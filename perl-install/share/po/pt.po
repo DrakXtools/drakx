@@ -1852,7 +1852,7 @@ msgid ""
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 "Para assegurar a integridade dos dados após redimensionar\n"
-"a(s) partição(ões), as verificações do sistema de ficheiros irão ser\n"
+"a(s) partição(ões), a verificação do sistema de ficheiros será\n"
 "executada no próximo arranque do Windows®"
 
 #: diskdrake/interactive.pm:945 diskdrake/interactive.pm:1484
@@ -1863,7 +1863,7 @@ msgstr "Chave de encriptação do sistema de ficheiros"
 #: diskdrake/interactive.pm:946
 #, c-format
 msgid "Enter your filesystem encryption key"
-msgstr "Indiquea sua chave de encriptação do sistema de ficheiros"
+msgstr "Indique a sua chave de encriptação do sistema de ficheiros"
 
 #: diskdrake/interactive.pm:947 diskdrake/interactive.pm:1492
 #, c-format
@@ -5784,7 +5784,7 @@ msgid ""
 msgstr ""
 "Activar protecção de usurpação de resolução de\n"
 "nomes (name resolution spoofing). Se \"%s\"\n"
-"é verdadeiro, também regista no syslog."
+"for verdadeiro, também regista no syslog."
 
 #: security/help.pm:80
 #, c-format
@@ -5799,7 +5799,7 @@ msgstr "Activar protecção contra usurpação de endereço IP."
 #: security/help.pm:84
 #, c-format
 msgid "Enable libsafe if libsafe is found on the system."
-msgstr "Activar libsafe se libsafe for encontrado no sistema."
+msgstr "Activar libsafe se o libsafe for encontrado no sistema."
 
 #: security/help.pm:86
 #, c-format
@@ -5967,8 +5967,7 @@ msgstr ""
 #, c-format
 msgid "if set to yes, report check result by mail."
 msgstr ""
-"se definido para sim, comunica por correio electrónico os resultados das "
-"verificações."
+"se definido para sim, reporta o resultado das verificações por correio."
 
 #: security/help.pm:129
 #, c-format
@@ -5983,28 +5982,25 @@ msgstr "se definido para sim, executa alguns testes na base de dados rpm."
 #: security/help.pm:131
 #, c-format
 msgid "if set to yes, report check result to syslog."
-msgstr ""
-"se definido para sim, comunica para syslog os resultados das verificações."
+msgstr "se definido para sim, reporta o resultado da verificação para o syslog."
 
 #: security/help.pm:132
 #, c-format
 msgid "if set to yes, reports check result to tty."
 msgstr ""
-"se definido para sim, comunica para tty os resultados das verificações."
+"se definido para sim, reporta o resultado da verificação para o tty."
 
 #: security/help.pm:134
 #, c-format
 msgid "Set shell commands history size. A value of -1 means unlimited."
-msgstr ""
-"Define o tamanho do histórico da Linha de Comandos (shell). O valor -1 "
+msgstr "Define o tamanho do histórico da linha de comandos. O valor -1 "
 "significa ilimitado."
 
 #: security/help.pm:136
 #, c-format
 msgid "Set the shell timeout. A value of zero means no timeout."
-msgstr ""
-"Define o tempo de espera da Linha de Comandos (shell). O valor zero "
-"significa sem tempo de espera.."
+msgstr "Define o tempo de espera da linha de comandos. O valor zero "
+"significa sem tempo de espera."
 
 #: security/help.pm:136
 #, c-format
@@ -6024,17 +6020,17 @@ msgstr "Aceitar mensagens de erro IPv4 adulteradas"
 #: security/l10n.pm:12
 #, c-format
 msgid "Accept broadcasted icmp echo"
-msgstr "Aceitar echo icmp transmitidos"
+msgstr "Aceitar eco icmp transmitidos"
 
 #: security/l10n.pm:13
 #, c-format
 msgid "Accept icmp echo"
-msgstr "Aceitar icmp echo"
+msgstr "Aceitar eco icmp"
 
 #: security/l10n.pm:15
 #, c-format
 msgid "/etc/issue* exist"
-msgstr "Existe /etc/issue*"
+msgstr "/etc/issue* existe"
 
 #: security/l10n.pm:16
 #, c-format
@@ -6044,12 +6040,12 @@ msgstr "Reiniciar pelo utilizador da consola"
 #: security/l10n.pm:17
 #, c-format
 msgid "Allow remote root login"
-msgstr "Permitir autenticação remota root"
+msgstr "Permitir autenticação remota do administrador"
 
 #: security/l10n.pm:18
 #, c-format
 msgid "Direct root login"
-msgstr "Autenticação directa root"
+msgstr "Autenticação directa do administrador"
 
 #: security/l10n.pm:19
 #, c-format
@@ -6059,17 +6055,18 @@ msgstr "Listar utilizadores nos gestores de ecrã (kdm e gdm)"
 #: security/l10n.pm:20
 #, c-format
 msgid "Export display when passing from root to the other users"
-msgstr "Exportar ecrã ao passar de root para os outros utilizadores"
+msgstr ""
+"Exportar ecrã ao passar de administrador para os outros utilizadores"
 
 #: security/l10n.pm:21
 #, c-format
 msgid "Allow X Window connections"
-msgstr "Permitir conexões X Window"
+msgstr "Permitir conexões de Janelas X"
 
 #: security/l10n.pm:22
 #, c-format
 msgid "Authorize TCP connections to X Window"
-msgstr "Autorizar conexões TCP à janela X"
+msgstr "Autorizar conexões TCP para a Janela X"
 
 #: security/l10n.pm:23
 #, c-format
@@ -6079,7 +6076,7 @@ msgstr "Autorizar todos os serviços controlados por tcp_wrappers"
 #: security/l10n.pm:24
 #, c-format
 msgid "Chkconfig obey msec rules"
-msgstr "Chkconfig obedecer a regras msec"
+msgstr "O chkconfig obedece às regras msec"
 
 #: security/l10n.pm:25
 #, c-format
@@ -6089,22 +6086,22 @@ msgstr "Activar \"crontab\" e \"at\" para utilizadores"
 #: security/l10n.pm:26
 #, c-format
 msgid "Syslog reports to console 12"
-msgstr "Syslog comunica para a consola 12"
+msgstr "O syslog reporta para a consola 12"
 
 #: security/l10n.pm:27
 #, c-format
 msgid "Name resolution spoofing protection"
-msgstr "Protecção spoofing de resolução de nomes"
+msgstr "Protecção 'spoofing' de resolução de nomes"
 
 #: security/l10n.pm:28
 #, c-format
 msgid "Enable IP spoofing protection"
-msgstr "Activar protecção IP spoofing"
+msgstr "Activar protecção 'spoofing' do IP"
 
 #: security/l10n.pm:29
 #, c-format
 msgid "Enable libsafe if libsafe is found on the system"
-msgstr "Activar libsafe se libsafe for encontrado no sistema"
+msgstr "Activar libsafe se o libsafe for encontrado no sistema"
 
 #: security/l10n.pm:30
 #, c-format
@@ -6164,7 +6161,7 @@ msgstr "Comprimento mínimo da senha, número de dígitos e letras maiúsculas"
 #: security/l10n.pm:41
 #, c-format
 msgid "Root umask"
-msgstr "Umask root"
+msgstr "Umask do administrador"
 
 #: security/l10n.pm:42
 #, c-format
@@ -6204,7 +6201,7 @@ msgstr "Verifica se os dispositivos de rede estão em modo promíscuo"
 #: security/l10n.pm:49
 #, c-format
 msgid "Run the daily security checks"
-msgstr "Executar diáriamente verificações de segurança"
+msgstr "Executar as verificações de segurança diárias"
 
 #: security/l10n.pm:50
 #, c-format
@@ -6229,7 +6226,7 @@ msgstr "Verificar adições/remoções dos ficheiros suid root"
 #: security/l10n.pm:54
 #, c-format
 msgid "Report unowned files"
-msgstr "Comunicar ficheiros sem dono"
+msgstr "Reportar ficheiros sem dono"
 
 #: security/l10n.pm:55
 #, c-format
@@ -6244,19 +6241,19 @@ msgstr "Executar verificações chkrootkit"
 #: security/l10n.pm:57
 #, c-format
 msgid "Do not send empty mail reports"
-msgstr "Não enviar correio de relatórios vazio"
+msgstr "Não enviar relatórios vazios de correio"
 
 #: security/l10n.pm:58
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
 msgstr ""
 "Se definido, envia o relatório para este endereço electrónico senão envia-o "
-"para o root"
+"para o administrador"
 
 #: security/l10n.pm:59
 #, c-format
 msgid "Report check result by mail"
-msgstr "Comunicar resultados das verificações por correio"
+msgstr "Reportar resultados das verificações por correio"
 
 #: security/l10n.pm:60
 #, c-format
@@ -6266,12 +6263,12 @@ msgstr "Executar algumas verificações na base de dados rpm"
 #: security/l10n.pm:61
 #, c-format
 msgid "Report check result to syslog"
-msgstr "Comunicar resultado das verificações para syslog"
+msgstr "Reportar resultado das verificações para o syslog"
 
 #: security/l10n.pm:62
 #, c-format
 msgid "Reports check result to tty"
-msgstr "Comunicar resultado das verificações para tty"
+msgstr "Reportar resultado das verificações para o tty"
 
 #: security/level.pm:10
 #, c-format
@@ -6286,7 +6283,7 @@ msgstr "Padrão"
 #: security/level.pm:12
 #, c-format
 msgid "Secure"
-msgstr "Segurar"
+msgstr "Seguro"
 
 #: security/level.pm:40
 #, c-format
@@ -6320,16 +6317,16 @@ msgid ""
 "connections from many clients. Note: if your machine is only a client on the "
 "Internet, you should choose a lower level."
 msgstr ""
-"Com este nível de segurança, o uso deste sistema como servidor tornou-se "
+"Com este nível de segurança, o uso deste sistema como servidor torna-se "
 "possível. A segurança é agora suficientemente alta para usar o sistema como "
 "um servidor\n"
-"que pode aceitar conexões de muitos clientes. Nota: se a sua máquina é "
+"que pode aceitar conexões de vários clientes. Nota: se a sua máquina é "
 "apenas um cliente na Internet, deve escolher um nível mais baixo."
 
 #: security/level.pm:51
 #, c-format
 msgid "DrakSec Basic Options"
-msgstr "Draksec Opções Básicas"
+msgstr "Opções Básicas do Draksec"
 
 #: security/level.pm:54
 #, c-format
@@ -6355,12 +6352,12 @@ msgstr "Autenticação ou endereço electrónico:"
 #: services.pm:19
 #, c-format
 msgid "Listen and dispatch ACPI events from the kernel"
-msgstr "Ouvir e despachar eventos ACPI do kernel"
+msgstr "Escutar e despachar eventos ACPI do kernel"
 
 #: services.pm:20
 #, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
-msgstr "Inicie o sistema de som ALSA (Arquitectura de Som Linux Avançada) "
+msgstr "Iniciar o sistema de som ALSA (Arquitectura de Som Linux Avançada) "
 
 #: services.pm:21
 #, c-format
@@ -6373,7 +6370,7 @@ msgid ""
 "apmd is used for monitoring battery status and logging it via syslog.\n"
 "It can also be used for shutting down the machine when the battery is low."
 msgstr ""
-"O apmd é usado para monitorizar o estado da bateria e registá-lo via "
+"O apmd é usado para monitorizar o estado da bateria e registar via "
 "syslog.\n"
 "Também pode ser usado para desligar a máquina quando a bateria está fraca."
 
@@ -6406,10 +6403,9 @@ msgid ""
 "basic\n"
 "UNIX cron, including better security and more powerful configuration options."
 msgstr ""
-"O cron é um programa UNIX padrão que executa programas especificados pelo\n"
-"utilizador em horas marcadas. O vixie cron adiciona várias características "
-"ao\n"
-"UNIX cron básico, incluindo melhor segurança e melhores opções de "
+"O cron é um programa UNIX padrão que corre programas especificados pelo\n"
+"utilizador nas horas agendadas. O vixie cron adiciona várias características\n"
+"ao UNIX cron básico, incluindo melhor segurança e melhores opções de "
 "configuração."
 
 #: services.pm:31
@@ -6432,7 +6428,7 @@ msgid ""
 "change.\n"
 "It is used by GNOME and KDE"
 msgstr ""
-"O FAM é um servidor de monitorização de ficheiros. É usado para obter\n"
+"O FAM é um serviço de monitorização de ficheiros. É usado para obter\n"
 "relatórios quando os ficheiros são alterados.\n"
 "É usado pelo GNOME e pelo KDE"
 
@@ -6449,14 +6445,15 @@ msgid ""
 "scripts can access the LCD via a simple API."
 msgstr ""
 "O G15Daemon permite aos utilizadores aceder a todas as chaves extra ao\n"
-"descodificá-las e enviá-las novamente para o kernel via o controlador linux "
-"UINPUT. Este controlador\n"
-"tem que ser carregado antes que o g15daemon possa ser usado para aceder ao "
-"teclado. O LCD G15\n"
-"é também suportado. Por predefinição, sem outros clientes activos, o "
-"g15daemon irá mostrar um relógio.\n"
-"As aplicações e «scripts' do cliente podem aceder ao LCD através de um "
-"simples API."
+"descodificá-las e enviá-las novamente para o kernel através do controlador "
+"linux UINPUT.\n"
+"Este controlador tem que ser carregado antes que o g15daemon possa ser "
+"usado para aceder\n "
+"ao teclado. O LCD G15 também é suportado. Por predefinição, sem outros "
+"clientes activos,\n"
+"o g15daemon mostra um relógio. As aplicações e «scripts' do cliente podem "
+"aceder ao LCD através\n"
+"de um simples API."
 
 #: services.pm:40
 #, c-format
@@ -6481,8 +6478,8 @@ msgid ""
 "HardDrake runs a hardware probe, and optionally configures\n"
 "new/changed hardware."
 msgstr ""
-"O harddrake executa uma verificação ao material, e opcionalmente\n"
-"configura o material novo/alterado."
+"O HardDrake executa uma verificação ao material, e opcionalmente\n"
+"configura material novo/alterado."
 
 #: services.pm:46
 #, c-format
@@ -6501,7 +6498,7 @@ msgid ""
 "disables\n"
 "all of the services it is responsible for."
 msgstr ""
-"O serviço internet superserver (normalmente chamado inetd) inicia\n"
+"O serviço de internet superserver (normalmente chamado inetd) inicia\n"
 "uma variedade de outros serviços Internet conforme necessário. É\n"
 "responsável pela inicialização de vários serviços, incluindo telnet, ftp,\n"
 "rsh e rlogin. Desactivando o inetd, desactiva todos os serviços pelos\n"
@@ -6523,8 +6520,8 @@ msgid ""
 "Launch packet filtering for Linux kernel 2.2 series, to set\n"
 "up a firewall to protect your machine from network attacks."
 msgstr ""
-"Execute o filtro de pacotes para o Linux kernel 2.2, para definir\n"
-"uma firewall para proteger a sua máquina de ataques da rede."
+"Lança um filtro de pacotes para o Linux kernel 2.2, para definir\n"
+"uma 'firewall' para proteger a sua máquina de ataques da rede."
 
 #: services.pm:55
 #, c-format
@@ -6562,7 +6559,7 @@ msgstr "Detecção e configuração automática de material no arranque."
 #: services.pm:62
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
-msgstr "Muda o comportamento do sistema para extender a vida da bateria"
+msgstr "Melhora o comportamento do sistema para extender a vida da bateria"
 
 #: services.pm:63
 #, c-format
@@ -6579,10 +6576,10 @@ msgid ""
 "lpd is the print daemon required for lpr to work properly. It is\n"
 "basically a server that arbitrates print jobs to printer(s)."
 msgstr ""
-"lpd é o servidor de impressão requerido para que o lpr funcione\n"
+"O lpd é o servidor de impressão requerido para que o lpr funcione\n"
 "correctamente.\n"
-"É basicamente um servidor que controla os trabalhos\n"
-"de impressão para a(s) impressora(s)."
+"É basicamente um servidor que controla os trabalhos de impressão\n"
+"para a(s) impressora(s)."
 
 #: services.pm:67
 #, c-format
@@ -6623,8 +6620,8 @@ msgid ""
 "named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
 "names to IP addresses."
 msgstr ""
-"O conhecido (BIND) é um Domain Name Server (DNS) que é usado para resolver "
-"nomes de endereços para endereços IP."
+"O conhecido (BIND) é um Ŝervidor de Nomes de Domínios (DNS) que é usado "
+"para resolver os nomes das máquinas para endereços IP."
 
 #: services.pm:74
 #, c-format
@@ -6637,8 +6634,8 @@ msgid ""
 "Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
 "Manager/Windows), and NCP (NetWare) mount points."
 msgstr ""
-"Monta e desmonta todos os pontos de montagem Network File\n"
-"System (NFS), SMB (Gestor Lan/Windows), e NCP (NetWare)."
+"Monta e desmonta todos os pontos de montagem do Sistema de Ficheiros\n"
+"da Rede (NFS), SMB (Gestor Lan/Windows), e NCP (NetWare)."
 
 #: services.pm:77
 #, c-format
@@ -6666,9 +6663,9 @@ msgid ""
 "This service provides NFS server functionality, which is configured via the\n"
 "/etc/exports file."
 msgstr ""
-"O NFS é um protocolo popular para partilha de ficheiros através de\n"
-"redes TCP/IP. Este serviço oferece a funcionalidade do servidor NFS,\n"
-"que é configurado através do ficheiro /etc/exports."
+"O NFS é um protocolo popular de partilha de ficheiros através de redes\n"
+"TCP/IP. Este serviço oferece a funcionalidade do servidor NFS, que é\n"
+"configurado através do ficheiro /etc/exports."
 
 #: services.pm:84
 #, c-format
@@ -6676,7 +6673,7 @@ msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP\n"
 "networks. This service provides NFS file locking functionality."
 msgstr ""
-"O NFS é um protocolo popular para partilha de ficheiros através de redes\n"
+"O NFS é um protocolo popular de partilha de ficheiros através de redes\n"
 "TCP/IP. Este serviço oferece a funcionalidade de bloquear ficheiros NFS."
 
 #: services.pm:86
@@ -6690,7 +6687,7 @@ msgid ""
 "Automatically switch on numlock key locker under console\n"
 "and Xorg at boot."
 msgstr ""
-"Automaticamente alterna o estado da tecla numlock na consola\n"
+"Muda automaticamente o estado da tecla numlock na consola\n"
 "e o Xorg no arranque."
 
 #: services.pm:89
@@ -6701,7 +6698,7 @@ msgstr "Suporta o OKI 4w e winprinters compatíveis."
 #: services.pm:90
 #, c-format
 msgid "Checks if a partition is close to full up"
-msgstr "Verifica se uma partição está perto de estar cheia"
+msgstr "Verifica se uma partição está quase cheia"
 
 #: services.pm:91
 #, c-format
@@ -6739,8 +6736,8 @@ msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
 "one machine to another."
 msgstr ""
-"O postfix é um Agente de Transporte de Correio Electrónico, que é o programa "
-"que move o correio de uma máquina para outra."
+"O postfix é um Agente de Transporte de Correio, que é o programa que move o "
+"correio de uma máquina para outra."
 
 #: services.pm:99
 #, c-format
@@ -6748,8 +6745,8 @@ msgid ""
 "Saves and restores system entropy pool for higher quality random\n"
 "number generation."
 msgstr ""
-"Grava e restaura o 'entropy pool' do sistema para melhor qualidade\n"
-"na geração de números aleatórios."
+"Grava e restaura o sistema 'entropy pool' para uma melhor qualidade na\n"
+"geração de números aleatórios."
 
 #: services.pm:101
 #, c-format
@@ -6773,10 +6770,10 @@ msgid ""
 "the RIP protocol. While RIP is widely used on small networks, more complex\n"
 "routing protocols are needed for complex networks."
 msgstr ""
-"O servidor encaminhado (routed) permite a actualização automática da\n"
-"tabela IP Router através do protocolo RIP. Enquanto o RIP é largamente\n"
-"usado em pequenas redes, os protocolos routing mais complexos são\n"
-"necessários para redes mais complexas."
+"O servidor roteado permite uma actualização automática da tabela do roteador "
+"IP através do protocolo RIP. Enquanto o RIP é bastante usado em pequenas "
+"redes, os protocolos de roteação mais complexos são necessários para redes "
+"mais complexas."
 
 #: services.pm:107
 #, c-format
@@ -6784,8 +6781,8 @@ msgid ""
 "The rstat protocol allows users on a network to retrieve\n"
 "performance metrics for any machine on that network."
 msgstr ""
-"O protocolo rstat permite que os utilizadores de uma rede recebam\n"
-"informações sobre velocidade para qualquer máquina nessa rede."
+"O protocolo rstat permite aos utilizadores de uma rede obter desempenhos\n"
+"métricos para qualquer máquina nessa rede."
 
 #: services.pm:109
 #, c-format
@@ -6793,8 +6790,8 @@ msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
 "system log files.  It is a good idea to always run rsyslog."
 msgstr ""
-"O syslog é a capacidade que muitos serviços usam para registar mensagens\n"
-"em vários ficheiros de registo do sistema. Recomenda-se que corra sempre o "
+"O syslog é a capacidade que muitos serviços usam para registar mensagens em\n"
+"vários ficheiros de registo do sistema. Recomenda-se que corra sempre o "
 "rsyslog."
 
 #: services.pm:110
@@ -6803,8 +6800,8 @@ msgid ""
 "The rusers protocol allows users on a network to identify who is\n"
 "logged in on other responding machines."
 msgstr ""
-"O protocolo rusers permite que os utilizadores de uma rede identifiquem\n"
-"quem está registado (ligado) noutras máquinas que respondam."
+"O protocolo rusers permite aos utilizadores de uma rede identificar\n"
+"quem está autenticado (ligado) noutras máquinas que respondam."
 
 #: services.pm:112
 #, c-format
@@ -6812,9 +6809,9 @@ msgid ""
 "The rwho protocol lets remote users get a list of all of the users\n"
 "logged into a machine running the rwho daemon (similar to finger)."
 msgstr ""
-"O protocolo rwho permite que utilizadores remotos obtenham uma\n"
-"lista de todos os utilizadores conectados numa máquina a correr o\n"
-"servidor rwho (similar ao finger)."
+"O protocolo rwho permite aos utilizadores remotos obter uma lista\n"
+"de todos os utilizadores autenticados numa máquina a correr o\n"
+"serviço rwho (similar ao finger)."
 
 #: services.pm:114
 #, c-format
@@ -6836,7 +6833,7 @@ msgid ""
 "integrates with a Windows Server domain"
 msgstr ""
 "O protocolo SMB/CIFS permite partilhar o acesso a ficheiros e impressoras e "
-"também faz uma integração com domínios de Servidores Windows"
+"também faz uma integração com um domínio Servidor Windows"
 
 #: services.pm:117
 #, c-format
@@ -6846,7 +6843,7 @@ msgstr "Iniciar o sistema de som na sua máquina"
 #: services.pm:118
 #, c-format
 msgid "layer for speech analysis"
-msgstr "camada para a análise de discurso"
+msgstr "camada para análise do discurso"
 
 #: services.pm:119
 #, c-format
@@ -6863,7 +6860,7 @@ msgid ""
 "Syslog is the facility by which many daemons use to log messages\n"
 "to various system log files.  It is a good idea to always run syslog."
 msgstr ""
-"O syslog é a capacidade que muitos servidores usam para registar mensagens\n"
+"O syslog é a capacidade que muitos serviços usam para registar mensagens\n"
 "em vários ficheiros de registo do sistema. Recomenda-se que execute sempre o "
 "syslog."
 
@@ -6915,7 +6912,7 @@ msgstr "Sistema"
 #: services.pm:160
 #, c-format
 msgid "Remote Administration"
-msgstr "Administração remota"
+msgstr "Administração Remota"
 
 #: services.pm:168
 #, c-format
