@@ -1478,11 +1478,11 @@ sub ask_for_X_restart {
     if (!$wm) {
         # no window manager, ctrl-alt-del may not be supported, but we still have to restart X..
         $in->ask_okcancel('', N("You need to logout and back in again for changes to take effect. Press OK to logout now."), 1) or return;
-        system('killall X');
+        system('killall Xorg');
     }
     else {
         $in->ask_okcancel('', N("You need to log out and back in again for changes to take effect"), 1) or return;
-        ask_window_manager_to_logout_then_do($wm, $pid, 'killall X');
+        ask_window_manager_to_logout_then_do($wm, $pid, 'killall Xorg');
     }
 }
 
