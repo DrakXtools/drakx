@@ -1410,7 +1410,7 @@ sub monitor_full_edid() {
 
 # FIXME: is buggy regarding multiple sessions
 sub running_window_manager() {
-    my @window_managers = qw(ksmserver kwin gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish olvwm fluxbox compiz drakx-matchbox-window-manager);
+    my @window_managers = qw(ksmserver kwin gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce4-session blackbox sawfish olvwm fluxbox compiz drakx-matchbox-window-manager);
 
     foreach (@window_managers) {
 	my @pids = fuzzy_pidofs(qr/\b$_\b/) or next;
@@ -1434,6 +1434,7 @@ sub ask_window_manager_to_logout {
 	'kwin' => "dcop kdesktop default logout",
 	'gnome-session' => "gnome-session-save --kill",
 	'icewm' => "killall -QUIT icewm",
+	'xfce4-session' => "xfce4-session-logout --logout",
     );
     my $cmd = $h{$wm} or return;
     if (member($wm, 'ksmserver', 'kwin', 'gnome-session') && $> == 0) {	
