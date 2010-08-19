@@ -616,7 +616,7 @@ sub setupBootloader__entries {
 	my @entries = @{$b->{entries}};
 	my ($index) = grep { $entries[$_]{label} eq $e->{label} } 0..$#entries;
 	if ($index > 0) {
-	  (@{$b->{entries}}->[$index - 1], @{$b->{entries}}->[$index]) = (@{$b->{entries}}->[$index], @{$b->{entries}}->[$index - 1]);
+	  ($b->{entries}->[$index - 1], $b->{entries}->[$index]) = ($b->{entries}->[$index], $b->{entries}->[$index - 1]);
 	}
 	1;
     };
@@ -626,7 +626,7 @@ sub setupBootloader__entries {
 	my @entries = @{$b->{entries}};
 	my ($index) = grep { $entries[$_]{label} eq $e->{label} } 0..$#entries;
 	if ($index < $#entries) {
-	  (@{$b->{entries}}->[$index + 1], @{$b->{entries}}->[$index]) = (@{$b->{entries}}->[$index], @{$b->{entries}}->[$index + 1]);
+	  ($b->{entries}->[$index + 1], $b->{entries}->[$index]) = ($b->{entries}->[$index], $b->{entries}->[$index + 1]);
 	}
 	1;
     };
