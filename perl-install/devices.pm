@@ -237,9 +237,9 @@ sub symlink_now_and_register {
     my ($if_struct, $of) = @_;
     my $if = $if_struct->{device};
 
-    #- add a specific udev script, we can't do it with a udev rule,
+    #- add a static udev device node, we can't do it with a udev rule,
     #- eg, ttySL0 is a symlink created by a daemon
-    output_with_perm("$::prefix/etc/udev/devices.d/$of.nodes", 0644, "L $of $if\n");
+    symlinkf($if, "$::prefix/lib/udev/devices/$of");
 
     symlinkf($if, "$::prefix/dev/$of");
 }
