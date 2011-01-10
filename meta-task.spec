@@ -12,6 +12,7 @@ Source: rpmsrate-raw
 Source1: check-rpmsrate
 Source2: compssUsers.pl
 Source3: prefer.vendor.list
+Source4: README
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
 BuildRequires: drakxtools-backend
@@ -25,6 +26,7 @@ packages to install.
 
 %build
 cp %{SOURCE1} .
+cp %{SOURCE4} .
 
 %install
 rm -rf %{buildroot}
@@ -43,5 +45,6 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
+%doc README
 %config(noreplace) %{_sysconfdir}/urpmi/prefer.vendor.list
 %{_datadir}/%{name}
