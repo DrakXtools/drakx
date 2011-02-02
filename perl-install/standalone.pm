@@ -184,7 +184,7 @@ foreach (@ARGV) {
 my $standalone_name;
 sub explanations { log::explanations("@_") }
 
-our @common_functs = qw(renamef linkf symlinkf output substInFile mkdir_p rm_rf cp_af touch setVarsInSh setExportedVarsInSh setExportedVarsInCsh update_gnomekderc);
+our @common_functs = qw(renamef linkf symlinkf output substInFile mkdir_p rm_rf cp_af cp_afx touch setVarsInSh setExportedVarsInSh setExportedVarsInCsh update_gnomekderc);
 our @builtin_functs = qw(chmod chown __exit exit unlink link symlink rename system);
 our @drakx_modules = qw(Xconfig::card Xconfig::default Xconfig::main Xconfig::monitor Xconfig::parse Xconfig::proprietary Xconfig::resolution_and_depth Xconfig::screen Xconfig::test Xconfig::various Xconfig::xfree any bootloader bootlook c commands crypto detect_devices devices diskdrake diskdrake::hd_gtk diskdrake::interactive diskdrake::removable diskdrake::removable_gtk diskdrake::smbnfs_gtk fs fsedit http keyboard lang log loopback lvm modules::parameters modules mouse my_gtk network network::adsl network::ethernet network::connection network::isdn_consts network::isdn network::modem network::netconnect network::network fs::remote::nfs fs::remote::smb network::tools partition_table partition_table_bsd partition_table::dos partition_table::empty partition_table::gpt partition_table::mac partition_table::raw partition_table::sun printer printerdrake proxy raid run_program scanner services steps swap timezone network::drakfirewall network::shorewall);
 
@@ -274,6 +274,13 @@ sub cp_af {
     my $retval = MDK::Common::File::cp_af(@_);
     my $dest = pop @_;
     explanations "copied recursively @_ to $dest";
+    return $retval;
+}
+
+sub cp_afx {
+    my $retval = MDK::Common::File::cp_afx(@_);
+    my $dest = pop @_;
+    explanations "copied recursively @_ to $dest, staying on same partition";
     return $retval;
 }
 
