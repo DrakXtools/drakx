@@ -504,7 +504,7 @@ sub Create {
 	   if_($::expert && isLVM($hd),
 	 { label => N("Logical volume name "), val => \$part->{lv_name}, list => [ qw(root swap usr home var), '' ], sort => 0, not_edit => 0 },
            ),
-	 { label => N("Encrypt partition"), type => 'bool', val => \$use_dmcrypt },
+        { label => N("Encrypt partition"), type => 'bool', val => \$use_dmcrypt, disabled => sub { member($part->{mntpoint}, qw(/ /usr /var /boot)); } },
 	 { label => N("Encryption key "), val => \$part->{dmcrypt_key}, disabled => sub { !$use_dmcrypt }, hidden => 1, weakness_check => 1 },
 	 { label => N("Encryption key (again)"), val => \$part->{dmcrypt_key2}, disabled => sub { !$use_dmcrypt }, hidden => 1 },
         ], complete => sub {
