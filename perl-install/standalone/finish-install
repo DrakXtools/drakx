@@ -247,6 +247,12 @@ sub encrypt_home {
     run_program::rooted($::prefix, 'cryptsetup', 'luksClose', $user->{name});
 }
 
+sub ask_remove_unused_packages {
+    require pkgs;
+    local $::prefix;
+    pkgs::remove_unused_packages($in, $in->do_pkgs, '/');
+}
+
 sub call {
     my ($step_name) = @_;
     my $f_name = 'ask_' . $step_name;
@@ -272,6 +278,7 @@ if (defined $::WizardWindow) {
     $::WizardWindow->destroy;
     undef $::WizardWindow;
 }
+call('remove_unused_packages');
 call('urpmi');
 $::Wizard_pix_up = 'redhat-config-users';
 call('authentication');
