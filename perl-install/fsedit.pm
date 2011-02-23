@@ -24,18 +24,18 @@ use fs;
   N_("simple") => [
     { mntpoint => "/",     size => MB(300), fs_type => defaultFS(), ratio => 10, maxsize => MB(12300) },
     { mntpoint => "swap",  size => MB(128), fs_type => 'swap', ratio => 1,  maxsize => MB(4000) },
-    { mntpoint => "/home", size => MB(300), fs_type => defaultFS(), ratio => 8,  min_hd_size => MB(8000) },
+    { mntpoint => "/home", size => MB(300), fs_type => defaultFS(), ratio => 8,  min_hd_size => MB(12000) },
   ], N_("with /usr") => [
     { mntpoint => "/",     size => MB(250), fs_type => defaultFS(), ratio => 1, maxsize => MB(8000) },
     { mntpoint => "swap",  size =>  MB(64), fs_type => 'swap', ratio => 1, maxsize => MB(4000) },
     { mntpoint => "/usr",  size => MB(300), fs_type => defaultFS(), ratio => 4, maxsize => MB(8000) },
-    { mntpoint => "/home", size => MB(100), fs_type => defaultFS(), ratio => 3, min_hd_size => MB(7000) },
+    { mntpoint => "/home", size => MB(100), fs_type => defaultFS(), ratio => 3, min_hd_size => MB(10000) },
   ], N_("server") => [
     { mntpoint => "/",     size => MB(150), fs_type => defaultFS(), ratio => 1, maxsize => MB(8000) },
     { mntpoint => "swap",  size =>  MB(64), fs_type => 'swap', ratio => 2, maxsize => MB(4000) },
     { mntpoint => "/usr",  size => MB(300), fs_type => defaultFS(), ratio => 4, maxsize => MB(8000) },
     { mntpoint => "/var",  size => MB(200), fs_type => defaultFS(), ratio => 3 },
-    { mntpoint => "/home", size => MB(150), fs_type => defaultFS(), ratio => 3, min_hd_size => MB(7000) },
+    { mntpoint => "/home", size => MB(150), fs_type => defaultFS(), ratio => 3, min_hd_size => MB(10000) },
     { mntpoint => "/tmp",  size => MB(150), fs_type => defaultFS(), ratio => 2, maxsize => MB(4000) },
   ],
 );
