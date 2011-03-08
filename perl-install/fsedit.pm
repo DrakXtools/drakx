@@ -619,7 +619,7 @@ sub change_type {
 sub partition_table_clear_and_initialize {
     my ($lvms, $hd, $o_in, $o_type, $b_warn) = @_;
     $hd->clear_existing;
-    partition_table_initialize($lvms, $hd, $o_in, $o_type, $b_warn);
+    partition_table_initialize($lvms, $hd, $o_in, $b_warn, $o_type);
 }
 
 sub partition_table_initialize {
