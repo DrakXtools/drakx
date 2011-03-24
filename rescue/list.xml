@@ -85,7 +85,7 @@
     pdisk 
   </if>
   dump dump.ext2 restore restore.ext2 dump.ext3 restore.ext3 dump.xfs restore.xfs
-  parted partimage
+  parted partimage partprobe
 
   mdadm lvm2
   mdmon kpartx
