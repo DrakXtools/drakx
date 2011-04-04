@@ -291,7 +291,7 @@ sub install {
     } elsif ($expand eq 'rpm') {
 	$disallow_from_dir->();
 	foreach my $rpm (@text_l) {
-	    my @l = chomp_(`rpm -ql $rpm`) or error("rpm $rpm must be installed");
+	    my @l = chomp_(`rpm -qls $rpm|grep -v \'not installed\'|awk -F\' \' \'{print \$2}\'`) or error("rpm $rpm must be installed");
 	    push @files, @l;
 	}
 
