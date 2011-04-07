@@ -1,6 +1,6 @@
 include ../Makefile.config
 
-VERSION=1.21
+VERSION=1.22
 PRODUCT=drakx-installer-rescue
 
 RESCUE = rescue.sqfs
