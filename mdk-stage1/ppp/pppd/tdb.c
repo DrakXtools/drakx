@@ -482,7 +482,7 @@ static tdb_off tdb_allocate(TDB_CONTEXT *tdb, tdb_len length)
 static int tdb_new_database(TDB_CONTEXT *tdb, int hash_size)
 {
 	struct tdb_header header;
-	tdb_off offset;
+//	tdb_off offset;
 	int i, size = 0;
 	tdb_off buf[16];
 
@@ -501,7 +501,7 @@ static int tdb_new_database(TDB_CONTEXT *tdb, int hash_size)
         } else size += sizeof(header);
 	
         /* the freelist and hash pointers */
-        offset = 0;
+//        offset = 0;
         memset(buf, 0, sizeof(buf));
 
         for (i=0;(hash_size+1)-i >= 16; i += 16) {

@@ -20,7 +20,7 @@ our %l = (
       if_(arch() !~ /alpha|sparc/,
         qw(3c501 3c503 3c505 3c507 3c509 3c515 3c990 3c990fx),
         qw(82596 ac3200 acenic aironet4500_card amd8111e at1700 atl2 atp),
-        qw(bcm4400 cassini cs89x0 de600 de620),
+        qw(bcm4400 cassini cs89x0 cx82310_eth de600 de620),
         qw(depca dmfe e2100 eepro eexpress enic eth16i),
         qw(ewrk3 hp hp-plus hp100),
         qw(iph5526), #- fibre channel
@@ -41,8 +41,8 @@ our %l = (
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(atl1 atl1c atl1e be2net bnx2 bnx2x cxgb cxgb3 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sfc sxg_nic
-      sis190 sk98lin skge sky2 slicoss spidernet tehuti tg3 via-velocity virtio_net vxge yellowfin),
+      qw(atl1 atl1c atl1e be2net bna bnx2 bnx2x cxgb cxgb3 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io sfc sxg_nic
+      sis190 sk98lin skge sky2 slicoss spidernet stmmac tehuti tg3 via-velocity virtio_net vxge yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
     ],
 
@@ -62,14 +62,14 @@ our %l = (
     ],
     wireless => [
       qw(acx-pci acx-usb adm8211 agnx airo airo_cs aironet4500_cs),
-      qw(aironet_cs ar9170usb arlan arusb_lnx at76_usb ath5k ath9k),
-      qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx com20020_cs),
+      qw(aironet_cs ar9170usb arlan arusb_lnx at76_usb ath5k ath6kl ath9k),
+      qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx bcm_wimax brcm80211 carl9170 com20020_cs),
       qw(dyc_ar5 hostap_cs hostap_pci hostap_plx i2400m-usb ipw2100),
       qw(ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwlwifi madwifi_pci),
       qw(mwl8k ndiswrapper netwave_cs orinoco orinoco_cs),
       qw(orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd p54pci),
       qw(p54usb prism2_cs prism2_pci prism2_usb prism54 r8180),
-      qw(r8187se r8192_pci r8192s_usb r8192u_usb ray_cs rndis_wlan rt2400 rt2400pci rt2500),
+      qw(r8187se r8192_pci r8192s_usb r8192u_usb r8712u ray_cs rndis_wlan rt2400 rt2400pci rt2500),
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
       qw(rt2870sta rt3070sta rt61 rt61pci rt73 rt73usb rtl8180),
       qw(rtl8187se rtusb spectrum_cs usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
@@ -85,7 +85,7 @@ our %l = (
       qw(hso nozomi option sierra),
     ],
     modem => [
-      qw(ltmodem mwave sm56),
+      qw(ltmodem mwave sm56 ft1000),
     ],
     slmodem => [
       qw(slamr slusb snd-ali5451 snd-atiixp-modem snd-intel8x0m snd-via82xx-modem),
@@ -153,7 +153,7 @@ our %l = (
     virtual => [ qw(xenblk virtio_blk) ],
     pcmcia => [ qw(aha152x_cs fdomain_cs nsp_cs qlogic_cs ide-cs pata_pcmcia sym53c500_cs) ],
     raw => [ qw(ide-gd_mod sd_mod) ],
-    usb => [ qw(usb-storage) ],
+    usb => [ qw(usb-storage keucr uas) ],
     firewire => [ qw(sbp2) ],
     cdrom => [ qw(ide-cd_mod sr_mod) ],
     card_reader => [ qw(sdhci tifm_sd tifm_7xx1) ],
@@ -275,8 +275,10 @@ our %l = (
   # just here for classification, unused categories (nor auto-detect, nor load_thiskind)
   {
     raid => [
-      qw(dm-crypt dm-mirror dm-mod dm-zero linear lvm-mod multipath raid0 raid1 raid10 raid456 raid5 raid6),
-      qw(dm-delay dm-log dm-mem-cache dm-message dm-raid4-5 dm-region_hash faulty md-mod),
+      qw(dm-crypt dm-log dm-log-userspace dm-mirror dm-mod dm-multipath dm-queue-length dm-raid dm-region-hash dm-round-robin),
+      qw(dm-service-time dm-snapshot dm-zero faulty linear lvm-mod md-mod multipath md-mod raid0 raid10 raid1 raid456),
+      # needed by raid456 and dm-raid 456 target
+      qw(async_memcpy async_pq async_raid6_recov async_tx async_xor raid6_pq xor),
     ],
     mouse => [
       qw(atixlmouse busmouse generic_serial inport ioc3_serial logibm logibusmouse msbusmouse pcips2 qpmouse synclinkmp),

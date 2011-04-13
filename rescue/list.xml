@@ -30,6 +30,7 @@
   rsync
   ssh scp
   telnet
+  tcpdump
   host
 
   date
@@ -105,8 +106,9 @@
   lspci lspcidrake
 
   rpm
-  rpm2cpio rpmdb
-  rpmquery rpmverify
+  db51_verify
+  db51_archive
+  rpm2cpio
 
   vim-minimal hexedit
 
@@ -190,9 +192,8 @@
 
 <from dir="/usr/lib/rpm" expand="glob">
   <mode copy="keep-links">
-    rpmrc
     macros
-    rpmpopt-*
+    rpmpopt
   </mode>
 </from>
 
