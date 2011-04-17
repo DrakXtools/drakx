@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-01 16:52+0200\n"
+"POT-Creation-Date: 2011-04-17 14:17+0300\n"
 "PO-Revision-Date: 2006-09-05 19:54+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@walon.org>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: KBabel 1.9.1\n"
 
-#: display_help:50 display_help:55 drakbug:186 drakperm:136
+#: display_help:54 display_help:59 drakbug:186 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Aidance"
 
-#: display_help:63 drakbug:191 drakfont:506
+#: display_help:67 drakbug:191 drakfont:506
 #, c-format
 msgid "Close"
 msgstr "Clôre"
@@ -450,7 +450,7 @@ msgstr ""
 #: drakdvb:80 draksec:73 drakups:99 finish-install:105 harddrake2:379
 #: scannerdrake:66 scannerdrake:70 scannerdrake:78 scannerdrake:319
 #: scannerdrake:368 scannerdrake:504 scannerdrake:508 scannerdrake:530
-#: service_harddrake:344
+#: service_harddrake:416
 #, c-format
 msgid "Please wait"
 msgstr "Tårdjîz on pô, s' i vs plait"
@@ -3300,50 +3300,70 @@ msgstr ""
 "Dji n' a savou astaler les pacaedjes k' i gn a mezåjhe po pårtaedjî vos "
 "scanrece(s)."
 
-#: service_harddrake:139
+#: service_harddrake:149
 #, fuzzy, c-format
 msgid "The graphic card '%s' is no more supported by the '%s' driver"
 msgstr "Li %s n' est nén sopoirté pa cisse modêye chal di %s."
 
-#: service_harddrake:181
+#: service_harddrake:159
+#, c-format
+msgid "New release, reconfiguring X for %s"
+msgstr ""
+
+#: service_harddrake:249
 #, c-format
 msgid "The proprietary kernel driver was not found for '%s' X.org driver"
 msgstr ""
 
-#: service_harddrake:220
+#: service_harddrake:299
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Sacwants éndjins del classe d' éndjolreye «%s» ont stî bodjîs:\n"
 
-#: service_harddrake:221
+#: service_harddrake:300
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s a stî bodjî foû\n"
 
-#: service_harddrake:224
+#: service_harddrake:303
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Sacwants éndjins ont stî radjoutés: %s\n"
 
-#: service_harddrake:225
+#: service_harddrake:304
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s a stî radjouté\n"
 
-#: service_harddrake:344
-#, c-format
-msgid "Hardware probing in progress"
-msgstr "Deteccion di l' éndjolreye en alaedje"
-
-#: service_harddrake_confirm:7
+#: service_harddrake:390
 #, c-format
 msgid "Hardware changes in \"%s\" class (%s seconds to answer)"
 msgstr "Candjmints d' éndjolreye dins l' classe «%s» (%s segondes po responde)"
 
-#: service_harddrake_confirm:8
+#: service_harddrake:391
 #, c-format
 msgid "Do you want to run the appropriate config tool?"
 msgstr "Voloz vs enonder l' usteye d' apontiaedje k' i fåt?"
+
+#: service_harddrake:416
+#, c-format
+msgid "Hardware probing in progress"
+msgstr "Deteccion di l' éndjolreye en alaedje"
+
+#: service_harddrake:429
+#, c-format
+msgid "Display driver setup"
+msgstr ""
+
+#: service_harddrake:429
+#, c-format
+msgid "The system has to be rebooted due to a display driver change."
+msgstr ""
+
+#: service_harddrake:430
+#, c-format
+msgid "Press Cancel within %d seconds to abort."
+msgstr ""
 
 #: ../menu/localedrake-system.desktop.in.h:1
 #, fuzzy

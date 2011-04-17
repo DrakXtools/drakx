@@ -42,7 +42,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 7.1\n"
 "Report-Msgid-Bugs-To: https://qa.mandriva.com\n"
-"POT-Creation-Date: 2010-05-01 16:52+0200\n"
+"POT-Creation-Date: 2011-04-17 14:17+0300\n"
 "PO-Revision-Date: 2011-02-10 22:48+0100\n"
 "Last-Translator: Cătălin Florin RUSSEN <cfrussen@yahoo.co.uk>\n"
 "Language-Team: Romanian <cooker-i18n@mandrivalinux.org>\n"
@@ -56,12 +56,12 @@ msgstr ""
 "2:1))\n"
 "X-Generator: Lokalize 1.0\n"
 
-#: display_help:50 display_help:55 drakbug:186 drakperm:136
+#: display_help:54 display_help:59 drakbug:186 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Ajutor"
 
-#: display_help:63 drakbug:191 drakfont:506
+#: display_help:67 drakbug:191 drakfont:506
 #, c-format
 msgid "Close"
 msgstr "Închide"
@@ -493,7 +493,7 @@ msgstr "Nu se poate obține lista canalelor disponibile"
 #: drakdvb:80 draksec:73 drakups:99 finish-install:105 harddrake2:379
 #: scannerdrake:66 scannerdrake:70 scannerdrake:78 scannerdrake:319
 #: scannerdrake:368 scannerdrake:504 scannerdrake:508 scannerdrake:530
-#: service_harddrake:344
+#: service_harddrake:416
 #, c-format
 msgid "Please wait"
 msgstr "Așteptați vă rog"
@@ -3348,51 +3348,71 @@ msgstr "Scanerul vostru nu va fi disponibil în rețea."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Nu se pot instala pachetele necesare pentru partajarea scanerului."
 
-#: service_harddrake:139
+#: service_harddrake:149
 #, c-format
 msgid "The graphic card '%s' is no more supported by the '%s' driver"
 msgstr "Placa grafică „%s” nu mai este suportată de pilotul „%s”"
 
-#: service_harddrake:181
+#: service_harddrake:159
+#, c-format
+msgid "New release, reconfiguring X for %s"
+msgstr ""
+
+#: service_harddrake:249
 #, c-format
 msgid "The proprietary kernel driver was not found for '%s' X.org driver"
 msgstr "Pilotul de nucleu proprietar nu a fost găsit pentru pilotul X.org „%s”"
 
-#: service_harddrake:220
+#: service_harddrake:299
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr ""
 "Unele dispozitive din clasa de componente materiale „%s” au fost șterse:\n"
 
-#: service_harddrake:221
+#: service_harddrake:300
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s a fost înlăturat\n"
 
-#: service_harddrake:224
+#: service_harddrake:303
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Au fost adăugate cîteva dispozitive: %s\n"
 
-#: service_harddrake:225
+#: service_harddrake:304
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s a fost adăugat\n"
 
-#: service_harddrake:344
-#, c-format
-msgid "Hardware probing in progress"
-msgstr "Detecția componentelor este în progres..."
-
-#: service_harddrake_confirm:7
+#: service_harddrake:390
 #, c-format
 msgid "Hardware changes in \"%s\" class (%s seconds to answer)"
 msgstr "Modificări de componente în clasa „%s” (%s secunde pentru a răspunde)"
 
-#: service_harddrake_confirm:8
+#: service_harddrake:391
 #, c-format
 msgid "Do you want to run the appropriate config tool?"
 msgstr "Doriți să lansați unealta de configurare adecvată?"
+
+#: service_harddrake:416
+#, c-format
+msgid "Hardware probing in progress"
+msgstr "Detecția componentelor este în progres..."
+
+#: service_harddrake:429
+#, c-format
+msgid "Display driver setup"
+msgstr ""
+
+#: service_harddrake:429
+#, c-format
+msgid "The system has to be rebooted due to a display driver change."
+msgstr ""
+
+#: service_harddrake:430
+#, c-format
+msgid "Press Cancel within %d seconds to abort."
+msgstr ""
 
 #: ../menu/localedrake-system.desktop.in.h:1
 msgid "System Regional Settings"

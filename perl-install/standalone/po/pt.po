@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-01 16:52+0200\n"
+"POT-Creation-Date: 2011-04-17 14:17+0300\n"
 "PO-Revision-Date: 2010-06-24 03:55+0100\n"
 "Last-Translator: Zé <ze@mandriva.org>\n"
 "Language-Team: Portuguese <>\n"
@@ -26,12 +26,12 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: display_help:50 display_help:55 drakbug:186 drakperm:136
+#: display_help:54 display_help:59 drakbug:186 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Ajuda"
 
-#: display_help:63 drakbug:191 drakfont:506
+#: display_help:67 drakbug:191 drakfont:506
 #, c-format
 msgid "Close"
 msgstr "Fechar"
@@ -461,7 +461,7 @@ msgstr "Não é possível obter a lista dos canais disponíveis"
 #: drakdvb:80 draksec:73 drakups:99 finish-install:105 harddrake2:379
 #: scannerdrake:66 scannerdrake:70 scannerdrake:78 scannerdrake:319
 #: scannerdrake:368 scannerdrake:504 scannerdrake:508 scannerdrake:530
-#: service_harddrake:344
+#: service_harddrake:416
 #, c-format
 msgid "Please wait"
 msgstr "Por favor aguarde"
@@ -528,8 +528,8 @@ msgid ""
 "You are going to close all running programs and lose your current session. "
 "Are you really sure that you want to restart the dm service?"
 msgstr ""
-"Feche todos os programas em execução, irá perder a sua sessão actual. "
-"Tem certeza que deseja reiniciar o serviço dm?"
+"Feche todos os programas em execução, irá perder a sua sessão actual. Tem "
+"certeza que deseja reiniciar o serviço dm?"
 
 #: drakfont:187
 #, c-format
@@ -3309,52 +3309,72 @@ msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 "Não foi possível instalar os pacotes precisos para partilhar o seu scanner."
 
-#: service_harddrake:139
+#: service_harddrake:149
 #, c-format
 msgid "The graphic card '%s' is no more supported by the '%s' driver"
 msgstr "A placa gráfica %s já não é suportada pelo controlador '%s'"
 
-#: service_harddrake:181
+#: service_harddrake:159
+#, c-format
+msgid "New release, reconfiguring X for %s"
+msgstr ""
+
+#: service_harddrake:249
 #, c-format
 msgid "The proprietary kernel driver was not found for '%s' X.org driver"
 msgstr ""
 "O controlador proprietário do kernel não encontrou para o controlador X.org "
 "'%s'"
 
-#: service_harddrake:220
+#: service_harddrake:299
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Alguns dispositivos na classe de material \"%s\" foram removidos:\n"
 
-#: service_harddrake:221
+#: service_harddrake:300
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s foi removido\n"
 
-#: service_harddrake:224
+#: service_harddrake:303
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Foram adicionados alguns dispositivos: %s\n"
 
-#: service_harddrake:225
+#: service_harddrake:304
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s foi adicionado\n"
 
-#: service_harddrake:344
-#, c-format
-msgid "Hardware probing in progress"
-msgstr "Detecção de material em progresso"
-
-#: service_harddrake_confirm:7
+#: service_harddrake:390
 #, c-format
 msgid "Hardware changes in \"%s\" class (%s seconds to answer)"
 msgstr "Alterações de material na classe \"%s\" (%s segundos para responder)"
 
-#: service_harddrake_confirm:8
+#: service_harddrake:391
 #, c-format
 msgid "Do you want to run the appropriate config tool?"
 msgstr "Deseja executar a ferramenta de configuração adequada?"
+
+#: service_harddrake:416
+#, c-format
+msgid "Hardware probing in progress"
+msgstr "Detecção de material em progresso"
+
+#: service_harddrake:429
+#, c-format
+msgid "Display driver setup"
+msgstr ""
+
+#: service_harddrake:429
+#, c-format
+msgid "The system has to be rebooted due to a display driver change."
+msgstr ""
+
+#: service_harddrake:430
+#, c-format
+msgid "Press Cancel within %d seconds to abort."
+msgstr ""
 
 #: ../menu/localedrake-system.desktop.in.h:1
 msgid "System Regional Settings"

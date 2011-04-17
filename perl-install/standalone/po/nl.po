@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-01 16:52+0200\n"
+"POT-Creation-Date: 2011-04-17 14:17+0300\n"
 "PO-Revision-Date: 2009-04-10 10:33+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@gmail.com>\n"
 "Language-Team: Nederlands\n"
@@ -22,12 +22,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: display_help:50 display_help:55 drakbug:186 drakperm:136
+#: display_help:54 display_help:59 drakbug:186 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Hulp"
 
-#: display_help:63 drakbug:191 drakfont:506
+#: display_help:67 drakbug:191 drakfont:506
 #, c-format
 msgid "Close"
 msgstr "Sluiten"
@@ -457,7 +457,7 @@ msgstr "Kan lijst van beschikbare kanalen niet verkrijgen"
 #: drakdvb:80 draksec:73 drakups:99 finish-install:105 harddrake2:379
 #: scannerdrake:66 scannerdrake:70 scannerdrake:78 scannerdrake:319
 #: scannerdrake:368 scannerdrake:504 scannerdrake:508 scannerdrake:530
-#: service_harddrake:344
+#: service_harddrake:416
 #, c-format
 msgid "Please wait"
 msgstr "Even geduld"
@@ -3316,50 +3316,70 @@ msgstr "Uw scanner(s) zullen niet beschikbaar zijn op het netwerk."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Kan de benodigde pakketten om scanner(s) te delen niet installeren."
 
-#: service_harddrake:139
+#: service_harddrake:149
 #, fuzzy, c-format
 msgid "The graphic card '%s' is no more supported by the '%s' driver"
 msgstr "De %s wordt niet ondersteund in deze versie van %s."
 
-#: service_harddrake:181
+#: service_harddrake:159
+#, c-format
+msgid "New release, reconfiguring X for %s"
+msgstr ""
+
+#: service_harddrake:249
 #, c-format
 msgid "The proprietary kernel driver was not found for '%s' X.org driver"
 msgstr ""
 
-#: service_harddrake:220
+#: service_harddrake:299
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Bepaalde apparaten in de apparatuurklasse \"%s\" zijn verwijderd:\n"
 
-#: service_harddrake:221
+#: service_harddrake:300
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s is verwijderd\n"
 
-#: service_harddrake:224
+#: service_harddrake:303
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Enkele apparaten zijn toegevoegd: %s\n"
 
-#: service_harddrake:225
+#: service_harddrake:304
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s is toegevoegd\n"
 
-#: service_harddrake:344
-#, c-format
-msgid "Hardware probing in progress"
-msgstr "Afzoeken van apparatuur is gaande"
-
-#: service_harddrake_confirm:7
+#: service_harddrake:390
 #, c-format
 msgid "Hardware changes in \"%s\" class (%s seconds to answer)"
 msgstr "Apparaatveranderingen in de \"%s\"-klasse (%s seconden voor antwoord)"
 
-#: service_harddrake_confirm:8
+#: service_harddrake:391
 #, c-format
 msgid "Do you want to run the appropriate config tool?"
 msgstr "Wilt u het bijpassende configuratieprogramma starten?"
+
+#: service_harddrake:416
+#, c-format
+msgid "Hardware probing in progress"
+msgstr "Afzoeken van apparatuur is gaande"
+
+#: service_harddrake:429
+#, c-format
+msgid "Display driver setup"
+msgstr ""
+
+#: service_harddrake:429
+#, c-format
+msgid "The system has to be rebooted due to a display driver change."
+msgstr ""
+
+#: service_harddrake:430
+#, c-format
+msgid "Press Cancel within %d seconds to abort."
+msgstr ""
 
 #: ../menu/localedrake-system.desktop.in.h:1
 msgid "System Regional Settings"
