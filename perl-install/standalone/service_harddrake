@@ -219,8 +219,7 @@ my $is_globetrotter = -f '/usr/sbin/mdkmove';
 
 my (%config, $wait);
 my $in;
-my $splash = -f '/proc/splash';
-my $splash_was_silent = cat_('/proc/splash') =~ /, silent : on/;
+my $plymouth = -x '/bin/plymouth';
 
 # For each hw, class, detect device, compare and offer to reconfigure if needed
 foreach my $hw_class (@harddrake::data::tree) {
@@ -339,7 +338,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     if (!$hw_class->{automatic}) {
         $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
         unless ($pid = fork()) {
-            $splash and eval { output('/proc/splash', 'verbose') } and $splash = 0;
+            $plymouth and system('plymouth', 'hide-splash');
             exec("/usr/share/harddrake/confirm", $Ident, $timeout, $msg);
         }
         alarm($timeout);
@@ -378,9 +377,5 @@ foreach my $hw_class (@harddrake::data::tree) {
 # output new hw config
 log::explanations("created file $last_boot_config");
 Storable::store(\%config, $last_boot_config);
-
-# restore bootsplash mode
-$splash_was_silent and eval { output('/proc/splash', 'silent') };
-
 
 $in->exit(0) if $in;
