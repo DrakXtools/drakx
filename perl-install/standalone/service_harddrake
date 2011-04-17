@@ -24,6 +24,7 @@ use harddrake::data;
 use harddrake::autoconf;
 use harddrake::sound;
 use Xconfig::card;
+use Xconfig::various;
 use modules;
 use Storable qw(store retrieve);
 
@@ -116,10 +117,13 @@ sub switch_x_driver {
         log::explanations("would switch X.org driver from '$old_driver' to '$new_driver' ($reason); but new driver is not installed");
         return;
     }
+    # This should use calls to Xconfig instead of substitution. However, currently
+    # Xconfig probably makes too intrusive changes to xorg.conf when switching the driver.
     cp_af('/etc/X11/xorg.conf', "/etc/X11/xorg.conf.mdv$^T");
     substInFile { s!Driver "($old_driver)"!Driver "$new_driver"!g } '/etc/X11/xorg.conf';
     log::explanations("switch X.org driver from '$old_driver' to '$new_driver' ($reason)");
     Xconfig::card::libgl_config_and_more({ Driver => $new_driver });
+    Xconfig::various::setup_kms();
 }
 
 sub should_reconfigure_x_driver {
