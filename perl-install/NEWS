@@ -3,6 +3,8 @@
   o add/remove nokmsboot boot option if needed when switching the driver
   o ask for a reboot after a driver switch if needed, and load the new driver
     if no reboot is needed
+  o do not switch a display driver if speedboot has already started X server,
+    in that case simply disable speedboot for next boot
 
 Version 13.42 - 24 February 2011
 - increase default disk size to suggest /home partition

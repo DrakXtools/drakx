@@ -198,10 +198,18 @@ foreach my $device (@devices) {
     # auto reconfigure x11 only on first time default driver have changed:
     my ($should_reconfigure, $reason) = should_reconfigure_x_driver($card_data, $device, $current_driver);
     if ($should_reconfigure) {
+	if (-e "/tmp/.X11-unix/X0") {
+	    # We are too late, X server is already running.
+	    # It was probably speedboot, disable it for next boot.
+	    substInFile { s!^$curr_kernel .*\n!! } "/var/lib/speedboot/status" if -e "/var/lib/speedboot/status";
+	    # Restore state as we were not able to switch the driver yet.
+	    setVarsInSh("$hw_sysconfdir/xorg", { XORG_DRV => $previous_xorg_config{XORG_DRV} });
+	} else {
 	    $reboot_needed |= switch_x_driver($current_driver, $card_data->{Driver}, $reason);
 	    schedule_warn_about_switch($reason) if any { $current_driver =~ $_->{xorg_driver_regexp} } @cards;
 	    # Update $current_driver with the new one
 	    $current_driver = $card_data->{Driver};
+	}
     }
 
     # nv->nouveau or non_kms_nouveau->kms_nouveau can't have "Disable dri"!
