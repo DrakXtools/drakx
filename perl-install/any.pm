@@ -179,6 +179,11 @@ sub setupBootloaderBefore {
 	}
     }
 
+    #- set nokmsboot if a conflicting driver is configured.
+    if (-x "$::prefix/sbin/display_driver_helper" && !run_program::rooted($::prefix, "/sbin/display_driver_helper", "--is-kms-allowed")) {
+	bootloader::set_append_simple($bootloader, 'nokmsboot');
+    }
+
     #- check for valid fb mode to enable a default boot with frame buffer.
     my $vga = $allow_fb && (!detect_devices::matching_desc__regexp('3D Rage LT') &&
                             !detect_devices::matching_desc__regexp('Rage Mobility [PL]') &&
