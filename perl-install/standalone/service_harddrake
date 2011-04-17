@@ -72,6 +72,22 @@ if (!member($curr_kernel, chomp_(cat_($known_kernels)))) {
     append_to_file($known_kernels, "$curr_kernel\n");
 }
 
+sub ask_with_timeout {
+    my ($title, $msg, $timeout, $plymouth) = @_;
+    my ($pid, $res, $timed_out);
+
+    $SIG{ALRM} = sub { $timed_out = 1; kill 15, $pid };
+    unless ($pid = fork()) {
+	$plymouth and system('plymouth', 'hide-splash');
+	exec("/usr/share/harddrake/confirm", $title, $msg);
+    }
+    alarm($timeout);
+    wait();
+    $res = $?;
+    alarm(0);
+    return $res, $timed_out;
+}
+
 sub get_xorg_driver() {
     my $x = Xconfig::xfree->read;
     if ($x) {
@@ -332,19 +348,12 @@ foreach my $hw_class (@harddrake::data::tree) {
         log::explanations(qw(skip $Ident configuration since "$configurator" is not executable));
         next;
     }
-    my ($pid, $no, $res);
+    my ($no, $res);
     $hw_class->{automatic} ||= ref($configurator) eq 'CODE';
 
     if (!$hw_class->{automatic}) {
-        $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
-        unless ($pid = fork()) {
-            $plymouth and system('plymouth', 'hide-splash');
-            exec("/usr/share/harddrake/confirm", $Ident, $timeout, $msg);
-        }
-        alarm($timeout);
-        wait();
-        $res = $?;
-        alarm(0);
+	($res, $no) = ask_with_timeout(N("Hardware changes in \"%s\" class (%s seconds to answer)", $Ident, $timeout),
+				    $msg . N("Do you want to run the appropriate config tool?"), $timeout, $plymouth);
     } else {
         $res = 1;
     }
