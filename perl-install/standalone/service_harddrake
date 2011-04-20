@@ -422,7 +422,15 @@ if (!$reboot_needed && text2bool($cfg{HANDLE_KMS_BOOT_CONFIG})) {
     if (-x "/sbin/display_driver_helper" && system("display_driver_helper", "--check-loaded") != 0) {
         # incorrect driver is loaded, X.org can't start (e.g. proprietary driver loaded while free driver in use,
         # or free driver loaded while vesa is configured).
-        $reboot_needed |= Xconfig::various::setup_kms();
+        my $kms_changed = Xconfig::various::setup_kms();
+        $reboot_needed |= $kms_changed;
+        if (!$reboot_needed && cat_("/proc/cmdline") !~ /\bnokmsboot\b/) {
+            # Wrong driver loaded but fixing the bootloader configuration failed.
+            # Possibly a direct boot from another bootloader.
+            dialog_with_timeout("warn", N("Display driver issue"),
+                N("The display driver currently configured requires you to use the 'nokmsboot' boot option to prevent the KMS driver of the kernel from being loaded in the boot process. Startup of the X server may now fail as that option was not specified."),
+                60, $plymouth);
+        }
     } elsif (-e "/dev/.late_kms") {
         # initrd didn't load the KMS driver; non-fatal but ugly, fix it for next boot
         unlink("/dev/.late_kms");
