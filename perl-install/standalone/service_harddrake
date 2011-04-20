@@ -260,18 +260,6 @@ foreach my $card (@cards) {
     }
 }
 
-if (!$reboot_needed && text2bool($cfg{HANDLE_KMS_BOOT_CONFIG})) {
-    if (-x "/sbin/display_driver_helper" && system("display_driver_helper", "--check-loaded") != 0) {
-	# incorrect driver is loaded, X.org can't start (e.g. proprietary driver loaded while free driver in use,
-	# or free driver loaded while vesa is configured).
-	$reboot_needed |= Xconfig::various::setup_kms();
-    } elsif (!$reboot_needed && -e "/dev/.late_kms") {
-	# initrd didn't load the KMS driver; non-fatal but ugly, fix it for next boot
-	unlink("/dev/.late_kms");
-	Xconfig::various::setup_kms();
-    }
-}
-
 my $is_globetrotter = -f '/usr/sbin/mdkmove';
 
 my (%config, $wait);
@@ -429,6 +417,18 @@ foreach my $hw_class (@harddrake::data::tree) {
 # output new hw config
 log::explanations("created file $last_boot_config");
 Storable::store(\%config, $last_boot_config);
+
+if (!$reboot_needed && text2bool($cfg{HANDLE_KMS_BOOT_CONFIG})) {
+    if (-x "/sbin/display_driver_helper" && system("display_driver_helper", "--check-loaded") != 0) {
+        # incorrect driver is loaded, X.org can't start (e.g. proprietary driver loaded while free driver in use,
+        # or free driver loaded while vesa is configured).
+        $reboot_needed |= Xconfig::various::setup_kms();
+    } elsif (!$reboot_needed && -e "/dev/.late_kms") {
+        # initrd didn't load the KMS driver; non-fatal but ugly, fix it for next boot
+        unlink("/dev/.late_kms");
+        Xconfig::various::setup_kms();
+    }
+}
 
 # Handle $reboot_needed from earlier:
 my ($reply, $timedout);
