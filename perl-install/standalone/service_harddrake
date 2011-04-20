@@ -395,7 +395,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     $hw_class->{automatic} ||= ref($configurator) eq 'CODE';
 
     if (!$hw_class->{automatic}) {
-	($res, $no) = dialog_with_timeout("okcancel", N("Hardware changes in \"%s\" class (%s seconds to answer)", $Ident, $timeout),
+	($res, $no) = dialog_with_timeout("yesorno", N("Hardware changes in \"%s\" class (%s seconds to answer)", $Ident, $timeout),
 				    $msg . N("Do you want to run the appropriate config tool?"), $timeout, $plymouth);
     } else {
         $res = 1;
