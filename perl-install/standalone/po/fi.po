@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-17 14:17+0300\n"
+"POT-Creation-Date: 2011-04-21 02:36+0300\n"
 "PO-Revision-Date: 2011-04-20 16:27+0300\n"
 "Last-Translator: Jani Välimaa <wally@mandriva.org>\n"
 "Language-Team: Finnish <cooker-i18n@mandrivalinux.org>\n"
@@ -456,7 +456,7 @@ msgstr "Kanavalistaa ei voitu hakea"
 #: drakdvb:80 draksec:73 drakups:99 finish-install:105 harddrake2:379
 #: scannerdrake:66 scannerdrake:70 scannerdrake:78 scannerdrake:319
 #: scannerdrake:368 scannerdrake:504 scannerdrake:508 scannerdrake:530
-#: service_harddrake:416
+#: service_harddrake:412
 #, c-format
 msgid "Please wait"
 msgstr "Odota hetki"
@@ -3288,69 +3288,83 @@ msgstr "Kuvanlukijoita ei voi käyttää verkosta."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Kuvanlukijan jakamiseen tarvittavia paketteja ei voitu asentaa."
 
-#: service_harddrake:149
+#: service_harddrake:153
 #, c-format
 msgid "The graphic card '%s' is no more supported by the '%s' driver"
 msgstr "Näytönohjain %s ei ole enää tuettu ajurin %s kanssa."
 
-#: service_harddrake:159
+#: service_harddrake:163
 #, c-format
 msgid "New release, reconfiguring X for %s"
 msgstr "Uusi julkaisu, asetetaan X uudelleen %s:lle"
 
-#: service_harddrake:249
+#: service_harddrake:254
 #, c-format
 msgid "The proprietary kernel driver was not found for '%s' X.org driver"
 msgstr "X.org-ajurin %s suljettua versiota ei löytynyt."
 
-#: service_harddrake:299
+#: service_harddrake:293
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Poistettiin joitakin laitteita laitteistoluokasta \"%s\":\n"
 
-#: service_harddrake:300
+#: service_harddrake:294
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- poistettiin %s\n"
 
-#: service_harddrake:303
+#: service_harddrake:297
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Lisättiin joitakin laitteita: %s\n"
 
-#: service_harddrake:304
+#: service_harddrake:298
 #, c-format
 msgid "- %s was added\n"
 msgstr "- lisättiin %s\n"
 
-#: service_harddrake:390
+#: service_harddrake:386
 #, c-format
 msgid "Hardware changes in \"%s\" class (%s seconds to answer)"
 msgstr "Laitteistomuutoksia luokassa \"%s\" (%s sekuntia aikaa vastata)"
 
-#: service_harddrake:391
+#: service_harddrake:387
 #, c-format
 msgid "Do you want to run the appropriate config tool?"
 msgstr "Haluatko suorittaa tarvittavan asetustyökalun?"
 
-#: service_harddrake:416
+#: service_harddrake:412
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Laitteiston tunnistaminen käynnissä..."
 
-#: service_harddrake:429
+#: service_harddrake:430
+#, fuzzy, c-format
+msgid "Display driver issue"
+msgstr "Näytönohjaimen ajurit"
+
+#: service_harddrake:431
+#, c-format
+msgid ""
+"The display driver currently configured requires you to use the 'nokmsboot' "
+"boot option to prevent the KMS driver of the kernel from being loaded in the "
+"boot process. Startup of the X server may now fail as that option was not "
+"specified."
+msgstr ""
+
+#: service_harddrake:445
 #, c-format
 msgid "Display driver setup"
 msgstr "Näytönohjaimen ajurit"
 
-#: service_harddrake:429
+#: service_harddrake:445
 #, c-format
 msgid "The system has to be rebooted due to a display driver change."
 msgstr ""
 "Järjestelmä on käynnistettävä uudelleen näytönohjaimen ajurin vaihdoksen "
 "vuoksi."
 
-#: service_harddrake:430
+#: service_harddrake:446
 #, c-format
 msgid "Press Cancel within %d seconds to abort."
 msgstr "Paina \"Peruuta\" %d sekunnin kuluessa keskeyttääksesi."

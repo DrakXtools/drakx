@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 2007\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-17 14:17+0300\n"
+"POT-Creation-Date: 2011-04-21 02:36+0300\n"
 "PO-Revision-Date: 2009-04-09 11:56+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -443,7 +443,7 @@ msgstr "无法获得可用频道的列表"
 #: drakdvb:80 draksec:73 drakups:99 finish-install:105 harddrake2:379
 #: scannerdrake:66 scannerdrake:70 scannerdrake:78 scannerdrake:319
 #: scannerdrake:368 scannerdrake:504 scannerdrake:508 scannerdrake:530
-#: service_harddrake:416
+#: service_harddrake:412
 #, c-format
 msgid "Please wait"
 msgstr "请稍候"
@@ -3231,67 +3231,81 @@ msgstr "您的扫描仪将不会在网络上出现。"
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "无法安装共享您的扫描仪所需的软件包。"
 
-#: service_harddrake:149
+#: service_harddrake:153
 #, fuzzy, c-format
 msgid "The graphic card '%s' is no more supported by the '%s' driver"
 msgstr "%2$s 版本不支持 %1$s。"
 
-#: service_harddrake:159
+#: service_harddrake:163
 #, c-format
 msgid "New release, reconfiguring X for %s"
 msgstr ""
 
-#: service_harddrake:249
+#: service_harddrake:254
 #, c-format
 msgid "The proprietary kernel driver was not found for '%s' X.org driver"
 msgstr ""
 
-#: service_harddrake:299
+#: service_harddrake:293
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "删除了一些“%s”类别的设备:\n"
 
-#: service_harddrake:300
+#: service_harddrake:294
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s 已删除\n"
 
-#: service_harddrake:303
+#: service_harddrake:297
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "添加了一些设备: %s\n"
 
-#: service_harddrake:304
+#: service_harddrake:298
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s 已添加\n"
 
-#: service_harddrake:390
+#: service_harddrake:386
 #, c-format
 msgid "Hardware changes in \"%s\" class (%s seconds to answer)"
 msgstr "在“%s”类别更改了硬件(还剩 %s 秒回答)"
 
-#: service_harddrake:391
+#: service_harddrake:387
 #, c-format
 msgid "Do you want to run the appropriate config tool?"
 msgstr "您想要运行相应的配置工具吗?"
 
-#: service_harddrake:416
+#: service_harddrake:412
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "硬件检测进行中"
 
-#: service_harddrake:429
+#: service_harddrake:430
+#, c-format
+msgid "Display driver issue"
+msgstr ""
+
+#: service_harddrake:431
+#, c-format
+msgid ""
+"The display driver currently configured requires you to use the 'nokmsboot' "
+"boot option to prevent the KMS driver of the kernel from being loaded in the "
+"boot process. Startup of the X server may now fail as that option was not "
+"specified."
+msgstr ""
+
+#: service_harddrake:445
 #, c-format
 msgid "Display driver setup"
 msgstr ""
 
-#: service_harddrake:429
+#: service_harddrake:445
 #, c-format
 msgid "The system has to be rebooted due to a display driver change."
 msgstr ""
 
-#: service_harddrake:430
+#: service_harddrake:446
 #, c-format
 msgid "Press Cancel within %d seconds to abort."
 msgstr ""
