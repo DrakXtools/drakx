@@ -31,6 +31,7 @@ use Storable qw(store retrieve);
 
 my $force = member('--force', @ARGV);
 my $reboot_needed;
+my $do_udev_settle;
 
 my $invert_do_it = $ARGV[0] eq 'X11' ? 1 : 0;
 my ($hw_sysconfdir, $timeout) = ("/etc/sysconfig/harddrake2", $invert_do_it ? 600 : 25);
@@ -113,6 +114,16 @@ sub find_xorg_driver {
       || -e "/usr/$lib/xorg/extra-modules/${new_driver}_drv.so";
 }
 
+sub after_x_driver_switch {
+    # If a wrong driver is loaded, ask for a reboot.
+    my $reboot_needed = -x "/sbin/display_driver_helper" && system("/sbin/display_driver_helper", "--check-loaded") != 0;
+    if (!$reboot_needed) {
+        # Load any new drivers.
+        system("udevadm", "trigger",  "--subsystem-match=pci", "--attr-match=class=0x03*");
+    }
+    $reboot_needed;
+}
+
 sub switch_x_driver {
     my ($old_driver, $new_driver, $reason) = @_;
     if (!find_xorg_driver($new_driver)) {
@@ -127,14 +138,7 @@ sub switch_x_driver {
     Xconfig::card::libgl_config_and_more({ Driver => $new_driver });
     Xconfig::various::setup_kms();
 
-    # If a wrong driver is loaded, ask for a reboot.
-    my $reboot_needed = -x "/sbin/display_driver_helper" && system("/sbin/display_driver_helper", "--check-loaded") != 0;
-    if (!$reboot_needed) {
-	# Load any new drivers.
-	system("udevadm", "trigger",  "--subsystem-match=pci", "--attr-match=class=0x03*");
-	system("udevadm", "settle", "--timeout=10");
-    }
-    $reboot_needed;
+    after_x_driver_switch(); # returns 1 if reboot is needed
 }
 
 sub should_reconfigure_x_driver {
@@ -207,6 +211,7 @@ foreach my $device (@devices) {
 	    setVarsInSh("$hw_sysconfdir/xorg", { XORG_DRV => $previous_xorg_config{XORG_DRV} });
 	} else {
 	    $reboot_needed |= switch_x_driver($current_driver, $card_data->{Driver}, $reason);
+	    $do_udev_settle = 1;
 	    schedule_warn_about_switch($reason) if any { $current_driver =~ $_->{xorg_driver_regexp} } @cards;
 	    # Update $current_driver with the new one
 	    $current_driver = $card_data->{Driver};
@@ -249,6 +254,7 @@ foreach my $card (@cards) {
             my $reason = N("The proprietary kernel driver was not found for '%s' X.org driver",
                            $old_driver);
             $reboot_needed |= switch_x_driver($card->{xorg_driver_regexp}, $driver, $reason);
+            $do_udev_settle = 1;
             schedule_warn_about_switch($reason);
         }
     }
@@ -367,6 +373,8 @@ foreach my $hw_class (@harddrake::data::tree) {
     } elsif ($Ident eq "VIDEO") {
         # explicitely NOT read the existing config (eg: new profile with globetrotter)
         harddrake::autoconf::xconf($modules_conf, {}, member($cfg{SETUP_FB}, qw(NO no)), $cfg{RESOLUTION_WANTED});
+        $reboot_needed |= after_x_driver_switch();
+        $do_udev_settle = 1;
         next;
     } elsif ($Ident eq "MOUSE") {
         harddrake::autoconf::mouse_conf($modules_conf);
@@ -432,5 +440,7 @@ if ($reboot_needed && ! -e "/tmp/.X11-unix/X0") {
 	exec("/sbin/reboot");
     }
 }
+
+system("udevadm", "settle", "--timeout=10") if $do_udev_settle;
 
 $in->exit(0) if $in;
