@@ -76,14 +76,14 @@ if (!member($curr_kernel, chomp_(cat_($known_kernels)))) {
     append_to_file($known_kernels, "$curr_kernel\n");
 }
 
-sub ask_with_timeout {
-    my ($title, $msg, $timeout, $plymouth) = @_;
+sub dialog_with_timeout {
+    my ($type, $title, $msg, $timeout, $plymouth) = @_;
     my ($pid, $res, $timed_out);
 
     $SIG{ALRM} = sub { $timed_out = 1; kill 15, $pid };
     unless ($pid = fork()) {
 	$plymouth and system('plymouth', 'hide-splash');
-	exec("/usr/share/harddrake/confirm", $title, $msg);
+	exec("/usr/share/harddrake/confirm", $type, $title, $msg);
     }
     alarm($timeout);
     wait();
@@ -395,7 +395,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     $hw_class->{automatic} ||= ref($configurator) eq 'CODE';
 
     if (!$hw_class->{automatic}) {
-	($res, $no) = ask_with_timeout(N("Hardware changes in \"%s\" class (%s seconds to answer)", $Ident, $timeout),
+	($res, $no) = dialog_with_timeout("okcancel", N("Hardware changes in \"%s\" class (%s seconds to answer)", $Ident, $timeout),
 				    $msg . N("Do you want to run the appropriate config tool?"), $timeout, $plymouth);
     } else {
         $res = 1;
@@ -434,7 +434,7 @@ Storable::store(\%config, $last_boot_config);
 my ($reply, $timedout);
 # Don't do autoreboot if X was somehow already started (not normally the case).
 if ($reboot_needed && ! -e "/tmp/.X11-unix/X0") {
-    ($reply, $timedout) = ask_with_timeout(N("Display driver setup"), N("The system has to be rebooted due to a display driver change.") . "\n\n"
+    ($reply, $timedout) = dialog_with_timeout("okcancel", N("Display driver setup"), N("The system has to be rebooted due to a display driver change.") . "\n\n"
 			. N("Press Cancel within %d seconds to abort.", 30), 30, $plymouth);
     if ($reply || $timedout) {
 	exec("/sbin/reboot");
