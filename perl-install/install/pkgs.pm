@@ -558,8 +558,6 @@ sub _openInstallLog() {
 sub rpmDbOpen {
     my ($b_rebuild_if_needed) = @_;
 
-    clean_rpmdb_shared_regions();
-
     my $need_rebuild = $b_rebuild_if_needed && !URPM::DB::verify($::prefix);
 
     if ($need_rebuild) {
@@ -594,12 +592,7 @@ sub rpmDbOpen {
     $db;
 }
 
-sub clean_rpmdb_shared_regions() {
-    unlink glob("$::prefix/var/lib/rpm/__db.*");
-}
-
 sub open_rpm_db_rw() {
-    clean_rpmdb_shared_regions();
     my $db = URPM::DB::open($::prefix, 1);
     $db and log::l("opened rpmdb for writing in $::prefix");
     $db;
@@ -682,8 +675,6 @@ sub install {
     my %packages;
 
     delete $packages->{rpmdb}; #- make sure rpmdb is closed before.
-    #- avoid potential problems with rpm db personality change
-    clean_rpmdb_shared_regions();
 
     return if !@$toInstall;
 
@@ -722,8 +713,6 @@ sub install {
 
     # prevent urpmi from trying to install them again (CHECKME: maybe uneeded):
     $packages->{state} = {};
-
-    clean_rpmdb_shared_regions(); #- workaround librpm which is buggy when using librpm rooted and the just installed rooted library
 
     fs::loopback::save_boot($loop_boot);
 }
