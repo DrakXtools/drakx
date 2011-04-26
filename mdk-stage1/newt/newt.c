@@ -51,10 +51,10 @@ const struct newtColors newtDefaultColorPalette = {
 	  "white", "blue",			/* label fg, bg */
 	  "black", "cyan",			/* listbox fg, bg */
 	  "yellow", "cyan",			/* active listbox fg, bg */
-	  "white", "blue",			/* textbox fg, bg */
+	  "black", "green",			/* textbox fg, bg */
 	  "cyan", "black",			/* active textbox fg, bg */
 	  "white", "blue",			/* help line */
-	  "yellow", "blue",			/* root text */
+	  "black", "green",			/* root text */
 	  "blue",					/* scale full */
 	  "red",					/* scale empty */
 	  "blue", "cyan",				/* disabled entry fg, bg */
