@@ -116,12 +116,12 @@ sub mkinitrd {
 
     modules::load('loop');
     my @options = (
-		   if_($::isInstall, "-v"), "-f", $initrd, $kernel_version, 
+		   if_($::isInstall), "-f", $initrd, $kernel_version, 
 		   if_($entry->{initrd_options}, split(' ', $entry->{initrd_options})),
 		  );
-    if (!run_program::rooted($::prefix, 'mkinitrd', @options)) {
+    if (!run_program::rooted($::prefix, 'dracut', @options)) {
 	unlink("$::prefix/$initrd");
-	die "mkinitrd failed:\n(mkinitrd @options)";
+	die "dracut failed:\n(dracut @options)";
     }
     add_boot_splash($initrd, $entry->{vga} || $bootloader->{vga});
 
