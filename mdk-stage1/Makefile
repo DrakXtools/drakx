@@ -15,7 +15,7 @@
  # along with this program; if not, write to the Free Software
  # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-VERSION=1.49
+VERSION=1.50
 PRODUCT=drakx-installer-binaries
 
  #
@@ -125,7 +125,7 @@ STAGE1OBJS-FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
 
 BINS = init stage1 dhcp-client rescue-gui probe-modules
 
-DIRS += pci-resource usb-resource slang newt 
+DIRS += pci-resource usb-resource slang newt ppp/pppd rp-pppoe/src
 ifeq (i386, $(ARCH))
 DIRS += pcmcia pcmcia-resource sysfs
 endif
