@@ -39,22 +39,22 @@ static const char * defaultHelpLine =
 
 const struct newtColors newtDefaultColorPalette = {
 	  "cyan", "black", 			/* root fg, bg */
-	  "black", "blue",			/* border fg, bg */
+	  "white", "blue",			/* border fg, bg */
 	  "white", "blue",			/* window fg, bg */
 	  "white", "black",			/* shadow fg, bg */
 	  "white", "blue",			/* title fg, bg */
-	  "black", "cyan",			/* button fg, bg */
-	  "yellow", "cyan",			/* active button fg, bg */
+	  "white", "cyan",			/* button fg, bg */
+	  "black", "white",			/* active button fg, bg */
 	  "yellow", "blue",			/* checkbox fg, bg */
 	  "blue", "brown",			/* active checkbox fg, bg */
 	  "yellow", "blue",			/* entry box fg, bg */
 	  "white", "blue",			/* label fg, bg */
 	  "black", "cyan",			/* listbox fg, bg */
-	  "yellow", "cyan",			/* active listbox fg, bg */
-	  "black", "green",			/* textbox fg, bg */
+	  "black", "white",			/* active listbox fg, bg */
+	  "white", "blue",			/* textbox fg, bg */
 	  "cyan", "black",			/* active textbox fg, bg */
-	  "white", "blue",			/* help line */
-	  "black", "green",			/* root text */
+	  "blue", "white",			/* help line */
+	  "blue", "white",			/* root text */
 	  "blue",					/* scale full */
 	  "red",					/* scale empty */
 	  "blue", "cyan",				/* disabled entry fg, bg */
