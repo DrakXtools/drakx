@@ -116,7 +116,7 @@ sub mkinitrd {
 
     modules::load('loop');
     my @options = (
-		   if_($::isInstall, "-v"), "-f", $initrd, $kernel_version, 
+		   if_($::isInstall), "-f", $initrd, $kernel_version, 
 		   if_($entry->{initrd_options}, split(' ', $entry->{initrd_options})),
 		  );
     if (!run_program::rooted($::prefix, 'mkinitrd', @options)) {
