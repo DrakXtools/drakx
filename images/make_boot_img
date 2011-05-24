@@ -121,7 +121,7 @@ display help.msg
 implicit 1
 EOF
     my $header_gfxboot = <<EOF;
-ui gfxboot.com bootlogo
+ui gfxboot.c32 bootlogo
 label harddisk
   localboot 0x80
 EOF
@@ -727,7 +727,7 @@ sub isolinux {
     syslinux_all_files('isolinux', $kernels);
 
     _ "cp $isolinux_bin isolinux/isolinux.bin";
-    _ "cp /usr/lib/syslinux/gfxboot.com isolinux/gfxboot.com";
+    _ "cp /usr/lib/syslinux/gfxboot.c32 isolinux/gfxboot.c32";
     output("isolinux/isolinux.cfg", syslinux_cfg_all('cdrom', 1));
 
     xbox_stage1() if arch() =~ /i.86/;
@@ -765,7 +765,7 @@ sub boot_iso {
     _ "cp /usr/share/gfxboot/themes/Mandriva/install/* .boot_iso/isolinux" if $with_gfxboot;
 # _ "cp /home/pixel/cooker/soft/theme/mandriva-gfxboot-theme/inst/* .boot_iso/isolinux" if $with_gfxboot;
     #_ "cp /home/teuf/mdv/src/mandriva-gfxboot-theme/inst/* .boot_iso/isolinux" if $with_gfxboot;
-    _ "cp /usr/lib/syslinux/gfxboot.com .boot_iso/isolinux/gfxboot.com" if $with_gfxboot;
+    _ "cp /usr/lib/syslinux/gfxboot.c32 .boot_iso/isolinux/gfxboot.c32" if $with_gfxboot;
 
     output('.boot_iso/isolinux/isolinux.cfg', syslinux_cfg_all('', $with_gfxboot));
 
