@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-04-17 14:17+0300\n"
-"PO-Revision-Date: 2011-06-27 05:56+0100\n"
+"PO-Revision-Date: 2011-06-27 06:51+0100\n"
 "Last-Translator: Zé <ze@mageia.org>\n"
 "Language-Team: Portuguese <>\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgstr ""
 "ou XP, pode causar um erro fatal no Windows. Esta precaução não se\n"
 "aplica ao Windows 95 ou 98. ou aos discos de dados NT.\n"
 "\n"
-"Atribuir um novo ID de Volume?"
+"Deseja atribuir um novo ID de Volume?"
 
 #: any.pm:275
 #, c-format
@@ -161,7 +161,7 @@ msgstr "Opções principais"
 #: any.pm:425
 #, c-format
 msgid "Delay before booting default image"
-msgstr "O atraso antes do arranque da imagem predefinida"
+msgstr "Atraso antes de iniciar a imagem predefinida"
 
 #: any.pm:426
 #, c-format
@@ -227,27 +227,27 @@ msgstr "Mensagem Init"
 #: any.pm:454
 #, c-format
 msgid "Open Firmware Delay"
-msgstr "Atraso 'Open Firmware'"
+msgstr "Atraso na abertura do 'firmware'"
 
 #: any.pm:455
 #, c-format
 msgid "Kernel Boot Timeout"
-msgstr "Intervalo de Arranque do Kernel"
+msgstr "Tempo de espera no arranque do kernel"
 
 #: any.pm:456
 #, c-format
 msgid "Enable CD Boot?"
-msgstr "Activar Arranque de CD?"
+msgstr "Permitir arranque de CD?"
 
 #: any.pm:457
 #, c-format
 msgid "Enable OF Boot?"
-msgstr "Activar Arranque OF?"
+msgstr "Permitir arranque de OF?"
 
 #: any.pm:458
 #, c-format
 msgid "Default OS?"
-msgstr "SO predefinido?"
+msgstr "Sistema Operativo predefinido?"
 
 #: any.pm:531
 #, c-format
@@ -257,17 +257,17 @@ msgstr "Imagem"
 #: any.pm:532 any.pm:546
 #, c-format
 msgid "Root"
-msgstr "Raiz"
+msgstr "Partição"
 
 #: any.pm:533 any.pm:559
 #, c-format
 msgid "Append"
-msgstr "Juntar"
+msgstr "Opções"
 
 #: any.pm:535
 #, c-format
 msgid "Xen append"
-msgstr "Juntar Xen"
+msgstr "Opções Xen"
 
 #: any.pm:537
 #, c-format
@@ -277,7 +277,7 @@ msgstr "Requer senha para arrancar"
 #: any.pm:539
 #, c-format
 msgid "Video mode"
-msgstr "Modo gráfico"
+msgstr "Resolução"
 
 #: any.pm:541
 #, c-format
@@ -307,7 +307,7 @@ msgstr "Sem Vídeo"
 #: any.pm:571
 #, c-format
 msgid "Empty label not allowed"
-msgstr "Não são permitidos nomes vazios"
+msgstr "Tem que indicar um nome"
 
 #: any.pm:572
 #, c-format
@@ -322,7 +322,7 @@ msgstr "Tem que indicar uma partição de raiz"
 #: any.pm:573
 #, c-format
 msgid "This label is already used"
-msgstr "Este nome já se encontra em uso"
+msgstr "Este nome já está a ser usado"
 
 #: any.pm:591
 #, c-format
@@ -366,12 +366,12 @@ msgstr ""
 #: any.pm:846
 #, c-format
 msgid "access to X programs"
-msgstr "aceder a programas X"
+msgstr "acesso a programas X"
 
 #: any.pm:847
 #, c-format
 msgid "access to rpm tools"
-msgstr "aceder a ferramentas rpm"
+msgstr "acesso a ferramentas rpm"
 
 #: any.pm:848
 #, c-format
@@ -381,17 +381,17 @@ msgstr "permitir \"su\""
 #: any.pm:849
 #, c-format
 msgid "access to administrative files"
-msgstr "aceder a ficheiros administrativos"
+msgstr "acesso a ficheiros administrativos"
 
 #: any.pm:850
 #, c-format
 msgid "access to network tools"
-msgstr "aceder a ferramentas de rede"
+msgstr "acesso a ferramentas de rede"
 
 #: any.pm:851
 #, c-format
 msgid "access to compilation tools"
-msgstr "aceder a ferramentas de compilação"
+msgstr "acesso a ferramentas de compilação"
 
 #: any.pm:857
 #, c-format
@@ -699,7 +699,7 @@ msgstr ""
 #: any.pm:1489
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
-msgstr "Precisa reiniciar para que as mudanças tenham efeito"
+msgstr "Precisa reiniciar a sessão para que as alterações tenham efeito"
 
 #: any.pm:1524
 #, c-format
@@ -1508,8 +1508,7 @@ msgstr "Deseja gravar as modificações em /etc/fstab?"
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
-"Precisa reiniciar para que as modificações na tabela de partições surtam "
-"efeito"
+"Precisa reiniciar para que as alterações na tabela de partições tenham efeito"
 
 #: diskdrake/interactive.pm:306
 #, c-format
@@ -1519,8 +1518,8 @@ msgid ""
 "Quit anyway?"
 msgstr ""
 "Deve formatar a partição %s!\n"
-"Senão nenhuma entrada para o ponto de montagem %s será gravada em fstab.\n"
-"Sair mesmo assim?"
+"Senão não gravará o ponto de montagem %s no ficheiro fstab.\n"
+"Deseja realmente sair?"
 
 #: diskdrake/interactive.pm:319
 #, c-format
@@ -1535,12 +1534,12 @@ msgstr "Auto alocar"
 #: diskdrake/interactive.pm:326
 #, c-format
 msgid "Toggle to normal mode"
-msgstr "Alternar para modo normal"
+msgstr "Modo normal"
 
 #: diskdrake/interactive.pm:326
 #, c-format
 msgid "Toggle to expert mode"
-msgstr "Alternar para modo avançado"
+msgstr "Modo avançado"
 
 #: diskdrake/interactive.pm:338
 #, c-format
@@ -1996,7 +1995,7 @@ msgstr "Precisa reiniciar antes que as modificações tenham efeito"
 #: diskdrake/interactive.pm:1244
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
-msgstr "A tabela de partições da unidade %s será escrita no disco"
+msgstr "A tabela de partições da unidade %s será gravada no disco"
 
 #: diskdrake/interactive.pm:1263 fs/format.pm:102 fs/format.pm:109
 #, c-format
@@ -2204,7 +2203,8 @@ msgid ""
 "probably leave it alone.\n"
 msgstr ""
 "\n"
-"Provavelmente é uma partição com controladores do sistema.\n"
+"Provavelmente é uma partição\n"
+"com controladores do sistema.\n"
 "Não deve mexer na partição.\n"
 
 #: diskdrake/interactive.pm:1417
@@ -2228,7 +2228,7 @@ msgstr "Espaço livre em %s (%s)"
 #: diskdrake/interactive.pm:1435
 #, c-format
 msgid "Read-only"
-msgstr "Apenas-leitura"
+msgstr "Leitura-apenas"
 
 #: diskdrake/interactive.pm:1436
 #, c-format
@@ -2446,7 +2446,7 @@ msgstr "Activar Listas de Controlo de Acesso Posix"
 #: fs/mount_options.pm:114
 #, c-format
 msgid "Flush write cache on file close"
-msgstr "Eliminar 'cache' de escrita ao fechar ficheiro"
+msgstr "Eliminar caixa de escrita no fecho do ficheiro"
 
 #: fs/mount_options.pm:116
 #, c-format
@@ -3349,8 +3349,8 @@ msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
 msgstr ""
-"Não existe nenhum controlador livre para a sua placa de som (%s), mas existe "
-"um controlador proprietário em \"%s\"."
+"Não existe nenhum controlador livre para a sua placa de som (%s), "
+"mas existe um controlador proprietário em \"%s\"."
 
 #: harddrake/sound.pm:454
 #, c-format
