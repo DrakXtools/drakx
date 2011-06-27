@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-04-17 14:17+0300\n"
-"PO-Revision-Date: 2011-06-19 21:23+0100\n"
+"PO-Revision-Date: 2011-06-27 05:56+0100\n"
 "Last-Translator: Zé <ze@mageia.org>\n"
 "Language-Team: Portuguese <>\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgid ""
 "\n"
 "Assign a new Volume ID?"
 msgstr ""
-"O LILO quer atribuir um novo ID de Volume ao dispositivo %s.  No entanto,\n"
+"O LILO quer atribuir um novo ID de Volume à unidade %s.  No entanto,\n"
 "se mudar o ID de Volume de um disco de arranque Windows NT, 2000,\n"
 "ou XP, pode causar um erro fatal no Windows. Esta precaução não se\n"
 "aplica ao Windows 95 ou 98. ou aos discos de dados NT.\n"
@@ -91,7 +91,7 @@ msgstr ""
 "Isto implica que já tem um carregador de arranque no disco em que arranca"
 "(ex: System Commander).\n"
 "\n"
-"Em que dispositivo está a arrancar?"
+"Em que unidade está a arrancar?"
 
 #: any.pm:332
 #, c-format
@@ -106,12 +106,12 @@ msgstr "Onde deseja instalar o carregador de arranque?"
 #: any.pm:360
 #, c-format
 msgid "First sector (MBR) of drive %s"
-msgstr "Primeiro sector (MBR) do disco %s"
+msgstr "Primeiro sector (MBR) da unidade %s"
 
 #: any.pm:362
 #, c-format
 msgid "First sector of drive (MBR)"
-msgstr "Primeiro sector do disco (MBR)"
+msgstr "Primeiro sector da unidade (MBR)"
 
 #: any.pm:364
 #, c-format
@@ -1996,7 +1996,7 @@ msgstr "Precisa reiniciar antes que as modificações tenham efeito"
 #: diskdrake/interactive.pm:1244
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
-msgstr "A tabela de partições do dispositivo %s será escrita no disco"
+msgstr "A tabela de partições da unidade %s será escrita no disco"
 
 #: diskdrake/interactive.pm:1263 fs/format.pm:102 fs/format.pm:109
 #, c-format
@@ -2079,7 +2079,7 @@ msgstr "UUID: "
 #: diskdrake/interactive.pm:1366
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
-msgstr "Letra do dispositivo DOS: %s (apenas um palpite)\n"
+msgstr "Letra da unidade DOS: %s (apenas um palpite)\n"
 
 #: diskdrake/interactive.pm:1370 diskdrake/interactive.pm:1379
 #: diskdrake/interactive.pm:1453
@@ -2140,7 +2140,7 @@ msgstr "RAID %s\n"
 #: diskdrake/interactive.pm:1393
 #, c-format
 msgid "Encrypted"
-msgstr "Encripatdo"
+msgstr "Encriptado"
 
 #: diskdrake/interactive.pm:1395
 #, c-format
@@ -2150,7 +2150,7 @@ msgstr "(mapeado em %s)"
 #: diskdrake/interactive.pm:1396
 #, c-format
 msgid " (to map on %s)"
-msgstr "(a mapear em %s)"
+msgstr "(para mapear em %s)"
 
 #: diskdrake/interactive.pm:1397
 #, c-format
@@ -2172,7 +2172,7 @@ msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
 msgstr ""
-"Partição de arranque predefinida\n"
+"Partição iniciada por predefinição\n"
 "    (para arranque MS-DOS, não para o lilo)\n"
 
 #: diskdrake/interactive.pm:1407
@@ -2204,7 +2204,7 @@ msgid ""
 "probably leave it alone.\n"
 msgstr ""
 "\n"
-"Provavelmente esta partição é uma partição com controlador.\n"
+"Provavelmente é uma partição com controladores do sistema.\n"
 "Não deve mexer na partição.\n"
 
 #: diskdrake/interactive.pm:1417
@@ -3334,7 +3334,7 @@ msgid ""
 msgstr ""
 "O antigo controlador \"%s\" está na lista negra.\n"
 "\n"
-"Foi indicado que provoca erros no kernel ao descarregar.\n"
+"Foi reportado que provoca erros no kernel ao descarregar.\n"
 "\n"
 "O novo controlador \"%s\" será apenas usado no próximo arranque."
 
@@ -3349,8 +3349,8 @@ msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
 msgstr ""
-"Não há nenhum controlador grátis para a sua placa de som (%s), mas existe um "
-"controlador proprietário em \"%s\"."
+"Não existe nenhum controlador livre para a sua placa de som (%s), mas existe "
+"um controlador proprietário em \"%s\"."
 
 #: harddrake/sound.pm:454
 #, c-format
