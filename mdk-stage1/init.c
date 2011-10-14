@@ -310,7 +310,6 @@ void unmount_filesystems(void)
 	struct filesystem fs[500];
 	int numfs = 0;
 	int i, nb;
-	int disallow_eject = 0;
 
 	printf("unmounting filesystems...\n"); 
 	
@@ -340,8 +339,6 @@ void unmount_filesystems(void)
 		*p++ = '\0';
 		while (*p != '\n') p++;
 		p++;
-                if (!strcmp(fs[numfs].fs, "nfs"))
-                        disallow_eject = 1;
 		if (strcmp(fs[numfs].name, "/")
                     && !strstr(fs[numfs].dev, "ram")
                     && strcmp(fs[numfs].name, "/dev")

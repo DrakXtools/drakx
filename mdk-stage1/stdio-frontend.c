@@ -76,7 +76,6 @@ static char * get_string_response(char * initial_string)
 	/* I won't use a scanf/%s since I also want the null string to be accepted -- also, I want the initial_string */
 	char s[500];
 	int i = 0;
-	char buf[10];
 	int b_index = 0;
 	char b;
 
@@ -108,7 +107,6 @@ static char * get_string_response(char * initial_string)
 		if (read(0, &b, 1) > 0) {
 			if (b_index == 1) {
 				if (b == 91) {
-					buf[b_index] = b;
 					b_index++;
 					continue;
 				}
@@ -146,7 +144,6 @@ static char * get_string_response(char * initial_string)
 					i--;
 				}
 			} else if (b == 27) {
-				buf[b_index] = b;
 				b_index++;
 			} else {
 				printf("%c", b);

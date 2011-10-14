@@ -284,7 +284,6 @@ int nfsmount_prepare(const char *spec, char **mount_opts)
 	enum clnt_stat clnt_stat;
 	static struct nfs_mount_data data;
 	int nfs_mount_version;
-	int val;
 	struct sockaddr_in server_addr;
 	struct sockaddr_in mount_server_addr;
 	struct pmap *pm_mnt;
@@ -297,12 +296,11 @@ int nfsmount_prepare(const char *spec, char **mount_opts)
 	char *s;
 	int port, mountport, proto, soft, intr;
 	int posix, nocto, noac, broken_suid, nolock;
-	int retry, tcp;
+	int tcp;
 	int mountprog, mountvers, nfsprog, nfsvers;
 	int retval;
 	time_t t;
 	time_t prevt;
-	time_t timeout;
 
 	nfs_mount_version = find_kernel_nfs_mount_version();
 
@@ -361,7 +359,6 @@ int nfsmount_prepare(const char *spec, char **mount_opts)
 	nolock = 1;
 	broken_suid = 0;
 	noac = 0;
-	retry = 10000;		/* 10000 minutes ~ 1 week */
 	tcp = 0;
 
 	mountprog = MOUNTPROG;
@@ -469,10 +466,8 @@ retry_mount:
 	retry_timeout.tv_usec = 0;
 	total_timeout.tv_sec = 20;
 	total_timeout.tv_usec = 0;
-	timeout = time(NULL) + 60 * retry;
 	prevt = 0;
 	t = 30;
-	val = 1;
 
 
 			/* be careful not to use too many CPU cycles */
