@@ -89,7 +89,7 @@ int insmod_local_file(char * path, char * options)
 
 static char *kernel_module_extension(void)
 {
-	return ".ko.gz";
+	return ".ko";
 }
 
 
