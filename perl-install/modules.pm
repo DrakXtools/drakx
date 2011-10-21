@@ -64,8 +64,8 @@ sub load_raw {
     my ($l, $h_options) = @_;
     if ($::testing || $::local_install) {
 	log::l("i would load module $_ ($h_options->{$_})") foreach @$l;
-#    } elsif ($::isInstall) {
-#	load_raw_install($l, $h_options);
+    } elsif ($::isInstall) {
+	load_raw_install($l, $h_options);
     } else {
 	run_program::run('/sbin/modprobe', $_, split(' ', $h_options->{$_})) 
 	  or !run_program::run('/sbin/modprobe', '-n', $_) #- ignore missing modules
@@ -294,9 +294,13 @@ sub extract_modules {
 	my $modname = $_;
 	my $path = list_modules::modname2path($modname);
 	my $f = $modname . module_extension();
+	my $extension = module_extension();
 	if (-e $path) {
-	    system("gzip -dc $path > $dir/$f") == 0
-	      or unlink "$dir/$f";
+	    if ($extension =~ /\.gz$/) { 
+	    	system("gzip -dc $path > $dir/$f") == 0 or unlink "$dir/$f";
+	    } else {
+	    	system("cp $path $dir/$f") == 0 or unlink "$dir/$f";
+	    }
 	} else {
 	    log::l("warning: unable to get module filename for $modname (path: $path)");
 	}
