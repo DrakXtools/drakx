@@ -64,8 +64,8 @@ sub load_raw {
     my ($l, $h_options) = @_;
     if ($::testing || $::local_install) {
 	log::l("i would load module $_ ($h_options->{$_})") foreach @$l;
-    } elsif ($::isInstall) {
-	load_raw_install($l, $h_options);
+#    } elsif ($::isInstall) {
+#	load_raw_install($l, $h_options);
     } else {
 	run_program::run('/sbin/modprobe', $_, split(' ', $h_options->{$_})) 
 	  or !run_program::run('/sbin/modprobe', '-n', $_) #- ignore missing modules
