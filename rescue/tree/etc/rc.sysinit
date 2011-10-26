@@ -27,8 +27,8 @@ echo rescue > /etc/HOSTNAME
 # Loads common modules ( no kerneld :( )
 echo "Loading additional modules..."
 load() { modprobe $* 2>/dev/null; }
-load ide-gd_mod
-load ide-cd_mod
+load scsi_mod
+load sd_mod
 load floppy
 load af_packet
 load isofs
@@ -39,7 +39,6 @@ load reiserfs
 load xfs
 load jfs
 load loop
-load sd_mod
 load sr_mod
 
 /sbin/ifconfig lo 127.0.0.1 netmask 255.0.0.0
