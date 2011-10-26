@@ -213,7 +213,7 @@ sub init_sizes {
     $::stepswidth = $::rootwidth <= 640 ? 0 : 196;
     ($::logowidth, $::logoheight) = $::rootwidth <= 640 ? (0, 0) : (800, 75);
     ($o->{windowwidth}, $o->{windowheight}) = ($::rootwidth - $::stepswidth, $::rootheight);
-    ($::real_windowwidth, $::real_windowheight) = (576, 465);
+    ($::real_windowwidth, $::real_windowheight) = (601, 600);
 }
 
 sub handle_unsafe_mouse {
