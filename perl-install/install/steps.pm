@@ -357,6 +357,8 @@ sub beforeInstallPackages {
 
     require network::network;
     network::network::add2hosts("localhost", "127.0.0.1");
+    # fix hostname
+    run_program::rooted($::prefix, 'echo', 'mandriva2011', '>', "/etc/hostname");
 
     #- resolv.conf will be modified at boot time
     #- the following will ensure we have a working DNS during install
@@ -410,6 +412,9 @@ sub installPackages {
 	install::pkgs::selectPackage($o->{packages}, install::pkgs::packageByName($o->{packages}, 'plymouth'));
     }
 
+    # those packages are mandatory, and requires(pre) doesnt seems to work...
+    install::pkgs::selectPackage($o->{packages}, install::pkgs::packageByName($o->{packages}, 'rpm-helper'));
+    install::pkgs::selectPackage($o->{packages}, install::pkgs::packageByName($o->{packages}, 'shadow-utils'));
     my $packages = $o->{packages};
 
     install::pkgs::remove_marked_ask_remove($packages, \&installCallback);
