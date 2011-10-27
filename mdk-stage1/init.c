@@ -505,10 +505,10 @@ int main(int argc, char **argv)
 		printf("proceeding, please wait...\n");
 
 		{
-			char * child_argv[2] = { "/sbin/init", NULL };
+			char * child_argv[2] = { "/etc/rc.sysinit", NULL };
 			execve(child_argv[0], child_argv, env);
 		}
-		fatal_error("failed to exec /sbin/init");
+		fatal_error("failed to exec /etc/rc.sysinit");
         } else if (!WIFEXITED(wait_status) || WEXITSTATUS(wait_status) != 0) {
 		printf("exited abnormally :-( ");
 		if (WIFSIGNALED(wait_status))

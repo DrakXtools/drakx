@@ -80,3 +80,8 @@ elif grep -q kamethod /proc/cmdline; then
 elif ! grep -q expert /proc/cmdline; then
     rescue-gui
 fi
+
+while :
+do
+    /bin/sh --login
+done
