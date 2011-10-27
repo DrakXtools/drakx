@@ -11,7 +11,7 @@ install: $(RESCUE)
 	cp -f $< $(STAGE2_DEST)
 
 $(RESCUE): list.xml drvinst guessmounts lsparts rescue-doc make_rescue_img
-	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_rescue_img
+	DISTRIB_DESCR=$(DISTRIB_DESCR) fakeroot ./make_rescue_img
 
 tar:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
