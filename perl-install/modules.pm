@@ -296,7 +296,7 @@ sub extract_modules {
 	my $f = $modname . module_extension();
 	my $extension = module_extension();
 	if (-e $path) {
-	    if ($extension =~ /\.gz$/) { 
+	    if ($path =~ /\.gz$/) { 
 	    	system("gzip -dc $path > $dir/$f") == 0 or unlink "$dir/$f";
 	    } else {
 	    	system("cp $path $dir/$f") == 0 or unlink "$dir/$f";
