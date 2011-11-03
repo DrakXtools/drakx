@@ -407,7 +407,9 @@ sub choosePackages {
 	my $tasks_ok = install::pkgs::packageByName($o->{packages}, 'task-kde4') &&
 	               install::pkgs::packageByName($o->{packages}, 'task-gnome-minimal');
 	if ($tasks_ok && $availableC >= 2_500_000_000) { 
-	    _chooseDesktop($o, $o->{rpmsrate_flags_chosen}, \$chooseGroups);
+		#_chooseDesktop($o, $o->{rpmsrate_flags_chosen}, \$chooseGroups);
+	    log::l("Disable desktop choice, force KDE choice, even if Gnome is available");
+	    $chooseGroups = 1;
 	} else {
 	    $tasks_ok ? log::l("not asking for desktop since not enough place") :
 	                log::l("not asking for desktop since kde and gnome are not available on media (useful for mini iso)");
