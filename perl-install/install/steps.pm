@@ -358,7 +358,8 @@ sub beforeInstallPackages {
     require network::network;
     network::network::add2hosts("localhost", "127.0.0.1");
     # fix hostname
-    run_program::rooted($::prefix, 'echo', 'mandriva2011', '>', "/etc/hostname");
+    log::l("Force hostname");
+    system("echo mandriva2011 > $::prefix/etc/hostname");
 
     #- resolv.conf will be modified at boot time
     #- the following will ensure we have a working DNS during install
