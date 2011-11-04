@@ -668,7 +668,10 @@ sub configure_firewall {
 #------------------------------------------------------------------------------
 sub installUpdates {}
 
-sub summaryBefore {}
+sub summaryBefore {
+    my ($o) = @_;
+    $o->do_pkgs->ensure_is_installed('kernel-firmware', undef, 1);
+}
 
 sub summary {
     my ($o) = @_;
