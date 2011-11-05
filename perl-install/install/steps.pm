@@ -357,9 +357,6 @@ sub beforeInstallPackages {
 
     require network::network;
     network::network::add2hosts("localhost", "127.0.0.1");
-    # fix hostname
-    log::l("Force hostname");
-    system("echo mandriva2011 > $::prefix/etc/hostname");
 
     #- resolv.conf will be modified at boot time
     #- the following will ensure we have a working DNS during install
@@ -670,7 +667,10 @@ sub installUpdates {}
 
 sub summaryBefore {
     my ($o) = @_;
-    $o->do_pkgs->ensure_is_installed('kernel-firmware', undef, 1);
+    log::l("be sure that kernel-firmware is installed");
+    $o->pkg_install("kernel-firmware");
+    log::l("enable networkmanager service");
+    run_program::rooted($::prefix, 'systemctl', 'enable', 'networkmanager.service');
 }
 
 sub summary {
