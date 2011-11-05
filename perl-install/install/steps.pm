@@ -413,6 +413,8 @@ sub installPackages {
     # those packages are mandatory, and requires(pre) doesnt seems to work...
     install::pkgs::selectPackage($o->{packages}, install::pkgs::packageByName($o->{packages}, 'rpm-helper'));
     install::pkgs::selectPackage($o->{packages}, install::pkgs::packageByName($o->{packages}, 'shadow-utils'));
+    log::l("be sure that kernel-firmware is installed");
+    install::pkgs::selectPackage($o->{packages}, install::pkgs::packageByName($o->{packages}, 'kernel-firmware'));
     my $packages = $o->{packages};
 
     install::pkgs::remove_marked_ask_remove($packages, \&installCallback);
@@ -667,10 +669,6 @@ sub installUpdates {}
 
 sub summaryBefore {
     my ($o) = @_;
-    log::l("be sure that kernel-firmware is installed");
-    $o->pkg_install("kernel-firmware");
-    log::l("enable networkmanager service");
-    run_program::rooted($::prefix, 'systemctl', 'enable', 'networkmanager.service');
 }
 
 sub summary {
