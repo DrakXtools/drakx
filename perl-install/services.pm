@@ -291,7 +291,7 @@ sub ask {
 
 sub _set_service {
     my ($service, $enable) = @_;
-    if (-f "") {
+    if (-f "/lib/systemd/system/$service.service") {
 	run_program::rooted($::prefix, "systemctl", $enable ? "enable" : "disable", $service . ".service");
     } else {
     #- FIXME: handle services with no chkconfig line and with no Default-Start levels in LSB header

@@ -485,9 +485,14 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     #- make sure some services have been enabled (or a catastrophic restart will occur).
     #- these are normally base package post install scripts or important services to start.
-    run_program::rooted($::prefix, "chkconfig", "--add", $_) foreach
-			qw(netfs network rawdevices sound kheader keytable syslog crond portmap);
-
+    foreach my $service qw(netfs network networkmanager rawdevices sound keytable syslog portmap) {
+	if (-f "/lib/systemd/system/$service.service") {
+	    run_program::rooted($::prefix, "systemctl", "enable", $service . ".service");
+	} else {
+	    run_program::rooted($::prefix, "chkconfig", "--add", $service);
+	}
+    }
+    
     if ($o->{mouse}{device} =~ /ttyS/) {
 	log::l("disabling gpm for serial mice (does not get along nicely with X)");
 	run_program::rooted($::prefix, "chkconfig", "--del", "gpm"); 
