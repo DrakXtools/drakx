@@ -43,8 +43,8 @@ use common;
                           N_("Summary") ],
   configureServices  => [ N_("_: Keep these entry short\nServices"), 1, 1, '1', "installPackages",
                           N_("_: Keep these entry short\nServices") ],
-  installUpdates     => [ N_("_: Keep these entry short\nUpdates"), 1, 1, '',
-                          ["installPackages", "configureNetwork", "summary"], N_("Updates") ],
+#  installUpdates     => [ N_("_: Keep these entry short\nUpdates"), 1, 1, '',
+#                          ["installPackages", "configureNetwork", "summary"], N_("Updates") ],
   exitInstall        => [ N_("_: Keep these entry short\nExit"), 0, 0, '', '', N_("Exit")  ],
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {
