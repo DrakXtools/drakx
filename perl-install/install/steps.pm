@@ -485,10 +485,12 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     #- make sure some services have been enabled (or a catastrophic restart will occur).
     #- these are normally base package post install scripts or important services to start.
-    foreach my $service qw(netfs network networkmanager rawdevices sound keytable syslog portmap) {
-	if (-f "/lib/systemd/system/$service.service") {
+    foreach my $service qw(netfs network rsyslog networkmanager ) {
+	if (-f "$::prefix/lib/systemd/system/$service.service") {
+	    log::l("use systemctl enable $service.service");
 	    run_program::rooted($::prefix, "systemctl", "enable", $service . ".service");
 	} else {
+	    log::l("use chkconfig --add $service");
 	    run_program::rooted($::prefix, "chkconfig", "--add", $service);
 	}
     }
