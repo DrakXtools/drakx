@@ -494,6 +494,8 @@ Consoles 1,3,4,7 may also contain interesting information";
 	    run_program::rooted($::prefix, "chkconfig", "--add", $service);
 	}
     }
+    log::l("fix hostname");
+    system("echo mdv2011  $::prefix/etc/hostname");
     
     if ($o->{mouse}{device} =~ /ttyS/) {
 	log::l("disabling gpm for serial mice (does not get along nicely with X)");
