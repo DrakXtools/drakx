@@ -121,7 +121,6 @@ display help.msg
 implicit 1
 EOF
     my $header_gfxboot = <<EOF;
-ui gfxboot.c32 bootlogo
 label harddisk
   localboot 0x80
 EOF
@@ -199,7 +198,7 @@ fi
 	__ "tar xC $tmp_initrd/modules/$ext -f $modz/${type}_modules.tar";
 	_ "depmod -b $tmp_initrd $ext";
 	# depmod keeps only available modules in modules.alias, but we want them all
-	_ "cp -f $modz/modules.alias $modz/modules.description $tmp_initrd/modules/$ext";
+	_ "cp -f $modz/modules.alias $tmp_initrd/modules/$ext";
     }
     # ka deploy need some files in all.rdz 
     {
@@ -284,7 +283,7 @@ sub boot_img_i386 {
     unlink $rdz;
 
     # mtools wants the image to be a power of 32
-    my $size = max((ceil(chomp_(`du -s -k $tmp_mnt`) / 32) * 32) + 64, 1440);
+    my $size = max((ceil(chomp_(`du -s -k $tmp_mnt`) / 32) * 32) + 128, 1440);
     _ "dd if=/dev/zero of=$img bs=1k count=$size";
 
     _ "/sbin/mkdosfs $img";
