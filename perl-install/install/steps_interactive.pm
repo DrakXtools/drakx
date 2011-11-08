@@ -722,6 +722,9 @@ sub configureNetwork {
 	    network::network::easy_dhcp($o->{net}, $o->{modules_conf});
 	}
 	$o->SUPER::configureNetwork;
+    # force network configuration
+    require network::netconnect;
+    network::netconnect::real_main($o->{net}, $o, $o->{modules_conf});
 }
 
 #------------------------------------------------------------------------------
