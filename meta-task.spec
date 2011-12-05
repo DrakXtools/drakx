@@ -1,11 +1,8 @@
-%define name meta-task
-%define version 2012.0
-%define release %mkrel 1
 
+Name: meta-task
 Summary: Meta task listing packages by group
-Name: %{name}
-Version: %{version}
-Release: %{release}
+Version: 2012.0
+Release: 1
 License: GPL
 Group: System/Configuration/Other
 Source: rpmsrate-raw
@@ -13,7 +10,6 @@ Source1: check-rpmsrate
 Source2: compssUsers.pl
 Source3: prefer.vendor.list
 Source4: README
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
 BuildRequires: drakxtools-backend
 
@@ -24,7 +20,8 @@ BuildRequires: drakxtools-backend
 # it updates only the texlive package, and uses far less memory.
 # FIXME this probably should be in a proper "cleanup" package that also causes
 # urpmi to restart.
-Conflicts:	texlive-doc, texlive-fontsextra, texlive-source, texlive-texmf
+# So we can clean these packages
+Obsoletes:	texlive-doc, texlive-fontsextra, texlive-source, texlive-texmf
 
 %description
 prefer.vendor.list is used by urpmi, rpmdrake and installer to prefer some
@@ -49,11 +46,7 @@ install -m644 %{SOURCE3} %{buildroot}%{_sysconfdir}/urpmi
 ERR=`./check-rpmsrate %{buildroot}%{_datadir}/%{name}/rpmsrate-raw 2>&1`
 [ -z "$ERR" ]
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc README
 %config(noreplace) %{_sysconfdir}/urpmi/prefer.vendor.list
 %{_datadir}/%{name}
