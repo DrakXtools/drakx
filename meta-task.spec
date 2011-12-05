@@ -1,6 +1,6 @@
 %define name meta-task
 %define version 2012.0
-%define release %mkrel 0
+%define release %mkrel 1
 
 Summary: Meta task listing packages by group
 Name: %{name}
@@ -16,6 +16,15 @@ Source4: README
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
 BuildRequires: drakxtools-backend
+
+# https://qa.mandriva.com/show_bug.cgi?id=64814 (texlive update crashes system)
+# Need to remove these packages first, because texlive packages were reworked
+# to match upstream layout, and this causes rpm/urpmi to use several GB of
+# memory, but by removing the large monolithic packages and restarting urpmi
+# it updates only the texlive package, and uses far less memory.
+# FIXME this probably should be in a proper "cleanup" package that also causes
+# urpmi to restart.
+Conflicts:	texlive-doc, texlive-fontsextra, texlive-source, texlive-texmf
 
 %description
 prefer.vendor.list is used by urpmi, rpmdrake and installer to prefer some
