@@ -31,6 +31,7 @@
 #include <sys/ioctl.h>
 #include <sys/mount.h>
 #include <stdio.h>
+#include <fcntl.h>
 #include <netdb.h>
 #include <resolv.h>
 #include <sys/utsname.h>
