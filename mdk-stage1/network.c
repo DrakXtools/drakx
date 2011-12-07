@@ -568,8 +568,15 @@ static enum return_type bringup_networking(struct interface_info * intf)
 {
 	static struct interface_info loopback;
 	enum return_type results;
-	
-	my_insmod("af_packet", ANY_DRIVER_TYPE, NULL, 1);
+        int fd;
+
+        /* try to find if module already loaded or built-in to avoid failing */
+        /* badly */
+        fd = open("/proc/net/packet", O_RDONLY);
+        if (fd < 0)
+               my_insmod("af_packet", ANY_DRIVER_TYPE, NULL, 1);
+        else
+               close(fd);
 
 	do {
 		results = configure_wireless(intf->device);

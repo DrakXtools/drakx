@@ -298,6 +298,13 @@ int module_already_present(const char * name)
                 }
                 fclose(f);
         }
+       /* built-in module case. try to find them through sysfs */
+       if (!answ) {
+               asprintf(&path, "/sys/module/%s", name);
+               if (!stat(path, &sb))
+                       answ = 1;
+               free(path);
+       }
 	return answ;
 }
 

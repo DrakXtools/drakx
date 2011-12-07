@@ -34,7 +34,15 @@
 #include "params.h"
 
 #include <sys/syscall.h>
-#define reboot(...) syscall(__NR_reboot, __VA_ARGS__)
+
+#define LINUX_REBOOT_MAGIC1    0xfee1dead
+#define LINUX_REBOOT_MAGIC2    672274793
+#define BMAGIC_REBOOT          0x01234567
+
+static inline long reboot(void)
+{
+       return (long) syscall(__NR_reboot, LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, BMAGIC_REBOOT, 0);
+}
 
 #if defined(__i386__) || defined(__x86_64__)
 #define ENABLE_RESCUE_MS_BOOT 1
@@ -233,7 +241,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
                         sync(); sync();
 			printf("rebooting system\n");
 			sleep(2);
-			reboot(0xfee1dead, 672274793, 0x01234567);
+			reboot();
 		}
 		if (ptr_begins_static_str(choice, doc)) {
 			binary = "/usr/bin/rescue-doc";

@@ -1191,10 +1191,13 @@ plogin(user, passwd, msg)
     if (pw != (struct passwd *)NULL) {
 	    struct lastlog ll;
 	    int fd;
+	    time_t tnow;
 
 	    if ((fd = open(_PATH_LASTLOG, O_RDWR, 0)) >= 0) {
 		(void)lseek(fd, (off_t)(pw->pw_uid * sizeof(ll)), SEEK_SET);
 		memset((void *)&ll, 0, sizeof(ll));
+		(void)time(&tnow);
+		ll.ll_time = tnow;
 		(void)time(&ll.ll_time);
 		(void)strncpy(ll.ll_line, tty, sizeof(ll.ll_line));
 		(void)write(fd, (char *)&ll, sizeof(ll));

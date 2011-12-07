@@ -70,63 +70,63 @@ typedef struct {
 } pci_id_t;
 
 pci_id_t pci_id[] = {
-    { 0x1013, 0x1100, "i82365", "Cirrus Logic CL 6729" },
+    { 0x1013, 0x1100, "pd6729", "Cirrus Logic CL 6729" },
     { 0x1013, 0x1110, "yenta_socket", "Cirrus Logic PD 6832" },
+    { 0x104c, 0x8011, "yenta_socket", "" },
+    { 0x104c, 0x8031, "yenta_socket", "Texas Instruments|PCIxx21/x515 Cardbus Controller" },
+    { 0x104c, 0x8036, "yenta_socket", "Texas Instruments|PCI6515 Cardbus Controller" },
+    { 0x104c, 0x8039, "yenta_socket", "Texas Instruments|PCIxx12 Cardbus Controller " },
+    { 0x104c, 0xac12, "yenta_socket", "Texas Instruments PCI1130" }, 
+    { 0x104c, 0xac13, "yenta_socket", "Texas Instruments PCI1031" }, 
+    { 0x104c, 0xac15, "yenta_socket", "Texas Instruments PCI1131" }, 
+    { 0x104c, 0xac16, "yenta_socket", "Texas Instruments PCI1250" }, 
+    { 0x104c, 0xac17, "yenta_socket", "Texas Instruments PCI1220" }, 
+    { 0x104c, 0xac19, "yenta_socket", "Texas Instruments PCI1221" }, 
+    { 0x104c, 0xac1a, "yenta_socket", "Texas Instruments PCI1210" }, 
+    { 0x104c, 0xac1b, "yenta_socket", "Texas Instruments PCI1450" }, 
+    { 0x104c, 0xac1c, "yenta_socket", "Texas Instruments PCI1225" }, 
+    { 0x104c, 0xac1d, "yenta_socket", "Texas Instruments PCI1251A" }, 
+    { 0x104c, 0xac1e, "yenta_socket", "Texas Instruments PCI1211" }, 
+    { 0x104c, 0xac1f, "yenta_socket", "Texas Instruments PCI1251B" }, 
+    { 0x104c, 0xac40, "yenta_socket", "Texas Instruments PCI4450" }, 
+    { 0x104c, 0xac41, "yenta_socket", "Texas Instruments PCI4410" }, 
+    { 0x104c, 0xac42, "yenta_socket", "Texas Instruments PCI4451" }, 
+    { 0x104c, 0xac44, "yenta_socket", "Texas Instruments PCI4510" }, 
+    { 0x104c, 0xac46, "yenta_socket", "Texas Instruments PCI4520" }, 
+    { 0x104c, 0xac47, "yenta_socket", "Texas Instruments PCI7510" }, 
+    { 0x104c, 0xac48, "yenta_socket", "Texas Instruments PCI7610" }, 
+    { 0x104c, 0xac49, "yenta_socket", "Texas Instruments PCI7410" }, 
+    { 0x104c, 0xac50, "yenta_socket", "Texas Instruments PCI1410" }, 
+    { 0x104c, 0xac51, "yenta_socket", "Texas Instruments PCI1420" }, 
+    { 0x104c, 0xac52, "yenta_socket", "Texas Instruments PCI1451" }, 
+    { 0x104c, 0xac54, "yenta_socket", "Texas Instruments PCI1620" }, 
+    { 0x104c, 0xac55, "yenta_socket", "Texas Instruments PCI1520" }, 
+    { 0x104c, 0xac56, "yenta_socket", "Texas Instruments PCI1510" }, 
+    { 0x104c, 0xac8d, "yenta_socket", "Texas Instruments|PCI7620" },
+    { 0x104c, 0xac8e, "yenta_socket", "Texas Instruments|PCI7420 CardBus Controller" },
+    { 0x104c, 0xac8e, "yenta_socket", "Texas Instruments PCI7420" },
     { 0x10b3, 0xb106, "yenta_socket", "SMC 34C90" },
+    { 0x1179, 0x0603, "pd6729", "Toshiba ToPIC95-A" }, 
+    { 0x1179, 0x060a, "yenta_socket", "Toshiba ToPIC95-B" }, 
+    { 0x1179, 0x060f, "yenta_socket", "Toshiba ToPIC97" }, 
+    { 0x1179, 0x0617, "yenta_socket", "Toshiba ToPIC100" }, 
     { 0x1180, 0x0465, "yenta_socket", "Ricoh RL5C465" },
     { 0x1180, 0x0466, "yenta_socket", "Ricoh RL5C466" },
     { 0x1180, 0x0475, "yenta_socket", "Ricoh RL5C475" },
     { 0x1180, 0x0476, "yenta_socket", "Ricoh RL5C476" },
     { 0x1180, 0x0477, "yenta_socket", "Ricoh RL5C477" },
     { 0x1180, 0x0478, "yenta_socket", "Ricoh RL5C478" },
-    { 0x104c, 0xac12, "yenta_socket", "Texas Instruments PCI1130" }, 
-    { 0x104c, 0xac13, "yenta_socket", "Texas Instruments PCI1031" }, 
-    { 0x104c, 0xac15, "yenta_socket", "Texas Instruments PCI1131" }, 
-    { 0x104c, 0xac1a, "yenta_socket", "Texas Instruments PCI1210" }, 
-    { 0x104c, 0xac1e, "yenta_socket", "Texas Instruments PCI1211" }, 
-    { 0x104c, 0xac17, "yenta_socket", "Texas Instruments PCI1220" }, 
-    { 0x104c, 0xac19, "yenta_socket", "Texas Instruments PCI1221" }, 
-    { 0x104c, 0xac1c, "yenta_socket", "Texas Instruments PCI1225" }, 
-    { 0x104c, 0xac16, "yenta_socket", "Texas Instruments PCI1250" }, 
-    { 0x104c, 0xac1d, "yenta_socket", "Texas Instruments PCI1251A" }, 
-    { 0x104c, 0xac1f, "yenta_socket", "Texas Instruments PCI1251B" }, 
-    { 0x104c, 0xac50, "yenta_socket", "Texas Instruments PCI1410" }, 
-    { 0x104c, 0xac51, "yenta_socket", "Texas Instruments PCI1420" }, 
-    { 0x104c, 0xac1b, "yenta_socket", "Texas Instruments PCI1450" }, 
-    { 0x104c, 0xac52, "yenta_socket", "Texas Instruments PCI1451" }, 
-    { 0x104c, 0xac56, "yenta_socket", "Texas Instruments PCI1510" }, 
-    { 0x104c, 0xac55, "yenta_socket", "Texas Instruments PCI1520" }, 
-    { 0x104c, 0xac54, "yenta_socket", "Texas Instruments PCI1620" }, 
-    { 0x104c, 0xac41, "yenta_socket", "Texas Instruments PCI4410" }, 
-    { 0x104c, 0xac40, "yenta_socket", "Texas Instruments PCI4450" }, 
-    { 0x104c, 0xac42, "yenta_socket", "Texas Instruments PCI4451" }, 
-    { 0x104c, 0xac44, "yenta_socket", "Texas Instruments PCI4510" }, 
-    { 0x104c, 0xac46, "yenta_socket", "Texas Instruments PCI4520" }, 
-    { 0x104c, 0xac49, "yenta_socket", "Texas Instruments PCI7410" }, 
-    { 0x104c, 0xac47, "yenta_socket", "Texas Instruments PCI7510" }, 
-    { 0x104c, 0xac48, "yenta_socket", "Texas Instruments PCI7610" }, 
-    { 0x104c, 0xac8e, "yenta_socket", "Texas Instruments PCI7420" },
-    { 0x1217, 0x6729, "i82365", "O2 Micro 6729" }, 
-    { 0x1217, 0x673a, "i82365", "O2 Micro 6730" }, 
-    { 0x1217, 0x6832, "yenta_socket", "O2 Micro 6832/6833" }, 
-    { 0x1217, 0x6836, "yenta_socket", "O2 Micro 6836/6860" }, 
-    { 0x1217, 0x6872, "yenta_socket", "O2 Micro 6812" }, 
-    { 0x1217, 0x6925, "yenta_socket", "O2 Micro 6922" }, 
-    { 0x1217, 0x6933, "yenta_socket", "O2 Micro 6933" }, 
-    { 0x1217, 0x6972, "yenta_socket", "O2 Micro 6912" }, 
-    { 0x1217, 0x7114, "yenta_socket", "O2 Micro 711M1" },
-    { 0x1179, 0x0603, "i82365", "Toshiba ToPIC95-A" }, 
-    { 0x1179, 0x060a, "yenta_socket", "Toshiba ToPIC95-B" }, 
-    { 0x1179, 0x060f, "yenta_socket", "Toshiba ToPIC97" }, 
-    { 0x1179, 0x0617, "yenta_socket", "Toshiba ToPIC100" }, 
-    { 0x119b, 0x1221, "i82365", "Omega Micro 82C092G" }, 
-    { 0x8086, 0x1221, "i82092", "Intel 82092AA_0" }, 
-    { 0x8086, 0x1222, "i82092", "Intel 82092AA_1" }, 
+    { 0x119b, 0x1221, "pd6729", "Omega Micro 82C092G" }, 
     { 0x1524, 0x1211, "yenta_socket", "ENE 1211" },
     { 0x1524, 0x1225, "yenta_socket", "ENE 1225" },
     { 0x1524, 0x1410, "yenta_socket", "ENE 1410" },
     { 0x1524, 0x1411, "yenta_socket", "ENE Technology CB1411" },
+    { 0x1524, 0x1412, "yenta_socket", "ENE Technology Inc|CB-712/4 Cardbus Controller " },
     { 0x1524, 0x1420, "yenta_socket", "ENE 1420" },
+    { 0x1524, 0x1421, "yenta_socket", "ENE Technology Inc|CB-720/2/4 Cardbus Controller" },
+    { 0x1524, 0x1422, "yenta_socket", "ENE Technology Inc|CB-722/4 Cardbus Controller" },
+    { 0x8086, 0x1221, "i82092", "Intel 82092AA_0" }, 
+    { 0x8086, 0x1222, "i82092", "Intel 82092AA_1" }, 
 };
 #define PCI_COUNT (sizeof(pci_id)/sizeof(pci_id_t))
 
@@ -145,6 +145,11 @@ static int pci_probe(void)
 	while (fgets(s, 256, f) != NULL) {
 	    u_int n = strtoul(s+5, NULL, 16);
 	    vendor = (n >> 16); device = (n & 0xffff);
+	    if (vendor == 0x1217) {
+		driver = "yenta_socket";
+		name = "O2 Micro|PCMCIA Controller";
+		break;
+	    }
 	    for (i = 0; i < PCI_COUNT; i++)
 		if ((vendor == pci_id[i].vendor) &&
 		    (device == pci_id[i].device)) break;
@@ -515,10 +520,12 @@ char * pcmcia_probe(void)
 {
 	if (!pci_probe())
 		return driver;
+#if !defined(__x86_64__) 
 	else if (!i365_probe())
-		return "i82365";
+		return "pd6729";
 	else if (!tcic_probe())
 		return "tcic";
+#endif
 	else
 		return NULL;
 }

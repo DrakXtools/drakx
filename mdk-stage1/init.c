@@ -39,7 +39,22 @@
 
 #include <sys/syscall.h>
 #define syslog(...) syscall(__NR_syslog, __VA_ARGS__)
-#define reboot(...) syscall(__NR_reboot, __VA_ARGS__)
+
+#define LINUX_REBOOT_MAGIC1    0xfee1dead
+#define LINUX_REBOOT_MAGIC2    672274793
+#define BMAGIC_HARD            0x89ABCDEF
+#define BMAGIC_SOFT            0
+#define BMAGIC_REBOOT          0x01234567
+#define BMAGIC_HALT            0xCDEF0123
+#define BMAGIC_POWEROFF                0x4321FEDC
+
+static unsigned int reboot_magic = BMAGIC_REBOOT;
+
+static inline long reboot(unsigned int command)
+{
+       return (long) syscall(__NR_reboot, LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, command, 0);
+}
+
 
 #include "config-stage1.h"
 #include <linux/cdrom.h>
@@ -376,13 +391,6 @@ void unmount_filesystems(void)
 	}
 }
 
-#define BMAGIC_HARD	0x89ABCDEF
-#define BMAGIC_SOFT	0
-#define BMAGIC_REBOOT	0x01234567
-#define BMAGIC_HALT	0xCDEF0123
-#define BMAGIC_POWEROFF	0x4321FEDC
-int reboot_magic = BMAGIC_REBOOT;
-
 int in_reboot(void)
 {
         int fd;
@@ -496,7 +504,7 @@ int main(int argc, char **argv)
         } while (WIFEXITED(wait_status) && WEXITSTATUS(wait_status) == exit_value_restart);
 
         /* allow Ctrl Alt Del to reboot */
-        reboot(0xfee1dead, 672274793, BMAGIC_HARD);
+        reboot(BMAGIC_HARD);
 
         if (in_reboot()) {
                 // any exitcode is valid if we're in_reboot
@@ -549,7 +557,7 @@ int main(int argc, char **argv)
                         printf("automatic reboot in 10 seconds\n");
                         sleep(10);
 #endif
-                        reboot(0xfee1dead, 672274793, reboot_magic);
+                        reboot(reboot_magic);
                 } else {
                         printf("you may safely poweroff your computer now\n");
                 }

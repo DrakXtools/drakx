@@ -1,5 +1,14 @@
 -1.51:
 - arm/mips support (from MGA)
+- (pcmcia_probe) do not attempt to perform ISA probe for PCMCIA controller on
+  x86_64 as it fails with kvm_amd (#1156) (from MGA)
+- (pci_probe) add vendor name for 0x1217 (from MGA)
+- (pci_probe) all "O2 Micro" devices are know managed by yenta_socket (from MGA)
+- "i82365" driver was renamed "pd6729" (from MGA)
+- update yenta_socket ID list from kernel, thus handling more PCMCIA controllers (from MGA)
+- sort pci_id table (from MGA)
+- fix time argument type (upstream commit 8d07ad78c8a32b9c89bfcea25d775e8440fd4172 on pppd/session.c) (from MGA)- try to handle built-in modules (from MGA)
+
 
 1.50:
 - PWP release

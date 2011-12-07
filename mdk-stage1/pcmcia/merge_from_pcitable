@@ -4,6 +4,9 @@
 # which is not in probe.c
 
 use MDK::Common;
+use lib qw(/usr/lib/libDrakX);
+use run_program;
+use c;
 
 my %probes;
 foreach (cat_('probe.c')) {
@@ -14,34 +17,21 @@ foreach (cat_('probe.c')) {
 }
 
 require '/usr/bin/merge2pcitable.pl';
-my $drivers = read_pcitable("/usr/share/ldetect-lst/pcitable");
 
-my %pcitable = map_each {
-    $::a =~ /^(....)(....)/ or die;
-    "$1$2" => { vendor => $1, device => $2, driver => $::b->[0], name => $::b->[1] };
-} %$drivers;
+my %pcitable;
+my @yenta_socket_ids = grep { $_ } map {
+	/.*pci:v0000(....).*d0000(....).*/;
+	my $key = lc("$1$2");
+	$pcitable{$key} = { vendor => $1, device => $2 };
+	$key;
+    } grep { /^alias/ } run_program::get_stdout('/sbin/modinfo', 'yenta_socket');
 
-my @yenta_socket_ids = grep { $pcitable{$_}{driver} eq 'yenta_socket' } keys %pcitable;
 
 if (my @missing_in_probe_c = difference2(\@yenta_socket_ids, [ keys %probes ])) {
     print "Missing in `probe.c':\n",
       map { 
 	  my $p = $pcitable{$_};
-	  qq(    { 0x$p->{vendor}, 0x$p->{device}, "yenta_socket", "$p->{name}" },\n);
+	  my $name = c::get_pci_description(hex($p->{vendor}), hex($p->{device}));
+	  qq(    { 0x$p->{vendor}, 0x$p->{device}, "yenta_socket", "$name" },\n);
       } sort @missing_in_probe_c;
-}
-
-my @res;
-foreach my $id (keys %probes) {
-    my $p = $probes{$id};
-    my $r = $pcitable{$id};
-    if (!$r || $r->{driver} ne 'yenta_socket') {
-	push @res, qq(0x$p->{vendor}\t0x$p->{device}\t"yenta_socket"\t") . ($r ? $r->{name} : '(COMPLETELY MISSING)') . qq("\n);
-    }
-    if ($r && $r->{driver} ne 'unknown' && $r->{driver} ne $p->{driver}) {
-	warn "WARNING: $id: pcitable:$r->{driver} vs probe.c:$p->{driver}\n";
-    }
-}
-if (@res) {
-    print "\n", "Missing in pcitable:\n", sort @res;
 }
