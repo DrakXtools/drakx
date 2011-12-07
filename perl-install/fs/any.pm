@@ -98,7 +98,7 @@ sub prepare_minimal_root {
     eval { fs::mount::usbfs($::prefix) };
 
     # copy all needed devices, for bootloader install and mkinitrd
-    cp_afx("/dev", "$::prefix");
+    cp_af("/dev", "$::prefix");
 }
 
 sub getAvailableSpace {
