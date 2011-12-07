@@ -4,6 +4,8 @@ use Config;
 use FileHandle;
 use MDK::Common;
 use POSIX;
+use Carp;
+
 
 Config->import;
 my ($arch) = $Config{archname} =~ /(.*?)-/;
@@ -25,7 +27,7 @@ if ($>) {
 }
 
 sub __ { print @_, "\n"; system(@_) }
-sub _ { __ @_; $? and die }
+sub _ { __ @_; $? and croak "'" . join(' ', @_) . "failed ($?)\n" }
 sub mke2fs { 
     my ($f) = @_;
     _ "/sbin/mke2fs -q -m 0 -F -s 1 $f";
