@@ -15,7 +15,7 @@
  # along with this program; if not, write to the Free Software
  # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-VERSION=1.50
+VERSION=1.51
 PRODUCT=drakx-installer-binaries
 
  #
@@ -132,16 +132,32 @@ endif
 ifeq (x86_64, $(ARCH))
 DIRS += pcmcia pcmcia-resource sysfs
 endif
+ifeq (mips, $(ARCH))
+DIRS += sysfs
+endif
+ifeq (arm, $(ARCH))
+DIRS += sysfs
+endif
+
 
 
 ifeq (i386,$(ARCH))
 PCMCIA_LIB = pcmcia/libpcmcia.a sysfs/libsysfs.a
 PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
+
 ifeq (x86_64,$(ARCH))
 PCMCIA_LIB = pcmcia/libpcmcia.a sysfs/libsysfs.a
 PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
+
+ifeq (mips,$(ARCH))
+PCMCIA_LIB = sysfs/libsysfs.a
+endif
+ifeq (arm,$(ARCH))
+PCMCIA_LIB = sysfs/libsysfs.a
+endif
+
 
 
 USB_DEFS_GEN = -DENABLE_USB

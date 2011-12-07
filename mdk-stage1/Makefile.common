@@ -16,6 +16,8 @@
 
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
+ARCH := $(patsubst arm%,arm,$(ARCH))
+
 
 # DEBUG = 1
 
@@ -26,7 +28,13 @@ else
 F = NEWT
 endif
 
+# diet libc syscalls are broken on mips
+ifneq (mips, $(ARCH))
+# diet libc eabi support is mostly broken
+ifneq (arm, $(ARCH))
 DIET = $(shell test -x /usr/bin/diet && echo diet)
+endif
+endif
 
 ifeq ($(DIET), diet)
  #- default lib is dietlibc (honoured by main Makefile whenever possible)
