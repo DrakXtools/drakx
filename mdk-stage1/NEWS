@@ -1,3 +1,17 @@
+-1.51:
+- arm/mips support (from MGA)
+
+1.50:
+- PWP release
+- Don't depend on /sbin/init for now
+- Since we switched to systemd and we don't want to include its whole 
+  deps, we choose the fast path and remove the use of init entirely
+  since it's not really used.
+- ide_cd_mod doesnt exist anymore
+- kernel doesnt provides compressed module now 
+
+1.48 - 1.49 No release ?
+
 1.47:
 - 2011.0 build
 
