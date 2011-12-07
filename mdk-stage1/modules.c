@@ -287,6 +287,8 @@ static void add_modules_conf(char * str)
 int module_already_present(const char * name)
 {
 	FILE * f;
+	struct stat sb;
+	char *path;
 	int answ = 0;
 
 	if ((f = fopen("/proc/modules", "rb"))) {
