@@ -2,7 +2,6 @@ package services; # $Id$
 
 
 
-
 #-######################################################################################
 #- misc imports
 #-######################################################################################
@@ -11,8 +10,7 @@ use strict;
 use common;
 use run_program;
 
-use common;
-use run_program;
+use File::Basename;
 
 sub description {
     my %services = (
@@ -98,7 +96,7 @@ portreserve => N_("Reserves some TCP ports"),
 postfix => N_("Postfix is a Mail Transport Agent, which is the program that moves mail from one machine to another."),
 random => N_("Saves and restores system entropy pool for higher quality random
 number generation."),
-rawdevices => N_("Assign raw devices to block devices (such as hard drive
+rawdevices => N_("Assign raw devices to block devices (such as hard disk drive
 partitions), for the use of applications such as Oracle or DVD players"),
 resolvconf => N_("Nameserver information manager"),
 routed => N_("The routed daemon allows for automatic IP router table updated via
@@ -291,14 +289,23 @@ sub ask {
 
 sub _set_service {
     my ($service, $enable) = @_;
-    if (-f "/lib/systemd/system/$service.service") {
-	run_program::rooted($::prefix, "systemctl", $enable ? "enable" : "disable", $service . ".service");
-    } else {
-    #- FIXME: handle services with no chkconfig line and with no Default-Start levels in LSB header
-    	my $script = "/etc/rc.d/init.d/$service";
-	run_program::rooted($::prefix, "chkconfig", $enable ? "--add" : "--del", $service);
-	if ($enable && cat_("$::prefix$script") =~ /^#\s+chkconfig:\s+-/m) {
-        	run_program::rooted($::prefix, "chkconfig", "--level", "35", $service, "on");
+    
+    if ( -f "/lib/systemd/system/$service.service" ) {
+      if ( -l "/lib/systemd/system/$service.service" ) {
+        $service = basename(readlink("/lib/systemd/system/$service.service"))
+      }
+      else {
+        $service = $service . ".service" ; 
+      }
+      run_program::rooted($::prefix, "systemctl", $enable ? "enable" : "disable", $service);
+    }
+    else 
+    {
+        my $script = "/etc/rc.d/init.d/$service";
+        run_program::rooted($::prefix, "chkconfig", $enable ? "--add" : "--del", $service);
+        #- FIXME: handle services with no chkconfig line and with no Default-Start levels in LSB header
+        if ($enable && cat_("$::prefix$script") =~ /^#\s+chkconfig:\s+-/m) {
+            run_program::rooted($::prefix, "chkconfig", "--level", "35", $service, "on");
         }
     }
 }
