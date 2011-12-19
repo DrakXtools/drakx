@@ -373,12 +373,17 @@ sub create_widget {
     my ($w, $real_w, $focus_w, $set);
     if ($e->{type} eq 'iconlist') {
 	$w = Gtk2::Button->new;
+	my $scale = 64;
+	if ($e->{scale}){
+	    $scale = $e->{scale};
+	}
+
 	$set = sub {
 	    gtkdestroy($e->{icon});
 	    my $f = $e->{icon2f}->($_[0]);
 	    $e->{icon} = -e $f ?
-	      gtkcreate_img($f) :
-		Gtk2::WrappedLabel->new(may_apply($e->{format}, $_[0]));
+	      gtkcreate_img($f, $scale) : 
+	    Gtk2::WrappedLabel->new(may_apply($e->{format}, $_[0]));
 	    $w->add(gtkshow($e->{icon}));
 	};
 	$w->signal_connect(clicked => sub {

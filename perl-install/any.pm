@@ -37,6 +37,12 @@ sub addKdmIcon {
     eval { cp_af(facesdir() . $icon . ".png", $dest) } if $icon;
 }
 
+sub addUserFaceIcon {
+    my ($user, $icon) = @_;
+    my $dest = "$::prefix/home/$user/.face.icon";
+    eval { cp_af(facesdir() . $icon . ".png", $dest) } if $icon;
+}
+
 sub alloc_user_faces {
     my ($users) = @_;
     my @m = my @l = facesnames();
@@ -100,6 +106,7 @@ sub add_users {
 	create_user($_, $authentication);
 	run_program::rooted($::prefix, "usermod", "-G", join(",", @{$_->{groups}}), $_->{name}) if !is_empty_array_ref($_->{groups});
 	addKdmIcon($_->{name}, delete $_->{auto_icon} || $_->{icon});
+    addUserFaceIcon($_->{name}, delete $_->{auto_icon} || $_->{icon});
     }
 }
 
