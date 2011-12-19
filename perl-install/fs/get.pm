@@ -144,7 +144,10 @@ sub is_same_hd {
     } else {
 	$hd1->{device_LABEL} && $hd2->{device_LABEL} && $hd1->{device_LABEL} eq $hd2->{device_LABEL}
 	  || $hd1->{device_UUID} && $hd2->{device_UUID} && $hd1->{device_UUID} eq $hd2->{device_UUID}
-	  || $hd1->{device} && $hd2->{device} && $hd1->{device} eq $hd2->{device};
+	  || $hd1->{device} && $hd2->{device} && $hd1->{device} eq $hd2->{device}
+	  || $hd1->{device} && $hd2->{device_alias} && $hd1->{device} eq $hd2->{device_alias}
+	  || $hd1->{device_alias} && $hd2->{device} && $hd1->{device_alias} eq $hd2->{device}
+	  || $hd1->{device_alias} && $hd2->{device_alias} && $hd1->{device_alias} eq $hd2->{device_alias};
     }
 }
 

@@ -102,6 +102,7 @@ sub pack_ {
 }
 sub pack {
     my ($part, $options, $unknown) = @_;
+    $unknown =~ s/ /,/g;
     $part->{options} = pack_($part, $options, $unknown) || 'defaults';
     noreturn();
 }
