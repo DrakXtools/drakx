@@ -1,5 +1,26 @@
 Version 13.52 - 19 Dec 2011
 - add support for systemd in drakxservices (from Mageia and dmorgan)
+- add support for lxde (from kazancas)
+- Atom processor below N series (Atom 2xx, 3xx) need use p4clokmode, not acpi (from kazancas)
+- detect-devices.patch from kazancas
+ o merge cpufreq detection logic into detect_devices::hasCPUFreq(), which is cleaner and enable us to install cpufreq on more cases
+ o add support to detect if CPU microcode is upgradable
+ o detect machines needing cpufreq
+        (getInputDevices,hasNumpad) detect (at least some (eg: Compaq USB numpad)
+ o use EVIOCGBIT ioctl instead of trying to parse key field from /proc/bus/input/devices to avoid issues on 64bit kernel with 32bit userspac
+
+- drakfont.patch from kazancas
+ o rename Ooo as LibreOffice
+ o enable support for LibreOffice/gs/... only if available
+- merge faceicon patch
+- match partitions when one of them as device_alias to the device of the other
+- fix spaces are not allowed between options in /etc/fstab
+- harddrake patch from kazancas
+ o Robustify the PulseAudio configs (don't try and write files if they do not exists.
+    Doing so previously would result in blank files that then causes problems 
+    when installing PulseAudio as the "config" files are not overwritten properly which can result in broken PA startup)
+ o Remove the "Enable 5.1..." option. This is now done via card profiles in native GUIs for GNOME and KDE (or pavucontrol)
+ o Add more options for CPU info
 
 Version 13.51 - 27 Jun 2011
 - add check_min_sys_requirements from ROSA Labs.
