@@ -455,6 +455,7 @@ sub getTVcards() { probe_category('multimedia/tv') }
 
 sub getInputDevices() {
     my (@devices, $device);
+    my $event;
     foreach (cat_('/proc/bus/input/devices')) {
         if (/^I:/) {
             $device = {};
@@ -506,14 +507,25 @@ sub getInputDevices() {
             #- B: KEY=1c43 0 70000 0 0 0 0 0 0 0 0 #=> BTN_LEFT BTN_RIGHT BTN_MIDDLE TOOL_PEN TOOL_RUBBER TOOL_FINGER TOOL_MOUSE TOUCH STYLUS STYLUS2
             #- B: ABS=100 3000003 #=> X Y PRESSURE DISTANCE MISC
 
+            #I: Bus=0003 Vendor=049f Product=0024 Version=0001
+	    #N: Name="Compaq Compaq Numeric Keypad"
+	    #P: Phys=usb-0000:00:03.2-2/input0
+	    #S: Sysfs=/class/input/input7
+	    #H: Handlers=kbd event3
+	    #B: EV=120003
+	    #B: KEY=10000 7 ff800000 7ff febeffdf ffefffff ffffffff fffffffe
+	    #B: LED=1f
+
 	    $device->{Synaptics} = $descr eq 'SynPS/2 Synaptics TouchPad';
 	    $device->{ALPS} = $descr =~ m!^AlpsPS/2 ALPS!;
 	    $device->{Elantech} = $descr eq 'ETPS/2 Elantech Touchpad';
+	    $device->{Numpad} = $descr =~ /Numeric Keypad/;
 
 	} elsif (/H: Handlers=(.*)/) {
 	    my @l = split(' ', $1);
 	    $device->{driver} = $l[0]; #- keep it for compatibility
 	    $device->{Handlers} = +{ map { (/^(.*?)\d*$/ ? $1 : $_, $_) } split(' ', $1) };
+	    $event = $device->{Handlers}{event};
 	} elsif (/S: Sysfs=(.+)/) {
 	    $device->{sysfs_path} = $1;
 	} elsif (/P: Phys=(.*)/) {
@@ -536,8 +548,11 @@ sub getInputDevices() {
 	    #- KEY=30000 0 0 0 0 0 0 0 0  #=> BTN_LEFT BTN_RIGHT
 	    #- KEY=70000 0 0 0 0 0 0 0 0  #=> BTN_LEFT BTN_RIGHT BTN_MIDDLE
 	    #- KEY=1f0000 0 0 0 0 0 0 0 0 #=> BTN_LEFT BTN_RIGHT BTN_MIDDLE BTN_SIDE BTN_EXTRA
-	    my $KEY = hex($1);
-	    $device->{SIDE} = 1 if $KEY & (1 << 0x13);
+	    if (! -f "/dev/input/$event") {
+		    devices::make("/dev/input/$event");
+	    }
+	    my @KEYS = c::EVIocGBitKey("/dev/input/$event");
+	    $device->{SIDE} = 1 if $KEYS[0] & (1 << 0x13);
 
         } elsif (/^\s*$/) {
 	    push @devices, $device if $device;
@@ -568,7 +583,14 @@ sub getSerialModem {
     my ($modules_conf, $o_mouse) = @_;
     my $mouse = $o_mouse || {};
     $mouse->{device} = readlink "/dev/mouse";
-    my $serdev = arch() =~ /ppc/ ? "macserial" : "serial";
+    my $serdev;
+    if (arch() =~ /ppc/) {
+	    $serdev = "macserial";
+    } elsif (arch() =~ /mips/) {
+	    $serdev = "8250";
+    } else {
+	    $serdev = "serial";
+    }
     eval { modules::load($serdev) };
 
     my @modems;
@@ -942,9 +964,14 @@ sub pcmcia_probe() {
 
 my $dmi_probe;
 sub dmi_probe() {
+    if (arch() !~ /86/) {
+        $dmi_probe ||= [];
+    }
+    else {
     $dmi_probe ||= [ map {
 	/(.*?)\t(.*)/ && { bus => 'DMI', driver => $1, description => $2 };
     } $> ? () : c::dmi_probe() ];
+    }
     @$dmi_probe;
 }
 
@@ -1044,7 +1071,7 @@ sub dmidecode() {
     return @dmis if $dmidecode_already_runned;
 
     return if $>;
-    my ($ver, @l) = run_program::get_stdout('dmidecode');
+    my ($ver, @l) = arch() =~ /86/ ? run_program::get_stdout('dmidecode') : ();
 
     my $tab = "\t";
 
@@ -1173,14 +1200,31 @@ sub has_cpu_flag {
 sub matching_types() {
     +{
 	laptop => isLaptop(),
+	'numpad' => hasNumpad(),
 	'touchpad' => hasTouchpad(),
 	'64bit' => to_bool(arch() =~ /64/),
 	wireless => to_bool(get_wireless_interface() || probe_category('network/wireless')),
     };
 }
 
+sub hasCPUMicrocode() {
+    state $hasCPUMicrocode;
+    if (!defined $hasCPUMicrocode) {
+        eval { modules::load('microcode') };
+        $hasCPUMicrocode = to_bool(find { 'microcode' } modules::loaded_modules());
+    }
+    return $hasCPUMicrocode;
+}
+
+sub hasCPUFreq()     {
+    require cpufreq;
+     to_bool(cpufreq::get_modules())
+       || cat_('/proc/cpuinfo') =~ /AuthenticAMD/ && arch() =~ /x86_64/
+       || cat_('/proc/cpuinfo') =~ /model name.*Intel\(R\) Core\(TM\)2 CPU/;
+}
 sub hasWacom()     { find { $_->{vendor} == 0x056a || $_->{driver} =~ /wacom/ } usb_probe() }
 sub hasTouchpad()  { any { $_->{Synaptics} || $_->{ALPS} || $_->{Elantech} } getInputDevices() }
+sub hasNumpad()    { any { $_->{Numpad} } getInputDevices() }
 
 sub usbWacom()     { grep { $_->{vendor} eq '056a' } getInputDevices() }
 sub usbKeyboards() { grep { $_->{media_type} =~ /\|Keyboard/ } usb_probe() }
