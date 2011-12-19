@@ -100,9 +100,9 @@ $ugtk2::wm_icon = "drakfont";
 my $xlsfonts = 0;
 my $windows  = 0;
 my $replace;
-my $so      = 1;
-my $gs      = 1;
-my $abi     = 1;
+my $so      = -f '/usr/bin/ooffice';
+my $gs      = -f '/usr/bin/gs';
+my $abi     = -f '/usr/bin/abiword';
 my $printer = 1;
 my $mode    = -1;
 my @application;
@@ -552,7 +552,7 @@ sub appli_choice() {
 			  ),
 	      );
 	    } ([ N("Ghostscript"), \$gs ],
-	       [ N("OpenOffice.org"), \$so ],
+	       [ N("LibreOffice"), \$so ],
 	       [ N("Abiword"), \$abi ],
 	       [ N("Generic Printers"), \$printer ],
 	      ), 
