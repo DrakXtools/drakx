@@ -69,6 +69,8 @@ my %fields =
      },
      CPU =>
      {
+      "system type" => [ "Sytem Type", "Name of the system" ],
+      "BogoMIPS" => [ N("Bogomips"), N("the GNU/Linux kernel needs to run a calculation loop at boot time to initialize a timer counter.  Its result is stored as bogomips as a way to \"benchmark\" the cpu.") ],
       "bogomips" => [ N("Bogomips"), N("the GNU/Linux kernel needs to run a calculation loop at boot time to initialize a timer counter.  Its result is stored as bogomips as a way to \"benchmark\" the cpu.") ],
       "cache size" => [ N("Cache size"), N("size of the (second level) cpu cache") ],
       "cpu family" => [ N("Cpuid family"), N("family of the cpu (eg: 6 for i686 class)") ],
@@ -83,6 +85,7 @@ my %fields =
       "level" => [ N("Level"), N("sub generation of the cpu") ],
       "model" => [ N("Model"), N("generation of the cpu (eg: 8 for Pentium III, ...)") ],
       "model name" => [ N("Model name"), N("official vendor name of the cpu") ],
+      "cpu model" => [ N("Model name"), N("official vendor name of the cpu") ],
       "name" => [ N("Name"), N("the name of the CPU") ],
       "processor" => [ N("Processor ID"), N("the number of the processor") ],
       "stepping" => [ N("Model stepping"), N("stepping of the cpu (sub model (generation) number)") ],

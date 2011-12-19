@@ -181,25 +181,6 @@ our %oss2alsa =
 my @blacklist = qw(cs46xx cs4281);
 my $blacklisted = 0;
 
-sub is_user_switching_enabled() {
-    my $output = run_program::get_stdout('polkit-action', '--action',
-                                         'org.freedesktop.hal.device-access.sound');
-    my ($val) = $output =~ /default_inactive: (.*)/;
-    to_bool($val eq 'no');
-}
-
-sub set_user_switching {
-    my ($val) = @_;
-    if ($val) {
-        run_program::get_stdout('polkit-action', '--reset-defaults',
-                                'org.freedesktop.hal.device-access.sound');
-    } else {
-        run_program::get_stdout('polkit-action', '--set-defaults-inactive',
-                                'org.freedesktop.hal.device-access.sound', 'yes');
-    }
-}
-
-
 sub is_pulseaudio_enabled() {
     my $soundprofile = common::read_alternative('soundprofile');
     $soundprofile =~ /pulse$/;
@@ -209,6 +190,8 @@ sub set_pulseaudio {
     my ($val) = @_;
 
     my $alterative = '/etc/sound/profiles/' . ($val ? 'pulse' : 'alsa');
+    return if ! -d $alterative;
+
     common::symlinkf_update_alternatives('soundprofile', $alterative);
 
     # (cg) This config file will eventually be dropped, but it is still needed for now
@@ -226,28 +209,34 @@ sub set_pulseaudio {
 }
 
 
-my $pa_defaultsconfig_file = "$::prefix/etc/pulse/default.pa";
+my $pa_startup_scriptfile = "$::prefix/etc/pulse/default.pa";
 
 sub is_pulseaudio_glitchfree_enabled() {
-    return -f $pa_defaultsconfig_file &&
-      cat_($pa_defaultsconfig_file) !~ /^load-module\s+module-(udev|hal)-detect\s+tsched=0/m;
+    return -f $pa_startup_scriptfile &&
+      cat_($pa_startup_scriptfile) !~ /^load-module\s+module-(udev|hal)-detect\s+tsched=0/m;
 }
 
 sub set_pulseaudio_glitchfree {
     my ($val) = @_;
+
+    return if ! -f $pa_startup_scriptfile;
+
     substInFile {
         if ($val) {
             s/^(load-module\s+module-(udev|hal)-detect)\s+tsched=0/$1/;
         } else {
             s/^(load-module\s+module-(udev|hal)-detect).*/$1 tsched=0/;
         }
-    } $pa_defaultsconfig_file;
+    } $pa_startup_scriptfile;
 }
 
 my $pa_client_conffile = "$::prefix/etc/pulse/client.conf";
 
 sub set_PA_autospan {
     my ($val) = @_;
+
+    return if ! -f $pa_client_conffile;
+
     $val = 'autospawn = ' . bool2yesno($val) . "\n";
     my $done;
     substInFile {
@@ -257,28 +246,6 @@ sub set_PA_autospan {
         }
     } $pa_client_conffile;
     append_to_file($pa_client_conffile, $val) if !$done;
-}
-
-
-my $pulse_config_file = "$::prefix/etc/pulse/daemon.conf";
-
-sub is_5_1_in_pulseaudio_enabled() {
-    my ($val) = cat_($pulse_config_file) =~ /^default-sample-channels\s*=\s*(\d+)/m; #^
-    $val ||= 2;
-    $val == 6;
-}
-
-sub set_5_1_in_pulseaudio {
-    my ($val) = @_;
-    $val = 'default-sample-channels = ' . ($val ? 6 : 2) . "\n";
-    my $done;
-    substInFile {
-        if (/^default-sample-channels\s*=/) {
-            $_ = $val;
-            $done = 1;
-        }
-    } $pulse_config_file;
-    append_to_file($pulse_config_file, $val) if !$done;
 }
 
 
@@ -336,19 +303,17 @@ sub switch {
         push @alternative, $driver;
         my %des = modules::category2modules_and_description('multimedia/sound');
         
+        my $is_pulseaudio_installed = (-f $pa_startup_scriptfile && -f $pa_client_conffile && -d '/etc/sound/profiles/pulse');
         my $is_pulseaudio_enabled = is_pulseaudio_enabled();
         my $is_pulseaudio_glitchfree_enabled = is_pulseaudio_glitchfree_enabled();
-        my $is_5_1_in_pulseaudio_enabled = is_5_1_in_pulseaudio_enabled();
-        my $is_user_switching = is_user_switching_enabled();
 
         my $old_value = $is_pulseaudio_enabled;
 
         my $write_config = sub {
+            return if !$is_pulseaudio_installed;
             set_pulseaudio($is_pulseaudio_enabled);
             set_pulseaudio_glitchfree($is_pulseaudio_glitchfree_enabled);
             set_PA_autospan($is_pulseaudio_enabled);
-            set_5_1_in_pulseaudio($is_5_1_in_pulseaudio_enabled);
-            set_user_switching($is_user_switching);
             if ($is_pulseaudio_enabled) {
                 my $lib = (arch() =~ /x86_64/ ? 'lib64' : 'lib');
                 $in->do_pkgs->ensure_is_installed($lib . 'alsa-plugins-pulseaudio',
@@ -357,7 +322,7 @@ sub switch {
             if ($old_value ne $is_pulseaudio_enabled) {
                 require any;
                 any::ask_for_X_restart($in);
-              }
+            }
         };
 
         my @common = (
@@ -365,20 +330,12 @@ sub switch {
             {
                 text => N("Enable PulseAudio"),
                 type => 'bool', val => \$is_pulseaudio_enabled,
-            },
-            {
-                text => N("Enable 5.1 sound with Pulse Audio"),
-                type => 'bool', val => \$is_5_1_in_pulseaudio_enabled,
-                disabled => sub { !$is_pulseaudio_enabled },
-            },
-            {
-                text => N("Enable user switching for audio applications"),
-                type => 'bool', val => \$is_user_switching,
+                disabled => sub { !$is_pulseaudio_installed },
             },
             {
                 text => N("Use Glitch-Free mode"),
                 type => 'bool', val => \$is_pulseaudio_glitchfree_enabled,
-                disabled => sub { !$is_pulseaudio_enabled },
+                disabled => sub { !$is_pulseaudio_installed || !$is_pulseaudio_enabled },
             },
             {
                 advanced => 1,
