@@ -623,7 +623,7 @@ sub partition_table_clear_and_initialize {
 }
 
 sub partition_table_initialize {
-    my ($lvms, $hd, $o_in, $b_warn, $o_type) = @_;
+    my ($lvms, $hd, $o_in, $o_type, $b_warn) = @_;
     partition_table::initialize($hd, $o_type);
     if ($hd->isa('partition_table::lvm')) {
 	if ($b_warn && $o_in) {
