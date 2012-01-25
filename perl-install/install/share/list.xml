@@ -301,6 +301,7 @@
   utf8.pm
   utf8_heavy.pl
   unicore/Heavy.pl
+  unicore/To/Digit.pl
   unicore/To/Lower.pl
   unicore/To/Fold.pl
   unicore/To/Upper.pl
@@ -416,6 +417,10 @@
     ARCH-linux-thread-multi/auto/Term/ReadLine/Gnu/Gnu.so
     ARCH-linux-thread-multi/auto/Term/ReadLine/Gnu/XS/autosplit.ix
   </if>
+</from>
+
+<from expand="rpm" matching="m!/usr/lib/perl5/.*/unicore/lib!">
+  perl
 </from>
 
 <from expand="rpm" matching="m!^/usr/lib/perl5! and !/\.pod$/">
