@@ -7,7 +7,7 @@
   pwd reset
 
   ls
-  cp ln mkdir mknod mv rm rmdir   
+  cp ln mkdir mknod mv rm rmdir
   chmod chown
   dd touch
 
@@ -56,16 +56,17 @@
   fdformat badblocks
   mkswap swapoff swapon
   e2fsck fsck.ext2 fsck.ext3 fsck.ext4
-  mke2fs mkfs.ext2 mkfs.ext3 mkfs.ext4 
+  mke2fs mkfs.ext2 mkfs.ext3 mkfs.ext4
   dumpe2fs tune2fs resize2fs debugfs
 
   mkfs.reiserfs resize_reiserfs reiserfstune reiserfsck
   mkfs.xfs xfs_admin xfs_repair fsck.xfs
-  mkfs.ntfs mkdosfs dosfslabel mkntfs ntfsresize ntfslabel 
+  mkfs.ntfs mkdosfs dosfslabel mkntfs ntfsresize ntfslabel
 
   dropbear dropbearkey
- 
   screen
+
+  gdisk
 
   <if ARCH="i.86|x86_64">
     mkfs.jfs fsck.jfs jfs_tune
@@ -85,7 +86,7 @@
   <if-not ARCH="ppc|sparc">
     sfdisk
   </if-not>
-                     
+ 
   <if ARCH="ppc">
     pdisk 
   </if>
@@ -145,7 +146,7 @@
 
 <from>
   /usr/lib/kbd/keymaps/include
-  <if ARCH="i.86|x86_64">    
+  <if ARCH="i.86|x86_64">
     /usr/lib/kbd/keymaps/i386/include
     /usr/lib/kbd/keymaps/i386/azerty/be-latin1.map.gz <!-- this one is needed by be2-latin1 -->
   </if>
@@ -165,7 +166,7 @@
 
   <if ARCH="ppc">
     /usr/lib/yaboot/ofboot
-    /usr/lib/yaboot/yaboot    
+    /usr/lib/yaboot/yaboot
   </if>
 
   <from expand="command">
