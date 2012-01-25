@@ -32,8 +32,21 @@ sub description {
 	       $hd->{info}, $hd->{mntpoint}, $hd->{fs_type});
 }
 
+#- align partition start to the next MB boundary
+sub align_to_MB_boundaries {
+    my ($part) = @_;
+
+    my $end = $part->{start} + $part->{size};
+    $part->{start} = round_up($part->{start}, MB(1));
+    $part->{size} = $end - $part->{start};
+}
+
 sub adjustStartAndEnd {
     my ($hd, $part) = @_;
+
+    # always align partition start to MB boundaries
+    # (this accounts for devices with non-512 physical sector sizes):
+    align_to_MB_boundaries($part);
 
     $hd->adjustStart($part);
     $hd->adjustEnd($part);

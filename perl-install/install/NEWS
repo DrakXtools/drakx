@@ -1,3 +1,5 @@
+- always align partitions to start at megabyte boundaries to avoid
+  performance issues with drives with 4k physical sectors (mga#1215)
 - include xfs_freeze (needed for setup grub on XFS, mga#1536)
 - include gtk20 translations (caps lock & the like)
 - include DM/MD udev rules so that install on LVM works again

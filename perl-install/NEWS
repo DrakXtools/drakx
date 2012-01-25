@@ -1,3 +1,6 @@
+- diskdrake:
+  o always align partitions to start at megabyte boundaries to avoid
+    performance issues with drives with 4k physical sectors (mga#1215)
 - finish-install: touch reload-dm lock file
   (used in live systems to restart gdm with new defaults )
 - sync with kernel-3.1.0
