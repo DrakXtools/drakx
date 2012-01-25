@@ -17,9 +17,7 @@
   parted
   partprobe
 
-  <mode copy="dereference">
-    usb_id <!-- needed by mouse::detect -->
-  </mode>
+  udevadm <!-- needed by mouse::detect -->
 
   badblocks
   mkswap
@@ -203,6 +201,7 @@
 
   /etc/pki/tls/certs/ca-bundle.crt
 
+  /lib/udev/udevd
   /lib/udev/pcmcia-socket-startup
   /etc/pcmcia/config.opts
 
