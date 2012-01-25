@@ -274,10 +274,7 @@ sub choosePackages {
     $availableCorrected;
 }
 
-sub upgrading_redhat() {
-    #- remove weird config files that bother Xconfig::* too much
-    unlink "$::prefix/etc/X11/XF86Config";
-    unlink "$::prefix/etc/X11/XF86Config-4";
+sub live_patch_URPM() {
 
     sub prefering_mdv {
 	my ($lpkg, $rpkg_ver, $c) = @_;
@@ -309,6 +306,13 @@ sub upgrading_redhat() {
 	}
 	&$old_compare;
     };
+}
+
+sub upgrading_redhat() {
+    #- remove weird config files that bother Xconfig::* too much
+    unlink "$::prefix/etc/X11/XF86Config";
+    unlink "$::prefix/etc/X11/XF86Config-4";
+    live_patch_URPM();
 }
 
 sub beforeInstallPackages {
