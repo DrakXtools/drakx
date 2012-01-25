@@ -249,7 +249,7 @@ dist-svn:
 	rm -rf $(PRODUCT)-$(VERSION)
 
 dist-git:
-	@cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD mdk-stage1 kernel Makefile.config | bzip2 >mdk-stage1/$(PRODUCT)-$(VERSION).tar.bz2;
+	@cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD mdk-stage1 kernel Makefile.config | xz >mdk-stage1/$(PRODUCT)-$(VERSION).tar.xz;
 
 .depend:
 	$(CPP) $(CFLAGS) -M $(ALLSRC) > .depend
