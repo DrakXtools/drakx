@@ -63,7 +63,7 @@ our %l = (
     wireless => [
       qw(acx-pci acx-usb adm8211 agnx airo airo_cs aironet4500_cs),
       qw(aironet_cs ar9170usb arlan arusb_lnx at76_usb ath5k ath6kl ath9k),
-      qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx bcm_wimax brcm80211 carl9170 com20020_cs),
+      qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx bcm_wimax brcm80211 brcmsmac carl9170 com20020_cs),
       qw(dyc_ar5 hostap_cs hostap_pci hostap_plx i2400m-usb ipw2100),
       qw(ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwlwifi madwifi_pci),
       qw(mwl8k ndiswrapper netwave_cs orinoco orinoco_cs),
@@ -71,8 +71,8 @@ our %l = (
       qw(p54usb prism2_cs prism2_pci prism2_usb prism54 r8180),
       qw(r8187se r8192_pci r8192s_usb r8192u_usb r8712u ray_cs rndis_wlan rt2400 rt2400pci rt2500),
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
-      qw(rt2870sta rt3070sta rt61 rt61pci rt73 rt73usb rtl8180),
-      qw(rtl8187se rtusb spectrum_cs usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
+      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187se rtusb ),
+      qw(rtl8192se rtl8192cu rtl8192de spectrum_cs usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
       qw(wavelan_cs wl wl3501_cs wvlan_cs zd1201 zd1211rw),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
@@ -144,7 +144,7 @@ our %l = (
       if_(arch() !~ /alpha|sparc/,
         # 3w-xxxx drives ATA-RAID, 3w-9xxx and arcmsr drive SATA-RAID
         qw(3w-9xxx 3w-sas 3w-xxxx a320raid aacraid arcmsr cciss cpqarray),
-        qw(cpqfc DAC960 dpt_i2o gdth hpsa hptiop i2o_block imm ipr ips),
+        qw(cpqfc DAC960 dpt_i2o gdth hpsa hptiop i2o_block imm ipr ips isci),
         qw(it8212 it821x iteraid megaide megaraid megaraid_mbox),
         qw(megaraid_sas mptfc mptsas mptscsih mptspi pdc-ultra pmcraid ppa),
         qw(qla2100 qla2200 qla2300 qla2322 qla4xxx qla6312 qla6322),
@@ -153,7 +153,8 @@ our %l = (
     virtual => [ qw(xenblk virtio_blk) ],
     pcmcia => [ qw(aha152x_cs fdomain_cs nsp_cs qlogic_cs ide-cs pata_pcmcia sym53c500_cs) ],
     raw => [ qw(ide-gd_mod sd_mod) ],
-    usb => [ qw(keucr uas ums-alauda ums-cypress ums-datafab ums-freecom ums-isd200 ums-jumpshot ums-karma ums-onetouch ums-sddr09 ums-sddr55 ums-usbat usb-storage) ],
+    usb => [ qw(keucr uas ums-alauda ums-cypress ums-datafab ums-eneub6250 ums-freecom ums-isd200),
+	     qw(ums-jumpshot ums-karma ums-onetouch ums-realtek ums-sddr09 ums-sddr55 ums-usbat usb-storage) ],
     firewire => [ qw(sbp2) ],
     cdrom => [ qw(sr_mod) ],
     card_reader => [ qw(sdhci tifm_sd tifm_7xx1) ],
@@ -176,9 +177,9 @@ our %l = (
     ],
     hid => [ qw(hid-a4tech hid-apple hid-belkin hid-cherry hid-chicony
                 hid-cypress hid-drff hid-ezkey hid-gaff hid-gyration hid-kensington hid-kye
-                hid-logitech hid-microsoft hid-monterey hid-multilaser hid-ntrig
+                hid-keytouch hid-logitech hid-microsoft hid-monterey hid-multilaser hid-ntrig
                 hid-petalynx hid-pl hid-samsung hid-sjoy hid-sony hid-sunplus
-                hid-tmff hid-topseed hid-zpff hid-wacom ff-memless)],
+                hid-tmff hid-topseed hid-uclogic hid-zpff hid-wacom ff-memless)],
    #serial_cs
    #ftl_cs 3c575_cb apa1480_cb epic_cb serial_cb tulip_cb iflash2+_mtd iflash2_mtd
    #cb_enabler
@@ -218,7 +219,7 @@ our %l = (
           qw(snd-gusclassic snd-gusextreme snd-gusmax),
           qw(snd-hda-intel snd-hdsp snd-hdspm snd-ice1712 snd-ice1724),
           qw(snd-indi snd-indigo snd-indigodj snd-indigodjx snd-indigoio snd-indigoiox snd-intel8x0 snd-interwave),
-          qw(snd-interwave-stb snd-korg1212 snd-layla20 snd-layla24 snd-layla3g snd-lx6464es),
+          qw(snd-interwave-stb snd-korg1212 snd-layla20 snd-layla24 snd-layla3g snd-lola snd-lx6464es),
           qw(snd-maestro3 snd-mia snd-mixart snd-mona snd-mpu401 snd-nm256),
           qw(snd-opl3sa2 snd-opti92x-ad1848 snd-opti92x-cs4231 snd-opti93x snd-oxygen snd-pcsp snd-pcxhr snd-riptide snd-rme32),
           qw(snd-rme96 snd-rme9652 snd-sb16 snd-sb8 snd-sbawe snd-sc6000 snd-sgalaxy snd-sis7019 snd-sonicvibes),
@@ -242,8 +243,9 @@ our %l = (
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-gemtek-pci radio-maestro radio-maxiradio radio-miropcm20 radio-usb-si470x) ],
     scanner => [ qw(scanner microtek) ],
+    firewire => [ qw(snd-firewire-speakers snd-isight) ],
     gameport => [ qw(cs461x ns558 emu10k1-gp fm801-gp lightning ns558 vortex) ],
-    usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-caiaq snd-usb-usx2y usb-midi) ],
+    usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-6fire snd-usb-caiaq snd-usb-usx2y usb-midi) ],
     webcam => [
         qw(cafe_ccic cpia2 cpia_usb cyber2000fb em28xx et61x251 gspca),
         qw(ibmcam konicawc mod_quickcam ov511 ov511-alt ov518_decomp),
