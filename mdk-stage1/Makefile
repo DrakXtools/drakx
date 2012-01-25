@@ -125,7 +125,7 @@ STAGE1OBJS-FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
 
 BINS = init stage1 dhcp-client rescue-gui probe-modules
 
-DIRS += pci-resource usb-resource slang newt ppp/pppd rp-pppoe/src
+DIRS += pci-resource usb-resource slang newt
 ifeq (i386, $(ARCH))
 DIRS += pcmcia pcmcia-resource sysfs
 endif
