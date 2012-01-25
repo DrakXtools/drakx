@@ -294,6 +294,8 @@ Do you agree to lose all the partitions?
 
     # must be done after getting major/minor
     $all_hds->{dmcrypts} = [ dmcrypts($all_hds) ];
+    # allow lvm on dmcrypt
+    $all_hds->{lvms} = [ lvms($all_hds) ];
 
     $_->{faked_device} = 0 foreach fs::get::fstab($all_hds);
 
