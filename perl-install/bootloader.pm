@@ -1788,7 +1788,7 @@ sub write_grub {
 	$bootloader->{terminal} ||= "--timeout=" . ($bootloader->{timeout} || 0) . " console serial";
     } elsif ($bootloader->{method} eq 'grub-graphic') {
 	my $bin = '/usr/sbin/grub-gfxmenu';
-	if ($bootloader->{gfxmenu} eq '' && -x "$::prefix/usr/sbin/grub-gfxmenu") {
+	if ($bootloader->{gfxmenu} eq '' && -x "$::prefix$bin") {
 	    my $locale = $::o->{locale} || do { require lang; lang::read() };
 	    run_program::rooted($::prefix, $bin, '--lang', $locale->{lang}, '--update-gfxmenu');
 	    $bootloader->{gfxmenu} ||= '/boot/gfxmenu';
