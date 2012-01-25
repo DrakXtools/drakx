@@ -2505,8 +2505,7 @@ sifnpmode(u, proto, mode)
     npi.mode     = mode;
     if (ioctl(ppp_dev_fd, PPPIOCSNPMODE, (caddr_t) &npi) < 0) {
 	if (! ok_error (errno))
-	    error("ioctl(PPPIOCSNPMODE, %d, %d): %m (%d)",
-		   proto, mode, errno);
+	    error("ioctl(PPPIOCSNPMODE, %d, %d): %m (%d)", proto, mode, errno);
 	return 0;
     }
     return 1;

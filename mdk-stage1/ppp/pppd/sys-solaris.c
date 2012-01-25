@@ -1520,7 +1520,7 @@ tty_send_config(mtu, asyncmap, pcomp, accomp)
 }
 
 /*
- * ppp_set_xaccm - set the extended transmit ACCM for the interface.
+ * tty_set_xaccm - set the extended transmit ACCM for the interface.
  */
 void
 tty_set_xaccm(accm)
@@ -1537,7 +1537,7 @@ tty_set_xaccm(accm)
 }
 
 /*
- * ppp_recv_config - configure the receive-side characteristics of
+ * tty_recv_config - configure the receive-side characteristics of
  * the ppp interface.
  */
 void
@@ -1956,12 +1956,6 @@ sifaddr(u, o, h, m)
 	error("Couldn't set remote IP address: %m");
 	ret = 0;
     }
-#if 0	/* now done in ppp_send_config */
-    ifr.ifr_metric = link_mtu;
-    if (ioctl(ipfd, SIOCSIFMTU, &ifr) < 0) {
-	error("Couldn't set IP MTU: %m");
-    }
-#endif
 
     remote_addr = h;
     return ret;
@@ -2179,7 +2173,7 @@ get_hw_addr_dlpi(name, hwaddr)
     char *name;
     struct sockaddr *hwaddr;
 {
-    char *p, *q;
+    char *q;
     int unit, iffd, adrlen;
     unsigned char *adrp;
     char ifdev[24];
@@ -2698,7 +2692,6 @@ get_pty(master_fdp, slave_fdp, slave_name, uid)
 {
     int mfd, sfd;
     char *pty_name;
-    struct termios tios;
 
     mfd = open("/dev/ptmx", O_RDWR);
     if (mfd < 0) {
