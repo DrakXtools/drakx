@@ -14,6 +14,7 @@ sub guess_mount_point {
 	     '/'     => 'etc/fstab',
 	     '/boot' => 'vmlinuz',
 	     '/boot' => 'vmlinux',
+	     '/boot' => 'uImage',
 	     '/tmp'  => '.X11-unix',
 	     '/usr'  => 'src',
 	     '/var'  => 'spool',

@@ -54,7 +54,7 @@ sub floppies {
     require modules;
     state @fds;
     state $legacy_already_detected;
-    if (arch =~ /mips/) {
+    if (arch =~ /mips|arm/) {
       $o_not_detect_legacy_floppies = 1;
     }
     if (!$o_not_detect_legacy_floppies && !$legacy_already_detected) {
@@ -1186,6 +1186,18 @@ sub is_mips_gdium() {
 
 sub is_mips_st_ls2f() {
     to_bool(cat_('/proc/cpuinfo') =~ /st-ls2f/);
+}
+
+sub is_arm_openrd_client {
+    to_bool(cat_('/proc/cpuinfo') =~ /OpenRD Client/);
+}
+
+sub is_arm_versatile {
+    to_bool(cat_('/proc/cpuinfo') =~ /ARM-Versatile/);
+}
+
+sub is_arm_efikamix {
+    to_bool(cat_('/proc/cpuinfo') =~ /Efika MX/);
 }
 
 sub is_xbox() {

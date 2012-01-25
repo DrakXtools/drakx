@@ -22,7 +22,7 @@ use modules;
 #-#####################################################################################
 #- Functions
 #-#####################################################################################
-my $vmlinuz_regexp = 'vmlinu[xz]|win4lin';
+my $vmlinuz_regexp = 'vmlinu[xz]|win4lin|uImage';
 my $decompose_vmlinuz_name = qr/((?:$vmlinuz_regexp).*?)-(\d+\.\d+.*)/;
 
 sub expand_vmlinuz_symlink {
@@ -57,7 +57,7 @@ sub kernel_str2short_name {
 
 sub basename2initrd_basename {
     my ($basename) = @_;
-    $basename =~ s!vmlinu[zx]-?!!; #- here we do not use $vmlinuz_regexp since we explictly want to keep all that is not "vmlinuz"
+    $basename =~ s!(vmlinu[zx]|uImage)-?!!; #- here we do not use $vmlinuz_regexp since we explictly want to keep all that is not "vmlinuz"
     'initrd' . ($basename ? "-$basename" : '');    
 }
 sub kernel_str2vmlinuz_long {
@@ -188,7 +188,7 @@ sub read {
 	    if (m!/fd\d+$!) {
 		warn "not checking the method on floppy, assuming $main_method is right\n";
 		$main_method;
-	    } elsif (member($main_method, qw(yaboot cromwell silo pmon2000))) {
+	    } elsif (member($main_method, qw(yaboot cromwell silo pmon2000 uboot))) {
 		#- not checking, there's only one bootloader anyway :)
 		$main_method;
 	    } elsif (my $type = partition_table::raw::typeOfMBR($_)) {
@@ -412,6 +412,11 @@ sub read_silo() {
 sub read_pmon2000() {
     my %b;
     $b{method} = 'pmon2000';
+    \%b;
+}
+sub read_uboot() {
+    my %b;
+    $b{method} = 'uboot';
     \%b;
 }
 sub read_cromwell() {
@@ -729,7 +734,7 @@ sub add_kernel {
 
     #- new versions of yaboot do not handle symlinks
     $b_nolink ||= arch() =~ /ppc/;
-    $b_no_initrd //= arch() =~ /mips/ && !detect_devices::is_mips_gdium();
+    $b_no_initrd //= (arch() =~ /mips|arm/) && !detect_devices::is_mips_gdium();
 
     $b_nolink ||= $kernel_str->{use_long_name};
 
@@ -1178,6 +1183,7 @@ sub method_choices_raw {
     arch() =~ /ia64/ ? 'lilo' : 
     arch() =~ /sparc/ ? 'silo' : 
     arch() =~ /mips/ ? 'pmon2000' : 
+    arch() =~ /arm/ ? 'uboot' :
       (
        if_(!$b_prefix_mounted || whereis_binary('grub', $::prefix), 
 	   'grub-graphic', 'grub-menu'),
@@ -1352,6 +1358,19 @@ sub write_pmon2000 {
 sub when_config_changed_pmon2000 {
     my ($_bootloader) = @_;
     log::l("Mips/pmon2000 - nothing to do...");
+}
+
+sub install_uboot { 
+    my ($_bootloader, $_all_hds) = @_;
+    log::l("uboot - nothing to install...");
+}
+sub write_uboot { 
+    my ($_bootloader, $_all_hds) = @_;
+    log::l("uboot - nothing to write...");
+}
+sub when_config_changed_uboot {
+    my ($_bootloader) = @_;
+    log::l("uboot - nothing to do...");
 }
 
 sub install_cromwell { 

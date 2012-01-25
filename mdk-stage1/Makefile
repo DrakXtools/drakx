@@ -141,6 +141,9 @@ endif
 ifeq (mips, $(ARCH))
 DIRS += sysfs
 endif
+ifeq (arm, $(ARCH))
+DIRS += sysfs
+endif
 
 
 
@@ -152,6 +155,9 @@ endif
 ifeq (x86_64,$(ARCH))
 PCMCIA_LIB = pcmcia/libpcmcia.a sysfs/libsysfs.a
 PCMCIA_DEFS = -DENABLE_PCMCIA
+endif
+ifeq (arm,$(ARCH))
+PCMCIA_LIB = sysfs/libsysfs.a
 endif
 
 ifeq (mips,$(ARCH))

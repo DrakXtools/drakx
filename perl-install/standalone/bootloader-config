@@ -58,8 +58,13 @@ if ($image) {
     # instead of using arch()
     if (arch() =~ /mips/) {
 	$image = "/boot/vmlinux-$kernel_version";
-    }
-    else {
+    } elsif (arch() =~ /arm/) {
+	if ($kernel_version =~ /versatile/) {
+	    $image = "/boot/vmlinuz-$kernel_version";
+	} else {
+	    $image = "/boot/uImage-$kernel_version";
+	}
+    } else {
     	$image = "/boot/vmlinuz-$kernel_version";
     }
 }

@@ -253,7 +253,7 @@ sub installBootloader {
     my ($in, $b, $all_hds) = @_;
     return if detect_devices::is_xbox();
 
-    if (arch() =~ /mips/) {
+    if (arch() =~ /mips|arm/) {
 	    return 1;
     }
     install_bootloader_pkgs($in->do_pkgs, $b);
