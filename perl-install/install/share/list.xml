@@ -77,6 +77,14 @@
   </if>
 </from>
 
+
+<from dir="/lib/udev/rules.d">
+  10-dm.rules
+  13-dm-disk.rules
+  11-dm-lvm.rules
+  95-dm-notify.rules
+</from>
+
 <from dir="/usr/LIB/xorg/modules">
   drivers/fbdev_drv.so
   drivers/vesa_drv.so
