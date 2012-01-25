@@ -13,5 +13,7 @@ if [ -f /etc/sysconfig/finish-install -a -x /usr/sbin/finish-install ]; then
 	. /etc/profile.d/10mandriva-release.sh
 	xsetroot -cursor_name left_ptr
 	/usr/sbin/finish-install
+	# used in live systems, so that dm gets restarted with the new defaults
+	touch /var/lock/reload-dm
     fi
 fi
