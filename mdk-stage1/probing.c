@@ -872,7 +872,7 @@ void find_media(enum media_bus bus)
 	tmp[count].name = NULL;
 	count++;
 
-	medias = memdup(tmp, sizeof(struct media_info) * count);
+	medias = _memdup(tmp, sizeof(struct media_info) * count);
 }
 
 
@@ -899,8 +899,8 @@ void get_medias(enum media_type media, char *** names, char *** models, enum med
 	tmp_names[count] = NULL;
 	tmp_models[count++] = NULL;
 
-	*names = memdup(tmp_names, sizeof(char *) * count);
-	*models = memdup(tmp_models, sizeof(char *) * count);
+	*names = _memdup(tmp_names, sizeof(char *) * count);
+	*models = _memdup(tmp_models, sizeof(char *) * count);
 }
 
 
@@ -966,7 +966,7 @@ char ** get_net_devices(void)
 
 	tmp[i++] = NULL;
 
-	return memdup(tmp, sizeof(char *) * i);
+	return _memdup(tmp, sizeof(char *) * i);
 
 }
 #endif /* DISABLE_NETWORK */

@@ -180,7 +180,7 @@ static int load_modules_dependencies(void)
 		}
 		tmp_deps[i++] = NULL;
 
-		modules_deps[line].deps = memdup(tmp_deps, sizeof(char *) * i);
+		modules_deps[line].deps = _memdup(tmp_deps, sizeof(char *) * i);
 
 		line++;
 		start = end + 1;

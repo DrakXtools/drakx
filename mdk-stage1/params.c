@@ -63,7 +63,7 @@ void process_cmdline(void)
 			i++;
 			continue;
 		}
-		name = memdup(&buf[j], i-j + 1);
+		name = _memdup(&buf[j], i-j + 1);
 		name[i-j] = '\0';
 
 		if (buf[i] == '=') {
@@ -71,7 +71,7 @@ void process_cmdline(void)
 			i++;
 			while (buf[i] != ' ' && buf[i] != '\0')
 				i++;
-			value = memdup(&buf[k], i-k + 1);
+			value = _memdup(&buf[k], i-k + 1);
 			value[i-k] = '\0';
 		}
 

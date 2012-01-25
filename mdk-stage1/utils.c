@@ -92,7 +92,7 @@ int total_memory(void)
 }
 
 /* pixel's */
-void * memdup(void *src, size_t size)
+void * _memdup(void *src, size_t size)
 {
 	void * r;
 	r = malloc(size);
@@ -128,7 +128,7 @@ char ** list_directory(char * direct)
 	if (dp)
 		closedir(dp);
 	tmp[i] = NULL;
-	return memdup(tmp, sizeof(char*) * (i+1));
+	return _memdup(tmp, sizeof(char*) * (i+1));
 }
 
 

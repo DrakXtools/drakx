@@ -46,14 +46,14 @@ void grab_automatic_params(char * line)
 		int j = i;
 		while (line[i] != ':' && line[i] != '\0')
 			i++;
-		name = memdup(&line[j], i-j + 1);
+		name = _memdup(&line[j], i-j + 1);
 		name[i-j] = 0;
 
 		k = i+1;
 		i++;
 		while (line[i] != ',' && line[i] != '\0')
 			i++;
-		value = memdup(&line[k], i-k + 1);
+		value = _memdup(&line[k], i-k + 1);
 		value[i-k] = 0;
 
 		tmp_params[p].name = name;
@@ -65,7 +65,7 @@ void grab_automatic_params(char * line)
 	}
 
 	tmp_params[p++].name = NULL;
-	automatic_params = memdup(tmp_params, sizeof(struct param_elem) * p);
+	automatic_params = _memdup(tmp_params, sizeof(struct param_elem) * p);
 
 	log_message("AUTOMATIC MODE: got %d params", p-1);
 }
@@ -160,7 +160,7 @@ enum return_type ask_from_entries_auto(char *msg, char ** questions, char *** an
 			questions_auto++;
 			
 		}
-		*answers = memdup(tmp_answers, sizeof(char *) * i);
+		*answers = _memdup(tmp_answers, sizeof(char *) * i);
 		return RETURN_OK;
 	}
 }
