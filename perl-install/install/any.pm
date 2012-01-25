@@ -549,6 +549,11 @@ sub default_packages {
       || cat_('/proc/cpuinfo') =~ /model name.*Intel\(R\) Core\(TM\)2 CPU/;
     push @l, 'apmd' if -e "/proc/apm";
     push @l, detect_devices::probe_name('Pkg');
+    push @l, map { $_->{BOOTPROTO} eq 'dhcp' ? $_->{DHCP_CLIENT} || 'dhcp-client' : () } values %{$o->{net}{ifcfg}};
+    # will get auto selected at summary stage for bootloader:
+    push @l, qw(acpi acpid mageia-gfxboot-theme);
+    # will get auto selected at summary stage for firewall:
+    push @l, qw(shorewall mandi-ifw);
 
     my $dmi_BIOS = detect_devices::dmidecode_category('BIOS');
     my $dmi_Base_Board = detect_devices::dmidecode_category('Base Board');

@@ -1,3 +1,6 @@
+- install more packages earlier (acpi{,d}, dhcp client, firewall & bootloader
+  stuff), preventing useless installing steps later at summary stage & also
+  fixing "program not found: grub-gfxmenu" error message while installing
 - better microcode_ctl management
 - always align partitions to start at megabyte boundaries to avoid
   performance issues with drives with 4k physical sectors (mga#1215)
