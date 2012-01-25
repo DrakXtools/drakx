@@ -1,0 +1,18 @@
+#!/bin/bash
+
+passwd=`genpasswd`
+
+if (( $? != 0 )); then
+	reset
+	exit $?
+fi
+
+sed -E -i -e 's/^root:[^:]*:/root:'"$passwd"':/' /etc/passwd
+
+mkdir -p /etc/dropbear
+[[ -f /etc/dropbear/dropbear_dss_host_key ]] || dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key >/dev/null
+[[ -f /etc/dropbear/dropbear_rsa_host_key ]] || dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key >/dev/null
+
+echo ""
+echo -n "Starting ssh daemon... "
+dropbear && echo "OK"
