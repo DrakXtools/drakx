@@ -29,7 +29,7 @@ extern int current_lineno;
 
 extern int yylex(void); /* mdk-stage1 */
 
-void yyerror(char *msg, ...);
+void yyerror(const char *msg, ...);
 
 %}
 
@@ -114,7 +114,7 @@ resource: IRQ_NO NUMBER
 	;
 
 %%
-void yyerror(char *msg, ...)
+void yyerror(const char *msg, ...)
 {
      va_list ap;
      char str[256];
