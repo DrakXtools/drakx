@@ -1165,6 +1165,17 @@ enum return_type http_prepare(void)
 		use_http_proxy = http_proxy_host && http_proxy_port && !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
 
 		fd = http_download_file(answers[0], location_full, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
+
+		/* Try arched directory */
+		if (fd < 0) {
+                     log_message("%s failed.", location_full);
+                     char *with_arch = asprintf_("%s%s/%s/%s", answers[1][0] == '/' ? "" : "/", answers[1], ARCH, COMPRESSED_FILE_REL("/"));
+                     log_message("trying %s...", with_arch);
+                     fd = http_download_file(answers[0], with_arch, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
+                     if (0 < fd)
+                          strcpy(location_full, with_arch);
+                }
+
 		if (fd < 0) {
 			log_message("HTTP: error %d", fd);
 			if (fd == FTPERR_FAILED_CONNECT)
