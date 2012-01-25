@@ -568,7 +568,7 @@ sub installPackages {
 			     $pkg_log_widget->{to_bottom}->('force');
 			 });
 
-    my $release_notes = any::get_release_notes($o);
+    state $release_notes ||= any::get_release_notes($o);
     my $rel_notes = gtknew('Button', text => N("Release Notes"), 
                            clicked => sub { $show_release_notes = 1 });
 

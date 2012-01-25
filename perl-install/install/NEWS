@@ -1,3 +1,5 @@
+- only retrieve release notes once during installation
+  (also reduces install log size)
 - install more packages earlier (acpi{,d}, dhcp client, firewall & bootloader
   stuff), preventing useless installing steps later at summary stage & also
   fixing "program not found: grub-gfxmenu" error message while installing
