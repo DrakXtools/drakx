@@ -79,8 +79,8 @@ FRONTEND_OBJS = $(subst .c,.o,$($(F)_FRONTEND_SRC))
 
 FRONTEND_LINK = $(FRONTEND_OBJS) $($(F)_FRONTEND_LIBS)
 
-STAGE1_STATIC_LIBS = libkmod.a
-STAGE1_STATIC_USR_LIBS = libz.a libldetect.a libpci.a
+STAGE1_STATIC_LIBS =
+STAGE1_STATIC_USR_LIBS = libz.a libldetect.a libkmod.a libpci.a liblzma.a
 STAGE1_OWN_LIBS =
 ifeq (DIETLIBC, $(L))
 STAGE1_OWN_LIBS = $(patsubst %,/usr/lib/dietlibc/lib-$(ARCH)/%,$(STAGE1_STATIC_USR_LIBS) $(STAGE1_STATIC_LIBS))
