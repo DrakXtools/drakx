@@ -238,14 +238,14 @@ tar:
 	    echo "Unknown SCM (not SVN nor GIT)";\
 	    exit 1; \
 	    fi;
-	$(info $(NAME)-$(VERSION).tar.bz2 is ready)
+	$(info $(NAME)-$(VERSION).tar.xz is ready)
 
 dist-svn:
 	mkdir -p $(PRODUCT)-$(VERSION)
 	svn export -q -rBASE . $(PRODUCT)-$(VERSION)/mdk-stage1
 	svn export -q -rBASE ../kernel $(PRODUCT)-$(VERSION)/kernel
 	cp ../Makefile.config $(PRODUCT)-$(VERSION)/
-	tar cfj $(PRODUCT)-$(VERSION).tar.bz2 $(PRODUCT)-$(VERSION)
+	tar cfa $(PRODUCT)-$(VERSION).tar.xz $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
 
 dist-git:
