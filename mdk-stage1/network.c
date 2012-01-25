@@ -861,8 +861,8 @@ static int choose_mirror_from_host_list(mirrorlist_t mirrorlist, char **selected
 static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port, const char *protocol, char **selected_host, char **filepath)
 {
 	enum return_type results;
-	char *versions[] = { "Specify the mirror manually", DISTRIB_VERSION, NULL };
-	char *version = DISTRIB_VERSION;
+	char *versions[] = { "Specify the mirror manually", DISTRIB_NAME " " DISTRIB_VERSION, NULL };
+	char *version = DISTRIB_NAME " " DISTRIB_VERSION;
 
 	do {
 		results = ask_from_list("Please select a medium from the list below.", versions, &version);
@@ -879,7 +879,7 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 				mirrorlist[0][0] = "Specify the mirror manually";
 				mirrorlist[1][0] = NULL;
 
-				results = get_mirrorlist(mirrorlist, 1, version, protocol, http_proxy_host, http_proxy_port);
+				results = get_mirrorlist(mirrorlist, 1, DISTRIB_VERSION, protocol, http_proxy_host, http_proxy_port);
 				if (results == RETURN_ERROR)
 					return RETURN_ERROR;
 
