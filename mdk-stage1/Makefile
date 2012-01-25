@@ -79,7 +79,7 @@ FRONTEND_OBJS = $(subst .c,.o,$($(F)_FRONTEND_SRC))
 
 FRONTEND_LINK = $(FRONTEND_OBJS) $($(F)_FRONTEND_LIBS)
 
-STAGE1_STATIC_LIBS = libmodprobe.a
+STAGE1_STATIC_LIBS = libkmod.a
 STAGE1_STATIC_USR_LIBS = libz.a libldetect.a libpci.a
 STAGE1_OWN_LIBS =
 ifeq (DIETLIBC, $(L))
