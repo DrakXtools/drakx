@@ -369,7 +369,7 @@ sub Auto_allocate {
 
 	$in->ask_warn("", [
 			   N("All primary partitions are used"),
-			   N("I can not add any more partitions"),
+			   N("I cannot add any more partitions"),
 			   N("To have more partitions, please delete one to be able to create an extended partition"),
 			  ]);
     }
@@ -539,7 +539,7 @@ sub Create {
 	    };
 	    if (my $err = $@) {
 		if ($err =~ /raw_add/ && $hd->hasExtended && !$hd->{primary}{extended}) {
-		    $in->ask_warn(N("Error"), N("You can not create a new partition
+		    $in->ask_warn(N("Error"), N("You cannot create a new partition
 (since you reached the maximal number of primary partitions).
 First remove a primary partition and create an extended partition."));
 		    return 0;
@@ -909,7 +909,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®"));
     } else {
 	set_isFormatted($part, 0);
 	partition_table::verifyParts($hd) if !isLVM($hd);
-	$part->{mntpoint} = '' if isNonMountable($part); #- mainly for ntfs, which we can not format
+	$part->{mntpoint} = '' if isNonMountable($part); #- mainly for ntfs, which we cannot format
     }
 
     $adjust->(0) if $size < $oldsize;
@@ -1048,7 +1048,7 @@ sub Loopback {
 
     write_partitions($in, $hd) or return;
 
-    my $handle = any::inspect($real_part) or $in->ask_warn(N("Error"), N("This partition can not be used for loopback")), return;
+    my $handle = any::inspect($real_part) or $in->ask_warn(N("Error"), N("This partition cannot be used for loopback")), return;
 
     my ($min, $max) = (1, fs::loopback::getFree($handle->{dir}, $real_part));
     $max = min($max, 1 << (31 - 9)) if $real_part->{fs_type} eq 'vfat'; #- FAT does not handle file size bigger than 2GB

@@ -66,7 +66,7 @@ sub kind2description_raw {
 	LDAP      => [ N("LDAP:"), N("Tells your computer to use LDAP for some or all authentication. LDAP consolidates certain types of information within your organization."), ],
 	NIS       => [ N("NIS:"), N("Allows you to run a group of computers in the same Network Information Service domain with a common password and group file."), ],
 	winbind   => [ N("Windows Domain:"), N("Winbind allows the system to retrieve information and authenticate users in a Windows domain."), ],
-	KRB5        => [ N("Kerberos 5 :"), N("With Kerberos and Ldap for authentication in Active Directory Server "), ],
+	KRB5        => [ N("Kerberos 5 :"), N("With Kerberos and LDAP for authentication in Active Directory Server "), ],
     );
     join('', map { $_ ? qq($_->[0]\n$_->[1]) : '' } map { $kind2description{$_} } @kinds);
 }
@@ -156,7 +156,7 @@ sub ask_parameters {
 
 my %level = (
              1 => N("Use local file for users information"),
-             2 => N("Use Ldap for users information"),
+             2 => N("Use LDAP for users information"),
             );
 
  $in->ask_from('', N(" "),
@@ -351,7 +351,7 @@ EOF
 	configure_nss_ldap($authentication);
 
 output($conf_file, <<EOF);
-auth=Ldap Directory
+auth=LDAP Directory
 server=$authentication->{LDAP_server}
 realm=$authentication->{LDAPDOMAIN}
 EOF

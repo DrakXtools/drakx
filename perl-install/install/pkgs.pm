@@ -342,7 +342,7 @@ sub empty_packages {
 sub readCompssUsers {
     my ($file) = @_;
 
-    my $f = common::open_file($file) or log::l("can not find $file: $!"), return;
+    my $f = common::open_file($file) or log::l("cannot find $file: $!"), return;
     my ($compssUsers, $gtk_display_compssUsers) = eval join('', <$f>);
     if ($@) {
 	log::l("ERROR: bad $file: $@");

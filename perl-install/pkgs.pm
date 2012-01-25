@@ -74,7 +74,7 @@ sub read_rpmsrate_raw {
 		    } elsif (@diff1 == 1 && @diff2 == 1) {
 			@new_flags = (@common, join('||', $diff1[0], $diff2[0]));
 		    } else {
-			log::l("$line_nb: can not handle complicate flags for packages appearing twice ($name)");
+			log::l("$line_nb: cannot handle complicate flags for packages appearing twice ($name)");
 			$fatal_error++;
 		    }
 		    log::l("$line_nb: package $name appearing twice with different rates ($rate != " . $rates{$name} . ")") if $rate != $rates{$name};

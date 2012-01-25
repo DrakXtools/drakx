@@ -150,7 +150,7 @@ sub add_kernel() {
 	return;
     }
 
-    my $root_part = fs::get::root([ fs::get::fstab($all_hds) ]) or die "can not find root partition\n";
+    my $root_part = fs::get::root([ fs::get::fstab($all_hds) ]) or die "cannot find root partition\n";
     my %opts = (
 		root => fs::wild_device::from_part('', $root_part), 
 		initrd_options => $initrd_options,
@@ -279,10 +279,10 @@ sub _migrate_to_uuids__fstab() {
 	_should_prefer_UUID($part) or next;
 
 	my $part_ = find { fs::get::is_same_hd($part, $_) } @$fstab
-	  or log::l("migrate_to_uuids: do not know $part->{device}, can not migrate it"), next;
+	  or log::l("migrate_to_uuids: do not know $part->{device}, cannot migrate it"), next;
 
 	$part->{device_UUID} = $part_->{device_UUID}
-	  or log::l("migrate_to_uuids: no UUID for $part->{device}, can not migrate it"), next;
+	  or log::l("migrate_to_uuids: no UUID for $part->{device}, cannot migrate it"), next;
 	$part->{prefer_device_UUID} = 1;
 	$part->{prefer_device} = 0;
 	delete $part->{device_alias} if $part->{device_alias} && $part->{device_alias} =~ m!\bmapper/!; # see fs::dmraid::migrate_device_names() for more
@@ -319,7 +319,7 @@ sub _add_uuid_to_swap {
 
     my $ids = fs::type::call_blkid($part);
     $ids->{ID_FS_VERSION} eq '2' 
-      or log::l("ERROR: do not know swap version $ids->{ID_FS_VERSION}, so can not add UUID to it"), return;
+      or log::l("ERROR: do not know swap version $ids->{ID_FS_VERSION}, so cannot add UUID to it"), return;
 
     my $uuid = run_program::get_stdout('uuidgen');
     log::l("adding UUID=$uuid to $part->{device}");

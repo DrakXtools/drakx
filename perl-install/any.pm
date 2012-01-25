@@ -441,7 +441,7 @@ sub setupBootloader__general {
 		  my $ok = $b->{password} eq $b->{password2}
                     or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]);
 		  my $ok2 = !($b->{password} && $b->{method} eq 'grub-graphic')
-                    or $in->ask_warn('', N("You can not use a password with %s",
+                    or $in->ask_warn('', N("You cannot use a password with %s",
                                            bootloader::method2text($b->{method})));
 		  $ok && $ok2;
 	      } },

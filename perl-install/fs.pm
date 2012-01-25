@@ -56,7 +56,7 @@ sub read_fstab {
 		    $fs_type = $1;
 
 		    #- with supermount, the type could be something like ext2:vfat
-		    #- but this can not be done without supermount, so switching to "auto"
+		    #- but this cannot be done without supermount, so switching to "auto"
 		    $fs_type = 'auto' if $fs_type =~ /:/;
 
 		    0;

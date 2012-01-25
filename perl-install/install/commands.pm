@@ -37,7 +37,7 @@ sub false() { exit 1 }
 sub cat { @ARGV = @_; print while <> }
 sub dirname_ { print dirname(@_), "\n" }
 sub basename_ { print basename(@_), "\n" }
-sub rmdir_ { foreach (@_) { rmdir $_ or die "rmdir: can not remove $_\n" } }
+sub rmdir_ { foreach (@_) { rmdir $_ or die "rmdir: cannot remove $_\n" } }
 sub lsmod() { print "Module                  Size  Used by\n"; cat("/proc/modules") }
 sub which { 
   ARG: foreach (@_) { foreach my $c (split /:/, $ENV{PATH}) { -x "$c/$_" and print("$c/$_\n"), next ARG } }
@@ -97,7 +97,7 @@ sub rm {
 	    if (!-l $_ && -d $_) {
 		$rec or die "$_ is a directory\n";
 		&$rm(glob_($_));
-		rmdir $_ or die "can not remove directory $_: $!\n";
+		rmdir $_ or die "cannot remove directory $_: $!\n";
 	    } else { unlink $_ or die "rm of $_ failed: $!\n" }
 	}
     };
@@ -160,7 +160,7 @@ sub ls {
     @_ == 1 && -d $_[0] and @_ = glob_($_[0]);
     foreach (sort @_) {
 	if ($l) {
-	    my @s = lstat or warn("can not stat file $_\n"), next;
+	    my @s = lstat or warn("cannot stat file $_\n"), next;
 	    formline(
 "@<<<<<<<<< @<<<<<<< @<<<<<<< @>>>>>>>> @>>>>>>>>>>>>>>> @*\n",
 		     rights($s[2]), getpwuid $s[4] || $s[4], getgrgid $s[5] || $s[5],
@@ -214,15 +214,15 @@ sub dd {
 	$h{$1} = $2;
     }
     local (*IF, *OF); my ($tmp, $nb, $read);
-    ref($h{if}) eq 'GLOB' ? (*IF = $h{if}) : sysopen(IF, $h{if}, 0)    || die "error: can not open file $h{if}\n";
-    ref($h{of}) eq 'GLOB' ? (*OF = $h{of}) : sysopen(OF, $h{of}, c::O_CREAT()|c::O_WRONLY()) || die "error: can not open file $h{of}\n";
+    ref($h{if}) eq 'GLOB' ? (*IF = $h{if}) : sysopen(IF, $h{if}, 0)    || die "error: cannot open file $h{if}\n";
+    ref($h{of}) eq 'GLOB' ? (*OF = $h{of}) : sysopen(OF, $h{of}, c::O_CREAT()|c::O_WRONLY()) || die "error: cannot open file $h{of}\n";
 
     $h{bs} = removeXiBSuffix($h{bs});
 
     for ($nb = 0; !$h{count} || $nb < $h{count}; $nb++) {
 	printf "\r%02.1d%%", 100 * $nb / $h{count} if $h{count} && $percent;
-	$read = sysread(IF, $tmp, $h{bs}) or ($h{count} ? die "error: can not read block $nb\n" : last);
-	syswrite(OF, $tmp) or die "error: can not write block $nb\n";
+	$read = sysread(IF, $tmp, $h{bs}) or ($h{count} ? die "error: cannot read block $nb\n" : last);
+	syswrite(OF, $tmp) or die "error: cannot write block $nb\n";
 	$read < $h{bs} and $read = 1, last;
     }
     print STDERR "\r$nb+$read records in\n";
@@ -233,7 +233,7 @@ sub head_tail {
     my ($h, $n) = getopts(\@_, qw(hn));
     $h || @_ < to_bool($n) and die "usage: $0 [-h] [-n lines] [<file>]\n";
     $n = $n ? shift : 10;
-    my $fh = @_ ? common::open_file($_[0]) || die "error: can not open file $_[0]\n" : *STDIN;
+    my $fh = @_ ? common::open_file($_[0]) || die "error: cannot open file $_[0]\n" : *STDIN;
 
     if ($0 eq 'head') {
 	local $_;
@@ -278,7 +278,7 @@ sub more {
     require devices;
     my $tty = devices::make('tty');
     my $n = 0; 
-    open(my $IN, $tty) or die "can not open $tty\n";
+    open(my $IN, $tty) or die "cannot open $tty\n";
     local $_;
     while (<>) {
 	if (++$n == 25) {
@@ -373,7 +373,7 @@ sub dmesg() { print cat_("/tmp/syslog") }
 sub sort {
     my ($n, $h) = getopts(\@_, qw(nh));
     $h and die "usage: sort [-n] [<file>]\n";
-    my $fh = @_ ? common::open_file($_[0]) || die "error: can not open file $_[0]\n" : *STDIN;
+    my $fh = @_ ? common::open_file($_[0]) || die "error: cannot open file $_[0]\n" : *STDIN;
     if ($n) {
 	print(sort { $a <=> $b } <$fh>);
     } else {

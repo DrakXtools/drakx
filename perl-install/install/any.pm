@@ -91,7 +91,7 @@ sub preConfigureTimezone {
     my ($o) = @_;
     require timezone;
    
-    #- can not be done in install cuz' timeconfig %post creates funny things
+    #- cannot be done in install cuz' timeconfig %post creates funny things
     add2hash($o->{timezone}, timezone::read()) if $o->{isUpgrade};
 
     $o->{timezone}{timezone} ||= timezone::bestTimezone($o->{locale}{country});
@@ -890,7 +890,7 @@ sub generate_automatic_stage1_params {
 	my @l = install::ftp::parse_ftp_url($ENV{URLPREFIX});
 	@ks = (server => $l[0], directory => $l[1], user => $l[2], pass => $l[3]);
     } elsif ($o->{method} eq 'nfs') {
-	cat_("/proc/mounts") =~ m|(\S+):(\S+)\s+/tmp/media| or internal_error("can not find nfsimage");
+	cat_("/proc/mounts") =~ m|(\S+):(\S+)\s+/tmp/media| or internal_error("cannot find nfsimage");
 	@ks = (server => $1, directory => $2);
     }
     @ks = (method => $method, @ks);
@@ -998,7 +998,7 @@ sub migrate_device_names {
 	goto found_one;
     }
 	
-    #- we can not find one and only one matching hd
+    #- we cannot find one and only one matching hd
     my @from_fstab_not_handled = map { @$_ } @from_fstab_per_hds;
     log::l("we still do not know what to do with: " . join(' ', map { $_->{device} } @from_fstab_not_handled));
 

@@ -692,7 +692,7 @@ OS installed on your machine.
 
  * if a GRUB or LILO boot sector is found, it'll replace it with a new one.
 
-If DrakX can not determine where to place the boot sector, it'll ask you
+If DrakX cannot determine where to place the boot sector, it'll ask you
 where it should place it. Generally, the \"%s\" is the safest place.
 Choosing \"%s\" will not install any boot loader. Use this option only if you
 know what you're doing.", N("First sector of drive (MBR)"), N("Skip"));

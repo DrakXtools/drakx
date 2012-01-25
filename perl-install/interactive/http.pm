@@ -115,7 +115,7 @@ sub ask_fromW {
 
 	open_stdout(); # re-open for writing
 	cont_stdout(N("Error"));
-	print $q->h1(N("Error")), $q->p("Sorry, you can not go back");
+	print $q->h1(N("Error")), $q->p("Sorry, you cannot go back");
 	goto redisplay;
     }
     each_index {

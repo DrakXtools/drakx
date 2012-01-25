@@ -309,7 +309,7 @@ sub _gtk__Pixbuf {
 
     if (!$w) {
 	my $name = delete $opts->{file} or internal_error("missing file");
-	my $file = _find_imgfile($name) or internal_error("can not find image $name");
+	my $file = _find_imgfile($name) or internal_error("cannot find image $name");
 	if (my $size = delete $opts->{size}) {
 	    $w = Gtk2::Gdk::Pixbuf->new_from_file_at_scale($file, $size, $size, 1);
 	} else {
@@ -373,11 +373,11 @@ sub _gtk__Image {
     }
 
     if (my $name = delete $opts->{file}) {
-	my $file = _find_imgfile(may_apply($w->{format}, $name)) or internal_error("can not find image $name");
+	my $file = _find_imgfile(may_apply($w->{format}, $name)) or internal_error("cannot find image $name");
 	$w->{set_from_file}->($w, $file, delete $opts->{size});
     } elsif (my $file_ref = delete $opts->{file_ref}) {
 	my $set = sub {
-	    my $file = _find_imgfile(may_apply($w->{format}, $$file_ref)) or internal_error("can not find image $$file_ref");
+	    my $file = _find_imgfile(may_apply($w->{format}, $$file_ref)) or internal_error("cannot find image $$file_ref");
 	    $w->{set_from_file}->($w, $file, delete $opts->{size});
 	};
 	gtkval_register($w, $file_ref, $set);
@@ -839,7 +839,7 @@ sub _gtk_any_Window {
 	if ($class eq 'Window') {
 	    $w = "Gtk2::$class"->new(delete $opts->{type} || 'toplevel');
 	} elsif ($class eq 'Plug') {
-	    $opts->{socket_id} or internal_error("can not create a Plug without a socket_id");
+	    $opts->{socket_id} or internal_error("cannot create a Plug without a socket_id");
 	    $w = "Gtk2::$class"->new(delete $opts->{socket_id});
 	} elsif ($class eq 'FileChooserDialog') {
             my $action = delete $opts->{action} || internal_error("missing action for FileChooser");
@@ -867,7 +867,7 @@ sub _gtk_any_Window {
 	    if (my $f = _find_imgfile($name)) {
 		$w->set_icon(gtknew('Pixbuf', file => $f));
 	    } elsif (!$icon_no_error) {
-		internal_error("can not find $name");
+		internal_error("cannot find $name");
 	    }
 	}
     }

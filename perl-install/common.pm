@@ -109,7 +109,7 @@ sub setVirtual {
 
 sub nonblock {
     my ($F) = @_;
-    fcntl($F, c::F_SETFL(), fcntl($F, c::F_GETFL(), 0) | c::O_NONBLOCK()) or die "can not fcntl F_SETFL: $!";
+    fcntl($F, c::F_SETFL(), fcntl($F, c::F_GETFL(), 0) | c::O_NONBLOCK()) or die "cannot fcntl F_SETFL: $!";
 }
 
 #- return a size in sector
@@ -267,7 +267,7 @@ sub open_file {
 
 sub secured_file {
     my ($f) = @_;
-    c::is_secure_file($f) or die "can not ensure a safe $f";
+    c::is_secure_file($f) or die "cannot ensure a safe $f";
     $f;
 }
 

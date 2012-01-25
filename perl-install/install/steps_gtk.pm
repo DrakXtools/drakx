@@ -438,7 +438,7 @@ sub choosePackagesTree {
 					    }
 					}
 				    }
-				    $error = [ N("You can not select/unselect this package"),
+				    $error = [ N("You cannot select/unselect this package"),
 					       formatList(20, map { my $rb = $state->{rejected}{$_}{backtrack};
 									    my @froms = keys %{$rb->{closure} || {}};
 									    my @unsatisfied = @{$rb->{unsatisfied} || []};
@@ -450,7 +450,7 @@ sub choosePackagesTree {
 									    $_ . ($s ? " ($s)" : '');
 									} sort @ask_unselect) ];
 				} elsif (install::pkgs::correctSize($size / sqr(1024)) > $available / sqr(1024)) {
-				    $error = N("You can not select this package as there is not enough space left to install it");
+				    $error = N("You cannot select this package as there is not enough space left to install it");
 				} elsif (@l > @_ && $common->{state}{auto_deps}) {
 				    $o->ask_okcancel(N("Confirmation"), [ $isSelection ? 
 							   N("The following packages are going to be installed") :
@@ -479,11 +479,11 @@ sub choosePackagesTree {
 			    check_interactive_to_toggle => sub {
 				my $p = install::pkgs::packageByName($packages, $_[0]) or return;
 				if ($p->flag_base) {
-				    $o->ask_warn('', N("This is a mandatory package, it can not be unselected"));
+				    $o->ask_warn('', N("This is a mandatory package, it cannot be unselected"));
 				} elsif ($p->flag_installed && !$p->flag_upgrade) {
-				    $o->ask_warn('', N("You can not unselect this package. It is already installed"));
+				    $o->ask_warn('', N("You cannot unselect this package. It is already installed"));
 				} elsif ($p->flag_selected && $p->flag_installed) {
-				    $o->ask_warn('', N("You can not unselect this package. It must be upgraded"));
+				    $o->ask_warn('', N("You cannot unselect this package. It must be upgraded"));
 				} else { return 1 }
 				return;
 			    },

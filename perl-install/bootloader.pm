@@ -1929,7 +1929,7 @@ sub install {
     my ($bootloader, $all_hds) = @_;
 
     if (my $part = fs::get::device2part($bootloader->{boot}, [ fs::get::fstab($all_hds) ])) {
-	die N("You can not install the bootloader on a %s partition\n", $part->{fs_type})
+	die N("You cannot install the bootloader on a %s partition\n", $part->{fs_type})
 	  if $part->{fs_type} eq 'xfs';
     }
     $bootloader->{keytable} = keytable($bootloader->{keytable});
@@ -2063,7 +2063,7 @@ sub update_for_renumbered_partitions {
     } $main_method ? $main_method : ('lilo', 'grub');
 
     if (intersection(\@needed, [ map { $_->{name} } @changed_configs ])) {
-	$in->ask_warn('', N("The bootloader can not be installed correctly. You have to boot rescue and choose \"%s\"", 
+	$in->ask_warn('', N("The bootloader cannot be installed correctly. You have to boot rescue and choose \"%s\"", 
 			    N("Re-install Boot Loader")));
     }
     1;

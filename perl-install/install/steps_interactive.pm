@@ -74,7 +74,7 @@ fonts, spell checkers, various programs translated etc. that
 varies from language to language).")) if $o->{locale}{lang} !~ /^en/ && !lang::load_mo();
     } else {
 	#- no need to have this in po since it is never translated
-	$o->ask_warn('', "The characters of your language can not be displayed in console,
+	$o->ask_warn('', "The characters of your language cannot be displayed in console,
 so the messages will be displayed in english during installation") if $ENV{LANGUAGE} eq 'C';
     }
 }

@@ -296,7 +296,7 @@ sub create_display_box {
 
     my $sep_count = @parts - 1;
     #- ratio used to compute initial partition pixel width (each partition should be > min_width)
-    #- though, the pixel/sectors ratio can not be the same for all the partitions
+    #- though, the pixel/sectors ratio cannot be the same for all the partitions
     my $initial_ratio = $totalsectors ? ($width - @parts * $minwidth - $sep_count) / $totalsectors : 1;
 
     my $vbox = Gtk2::VBox->new;
@@ -428,7 +428,7 @@ sub display_choices {
 
     @solutions = @sol if @sol > 1;
     log::l("solutions: ", int @solutions);
-    @solutions or $o->ask_warn(N("Partitioning"), N("I can not find any room for installing")), die 'already displayed';
+    @solutions or $o->ask_warn(N("Partitioning"), N("I cannot find any room for installing")), die 'already displayed';
 
     log::l('HERE: ', join(',', map { $solutions{$_}[1] } @solutions));
 
@@ -574,7 +574,7 @@ sub main {
                " (all solutions found: " . join('', map { $_->[1] } @solutions) . ")");
         @solutions = @sol if @sol > 1;
         log::l("solutions: ", int @solutions);
-        @solutions or $o->ask_warn(N("Partitioning"), N("I can not find any room for installing")), die 'already displayed';
+        @solutions or $o->ask_warn(N("Partitioning"), N("I cannot find any room for installing")), die 'already displayed';
         log::l('HERE: ', join(',', map { $_->[1] } @solutions));
         $o->ask_from_({ 
             title => N("Partitioning"),

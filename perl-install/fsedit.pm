@@ -244,7 +244,7 @@ sub get_hds {
 		    #- already handled in cdie handler above
 		} elsif ($handle_die_and_cdie->()) {
 		} elsif ($o_in && $o_in->ask_yesorno(N("Error"), 
-N("I can not read the partition table of device %s, it's too corrupted for me :(
+N("I cannot read the partition table of device %s, it's too corrupted for me :(
 I can try to go on, erasing over bad partitions (ALL DATA will be lost!).
 The other solution is to not allow DrakX to modify the partition table.
 (the error is %s)
@@ -460,11 +460,11 @@ Please be sure to add a /boot partition");
     }
 
     if ($mntpoint eq "/boot" && (isLUKS($part) || isRawLUKS($part)))  {
-	die N("You can not use an encrypted file system for mount point %s", "/boot");
+	die N("You cannot use an encrypted file system for mount point %s", "/boot");
     }
 
     #- NB: if the LV doesn't exist, lv_nb_pvs returns 0
-    die N("You can not use the LVM Logical Volume for mount point %s since it spans physical volumes", $mntpoint)
+    die N("You cannot use the LVM Logical Volume for mount point %s since it spans physical volumes", $mntpoint)
       if $mntpoint eq '/boot' && isLVM($part) && lvm::lv_nb_pvs($part) > 1;
     cdie N("You've selected the LVM Logical Volume as root (/).
 The bootloader is not able to handle this when the volume spans physical volumes.
@@ -478,7 +478,7 @@ You should create a /boot partition first") if $mntpoint eq "/" && isLVM($part) 
       if !isTrueLocalFS($part) && $mntpoint eq '/';
     die N("You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount point\n")
       if !isTrueFS($part) && member($mntpoint, '/home', fs::type::directories_needed_to_boot());
-    die N("You can not use an encrypted file system for mount point %s", $mntpoint)
+    die N("You cannot use an encrypted file system for mount point %s", $mntpoint)
       if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var /boot));
 
     local $part->{mntpoint} = $mntpoint;

@@ -532,7 +532,7 @@ sub add_extended {
     my $e = $hd->{primary}{extended};
 
     if ($e && !verifyInside($part, $e)) {
-	#-die "sorry, can not add outside the main extended partition" unless $::unsafe;
+	#-die "sorry, cannot add outside the main extended partition" unless $::unsafe;
 	my $end = $e->{start} + $e->{size};
 	my $start = min($e->{start}, $part->{start});
 	$end = max($end, $part->{start} + $part->{size}) - $start;
@@ -542,7 +542,7 @@ sub add_extended {
 	    local $e->{size} = $end - $start;
 	    eval { verifyPrimary($hd->{primary}) };
 	    $@ and die
-N("You have a hole in your partition table but I can not use it.
+N("You have a hole in your partition table but I cannot use it.
 The only solution is to move your primary partitions to have the hole next to the extended partitions.");
 	}
     }
