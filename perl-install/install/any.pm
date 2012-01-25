@@ -554,6 +554,8 @@ sub default_packages {
     push @l, qw(acpi acpid mageia-gfxboot-theme);
     # will get auto selected at summary stage for firewall:
     push @l, qw(shorewall mandi-ifw);
+    # only needed for CDs/DVDs installations:
+    push @l, 'perl-Hal-Cdroms' if $o->{method} eq 'cdrom';
 
     my $dmi_BIOS = detect_devices::dmidecode_category('BIOS');
     my $dmi_Base_Board = detect_devices::dmidecode_category('Base Board');
