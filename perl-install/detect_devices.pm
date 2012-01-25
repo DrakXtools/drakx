@@ -1188,15 +1188,15 @@ sub is_mips_st_ls2f() {
     to_bool(cat_('/proc/cpuinfo') =~ /st-ls2f/);
 }
 
-sub is_arm_openrd_client {
+sub is_arm_openrd_client() {
     to_bool(cat_('/proc/cpuinfo') =~ /OpenRD Client/);
 }
 
-sub is_arm_versatile {
+sub is_arm_versatile() {
     to_bool(cat_('/proc/cpuinfo') =~ /ARM-Versatile/);
 }
 
-sub is_arm_efikamix {
+sub is_arm_efikamix() {
     to_bool(cat_('/proc/cpuinfo') =~ /Efika MX/);
 }
 
