@@ -144,16 +144,6 @@ int string_array_length(char ** a)
 	return i;
 }
 
-int kernel_version(void)
-{
-        struct utsname val;
-        if (uname(&val)) {
-                log_perror("uname failed");
-                return -1;
-        }
-        return charstar_to_int(val.release + 2);
-}
-
 char * asprintf_(const char *msg, ...)
 {
         int n;
