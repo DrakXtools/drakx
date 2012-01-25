@@ -11,14 +11,20 @@ echo -e "\t\t\tWelcome to \\033[1;36mMandriva\\033[0;39m Linux"
 action "Remounting root filesystem in read-write mode" mount -n -o remount,rw /
 
 ln -s /tmp/stage2/etc/* /etc 2>/dev/null
+# make passwd changable
+rm -f /etc/passwd
+cp /tmp/stage2/etc/passwd /etc/
 
 rm -f /dev ; cp -a /tmp/stage2/dev /dev
 
-mkdir -p /mnt /var/log
+mkdir -p /mnt /var/log /dev/pts
 
 >/etc/mtab
 mount -f /
 mount -f /proc
+# mount /dev/pts and link /dev/ptmx so dropbear works
+mount /dev/pts
+ln -s /dev/pts/ptmx /dev/ptmx
 
 # Set the hostname.
 action "Setting hostname rescue" hostname rescue

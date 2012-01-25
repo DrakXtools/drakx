@@ -62,6 +62,11 @@
   mkfs.reiserfs resize_reiserfs reiserfstune reiserfsck
   mkfs.xfs xfs_admin xfs_repair fsck.xfs
   mkfs.ntfs mkdosfs dosfslabel mkntfs ntfsresize ntfslabel 
+
+  dropbear dropbearkey
+ 
+  screen
+
   <if ARCH="i.86|x86_64">
     mkfs.jfs fsck.jfs jfs_tune
   </if>
@@ -243,6 +248,7 @@
   termcap
   protocols
   services
+  shells
   ssh/ssh_config
 </from>
 
@@ -318,7 +324,9 @@
 </from>
 <from dir=".">
     <to dir="/usr/sbin">
-      diskdrake-resize
+        diskdrake-resize
+        genpasswd
+        startssh
     </to>
 </from>
 <if set="RESCUE_FLASH">
