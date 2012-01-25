@@ -54,6 +54,9 @@ sub floppies {
     require modules;
     state @fds;
     state $legacy_already_detected;
+    if (arch =~ /mips/) {
+      $o_not_detect_legacy_floppies = 1;
+    }
     if (!$o_not_detect_legacy_floppies && !$legacy_already_detected) {
         $legacy_already_detected = 1;
         eval { modules::load("floppy") if $::isInstall };
@@ -1161,9 +1164,28 @@ sub BIGMEM() {
 
 sub is_i586() {
     my $cpuinfo = cat_('/proc/cpuinfo');
+    if (arch() !~ /86/) {
+        return 0;
+    }
     $cpuinfo =~ /^cpu family\s*:\s*(\d+)/m && $1 < 6 ||
       $cpuinfo =~ /^model name\s*:\s*Transmeta.* TM5800/m || # mdvbz#37866
       !has_cpu_flag('cmov');
+}
+
+sub is_mips_lemote() {
+    to_bool(cat_('/proc/cpuinfo') =~ /lemote/);
+}
+
+sub is_mips_ict() {
+    to_bool(cat_('/proc/cpuinfo') =~ /ict/);
+}
+
+sub is_mips_gdium() {
+    to_bool(cat_('/proc/cpuinfo') =~ /gdium/);
+}
+
+sub is_mips_st_ls2f() {
+    to_bool(cat_('/proc/cpuinfo') =~ /st-ls2f/);
 }
 
 sub is_xbox() {
@@ -1199,6 +1221,9 @@ sub has_cpu_flag {
 
 sub matching_types() {
     +{
+	mips_lemote => is_mips_lemote(),
+	mips_ict => is_mips_ict(),
+	mips_st_ls2f => is_mips_st_ls2f(),
 	laptop => isLaptop(),
 	'numpad' => hasNumpad(),
 	'touchpad' => hasTouchpad(),

@@ -13,6 +13,7 @@ sub guess_mount_point {
     my %l = (
 	     '/'     => 'etc/fstab',
 	     '/boot' => 'vmlinuz',
+	     '/boot' => 'vmlinux',
 	     '/tmp'  => '.X11-unix',
 	     '/usr'  => 'src',
 	     '/var'  => 'spool',

@@ -22,7 +22,7 @@ use modules;
 #-#####################################################################################
 #- Functions
 #-#####################################################################################
-my $vmlinuz_regexp = 'vmlinuz|win4lin';
+my $vmlinuz_regexp = 'vmlinu[xz]|win4lin';
 my $decompose_vmlinuz_name = qr/((?:$vmlinuz_regexp).*?)-(\d+\.\d+.*)/;
 
 sub expand_vmlinuz_symlink {
@@ -57,7 +57,7 @@ sub kernel_str2short_name {
 
 sub basename2initrd_basename {
     my ($basename) = @_;
-    $basename =~ s!vmlinuz-?!!; #- here we do not use $vmlinuz_regexp since we explictly want to keep all that is not "vmlinuz"
+    $basename =~ s!vmlinu[zx]-?!!; #- here we do not use $vmlinuz_regexp since we explictly want to keep all that is not "vmlinuz"
     'initrd' . ($basename ? "-$basename" : '');    
 }
 sub kernel_str2vmlinuz_long {
@@ -188,7 +188,7 @@ sub read {
 	    if (m!/fd\d+$!) {
 		warn "not checking the method on floppy, assuming $main_method is right\n";
 		$main_method;
-	    } elsif (member($main_method, qw(yaboot cromwell silo))) {
+	    } elsif (member($main_method, qw(yaboot cromwell silo pmon2000))) {
 		#- not checking, there's only one bootloader anyway :)
 		$main_method;
 	    } elsif (my $type = partition_table::raw::typeOfMBR($_)) {
@@ -408,6 +408,11 @@ sub read_silo() {
 				    });
     $bootloader->{method} = 'silo';
     $bootloader;
+}
+sub read_pmon2000() {
+    my %b;
+    $b{method} = 'pmon2000';
+    \%b;
 }
 sub read_cromwell() {
     my %b;
@@ -724,6 +729,7 @@ sub add_kernel {
 
     #- new versions of yaboot do not handle symlinks
     $b_nolink ||= arch() =~ /ppc/;
+    $b_no_initrd //= arch() =~ /mips/ && !detect_devices::is_mips_gdium();
 
     $b_nolink ||= $kernel_str->{use_long_name};
 
@@ -742,11 +748,25 @@ sub add_kernel {
 
     if (!$b_nolink) {
 	$v->{kernel_or_dev} = '/boot/' . kernel_str2vmlinuz_short($kernel_str);
-	_do_the_symlink($bootloader, $v->{kernel_or_dev}, $vmlinuz_long);
+	if (arch() =~ /mips/) {
+	    log::l("link $::prefix/boot/$vmlinuz_long -> $::prefix$v->{kernel_or_dev}");
+	    linkf("$::prefix/boot/$vmlinuz_long", $::prefix . $v->{kernel_or_dev});
+	    linkf("$::prefix/boot/$vmlinuz_long", $::prefix . $v->{kernel_or_dev} . ".32");
+	} else {
+	    _do_the_symlink($bootloader, $v->{kernel_or_dev}, $vmlinuz_long);
+	}
 
 	if ($v->{initrd}) {
 	    $v->{initrd} = '/boot/' . kernel_str2initrd_short($kernel_str);
-	    _do_the_symlink($bootloader, $v->{initrd}, $initrd_long);
+	    if (arch() =~ /mips/) {
+		log::l("link $::prefix/boot/$initrd_long -> $::prefix$v->{initrd}");
+		linkf("$::prefix/boot/$initrd_long", $::prefix . $v->{initrd});
+		if ($v->{initrd} =~ s/.img$/.gz/) {
+		    linkf("$::prefix/boot/$initrd_long", $::prefix . $v->{initrd});
+		}
+	    } else {
+		_do_the_symlink($bootloader, $v->{initrd}, $initrd_long);
+	    }
 	}
     }
 
@@ -1157,6 +1177,7 @@ sub method_choices_raw {
     arch() =~ /ppc/ ? 'yaboot' : 
     arch() =~ /ia64/ ? 'lilo' : 
     arch() =~ /sparc/ ? 'silo' : 
+    arch() =~ /mips/ ? 'pmon2000' : 
       (
        if_(!$b_prefix_mounted || whereis_binary('grub', $::prefix), 
 	   'grub-graphic', 'grub-menu'),
@@ -1318,6 +1339,19 @@ sub when_config_changed_yaboot {
     }	
     my $error;
     run_program::rooted($::prefix, "/usr/sbin/ybin", "2>", \$error) or die "ybin failed: $error";
+}
+
+sub install_pmon2000 { 
+    my ($_bootloader, $_all_hds) = @_;
+    log::l("Mips/pmon2000 - nothing to install...");
+}
+sub write_pmon2000 { 
+    my ($_bootloader, $_all_hds) = @_;
+    log::l("Mips/pmon2000 - nothing to write...");
+}
+sub when_config_changed_pmon2000 {
+    my ($_bootloader) = @_;
+    log::l("Mips/pmon2000 - nothing to do...");
 }
 
 sub install_cromwell { 

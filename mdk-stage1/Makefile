@@ -138,6 +138,9 @@ endif
 ifeq (arm, $(ARCH))
 DIRS += sysfs
 endif
+ifeq (mips, $(ARCH))
+DIRS += sysfs
+endif
 
 
 
@@ -157,7 +160,9 @@ endif
 ifeq (arm,$(ARCH))
 PCMCIA_LIB = sysfs/libsysfs.a
 endif
-
+ifeq (mips,$(ARCH))
+PCMCIA_LIB = sysfs/libsysfs.a
+endif
 
 
 USB_DEFS_GEN = -DENABLE_USB
