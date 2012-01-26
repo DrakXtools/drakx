@@ -63,7 +63,7 @@ my %edit_LABEL = ( # package, command, option
     ntfs     => [ 'ntfsprogs', 'ntfslabel' ],
    'ntfs-3g' => [ 'ntfsprogs', 'ntfslabel' ],
 #    btrfs
-#    nilfs2
+    nilfs2 => [ 'nilfs-utils', 'nilfs-tune', '-L' ],
 );
 
 sub package_needed_for_partition_type {
