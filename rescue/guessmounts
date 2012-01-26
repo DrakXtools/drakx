@@ -55,7 +55,7 @@ if (@$raid_parts) {
 }
 
 my @fstab;
-my ($root, @roots);
+my ($root, $fs, @roots);
 
 foreach (@$normal_parts) {
     my $dev = devices::make($_->{device});
@@ -69,7 +69,7 @@ foreach (@$normal_parts) {
 	print STDERR "=> found a %s root partition on $dev\n=> type $fs, version `",
 	  $release, "'\n";
 	@fstab = fs::read_fstab($target, '/etc/fstab');
-	push @roots, { dev => $dev, release => $release };
+	push @roots, { dev => $dev, release => $release, fs => $fs };
     }
     system('umount', $target) == 0 or die "error unmounting $target\n";
 }
@@ -77,10 +77,15 @@ foreach (@$normal_parts) {
 # Try Mandriva first:
 if (@roots) {
     @roots = map { @$_ } partition { $_->{release} =~ /Mandriva/ } @roots;
-    $root = first(@roots)->{dev};
+    my $selected = first(@roots);
+    $root = $selected->{dev};
+    $fs = $selected->{fs};
+    print STDERR "=> Selecting $root as root fs\n";
 }
 
 if ($root) {
+    system("mount -t $fs $root $target 2>/dev/null");
+
     print STDERR "\nMounting other partitions from fstab on $target...\n";
     foreach (@fstab) {
 	my ($valued_options, $options) = fs::mount_options::unpack($_);
