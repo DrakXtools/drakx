@@ -56,7 +56,12 @@ sub lvm_cmd {
 }
 sub lvm_cmd_or_die {
     my ($prog, @para) = @_;
-    lvm_cmd($prog, @para) or die "$prog failed\n";
+    my @err;
+    lvm_cmd("2>", \@err, $prog, @para) or do {
+        my $err = $err[-1]; # prevent "Modification of non-creatable array value attempted"
+        chomp($err);
+        die "$prog failed: $err\n";
+    };
 }
 
 sub check {
