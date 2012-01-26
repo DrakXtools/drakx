@@ -3,6 +3,9 @@
   o include better C traces in reports
   o remove top of traces that is inside bug handler from report
   o no more run GDB (too late & faster)
+  o regroup misc data in bugzilla
+  o do not keep around the segfaulted process once we collected all needed data
+    when running drakbug
 - diskdrake:
   o always align partitions to start at megabyte boundaries to avoid
     performance issues with drives with 4k physical sectors (mga#1215)

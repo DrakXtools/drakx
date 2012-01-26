@@ -275,16 +275,13 @@ sub report_bug_to_bugzilla() {
                            'comment=' . uri_escape(
                                if_($incident,
                                    qq(The "$prog" program crashed. Drakbug-$rel caught it.
-Theme name: $theme_name
 
 ) . ($text || "Please describe what you were doing when it crashed.") . "\n\n"
   . ($error ? $error :
   qq(If you can, try to run the "$prog" program from a terminal and copy and paste here any error messages and/or backtrace))
-    . if_($segfaulted, qq(
-(interesting part of backtrace is below Perl_pp_fork(), Perl_pp_waitpid() or sighandler):
-)),
                                )
                                  . qq(
+Theme name: $theme_name
 Kernel version = $kernel_release
 Distribution=) . cat_('/etc/release')
 . if_($cpuinfo, "CPU=$cpuinfo")

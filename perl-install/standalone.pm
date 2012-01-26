@@ -216,7 +216,7 @@ sub bug_handler {
     	exit(1);
     }
     $progname =~ s|.*/||;
-    system('drakbug',  if_($error, '--error', $error), '--incident', $progname);
+    exec('drakbug',  if_($error, '--error', $error), '--incident', $progname);
     c::_exit(1);
 }
 
