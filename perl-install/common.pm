@@ -264,10 +264,19 @@ sub open_file {
     open($F, $file) ? $F : do { log::l("Can not open $file: $!"); undef };
 }
 
-
+# FIXME: callers should just use mkstemp in /tmp instead of relying on $TMPDIR || $ENV{HOME}/tmp
+# or we should just move the choice of directoyr from callers to here:
+# my $tmpdir = find { -d $_ } $ENV{TMPDIR}, "$ENV{HOME}/tmp", "$::prefix/tmp";
 sub secured_file {
     my ($f) = @_;
-    mkdir_p(dirname($f));
+    my $d = dirname($f);
+    if (! -d $d) {
+        mkdir_p($d);
+	if ($d =~ /^$ENV{HOME}/) {
+	   my ($user) = grep { $_->[7] eq $ENV{HOME} } list_passwd();
+           chown($user->[2], $user->[3], $d);
+	}
+    }
     c::is_secure_file($f) or die "cannot ensure a safe $f";
     $f;
 }
