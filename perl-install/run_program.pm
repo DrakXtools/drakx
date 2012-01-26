@@ -48,12 +48,15 @@ sub raw {
     ($stdout_mode, $stdout_raw, @args) = @args if $args[0] =~ /^>>?$/;
     ($stderr_mode, $stderr_raw, @args) = @args if $args[0] =~ /^2>>?$/;
 
+    my $home;
     if ($options->{as_user}) {
         my $user;
         $user = $ENV{USERHELPER_UID} && getpwuid($ENV{USERHELPER_UID});
         $user ||= common::get_parent_uid();
         $options->{setuid} = getpwnam($user) if $user;
+        $home = $user->[7] if $user;
     }
+    local $ENV{HOME} = $home if $home;
 
     my $args = $options->{sensitive_arguments} ? '<hidden arguments>' : join(' ', @args);
     log::explanations("running: $real_name $args" . ($root ? " with root $root" : ""));
