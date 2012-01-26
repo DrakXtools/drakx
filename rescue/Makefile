@@ -22,8 +22,20 @@ dist-svn:
 	tar cfj $(PRODUCT)-$(VERSION).tar.bz2 $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
 
+dist-git:
+	@cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD rescue tools/install-xml-file-list Makefile.config | xz >$(PRODUCT)-$(VERSION).tar.xz;
+
 tar:
-	@make dist-svn
+	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
+	@if [ -e "../.svn" ]; then \
+		$(MAKE) dist-svn; \
+	elif [ -e "../.git" ]; then \
+		$(MAKE) dist-git; \
+	else \
+		echo "Unknown SCM (not SVN nor GIT)";\
+		exit 1; \
+	fi;
+	$(info $(PRODUCT)-$(VERSION).tar.xz is ready)
 
 clean: 
 	rm -f $(RESCUE) kernel_read_part
