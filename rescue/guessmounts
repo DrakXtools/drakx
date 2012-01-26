@@ -55,7 +55,7 @@ if (@$raid_parts) {
 }
 
 my @fstab;
-my $root;
+my ($root, @roots);
 
 foreach (@$normal_parts) {
     my $dev = devices::make($_->{device});
@@ -65,14 +65,19 @@ foreach (@$normal_parts) {
     } fs::type::true_local_fs_types() or next;
 
     if (my $release_file = common::release_file($target)) {
-	print STDERR "=> found a Mandriva Linux root partition on $dev\n=> type $fs, version `",
-	  chomp_(cat_("$target$release_file")), "'\n";
+	my $release = chomp_(cat_("$target$release_file"));
+	print STDERR "=> found a %s root partition on $dev\n=> type $fs, version `",
+	  $release, "'\n";
 	@fstab = fs::read_fstab($target, '/etc/fstab');
-	$root = $dev;
-	last;
-    } else {
-	system('umount', $target) == 0 or die "error unmounting $target\n";
+	push @roots, { dev => $dev, release => $release };
     }
+    system('umount', $target) == 0 or die "error unmounting $target\n";
+}
+
+# Try Mandriva first:
+if (@roots) {
+    @roots = map { @$_ } partition { $_->{release} =~ /Mandriva/ } @roots;
+    $root = first(@roots)->{dev};
 }
 
 if ($root) {
