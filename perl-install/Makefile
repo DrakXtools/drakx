@@ -68,8 +68,20 @@ dist-svn: localcopy
 	tar cfa $(PACKAGE)-$(PKGVERSION).tar.xz $(PACKAGE)-$(PKGVERSION)
 	rm -rf $(PACKAGE)-$(PKGVERSION)
 
+dist-git:
+	@cd ..; git archive --prefix=$(PACKAGE)-$(PKGVERSION)/ HEAD perl-install/{[^i]*,int*} $(OTHERS) kernel/list_modules.pm Makefile.config | xz >$(PACKAGE)-$(PKGVERSION).tar.xz;
+
 tar:
-	@make dist-svn
+	rm -rf $(PACKAGE)*.tar* $(PACKAGE)-$(PKGVERSION)
+	if [ -e "../.svn" ]; then \
+		$(MAKE) dist-svn; \
+	elif [ -e "../.git" ]; then \
+		$(MAKE) dist-git; \
+	else \
+		echo "Unknown SCM (not SVN nor GIT)";\
+		exit 1; \
+	fi;
+	$(info $(PACKAGE)-$(PKGVERSION).tar.xz is ready)
 
 # rules to build a distributable rpm
 
