@@ -15,8 +15,7 @@ all: xs
 clean xs:
 	make -C .. $@
 
-tar:
-	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
+dist-svn:
 	mkdir -p $(PRODUCT)-$(VERSION)
 	svn export -q -rBASE .. $(PRODUCT)-$(VERSION)/perl-install
 	svn export -q -rBASE ../../tools $(PRODUCT)-$(VERSION)/tools
@@ -24,6 +23,10 @@ tar:
 	cp ../../Makefile.config $(PRODUCT)-$(VERSION)/
 	tar cfa $(PRODUCT)-$(VERSION).tar.xz $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
+
+tar:
+	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
+	@make dist-svn
 
 install:
 	$(MAKE) full_stage2
