@@ -150,7 +150,7 @@ sub should_reconfigure_x_driver {
     # auto reconfigure x11 only on first time default driver have changed:
     if ($previous_xorg_config{XORG_DRV} ne $new_key) {
 	if (!member($current_driver, $card_data->{Driver}, $card_data->{Driver2}, 'fbdev', 'vesa')) {
-	    $reason = N("The graphic card '%s' is no more supported by the '%s' driver",
+	    $reason = N("The graphics card '%s' is no longer supported by driver '%s'",
 			 $device->{description}, $current_driver);
 	    $reconfigure = 1;
 	 }
@@ -251,7 +251,7 @@ foreach my $card (@cards) {
         my $driver = $cards[0]{Driver};
         my $old_driver = cat_('/etc/X11/xorg.conf') =~ /Driver "($card->{xorg_driver_regexp})"/ && $1;
         if ($old_driver) {
-            my $reason = N("The proprietary kernel driver was not found for '%s' X.org driver",
+            my $reason = N("The proprietary kernel driver was not found for X.org driver '%s'",
                            $old_driver);
             $reboot_needed |= switch_x_driver($card->{xorg_driver_regexp}, $driver, $reason);
             $do_udev_settle = 1;
@@ -424,12 +424,21 @@ if (!$reboot_needed && text2bool($cfg{HANDLE_KMS_BOOT_CONFIG})) {
         # or free driver loaded while vesa is configured).
         my $kms_changed = Xconfig::various::setup_kms();
         $reboot_needed |= $kms_changed;
-        if (!$reboot_needed && cat_("/proc/cmdline") !~ /\bnokmsboot\b/) {
-            # Wrong driver loaded but fixing the bootloader configuration failed.
-            # Possibly a direct boot from another bootloader.
-            dialog_with_timeout("warn", N("Display driver issue"),
-                N("The display driver currently configured requires you to use the 'nokmsboot' boot option to prevent the KMS driver of the kernel from being loaded in the boot process. Startup of the X server may now fail as that option was not specified."),
-                60, $plymouth);
+        if (!$reboot_needed) {
+	    my $kms_allowed = system("display_driver_helper", "--is-kms-allowed") == 0;
+	    if (!$kms_allowed && cat_("/proc/cmdline") !~ /\bnokmsboot\b/) {
+                # Wrong driver loaded and boot parameters incorrect, but fixing the
+                # bootloader configuration failed.
+                # Possibly a direct boot from another bootloader.
+                dialog_with_timeout("warn", N("Display driver issue"),
+                    N("The display driver currently configured requires you to use the 'nokmsboot' boot option to prevent the KMS driver of the kernel from being loaded in the boot process. Startup of the X server may now fail as that option was not specified."),
+                    60, $plymouth);
+            } else {
+                # Wrong driver loaded even while boot parameters were correct.
+                dialog_with_timeout("warn", N("Display driver issue"),
+                    N("Detected a loaded display driver kernel module which conflicts with the driver the X server is configured to use. Startup of the X server may now fail."),
+                    60, $plymouth);
+            }
         }
     } elsif (-e "/dev/.late_kms") {
         # initrd didn't load the KMS driver; non-fatal but ugly, fix it for next boot
