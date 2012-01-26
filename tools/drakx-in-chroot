@@ -29,6 +29,7 @@ my ($disk_iso_repository, $repository_uri);
 ";
 
 (my $repository, my $dir, @ARGV) = @ARGV;
+my ($gdb);
 foreach (@ARGV) {
     if (/--resolution=(.*)/) {
         $resolution = $1;
@@ -36,6 +37,8 @@ foreach (@ARGV) {
         $disk_iso_repository = $1;
     } elsif (/--repository=(.*)/) {
         $repository_uri = $1;
+    } elsif (/--gdb/) {
+        $gdb = "gdb -q --args";
     }
 }
 my ($repository_without_arch, $repository_arch) = basename($repository) eq arch() ? (dirname($repository), '/' . arch()) : ($repository, '');
@@ -137,7 +140,18 @@ if (my $pid = fork()) {
                    if_($disk_iso_repository, "--method disk-iso"),
 		   if_($remote_repository, "--method $remote_repository"),
 		   @ARGV);
-    exec "$sudo chroot $SLASH_LOCATION $cmd" or die "exec $cmd in $SLASH_LOCATION failed\n";
+    if ($gdb) {
+	warn qq(GDB USAGE
+Beware that debug info won't be found so on segfault
+just generate a core dump with "gcore" and then
+analyze it offline.
+Thus you sessions will look like:
+(gdb) run
+(gdb) gcore
+(gdb) exit
+);
+    }
+    exec "$sudo $gdb chroot $SLASH_LOCATION $cmd" or die "exec $cmd in $SLASH_LOCATION failed\n";
 }
 
 sub system_verbose { warn join(' ', @_), "\n" if $verbose; system(@_) }
