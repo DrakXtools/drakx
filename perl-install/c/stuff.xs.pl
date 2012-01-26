@@ -37,6 +37,7 @@ print '
 #include <netinet/in.h>
 #include <linux/sockios.h>
 #include <linux/input.h>
+#include <execinfo.h>
 
 // for ethtool structs:
 typedef unsigned long long u64;
@@ -700,6 +701,34 @@ disk_add_partition(char * device_path, double start, double length, const char *
   }
   OUTPUT:
   RETVAL
+
+#define BACKTRACE_DEPTH				20
+ 
+
+char*
+C_backtrace()
+  CODE:
+  static char buf[1024];
+  int nAddresses, i;
+  unsigned long idx = 0;
+  void * addresses[BACKTRACE_DEPTH];
+  char ** symbols = NULL;
+  nAddresses = backtrace(addresses, BACKTRACE_DEPTH);
+  symbols = backtrace_symbols(addresses, nAddresses);
+  if (symbols == NULL) {
+      idx += sprintf(buf+idx, "ERROR: Retrieving symbols failed.\n");
+  } else {
+      fprintf(stderr, "HERE 5\n");
+      /* dump stack trace */
+      for (i = 0; i < nAddresses; ++i)
+          idx += sprintf(buf+idx, "%d: %s\n", i, symbols[i]);
+  }
+  RETVAL = strdup(buf);
+  OUTPUT:
+  RETVAL
+
+
+
 
 ';
 
