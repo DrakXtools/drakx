@@ -534,7 +534,8 @@ sub setupBootloader__entries {
 	my %root_descr = map { 
 	    my $info = delete $hd_infos{$_->{rootDevice}};
 	    my $dev = "/dev/$_->{device}";
-	    my $info_ = $info ? "$dev ($info)" : $dev;
+	    my $hint = $info || $_->{info} || $_->{device_LABEL};
+	    my $info_ = $hint ? "$dev ($hint)" : $dev;
 	    ($dev => $info_, fs::wild_device::from_part('', $_) => $info_);
 	} @$fstab;
 
