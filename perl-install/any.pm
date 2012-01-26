@@ -418,7 +418,8 @@ sub setupBootloader__general {
 	foreach (bootloader::allowed_boot_parts($b, $all_hds)) {
 	    my $dev = "/dev/$_->{device}";
 	    push @boot_devices, $dev;
-	    $boot_devices{$dev} = $_->{info} ? "$dev ($_->{info})" : $dev;
+	    my $name = $_->{info} || $_->{device_LABEL};
+	    $boot_devices{$dev} = $name ? "$dev ($name)" : $dev;
 	}
 
 	$in->ask_from_({ #messages => N("Bootloader main options"),
