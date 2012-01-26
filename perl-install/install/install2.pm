@@ -306,6 +306,12 @@ sub start_udev() {
     run_program::run("udevadm", "trigger", "--type=devices", "--action=add");
 }
 
+sub stop_udev() {
+    run_program::run('killall', 'udevd');
+    require fs::mount;
+    fs::mount::umount($_) foreach '/dev/pts', '/dev/shm', '/run', '/dev';
+}
+
 #-######################################################################################
 #- MAIN
 #-######################################################################################
@@ -316,6 +322,7 @@ sub main {
 	log::l("$msg\n" . backtrace());
 	$o->ask_warn('', $msg);
 	setVirtual(1);
+	stop_udev() if !$::local_install;
 	require install::steps_auto_install;
 	install::steps_auto_install_non_interactive::errorInStep($o, $msg);
     };
@@ -648,6 +655,7 @@ sub main {
     #- ala pixel? :-) [fpons]
     common::sync(); common::sync();
 
+    stop_udev() if !$::local_install;
     log::l("installation complete, leaving");
     log::l("files still open by install2: ", readlink($_)) foreach glob_("/proc/self/fd/*");
     print "\n" x 80 if !$::local_install;
