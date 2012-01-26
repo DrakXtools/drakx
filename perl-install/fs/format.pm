@@ -66,6 +66,13 @@ my %edit_LABEL = ( # package, command, option
     nilfs2 => [ 'nilfs-utils', 'nilfs-tune', '-L' ],
 );
 
+# Preserve UUID on fs where we couldn't enforce it while formatting
+my %preserve_UUID = ( # package, commande
+    #btrfs    => [ 'btrfs-progs', 'FIXME' ],
+    jfs      => [ 'jfsutils', 'jfs_tune', ],
+    xfs      => [ 'xfsprogs', 'xfs_admin' ],
+);
+ 
 sub package_needed_for_partition_type {
     my ($part) = @_;
     my $l = $cmds{$part->{fs_type}} or return;
@@ -188,13 +195,8 @@ sub part_raw {
     delete $part->{device_LABEL_changed};
 
     # Preserve UUID on fs where we couldn't enforce it while formatting
-    if ($fs_type eq 'jfs') {
-	run_program::raw('jfs_tune', '-U', devices::make($dev));
-    } elsif ($fs_type eq 'xfs') {
-	run_program::raw('xfs_admin', '-U', devices::make($dev));
-    } elsif ($fs_type eq 'btrfs') {
-	#FIXME
-    }
+    my ($_pkg, $cmd) = @{$preserve_UUID{$fs_type}};
+    run_program::raw($cmd, '-U', devices::make($dev)) if $cmd;
     
     if (member($fs_type, qw(ext3 ext4))) {
 	disable_forced_fsck($dev);
