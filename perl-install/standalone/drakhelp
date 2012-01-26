@@ -9,7 +9,7 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use interactive;
 use common;
 use any;
-use ctxhelp;
+eval { require ctxhelp };
 use log;
 
 
@@ -30,14 +30,14 @@ my ($opt, $idlabel) = @ARGV;
 
 
 
-my ($instpath, $ancpath, $package) = ctxhelp::path2help($opt, $idlabel);
+my ($instpath, $ancpath, $package) = eval { ctxhelp::path2help($opt, $idlabel) };
 if (! -e $instpath) {
     system('/usr/sbin/drakhelp_inst', $package);
 }
 
 if (! -e $instpath) {
     #- trying again, asking for the english entry
-    ($instpath, $ancpath, my $package2) = ctxhelp::path2help($opt, $idlabel, 'en');
+    ($instpath, $ancpath, my $package2) = eval { ctxhelp::path2help($opt, $idlabel, 'en') };
     if (! -e $instpath && $package ne $package2) {
 	system("/usr/sbin/drakhelp_inst $package2");
     }
