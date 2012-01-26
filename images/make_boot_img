@@ -215,7 +215,7 @@ fi
 
     my $devs = sprintf "ls /dev/{%s}", join(',', qw(console fb0 fd0 loop3 mem null ppp ptmx ptyp0 ram3 random tty[0-7] ttyp0 ttyS0 urandom));
 
-    _ "(cd $tmp_initrd; (find . ; $devs) | cpio -o -c --quiet) | xz --check=crc32 --lzma2=dict=512KiB  > $img";
+    _ "(cd $tmp_initrd; (find . ; $devs) | cpio -o -c --quiet) | xz --check=crc32 --lzma2=dict=1MiB  > $img";
     _ "rm -rf $tmp_initrd";
 }
 
