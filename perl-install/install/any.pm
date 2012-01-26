@@ -552,8 +552,6 @@ sub default_packages {
     push @l, map { $_->{BOOTPROTO} eq 'dhcp' ? $_->{DHCP_CLIENT} || 'dhcp-client' : () } values %{$o->{net}{ifcfg}};
     # will get auto selected at summary stage for bootloader:
     push @l, qw(acpi acpid mageia-gfxboot-theme);
-    # will get auto selected at summary stage for firewall:
-    push @l, qw(shorewall mandi-ifw);
     # only needed for CDs/DVDs installations:
     push @l, 'perl-Hal-Cdroms' if $o->{method} eq 'cdrom';
 
