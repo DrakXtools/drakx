@@ -34,7 +34,7 @@ use run_program;
 
 my $prog;
 my $incident = 0;
-my ($table, $comb_app, $com_app, $button_pkg, $button_browse, $package, $distrocode, $error, $gdb_trace, $user_descr);
+my ($table, $comb_app, $com_app, $button_pkg, $button_browse, $package, $distrocode, $error, $user_descr);
 
 my $i;
 foreach (@ARGV) {
@@ -46,25 +46,11 @@ foreach (@ARGV) {
 }
 
 my $segfaulted = $error =~ /SEGV/;
-if ($segfaulted && -x '/usr/bin/gdb') {
-    local $ENV{TMP} = $ENV{TMP} || '/tmp';
-    my $file = chomp_(`mktemp $ENV{TMP}/drakbug.XXXXXXXX`);
-    my $_guard = before_leaving { rm_rf $file };
-    if (-e $file) {
-        output($file, qq(bt
-quit));
-        local $ENV{LANGUAGE} = 'C';
-        my $temp = run_program::get_stdout('gdb', '-q', 'perl', $$, '-x', $file);
-        $gdb_trace = join "\n", grep { !/^done\.$/ && !/Reading symbols from/
-                                         && !/Loaded symbols/ && !/The program is run/ } split(/\n/, $temp);
-    }
-}
 if (!check_for_xserver()) {
     print("Cannot be run in console mode.\n");
     print join("\n", 
                N("The \"%s\" program has crashed with the following error:", $prog),
                $error,
-               $gdb_trace,
                '')
       if $error;
     c::_exit(0);
@@ -154,7 +140,6 @@ gtkadd($window->{window},
                                                 : N("The \"%s\" program has crashed with the following error:", $prog)),
                                            $error)
                                    ),
-                                   if_($gdb_trace, format_trace_with_message(N("Its GDB trace is:"), $gdb_trace)),
                                ),
                                [ N("Used theme: %s", $theme_name) . "\n\n" ],
                                [
@@ -285,7 +270,6 @@ sub report_bug_to_bugzilla() {
                        if_($incident,
                            join('', "short_desc=$prog%20",
                                 ($segfaulted ? 'segfaulted' : 'crashed'),
-                                if_(!$gdb_trace, get_top_of_trace($error)),
                             ),
                        ),
                            'comment=' . uri_escape(
@@ -294,12 +278,11 @@ sub report_bug_to_bugzilla() {
 Theme name: $theme_name
 
 ) . ($text || "Please describe what you were doing when it crashed.") . "\n\n"
-  . ($error ? qq(Backtrace was:
-$error) :
+  . ($error ? $error :
   qq(If you can, try to run the "$prog" program from a terminal and copy and paste here any error messages and/or backtrace))
-    . if_($gdb_trace, qq(
-GDB backtrace was (its interesting part is below Perl_pp_fork() or Perl_pp_waitpid()):
-$gdb_trace)),
+    . if_($segfaulted, qq(
+(interesting part of backtrace is below Perl_pp_fork(), Perl_pp_waitpid() or sighandler):
+)),
                                )
                                  . qq(
 Kernel version = $kernel_release

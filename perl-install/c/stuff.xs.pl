@@ -718,7 +718,6 @@ C_backtrace()
   if (symbols == NULL) {
       idx += sprintf(buf+idx, "ERROR: Retrieving symbols failed.\n");
   } else {
-      fprintf(stderr, "HERE 5\n");
       /* dump stack trace */
       for (i = 0; i < nAddresses; ++i)
           idx += sprintf(buf+idx, "%d: %s\n", i, symbols[i]);
