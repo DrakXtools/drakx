@@ -219,10 +219,6 @@ static void spawn_interactive(void)
 static void handle_pcmcia(void)
 {
         char * pcmcia_adapter;
-	if (kernel_version() == 2) {
-		stg1_error_message("We now use kernel pcmcia support and this won't work with a 2.2 kernel.");
-		return;
-	}
 
 	pcmcia_adapter = pcmcia_probe();
 	if (!pcmcia_adapter) {
