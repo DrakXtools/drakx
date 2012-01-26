@@ -71,6 +71,7 @@ my %preserve_UUID = ( # package, commande
     #btrfs    => [ 'btrfs-progs', 'FIXME' ],
     jfs      => [ 'jfsutils', 'jfs_tune', ],
     xfs      => [ 'xfsprogs', 'xfs_admin' ],
+    nilfs2   => [ 'nilfs-utils', 'nilfs-tune' ],
 );
  
 sub package_needed_for_partition_type {
