@@ -78,7 +78,7 @@ sub open_part {
 	_run_or_die('luksOpen', devices::make($part->{device}), 
 				$part->{dm_name}, '--key-file', $_[0]);
     });
-    run_program::run('udevadm', 'settle') unless $::isInstall;
+    run_program::run('udevadm', 'settle');
 
     my $active_dmcrypt = _parse_dmsetup_table($part->{dm_name}, 
 					      run_program::get_stdout('dmsetup', 'table', $part->{dm_name}));
@@ -148,7 +148,7 @@ sub _parse_dmsetup_table {
 }
 
 sub active_dm() {
-    run_program::run('udevadm', 'settle') unless $::isInstall;
+    run_program::run('udevadm', 'settle');
 
     map {
 	my $name = s/(.*?):\s*// && $1;

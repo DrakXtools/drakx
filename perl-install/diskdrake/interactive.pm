@@ -1245,7 +1245,7 @@ sub write_partitions {
     partition_table::write($hd) if !$::testing;
     check_rebootNeeded($in, $hd) if !$b_skip_check_rebootNeeded;
     # fix resizing's failures due to udev's race when writing the partition table
-    run_program::run('udevadm', 'settle') unless $::isInstall;
+    run_program::run('udevadm', 'settle');
     1;
 }
 
