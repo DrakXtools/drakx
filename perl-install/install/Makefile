@@ -47,7 +47,6 @@ install_pms:
 
 get_needed_files: xs
 	REP4PMS=$(REP4PMS) ../../tools/install-xml-file-list share/list.xml $(DEST)
-	mkdir -p $(DEST)/run
 	chmod u-s -R $(DEST) # for mount/umount
 	share/generate-xlocales $(DEST)
 
