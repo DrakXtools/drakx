@@ -24,9 +24,20 @@ dist-svn:
 	tar cfa $(PRODUCT)-$(VERSION).tar.xz $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
 
+dist-git:
+	@cd ../..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD kernel perl-install tools Makefile.config | xz >$(PRODUCT)-$(VERSION).tar.xz;
+
 tar:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
-	@make dist-svn
+	@if [ -e "../.svn" ]; then \
+		$(MAKE) dist-svn; \
+	elif [ -e "../../.git" ]; then \
+		$(MAKE) dist-git; \
+	else \
+		echo "Unknown SCM (not SVN nor GIT)";\
+		exit 1; \
+	fi;
+	$(info $(PRODUCT)-$(VERSION).tar.xz is ready)
 
 install:
 	$(MAKE) full_stage2
