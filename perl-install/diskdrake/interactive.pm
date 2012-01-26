@@ -501,7 +501,7 @@ sub Create {
            if_($::expert && $hd->hasExtended,
          { label => N("Preference: "), val => \$primaryOrExtended, list => [ '', "Extended", "Primary", if_($::expert, "Extended_0x85") ] },
            ),
-	   if_($::expert && isLVM($hd),
+	   if_(isLVM($hd),
 	 { label => N("Logical volume name "), val => \$part->{lv_name}, list => [ qw(root swap usr home var), '' ], sort => 0, not_edit => 0 },
            ),
         { label => N("Encrypt partition"), type => 'bool', val => \$use_dmcrypt, disabled => sub { member($part->{mntpoint}, qw(/ /usr /var /boot)); } },
