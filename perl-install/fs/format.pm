@@ -62,7 +62,7 @@ my %edit_LABEL = ( # package, command, option
 #    swap     => [ 'util-linux', 'mkswap' ],
     ntfs     => [ 'ntfsprogs', 'ntfslabel' ],
    'ntfs-3g' => [ 'ntfsprogs', 'ntfslabel' ],
-#    btrfs
+    btrfs => [ 'btrfs-progs', 'btrfs', 'filesystem', 'label' ],
     nilfs2 => [ 'nilfs-utils', 'nilfs-tune', '-L' ],
 );
 
@@ -126,6 +126,9 @@ sub write_label {
     my @args;
     if ($cmd eq 'mlabel') {
       @args = ($cmd, @first_options, devices::make($dev), '::' . $part->{device_LABEL});
+    } elsif ($cmd eq 'btrfs') {
+      # btrfs needs reverse ordering
+      @args = ($cmd, @first_options, devices::make($dev), $part->{device_LABEL});
     } elsif (defined $first_options[0]) {
       @args = ($cmd, @first_options, $part->{device_LABEL}, devices::make($dev));
     } else {
