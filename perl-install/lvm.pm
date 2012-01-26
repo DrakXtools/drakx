@@ -169,9 +169,19 @@ sub lv_delete {
     @$list = grep { $_ != $lv } @$list;
 }
 
+sub suggest_lv_name_from_mnt_point {
+    my ($lv) = @_;
+    my $str = $lv->{mntpoint};
+    $str = "root" if $str eq '/';
+    $str =~ s!^/!!;
+    $str =~ s!/!_!g;
+    $str;
+}
+
 sub suggest_lv_name {
     my ($lvm, $lv) = @_;
     my $list = $lvm->{primary}{normal} ||= [];
+    $lv->{lv_name} ||= suggest_lv_name_from_mnt_point($lv);
     $lv->{lv_name} ||= 1 + max(map { if_($_->{device} =~ /(\d+)$/, $1) } @$list);
 }
 
