@@ -413,7 +413,7 @@ sub main {
     eval { fs::mount::mount('none', '/sys', 'sysfs', 1) };
     eval { touch('/root/non-chrooted-marker.DrakX') }; #- helps distinguishing /root and /mnt/root when we don't know if we are chrooted
 
-    start_udev();
+    start_udev() if !$::local_install;
 
     if ($::local_install) {
 	push @::auto_steps, 
