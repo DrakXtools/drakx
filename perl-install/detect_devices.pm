@@ -968,13 +968,11 @@ sub pcmcia_probe() {
 my $dmi_probe;
 sub dmi_probe() {
     if (arch() !~ /86/) {
-        $dmi_probe ||= [];
+        return [];
     }
-    else {
     $dmi_probe ||= [ map {
 	/(.*?)\t(.*)/ && { bus => 'DMI', driver => $1, description => $2 };
     } $> ? () : c::dmi_probe() ];
-    }
     @$dmi_probe;
 }
 
