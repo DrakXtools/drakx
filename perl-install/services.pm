@@ -146,7 +146,7 @@ sub ask_ {
     my %root_services = (
 			 N("Printing") => [ qw(cups cupslpd lpr lpd oki4daemon hpoj cups-lpd) ],
 			 N("Internet") => [ qw(httpd boa tux roxen ftp pftp tftp proftpd wu-ftpd pure-ftpdipsec proftpd-xinetd
-                                               ipchains iptables ip6tables ipvsadm isdn4linux ibod jabber jabber-icq adsl squid
+                                               ipchains iptables ip6tables ipvsadm isdn4linux ibod jabber jabber-icq adsl shorewall squid
                                                portsentry prelude nessusd junkbuster radvd cddbp ippl iptoip jail.init) ],
 			 N("File sharing") => [ qw(nfs-common nfs-server nfslock smb nettalk netfs mcserv autofs amd
                                                    venus.init auth2.init codasrv.init update.init swat) ],
