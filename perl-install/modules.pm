@@ -298,6 +298,8 @@ sub extract_modules {
 	if (-e $path) {
 	    if ($path =~ /\.gz$/) { 
 	    	system("gzip -dc $path > $dir/$f") == 0 or unlink "$dir/$f";
+	    } elsif ($path =~ /\.xz$/) {
+	        system("xz -d < $path > $dir/$f") == 0 or unlink "$dir/$f";
 	    } else {
 	    	system("cp $path $dir/$f") == 0 or unlink "$dir/$f";
 	    }
