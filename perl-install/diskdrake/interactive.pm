@@ -985,12 +985,12 @@ sub Add2LVM {
     require lvm;
     if (!ref $lvm) {
 	# create new lvm
-	my $n = 0;
-	while (member("vg$n", @lvm_names)) {
+	my $n; my $str = "vg-mdv";
+	while (member("$str$n", @lvm_names)) {
 	    $n++;
 	}
 
-	my $name = "vg$n";
+	my $name = "$str$n";
 	$in->ask_from_({ title => N("LVM name"), 
 			messages => N("Enter a name for the new LVM volume group"),
 		       	focus_first => 1,
