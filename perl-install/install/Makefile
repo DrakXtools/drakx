@@ -26,6 +26,7 @@ dist-svn:
 
 dist-git:
 	@cd ../..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD kernel perl-install tools Makefile.config | xz >$(PRODUCT)-$(VERSION).tar.xz;
+	@echo WARNING: rpmsrate is MISSING!!!
 
 tar:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
