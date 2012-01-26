@@ -66,8 +66,7 @@ foreach (@$normal_parts) {
 
     if (my $release_file = common::release_file($target)) {
 	my $release = chomp_(cat_("$target$release_file"));
-	print STDERR "=> found a %s root partition on $dev\n=> type $fs, version `",
-	  $release, "'\n";
+	print STDERR "=> found a $release root partition on $dev\n=> type $fs, version `\n";
 	@fstab = fs::read_fstab($target, '/etc/fstab');
 	push @roots, { dev => $dev, release => $release, fs => $fs };
     }
