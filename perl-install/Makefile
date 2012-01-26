@@ -64,9 +64,12 @@ localcopy: clean
 
 localdist: tar
 
-tar: localcopy
+dist-svn: localcopy
 	tar cfa $(PACKAGE)-$(PKGVERSION).tar.xz $(PACKAGE)-$(PKGVERSION)
 	rm -rf $(PACKAGE)-$(PKGVERSION)
+
+tar:
+	@make dist-svn
 
 # rules to build a distributable rpm
 
