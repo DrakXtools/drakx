@@ -12,3 +12,5 @@ ca:12345:ctrlaltdel:/sbin/fakeshutdown
 4:23:respawn:/sbin/mingetty tty4
 5:23:respawn:/sbin/mingetty tty5
 6:23:respawn:/sbin/mingetty tty6
+s0:2345:respawn:/sbin/agetty -h -t 60 ttyS0 9600 ansi
+#s1:2345:respawn:/sbin/agetty -h -t 60 ttyS1 115200,9600 linux
