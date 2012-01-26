@@ -36,49 +36,9 @@ sub new($$) {
 
     if (!$::local_install && 
 	($::testing ? $ENV{DISPLAY} ne $wanted_DISPLAY : $ENV{DISPLAY} =~ /^:\d/)) { #- is the display local or distant?
-	my $f = "/tmp/Xconf";
-	if (!$::testing) {
-	    devices::make("/dev/kbd");
-	}
-
-	#- /tmp is mostly tmpfs, but not fully, since it doesn't allow: mount --bind /tmp/.X11-unix /mnt/tmp/.X11-unix
-	mkdir '/tmp/.X11-unix';
-	run_program::run('mount', '-t', 'tmpfs', 'none', '/tmp/.X11-unix');
-
-
-	my @servers = qw(Driver:fbdev Driver:vesa); #-)
-	if ($::testing) {
-	    @servers = 'Xnest';
-	} elsif (arch() =~ /ia64/) {
-	    require Xconfig::card;
-	    my ($card) = Xconfig::card::probe();
-	    @servers = map { if_($_, "Driver:$_") } $card && $card->{Driver}, 'fbdev';
-	} elsif (arch() =~ /i.86/) {
-	    require Xconfig::card;
-	    my ($card) = Xconfig::card::probe();
-	    if ($card && $card->{card_name} eq 'i810') {
-		# early i810 do not support VESA:
-		log::l("graphical installer not supported on early i810");
-		undef @servers;
-	    }
-        }
-
-	foreach (@servers) {
-	    log::l("Trying with server $_");
-	    my ($prog, $Driver) = /Driver:(.*)/ ? ('Xorg', $1) : /Xsun|Xnest|^X_move$/ ? $_ : "XF86_$_";
-	    if (/FB/i) {
-		!$o->{vga16} && $o->{allowFB} or next;
-
-		$o->{allowFB} = _launchX($o, $f, $prog, $Driver, $wanted_DISPLAY) #- keep in mind FB is used.
-		  and goto OK;
-	    } else {
-		$o->{vga16} = 1 if /VGA16/;
-		_launchX($o, $f, $prog, $Driver, $wanted_DISPLAY) and goto OK;
-	    }
-	}
-	return undef;
+        _setup_and_start_X($o, $wanted_DISPLAY);
     }
-  OK:
+
     $ENV{DISPLAY} = $wanted_DISPLAY;
     require detect_devices;
     if (detect_devices::is_xbox()) {
@@ -98,6 +58,51 @@ sub new($$) {
     $o = (bless {}, ref($type) || $type)->SUPER::new($o);
     $o->interactive::gtk::new;
     $o;
+}
+
+sub _setup_and_start_X {
+    my ($o, $wanted_DISPLAY) = @_;
+    my $f = "/tmp/Xconf";
+    if (!$::testing) {
+        devices::make("/dev/kbd");
+    }
+
+    #- /tmp is mostly tmpfs, but not fully, since it doesn't allow: mount --bind /tmp/.X11-unix /mnt/tmp/.X11-unix
+    mkdir '/tmp/.X11-unix';
+    run_program::run('mount', '-t', 'tmpfs', 'none', '/tmp/.X11-unix');
+
+
+    my @servers = qw(Driver:fbdev Driver:vesa); #-)
+    if ($::testing) {
+        @servers = 'Xnest';
+    } elsif (arch() =~ /ia64/) {
+        require Xconfig::card;
+        my ($card) = Xconfig::card::probe();
+        @servers = map { if_($_, "Driver:$_") } $card && $card->{Driver}, 'fbdev';
+    } elsif (arch() =~ /i.86/) {
+        require Xconfig::card;
+        my ($card) = Xconfig::card::probe();
+        if ($card && $card->{card_name} eq 'i810') {
+            # early i810 do not support VESA:
+            log::l("graphical installer not supported on early i810");
+            undef @servers;
+        }
+    }
+
+    foreach (@servers) {
+        log::l("Trying with server $_");
+        my ($prog, $Driver) = /Driver:(.*)/ ? ('Xorg', $1) : /Xsun|Xnest|^X_move$/ ? $_ : "XF86_$_";
+        if (/FB/i) {
+            !$o->{vga16} && $o->{allowFB} or next;
+
+            $o->{allowFB} = _launchX($o, $f, $prog, $Driver, $wanted_DISPLAY) #- keep in mind FB is used.
+              and return;
+        } else {
+            $o->{vga16} = 1 if /VGA16/;
+            _launchX($o, $f, $prog, $Driver, $wanted_DISPLAY) and return;
+        }
+    }
+    return undef;
 }
 
 sub _launchX {
