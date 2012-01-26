@@ -14,6 +14,7 @@
 
 use lib qw(/usr/lib/libDrakX);
 use common;
+use devices;
 use fs;
 use fs::proc_partitions;
 use fs::type;
@@ -35,6 +36,7 @@ print STDERR "\nPlease wait, trying to find your root device...\n";
 
 mkdir_p($target);
 
+devices::init_device_mapper();
 lvm::detect_during_install();
 
 my @parts = map {
