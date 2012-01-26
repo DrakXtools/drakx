@@ -32,6 +32,13 @@ sub new {
     open STDERR, ">", common::secured_file($stderr_file);
 
     $cui ||= Curses::UI->new('-color_support' => 1);
+
+    # Set some default terminal size, for serial install
+    unless ($cui->{-width}) {
+	$cui->{-width} = $cui->{-w} = $cui->{-bw} = 80;
+    	$cui->{-height} = $cui->{-h} = $cui->{-bh} = 25;
+    }
+
     bless { cui => $cui }, $class;
 }
 
