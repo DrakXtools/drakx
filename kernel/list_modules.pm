@@ -341,7 +341,7 @@ sub load_dependencies {
 	my ($filename, @fdeps) = map {
 	    s![^ ]*/!!g;
 	    s!\.ko!!g;
-	    s!\.gz!!g;
+	    s!\.[gx]z!!g;
 	    $_;
 	} $m, split(' ', $d);
 
