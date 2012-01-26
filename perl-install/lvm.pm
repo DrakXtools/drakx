@@ -49,6 +49,7 @@ sub lvm_cmd {
 	$? >> 8 == 98 or return;
 
 	#- sometimes, it needs running vgscan again, doing so:
+	log::l("forcing rescan because of prior failure");
 	run_program::run('lvm2', 'vgscan');
 	run_program::run('lvm2', @_);
     }
