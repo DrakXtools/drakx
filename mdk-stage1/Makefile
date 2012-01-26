@@ -230,7 +230,7 @@ probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils
 dist: tar
 tar:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
-	@if [ -e ".svn" ]; then \
+	@if [ -e "../.svn" ]; then \
 	    $(MAKE) dist-svn; \
 	    elif [ -e "../.git" ]; then \
 	    $(MAKE) dist-git; \
