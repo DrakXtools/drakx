@@ -67,8 +67,8 @@ foreach (@$normal_parts) {
     if (my $release_file = common::release_file($target)) {
 	my $release = chomp_(cat_("$target$release_file"));
 	print STDERR "=> found a $release root partition on $dev\n=> type $fs, version `\n";
-	@fstab = fs::read_fstab($target, '/etc/fstab');
-	push @roots, { dev => $dev, release => $release, fs => $fs };
+	my @fstab = fs::read_fstab($target, '/etc/fstab');
+	push @roots, { dev => $dev, release => $release, fs => $fs, fstab => \@fstab };
     }
     system('umount', $target) == 0 or die "error unmounting $target\n";
 }
@@ -79,6 +79,7 @@ if (@roots) {
     my $selected = first(@roots);
     $root = $selected->{dev};
     $fs = $selected->{fs};
+    @fstab = @{$selected->{fstab}};
     print STDERR "=> Selecting $root as root fs\n";
 }
 
