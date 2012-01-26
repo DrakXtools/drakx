@@ -201,8 +201,11 @@ sub bug_handler {
     }
 
     # we want the full backtrace:
-    $error .= "\n" if $is_signal;
-    $error .= common::backtrace() if $error;
+    if ($is_signal) {
+        my $ctrace = c::C_backtrace();
+        $error .= "\nGlibc's trace:\n$ctrace\n";
+    }
+    $error .= "Perl's trace:\n". common::backtrace() if $error;
 
     my $progname = $0;
 
