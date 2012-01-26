@@ -965,8 +965,8 @@ sub pcmcia_probe() {
     } all($dev_dir);
 }
 
-my $dmi_probe;
 sub dmi_probe() {
+    state $dmi_probe;
     if (arch() !~ /86/) {
         return [];
     }
