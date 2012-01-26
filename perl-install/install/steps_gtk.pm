@@ -45,53 +45,7 @@ sub new($$) {
 	mkdir '/tmp/.X11-unix';
 	run_program::run('mount', '-t', 'tmpfs', 'none', '/tmp/.X11-unix');
 
-	my $launchX = sub {
-	    my ($server, $Driver) = @_;
 
-	    mkdir '/var/log' if !-d '/var/log';
-
-	    my @options = $wanted_DISPLAY;
-	    if ($server eq 'Xnest') {
-		push @options, '-ac', '-geometry', $o->{vga} || ($o->{vga16} ? '640x480' : '800x600');
-	    } else {
-		install::gtk::createXconf($f, @{$o->{mouse}}{'Protocol', 'device'}, $o->{mouse}{wacom}[0], $Driver);
-
-		push @options, '-allowMouseOpenFail', '-xf86config', $f if arch() !~ /^sparc/;
-		push @options, 'vt7', '-dpi', '75';
-		push @options, '-nolisten', 'tcp';
-
-		#- old weird servers: Xsun
-		push @options, '-fp', '/usr/share/fonts:unscaled' if $server =~ /Xsun/;
-	    }
-
-	    if (!fork()) {
-		c::setsid();
-		exec $server, @options or c::_exit(1);
-	    }
-
-	    #- wait for the server to start
-	    foreach (1..5) {
-		sleep 1;
-		last if fuzzy_pidofs(qr/\b$server\b/);
-		log::l("$server still not running, trying again");
-	    }
-	    my $nb;
-	    my $start_time = time();
-	    foreach (1..60) {
-		log::l("waiting for the server to start ($_ $nb)");
-		log::l("Server died"), return 0 if !fuzzy_pidofs(qr/\b$server\b/);
-		$nb++ if xf86misc::main::Xtest($wanted_DISPLAY);
-		if ($nb > 2) { #- one succeeded test is not enough :-(
-		    log::l("AFAIK X server is up");
-		    return 1;
-		}
-		time() - $start_time < 60 or last;
-		time() - $start_time > 8 and print N("Xorg server is slow to start. Please wait..."), "\n";
-		sleep 1;
-	    }
-	    log::l("Timeout!!");
-	    0;
-	};
 	my @servers = qw(Driver:fbdev Driver:vesa); #-)
 	if ($::testing) {
 	    @servers = 'Xnest';
@@ -115,11 +69,11 @@ sub new($$) {
 	    if (/FB/i) {
 		!$o->{vga16} && $o->{allowFB} or next;
 
-		$o->{allowFB} = &$launchX($prog, $Driver) #- keep in mind FB is used.
+		$o->{allowFB} = _launchX($o, $f, $prog, $Driver, $wanted_DISPLAY) #- keep in mind FB is used.
 		  and goto OK;
 	    } else {
 		$o->{vga16} = 1 if /VGA16/;
-		&$launchX($prog, $Driver) and goto OK;
+		_launchX($o, $f, $prog, $Driver, $wanted_DISPLAY) and goto OK;
 	    }
 	}
 	return undef;
@@ -144,6 +98,54 @@ sub new($$) {
     $o = (bless {}, ref($type) || $type)->SUPER::new($o);
     $o->interactive::gtk::new;
     $o;
+}
+
+sub _launchX {
+    my ($o, $f, $server, $Driver, $wanted_DISPLAY) = @_;
+
+    mkdir '/var/log' if !-d '/var/log';
+
+    my @options = $wanted_DISPLAY;
+    if ($server eq 'Xnest') {
+        push @options, '-ac', '-geometry', $o->{vga} || ($o->{vga16} ? '640x480' : '800x600');
+    } else {
+        install::gtk::createXconf($f, @{$o->{mouse}}{'Protocol', 'device'}, $o->{mouse}{wacom}[0], $Driver);
+
+        push @options, '-allowMouseOpenFail', '-xf86config', $f if arch() !~ /^sparc/;
+        push @options, 'vt7', '-dpi', '75';
+        push @options, '-nolisten', 'tcp';
+
+        #- old weird servers: Xsun
+        push @options, '-fp', '/usr/share/fonts:unscaled' if $server =~ /Xsun/;
+    }
+
+    if (!fork()) {
+        c::setsid();
+        exec $server, @options or c::_exit(1);
+    }
+
+    #- wait for the server to start
+    foreach (1..5) {
+        sleep 1;
+        last if fuzzy_pidofs(qr/\b$server\b/);
+        log::l("$server still not running, trying again");
+    }
+    my $nb;
+    my $start_time = time();
+    foreach (1..60) {
+        log::l("waiting for the server to start ($_ $nb)");
+        log::l("Server died"), return 0 if !fuzzy_pidofs(qr/\b$server\b/);
+        $nb++ if xf86misc::main::Xtest($wanted_DISPLAY);
+        if ($nb > 2) {         #- one succeeded test is not enough :-(
+            log::l("AFAIK X server is up");
+            return 1;
+        }
+        time() - $start_time < 60 or last;
+        time() - $start_time > 8 and print N("Xorg server is slow to start. Please wait..."), "\n";
+        sleep 1;
+    }
+    log::l("Timeout!!");
+    0;
 }
 
 #- if we success to start X in 640x480 using driver "vesa", 
