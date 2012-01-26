@@ -267,6 +267,7 @@ sub open_file {
 
 sub secured_file {
     my ($f) = @_;
+    mkdir_p(dirname($f));
     c::is_secure_file($f) or die "cannot ensure a safe $f";
     $f;
 }
