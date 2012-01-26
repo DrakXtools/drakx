@@ -192,7 +192,7 @@ our %l = (
     loopback => [ qw(isofs loop squashfs) ],
     local => [
       if_(arch() =~ /^ppc/, qw(hfs)),
-      qw(btrfs ext3 ext4 jfs ntfs reiserfs reiser4 vfat xfs),
+      qw(btrfs ext3 ext4 jfs nilfs2 ntfs reiserfs reiser4 vfat xfs),
     ],
     various => [ qw(romfs ufs unionfs) ],
 
