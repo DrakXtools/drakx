@@ -288,7 +288,7 @@ sub extract_modules {
 	my $extension = module_extension();
 	if (-e $path) {
 	    if ($path =~ /\.gz$/) { 
-	    	system("gzip -dc $path > $dir/$f") == 0 or unlink "$dir/$f";
+	    	system("gzip -dc $path > $dir/$f 2>/dev/null") == 0 or unlink "$dir/$f";
 	    } elsif ($path =~ /\.xz$/) {
 	        system("xz -d < $path > $dir/$f") == 0 or unlink "$dir/$f";
 	    } else {
