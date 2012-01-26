@@ -288,6 +288,26 @@ sub exitInstall {
 }
 
 
+sub start_udev() {
+    # Ensure /run is mounted
+    mkdir "/run", 0755;
+    run_program::run("mount -t tmpfs -o mode=0755,nosuid,nodev tmpfs /run");
+    mkdir "/run/udev", 0755;
+    mkdir "/run/udev/rules.d", 0755;
+    $ENV{UDEVRULESD} = "/run/udev/rules.d";
+
+    # Start up udev and trigger cold plugs
+    run_program::run("mount", "-t", "devtmpfs", "-o", "mode=0755,nosuid", "devtmpfs", "/dev");
+    mkdir "/dev/pts", 0755;
+    run_program::run("mount", "-t", "devpts", "-o", "gid=5,mode=620,noexec,nosuid", "devpts", "/dev/pts");
+    mkdir "/dev/shm", 0755;
+    run_program::run("mount", "-t", "tmpfs", "-o", "mode=1777,nosuid,nodev", "tmpfs", "/dev/shm");
+
+    run_program::run("/lib/udev/udevd", "--daemon", "--resolve-names=never");
+    run_program::run("udevadm", "trigger", "--type=subsystems", "--action=add");
+    run_program::run("udevadm", "trigger", "--type=devices", "--action=add");
+}
+
 #-######################################################################################
 #- MAIN
 #-######################################################################################
@@ -395,23 +415,7 @@ sub main {
     eval { fs::mount::mount('none', '/sys', 'sysfs', 1) };
     eval { touch('/root/non-chrooted-marker.DrakX') }; #- helps distinguishing /root and /mnt/root when we don't know if we are chrooted
 
-    # Ensure /run is mounted
-    mkdir "/run", 0755;
-    run_program::run("mount -t tmpfs -o mode=0755,nosuid,nodev tmpfs /run");
-    mkdir "/run/udev", 0755;
-    mkdir "/run/udev/rules.d", 0755;
-    $ENV{UDEVRULESD} = "/run/udev/rules.d";
-
-    # Start up udev and trigger cold plugs
-    run_program::run("mount", "-t", "devtmpfs", "-o", "mode=0755,nosuid", "devtmpfs", "/dev");
-    mkdir "/dev/pts", 0755;
-    run_program::run("mount", "-t", "devpts", "-o", "gid=5,mode=620,noexec,nosuid", "devpts", "/dev/pts");
-    mkdir "/dev/shm", 0755;
-    run_program::run("mount", "-t", "tmpfs", "-o", "mode=1777,nosuid,nodev", "tmpfs", "/dev/shm");
-
-    run_program::run("/lib/udev/udevd", "--daemon", "--resolve-names=never");
-    run_program::run("udevadm", "trigger", "--type=subsystems", "--action=add");
-    run_program::run("udevadm", "trigger", "--type=devices", "--action=add");
+    start_udev();
 
     if ($::local_install) {
 	push @::auto_steps, 
