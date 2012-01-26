@@ -765,10 +765,6 @@ sub device_matches_sysfs_device {
   device_matches_sysfs_ids($device, get_ids_from_sysfs_device($dev_path));
 }
 
-#sub getISDN() {
-#    mapgrep(sub {member (($_[0] =~ /\s*(\w*):/), @netdevices), $1 }, split(/\n/, cat_("/proc/net/dev")));
-#}
-
 sub getUPS() {
     # MGE serial PnP devices:
     (map {
