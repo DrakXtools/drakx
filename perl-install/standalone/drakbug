@@ -149,7 +149,7 @@ gtkadd($window->{window},
                                if_($prog,
                                    if_($error,
                                        format_trace_with_message(
-                                           ($gdb_trace ?
+                                           ($segfaulted ?
                                               N("The \"%s\" program has segfaulted with the following error:", $prog)
                                                 : N("The \"%s\" program has crashed with the following error:", $prog)),
                                            $error)
