@@ -537,23 +537,30 @@ sub rpmsrate_always_flags {
 sub default_packages {
     my ($o) = @_;
     my @l;
+    sub add_n_log {
+       my ($reason, @packages) = @_;
+       if (@packages) {
+          log::l("selecting " . join(',', @packages) . " because of $reason");
+          push @l, @packages;
+       }
+    }
 
-    push @l, "brltty" if cat_("/proc/cmdline") =~ /brltty=/;
-    push @l, "nfs-utils-clients" if $o->{method} eq "nfs";
-    push @l, "mdadm" if !is_empty_array_ref($o->{all_hds}{raids});
-    push @l, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
-    push @l, "cryptsetup" if !is_empty_array_ref($o->{all_hds}{dmcrypts});
-    push @l, "dmraid" if any { fs::type::is_dmraid($_) } @{$o->{all_hds}{hds}};
-    push @l, "microcode_ctl" if detect_devices::hasCPUMicrocode();
-    push @l, 'cpufreq' if cat_('/proc/cpuinfo') =~ /AuthenticAMD/ && arch() =~ /x86_64/
-      || cat_('/proc/cpuinfo') =~ /model name.*Intel\(R\) Core\(TM\)2 CPU/;
-    push @l, 'apmd' if -e "/proc/apm";
-    push @l, detect_devices::probe_name('Pkg');
-    push @l, map { $_->{BOOTPROTO} eq 'dhcp' ? $_->{DHCP_CLIENT} || 'dhcp-client' : () } values %{$o->{net}{ifcfg}};
+    add_n_log("/proc/cmdline=~/brltty=/", "brltty") if cat_("/proc/cmdline") =~ /brltty=/;
+    add_n_log("method==nfs", "nfs-utils-clients") if $o->{method} eq "nfs";
+    add_n_log("have RAID", "mdadm") if !is_empty_array_ref($o->{all_hds}{raids});
+    add_n_log("have LVM", "lvm2") if !is_empty_array_ref($o->{all_hds}{lvms});
+    add_n_log("have crypted DM", "cryptsetup") if !is_empty_array_ref($o->{all_hds}{dmcrypts});
+    add_n_log("some disks are fake RAID", "dmraid") if any { fs::type::is_dmraid($_) } @{$o->{all_hds}{hds}};
+    add_n_log("CPU needs microcode", "microcode_ctl") if detect_devices::hasCPUMicrocode();
+    add_n_log("CPU needs cpufreq", 'cpufreq') if detect_devices::hasCPUFreq();
+    add_n_log("APM support needed", 'apmd') if -e "/proc/apm";
+    add_n_log("needed by hardware", detect_devices::probe_name('Pkg'));
+    my @ltmp = map { $_->{BOOTPROTO} eq 'dhcp' ? $_->{DHCP_CLIENT} || 'dhcp-client' : () } values %{$o->{net}{ifcfg}};
+    add_n_log("needed by networking", @ltmp) if @ltmp;
     # will get auto selected at summary stage for bootloader:
     push @l, qw(acpi acpid mageia-gfxboot-theme);
     # only needed for CDs/DVDs installations:
-    push @l, 'perl-Hal-Cdroms' if $o->{method} eq 'cdrom';
+    add_n_log("method='cdrom'", 'perl-Hal-Cdroms') if $o->{method} eq 'cdrom';
 
     my $dmi_BIOS = detect_devices::dmidecode_category('BIOS');
     my $dmi_Base_Board = detect_devices::dmidecode_category('Base Board');
@@ -563,9 +570,10 @@ sub default_packages {
 	modules::append_to_modules_loaded_at_startup_for_all_kernels('acerhk');
     }
 
-    push @l, 'quota' if any { $_->{options} =~ /usrquota|grpquota/ } @{$o->{fstab}};
-    push @l, uniq(grep { $_ } map { fs::format::package_needed_for_partition_type($_) } @{$o->{fstab}});
-    push @l, 'ntfs-3g' if any { $_->{fs_type} eq 'ntfs-3g' } @{$o->{fstab}};
+    add_n_log("some fs is mounted with quota options", 'quota') if any { $_->{options} =~ /usrquota|grpquota/ } @{$o->{fstab}};
+    @ltmp = uniq(grep { $_ } map { fs::format::package_needed_for_partition_type($_) } @{$o->{fstab}});
+    add_n_log("needed by some fs", @ltmp) if @ltmp;
+    add_n_log("some fs is NTFS-3G", 'ntfs-3g') if any { $_->{fs_type} eq 'ntfs-3g' } @{$o->{fstab}};
 
     # handle locales with specified scripting:
     my @languages = map { s/\@.*//; $_ } lang::langsLANGUAGE($o->{locale}{langs});
