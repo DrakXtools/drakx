@@ -30,9 +30,6 @@ sub read_one {
         \%p;
     } c::get_disk_partitions($hd->{file});
 
-    use Data::Dumper;
-    print Dumper(@pt);
-
     [ @pt ], $info;
 }
 
