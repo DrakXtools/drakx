@@ -296,10 +296,9 @@ sub start_udev() {
     $ENV{UDEVRULESD} = "/run/udev/rules.d";
 
     # Start up udev and trigger cold plugs
+    mkdir("/dev/$_", 0755) foreach qw(pts shm);
     run_program::run("mount", "-t", "devtmpfs", "-o", "mode=0755,nosuid", "devtmpfs", "/dev");
-    mkdir "/dev/pts", 0755;
     run_program::run("mount", "-t", "devpts", "-o", "gid=5,mode=620,noexec,nosuid", "devpts", "/dev/pts");
-    mkdir "/dev/shm", 0755;
     run_program::run("mount", "-t", "tmpfs", "-o", "mode=1777,nosuid,nodev", "tmpfs", "/dev/shm");
 
     run_program::run("/lib/udev/udevd", "--daemon", "--resolve-names=never");
