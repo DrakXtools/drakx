@@ -59,7 +59,7 @@ my %edit_LABEL = ( # package, command, option
 #    hfs
     dos      => [ 'mtools', 'mlabel', '-i' ],
     vfat     => [ 'mtools', 'mlabel', '-i' ],
-#    swap     => [ 'util-linux-ng', 'mkswap' ],
+#    swap     => [ 'util-linux', 'mkswap' ],
     ntfs     => [ 'ntfsprogs', 'ntfslabel' ],
    'ntfs-3g' => [ 'ntfsprogs', 'ntfslabel' ],
 #    btrfs
