@@ -1214,8 +1214,8 @@ sub is_vmware() {
 
 sub is_netbook_nettop() {
     my @cpus = getCPUs();
-    (any { $_->{'model name'} =~ /(\bIntel\(R\) Atom\(TM\)\B)/i } @cpus) ||
-    (any { $_->{'model name'} =~ /(\bIntel\(R\) Celeron\(R\) M processor\b|\bVIA C7-M Processor\b|\bGeode\(TM\)\B)/i && $_->{'cpu MHz'} < 1500 } @cpus);
+    (any { $_->{'model name'} =~ /(\bIntel\(R\) Atom\(TM\)\b)/i } @cpus) ||
+    (any { $_->{'model name'} =~ /(\bIntel\(R\) Celeron\(R\) M processor\b|\bVIA C7-M Processor\b|\bGeode\(TM\)\b)/i && $_->{'cpu MHz'} < 1500 } @cpus);
 }
 
 sub has_low_resources() {
