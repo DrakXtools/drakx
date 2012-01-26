@@ -290,7 +290,7 @@ sub exitInstall {
 
 sub start_udev() {
     # Ensure /run is mounted
-    mkdir "/run", 0755;
+    mkdir("/run", 0755);
     run_program::run("mount -t tmpfs -o mode=0755,nosuid,nodev tmpfs /run");
     mkdir "/run/udev", 0755;
     mkdir "/run/udev/rules.d", 0755;
