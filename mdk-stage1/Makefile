@@ -80,7 +80,7 @@ FRONTEND_OBJS = $(subst .c,.o,$($(F)_FRONTEND_SRC))
 FRONTEND_LINK = $(FRONTEND_OBJS) $($(F)_FRONTEND_LIBS)
 
 STAGE1_STATIC_LIBS =
-STAGE1_STATIC_USR_LIBS = libz.a libldetect.a libkmod.a libpci.a liblzma.a
+STAGE1_STATIC_USR_LIBS = libz.a libldetect.a libkmod.a libpci.a liblzma.a libsysfs.a
 STAGE1_OWN_LIBS =
 ifeq (UCLIBC, $(L))
 STAGE1_OWN_LIBS = $(patsubst %,/usr/uclibc/usr/$(LIB)/%,$(STAGE1_STATIC_USR_LIBS)) $(patsubst %,/$(LIB)/%,$(STAGE1_STATIC_LIBS))
@@ -135,47 +135,22 @@ BINS = init stage1 dhcp-client rescue-gui probe-modules
 
 DIRS += pci-resource usb-resource slang newt
 ifeq (i386, $(ARCH))
-DIRS += pcmcia pcmcia-resource sysfs
+DIRS += pcmcia pcmcia-resource
 endif
 ifeq (x86_64, $(ARCH))
-DIRS += pcmcia pcmcia-resource sysfs
-endif
-ifeq (mips, $(ARCH))
-DIRS += sysfs
-endif
-ifeq (arm, $(ARCH))
-DIRS += sysfs
-endif
-ifeq (mips, $(ARCH))
-DIRS += sysfs
-endif
-ifeq (arm, $(ARCH))
-DIRS += sysfs
+DIRS += pcmcia pcmcia-resource
 endif
 
 
 
 ifeq (i386,$(ARCH))
-PCMCIA_LIB = pcmcia/libpcmcia.a sysfs/libsysfs.a
+PCMCIA_LIB = pcmcia/libpcmcia.a
 PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
 
 ifeq (x86_64,$(ARCH))
-PCMCIA_LIB = pcmcia/libpcmcia.a sysfs/libsysfs.a
+PCMCIA_LIB = pcmcia/libpcmcia.a
 PCMCIA_DEFS = -DENABLE_PCMCIA
-endif
-ifeq (arm,$(ARCH))
-PCMCIA_LIB = sysfs/libsysfs.a
-endif
-
-ifeq (mips,$(ARCH))
-PCMCIA_LIB = sysfs/libsysfs.a
-endif
-ifeq (arm,$(ARCH))
-PCMCIA_LIB = sysfs/libsysfs.a
-endif
-ifeq (mips,$(ARCH))
-PCMCIA_LIB = sysfs/libsysfs.a
 endif
 
 
