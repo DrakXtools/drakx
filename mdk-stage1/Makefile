@@ -82,17 +82,25 @@ FRONTEND_LINK = $(FRONTEND_OBJS) $($(F)_FRONTEND_LIBS)
 STAGE1_STATIC_LIBS =
 STAGE1_STATIC_USR_LIBS = libz.a libldetect.a libkmod.a libpci.a liblzma.a
 STAGE1_OWN_LIBS =
+ifeq (UCLIBC, $(L))
+STAGE1_OWN_LIBS = $(patsubst %,/usr/uclibc/usr/$(LIB)/%,$(STAGE1_STATIC_USR_LIBS)) $(patsubst %,/$(LIB)/%,$(STAGE1_STATIC_LIBS))
+else
 ifeq (DIETLIBC, $(L))
 STAGE1_OWN_LIBS = $(patsubst %,/usr/lib/dietlibc/lib-$(ARCH)/%,$(STAGE1_STATIC_USR_LIBS) $(STAGE1_STATIC_LIBS))
 else
 STAGE1_OWN_LIBS = $(patsubst %,/usr/$(LIB)/%,$(STAGE1_STATIC_USR_LIBS)) $(patsubst %,/$(LIB)/%,$(STAGE1_STATIC_LIBS))
 endif
+endif
 
 
+ifeq (UCLIBC, $(L))
+STAGE1_NETWORK_LIBS = /usr/uclibc/usr/$(LIB)/libresolv.a
+else
 ifeq (DIETLIBC, $(L))
 STAGE1_NETWORK_LIBS = /usr/lib/dietlibc/lib-$(ARCH)/librpc.a
 else
 STAGE1_NETWORK_LIBS = /usr/$(LIB)/libresolv.a
+endif
 endif
 
  #- stage1 itself

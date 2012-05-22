@@ -36,4 +36,4 @@ $(TARGET): $(OBJS)
 	ranlib $@
 
 $(OBJS): %.o: %.c
-	$(DIET) gcc $(FLAGS) $(INCLUDES) -c $< -o $@
+	$(DIET) $(CC) $(FLAGS) $(INCLUDES) -c $< -o $@

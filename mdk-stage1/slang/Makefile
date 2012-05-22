@@ -39,4 +39,4 @@ $(LIBNAME).a: $(OBJS)
 	ranlib $@
 
 $(OBJS): %.o: %.c
-	$(DIET) gcc $(CFLAGS) $(DEFS) $(INCS) $(INCLUDES) -c $< -o $@
+	$(DIET) $(CC) $(CFLAGS) $(DEFS) $(INCS) $(INCLUDES) -c $< -o $@

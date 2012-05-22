@@ -46,7 +46,7 @@ $(TARGET): $(OBJS) yacc_config.h
 	ranlib $@
 
 $(OBJS): %.o: %.c
-	$(DIET) gcc $(FLAGS) $(INCLUDES) -c $< -o $@
+	$(DIET) $(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
 pcmcia_probe.o: probe.c
-	$(DIET) gcc -fPIC $(FLAGS) $(INCLUDES) -c $< -o $@
+	$(DIET) $(CC) -fPIC $(FLAGS) $(INCLUDES) -c $< -o $@

@@ -28,6 +28,9 @@ else
 F = NEWT
 endif
 
+ifdef UCLIBC
+CC=uclibc-gcc
+else
 # diet libc syscalls are broken on mips
 ifneq (mips, $(ARCH))
 # diet libc eabi support is mostly broken
@@ -35,12 +38,17 @@ ifneq (arm, $(ARCH))
 DIET = $(shell test -x /usr/bin/diet && echo diet)
 endif
 endif
+endif
 
+ifdef UCLIBC
+L = UCLIBC
+else
 ifeq ($(DIET), diet)
  #- default lib is dietlibc (honoured by main Makefile whenever possible)
 L = DIETLIBC
 else
 L = GLIBC
+endif
 endif
 
 ifdef DEBUG
@@ -61,6 +69,7 @@ endif
 DIETLIBC_INCLUDES = -I/usr/lib/dietlibc/include -I.
 DIETLIBC_LIBC = /usr/lib/dietlibc/lib-$(ARCH)/libcompat.a
 GLIBC_INCLUDES = -I.
+UCLIBC_INCLUDES = -I.
 INCLUDES = $($(L)_INCLUDES)
 
 GLIBC_LDFLAGS = -static
