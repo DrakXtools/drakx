@@ -28,6 +28,7 @@ else
 F = NEWT
 endif
 
+ifndef DYNAMIC
 ifdef UCLIBC
 CC=uclibc-gcc
 else
@@ -36,6 +37,7 @@ ifneq (mips, $(ARCH))
 # diet libc eabi support is mostly broken
 ifneq (arm, $(ARCH))
 DIET = $(shell test -x /usr/bin/diet && echo diet)
+endif
 endif
 endif
 endif
@@ -72,7 +74,9 @@ GLIBC_INCLUDES = -I.
 UCLIBC_INCLUDES = -I.
 INCLUDES = $($(L)_INCLUDES)
 
+ifndef DYNAMIC
 GLIBC_LDFLAGS = -static
+endif
 LDFLAGS = $($(L)_LDFLAGS)
 
 STAGE1_LIBC = $($(L)_LIBC)
