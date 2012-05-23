@@ -76,6 +76,7 @@ INCLUDES = $($(L)_INCLUDES)
 
 ifndef DYNAMIC
 GLIBC_LDFLAGS = -static
+UCLIBC_LDFLAGS = -static
 endif
 LDFLAGS = $($(L)_LDFLAGS)
 
