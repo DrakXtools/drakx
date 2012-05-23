@@ -14,7 +14,7 @@ foreach (<DATA>) {
 	    }
 	};
 	foreach (@l2) {
-	    my $cmd = "mknod-m600 $_ $typ $maj " . $min++;
+	    my $cmd = "mknod -m600 $_ $typ $maj " . $min++;
 	    system($cmd) == 0 or die "$cmd failed\n";
 	}
     }
