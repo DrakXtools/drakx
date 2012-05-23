@@ -68,7 +68,11 @@ INITOBJS = $(subst .c,.o,$(INITSRC))
 
  #- frontends
 NEWT_FRONTEND_SRC = newt-frontend.c
+ifdef DYNAMIC
+NEWT_FRONTEND_LIBS = -lnewt -lslang
+else
 NEWT_FRONTEND_LIBS = newt/libnewt.a slang/libslang.a
+endif
 
 STDIO_FRONTEND_SRC = stdio-frontend.c
 STDIO_FRONTEND_LIBS =
@@ -96,7 +100,9 @@ endif
 endif
 endif
 
-
+ifdef DYNAMIC
+STAGE1_NETWORK_LIBS = -lresolv
+else
 ifeq (UCLIBC, $(L))
 STAGE1_NETWORK_LIBS = /usr/uclibc/usr/$(LIB)/libresolv.a
 else
@@ -104,6 +110,7 @@ ifeq (DIETLIBC, $(L))
 STAGE1_NETWORK_LIBS = /usr/lib/dietlibc/lib-$(ARCH)/librpc.a
 else
 STAGE1_NETWORK_LIBS = /usr/$(LIB)/libresolv.a
+endif
 endif
 endif
 
