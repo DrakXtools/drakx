@@ -65,7 +65,7 @@ sub extract_installed_rpm {
     sys('cp', "$installed_dir/boot/vmlinuz-$kern_ver", "$local_dir/vmlinuz");
     sys("cp $installed_dir/lib/modules/$kern_ver/modules.* $local_dir");
 
-    open(my $F, "find $installed_dir/lib/modules/$kern_ver -name '*.ko' |");
+    open(my $F, "find $installed_dir/lib/modules/$kern_ver -name '*.ko' -o -name '*.ko.gz' -o -name '*.ko.xz' |");
     my $file; while ($file = <$F>) {
 	chomp($file);
 	system('cp', $file, "$local_dir/modules/" . basename($file)) == 0

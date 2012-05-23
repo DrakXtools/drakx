@@ -61,6 +61,7 @@ sub remove_unneeded_modules {
     my @all_with_deps = map { dependencies_closure($_) } @all;
     my %wanted_modules = map { (list_modules::modname2filename($_) . ".ko" => 1) } @all_with_deps;
     foreach (all("all.kernels/$kern_ver/modules")) {
+	$_ =~ s/\.(gz|xz)//;
 	$wanted_modules{$_} or unlink "all.kernels/$kern_ver/modules/$_";	
     }
 }
@@ -70,7 +71,7 @@ sub make_modules_per_image {
 
     my $dir = "all.kernels/$kern_ver/modules";
 
-    system("cd $dir ; tar cf ../all_modules.tar *.ko") == 0 or die "tar failed\n";
+    system("cd $dir ; tar cf ../all_modules.tar *.ko*") == 0 or die "tar failed\n";
 }
 
 sub get_main_modules() {
