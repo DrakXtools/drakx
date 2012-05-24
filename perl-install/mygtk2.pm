@@ -1540,7 +1540,7 @@ sub _get_weakness_tooltip {
     my %weakness_tooltip = (
         1 => N("Password is trivial to guess"),
         2 => N("Password is trivial to guess"),
-        3 => N("Password should resist to basic attacks"),
+        3 => N("Password should be resistant to basic attacks"),
         4 => N("Password seems secure"),
         5 => N("Password seems secure"));
     my $weakness_tooltip = $weakness_tooltip{$password_weakness} || return undef;
