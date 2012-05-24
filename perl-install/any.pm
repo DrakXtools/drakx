@@ -183,7 +183,10 @@ sub setupBootloaderBefore {
     } elsif (bootloader::get_append_simple($bootloader, 'noresume')) {
     } else {
 	if (my ($biggest_swap) = sort { $b->{size} <=> $a->{size} } grep { isSwap($_) } @$fstab) {
-	    bootloader::set_append_with_key($bootloader, resume => fs::wild_device::from_part('', $biggest_swap));
+	    my $biggest_swap_dev = fs::wild_device::from_part('', $biggest_swap);
+	    bootloader::set_append_with_key($bootloader, resume => $biggest_swap_dev);
+	    mkdir_p("$::prefix/etc/dracut.conf.d");
+	    output("$::prefix/etc/dracut.conf.d/51-mageia-resume.conf", qq(add_device+="$biggest_swap_dev"\n));
 	}
     }
 
