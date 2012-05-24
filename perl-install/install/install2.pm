@@ -658,6 +658,10 @@ sub main {
 
 	last if $o->{step} eq 'exitInstall';
     }
+    finish_install();
+}
+
+sub finish_install() {
     unlink $install::any::compressed_image_on_disk;
     install::media::clean_postinstall_rpms();
     install::media::log_sizes();
