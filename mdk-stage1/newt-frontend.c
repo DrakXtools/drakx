@@ -299,7 +299,7 @@ static int mynewtWinEntries(char * title, char * text, int suggestedWidth, int f
 	for (i = 0; i < numItems; i++) {
 		newtComponent entr = newtEntry(-1, -1, items[i].value ? 
 					       *items[i].value : NULL, dataWidth,
-					       items[i].value, items[i].flags);
+					       (const char**)items[i].value, items[i].flags);
 
 		newtGridSetField(subgrid, 0, i, NEWT_GRID_COMPONENT,
 				 newtLabel(-1, -1, items[i].text),
