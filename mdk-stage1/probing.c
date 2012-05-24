@@ -50,13 +50,13 @@
 #include "utils.h"
 #include "frontend.h"
 #include "modules.h"
-#include "pci-resource/pci-ids.h"
+#include "pci-ids.h"
 #ifdef ENABLE_USB
-#include "usb-resource/usb-ids.h"
+#include "usb-ids.h"
 #endif
 #ifdef ENABLE_PCMCIA
 #include "sysfs/libsysfs.h"
-#include "pcmcia-resource/pcmcia-ids.h"
+#include "pcmcia-ids.h"
 #endif
 
 #include "probing.h"

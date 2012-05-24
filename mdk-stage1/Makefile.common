@@ -23,35 +23,23 @@ ARCH := $(patsubst arm%,arm,$(ARCH))
 
  #- default frontend is newt (honoured by main Makefile whenever possible)
 ifdef DEBUG
-F = STDIO
+FRONTEND = stdio
 else
-F = NEWT
+FRONTEND = newt
 endif
 
-ifndef DYNAMIC
-ifdef UCLIBC
+LIBC=uclibc
+
+ifeq (uclibc, $(LIBC))
 CC=uclibc-gcc
 else
 # diet libc syscalls are broken on mips
-ifneq (mips, $(ARCH))
 # diet libc eabi support is mostly broken
-ifneq (arm, $(ARCH))
-DIET = $(shell test -x /usr/bin/diet && echo diet)
-endif
-endif
+ifeq (dietlibc, $(LIBC))
+DIET= /usr/bin/diet
 endif
 endif
 
-ifdef UCLIBC
-L = UCLIBC
-else
-ifeq ($(DIET), diet)
- #- default lib is dietlibc (honoured by main Makefile whenever possible)
-L = DIETLIBC
-else
-L = GLIBC
-endif
-endif
 
 ifdef DEBUG
 OPTFLAGS = -g
@@ -68,19 +56,16 @@ CFLAGS += -Werror
 endif
 endif
 
-DIETLIBC_INCLUDES = -I/usr/lib/dietlibc/include -I.
-DIETLIBC_LIBC = /usr/lib/dietlibc/lib-$(ARCH)/libcompat.a
-GLIBC_INCLUDES = -I.
-UCLIBC_INCLUDES = -I.
-INCLUDES = $($(L)_INCLUDES)
+INCLUDES = -I.
 
-ifndef DYNAMIC
-GLIBC_LDFLAGS = -static
-UCLIBC_LDFLAGS = -static
+LIBC_LIBS = 
+ifeq (dietlibc, $(LIBC))
+LIBC_LIBS += -lcompat
 endif
-LDFLAGS = $($(L)_LDFLAGS)
 
-STAGE1_LIBC = $($(L)_LIBC)
+ifeq (uclibc, $(LIBC))
+LDFLAGS += -static
+endif
 
 ifdef DEBUG
 STRIPCMD = echo not stripping

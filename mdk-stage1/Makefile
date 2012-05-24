@@ -57,84 +57,42 @@ DEFS = -DDISTRIB_NAME=\"$(DISTRIB_NAME)\" -DDISTRIB_VERSION=\"$(DISTRIB_VERSION)
 
 COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
-INIT_DEFS =
 INITSRC = init.c
-ifneq (DIETLIBC, $(L))
-INIT_DEFS += $(GLIBC_INCLUDES)
-endif
 
 INITOBJS = $(subst .c,.o,$(INITSRC))
 
 
+FRONTEND_SRC =
+FRONTEND_LIBS =
  #- frontends
-NEWT_FRONTEND_SRC = newt-frontend.c
-ifdef DYNAMIC
-NEWT_FRONTEND_LIBS = -lnewt -lslang
+ifeq (newt, $(FRONTEND))
+FRONTEND_SRC += newt-frontend.c
+FRONTEND_LIBS += -lnewt -lslang
 else
-NEWT_FRONTEND_LIBS = libnewt.a libslang.a
+FRONTEND_SRC += stdio-frontend.c
 endif
 
-STDIO_FRONTEND_SRC = stdio-frontend.c
-STDIO_FRONTEND_LIBS =
-STDIO_FRONTEND_LIBS =
 
+FRONTEND_OBJS = $(subst .c,.o,$(FRONTEND_SRC))
 
-FRONTEND_OBJS = $(subst .c,.o,$($(F)_FRONTEND_SRC))
+STAGE1_LIBS = -lz -lldetect -lkmod -lpci -llzma -lsysfs
 
-ifdef DYNAMIC
-FRONTEND_LINK = $(FRONTEND_OBJS) $($(F)_FRONTEND_LIBS)
+STAGE1_NETWORK_LIBS =
+ifeq (dietlibc, $(LIBC))
+STAGE1_NETWORK_LIBS += -lrpc
 else
-ifeq (UCLIBC, $(L))
-FRONTEND_LINK = $(FRONTEND_OBJS) $(patsubst %,/usr/uclibc/usr/$(LIB)/%,$($(F)_FRONTEND_LIBS))
-else
-ifeq (DIETLIBC, $(L))
-FRONTEND_LINK = $(FRONTEND_OBJS) $(patsubst %,/usr/lib/dietlibc/lib-$(ARCH)/%,$($(F)_FRONTEND_LIBS))
-else
-FRONTEND_LINK = $(FRONTEND_OBJS) $(patsubst %,/usr/$(LIB)/%,$($(F)_FRONTEND_LIBS))
-endif
-endif
-endif
-
-STAGE1_STATIC_LIBS =
-STAGE1_STATIC_USR_LIBS = libz.a libldetect.a libkmod.a libpci.a liblzma.a libsysfs.a
-STAGE1_OWN_LIBS =
-ifdef DYNAMIC
-STAGE1_OWN_LIBS = -lz -lldetect -lkmod -lpci -llzma -lsysfs
-else
-ifeq (UCLIBC, $(L))
-STAGE1_OWN_LIBS = $(patsubst %,/usr/uclibc/usr/$(LIB)/%,$(STAGE1_STATIC_USR_LIBS)) $(patsubst %,/$(LIB)/%,$(STAGE1_STATIC_LIBS))
-else
-ifeq (DIETLIBC, $(L))
-STAGE1_OWN_LIBS = $(patsubst %,/usr/lib/dietlibc/lib-$(ARCH)/%,$(STAGE1_STATIC_USR_LIBS) $(STAGE1_STATIC_LIBS))
-else
-STAGE1_OWN_LIBS = $(patsubst %,/usr/$(LIB)/%,$(STAGE1_STATIC_USR_LIBS)) $(patsubst %,/$(LIB)/%,$(STAGE1_STATIC_LIBS))
-endif
-endif
-endif
-
-ifdef DYNAMIC
-STAGE1_NETWORK_LIBS = -lresolv
-else
-ifeq (UCLIBC, $(L))
-STAGE1_NETWORK_LIBS = /usr/uclibc/usr/$(LIB)/libresolv.a
-else
-ifeq (DIETLIBC, $(L))
-STAGE1_NETWORK_LIBS = /usr/lib/dietlibc/lib-$(ARCH)/librpc.a
-else
-STAGE1_NETWORK_LIBS = /usr/$(LIB)/libresolv.a
-endif
-endif
+STAGE1_NETWORK_LIBS += -lresolv
 endif
 
  #- stage1 itself
-STAGE1SRC = stage1.c log.c utils.c params.c tools.c modules.c probing.c mount.c automatic.c frontend-common.c lomount.c thirdparty.c zlibsupport.c
+STAGE1_SRC = stage1.c log.c utils.c params.c tools.c modules.c probing.c mount.c automatic.c frontend-common.c lomount.c thirdparty.c zlibsupport.c
 CDROMSRC = cdrom.c
 DISKSRC = disk.c directory.c partition.c
 NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c directory.c wireless.c
 KASRC = ka.c
 
 # use sort to remove duplicates
-STAGE1_ALLSRC = $(sort $(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC) $(KASRC))
+STAGE1_ALLSRC = $(sort $(STAGE1_SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC) $(KASRC))
 ALLSRC = $(INITSRC) $(STAGE1_ALLSRC)
 
 
@@ -142,95 +100,85 @@ ALLSRC = $(INITSRC) $(STAGE1_ALLSRC)
 CDROM_DEFS = -DSPAWN_SHELL -DDISABLE_DISK -DDISABLE_NETWORK
 
 
-STAGE1OBJS-NETWORK = $(subst .c,-NETWORK.o,$(STAGE1SRC) $(NETWORKSRC))
+STAGE1OBJS_NETWORK = $(subst .c,-NETWORK.o,$(STAGE1_SRC) $(NETWORKSRC))
 
 NETWORK_DEFS = -DSPAWN_SHELL -DDISABLE_CDROM -DDISABLE_DISK -DDISABLE_KA
 
 
-STAGE1OBJS-NETWORK-STANDALONE = $(subst .c,-NETWORK-STANDALONE.o,$(STAGE1SRC) $(NETWORKSRC))
+STAGE1OBJS_NETWORK_STANDALONE = $(subst .c,-NETWORK-STANDALONE.o,$(STAGE1_SRC) $(NETWORKSRC))
 
 NETWORK_STANDALONE_DEFS = -DDISABLE_CDROM -DDISABLE_DISK -DENABLE_NETWORK_STANDALONE -DDISABLE_KA
 
 
-STAGE1OBJS-FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
+STAGE1OBJS_FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
 
 BINS = init stage1 dhcp-client rescue-gui probe-modules
 
-DIRS += pci-resource usb-resource
+OTHERS = pci-ids.h usb-ids.h
 ifeq (i386, $(ARCH))
-DIRS += pcmcia pcmcia-resource
+OTHERS += pcmcia-ids.h pcmcia
+PCMCIA_LIB = pcmcia/libpcmcia.a
+PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
 ifeq (x86_64, $(ARCH))
-DIRS += pcmcia pcmcia-resource
-endif
-
-
-
-ifeq (i386,$(ARCH))
+OTHERS += pcmcia-ids.h pcmcia
 PCMCIA_LIB = pcmcia/libpcmcia.a
 PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
-
-ifeq (x86_64,$(ARCH))
-PCMCIA_LIB = pcmcia/libpcmcia.a
-PCMCIA_DEFS = -DENABLE_PCMCIA
-endif
-
 
 USB_DEFS_GEN = -DENABLE_USB
 USB_DEFS = -DENABLE_USB -DDISABLE_PCIADAPTERS
 
-all: dirs $(BINS)
+all: $(OTHERS) $(BINS)
 
-dirs:
-	@for n in . $(DIRS); do \
-		[ "$$n" = "." ] || make -C $$n || exit 1 ;\
-	done
+pci-ids.h: /usr/share/ldetect-lst/pcitable.gz update-pci-ids.pl
+	perl update-pci-ids.pl > $@ || { rm -f $@; exit 1; }
 
-init: $(INITOBJS) $(STAGE1_LIBC)
-	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
+pcmcia-ids.h: update-pcmcia-ids.pl
+	perl update-pcmcia-ids.pl > $@ || { rm -f $@; exit 1; }
+
+usb-ids.h: /usr/share/ldetect-lst/usbtable.gz update-usb-ids.pl
+	perl update-usb-ids.pl > $@ || { rm -f $@; exit 1; }
+
+init: $(INITOBJS)
+	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(LIBC_LIBS)
 	$(STRIPCMD) $@
 
-stage1: $(STAGE1OBJS-FULL) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) bootsplash.o $(PCMCIA_LIB) $(STAGE1_LIBC)
-	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
+stage1: $(STAGE1OBJS_FULL) bootsplash.o $(FRONTEND_OBJS) $(PCMCIA_LIB)
+	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
 	$(STRIPCMD) $@
 
-dhcp-client: $(STAGE1OBJS-NETWORK-STANDALONE) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
-	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
+dhcp-client: $(STAGE1OBJS_NETWORK_STANDALONE) $(FRONTEND_OBJS)
+	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
 	$(STRIPCMD) $@
 
 
 $(INITOBJS): %.o: %.c
-	$(COMPILE) $(INIT_DEFS) -c $<
+	$(COMPILE) $(INCLUDES) -c $<
 
-$(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c
+$(STAGE1OBJS_NETWORK): %-NETWORK.o: %.c
 	$(DIET) $(COMPILE) $(INCLUDES) $(NETWORK_DEFS) $(PCMCIA_DEFS) $(USB_DEFS_GEN) -DENABLE_ADDITIONAL_MODULES -c $< -o $@
 
-$(STAGE1OBJS-NETWORK-STANDALONE): %-NETWORK-STANDALONE.o: %.c
+$(STAGE1OBJS_NETWORK_STANDALONE): %-NETWORK-STANDALONE.o: %.c
 	$(DIET) $(COMPILE) $(INCLUDES) $(NETWORK_STANDALONE_DEFS) $(USB_DEFS_GEN) -c $< -o $@
 
-$(STAGE1OBJS-FULL): %-FULL.o: %.c
+$(STAGE1OBJS_FULL): %-FULL.o: %.c
 	$(DIET) $(COMPILE) $(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) -DENABLE_BOOTSPLASH -c $< -o $@
 
 .c.o:
 	$(DIET) $(COMPILE) $(INCLUDES) -DENABLE_BOOTSPLASH -c $<
 
 
-clean: localclean
-	@for n in $(DIRS); do \
-		(cd $$n; make clean) \
-	done
-
-localclean:
-	rm -f *.o .depend *.rdz *.img $(BINS)
+clean:
+	rm -f *.o .depend *.rdz *.img pci-ids.h pcmcia-ids.h usb-ids.h $(BINS)
 
 
-rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(FRONTEND_LINK) $(STAGE1_LIBC)
-	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
+rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(FRONTEND_OBJS)
+	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(FRONTEND_LIBS) $(LIBC_LIBS)
 	$(STRIPCMD) $@
 
-probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o zlibsupport-FULL.o $(STAGE1_OWN_LIBS) $(PCMCIA_LIB) $(STAGE1_LIBC)
-	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
+probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o zlibsupport-FULL.o $(PCMCIA_LIB)
+	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(LIBC_LIBS)
 	$(STRIPCMD) $@
 
 dist: tar

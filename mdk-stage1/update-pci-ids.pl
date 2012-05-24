@@ -12,7 +12,7 @@ my %t = (
 );
 
 foreach my $type (keys %t) {
-    my @modules = chomp_(`perl ../../kernel/modules.pl pci_modules4stage1 "$t{$type}"`)
+    my @modules = chomp_(`perl ../kernel/modules.pl pci_modules4stage1 "$t{$type}"`)
 	or die "unable to get PCI modules";
 
     print "#ifndef DISABLE_".uc($type)."
