@@ -161,8 +161,16 @@ sub add_boot_splash {
 sub update_splash {
     my ($bootloader) = @_;
 
+    my %real_initrd_entries;
     foreach (@{$bootloader->{entries}}) {
-	add_boot_splash($_->{initrd}, $_->{vga} || $bootloader->{vga}) if $_->{initrd};
+	if ($_->{initrd}) {
+	    my $initrd = expand_symlinks($_->{initrd});
+	    $real_initrd_entries{$initrd} = $_;
+	}
+    }
+    foreach (values %real_initrd_entries) {
+        log::l("add boot splash to $_->{initrd}\n");
+	add_boot_splash($_->{initrd}, $_->{vga} || $bootloader->{vga});
     }
 }
 
