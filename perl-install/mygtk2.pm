@@ -24,7 +24,7 @@ sub init() {
           @::textdomains;
     Gtk2->croak_execeptions;
 }
-init() unless ($::no_ugtk_init);
+init() unless $::no_ugtk_init;
 Gtk2->croak_execeptions if $::isInstall;
 
 

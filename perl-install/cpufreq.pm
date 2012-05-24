@@ -112,7 +112,7 @@ sub probe_powernow_k8() {
         get_vendor($_) eq "AMD" && (
             ($_->{'cpu family'} == 15 && ($_->{'power management'} =~ /\bfid\b/ || has_flag($_, 'fid'))) # frequency ID control)
                 ||
-            ($_->{'cpu family'} == 16 && ($_->{'power management'} =~ /\bhwpstate\b/)) # support for Athlon/Phenom II processors (#58477))
+            $_->{'cpu family'} == 16 && ($_->{'power management'} =~ /\bhwpstate\b/) # support for Athlon/Phenom II processors (#58477))
         );
     } get_cpus();
 }
