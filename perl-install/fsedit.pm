@@ -462,7 +462,7 @@ Please be sure to add a separate /boot partition");
     }
 
     if ($mntpoint eq "/boot" && (isLUKS($part) || isRawLUKS($part)))  {
-	die N("You cannot use an encrypted file system for mount point %s", "/boot");
+	die N("You cannot use an encrypted filesystem for mount point %s", "/boot");
     }
 
     #- NB: if the LV doesn't exist, lv_nb_pvs returns 0
@@ -480,7 +480,7 @@ You should create a separate /boot partition first") if $mntpoint eq "/" && isLV
       if !isTrueLocalFS($part) && $mntpoint eq '/';
     die N("You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount point\n")
       if !isTrueFS($part) && member($mntpoint, '/home', fs::type::directories_needed_to_boot());
-    die N("You cannot use an encrypted file system for mount point %s", $mntpoint)
+    die N("You cannot use an encrypted filesystem for mount point %s", $mntpoint)
       if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var /boot));
 
     local $part->{mntpoint} = $mntpoint;

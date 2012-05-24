@@ -516,7 +516,7 @@ When a partition is selected, you can use:
 
  * Ctrl-m to set the mount point
 
-To get information about the different file system types available, please
+To get information about the different filesystem types available, please
 read the ext2FS chapter from the ``Reference Manual''.
 
 If you are installing on a PPC machine, you will want to create a small HFS
@@ -572,7 +572,7 @@ upgrade of an existing Mandriva Linux system:
 However, depending on your partitioning scheme, you can prevent some of
 your existing data (notably \"home\" directories) from being over-written.
 If you wish to change how your hard drives are partitioned, or to change
-the file system, you should use this option.
+the filesystem, you should use this option.
 
  * \"%s\". This installation class allows you to update the packages
 currently installed on your Mandriva Linux system. Your current partitioning

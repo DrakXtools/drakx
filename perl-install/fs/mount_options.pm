@@ -116,32 +116,32 @@ sub help() {
 
 	'grpquota' => N("Enable group disk quota accounting and optionally enforce limits"),
 
-	'noatime' => N("Do not update inode access times on this file system
+	'noatime' => N("Do not update inode access times on this filesystem
 (e.g, for faster access on the news spool to speed up news servers)."),
 
 	'relatime' => N("Update inode access times on this filesystem in a more efficient way
 (e.g, for faster access on the news spool to speed up news servers)."),
 
 	'noauto' => N("Can only be mounted explicitly (i.e.,
-the -a option will not cause the file system to be mounted)."),
+the -a option will not cause the filesystem to be mounted)."),
 
-	'nodev' => N("Do not interpret character or block special devices on the file system."),
+	'nodev' => N("Do not interpret character or block special devices on the filesystem."),
 
 	'noexec' => N("Do not allow execution of any binaries on the mounted
-file system. This option might be useful for a server that has file systems
+filesystem. This option might be useful for a server that has filesystems
 containing binaries for architectures other than its own."),
 
 	'nosuid' => N("Do not allow set-user-identifier or set-group-identifier
 bits to take effect. (This seems safe, but is in fact rather unsafe if you
 have suidperl(1) installed.)"),
 
-	'ro' => N("Mount the file system read-only."),
+	'ro' => N("Mount the filesystem read-only."),
 
-	'sync' => N("All I/O to the file system should be done synchronously."),
+	'sync' => N("All I/O to the filesystem should be done synchronously."),
 
-	'users' => N("Allow every user to mount and umount the file system."),         
+	'users' => N("Allow every user to mount and umount the filesystem."),         
 
-	'user' => N("Allow an ordinary user to mount the file system."),         
+	'user' => N("Allow an ordinary user to mount the filesystem."),         
 
 	'usrquota' => N("Enable user disk quota accounting, and optionally enforce limits"),
 
@@ -204,7 +204,7 @@ sub set_default {
 	#- noatime on laptops (do not wake up the hd)
 	#- otherwise relatime (wake up the hd less often / better performances)
 	#- Do  not  update  inode  access times on this
-	#- file system (e.g, for faster access  on  the
+	#- filesystem (e.g, for faster access  on  the
 	#- news spool to speed up news servers).
 	$options->{relatime} = $options->{noatime} = 0;
 	$options->{ detect_devices::isLaptop() ? 'noatime' : 'relatime' } = 1 if !$opts{force_atime};

@@ -57,7 +57,7 @@ sub read($) {
     $fs->{cluster_size} = $fs->{cluster_size_in_sectors} * $fs->{sector_size};
 
     $fs->{boot_sign} == 0xAA55 or die "Invalid signature for a MS-based filesystem.\n";
-    $fs->{nb_sectors} < 32 and die "Too few sectors for viable file system\n";
+    $fs->{nb_sectors} < 32 and die "Too few sectors for viable filesystem\n";
     $fs->{nb_fats} == 2 or cdie "Weird number of FATs: $fs->{nb_fats}, not 2.\n";
     $fs->{sector_size} == 512 or cdie "Strange sector_size != 512\n";
 
