@@ -334,6 +334,18 @@ sub init_brltty() {
     run_program::run("brltty");
 }
 
+sub read_product_id() {
+    my $product_id = cat__(install::any::getFile_($o->{stage2_phys_medium}, "product.id"));
+    log::l('product_id: ' . chomp_($product_id));
+    $o->{product_id} = common::parse_LDAP_namespace_structure($product_id);
+ 
+    $o->{meta_class} ||= {
+        One          => 'desktop',
+        Free         => 'download',
+        Powerpack    => 'powerpack',
+    }->{$o->{product_id}{product}} || 'download';
+}
+
 sub sig_segv_handler() {
     my $msg = "segmentation fault: install crashed (maybe memory is missing?)\n" . backtrace();
     log::l("$msg\n");
@@ -578,17 +590,7 @@ sub main {
 
     $o->{allowFB} = listlength(cat_("/proc/fb"));
 
-    if (!$::testing) {
-	my $product_id = cat__(install::any::getFile_($o->{stage2_phys_medium}, "product.id"));
-	log::l('product_id: ' . chomp_($product_id));
-	$o->{product_id} = common::parse_LDAP_namespace_structure($product_id);
-
-	$o->{meta_class} ||= {
-	    One          => 'desktop',
-	    Free         => 'download',
-	    Powerpack    => 'powerpack',
-	}->{$o->{product_id}{product}} || 'download';
-    }
+    read_product_id() if !$::testing;
 
     log::l("META_CLASS=$o->{meta_class}");
     $ENV{META_CLASS} = $o->{meta_class}; #- for Ia Ora
