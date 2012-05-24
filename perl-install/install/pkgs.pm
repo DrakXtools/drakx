@@ -376,6 +376,7 @@ sub empty_packages {
     $packages->{options}{'priority-upgrade'} = undef;
     # log $trans->add() faillure; FIXME: should we override *urpm::msg::sys_log?
     $packages->{debug} = $packages->{debug_URPM} = \&log::l;
+    $packages->{options}{'curl-options'} = $::o->{curl_options} if $::o->{curl_options};
 
     $packages;
 }

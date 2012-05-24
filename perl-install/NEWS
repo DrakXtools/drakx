@@ -1,3 +1,7 @@
+- pkgs.pm, http.pm: Allow to set urpm curl options in order to be able
+  to make curl quiet when running an autoinstall in text mode. This can
+  be set throught the new option "curl_options" in the auto_inst file.
+  Also, use '-s' by default when downloading VERSION and auto_inst file.
 - harddrake:
   o do not disable cpufreq on non-laptops
   o remove double apmd check

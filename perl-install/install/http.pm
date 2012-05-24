@@ -41,6 +41,7 @@ sub get_file_and_size {
     if (!$urpm) {
         require install::pkgs;
         $urpm = install::pkgs::empty_packages($::o->{keep_unrequested_dependencies});
+	$urpm->{options}{'curl-options'} = '-s';
     }
 
     my $cachedir = $urpm->{cachedir} || '/root';
