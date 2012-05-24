@@ -49,7 +49,7 @@ my ($raid_parts, $normal_parts) = partition { isRawRAID($_) } @parts;
 
 if (@$raid_parts) {
     require raid;
-    raid::detect_during_install_once(@$raid_parts);
+    raid::detect_during_install(@$raid_parts);
     my $raids = raid::get_existing(@$raid_parts);
     push @$normal_parts, @$raids;
 }
