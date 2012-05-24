@@ -144,20 +144,20 @@ xinetd => N_("Starts other deamons on demand."),
 sub ask_ {
     my ($in) = @_;
     my %root_services = (
-			 N("Printing") => [ qw(cups cupslpd lpr lpd oki4daemon hpoj cups-lpd) ],
-			 N("Internet") => [ qw(httpd boa tux roxen ftp pftp tftp proftpd wu-ftpd pure-ftpdipsec proftpd-xinetd
-                                               iptables ip6tables ipvsadm isdn4linux ibod jabber jabber-icq adsl mandi shorewall squid
-                                               portsentry prelude nessusd junkbuster radvd cddbp ippl iptoip jail.init) ],
-			 N("File sharing") => [ qw(nfs-common nfs-server nfslock smb nettalk netfs mcserv autofs amd
-                                                   venus.init auth2.init codasrv.init update.init swat) ],
-			 N("System") => [ qw(usb usbd pcmcia irda xinetd inetd kudzu harddrake apmd sound network xfs
-                                             alsa functions halt kheader killall mandrake_everytime mandrake_firstime
-                                             random rawdevices single keytable syslog crond medusa-init portmap rpcbind acon
-                                             anacron atd gpm psacct wine acpid numlock jserver sensors mosix bpowerd bpowerfail
-                                             fcron powertweak.init ups syslog-ng cvs apcupsd) ],
-			 N("Remote Administration") => [ qw(sshd telnetd telnet rsh rlogin rexec webmin cfd heartbeat ldirectord
-                                                            iplog mon vncserver netsaint olympusd drakxtools_http) ],
-#			 N("Network Client") => [ qw(ypbind nscd arpwatch fetchmail dnrd_rc diald rsync) ],
+			 N("Printing") => [ qw(cups cupslpd cups-lpd hpoj lpd lpr oki4daemon) ],
+			 N("Internet") => [ qw(adsl boa cddbp ftp httpd ibod ip6tables ippl iptables iptoip ipvsadm
+                                               isdn4linux jabber jabber-icq jail.init junkbuster mandi nessusd pftp portsentry 
+                                               prelude proftpd proftpd-xinetd pure-ftpd ipsec radvd roxen shorewall squid
+                                               tftp tux wu-ftpd) ],
+			 N("File sharing") => [ qw(amd auth2.init autofs codasrv.init mcserv netfs nettalk nfs-common nfs-server 
+                                                   nfslock smb swat update.init venus.init) ],
+			 N("System") => [ qw(acon acpid alsa anacron apcupsd apmd atd bpowerd bpowerfail crond cvs fcron functions
+                                             gpm halt harddrake inetd irda jserver keytable kheader killall kudzu mageia_everytime
+                                             mageia_firstime medusa-init mosix network numlock pcmcia portmap powertweak.init psacct
+                                             random rawdevices rpcbind sensors single sound syslog syslog-ng ups usb usbd wine xfs xinetd) ],
+			 N("Remote Administration") => [ qw(cfd drakxtools_http heartbeat iplog ldirectord mon netsaint olympusd rexec
+                                                            rlogin rsh sshd telnet telnetd vncserver webmin) ],
+#			 N("Network Client") => [ qw(arpwatch diald dnrd_rc fetchmail nscd rsync ypbind) ],
 #			 N("Network Server") => [ qw(named bootparamd ntpd xntpd chronyd postfix sendmail
 #                                                     imap imaps ipop2 ipop3 pop3s routed yppasswdd ypserv ldap dhcpd dhcrelay
 #                                                     hylafax innd identd rstatd rusersd rwalld rwhod gated
