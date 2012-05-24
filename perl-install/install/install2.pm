@@ -470,41 +470,54 @@ sub parse_args {
 	    langs     => sub { $o->{locale}{langs} = +{ map { $_ => 1 } split(':', $v) } },
 	    method    => sub { $o->{method} = $v },
 	    pcmcia    => sub { $o->{pcmcia} = $v },
-	    vga16     => sub { $o->{vga16} = $v },
-	    vga       => sub { $o->{vga} = $v =~ /0x/ ? hex($v) : $v },
 	    step      => sub { $o->{steps}{first} = $v },
 	    meta_class => sub { $o->{meta_class} = $v },
 	    freedriver => sub { $o->{freedriver} = $v },
+
+	    # fs/block options:
 	    no_bad_drives => sub { $o->{partitioning}{no_bad_drives} = 1 },
 	    nodmraid  => sub { $o->{partitioning}{nodmraid} = 1 },
+	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
+	    use_uuid  => sub { $::no_uuid_by_default = !$v },
+
+	    # urpmi options:
 	    debug_urpmi  => sub { $o->{debug_urpmi} = 1 },
 	    justdb    => sub { $o->{justdb} = 1 },
 	    'tune-rpm' => sub { $o->{'tune-rpm'} = 'all' },
-	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
+
+	    # GUI options:
+	    vga16     => sub { $o->{vga16} = $v },
+	    vga       => sub { $o->{vga} = $v =~ /0x/ ? hex($v) : $v },
 	    display   => sub { $o->{display} = $v },
 	    askdisplay => sub { print "Please enter the X11 display to perform the install on ? "; $o->{display} = chomp_(scalar(<STDIN>)) },
-	    security  => sub { $o->{security} = $v },
-	    noauto    => sub { $::noauto = 1 },
-	    testing   => sub { $::testing = 1 },
-	    patch     => sub { $patch = 1 },
-	    defcfg    => sub { $cfg = $v },
-	    newt      => sub { $o->{interactive} = "curses" },
 	    text      => sub { $o->{interactive} = "curses" },
 	    stdio     => sub { $o->{interactive} = "stdio" },
-	    use_uuid  => sub { $::no_uuid_by_default = !$v },
-	    kickstart => sub { $::auto_install = $v },
-	    local_install => sub { $::local_install = 1 },
-	    uml_install => sub { $::uml_install = $::local_install = 1 },
-	    auto_install => sub { $::auto_install = $v },
+	    newt      => sub { $o->{interactive} = "curses" },
 	    simple_themes => sub { $o->{simple_themes} = 1 },
 	    theme     => sub { $o->{theme} = $v },
 	    doc       => sub { $o->{doc} = 1 },  #- will be used to know that we're running for the doc team,
 	                                         #- e.g. we want screenshots with a good B&W contrast
+
+	    security  => sub { $o->{security} = $v },
+
+	    # auto install options:
+	    noauto    => sub { $::noauto = 1 },
+	    testing   => sub { $::testing = 1 },
+	    patch     => sub { $patch = 1 },
+	    defcfg    => sub { $cfg = $v },
+	    kickstart => sub { $::auto_install = $v },
+
+	    local_install => sub { $::local_install = 1 },
+	    uml_install => sub { $::uml_install = $::local_install = 1 },
+	    auto_install => sub { $::auto_install = $v },
+
+	    # debugging options:
 	    useless_thing_accepted => sub { $o->{useless_thing_accepted} = 1 },
 	    alawindows => sub { $o->{security} = 0; $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
 	    fdisk => sub { $o->{partitioning}{fdisk} = 1 },
 	    nomouseprobe => sub { $o->{nomouseprobe} = $v },
 	    updatemodules => sub { $o->{updatemodules} = 1 },
+
 	    suppl => sub { $o->{supplmedia} = $v },
 	    askmedia => sub { $o->{askmedia} = 1 },
 	    restore => sub { $::isRestore = 1 },
