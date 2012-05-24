@@ -321,7 +321,6 @@ sub stop_udev() {
 #- MAIN
 #-######################################################################################
 sub main {
-#-    $SIG{__DIE__} = sub { warn "DIE " . backtrace() . "\n" };
     $SIG{SEGV} = sub { 
 	my $msg = "segmentation fault: install crashed (maybe memory is missing?)\n" . backtrace();
 	log::l("$msg\n");
