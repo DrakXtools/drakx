@@ -1079,7 +1079,8 @@ sub suggest {
 	       {
 		root => $root,
 		if_($options{vga_fb}, vga => $options{vga_fb}), #- using framebuffer
-		if_($options{vga_fb} && $options{quiet}, append => "splash=silent"),
+		if_($options{vga_fb} && $options{splash}, append => "splash"),
+		if_($options{quiet}, append => "quiet"),
 	       });
 
 	if ($options{vga_fb} && $e->{label} eq 'linux') {

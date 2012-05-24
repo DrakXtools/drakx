@@ -137,12 +137,13 @@ sub setupBootloaderBeforeStandalone {
     my $allow_fb = listlength(cat_("/proc/fb"));
     my $cmdline = cat_('/proc/cmdline');
     my $vga_fb = first($cmdline =~ /\bvga=(\S+)/);
-    my $quiet = $cmdline =~ /\bsplash=silent\b/;
-    setupBootloaderBefore($do_pkgs, $b, $all_hds, $fstab, $keyboard, $allow_fb, $vga_fb, $quiet);
+    my $splash = $cmdline =~ /\bsplash\b/;
+    my $quiet = $cmdline =~ /\bquiet\b/;
+    setupBootloaderBefore($do_pkgs, $b, $all_hds, $fstab, $keyboard, $allow_fb, $vga_fb, $splash, $quiet);
 }
 
 sub setupBootloaderBefore {
-    my ($do_pkgs, $bootloader, $all_hds, $fstab, $keyboard, $allow_fb, $vga_fb, $quiet) = @_;
+    my ($_do_pkgs, $bootloader, $all_hds, $fstab, $keyboard, $allow_fb, $vga_fb, $splash, $quiet) = @_;
     require bootloader;
 
     #- auto_install backward compatibility
@@ -214,6 +215,7 @@ sub setupBootloaderBefore {
     my $need_fb = -e "$::prefix/usr/share/bootsplash/scripts/make-boot-splash";
     bootloader::suggest($bootloader, $all_hds,
                         vga_fb => ($force_vga || $vga && $need_fb) && $vga_fb,
+                        splash => $splash,
                         quiet => $quiet);
 
     $bootloader->{keytable} ||= keyboard::keyboard2kmap($keyboard);
