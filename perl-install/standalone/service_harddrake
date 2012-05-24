@@ -252,7 +252,7 @@ foreach my $card (@cards) {
     next if !$device;
     
     if (find { -e join('', "/lib/modules/", c::kernel_version(), $_) }
-          map { ("/dkms/$_", "/dkms-binary/$_", "/kernel/$_") } map { "/drivers/$_" } map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } map { $_, "$_.gz" } @{$card->{module_names}}) {
+          map { ("/dkms/$_", "/dkms-binary/$_", "/kernel/$_") } map { "/drivers/$_" } map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } map { $_, "$_.xz", "$_.gz" } @{$card->{module_names}}) {
 
         # do not automatically switch from nv to nvidia (in order to handle
         # cases where nvidia module crashes the system):
