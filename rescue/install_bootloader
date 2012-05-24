@@ -17,6 +17,7 @@ use common;
 use bootloader;
 use fs;
 
+my $auto;
 if ($ARGV[0] eq '--auto') {
     $auto = shift @ARGV;
 }
