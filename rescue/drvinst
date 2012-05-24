@@ -19,15 +19,10 @@ use detect_devices;
 $ARGV[0] =~ /^--?h/ and die "usage: drivers_install [drivertype1 [drivertype2 ...]]\n";
 my @types = @ARGV;
 
-sub install_module_raw {
+sub install_module {
     my ($driver, $descr) = @_;
     print STDERR qq(Installing driver $driver (for "$descr")\n);
     system("/sbin/modprobe", $driver) and print "\tfailed\n";
-}
-
-sub install_module {
-    my ($driver, $descr) = @_;
-    install_module_raw($driver, $descr);
 }
 
 #- start
