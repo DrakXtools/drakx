@@ -376,7 +376,7 @@ sub setSelectedFromCompssList {
     $rpmsrate_flags_chosen->{TRUE} = 1; #- ensure TRUE is set
     my $nb = selectedSize($packages);
 
-    my %pkgs = {};
+    my %pkgs;
     foreach my $p (@{$packages->{depslist}}) {
 	my @flags = $p->rflags;
 	next if
@@ -385,7 +385,7 @@ sub setSelectedFromCompssList {
 	$pkgs{$p->rate} ||= {};
 	$pkgs{$p->rate}{$p->id} = 1 if _packageRequest($packages, $p);
     }
-    my %pkgswanted = {};
+    my %pkgswanted;
     foreach my $level (sort { $b <=> $a } keys %pkgs) {
 	#- determine the packages that will be selected
 	#- the packages are not selected.
