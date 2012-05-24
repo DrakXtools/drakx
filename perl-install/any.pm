@@ -680,7 +680,7 @@ sub get_autologin() {
         GNOME => 'gdm',
         KDE4 => 'kdm',
         xfce4 => 'gdm',
-        LXDE => 'gdm',
+        LXDE => 'lxdm',
     );
     my %dm_canonical = (
         gnome => 'gdm',
