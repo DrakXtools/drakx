@@ -71,7 +71,7 @@ NEWT_FRONTEND_SRC = newt-frontend.c
 ifdef DYNAMIC
 NEWT_FRONTEND_LIBS = -lnewt -lslang
 else
-NEWT_FRONTEND_LIBS = newt/libnewt.a slang/libslang.a
+NEWT_FRONTEND_LIBS = libnewt.a libslang.a
 endif
 
 STDIO_FRONTEND_SRC = stdio-frontend.c
@@ -81,7 +81,19 @@ STDIO_FRONTEND_LIBS =
 
 FRONTEND_OBJS = $(subst .c,.o,$($(F)_FRONTEND_SRC))
 
+ifdef DYNAMIC
 FRONTEND_LINK = $(FRONTEND_OBJS) $($(F)_FRONTEND_LIBS)
+else
+ifeq (UCLIBC, $(L))
+FRONTEND_LINK = $(FRONTEND_OBJS) $(patsubst %,/usr/uclibc/usr/$(LIB)/%,$($(F)_FRONTEND_LIBS))
+else
+ifeq (DIETLIBC, $(L))
+FRONTEND_LINK = $(FRONTEND_OBJS) $(patsubst %,/usr/lib/dietlibc/lib-$(ARCH)/%,$($(F)_FRONTEND_LIBS))
+else
+FRONTEND_LINK = $(FRONTEND_OBJS) $(patsubst %,/usr/$(LIB)/%,$($(F)_FRONTEND_LIBS))
+endif
+endif
+endif
 
 STAGE1_STATIC_LIBS =
 STAGE1_STATIC_USR_LIBS = libz.a libldetect.a libkmod.a libpci.a liblzma.a libsysfs.a
