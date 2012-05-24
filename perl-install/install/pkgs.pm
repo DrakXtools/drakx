@@ -818,12 +818,13 @@ sub _install_raw {
             log::l($msg2);
             return 0 if $packages->{options}{auto};
             state $do_not_ask;
-            return if $do_not_ask;
-            $::o->ask_from_({ messages => "$msg\n\n$msg2" }, [ 
-                                { val => \$do_not_ask,
-                                  type => 'bool', text => N("Do not ask again"),
-                              },
-			    ]);
+            state $answer;
+            return $answer if $do_not_ask;
+            $answer = $::o->ask_from_({ messages => "$msg\n\n$msg2" }, [ 
+                { val => \$do_not_ask,
+                  type => 'bool', text => N("Do not ask again"),
+              },
+            ]);
         },
         copy_removable => sub {
             my ($medium) = @_;
