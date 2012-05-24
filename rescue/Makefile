@@ -25,6 +25,8 @@ dist-svn:
 dist-git:
 	@cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD rescue tools/install-xml-file-list Makefile.config | xz >$(PRODUCT)-$(VERSION).tar.xz;
 
+dist: tar
+
 tar:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
 	@if [ -e "../.svn" ]; then \
