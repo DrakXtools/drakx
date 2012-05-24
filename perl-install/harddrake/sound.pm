@@ -344,7 +344,7 @@ sub switch {
             },
             {
                 advanced => 1,
-                val => N("Trouble shooting"), disabled => sub {},
+                val => N("Troubleshooting"), disabled => sub {},
                 clicked => sub { &trouble($in) }
             },
         );
@@ -424,7 +424,7 @@ sub config {
 
 sub trouble {
     my ($in) = @_;
-    $in->ask_warn(N("Sound trouble shooting"),
+    $in->ask_warn(N("Sound troubleshooting"),
                   formatAlaTeX(
                                #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
                                N("The classic bug sound tester is to run the following commands:
