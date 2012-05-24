@@ -155,7 +155,7 @@ sub _packageRequest {
     #- check for medium selection, if the medium has not been
     #- selected, the package cannot be selected.
     my $medium = packageMedium($packages, $pkg);
-    $medium and !$medium->{ignore} or return;
+    $medium && !$medium->{ignore} or return;
 
     +{ $pkg->id => 1 };
 }
@@ -332,7 +332,8 @@ sub empty_packages {
     $urpm::args::options{force_transactions} = 1;
     $::force = 1;
     $packages->{options}{ignoresize} = 1;
-    $packages->{options}{'priority-upgrade'};  # prevent priority upgrade
+    # prevent priority upgrade (redundant for now as $urpm->{root} implies disabling it:
+    $packages->{options}{'priority-upgrade'} = undef;
     # log $trans->add() faillure; FIXME: should we override *urpm::msg::sys_log?
     $packages->{debug} = \&log::l;
 
@@ -751,8 +752,6 @@ sub _install_raw {
     # leaks a fd per transaction (around ~100 for a typically gnome install, see #49097):
     # bug present in 2009.0, 2008.1, 2008.0, ... (probably since r11141 aka when switching to rpm-4.2 in URPM-0.83)
     local $packages->{options}{script_fd} = fileno $LOG;
-
-    my ($retry, $retry_count);
 
     log::l("rpm transactions start");
 
