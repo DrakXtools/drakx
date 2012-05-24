@@ -273,6 +273,7 @@ int try_mount(char * dev, char * location)
 	snprintf(device_fullname, sizeof(device_fullname), "/dev/%s", dev);
 
 	if (my_mount(device_fullname, location, "ext4", 0) == -1 &&
+	    my_mount(device_fullname, location, "btrfs", 0) == -1 &&
 	    my_mount(device_fullname, location, "vfat", 0) == -1 &&
 	    my_mount(device_fullname, location, "ntfs", 0) == -1 &&
 	    my_mount(device_fullname, location, "reiserfs", 0) == -1 &&
