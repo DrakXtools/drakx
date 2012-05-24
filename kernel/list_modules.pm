@@ -40,7 +40,7 @@ our %l = (
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
       # add all phys
       qw(broadcom cicada davicom et1011c icplus lxt marvell micrel),
-      wq(national qsemi realtek smsc ste10Xp vitesse),
+      qw(national qsemi realtek smsc ste10Xp vitesse),
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
