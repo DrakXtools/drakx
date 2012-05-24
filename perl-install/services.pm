@@ -343,6 +343,14 @@ sub doit {
     }
 }
 
+sub running_systemd() {
+    run_program::rooted($::prefix, '/bin/mountpoint', '-q', '/sys/fs/cgroup/systemd');
+}
+
+sub has_systemd() {
+    run_program::rooted($::prefix, '/bin/rpm', '-q', 'systemd-sysvinit');
+}
+
 sub xinetd_services() {
     local $ENV{LANGUAGE} = 'C';
     my @xinetd_services;
