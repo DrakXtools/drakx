@@ -145,7 +145,8 @@ sub ask_ {
     my ($in) = @_;
     my %root_services = (
 			 N("Printing") => [ qw(cups cupslpd cups-lpd hpoj lpd lpr oki4daemon) ],
-
+                         
+			 # FIXME: split part of 'Internet' into 'Security' or 'Firewall'?
 			 N("Internet") => [ qw(adsl boa cddbp ftp httpd ibod ip6tables ippl iptables iptoip ipvsadm
                                                isdn4linux jabber jabber-icq jail.init junkbuster mandi nessusd pftp portsentry 
                                                prelude proftpd proftpd-xinetd pure-ftpd ipsec radvd roxen shorewall squid
