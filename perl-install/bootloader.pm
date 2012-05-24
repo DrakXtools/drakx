@@ -410,19 +410,13 @@ sub read_silo() {
     $bootloader;
 }
 sub read_pmon2000() {
-    my %b;
-    $b{method} = 'pmon2000';
-    \%b;
+    +{ method => 'pmon2000' };
 }
 sub read_uboot() {
-    my %b;
-    $b{method} = 'uboot';
-    \%b;
+    +{ method => 'uboot' };
 }
 sub read_cromwell() {
-    my %b;
-    $b{method} = 'cromwell';
-    \%b;
+    +{ method => 'cromwell' };
 }
 sub read_yaboot() { 
     my $bootloader = read_lilo_like("/etc/yaboot.conf", \&yaboot2file);
