@@ -1301,6 +1301,7 @@ sub disable_user_view() {
 sub set_security {
     my ($o) = @_;
     require security::various;
+    return if !-x "$::prefix/usr/sbin/msec";
     security::level::set($o->{security});
     security::various::config_security_user($::prefix, $o->{security_user});
 }
