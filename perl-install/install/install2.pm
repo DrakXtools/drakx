@@ -406,20 +406,7 @@ sub read_stage1_net_conf() {
     }
 }
 
-#-######################################################################################
-#- MAIN
-#-######################################################################################
-sub main {
-    $SIG{SEGV} = \&sig_segv_handler;
-    $ENV{PERL_BADLANG} = 1;
-    delete $ENV{TERMINFO};
-    umask 022;
-
-    $::isWizard = 1;
-    $::no_ugtk_init = 1;
-
-    push @::textdomains, 'DrakX', 'drakx-net', 'drakx-kbd-mouse-x11';
-
+sub parse_args {
     my ($cfg, $patch);
     my %cmdline = map { 
 	my ($n, $v) = split /=/;
@@ -487,6 +474,25 @@ sub main {
 	    compsslistlevel => sub { $o->{compssListLevel} = $v },
 	}}{lc $n}; &$f if $f;
     } %cmdline;
+
+    ($cfg, $patch);
+}
+
+#-######################################################################################
+#- MAIN
+#-######################################################################################
+sub main {
+    $SIG{SEGV} = \&sig_segv_handler;
+    $ENV{PERL_BADLANG} = 1;
+    delete $ENV{TERMINFO};
+    umask 022;
+
+    $::isWizard = 1;
+    $::no_ugtk_init = 1;
+
+    push @::textdomains, 'DrakX', 'drakx-net', 'drakx-kbd-mouse-x11';
+
+    my ($cfg, $patch) = parse_args(@_);
 
     if ($::testing) {
 	$ENV{SHARE_PATH} ||= "/export/install/stage2/live/usr/share";
