@@ -448,7 +448,11 @@ sub is_service_running ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
     service_exists($service) or return 1;
-    run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", '>', '/dev/null', '2>', '/dev/null', "status");
+    if (running_systemd()) {
+        run_program::rooted($::prefix, '/bin/systemctl', '--quiet', 'is-active', "$service.service");
+    } else {
+        run_program::rooted($::prefix, '/sbin/service', $service, 'status');
+    }
 }
 
 sub starts_on_boot {
