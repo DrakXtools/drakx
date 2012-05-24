@@ -67,10 +67,10 @@ Each partition is listed as follows: \"Name\", \"Capacity\".
 \"Name\" is structured: \"hard disk drive type\", \"hard disk drive number\",
 \"partition number\" (for example, \"hda1\").
 
-\"Hard drive type\" is \"hd\" if your hard disk drive is an IDE hard disk drive and
+\"Hard disk drive type\" is \"hd\" if your hard disk drive is an IDE hard disk drive and
 \"sd\" if it is a SCSI hard disk drive.
 
-\"Hard drive number\" is always a letter after \"hd\" or \"sd\". For IDE
+\"Hard disk drive number\" is always a letter after \"hd\" or \"sd\". For IDE
 hard disk drives:
 
  * \"a\" means \"master hard disk drive on the primary IDE controller\";

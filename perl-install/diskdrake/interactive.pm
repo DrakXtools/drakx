@@ -335,7 +335,7 @@ sub hd_possible_actions {
 
 sub hd_possible_actions_interactive {
     my ($_in, $_hd, $_all_hds) = @_;
-    &hd_possible_actions, N_("Hard drive information");
+    &hd_possible_actions, N_("Hard disk drive information");
 }
 
 sub Clear_all {
@@ -1141,7 +1141,7 @@ sub Options {
     *{'Add to LVM'} = \&Add2LVM;
     *{'Remove from LVM'} = \&RemoveFromLVM;
     *{'Use for loopback'} = \&Loopback;
-    *{'Hard drive information'} = \&Hd_info;
+    *{'Hard disk drive information'} = \&Hd_info;
 }
 
 
