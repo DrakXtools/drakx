@@ -167,7 +167,7 @@ sub add_kernel() {
     modify_bootloader();
 }
 
-sub configure_ide_controller {
+sub configure_ide_controller() {
     my $modules_conf = modules::any_conf->read;
     if ($modules_conf->get_alias('ide-controller') || 
         $modules_conf->get_probeall('ide-controller')) {
