@@ -241,7 +241,7 @@ sub install {
         my $_wait = $do->in && $do->in->wait_message(N("Please wait"), N("Installing packages..."));
         $do->in->suspend if $do->in;
         log::explanations("installing packages @l");
-        $ret = system('urpmi', '--gui', @options) == 0;
+        $ret = system('urpmi', @options) == 0;
         $do->in->resume if $do->in;
     }
     $ret;
