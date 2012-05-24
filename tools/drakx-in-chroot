@@ -58,7 +58,7 @@ if (-d $SLASH_LOCATION) {
     rm_rf($SLASH_LOCATION);
 }
 
-mkdir_p("$SLASH_LOCATION$_") foreach '/dev', '/dev/usb', '/etc', '/var', '/proc', '/sys', $STAGE2_LOCATION_ROOTED, $MEDIA_LOCATION_ROOTED, $prefix_ROOTED;
+mkdir_p("$SLASH_LOCATION$_") foreach '/dev', '/dev/usb', '/etc', '/var', '/proc', '/sys', '/run', $STAGE2_LOCATION_ROOTED, $MEDIA_LOCATION_ROOTED, $prefix_ROOTED;
 
 sys("$sudo rm -rf $dir") if $ENV{CLEAN};
 -e $dir or sys("$sudo mkdir -p $dir");
@@ -82,6 +82,20 @@ sys("$sudo mount -o bind $repository_uri $SLASH_LOCATION$MEDIA_LOCATION_ROOTED")
 
 sys("$sudo mount -t proc none $SLASH_LOCATION/proc");
 sys("$sudo mount -t sysfs none $SLASH_LOCATION/sys");
+sys("$sudo mount -t tmpfs none $SLASH_LOCATION/run");
+
+if (-d "/run/udev") {
+    # Ensure we mount the udev run dir for various extra metadata from udevadm
+    mkdir_p("$SLASH_LOCATION/run/udev");
+    sys("$sudo mount -o bind /run/udev $SLASH_LOCATION/run/udev");
+}
+
+if (-d "/run/initramfs") {
+    # If dracut has been used (and thus udev has yummy metadata) make sure
+    # drakx knows about it when running in the chroot
+    mkdir_p("$SLASH_LOCATION/run/initramfs");
+    sys("$sudo mount -o bind /run/initramfs $SLASH_LOCATION/run/initramfs");
+}
 
 if ($disk_iso_repository) {
     my $repository_arch = $repository_arch || 'i586';
@@ -179,7 +193,7 @@ sub create_initial_devices() {
 sub umount_all() {
     my $err;
     clean_stage2_updates();
-    my @procs = ('/proc/bus/usb', '/proc', '/sys');
+    my @procs = ('/proc/bus/usb', '/proc', '/sys', '/run/udev', '/run/initramfs', '/run');
     foreach ((map { "$prefix_ROOTED$_" } @procs, ''), @procs, $STAGE2_LOCATION_ROOTED, $LOOP_MOUNT_POINT, $MEDIA_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED) {
 	my $dir = "$SLASH_LOCATION$_";
 	rmdir $dir;
