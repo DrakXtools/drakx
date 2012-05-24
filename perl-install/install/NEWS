@@ -5,6 +5,7 @@
 - debug build:
   o don't run directly stage2
   o include busybox
+  o start udev since we fork a shell prior to running stage2
 - set geometry for text installer
 - fix crashing if we failed to initialize Curses
 - fix double segfault when text installer fails to init
