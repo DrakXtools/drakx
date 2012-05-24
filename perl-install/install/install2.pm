@@ -478,6 +478,15 @@ sub parse_args {
     ($cfg, $patch);
 }
 
+sub init_env_share() {
+    if ($::testing) {
+	$ENV{SHARE_PATH} ||= "/export/install/stage2/live/usr/share";
+	$ENV{SHARE_PATH} = "/usr/share" if !-e $ENV{SHARE_PATH};
+    } else {
+	$ENV{SHARE_PATH} ||= "/usr/share";
+    }
+}
+
 #-######################################################################################
 #- MAIN
 #-######################################################################################
@@ -494,12 +503,7 @@ sub main {
 
     my ($cfg, $patch) = parse_args(@_);
 
-    if ($::testing) {
-	$ENV{SHARE_PATH} ||= "/export/install/stage2/live/usr/share";
-	$ENV{SHARE_PATH} = "/usr/share" if !-e $ENV{SHARE_PATH};
-    } else {
-	$ENV{SHARE_PATH} ||= "/usr/share";
-    }
+    init_env_share();
 
     undef $::auto_install if $cfg;
 
