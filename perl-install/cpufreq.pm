@@ -166,7 +166,7 @@ sub find_driver() {
     $m && $m->[0];
 }
 
-my @governor_modules = map { "cpufreq_$_" } qw(performance powersave conservative ondemand);
+my @governor_modules = map { "cpufreq_$_" } qw(powersave conservative ondemand);
 
 sub get_modules() {
     my $module;
