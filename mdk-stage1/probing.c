@@ -555,7 +555,9 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
                 if (module_already_present("ieee1394"))
                         my_insmod("sbp2", MEDIA_ADAPTERS, NULL, 0);
                 wait_message("Detecting USB mass-storage devices.");
+#ifndef DEBUG
                 sleep(10); /* sucking background work */
+#endif
                 remove_wait_message();
         }
 }
