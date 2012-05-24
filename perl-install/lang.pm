@@ -585,19 +585,19 @@ my ($is_kde4);
 # keep the 'packages' field in sync with share/rpmsrate:
 my %IM_config =
   (
-   chinput => {
-               GTK_IM_MODULE => 'xim',
-               XIM => 'chinput',
-               XMODIFIERS => '@im=Chinput',
-	       XIM_PROGRAM => {
-		   'zh_CN' => 'chinput -gb',
-		   'en_SG' => 'chinput -gb',
-		   'zh_HK' => 'chinput -big5',
-		   'zh_TW' => 'chinput -big5',
-	       },	       
-	       langs => 'zh',
-	       packages => { generic => sub { 'miniChinput' } },
-              },
+#   chinput => {
+#               GTK_IM_MODULE => 'xim',
+#               XIM => 'chinput',
+#               XMODIFIERS => '@im=Chinput',
+#	       XIM_PROGRAM => {
+#		   'zh_CN' => 'chinput -gb',
+#		   'en_SG' => 'chinput -gb',
+#		   'zh_HK' => 'chinput -big5',
+#		   'zh_TW' => 'chinput -big5',
+#	       },	       
+#	       langs => 'zh',
+#	       packages => { generic => sub { 'miniChinput' } },
+#              },
    fcitx => {
              GTK_IM_MODULE => 'xim',
              XIM => 'fcitx',
@@ -616,6 +616,17 @@ my %IM_config =
 		     generic => sub { qw(gcin) },
 	     },
             },
+   hime => {
+             GTK_IM_MODULE => 'hime',
+             XIM => 'hime',
+             XIM_PROGRAM => 'hime',
+             XMODIFIERS => '@im=hime',
+	     langs => 'zh',
+	     packages => {
+		     common => sub { if_($is_kde4, 'hime-qt4') },
+		     generic => sub { qw(hime) },
+	     },
+            },
    'im-ja' => {
                GTK_IM_MODULE => 'im-ja',
                QT_IM_MODULE => 'xim',
@@ -625,14 +636,14 @@ my %IM_config =
 	       langs => 'ja',
               },
 
-   kinput2 => {   
-               GTK_IM_MODULE => 'xim',
-               XIM => 'kinput2',
-               XIM_PROGRAM => 'kinput2',
-               XMODIFIERS => '@im=kinput2',
-	       langs => 'ja',
-	       packages => { generic => sub { 'kinput2-wnn' } },
-              },
+#   kinput2 => {   
+#               GTK_IM_MODULE => 'xim',
+#               XIM => 'kinput2',
+#               XIM_PROGRAM => 'kinput2',
+#               XMODIFIERS => '@im=kinput2',
+#	       langs => 'ja',
+#	       packages => { generic => sub { 'kinput2-wnn' } },
+#              },
    nabi => {
             GTK_IM_MODULE => 'xim',
             XIM => 'nabi',
@@ -641,14 +652,14 @@ my %IM_config =
 	    langs => 'ko',
            },
 
-   oxim => {
-       GTK_IM_MODULE => 'oxim',
-       XIM => 'oxim',
-       XIM_PROGRAM => 'oxim',
-       XMODIFIERS => '@im=oxim', # '@im=SCIM' is broken for now
-       langs => 'zh_TW',
-       packages => { generic => sub { 'oxim' } },
-   },
+#   oxim => {
+#       GTK_IM_MODULE => 'oxim',
+#       XIM => 'oxim',
+#       XIM_PROGRAM => 'oxim',
+#       XMODIFIERS => '@im=oxim', # '@im=SCIM' is broken for now
+#       langs => 'zh_TW',
+#       packages => { generic => sub { 'oxim' } },
+#   },
    'scim' => {
             GTK_IM_MODULE => 'scim',
 	    QT_IM_MODULE => 'xim',
@@ -704,13 +715,13 @@ my %IM_config =
 		  generic => sub { qw(uim-gtk uim) },
 	  },
           },
-   xcin => {
-            XIM => 'xcin',
-            XIM_PROGRAM => 'xcin',
-            XMODIFIERS => '@im=xcin-zh_TW',
-            GTK_IM_MODULE => 'xim',
-	    langs => 'zh',
-           },
+#   xcin => {
+#            XIM => 'xcin',
+#            XIM_PROGRAM => 'xcin',
+#            XMODIFIERS => '@im=xcin-zh_TW',
+#            GTK_IM_MODULE => 'xim',
+#	    langs => 'zh',
+#           },
    'x-unikey' => {
                   GTK_IM_MODULE => 'xim',
                   XMODIFIERS => '@im=unikey',
