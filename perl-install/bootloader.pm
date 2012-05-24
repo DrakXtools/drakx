@@ -653,18 +653,6 @@ sub _do_the_symlink {
       or cp_af("$::prefix/boot/$long_name", "$::prefix$link");
 }
 
-sub cmp_kernel_versions {
-    my ($va, $vb) = @_;
-    my $rel_a = $va =~ s/-(.*)$// && $1;
-    my $rel_b = $vb =~ s/-(.*)$// && $1;
-    ($va, $vb) = map { [ split /[.-]/ ] } $va, $vb;
-    my $r = 0;
-    mapn_ {
-	$r ||= $_[0] <=> $_[1];
-    } $va, $vb;
-    $r || $rel_a <=> $rel_b || $rel_a cmp $rel_b;
-}
-
 # for lilo & xen
 sub get_mbootpack_filename {
     my ($entry) = @_;
@@ -725,7 +713,7 @@ sub add_kernel {
 	    #- perImageAppend contains resume=/dev/xxx which we don't want
 	    @$dict = grep { $_->[0] ne 'resume' } @$dict;
 	}
-	if (-e "$::prefix/sbin/udev" && cmp_kernel_versions($kernel_str->{version_no_ext}, '2.6.8') >= 0) {
+	if (-e "$::prefix/sbin/udev" && common::cmp_kernel_versions($kernel_str->{version_no_ext}, '2.6.8') >= 0) {
 	    log::l("it is a recent kernel, so we remove any existing devfs= kernel option to enable udev");
 	    @$dict = grep { $_->[0] ne 'devfs' } @$dict;
 	}
@@ -926,7 +914,7 @@ sub get_kernel_labels {
     my ($kernels, $b_prefer_24) = @_;
     
     my @kernels_str = 
-      sort { cmp_kernel_versions($b->{version_no_ext}, $a->{version_no_ext}) } 
+      sort { common::cmp_kernel_versions($b->{version_no_ext}, $a->{version_no_ext}) } 
       grep { -d "$::prefix/lib/modules/$_->{version}" }
       map { vmlinuz2kernel_str($_) } @$kernels;
 

@@ -488,4 +488,16 @@ sub update_gnomekderc_no_create {
     }
 }
 
+sub cmp_kernel_versions {
+    my ($va, $vb) = @_;
+    my $rel_a = $va =~ s/-(.*)$// && $1;
+    my $rel_b = $vb =~ s/-(.*)$// && $1;
+    ($va, $vb) = map { [ split /[.-]/ ] } $va, $vb;
+    my $r = 0;
+    mapn_ {
+	$r ||= $_[0] <=> $_[1];
+    } $va, $vb;
+    $r || $rel_a <=> $rel_b || $rel_a cmp $rel_b;
+}
+
 1;
