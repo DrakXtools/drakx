@@ -327,7 +327,6 @@ sub main {
 	log::l("$msg\n");
 	$o and $o->ask_warn('', $msg);
 	setVirtual(1);
-	stop_udev() if !$::local_install;
 	require install::steps_auto_install;
 	install::steps_auto_install_non_interactive::errorInStep($o, $msg);
     };
