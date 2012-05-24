@@ -88,8 +88,7 @@ sub create_minimal_files() {
     chmod 0666, "$::prefix/dev/null";
 }
 
-sub prepare_minimal_root {
-    my ($_all_hds) = @_;
+sub prepare_minimal_root() {
 
     fs::any::create_minimal_files();
 

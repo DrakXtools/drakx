@@ -176,7 +176,7 @@ sub formatPartitions {
 	eval { rm_rf("$::prefix/var/lib/rpm") };
     }
 
-    fs::any::prepare_minimal_root($o->{all_hds});
+    fs::any::prepare_minimal_root();
 
     install::any::screenshot_dir__and_move();
     install::any::move_compressed_image_to_disk($o);
