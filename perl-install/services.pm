@@ -370,31 +370,97 @@ sub xinetd_services() {
     @xinetd_services;
 }
 
-sub services_raw() {
+sub _systemd_services() {
     local $ENV{LANGUAGE} = 'C';
-    my (@services, @xinetd_services);
-    foreach (run_program::rooted_get_stdout($::prefix, '/sbin/chkconfig', '--list')) {
-	if (my ($xinetd_name, $on_off) = m!^\t(\S+):\s*(on|off)!) {
-	    push @xinetd_services, [ $xinetd_name, $on_off eq 'on' ];
-	} elsif (my ($name, $l) = m!^(\S+)\s+(0:(on|off).*)!) {
-	    push @services, [ $name, [ $l =~ /(\d+):on/g ] ];
-	}
+    my @services;
+    # Running system using systemd
+    log::explanations("Detected systemd running. Using systemctl introspection.");
+    foreach (run_program::rooted_get_stdout($::prefix, '/bin/systemctl', '--full', '--all', 'list-units')) {
+        if (my ($name) = m!^(\S+)\.service\s+loaded!) {
+            # We only look at non-template, non-linked service files in /lib
+            # We also check for any non-masked sysvinit files as these are
+            # also handled by systemd
+            if ($name !~ /.*\@$/g && (-e "$::prefix/lib/systemd/system/$name.service" or -e "$::prefix/etc/rc.d/init.d/$name") && ! -l "$::prefix/lib/systemd/system/$name.service") {
+                push @services, [ $name, !!run_program::rooted($::prefix, '/bin/systemctl', '--quiet', 'is-enabled', "$name.service") ];
+            }
+        }
     }
-    \@services, \@xinetd_services;
+    @services;
 }
 
-#- returns: 
+sub _legacy_services() {
+    local $ENV{LANGUAGE} = 'C';
+    my @services;
+    my $has_systemd = has_systemd();
+    if ($has_systemd) {
+        # The system not using systemd but will be at next boot. This is
+        # is typically the case in the installer. In this mode we must read
+        # as much as is practicable from the native systemd unit files and
+        # combine that with information from chkconfig regarding legacy sysvinit
+        # scripts (which systemd will parse and include when running)
+        log::explanations("Detected systemd installed. Using fake service+chkconfig introspection.");
+        foreach (glob_("$::prefix/lib/systemd/system/*.service")) {
+            my ($name) = m!([^/]*).service$!;
+
+            # We only look at non-template, non-symlinked service files
+            if (!(/.*\@\.service$/g) && ! -l $_) {
+                # Limit ourselves to "standard" targets
+                my $wantedby = cat_($_) =~ /^WantedBy=(graphical|multi-user).target$/sm ? $1 : '';
+                if ($wantedby) {
+                    # Exclude if enabled statically
+                    # Note DO NOT use -e when testing for files that could
+                    # be symbolic links as this will fail under a chroot
+                    # setup where -e will fail if the symlink target does
+                    # exist which is typically the case when viewed outside
+                    # of the chroot.
+                    if (!-l "$::prefix/lib/systemd/system/$wantedby.target.wants/$name.service") {
+                        push @services, [ $name, !!-l "$::prefix/etc/systemd/system/$wantedby.target.wants/$name.service" ];
+                    }
+                }
+            }
+        }
+    } else {
+        log::explanations("Could not detect systemd. Using chkconfig service introspection.");
+    }
+
+    # Regardless of whether we expect to use systemd on next boot, we still
+    # need to instrospect information about non-systemd native services.
+    my $runlevel;
+    my $on_off;
+    if (!$::isInstall) {
+        $runlevel = (split " ", `/sbin/runlevel`)[1];
+    }
+    foreach (run_program::rooted_get_stdout($::prefix, '/sbin/chkconfig', '--list', '--type', 'sysv')) {
+        if (my ($name, $l) = m!^(\S+)\s+(0:(on|off).*)!) {
+            # If we expect to use systemd (i.e. installer) only show those
+            # sysvinit scripts which are not masked by a native systemd unit.
+            my $has_systemd_unit = (-e "$::prefix/lib/systemd/system/$name.service" or -l "$::prefix/lib/systemd/system/$name.service");
+            if (!$has_systemd || !$has_systemd_unit) {
+                if ($::isInstall) {
+                    $on_off = $l =~ /\d+:on/g;
+                } else {
+                    $on_off = $l =~ /$runlevel:on/g;
+                }
+                push @services, [ $name, $on_off ];
+            }
+        }
+    }
+    @services;
+}
+
+#- returns:
 #--- the listref of installed services
 #--- the listref of "on" services
 sub services() {
-    my ($services, $xinetd_services) = services_raw();
-    my @l = @$xinetd_services;
-    if ($::isInstall) {
-        push @l, map { [ $_->[0], @{$_->[1]} > 0 ] } @$services;
+    my @services;
+    if (running_systemd()) {
+        @services = _systemd_services();
     } else {
-        my $runlevel = (split " ", `/sbin/runlevel`)[1];
-        push @l, map { [ $_->[0], member($runlevel, @{$_->[1]}) ] } @$services;
+        @services = _legacy_services();
     }
+
+    my @l = xinetd_services();
+    push @l, @services;
     @l = sort { $a->[0] cmp $b->[0] } @l;
     [ map { $_->[0] } @l ], [ map { $_->[0] } grep { $_->[1] } @l ];
 }
