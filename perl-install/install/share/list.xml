@@ -217,6 +217,56 @@
   /lib/udev/pcmcia-socket-startup
   /etc/pcmcia/config.opts
 
+  <!-- for GDB: -->
+  <if set="DEBUG_INSTALL">
+    /usr/include/python2.7/pyconfig.h
+    /usr/LIB/libinproctrace.so
+    /usr/LIB/libpython2.7.so.1.0
+    /usr/LIB/python2.7/_abcoll.py
+    /usr/LIB/python2.7/abc.py
+    /usr/LIB/python2.7/codecs.py
+    /usr/LIB/python2.7/config/Makefile
+    /usr/LIB/python2.7/copy.py
+    /usr/LIB/python2.7/copy_reg.py
+    /usr/LIB/python2.7/encodings/aliases.py
+    /usr/LIB/python2.7/encodings/__init__.py
+    /usr/LIB/python2.7/encodings/utf_8.py
+    /usr/LIB/python2.7/genericpath.py
+    /usr/LIB/python2.7/lib-dynload/itertools.so
+    /usr/LIB/python2.7/linecache.py
+    /usr/LIB/python2.7/os.py
+    /usr/LIB/python2.7/posixpath.py
+    /usr/LIB/python2.7/re.py
+    /usr/LIB/python2.7/site-packages/pygtk.pth
+    /usr/LIB/python2.7/site.py
+    /usr/LIB/python2.7/sre_compile.py
+    /usr/LIB/python2.7/sre_constants.py
+    /usr/LIB/python2.7/sre_parse.py
+    /usr/LIB/python2.7/stat.py
+    /usr/LIB/python2.7/sysconfig.py
+    /usr/LIB/python2.7/traceback.py
+    /usr/LIB/python2.7/types.py
+    /usr/LIB/python2.7/UserDict.py
+    /usr/LIB/python2.7/warnings.py
+    /usr/LIB/python2.7/weakref.py
+    /usr/LIB/python2.7/_weakrefset.py
+    /usr/share/gdb/python/gdb/backtrace.py
+    /usr/share/gdb/python/gdb/command/alias.py
+    /usr/share/gdb/python/gdb/command/backtrace.py
+    /usr/share/gdb/python/gdb/command/ignore_errors.py
+    /usr/share/gdb/python/gdb/command/__init__.py
+    /usr/share/gdb/python/gdb/command/pahole.py
+    /usr/share/gdb/python/gdb/command/pretty_printers.py
+    /usr/share/gdb/python/gdb/command/require.py
+    /usr/share/gdb/python/gdb/command/upto.py
+    /usr/share/gdb/python/gdb/FrameIterator.py
+    /usr/share/gdb/python/gdb/FrameWrapper.py
+    /usr/share/gdb/python/gdb/function/caller_is.py
+    /usr/share/gdb/python/gdb/function/__init__.py
+    /usr/share/gdb/python/gdb/function/in_scope.py
+    /usr/share/gdb/python/gdb/__init__.py
+  </if>
+
   <from expand="glob">
     <from spaces_in_filename="1">
        /usr/share/themes/Ia Ora*
