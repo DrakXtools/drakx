@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 
-sub output { my $f = shift; local *F; open F, ">$f" or die "output in file $f failed: $!\n"; print F foreach @_; }
+# From MDK::Common:
+sub output { my $f = shift; open(my $F, ">$f") or die "output in file $f failed: $!\n"; print $F $_ foreach @_ }
 
 output('/tmp/rescue-doc-contents', q(
      Information regarding problems not directly addressed
