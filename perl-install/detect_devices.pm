@@ -1320,7 +1320,7 @@ sub probeall_unavailable_modules() {
         !member($driver, 'hub', 'unknown', 'amd64_agp') &&
         !modules::module_is_available($driver) ?
           $driver :
-          ();
+          @{[]};
     } probeall();
 }
 
