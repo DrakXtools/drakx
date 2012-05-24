@@ -20,6 +20,7 @@
   o fix removing several notebook pages
   o fix partitions not being shown after clicking on "Reload partition table"
     (mga#3260)
+  o forbid having /boot as btrfs (mga#5627)
 - fix a crash when package state is empty (mga#5487)
 - fix not offering to upgrade RAID installs
   (udev was enabling RAIDs early but leaved them in inactive mode
