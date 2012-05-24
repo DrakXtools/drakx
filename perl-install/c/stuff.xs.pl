@@ -731,40 +731,7 @@ C_backtrace()
   OUTPUT:
   RETVAL
 
-#define BITS_PER_LONG (sizeof(long) * 8)
-#define NBITS(x) ((((x)-1)/BITS_PER_LONG)+1)
-#define OFF(x)  ((x)%BITS_PER_LONG)
-#define BIT(x)  (1UL<<OFF(x))
-#define LONG(x) ((x)/BITS_PER_LONG)
-#define test_bit(bit, array)    ((array[LONG(bit)] >> OFF(bit)) & 1)
 
-void
-EVIocGBitKey (char *file)
-	PPCODE:
-		int fd;
-		int i;
-		long bitmask[NBITS(KEY_MAX)];
-
-		fd = open (file, O_RDONLY);
-		if (fd < 0) {
-			perror("Cannot open /dev/input/eventX");
-			return;
-		}
-
-		if (ioctl (fd, EVIOCGBIT(EV_KEY, sizeof (bitmask)), bitmask) < 0) {
-			perror ("ioctl EVIOCGBIT failed");
-			close (fd);
-			return;
-		}
-
-        	for (i = NBITS(KEY_MAX) - 1; i > 0; i--)
-			if (bitmask[i])
-				break;
-
-		for (; i >= 0; i--) {
-			EXTEND(sp, 1);
-			PUSHs(sv_2mortal(newSViv(bitmask[i])));
-		}
 
 
 ';
