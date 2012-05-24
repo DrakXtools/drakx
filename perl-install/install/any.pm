@@ -54,7 +54,8 @@ sub spawnShell() {
         return;
     }
 
-    $ENV{DISPLAY} ||= ":0"; #- why not :pp
+    #- why not :pp
+    $ENV{DISPLAY} ||= ":0" if $::o->{interactive} eq "gtk";
 
     local *F;
     sysopen F, "/dev/tty2", 2 or log::l("cannot open /dev/tty2 -- no shell will be provided: $!"), goto cant_spawn;
