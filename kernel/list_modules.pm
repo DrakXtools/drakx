@@ -38,6 +38,9 @@ our %l = (
         qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
       ),
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
+      # add all phys
+      qw(broadcom cicada davicom et1011c icplus libphy lxt marvell micrel),
+      wq(national qsemi realtek smsc ste10Xp vitesse),
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
