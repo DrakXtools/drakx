@@ -4,10 +4,6 @@ use urpm::download;
 use common;
 use Cwd;
 
-# to be killed once callers got fixed
-sub close() {
-}
-
 sub getFile {
     my ($url, %o_options) = @_;
     my ($_size, $fh) = get_file_and_size($url, %o_options) or return;

@@ -69,7 +69,6 @@ sub mirrors_raw {
         alarm 60;
         log::l("using mirror list $list");
         push @lines, $_ while <$f>;
-        install::http::close();
         alarm 0; 
     } else {
         if (ref($downloader)) {
