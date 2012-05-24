@@ -732,6 +732,12 @@ sub add_kernel {
 	$v->{append} = pack_append($simple, $dict);
     }
 
+    if (-e "$::prefix/bin/systemd") {
+       log::l("defaulting to systemd");
+       #@$dict = grep { $_->[0] ne 'devfs' } @$dict;
+       $v->{append} .= " init=/bin/systemd";
+    }
+
     #- new versions of yaboot do not handle symlinks
     $b_nolink ||= arch() =~ /ppc/;
     $b_no_initrd //= (arch() =~ /mips|arm/) && !detect_devices::is_mips_gdium();
