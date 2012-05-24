@@ -79,6 +79,8 @@ my ($root, $fs, @fstab);
 # Try Mandriva first:
 if (@roots) {
     @roots = map { @$_ } partition { $_->{release} =~ /Mandriva/ } @roots;
+    # Order by release number:
+    @roots = sort { $b->{release} cmp $a->{release} } @roots;
     my $selected = first(@roots);
     $root = $selected->{dev};
     $fs = $selected->{fs};
