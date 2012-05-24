@@ -1605,7 +1605,7 @@ sub add {
 sub show {
     my ($self) = @_; # perl_checker: $self = Gtk2::Notify->new
     my $info = $self->{queue}[0];
-    my $notification = Gtk2::Notify->new_with_status_icon($info->{title}, $info->{message}, undef, $self->{statusicon});
+    my $notification = Gtk2::Notify->new($info->{title}, $info->{message}, $self->{statusicon});
     $notification->set_icon_from_pixbuf($info->{pixbuf});
     $notification->set_urgency($info->{urgency}) if $info->{urgency};
     foreach my $a (@{$info->{actions} || []}) {

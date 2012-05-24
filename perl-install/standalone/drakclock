@@ -25,6 +25,7 @@ $ugtk2::wm_icon = "/usr/share/mcc/themes/default/time-mdk.png";
 
 my $ntpfile = '/etc/ntp.conf';
 my $ntpdlock = '/var/lock/subsys/ntpd';
+my $ntpdsystemdlock = '/sys/fs/cgroup/systemd/system/ntpd.service';
 
 my $my_win = ugtk2->new(N("Date, Clock & Time Zone Settings"));
 
@@ -132,6 +133,10 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
 								system(qw(service ntpd stop));
 								system(qw(/sbin/chkconfig --level 35 ntpd off));
 							    }
+							    elsif (-e $ntpdsystemdlock) {
+								system(qw(systemctl stop ntpd.service));
+								system(qw(systemctl disable ntpd.service));
+							    }
 							}
 							if ($need_date) {
 							    my ($year, $month, $day) = $calendar->get_date;
@@ -163,7 +168,7 @@ $time_box->set_direction('ltr');
 
 my $servers = get_server();
 $combo_ntpserver->set_popdown_strings(@$servers);
-if (-e $ntpfile && -e $ntpdlock) {
+if (-e $ntpfile && ( -e $ntpdsystemdlock || -e $ntpdlock)) {
     $ntp = timezone::ntp_server();
     $ntp and ntp_widget_state(1);
     my $fullntp = $ntp;
