@@ -86,12 +86,7 @@ sub mirrors_raw {
     my $type = lc($product_id->{type}); $type =~ s/\s//g;
     my $list = "https://api.mandriva.com/mirrors/$type.$product_id->{version}.$product_id->{arch}.list?product=$product_id->{product}";
     log::explanations("trying mirror list from $list");
-    my @lines;
-    if ($::isInstall) {
-        @lines = _mirrors_raw_install($list);
-    } else {
-        @lines = _mirrors_raw_standalone($list);
-    }
+    my @lines = $::isInstall ? _mirrors_raw_install($list) : _mirrors_raw_standalone($list);
     map { common::parse_LDAP_namespace_structure(chomp_($_)) } @lines;
 }
 
