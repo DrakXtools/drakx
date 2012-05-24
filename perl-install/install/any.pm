@@ -374,7 +374,6 @@ sub setPackages {
 	    log::l("selecting task-kde (since kdebase-progs was installed)");
 	    install::pkgs::select_by_package_names($o->{packages}, ['task-kde']);
 	}
-        upgrade_kde3_to_kde4($o);
     }
 }
 
@@ -398,16 +397,6 @@ sub remove_package_for_upgrade {
     };
     push @{$o->{default_packages}}, install::pkgs::upgrade_by_removing_pkgs($o->{packages}, $callback, $extension, $o->{isUpgrade});
     log::l("Removing packages took: ", formatTimeRaw(time() - $time));
-}
-
-sub upgrade_kde3_to_kde4 {
-    my ($o) = @_;
-    if ((-e "$::prefix/usr/bin/kicker" || -e "$::prefix/opt/kde3/bin/kicker")
-          && !install::pkgs::packageByName($o->{packages}, 'task-kde3')) {
-        log::l("kde3 installed, but task-kde3 not available so can't upgrade correctly");
-        log::l("ok, continuing anyway, but forcing install of task-kde4");
-        install::pkgs::select_by_package_names($o->{packages}, ['task-kde4']);
-    }
 }
 
 sub count_files {
