@@ -580,7 +580,7 @@ sub default_packages {
     my @locale_pkgs = map { URPM::packages_providing($o->{packages}, 'locales-' . $_) } @languages;
     unshift @l, uniq(map { $_->name } @locale_pkgs);
 
-    @l;
+    uniq(@l);
 }
 
 sub mark_skipped_packages {
