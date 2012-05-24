@@ -534,6 +534,14 @@ sub init_mouse() {
     mouse::load_modules($o->{mouse});
 }
 
+sub init_modules_conf() {
+    list_modules::load_default_moddeps();
+    require modules::any_conf;
+    require modules::modules_conf;
+    $o->{modules_conf} = modules::modules_conf::read(modules::any_conf::vnew(), '/tmp/modules.conf');
+    modules::read_already_loaded($o->{modules_conf});
+}
+
 sub process_auto_steps() {
     foreach (@::auto_steps) {
 	if (my $s = $o->{steps}{/::(.*)/ ? $1 : $_}) {
@@ -594,11 +602,7 @@ sub main {
 
     eval { install::any::spawnShell() };
 
-    list_modules::load_default_moddeps();
-    require modules::any_conf;
-    require modules::modules_conf;
-    $o->{modules_conf} = modules::modules_conf::read(modules::any_conf::vnew(), '/tmp/modules.conf');
-    modules::read_already_loaded($o->{modules_conf});
+    init_modules_conf();
 
     #- done before auto_install is called to allow the -IP feature on auto_install file name
     read_stage1_net_conf() if -e '/tmp/network';
