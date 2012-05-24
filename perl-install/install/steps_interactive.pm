@@ -980,7 +980,7 @@ sub summary {
              install::any::set_security($o);
          }
 	},
-    };
+    } if -x "$::prefix/usr/sbin/msec";
 
     push @l, {
 	group => N("Security"),
