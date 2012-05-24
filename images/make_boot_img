@@ -186,8 +186,10 @@ fi
     _ "chmod 755 $tmp_initrd/hotplug";
     symlink "../hotplug", "$tmp_initrd/sbin/hotplug";
     _ "install $stage1_root/init $tmp_initrd/";
-    foreach ('stage1', 'pppd', 'pppoe') {
-	_ "install $stage1_root/$_ $tmp_initrd/sbin/";
+    _ "install $stage1_root/stage1 $tmp_initrd/sbin/";
+
+    foreach ('pppd', 'pppoe') {
+	_ "install /usr/uclibc/usr/sbin/pppd $tmp_initrd/sbin/";
     }
 
     if ($arch !~ /ppc|ia64/) {
