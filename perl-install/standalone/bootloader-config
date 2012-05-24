@@ -269,7 +269,7 @@ sub migrate_to_uuids() {
     }
 }
 
-sub _migrate_to_uuids__fstab() {
+sub _migrate_to_uuids__fstab {
     my ($fstab) = @_;
 
     my @raw_fstab = fs::read_fstab('', '/etc/fstab', 'keep_freq_passno', 'verbatim_credentials');
