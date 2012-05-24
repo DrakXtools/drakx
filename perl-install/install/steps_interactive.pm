@@ -243,7 +243,6 @@ sub selectMouse {
     if ($o->{mouse}{device} eq "input/mice") {
 	modules::interactive::load_category($o, $o->{modules_conf}, 'bus/usb', 1, 0);
 	eval { 
-	    devices::make("usbmouse");
 	    modules::load('usbhid');
 	};
     }
