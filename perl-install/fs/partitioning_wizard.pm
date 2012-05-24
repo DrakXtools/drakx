@@ -232,7 +232,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®")) if $
 	    sub {
                 my $hd;
                 if (!$in->isa('interactive::gtk')) {
-                    $hd = $in->ask_from_listf_raw({ messages => N("You have more than one hard drive, which one do you install linux on?"),
+                    $hd = $in->ask_from_listf_raw({ messages => N("You have more than one hard disk drive, which one do you want the installer to use?"),
                                                        title => N("Partitioning"),
                                                        interactive_help_id => 'takeOverHdChoose',
                                                      },

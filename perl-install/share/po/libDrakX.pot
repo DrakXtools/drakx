@@ -985,54 +985,54 @@ msgid ""
 ""
 msgstr ""
 
-#: bootloader.pm:1146
+#: bootloader.pm:1171
 #, c-format
 msgid "LILO with text menu"
 msgstr ""
 
-#: bootloader.pm:1147
+#: bootloader.pm:1172
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr ""
 
-#: bootloader.pm:1148
+#: bootloader.pm:1173
 #, c-format
 msgid "GRUB with text menu"
 msgstr ""
 
-#: bootloader.pm:1149
+#: bootloader.pm:1174
 #, c-format
 msgid "Yaboot"
 msgstr ""
 
-#: bootloader.pm:1150
+#: bootloader.pm:1175
 #, c-format
 msgid "SILO"
 msgstr ""
 
-#: bootloader.pm:1232
+#: bootloader.pm:1259
 #, c-format
 msgid "not enough room in /boot"
 msgstr ""
 
-#: bootloader.pm:1932
+#: bootloader.pm:1985
 #, c-format
 msgid ""
 "You can not install the bootloader on a %s partition\n"
 ""
 msgstr ""
 
-#: bootloader.pm:2053
+#: bootloader.pm:2106
 #, c-format
 msgid "Your bootloader configuration must be updated because partition has been renumbered"
 msgstr ""
 
-#: bootloader.pm:2066
+#: bootloader.pm:2119
 #, c-format
 msgid "The bootloader can not be installed correctly. You have to boot rescue and choose \"%s\""
 msgstr ""
 
-#: bootloader.pm:2067
+#: bootloader.pm:2120
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr ""
@@ -1971,7 +1971,7 @@ msgstr ""
 msgid " (inactive)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1404
+#: diskdrake/interactive.pm:1405
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2349,22 +2349,22 @@ msgstr ""
 msgid "Give read-only access to ordinary users"
 msgstr ""
 
-#: fs/mount_point.pm:80
+#: fs/mount_point.pm:82
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr ""
 
-#: fs/mount_point.pm:95
+#: fs/mount_point.pm:97
 #, c-format
 msgid "No partition available"
 msgstr ""
 
-#: fs/mount_point.pm:98
+#: fs/mount_point.pm:100
 #, c-format
 msgid "Scanning partitions to find mount points"
 msgstr ""
 
-#: fs/mount_point.pm:105
+#: fs/mount_point.pm:107
 #, c-format
 msgid "Choose the mount points"
 msgstr ""
@@ -2620,24 +2620,24 @@ msgid ""
 "Please be sure to add a /boot partition"
 msgstr ""
 
-#: fsedit.pm:438
+#: fsedit.pm:440
 #, c-format
 msgid "Metadata version unsupported for a boot partition. Please be sure to add a /boot partition."
 msgstr ""
 
-#: fsedit.pm:446
+#: fsedit.pm:448
 #, c-format
 msgid ""
 "You've selected a software RAID partition as /boot.\n"
 "No bootloader is able to handle this."
 msgstr ""
 
-#: fsedit.pm:450
+#: fsedit.pm:452
 #, c-format
 msgid "Metadata version unsupported for a boot partition."
 msgstr ""
 
-#: fsedit.pm:457
+#: fsedit.pm:459
 #, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
@@ -2989,7 +2989,7 @@ msgstr ""
 msgid ""
 "\n"
 "\n"
-"Your card currently use the %s\"%s\" driver (default driver for your card is \"%s\")"
+"Your card currently uses the %s\"%s\" driver (the default driver for your card is \"%s\")"
 msgstr ""
 
 #: harddrake/sound.pm:414
@@ -4493,6 +4493,7 @@ msgstr ""
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr ""
 
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: messages.pm:11
 #, c-format
 msgid ""
@@ -4543,11 +4544,11 @@ msgid ""
 "included in the Software Products.\n"
 "However, because some jurisdictions do not allow the exclusion or limitation or liability for \n"
 "consequential or incidental damages, the above limitation may not apply to you.  \n"
-"%s\n"
+"\n"
 "\n"
 "3. The GPL License and Related Licenses\n"
 "\n"
-"The Software Products consist of components created by different persons or entities. %s\n"
+"The Software Products consist of components created by different persons or entities.\n"
 "Most of these licenses allow you to use, duplicate, adapt or redistribute the components which \n"
 "they cover. Please read carefully the terms and conditions of the license agreement for each component \n"
 "before using any component. Any question on a component license should be addressed to the component \n"
@@ -4622,39 +4623,8 @@ msgid ""
 "may be applicable to you, check your local laws."
 msgstr ""
 
-#: messages.pm:120
-#, c-format
-msgid ""
-"6. Additional provisions applicable to those Software Products provided by Google Inc. (\"Google Software\")\n"
-"\n"
-"(a)  You acknowledge that Google or third parties own all rights, title and interest in and to the Google \n"
-"Software, portions thereof, or software provided through or in conjunction with the Google Software, including\n"
-"without limitation all Intellectual Property Rights. \"Intellectual Property Rights\" means any and all rights \n"
-"existing from time to time under patent law, copyright law, trade secret law, trademark law, unfair competition \n"
-"law, database rights and any and all other proprietary rights, and any and all applications, renewals, extensions \n"
-"and restorations thereof, now or hereafter in force and effect worldwide. You agree not to modify, adapt, \n"
-"translate, prepare derivative works from, decompile, reverse engineer, disassemble or otherwise attempt to derive \n"
-"source code from Google Software. You also agree to not remove, obscure, or alter Google's or any third party's \n"
-"copyright notice, trademarks, or other proprietary rights notices affixed to or contained within or accessed in \n"
-"conjunction with or through the Google Software.  \n"
-"\n"
-"(b)  The Google Software is made available to you for your personal, non-commercial use only.\n"
-"You may not use the Google Software in any manner that could damage, disable, overburden, or impair Google's \n"
-"search services (e.g., you may not use the Google Software in an automated manner), nor may you use Google \n"
-"Software in any manner that could interfere with any other party's use and enjoyment of Google's search services\n"
-"or the services and products of the third party licensors of the Google Software.\n"
-"\n"
-"(c)  Some of the Google Software is designed to be used in conjunction with Google's search and other services.\n"
-"Accordingly, your use of such Google Software is also defined by Google's Terms of Service located at \n"
-"http://www.google.com/terms_of_service.html and Google's Toolbar Privacy Policy located at \n"
-"http://www.google.com/support/toolbar/bin/static.py?page=privacy.html.\n"
-"\n"
-"(d)  Google Inc. and each of its subsidiaries and affiliates are third party beneficiaries of this contract \n"
-"and may enforce its terms."
-msgstr ""
-
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: messages.pm:150
+#: messages.pm:102
 #, c-format
 msgid ""
 "Congratulations, installation is complete.\n"
