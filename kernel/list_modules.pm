@@ -47,6 +47,7 @@ our %l = (
       qw(atl1 atl1c atl1e be2net bna bnx2 bnx2x cxgb cxgb3 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io sfc sxg_nic
       sis190 sk98lin skge sky2 slicoss spidernet stmmac tehuti tg3 via-velocity virtio_net vxge yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
+      qw(broadcom libphy), # needed to get tg3 working
     ],
 
     raw => [
