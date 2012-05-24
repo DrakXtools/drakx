@@ -548,6 +548,8 @@ sub main {
 	run_program::run("brltty");
     }
 
+    devices::make('tty') if $o->{interactive} eq "curses";
+
     #- needed very early for install::steps_gtk
     if (!$::testing) {
 	eval { $o->{mouse} = mouse::detect($o->{modules_conf}) } if !$o->{mouse} && !$o->{nomouseprobe};
