@@ -568,13 +568,7 @@ First remove a primary partition and create an extended partition."));
 	if ($::isStandalone) {
 	    fs::format::check_package_is_installed_format($in->do_pkgs, $p->{fs_type}) or log::l("Missing package");
 	}
-	if ($::expert && !member($p->{fs_type}, 'reiserfs', 'xfs', 'hfs', 'ntfs', 'ntfs-3g')) {
-	    $p->{toFormatCheck} = $in->ask_yesorno(N("Confirmation"), N("Check bad blocks?"));
-	}
-	$p->{isFormatted} = 0; #- force format;
-	# Wait for the newly created device to appear before formatting it
-	my ($_w, $wait_message) = $in->wait_message_with_progress_bar;
-	fs::format::part($all_hds, $p, $wait_message) unless isRawLVM($p);
+	_format_raw($in, $p, $all_hds, isRawLVM($p));
     }
 
     warn_if_renumbered($in, $hd);
@@ -1292,13 +1286,14 @@ sub format_ {
 }
 
 sub _format_raw {
-    my ($in, $part, $all_hds) = @_;
+    my ($in, $part, $all_hds, $o_skip) = @_;
     if ($::expert && !member($part->{fs_type}, 'reiserfs', 'xfs', 'hfs', 'ntfs', 'ntfs-3g')) {
 	$part->{toFormatCheck} = $in->ask_yesorno(N("Confirmation"), N("Check bad blocks?"));
     }
     $part->{isFormatted} = 0; #- force format;
+    # Wait for the newly created device to appear before formatting it
     my ($_w, $wait_message) = $in->wait_message_with_progress_bar;
-    fs::format::part($all_hds, $part, $wait_message);
+    fs::format::part($all_hds, $part, $wait_message) if !$o_skip;
     1;
 }
 
