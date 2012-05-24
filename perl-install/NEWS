@@ -7,6 +7,8 @@
   o fix actually displaying "Domain Windows for authentication"
 - drakboot:
   o support the "quiet" kernel command line argument to hide kernel text
+  o display mountpoint if available, and size+fs_type if we have nothing 
+    else (mga#5460)
 - fix mdkapplet crashing on live migration when there's a new major version of
   perl (mga#3042)
 - reduce resident memory of net_applet (5Mb aka 11%) & mgapplet (7Mb aka 14%)
