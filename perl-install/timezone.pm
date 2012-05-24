@@ -167,6 +167,7 @@ sub get_ntp_server_tree {
 }
 
 sub ntp_servers() {
+    # FIXME: missing parameter:
     +{ get_ntp_server_tree() };
 }
 
@@ -176,6 +177,7 @@ sub dump_ntp_zone {
 }
 sub print_ntp_zone {
     my ($zone, $name) = @_;
+    # FIXME: missing parameter:
     my %servers = dump_ntp_zone($zone);
     print qq(\$ntp_servers{"$name"} = {\n);
     print join('', map { qq(    N_("$_") => "$servers{$_}",\n) } sort(keys %servers));
