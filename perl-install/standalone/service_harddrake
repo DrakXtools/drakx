@@ -92,6 +92,22 @@ sub dialog_with_timeout {
     return $res, $timed_out;
 }
 
+sub ask_with_timeout {
+    my ($title, $msg, $timeout, $plymouth) = @_;
+    my ($pid, $res, $timed_out);
+
+    $SIG{ALRM} = sub { $timed_out = 1; kill 15, $pid };
+    unless ($pid = fork()) {
+	$plymouth and system('plymouth', 'hide-splash');
+	exec("/usr/share/harddrake/confirm", $title, $msg);
+    }
+    alarm($timeout);
+    wait();
+    $res = $?;
+    alarm(0);
+    return $res, $timed_out;
+}
+
 sub get_xorg_driver() {
     my $x = Xconfig::xfree->read;
     if ($x) {
