@@ -296,12 +296,12 @@ sub ask {
 sub _set_service {
     my ($service, $enable) = @_;
     
-    if ( -f "/lib/systemd/system/$service.service" ) {
-      if ( -l "/lib/systemd/system/$service.service" ) {
-        $service = basename(readlink("/lib/systemd/system/$service.service"))
+    if (-f "/lib/systemd/system/$service.service") {
+      if (-l "/lib/systemd/system/$service.service") {
+        $service = basename(readlink("/lib/systemd/system/$service.service"));
       }
       else {
-        $service = $service . ".service" ; 
+        $service = $service . ".service"; 
       }
       run_program::rooted($::prefix, "systemctl", $enable ? "enable" : "disable", $service);
     } else {
