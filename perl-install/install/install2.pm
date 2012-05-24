@@ -538,6 +538,15 @@ sub process_auto_steps() {
     }
 }
 
+sub process_patch {
+    my ($cfg, $patch) = @_;
+    #- oem patch should be read before to still allow patch or defcfg.
+    eval { $o = $::o = install::any::loadO($o, "install/patch-oem.pl"); log::l("successfully read oem patch") };
+    #- patch should be read after defcfg in order to take precedance.
+    eval { $o = $::o = install::any::loadO($o, $cfg); log::l("successfully read default configuration: $cfg") } if $cfg;
+    eval { $o = $::o = install::any::loadO($o, "patch"); log::l("successfully read patch") } if $patch;
+}
+
 #-######################################################################################
 #- MAIN
 #-######################################################################################
@@ -612,11 +621,7 @@ sub main {
     #- needed before accessing floppy (in case of usb floppy)
     modules::load_category($o->{modules_conf}, 'bus/usb'); 
 
-    #- oem patch should be read before to still allow patch or defcfg.
-    eval { $o = $::o = install::any::loadO($o, "install/patch-oem.pl"); log::l("successfully read oem patch") };
-    #- patch should be read after defcfg in order to take precedance.
-    eval { $o = $::o = install::any::loadO($o, $cfg); log::l("successfully read default configuration: $cfg") } if $cfg;
-    eval { $o = $::o = install::any::loadO($o, "patch"); log::l("successfully read patch") } if $patch;
+    process_patch($cfg, $patch);
 
     eval { modules::load("af_packet") };
 
