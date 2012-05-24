@@ -838,7 +838,7 @@ sub miscellaneousAfter {
     addToBeDone {
 	addVarsInSh("$::prefix/etc/sysconfig/system", { META_CLASS => $o->{meta_class} });
 
-	eval { install::any::set_security($o) };
+	eval { install::any::set_security($o) } if !$o->{isUpgrade};
 
     } 'installPackages';
 }
