@@ -346,7 +346,7 @@ sub setPackages {
 	if ($o->{isUpgrade} && $o->{packages}{sizes}{dkms}) {
 	    my $devel_kernel_pkg = "$1-devel-latest" if $kernel_pkg =~ /(.*)-latest/;
 	    log::l("selecting $devel_kernel_pkg (since dkms was installed)");
-	    install::pkgs::select_by_package_names($o->{packages}, [ $devel_kernel_pkg], 1);
+	    install::pkgs::select_by_package_names($o->{packages}, [ $devel_kernel_pkg ], 1);
 	}
 
 	install::pkgs::select_by_package_names_or_die($o->{packages}, ['basesystem'], 1);
