@@ -365,7 +365,11 @@ sub empty_packages {
     urpm::args::set_debug($packages) if $::o->{debug_urpmi};
     $packages->{log} = \&log::l;
     $packages->{info} = \&log::l;
-    $packages->{fatal} = $packages->{error} = sub {
+    $packages->{fatal} = sub {
+        log::l("urpmi error: $_[0]");
+        $::o->ask_warn(undef, N("A fatal error occurred: %s.", "$_[1] ($_[0])"));
+    };
+    $packages->{error} = sub {
         log::l("urpmi error: $_[0]");
         $::o->ask_warn(undef, N("An error occurred:") . "\n\n" . $_[0]);
     };
