@@ -983,8 +983,9 @@ sub urpmi_add_all_media {
     local $ENV{URPMI_ADDMEDIA_REASON} = $reason;
 
     my $log_file = '/root/drakx/updates.log';
+    my $val = run_program::rooted($::prefix, $binary, '>>', $log_file, '2>>', $log_file, @options);
     undef $wait;
-    run_program::rooted($::prefix, $binary, '>>', $log_file, '2>>', $log_file, @options);
+    $val;
 }
 
 sub autologin {
