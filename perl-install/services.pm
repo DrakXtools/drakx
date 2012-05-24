@@ -347,9 +347,9 @@ sub xinetd_services() {
     local $ENV{LANGUAGE} = 'C';
     my @xinetd_services;
     foreach (run_program::rooted_get_stdout($::prefix, '/sbin/chkconfig', '--list', '--type', 'xinetd')) {
-	if (my ($xinetd_name, $on_off) = m!^\t(\S+):\s*(on|off)!) {
-	    push @xinetd_services, [ $xinetd_name, $on_off eq 'on' ];
-	}
+        if (my ($xinetd_name, $on_off) = m!^\t(\S+):\s*(on|off)!) {
+            push @xinetd_services, [ $xinetd_name, $on_off eq 'on' ];
+        }
     }
     @xinetd_services;
 }
