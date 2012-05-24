@@ -699,7 +699,7 @@ my %IM_config =
 	default_for_lang => 'am ja ko th vi zh_CN zh_TW',
 	packages => {
 		generic => sub { qw(ibus-table ibus-m17n), if_($is_kde4, 'ibus-qt4') },
-		ja => sub { qw(ibus-anthy) },
+		ja => sub { qw(ibus-mozc) },
 		zh => sub { qw(ibus-pinyin ibus-chewing) },
 		ko => sub { qw(ibus-hangul) },
 	},
