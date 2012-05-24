@@ -479,6 +479,7 @@ sub parse_args {
 	    nodmraid  => sub { $o->{partitioning}{nodmraid} = 1 },
 	    debug_urpmi  => sub { $o->{debug_urpmi} = 1 },
 	    justdb    => sub { $o->{justdb} = 1 },
+	    'tune-rpm' => sub { $o->{'tune-rpm'} = 'all' },
 	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
 	    display   => sub { $o->{display} = $v },
 	    askdisplay => sub { print "Please enter the X11 display to perform the install on ? "; $o->{display} = chomp_(scalar(<STDIN>)) },
