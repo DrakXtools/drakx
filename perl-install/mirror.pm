@@ -53,6 +53,19 @@ sub register_downloader {
     $downloader = $func;
 }
 
+sub _mirrors_raw_install {
+    my ($list) = @_;
+    require install::http;
+    my $f = install::http::getFile($list, "strict-certificate-check" => 1) or die "mirror list not found";
+    local $SIG{ALRM} = sub { die "timeout" };
+    alarm 60;
+    log::l("using mirror list $list");
+    my @lines;
+    push @lines, $_ while <$f>;
+    alarm 0;
+    @lines;
+}
+
 sub mirrors_raw {
     my ($product_id) = @_;
 
@@ -63,13 +76,7 @@ sub mirrors_raw {
     log::explanations("trying mirror list from $list");
     my @lines;
     if ($::isInstall) {
-        require install::http;
-        my $f = install::http::getFile($list, "strict-certificate-check" => 1) or die "mirror list not found";
-        local $SIG{ALRM} = sub { die "timeout" };
-        alarm 60;
-        log::l("using mirror list $list");
-        push @lines, $_ while <$f>;
-        alarm 0; 
+        @lines = _mirrors_raw_install($list);
     } else {
         if (ref($downloader)) {
             @lines = $downloader->($list);
