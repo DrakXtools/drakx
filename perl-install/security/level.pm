@@ -3,7 +3,7 @@ package security::level;
 use strict;
 use common;
 use run_program;
-
+# perl_checker: require interactive
 
 sub level_list() {
     (
@@ -34,7 +34,7 @@ sub set {
 }
 
 sub level_choose {
-    my ($in, $security, $email) = @_;
+    my ($in, $security, $email) = @_; # perl_checker: $in = interactive->new
 
     my %help = (
       0 => N("This level is to be used with care, as it disables all additional security

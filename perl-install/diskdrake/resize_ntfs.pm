@@ -5,7 +5,7 @@ use strict;
 
 use run_program;
 use common;
-
+# perl_checker: require interactive
 
 sub new {
     my ($type, $_device, $dev) = @_;
@@ -13,7 +13,7 @@ sub new {
 }
 
 sub check_prog {
-    my ($in) = @_;
+    my ($in) = @_; # perl_checker: $in = interactive->new
     #- ensure_binary_is_installed checks binary chrooted, whereas we run the binary non-chrooted (pb for Mandriva One)
     $::isInstall || whereis_binary('ntfsresize') || $in->do_pkgs->ensure_binary_is_installed('ntfsprogs', 'ntfsresize');
 }

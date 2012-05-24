@@ -13,6 +13,8 @@ use partition_table;
 use partition_table::raw;
 use partition_table::dos;
 use POSIX qw(ceil);
+use mygtk2;
+use ugtk2 qw(:wrappers);
 
 #- unit of $mb is mega bytes, min and max are in sectors, this
 #- function is used to convert back to sectors count the size of

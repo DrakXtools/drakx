@@ -245,6 +245,7 @@ sub encrypt_home {
 
     run_program::rooted($::prefix, 'umount', $home);
     run_program::rooted($::prefix, 'cryptsetup', 'luksClose', $user->{name});
+    undef $wait;
 }
 
 sub ask_remove_unused_packages {

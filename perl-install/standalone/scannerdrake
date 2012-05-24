@@ -322,6 +322,7 @@ sub tryConfScanner {
 		modules::append_to_modules_loaded_at_startup_for_all_kernels($m);
 	    }
 	}
+        undef $wait;
     }
     if ($scanner::scannerDB->{$model}{ask} =~ /DEVICE/ || !$port) {
 	$port ||= N("Auto-detect available ports");
@@ -505,7 +506,7 @@ sub mainwindow {
 		    $in->wait_message(N("Please wait"),
 				      N("Searching for new scanners..."));
 		my @f = scanner::detect(@configured);
-		$wait = undef;
+		undef $wait;
 		if (@f) { 
 		    $changed = auto();
 		}

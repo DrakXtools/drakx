@@ -2,6 +2,7 @@ package modules::modprobe_conf; # $Id$
 
 use log;
 use common;
+# perl_checker: require modules::any_conf
 
 our @ISA = qw(modules::any_conf);
 

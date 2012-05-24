@@ -4,6 +4,7 @@ package wizards;
 use strict;
 use c;
 use common;
+# perl_checker: require interactive
 
 =head1 NAME
 
@@ -89,7 +90,7 @@ sub new {
 
 
 sub check_rpm {
-    my ($in, $rpms) = @_;
+    my ($in, $rpms) = @_; # perl_checker: $in = interactive->new
     foreach my $rpm (@$rpms) {
         next if $in->do_pkgs->is_installed($rpm);
         if ($in->ask_okcancel(N("Error"), N("%s is not installed\nClick \"Next\" to install or \"Cancel\" to quit", $rpm))) {
