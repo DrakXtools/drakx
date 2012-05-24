@@ -180,7 +180,7 @@ sub check {
 ################################################################################
 package exports;
 
-sub find {
+sub _find {
     my ($exports, $mntpoint) = @_;
     foreach (@$exports) {
 	$_->{mntpoint} eq $mntpoint and return $_;
@@ -190,7 +190,7 @@ sub find {
 
 sub add {
     my ($exports, $mntpoint) = @_;
-    find($exports, $mntpoint) and die 'add';
+    _find($exports, $mntpoint) and die 'add';
     push @$exports, my $e = { mntpoint => $mntpoint };
     $e;
 }
