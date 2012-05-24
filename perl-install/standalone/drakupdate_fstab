@@ -115,7 +115,7 @@ sub configure_part {
     my ($action, $part, $is_hd) = @_;
     my $fstab_file = '/etc/fstab';
     if (!$part) {
-	print STDERR "Can not find device $device_name\n" if $::testing;
+	print STDERR "Cannot find device $device_name\n" if $::testing;
 	return;
     } elsif ($::testing) {
 	cp_af('/etc/fstab', $fstab_file = '/tmp/fstab');

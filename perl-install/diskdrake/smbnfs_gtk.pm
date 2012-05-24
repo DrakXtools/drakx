@@ -161,7 +161,7 @@ sub import_tree {
 	return @l if !$@;
 
 	if ($server->{username}) {
-	    $in->ask_warn('', N("Can not login using username %s (bad password?)", $server->{username}));
+	    $in->ask_warn('', N("Cannot login using username %s (bad password?)", $server->{username}));
 	    fs::remote::smb::remove_bad_credentials($server);
 	} else {
 	    if (my @l = fs::remote::smb::authentications_available($server)) {

@@ -506,7 +506,7 @@ sub remove {
 
     my ($first, $second, $third) = map { $_->{normal} } @{$hd->{extended} || []};
     if ($third && $first eq $part) {
-	die "Can not handle removing hda5 when hda6 is not the second partition" if $second->{start} > $third->{start};
+	die "Cannot handle removing hda5 when hda6 is not the second partition" if $second->{start} > $third->{start};
     }      
 
     #- otherwise search it in extended partitions

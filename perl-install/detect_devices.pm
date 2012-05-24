@@ -1044,7 +1044,7 @@ sub syslog() {
 }
 
 sub get_mac_model() {
-    my $mac_model = cat_("/proc/device-tree/model") || die "Can not open /proc/device-tree/model";
+    my $mac_model = cat_("/proc/device-tree/model") || die "Cannot open /proc/device-tree/model";
     log::l("Mac model: $mac_model");
     $mac_model;	
 }

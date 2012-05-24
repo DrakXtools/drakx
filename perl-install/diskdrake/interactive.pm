@@ -713,7 +713,7 @@ sub Mount_point {
 		     callbacks => {
 		         complete => sub {
 	    !isPartOfLoopback($part) || $mntpoint or $in->ask_warn(N("Error"),
-N("Can not unset mount point as this partition is used for loop back.
+N("Cannot unset mount point as this partition is used for loop back.
 Remove the loopback first")), return 1;
 	    $part->{mntpoint} eq $mntpoint || check_mntpoint($in, $mntpoint, $part, $all_hds) or return 1;
     	    $migrate_files = need_migration($in, $mntpoint) or return 1;

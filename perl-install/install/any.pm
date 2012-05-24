@@ -1246,7 +1246,7 @@ sub take_screenshot {
     my ($base_dir, $nowarn) = screenshot_dir__and_move();
     my $dir = "$base_dir/DrakX-screenshots";
     if (!-e $dir) {
-	mkdir $dir or $in->ask_warn('', N("Can not make screenshots before partitioning")), return;
+	mkdir $dir or $in->ask_warn('', N("Cannot make screenshots before partitioning")), return;
     }
     my $nb = 1;
     $nb++ while -e "$dir/$nb.png";

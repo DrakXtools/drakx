@@ -374,7 +374,7 @@ EOF
     } elsif ($kind eq 'NIS') {
 	my $domain = $net->{network}{NISDOMAIN};
 	my $NIS_server = $authentication->{NIS_server};
-	$domain || $NIS_server ne "broadcast" or die N("Can not use broadcast with no NIS domain");
+	$domain || $NIS_server ne "broadcast" or die N("Cannot use broadcast with no NIS domain");
 	my $t = $domain ? 
 	  ($NIS_server eq 'broadcast' ? 
 	     "domain $domain broadcast" : 

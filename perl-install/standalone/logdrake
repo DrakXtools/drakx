@@ -497,7 +497,7 @@ if ($r) {
                     To      => $options{MAIL},
                     Subject => "DrakLog Mail Alert",
                   })
-      or die "Can not open: $!\n";
+      or die "Cannot open: $!\n";
     print $mailer $r;
     $mailer->close;
 }

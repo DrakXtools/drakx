@@ -261,7 +261,7 @@ sub files_exist { and_(map { -f "$::prefix$_" } @_) }
 sub open_file {
     my ($file) = @_;
     my $F;
-    open($F, $file) ? $F : do { log::l("Can not open $file: $!"); undef };
+    open($F, $file) ? $F : do { log::l("Cannot open $file: $!"); undef };
 }
 
 # FIXME: callers should just use mkstemp in /tmp instead of relying on $TMPDIR || $ENV{HOME}/tmp
