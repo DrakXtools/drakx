@@ -799,7 +799,7 @@ sub writeandclean_ldsoconf {
     my @l = chomp_(cat_($file));
 
     my @default = ('/lib', '/usr/lib'); #- no need to have /lib and /usr/lib in ld.so.conf
-    my @suggest = ('/usr/X11R6/lib', '/usr/lib/qt3/lib'); #- needed for upgrade where package renaming can cause this to disappear
+    my @suggest = ('/usr/lib/qt3/lib'); #- needed for upgrade where package renaming can cause this to disappear
 
     if (arch() =~ /x86_64/) {
 	@default = map { $_, $_ . '64' } @default;

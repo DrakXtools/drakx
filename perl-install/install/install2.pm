@@ -585,8 +585,8 @@ sub main {
     mkdir $::prefix, 0755;
 
     #-  make sure we do not pick up any gunk from the outside world
-    my $remote_path = "$::prefix/sbin:$::prefix/bin:$::prefix/usr/sbin:$::prefix/usr/bin:$::prefix/usr/X11R6/bin";
-    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$remote_path";
+    my $remote_path = "$::prefix/sbin:$::prefix/bin:$::prefix/usr/sbin:$::prefix/usr/bin";
+    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:$remote_path";
 
     eval { install::any::spawnShell() };
 
