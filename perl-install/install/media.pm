@@ -436,7 +436,8 @@ sub urpmidir() {
 sub hdlist_on_disk {
     my ($m) = @_;
 
-    urpmidir() . "/hdlist.$m->{fakemedium}.cz";
+    #urpmidir() . "/hdlist.$m->{fakemedium}.cz";
+    join('/', $m->{url}, $m->{media_info_dir}, "hdlist.cz");
 }
 
 sub _allow_copy_rpms_on_disk {
