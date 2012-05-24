@@ -89,7 +89,7 @@ sub load_with_options {
 	dependencies_closure(cond_mapping_24_26($_));
     } @$l;
 
-    @l = remove_loaded_modules(@l) or return;
+    @l = filter_out_loaded_modules(@l) or return;
 
     my %options = map { cond_mapping_24_26($_) => $h_options->{$_} } keys %$h_options;
     load_raw(\@l, \%options);
@@ -103,7 +103,7 @@ sub load {
 sub load_and_configure {
     my ($conf, $module, $o_options) = @_;
 
-    my @l = remove_loaded_modules(dependencies_closure(cond_mapping_24_26($module)));
+    my @l = filter_out_loaded_modules(dependencies_closure(cond_mapping_24_26($module)));
     load_raw(\@l, { cond_mapping_24_26($module) => $o_options });
 
     if (member($module, @parallel_zip_modules)
@@ -223,7 +223,7 @@ sub set_preload_modules {
 sub loaded_modules() { 
     map { /(\S+)/ } cat_("/proc/modules");
 }
-sub remove_loaded_modules {
+sub filter_out_loaded_modules {
     my (@l) = @_;
     difference2([ uniq(@l) ], [ map { my $s = $_; $s =~ s/_/-/g; $s, $_ } loaded_modules() ]);
 }
