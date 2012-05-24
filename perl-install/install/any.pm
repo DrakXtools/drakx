@@ -578,6 +578,7 @@ sub default_packages {
     @ltmp = uniq(grep { $_ } map { fs::format::package_needed_for_partition_type($_) } @{$o->{fstab}});
     add_n_log("needed by some fs", @ltmp) if @ltmp;
     add_n_log("some fs is NTFS-3G", 'ntfs-3g') if any { $_->{fs_type} eq 'ntfs-3g' } @{$o->{fstab}};
+    add_n_log("some fs is btrfs", 'btrfs-progs') if any { $_->{fs_type} eq 'btrfs' } @{$o->{fstab}};
 
     # handle locales with specified scripting:
     my @languages = map { s/\@.*//; $_ } lang::langsLANGUAGE($o->{locale}{langs});
