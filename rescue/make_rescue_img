@@ -21,7 +21,6 @@ _ 'find . -name "*~" | xargs rm -f';
 mkdir_p($tmp . chomp_($_)) foreach cat_("dirs");
 _ "cp -a tree/* $tmp";
 _ "find $tmp -name .svn | xargs rm -rf";
-_ "perl devices.pl $tmp/dev";
 substInFile { s/DISTRIB_DESCR/$ENV{DISTRIB_DESCR}/ } "$tmp/etc/issue";
 
 _ "../tools/install-xml-file-list list.xml $tmp";

@@ -18,10 +18,9 @@ export UDEVRULESD=/run/udev/rules.d
 mount -t devtmpfs -o mode=0755,nosuid devtmpfs /dev
 mkdir /dev/pts
 mkdir /dev/shm
-mount -t devpts -o mode=620 devpts /dev/pts
-mount -t tmpfs -o mode=1777,nosuid,nodev tmpfs /dev/shm
+mount /dev/pts
+mount /dev/shm
 
-cp -a /tmp/stage2/dev/. /dev/
 /lib/udev/udevd --daemon --resolve-names=never
 udevadm trigger --type=subsystems --action=add
 udevadm trigger --type=devices --action=add
