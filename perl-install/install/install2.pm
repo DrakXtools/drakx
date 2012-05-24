@@ -327,6 +327,17 @@ sub init_local_install {
 	$o->{mouse} = mouse::fullname2mouse('Universal|Any PS/2 & USB mice');
 }
 
+sub pre_init_brltty() {
+    if (my ($s) = cat_("/proc/cmdline") =~ /brltty=(\S*)/) {
+	my ($driver, $device, $table) = split(',', $s);
+	$table = "text.$table.tbl" if $table !~ /\.tbl$/;
+	log::l("brltty option $driver $device $table");
+	$o->{brltty} = { driver => $driver, device => $device, table => $table };
+	$o->{interactive} = 'curses';
+	$o->{nomouseprobe} = 1;
+    }
+}
+
 sub init_brltty() {
     symlink "/tmp/stage2/$_", $_ foreach "/etc/brltty";
     devices::make($_) foreach $o->{brltty}{device} ? $o->{brltty}{device} : qw(ttyS0 ttyS1);
@@ -581,14 +592,7 @@ sub main {
  	$o->{interactive} = "curses";
     }
 
-    if (my ($s) = cat_("/proc/cmdline") =~ /brltty=(\S*)/) {
-	my ($driver, $device, $table) = split(',', $s);
-	$table = "text.$table.tbl" if $table !~ /\.tbl$/;
-	log::l("brltty option $driver $device $table");
-	$o->{brltty} = { driver => $driver, device => $device, table => $table };
-	$o->{interactive} = 'curses';
-	$o->{nomouseprobe} = 1;
-    }
+    pre_init_brltty();
 
     # perl_checker: require install::steps_gtk
     # perl_checker: require install::steps_curses
