@@ -345,6 +345,31 @@ sub init_brltty() {
     run_program::run("brltty");
 }
 
+sub init_auto_install() {
+    if ($::auto_install =~ /-IP(\.pl)?$/) {
+        my ($ip) = cat_('/tmp/stage1.log') =~ /configuring device (?!lo)\S+ ip: (\S+)/;
+        my $normalized_ip = join('', map { sprintf "%02X", $_ } split('\.', $ip)); 
+        $::auto_install =~ s/-IP(\.pl)?$/-$normalized_ip$1/;
+    }
+    require install::steps_auto_install;
+    eval { $o = $::o = install::any::loadO($o, $::auto_install) };
+    if ($@) {
+        if ($o->{useless_thing_accepted}) { #- Pixel's hack to be able to fail through
+            log::l("error using auto_install, continuing");
+            undef $::auto_install;
+        } else {
+            install::steps_auto_install_non_interactive::errorInStep($o, "Error using auto_install\n" . formatError($@));
+        }
+    } else {
+        log::l("auto install config file loaded successfully");
+
+        #- normalize for people not using our special scheme
+        foreach (@{$o->{manualFstab} || []}) {
+            $_->{device} =~ s!^/dev/!!;
+        }
+    }
+}
+
 sub step_init {
   my ($o) = @_;
   my $o_;
@@ -562,28 +587,7 @@ sub main {
 
     #- done after module dependencies are loaded for "vfat depends on fat"
     if ($::auto_install) {
-	if ($::auto_install =~ /-IP(\.pl)?$/) {
-	    my ($ip) = cat_('/tmp/stage1.log') =~ /configuring device (?!lo)\S+ ip: (\S+)/;
-	    my $normalized_ip = join('', map { sprintf "%02X", $_ } split('\.', $ip)); 
-	    $::auto_install =~ s/-IP(\.pl)?$/-$normalized_ip$1/;
-	}
-	require install::steps_auto_install;
-	eval { $o = $::o = install::any::loadO($o, $::auto_install) };
-	if ($@) {
-	    if ($o->{useless_thing_accepted}) { #- Pixel's hack to be able to fail through
-		log::l("error using auto_install, continuing");
-		undef $::auto_install;
-	    } else {
-		install::steps_auto_install_non_interactive::errorInStep($o, "Error using auto_install\n" . formatError($@));
-	    }
-	} else {
-	    log::l("auto install config file loaded successfully");
-
-	    #- normalize for people not using our special scheme
-	    foreach (@{$o->{manualFstab} || []}) {
-		$_->{device} =~ s!^/dev/!!;
-	    }
-	}
+        init_auto_install();
     } else {
         $o->{interactive} ||= 'gtk';
     }
