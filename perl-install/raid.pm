@@ -189,6 +189,11 @@ sub detect_during_install {
     foreach (@{allmodules()}) {
 	eval { modules::load($_) };
     }
+
+    # udev may have started raids but failed due to not yet loaded modules and
+    # they remains inactive ("md: personality for level 1 is not loaded!")
+    stop_inactive_mds();
+
     detect_during_install_once(@parts);
     detect_during_install_once(@parts) if active_mds(); #- try again to detect RAID 10
     stop_inactive_mds();

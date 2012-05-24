@@ -1,4 +1,7 @@
 - fix a crash when package state is empty (mga#5487)
+- fix not offering to upgrade RAID installs
+  (udev was enabling RAIDs early but leaved them in inactive mode
+  due to not yet loaded personality modules)
 - when selecting where ro install bootloader, display mountpoint if
   available, and size+fs_type if we have nothing (mga#5460)
 - package installation:
