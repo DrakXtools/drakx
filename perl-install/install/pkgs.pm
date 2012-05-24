@@ -852,6 +852,17 @@ sub _install_raw {
             log::l($msg);
             $::o->ask_yesorno($title, $msg);
         },
+        ask_for_bad_or_missing => sub {
+            my ($_title, $msg) = @_;
+            log::l($msg);
+            state $do_not_ask;
+            state $answer;
+            return $answer if $do_not_ask;
+            $answer = $::o->ask_from_({ messages => $msg }, [
+                { val => \$do_not_ask, type => 'bool', text => N("Do not ask again"),
+              },
+            ]);
+        },
         # Uneeded callbacks: success_summary
     });
           
