@@ -151,12 +151,11 @@ sub ask_ {
                                                prelude proftpd proftpd-xinetd pure-ftpd ipsec radvd roxen shorewall squid
                                                tftp tux wu-ftpd) ],
 
-			 N("File sharing") => [ qw(amd auth2.init autofs codasrv.init mcserv netfs nettalk nfs-common nfs-server 
-                                                   nfslock smb swat update.init venus.init) ],
+			 N("_: Keep these entry short\nNetworking") => [ qw(network network-auth network-up resolvconf) ],
 
 			 N("System") => [ qw(acon acpid alsa anacron apcupsd apmd atd bpowerd bpowerfail crond cvs dm fcron functions
                                              gpm halt harddrake inetd irda jserver keytable kheader killall kudzu mageia_everytime
-                                             mageia_firstime mdadm medusa-init messagebus microcode_ctl mosix network netconsole numlock partmon
+                                             mageia_firstime mdadm medusa-init messagebus microcode_ctl mosix netconsole numlock partmon
                                              pcmcia portmap powertweak.init psacct
                                              random rawdevices rpcbind sensors single sound syslog syslog-ng ups usb usbd wine xfs xinetd) ],
 
