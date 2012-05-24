@@ -903,7 +903,7 @@ sub get_kernels_and_labels_before_kernel_remove {
     map { kernel_str2label($_) => $_ } get_kernel_labels(\@kernels);
 }
 
-sub get_kernels_and_labels {
+sub get_kernels_and_labels() {
     my ($b_prefer_24) = @_;
     get_kernel_labels([ installed_vmlinuz() ], $b_prefer_24);
 }
