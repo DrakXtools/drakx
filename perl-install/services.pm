@@ -326,7 +326,11 @@ sub _set_service {
 
 sub _run_action {
     my ($service, $action) = @_;
-    run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", $action);
+    if (running_systemd()) {
+        run_program::rooted($::prefix, '/bin/systemctl', $action, "$service.service");
+    } else {
+        run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", $action);
+    }
 }
 
 sub doit {
