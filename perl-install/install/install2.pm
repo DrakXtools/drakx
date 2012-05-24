@@ -327,19 +327,21 @@ sub init_local_install {
 	$o->{mouse} = mouse::fullname2mouse('Universal|Any PS/2 & USB mice');
 }
 
+sub sig_segv_handler() {
+    my $msg = "segmentation fault: install crashed (maybe memory is missing?)\n" . backtrace();
+    log::l("$msg\n");
+    # perl_checker: require UNIVERSAL
+    UNIVERSAL::can($o, 'ask_warn') and $o->ask_warn('', $msg);
+    setVirtual(1);
+    require install::steps_auto_install;
+    install::steps_auto_install_non_interactive::errorInStep($o, $msg);
+}
+
 #-######################################################################################
 #- MAIN
 #-######################################################################################
 sub main {
-    $SIG{SEGV} = sub { 
-	my $msg = "segmentation fault: install crashed (maybe memory is missing?)\n" . backtrace();
-	log::l("$msg\n");
-	# perl_checker: require UNIVERSAL
-	UNIVERSAL::can($o, 'ask_warn') and $o->ask_warn('', $msg);
-	setVirtual(1);
-	require install::steps_auto_install;
-	install::steps_auto_install_non_interactive::errorInStep($o, $msg);
-    };
+    $SIG{SEGV} = \&sig_segv_handler;
     $ENV{PERL_BADLANG} = 1;
     delete $ENV{TERMINFO};
     umask 022;
