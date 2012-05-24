@@ -35,7 +35,7 @@ use common;
                           N_("User management") ],
   configureNetwork   => [ N_("_: Keep these entry short\nNetworking"), 1, 1, '', "formatPartitions",
                           N_("_: Keep these entry short\nNetworking") ],
-  setupBootloader    => [ N_("_: Keep these entry short\nBootloader"), 1, 0, '', "installPackages",
+  setupBootloader    => [ N_("_: Keep these entry short\nBootloader"), 1, 0, '1', "installPackages",
                           N_("_: Keep these entry short\nBootloader")  ],
   configureX         => [ N_("_: Keep these entry short\nConfigure X"), 1, 1, '1', ["formatPartitions", "setupBootloader"],
                       N_("_: Keep these entry short\nConfigure X") ],
