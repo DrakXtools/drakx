@@ -32,7 +32,6 @@ sub install_module {
     if (!$already_usb && $driver =~ /usb/) {
 	$already_usb = 1;
 	install_module_raw('usbkbd');
-	install_module_raw('keybdev');
     }
 }
 
