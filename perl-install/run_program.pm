@@ -32,6 +32,14 @@ sub get_stdout {
     run($name, '>', \@r, @args) or return;
     wantarray() ? @r : join('', @r);
 }
+
+sub get_stdout_raw {
+    my ($options, $name, @args) = @_;
+    my @r;
+    raw($options, $name, '>', \@r, @args) or return;
+    wantarray() ? @r : join('', @r);
+}
+
 sub rooted_get_stdout {
     my ($root, $name, @args) = @_;
     my @r;
