@@ -311,7 +311,8 @@ sub load_raw_install {
             my $stdout;
             my $rc = run_program::run('/sbin/insmod', '2>', \$stdout, $m, split(' ', $options->{$_}));
             log::l(chomp_($stdout)) if $stdout;
-            if ($rc) {
+            # if whether we succeeded or module is already loaded:
+            if ($rc || $stdout =~ /: -1 File exists/) {
                 unlink $m;
                 '';
             }
