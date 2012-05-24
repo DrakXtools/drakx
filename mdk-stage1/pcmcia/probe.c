@@ -12,6 +12,9 @@
  *
  *
  * Code comes from /anonymous@projects.sourceforge.net:/pub/pcmcia-cs/pcmcia-cs-3.1.29.tar.bz2
+ *
+ * FIXME: resync with latest pcmcia-cs-3.2.8 or with pcmciautils-0.18 (which uses sysfs)
+ *
  */
 
 /*======================================================================
