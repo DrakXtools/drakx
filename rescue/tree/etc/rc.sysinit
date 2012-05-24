@@ -64,6 +64,8 @@ echo "Setting local loop"
 # disable the weird echoprt in cooked mode for user interaction:
 stty sane
 
+export TERM=screen
+
 #LANGUAGE (filled by make_rescue_img)
 
 grep -q noauto /proc/cmdline || drvinst SERIAL_USB
