@@ -504,6 +504,7 @@ sub main {
         my $mainbox = Gtk2::VBox->new;
 
         my @kinds = map { diskdrake::hd_gtk::hd2kind($_) } sort { $a->{is_removable} <=> $b->{is_removable} } @{ $all_hds->{hds} };
+        # FIXME: raid2kind() doesn't take any arg:
         push @kinds, map { diskdrake::hd_gtk::raid2kind($_) } @{$all_hds->{raids}};
         push @kinds, map { diskdrake::hd_gtk::lvm2kind($_) } @{$all_hds->{lvms}};
 
