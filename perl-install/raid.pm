@@ -97,7 +97,7 @@ sub updateSize {
 }
 
 sub allmodules {
-    [ 'raid0', 'raid1', 'raid10', 'raid456' ];
+    ('raid0', 'raid1', 'raid10', 'raid456');
 }
 
 sub module {
@@ -187,7 +187,7 @@ sub free_mds {
 
 sub detect_during_install {
     my (@parts) = @_;
-    foreach (@{allmodules()}) {
+    foreach (allmodules()) {
 	eval { modules::load($_) };
     }
 
