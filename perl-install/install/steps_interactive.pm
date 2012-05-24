@@ -981,6 +981,7 @@ sub summary {
          }
 	},
     } if -x "$::prefix/usr/sbin/msec";
+    # FIXME: install msec if needed instead
 
     push @l, {
 	group => N("Security"),
