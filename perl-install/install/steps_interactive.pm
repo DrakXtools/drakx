@@ -575,6 +575,13 @@ sub chooseGroups {
     }
     #- if no group have been chosen, ask for using base system only, or no X, or normal.
     if (!$o->{isUpgrade} && !any { $_->{selected} } @$compssUsers) {
+        offer_minimal_options($o);
+    }
+    1;
+}
+
+sub offer_minimal_options {
+	my ($o) = @_;
 	my $docs = !$o->{excludedocs};	
 	state $minimal;
 	my $suggests = $o->{no_suggests};
@@ -603,8 +610,6 @@ Please choose the minimal installation you want:"),
 	log::l("install settings: no_suggests=$o->{no_suggests}, excludedocs=$o->{excludedocs}, really_minimal_install=$minimal");
 
 	install::any::unselectMostPackages($o);
-    }
-    1;
 }
 
 sub reallyChooseGroups {
