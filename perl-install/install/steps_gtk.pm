@@ -287,7 +287,6 @@ sub reallyChooseDesktop {
                    );
                 $wp->{real_window}->set_size_request(-1, -1);
                 $wp->{real_window}->grab_focus;
-                $wp->{real_window}->grab_focus;
                 $wp->{real_window}->show_all;
                 $wp->main;
             });
