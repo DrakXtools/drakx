@@ -75,8 +75,6 @@ sub laptop {
 #     }
     require services;
     services::set_status("apmd", -e "/proc/apm");
-    services::set_status("cpufreq", $on_laptop);
-    services::set_status("apmd", $on_laptop);
     services::set_status("laptop-mode", $on_laptop);
     services::set_status("numlock", !$on_laptop);
 }
