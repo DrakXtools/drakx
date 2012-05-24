@@ -336,8 +336,8 @@ If you want to skip some of them, you can unselect them now.")) },
 			    if_($_ eq $names[0], disabled => sub { 1 }),
 			} } @names),
 		  if_($o_copy_rpms_on_disk,
-		    { type => 'label', val => \(formatAlaTeX(N("You have the option to copy the contents of the CDs onto the hard drive before installation.
-It will then continue from the hard drive and the packages will remain available once the system is fully installed."))) },
+		    { type => 'label', val => \(formatAlaTeX(N("You have the option to copy the contents of the CDs onto the hard disk drive before installation.
+It will then continue from the hard disk drive and the packages will remain available once the system is fully installed."))) },
 		    { type => 'bool', text => N("Copy whole CDs"), val => $o_copy_rpms_on_disk },
 		  ),
 		]);

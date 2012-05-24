@@ -333,7 +333,7 @@ sub setupBootloader__boot_bios_drive {
 
     log::l("_ask_boot_bios_drive");
     my $hd = $in->ask_from_listf('', N("You decided to install the bootloader on a partition.
-This implies you already have a bootloader on the hard drive you boot (eg: System Commander).
+This implies you already have a bootloader on the hard disk drive you boot (eg: System Commander).
 
 On which drive are you booting?"), \&partition_table::description, $hds) or return 0;
     log::l("mixed_kind_of_disks chosen $hd->{device}");

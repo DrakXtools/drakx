@@ -54,7 +54,7 @@ security), choose the desired user and window manager, then click on
 \"%s\". If you're not interested in this feature, uncheck the \"%s\" box.", N("User name"), N("Accept user"), N("Next"), N("Advanced"), N("Next"), N("Do you want to use this feature?"));
 }
 sub ask_mntpoint_s() {
-    N("Listed here are the existing Linux partitions detected on your hard drive.
+    N("Listed here are the existing Linux partitions detected on your hard disk drive.
 You can keep the choices made by the wizard, since they are good for most
 common installations. If you make any changes, you must at least define a
 root partition (\"/\"). Do not choose too small a partition or you will not
@@ -64,24 +64,24 @@ separate partition, you will also need to create a \"/home\" partition
 
 Each partition is listed as follows: \"Name\", \"Capacity\".
 
-\"Name\" is structured: \"hard drive type\", \"hard drive number\",
+\"Name\" is structured: \"hard disk drive type\", \"hard disk drive number\",
 \"partition number\" (for example, \"hda1\").
 
-\"Hard drive type\" is \"hd\" if your hard drive is an IDE hard drive and
-\"sd\" if it is a SCSI hard drive.
+\"Hard drive type\" is \"hd\" if your hard disk drive is an IDE hard disk drive and
+\"sd\" if it is a SCSI hard disk drive.
 
 \"Hard drive number\" is always a letter after \"hd\" or \"sd\". For IDE
-hard drives:
+hard disk drives:
 
- * \"a\" means \"master hard drive on the primary IDE controller\";
+ * \"a\" means \"master hard disk drive on the primary IDE controller\";
 
- * \"b\" means \"slave hard drive on the primary IDE controller\";
+ * \"b\" means \"slave hard disk drive on the primary IDE controller\";
 
- * \"c\" means \"master hard drive on the secondary IDE controller\";
+ * \"c\" means \"master hard disk drive on the secondary IDE controller\";
 
- * \"d\" means \"slave hard drive on the secondary IDE controller\".
+ * \"d\" means \"slave hard disk drive on the secondary IDE controller\".
 
-With SCSI hard drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means
+With SCSI hard disk drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means
 \"second lowest SCSI ID\", etc.");
 }
 sub chooseCd() {
@@ -457,19 +457,19 @@ sub partition_with_diskdrake() {
     N("At this point, you need to choose which partition(s) will be used for the
 installation of your Mandriva Linux system. If partitions have already been
 defined, either from a previous installation of GNU/Linux or by another
-partitioning tool, you can use existing partitions. Otherwise, hard drive
+partitioning tool, you can use existing partitions. Otherwise, hard disk drive
 partitions must be defined.
 
-To create partitions, you must first select a hard drive. You can select
+To create partitions, you must first select a hard disk drive. You can select
 the disk for partitioning by clicking on ``hda'' for the first IDE drive,
 ``hdb'' for the second, ``sda'' for the first SCSI drive and so on.
 
-To partition the selected hard drive, you can use these options:
+To partition the selected hard disk drive, you can use these options:
 
- * \"%s\": this option deletes all partitions on the selected hard drive
+ * \"%s\": this option deletes all partitions on the selected hard disk drive
 
  * \"%s\": this option enables you to automatically create ext3 and swap
-partitions in the free space of your hard drive
+partitions in the free space of your hard disk drive
 
 \"%s\": gives access to additional features:
 
@@ -485,21 +485,21 @@ using this option. Please be careful and remember that it does not always
 work.
 
  * \"%s\": discards all changes and reloads the partition table that was
-originally on the hard drive.
+originally on the hard disk drive.
 
  * \"%s\": un-checking this option will force users to manually mount and
 unmount removable media such as floppies and CD-ROMs.
 
  * \"%s\": use this option if you wish to use a wizard to partition your
-hard drive. This is recommended if you do not have a good understanding of
+hard disk drive. This is recommended if you do not have a good understanding of
 partitioning.
 
  * \"%s\": use this option to cancel your changes.
 
  * \"%s\": allows additional actions on partitions (type, options, format)
-and gives more information about the hard drive.
+and gives more information about the hard disk drive.
 
- * \"%s\": when you are finished partitioning your hard drive, this will
+ * \"%s\": when you are finished partitioning your hard disk drive, this will
 save your changes back to disk.
 
 When defining the size of a partition, you can finely set the partition
@@ -571,7 +571,7 @@ upgrade of an existing Mandriva Linux system:
  * \"%s\". For the most part, this completely wipes out the old system.
 However, depending on your partitioning scheme, you can prevent some of
 your existing data (notably \"home\" directories) from being over-written.
-If you wish to change how your hard drives are partitioned, or to change
+If you wish to change how your hard disk drives are partitioned, or to change
 the filesystem, you should use this option.
 
  * \"%s\". This installation class allows you to update the packages
@@ -729,7 +729,7 @@ also scan for one or more PCI SCSI cards on your system. If a SCSI card is
 found, DrakX will automatically install the appropriate driver.
 
 Because hardware detection is not foolproof, DrakX may fail in detecting
-your hard drives. If so, you'll have to specify your hardware by hand.
+your hard disk drives. If so, you'll have to specify your hardware by hand.
 
 If you had to manually specify your PCI SCSI adapter, DrakX will ask if you
 want to configure options for it. You should allow DrakX to probe the

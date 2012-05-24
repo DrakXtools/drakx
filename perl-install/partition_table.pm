@@ -18,7 +18,7 @@ sub hd2minimal_part {
     };
 }
 
-#- works for both hard drives and partitions ;p
+#- works for both hard disk drives and partitions ;p
 sub description {
     my ($hd) = @_;
     my $win = $hd->{device_windobe};
@@ -485,7 +485,7 @@ sub active {
 }
 
 
-# remove a normal partition from hard drive hd
+# remove a normal partition from hard disk drive hd
 sub remove {
     my ($hd, $part) = @_;
     my $i;

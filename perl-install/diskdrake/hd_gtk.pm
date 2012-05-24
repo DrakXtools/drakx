@@ -289,7 +289,7 @@ sub create_automatic_notebooks {
 	my $b = $_->{marked} or $notebook_widget->remove_page($::i);
 	$b;
     } @notebook;
-    @notebook or $in->ask_warn(N("Error"), N("No hard drives found")), $in->exit(1);
+    @notebook or $in->ask_warn(N("Error"), N("No hard disk drives found")), $in->exit(1);
 }
 
 ################################################################################

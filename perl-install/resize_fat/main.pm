@@ -44,7 +44,7 @@ sub DESTROY {
 
 #- copy all clusters >= <start_cluster> to a new place on the partition, less
 #- than <start_cluster>. Only copies files, not directories.
-#- (use of buffer needed because the seeks slow like hell the hard drive)
+#- (use of buffer needed because the seeks slow like hell the hard disk drive)
 sub copy_clusters {
     my ($fs, $cluster) = @_;
     my @buffer;
