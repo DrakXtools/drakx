@@ -402,7 +402,7 @@ sub choosePackagesTree {
 			    },
 			    get_info => sub {
 				my $p = install::pkgs::packageByName($packages, $_[0]) or return '';
-                                install::pkgs::extractHeaders([$p], $packages);
+                                install::pkgs::extractHeaders([$p], $packages->{media});
 
 				my $imp = translate($install::pkgs::compssListDesc{$p->flag_base ? 5 : $p->rate});
 
