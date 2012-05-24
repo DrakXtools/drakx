@@ -93,6 +93,8 @@
   dump dump.ext2 restore restore.ext2 dump.ext3 restore.ext3 dump.xfs restore.xfs
   parted partimage partprobe
 
+  udevadm
+
   mdadm lvm2
   mdmon kpartx
   dmevent_tool
@@ -252,6 +254,18 @@
   shells
   ssh/ssh_config
 </from>
+
+<from dir="/lib/udev">
+  udevd
+</from>
+
+<from dir="/lib/udev/rules.d">
+  10-dm.rules
+  13-dm-disk.rules
+  11-dm-lvm.rules
+  95-dm-notify.rules
+</from>
+
 
 <filter command="strip">
 <from dir="/LIB">
