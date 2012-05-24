@@ -21,7 +21,7 @@ my @types = @ARGV;
 
 sub install_module_raw {
     my ($driver, $o_descr) = @_;
-    print STDERR "Installing driver $driver", $o_descr ? qq( (for "$o_descr")) : '', "\n";
+    print STDERR "Installing driver $driver", if_($o_descr, qq( (for "$o_descr"))), "\n";
     system("/sbin/modprobe", $driver) and print "\tfailed\n";
 }
 
