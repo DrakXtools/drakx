@@ -523,6 +523,12 @@ sub init_env_share() {
     }
 }
 
+sub init_path() {
+    #-  make sure we do not pick up any gunk from the outside world
+    my $remote_path = "$::prefix/sbin:$::prefix/bin:$::prefix/usr/sbin:$::prefix/usr/bin";
+    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:$remote_path";
+}
+
 sub init_mouse() {
     eval { $o->{mouse} = mouse::detect($o->{modules_conf}) } if !$o->{mouse} && !$o->{nomouseprobe};
     mouse::load_modules($o->{mouse});
@@ -584,9 +590,7 @@ sub main {
     $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : "/mnt";
     mkdir $::prefix, 0755;
 
-    #-  make sure we do not pick up any gunk from the outside world
-    my $remote_path = "$::prefix/sbin:$::prefix/bin:$::prefix/usr/sbin:$::prefix/usr/bin";
-    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:$remote_path";
+    init_path();
 
     eval { install::any::spawnShell() };
 
