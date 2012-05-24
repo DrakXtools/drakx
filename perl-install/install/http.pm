@@ -56,12 +56,7 @@ sub get_file_and_size {
         urpm::download::set_cmdline_proxy(http_proxy => "http://$proxy/");
     }
     
-    (my $cwd) = getcwd() =~ /(.*)/;
     my $res = eval { urpm::download::sync_url($urpm, $url, %o_options, dir => $cachedir) };
-    #- urpmi does not always reset cwd when dying or failing!
-    #- do not stay in /mnt/var/cache/urpmi, it's evil to be in /mnt
-    #- FIXME: fix urpmi
-    chdir $cwd;
 
     if ($res) {
         open(my $f, $file);
