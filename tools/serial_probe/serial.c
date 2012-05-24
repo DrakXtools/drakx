@@ -42,14 +42,14 @@ struct pnp_com_id {
     unsigned char other_id[17];    /* backward compatibility with pre-PNP */
     unsigned char other_len;       /* length of the other_id */
     unsigned char pnp_rev[2];      /* PnP revision bytes */
-    unsigned char pnp_rev_str[8];  /* PnP revision (string version) */
-    unsigned char eisa_id[4];      /* EISA Mfr identifier (string) */
-    unsigned char product_id[5];   /* Mfr determined product ID (string) */
-    unsigned char serial_number[9];/* Optional dev serial number (string) */
-    unsigned char class_name[33];  /* Optional PnP Class name (string) */
-    unsigned char driver_id[42];   /* Optional compat device IDs (string) */
-    unsigned char user_name[42];   /* Optional verbose product descr (string)*/
-    unsigned char checksum[2];     /* Optional checksum */
+    char pnp_rev_str[8];  /* PnP revision (string version) */
+    char eisa_id[4];      /* EISA Mfr identifier (string) */
+    char product_id[5];   /* Mfr determined product ID (string) */
+    char serial_number[9];/* Optional dev serial number (string) */
+    char class_name[33];  /* Optional PnP Class name (string) */
+    char driver_id[42];   /* Optional compat device IDs (string) */
+    char user_name[42];   /* Optional verbose product descr (string)*/
+    char checksum[2];     /* Optional checksum */
 };
 
 /* there are two possible bytes to signify the start of a PnP ID string */
@@ -356,7 +356,7 @@ static int init_pnp_com_ati9( int fd ) {
     int done;
     int respindex;
     int starttime;
-    unsigned char resp[100], buf[2];
+    char resp[100], buf[2];
     struct timeval timo;
     struct termios portattr;
 
@@ -526,7 +526,7 @@ static int find_legacy_modem( int fd ) {
     int done;
     int respindex;
     int starttime;
-    unsigned char resp[10], buf[2];
+    char resp[10], buf[2];
     struct timeval timo;
     struct termios portattr;
 
@@ -591,7 +591,7 @@ static int find_legacy_modem( int fd ) {
 /* timeout after 3 seconds   */
 /* should probably set a 200 msec timeout per char, as spec says */
 /* if no char received, we're done                              */
-static int read_pnp_string( int fd, unsigned char *pnp_string, int *pnp_len, int pnp_stringbuf_size ) {
+static int read_pnp_string( int fd, char *pnp_string, int *pnp_len, int pnp_stringbuf_size ) {
     int     pnp_index;
     int     temp, done, counter;
     int     seen_start;
@@ -654,7 +654,7 @@ static int read_pnp_string( int fd, unsigned char *pnp_string, int *pnp_len, int
 }
 
 /* parse the PnP ID string into components */
-static int parse_pnp_string( unsigned char *pnp_id_string, int pnp_len,
+static int parse_pnp_string( char *pnp_id_string, int pnp_len,
 		     struct pnp_com_id *pnp_id ) {
     unsigned char *p1, *p2;
     unsigned char *start;
@@ -752,7 +752,7 @@ static int parse_pnp_string( unsigned char *pnp_id_string, int pnp_len,
     while (!no_more_extensions) {
 	if (*curpos == ExtendPnP1 || *curpos == ExtendPnP2) {
 	    curpos++;
-	    endfield = strpbrk(curpos, extension_delims);
+	    endfield = (unsigned char*)strpbrk((const char*)curpos, extension_delims);
 	    if (!endfield)
 		return -1;
 	    /* if we reached the end of all PnP data, back off */
@@ -797,7 +797,7 @@ static int parse_pnp_string( unsigned char *pnp_id_string, int pnp_len,
     }
 
     /* now find the end of all PnP data */
-    end = strpbrk(curpos, end_delims);
+    end = (unsigned char*)strpbrk((const char*)curpos, end_delims);
     if (!end)
 	return -1;
     
@@ -881,8 +881,8 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
     int fd;
     int temp;
     int pnp_strlen;
-    int devicetype=-1;
-    unsigned char pnp_string[100];
+    /* unused: int devicetype=-1; */
+    char pnp_string[100];
     char port[20];
     struct termios origattr;
     struct pnp_com_id pnp_id;
@@ -986,7 +986,7 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 	    
 
 	    /* try twiddling RS232 control lines and see if it talks to us */
-	    devicetype=-1;
+	    /* unused: devicetype=-1; */
 	    pnp_strlen = 0;
 	    if (attempt_pnp_retrieve( fd, pnp_string, &pnp_strlen,
 				      sizeof(pnp_string) - 1 ) == PNP_COM_FATAL)
