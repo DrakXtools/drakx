@@ -20,7 +20,7 @@ sub config_window {
         return;
     }
     if ($in->ask_from(N("Module configuration"), N("You can configure each parameter of the module here."), \@l)) {
-	   my $options = join(' ', map { if_($conf{$_}, "$_=$conf{$_}") } keys %conf);
+	   my $options = join(' ', map { if_($conf{$_} =~ /^\S+$/, "$_=$conf{$_}") } keys %conf);
 	   my $old_options = $modules_conf->get_options($data->{driver});
 	   if ($options ne $old_options) {
 	       $modules_conf->set_options($data->{driver}, $options);
