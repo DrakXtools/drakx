@@ -258,6 +258,9 @@ sub selectSupplMedia { '' }
 sub choosePackages {
     my ($o, $o_compssListLevel) = @_;
 
+    #- clear the mirror cache before upgrading:
+    rm_rf("$::prefix/var/cache/urpmi/mirrors.cache");
+ 
     #- now for upgrade, package that must be upgraded are
     #- selected first, after is used the same scheme as install.
 
