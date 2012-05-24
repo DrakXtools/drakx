@@ -27,7 +27,7 @@ _ "../tools/install-xml-file-list list.xml $tmp";
 
 my %keytable_conflicts;
 my @less_important_keytables = qw(am_old am_phonetic no-dvorak de-latin1);
-foreach (keyboard::loadkeys_files()) {
+foreach (keyboard::loadkeys_files(sub { warn @_ })) {
     my ($dir, $fname) = (dirname($_), basename($_));
     my ($name) = $fname =~ /(.*)\.map\.gz/ or next;
     next if member($name, @less_important_keytables);
