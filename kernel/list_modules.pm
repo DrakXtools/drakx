@@ -177,7 +177,7 @@ our %l = (
     ],
     hid => [ qw(hid-a4tech hid-apple hid-belkin hid-cherry hid-chicony
                 hid-cypress hid-drff hid-ezkey hid-gaff hid-gyration hid-kensington hid-kye
-                hid-keytouch hid-logitech hid-microsoft hid-monterey hid-multilaser hid-ntrig
+                hid-keytouch hid-logitech hid-logitech-dj hid-microsoft hid-monterey hid-multilaser hid-ntrig
                 hid-petalynx hid-pl hid-samsung hid-sjoy hid-sony hid-sunplus
                 hid-tmff hid-topseed hid-uclogic hid-zpff hid-wacom ff-memless)],
    #serial_cs
