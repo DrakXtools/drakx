@@ -110,7 +110,7 @@ sub pack {
 # update me on each util-linux new release:
 sub help() {
     (
-	'acl' => N("Enable Posix Access Control Lists"),
+	'acl' => N("Enable POSIX Access Control Lists"),
 
 	'flush' => N("Flush write cache on file close"),
 
