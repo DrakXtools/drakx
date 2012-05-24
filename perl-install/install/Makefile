@@ -53,7 +53,7 @@ install_pms:
 	cd .. ; for i in $(PMS); do \
 		dest=$(DESTREP4PMS)/`dirname $$i`; \
 		install -d $$dest; \
-		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=(back|begin|head)/ .. /^=cut/) || /use (diagnostics|strict|vars|warnings)/' $$i > $(DESTREP4PMS)/$$i; \
+		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=(back|begin|head|item)/ .. /^=cut/) || /use (diagnostics|strict|vars|warnings)/' $$i > $(DESTREP4PMS)/$$i; \
 	done
 
 	cp ../share/*.rc share/*.rc $(DESTREP4PMS)
