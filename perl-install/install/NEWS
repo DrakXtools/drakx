@@ -17,6 +17,8 @@
   o run udevadm in installer too
     (might fix unnecessary reboot (mga#4439))
   o fix removing several notebook pages
+  o fix partitions not being shown after clicking on "Reload partition table"
+    (mga#3260)
 - fix a crash when package state is empty (mga#5487)
 - fix not offering to upgrade RAID installs
   (udev was enabling RAIDs early but leaved them in inactive mode

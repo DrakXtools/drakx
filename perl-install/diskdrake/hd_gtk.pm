@@ -83,6 +83,7 @@ sub main {
 	  );
     my ($lock, $initializing) = (undef, 1);
     $update_all = sub {
+	my ($o_refresh_gui) = @_;
 	state $not_first;
 	return if $initializing && $not_first;
 	$not_first = 1;
@@ -95,6 +96,10 @@ sub main {
 	current_kind_changed($in, $current_kind);
 	current_entry_changed($current_kind, $current_entry);
 	$lock = 0;
+	if ($o_refresh_gui) {
+            $notebook_widget->set_current_page(-1);
+            $notebook_widget->set_current_page(0);
+	}
     };
     create_automatic_notebooks($notebook_widget);
 
@@ -129,6 +134,7 @@ sub try_ {
     }
     if ($v eq 'force_reload') {	
 	$all_hds = $do_force_reload->();
+        $update_all->(1);
     }
 
     $current_entry = '' if !diskdrake::interactive::is_part_existing($current_entry, $all_hds);
