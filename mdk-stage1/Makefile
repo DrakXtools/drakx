@@ -114,22 +114,32 @@ STAGE1OBJS_FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
 
 BINS = init stage1 dhcp-client rescue-gui probe-modules
 
+DIRS =
 OTHERS = pci-ids.h usb-ids.h
 ifeq (i386, $(ARCH))
-OTHERS += pcmcia-ids.h pcmcia
+DIRS += pcmcia
+OTHERS += pcmcia-ids.h
 PCMCIA_LIB = pcmcia/libpcmcia.a
 PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
 ifeq (x86_64, $(ARCH))
+DIRS += pcmcia
 OTHERS += pcmcia-ids.h pcmcia
 PCMCIA_LIB = pcmcia/libpcmcia.a
 PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
 
+BUILDDIRS = $(DIRS:%=build-%)
+CLEANDIRS = $(DIRS:%=clean-%)
+
 USB_DEFS_GEN = -DENABLE_USB
 USB_DEFS = -DENABLE_USB -DDISABLE_PCIADAPTERS
 
-all: $(OTHERS) $(BINS)
+all: $(BUILDDIRS) $(OTHERS) $(BINS)
+$(DIRS): $(BUILDDIRS)
+$(BUILDDIRS):
+	$(MAKE) -C $(@:build-%=%)
+
 
 pci-ids.h: /usr/share/ldetect-lst/pcitable.gz update-pci-ids.pl
 	perl update-pci-ids.pl > $@ || { rm -f $@; exit 1; }
@@ -169,9 +179,15 @@ $(STAGE1OBJS_FULL): %-FULL.o: %.c
 	$(DIET) $(COMPILE) $(INCLUDES) -DENABLE_BOOTSPLASH -c $<
 
 
-clean:
+clean: $(CLEANDIRS)
 	rm -f *.o .depend *.rdz *.img pci-ids.h pcmcia-ids.h usb-ids.h $(BINS)
+$(CLEANDIRS): 
+	$(MAKE) -C $(@:clean-%=%) clean
 
+.PHONY: subdirs $(DIRS)
+.PHONY: subdirs $(BUILDDIRS)
+.PHONY: subdirs $(CLEANDIRS)
+.PHONY: all install clean test
 
 rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(FRONTEND_OBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(FRONTEND_LIBS) $(LIBC_LIBS)
