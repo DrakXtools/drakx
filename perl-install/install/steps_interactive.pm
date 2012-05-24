@@ -569,13 +569,12 @@ sub chooseGroups {
 
     log::l("compssUsersChoice selected: ", join(', ', map { qq("$_->{path}|$_->{label}") } grep { $_->{selected} } @$compssUsers));
 
-    #- do not try to deselect package (by default no groups are selected).
     if (!$o->{isUpgrade}) {
+	#- do not try to deselect package (by default no groups are selected).
 	install::any::unselectMostPackages($o) if $unselect_all;
-    }
-    #- if no group have been chosen, ask for using base system only, or no X, or normal.
-    if (!$o->{isUpgrade} && !any { $_->{selected} } @$compssUsers) {
-        offer_minimal_options($o);
+
+	#- if no group have been chosen, ask for using base system only, or no X, or normal.
+	offer_minimal_options($o) if !any { $_->{selected} } @$compssUsers;
     }
     1;
 }
