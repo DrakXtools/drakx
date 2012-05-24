@@ -180,7 +180,7 @@ sub nonroot_access_for_parport {
     # Is saned running?
     my $sanedrunning = services::starts_on_boot("saned");
     # Is the "net" SANE backend active
-    my $netbackendactive = grep { /^\s*net\s*$/ }
+    my $netbackendactive = find { /^\s*net\s*$/ }
       cat_("/etc/sane.d/dll.conf");
     # Set this to 1 to tell the caller that the list of locally available
     # scanners has changed (Here if the SANE client configuration has
@@ -279,13 +279,13 @@ sub detect {
 		$productid = $3;
 	    }
 	    if ($vendorid && $productid) {
-		my ($vendor) = ($vendorid =~ /0x([0-9a-f]+)/);
-		my ($id) = ($productid =~ /0x([0-9a-f]+)/);
+		my ($vendor) = $vendorid =~ /0x([0-9a-f]+)/;
+		my ($id) = $productid =~ /0x([0-9a-f]+)/;
 		my ($device) = grep { sprintf("%04x", $_->{vendor}) eq $vendor && sprintf("%04x", $_->{id}) eq $id } @devices;
 
 		if ($device) {
 		    $driver = $device->{driver};
-		    $real_device = $device
+		    $real_device = $device;
 		} else {
 		    #warn "Failed to lookup $vendorid and $productid!\n";
 		}
@@ -567,10 +567,10 @@ sub updateScannerDBfromSane {
 	next if $f =~ /unsupported.desc$/;
 	# Treat unsupported.desc in the end
 	$f = "$sanesrcdir/doc/descriptions/unsupported.desc" if
-	    ($f eq "UNSUPPORTED");
+	    $f eq "UNSUPPORTED";
 	my $F = common::openFileMaybeCompressed($f);
 	$to_add .= "\n# from $f";
-	my ($lineno, $cmd, $val) = 0;
+	my ($lineno, $cmd, $val);
 	my ($name, $intf, $comment, $mfg, $backend);
 	my $fs = {
 		  backend => sub { $backend = $val },

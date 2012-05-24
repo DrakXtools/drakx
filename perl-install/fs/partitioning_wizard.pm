@@ -30,7 +30,7 @@ sub to_Mb {
 }
 
 sub partition_with_diskdrake {
-    my ($in, $all_hds, $fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab) = @_;
+    my ($in, $all_hds, $fstab, $manual_fstab, $_partitions, $partitioning_flags, $skip_mtab) = @_;
     my $ok;
 
     do {
@@ -48,7 +48,7 @@ sub partition_with_diskdrake {
 	}
 	my @fstab = fs::get::fstab($all_hds);
 
-	unless ($root = fs::get::root_(\@fstab)) {
+	unless (fs::get::root_(\@fstab)) {
 	    $ok = 0;
 	    $in->ask_okcancel(N("Partitioning"), N("You must have a root partition.
 For this, create a partition (or click on an existing one).
@@ -501,7 +501,7 @@ sub main {
 
         my $mainbox = Gtk2::VBox->new;
 
-        my @kinds = map { diskdrake::hd_gtk::hd2kind($_) } sort { $a->{is_removable} <=> $b->{is_removable} } @{$all_hds->{hds} };
+        my @kinds = map { diskdrake::hd_gtk::hd2kind($_) } sort { $a->{is_removable} <=> $b->{is_removable} } @{ $all_hds->{hds} };
         push @kinds, map { diskdrake::hd_gtk::raid2kind($_) } @{$all_hds->{raids}};
         push @kinds, map { diskdrake::hd_gtk::lvm2kind($_) } @{$all_hds->{lvms}};
 

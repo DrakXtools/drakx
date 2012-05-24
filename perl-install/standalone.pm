@@ -134,7 +134,7 @@ sub __exit {
 }
 
 
-sub real_version {
+sub real_version() {
     return "VER"; # version automatically set from Makefile
 }
 
@@ -206,7 +206,7 @@ sub bug_handler {
         $ctrace =~ s/0:.*(\d+:[^:]*Perl_sighandler)/\1/sig if $ctrace =~ /0:.*(\d+:[^:]*Perl_sighandler)/sig;
         $error .= "\nGlibc's trace:\n$ctrace\n";
     }
-    $error .= "Perl's trace:\n". common::backtrace() if $error;
+    $error .= "Perl's trace:\n" . common::backtrace() if $error;
 
     my $progname = $0;
 

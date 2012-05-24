@@ -975,6 +975,7 @@ sub urpmi_add_all_media {
 
     my $log_file = '/root/drakx/updates.log';
     run_program::rooted($::prefix, $binary, '>>', $log_file, '2>>', $log_file, @options);
+    undef $wait;
 }
 
 sub autologin {

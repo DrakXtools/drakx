@@ -53,7 +53,7 @@ sub acceptLicense {
     my ($o) = @_;
     return if $o->{useless_thing_accepted};
 
-    any::acceptLicense($o, $o->{meta_class} eq 'powerpack');
+    any::acceptLicense($o);
 }
 
 sub selectLanguage {
@@ -479,6 +479,7 @@ sub _chooseDesktop {
     my $default_choice = (find { $rpmsrate_flags_chosen->{"CAT_" . $_->[0]} } @l) || $l[0];
     my $choice = $default_choice;
     if ($o->isa('interactive::gtk')) {
+        # perl_checker: require install::steps_gtk
 	$choice = install::steps_gtk::reallyChooseDesktop($o, $title, $message, \@l, $default_choice);
     } else {
 	$o->ask_from_({ title => $title, message => $message }, [
@@ -577,7 +578,7 @@ sub chooseGroups {
 	my $suggests;
 
 	$o->ask_from_({ title => N("Type of install"), 
-                        message =>N("You have not selected any group of packages.
+                        message => N("You have not selected any group of packages.
 Please choose the minimal installation you want:"),
                         interactive_help_id => 'choosePackages#minimal-install'
                         },
@@ -730,7 +731,7 @@ sub configureNetwork {
 #------------------------------------------------------------------------------
 sub installUpdates {
     my ($o) = @_;
-    my $u = $o->{updates} ||= {};
+    $o->{updates} ||= {};
     
     $o->hasNetwork or return;
 
@@ -846,8 +847,10 @@ sub summary {
 	group => N("System"),
 	label => N("Bootloader"),
 	val => sub { 
-	    #-PO: example: lilo-graphic on /dev/hda1
-	    $o->{bootloader}{boot} ? N("%s on %s", $o->{bootloader}{method}, $o->{bootloader}{boot}) : N("None");
+
+	    $o->{bootloader}{boot} ?
+              #-PO: example: lilo-graphic on /dev/hda1
+              N("%s on %s", $o->{bootloader}{method}, $o->{bootloader}{boot}) : N("None");
 	},
 	clicked => sub { 
 	    any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;

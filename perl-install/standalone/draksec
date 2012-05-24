@@ -41,14 +41,13 @@ use security::l10n;
 #/^-?-(\S+)$/ and $options{$1} = 1 foreach @ARGV;
 
 
-my $in = 'interactive'->vnew('su');
+my $_in = 'interactive'->vnew('su'); # enforce being root
 
 $ugtk2::wm_icon = "/usr/share/mcc/themes/default/draksec-mdk.png";
-my ($w, %fields);
+my ($w);
 
 ############################    I18N     ###################################
 
-my @help;
 
 my %translations = (
 	'ALL'     => N("ALL"),
@@ -64,9 +63,6 @@ my %inv_translations = reverse %translations;
 sub to_i18n { map { $translations{$_} || $_ } @_ }
 sub from_i18n { $inv_translations{$_[0]} || $_[0] }
 sub resize { gtkset($_[0], width => 50) }
-
-%fields = security::l10n::fields();
-my %inv_fields = reverse %fields;
 
 # factorize this with rpmdrake and harddrake2
 sub wait_msg {
@@ -87,7 +83,7 @@ sub new_nonedit_combo {
     gtknew('ComboBox', text => to_i18n($o_default_value), list => [ to_i18n(@$string_list) ]);
 }
 
-my $msec = new security::msec;
+#my $msec = security::msec->new;
 $w = ugtk2->new(N("Security Level and Checks"));
 my $window = $w->{window};
 
@@ -179,7 +175,7 @@ my %descr = (
 gtkpack_($vbox,
 	 0, gtkshow(gtknew('VBox', spacing => 5, children => [
 			if_(!$::isEmbedded, 0, Gtk2::Banner->new('/usr/share/mcc/themes/default/drakperm-mdk.png', N("Permissions"))),
-			0, gtknew('Label', text => $auth_string, alignment => [ 0.5, 0])
+			0, gtknew('Label', text => $auth_string, alignment => [ 0.5, 0 ])
 		])),
          1, gtkshow(create_scrolled_window(
 			gtknew('VBox', children => [

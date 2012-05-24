@@ -104,7 +104,8 @@ sub options {
 sub remove {
     my ($in, $dav, $all_hds) = @_;
     if ($in->ask_yesorno(N("Warning"), N("Are you sure you want to delete this mountpoint?"))) {
-            @{$all_hds->{davs}} = grep($_->{mntpoint} ne $dav->{mntpoint}, @{$all_hds->{davs}});
+            @{$all_hds->{davs}} = grep { $_->{mntpoint} ne $dav->{mntpoint} } @{$all_hds->{davs}};
+
             return 1;
     }
     return;

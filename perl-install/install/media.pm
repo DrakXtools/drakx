@@ -477,11 +477,11 @@ sub _parse_media_cfg {
 sub select_only_some_media {
     my ($media_list, $selected_names) = @_;
     my @names = split(',', $selected_names);
-    foreach my $m (@{$media_list}) {
+    foreach my $m (@$media_list) {
         my $bool = !member($m->{name}, @names);
         # workaround urpmi transforming "ignore => ''" or "ignore => 0" into "ignore => 1":
         undef $bool if !$bool;
-        log::l "disabling '$m->{name}' medium: " . to_bool($bool);
+        log::l("disabling '$m->{name}' medium: " . to_bool($bool));
         urpm::media::_tempignore($m, $bool);
         # make sure we update un-ignored media (eg: */Testing and the like):
         $m->{modified} = 1 if !$bool;
@@ -706,13 +706,13 @@ sub get_standalone_medium {
 }
 
 sub _get_medium {
-    my ($in_wait, $phys_m, $packages, $m) = @_;
+    my ($_in_wait, $phys_m, $packages, $m) = @_;
 
     !$m->{ignore} or log::l("ignoring packages in $m->{rel_hdlist}"), return;
 
     my $url = _get_media_url({}, $phys_m);
     log::l("trying '$url'\n");
-    urpm::media::add_medium($packages, $m->{name} || 'Supplementary medium', $url) or $packages->{fatal}(10, N("unable to add medium"));
+    urpm::media::add_medium($packages, $m->{name} || 'Supplementary medium', $url, 0) or $packages->{fatal}(10, N("unable to add medium"));
 }
 
 

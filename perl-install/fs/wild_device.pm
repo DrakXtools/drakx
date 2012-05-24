@@ -2,7 +2,7 @@ package fs::wild_device; # $Id$
 
 use diagnostics;
 use strict;
-
+use devices;
 use common;
 
 
@@ -44,7 +44,7 @@ sub to_subpart {
 		($part{major}, $part{minor}) = unmakedev($rdev);
 	    }
 
-	    my $symlink = readlink("$::prefix$dev") unless $dev =~ m!mapper/!;
+	    my $symlink = $dev =~ m!mapper/! ? readlink("$::prefix$dev") : undef;
 	    $dev =~ s!/u?dev/!!;
 
 	    if ($symlink && $symlink !~ m!^/!) {

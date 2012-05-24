@@ -570,9 +570,7 @@ sub custom_id {
          N("cpu # ") . $device->{processor} . ": " . $device->{'model name'} :
          $device->{"Socket Designation"} ?
          "$device->{name} (" . $device->{"Socket Designation"} . ")" :
-         $device->{name} ? $device->{name} :
-           (($device->{description}) ? $device->{description} :
-              (($device->{Vendor}) ? $device->{Vendor} : $str)));
+         $device->{name} || $device->{description} || $device->{Vendor} || $str);
 }
 
 1;

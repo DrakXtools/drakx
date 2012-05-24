@@ -87,7 +87,7 @@ sub per_entry_action_box {
           : gtknew('Label', text => "");
     } group_by2(@l);
     
-    gtkadd($box, gtknew('HBox', children_loose => [ @buttons]));
+    gtkadd($box, gtknew('HBox', children_loose => \@buttons));
 }
 
 sub done {
@@ -249,7 +249,7 @@ sub add_smbnfs {
       gtknew('VBox', spacing => 7, children => [
 	       1, gtknew('HBox', spacing => 7, children_loose => [
 			  gtkset($kind->{display_box}, width => 200),
-			  $kind->{info_box}]),
+			  $kind->{info_box} ]),
 	       0, $kind->{action_box},
 	     ]);
 

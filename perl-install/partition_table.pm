@@ -405,9 +405,9 @@ sub tell_kernel {
 	    my ($action, $part_number, $o_start, $o_size) = @$_;
 	    
 	    if ($action eq 'add') {
-		$force_reboot ||= !c::add_partition(fileno $F, $part_number, $o_start, $o_size);
+		$force_reboot ||= !c::add_partition(fileno($F), $part_number, $o_start, $o_size);
 	    } elsif ($action eq 'del') {
-		$force_reboot ||= !c::del_partition(fileno $F, $part_number);
+		$force_reboot ||= !c::del_partition(fileno($F), $part_number);
 	    }
 	    log::l("tell kernel $action ($hd->{device} $part_number $o_start $o_size) force_reboot=$force_reboot rebootNeeded=$hd->{rebootNeeded}");
 	}

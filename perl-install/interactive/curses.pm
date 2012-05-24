@@ -34,9 +34,9 @@ sub new {
     $cui ||= Curses::UI->new('-color_support' => 1);
 
     # Set some default terminal size, for serial install
-    unless ($cui->{-width}) {
-	$cui->{-width} = $cui->{-w} = $cui->{-bw} = 80;
-    	$cui->{-height} = $cui->{-h} = $cui->{-bh} = 25;
+    unless ($cui->{'-width'}) {
+	$cui->{'-width'}  = $cui->{'-w'} = $cui->{'-bw'} = 80;
+    	$cui->{'-height'} = $cui->{'-h'} = $cui->{'-bh'} = 25;
     }
 
     bless { cui => $cui }, $class;
@@ -552,7 +552,7 @@ sub ask_fileW {
 
     $dir = $opts->{directory} || $opts->{file} && dirname($opts->{file});
 
-    if($opts->{save}) {
+    if ($opts->{save}) {
         $file = $o->{cui}->savefilebrowser('-title' => $opts->{title}, '-path' => $dir, '-file' => basename($file));
     } else {
         $file = $o->{cui}->loadfilebrowser('-title' => $opts->{title}, '-path' => $dir, '-file' => basename($file));
@@ -561,13 +561,13 @@ sub ask_fileW {
     my $err;
     if (!$file) {
 	$err = N("No file chosen");
-    } elsif(-f $file && $opts->{want_a_dir}) {
+    } elsif (-f $file && $opts->{want_a_dir}) {
         $file = dirname($file);
-    } elsif(-d $file && !$opts->{want_a_dir}) {
+    } elsif (-d $file && !$opts->{want_a_dir}) {
         $err = N("You have chosen a directory, not a file");
     } elsif (!-e $file && !$opts->{save}) {
 	$err = $opts->{want_a_dir} ? N("No such directory") : N("No such file");
-    };
+    }
     $err and $o->ask_warn('', $err) or $file;
 }
 

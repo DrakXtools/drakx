@@ -16,7 +16,7 @@ sub _crypttab() { "$::prefix/etc/crypttab" }
 sub init() {
     whereis_binary('cryptsetup') or die "cryptsetup not installed";
 
-    eval { modules::load('dm-crypt', 'cbc', 'sha256_generic', if_(arch() =~ /i.86/, 'aes-i586'), if_( arch() =~ /x86_64/, 'aes-x86_64'), 'aes_generic') };
+    eval { modules::load('dm-crypt', 'cbc', 'sha256_generic', if_(arch() =~ /i.86/, 'aes-i586'), if_(arch() =~ /x86_64/, 'aes-x86_64'), 'aes_generic') };
     devices::init_device_mapper();
     1;
 }
@@ -67,7 +67,7 @@ sub format_part {
     common::with_private_tmp_file($tmp_key_file, $part->{dmcrypt_key}, sub {
 	_run_or_die('luksFormat', '--batch-mode', devices::make($part->{device}), $_[0]);
     });
-    fs::format::after_formatting($part, 1);
+    fs::format::after_formatting($part);
 }
 
 sub open_part {

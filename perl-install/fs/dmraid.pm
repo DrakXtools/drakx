@@ -47,16 +47,16 @@ sub _raid_devices_raw() {
 	log::l("got: $_");
 	my %l; @l{qw(name size stride level status subsets devs spares)} = split(':');
 	$vgs{$l{name}} = 1 if defined $l{spares};
-	if(/freeing device "(.*)", path "(.*)"/ && defined $vgs{$1}) {
+	if (/freeing device "(.*)", path "(.*)"/ && defined $vgs{$1}) {
 	    log::l("$2 => $1");
-	    { $2 => $1 };
+	    { $2 => $1 }
         }
     } call_dmraid('-d', '-s', '-c', '-c');
     map {
 	chomp;
 	log::l("got: $_");
 	my %l; @l{qw(pv format vg level status size)} = split(':');
-	if(defined $l{size} && defined $l{vg} && defined $pv2vg{$l{pv}} && !defined $vgs{$l{vg}}) {
+	if (defined $l{size} && defined $l{vg} && defined $pv2vg{$l{pv}} && !defined $vgs{$l{vg}}) {
 	    log::l("using $pv2vg{$l{pv}} instead of $l{vg}");
 	    $l{vg} = $pv2vg{$l{pv}};
 	}

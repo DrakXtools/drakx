@@ -373,7 +373,7 @@ sub put_font_dir() {
             my $dir = "$drakfont_dir/$subdir";
             move_fonts("$drakfont_dir/tmp/tmp", "../../$subdir", $subdir);
             run_program::run($_, $dir) foreach qw(mkfontscale mkfontdir), $fccache;
-            symlinkf($dir, '/etc/X11/fontpath.d/drakfont_' . basename ($dir));
+            symlinkf($dir, '/etc/X11/fontpath.d/drakfont_' . basename($dir));
         }
 
         interactive_progress($pbar2, 1, N("done"));

@@ -6,7 +6,7 @@ use diagnostics;
 use common;
 use fs::mount_options;
 
-sub secrets_file { "$::prefix/etc/davfs2/secrets" }
+sub secrets_file() { "$::prefix/etc/davfs2/secrets" }
 
 sub fstab_entry_to_credentials {
     my ($part) = @_;    
@@ -14,7 +14,7 @@ sub fstab_entry_to_credentials {
     my ($options, $unknown) = fs::mount_options::unpack($part);
     my %h = map { $_ => delete $options->{"$_="} } qw(username password);
     foreach (qw(username password)) {
-        $h{$_} = 'nobody' if !$h{$_};
+        $h{$_} ||= 'nobody';
     }
     $h{mntpoint} = $part->{mntpoint} or return;
     fs::mount_options::pack_($part, $options, $unknown), \%h;
@@ -45,7 +45,7 @@ sub mountpoint_credentials_save {
 }
 
 
-sub read_credentials_raw {
+sub read_credentials_raw() {
     from_double_quoted(cat_(secrets_file()));
 }
 
@@ -66,12 +66,12 @@ sub from_double_quoted {
     my ($file) = @_;
     my @l;
     my @lines = split("\n",$file);
-    foreach (@lines){
+    foreach (@lines) {
 	my ($mnt, $user, $pass, $comment); 
 	if (/^\s*(#.*)?$/) {
 	    $comment = $1;
 	} else {
-            if(/^(?:"((?:\\.|[^"])*)"|((?:\\.|[^"\s#])+))\s+(?:"((?:\\.|[^"])*)"|((?:\\.|[^"\s#])+))(?:\s+(?:"((?:\\.|[^"])*)"|((?:\\.|[^"\s#])+)))?(?:\s*|\s*(#.*))?$/) {
+            if (/^(?:"((?:\\.|[^"])*)"|((?:\\.|[^"\s#])+))\s+(?:"((?:\\.|[^"])*)"|((?:\\.|[^"\s#])+))(?:\s+(?:"((?:\\.|[^"])*)"|((?:\\.|[^"\s#])+)))?(?:\s*|\s*(#.*))?$/) {
 	            $mnt = "$1$2";
 		    $mnt =~ s/\\(.)/$1/g;
 		    $user = "$3$4";
@@ -83,7 +83,7 @@ sub from_double_quoted {
 		    die "bad entry $_";
 	    }
         }
-        push @l, {'mntpoint'=>$mnt, 'username'=>$user, 'password'=>$pass, 'comment'=>$comment};
+        push @l, { 'mntpoint' => $mnt, 'username' => $user, 'password' => $pass, 'comment' => $comment };
     }
     @l;
 }

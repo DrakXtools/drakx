@@ -114,7 +114,7 @@ sub find_xorg_driver {
       || -e "/usr/$lib/xorg/extra-modules/${new_driver}_drv.so";
 }
 
-sub after_x_driver_switch {
+sub after_x_driver_switch() {
     # If a wrong driver is loaded, ask for a reboot.
     my $reboot_needed = -x "/sbin/display_driver_helper" && system("/sbin/display_driver_helper", "--check-loaded") != 0;
     if (!$reboot_needed) {

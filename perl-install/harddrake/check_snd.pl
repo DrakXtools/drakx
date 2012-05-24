@@ -10,7 +10,7 @@ use list_modules;
 
 my @listed_modules = @{$list_modules::l{multimedia}{sound}};
 my @drivers = (keys %harddrake::sound::oss2alsa, keys %harddrake::sound::alsa2oss);
-my @alternatives = uniq map { @{$_} } values %harddrake::sound::oss2alsa, values %harddrake::sound::alsa2oss;
+my @alternatives = uniq map { @$_ } values %harddrake::sound::oss2alsa, values %harddrake::sound::alsa2oss;
 
 # check harddrake::sound's data structures're coherent
 print "unknown alternative drivers : [", join(', ', difference2(\@alternatives, \@drivers)), "]\n";

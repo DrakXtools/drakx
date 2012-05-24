@@ -185,10 +185,10 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 							      my $local_page = $nb_pages;
 							      my $function = sub { $notebook->set_current_page($local_page) };
 							      gtksignal_connect($button, toggled => sub {
-										    $button->get_active and $function->()
+										    $button->get_active and $function->();
 										});
 							      my $b;
-                                         if ($_->[1] ne "") { $b = gtkcreate_img($_->[1]) } else { undef $b };
+                                         if ($_->[1] ne "") { $b = gtkcreate_img($_->[1]) } else { undef $b }
 							      gtksignal_connect(gtkadd($button,
 										       gtkpack__(Gtk2::VBox->new(0,3),
 												 $b,
@@ -200,9 +200,9 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 											  $button->set_active(1);
 											  $box->{active_function} = $function;
 											  $function->();
-										      })
+										      });
 									    } @{$tree{$_}}
-									   )
+									   );
 							} keys(%tree)
 				    )
 			   ),
@@ -296,7 +296,7 @@ sub h2widget {
 	} else {
 	    $w = create_packtable({ col_spacings => 10, row_spacings => 3 },
 				  map { create_entry_element($k->{$_}, "$label\{$_}", $_) } @list_keys
-				 )
+				 );
 	}
     } elsif (ref($k) =~ /ARRAY/) {
 	my $vb;
@@ -341,7 +341,7 @@ sub create_entry_element {
 			      eval $exe;
 			  });
     }
-    [ $label ? "$label : " : "" , $e ]
+    [ $label ? "$label : " : "" , $e ];
 }
 
 sub control_buttons {
@@ -366,5 +366,5 @@ sub control_buttons {
 				    $i >= 0 or $button_remove->set_sensitive(0);
 				}
 			       )
-	     )
+	     );
 }

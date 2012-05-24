@@ -29,10 +29,8 @@ use scanner;
 use handle_configs;
 use services;
 
-my $companyname = "Mandriva";
 my $distroname = "Mandriva Linux";
 my $shortdistroname = "Mandriva Linux";
-my $domainname = "mandriva.com";
 
 foreach (@ARGV) {
     /^--update-usbtable$/ and do { scanner::updateScannerDBfromUsbtable(); exit() };
@@ -94,7 +92,7 @@ sub auto() {
     my $changed = 0;
     foreach (@f) {
 	my $c = 0;
-	if (member($_->{val}{DESCRIPTION}, keys %$scanner::scannerDB)) {
+	if (exists $scanner::scannerDB->{$_->{val}{DESCRIPTION}}) {
 	    my $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; # some HP entries have a trailing space, i will correct usbtable asap
 	    if ($scanner::scannerDB->{$name}{flags}{unsupported}) {
@@ -102,11 +100,11 @@ sub auto() {
 		next;
 	    }
 	    if ($in->ask_yesorno(N("Confirmation"), N("%s found on %s, configure it automatically?", removeverticalbar($name), $_->{port}),1)) {
-		$c = (tryConfScanner($name, $_->{port}, 
+		$c = tryConfScanner($name, $_->{port}, 
 				     $_->{val}{vendor},
 				     $_->{val}{id}) || 
 		      manual($_->{port}, $_->{val}{vendor},
-			     $_->{val}{id}, $name));
+			     $_->{val}{id}, $name);
 	    } else {
 		$c = manual($_->{port}, $_->{val}{vendor},
 			    $_->{val}{id}, $name);
@@ -149,10 +147,10 @@ sub dynamic() {
     @f = scanner::detect();
     my $name;
     foreach (@f) { 
-	if (member($_->{val}{DESCRIPTION}, keys %$scanner::scannerDB)) {
+	if (exists $scanner::scannerDB->{$_->{val}{DESCRIPTION}}) {
 	    $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
-	    next if ($scanner::scannerDB->{$name}{flags}{unsupported});
+	    next if $scanner::scannerDB->{$name}{flags}{unsupported};
 	    if (my @modules = @{$scanner::scannerDB->{$name}{kernel}}) {
 		modules::load(@modules);
 		modules::append_to_modules_loaded_at_startup_for_all_kernels(@modules);
@@ -195,8 +193,8 @@ sub installfirmware {
 	    return "";
 	}
 	# Let user select a firmware file from a floppy, hard disk, ...
-        $firmware = $in->ask_file(N("Select firmware file"), "$dir");
-	last if !$firmware || (-r $firmware);
+        $firmware = $in->ask_file(N("Select firmware file"), $dir);
+	last if !$firmware || -r $firmware;
 	$in->ask_warn(N("Error"),
 		      N("The firmware file %s does not exist or is unreadable!",
 			$firmware));
@@ -212,9 +210,9 @@ sub updatefirmware {
     my $firmware;
     my @scanners =
 	map { 
-	    $_->{val}{DESCRIPTION}
+	    $_->{val}{DESCRIPTION};
 	} grep { 
-	    $_->{val}{FIRMWARELINE}
+	    $_->{val}{FIRMWARELINE};
 	} @configured;
     my ($scannerchoice, $mediachoice);
     while (1) {
@@ -254,8 +252,8 @@ sub updatefirmware {
 	}
 	# Let user select a firmware file from a floppy, hard disk, ...
         $firmware = $in->ask_file(N("Select firmware file for the %s",
-				    $scannerchoice), "$dir");
-	last if !$firmware || (-r $firmware);
+				    $scannerchoice), $dir);
+	last if !$firmware || -r $firmware;
 	$in->ask_warn(N("Error"),
 		      N("The firmware file %s does not exist or is unreadable!",
 			$firmware));
@@ -276,7 +274,7 @@ sub updatefirmware {
 	    return 0;
 	}
 	# Enter the path to the firmware in the appropriate config file
-	my $firmwareline =$_->{val}{FIRMWARELINE};
+	my $firmwareline = $_->{val}{FIRMWARELINE};
 	$firmwareline =~ s/\$FIRMWARE/$firmware/sg;
 	scanner::setfirmware($backend, $firmwareline);
 	last;
@@ -302,18 +300,18 @@ sub tryConfScanner {
      	$in->ask_warn(N("Warning"), N("The %s must be configured by system-config-printer.\nYou can launch system-config-printer from the %s Control Center in Hardware section.", removeverticalbar($model), $shortdistroname));
      	return 0;
     }
-    my @modules = ();
+    my @modules;
     if (defined($scanner::scannerDB->{$model}{kernel})) {
-	push(@modules, @{$scanner::scannerDB->{$model}{kernel}});
-    } elsif ((defined($scanner::scannerDB->{$model}{scsikernel})) &&
-	     ($scanner::scannerDB->{$model}{driver} =~ /SCSI/i)) {
-	push(@modules, @{$scanner::scannerDB->{$model}{scsikernel}});
-    } elsif ((defined($scanner::scannerDB->{$model}{usbkernel})) &&
-	     ($scanner::scannerDB->{$model}{driver} =~ /USB/i)) {
-	push(@modules, @{$scanner::scannerDB->{$model}{usbkernel}});
-    } elsif ((defined($scanner::scannerDB->{$model}{parportkernel})) &&
-	     ($scanner::scannerDB->{$model}{driver} =~ /Parport/i)) {
-	push(@modules, @{$scanner::scannerDB->{$model}{parportkernel}});
+	push @modules, @{$scanner::scannerDB->{$model}{kernel}};
+    } elsif (defined($scanner::scannerDB->{$model}{scsikernel}) &&
+	     $scanner::scannerDB->{$model}{driver} =~ /SCSI/i) {
+	push @modules, @{$scanner::scannerDB->{$model}{scsikernel}};
+    } elsif (defined($scanner::scannerDB->{$model}{usbkernel}) &&
+	     $scanner::scannerDB->{$model}{driver} =~ /USB/i) {
+	push @modules, @{$scanner::scannerDB->{$model}{usbkernel}};
+    } elsif (defined($scanner::scannerDB->{$model}{parportkernel}) &&
+	     $scanner::scannerDB->{$model}{driver} =~ /Parport/i)  {
+	push @modules, @{$scanner::scannerDB->{$model}{parportkernel}};
     }
     if ($#modules >= 0) {
 	my $wait = $in->wait_message(N("Please wait"),
@@ -321,8 +319,7 @@ sub tryConfScanner {
 	foreach my $m (@modules) {
 	    eval { modules::load($m) };
 	    if (!$@) {
-		modules::append_to_modules_loaded_at_startup_for_all_kernels
-		    ($m);
+		modules::append_to_modules_loaded_at_startup_for_all_kernels($m);
 	    }
 	}
     }
@@ -395,7 +392,7 @@ sub tryConfScanner {
     ($vendor, $product) = scanner::get_usb_ids_for_port($port);
     my $firmware;
     my $server = $scanner::scannerDB->{$model}{server};
-    if (grep { /FIRMWARELINE/ } @{$scanner::scannerDB->{$model}{lines}} ) {
+    if (any { /FIRMWARELINE/ } @{$scanner::scannerDB->{$model}{lines}}) {
 	$firmware = installfirmware($model, $server);
 	return 0 if $firmware eq "///";
     }
@@ -475,13 +472,13 @@ sub mainwindow {
 		    $buttonclicked = "manualadd";
 		    1;
 		} },
-	      ( (grep { $_->{val}{FIRMWARELINE} } @configured) ?
+	      ((any { $_->{val}{FIRMWARELINE} } @configured) ?
 		{ val => N("Install/Update firmware files"),
 		  type => 'button',
 		  clicked_may_quit => sub {
 		      $buttonclicked = "firmware";
 		      1;
-		  } } : () ),
+		  } } : ()),
 	      { val => N("Scanner sharing"),
 		type => 'button',
 		clicked_may_quit => sub {
@@ -576,7 +573,7 @@ sub sharewindow {
     my $sanedrunning = services::starts_on_boot("saned");
     my $oldsanedrunning = $sanedrunning;
     # Is the "net" SANE backend active
-    my $netbackendactive = grep { /^\s*net\s*$/ }
+    my $netbackendactive = find { /^\s*net\s*$/ }
       cat_("/etc/sane.d/dll.conf");
     my $oldnetbackendactive = $netbackendactive;
     # Set this to 1 to tell the caller that the list of locally available
@@ -668,7 +665,7 @@ sub sharewindow {
 				 1; 
 			     },
 			     disabled => sub {
-				 return ($#list < 0);
+				 return $#list < 0;
 			     } },
 			   { val => N("Remove selected host"), 
 			     type => 'button',
@@ -677,7 +674,7 @@ sub sharewindow {
 				 1; 
 			     },
 			     disabled => sub {
-				 return ($#list < 0);
+				 return $#list < 0;
 			     } },
 			   { val => N("Done"), 
 			     type => 'button',
@@ -818,7 +815,7 @@ sub sharewindow {
 				 1; 
 			     },
 			     disabled => sub {
-				 return ($#list < 0);
+				 return $#list < 0;
 			     } },
 			   { val => N("Remove selected host"), 
 			     type => 'button',
@@ -827,7 +824,7 @@ sub sharewindow {
 				 1; 
 			     },
 			     disabled => sub {
-				 return ($#list < 0);
+				 return $#list < 0;
 			     } },
 			   { val => N("Done"), 
 			     type => 'button',

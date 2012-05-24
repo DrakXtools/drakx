@@ -519,7 +519,7 @@ sub computeGroupSize {
 			if (find { $_->flag_available } @choices_pkgs) {
 			    @choices = (); #- one package is already selected (?)
 			} else {
-			    @choices = map { $_->id } packageCallbackChoices($packages, undef, undef, \@choices_pkgs, $virtual);
+			    @choices = map { $_->id } packageCallbackChoices($packages, undef, undef, \@choices_pkgs, $virtual, undef);
 			}
 		    }
 		    push @l2, @choices;
@@ -741,7 +741,7 @@ sub is_package_installed {
 }
 
 sub _install_raw {
-    my ($packages, $isUpgrade, $callback, $LOG, $noscripts) = @_;
+    my ($packages, $_isUpgrade, $callback, $LOG, $noscripts) = @_;
 
     # prevent warnings in install's logs:
     local $ENV{LC_ALL} = 'C';

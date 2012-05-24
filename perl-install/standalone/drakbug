@@ -116,7 +116,7 @@ sub is_a_boot_issue() {
 
 sub format_trace_with_message {
     my ($message, $trace) = @_;
-    ([ $message ], [ "\n\n  " . join("\n  ", split("\n", $trace)) . "\n\n", { family => 'monospace' }]);
+    ([ $message ], [ "\n\n  " . join("\n  ", split("\n", $trace)) . "\n\n", { family => 'monospace' } ]);
 }
 
 my @commands = 'lspcidrake -v';
@@ -144,7 +144,7 @@ gtkadd($window->{window},
                                [ N("Used theme: %s", $theme_name) . "\n\n" ],
                                [
                                    N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server",
-                                     $wizard_name).  "\n" .
+                                     $wizard_name) .  "\n" .
                                        P("It would be very useful to attach to your report the output of the following command: %s.",
                                          "Things useful to attach to your report are the output of the following commands: %s.",
                                          scalar(@commands),
@@ -193,7 +193,7 @@ $button_pkg->signal_connect('clicked', sub {
 				    $package->set_text($pkg_name);
 				});
 
-$button_browse->signal_connect('file-set', sub { $com_app->set_text($button_browse->get_filename()) });
+$button_browse->signal_connect('file-set', sub { $com_app->set_text($button_browse->get_filename) });
 
 $window->{window}->show_all;
 $window->main;
@@ -260,7 +260,7 @@ sub report_bug_to_bugzilla() {
         $cpuinfo = $1;
     }
     my $arch = arch();
-    $arch = 'i586' if arch =~ /^i.86/;
+    $arch = 'i586' if arch() =~ /^i.86/;
     my $options = join('&',
                        ($product || $version ? 'cf_rpmpkg=' . join('-', $product, $version) : ()),
                        'version=' . ($rel_data->{branch} eq 'Devel' ? 'Cooker' : $rel_data->{version}),
@@ -277,7 +277,7 @@ sub report_bug_to_bugzilla() {
                                    qq(The "$prog" program crashed. Drakbug-$rel caught it.
 
 ) . ($text || "Please describe what you were doing when it crashed.") . "\n\n"
-  . ($error ? $error :
+  . ($error ||
   qq(If you can, try to run the "$prog" program from a terminal and copy and paste here any error messages and/or backtrace))
                                )
                                  . qq(

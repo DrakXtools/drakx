@@ -901,6 +901,7 @@ sub generate_automatic_stage1_params {
 	$method = $1; #- in stage1, FTP via HTTP proxy is available through FTP config, not HTTP
 	@ks = (server => $2, directory => $3);
     } elsif ($o->{method} eq 'ftp') {
+	require install::ftp;
 	my @l = install::ftp::parse_ftp_url($ENV{URLPREFIX});
 	@ks = (server => $l[0], directory => $l[1], user => $l[2], pass => $l[3]);
     } elsif ($o->{method} eq 'nfs') {

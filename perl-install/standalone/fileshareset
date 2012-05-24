@@ -153,7 +153,7 @@ sub read_conf {
 	$conf{$cmd} = $value || warn qq(suspicious line "$_" in $authorisation_file\n);
     }
     # no close $F_lock, keep it locked
-    \%conf
+    \%conf;
 }
 
 sub check {
@@ -170,7 +170,7 @@ sub check {
 	# ok, access granted for everybody
     } else {
 	my @l;
-	while (@l = getgrent) {
+	while (@l = getgrent()) {
 	    last if $l[0] eq $authorisation_group;
 	}
 	::member($username, split(' ', $l[3])) or ::error($non_authorised);

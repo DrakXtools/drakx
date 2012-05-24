@@ -195,7 +195,7 @@ sub print_ntp_servers() {
 $ntp_servers{""} = {
     N_("Global") => "pool.ntp.org",
 };
-$ntp_servers{"Global"} = {
+$ntp_servers{Global} = {
     N_("Africa") => "africa.pool.ntp.org",
     N_("Asia") => "asia.pool.ntp.org",
     N_("Europe") => "europe.pool.ntp.org",
@@ -203,11 +203,11 @@ $ntp_servers{"Global"} = {
     N_("Oceania") => "oceania.pool.ntp.org",
     N_("South America") => "south-america.pool.ntp.org",
 };
-$ntp_servers{"Africa"} = {
+$ntp_servers{Africa} = {
     N_("South Africa") => "za.pool.ntp.org",
     N_("Tanzania") => "tz.pool.ntp.org",
 };
-$ntp_servers{"Asia"} = {
+$ntp_servers{Asia} = {
     N_("Bangladesh") => "bd.pool.ntp.org",
     N_("China") => "cn.pool.ntp.org",
     N_("Hong Kong") => "hk.pool.ntp.org",
@@ -225,7 +225,7 @@ $ntp_servers{"Asia"} = {
     N_("Turkey") => "tr.pool.ntp.org",
     N_("United Arab Emirates") => "ae.pool.ntp.org",
 };
-$ntp_servers{"Europe"} = {
+$ntp_servers{Europe} = {
     N_("Austria") => "at.pool.ntp.org",
     N_("Belarus") => "by.pool.ntp.org",
     N_("Belgium") => "be.pool.ntp.org",
@@ -263,7 +263,7 @@ $ntp_servers{"North America"} = {
     N_("Mexico") => "mx.pool.ntp.org",
     N_("United States") => "us.pool.ntp.org",
 };
-$ntp_servers{"Oceania"} = {
+$ntp_servers{Oceania} = {
     N_("Australia") => "au.pool.ntp.org",
     N_("New Zealand") => "nz.pool.ntp.org",
 };

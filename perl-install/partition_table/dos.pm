@@ -220,14 +220,14 @@ sub read_one {
     sysread $F, $tmp, length $magic or die "error reading magic number on disk $hd->{device}";
     $tmp eq $magic or die "bad magic number on disk $hd->{device}";
 
-    if(c::get_disk_type($hd->{file}) ne "msdos") {
+    if (c::get_disk_type($hd->{file}) ne "msdos") {
 	# libparted may have ignored it because of overlapping partitions or other error
 	# while it is actually a partition table.
 	$hd->{fs_type_from_magic} and die "unpartitionned disk";
 	my $primary = partition_table::raw::pt_info_to_primary($hd, [ @pt ]);
        foreach my $i (@{$primary->{normal}}) {
-          if (($i->{active} && $i->{active} != 0x80) || 
-             ($hd->{totalsectors} && $i->{start} > $hd->{totalsectors})) {
+          if ($i->{active} && $i->{active} != 0x80 || 
+             $hd->{totalsectors} && $i->{start} > $hd->{totalsectors}) {
                 die "Invalid DOS partition table";
           }
        }

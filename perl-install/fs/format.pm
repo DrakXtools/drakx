@@ -196,7 +196,7 @@ sub part_raw {
     delete $part->{device_LABEL_changed};
 
     # Preserve UUID on fs where we couldn't enforce it while formatting
-    my ($_pkg, $cmd) = @{$preserve_UUID{$fs_type}};
+    (undef, $cmd) = @{$preserve_UUID{$fs_type}};
     run_program::raw($cmd, '-U', devices::make($dev)) if $cmd;
     
     if (member($fs_type, qw(ext3 ext4))) {
@@ -241,7 +241,7 @@ sub clean_label {
     if ($part->{device_LABEL}) {
 	my $fs_type = $part->{fs_type};
 	if ($LABELs{$fs_type}) {
-	    my ($option, $length, $handled_by_mount) = @{$LABELs{$fs_type}};
+	    my ($_option, $length, $handled_by_mount) = @{$LABELs{$fs_type}};
 	    if (length $part->{device_LABEL} > $length) {
 		my $short = substr($part->{device_LABEL}, 0, $length);
 		log::l("shortening LABEL $part->{device_LABEL} to $short");

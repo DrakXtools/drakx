@@ -89,7 +89,7 @@ sub create_minimal_files() {
 }
 
 sub prepare_minimal_root {
-    my ($all_hds) = @_;
+    my ($_all_hds) = @_;
 
     fs::any::create_minimal_files();
 
@@ -98,7 +98,7 @@ sub prepare_minimal_root {
     eval { fs::mount::usbfs($::prefix) };
 
     # copy all needed devices, for bootloader install and mkinitrd
-    cp_afx("/dev", "$::prefix");
+    cp_af('/dev', $::prefix);
 }
 
 sub getAvailableSpace {

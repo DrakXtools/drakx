@@ -122,7 +122,7 @@ sub get_geometries {
 	    $geom{start} = 1;
 	    compute_nb_cylinders(\%geom, $total);
 	    $geom{totalcylinders} = $geom{cylinders};
-	    log::l("Fake geometry on ".$_->{file}.": heads=$geom{heads} sectors=$geom{sectors} cylinders=$geom{cylinders} start=$geom{start}");
+	    log::l("Fake geometry on " . $_->{file} . ": heads=$geom{heads} sectors=$geom{sectors} cylinders=$geom{cylinders} start=$geom{start}");
 	    add2hash_($_, { totalsectors => $total, geom => \%geom });
 	    1;
         } elsif (my $h = get_geometry($_->{file})) {

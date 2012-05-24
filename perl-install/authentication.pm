@@ -113,10 +113,10 @@ sub ask_parameters {
                      {},
 		     { label => N("LDAP Server"), val => \$authentication->{LDAP_server} },
 		     { label => N("Base dn"), val => \$authentication->{LDAPDOMAIN} },
-                     { val => N("Fetch base Dn "), type  => button , clicked_may_quit => sub { $authentication->{LDAPDOMAIN} = fetch_dn($authentication->{LDAP_server}); 0 } },
+                     { val => N("Fetch base Dn "), type  => 'button' , clicked_may_quit => sub { $authentication->{LDAPDOMAIN} = fetch_dn($authentication->{LDAP_server}); 0 } },
 		     {},
 		     { text => N("Use encrypt connection with TLS "), val => \$authentication->{cafile}, type => 'bool' },
-                     { val => N("Download CA Certificate "), type  => button , disabled => sub { !$authentication->{cafile} }, clicked_may_quit => sub { $authentication->{file} = add_cafile(); 0 }  },
+                     { val => N("Download CA Certificate "), type  => 'button' , disabled => sub { !$authentication->{cafile} }, clicked_may_quit => sub { $authentication->{file} = add_cafile(); 0 }  },
 		     
 		     { text => N("Use Disconnect mode "), val => \$authentication->{ccreds}, type => 'bool' },
 		     { text => N("Use anonymous BIND "), val => \$authentication->{anonymous}, type => 'bool' , advanced => 1 },
@@ -168,10 +168,10 @@ my %level = (
 			{},	
 			{ label => N("LDAP Server"), val => \$authentication->{LDAP_server}, disabled => sub { $authentication->{nsskrb} eq "1"  } },
                      	{ label => N("Base dn"), val => \$authentication->{LDAPDOMAIN} , disabled => sub { $authentication->{nsskrb} eq "1"  } },
-                     	{ val => N("Fecth base Dn "), type  => button , clicked_may_quit => sub { $authentication->{LDAPDOMAIN} = fetch_dn($authentication->{LDAP_server}); 0 }, disabled => sub { $authentication->{nsskrb} eq "1"  } },
+                     	{ val => N("Fecth base Dn "), type  => 'button' , clicked_may_quit => sub { $authentication->{LDAPDOMAIN} = fetch_dn($authentication->{LDAP_server}); 0 }, disabled => sub { $authentication->{nsskrb} eq "1"  } },
 			{},
                      	{ text => N("Use encrypt connection with TLS "), val => \$authentication->{cafile}, type => 'bool',, disabled => sub { $authentication->{nsskrb} eq "1"  } },
-                     	{ val => N("Download CA Certificate "), type  => button , disabled => sub { !$authentication->{cafile} }, clicked_may_quit => sub { $authentication->{file} = add_cafile(); 0 }  },
+                     	{ val => N("Download CA Certificate "), type  => 'button' , disabled => sub { !$authentication->{cafile} }, clicked_may_quit => sub { $authentication->{file} = add_cafile(); 0 }  },
                      	{ text => N("Use anonymous BIND "), val => \$authentication->{anonymous}, type => 'bool', disabled => sub { $authentication->{nsskrb} eq "1"  } },
                      	{ label => N("Bind DN "), val => \$authentication->{LDAP_binddn}, disabled => sub { !$authentication->{anonymous} } },
                      	{ label => N("Bind Password "), val => \$authentication->{LDAP_bindpwd}, disabled => sub { !$authentication->{anonymous} } },
@@ -888,9 +888,8 @@ sub pack_passwd {
 }
 
 sub add_cafile() {
-	my $file;
 	my $in = interactive->vnew;
-	$file = $in->ask_filename({ title => N("Select file") }) or return;
+	$in->ask_filename({ title => N("Select file") }) or return;
 }
 
 sub auth() {
@@ -915,7 +914,6 @@ sub list_domains() {
 }
 sub get_server_for_domain {
     my $smb = fs::remote::smb->new;
-    my %domains;
     foreach my $server ($smb->find_servers) {
         return $server->{name} if $server->{group} == $_[0];
     }

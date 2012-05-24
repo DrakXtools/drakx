@@ -44,7 +44,7 @@ notebook current_kind[]
 
 =cut
 
-sub load_theme {
+sub load_theme() {
     my $rc = "/usr/share/libDrakX/diskdrake.rc";
     -r $rc or $rc = dirname(__FILE__) . "/../diskdrake.rc";
     -r $rc or $rc = dirname(__FILE__) . "/../share/diskdrake.rc";
@@ -149,7 +149,7 @@ sub add_kind2notebook {
     die if $kind->{main_box};
 
     $kind->{display_box} = gtkset_size_request(Gtk2::HBox->new(0,0), $width, $height);
-    $kind->{action_box} = gtkset_size_request(Gtk2::VBox->new(), get_action_box_size());
+    $kind->{action_box} = gtkset_size_request(Gtk2::VBox->new, get_action_box_size());
     $kind->{info_box} = Gtk2::VBox->new(0,0);
     my $box =
       gtkpack_(Gtk2::VBox->new(0,7),
@@ -222,7 +222,7 @@ sub per_entry_action_box {
 	    $w;
 	} diskdrake::interactive::part_possible_actions($in, kind2hd($kind), $entry, $all_hds);
 
-	gtkadd($box, create_scrolled_window(gtkpack__(Gtk2::VBox->new(), @buttons), undef, 'none')) if @buttons;
+	gtkadd($box, create_scrolled_window(gtkpack__(Gtk2::VBox->new, @buttons), undef, 'none')) if @buttons;
     } else {
 	my $txt = !$::isStandalone && fsedit::is_one_big_fat_or_NT($all_hds->{hds}) ?
 N("You have one big Microsoft Windows partition.
@@ -315,7 +315,7 @@ sub create_buttons4partitions {
     };
 
     foreach my $entry (@parts) {
-	if(isRawLUKS($entry) && $entry->{dm_active}) {
+	if (isRawLUKS($entry) && $entry->{dm_active}) {
 	    my $p = find { $entry->{dm_name} eq $_->{dmcrypt_name} } @{$all_hds->{dmcrypts}};
 	    $entry = $p if $p;
 	}
@@ -345,7 +345,7 @@ sub create_buttons4partitions {
 		last;
 	    }
 	});
-	if(isLUKS($entry) || isRawLUKS($entry)) {
+	if (isLUKS($entry) || isRawLUKS($entry)) {
 	    $w->set_image(gtknew("Image", file => "security-strong"));
 	}
 	my @colorized_fs_types = qw(ext3 ext4 xfs swap vfat ntfs ntfs-3g);
@@ -366,7 +366,7 @@ sub create_buttons4partitions {
 # disks: helpers
 ################################################################################
 sub current_hd() { 
-    $current_kind->{type} =~ /hd|lvm/ or die 'current_hd called but $current_kind is not an hd ('.$current_kind->{type}.')';
+    $current_kind->{type} =~ /hd|lvm/ or die 'current_hd called but $current_kind is not an hd (' . $current_kind->{type} . ')';
     $current_kind->{val};
 }
 sub current_part() {
@@ -389,7 +389,7 @@ sub filesystems_button_box() {
 		 N_("Other"), N_("Empty"));
     my %name2fs_type = (Ext3 => 'ext3', Ext4 => 'ext4', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
 
-    gtkpack(Gtk2::HBox->new(), 
+    gtkpack(Gtk2::HBox->new, 
 	    map {
 		  my $t = $name2fs_type{$_};
                   my $w = gtknew('Button', text => translate($_), widget_name => 'PART_' . ($t || 'empty'),

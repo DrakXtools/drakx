@@ -146,7 +146,7 @@ sub _gtk {
 }
 
 sub _gtk__Install_Button {
-    my ($w, $opts, $class) = @_;
+    my ($w, $opts, $_class) = @_;
     $opts->{child} = gtknew('HBox', spacing => 5, 
                              children_tight => [
                                  # FIXME: not RTL compliant (lang::text_direction_rtl() ? ...)
@@ -296,7 +296,7 @@ sub _gtk__HSeparator { &_gtk_any_simple }
 sub _gtk__Calendar   { &_gtk_any_simple }
 
 sub _gtk__DrawingArea {
-    my ($w, $opts) = @_;
+    my ($w, $_opts) = @_;
 
     if (!$w) {
 	$w = Gtk2::DrawingArea->new;
@@ -353,7 +353,7 @@ sub _gtk__Image {
                                        $w->{x} = $alloc->x;
                                        $w->{y} = $alloc->y;
                                    }
-                                   foreach my $rect($event->region->get_rectangles) {
+                                   foreach my $rect ($event->region->get_rectangles) {
                                        my @values = $rect->values;
                                        $pixbuf->render_to_drawable($w->window, $w->style->fg_gc('normal'),
                                                                @values[0..1], $w->{x}+$values[0], $w->{y}+$values[1], @values[2..3], 'max', 0, 0);
@@ -389,7 +389,7 @@ sub _gtk__Image {
 sub _gtk__WrappedLabel {
     my ($w, $opts) = @_;
     
-    $opts->{line_wrap} = 1 if not defined $opts->{line_wrap};
+    $opts->{line_wrap} = 1 if !defined $opts->{line_wrap};
     _gtk__Label($w, $opts);
 }
 
@@ -442,7 +442,7 @@ sub _gtk__Label {
 
 
 sub _gtk__Alignment {
-    my ($w, $opts) = @_;
+    my ($w, $_opts) = @_;
 
     if (!$w) {
 	$w = Gtk2::Alignment->new(0, 0, 0, 0);
@@ -585,7 +585,7 @@ sub _gtk__TextView {
 }
 
 sub _gtk__WebKit_View {
-    my ($w, $opts, $_class, $action) = @_;
+    my ($w, $opts, $_class, $_action) = @_;
     if (!$w) {
         $w = Gtk2::WebKit::WebView->new;
     }
@@ -667,7 +667,7 @@ sub _gtk__ScrolledWindow {
 	    $w->add_with_viewport($child);
 	}
 	$child->set_focus_vadjustment($w->get_vadjustment) if $child->can('set_focus_vadjustment');
-	$child->set_left_margin(6) if ref($child) =~ /Gtk2::TextView/ && $child->get_left_margin() <= 6;
+	$child->set_left_margin(6) if ref($child) =~ /Gtk2::TextView/ && $child->get_left_margin <= 6;
 	$child->show;
 
 	$w->child->set_shadow_type(delete $opts->{shadow_type}) if exists $opts->{shadow_type};
@@ -722,14 +722,14 @@ sub _gtk__Expander {
 
 
 sub _gtk__MDV_Notebook {
-    my ($w, $opts, $_class, $action) = @_;
+    my ($w, $opts, $_class, $_action) = @_;
     if (!$w) {
         import_style_ressources();
 
         my ($layout, $selection_arrow, $selection_bar);
         my $parent_window = delete $opts->{parent_window} || root_window();
-        my $root_height = first($parent_window->get_size());
-        my $suffix = $root_height eq 800 && !$::isStandalone ? '_600' : '_768';
+        my $root_height = first($parent_window->get_size);
+        my $suffix = $root_height == 800 && !$::isStandalone ? '_600' : '_768';
         # the white square is a little bit above the actual left sidepanel:
         my $offset = 20;
         my $is_flip_needed = text_direction_rtl();
@@ -740,11 +740,11 @@ sub _gtk__MDV_Notebook {
         my @right_background = $::isInstall ? 
           gtknew('Image', file => "right-white-background_left_part$suffix", flip => $is_flip_needed)
             : map {
-                gtknew('Image', file => "right-white-background_left_part-$_", flip => $is_flip_needed)
+                gtknew('Image', file => "right-white-background_left_part-$_", flip => $is_flip_needed);
             } 1, 2, 2, 3;
         my $width1 = $left_background->{pixbuf}->get_width;
         my $total_width = $width1 + $right_background[0]->get_pixbuf->get_width;
-        my $arrow_x = text_direction_rtl() ? $offset/2 -4 : $width1 - $offset -3;
+        my $arrow_x = text_direction_rtl() ? $offset/2 - 4 : $width1 - $offset - 3;
         $w = gtknew('HBox', spacing => 0, children => [
             0, $layout = gtknew('Layout', width => $total_width - $offset, children => [ #Layout Fixed
                 # stacking order is important for "Z-buffer":
@@ -790,7 +790,7 @@ sub _gtk__MDV_Notebook {
 
 
 sub _gtk__Fixed {
-    my ($w, $opts, $_class, $action) = @_;
+    my ($w, $opts, $_class, $_action) = @_;
 	
     if (!$w) {
 	$w = Gtk2::Fixed->new;
@@ -820,7 +820,7 @@ sub _gtknew_handle_layout_children {
         delete $opts->{children};
 
         if ($opts->{pixbuf_file}) {
-            my $pixbuf = gtknew('Pixbuf', file => delete $opts->{pixbuf_file}) if $opts->{pixbuf_file};
+            my $pixbuf = if_($opts->{pixbuf_file}, gtknew('Pixbuf', file => delete $opts->{pixbuf_file}));
             $w->signal_connect(
                 realize => sub {
                     ugtk2::set_back_pixbuf($w, $pixbuf);
@@ -1270,7 +1270,7 @@ sub _create_Window {
 	}) if $special_center;
     }
 
-    $w->present() if $no_Window_Manager;
+    $w->present if $no_Window_Manager;
 
     $w;
 }
@@ -1396,7 +1396,7 @@ sub asteriskize {
 }
 
 sub get_main_window_size() {
-    my ($width, $height) = $::real_windowwidth ? ($::real_windowwidth, $::real_windowheight) : $::isWizard ? (540, 360) : (600, 400);
+    $::real_windowwidth ? ($::real_windowwidth, $::real_windowheight) : $::isWizard ? (540, 360) : (600, 400);
 }
 
 # in order to workaround infamous 6 years old gnome bug #101968:
@@ -1520,7 +1520,7 @@ sub import_style_ressources() {
 }
 
 sub text_direction_rtl() {
-    Gtk2::Widget->get_default_direction() eq 'rtl';
+    Gtk2::Widget->get_default_direction eq 'rtl';
 }
 
 sub _get_weakness_icon {

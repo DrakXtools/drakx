@@ -63,7 +63,7 @@ ask_fromW_begin:
     my @labels;
     my $format_label = sub { my ($e) = @_; return sprintf("`%s' %s %s\n", ${$e->{val}}, $e->{label}, $e->{text}) };
     my $do_widget = sub {
-	my ($e, $ind) = @_;
+	my ($e, $_ind) = @_;
 
 	if ($e->{type} eq 'bool') {
 	    print "$e->{text} $e->{label}\n";
@@ -170,7 +170,7 @@ sub wait_messageW {
     print join "\n", $message, $message_modifiable;
 }
 sub wait_message_nextW { 
-    my $m = join "\n", $_[1];
+    my $m = $_[1];
     print "\r$m", ' ' x (60 - length $m);
 }
 sub wait_message_endW { print "\nDone\n" }

@@ -523,7 +523,7 @@ sub create_okcancel {
         $bprev = $w->{cancel} = gtknew('Button', text => $cancel, clicked => $w->{cancel_clicked} || 
                                    sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
     }
-    $w->{wizcancel} = gtknew('Button', text =>  ($::Wizard_skip ? N("Skip") : N("Cancel")), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall && !$::Wizard_no_cancel;;
+    $w->{wizcancel} = gtknew('Button', text =>  ($::Wizard_skip ? N("Skip") : N("Cancel")), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall && !$::Wizard_no_cancel;
     if (!defined $wm_is_kde) {
         require any;
         my $wm = any::running_window_manager();

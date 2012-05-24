@@ -8,7 +8,7 @@ use c;
 my $q = CGI->new;
 $| = 1;
 
-my $script_name = $q->url(-relative => 1);
+my $script_name = $q->url('-relative' => 1);
 
 # name inversed (must be in sync with interactive_http.html)
 my $pipe_r = "/tmp/interactive_http_w";
@@ -27,24 +27,23 @@ if ($q->param('state') eq 'new') {
     error("booh...");
 }
 
-sub read_ {
-    local *F;
-    open F, "<$pipe_r" or error("Failed to connect to the prog");
+sub read_() {
+    open my $F, "<$pipe_r" or error("Failed to connect to the prog");
     my $t;
-    print $t while sysread F, $t, 1;
+    print $t while sysread $F, $t, 1;
 }
-sub write_ {
+sub write_() {
     local *F;
     open F, ">$pipe_w" or die;
     my $q = CGI->new;
     $q->save(\*F);
 }
 
-sub first_step { read_() }
-sub next_step { write_(); read_() }
+sub first_step() { read_() }
+sub next_step() { write_(); read_() }
 
 
-sub force_exit_dead_prog {
+sub force_exit_dead_prog() {
     -p $pipe_w or return;
     {
 	local *F;
@@ -65,7 +64,7 @@ sub spawn_server {
     my @authorised_progs = map { chomp_($_) } cat_('/etc/drakxtools_http/authorised_progs');
     member($prog, @authorised_progs) or error("You tried to call a non-authorised program");
 
-    fork and return;
+    fork() and return;
 
     $ENV{INTERACTIVE_HTTP} = $script_name;
 
@@ -78,9 +77,9 @@ sub spawn_server {
 }
 
 sub error {
-    print $q->header(), $q->start_html();
+    print $q->header, $q->start_html;
     print $q->h1(N("Error")), @_;
-    print $q->end_html(), "\n";
+    print $q->end_html, "\n";
     exit 0;
 }
 

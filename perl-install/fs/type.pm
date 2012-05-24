@@ -311,7 +311,7 @@ sub type_subpart_from_magic {
     $p;
 }
 
-sub defaultFS { 'ext4' }
+sub defaultFS() { 'ext4' }
 
 sub true_local_fs_types() { qw(btrfs ext3 ext2 ext4 reiserfs reiser4 xfs jfs) }
 
@@ -333,7 +333,7 @@ sub isRecovery {
             # Extracted from /usr/share/hal/fdi/policy/10osvendor/20-storage-methods.fdi
             # Hopefuly we'll ask to hal/udev someday
             'RECOVERY', 'PQSERVICE', 'HP_RECOVERY', 'Recovery Partition', 'DellUtility', 'DellRestore', 'IBM_SERVICE', 'SERVICEV001', 'SERVICEV002')
-    )
+    );
 }
 
 sub isTrueFS { isTrueLocalFS($_[0]) || member($_[0]{fs_type}, qw(nfs)) }

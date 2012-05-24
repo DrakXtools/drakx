@@ -498,6 +498,7 @@ sub choosePackagesTree {
 			    interactive_help => sub { 
                                 interactive::gtk::display_help($o,
                                                                { interactive_help_id => 
+                                                                   # FIXME: missing ref to upper window:
                                                                    'choosePackages#choosePackagesTree' }, my $w) },
 
 			    ok => N("Install"),

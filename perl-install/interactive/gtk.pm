@@ -457,9 +457,7 @@ sub create_widget {
 	if (my $actions = $e->{add_modify_remove}) {
 	    my @buttons = (N_("Add"), N_("Modify"), N_("Remove"));
 	    # Add Up/Down buttons if their actions are defined
-	    foreach (qw(Up Down)) {
-	        push @buttons, 'gtk-go-' . $_ if $actions->{$_};
-	    }
+            push @buttons, map { if_($actions->{$_}, 'gtk-go-' . $_) } qw(Up Down);
 	    @buttons = map {
                 my $button = /^gtk-/ ? gtknew('Button', image => gtknew('Image', stock => lc($_)))
                   : Gtk2::Button->new(translate($_));
@@ -490,7 +488,7 @@ sub create_widget {
                                             if_($images,
                                                 gtknew('HButtonBox',
                                                        layout => 'spread',
-                                                       children_loose => [ map { $_->{button} } @$images]
+                                                       children_loose => [ map { $_->{button} } @$images ]
                                                       )
                                             ),
                                         ),
@@ -669,7 +667,7 @@ sub create_widgets_block {
             ]);
 	}
 
-	my $eater = gtknew('Label') if $e->{alignment} eq 'right' && !$label_w;
+	my $eater = if_($e->{alignment} eq 'right' && !$label_w, gtknew('Label'));
 
 	$e->{real_w} = gtkpack_(Gtk2::HBox->new,
 				if_($e->{icon}, 0, eval { gtkcreate_img($e->{icon}) }),

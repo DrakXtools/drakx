@@ -28,7 +28,7 @@ sub set_loop {
     my $dev = find_free_loop();
 
     if ($o_encrypt_key && $o_encryption) {
-	eval { modules::load('cryptoloop', 'cbc', if_(arch() =~ /i.86/, 'aes-i586'), if_( arch() =~ /x86_64/, 'aes-x86_64'), 'aes_generic') };
+	eval { modules::load('cryptoloop', 'cbc', if_(arch() =~ /i.86/, 'aes-i586'), if_(arch() =~ /x86_64/, 'aes-x86_64'), 'aes_generic') };
 	my $cmd = "losetup -p 0 -e $o_encryption $dev $file";
 	log::l("calling $cmd");
 	open(my $F, "|$cmd");
@@ -111,7 +111,7 @@ sub entry {
 		   "ubd/"        => sub { c::S_IFBLK(), 98, 0  },
 		   "dm-"         => sub { c::S_IFBLK(), get_dynamic_major('device-mapper'), 0 },
 	       }}{$prefix};
-	if($f) {
+	if ($f) {
 	    ($type, $major, $minor) = $f->();
 	    $minor += $nb;
         }
@@ -177,7 +177,7 @@ sub entry {
     # Now device mapper devices are links and do not appear in /proc or /sys
     unless ($type) {
 	if (-e "/dev/$_") {
-	    my (undef,undef,$mode,undef,undef,undef,$rdev,undef) = stat("/dev/$_");
+	    my (undef, undef, $mode, undef, undef, undef, $rdev, undef) = stat("/dev/$_");
 	    ($major, $minor) = unmakedev($rdev);
 	    $type = $mode & c::S_IFMT();
 	}

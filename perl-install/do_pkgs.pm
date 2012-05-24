@@ -72,7 +72,7 @@ sub ensure_binary_is_installed {
 sub ensure_files_are_installed {
     my ($do, $pkgs, $b_auto) = @_;
 
-    my @not_installed = map { my ($package, $file) = @{$_}; -e "$::prefix$file"?():$package } @{$pkgs};
+    my @not_installed = map { my ($package, $file) = @$_; -e "$::prefix$file" ? () : $package } @$pkgs;
 
     $do->in->ask_okcancel(N("Warning"), N("The following packages need to be installed:\n") . join(', ', @not_installed), 1)
 	  or return if !$b_auto && $do->in;
@@ -119,7 +119,7 @@ sub check_kernel_module_packages {
 	'dkms-' . $base_name,
 	map { $base_name . '-kernel-' . bootloader::vmlinuz2version($_) } bootloader::installed_vmlinuz()
     );
-    @rpms = $do->are_available(@test_rpms);
+    my @rpms = $do->are_available(@test_rpms);
     @rpms = $do->are_installed(@test_rpms) if !@rpms;
     @rpms or return;
 

@@ -298,9 +298,7 @@ sub _set_service {
         $service = $service . ".service" ; 
       }
       run_program::rooted($::prefix, "systemctl", $enable ? "enable" : "disable", $service);
-    }
-    else 
-    {
+    } else {
         my $script = "/etc/rc.d/init.d/$service";
         run_program::rooted($::prefix, "chkconfig", $enable ? "--add" : "--del", $service);
         #- FIXME: handle services with no chkconfig line and with no Default-Start levels in LSB header

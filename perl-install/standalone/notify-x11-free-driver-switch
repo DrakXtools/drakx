@@ -8,7 +8,7 @@ $::isStandalone = 0;
 my $in = 'interactive'->vnew;
 my $driver = eval {
     require Xconfig::xfree;
-    $raw_X = Xconfig::xfree->read;
+    my $raw_X = Xconfig::xfree->read;
     $raw_X->get_Driver;
 } || N("unknown");
 

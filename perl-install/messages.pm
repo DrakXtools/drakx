@@ -5,7 +5,7 @@ use strict;
 
 use common;
 
-sub main_license {
+sub main_license() {
     my ($us, $google) = @_;
 #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
 N("Introduction

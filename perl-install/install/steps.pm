@@ -774,8 +774,10 @@ sub read_bootloader_config {
 
 sub setupBootloaderBefore {
     my ($o) = @_;
+    my $bool = $o->{meta_class} ne 'server';
     any::setupBootloaderBefore($o->do_pkgs, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{keyboard},
                                $o->{allowFB}, $o->{vga}, $o->{meta_class} ne 'server');
+                               $o->{allowFB}, $o->{vga}, $bool);
 }
 
 sub setupBootloader {

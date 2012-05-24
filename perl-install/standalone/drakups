@@ -236,8 +236,8 @@ sub edit_callback {
 
 sub del_callback {
     my ($model, $list) = @_;
-    my (undef, $iter) = $list->get_selection->get_selected;
-    my $removed_idx = $model->get($iter, 0); # 1st column is index
+    #my (undef, $iter) = $list->get_selection->get_selected;
+    #my $removed_idx = $model->get($iter, 0); # 1st column is index
     #@rules = grep { $_->{index} ne $removed_idx } @rules;
     #$tree->remove($iter);
     #sensitive_buttons(0);
@@ -341,7 +341,7 @@ my $_msg = N("Welcome to the UPS configuration tools");
 $w->{window}->add(gtkpack_(Gtk2::VBox->new,
                            if_(!$::isEmbedded, 0, Gtk2::Banner->new('drakups', N("DrakUPS"))),
                            1, my $nb = Gtk2::Notebook->new,
-                           0, create_okcancel(my $oc = 
+                           0, create_okcancel( 
                                                {
                                                 ok_clicked => sub { 
                                                     #$_->{save}->() foreach @pages;
@@ -356,12 +356,6 @@ $w->{window}->add(gtkpack_(Gtk2::VBox->new,
 
 #------------------------------------------------------------------
 # build the notebook
-
-my %labels = (
-	      add => N("Add"),
-	      edit => N("Edit"),
-	      remove => N("Remove"),
-	     );
 
 foreach my $i (@pages) {
     my $model = $models{$i->{id}} = Gtk2::ListStore->new("Glib::Int", ("Glib::String") x listlength(@{$i->{columns}}));
