@@ -559,7 +559,7 @@ sub default_packages {
     my @ltmp = map { $_->{BOOTPROTO} eq 'dhcp' ? $_->{DHCP_CLIENT} || 'dhcp-client' : () } values %{$o->{net}{ifcfg}};
     add_n_log("needed by networking", @ltmp) if @ltmp;
     # will get auto selected at summary stage for bootloader:
-    push @l, qw(acpi acpid mageia-gfxboot-theme);
+    add_n_log("needed later at summary stage", qw(acpi acpid mageia-gfxboot-theme));
     # only needed for CDs/DVDs installations:
     add_n_log("method='cdrom'", 'perl-Hal-Cdroms') if $o->{method} eq 'cdrom';
 
