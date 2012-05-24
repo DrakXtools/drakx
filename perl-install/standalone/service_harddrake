@@ -27,6 +27,10 @@ use Xconfig::card;
 use Xconfig::various;
 use modules;
 use Storable qw(store retrieve);
+use run_program;
+
+# timeout runaway processes after 2mn:
+run_program::set_default_timeout(2*60);
 
 
 my $force = member('--force', @ARGV);
