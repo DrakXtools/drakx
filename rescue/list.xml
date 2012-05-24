@@ -274,6 +274,12 @@
 
 
 <filter command="strip">
+  <!-- 32bit grub needs 32 bit loader -->
+  <if ARCH="x86_64">
+    <from dir="/lib">
+      ld-linux*.so.2
+    </from>
+  </if>
 <from dir="/LIB">
   libnss_files.so.2
   libnss_dns.so.2
