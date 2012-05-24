@@ -16,58 +16,36 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-21 02:36+0300\n"
+"POT-Creation-Date: 2012-05-25 01:32+0200\n"
 "PO-Revision-Date: 2011-06-24 21:45+0200\n"
 "Last-Translator: Atilla ÖNTAŞ <atilla_ontas@mandriva.org>\n"
 "Language-Team: Turkish <i18n-tr@ml.mageia.org>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: display_help:54
-#: display_help:59
-#: drakbug:186
-#: drakperm:136
+#: display_help:54 display_help:59 drakbug:173 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Yardım"
 
-#: display_help:67
-#: drakbug:191
-#: drakfont:506
+#: display_help:67 drakbug:178 drakfont:506
 #, c-format
 msgid "Close"
 msgstr "Kapat"
 
-#: drakauth:24
-#: drakauth:26
-#: draksec:164
+#: drakauth:24 drakauth:26 draksec:160
 #, c-format
 msgid "Authentication"
 msgstr "Kimlik kanıtlama"
 
-#: drakauth:37
-#: drakclock:111
-#: drakclock:125
-#: drakdvb:74
-#: drakfont:213
-#: drakfont:226
-#: drakfont:264
-#: finish-install:130
-#: logdrake:170
-#: logdrake:445
-#: logdrake:450
-#: scannerdrake:59
-#: scannerdrake:101
-#: scannerdrake:142
-#: scannerdrake:200
-#: scannerdrake:259
-#: scannerdrake:729
-#: scannerdrake:740
-#: scannerdrake:879
-#: scannerdrake:890
-#: scannerdrake:960
+#: drakauth:37 drakclock:109 drakclock:125 drakdvb:74 drakfont:213
+#: drakfont:226 drakfont:264 finish-install:130 logdrake:170 logdrake:445
+#: logdrake:450 scannerdrake:57 scannerdrake:99 scannerdrake:140
+#: scannerdrake:198 scannerdrake:257 scannerdrake:727 scannerdrake:738
+#: scannerdrake:877 scannerdrake:888 scannerdrake:958
 #, c-format
 msgid "Error"
 msgstr "Hata"
@@ -77,23 +55,17 @@ msgstr "Hata"
 msgid "No bootloader found, creating a new configuration"
 msgstr "Önyükleyici bulunamadı. Yeni bir yapılandırma oluşturuluyor."
 
-#: drakboot:88
-#: harddrake2:196
-#: harddrake2:197
-#: logdrake:71
+#: drakboot:88 harddrake2:199 harddrake2:200 logdrake:71
 #, c-format
 msgid "/_File"
 msgstr "/_Dosya"
 
-#: drakboot:89
-#: logdrake:77
+#: drakboot:89 logdrake:77
 #, c-format
 msgid "/File/_Quit"
 msgstr "/Dosya/Çı_kış"
 
-#: drakboot:89
-#: harddrake2:197
-#: logdrake:77
+#: drakboot:89 harddrake2:200 logdrake:77
 #, c-format
 msgid "<control>Q"
 msgstr "<control>K"
@@ -113,29 +85,22 @@ msgstr "Verbose"
 msgid "Silent"
 msgstr "Sessiz"
 
-#: drakboot:137
-#: drakbug:263
-#: drakdvb:57
-#: drakfont:682
-#: drakperm:376
-#: drakperm:386
-#: drakups:27
-#: harddrake2:535
-#: localedrake:45
-#: notify-x11-free-driver-switch:18
-#: scannerdrake:51
-#: scannerdrake:54
-#: scannerdrake:297
-#: scannerdrake:302
-#: scannerdrake:954
+#: drakboot:137 drakbug:250 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:538 localedrake:45 scannerdrake:49 scannerdrake:52
+#: scannerdrake:295 scannerdrake:300 scannerdrake:952
 #, c-format
 msgid "Warning"
 msgstr "Uyarı"
 
 #: drakboot:138
 #, c-format
-msgid "Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool."
-msgstr "Sistem önyükleyiciniz çerçeve tampon belleği kipinde değil. Grafiksel açılışı  etkinleştirmek için, önyükleyici yapılandırma aracını kullanarak grafik ekran kipi  seçin."
+msgid ""
+"Your system bootloader is not in framebuffer mode. To activate graphical "
+"boot, select a graphic video mode from the bootloader configuration tool."
+msgstr ""
+"Sistem önyükleyiciniz çerçeve tampon belleği kipinde değil. Grafiksel "
+"açılışı  etkinleştirmek için, önyükleyici yapılandırma aracını kullanarak grafik "
+"ekran kipi  seçin."
 
 #: drakboot:139
 #, c-format
@@ -197,8 +162,7 @@ msgstr "Grafiksel ortam açılışta çalıştırılsın"
 msgid "Boot Style Configuration"
 msgstr "Önyükleme Yapılandırması"
 
-#: drakboot:261
-#: drakboot:265
+#: drakboot:261 drakboot:265
 #, c-format
 msgid "Video mode"
 msgstr "Ekran kipi"
@@ -206,76 +170,74 @@ msgstr "Ekran kipi"
 #: drakboot:262
 #, c-format
 msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries selected below.\n"
+"Please choose a video mode, it will be applied to each of the boot entries "
+"selected below.\n"
 "Be sure your video card supports the mode you choose."
 msgstr ""
 "Lütfen bir ekran kipi seçin, bu kip aşağıda seçilen her bir açılış girdisine  uygulanacaktır.\n"
 " Seçtiğiniz kipin ekran kartınız tarafından desteklendiğinden emin olun."
 
-#: drakbug:65
-#: drakbug:153
+#: drakbug:52 drakbug:140
 #, c-format
 msgid "The \"%s\" program has crashed with the following error:"
 msgstr "\"%s\" uygulaması şu hatayı vererek çöktü:"
 
-#: drakbug:76
+#: drakbug:62
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Mandriva Linux Hata Bildirme Aracı"
 
-#: drakbug:81
+#: drakbug:67
 #, c-format
 msgid "Mandriva Linux Control Center"
 msgstr "Mandriva Linux Denetim Merkezi"
 
-#: drakbug:82
+#: drakbug:68
 #, c-format
 msgid "First Time Wizard"
 msgstr "İlk Açılış Sihirbazı"
 
-#: drakbug:83
+#: drakbug:69
 #, c-format
 msgid "Synchronization tool"
 msgstr "Eşleştirme aracı"
 
-#: drakbug:84
-#: drakbug:219
+#: drakbug:70 drakbug:206
 #, c-format
 msgid "Standalone Tools"
 msgstr "Tekli Araçlar"
 
-#: drakbug:86
-#: drakbug:87
+#: drakbug:72 drakbug:73
 #, c-format
 msgid "Mandriva Online"
 msgstr "Mandriva Online"
 
-#: drakbug:88
+#: drakbug:74
 #, c-format
 msgid "Remote Control"
 msgstr "Uzaktan Yönetim"
 
-#: drakbug:89
+#: drakbug:75
 #, c-format
 msgid "Software Manager"
 msgstr "Yazılım Yöneticisi"
 
-#: drakbug:90
+#: drakbug:76
 #, c-format
 msgid "Windows Migration tool"
 msgstr "Windows Geçiş Aracı"
 
-#: drakbug:91
+#: drakbug:77
 #, c-format
 msgid "Configuration Wizards"
 msgstr "Yapılandırma Sihirbazı"
 
-#: drakbug:113
+#: drakbug:99
 #, c-format
 msgid "Select Mandriva Tool:"
 msgstr "Mandriva Aracı seçin:"
 
-#: drakbug:114
+#: drakbug:100
 #, c-format
 msgid ""
 "or Application Name\n"
@@ -284,93 +246,101 @@ msgstr ""
 "veya Uygulama İsmi\n"
 " (veya Tam Konum):"
 
-#: drakbug:117
+#: drakbug:103
 #, c-format
 msgid "Find Package"
 msgstr "Paket Bul"
 
-#: drakbug:118
+#: drakbug:104
 #, c-format
 msgid "Browse"
 msgstr "Gözat"
 
-#: drakbug:120
+#: drakbug:106
 #, c-format
 msgid "Package: "
 msgstr "Paket:"
 
-#: drakbug:121
+#: drakbug:107
 #, c-format
 msgid "Kernel:"
 msgstr "Çekirdek:"
 
-#: drakbug:152
+#: drakbug:139
 #, c-format
 msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "\"%s\" uygulaması şu hatayı vererek çöktü:"
 
-#: drakbug:156
-#, c-format
-msgid "Its GDB trace is:"
-msgstr "GDB izi :"
+#: drakbug:144
+#, fuzzy, c-format
+msgid "Used theme: %s"
+msgstr "Kullanıcı: %s"
 
-#: drakbug:159
+#: drakbug:146
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
-"This will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server"
+"This will open a web browser window on %s where you'll find a form to fill "
+"in.  The information displayed above will be transferred to that server"
 msgstr ""
 "Hata bildirimi göndermek için raporla düğmesine tıklayın.\n"
-"Web tarayıcısı %s adresiyle açılacaktır. Oradaki formu doldurunca yukarıdaki bilgilerilerle birlikte oraya gönderilecektir."
+"Web tarayıcısı %s adresiyle açılacaktır. Oradaki formu doldurunca yukarıdaki "
+"bilgilerilerle birlikte oraya gönderilecektir."
 
-#: drakbug:161
+#: drakbug:148
 #, c-format
-msgid "It would be very useful to attach to your report the output of the following command: %s."
-msgid_plural "Things useful to attach to your report are the output of the following commands: %s."
-msgstr[0] "Şu komutların çıktısını rapora eklemeniz oldukça yararlı olacaktır: %s."
+msgid ""
+"It would be very useful to attach to your report the output of the following "
+"command: %s."
+msgid_plural ""
+"Things useful to attach to your report are the output of the following "
+"commands: %s."
+msgstr[0] ""
+"Şu komutların çıktısını rapora eklemeniz oldukça yararlı olacaktır: %s."
 
-#: drakbug:164
+#: drakbug:151
 #, c-format
 msgid "'%s'"
 msgstr "'%s'"
 
-#: drakbug:167
+#: drakbug:154
 #, c-format
 msgid "You should also attach the following files: %s as well as %s."
 msgstr "Şu dosyaları da eklemeniz gerekir: %s ve %s."
 
-#: drakbug:174
+#: drakbug:161
 #, c-format
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Lütfen, uygulama çöktüğünde ne yapmakta olduğunuz açıklayın:"
 
-#: drakbug:190
+#: drakbug:177
 #, c-format
 msgid "Report"
 msgstr "Bildir"
 
-#: drakbug:226
+#: drakbug:213
 #, c-format
 msgid "Not installed"
 msgstr "Kurulmadı"
 
-#: drakbug:239
+#: drakbug:226
 #, c-format
 msgid "Package not installed"
 msgstr "Paket kurulu değil"
 
-#: drakbug:264
+#: drakbug:251
 #, c-format
-msgid "You must type in what you were doing when this bug happened in order to enable us to reproduce this bug and to increase the odds of fixing it"
+msgid ""
+"You must type in what you were doing when this bug happened in order to "
+"enable us to reproduce this bug and to increase the odds of fixing it"
 msgstr "Bizim yeniden bu hatayı oluşturabilmemiz ve düzeltebilmemiz için,  bu hata oluştuğu sırada ne yaptığınız yazmanız gereklidir."
 
-#: drakbug:265
+#: drakbug:252
 #, c-format
 msgid "Thanks."
 msgstr "Teşekkürler."
 
-#: drakclock:30
-#: draksec:170
+#: drakclock:30 draksec:166
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Tarih, Saat & Zaman Dilimi Ayarları"
@@ -405,12 +375,12 @@ msgstr "GMT - DrakClock"
 msgid "Is your hardware clock set to GMT?"
 msgstr "Donanım saatiniz GMT'ye göre mi ayarlı?"
 
-#: drakclock:70
+#: drakclock:68
 #, c-format
 msgid "Network Time Protocol"
 msgstr "Ağ Zaman Protokolü"
 
-#: drakclock:72
+#: drakclock:70
 #, c-format
 msgid ""
 "Your computer can synchronize its clock\n"
@@ -419,22 +389,22 @@ msgstr ""
 "Bilgisayarınız saatini NTP kullanarak\n"
 " bir uzak zaman sunucusya eşleştirebilir."
 
-#: drakclock:73
+#: drakclock:71
 #, c-format
 msgid "Enable Network Time Protocol"
 msgstr "Ağ Zaman Protokolünü etkinleştir"
 
-#: drakclock:81
+#: drakclock:79
 #, c-format
 msgid "Server:"
 msgstr "Sunucu:"
 
-#: drakclock:95
+#: drakclock:93
 #, c-format
 msgid "Timezone"
 msgstr "Zaman Dilimi"
 
-#: drakclock:111
+#: drakclock:109
 #, c-format
 msgid "Please enter a valid NTP server address."
 msgstr "Lütfen geçerli bir NTP sunucu adresi girin."
@@ -444,10 +414,7 @@ msgstr "Lütfen geçerli bir NTP sunucu adresi girin."
 msgid "Could not synchronize with %s."
 msgstr "%s ile eşleştirilemiyor."
 
-#: drakclock:127
-#: drakdvb:149
-#: logdrake:175
-#: scannerdrake:491
+#: drakclock:127 drakdvb:149 logdrake:175 scannerdrake:489
 #, c-format
 msgid "Quit"
 msgstr "Çık"
@@ -457,8 +424,7 @@ msgstr "Çık"
 msgid "Retry"
 msgstr "Yeniden dene"
 
-#: drakclock:151
-#: drakclock:161
+#: drakclock:155 drakclock:165
 #, c-format
 msgid "Reset"
 msgstr "Sıfırla"
@@ -468,8 +434,7 @@ msgstr "Sıfırla"
 msgid "DVB"
 msgstr "DVB"
 
-#: drakdvb:39
-#: harddrake2:98
+#: drakdvb:39 harddrake2:101
 #, c-format
 msgid "Channel"
 msgstr "Kanal"
@@ -484,20 +449,10 @@ msgstr "%s zaten var ve tüm içeriği kaybedilecektir."
 msgid "Could not get the list of available channels"
 msgstr "Erişilebilir kanalların listesi alınamıyor."
 
-#: drakdvb:80
-#: draksec:73
-#: drakups:99
-#: finish-install:105
-#: harddrake2:379
-#: scannerdrake:66
-#: scannerdrake:70
-#: scannerdrake:78
-#: scannerdrake:319
-#: scannerdrake:368
-#: scannerdrake:504
-#: scannerdrake:508
-#: scannerdrake:530
-#: service_harddrake:412
+#: drakdvb:80 draksec:69 drakups:99 finish-install:105 harddrake2:382
+#: scannerdrake:64 scannerdrake:68 scannerdrake:76 scannerdrake:317
+#: scannerdrake:366 scannerdrake:502 scannerdrake:506 scannerdrake:528
+#: service_harddrake:432
 #, c-format
 msgid "Please wait"
 msgstr "Lütfen bekleyin"
@@ -507,12 +462,7 @@ msgstr "Lütfen bekleyin"
 msgid "Detecting DVB channels, this will take a few minutes"
 msgstr "DVB kanalları algılanıyor. Bu işlem zaman alabilir."
 
-#: drakdvb:85
-#: drakfont:572
-#: drakfont:652
-#: drakfont:736
-#: drakups:217
-#: logdrake:175
+#: drakdvb:85 drakfont:572 drakfont:652 drakfont:736 drakups:217 logdrake:175
 #, c-format
 msgid "Cancel"
 msgstr "İptal"
@@ -565,8 +515,12 @@ msgstr "Değişiklik tamamlandı, dm hizmetini yeniden başlatmak ister misiniz?
 
 #: drakedm:75
 #, c-format
-msgid "You are going to close all running programs and lose your current session. Are you really sure that you want to restart the dm service?"
-msgstr "Çalışan tüm uygulamalarınızı kapatmak ve şu anki oturumu kaybetmek üzeresiniz.  Gerçek ekran yöneticisi hizmetini yeniden başlatmak istiyor musnuz?"
+msgid ""
+"You are going to close all running programs and lose your current session. "
+"Are you really sure that you want to restart the dm service?"
+msgstr ""
+"Çalışan tüm uygulamalarınızı kapatmak ve şu anki oturumu kaybetmek "
+"üzeresiniz.  Gerçek ekran yöneticisi hizmetini yeniden başlatmak istiyor musnuz?"
 
 #: drakfont:187
 #, c-format
@@ -588,14 +542,8 @@ msgstr "Hiç yazı tipi bulunamadı"
 msgid "parse all fonts"
 msgstr "tüm yazı tiplerini çözümle"
 
-#: drakfont:222
-#: drakfont:263
-#: drakfont:338
-#: drakfont:379
-#: drakfont:383
-#: drakfont:409
-#: drakfont:427
-#: drakfont:435
+#: drakfont:222 drakfont:263 drakfont:338 drakfont:379 drakfont:383
+#: drakfont:409 drakfont:427 drakfont:435
 #, c-format
 msgid "done"
 msgstr "bitti"
@@ -645,8 +593,7 @@ msgstr "ttmkfdir çalışıyor, lütfen bekleyiniz..."
 msgid "True Type install done"
 msgstr "True Type kurulumu bitti"
 
-#: drakfont:354
-#: drakfont:369
+#: drakfont:354 drakfont:369
 #, c-format
 msgid "type1inst building"
 msgstr "type1 kurulumu"
@@ -661,8 +608,7 @@ msgstr "Ghostscript başvuruları"
 msgid "Suppress Temporary Files"
 msgstr "Geçici dosyaları engelle"
 
-#: drakfont:425
-#: drakfont:431
+#: drakfont:425 drakfont:431
 #, c-format
 msgid "Suppress Fonts Files"
 msgstr "Yazı tipi Dosyalarını Engelle"
@@ -670,13 +616,17 @@ msgstr "Yazı tipi Dosyalarını Engelle"
 #: drakfont:439
 #, c-format
 msgid ""
-"Before installing any fonts, be sure that you have the right to use and install them on your system.\n"
+"Before installing any fonts, be sure that you have the right to use and "
+"install them on your system.\n"
 "\n"
-"You can install the fonts the normal way. In rare cases, bogus fonts may hang up your X Server."
+"You can install the fonts the normal way. In rare cases, bogus fonts may "
+"hang up your X Server."
 msgstr ""
-"Herhangi bir yazı tipini sisteminize kurmadan önce kullanım hakkınız olduğundan emin olmalısınız.\n"
+"Herhangi bir yazı tipini sisteminize kurmadan önce kullanım hakkınız "
+"olduğundan emin olmalısınız.\n"
 "\n"
-"Yazı tiplerini normal yoldan kurabilirsiniz. Genellikle, sağdan soldan toplanan bozuk yazı tipleri X sunucunuzun çökmesine sebep olur. "
+"Yazı tiplerini normal yoldan kurabilirsiniz. Genellikle, sağdan soldan "
+"toplanan bozuk yazı tipleri X sunucunuzun çökmesine sebep olur. "
 
 #: drakfont:478
 #, c-format
@@ -688,8 +638,7 @@ msgstr "Yazı Tipi Kurulumu"
 msgid "DrakFont"
 msgstr "DrakFont"
 
-#: drakfont:490
-#: drakfont:642
+#: drakfont:490 drakfont:642
 #, c-format
 msgid "Font List"
 msgstr "Yazı tipi Listesi"
@@ -704,14 +653,12 @@ msgstr "Windows Yazı Tiplerini Al"
 msgid "About"
 msgstr "Hakkında"
 
-#: drakfont:500
-#: drakfont:541
+#: drakfont:500 drakfont:541
 #, c-format
 msgid "Options"
 msgstr "Seçenekler"
 
-#: drakfont:501
-#: drakfont:721
+#: drakfont:501 drakfont:721
 #, c-format
 msgid "Uninstall"
 msgstr "Kaldır"
@@ -726,8 +673,7 @@ msgstr "Al"
 msgid "Drakfont"
 msgstr "Drakfont"
 
-#: drakfont:522
-#: harddrake2:234
+#: drakfont:522 harddrake2:237
 #, c-format
 msgid "Copyright (C) %s by Mandriva"
 msgstr "Copyright (C) %s bir Mandriva ürünüdür"
@@ -737,16 +683,14 @@ msgstr "Copyright (C) %s bir Mandriva ürünüdür"
 msgid "Font installer."
 msgstr "Yazı tipi kurucusu."
 
-#: drakfont:526
-#: harddrake2:238
+#: drakfont:526 harddrake2:241
 #, c-format
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:533
-#: harddrake2:243
+#: drakfont:533 harddrake2:246
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr ""
@@ -770,8 +714,8 @@ msgstr "Ghostscript"
 
 #: drakfont:555
 #, c-format
-msgid "OpenOffice.org"
-msgstr "OpenOffice.org"
+msgid "LibreOffice"
+msgstr ""
 
 #: drakfont:556
 #, c-format
@@ -783,9 +727,7 @@ msgstr "Abiword"
 msgid "Generic Printers"
 msgstr "Temel Yazıcı"
 
-#: drakfont:562
-#: drakfont:572
-#: drakups:210
+#: drakfont:562 drakfont:572 drakups:210
 #, c-format
 msgid "Ok"
 msgstr "Tamam"
@@ -793,7 +735,8 @@ msgstr "Tamam"
 #: drakfont:571
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
-msgstr "Yazı tipi dosyasını ya da dizinini seçtikten sonra 'Ekle' ye tıklayınız."
+msgstr ""
+"Yazı tipi dosyasını ya da dizinini seçtikten sonra 'Ekle' ye tıklayınız."
 
 #: drakfont:572
 #, c-format
@@ -805,25 +748,17 @@ msgstr "Dosya Seçimi"
 msgid "Fonts"
 msgstr "Yazı tipleri"
 
-#: drakfont:640
-#: draksec:166
+#: drakfont:640 draksec:162
 #, c-format
 msgid "Import fonts"
 msgstr "Yazı tipi al"
 
-#: drakfont:646
-#: drakups:299
-#: drakups:361
-#: drakups:381
+#: drakfont:646 drakups:299 drakups:375
 #, c-format
 msgid "Add"
 msgstr "Ekle"
 
-#: drakfont:647
-#: drakfont:735
-#: drakups:301
-#: drakups:363
-#: drakups:383
+#: drakfont:647 drakfont:735 drakups:301 drakups:377
 #, c-format
 msgid "Remove"
 msgstr "Kaldır"
@@ -838,16 +773,12 @@ msgstr "Kur"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Aşağıdaki yazı tiplerini kaldırmak istediğinizden emin misiniz?"
 
-#: drakfont:688
-#: draksec:60
-#: harddrake2:324
+#: drakfont:688 draksec:59 harddrake2:327
 #, c-format
 msgid "Yes"
 msgstr "Evet"
 
-#: drakfont:690
-#: draksec:59
-#: harddrake2:325
+#: drakfont:690 draksec:58 harddrake2:328
 #, c-format
 msgid "No"
 msgstr "Hayır"
@@ -867,8 +798,7 @@ msgstr "Tümünü Seç"
 msgid "Importing fonts"
 msgstr "Yazı tipi alınıyor"
 
-#: drakfont:753
-#: drakfont:773
+#: drakfont:753 drakfont:773
 #, c-format
 msgid "Initial tests"
 msgstr "Denetimler başlıyor"
@@ -908,13 +838,15 @@ msgstr "Kurulumun kaldırılması Sonrası"
 msgid ""
 " drakhelp 0.1\n"
 "Copyright (C) %s Mandriva.\n"
-"This is free software and may be redistributed under the terms of the GNU GPL.\n"
+"This is free software and may be redistributed under the terms of the GNU "
+"GPL.\n"
 "\n"
 "Usage: \n"
 msgstr ""
 " drakhelp 0.1\n"
 "Telif Hakkı (C) %s Mandriva.\n"
-"Bu bir serbest yazılımdır ve GNU GPL lisansı altında tekrar dağıtılabilinir.\n"
+"Bu bir serbest yazılımdır ve GNU GPL lisansı altında tekrar "
+"dağıtılabilinir.\n"
 "\n"
 "Kullanımı: \n"
 
@@ -925,13 +857,18 @@ msgstr " --help                - bu yardım ekranını gösterir     \n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr " --id <id_label>       - id_label'e başvuran html yardım dosyasını yükle\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr ""
+" --id <id_label>       - id_label'e başvuran html yardım dosyasını yükle\n"
 
 #: drakhelp:24
 #, c-format
-msgid " --doc <link>          - link to another web page ( for WM welcome frontend)\n"
-msgstr " --doc <link>          - diğer web sayfasına bağlantıla ( WM hoşgeldiniz  ön yüzü için)\n"
+msgid ""
+" --doc <link>          - link to another web page ( for WM welcome "
+"frontend)\n"
+msgstr ""
+" --doc <link>          - diğer web sayfasına bağlantıla ( WM hoşgeldiniz  ön yüzü için)\n"
 
 #: drakhelp:52
 #, c-format
@@ -968,28 +905,22 @@ msgstr "Güvenlik İzinleri"
 msgid "Editable"
 msgstr "Düzenlenebilir"
 
-#: drakperm:50
-#: drakperm:320
+#: drakperm:50 drakperm:320
 #, c-format
 msgid "Path"
 msgstr "Yol"
 
-#: drakperm:50
-#: drakperm:249
+#: drakperm:50 drakperm:249
 #, c-format
 msgid "User"
 msgstr "Kullanıcı"
 
-#: drakperm:50
-#: drakperm:249
+#: drakperm:50 drakperm:249
 #, c-format
 msgid "Group"
 msgstr "Grup"
 
-#: drakperm:50
-#: drakperm:109
-#: drakperm:332
-#: draksec:181
+#: drakperm:50 drakperm:109 drakperm:332 draksec:177
 #, c-format
 msgid "Permissions"
 msgstr "Yetkiler"
@@ -999,9 +930,7 @@ msgstr "Yetkiler"
 msgid "Add a new rule"
 msgstr "Yeni bir kural ekle"
 
-#: drakperm:67
-#: drakperm:102
-#: drakperm:128
+#: drakperm:67 drakperm:102 drakperm:128
 #, c-format
 msgid "Edit current rule"
 msgstr "Geçerli kuralı düzenle"
@@ -1009,11 +938,14 @@ msgstr "Geçerli kuralı düzenle"
 #: drakperm:110
 #, c-format
 msgid ""
-"Here you can see files to use in order to fix permissions, owners, and groups via msec.\n"
+"Here you can see files to use in order to fix permissions, owners, and "
+"groups via msec.\n"
 "You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
-"Burada, msec yoluyla yetkileri, sahipleri ve grupları düzeltmek amacıyla kullanılacak dosyaları görebilirsiniz.\n"
-"Ayrıca ön tanımlı kuralları değiştirerek kendi kurallarınızı da düzenleyebilirsiniz."
+"Burada, msec yoluyla yetkileri, sahipleri ve grupları düzeltmek amacıyla "
+"kullanılacak dosyaları görebilirsiniz.\n"
+"Ayrıca ön tanımlı kuralları değiştirerek kendi kurallarınızı da "
+"düzenleyebilirsiniz."
 
 #: drakperm:112
 #, c-format
@@ -1064,10 +996,7 @@ msgstr "Sil"
 msgid "Delete selected rule"
 msgstr "Seçili kuralı sil"
 
-#: drakperm:128
-#: drakups:300
-#: drakups:362
-#: drakups:382
+#: drakperm:128 drakups:300 drakups:376
 #, c-format
 msgid "Edit"
 msgstr "Düzenle"
@@ -1218,174 +1147,172 @@ msgstr "Kullanıcı: %s"
 msgid "Group: %s"
 msgstr "Grup: %s"
 
-#: draksec:54
+#: draksec:53
 #, c-format
 msgid "ALL"
 msgstr "HEPSİ"
 
-#: draksec:55
+#: draksec:54
 #, c-format
 msgid "LOCAL"
 msgstr "YEREL"
 
-#: draksec:56
+#: draksec:55
 #, c-format
 msgid "NONE"
 msgstr "HİÇBİRİ"
 
-#: draksec:57
+#: draksec:56
 #, c-format
 msgid "Default"
 msgstr "Öntanımlı"
 
-#: draksec:58
+#: draksec:57
 #, c-format
 msgid "Ignore"
 msgstr "Yoksay"
 
-#: draksec:91
+#: draksec:87
 #, c-format
 msgid "Security Level and Checks"
 msgstr "Güvenlik Seviyesi ve Denetlemeler"
 
-#: draksec:114
+#: draksec:110
 #, c-format
 msgid "Configure authentication required to access Mandriva tools"
 msgstr "Mandriva araçlarına erişebilmek için gerekli doğrulamayı yapılandırın"
 
-#: draksec:117
+#: draksec:113
 #, c-format
 msgid "No password"
 msgstr "Parola yok"
 
-#: draksec:118
+#: draksec:114
 #, c-format
 msgid "Root password"
 msgstr "Kök parolası"
 
-#: draksec:119
+#: draksec:115
 #, c-format
 msgid "User password"
 msgstr "Kullanıcı parolası"
 
-#: draksec:149
-#: draksec:204
+#: draksec:145 draksec:200
 #, c-format
 msgid "Software Management"
 msgstr "Yazılım Yöneticisi"
 
-#: draksec:150
+#: draksec:146
 #, c-format
 msgid "Mandriva Update"
 msgstr "Mandriva Güncelleme"
 
-#: draksec:151
+#: draksec:147
 #, c-format
 msgid "Software Media Manager"
 msgstr "Yazılım Kaynak Yöneticisi"
 
-#: draksec:152
+#: draksec:148
 #, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "3 Boyutlu masaüstü özelliklerini yapılandır."
 
-#: draksec:153
+#: draksec:149
 #, c-format
 msgid "Graphical Server Configuration"
 msgstr "Grafiksel Sunucu Yapılandırması"
 
-#: draksec:154
+#: draksec:150
 #, c-format
 msgid "Mouse Configuration"
 msgstr "Fare Yapılandırması"
 
-#: draksec:155
+#: draksec:151
 #, c-format
 msgid "Keyboard Configuration"
 msgstr "Klavye Yapılandırması"
 
-#: draksec:156
+#: draksec:152
 #, c-format
 msgid "UPS Configuration"
 msgstr "UPS Yapılandırması"
 
-#: draksec:157
+#: draksec:153
 #, c-format
 msgid "Network Configuration"
 msgstr "Ağ Yapılandırması"
 
-#: draksec:158
+#: draksec:154
 #, c-format
 msgid "Hosts definitions"
 msgstr "Makine adları"
 
-#: draksec:159
+#: draksec:155
 #, c-format
 msgid "Network Center"
 msgstr "Ağ & İnternet "
 
-#: draksec:160
+#: draksec:156
 #, c-format
 msgid "Wireless Network Roaming"
 msgstr "Kablosuz Ağ Dolaşımı"
 
-#: draksec:161
+#: draksec:157
 #, c-format
 msgid "VPN"
 msgstr "VPN"
 
-#: draksec:162
+#: draksec:158
 #, c-format
 msgid "Proxy Configuration"
 msgstr "Vekil Sunucu Yapılandırması"
 
-#: draksec:163
+#: draksec:159
 #, c-format
 msgid "Connection Sharing"
 msgstr "Bağlantı Paylaşımı"
 
-#: draksec:165
+#: draksec:161
 #, c-format
 msgid "Backups"
 msgstr "Yedekler"
 
-#: draksec:167
-#: logdrake:52
+#: draksec:163 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Kayıtlar"
 
-#: draksec:168
+#: draksec:164
 #, c-format
 msgid "Services"
 msgstr "Servisler"
 
-#: draksec:169
+#: draksec:165
 #, c-format
 msgid "Users"
 msgstr "Kullanıcılar"
 
-#: draksec:171
+#: draksec:167
 #, c-format
 msgid "Boot Configuration"
 msgstr "Önyükleme Yapılandırması"
 
-#: draksec:205
+#: draksec:201
 #, c-format
 msgid "Hardware"
 msgstr "Donanım"
 
-#: draksec:206
+#: draksec:202
 #, c-format
 msgid "Network"
 msgstr "Ağ"
 
-#: draksec:207
+#: draksec:203
 #, c-format
 msgid "System"
 msgstr "Sistem"
 
-#: draksec:208
+#: draksec:204
 #, c-format
 msgid "Boot"
 msgstr "Önyükleme"
@@ -1399,7 +1326,8 @@ msgstr "Ses kartı bulunamadı!"
 #: draksound:51
 #, c-format
 msgid ""
-"No Sound Card has been detected on your machine. Please verify that a Linux-supported Sound Card is correctly plugged in.\n"
+"No Sound Card has been detected on your machine. Please verify that a Linux-"
+"supported Sound Card is correctly plugged in.\n"
 "\n"
 "\n"
 "You can visit our hardware database at:\n"
@@ -1407,7 +1335,8 @@ msgid ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 msgstr ""
-"Sisteminizde hiç bir ses kartı bulunamadı. Lütfen makinanıza Linux-Uyumlu bir ses Kartının sorunsuz olarak takılı olduğundan emin olun.\n"
+"Sisteminizde hiç bir ses kartı bulunamadı. Lütfen makinanıza Linux-Uyumlu "
+"bir ses Kartının sorunsuz olarak takılı olduğundan emin olun.\n"
 "\n"
 "\n"
 "Desteklenen donanımlar listesine aşağıdaki adresten ulaşabilirsiniz:\n"
@@ -1421,12 +1350,15 @@ msgid ""
 "\n"
 "\n"
 "\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
+"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
+"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
 msgstr ""
 "\n"
 "\n"
 "\n"
-"Not: Eğer Tak Kullan(PnP) tipinde bir ISA ses kartınız var ise, sndconfig veya alsaconf uygulamalarını kullanmalısınız.  Sadece konsolda \"sndconfig\"veya \"alsaconf\" yazınız."
+"Not: Eğer Tak Kullan(PnP) tipinde bir ISA ses kartınız var ise, sndconfig "
+"veya alsaconf uygulamalarını kullanmalısınız.  Sadece konsolda \"sndconfig"
+"\"veya \"alsaconf\" yazınız."
 
 #: drakups:71
 #, c-format
@@ -1459,7 +1391,8 @@ msgstr ""
 msgid ""
 "We're going to add an UPS device.\n"
 "\n"
-"Do you want to autodetect UPS devices connected to this machine or to manually select them?"
+"Do you want to autodetect UPS devices connected to this machine or to "
+"manually select them?"
 msgstr ""
 "Bir UPS aygıtı ekleyeceğiz.\n"
 "\n"
@@ -1470,16 +1403,12 @@ msgstr ""
 msgid "Autodetection"
 msgstr "Otomatik algıla"
 
-#: drakups:99
-#: harddrake2:379
+#: drakups:99 harddrake2:382
 #, c-format
 msgid "Detection in progress"
 msgstr "Algılama sürüyor"
 
-#: drakups:118
-#: drakups:157
-#: logdrake:457
-#: logdrake:463
+#: drakups:118 drakups:157 logdrake:457 logdrake:463
 #, c-format
 msgid "Congratulations"
 msgstr "Tebrikler"
@@ -1494,8 +1423,7 @@ msgstr "Sihirbaz aşağıdaki UPS aygıtları başarıyla ekledi:"
 msgid "No new UPS devices was found"
 msgstr "Yeni bir UPS aygıt bulunamadı"
 
-#: drakups:126
-#: drakups:138
+#: drakups:126 drakups:138
 #, c-format
 msgid "UPS driver configuration"
 msgstr "UPS sürücü yapılandırması"
@@ -1559,24 +1487,18 @@ msgstr "Sihirbaz başarıyla yeni \"%s\" UPS aygıtını yapılandırdı."
 msgid "UPS devices"
 msgstr "UPS aygıtları"
 
-#: drakups:249
-#: drakups:268
-#: drakups:284
-#: harddrake2:86
-#: harddrake2:113
-#: harddrake2:120
+#: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:116
+#: harddrake2:123
 #, c-format
 msgid "Name"
 msgstr "İsim"
 
-#: drakups:249
-#: harddrake2:136
+#: drakups:249 harddrake2:139
 #, c-format
 msgid "Driver"
 msgstr "Sürücü"
 
-#: drakups:249
-#: harddrake2:56
+#: drakups:249 harddrake2:56
 #, c-format
 msgid "Port"
 msgstr "Kapı"
@@ -1611,8 +1533,7 @@ msgstr "Kurallar"
 msgid "Action"
 msgstr "Hareket"
 
-#: drakups:297
-#: harddrake2:83
+#: drakups:297 harddrake2:85
 #, c-format
 msgid "Level"
 msgstr "Seviye"
@@ -1622,8 +1543,7 @@ msgstr "Seviye"
 msgid "ACL name"
 msgstr "ACL ismi"
 
-#: drakups:297
-#: finish-install:195
+#: drakups:297 finish-install:195
 #, c-format
 msgid "Password"
 msgstr "Parola"
@@ -1633,8 +1553,7 @@ msgstr "Parola"
 msgid "UPS Management"
 msgstr "UPS Yönetimi"
 
-#: drakups:333
-#: drakups:342
+#: drakups:333 drakups:342
 #, c-format
 msgid "DrakUPS"
 msgstr "DrakUPS"
@@ -1653,7 +1572,8 @@ msgstr "TV kartı bulunamadı."
 #: drakxtv:69
 #, c-format
 msgid ""
-"No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.\n"
+"No TV Card has been detected on your machine. Please verify that a Linux-"
+"supported Video/TV Card is correctly plugged in.\n"
 "\n"
 "\n"
 "You can visit our hardware database at:\n"
@@ -1661,7 +1581,8 @@ msgid ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 msgstr ""
-"Sisteminizde hiç bir TV kartı bulunamadı. Lütfen makinanıza Linux-Uyumlu bir Video/TV Kartının sorunsuz olarak takılı olduğundan emin olun.\n"
+"Sisteminizde hiç bir TV kartı bulunamadı. Lütfen makinanıza Linux-Uyumlu bir "
+"Video/TV Kartının sorunsuz olarak takılı olduğundan emin olun.\n"
 "\n"
 "\n"
 "Desteklenen donanımlar listesine aşağıdaki adresten ulaşabilirsiniz:\n"
@@ -1684,9 +1605,7 @@ msgstr "Lütfen, klavye yerleşimini seçiniz."
 msgid "Testing your connection..."
 msgstr "Bağlantınız test ediliyor..."
 
-#: finish-install:193
-#: finish-install:211
-#: finish-install:223
+#: finish-install:193 finish-install:211 finish-install:224
 #, c-format
 msgid "Encrypted home partition"
 msgstr "Şifrelenmiş ev bölümü"
@@ -1706,7 +1625,7 @@ msgstr "Parola (tekrar)"
 msgid "Creating encrypted home partition"
 msgstr "Şifrelenmiş ev bölümü oluşturuluyor"
 
-#: finish-install:223
+#: finish-install:224
 #, c-format
 msgid "Formatting encrypted home partition"
 msgstr "Şifrelenmiş ev bölümü biçimlendiriliyor"
@@ -1721,27 +1640,30 @@ msgstr "Altarnatif sürücüler"
 msgid "the list of alternative drivers for this sound card"
 msgstr "bu ses kartı için sürücü seçenekleri"
 
-#: harddrake2:33
-#: harddrake2:122
+#: harddrake2:33 harddrake2:125
 #, c-format
 msgid "Bus"
 msgstr "Veriyolu"
 
 #: harddrake2:34
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "bu, aygıtın takılı olduğu fiziksel veriyoludur (örn. PCI, USB, ...)"
 
-#: harddrake2:36
-#: harddrake2:148
+#: harddrake2:36 harddrake2:151
 #, c-format
 msgid "Bus identification"
 msgstr "Veriyolu tanımlaması"
 
 #: harddrake2:37
 #, c-format
-msgid "- PCI and USB devices: this lists the vendor, device, subvendor and subdevice PCI/USB ids"
-msgstr "- PCI ve USB aygıtları : bu liste üretici, aygıt, alt-üretici ve alt-aygıt  PCI/USB kimliklerini göstermektedir"
+msgid ""
+"- PCI and USB devices: this lists the vendor, device, subvendor and "
+"subdevice PCI/USB ids"
+msgstr ""
+"- PCI ve USB aygıtları : bu liste üretici, aygıt, alt-üretici ve alt-aygıt  "
+"PCI/USB kimliklerini göstermektedir"
 
 #: harddrake2:39
 #, c-format
@@ -1850,8 +1772,7 @@ msgstr "Ortam sınıfı"
 msgid "class of hardware device"
 msgstr "donanım aygıtının sınıfı"
 
-#: harddrake2:55
-#: harddrake2:84
+#: harddrake2:55 harddrake2:86
 #, c-format
 msgid "Model"
 msgstr "Model"
@@ -1876,8 +1797,7 @@ msgstr "Birincil bölümler"
 msgid "the number of the primary partitions"
 msgstr "birincil bölüm sayısı"
 
-#: harddrake2:58
-#: harddrake2:89
+#: harddrake2:58 harddrake2:92
 #, c-format
 msgid "Vendor"
 msgstr "Üretici"
@@ -1892,8 +1812,7 @@ msgstr "aygıtın üreticisinin adı"
 msgid "PCI domain"
 msgstr "PCI etki alanı"
 
-#: harddrake2:59
-#: harddrake2:60
+#: harddrake2:59 harddrake2:60
 #, c-format
 msgid "the PCI domain of the device"
 msgstr "aygıtının PCI etki alanı"
@@ -1983,399 +1902,413 @@ msgstr "Aygıt USB Kimliği"
 msgid ".."
 msgstr ".."
 
-#: harddrake2:72
+#: harddrake2:73 harddrake2:74
 #, c-format
 msgid "Bogomips"
 msgstr "Bogomips"
 
-#: harddrake2:72
+#: harddrake2:73 harddrake2:74
 #, c-format
-msgid "the GNU/Linux kernel needs to run a calculation loop at boot time to initialize a timer counter.  Its result is stored as bogomips as a way to \"benchmark\" the cpu."
-msgstr "GNU/Linux çekirdeğinin bir zamanlayıcı sayacı çalıştırabilmesi için açılış sırasında bir hesaplama döngü yürütmesi gerekli.  Bunun sonucu işlemcinin \"benchmark\" ı olması için bogomip çeklinde saklanacaktır."
+msgid ""
+"the GNU/Linux kernel needs to run a calculation loop at boot time to "
+"initialize a timer counter.  Its result is stored as bogomips as a way to "
+"\"benchmark\" the cpu."
+msgstr ""
+"GNU/Linux çekirdeğinin bir zamanlayıcı sayacı çalıştırabilmesi için açılış "
+"sırasında bir hesaplama döngü yürütmesi gerekli.  Bunun sonucu işlemcinin "
+"\"benchmark\" ı olması için bogomip çeklinde saklanacaktır."
 
-#: harddrake2:73
+#: harddrake2:75
 #, c-format
 msgid "Cache size"
 msgstr "Önbellek boyutu"
 
-#: harddrake2:73
+#: harddrake2:75
 #, c-format
 msgid "size of the (second level) cpu cache"
 msgstr "CPU önbelleğinin (ikinci seviye) boyutu"
 
-#: harddrake2:74
+#: harddrake2:76
 #, c-format
 msgid "Cpuid family"
 msgstr "Cpuid ailesi"
 
-#: harddrake2:74
+#: harddrake2:76
 #, c-format
 msgid "family of the cpu (eg: 6 for i686 class)"
 msgstr "cpu ailesi (örn: i686 sınıfı için 6)"
 
-#: harddrake2:75
+#: harddrake2:77
 #, c-format
 msgid "Cpuid level"
 msgstr "Cpuid seviyesi"
 
-#: harddrake2:75
+#: harddrake2:77
 #, c-format
 msgid "information level that can be obtained through the cpuid instruction"
 msgstr "cpuid talimatı ile elde edilebilecek bilgi seviyesi"
 
-#: harddrake2:76
+#: harddrake2:78
 #, c-format
 msgid "Frequency (MHz)"
 msgstr "Frekans (MHz)"
 
-#: harddrake2:76
+#: harddrake2:78
 #, c-format
-msgid "the CPU frequency in MHz (Megahertz which in first approximation may be coarsely assimilated to number of instructions the cpu is able to execute per second)"
-msgstr "MHz cinsinden İşlemci frekansı (İşlemcinin saniyede yürütebileceği talimat sayısına kabaca benzeşen ilk yaklaşık Megahertz değeri)"
+msgid ""
+"the CPU frequency in MHz (Megahertz which in first approximation may be "
+"coarsely assimilated to number of instructions the cpu is able to execute "
+"per second)"
+msgstr ""
+"MHz cinsinden İşlemci frekansı (İşlemcinin saniyede yürütebileceği talimat "
+"sayısına kabaca benzeşen ilk yaklaşık Megahertz değeri)"
 
-#: harddrake2:77
+#: harddrake2:79
 #, c-format
 msgid "Flags"
 msgstr "Bayraklar"
 
-#: harddrake2:77
+#: harddrake2:79
 #, c-format
 msgid "CPU flags reported by the kernel"
 msgstr "Çekirdek tarafından CPU bayrakları raporlandı"
 
-#: harddrake2:78
-#: harddrake2:141
+#: harddrake2:80 harddrake2:144
 #, c-format
 msgid "Cores"
 msgstr "Çekirdekler"
 
-#: harddrake2:78
+#: harddrake2:80
 #, c-format
 msgid "CPU cores"
 msgstr "İşlemci çekirdekleri"
 
-#: harddrake2:79
+#: harddrake2:81
 #, c-format
 msgid "Core ID"
 msgstr "Çekirdek Kimliği"
 
-#: harddrake2:80
+#: harddrake2:82
 #, c-format
 msgid "Physical ID"
 msgstr "Fiziksel Kimlik"
 
-#: harddrake2:81
+#: harddrake2:83
 #, c-format
 msgid "ACPI ID"
 msgstr "ACPI Kimliği"
 
-#: harddrake2:82
+#: harddrake2:84
 #, c-format
 msgid "Siblings"
 msgstr "Kardeşler"
 
-#: harddrake2:83
+#: harddrake2:85
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "İşlemcinin alt nesli"
 
-#: harddrake2:84
+#: harddrake2:86
 #, c-format
 msgid "generation of the cpu (eg: 8 for Pentium III, ...)"
 msgstr "İşlemci nesli (örn: Pentium III için 8, ...)"
 
-#: harddrake2:85
+#: harddrake2:87 harddrake2:88
 #, c-format
 msgid "Model name"
 msgstr "Model adı"
 
-#: harddrake2:85
+#: harddrake2:87 harddrake2:88
 #, c-format
 msgid "official vendor name of the cpu"
 msgstr "Cpu'nun resmi üreticisinin adı"
 
-#: harddrake2:86
+#: harddrake2:89
 #, c-format
 msgid "the name of the CPU"
 msgstr "CPU'nun ismi"
 
-#: harddrake2:87
+#: harddrake2:90
 #, c-format
 msgid "Processor ID"
 msgstr "İşlemci ID"
 
-#: harddrake2:87
+#: harddrake2:90
 #, c-format
 msgid "the number of the processor"
 msgstr "işlemci sayısı"
 
-#: harddrake2:88
+#: harddrake2:91
 #, c-format
 msgid "Model stepping"
 msgstr "Model numarası"
 
-#: harddrake2:88
+#: harddrake2:91
 #, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
 msgstr "İşlemci basamağı (alt model (nesil) numarası)"
 
-#: harddrake2:89
+#: harddrake2:92
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "işlemcinin üreticisinin adı"
 
-#: harddrake2:90
+#: harddrake2:93
 #, c-format
 msgid "Write protection"
 msgstr "Yazma koruması"
 
-#: harddrake2:90
+#: harddrake2:93
 #, c-format
-msgid "the WP flag in the CR0 register of the cpu enforce write protection at the memory page level, thus enabling the processor to prevent unchecked kernel accesses to user memory (aka this is a bug guard)"
-msgstr "Hafıza sayfalama seviyesinde işlemci yazma korumasına zorlaması CR0 kaydındaki WP bayrağı; ki kullanıcı hafızasına çekirdeğin denetlenmemiş erişimlerini engeller (yani bir hata korumasıdır.)"
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write protection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+"Hafıza sayfalama seviyesinde işlemci yazma korumasına zorlaması CR0 "
+"kaydındaki WP bayrağı; ki kullanıcı hafızasına çekirdeğin denetlenmemiş "
+"erişimlerini engeller (yani bir hata korumasıdır.)"
 
-#: harddrake2:94
+#: harddrake2:97
 #, c-format
 msgid "Floppy format"
 msgstr "Disket biçimi"
 
-#: harddrake2:94
+#: harddrake2:97
 #, c-format
 msgid "format of floppies supported by the drive"
 msgstr "Sürücü tarafından desteklenilen biçimlendirme tarzları"
 
-#: harddrake2:98
+#: harddrake2:101
 #, c-format
 msgid "EIDE/SCSI channel"
 msgstr "EIDE/SCSI kanal"
 
-#: harddrake2:99
+#: harddrake2:102
 #, c-format
 msgid "Disk identifier"
 msgstr "Disk belirleyicisi"
 
-#: harddrake2:99
+#: harddrake2:102
 #, c-format
 msgid "usually the disk serial number"
 msgstr "genellikle disk numarası"
 
-#: harddrake2:100
+#: harddrake2:103
 #, c-format
 msgid "Target id number"
 msgstr "Hedef kimlik numarası"
 
-#: harddrake2:100
+#: harddrake2:103
 #, c-format
 msgid "the SCSI target identifier"
 msgstr "SCSI hedef belirleyici"
 
-#: harddrake2:101
+#: harddrake2:104
 #, c-format
 msgid "Logical unit number"
 msgstr "Mantıksal bölüm numarası"
 
-#: harddrake2:101
+#: harddrake2:104
 #, c-format
 msgid ""
-"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are uniquely identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
-"SCSI hedef numarası (LUN). Bir makineye bağlanan SCSI aygıtlar benzersiz bir kanal numarası,\n"
+"SCSI hedef numarası (LUN). Bir makineye bağlanan SCSI aygıtlar benzersiz bir "
+"kanal numarası,\n"
 "hedef kimliği ve bir mantıksal birim numarası ile algılanırlar."
 
 #. -PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
-#: harddrake2:108
+#: harddrake2:111
 #, c-format
 msgid "Installed size"
 msgstr "Kurulu boyut"
 
-#: harddrake2:108
+#: harddrake2:111
 #, c-format
 msgid "Installed size of the memory bank"
 msgstr "Hafıza bankasının kurulu boyutu"
 
-#: harddrake2:109
+#: harddrake2:112
 #, c-format
 msgid "Enabled Size"
 msgstr "Etkinleştirilmiş Boyut"
 
-#: harddrake2:109
+#: harddrake2:112
 #, c-format
 msgid "Enabled size of the memory bank"
 msgstr "Hafıza bankasının etkinleştirilmiş boyutu"
 
-#: harddrake2:110
-#: harddrake2:119
+#: harddrake2:113 harddrake2:122
 #, c-format
 msgid "Type"
 msgstr "Türü"
 
-#: harddrake2:110
+#: harddrake2:113
 #, c-format
 msgid "type of the memory device"
 msgstr "hafıza aygıtının türü"
 
-#: harddrake2:111
+#: harddrake2:114
 #, c-format
 msgid "Speed"
 msgstr "Hızı"
 
-#: harddrake2:111
+#: harddrake2:114
 #, c-format
 msgid "Speed of the memory bank"
 msgstr "hafıza bankasının hızı"
 
-#: harddrake2:112
+#: harddrake2:115
 #, c-format
 msgid "Bank connections"
 msgstr "Banka bağlantıları"
 
-#: harddrake2:113
+#: harddrake2:116
 #, c-format
 msgid "Socket designation of the memory bank"
 msgstr "Hafıza bankasının soket tasarımı"
 
-#: harddrake2:117
+#: harddrake2:120
 #, c-format
 msgid "Device file"
 msgstr "Aygıt dosyası"
 
-#: harddrake2:117
+#: harddrake2:120
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr "aygıt dosyası, fare için çekirdek sürücüsü ile iletişimde kullanılır."
 
-#: harddrake2:118
+#: harddrake2:121
 #, c-format
 msgid "Emulated wheel"
 msgstr "Taklit edilmiş tekerlek"
 
-#: harddrake2:118
+#: harddrake2:121
 #, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "tekerlek taklidi yapılıp yapılmayacağı"
 
-#: harddrake2:119
+#: harddrake2:122
 #, c-format
 msgid "the type of the mouse"
 msgstr "fare türü"
 
-#: harddrake2:120
+#: harddrake2:123
 #, c-format
 msgid "the name of the mouse"
 msgstr "Farenin ismi"
 
-#: harddrake2:121
+#: harddrake2:124
 #, c-format
 msgid "Number of buttons"
 msgstr "Tuş sayısı"
 
-#: harddrake2:121
+#: harddrake2:124
 #, c-format
 msgid "the number of buttons the mouse has"
 msgstr "farenin sahip olduğu tuş sayısı"
 
-#: harddrake2:122
+#: harddrake2:125
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "farenizin bağlı olduğu veri yolu türü"
 
-#: harddrake2:123
+#: harddrake2:126
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr "X11 tarafından kullanılan fare protokolü"
 
-#: harddrake2:123
+#: harddrake2:126
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "grafik masaüstünün fare ile kullanacağı protokol"
 
-#: harddrake2:127
+#: harddrake2:130
 #, c-format
 msgid "Identification"
 msgstr "Tanımlama Ekle"
 
-#: harddrake2:132
-#: harddrake2:147
+#: harddrake2:135 harddrake2:150
 #, c-format
 msgid "Connection"
 msgstr "Bağlantı"
 
-#: harddrake2:142
+#: harddrake2:145
 #, c-format
 msgid "Performances"
 msgstr "Verimlilik"
 
-#: harddrake2:149
+#: harddrake2:152
 #, c-format
 msgid "Device"
 msgstr "Aygıt"
 
-#: harddrake2:150
+#: harddrake2:153
 #, c-format
 msgid "Partitions"
 msgstr "Bölümlemeler"
 
-#: harddrake2:155
+#: harddrake2:158
 #, c-format
 msgid "Features"
 msgstr "Özellikler"
 
 #. -PO: please keep all "/" characters !!!
-#: harddrake2:178
-#: logdrake:78
+#: harddrake2:181 logdrake:78
 #, c-format
 msgid "/_Options"
 msgstr "/_Ayarlar"
 
-#: harddrake2:179
-#: harddrake2:208
-#: logdrake:80
+#: harddrake2:182 harddrake2:211 logdrake:80
 #, c-format
 msgid "/_Help"
 msgstr "/_Yardım"
 
-#: harddrake2:183
+#: harddrake2:186
 #, c-format
 msgid "/Autodetect _printers"
 msgstr "/_Yazıcıları otomatik algıla"
 
-#: harddrake2:184
+#: harddrake2:187
 #, c-format
 msgid "/Autodetect _modems"
 msgstr "/_Modemleri otomatik algıla"
 
-#: harddrake2:185
+#: harddrake2:188
 #, c-format
 msgid "/Autodetect _jaz drives"
 msgstr "/_jaz sürücülerini otomatik algıla"
 
-#: harddrake2:186
+#: harddrake2:189
 #, c-format
 msgid "/Autodetect parallel _zip drives"
 msgstr "/paralelsıkıştırılmış _zip sürücüleri otomatik algıla"
 
-#: harddrake2:190
+#: harddrake2:193
 #, c-format
 msgid "Hardware Configuration"
 msgstr "Donanım Yapılandırması"
 
-#: harddrake2:197
+#: harddrake2:200
 #, c-format
 msgid "/_Quit"
 msgstr "/_Çık"
 
-#: harddrake2:210
+#: harddrake2:213
 #, c-format
 msgid "/_Fields description"
 msgstr "/_Alan tanımlaması"
 
-#: harddrake2:212
+#: harddrake2:215
 #, c-format
 msgid "Harddrake help"
 msgstr "Harddrake yardım"
 
-#: harddrake2:213
+#: harddrake2:216
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -2384,99 +2317,103 @@ msgstr ""
 "Alanların tanımları:\n"
 "\n"
 
-#: harddrake2:221
+#: harddrake2:224
 #, c-format
 msgid "Select a device!"
 msgstr "Bir aygıt seçiniz"
 
-#: harddrake2:221
+#: harddrake2:224
 #, c-format
-msgid "Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"
-msgstr "Bir aygıt seçtiğinizde, sağ yandaki tablada (\"Bilgi\") aygıt hakkındaki bilgileri görebilirsiniz."
+msgid ""
+"Once you've selected a device, you'll be able to see the device information "
+"in fields displayed on the right frame (\"Information\")"
+msgstr ""
+"Bir aygıt seçtiğinizde, sağ yandaki tablada (\"Bilgi\") aygıt hakkındaki "
+"bilgileri görebilirsiniz."
 
-#: harddrake2:227
+#: harddrake2:230
 #, c-format
 msgid "/_Report Bug"
 msgstr "/_Hata raporla"
 
-#: harddrake2:229
+#: harddrake2:232
 #, c-format
 msgid "/_About..."
 msgstr "/_Hakkında..."
 
-#: harddrake2:232
+#: harddrake2:235
 #, c-format
 msgid "Harddrake"
 msgstr "HardDrake"
 
-#: harddrake2:236
+#: harddrake2:239
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr "Bu HardDrake' tir. Bir %s donanım yapılandırma aracıdır."
 
-#: harddrake2:269
+#: harddrake2:272
 #, c-format
 msgid "Detected hardware"
 msgstr "Bulunan donanımlar"
 
-#: harddrake2:272
-#: scannerdrake:286
+#: harddrake2:275 scannerdrake:284
 #, c-format
 msgid "Information"
 msgstr "Bilgiler"
 
-#: harddrake2:274
+#: harddrake2:277
 #, c-format
 msgid "Set current driver options"
 msgstr "Şu anki sürücü seçeneklerini ayarla"
 
-#: harddrake2:281
+#: harddrake2:284
 #, c-format
 msgid "Run config tool"
 msgstr "Yapılandırma aracını çalıştır"
 
-#: harddrake2:301
-#, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+#: harddrake2:304
+#, fuzzy, c-format
+msgid ""
+"Click on a device in the tree on the left in order to display its "
+"information here."
 msgstr "Hakkında bilgi edinmek istediğiniz aygıtı sol ağaçtan tıklayınız."
 
-#: harddrake2:322
-#: notify-x11-free-driver-switch:13
+#: harddrake2:325 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "bilinmeyen"
 
-#: harddrake2:323
+#: harddrake2:326
 #, c-format
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
-#: harddrake2:343
+#: harddrake2:346
 #, c-format
 msgid "Misc"
 msgstr "Çeşitli"
 
-#: harddrake2:427
+#: harddrake2:430
 #, c-format
 msgid "secondary"
 msgstr "ikincil"
 
-#: harddrake2:427
+#: harddrake2:430
 #, c-format
 msgid "primary"
 msgstr "birincil"
 
-#: harddrake2:431
+#: harddrake2:434
 #, c-format
 msgid "burner"
 msgstr "cdyazıcı"
 
-#: harddrake2:431
+#: harddrake2:434
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:535
+#: harddrake2:538
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Bu paketlerinde kurulu olması gerekiyor:\n"
@@ -2625,8 +2562,7 @@ msgstr "Takvim"
 msgid "Content of the file"
 msgstr "Dosya içeriği"
 
-#: logdrake:163
-#: logdrake:407
+#: logdrake:163 logdrake:407
 #, c-format
 msgid "Mail alert"
 msgstr "Posta uyarısı"
@@ -2734,7 +2670,9 @@ msgstr "Hizmet ayarları"
 
 #: logdrake:422
 #, c-format
-msgid "You will receive an alert if one of the selected services is no longer running"
+msgid ""
+"You will receive an alert if one of the selected services is no longer "
+"running"
 msgstr "Eğer seçili servislerden biri artık çalışmıyorsa bir uyarı alacaksınız"
 
 #: logdrake:429
@@ -2772,12 +2710,17 @@ msgstr "ve kullanmak istediğiniz SMTP sunucu adını (veya IP) girin"
 #: logdrake:445
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
-msgstr "\"%s\" ne geçerli bir e-posta adresi ne de varolan bir yerel kullanıcı!"
+msgstr ""
+"\"%s\" ne geçerli bir e-posta adresi ne de varolan bir yerel kullanıcı!"
 
 #: logdrake:450
 #, c-format
-msgid "\"%s\" is a local user, but you did not select a local smtp, so you must use a complete email address!"
-msgstr "\"%s\" bir yerel kullanıcı; ancak bir yerel smtp seçmemiştiniz. Yani, tam bir e-posta adresi kullanmak durumundasınız!"
+msgid ""
+"\"%s\" is a local user, but you did not select a local smtp, so you must use "
+"a complete email address!"
+msgstr ""
+"\"%s\" bir yerel kullanıcı; ancak bir yerel smtp seçmemiştiniz. Yani, tam "
+"bir e-posta adresi kullanmak durumundasınız!"
 
 #: logdrake:457
 #, c-format
@@ -2794,17 +2737,23 @@ msgstr "Sihirbaz başarıyla e-posta uyarısını devredışı bıraktı."
 msgid "Save as.."
 msgstr "Farklı Kaydet..."
 
+#: notify-x11-free-driver-switch:18 service_harddrake:474
+#: service_harddrake:487
+#, c-format
+msgid "Display driver setup"
+msgstr "Ekran kartı sürücüsü kurulumu"
+
 #: notify-x11-free-driver-switch:20
 #, c-format
-msgid "The proprietary driver for your graphic card can not be found, the system is now using the free software driver (%s)."
-msgstr "Ekran kartınız için tescilli bir sürücü bulunamadı. Sistem şu anda özgür yazılım sürücüsü(%s) kullanıyor."
+msgid "The display driver has been automatically switched to '%s'."
+msgstr ""
 
 #: notify-x11-free-driver-switch:21
 #, c-format
 msgid "Reason: %s."
 msgstr "Sebep: %s."
 
-#: scannerdrake:51
+#: scannerdrake:49
 #, c-format
 msgid ""
 "SANE packages need to be installed to use scanners.\n"
@@ -2815,316 +2764,332 @@ msgstr ""
 "\n"
 "SANE paketlerinin kurulmasını ister misiniz?"
 
-#: scannerdrake:55
+#: scannerdrake:53
 #, c-format
 msgid "Aborting Scannerdrake."
 msgstr "Scannerdrake iptal ediliyor."
 
-#: scannerdrake:60
+#: scannerdrake:58
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
-msgstr "Scannerdrake ile bir tarayıcı kurabilmek için gerekli paketler kurulamıyor."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgstr ""
+"Scannerdrake ile bir tarayıcı kurabilmek için gerekli paketler kurulamıyor."
 
-#: scannerdrake:61
+#: scannerdrake:59
 #, c-format
 msgid "Scannerdrake will not be started now."
 msgstr "Scannerdrake şimdi başlatılmayacak."
 
-#: scannerdrake:67
-#: scannerdrake:505
+#: scannerdrake:65 scannerdrake:503
 #, c-format
 msgid "Searching for configured scanners..."
 msgstr "Yapılandırılmış tarayıcılar aranıyor ..."
 
-#: scannerdrake:71
-#: scannerdrake:509
+#: scannerdrake:69 scannerdrake:507
 #, c-format
 msgid "Searching for new scanners..."
 msgstr "Yeni tarayıcılar aranıyor ..."
 
-#: scannerdrake:79
-#: scannerdrake:531
+#: scannerdrake:77 scannerdrake:529
 #, c-format
 msgid "Re-generating list of configured scanners..."
 msgstr "Yapılandırılmış tarayıcıların listesi yeniden oluşturuluyor ..."
 
-#: scannerdrake:101
+#: scannerdrake:99
 #, c-format
 msgid "The %s is not supported by this version of %s."
 msgstr "%s aygıtı %s sürümlü dağıtımca desteklenmiyor."
 
-#: scannerdrake:104
-#: scannerdrake:115
+#: scannerdrake:102 scannerdrake:113
 #, c-format
 msgid "Confirmation"
 msgstr "Onaylama"
 
-#: scannerdrake:104
+#: scannerdrake:102
 #, c-format
 msgid "%s found on %s, configure it automatically?"
 msgstr "%2$s üzerinde %1$s bulundu, otomatikmen yapılandırayım mı?"
 
-#: scannerdrake:116
+#: scannerdrake:114
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
 msgstr "%s tarayıcı veritabanında değil, elle yapılandırmak ister misiniz?"
 
-#: scannerdrake:130
+#: scannerdrake:128
 #, c-format
 msgid "Scanner configuration"
 msgstr "Tarayıcı yapılandırması"
 
-#: scannerdrake:131
+#: scannerdrake:129
 #, c-format
 msgid "Select a scanner model (Detected model: %s, Port: %s)"
 msgstr "Bir tarayıcı modeli seçin (Algılanan model %s, Port: %s)"
 
-#: scannerdrake:133
+#: scannerdrake:131
 #, c-format
 msgid "Select a scanner model (Detected model: %s)"
 msgstr "Bir tarayıcı modeli seçin (Algılanan model %s)"
 
-#: scannerdrake:134
+#: scannerdrake:132
 #, c-format
 msgid "Select a scanner model (Port: %s)"
 msgstr "Bir tarayıcı modeli seçin (Port: %s)"
 
-#: scannerdrake:136
-#: scannerdrake:139
+#: scannerdrake:134 scannerdrake:137
 #, c-format
 msgid " (UNSUPPORTED)"
 msgstr " (DESTEKLENMİYOR)"
 
-#: scannerdrake:142
+#: scannerdrake:140
 #, c-format
 msgid "The %s is not supported under Linux."
 msgstr "%s aygıtı Linux tarafından desteklenmiyor."
 
-#: scannerdrake:169
-#: scannerdrake:183
+#: scannerdrake:167 scannerdrake:181
 #, c-format
 msgid "Do not install firmware file"
 msgstr "Donanım yazılımı dosyasını kurma"
 
-#: scannerdrake:172
-#: scannerdrake:222
+#: scannerdrake:170 scannerdrake:220
 #, c-format
 msgid "Scanner Firmware"
 msgstr "Tarayıcı donanımsal yazılımı"
 
-#: scannerdrake:173
-#: scannerdrake:225
+#: scannerdrake:171 scannerdrake:223
 #, c-format
-msgid "It is possible that your %s needs its firmware to be uploaded everytime when it is turned on."
-msgstr "%s için her çalıştırılmasında bir donanım yazılımı yüklenmesi gerekebilir."
+msgid ""
+"It is possible that your %s needs its firmware to be uploaded everytime when "
+"it is turned on."
+msgstr ""
+"%s için her çalıştırılmasında bir donanım yazılımı yüklenmesi gerekebilir."
 
-#: scannerdrake:174
-#: scannerdrake:226
+#: scannerdrake:172 scannerdrake:224
 #, c-format
 msgid "If this is the case, you can make this be done automatically."
 msgstr "Durum buysa; bunun otomatikman yapılmasını sağlayabilirsiniz."
 
-#: scannerdrake:175
-#: scannerdrake:229
+#: scannerdrake:173 scannerdrake:227
 #, c-format
-msgid "To do so, you need to supply the firmware file for your scanner so that it can be installed."
-msgstr "Bunu yapmak için; tarayıcınız için bir donanım yazılımı dosyası sağlamalısınız ki aygıt kurulabilsin."
+msgid ""
+"To do so, you need to supply the firmware file for your scanner so that it "
+"can be installed."
+msgstr ""
+"Bunu yapmak için; tarayıcınız için bir donanım yazılımı dosyası "
+"sağlamalısınız ki aygıt kurulabilsin."
 
-#: scannerdrake:176
-#: scannerdrake:230
+#: scannerdrake:174 scannerdrake:228
 #, c-format
-msgid "You find the file on the CD or floppy coming with the scanner, on the manufacturer's home page, or on your Windows partition."
-msgstr "Dosyayı tarayıcı ile verilen CD veya disket üzerinde, üreticinin internet sitesinde veya bilgisayarınızın Windows bölümünde bulabilirsiniz."
+msgid ""
+"You find the file on the CD or floppy coming with the scanner, on the "
+"manufacturer's home page, or on your Windows partition."
+msgstr ""
+"Dosyayı tarayıcı ile verilen CD veya disket üzerinde, üreticinin internet "
+"sitesinde veya bilgisayarınızın Windows bölümünde bulabilirsiniz."
 
-#: scannerdrake:178
-#: scannerdrake:237
+#: scannerdrake:176 scannerdrake:235
 #, c-format
 msgid "Install firmware file from"
 msgstr "Donanım yazılımını şu kaynaklardan birinden kurun:"
 
-#: scannerdrake:180
-#: scannerdrake:188
-#: scannerdrake:239
-#: scannerdrake:246
+#: scannerdrake:178 scannerdrake:186 scannerdrake:237 scannerdrake:244
 #, c-format
 msgid "CD-ROM"
 msgstr "CD-ROM"
 
-#: scannerdrake:181
-#: scannerdrake:190
-#: scannerdrake:240
-#: scannerdrake:248
+#: scannerdrake:179 scannerdrake:188 scannerdrake:238 scannerdrake:246
 #, c-format
 msgid "Floppy Disk"
 msgstr "Disket"
 
-#: scannerdrake:182
-#: scannerdrake:192
-#: scannerdrake:241
-#: scannerdrake:250
+#: scannerdrake:180 scannerdrake:190 scannerdrake:239 scannerdrake:248
 #, c-format
 msgid "Other place"
 msgstr "Diğer konum"
 
-#: scannerdrake:198
+#: scannerdrake:196
 #, c-format
 msgid "Select firmware file"
 msgstr "Donanım yazılımı dosyasını seçin"
 
-#: scannerdrake:201
-#: scannerdrake:260
+#: scannerdrake:199 scannerdrake:258
 #, c-format
 msgid "The firmware file %s does not exist or is unreadable!"
 msgstr "%s donanım yazılımı dosyası ya hiç yok ya da okunamaz durumda!"
 
-#: scannerdrake:224
+#: scannerdrake:222
 #, c-format
-msgid "It is possible that your scanners need their firmware to be uploaded everytime when they are turned on."
-msgstr "Tarayıcılarınız için her çalıştırılmalarında bir donanım yazılımı yüklenmesi gerekebilir."
+msgid ""
+"It is possible that your scanners need their firmware to be uploaded "
+"everytime when they are turned on."
+msgstr ""
+"Tarayıcılarınız için her çalıştırılmalarında bir donanım yazılımı yüklenmesi "
+"gerekebilir."
 
-#: scannerdrake:228
+#: scannerdrake:226
 #, c-format
-msgid "To do so, you need to supply the firmware files for your scanners so that it can be installed."
-msgstr "Bunu yapmak için; tarayıcılarınız için birer donanım yazılımı dosyası sağlamalısınız ki aygıtlar kurulabilsin."
+msgid ""
+"To do so, you need to supply the firmware files for your scanners so that it "
+"can be installed."
+msgstr ""
+"Bunu yapmak için; tarayıcılarınız için birer donanım yazılımı dosyası "
+"sağlamalısınız ki aygıtlar kurulabilsin."
+
+#: scannerdrake:229
+#, c-format
+msgid ""
+"If you have already installed your scanner's firmware you can update the "
+"firmware here by supplying the new firmware file."
+msgstr ""
+"Tarayıcınız için bir donanım yazılımını önceden kurduysanız, yeni bir "
+"donanım yazılımı dosyası sağlayarak burada güncelleyebilirsiniz."
 
 #: scannerdrake:231
-#, c-format
-msgid "If you have already installed your scanner's firmware you can update the firmware here by supplying the new firmware file."
-msgstr "Tarayıcınız için bir donanım yazılımını önceden kurduysanız, yeni bir donanım yazılımı dosyası sağlayarak burada güncelleyebilirsiniz."
-
-#: scannerdrake:233
 #, c-format
 msgid "Install firmware for the"
 msgstr "Şunun için donanım yazılımı kur:"
 
-#: scannerdrake:256
+#: scannerdrake:254
 #, c-format
 msgid "Select firmware file for the %s"
 msgstr "%s için firmware dosyasını seçin"
 
-#: scannerdrake:274
+#: scannerdrake:272
 #, c-format
 msgid "Could not install the firmware file for the %s!"
 msgstr "%s için donanım yazılımı kurulamıyor!"
 
-#: scannerdrake:287
+#: scannerdrake:285
 #, c-format
 msgid "The firmware file for your %s was successfully installed."
 msgstr "%s için sağlanan donanım yazılımı başarıyla kuruldu."
 
-#: scannerdrake:297
+#: scannerdrake:295
 #, c-format
 msgid "The %s is unsupported"
 msgstr "%s desteklenmiyor"
 
-#: scannerdrake:302
+#: scannerdrake:300
 #, c-format
 msgid ""
 "The %s must be configured by system-config-printer.\n"
-"You can launch system-config-printer from the %s Control Center in Hardware section."
+"You can launch system-config-printer from the %s Control Center in Hardware "
+"section."
 msgstr ""
 "%s system-config-printer ile yapılandırılmalı.\n"
-"system-config-printer uygulamasını %s Denetim Merkezinin Donanım bölümünden çalıştırabilirsiniz."
+"system-config-printer uygulamasını %s Denetim Merkezinin Donanım bölümünden "
+"çalıştırabilirsiniz."
 
-#: scannerdrake:320
+#: scannerdrake:318
 #, c-format
 msgid "Setting up kernel modules..."
 msgstr "Çekirdek modülleri kuruluyor..."
 
-#: scannerdrake:330
-#: scannerdrake:337
-#: scannerdrake:367
+#: scannerdrake:328 scannerdrake:335 scannerdrake:365
 #, c-format
 msgid "Auto-detect available ports"
 msgstr "Mevcut limanları otomatik algıla"
 
-#: scannerdrake:331
-#: scannerdrake:377
+#: scannerdrake:329 scannerdrake:375
 #, c-format
 msgid "Device choice"
 msgstr "Aygıt seçimi"
 
-#: scannerdrake:332
-#: scannerdrake:378
+#: scannerdrake:330 scannerdrake:376
 #, c-format
 msgid "Please select the device where your %s is attached"
 msgstr "Lütfen %s limanına eklediğiniz aygıtı seçiniz"
 
-#: scannerdrake:333
+#: scannerdrake:331
 #, c-format
 msgid "(Note: Parallel ports cannot be auto-detected)"
 msgstr "(Not: Paralel limanlar otomatik algılanılamıyor)"
 
-#: scannerdrake:335
-#: scannerdrake:380
+#: scannerdrake:333 scannerdrake:378
 #, c-format
 msgid "choose device"
 msgstr "Aygıtı Seç"
 
-#: scannerdrake:369
+#: scannerdrake:367
 #, c-format
 msgid "Searching for scanners..."
 msgstr "Tarayıcılar aranıyor ..."
 
-#: scannerdrake:405
-#: scannerdrake:412
+#: scannerdrake:403 scannerdrake:410
 #, c-format
 msgid "Attention!"
 msgstr "Dikkat!"
 
-#: scannerdrake:406
+#: scannerdrake:404
 #, c-format
 msgid ""
 "Your %s cannot be configured fully automatically.\n"
 "\n"
-"Manual adjustments are required. Please edit the configuration file /etc/sane.d/%s.conf. "
+"Manual adjustments are required. Please edit the configuration file /etc/"
+"sane.d/%s.conf. "
 msgstr ""
 "%s tamamen otomatik olarak yapılandırılamaz.\n"
 "\n"
 "Elle ayarlama gerekli. Lütfen, etc/sane.d/%s.conf dosyasını düzenleyin."
 
-#: scannerdrake:407
-#: scannerdrake:416
+#: scannerdrake:405 scannerdrake:414
 #, c-format
-msgid "More info in the driver's manual page. Run the command \"man sane-%s\" to read it."
-msgstr "Daha fazla bilgi sürücünün el kitabında bulunmaktadır. \"man sane-%s\" komutunu çalıştırarak okuyabilirsiniz."
+msgid ""
+"More info in the driver's manual page. Run the command \"man sane-%s\" to "
+"read it."
+msgstr ""
+"Daha fazla bilgi sürücünün el kitabında bulunmaktadır. \"man sane-%s\" "
+"komutunu çalıştırarak okuyabilirsiniz."
 
-#: scannerdrake:409
-#: scannerdrake:418
+#: scannerdrake:407 scannerdrake:416
+#, fuzzy, c-format
+msgid ""
+"After that you may scan documents using \"XSane\" or \"%s\" from Multimedia/"
+"Graphics in the applications menu."
+msgstr ""
+"Bundan sonra uygulamalar menüsünden Çoklu Ortam/Grafikler altından \"XSane\" "
+"veya \"Kooka\" ile belgelerinizi tarayabilirsiniz."
+
+#: scannerdrake:411
 #, c-format
-msgid "After that you may scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu."
-msgstr "Bundan sonra uygulamalar menüsünden Çoklu Ortam/Grafikler altından \"XSane\" veya \"Kooka\" ile belgelerinizi tarayabilirsiniz."
+msgid ""
+"Your %s has been configured, but it is possible that additional manual "
+"adjustments are needed to get it to work. "
+msgstr ""
+"%s yapılandırıldı. Ancak, çalışabilmesi için elle ek ayarlamalar yapmanız "
+"gerekebilir."
+
+#: scannerdrake:412
+#, c-format
+msgid ""
+"If it does not appear in the list of configured scanners in the main window "
+"of Scannerdrake or if it does not work correctly, "
+msgstr ""
+"Scannerdrake ana penceresindeki yapılandırılan tarayıcılar arasında "
+"göremezseniz veya düzgün biçimde çalışmazsa, "
 
 #: scannerdrake:413
-#, c-format
-msgid "Your %s has been configured, but it is possible that additional manual adjustments are needed to get it to work. "
-msgstr "%s yapılandırıldı. Ancak, çalışabilmesi için elle ek ayarlamalar yapmanız gerekebilir."
-
-#: scannerdrake:414
-#, c-format
-msgid "If it does not appear in the list of configured scanners in the main window of Scannerdrake or if it does not work correctly, "
-msgstr "Scannerdrake ana penceresindeki yapılandırılan tarayıcılar arasında göremezseniz veya düzgün biçimde çalışmazsa, "
-
-#: scannerdrake:415
 #, c-format
 msgid "edit the configuration file /etc/sane.d/%s.conf. "
 msgstr "/etc/sane.d/%s.conf yapılandırma dosyasını düzenleyin. "
 
-#: scannerdrake:420
+#: scannerdrake:418
 #, c-format
 msgid "Congratulations!"
 msgstr "Tebrikler!"
 
-#: scannerdrake:421
-#, c-format
+#: scannerdrake:419
+#, fuzzy, c-format
 msgid ""
 "Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu."
+"You may now scan documents using \"XSane\" or \"%s\" from Multimedia/"
+"Graphics in the applications menu."
 msgstr ""
 "%s tarayıcınızın yapılandırması tamamlandı.\n"
-"Bundan sonra uygulamalar menüsünden Çoklu Ortam/Grafikler altından \"XSane\" veya \"Kooka\" ile belgelerinizi tarayabilirsiniz."
+"Bundan sonra uygulamalar menüsünden Çoklu Ortam/Grafikler altından \"XSane\" "
+"veya \"Kooka\" ile belgelerinizi tarayabilirsiniz."
 
-#: scannerdrake:446
+#: scannerdrake:444
 #, c-format
 msgid ""
 "The following scanners\n"
@@ -3137,7 +3102,7 @@ msgstr ""
 "%s\n"
 "sisteminizde mevcut.\n"
 
-#: scannerdrake:447
+#: scannerdrake:445
 #, c-format
 msgid ""
 "The following scanner\n"
@@ -3150,259 +3115,266 @@ msgstr ""
 "%s\n"
 "sisteminizde mevcut.\n"
 
-#: scannerdrake:449
-#: scannerdrake:452
+#: scannerdrake:447 scannerdrake:450
 #, c-format
 msgid "There are no scanners found which are available on your system.\n"
 msgstr "Bilgisayarınızda hiçbir mevcut tarayıcı bulunamadı.\n"
 
-#: scannerdrake:460
+#: scannerdrake:458
 #, c-format
 msgid "Scanner Management"
 msgstr "Tarayıcı Yönetimi"
 
-#: scannerdrake:466
+#: scannerdrake:464
 #, c-format
 msgid "Search for new scanners"
 msgstr "Yeni tarayıcıları ara"
 
-#: scannerdrake:472
+#: scannerdrake:470
 #, c-format
 msgid "Add a scanner manually"
 msgstr "Tarayıcıyı elle ekle"
 
-#: scannerdrake:479
+#: scannerdrake:477
 #, c-format
 msgid "Install/Update firmware files"
 msgstr "Firmware dosyalarını Kur/Güncelle"
 
-#: scannerdrake:485
+#: scannerdrake:483
 #, c-format
 msgid "Scanner sharing"
 msgstr "Tarayıcı paylaşımı"
 
-#: scannerdrake:544
-#: scannerdrake:709
+#: scannerdrake:542 scannerdrake:707
 #, c-format
 msgid "All remote machines"
 msgstr "Tüm uzak makineler"
 
-#: scannerdrake:556
-#: scannerdrake:859
+#: scannerdrake:554 scannerdrake:857
 #, c-format
 msgid "This machine"
 msgstr "Bu makine"
 
-#: scannerdrake:595
+#: scannerdrake:593
 #, c-format
 msgid "Scanner Sharing"
 msgstr "Tarayıcı Paylaşımı"
 
-#: scannerdrake:596
+#: scannerdrake:594
 #, c-format
-msgid "Here you can choose whether the scanners connected to this machine should be accessible by remote machines and by which remote machines."
-msgstr "Burada, bu makineye bağlanan tarayıcılara uzak makinelerden erişilip erişilemeyeceğini ve hangi uzak makinelerden erişilebileceğini ayarlayabilirsiniz."
+msgid ""
+"Here you can choose whether the scanners connected to this machine should be "
+"accessible by remote machines and by which remote machines."
+msgstr ""
+"Burada, bu makineye bağlanan tarayıcılara uzak makinelerden erişilip "
+"erişilemeyeceğini ve hangi uzak makinelerden erişilebileceğini "
+"ayarlayabilirsiniz."
 
-#: scannerdrake:597
+#: scannerdrake:595
 #, c-format
-msgid "You can also decide here whether scanners on remote machines should be made available on this machine."
-msgstr "Ayrıca, uzak makinelerdeki tarayıcıların bu makine tarafından kullanılıp kullanılmayacağına karar verebilirsiniz."
+msgid ""
+"You can also decide here whether scanners on remote machines should be made "
+"available on this machine."
+msgstr ""
+"Ayrıca, uzak makinelerdeki tarayıcıların bu makine tarafından kullanılıp "
+"kullanılmayacağına karar verebilirsiniz."
 
-#: scannerdrake:600
+#: scannerdrake:598
 #, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr "Bu makinedeki mevcut tarayıcılara diğer bilgisayarlardan da erişilebilir"
+msgstr ""
+"Bu makinedeki mevcut tarayıcılara diğer bilgisayarlardan da erişilebilir"
 
-#: scannerdrake:602
+#: scannerdrake:600
 #, c-format
 msgid "Scanner sharing to hosts: "
 msgstr "Şu makinelere tarayıcı paylaştırılıyor: "
 
-#: scannerdrake:607
-#: scannerdrake:624
+#: scannerdrake:605 scannerdrake:622
 #, c-format
 msgid "No remote machines"
 msgstr "Uzak makine yok"
 
-#: scannerdrake:616
+#: scannerdrake:614
 #, c-format
 msgid "Use scanners on remote computers"
 msgstr "Uzak makinelerdeki tarayıcıları kullan"
 
-#: scannerdrake:619
+#: scannerdrake:617
 #, c-format
 msgid "Use the scanners on hosts: "
 msgstr "Şu makinelerdeki tarayıcıları kullan: "
 
-#: scannerdrake:646
-#: scannerdrake:718
-#: scannerdrake:868
+#: scannerdrake:644 scannerdrake:716 scannerdrake:866
 #, c-format
 msgid "Sharing of local scanners"
 msgstr "Yerel tarayıcıların paylaşımı"
 
-#: scannerdrake:647
+#: scannerdrake:645
 #, c-format
-msgid "These are the machines on which the locally connected scanner(s) should be available:"
-msgstr "Bunlar yerel bağlanmış tarayıcı(lar)ın kullanılabileceği makineler ve ağlardır:"
+msgid ""
+"These are the machines on which the locally connected scanner(s) should be "
+"available:"
+msgstr ""
+"Bunlar yerel bağlanmış tarayıcı(lar)ın kullanılabileceği makineler ve "
+"ağlardır:"
 
-#: scannerdrake:658
-#: scannerdrake:808
+#: scannerdrake:656 scannerdrake:806
 #, c-format
 msgid "Add host"
 msgstr "Makine Ekle"
 
-#: scannerdrake:664
-#: scannerdrake:814
+#: scannerdrake:662 scannerdrake:812
 #, c-format
 msgid "Edit selected host"
 msgstr "Seçili makineyi düzenle"
 
-#: scannerdrake:673
-#: scannerdrake:823
+#: scannerdrake:671 scannerdrake:821
 #, c-format
 msgid "Remove selected host"
 msgstr "Seçili makineleri kaldır"
 
-#: scannerdrake:682
-#: scannerdrake:832
+#: scannerdrake:680 scannerdrake:830
 #, c-format
 msgid "Done"
 msgstr "Tamamlandı"
 
-#: scannerdrake:697
-#: scannerdrake:705
-#: scannerdrake:710
-#: scannerdrake:756
-#: scannerdrake:847
-#: scannerdrake:855
-#: scannerdrake:860
-#: scannerdrake:906
+#: scannerdrake:695 scannerdrake:703 scannerdrake:708 scannerdrake:754
+#: scannerdrake:845 scannerdrake:853 scannerdrake:858 scannerdrake:904
 #, c-format
 msgid "Name/IP address of host:"
 msgstr "Makinenin adı/IP adresi:"
 
-#: scannerdrake:719
-#: scannerdrake:869
+#: scannerdrake:717 scannerdrake:867
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
 msgstr "Yerel tarayıcıların kullanılabileceği ağ veya makineleri seçin:"
 
-#: scannerdrake:730
-#: scannerdrake:880
+#: scannerdrake:728 scannerdrake:878
 #, c-format
 msgid "You must enter a host name or an IP address.\n"
 msgstr "Makina adı ya da IP numarası girmelisiniz.\n"
 
-#: scannerdrake:741
-#: scannerdrake:891
+#: scannerdrake:739 scannerdrake:889
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
 msgstr "Bu makine listede zaten mevcut, tekrar eklenemez.\n"
 
-#: scannerdrake:796
+#: scannerdrake:794
 #, c-format
 msgid "Usage of remote scanners"
 msgstr "Uzak (makinedeki) tarayıcıların kullanımı"
 
-#: scannerdrake:797
+#: scannerdrake:795
 #, c-format
 msgid "These are the machines from which the scanners should be used:"
 msgstr "Liste tarayıcısı kullanılabilecek makineler gösteriliyor:"
 
-#: scannerdrake:954
+#: scannerdrake:952
 #, c-format
 msgid ""
 "saned needs to be installed to share the local scanner(s).\n"
 "\n"
 "Do you want to install the saned package?"
 msgstr ""
-"Yerel tatarıcı(lar)ın paylaştırılabilmesi için saned paketinin kurulması gerekiyor.\n"
+"Yerel tatarıcı(lar)ın paylaştırılabilmesi için saned paketinin kurulması "
+"gerekiyor.\n"
 "\n"
 "Saned paketinin kurulmasını ister misiniz?"
 
-#: scannerdrake:958
-#: scannerdrake:962
+#: scannerdrake:956 scannerdrake:960
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
 msgstr "Tarayıcıları(nız) ağda görünmeyecek."
 
-#: scannerdrake:961
+#: scannerdrake:959
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Tarayıcı(ları)nızı paylaştırmanız için gerekli paket yüklenemedi."
 
-#: service_harddrake:153
-#, c-format
-msgid "The graphic card '%s' is no more supported by the '%s' driver"
+#: service_harddrake:173
+#, fuzzy, c-format
+msgid "The graphics card '%s' is no longer supported by driver '%s'"
 msgstr "'%s ' ekran kartı artık '%s' sürücüsü tarafından desteklenmemektedir."
 
-#: service_harddrake:163
+#: service_harddrake:183
 #, c-format
 msgid "New release, reconfiguring X for %s"
 msgstr "Yeni yayın, %s  için X yeniden ayarlanıyor."
 
-#: service_harddrake:254
-#, c-format
-msgid "The proprietary kernel driver was not found for '%s' X.org driver"
+#: service_harddrake:274
+#, fuzzy, c-format
+msgid "The proprietary kernel driver was not found for X.org driver '%s'"
 msgstr "'%s' X.org sürücüsü için müseccel çekirdek sürücüsü bulunamadı"
 
-#: service_harddrake:293
+#: service_harddrake:313
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "\"%s\" donanım sınıfındaki bazı aygıtlar kaldırıldı:\n"
 
-#: service_harddrake:294
+#: service_harddrake:314
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s kaldırıldı.\n"
 
-#: service_harddrake:297
+#: service_harddrake:317
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Bazı aygıtlar eklendi: %s\n"
 
-#: service_harddrake:298
+#: service_harddrake:318
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s eklendi.\n"
 
-#: service_harddrake:386
+#: service_harddrake:406
 #, c-format
 msgid "Hardware changes in \"%s\" class (%s seconds to answer)"
 msgstr "\"%s\" sınıfında donanım değişikliği (%s saniyede cevap veriyor)"
 
-#: service_harddrake:387
+#: service_harddrake:407
 #, c-format
 msgid "Do you want to run the appropriate config tool?"
 msgstr "Buna uygun yapılandırma aracını çalıştırmak ister misiniz?"
 
-#: service_harddrake:412
+#: service_harddrake:432
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Donanım Algılama sürüyor"
 
-#: service_harddrake:430
+#: service_harddrake:453 service_harddrake:458
 #, c-format
 msgid "Display driver issue"
 msgstr "Ekran kartı sürücüsü sorunu"
 
-#: service_harddrake:431
+#: service_harddrake:454
 #, c-format
-msgid "The display driver currently configured requires you to use the 'nokmsboot' boot option to prevent the KMS driver of the kernel from being loaded in the boot process. Startup of the X server may now fail as that option was not specified."
-msgstr "Yapılandırılan ekran kartı sürücüsü, önyükleme işlemi sırasında çekirdeğin KMS sürücüsünün yüklenmesini önlemek için 'nokmsboot' önyükleme seçeneğinin kullanılmasını gerektiriyor. Bu seçenek etkinleştirilmediği için X sunucusu başlatılamayabilir."
+msgid ""
+"The display driver currently configured requires you to use the 'nokmsboot' "
+"boot option to prevent the KMS driver of the kernel from being loaded in the "
+"boot process. Startup of the X server may now fail as that option was not "
+"specified."
+msgstr ""
+"Yapılandırılan ekran kartı sürücüsü, önyükleme işlemi sırasında çekirdeğin "
+"KMS sürücüsünün yüklenmesini önlemek için 'nokmsboot' önyükleme seçeneğinin "
+"kullanılmasını gerektiriyor. Bu seçenek etkinleştirilmediği için X sunucusu "
+"başlatılamayabilir."
 
-#: service_harddrake:445
+#: service_harddrake:459
 #, c-format
-msgid "Display driver setup"
-msgstr "Ekran kartı sürücüsü kurulumu"
+msgid ""
+"Detected a loaded display driver kernel module which conflicts with the "
+"driver the X server is configured to use. Startup of the X server may now "
+"fail."
+msgstr ""
 
-#: service_harddrake:445
+#: service_harddrake:474 service_harddrake:487
 #, c-format
 msgid "The system has to be rebooted due to a display driver change."
-msgstr "Ekran kartı sürücüsü değişikliği nedeniyle sistem yeniden başlatılmalı."
+msgstr ""
+"Ekran kartı sürücüsü değişikliği nedeniyle sistem yeniden başlatılmalı."
 
-#: service_harddrake:446
+#: service_harddrake:475 service_harddrake:488
 #, c-format
 msgid "Press Cancel within %d seconds to abort."
 msgstr "Sonlandırmak için %d saniye içinde İptal tuşuna basın."
@@ -3428,12 +3400,25 @@ msgid "Hardware Configuration Tool"
 msgstr "Donanım Yapılandırma Aracı"
 
 #: ../menu/localedrake-user.desktop.in.h:1
+msgid "Regional Settings"
+msgstr "Bölgesel Ayarlar"
+
+#: ../menu/localedrake-user.desktop.in.h:2
 msgid "Language & country configuration"
 msgstr "Dil ve Ülke yapılandırması"
 
-#: ../menu/localedrake-user.desktop.in.h:2
-msgid "Regional Settings"
-msgstr "Bölgesel Ayarlar"
+#~ msgid "Its GDB trace is:"
+#~ msgstr "GDB izi :"
+
+#~ msgid "OpenOffice.org"
+#~ msgstr "OpenOffice.org"
+
+#~ msgid ""
+#~ "The proprietary driver for your graphic card can not be found, the system "
+#~ "is now using the free software driver (%s)."
+#~ msgstr ""
+#~ "Ekran kartınız için tescilli bir sürücü bulunamadı. Sistem şu anda özgür "
+#~ "yazılım sürücüsü(%s) kullanıyor."
 
 #~ msgid ""
 #~ "Display theme\n"
