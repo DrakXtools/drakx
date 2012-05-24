@@ -7,11 +7,9 @@ use modules;
 # based on install::commands
 sub modprobe {
     !@_ || $_[0] =~ /^-?-h/ and die "usage: modprobe <module> [<options...>]\n";
+    my $name;
     # kernel calls us with modprobe -q -- <module>, so ignore options
-    my $name = shift;
-    while (substr($name, 0, 1) eq "-") {
-	$name = shift;
-    }
+    do { $name= shift } while substr($name, 0, 1) eq "-";
     list_modules::load_default_moddeps();
     modules::load_with_options([ $name ], { $name => join(' ', @_) });
 }
