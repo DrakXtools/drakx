@@ -70,6 +70,7 @@ dist-svn: localcopy
 
 dist-git:
 	@cd ..; git archive --prefix=$(PACKAGE)-$(PKGVERSION)/ HEAD perl-install/{[^i]*,int*} $(OTHERS) kernel/list_modules.pm Makefile.config | xz >$(PACKAGE)-$(PKGVERSION).tar.xz;
+	@echo "WARNING: this archive is not complete !!! Regenerate it from SVN"
 
 tar:
 	rm -rf $(PACKAGE)*.tar* $(PACKAGE)-$(PKGVERSION)
