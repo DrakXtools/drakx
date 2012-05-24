@@ -2,7 +2,7 @@ package authentication; # $Id$
 
 use common;
 
-my ($authentication) = @_;
+my $authentication;
 
 sub kinds { 
     my $no_para = @_ == 0;
