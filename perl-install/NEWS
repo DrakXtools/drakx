@@ -1,3 +1,6 @@
+- fix rebooting on autoinstall by using a "wider" regexp (otherwise udevd was
+  not found by fuzzy_pidofs) and gives some time to udevd process to disappear.
+  Also, don't try to unmount /dev as it's still used by other processes.
 - pkgs.pm, http.pm: Allow to set urpm curl options in order to be able
   to make curl quiet when running an autoinstall in text mode. This can
   be set throught the new option "curl_options" in the auto_inst file.

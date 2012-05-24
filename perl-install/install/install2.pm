@@ -311,9 +311,10 @@ sub start_udev() {
 }
 
 sub stop_udev() {
-    kill 15, fuzzy_pidofs('^udevd\b');
+    kill 15, fuzzy_pidofs('udevd');
+    sleep(2);
     require fs::mount;
-    fs::mount::umount($_) foreach '/dev/pts', '/dev/shm', '/run', '/dev';
+    fs::mount::umount($_) foreach '/dev/pts', '/dev/shm', '/run';
 }
 
 #-######################################################################################
