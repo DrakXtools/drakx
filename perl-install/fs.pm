@@ -198,7 +198,7 @@ sub merge_info_from_fstab {
     my @l = grep { 
 	if ($uniq) {
 	    my $part = fs::get::mntpoint2part($_->{mntpoint}, $fstab);
-	    !$part || fs::get::is_same_hd($part, $_); #- keep it only if it is the mountpoint AND the same device
+	    !$part || fs::get::is_same_hd($part, $_); #- keep it only if it is the mount point AND the same device
 	} else {
 	    1;
 	}
