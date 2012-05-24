@@ -255,9 +255,8 @@ sub installBootloader {
     my ($in, $b, $all_hds) = @_;
     return if detect_devices::is_xbox();
 
-    if (arch() =~ /mips|arm/) {
-	    return 1;
-    }
+    return 1 if arch() =~ /mips|arm/;
+   
     install_bootloader_pkgs($in->do_pkgs, $b);
 
     eval { run_program::rooted($::prefix, 'echo | lilo -u') } if $::isInstall && !$::o->{isUpgrade} && -e "$::prefix/etc/lilo.conf" && glob("$::prefix/boot/boot.*");
