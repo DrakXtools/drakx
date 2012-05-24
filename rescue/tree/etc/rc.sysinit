@@ -21,6 +21,7 @@ mkdir /dev/shm
 mount -t devpts -o mode=620 devpts /dev/pts
 mount -t tmpfs -o mode=1777,nosuid,nodev tmpfs /dev/shm
 
+cp -a /tmp/stage2/dev/. /dev/
 /lib/udev/udevd --daemon --resolve-names=never
 udevadm trigger --type=subsystems --action=add
 udevadm trigger --type=devices --action=add
@@ -30,9 +31,7 @@ ln -s /tmp/stage2/etc/* /etc 2>/dev/null
 rm -f /etc/passwd
 cp /tmp/stage2/etc/passwd /etc/
 
-rm -f /dev ; cp -a /tmp/stage2/dev /dev
-
-mkdir -p /mnt /var/log /dev/pts
+mkdir -p /mnt /var/log
 
 >/etc/mtab
 mount -f /
