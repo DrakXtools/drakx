@@ -530,8 +530,7 @@ sub pam_sufficient_line {
 
 
 sub set_pam_authentication {
-    #my (@authentication_kinds) = @_;
-    my ($authentication_kinds, $ccreds) = @_;
+    my ($authentication_kinds, $o_ccreds) = @_;
     
     my %special = (
 	    #auth => [ difference2(\@authentication_kinds,, [ 'mount' ]) ],
@@ -586,15 +585,15 @@ sub set_pam_authentication {
 			 );
 		push @{$l[-1]}, @para_for_last;
 		#$_ = join('', map { pam_format_line($type, 'sufficient', @$_) } @l);
-		### $_ = join('', map { pam_format_line($type, sufficient($ccreds, $_->[0], $type), @$_) } @l);
-		$_ = join('', map { pam_sufficient_line($ccreds, $type, @$_) } @l);
+		### $_ = join('', map { pam_format_line($type, sufficient($o_ccreds, $_->[0], $type), @$_) } @l);
+		$_ = join('', map { pam_sufficient_line($o_ccreds, $type, @$_) } @l);
 
 		if ($control eq 'required') {
 		    #- ensure a pam_deny line is there. it will be added below
 		    ($module, @para) = ('pam_deny');
 		}
 
-		if ($type eq 'auth' && $ccreds) {
+		if ($type eq 'auth' && $o_ccreds) {
 			$_ .= pam_format_line('auth', '[default=done]', 'pam_ccreds', 'action=validate use_first_pass');
 			$_ .= pam_format_line('auth', '[default=done]', 'pam_ccreds', 'action=store');
 			$_ .= pam_format_line('auth', '[default=bad]',  'pam_ccreds', 'action=update');
@@ -604,7 +603,7 @@ sub set_pam_authentication {
 
 	    if (member($module, 'pam_deny', 'pam_permit')) {
 		$_ .= pam_format_line($type, $control, 
-				      $type eq 'account' && $ccreds ? 'pam_permit' : 'pam_deny');
+				      $type eq 'account' && $o_ccreds ? 'pam_permit' : 'pam_deny');
 	    }
 	    if (my $s = delete $before_first{$type}) {
 		$_ = $s . $_;

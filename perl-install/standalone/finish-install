@@ -214,7 +214,7 @@ sub encrypt_home {
         s/^volume $user->{name}.*//;
         $_ .= "volume $user->{name} crypt - $device $home - - -\n" if eof;
     } $::prefix . '/etc/security/pam_mount.conf';
-    # FIXME: missing parameter
+
     authentication::set_pam_authentication('mount');
 
     run_program::raw({ root => $::prefix, sensitive_arguments => 1 },
