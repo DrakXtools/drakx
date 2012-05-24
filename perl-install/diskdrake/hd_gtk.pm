@@ -285,9 +285,15 @@ sub create_automatic_notebooks {
     $may_add->(raid2kind()) if @{$all_hds->{raids}};
     $may_add->(loopback2kind()) if @{$all_hds->{loopbacks}};
 
-    @notebook = grep_index {
-	my $b = $_->{marked} or $notebook_widget->remove_page($::i);
-	$b;
+    my $i = 0;
+    @notebook = grep {
+	if ($_->{marked}) {
+	    $i++;
+	    1;
+	} else {
+	    $notebook_widget->remove_page($i);
+	    0;
+	}
     } @notebook;
     @notebook or $in->ask_warn(N("Error"), N("No hard disk drives found")), $in->exit(1);
 }
