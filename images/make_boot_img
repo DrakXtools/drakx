@@ -202,6 +202,8 @@ fi
 	my $modz = "all.kernels$I/$ext";
 	mkdir_p("$tmp_initrd/modules/$ext");
 	__ "tar xC $tmp_initrd/modules/$ext -f $modz/${type}_modules.tar";
+        _ "cp -f $modz/modules.$_ $tmp_initrd/modules/$ext" foreach qw(order builtin);
+        substInFile { s,.*/,, } "$tmp_initrd/modules/$ext/modules.order";
 	_ "depmod -b $tmp_initrd $ext";
 	# depmod keeps only available modules in modules.alias, but we want them all
 	_ "cp -f $modz/modules.alias $tmp_initrd/modules/$ext";
