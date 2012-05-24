@@ -26,6 +26,7 @@ use any;
 use log;
 use fs;
 use fs::any;
+use Scalar::Util qw(blessed dualvar);
 
 
 #-#######################################################################################
@@ -325,7 +326,7 @@ sub main {
     $SIG{SEGV} = sub { 
 	my $msg = "segmentation fault: install crashed (maybe memory is missing?)\n" . backtrace();
 	log::l("$msg\n");
-	$o and $o->ask_warn('', $msg);
+	blessed($o) and $o->ask_warn('', $msg);
 	setVirtual(1);
 	require install::steps_auto_install;
 	install::steps_auto_install_non_interactive::errorInStep($o, $msg);
