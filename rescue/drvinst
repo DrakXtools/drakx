@@ -37,9 +37,11 @@ sub install_module {
 
 #- start
 foreach my $card (detect_devices::pci_probe()) {
+    # ignoring "unknown", "Card:foobar" and the like as well as video cards:
     $card->{driver} eq 'unknown' || $card->{driver} =~ /:/ and next;
     $card->{media_type} eq "DISPLAY_VGA" and next;
 
+    # load drivers for selected categories or for everything if no args:
     if (!@ARGV || find { $card->{media_type} =~ /$_/i } @types) {
 	install_module($card->{driver}, $card->{description});
     }
