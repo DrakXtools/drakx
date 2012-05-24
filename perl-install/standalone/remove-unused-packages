@@ -7,5 +7,5 @@ use do_pkgs;
 use standalone;
 
 my $in = interactive->vnew('su');
-my $do_pkgs = do_pkgs->do_pkgs($in);
+my $do_pkgs = do_pkgs::do_pkgs($in);
 pkgs::remove_unused_packages($in, $do_pkgs);
