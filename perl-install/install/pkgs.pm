@@ -27,6 +27,32 @@ use fs::any;
 use fs::loopback;
 use c;
 
+sub cleanHeaders() {
+    rm_rf("$::prefix/tmp/headers") if -e "$::prefix/tmp/headers";
+}
+
+#- get all headers from an hdlist file.
+sub extractHeaders {
+    my ($pkgs, $media) = @_;
+    cleanHeaders();
+
+    foreach my $medium (@$media) {
+        $medium->{selected} or next;
+
+        my @l = grep { $_->id >= $medium->{start} && $_->id <= $medium->{end} } @$pkgs or next;
+        eval {
+            require packdrake;
+            my $packer = new packdrake(install::media::hdlist_on_disk($medium), quiet => 1);
+            $packer->extract_archive("$::prefix/tmp/headers", map { $_->header_filename } @l);
+        };
+        $@ and log::l("packdrake failed: $@");
+    }
+
+    foreach (@$pkgs) {
+        my $f = "$::prefix/tmp/headers/" . $_->header_filename;
+        $_->update_header($f) or log::l("unable to open header file $f"), next;
+    }
+}
 
 #- lower bound on the left ( aka 90 means [90-100[ )
 our %compssListDesc = (
