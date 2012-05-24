@@ -26,6 +26,7 @@ use any;
 use log;
 use fs;
 use fs::any;
+use fs::mount;
 
 #-#######################################################################################
 #-$O
@@ -313,7 +314,6 @@ sub start_udev() {
 sub stop_udev() {
     kill 15, fuzzy_pidofs('udevd');
     sleep(2);
-    require fs::mount;
     fs::mount::umount($_) foreach '/dev/pts', '/dev/shm', '/run';
 }
 
