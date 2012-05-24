@@ -16,7 +16,8 @@ sub read_one {
     my ($hd, $sector) = @_;
     my $info;
 
-    c::get_disk_type($hd->{file}) eq "gpt" or die "not a GPT disk";
+    c::get_disk_type($hd->{file}) eq "gpt" or die "$hd->{device} not a GPT disk ($hd->{file})";
+
     my %parts = map {
         my %p;
         print $_;
