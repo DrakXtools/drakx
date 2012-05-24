@@ -1082,6 +1082,7 @@ sub dmidecode() {
     }
 
     foreach (@l) {
+	next if /TRUNCATED/;
 	if (/^$tab\t(.*)/) {
 	    $dmis[-1]{string} .= "$1\n";
 	    $dmis[-1]{$1} = $2 if /^$tab\t(.*): (.*)$/;
