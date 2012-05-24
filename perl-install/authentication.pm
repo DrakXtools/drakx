@@ -325,7 +325,6 @@ sub set_raw {
 
     my $pam_modules = $kind2pam_kind{$kind} or log::l("kind2pam_kind does not know $kind");
     $pam_modules ||= [];
-    sshd_config_UsePAM(@$pam_modules > 0);
     set_pam_authentication($pam_modules, $authentication->{ccreds});
 
     my $nsswitch = $kind2nsswitch{$kind} or log::l("kind2nsswitch does not know $kind");
@@ -779,18 +778,6 @@ sub krb5_conf_update {
 
     MDK::Common::File::output($file, $s);
 
-}
-
-sub sshd_config_UsePAM {
-    my ($UsePAM) = @_;
-    my $sshd = "$::prefix/etc/ssh/sshd_config";
-    -e $sshd or return;
-
-    my $val = "UsePAM " . bool2yesno($UsePAM);
-    substInFile {
-	$val = '' if s/^#?UsePAM.*/$val/;
-	$_ .= "$val\n" if eof && $val;
-    } $sshd;
 }
 
 sub query_srv_names {
