@@ -9,6 +9,7 @@ use vars qw(@ISA);
 use partition_table::raw;
 use c;
 
+my $nb_primary = 128;
 #sub use_pt_type { 1 }
 
 sub read_one {
@@ -16,7 +17,7 @@ sub read_one {
     my $info;
 
     c::get_disk_type($hd->{file}) eq "gpt" or die "not a GPT disk";
-    my @pt = map {
+    my %parts = map {
         my %p;
         print $_;
         if (/^([^ ]*) ([^ ]*) ([^ ]*) (.*) \((\d*),(\d*),(\d*)\)$/) {
@@ -27,8 +28,19 @@ sub read_one {
             $p{start} = $5;
             $p{size} = $7;
         }
-        \%p;
+        $p{part_number} => \%p;
     } c::get_disk_partitions($hd->{file});
+
+    my @pt = map {
+	my $part_number = $_;
+	if ($parts{$part_number}) {
+	    $parts{$part_number};
+	} else {
+	    my %p;
+	    $p{part_number} = $part_number;
+	    \%p;
+	}
+    } (1..$nb_primary);
 
     [ @pt ], $info;
 }
@@ -62,13 +74,6 @@ sub initialize {
 }
 
 sub can_add { &can_raw_add }
-sub can_raw_add { 1 }
-sub raw_add {
-    my ($hd, $raw, $part) = @_;
-    $hd->can_raw_add or die "raw_add: partition table already full";
-    push @$raw, $part;
-}
-
 sub adjustStart {}
 sub adjustEnd {}
 
