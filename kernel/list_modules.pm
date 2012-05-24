@@ -160,7 +160,7 @@ our %l = (
 	     qw(ums-jumpshot ums-karma ums-onetouch ums-realtek ums-sddr09 ums-sddr55 ums-usbat usb-storage) ],
     firewire => [ qw(sbp2) ],
     cdrom => [ qw(sr_mod) ],
-    card_reader => [ qw(sdhci tifm_sd tifm_7xx1) ],
+    card_reader => [ qw(sdhci sdhci-pci tifm_sd tifm_7xx1) ],
   },
 
   ################################################################################
