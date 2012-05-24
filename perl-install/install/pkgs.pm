@@ -266,11 +266,13 @@ sub select_by_package_names_or_die {
     }
 }
 
+my @suggested_package_ids;
 sub _resolve_requested_and_check {
     my ($packages, $state, $requested) = @_;
 
     my @l = $packages->resolve_requested($packages->{rpmdb}, $state, $requested,
 					 callback_choices => \&packageCallbackChoices, no_suggests => $::o->{no_suggests});
+    @suggested_package_ids = uniq(@suggested_package_ids, map { $packages->{depslist}[$_]->id } grep { $state->{selected}{$_}{suggested} } keys $state->{selected});
 
     my $error;
     if (find { !exists $state->{selected}{$_} } keys %$requested) {
@@ -322,7 +324,10 @@ sub unselectAllPackages {
     my %keep_selected;
     log::l("unselecting all packages...");
     foreach (@{$packages->{depslist}}) {
+	log::l("will unselect suggested " . $_->name) if member($_->id, @suggested_package_ids);
 	my $to_select = $_->flag_base || $_->flag_installed && $_->flag_selected;
+	# unselect suggested packages if minimal install:
+	undef $to_select if $::o->{no_suggests} && member($_->id, @suggested_package_ids);
 	if ($to_select) {
 	    #- keep track of packages that should be kept selected.
 	    $keep_selected{$_->id} = $_;
