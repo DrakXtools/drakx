@@ -523,6 +523,11 @@ sub init_env_share() {
     }
 }
 
+sub init_mouse() {
+    eval { $o->{mouse} = mouse::detect($o->{modules_conf}) } if !$o->{mouse} && !$o->{nomouseprobe};
+    mouse::load_modules($o->{mouse});
+}
+
 sub process_auto_steps() {
     foreach (@::auto_steps) {
 	if (my $s = $o->{steps}{/::(.*)/ ? $1 : $_}) {
@@ -624,10 +629,7 @@ sub main {
     devices::make('tty') if $o->{interactive} eq "curses";
 
     #- needed very early for install::steps_gtk
-    if (!$::testing) {
-	eval { $o->{mouse} = mouse::detect($o->{modules_conf}) } if !$o->{mouse} && !$o->{nomouseprobe};
-	mouse::load_modules($o->{mouse});
-    }
+    init_mouse() if !$::testing;
 
     #- for auto_install compatibility with old $o->{lang},
     #- and also for --lang and --flang
