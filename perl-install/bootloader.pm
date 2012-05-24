@@ -409,6 +409,8 @@ sub read_silo() {
     $bootloader->{method} = 'silo';
     $bootloader;
 }
+
+# FIXME: actually read back previous conf
 sub read_pmon2000() {
     +{ method => 'pmon2000' };
 }
@@ -418,6 +420,8 @@ sub read_uboot() {
 sub read_cromwell() {
     +{ method => 'cromwell' };
 }
+
+
 sub read_yaboot() { 
     my $bootloader = read_lilo_like("/etc/yaboot.conf", \&yaboot2file);
     $bootloader->{method} = 'yaboot';
