@@ -27,7 +27,6 @@ use log;
 use fs;
 use fs::any;
 
-
 #-#######################################################################################
 #-$O
 #-the big struct which contain, well everything (globals + the interactive methods ...)
@@ -324,6 +323,7 @@ sub main {
     $SIG{SEGV} = sub { 
 	my $msg = "segmentation fault: install crashed (maybe memory is missing?)\n" . backtrace();
 	log::l("$msg\n");
+	# perl_checker: require UNIVERSAL
 	UNIVERSAL::can($o, 'ask_warn') and $o->ask_warn('', $msg);
 	setVirtual(1);
 	require install::steps_auto_install;
