@@ -327,6 +327,13 @@ sub init_local_install {
 	$o->{mouse} = mouse::fullname2mouse('Universal|Any PS/2 & USB mice');
 }
 
+sub init_brltty() {
+    symlink "/tmp/stage2/$_", $_ foreach "/etc/brltty";
+    devices::make($_) foreach $o->{brltty}{device} ? $o->{brltty}{device} : qw(ttyS0 ttyS1);
+    devices::make("vcsa");
+    run_program::run("brltty");
+}
+
 sub sig_segv_handler() {
     my $msg = "segmentation fault: install crashed (maybe memory is missing?)\n" . backtrace();
     log::l("$msg\n");
@@ -549,12 +556,7 @@ sub main {
     harddrake::sound::configure_sound_slots($o->{modules_conf});
 
     #- need to be after oo-izing $o
-    if ($o->{brltty}) {
-	symlink "/tmp/stage2/$_", $_ foreach "/etc/brltty";
-	devices::make($_) foreach $o->{brltty}{device} ? $o->{brltty}{device} : qw(ttyS0 ttyS1);
-	devices::make("vcsa");
-	run_program::run("brltty");
-    }
+    init_brltty() if $o->{brltty};
 
     devices::make('tty') if $o->{interactive} eq "curses";
 
