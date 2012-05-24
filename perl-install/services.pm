@@ -220,7 +220,7 @@ sub ask_ {
 sub ask_standalone_gtk {
     my ($_in) = @_;
     my ($l, $on_services) = services();
-    my @xinetd_services = xinetd_services();
+    my @xinetd_services = map { $_->[0] } xinetd_services();
 
     require ugtk2;
     ugtk2->import(qw(:wrappers :create));
@@ -351,7 +351,7 @@ sub xinetd_services() {
 	    push @xinetd_services, [ $xinetd_name, $on_off eq 'on' ];
 	}
     }
-    map { $_->[0] } @xinetd_services;
+    @xinetd_services;
 }
 
 sub services_raw() {
