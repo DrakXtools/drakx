@@ -23,7 +23,6 @@ my $its_reset = 0;
 
 $ugtk2::wm_icon = "/usr/share/mcc/themes/default/time-mdk.png";
 
-#my $conffile = '/etc/sysconfig/ntpclock';
 my $ntpfile = '/etc/ntp.conf';
 my $ntpdlock = '/var/lock/subsys/ntpd';
 
@@ -47,8 +46,6 @@ $button_time->signal_connect(clicked => sub {
                                    }
                                    $label_timezone->set_text($timezone->{timezone});
 			       });
-#my $button_ntp = gtknew('Button', text => N("Use NTP"));
-#$button_time->signal_connect(clicked => sub { ask_ntp($in, $) });
 
 my $drawing_area;
 
