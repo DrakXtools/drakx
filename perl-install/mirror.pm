@@ -66,6 +66,18 @@ sub _mirrors_raw_install {
     @lines;
 }
 
+sub _mirrors_raw_standalone {
+    my ($list) = @_;
+    my @lines;
+    if (ref($downloader)) {
+        @lines = $downloader->($list);
+        @lines or die "mirror list not found";
+    } else {
+        die "Missing download callback";
+    }
+    @lines;
+}
+
 sub mirrors_raw {
     my ($product_id) = @_;
 
@@ -78,12 +90,7 @@ sub mirrors_raw {
     if ($::isInstall) {
         @lines = _mirrors_raw_install($list);
     } else {
-        if (ref($downloader)) {
-            @lines = $downloader->($list);
-            @lines or die "mirror list not found";
-        } else {
-            die "Missing download callback";
-        }
+        @lines = _mirrors_raw_standalone($list);
     }
     map { common::parse_LDAP_namespace_structure(chomp_($_)) } @lines;
 }
