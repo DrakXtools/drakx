@@ -262,6 +262,11 @@
 <from dir="/lib/udev/rules.d">
   10-dm.rules
   13-dm-disk.rules
+  64-md-raid.rules
+  <filter subst="s/bash/sh/">
+    65-md-incremental.rules
+ </filter>
+
   11-dm-lvm.rules
   95-dm-notify.rules
 </from>
@@ -274,6 +279,9 @@
   libresolv.so.2
   ld-linux*.so.2
   libfuse.so.2
+
+  <!-- needed by dmraid -->
+  libdmraid-events-isw.so
 </from>
 </filter>
 

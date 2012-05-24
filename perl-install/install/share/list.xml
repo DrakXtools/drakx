@@ -80,7 +80,8 @@
   </if>
 </from>
 
-
+<!-- when adding udev rules, think whether they're needed in rescue too
+     (../../../rescue/list.xml) -->
 <from dir="/lib/udev/rules.d">
   10-dm.rules
   11-dm-lvm.rules
