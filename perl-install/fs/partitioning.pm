@@ -45,7 +45,7 @@ sub choose_partitions_to_format {
     $in->ask_from_(
         { messages => N("Choose the partitions you want to format"),
 	  interactive_help_id => 'formatPartitions',
-          advanced_messages => N("Check bad blocks?"),
+          advanced_messages => N("Check for bad blocks?"),
         },
         [ map { 
 	    my $e = $_;
