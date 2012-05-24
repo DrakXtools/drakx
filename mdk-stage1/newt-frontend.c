@@ -32,7 +32,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/time.h>
-#include "newt/newt.h"
+#include <newt.h>
 
 #include <probing.h>
 
