@@ -175,11 +175,18 @@ our %l = (
     pcmcia => [
       if_(arch() !~ /^sparc/, qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket)), # cb_enabler
     ],
-    hid => [ qw(hid-a4tech hid-apple hid-belkin hid-cherry hid-chicony
-                hid-cypress hid-drff hid-ezkey hid-gaff hid-gyration hid-kensington hid-kye
-                hid-keytouch hid-logitech hid-logitech-dj hid-microsoft hid-monterey hid-multilaser hid-ntrig
-                hid-petalynx hid-pl hid-samsung hid-sjoy hid-sony hid-sunplus
-                hid-tmff hid-topseed hid-uclogic hid-zpff hid-wacom ff-memless)],
+    hid => [ qw(ff-memless hid-a4tech hid-apple hid-belkin hid-cypress
+	    hid-cherry hid hid-axff hid-dr hid-elecom hid-emsff hid-holtekff
+	    hid-hyperv hid-lcpower hid-magicmouse hid-multitouch hid-ortek
+	    hid-picolcd hid-primax hid-prodikeys hid-roccat hid-roccat-arvo
+	    hid-roccat-common hid-roccat-isku hid-roccat-kone
+	    hid-roccat-koneplus hid-roccat-kovaplus hid-roccat-pyra
+	    hid-speedlink hid-twinhan hid-waltop hid-wiimote hid-zydacron
+	    hid-chicony hid-drff hid-ezkey hid-gaff hid-gyration hid-kensington
+	    hid-keytouch hid-kye hid-logitech hid-logitech-dj hid-microsoft
+	    hid-monterey hid-multilaser hid-ntrig hid-petalynx hid-pl
+	    hid-samsung hid-sjoy hid-sony hid-sunplus hid-tmff hid-topseed
+	    hid-uclogic hid-wacom hid-zpff ) ],
    #serial_cs
    #ftl_cs 3c575_cb apa1480_cb epic_cb serial_cb tulip_cb iflash2+_mtd iflash2_mtd
    #cb_enabler
