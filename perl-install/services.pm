@@ -214,7 +214,7 @@ sub ask_ {
 sub ask_standalone_gtk {
     my ($_in) = @_;
     my ($l, $on_services) = services();
-    my @xinetd_services = map { $_->[0] } @{(services_raw())[1]};
+    my @xinetd_services = xinetd_services();
 
     require ugtk2;
     ugtk2->import(qw(:wrappers :create));
@@ -335,6 +335,17 @@ sub doit {
 	    }
 	}
     }
+}
+
+sub xinetd_services() {
+    local $ENV{LANGUAGE} = 'C';
+    my @xinetd_services;
+    foreach (run_program::rooted_get_stdout($::prefix, '/sbin/chkconfig', '--list', '--type', 'xinetd')) {
+	if (my ($xinetd_name, $on_off) = m!^\t(\S+):\s*(on|off)!) {
+	    push @xinetd_services, [ $xinetd_name, $on_off eq 'on' ];
+	}
+    }
+    map { $_->[0] } @xinetd_services;
 }
 
 sub services_raw() {
