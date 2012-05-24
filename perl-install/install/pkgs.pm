@@ -325,10 +325,12 @@ sub unselectAllPackages {
     my %keep_selected;
     log::l("unselecting all packages...");
     foreach (@{$packages->{depslist}}) {
-	log::l("will unselect suggested " . $_->name) if member($_->id, @suggested_package_ids);
 	my $to_select = $_->flag_base || $_->flag_installed && $_->flag_selected;
 	# unselect suggested packages if minimal install:
-	undef $to_select if $::o->{no_suggests} && member($_->id, @suggested_package_ids);
+	if ($::o->{no_suggests} && member($_->id, @suggested_package_ids)) {
+	    log::l("unselecting suggested package " . $_->name);
+	    undef $to_select;
+	}
 	if ($to_select) {
 	    #- keep track of packages that should be kept selected.
 	    $keep_selected{$_->id} = $_;
