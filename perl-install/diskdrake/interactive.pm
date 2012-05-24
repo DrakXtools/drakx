@@ -820,7 +820,7 @@ sub Resize {
 	#- for these, we have tools to resize partition table
 	#- without losing data (or at least we hope so :-)
 	if (%nice_resize) {
-	    ask_alldatamaybelost($in, $part, N_("All data on this partition should be backed-up")) or return;
+	    ask_alldatamaybelost($in, $part, N_("All data on this partition should be backed up")) or return;
 	} else {
 	    ask_alldatawillbelost($in, $part, N_("After resizing partition %s, all data on this partition will be lost")) or return;
 	}
