@@ -63,6 +63,7 @@ sub packageMedium {
    my ($packages, $p) = @_;
    URPM::pkg2media($packages->{media}, $p) || {};
 }
+
 sub packagesOfMedium {
     my ($packages, $medium) = @_;
 
@@ -104,6 +105,7 @@ sub umount_phys_medium {
     }
     $ok;
 }
+
 sub _mount_phys_medium {
     my ($phys_m, $o_rel_file, $b_force_change) = @_;
 
@@ -284,6 +286,7 @@ sub _iso_phys_media {
 	mntpoint => $mntpoint, rel_path => $rel_path,
     };
 }
+
 sub _get_phys_media_iso {
     my ($all_hds, $main_phys_m, $names) = @_;
 
@@ -296,6 +299,7 @@ sub _get_phys_media_iso {
 	$m;
     } @ISOs;
 }
+
 sub _look_for_ISO_images {
     my ($main_iso) = @_;
 
@@ -332,6 +336,7 @@ sub _open_file_and_size {
     my $fh = common::open_file($f) or return;
     $size, $fh;
 }
+
 sub getFile_ {
     my ($phys_m, $f) = @_;
     log::l("getFile $f on " . phys_medium_to_string($phys_m) . "");
@@ -339,6 +344,7 @@ sub getFile_ {
     my ($_size, $fh) = get_file_and_size($phys_m, $f) or return;
     $fh;
 }
+
 sub get_file_and_size {
     my ($phys_m, $f) = @_;
 
@@ -367,6 +373,7 @@ sub getAndSaveFile_ {
     my $fh = getFile_($phys_m, $file) or return;
     _getAndSaveFile_raw($fh, $local);
 }
+
 sub _getAndSaveFile_progress {
     my ($in_wait, $msg, $phys_m, $file, $local) = @_;
     my ($size, $fh) = get_file_and_size($phys_m, $file) or return;
@@ -376,6 +383,7 @@ sub _getAndSaveFile_progress {
 	_getAndSaveFile_raw($fh, $local);
     }
 }
+
 sub _getAndSaveFile_raw {
     my ($fh, $local) = @_;
 
@@ -386,6 +394,7 @@ sub _getAndSaveFile_raw {
     while (<$fh>) { syswrite($F, $_) or unlink($local), die("getAndSaveFile($local): $!") }
     1;
 }
+
 sub _getAndSaveFile_progress_raw {
     my ($in_wait, $msg, $size, $fh, $local) = @_;
 
@@ -393,6 +402,7 @@ sub _getAndSaveFile_progress_raw {
     open(my $out, ">$local") or log::l("getAndSaveFile(opening $local): $!"), return;
     _print_with_progress($in_wait, $msg, $size, $fh, $out) or unlink($local), die("getAndSaveFile($local): $!");
 }
+
 sub _print_with_progress {
     my ($in_wait, $msg, $size, $in, $out) = @_;
 
@@ -416,7 +426,6 @@ sub _print_with_progress {
     }
     1;
 }
-
 
 sub urpmidir() {
     my $v = "$::prefix/var/lib/urpmi";
