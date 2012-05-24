@@ -487,6 +487,16 @@ sub init_env_share() {
     }
 }
 
+sub process_auto_steps() {
+    foreach (@::auto_steps) {
+	if (my $s = $o->{steps}{/::(.*)/ ? $1 : $_}) {
+	    $s->{auto} = $s->{hidden} = 1;
+	} else {
+	    log::l("ERROR: unknown step $_ in auto_steps");
+	}
+    }
+}
+
 #-######################################################################################
 #- MAIN
 #-######################################################################################
@@ -627,13 +637,7 @@ sub main {
     log::l("META_CLASS=$o->{meta_class}");
     $ENV{META_CLASS} = $o->{meta_class}; #- for Ia Ora
 
-    foreach (@::auto_steps) {
-	if (my $s = $o->{steps}{/::(.*)/ ? $1 : $_}) {
-	    $s->{auto} = $s->{hidden} = 1;
-	} else {
-	    log::l("ERROR: unknown step $_ in auto_steps");
-	}
-    }
+    process_auto_steps();
 
     $ENV{COLUMNS} ||= 80;
     $ENV{LINES}   ||= 25;
