@@ -639,7 +639,7 @@ sub installPackages {
 
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'progress') {
-	    $o->{install_start_time} = time() unless $o->{install_start_time};
+	    $o->{install_start_time} ||= time();
 	    gtkval_modify(\$pkg_progress, $total ? $amount / $total : 0);
 
 	    my $dtime = time() - $o->{install_start_time};
@@ -696,7 +696,7 @@ sub summary_prompt {
 	push @table, [], [ gtknew('HBox', children_tight => [ $e->{widget}, gtknew('Alignment', width => 10) ]),
 			   gtknew('Button', text => N("Configure"), clicked => sub { 
 						 $w->{rwindow}->hide;
-						 my ($old_icon, $old_title) = get_default_step_items();
+						 my ($_old_icon, $old_title) = get_default_step_items();
 						 set_default_step_items($e->{banner_title} || $old_title);
 						 $e->{clicked}(); 
 						 set_default_step_items($old_title);

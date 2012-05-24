@@ -1,6 +1,7 @@
 package install::pkgs; # $Id$
 
 use strict;
+use feature 'state';
 
 BEGIN {
     # needed before "use URPM"
@@ -781,7 +782,13 @@ sub _install_raw {
             log::l($msg);
             log::l($msg2);
             return 0 if $packages->{options}{auto};
-            $::o->ask_yesorno(N("Warning"), "$msg\n\n$msg2");
+            state $do_not_ask;
+            return if $do_not_ask;
+            $::o->ask_from_({ messages => "$msg\n\n$msg2" }, [ 
+                                { val => \$do_not_ask,
+                                  type => 'bool', text => N("Do not ask again"),
+                              },
+			    ]);
         },
         copy_removable => sub {
             my ($medium) = @_;
