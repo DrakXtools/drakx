@@ -1,3 +1,5 @@
+- any.pm:
+  o bind mount /dev inside chroot rather than copy nodes (mga#5730)
 - packageByName: Fix noarch handling/search on 64bit as they're in 32 and 64 bit
   media and in some cases it may return the not-installed rpm while the other is.
   (it was found by default.jpg/xorg.conf not being done by configureX step, even

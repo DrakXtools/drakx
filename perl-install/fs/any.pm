@@ -6,6 +6,7 @@ use strict;
 use common;
 use fsedit;
 use fs::mount_point;
+use run_program;
 
 sub get_hds {
     my ($all_hds, $fstab, $manual_fstab, $partitioning_flags, $skip_mtab, $o_in) = @_;
@@ -92,12 +93,10 @@ sub prepare_minimal_root() {
 
     fs::any::create_minimal_files();
 
+    run_program::run('mount', '--bind', '/dev', "$::prefix/dev");
     eval { fs::mount::mount('none', "$::prefix/proc", 'proc') };
     eval { fs::mount::mount('none', "$::prefix/sys", 'sysfs') };
     eval { fs::mount::usbfs($::prefix) };
-
-    # copy all needed devices, for bootloader install and mkinitrd
-    cp_af('/dev', $::prefix);
 }
 
 sub getAvailableSpace {
