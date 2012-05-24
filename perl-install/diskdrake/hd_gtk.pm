@@ -250,13 +250,8 @@ sub current_kind_changed {
     my ($_in, $kind) = @_;
 
     $_->destroy foreach $kind->{display_box}->get_children;
-
-    my $v = $kind->{val};
-    my @parts = 
-      $kind->{type} eq 'raid' ? grep { $_ } @$v :
-      $kind->{type} eq 'loopback' ? @$v : fs::get::hds_fstab_and_holes($v);
-    my $totalsectors = 
-      $kind->{type} =~ /raid|loopback/ ? sum(map { $_->{size} } @parts) : $v->{totalsectors};
+    my @parts = kind2parts($kind);
+    my $totalsectors = kind2sectors($kind, @parts);
     create_buttons4partitions($kind, $totalsectors, @parts);
 }
 
@@ -431,6 +426,21 @@ sub createOrChangeType {
 	return if $fs_type eq $part->{fs_type};
 	$in->ask_warn('', isBusy($part) ? N("Use ``Unmount'' first") : N("Use ``%s'' instead (in expert mode)", N("Type")));
     }
+}
+
+sub kind2parts {
+    my ($kind) = @_;
+    my $v = $kind->{val};
+    my @parts = 
+      $kind->{type} eq 'raid' ? grep { $_ } @$v :
+      $kind->{type} eq 'loopback' ? @$v : fs::get::hds_fstab_and_holes($v);
+    @parts;
+}
+
+sub kind2sectors {
+    my ($kind, @parts) = @_;
+    my $v = $kind->{val};
+    $kind->{type} =~ /raid|loopback/ ? sum(map { $_->{size} } @parts) : $v->{totalsectors};
 }
 
 ################################################################################

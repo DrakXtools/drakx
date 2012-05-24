@@ -287,10 +287,9 @@ sub warn_reboot_needed {
 
 sub create_display_box {
     my ($kind, $resize, $fill_empty, $button) = @_;
-    # perl_checker: require UNIVERSAL
-    my @parts = fs::get::hds_fstab_and_holes($kind->{val}) if UNIVERSAL::can($kind->{val}, 'first_usable_sector,');
 
-    my $totalsectors = $kind->{val}{totalsectors};
+    my @parts = diskdrake::hd_gtk::kind2parts($kind);
+    my $totalsectors = diskdrake::hd_gtk::kind2sectors($kind, @parts);
 
     my $width = 540;
     my $minwidth = 40;
