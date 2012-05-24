@@ -473,7 +473,7 @@ sub config {
 
 
     if ($in->ask_from("BTTV configuration", N("For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-detect the rights parameters.
-If your card is misdetected, you can force the right tuner and card types here. Just select your tv card parameters if needed."),
+If your card is misdetected, you can force the right tuner and card types here. Just select your TV card parameters if needed."),
                       [
                        { label => N("Card model:"), val => \$conf{card}, list => [ keys %cards_list ], default => -1, sort =>1, separator => '|' },
                        { label => N("Tuner type:"), val => \$conf{tuner}, list => [keys %tuners_lst], format => sub { $tuners_lst{$_[0]} }, sort => 1, separator => '|' },
