@@ -187,9 +187,7 @@ sub free_mds {
 
 sub detect_during_install {
     my (@parts) = @_;
-    foreach (allmodules()) {
-	eval { modules::load($_) };
-    }
+    eval { modules::load($_) } foreach allmodules();
 
     # udev may have started raids but failed due to not yet loaded modules and
     # they remains inactive ("md: personality for level 1 is not loaded!")
