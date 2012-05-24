@@ -1310,7 +1310,7 @@ sub toggle_expansion {
 # compatible with Combo since its API is quite nice.
 
 package Gtk2::OptionMenu;
-use common;
+use MDK::Common;
 
 # try to get combox <==> option menu mapping
 sub set_popdown_strings {
@@ -1356,7 +1356,7 @@ sub set_text {
 
 
 package Gtk2::ComboBox;
-use common;
+use MDK::Common;
 
 # try to get combox <==> option menu mapping
 sub set_popdown_strings {
@@ -1516,7 +1516,7 @@ sub calc_size {
 sub GET_SIZE {
   my ($cell, $widget, $_cell_area) = @_;
 
-  my $layout = $cell->get_layout($widget);
+  my $layout = get_layout($cell, $widget);
   $layout->set_text($cell->get('label'));
 
   return calc_size($cell, $layout);
@@ -1540,7 +1540,7 @@ sub RENDER { # not that efficient...
       : 'normal';
   }
 
-  my $layout = $cell->get_layout($widget);
+  my $layout = get_layout($cell, $widget);
   $layout->set_text($cell->get('label'));
 
   my $is_rtl = lang::text_direction_rtl();
