@@ -212,7 +212,7 @@ sub make($) {
 
 sub simple_partition_scan {
     my ($part) = @_;
-    $part->{device} =~ /([hsv]d[a-z])(\d+)$/;
+    $part->{device} =~ /((?:[hsv]|xv)d[a-z])(\d+)$/;
 }
 sub part_number {
     my ($part) = @_;
@@ -230,7 +230,7 @@ sub prefix_for_dev {
 
 sub should_prefer_UUID {
     my ($dev) = @_;
-    $dev =~ /^([hsv]d)/;
+    $dev =~ /^((?:[hsv]|xv)d)/;
 }
 
 sub symlink_now_and_register {
