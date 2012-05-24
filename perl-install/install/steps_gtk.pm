@@ -423,6 +423,7 @@ sub choosePackagesTree {
 				my $state = $packages->{state} ||= {};
 				$packages->{rpmdb} ||= install::pkgs::rpmDbOpen(); #- WORKAROUND
 				my @l = $isSelection ? $packages->resolve_requested($packages->{rpmdb}, $state, \%l,
+                                                                                    no_suggests => $::o->{no_suggests},
 										    callback_choices => \&install::pkgs::packageCallbackChoices) :
 						       $packages->disable_selected($packages->{rpmdb}, $state,
 										   map { $packages->{depslist}[$_] } keys %l);
@@ -469,7 +470,8 @@ sub choosePackagesTree {
 				    #- disable selection (or unselection).
 				    $packages->{rpmdb} ||= install::pkgs::rpmDbOpen(); #- WORKAROUND
 				    $isSelection ? $packages->disable_selected($packages->{rpmdb}, $state, @l) :
-				                   $packages->resolve_requested($packages->{rpmdb}, $state, { map { $_->id => 1 } @l });
+				                   $packages->resolve_requested($packages->{rpmdb}, $state, { map { $_->id => 1 } @l },
+                                                                                no_suggests => $::o->{no_suggests});
 				} else {
 				    #- keep the changes, update visible state.
 				    foreach (@l) {

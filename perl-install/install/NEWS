@@ -1,6 +1,8 @@
 - do not offer to upgrade mdv 201[1-9] (mga#5004)
 - individual package selection:
   o fix a crash
+  o honor "no suggests" option (mga#3467)
+  o show again package descriptions (mga#549)
 - include missing perl modules (mga#5528)
 - partitioning wizard:
   o do not crash on selecting a RAID device
@@ -18,8 +20,6 @@
   o offer to not ask again about missing packages
   o unselect already suggested packages when performing a minimal
     install if "no suggests" option was choosen (mga#5209)
-- individual package selection:
-  o show again package descriptions (mga#549)
 - add missing udev programs needed for persistant storage rules.
 - make sure ranges are always within limits in text mode (mga#646)
 - install btrfs-progs if needed (mga#5274)
