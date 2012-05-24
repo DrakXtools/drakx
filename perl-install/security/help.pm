@@ -91,7 +91,7 @@ and crontab(1))."),
 
 'enable_password' => N("Use password to authenticate users."),
 
-'enable_promisc_check' => N("Activate ethernet cards promiscuity check."),
+'enable_promisc_check' => N("Activate Ethernet cards promiscuity check."),
 
 'enable_security_check' => N("Activate daily security check."),
 
