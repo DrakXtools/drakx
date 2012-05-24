@@ -395,6 +395,10 @@ sub Hd_info {
 # per-part actions
 ################################################################################
 
+sub is_LVM_resizable {
+    my ($part) = @_;
+    member($part->{fs_type}, qw(btrfs ext3 ext4 reiserfs xfs));
+}
 sub part_possible_actions {
     my ($_in, $hd, $part, $all_hds) = @_;
     $part or return;
@@ -405,7 +409,7 @@ sub part_possible_actions {
         N_("Type")             => '!isBusy && $::expert && (!readonly || $part->{pt_type} == 0x83)',
         N_("Options")          => '!isSwap($part) && !isNonMountable && $::expert',
         N_("Label")            => '!isNonMountable && $::expert && fs::format::canEditLabel($part)',
-        N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && LVM_resizable',
+        N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && is_LVM_resizable',
         N_("Format")           => '!isBusy && !isRawLVM && !isPartOfLVM && (!readonly && ($::expert || $::isStandalone) || fs::type::isRawLUKS($part))',
         N_("Mount")            => '!isBusy && (hasMntpoint || isSwap) && maybeFormatted && ($::expert || $::isStandalone)',
         N_("Add to RAID")      => '!isBusy && isRawRAID && (!isSpecial || isRAID)',
@@ -424,7 +428,6 @@ sub part_possible_actions {
     my %macros = (
 	readonly => '$hd->{readonly}',
         hasMntpoint => '$part->{mntpoint}',
-	LVM_resizable => 'member($part->{fs_type}, qw(btrfs ext3 ext4 reiserfs xfs))',
 	canModifyRAID => 'isPartOfRAID($part) && !isMounted(fs::get::device2part($part->{raid}, $all_hds->{raids}))',
     );
     if (isEmpty($part)) {
