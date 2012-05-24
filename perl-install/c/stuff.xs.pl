@@ -332,6 +332,9 @@ get_usb_ups_name(int fd)
 
 
 int
+res_init()
+
+int
 isNetDeviceWirelessAware(device)
   char * device
   CODE:
