@@ -30,18 +30,18 @@ tar:
 		echo "Unknown SCM (not SVN nor GIT)";\
 		exit 1; \
 	fi;
-	$(info $(PRODUCT)-$(VERSION).tar.bz2 is ready)
+	$(info $(PRODUCT)-$(VERSION).tar.xz is ready)
 
 dist-svn:
 	mkdir -p $(PRODUCT)-$(VERSION) 
 	svn export -q -rBASE . $(PRODUCT)-$(VERSION)/images
 	svn export -q -rBASE ../kernel $(PRODUCT)-$(VERSION)/kernel
 	cp ../Makefile.config $(PRODUCT)-$(VERSION)/
-	tar cfj $(PRODUCT)-$(VERSION).tar.bz2 $(PRODUCT)-$(VERSION)
+	tar cfj $(PRODUCT)-$(VERSION).tar.xz $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
 
 dist-git:
-	@cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD images kernel Makefile.config | bzip2 >images/$(PRODUCT)-$(VERSION).tar.bz2;
+	@cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD images kernel Makefile.config | xz >images/$(PRODUCT)-$(VERSION).tar.xz;
 
 clean:
 	rm -rf images isolinux all.kernels modules.description
