@@ -412,6 +412,21 @@ sub create_widget {
 	    my $width = $w->{'-sw'} - ($w->{'-vscrollbar'} ? 1 : 0);
 	    $w->text(join("\n", _messages($width, $text)));
 	};
+    } elsif ($e->{type} eq 'range') {
+	$w = $win->add(undef, 'TextEntry', 
+		       '-sbborder' => 1,
+		       '-text' => '', 
+		       '-regexp' => '/^\d*$/',
+		       '-onchange' => sub {
+			   log::l("onchange: ".$w->text);
+			   $w->text($e->{min}) if $w->text < $e->{min};
+			   $w->text($e->{max}) if $w->text > $e->{max};
+			   ${$e->{val}} = $w->text;
+			   log::l("/onchange: ".$w->text);
+			   $changed->() if $changed;
+		       },
+		       %options);
+	$set = sub { $w->text($_[0] || '') };
     } else {
 	$w = $win->add(undef, $e->{hidden} ? 'PasswordEntry' : 'TextEntry', 
 		       '-sbborder' => 1,
