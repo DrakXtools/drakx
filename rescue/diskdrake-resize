@@ -16,6 +16,7 @@ my %fs_pkgs = (
     ntfs => 'diskdrake::resize_ntfs',
     ext2 => 'diskdrake::resize_ext2',
     ext3 => 'diskdrake::resize_ext2',
+    ext4 => 'diskdrake::resize_ext2',
 );
 
 my $resize_pkg = $fs_pkgs{$fs_type}
