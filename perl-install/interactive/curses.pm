@@ -418,11 +418,9 @@ sub create_widget {
 		       '-text' => '', 
 		       '-regexp' => '/^\d*$/',
 		       '-onchange' => sub {
-			   log::l("onchange: ".$w->text);
 			   $w->text($e->{min}) if $w->text < $e->{min};
 			   $w->text($e->{max}) if $w->text > $e->{max};
 			   ${$e->{val}} = $w->text;
-			   log::l("/onchange: ".$w->text);
 			   $changed->() if $changed;
 		       },
 		       %options);
