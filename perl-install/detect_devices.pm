@@ -54,9 +54,9 @@ sub floppies {
     require modules;
     state @fds;
     state $legacy_already_detected;
-    if (arch =~ /mips|arm/) {
-      $o_not_detect_legacy_floppies = 1;
-    }
+
+    $o_not_detect_legacy_floppies = 1 if arch() =~ /mips|arm/;
+
     if (!$o_not_detect_legacy_floppies && !$legacy_already_detected) {
         $legacy_already_detected = 1;
         eval { modules::load("floppy") if $::isInstall };
