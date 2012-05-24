@@ -7,12 +7,17 @@ if (( $? != 0 )); then
 	exit $?
 fi
 
+# change passwd file
 sed -E -i -e 's/^root:[^:]*:/root:'"$passwd"':/' /etc/passwd
 
+# dropbear must have /dev/pts mounted
+grep '^devpts /dev/pts devpts ' /proc/mounts >/dev/null 2>/dev/null || mount -t devpts devpts /dev/pts
+
+# generate host keys
 mkdir -p /etc/dropbear
 [[ -f /etc/dropbear/dropbear_dss_host_key ]] || dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key >/dev/null
 [[ -f /etc/dropbear/dropbear_rsa_host_key ]] || dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key >/dev/null
 
 echo ""
 echo -n "Starting ssh daemon... "
-dropbear && echo "OK"
+dropbear -E 2>/var/log/dropbear.log && echo "OK"
