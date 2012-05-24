@@ -586,14 +586,8 @@ sub getSerialModem {
     my ($modules_conf, $o_mouse) = @_;
     my $mouse = $o_mouse || {};
     $mouse->{device} = readlink "/dev/mouse";
-    my $serdev;
-    if (arch() =~ /ppc/) {
-	    $serdev = "macserial";
-    } elsif (arch() =~ /mips/) {
-	    $serdev = "8250";
-    } else {
-	    $serdev = "serial";
-    }
+    my $serdev = arch() =~ /ppc/ ? "macserial" : arch() =~ /mips/ ? "8250" : "serial";
+
     eval { modules::load($serdev) };
 
     my @modems;
