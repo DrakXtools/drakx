@@ -90,7 +90,7 @@ endif
 
 full_stage2:
 	$(MAKE) stage2
-	@[ "$${DEBUG_INSTALL+xxx}" ] && make dont_run_directly_stage2
+	@if [ "$${DEBUG_INSTALL+xxx}" ]; then make dont_run_directly_stage2; else : ; fi
 	$(MAKE) compress
 
 compress:
