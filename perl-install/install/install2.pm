@@ -324,7 +324,7 @@ sub main {
 #-    $SIG{__DIE__} = sub { warn "DIE " . backtrace() . "\n" };
     $SIG{SEGV} = sub { 
 	my $msg = "segmentation fault: install crashed (maybe memory is missing?)\n" . backtrace();
-	log::l("$msg\n" . backtrace());
+	log::l("$msg\n");
 	$o and $o->ask_warn('', $msg);
 	setVirtual(1);
 	stop_udev() if !$::local_install;
