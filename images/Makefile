@@ -22,7 +22,7 @@ all.kernels: update_kernel ../kernel/list_modules.pm
 dist: tar
 tar:
 	@rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
-	@if [ -e ".svn" ]; then \
+	@if [ -e "../.svn" ]; then \
 		$(MAKE) dist-svn; \
 	elif [ -e "../.git" ]; then \
 		$(MAKE) dist-git; \
