@@ -86,7 +86,9 @@
   11-dm-lvm.rules
   13-dm-disk.rules
   64-md-raid.rules
-  65-md-incremental.rules
+  <filter subst="s/bash/sh/">
+    65-md-incremental.rules
+  </filter>
   95-dm-notify.rules
 </from>
 
