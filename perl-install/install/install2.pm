@@ -631,6 +631,11 @@ sub main {
 
     eval { output('/proc/splash', "verbose\n") };
   
+    real_main();
+    finish_install();
+}
+
+sub real_main() {
     #-the main cycle
     MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep($o)) {
 	$o->{steps}{$o->{step}}{entered}++;
@@ -658,7 +663,6 @@ sub main {
 
 	last if $o->{step} eq 'exitInstall';
     }
-    finish_install();
 }
 
 sub finish_install() {
