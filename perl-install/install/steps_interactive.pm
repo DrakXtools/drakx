@@ -130,7 +130,7 @@ sub selectInstallClass {
     my @l = install::any::find_root_parts($o->{fstab}, $::prefix);
     # Don't list other archs as ugrading between archs is not supported
     my $arch = arch() =~ /i.86/ ? $MDK::Common::System::compat_arch{arch()} : arch();
-    @l = grep { $_->{arch} eq $arch } @l;
+    @l = grep { $_->{arch} eq $arch && $_->{version} !~ /201[1-9]/ } @l;
     if (@l) {
 
 	log::l("proposing to upgrade partitions " . join(" ", map { $_->{part} && $_->{part}{device} } @l));
