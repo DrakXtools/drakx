@@ -10,6 +10,13 @@ use log;
 
 1;
 
+my $default_timeout = 10 * 60;
+
+sub set_default_timeout {
+    my ($seconds) = @_;
+    $default_timeout = $seconds;
+}
+
 sub run_or_die {
     my ($name, @args) = @_;
     run($name, @args) or die "$name failed\n";
@@ -87,7 +94,7 @@ sub raw {
 	    $pid;
 	} else {
 	    my $ok;
-	    add2hash_($options, { timeout => 10 * 60 });
+	    add2hash_($options, { timeout => $default_timeout });
 	    eval {
 		local $SIG{ALRM} = sub { die "ALARM" };
 		my $remaining = $options->{timeout} && $options->{timeout} ne 'never' &&  alarm($options->{timeout});
