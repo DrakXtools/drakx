@@ -235,11 +235,13 @@ sub get_existing {
 	      }
 	  } split(',', $raw_part->{devices});
 
+	my ($info) = $md =~ m!([^/]*)$!;
 	my $md_part = new($raids,
 		device => $md,
 		UUID => $raw_part->{UUID},
 		level => $raw_part->{level},
 		metadata => $raw_part->{metadata},
+		info => $info . " (RAID$raw_part->{level})",
 		disks => \@mdparts);
 
 	my $type = fs::type::type_subpart_from_magic($md_part);
