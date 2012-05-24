@@ -55,13 +55,10 @@
 #include <errno.h>
 #include <fcntl.h>
 
-//mdk-stage1// #include <pcmcia/config.h>
 #include "log.h"
 #include "pcmcia.h"
 
 /*====================================================================*/
-
-//mdk-stage1// #ifdef CONFIG_PCI
 
 typedef struct {
     u_short	vendor, device;
@@ -138,7 +135,6 @@ static int pci_probe(void)
     u_int device, vendor, i;
     FILE *f;
     
-//mdk-stage1//     if (!module)
     log_message("PCMCIA: probing PCI bus..");
 
     if ((f = fopen("/proc/bus/pci/devices", "r")) != NULL) {
@@ -159,58 +155,20 @@ static int pci_probe(void)
 	    }
 	}
     }
-//mdk-stage1// else if ((f = fopen("/proc/pci", "r")) != NULL) {
-//mdk-stage1// 	while (fgets(s, 256, f) != NULL) {
-//mdk-stage1// 	    t = strstr(s, "Device id=");
-//mdk-stage1// 	    if (t) {
-//mdk-stage1// 		device = strtoul(t+10, NULL, 16);
-//mdk-stage1// 		t = strstr(s, "Vendor id=");
-//mdk-stage1// 		vendor = strtoul(t+10, NULL, 16);
-//mdk-stage1// 		for (i = 0; i < PCI_COUNT; i++)
-//mdk-stage1// 		    if ((vendor == pci_id[i].vendor) &&
-//mdk-stage1// 			(device == pci_id[i].device)) break;
-//mdk-stage1// 	    } else
-//mdk-stage1// 		for (i = 0; i < PCI_COUNT; i++)
-//mdk-stage1// 		    if (strstr(s, pci_id[i].tag) != NULL) break;
-//mdk-stage1// 	    if (i != PCI_COUNT) {
-//mdk-stage1// 		name = pci_id[i].name;
-//mdk-stage1// 		break;
-//mdk-stage1// 	    } else {
-//mdk-stage1// 		t = strstr(s, "CardBus bridge");
-//mdk-stage1// 		if (t != NULL) {
-//mdk-stage1// 		    name = t + 16;
-//mdk-stage1// 		    t = strchr(s, '(');
-//mdk-stage1// 		    t[-1] = '\0';
-//mdk-stage1// 		    break;
-//mdk-stage1// 		}
-//mdk-stage1// 	    }
-//mdk-stage1// 	}
-//mdk-stage1//     }
     fclose(f);
 
     if (name) {
-//mdk-stage1// 	if (module)
-//mdk-stage1// 	    printf("i82365\n");
-//mdk-stage1// 	else
 	    log_message("\t%s found, 2 sockets (driver %s).", name, driver);
 	return 0;
     } else {
-//mdk-stage1// 	if (!module)
 	    log_message("\tnot found.");
 	return -ENODEV;
     }
 }
-//mdk-stage1// #endif
 
 /*====================================================================*/
 
-//mdk-stage1// #ifdef CONFIG_ISA
-//mdk-stage1// 
-//mdk-stage1// #ifdef __GLIBC__
 #include <sys/io.h>
-//mdk-stage1// #else
-//mdk-stage1// #include <asm/io.h>
-//mdk-stage1// #endif
 typedef u_short ioaddr_t;
 
 #include "i82365.h"
@@ -251,9 +209,7 @@ int i365_probe(void)
     int val, sock, done;
     char *name = "i82365sl";
 
-//mdk-stage1// if (!module)
     log_message("PCMCIA: probing for Intel PCIC (ISA)..");
-//mdk-stage1//     if (verbose) printf("\n");
     
     sock = done = 0;
     if (ioperm(i365_base, 4, 1)) {
@@ -263,8 +219,6 @@ int i365_probe(void)
     ioperm(0x80, 1, 1);
     for (; sock < 2; sock++) {
 	val = i365_get(sock, I365_IDENT);
-//mdk-stage1//	if (verbose)
-//mdk-stage1//	    printf("  ident(%d)=%#2.2x", sock, val); 
 	switch (val) {
 	case 0x82:
 	    name = "i82365sl A step";
@@ -286,9 +240,7 @@ int i365_probe(void)
 	if (done) break;
     }
 
-//mdk-stage1//    if (verbose) printf("\n  ");
     if (sock == 0) {
-//mdk-stage1//	if (!module)
 	log_message("\tnot found.");
 	return -ENODEV;
     }
@@ -327,23 +279,14 @@ int i365_probe(void)
 	}
     }
 
-//mdk-stage1//    if (module)
-//mdk-stage1//	printf("i82365\n");
-//mdk-stage1//    else
 	printf("\t%s found, %d sockets.\n", name, sock);
     return 0;
     
 } /* i365_probe */
 
-//mdk-stage1//#endif /* CONFIG_ISA */
-
 /*====================================================================*/
 
-//mdk-stage1//#ifdef CONFIG_ISA
-
 #include "tcic.h"
-
-//mdk-stage1//static ioaddr_t tcic_base = TCIC_BASE;
 
 static u_char tcic_getb(ioaddr_t base, u_char reg)
 {
@@ -401,7 +344,6 @@ int tcic_probe_at(ioaddr_t base)
 	if (tcic_getw(base, i) == 0xffff)
 	    return -1;
 
-//mdk-stage1//    if (!module)
     log_message("\tat %#3.3x: ", base); fflush(stdout);
 
     /* Try to reset the chip */
@@ -427,7 +369,6 @@ int tcic_probe(void)
 {
     int sock, id;
 
-//mdk-stage1//     if (!module)
     log_message("PCMCIA: probing for Databook TCIC-2 (ISA).."); fflush(stdout);
     
     if (ioperm(TCIC_BASE, 16, 1)) {
@@ -438,14 +379,10 @@ int tcic_probe(void)
     sock = tcic_probe_at(TCIC_BASE);
     
     if (sock <= 0) {
-//mdk-stage1//	if (!module)
 	    log_message("\tnot found.");
 	return -ENODEV;
     }
 
-//mdk-stage1//    if (module)
-//mdk-stage1//	printf("tcic\n");
-//mdk-stage1//    else {
 	id = get_tcic_id(TCIC_BASE);
 	switch (id) {
 	case TCIC_ID_DB86082:
@@ -466,54 +403,9 @@ int tcic_probe(void)
 	    log_message("Unknown TCIC-2 ID 0x%02x", id);
 	}
 	log_message(" found at %#6x, %d sockets.", TCIC_BASE, sock);
-//mdk-stage1//     }
     return 0;
     
 } /* tcic_probe */
-
-//mdk-stage1// #endif /* CONFIG_ISA */
-
-//mdk-stage1// /*====================================================================*/
-//mdk-stage1// 
-//mdk-stage1// int main(int argc, char *argv[])
-//mdk-stage1// {
-//mdk-stage1//     int optch, errflg;
-//mdk-stage1//     extern char *optarg;
-//mdk-stage1//     int verbose = 0, module = 0;
-//mdk-stage1//     
-//mdk-stage1//     errflg = 0;
-//mdk-stage1//     while ((optch = getopt(argc, argv, "t:vxm")) != -1) {
-//mdk-stage1// 	switch (optch) {
-//mdk-stage1// #ifdef CONFIG_ISA
-//mdk-stage1// 	case 't':
-//mdk-stage1// 	    tcic_base = strtoul(optarg, NULL, 0); break;
-//mdk-stage1// #endif
-//mdk-stage1// 	case 'v':
-//mdk-stage1// 	    verbose = 1; break;
-//mdk-stage1// 	case 'm':
-//mdk-stage1// 	    module = 1; break;
-//mdk-stage1// 	default:
-//mdk-stage1// 	    errflg = 1; break;
-//mdk-stage1// 	}
-//mdk-stage1//     }
-//mdk-stage1//     if (errflg || (optind < argc)) {
-//mdk-stage1// 	fprintf(stderr, "usage: %s [-t tcic_base] [-v] [-m]\n", argv[0]);
-//mdk-stage1// 	exit(EXIT_FAILURE);
-//mdk-stage1//     }
-//mdk-stage1// 
-//mdk-stage1// #ifdef CONFIG_PCI
-//mdk-stage1//     if (pci_probe(verbose, module) == 0)
-//mdk-stage1// 	exit(EXIT_SUCCESS);
-//mdk-stage1// #endif
-//mdk-stage1// #ifdef CONFIG_ISA
-//mdk-stage1//     if (i365_probe(verbose, module) == 0)
-//mdk-stage1// 	exit(EXIT_SUCCESS);
-//mdk-stage1//     else if (tcic_probe(verbose, module, tcic_base) == 0)
-//mdk-stage1// 	exit(EXIT_SUCCESS);
-//mdk-stage1// #endif
-//mdk-stage1//     exit(EXIT_FAILURE);
-//mdk-stage1//     return 0;
-//mdk-stage1// }
 
 
 char * pcmcia_probe(void)
