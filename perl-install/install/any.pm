@@ -1234,9 +1234,10 @@ sub screenshot_dir__and_move() {
     if (-e $dir0 && ! -e '/root/non-chrooted-marker.DrakX') {
 	($dir0, 'nowarn'); #- it occurs during pkgs install when we are chrooted
     } elsif (-e $dir1) {
-	if (-e "$dir2/DrakX-screenshots") {
-	    cp_af("$dir2/DrakX-screenshots", $dir1);
-	    rm_rf("$dir2/DrakX-screenshots");
+        my $path = "$dir2/DrakX-screenshots";
+	if (-e $path) {
+	    cp_af($path, $dir1);
+	    rm_rf($path);
 	}
 	$dir1;
     } else {
