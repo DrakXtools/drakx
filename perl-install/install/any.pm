@@ -550,7 +550,7 @@ sub default_packages {
     add_n_log("have RAID", "mdadm") if !is_empty_array_ref($o->{all_hds}{raids});
     add_n_log("have LVM", "lvm2") if !is_empty_array_ref($o->{all_hds}{lvms});
     add_n_log("have crypted DM", "cryptsetup") if !is_empty_array_ref($o->{all_hds}{dmcrypts});
-    add_n_log("some disks are fake RAID", "dmraid") if any { fs::type::is_dmraid($_) } @{$o->{all_hds}{hds}};
+    add_n_log("some disks are fake RAID", qw(mdadm dmraid)) if any { fs::type::is_dmraid($_) } @{$o->{all_hds}{hds}};
     add_n_log("CPU needs microcode", "microcode_ctl") if detect_devices::hasCPUMicrocode();
     add_n_log("CPU needs cpufreq", 'cpufreq') if detect_devices::hasCPUFreq();
     add_n_log("APM support needed", 'apmd') if -e "/proc/apm";
