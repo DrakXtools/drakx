@@ -54,19 +54,7 @@ if ($image) {
     }
     $image = "/boot/$image" if $image !~ m!^/!;
 } elsif ($kernel_version) {
-    # FIXME : test for vmlinux or vmlinuz existence and choose
-    # instead of using arch()
-    if (arch() =~ /mips/) {
-	$image = "/boot/vmlinux-$kernel_version";
-    } elsif (arch() =~ /arm/) {
-	if ($kernel_version =~ /versatile/) {
-	    $image = "/boot/vmlinuz-$kernel_version";
-	} else {
-	    $image = "/boot/uImage-$kernel_version";
-	}
-    } else {
-    	$image = "/boot/vmlinuz-$kernel_version";
-    }
+    $image = find { -e $_ } map { "/boot/$_-$kernel_version" } qw(vmlinux uImage vmlinuz);
 }
 
 
