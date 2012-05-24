@@ -287,7 +287,8 @@ sub warn_reboot_needed {
 
 sub create_display_box {
     my ($kind, $resize, $fill_empty, $button) = @_;
-    my @parts = fs::get::hds_fstab_and_holes($kind->{val});
+    # perl_checker: require UNIVERSAL
+    my @parts = fs::get::hds_fstab_and_holes($kind->{val}) if UNIVERSAL::can($kind->{val}, 'first_usable_sector,');
 
     my $totalsectors = $kind->{val}{totalsectors};
 
