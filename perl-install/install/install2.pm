@@ -592,6 +592,8 @@ sub main {
     }
 
     my $o_;
+    $ENV{COLUMNS} ||= 80;
+    $ENV{LINES}   ||= 25;
     while (1) {
     	$o_ = $::auto_install ?
     	  install::steps_auto_install->new($o) :
