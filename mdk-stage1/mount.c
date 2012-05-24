@@ -222,6 +222,9 @@ int my_mount(char *dev, char *location, char *fs, int force_rw)
 	if (!strcmp(fs, "ext4"))
 		my_insmod("ext4", ANY_DRIVER_TYPE, NULL, 1);
 
+	if (!strcmp(fs, "btrfs"))
+		my_insmod("btrfs", ANY_DRIVER_TYPE, NULL, 1);
+
 #endif
 	if (!strcmp(fs, "iso9660"))
 		my_insmod("isofs", ANY_DRIVER_TYPE, NULL, 1);
