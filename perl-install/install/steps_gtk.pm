@@ -407,12 +407,12 @@ sub choosePackagesTree {
 				my $imp = translate($install::pkgs::compssListDesc{$p->flag_base ? 5 : $p->rate});
 
                                 my $tag = { 'foreground' => 'royalblue3' };
-				$@ ? N("Bad package") :
+				
 				  [ [ N("Name: "), $tag ], [ $p->name . "\n" ],
                                     [ N("Version: "), $tag ], [ $p->version . '-' . $p->release . "\n" ],
                                     [ N("Size: "), $tag ], [ N("%d KB\n", $p->size / 1024) ],
                                     if_($imp, [ N("Importance: "), $tag ], [ "$imp\n" ]),
-                                    [ "\n" ], [ formatLines($p->description) ] ];
+                                    [ "\n" ], [ formatLines($p->description || N("No description")) ] ];
 			    },
 			    toggle_nodes => sub {
 				my $set_state = shift @_;
