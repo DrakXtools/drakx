@@ -336,7 +336,7 @@ sub empty_packages {
     # prevent priority upgrade (redundant for now as $urpm->{root} implies disabling it:
     $packages->{options}{'priority-upgrade'} = undef;
     # log $trans->add() faillure; FIXME: should we override *urpm::msg::sys_log?
-    $packages->{debug} = \&log::l;
+    $packages->{debug} = $packages->{debug_URPM} = \&log::l;
 
     $packages;
 }
