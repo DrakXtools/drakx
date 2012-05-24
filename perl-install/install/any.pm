@@ -560,6 +560,8 @@ sub default_packages {
     add_n_log("needed by networking", @ltmp) if @ltmp;
     # will get auto selected at summary stage for bootloader:
     add_n_log("needed later at summary stage", qw(acpi acpid mageia-gfxboot-theme));
+    # will get auto selected at summary stage for firewall:
+    add_n_log("needed for firewall/security", qw(shorewall mandi-ifw));
     # only needed for CDs/DVDs installations:
     add_n_log("method='cdrom'", 'perl-Hal-Cdroms') if $o->{method} eq 'cdrom';
 
