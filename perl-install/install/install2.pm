@@ -325,7 +325,7 @@ sub main {
     $SIG{SEGV} = sub { 
 	my $msg = "segmentation fault: install crashed (maybe memory is missing?)\n" . backtrace();
 	log::l("$msg\n" . backtrace());
-	$o->ask_warn('', $msg);
+	$o and $o->ask_warn('', $msg);
 	setVirtual(1);
 	stop_udev() if !$::local_install;
 	require install::steps_auto_install;
