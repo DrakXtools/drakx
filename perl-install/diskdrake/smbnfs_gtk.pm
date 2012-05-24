@@ -208,7 +208,7 @@ sub import_tree {
 		  gtksignal_connect($search,
 				    clicked => sub {
 					$add_server->($_) foreach sort { $a->{name} cmp $b->{name} } $kind->find_servers;
-					gtkset($search, text => N("Search new servers"));
+					gtkset($search, text => N("Search for new servers"));
 				    }));
     }
 
