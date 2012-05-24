@@ -434,9 +434,11 @@ sub main {
     eval { fs::mount::mount('none', '/sys', 'sysfs', 1) };
     eval { touch('/root/non-chrooted-marker.DrakX') }; #- helps distinguishing /root and /mnt/root when we don't know if we are chrooted
 
-    start_udev() if !$::local_install;
-
-    init_local_install($o) if $::local_install;
+    if ($::local_install) {
+        init_local_install($o);
+    } else {
+        start_udev();
+    }
 
     $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : "/mnt";
     mkdir $::prefix, 0755;
