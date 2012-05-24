@@ -73,7 +73,7 @@ dist-git:
 
 tar:
 	rm -rf $(PACKAGE)*.tar* $(PACKAGE)-$(PKGVERSION)
-	if [ -e "../.svn" ]; then \
+	@if [ -e "../.svn" ]; then \
 		$(MAKE) dist-svn; \
 	elif [ -e "../.git" ]; then \
 		$(MAKE) dist-git; \
