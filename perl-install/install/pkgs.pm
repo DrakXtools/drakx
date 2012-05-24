@@ -37,7 +37,7 @@ sub extractHeaders {
     cleanHeaders();
 
     foreach my $medium (@$media) {
-        $medium->{selected} or next;
+        !$medium->{ignore} or next;
 
         my @l = grep { $_->id >= $medium->{start} && $_->id <= $medium->{end} } @$pkgs or next;
         eval {
