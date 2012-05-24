@@ -199,12 +199,12 @@ sub per_kind_action_box {
 
     $kind->{type} =~ /hd|lvm/ or return;
 
-    foreach my $s (diskdrake::interactive::hd_possible_actions_base($in, kind2hd($kind), $all_hds)) {
+    foreach my $s (diskdrake::interactive::hd_possible_actions_base($in)) {
 	gtkadd($box, 
 	       gtksignal_connect(Gtk2::Button->new(translate($s)),
 				 clicked => sub { try($s, kind2hd($kind)) }));
     }
-    foreach my $s (diskdrake::interactive::hd_possible_actions_extra($in, kind2hd($kind), $all_hds)) {
+    foreach my $s (diskdrake::interactive::hd_possible_actions_extra($in)) {
 	gtkadd($box2, 
 	       gtksignal_connect(Gtk2::Button->new(translate($s)),
 				 clicked => sub { try($s, kind2hd($kind)) }));
