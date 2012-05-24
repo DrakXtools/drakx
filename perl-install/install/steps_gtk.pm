@@ -63,9 +63,6 @@ sub new($$) {
 sub _setup_and_start_X {
     my ($o, $wanted_DISPLAY) = @_;
     my $f = "/tmp/Xconf";
-    if (!$::testing) {
-        devices::make("/dev/kbd");
-    }
 
     #- /tmp is mostly tmpfs, but not fully, since it doesn't allow: mount --bind /tmp/.X11-unix /mnt/tmp/.X11-unix
     mkdir '/tmp/.X11-unix';
