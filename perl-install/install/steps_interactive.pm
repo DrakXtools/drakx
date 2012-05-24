@@ -2,6 +2,7 @@ package install::steps_interactive; # $Id$
 
 
 use strict;
+use feature 'state';
 
 our @ISA = qw(install::steps);
 
@@ -575,8 +576,8 @@ sub chooseGroups {
     #- if no group have been chosen, ask for using base system only, or no X, or normal.
     if (!$o->{isUpgrade} && !any { $_->{selected} } @$compssUsers) {
 	my $docs = !$o->{excludedocs};	
-	my $minimal;
-	my $suggests;
+	state $minimal;
+	my $suggests = $o->{no_suggests};
 
 	$o->ask_from_({ title => N("Type of install"), 
                         message => N("You have not selected any group of packages.
