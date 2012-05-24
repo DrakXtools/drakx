@@ -31,6 +31,8 @@
   mkfs.btrfs btrfsctl btrfs
   mkfs.nilfs2 nilfs-tune
 
+  tty stty <!-- needed for text mode installer (through unicode_start) -->
+
   <if ARCH="i.86|x86_64|ia64">
     mkdosfs
     dosfslabel
