@@ -113,11 +113,13 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
                                                             }
                                                             timezone::set_ntp_server($choosed_serv);
                                                             system(qw(/sbin/chkconfig --level 35 ntpd on));
+                                                            # FIXME: Change to use systemctl when will not support old iniscript anymore
                                                             system(qw(service ntpd stop));
                                                             #verify that we have a valid hostname (thx sam)
                                                             $choosed_serv =~ s/[^-a-zA-Z0-9.]//g;
 							    if (!system("/usr/sbin/ntpdate", $choosed_serv)) {
 								update_time(); #- get the new time before updating the hwclock
+                                # FIXME: Change to use systemctl when will not support old iniscript anymore
 								system(qw(service ntpd start));
 								$need_date = 0;
 							    } else {
