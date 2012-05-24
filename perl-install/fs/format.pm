@@ -15,7 +15,6 @@ my %cmds = (
     ext3     => [ 'e2fsprogs', 'mkfs.ext3', '-F' ],
     ext4     => [ 'e2fsprogs', 'mkfs.ext4', '-F' ],
     reiserfs => [ 'reiserfsprogs', 'mkfs.reiserfs', '-ff' ],
-    reiser4  => [ 'reiser4progs', 'mkfs.reiser4', '-f', '-y' ],
     xfs      => [ 'xfsprogs', 'mkfs.xfs', '-f', '-q' ],
     jfs      => [ 'jfsutils', 'mkfs.jfs', '-f' ],
     hfs      => [ 'hfsutils', 'hformat' ],
@@ -33,7 +32,6 @@ my %LABELs = ( #- option, length, handled_by_mount
     ext3     => [ '-L', 16, 1 ],
     ext4     => [ '-L', 16, 1 ],
     reiserfs => [ '-l', 16, 1 ],
-    reiser4  => [ '-L', 16, 1 ],
     xfs      => [ '-L', 12, 1 ],
     jfs      => [ '-L', 16, 1 ],
     hfs      => [ '-l', 27, 0 ],
@@ -53,7 +51,6 @@ my %edit_LABEL = ( # package, command, option
     ext3     => [ 'e2fsprogs', 'tune2fs', '-L' ],
     ext4     => [ 'e2fsprogs', 'tune2fs', '-L' ],
     reiserfs => [ 'reiserfsprogs', 'reiserfstune', '-l' ],
-#    reiser4
     xfs      => [ 'xfsprogs', 'xfs_admin', '-L' ],
     jfs      => [ 'jfsutils', 'jfs_tune', '-L' ],
 #    hfs

@@ -119,9 +119,6 @@ if_(arch() !~ /ppc/,
   0x75 => '',         'PC/IX',
   0x80 => '',         'Old Minix',
   0x81 => '',         'Minix / old Linux',
- if_(!$::isInstall,
-  0x83 => 'reiser4',  'Journalised FS: Reiser4',
- ),
   0x83 => 'nilfs2',   'NILFS2',
   0x83 => 'btrfs',    'Btrfs',
   0x84 => '',         'OS/2 hidden C: drive',
@@ -313,7 +310,7 @@ sub type_subpart_from_magic {
 
 sub defaultFS() { 'ext4' }
 
-sub true_local_fs_types() { qw(btrfs ext3 ext2 ext4 reiserfs reiser4 xfs jfs) }
+sub true_local_fs_types() { qw(btrfs ext3 ext2 ext4 reiserfs xfs jfs) }
 
 sub isEmpty { !$_[0]{fs_type} && $_[0]{pt_type} == 0 }
 sub isEfi { arch() =~ /ia64/ && $_[0]{pt_type} == 0xef }

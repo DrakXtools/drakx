@@ -565,7 +565,7 @@ First remove a primary partition and create an extended partition."));
 	if ($::isStandalone) {
 	    fs::format::check_package_is_installed_format($in->do_pkgs, $p->{fs_type}) or log::l("Missing package");
 	}
-	if ($::expert && !member($p->{fs_type}, 'reiserfs', 'reiser4', 'xfs', 'hfs', 'ntfs', 'ntfs-3g')) {
+	if ($::expert && !member($p->{fs_type}, 'reiserfs', 'xfs', 'hfs', 'ntfs', 'ntfs-3g')) {
 	    $p->{toFormatCheck} = $in->ask_yesorno(N("Confirmation"), N("Check bad blocks?"));
 	}
 	$p->{isFormatted} = 0; #- force format;
@@ -1281,7 +1281,7 @@ sub format_ {
     if ($::isStandalone) {
 	fs::format::check_package_is_installed_format($in->do_pkgs, $part->{fs_type}) or return;
     }
-    if ($::expert && !member($part->{fs_type}, 'reiserfs', 'reiser4', 'xfs', 'hfs', 'ntfs', 'ntfs-3g')) {
+    if ($::expert && !member($part->{fs_type}, 'reiserfs', 'xfs', 'hfs', 'ntfs', 'ntfs-3g')) {
 	$part->{toFormatCheck} = $in->ask_yesorno(N("Confirmation"), N("Check bad blocks?"));
     }
     $part->{isFormatted} = 0; #- force format;
