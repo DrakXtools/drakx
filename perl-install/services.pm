@@ -149,12 +149,12 @@ sub ask_ {
 			 N("Internet") => [ qw(adsl boa cddbp ftp httpd ibod ip6tables ippl iptables iptoip ipvsadm
                                                isdn4linux jabber jabber-icq jail.init junkbuster mandi nessusd pftp portsentry 
                                                prelude proftpd proftpd-xinetd pure-ftpd ipsec radvd roxen shorewall squid
-                                               tftp tux wu-ftpd) ],
+                                               tftp) ],
 
 			 N("_: Keep these entry short\nNetworking") => [ qw(network network-auth network-up resolvconf) ],
 
 			 N("System") => [ qw(acon acpid alsa anacron apcupsd apmd atd bpowerd bpowerfail crond cvs dm fcron functions
-                                             gpm halt harddrake inetd irda jserver keytable kheader killall kudzu mageia_everytime
+                                             gpm halt harddrake inetd irda jserver keytable kheader killall mageia_everytime
                                              mageia_firstime mdadm medusa-init messagebus microcode_ctl mosix netconsole numlock partmon
                                              pcmcia portmap powertweak.init psacct
                                              random rawdevices rpcbind sensors single sound syslog syslog-ng ups usb usbd wine xfs xinetd) ],
