@@ -25,14 +25,9 @@ sub install_module_raw {
     system("/sbin/modprobe", $driver) and print "\tfailed\n";
 }
 
-my $already_usb;
 sub install_module {
     my ($driver, $descr) = @_;
     install_module_raw($driver, $descr);
-    if (!$already_usb && $driver =~ /usb/) {
-	$already_usb = 1;
-	install_module_raw('usbkbd');
-    }
 }
 
 #- start
