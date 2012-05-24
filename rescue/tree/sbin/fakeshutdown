@@ -13,7 +13,8 @@
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 
-sub cat_ { local *F; open F, $_[0] or die "cat of file $_[0] failed: $!\n"; my @l = <F>; wantarray ? @l : join '', @l }
+# From MDK::Common:
+sub cat_ { open(my $F, '<', $_[0]) or die "cat of file $_[0] failed: $!\n"; my @l = <$F>; wantarray() ? @l : join '', @l }
 print "\n";
 
 
