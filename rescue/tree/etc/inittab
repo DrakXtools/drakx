@@ -7,10 +7,10 @@ re:6:wait:/etc/rc.reboot
 ca:12345:ctrlaltdel:/sbin/fakeshutdown
 
 1:12345:respawn:/sbin/mingetty --autologin root tty1
-2:23:respawn:/sbin/mingetty tty2
-3:23:respawn:/sbin/mingetty tty3
-4:23:respawn:/sbin/mingetty tty4
-5:23:respawn:/sbin/mingetty tty5
-6:23:respawn:/sbin/mingetty tty6
+2:23:respawn:/sbin/mingetty --autologin root tty2
+3:23:respawn:/sbin/mingetty --autologin root tty3
+4:23:respawn:/sbin/mingetty --autologin root tty4
+5:23:respawn:/sbin/mingetty --autologin root tty5
+6:23:respawn:/sbin/mingetty --autologin root tty6
 s0:2345:respawn:/sbin/agetty -h -t 60 ttyS0 9600 ansi
 #s1:2345:respawn:/sbin/agetty -h -t 60 ttyS1 115200,9600 linux
