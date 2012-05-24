@@ -190,6 +190,7 @@ sub _check_unsafe_upgrade_and_warn {
     my ($o, $part) = @_;
     !_is_unsafe_upgrade($part) || _warn_unsafe_upgrade($o);
 }
+
 sub _is_unsafe_upgrade {
     my ($part) = @_;
 
@@ -198,6 +199,7 @@ sub _is_unsafe_upgrade {
     log::l("block_size $block_size");
     $block_size == 1024;
 }
+
 sub _warn_unsafe_upgrade {
     my ($o) = @_;
 
@@ -381,6 +383,7 @@ sub selectSupplMedia {
     my ($o) = @_;
     install::any::selectSupplMedia($o);
 }
+
 #------------------------------------------------------------------------------
 sub choosePackages {
     my ($o) = @_;
@@ -442,6 +445,7 @@ sub choosePackagesTree {
 			    sort => 1,
 			   });
 }
+
 sub loadSavePackagesOnFloppy {
     my ($o, $packages) = @_;
     $o->ask_from('', 
@@ -467,6 +471,7 @@ The format is the same as auto_install generated files."),
 	install::any::g_default_packages($o);
     }
 }
+
 sub _chooseDesktop {
     my ($o, $rpmsrate_flags_chosen, $chooseGroups) = @_;
 
@@ -502,6 +507,7 @@ sub _chooseDesktop {
 	$$chooseGroups = 1;
     }
 }
+
 sub chooseGroups {
     my ($o, $packages, $compssUsers, $individual) = @_;
 
