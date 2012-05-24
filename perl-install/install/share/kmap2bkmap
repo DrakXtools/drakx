@@ -8,10 +8,12 @@ my $KMAP_MAGIC = 0x8B39C07F;
 BEGIN { @ARGV == 1 or die "usage: kmap2bkmap <keymap>\n" }
 
 # load unicode keymap
-my $unimap = "$ARGV[0]" . ".uni";
+my $unimap = $ARGV[0] . ".uni";
 system("sudo loadkeys $unimap") == 0 or die;
-open F, "dumpkeys -n -f |";
-<F> =~ /^keymaps\s+(.*)/ or die;
+open my $F, "dumpkeys -n -f |";
+<$F> =~ /^keymaps\s+(.*)/ or die;
+
+my @keymaps;
 foreach (split ',', $1) {
     my @l = /(\d+)-(\d+)/;
     my ($i, $j) = @l ? @l : ($_,$_);
@@ -21,14 +23,15 @@ foreach (split ',', $1) {
 print pack("I", $KMAP_MAGIC);
 print map { pack "i", $keymaps[$_] || 0 } 0 .. c::MAX_NR_KEYMAPS()-1;
 
-foreach (<F>) {
+my @L;
+foreach (<$F>) {
     s/\+0x/0x/g;
     my ($keycode, $key, undef, @l) = split;
     $keycode eq 'keycode' or next;
     my $i = 0;
     $L[$i++][$key] = hex $_ foreach @l;
 }
-close F or die "dumpkeys failed";
+close $F or die "dumpkeys failed";
 
 foreach (@L) {
     foreach my $i (0 .. c::NR_KEYS()-1) {
