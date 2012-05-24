@@ -334,6 +334,28 @@ sub init_brltty() {
     run_program::run("brltty");
 }
 
+sub step_init {
+  my ($o) = @_;
+  my $o_;
+  while (1) {
+      $o_ = $::auto_install ?
+    	  install::steps_auto_install->new($o) :
+    	    $o->{interactive} eq "stdio" ?
+    	  install::steps_stdio->new($o) :
+    	    $o->{interactive} eq "curses" ?
+    	  install::steps_curses->new($o) :
+    	    $o->{interactive} eq "gtk" ?
+    	  install::steps_gtk->new($o) :
+    	    die "unknown install type";
+      $o_ and last;
+
+      log::l("$o->{interactive} failed, trying again with curses");
+      $o->{interactive} = "curses";
+      require install::steps_curses;
+  }
+  $o;
+}
+
 sub read_product_id() {
     my $product_id = cat__(install::any::getFile_($o->{stage2_phys_medium}, "product.id"));
     log::l('product_id: ' . chomp_($product_id));
@@ -603,26 +625,9 @@ sub main {
 	}
     }
 
-    my $o_;
     $ENV{COLUMNS} ||= 80;
     $ENV{LINES}   ||= 25;
-    while (1) {
-    	$o_ = $::auto_install ?
-    	  install::steps_auto_install->new($o) :
-    	    $o->{interactive} eq "stdio" ?
-    	  install::steps_stdio->new($o) :
-    	    $o->{interactive} eq "curses" ?
-    	  install::steps_curses->new($o) :
-    	    $o->{interactive} eq "gtk" ?
-    	  install::steps_gtk->new($o) :
-    	    die "unknown install type";
-	$o_ and last;
-
-	log::l("$o->{interactive} failed, trying again with curses");
-	$o->{interactive} = "curses";
-	require install::steps_curses;
-    }
-    $::o = $o = $o_;
+    $::o = $o = step_init($o);
 
     eval { output('/proc/splash', "verbose\n") };
   
