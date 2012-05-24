@@ -54,8 +54,7 @@ if (@$raid_parts) {
     push @$normal_parts, @$raids;
 }
 
-my @fstab;
-my ($root, $fs, @roots);
+my @roots;
 
 foreach (@$normal_parts) {
     my $dev = devices::make($_->{device});
@@ -72,6 +71,8 @@ foreach (@$normal_parts) {
     }
     system('umount', $target) == 0 or die "error unmounting $target\n";
 }
+
+my ($root, $fs, @fstab);
 
 # Try Mandriva first:
 if (@roots) {
