@@ -273,6 +273,7 @@ sub _resolve_requested_and_check {
     my @l = $packages->resolve_requested($packages->{rpmdb}, $state, $requested,
 					 callback_choices => \&packageCallbackChoices, no_suggests => $::o->{no_suggests});
 
+    #- keep track of suggested packages so that theys could be unselected if the "no suggests" option is choosen later:
     if (!is_empty_hash_ref($state->{selected})) {
         my @new_ids = map { $packages->{depslist}[$_]->id } grep { $state->{selected}{$_}{suggested} } keys $state->{selected};
         @suggested_package_ids = uniq(@suggested_package_ids, @new_ids);
