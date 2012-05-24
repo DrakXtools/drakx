@@ -376,6 +376,12 @@ sub beforeInstallPackages {
 	run_program::run('mount', '--bind', '/tmp/.X11-unix', "$::prefix/tmp/.X11-unix");
     }
 
+    if (-e '/run') {
+	mkdir "$::prefix/run";
+	run_program::run('mount', '--bind', '/run', "$::prefix/run");
+    }
+
+
     log::l("setting excludedocs to $o->{excludedocs}");
     substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$::prefix/etc/rpm/macros";
 
