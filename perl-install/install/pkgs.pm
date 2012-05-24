@@ -322,7 +322,8 @@ sub unselectAllPackages {
     my %keep_selected;
     log::l("unselecting all packages...");
     foreach (@{$packages->{depslist}}) {
-	if ($_->flag_base || $_->flag_installed && $_->flag_selected) {
+	my $to_select = $_->flag_base || $_->flag_installed && $_->flag_selected;
+	if ($to_select) {
 	    #- keep track of packages that should be kept selected.
 	    $keep_selected{$_->id} = $_;
 	} else {
