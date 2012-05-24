@@ -337,6 +337,34 @@ sub sig_segv_handler() {
     install::steps_auto_install_non_interactive::errorInStep($o, $msg);
 }
 
+sub read_stage1_net_conf() {
+    require network::network;
+    #- get stage1 network configuration if any.
+    log::l('found /tmp/network');
+    add2hash($o->{net}{network} ||= {}, network::network::read_conf('/tmp/network'));
+    if (my ($file) = glob_('/tmp/ifcfg-*')) {
+        log::l("found network config file $file");
+        my $l = network::network::read_interface_conf($file);
+        $o->{net}{ifcfg}{$l->{DEVICE}} ||= $l;
+    }
+    my $dsl_device = find { $_->{BOOTPROTO} eq 'adsl_pppoe' } values %{$o->{net}{ifcfg}};
+    if ($dsl_device) {
+        $o->{net}{type} = 'adsl';
+        $o->{net}{net_interface} = $dsl_device->{DEVICE};
+        $o->{net}{adsl} = {
+            method => 'pppoe',
+            device => $dsl_device->{DEVICE},
+            ethernet_device => $dsl_device->{DEVICE},
+            login => $dsl_device->{USER},
+            password => $dsl_device->{PASS},
+        };
+        %$dsl_device = ();
+    } else {
+        $o->{net}{type} = 'lan';
+        $o->{net}{net_interface} = first(values %{$o->{net}{ifcfg}});
+    }
+}
+
 #-######################################################################################
 #- MAIN
 #-######################################################################################
@@ -458,33 +486,7 @@ sub main {
     modules::read_already_loaded($o->{modules_conf});
 
     #- done before auto_install is called to allow the -IP feature on auto_install file name
-    if (-e '/tmp/network') {
-	require network::network;
-	#- get stage1 network configuration if any.
-	log::l('found /tmp/network');
-	add2hash($o->{net}{network} ||= {}, network::network::read_conf('/tmp/network'));
-	if (my ($file) = glob_('/tmp/ifcfg-*')) {
-	    log::l("found network config file $file");
-	    my $l = network::network::read_interface_conf($file);
-	    $o->{net}{ifcfg}{$l->{DEVICE}} ||= $l;
-	}
-	my $dsl_device = find { $_->{BOOTPROTO} eq 'adsl_pppoe' } values %{$o->{net}{ifcfg}};
-	if ($dsl_device) {
-	    $o->{net}{type} = 'adsl';
-	    $o->{net}{net_interface} = $dsl_device->{DEVICE};
-	    $o->{net}{adsl} = {
-		method => 'pppoe',
-		device => $dsl_device->{DEVICE},
-		ethernet_device => $dsl_device->{DEVICE},
-		login => $dsl_device->{USER},
-		password => $dsl_device->{PASS},
-	    };
-	    %$dsl_device = ();
-	} else {
-	    $o->{net}{type} = 'lan';
-	    $o->{net}{net_interface} = first(values %{$o->{net}{ifcfg}});
-	}
-    }
+    read_stage1_net_conf() if -e '/tmp/network';
 
     #- done after module dependencies are loaded for "vfat depends on fat"
     if ($::auto_install) {
