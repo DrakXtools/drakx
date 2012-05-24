@@ -185,7 +185,6 @@ sub type_names {
     push @l, grep { $_ ne 'Encrypted' } @{$type_names{non_fs_type}};
     push @l, sort @{$type_names{other}} if $expert;
     if ($o_hd && !$o_hd->use_pt_type) {
-	warn "$_ => $type_name2fs_type{$_}\n" foreach @l;
 	@l = grep { $type_name2fs_type{$_} } @l;
 	@l = uniq_ { $type_name2fs_type{$_[0]} } @l;
 	(@l, @{$type_names{non_fs_type}});
