@@ -958,6 +958,8 @@ sub dmcrypt_open {
 	delete $part->{dmcrypt_key};
 	die(($? >> 8) == 255 ? N("Invalid key") : $@);
     }
+    # Detect LVMs on top of dmcrypt
+    $all_hds->{lvms} = [ fsedit::lvms($all_hds) ];
 }
 
 sub Add2RAID {

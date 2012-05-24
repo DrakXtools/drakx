@@ -127,8 +127,10 @@ sub _get_existing_one {
 	put_in_hash($part, $type);
     }
     fs::type::set_isFormatted($part, to_bool($part->{fs_type}));
-    
-    $part->{fs_type} or fs::type::set_fs_type($part, defaultFS());
+
+    unless (fs::type::cannotBeMountable($part)) {
+	$part->{fs_type} or fs::type::set_fs_type($part, defaultFS());
+    }
 
     log::l("dmcrypt: found $part->{device} type $part->{fs_type} with rootDevice $part->{rootDevice}");
 
