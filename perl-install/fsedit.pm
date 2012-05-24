@@ -433,11 +433,11 @@ sub check_mntpoint {
 	if ($part->{level} ne '1') {
 	    cdie N("You've selected a software RAID partition as root (/).
 No bootloader is able to handle this without a /boot partition.
-Please be sure to add a /boot partition");
+Please be sure to add a separate /boot partition");
 	} else {
 	    # LILO only handles 0.90 metadata
 	    if ($part->{isFormatted} && $part->{metadata} && $part->{metadata} ne '0.90') {
-		cdie N("Metadata version unsupported for a boot partition. Please be sure to add a /boot partition.");
+		cdie N("Metadata version unsupported for a boot partition. Please be sure to add a separate /boot partition.");
 	    } else {
 		$part->{metadata} = '0.90';
 	    }
@@ -458,7 +458,7 @@ No bootloader is able to handle this.") if $part->{level} ne '1'; # lilo handles
     if ($mntpoint eq "/" && (isLUKS($part) || isRawLUKS($part)) && !fs::get::has_mntpoint("/boot", $all_hds)) {
 	cdie N("You've selected an encrypted partition as root (/).
 No bootloader is able to handle this without a /boot partition.
-Please be sure to add a /boot partition");
+Please be sure to add a separate /boot partition");
     }
 
     if ($mntpoint eq "/boot" && (isLUKS($part) || isRawLUKS($part)))  {
@@ -470,7 +470,7 @@ Please be sure to add a /boot partition");
       if $mntpoint eq '/boot' && isLVM($part) && lvm::lv_nb_pvs($part) > 1;
     cdie N("You've selected the LVM Logical Volume as root (/).
 The bootloader is not able to handle this when the volume spans physical volumes.
-You should create a /boot partition first") if $mntpoint eq "/" && isLVM($part) && lvm::lv_nb_pvs($part) != 1 && !fs::get::has_mntpoint("/boot", $all_hds);
+You should create a separate /boot partition first") if $mntpoint eq "/" && isLVM($part) && lvm::lv_nb_pvs($part) != 1 && !fs::get::has_mntpoint("/boot", $all_hds);
 
     cdie N("This directory should remain within the root filesystem")
       if member($mntpoint, qw(/root));
