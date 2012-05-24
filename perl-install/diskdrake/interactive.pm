@@ -860,6 +860,7 @@ sub Resize {
 	    partition_table::adjust_main_extended($hd);
 	    write_partitions($in, $hd) or return if $write_partitions && %nice_resize;
 	    if ($write_partitions && isLUKS($part)) {
+		require fs::dmcrypt;
 		fs::dmcrypt::open_part([], $low_part);
 	    }
 	}
@@ -949,7 +950,7 @@ sub dmcrypt_open {
 	       hidden => 1, focus => sub { 1 } } ]) or return;
     }
 
-    eval { fs::dmcrypt::open_part($all_hds->{dmcrypts}, $part) };
+    eval { require fs::dmcrypt; fs::dmcrypt::open_part($all_hds->{dmcrypts}, $part) };
     if ($@) {
 	delete $part->{dmcrypt_key};
 	die(($? >> 8) == 255 ? N("Invalid key") : $@);
@@ -1019,6 +1020,7 @@ sub RemoveFromRAID {
 }
 sub RemoveFromDm {
     my ($_in, $_hd, $part, $all_hds) = @_;
+    require fs::dmcrypt;
     fs::dmcrypt::close_part($all_hds->{dmcrypts}, $part);
 }
 sub RemoveFromLVM {
