@@ -653,7 +653,6 @@ sub main {
     read_product_id() if !$::testing;
 
     log::l("META_CLASS=$o->{meta_class}");
-    $ENV{META_CLASS} = $o->{meta_class}; #- for Ia Ora
 
     process_auto_steps();
 
