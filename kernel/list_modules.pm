@@ -306,7 +306,7 @@ our %l = (
       qw(parport_pc parport_serial),
       qw(btaudio mmc_block),
 
-      'cryptoloop', 'aes-i586', 'aes-x86_64', 'aes_generic',
+      'cryptoloop', 'aes-i586', 'aes-x86_64', 'aes_generic', 'cryptd', 'xts',
       if_(arch() =~ /sparc/, 'openprom'),
 
       qw(crc32c crc32c-intel),
