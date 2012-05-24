@@ -538,6 +538,7 @@ sub init_modules_conf() {
     list_modules::load_default_moddeps();
     require modules::any_conf;
     require modules::modules_conf;
+    # read back config from stage1:
     $o->{modules_conf} = modules::modules_conf::read(modules::any_conf::vnew(), '/tmp/modules.conf');
     modules::read_already_loaded($o->{modules_conf});
 }
