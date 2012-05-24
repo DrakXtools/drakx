@@ -241,7 +241,6 @@ sub install {
         my $_wait = $do->in && $do->in->wait_message(N("Please wait"), N("Installing packages..."));
         $do->in->suspend if $do->in;
         log::explanations("installing packages @l");
-        #- --expect-install added in urpmi 4.6.11
         $ret = system('urpmi', '--gui', @options) == 0;
         $do->in->resume if $do->in;
     }
