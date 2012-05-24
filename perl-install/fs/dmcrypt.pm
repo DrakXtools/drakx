@@ -65,7 +65,7 @@ sub format_part {
 
     my $tmp_key_file = "/tmp/.dmcrypt_key-$$";
     common::with_private_tmp_file($tmp_key_file, $part->{dmcrypt_key}, sub {
-	_run_or_die('luksFormat', '--batch-mode', devices::make($part->{device}), $_[0]);
+	_run_or_die('--cipher=aes-xts-benbi', '--key-size=512', 'luksFormat', '--batch-mode', devices::make($part->{device}), $_[0]);
     });
     fs::format::after_formatting($part);
 }
