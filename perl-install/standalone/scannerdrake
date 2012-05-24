@@ -44,7 +44,7 @@ my $in = 'interactive'->vnew('su');
 if (!files_exist(qw(/usr/bin/scanimage
 		    /etc/sane.d/dll.conf)) ||
     (!files_exist(qw(/usr/bin/xsane)) &&
-     !files_exist(qw(/usr/bin/kooka)) &&
+     !files_exist(qw(/usr/bin/skanlite)) &&
      !$in->do_pkgs->is_installed('scanner-gui'))) {
     if (!$in->ask_yesorno(N("Warning"), N("SANE packages need to be installed to use scanners.
 
@@ -403,7 +403,7 @@ sub tryConfScanner {
 		      N("Your %s cannot be configured fully automatically.\n\nManual adjustments are required. Please edit the configuration file /etc/sane.d/%s.conf. ", removeverticalbar($model), $server) .
 		      N("More info in the driver's manual page. Run the command \"man sane-%s\" to read it.", $server) .
 		      "\n\n" .
-		      N("After that you may scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu."));
+		      N("After that you may scan documents using \"XSane\" or \"%s\" from Multimedia/Graphics in the applications menu.", "Skanlite"));
     } elsif ($scanner::scannerDB->{$model}{flags}{manual} == 1) {
 	# MANUAL in ScannerDB
 	$in->ask_warn(N("Attention!"),
@@ -412,10 +412,10 @@ sub tryConfScanner {
 		      N("edit the configuration file /etc/sane.d/%s.conf. ", $server) .
 		      N("More info in the driver's manual page. Run the command \"man sane-%s\" to read it.", $server) .
 		      "\n\n" .
-		      N("After that you may scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu."));
+		      N("After that you may scan documents using \"XSane\" or \"%s\" from Multimedia/Graphics in the applications menu.", "Skanlite"));
     } else {
 	$in->ask_warn(N("Congratulations!"),
-		      N("Your %s has been configured.\nYou may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu.", removeverticalbar($model)));
+		      N("Your %s has been configured.\nYou may now scan documents using \"XSane\" or \"%s\" from Multimedia/Graphics in the applications menu.", removeverticalbar($model), "Skanlite"));
     }
     return 1;
 }
