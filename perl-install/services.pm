@@ -128,14 +128,20 @@ xinetd => N_("Starts other deamons on demand."),
     if ($s) {
 	$s = translate($s);
     } else {
-	my $file = find { -e $_ } map { "$::prefix$_/$name" } '/etc/rc.d/init.d', '/etc/init.d', '/etc/xinetd.d';
-	$s = cat_($file);
-	$s =~ s/\\\s*\n#\s*//mg;
-	$s = 
-	  $s =~ /^#\s+(?:Short-)?[dD]escription:\s+(.*?)^(?:[^#]|# {0,2}\S)/sm ? $1 :
-	  $s =~ /^#\s*(.*?)^[^#]/sm ? $1 : '';
+	my $file = "$::prefix/lib/systemd/system/$name.service";
+	if (-e $file) {
+		$s = cat_($file);
+		$s = $s =~ /^Description=(.*)/mg ? $1 : '';
+	} else {
+		$file = find { -e $_ } map { "$::prefix$_/$name" } '/etc/rc.d/init.d', '/etc/init.d', '/etc/xinetd.d';
+		$s = cat_($file);
+		$s =~ s/\\\s*\n#\s*//mg;
+		$s =
+			$s =~ /^#\s+(?:Short-)?[dD]escription:\s+(.*?)^(?:[^#]|# {0,2}\S)/sm ? $1 :
+			$s =~ /^#\s*(.*?)^[^#]/sm ? $1 : '';
 
-	$s =~ s/#\s*//mg;
+		$s =~ s/#\s*//mg;
+	}
     }
     $s =~ s/\n/ /gm; $s =~ s/\s+$//;
     $s;
