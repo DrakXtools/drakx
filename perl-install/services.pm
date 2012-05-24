@@ -434,7 +434,7 @@ sub _legacy_services() {
         if (my ($name, $l) = m!^(\S+)\s+(0:(on|off).*)!) {
             # If we expect to use systemd (i.e. installer) only show those
             # sysvinit scripts which are not masked by a native systemd unit.
-            my $has_systemd_unit = (-e "$::prefix/lib/systemd/system/$name.service" or -l "$::prefix/lib/systemd/system/$name.service");
+            my $has_systemd_unit = systemd_unit_exists($name);
             if (!$has_systemd || !$has_systemd_unit) {
                 if ($::isInstall) {
                     $on_off = $l =~ /\d+:on/g;
@@ -467,12 +467,14 @@ sub services() {
 
 
 
-
-
+sub systemd_unit_exists {
+    my ($name) = @_;
+    -e "$::prefix/lib/systemd/system/$name.service" or -l "$::prefix/lib/systemd/system/$name.service";
+}
 
 sub service_exists {
     my ($service) = @_;
-    -x "$::prefix/etc/rc.d/init.d/$service" or -e "$::prefix/lib/systemd/system/$service.service" or -l "$::prefix/lib/systemd/system/$service.service";
+    -x "$::prefix/etc/rc.d/init.d/$service" or systemd_unit_exists($service);
 }
 
 sub restart ($) {
