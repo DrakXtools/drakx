@@ -98,9 +98,6 @@ sub ask_parameters {
 
     if ($kind eq 'LDAP') {
 	$authentication->{LDAPDOMAIN} ||= domain_to_ldap_domain($net->{resolv}{DOMAINNAME});
-	#$authentication->{anonymous} = "0";
-	#$authentication->{cafile} = "0";
-	#$authentication->{nssgrp} = "0";
 	$authentication->{ccreds} = 1;
 
     # this package must be installed for 'Fetch DN' button to actually work
@@ -337,7 +334,7 @@ sub set_raw {
 
     if ($kind eq 'local') {
 
-output($conf_file, <<EOF);
+	output($conf_file, <<EOF);
 auth=Local File 
 server=none 
 realm=none
@@ -350,7 +347,7 @@ EOF
 
 	configure_nss_ldap($authentication);
 
-output($conf_file, <<EOF);
+	output($conf_file, <<EOF);
 auth=LDAP Directory
 server=$authentication->{LDAP_server}
 realm=$authentication->{LDAPDOMAIN}
@@ -365,7 +362,7 @@ EOF
 	configure_krb5_for_AD($authentication);
 	configure_nss_ldap($authentication);
 
-output($conf_file, <<EOF);
+	output($conf_file, <<EOF);
 auth=Kerberos 5
 server=$authentication->{AD_server}
 realm=$authentication->{AD_domain}
@@ -397,13 +394,11 @@ EOF
 	    run_program::rooted($::prefix, 'service', 'ypbind', 'restart');
 	});
 
-output($conf_file, <<EOF);
+	output($conf_file, <<EOF);
 auth=$kind
 server=$NIS_server
 realm=$domain
 EOF
-
-#    } elsif ($kind eq 'winbind' || $kind eq 'AD' && $authentication->{subkind} eq 'winbind') {
 
     } elsif ($kind eq 'winbind') {
 
@@ -423,11 +418,11 @@ EOF
 
 	$when_network_is_up->(sub {
 	    run_program::raw({ root => $::prefix, sensitive_arguments => 1 },
-		    #'net', 'join', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
+			                 #'net', 'join', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
 			     'echo', '"', 'net', 'join', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass}, '"');
 	});
 
-output($conf_file, <<EOF);
+	output($conf_file, <<EOF);
 auth=Windows NT4 Domain
 server= none 
 realm=$domain
@@ -457,8 +452,8 @@ EOF
 	    run_program::rooted($::prefix, 'service', 'winbind', 'restart');
 	});
 
-#FIXME: perhaps save the defaults values ?
-output($conf_file, <<EOF);
+	#FIXME: perhaps save the defaults values ?
+	output($conf_file, <<EOF);
 auth=Windows Active Directory Domain
 server= none
 realm=$realm
@@ -485,11 +480,9 @@ sub pam_format_line {
 sub get_raw_pam_authentication() {
     my %before_deny;
     foreach (cat_("$::prefix/etc/pam.d/system-auth")) {
-	#my ($type, $control, $module, @para) = split;
 	my ($type, $_control, $other) = /(\S+)\s+(\[.*?\]|\S+)\s+(.*)/;
 	my ($module, @para) = split(' ', $other);
 	if ($module = pam_module_from_path($module)) {
-	    #$before_deny{$type}{$module} = \@para if $control eq 'sufficient' && member($module, pam_modules());
 	    $before_deny{$type}{$module} = \@para if member($module, pam_modules());
 	}
     }
@@ -533,21 +526,15 @@ sub set_pam_authentication {
     my ($authentication_kinds, $o_ccreds) = @_;
     
     my %special = (
-	    #auth => [ difference2(\@authentication_kinds,, [ 'mount' ]) ],
-	    #account => [ difference2(\@authentication_kinds, [ 'castella', 'mount' ]) ],
-	    #password => [ intersection(\@authentication_kinds, [ 'ldap', 'krb5' ]) ],
 	auth => [ difference2($authentication_kinds,, [ 'mount' ]) ],
 	account => [ difference2($authentication_kinds, [ 'castella', 'mount', 'ccreds' ]) ],
 	password => [ intersection($authentication_kinds, [ 'ldap', 'krb5', 'ccreds' ]) ],
     );
     my %before_first = (
-	    #auth => member('mount', @authentication_kinds) ? pam_format_line('auth', 'required', 'pam_mount') : '',
 	auth => member('mount', @$authentication_kinds) ? pam_format_line('auth', 'required', 'pam_mount') : '',
 	session => 
-	  #intersection(\@authentication_kinds, [ 'winbind', 'krb5', 'ldap' ]) 
 	  intersection($authentication_kinds, [ 'winbind', 'krb5', 'ldap' ])
 	    ? pam_format_line('session', 'optional', 'pam_mkhomedir', 'skel=/etc/skel/', 'umask=0022') :
-	    #member('castella', @authentication_kinds)
 	    member('castella', @$authentication_kinds)
 	    ? pam_format_line('session', 'optional', 'pam_castella') : '',
     );
@@ -560,7 +547,6 @@ sub set_pam_authentication {
     );
 
     substInFile {
-	    #my ($type, $control, $module, @para) = split;
 	my ($type, $control, $other) = /(\S+)\s+(\[.*?\]|\S+)\s+(.*)/;
 	my ($module, @para) = split(' ', $other);
 	if ($module = pam_module_from_path($module)) {
@@ -584,8 +570,7 @@ sub set_pam_authentication {
 			 (map { [ "pam_$_" ] } @$ask),
 			 );
 		push @{$l[-1]}, @para_for_last;
-		#$_ = join('', map { pam_format_line($type, 'sufficient', @$_) } @l);
-		### $_ = join('', map { pam_format_line($type, sufficient($o_ccreds, $_->[0], $type), @$_) } @l);
+
 		$_ = join('', map { pam_sufficient_line($o_ccreds, $type, @$_) } @l);
 
 		if ($control eq 'required') {
@@ -618,14 +603,11 @@ sub set_pam_authentication {
 }
 
 sub set_nsswitch_priority {
-	#my (@kinds) = @_;
     my ($kinds, $connected) = @_;
     my @known = qw(nis ldap winbind compat);
     substInFile {
 	if (my ($database, $l) = /^(\s*(?:passwd|shadow|group|automount):\s*)(.*)/) {
 	    my @l = difference2([ split(' ', $l) ], \@known);
-	    #    $_ = $database . join(' ', uniq('files', @kinds, @l)) . "\n";
-	    #}
 		$_ = $database . join(' ', uniq('files', @$kinds, @l)) . "\n";
 	}
 	if (/^\s*(?:passwd|group):/) {
@@ -927,10 +909,6 @@ sub fetch_dn {
 	
 sub configure_nss_ldap {
 	my ($authentication) = @_;
-	#my $authentication->{domain} = $authentication->{LDAPDOMAIN} || do {
-        #    my $s = run_program::rooted_get_stdout($::prefix, 'ldapsearch', '-x', '-h', $authentication->{LDAP_server}, '-b', '', '-s', 'base', '+');
-        #    first($s =~ /namingContexts: (.+)/);
-        #} or log::l("no ldap domain found on server $authentication->{LDAP_server}"), return;
 	update_ldap_conf(
                          host => $authentication->{LDAP_server},
                          base => $authentication->{LDAPDOMAIN},
