@@ -37,7 +37,7 @@ dist-svn:
 	svn export -q -rBASE . $(PRODUCT)-$(VERSION)/images
 	svn export -q -rBASE ../kernel $(PRODUCT)-$(VERSION)/kernel
 	cp ../Makefile.config $(PRODUCT)-$(VERSION)/
-	tar cfj $(PRODUCT)-$(VERSION).tar.xz $(PRODUCT)-$(VERSION)
+	tar cfJ $(PRODUCT)-$(VERSION).tar.xz $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
 
 dist-git:
