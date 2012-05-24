@@ -397,7 +397,7 @@ sub tell_kernel {
 
     my $F = partition_table::raw::openit($hd);
 
-    run_program::run('udevadm', 'control', '--stop-exec-queue') unless $::isInstall;
+    run_program::run('udevadm', 'control', '--stop-exec-queue');
 
     my $force_reboot = any { $_->[0] eq 'force_reboot' } @$tell_kernel;
     if (!$force_reboot) {
@@ -413,7 +413,7 @@ sub tell_kernel {
 	}
     }
 
-    run_program::run('udevadm', 'control', '--start-exec-queue') unless $::isInstall;
+    run_program::run('udevadm', 'control', '--start-exec-queue');
 
     if ($force_reboot) {
 	# FIXME Handle LVM/dmcrypt/RAID

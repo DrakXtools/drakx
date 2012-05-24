@@ -1,6 +1,4 @@
 - include needed symlinks for ndiswrapper (mga#44416)
-- partitioning wizard:
-  o fix removing several notebook pages
 - fix offering desktop choice (DVD has task-kde4-minimal instead of task-kde4)
   (mga#5574)
 - do not set fs_type to ext4 for raw LVM/RAID/LUKS
@@ -16,6 +14,9 @@
   o fix displaying empty info about RAID devices
   o fix listing RAID devices
   o reuse code from hd_gtk, fixes display of "Use free space" solution
+  o run udevadm in installer too
+    (might fix unnecessary reboot (mga#4439))
+  o fix removing several notebook pages
 - fix a crash when package state is empty (mga#5487)
 - fix not offering to upgrade RAID installs
   (udev was enabling RAIDs early but leaved them in inactive mode
