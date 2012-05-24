@@ -37,8 +37,10 @@ print STDERR "\nPlease wait, trying to find your root device...\n";
 
 mkdir_p($target);
 
-devices::init_device_mapper();
-lvm::detect_during_install();
+{
+    local $::isInstall = 1; # so that detect_during_install() got called by init:
+    lvm::init();
+}
 fs::dmcrypt::init;
 
 my @parts = map {
