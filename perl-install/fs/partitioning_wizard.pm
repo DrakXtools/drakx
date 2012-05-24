@@ -51,7 +51,7 @@ sub partition_with_diskdrake {
 	unless (fs::get::root_(\@fstab)) {
 	    $ok = 0;
 	    $in->ask_okcancel(N("Partitioning"), N("You must have a root partition.
-For this, create a partition (or click on an existing one).
+To accomplish this, create a partition (or click on an existing one).
 Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	}
 
