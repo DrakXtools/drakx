@@ -123,7 +123,11 @@ sub packageByName {
     my $best;
     foreach (@l) {
 	if ($best && $best != $_) {
-	    $_->compare_pkg($best) > 0 and $best = $_;
+	    if ($best->fullname eq $_->fullname) {
+		$best = $_ if $_->flag_installed;
+	    } else {
+	        $_->compare_pkg($best) > 0 and $best = $_;
+            }
 	} else {
 	    $best = $_;
 	}
