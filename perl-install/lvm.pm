@@ -29,8 +29,6 @@ sub cylinder_size {
     $hd->{extent_size};
 }
 
-init() or log::l("lvm::init failed");
-
 sub detect_during_install() {
     run_program::run('lvm2', 'vgscan');
     run_program::run('lvm2', 'vgchange', '-a', 'y');
@@ -41,6 +39,8 @@ sub init() {
     detect_during_install() if $::isInstall;
     1;
 }
+
+init() or log::l("lvm::init failed");
 
 sub lvm_cmd {
     if (my $r = run_program::run('lvm2', @_)) {
