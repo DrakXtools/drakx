@@ -307,13 +307,13 @@ sub _set_service {
     if (member($service, @xinetd_services)) {
         run_program::rooted($::prefix, "chkconfig", $enable ? "--add" : "--del", $service);
     } elsif (running_systemd() or has_systemd()) {
-      if (-l "/lib/systemd/system/$service.service") {
-        $service = basename(readlink("/lib/systemd/system/$service.service"));
-      }
-      else {
-        $service = $service . ".service"; 
-      }
-      run_program::rooted($::prefix, "/bin/systemctl", $enable ? "enable" : "disable", $service);
+        # systemctl rejects any symlinked units. You have to enabled the real file
+        if (-l "/lib/systemd/system/$service.service") {
+            $service = basename(readlink("/lib/systemd/system/$service.service"));
+        } else {
+            $service = $service.".service";
+        }
+        run_program::rooted($::prefix, "/bin/systemctl", $enable ? "enable" : "disable", $service);
     } else {
         my $script = "/etc/rc.d/init.d/$service";
         run_program::rooted($::prefix, "chkconfig", $enable ? "--add" : "--del", $service);
