@@ -104,8 +104,7 @@ stage2:
 
 dont_run_directly_stage2:
 	[ -d $(DEST) ] || ../../tools/mdkinst_stage2_tool --uncompress $(STAGE2_DEST)
-	echo -e '#!/bin/sh\n\nperl -I/usr/lib/libDrakX -Minstall::install2 -e "install::install2::start_udev()"\nexec /usr/bin/busybox sh' > $(DEST)/usr/bin/runinstall2.sh
-	chmod a+x $(DEST)/usr/bin/runinstall2.sh
+	install -m 755 share/runinstall2.sh share/gdb-inst $(DEST)/usr/bin/
 	ln -sf runinstall2.sh $(DEST)/usr/bin/runinstall2
 
 trace_stage2:
