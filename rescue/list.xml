@@ -318,6 +318,9 @@
   </from>
   <from dir="/usr/lib/libDrakX" expand="glob">
     raid.pm <!-- required when needed in guessmounts -->
+    fs/remote.pm <!-- required by fs::remote::* -->
+    fs/remote/davfs.pm <!-- required by fs -->
+    fs/remote/smb.pm <!-- required by fs -->
     fs/dmraid.pm <!-- required by fsedit -->
     partition_table/*.pm <!-- required by partimage_whole_disk -->
   </from>
