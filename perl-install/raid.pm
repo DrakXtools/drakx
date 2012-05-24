@@ -191,7 +191,10 @@ sub detect_during_install {
     }
     detect_during_install_once(@parts);
     detect_during_install_once(@parts) if active_mds(); #- try again to detect RAID 10
+    stop_inactive_mds();
+}
 
+sub stop_inactive_mds() {
     foreach (inactive_mds()) {
 	log::l("$_ is an inactive md, we stop it to ensure it doesn't busy devices");
 	run_program::run('mdadm', '--stop', devices::make($_));
