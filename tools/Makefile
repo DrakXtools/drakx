@@ -1,3 +1,4 @@
+CC          = gcc
 DIRS	    = serial_probe
 CFLAGS      = -Wall
 

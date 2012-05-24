@@ -1,3 +1,4 @@
+CC = gcc
 CFLAGS = -Wall -Os
 CFILES = $(wildcard *.c)
 OFILES = $(CFILES:%.c=%.o)
