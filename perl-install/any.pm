@@ -909,7 +909,7 @@ sub ask_user_and_root {
            ),
 	  { label => N("Real name"), val => \$u->{realname}, alignment => 'right', focus_out => sub {
 		$u->{name} ||= lc(Locale::gettext::iconv($u->{realname}, "utf-8", "ascii//TRANSLIT"));
-                $u->{name} =~ s/[^a-zA-Z0-9_-]//g; # drop any charcter that would break login program
+                $u->{name} =~ s/[^a-zA-Z0-9_-]//g; # drop any character that would break login program
 	    },
 	    focus => sub { !$superuser },
           },
