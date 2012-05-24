@@ -16,7 +16,8 @@ use modules;
 sub max_nb() { 31 }
 
 sub check_prog {
-    my ($in) = @_;
+    # perl_checker: require interactive
+    my ($in) = @_; # perl_checker: $in = interactive->new
     $::prefix ? whereis_binary('mdadm') : $in->do_pkgs->ensure_binary_is_installed('mdadm', 'mdadm');
 }
 
