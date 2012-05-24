@@ -446,7 +446,7 @@ sub installPackages {
     }
     any::writeandclean_ldsoconf($::prefix);
 
-    run_program::rooted_or_die($::prefix, 'ldconfig');
+    run_program::rooted_or_die($::prefix, 'ldconfig') if !$o->{justdb};
 
     log::l("Install took: ", formatTimeRaw(time() - $time));
     install::media::log_sizes();
@@ -463,7 +463,7 @@ Either your cdrom drive or your cdrom is defective.
 Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm\"
 ") if any { m|read failed: Input/output error| } cat_("$::prefix/root/drakx/install.log");
 
-    if (arch() !~ /^sparc/) { #- TODO restore it as may be needed for sparc
+    if (arch() !~ /^sparc/ && !$o->{justdb}) { #- TODO restore it as may be needed for sparc
 	-x "$::prefix/usr/bin/dumpkeys" or $::testing or die 
 "Some important packages did not get installed properly.
 
@@ -666,7 +666,8 @@ sub configureNetwork {
     my ($o) = @_;
     require network::network;
     network::network::configure_network($o->{net}, $o, $o->{modules_conf});
-    configure_firewall($o) if !$o->{isUpgrade};
+
+    configure_firewall($o) if !$o->{isUpgrade} && !$o->{justdb};
 
     #- only a http proxy can be used by stage1
     #- the method is http even for ftp connections through a http proxy

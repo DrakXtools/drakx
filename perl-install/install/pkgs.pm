@@ -378,6 +378,7 @@ sub empty_packages {
     $packages->{keep_unrequested_dependencies} =
       defined($o_keep_unrequested_dependencies) ? $o_keep_unrequested_dependencies : 1;
     $urpm::args::options{force_transactions} = 1;
+    $urpm::args::options{justdb} = $::o->{justdb};
     $::force = 1;
     $packages->{options}{ignoresize} = 1;
     # prevent priority upgrade (redundant for now as $urpm->{root} implies disabling it:
