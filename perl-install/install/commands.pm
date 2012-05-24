@@ -276,7 +276,7 @@ sub hexdump {
 sub more {
     @ARGV = @_;
     require devices;
-    my $tty = devices::make('tty');
+    my $tty = '/dev/tty';
     my $n = 0; 
     open(my $IN, $tty) or die "cannot open $tty\n";
     local $_;

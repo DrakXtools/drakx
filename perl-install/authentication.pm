@@ -797,7 +797,7 @@ sub enable_shadow() {
 sub salt {
     my ($nb) = @_;
     require devices;
-    open(my $F, devices::make("urandom")) or die "missing urandom";
+    open(my $F, "/dev/urandom") or die "missing urandom";
     my $s; read $F, $s, $nb;
     $s = pack("b8" x $nb, unpack "b6" x $nb, $s);
     $s =~ tr|\0-\x3f|0-9a-zA-Z./|;

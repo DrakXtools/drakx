@@ -340,8 +340,7 @@ sub pre_init_brltty() {
 
 sub init_brltty() {
     symlink "/tmp/stage2/$_", $_ foreach "/etc/brltty";
-    devices::make($_) foreach $o->{brltty}{device} ? $o->{brltty}{device} : qw(ttyS0 ttyS1);
-    devices::make("vcsa");
+    devices::make($_) foreach $o->{brltty}{device};
     run_program::run("brltty");
 }
 

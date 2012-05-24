@@ -160,8 +160,6 @@ sub part {
 		set_loop($part);
 		$options = join(',', grep { !/^(encryption=|encrypted$|loop$)/ } split(',', $options)); #- we take care of this, don't let it mount see it
 	    } elsif (isLoopback($part)) {
-		#- mount will take care, but we must help it
-		devices::make("loop$_") foreach 0 .. 7;
 		$options = join(',', uniq('loop', split(',', $options))); #- ensure the loop options is used
 	    } elsif ($part->{options} =~ /encrypted/) {
 		log::l("skip mounting $part->{device} since we do not have the encrypt_key");
