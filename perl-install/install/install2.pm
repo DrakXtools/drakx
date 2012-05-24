@@ -584,8 +584,9 @@ sub main {
 		$_->{device} =~ s!^/dev/!!;
 	    }
 	}
+    } else {
+        $o->{interactive} ||= 'gtk';
     }
-    $o->{interactive} ||= 'gtk' if !$::auto_install;
  
     if ($o->{interactive} eq "gtk" && availableMemory() < 22 * 1024) {
  	log::l("switching to curses install cuz not enough memory");
