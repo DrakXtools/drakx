@@ -510,6 +510,7 @@ sub rpmsrate_always_flags {
         log::l("activation light desktop mode (for low resources systems or netbook/nettops)");
         $rpmsrate_flags_chosen->{LIGHT} = 1;
     }
+    # FIXME: to be updated!!!
     $rpmsrate_flags_chosen->{'3D'} = 1 if
       $o->{match_all_hardware} ||
       detect_devices::matching_desc__regexp('Matrox.* G[245][05]0') ||
