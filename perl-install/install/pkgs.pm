@@ -272,8 +272,11 @@ sub _resolve_requested_and_check {
 
     my @l = $packages->resolve_requested($packages->{rpmdb}, $state, $requested,
 					 callback_choices => \&packageCallbackChoices, no_suggests => $::o->{no_suggests});
-    my @new_ids = map { $packages->{depslist}[$_]->id } grep { $state->{selected}{$_}{suggested} } keys $state->{selected};
-    @suggested_package_ids = uniq(@suggested_package_ids, @new_ids);
+
+    if (!is_empty_hash_ref($state->{selected})) {
+        my @new_ids = map { $packages->{depslist}[$_]->id } grep { $state->{selected}{$_}{suggested} } keys $state->{selected};
+        @suggested_package_ids = uniq(@suggested_package_ids, @new_ids);
+    }
 
     my $error;
     if (find { !exists $state->{selected}{$_} } keys %$requested) {
