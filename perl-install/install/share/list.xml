@@ -28,7 +28,7 @@
   mkfs.xfs xfs_admin
   xfs_freeze xfs_io <!-- needed for setup grub on XFS formated / -->
 
-  mkfs.btrfs btrfsctl btrfs
+  mkfs.btrfs btrfsctl btrfs btrfsck fsck.btrfs
   mkfs.nilfs2 nilfs-tune
 
   tty stty <!-- needed for text mode installer (through unicode_start) -->
