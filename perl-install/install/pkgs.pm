@@ -780,11 +780,8 @@ sub _install_raw {
             $msg =~ s/:$/\n\n/m; # FIXME: to be fixed in urpmi after 2008.0 (sic!)
             log::l($msg);
             log::l($msg2);
-            if ($packages->{options}{auto}) {
-                0;
-            } else {
-                $::o->ask_yesorno(N("Warning"), "$msg\n\n$msg2");
-            }
+            return 0 if $packages->{options}{auto};
+            $::o->ask_yesorno(N("Warning"), "$msg\n\n$msg2");
         },
         copy_removable => sub {
             my ($medium) = @_;
