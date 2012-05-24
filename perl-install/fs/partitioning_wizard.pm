@@ -280,7 +280,7 @@ When you are done, do not forget to save using `w'", partition_table::descriptio
 
 sub warn_reboot_needed {
     my ($in) = @_;
-    $in->ask_warn(N("Partitioning"), N("You need to reboot for the partition table modifications to take place"));
+    $in->ask_warn(N("Partitioning"), N("You need to reboot for the partition table modifications to take effect"));
 }
 
 sub create_display_box {

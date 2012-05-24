@@ -298,7 +298,7 @@ sub Done {
 	update_bootloader_for_renumbered_partitions($in, $all_hds);
 
 	if (any { $_->{rebootNeeded} } @{$all_hds->{hds}}) {
-	    $in->ask_warn(N("Partitioning"), N("You need to reboot for the partition table modifications to take place"));
+	    $in->ask_warn(N("Partitioning"), N("You need to reboot for the partition table modifications to take effect"));
 	    tell_wm_and_reboot();
 	}
     }
@@ -1232,7 +1232,7 @@ sub check {
 
 sub check_rebootNeeded {
     my ($_in, $hd) = @_;
-    $hd->{rebootNeeded} and die N("You'll need to reboot before the modification can take place");
+    $hd->{rebootNeeded} and die N("You'll need to reboot before the modification can take effect");
 }
 
 sub write_partitions {
