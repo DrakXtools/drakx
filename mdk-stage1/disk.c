@@ -19,14 +19,14 @@
  *
  */
 
+#define _GNU_SOURCE         /* We want the non segfaulting my_dirname() -- See dirname(3) */
+#include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
-#include <string.h>
 #include <sys/mount.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <string.h>
 #include <libgen.h>
 #include "stage1.h"
 #include "frontend.h"
@@ -155,7 +155,7 @@ static enum return_type try_with_device(char *dev_name)
 		char * path = strdup(answers_location[0]);
 		stg1_error_message("Directory or ISO image file could not be found on partition.\n"
 			      "Here's a short extract of the files in the directory %s:\n"
-			      "%s", dirname(path), extract_list_directory(dirname(location_full)));
+			      "%s", my_dirname(path), extract_list_directory(my_dirname(location_full)));
 		free(path);
 		goto ask_dir;
 	}
