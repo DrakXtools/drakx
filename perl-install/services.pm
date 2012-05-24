@@ -154,9 +154,10 @@ sub ask_ {
 			 N("File sharing") => [ qw(amd auth2.init autofs codasrv.init mcserv netfs nettalk nfs-common nfs-server 
                                                    nfslock smb swat update.init venus.init) ],
 
-			 N("System") => [ qw(acon acpid alsa anacron apcupsd apmd atd bpowerd bpowerfail crond cvs fcron functions
+			 N("System") => [ qw(acon acpid alsa anacron apcupsd apmd atd bpowerd bpowerfail crond cvs dm fcron functions
                                              gpm halt harddrake inetd irda jserver keytable kheader killall kudzu mageia_everytime
-                                             mageia_firstime medusa-init mosix network numlock pcmcia portmap powertweak.init psacct
+                                             mageia_firstime mdadm medusa-init messagebus microcode_ctl mosix network netconsole numlock partmon
+                                             pcmcia portmap powertweak.init psacct
                                              random rawdevices rpcbind sensors single sound syslog syslog-ng ups usb usbd wine xfs xinetd) ],
 
 			 N("Remote Administration") => [ qw(cfd drakxtools_http heartbeat iplog ldirectord mon netsaint olympusd rexec
