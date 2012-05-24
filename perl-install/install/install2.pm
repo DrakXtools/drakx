@@ -317,6 +317,16 @@ sub stop_udev() {
     fs::mount::umount($_) foreach '/dev/pts', '/dev/shm', '/run';
 }
 
+sub init_local_install {
+    my ($o) = @_;
+    push @::auto_steps, 
+#      'selectLanguage', 'selectKeyboard', 'miscellaneous', 'selectInstallClass',
+      'doPartitionDisks', 'formatPartitions';
+	fs::mount::usbfs(''); #- do it now so that when_load doesn't do it
+	$o->{nomouseprobe} = 1;
+	$o->{mouse} = mouse::fullname2mouse('Universal|Any PS/2 & USB mice');
+}
+
 #-######################################################################################
 #- MAIN
 #-######################################################################################
@@ -426,14 +436,7 @@ sub main {
 
     start_udev() if !$::local_install;
 
-    if ($::local_install) {
-	push @::auto_steps, 
-#	  'selectLanguage', 'selectKeyboard', 'miscellaneous', 'selectInstallClass',
-	  'doPartitionDisks', 'formatPartitions';
-	fs::mount::usbfs(''); #- do it now so that when_load doesn't do it
-	$o->{nomouseprobe} = 1;
-	$o->{mouse} = mouse::fullname2mouse('Universal|Any PS/2 & USB mice');
-    }
+    init_local_install($o) if $::local_install;
 
     $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : "/mnt";
     mkdir $::prefix, 0755;
