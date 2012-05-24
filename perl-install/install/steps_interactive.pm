@@ -598,6 +598,7 @@ Please choose the minimal installation you want:"),
 	$o->{rpmsrate_flags_chosen}{CAT_MINIMAL_DOCS} = $docs;
 	$o->{no_suggests} = !$suggests;
 	$o->{compssListLevel} = pkgs::rpmsrate_rate_max() if !$suggests;
+	log::l("install settings: no_suggests=$o->{no_suggests}, excludedocs=$o->{excludedocs}, really_minimal_install=$minimal");
 
 	install::any::unselectMostPackages($o);
     }
