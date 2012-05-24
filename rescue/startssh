@@ -8,8 +8,8 @@ fi
 
 # generate host keys
 mkdir -p /etc/dropbear
-[[ -f /etc/dropbear/dropbear_dss_host_key ]] || dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key >/dev/null || { echo "Can't generate dsa host key" >&2 ; exit 4 }
-[[ -f /etc/dropbear/dropbear_rsa_host_key ]] || dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key >/dev/null || { echo "Can't generate rsa host key" >&2 ; exit 3 }
+[[ -f /etc/dropbear/dropbear_dss_host_key ]] || dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key >/dev/null || { echo "Can't generate dsa host key" >&2 ; exit 4; }
+[[ -f /etc/dropbear/dropbear_rsa_host_key ]] || dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key >/dev/null || { echo "Can't generate rsa host key" >&2 ; exit 3; }
 
 # set a password
 passwd=`genpasswd`
@@ -17,11 +17,11 @@ if (( $? != 0 )); then
 	reset
 	exit $?
 fi
-sed -E -i -e 's/^root:[^:]*:/root:'"$passwd"':/' /etc/passwd || { echo "Can't set password" >&2 ; exit 2 }
+sed -E -i -e 's/^root:[^:]*:/root:'"${passwd//\//\\/}"':/' /etc/passwd || { echo "Can't set password" >&2 ; exit 2; }
 
 # test for /dev/pts
 grep '^devpts /dev/pts devpts ' /proc/mounts >/dev/null 2>/dev/null || mount -t devpts devpts /dev/pts
 
 echo ""
 echo -n "Starting ssh daemon... "
-dropbear -E 2>/var/log/dropbear.log && echo "OK" || { echo "Failed" ; exit 1 }
+dropbear -E 2>/var/log/dropbear.log && echo "OK" || { echo "Failed" ; exit 1; }
