@@ -19,7 +19,7 @@ dist-svn:
 	svn export -q -rBASE . $(PRODUCT)-$(VERSION)/rescue
 	cp ../Makefile.config $(PRODUCT)-$(VERSION)/
 	cp ../tools/install-xml-file-list $(PRODUCT)-$(VERSION)/tools
-	tar cfj $(PRODUCT)-$(VERSION).tar.bz2 $(PRODUCT)-$(VERSION)
+	tar cfJ $(PRODUCT)-$(VERSION).tar.x2 $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
 
 dist-git:
