@@ -419,11 +419,6 @@ sub installPackages {
 	install::pkgs::selectPackage($o->{packages}, install::pkgs::packageByName($o->{packages}, 'plymouth'));
     }
 
-    # those packages are mandatory, and requires(pre) doesnt seems to work...
-    install::pkgs::selectPackage($o->{packages}, install::pkgs::packageByName($o->{packages}, 'rpm-helper'));
-    install::pkgs::selectPackage($o->{packages}, install::pkgs::packageByName($o->{packages}, 'shadow-utils'));
-    log::l("be sure that kernel-firmware is installed");
-    install::pkgs::selectPackage($o->{packages}, install::pkgs::packageByName($o->{packages}, 'kernel-firmware'));
     my $packages = $o->{packages};
 
     install::pkgs::remove_marked_ask_remove($packages, \&installCallback);
