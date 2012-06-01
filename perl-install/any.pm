@@ -186,7 +186,7 @@ sub setupBootloaderBefore {
 	    my $biggest_swap_dev = fs::wild_device::from_part('', $biggest_swap);
 	    bootloader::set_append_with_key($bootloader, resume => $biggest_swap_dev);
 	    mkdir_p("$::prefix/etc/dracut.conf.d");
-	    output("$::prefix/etc/dracut.conf.d/51-mandriva-resume.conf", qq(add_device+="$biggest_swap_dev"\n));
+	    output("$::prefix/etc/dracut.conf.d/51-drakx-resume.conf", qq(add_device+="$biggest_swap_dev"\n));
 	}
     }
 
