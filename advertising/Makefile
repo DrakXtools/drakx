@@ -14,7 +14,7 @@ install:
 tar:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
 	svn export -q . $(PRODUCT)-$(VERSION)
-	tar cfj $(PRODUCT)-$(VERSION).tar.bz2 $(PRODUCT)-$(VERSION)
+	tar cfJ $(PRODUCT)-$(VERSION).tar.xz $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
 
 clean:
