@@ -64,7 +64,9 @@ LIBC_LIBS += -lcompat
 endif
 
 ifeq (uclibc, $(LIBC))
+ifndef DYNAMIC
 LDFLAGS += -static
+endif
 endif
 
 ifdef DEBUG
