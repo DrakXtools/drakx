@@ -11,7 +11,7 @@ install:
 	install -m644 `cat list-$(THEME)` $(DESTDIR)
 	install -m644 list-$(THEME) $(DESTDIR)/list
 
-tar:
+dist:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
 	svn export -q . $(PRODUCT)-$(VERSION)
 	tar cfJ $(PRODUCT)-$(VERSION).tar.xz $(PRODUCT)-$(VERSION)
