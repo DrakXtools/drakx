@@ -1,1 +1,1 @@
-$title = N("Mandriva 2011 Powerpack");
+$title = N("Mandriva 2012 Powerpack");
