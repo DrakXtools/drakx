@@ -14,7 +14,7 @@ my $default_append = '';
 my $default_acpi = '';
 my $default_vga = "vga=788 splash quiet";
 my $timeout = 150;
-my $isolinux_bin = $arch eq 'x86_64' ? '/usr/lib/syslinux/isolinux-x86_64.bin' : '/usr/lib/syslinux/isolinux-i586.bin';
+my $isolinux_bin = '/usr/lib/syslinux/isolinux.bin';
 my $lib = $arch eq 'x86_64' ? 'lib64' : 'lib';
 
 my $tmp_mnt = '/tmp/drakx_mnt';
