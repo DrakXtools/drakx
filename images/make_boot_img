@@ -16,6 +16,7 @@ my $default_vga = "vga=788 splash quiet";
 my $timeout = 150;
 my $isolinux_bin = '/usr/lib/syslinux/isolinux.bin';
 my $lib = $arch eq 'x86_64' ? 'lib64' : 'lib';
+my $wordsize = $arch eq 'x86_64' ? '64' : '32';
 
 my $tmp_mnt = '/tmp/drakx_mnt';
 my $tmp_initrd = '/tmp/drakx_initrd';
@@ -57,7 +58,7 @@ foreach my $img (@images) {
 	isolinux(\@kernels);
 
 	if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
-	    system("/bin/cp -f isolinux/alt0/* $tftpboot");
+	    system("/bin/cp -f isolinux/alt0/$wordsize/* $tftpboot");
 	}
     } elsif ($img =~ /boot.iso/) {
 	boot_iso($img, \@kernels);
@@ -111,18 +112,46 @@ sub syslinux_msg {
       . "\n" . syslinux_color('red') . "[F1-Help] [F2-Advanced Help]" . syslinux_color('default') . "\n";
 }
 
-sub syslinux_cfg {
-    my ($entries, $b_gfxboot) = @_;
-    my $default = 'linux';
+sub syslinux_cfg_init {
+    my $default = 'load';
 
     my $header = <<EOF;
-default $default
+default load
+timeout $timeout
+display help.msg
+implicit 0
+
+SERIAL 0
+
+label load
+	com32 ifcpu.c32
+	append 64 -- 64 -- 32
+
+label 32 
+	CONFIG 32.cfg
+
+label 64
+	CONFIG 64.cfg
+
+EOF
+}
+
+sub syslinux_cfg {
+    my ($entries, $b_gfxboot, $type) = @_;
+    my $default = 'linux';
+    my $promp = 
+
+    my $header == "default $default\n";
+    if ($type ne 'cdrom') {
+	$header .= <<EOF;
 prompt 1
 timeout $timeout
 display help.msg
 implicit 1
 EOF
+    }
     my $header_gfxboot = <<EOF;
+UI gfxboot.c32 bootlogo
 label harddisk
   localboot 0x80
 EOF
@@ -221,7 +250,7 @@ fi
 
     my $devs = sprintf "ls /dev/{%s}", join(',', qw(console fb0 fd0 loop3 mem null ppp ptmx ptyp0 ram3 random tty[0-7] ttyp0 ttyS0 urandom));
 
-    _ "(cd $tmp_initrd; (find . ; $devs) | cpio -o -c --quiet) | xz -v --check=crc32 -9e  > $img";
+    _ "(cd $tmp_initrd; (find . ; $devs) | cpio -o -c --quiet) | xz -v --check=crc32 -9e > $img";
     _ "rm -rf $tmp_initrd";
 }
 
@@ -254,14 +283,15 @@ sub syslinux_cfg_all {
 
     syslinux_cfg([
 	(map {
-	    { kernel => 'alt0/vmlinuz', initrd => 'alt0/all.rdz', %$_ };
+	    { kernel => "alt0/$wordsize/vmlinuz", initrd => "alt0/$wordsize/all.rdz", %$_ };
 	} entries_append($type)),
 	(map_index {
-	    { label => "alt$::i", kernel => "alt$::i/vmlinuz", initrd => "alt$::i/all.rdz", 
+	    { label => "alt$::i", kernel => "alt$::i/$wordsize/vmlinuz", initrd => "alt$::i/$wordsize/all.rdz", 
 	      append => join(' ', grep { $_ } $default_append, $default_acpi, $default_vga) };
 	} @kernels),
 	{ label => 'memtest', kernel => 'memtest' },
-    ], $b_gfxboot);
+	{ label => 'hdt', kernel => 'hdt.c32', append => 'modules=modules.pci' }
+    ], $b_gfxboot, $type);
 }
 sub remove_ending_zero {
     my ($img) = @_;
@@ -714,10 +744,10 @@ sub syslinux_all_files {
     my $theme = $ENV{THEME} || 'Mandriva-Free';
 
     each_index {
-	mkdir "$dir/alt$::i", 0777;
-	_ "cp all.kernels/$_/vmlinuz $dir/alt$::i";
+	mkdir "$dir/alt$::i/$wordsize", 0777;
+	_ "install -m644 all.kernels/$_/vmlinuz -D $dir/alt$::i/$wordsize/vmlinuz";
 	initrd('all', '', "images/all.rdz-$_");
-	rename("images/all.rdz-$_", "$dir/alt$::i/all.rdz");
+	rename("images/all.rdz-$_", "$dir/alt$::i/$wordsize/all.rdz");
     } @$kernels;
 
     _ "install -m 644 -D /boot/memtest* $dir/memtest";
@@ -734,8 +764,10 @@ sub isolinux {
     syslinux_all_files('isolinux', $kernels);
 
     _ "cp $isolinux_bin isolinux/isolinux.bin";
+    _ "cp /usr/lib/syslinux/ifcpu.c32 isolinux/ifcpu.c32";
     _ "cp /usr/lib/syslinux/gfxboot.c32 isolinux/gfxboot.c32";
-    output("isolinux/isolinux.cfg", syslinux_cfg_all('cdrom', 1));
+    output("isolinux/isolinux.cfg", syslinux_cfg_init());
+    output("isolinux/$wordsize.cfg", syslinux_cfg_all('cdrom', 1));
 
     xbox_stage1() if arch() =~ /i.86/;
 }
@@ -804,8 +836,8 @@ fallback 1
 title Mandriva Linux Install
 
 root (hd0,0)
-kernel /cooker/isolinux/alt0/vmlinuz $default_append $default_acpi $default_vga automatic=method:disk
-initrd /cooker/isolinux/alt0/all.rdz
+kernel /cooker/isolinux/alt0/$wordsize/vmlinuz $default_append $default_acpi $default_vga automatic=method:disk
+initrd /cooker/isolinux/alt0/$wordsize/all.rdz
 
 title Help
 
