@@ -246,11 +246,11 @@ sub setupBootloaderUntilInstalled {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
     do {
         my $before = fs::fstab_to_string($all_hds);
-        setupBootloader($in, $b, $all_hds, $fstab, $security) or $in->exit;
         if ($before ne fs::fstab_to_string($all_hds)) {
             #- for /tmp using tmpfs when "clean /tmp" is chosen
             fs::write_fstab($all_hds);
         }
+        setupBootloader($in, $b, $all_hds, $fstab, $security) or $in->exit;
     } while !installBootloader($in, $b, $all_hds);
 }
 
