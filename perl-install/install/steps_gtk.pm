@@ -93,7 +93,7 @@ sub _setup_and_start_X {
             !$o->{vga16} && $o->{allowFB} or next;
 
             $o->{allowFB} = _launchX($o, $f, $prog, $Driver, $wanted_DISPLAY) #- keep in mind FB is used.
-              and return;
+              and return 1;
         } else {
             $o->{vga16} = 1 if /VGA16/;
             _launchX($o, $f, $prog, $Driver, $wanted_DISPLAY) and return 1;
