@@ -97,6 +97,7 @@ our %l = (
     tokenring => [ qw(3c359 abyss ibmtr lanstreamer olympic proteon skisa smctr tms380tr tmspci) ],
     wan => [ qw(c101 cosa cyclomx cycx_drv dlci dscc4 farsync hdlc hostess_sv11 lapbether lmc n2 pc300 pci200syn sbni sdla sdladrv sealevel syncppp wanxl z85230) ],
     usb_dsl => [ qw(cxacru speedtch ueagle-atm usbatm xusbatm) ],
+    virtual => [ qw(xen-netfront) ],
   },
 
   ################################################################################
@@ -154,7 +155,7 @@ our %l = (
         qw(qla2100 qla2200 qla2300 qla2322 qla4xxx qla6312 qla6322),
       ),
     ],
-    virtual => [ qw(xenblk virtio_blk) ],
+    virtual => [ qw(hv_storvsc virtio_blk virtio_scsi xenblk) ],
     pcmcia => [ qw(aha152x_cs fdomain_cs nsp_cs qlogic_cs ide-cs pata_pcmcia sym53c500_cs) ],
     raw => [ qw(ide-gd_mod sd_mod) ],
     usb => [ qw(keucr uas ums-alauda ums-cypress ums-datafab ums-eneub6250 ums-freecom ums-isd200),
