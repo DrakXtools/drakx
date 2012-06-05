@@ -76,7 +76,7 @@ char * env[] = {
 #endif
 	,
 	"HOME=/",
-	"TERM=screen",
+	"TERM=linux",
 	"TERMINFO=/etc/terminfo",
 	"LC_CTYPE=UTF-8",
 	NULL
