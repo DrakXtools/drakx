@@ -39,29 +39,38 @@
 
 int mygethostbyname(char * name, struct in_addr * addr)
 {
-	struct hostent * h;
+	struct addrinfo hints, *res, *p;
+	int status;
+	char ipstr[INET6_ADDRSTRLEN];
+
+	memset(&hints, 0, sizeof hints);
+	hints.ai_family = AF_INET; //AF_UNSPEC for both IPv4 & IPv6
+	hints.ai_socktype = SOCK_STREAM;
 
 	/* prevent from timeouts */
 	if (_res.nscount == 0) 
 		return -1;
 
-	h = gethostbyname(name);
-
-	if (!h && domain) {
-		// gethostbyname from dietlibc doesn't support domain handling
-		char fully_qualified[500];
-		sprintf(fully_qualified, "%s.%s", name, domain);
-		h = gethostbyname(fully_qualified);
+	if ((status = getaddrinfo(name, NULL, &hints, &res)) != 0) {
+          log_message("getaddrinfo: %s\n", gai_strerror(status));
+          return -1;
 	}
 
-	if (h && h->h_addr_list && (h->h_addr_list)[0]) {
-		memcpy(addr, (h->h_addr_list)[0], sizeof(*addr));
-		log_message("is-at: %s", inet_ntoa(*addr));
-		return 0;
+	for (p = res;p != NULL; p = p->ai_next) {
+          void *tmp_addr;
+
+          struct sockaddr_in *ipv = (struct sockaddr_in *)p->ai_addr;
+          tmp_addr = &(ipv->sin_addr);
+
+          /* convert the IP to a string: */
+          inet_ntop(p->ai_family, addr, ipstr, sizeof ipstr);
+
+	  memcpy(addr, tmp_addr, sizeof(*addr));
+	  log_message("is-at: %s\n", inet_ntoa(*addr));
 	}
 
-	log_message("unknown host %s", name);
-	return -1;
+	freeaddrinfo(res); // free the linked list
+	return 0;
 }
 
 char * mygethostbyaddr(char * ipnum)
