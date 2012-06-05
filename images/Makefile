@@ -3,7 +3,7 @@ include ../Makefile.config
 VERSION=1.56
 PRODUCT=$(FAMILY)-images
 KERNELS=$(shell rpm -qf /lib/modules/3.*)
-ROOTDEST = /usr/$(LIB)/$(FAMILY)
+ROOTDEST = $(LOCATION)/root
 IMAGES_DEST = $(ROOTDEST)/install/images
 
 all: images
