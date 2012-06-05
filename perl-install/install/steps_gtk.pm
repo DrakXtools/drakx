@@ -36,7 +36,7 @@ sub new($$) {
 
     if (!$::local_install && 
 	($::testing ? $ENV{DISPLAY} ne $wanted_DISPLAY : $ENV{DISPLAY} =~ /^:\d/)) { #- is the display local or distant?
-        _setup_and_start_X($o, $wanted_DISPLAY);
+        _setup_and_start_X($o, $wanted_DISPLAY) or return;
     }
 
     $ENV{DISPLAY} = $wanted_DISPLAY;
@@ -96,7 +96,7 @@ sub _setup_and_start_X {
               and return;
         } else {
             $o->{vga16} = 1 if /VGA16/;
-            _launchX($o, $f, $prog, $Driver, $wanted_DISPLAY) and return;
+            _launchX($o, $f, $prog, $Driver, $wanted_DISPLAY) and return 1;
         }
     }
     return undef;
