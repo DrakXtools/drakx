@@ -27,10 +27,11 @@ all: $(TARGET) pcmcia_probe.o
 clean:
 	rm -f *.o $(TARGET) lex_config.c yacc_config.c yacc_config.h
 
-FLAGS = -D__linux__ -Wall -Werror -Wno-deprecated-declarations -Os -fomit-frame-pointer -pipe -c -I.. -D_BSD_SOURCE
+CFLAGS = -Wall -Werror -Wno-deprecated-declarations -Os -fomit-frame-pointer -pipe
+INCLUDES += -I$(top_dir) -D_BSD_SOURCE
+
 # (blino) make sure yynewerror and yyerrlab are uselessly used
-FLAGS += -Dlint
-LFLAGS += --nounput
+INCLUDES += -Dlint
 
 
 OBJS = probe.o startup.o yacc_config.o lex_config.o
@@ -46,7 +47,7 @@ $(TARGET): $(OBJS) yacc_config.h
 	ranlib $@
 
 $(OBJS): %.o: %.c
-	$(DIET) $(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
+	$(DIET) $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 pcmcia_probe.o: probe.c
-	$(DIET) $(CC) -fPIC $(FLAGS) $(INCLUDES) -c $< -o $@
+	$(DIET) $(CC) -fPIC $(CFLAGS) $(INCLUDES) -c $< -o $@
