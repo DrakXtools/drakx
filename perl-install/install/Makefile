@@ -1,9 +1,8 @@
 include ../../Makefile.config
 include ../Makefile.config
 
-PRODUCT=drakx-installer-stage2
+PRODUCT=$(FAMILY)-stage2
 
-ROOTDEST = /export
 STAGE2_DEST = $(ROOTDEST)/install/stage2
 DEST = $(STAGE2_DEST)/live
 
@@ -42,51 +41,51 @@ tar:
 
 install:
 	$(MAKE) full_stage2
-	echo $(VERSION) > $(STAGE2_DEST)/VERSION
+	echo $(VERSION) > $(DESTDIR)$(STAGE2_DEST)/VERSION
 
 install_pms:
-	[ -d $(DEST) ] || ../../tools/mdkinst_stage2_tool --uncompress $(STAGE2_DEST)
+	[ -d $(DESTDIR)$(DEST) ] || ../../tools/mdkinst_stage2_tool --uncompress $(DESTDIR)$(STAGE2_DEST)
 
-	for i in `perl -ne 's/sub (\w+?)_?(\(\))? {.*/$$1/ and print' commands.pm` sync; do ln -sf commands $(DEST)/usr/bin/$$i; done
+	for i in `perl -ne 's/sub (\w+?)_?(\(\))? {.*/$$1/ and print' commands.pm` sync; do ln -sf commands $(DESTDIR)$(DEST)/usr/bin/$$i; done
 
-	install -d $(DESTREP4PMS)
+	install -d $(DESTDIR)$(DESTREP4PMS)
 	cd .. ; for i in $(PMS); do \
-		dest=$(DESTREP4PMS)/`dirname $$i`; \
+		dest=$(DESTDIR)$(DESTREP4PMS)/`dirname $$i`; \
 		install -d $$dest; \
-		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=(back|begin|head|item)/ .. /^=cut/) || /use (diagnostics|strict|vars|warnings)/' $$i > $(DESTREP4PMS)/$$i; \
+		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=(back|begin|head|item)/ .. /^=cut/) || /use (diagnostics|strict|vars|warnings)/' $$i > $(DESTDIR)$(DESTREP4PMS)/$$i; \
 	done
 
-	cp ../share/*.rc share/*.rc $(DESTREP4PMS)
-	chmod a+x $(DESTREP4PMS)/install/install2
-	chmod a+x $(DESTREP4PMS)/install/commands
+	cp ../share/*.rc share/*.rc $(DESTDIR)$(DESTREP4PMS)
+	chmod a+x $(DESTDIR)$(DESTREP4PMS)/install/install2
+	chmod a+x $(DESTDIR)$(DESTREP4PMS)/install/commands
 
 get_needed_files: xs
-	REP4PMS=$(REP4PMS) ../../tools/install-xml-file-list share/list.xml $(DEST)
-	chmod u-s -R $(DEST) # for mount/umount
-	share/generate-xlocales $(DEST)
+	REP4PMS=$(REP4PMS) ../../tools/install-xml-file-list share/list.xml $(DESTDIR)$(DEST)
+	chmod u-s -R $(DESTDIR)$(DEST) # for mount/umount
+	share/generate-xlocales $(DESTDIR)$(DEST)
 
-	mv -f $(DEST)/usr/$(LIB)/*.so* $(DEST)/$(LIB)
-	../../tools/simplify-drakx-modules $(DEST)/usr/*/*/*/utf8_heavy.pl
+	mv -f $(DESTDIR)$(DEST)/usr/$(LIB)/*.so* $(DESTDIR)$(DEST)/$(LIB)
+	../../tools/simplify-drakx-modules $(DESTDIR)$(DEST)/usr/*/*/*/utf8_heavy.pl
 
-	perl -I.. -Mlang -e 'symlink "UTF-8", "$(DEST)/usr/share/locale/$$_" foreach lang::list_langs()'
+	perl -I.. -Mlang -e 'symlink "UTF-8", "$(DESTDIR)$(DEST)/usr/share/locale/$$_" foreach lang::list_langs()'
 
-	perl -ane 'symlink "$$F[1]", "$(DEST)$$F[0]"' share/aliases
+	perl -ane 'symlink "$$F[1]", "$(DESTDIR)$(DEST)$$F[0]"' share/aliases
 ifeq (ia64,$(ARCH))
-	ln -sf bash $(DEST)/bin/sh
+	ln -sf bash $(DESTDIR)$(DEST)/bin/sh
 else
-	ln -sf ash $(DEST)/bin/sh
+	ln -sf ash $(DESTDIR)$(DEST)/bin/sh
 endif
 
-	mkfontdir $(DEST)/usr/share/fonts
-	fc-cache -f $(DEST)/usr/share/fonts
+	mkfontdir $(DESTDIR)$(DEST)/usr/share/fonts
+	fc-cache -f $(DESTDIR)$(DEST)/usr/share/fonts
 
-	$(MAKE) -C ../share/po install SUDO= LOCALEDIR=$(DEST)/usr/share/locale_special
-	$(MAKE) -C help/po install SUDO= LOCALEDIR=$(DEST)/usr/share/locale_special
-	$(MAKE) -C share/po install SUDO= LOCALEDIR=$(DEST)/usr/share/locale_special
+	$(MAKE) -C ../share/po install SUDO= LOCALEDIR=$(DESTDIR)$(DEST)/usr/share/locale_special
+	$(MAKE) -C help/po install SUDO= LOCALEDIR=$(DESTDIR)$(DEST)/usr/share/locale_special
+	$(MAKE) -C share/po install SUDO= LOCALEDIR=$(DESTDIR)$(DEST)/usr/share/locale_special
 # POFILES to disable for installation:
 # be,fur: too few messages translated; 
 # ta: font problem
-	rm -rf $(DEST)/usr/share/locale_special/{be,fur,ta}
+	rm -rf $(DESTDIR)$(DEST)/usr/share/locale_special/{be,fur,ta}
 
 full_stage2:
 	$(MAKE) stage2
@@ -94,23 +93,23 @@ full_stage2:
 	$(MAKE) compress
 
 compress:
-	../../tools/mdkinst_stage2_tool --clean --compress $(STAGE2_DEST)
+	../../tools/mdkinst_stage2_tool --clean --compress $(DESTDIR)$(STAGE2_DEST)
 
 stage2:
-	rm -rf $(DEST)
-	mkdir -p $(DEST)
+	rm -rf $(DESTDIR)$(DEST)
+	mkdir -p $(DESTDIR)$(DEST)
 	$(MAKE) get_needed_files 
 	$(MAKE) install_pms
 
 dont_run_directly_stage2:
-	[ -d $(DEST) ] || ../../tools/mdkinst_stage2_tool --uncompress $(STAGE2_DEST)
-	install -m 755 share/runinstall2.sh share/gdb-inst $(DEST)/usr/bin/
-	ln -sf runinstall2.sh $(DEST)/usr/bin/runinstall2
+	[ -d $(DEST) ] || ../../tools/mdkinst_stage2_tool --uncompress $(DESTDIR)$(STAGE2_DEST)
+	install -m 755 share/runinstall2.sh share/gdb-inst $(DESTDIR)$(DEST)/usr/bin/
+	ln -sf runinstall2.sh $(DESTDIR)$(DEST)/usr/bin/runinstall2
 
 trace_stage2:
-	[ -d $(DEST) ] || ../../tools/mdkinst_stage2_tool --uncompress $(STAGE2_DEST)
-	f=`perldoc -l Devel::Trace`; install -m 644 -D $$f $(DEST)$$f
-	perl -pi -e 's|(#!/usr/bin/perl).*|$$1 -d:Trace|' $(DEST)/usr/bin/runinstall2
+	[ -d $(DESTDIR)$(DEST) ] || ../../tools/mdkinst_stage2_tool --uncompress $(DESTDIR)$(STAGE2_DEST)
+	f=`perldoc -l Devel::Trace`; install -m 644 -D $$f $(DESTDIR)$(DEST)$$f
+	perl -pi -e 's|(#!/usr/bin/perl).*|$$1 -d:Trace|' $(DESTDIR)$(DEST)/usr/bin/runinstall2
 
 # [pixel] after make install_pms:
 # sudo sh -c 'CLEAN=1 perl ../../tools/drakx-in-chroot /export /tmp/rr --useless_thing_accepted --kickstart install/auto_inst.cfg.local.pl'
