@@ -210,7 +210,7 @@ tar:
 	    echo "Unknown SCM (not SVN nor GIT)";\
 	    exit 1; \
 	    fi;
-	$(info $(NAME)-$(VERSION).tar.xz is ready)
+	$(info $(PRODUCT)-$(VERSION).tar.xz is ready)
 
 dist-svn:
 	mkdir -p $(PRODUCT)-$(VERSION)
