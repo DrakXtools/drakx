@@ -1,14 +1,14 @@
 include ../Makefile.config
 
-VERSION=1.23
-PRODUCT=drakx-installer-rescue
+VERSION=1.24
+PRODUCT=$(FAMILY)-rescue
 
 RESCUE = rescue.sqfs
 
 all: $(RESCUE)
 
 install: $(RESCUE)
-	cp -f $< $(STAGE2_DEST)
+	cp -f $< $(DESTDIR)$(STAGE2_DEST)
 
 $(RESCUE): list.xml drvinst guessmounts lsparts rescue-doc make_rescue_img
 	DISTRIB_DESCR=$(DISTRIB_DESCR) fakeroot ./make_rescue_img
