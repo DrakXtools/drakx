@@ -21,7 +21,7 @@ install:
 	install mdkinst_stage2_tool drakx-in-chroot $(DESTDIR)$(ROOTDEST)/misc
 
 xhost+: %: %.c
-	$(CC) $(CFLAGS) $< -L/usr/X11R6/$(LIB_NAME) -lX11 -o $@
+	$(CC) $(CFLAGS) $(LDFLAGS) $< -L/usr/X11R6/$(LIB_NAME) -lX11 -o $@
 
 clean: 
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done
