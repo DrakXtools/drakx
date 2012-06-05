@@ -221,7 +221,7 @@ dist-svn:
 dist-git:
 	@cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD mdk-stage1 kernel Makefile.config | xz >mdk-stage1/$(PRODUCT)-$(VERSION).tar.xz;
 
-install: all
+install:
 	install -m755 init -D $(DESTDIR)$(ROOTDEST)/init
 	install -m755 stage1 -D $(DESTDIR)$(ROOTDEST)/stage1
 	install -m755 rescue-gui -D $(DESTDIR)$(ROOTDEST)/rescue-gui
