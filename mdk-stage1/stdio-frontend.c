@@ -34,7 +34,7 @@
 
 void init_frontend(char * welcome_msg)
 {
-	printf(welcome_msg);
+	printf("%s", welcome_msg);
 	printf("\n");
 }
 
@@ -84,7 +84,7 @@ static char * get_string_response(char * initial_string)
 	memset(s, '\0', sizeof(s));
 
 	if (initial_string) {
-		printf(initial_string);
+		printf("%s", initial_string);
 		strcpy(s, initial_string);
 		i = strlen(s);
 	}
@@ -166,7 +166,7 @@ static char * get_string_response(char * initial_string)
 
 static void blocking_msg(char *type, char *fmt, va_list ap)
 {
-	printf(type);
+	printf("%s", type);
 	vprintf(fmt, ap);
 	get_any_response();
 }

@@ -138,7 +138,7 @@ void init_progression_raw(char *msg, int size)
 		newtRefresh();
 	}
 	else {
-		wait_message(msg);
+		wait_message("%s", msg);
 		msg_progress = msg;
 	}
 }
@@ -160,7 +160,7 @@ void update_progression_raw(int current_size)
 			char msg_prog_final[500];
 			sprintf(msg_prog_final, "%s (%d bytes read) ", msg_progress, current_size);
 			remove_wait_message();
-			wait_message(msg_prog_final);
+			wait_message("%s", msg_prog_final);
 		}
 		last_time = time;
 	}
