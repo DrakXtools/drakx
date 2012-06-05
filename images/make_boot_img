@@ -184,7 +184,6 @@ sub initrd {
     symlink "/proc/mounts", "$tmp_initrd/etc/mtab";
     symlink "../tmp", "$tmp_initrd/var/run";
     _ "install -D /usr/share/terminfo/l/linux $tmp_initrd/usr/share/terminfo/l/linux";
-    _ "install -D /usr/share/terminfo/s/screen $tmp_initrd/usr/share/terminfo/s/screen";
     foreach ('pcitable', 'usbtable') {
         _ "install -D /usr/share/ldetect-lst/$_.gz $tmp_initrd/usr/share/ldetect-lst/$_.gz";
     }
