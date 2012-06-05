@@ -1,7 +1,5 @@
 include Makefile.config
 
-ROOTDEST = /export
-STAGE2_DEST = $(ROOTDEST)/install/stage2
 
 DIRS = tools images perl-install/install rescue
 
@@ -13,13 +11,13 @@ dirs:
 	@for n in $(DIRS); do $(MAKE) -C $$n all || exit 1 ; done
 
 install_only:
-	make -C images install ROOTDEST=$(ROOTDEST)
-	make -C tools install ROOTDEST=$(ROOTDEST)
-	make -C perl-install/install install ROOTDEST=$(ROOTDEST)
-	make -C rescue install STAGE2_DEST=$(STAGE2_DEST)
-	make -C advertising install ROOTDEST=$(ROOTDEST)
+	make -C images install DESTDIR=$(DESTDIR)
+	make -C tools install $(DESTDIR)=$(DESTDIR)
+	make -C perl-install/install install DESTDIR=$(DESTDIR)
+	make -C rescue install DESTDIR=$(DESTDIR)
+	make -C advertising install DESTDIR=$(DESTDIR)
 
-	LC_ALL=C svn info ChangeLog  | egrep '^Revision|^Last Changed Date' > $(STAGE2_DEST)/VERSION
+	LC_ALL=C svn info ChangeLog  | egrep '^Revision|^Last Changed Date' > $(DESTDIR)$(STAGE2_DEST)/VERSION
 
 clean:
 #	force taking new rpms from repository

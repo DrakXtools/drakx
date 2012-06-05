@@ -8,7 +8,7 @@ RESCUE = rescue.sqfs
 all: $(RESCUE)
 
 install: $(RESCUE)
-	cp -f $< $(DESTDIR)$(STAGE2_DEST)
+	install -m644 $< -D $(DESTDIR)$(STAGE2_DEST)/$<
 
 $(RESCUE): list.xml drvinst guessmounts lsparts rescue-doc make_rescue_img
 	DISTRIB_DESCR=$(DISTRIB_DESCR) fakeroot ./make_rescue_img
