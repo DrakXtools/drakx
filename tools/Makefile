@@ -17,8 +17,8 @@ $(DIRS):
 	make -C $@
 
 install:
-	install -d $(ROOTDEST)/misc
-	install mdkinst_stage2_tool drakx-in-chroot $(ROOTDEST)/misc
+	install -d $(DESTDIR)$(ROOTDEST)/misc
+	install mdkinst_stage2_tool drakx-in-chroot $(DESTDIR)$(ROOTDEST)/misc
 
 xhost+: %: %.c
 	$(CC) $(CFLAGS) $< -L/usr/X11R6/$(LIB_NAME) -lX11 -o $@
