@@ -54,10 +54,10 @@ clean:
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
 install:
-	install -d $(IMAGES_DEST)
-	rm -rf $(IMAGES_DEST)/alternatives 
-	cp -r images/* $(IMAGES_DEST)
+	install -d $(DESTDIR)$(IMAGES_DEST)
+	rm -rf $(DESTDIR)$(IMAGES_DEST)/alternatives 
+	cp -r images/* $(DESTDIR)$(IMAGES_DEST)
 ifeq (,$(findstring $(ARCH), i386 x86_64))
-	rm -rf $(ROOTDEST)/isolinux
-	cp -af isolinux $(ROOTDEST)
+	rm -rf $(DESTDIR)$(ROOTDEST)/isolinux
+	cp -af isolinux $(DESTDIR)$(ROOTDEST)
 endif
