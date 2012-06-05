@@ -59,6 +59,8 @@ COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
 INITSRC = init.c
 
+STAGE1_DEFS=-DDISABLE_KA
+
 INITOBJS = $(subst .c,.o,$(INITSRC))
 
 
@@ -89,7 +91,7 @@ STAGE1_SRC = stage1.c log.c utils.c params.c tools.c modules.c probing.c mount.c
 CDROMSRC = cdrom.c
 DISKSRC = disk.c directory.c partition.c
 NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c directory.c wireless.c
-KASRC = ka.c
+#KASRC = ka.c
 
 # use sort to remove duplicates
 STAGE1_ALLSRC = $(sort $(STAGE1_SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC) $(KASRC))
@@ -173,7 +175,7 @@ $(STAGE1OBJS_NETWORK_STANDALONE): %-NETWORK-STANDALONE.o: %.c
 	$(DIET) $(COMPILE) $(INCLUDES) $(NETWORK_STANDALONE_DEFS) $(USB_DEFS_GEN) -c $< -o $@
 
 $(STAGE1OBJS_FULL): %-FULL.o: %.c
-	$(DIET) $(COMPILE) $(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) -DENABLE_BOOTSPLASH -c $< -o $@
+	$(DIET) $(COMPILE) $(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -DENABLE_BOOTSPLASH -c $< -o $@
 
 .c.o:
 	$(DIET) $(COMPILE) $(INCLUDES) -DENABLE_BOOTSPLASH -c $<
