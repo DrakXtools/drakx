@@ -4,11 +4,6 @@ VERSION=1.56
 FAMILY=drakx-installer
 PRODUCT=$(FAMILY)-images
 KERNELS=$(shell rpm -qf /lib/modules/3.*)
-ifeq (,$(findstring $(ARCH), x86_64))
-LIB = lib
-else
-LIB = lib64
-endif
 ROOTDEST = /usr/$(LIB)/$(FAMILY)
 IMAGES_DEST = $(ROOTDEST)/install/images
 
