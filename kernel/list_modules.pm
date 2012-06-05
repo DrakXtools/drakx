@@ -39,7 +39,7 @@ our %l = (
       ),
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
       # add all phys
-      qw(broadcom cicada davicom et1011c icplus lxt marvell micrel),
+      qw(amd broadcom cicada davicom et1011c icplus lxt marvell micrel),
       qw(national qsemi realtek smsc ste10Xp vitesse),
     ],
     firewire => [ qw(eth1394 pcilynx) ],
@@ -66,7 +66,7 @@ our %l = (
     ],
     wireless => [
       qw(acx-pci acx-usb adm8211 agnx airo airo_cs aironet4500_cs),
-      qw(aironet_cs ar9170usb arlan arusb_lnx at76_usb ath5k ath6kl ath9k),
+      qw(aironet_cs ar9170usb arlan arusb_lnx at76_usb at76c50x_usb ath5k ath6kl ath6kl_usb ath9k ath9k_ht),
       qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx bcm_wimax brcm80211 brcmsmac carl9170 com20020_cs),
       qw(dyc_ar5 hostap_cs hostap_pci hostap_plx i2400m-usb ipw2100),
       qw(ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwlwifi madwifi_pci),
@@ -191,9 +191,10 @@ our %l = (
 	    hid-speedlink hid-twinhan hid-waltop hid-wiimote hid-zydacron
 	    hid-chicony hid-drff hid-ezkey hid-gaff hid-gyration hid-kensington
 	    hid-keytouch hid-kye hid-logitech hid-logitech-dj hid-microsoft
-	    hid-monterey hid-multilaser hid-ntrig hid-petalynx hid-pl
-	    hid-samsung hid-sjoy hid-sony hid-sunplus hid-tmff hid-topseed
+	    hid-monterey hid-multilaser hid-ntrig hid-petalynx hid-pl hid-saitek 
+	    hid-samsung hid-sjoy hid-sony hid-sunplus hid-tivo hid-tmff hid-topseed
 	    hid-uclogic hid-wacom hid-zpff ) ],
+
    #serial_cs
    #ftl_cs 3c575_cb apa1480_cb epic_cb serial_cb tulip_cb iflash2+_mtd iflash2_mtd
    #cb_enabler
