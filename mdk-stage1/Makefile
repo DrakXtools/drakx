@@ -119,13 +119,7 @@ BINS = init stage1 dhcp-client rescue-gui probe-modules
 
 DIRS =
 OTHERS = pci-ids.h usb-ids.h
-ifeq (i386, $(ARCH))
-DIRS += pcmcia
-OTHERS += pcmcia-ids.h
-PCMCIA_LIB = pcmcia/libpcmcia.a
-PCMCIA_DEFS = -DENABLE_PCMCIA
-endif
-ifeq (x86_64, $(ARCH))
+ifneq (,$(findstring $(ARCH), i386 x86_64))
 DIRS += pcmcia
 OTHERS += pcmcia-ids.h
 PCMCIA_LIB = pcmcia/libpcmcia.a
