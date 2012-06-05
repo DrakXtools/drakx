@@ -127,7 +127,7 @@ PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
 ifeq (x86_64, $(ARCH))
 DIRS += pcmcia
-OTHERS += pcmcia-ids.h pcmcia
+OTHERS += pcmcia-ids.h
 PCMCIA_LIB = pcmcia/libpcmcia.a
 PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
@@ -138,7 +138,7 @@ CLEANDIRS = $(DIRS:%=clean-%)
 USB_DEFS_GEN = -DENABLE_USB
 USB_DEFS = -DENABLE_USB -DDISABLE_PCIADAPTERS
 
-all: $(BUILDDIRS) $(OTHERS) $(BINS)
+all: $(BUILDDIRS) $(OTHERS) $(DIRS) $(BINS)
 $(DIRS): $(BUILDDIRS)
 $(BUILDDIRS):
 	$(MAKE) -C $(@:build-%=%)
@@ -152,6 +152,8 @@ pcmcia-ids.h: update-pcmcia-ids.pl
 
 usb-ids.h: /usr/share/ldetect-lst/usbtable.gz update-usb-ids.pl
 	perl update-usb-ids.pl > $@ || { rm -f $@; exit 1; }
+
+pcmcia/libpcmcia.a: pcmcia
 
 init: $(INITOBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(LIBC_LIBS)
@@ -192,7 +194,7 @@ $(CLEANDIRS):
 rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(FRONTEND_OBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(FRONTEND_LIBS) $(LIBC_LIBS)
 
-probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o zlibsupport-FULL.o $(PCMCIA_LIB)
+probe-modules: $(OTHERS) probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o zlibsupport-FULL.o $(PCMCIA_LIB)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(LIBC_LIBS)
 
 dist: tar

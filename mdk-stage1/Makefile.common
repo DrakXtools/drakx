@@ -65,6 +65,6 @@ endif
 
 ifeq (uclibc, $(LIBC))
 ifndef DYNAMIC
-LDFLAGS += -static
+LIBC_LIBS += -static
 endif
 endif
