@@ -9,7 +9,7 @@ it typically contains:
   isolinux/isolinux.bin
   isolinux/isolinux.cfg
   isolinux/vmlinuz
-  install/stage2/rescue.clp
+  install/stage2/rescue.sqfs
 
 
   data/box.XXX #######################################################
@@ -27,11 +27,11 @@ it typically contains:
   - isolinux.cfg customized to call directly save_all or rest_all
     (with option keepmounted for rest_all)
   
-  install/stage2/rescue.clp ##########################################
+  install/stage2/rescue.sqfs ##########################################
   
   - compressed loopback containing a iso9660 filesystem.
-    it is mostly the same as the mdv rescue.clp, *plus* partimage_whole_disk
-    (nb : use extract_compressed_fs/create_compressed_fs to expand/create rescue.clp)
+    it is mostly the same as the mdv rescue.sqfs, *plus* partimage_whole_disk
+    (nb : use extract_compressed_fs/create_compressed_fs to expand/create rescue.sqfs)
 
 
 Mastering process ##############################################################
@@ -80,5 +80,5 @@ Build process ##################################################################
 - in gi/rescue, call
   ./make_partimage_save_rest_all partimage-0.6.4-7mdk.i586.rpm /var/lib/partimage /data/box.XXX
 
-  => it calls ./make_rescue_img with special options to create a special rescue.clp
+  => it calls ./make_rescue_img with special options to create a special rescue.sqfs
   => generates part_save_all.iso and part_rest_all.iso
