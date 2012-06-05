@@ -118,10 +118,10 @@ STAGE1OBJS_FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
 BINS = init stage1 dhcp-client rescue-gui probe-modules
 
 DIRS =
-OTHERS = pci-ids.h usb-ids.h
+HEADERS = pci-ids.h usb-ids.h
 ifneq (,$(findstring $(ARCH), i386 x86_64))
 DIRS += pcmcia
-OTHERS += pcmcia-ids.h
+HEADERS += pcmcia-ids.h
 PCMCIA_LIB = pcmcia/libpcmcia.a
 PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
@@ -132,7 +132,7 @@ CLEANDIRS = $(DIRS:%=clean-%)
 USB_DEFS_GEN = -DENABLE_USB
 USB_DEFS = -DENABLE_USB -DDISABLE_PCIADAPTERS
 
-all: $(BUILDDIRS) $(OTHERS) $(DIRS) $(BINS)
+all: $(BUILDDIRS) $(DIRS) $(BINS)
 $(DIRS): $(BUILDDIRS)
 $(BUILDDIRS):
 	$(MAKE) -C $(@:build-%=%)
@@ -159,19 +159,19 @@ dhcp-client: $(STAGE1OBJS_NETWORK_STANDALONE) $(FRONTEND_OBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
 
 
-$(INITOBJS): %.o: %.c
+$(INITOBJS): %.o: %.c .depend
 	$(COMPILE) $(INCLUDES) -c $<
 
-$(STAGE1OBJS_NETWORK): %-NETWORK.o: %.c
+$(STAGE1OBJS_NETWORK): %-NETWORK.o: %.c .depend
 	$(DIET) $(COMPILE) $(INCLUDES) $(NETWORK_DEFS) $(PCMCIA_DEFS) $(USB_DEFS_GEN) -DENABLE_ADDITIONAL_MODULES -c $< -o $@
 
 $(STAGE1OBJS_NETWORK_STANDALONE): %-NETWORK-STANDALONE.o: %.c
 	$(DIET) $(COMPILE) $(INCLUDES) $(NETWORK_STANDALONE_DEFS) $(USB_DEFS_GEN) -c $< -o $@
 
-$(STAGE1OBJS_FULL): %-FULL.o: %.c
+$(STAGE1OBJS_FULL): %-FULL.o: %.c .depend
 	$(DIET) $(COMPILE) $(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -DENABLE_BOOTSPLASH -c $< -o $@
 
-.c.o:
+.c.o: .depend
 	$(DIET) $(COMPILE) $(INCLUDES) -DENABLE_BOOTSPLASH -c $<
 
 
@@ -188,7 +188,7 @@ $(CLEANDIRS):
 rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(FRONTEND_OBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(FRONTEND_LIBS) $(LIBC_LIBS)
 
-probe-modules: $(OTHERS) probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o zlibsupport-FULL.o $(PCMCIA_LIB)
+probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o zlibsupport-FULL.o $(PCMCIA_LIB)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(LIBC_LIBS)
 
 dist: tar
@@ -226,8 +226,9 @@ install:
 	fi
 
 
-.depend:
-	$(CPP) $(CFLAGS) -M $(ALLSRC) > .depend
+.DELETE_ON_ERROR:
+.depend: $(HEADERS)
+	$(CPP) $(DEFS) $(INCLUDES) $(CFLAGS) -M $(ALLSRC) > .depend
 
 ifeq (.depend,$(wildcard .depend))
 include .depend
