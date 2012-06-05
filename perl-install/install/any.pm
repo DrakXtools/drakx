@@ -44,7 +44,7 @@ sub is_network_install {
 }
 
 sub spawnShell() {
-    return if $::local_install || $::testing || dont_run_directly_stage2();
+    return if $::local_install || $::testing;
 
     my $shellpid_file = '/var/run/drakx_shell.pid';
     return if -e $shellpid_file && -d '/proc/' . chomp_(cat_($shellpid_file));
