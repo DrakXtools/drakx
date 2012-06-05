@@ -154,15 +154,12 @@ usb-ids.h: /usr/share/ldetect-lst/usbtable.gz update-usb-ids.pl
 
 init: $(INITOBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(LIBC_LIBS)
-	$(STRIPCMD) $@
 
 stage1: $(STAGE1OBJS_FULL) bootsplash.o $(FRONTEND_OBJS) $(PCMCIA_LIB)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
-	$(STRIPCMD) $@
 
 dhcp-client: $(STAGE1OBJS_NETWORK_STANDALONE) $(FRONTEND_OBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
-	$(STRIPCMD) $@
 
 
 $(INITOBJS): %.o: %.c
@@ -193,11 +190,9 @@ $(CLEANDIRS):
 
 rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(FRONTEND_OBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(FRONTEND_LIBS) $(LIBC_LIBS)
-	$(STRIPCMD) $@
 
 probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o zlibsupport-FULL.o $(PCMCIA_LIB)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(LIBC_LIBS)
-	$(STRIPCMD) $@
 
 dist: tar
 tar:

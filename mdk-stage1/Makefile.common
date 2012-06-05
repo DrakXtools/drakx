@@ -68,10 +68,3 @@ ifndef DYNAMIC
 LDFLAGS += -static
 endif
 endif
-
-ifdef DEBUG
-STRIPCMD = echo not stripping
-else
-STRIPCMD = strip -R .note -R .comment
-endif
-
