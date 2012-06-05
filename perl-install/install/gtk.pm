@@ -255,7 +255,8 @@ sub createXconf {
     #- remove "error opening security policy file" warning
     symlink("/tmp/stage2/etc/X11", "/etc/X11");
 
-if ($Driver) {
+    return if !$Driver;
+
      my ($mouse_driver, $mouse_protocol) = detect_devices::is_vmware() ? qw(vmmouse auto) : ('mouse', $mouse_type);
      output($file, sprintf(<<'END', $mouse_driver, $mouse_protocol, $Driver, $Driver eq 'fbdev' ? '"default"' : '"800x600" "640x480"'));
 Section "ServerFlags"
@@ -323,7 +324,6 @@ Section "ServerLayout"
 EndSection
 
 END
- }
 }
 
 1;
