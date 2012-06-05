@@ -16,7 +16,7 @@
  # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 VERSION=1.53
-PRODUCT=drakx-installer-binaries
+PRODUCT = $(FAMILY)-binaries
 
  #
  # Portions from Erik Troan (ewt@redhat.com) Copyright 1996 Red Hat Software 
@@ -52,6 +52,7 @@ ARCHDIR=$(ARCH)
 ifeq (i386, $(ARCH))
 ARCHDIR=i586
 endif
+ROOTDEST = $(LOCATION)/binaries
 
 DEFS = -DDISTRIB_NAME=\"$(DISTRIB_NAME)\" -DDISTRIB_VERSION=\"$(DISTRIB_VERSION)\" -DDISTRIB_TYPE=\"$(DISTRIB_TYPE)\" -DDISTRIB_DESCR=\"$(DISTRIB_DESCR)\" $(ADDITIONAL_DEFS) -D_FILE_OFFSET_BITS=64 -DARCH=\"$(ARCHDIR)\" -DCONFIG_USE_ZLIB
 
@@ -186,7 +187,7 @@ $(CLEANDIRS):
 .PHONY: subdirs $(DIRS)
 .PHONY: subdirs $(BUILDDIRS)
 .PHONY: subdirs $(CLEANDIRS)
-.PHONY: all install clean test
+.PHONY: all clean test
 
 rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(FRONTEND_OBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(FRONTEND_LIBS) $(LIBC_LIBS)
@@ -217,6 +218,17 @@ dist-svn:
 
 dist-git:
 	@cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD mdk-stage1 kernel Makefile.config | xz >mdk-stage1/$(PRODUCT)-$(VERSION).tar.xz;
+
+install: init stage1 rescue-gui dhcp-client probe-modules
+	install -m755 init -D $(DESTDIR)$(ROOTDEST)/init
+	install -m755 stage1 -D $(DESTDIR)$(ROOTDEST)/stage1
+	install -m755 rescue-gui -D $(DESTDIR)$(ROOTDEST)/rescue-gui
+	install -m755 dhcp-client -D $(DESTDIR)$(ROOTDEST)/dhcp-client
+	install -m755 probe-modules -D $(DESTDIR)$(ROOTDEST)/probe-modules
+	if [ -e pcmcia/pcmcia_probe.o ]; then \
+		install -m644 pcmcia/pcmcia_probe.o -D $(DESTDIR)$(ROOTDEST)/pcmcia_probe.o; \
+	fi
+
 
 .depend:
 	$(CPP) $(CFLAGS) -M $(ALLSRC) > .depend
