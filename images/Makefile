@@ -1,7 +1,6 @@
 include ../Makefile.config
 
 VERSION=1.56
-FAMILY=drakx-installer
 PRODUCT=$(FAMILY)-images
 KERNELS=$(shell rpm -qf /lib/modules/3.*)
 ROOTDEST = /usr/$(LIB)/$(FAMILY)
