@@ -1,9 +1,15 @@
 include ../Makefile.config
 
 VERSION=1.56
-PRODUCT=drakx-installer-images
+FAMILY=drakx-installer
+PRODUCT=$(FAMILY)-images
 KERNELS=$(shell rpm -qf /lib/modules/3.*)
-
+ifeq (,$(findstring $(ARCH), x86_64))
+LIB = lib
+else
+LIB = lib64
+endif
+ROOTDEST = /usr/$(LIB)/$(FAMILY)
 IMAGES_DEST = $(ROOTDEST)/install/images
 
 all: images
@@ -51,7 +57,7 @@ install:
 	install -d $(IMAGES_DEST)
 	rm -rf $(IMAGES_DEST)/alternatives 
 	cp -r images/* $(IMAGES_DEST)
-    ifneq (,$(findstring $(ARCH), i386 x86_64))
+ifeq (,$(findstring $(ARCH), i386 x86_64))
 	rm -rf $(ROOTDEST)/isolinux
 	cp -af isolinux $(ROOTDEST)
-    endif
+endif
