@@ -12,12 +12,12 @@ entry point for stage2 is /usr/bin/runinstall2 which is typically a link to
 install2::main with @ARGV.
 
 install2::main parse command line arguments, prepare installation, find the right
-install_interactive class (take a look at gi/docs/object_class.fig) according to
+install/interactive class (take a look at gi/docs/object_class.fig) according to
 command line, memory available and if the interactive chosen is initializing
 correctly, else it will try a less-demanding interactive object.
 Once done, $::o is set to this install & interactive object and main runs the
 various step of install2 defined in $o->{steps}, starting with $o->{steps}{first}
-and iterating with method install_any::getNextStep().
+and iterating with method install::any::getNextStep().
 while running step, it trap any errors that may arise and use perl exception to
 change step.
 
@@ -28,35 +28,35 @@ Here is a brief description of what each modules of DrakX is doing.
 
 install2: main module of DrakX as described above, main loop execution of DrakX.
 
-install_steps: generic installation module containing steps definition, all steps
+install/steps: generic installation module containing steps definition, all steps
   should always be defined here as some methods may be used on automatic mode.
   there is no interactivity available. typically are defined base operation for
   configuring each step according to $o.
 
-install_steps_interactive: generic installation module with generic interative
+install/steps_interactive: generic installation module with generic interative
   methods. typically are found all interactive code of DrakX for each steps.
 
-install_steps_auto_install: implementation installation module without interactive
+install/steps_auto_install: implementation installation module without interactive
   methods to match auto_install mode. this is the simplest as almost no method are
-  redefined (inherit module install_steps only, compared to other implementation
+  redefined (inherit module install/steps only, compared to other implementation
   modules described below).
 
-install_steps_stdio: implementation installation module with interactive stdio
-  methods to match stdio mode. inherit modules install_steps_interactive and
+install/steps_stdio: implementation installation module with interactive stdio
+  methods to match stdio mode. inherit modules install/steps_interactive and
   interactive_stdio.
 
-install_steps_newt: implementation installation module with interactive newt
-  methods to match newt mode. inherit modules install_steps_interactive and
+install/steps_newt: implementation installation module with interactive newt
+  methods to match newt mode. inherit modules install/steps_interactive and
   interactive_newt.
 
-install_steps_gtk: implementation installation module with interactive gtk
-  methods to match gtk mode. inherit modules install_steps_interactive and
+install/steps_gtk: implementation installation module with interactive gtk
+  methods to match gtk mode. inherit modules install/steps_interactive and
   interactive_gtk.
 
-install_any: contains various methods using generic interactive interface but
+install/any: contains various methods using generic interactive interface but
   not used by standalone tools.
 
-install_gtk: contains various methods using gtk interface but not used by
+install/gtk: contains various methods using gtk interface but not used by
   standalone tools.
 
 interactive_stdio: implementation methods for interactivity in stdio mode.
@@ -71,7 +71,7 @@ interactive_gtk: implementation methods for interactivity in gtk mode.
 my_gtk: basic gtk access methods.
 
 any: contains various methods using generic interactive interface. to compare
-  against install_any module as this one is available for standalone tools.
+  against install/any module as this one is available for standalone tools.
 
 class_discard: simple module that implement every methods undefined to return
   nothing. this trick is used to ensure no undefined method can arise when using
@@ -237,14 +237,14 @@ the 0, 1, '' means not "redoable", "skip on error", "don't hide"
 
 sub selectAlawindows  { $o->selectAlawindows }
 
-3. add your function selectAlawindows in install_steps_interactive.pm
+3. add your function selectAlawindows in install/steps_interactive.pm
 
 sub selectAlawindows {
     my ($o) = @_;
     $o->{alawindows} = $o->ask_yesorno('', _("Throw everything away as windobe does?"), 1);
 }
 
-4. add your function selectAlawindows in install_steps.pm (not needed in that
+4. add your function selectAlawindows in install/steps.pm (not needed in that
 case, except for auto_install)
 
 sub selectAlawindows  {}
