@@ -78,6 +78,7 @@ char * env[] = {
 	"HOME=/",
 	"TERM=screen",
 	"TERMINFO=/etc/terminfo",
+	"LC_CTYPE=UTF-8",
 	NULL
 };
 
