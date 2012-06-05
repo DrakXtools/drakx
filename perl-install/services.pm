@@ -469,6 +469,7 @@ sub services() {
 
 sub systemd_unit_exists {
     my ($name) = @_;
+    # we test with -l as symlinks are not valid when the system is chrooted:
     -e "$::prefix/lib/systemd/system/$name.service" or -l "$::prefix/lib/systemd/system/$name.service";
 }
 
