@@ -574,9 +574,6 @@ EOF
 	unlink "/usr/share/oem-theme.rpm";
     }
 
-    #- call update-menus at the end of package installation
-    push @{$o->{waitpids}}, run_program::raw({ root => $::prefix, detach => 1 }, "update-menus", "-n");
-
     $o->install_hardware_packages;
 
     if ($o->{updatemodules}) {
