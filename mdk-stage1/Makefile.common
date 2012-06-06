@@ -44,11 +44,11 @@ endif
 ifdef DEBUG
 OPTFLAGS = -g
 else
-OPTFLAGS = -Os
+OPTFLAGS = -Os -fomit-frame-pointer
 endif
 
 #- flags used by all stuff
-CFLAGS = $(OPTFLAGS) -pipe -Wall -fomit-frame-pointer -Werror=strict-aliasing -Wstrict-aliasing=2
+CFLAGS = $(OPTFLAGS) -pipe -Wall -Werror=strict-aliasing -Wstrict-aliasing=2
 
 ifneq (ppc, $(ARCH))
 ifneq (sparc, $(ARCH))
