@@ -546,7 +546,7 @@ sub default_packages {
     add_n_log("CPU needs cpufreq", 'cpufreq') if detect_devices::hasCPUFreq();
     add_n_log("APM support needed", 'apmd') if -e "/proc/apm";
     add_n_log("needed by hardware", detect_devices::probe_name('Pkg'));
-    my @ltmp = map { $_->{BOOTPROTO} eq 'dhcp' ? $_->{DHCP_CLIENT} || 'dhcp-client' : () } values %{$o->{net}{ifcfg}};
+    my @ltmp = map { $_->{BOOTPROTO} eq 'dhcp' ? $_->{DHCP_CLIENT} || 'dhcpcd' : () } values %{$o->{net}{ifcfg}};
     add_n_log("needed by networking", @ltmp) if @ltmp;
     # will get auto selected at summary stage for bootloader:
     add_n_log("needed later at summary stage", qw(acpi acpid mandriva-gfxboot-theme));
