@@ -257,6 +257,12 @@ void doklog()
 			}
 		}
 
+#if 0
+		// Because the code above starting with
+		// /* now open the syslog socket */
+		// is commented out, sockaddr is uninitialized here.
+		// Trying to accept() an uninitialized sockaddr can't work,
+		// so until the above is fixed, we shouldn't be running this
 		/* the socket has moved, new stuff to do */
 		if (sock >= 0 && FD_ISSET(sock, &readset)) {
 			s = sizeof(sockaddr.un);
@@ -272,6 +278,7 @@ void doklog()
 			else
 				FD_SET(readfd, &unixs);
 		}
+#endif
 	}
 }
 
