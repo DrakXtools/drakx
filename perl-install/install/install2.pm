@@ -266,6 +266,7 @@ sub setupBootloader {
     return if $::local_install;
 
     $o->{modules_conf}->write;
+    install::any::write_fstab($o);
 
     installStepsCall($o, $auto, 'setupBootloaderBefore');
     installStepsCall($o, $auto, 'setupBootloader');

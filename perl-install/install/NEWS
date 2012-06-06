@@ -1,5 +1,7 @@
 Version 14.25 -  6 June 2012, by Per Øyvind Karlesn
 
+- write /etc/fstab before creating initrd during install also, otherwise
+  it'll fail if using mkinitrd (dracut not affected)
 - don't run update-menus after install of packages as the legacy menu system
   has been dead for ages
 - debug mode:
