@@ -149,12 +149,14 @@ void doklog()
 	fd_set readset, unixs;
 	int in, out, i;
 	int log;
+#if 0
 	socklen_t s;
-	int sock = -1;
 	union {
 		struct sockaddr_un un;
 		struct sockaddr generic;
 	} sockaddr;
+#endif
+	int sock = -1;
 	char buf[1024];
 	int readfd;
 
