@@ -39,11 +39,16 @@ enum return_type ka_prepare(void);
 enum boot_proto_type { BOOTPROTO_STATIC, BOOTPROTO_DHCP, BOOTPROTO_ADSL_PPPOE };
 enum auto_detection_type { AUTO_DETECTION_NONE, AUTO_DETECTION_ALL, AUTO_DETECTION_WIRED };
 
+typedef union {
+	struct in_addr in;
+	uint32_t u;
+} ipv4_addr;
+
 /* all of these in_addr things are in network byte order! */
 struct interface_info {
 	char device[10];
 	int is_ptp, is_up;
-	struct in_addr ip, netmask, broadcast, network;
+	ipv4_addr ip, netmask, broadcast, network;
 	enum boot_proto_type boot_proto;
 	char *user, *pass, *acname; /* for ADSL connection */
 };

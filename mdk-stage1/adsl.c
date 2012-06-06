@@ -96,7 +96,7 @@ static enum return_type adsl_connect(struct interface_info * intf, char * userna
 				if (p) {
 					struct sockaddr_in addr;
 					if (inet_aton(p + 8, &addr.sin_addr))
-						intf->ip = addr.sin_addr;
+						intf->ip.in = addr.sin_addr;
 					status = RETURN_OK;
 				}
 			}
@@ -136,8 +136,7 @@ enum return_type perform_adsl(struct interface_info * intf)
 	inet_aton("255.255.255.0", &addr);
 	memcpy(&intf->netmask, &addr, sizeof(addr));
 
-	*((uint32_t *) &intf->broadcast) = (*((uint32_t *) &intf->ip) &
-					    *((uint32_t *) &intf->netmask)) | ~(*((uint32_t *) &intf->netmask));
+	intf->broadcast.u = (intf->ip.u & intf->netmask.u) | ~(intf->netmask.u);
 
 	intf->is_ptp = 0;
 

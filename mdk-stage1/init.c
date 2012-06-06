@@ -151,7 +151,10 @@ void doklog()
 	int log;
 	socklen_t s;
 	int sock = -1;
-	struct sockaddr_un sockaddr;
+	union {
+		struct sockaddr_un un;
+		struct sockaddr generic;
+	} sockaddr;
 	char buf[1024];
 	int readfd;
 
@@ -185,8 +188,8 @@ void doklog()
 
 	/* now open the syslog socket */
 // ############# LINUX 2.4 /dev/log IS BUGGED! --> apparently the syslogs can't reach me, and it's full up after a while
-//	  sockaddr.sun_family = AF_UNIX;
-//	  strncpy(sockaddr.sun_path, "/dev/log", UNIX_PATH_MAX);
+//	  sockaddr.un.sun_family = AF_UNIX;
+//	  strncpy(sockaddr.un.sun_path, "/dev/log", UNIX_PATH_MAX);
 //	  sock = socket(AF_UNIX, SOCK_STREAM, 0);
 //	  if (sock < 0) {
 //		  printf("error creating socket: %d\n", errno);
@@ -194,7 +197,7 @@ void doklog()
 //	  }
 //
 //	  print_str_init(log, "] got socket\n");
-//	  if (bind(sock, (struct sockaddr *) &sockaddr, sizeof(sockaddr.sun_family) + strlen(sockaddr.sun_path)))	{
+//	  if (bind(sock, &sockaddr.generic, sizeof(sockaddr.un.sun_family) + strlen(sockaddr.un.sun_path)))	{
 //		  print_str_init(log, "] bind error: ");
 //		  print_int_init(log, errno);
 //		  print_str_init(log, "\n");
@@ -256,8 +259,8 @@ void doklog()
 
 		/* the socket has moved, new stuff to do */
 		if (sock >= 0 && FD_ISSET(sock, &readset)) {
-			s = sizeof(sockaddr);
-			readfd = accept(sock, (struct sockaddr *) &sockaddr, &s);
+			s = sizeof(sockaddr.un);
+			readfd = accept(sock, &sockaddr.generic, &s);
 			if (readfd < 0) {
 				char * msg_error = "] error in accept\n";
 				if (out >= 0)

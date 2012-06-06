@@ -48,7 +48,7 @@ OPTFLAGS = -Os
 endif
 
 #- flags used by all stuff
-CFLAGS = $(OPTFLAGS) -pipe -Wall -fomit-frame-pointer -fno-strict-aliasing
+CFLAGS = $(OPTFLAGS) -pipe -Wall -fomit-frame-pointer -Werror=strict-aliasing -Wstrict-aliasing=2
 
 ifneq (ppc, $(ARCH))
 ifneq (sparc, $(ARCH))

@@ -167,7 +167,10 @@ int ftp_open_connection(char * host, char * name, char * password, char * proxy)
 {
 	int sock;
 	struct in_addr serverAddress;
-	struct sockaddr_in destPort;
+	union {
+		struct sockaddr_in in;
+		struct sockaddr sa;
+	} destPort;
 	int rc;
 	int port = 21;
 
@@ -188,11 +191,11 @@ int ftp_open_connection(char * host, char * name, char * password, char * proxy)
 		return FTPERR_FAILED_CONNECT;
 	}
 
-	destPort.sin_family = AF_INET;
-	destPort.sin_port = htons(port);
-	destPort.sin_addr = serverAddress;
+	destPort.in.sin_family = AF_INET;
+	destPort.in.sin_port = htons(port);
+	destPort.in.sin_addr = serverAddress;
 
-	if (connect(sock, (struct sockaddr *) &destPort, sizeof(destPort))) {
+	if (connect(sock, &destPort.sa, sizeof(destPort.in))) {
 		close(sock);
 		return FTPERR_FAILED_CONNECT;
 	}
@@ -229,7 +232,10 @@ int ftp_open_connection(char * host, char * name, char * password, char * proxy)
 int ftp_data_command(int sock, char * command, char * param)
 {
 	int dataSocket;
-	struct sockaddr_in dataAddress;
+	union {
+		struct sockaddr_in in;
+		struct sockaddr sa;
+	} dataAddress;
 	int i, j;
 	char * passReply;
 	char * chptr;
@@ -261,18 +267,18 @@ int ftp_data_command(int sock, char * command, char * param)
 	/* now passReply points to the IP portion, and chptr points to the
 	   port number portion */
 
-	dataAddress.sin_family = AF_INET;
+	dataAddress.in.sin_family = AF_INET;
 	if (sscanf(chptr, "%d,%d", &i, &j) != 2) {
 		return FTPERR_PASSIVE_ERROR;
 	}
-	dataAddress.sin_port = htons((i << 8) + j);
+	dataAddress.in.sin_port = htons((i << 8) + j);
 
 	chptr = passReply;
 	while (*chptr++) {
 		if (*chptr == ',') *chptr = '.';
 	}
 
-	if (!inet_aton(passReply, &dataAddress.sin_addr)) 
+	if (!inet_aton(passReply, &dataAddress.in.sin_addr)) 
 		return FTPERR_PASSIVE_ERROR;
 
 	dataSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
@@ -291,8 +297,8 @@ int ftp_data_command(int sock, char * command, char * param)
 		return FTPERR_SERVER_IO_ERROR;
 	}
 
-	if (connect(dataSocket, (struct sockaddr *) &dataAddress, 
-		    sizeof(dataAddress))) {
+	if (connect(dataSocket, &dataAddress.sa,
+		    sizeof(dataAddress.in))) {
 		close(dataSocket);
 		return FTPERR_FAILED_DATA_CONNECT;
 	}
@@ -408,7 +414,10 @@ static int _http_download_file(char * hostname, char * remotename, int * size, c
 	struct pollfd polls;
 	int sock;
 	int rc;
-	struct sockaddr_in destPort;
+	union {
+		struct sockaddr_in in;
+		struct sockaddr sa;
+	} destPort;
 	const char * header_content_length = "Content-Length: ";
 	const char * header_location = "Location: http://";
 	char * http_server_name;
@@ -433,11 +442,11 @@ static int _http_download_file(char * hostname, char * remotename, int * size, c
 		return FTPERR_FAILED_CONNECT;
 	}
 
-	destPort.sin_family = AF_INET;
-	destPort.sin_port = htons(http_server_port);
-	destPort.sin_addr = serverAddress;
+	destPort.in.sin_family = AF_INET;
+	destPort.in.sin_port = htons(http_server_port);
+	destPort.in.sin_addr = serverAddress;
 
-	if (connect(sock, (struct sockaddr *) &destPort, sizeof(destPort))) {
+	if (connect(sock, &destPort.sa, sizeof(destPort.in))) {
 		close(sock);
 		return FTPERR_FAILED_CONNECT;
 	}

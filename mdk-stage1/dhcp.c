@@ -53,10 +53,6 @@
 
 #include "dhcp.h"
 
-
-typedef int bp_int32;
-typedef short bp_int16;
-
 #define BOOTP_OPTION_NETMASK		1
 #define BOOTP_OPTION_GATEWAY		3
 #define BOOTP_OPTION_DNS		6
@@ -93,10 +89,10 @@ struct bootp_request {
 	char hw;
 	char hwlength;
 	char hopcount;
-	bp_int32 id;
-	bp_int16 secs;
-	bp_int16 flags;
-	bp_int32 ciaddr, yiaddr, server_ip, bootp_gw_ip;
+	int32_t id;
+	int16_t secs;
+	int16_t flags;
+	int32_t ciaddr, yiaddr, server_ip, bootp_gw_ip;
 	char hwaddr[16];
 	char servername[64];
 	char bootfile[128];
@@ -122,17 +118,20 @@ static unsigned int verify_checksum(void * buf2, int length2)
 
 
 static int initial_setup_interface(char * device, int s) {
-	struct sockaddr_in * addrp;
+	union {
+		struct sockaddr_in *in;
+		struct sockaddr *sa;
+	} addrp;
 	struct ifreq req;
 	struct rtentry route;
 	int true = 1;
 	
-	addrp = (struct sockaddr_in *) &req.ifr_addr;
+	addrp.sa = &req.ifr_addr;
 	
 	strcpy(req.ifr_name, device);
-	addrp->sin_family = AF_INET;
-	addrp->sin_port = 0;
-	memset(&addrp->sin_addr, 0, sizeof(addrp->sin_addr));
+	addrp.in->sin_family = AF_INET;
+	addrp.in->sin_port = 0;
+	memset(&addrp.in->sin_addr, 0, sizeof(addrp.in->sin_addr));
 	
 	req.ifr_flags = 0; /* take it down */
 	if (ioctl(s, SIOCSIFFLAGS, &req)) {
@@ -140,8 +139,8 @@ static int initial_setup_interface(char * device, int s) {
 		return -1;
 	}
     
-	addrp->sin_family = AF_INET;
-	addrp->sin_addr.s_addr = htonl(0);
+	addrp.in->sin_family = AF_INET;
+	addrp.in->sin_addr.s_addr = htonl(0);
 	if (ioctl(s, SIOCSIFADDR, &req)) {
 		log_perror("SIOCSIFADDR");
 		return -1;
@@ -154,13 +153,13 @@ static int initial_setup_interface(char * device, int s) {
 	}
 
 	memset(&route, 0, sizeof(route));
-	memcpy(&route.rt_gateway, addrp, sizeof(*addrp));
+	memcpy(&route.rt_gateway, addrp.in, sizeof(*addrp.in));
 	
-	addrp->sin_family = AF_INET;
-	addrp->sin_port = 0;
-	addrp->sin_addr.s_addr = INADDR_ANY;
-	memcpy(&route.rt_dst, addrp, sizeof(*addrp));
-	memcpy(&route.rt_genmask, addrp, sizeof(*addrp));
+	addrp.in->sin_family = AF_INET;
+	addrp.in->sin_port = 0;
+	addrp.in->sin_addr.s_addr = INADDR_ANY;
+	memcpy(&route.rt_dst, addrp.in, sizeof(*addrp.in));
+	memcpy(&route.rt_genmask, addrp.in, sizeof(*addrp.in));
 	
 	route.rt_dev = device;
 	route.rt_flags = RTF_UP;
@@ -193,19 +192,19 @@ static int initial_setup_interface(char * device, int s) {
 
 void set_missing_ip_info(struct interface_info * intf)
 {
-	bp_int32 ipNum = *((bp_int32 *) &intf->ip);
-	bp_int32 nmNum;
+	int32_t ipNum = intf->ip.u;
+	int32_t nmNum;
 
-	if (intf->netmask.s_addr == 0)
-		inet_aton(guess_netmask(inet_ntoa(intf->ip)), &intf->netmask);
+	if (intf->netmask.in.s_addr == 0)
+		inet_aton(guess_netmask(inet_ntoa(intf->ip.in)), &intf->netmask.in);
 
-	nmNum = *((bp_int32 *) &intf->netmask);
+	nmNum = intf->netmask.u;
 
-	if (intf->broadcast.s_addr == 0)
-		*((bp_int32 *) &intf->broadcast) = (ipNum & nmNum) | ~(nmNum);
+	if (intf->broadcast.in.s_addr == 0)
+		intf->broadcast.u = (ipNum & nmNum) | ~(nmNum);
 
-	if (intf->network.s_addr == 0)
-		*((bp_int32 *) &intf->network) = ipNum & nmNum;
+	if (intf->network.in.s_addr == 0)
+		intf->network.u = ipNum & nmNum;
 }
 
 static void parse_reply(struct bootp_request * breq, struct interface_info * intf)
@@ -242,8 +241,8 @@ static void parse_reply(struct bootp_request * breq, struct interface_info * int
 			break;
 
 		case BOOTP_OPTION_NETMASK:
-			memcpy(&intf->netmask, chptr, sizeof(intf->netmask));
-			log_message("got netmask %s", inet_ntoa(intf->netmask));
+			memcpy(&intf->netmask, chptr, sizeof(intf->netmask.in));
+			log_message("got netmask %s", inet_ntoa(intf->netmask.in));
 			break;
 		    
 		case BOOTP_OPTION_DOMAIN:
@@ -255,7 +254,7 @@ static void parse_reply(struct bootp_request * breq, struct interface_info * int
 
 		case BOOTP_OPTION_BROADCAST:
 			memcpy(&intf->broadcast, chptr, sizeof(intf->broadcast));
-			log_message("got broadcast %s", inet_ntoa(intf->broadcast));
+			log_message("got broadcast %s", inet_ntoa(intf->broadcast.in));
 			break;
 
 		case BOOTP_OPTION_GATEWAY:
@@ -276,7 +275,11 @@ static void init_vendor_codes(struct bootp_request * breq) {
 	memcpy(breq->vendor, vendor_cookie, sizeof(vendor_cookie));
 }
 
-static char gen_hwaddr[16];
+static union {
+	char b8[16];
+	int16_t b16[8];
+	int32_t b32[4];
+} gen_hwaddr;
 
 static int prepare_request(struct bootp_request * breq, int sock, char * device)
 {
@@ -295,7 +298,7 @@ static int prepare_request(struct bootp_request * breq, int sock, char * device)
 	breq->hw = req.ifr_hwaddr.sa_family;
 	breq->hwlength = IFHWADDRLEN;	
 	memcpy(breq->hwaddr, req.ifr_hwaddr.sa_data, IFHWADDRLEN);
-	memcpy(gen_hwaddr, req.ifr_hwaddr.sa_data, IFHWADDRLEN);
+	memcpy(gen_hwaddr.b8, req.ifr_hwaddr.sa_data, IFHWADDRLEN);
 	
 	breq->hopcount = 0;
 	
@@ -359,7 +362,7 @@ static void rfc951_sleep(int exp)
 	
 	if (!seed)
 		/* Initialize linear congruential generator.  */
-		seed = (currticks () + *(long *) &gen_hwaddr + ((short *) gen_hwaddr)[2]);
+		seed = (currticks () + gen_hwaddr.b32[0] + gen_hwaddr.b16[2]);
   
 	/* Simplified version of the LCG given in Bruce Scheier's
 	   "Applied Cryptography".  */
@@ -508,7 +511,10 @@ enum return_type perform_dhcp(struct interface_info * intf)
 {
 	int s, i;
 	struct sockaddr_in server_addr;
-	struct sockaddr_in client_addr;
+	union {
+		struct sockaddr_in in;
+		struct sockaddr sa;
+	} client_addr;
 	struct sockaddr_in broadcast_addr;
 	struct bootp_request breq, bresp;
 	unsigned char messageType;
@@ -579,7 +585,7 @@ enum return_type perform_dhcp(struct interface_info * intf)
 			 * for this interface, we have to mimic their identifier.
 			 */
 			client_id_hwaddr[0] = 1;  /* set flag for ethernet */
-			memcpy(client_id_hwaddr+1, gen_hwaddr, IFHWADDRLEN);
+			memcpy(client_id_hwaddr+1, gen_hwaddr.b8, IFHWADDRLEN);
 			add_vendor_code(&breq, DHCP_OPTION_CLIENT_IDENTIFIER, IFHWADDRLEN+1, client_id_hwaddr);
 		}
 		/* this is the one that the dhcp server really wants for DDNS updates */
@@ -587,11 +593,11 @@ enum return_type perform_dhcp(struct interface_info * intf)
 		log_message("DHCP: telling server to use name = %s", dhcp_hostname);
 	}
 
-	memset(&client_addr.sin_addr, 0, sizeof(&client_addr.sin_addr));
-	client_addr.sin_family = AF_INET;
-	client_addr.sin_port = htons(BOOTP_CLIENT_PORT);	/* bootp client */
+	memset(&client_addr.in.sin_addr, 0, sizeof(&client_addr.in.sin_addr));
+	client_addr.in.sin_family = AF_INET;
+	client_addr.in.sin_port = htons(BOOTP_CLIENT_PORT);	/* bootp client */
 
-	if (bind(s, (struct sockaddr *) &client_addr, sizeof(client_addr))) {
+	if (bind(s, &client_addr.sa, sizeof(client_addr.in))) {
 		log_perror("bind");
 		return RETURN_ERROR;
 	}
@@ -668,9 +674,9 @@ enum return_type perform_dhcp(struct interface_info * intf)
 
 	close(s);
 
-	intf->netmask.s_addr = 0;
-	intf->broadcast.s_addr = 0;
-	intf->network.s_addr = 0;
+	intf->netmask.in.s_addr = 0;
+	intf->broadcast.in.s_addr = 0;
+	intf->network.in.s_addr = 0;
 
 	parse_reply(&bresp, intf);
 

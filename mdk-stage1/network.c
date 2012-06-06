@@ -316,10 +316,10 @@ static int save_netinfo(struct interface_info * intf)
 			fprintf(f, "DHCP_HOSTNAME=%s\n", dhcp_hostname);
 	} else if (intf->boot_proto == BOOTPROTO_STATIC) {
 		fprintf(f, "BOOTPROTO=static\n");
-		fprintf(f, "IPADDR=%s\n", inet_ntoa(intf->ip));
-		fprintf(f, "NETMASK=%s\n", inet_ntoa(intf->netmask));
-		fprintf(f, "NETWORK=%s\n", inet_ntoa(intf->network));
-		fprintf(f, "BROADCAST=%s\n", inet_ntoa(intf->broadcast));
+		fprintf(f, "IPADDR=%s\n", inet_ntoa(intf->ip.in));
+		fprintf(f, "NETMASK=%s\n", inet_ntoa(intf->netmask.in));
+		fprintf(f, "NETWORK=%s\n", inet_ntoa(intf->network.in));
+		fprintf(f, "BROADCAST=%s\n", inet_ntoa(intf->broadcast.in));
 		if (domain)
 			fprintf(f, "DOMAIN=%s\n", domain);
 		if (dns_server.s_addr != 0)
@@ -449,16 +449,15 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 			return setup_network_interface(intf);
 		}
 
-		*((uint32_t *) &intf->broadcast) = (*((uint32_t *) &intf->ip) &
-						    *((uint32_t *) &intf->netmask)) | ~(*((uint32_t *) &intf->netmask));
+		intf->broadcast.u = (intf->ip.u & intf->netmask.u) | ~(intf->netmask.u);
 
 		inet_aton("255.255.255.255", &addr);
 		if (!memcmp(&addr, &intf->netmask, sizeof(addr))) {
 			log_message("netmask is 255.255.255.255 -> point to point device");
-			intf->network = gateway;
+			intf->network.in = gateway;
 			intf->is_ptp = 1;
 		} else {
-			*((uint32_t *) &intf->network) = *((uint32_t *) &intf->ip) & *((uint32_t *) &intf->netmask);
+			intf->network.u = intf->ip.u & intf->netmask.u;
 			intf->is_ptp = 0;
 		}
 		intf->boot_proto = BOOTPROTO_STATIC;
@@ -499,7 +498,7 @@ static enum return_type configure_network(struct interface_info * intf)
 	if (hostname && domain)
 		return RETURN_OK;
 
-	dnshostname = mygethostbyaddr(inet_ntoa(intf->ip));
+	dnshostname = mygethostbyaddr(inet_ntoa(intf->ip.in));
 
 	if (dnshostname) {
 		if (intf->boot_proto == BOOTPROTO_STATIC)
@@ -604,10 +603,10 @@ static enum return_type bringup_networking(struct interface_info * intf)
 		strcpy(loopback.device, "lo");
 		loopback.is_ptp = 0;
 		loopback.is_up = 0;
-		loopback.ip.s_addr = htonl(0x7f000001);
-		loopback.netmask.s_addr = htonl(0xff000000);
-		loopback.broadcast.s_addr = htonl(0x7fffffff);
-		loopback.network.s_addr = htonl(0x7f000000);
+		loopback.ip.in.s_addr = htonl(0x7f000001);
+		loopback.netmask.in.s_addr = htonl(0xff000000);
+		loopback.broadcast.in.s_addr = htonl(0x7fffffff);
+		loopback.network.in.s_addr = htonl(0x7f000000);
 		rc = configure_net_device(&loopback);
 		if (rc)
 			return RETURN_ERROR;
