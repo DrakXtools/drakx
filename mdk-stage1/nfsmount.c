@@ -634,6 +634,7 @@ retry_mount:
 	log_message("using port %d for nfs deamon", port);
 #endif
 	server_addr.sin_port = htons(port);
+#ifdef SUPPORT_DINOSAURS
 	/*
 	 * connect() the socket for kernels 1.3.10 and below only,
 	 * to avoid problems with multihomed hosts.
@@ -645,6 +646,7 @@ retry_mount:
 		log_perror("nfs connect");
 		goto fail;
 	}
+#endif
 
 	/* prepare data structure for kernel */
 
