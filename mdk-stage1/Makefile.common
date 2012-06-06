@@ -56,6 +56,8 @@ CFLAGS += -Werror
 endif
 endif
 
+LDFLAGS = $(CFLAGS) -Wl,-O2,-no-undefined -z relro
+
 INCLUDES = -I.
 
 LIBC_LIBS = 
