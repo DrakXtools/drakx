@@ -12,6 +12,14 @@ install:
 	install -m644 `cat list-$(THEME)` $(DESTDIR)$(ADVERTISING)
 	install -m644 list-$(THEME) $(DESTDIR)/$(ADVERTISING)/list
 
+dist-svn:
+	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
+	mkdir -p $(PRODUCT)-$(VERSION)/
+	svn export -q -rBASE . $(PRODUCT)-$(VERSION)/advertising
+	cp ../Makefile.config $(PRODUCT)-$(VERSION)/
+	tar cfJ $(PRODUCT)-$(VERSION).tar.xz $(PRODUCT)-$(VERSION)
+	rm -rf $(PRODUCT)-$(VERSION)
+
 dist:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
 	svn export -q . $(PRODUCT)-$(VERSION)

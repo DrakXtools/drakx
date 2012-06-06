@@ -173,7 +173,7 @@ EOF
 
 sub initrd {
     my ($type, $I, $img) = @_;
-    my $stage1_root = $ENV{USE_LOCAL_STAGE1} ? "../mdk-stage1" : "/usr/$lib/drakx-installer-binaries";
+    my $stage1_root = $ENV{USE_LOCAL_STAGE1} ? "../mdk-stage1" : "/usr/$lib/drakx-installer/binaries";
     my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
 
     _ "rm -rf $tmp_initrd";
