@@ -1,15 +1,16 @@
+include ../Makefile.config
+
 VERSION = 2012.0
-PRODUCT = drakx-installer-advertising
+PRODUCT = $(FAMILY)-advertising
 
 THEME = pwp
-DESTDIR = $(ROOTDEST)/install/extra/advertising
+ADVERTISING = $(ROOTDEST)/install/extra/advertising
 
 install:
-	rm -rf $(DESTDIR)
-	install -d $(DESTDIR)
-	install -m755 `cat list-$(THEME) | sed 's/png$$/pl/'` $(DESTDIR)
-	install -m644 `cat list-$(THEME)` $(DESTDIR)
-	install -m644 list-$(THEME) $(DESTDIR)/list
+	install -d $(DESTDIR)$(ADVERTISING)
+	install -m755 `cat list-$(THEME) | sed 's/png$$/pl/'` $(DESTDIR)$(ADVERTISING)
+	install -m644 `cat list-$(THEME)` $(DESTDIR)$(ADVERTISING)
+	install -m644 list-$(THEME) $(DESTDIR)/$(ADVERTISING)/list
 
 dist:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
