@@ -1,5 +1,11 @@
-Version 1.54 -  5 June 2012, by Per Øyvind Karlsen
+Version 1.54 -  6 June 2012, by Per Øyvind Karlsen
 
+- drop some dead code
+- comment out code operating on an uninitialized sockaddr
+- get rid of unused variables
+- fix aliasing violations
+- fix bogus sizeof(int) == sizeof(int32_t) assumptions
+- take out -fno-strict-aliasing
 - revert to "linux" terminfo
 - make sure ncurses get initialized in UTF-8 (mga#4894)
 - fix 'format not a string literal and no format arguments'
