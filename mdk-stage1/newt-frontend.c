@@ -361,7 +361,7 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 	entries[i].value = NULL;
 
 	if (*answers == NULL)
-		*answers = (char **) malloc(sizeof(char *) * i);
+		*answers = (char **) calloc(1, sizeof(char *) * i);
 	else
 		already_answers = *answers;
 

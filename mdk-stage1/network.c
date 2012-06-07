@@ -1004,7 +1004,7 @@ enum return_type ftp_prepare(void)
 
 		if (!IS_AUTOMATIC) {
 			if (answers == NULL)
-				answers = (char **) malloc(sizeof(questions));
+				answers = (char **) calloc(1, sizeof(questions));
 
 			results = choose_mirror_from_list(http_proxy_host, http_proxy_port, "ftp", &answers[0], &answers[1]);
 
@@ -1148,7 +1148,7 @@ enum return_type http_prepare(void)
 
 		if (!IS_AUTOMATIC) {
 			if (answers == NULL)
-				answers = (char **) malloc(sizeof(questions));
+				answers = (char **) calloc(1, sizeof(questions));
 
 			results = choose_mirror_from_list(http_proxy_host, http_proxy_port, "http", &answers[0], &answers[1]);
 
