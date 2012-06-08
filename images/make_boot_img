@@ -160,7 +160,7 @@ sub syslinux_cfg {
     my $default = 'linux';
     my $promp = 
 
-    my $header == "default $default\n";
+    my $header; = "default $default\n";
     if ($type ne 'cdrom') {
 	$header .= <<EOF;
 prompt 1
