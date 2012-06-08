@@ -1,10 +1,10 @@
 include ../Makefile.config
 
-VERSION=1.57
+VERSION=1.58
 PRODUCT=$(FAMILY)-images
 KERNELS=$(shell rpm -qf /lib/modules/3.*)
 IMAGES_DEST = $(ROOTDEST)/install/images
-COMPRESS = xz -v --check=crc32 -9e
+COMPRESS = xz -v --check=crc32 --lzma2=dict=512KiB
 
 all: images
 

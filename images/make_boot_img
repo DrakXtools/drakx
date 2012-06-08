@@ -20,7 +20,7 @@ my $wordsize = $arch eq 'x86_64' ? '64' : '32';
 
 my $tmp_mnt = "$ENV{'PWD'}/tmp_mnt";
 my $tmp_initrd = "$ENV{'PWD'}/tmp_initrd";
-my $compress_filter = 'gzip -1'; #xz -v --check=crc32 -9e';
+my $compress_filter = 'gzip -1';
 
 
 if ("@ARGV") {
