@@ -725,11 +725,6 @@ sub finish_install() {
     install::any::remove_advertising();
     install::any::write_fstab($o);
     $o->{modules_conf}->write;
-    if (! -e "/etc/resolv.conf") {
-        #- symlink resolv.conf in install root too so that updates and suppl media can be added
-	#  (probably not the "right" place, but fsckit, I've had enough spaghetti for this round..)
-        symlink "$::prefix/etc/resolv.conf", "/etc/resolv.conf";
-    }
     detect_devices::install_addons($::prefix);
 
     install::any::adjust_files_mtime_to_timezone();

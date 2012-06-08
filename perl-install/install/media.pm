@@ -921,6 +921,15 @@ sub openCdromTray {
 
 sub log_sizes() {
     my @df = MDK::Common::System::df($::prefix);
+
+    if (! -e "/etc/resolv.conf") {
+        #- symlink resolv.conf in install root too so that updates and suppl media can be added
+	#  (clearly not the right place to do this, but for some reason it just won't work if done
+	#  either before or after this function..??
+	#  fsckit, I've had enough spaghetti for this round!)
+        symlink "$::prefix/etc/resolv.conf", "/etc/resolv.conf";
+    }
+ 
     log::l(sprintf "Installed: %dMB(df), %dMB(rpm)",
 	   ($df[0] - $df[1]) / 1024,
 	   sum(run_program::rooted_get_stdout($::prefix, 'rpm', '-qa', '--queryformat', '%{size}\n')) / 1024 / 1024) if -x "$::prefix/bin/rpm";
