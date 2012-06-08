@@ -8,19 +8,19 @@ COMPRESS = xz -v --check=crc32 -9e
 
 all: images
 
-images: all.kernels/.ok
-	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)"
+images: all.kernels/.list isolinux boot.iso all.img hd_grub.img
 	rm -rf images/alternatives 
 	if [ `ls images/*.img-* 2>/dev/null | wc -l` -gt 0 ]; then	\
 	  mkdir images/alternatives; cd images/alternatives; mv ../*.img-* .; md5sum *.img-* > MD5SUM; \
 	fi
 	cd images ; md5sum *.{img,iso}* > MD5SUM
 
-# really st00pid check just to verify that it at least finished something last time..
-all.kernels/.ok: all.kernels
-	touch all.kernels/.ok
 
-all.kernels: update_kernel ../kernel/list_modules.pm
+isolinux boot.iso all.img hd_grub.img: all.kernels/.list images/$@
+	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
+
+
+all.kernels/.list: update_kernel ../kernel/list_modules.pm
 	./update_kernel $(KERNELS)
 
 dist: tar
