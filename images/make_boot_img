@@ -20,7 +20,7 @@ my $wordsize = $arch eq 'x86_64' ? '64' : '32';
 
 my $tmp_mnt = '/tmp/drakx_mnt';
 my $tmp_initrd = '/tmp/drakx_initrd';
-my $compress_filter = 'xz -v --check=crc32 -9e > $img';
+my $compress_filter = 'xz -v --check=crc32 -9e';
 
 
 if ("@ARGV") {
