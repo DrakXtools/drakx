@@ -4,11 +4,12 @@ VERSION=1.57
 PRODUCT=$(FAMILY)-images
 KERNELS=$(shell rpm -qf /lib/modules/3.*)
 IMAGES_DEST = $(ROOTDEST)/install/images
+COMPRESS = xz -v --check=crc32 -9e
 
 all: images
 
 images: all.kernels/.ok
-	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img
+	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)"
 	rm -rf images/alternatives 
 	if [ `ls images/*.img-* 2>/dev/null | wc -l` -gt 0 ]; then	\
 	  mkdir images/alternatives; cd images/alternatives; mv ../*.img-* .; md5sum *.img-* > MD5SUM; \
