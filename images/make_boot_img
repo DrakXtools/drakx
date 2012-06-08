@@ -20,6 +20,19 @@ my $wordsize = $arch eq 'x86_64' ? '64' : '32';
 
 my $tmp_mnt = '/tmp/drakx_mnt';
 my $tmp_initrd = '/tmp/drakx_initrd';
+my $compress_filter = 'xz -v --check=crc32 -9e > $img';
+
+
+if ("@ARGV") {
+    if ($ARGV[0] eq "--compress") {
+	shift @ARGV;
+	$compress_filter = $ARGV[0];
+	shift @ARGV;
+    }
+} else {
+    #usage();
+    #exit(1);
+}
 
 my $sudo;
 if ($>) {
@@ -71,6 +84,12 @@ foreach my $img (@images) {
     } else {
 	die "unknown image $img";
     }
+}
+
+sub usage () {
+    print "Usage: make_boot_img [--compress <filter>]\n";
+
+    exit(1);
 }
 
 sub syslinux_color {
@@ -250,7 +269,7 @@ fi
 
     my $devs = sprintf "ls /dev/{%s}", join(',', qw(console fb0 fd0 loop3 mem null ppp ptmx ram3 random tty[0-7] ttyS0 urandom));
 
-    _ "(cd $tmp_initrd; (find . ; $devs) | cpio -o -c --quiet) | xz -v --check=crc32 -9e > $img";
+    _ "(cd $tmp_initrd; (find . ; $devs) | cpio -o -c --quiet) | $compress_filter > $img";
     _ "rm -rf $tmp_initrd";
 }
 
