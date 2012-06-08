@@ -18,9 +18,9 @@ my $isolinux_bin = '/usr/lib/syslinux/isolinux.bin';
 my $lib = $arch eq 'x86_64' ? 'lib64' : 'lib';
 my $wordsize = $arch eq 'x86_64' ? '64' : '32';
 
-my $tmp_mnt = '/tmp/drakx_mnt';
-my $tmp_initrd = '/tmp/drakx_initrd';
-my $compress_filter = 'xz -v --check=crc32 -9e';
+my $tmp_mnt = "$ENV{'PWD'}/tmp_mnt";
+my $tmp_initrd = "$ENV{'PWD'}/tmp_initrd";
+my $compress_filter = 'gzip -1'; #xz -v --check=crc32 -9e';
 
 
 if ("@ARGV") {
