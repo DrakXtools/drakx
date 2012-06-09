@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
-#
-# # Translators:
-# webteam <webteam@mandriva.com>, 2011.
+# Translators:
+# Atilla ÖNTAŞ <tarakbumba@gmail.com>, 2008-2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
 "Report-Msgid-Bugs-To: https://qa.mandriva.com\n"
 "POT-Creation-Date: 2012-05-25 01:31+0200\n"
-"PO-Revision-Date: 2011-12-01 13:25+0000\n"
-"Last-Translator: A. ONTAS <tarakbumba@gmail.com>\n"
-"Language-Team: Turkish <i18n-tr@ml.mageia.org>\n"
+"PO-Revision-Date: 2012-06-09 04:29+0300\n"
+"Last-Translator: Atilla ÖNTAŞ <tarakbumba@gmail.com>\n"
+"Language-Team: Transifex Turkish Translation Team\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Virtaal 0.7.1\n"
 
 #: any.pm:269 any.pm:973 diskdrake/interactive.pm:645
 #: diskdrake/interactive.pm:869 diskdrake/interactive.pm:929
@@ -72,19 +72,19 @@ msgstr ""
 "girerseniz, sonraki açılışta önyükleyici komut satırını görmeniz gerekir."
 
 #: any.pm:337
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
-"This implies you already have a bootloader on the hard disk drive you boot "
-"(eg: System Commander).\n"
+"This implies you already have a bootloader on the hard drive you boot (eg: "
+"System Commander).\n"
 "\n"
 "On which drive are you booting?"
 msgstr ""
 "Sistem yükleyicinizi bir disk bölümüne yüklemeye karar verdiniz.\n"
-"Bu durum sistemi boot ettiğiniz hard disk sürücüsü üzerinde bir sistem "
-"yükleyicinin olduğunu gösteriyor.(örn: System Commander)\n"
+"Bu durum önyükleme yaptığınız  sabit disk üzerinde bir önyükleyicinin "
+"olduğunu gösteriyor.(örn: System Commander)\n"
 "\n"
-"Hangi sürücüden sistemi önyükleme(boot) gerçekleştiriyorsunuz?"
+"Hangi sabit diskten önyükleme gerçekleştiriyorsunuz?"
 
 #: any.pm:348
 #, c-format
@@ -1076,7 +1076,7 @@ msgid "Domain Admin Password"
 msgstr "Alan Yöneticisinin Parolası"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:994
+#: bootloader.pm:969
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1152,32 +1152,32 @@ msgstr "Önyükleyiciyi Yeniden Kurun"
 #: check_min_sys_requirements.pm:78
 #, c-format
 msgid "System requirements warning\n"
-msgstr ""
+msgstr "Sistem gereksinimleri uyarısı\n"
 
 #: check_min_sys_requirements.pm:79
 #, c-format
 msgid "Recommended system parameters:\n"
-msgstr ""
+msgstr "Önerilen sistem parametreleri\n"
 
 #: check_min_sys_requirements.pm:80 check_min_sys_requirements.pm:85
 #, c-format
 msgid "  RAM = "
-msgstr ""
+msgstr "  BELLEK = "
 
 #: check_min_sys_requirements.pm:80 check_min_sys_requirements.pm:85
 #, c-format
 msgid " Mb\n"
-msgstr ""
+msgstr " Mb\n"
 
 #: check_min_sys_requirements.pm:81
 #, c-format
 msgid "  HDD = "
-msgstr ""
+msgstr "  SABİT DİSK = "
 
 #: check_min_sys_requirements.pm:81
 #, c-format
 msgid " Gb\n"
-msgstr ""
+msgstr " Gb\n"
 
 #: check_min_sys_requirements.pm:82
 #, c-format
@@ -1185,6 +1185,8 @@ msgid ""
 "\n"
 "Your system parameters:\n"
 msgstr ""
+"\n"
+"Sistem parametreleriniz:\n"
 
 #: check_min_sys_requirements.pm:93
 #, c-format
@@ -1192,11 +1194,13 @@ msgid ""
 "\n"
 "Your system resources are too low\n"
 msgstr ""
+"\n"
+"Sistem kaynaklarınız çok düşük\n"
 
 #: check_min_sys_requirements.pm:99
 #, c-format
 msgid "System requirements warning"
-msgstr ""
+msgstr "Sistem gereksinimleri uyarısı"
 
 #: common.pm:142
 #, c-format
@@ -1340,7 +1344,7 @@ msgid "Warning"
 msgstr "Uyarı"
 
 #: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete this mountpoint?"
 msgstr "Bu bağlama noktasını silmek istediğinizden emin misiniz?"
 
@@ -1391,7 +1395,7 @@ msgstr "Önce verinizin yedeğini alınız"
 msgid "Exit"
 msgstr "Çıkış"
 
-#: diskdrake/hd_gtk.pm:116
+#: diskdrake/hd_gtk.pm:111
 #, c-format
 msgid "Continue"
 msgstr "Devam"
@@ -1964,7 +1968,7 @@ msgstr "Loopback"
 msgid "Loopback file name: "
 msgstr "Loopback dosya ismi: "
 
-#: diskdrake/interactive.pm:1071
+#: diskdrake/interactive.pm:1070
 #, c-format
 msgid "Give a file name"
 msgstr "Bir dosya ismi verin"
@@ -2040,7 +2044,7 @@ msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "%s bölümü biçimlendirilirken üzerinde ki tüm bilgiler silinecektir"
 
 #: diskdrake/interactive.pm:1291
-#, fuzzy, c-format
+#, c-format
 msgid "Check bad blocks?"
 msgstr "Hatalı bloklar sınansın mı?"
 
@@ -2506,7 +2510,7 @@ msgstr ""
 "erişim için)."
 
 #: fs/mount_options.pm:125
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
 "the -a option will not cause the filesystem to be mounted)."
@@ -2514,22 +2518,22 @@ msgstr ""
 "Sadece belirgin olarak bağlanabilir (örn.,\n"
 "-a seçeneği dosya sisteminin bağlanmasını sağlayamayacaktır)."
 
-#: fs/mount_options.pm:128
-#, fuzzy, c-format
-msgid "Do not interpret character or block special devices on the filesystem."
+#: fs/mount_options.pm:127
+#, c-format
+msgid "Do not interpret character or block special devices on the file system."
 msgstr "Dosya sistemindeki karakter veya blok özellikli aygıtları yorumlama."
 
 #: fs/mount_options.pm:130
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
 "filesystem. This option might be useful for a server that has filesystems\n"
 "containing binaries for architectures other than its own."
 msgstr ""
 "Bağlı dosya sistemindeki hiç bir ikili dosyanın çalışmasına\n"
-" izin verme. Kendisi dışındaki mimariler için derlenmiş ikili dosyaları "
+"izin verme. Kendisi dışındaki mimariler için derlenmiş ikili dosyaları "
 "içeren\n"
-" dosya sistemlerine sahip sunucularda bu seçenek yararlı olabilir."
+"dosya sistemlerine sahip sunucularda bu seçenek yararlı olabilir."
 
 #: fs/mount_options.pm:134
 #, c-format
@@ -2543,22 +2547,22 @@ msgstr ""
 " güvensizdir.)"
 
 #: fs/mount_options.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Mount the filesystem read-only."
 msgstr "Dosya sistemini salt okunur olarak bağla."
 
 #: fs/mount_options.pm:140
-#, fuzzy, c-format
+#, c-format
 msgid "All I/O to the filesystem should be done synchronously."
 msgstr "Dosya sistemine tüm I/O işlemleri eş zamanlı yapılmalıdır."
 
-#: fs/mount_options.pm:142
-#, fuzzy, c-format
-msgid "Allow every user to mount and umount the filesystem."
+#: fs/mount_options.pm:141
+#, c-format
+msgid "Allow every user to mount and umount the file system."
 msgstr "Her kullanıcının dosya sistemini bağlamasına veya ayırmasına izin ver."
 
 #: fs/mount_options.pm:144
-#, fuzzy, c-format
+#, c-format
 msgid "Allow an ordinary user to mount the filesystem."
 msgstr "Normal bir kullanıcının dosya sistemini bağlamasına izin ver."
 
@@ -2733,8 +2737,8 @@ msgstr ""
 "Devam etmek için hazır olduğunuzda %s tuşuna basın."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:191 fs/partitioning_wizard.pm:559
-#: interactive.pm:549 interactive/curses.pm:270 ugtk2.pm:519
+#: fs/partitioning_wizard.pm:189 fs/partitioning_wizard.pm:557
+#: interactive.pm:549 interactive/curses.pm:263 ugtk2.pm:519
 #, c-format
 msgid "Next"
 msgstr "İleri"
@@ -2780,11 +2784,13 @@ msgid "Erase and use entire disk"
 msgstr "Tüm diski sil ve kullan"
 
 #: fs/partitioning_wizard.pm:237
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
-msgstr "Birden çok sabit diskiniz var, hangisine linux kurmak istiyorsunuz?"
+msgstr ""
+"Birden çok sabit diskiniz var, kurulum aracının hangisini kullanmasını "
+"istiyorsunuz?"
 
 #: fs/partitioning_wizard.pm:245 fsedit.pm:634
 #, c-format
@@ -2866,9 +2872,9 @@ msgid "BIOS software RAID detected on disks %s. Activate it?"
 msgstr "%s disklerinde BIOS RAID yazılımı algılandı. Etkinleştirilsin mi?"
 
 #: fsedit.pm:247
-#, fuzzy, c-format
+#, c-format
 msgid ""
-"I cannot read the partition table of device %s, it's too corrupted for me :"
+"I can not read the partition table of device %s, it's too corrupted for me :"
 "(\n"
 "I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
 "The other solution is to not allow DrakX to modify the partition table.\n"
@@ -2900,7 +2906,7 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "Bağlama noktası %s olan bir bölüm zaten var\n"
 
 #: fsedit.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
@@ -2911,10 +2917,10 @@ msgstr ""
 "Bu nedenle bir /boot bölümü eklediğinize emin olun."
 
 #: fsedit.pm:440
-#, fuzzy, c-format
+#, c-format
 msgid ""
-"Metadata version unsupported for a boot partition. Please be sure to add a "
-"separate /boot partition."
+"Metadata version unsupported for a boot partition. Please be sure to add a /"
+"boot partition."
 msgstr ""
 "Bir önyükleme disk bölümü için meta verisi sürümü desteklenmiyor. uBir /boot "
 "bölümü eklediğinize emin olun."
@@ -2934,7 +2940,7 @@ msgid "Metadata version unsupported for a boot partition."
 msgstr "Bir önyükleme disk bölümü için meta verisi sürümü desteklenmiyor."
 
 #: fsedit.pm:459
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
@@ -2945,12 +2951,12 @@ msgstr ""
 "Bu nedenle bir /boot bölümü eklediğinize emin olun."
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr "%s bağlama noktası için parolalı dosya sistemi kullanamazsınız"
 
 #: fsedit.pm:469
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You cannot use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
@@ -2959,12 +2965,12 @@ msgstr ""
 "noktası  olarak kullanmazsınız"
 
 #: fsedit.pm:471
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
 "volumes.\n"
-"You should create a separate /boot partition first"
+"You should create a /boot partition first"
 msgstr ""
 "Bir LVM Mantıksal bölümünü kök dizini (/) olarak seçtiniz.\n"
 "Önyükleyici, bölüm fiziki bölümleri kapsadığı sürece bunu kullanamaz\n"
@@ -3291,12 +3297,12 @@ msgstr ""
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:369
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
-"Your card currently uses the %s\"%s\" driver (the default driver for your "
-"card is \"%s\")"
+"Your card currently use the %s\"%s\" driver (default driver for your card is "
+"\"%s\")"
 msgstr ""
 "\n"
 "\n"
@@ -3304,7 +3310,7 @@ msgstr ""
 "tanımlısı \"%s\" sürücüsüdür)"
 
 #: harddrake/sound.pm:371
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
 "sound API (it's available on most UNIX(tm) systems) but it's a very basic "
@@ -3318,8 +3324,8 @@ msgid ""
 "It also provides a much higher API than OSS.\n"
 "\n"
 "To use alsa, one can either use:\n"
-"- the old compatibility OSS API\n"
-"- the new ALSA API that provides many enhanced features but requires using "
+"- the old compatibility OSS api\n"
+"- the new ALSA api that provides many enhanced features but requires using "
 "the ALSA library.\n"
 msgstr ""
 "OSS (Open Sound System [Serbest Ses Sistemi]) ilk ses API dir. Bir İşletim "
@@ -3389,7 +3395,7 @@ msgid "Sound troubleshooting"
 msgstr "Ses sorunu giderme"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:430
+#: harddrake/sound.pm:473
 #, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
@@ -3449,12 +3455,12 @@ msgid "Choosing an arbitrary driver"
 msgstr "İsteğe bağlı bir sürücü seçiliyor"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:463
-#, fuzzy, c-format
+#: harddrake/sound.pm:506
+#, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one in the above list.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -3484,12 +3490,12 @@ msgid "Unknown|CPH06X (bt878) [many vendors]"
 msgstr "Bilinmeyen|CPH06X (bt878) [çok sayıda üretici]"
 
 #: harddrake/v4l.pm:475
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-"
 "detect the rights parameters.\n"
 "If your card is misdetected, you can force the right tuner and card types "
-"here. Just select your TV card parameters if needed."
+"here. Just select your tv card parameters if needed."
 msgstr ""
 "Çoğu TV kartı için, GNU/Linux çekirdeğinde bulunan bttv modülü otomatik "
 "olarak kart için gerekli değişkenleri bulur.\n"
@@ -5487,9 +5493,9 @@ msgid "Extended partition not supported on this platform"
 msgstr "Mantıksal bölüm bu platform tarafından desteklenmiyor"
 
 #: partition_table.pm:558
-#, fuzzy, c-format
+#, c-format
 msgid ""
-"You have a hole in your partition table but I cannot use it.\n"
+"You have a hole in your partition table but I can not use it.\n"
 "The only solution is to move your primary partitions to have the hole next "
 "to the extended partitions."
 msgstr ""
@@ -6883,7 +6889,7 @@ msgstr "İnternet"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "Ağ"
 
 #: services.pm:163
 #, c-format
@@ -7295,12 +7301,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Kurulum başarısız!"
-
-#~ msgid "Enable 5.1 sound with Pulse Audio"
-#~ msgstr "PulseAudio ile 5.1 surround sesi etkinleştir"
-
-#~ msgid "Enable user switching for audio applications"
-#~ msgstr "Ses uygulamaları için kullanıcı geçişlerini etkinleştir"
-
-#~ msgid "File sharing"
-#~ msgstr "Dosya paylaşımı"
