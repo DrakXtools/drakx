@@ -391,7 +391,7 @@ sub empty_packages {
     $packages->{log} = \&log::l;
     $packages->{info} = \&log::l;
     $packages->{fatal} = sub {
-        log::l("urpmi error: $_[1] ($_[0])");
+        log::l("urpmi error: $_[1] ($_[0])\n" . common::backtrace());
         $::o->ask_warn(undef, N("A fatal error occurred: %s.", "$_[1] ($_[0])"));
     };
     $packages->{error} = sub {
