@@ -28,7 +28,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/mount.h>
-#include <linux/un.h>
+#include <sys/un.h>
 #include <errno.h>
 #include <signal.h>
 #include <sys/resource.h>
