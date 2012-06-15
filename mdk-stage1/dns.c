@@ -75,20 +75,23 @@ int mygethostbyname(char * name, struct in_addr * addr)
 
 char * mygethostbyaddr(char * ipnum)
 {
-	struct sockaddr_in sa;
+	union {
+	    struct sockaddr_in in;
+	    struct sockaddr sa;
+	} addr;
 	char hbuf[NI_MAXHOST];
 
         /* prevent from timeouts */
         if (_res.nscount == 0) 
                 return NULL;
   
-	memset(&sa, 0, sizeof sa);
-	sa.sin_family = AF_INET;
+	memset(&addr, 0, sizeof addr);
+	addr.in.sin_family = AF_INET;
 
-	if (inet_pton(AF_INET, ipnum, &sa.sin_addr) != 1)
+	if (inet_pton(AF_INET, ipnum, &addr.in.sin_addr) != 1)
           return NULL;
 
-	if (getnameinfo((struct sockaddr*)&sa, sizeof(sa), hbuf, sizeof(hbuf), NULL, 0, 0 |NI_NAMEREQD) == 0) //NI_NUMERICHOST  NI_NAMEREQD
+	if (getnameinfo(&addr.sa, sizeof(addr), hbuf, sizeof(hbuf), NULL, 0, 0 |NI_NAMEREQD) == 0) //NI_NUMERICHOST  NI_NAMEREQD
           return strdup(hbuf);
 	else return NULL;
 }
