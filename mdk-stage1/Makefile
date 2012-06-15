@@ -15,7 +15,7 @@
  # along with this program; if not, write to the Free Software
  # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-VERSION=1.55
+VERSION=1.56
 PRODUCT = $(FAMILY)-binaries
 
  #
@@ -149,6 +149,45 @@ usb-ids.h: /usr/share/ldetect-lst/usbtable.gz update-usb-ids.pl
 
 pcmcia/libpcmcia.a: pcmcia
 
+ifneq (0, $(WHOLE_PROGRAM))
+
+init: .depend
+	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
+		$(INCLUDES) \
+		$(INITSRC) \
+		$(LIBC_LIBS) \
+		-o $@
+
+stage1: .depend $(PCMCIA_LIB)
+	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
+		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -DENABLE_BOOTSPLASH \
+		bootsplash.c $(FRONTEND_SRC) $(STAGE1_ALLSRC) \
+		$(PCMCIA_LIB) $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS) \
+		-o $@
+
+dhcp-client: .depend
+	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
+		$(INCLUDES) $(NETWORK_STANDALONE_DEFS) $(USB_DEFS_GEN) \
+		$(STAGE1_SRC) $(NETWORKSRC) $(FRONTEND_SRC) \
+		$(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS) \
+		-o $@
+
+rescue-gui: .depend
+	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
+		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -DENABLE_BOOTSPLASH \
+		rescue-gui.c frontend-common.c params.c utils.c log.c automatic.c $(FRONTEND_SRC) \
+		$(FRONTEND_LIBS) $(LIBC_LIBS) \
+		-o $@
+
+probe-modules: .depend $(PCMCIA_LIB)
+	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
+		$(INCLUDES) \
+		probe-modules.c probing.c modules.c params.c utils.c log.c automatic.c frontend-common.c stdio-frontend.c zlibsupport.c $(PCMCIA_LIB) \
+		$(STAGE1_LIBS) $(LIBC_LIBS) \
+		-o $@
+
+else
+
 init: $(INITOBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(LIBC_LIBS)
 
@@ -158,6 +197,11 @@ stage1: $(STAGE1OBJS_FULL) bootsplash.o $(FRONTEND_OBJS) $(PCMCIA_LIB)
 dhcp-client: $(STAGE1OBJS_NETWORK_STANDALONE) $(FRONTEND_OBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
 
+rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(FRONTEND_OBJS)
+	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(FRONTEND_LIBS) $(LIBC_LIBS)
+
+probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o zlibsupport-FULL.o $(PCMCIA_LIB)
+	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(LIBC_LIBS)
 
 $(INITOBJS): %.o: %.c .depend
 	$(COMPILE) $(INCLUDES) -c $<
@@ -174,6 +218,7 @@ $(STAGE1OBJS_FULL): %-FULL.o: %.c .depend
 .c.o: .depend
 	$(DIET) $(COMPILE) $(INCLUDES) -DENABLE_BOOTSPLASH -c $<
 
+endif
 
 clean: $(CLEANDIRS)
 	rm -f *.o .depend *.rdz *.img pci-ids.h pcmcia-ids.h usb-ids.h $(BINS)
@@ -184,12 +229,6 @@ $(CLEANDIRS):
 .PHONY: subdirs $(BUILDDIRS)
 .PHONY: subdirs $(CLEANDIRS)
 .PHONY: all clean test
-
-rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(FRONTEND_OBJS)
-	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(FRONTEND_LIBS) $(LIBC_LIBS)
-
-probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o zlibsupport-FULL.o $(PCMCIA_LIB)
-	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(LIBC_LIBS)
 
 dist: tar
 tar:

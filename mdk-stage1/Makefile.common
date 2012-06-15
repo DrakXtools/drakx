@@ -49,6 +49,7 @@ endif
 
 #- flags used by all stuff
 CFLAGS = $(OPTFLAGS) -pipe -Wall -Werror=strict-aliasing -Wstrict-aliasing=2
+WHOLEFLAGS = -Os -fwhole-program -flto
 
 ifneq (ppc, $(ARCH))
 ifneq (sparc, $(ARCH))
