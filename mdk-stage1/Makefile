@@ -204,7 +204,7 @@ probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(LIBC_LIBS)
 
 $(INITOBJS): %.o: %.c .depend
-	$(COMPILE) $(INCLUDES) -c $<
+	$(DIET) $(COMPILE) $(INCLUDES) -c $<
 
 $(STAGE1OBJS_NETWORK): %-NETWORK.o: %.c .depend
 	$(DIET) $(COMPILE) $(INCLUDES) $(NETWORK_DEFS) $(PCMCIA_DEFS) $(USB_DEFS_GEN) -DENABLE_ADDITIONAL_MODULES -c $< -o $@
