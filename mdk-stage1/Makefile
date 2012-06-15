@@ -120,9 +120,13 @@ BINS = init stage1 dhcp-client rescue-gui probe-modules
 DIRS =
 HEADERS = pci-ids.h usb-ids.h
 ifneq (,$(findstring $(ARCH), i386 x86_64))
-DIRS += pcmcia
 HEADERS += pcmcia-ids.h
+ifneq (0, $(WHOLE_PROGRAM))
+PCMCIA_LIB = pcmcia/probe.c pcmcia/startup.c pcmcia/yacc_config.c pcmcia/lex_config.c
+else
+DIRS += pcmcia
 PCMCIA_LIB = pcmcia/libpcmcia.a
+endif
 PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
 
@@ -137,6 +141,11 @@ $(DIRS): $(BUILDDIRS)
 $(BUILDDIRS):
 	$(MAKE) -C $(@:build-%=%)
 
+pcmcia/pcmcia_probe.o: pcmcia/probe.c
+	$(DIET) $(COMPILE) -fPIC $(INCLUDES) -c $< -o $@
+
+pcmcia/yacc_config.c:
+	$(YACC) $(YFLAGS) -d -o pcmcia/yacc_config.c pcmcia/yacc_config.y
 
 pci-ids.h: /usr/share/ldetect-lst/pcitable.gz update-pci-ids.pl
 	perl update-pci-ids.pl > $@ || { rm -f $@; exit 1; }

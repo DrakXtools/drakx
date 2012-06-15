@@ -59,6 +59,10 @@ endif
 
 LDFLAGS = $(CFLAGS) -Wl,-O2,-no-undefined -z relro
 
+# (blino) make sure yynewerror and yyerrlab are uselessly used
+LFLAGS += --nounput
+YFLAGS := -d
+
 INCLUDES = -I.
 
 LIBC_LIBS = 
