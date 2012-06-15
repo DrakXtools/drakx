@@ -40,21 +40,20 @@
 #include <sys/syscall.h>
 #define syslog(...) syscall(__NR_syslog, __VA_ARGS__)
 
-#define LINUX_REBOOT_MAGIC1    0xfee1dead
-#define LINUX_REBOOT_MAGIC2    672274793
-#define BMAGIC_HARD            0x89ABCDEF
-#define BMAGIC_SOFT            0
-#define BMAGIC_REBOOT          0x01234567
-#define BMAGIC_HALT            0xCDEF0123
-#define BMAGIC_POWEROFF                0x4321FEDC
+#define LINUX_REBOOT_MAGIC1	0xfee1dead
+#define LINUX_REBOOT_MAGIC2	672274793
+#define BMAGIC_HARD		0x89ABCDEF
+#define BMAGIC_SOFT		0
+#define BMAGIC_REBOOT		0x01234567
+#define BMAGIC_HALT		0xCDEF0123
+#define BMAGIC_POWEROFF		0x4321FEDC
 
 static unsigned int reboot_magic = BMAGIC_REBOOT;
 
 static inline long reboot(unsigned int command)
 {
-       return (long) syscall(__NR_reboot, LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, command, 0);
+	return (long) syscall(__NR_reboot, LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, command, 0);
 }
-
 
 #include "config-stage1.h"
 #include <linux/cdrom.h>
@@ -118,20 +117,20 @@ void print_int_init(int fd, int i)
 	char buf[10];
 	char * chptr = buf + 9;
 	int j = 0;
-	
+
 	if (i < 0)
 	{
 		write(1, "-", 1);
 		i = -1 * i;
 	}
-	
+
 	while (i)
 	{
 		*chptr-- = '0' + (i % 10);
 		j++;
 		i = i / 10;
 	}
-	
+
 	write(fd, chptr + 1, j);
 }
 
@@ -183,7 +182,7 @@ void doklog()
 		close(1);
 		close(2);
 	}
-	
+
 	out = open("/dev/tty4", O_WRONLY, 0);
 	if (out < 0) 
 		print_warning("couldn't open tty for syslog -- still using /tmp/syslog\n");
@@ -225,7 +224,7 @@ void doklog()
 		if (sock >= 0)
 			FD_SET(sock, &readset);
 		FD_SET(in, &readset);
-		
+
 		i = select(20, &readset, NULL, NULL, NULL);
 		if (i <= 0)
 			continue;
@@ -340,7 +339,7 @@ void unmount_filesystems(void)
 	int i, nb;
 
 	printf("unmounting filesystems...\n"); 
-	
+
 	fd = open("/proc/mounts", O_RDONLY, 0);
 	if (fd < 1) {
 		print_error("failed to open /proc/mounts");
@@ -390,14 +389,14 @@ void unmount_filesystems(void)
 			}
 		}
 	} while (nb);
-	
+
 	for (i = nb = 0; i < numfs; i++)
 		if (fs[i].mounted) {
 			printf("\tumount failed: %s\n", fs[i].name);
 			if (strcmp(fs[i].fs, "ext3") == 0) nb++; /* don't count not-ext3 umount failed */
 		}
 
-	
+
 	if (nb) {
 		printf("failed to umount some filesystems\n");
                 select(0, NULL, NULL, NULL, NULL);
@@ -452,7 +451,7 @@ int main(int argc, char **argv)
 		if (mount("none", "/sys", "sysfs", 0, NULL))
 			fatal_error("Unable to mount sysfs filesystem");
 	}
-	
+
 
 	/* ignore Control-C and keyboard stop signals */
 	signal(SIGINT, SIG_IGN);
@@ -462,13 +461,13 @@ int main(int argc, char **argv)
 		fd = open("/dev/console", O_RDWR, 0);
 		if (fd < 0)
 			fatal_error("failed to open /dev/console");
-		
+
 		dup2(fd, 0);
 		dup2(fd, 1);
 		dup2(fd, 2);
 		close(fd);
 	}
-		
+
 
 	/* I set me up as session leader (probably not necessary?) */
 	setsid();
@@ -488,7 +487,7 @@ int main(int argc, char **argv)
 
 	/* Go into normal init mode - keep going, and then do a orderly shutdown
 	   when:
-	   
+
 	   1) install exits
 	   2) we receive a SIGHUP 
 	*/
