@@ -28,7 +28,7 @@ clean:
 	rm -f *.o $(TARGET) lex_config.c yacc_config.c yacc_config.h
 
 CFLAGS = -Wall -Werror -Wno-deprecated-declarations -Os -fomit-frame-pointer -pipe
-INCLUDES += -I$(top_dir) -D_BSD_SOURCE
+INCLUDES += -I$(top_dir)
 
 # (blino) make sure yynewerror and yyerrlab are uselessly used
 INCLUDES += -Dlint

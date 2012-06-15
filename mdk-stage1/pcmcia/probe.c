@@ -50,6 +50,10 @@
     
 ======================================================================*/
 
+#if defined(__dietlibc__)
+#define _BSD_SOURCE 1
+#endif
+
 #include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>

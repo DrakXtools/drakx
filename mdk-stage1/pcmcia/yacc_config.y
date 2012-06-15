@@ -11,6 +11,10 @@
  * License: GPL v2
  */
     
+#if defined(__dietlibc__)
+#define _BSD_SOURCE 1
+#endif
+
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
