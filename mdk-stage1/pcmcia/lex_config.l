@@ -16,10 +16,7 @@
 
 #undef src
 
-#if defined(__dietlibc__)
-#define _BSD_SOURCE 1
-#endif
-
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

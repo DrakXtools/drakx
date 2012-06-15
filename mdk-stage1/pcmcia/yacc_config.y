@@ -11,10 +11,7 @@
  * License: GPL v2
  */
     
-#if defined(__dietlibc__)
-#define _BSD_SOURCE 1
-#endif
-
+#include <stdint.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -45,7 +42,7 @@ void yyerror(const char *msg, ...);
 
 %union {
     char *str;
-    u_long num;
+    unsigned long num;
     struct adjust_list_t *adjust;
 }
 

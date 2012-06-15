@@ -50,11 +50,8 @@
     
 ======================================================================*/
 
-#if defined(__dietlibc__)
-#define _BSD_SOURCE 1
-#endif
-
 #include <sys/types.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -68,7 +65,7 @@
 /*====================================================================*/
 
 typedef struct {
-    u_short	vendor, device;
+    uint16_t	vendor, device;
     char	*modname;
     char	*name;
 } pci_id_t;
@@ -139,14 +136,14 @@ char * driver = NULL;
 static int pci_probe(void)
 {
     char s[256], *name = NULL;
-    u_int device, vendor, i;
+    uint32_t device, vendor, i;
     FILE *f;
     
     log_message("PCMCIA: probing PCI bus..");
 
     if ((f = fopen("/proc/bus/pci/devices", "r")) != NULL) {
 	while (fgets(s, 256, f) != NULL) {
-	    u_int n = strtoul(s+5, NULL, 16);
+	    uint32_t n = strtoul(s+5, NULL, 16);
 	    vendor = (n >> 16); device = (n & 0xffff);
 	    if (vendor == 0x1217) {
 		driver = "yenta_socket";
@@ -176,7 +173,7 @@ static int pci_probe(void)
 /*====================================================================*/
 
 #include <sys/io.h>
-typedef u_short ioaddr_t;
+typedef uint16_t ioaddr_t;
 
 #include "i82365.h"
 #include "cirrus.h"
@@ -184,29 +181,29 @@ typedef u_short ioaddr_t;
 
 static ioaddr_t i365_base = 0x03e0;
 
-static u_char i365_get(u_short sock, u_short reg)
+static uint8_t i365_get(uint16_t sock, uint16_t reg)
 {
-    u_char val = I365_REG(sock, reg);
+    uint8_t val = I365_REG(sock, reg);
     outb(val, i365_base); val = inb(i365_base+1);
     return val;
 }
 
-static void i365_set(u_short sock, u_short reg, u_char data)
+static void i365_set(uint16_t sock, uint16_t reg, uint8_t data)
 {
-    u_char val = I365_REG(sock, reg);
+    uint8_t val = I365_REG(sock, reg);
     outb(val, i365_base); outb(data, i365_base+1);
 }
 
-static void i365_bset(u_short sock, u_short reg, u_char mask)
+static void i365_bset(uint16_t sock, uint16_t reg, uint8_t mask)
 {
-    u_char d = i365_get(sock, reg);
+    uint8_t d = i365_get(sock, reg);
     d |= mask;
     i365_set(sock, reg, d);
 }
 
-static void i365_bclr(u_short sock, u_short reg, u_char mask)
+static void i365_bclr(uint16_t sock, uint16_t reg, uint8_t mask)
 {
-    u_char d = i365_get(sock, reg);
+    uint8_t d = i365_get(sock, reg);
     d &= ~mask;
     i365_set(sock, reg, d);
 }
@@ -295,45 +292,45 @@ int i365_probe(void)
 
 #include "tcic.h"
 
-static u_char tcic_getb(ioaddr_t base, u_char reg)
+static uint8_t tcic_getb(ioaddr_t base, uint8_t reg)
 {
-    u_char val = inb(base+reg);
+    uint8_t val = inb(base+reg);
     return val;
 }
 
-static void tcic_setb(ioaddr_t base, u_char reg, u_char data)
+static void tcic_setb(ioaddr_t base, uint8_t reg, uint8_t data)
 {
     outb(data, base+reg);
 }
 
-static u_short tcic_getw(ioaddr_t base, u_char reg)
+static uint16_t tcic_getw(ioaddr_t base, uint8_t reg)
 {
-    u_short val = inw(base+reg);
+    uint16_t val = inw(base+reg);
     return val;
 }
 
-static void tcic_setw(ioaddr_t base, u_char reg, u_short data)
+static void tcic_setw(ioaddr_t base, uint8_t reg, uint16_t data)
 {
     outw(data, base+reg);
 }
 
-static u_short tcic_aux_getw(ioaddr_t base, u_short reg)
+static uint16_t tcic_aux_getw(ioaddr_t base, uint16_t reg)
 {
-    u_char mode = (tcic_getb(base, TCIC_MODE) & TCIC_MODE_PGMMASK) | reg;
+    uint8_t mode = (tcic_getb(base, TCIC_MODE) & TCIC_MODE_PGMMASK) | reg;
     tcic_setb(base, TCIC_MODE, mode);
     return tcic_getw(base, TCIC_AUX);
 }
 
-static void tcic_aux_setw(ioaddr_t base, u_short reg, u_short data)
+static void tcic_aux_setw(ioaddr_t base, uint16_t reg, uint16_t data)
 {
-    u_char mode = (tcic_getb(base, TCIC_MODE) & TCIC_MODE_PGMMASK) | reg;
+    uint8_t mode = (tcic_getb(base, TCIC_MODE) & TCIC_MODE_PGMMASK) | reg;
     tcic_setb(base, TCIC_MODE, mode);
     tcic_setw(base, TCIC_AUX, data);
 }
 
 static int get_tcic_id(ioaddr_t base)
 {
-    u_short id;
+    uint16_t id;
     tcic_aux_setw(base, TCIC_AUX_TEST, TCIC_TEST_DIAG);
     id = tcic_aux_getw(base, TCIC_AUX_ILOCK);
     id = (id & TCIC_ILOCKTEST_ID_MASK) >> TCIC_ILOCKTEST_ID_SH;
@@ -344,7 +341,7 @@ static int get_tcic_id(ioaddr_t base)
 int tcic_probe_at(ioaddr_t base)
 {
     int i;
-    u_short old;
+    uint16_t old;
     
     /* Anything there?? */
     for (i = 0; i < 0x10; i += 2)
