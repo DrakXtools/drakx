@@ -205,6 +205,10 @@ sub install {
     my $copy_mode = $env->{mode}{copy} || '';
     my $working_dir = '.';
 
+    if ($env->{from}{dir} eq "/usr/LIB/drakx-installer/binaries" and $ENV{USE_LOCAL_STAGE1}) {
+	$from_dir = "../mdk-stage1";
+    }
+
     my $expand = $env->{from}{expand} || '';
 
     my $disallow_from_dir = sub {
