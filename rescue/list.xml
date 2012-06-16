@@ -63,15 +63,13 @@
   mkfs.xfs xfs_admin xfs_repair fsck.xfs
   mkfs.ntfs mkdosfs dosfslabel mkntfs ntfsresize ntfslabel
   mkfs.nilfs2 nilfs-tune
+  mkfs.jfs fsck.jfs jfs_tune
 
   dropbear dropbearkey
   screen
 
   gdisk
 
-  <if ARCH="i.86|x86_64">
-    mkfs.jfs fsck.jfs jfs_tune
-  </if>
   quotacheck
   cryptsetup dmsetup
 
