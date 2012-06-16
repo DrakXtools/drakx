@@ -44,6 +44,9 @@ output("$tmp/etc/issue", $issue);
 
 _ "../tools/install-xml-file-list list.xml $tmp";
 
+# XXX: prevent this from being added to begin with
+_ "rm -rf $tmp/usr/share/locale/";
+
 _ "cp /bin/busybox.static $tmp/usr/bin/busybox";
 my @busybox_links = split("\n", `$tmp/usr/bin/busybox --list-full`);
 _ "test -e $tmp/$_ || ln $tmp/usr/bin/busybox $tmp/$_" foreach @busybox_links;
@@ -71,11 +74,12 @@ foreach (cat_("aliases")) {
 }
 
 
-if (my ($LANGUAGE) = map { if_(/LANGUAGE_(.*)/, $1) } keys %ENV) {
+#if (my ($LANGUAGE) = map { if_(/LANGUAGE_(.*)/, $1) } keys %ENV) {
+my $LANGUAGE = "C";
     substInFile {
 	$_ = "export LANGUAGE=$LANGUAGE\n" . "export LC_ALL=$LANGUAGE\n" if /^#LANGUAGE/;	
     } "$tmp/etc/rc.sysinit";
-}
+#}
 
 exit 0 if $ARGV[0];
 
