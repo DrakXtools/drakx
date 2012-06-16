@@ -21,7 +21,6 @@ _ 'find . -name "*~" | xargs rm -f';
 mkdir_p($tmp . chomp_($_)) foreach cat_("dirs");
 _ "cp -a tree/* $tmp";
 _ "find $tmp -name .svn | xargs rm -rf";
-substInFile { s/DISTRIB_DESCR/$ENV{DISTRIB_DESCR}/ } "$tmp/etc/issue";
 
 my $issue = `linux_logo -l`;
 
