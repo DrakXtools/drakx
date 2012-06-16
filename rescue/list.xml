@@ -143,6 +143,9 @@
   <if ARCH="sparc">
     silo
   </if>
+
+  blkid
+
 </from>
 
 <from>
@@ -194,7 +197,6 @@
 
 
   /sbin/mount.ntfs-3g <!-- can not be expanded as binary, not executable for all users -->
-  /sbin/blkid
 </from>
 
 <from dir="/usr/lib/rpm" expand="glob">
