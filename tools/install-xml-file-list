@@ -25,6 +25,8 @@ my $initial_dir = cwd();
 my $ARCH = arch() =~ /i.86/ ? 'i386' : arch();
 my $LIB = arch() =~ /x86_64/ ? "lib64" : "lib";
 
+my @busybox_funct = split("\n", `busybox.static --list`);
+
 my $base_cpio_options = '-pumd --quiet';
 
 my $problem;
@@ -137,7 +139,8 @@ sub collect_needed_libraries {
     my (@to_check) = @_;
     while (@to_check) {
 	my $to_check = join(' ', @to_check);
-	my @l = `ldd $to_check 2>/dev/null` =~ m! => (/\S+)!g;
+	# we add LD_LIBRARY_PATH so that ldd will be able to pick up the uClibc elf loader..
+	my @l = `LD_LIBRARY_PATH=/usr/uclibc/$LIB ldd $to_check 2>/dev/null` =~ m! => (/\S+)!g;
 	foreach (@l) {
 	    if ($main_node->{attr}{'no-arch-libraries'}) {
 		#- replace /lib/tls or /lib/i686 with /lib
@@ -260,6 +263,11 @@ sub install {
 	$disallow_from_dir->();
 	my @PATH = qw(/sbin /bin /usr/bin /usr/sbin /usr/X11R6/bin);
 	foreach my $name (map { expand_macros($_) } @text_l) {
+	    if (grep {$_ eq $name } @busybox_funct) {
+		warn "$name provided by busybox, skipping\n";
+		next;
+	    }
+
 	    my @l = grep { -x $_ } map { "$_/$name" } @PATH;
 	    @l or error("can't find binary $name"), next;
 	    if (@l > 1) {
