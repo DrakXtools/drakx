@@ -160,35 +160,35 @@ pcmcia/libpcmcia.a: pcmcia
 
 ifneq (0, $(WHOLE_PROGRAM))
 
-init: .depend
+init: .depend $(INITSRC)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) \
 		$(INITSRC) \
 		$(LIBC_LIBS) \
 		-o $@
 
-stage1: .depend $(PCMCIA_LIB)
+stage1: .depend $(PCMCIA_LIB) bootsplash.c $(FRONTEND_SRC) $(STAGE1_ALLSRC)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -DENABLE_BOOTSPLASH \
 		bootsplash.c $(FRONTEND_SRC) $(STAGE1_ALLSRC) \
 		$(PCMCIA_LIB) $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS) \
 		-o $@
 
-dhcp-client: .depend
+dhcp-client: .depend $(STAGE1_SRC) $(NETWORKSRC) $(FRONTEND_SRC)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) $(NETWORK_STANDALONE_DEFS) $(USB_DEFS_GEN) \
 		$(STAGE1_SRC) $(NETWORKSRC) $(FRONTEND_SRC) \
 		$(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS) \
 		-o $@
 
-rescue-gui: .depend
+rescue-gui: .depend rescue-gui.c frontend-common.c params.c utils.c log.c automatic.c $(FRONTEND_SRC)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -DENABLE_BOOTSPLASH \
 		rescue-gui.c frontend-common.c params.c utils.c log.c automatic.c $(FRONTEND_SRC) \
 		$(FRONTEND_LIBS) $(LIBC_LIBS) \
 		-o $@
 
-probe-modules: .depend $(PCMCIA_LIB)
+probe-modules: .depend $(PCMCIA_LIB) probe-modules.c probing.c modules.c params.c utils.c log.c automatic.c frontend-common.c stdio-frontend.c zlibsupport.c $(PCMCIA_LIB)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) \
 		probe-modules.c probing.c modules.c params.c utils.c log.c automatic.c frontend-common.c stdio-frontend.c zlibsupport.c $(PCMCIA_LIB) \
