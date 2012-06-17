@@ -82,12 +82,4 @@ elif grep -q kamethod /proc/cmdline; then
     echo "-------- Starting LOG server -------------"
     perl send_status.pl > /tmp/kacmd &
     exec ./ka_replication.sh > /tmp/ka_log-$HOSTNAME-$DATE 2>&1
-elif ! grep -q expert /proc/cmdline; then
-    echo "starting GUI"
-    rescue-gui
 fi
-
-while :
-do
-    /bin/sh --login
-done
