@@ -121,7 +121,7 @@ static pid_t shell_pid = 0;
 static void spawn_shell(void)
 {
 	int fd;
-	char * shell_name[] = { "/sbin/sh", NULL };
+	char * shell_name[] = { "/bin/sh", NULL };
 
 	log_message("spawning a shell");
 
