@@ -257,13 +257,11 @@ fi
     }
     # ka deploy need some files in all.rdz 
     {
-	mkdir_p("$tmp_initrd/$_") foreach qw(dev ka proc usr/bin var/tmp tmp/stage2);
-	symlink("/sbin", "$tmp_initrd/bin");
+	mkdir_p("$tmp_initrd/$_") foreach qw(bin dev ka proc usr/bin usr/sbin var/tmp tmp/stage2);
 	cp_af("/usr/bin/ka-d-client", "$tmp_initrd/ka/ka-d-client");
 	cp_af("/bin/busybox.static", "$tmp_initrd/usr/bin/busybox");
-	my @funct = map { /functions:/ .. /^$/ ? do { s/\s//g; split /,/ } : () } `busybox.static`;
-	shift @funct;
-	symlink('busybox', $tmp_initrd . "/sbin/$_") foreach @funct;
+	my @busybox_links = split("\n", `/bin/busybox.static --list-full`);
+	_ "test -e $tmp_initrd/$_ || ln $tmp_initrd/usr/bin/busybox $tmp_initrd/$_" foreach @busybox_links;
     }
 
     _ "(cd $tmp_initrd; find . | cpio -o -c --quiet) | $compress_filter > $img";
