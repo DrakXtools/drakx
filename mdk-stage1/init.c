@@ -527,10 +527,20 @@ int main(int argc, char **argv)
 		printf("proceeding, please wait...\n");
 
 		{
-			char * child_argv[2] = { "/etc/rc.sysinit", NULL };
+			char * child_argv[2] = { "/sbin/init", NULL };
+			if (mount("/tmp/stage2", "/tmp/newroot", "overlayfs", 0, "upperdir=/,lowerdir=/tmp/stage2"))
+				fatal_error("Unable to mount overlayfs filesystem");
+
+			if (mount("/proc", "/tmp/newroot/proc", "proc", 0, NULL))
+				fatal_error("Unable to mount proc filesystem");
+			if (mount("none", "tmp/newroot/sys", "sysfs", 0, NULL))
+				fatal_error("Unable to mount sysfs filesystem");
+			if (mount("none", "tmp/newroot/dev", "devtmpfs", 0, NULL))
+				fatal_error("Unable to mount dev filesystem");
+			chroot ("/tmp/newroot");
 			execve(child_argv[0], child_argv, env);
 		}
-		fatal_error("failed to exec /etc/rc.sysinit");
+		fatal_error("failed to exec /sbin/init");
         } else if (!WIFEXITED(wait_status) || WEXITSTATUS(wait_status) != 0) {
 		printf("exited abnormally :-( ");
 		if (WIFSIGNALED(wait_status))

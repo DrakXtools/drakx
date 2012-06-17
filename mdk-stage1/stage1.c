@@ -343,35 +343,9 @@ static void method_select_and_prepare(void)
 }
 #endif
 
-static enum return_type create_initial_fs_symlinks(char* symlinks)
-{
-        FILE *f;
-        char buf[5000];
-
-        if (scall(!(f = fopen(symlinks, "rb")), "fopen"))
-                return RETURN_ERROR;
-        while (fgets(buf, sizeof(buf), f)) {
-                char oldpath[500], newpath[500];
-                buf[strlen(buf)-1] = '\0';  // trim \n
-                if (sscanf(buf, "%s %s", oldpath, newpath) != 2) {
-                        sprintf(oldpath, "%s%s", STAGE2_LOCATION, buf);
-			sprintf(newpath, "%s", buf);
-                }
-		recursiveRemove_if_it_exists(newpath);
-                log_message("creating symlink %s -> %s", oldpath, newpath);
-                if (scall(symlink(oldpath, newpath), "symlink"))
-                        return RETURN_ERROR;
-        }
-        fclose(f);
-        return RETURN_OK;
-}
-
 void finish_preparing(void)
 {
 	recursiveRemove("/init");
-
-	if (create_initial_fs_symlinks(STAGE2_LOCATION "/usr/share/symlinks") != RETURN_OK)
-		stg1_fatal_message("Fatal error finishing initialization.");
 
 	/* /tmp/syslog is used by the second init, so it must be copied now, not in stage2 */
 	/* we remove it to ensure the old one is not copied over it in stage2 */

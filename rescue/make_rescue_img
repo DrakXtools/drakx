@@ -50,8 +50,6 @@ _ "rm -rf $tmp/usr/share/locale/";
 _ "cp /bin/busybox.static $tmp/usr/bin/busybox";
 my @busybox_links = split("\n", `$tmp/usr/bin/busybox --list-full`);
 _ "test -e $tmp/$_ || ln $tmp/usr/bin/busybox $tmp/$_" foreach @busybox_links;
-# required by busybox
-_ "mkdir $tmp/dev";
 
 my %keytable_conflicts;
 my @less_important_keytables = qw(am_old am_phonetic no-dvorak de-latin1);

@@ -8,14 +8,11 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 
 echo -e "\t\t\tWelcome to \\033[1;36mMandriva\\033[0;39m Linux"
 
-action "Remounting root filesystem in read-write mode" mount -n -o remount,rw /
-
 echo "Starting udev"
 mkdir /run
 mount -t tmpfs -o mode=0755,nosuid,nodev tmpfs /run
 mkdir -p /run/udev/rules.d
 export UDEVRULESD=/run/udev/rules.d
-mount -t devtmpfs -o mode=0755,nosuid devtmpfs /dev
 mkdir /dev/pts
 mkdir /dev/shm
 mount /dev/pts
@@ -25,16 +22,7 @@ mount /dev/shm
 udevadm trigger --type=subsystems --action=add
 udevadm trigger --type=devices --action=add
 
-ln -s /tmp/stage2/etc/* /etc 2>/dev/null
-# make passwd changable
-rm -f /etc/passwd
-cp /tmp/stage2/etc/passwd /etc/
-
 mkdir -p /mnt /var/log
-
->/etc/mtab
-mount -f /
-mount -f /proc
 
 # Set the hostname.
 action "Setting hostname rescue" hostname rescue
