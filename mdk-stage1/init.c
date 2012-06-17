@@ -450,6 +450,9 @@ int main(int argc, char **argv)
 		mkdir("/sys", 0755);
 		if (mount("none", "/sys", "sysfs", 0, NULL))
 			fatal_error("Unable to mount sysfs filesystem");
+		mkdir("/sys", 0755);
+		if (mount("none", "/dev", "devtmpfs", 0, NULL))
+			fatal_error("Unable to mount dev filesystem");
 	}
 
 
