@@ -77,6 +77,6 @@ my $LANGUAGE = "C";
 
 my $MKSQUASHFS_ARGS = $ARGV[0];
 
-_ "mksquashfs $tmp $rescue $MKSQUASHFS_ARGS -no-xattrs -all-root -noappend >/dev/null";
+_ "mksquashfs $tmp $rescue $MKSQUASHFS_ARGS -Xbcj x86 -no-xattrs -all-root -noappend >/dev/null";
 _ "chmod 755 $rescue";
 _ "rm -rf $tmp";
