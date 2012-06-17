@@ -1,5 +1,7 @@
 Version 1.25 - 17 June 2012, by Per Øyvind Karlsen
 
+- don't bundle copy of busybox with rescue image, we'll just reuse the one
+  bundled with initrd
 - use overlayfs for new root rather than symlinks
 - don't store extended attributes
 - support USE_LOCAL_STAGE1

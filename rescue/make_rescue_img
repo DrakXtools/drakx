@@ -47,10 +47,6 @@ _ "../tools/install-xml-file-list list.xml $tmp";
 # XXX: prevent this from being added to begin with
 _ "rm -rf $tmp/usr/share/locale/";
 
-_ "cp /bin/busybox.static $tmp/usr/bin/busybox";
-my @busybox_links = split("\n", `$tmp/usr/bin/busybox --list-full`);
-_ "test -e $tmp/$_ || ln $tmp/usr/bin/busybox $tmp/$_" foreach @busybox_links;
-
 my %keytable_conflicts;
 my @less_important_keytables = qw(am_old am_phonetic no-dvorak de-latin1);
 foreach (keyboard::loadkeys_files(sub { warn @_ })) {
