@@ -18,7 +18,11 @@ images: all.kernels/.list images/all.img images/hd_grub.img images/boot.iso isol
 	fi
 	cd images; md5sum *.{img,iso}* > MD5SUM
 
-images/all.img images/boot.iso images/hd_grub.img: all.kernels/.list images/$@
+ifeq (1, $(USE_LOCAL_STAGE1))
+STAGE1_BINS = ../mdk-stage1/dhcp-client ../mdk-stage1/init ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1
+endif
+
+images/all.img images/boot.iso images/hd_grub.img: all.kernels/.list images/$@ $(STAGE1_BINS)
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
 
 isolinux: all.kernels/.list
