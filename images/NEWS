@@ -1,5 +1,6 @@
 Version 1.58 - 17 June 2012, by Per Øyvind Karlsen
 
+- don't include ka-d-client as we're no longer building with support for it
 - in stead of symlinks in /sbin, create hardlinks in the locations given by
   busybox --list-full
 - don't create /dev/*, it's now handled by devtmpfs
