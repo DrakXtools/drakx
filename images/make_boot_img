@@ -266,9 +266,7 @@ fi
 	symlink('busybox', $tmp_initrd . "/sbin/$_") foreach @funct;
     }
 
-    my $devs = sprintf "ls /dev/{%s}", join(',', qw(console fb0 fd0 loop3 mem null ppp ptmx ram3 random tty[0-7] ttyS0 urandom));
-
-    _ "(cd $tmp_initrd; (find . ; $devs) | cpio -o -c --quiet) | $compress_filter > $img";
+    _ "(cd $tmp_initrd; find . | cpio -o -c --quiet) | $compress_filter > $img";
     _ "rm -rf $tmp_initrd";
 }
 
