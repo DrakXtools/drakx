@@ -4,7 +4,7 @@
 
 ::sysinit:/etc/rc.sysinit
 #re:6:wait:/etc/rc.reboot
-#ca:12345:ctrlaltdel:/sbin/fakeshutdown
+::ctrlaltdel:/sbin/fakeshutdown
 
 tty1::respawn:/sbin/getty -n 115200,9600 tty1 linux
 tty2::respawn:/sbin/getty -n 115200,9600 tty2 linux
