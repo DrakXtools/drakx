@@ -96,18 +96,18 @@ int testing = 0;
 int klog_pid;
 
 
-void fatal_error(char *msg)
+void fatal_error(const char *msg)
 {
 	printf("FATAL ERROR IN INIT: %s\n\nI can't recover from this, please reboot manually and send bugreport.\n", msg);
         select(0, NULL, NULL, NULL, NULL);
 }
 
-void print_error(char *msg)
+void print_error(const char *msg)
 {
 	printf("E: %s\n", msg);
 }
 
-void print_warning(char *msg)
+void print_warning(const char *msg)
 {
 	printf("W: %s\n", msg);
 }
@@ -134,7 +134,7 @@ void print_int_init(int fd, int i)
 	write(fd, chptr + 1, j);
 }
 
-void print_str_init(int fd, char * string)
+void print_str_init(int fd, const char * string)
 {
 	write(fd, string, strlen(string));
 }
