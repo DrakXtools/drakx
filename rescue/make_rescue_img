@@ -83,6 +83,6 @@ my $LANGUAGE = "C";
 
 exit 0 if $ARGV[0];
 
-_ "mksquashfs $tmp $rescue -all-root -noappend >/dev/null";
+_ "mksquashfs $tmp $rescue -no-xattrs -all-root -noappend >/dev/null";
 _ "chmod 755 $rescue";
 _ "rm -rf $tmp";
