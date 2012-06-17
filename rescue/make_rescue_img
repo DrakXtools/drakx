@@ -81,8 +81,8 @@ my $LANGUAGE = "C";
     } "$tmp/etc/rc.sysinit";
 #}
 
-exit 0 if $ARGV[0];
+my $MKSQUASHFS_ARGS = $ARGV[0];
 
-_ "mksquashfs $tmp $rescue -no-xattrs -all-root -noappend >/dev/null";
+_ "mksquashfs $tmp $rescue $MKSQUASHFS_ARGS -no-xattrs -all-root -noappend >/dev/null";
 _ "chmod 755 $rescue";
 _ "rm -rf $tmp";
