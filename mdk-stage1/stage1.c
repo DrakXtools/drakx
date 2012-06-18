@@ -346,6 +346,8 @@ static void method_select_and_prepare(void)
 void finish_preparing(void)
 {
 	recursiveRemove("/init");
+	/* we want to replace this one with what's provided by rescue.sqfs */
+	recursiveRemove("/bin/login");
 
 	/* /tmp/syslog is used by the second init, so it must be copied now, not in stage2 */
 	/* we remove it to ensure the old one is not copied over it in stage2 */
