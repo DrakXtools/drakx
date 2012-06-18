@@ -1,0 +1,61 @@
+#!/usr/bin/perl
+
+# From MDK::Common:
+sub output { my $f = shift; open(my $F, ">$f") or die "output in file $f failed: $!\n"; print $F $_ foreach @_ }
+
+output('/tmp/rescue-doc-contents', q(
+     Information regarding problems not directly addressed
+                     by this rescue.
+
+
+Are you certain "rescue mode" is the best tool for your specific
+problem?
+
+The rescue system on this CD is a very basic text-based
+environment for rescuing systems that no longer boot. You will
+not find an easy-to-use graphical environment in this rescue
+system, nor the Mandriva detection/configuration libraries.
+
+
+The vast majority of problems that can affect a Linux system are
+much easier to repair on a running system than by booting into
+"rescue mode". In fact, there are very few problems which aren't
+easier to resolve in the comfortable environment of a fully
+installed Mandriva Linux system than in this spartan "rescue
+system" shell. Some of the most common problems include:
+
+- bad or missing X (video display) configuration
+- adding/removing/reconfiguring hardware
+- repairing problems caused by installing third-party software
+  with the "--force" and "--nodeps" options
+
+The general rule of thumb is: "If you can boot into the Linux
+system without using rescue mode or this CD, there is no real
+reason to use the rescue CD".
+
+
+However, if you can no longer boot into the system, the rescue
+system is the right tool. Some common examples include:
+
+- If you previously changed some parameters in the /etc/fstab and
+  the system will no longer boot, fix the offending line while in
+  rescue mode, then try to boot normally into your system.
+
+- If the problem cannot be completely resolved in rescue mode
+  (for example, if you need to reconfigure the video display),
+  just modify what's necessary to boot into a running system,
+  then complete the fix from there.
+
+In case you have found a new problem which should be handled by
+"rescue mode" but currently isn't, please report it to
+<pixel@mandriva.com>.
+
+For more information on troubleshooting a Mandriva Linux system,
+please consult the official manuals, the documentation on
+MandrivaLinux.com, MandrivaClub.org, or the MandrivaExpert.com support forum.
+
+<press 'q' (qwerty keyboard) to continue>
+));
+
+exec 'less /tmp/rescue-doc-contents';
+

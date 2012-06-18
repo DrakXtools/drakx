@@ -305,7 +305,7 @@
 <filter command="../tools/simplify-drakx-modules">
   <from dir="." expand="collect-perl-files /usr/lib/libDrakX /usr/lib/libDrakX">
     <to dir="/usr/bin">
-      rescue-doc lsparts
+      lsparts
       guessmounts install_bootloader
       <if ARCH="i.86|x86_64">
 	restore_ms_boot
@@ -354,6 +354,11 @@
 <from dir="/etc/ka">
   <to dir="/ka">
     replication.conf
+  </to>
+</from>
+<from dir=".">
+  <to dir="/usr/bin">
+    rescue-doc
   </to>
 </from>
 <from dir=".">
