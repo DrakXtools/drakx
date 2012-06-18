@@ -5,10 +5,30 @@ PRODUCT=$(FAMILY)-rescue
 
 RESCUE = rescue.sqfs
 
+LIBC = uclibc
+ifeq (uclibc, $(LIBC))
+CC = uclibc-gcc
+else
+ifeq (dietlibc, $(LIBC))
+CC = diet gcc
+else
+CC=gcc
+endif
+endif
+CFLAGS = -Os
+LIBS = -lldetect -lkmod
+ifndef DYNAMIC
+# -lz??
+LIBS += -static -lpci -lz
+endif
+
 all: $(RESCUE)
 
 install: $(RESCUE)
 	install -m644 $< -D $(DESTDIR)$(STAGE2_DEST)/$<
+
+drvinst: drvinst.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 $(RESCUE): list.xml drvinst guessmounts lsparts rescue-doc make_rescue_img
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_rescue_img "$(MKSQUASHFS_ARGS)"
@@ -40,4 +60,4 @@ tar:
 	$(info $(PRODUCT)-$(VERSION).tar.xz is ready)
 
 clean: 
-	rm -f $(RESCUE) kernel_read_part
+	rm -f $(RESCUE) kernel_read_part drvinst

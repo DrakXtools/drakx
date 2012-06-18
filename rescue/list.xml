@@ -305,7 +305,7 @@
 <filter command="../tools/simplify-drakx-modules">
   <from dir="." expand="collect-perl-files /usr/lib/libDrakX /usr/lib/libDrakX">
     <to dir="/usr/bin">
-      rescue-doc drvinst lsparts
+      rescue-doc lsparts
       guessmounts install_bootloader
       <if ARCH="i.86|x86_64">
 	restore_ms_boot
@@ -359,6 +359,7 @@
 <from dir=".">
     <to dir="/usr/sbin">
         diskdrake-resize
+	drvinst
         genpasswd
         startssh
     </to>
