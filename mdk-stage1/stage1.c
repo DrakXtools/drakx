@@ -35,8 +35,11 @@
 #include <signal.h>
 #include <linux/unistd.h>
 #include <libldetect.h>
+#include <libgen.h>
 
 #include "stage1.h"
+#include "probe-modules.h"
+#include "rescue-gui.h"
 
 #include "log.h"
 #include "probing.h"
@@ -72,7 +75,7 @@
 
 void fatal_error(char *msg)
 {
-	printf("FATAL ERROR IN STAGE1: %s\n\nI can't recover from this.\nYou may reboot your system.\n", msg);
+	printf("FATAL ERROR IN %s: %s\n\nI can't recover from this.\nYou may reboot your system.\n", binary_name, msg);
 	while (1);
 }
 
@@ -239,7 +242,6 @@ static void handle_pcmcia(void)
 }
 #endif
 
-#ifndef ENABLE_NETWORK_STANDALONE
 static void handle_hid(void)
 {
 	struct hid_entries entry_list;
@@ -341,7 +343,6 @@ static void method_select_and_prepare(void)
         /* try to find third party modules on the install media */
         thirdparty_load_media_modules();
 }
-#endif
 
 void finish_preparing(void)
 {
@@ -365,20 +366,32 @@ void finish_preparing(void)
 #endif
 }
 
-int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)), char **env)
+int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 {
-#ifdef ENABLE_NETWORK_STANDALONE
-	open_log();
-	init_frontend("");
+	binary_name = basename(argv[0]);
 
-	unlink("/etc/resolv.conf"); /* otherwise it is read-only */
-	set_param(MODE_AUTOMATIC);
-	grab_automatic_params("network:dhcp");
+	if (!strcmp(binary_name, "dhcp-client")) {
+		open_log();
+		init_frontend("");
 
-	intf_select_and_up();
-	finish_frontend();
-	return 0;
-#else
+		unlink("/etc/resolv.conf"); /* otherwise it is read-only */
+		set_param(MODE_AUTOMATIC);
+		grab_automatic_params("network:dhcp");
+
+		intf_select_and_up();
+		finish_frontend();
+
+		return 0;
+	}
+	if (!strcmp(binary_name, "rescue-gui"))
+		return rescue_gui_main(argc, argv);
+	if (!strcmp(binary_name, "probe-modules"))
+		return probe_modules_main(argc, argv);
+	if (strcmp(binary_name, "stage1")) {
+		fprintf(stderr, "executed as '%s', unknown!\n", binary_name);
+		return 1;
+	}
+
 	if (getenv("DEBUGSTAGE1")) {
 		set_param(MODE_DEBUGSTAGE1);
 		set_param(MODE_TESTING);
@@ -446,5 +459,4 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		return 66; /* ask init to exec new init */
 	else
 		return 0x35; /* ask init to run stage2 binary */
-#endif
 }

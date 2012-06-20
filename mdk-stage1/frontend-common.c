@@ -20,6 +20,7 @@
 
 #include "frontend.h"
 
+const char * binary_name = NULL;
 
 void info_message(char *msg, ...)
 {

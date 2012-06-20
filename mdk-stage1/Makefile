@@ -68,12 +68,12 @@ INITOBJS = $(subst .c,.o,$(INITSRC))
 FRONTEND_SRC =
 FRONTEND_LIBS =
  #- frontends
-ifeq (newt, $(FRONTEND))
-FRONTEND_SRC += newt-frontend.c
+#ifeq (newt, $(FRONTEND))
+#FRONTEND_SRC += newt-frontend.c
 FRONTEND_LIBS += -lnewt -lslang
-else
-FRONTEND_SRC += stdio-frontend.c
-endif
+#else
+#FRONTEND_SRC += stdio-frontend.c
+#endif
 
 
 FRONTEND_OBJS = $(subst .c,.o,$(FRONTEND_SRC))
@@ -88,7 +88,7 @@ STAGE1_NETWORK_LIBS += -lresolv
 endif
 
  #- stage1 itself
-STAGE1_SRC = stage1.c log.c utils.c params.c tools.c modules.c probing.c mount.c automatic.c frontend-common.c lomount.c thirdparty.c zlibsupport.c
+STAGE1_SRC = stage1.c log.c utils.c params.c tools.c modules.c probing.c mount.c automatic.c frontend.c frontend-common.c lomount.c thirdparty.c zlibsupport.c
 CDROMSRC = cdrom.c
 DISKSRC = disk.c directory.c partition.c
 NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c directory.c wireless.c
@@ -158,6 +158,11 @@ usb-ids.h: /usr/share/ldetect-lst/usbtable.gz update-usb-ids.pl
 
 pcmcia/libpcmcia.a: pcmcia
 
+ifneq (0, $(ONE_BINARY))
+dhcp-client rescue-gui probe-modules: stage1
+	ln -f $^ $@
+endif
+
 ifneq (0, $(WHOLE_PROGRAM))
 
 init: .depend $(INITSRC)
@@ -167,6 +172,15 @@ init: .depend $(INITSRC)
 		$(LIBC_LIBS) \
 		-o $@
 
+ifneq (0, $(ONE_BINARY))
+stage1: .depend $(PCMCIA_LIB) bootsplash.c probe-modules.c rescue-gui.c $(FRONTEND_SRC) $(STAGE1_ALLSRC)
+	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
+		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -DENABLE_BOOTSPLASH \
+		bootsplash.c probe-modules.c rescue-gui.c $(FRONTEND_SRC) $(STAGE1_ALLSRC) \
+		$(PCMCIA_LIB) $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS) \
+		-o $@
+
+else
 stage1: .depend $(PCMCIA_LIB) bootsplash.c $(FRONTEND_SRC) $(STAGE1_ALLSRC)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -DENABLE_BOOTSPLASH \
@@ -194,7 +208,7 @@ probe-modules: .depend $(PCMCIA_LIB) probe-modules.c probing.c modules.c params.
 		probe-modules.c probing.c modules.c params.c utils.c log.c automatic.c frontend-common.c stdio-frontend.c zlibsupport.c $(PCMCIA_LIB) \
 		$(STAGE1_LIBS) $(LIBC_LIBS) \
 		-o $@
-
+endif
 else
 
 init: $(INITOBJS)
@@ -203,11 +217,13 @@ init: $(INITOBJS)
 stage1: $(STAGE1OBJS_FULL) bootsplash.o $(FRONTEND_OBJS) $(PCMCIA_LIB)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
 
+ifeq (0, $(ONE_BINARY))
 dhcp-client: $(STAGE1OBJS_NETWORK_STANDALONE) $(FRONTEND_OBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
 
 rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(FRONTEND_OBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(FRONTEND_LIBS) $(LIBC_LIBS)
+endif
 
 probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o zlibsupport-FULL.o $(PCMCIA_LIB)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(LIBC_LIBS)

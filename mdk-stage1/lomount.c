@@ -146,11 +146,15 @@ del_loop(char * loopdev)
         if (!loopdev)
                 return;
 
-	if ((fd = open (loopdev, O_RDONLY)) < 0)
+	if ((fd = open (loopdev, O_RDONLY)) < 0) {
+		printf("del_loop open failed\n");
 		return;
+	}
 
-	if (ioctl (fd, LOOP_CLR_FD, 0) < 0)
+	if (ioctl (fd, LOOP_CLR_FD, 0) < 0) {
+		printf("del_loop ioctl failed");
 		return;
+	}
   
 	close (fd);
 }

@@ -28,10 +28,12 @@
 #include <linux/unistd.h>
 #include <sys/select.h>
 
+#include "rescue-gui.h"
 #include "config-stage1.h"
 #include "frontend.h"
 #include "utils.h"
 #include "params.h"
+#include "lomount.h"
 
 #include <sys/syscall.h>
 
@@ -69,30 +71,6 @@ static void PAUSE(void) {
   read(0, &t, 1);
 }
 
-
-/* ------ UUURGH this is duplicated from `init.c', don't edit here........ */
-void fatal_error(char *msg)
-{
-	printf("FATAL ERROR IN RESCUE: %s\n\nI can't recover from this.\nYou may reboot your system.\n", msg);
-	while (1);
-}
-
-#define LOOP_CLR_FD	0x4C01
-void del_loop(char *device) 
-{
-	int fd;
-	if ((fd = open(device, O_RDONLY, 0)) < 0) {
-		printf("del_loop open failed\n");
-		return;
-	}
-
-	if (ioctl(fd, LOOP_CLR_FD, 0) < 0) {
-		printf("del_loop ioctl failed");
-		return;
-	}
-
-	close(fd);
-}
 struct filesystem { char * dev; char * name; char * fs; int mounted; };
 void unmount_filesystems(void)
 {
@@ -167,12 +145,7 @@ void unmount_filesystems(void)
 /* ------ UUURGH -- end */
 
 
-/* ------ UUURGH -- this is dirrrrrttttyyyyyy */
-void probe_that_type(void) {}
-void exit_bootsplash(void) {}
-
-
-int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)))
+int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute__ ((unused)))
 {
 	enum return_type results;
 

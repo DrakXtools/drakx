@@ -24,8 +24,6 @@
  * Each different frontend must implement all functions defined in frontend.h
  */
 
-#define _GNU_SOURCE
-
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
@@ -38,7 +36,7 @@
 
 #include "frontend.h"
 
-void init_frontend(char * welcome_msg)
+void init_frontend_newt(char * welcome_msg)
 {
 	int i;
 	for (i=0; i<38; i++) printf("\n");
@@ -58,24 +56,24 @@ void init_frontend(char * welcome_msg)
 }
 
 
-void finish_frontend(void)
+void finish_frontend_newt(void)
 {
 	newtFinished();
 }
 
 
-void verror_message(char *msg, va_list ap)
+void verror_message_newt(char *msg, va_list ap)
 {
 	newtWinMessagev("Error", "Ok", msg, ap);
 }
 
-void vinfo_message(char *msg, va_list ap)
+void vinfo_message_newt(char *msg, va_list ap)
 {
 	newtWinMessagev("Notice", "Ok", msg, ap);
 }
 
 
-void vwait_message(char *msg, va_list ap)
+void vwait_message_newt(char *msg, va_list ap)
 {
 	int width, height;
 	char * title = "Please wait...";
@@ -113,7 +111,7 @@ void vwait_message(char *msg, va_list ap)
 	newtFormDestroy(f);
 }
 
-void remove_wait_message(void)
+void remove_wait_message_newt(void)
 {
 	newtPopWindow();
 }
@@ -124,7 +122,7 @@ static int size_progress;
 static int actually_drawn;
 static char * msg_progress;
 
-void init_progression_raw(char *msg, int size)
+void init_progression_raw_newt(char *msg, int size)
 {
 	size_progress = size;
 	if (size) {
@@ -143,7 +141,7 @@ void init_progression_raw(char *msg, int size)
 	}
 }
 
-void update_progression_raw(int current_size)
+void update_progression_raw_newt(int current_size)
 {
 	if (size_progress) {
 		if (current_size <= size_progress)
@@ -166,7 +164,7 @@ void update_progression_raw(int current_size)
 	}
 }
 
-void end_progression_raw(void)
+void end_progression_raw_newt(void)
 {
 	if (size_progress) {
 		newtPopWindow();
@@ -177,7 +175,7 @@ void end_progression_raw(void)
 }
 
 
-enum return_type ask_from_list_index(char *msg, char ** elems, char ** elems_comments, int * answer)
+enum return_type ask_from_list_index_newt(char *msg, char ** elems, char ** elems_comments, int * answer)
 {
 	char * items[50000];
 	int rc;
@@ -210,7 +208,7 @@ enum return_type ask_from_list_index(char *msg, char ** elems, char ** elems_com
 	return RETURN_OK;
 }
 
-enum return_type ask_yes_no(char *msg)
+enum return_type ask_yes_no_newt(char *msg)
 {
 	int rc;
 
@@ -344,7 +342,7 @@ static int mynewtWinEntries(char * title, char * text, int suggestedWidth, int f
 }
 
 
-enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size, void (*callback_func)(char ** strings))
+enum return_type ask_from_entries_newt(char *msg, char ** questions, char *** answers, int entry_size, void (*callback_func)(char ** strings))
 {
 	struct newtWinEntry entries[50];
 	int j, i = 0;
@@ -385,5 +383,5 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 }
 
 
-void suspend_to_console(void) { newtSuspend(); }
-void resume_from_suspend(void) { newtResume(); }
+void suspend_to_console_newt(void) { newtSuspend(); }
+void resume_from_suspend_newt(void) { newtResume(); }

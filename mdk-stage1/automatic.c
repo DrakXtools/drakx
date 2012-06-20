@@ -102,7 +102,8 @@ char * get_auto_value(char * auto_param)
 enum return_type ask_from_list_auto(char *msg, char ** elems, char ** choice, char * auto_param, char ** elems_auto)
 {
 	if (!IS_AUTOMATIC) {
-		exit_bootsplash();
+		if (binary_name && (!strcmp(binary_name, "stage1") || !strcmp(binary_name, "rescue-gui")))
+		    exit_bootsplash();
 		return ask_from_list(msg, elems, choice);
 	} else {
 		char ** sav_elems = elems;
@@ -124,7 +125,8 @@ enum return_type ask_from_list_auto(char *msg, char ** elems, char ** choice, ch
 enum return_type ask_from_list_comments_auto(char *msg, char ** elems, char ** elems_comments, char ** choice, char * auto_param, char ** elems_auto)
 {
 	if (!IS_AUTOMATIC) {
-		exit_bootsplash();
+		if (binary_name && (!strcmp(binary_name, "stage1") || !strcmp(binary_name, "rescue-gui")))
+		    exit_bootsplash();
 		return ask_from_list_comments(msg, elems, elems_comments, choice);
 	} else {
 		char ** sav_elems = elems;
@@ -147,7 +149,8 @@ enum return_type ask_from_list_comments_auto(char *msg, char ** elems, char ** e
 enum return_type ask_from_entries_auto(char *msg, char ** questions, char *** answers, int entry_size, char ** questions_auto, void (*callback_func)(char ** strings))
 {
 	if (!IS_AUTOMATIC) {
-		exit_bootsplash();
+		if (binary_name && (!strcmp(binary_name, "stage1") || !strcmp(binary_name, "rescue-gui")))
+    		    exit_bootsplash();
 		return ask_from_entries(msg, questions, answers, entry_size, callback_func);
 	} else {
 		char * tmp_answers[50];

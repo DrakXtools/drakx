@@ -23,6 +23,7 @@
 #include "automatic.h"
 #include "log.h"
 #include "bootsplash.h"
+#include "frontend.h"
 
 static struct param_elem params[50];
 static int param_number = 0;
@@ -173,5 +174,7 @@ void unset_automatic(void)
 {
 	log_message("unsetting automatic");
 	unset_param(MODE_AUTOMATIC);
-	exit_bootsplash();
+
+	if (binary_name && (!strcmp(binary_name, "stage1") || !strcmp(binary_name, "rescue-gui")))
+	    exit_bootsplash();
 }

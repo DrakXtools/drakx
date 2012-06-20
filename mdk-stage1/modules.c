@@ -311,7 +311,6 @@ int module_already_present(const char * name)
 }
 
 
-#ifndef ENABLE_NETWORK_STANDALONE
 static enum insmod_return insmod_with_deps(const char * mod_name, char * options, int allow_modules_floppy)
 {
 	struct module_deps_elem * dep;
@@ -346,7 +345,6 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 		return insmod_local_file((char *) filename, options);
 	}
 }
-#endif
 
 
 #ifndef DISABLE_NETWORK
@@ -370,16 +368,15 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attr
 		net_devices = get_net_devices();
 #endif
 
-#ifdef ENABLE_NETWORK_STANDALONE
+	if (binary_name && !strcmp(binary_name, "dhcp-client"))
 	{
 		char *cmd = options ? asprintf_("/sbin/modprobe %s %s", mod_name, options) : 
 			              asprintf_("/sbin/modprobe %s", mod_name);
 		log_message("running %s", cmd);
 		i = system(cmd);
-	}
-#else
-	i = insmod_with_deps(mod_name, options, allow_modules_floppy);
-#endif
+	} else
+    	    i = insmod_with_deps(mod_name, options, allow_modules_floppy);
+
 	if (i == 0) {
 		log_message("\tsucceeded %s", mod_name);
 #ifndef DISABLE_NETWORK

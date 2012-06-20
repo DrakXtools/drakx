@@ -32,18 +32,18 @@
 #include "frontend.h"
 #include "utils.h"
 
-void init_frontend(char * welcome_msg)
+void init_frontend_stdio(char * welcome_msg)
 {
 	printf("%s", welcome_msg);
 	printf("\n");
 }
 
 
-void finish_frontend(void)
+void finish_frontend_stdio(void)
 {
 }
 
-static void get_any_response(void)
+static void get_any_response_stdio(void)
 {
 	unsigned char t;
 	printf("\n\t(press <enter> to proceed)");
@@ -54,7 +54,7 @@ static void get_any_response(void)
 	fcntl(0, F_SETFL, 0);
 }
 	
-static int get_int_response(void)
+static int get_int_response_stdio(void)
 {
 	char s[50];
 	int j = 0;
@@ -71,7 +71,7 @@ static int get_int_response(void)
 	return j;
 }
 
-static char * get_string_response(char * initial_string)
+static char * get_string_response_stdio(char * initial_string)
 {
 	/* I won't use a scanf/%s since I also want the null string to be accepted -- also, I want the initial_string */
 	char s[500];
@@ -164,31 +164,31 @@ static char * get_string_response(char * initial_string)
 	return strdup(s);
 }
 
-static void blocking_msg(char *type, char *fmt, va_list ap)
+static void blocking_msg_stdio(char *type, char *fmt, va_list ap)
 {
 	printf("%s", type);
 	vprintf(fmt, ap);
-	get_any_response();
+	get_any_response_stdio();
 }
 
-void verror_message(char *msg, va_list ap)
+void verror_message_stdio(char *msg, va_list ap)
 {
-	blocking_msg("> Error! ", msg, ap);
+	blocking_msg_stdio("> Error! ", msg, ap);
 }
 
-void vinfo_message(char *msg, va_list ap)
+void vinfo_message_stdio(char *msg, va_list ap)
 {
-	blocking_msg("> Notice: ", msg, ap);
+	blocking_msg_stdio("> Notice: ", msg, ap);
 }
 
-void vwait_message(char *msg, va_list ap)
+void vwait_message_stdio(char *msg, va_list ap)
 {
 	printf("Please wait: ");
 	vprintf(msg, ap);
 	fflush(stdout);
 }
 
-void remove_wait_message(void)
+void remove_wait_message_stdio(void)
 {
 	printf("\n");
 }
@@ -197,7 +197,7 @@ void remove_wait_message(void)
 static int size_progress;
 static int actually_drawn;
 #define PROGRESS_SIZE 45
-void init_progression_raw(char *msg, int size)
+void init_progression_raw_stdio(char *msg, int size)
 {
 	int i;
 	size_progress = size;
@@ -212,7 +212,7 @@ void init_progression_raw(char *msg, int size)
 		printf("\n");
 }
 
-void update_progression_raw(int current_size)
+void update_progression_raw_stdio(int current_size)
 {
 	if (size_progress) {
 		if (current_size > size_progress)
@@ -227,17 +227,17 @@ void update_progression_raw(int current_size)
 	fflush(stdout);
 }
 
-void end_progression_raw(void)
+void end_progression_raw_stdio(void)
 {
 	if (size_progress) {
-		update_progression_raw(size_progress);
+		update_progression_raw_stdio(size_progress);
 		printf("]\n");
 	} else
 		printf(" done.\n");
 }
 
 
-enum return_type ask_from_list_index(char *msg, char ** elems, char ** elems_comments, int *answer)
+enum return_type ask_from_list_index_stdio(char *msg, char ** elems, char ** elems_comments, int *answer)
 {
 	int justify_number = 1;
 	void print_choice_number(int i) {
@@ -281,7 +281,7 @@ enum return_type ask_from_list_index(char *msg, char ** elems, char ** elems_com
 
 	printf("\n? "); 
 
-	j = get_int_response();
+	j = get_int_response_stdio();
 
 	if (j == 0)
 		return RETURN_BACK;
@@ -295,13 +295,13 @@ enum return_type ask_from_list_index(char *msg, char ** elems, char ** elems_com
 }
 
 
-enum return_type ask_yes_no(char *msg)
+enum return_type ask_yes_no_stdio(char *msg)
 {
 	int j;
 
 	printf("> %s\n[0] Yes  [1] No  [2] Back\n? ", msg);
 
-	j = get_int_response();
+	j = get_int_response_stdio();
 
 	if (j == 0)
 		return RETURN_OK;
@@ -311,7 +311,7 @@ enum return_type ask_yes_no(char *msg)
 }
 
 
-enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size UNUSED, void (*callback_func)(char ** strings) UNUSED)
+enum return_type ask_from_entries_stdio(char *msg, char ** questions, char *** answers, int entry_size UNUSED, void (*callback_func)(char ** strings) UNUSED)
 {
 	int j, i = 0;
 	char ** already_answers = NULL;
@@ -334,14 +334,14 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 		for (j = 0 ; j < i ; j++) {
 			printf("(%c) ? ", j + 'a');
 			if (already_answers && *already_answers) {
-				(*answers)[j] = get_string_response(*already_answers);
+				(*answers)[j] = get_string_response_stdio(*already_answers);
 				already_answers++;
 			} else
-				(*answers)[j] = get_string_response(NULL);
+				(*answers)[j] = get_string_response_stdio(NULL);
 
 		}
 		printf("[0] Cancel  [1] Accept  [2] Re-enter answers\n? ");
-		r = get_int_response();
+		r = get_int_response_stdio();
 		if (r == 0)
 			return RETURN_BACK;
 		if (r == 1)
@@ -350,5 +350,5 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 }
 
 
-void suspend_to_console(void) {}
-void resume_from_suspend(void) {}
+void suspend_to_console_stdio(void) {}
+void resume_from_suspend_stdio(void) {}

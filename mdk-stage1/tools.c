@@ -221,7 +221,11 @@ enum return_type preload_mount_compressed_fd(int compressed_fd, int image_size, 
 	int ret;
 	char *compressed_tmpfs = asprintf_("/tmp/%s", image_name);
 	char *buf = "Loading program into memory...";
-	init_progression(buf, image_size);
+	if (binary_name && (!strcmp(binary_name, "stage1") || !strcmp(binary_name, "rescue-gui")))
+		init_progression(buf, image_size);
+	else
+		init_progression_raw(buf, image_size);
+
 	ret = save_fd(compressed_fd, compressed_tmpfs, update_progression);
 	end_progression();
 	if (ret != RETURN_OK)

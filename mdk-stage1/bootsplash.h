@@ -15,11 +15,7 @@
 #ifndef _BOOTSPLASH_H_
 #define _BOOTSPLASH_H_
 
-#ifdef ENABLE_BOOTSPLASH
 void exit_bootsplash(void);
 void tell_bootsplash(char *cmd);
-#else
-#define exit_bootsplash()
-#endif
 
 #endif

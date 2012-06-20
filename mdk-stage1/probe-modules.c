@@ -22,22 +22,9 @@
 #include <string.h>
 #include "utils.h"
 
-void exit_bootsplash(void) {}
-void stg1_error_message(char *msg, ...)
+int probe_modules_main(int argc, char *argv[], char *env[])
 {
-	va_list args;
-	va_start(args, msg);
-	verror_message(msg, args);
-	va_end(args);
-}
-void fatal_error(char *msg)
-{
-	log_message("FATAL ERROR IN MODULES LOADER: %s\n\nI can't recover from this.\nYou may reboot your system.\n", msg);
-	exit(EXIT_FAILURE);
-}
-
-int main(int argc, char **argv, char **env)
-{
+	exit(1);
 	enum media_bus bus = BUS_ANY;
 	char *module = NULL;
 	char options[500] = "";
