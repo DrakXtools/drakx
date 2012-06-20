@@ -76,5 +76,5 @@ my $LANGUAGE = "C";
 
 my $MKSQUASHFS_ARGS = $ARGV[0] ? $ARGV[0] : "-comp xz -Xbcj x86";
 
-_ "mksquashfs $tmp $rescue $MKSQUASHFS_ARGS -no-xattrs -all-root -noappend";
+_ "mksquashfs $tmp $rescue $MKSQUASHFS_ARGS -b 1048576 -no-xattrs -all-root -noappend";
 _ "rm -rf $tmp";

@@ -67,8 +67,6 @@
   dropbear dropbearkey
   screen
 
-  gdisk
-
   quotacheck
   cryptsetup dmsetup
 
@@ -325,14 +323,6 @@
   </from>
 </filter>
 
-<from dir="/usr/LIB/drakx-installer/binaries">
-  <to dir="/usr/bin">
-    rescue-gui
-  </to>
-  <to dir="/usr/sbin">
-    dhcp-client
-  </to>
-</from>
 <from dir="/usr/bin">
   <to dir="/ka">
     bootable_flag.sh

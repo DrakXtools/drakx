@@ -1,5 +1,7 @@
 Version 1.25 - 19 June 2012, by Per Øyvind Karlsen
 
+- drop gdisk as it pulls in ie. 18MB libicudata library
+- increase squasfs block size to 1MB
 - replace perl implementation of 'rescue-doc' with a shell script
 - port perl implementation of 'drvinst' to C
 - fix issue with additional ttys not being used
