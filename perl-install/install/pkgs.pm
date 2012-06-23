@@ -480,6 +480,7 @@ sub setSelectedFromCompssList {
 	    $nb += $_->size;
 	}
 	if ($max_size && $nb > $max_size) {
+	    log::l("disabling selected packages because too big for level $level: $nb > $max_size");
 	    $nb = $old_nb;
 	    $min_level = $level;
 	    $packages->disable_selected($packages->{rpmdb}, $state, @$l);
