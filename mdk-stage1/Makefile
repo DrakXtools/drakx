@@ -78,7 +78,11 @@ FRONTEND_LIBS += -lnewt -lslang
 
 FRONTEND_OBJS = $(subst .c,.o,$(FRONTEND_SRC))
 
-STAGE1_LIBS = -lldetect -lkmod -lpci -lsysfs -llzma -lz
+ifndef DYNAMIC
+STAGE1_LIBS = -lldetect -lz -lkmod -lpci -lsysfs -llzma
+else
+STAGE1_LIBS = -Wl,-Bdynamic -lldetect -lz -Wl,-Bstatic -lkmod -lpci -lsysfs -llzma -Wl,-Bdynamic
+endif
 
 STAGE1_NETWORK_LIBS =
 ifeq (dietlibc, $(LIBC))
