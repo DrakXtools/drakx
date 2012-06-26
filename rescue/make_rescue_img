@@ -74,6 +74,16 @@ my $LANGUAGE = "C";
     } "$tmp/etc/rc.sysinit";
 #}
 
+# shell script, too lazy for anything else..
+# simply just take care of stripping any binaries not stripped already
+_ "
+for f in `find $tmp`; do
+    if [ -n \"`file \$f|grep 'not stripped'`\" ]; then
+	strip \$f
+    fi
+done
+";
+
 my $MKSQUASHFS_ARGS = $ARGV[0] ? $ARGV[0] : "-comp xz -Xbcj x86";
 
 _ "mksquashfs $tmp $rescue $MKSQUASHFS_ARGS -b 1048576 -no-xattrs -all-root -noappend";
