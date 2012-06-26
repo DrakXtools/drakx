@@ -70,7 +70,11 @@ FRONTEND_LIBS =
  #- frontends
 #ifeq (newt, $(FRONTEND))
 #FRONTEND_SRC += newt-frontend.c
+ifndef DYNAMIC
 FRONTEND_LIBS += -lnewt -lslang
+else
+FRONTEND_LIBS += -Wl,-Bstatic -lnewt -lslang -Wl,-Bdynamic
+endif
 #else
 #FRONTEND_SRC += stdio-frontend.c
 #endif
