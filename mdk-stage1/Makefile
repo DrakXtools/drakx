@@ -181,18 +181,18 @@ init: .depend $(INITSRC)
 		-o $@
 
 ifneq (0, $(ONE_BINARY))
-stage1: .depend $(PCMCIA_LIB) bootsplash.c probe-modules.c rescue-gui.c $(FRONTEND_SRC) $(STAGE1_ALLSRC)
+stage1: .depend $(PCMCIA_LIB) probe-modules.c rescue-gui.c $(FRONTEND_SRC) $(STAGE1_ALLSRC)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
-		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -DENABLE_BOOTSPLASH \
-		bootsplash.c probe-modules.c rescue-gui.c $(FRONTEND_SRC) $(STAGE1_ALLSRC) \
+		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) \
+		probe-modules.c rescue-gui.c $(FRONTEND_SRC) $(STAGE1_ALLSRC) \
 		$(PCMCIA_LIB) $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS) \
 		-o $@
 
 else
-stage1: .depend $(PCMCIA_LIB) bootsplash.c $(FRONTEND_SRC) $(STAGE1_ALLSRC)
+stage1: .depend $(PCMCIA_LIB) $(FRONTEND_SRC) $(STAGE1_ALLSRC)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
-		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -DENABLE_BOOTSPLASH \
-		bootsplash.c $(FRONTEND_SRC) $(STAGE1_ALLSRC) \
+		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) \
+		$(FRONTEND_SRC) $(STAGE1_ALLSRC) \
 		$(PCMCIA_LIB) $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS) \
 		-o $@
 
@@ -205,7 +205,7 @@ dhcp-client: .depend $(STAGE1_SRC) $(NETWORKSRC) $(FRONTEND_SRC)
 
 rescue-gui: .depend rescue-gui.c frontend-common.c params.c utils.c log.c automatic.c $(FRONTEND_SRC)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
-		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -DENABLE_BOOTSPLASH \
+		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) \
 		rescue-gui.c frontend-common.c params.c utils.c log.c automatic.c $(FRONTEND_SRC) \
 		$(FRONTEND_LIBS) $(LIBC_LIBS) \
 		-o $@
@@ -222,7 +222,7 @@ else
 init: $(INITOBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(LIBC_LIBS)
 
-stage1: $(STAGE1OBJS_FULL) bootsplash.o $(FRONTEND_OBJS) $(PCMCIA_LIB)
+stage1: $(STAGE1OBJS_FULL) $(FRONTEND_OBJS) $(PCMCIA_LIB)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
 
 ifeq (0, $(ONE_BINARY))
@@ -246,10 +246,10 @@ $(STAGE1OBJS_NETWORK_STANDALONE): %-NETWORK-STANDALONE.o: %.c .depend
 	$(DIET) $(COMPILE) $(INCLUDES) $(NETWORK_STANDALONE_DEFS) $(USB_DEFS_GEN) -c $< -o $@
 
 $(STAGE1OBJS_FULL): %-FULL.o: %.c .depend
-	$(DIET) $(COMPILE) $(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -DENABLE_BOOTSPLASH -c $< -o $@
+	$(DIET) $(COMPILE) $(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -c $< -o $@
 
 .c.o: .depend
-	$(DIET) $(COMPILE) $(INCLUDES) -DENABLE_BOOTSPLASH -c $<
+	$(DIET) $(COMPILE) $(INCLUDES) -c $<
 
 endif
 

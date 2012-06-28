@@ -175,6 +175,8 @@ void unset_automatic(void)
 	log_message("unsetting automatic");
 	unset_param(MODE_AUTOMATIC);
 
+#ifdef ENABLE_BOOTSPLASH
 	if (binary_name && (!strcmp(binary_name, "stage1") || !strcmp(binary_name, "rescue-gui")))
 	    exit_bootsplash();
+#endif
 }
