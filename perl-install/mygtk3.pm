@@ -1569,7 +1569,9 @@ sub pixmap_from_pixbuf {
 
 sub import_style_ressources() {
     if (!$::isInstall) {
-        Gtk3::Rc->parse_string(scalar cat_('/usr/share/libDrakX/themes-galaxy.rc')); # FIXME DEBUG
+        my $pl = Gtk3::CssProvider->new;
+        $pl->load_from_path('/usr/share/libDrakX/themes-galaxy.css'); # FIXME DEBUG
+        my $cx = Gtk3::StyleContext::add_provider_for_screen(Gtk3::Gdk::Screen::get_default(), $pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 }
 
