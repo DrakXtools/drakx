@@ -310,9 +310,9 @@ sub markup_to_TextView_format {
     foreach (@$l) {
 	my ($_txt, $attrs) = @$_;
 	if ($attrs) {
-         $attrs->{weight} eq 'bold' and $attrs->{weight} = do { require Gtk2::Pango; Gtk2::Pango->PANGO_WEIGHT_BOLD };
+         $attrs->{weight} eq 'bold' and $attrs->{weight} = do { require Pango; Pango->PANGO_WEIGHT_BOLD };
          $attrs->{size} eq 'larger' and do {
-             $attrs->{scale} = Gtk2::Pango->scale_x_large; # equivalent to Label's size => 'larger'
+             $attrs->{scale} = Pango->scale_x_large; # equivalent to Label's size => 'larger'
              delete $attrs->{size};
          };
      }
@@ -349,7 +349,7 @@ sub create_box_with_title {
 	my $scroll = gtknew('ScrolledWindow', child => $wtext, width => $width, height => 200);
 	$scroll->signal_connect(realize => sub {
                                 my $layout = $wtext->create_pango_layout($text);
-                                $layout->set_width(($width - 10) * Gtk2::Pango->scale);
+                                $layout->set_width(($width - 10) * Pango->scale);
                                 $wtext->set_size_request($width,  min(200, second($layout->get_pixel_size) + 10));
                                 $scroll->set_size_request($width, min(200, second($layout->get_pixel_size) + 10));
                                 $o->{rwindow}->queue_resize;
@@ -653,14 +653,14 @@ sub gtkfontinfo {
     foreach (qw(ascent descent approximate_char_width approximate_digit_width)) {
 	no strict;
 	my $func = "get_$_";
-	$fontinfo{$_} = Gtk2::Pango->pixels($metrics->$func);
+	$fontinfo{$_} = Pango->pixels($metrics->$func);
     }
     %fontinfo;
 }
 
 sub gtkmodify_font {
     my ($w, $arg) = @_;
-    $w->modify_font(ref($arg) ? $arg : Gtk2::Pango::FontDescription->from_string($arg));
+    $w->modify_font(ref($arg) ? $arg : Pango::FontDescription->from_string($arg));
     $w;
 }
 
@@ -1446,7 +1446,7 @@ sub new {
     $darea->{back_pixbuf} = gtknew('Pixbuf', file => 'banner-background');
     my $d_height = $darea->{back_pixbuf}->get_height;
     $darea->set_size_request(-1, $d_height);
-    $darea->modify_font(Gtk2::Pango::FontDescription->from_string("13"));
+    $darea->modify_font(Pango::FontDescription->from_string("13"));
     eval { $darea->{icon} = ugtk3::gtkcreate_pixbuf($icon) };
     $darea->{icon} ||= ugtk3::gtkcreate_pixbuf(ugtk3::wm_icon());
     my $blue_part = eval { gtknew('Pixbuf', file => 'banner-blue-part', flip => mygtk3::text_direction_rtl()) };

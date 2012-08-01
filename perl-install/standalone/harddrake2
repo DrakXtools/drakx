@@ -310,7 +310,7 @@ $tree->get_selection->signal_connect('changed' => sub {
         ($current_device, $current_class) = @{$data[$idx]};
         
         if ($idx ne -1) {
-            use Gtk2::Pango;
+            use Pango;
             my %device_fields = map {
                 # The U+200E character is to force LTR display, as what what follows the colon is always in LTR (device names, paths, etc),
                 # this ensures proper displaying of names like /dev/fd0 (otherwise it gets 'dev/fd0/').
@@ -318,7 +318,7 @@ $tree->get_selection->signal_connect('changed' => sub {
                 my $field = lookup_field($_);
                 if_($_ && $field->[0], $_ =>
                    [
-                    [ $field->[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->PANGO_WEIGHT_BOLD } ],
+                    [ $field->[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Pango->PANGO_WEIGHT_BOLD } ],
                     [ ($current_device->{$_} =~ /^(unknown)/ ? N("unknown") :
                        $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : 
                        $current_device->{$_} eq 'yes' ? N("Yes") : 
@@ -569,7 +569,7 @@ sub lookup_field {
 
 sub titleFormat {
     my ($title) = @_;
-    [ $title . "\n", { 'weight' => Gtk2::Pango->PANGO_WEIGHT_BOLD, scale => Gtk2::Pango->PANGO_SCALE_LARGE } ];
+    [ $title . "\n", { 'weight' => Pango->PANGO_WEIGHT_BOLD, scale => Pango->PANGO_SCALE_LARGE } ];
 }
 
 sub force_rename_field {
