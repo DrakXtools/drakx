@@ -114,7 +114,7 @@ sub _gtk {
     }
     $w->set_name(delete $opts->{widget_name}) if exists $opts->{widget_name};
     $w->can_focus(delete $opts->{can_focus}) if exists $opts->{can_focus};
-    $w->can_default(delete $opts->{can_default}) if exists $opts->{can_default};
+    $w->set_can_default(delete $opts->{can_default}) if exists $opts->{can_default};
     $w->grab_focus if delete $opts->{grab_focus};
     $w->set_padding(@{delete $opts->{padding}}) if exists $opts->{padding};
     $w->set_sensitive(delete $opts->{sensitive}) if exists $opts->{sensitive};

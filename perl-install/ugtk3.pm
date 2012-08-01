@@ -558,7 +558,7 @@ sub create_okcancel {
 		       gtknew('HButtonBox', spacing => 5, layout => $_->[1],
 			      children_loose => [
 				  map {
-				      $_->can_default($::isWizard);
+				      $_->set_can_default($::isWizard);
 				      $_;
 				  } grep { $_ } @{$_->[0]} 
 			      ]);

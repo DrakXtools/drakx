@@ -249,7 +249,7 @@ gtkpack_($vbox,
                            ),
         );
 
-$oc->{cancel}->can_default(1);
+$oc->{cancel}->set_can_default(1);
 $oc->{cancel}->grab_default;
 
 $w->main;
