@@ -681,7 +681,7 @@ sub set_back_pixbuf {
 
 sub set_back_pixmap {
     my ($w) = @_;
-    return if !$w->realized;
+    return if !$w->get_realized;
     my $window = $w->window;
     my $pixmap = $w->{back_pixmap} ||= Gtk3::Gdk::Pixmap->new($window, 1, 2, $window->get_depth);
 
@@ -1425,7 +1425,7 @@ use ugtk3 qw(:helpers :wrappers);
 
 sub set_pixmap {
     my ($darea) = @_;
-    return if !$darea->realized;
+    return if !$darea->get_realized;
     ugtk3::set_back_pixbuf($darea, $darea->{back_pixbuf});
     update_text($darea);
 }
