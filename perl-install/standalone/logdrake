@@ -28,10 +28,10 @@ use c;
 use common;
 use interactive;
 use do_pkgs;
-use mygtk2 qw(gtknew); #- do not import gtkadd which conflicts with ugtk2 version
-use ugtk2 qw(:create :dialogs :helpers :wrappers);
+use mygtk3 qw(gtknew); #- do not import gtkadd which conflicts with ugtk3 version
+use ugtk3 qw(:create :dialogs :helpers :wrappers);
 
-$ugtk2::wm_icon = "/usr/share/mcc/themes/default/logdrake-mdk.png";
+$ugtk3::wm_icon = "/usr/share/mcc/themes/default/logdrake-mdk.png";
 my $in = 'interactive'->vnew('su');
 
 my ($isExplain, $Explain, $isFile, $File, $isWord, $Word);
@@ -50,9 +50,9 @@ my $isTail = $isFile;
 $| = 1 if $isTail;
 my $h = chomp_(`hostname -s`);
 
-$ugtk2::wm_icon = "logdrake";
-my $explain_title = N("Mandriva Linux Tools Logs");
-my $my_win = ugtk2->new($isExplain ? $explain_title : N("Logs"));
+$ugtk3::wm_icon = "logdrake";
+my $explain_title = N("DrakX Tools Logs");
+my $my_win = ugtk3->new($isExplain ? $explain_title : N("Logs"));
 
 unless ($::isEmbedded) {
     $my_win->{window}->set_border_width(5);
@@ -186,7 +186,7 @@ $my_win->{window}->show_all;
 search() if $isFile;
 $my_win->main;
 
-sub quit() { ugtk2->exit(0) }
+sub quit() { ugtk3->exit(0) }
 
 #-------------------------------------------------------------
 # search functions
@@ -364,7 +364,7 @@ sub log_output {
 }
 
 sub insert_text_n_scroll() {
-    ugtk2::gtktext_insert($log_text, \@logs, append => 1);
+    ugtk3::gtktext_insert($log_text, \@logs, append => 1);
     $log_text->scroll_to_iter($log_buf->get_end_iter, 0, 1, 0.5, 0.5);
     undef @logs;
 }

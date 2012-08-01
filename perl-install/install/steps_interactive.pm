@@ -36,7 +36,7 @@ use log;
 #-######################################################################################
 sub errorInStep {
     my ($o, $err) = @_;
-    $err = ugtk2::escape_text_for_TextView_markup_format($err) if $o->isa('install::steps_gtk');
+    $err = ugtk3::escape_text_for_TextView_markup_format($err) if $o->isa('install::steps_gtk');
     $o->ask_warn(N("Error"), [ N("An error occurred"), formatError($err) ]);
 }
 

@@ -8,8 +8,8 @@ use vars qw(@ISA);
 
 use interactive;
 use common;
-use mygtk2;
-use ugtk2 qw(:helpers :wrappers :create);
+use mygtk3;
+use ugtk3 qw(:helpers :wrappers :create);
 use Gtk2::Gdk::Keysyms;
 
 my $forgetTime = 1000; #- in milli-seconds
@@ -22,21 +22,21 @@ sub new {
 sub enter_console { my ($o) = @_; $o->{suspended} = common::setVirtual(1) }
 sub leave_console { my ($o) = @_; common::setVirtual(delete $o->{suspended}) }
 sub adapt_markup { 
-    #- nothing needed, the default markup is gtk2's
+    #- nothing needed, the default markup is gtk3's
     my ($_o, $s) = @_; return $s;
 }
 
-sub exit { ugtk2::exit(@_) }
+sub exit { ugtk3::exit(@_) }
 
 sub ask_fileW {
     my ($in, $common) = @_;
 
-    my $w = ugtk2::create_file_selector(%$common);
+    my $w = ugtk3::create_file_selector(%$common);
 
     my $file;
     $w->main(sub { 
 	$file = $w->{chooser}->get_filename;
-	my $err = ugtk2::file_selected_check($common->{save}, $common->{want_a_dir}, $file);
+	my $err = ugtk3::file_selected_check($common->{save}, $common->{want_a_dir}, $file);
 	$err and $in->ask_warn('', $err);
 	!$err;
     }) && $file;
@@ -51,7 +51,7 @@ sub create_boxradio {
     mapn {
 	my ($txt, $w) = @_;
 	# workaround infamous 6 years old gnome bug #101968:
-	$w->child->set_size_request(mygtk2::get_label_width(), -1) if $e->{alignment} ne 'right' && !$e->{label};
+	$w->child->set_size_request(mygtk3::get_label_width(), -1) if $e->{alignment} ne 'right' && !$e->{label};
 	$w->signal_connect(button_press_event => $double_click) if $double_click;
 
 	$w->signal_connect(key_press_event => $e->{may_go_to_next});
@@ -223,7 +223,7 @@ sub create_treeview_tree {
 	my $path = Gtk2::TreePath->new_from_string($path_str);
 	$tree->expand_to_path($path);
 	$tree->set_cursor($path, undef, 0);
-        gtkflush();  #- workaround gtk2 bug not honouring centering on the given row if node was closed
+        gtkflush();  #- workaround gtk3 bug not honouring centering on the given row if node was closed
 	$tree->scroll_to_cell($path, undef, 1, 0.5, 0);
     };
 
@@ -348,7 +348,7 @@ sub add_modify_remove_action {
     } elsif ($button->{kind} eq 'remove') {
 	${$e->{val}} = $e->{list}[0];
     }
-    ugtk2::gtk_set_treelist($treelist, [ map { may_apply($e->{format}, $_) } @{$e->{list}} ]);
+    ugtk3::gtk_set_treelist($treelist, [ map { may_apply($e->{format}, $_) } @{$e->{list}} ]);
 
     add_modify_remove_sensitive($buttons, $e);
     1;
@@ -357,7 +357,7 @@ sub add_modify_remove_action {
 sub add_padding {
     my ($w) = @_;
     gtknew('HBox', children => [
-        0, gtknew('Alignment', width => $mygtk2::left_padding),
+        0, gtknew('Alignment', width => $mygtk3::left_padding),
         1, $w
     ]);
 }  
@@ -397,7 +397,7 @@ sub create_widget {
         }
     } elsif ($e->{type} eq 'bool') {
 	if ($e->{image}) {
-	    $w = ugtk2::gtkadd(Gtk2::CheckButton->new, gtkshow(gtkcreate_img($e->{image})));
+	    $w = ugtk3::gtkadd(Gtk2::CheckButton->new, gtkshow(gtkcreate_img($e->{image})));
 	} else {
 	    #-		warn "\"text\" member should have been used instead of \"label\" one at:\n", common::backtrace(), "\n" if $e->{label} && !$e->{text};
 	    $w = Gtk2::CheckButton->new_with_label($e->{text});
@@ -408,7 +408,7 @@ sub create_widget {
     } elsif ($e->{type} eq 'only_label') {
         my @common = (
             # workaround infamous 6 years old gnome bug #101968:
-            if_($e->{alignment} ne 'right', width => mygtk2::get_label_width())
+            if_($e->{alignment} ne 'right', width => mygtk3::get_label_width())
         );
 	$w = $e->{title} ? 
 	         gtknew('Title2', label => escape_text_for_TextView_markup_format(${$e->{val}}), @common) :
@@ -751,7 +751,7 @@ sub create_widgets {
     # add asterisks before titles when there're more than one:
     my @all_titles = all_title_entries($l);
     if (2 <= @all_titles) {
-        ${$_->{val}} = mygtk2::asteriskize(${$_->{val}}) foreach @all_titles;
+        ${$_->{val}} = mygtk3::asteriskize(${$_->{val}}) foreach @all_titles;
     }
 
     my $box = create_widgets_block($o, $common, $l, $update, \$ignore);
@@ -815,7 +815,7 @@ sub display_help_window {
 
         load_from_uri($view, $file);
 
-        my $w = ugtk2->new(N("Help"), modal => 1);
+        my $w = ugtk3->new(N("Help"), modal => 1);
         gtkadd($w->{rwindow},
                gtkpack_(Gtk2::VBox->new,
                         1, create_scrolled_window(gtkset_border_width($view, 5),
@@ -827,7 +827,7 @@ sub display_help_window {
                                ),
                     ),
            );
-        mygtk2::set_main_window_size($w->{rwindow});
+        mygtk3::set_main_window_size($w->{rwindow});
         $w->{real_window}->grab_focus;
         $w->{real_window}->show_all;
         $w->main;
@@ -852,7 +852,7 @@ sub ask_fromW {
 
     filter_widgets($l);
 
-    my $mainw = ugtk2->new($common->{title}, %$o, if__($::main_window, transient => $::main_window),
+    my $mainw = ugtk3->new($common->{title}, %$o, if__($::main_window, transient => $::main_window),
                            if_($common->{icon}, icon => $common->{icon}), banner_title => $common->{banner_title},
 		       );
  
@@ -860,7 +860,7 @@ sub ask_fromW {
 
     $mainw->{box_allow_grow} = 1;
     my $pack = create_box_with_title($mainw, @{$common->{messages}});
-    mygtk2::set_main_window_size($mainw->{rwindow}) if $mainw->{pop_it} && !$common->{auto_window_size} && (@$l || $mainw->{box_size} == 200);
+    mygtk3::set_main_window_size($mainw->{rwindow}) if $mainw->{pop_it} && !$common->{auto_window_size} && (@$l || $mainw->{box_size} == 200);
 
     my @more_buttons = (
 			if_($common->{interactive_help} || $common->{interactive_help_id}, 
@@ -875,7 +875,7 @@ sub ask_fromW {
     if ($buttons_pack) {
 	$pack->pack_end(gtkshow($buttons_pack), 0, 0, 0);
     }
-    ugtk2::gtkadd($mainw->{window}, $pack);
+    ugtk3::gtkadd($mainw->{window}, $pack);
     $set_all->();
 
     my $entry_to_focus = find { $_->{focus} && $_->{focus}() } @$l;
@@ -904,7 +904,7 @@ sub ask_fromW {
 sub ask_browse_tree_info_refW {
     my ($o, $common) = @_;
     add2hash($common, { wait_message => sub { $o->wait_message(@_) } });
-    ugtk2::ask_browse_tree_info($common);
+    ugtk3::ask_browse_tree_info($common);
 }
 
 
@@ -940,9 +940,9 @@ sub wait_messageW {
 			    if_(ref($message_modifiable), 0, $message_modifiable),
 			]),
 		      );
-    mygtk2::enable_sync_flush($Window);
+    mygtk3::enable_sync_flush($Window);
     $Window->{wait_messageW} = $to_modify;
-    mygtk2::sync_flush($Window);
+    mygtk3::sync_flush($Window);
     $Window;
 }
 sub wait_message_nextW {
@@ -950,17 +950,17 @@ sub wait_message_nextW {
     return if $message eq $Window->{wait_messageW}->get_text; #- needed otherwise no expose_event :(
     $Window->{displayed} = 0;
     $Window->{wait_messageW}->set($message);
-    mygtk2::sync($Window) while !$Window->{displayed};
+    mygtk3::sync($Window) while !$Window->{displayed};
 }
 sub wait_message_endW {
     my ($_o, $Window) = @_;
     if ($Window->{pop_and_reuse}) {
 	$reuse_timeout = Glib::Timeout->add(100, sub {
-	    mygtk2::destroy_previous_popped_and_reuse_window();
+	    mygtk3::destroy_previous_popped_and_reuse_window();
 	});
     } else {
-	mygtk2::may_destroy($Window);
-	mygtk2::flush();
+	mygtk3::may_destroy($Window);
+	mygtk3::flush();
     }
 }
 
@@ -984,11 +984,11 @@ sub wait_message_with_progress_bar {
 		$progress->set_fraction($fraction);
 		$progress->show;
 		$displayed = 0;
-		mygtk2::flush() while !$displayed;
+		mygtk3::flush() while !$displayed;
 	    }
 	} else {
 	    $progress->hide;
-	    mygtk2::flush();
+	    mygtk3::flush();
 	}
     };
 }

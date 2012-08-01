@@ -1,4 +1,4 @@
-package ugtk2;
+package ugtk3;
 
 use diagnostics;
 use strict;
@@ -36,7 +36,7 @@ $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 use c;
 use log;
 use common;
-use mygtk2 qw(gtknew); #- do not import gtkadd which conflicts with ugtk2 version
+use mygtk3 qw(gtknew); #- do not import gtkadd which conflicts with ugtk3 version
 
 use Gtk2;
 
@@ -53,8 +53,8 @@ sub wm_icon() { $wm_icon || $::Wizard_pix_up || "wiz_default_up.png" }
 # variables, and second, to "see" directly in the code the user interface
 # you're building.
 
-sub gtkdestroy                { mygtk2::may_destroy($_[0]) }
-sub gtkflush()                { mygtk2::flush() }
+sub gtkdestroy                { mygtk3::may_destroy($_[0]) }
+sub gtkflush()                { mygtk3::flush() }
 sub gtkhide                   { $_[0]->hide; $_[0] }
 sub gtkmove                   { $_[0]->window->move($_[1], $_[2]); $_[0] }
 sub gtkpack                   { gtkpowerpack(1, 1, @_) }
@@ -152,9 +152,9 @@ sub gtkradio {
       } @_;
 }
 
-sub gtkroot() { mygtk2::root_window() }
-sub gtkcolor { &mygtk2::rgb2color }
-sub gtkset_background { &mygtk2::set_root_window_background }
+sub gtkroot() { mygtk3::root_window() }
+sub gtkcolor { &mygtk3::rgb2color }
+sub gtkset_background { &mygtk3::set_root_window_background }
 
 sub gtkset_text {
     my ($w, $s) = @_;
@@ -360,7 +360,7 @@ sub create_box_with_title {
          my ($txt) = @_;
          ref($txt) ? $txt : gtknew('WrappedLabel', text_markup => $txt,
                                    # workaround infamous 6 years old gnome bug #101968:
-                                   width => mygtk2::get_label_width());
+                                   width => mygtk3::get_label_width());
      };
 	    gtkpack__($box,
 		      if_($::isWizard, gtknew('Label', height => 10)),
@@ -635,13 +635,13 @@ sub may_set_icon {
     }
 }
 
-sub gtktext_insert { &mygtk2::_text_insert }
-sub icon_paths { &mygtk2::_icon_paths }
-sub add_icon_path { &mygtk2::add_icon_path }
+sub gtktext_insert { &mygtk3::_text_insert }
+sub icon_paths { &mygtk3::_icon_paths }
+sub add_icon_path { &mygtk3::add_icon_path }
 
 sub set_main_window_size { 
     my ($o) = @_;
-    mygtk2::set_main_window_size($o->{rwindow});
+    mygtk3::set_main_window_size($o->{rwindow});
 }
 
 # extracts interesting font metrics for a given widget
@@ -748,7 +748,7 @@ sub new {
 	if_(!$::isInstall, icon_no_error => wm_icon()),
 	if_($o->{transient}, transient_for => $o->{transient}), 
     );
-    mygtk2::register_main_window($window->{real_window}) if !$opts{do_not_track_main_window};
+    mygtk3::register_main_window($window->{real_window}) if !$opts{do_not_track_main_window};
     $window->set_border_width(10) if !$window->{pop_it} && !$::noborderWhenEmbedded;
 
     $o->{rwindow} = $o->{window} = $window;
@@ -763,7 +763,7 @@ sub main {
     gtkset_mousecursor_normal();
 
     $o->show;
-    mygtk2::main($o->{rwindow},
+    mygtk3::main($o->{rwindow},
 		 sub { $o->{retval} ? !$o_completed || $o_completed->() : !$o_canceled || $o_canceled->() });
     $o->{retval};
 }
@@ -807,11 +807,11 @@ END { &exit() }
 # Full UI managed functions that will return to you the value that the
 # user chose.
 
-sub ask_warn       { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_warn(@_); main($w) }
-sub ask_yesorno    { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_okcancel(@_, N("Yes"), N("No")); main($w) }
-sub ask_okcancel   { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_okcancel(@_, N("Is this correct?"), N("Ok"), N("Cancel")); main($w) }
-sub ask_from_entry { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_from_entry(@_); main($w) }
-sub ask_dir        { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_dir(@_); main($w) }
+sub ask_warn       { my $w = ugtk3->new(shift @_, grab => 1); $w->_ask_warn(@_); main($w) }
+sub ask_yesorno    { my $w = ugtk3->new(shift @_, grab => 1); $w->_ask_okcancel(@_, N("Yes"), N("No")); main($w) }
+sub ask_okcancel   { my $w = ugtk3->new(shift @_, grab => 1); $w->_ask_okcancel(@_, N("Is this correct?"), N("Ok"), N("Cancel")); main($w) }
+sub ask_from_entry { my $w = ugtk3->new(shift @_, grab => 1); $w->_ask_from_entry(@_); main($w) }
+sub ask_dir        { my $w = ugtk3->new(shift @_, grab => 1); $w->_ask_dir(@_); main($w) }
 
 sub _ask_from_entry($$@) {
     my ($o, @msgs) = @_;
@@ -852,7 +852,7 @@ sub _ask_okcancel($@) {
 
 sub create_file_selector {
     my (%opts) = @_;
-    my $w = ugtk2->new(delete $opts{title}, modal => 1);
+    my $w = ugtk3->new(delete $opts{title}, modal => 1);
     my ($message, $save, $want_a_dir) = (delete $opts{message}, delete $opts{save}, delete $opts{want_a_dir});
     my $action = $want_a_dir ? ($save ? 'create_folder' : 'select_folder') : ($save ? 'save' : 'open');
     add2hash(\%opts, { width => 480, height => 250 });
@@ -901,7 +901,7 @@ sub _ask_dir {
 sub ask_browse_tree_info {
     my ($common) = @_;
 
-    my $w = ugtk2->new($common->{title});
+    my $w = ugtk3->new($common->{title});
 
     my $tree_model = Gtk2::TreeStore->new("Glib::String", "Gtk2::Gdk::Pixbuf", "Glib::String");
     my $tree = Gtk2::TreeView->new_with_model($tree_model);
@@ -918,7 +918,7 @@ sub ask_browse_tree_info {
 	   gtknew('VBox', spacing => 5, children => [
 		    0, gtknew('Title2', label => $common->{message},
                               # workaround infamous 6 years old gnome bug #101968:
-                              width => mygtk2::get_label_width()),
+                              width => mygtk3::get_label_width()),
 		    1, gtknew('VBox', children => [
 			       1, gtknew('ScrolledWindow', child => $tree),
 			       0, gtknew('Frame', text => N("Info"), child =>
@@ -1163,7 +1163,7 @@ sub ask_browse_tree_info_given_widgets {
 	    $curr = $iter;
 	}
 	#- the following test for equality is because we can have a button_press_event first, then
-	#- two changed events, the first being on a different row :/ (is it a bug in gtk2?) - that
+	#- two changed events, the first being on a different row :/ (is it a bug in gtk3?) - that
 	#- happens in rpmdrake when doing a "search" and directly trying to select a found package
 	if ($mouse_toggle_pending eq $model->get($iter, 0)) {
 	    $toggle->(1);
@@ -1318,8 +1318,8 @@ sub set_popdown_strings {
     my $menu = Gtk2::Menu->new;
     # keep string list around for ->set_text compatibilty helper
     $w->{strings} = \@strs;
-    #$w->set_menu((ugtk2::create_factory_menu($window, [ "File", (undef) x 3, '<Branch>' ], map { [ "File/" . $_, (undef) x 3, '<Item>' ] } @strs))[0]);
-    $menu->append(ugtk2::gtkshow(Gtk2::MenuItem->new_with_label($_))) foreach @strs;
+    #$w->set_menu((ugtk3::create_factory_menu($window, [ "File", (undef) x 3, '<Branch>' ], map { [ "File/" . $_, (undef) x 3, '<Item>' ] } @strs))[0]);
+    $menu->append(ugtk3::gtkshow(Gtk2::MenuItem->new_with_label($_))) foreach @strs;
     $w->set_menu($menu);
     $w;
 }
@@ -1399,34 +1399,34 @@ sub set_text {
 package Gtk2::Label;
 sub set {
     my ($label, $text) = @_;
-    mygtk2::gtkset($label, text => $text);
+    mygtk3::gtkset($label, text => $text);
 }
 
 
 package Gtk2::WrappedLabel;
 sub new {
     my ($_type, $o_text, $o_align) = @_;
-    mygtk2::gtknew('WrappedLabel', text => $o_text || '', alignment => [ $o_align || 0, 0.5 ]);
+    mygtk3::gtknew('WrappedLabel', text => $o_text || '', alignment => [ $o_align || 0, 0.5 ]);
 }
 
 
 package Gtk2::Entry;
 sub new_with_text {
     my ($_class, $o_text) = @_;
-    mygtk2::gtknew('Entry', text => $o_text);
+    mygtk3::gtknew('Entry', text => $o_text);
 }
 
 
 package Gtk2::Banner;
 
 use MDK::Common;
-use mygtk2 qw(gtknew);
-use ugtk2 qw(:helpers :wrappers);
+use mygtk3 qw(gtknew);
+use ugtk3 qw(:helpers :wrappers);
 
 sub set_pixmap {
     my ($darea) = @_;
     return if !$darea->realized;
-    ugtk2::set_back_pixbuf($darea, $darea->{back_pixbuf});
+    ugtk3::set_back_pixbuf($darea, $darea->{back_pixbuf});
     update_text($darea);
 }
 
@@ -1441,15 +1441,15 @@ sub update_text {
 sub new {
     my ($_class, $icon, $text, $o_options) = @_;
 
-    mygtk2::import_style_ressources();
+    mygtk3::import_style_ressources();
     my $darea = gtknew('DrawingArea', widget_name => 'Banner');
     $darea->{back_pixbuf} = gtknew('Pixbuf', file => 'banner-background');
     my $d_height = $darea->{back_pixbuf}->get_height;
     $darea->set_size_request(-1, $d_height);
     $darea->modify_font(Gtk2::Pango::FontDescription->from_string("13"));
-    eval { $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon) };
-    $darea->{icon} ||= ugtk2::gtkcreate_pixbuf(ugtk2::wm_icon());
-    my $blue_part = eval { gtknew('Pixbuf', file => 'banner-blue-part', flip => mygtk2::text_direction_rtl()) };
+    eval { $darea->{icon} = ugtk3::gtkcreate_pixbuf($icon) };
+    $darea->{icon} ||= ugtk3::gtkcreate_pixbuf(ugtk3::wm_icon());
+    my $blue_part = eval { gtknew('Pixbuf', file => 'banner-blue-part', flip => mygtk3::text_direction_rtl()) };
     my $blue_width = $blue_part->get_width;
     $darea->{text} = $text;
     require lang;
@@ -1633,13 +1633,13 @@ sub show {
 package Gtk2::GUI_Update_Guard;
 
 use MDK::Common::Func qw(before_leaving);
-use ugtk2;
+use ugtk3;
 
 sub new {
     my ($_class) = @_; # prevent a perl_checker warning in callers
     my $old_signal = $SIG{ALRM};
     $SIG{ALRM} = sub {
-        ugtk2::gtkflush();
+        ugtk3::gtkflush();
         alarm(1);
     };
     alarm(1);

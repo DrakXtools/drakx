@@ -26,8 +26,8 @@ use common;
 use standalone;
 use vars qw($MODE %options);
 use interactive;
-use mygtk2 qw(gtknew gtkset);
-use ugtk2 qw(:helpers :wrappers :ask :create);
+use mygtk3 qw(gtknew gtkset);
+use ugtk3 qw(:helpers :wrappers :ask :create);
 use run_program;
 use security::level;
 use security::msec;
@@ -43,7 +43,7 @@ use security::l10n;
 
 my $_in = 'interactive'->vnew('su'); # enforce being root
 
-$ugtk2::wm_icon = "/usr/share/mcc/themes/default/draksec-mdk.png";
+$ugtk3::wm_icon = "/usr/share/mcc/themes/default/draksec-mdk.png";
 my ($w);
 
 ############################    I18N     ###################################
@@ -66,7 +66,7 @@ sub resize { gtkset($_[0], width => 50) }
 
 # factorize this with drakrpm and harddrake2
 sub wait_msg {
-    my $mainw = ugtk2->new(N("Please wait"), (modal => 1, transient => $w->{real_window}));
+    my $mainw = ugtk3->new(N("Please wait"), (modal => 1, transient => $w->{real_window}));
     $mainw->{window}->add(gtknew('WrappedLabel', text => $_[0]));
     $mainw->{rwindow}->show_all;
     gtkset_mousecursor_wait($mainw->{rwindow}->window);
@@ -84,7 +84,7 @@ sub new_nonedit_combo {
 }
 
 #my $msec = security::msec->new;
-$w = ugtk2->new(N("Security Level and Checks"));
+$w = ugtk3->new(N("Security Level and Checks"));
 my $window = $w->{window};
 
 
@@ -98,7 +98,7 @@ unless ($::isEmbedded) {
 
 # Connect the signals
 $window->signal_connect('delete_event', sub { $window->destroy });
-$window->signal_connect('destroy', sub { ugtk2->exit });
+$window->signal_connect('destroy', sub { ugtk3->exit });
 
 $window->add(my $vbox = gtkshow(gtknew('VBox')));
 
@@ -231,7 +231,7 @@ gtkpack_($vbox,
 
          0, create_okcancel(my $oc =
                             {
-                             cancel_clicked => sub { ugtk2->exit(0) },
+                             cancel_clicked => sub { ugtk3->exit(0) },
                              ok_clicked => sub {
                                 log::explanations("Setting up right delegation");
                                 my %rev_auth = reverse %auth;
@@ -242,7 +242,7 @@ gtkpack_($vbox,
 
                                 write_rules();
                                 remove_wait_msg($w);
-                                ugtk2->exit(0);
+                                ugtk3->exit(0);
                             }
                             },
                             undef, undef, ''
@@ -253,4 +253,4 @@ $oc->{cancel}->can_default(1);
 $oc->{cancel}->grab_default;
 
 $w->main;
-ugtk2->exit(0);
+ugtk3->exit(0);

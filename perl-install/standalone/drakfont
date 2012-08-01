@@ -87,14 +87,14 @@ use lib qw(/usr/lib/libDrakX);
 
 use standalone;    #- warning, standalone must be loaded very first, for 'explanations'
 
-use mygtk2 qw(gtknew); #- do not import gtkadd which conflicts with ugtk2 version
-use ugtk2 qw(:create :dialogs :helpers :wrappers);
+use mygtk3 qw(gtknew); #- do not import gtkadd which conflicts with ugtk3 version
+use ugtk3 qw(:create :dialogs :helpers :wrappers);
 use common;
 use run_program;
 
 require_root_capability();
 
-$ugtk2::wm_icon = "drakfont";
+$ugtk3::wm_icon = "drakfont";
 
 #   global variables needed by each functions
 my $xlsfonts = 0;
@@ -476,9 +476,9 @@ sub backend_mod() {
 
 sub interactive_mode() {
     $interactive = 1;
-    $window1 = ugtk2->new(N("Font Installation"));
-    mygtk2::register_main_window($window1->{real_window});
-    $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
+    $window1 = ugtk3->new(N("Font Installation"));
+    mygtk3::register_main_window($window1->{real_window});
+    $window1->{rwindow}->signal_connect(delete_event => sub { ugtk3->exit(0) });
     $window1->{rwindow}->set_position('center') if !$::isEmbedded;
     
     my $button = {};
@@ -510,7 +510,7 @@ sub interactive_mode() {
     $window1->{rwindow}->show_all;
     $window1->{rwindow}->realize;
     $window1->main;
-    ugtk2->exit(0);
+    ugtk3->exit(0);
 }
 
 $list_all_font_path || $xlsfonts || $windows || @install || @uninstall ? backend_mod() : interactive_mode();

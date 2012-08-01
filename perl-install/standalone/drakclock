@@ -6,8 +6,8 @@ use POSIX;
 use common;
 # i18n : IMPORTANT to get correct namespace (drakconf instead of libDrakX)
 BEGIN { unshift @::textdomains, 'drakconf' }
-use mygtk2 qw(gtknew);
-use ugtk2 qw(:all);
+use mygtk3 qw(gtknew);
+use ugtk3 qw(:all);
 use interactive;
 use standalone;
 use timezone;
@@ -21,14 +21,14 @@ my $timer;
 my $first = 1;
 my $its_reset = 0;
 
-$ugtk2::wm_icon = "/usr/share/mcc/themes/default/time-mdk.png";
+$ugtk3::wm_icon = "/usr/share/mcc/themes/default/time-mdk.png";
 
 my $ntpd = $timezone::ntp . 'd';
 my $ntpfile = '/etc/' . $timezone::ntp . '.conf';
 
-my $my_win = ugtk2->new(N("Date, Clock & Time Zone Settings"));
+my $my_win = ugtk3->new(N("Date, Clock & Time Zone Settings"));
 
-$my_win->{window}->signal_connect(delete_event => sub { ugtk2->exit(0) });
+$my_win->{window}->signal_connect(delete_event => sub { ugtk3->exit(0) });
 
 my $calendar = gtknew('Calendar');
 $calendar->signal_connect($_ => \&cal_changed) foreach 'month-changed', 'day-selected', 'day-selected-double-click', 'prev-month', 'next-month', 'prev-year', 'next-year';
@@ -103,7 +103,7 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
                                            ]),
                                 0, create_okcancel(my $w =
                                                    {
-                                                    cancel_clicked => sub { ugtk2->exit(0) },
+                                                    cancel_clicked => sub { ugtk3->exit(0) },
                                                     ok_clicked => sub {
 							my $need_date = 1;
                                                         any::disable_x_screensaver();
@@ -156,7 +156,7 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
 							-e '/sbin/hwclock' and system('/sbin/hwclock', '--systohc');
                                                         any::enable_x_screensaver();
                                                         system(qw(dcop kicker Panel restart)) if $ENV{DESKTOP} eq 'kde';
-                                                        ugtk2->exit(0);
+                                                        ugtk3->exit(0);
                                                     },
                                                    },
                                                    undef, undef, '',
@@ -230,7 +230,7 @@ $drawing_area->show;
 $my_win->{window}->show_all;
 my ($midx, $midy) = ($drawing_area->allocation->width/2, $drawing_area->allocation->height/2);
 $my_win->main;
-ugtk2->exit(0);
+ugtk3->exit(0);
 
 sub ntp_widget_state {
     my ($state) = @_;
@@ -345,7 +345,7 @@ sub Repaint {
     my $dRadians_min_real  = POSIX::floor($dRadians_min / $PI * 30) * $PI / 30;
     my $dRadians_sec_real  = $dRadians_sec;
     my $gc = $drawing_area->style->white_gc;
-    # fix race on ugtk2->exit that causes a crash (#33894)
+    # fix race on ugtk3->exit that causes a crash (#33894)
     return 0  if !$gc;
     $pixmap->draw_rectangle($drawing_area->style->white_gc, 1, 0, 0, $width, $height);
     my ($midx, $midy) = ($width / 2, $height / 2);

@@ -20,7 +20,7 @@
 
 use lib qw(../..);
 use common;
-use ugtk2;
+use ugtk3;
 use install_gtk;
 
 !@ARGV and die "Usage: LANGUAGE=lang_to_test $0 string_to_translate\n(for example: LANGUAGE=ja $0 Advanced)\n";

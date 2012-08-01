@@ -104,8 +104,8 @@ my $o_old = $o; # BUG (maybe install's $::o ?)
 my %struct_gui;
 
 if (!$::isEmbedded && $in->isa('interactive::gtk')) {
-    require ugtk2;
-    ugtk2->import(qw(:helpers :wrappers :create));
+    require ugtk3;
+    ugtk3->import(qw(:helpers :wrappers :create));
 
     my %tree;
     $struct_gui{$_} = 'General' foreach qw(lang isUpgrade autoExitInstall timezone default_packages);
@@ -138,7 +138,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 
     exists $struct_gui{$_} and push @{$tree{$struct_gui{$_}}}, [ $_ , $pixmap{$_}, h2widget($o->{$_}, "\$o->\{$_}") ] foreach keys %$o;
 
-    my $W = ugtk2->new('$o edition');
+    my $W = ugtk3->new('$o edition');
     my @box_to_hide;
     my $nb_pages=0;
     my $notebook = Gtk2::Notebook->new;

@@ -4,8 +4,8 @@ use diagnostics;
 use strict;
 
 use common;
-use mygtk2 qw(gtknew);
-use ugtk2 qw(:helpers :wrappers :create);
+use mygtk3 qw(gtknew);
+use ugtk3 qw(:helpers :wrappers :create);
 use partition_table;
 use fs::type;
 use detect_devices;
@@ -58,8 +58,8 @@ sub main {
 
     local $in->{grab} = 1;
 
-    $w = ugtk2->new(N("Partitioning"));
-    mygtk2::register_main_window($w->{real_window}) if !$::isEmbedded && !$::isInstall;
+    $w = ugtk3->new(N("Partitioning"));
+    mygtk3::register_main_window($w->{real_window}) if !$::isEmbedded && !$::isInstall;
 
     load_theme();
 
@@ -72,7 +72,7 @@ sub main {
 		    0, gtknew(($::isInstall ? ('Title1', 'label') : ('Label_Left', 'text'))
                                 => N("Click on a partition, choose a filesystem type then choose an action"),
                               # workaround infamous 6 years old gnome bug #101968:
-                              width => mygtk2::get_label_width()
+                              width => mygtk3::get_label_width()
                             ),
 		    1, (my $notebook_widget = Gtk2::Notebook->new),
 		    0, (my $per_kind_action_box = gtknew('HButtonBox', layout => 'edge')),
@@ -176,7 +176,7 @@ sub add_kind2notebook {
         1, $box,
         0, $kind->{action_box},
     ]);
-    ugtk2::add2notebook($notebook_widget, $kind->{name}, $kind->{main_box});
+    ugtk3::add2notebook($notebook_widget, $kind->{name}, $kind->{main_box});
     push @notebook, $kind;
     $kind;
 }

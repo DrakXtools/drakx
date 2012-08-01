@@ -13,8 +13,8 @@ use partition_table;
 use partition_table::raw;
 use partition_table::dos;
 use POSIX qw(ceil);
-use mygtk2;
-use ugtk2 qw(:wrappers);
+use mygtk3;
+use ugtk3 qw(:wrappers);
 
 #- unit of $mb is mega bytes, min and max are in sectors, this
 #- function is used to convert back to sectors count the size of
@@ -300,7 +300,7 @@ sub create_display_box {
     my $width = 540;
     my $minwidth = 40;
 
-    my $display_box = ugtk2::gtkset_size_request(Gtk2::HBox->new(0,0), -1, 26);
+    my $display_box = ugtk3::gtkset_size_request(Gtk2::HBox->new(0,0), -1, 26);
 
     my $sep_count = @parts - 1;
     #- ratio used to compute initial partition pixel width (each partition should be > min_width)
@@ -339,12 +339,12 @@ sub create_display_box {
             $hpane->add2($mdv_widget);
             $hpane->child2_shrink(0);
             $hpane->set_position(ceil($ratio * $entry->{req_size}));
-            ugtk2::gtkset_size_request($hpane, $entry->{width}, 0);
-            ugtk2::gtkpack__($display_box, $hpane);
+            ugtk3::gtkset_size_request($hpane, $entry->{width}, 0);
+            ugtk3::gtkpack__($display_box, $hpane);
 
             my $add_part_size_info = sub {
                 my ($name, $label) = @_;
-                ugtk2::gtkpack__($desc,
+                ugtk3::gtkpack__($desc,
                                  gtkadd(gtkset_name(Gtk2::EventBox->new, $name),
                                         Gtk2::Label->new(" " x 4)),
                                  gtkset_size_request(gtkset_alignment($label, 0, 0.5),
@@ -396,7 +396,7 @@ sub create_display_box {
                                          'other'));
             }
             $part_widget->set_size_request($entry->{width}, 0);
-            ugtk2::gtkpack($display_box, $part_widget);
+            ugtk3::gtkpack($display_box, $part_widget);
         }
 	$part_widget->add($part_info);
 
@@ -409,7 +409,7 @@ sub create_display_box {
         my @types = (N_("Ext2/3/4"), N_("XFS"), N_("Swap"), arch() =~ /sparc/ ? N_("SunOS") : arch() eq "ppc" ? N_("HFS") : N_("Windows"),
                     N_("Other"), N_("Empty"));
         my %name2fs_type = ('Ext2/3/4' => 'ext3', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
-        $desc = ugtk2::gtkpack(Gtk2::HBox->new,
+        $desc = ugtk3::gtkpack(Gtk2::HBox->new,
                 map {
                      my $t = $name2fs_type{$_};
                      my $ev = Gtk2::EventBox->new;
@@ -443,8 +443,8 @@ sub display_choices {
     $contentbox->foreach(sub { $contentbox->remove($_[0]) });
 
     $mainw->{kind}{display_box} ||= create_display_box($mainw->{kind});
-    ugtk2::gtkpack2__($contentbox, $mainw->{kind}{display_box});
-    ugtk2::gtkpack__($contentbox, gtknew('Label',
+    ugtk3::gtkpack2__($contentbox, $mainw->{kind}{display_box});
+    ugtk3::gtkpack__($contentbox, gtknew('Label',
                                          text => N("The DrakX Partitioning wizard found the following solutions:"),
                                          alignment => [0, 0]));
 
@@ -471,20 +471,20 @@ sub display_choices {
             log::l($s);
             next;
         }
-        ugtk2::gtkpack($vbox, 
+        ugtk3::gtkpack($vbox, 
                        gtknew('Label',
                               text => $solutions{$s}[1],
                               alignment => [0, 0]));
-        ugtk2::gtkpack($vbox, $item) if defined($item);
+        ugtk3::gtkpack($vbox, $item) if defined($item);
         $button->set_group($oldbutton->get_group) if $oldbutton;
         $oldbutton = $button;
         $button->signal_connect('toggled', sub { $mainw->{sol} = $solutions{$s} if $_[0]->get_active });
-        ugtk2::gtkpack2__($choicesbox, $button);
+        ugtk3::gtkpack2__($choicesbox, $button);
         $sep = gtknew('HSeparator');
-        ugtk2::gtkpack2__($choicesbox, $sep);
+        ugtk3::gtkpack2__($choicesbox, $sep);
     }
     $choicesbox->remove($sep);
-    ugtk2::gtkadd($contentbox, $choicesbox);
+    ugtk3::gtkadd($contentbox, $choicesbox);
     $mainw->{sol} = $solutions{@solutions[0]};
 }
 
@@ -494,15 +494,15 @@ sub main {
     my $sol;
 
     if ($o->isa('interactive::gtk')) {
-        require mygtk2;
-        mygtk2->import(qw(gtknew));
-        require ugtk2;
-        ugtk2->import(qw(:wrappers));
+        require mygtk3;
+        mygtk3->import(qw(gtknew));
+        require ugtk3;
+        ugtk3->import(qw(:wrappers));
 
-        my $mainw = ugtk2->new(N("Partitioning"), %$o, if__($::main_window, transient => $::main_window));
+        my $mainw = ugtk3->new(N("Partitioning"), %$o, if__($::main_window, transient => $::main_window));
         $mainw->{box_allow_grow} = 1;
 
-        mygtk2::set_main_window_size($mainw->{rwindow});
+        mygtk3::set_main_window_size($mainw->{rwindow});
 
         require diskdrake::hd_gtk;
         diskdrake::hd_gtk::load_theme();
@@ -526,10 +526,10 @@ sub main {
         }
         $combobox->set_active(0);
 
-        ugtk2::gtkpack2__($hdchoice, $hdchoicelabel);
+        ugtk3::gtkpack2__($hdchoice, $hdchoicelabel);
         $hdchoice->add($combobox);
 
-        ugtk2::gtkpack2__($mainbox, $hdchoice);
+        ugtk3::gtkpack2__($mainbox, $hdchoice);
 
         my $contentbox = Gtk2::VBox->new(0, 12);
 
@@ -564,7 +564,7 @@ sub main {
             );
         my $buttons_pack = $mainw->create_okcancel(N("Next"), undef, '', @more_buttons);
         $mainbox->pack_end($buttons_pack, 0, 0, 0);
-        ugtk2::gtkadd($mainw->{window}, $mainbox);
+        ugtk3::gtkadd($mainw->{window}, $mainbox);
         $mainw->{window}->show_all;
 
         $mainw->main;

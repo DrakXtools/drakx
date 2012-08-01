@@ -3,8 +3,8 @@ package install::gtk; # $Id$
 use diagnostics;
 use strict;
 
-use ugtk2;
-use mygtk2;
+use ugtk3;
+use mygtk3;
 use common;
 use lang;
 use devices;
@@ -98,7 +98,7 @@ sub install_theme {
     my $win = gtknew('Window', widget_name => 'background', title => 'root window');
     $win->set_type_hint('desktop'); # for matchbox window manager
     $win->realize;
-    mygtk2::set_root_window_background_with_gc($win->style->bg_gc('normal'));
+    mygtk3::set_root_window_background_with_gc($win->style->bg_gc('normal'));
     $root_window = $win;
 }
 
@@ -169,7 +169,7 @@ sub update_steps_position {
 	exists $steps{steps}{$_} or next;
 	if ($o->{steps}{$_}{entered} && !$o->{steps}{$_}{done}) {
             # we need to flush the X queue since else we got a temporary Y position of -1 when switching locales:
-            mygtk2::flush(); #- for auto_installs which never go through the Gtk2 main loop
+            mygtk3::flush(); #- for auto_installs which never go through the Gtk2 main loop
             $o->{steps_widget}->move_selection($steps{steps}{$_}{text});
 
             if ($last_step) {
@@ -179,7 +179,7 @@ sub update_steps_position {
 	}
         $last_step = $_;
     }
-    mygtk2::flush(); #- for auto_installs which never go through the Gtk2 main loop
+    mygtk3::flush(); #- for auto_installs which never go through the Gtk2 main loop
 }
 
 #------------------------------------------------------------------------------
@@ -233,7 +233,7 @@ sub special_shortcuts {
 	install::any::take_screenshot($::o);
     } elsif ($d eq 'restart' && member('control-mask', @{$event->state}) && member('mod1-mask', @{$event->state})) {
 	log::l("restarting install");
-	ugtk2->exit(0x35);
+	ugtk3->exit(0x35);
     }
     0;
 }

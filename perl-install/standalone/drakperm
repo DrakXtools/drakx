@@ -7,10 +7,10 @@ use standalone;
 
 use MDK::Common;
 use common;
-use mygtk2 qw(gtknew gtkset);
-use ugtk2 qw(:create :dialogs :helpers :wrappers);
+use mygtk3 qw(gtknew gtkset);
+use ugtk3 qw(:create :dialogs :helpers :wrappers);
 
-$ugtk2::wm_icon = "/usr/share/mcc/themes/default/drakperm-mdk.png";
+$ugtk3::wm_icon = "/usr/share/mcc/themes/default/drakperm-mdk.png";
 require_root_capability();
 
 #- vars declaration
@@ -30,10 +30,10 @@ my ($editable, $modified) = (0, 0);
 my @rules;
 
 #- Widget declaration
-my $w = ugtk2->new(N("Security Permissions"));
+my $w = ugtk3->new(N("Security Permissions"));
 $w->{rwindow}->set_size_request(620, 400) unless $::isEmbedded;
 my $W = $w->{window};
-$W->signal_connect(delete_event => sub { ugtk2->exit });
+$W->signal_connect(delete_event => sub { ugtk3->exit });
 my $model = Gtk2::ListStore->new("Gtk2::Gdk::Pixbuf", ("Glib::String") x 5);
 my $permList = Gtk2::TreeView->new_with_model($model);
 
@@ -129,7 +129,7 @@ Select permissions to see/edit", $level), alignment => [ 0, 0 ]),
                                     0, gtknew('VBox'),
                                    ]),
                  0, create_okcancel({
-                                     cancel_clicked => sub { ugtk2->exit },
+                                     cancel_clicked => sub { ugtk3->exit },
                                      ok_clicked => \&save_perm,
                                     },
                                     undef, undef, '',
@@ -160,7 +160,7 @@ $permList->get_selection->signal_connect('changed' => sub {
                                            });
 
 $w->main;
-ugtk2->exit;
+ugtk3->exit;
 
 
 sub hide_up_button_iffirst_item {
@@ -211,7 +211,7 @@ sub save_perm() {
         close $F;
     }
     $modified = 0;
-    ugtk2->exit;
+    ugtk3->exit;
 }
 
 sub load_perms() {

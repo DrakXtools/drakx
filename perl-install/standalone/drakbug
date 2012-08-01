@@ -26,8 +26,8 @@ use standalone;
 use MDK::Common;
 use common;
 BEGIN { $::no_ugtk_init = 1 }
-use mygtk2 qw(gtknew);
-use ugtk2 qw(:all);
+use mygtk3 qw(gtknew);
+use ugtk3 qw(:all);
 use Config;
 use URI::Escape;
 use run_program;
@@ -56,21 +56,21 @@ if (!check_for_xserver()) {
     c::_exit(0);
 }
 
-mygtk2::init();
+mygtk3::init();
 
-$ugtk2::wm_icon = 'drakbug-16';
-my $window = ugtk2->new(N("Mandriva Linux Bug Report Tool"), center => 1);
+$ugtk3::wm_icon = 'drakbug-16';
+my $window = ugtk3->new(N("DrakX Bug Report Tool"), center => 1);
 $window->{rwindow}->set_border_width(5);
-$window->{window}->signal_connect("delete_event", sub { ugtk2->exit(0) });
+$window->{window}->signal_connect("delete_event", sub { ugtk3->exit(0) });
 
 my $mdk_app = { 
-	       N("Mandriva Linux Control Center") => 'drakconf',
+	       N("DrakX Linux Control Center") => 'drakconf',
 	       N("First Time Wizard") => 'drakfw',
 	       N("Synchronization tool") => 'draksync',  
 	       N("Standalone Tools") => 'drakxtools',
 	       "harddrake" => 'harddrake2',
-	       N("Mandriva Online") => 'mdkonline',
-	       N("Mandriva Online") => 'mdkapplet',
+	       N("DrakX Online") => 'mdkonline',
+	       N("DrakX Online") => 'mdkapplet',
 	       N("Remote Control") => 'rfbdrake',
 	       N("Software Manager") => 'rpmdrake',
 	       N("Windows Migration tool") => 'transfugdrake',
@@ -175,7 +175,7 @@ gtkadd($window->{window},
                                }),
                            gtkpack(create_hbox('end'),
                                    gtksignal_connect(Gtk2::Button->new(N("Report")), clicked => \&report_bug_to_bugzilla),
-                                   gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
+                                   gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk3->exit(0) }),
                                ))));
 
 if (defined $prog) {
@@ -197,7 +197,7 @@ $button_browse->signal_connect('file-set', sub { $com_app->set_text($button_brow
 
 $window->{window}->show_all;
 $window->main;
-ugtk2->exit(0);
+ugtk3->exit(0);
 
 sub update_app {
     my ($text) = @_;

@@ -6,7 +6,7 @@ use standalone;
 use common;
 use mouse;
 use detect_devices;
-use ugtk2 qw(:create :dialogs :helpers :wrappers);
+use ugtk3 qw(:create :dialogs :helpers :wrappers);
 use interactive;
 use Libconf qw(:functions);
 use Libconf::Glueconf::NUT::Ups_conf;
@@ -313,7 +313,7 @@ my @pages = (
 #$in = 'interactive'->vnew('su'); # require_root_capability();
 $in = 'interactive'->vnew;
 
-$ugtk2::wm_icon = "drakups";
+$ugtk3::wm_icon = "drakups";
 
 if (!$::testing) {
     $in->do_pkgs->ensure_is_installed('nut-server', '/usr/sbin/upsd') or $in->exit(1);
@@ -326,7 +326,7 @@ if (member('--wizard', @ARGV)) {
     $in->exit($@ ? 1 : 0);
 }
 
-$w = ugtk2->new(N("UPS Management"));
+$w = ugtk3->new(N("UPS Management"));
 if (!$::isEmbedded) {
     mygtk3::register_main_window($w->{real_window});
     $w->{window}->set_size_request(500, 550);

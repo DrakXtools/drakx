@@ -9,8 +9,8 @@ use common;
 use interactive;
 use fs::remote::smb;
 use fs::remote::nfs;
-use mygtk2 qw(gtknew gtkset);
-use ugtk2 qw(:helpers :wrappers :create);
+use mygtk3 qw(gtknew gtkset);
+use ugtk3 qw(:helpers :wrappers :create);
 
 my ($all_hds, $in, $tree_model, $current_entry, $current_leaf, %icons);
 
@@ -19,7 +19,7 @@ sub main {
     my ($kind) = $type eq 'smb' ? smb2kind() : nfs2kind();
     $kind->check($in) or return;
 
-    my $w = ugtk2->new(N("Partitioning"));
+    my $w = ugtk3->new(N("Partitioning"));
 
     add_smbnfs($w->{window}, $kind);
     $w->{rwindow}->set_default_size(400, 300) if $w->{rwindow}->can('set_default_size');
@@ -227,7 +227,7 @@ sub import_tree {
 	} else {
 	    if (!$tree_model->iter_has_child($curr)) {
 		gtkset_mousecursor_wait($tree->window);
-		ugtk2::flush();
+		ugtk3::flush();
 		$add_exports->($curr);		
 		gtkset_mousecursor_normal($tree->window);
 	    }

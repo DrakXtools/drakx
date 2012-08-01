@@ -991,7 +991,7 @@ sub urpmi_add_all_media {
 	$wait = $in->wait_message(N("Please wait"), N("Please wait, adding media..."));
     } elsif ($in->isa('interactive::gtk')) {
 	push @options, '--silent-success';
-	mygtk2::flush();
+	mygtk3::flush();
     }
 
     my $reason = join(',', $o_previous_release ? 
@@ -1055,17 +1055,17 @@ sub display_release_notes {
     }
 
     require Gtk2::WebKit;
-    require ugtk2;
-    ugtk2->import(':all');
-    require mygtk2;
-    mygtk2->import('gtknew');
+    require ugtk3;
+    ugtk3->import(':all');
+    require mygtk3;
+    mygtk3->import('gtknew');
     my $view = gtknew('WebKit_View', no_popup_menu => 1);
     $view->load_html_string($release_notes, '/');
                                
-    my $w = ugtk2->new(N("Release Notes"), transient => $::main_window, modal => 1, pop_it => 1);
+    my $w = ugtk3->new(N("Release Notes"), transient => $::main_window, modal => 1, pop_it => 1);
     gtkadd($w->{rwindow},
            gtkpack_(Gtk2::VBox->new,
-                    1, create_scrolled_window(ugtk2::gtkset_border_width($view, 5),
+                    1, create_scrolled_window(ugtk3::gtkset_border_width($view, 5),
                                               [ 'never', 'automatic' ],
                                           ),
                     0, gtkpack(create_hbox('end'),
@@ -1074,7 +1074,7 @@ sub display_release_notes {
                            ),
                 ),
        );
-    mygtk2::set_main_window_size($w->{rwindow});
+    mygtk3::set_main_window_size($w->{rwindow});
     $w->{real_window}->grab_focus;
     $w->{real_window}->show_all;
     $w->main;

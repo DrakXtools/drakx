@@ -47,7 +47,7 @@ if (-f $instpath) {
     local $ENV{HOME} = '/root' if !$<;
     run_program::raw({ detach => 1 }, 'display_help', "file://$ancpath");
 } else {
-    $ugtk2::wm_icon = "help";
+    $ugtk3::wm_icon = "help";
     my $in = interactive->vnew;
     $in->ask_warn(N("Mandriva Linux Help Center"), N("No Help entry for %s\n", $idlabel));
 }

@@ -1,4 +1,4 @@
-package mygtk2;
+package mygtk3;
 
 use diagnostics;
 use strict;
@@ -15,7 +15,7 @@ use Gtk2;
 
 sub init() {
     !check_for_xserver() and print("Cannot be run in console mode.\n"), c::_exit(0);
-    $::one_message_has_been_translated and warn("N() was called from $::one_message_has_been_translated BEFORE gtk2 initialisation, replace it with a N_() AND a translate() later.\n"), c::_exit(1);
+    $::one_message_has_been_translated and warn("N() was called from $::one_message_has_been_translated BEFORE gtk3 initialisation, replace it with a N_() AND a translate() later.\n"), c::_exit(1);
 
     Gtk2->init;
     Locale::gettext::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', if_(!$::isInstall, 'libDrakX-standalone'),
@@ -52,7 +52,7 @@ sub gtkset {
     }
     my %opts = @_;
 
-    $class =~ s/^(Gtk2|Gtk2::Gdk|mygtk2)::// or internal_error("gtkset unknown class $class");
+    $class =~ s/^(Gtk2|Gtk2::Gdk|mygtk3)::// or internal_error("gtkset unknown class $class");
     
     _gtk($w, $class, 'gtkset', \%opts);
 }
@@ -67,7 +67,7 @@ sub gtkadd {
 	internal_error("gtkadd $class: $r should be a string in @_");
     }
     my %opts = @_;
-    $class =~ s/^(Gtk2|Gtk2::Gdk|mygtk2)::// or internal_error("gtkadd unknown class $class");
+    $class =~ s/^(Gtk2|Gtk2::Gdk|mygtk3)::// or internal_error("gtkadd unknown class $class");
     
     _gtk($w, $class, 'gtkadd', \%opts);
 }
@@ -102,7 +102,7 @@ my $global_tooltips;
 sub _gtk {
     my ($w, $class, $action, $opts) = @_;
 
-    if (my $f = $mygtk2::{"_gtk__$class"}) {
+    if (my $f = $mygtk3::{"_gtk__$class"}) {
 	$w = $f->($w, $opts, $class, $action);
     } else {
 	internal_error("$action $class: unknown class");
@@ -337,7 +337,7 @@ sub _gtk__Image {
 
         $w->{set_from_file} = $class =~ /using_pixmap/ ? sub { 
             my ($w, $file) = @_;
-            my $pixmap = mygtk2::pixmap_from_pixbuf($w, gtknew('Pixbuf', file => $file));
+            my $pixmap = mygtk3::pixmap_from_pixbuf($w, gtknew('Pixbuf', file => $file));
 	    $w->set_from_pixmap($pixmap, undef);
         } : $class =~ /using_pixbuf/ ? sub { 
             my ($w, $file) = @_;
@@ -612,7 +612,7 @@ sub _gtk__ComboBox {
     my $set_list = sub {
 	$w->{formatted_list} = $w->{format} ? [ map { $w->{format}($_) } @{$w->{list}} ] : $w->{list};
 	$w->get_model->clear;
-	$w->{strings} = $w->{formatted_list};  # used by Gtk2::ComboBox wrappers such as get_text() in ugtk2
+	$w->{strings} = $w->{formatted_list};  # used by Gtk2::ComboBox wrappers such as get_text() in ugtk3
 	$w->append_text($_) foreach @{$w->{formatted_list}};
     };
     if (my $list_ref = delete $opts->{list_ref}) {
@@ -822,7 +822,7 @@ sub _gtknew_handle_layout_children {
             my $pixbuf = if_($opts->{pixbuf_file}, gtknew('Pixbuf', file => delete $opts->{pixbuf_file}));
             $w->signal_connect(
                 realize => sub {
-                    ugtk2::set_back_pixbuf($w, $pixbuf);
+                    ugtk3::set_back_pixbuf($w, $pixbuf);
                 });
         }
 }
@@ -963,7 +963,7 @@ sub _gtk__MagicWindow {
 	real_window => $w, 
 	child => $sub_child, pop_it => $pop_it, pop_and_reuse => $pop_and_reuse,
 	if_($provided_banner, banner => $provided_banner),
-    }, 'mygtk2::MagicWindow';
+    }, 'mygtk3::MagicWindow';
 }
 
 # A standard About dialog. Used with:
@@ -1191,10 +1191,10 @@ sub _gtknew_handle_children {
 #-   (eg : add_accel_group set_position set_default_size
 #- * a few methods are handled specially
 my %for_real_window = map { $_ => 1 } qw(show_all size_request);
-sub mygtk2::MagicWindow::AUTOLOAD {
+sub mygtk3::MagicWindow::AUTOLOAD {
     my ($w, @args) = @_;
 
-    my ($meth) = $mygtk2::MagicWindow::AUTOLOAD =~ /mygtk2::MagicWindow::(.*)/;
+    my ($meth) = $mygtk3::MagicWindow::AUTOLOAD =~ /mygtk3::MagicWindow::(.*)/;
 
     my ($s1, @s2) = $meth eq 'show'
               ? ('real_window', 'banner', 'child') :
@@ -1206,7 +1206,7 @@ sub mygtk2::MagicWindow::AUTOLOAD {
 	      ? 'real_window'
 	      : 'child';
 
-#-    warn "mygtk2::MagicWindow::$meth", first($w =~ /HASH(.*)/), " on $s1 @s2 (@args)\n";
+#-    warn "mygtk3::MagicWindow::$meth", first($w =~ /HASH(.*)/), " on $s1 @s2 (@args)\n";
 
     $w->{$_} && $w->{$_}->$meth(@args) foreach @s2;
     $w->{$s1}->$meth(@args);
@@ -1224,10 +1224,10 @@ sub quit_popup() {
    if (!$in_callback) {
 	$in_callback = 1;
 	my $_guard = before_leaving { undef $in_callback };
-	require ugtk2;
-	my $w = ugtk2->new(N("Confirmation"), grab => 1);
-	ugtk2::_ask_okcancel($w, N("Are you sure you want to quit?"), N("Quit"), N("Cancel"));
-	my $ret = ugtk2::main($w);
+	require ugtk3;
+	my $w = ugtk3->new(N("Confirmation"), grab => 1);
+	ugtk3::_ask_okcancel($w, N("Are you sure you want to quit?"), N("Quit"), N("Cancel"));
+	my $ret = ugtk3::main($w);
 	return 1 if !$ret;
     }
 }
@@ -1425,7 +1425,7 @@ sub get_main_window_size() {
 
 # in order to workaround infamous 6 years old gnome bug #101968:
 sub get_label_width() {
-    first(mygtk2::get_main_window_size()) - 50 - $left_padding;
+    first(mygtk3::get_main_window_size()) - 55 - $left_padding;
 }
 
 sub set_main_window_size {
@@ -1470,7 +1470,7 @@ sub enable_sync_flush {
 sub sync_flush {
     my ($w) = @_;
     # hackish :-(
-    mygtk2::sync($w) while !$w->{displayed};
+    mygtk3::sync($w) while !$w->{displayed};
 }
 
 

@@ -69,7 +69,7 @@ sub remove_translate_context {
 
 sub translate {
     my $s = translate_real(@_);
-    $::one_message_has_been_translated ||= join(':', (caller(1))[1,2]); #- see mygtk2.pm
+    $::one_message_has_been_translated ||= join(':', (caller(1))[1,2]); #- see mygtk3.pm
     remove_translate_context($s);
 }
 

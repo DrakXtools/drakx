@@ -15,8 +15,8 @@ use install::steps_interactive;
 use interactive::gtk;
 use xf86misc::main;
 use common;
-use mygtk2;
-use ugtk2 qw(:helpers :wrappers :create);
+use mygtk3;
+use ugtk3 qw(:helpers :wrappers :create);
 use devices;
 use modules;
 use install::gtk;
@@ -53,7 +53,7 @@ sub new($$) {
     install::gtk::create_steps_window($o);
     _may_configure_framebuffer_640x480($o);
 
-    $ugtk2::grab = 1;
+    $ugtk3::grab = 1;
 
     $o = (bless {}, ref($type) || $type)->SUPER::new($o);
     $o->interactive::gtk::new;
@@ -246,7 +246,7 @@ sub setPackages {
 sub reallyChooseDesktop {
     my ($o, $title, $message, $choices, $choice) = @_;
 
-    my $w = ugtk2->new($title);
+    my $w = ugtk3->new($title);
 
     my %tips = (
         KDE    => N("Install %s KDE Desktop", "Moondrake"),
@@ -277,12 +277,12 @@ sub reallyChooseDesktop {
                     Custom => N("Custom Desktop"),
                 );
 
-                my $wp = ugtk2->new($title{$val->[0]}, transient => $w->{real_window}, modal => 1);
+                my $wp = ugtk3->new($title{$val->[0]}, transient => $w->{real_window}, modal => 1);
                 gtkadd($wp->{rwindow},
                        gtknew('VBox', children => [
                                 0, gtknew('Title2', label => N("Here's a preview of the '%s' desktop.", $val->[1]),
                                           # workaround infamous 6 years old gnome bug #101968:
-                                          width => mygtk2::get_label_width(), 
+                                          width => mygtk3::get_label_width(), 
                                       ),
                                 1, gtknew('Image', file => "desktop-$val->[0]-big"),
                                 0, gtknew('HSeparator'),
@@ -302,11 +302,11 @@ sub reallyChooseDesktop {
         ]);
     } @$choices;
 
-    ugtk2::gtkadd($w->{window},
+    ugtk3::gtkadd($w->{window},
 	   gtknew('VBox', children => [
 		    0, gtknew('Title2',
                               # workaround infamous 6 years old gnome bug #101968:
-                              width => mygtk2::get_label_width(), label => $message . ' ' .
+                              width => mygtk3::get_label_width(), label => $message . ' ' .
                                 N("Click on images in order to see a bigger preview")),
 		    1, gtknew('HButtonBox', children_loose => \@l),
 		    0, $w->create_okcancel(N("Next"), undef, '',
@@ -323,7 +323,7 @@ sub reallyChooseDesktop {
 sub reallyChooseGroups {
     my ($o, $size_to_display, $individual, $_compssUsers) = @_;
 
-    my $w = ugtk2->new(N("Package Group Selection"));
+    my $w = ugtk3->new(N("Package Group Selection"));
     my $w_size = gtknew('Label_Left', text => &$size_to_display, padding => [ 0, 0 ]);
     my @entries;
 
@@ -342,7 +342,8 @@ sub reallyChooseGroups {
     };
     #- when restarting this step, it might be necessary to reload the compssUsers.pl (bug 11558). kludgy.
     if (!ref $o->{gtk_display_compssUsers}) { install::any::load_rate_files($o) }
-    ugtk2::gtkadd($w->{window},
+    ugtk3::gtkadd($w->{window},
+       gtknew('ScrolledWindow', child =>
 	   gtknew('VBox', children => [
 		    1, $o->{gtk_display_compssUsers}->($entry),
 		    1, '',
@@ -547,7 +548,7 @@ sub installPackages {
     my ($current_total_size, $last_size, $nb, $total_size, $last_dtime, $_trans_progress_total);
 
     local $::noborderWhenEmbedded = 1;
-    my $w = ugtk2->new(N("Installing"));
+    my $w = ugtk3->new(N("Installing"));
     state $show_advertising;
     state $video_game;
     my $show_release_notes;
@@ -594,8 +595,7 @@ sub installPackages {
     my $rel_notes = gtknew('Button', text => N("Release Notes"), 
                            clicked => sub { $show_release_notes = 1 });
 
-    ugtk2::gtkadd($w->{window}, my $box = gtknew('VBox', children_tight => [ 
-	my $frame = gtknew('Frame', show_ref => \$show_advertising),
+    ugtk3::gtkadd($w->{window}, my $box = gtknew('VBox', children_tight => [ 
 	# TODO: allow for both advertising and game?
 	#gtknew('Image_using_pixmap', file_ref => \$advertising_image, show_ref => \$show_advertising),
     ]));
@@ -648,7 +648,7 @@ sub installPackages {
 	    $nb = $amount;
 	    $total_size = $total; $current_total_size = 0;
 	    $o->{install_start_time} = 0;
-	    mygtk2::gtkadd($pkg_log_widget, text => P("%d package", "%d packages", $nb, $nb));
+	    mygtk3::gtkadd($pkg_log_widget, text => P("%d package", "%d packages", $nb, $nb));
 	    $w->flush;
 	} elsif ($type eq 'open') {
 	    $advertize->(1) if $show_advertising && $total_size > 20_000_000 && time() - $change_time > 20;
@@ -662,7 +662,7 @@ sub installPackages {
 	} elsif ($type eq 'inst' && $subtype eq 'start') {
 	    gtkval_modify(\$pkg_progress, 0);
 	    my $p = $packages->{depslist}[$id];
-	    mygtk2::gtkadd($pkg_log_widget, text => sprintf("\n%s: %s", $p->name, translate($p->summary)));
+	    mygtk3::gtkadd($pkg_log_widget, text => sprintf("\n%s: %s", $p->name, translate($p->summary)));
 	    $current_total_size += $last_size;
 	    $last_size = $p->size;
 
@@ -704,7 +704,7 @@ sub installPackages {
 sub summary_prompt {
     my ($o, $l, $check_complete) = @_;
 
-    my $w = ugtk2->new(N("Summary"));
+    my $w = ugtk3->new(N("Summary"));
 
     my $set_entry_labels;
     my (@table, @widget_list);
@@ -718,7 +718,7 @@ sub summary_prompt {
 	    $group = $e->{group};
 	    push @table, [ gtknew('HBox', children_tight => [
                 gtknew('Title1', 
-                       label => mygtk2::asteriskize(escape_text_for_TextView_markup_format($group))) ]), '' ];
+                       label => mygtk3::asteriskize(escape_text_for_TextView_markup_format($group))) ]), '' ];
 	}
 	$e->{widget} = gtknew('Label_Right', width => $::real_windowwidth * 0.72, alignment => [ 1, 1 ]);
 
@@ -750,7 +750,7 @@ sub summary_prompt {
 
     my $help_sub = sub { interactive::gtk::display_help($o, { interactive_help_id => 'misc-params' }) };
 
-    ugtk2::gtkadd($w->{window},
+    ugtk3::gtkadd($w->{window},
 	   gtknew('VBox', spacing => 5, children => [
 		    1, gtknew('ScrolledWindow', h_policy => 'never',
 		    child => gtknew('TextView', 
@@ -774,15 +774,15 @@ sub ask_deselect_media__copy_on_disk {
     my %selection = map { $_->{name} => !$_->{ignore} } @$hdlists;
 
     if (@names > 1 || $o_copy_rpms_on_disk) {
-	my $w = ugtk2->new(N("Media Selection"));
+	my $w = ugtk3->new(N("Media Selection"));
 	$w->sync;
-	ugtk2::gtkadd(
+	ugtk3::gtkadd(
 	    $w->{window},
 	    gtknew('VBox', children => [
 	      @names > 1 ? (
 		0, gtknew('Label_Left', padding => [ 0, 0 ],
                               # workaround infamous 6 years old gnome bug #101968:
-                              width => mygtk2::get_label_width(),
+                              width => mygtk3::get_label_width(),
                               text => formatAlaTeX(N("The following installation media have been found.
 If you want to skip some of them, you can unselect them now."))),
 		1, gtknew('ScrolledWindow', child => gtknew('VBox', children => [
@@ -798,7 +798,7 @@ If you want to skip some of them, you can unselect them now."))),
 		if_($o_copy_rpms_on_disk,
 		    0, gtknew('Label_Left', padding => [ 0, 0 ],
                               # workaround infamous 6 years old gnome bug #101968:
-                              width => mygtk2::get_label_width(),
+                              width => mygtk3::get_label_width(),
                               text => N("You have the option to copy the contents of the CDs onto the hard disk drive before installation.
 It will then continue from the hard disk drive and the packages will remain available once the system is fully installed.")),
 		    0, gtknew('CheckButton', text => N("Copy whole CDs"), active_ref => $o_copy_rpms_on_disk),

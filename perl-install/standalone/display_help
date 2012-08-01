@@ -22,8 +22,8 @@
 use lib qw(/usr/lib/libDrakX);
 use common;
 use any;
-use mygtk2 qw(gtknew);
-use ugtk2 qw(:wrappers :create);
+use mygtk3 qw(gtknew);
+use ugtk3 qw(:wrappers :create);
 use Gtk2::WebKit;
 
 my $view = gtknew('WebKit_View', no_popup_menu => 1);
@@ -31,11 +31,11 @@ my $view = gtknew('WebKit_View', no_popup_menu => 1);
 my $websettings = $view->get_settings;
 $websettings->set_property('allow-scripts-to-close-windows', 1);
 $view->set_settings($websettings);
-$view->signal_connect('close-web-view', sub { ugtk2::exit(0) });
+$view->signal_connect('close-web-view', sub { ugtk3::exit(0) });
 
 $view->open($ARGV[0]);
 
-# FIXME: merge this with mcc code into new mygtk2::set_standalone_main_window_size()?
+# FIXME: merge this with mcc code into new mygtk3::set_standalone_main_window_size()?
 my ($rootwin_width, $rootwin_height) = gtkroot()->get_size;
 my ($default_width, $default_height);
 my $wm = any::running_window_manager();
@@ -51,7 +51,7 @@ if (!$is_firstime) {
 }
 
 # TODO: got XID from mcc/... ? (transient & modal hints?)
-my $w = ugtk2->new(N("Help"), width => $default_width, height => $default_height);
+my $w = ugtk3->new(N("Help"), width => $default_width, height => $default_height);
 
 gtkadd($w->{rwindow},
        gtkpack_(Gtk2::VBox->new,

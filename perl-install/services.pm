@@ -220,10 +220,10 @@ sub ask_standalone_gtk {
     my ($l, $on_services) = services();
     my @xinetd_services = map { $_->[0] } xinetd_services();
 
-    require ugtk2;
-    ugtk2->import(qw(:wrappers :create));
+    require ugtk3;
+    ugtk3->import(qw(:wrappers :create));
 
-    my $W = ugtk2->new(N("Services"));
+    my $W = ugtk3->new(N("Services"));
     my ($x, $y, $w_popup);
     my $nopop = sub { $w_popup and $w_popup->destroy; undef $w_popup };
     my $display = sub { 
@@ -244,7 +244,7 @@ sub ask_standalone_gtk {
     my $b = Gtk2::EventBox->new;
     $b->set_events('pointer_motion_mask');
     gtkadd($W->{window}, gtkadd($b, gtkpack_($W->create_box_with_title,
-	0, mygtk2::gtknew('Title1', label => N("Services and daemons")),
+	0, mygtk3::gtknew('Title1', label => N("Services and daemons")),
 	1, gtkset_size_request(create_scrolled_window(create_packtable({ col_spacings => 10, row_spacings => 3 },
 	    map {
                 my $service = $_;

@@ -12,11 +12,11 @@ use common;
 # i18n: IMPORTANT: to get correct namespace (drakconf instead of only libDrakX)
 BEGIN { unshift @::textdomains, 'drakconf' }
 
-use mygtk2 qw(gtknew); #- do not import gtkadd which conflicts with ugtk2 version
-use ugtk2 qw(:create :helpers :wrappers);
+use mygtk3 qw(gtknew); #- do not import gtkadd which conflicts with ugtk3 version
+use ugtk3 qw(:create :helpers :wrappers);
 use interactive;
 use modules::parameters;
-use harddrake::data;  #- needs to stay after use-ugtk2 as long as this module defines globals containing some N()
+use harddrake::data;  #- needs to stay after use-ugtk3 as long as this module defines globals containing some N()
 use fsedit;
 use pkgs;
 use POSIX qw(:sys_wait_h);
@@ -188,8 +188,8 @@ my %menu_options = (
                     'PARALLEL_ZIP_DETECTION' => [ $menus{options}, N("/Autodetect parallel _zip drives") ],
                     );
 
-$ugtk2::wm_icon = "harddrake";
-$w = ugtk2->new(N("Hardware Configuration"));
+$ugtk3::wm_icon = "harddrake";
+$w = ugtk3->new(N("Hardware Configuration"));
 # fake diagnostics pragma:
 local $::main_window = $w->{real_window};
 
@@ -548,7 +548,7 @@ $w->main;
 sub quit_global() {
     kill(15, $pid) if $pid;
     setVarsInSh($conffile, \%options) if !$::testing;
-    ugtk2->exit(0);
+    ugtk3->exit(0);
 }
 
 sub show_hide {
