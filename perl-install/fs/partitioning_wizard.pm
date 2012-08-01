@@ -517,7 +517,7 @@ sub main {
 
         my $hdchoicelabel = Gtk3::Label->new(N("Here is the content of your disk drive "));
 
-        my $combobox = Gtk3::ComboBox->new_text;
+        my $combobox = Gtk3::ComboBoxText->new;
         foreach (@kinds) {
             my $info = $_->{val}{info} || $_->{val}{device};
             $info =~ s|^(?:.*/)?(.{24}).*|$1|;

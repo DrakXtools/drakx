@@ -605,7 +605,7 @@ sub _gtk__ComboBox {
     my ($w, $opts, $_class, $action) = @_;
 
     if (!$w) {
-	$w = Gtk3::ComboBox->new_text;
+	$w = Gtk3::ComboBoxText->new;
 	$w->{format} = delete $opts->{format} if exists $opts->{format};
 
     }

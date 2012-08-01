@@ -518,7 +518,7 @@ sub create_widget {
 
 	    if (!$e->{separator}) {
 		if ($e->{not_edit}) {
-		    $real_w = $w = Gtk3::ComboBox->new_text;
+		    $real_w = $w = Gtk3::ComboBoxText->new;
 		    # FIXME: the following causes Gtk-CRITICAL but not solvable at realize time:
 		    first($w->child->get_cell_renderers)->set_property('ellipsize', 'end') if !$e->{do_not_ellipsize};
 		    $w->set_wrap_width($e->{gtk}{wrap_width}) if exists $e->{gtk}{wrap_width};

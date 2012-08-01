@@ -96,7 +96,7 @@ my $bugzilla_url = 'http://qa.mandriva.com/enter_bug.cgi';
 my $wizard_name = "Bugzilla";
 
 $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
-		          [ gtknew('Label_Left', text => N("Select %s Tool:", N("DrakX"))), $comb_app = Gtk3::ComboBox->new_text, $comb_app->set_wrap_width(3) ],
+		          [ gtknew('Label_Left', text => N("Select %s Tool:", N("DrakX"))), $comb_app = Gtk3::ComboBoxText->new, $comb_app->set_wrap_width(3) ],
                           [ gtknew('Label_Left', text => N("or Application Name\n(or Full Path):")), 
 			  gtkpack_(Gtk3::HBox->new(0, 5),
 				   1, $com_app = gtkset_editable(Gtk3::Entry->new, 1), 
