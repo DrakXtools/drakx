@@ -69,7 +69,7 @@ sub wait_msg {
     my $mainw = ugtk3->new(N("Please wait"), (modal => 1, transient => $w->{real_window}));
     $mainw->{window}->add(gtknew('WrappedLabel', text => $_[0]));
     $mainw->{rwindow}->show_all;
-    gtkset_mousecursor_wait($mainw->{rwindow}->window);
+    gtkset_mousecursor_wait($mainw->{rwindow}->get_window);
     # ugly workaround for gtk+ not displaying subdialog contents:
     Glib::Timeout->add(300, sub { Gtk3->main_quit; 0 });
     Gtk3->main;

@@ -56,7 +56,7 @@ sub wm_icon() { $wm_icon || $::Wizard_pix_up || "wiz_default_up.png" }
 sub gtkdestroy                { mygtk3::may_destroy($_[0]) }
 sub gtkflush()                { mygtk3::flush() }
 sub gtkhide                   { $_[0]->hide; $_[0] }
-sub gtkmove                   { $_[0]->window->move($_[1], $_[2]); $_[0] }
+sub gtkmove                   { $_[0]->get_window->move($_[1], $_[2]); $_[0] }
 sub gtkpack                   { gtkpowerpack(1, 1, @_) }
 sub gtkpack_                  { gtkpowerpack('arg', 1, @_) }
 sub gtkpack__                 { gtkpowerpack(0, 1, @_) }
@@ -64,7 +64,7 @@ sub gtkpack2                  { gtkpowerpack(1, 0, @_) }
 sub gtkpack2_                 { gtkpowerpack('arg', 0, @_) }
 sub gtkpack2__                { gtkpowerpack(0, 0, @_) }
 sub gtkput                    { $_[0]->put(gtkshow($_[1]), $_[2], $_[3]); $_[0] }
-sub gtkresize                 { $_[0]->window->resize($_[1], $_[2]); $_[0] }
+sub gtkresize                 { $_[0]->get_window->resize($_[1], $_[2]); $_[0] }
 sub gtkset_active             { $_[0]->set_active($_[1]); $_[0] }
 sub gtkset_border_width       { $_[0]->set_border_width($_[1]); $_[0] }
 sub gtkset_editable           { $_[0]->set_editable($_[1]); $_[0] }
@@ -672,7 +672,7 @@ sub gtkset_property {
 
 sub set_back_pixbuf {
     my ($widget, $pixbuf) = @_;
-    my $window = $widget->window;
+    my $window = $widget->get_window;
     my ($width, $height) = ($pixbuf->get_width, $pixbuf->get_height);
     my $pixmap = Gtk3::Gdk::Pixmap->new($window, $width, $height, $window->get_depth);
     $pixbuf->render_to_drawable($pixmap, $widget->style->fg_gc('normal'), 0, 0, 0, 0, $width, $height, 'max', 0, 0);
@@ -682,7 +682,7 @@ sub set_back_pixbuf {
 sub set_back_pixmap {
     my ($w) = @_;
     return if !$w->get_realized;
-    my $window = $w->window;
+    my $window = $w->get_window;
     my $pixmap = $w->{back_pixmap} ||= Gtk3::Gdk::Pixmap->new($window, 1, 2, $window->get_depth);
 
     my $style = $w->get_style;
@@ -1462,7 +1462,7 @@ sub new {
                                my $height = $darea->{icon}->get_height;
                                my $width = $darea->{icon}->get_width;
                                # fix icon position when not using the default height:
-                               (undef, undef, undef, $d_height) = $darea->window->get_geometry;
+                               (undef, undef, undef, $d_height) = $darea->get_window->get_geometry;
                                my $padding = int(($d_height - $height)/2);
                                my $d_width = $darea->allocation->width;
                                my $x_blue = $is_rtl ? $d_width - $blue_width : 0;
@@ -1470,11 +1470,11 @@ sub new {
                                # here: 48 is the amount of white background in the blue background we wish to ignore:
                                my $x_text = $is_rtl ? $d_width - $blue_width + 48 - $darea->{txt_width} : $blue_width - 48;
                                $darea->{layout_height} ||= second($darea->{layout}->get_pixel_size);
-                               $blue_part->render_to_drawable($darea->window, $style->bg_gc('normal'),
+                               $blue_part->render_to_drawable($darea->get_window, $style->bg_gc('normal'),
                                                                   0, 0, $x_blue, 0, -1, -1, 'none', 0, 0);
-                               $darea->{icon}->render_to_drawable($darea->window, $style->bg_gc('normal'),
+                               $darea->{icon}->render_to_drawable($darea->get_window, $style->bg_gc('normal'),
                                                                   0, 0, $x_icon, $padding, -1, -1, 'none', 0, 0);
-                               $darea->window->draw_layout($style->fg_gc('normal'), $x_text,
+                               $darea->get_window->draw_layout($style->fg_gc('normal'), $x_text,
                                                            $o_options->{txt_ypos} || ($d_height - $darea->{layout_height})/2,
                                                            $darea->{layout});
                                1;

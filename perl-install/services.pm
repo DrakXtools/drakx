@@ -284,7 +284,7 @@ sub ask_standalone_gtk {
             ))
 	  );
     $b->signal_connect(motion_notify_event => sub { my ($w, $e) = @_;
-						    my ($ox, $oy) = $w->window->get_origin;
+						    my ($ox, $oy) = $w->get_window->get_origin;
 						    $x = $e->x+$ox; $y = $e->y+$oy });
     $b->signal_connect(button_press_event => sub { $nopop->() });
     $::isEmbedded and gtkflush();

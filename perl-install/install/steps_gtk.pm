@@ -637,7 +637,7 @@ sub installPackages {
     $details->hide if !@install::any::advertising_images;
     $w->sync;
     foreach ($cancel, $details) {
-	gtkset_mousecursor_normal($_->window);
+	gtkset_mousecursor_normal($_->get_window);
     }
 
     $advertize->(0);

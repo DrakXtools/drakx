@@ -56,7 +56,7 @@ sub detect_channels() {
     if (-s $config_file) {
         $in->ask_okcancel(N("Warning"), N("%s already exists and its contents will be lost", $config_file)) or return;
     }
-    gtkset_mousecursor_wait($w->{window}->window);
+    gtkset_mousecursor_wait($w->{window}->get_window);
     $channel_list->set_sensitive(0);
     $_->set_sensitive(0) foreach values %buttons;
 
@@ -73,7 +73,7 @@ sub detect_channels() {
         } else {
             $in->ask_warn(N("Error"), N("Could not get the list of available channels"));
         }
-        gtkset_mousecursor_normal($w->{window}->window);
+        gtkset_mousecursor_normal($w->{window}->get_window);
         $buttons{detect}->set_sensitive(1);
         $channel_list->set_sensitive(1);
     };

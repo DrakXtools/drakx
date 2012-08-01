@@ -193,7 +193,7 @@ my $pressed;
 $drawing_area->set_events([ 'button_press_mask', 'button_release_mask', "pointer_motion_mask" ]);
 $drawing_area->signal_connect(expose_event => \&expose_event);
 $drawing_area->signal_connect(realize => sub {
-                                  my $window = $drawing_area->window;
+                                  my $window = $drawing_area->get_window;
                                   $pixmap = Gtk3::Gdk::Pixmap->new($window, @image_size, $window->get_depth);
                               });
 
@@ -316,7 +316,7 @@ sub determine_radian {
 sub expose_event {
     my ($widget, $event) = @_;
     my ($x, $y, $width, $height) = $event->area->values;
-    $widget->window->draw_drawable($widget->style->fg_gc('normal'), $pixmap, $x, $y, $x, $y, $width, $height);
+    $widget->get_window->draw_drawable($widget->style->fg_gc('normal'), $pixmap, $x, $y, $x, $y, $width, $height);
     0;
 }
 

@@ -226,10 +226,10 @@ sub import_tree {
 	    $current_entry = find_fstab_entry($kind, $wexports{$tree_model->get_path_str($curr)} || die(''), 'add');
 	} else {
 	    if (!$tree_model->iter_has_child($curr)) {
-		gtkset_mousecursor_wait($tree->window);
+		gtkset_mousecursor_wait($tree->get_window);
 		ugtk3::flush();
 		$add_exports->($curr);		
-		gtkset_mousecursor_normal($tree->window);
+		gtkset_mousecursor_normal($tree->get_window);
 	    }
 	    $current_entry = undef;
 	}

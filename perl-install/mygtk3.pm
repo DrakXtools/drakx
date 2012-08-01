@@ -354,13 +354,13 @@ sub _gtk__Image {
                                    }
                                    # workaround Gtk+ bug: in installer, first event is not complete and rectables are bogus:
                                    if ($::isInstall) {
-                                       $pixbuf->render_to_drawable($w->window, $w->style->fg_gc('normal'),
+                                       $pixbuf->render_to_drawable($w->get_window, $w->style->fg_gc('normal'),
                                                                    0, 0, $w->{x}, $w->{y}, $width, $height, 'max', 0, 0);
                                        return;
                                    }
                                    foreach my $rect ($event->region->get_rectangles) {
                                        my @values = $rect->values;
-                                       $pixbuf->render_to_drawable($w->window, $w->style->fg_gc('normal'),
+                                       $pixbuf->render_to_drawable($w->get_window, $w->style->fg_gc('normal'),
                                                                @values[0..1], $w->{x}+$values[0], $w->{y}+$values[1], @values[2..3], 'max', 0, 0);
 				   }
                                });
@@ -1536,7 +1536,7 @@ sub _pixbuf_render_alpha {
 
 sub pixmap_from_pixbuf {
     my ($widget, $pixbuf) = @_;
-    my $window = $widget->window or internal_error("you can't use this function if the widget is not realised");
+    my $window = $widget->get_window or internal_error("you can't use this function if the widget is not realised");
     my ($width, $height) = ($pixbuf->get_width, $pixbuf->get_height);
     my $pixmap = Gtk3::Gdk::Pixmap->new($window, $width, $height, $window->get_depth);
     $pixbuf->render_to_drawable($pixmap, $widget->style->fg_gc('normal'), 0, 0, 0, 0, $width, $height, 'max', 0, 0);
