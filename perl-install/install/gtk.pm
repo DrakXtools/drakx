@@ -228,7 +228,7 @@ sub handle_unsafe_mouse {
 
 sub special_shortcuts {
     my (undef, $event) = @_;
-    my $d = ${{ $Gtk2::Gdk::Keysyms{F2} => 'screenshot', $Gtk2::Gdk::Keysyms{Home} => 'restart' }}{$event->keyval};
+    my $d = ${{ Gtk3::Gdk::KEY_F2 => 'screenshot', Gtk3::Gdk::KEY_Home => 'restart' }}{$event->keyval};
     if ($d eq 'screenshot') {
 	install::any::take_screenshot($::o);
     } elsif ($d eq 'restart' && member('control-mask', @{$event->state}) && member('mod1-mask', @{$event->state})) {

@@ -10,7 +10,6 @@ use interactive;
 use common;
 use mygtk3;
 use ugtk3 qw(:helpers :wrappers :create);
-use Gtk2::Gdk::Keysyms;
 
 my $forgetTime = 1000; #- in milli-seconds
 
@@ -104,8 +103,8 @@ sub create_treeview_list {
 	Glib::Source->remove($timeout) if $timeout; $timeout = '';
 	
 	if ($event->keyval >= 0x100) {
-	    $e->{may_go_to_next}(), return 1 if member($event->keyval, ($Gtk2::Gdk::Keysyms{Return}, $Gtk2::Gdk::Keysyms{KP_Enter}));
-	    $starting_word = '' if !member($event->keyval, ($Gtk2::Gdk::Keysyms{Control_L}, $Gtk2::Gdk::Keysyms{Control_R}));
+	    $e->{may_go_to_next}(), return 1 if member($event->keyval, (Gtk3::Gdk::KEY_Return, Gtk3::Gdk::KEY_KP_Enter));
+	    $starting_word = '' if !member($event->keyval, (Gtk3::Gdk::KEY_Control_L, Gtk3::Gdk::KEY_Control_R));
 	} else {
 	    if (member('control-mask', @{$event->state})) {
 		$c eq 's' or return 1;
@@ -268,8 +267,8 @@ sub create_treeview_tree {
 	Glib::Source->remove($timeout) if $timeout; $timeout = '';
 
 	if ($event->keyval >= 0x100) {
-	    &$toggle and return 1 if member($event->keyval, ($Gtk2::Gdk::Keysyms{Return}, $Gtk2::Gdk::Keysyms{KP_Enter}));
-	    $starting_word = '' if !member($event->keyval, ($Gtk2::Gdk::Keysyms{Control_L}, $Gtk2::Gdk::Keysyms{Control_R}));
+	    &$toggle and return 1 if member($event->keyval, (Gtk3::Gdk::KEY_Return, Gtk3::Gdk::KEY_KP_Enter));
+	    $starting_word = '' if !member($event->keyval, (Gtk3::Gdk::KEY_Control_L, Gtk3::Gdk::KEY_Control_R));
 	} else {
 	    my $next;
 	    if (member('control-mask', @{$event->state})) {
