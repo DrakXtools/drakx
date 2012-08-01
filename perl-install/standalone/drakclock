@@ -228,7 +228,7 @@ $timer = Glib::Timeout->add(120, \&update_time);
 
 $drawing_area->show;
 $my_win->{window}->show_all;
-my ($midx, $midy) = ($drawing_area->allocation->width/2, $drawing_area->allocation->height/2);
+my ($midx, $midy) = ($drawing_area->get_allocation->width/2, $drawing_area->get_allocation->height/2);
 $my_win->main;
 ugtk3->exit(0);
 
@@ -340,7 +340,7 @@ sub Repaint {
     my ($drawing_area, $o_update_time) = @_;
     my ($sec, $min, $hour) = localtime(time());
     time_to_rad($sec, $min, $hour) if $o_update_time;
-    my ($width, $height) = ($drawing_area->allocation->width, $drawing_area->allocation->height);
+    my ($width, $height) = ($drawing_area->get_allocation->width, $drawing_area->get_allocation->height);
     my $dRadians_hour_real = $dRadians_hour + $dRadians_min / 12;
     my $dRadians_min_real  = POSIX::floor($dRadians_min / $PI * 30) * $PI / 30;
     my $dRadians_sec_real  = $dRadians_sec;

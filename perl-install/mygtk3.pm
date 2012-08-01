@@ -348,7 +348,7 @@ sub _gtk__Image {
             $w->signal_connect(expose_event => sub {
                                    my (undef, $event) = @_;
                                    if (!$w->{x}) {
-                                       my $alloc = $w->allocation;
+                                       my $alloc = $w->get_allocation;
                                        $w->{x} = $alloc->x;
                                        $w->{y} = $alloc->y;
                                    }
@@ -1590,7 +1590,7 @@ sub move_selection {
     my $layout = $w->{layout};
     $layout->{arrow_ydiff} ||=
       ($w->{selection_arrow}->get_pixbuf->get_height - $w->{selection_bar}->get_pixbuf->get_height)/2;
-    my $bar_y = $label->allocation->y - ($w->{selection_bar}->get_pixbuf->get_height - $label->allocation->height)/2;
+    my $bar_y = $label->get_allocation->y - ($w->{selection_bar}->get_pixbuf->get_height - $label->allocation->height)/2;
     $layout->move($w->{selection_bar}, 0, $bar_y);
     $layout->move($w->{selection_arrow}, $w->{arrow_x}, $bar_y - $layout->{arrow_ydiff}); # arrow is higer
     $_->show foreach $w->{selection_bar}, $w->{selection_arrow};
