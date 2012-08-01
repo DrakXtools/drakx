@@ -34,17 +34,17 @@ my $w = ugtk3->new(N("Security Permissions"));
 $w->{rwindow}->set_size_request(620, 400) unless $::isEmbedded;
 my $W = $w->{window};
 $W->signal_connect(delete_event => sub { ugtk3->exit });
-my $model = Gtk2::ListStore->new("Gtk2::Gdk::Pixbuf", ("Glib::String") x 5);
-my $permList = Gtk2::TreeView->new_with_model($model);
+my $model = Gtk3::ListStore->new("Gtk3::Gdk::Pixbuf", ("Glib::String") x 5);
+my $permList = Gtk3::TreeView->new_with_model($model);
 
 my $pixbuf = gtknew('Pixbuf', file => 'non-editable');
 
 my @column_sizes = (150, 100, 100, 15, -1);
 
 # TreeView layout is (Editable, Path, User, Group, Permissions, [hidden]index_id)
-$permList->append_column(Gtk2::TreeViewColumn->new_with_attributes(N("Editable"), Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
+$permList->append_column(Gtk3::TreeViewColumn->new_with_attributes(N("Editable"), Gtk3::CellRendererPixbuf->new, 'pixbuf' => 0));
 each_index {
-    my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i + 1);
+    my $col = Gtk3::TreeViewColumn->new_with_attributes($_, Gtk3::CellRendererText->new, 'text' => $::i + 1);
     $col->set_min_width($column_sizes[$::i+1]);
     $permList->append_column($col);
 } (N("Path"), N("User"), N("Group"), N("Permissions"));
@@ -103,11 +103,11 @@ $permList->signal_connect(button_press_event => sub {
                  });
 
 
-my $tips = Gtk2::Tooltips->new;
+my $tips = Gtk3::Tooltips->new;
 
 $W->add(gtknew('VBox', spacing => 5, children => [
-    if_(!$::isEmbedded, 0, Gtk2::Banner->new('/usr/share/mcc/themes/default/drakperm-mdk.png', N("Permissions"))),
-                 0, gtknew('Label_Left', text => N("Here you can see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules."), alignment => [ 0.5, 0 ]),
+    if_(!$::isEmbedded, 0, Gtk3::Banner->new('/usr/share/mcc/themes/default/drakperm-mdk.png', N("Permissions"))),
+                 0, gtknew('Label_Left', text => N("Here you can see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will overwrite the default rules."), alignment => [ 0.5, 0 ]),
                  1, gtknew('VBox', border_width => 0, children => [
                                     0, gtknew('Label_Left', text => N("The current security level is %s.
 Select permissions to see/edit", $level), alignment => [ 0, 0 ]),

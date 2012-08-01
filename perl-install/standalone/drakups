@@ -197,7 +197,7 @@ sub edit_row {
     my ($model, $o_iter) = @_;
     # create new item if needed (that is when adding a new one) at end of list
     my $iter = $o_iter || $model->append;
-    my $dialog = Gtk2::Dialog->new;
+    my $dialog = Gtk3::Dialog->new;
     $dialog->set_transient_for($w->{real_window});
     $dialog->set_modal(1);
 
@@ -207,14 +207,14 @@ sub edit_row {
             );
 
     gtkadd($dialog->action_area,
-           gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
+           gtksignal_connect(Gtk3::Button->new(N("Ok")), clicked => sub {
                                  # create new item if needed (that is when adding a new one) at end of list
                                  $iter ||= $model->append;
                                  # $model->set($iter, 1 => $file->get_text); # FILL ME
                                  $dialog->destroy;
                                  # $modified++;
                              }),
-           gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { $dialog->destroy }),
+           gtksignal_connect(Gtk3::Button->new(N("Cancel")), clicked => sub { $dialog->destroy }),
           );
      
     $dialog->show_all;
@@ -338,9 +338,9 @@ if (!$::isEmbedded) {
 
 my $_msg = N("Welcome to the UPS configuration tools");
 
-$w->{window}->add(gtkpack_(Gtk2::VBox->new,
-                           if_(!$::isEmbedded, 0, Gtk2::Banner->new('drakups', N("DrakUPS"))),
-                           1, my $nb = Gtk2::Notebook->new,
+$w->{window}->add(gtkpack_(Gtk3::VBox->new,
+                           if_(!$::isEmbedded, 0, Gtk3::Banner->new('drakups', N("DrakUPS"))),
+                           1, my $nb = Gtk3::Notebook->new,
                            0, create_okcancel( 
                                                {
                                                 ok_clicked => sub { 
@@ -358,18 +358,18 @@ $w->{window}->add(gtkpack_(Gtk2::VBox->new,
 # build the notebook
 
 foreach my $i (@pages) {
-    my $model = $models{$i->{id}} = Gtk2::ListStore->new("Glib::Int", ("Glib::String") x listlength(@{$i->{columns}}));
+    my $model = $models{$i->{id}} = Gtk3::ListStore->new("Glib::Int", ("Glib::String") x listlength(@{$i->{columns}}));
     my (%buttons, $list);
     $indexes{$i->{name}} = 0;
     my $idx = \$indexes{$i->{name}};
     my $getindex = sub { $$idx++ };
-    $nb->append_page(gtkpack_(Gtk2::VBox->new,
-                              1, create_scrolled_window($list = Gtk2::TreeView->new_with_model($model),
+    $nb->append_page(gtkpack_(Gtk3::VBox->new,
+                              1, create_scrolled_window($list = Gtk3::TreeView->new_with_model($model),
                                                         [ 'automatic', 'automatic' ]),
-                              0, gtkpack(Gtk2::HButtonBox->new,
+                              0, gtkpack(Gtk3::HButtonBox->new,
                                          (map { 
                                              my ($id, $label, $sub) = @$_;
-                                             gtksignal_connect($buttons{$id} = Gtk2::Button->new($label), clicked => sub { 
+                                             gtksignal_connect($buttons{$id} = Gtk3::Button->new($label), clicked => sub { 
 								 $sub->($model, $list, $getindex);
 							       });
                                          } ([ 'add', N("Add"), $i->{callbacks}{add} || \&add_callback ],
@@ -378,15 +378,15 @@ foreach my $i (@pages) {
                                            )
                                          )
                                          #(map {
-                                         #    gtksignal_connect(Gtk2::Button->new($_), clicked => $i->{callbacks}{$_}),
+                                         #    gtksignal_connect(Gtk3::Button->new($_), clicked => $i->{callbacks}{$_}),
                                          #} keys %{$i->{callbacks}})
                                         ),
                              ),
-                     Gtk2::Label->new($i->{name}),
+                     Gtk3::Label->new($i->{name}),
                     );
     #$i->{list} = $list;
     each_index {
-        $list->append_column(Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i + 1));
+        $list->append_column(Gtk3::TreeViewColumn->new_with_attributes($_, Gtk3::CellRendererText->new, 'text' => $::i + 1));
     } @{$i->{columns}};
     my @u = $i->{load}->();
     foreach my $line (@u) {

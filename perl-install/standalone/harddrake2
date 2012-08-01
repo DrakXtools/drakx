@@ -262,23 +262,23 @@ $::noborderWhenEmbedded = 1;
 my ($menubar, $factory) = create_factory_menu($w->{real_window}, @menu_items);
 $w->{window}->set_size_request(805, 550) if !$::isEmbedded;
 
-my $tree_model = Gtk2::TreeStore->new("Gtk2::Gdk::Pixbuf", "Glib::String", "Glib::Int");
-$w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
+my $tree_model = Gtk3::TreeStore->new("Gtk3::Gdk::Pixbuf", "Glib::String", "Glib::Int");
+$w->{window}->add(gtkpack_(0, Gtk3::VBox->new(0, 0),
                            0, $menubar,
-                           0, Gtk2::Banner->new("/usr/share/mcc/themes/default/harddrake-mdk.png", translate("Hardware")),
-                           1, create_hpaned(gtkadd(Gtk2::Frame->new(N("Detected hardware")), 
-                                                   create_scrolled_window(gtkset_size_request(my $tree = Gtk2::TreeView->new_with_model($tree_model), 350, -1), ['automatic', 'automatic'])),
-                                            gtkpack_(0, Gtk2::VBox->new(0, 0),
-                                                     1, gtkadd(my $frame = Gtk2::Frame->new(N("Information")),
-                                                               create_scrolled_window(my $text = Gtk2::TextView->new)),
-                                                     0, my $module_cfg_button = gtksignal_connect(Gtk2::Button->new(N("Set current driver options")),
+                           0, Gtk3::Banner->new("/usr/share/mcc/themes/default/harddrake-mdk.png", translate("Hardware")),
+                           1, create_hpaned(gtkadd(Gtk3::Frame->new(N("Detected hardware")), 
+                                                   create_scrolled_window(gtkset_size_request(my $tree = Gtk3::TreeView->new_with_model($tree_model), 350, -1), ['automatic', 'automatic'])),
+                                            gtkpack_(0, Gtk3::VBox->new(0, 0),
+                                                     1, gtkadd(my $frame = Gtk3::Frame->new(N("Information")),
+                                                               create_scrolled_window(my $text = Gtk3::TextView->new)),
+                                                     0, my $module_cfg_button = gtksignal_connect(Gtk3::Button->new(N("Set current driver options")),
                                                                                                   clicked => sub {
                                                                                                       local $SIG{CHLD} = undef;
                                                                                                       require modules::interactive;
                                                                                                       modules::interactive::config_window($in, $current_device);
                                                                                                       gtkset_mousecursor_normal();
                                                                                                   }),
-                                                     0, my $config_button = gtksignal_connect(Gtk2::Button->new(N("Run config tool")),
+                                                     0, my $config_button = gtksignal_connect(Gtk3::Button->new(N("Run config tool")),
                                                                                               # we've a configurator, let's add a button for it and show it
                                                                                               clicked => sub {
                                                                                                   return 1 if defined $pid;
@@ -293,7 +293,7 @@ $text->set_wrap_mode('word');
 $frame->set_size_request(300, 450) unless $::isEmbedded;
 #    $tree->set_column_auto_resize(0, 1);
 my (@data, @configurators);
-$tree->append_column(my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::MDV::CellRendererPixWithLabel->new, 'pixbuf' => 0, label => 1));
+$tree->append_column(my $textcolumn = Gtk3::TreeViewColumn->new_with_attributes(undef, Gtk3::MDV::CellRendererPixWithLabel->new, 'pixbuf' => 0, label => 1));
 $tree->set_headers_visible(0);
 
 sub fill_default_text {
@@ -374,7 +374,7 @@ $tree->get_selection->signal_connect('changed' => sub {
 # show the main window earlier (so that sub dialogs can use main
 # window's icon and so that no Gtk+ critical message got displayed):
 $w->{rwindow}->show_all;
-my $flush_guard = Gtk2::GUI_Update_Guard->new;
+my $flush_guard = Gtk3::GUI_Update_Guard->new;
 $_->hide foreach $module_cfg_button, $config_button; # hide buttons while no device
 my $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
 gtkflush() if !$::isEmbedded;
@@ -516,7 +516,7 @@ $textcolumn->set_min_width(350);
 #$textcolumn->set_minmax_width(400);
 $textcolumn->set_sizing('GTK_TREE_VIEW_COLUMN_AUTOSIZE');#GROW_ONLY
 #$tree->columns_autosize();
-$tree->signal_connect(realize => sub { $tree->get_selection->select_path(Gtk2::TreePath->new_first) });
+$tree->signal_connect(realize => sub { $tree->get_selection->select_path(Gtk3::TreePath->new_first) });
 
 {
     $SIG{CHLD} = undef;

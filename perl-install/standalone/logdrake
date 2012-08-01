@@ -60,12 +60,12 @@ unless ($::isEmbedded) {
 }
 $my_win->{window}->signal_connect(delete_event => \&quit);
 
-my $cal = gtkset_sensitive(Gtk2::Calendar->new, 0);
+my $cal = gtkset_sensitive(Gtk3::Calendar->new, 0);
 my $mday = (localtime(time()))[3];
 $cal->select_day($mday);
 my @months = qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec);
 my $cal_mode = 0;
-my $cal_butt = gtksignal_connect(Gtk2::CheckButton->new(N("Show only for the selected day")), clicked => sub { $cal_mode = !$cal_mode; gtkset_sensitive($cal,$cal_mode) });
+my $cal_butt = gtksignal_connect(Gtk3::CheckButton->new(N("Show only for the selected day")), clicked => sub { $cal_mode = !$cal_mode; gtkset_sensitive($cal,$cal_mode) });
 
 ### menus definition
 # the menus are not shown
@@ -117,9 +117,9 @@ my %files = (
 	     "explanations" => { file => "/var/log/explanations", desc => $explain_title }
 );
 
-my $yy = gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("search")) , clicked => \&search),0);
+my $yy = gtkset_sensitive(gtksignal_connect(Gtk3::Button->new(N("search")) , clicked => \&search),0);
 
-my $log_text = gtktext_insert(Gtk2::TextView->new, [ [ '' ] ]);
+my $log_text = gtktext_insert(Gtk3::TextView->new, [ [ '' ] ]);
 
 my $log_buf = $log_text->get_buffer;
 my $refcount_search;
@@ -128,19 +128,19 @@ my $refcount_search;
 my %toggle;
 
 gtkadd($my_win->{window},
-       gtkpack_(Gtk2::VBox->new(0,0),
+       gtkpack_(Gtk3::VBox->new(0,0),
 		if_(!$::isEmbedded, 0, gtknew('Title1', label => N("A tool to monitor your logs"))),
-		if_(!$isFile, 0, gtkpack__(Gtk2::VBox->new(0,2),
+		if_(!$isFile, 0, gtkpack__(Gtk3::VBox->new(0,2),
                                      gtknew('Title2', label => N("Settings")),
 							      # N("Show lines"),
-							      gtkpack__(Gtk2::HBox->new(0,0),
-									" " . N("Matching") . " ", my $e_yes = Gtk2::Entry->new,
-									" " . N("but not matching") . " ", my $e_no = Gtk2::Entry->new
+							      gtkpack__(Gtk3::HBox->new(0,0),
+									" " . N("Matching") . " ", my $e_yes = Gtk3::Entry->new,
+									" " . N("but not matching") . " ", my $e_no = Gtk3::Entry->new
 									),
-						    gtkpack_(Gtk2::HBox->new(0,0),
-							     1, gtkadd(gtkset_border_width(Gtk2::Frame->new(N("Choose file")),2),
-								       gtkpack(gtkset_border_width(Gtk2::VBox->new(0,0),0),
-										map { $toggle{$_} = gtksignal_connect(Gtk2::CheckButton->new($files{$_}{desc}), 
+						    gtkpack_(Gtk3::HBox->new(0,0),
+							     1, gtkadd(gtkset_border_width(Gtk3::Frame->new(N("Choose file")),2),
+								       gtkpack(gtkset_border_width(Gtk3::VBox->new(0,0),0),
+										map { $toggle{$_} = gtksignal_connect(Gtk3::CheckButton->new($files{$_}{desc}), 
 														      clicked => sub {
 															  $refcount_search++; 
 															  gtkset_sensitive($yy, $refcount_search);
@@ -150,8 +150,8 @@ gtkadd($my_win->{window},
                                                     } sort keys %files,
 										)
 								       ),
-							     0, gtkadd(gtkset_border_width(Gtk2::Frame->new(N("Calendar")),2),
-								       gtkpack__(gtkset_border_width(Gtk2::VBox->new(0,0),5),
+							     0, gtkadd(gtkset_border_width(Gtk3::Frame->new(N("Calendar")),2),
+								       gtkpack__(gtkset_border_width(Gtk3::VBox->new(0,0),5),
 										 $cal_butt, $cal
 										 )
 								       )
@@ -162,8 +162,8 @@ gtkadd($my_win->{window},
 		!$isExplain ? (0, gtknew('Title2', label => N("Content of the file")),
 					   1, create_scrolled_window($log_text)
 					   ) : (1, create_scrolled_window($log_text)),
-		0, gtkadd(gtkset_border_width(gtkset_layout(Gtk2::HButtonBox->new, 'end'), 5),
-					      if_(!$isFile, gtksignal_connect(Gtk2::Button->new(N("Mail alert")), 
+		0, gtkadd(gtkset_border_width(gtkset_layout(Gtk3::HButtonBox->new, 'end'), 5),
+					      if_(!$isFile, gtksignal_connect(Gtk3::Button->new(N("Mail alert")), 
 										clicked => sub { 
                                                       eval { alert_config() };
                                                       my $err = $@;
@@ -174,8 +174,8 @@ gtkadd($my_win->{window},
                                                                      . "\n\n" . $err);
                                                       }
                                                   })),
-					      gtksignal_connect(Gtk2::Button->new(N("Save")), clicked => \&save),
-					      gtksignal_connect(Gtk2::Button->new($::isEmbedded ? N("Cancel") : N("Quit")), clicked => \&quit)
+					      gtksignal_connect(Gtk3::Button->new(N("Save")), clicked => \&save),
+					      gtksignal_connect(Gtk3::Button->new($::isEmbedded ? N("Cancel") : N("Quit")), clicked => \&quit)
 					      )
 		)
        );
@@ -220,10 +220,10 @@ sub parse_file {
   my ($pbar, $win_pb);
   unless ($::isEmbedded && $isExplain) {
       local $::main_window = $my_win->{real_window};
-      gtkadd($win_pb = gtkset_modal(Gtk2::Window->new('toplevel'), 1),
-             gtkpack(Gtk2::VBox->new(2,0),
-                     Gtk2::Label->new(" " . N("please wait, parsing file: %s", $descr) . " "),
-                     $pbar = Gtk2::ProgressBar->new
+      gtkadd($win_pb = gtkset_modal(Gtk3::Window->new('toplevel'), 1),
+             gtkpack(Gtk3::VBox->new(2,0),
+                     Gtk3::Label->new(" " . N("please wait, parsing file: %s", $descr) . " "),
+                     $pbar = Gtk3::ProgressBar->new
                      )
              );
       $win_pb->set_transient_for($my_win->{real_window});
@@ -355,7 +355,7 @@ sub logcolorize {
 }
 
 
-#    log_output (Gtk2::TextView, [ [ ... ] ])
+#    log_output (Gtk3::TextView, [ [ ... ] ])
 sub log_output {
     my ($text, $font, $col) = @_;
     my $tag = join('', $font, $col);

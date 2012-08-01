@@ -71,8 +71,8 @@ sub wait_msg {
     $mainw->{rwindow}->show_all;
     gtkset_mousecursor_wait($mainw->{rwindow}->window);
     # ugly workaround for gtk+ not displaying subdialog contents:
-    Glib::Timeout->add(300, sub { Gtk2->main_quit; 0 });
-    Gtk2->main;
+    Glib::Timeout->add(300, sub { Gtk3->main_quit; 0 });
+    Gtk3->main;
     $mainw;
 }
 
@@ -89,7 +89,7 @@ my $window = $w->{window};
 
 
 ############################ MAIN WINDOW ###################################
-# Set different options to Gtk2::Window
+# Set different options to Gtk3::Window
 unless ($::isEmbedded) {
     $w->{rwindow}->set_position('center');
     $w->{rwindow}->set_title("DrakSec");
@@ -197,7 +197,7 @@ my %descr = (
 ####################### OK CANCEL BUTTONS ##################################
 gtkpack_($vbox,
 	 0, gtkshow(gtknew('VBox', spacing => 5, children => [
-			if_(!$::isEmbedded, 0, Gtk2::Banner->new('/usr/share/mcc/themes/default/drakperm-mdk.png', N("Permissions"))),
+			if_(!$::isEmbedded, 0, Gtk3::Banner->new('/usr/share/mcc/themes/default/drakperm-mdk.png', N("Permissions"))),
 			0, gtknew('Label', text => $auth_string, alignment => [ 0.5, 0 ])
 		])),
          1, gtkshow(create_scrolled_window(

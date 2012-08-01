@@ -48,7 +48,7 @@ sub load_theme() {
     my $rc = "/usr/share/libDrakX/diskdrake.rc";
     -r $rc or $rc = dirname(__FILE__) . "/../diskdrake.rc";
     -r $rc or $rc = dirname(__FILE__) . "/../share/diskdrake.rc";
-    Gtk2::Rc->parse($rc);
+    Gtk3::Rc->parse($rc);
 }
 
 sub main {
@@ -68,16 +68,16 @@ sub main {
 #    updateLoopback();
 
     gtkadd($w->{window},
-	   gtkpack_(Gtk2::VBox->new(0,7),
+	   gtkpack_(Gtk3::VBox->new(0,7),
 		    0, gtknew(($::isInstall ? ('Title1', 'label') : ('Label_Left', 'text'))
                                 => N("Click on a partition, choose a filesystem type then choose an action"),
                               # workaround infamous 6 years old gnome bug #101968:
                               width => mygtk3::get_label_width()
                             ),
-		    1, (my $notebook_widget = Gtk2::Notebook->new),
+		    1, (my $notebook_widget = Gtk3::Notebook->new),
 		    0, (my $per_kind_action_box = gtknew('HButtonBox', layout => 'edge')),
 		    0, (my $per_kind_action_box2 = gtknew('HButtonBox', layout => 'end')),
-		    0, Gtk2::HSeparator->new,
+		    0, Gtk3::HSeparator->new,
 		    0, (my $general_action_box  = gtknew('HBox', spacing => 5)),
 		   ),
 	  );
@@ -150,7 +150,7 @@ sub try_ {
     }
     $update_all->($refresh);
 
-    Gtk2->main_quit if $v && member($name, 'Done');
+    Gtk3->main_quit if $v && member($name, 'Done');
 }
 
 sub get_action_box_size() {
@@ -164,11 +164,11 @@ sub add_kind2notebook {
     my ($notebook_widget, $kind) = @_;
     die if $kind->{main_box};
 
-    $kind->{display_box} = gtkset_size_request(Gtk2::HBox->new(0,0), $width, $height);
-    $kind->{action_box} = gtkset_size_request(Gtk2::VBox->new, get_action_box_size());
-    $kind->{info_box} = Gtk2::VBox->new(0,0);
+    $kind->{display_box} = gtkset_size_request(Gtk3::HBox->new(0,0), $width, $height);
+    $kind->{action_box} = gtkset_size_request(Gtk3::VBox->new, get_action_box_size());
+    $kind->{info_box} = Gtk3::VBox->new(0,0);
     my $box =
-      gtkpack_(Gtk2::VBox->new(0,7),
+      gtkpack_(Gtk3::VBox->new(0,7),
 	       0, $kind->{display_box},
 	       0, filesystems_button_box(),
 	       1, $kind->{info_box});
@@ -203,7 +203,7 @@ sub general_action_box {
 		   N_("Done"));
     my $box_end = gtknew('HButtonBox', layout => 'end', spacing => 5);
     foreach my $s (@actions) {
-	my $button = Gtk2::Button->new(translate($s));
+	my $button = Gtk3::Button->new(translate($s));
 	$done_button = $button if $s eq 'Done';
 	gtkadd($box_end, gtksignal_connect($button, clicked => sub { try($s) }));
     }
@@ -217,12 +217,12 @@ sub per_kind_action_box {
 
     foreach my $s (diskdrake::interactive::hd_possible_actions_base($in)) {
 	gtkadd($box, 
-	       gtksignal_connect(Gtk2::Button->new(translate($s)),
+	       gtksignal_connect(Gtk3::Button->new(translate($s)),
 				 clicked => sub { try($s, kind2hd($kind)) }));
     }
     foreach my $s (diskdrake::interactive::hd_possible_actions_extra($in)) {
 	gtkadd($box2, 
-	       gtksignal_connect(Gtk2::Button->new(translate($s)),
+	       gtksignal_connect(Gtk3::Button->new(translate($s)),
 				 clicked => sub { try($s, kind2hd($kind)) }));
     }
 }
@@ -233,18 +233,18 @@ sub per_entry_action_box {
     if ($entry) {
 	my @buttons = map { 
 	    my $s = $_;
-	    my $w = Gtk2::Button->new(translate($s));
+	    my $w = Gtk3::Button->new(translate($s));
 	    $w->signal_connect(clicked => sub { try($s, kind2hd($kind), $entry) });
 	    $w;
 	} diskdrake::interactive::part_possible_actions($in, kind2hd($kind), $entry, $all_hds);
 
-	gtkadd($box, create_scrolled_window(gtkpack__(Gtk2::VBox->new, @buttons), undef, 'none')) if @buttons;
+	gtkadd($box, create_scrolled_window(gtkpack__(Gtk3::VBox->new, @buttons), undef, 'none')) if @buttons;
     } else {
 	my $txt = !$::isStandalone && fsedit::is_one_big_fat_or_NT($all_hds->{hds}) ?
 N("You have one big Microsoft Windows partition.
 I suggest you first resize that partition
 (click on it, then click on \"Resize\")") : N("Please click on a partition");
-	gtkpack($box, gtktext_insert(Gtk2::TextView->new, $txt));
+	gtkpack($box, gtktext_insert(Gtk3::TextView->new, $txt));
     }
 }
 
@@ -338,7 +338,7 @@ sub create_buttons4partitions {
 	}
 	my $info = $entry->{mntpoint} || $entry->{device_LABEL};
 	$info .= "\n" . ($entry->{size} ? formatXiB($entry->{size}, 512) : N("Unknown")) if $info;
-	my $w = Gtk2::ToggleButton->new_with_label($info) or internal_error('new_with_label');
+	my $w = Gtk3::ToggleButton->new_with_label($info) or internal_error('new_with_label');
 	$w->signal_connect(clicked => sub { 
 	    $current_button != $w or return;
 	    current_entry_changed($kind, $entry); 
@@ -406,7 +406,7 @@ sub filesystems_button_box() {
 		 N_("Other"), N_("Empty"));
     my %name2fs_type = (Ext3 => 'ext3', Ext4 => 'ext4', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
 
-    gtkpack(Gtk2::HBox->new, 
+    gtkpack(Gtk3::HBox->new, 
 	    map {
 		  my $t = $name2fs_type{$_};
                   my $w = gtknew('Button', text => translate($_), widget_name => 'PART_' . ($t || 'empty'),

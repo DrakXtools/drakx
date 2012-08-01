@@ -82,12 +82,12 @@ my @all_drakxtools = qw(adduserdrake diskdrake drakautoinst drakboot drakbug dra
 push @generic_tool, @all_drakxtools, qw(MandrivaUpdate drakbackup drakconnect drakfirewall drakhosts drakmenustyle draknfs draksambashare drakgw drakroam drakvpn keyboarddrake msec mousedrake net_monitor printerdrake urpmi userdrake XFdrake);
 
 my $kernel_release = chomp_(`uname -r`);
-my $mandrake_release = chomp_(cat_('/etc/mandrakelinux-release'));
+my $distro_release = chomp_(cat_('/etc/release'));
 #- unused for now
 #- (my $mandrake_version) = $mandrake_release =~ /(\d+\.\d+)/;
 
-if ($mandrake_release =~ /(official|community)/i) {
-    $distrocode = $mandrake_release;
+if ($distro_release =~ /(official|community)/i) {
+    $distrocode = $distro_release;
     $distrocode =~ s/^.*?(\d+\.\d+) \((\w+)\).*$/$1-\l$2/;
 } else {
     $distrocode = "cooker";
@@ -96,15 +96,15 @@ my $bugzilla_url = 'http://qa.mandriva.com/enter_bug.cgi';
 my $wizard_name = "Bugzilla";
 
 $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
-		          [ gtknew('Label_Left', text => N("Select Mandriva Tool:")), $comb_app = Gtk2::ComboBox->new_text, $comb_app->set_wrap_width(3) ],
+		          [ gtknew('Label_Left', text => N("Select %s Tool:", N("DrakX"))), $comb_app = Gtk3::ComboBox->new_text, $comb_app->set_wrap_width(3) ],
                           [ gtknew('Label_Left', text => N("or Application Name\n(or Full Path):")), 
-			  gtkpack_(Gtk2::HBox->new(0, 5),
-				   1, $com_app = gtkset_editable(Gtk2::Entry->new, 1), 
-				   0, $button_pkg = Gtk2::Button->new(N("Find Package")),
-				   0, $button_browse = Gtk2::FileChooserButton->new(N("Browse"), 'GTK_FILE_CHOOSER_ACTION_OPEN'),
+			  gtkpack_(Gtk3::HBox->new(0, 5),
+				   1, $com_app = gtkset_editable(Gtk3::Entry->new, 1), 
+				   0, $button_pkg = Gtk3::Button->new(N("Find Package")),
+				   0, $button_browse = Gtk3::FileChooserButton->new(N("Browse"), 'GTK_FILE_CHOOSER_ACTION_OPEN'),
 				  ) ],
-			  [ gtknew('Label_Left', text => N("Package: ")), $package = Gtk2::Entry->new_with_text("...") ], # complain on gtk-perl@ml
-			  [ gtknew('Label_Left', text => N("Kernel:")), gtkset_editable(Gtk2::Entry->new_with_text($kernel_release), 0) ]
+			  [ gtknew('Label_Left', text => N("Package: ")), $package = Gtk3::Entry->new_with_text("...") ], # complain on gtk-perl@ml
+			  [ gtknew('Label_Left', text => N("Kernel:")), gtkset_editable(Gtk3::Entry->new_with_text($kernel_release), 0) ]
                          );
 $comb_app->set_popdown_strings("", uniq(sort(@generic_tool), if_($prog, $prog)));
 $comb_app->set_text("");
@@ -127,8 +127,8 @@ my $parent_uid = get_parent_uid();
 
 my $width = 600;
 gtkadd($window->{window},
-       gtkpack_(Gtk2::VBox->new(0, 5),
-                0, gtknew('Title1', label => $mandrake_release, width => $width),
+       gtkpack_(Gtk3::VBox->new(0, 5),
+                0, gtknew('Title1', label => $distro_release, width => $width),
                 1, create_scrolled_window(
                     gtknew('TextView', editable => 0, height => 150,
                            text => [
@@ -167,15 +167,15 @@ gtkadd($window->{window},
 		if_(!$error,
                     0, gtkadd($table),
                 ),
-		0, gtkpack(Gtk2::HSeparator->new),
+		0, gtkpack(Gtk3::HSeparator->new),
 		0, gtkpack(create_hbox('edge'),
                            gtksignal_connect(
-                               Gtk2::Button->new(N("Help")), clicked => sub {
+                               Gtk3::Button->new(N("Help")), clicked => sub {
                                    run_program::raw({ detach => 1, setuid => $parent_uid }, 'drakhelp', '--id', 'drakbug');
                                }),
                            gtkpack(create_hbox('end'),
-                                   gtksignal_connect(Gtk2::Button->new(N("Report")), clicked => \&report_bug_to_bugzilla),
-                                   gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk3->exit(0) }),
+                                   gtksignal_connect(Gtk3::Button->new(N("Report")), clicked => \&report_bug_to_bugzilla),
+                                   gtksignal_connect(Gtk3::Button->new(N("Close")), clicked => sub { ugtk3->exit(0) }),
                                ))));
 
 if (defined $prog) {

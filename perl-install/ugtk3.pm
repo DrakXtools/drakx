@@ -38,7 +38,7 @@ use log;
 use common;
 use mygtk3 qw(gtknew); #- do not import gtkadd which conflicts with ugtk3 version
 
-use Gtk2;
+use Gtk3;
 
 
 $border = 5;
@@ -146,7 +146,7 @@ sub gtkradio {
     my $def = shift;
     my $radio;
     map {
-        my $w = gtkset_active($radio = Gtk2::RadioButton->new_with_label($radio ? $radio->get_group : undef, $_), $_ eq $def);
+        my $w = gtkset_active($radio = Gtk3::RadioButton->new_with_label($radio ? $radio->get_group : undef, $_), $_ eq $def);
         $w->get_child->set_line_wrap(1);
         $w;
       } @_;
@@ -170,7 +170,7 @@ sub gtkcombo_setpopdown_strings {
 
 sub gtkset_mousecursor {
     my ($type, $w) = @_;
-    ($w || gtkroot())->set_cursor(Gtk2::Gdk::Cursor->new($type));
+    ($w || gtkroot())->set_cursor(Gtk3::Gdk::Cursor->new($type));
     $w;
 }
 
@@ -268,7 +268,7 @@ sub create_pixbutton {
 
 sub create_adjustment {
     my ($val, $min, $max) = @_;
-    Gtk2::Adjustment->new($val, $min, $max + 1, 1, ($max - $min + 1) / 10, 1);
+    Gtk3::Adjustment->new($val, $min, $max + 1, 1, ($max - $min + 1) / 10, 1);
 }
 
 sub create_scrolled_window {
@@ -286,7 +286,7 @@ sub n_line_size {
 
 # Glib::Markup::escape_text() if no use for us because it'll do extra
 # s/X/&foobar;/ (such as s/'/&apos;/) that are suitable for
-# Gtk2::Labels but are not for Gtk2::TextViews, resulting in
+# Gtk3::Labels but are not for Gtk3::TextViews, resulting in
 # displaying the raw enriched text instead...
 #
 sub escape_text_for_TextView_markup_format {
@@ -403,7 +403,7 @@ sub create_dialog {
     gtkpack($dialog->vbox,
             gtknew('HBox', children => [
                      if_($o_options->{stock},
-                         0, Gtk2::Image->new_from_stock($o_options->{stock}, 'dialog'),
+                         0, Gtk3::Image->new_from_stock($o_options->{stock}, 'dialog'),
                          0, gtknew('Label', text => "   "),
                         ),
                      1, $o_options->{scroll} ? create_scrolled_window($text, [ 'never', 'automatic' ]) : $text,
@@ -413,19 +413,19 @@ sub create_dialog {
     if ($o_options->{cancel}) {
 	$dialog->action_area->pack_start(
 	    gtknew('Button', text => N("Cancel"),
-		   clicked => sub { $ret = 0; $dialog->destroy; Gtk2->main_quit },
+		   clicked => sub { $ret = 0; $dialog->destroy; Gtk3->main_quit },
 		   can_default => 1), 
 	    1, 1, 0);
     }
 
     my $button = gtknew('Button', text => N("Ok"), can_default => 1,
-			clicked => sub { $ret = 1; $dialog->destroy; Gtk2->main_quit });
+			clicked => sub { $ret = 1; $dialog->destroy; Gtk3->main_quit });
     $dialog->action_area->pack_start($button, 1, 1, 0);
     $button->grab_default;
 
     $dialog->set_has_separator(0);
     $dialog->show_all;
-    Gtk2->main;
+    Gtk3->main;
     $ret;
 }
 
@@ -455,19 +455,19 @@ sub create_vbox { gtknew('VButtonBox', layout => $_[0]) }
 
 sub create_factory_menu_ {
     my ($type, $name, $window, @menu_items) = @_;
-    my $widget = Gtk2::ItemFactory->new($type, $name, my $accel_group = Gtk2::AccelGroup->new);
+    my $widget = Gtk3::ItemFactory->new($type, $name, my $accel_group = Gtk3::AccelGroup->new);
     $widget->create_items($window, @menu_items);
     $window->add_accel_group($accel_group);
     ($widget->get_widget($name), $widget);
 }
 
-sub create_factory_popup_menu { create_factory_menu_("Gtk2::Menu", '<main>', @_) }
-sub create_factory_menu { create_factory_menu_("Gtk2::MenuBar", '<main>', @_) }
+sub create_factory_popup_menu { create_factory_menu_("Gtk3::Menu", '<main>', @_) }
+sub create_factory_menu { create_factory_menu_("Gtk3::MenuBar", '<main>', @_) }
 
 sub create_menu {
     my $title = shift;
-    my $w = Gtk2::MenuItem->new($title);
-    $w->set_submenu(gtkshow(gtkappend(Gtk2::Menu->new, @_)));
+    my $w = Gtk3::MenuItem->new($title);
+    $w->set_submenu(gtkshow(gtkappend(Gtk3::Menu->new, @_)));
     $w;
 }
 
@@ -482,7 +482,7 @@ sub create_notebook {
 
 sub create_packtable {
     my ($options, @l) = @_;
-    my $w = Gtk2::Table->new(0, 0, $options->{homogeneous} || 0);
+    my $w = Gtk3::Table->new(0, 0, $options->{homogeneous} || 0);
     add2hash_($options, { xpadding => 5, ypadding => 0 });
     each_index {
 	my ($i, $l) = ($::i, $_);
@@ -494,7 +494,7 @@ sub create_packtable {
 		  $w->attach($_, $j, $j + 1, $i, $i + 1,
 			     'fill', 'fill', $options->{xpadding}, $options->{ypadding}) :
 		  $w->attach($_, $j, $j + 1, $i, $i + 1,
-			     ['expand', 'fill'], ref($_) eq 'Gtk2::ScrolledWindow' || $_->get_data('must_grow') ? ['expand', 'fill'] : [], 0, 0);
+			     ['expand', 'fill'], ref($_) eq 'Gtk3::ScrolledWindow' || $_->get_data('must_grow') ? ['expand', 'fill'] : [], 0, 0);
 		$_->show;
 	    }
 	} @$l;
@@ -517,11 +517,11 @@ sub create_okcancel {
         $cancel = $::isWizard ? N("Previous") : N("Cancel");
     }
     my $ok = defined $o_ok ? $o_ok : $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next")) : N("Ok");
-    my $bok = $ok && ($w->{ok} = gtknew('Button', text => $ok, clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit }));
+    my $bok = $ok && ($w->{ok} = gtknew('Button', text => $ok, clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk3->main_quit }));
     my $bprev;
     if ($cancel) {
         $bprev = $w->{cancel} = gtknew('Button', text => $cancel, clicked => $w->{cancel_clicked} || 
-                                   sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
+                                   sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk3->main_quit });
     }
     $w->{wizcancel} = gtknew('Button', text =>  ($::Wizard_skip ? N("Skip") : N("Cancel")), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall && !$::Wizard_no_cancel;
     if (!defined $wm_is_kde) {
@@ -529,7 +529,7 @@ sub create_okcancel {
         my $wm = any::running_window_manager();
         $wm_is_kde = !$::isInstall && ($wm eq "kwin" || $wm eq "compiz" && fuzzy_pidofs(qr/\bkde-window-decorator\b/)) || 0;
     }
-    my $f = sub { $w->{buttons}{$_[0][0]} = ref($_[0][0]) =~ /Gtk2::Button/ ?
+    my $f = sub { $w->{buttons}{$_[0][0]} = ref($_[0][0]) =~ /Gtk3::Button/ ?
                     $_[0][0] :
                     gtknew('Button', text => $_[0][0], clicked => $_[0][1]) };
     my @left  = ((map { $f->($_) } grep {  $_->[2] && !$_->[3] } @other),
@@ -580,11 +580,11 @@ sub _setup_paned {
 }
 
 sub create_vpaned {
-    _setup_paned(Gtk2::VPaned->new, @_);
+    _setup_paned(Gtk3::VPaned->new, @_);
 }
 
 sub create_hpaned {
-    _setup_paned(Gtk2::HPaned->new, @_);
+    _setup_paned(Gtk3::HPaned->new, @_);
 }
 
 sub gtkcreate_frame {
@@ -674,7 +674,7 @@ sub set_back_pixbuf {
     my ($widget, $pixbuf) = @_;
     my $window = $widget->window;
     my ($width, $height) = ($pixbuf->get_width, $pixbuf->get_height);
-    my $pixmap = Gtk2::Gdk::Pixmap->new($window, $width, $height, $window->get_depth);
+    my $pixmap = Gtk3::Gdk::Pixmap->new($window, $width, $height, $window->get_depth);
     $pixbuf->render_to_drawable($pixmap, $widget->style->fg_gc('normal'), 0, 0, 0, 0, $width, $height, 'max', 0, 0);
     $window->set_back_pixmap($pixmap, 0);
 }
@@ -683,7 +683,7 @@ sub set_back_pixmap {
     my ($w) = @_;
     return if !$w->realized;
     my $window = $w->window;
-    my $pixmap = $w->{back_pixmap} ||= Gtk2::Gdk::Pixmap->new($window, 1, 2, $window->get_depth);
+    my $pixmap = $w->{back_pixmap} ||= Gtk3::Gdk::Pixmap->new($window, 1, 2, $window->get_depth);
 
     my $style = $w->get_style;
     $pixmap->draw_points($style->bg_gc('normal'), 0, 0);
@@ -741,7 +741,7 @@ sub new {
 	title => $title || '',
 	pop_it => $o->{pop_it},
 	$::isInstall ? (banner => gtknew('Install_Title', text => $title || get_default_step_items())) : (),
-	$::isStandalone && $banner_title && $icon ? (banner => Gtk2::Banner->new($icon, $banner_title)) : (),
+	$::isStandalone && $banner_title && $icon ? (banner => Gtk3::Banner->new($icon, $banner_title)) : (),
 	width => $opts{width}, height => $opts{height}, default_width => $opts{default_width}, default_height => $opts{default_height}, 
 	modal => (!$o->{pop_it} && !$::isInstall) && ($opts{modal} || $grab || $o->{grab}) || $o->{modal},
 	no_Window_Manager => exists $opts{no_Window_Manager} ? $opts{no_Window_Manager} : !$::isStandalone,
@@ -785,7 +785,7 @@ sub sync {
 sub flush() { gtkflush() }
 sub shrink_topwindow {
     my ($o) = @_;
-    $o->{real_window}->signal_emit('size_allocate', Gtk2::Gdk::Rectangle->new(-1, -1, -1, -1));
+    $o->{real_window}->signal_emit('size_allocate', Gtk3::Gdk::Rectangle->new(-1, -1, -1, -1));
 }
 sub exit {
     gtkset_mousecursor_normal(); #- for restoring a normal in any case
@@ -816,9 +816,9 @@ sub ask_dir        { my $w = ugtk3->new(shift @_, grab => 1); $w->_ask_dir(@_); 
 sub _ask_from_entry($$@) {
     my ($o, @msgs) = @_;
     my $entry = gtknew('Entry');
-    my $f = sub { $o->{retval} = $entry->get_text; Gtk2->main_quit };
+    my $f = sub { $o->{retval} = $entry->get_text; Gtk3->main_quit };
     $o->{ok_clicked} = $f;
-    $o->{cancel_clicked} = sub { undef $o->{retval}; Gtk2->main_quit };
+    $o->{cancel_clicked} = sub { undef $o->{retval}; Gtk3->main_quit };
 
     gtkadd($o->{window},
 	  gtkpack($o->create_box_with_title(@msgs),
@@ -832,7 +832,7 @@ sub _ask_warn($@) {
     my ($o, @msgs) = @_;
     gtkadd($o->{window},
 	  gtkpack($o->create_box_with_title(@msgs),
-		  my $w = gtknew('Button', text => N("Ok"), clicked => sub { Gtk2->main_quit }),
+		  my $w = gtknew('Button', text => N("Ok"), clicked => sub { Gtk3->main_quit }),
 		 ),
 	  );
     $w->grab_focus;
@@ -903,12 +903,12 @@ sub ask_browse_tree_info {
 
     my $w = ugtk3->new($common->{title});
 
-    my $tree_model = Gtk2::TreeStore->new("Glib::String", "Gtk2::Gdk::Pixbuf", "Glib::String");
-    my $tree = Gtk2::TreeView->new_with_model($tree_model);
+    my $tree_model = Gtk3::TreeStore->new("Glib::String", "Gtk3::Gdk::Pixbuf", "Glib::String");
+    my $tree = Gtk3::TreeView->new_with_model($tree_model);
     $tree->get_selection->set_mode('browse');
-    $tree->append_column(my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
-    $tree->append_column(my $pixcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 1));
-    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 2));
+    $tree->append_column(my $textcolumn = Gtk3::TreeViewColumn->new_with_attributes(undef, Gtk3::CellRendererText->new, 'text' => 0));
+    $tree->append_column(my $pixcolumn  = Gtk3::TreeViewColumn->new_with_attributes(undef, Gtk3::CellRendererPixbuf->new, 'pixbuf' => 1));
+    $tree->append_column(Gtk3::TreeViewColumn->new_with_attributes(undef, Gtk3::CellRendererText->new, 'text' => 2));
     $tree->set_headers_visible(0);
     $tree->set_rules_hint(1);
     $textcolumn->set_min_width(200);
@@ -924,20 +924,20 @@ sub ask_browse_tree_info {
 			       0, gtknew('Frame', text => N("Info"), child =>
 				      gtknew('ScrolledWindow', child => my $info = gtknew('TextView', editable => 0, height => 100)),
 				     ) ]),
-		    0, Gtk2::HSeparator->new,
+		    0, Gtk3::HSeparator->new,
 		    0, my $status = gtknew('Label'),
 		    if_($common->{auto_deps},
 		        0, gtknew('CheckButton', text => $common->{auto_deps}, active_ref => \$common->{state}{auto_deps})
 		    ),
-		    0, Gtk2::HSeparator->new,
+		    0, Gtk3::HSeparator->new,
 		    0, my $box2 = gtknew('HBox', spacing => 10),
 		   ]));
 
     gtkpack__($box2, gtknew(($::isInstall ? 'Install_Button' : 'Button'), text => N("Help"),
                             clicked => $common->{interactive_help})) if $common->{interactive_help};
 
-    #gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new('horizontal', 'icons'));
-    gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new);
+    #gtkpack__($box2, my $toolbar = Gtk3::Toolbar->new('horizontal', 'icons'));
+    gtkpack__($box2, my $toolbar = Gtk3::Toolbar->new);
 
     my @l = ([ $common->{ok}, 1 ], if_($common->{cancel}, [ $common->{cancel}, 0 ]));
     @l = reverse @l if !$::isInstall;
@@ -945,7 +945,7 @@ sub ask_browse_tree_info {
 	my ($t, $val) = @$_;
 	$box2->pack_end(my $w = gtknew('Button', text => $t, clicked => sub {
 					   $w->{retval} = $val;
-					   Gtk2->main_quit;
+					   Gtk3->main_quit;
 				       }), 0, 1, 20);
 	$w->show;
 	$w;
@@ -1239,7 +1239,7 @@ sub gtk_new_TextView_get_log {
 
 # misc helpers:
 
-package Gtk2::TreeStore;
+package Gtk3::TreeStore;
 sub append_set {
     my ($model, $parent, @values) = @_;
     # compatibility:
@@ -1250,7 +1250,7 @@ sub append_set {
 }
 
 
-package Gtk2::ListStore;
+package Gtk3::ListStore;
 # Append a new row, set the values, return the TreeIter
 sub append_set {
     my ($model, @values) = @_;
@@ -1262,7 +1262,7 @@ sub append_set {
 }
 
 
-package Gtk2::TreeModel;
+package Gtk3::TreeModel;
 # gets the string representation of a TreeIter
 sub get_path_str {
     my ($self, $iter) = @_;
@@ -1278,7 +1278,7 @@ sub iter_each_children {
     }
 }
 
-package Gtk2::TreeView;
+package Gtk3::TreeView;
 # likewise gtk-1.2 function
 sub toggle_expansion {
     my ($self, $path, $b_open_all) = @_;
@@ -1309,17 +1309,17 @@ sub toggle_expansion {
 # This layer try to make OptionMenu and ComboBox look being api
 # compatible with Combo since its API is quite nice.
 
-package Gtk2::OptionMenu;
+package Gtk3::OptionMenu;
 use MDK::Common;
 
 # try to get combox <==> option menu mapping
 sub set_popdown_strings {
     my ($w, @strs) = @_;
-    my $menu = Gtk2::Menu->new;
+    my $menu = Gtk3::Menu->new;
     # keep string list around for ->set_text compatibilty helper
     $w->{strings} = \@strs;
     #$w->set_menu((ugtk3::create_factory_menu($window, [ "File", (undef) x 3, '<Branch>' ], map { [ "File/" . $_, (undef) x 3, '<Item>' ] } @strs))[0]);
-    $menu->append(ugtk3::gtkshow(Gtk2::MenuItem->new_with_label($_))) foreach @strs;
+    $menu->append(ugtk3::gtkshow(Gtk3::MenuItem->new_with_label($_))) foreach @strs;
     $w->set_menu($menu);
     $w;
 }
@@ -1355,7 +1355,7 @@ sub set_text {
 
 
 
-package Gtk2::ComboBox;
+package Gtk3::ComboBox;
 use MDK::Common;
 
 # try to get combox <==> option menu mapping
@@ -1396,28 +1396,28 @@ sub set_text {
 }
 
 
-package Gtk2::Label;
+package Gtk3::Label;
 sub set {
     my ($label, $text) = @_;
     mygtk3::gtkset($label, text => $text);
 }
 
 
-package Gtk2::WrappedLabel;
+package Gtk3::WrappedLabel;
 sub new {
     my ($_type, $o_text, $o_align) = @_;
     mygtk3::gtknew('WrappedLabel', text => $o_text || '', alignment => [ $o_align || 0, 0.5 ]);
 }
 
 
-package Gtk2::Entry;
+package Gtk3::Entry;
 sub new_with_text {
     my ($_class, $o_text) = @_;
     mygtk3::gtknew('Entry', text => $o_text);
 }
 
 
-package Gtk2::Banner;
+package Gtk3::Banner;
 
 use MDK::Common;
 use mygtk3 qw(gtknew);
@@ -1484,13 +1484,13 @@ sub new {
 }
 
 
-package Gtk2::MDV::CellRendererPixWithLabel;
+package Gtk3::MDV::CellRendererPixWithLabel;
 
 use MDK::Common;
-use Glib::Object::Subclass "Gtk2::CellRenderer",
+use Glib::Object::Subclass "Gtk3::CellRenderer",
   properties => [
       Glib::ParamSpec->string("label", "Label", "A meaningfull label", "", [qw(readable writable)]),
-      Glib::ParamSpec->object("pixbuf", "Pixbuf file", "Something nice to display", 'Gtk2::Gdk::Pixbuf', [qw(readable writable)]),
+      Glib::ParamSpec->object("pixbuf", "Pixbuf file", "Something nice to display", 'Gtk3::Gdk::Pixbuf', [qw(readable writable)]),
   ];
 
 my $x_padding = 2;
@@ -1574,12 +1574,12 @@ sub RENDER { # not that efficient...
 1;
 
 
-package Gtk2::Notify::Queue;
+package Gtk3::Notify::Queue;
 
 sub new {
     my ($class, $statusicon) = @_;
 
-    require Gtk2::Notify;
+    require Gtk3::Notify;
 
     my $self = bless {
         queue => [],
@@ -1604,9 +1604,9 @@ sub add {
 }
 
 sub show {
-    my ($self) = @_; # perl_checker: $self = Gtk2::Notify->new
+    my ($self) = @_; # perl_checker: $self = Gtk3::Notify->new
     my $info = $self->{queue}[0];
-    my $notification = Gtk2::Notify->new($info->{title}, $info->{message}, $self->{statusicon});
+    my $notification = Gtk3::Notify->new($info->{title}, $info->{message}, $self->{statusicon});
     $notification->set_icon_from_pixbuf($info->{pixbuf}) if $info->{pixbuf};
     $notification->set_urgency($info->{urgency}) if $info->{urgency};
     foreach my $a (@{$info->{actions} || []}) {
@@ -1630,7 +1630,7 @@ sub show {
 1;
 
 
-package Gtk2::GUI_Update_Guard;
+package Gtk3::GUI_Update_Guard;
 
 use MDK::Common::Func qw(before_leaving);
 use ugtk3;

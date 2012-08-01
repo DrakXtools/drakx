@@ -11,13 +11,13 @@ use c;
 use log;
 use common;
 
-use Gtk2;
+use Gtk3;
 
 sub init() {
     !check_for_xserver() and print("Cannot be run in console mode.\n"), c::_exit(0);
     $::one_message_has_been_translated and warn("N() was called from $::one_message_has_been_translated BEFORE gtk3 initialisation, replace it with a N_() AND a translate() later.\n"), c::_exit(1);
 
-    Gtk2->init;
+    Gtk3->init;
     Locale::gettext::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', if_(!$::isInstall, 'libDrakX-standalone'),
         if_($::isRestore, 'draksnapshot'), if_($::isInstall, 'urpmi'),
         'drakx-net', 'drakx-kbd-mouse-x11', # shared translation
@@ -52,7 +52,7 @@ sub gtkset {
     }
     my %opts = @_;
 
-    $class =~ s/^(Gtk2|Gtk2::Gdk|mygtk3)::// or internal_error("gtkset unknown class $class");
+    $class =~ s/^(Gtk3|Gtk3::Gdk|mygtk3)::// or internal_error("gtkset unknown class $class");
     
     _gtk($w, $class, 'gtkset', \%opts);
 }
@@ -67,7 +67,7 @@ sub gtkadd {
 	internal_error("gtkadd $class: $r should be a string in @_");
     }
     my %opts = @_;
-    $class =~ s/^(Gtk2|Gtk2::Gdk|mygtk3)::// or internal_error("gtkadd unknown class $class");
+    $class =~ s/^(Gtk3|Gtk3::Gdk|mygtk3)::// or internal_error("gtkadd unknown class $class");
     
     _gtk($w, $class, 'gtkadd', \%opts);
 }
@@ -122,7 +122,7 @@ sub _gtk {
     $w->signal_connect(realize => delete $opts->{realize}) if exists $opts->{realize};
     (delete $opts->{size_group})->add_widget($w) if $opts->{size_group};
     if (my $tip = delete $opts->{tip}) {
-	$global_tooltips ||= Gtk2::Tooltips->new;
+	$global_tooltips ||= Gtk3::Tooltips->new;
 	$global_tooltips->set_tip($w, $tip);
     }
 
@@ -170,10 +170,10 @@ sub _gtk_any_Button {
         if ($class eq 'RadioButton') {
             @radio_options = delete $opts->{group};
 	}
-	$w = $opts->{child} ? "Gtk2::$class"->new(@radio_options) :
-	  delete $opts->{mnemonic} ? "Gtk2::$class"->new_with_mnemonic(@radio_options, delete $opts->{text} || '') :
-	    $opts->{text} ? "Gtk2::$class"->new_with_label(@radio_options, delete $opts->{text} || '') :
-           "Gtk2::$class"->new(@radio_options);
+	$w = $opts->{child} ? "Gtk3::$class"->new(@radio_options) :
+	  delete $opts->{mnemonic} ? "Gtk3::$class"->new_with_mnemonic(@radio_options, delete $opts->{text} || '') :
+	    $opts->{text} ? "Gtk3::$class"->new_with_label(@radio_options, delete $opts->{text} || '') :
+           "Gtk3::$class"->new(@radio_options);
 
 	$w->{format} = delete $opts->{format} if exists $opts->{format};
     }
@@ -223,9 +223,9 @@ sub _gtk__CheckMenuItem {
     if (!$w) {
 	add2hash_($opts, { mnemonic => 1 });
 
-	$w = $opts->{image} || !exists $opts->{text} ? "Gtk2::$class"->new :
-	  delete $opts->{mnemonic} ? "Gtk2::$class"->new_with_label(delete $opts->{text}) :
-	    "Gtk2::$class"->new_with_mnemonic(delete $opts->{text});
+	$w = $opts->{image} || !exists $opts->{text} ? "Gtk3::$class"->new :
+	  delete $opts->{mnemonic} ? "Gtk3::$class"->new_with_label(delete $opts->{text}) :
+	    "Gtk3::$class"->new_with_mnemonic(delete $opts->{text});
     }
 
     $w->set_active(delete $opts->{active}) if exists $opts->{active};
@@ -239,9 +239,9 @@ sub _gtk__SpinButton {
     if (!$w) {
 	$opts->{adjustment} ||= do {
 	    add2hash_($opts, { step_increment => 1, page_increment => 5, page_size => 1, value => delete $opts->{lower} });
-	    Gtk2::Adjustment->new(delete $opts->{value}, delete $opts->{lower}, delete $opts->{upper}, delete $opts->{step_increment}, delete $opts->{page_increment}, delete $opts->{page_size});
+	    Gtk3::Adjustment->new(delete $opts->{value}, delete $opts->{lower}, delete $opts->{upper}, delete $opts->{step_increment}, delete $opts->{page_increment}, delete $opts->{page_size});
 	};
-	$w = Gtk2::SpinButton->new(delete $opts->{adjustment}, delete $opts->{climb_rate} || 0, delete $opts->{digits} || 0);
+	$w = Gtk3::SpinButton->new(delete $opts->{adjustment}, delete $opts->{climb_rate} || 0, delete $opts->{digits} || 0);
     }
 
     $w->signal_connect(value_changed => delete $opts->{value_changed}) if exists $opts->{value_changed};
@@ -255,9 +255,9 @@ sub _gtk__HScale {
 	$opts->{adjustment} ||= do {
 	    add2hash_($opts, { step_increment => 1, page_increment => 5, page_size => 1 });
 	    add2hash_($opts, { value => $opts->{lower} }) if !exists $opts->{value};
-	    Gtk2::Adjustment->new(delete $opts->{value}, delete $opts->{lower}, (delete $opts->{upper}) + 1, delete $opts->{step_increment}, delete $opts->{page_increment}, delete $opts->{page_size});
+	    Gtk3::Adjustment->new(delete $opts->{value}, delete $opts->{lower}, (delete $opts->{upper}) + 1, delete $opts->{step_increment}, delete $opts->{page_increment}, delete $opts->{page_size});
 	};
-	$w = Gtk2::HScale->new(delete $opts->{adjustment});
+	$w = Gtk3::HScale->new(delete $opts->{adjustment});
     }
 
     $w->set_digits(delete $opts->{digits}) if exists $opts->{digits};
@@ -277,7 +277,7 @@ sub _gtk__ProgressBar {
     my ($w, $opts) = @_;
 
     if (!$w) {
-	$w = Gtk2::ProgressBar->new;
+	$w = Gtk3::ProgressBar->new;
     }
 
     if (my $fraction_ref = delete $opts->{fraction_ref}) {
@@ -299,7 +299,7 @@ sub _gtk__DrawingArea {
     my ($w, $_opts) = @_;
 
     if (!$w) {
-	$w = Gtk2::DrawingArea->new;
+	$w = Gtk3::DrawingArea->new;
     }
     $w;
 }
@@ -311,9 +311,9 @@ sub _gtk__Pixbuf {
 	my $name = delete $opts->{file} or internal_error("missing file");
 	my $file = _find_imgfile($name) or internal_error("cannot find image $name");
 	if (my $size = delete $opts->{size}) {
-	    $w = Gtk2::Gdk::Pixbuf->new_from_file_at_scale($file, $size, $size, 1);
+	    $w = Gtk3::Gdk::Pixbuf->new_from_file_at_scale($file, $size, $size, 1);
 	} else {
-	    $w = Gtk2::Gdk::Pixbuf->new_from_file($file);
+	    $w = Gtk3::Gdk::Pixbuf->new_from_file($file);
 	}
         $w = $w->flip(1) if delete $opts->{flip};
     }
@@ -328,7 +328,7 @@ sub _gtk__Image {
     my ($w, $opts, $class) = @_;
 
     if (!$w) {
-	$w = Gtk2::Image->new;
+	$w = Gtk3::Image->new;
 	$w->{format} = delete $opts->{format} if exists $opts->{format};
         
         $w->set_from_stock(delete $opts->{stock}, 'button') if exists $opts->{stock};
@@ -414,7 +414,7 @@ sub _gtk__Label {
     if ($w) {
 	$w->set_text(delete $opts->{text}) if exists $opts->{text};
     } else {
-	$w = exists $opts->{text} ? Gtk2::Label->new(delete $opts->{text}) : Gtk2::Label->new;
+	$w = exists $opts->{text} ? Gtk3::Label->new(delete $opts->{text}) : Gtk3::Label->new;
 	$w->set_selectable(delete $opts->{selectable}) if exists $opts->{selectable};
 	$w->set_ellipsize(delete $opts->{ellipsize}) if exists $opts->{ellipsize};
 	$w->set_justify(delete $opts->{justify}) if exists $opts->{justify};
@@ -444,7 +444,7 @@ sub _gtk__Alignment {
     my ($w, $_opts) = @_;
 
     if (!$w) {
-	$w = Gtk2::Alignment->new(0, 0, 0, 0);
+	$w = Gtk3::Alignment->new(0, 0, 0, 0);
     }
     $w;
 }
@@ -472,7 +472,7 @@ sub _gtk__Install_Title {
         0, gtknew('Label', padding => [ 6, 0 ]),
         1, gtknew('VBox', widget_name => 'Banner', children_tight => [
             _gtk__Title2($w, $opts),
-            if_($::isInstall, Gtk2::HSeparator->new),
+            if_($::isInstall, Gtk3::HSeparator->new),
         ]),
         0, gtknew('Label', padding => [ 6, 0 ]),
     ]);
@@ -495,9 +495,9 @@ sub _gtk__Title2 {
 sub _gtk__Sexy_IconEntry {
     my ($w, $opts) = @_;
 
-    require Gtk2::Sexy;
+    require Gtk3::Sexy;
     if (!$w) {
-	$w = Gtk2::Sexy::IconEntry->new;
+	$w = Gtk3::Sexy::IconEntry->new;
 	$w->set_editable(delete $opts->{editable}) if exists $opts->{editable};
     }
 
@@ -521,7 +521,7 @@ sub _gtk__Entry {
     my ($w, $opts) = @_;
 
     if (!$w) {
-	$w = Gtk2::Entry->new;
+	$w = Gtk3::Entry->new;
 	$w->set_editable(delete $opts->{editable}) if exists $opts->{editable};
     }
 
@@ -573,7 +573,7 @@ sub _gtk__TextView {
     my ($w, $opts, $_class, $action) = @_;
 	
     if (!$w) {
-	$w = Gtk2::TextView->new;
+	$w = Gtk3::TextView->new;
 	$w->set_editable(delete $opts->{editable}) if exists $opts->{editable};
 	$w->set_wrap_mode(delete $opts->{wrap_mode}) if exists $opts->{wrap_mode};
 	$w->set_cursor_visible(delete $opts->{cursor_visible}) if exists $opts->{cursor_visible};
@@ -586,7 +586,7 @@ sub _gtk__TextView {
 sub _gtk__WebKit_View {
     my ($w, $opts, $_class, $_action) = @_;
     if (!$w) {
-        $w = Gtk2::WebKit::WebView->new;
+        $w = Gtk3::WebKit::WebView->new;
     }
 
     # disable contextual menu:
@@ -605,14 +605,14 @@ sub _gtk__ComboBox {
     my ($w, $opts, $_class, $action) = @_;
 
     if (!$w) {
-	$w = Gtk2::ComboBox->new_text;
+	$w = Gtk3::ComboBox->new_text;
 	$w->{format} = delete $opts->{format} if exists $opts->{format};
 
     }
     my $set_list = sub {
 	$w->{formatted_list} = $w->{format} ? [ map { $w->{format}($_) } @{$w->{list}} ] : $w->{list};
 	$w->get_model->clear;
-	$w->{strings} = $w->{formatted_list};  # used by Gtk2::ComboBox wrappers such as get_text() in ugtk3
+	$w->{strings} = $w->{formatted_list};  # used by Gtk3::ComboBox wrappers such as get_text() in ugtk3
 	$w->append_text($_) foreach @{$w->{formatted_list}};
     };
     if (my $list_ref = delete $opts->{list_ref}) {
@@ -653,29 +653,29 @@ sub _gtk__ScrolledWindow {
     my ($w, $opts, $_class, $action) = @_;
 	
     if (!$w) {
-	$w = Gtk2::ScrolledWindow->new(undef, undef);
+	$w = Gtk3::ScrolledWindow->new(undef, undef);
 	$w->set_policy(delete $opts->{h_policy} || 'automatic', delete $opts->{v_policy} || 'automatic');
     }
 
     my $faked_w = $w;
 
     if (my $child = delete $opts->{child}) {
-	if (member(ref($child), qw(Gtk2::Layout Gtk2::Html2::View  Gtk2::SimpleList Gtk2::SourceView::View Gtk2::Text Gtk2::TextView Gtk2::TreeView Gtk2::WebKit::WebView))) {
+	if (member(ref($child), qw(Gtk3::Layout Gtk3::Html2::View  Gtk3::SimpleList Gtk3::SourceView::View Gtk3::Text Gtk3::TextView Gtk3::TreeView Gtk3::WebKit::WebView))) {
 	    $w->add($child);
 	} else {
 	    $w->add_with_viewport($child);
 	}
 	$child->set_focus_vadjustment($w->get_vadjustment) if $child->can('set_focus_vadjustment');
-	$child->set_left_margin(6) if ref($child) =~ /Gtk2::TextView/ && $child->get_left_margin <= 6;
+	$child->set_left_margin(6) if ref($child) =~ /Gtk3::TextView/ && $child->get_left_margin <= 6;
 	$child->show;
 
 	$w->child->set_shadow_type(delete $opts->{shadow_type}) if exists $opts->{shadow_type};
 
-	if (ref($child) eq 'Gtk2::TextView' && delete $opts->{to_bottom}) {
+	if (ref($child) eq 'Gtk3::TextView' && delete $opts->{to_bottom}) {
 	    $child->{to_bottom} = _allow_scroll_TextView_to_bottom($w, $child);
 	}
 
-	if (!delete $opts->{no_shadow} && $action eq 'gtknew' && ref($child) =~ /Gtk2::(Html2|SimpleList|TextView|TreeView|WebKit::WebView)/) {
+	if (!delete $opts->{no_shadow} && $action eq 'gtknew' && ref($child) =~ /Gtk3::(Html2|SimpleList|TextView|TreeView|WebKit::WebView)/) {
 	    $faked_w = gtknew('Frame', shadow_type => 'in', child => $w);
 	}
     }
@@ -688,7 +688,7 @@ sub _gtk__Frame {
     if ($w) {
 	$w->set_label(delete $opts->{text}) if exists $opts->{text};
     } else {
-	$w = Gtk2::Frame->new(delete $opts->{text});
+	$w = Gtk3::Frame->new(delete $opts->{text});
 	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
 	$w->set_shadow_type(delete $opts->{shadow_type}) if exists $opts->{shadow_type};
     }
@@ -706,7 +706,7 @@ sub _gtk__Expander {
     if ($w) {
 	$w->set_label(delete $opts->{text}) if exists $opts->{text};
     } else {
-	$w = Gtk2::Expander->new(delete $opts->{text});
+	$w = Gtk3::Expander->new(delete $opts->{text});
     }
 
     $w->signal_connect(activate => delete $opts->{activate}) if exists $opts->{activate};
@@ -776,7 +776,7 @@ sub _gtk__MDV_Notebook {
                                $box->set_size_request($width, $requisition->height);
                            });
         $_->set_property('no-show-all', 1) foreach $selection_bar, $selection_arrow;
-        bless($w, 'Gtk2::MDV_Notebook');
+        bless($w, 'Gtk3::MDV_Notebook');
         add2hash($w, {
             arrow_x         => $arrow_x,
             layout          => $layout,
@@ -792,7 +792,7 @@ sub _gtk__Fixed {
     my ($w, $opts, $_class, $_action) = @_;
 	
     if (!$w) {
-	$w = Gtk2::Fixed->new;
+	$w = Gtk3::Fixed->new;
 	$w->set_has_window(delete $opts->{has_window}) if exists $opts->{has_window};
         _gtknew_handle_layout_children($w, $opts);
     }
@@ -803,7 +803,7 @@ sub _gtk__Layout {
     my ($w, $opts, $_class, $_action) = @_;
 	
     if (!$w) {
-	$w = Gtk2::Layout->new;
+	$w = Gtk3::Layout->new;
         _gtknew_handle_layout_children($w, $opts);
     }
     $w;
@@ -836,17 +836,17 @@ sub _gtk_any_Window {
 
     if (!$w) {
 	if ($class eq 'Window') {
-	    $w = "Gtk2::$class"->new(delete $opts->{type} || 'toplevel');
+	    $w = "Gtk3::$class"->new(delete $opts->{type} || 'toplevel');
 	} elsif ($class eq 'Plug') {
 	    $opts->{socket_id} or internal_error("cannot create a Plug without a socket_id");
-	    $w = "Gtk2::$class"->new(delete $opts->{socket_id});
+	    $w = "Gtk3::$class"->new(delete $opts->{socket_id});
 	} elsif ($class eq 'FileChooserDialog') {
             my $action = delete $opts->{action} || internal_error("missing action for FileChooser");
-            $w = Gtk2::FileChooserDialog->new(delete $opts->{title}, delete $opts->{transient_for} || $::main_window,
+            $w = Gtk3::FileChooserDialog->new(delete $opts->{title}, delete $opts->{transient_for} || $::main_window,
                                               $action, N("Cancel") => 'cancel', delete $opts->{button1} || N("Ok") => 'ok',
                                           );
 	} else {
-	    $w = "Gtk2::$class"->new;
+	    $w = "Gtk3::$class"->new;
 	}
 
 	if ($::isInstall || $::set_dialog_hint) {
@@ -894,7 +894,7 @@ sub _gtk__MagicWindow {
     my $pop_it = delete $opts->{pop_it} || !$::isWizard && !$::isEmbedded || $::WizardTable && do {
 	#- do not take into account the wizard banner
         # FIXME!!!
-	any { !$_->isa('Gtk2::DrawingArea') && $_->visible } $::WizardTable->get_children;
+	any { !$_->isa('Gtk3::DrawingArea') && $_->visible } $::WizardTable->get_children;
     };
 
     my $pop_and_reuse = delete $opts->{pop_and_reuse} && $pop_it;
@@ -927,7 +927,7 @@ sub _gtk__MagicWindow {
 	    my $banner;
 	    if (!$::isEmbedded && !$::isInstall && $::Wizard_title) {
 		if (_find_imgfile($opts->{icon_no_error})) {
-		    $banner = Gtk2::Banner->new($opts->{icon_no_error}, $::Wizard_title);
+		    $banner = Gtk3::Banner->new($opts->{icon_no_error}, $::Wizard_title);
 		} else { 
 		    log::l("ERROR: missing wizard banner $opts->{icon_no_error}");
 		}
@@ -974,7 +974,7 @@ sub _gtk__AboutDialog {
     my ($w, $opts) = @_;
 
     if (!$w) {
-        $w = Gtk2::AboutDialog->new;
+        $w = Gtk3::AboutDialog->new;
         $w->signal_connect(response => sub { $_[0]->destroy });
         $w->set_program_name(delete $opts->{name}) if exists $opts->{name};
         $w->set_version(delete $opts->{version}) if exists $opts->{version};
@@ -991,7 +991,7 @@ sub _gtk__AboutDialog {
         });
 
         if (my $url = delete $opts->{website}) {
-            $url =~ s/^https:/http:/; # Gtk2::About doesn't like "https://..." like URLs
+            $url =~ s/^https:/http:/; # Gtk3::About doesn't like "https://..." like URLs
             $w->set_website($url);
         }
         $w->set_license(delete $opts->{license}) if exists $opts->{license};
@@ -1013,7 +1013,7 @@ sub _gtk__FileSelection {
     my ($w, $opts) = @_;
 
     if (!$w) {
-	$w = Gtk2::FileSelection->new(delete $opts->{title} || '');
+	$w = Gtk3::FileSelection->new(delete $opts->{title} || '');
 	gtkset($w->ok_button, %{delete $opts->{ok_button}}) if exists $opts->{ok_button};
 	gtkset($w->cancel_button, %{delete $opts->{cancel_button}}) if exists $opts->{cancel_button};
     }
@@ -1029,7 +1029,7 @@ sub _gtk__FileChooser {
 
     if (!$w) {
 	my $action = delete $opts->{action} || internal_error("missing action for FileChooser");
-	$w = Gtk2::FileChooserWidget->new($action);
+	$w = Gtk3::FileChooserWidget->new($action);
 
 	my $file = $opts->{file} && delete $opts->{file};
 
@@ -1053,7 +1053,7 @@ sub _gtk_any_Paned {
     my ($w, $opts, $class, $action) = @_;
 
     if (!$w) {
-	$w = "Gtk2::$class"->new;
+	$w = "Gtk3::$class"->new;
 	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
         $w->set_position(delete $opts->{position}) if exists $opts->{position};
     } elsif ($action eq 'gtkset') {
@@ -1074,7 +1074,7 @@ sub _gtk_any_Box {
     my ($w, $opts, $class, $action) = @_;
 
     if (!$w) {
-	$w = "Gtk2::$class"->new;
+	$w = "Gtk3::$class"->new;
 	$w->set_homogeneous(delete $opts->{homogenous}) if exists $opts->{homogenous};
 	$w->set_spacing(delete $opts->{spacing}) if exists $opts->{spacing};
 	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
@@ -1092,7 +1092,7 @@ sub _gtk_any_ButtonBox {
     my ($w, $opts, $class, $action) = @_;
 
     if (!$w) {
-	$w = "Gtk2::$class"->new;
+	$w = "Gtk3::$class"->new;
 	$w->set_homogeneous(delete $opts->{homogenous}) if exists $opts->{homogenous};
 	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
 	$w->set_spacing(delete $opts->{spacing}) if exists $opts->{spacing};
@@ -1109,7 +1109,7 @@ sub _gtk__Notebook {
     my ($w, $opts) = @_;
 
     if (!$w) {
-	$w = Gtk2::Notebook->new;
+	$w = Gtk3::Notebook->new;
 	$w->set_property('show-tabs', delete $opts->{show_tabs}) if exists $opts->{show_tabs};
 	$w->set_property('show-border', delete $opts->{show_border}) if exists $opts->{show_border};
     }
@@ -1131,7 +1131,7 @@ sub _gtk__Table {
     if (!$w) {
 	add2hash_($opts, { xpadding => 5, ypadding => 0, border_width => $::isInstall ? 3 : 10 });
 
-	$w = Gtk2::Table->new(0, 0, delete $opts->{homogeneous} || 0);
+	$w = Gtk3::Table->new(0, 0, delete $opts->{homogeneous} || 0);
 	$w->set_col_spacings(delete $opts->{col_spacings} || 0);
 	$w->set_row_spacings(delete $opts->{row_spacings} || 0);
 	$w->set_border_width(delete $opts->{border_width});
@@ -1143,11 +1143,11 @@ sub _gtk__Table {
 	each_index {
 	    my $j = $::i;
 	    if ($_) {
-		ref $_ or $_ = Gtk2::WrappedLabel->new($_);
+		ref $_ or $_ = Gtk3::WrappedLabel->new($_);
                 $w->attach($_, $j, $j + 1, $i, $i + 1,
                            $j != $#$l && !$w->{mcc} ?
 			     ('fill', 'fill', $w->{xpadding}, $w->{ypadding}) :
-                               (['expand', 'fill'], ref($_) eq 'Gtk2::ScrolledWindow' || $_->get_data('must_grow') ?
+                               (['expand', 'fill'], ref($_) eq 'Gtk3::ScrolledWindow' || $_->get_data('must_grow') ?
                                  ['expand', 'fill'] : [], 0, 0));
 		$_->show;
 	    }
@@ -1160,7 +1160,7 @@ sub _gtk__Table {
 sub _gtk_any_simple {
     my ($w, $_opts, $class) = @_;
 
-    $w ||= "Gtk2::$class"->new;
+    $w ||= "Gtk3::$class"->new;
 }
 
 sub _gtknew_handle_children {
@@ -1178,7 +1178,7 @@ sub _gtknew_handle_children {
     foreach (@child) {
 	my ($fill, $child) = @$_;
 	$fill eq '0' || $fill eq '1' || $fill eq 'fill' || $fill eq 'expand' or internal_error("odd {children} parameter must be 0 or 1 (got $fill)");
-	ref $child or $child = Gtk2::WrappedLabel->new($child);
+	ref $child or $child = Gtk3::WrappedLabel->new($child);
 	my $expand = $fill && $fill ne 'fill' ? 1 : 0;
 	$w->pack_start($child, $expand, $fill, $padding || 0);
 	$child->show;
@@ -1240,8 +1240,8 @@ sub quit_callback {
 	$w->destroy; 
 	die 'wizcancel';
     } else { 
-	if (Gtk2->main_level) {
-	    Gtk2->main_quit;
+	if (Gtk3->main_level) {
+	    Gtk3->main_quit;
 	} else {
 	    # block window deletion if not in main loop (eg: while starting the GUI)
 	    return 1;
@@ -1355,11 +1355,11 @@ sub _text_insert {
         foreach my $token (@$t) {
             my ($item, $tag) = @$token;
             my $iter1 = $buffer->get_end_iter;
-            if (ref($item) =~ /^Gtk2::Gdk::Pixbuf/) {
+            if (ref($item) =~ /^Gtk3::Gdk::Pixbuf/) {
                 $buffer->insert_pixbuf($iter1, $item);
                 next;
             }
-            if (ref($item) =~ /^Gtk2::/) {
+            if (ref($item) =~ /^Gtk3::/) {
                 my $anchor = $buffer->create_child_anchor($iter1);
                 $textview->add_child_at_anchor($item, $anchor);
                 $textview->{anchors} ||= [];
@@ -1447,7 +1447,7 @@ sub main {
     my $destroyed;
     $window->signal_connect(destroy => sub { $destroyed = 1 });
     $window->show;
-    do { Gtk2->main } while (!$destroyed && $o_verif && !$o_verif->());
+    do { Gtk3->main } while (!$destroyed && $o_verif && !$o_verif->());
     may_destroy($window);
     flush();
 }
@@ -1459,7 +1459,7 @@ sub sync {
 }
 
 sub flush() { 
-    Gtk2->main_iteration while Gtk2->events_pending;
+    Gtk3->main_iteration while Gtk3->events_pending;
 }
 
 sub enable_sync_flush {
@@ -1492,12 +1492,12 @@ sub may_destroy {
 
 sub root_window() {
     state $root;
-    $root ||= Gtk2::Gdk->get_default_root_window;
+    $root ||= Gtk3::Gdk->get_default_root_window;
 }
 
 sub rgb2color {
     my ($r, $g, $b) = @_;
-    my $color = Gtk2::Gdk::Color->new($r, $g, $b);
+    my $color = Gtk3::Gdk::Color->new($r, $g, $b);
     root_window()->get_colormap->rgb_find_color($color);
     $color;
 }
@@ -1505,7 +1505,7 @@ sub rgb2color {
 sub set_root_window_background {
     my ($r, $g, $b) = @_;
     my $root = root_window();
-    my $gc = Gtk2::Gdk::GC->new($root);
+    my $gc = Gtk3::Gdk::GC->new($root);
     my $color = rgb2color($r, $g, $b);
     $gc->set_rgb_fg_color($color);
     set_root_window_background_with_gc($gc);
@@ -1522,7 +1522,7 @@ sub set_root_window_background_with_gc {
 sub _new_alpha_pixbuf {
     my ($pixbuf) = @_;
     my ($height, $width) = ($pixbuf->get_height, $pixbuf->get_width);
-    my $new_pixbuf = Gtk2::Gdk::Pixbuf->new('rgb', 1, 8, $width, $height);
+    my $new_pixbuf = Gtk3::Gdk::Pixbuf->new('rgb', 1, 8, $width, $height);
     $new_pixbuf->fill(0x00000000); # transparent white
     $width, $height, $new_pixbuf;
 }
@@ -1538,19 +1538,19 @@ sub pixmap_from_pixbuf {
     my ($widget, $pixbuf) = @_;
     my $window = $widget->window or internal_error("you can't use this function if the widget is not realised");
     my ($width, $height) = ($pixbuf->get_width, $pixbuf->get_height);
-    my $pixmap = Gtk2::Gdk::Pixmap->new($window, $width, $height, $window->get_depth);
+    my $pixmap = Gtk3::Gdk::Pixmap->new($window, $width, $height, $window->get_depth);
     $pixbuf->render_to_drawable($pixmap, $widget->style->fg_gc('normal'), 0, 0, 0, 0, $width, $height, 'max', 0, 0);
     $pixmap;
 }
 
 sub import_style_ressources() {
     if (!$::isInstall) {
-        Gtk2::Rc->parse_string(scalar cat_('/usr/share/libDrakX/themes-galaxy.rc')); # FIXME DEBUG
+        Gtk3::Rc->parse_string(scalar cat_('/usr/share/libDrakX/themes-galaxy.rc')); # FIXME DEBUG
     }
 }
 
 sub text_direction_rtl() {
-    Gtk2::Widget->get_default_direction eq 'rtl';
+    Gtk3::Widget->get_default_direction eq 'rtl';
 }
 
 sub _get_weakness_icon {
@@ -1577,8 +1577,8 @@ sub _get_weakness_tooltip {
     return $weakness_tooltip;
 }
 
-package Gtk2::MDV_Notebook; # helper functions for installer & mcc
-our @ISA = qw(Gtk2::Widget);
+package Gtk3::MDV_Notebook; # helper functions for installer & mcc
+our @ISA = qw(Gtk3::Widget);
 
 sub hide_selection {
     my ($w) = @_;

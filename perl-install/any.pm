@@ -1054,7 +1054,7 @@ sub display_release_notes {
         return;
     }
 
-    require Gtk2::WebKit;
+    require Gtk3::WebKit;
     require ugtk3;
     ugtk3->import(':all');
     require mygtk3;
@@ -1064,13 +1064,13 @@ sub display_release_notes {
                                
     my $w = ugtk3->new(N("Release Notes"), transient => $::main_window, modal => 1, pop_it => 1);
     gtkadd($w->{rwindow},
-           gtkpack_(Gtk2::VBox->new,
+           gtkpack_(Gtk3::VBox->new,
                     1, create_scrolled_window(ugtk3::gtkset_border_width($view, 5),
                                               [ 'never', 'automatic' ],
                                           ),
                     0, gtkpack(create_hbox('end'),
                                gtknew('Button', text => N("Close"),
-                                      clicked => sub { Gtk2->main_quit })
+                                      clicked => sub { Gtk3->main_quit })
                            ),
                 ),
        );
@@ -1234,7 +1234,7 @@ sub selectLanguage_standalone {
     ]);
     $locale->{utf8} = !$non_utf8;
     lang::set($locale);
-    Gtk2->set_locale if $in->isa('interactive::gtk');
+    Gtk3->set_locale if $in->isa('interactive::gtk');
     lang::lang_changed($locale) if $old_lang ne $locale->{lang};
 }
 

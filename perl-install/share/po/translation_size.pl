@@ -26,20 +26,20 @@ use install_gtk;
 !@ARGV and die "Usage: LANGUAGE=lang_to_test $0 string_to_translate\n(for example: LANGUAGE=ja $0 Advanced)\n";
 
 install_gtk::load_font({ locale => { lang => 'en_US' } });
-$l1 = Gtk2::Label->new($ARGV[0]);
-my $v = Gtk2::VBox->new(1, 0);
+$l1 = Gtk3::Label->new($ARGV[0]);
+my $v = Gtk3::VBox->new(1, 0);
 $v->pack_start($l1, 0, 0, 0);
-my $window = Gtk2::Window->new('toplevel');
+my $window = Gtk3::Window->new('toplevel');
 $window->set_size_request(200, 50);
 $window->set_position('center');
-$window->signal_connect(key_press_event => sub { Gtk2->main_quit });
+$window->signal_connect(key_press_event => sub { Gtk3->main_quit });
 $window->add($v);
 $window->show_all;
 
 install_gtk::load_font({ locale => { lang => $ENV{LANGUAGE} } });
-$l2 = Gtk2::Label->new(translate($ARGV[0]));
+$l2 = Gtk3::Label->new(translate($ARGV[0]));
 $v->pack_start($l2, 0, 0, 0);
 $window->show_all;
 
-Gtk2->main;
+Gtk3->main;
 

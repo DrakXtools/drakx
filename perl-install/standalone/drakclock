@@ -55,9 +55,9 @@ if (!@timezones) {
 
 my $drawing_area;
 
-my $adjh = Gtk2::Adjustment->new(0.0, 0.0, 23.0, 1.0, 5.0, 0.0);
-my $adjm = Gtk2::Adjustment->new(0.0, 0.0, 59.0, 1.0, 5.0, 0.0);
-my $adjs = Gtk2::Adjustment->new(0.0, 0.0, 59.0, 1.0, 5.0, 0.0);
+my $adjh = Gtk3::Adjustment->new(0.0, 0.0, 23.0, 1.0, 5.0, 0.0);
+my $adjm = Gtk3::Adjustment->new(0.0, 0.0, 59.0, 1.0, 5.0, 0.0);
+my $adjs = Gtk3::Adjustment->new(0.0, 0.0, 59.0, 1.0, 5.0, 0.0);
 
 my ($button_reset, $check_ntp, $hb_ntp, $combo_ntpserver, $ntp);
 my $mode = 0;
@@ -82,18 +82,18 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
                                                                                                 }),
                                                                            0, $hb_ntp = gtknew('HBox', border_width => 5, children => [
                                                                                        0, gtknew('Label', text => N("Server:")),
-                                                                                       1, $combo_ntpserver = Gtk2::Combo->new
+                                                                                       1, $combo_ntpserver = Gtk3::Combo->new
                                                                                       ])
                                                                           ]))
                                                        ]),
                                             0, gtknew('VBox', children => [
                                                         0, gtknew('HBox', children => [
-                                                                    0, $drawing_area = gtkset_size_request(Gtk2::DrawingArea->new, @image_size),
+                                                                    0, $drawing_area = gtkset_size_request(Gtk3::DrawingArea->new, @image_size),
                                                                    ]),
                                                         0, my $time_box = gtknew('HBox', homogenous => 1, children => [
-                                                                    0, my $spinner_h = Gtk2::SpinButton->new($adjh, 0, 0),
-                                                                    0, my $spinner_m = Gtk2::SpinButton->new($adjm, 0, 0),
-                                                                    0, my $spinner_s = Gtk2::SpinButton->new($adjs, 0, 0),
+                                                                    0, my $spinner_h = Gtk3::SpinButton->new($adjh, 0, 0),
+                                                                    0, my $spinner_m = Gtk3::SpinButton->new($adjm, 0, 0),
+                                                                    0, my $spinner_s = Gtk3::SpinButton->new($adjs, 0, 0),
                                                                    ]),
                                                         1, gtknew('Frame', text => N("Timezone"), shadow_type => 'etched_in', child => 
                                                                   gtknew('VBox', border_width => 5, children_tight => [
@@ -194,7 +194,7 @@ $drawing_area->set_events([ 'button_press_mask', 'button_release_mask', "pointer
 $drawing_area->signal_connect(expose_event => \&expose_event);
 $drawing_area->signal_connect(realize => sub {
                                   my $window = $drawing_area->window;
-                                  $pixmap = Gtk2::Gdk::Pixmap->new($window, @image_size, $window->get_depth);
+                                  $pixmap = Gtk3::Gdk::Pixmap->new($window, @image_size, $window->get_depth);
                               });
 
 $drawing_area->signal_connect(button_press_event   => sub { $pressed = 1 });

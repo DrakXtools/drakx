@@ -229,10 +229,10 @@ sub ask_standalone_gtk {
     my $display = sub { 
 	my ($text) = @_;
 	$nopop->(); 
-	gtkshow(gtkadd($w_popup = Gtk2::Window->new('popup'),
-		       gtksignal_connect(gtkadd(Gtk2::EventBox->new,
-						gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'etched_out'),
-						       gtkset_justify(Gtk2::Label->new($text), 'left'))),
+	gtkshow(gtkadd($w_popup = Gtk3::Window->new('popup'),
+		       gtksignal_connect(gtkadd(Gtk3::EventBox->new,
+						gtkadd(gtkset_shadow_type(Gtk3::Frame->new, 'etched_out'),
+						       gtkset_justify(Gtk3::Label->new($text), 'left'))),
 					 button_press_event => sub { $nopop->() }
 					)))->move($x, $y) if $text;
     };
@@ -241,7 +241,7 @@ sub ask_standalone_gtk {
 	my $started = is_service_running($service);
 	$label->set_label($started ? N("running") : N("stopped"));
     };
-    my $b = Gtk2::EventBox->new;
+    my $b = Gtk3::EventBox->new;
     $b->set_events('pointer_motion_mask');
     gtkadd($W->{window}, gtkadd($b, gtkpack_($W->create_box_with_title,
 	0, mygtk3::gtknew('Title1', label => N("Services and daemons")),
@@ -251,14 +251,14 @@ sub ask_standalone_gtk {
 		my $is_xinetd_service = member($service, @xinetd_services);
         	my $infos = warp_text(description($_), 40);
                 $infos ||= N("No additional information\nabout this service, sorry.");
-		my $label = gtkset_justify(Gtk2::Label->new, 'left');
+		my $label = gtkset_justify(Gtk3::Label->new, 'left');
                 $update_service->($service, $label) if !$is_xinetd_service;
-		[ gtkpack__(Gtk2::HBox->new(0,0), $_),
-		  gtkpack__(Gtk2::HBox->new(0,0), $label),
-		  gtkpack__(Gtk2::HBox->new(0,0), gtksignal_connect(Gtk2::Button->new(N("Info")), clicked => sub { $display->($infos) })),
+		[ gtkpack__(Gtk3::HBox->new(0,0), $_),
+		  gtkpack__(Gtk3::HBox->new(0,0), $label),
+		  gtkpack__(Gtk3::HBox->new(0,0), gtksignal_connect(Gtk3::Button->new(N("Info")), clicked => sub { $display->($infos) })),
 
-                  gtkpack__(Gtk2::HBox->new(0,0), gtkset_active(gtksignal_connect(
-                          Gtk2::CheckButton->new($is_xinetd_service ? N("Start when requested") : N("On boot")),
+                  gtkpack__(Gtk3::HBox->new(0,0), gtkset_active(gtksignal_connect(
+                          Gtk3::CheckButton->new($is_xinetd_service ? N("Start when requested") : N("On boot")),
                           clicked => sub { if ($_[0]->get_active) {
                                                push @$on_services, $service if !member($service, @$on_services);
                                            } else {
@@ -266,7 +266,7 @@ sub ask_standalone_gtk {
                                         } }), member($service, @$on_services))),
 		  map { 
 		      my $a = $_;
-		      gtkpack__(Gtk2::HBox->new(0,0), gtksignal_connect(Gtk2::Button->new(translate($a)),
+		      gtkpack__(Gtk3::HBox->new(0,0), gtksignal_connect(Gtk3::Button->new(translate($a)),
                           clicked => sub { 
 			      my $action = $a eq "Start" ? 'restart' : 'stop'; 
 			      log::explanations(qq(GP_LANG="UTF-8" service $service $action));
@@ -280,7 +280,7 @@ sub ask_standalone_gtk {
 		];
 	    }
             @$l), [ $::isEmbedded ? 'automatic' : 'never', 'automatic' ]), -1, $::isEmbedded ? -1 : 400),
-            0, gtkpack(gtkset_border_width(Gtk2::HBox->new(0,0),5), $W->create_okcancel)
+            0, gtkpack(gtkset_border_width(Gtk3::HBox->new(0,0),5), $W->create_okcancel)
             ))
 	  );
     $b->signal_connect(motion_notify_event => sub { my ($w, $e) = @_;

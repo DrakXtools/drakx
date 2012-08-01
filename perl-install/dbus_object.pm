@@ -55,9 +55,9 @@ sub set_gtk3_watch_helper {
         my ($con, $watch) = @_;
         my $flags = $watch->get_flags;
         require Net::DBus::Binding::Watch;
-	require Gtk2::Helper;
+	require Gtk3::Helper;
         if ($flags & &Net::DBus::Binding::Watch::READABLE) {
-            Gtk2::Helper->add_watch($watch->get_fileno, 'in', sub {
+            Gtk3::Helper->add_watch($watch->get_fileno, 'in', sub {
                 $watch->handle(&Net::DBus::Binding::Watch::READABLE);
                 $con->dispatch;
                 1;

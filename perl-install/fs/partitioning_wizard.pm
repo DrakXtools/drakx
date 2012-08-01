@@ -300,14 +300,14 @@ sub create_display_box {
     my $width = 540;
     my $minwidth = 40;
 
-    my $display_box = ugtk3::gtkset_size_request(Gtk2::HBox->new(0,0), -1, 26);
+    my $display_box = ugtk3::gtkset_size_request(Gtk3::HBox->new(0,0), -1, 26);
 
     my $sep_count = @parts - 1;
     #- ratio used to compute initial partition pixel width (each partition should be > min_width)
     #- though, the pixel/sectors ratio cannot be the same for all the partitions
     my $initial_ratio = $totalsectors ? ($width - @parts * $minwidth - $sep_count) / $totalsectors : 1;
 
-    my $vbox = Gtk2::VBox->new;
+    my $vbox = Gtk3::VBox->new;
 
     my $part_sep;
     my $desc;
@@ -315,9 +315,9 @@ sub create_display_box {
     my $last = $resize && $resize->[-1];
 
     foreach my $entry (@parts) {
-	my $part_info = Gtk2::Label->new($entry->{device_LABEL});
+	my $part_info = Gtk3::Label->new($entry->{device_LABEL});
 	my @colorized_fs_types = qw(ext2 ext3 ext4 xfs swap vfat ntfs ntfs-3g);
-        my $part_widget = Gtk2::EventBox->new;
+        my $part_widget = Gtk3::EventBox->new;
         $entry->{width} = int($entry->{size} * $initial_ratio) + $minwidth;
         if ($last && $last->{device} eq $entry->{device}) {
             #- entry is the last resizable partition
@@ -329,11 +329,11 @@ sub create_display_box {
             $part_widget->set_name("PART_vfat");
             $part_info->set_size_request(ceil($ratio * $entry->{min_win}), 0);
 
-            my $mdv_widget = gtkadd(gtkset_name(Gtk2::EventBox->new, "PART_new"),
+            my $mdv_widget = gtkadd(gtkset_name(Gtk3::EventBox->new, "PART_new"),
                                     gtkset_size_request(gtknew("Image", file => "small-logo"),
                                                         $ratio * MB(600), 0));
 
-            my $hpane = Gtk2::HPaned->new;
+            my $hpane = Gtk3::HPaned->new;
             $hpane->add1($part_widget);
             $hpane->child1_shrink(0);
             $hpane->add2($mdv_widget);
@@ -345,17 +345,17 @@ sub create_display_box {
             my $add_part_size_info = sub {
                 my ($name, $label) = @_;
                 ugtk3::gtkpack__($desc,
-                                 gtkadd(gtkset_name(Gtk2::EventBox->new, $name),
-                                        Gtk2::Label->new(" " x 4)),
+                                 gtkadd(gtkset_name(Gtk3::EventBox->new, $name),
+                                        Gtk3::Label->new(" " x 4)),
                                  gtkset_size_request(gtkset_alignment($label, 0, 0.5),
                                                      150, 20));
             };
-            $desc = Gtk2::HBox->new(0,0);
+            $desc = Gtk3::HBox->new(0,0);
 
-            my $win_size_label = Gtk2::Label->new;
+            my $win_size_label = Gtk3::Label->new;
             $add_part_size_info->("PART_vfat", $win_size_label);
 
-            my $mdv_size_label = Gtk2::Label->new;
+            my $mdv_size_label = Gtk3::Label->new;
             $add_part_size_info->("PART_new", $mdv_size_label);
 
             my $update_size_labels = sub {
@@ -400,8 +400,8 @@ sub create_display_box {
         }
 	$part_widget->add($part_info);
 
-	$part_sep = gtkadd(Gtk2::EventBox->new,
-                     gtkset_size_request(Gtk2::Label->new("."), 1, 0));
+	$part_sep = gtkadd(Gtk3::EventBox->new,
+                     gtkset_size_request(Gtk3::Label->new("."), 1, 0));
 	gtkpack__($display_box, $part_sep);
     }
     $display_box->remove($part_sep) if $part_sep;
@@ -409,11 +409,11 @@ sub create_display_box {
         my @types = (N_("Ext2/3/4"), N_("XFS"), N_("Swap"), arch() =~ /sparc/ ? N_("SunOS") : arch() eq "ppc" ? N_("HFS") : N_("Windows"),
                     N_("Other"), N_("Empty"));
         my %name2fs_type = ('Ext2/3/4' => 'ext3', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
-        $desc = ugtk3::gtkpack(Gtk2::HBox->new,
+        $desc = ugtk3::gtkpack(Gtk3::HBox->new,
                 map {
                      my $t = $name2fs_type{$_};
-                     my $ev = Gtk2::EventBox->new;
-		     my $w = Gtk2::Label->new(translate($_));
+                     my $ev = Gtk3::EventBox->new;
+		     my $w = Gtk3::Label->new(translate($_));
 	             $ev->add($w);
 		     $ev->set_name('PART_' . ($t || 'empty'));
                      $ev;
@@ -461,7 +461,7 @@ sub display_choices {
             $item = create_display_box($mainw->{kind}, $solutions{$s}[3], undef, $button);
         } elsif ($s eq 'existing_part') {
         } elsif ($s eq 'wipe_drive') {
-            $item = Gtk2::EventBox->new;
+            $item = Gtk3::EventBox->new;
             my $b2 = gtknew("Image", file => "small-logo");
             $item->add($b2);
             $item->set_size_request(540,26);
@@ -507,17 +507,17 @@ sub main {
         require diskdrake::hd_gtk;
         diskdrake::hd_gtk::load_theme();
 
-        my $mainbox = Gtk2::VBox->new;
+        my $mainbox = Gtk3::VBox->new;
 
         my @kinds = map { diskdrake::hd_gtk::hd2kind($_) } sort { $a->{is_removable} <=> $b->{is_removable} } @{ $all_hds->{hds} };
         push @kinds, diskdrake::hd_gtk::raid2real_kind($_) foreach @{$all_hds->{raids}};
         push @kinds, map { diskdrake::hd_gtk::lvm2kind($_) } @{$all_hds->{lvms}};
 
-        my $hdchoice = Gtk2::HBox->new;
+        my $hdchoice = Gtk3::HBox->new;
 
-        my $hdchoicelabel = Gtk2::Label->new(N("Here is the content of your disk drive "));
+        my $hdchoicelabel = Gtk3::Label->new(N("Here is the content of your disk drive "));
 
-        my $combobox = Gtk2::ComboBox->new_text;
+        my $combobox = Gtk3::ComboBox->new_text;
         foreach (@kinds) {
             my $info = $_->{val}{info} || $_->{val}{device};
             $info =~ s|^(?:.*/)?(.{24}).*|$1|;
@@ -531,11 +531,11 @@ sub main {
 
         ugtk3::gtkpack2__($mainbox, $hdchoice);
 
-        my $contentbox = Gtk2::VBox->new(0, 12);
+        my $contentbox = Gtk3::VBox->new(0, 12);
 
-        my $scroll = Gtk2::ScrolledWindow->new;
+        my $scroll = Gtk3::ScrolledWindow->new;
         $scroll->set_policy('never', 'automatic'),
-        my $vp = Gtk2::Viewport->new;
+        my $vp = Gtk3::Viewport->new;
         $vp->set_shadow_type('none');
         $vp->add($contentbox);
         $scroll->add($vp);

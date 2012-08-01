@@ -59,7 +59,7 @@ sub load_rc {
     my $f = $name;
     -r $name or $f = find { -r $_ } map { "$_/themes-$name.rc" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__) . '/..');
     if ($f) {
-	Gtk2::Rc->parse_string($o->{doc} ? $theme_overriding_for_doc : scalar cat_($f));
+	Gtk3::Rc->parse_string($o->{doc} ? $theme_overriding_for_doc : scalar cat_($f));
    }
 }
 
@@ -68,7 +68,7 @@ sub load_font {
     my ($o) = @_;
 
     if (defined($::WizardWindow) && lang::text_direction_rtl()) {
-	Gtk2::Widget->set_default_direction('rtl'); 
+	Gtk3::Widget->set_default_direction('rtl'); 
 	my ($x, $y) = $::WizardWindow->get_position;
 	my ($width) = $::WizardWindow->get_size;
 	$::WizardWindow->move($::rootwidth - $width - $x, $y);
@@ -76,7 +76,7 @@ sub load_font {
 
     my $font = lang::l2pango_font($o->{locale}{lang});
     my $s = qq(gtk-font-name="$font");
-    Gtk2::Rc->parse_string($s);
+    Gtk3::Rc->parse_string($s);
     mkdir("/root");
     output("/root/.gtkrc-2.0", $s);
 }
@@ -169,7 +169,7 @@ sub update_steps_position {
 	exists $steps{steps}{$_} or next;
 	if ($o->{steps}{$_}{entered} && !$o->{steps}{$_}{done}) {
             # we need to flush the X queue since else we got a temporary Y position of -1 when switching locales:
-            mygtk3::flush(); #- for auto_installs which never go through the Gtk2 main loop
+            mygtk3::flush(); #- for auto_installs which never go through the Gtk3 main loop
             $o->{steps_widget}->move_selection($steps{steps}{$_}{text});
 
             if ($last_step) {
@@ -179,7 +179,7 @@ sub update_steps_position {
 	}
         $last_step = $_;
     }
-    mygtk3::flush(); #- for auto_installs which never go through the Gtk2 main loop
+    mygtk3::flush(); #- for auto_installs which never go through the Gtk3 main loop
 }
 
 #------------------------------------------------------------------------------
@@ -199,14 +199,14 @@ q(<fontconfig>
         $ENV{FONTCONFIG_FILE} = '/tmp/fonts.conf';
     }
 
-    Gtk2->init;
-    Gtk2->set_locale;
+    Gtk3->init;
+    Gtk3->set_locale;
 }
 
 #------------------------------------------------------------------------------
 sub init_sizes {
     my ($o) = @_;
-    ($::rootwidth,  $::rootheight)    = (Gtk2::Gdk->screen_width, Gtk2::Gdk->screen_height);
+    ($::rootwidth,  $::rootheight)    = (Gtk3::Gdk->screen_width, Gtk3::Gdk->screen_height);
     $::stepswidth = $::rootwidth <= 640 ? 0 : 196;
     ($::logowidth, $::logoheight) = $::rootwidth <= 640 ? (0, 0) : (800, 75);
     ($o->{windowwidth}, $o->{windowheight}) = ($::rootwidth - $::stepswidth, $::rootheight);

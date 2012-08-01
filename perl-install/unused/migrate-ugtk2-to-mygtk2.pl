@@ -23,7 +23,7 @@ $b = 1;
 while ($b) {
     $b = 0;
 
-    if (my ($before, $class, undef, $new, $arg, $after, $after2) = /(.*?)Gtk2::(\w+(::\w+)*)->(new\w*)(?:\(($re)\)(.*)|([^(].*))/s) {
+    if (my ($before, $class, undef, $new, $arg, $after, $after2) = /(.*?)Gtk3::(\w+(::\w+)*)->(new\w*)(?:\(($re)\)(.*)|([^(].*))/s) {
 	$after ||= $after2;
 	my $s;
 

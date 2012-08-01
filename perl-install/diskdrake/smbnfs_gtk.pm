@@ -42,7 +42,7 @@ sub try_ {
 	$in->ask_warn(N("Error"), formatError($err));
     }
     update($kind);
-    Gtk2->main_quit if member($name, 'Cancel', 'Done');
+    Gtk3->main_quit if member($name, 'Cancel', 'Done');
 }
 
 sub raw_hd_options {
@@ -127,14 +127,14 @@ sub import_tree {
     my ($kind, $info_box) = @_;
     my (%servers_displayed, %wservers, %wexports);
 
-    $tree_model = Gtk2::TreeStore->new("Gtk2::Gdk::Pixbuf", "Glib::String");
-    my $tree = Gtk2::TreeView->new_with_model($tree_model);
+    $tree_model = Gtk3::TreeStore->new("Gtk3::Gdk::Pixbuf", "Glib::String");
+    my $tree = Gtk3::TreeView->new_with_model($tree_model);
     $tree->get_selection->set_mode('browse');
 
-    my $col = Gtk2::TreeViewColumn->new;
-    $col->pack_start(my $pixrender = Gtk2::CellRendererPixbuf->new, 0);
+    my $col = Gtk3::TreeViewColumn->new;
+    $col->pack_start(my $pixrender = Gtk3::CellRendererPixbuf->new, 0);
     $col->add_attribute($pixrender, 'pixbuf', 0);
-    $col->pack_start(my $texrender = Gtk2::CellRendererText->new, 1);
+    $col->pack_start(my $texrender = Gtk3::CellRendererText->new, 1);
     $col->add_attribute($texrender, 'text', 1);
     $tree->append_column($col);
 

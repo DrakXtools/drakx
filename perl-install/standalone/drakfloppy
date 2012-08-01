@@ -119,18 +119,18 @@ sub pref_dialog() {
     
 
     # Create root tree:
-    $tree_model = Gtk2::TreeStore->new(("Glib::String") x 2, "Glib::Int");
-    $tree = Gtk2::TreeView->new_with_model($tree_model);
+    $tree_model = Gtk3::TreeStore->new(("Glib::String") x 2, "Glib::Int");
+    $tree = Gtk3::TreeView->new_with_model($tree_model);
     $tree->set_headers_visible(0);
-    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $tree->append_column(Gtk3::TreeViewColumn->new_with_attributes(undef, Gtk3::CellRendererText->new, 'text' => 0));
     $tree->signal_connect('row-expanded', \&expand_tree);
     $tree->get_selection->signal_connect('changed' => \&selected_tree);
 
     # Create modules list:
-    $list_model = Gtk2::ListStore->new(("Glib::String") x 3); # relative path, size, (hidden full path)
-    $list  = Gtk2::TreeView->new_with_model($list_model);
+    $list_model = Gtk3::ListStore->new(("Glib::String") x 3); # relative path, size, (hidden full path)
+    $list  = Gtk3::TreeView->new_with_model($list_model);
     each_index {
-        $list->append_column(my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i));
+        $list->append_column(my $col = Gtk3::TreeViewColumn->new_with_attributes($_, Gtk3::CellRendererText->new, 'text' => $::i));
         $col->set_sort_column_id($::i);
         $col->set_min_width((200, 50)[$::i]);
     } (N("Module name"), N("Size"));
@@ -150,7 +150,7 @@ sub pref_dialog() {
                                                          gtknew('ScrolledWindow', child => $tree),
                                                          200, $::isEmbedded ? 0 : 175),
                                      gtknew('VBox', children => [
-                                              1, gtkadd(Gtk2::ScrolledWindow->new,
+                                              1, gtkadd(Gtk3::ScrolledWindow->new,
                                                         $list
                                                        ),
                                               0, $remove_but = gtknew('Button', text => N("Remove a module"), 

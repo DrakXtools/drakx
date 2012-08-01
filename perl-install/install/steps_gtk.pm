@@ -181,7 +181,7 @@ sub leavingStep {
 
 sub charsetChanged {
     my ($o) = @_;
-    Gtk2->set_locale;
+    Gtk3->set_locale;
     install::gtk::load_font($o);
     install::gtk::create_steps_window($o);
 }
@@ -265,11 +265,11 @@ sub reallyChooseDesktop {
 	$prev->signal_connect(key_press_event => sub {
 				  my (undef, $event) = @_;
 				  if (!$event || ($event->keyval & 0x7f) == 0xd) {
-				      Gtk2->main_quit;
+				      Gtk3->main_quit;
 				  }
 			      });
         my $img = gtksignal_connect(
-            gtkadd(Gtk2::EventBox->new, gtknew('Image', file => "desktop-$val->[0]")),
+            gtkadd(Gtk3::EventBox->new, gtknew('Image', file => "desktop-$val->[0]")),
             'button-press-event' => sub {
                 my %title = (
                     KDE    => N("KDE Desktop"),
@@ -287,7 +287,7 @@ sub reallyChooseDesktop {
                                 1, gtknew('Image', file => "desktop-$val->[0]-big"),
                                 0, gtknew('HSeparator'),
                                 0, gtknew('HButtonBox', layout => 'end', children_loose => [
-                                           gtknew('Button', text => N("Close"), clicked => sub { Gtk2->main_quit })
+                                           gtknew('Button', text => N("Close"), clicked => sub { Gtk3->main_quit })
                                        ]),
                             ]),
                    );
@@ -356,9 +356,10 @@ sub reallyChooseGroups {
                         gtknew('Install_Button', text => N("Help"), clicked => sub {
                                    interactive::gtk::display_help($o, { interactive_help_id => 'choosePackageGroups' }) }),
 			  gtknew('Button', text => N("Unselect All"), clicked => sub { $_->set_active(0) foreach @entries }),
-			  gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
-			 ]),
+			  gtknew('Button', text => N("Next"), clicked => sub { Gtk3->main_quit }),
+                    ]),
 		  ]),
+	    )
 	  );
     $w->main;
     1;
@@ -573,7 +574,7 @@ sub installPackages {
 	    my $pl = $f; $pl =~ s/\.png$/.pl/;
 	    eval(cat_($pl)) if -e $pl;    
 	    $banner->{text} = $title;
-	    Gtk2::Banner::update_text($banner);
+	    Gtk3::Banner::update_text($banner);
 	}
     };
 
@@ -808,7 +809,7 @@ It will then continue from the hard disk drive and the packages will remain avai
 		0, gtknew('HButtonBox', layout => 'edge', children_tight => [
                     gtknew('Install_Button', text => N("Help"), clicked => sub {
                                interactive::gtk::display_help($o, { interactive_help_id => 'choosePackagesTree' }) }),
-		    gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
+		    gtknew('Button', text => N("Next"), clicked => sub { Gtk3->main_quit }),
 		]),
 	    ]),
 	);
