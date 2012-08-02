@@ -414,7 +414,7 @@ sub _gtk__Label {
     if ($w) {
 	$w->set_text(delete $opts->{text}) if exists $opts->{text};
     } else {
-	$w = exists $opts->{text} ? Gtk3::Label->new(delete $opts->{text}) : Gtk3::Label->new;
+	$w = Gtk3::Label->new(delete $opts->{text});
 	$w->set_selectable(delete $opts->{selectable}) if exists $opts->{selectable};
 	$w->set_ellipsize(delete $opts->{ellipsize}) if exists $opts->{ellipsize};
 	$w->set_justify(delete $opts->{justify}) if exists $opts->{justify};
