@@ -299,7 +299,6 @@ else
 	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/dhcp-client
 	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/probe-modules
 endif
-
 	if [ -e pcmcia/pcmcia_probe.o ]; then \
 		install -m644 pcmcia/pcmcia_probe.o -D $(DESTDIR)$(ROOTDEST)/pcmcia_probe.o; \
 	fi
