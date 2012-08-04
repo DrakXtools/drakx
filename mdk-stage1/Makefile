@@ -290,9 +290,16 @@ dist-git:
 install:
 	install -m755 init -D $(DESTDIR)$(ROOTDEST)/init
 	install -m755 stage1 -D $(DESTDIR)$(ROOTDEST)/stage1
+ifeq (0, $(ONE_BINARY))
 	install -m755 rescue-gui -D $(DESTDIR)$(ROOTDEST)/rescue-gui
 	install -m755 dhcp-client -D $(DESTDIR)$(ROOTDEST)/dhcp-client
 	install -m755 probe-modules -D $(DESTDIR)$(ROOTDEST)/probe-modules
+else
+	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/rescue-gui
+	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/dhcp-client
+	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/probe-modules
+endif
+
 	if [ -e pcmcia/pcmcia_probe.o ]; then \
 		install -m644 pcmcia/pcmcia_probe.o -D $(DESTDIR)$(ROOTDEST)/pcmcia_probe.o; \
 	fi
