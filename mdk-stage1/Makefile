@@ -144,7 +144,7 @@ CLEANDIRS = $(DIRS:%=clean-%)
 USB_DEFS_GEN = -DENABLE_USB
 USB_DEFS = -DENABLE_USB -DDISABLE_PCIADAPTERS
 
-all: $(BUILDDIRS) $(DIRS) $(BINS)
+all: $(BUILDDIRS) $(DIRS) $(BINS) pcmcia/pcmcia_probe.o
 $(DIRS): $(BUILDDIRS)
 $(BUILDDIRS):
 	$(MAKE) -C $(@:build-%=%)
