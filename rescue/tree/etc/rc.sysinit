@@ -18,7 +18,7 @@ mkdir /dev/shm
 mount /dev/pts
 mount /dev/shm
 
-/lib/udev/udevd --daemon --resolve-names=never
+/lib/systemd/systemd-udevd --daemon --resolve-names=never
 udevadm trigger --type=subsystems --action=add
 udevadm trigger --type=devices --action=add
 
