@@ -236,6 +236,8 @@ fi
     symlink "../hotplug", "$tmp_initrd/sbin/hotplug";
     _ "install $stage1_root/init $tmp_initrd/";
     _ "install $stage1_root/stage1 $tmp_initrd/sbin/";
+    _ "mkdir $tmp_initrd/bin";
+    _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/bin/rescue-gui";
 
     foreach ('pppd', 'pppoe') {
 	_ "install /usr/uclibc/sbin/$_ $tmp_initrd/sbin/";

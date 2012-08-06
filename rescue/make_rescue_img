@@ -42,7 +42,6 @@ EOF
 output("$tmp/etc/issue", $issue);
 
 _ "../tools/install-xml-file-list list.xml $tmp";
-_ "ln -s /sbin/stage1 $tmp/bin/rescue-gui";
 
 # XXX: prevent this from being added to begin with
 _ "rm -rf $tmp/usr/share/locale/";
