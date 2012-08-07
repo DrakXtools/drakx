@@ -263,7 +263,16 @@ fi
 	#cp_af("/usr/bin/ka-d-client", "$tmp_initrd/ka/ka-d-client");
 	cp_af("/bin/busybox.static", "$tmp_initrd/usr/bin/busybox");
 	my @busybox_links = split("\n", `/bin/busybox.static --list-full`);
-	_ "test -e $tmp_initrd/$_ || ln $tmp_initrd/usr/bin/busybox $tmp_initrd/$_" foreach @busybox_links;
+	#TODO: should really pick these up from list.xml in stead
+	my @system_bins = ('mke2fs', 'mkfs.ext2', 'mkfs.ext3', 'mkfs.ext4', 'e2fsck', 'tune2fs',
+	    'dumpe2fs', 'resize2fs', 'mkfs.reiserfs', 'resize_reiserfs', 'reiserfstune');
+	foreach my $bin (@busybox_links) {
+	    if (grep {$_ eq basename($bin) } @system_bins) {
+		print "skipping $bin busybox link\n";
+		next;
+	    }
+	    _ "test -e $tmp_initrd/$bin || ln $tmp_initrd/usr/bin/busybox $tmp_initrd/$bin";
+	}
     }
 
     _ "(cd $tmp_initrd; find . | cpio -o -c --quiet) | $compress_filter > $img";
