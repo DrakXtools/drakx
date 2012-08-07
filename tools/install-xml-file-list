@@ -272,8 +272,12 @@ sub install {
 	my @PATH = qw(/sbin /bin /usr/bin /usr/sbin /usr/X11R6/bin);
 	foreach my $name (map { expand_macros($_) } @text_l) {
 	    if (grep {$_ eq $name } @busybox_funct) {
-		warn "$name provided by busybox, skipping\n";
-		next;
+		if ($copy_mode eq 'system') {
+		    warn "$name provided by busybox, overridden to use system version\n";
+		} else {
+		    warn "$name provided by busybox, skipping\n";
+		    next;
+		}
 	    }
 
 	    my @l = grep { -x $_ } map { "$_/$name" } @PATH;
