@@ -109,7 +109,8 @@ sub get_label {
 sub mkinitrd {
     my ($kernel_version, $bootloader, $entry, $initrd) = @_;
 
-    $::testing || -e "$::prefix/$initrd" and return $initrd;
+    return $initrd if $::testing  # testing mode
+      || -e "$::prefix/$initrd";  # already exists
 
     # for /boot on dos partitions when installing on loopback file on dos partition
     my $loop_boot = fs::loopback::prepare_boot();
