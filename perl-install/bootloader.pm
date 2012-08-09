@@ -110,7 +110,8 @@ sub mkinitrd {
     my ($kernel_version, $bootloader, $entry, $initrd) = @_;
 
     return $initrd if $::testing  # testing mode
-      || -e "$::prefix/$initrd";  # already exists
+      || -e "$::prefix/$initrd"   # already exists
+        || $initrd =~ /\(hd/;     # unrecognized partition
 
     # for /boot on dos partitions when installing on loopback file on dos partition
     my $loop_boot = fs::loopback::prepare_boot();
