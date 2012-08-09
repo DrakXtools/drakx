@@ -290,7 +290,7 @@ sub exitInstall {
 
 
 sub start_udev() {
-    return if -e "/dev/zero";
+    return if -e "/dev/block";
 
     # Ensure /run is mounted
     mkdir("/run", 0755);
