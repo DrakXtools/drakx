@@ -23,7 +23,8 @@
   badblocks
   mkswap
   <mode copy="system">
-    mke2fs mkfs.ext2 mkfs.ext3 mkfs.ext4 e2fsck tune2fs dumpe2fs resize2fs
+    mke2fs mkfs.ext2 mkfs.ext3 mkfs.ext4 e2fsck fsck.ext2 fsck.ext3 fsck.ext4
+    tune2fs dumpe2fs resize2fs
 
     mkfs.reiserfs resize_reiserfs reiserfstune
   </mode>
@@ -211,7 +212,9 @@
   /usr/share/terminfo/l/linux
   /bin/brltty
   /sbin/mount.ntfs-3g <!-- cannot be expanded as binary, not executable for all users -->
-  /sbin/blkid
+  <mode copy="system">
+    /sbin/blkid
+  </mode>
 
   /usr/bin/drakx-matchbox-window-manager
   /usr/share/matchbox/mbnoapp.xpm
