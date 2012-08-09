@@ -714,6 +714,11 @@ sub get_autologin() {
     { user => $autologin_user, desktop => $desktop, dm => $dm };
 }
 
+sub is_standalone_autologin_needed {
+    my ($dm) = @_;
+    return member($dm, qw(lxdm slim xdm));
+}
+
 sub set_autologin {
     my ($do_pkgs, $autologin) = @_;
     log::l("set_autologin $autologin->{user} $autologin->{desktop}");
@@ -722,7 +727,7 @@ sub set_autologin {
     $autologin->{dm} ||= 'xdm';
     $do_pkgs->ensure_is_installed($autologin->{dm})
       or return;
-    if ($autologin->{user} && $autologin->{dm} eq 'xdm') {
+    if ($autologin->{user} && is_standalone_autologin_needed($autologin->{dm})) {
         $do_pkgs->ensure_is_installed('autologin', '/usr/bin/startx.autologin')
           or return;
     }
@@ -742,7 +747,8 @@ sub set_autologin {
     )) } if -e $gdm_conffile;
 
     my $xdm_autologin_cfg = "$::prefix/etc/sysconfig/autologin";
-    if ($autologin->{dm} eq 'xdm') {
+    # TODO: configure lxdm in /etx/lxdm/lxdm.conf
+    if (is_standalone_autologin_needed($autologin->{dm})) {
 	setVarsInShMode($xdm_autologin_cfg, 0644,
 			{ USER => $autologin->{user}, AUTOLOGIN => bool2yesno($autologin->{user}), EXEC => '/usr/bin/startx.autologin' });
     } else {
