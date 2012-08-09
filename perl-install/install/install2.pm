@@ -309,7 +309,7 @@ sub start_udev() {
 
     mkdir_p("/run/udev/rules.d");
     $ENV{UDEVRULESD} = "/run/udev/rules.d";
-    run_program::run("/lib/udev/udevd", "--daemon", "--resolve-names=never");
+    run_program::run("/lib/systemd/systemd-udevd", "--daemon", "--resolve-names=never");
     run_program::run("udevadm", "trigger", "--type=subsystems", "--action=add");
     run_program::run("udevadm", "trigger", "--type=devices", "--action=add");
 }
