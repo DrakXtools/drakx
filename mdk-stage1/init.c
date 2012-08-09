@@ -421,13 +421,23 @@ static void overlay_chroot() {
 	printf("proceeding, please wait...\n");
 
 	if (mount("/tmp/stage2", "/tmp/newroot", "overlayfs", 0, "upperdir=/,lowerdir=/tmp/stage2"))
-		fatal_error("Unable to mount overlayfs filesystem");
+		fatal_error("Unable to mount /tmp/newroot overlayfs filesystem");
 	if (mount("/proc", "/tmp/newroot/proc", "proc", 0, NULL))
-		fatal_error("Unable to mount proc filesystem");
-	if (mount("none", "tmp/newroot/sys", "sysfs", 0, NULL))
-		fatal_error("Unable to mount sysfs filesystem");
-	if (mount("none", "tmp/newroot/dev", "devtmpfs", 0, NULL))
-		fatal_error("Unable to mount dev filesystem");
+		fatal_error("Unable to mount /proc proc filesystem");
+	if (mount("none", "/tmp/newroot/sys", "sysfs", 0, NULL))
+		fatal_error("Unable to mount /sys sysfs filesystem");
+	if (mount("none", "/tmp/newroot/dev", "devtmpfs", 0, NULL))
+		fatal_error("Unable to mount /dev devtmpfs filesystem");
+	mkdir("/tmp/newroot/dev/pts", 0755);
+	if (mount("none", "/tmp/newroot/dev/pts", "devpts", 0, NULL))
+	    fatal_error("Unable to mount /dev/pts devpts filesystem");
+	mkdir("/tmp/newroot/dev/shm", 0755);
+	if (mount("none", "/tmp/newroot/dev/shm", "tmpfs", 0, NULL))
+	    fatal_error("Unable to mount /dev/shm tmpfs filesystem");
+	mkdir("/tmp/newroot/run", 0755);
+	if (mount("none", "/tmp/newroot/run", "tmpfs", 0, NULL))
+	    fatal_error("Unable to mount /run tmpfs filesystem");
+
 
 	chroot ("/tmp/newroot");
 }
@@ -461,12 +471,18 @@ int main(int argc, char **argv)
 	if (!testing) {
 		mkdir("/proc", 0755);
 		if (mount("/proc", "/proc", "proc", 0, NULL))
-			fatal_error("Unable to mount proc filesystem");
+			fatal_error("Unable to mount /proc filesystem");
 		mkdir("/sys", 0755);
 		if (mount("none", "/sys", "sysfs", 0, NULL))
-			fatal_error("Unable to mount sysfs filesystem");
+			fatal_error("Unable to mount /sys sysfs filesystem");
 		if (mount("none", "/dev", "devtmpfs", 0, NULL))
-			fatal_error("Unable to mount dev filesystem");
+			fatal_error("Unable to mount /dev devmpts filesystem");
+		mkdir("/dev/pts", 0755);
+		if (mount("none", "/dev/pts", "devpts", 0, NULL))
+			fatal_error("Unable to mount /dev/pts devpts filesystem");
+		mkdir("/dev/shm", 0755);
+		if (mount("none", "/dev/shm", "tmpfs", 0, NULL))
+			fatal_error("Unable to mount /dev/shm tmpfs filesystem");
 	}
 
 

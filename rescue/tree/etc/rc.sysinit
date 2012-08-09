@@ -9,14 +9,8 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 echo -e "\t\t\tWelcome to \\033[1;36mMandriva\\033[0;39m Linux"
 
 echo "Starting udev"
-mkdir /run
-mount -t tmpfs -o mode=0755,nosuid,nodev tmpfs /run
 mkdir -p /run/udev/rules.d
 export UDEVRULESD=/run/udev/rules.d
-mkdir /dev/pts
-mkdir /dev/shm
-mount /dev/pts
-mount /dev/shm
 
 /lib/systemd/systemd-udevd --daemon --resolve-names=never
 udevadm trigger --type=subsystems --action=add

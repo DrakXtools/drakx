@@ -292,20 +292,10 @@ sub exitInstall {
 sub start_udev() {
     return if -e "/dev/block";
 
-    # Ensure /run is mounted
-    mkdir("/run", 0755);
-    run_program::run("mount -t tmpfs -o mode=0755,nosuid,nodev tmpfs /run");
-
     # Fake dracut boot (due to checks employed when running dracut during install)
     # as we know that we'll have the needed metadata in udevadm db due to us
     # starting udev nice and early here.
     mkdir_p("/run/initramfs");
-
-    # Start up udev and trigger cold plugs
-    run_program::run("mount", "-t", "devtmpfs", "-o", "mode=0755,nosuid", "devtmpfs", "/dev");
-    mkdir("/dev/$_", 0755) foreach qw(pts shm);
-    run_program::run("mount", "-t", "devpts", "-o", "gid=5,mode=620,noexec,nosuid", "devpts", "/dev/pts");
-    run_program::run("mount", "-t", "tmpfs", "-o", "mode=1777,nosuid,nodev", "tmpfs", "/dev/shm");
 
     mkdir_p("/run/udev/rules.d");
     $ENV{UDEVRULESD} = "/run/udev/rules.d";
