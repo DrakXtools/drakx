@@ -123,8 +123,7 @@ sub install_acpi_pkgs {
     my $acpi = bootloader::get_append_with_key($b, 'acpi');
     my $use_acpi = !member($acpi, 'off', 'ht');
     if ($use_acpi) {
-	$do_pkgs->ensure_is_installed('acpi', '/usr/bin/acpi', $::isInstall);
-	$do_pkgs->ensure_is_installed('acpid', '/usr/sbin/acpid', $::isInstall);
+	$do_pkgs->ensure_files_are_installed([ [ 'acpi', '/usr/bin/acpi' ], [ 'acpid', '/usr/sbin/acpid' ] ], $::isInstall);
     }
     require services;
     services::set_status($_, $use_acpi, $::isInstall) foreach qw(acpi acpid);
