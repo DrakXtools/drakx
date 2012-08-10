@@ -112,28 +112,6 @@ void print_warning(const char *msg)
 	printf("W: %s\n", msg);
 }
 
-void print_int_init(int fd, int i)
-{
-	char buf[10];
-	char * chptr = buf + 9;
-	int j = 0;
-
-	if (i < 0)
-	{
-		write(1, "-", 1);
-		i = -1 * i;
-	}
-
-	while (i)
-	{
-		*chptr-- = '0' + (i % 10);
-		j++;
-		i = i / 10;
-	}
-
-	write(fd, chptr + 1, j);
-}
-
 void print_str_init(int fd, const char * string)
 {
 	write(fd, string, strlen(string));
