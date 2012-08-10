@@ -347,7 +347,6 @@ static void method_select_and_prepare(void)
 
 void finish_preparing(void)
 {
-	recursiveRemove("/init");
 	/* we want to replace this one with what's provided by rescue.sqfs */
 	recursiveRemove("/bin/login");
 
