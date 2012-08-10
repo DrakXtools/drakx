@@ -58,6 +58,8 @@ static inline long reboot(unsigned int command)
 #include "config-stage1.h"
 #include <linux/cdrom.h>
 
+#include "init.h"
+
 #if defined(__powerpc__)
 #define TIOCSCTTY     0x540E
 #endif
@@ -67,7 +69,7 @@ static inline long reboot(unsigned int command)
 #define BINARY_STAGE2 "/usr/bin/runinstall2"
 
 
-char * env[] = {
+static char * const env[] = {
 	"PATH=/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:/mnt/bin:/mnt/usr/bin",
 	"LD_LIBRARY_PATH=/lib:/usr/lib:/mnt/lib:/mnt/usr/lib:/usr/X11R6/lib:/mnt/usr/X11R6/lib"
 #if defined(__x86_64__) || defined(__ppc64__)
@@ -92,27 +94,27 @@ char * env[] = {
  *
  */
 
-int testing = 0;
-int klog_pid;
+static int testing = 0;
+static int klog_pid;
 
 
-void fatal_error(const char *msg)
+static void fatal_error(const char *msg)
 {
 	printf("FATAL ERROR IN INIT: %s\n\nI can't recover from this, please reboot manually and send bugreport.\n", msg);
         select(0, NULL, NULL, NULL, NULL);
 }
 
-void print_error(const char *msg)
+static void print_error(const char *msg)
 {
 	printf("E: %s\n", msg);
 }
 
-void print_warning(const char *msg)
+static void print_warning(const char *msg)
 {
 	printf("W: %s\n", msg);
 }
 
-void print_str_init(int fd, const char * string)
+static void print_str_init(int fd, const char * string)
 {
 	write(fd, string, strlen(string));
 }
@@ -121,7 +123,7 @@ void print_str_init(int fd, const char * string)
  *   (1) watch /proc/kmsg and copy the stuff to /dev/tty4
  *   (2) listens to /dev/log and copy also this stuff (log from programs)
  */
-void doklog()
+static void doklog()
 {
 	fd_set readset, unixs;
 	int in, out, i;
@@ -264,7 +266,7 @@ void doklog()
 
 #define LOOP_CLR_FD	0x4C01
 
-void del_loops(void) 
+static void del_loops(void) 
 {
         char loopdev[] = "/dev/loop0";
         char chloopdev[] = "/dev/chloop0";
@@ -297,7 +299,7 @@ struct filesystem
 };
 
 /* attempt to unmount all filesystems in /proc/mounts */
-void unmount_filesystems(void)
+static void unmount_filesystems(void)
 {
 	int fd, size;
 	char buf[65535];			/* this should be big enough */
@@ -371,7 +373,7 @@ void unmount_filesystems(void)
 	}
 }
 
-int in_reboot(void)
+static int in_reboot(void)
 {
         int fd;
         if ((fd = open("/var/run/rebootctl", O_RDONLY, 0)) > 0) {
@@ -418,10 +420,10 @@ static void mount_and_chroot(int first) {
 		fatal_error("Unable to mount /run tmpfs filesystem");
 }
 
-int exit_value_proceed = 66;
-int exit_value_restart = 0x35;
+static int exit_value_proceed = 66;
+static int exit_value_restart = 0x35;
 
-int main(int argc, char **argv)
+int init_main(int argc, char **argv)
 {
 	pid_t installpid, childpid;
 	int wait_status;

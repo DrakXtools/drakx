@@ -167,12 +167,22 @@ usb-ids.h: /usr/share/ldetect-lst/usbtable.gz update-usb-ids.pl
 pcmcia/libpcmcia.a: pcmcia
 
 ifneq (0, $(ONE_BINARY))
-dhcp-client rescue-gui probe-modules: stage1
+dhcp-client rescue-gui probe-modules init: stage1
 	ln -f $^ $@
 endif
 
 ifneq (0, $(WHOLE_PROGRAM))
 
+ifneq (0, $(ONE_BINARY))
+
+stage1: .depend $(PCMCIA_LIB) probe-modules.c rescue-gui.c $(INITSRC) $(FRONTEND_SRC) $(STAGE1_ALLSRC)
+	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
+		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) \
+		probe-modules.c rescue-gui.c $(INITSRC) $(FRONTEND_SRC) $(STAGE1_ALLSRC) \
+		$(PCMCIA_LIB) $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS) \
+		-o $@
+
+else
 init: .depend $(INITSRC)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) \
@@ -180,15 +190,6 @@ init: .depend $(INITSRC)
 		$(LIBC_LIBS) \
 		-o $@
 
-ifneq (0, $(ONE_BINARY))
-stage1: .depend $(PCMCIA_LIB) probe-modules.c rescue-gui.c $(FRONTEND_SRC) $(STAGE1_ALLSRC)
-	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
-		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) \
-		probe-modules.c rescue-gui.c $(FRONTEND_SRC) $(STAGE1_ALLSRC) \
-		$(PCMCIA_LIB) $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS) \
-		-o $@
-
-else
 stage1: .depend $(PCMCIA_LIB) $(FRONTEND_SRC) $(STAGE1_ALLSRC)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) \
