@@ -417,29 +417,41 @@ int in_reboot(void)
         return 0;
 }
 
-static void overlay_chroot() {
+static void mount_and_chroot(int first) {
 	printf("proceeding, please wait...\n");
 
-	if (mount("/tmp/stage2", "/tmp/newroot", "overlayfs", 0, "upperdir=/,lowerdir=/tmp/stage2"))
-		fatal_error("Unable to mount /tmp/newroot overlayfs filesystem");
-	if (mount("/proc", "/tmp/newroot/proc", "proc", 0, NULL))
+	if (!first)
+	{
+		umount("/proc/bus/usb");
+		umount("/proc");
+		umount("/sys");
+		umount("/dev/pts");
+		umount("/dev/shm");
+		umount2("/dev", MNT_DETACH);
+		umount("/run");
+		if (mount("/tmp/stage2", "/tmp/newroot", "overlayfs", 0, "upperdir=/,lowerdir=/tmp/stage2"))
+			fatal_error("Unable to mount /tmp/newroot overlayfs filesystem");
+		chroot ("/tmp/newroot");
+
+	} else {
+		mkdir("/run", 0755);
+		mkdir("/sys", 0755);
+	}
+
+	if (mount("/proc", "/proc", "proc", 0, NULL))
 		fatal_error("Unable to mount /proc proc filesystem");
-	if (mount("none", "/tmp/newroot/sys", "sysfs", 0, NULL))
+	if (mount("none", "/sys", "sysfs", 0, NULL))
 		fatal_error("Unable to mount /sys sysfs filesystem");
-	if (mount("none", "/tmp/newroot/dev", "devtmpfs", 0, NULL))
+	if (mount("none", "/dev", "devtmpfs", 0, NULL))
 		fatal_error("Unable to mount /dev devtmpfs filesystem");
-	mkdir("/tmp/newroot/dev/pts", 0755);
-	if (mount("none", "/tmp/newroot/dev/pts", "devpts", 0, NULL))
-	    fatal_error("Unable to mount /dev/pts devpts filesystem");
-	mkdir("/tmp/newroot/dev/shm", 0755);
-	if (mount("none", "/tmp/newroot/dev/shm", "tmpfs", 0, NULL))
-	    fatal_error("Unable to mount /dev/shm tmpfs filesystem");
-	mkdir("/tmp/newroot/run", 0755);
-	if (mount("none", "/tmp/newroot/run", "tmpfs", 0, NULL))
-	    fatal_error("Unable to mount /run tmpfs filesystem");
-
-
-	chroot ("/tmp/newroot");
+	mkdir("/dev/pts", 0755);
+	if (mount("none", "/dev/pts", "devpts", 0, NULL))
+		fatal_error("Unable to mount /dev/pts devpts filesystem");
+	mkdir("/dev/shm", 0755);
+	if (mount("none", "/dev/shm", "tmpfs", 0, NULL))
+		fatal_error("Unable to mount /dev/shm tmpfs filesystem");
+	if (mount("none", "/run", "tmpfs", 0, NULL))
+		fatal_error("Unable to mount /run tmpfs filesystem");
 }
 
 int exit_value_proceed = 66;
@@ -468,22 +480,8 @@ int main(int argc, char **argv)
 		printf("*** TESTING MODE *** (pid is %d)\n", getpid());
 
 
-	if (!testing) {
-		mkdir("/proc", 0755);
-		if (mount("/proc", "/proc", "proc", 0, NULL))
-			fatal_error("Unable to mount /proc filesystem");
-		mkdir("/sys", 0755);
-		if (mount("none", "/sys", "sysfs", 0, NULL))
-			fatal_error("Unable to mount /sys sysfs filesystem");
-		if (mount("none", "/dev", "devtmpfs", 0, NULL))
-			fatal_error("Unable to mount /dev devmpts filesystem");
-		mkdir("/dev/pts", 0755);
-		if (mount("none", "/dev/pts", "devpts", 0, NULL))
-			fatal_error("Unable to mount /dev/pts devpts filesystem");
-		mkdir("/dev/shm", 0755);
-		if (mount("none", "/dev/shm", "tmpfs", 0, NULL))
-			fatal_error("Unable to mount /dev/shm tmpfs filesystem");
-	}
+	if (!testing)
+		mount_and_chroot(1);
 
 
 	/* ignore Control-C and keyboard stop signals */
@@ -526,9 +524,8 @@ int main(int argc, char **argv)
 	*/
 
         do {
-		if (counter == 1) {
-			overlay_chroot();
-		}
+		if (counter == 1)
+			mount_and_chroot(0);
 
                 if (!(installpid = fork())) {
                         /* child */
@@ -558,7 +555,7 @@ int main(int argc, char **argv)
 
 		{
 			char * child_argv[2] = { "/sbin/init", NULL };
-			overlay_chroot();
+			mount_and_chroot(0);
 			execve(child_argv[0], child_argv, env);
 		}
 		fatal_error("failed to exec /sbin/init");
