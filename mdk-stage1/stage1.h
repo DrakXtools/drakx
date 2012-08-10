@@ -41,6 +41,7 @@ extern char * interactive_fifo;
 #define MODE_NOAUTO         (1 << 12)
 #define MODE_NETAUTO        (1 << 13)
 #define MODE_RECOVERY       (1 << 14)
+#define	MODE_KEEPSHELL      (1 << 15)
 
 #define IS_TESTING     (get_param(MODE_TESTING))
 #define IS_RESCUE      (get_param(MODE_RESCUE))

@@ -354,7 +354,7 @@ void finish_preparing(void)
 	/* we remove it to ensure the old one is not copied over it in stage2 */
 
 #ifdef SPAWN_SHELL
-	if (shell_pid != 0) {
+	if (!get_param(MODE_KEEPSHELL) && shell_pid != 0) {
 		int fd;
 		const char *clear = "\033[H\033[J";
 		kill(shell_pid, 9);
