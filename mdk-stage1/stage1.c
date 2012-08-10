@@ -129,9 +129,9 @@ static void spawn_shell(void)
 	log_message("spawning a shell");
 
 	if (!IS_TESTING) {
-		fd = open("/dev/tty2", O_RDWR);
+		fd = open("/dev/tty5", O_RDWR);
 		if (fd == -1) {
-			log_message("cannot open /dev/tty2 -- no shell will be provided");
+			log_message("cannot open /dev/tty5 -- no shell will be provided");
 			return;
 		}
 		else if (access(shell_name[0], X_OK)) {
@@ -359,7 +359,7 @@ void finish_preparing(void)
 		const char *clear = "\033[H\033[J";
 		kill(shell_pid, 9);
 		log_message("killed shell");
-		fd = open("/dev/tty2", O_RDWR);
+		fd = open("/dev/tty5", O_RDWR);
 		write(fd, clear, strlen(clear));
 		close(fd);
         }
