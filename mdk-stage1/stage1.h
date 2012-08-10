@@ -30,18 +30,20 @@
 
 extern char * interactive_fifo;
 
-#define MODE_TESTING        (1 << 0)
-#define MODE_RESCUE         (1 << 3)
-#define MODE_AUTOMATIC	    (1 << 4)
-#define MODE_KEEP_MOUNTED   (1 << 5) /* for rescue */
-#define MODE_DEBUGSTAGE1    (1 << 6)
-#define MODE_RAMDISK        (1 << 9)
-#define MODE_CHANGEDISK     (1 << 10)
-#define MODE_THIRDPARTY     (1 << 11)
-#define MODE_NOAUTO         (1 << 12)
-#define MODE_NETAUTO        (1 << 13)
-#define MODE_RECOVERY       (1 << 14)
-#define	MODE_KEEPSHELL      (1 << 15)
+enum mode {
+	MODE_TESTING	=	(1 << 0),
+	MODE_RESCUE	=	(1 << 1),
+	MODE_AUTOMATIC	=	(1 << 2),
+	MODE_KEEP_MOUNTED =	(1 << 3), /* for rescue */
+	MODE_DEBUGSTAGE1 =	(1 << 4),
+	MODE_RAMDISK =		(1 << 5),
+	MODE_CHANGEDISK =	(1 << 6),
+	MODE_THIRDPARTY =	(1 << 7),
+	MODE_NOAUTO	=	(1 << 8),
+	MODE_NETAUTO	=	(1 << 9),
+	MODE_RECOVERY	=	(1 << 10),
+	MODE_KEEPSHELL	=	(1 << 11)
+};
 
 #define IS_TESTING     (get_param(MODE_TESTING))
 #define IS_RESCUE      (get_param(MODE_RESCUE))
@@ -52,6 +54,7 @@ extern char * interactive_fifo;
 #define IS_NOAUTO      (get_param(MODE_NOAUTO))
 #define IS_NETAUTO     (get_param(MODE_NETAUTO))
 #define IS_RECOVERY    (get_param(MODE_RECOVERY))
+#define	IS_KEEPSHELL   (get_param(MODE_KEEPSHELL))
 #define KEEP_MOUNTED   (!IS_RESCUE || get_param(MODE_KEEP_MOUNTED))
 
 void fatal_error(char *msg) __attribute__ ((noreturn));
