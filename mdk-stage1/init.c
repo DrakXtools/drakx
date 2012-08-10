@@ -318,16 +318,6 @@ struct filesystem
 	int mounted;
 };
 
-char* strcat(register char* s,register const char* t)
-{
-  char *dest=s;
-  s+=strlen(s);
-  for (;;) {
-    if (!(*s = *t)) break; ++s; ++t;
-  }
-  return dest;
-}
-
 /* attempt to unmount all filesystems in /proc/mounts */
 void unmount_filesystems(void)
 {
