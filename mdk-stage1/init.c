@@ -432,10 +432,6 @@ static void mount_and_chroot(int first) {
 		if (mount("/tmp/stage2", "/tmp/newroot", "overlayfs", 0, "upperdir=/,lowerdir=/tmp/stage2"))
 			fatal_error("Unable to mount /tmp/newroot overlayfs filesystem");
 		chroot ("/tmp/newroot");
-
-	} else {
-		mkdir("/run", 0755);
-		mkdir("/sys", 0755);
 	}
 
 	if (mount("/proc", "/proc", "proc", 0, NULL))

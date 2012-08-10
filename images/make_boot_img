@@ -259,7 +259,7 @@ fi
     }
     # ka deploy need some files in all.rdz 
     {
-	mkdir_p("$tmp_initrd/$_") foreach qw(bin dev ka proc usr/bin usr/sbin var/tmp tmp/newroot tmp/stage2);
+	mkdir_p("$tmp_initrd/$_") foreach qw(bin dev ka proc run sys usr/bin usr/sbin var/tmp tmp/newroot tmp/stage2);
 	#cp_af("/usr/bin/ka-d-client", "$tmp_initrd/ka/ka-d-client");
 	cp_af("/bin/busybox.static", "$tmp_initrd/usr/bin/busybox");
 	my @busybox_links = split("\n", `/bin/busybox.static --list-full`);
