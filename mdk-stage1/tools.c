@@ -148,65 +148,6 @@ enum return_type copy_file(char * from, char * to, void (*callback_func)(int ove
         }
 }
 
-enum return_type recursiveRemove(char *file) 
-{
-	struct stat sb;
-
-	if (lstat(file, &sb) != 0) {
-		log_message("failed to stat %s: %d", file, errno);
-		return RETURN_ERROR;
-	}
-
-	/* only descend into subdirectories if device is same as dir */
-	if (S_ISDIR(sb.st_mode)) {
-		char * strBuf = alloca(strlen(file) + 1024);
-		DIR * dir;
-		struct dirent * d;
-
-		if (!(dir = opendir(file))) {
-			log_message("error opening %s: %d", file, errno);
-			return RETURN_ERROR;
-		}
-		while ((d = readdir(dir))) {
-			if (!strcmp(d->d_name, ".") || !strcmp(d->d_name, ".."))
-				continue;
-
-			strcpy(strBuf, file);
-			strcat(strBuf, "/");
-			strcat(strBuf, d->d_name);
-
-			if (recursiveRemove(strBuf) != 0) {
-				closedir(dir);
-				return RETURN_ERROR;
-			}
-		}
-		closedir(dir);
-
-		if (rmdir(file)) {
-			log_message("failed to rmdir %s: %d", file, errno);
-			return RETURN_ERROR;
-		}
-	} else {
-		if (unlink(file) != 0) {
-			log_message("failed to remove %s: %d", file, errno);
-			return RETURN_ERROR;
-		}
-	}
-	return RETURN_OK;
-}
-
-enum return_type recursiveRemove_if_it_exists(char *file) 
-{
-	struct stat sb;
-
-	if (lstat(file, &sb) != 0) {
-		/* if file doesn't exist, simply return OK */
-		return RETURN_OK;
-	}
-
-	return recursiveRemove(file);
-}
-
 enum return_type mount_compressed_image(char *compressed_image,  char *location_mount)
 {
 	if (lomount(compressed_image, location_mount, NULL, 1)) {

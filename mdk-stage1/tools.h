@@ -30,8 +30,6 @@ int image_has_stage2();
 enum return_type create_IMAGE_LOCATION(char *location_full);
 int ramdisk_possible(void);
 enum return_type copy_file(char * from, char * to, void (*callback_func)(int overall));
-enum return_type recursiveRemove(char *file);
-enum return_type recursiveRemove_if_it_exists(char *file);
 enum return_type preload_mount_compressed_fd(int compressed_fd, int image_size, char *image_name, char *location_mount);
 enum return_type mount_compressed_image(char *compressed_image,  char *location_mount);
 enum return_type mount_compressed_image_may_preload(char *image_name, char *location_mount, int preload);
