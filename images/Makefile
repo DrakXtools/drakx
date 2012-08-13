@@ -1,6 +1,6 @@
 include ../Makefile.config
 
-VERSION=1.58
+VERSION=1.59
 PRODUCT=$(FAMILY)-images
 KERNELS=$(shell rpm -qf /lib/modules/3.*)
 IMAGES_DEST = $(ROOTDEST)/install/images

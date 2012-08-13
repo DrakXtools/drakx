@@ -1,3 +1,11 @@
+Version 1.59 - 13 August 2012, by Per Øyvind Karlsen
+
+- use system version of blkid for now
+- get rid of busybox links for stuff where we want to use the system version
+- create /run & /sys in image created, rather than in code
+- provide a hard link for rescue-gui in stage 1
+
+
 Version 1.58 - 17 June 2012, by Per Øyvind Karlsen
 
 - don't include ka-d-client as we're no longer building with support for it
