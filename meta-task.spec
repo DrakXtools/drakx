@@ -2,7 +2,7 @@ Name:		meta-task
 Summary:	Meta task listing packages by group
 Version:	2012.0
 Release:	2
-License:	GPL
+License:	GPLv2+
 Group:		System/Configuration/Other
 Source0:	rpmsrate-raw
 Source1:	check-rpmsrate
