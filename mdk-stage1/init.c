@@ -146,7 +146,6 @@ static void doklog()
 		return;
 	}
 
-        mkdir("/tmp", 0755);
 	if ((log = open("/tmp/syslog", O_WRONLY | O_CREAT | O_APPEND, 0644)) < 0) {
 		print_error("error opening /tmp/syslog");
 		sleep(5);
