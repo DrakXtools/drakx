@@ -356,7 +356,7 @@ sub running_systemd() {
 }
 
 sub has_systemd() {
-    run_program::rooted($::prefix, '/bin/rpm', '-q', 'systemd-sysvinit');
+    run_program::rooted($::prefix, '/bin/rpm', '-q', 'systemd');
 }
 
 sub xinetd_services() {

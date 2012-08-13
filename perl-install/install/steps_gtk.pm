@@ -318,17 +318,20 @@ sub reallyChooseGroups {
 
     my $w = ugtk2->new(N("Package Group Selection"));
     my $w_size = gtknew('Label_Left', text => &$size_to_display, padding => [ 0, 0 ]);
+    my @entries;
 
     my $entry = sub {
 	my ($e) = @_;
 
-	gtknew('CheckButton', 
+	my $w = gtknew('CheckButton', 
 	       text => translate($e->{label}), 
 	       tip => translate($e->{descr}),
 	       active_ref => \$e->{selected},
 	       toggled => sub { 
 		   gtkset($w_size, text => &$size_to_display);
 	       });
+        push @entries, $w;
+        $w;
     };
     #- when restarting this step, it might be necessary to reload the compssUsers.pl (bug 11558). kludgy.
     if (!ref $o->{gtk_display_compssUsers}) { install::any::load_rate_files($o) }
@@ -344,6 +347,8 @@ sub reallyChooseGroups {
 		    0, gtknew('HButtonBox', layout => 'edge', children_tight => [
                         gtknew('Install_Button', text => N("Help"), clicked => sub {
                                    interactive::gtk::display_help($o, { interactive_help_id => 'choosePackages#choosePackagesGroups' }, $w) }),
+			  gtknew('Button', text => N("Select All"),   clicked => sub { $_->set_active(1) foreach @entries }),
+			  gtknew('Button', text => N("Unselect All"), clicked => sub { $_->set_active(0) foreach @entries }),
 			  gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
 			 ]),
 		  ]),
