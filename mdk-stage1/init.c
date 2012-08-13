@@ -390,8 +390,29 @@ static int in_reboot(void)
 static void mount_and_chroot(int first) {
 	printf("proceeding, please wait...\n");
 
+	size_t len = first ? sizeof("/tmp/newroot")-1 : 0;
 	if (!first)
-	{
+		if (mount("/tmp/stage2", "/tmp/newroot", "overlayfs", 0, "upperdir=/,lowerdir=/tmp/stage2"))
+			fatal_error("Unable to mount /tmp/newroot overlayfs filesystem");
+
+	/* XXX uClibc unfortunately doesn't support MS_MOVE yet */
+	if (mount("/proc", "/tmp/newroot/proc" + len, "proc", first ? 0: MS_BIND, NULL))
+		fatal_error("Unable to mount /proc proc filesystem");
+	if (mount("/sys", "/tmp/newroot/sys" + len, "sysfs", first ? 0: MS_BIND, NULL))
+		fatal_error("Unable to mount /sys sysfs filesystem");
+	if (mount("/dev", "/tmp/newroot/dev" + len, "devtmpfs", first ? 0: MS_BIND, NULL))
+		fatal_error("Unable to mount /dev devtmpfs filesystem");
+	if (first) {
+		mkdir("/dev/pts", 0755);
+		mkdir("/dev/shm", 0755);
+	}
+	if (mount("/dev/pts", "/tmp/newroot/dev/pts" + len, "devpts", first ? 0: MS_BIND, NULL))
+		fatal_error("/tmp/newrootUnable to mount /dev/pts devpts filesystem");
+	if (mount("/dev/shm", "/tmp/newroot/dev/shm" + len, "tmpfs", first ? 0: MS_BIND, NULL))
+		fatal_error("Unable to mount /dev/shm tmpfs filesystem");
+	if (mount("/run", "/tmp/newroot/run" + len, "tmpfs", first ? 0: MS_BIND, NULL))
+		fatal_error("Unable to mount /run tmpfs filesystem");
+	if (!first) {
 		umount("/proc/bus/usb");
 		umount("/proc");
 		umount("/sys");
@@ -399,25 +420,8 @@ static void mount_and_chroot(int first) {
 		umount("/dev/shm");
 		umount2("/dev", MNT_DETACH);
 		umount("/run");
-		if (mount("/tmp/stage2", "/tmp/newroot", "overlayfs", 0, "upperdir=/,lowerdir=/tmp/stage2"))
-			fatal_error("Unable to mount /tmp/newroot overlayfs filesystem");
 		chroot ("/tmp/newroot");
 	}
-
-	if (mount("/proc", "/proc", "proc", 0, NULL))
-		fatal_error("Unable to mount /proc proc filesystem");
-	if (mount("none", "/sys", "sysfs", 0, NULL))
-		fatal_error("Unable to mount /sys sysfs filesystem");
-	if (mount("none", "/dev", "devtmpfs", 0, NULL))
-		fatal_error("Unable to mount /dev devtmpfs filesystem");
-	mkdir("/dev/pts", 0755);
-	if (mount("none", "/dev/pts", "devpts", 0, NULL))
-		fatal_error("Unable to mount /dev/pts devpts filesystem");
-	mkdir("/dev/shm", 0755);
-	if (mount("none", "/dev/shm", "tmpfs", 0, NULL))
-		fatal_error("Unable to mount /dev/shm tmpfs filesystem");
-	if (mount("none", "/run", "tmpfs", 0, NULL))
-		fatal_error("Unable to mount /run tmpfs filesystem");
 }
 
 static int exit_value_proceed = 66;
