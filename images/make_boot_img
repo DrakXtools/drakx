@@ -235,7 +235,7 @@ fi
     _ "chmod 755 $tmp_initrd/hotplug";
     symlink "../hotplug", "$tmp_initrd/sbin/hotplug";
     _ "install $stage1_root/init $tmp_initrd/";
-    _ "install $stage1_root/stage1 $tmp_initrd/sbin/";
+    _ "ln $tmp_initrd/init $tmp_initrd/sbin/stage1";
     _ "mkdir $tmp_initrd/bin";
     _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/bin/rescue-gui";
 
