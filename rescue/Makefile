@@ -1,6 +1,6 @@
 include ../Makefile.config
 
-VERSION=1.25
+VERSION=1.26
 PRODUCT=$(FAMILY)-rescue
 
 RESCUE = rescue.sqfs
