@@ -1,17 +1,16 @@
-
-Name: meta-task
-Summary: Meta task listing packages by group
-Version: 2012.0
-Release: 2
-License: GPL
-Group: System/Configuration/Other
-Source: rpmsrate-raw
-Source1: check-rpmsrate
-Source2: compssUsers.pl
-Source3: prefer.vendor.list
-Source4: README
-BuildArch: noarch
-BuildRequires: drakxtools-backend
+Name:		meta-task
+Summary:	Meta task listing packages by group
+Version:	2012.0
+Release:	2
+License:	GPL
+Group:		System/Configuration/Other
+Source0:	rpmsrate-raw
+Source1:	check-rpmsrate
+Source2:	compssUsers.pl
+Source3:	prefer.vendor.list
+Source4:	README
+BuildArch:	noarch
+BuildRequires:	drakxtools-backend
 
 # https://qa.mandriva.com/show_bug.cgi?id=64814 (texlive update crashes system)
 # Need to remove these packages first, because texlive packages were reworked
@@ -21,7 +20,7 @@ BuildRequires: drakxtools-backend
 # FIXME this probably should be in a proper "cleanup" package that also causes
 # urpmi to restart.
 # So we can clean these packages
-Obsoletes:	texlive-doc, texlive-fontsextra, texlive-source, texlive-texmf
+Obsoletes:	texlive-doc texlive-fontsextra texlive-source texlive-texmf
 
 %description
 prefer.vendor.list is used by urpmi, rpmdrake and installer to prefer some
@@ -35,7 +34,6 @@ cp %{SOURCE1} .
 cp %{SOURCE4} .
 
 %install
-rm -rf %{buildroot}
 install -d %{buildroot}%{_datadir}/%{name}
 install -m644 %{SOURCE0} %{buildroot}%{_datadir}/%{name}
 install -m644 %{SOURCE2} %{buildroot}%{_datadir}/%{name}
