@@ -299,16 +299,17 @@ struct filesystem
 };
 
 /* attempt to unmount all filesystems in /proc/mounts */
-static void unmount_filesystems(void)
+static void unmount_filesystems(int unmount)
 {
 	int fd, size;
 	char buf[65535];			/* this should be big enough */
+	char path[PATH_MAX] = "/tmp/newroot";
 	char *p;
 	struct filesystem fs[500];
 	int numfs = 0;
 	int i, nb;
 
-	printf("unmounting filesystems...\n"); 
+	printf(unmount ? "unmounting filesystems...\n" : "loading stage 2, please wait\n"); 
 
 	fd = open("/proc/mounts", O_RDONLY, 0);
 	if (fd < 1) {
@@ -337,37 +338,52 @@ static void unmount_filesystems(void)
 		while (*p != '\n') p++;
 		p++;
 		if (strcmp(fs[numfs].name, "/")
-                    && !strstr(fs[numfs].dev, "ram")
+                    && (((!unmount && strcmp(fs[numfs].fs, "squashfs")) ||
+		    (!strstr(fs[numfs].dev, "ram")
                     && strcmp(fs[numfs].name, "/dev")
                     && strcmp(fs[numfs].name, "/sys")
-                    && strncmp(fs[numfs].name, "/proc", 5))
+                    && strncmp(fs[numfs].name, "/proc", 5)))))
                         numfs++;
 	}
 
 	/* Pixel's ultra-optimized sorting algorithm:
 	   multiple passes trying to umount everything until nothing moves
 	   anymore (a.k.a holy shotgun method) */
-	do {
-		nb = 0;
-		for (i = 0; i < numfs; i++) {
-			/*printf("trying with %s\n", fs[i].name);*/
-                        del_loops();
-			if (fs[i].mounted && umount(fs[i].name) == 0) { 
-				printf("\t%s\n", fs[i].name);
-				fs[i].mounted = 0;
-				nb++;
+	if (unmount) {
+		do {
+			nb = 0;
+			for (i = 0; i < numfs; i++) {
+				/*printf("trying with %s\n", fs[i].name);*/
+				del_loops();
+				if (fs[i].mounted && umount(fs[i].name) == 0) { 
+					printf("\t%s\n", fs[i].name);
+					fs[i].mounted = 0;
+					nb++;
+				}
 			}
-		}
-	} while (nb);
+		} while (nb);
+	} else
+		if (mount("/tmp/stage2", path, "overlayfs", 0, "upperdir=/,lowerdir=/tmp/stage2"))
+			fatal_error("Unable to mount /tmp/newroot overlayfs filesystem");
 
-	for (i = nb = 0; i < numfs; i++)
-		if (fs[i].mounted) {
+	for (i = nb = 0; i < numfs; i++) {
+		if (unmount && fs[i].mounted) {
 			printf("\tumount failed: %s\n", fs[i].name);
 			if (strcmp(fs[i].fs, "ext3") == 0) nb++; /* don't count not-ext3 umount failed */
+		} else {
+			stpcpy(&path[sizeof("/tmp/newroot")-1], fs[i].name);
+			/* XXX uClibc unfortunately doesn't support MS_MOVE yet */
+			mount(fs[i].name, path, fs[i].fs, MS_BIND, NULL);
 		}
+	}
 
-
-	if (nb) {
+	if (!unmount) {
+		for (i = numfs-1; i >= 0; i--) {
+			if (umount(fs[i].name))
+				umount2(fs[i].name, MNT_FORCE|MNT_DETACH);
+		}
+		chroot("/tmp/newroot");
+	} else if (nb) {
 		printf("failed to umount some filesystems\n");
                 select(0, NULL, NULL, NULL, NULL);
 	}
@@ -385,69 +401,6 @@ static int in_reboot(void)
                 return i > 0;
         }
         return 0;
-}
-
-static void move_chroot() {
-	int fd, size;
-	char buf[65535];			/* this should be big enough */
-	char *p;
-	struct filesystem fs[500];
-	int numfs = 0;
-	int i;
-
-	printf("unmounting filesystems...\n"); 
-
-	fd = open("/proc/mounts", O_RDONLY, 0);
-	if (fd < 1) {
-		printf("failed to open /proc/mounts");
-		sleep(2);
-		return;
-	}
-
-	size = read(fd, buf, sizeof(buf) - 1);
-	buf[size] = '\0';
-
-	close(fd);
-
-	p = buf;
-	while (*p) {
-		fs[numfs].mounted = 1;
-		fs[numfs].dev = p;
-		while (*p != ' ') p++;
-		*p++ = '\0';
-		fs[numfs].name = p;
-		while (*p != ' ') p++;
-		*p++ = '\0';
-		fs[numfs].fs = p;
-		while (*p != ' ') p++;
-		*p++ = '\0';
-		while (*p != '\n') p++;
-		p++;
-		if (strcmp(fs[numfs].name, "/")
-                    && strcmp(fs[numfs].fs, "squashfs"))
-                        numfs++;
-	}
-
-	/* Pixel's ultra-optimized sorting algorithm:
-	   multiple passes trying to umount everything until nothing moves
-	   anymore (a.k.a holy shotgun method) */
-	char buff[BUFSIZ] = "/tmp/newroot";
-	if (mount("/tmp/stage2", buff, "overlayfs", 0, "upperdir=/,lowerdir=/tmp/stage2"))
-			fatal_error("Unable to mount /tmp/newroot overlayfs filesystem");
-	for (i = 0; i < numfs; i++) {
-		stpcpy(&buff[sizeof("/tmp/newroot")-1], fs[i].name);
-		/* XXX uClibc unfortunately doesn't support MS_MOVE yet */
-		mount(fs[i].name, buff, fs[i].fs, MS_BIND, NULL);
-	}
-	for (i--; i >= 0; i--) {
-		if (umount(fs[i].name))
-			umount2(fs[i].name, MNT_FORCE|MNT_DETACH);
-	}
-
-	chroot("/tmp/newroot");
-
-	return;
-
 }
 
 static void mount_fs() {
@@ -541,7 +494,7 @@ int init_main(int argc, char **argv)
 
         do {
 		if (counter == 1)
-			move_chroot();
+			unmount_filesystems(0);
 
                 if (!(installpid = fork())) {
                         /* child */
@@ -571,7 +524,7 @@ int init_main(int argc, char **argv)
 
 		{
 			char * child_argv[2] = { "/sbin/init", NULL };
-			move_chroot();
+			unmount_filesystems(0);
 			execve(child_argv[0], child_argv, env);
 		}
 		fatal_error("failed to exec /sbin/init");
@@ -605,7 +558,7 @@ int init_main(int argc, char **argv)
 	sleep(2);
 	printf("done\n");
 
-	unmount_filesystems();
+	unmount_filesystems(1);
 
 	sync(); sync();
 
