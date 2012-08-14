@@ -594,7 +594,6 @@ sub main {
     log::l("second stage install running (", install::any::drakx_version($o), ")");
 
     eval { output('/proc/sys/kernel/modprobe', "\n") } if !$::local_install && !$::testing; #- disable kmod
-    eval { fs::mount::mount('none', '/sys', 'sysfs', 1) } if !install::any::dont_run_directly_stage2();
     eval { touch('/root/non-chrooted-marker.DrakX') }; #- helps distinguishing /root and /mnt/root when we don't know if we are chrooted
 
     if ($::local_install) {
