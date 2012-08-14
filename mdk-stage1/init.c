@@ -493,7 +493,7 @@ int init_main(int argc, char **argv)
 	*/
 
         do {
-		if (counter == 1)
+		if (counter == 1 && !testing)
 			unmount_filesystems(0);
 
                 if (!(installpid = fork())) {
@@ -524,7 +524,8 @@ int init_main(int argc, char **argv)
 
 		{
 			char * child_argv[2] = { "/sbin/init", NULL };
-			unmount_filesystems(0);
+			if (!testing)
+				unmount_filesystems(0);
 			execve(child_argv[0], child_argv, env);
 		}
 		fatal_error("failed to exec /sbin/init");
