@@ -19,6 +19,7 @@
  *
  */
 
+#define _GNU_SOURCE 1
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -386,41 +387,87 @@ static int in_reboot(void)
         return 0;
 }
 
-static void mount_and_chroot(int first) {
+static void move_chroot() {
+	int fd, size;
+	char buf[65535];			/* this should be big enough */
+	char *p;
+	struct filesystem fs[500];
+	int numfs = 0;
+	int i;
+
+	printf("unmounting filesystems...\n"); 
+
+	fd = open("/proc/mounts", O_RDONLY, 0);
+	if (fd < 1) {
+		printf("failed to open /proc/mounts");
+		sleep(2);
+		return;
+	}
+
+	size = read(fd, buf, sizeof(buf) - 1);
+	buf[size] = '\0';
+
+	close(fd);
+
+	p = buf;
+	while (*p) {
+		fs[numfs].mounted = 1;
+		fs[numfs].dev = p;
+		while (*p != ' ') p++;
+		*p++ = '\0';
+		fs[numfs].name = p;
+		while (*p != ' ') p++;
+		*p++ = '\0';
+		fs[numfs].fs = p;
+		while (*p != ' ') p++;
+		*p++ = '\0';
+		while (*p != '\n') p++;
+		p++;
+		if (strcmp(fs[numfs].name, "/")
+                    && strcmp(fs[numfs].fs, "squashfs"))
+                        numfs++;
+	}
+
+	/* Pixel's ultra-optimized sorting algorithm:
+	   multiple passes trying to umount everything until nothing moves
+	   anymore (a.k.a holy shotgun method) */
+	char buff[BUFSIZ] = "/tmp/newroot";
+	if (mount("/tmp/stage2", buff, "overlayfs", 0, "upperdir=/,lowerdir=/tmp/stage2"))
+			fatal_error("Unable to mount /tmp/newroot overlayfs filesystem");
+	for (i = 0; i < numfs; i++) {
+		stpcpy(&buff[sizeof("/tmp/newroot")-1], fs[i].name);
+		/* XXX uClibc unfortunately doesn't support MS_MOVE yet */
+		mount(fs[i].name, buff, fs[i].fs, MS_BIND, NULL);
+	}
+	for (i--; i >= 0; i--) {
+		if (umount(fs[i].name))
+			umount2(fs[i].name, MNT_FORCE|MNT_DETACH);
+	}
+
+	chroot("/tmp/newroot");
+
+	return;
+
+}
+
+static void mount_fs() {
 	printf("proceeding, please wait...\n");
 
-	size_t len = first ? sizeof("/tmp/newroot")-1 : 0;
-	if (!first)
-		if (mount("/tmp/stage2", "/tmp/newroot", "overlayfs", 0, "upperdir=/,lowerdir=/tmp/stage2"))
-			fatal_error("Unable to mount /tmp/newroot overlayfs filesystem");
-
 	/* XXX uClibc unfortunately doesn't support MS_MOVE yet */
-	if (mount("/proc", "/tmp/newroot/proc" + len, "proc", first ? 0: MS_BIND, NULL))
+	if (mount("/proc", "/proc", "proc", 0, NULL))
 		fatal_error("Unable to mount /proc proc filesystem");
-	if (mount("/sys", "/tmp/newroot/sys" + len, "sysfs", first ? 0: MS_BIND, NULL))
+	if (mount("/sys", "/sys", "sysfs", 0, NULL))
 		fatal_error("Unable to mount /sys sysfs filesystem");
-	if (mount("/dev", "/tmp/newroot/dev" + len, "devtmpfs", first ? 0: MS_BIND, NULL))
+	if (mount("/dev", "/dev", "devtmpfs", 0, NULL))
 		fatal_error("Unable to mount /dev devtmpfs filesystem");
-	if (first) {
-		mkdir("/dev/pts", 0755);
-		mkdir("/dev/shm", 0755);
-	}
-	if (mount("/dev/pts", "/tmp/newroot/dev/pts" + len, "devpts", first ? 0: MS_BIND, NULL))
-		fatal_error("/tmp/newrootUnable to mount /dev/pts devpts filesystem");
-	if (mount("/dev/shm", "/tmp/newroot/dev/shm" + len, "tmpfs", first ? 0: MS_BIND, NULL))
+	mkdir("/dev/pts", 0755);
+	if (mount("/dev/pts", "/dev/pts", "devpts", 0, NULL))
+		fatal_error("Unable to mount /dev/pts devpts filesystem");
+	mkdir("/dev/shm", 0755);
+	if (mount("/dev/shm", "/dev/shm", "tmpfs", 0, NULL))
 		fatal_error("Unable to mount /dev/shm tmpfs filesystem");
-	if (mount("/run", "/tmp/newroot/run" + len, "tmpfs", first ? 0: MS_BIND, NULL))
+	if (mount("/run", "/run", "tmpfs", 0, NULL))
 		fatal_error("Unable to mount /run tmpfs filesystem");
-	if (!first) {
-		umount("/proc/bus/usb");
-		umount("/proc");
-		umount("/sys");
-		umount("/dev/pts");
-		umount("/dev/shm");
-		umount2("/dev", MNT_DETACH);
-		umount("/run");
-		chroot ("/tmp/newroot");
-	}
 }
 
 static int exit_value_proceed = 66;
@@ -450,7 +497,7 @@ int init_main(int argc, char **argv)
 
 
 	if (!testing)
-		mount_and_chroot(1);
+		mount_fs();
 
 
 	/* ignore Control-C and keyboard stop signals */
@@ -494,7 +541,7 @@ int init_main(int argc, char **argv)
 
         do {
 		if (counter == 1)
-			mount_and_chroot(0);
+			move_chroot();
 
                 if (!(installpid = fork())) {
                         /* child */
@@ -524,7 +571,7 @@ int init_main(int argc, char **argv)
 
 		{
 			char * child_argv[2] = { "/sbin/init", NULL };
-			mount_and_chroot(0);
+			move_chroot();
 			execve(child_argv[0], child_argv, env);
 		}
 		fatal_error("failed to exec /sbin/init");
