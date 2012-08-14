@@ -110,10 +110,10 @@ sub mkinitrd {
     my ($kernel_version, $bootloader, $entry, $initrd) = @_;
 
     my $dir = dirname($initrd);
-    return $initrd if $::testing  # testing mode
-      || -e "$::prefix/$initrd"   # already exists
-        || $initrd =~ /\(hd/      # unrecognized partition
-          || !-d $dir;            # dir doesn't exist (probably !mounted foreign part)
+    return $initrd if ($::testing	# testing mode
+      || -e "$::prefix/$initrd"		# already exists
+        || $initrd =~ /\(hd/		# unrecognized partition
+          || ! -d "$::prefix/$dir");	# dir doesn't exist (probably !mounted foreign part)
 
     # for /boot on dos partitions when installing on loopback file on dos partition
     my $loop_boot = fs::loopback::prepare_boot();
