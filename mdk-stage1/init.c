@@ -309,7 +309,7 @@ static void unmount_filesystems(int unmount)
 	int numfs = 0;
 	int i, nb;
 
-	printf(unmount ? "unmounting filesystems...\n" : "loading stage 2, please wait\n"); 
+	printf(unmount ? "unmounting filesystems...\n" : "loading stage 2, please wait...\n"); 
 
 	fd = open("/proc/mounts", O_RDONLY, 0);
 	if (fd < 1) {
