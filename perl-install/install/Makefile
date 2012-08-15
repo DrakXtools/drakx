@@ -103,7 +103,7 @@ stage2:
 
 dont_run_directly_stage2:
 	[ -d $(DEST) ] || ../../tools/mdkinst_stage2_tool --uncompress $(DESTDIR)$(STAGE2_DEST)
-	install -m 755 share/runinstall2.sh share/gdb-inst $(DESTDIR)$(DEST)/usr/bin/
+	install -m 755 share/runinstall2.sh $(DESTDIR)$(DEST)/usr/bin/
 	ln -sf runinstall2.sh $(DESTDIR)$(DEST)/usr/bin/runinstall2
 
 trace_stage2:
