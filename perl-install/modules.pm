@@ -61,7 +61,30 @@ sub module_is_available {
 #-###############################################################################
 # handles dependencies
 sub load_raw {
-    my ($l, $h_options) = @_;
+    my ($lm, $h_options) = @_;
+
+    #  try to detect built-in modules by looking at /sys/module
+    #  unfortunately it does not work for all modules eg :
+    #  - networks protocols  like af_packet
+    #  - file systems
+    foreach my $mod (@$lm) {
+	$mod =~ s/-/_/g;
+        if (-d "/sys/module/$mod") {
+	  log::l("$mod already loaded");
+    	} elsif ($mod =~ /af_packet/) {
+	  if (-f "/proc/net/packet") {
+	    log::l("$mod already loaded");
+	  } else {
+	    @$l = (@$l, $mod);
+	  }
+	} elsif (cat_("/proc/filesystems") =~ /$mod/) {
+	  log::l("$mod already loaded");
+	} elsif ($mod =~ /serial/) {
+	  # hack ... must find who tries to load the module serial
+	} else {
+	  @$l = (@$l, $mod);
+	}
+    }
     if ($::testing || $::local_install) {
 	log::l("i would load module $_ ($h_options->{$_})") foreach @$l;
     } elsif ($::isInstall) {
