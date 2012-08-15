@@ -428,6 +428,30 @@ static void mount_fs() {
 		fatal_error("Unable to mount /run tmpfs filesystem");
 }
 
+static int ctty(const char *tty) {
+	if (!testing) {
+		int fd;
+		/* I set me up as session leader (probably not necessary?) */
+		setsid();
+		/* if (ioctl(0, TIOCSCTTY, NULL))
+		   print_error("could not set new controlling tty"); */
+
+		fd = open(tty, O_RDWR, 0);
+		if (fd < 0) {
+			char err[PATH_MAX];
+			snprintf(err, sizeof(err), "failed to open %s", tty);
+			fatal_error(err);
+			return -1;
+		}
+
+		dup2(fd, 0);
+		dup2(fd, 1);
+		dup2(fd, 2);
+		close(fd);
+	}
+	return 0;
+}
+
 static int exit_value_proceed = 66;
 static int exit_value_restart = 0x35;
 
@@ -435,7 +459,6 @@ int init_main(int argc, char **argv)
 {
 	pid_t installpid, childpid;
 	int wait_status;
-	int fd;
 	int counter = 0;
 	int abnormal_termination = 0;
 
@@ -462,22 +485,7 @@ int init_main(int argc, char **argv)
 	signal(SIGINT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
 
-	if (!testing) {
-		fd = open("/dev/console", O_RDWR, 0);
-		if (fd < 0)
-			fatal_error("failed to open /dev/console");
-
-		dup2(fd, 0);
-		dup2(fd, 1);
-		dup2(fd, 2);
-		close(fd);
-	}
-
-
-	/* I set me up as session leader (probably not necessary?) */
-	setsid();
-//	if (ioctl(0, TIOCSCTTY, NULL))
-//		print_error("could not set new controlling tty");
+	ctty("/dev/console");
 
 	if (!testing) {
 		char my_hostname[] = "localhost";
@@ -504,7 +512,12 @@ int init_main(int argc, char **argv)
                 if (!(installpid = fork())) {
                         /* child */
                         char * child_argv[2];
-                        child_argv[0] = counter == 0 ? BINARY : BINARY_STAGE2;
+			if (counter == 0)
+				child_argv[0] = BINARY;
+			else {
+				child_argv[0] = BINARY_STAGE2;
+				ctty("/dev/tty1");
+			}
                         child_argv[1] = NULL;
 
                         execve(child_argv[0], child_argv, env);
