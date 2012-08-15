@@ -70,11 +70,6 @@ get_needed_files: xs
 	perl -I.. -Mlang -e 'symlink "UTF-8", "$(DESTDIR)$(DEST)/usr/share/locale/$$_" foreach lang::list_langs()'
 
 	perl -ane 'symlink "$$F[1]", "$(DESTDIR)$(DEST)$$F[0]"' share/aliases
-ifeq (ia64,$(ARCH))
-	ln -sf bash $(DESTDIR)$(DEST)/bin/sh
-else
-	ln -sf ash $(DESTDIR)$(DEST)/bin/sh
-endif
 
 	mkfontdir $(DESTDIR)$(DEST)/usr/share/fonts
 	fc-cache -f $(DESTDIR)$(DEST)/usr/share/fonts
