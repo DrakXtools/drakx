@@ -33,7 +33,7 @@ my %mappings_24_26 = (
     "dc395x_trm" => "dc395x",
 );
 my %mappings_26_24 = reverse %mappings_24_26;
-$mappings_26_24{'uhci_hcd'} = 'usb_uhci';
+$mappings_26_24{uhci_hcd} = 'usb_uhci';
 
 my @parallel_zip_modules = qw(imm ppa);
 
