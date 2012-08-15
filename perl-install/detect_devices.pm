@@ -341,9 +341,7 @@ sub getCompaqSmartArray() {
     my (@idi, $f);
 
     foreach ('array/ida', 'cpqarray/ida', 'cciss/cciss') {
-	my $prefix = "/proc/driver/$_"; #- kernel 2.4 places it here
-	$prefix = "/proc/$_" if !-e "${prefix}0"; #- kernel 2.2
-
+	my $prefix = "/proc/driver/$_";
 	my ($name) = m|/(.*)|;
 	for (my $i = 0; -r ($f = "${prefix}$i"); $i++) {
 	    my @raw_devices = cat_($f) =~ m|^\s*($name/.*?):|gm;
@@ -1061,7 +1059,7 @@ sub hasSMP() {
      (any { /^processor\s*:\s*(\d+)/ && $1 > 0 } cat_('/proc/cpuinfo')) ||
       any { /\bProcessor #(\d+)\s+(\S*)/ && $1 > 0 && $2 ne 'invalid' } syslog();
 }
-sub hasPCMCIA() { $::o->{pcmcia} } #- because /proc/pcmcia seems not to be present on 2.4 at least (or use /var/run/stab)
+sub hasPCMCIA() { $::o->{pcmcia} }
 
 my (@dmis, $dmidecode_already_runned);
 
