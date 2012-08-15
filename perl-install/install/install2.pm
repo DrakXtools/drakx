@@ -609,6 +609,9 @@ sub main {
 
     eval { install::any::spawnShell() };
 
+    #- there's probably a better way to load this, but...
+    eval { modules::load("evdev") };
+
     init_modules_conf();
 
     #- done before auto_install is called to allow the -IP feature on auto_install file name
