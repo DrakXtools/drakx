@@ -344,8 +344,8 @@ sub setPackages {
 	#- installed and provides what is necessary).
 	my $kernel_pkg = install::pkgs::bestKernelPackage($o->{packages}, $o->{match_all_hardware});
 	install::pkgs::selectPackage($o->{packages}, $kernel_pkg, 1);
-	if ($o->{isUpgrade} && $o->{packages}{sizes}{dkms}) {
-	    my $devel_kernel_pkg = "$1-devel-latest" if $kernel_pkg =~ /(.*)-latest/;
+	if ($o->{isUpgrade} && $o->{packages}{sizes}{dkms} && $kernel_pkg =~ /(.*)-latest/) {
+	    my $devel_kernel_pkg = "$1-devel-latest";
 	    log::l("selecting $devel_kernel_pkg (since dkms was installed)");
 	    install::pkgs::select_by_package_names($o->{packages}, [ $devel_kernel_pkg ], 1);
 	}
