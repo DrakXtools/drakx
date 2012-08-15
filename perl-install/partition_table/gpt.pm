@@ -10,40 +10,33 @@ use partition_table::raw;
 use c;
 
 my $nb_primary = 128;
-#sub use_pt_type { 1 }
 
 sub read_one {
     my ($hd, $_sector) = @_;
-    my $info;
 
     c::get_disk_type($hd->{file}) eq "gpt" or die "$hd->{device} not a GPT disk ($hd->{file})";
 
-    my %parts = map {
-        my %p;
-        print $_;
-        if (/^([^ ]*) ([^ ]*) ([^ ]*) (.*) \((\d*),(\d*),(\d*)\)$/) {
+    my @pt;
+    foreach (c::get_disk_partitions($hd->{file})) {
+	log::l($_);
+	if (/^([^ ]*) ([^ ]*) ([^ ]*) (.*) \((\d*),(\d*),(\d*)\)$/) {
+            my %p;
             $p{part_number} = $1;
             $p{real_device} = $2;
             $p{fs_type} = $3;
             $p{pt_type} = 0xba;
             $p{start} = $5;
             $p{size} = $7;
+            @pt[$p{part_number}-1] = \%p;
         }
-        $p{part_number} => \%p;
-    } c::get_disk_partitions($hd->{file});
+    }
 
-    my @pt = map {
-	my $part_number = $_;
-	if ($parts{$part_number}) {
-	    $parts{$part_number};
-	} else {
-	    my %p;
-	    $p{part_number} = $part_number;
-	    \%p;
-	}
-    } (1..$nb_primary);
+    for (my $part_number = 1; $part_number < $nb_primary; $part_number++) {
+	next if exists($pt[$part_number-1]);
+	$pt[$part_number-1] = { part_number => $part_number };
+    }
 
-    [ @pt ], $info;
+    \@pt;
 }
 
 sub write {
