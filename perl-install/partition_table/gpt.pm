@@ -13,7 +13,7 @@ my $nb_primary = 128;
 #sub use_pt_type { 1 }
 
 sub read_one {
-    my ($hd, $sector) = @_;
+    my ($hd, $_sector) = @_;
     my $info;
 
     c::get_disk_type($hd->{file}) eq "gpt" or die "$hd->{device} not a GPT disk ($hd->{file})";
@@ -47,7 +47,7 @@ sub read_one {
 }
 
 sub write {
-    my ($hd, $sector, $pt, $info) = @_;
+    my ($hd, $_sector, $_pt, $_info) = @_;
 
     # Initialize the disk if current partition table is not gpt
     if (c::get_disk_type($hd->{file}) ne "gpt") {
