@@ -113,7 +113,7 @@ our %langs = (
 'ms' =>    [ 'Malay',               'Bahasa Melayu',     'ms_MY', ' 2   ', 'utf_lat1' ],
 'mt' =>    [ 'Maltese',             'Maltin',            'mt_MT', '1 3  ', 'unicode' ],
 #- "my_MM" not yet done, using "en_US" for now
-'my' =>    [ 'Burmese',             'ZZ Bamaca',         'en_US', ' 2   ', 'utf_mymr', 'my_MM:my' ],
+'my' =>    [ 'Burmese',             'ZZ Bamaca',         'my', ' 2   ', 'utf_mymr', 'my_MM:my' ],
 'nb' =>    [ 'Norwegian Bokmaal',   'Norsk, Bokmal',     'nb_NO', '1    ', 'iso-8859-15',  'nb:no' ],
 'nds' =>   [ 'Low Saxon',           'Platduutsch',       'nds_DE', '1    ', 'utf_lat1', 'nds_DE:nds' ],
 'ne' =>    [ 'Nepali',              'ZZ Nepali',         'ne_NP', ' 2   ', 'utf_deva' ],
