@@ -102,7 +102,7 @@ stage2:
 	$(MAKE) install_pms
 
 dont_run_directly_stage2:
-	[ -d $(DEST) ] || ../../tools/mdkinst_stage2_tool --uncompress $(DESTDIR)$(STAGE2_DEST)
+	[ -d $(DESTDIR)$(DEST) ] || ../../tools/mdkinst_stage2_tool --uncompress $(DESTDIR)$(STAGE2_DEST)
 	install -m 755 share/runinstall2.sh $(DESTDIR)$(DEST)/usr/bin/
 	ln -sf runinstall2.sh $(DESTDIR)$(DEST)/usr/bin/runinstall2
 
