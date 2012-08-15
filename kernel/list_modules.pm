@@ -44,8 +44,9 @@ our %l = (
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(atl1 atl1c atl1e be2net bna bnx2 bnx2x cxgb cxgb3 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io sfc sxg_nic
-      sis190 sk98lin skge sky2 slicoss spidernet stmmac tehuti tg3 via-velocity virtio_net vxge yellowfin),
+      qw(atl1 atl1c atl1e be2net bna bnx2 bnx2x cxgb cxgb3 cxgb4 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe),
+      qw(myri_sbus myri10ge netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io sfc sxg_nic),
+      qw(sis190 sk98lin skge sky2 slicoss spidernet stmmac tehuti tg3 via-velocity virtio_net vxge yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
       qw(broadcom libphy), # needed to get tg3 working
     ],
@@ -62,21 +63,22 @@ our %l = (
    #- protocol reported are not accurate) so we match network adapters against
    #- known drivers :-(
     usb => [ 
-      qw(asix catc cdc_ether kaweth pegasus rtl8150 usbnet),
+      qw(asix catc cdc_ether dm9601 kaweth mcs7830 pegasus rtl8150 smsc75xx smsc95xx usbnet),
     ],
     wireless => [
       qw(acx-pci acx-usb adm8211 agnx airo airo_cs aironet4500_cs),
-      qw(aironet_cs ar9170usb arlan arusb_lnx at76_usb at76c50x_usb ath5k ath6kl ath6kl_usb ath9k ath9k_ht),
+      qw(aironet_cs ar9170usb arlan arusb_lnx at76_usb at76c50x_usb ath5k ath6kl ath6kl_usb ath9k ath9k_htc),
+      qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx bcm_wimax brcm80211 brcmsmac brcmfmac carl9170 com20020_cs),
       qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx bcm_wimax brcm80211 brcmsmac carl9170 com20020_cs),
       qw(dyc_ar5 hostap_cs hostap_pci hostap_plx i2400m-usb ipw2100),
-      qw(ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwlwifi madwifi_pci),
+      qw(i2400m_usb ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwlwifi madwifi_pci),
       qw(mwl8k ndiswrapper netwave_cs orinoco orinoco_cs),
-      qw(orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd p54pci),
+      qw(orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd orinoco_usb p54pci),
       qw(p54usb prism2_cs prism2_pci prism2_usb prism54 r8180),
       qw(r8187se r8192_pci r8192s_usb r8192u_usb r8712u ray_cs rndis_wlan rt2400 rt2400pci rt2500),
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
-      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187se rtusb ),
-      qw(rtl8192se rtl8192cu rtl8192de spectrum_cs usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
+      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtusb ),
+      qw(rtl8192se rtl8192cu rtl8192de spectrum_cs usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
       qw(wavelan_cs wl wl3501_cs wvlan_cs zd1201 zd1211rw),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
