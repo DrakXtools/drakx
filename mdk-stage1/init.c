@@ -447,7 +447,8 @@ static int ctty(const char *tty) {
 		dup2(fd, 0);
 		dup2(fd, 1);
 		dup2(fd, 2);
-		close(fd);
+		while (fd > 2)
+			close(fd--);
 	}
 	return 0;
 }
