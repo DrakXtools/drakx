@@ -60,6 +60,18 @@ int ensure_dev_exists(const char * dev)
 			}
 		} else if (name[3])
 			minor += (name[3] - '0');
+	} else if (ptr_begins_static_str(name, "vd")) {
+		/* Virtual disks */
+		major = 252;
+		minor = (name[2] - 'a') << 4;
+		if (name[3] && name[4]) {
+			minor += 10 + (name[4] - '0');
+			if (name[3] > 1 || name[4] > 5) {
+				log_message("I don't know how to create device %s, please post bugreport to me!", dev);
+				return -1;
+			}
+		} else if (name[3])
+			minor += (name[3] - '0');
 	} else if (ptr_begins_static_str(name, "xvd")) {
 		/* Virtual disks */
 		major = 202;

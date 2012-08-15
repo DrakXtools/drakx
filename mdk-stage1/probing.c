@@ -868,6 +868,41 @@ void find_media(enum media_bus bus)
 			fclose(f);
 		}
 	}
+	/* ----------------------------------------------- */
+	log_message("looking for VirtIO");
+	{
+		int fd, i;
+		char b[50];
+		char *name = b+11;
+		strcpy(b, "/sys/block/vd");
+		for (b[13] = 'a'; b[13] <= 'c'; b[13]++) {
+			/* first, test if file exists (will tell if attached medium exists) */
+			b[14] = '\0';
+			if (access(b, R_OK))
+				continue;
+
+			tmp[count].name = strdup(name);
+			tmp[count].type = DISK; //UNKNOWN_MEDIA;
+			tmp[count].model = strdup("VirtIO disk");
+
+			/* media type */
+			strcpy(b + 14, "/capability");
+			fd = open(b, O_RDONLY);
+			if (fd == -1) {
+				log_message("failed to open %s for reading", b);
+				//continue;
+			}
+			i = read(fd, buf, sizeof(buf));
+			if (i == -1) {
+				log_message("Couldn't read capabilities file (%s)", b);
+			} else {
+				if (!strcmp(buf, "10"))
+					tmp[count].type = DISK;
+			}
+
+			count++;
+		}
+	}
  find_media_after_scsi:
 
 	/* ----------------------------------------------- */
