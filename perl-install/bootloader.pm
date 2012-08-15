@@ -723,10 +723,6 @@ sub add_kernel {
 	    #- perImageAppend contains resume=/dev/xxx which we don't want
 	    @$dict = grep { $_->[0] ne 'resume' } @$dict;
 	}
-	if (-e "$::prefix/sbin/udev" && common::cmp_kernel_versions($kernel_str->{version_no_ext}, '2.6.8') >= 0) {
-	    log::l("it is a recent kernel, so we remove any existing devfs= kernel option to enable udev");
-	    @$dict = grep { $_->[0] ne 'devfs' } @$dict;
-	}
 	$v->{append} = pack_append($simple, $dict);
     }
 
@@ -910,22 +906,16 @@ sub get_kernels_and_labels_before_kernel_remove {
 }
 
 sub get_kernels_and_labels() {
-    my ($b_prefer_24) = @_;
-    get_kernel_labels([ installed_vmlinuz() ], $b_prefer_24);
+    get_kernel_labels([ installed_vmlinuz() ]);
 }
 
 sub get_kernel_labels {
-    my ($kernels, $b_prefer_24) = @_;
+    my ($kernels) = @_;
     
     my @kernels_str = 
       sort { common::cmp_kernel_versions($b->{version_no_ext}, $a->{version_no_ext}) } 
       grep { -d "$::prefix/lib/modules/$_->{version}" }
       map { vmlinuz2kernel_str($_) } @$kernels;
-
-    if ($b_prefer_24) {
-	my ($kernel_24, $other) = partition { $_->{ext} eq '' && $_->{version} =~ /^\Q2.4/ } @kernels_str;
-	@kernels_str = (@$kernel_24, @$other);
-    }
 
     my %labels;
     foreach (@kernels_str) {
