@@ -30,6 +30,7 @@
 #include <fcntl.h>
 #include <sys/mount.h>
 #include <sys/un.h>
+#include <sys/param.h>
 #include <errno.h>
 #include <signal.h>
 #include <sys/resource.h>
