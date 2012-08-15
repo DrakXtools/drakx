@@ -383,7 +383,11 @@ static void unmount_filesystems(int unmount)
 			if (umount(fs[i].name))
 				umount2(fs[i].name, MNT_FORCE|MNT_DETACH);
 		}
-		chroot("/tmp/newroot");
+
+		chdir("/tmp/newroot");
+		if (chroot("/tmp/newroot"))
+			perror("unable to chroot()");
+
 	} else if (nb) {
 		printf("failed to umount some filesystems\n");
                 select(0, NULL, NULL, NULL, NULL);
