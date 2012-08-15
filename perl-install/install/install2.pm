@@ -646,6 +646,8 @@ sub main {
     #- need to be after oo-izing $o
     init_brltty() if $o->{brltty};
 
+    devices::make('tty') if $o->{interactive} eq "curses";
+
     #- needed very early for install::steps_gtk
     init_mouse() if !$::testing;
 
