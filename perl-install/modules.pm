@@ -66,7 +66,7 @@ sub load_raw {
     #  try to detect built-in modules by looking at /sys/module
     #  unfortunately it does not work for all modules eg :
     #  - networks protocols  like af_packet
-    #  - file systems
+    #  - filesystems
     foreach my $mod (@$lm) {
 	$mod =~ s/-/_/g;
         if (-d "/sys/module/$mod") {
