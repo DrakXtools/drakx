@@ -77,14 +77,14 @@ sub load_raw {
 	  if (-f "/proc/net/packet") {
 	    log::l("$mod already loaded");
 	  } else {
-	    @$l = (@$l, $mod);
+	    push @$l, $mod;
 	  }
 	} elsif (cat_("/proc/filesystems") =~ /$mod/) {
 	  log::l("$mod already loaded");
 	} elsif ($mod =~ /serial/) {
 	  # hack ... must find who tries to load the module serial
 	} else {
-	  @$l = (@$l, $mod);
+	  push @$l, $mod;
 	}
     }
 
