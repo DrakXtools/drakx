@@ -139,7 +139,6 @@ static void doklog()
 #endif
 	int sock = -1;
 	char buf[1024];
-	int readfd;
 
 	/* open kernel message logger */
 	in = open("/proc/kmsg", O_RDONLY,0);
