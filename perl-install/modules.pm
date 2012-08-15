@@ -63,6 +63,8 @@ sub module_is_available {
 sub load_raw {
     my ($lm, $h_options) = @_;
 
+    my $l;
+
     #  try to detect built-in modules by looking at /sys/module
     #  unfortunately it does not work for all modules eg :
     #  - networks protocols  like af_packet
@@ -85,6 +87,7 @@ sub load_raw {
 	  @$l = (@$l, $mod);
 	}
     }
+
     if ($::testing || $::local_install) {
 	log::l("i would load module $_ ($h_options->{$_})") foreach @$l;
     } elsif ($::isInstall) {
