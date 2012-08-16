@@ -1,0 +1,26 @@
+#!/bin/sh
+
+mount /dev
+mkdir /dev/pts /dev/shm
+mount -a
+klogd
+
+/sbin/stage1
+RETVAL=$?
+if [ $RETVAL -eq 66 ]; then
+	rm /etc/inittab
+fi
+
+for mp in /tmp/stage2/*; do
+	mpnew=/`basename $mp`
+	test -d $mpnew || mkdir $mpnew
+	mount $mp $mpnew -t overlayfs -o lowerdir=$mp,upperdir=$mpnew
+done
+
+if [ $RETVAL -eq 66 ]; then
+	init -q
+	exec /etc/rc.sysinit
+elif [ $RETVAL -eq 53 ]; then 
+	/usr/bin/runinstall2
+fi
+

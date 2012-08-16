@@ -234,8 +234,10 @@ fi
 });
     _ "chmod 755 $tmp_initrd/hotplug";
     symlink "../hotplug", "$tmp_initrd/sbin/hotplug";
-    _ "install $stage1_root/init $tmp_initrd/";
-    _ "ln $tmp_initrd/init $tmp_initrd/sbin/stage1";
+    _ "install -m644 $stage1_root/tree/etc/fstab	-D $tmp_initrd/etc/fstab";
+    _ "install -m644 $stage1_root/tree/etc/inittab	-D $tmp_initrd/etc/inittab";
+    _ "install -m755 $stage1_root/tree/etc/rc.stage1	-D $tmp_initrd/etc/rc.stage1";
+    _ "install -m755 $stage1_root/stage1		-D $tmp_initrd/sbin/stage1";
     _ "mkdir $tmp_initrd/bin";
     _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/bin/rescue-gui";
 
@@ -273,6 +275,7 @@ fi
 	    }
 	    _ "test -e $tmp_initrd/$bin || ln $tmp_initrd/usr/bin/busybox $tmp_initrd/$bin";
 	}
+	_ "ln $tmp_initrd/sbin/init $tmp_initrd/init";
     }
 
     _ "(cd $tmp_initrd; find . | cpio -o -c --quiet) | $compress_filter > $img";
