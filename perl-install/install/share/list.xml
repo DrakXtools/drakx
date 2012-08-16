@@ -125,7 +125,9 @@
 
 <from dir="/usr/share/fonts/">
   <to flatten="on">
-    misc/cursor.pcf.gz
+   <filter command="gunzip">
+      misc/cursor.pcf.gz
+    </filter>
     TTF/bengali/MuktiNarrow.ttf
     TTF/dejavu/DejaVuSans.ttf
     TTF/dejavu/DejaVuSans-Bold.ttf
@@ -308,11 +310,11 @@
 </from>
 
 <from dir="/usr/share/ldetect-lst">
-  dmitable.gz pcitable.gz usbtable.gz
-  dkms-modules.alias fallback-modules.alias
-  <filter command="gzip">
-    Cards+ MonitorsDB isdn.db
+  <filter command="gunzip">
+    dmitable.gz pcitable.gz usbtable.gz
   </filter>
+  dkms-modules.alias fallback-modules.alias
+  Cards+ MonitorsDB isdn.db
 </from>
 
 <from dir="/lib/module-init-tools">
