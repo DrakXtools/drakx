@@ -1,9 +1,7 @@
 #Inittab for Mandrake Rescue Disk
 #Author: Daouda Lo <daouda@mandrakesoft.com>
-#id:3:initdefault:
 
 ::sysinit:/etc/rc.sysinit
-#re:6:wait:/etc/rc.reboot
 ::ctrlaltdel:/sbin/fakeshutdown
 
 ::respawn:/sbin/getty -n 115200,9600 tty1 linux
@@ -13,4 +11,3 @@
 ::respawn:/sbin/getty -n 115200,9600 tty5 linux
 ::respawn:/sbin/getty -n 115200,9600 tty6 linux
 ::respawn:/sbin/getty -h -t 60 ttyS0 9600 ansi
-#s1:2345:respawn:/sbin/agetty -h -t 60 ttyS1 115200,9600 linux
