@@ -18,6 +18,9 @@ images: all.kernels/.list images/all.img images/hd_grub.img images/boot.iso isol
 	fi
 	cd images; md5sum *.{img,iso}* > MD5SUM
 
+../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1:
+	make -C ../mdk-stage1
+
 ifeq (1, $(USE_LOCAL_STAGE1))
 STAGE1_BINS = ../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1
 endif
