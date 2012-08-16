@@ -275,6 +275,14 @@ fi
 	    _ "test -e $tmp_initrd/$bin || ln $tmp_initrd/usr/bin/busybox $tmp_initrd/$bin";
 	}
 	_ "ln $tmp_initrd/sbin/init $tmp_initrd/init";
+	if ($ENV{DEBUG_INSTALL}) {
+		foreach my $f (split("\n", `rpm -ql valgrind`)) {
+			_ "test -d $f || install $f -D ${tmp_initrd}$f";
+		}
+		foreach my $f (("libc.so.6", "libpthread.so.0", "ld-linux-" . ($wordsize eq "64" ? "x86-64" : "") . ".so.2")) {
+			_ "install -m755 /$lib/$f -D $tmp_initrd/$lib/$f";
+		}
+	}
     }
 
     _ "(cd $tmp_initrd; find . | cpio -o -c --quiet) | $compress_filter > $img";
