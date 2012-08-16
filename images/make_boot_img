@@ -235,8 +235,7 @@ fi
     _ "chmod 755 $tmp_initrd/hotplug";
     symlink "../hotplug", "$tmp_initrd/sbin/hotplug";
     _ "install -m644 $stage1_root/tree/etc/fstab	-D $tmp_initrd/etc/fstab";
-    _ "install -m644 $stage1_root/tree/etc/inittab	-D $tmp_initrd/etc/inittab";
-    _ "install -m755 $stage1_root/tree/etc/rc.stage1	-D $tmp_initrd/etc/rc.stage1";
+    _ "install -m755 $stage1_root/tree/etc/init.d/rcS	-D $tmp_initrd/etc/init.d/rcS";
     _ "install -m755 $stage1_root/stage1		-D $tmp_initrd/sbin/stage1";
     _ "mkdir $tmp_initrd/bin";
     _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/bin/rescue-gui";
