@@ -301,9 +301,11 @@ static void method_select_and_prepare(void)
 
 	unlink(IMAGE_LOCATION);
 
-	if (IS_NETTEST)
+	if (IS_NETTEST) {
 		results = http_prepare();
-	else
+		if (results == RETURN_OK)
+			return;
+	} else
 		results = ask_from_list_auto("Please choose the installation method.", means, &choice, "method", means_auto);
 
 	if (results != RETURN_OK)
