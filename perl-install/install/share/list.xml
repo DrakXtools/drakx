@@ -304,9 +304,9 @@
     perl -Mlang -I.. -le 'print foreach lang::console_font_files()'
   </from>
 
-  <!--FIXME: if set="DEBUG_INSTALL"-->
+  <if set="DEBUG_INSTALL">
     /etc/termcap
-  <!--/if-->
+  </if>
 </from>
 
 <from dir="/usr/share/ldetect-lst">
