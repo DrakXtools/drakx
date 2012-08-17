@@ -79,6 +79,7 @@ void process_cmdline(void)
 		params[param_number].name = name;
 		params[param_number].value = value;
 		param_number++;
+		log_message("got %s=%s", name, value);
 		if (!strcmp(name, "changedisk")) set_param(MODE_CHANGEDISK);
 		if (!strcmp(name, "updatemodules") ||
 		    !strcmp(name, "thirdparty")) set_param(MODE_THIRDPARTY);
