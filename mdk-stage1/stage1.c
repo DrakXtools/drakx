@@ -301,7 +301,10 @@ static void method_select_and_prepare(void)
 
 	unlink(IMAGE_LOCATION);
 
-	results = ask_from_list_auto("Please choose the installation method.", means, &choice, "method", means_auto);
+	if (IS_NETTEST)
+		results = http_prepare();
+	else
+		results = ask_from_list_auto("Please choose the installation method.", means, &choice, "method", means_auto);
 
 	if (results != RETURN_OK)
 		return method_select_and_prepare();
@@ -395,6 +398,9 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 		set_param(MODE_DEBUGSTAGE1);
 		set_param(MODE_TESTING);
         }
+
+	if (getenv("NETTEST"))
+		set_param(MODE_NETTEST);
 
 #ifdef SPAWN_INTERACTIVE
 	spawn_interactive();

@@ -42,7 +42,8 @@ enum mode {
 	MODE_NOAUTO	=	(1 << 8),
 	MODE_NETAUTO	=	(1 << 9),
 	MODE_RECOVERY	=	(1 << 10),
-	MODE_KEEPSHELL	=	(1 << 11)
+	MODE_KEEPSHELL	=	(1 << 11),
+	MODE_NETTEST	=	(1 << 12)
 };
 
 #define IS_TESTING     (get_param(MODE_TESTING))
@@ -55,6 +56,7 @@ enum mode {
 #define IS_NETAUTO     (get_param(MODE_NETAUTO))
 #define IS_RECOVERY    (get_param(MODE_RECOVERY))
 #define	IS_KEEPSHELL   (get_param(MODE_KEEPSHELL))
+#define	IS_NETTEST     (get_param(MODE_NETTEST))
 #define KEEP_MOUNTED   (!IS_RESCUE || get_param(MODE_KEEP_MOUNTED))
 
 void fatal_error(char *msg) __attribute__ ((noreturn));

@@ -405,9 +405,13 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 	char * bootprotos_auto[] = { "dhcp", "static", "adsl" };
 	char * choice;
 
-	results = ask_from_list_auto("Please select your network connection type.", bootprotos, &choice, "network", bootprotos_auto);
-	if (results != RETURN_OK)
-		return results;
+	if (IS_NETTEST)
+		choice = strdup("DHCP");
+	else {
+		results = ask_from_list_auto("Please select your network connection type.", bootprotos, &choice, "network", bootprotos_auto);
+		if (results != RETURN_OK)
+			return results;
+	}
 
 	if (!strcmp(choice, "Static")) {
 		char * questions[] = { "IP of this machine", "IP of DNS", "IP of default gateway", "Netmask", NULL };
@@ -736,8 +740,14 @@ static enum return_type get_http_proxy(char **http_proxy_host, char **http_proxy
 	static char ** answers = NULL;
 	enum return_type results;
 	
-	results = ask_from_entries_auto("Please enter HTTP proxy host and port if you need it, else leave them blank or cancel.",
-					questions, &answers, 40, questions_auto, NULL);
+	if (IS_NETTEST) {
+		answers = (char **) malloc(sizeof(questions));
+		answers[0] = "";
+		answers[1] = "";
+		results = RETURN_OK;
+	} else
+		results = ask_from_entries_auto("Please enter HTTP proxy host and port if you need it, else leave them blank or cancel.",
+				questions, &answers, 40, questions_auto, NULL);
 	if (results == RETURN_OK) {
 		*http_proxy_host = answers[0];
 		*http_proxy_port = answers[1];
@@ -1139,7 +1149,7 @@ enum return_type http_prepare(void)
 	if (results != RETURN_OK)
 		return results;
 
-        get_http_proxy(&http_proxy_host, &http_proxy_port);
+	get_http_proxy(&http_proxy_host, &http_proxy_port);
 
 	do {
 		char location_full[500];
@@ -1149,19 +1159,26 @@ enum return_type http_prepare(void)
 		if (!IS_AUTOMATIC) {
 			if (answers == NULL)
 				answers = (char **) calloc(1, sizeof(questions));
+			if (IS_NETTEST) {
+				answers[0] = "192.168.0.1";
+				answers[1] = "/";
+			} else {
+				results = choose_mirror_from_list(http_proxy_host, http_proxy_port, "http", &answers[0], &answers[1]);
 
-			results = choose_mirror_from_list(http_proxy_host, http_proxy_port, "http", &answers[0], &answers[1]);
-
-			if (results == RETURN_BACK)
-				return ftp_prepare();
+				if (results == RETURN_BACK)
+					return ftp_prepare();
+			}
 		}
 
-		results = ask_from_entries_auto("Please enter the name or IP address of the HTTP server, "
-						"and the directory containing the " DISTRIB_NAME " Distribution.",
-						questions, &answers, 40, questions_auto, NULL);
-		if (results != RETURN_OK || streq(answers[0], "")) {
-			unset_automatic(); /* we are in a fallback mode */
-			return http_prepare();
+		if (!IS_NETTEST) {
+			results = ask_from_entries_auto("Please enter the name or IP address of the HTTP server, "
+							"and the directory containing the " DISTRIB_NAME " Distribution.",
+							questions, &answers, 40, questions_auto, NULL);
+
+			if (results != RETURN_OK || streq(answers[0], "")) {
+				unset_automatic(); /* we are in a fallback mode */
+				return http_prepare();
+			}
 		}
 
 		strcpy(location_full, answers[1][0] == '/' ? "" : "/");

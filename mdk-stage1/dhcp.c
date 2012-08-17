@@ -539,7 +539,13 @@ enum return_type perform_dhcp(struct interface_info * intf)
 
 		client_id_str = client_id_hwaddr = NULL;
 		
-		results = ask_from_entries_auto("If the DHCP server needs to know you by name; please fill in this information. "
+		if (IS_NETTEST) {
+			answers = (char **) malloc(sizeof(questions));
+			answers[0] = "";
+			answers[1] = "";
+			results = RETURN_OK;
+		} else
+			results = ask_from_entries_auto("If the DHCP server needs to know you by name; please fill in this information. "
 						"Valid answers are for example: `mybox' for hostname and `mynetwork.com' for "
 						"domain name, for a machine called `mybox.mynetwork.com' on the Internet.",
 						questions, &answers, 32, questions_auto, NULL);
