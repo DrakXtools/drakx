@@ -1,5 +1,7 @@
 Version 14.31 - 17 August 2012, by Per Øyvind Karlsen
 
+- don't log to /dev/tty3 & /tmp/ddebug.log, but rather let inittab take care
+  of logging to a different tty, while /var/log/stage2.log replaces ddebug.log
 - evdev now gets loaded early enough
 - generate & use keymap dumps in smaller binary keymap compatible with busybox'
   'loadkmap'

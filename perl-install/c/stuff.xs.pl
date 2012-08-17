@@ -70,17 +70,7 @@ print '
 void log_message(const char * s, ...) {
    va_list args;
    va_list args_copy;
-   FILE * logtty = fopen("/dev/tty3", "w");
-   if (!logtty)
-      return;
-   fprintf(logtty, "* ");
-   va_start(args, s);
-   vfprintf(logtty, s, args);
-   fprintf(logtty, "\n");
-   fclose(logtty);
-   va_end(args);
-
-   logtty = fopen("/tmp/ddebug.log", "a");
+   FILE * logtty = fopen("/var/log/stage2.log", "a");
    if (!logtty)
       return;
    fprintf(logtty, "* ");
