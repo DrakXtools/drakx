@@ -3,4 +3,5 @@
 mount /dev
 mkdir /dev/pts /dev/shm
 mount -a
-klogd
+klogd -n 6
+syslogd -s 0
