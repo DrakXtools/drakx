@@ -1,0 +1,4 @@
+#!/bin/sh
+mount /tmp/stage2 /tmp/newroot -t overlayfs -o upperdir=/,lowerdir=/tmp/stage2
+cd /tmp/newroot
+pivot_root . /
