@@ -1,5 +1,7 @@
 Version 1.59 - 17 August 2012, by Per Øyvind Karlsen
 
+- removal of stage1 files conflicting with files from stage2 is now
+  automatically handled by init scripts
 - fix a bug in selection of http install where going back during configuration
   would invoke ftp install option rather than http
 - move stage1.log from /tmp to /var/log/stage1.log

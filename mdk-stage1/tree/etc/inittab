@@ -13,7 +13,7 @@ tty12::once:/usr/bin/tail -f /var/log/messages
 #::respawn:/sbin/getty -L ttyS0 9600 vt100
 #::respawn:/sbin/getty -L ttyS1 9600 vt100
 #::respawn:/sbin/getty 57600 ttyS2
-::restart:/etc/init.d/rc.newroot 2>> /var/log/stage1.log 
+::restart:/etc/init.d/rc.newroot
 ::ctrlaltdel:/sbin/reboot
 #::shutdown:/bin/umount -a -r
 #::shutdown:/sbin/swapoff -a

@@ -1,5 +1,7 @@
 Version 1.62 - 17 August 2012, by Per Øyvind Karlsen
 
+- removal of stage1 files conflicting with files from stage2 is now
+  automatically handled by init scripts
 - leave start & stop of udev to init scripts
 - add support for adding valgrind to image by setting $DEBUG_INSTALL to true
 - migrate to using 'init' implementation from busybox rather than our own
