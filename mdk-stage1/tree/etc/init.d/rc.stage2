@@ -9,4 +9,3 @@ export UDEVRULESD=/run/udev/rules.d
 /lib/systemd/systemd-udevd --daemon --resolve-names=never
 udevadm trigger --type=subsystems --action=add
 udevadm trigger --type=devices --action=add
-

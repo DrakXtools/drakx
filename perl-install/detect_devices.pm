@@ -62,7 +62,7 @@ sub floppies {
         eval { modules::load("floppy") if $::isInstall };
         #- do not bother probing /dev/fd0 and loading floppy device uselessly,
         #- it takes time and it is already done by boot process (if not in install):
-        #-   /dev/fd0 is created by start_udev (/etc/udev/devices.d/default.nodes)
+        #-   /dev/fd0 is created by udev (/etc/udev/devices.d/default.nodes)
         #-   then hal probes /dev/fd0 and triggers floppy module loading through kernel's kmod
         if (any { (split)[1] eq 'fd' } cat_("/proc/devices")) {
             @fds = map {
