@@ -234,7 +234,8 @@ sub getSCSI() {
 	# (see linux/include/scsi/scsi.h and sans-find-scanner.1)
 	my $raw_type = $scsi_types[$get->('type')];
 
-	my $media_type = ${{ st => 'tape', sr => 'cdrom', sd => 'hd', sg => 'generic' }}{substr($device, 0, 2)} || $raw_type =~ /Scanner|Processor/ && 'scanner';
+	my $media_type = ${{ st => 'tape', sr => 'cdrom', sd => 'hd', sg => 'generic' }}{substr($device, 0, 2)} ||
+	  $raw_type =~ /Scanner|Processor/ && 'scanner';
 
 	my ($vendor, $model) = ($get->('vendor'), $get->('model'));
 	my ($v, $m) = _get_hd_vendor($model);
