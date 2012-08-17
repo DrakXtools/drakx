@@ -31,7 +31,6 @@
 
 #include "log.h"
 
-static FILE * logtty  = NULL;
 static FILE * logfile = NULL;
 
 
@@ -45,12 +44,6 @@ void vlog_message(const char * s, va_list args)
 		vfprintf(logfile, s, args);
 		fprintf(logfile, "\n");
 		fflush(logfile);
-	}
-	if (logtty) {
-		fprintf(logtty, "* ");
-		vfprintf(logtty, s, args_copy);
-		fprintf(logtty, "\n");
-		fflush(logtty);
 	}
 
 	va_end(args_copy);
@@ -75,10 +68,8 @@ void log_perror(const char *msg)
 
 void open_log(void)
 {
-	if (!IS_TESTING) {
-		logtty  = fopen("/dev/tty3", "w");
+	if (!IS_TESTING)
 		logfile = fopen("/var/log/stage1.log", "w");
-	}
 	else
 		logfile = fopen("debug.log", "w");
 }
@@ -88,7 +79,5 @@ void close_log(void)
 	if (logfile) {
 		log_message("stage1: disconnecting life support systems");
 		fclose(logfile);
-		if (logtty)
-			fclose(logtty);
 	}
 }
