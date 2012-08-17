@@ -1,5 +1,8 @@
 #!/bin/sh
-exec 2>> /var/log/stage1.log
+
+# we want to log any errors from this script
+exec 2>> /var/log/stage1.log 2>&1
+
 sed -e 's#::sysinit:/etc/init.d/rcS#::sysinit:/etc/init.d/rc.stage2#g' -i /etc/inittab
 
 if [ -x /tmp/stage2/usr/bin/runinstall2 ]; then
