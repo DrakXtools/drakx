@@ -585,9 +585,6 @@ sub main {
 
     eval { install::any::spawnShell() };
 
-    #- there's probably a better way to load this, but...
-    eval { modules::load("evdev") };
-
     init_modules_conf();
 
     #- done before auto_install is called to allow the -IP feature on auto_install file name
@@ -607,6 +604,9 @@ sub main {
 
     pre_init_brltty();
 
+    #- needed very early for install::steps_gtk
+    init_mouse() if !$::testing;
+
     # perl_checker: require install::steps_gtk
     # perl_checker: require install::steps_curses
     # perl_checker: require install::steps_stdio
@@ -624,9 +624,6 @@ sub main {
 
     #- need to be after oo-izing $o
     init_brltty() if $o->{brltty};
-
-    #- needed very early for install::steps_gtk
-    init_mouse() if !$::testing;
 
     #- for auto_install compatibility with old $o->{lang},
     #- and also for --lang and --flang

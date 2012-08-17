@@ -1,5 +1,6 @@
 Version 14.31 - 17 August 2012, by Per Øyvind Karlsen
 
+- evdev now gets loaded early enough
 - generate & use keymap dumps in smaller binary keymap compatible with busybox'
   'loadkmap'
 - leave start & stop of udev to init scripts
@@ -7,7 +8,6 @@ Version 14.31 - 17 August 2012, by Per Øyvind Karlsen
   with it as lzma compression algorithm used by mksquashfs uses larger
   dictionary size and does better at compressing these
 - text mode installer finally works again
-- force loading of evdev so that EVIOCGBIT ioctl won't b0rk
 - fix broken check for /boot directory when creating initrd
 - don't use (*slow*) perl implementations of various commands that busybox is
   able to provide
