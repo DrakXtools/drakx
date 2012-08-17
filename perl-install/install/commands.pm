@@ -50,12 +50,4 @@ sub bug {
     common::sync();
 }
 
-sub loadkeys {
-    my ($h) = getopts(\@_, "h");
-    $h || @_ != 1 and die "usage: loadkeys <keyboard>\n";
-
-    require keyboard;
-    keyboard::setup_install({ KEYBOARD => $_[0] });
-}
-
 1;

@@ -550,11 +550,30 @@
   </to>
 </from>
 
-<from dir="share">
-  <from expand="tar">
-    keymaps.tar.bz2
-  </from>
+<from dir="bkeymaps">
+  <to dir="/usr/share/bkeymaps">
+    <from expand="command">
+    perl -I/usr/lib/libDrakX -Mkeyboard -le '{
+        foreach (keyboard::_keyboards()) {
+        my $dir = "bkeymaps";
+          my $kmap = keyboard::keyboard2kmap($_);
+            if (system("loadkeys -b $kmap > $dir/$kmap.bkmap") != 0) {
+              warn "unknown kmap $kmap\n";
+              unlink "$dir/$kmap.bkmap";
+            } else {
+              print "$kmap.bkmap";
+            }
+          }
+	}'
+    </from>
+  </to>
+</from>
 
+<to dir="/usr/bin">
+  loadkeys
+</to>
+
+<from dir="share">
   <to dir="/usr/share">
     consolefonts symlinks
     upgrade
