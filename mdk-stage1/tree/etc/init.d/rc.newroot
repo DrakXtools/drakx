@@ -1,4 +1,5 @@
 #!/bin/sh
+exec 2>> /var/log/stage1.log
 sed -e 's#::sysinit:/etc/init.d/rcS#::sysinit:/etc/init.d/rc.stage2#g' -i /etc/inittab
 
 if [ -x /tmp/stage2/usr/bin/runinstall2 ]; then

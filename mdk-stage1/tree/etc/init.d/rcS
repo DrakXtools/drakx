@@ -1,7 +1,8 @@
 #!/bin/sh
 
+# we want to log any errors from this script
+exec 2>> /var/log/stage1.log 2>&1
+
 mount /dev
 mkdir /dev/pts /dev/shm
 mount -a
-#klogd -c 6
-#syslogd -s 0

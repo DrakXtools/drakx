@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# we want to log any errors from this script
+exec 2>> /var/log/stage1.log 2>&1
+
 echo -e "\t\t\tWelcome to \\033[1;36mMandriva\\033[0;39m Linux"
 
 echo "Starting udev"
