@@ -576,8 +576,6 @@ sub main {
 
     if ($::local_install) {
         init_local_install($o);
-    } else {
-        start_udev();
     }
 
     $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : "/mnt";
