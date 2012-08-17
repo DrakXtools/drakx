@@ -6,7 +6,7 @@ use keyboard;
 my $dir = "keymaps/usr/share/keymaps";
 system("rm -rf keymaps ; mkdir -p keymaps/usr/share/keymaps");
 
-foreach (keyboard::keyboards()) {
+foreach (keyboard::_keyboards()) {
     my $kmap = keyboard::keyboard2kmap($_);
     if (system("./kmap2bkmap $kmap > $dir/$kmap.bkmap") != 0) {
 	warn "unknown kmap $kmap\n";
