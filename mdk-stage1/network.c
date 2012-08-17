@@ -1166,7 +1166,7 @@ enum return_type http_prepare(void)
 				results = choose_mirror_from_list(http_proxy_host, http_proxy_port, "http", &answers[0], &answers[1]);
 
 				if (results == RETURN_BACK)
-					return ftp_prepare();
+					return http_prepare();
 			}
 		}
 
