@@ -6,6 +6,7 @@ tty1::once:-/sbin/stage1
 tty2::once:-/bin/rescue-gui
 tty3::askfirst:-/bin/sh
 tty4::askfirst:-/bin/sh
+tty5::askfirst:-/bin/sh
 ::once:/sbin/klogd -n -c 6
 ::once:/sbin/syslogd -n -s 0
 tty11::once:/usr/bin/tail -f /var/log/stage1.log
