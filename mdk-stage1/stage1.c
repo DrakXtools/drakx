@@ -460,8 +460,7 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 	finish_frontend();
 	close_log();
 
-	if (IS_RESCUE)
-		return 66; /* ask init to exec new init */
-	else
-		return 0x35; /* ask init to run stage2 binary */
+	kill(1, SIGQUIT);
+
+	return 0;
 }

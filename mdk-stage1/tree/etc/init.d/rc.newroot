@@ -1,4 +1,14 @@
 #!/bin/sh
+sed -e 's#::sysinit:/etc/init.d/rcS#::sysinit:/etc/init.d/rc.stage2#g' -i /etc/inittab
+
+if [ -x /tmp/stage2/usr/bin/runinstall2 ]; then
+	sed -e 's#tty1::once:-/sbin/stage1#tty1::once:-/usr/bin/runinstall2#g' -i /etc/inittab
+fi
+
 mount /tmp/stage2 /tmp/newroot -t overlayfs -o upperdir=/,lowerdir=/tmp/stage2
-cd /tmp/newroot
-pivot_root . /
+mount /sys /tmp/newroot/sys -t sysfs -o move
+mount /dev /tmp/newroot/dev -t devtmpfs -o move
+mount /run /tmp/newroot/run -t tmpfs -o move
+mount /proc /tmp/newroot/proc -t proc -o move
+
+exec chroot /tmp/newroot /sbin/init

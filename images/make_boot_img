@@ -238,6 +238,7 @@ fi
     _ "install -m644 $stage1_root/tree/etc/inittab		-D $tmp_initrd/etc/inittab";
     _ "install -m755 $stage1_root/tree/etc/init.d/rcS		-D $tmp_initrd/etc/init.d/rcS";
     _ "install -m755 $stage1_root/tree/etc/init.d/rc.newroot	-D $tmp_initrd/etc/init.d/rc.newroot";
+    _ "install -m755 $stage1_root/tree/etc/init.d/rc.stage2	-D $tmp_initrd/etc/init.d/rc.stage2";
     _ "install -m755 $stage1_root/stage1			-D $tmp_initrd/sbin/stage1";
     _ "mkdir $tmp_initrd/bin";
     _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/bin/rescue-gui";

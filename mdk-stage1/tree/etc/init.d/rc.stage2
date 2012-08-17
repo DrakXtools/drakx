@@ -1,0 +1,12 @@
+#!/bin/sh
+
+echo -e "\t\t\tWelcome to \\033[1;36mMandriva\\033[0;39m Linux"
+
+echo "Starting udev"
+mkdir -p /run/udev/rules.d
+export UDEVRULESD=/run/udev/rules.d
+
+/lib/systemd/systemd-udevd --daemon --resolve-names=never
+udevadm trigger --type=subsystems --action=add
+udevadm trigger --type=devices --action=add
+
