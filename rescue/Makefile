@@ -27,10 +27,7 @@ all: $(RESCUE)
 install: $(RESCUE)
 	install -m644 $< -D $(DESTDIR)$(STAGE2_DEST)/$<
 
-drvinst: drvinst.c
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
-
-$(RESCUE): list.xml drvinst guessmounts lsparts rescue-doc make_rescue_img
+$(RESCUE): list.xml guessmounts lsparts rescue-doc make_rescue_img
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_rescue_img "$(MKSQUASHFS_ARGS)"
 
 dist-svn:
@@ -60,4 +57,4 @@ tar:
 	$(info $(PRODUCT)-$(VERSION).tar.xz is ready)
 
 clean: 
-	rm -f $(RESCUE) kernel_read_part drvinst
+	rm -f $(RESCUE) kernel_read_part

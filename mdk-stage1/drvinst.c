@@ -29,6 +29,8 @@
 #include <libldetect.h>
 #include <libkmod.h>
 
+#include "drvinst.h"
+
 static int modprobe(const char *alias) {
     struct kmod_ctx *ctx;
     struct kmod_list *l, *list = NULL;
@@ -133,7 +135,7 @@ static void load_modules(int argc, char *argv[]) {
     pciusb_free(&entries);
 }
 
-int main(int argc, char *argv[]) {
+int drvinst_main(int argc, char *argv[]) {
     if (argc > 1 && !strcmp(argv[0], "--help")) 
 	fprintf(stderr, "usage: drivers_install [drivertype1 [drivertype2 ...]]\n");
     else

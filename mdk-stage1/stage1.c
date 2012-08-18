@@ -40,6 +40,7 @@
 #include "stage1.h"
 #include "probe-modules.h"
 #include "rescue-gui.h"
+#include "drvinst.h"
 
 #include "log.h"
 #include "probing.h"
@@ -391,6 +392,8 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 		return rescue_gui_main(argc, argv);
 	if (!strcmp(binary_name, "probe-modules"))
 		return probe_modules_main(argc, argv);
+	if (!strcmp(binary_name, "drvinst"))
+		return drvinst_main(argc, argv);
 	if (strcmp(binary_name, "stage1")) {
 		fprintf(stderr, "executed as '%s', unknown!\n", binary_name);
 		return 1;
