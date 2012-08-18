@@ -1,8 +1,0 @@
-#!/bin/sh
-
-sleep 1
-/sbin/killall5 -9
-
-umount -a -f -t noproc
-
-reboot -i -d
