@@ -58,7 +58,7 @@ DEFS = -DDISTRIB_NAME=\"$(DISTRIB_NAME)\" -DDISTRIB_VERSION=\"$(DISTRIB_VERSION)
 
 COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
-STAGE1_DEFS=-DDISABLE_KA
+STAGE1_DEFS=-DDISABLE_KA -DDRAKX_ONE_BINARY
 
 
 FRONTEND_SRC =
@@ -119,7 +119,7 @@ NETWORK_STANDALONE_DEFS = -DDISABLE_CDROM -DDISABLE_DISK -DENABLE_NETWORK_STANDA
 
 STAGE1OBJS_FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
 
-BINS = stage1 dhcp-client rescue-gui probe-modules drvinst
+BINS = stage1 dhcp-client rescue-gui probe-modules drvinst lspcidrake
 
 DIRS =
 HEADERS = pci-ids.h usb-ids.h
@@ -163,7 +163,7 @@ usb-ids.h: /usr/share/ldetect-lst/usbtable.gz update-usb-ids.pl
 pcmcia/libpcmcia.a: pcmcia
 
 ifneq (0, $(ONE_BINARY))
-dhcp-client rescue-gui probe-modules: stage1
+dhcp-client rescue-gui probe-modules drvinst lspcidrake: stage1
 	ln -f $^ $@
 endif
 
@@ -171,10 +171,10 @@ ifneq (0, $(WHOLE_PROGRAM))
 
 ifneq (0, $(ONE_BINARY))
 
-stage1: .depend $(PCMCIA_LIB) probe-modules.c rescue-gui.c drvinst.c $(FRONTEND_SRC) $(STAGE1_ALLSRC)
+stage1: .depend $(PCMCIA_LIB) probe-modules.c rescue-gui.c drvinst.c ldetect/lspcidrake.c $(FRONTEND_SRC) $(STAGE1_ALLSRC)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) \
-		probe-modules.c rescue-gui.c drvinst.c $(FRONTEND_SRC) $(STAGE1_ALLSRC) \
+		probe-modules.c rescue-gui.c drvinst.c ldetect/lspcidrake.c $(FRONTEND_SRC) $(STAGE1_ALLSRC) \
 		$(PCMCIA_LIB) $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS) \
 		-o $@
 
@@ -278,11 +278,13 @@ ifeq (0, $(ONE_BINARY))
 	install -m755 dhcp-client -D $(DESTDIR)$(ROOTDEST)/dhcp-client
 	install -m755 probe-modules -D $(DESTDIR)$(ROOTDEST)/probe-modules
 	install -m755 drvinst -D $(DESTDIR)$(ROOTDEST)/drvinst
+	install -m755 lspcidrake -D $(DESTDIR)$(ROOTDEST)/lspcidrake
 else
 	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/rescue-gui
 	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/dhcp-client
 	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/probe-modules
 	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/drvinst
+	ln -f $(DESTDIR)$(ROOTDEST)/lspcidrake $(DESTDIR)$(ROOTDEST)/lspcidrake
 endif
 	if [ -e pcmcia/pcmcia_probe.o ]; then \
 		install -m644 pcmcia/pcmcia_probe.o -D $(DESTDIR)$(ROOTDEST)/pcmcia_probe.o; \
