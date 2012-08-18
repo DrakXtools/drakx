@@ -4,20 +4,6 @@ action() { echo $1; shift; $*; }
 DATE=`date +%Y%m%d-%Hh%M`
 KADIR="/ka2"
 
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin
-
-echo -e "\t\t\tWelcome to \\033[1;36mMandriva\\033[0;39m Linux"
-
-echo "Starting udev"
-mkdir -p /run/udev/rules.d
-export UDEVRULESD=/run/udev/rules.d
-
-/lib/systemd/systemd-udevd --daemon --resolve-names=never
-udevadm trigger --type=subsystems --action=add
-udevadm trigger --type=devices --action=add
-
-mkdir -p /mnt /var/log
-
 # Set the hostname.
 action "Setting hostname rescue" hostname rescue
 echo rescue > /etc/HOSTNAME
