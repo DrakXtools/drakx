@@ -48,7 +48,7 @@
   sed tr
   strings
 
-  loadkeys tset stty
+  tset stty
 
   ping hostname ifconfig route
 
@@ -145,12 +145,32 @@
 
 </from>
 
+<from dir="../perl-install/install/bkeymaps">
+  <to dir="/usr/share/bkeymaps">
+    <from expand="command">
+      perl -I/usr/lib/libDrakX -Mkeyboard -le '{
+        foreach (keyboard::_keyboards()) {
+	my $dir = "../perl-install/install/bkeymaps";
+          my $kmap = keyboard::keyboard2kmap($_);
+            if (system("loadkeys -b $kmap > $dir/$kmap.bkmap") != 0) {
+              warn "unknown kmap $kmap\n";
+              unlink "$dir/$kmap.bkmap";
+            } else {
+              print "$kmap.bkmap";
+            }
+          }
+	}'
+    </from>
+  </to>
+</from>
+
+<from dir="../perl-install/install">
+  <to dir="/usr/bin">
+    loadkeys
+  </to>
+</from>
+
 <from>
-  /usr/lib/kbd/keymaps/include
-  <if ARCH="i.86|x86_64">
-    /usr/lib/kbd/keymaps/i386/include
-    /usr/lib/kbd/keymaps/i386/azerty/be-latin1.map.gz <!-- this one is needed by be2-latin1 -->
-  </if>
   /usr/share/misc/magic.mgc
   /usr/share/terminfo/l/linux
   /usr/share/terminfo/s/screen
@@ -170,10 +190,6 @@
     /usr/lib/yaboot/ofboot
     /usr/lib/yaboot/yaboot
   </if>
-
-  <from expand="command">
-    perl -Mkeyboard -I/usr/lib/libDrakX -le 'print foreach keyboard::loadkeys_files()'
-  </from>
 
   <if set="LANGUAGE_fr_FR">
     /usr/lib/gconv/gconv-modules

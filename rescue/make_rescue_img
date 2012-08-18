@@ -46,20 +46,20 @@ _ "../tools/install-xml-file-list list.xml $tmp";
 # XXX: prevent this from being added to begin with
 _ "rm -rf $tmp/usr/share/locale/";
 
-my %keytable_conflicts;
-my @less_important_keytables = qw(am_old am_phonetic no-dvorak de-latin1);
-foreach (keyboard::loadkeys_files(sub { warn @_ })) {
-    my ($dir, $fname) = (dirname($_), basename($_));
-    my ($name) = $fname =~ /(.*)\.map\.gz/ or next;
-    next if member($name, @less_important_keytables);
-    if (my ($short2, $short) = $name =~ m|((.+?)[\W_][^\W_]*)|) {
-	$keytable_conflicts{$short} && $short2 ne $name and $short = $short2;
-	$keytable_conflicts{$short} and warn("conflict between $keytable_conflicts{$short} and $name for short name $short (choosing the first)\n"), next;
-	$keytable_conflicts{$short} = $name;
+#my %keytable_conflicts;
+#my @less_important_keytables = qw(am_old am_phonetic no-dvorak de-latin1);
+#foreach (keyboard::loadkeys_files(sub { warn @_ })) {
+#    my ($dir, $fname) = (dirname($_), basename($_));
+#    my ($name) = $fname =~ /(.*)\.map\.gz/ or next;
+#    next if member($name, @less_important_keytables);
+#    if (my ($short2, $short) = $name =~ m|((.+?)[\W_][^\W_]*)|) {
+#	$keytable_conflicts{$short} && $short2 ne $name and $short = $short2;
+#	$keytable_conflicts{$short} and warn("conflict between $keytable_conflicts{$short} and $name for short name $short (choosing the first)\n"), next;
+#	$keytable_conflicts{$short} = $name;
 	# create the short name based on the long one
-	symlinkf($fname, "$tmp$dir/$short.map.gz");
-    }
-}
+#	symlinkf($fname, "$tmp$dir/$short.map.gz");
+#    }
+#}
 
 foreach (cat_("aliases")) {
     chomp; my ($f, $dest) = split;
