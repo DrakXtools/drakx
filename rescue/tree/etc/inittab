@@ -2,7 +2,10 @@
 #Author: Daouda Lo <daouda@mandrakesoft.com>
 
 ::sysinit:/etc/rc.sysinit
+::restart:/init
 ::ctrlaltdel:/sbin/reboot
+::shutdown:/bin/umount -a -r
+::shutdown:/sbin/swapoff -a
 
 ::respawn:/sbin/getty -n 115200,9600 tty1 linux
 ::respawn:/sbin/getty -n 115200,9600 tty2 linux
