@@ -64,7 +64,7 @@ _ "rm -rf $tmp/usr/share/locale/";
 my $LANGUAGE = "C";
     substInFile {
 	$_ = "export LANGUAGE=$LANGUAGE\n" . "export LC_ALL=$LANGUAGE\n" if /^#LANGUAGE/;	
-    } "$tmp/etc/rc.sysinit";
+    } "$tmp/etc/init.d/rc.stage2";
 #}
 
 # shell script, too lazy for anything else..
