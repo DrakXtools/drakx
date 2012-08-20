@@ -38,8 +38,6 @@ partimage_dir=getarg BOX `cat /proc/cmdline`
 [ -z "$partimage_dir" ] && partimage_dir=$partimage_default_dir
 partimage_server=getarg pserver `cat /proc/cmdline`
 
-sleep 15
-
 if grep -q save_all /proc/cmdline; then
     partimage_whole_disk -s $partimage_server save_all $partimage_default_dir
 elif grep -q rest_all /proc/cmdline; then
