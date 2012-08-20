@@ -246,7 +246,7 @@ static void handle_pcmcia(void)
 
 static void handle_hid(void)
 {
-	struct hid_entries entry_list;
+	struct entries entry_list;
 	unsigned int i;
 
 	entry_list = hid_probe();
