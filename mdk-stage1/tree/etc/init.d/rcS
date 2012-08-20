@@ -1,7 +1,10 @@
 #!/bin/sh
 
-# we want to log any errors from this script
-exec 2>> /var/log/stage1.log 2>&1
+. /etc/init.d/functions
+
+log_stderr
+
+
 
 mount /dev
 mkdir /dev/pts /dev/shm

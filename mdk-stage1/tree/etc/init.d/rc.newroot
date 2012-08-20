@@ -1,7 +1,9 @@
 #!/bin/sh
 
-# we want to log any errors from this script
-exec 2>> /var/log/stage1.log 2>&1
+NAME=stage1
+export NAME
+
+. /etc/init.d/functions
 
 sed -e 's#::sysinit:/etc/init.d/rcS#::sysinit:/etc/init.d/rc.sysinit#g' -i /etc/inittab
 
