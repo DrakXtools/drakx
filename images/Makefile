@@ -11,19 +11,21 @@ all: images
 images/:
 	mkdir -p images
 
-images: all.kernels/.list images/all.img images/hd_grub.img images/boot.iso isolinux
+ifeq (1, $(USE_LOCAL_STAGE1))
+STAGE1_BINS = ../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage/lspcidrake
+endif
+
+images: all.kernels/.list images/all.img images/hd_grub.img images/boot.iso isolinux $(STAGE1_BINS)
 	rm -rf images/alternatives 
 	if [ `ls images/*.img-* 2>/dev/null | wc -l` -gt 0 ]; then	\
 	  mkdir images/alternatives; cd images/alternatives; mv ../*.img-* .; md5sum *.img-* > MD5SUM; \
 	fi
 	cd images; md5sum *.{img,iso}* > MD5SUM
 
-../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage1/lspcidrake:
-	make -C ../mdk-stage1
+#../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage1/lspcidrake:
+$(STAGE1_BINS):
+	make -C ../mdk-stage1 $(shell basename $@)
 
-ifeq (1, $(USE_LOCAL_STAGE1))
-STAGE1_BINS = ../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage/lspcidrake
-endif
 
 images/all.img images/boot.iso: all.kernels/.list images/$@ $(STAGE1_BINS)
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
