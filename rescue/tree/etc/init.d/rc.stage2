@@ -52,15 +52,4 @@ elif grep -q oem /proc/cmdline; then
     /tmp/image/oem-rescue.sh
 elif grep -q restore /proc/cmdline; then
     /usr/sbin/restore-image.sh
-elif grep -q kamethod /proc/cmdline; then
-    echo "Welcome to Ka"
-    drvinst 
-    ln -sf /tmp/stage2/ka $KADIR
-    ln -sf /tmp/stage2/disk /disk
-    cd $KADIR
-    echo "-------- Starting LOG server -------------"
-    perl send_status.pl > /tmp/kacmd &
-    exec ./ka_replication.sh > /tmp/ka_log-$HOSTNAME-$DATE 2>&1
 fi
-
-sleep 5

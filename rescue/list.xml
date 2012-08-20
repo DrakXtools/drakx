@@ -338,29 +338,6 @@
   </from>
 </filter>
 
-<from dir="/usr/bin">
-  <to dir="/ka">
-    bootable_flag.sh
-    fdisk_to_desc
-    gen_modprobe_conf.pl
-    ka-d-client
-    ka-d-server
-    ka-d.sh
-    ka_replication.sh
-    make_initrd_grub
-    make_initrd_lilo
-    prepare_node.sh
-    send_status.pl
-    status_node.pl
-    store_log.sh
-    udev_creation.sh
-  </to>
-</from>
-<from dir="/etc/ka">
-  <to dir="/ka">
-    replication.conf
-  </to>
-</from>
 <from dir=".">
   <to dir="/usr/bin">
     rescue-doc
