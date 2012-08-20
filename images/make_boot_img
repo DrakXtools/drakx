@@ -236,6 +236,7 @@ fi
     symlink "../hotplug", "$tmp_initrd/sbin/hotplug";
     _ "install -m644 $stage1_root/tree/etc/fstab		-D $tmp_initrd/etc/fstab";
     _ "install -m644 $stage1_root/tree/etc/inittab		-D $tmp_initrd/etc/inittab";
+    _ "install -m644 $stage1_root/tree/etc/init.d/functions	-D $tmp_initrd/etc/init.d/functions";
     _ "install -m755 $stage1_root/tree/etc/init.d/rcS		-D $tmp_initrd/etc/init.d/rcS";
     _ "install -m755 $stage1_root/tree/etc/init.d/rc.newroot	-D $tmp_initrd/etc/init.d/rc.newroot";
     _ "install -m755 $stage1_root/tree/etc/init.d/rc.sysinit	-D $tmp_initrd/etc/init.d/rc.sysinit";

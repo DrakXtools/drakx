@@ -1,7 +1,9 @@
 #!/bin/sh
 
-action() { echo $1; shift; $*; }
-DATE=`date +%Y%m%d-%Hh%M`
+. /etc/init.d/functions
+
+log_stderr
+
 KADIR="/ka2"
 
 # Set the hostname.
@@ -30,16 +32,18 @@ echo "Setting local loop"
 /sbin/route add 127.0.0.1 lo
 
 # disable the weird echoprt in cooked mode for user interaction:
-stty sane
+#stty sane
 
 #LANGUAGE (filled by make_rescue_img)
 
 grep -q noauto /proc/cmdline || drvinst SERIAL_USB
 
 partimage_default_dir=/data/box
-partimage_dir=`perl -lne 'print $1 if /BOX=(\S+)/' /proc/cmdline`
+partimage_dir=getarg BOX `cat /proc/cmdline`
 [ -z "$partimage_dir" ] && partimage_dir=$partimage_default_dir
-partimage_server=`perl -lne 'print $1 if /\bpserver=(\S+)/' /proc/cmdline`
+partimage_server=getarg pserver `cat /proc/cmdline`
+
+sleep 15
 
 if grep -q save_all /proc/cmdline; then
     partimage_whole_disk -s $partimage_server save_all $partimage_default_dir
@@ -63,3 +67,5 @@ elif grep -q kamethod /proc/cmdline; then
     perl send_status.pl > /tmp/kacmd &
     exec ./ka_replication.sh > /tmp/ka_log-$HOSTNAME-$DATE 2>&1
 fi
+
+sleep 5
