@@ -79,12 +79,10 @@ endif
 FRONTEND_OBJS = $(subst .c,.o,$(FRONTEND_SRC))
 
 ifndef DYNAMIC
-STAGE1_LIBS = -lz -lkmod -lpci -lsysfs -llzma
+STAGE1_LIBS = -lldetect -lz -lkmod -lpci -lsysfs -llzma
 else
-STAGE1_LIBS = -Wl,-Bdynamic -lz -Wl,-Bstatic -lkmod -lpci -lsysfs -llzma -Wl,-Bdynamic
+STAGE1_LIBS = -Wl,-Bdynamic -lldetect -lz -Wl,-Bstatic -lkmod -lpci -lsysfs -llzma -Wl,-Bdynamic
 endif
-
-LDETECT_SRC = ldetect/common.c ldetect/modalias.c ldetect/pciusb.c ldetect/pci.c ldetect/usb.c ldetect/pciclass.c ldetect/usbclass.c ldetect/dmi.c ldetect/dmi_hid.c ldetect/hid.c ldetect/sysfs_attr.c ldetect/sysfs_utils.c ldetect/names.c
 
 STAGE1_NETWORK_LIBS =
 ifeq (dietlibc, $(LIBC))
@@ -173,10 +171,10 @@ ifneq (0, $(WHOLE_PROGRAM))
 
 ifneq (0, $(ONE_BINARY))
 
-stage1: .depend $(PCMCIA_LIB) probe-modules.c rescue-gui.c drvinst.c ldetect/lspcidrake.c $(FRONTEND_SRC) $(STAGE1_ALLSRC) $(LDETECT_SRC)
-	$(DIET) $(COMPILE) -std=gnu99 $(LDFLAGS) $(WHOLEFLAGS) \
+stage1: .depend $(PCMCIA_LIB) probe-modules.c rescue-gui.c drvinst.c ldetect/lspcidrake.c $(FRONTEND_SRC) $(STAGE1_ALLSRC)
+	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) \
-		probe-modules.c rescue-gui.c drvinst.c ldetect/lspcidrake.c $(LDETECT_SRC) $(FRONTEND_SRC) $(STAGE1_ALLSRC) \
+		probe-modules.c rescue-gui.c drvinst.c ldetect/lspcidrake.c $(FRONTEND_SRC) $(STAGE1_ALLSRC) \
 		$(PCMCIA_LIB) $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS) \
 		-o $@
 

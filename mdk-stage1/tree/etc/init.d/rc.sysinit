@@ -1,8 +1,7 @@
 #!/bin/sh
 
-. /etc/init.d/functions
-
-log_stderr
+# we want to log any errors from this script
+exec 2>> /var/log/stage2.log 2>&1
 
 echo -e "\t\t\tWelcome to \\033[1;36mMandriva\\033[0;39m Linux"
 
@@ -15,5 +14,5 @@ udevadm trigger --type=subsystems --action=add
 udevadm trigger --type=devices --action=add
 
 if [ -x /etc/init.d/rc.stage2 ]; then
-	. /etc/init.d/rc.stage2
+	exec /etc/init.d/rc.stage2
 fi

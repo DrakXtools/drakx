@@ -1,7 +1,5 @@
 Version 1.59 - 17 August 2012, by Per Øyvind Karlsen
 
-- just compile all of ldetect's source directly into the stage1 binary rather
-  than linking it through a static library
 - compile and link 'drvinst' & lspcidrake directly into stage1 binary in order
   to save space and make it available from earlier on
 - don't write directly to /dev/tty3, inittab takes care of this now
