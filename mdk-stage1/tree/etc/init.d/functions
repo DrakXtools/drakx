@@ -4,10 +4,6 @@
 #		shell scripts in the /etc/init.d directory.
 #
 
-# we want to log any errors from this script
-echo "Writing to /var/log/${NAME}.log for $0" > /var/log/${NAME}.log
-exec 2>> /var/log/${NAME}.log 2>&1
-
 TMP=/tmp
 TMPDIR=/tmp
 export TMP TMPDIR
