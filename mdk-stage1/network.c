@@ -278,7 +278,7 @@ static int write_resolvconf(void)
 
 static int save_netinfo(struct interface_info * intf)
 {
-	char * file_network = "/tmp/network";
+	char * file_network = "/etc/sysconfig/network";
 	char file_intf[500];
 	FILE * f;
 	
@@ -299,7 +299,7 @@ static int save_netinfo(struct interface_info * intf)
 	fclose(f);
 
 	
-	strcpy(file_intf, "/tmp/ifcfg-");
+	strcpy(file_intf, "/etc/sysconfig/network-scripts/ifcfg-");
 	strcat(file_intf, intf->device);
 
 	f = fopen(file_intf, "w");

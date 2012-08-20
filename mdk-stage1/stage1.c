@@ -162,7 +162,7 @@ static void spawn_shell(void)
 #endif
 
 #ifdef SPAWN_INTERACTIVE
-char * interactive_fifo = "/tmp/stage1-fifo";
+char * interactive_fifo = "/var/run/stage1-fifo";
 static pid_t interactive_pid = 0;
 
 /* spawns my small interactive on console #6 */

@@ -842,7 +842,7 @@ void find_media(enum media_bus bus)
 	log_message("looking for DAC960");
 	{
 		FILE * f;
-		if ((f = fopen("/tmp/syslog", "rb"))) {
+		if ((f = fopen("/var/log/messages", "rb"))) {
 			while (fgets(buf, sizeof(buf), f)) {
 				char * start;
 				if ((start = strstr(buf, "/dev/rd/"))) {
