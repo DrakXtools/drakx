@@ -32,9 +32,9 @@ action "Bringing up local loop interface" ifconfig lo up
 grep -q noauto /proc/cmdline || drvinst SERIAL_USB
 
 partimage_default_dir=/data/box
-partimage_dir=getarg BOX `cat /proc/cmdline`
+partimage_dir=$(getarg BOX `cat /proc/cmdline`)
 [ -z "$partimage_dir" ] && partimage_dir=$partimage_default_dir
-partimage_server=getarg pserver `cat /proc/cmdline`
+partimage_server=$(getarg pserver `cat /proc/cmdline`)
 
 if grep -q save_all /proc/cmdline; then
     partimage_whole_disk -s $partimage_server save_all $partimage_default_dir
