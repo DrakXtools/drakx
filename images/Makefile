@@ -18,11 +18,11 @@ images: all.kernels/.list images/all.img images/hd_grub.img images/boot.iso isol
 	fi
 	cd images; md5sum *.{img,iso}* > MD5SUM
 
-../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1:
+../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage1/lspcidrake:
 	make -C ../mdk-stage1
 
 ifeq (1, $(USE_LOCAL_STAGE1))
-STAGE1_BINS = ../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1
+STAGE1_BINS = ../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage/lspcidrake
 endif
 
 images/all.img images/boot.iso: all.kernels/.list images/$@ $(STAGE1_BINS)
