@@ -18,7 +18,6 @@ sub _ { __ @_; $? and die }
 _ "rm -rf $tmp" if -e $tmp;
 _ "mkdir $tmp";
 _ 'find . -name "*~" | xargs rm -f';
-mkdir_p($tmp . chomp_($_)) foreach cat_("dirs");
 _ "cp -a tree/* $tmp";
 _ "find $tmp -name .svn | xargs rm -rf";
 
@@ -60,12 +59,6 @@ _ "rm -rf $tmp/usr/share/locale/";
 #	symlinkf($fname, "$tmp$dir/$short.map.gz");
 #    }
 #}
-
-foreach (cat_("aliases")) {
-    chomp; my ($f, $dest) = split;
-    symlink $dest, "$tmp$f";
-}
-
 
 #if (my ($LANGUAGE) = map { if_(/LANGUAGE_(.*)/, $1) } keys %ENV) {
 my $LANGUAGE = "C";

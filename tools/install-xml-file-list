@@ -166,6 +166,7 @@ sub collect_needed_perl_files {
     foreach my $script (@scripts) {
 	foreach (`strace -efile perl -cw -I$local_rep $script 2>&1`) {
 	    my ($f) = /^open\("(.*?)",.*\)\s*=\s*\d+$/ or next;
+	    $f =~ /\/proc/ and next;
 	    if ($f =~ m!^\Q$local_rep\E/(.*)!) {
 		$local{$1} = 1;
 	    } elsif (begins_with($f, '/dev/')) {
