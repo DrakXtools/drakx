@@ -171,10 +171,7 @@
 
 <from>
   /usr/share/misc/magic.mgc
-  /usr/share/terminfo/l/linux
   /usr/share/terminfo/s/screen
-  /usr/share/pci.ids
-  /var/run/utmp
 
   <if ARCH="i.86|x86_64">    
     <from dir="/lib/grub/ARCH-mandriva" expand="glob">
@@ -303,17 +300,6 @@
   libdmraid-events-isw.so
 </from>
 </filter>
-
-<from dir="/usr/share/ldetect-lst" expand="glob">
-  <filter command="gunzip">
-    *table.gz
-  </filter>
-  dkms-modules.alias fallback-modules.alias
-</from>
-
-<from dir="/lib/module-init-tools">
-  ldetect-lst-modules.alias
-</from>
 
 <filter command="../tools/simplify-drakx-modules">
   <from dir="." expand="collect-perl-files /usr/lib/libDrakX /usr/lib/libDrakX">
