@@ -4,6 +4,10 @@
 #		shell scripts in the /etc/init.d directory.
 #
 
+LOG=/var/log/$(basename $0).log
+echo "Writing to $LOG for $0" >> $LOG
+exec 2>> $LOG
+
 TMP=/tmp
 TMPDIR=/tmp
 export TMP TMPDIR
@@ -49,12 +53,6 @@ if [ "$CONSOLETYPE" = "serial" ]; then
 	SETCOLOR_WARNING=
 	SETCOLOR_NORMAL=
 fi
-
-log_stderr () {
-	echo "Writing to /var/log/${NAME}.log for $0" > /var/log/${NAME}.log
-	LOG=/var/log/$(basename $0).log
-	exec 2>> $LOG 2>&1
-}
 
 # Check if $pid (could be plural) are running with
 # the same root as this script

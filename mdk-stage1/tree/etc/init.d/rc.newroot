@@ -1,8 +1,5 @@
 #!/bin/sh
 
-NAME=stage1
-export NAME
-
 . /etc/init.d/functions
 
 sed -e 's#::sysinit:/etc/init.d/rcS#::sysinit:/etc/init.d/rc.sysinit#g' -i /etc/inittab
@@ -13,7 +10,7 @@ fi
 for f in `(cd /tmp/stage2; find -type f)`; do
 	if [ -f /$f ]; then
 		rm /$f
-		echo "/$f removed, provided by stage2" >> /var/log/stage1.log
+		echo "$f removed, provided by stage2" | cut -d. -f2- >> $LOG
 	fi
 done
 

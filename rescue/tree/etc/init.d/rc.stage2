@@ -1,10 +1,6 @@
 #!/bin/sh
 
-. /etc/init.d/functions
-
 #LANGUAGE (filled by make_rescue_img)
-
-log_stderr
 
 # Set the hostname.
 action "Setting hostname rescue" hostname rescue
