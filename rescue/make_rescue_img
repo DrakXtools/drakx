@@ -60,6 +60,11 @@ _ "rm -rf $tmp/usr/share/locale/";
 #    }
 #}
 
+foreach (cat_("aliases")) {
+    chomp; my ($f, $dest) = split;
+    symlink $dest, "$tmp$f";
+}
+
 #if (my ($LANGUAGE) = map { if_(/LANGUAGE_(.*)/, $1) } keys %ENV) {
 my $LANGUAGE = "C";
     substInFile {
