@@ -57,7 +57,7 @@ CFLAGS += -Werror
 endif
 endif
 
-LDFLAGS = $(CFLAGS) -Wl,-O2,-no-undefined -z relro
+LDFLAGS = $(CFLAGS) -Wl,-O2,-no-undefined -z relro -Wl,--no-warn-common
 
 # (blino) make sure yynewerror and yyerrlab are uselessly used
 LFLAGS += --nounput
