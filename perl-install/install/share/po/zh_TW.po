@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-25 01:34+0200\n"
+"POT-Creation-Date: 2012-08-25 11:38+0200\n"
 "PO-Revision-Date: 2008-10-01 10:02+0800\n"
 "Last-Translator: # You-Cheng Hsieh <yochenhsieh@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
@@ -43,7 +43,7 @@ msgstr ""
 #: ../../advertising/MandrivaOne-advert-8.pl:1
 #: ../../advertising/MandrivaOne-advert-9.pl:1
 #, c-format
-msgid "Mandriva 2011 Powerpack"
+msgid "Mandriva Linux 2012 Tech Preview (Bernie Lomax;)"
 msgstr ""
 
 #: any.pm:110
@@ -694,7 +694,7 @@ msgstr ""
 "發生了一個錯誤，但我不知道該如何妥善處置它。\n"
 "要繼續安裝工作的話請小心。"
 
-#: steps.pm:457
+#: steps.pm:452
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -783,180 +783,190 @@ msgstr "在影像上點選以觀看較大的預覽畫面"
 msgid "Package Group Selection"
 msgstr "套件群組選擇"
 
-#: steps_gtk.pm:340 steps_interactive.pm:642
+#: steps_gtk.pm:343 steps_interactive.pm:642
 #, c-format
 msgid "Individual package selection"
 msgstr "單一套件選取"
 
-#: steps_gtk.pm:364 steps_interactive.pm:557
+#: steps_gtk.pm:350
+#, c-format
+msgid "Select All"
+msgstr ""
+
+#: steps_gtk.pm:351
+#, c-format
+msgid "Unselect All"
+msgstr ""
+
+#: steps_gtk.pm:369 steps_interactive.pm:557
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "總共大小： %d / %d MB"
 
-#: steps_gtk.pm:409
+#: steps_gtk.pm:414
 #, c-format
 msgid "Version: "
 msgstr "版本："
 
-#: steps_gtk.pm:410
+#: steps_gtk.pm:415
 #, c-format
 msgid "Size: "
 msgstr "大小："
 
-#: steps_gtk.pm:410
+#: steps_gtk.pm:415
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KB\n"
 
-#: steps_gtk.pm:411
+#: steps_gtk.pm:416
 #, c-format
 msgid "Importance: "
 msgstr "重要性："
 
-#: steps_gtk.pm:412
+#: steps_gtk.pm:417
 #, c-format
 msgid "No description"
 msgstr ""
 
-#: steps_gtk.pm:446
+#: steps_gtk.pm:451
 #, c-format
 msgid "You cannot select/unselect this package"
 msgstr "您不可以選擇/取消選擇這個套件"
 
-#: steps_gtk.pm:450
+#: steps_gtk.pm:455
 #, c-format
 msgid "due to missing %s"
 msgstr "因為遺失 %s"
 
-#: steps_gtk.pm:451
+#: steps_gtk.pm:456
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "由於沒有滿足 %s"
 
-#: steps_gtk.pm:452
+#: steps_gtk.pm:457
 #, c-format
 msgid "trying to promote %s"
 msgstr "正在嘗試促進 %s"
 
-#: steps_gtk.pm:453
+#: steps_gtk.pm:458
 #, c-format
 msgid "in order to keep %s"
 msgstr "為了保留 %s"
 
-#: steps_gtk.pm:458
+#: steps_gtk.pm:463
 #, c-format
 msgid ""
 "You cannot select this package as there is not enough space left to install "
 "it"
 msgstr "您不可以選取這個套件，因為剩餘的空間不足以安裝它。"
 
-#: steps_gtk.pm:461
+#: steps_gtk.pm:466
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "下列的套件將會被安裝上"
 
-#: steps_gtk.pm:462
+#: steps_gtk.pm:467
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "下列的套件將會被移除"
 
-#: steps_gtk.pm:488
+#: steps_gtk.pm:493
 #, c-format
 msgid "This is a mandatory package, it cannot be unselected"
 msgstr "這是一個必要的套件，您不能不選取它"
 
-#: steps_gtk.pm:490
+#: steps_gtk.pm:495
 #, c-format
 msgid "You cannot unselect this package. It is already installed"
 msgstr "您不能不選這個套件。它已經被安裝上了。"
 
-#: steps_gtk.pm:492
+#: steps_gtk.pm:497
 #, c-format
 msgid "You cannot unselect this package. It must be upgraded"
 msgstr "您不能不選這個套件，它一定要更新才行。"
 
-#: steps_gtk.pm:496
+#: steps_gtk.pm:501
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "顯示自動被選取的套件"
 
-#: steps_gtk.pm:503
+#: steps_gtk.pm:508
 #, c-format
 msgid "Install"
 msgstr "安裝"
 
-#: steps_gtk.pm:506
+#: steps_gtk.pm:511
 #, c-format
 msgid "Load/Save selection"
 msgstr "載入/儲存選取"
 
-#: steps_gtk.pm:507
+#: steps_gtk.pm:512
 #, c-format
 msgid "Updating package selection"
 msgstr "正在更新套件的選擇"
 
-#: steps_gtk.pm:512
+#: steps_gtk.pm:517
 #, c-format
 msgid "Minimal install"
 msgstr "最小安裝"
 
-#: steps_gtk.pm:525
+#: steps_gtk.pm:530
 #, c-format
 msgid "Software Management"
 msgstr "軟體套件管理"
 
-#: steps_gtk.pm:525 steps_interactive.pm:438
+#: steps_gtk.pm:530 steps_interactive.pm:438
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "選擇您想要安裝的套件"
 
-#: steps_gtk.pm:542 steps_interactive.pm:656 steps_list.pm:32
+#: steps_gtk.pm:547 steps_interactive.pm:656 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "正在安裝"
 
-#: steps_gtk.pm:572
+#: steps_gtk.pm:577
 #, c-format
 msgid "No details"
 msgstr "沒有詳細資訊"
 
-#: steps_gtk.pm:591
+#: steps_gtk.pm:596
 #, c-format
 msgid "Time remaining:"
 msgstr "剩餘時間："
 
-#: steps_gtk.pm:592
+#: steps_gtk.pm:597
 #, c-format
 msgid "(estimating...)"
 msgstr "(正在估計...)"
 
-#: steps_gtk.pm:622
+#: steps_gtk.pm:627
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d 個套件"
 
-#: steps_gtk.pm:677 steps_interactive.pm:821 steps_list.pm:43
+#: steps_gtk.pm:682 steps_interactive.pm:821 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "總結"
 
-#: steps_gtk.pm:696
+#: steps_gtk.pm:701
 #, c-format
 msgid "Configure"
 msgstr "設定"
 
-#: steps_gtk.pm:713 steps_interactive.pm:817 steps_interactive.pm:969
+#: steps_gtk.pm:718 steps_interactive.pm:817 steps_interactive.pm:969
 #, c-format
 msgid "not configured"
 msgstr "未被設定"
 
-#: steps_gtk.pm:747
+#: steps_gtk.pm:752
 #, c-format
 msgid "Media Selection"
 msgstr "選擇安裝媒介"
 
-#: steps_gtk.pm:756 steps_interactive.pm:336
+#: steps_gtk.pm:761 steps_interactive.pm:336
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -965,7 +975,7 @@ msgstr ""
 "已經找到下列的安裝媒介。\n"
 "如果您想略過它們，您現在可以將它們取消選取。"
 
-#: steps_gtk.pm:772 steps_interactive.pm:342
+#: steps_gtk.pm:777 steps_interactive.pm:342
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard disk drive "
@@ -977,7 +987,7 @@ msgstr ""
 "件\n"
 "在安裝完畢之後仍然可以繼續使用。"
 
-#: steps_gtk.pm:774 steps_interactive.pm:344
+#: steps_gtk.pm:779 steps_interactive.pm:344
 #, c-format
 msgid "Copy whole CDs"
 msgstr "複製整張光碟"

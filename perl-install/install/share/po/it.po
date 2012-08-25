@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-25 01:34+0200\n"
+"POT-Creation-Date: 2012-08-25 11:38+0200\n"
 "PO-Revision-Date: 2009-10-08 09:48+0200\n"
 "Last-Translator: Moreno Manzini <moreno.mg@gmail.com>\n"
 "Language-Team: Italian <timl@freelist.org>\n"
@@ -34,7 +34,7 @@ msgstr ""
 #: ../../advertising/MandrivaOne-advert-8.pl:1
 #: ../../advertising/MandrivaOne-advert-9.pl:1
 #, c-format
-msgid "Mandriva 2011 Powerpack"
+msgid "Mandriva Linux 2012 Tech Preview (Bernie Lomax;)"
 msgstr ""
 
 #: any.pm:110
@@ -702,7 +702,7 @@ msgstr ""
 "Si è verificato un errore non gestibile automaticamente.\n"
 "Puoi continuare a tuo rischio e pericolo."
 
-#: steps.pm:457
+#: steps.pm:452
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -792,67 +792,77 @@ msgstr "Clicca sulle immagini per ottenere un'anteprima più grande"
 msgid "Package Group Selection"
 msgstr "Selezione per gruppi di pacchetti"
 
-#: steps_gtk.pm:340 steps_interactive.pm:642
+#: steps_gtk.pm:343 steps_interactive.pm:642
 #, c-format
 msgid "Individual package selection"
 msgstr "Selezione individuale dei pacchetti"
 
-#: steps_gtk.pm:364 steps_interactive.pm:557
+#: steps_gtk.pm:350
+#, c-format
+msgid "Select All"
+msgstr ""
+
+#: steps_gtk.pm:351
+#, c-format
+msgid "Unselect All"
+msgstr ""
+
+#: steps_gtk.pm:369 steps_interactive.pm:557
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Dimensione totale: %d / %d MB"
 
-#: steps_gtk.pm:409
+#: steps_gtk.pm:414
 #, c-format
 msgid "Version: "
 msgstr "Versione: "
 
-#: steps_gtk.pm:410
+#: steps_gtk.pm:415
 #, c-format
 msgid "Size: "
 msgstr "Dimensione:"
 
-#: steps_gtk.pm:410
+#: steps_gtk.pm:415
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KB\n"
 
-#: steps_gtk.pm:411
+#: steps_gtk.pm:416
 #, c-format
 msgid "Importance: "
 msgstr "Importanza: "
 
-#: steps_gtk.pm:412
+#: steps_gtk.pm:417
 #, c-format
 msgid "No description"
 msgstr ""
 
-#: steps_gtk.pm:446
+#: steps_gtk.pm:451
 #, c-format
 msgid "You cannot select/unselect this package"
 msgstr "Non puoi selezionare/deselezionare questo pacchetto"
 
-#: steps_gtk.pm:450
+#: steps_gtk.pm:455
 #, c-format
 msgid "due to missing %s"
 msgstr "per la mancanza di %s"
 
-#: steps_gtk.pm:451
+#: steps_gtk.pm:456
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "perché %s non è soddisfatto"
 
-#: steps_gtk.pm:452
+#: steps_gtk.pm:457
 #, c-format
 msgid "trying to promote %s"
 msgstr "Ricerca del miglior pacchetto per %s..."
 
-#: steps_gtk.pm:453
+#: steps_gtk.pm:458
 #, c-format
 msgid "in order to keep %s"
 msgstr "per conservare %s"
 
-#: steps_gtk.pm:458
+#: steps_gtk.pm:463
 #, c-format
 msgid ""
 "You cannot select this package as there is not enough space left to install "
@@ -861,114 +871,114 @@ msgstr ""
 "Non puoi selezionare questo pacchetto. Non c'è spazio sufficiente per "
 "installarlo"
 
-#: steps_gtk.pm:461
+#: steps_gtk.pm:466
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "I seguenti pacchetti stanno per essere installati"
 
-#: steps_gtk.pm:462
+#: steps_gtk.pm:467
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "I seguenti pacchetti stanno per essere rimossi"
 
-#: steps_gtk.pm:488
+#: steps_gtk.pm:493
 #, c-format
 msgid "This is a mandatory package, it cannot be unselected"
 msgstr "Questo è un pacchetto indispensabile, non può essere deselezionato"
 
-#: steps_gtk.pm:490
+#: steps_gtk.pm:495
 #, c-format
 msgid "You cannot unselect this package. It is already installed"
 msgstr "Non puoi deselezionare questo pacchetto. È già installato"
 
-#: steps_gtk.pm:492
+#: steps_gtk.pm:497
 #, c-format
 msgid "You cannot unselect this package. It must be upgraded"
 msgstr "Non puoi deselezionare questo pacchetto. Deve essere aggiornato"
 
-#: steps_gtk.pm:496
+#: steps_gtk.pm:501
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Mostra i pacchetti selezionati automaticamente"
 
-#: steps_gtk.pm:503
+#: steps_gtk.pm:508
 #, c-format
 msgid "Install"
 msgstr "Installa"
 
-#: steps_gtk.pm:506
+#: steps_gtk.pm:511
 #, c-format
 msgid "Load/Save selection"
 msgstr "Carica/salva selezione"
 
-#: steps_gtk.pm:507
+#: steps_gtk.pm:512
 #, c-format
 msgid "Updating package selection"
 msgstr "Aggiornamento scelta pacchetti"
 
-#: steps_gtk.pm:512
+#: steps_gtk.pm:517
 #, c-format
 msgid "Minimal install"
 msgstr "Installazione minimale"
 
-#: steps_gtk.pm:525
+#: steps_gtk.pm:530
 #, c-format
 msgid "Software Management"
 msgstr "Gestione software"
 
-#: steps_gtk.pm:525 steps_interactive.pm:438
+#: steps_gtk.pm:530 steps_interactive.pm:438
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Scegli i pacchetti che vuoi installare"
 
-#: steps_gtk.pm:542 steps_interactive.pm:656 steps_list.pm:32
+#: steps_gtk.pm:547 steps_interactive.pm:656 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Installazione"
 
-#: steps_gtk.pm:572
+#: steps_gtk.pm:577
 #, c-format
 msgid "No details"
 msgstr "Senza dettagli"
 
-#: steps_gtk.pm:591
+#: steps_gtk.pm:596
 #, c-format
 msgid "Time remaining:"
 msgstr "Tempo restante:"
 
-#: steps_gtk.pm:592
+#: steps_gtk.pm:597
 #, c-format
 msgid "(estimating...)"
 msgstr "(stima in corso...)"
 
-#: steps_gtk.pm:622
+#: steps_gtk.pm:627
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d pacchetto"
 msgstr[1] "%d pacchetti"
 
-#: steps_gtk.pm:677 steps_interactive.pm:821 steps_list.pm:43
+#: steps_gtk.pm:682 steps_interactive.pm:821 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Riepilogo"
 
-#: steps_gtk.pm:696
+#: steps_gtk.pm:701
 #, c-format
 msgid "Configure"
 msgstr "Configura"
 
-#: steps_gtk.pm:713 steps_interactive.pm:817 steps_interactive.pm:969
+#: steps_gtk.pm:718 steps_interactive.pm:817 steps_interactive.pm:969
 #, c-format
 msgid "not configured"
 msgstr "non configurata"
 
-#: steps_gtk.pm:747
+#: steps_gtk.pm:752
 #, c-format
 msgid "Media Selection"
 msgstr "Selezione delle fonti d'installazione"
 
-#: steps_gtk.pm:756 steps_interactive.pm:336
+#: steps_gtk.pm:761 steps_interactive.pm:336
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -977,7 +987,7 @@ msgstr ""
 "Sono state trovate queste fonti d'installazione.\n"
 "Se vuoi ignorarne qualcuna, la puoi deselezionare ora."
 
-#: steps_gtk.pm:772 steps_interactive.pm:342
+#: steps_gtk.pm:777 steps_interactive.pm:342
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard disk drive "
@@ -989,7 +999,7 @@ msgstr ""
 "L'installazione continuerà dal disco fisso e i pacchetti resteranno "
 "disponibili anche quando il sistema sarà installato."
 
-#: steps_gtk.pm:774 steps_interactive.pm:344
+#: steps_gtk.pm:779 steps_interactive.pm:344
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Copia tutti i CD"

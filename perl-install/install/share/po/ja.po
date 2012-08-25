@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-ja\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-25 01:34+0200\n"
+"POT-Creation-Date: 2012-08-25 11:38+0200\n"
 "PO-Revision-Date: 2009-03-22 21:11+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
@@ -30,7 +30,7 @@ msgstr ""
 #: ../../advertising/MandrivaOne-advert-8.pl:1
 #: ../../advertising/MandrivaOne-advert-9.pl:1
 #, c-format
-msgid "Mandriva 2011 Powerpack"
+msgid "Mandriva Linux 2012 Tech Preview (Bernie Lomax;)"
 msgstr ""
 
 #: any.pm:110
@@ -686,7 +686,7 @@ msgstr ""
 "エラーが発生しました。しかし対処する方法がわかりません。\n"
 "自己責任で続けてください。"
 
-#: steps.pm:457
+#: steps.pm:452
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -776,69 +776,79 @@ msgstr "画像をクリックすると大きなプレビューが表示されま
 msgid "Package Group Selection"
 msgstr "パッケージグループを選択"
 
-#: steps_gtk.pm:340 steps_interactive.pm:642
+#: steps_gtk.pm:343 steps_interactive.pm:642
 #, c-format
 msgid "Individual package selection"
 msgstr "パッケージを個別に選択"
 
+#: steps_gtk.pm:350
+#, c-format
+msgid "Select All"
+msgstr ""
+
+#: steps_gtk.pm:351
+#, c-format
+msgid "Unselect All"
+msgstr ""
+
 # Changed "total size" to "total", due to problem of available
 # space on screen.
-#: steps_gtk.pm:364 steps_interactive.pm:557
+#: steps_gtk.pm:369 steps_interactive.pm:557
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "合計: %d/%d MB"
 
-#: steps_gtk.pm:409
+#: steps_gtk.pm:414
 #, c-format
 msgid "Version: "
 msgstr "バージョン: "
 
-#: steps_gtk.pm:410
+#: steps_gtk.pm:415
 #, c-format
 msgid "Size: "
 msgstr "サイズ: "
 
-#: steps_gtk.pm:410
+#: steps_gtk.pm:415
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KB\n"
 
-#: steps_gtk.pm:411
+#: steps_gtk.pm:416
 #, c-format
 msgid "Importance: "
 msgstr "重要性: "
 
-#: steps_gtk.pm:412
+#: steps_gtk.pm:417
 #, c-format
 msgid "No description"
 msgstr ""
 
-#: steps_gtk.pm:446
+#: steps_gtk.pm:451
 #, c-format
 msgid "You cannot select/unselect this package"
 msgstr "このパッケージの選択/非選択は変更できません"
 
-#: steps_gtk.pm:450
+#: steps_gtk.pm:455
 #, c-format
 msgid "due to missing %s"
 msgstr "%s がないために"
 
-#: steps_gtk.pm:451
+#: steps_gtk.pm:456
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "%s が依存を満たしていないために"
 
-#: steps_gtk.pm:452
+#: steps_gtk.pm:457
 #, c-format
 msgid "trying to promote %s"
 msgstr "%s をアップグレードするために"
 
-#: steps_gtk.pm:453
+#: steps_gtk.pm:458
 #, c-format
 msgid "in order to keep %s"
 msgstr "%s を維持するために"
 
-#: steps_gtk.pm:458
+#: steps_gtk.pm:463
 #, c-format
 msgid ""
 "You cannot select this package as there is not enough space left to install "
@@ -846,113 +856,113 @@ msgid ""
 msgstr ""
 "このパッケージは選択できません。インストールに必要な空き容量がありません。"
 
-#: steps_gtk.pm:461
+#: steps_gtk.pm:466
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "以下のパッケージをインストールします"
 
-#: steps_gtk.pm:462
+#: steps_gtk.pm:467
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "以下のパッケージを削除します"
 
-#: steps_gtk.pm:488
+#: steps_gtk.pm:493
 #, c-format
 msgid "This is a mandatory package, it cannot be unselected"
 msgstr "これは必須パッケージです。選択を解除することはできません。"
 
-#: steps_gtk.pm:490
+#: steps_gtk.pm:495
 #, c-format
 msgid "You cannot unselect this package. It is already installed"
 msgstr "このパッケージの選択は解除できません。既にインストールされています。"
 
-#: steps_gtk.pm:492
+#: steps_gtk.pm:497
 #, c-format
 msgid "You cannot unselect this package. It must be upgraded"
 msgstr "このパッケージの選択は解除できません。アップグレードが必要です。"
 
-#: steps_gtk.pm:496
+#: steps_gtk.pm:501
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "自動的に選択されたパッケージを表示"
 
-#: steps_gtk.pm:503
+#: steps_gtk.pm:508
 #, c-format
 msgid "Install"
 msgstr "インストール"
 
-#: steps_gtk.pm:506
+#: steps_gtk.pm:511
 #, c-format
 msgid "Load/Save selection"
 msgstr "選択を読み込む/保存する"
 
-#: steps_gtk.pm:507
+#: steps_gtk.pm:512
 #, c-format
 msgid "Updating package selection"
 msgstr "パッケージの選択を更新"
 
-#: steps_gtk.pm:512
+#: steps_gtk.pm:517
 #, c-format
 msgid "Minimal install"
 msgstr "最小インストール"
 
-#: steps_gtk.pm:525
+#: steps_gtk.pm:530
 #, c-format
 msgid "Software Management"
 msgstr "ソフトウェアの管理"
 
-#: steps_gtk.pm:525 steps_interactive.pm:438
+#: steps_gtk.pm:530 steps_interactive.pm:438
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "インストールするパッケージを選んでください"
 
-#: steps_gtk.pm:542 steps_interactive.pm:656 steps_list.pm:32
+#: steps_gtk.pm:547 steps_interactive.pm:656 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "インストール中"
 
-#: steps_gtk.pm:572
+#: steps_gtk.pm:577
 #, c-format
 msgid "No details"
 msgstr "詳細なし"
 
-#: steps_gtk.pm:591
+#: steps_gtk.pm:596
 #, c-format
 msgid "Time remaining:"
 msgstr "残り時間:"
 
-#: steps_gtk.pm:592
+#: steps_gtk.pm:597
 #, c-format
 msgid "(estimating...)"
 msgstr "(試算しています...)"
 
-#: steps_gtk.pm:622
+#: steps_gtk.pm:627
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d 個のパッケージ"
 
-#: steps_gtk.pm:677 steps_interactive.pm:821 steps_list.pm:43
+#: steps_gtk.pm:682 steps_interactive.pm:821 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "まとめ"
 
-#: steps_gtk.pm:696
+#: steps_gtk.pm:701
 #, c-format
 msgid "Configure"
 msgstr "設定"
 
-#: steps_gtk.pm:713 steps_interactive.pm:817 steps_interactive.pm:969
+#: steps_gtk.pm:718 steps_interactive.pm:817 steps_interactive.pm:969
 #, c-format
 msgid "not configured"
 msgstr "設定されていません"
 
-#: steps_gtk.pm:747
+#: steps_gtk.pm:752
 #, c-format
 msgid "Media Selection"
 msgstr "メディアの選択"
 
-#: steps_gtk.pm:756 steps_interactive.pm:336
+#: steps_gtk.pm:761 steps_interactive.pm:336
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -961,7 +971,7 @@ msgstr ""
 "次のインストールメディアを検出しました。\n"
 "使用しないものがあればここで選択を解除してください。"
 
-#: steps_gtk.pm:772 steps_interactive.pm:342
+#: steps_gtk.pm:777 steps_interactive.pm:342
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard disk drive "
@@ -973,7 +983,7 @@ msgstr ""
 "そうするとインストーラはハードドライブからインストールを続けます。コピーされ"
 "たパッケージはインストール完了後も利用できます。"
 
-#: steps_gtk.pm:774 steps_interactive.pm:344
+#: steps_gtk.pm:779 steps_interactive.pm:344
 #, c-format
 msgid "Copy whole CDs"
 msgstr "CD 全体をコピー"

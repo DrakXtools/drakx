@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko(metanav)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-25 01:34+0200\n"
+"POT-Creation-Date: 2012-08-25 11:38+0200\n"
 "PO-Revision-Date: 2007-06-18 14:54+0900\n"
 "Last-Translator: meta <hbahn@metq.com>\n"
 "Language-Team: ahb hong-bae <ko@li.org>\n"
@@ -31,7 +31,7 @@ msgstr ""
 #: ../../advertising/MandrivaOne-advert-8.pl:1
 #: ../../advertising/MandrivaOne-advert-9.pl:1
 #, c-format
-msgid "Mandriva 2011 Powerpack"
+msgid "Mandriva Linux 2012 Tech Preview (Bernie Lomax;)"
 msgstr ""
 
 #: any.pm:110
@@ -682,7 +682,7 @@ msgstr ""
 "오류가 발생했지만, 처리할 수 없습니다.\n"
 "위험을 감수하려면 계속하세요."
 
-#: steps.pm:457
+#: steps.pm:452
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -774,181 +774,191 @@ msgstr ""
 msgid "Package Group Selection"
 msgstr "패키지 그룹 선택"
 
-#: steps_gtk.pm:340 steps_interactive.pm:642
+#: steps_gtk.pm:343 steps_interactive.pm:642
 #, c-format
 msgid "Individual package selection"
 msgstr "개별 팩키지 선택"
 
-#: steps_gtk.pm:364 steps_interactive.pm:557
+#: steps_gtk.pm:350
+#, c-format
+msgid "Select All"
+msgstr ""
+
+#: steps_gtk.pm:351
+#, c-format
+msgid "Unselect All"
+msgstr ""
+
+#: steps_gtk.pm:369 steps_interactive.pm:557
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "전체 크기: %d / %d MB"
 
-#: steps_gtk.pm:409
+#: steps_gtk.pm:414
 #, c-format
 msgid "Version: "
 msgstr "판"
 
-#: steps_gtk.pm:410
+#: steps_gtk.pm:415
 #, c-format
 msgid "Size: "
 msgstr "크기: "
 
-#: steps_gtk.pm:410
+#: steps_gtk.pm:415
 #, c-format
 msgid "%d KB\n"
 msgstr "%d 킬로 바이트\n"
 
-#: steps_gtk.pm:411
+#: steps_gtk.pm:416
 #, c-format
 msgid "Importance: "
 msgstr "중요도: "
 
-#: steps_gtk.pm:412
+#: steps_gtk.pm:417
 #, c-format
 msgid "No description"
 msgstr ""
 
-#: steps_gtk.pm:446
+#: steps_gtk.pm:451
 #, c-format
 msgid "You cannot select/unselect this package"
 msgstr "이 패키지를 선택/버림 할 수 없습니다."
 
-#: steps_gtk.pm:450
+#: steps_gtk.pm:455
 #, c-format
 msgid "due to missing %s"
 msgstr "%s 가 없음"
 
-#: steps_gtk.pm:451
+#: steps_gtk.pm:456
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "%s 비충족"
 
-#: steps_gtk.pm:452
+#: steps_gtk.pm:457
 #, c-format
 msgid "trying to promote %s"
 msgstr "%s 를 활성화하기 위해 시도중"
 
-#: steps_gtk.pm:453
+#: steps_gtk.pm:458
 #, c-format
 msgid "in order to keep %s"
 msgstr "%s를 유지하기 위해"
 
-#: steps_gtk.pm:458
+#: steps_gtk.pm:463
 #, c-format
 msgid ""
 "You cannot select this package as there is not enough space left to install "
 "it"
 msgstr "이 패키지 선택할 수 없음 - 디스크 공간 부족"
 
-#: steps_gtk.pm:461
+#: steps_gtk.pm:466
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "다음 패키지들을 설치합니다."
 
-#: steps_gtk.pm:462
+#: steps_gtk.pm:467
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "다음 패키지들을 제거합니다."
 
-#: steps_gtk.pm:488
+#: steps_gtk.pm:493
 #, c-format
 msgid "This is a mandatory package, it cannot be unselected"
 msgstr "이것은 필수 패키지이므로 제거할 수 없습니다."
 
-#: steps_gtk.pm:490
+#: steps_gtk.pm:495
 #, c-format
 msgid "You cannot unselect this package. It is already installed"
 msgstr "선택해제할 수 없음 - 이미 설치된 패키지입니다."
 
-#: steps_gtk.pm:492
+#: steps_gtk.pm:497
 #, c-format
 msgid "You cannot unselect this package. It must be upgraded"
 msgstr "선택해제할 수 없음 - 업그레이드 필."
 
-#: steps_gtk.pm:496
+#: steps_gtk.pm:501
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "자동 선택 패키지들 보기"
 
-#: steps_gtk.pm:503
+#: steps_gtk.pm:508
 #, c-format
 msgid "Install"
 msgstr "설치"
 
-#: steps_gtk.pm:506
+#: steps_gtk.pm:511
 #, c-format
 msgid "Load/Save selection"
 msgstr "열기/저장 선택"
 
-#: steps_gtk.pm:507
+#: steps_gtk.pm:512
 #, c-format
 msgid "Updating package selection"
 msgstr "선택된 패키지 목록 업데이트 중"
 
-#: steps_gtk.pm:512
+#: steps_gtk.pm:517
 #, c-format
 msgid "Minimal install"
 msgstr "최소 설치"
 
-#: steps_gtk.pm:525
+#: steps_gtk.pm:530
 #, c-format
 msgid "Software Management"
 msgstr "소프트웨어 관리"
 
-#: steps_gtk.pm:525 steps_interactive.pm:438
+#: steps_gtk.pm:530 steps_interactive.pm:438
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "설치할 패키지를 선택하시오."
 
-#: steps_gtk.pm:542 steps_interactive.pm:656 steps_list.pm:32
+#: steps_gtk.pm:547 steps_interactive.pm:656 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "설치중"
 
-#: steps_gtk.pm:572
+#: steps_gtk.pm:577
 #, c-format
 msgid "No details"
 msgstr "상세설명 생략"
 
-#: steps_gtk.pm:591
+#: steps_gtk.pm:596
 #, fuzzy, c-format
 msgid "Time remaining:"
 msgstr "남은 시간 "
 
-#: steps_gtk.pm:592
+#: steps_gtk.pm:597
 #, fuzzy, c-format
 msgid "(estimating...)"
 msgstr "계산 중"
 
-#: steps_gtk.pm:622
+#: steps_gtk.pm:627
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d 패키지"
 msgstr[1] "%d 패키지"
 
-#: steps_gtk.pm:677 steps_interactive.pm:821 steps_list.pm:43
+#: steps_gtk.pm:682 steps_interactive.pm:821 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "요약설명"
 
-#: steps_gtk.pm:696
+#: steps_gtk.pm:701
 #, c-format
 msgid "Configure"
 msgstr "설정"
 
-#: steps_gtk.pm:713 steps_interactive.pm:817 steps_interactive.pm:969
+#: steps_gtk.pm:718 steps_interactive.pm:817 steps_interactive.pm:969
 #, c-format
 msgid "not configured"
 msgstr "설정되지 않음"
 
-#: steps_gtk.pm:747
+#: steps_gtk.pm:752
 #, fuzzy, c-format
 msgid "Media Selection"
 msgstr "패키지 그룹 선택"
 
-#: steps_gtk.pm:756 steps_interactive.pm:336
+#: steps_gtk.pm:761 steps_interactive.pm:336
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -957,7 +967,7 @@ msgstr ""
 "다음 설치 매체를 찾았습니다.\n"
 "설치 하지 않으려면 설치해제하십시오."
 
-#: steps_gtk.pm:772 steps_interactive.pm:342
+#: steps_gtk.pm:777 steps_interactive.pm:342
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard disk drive "
@@ -969,7 +979,7 @@ msgstr ""
 "그러면 하드 드라이브에 설치한 후에도 패키지는 시스템에 남아서 재설치가 가능합"
 "니다."
 
-#: steps_gtk.pm:774 steps_interactive.pm:344
+#: steps_gtk.pm:779 steps_interactive.pm:344
 #, c-format
 msgid "Copy whole CDs"
 msgstr "전체 CD 복사"
