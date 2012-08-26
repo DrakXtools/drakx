@@ -2,11 +2,11 @@
 #Author: Per Øyvind Karlsen <peroyvind@mandriva.org>
 
 ::sysinit:/etc/init.d/rcS
-tty1::once:-/sbin/stage1
-tty2::askfirst:-/bin/rescue-gui
-tty3::askfirst:-/bin/sh
-tty4::askfirst:-/bin/sh
-tty5::askfirst:-/bin/sh
+tty1::once:/sbin/stage1
+#tty2::askfirst:/bin/rescue-gui
+tty3::askfirst:/bin/sh
+tty4::askfirst:/bin/sh
+tty5::askfirst:/bin/sh
 ::once:/sbin/klogd -n -c 6
 ::once:/sbin/syslogd -n -s 0
 tty11::once:/usr/bin/tail -f /var/log/stage1.log

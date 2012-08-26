@@ -5,7 +5,7 @@
 sed -e 's#::sysinit:/etc/init.d/rcS#::sysinit:/etc/init.d/rc.sysinit#g' -i /etc/inittab
 
 if [ -x /tmp/stage2/usr/bin/runinstall2 ]; then
-	sed -e 's#tty1::once:-/sbin/stage1#tty1::once:-/usr/bin/runinstall2#g' -i /etc/inittab
+	sed -e 's#tty1::once:.*1#tty1::once:/usr/bin/runinstall2#g' -i /etc/inittab
 fi
 for f in `(cd /tmp/stage2; find -type f)`; do
 	if [ -f /$f ]; then
