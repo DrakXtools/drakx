@@ -263,7 +263,7 @@ fi
         substInFile { s,.*/,, } "$tmp_initrd/modules/$ext/modules.order";
 	_ "depmod -b $tmp_initrd $ext";
 	# depmod keeps only available modules in modules.alias, but we want them all
-	_ "cp -f $modz/modules.alias $tmp_initrd/modules/$ext";
+	_ "cp -f $modz/modules.alias $modz/modules.description $tmp_initrd/modules/$ext";
     }
     # ka deploy need some files in all.rdz 
     {
