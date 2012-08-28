@@ -1,0 +1,7 @@
+#!/bin/sh
+
+. /etc/init.d/functions
+
+mount /dev
+mkdir /dev/pts /dev/shm
+mount -a
