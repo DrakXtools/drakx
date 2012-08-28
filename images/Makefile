@@ -56,6 +56,7 @@ dist-svn:
 	mkdir -p $(PRODUCT)-$(VERSION) 
 	svn export -q -rBASE . $(PRODUCT)-$(VERSION)/images
 	svn export -q -rBASE ../kernel $(PRODUCT)-$(VERSION)/kernel
+	svn export -q -rBASE ./tree $(PRODUCT)-$(VERSION)/tree
 	cp ../Makefile.config $(PRODUCT)-$(VERSION)/
 	tar cfJ $(PRODUCT)-$(VERSION).tar.xz $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
