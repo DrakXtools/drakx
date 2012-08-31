@@ -296,7 +296,7 @@ sub _resolve_requested_and_check {
 
     my $error;
     if (find { !exists $state->{selected}{$_} } keys %$requested) {
-	my @rejected = urpm::select::unselected_packages($packages, $state);
+	my @rejected = urpm::select::unselected_packages($state);
 	$error = urpm::select::translate_why_unselected($packages, $state, @rejected);
 	log::l("ERROR: selection failed: $error");
     }
@@ -840,7 +840,7 @@ sub _install_raw {
 
     log::l("rpm transactions start");
 
-    my $exit_code = urpm::main_loop::run($packages, $packages->{state}, undef, undef, undef, {
+    my $exit_code = urpm::main_loop::run($packages, $packages->{state}, undef, undef, {
         open_helper => $callback,
         close_helper => sub {
 				my ($db, $packages, $_type, $id) = @_;
