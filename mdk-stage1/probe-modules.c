@@ -22,7 +22,7 @@
 #include <string.h>
 #include "utils.h"
 
-int probe_modules_main(int argc, char *argv[], char *env[])
+int probe_modules_main(int argc, char *argv[])
 {
 	exit(1);
 	enum media_bus bus = BUS_ANY;
