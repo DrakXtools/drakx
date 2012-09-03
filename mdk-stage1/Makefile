@@ -46,6 +46,11 @@ PRODUCT = $(FAMILY)-binaries
 
 top_dir = .
 
+MDK_STAGE_ONE=1
+include ldetect/Makefile
+LDETECT_SRC := $(patsubst %,ldetect/%,$(lib_src))
+
+
 include $(top_dir)/Makefile.common
 include $(top_dir)/../Makefile.config
 ARCHDIR=$(ARCH)
@@ -84,16 +89,14 @@ else
 STAGE1_LIBS = -Wl,-Bdynamic -lz -Wl,-Bstatic -lkmod -lpci -lsysfs -llzma -Wl,-Bdynamic
 endif
 
-LDETECT_SRC = ldetect/common.c ldetect/modalias.c ldetect/pciusb.c ldetect/pci.c ldetect/usb.c ldetect/pciclass.c ldetect/usbclass.c ldetect/dmi.c ldetect/dmi_hid.c ldetect/hid.c ldetect/sysfs_attr.c ldetect/sysfs_utils.c ldetect/names.c
-
 STAGE1_NETWORK_LIBS =
 ifeq (dietlibc, $(LIBC))
-STAGE1_NETWORK_LIBS += -lrpc
+	STAGE1_NETWORK_LIBS += -lrpc
 else
-STAGE1_NETWORK_LIBS += -lresolv
+	STAGE1_NETWORK_LIBS += -lresolv
 endif
 
- #- stage1 itself
+# - stage1 itself
 STAGE1_SRC = stage1.c log.c utils.c params.c tools.c modules.c probing.c mount.c automatic.c frontend.c frontend-common.c lomount.c thirdparty.c zlibsupport.c
 CDROMSRC = cdrom.c
 DISKSRC = disk.c directory.c partition.c
@@ -121,12 +124,12 @@ NETWORK_STANDALONE_DEFS = -DDISABLE_CDROM -DDISABLE_DISK -DENABLE_NETWORK_STANDA
 
 STAGE1OBJS_FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
 
-BINS = stage1 dhcp-client rescue-gui probe-modules drvinst lspcidrake
+BINS := stage1 dhcp-client rescue-gui probe-modules drvinst lspcidrake
 
 DIRS =
 HEADERS = pci-ids.h usb-ids.h
 ifneq (,$(findstring $(ARCH), i386 x86_64))
-HEADERS += pcmcia-ids.h
+	HEADERS += pcmcia-ids.h
 ifneq (0, $(WHOLE_PROGRAM))
 PCMCIA_LIB = pcmcia/probe.c pcmcia/startup.c pcmcia/yacc_config.c pcmcia/lex_config.c
 else
@@ -247,6 +250,7 @@ $(CLEANDIRS):
 .PHONY: subdirs $(DIRS)
 .PHONY: subdirs $(BUILDDIRS)
 .PHONY: subdirs $(CLEANDIRS)
+.PHONY: subdirs ldetect
 .PHONY: all clean test
 
 dist: tar
@@ -262,12 +266,14 @@ tar:
 	    fi;
 	$(info $(PRODUCT)-$(VERSION).tar.xz is ready)
 
+#$@ $^
 dist-svn:
-	mkdir -p $(PRODUCT)-$(VERSION)
+	mkdir -p $(PRODUCT)-$(VERSION)/
 	svn export -q -rBASE . $(PRODUCT)-$(VERSION)/mdk-stage1
+	svn export -q -rBASE ldetect/  --force $(PRODUCT)-$(VERSION)/mdk-stage1/ldetect
 	svn export -q -rBASE ../kernel $(PRODUCT)-$(VERSION)/kernel
 	cp ../Makefile.config $(PRODUCT)-$(VERSION)/
-	tar cfa $(PRODUCT)-$(VERSION).tar.xz $(PRODUCT)-$(VERSION)
+	tar cfa $(PRODUCT)-$(VERSION).tar.xz $(PRODUCT)-$(VERSION)/
 	rm -rf $(PRODUCT)-$(VERSION)
 
 dist-git:
