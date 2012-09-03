@@ -19,7 +19,9 @@
  *
  */
 
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE         /* We want the non segfaulting my_dirname() -- See dirname(3) */
+#endif
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
