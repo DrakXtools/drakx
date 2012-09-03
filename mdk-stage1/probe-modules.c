@@ -24,7 +24,6 @@
 
 int probe_modules_main(int argc, char *argv[])
 {
-	exit(1);
 	enum media_bus bus = BUS_ANY;
 	char *module = NULL;
 	char options[500] = "";
