@@ -1089,6 +1089,8 @@ static void destroy_fd_type (SLtype type, VOID_STAR ptr)
 
    SLfile_free_fd (*(SLFile_FD_Type **) ptr);
    e = _pSLerrno_errno;
+   /* Avoid -Wunused-but-set-variable */
+   e = e;
 }
 
 static int fd_push (SLtype type, VOID_STAR v)

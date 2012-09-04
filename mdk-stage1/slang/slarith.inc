@@ -47,6 +47,8 @@ static int GENERIC_BINARY_FUNCTION
    a = (GENERIC_TYPE *) ap;
    b = (GENERIC_TYPE *) bp;
    c = (GENERIC_TYPE *) cp;
+   /* Avoid -Wunused-but-set-variable */
+   c = c;
    cc = (char *) cp;
 
 # if SLANG_OPTIMIZE_FOR_SPEED < 2

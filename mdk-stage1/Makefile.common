@@ -53,7 +53,7 @@ WHOLEFLAGS = -Os -fwhole-program -flto
 
 ifneq (ppc, $(ARCH))
 ifneq (sparc, $(ARCH))
-CFLAGS += -Werror -Wno-error=unused-but-set-variable
+CFLAGS += -Werror
 endif
 endif
 

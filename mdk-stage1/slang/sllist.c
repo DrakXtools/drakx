@@ -1043,6 +1043,8 @@ static int _pSLlist_aget (SLtype type, unsigned int num_indices)
      goto free_and_return;
 
    list_len = list->length;
+   /* Avoid -Wunused-but-set-variable */
+   list_len = list_len;
    num = ind_at->num_elements;
    idx_data = (SLindex_Type *)ind_at->data;
    for (i = 0; i < num; i++)
@@ -1124,6 +1126,9 @@ static int _pSLlist_aput (SLtype type, unsigned int num_indices)
    idx_data = (SLindex_Type *)ind_at->data;
    num = ind_at->num_elements;
    list_len = list->length;
+   /* Avoid -Wunused-but-set-variable */
+   list_len = list_len;
+
 
    if (-1 == SLang_pop (&obj))
      {

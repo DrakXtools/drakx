@@ -1002,6 +1002,8 @@ aget_from_index_array (SLang_Array_Type *at, SLang_Array_Type *ind_at)
    new_data = (unsigned char *) new_at->data;
    num_elements = (SLindex_Type) at->num_elements;
    sizeof_type = new_at->sizeof_type;
+   /* Avoid -Wunused-but-set-variable */
+   sizeof_type = sizeof_type;
 
    if (num_elements < 0)
      {
@@ -1960,6 +1962,8 @@ aput_from_index_array (SLang_Array_Type *at, SLang_Array_Type *ind_at)
      return -1;
 
    sizeof_type = at->sizeof_type;
+/* Avoid -Wunused-but-set-variable */
+   sizeof_type = sizeof_type;
 
    cl = at->cl;
 
@@ -2475,6 +2479,8 @@ static void qs_sort_array_internal (void *vobj, SLindex_Type n,
      indx[i] = i;
 
    save_vobj = QSort_Obj;
+   /* Avoid -Wunused-but-set-variable */
+   save_vobj = save_vobj;
    QSort_Obj = vobj;
    qsort ((void *)indx, n, sizeof (SLindex_Type), sort_cmp);
    QSort_Obj = vobj;
