@@ -63,7 +63,7 @@ DEFS = -DDISTRIB_NAME=\"$(DISTRIB_NAME)\" -DDISTRIB_VERSION=\"$(DISTRIB_VERSION)
 
 COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
-STAGE1_DEFS=-DDISABLE_KA -DDRAKX_ONE_BINARY
+STAGE1_DEFS=-DDISABLE_KA -DDRAKX_ONE_BINARY -Dunix -DSLANG -D_GNU_SOURCE
 
 
 FRONTEND_SRC =
@@ -72,7 +72,9 @@ FRONTEND_LIBS =
 #ifeq (newt, $(FRONTEND))
 #FRONTEND_SRC += newt-frontend.c
 ifndef DYNAMIC
-FRONTEND_LIBS += -lnewt -lslang
+SLANG_SRC = -Islang slang/slang.c slang/slarith.c slang/slarray.c slang/slarrfun.c slang/slarrmis.c slang/slassoc.c slang/slboseos.c slang/slbstr.c slang/slclass.c slang/slcmd.c slang/slcmplex.c slang/slcommon.c slang/slcompat.c slang/slcurses.c slang/sldisply.c slang/slerrno.c slang/slerr.c slang/slexcept.c slang/slfpu.c slang/slgetkey.c slang/slintall.c slang/slischar.c slang/slistruc.c slang/slkeymap.c slang/slkeypad.c slang/sllist.c slang/sllower.c slang/slmalloc.c slang/slmath.c slang/slmemchr.c slang/slmemcmp.c slang/slmemcpy.c slang/slmemset.c slang/slmisc.c slang/slnspace.c slang/slospath.c slang/slpack.c slang/slparse.c slang/slpath.c slang/slposdir.c slang/slposio.c slang/slprepr.c slang/slproc.c slang/slregexp.c slang/slrline.c slang/slscanf.c slang/slscroll.c slang/slsearch.c slang/slsignal.c slang/slsig.c slang/slsmg.c slang/slstdio.c slang/slstd.c slang/slstring.c slang/slstrops.c slang/slstruct.c slang/sltermin.c slang/sltime.c slang/sltoken.c slang/sltypes.c slang/slupper.c slang/slutf8.c slang/slutty.c slang/slwclut.c slang/slwcwidth.c slang/slxstrng.c
+NEWT_SRC = newt/buttonbar.c newt/button.c  newt/checkbox.c  newt/checkboxtree.c  newt/entry.c  newt/form.c  newt/grid.c newt/label.c   newt/scale.c newt/scrollbar.c	newt/textbox.c	newt/windows.c newt/newt.c  newt/listbox.c
+FRONTEND_LIBS += $(NEWT_SRC) $(SLANG_SRC)
 else
 FRONTEND_LIBS += -Wl,-Bstatic -lnewt -lslang -Wl,-Bdynamic
 endif
@@ -84,7 +86,7 @@ endif
 FRONTEND_OBJS = $(subst .c,.o,$(FRONTEND_SRC))
 
 ifndef DYNAMIC
-STAGE1_LIBS = -lz -lkmod -lpci -lsysfs -llzma
+STAGE1_LIBS = -lz -lkmod -lpci -lsysfs -llzma -lm
 else
 STAGE1_LIBS = -Wl,-Bdynamic -lz -Wl,-Bstatic -lkmod -lpci -lsysfs -llzma -Wl,-Bdynamic
 endif
@@ -180,7 +182,7 @@ stage1: .depend $(PCMCIA_LIB) probe-modules.c rescue-gui.c drvinst.c ldetect/lsp
 	$(DIET) $(COMPILE) -std=gnu99 $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) \
 		probe-modules.c rescue-gui.c drvinst.c ldetect/lspcidrake.c $(LDETECT_SRC) $(FRONTEND_SRC) $(STAGE1_ALLSRC) \
-		$(PCMCIA_LIB) $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS) \
+		$(PCMCIA_LIB) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(STAGE1_LIBS) $(LIBC_LIBS) \
 		-o $@
 
 else
