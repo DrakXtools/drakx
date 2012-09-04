@@ -1,4 +1,6 @@
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 #include <stdio.h>
 #include "config.h"
 
@@ -415,7 +417,7 @@ static void formPlace(newtComponent co, int left, int top);
 static newtCallback helpCallback;
 
 /* this isn't static as grid.c tests against it to find forms */
-struct componentOps formOps __attribute__ ((visibility ("hidden"))) = {
+struct componentOps formOps = {
     newtDrawForm,
     formEvent,
     newtFormDestroy,

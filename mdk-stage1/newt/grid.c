@@ -27,7 +27,7 @@ struct grid_s {
 };
 
 /* this is a bit of a hack */
-extern struct componentOps formOps[];
+extern struct componentOps formOps;
 
 newtGrid newtCreateGrid(int cols, int rows) {
     newtGrid grid;
@@ -108,7 +108,7 @@ static void shuffleGrid(newtGrid grid, int left, int top, int set) {
 		    shuffleGrid(field->u.grid, left, top, 0);
 		j = field->u.grid->width;
 	    } else if (field->type == NEWT_GRID_COMPONENT) {
-		if (field->u.co->ops == formOps)
+		if (field->u.co->ops == &formOps)
 		    newtFormSetSize(field->u.co);
 		j = field->u.co->width;
 	    } else 
