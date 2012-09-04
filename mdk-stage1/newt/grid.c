@@ -26,8 +26,8 @@ struct grid_s {
     struct gridField ** fields;
 };
 
-/* this is a bit of a hack */
-extern struct componentOps formOps;
+/* make it local to the dso */
+extern struct componentOps formOps __attribute__ ((visibility ("hidden")));
 
 newtGrid newtCreateGrid(int cols, int rows) {
     newtGrid grid;
