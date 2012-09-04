@@ -179,7 +179,7 @@ ifneq (0, $(WHOLE_PROGRAM))
 ifneq (0, $(ONE_BINARY))
 
 stage1: .depend $(PCMCIA_LIB) probe-modules.c rescue-gui.c drvinst.c ldetect/lspcidrake.c $(FRONTEND_SRC) $(FRONTEND_LIBS) $(STAGE1_ALLSRC) $(LDETECT_SRC) Makefile
-	$(DIET) $(COMPILE) -std=gnu99 $(LDFLAGS) $(WHOLEFLAGS) \
+	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) \
 		probe-modules.c rescue-gui.c drvinst.c ldetect/lspcidrake.c $(LDETECT_SRC) $(FRONTEND_SRC) $(STAGE1_ALLSRC) \
 		$(PCMCIA_LIB) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(STAGE1_LIBS) $(LIBC_LIBS) \
