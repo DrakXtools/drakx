@@ -15,9 +15,8 @@ for f in `(cd /tmp/stage2; find -type f)`; do
 done
 
 mount /tmp/stage2 /tmp/newroot -t overlayfs -o upperdir=/,lowerdir=/tmp/stage2
-mount /sys /tmp/newroot/sys -t sysfs -o move
-mount /dev /tmp/newroot/dev -t devtmpfs -o move
-mount /run /tmp/newroot/run -t tmpfs -o move
-mount /proc /tmp/newroot/proc -t proc -o move
+for mntpnt in `cat /proc/mounts| grep -v -e rootfs -e overlayfs`; do
+	mount $mntpnt /tmp/newroot/$mntpnt -o move
+done
 
 exec chroot /tmp/newroot /sbin/init
