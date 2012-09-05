@@ -29,4 +29,7 @@ $::isStandalone = 0;
 
 install::install2::main(@ARGV);
 
+#- not happy about, slightly ugly, but whatever...
+system('umount -a');
+system('reboot');
 c::_exit(0);
