@@ -107,7 +107,7 @@ NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c directory.c wireless
 
 # use sort to remove duplicates
 STAGE1_ALLSRC = $(sort $(STAGE1_SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC) $(KASRC))
-ALLSRC = $(STAGE1_ALLSRC)
+ALLSRC = $(STAGE1_ALLSRC) $(FRONTEND_LIBS)
 
 
 
