@@ -854,7 +854,7 @@ sub exitInstall {
 	my $report = '/root/drakx/report.bug';
 	unlink "$::prefix$report", "$::prefix$report.gz";
 	output "$::prefix$report", install::any::report_bug();
-	run_program::rooted($::prefix, 'gzip', $report);
+	run_program::rooted($::prefix, 'xz', $report);
     };
     output("$::prefix/root/drakx/package_list.pl", install::any::selected_leaves_pl($o));
 
