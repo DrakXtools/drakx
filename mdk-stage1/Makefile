@@ -46,6 +46,8 @@ PRODUCT = $(FAMILY)-binaries
 
 top_dir = .
 
+default: all
+
 MDK_STAGE_ONE=1
 include ldetect/Makefile
 LDETECT_SRC := $(patsubst %,ldetect/%,$(lib_src))
