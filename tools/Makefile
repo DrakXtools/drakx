@@ -2,7 +2,8 @@ include ../Makefile.config
 
 CC          = gcc
 DIRS	    = serial_probe
-CFLAGS      = -Wall
+CFLAGS      = -Wall -Os -flto
+LDFLAGS     = -Wl,-O2 -flto
 
 .PHONY: clean install $(DIRS)
 
