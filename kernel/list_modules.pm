@@ -72,9 +72,9 @@ our %l = (
       qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx bcm_wimax brcm80211 brcmsmac carl9170 com20020_cs),
       qw(dyc_ar5 hostap_cs hostap_pci hostap_plx i2400m-usb ipw2100),
       qw(i2400m_usb ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwlwifi madwifi_pci),
-      qw(mwl8k ndiswrapper netwave_cs orinoco orinoco_cs),
+      qw(mwifiex_usb mwl8k ndiswrapper netwave_cs orinoco orinoco_cs),
       qw(orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd orinoco_usb p54pci),
-      qw(p54usb prism2_cs prism2_pci prism2_usb prism54 r8180),
+      qw(p54usb prism2_cs prism2_pci prism2_usb prism54 qmi_wwan r8180),
       qw(r8187se r8192_pci r8192s_usb r8192u_usb r8712u ray_cs rndis_wlan rt2400 rt2400pci rt2500),
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
       qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtusb ),
@@ -184,7 +184,7 @@ our %l = (
     pcmcia => [
       if_(arch() !~ /^sparc/, qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket)), # cb_enabler
     ],
-    hid => [ qw(ff-memless hid-a4tech hid-apple hid-belkin hid-cypress
+    hid => [ qw(ff-memless hid-a4tech hid-apple hid-aureal hid-belkin hid-cypress
 	    hid-cherry hid hid-axff hid-dr hid-elecom hid-emsff hid-holtekff
 	    hid-hyperv hid-lcpower hid-magicmouse hid-multitouch hid-ortek
 	    hid-picolcd hid-primax hid-prodikeys hid-roccat hid-roccat-arvo
@@ -302,7 +302,7 @@ our %l = (
     mouse => [
       qw(atixlmouse busmouse generic_serial inport ioc3_serial logibm logibusmouse msbusmouse pcips2 qpmouse synclinkmp),
       if_(arch() =~ /ppc/, 'macserial'),
-      qw(mousedev usbhid usbmouse),
+      qw(mousedev usbhid usbmouse synaptics_usb),
     ],
     char => [
       if_(arch() =~ /ia64/, qw(efivars)),
@@ -310,7 +310,7 @@ our %l = (
       qw(wdt_pci i810-tco sx), #- what are these???
     ],
     crypto => [
-      qw(sha256_generic cbc amd768_rng amd7xx_tco i810_rng hw_random leedslite padlock),
+      qw(aesni_intel amd768_rng amd7xx_tco cbc hw_random i810_rng leedslite padlock sha256_generic),
     ],
     laptop => [
       qw(i8k sonypi toshiba),
@@ -334,6 +334,7 @@ our %l = (
       qw(rrunner meye),
 
       qw(virtio_pci virtio_balloon),
+      qw(mei pch_phub),
     ],
     agpgart => [
       if_(arch() =~ /alpha/, qw(alpha-agp)),
