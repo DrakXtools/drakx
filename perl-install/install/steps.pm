@@ -426,6 +426,7 @@ sub installPackages {
     #- small transaction will be built based on this selection and depslist.
     my @toInstall = install::pkgs::packagesToInstall($packages);
 
+    my $exit_code;
     my $time = time();
     { 
 	local $ENV{DURING_INSTALL} = 1;
@@ -433,13 +434,14 @@ sub installPackages {
 	local $ENV{TMP} = '/tmp';
 	local $ENV{HOME};
 	local $packages->{options}{auto} = !$o_interactive;
-	install::pkgs::install($o->{isUpgrade}, \@toInstall, $packages, \&installCallback);
+	$exit_code = install::pkgs::install($o->{isUpgrade}, \@toInstall, $packages, \&installCallback);
     }
     any::writeandclean_ldsoconf($::prefix);
 
     log::l("Install took: ", formatTimeRaw(time() - $time));
     run_program::rooted_or_die($::prefix, 'ldconfig') if !$o->{justdb};
 
+    $exit_code and die "Installation failed";
     install::media::log_sizes();
     scalar(@toInstall); #- return number of packages installed.
 }

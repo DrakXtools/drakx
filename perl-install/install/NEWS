@@ -1,5 +1,7 @@
-Version 14.31 - 17 August 2012, by Per Øyvind Karlsen
+Version 14.32 -  6 September 2012, by Per Øyvind Karlsen
 
+- summary: fix displayed network type (mga#4959)
+- prevent going further if some transactions failed (mga#7016)
 - don't log to /dev/tty3 & /tmp/ddebug.log, but rather let inittab take care
   of logging to a different tty, while /var/log/stage2.log replaces ddebug.log
 - evdev now gets loaded early enough

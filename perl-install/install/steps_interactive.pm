@@ -956,6 +956,7 @@ sub summary {
 	group => N("Network & Internet"),
 	label => N("Network"),
 	val => sub { $o->{net}{type} },
+	format => sub { s/.*:://; $_ },
 	clicked => sub { 
 	    require network::netconnect;
 	    network::netconnect::real_main($o->{net}, $o, $o->{modules_conf});

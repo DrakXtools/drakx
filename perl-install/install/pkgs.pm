@@ -757,7 +757,7 @@ sub install {
     #- place (install::steps_gtk.pm,...).
     $callback->($packages, user => undef, install => $nb, $total);
 
-    _install_raw($packages, $isUpgrade, $callback, $LOG, 0);
+    my $exit_code = _install_raw($packages, $isUpgrade, $callback, $LOG, 0);
 
     log::l("closing install.log file");
     close $LOG;
@@ -766,6 +766,8 @@ sub install {
     $packages->{state} = {};
 
     fs::loopback::save_boot($loop_boot);
+
+    $exit_code;
 }
 
 sub _unselect_package {
