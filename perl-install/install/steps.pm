@@ -437,9 +437,9 @@ sub installPackages {
     }
     any::writeandclean_ldsoconf($::prefix);
 
+    log::l("Install took: ", formatTimeRaw(time() - $time));
     run_program::rooted_or_die($::prefix, 'ldconfig') if !$o->{justdb};
 
-    log::l("Install took: ", formatTimeRaw(time() - $time));
     install::media::log_sizes();
     scalar(@toInstall); #- return number of packages installed.
 }
