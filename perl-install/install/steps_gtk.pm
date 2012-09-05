@@ -339,9 +339,9 @@ sub reallyChooseGroups {
 	   gtknew('VBox', children => [
 		    1, $o->{gtk_display_compssUsers}->($entry),
 		    1, '',
-		    0, if_($individual,
-			      gtknew('CheckButton', text => N("Individual package selection"), active_ref => $individual),
-			  ),
+		    if_($individual,
+                        0, gtknew('CheckButton', text => N("Individual package selection"), active_ref => $individual),
+                    ),
 		    0, $w_size,
 		    0, Gtk2::HSeparator->new,
 		    0, gtknew('HButtonBox', layout => 'edge', children_tight => [
