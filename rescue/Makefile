@@ -36,6 +36,7 @@ dist-svn:
 	svn export -q -rBASE . $(PRODUCT)-$(VERSION)/rescue
 	cp ../Makefile.config $(PRODUCT)-$(VERSION)/
 	cp ../tools/install-xml-file-list $(PRODUCT)-$(VERSION)/tools
+	cp ../tools/loadkeys $(PRODUCT)-$(VERSION)/tools
 	tar cfJ $(PRODUCT)-$(VERSION).tar.xz $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
 

@@ -569,9 +569,11 @@
   </to>
 </from>
 
-<to dir="/usr/bin">
-  loadkeys
-</to>
+<from dir="../../tools">
+  <to dir="/usr/bin">
+    loadkeys
+  </to>
+</from>
 
 <from dir="share">
   <to dir="/usr/share">

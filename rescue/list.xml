@@ -144,12 +144,12 @@
 
 </from>
 
-<from dir="../perl-install/install/bkeymaps">
+<from dir="bkeymaps">
   <to dir="/usr/share/bkeymaps">
     <from expand="command">
-      perl -I/usr/lib/libDrakX -Mkeyboard -le '{
+    perl -I/usr/lib/libDrakX -Mkeyboard -le '{
         foreach (keyboard::_keyboards()) {
-	my $dir = "../perl-install/install/bkeymaps";
+        my $dir = "bkeymaps";
           my $kmap = keyboard::keyboard2kmap($_);
             if (system("loadkeys -b $kmap > $dir/$kmap.bkmap") != 0) {
               warn "unknown kmap $kmap\n";
@@ -163,7 +163,7 @@
   </to>
 </from>
 
-<from dir="../perl-install/install">
+<from dir="../tools">
   <to dir="/usr/bin">
     loadkeys
   </to>
