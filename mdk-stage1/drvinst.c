@@ -31,6 +31,67 @@
 
 #include "drvinst.h"
 
+static void print_mod_strerror(int err, struct kmod_module *mod, const char *filename)
+{
+    switch (err) {
+	case -EEXIST:
+	    fprintf(stderr, "could not insert '%s': Module already in kernel\n",
+		    mod ? kmod_module_get_name(mod) : filename);
+	    break;
+	case -ENOENT:
+	    fprintf(stderr, "could not insert '%s': Unknown symbol in module, "
+		    "or unknown parameter (see dmesg)\n",
+		    mod ? kmod_module_get_name(mod) : filename);
+	    break;
+	case ESRCH:
+	    fprintf(stderr, "could not insert '%s': Module has wrong symbol version "
+		    "(see dmesg)\n",
+		    mod ? kmod_module_get_name(mod) : filename);
+	    break;
+	case EINVAL:
+	    fprintf(stderr, "could not insert '%s': Module has invalid parameters "
+		    "(see dmesg)\n",
+		    mod ? kmod_module_get_name(mod) : filename);
+	    break;
+	default:
+		fprintf(stderr, "could not insert '%s': %s\n",
+			mod ? kmod_module_get_name(mod) : filename,
+			strerror(-err));
+	    break;
+    }
+}
+
+int insmod(const char *filename, const char *options)
+{
+	struct kmod_ctx *ctx;
+	struct kmod_module *mod;
+	int err = 0;
+	const char *null_config = NULL;
+
+	ctx = kmod_new(NULL, &null_config);
+	if (!ctx) {
+		fputs("Error: kmod_new() failed!\n", stderr);
+		goto exit;
+	}
+
+	err = kmod_module_new_from_path(ctx, filename, &mod);
+	if (err < 0) {
+		print_mod_strerror(err, NULL, filename);
+		goto exit;
+	}
+
+	err = kmod_module_insert_module(mod, 0, options);
+	if (err < 0) {
+		print_mod_strerror(err, NULL, filename);
+	}
+	kmod_module_unref(mod);
+
+exit:
+	kmod_unref(ctx);
+
+	return err;
+}
+
 int modprobe(const char *alias, const char *extra_options) {
     struct kmod_ctx *ctx;
     struct kmod_list *l, *list = NULL;
