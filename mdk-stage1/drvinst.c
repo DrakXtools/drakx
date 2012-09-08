@@ -40,7 +40,7 @@ static void print_mod_strerror(int err, struct kmod_module *mod, const char *fil
 	    break;
 	case -ENOENT:
 	    fprintf(stderr, "could not insert '%s': Unknown symbol in module, "
-		    "or unknown parameter (see dmesg)\n",
+		    "or file not found (see dmesg)\n",
 		    mod ? kmod_module_get_name(mod) : filename);
 	    break;
 	case -ESRCH:
