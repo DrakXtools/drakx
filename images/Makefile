@@ -71,7 +71,7 @@ clean:
 install:
 	install -d $(DESTDIR)$(IMAGES_DEST)
 	rm -rf $(DESTDIR)$(IMAGES_DEST)/alternatives 
-	cp -r tree images/* $(DESTDIR)$(IMAGES_DEST)
+	cp -r images/* $(DESTDIR)$(IMAGES_DEST)
 ifneq (,$(findstring $(ARCH), i386 x86_64))
 	rm -rf $(DESTDIR)$(ROOTDEST)/isolinux
 	cp -af isolinux $(DESTDIR)$(ROOTDEST)
