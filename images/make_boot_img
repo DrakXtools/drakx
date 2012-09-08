@@ -12,7 +12,7 @@ my ($arch) = $Config{archname} =~ /(.*?)-/;
 
 my $default_append = '';
 my $default_acpi = '';
-my $default_vga = "vga=788 splash quiet";
+my $default_vga = "vga=791 splash quiet";
 my $timeout = 150;
 my $isolinux_bin = '/usr/lib/syslinux/isolinux.bin';
 my $lib = $arch eq 'x86_64' ? 'lib64' : 'lib';
@@ -298,6 +298,7 @@ sub entries_append {
     my @simple_entries = (
 	linux => $default_vga,
 	vgalo => "vga=785",
+	vgame => "vga=788",
 	vgahi => "vga=791",
 	text => "text",
 #	patch => "patch $default_vga",
@@ -775,7 +776,7 @@ sub syslinux_all_files {
 
     @$kernels or die "syslinux_all_files: no kernel\n";
 
-    $default_vga =~ /788/ or die 'we rely on vga=788 for bootsplash';
+    $default_vga =~ /791/ or die 'we rely on vga=791 for bootsplash';
     my $theme = $ENV{THEME} || 'Mandriva-Free';
 
     each_index {
