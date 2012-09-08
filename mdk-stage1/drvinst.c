@@ -31,7 +31,7 @@
 
 #include "drvinst.h"
 
-static int modprobe(const char *alias) {
+int modprobe(const char *alias) {
     struct kmod_ctx *ctx;
     struct kmod_list *l, *list = NULL;
     int err = 0, flags = 0;

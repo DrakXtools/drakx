@@ -14,6 +14,7 @@
 #ifndef _DRVINST_H_
 #define _DRVINST_H_
 
+int modprobe(const char *alias);
 int drvinst_main(int argc, char *argv[]);
 
 #endif
