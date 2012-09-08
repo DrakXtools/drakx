@@ -24,6 +24,7 @@
 #include "utils.h"
 #include "log.h"
 #include "modules.h"
+#include "drvinst.h"
 #include "mount.h"
 #include "frontend.h"
 #include "partition.h"
@@ -210,7 +211,7 @@ static enum return_type thirdparty_prompt_modules(const char *modules_location, 
 		if (results != RETURN_OK)
 			continue;
 
-		rc = insmod_local_file(final_name, answers[0]);
+		rc = insmod(final_name, answers[0]);
 		if (rc) {
 			log_message("\tfailed");
 			stg1_error_message("Insmod failed.");
@@ -324,7 +325,7 @@ static enum return_type thirdparty_autoload_modules(const char *modules_location
 		while (entry && *entry) {
 			if (!strncmp(*entry, module, strlen(module)) && (*entry)[strlen(module)] == '.') {
 				sprintf(final_name, "%s/%s", modules_location, *entry);
-				if (insmod_local_file(final_name, options)) {
+				if (insmod(final_name, options)) {
 					log_message("\t%s (third party media): failed", *entry);
 					stg1_error_message("Insmod %s (third party media) failed.", *entry);
 				}

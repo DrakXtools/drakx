@@ -89,9 +89,9 @@ endif
 FRONTEND_OBJS = $(subst .c,.o,$(FRONTEND_SRC))
 
 ifndef DYNAMIC
-STAGE1_LIBS = -lz -lkmod -lpci -lsysfs -llzma -lm
+STAGE1_LIBS = -lkmod -lpci -lsysfs -lm
 else
-STAGE1_LIBS = -Wl,-Bdynamic -lz -Wl,-Bstatic -lkmod -lpci -lsysfs -llzma -Wl,-Bdynamic
+STAGE1_LIBS = -Wl,-Bdynamic -Wl,-Bstatic -lkmod -lpci -lsysfs -Wl,-Bdynamic
 endif
 
 STAGE1_NETWORK_LIBS =
@@ -102,7 +102,7 @@ else
 endif
 
 # - stage1 itself
-STAGE1_SRC = stage1.c log.c utils.c params.c tools.c modules.c probing.c mount.c automatic.c frontend.c frontend-common.c lomount.c thirdparty.c zlibsupport.c
+STAGE1_SRC = stage1.c log.c utils.c params.c tools.c modules.c probing.c mount.c automatic.c frontend.c frontend-common.c lomount.c thirdparty.c
 CDROMSRC = cdrom.c
 DISKSRC = disk.c directory.c partition.c
 NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c directory.c wireless.c

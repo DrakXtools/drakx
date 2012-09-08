@@ -35,9 +35,9 @@
 #include "utils.h"
 #include "frontend.h"
 #include "mount.h"
-#include "zlibsupport.h"
 
 #include "modules.h"
+#include "drvinst.h"
 
 #define UEVENT_HELPER_FILE "/sys/kernel/uevent_helper"
 #define UEVENT_HELPER_VALUE "/sbin/hotplug"
@@ -45,47 +45,6 @@
 static char modules_directory[100];
 static struct module_deps_elem * modules_deps = NULL;
 static struct module_descr_elem * modules_descr = NULL;
-
-extern long init_module(void *, unsigned long, const char *);
-
-
-static const char *moderror(int err)
-{
-	switch (err) {
-	case ENOEXEC:
-		return "Invalid module format";
-	case ENOENT:
-		return "Unknown symbol in module";
-	case ESRCH:
-		return "Module has wrong symbol version";
-	case EINVAL:
-		return "Invalid parameters";
-	default:
-		return strerror(err);
-	}
-}
-
-int insmod_local_file(char * path, char * options)
-{
-	void *file;
-	unsigned long len;
-	int rc;
-                
-	if (IS_TESTING)
-		return 0;
-
-	file = grab_file(path, &len);
-                
-	if (!file) {
-		log_perror(asprintf_("\terror reading %s", path));
-		return -1;
-	}
-                
-	rc = init_module(file, len, options ? options : "");
-	if (rc)
-		log_message("\terror: %s", moderror(errno));
-	return rc;
-}
 
 static char *kernel_module_extension(void)
 {
@@ -313,36 +272,14 @@ int module_already_present(const char * name)
 
 static enum insmod_return insmod_with_deps(const char * mod_name, char * options, int allow_modules_floppy)
 {
-	struct module_deps_elem * dep;
-	const char * filename;
-
-	dep = modules_deps;
-	while (dep && dep->modname && strcmp(dep->modname, mod_name)) dep++;
-
-	if (dep && dep->modname && dep->deps) {
-		char ** one_dep;
-		one_dep = dep->deps;
-		while (*one_dep) {
-			/* here, we can fail but we don't care, if the error is
-			 * important, the desired module will fail also */
-			insmod_with_deps(*one_dep, NULL, allow_modules_floppy);
-			one_dep++;
-		}
-	}
-        
-	if (dep && dep->filename) {
-	       filename = dep->filename;
-	} else {
-		log_message("warning: unable to get module filename for %s", mod_name);
-		filename = mod_name;
-	}
-
-	if (module_already_present(mod_name))
+	int err = modprobe(mod_name, options);
+	switch (err){
+	    case 0:
 		return INSMOD_OK;
-
-	log_message("needs %s", filename);
-	{
-		return insmod_local_file((char *) filename, options);
+	    case -ENOENT:
+		return INSMOD_FAILED_FILE_NOT_FOUND;
+	    default:
+		return INSMOD_FAILED;
 	}
 }
 
