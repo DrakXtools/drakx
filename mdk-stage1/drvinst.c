@@ -31,7 +31,7 @@
 
 #include "drvinst.h"
 
-int modprobe(const char *alias) {
+int modprobe(const char *alias, const char *extra_options) {
     struct kmod_ctx *ctx;
     struct kmod_list *l, *list = NULL;
     int err = 0, flags = 0;
@@ -70,7 +70,7 @@ int modprobe(const char *alias) {
     kmod_list_foreach(l, list) {
 	struct kmod_module *mod = kmod_module_get_module(l);
 	err = kmod_module_probe_insert_module(mod, flags,
-		NULL, NULL, NULL, NULL);
+		extra_options, NULL, NULL, NULL);
 
 	if (err >= 0)
 	    /* ignore flag return values such as a mod being blacklisted */
@@ -130,7 +130,7 @@ static void load_modules(int argc, char *argv[]) {
 		continue;
 	}
 	printf("Installing driver %s (for \"%s\" [%s])\n", e->module, e->text, class);
-	modprobe(e->module);
+	modprobe(e->module, NULL);
     }
     pciusb_free(&entries);
 }
