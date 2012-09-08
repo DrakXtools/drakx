@@ -43,12 +43,12 @@ static void print_mod_strerror(int err, struct kmod_module *mod, const char *fil
 		    "or unknown parameter (see dmesg)\n",
 		    mod ? kmod_module_get_name(mod) : filename);
 	    break;
-	case ESRCH:
+	case -ESRCH:
 	    fprintf(stderr, "could not insert '%s': Module has wrong symbol version "
 		    "(see dmesg)\n",
 		    mod ? kmod_module_get_name(mod) : filename);
 	    break;
-	case EINVAL:
+	case -EINVAL:
 	    fprintf(stderr, "could not insert '%s': Module has invalid parameters "
 		    "(see dmesg)\n",
 		    mod ? kmod_module_get_name(mod) : filename);
