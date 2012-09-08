@@ -14,8 +14,6 @@
 #ifndef _DRVINST_H_
 #define _DRVINST_H_
 
-int insmod(const char *filename, const char *options);
-int modprobe(const char *alias, const char *extra_options);
 int drvinst_main(int argc, char *argv[]);
 
 #endif
