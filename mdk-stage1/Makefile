@@ -87,6 +87,11 @@ DEFS += $(KMOD_DEFS)
 LIBPCI_SRC = libpci/access.c libpci/caps.c libpci/dump.c libpci/generic.c libpci/init.c libpci/i386-ports.c libpci/names.c libpci/names-cache.c libpci/names-hash.c libpci/names-net.c libpci/names-parse.c libpci/params.c libpci/proc.c libpci/sysfs.c
 LOCAL_SRC += $(LIBPCI_SRC)
 
+LIBSYSFS_SRC = libsysfs/dlist.c libsysfs/sysfs_attr.c libsysfs/sysfs_device.c libsysfs/sysfs_utils.c
+LIBSYSFS_DEFS = -Ilibsysfs
+LOCAL_SRC += $(LIBSYSFS_SRC) 
+DEFS += $(LIBSYSFS_DEFS)
+
 else
 FRONTEND_LIBS += -Wl,-Bstatic -lnewt -lslang -Wl,-Bdynamic
 endif
@@ -98,7 +103,7 @@ endif
 FRONTEND_OBJS = $(subst .c,.o,$(FRONTEND_SRC))
 
 ifndef DYNAMIC
-STAGE1_LIBS = -lsysfs -lm
+STAGE1_LIBS = -lm
 else
 STAGE1_LIBS = -Wl,-Bdynamic -Wl,-Bstatic -lkmod -lpci -lsysfs -Wl,-Bdynamic
 endif
