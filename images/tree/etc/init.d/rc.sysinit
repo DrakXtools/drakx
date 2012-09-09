@@ -14,4 +14,7 @@ udevadm trigger --type=devices --action=add
 
 if [ -x /etc/init.d/rc.stage2 ]; then
 	. /etc/init.d/rc.stage2
+else
+	# Set the hostname.
+	action "Setting hostname stage2" hostname stage2
 fi
