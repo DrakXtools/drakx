@@ -251,6 +251,7 @@ fi
     _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/bin/lspcidrake";
     _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/bin/rescue-gui";
     _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/sbin/drvinst";
+    _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/sbin/probe-modules";
 
     foreach ('pppd', 'pppoe') {
 	_ "install /usr/uclibc/sbin/$_ $tmp_initrd/sbin/";
