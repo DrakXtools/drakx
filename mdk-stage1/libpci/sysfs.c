@@ -7,8 +7,6 @@
  *	Can be freely distributed and used under the terms of the GNU GPL.
  */
 
-#define _GNU_SOURCE
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -206,7 +204,7 @@ sysfs_fill_slots(struct pci_access *a)
   if (!dir)
     return;
 
-  while (entry = readdir(dir))
+  while ((entry = readdir(dir)))
     {
       char namebuf[OBJNAMELEN], buf[16];
       FILE *file;

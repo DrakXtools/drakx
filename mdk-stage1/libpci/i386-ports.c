@@ -6,8 +6,6 @@
  *	Can be freely distributed and used under the terms of the GNU GPL.
  */
 
-#define _GNU_SOURCE
-
 #include "internal.h"
 
 #include <unistd.h>
@@ -76,10 +74,10 @@ intel_sanity_check(struct pci_access *a, struct pci_methods *m)
   for (d.dev = 0; d.dev < 32; d.dev++)
     {
       u16 class, vendor;
-      if (m->read(&d, PCI_CLASS_DEVICE, (byte *) &class, sizeof(class)) &&
-	  (class == cpu_to_le16(PCI_CLASS_BRIDGE_HOST) || class == cpu_to_le16(PCI_CLASS_DISPLAY_VGA)) ||
-	  m->read(&d, PCI_VENDOR_ID, (byte *) &vendor, sizeof(vendor)) &&
-	  (vendor == cpu_to_le16(PCI_VENDOR_ID_INTEL) || vendor == cpu_to_le16(PCI_VENDOR_ID_COMPAQ)))
+      if ((m->read(&d, PCI_CLASS_DEVICE, (byte *) &class, sizeof(class)) &&
+	  (class == cpu_to_le16(PCI_CLASS_BRIDGE_HOST) || class == cpu_to_le16(PCI_CLASS_DISPLAY_VGA))) ||
+	  (m->read(&d, PCI_VENDOR_ID, (byte *) &vendor, sizeof(vendor)) &&
+	  (vendor == cpu_to_le16(PCI_VENDOR_ID_INTEL) || vendor == cpu_to_le16(PCI_VENDOR_ID_COMPAQ))))
 	{
 	  a->debug("...outside the Asylum at 0/%02x/0", d.dev);
 	  return 1;
