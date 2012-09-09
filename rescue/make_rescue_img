@@ -41,6 +41,9 @@ EOF
 output("$tmp/etc/issue", $issue);
 
 _ "../tools/install-xml-file-list list.xml $tmp";
+#lame..
+_ "ln $tmp/usr/bin/dropbearmulti $tmp/usr/bin/ssh";
+_ "ln $tmp/usr/bin/dropbearmulti $tmp/usr/sbin/dropbear";
 
 # XXX: prevent this from being added to begin with
 _ "rm -rf $tmp/usr/share/locale/";

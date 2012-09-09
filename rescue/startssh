@@ -8,19 +8,9 @@ if test "x"`ifconfig | cut -d ' ' -f 1 | grep -v '^$' | grep -v lo` = "x"; then
 	exit 5
 fi
 
-# generate host keys
-mkdir -p /etc/dropbear
-[ -f /etc/dropbear/dropbear_dss_host_key ] || dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key >/dev/null || { echo "Can't generate dsa host key" >&2 ; exit 4; }
-[ -f /etc/dropbear/dropbear_rsa_host_key ] || dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key >/dev/null || { echo "Can't generate rsa host key" >&2 ; exit 3; }
-
 # set a password
-echo "Give a password:"
-passwd=`mkpasswd | grep -v Password:`
-if [ $? != 0 ]; then
-	reset
-	exit $?
-fi
-sed -e 's#^root:[^:]*:#root:'"${passwd}"':#' -i /etc/passwd || { echo "Can't set password" >&2 ; exit 2; }
+echo "Set root password for login:"
+passwd root
 
 echo ""
 action "Starting ssh daemon... " dropbear -E 2>/var/log/dropbear.log

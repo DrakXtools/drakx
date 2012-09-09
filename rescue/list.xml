@@ -63,7 +63,6 @@
   mkfs.nilfs2 nilfs-tune
   mkfs.jfs fsck.jfs jfs_tune
 
-  dropbear dropbearkey
   screen
 
   quotacheck
@@ -142,6 +141,12 @@
 
   blkid
 
+</from>
+
+<from dir="/usr/uclibc/usr/sbin">
+  <to dir="/usr/bin">
+    dropbearmulti
+  </to>
 </from>
 
 <from dir="bkeymaps">
