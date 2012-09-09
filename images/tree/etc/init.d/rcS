@@ -8,5 +8,3 @@ action "Setting hostname stage1" hostname stage1
 mount /dev
 mkdir /dev/pts /dev/shm
 mount -a
-echo "/sbin/mdev" > /proc/sys/kernel/hotplug
-mdev -s
