@@ -240,7 +240,12 @@ fi
     _ "install -m755 tree/etc/init.d/rcS	-D $tmp_initrd/etc/init.d/rcS";
     _ "install -m755 tree/etc/init.d/rc.newroot	-D $tmp_initrd/etc/init.d/rc.newroot";
     _ "install -m755 tree/etc/init.d/rc.sysinit	-D $tmp_initrd/etc/init.d/rc.sysinit";
-    _ "install -m644 tree/etc/passwd		-D $tmp_initrd/etc/passwd";
+    _ "install -m644 setup/host.conf		-D $tmp_initrd/etc/host.conf";
+    _ "install -m644 setup/hosts		-D $tmp_initrd/etc/hosts";
+    _ "install -m644 setup/inputrc		-D $tmp_initrd/etc/inputrc";
+    _ "install -m644 setup/profile		-D $tmp_initrd/etc/profile";
+    _ "install -m644 setup/passgrp/group	-D $tmp_initrd/etc/group";
+    _ "install -m644 setup/passgrp/passwd	-D $tmp_initrd/etc/passwd";
     _ "install -m755 $stage1_root/stage1	-D $tmp_initrd/sbin/stage1";
     _ "mkdir $tmp_initrd/bin";
     _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/bin/lspcidrake";
