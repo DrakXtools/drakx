@@ -50,7 +50,7 @@ void init_frontend_newt(char * welcome_msg)
 		asprintf(&msg, " %-*s", cols - 1, welcome_msg);
 		newtDrawRootText(0, 0, msg);
 		free(msg);
-		newtPushHelpLine(" <Alt-F1> for here, <Alt-F3> to see the logs, <Alt-F4> for kernel msg");
+		newtPushHelpLine(" <Alt-F1> for here, <Alt-F11> to see the logs, <Alt-F12> for kernel msg");
 	}
 	newtRefresh();
 }
