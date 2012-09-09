@@ -229,10 +229,10 @@ rescue-gui: .depend rescue-gui.c frontend-common.c params.c utils.c log.c automa
 		$(FRONTEND_LIBS) $(LIBC_LIBS) \
 		-o $@
 
-probe-modules: .depend $(PCMCIA_LIB) probe-modules.c probing.c modules.c params.c utils.c log.c automatic.c frontend-common.c stdio-frontend.c zlibsupport.c $(PCMCIA_LIB)
+probe-modules: .depend $(PCMCIA_LIB) probe-modules.c probing.c modules.c params.c utils.c log.c automatic.c frontend-common.c stdio-frontend.c $(PCMCIA_LIB)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) \
-		probe-modules.c probing.c modules.c params.c utils.c log.c automatic.c frontend-common.c stdio-frontend.c zlibsupport.c $(PCMCIA_LIB) \
+		probe-modules.c probing.c modules.c params.c utils.c log.c automatic.c frontend-common.c stdio-frontend.c $(PCMCIA_LIB) \
 		$(STAGE1_LIBS) $(LIBC_LIBS) \
 		-o $@
 endif
@@ -249,7 +249,7 @@ rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(FRONTEND_LIBS) $(LIBC_LIBS)
 endif
 
-probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o zlibsupport-FULL.o $(PCMCIA_LIB)
+probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o $(PCMCIA_LIB)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(LIBC_LIBS)
 
 $(STAGE1OBJS_NETWORK): %-NETWORK.o: %.c .depend
