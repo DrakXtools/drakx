@@ -63,7 +63,7 @@ LDFLAGS = $(CFLAGS) -Wl,-O2,-no-undefined -z relro -Wl,--no-warn-common
 LFLAGS += --nounput
 YFLAGS := -d
 
-INCLUDES = -I. -Ildetect
+INCLUDES = -I.
 
 LIBC_LIBS = 
 ifeq (dietlibc, $(LIBC))

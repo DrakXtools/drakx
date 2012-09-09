@@ -56,6 +56,9 @@ LDETECT_SRC := $(patsubst %,ldetect/%,$(lib_src))
 
 include $(top_dir)/Makefile.common
 include $(top_dir)/../Makefile.config
+
+INCLUDES += -Ildetect
+
 ARCHDIR=$(ARCH)
 ifeq (i386, $(ARCH))
 ARCHDIR=i586
@@ -76,26 +79,24 @@ FRONTEND_LIBS =
 #FRONTEND_SRC += newt-frontend.c
 ifndef DYNAMIC
 SLANG_SRC = slang/slang.c slang/slarith.c slang/slarray.c slang/slarrfun.c slang/slarrmis.c slang/slassoc.c slang/slboseos.c slang/slbstr.c slang/slclass.c slang/slcmd.c slang/slcmplex.c slang/slcommon.c slang/slcompat.c slang/slcurses.c slang/sldisply.c slang/slerrno.c slang/slerr.c slang/slexcept.c slang/slfpu.c slang/slgetkey.c slang/slintall.c slang/slischar.c slang/slistruc.c slang/slkeymap.c slang/slkeypad.c slang/sllist.c slang/sllower.c slang/slmalloc.c slang/slmath.c slang/slmemchr.c slang/slmemcmp.c slang/slmemcpy.c slang/slmemset.c slang/slmisc.c slang/slnspace.c slang/slospath.c slang/slpack.c slang/slparse.c slang/slpath.c slang/slposdir.c slang/slposio.c slang/slprepr.c slang/slproc.c slang/slregexp.c slang/slrline.c slang/slscanf.c slang/slscroll.c slang/slsearch.c slang/slsignal.c slang/slsig.c slang/slsmg.c slang/slstdio.c slang/slstd.c slang/slstring.c slang/slstrops.c slang/slstruct.c slang/sltermin.c slang/sltime.c slang/sltoken.c slang/sltypes.c slang/slupper.c slang/slutf8.c slang/slutty.c slang/slwclut.c slang/slwcwidth.c slang/slxstrng.c
-SLANG_DEFS = -Islang
-DEFS += $(SLANG_DEFS)
+INCLUDES += -Islang
 
 NEWT_SRC = newt/buttonbar.c newt/button.c  newt/checkbox.c  newt/checkboxtree.c  newt/entry.c  newt/form.c  newt/grid.c newt/label.c   newt/scale.c newt/scrollbar.c	newt/textbox.c	newt/windows.c newt/newt.c  newt/listbox.c
 FRONTEND_LIBS += $(NEWT_SRC) $(SLANG_SRC)
 
 KMOD_SRC = libkmod/libkmod.c libkmod/libkmod-module.c libkmod/libkmod-elf.c libkmod/libkmod-config.c libkmod/libkmod-hash.c libkmod/libkmod-util.c libkmod/libkmod-list.c libkmod/libkmod-file.c libkmod/libkmod-index.c
-KMOD_DEFS = -DHAVE_CONFIG_H -DROOTPREFIX='""' -DSYSCONFDIR='"/etc"' -Ilibkmod
+KMOD_DEFS = -DHAVE_CONFIG_H -DROOTPREFIX='""' -DSYSCONFDIR='"/etc"'
 LOCAL_SRC += $(KMOD_SRC)
+INCLUDES += -Ilibkmod
 DEFS += $(KMOD_DEFS)
 
 LIBPCI_SRC = libpci/access.c libpci/caps.c libpci/dump.c libpci/generic.c libpci/init.c libpci/i386-ports.c libpci/names.c libpci/names-cache.c libpci/names-hash.c libpci/names-net.c libpci/names-parse.c libpci/params.c libpci/proc.c libpci/sysfs.c
-LIBPCI_DEFS = -Ilibpci
 LOCAL_SRC += $(LIBPCI_SRC)
-DEFS += $(LIBPCI_DEFS)
+INCLUDES += -Ilibpci
 
 LIBSYSFS_SRC = libsysfs/dlist.c libsysfs/sysfs_attr.c libsysfs/sysfs_device.c libsysfs/sysfs_utils.c
-LIBSYSFS_DEFS = -Ilibsysfs
 LOCAL_SRC += $(LIBSYSFS_SRC) 
-DEFS += $(LIBSYSFS_DEFS)
+INCLUDES += -Ilibsysfs
 
 else
 FRONTEND_LIBS += -Wl,-Bstatic -lnewt -lslang -Wl,-Bdynamic
