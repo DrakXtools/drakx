@@ -6,7 +6,7 @@ echo -e "\t\t\tWelcome to \\033[1;36mMandriva\\033[0;39m Linux"
 
 # disabled for now..
 #echo "/sbin/mdev" > /proc/sys/kernel/hotplug
-#mdev -s
+#action "Starting mdev" mdev -s
 
 echo "Starting udev"
 mkdir -p /run/udev/rules.d
