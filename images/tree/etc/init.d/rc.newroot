@@ -15,7 +15,7 @@ for f in `(cd /tmp/stage2; find -type f)`; do
 done
 
 mount /tmp/stage2 /tmp/newroot -t overlayfs -o upperdir=/,lowerdir=/tmp/stage2
-for mntpnt in `cat /proc/mounts| grep -v -e rootfs -e overlayfs`; do
+for mntpnt in `cat /proc/mounts | grep -v -e rootfs -e overlayfs | cut -d\  -f2`; do
 	mount $mntpnt /tmp/newroot/$mntpnt -o move
 done
 
