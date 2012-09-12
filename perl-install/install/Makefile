@@ -14,6 +14,8 @@ all: xs
 clean xs:
 	make -C .. $@
 
+dist: dist-svn
+
 dist-svn:
 	mkdir -p $(PRODUCT)-$(VERSION)
 	svn export -q -rBASE .. $(PRODUCT)-$(VERSION)/perl-install
