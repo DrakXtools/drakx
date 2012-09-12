@@ -12,6 +12,8 @@ install:
 	install -m644 `cat list-$(THEME)` $(DESTDIR)$(ADVERTISING)
 	install -m644 list-$(THEME) $(DESTDIR)/$(ADVERTISING)/list
 
+dist: dist-svn
+
 dist-svn:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
 	mkdir -p $(PRODUCT)-$(VERSION)/
