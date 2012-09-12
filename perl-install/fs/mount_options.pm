@@ -81,7 +81,7 @@ sub pack_ {
 	    /^umask=(.+)/ ? if_($v, $1) : $v;
 	} else { () }
     } keys %$options;
-    if (@umasks) {
+    if (@umasks and $_part->{media_type} ne 'cdrom') {
 	push @l, 'umask=' . min(@umasks);
     }
 
