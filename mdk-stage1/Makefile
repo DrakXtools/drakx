@@ -152,7 +152,9 @@ NETWORK_STANDALONE_DEFS = -DDISABLE_CDROM -DDISABLE_DISK -DENABLE_NETWORK_STANDA
 
 STAGE1OBJS_FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
 
-BINS := stage1 dhcp-client rescue-gui probe-modules drvinst lspcidrake serial_probe
+ADD_BINS = dhcp-client rescue-gui probe-modules drvinst lspcidrake serial_probe
+
+BINS := stage1 $(ADD_BINS)
 
 DIRS =
 HEADERS = pci-ids.h usb-ids.h
@@ -196,7 +198,7 @@ usb-ids.h: /usr/share/ldetect-lst/usbtable.gz update-usb-ids.pl
 pcmcia/libpcmcia.a: pcmcia
 
 ifneq (0, $(ONE_BINARY))
-	dhcp-client rescue-gui probe-modules drvinst lspcidrake: stage1
+$(ADD_BINS): stage1
 	ln -f $^ $@
 endif
 
