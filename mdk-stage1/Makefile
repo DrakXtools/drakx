@@ -249,7 +249,7 @@ probe-modules: .depend $(PCMCIA_LIB) probe-modules.c probing.c modules.c params.
 endif
 else
 
-stage1: .depend $(STAGE1OBJS_FULL) $(FRONTEND_OBJS) $(PCMCIA_LIB) $(LOCALOBJS)
+stage1: $(STAGE1OBJS_FULL) $(FRONTEND_OBJS) $(PCMCIA_LIB) $(LOCALOBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
 
 ifeq (0, $(ONE_BINARY))
