@@ -46,7 +46,7 @@
 #define UEVENT_HELPER_VALUE "/sbin/hotplug"
 
 static char modules_directory[100];
-static struct module_deps_elem * modules_deps = NULL;
+//static struct module_deps_elem * modules_deps = NULL;
 static struct module_descr_elem * modules_descr = NULL;
 
 static void print_mod_strerror(int err, struct kmod_module *mod, const char *filename)
@@ -222,76 +222,6 @@ static void find_modules_directory(void)
 	sprintf(modules_directory , "%s/%s", prefix, release);
 }
 
-static int load_modules_dependencies(void)
-{
-	char * deps_file = asprintf_("%s/%s", modules_directory, "modules.dep");
-	char * buf, * ptr, * start, * end;
-	struct stat s;
-	int line, i;
-
-	log_message("loading modules dependencies");
-	buf = cat_file(deps_file, &s);
-	if (!buf)
-		return -1;
-	line = line_counts(buf);
-	modules_deps = malloc(sizeof(*modules_deps) * (line+1));
-
-	start = buf;
-	line = 0;
-	while (start < (buf+s.st_size) && *start) {
-		char * tmp_deps[50];
-
-		end = strchr(start, '\n');
-		*end = '\0';
-
-		ptr = strchr(start, ':');
-		if (!ptr) {
-			start = end + 1;
-			continue;
-		}
-		*ptr = '\0';
-		ptr++;
-
-		while (*ptr && (*ptr == ' ')) ptr++;
-
-		/* sort of a good line */
-		modules_deps[line].filename = start[0] == '/' ? strdup(start) : asprintf_("%s/%s", modules_directory, start);
-		modules_deps[line].modname = filename2modname(start);
-
-		start = ptr;
-		i = 0;
-		while (start && *start && i < sizeof(tmp_deps)/sizeof(char *)) {
-			ptr = strchr(start, ' ');
-			if (ptr) *ptr = '\0';
-			tmp_deps[i++] = filename2modname(start);
-			if (ptr)
-				start = ptr + 1;
-			else
-				start = NULL;
-			while (start && *start && *start == ' ')
-				start++;
-		}
-		if(i >= sizeof(tmp_deps)/sizeof(char *)-1) {
-			log_message("warning, more than %zu dependencies for module %s",
-				    sizeof(tmp_deps)/sizeof(char *)-1,
-				    modules_deps[line].modname);
-			i = sizeof(tmp_deps)/sizeof(char *)-1;
-		}
-		tmp_deps[i++] = NULL;
-
-		modules_deps[line].deps = _memdup(tmp_deps, sizeof(char *) * i);
-
-		line++;
-		start = end + 1;
-	}
-	modules_deps[line].modname = NULL;
-
-	free(buf);
-
-	return 0;
-}
-
-
 static int load_modules_descriptions(void)
 {
 	char * descr_file = asprintf_("%s/%s", modules_directory, "modules.description");
@@ -348,9 +278,6 @@ void init_firmware_loader(void)
 void init_modules_insmoding(void)
 {
 	find_modules_directory();
-	if (load_modules_dependencies()) {
-		fatal_error("warning, error initing modules stuff, modules loading disabled");
-	}
 	if (load_modules_descriptions()) {
 		log_message("warning, error initing modules stuff");
 	}
