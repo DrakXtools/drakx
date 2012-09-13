@@ -268,6 +268,10 @@ $(STAGE1OBJS_NETWORK_STANDALONE): %-NETWORK-STANDALONE.o: %.c .depend
 $(STAGE1OBJS_FULL): %-FULL.o: %.c .depend
 	$(DIET) $(COMPILE) $(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -c $< -o $@
 
+$(FRONTEND_OBJS): %.o: %.c .depend
+	$(DIET) $(COMPILE) $(INCLUDES) -c $< -o $@
+
+
 .c.o: .depend
 	$(DIET) $(COMPILE) $(INCLUDES) -c $<
 
