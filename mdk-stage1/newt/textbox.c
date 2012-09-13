@@ -1,3 +1,4 @@
+#define _XOPEN_SOURCE
 
 #include <ctype.h>
 #include <slang.h>
