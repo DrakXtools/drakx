@@ -736,6 +736,7 @@ static int parse_pnp_string( char *pnp_id_string, int pnp_len,
       pnp_id->xlate_6bit = 0;
       end_char = EndPnP1;
     }
+    end_char = end_char;
     
     /* move everything before the start of the PnP block */
     memcpy(pnp_id->other_id, pnp_string, start-pnp_string);
