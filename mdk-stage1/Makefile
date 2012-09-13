@@ -82,7 +82,7 @@ SLANG_SRC = slang/slang.c slang/slarith.c slang/slarray.c slang/slarrfun.c slang
 INCLUDES += -Islang
 
 NEWT_SRC = newt/buttonbar.c newt/button.c  newt/checkbox.c  newt/checkboxtree.c  newt/entry.c  newt/form.c  newt/grid.c newt/label.c   newt/scale.c newt/scrollbar.c	newt/textbox.c	newt/windows.c newt/newt.c  newt/listbox.c
-FRONTEND_LIBS += $(NEWT_SRC) $(SLANG_SRC)
+FRONTEND_SRC += $(NEWT_SRC) $(SLANG_SRC)
 
 KMOD_SRC = libkmod/libkmod.c libkmod/libkmod-module.c libkmod/libkmod-elf.c libkmod/libkmod-config.c libkmod/libkmod-hash.c libkmod/libkmod-util.c libkmod/libkmod-list.c libkmod/libkmod-file.c libkmod/libkmod-index.c
 KMOD_DEFS = -DHAVE_CONFIG_H -DROOTPREFIX='""' -DSYSCONFDIR='"/etc"'
