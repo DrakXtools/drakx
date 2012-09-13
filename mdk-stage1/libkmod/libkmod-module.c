@@ -1172,9 +1172,15 @@ KMOD_EXPORT int kmod_module_probe_insert_module(struct kmod_module *mod,
 			return 0;
 	}
 
-	err = flags & (KMOD_PROBE_APPLY_BLACKLIST |
-					KMOD_PROBE_APPLY_BLACKLIST_ALL);
-	if (err != 0) {
+	/*
+	 * Ugly assignement + check. We need to check if we were told to check
+	 * blacklist and also return the reason why we failed.
+	 * KMOD_PROBE_APPLY_BLACKLIST_ALIAS_ONLY will take effect only if the
+	 * module is an alias, so we also need to check it
+	 */
+	if ((mod->alias != NULL && ((err = flags & KMOD_PROBE_APPLY_BLACKLIST_ALIAS_ONLY)))
+			|| (err = flags & KMOD_PROBE_APPLY_BLACKLIST_ALL)
+			|| (err = flags & KMOD_PROBE_APPLY_BLACKLIST)) {
 		if (module_is_blacklisted(mod))
 			return err;
 	}
@@ -1679,22 +1685,43 @@ KMOD_EXPORT int kmod_module_get_initstate(const struct kmod_module *mod)
  * kmod_module_get_size:
  * @mod: kmod module
  *
- * Get the size of this kmod module as returned by Linux kernel. It reads the
- * file /proc/modules to search for this module and get its size.
+ * Get the size of this kmod module as returned by Linux kernel. If supported,
+ * the size is read from the coresize attribute in /sys/module. For older
+ * kernels, this falls back on /proc/modules and searches for the specified
+ * module to get its size.
  *
  * Returns: the size of this kmod module.
  */
 KMOD_EXPORT long kmod_module_get_size(const struct kmod_module *mod)
 {
-	// FIXME TODO: this should be available from /sys/module/foo
 	FILE *fp;
 	char line[4096];
 	int lineno = 0;
 	long size = -ENOENT;
+	int dfd, cfd;
 
 	if (mod == NULL)
 		return -ENOENT;
 
+	/* try to open the module dir in /sys. If this fails, don't
+	 * bother trying to find the size as we know the module isn't
+	 * loaded.
+	 */
+	snprintf(line, sizeof(line), "/sys/module/%s", mod->name);
+	dfd = open(line, O_RDONLY);
+	if (dfd < 0)
+		return -errno;
+
+	/* available as of linux 3.3.x */
+	cfd = openat(dfd, "coresize", O_RDONLY|O_CLOEXEC);
+	if (cfd >= 0) {
+		if (read_str_long(cfd, &size, 10) < 0)
+			ERR(mod->ctx, "failed to read coresize from %s\n", line);
+		close(cfd);
+		goto done;
+	}
+
+	/* fall back on parsing /proc/modules */
 	fp = fopen("/proc/modules", "re");
 	if (fp == NULL) {
 		int err = -errno;
@@ -1729,6 +1756,9 @@ KMOD_EXPORT long kmod_module_get_size(const struct kmod_module *mod)
 		break;
 	}
 	fclose(fp);
+
+done:
+	close(dfd);
 	return size;
 }
 
