@@ -71,7 +71,7 @@ COMPILE = $(CC) -std=gnu11 $(DEFS) $(CFLAGS)
 
 STAGE1_DEFS=-DDISABLE_KA -DDRAKX_ONE_BINARY -D_GNU_SOURCE
 
-LOCAL_SRC =
+LOCAL_SRC = $(LDETECT_SRC)
 FRONTEND_SRC =
 FRONTEND_LIBS =
  #- frontends
@@ -100,6 +100,9 @@ INCLUDES += -Ilibsysfs
 
 SERIAL_PROBE_SRC = serial_probe/serial.c serial_probe/serial_probe.c
 LOCAL_SRC += $(SERIAL_PROBE_SRC)
+
+BINS_SRC = drvinst.c probe-modules.c rescue-gui.c ldetect/lspcidrake.c
+LOCAL_SRC += $(BINS_SRC)
 
 else
 FRONTEND_LIBS += -Wl,-Bstatic -lnewt -lslang -Wl,-Bdynamic
@@ -151,6 +154,8 @@ NETWORK_STANDALONE_DEFS = -DDISABLE_CDROM -DDISABLE_DISK -DENABLE_NETWORK_STANDA
 
 
 STAGE1OBJS_FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
+
+LOCALOBJS = $(subst .c,.o,$(LOCAL_SRC))
 
 ADD_BINS = dhcp-client rescue-gui probe-modules drvinst lspcidrake serial_probe
 
@@ -206,10 +211,10 @@ ifneq (0, $(WHOLE_PROGRAM))
 
 ifneq (0, $(ONE_BINARY))
 
-stage1: .depend $(PCMCIA_LIB) probe-modules.c rescue-gui.c drvinst.c ldetect/lspcidrake.c $(FRONTEND_SRC) $(LOCAL_SRC) $(FRONTEND_LIBS) $(STAGE1_ALLSRC) $(LDETECT_SRC) Makefile
+stage1: .depend $(PCMCIA_LIB) $(FRONTEND_SRC) $(LOCAL_SRC) $(FRONTEND_LIBS) $(STAGE1_ALLSRC) Makefile
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) \
-		probe-modules.c rescue-gui.c drvinst.c ldetect/lspcidrake.c $(LDETECT_SRC) $(FRONTEND_SRC) $(LOCAL_SRC) $(STAGE1_ALLSRC) \
+		$(FRONTEND_SRC) $(LOCAL_SRC) $(STAGE1_ALLSRC) \
 		$(PCMCIA_LIB) $(FRONTEND_LIBS) $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(LIBC_LIBS) \
 		-o $@
 
@@ -244,7 +249,7 @@ probe-modules: .depend $(PCMCIA_LIB) probe-modules.c probing.c modules.c params.
 endif
 else
 
-stage1: $(STAGE1OBJS_FULL) $(FRONTEND_OBJS) $(PCMCIA_LIB)
+stage1: .depend $(STAGE1OBJS_FULL) $(FRONTEND_OBJS) $(PCMCIA_LIB) $(LOCALOBJS)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
 
 ifeq (0, $(ONE_BINARY))
@@ -268,8 +273,8 @@ $(STAGE1OBJS_NETWORK_STANDALONE): %-NETWORK-STANDALONE.o: %.c .depend
 $(STAGE1OBJS_FULL): %-FULL.o: %.c .depend
 	$(DIET) $(COMPILE) $(INCLUDES) -DSPAWN_SHELL $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -c $< -o $@
 
-$(FRONTEND_OBJS): %.o: %.c .depend
-	$(DIET) $(COMPILE) $(INCLUDES) -c $< -o $@
+$(FRONTEND_OBJS) $(LOCALOBJS): %.o: %.c .depend
+	$(DIET) $(COMPILE) $(INCLUDES) $(STAGE1_DEFS) -c $< -o $@
 
 
 .c.o: .depend
