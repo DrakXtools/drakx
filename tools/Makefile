@@ -1,7 +1,6 @@
 include ../Makefile.config
 
 CC          = gcc
-DIRS	    = serial_probe
 CFLAGS      = -Wall -Os -flto
 LDFLAGS     = -Wl,-O2 -flto
 

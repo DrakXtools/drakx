@@ -252,6 +252,7 @@ fi
     _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/bin/rescue-gui";
     _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/sbin/drvinst";
     _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/sbin/probe-modules";
+    _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/usr/bin/serial_probe";
 
     if (0) {
 	_ "install -m644 tree/etc/mdev.conf		-D $tmp_initrd/etc/mdev.conf";

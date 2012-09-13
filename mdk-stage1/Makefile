@@ -15,7 +15,7 @@
  # along with this program; if not, write to the Free Software
  # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-VERSION=1.60
+VERSION=1.61
 PRODUCT = $(FAMILY)-binaries
 
  #
@@ -98,6 +98,9 @@ LIBSYSFS_SRC = libsysfs/dlist.c libsysfs/sysfs_attr.c libsysfs/sysfs_device.c li
 LOCAL_SRC += $(LIBSYSFS_SRC) 
 INCLUDES += -Ilibsysfs
 
+SERIAL_PROBE_SRC = serial_probe/serial.c serial_probe/serial_probe.c
+LOCAL_SRC += $(SERIAL_PROBE_SRC)
+
 else
 FRONTEND_LIBS += -Wl,-Bstatic -lnewt -lslang -Wl,-Bdynamic
 endif
@@ -149,7 +152,7 @@ NETWORK_STANDALONE_DEFS = -DDISABLE_CDROM -DDISABLE_DISK -DENABLE_NETWORK_STANDA
 
 STAGE1OBJS_FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
 
-BINS := stage1 dhcp-client rescue-gui probe-modules drvinst lspcidrake
+BINS := stage1 dhcp-client rescue-gui probe-modules drvinst lspcidrake serial_probe
 
 DIRS =
 HEADERS = pci-ids.h usb-ids.h
@@ -193,7 +196,7 @@ usb-ids.h: /usr/share/ldetect-lst/usbtable.gz update-usb-ids.pl
 pcmcia/libpcmcia.a: pcmcia
 
 ifneq (0, $(ONE_BINARY))
-dhcp-client rescue-gui probe-modules drvinst lspcidrake: stage1
+	dhcp-client rescue-gui probe-modules drvinst lspcidrake: stage1
 	ln -f $^ $@
 endif
 

@@ -66,7 +66,7 @@ void freeDevice(struct device *dev) {
 void writeDevice(FILE *file, struct device *dev) {}
 int compareDevice(struct device *dev1, struct device *dev2) { return 0; }
 
-int main () {
+int serial_probe_main () {
   struct device* devices = NULL;
   struct serialDevice* serialDevice = NULL;
 

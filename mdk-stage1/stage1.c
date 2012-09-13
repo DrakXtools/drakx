@@ -43,6 +43,8 @@
 #include "drvinst.h"
 #include "ldetect/lspcidrake.h"
 
+#include "serial_probe/serial_probe.h"
+
 #include "log.h"
 #include "probing.h"
 #include "frontend.h"
@@ -401,6 +403,8 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 		fprintf(stderr, "executed as '%s', unknown!\n", binary_name);
 		return 1;
 	}
+	if (!strcmp(argv[0], "serial_probe"))
+		return serial_probe_main();
 
 	if (getenv("DEBUGSTAGE1")) {
 		set_param(MODE_DEBUGSTAGE1);
