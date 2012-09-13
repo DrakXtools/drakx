@@ -46,7 +46,6 @@
 #define UEVENT_HELPER_VALUE "/sbin/hotplug"
 
 static char modules_directory[100];
-//static struct module_deps_elem * modules_deps = NULL;
 static struct module_descr_elem * modules_descr = NULL;
 
 static void print_mod_strerror(int err, struct kmod_module *mod, const char *filename)
