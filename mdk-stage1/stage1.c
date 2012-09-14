@@ -399,7 +399,7 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 		return drvinst_main(argc, argv);
 	if (!strcmp(binary_name, "lspcidrake"))
 		return lspcidrake_main(argc, argv);
-	if (!strcmp(argv[0], "serial_probe"))
+	if (!strcmp(binary_name, "serial_probe"))
 		return serial_probe_main();
 
 	if (strcmp(binary_name, "stage1")) {
