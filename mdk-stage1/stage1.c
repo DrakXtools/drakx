@@ -399,12 +399,13 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 		return drvinst_main(argc, argv);
 	if (!strcmp(binary_name, "lspcidrake"))
 		return lspcidrake_main(argc, argv);
+	if (!strcmp(argv[0], "serial_probe"))
+		return serial_probe_main();
+
 	if (strcmp(binary_name, "stage1")) {
 		fprintf(stderr, "executed as '%s', unknown!\n", binary_name);
 		return 1;
 	}
-	if (!strcmp(argv[0], "serial_probe"))
-		return serial_probe_main();
 
 	if (getenv("DEBUGSTAGE1")) {
 		set_param(MODE_DEBUGSTAGE1);
