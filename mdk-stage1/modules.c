@@ -185,6 +185,42 @@ exit:
     return err;
 }
 
+static char *modinfo_do(struct kmod_ctx *ctx, const char *path)
+{
+	struct kmod_module *mod;
+	struct kmod_list *l, *list = NULL;
+	int err;
+	char *ret = NULL;
+
+	err = kmod_module_new_from_path(ctx, path, &mod);
+	if (err < 0) {
+		fprintf(stderr, "Module alias %s not found.\n", path);
+		return ret;
+	}
+
+	err = kmod_module_get_info(mod, &list);
+	if (err < 0) {
+		fprintf(stderr, "could not get modinfo from '%s': %s\n",
+			kmod_module_get_name(mod), strerror(-err));
+		return ret;
+	}
+
+	kmod_list_foreach(l, list) {
+		const char *key = kmod_module_info_get_key(l);
+		const char *value = kmod_module_info_get_value(l);
+
+		if (strcmp("description", key) != 0)
+			continue;
+		ret = strndup(value, 50);
+		break;
+	}
+
+	kmod_module_info_free_list(list);
+	kmod_module_unref(mod);
+
+	return ret;
+}
+
 static char *kernel_module_extension(void)
 {
 	return ".ko";
@@ -223,42 +259,34 @@ static void find_modules_directory(void)
 
 static int load_modules_descriptions(void)
 {
-	char * descr_file = asprintf_("%s/%s", modules_directory, "modules.description");
-	char * buf, * ptr, * start, * end;
-	struct stat s;
-	int line;
+	int modnum;
+	char ** dlist;
+	struct kmod_ctx *ctx;
+	char modpath[PATH_MAX];
 
 	log_message("loading modules descriptions");
 
-	buf = cat_file(descr_file, &s);
-	if (!buf)
-		return -1;
-	line = line_counts(buf);
-	modules_descr = malloc(sizeof(*modules_descr) * (line+1));
+	dlist = list_directory(modules_directory);
+	for (modnum = 0; dlist[modnum] && *dlist[modnum]; modnum++);
 
-	start = buf;
-	line = 0;
-	while (start < (buf+s.st_size) && *start) {
-		end = strchr(start, '\n');
-		*end = '\0';
+	modules_descr = calloc((modnum+1), sizeof(*modules_descr));
 
-		ptr = strchr(start, '\t');
-		if (!ptr) {
-			start = end + 1;
-			continue;
-		}
-		*ptr = '\0';
-		ptr++;
-
-		modules_descr[line].modname = filename2modname(start);
-		modules_descr[line].description = strndup(ptr, 50);
-
-		line++;
-		start = end + 1;
+	ctx = kmod_new(modules_directory, NULL);
+	if (!ctx) {
+		fputs("Error: kmod_new() failed!\n", stderr);
+		return 1;
 	}
-	modules_descr[line].modname = NULL;
+	kmod_load_resources(ctx);
 
-	free(buf);
+	for (int i = 0; i < modnum; i++) {
+		modules_descr[i].modname = filename2modname(dlist[i]);
+		if (strstr(dlist[i], ".ko")) {
+			sprintf(modpath, "%s/%s", modules_directory, dlist[i]);
+			modules_descr[i].description = modinfo_do(ctx, modpath);
+		}
+	}
+	free(dlist);
+	kmod_unref(ctx);
 
 	return 0;
 }
