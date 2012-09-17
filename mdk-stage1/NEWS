@@ -1,5 +1,7 @@
 Version 1.61 - 17 September 2012, by Per Øyvind Karlsen
 
+- fix drvinst to only compare the length of drivertype, so ie. comparing
+  'STORAGE' against 'STORAGE_IDE' is true again
 - load module descriptions directly from modules rather than distributing
   them in pregenerated 'modules.description' file
 - update to kmod 10

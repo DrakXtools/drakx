@@ -45,7 +45,7 @@ static void load_modules(int argc, char *argv[]) {
 	    int j;
 	    bool skip = true;
 	    for (j = 1; j < argc; j++) {
-		if (!strcasecmp(argv[j], class)) {
+		if (!strncasecmp(argv[j], class, strlen(argv[j]))) {
 		    skip = false;
 		    break;
 		}
