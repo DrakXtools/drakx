@@ -46,8 +46,36 @@
 #define UEVENT_HELPER_VALUE "/sbin/hotplug"
 
 static const char kernel_module_extension[] = ".ko";
-static char modules_directory[100];
+static char modules_directory[100] = "";
 static struct module_descr_elem * modules_descr = NULL;
+
+static char *filename2modname(char * filename) {
+	char *modname, *p;
+
+	modname = strdup(basename(filename));
+	if (strstr(modname, kernel_module_extension)) {
+		modname[strlen(modname)-(sizeof(kernel_module_extension)-1)] = '\0'; /* remove trailing .ko.gz */
+	}
+
+	p = modname;
+	while (p && *p) {
+		if (*p == '-')
+			*p = '_';
+		p++;
+	}
+
+	return modname;
+}
+
+static void find_modules_directory(void)
+{
+	struct utsname u;
+	if (uname(&u) < 0) {
+		perror("Error: uname() failed");
+		return;
+	}
+	snprintf(modules_directory, sizeof(modules_directory), "/lib/modules/%s", u.release);
+}
 
 static void print_mod_strerror(int err, struct kmod_module *mod, const char *filename)
 {
@@ -114,16 +142,11 @@ int modprobe(const char *alias, const char *extra_options) {
     struct kmod_ctx *ctx;
     struct kmod_list *l, *list = NULL;
     int err = 0, flags = 0;
-    char dirname[PATH_MAX];
-    struct utsname u;
 
-    if (uname(&u) < 0) {
-	perror("Error: uname() failed");
-	return 0;
-    }
-    snprintf(dirname, sizeof(dirname), "/lib/modules/%s", u.release);
+    if (!*modules_directory)
+	    find_modules_directory();
 
-    ctx = kmod_new(dirname, NULL);
+    ctx = kmod_new(modules_directory, NULL);
     if (!ctx) {
 	fputs("Error: kmod_new() failed!\n", stderr);
 	goto exit;
@@ -222,36 +245,6 @@ static char *modinfo_do(struct kmod_ctx *ctx, const char *path)
 	return ret;
 }
 
-static char *filename2modname(char * filename) {
-	char *modname, *p;
-
-	modname = strdup(basename(filename));
-	if (strstr(modname, kernel_module_extension)) {
-		modname[strlen(modname)-(sizeof(kernel_module_extension)-1)] = '\0'; /* remove trailing .ko.gz */
-	}
-
-	p = modname;
-	while (p && *p) {
-		if (*p == '-')
-			*p = '_';
-		p++;
-	}
-
-	return modname;
-}
-
-static void find_modules_directory(void)
-{
-	struct utsname kernel_uname;
-	char * prefix = "/lib/modules";
-	char * release;
-	if (uname(&kernel_uname)) {
-		fatal_error("uname failed");
-	}
-	release = kernel_uname.release;
-	sprintf(modules_directory , "%s/%s", prefix, release);
-}
-
 static int load_modules_descriptions(void)
 {
 	int modnum;
@@ -275,7 +268,7 @@ static int load_modules_descriptions(void)
 
 	for (int i = 0; i < modnum; i++) {
 		modules_descr[i].modname = filename2modname(dlist[i]);
-		if (strstr(dlist[i], ".ko")) {
+		if (strstr(dlist[i], kernel_module_extension)) {
 			sprintf(modpath, "%s/%s", modules_directory, dlist[i]);
 			modules_descr[i].description = modinfo_do(ctx, modpath);
 		}
