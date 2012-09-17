@@ -162,15 +162,15 @@ void lowercase(char *s)
 }
 
 char *my_dirname(char *path) {
-  char *p = strrchr (path, '/');
-  char *tmp;
-  int len;
-  if (!p)
-     return path;
-  len = p-path+1;
-  tmp = malloc(len);
-  strncpy(tmp, path, len-1);
-  tmp[len-1] = '\0';
-  return tmp;
+	char *p = strrchr (path, '/');
+	char *tmp;
+	int len;
+	if (!p)
+		return path;
+	len = p-path+1;
+	tmp = malloc(len);
+	strncpy(tmp, path, len-1);
+	tmp[len-1] = '\0';
+	return tmp;
 }
 
