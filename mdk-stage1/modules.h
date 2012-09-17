@@ -33,12 +33,6 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char 
 enum return_type ask_insmod(enum driver_type);
 int module_already_present(const char * name);
 
-struct module_deps_elem {
-    char * modname;
-    char * filename;
-    char ** deps;
-};
-
 struct module_descr_elem {
     char * modname;
     char * description;
