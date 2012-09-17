@@ -100,7 +100,6 @@ void * _memdup(void *src, size_t size)
 	return r;
 }
 
-
 void add_to_env(char * name, char * value)
 {
         FILE* fakeenv = fopen("/tmp/env", "a");
@@ -131,7 +130,6 @@ char ** list_directory(char * direct)
 	tmp[i] = NULL;
 	return _memdup(tmp, sizeof(char*) * (i+1));
 }
-
 
 int string_array_length(char ** a)
 {
