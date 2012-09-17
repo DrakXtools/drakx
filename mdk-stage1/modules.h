@@ -18,6 +18,8 @@
 #ifndef _MODULES_H_
 #define _MODULES_H_
 
+#include <stdbool.h>
+
 #include "stage1.h"
 #include "probing.h"
 
@@ -31,7 +33,7 @@ int modprobe(const char *alias, const char *extra_options);
 
 enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char * options, int allow_modules_floppy);
 enum return_type ask_insmod(enum driver_type);
-int module_already_present(const char * name);
+bool module_already_present(const char * name);
 
 struct module_descr_elem {
     char * modname;

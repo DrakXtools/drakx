@@ -323,32 +323,35 @@ static void add_modules_conf(char * str)
 }
 
 
-int module_already_present(const char * name)
+bool module_already_present(const char *name)
 {
-	FILE * f;
-	struct stat sb;
-	char *path;
-	int answ = 0;
+	int err;
+	bool present;
+	const char *null_config = NULL;
+	struct kmod_ctx *ctx;
+	struct kmod_module *mod;
 
-	if ((f = fopen("/proc/modules", "rb"))) {
-                while (1) {
-                        char buf[500];
-                        if (!fgets(buf, sizeof(buf), f)) break;
-                        if (!strncmp(name, buf, strlen(name)) && buf[strlen(name)] == ' ')
-                                answ = 1;
-                }
-                fclose(f);
-        }
-       /* built-in module case. try to find them through sysfs */
-       if (!answ) {
-               asprintf(&path, "/sys/module/%s", name);
-               if (!stat(path, &sb))
-                       answ = 1;
-               free(path);
-       }
-	return answ;
+	ctx = kmod_new(NULL, &null_config);
+	if (!ctx) {
+		fputs("Error: kmod_new() failed!\n", stderr);
+		return 1;
+	}
+
+	err = kmod_module_new_from_name(ctx, name, &mod);
+
+	if (err < 0)
+		print_mod_strerror(err, mod, NULL);
+
+	if (kmod_module_get_initstate(mod) == -ENOENT)
+		present = 0;
+	else
+		present = 1;
+
+	kmod_module_unref(mod);
+	kmod_unref(ctx);
+
+	return present;
 }
-
 
 static enum insmod_return insmod_with_deps(const char * mod_name, char * options, int allow_modules_floppy)
 {
