@@ -10,7 +10,7 @@
 ::once:/sbin/syslogd -n -s 0
 tty12::once:/usr/bin/tail -f /var/log/messages
 
-::respawn:/sbin/getty -n 115200,9600 tty1 linux
+::respawn:/sbin/getty -n 115200,9600 tty1 linux -l /bin/rescue-gui
 ::respawn:/sbin/getty -n 115200,9600 tty2 linux
 ::respawn:/sbin/getty -n 115200,9600 tty3 linux
 ::respawn:/sbin/getty -n 115200,9600 tty4 linux
