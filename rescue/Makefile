@@ -5,23 +5,6 @@ PRODUCT=$(FAMILY)-rescue
 
 RESCUE = rescue.sqfs
 
-LIBC = uclibc
-ifeq (uclibc, $(LIBC))
-CC = uclibc-gcc
-else
-ifeq (dietlibc, $(LIBC))
-CC = diet gcc
-else
-CC=gcc
-endif
-endif
-CFLAGS = -Os
-LIBS = -lldetect -lkmod
-ifndef DYNAMIC
-# -lz??
-LIBS += -static -lpci -lz
-endif
-
 all: $(RESCUE)
 
 install: $(RESCUE)
