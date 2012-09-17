@@ -45,6 +45,7 @@
 #define UEVENT_HELPER_FILE "/sys/kernel/uevent_helper"
 #define UEVENT_HELPER_VALUE "/sbin/hotplug"
 
+static const char kernel_module_extension[] = ".ko";
 static char modules_directory[100];
 static struct module_descr_elem * modules_descr = NULL;
 
@@ -221,18 +222,12 @@ static char *modinfo_do(struct kmod_ctx *ctx, const char *path)
 	return ret;
 }
 
-static char *kernel_module_extension(void)
-{
-	return ".ko";
-}
-
-
 static char *filename2modname(char * filename) {
 	char *modname, *p;
 
 	modname = strdup(basename(filename));
-	if (strstr(modname, kernel_module_extension())) {
-		modname[strlen(modname)-strlen(kernel_module_extension())] = '\0'; /* remove trailing .ko.gz */
+	if (strstr(modname, kernel_module_extension)) {
+		modname[strlen(modname)-(sizeof(kernel_module_extension)-1)] = '\0'; /* remove trailing .ko.gz */
 	}
 
 	p = modname;
@@ -485,13 +480,13 @@ enum return_type ask_insmod(enum driver_type type)
 
 	while (p_dlist && *p_dlist) {
 		struct module_descr_elem * descr;
-		if (!strstr(*p_dlist, kernel_module_extension())) {
+		if (!strstr(*p_dlist, kernel_module_extension)) {
 			p_dlist++;
 			continue;
 		}
 		*p_modules = *p_dlist;
 		*p_descrs = NULL;
-		(*p_modules)[strlen(*p_modules)-strlen(kernel_module_extension())] = '\0'; /* remove trailing .ko.gz */
+		(*p_modules)[strlen(*p_modules)-(sizeof(kernel_module_extension)-1)] = '\0'; /* remove trailing .ko.gz */
 
 		descr = modules_descr;
 		while (descr && descr->modname && strcmp(descr->modname, *p_modules)) descr++;
