@@ -180,7 +180,7 @@ int ftp_open_connection(char * host, char * name, char * password, char * proxy)
 	}
 
 	if (strcmp(proxy, "")) {
-		name = asprintf_("%s@%s", name, host);
+		asprintf(&name, "%s@%s", name, host);
 		host = proxy;
 	}
 
@@ -451,8 +451,10 @@ static int _http_download_file(char * hostname, char * remotename, int * size, c
 		return FTPERR_FAILED_CONNECT;
 	}
 
-        buf = proxyprotocol ? asprintf_("GET %s://%s%s HTTP/1.0\r\nHost: %s\r\n\r\n", proxyprotocol, hostname, remotename, hostname)
-                            : asprintf_("GET %s HTTP/1.0\r\nHost: %s\r\n\r\n", remotename, hostname);
+        if (proxyprotocol)
+		asprintf(&buf, "GET %s://%s%s HTTP/1.0\r\nHost: %s\r\n\r\n", proxyprotocol, hostname, remotename, hostname);
+	else
+		asprintf(&buf, "GET %s HTTP/1.0\r\nHost: %s\r\n\r\n", remotename, hostname);
 
 	write(sock, buf, strlen(buf));
 

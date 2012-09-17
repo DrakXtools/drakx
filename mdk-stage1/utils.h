@@ -26,7 +26,6 @@ void * _memdup(void *src, size_t size);
 void add_to_env(char * name, char * value);
 char ** list_directory(char * direct);
 int string_array_length(char ** a);
-char * asprintf_(const char *msg, ...);
 int scall_(int retval, char * msg, char * file, int line);
 char *my_dirname(char *path);
 #define scall(retval, msg) scall_(retval, msg, __FILE__, __LINE__)

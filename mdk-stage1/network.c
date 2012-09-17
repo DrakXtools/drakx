@@ -1083,7 +1083,8 @@ enum return_type ftp_prepare(void)
 		/* Try arched directory */
 		if (fd < 0) {
                      log_message("%s failed.", location_full);
-                     char *with_arch = asprintf_("%s%s/%s/%s", answers[1][0] == '/' ? "" : "/", answers[1], ARCH, COMPRESSED_FILE_REL("/"));
+                     char *with_arch = NULL;
+		     asprintf(&with_arch, "%s%s/%s/%s", answers[1][0] == '/' ? "" : "/", answers[1], ARCH, COMPRESSED_FILE_REL("/"));
                      log_message("trying %s...", with_arch);
                      fd = http_download_file(answers[0], with_arch, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
                      if (0 < fd)
@@ -1194,7 +1195,8 @@ enum return_type http_prepare(void)
 		/* Try arched directory */
 		if (fd < 0) {
                      log_message("%s failed.", location_full);
-                     char *with_arch = asprintf_("%s%s/%s/%s", answers[1][0] == '/' ? "" : "/", answers[1], ARCH, COMPRESSED_FILE_REL("/"));
+                     char *with_arch = NULL;
+		     asprintf(&with_arch, "%s%s/%s/%s", answers[1][0] == '/' ? "" : "/", answers[1], ARCH, COMPRESSED_FILE_REL("/"));
                      log_message("trying %s...", with_arch);
                      fd = http_download_file(answers[0], with_arch, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
                      if (0 < fd)

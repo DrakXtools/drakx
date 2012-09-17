@@ -395,8 +395,13 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attr
 
 	if (binary_name && !strcmp(binary_name, "dhcp-client"))
 	{
-		char *cmd = options ? asprintf_("/sbin/modprobe %s %s", mod_name, options) : 
-			              asprintf_("/sbin/modprobe %s", mod_name);
+		char *cmd = NULL;
+
+		if (options)
+			asprintf(&cmd, "/sbin/modprobe %s %s", mod_name, options); 
+		else
+			asprintf(&cmd, "/sbin/modprobe %s", mod_name);
+
 		log_message("running %s", cmd);
 		i = system(cmd);
 	} else

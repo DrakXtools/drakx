@@ -57,7 +57,8 @@ enum return_type create_IMAGE_LOCATION(char *location_full)
 {
 	struct stat statbuf;
 	int offset = strncmp(location_full, IMAGE_LOCATION_DIR, sizeof(IMAGE_LOCATION_DIR) - 1) == 0 ? sizeof(IMAGE_LOCATION_DIR) - 1 : 0;
-	char *with_arch = asprintf_("%s/%s", location_full, ARCH);
+	char *with_arch = NULL;
+	asprintf(&with_arch, "%s/%s", location_full, ARCH);
 
 	log_message("trying %s", with_arch);
 
@@ -160,7 +161,8 @@ enum return_type mount_compressed_image(char *compressed_image,  char *location_
 enum return_type preload_mount_compressed_fd(int compressed_fd, int image_size, char *image_name, char *location_mount)
 {
 	int ret;
-	char *compressed_tmpfs = asprintf_("/tmp/%s", image_name);
+	char *compressed_tmpfs = NULL;
+	asprintf(&compressed_tmpfs, "/tmp/%s", image_name);
 	char *buf = "Loading program into memory...";
 	if (binary_name && (!strcmp(binary_name, "stage1") || !strcmp(binary_name, "rescue-gui")))
 		init_progression(buf, image_size);
@@ -177,7 +179,8 @@ enum return_type preload_mount_compressed_fd(int compressed_fd, int image_size, 
 
 enum return_type mount_compressed_image_may_preload(char *image_name, char *location_mount, int preload)
 {
-	char *compressed_image = asprintf_("%s/%s", COMPRESSED_LOCATION, image_name);
+	char *compressed_image = NULL;
+	asprintf(&compressed_image, "%s/%s", COMPRESSED_LOCATION, image_name);
 
 	log_message("mount_compressed_may_preload: %s into %s (preload = %d)", compressed_image, location_mount, preload);
 
@@ -300,8 +303,11 @@ char * floppy_device(void)
         log_message("seems that you don't have a regular floppy drive");
         my_insmod("sd_mod", ANY_DRIVER_TYPE, NULL, 0);
 	get_medias(FLOPPY, &names, &models, BUS_ANY);
-	if (names && *names)
-                return asprintf_("/dev/%s", *names);
+	if (names && *names) {
+		char *devnames = NULL;
+                asprintf(&devnames, "/dev/%s", *names);
+		return devnames;
+	}
         else
                 return NULL;
 }

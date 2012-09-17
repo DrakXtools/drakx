@@ -105,7 +105,8 @@ void add_to_env(char * name, char * value)
 {
         FILE* fakeenv = fopen("/tmp/env", "a");
         if (fakeenv) {
-                char* e = asprintf_("%s=%s\n", name, value);
+                char* e = NULL;
+		asprintf(&e, "%s=%s\n", name, value);
                 fwrite(e, 1, strlen(e), fakeenv);
                 free(e);
                 fclose(fakeenv);
@@ -142,24 +143,6 @@ int string_array_length(char ** a)
 		i++;
 	}
 	return i;
-}
-
-char * asprintf_(const char *msg, ...)
-{
-        int n;
-        char * s;
-        char dummy;
-        va_list arg_ptr;
-        va_start(arg_ptr, msg);
-        n = vsnprintf(&dummy, sizeof(dummy), msg, arg_ptr);
-        va_start(arg_ptr, msg);
-        if ((s = malloc(n + 1))) {
-                vsnprintf(s, n + 1, msg, arg_ptr);
-                va_end(arg_ptr);
-                return s;
-        }
-        va_end(arg_ptr);
-        return strdup("");
 }
 
 int scall_(int retval, char * msg, char * file, int line)
