@@ -45,6 +45,11 @@
 #define UEVENT_HELPER_FILE "/sys/kernel/uevent_helper"
 #define UEVENT_HELPER_VALUE "/sbin/hotplug"
 
+struct module_descr_elem {
+    char * modname;
+    char * description;
+};
+
 static const char kernel_module_extension[] = ".ko";
 static char modules_directory[100] = "";
 static struct module_descr_elem * modules_descr = NULL;
