@@ -195,7 +195,7 @@ static char *modinfo_do(struct kmod_ctx *ctx, const char *path)
 
 	err = kmod_module_new_from_path(ctx, path, &mod);
 	if (err < 0) {
-		fprintf(stderr, "Module alias %s not found.\n", path);
+		fprintf(stderr, "Module %s not found.\n", path);
 		return ret;
 	}
 
