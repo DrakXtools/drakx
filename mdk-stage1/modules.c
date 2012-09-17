@@ -79,32 +79,32 @@ static void find_modules_directory(void)
 
 static void print_mod_strerror(int err, struct kmod_module *mod, const char *filename)
 {
-    switch (err) {
-	case -EEXIST:
-	    fprintf(stderr, "could not insert '%s': Module already in kernel\n",
-		    mod ? kmod_module_get_name(mod) : filename);
-	    break;
-	case -ENOENT:
-	    fprintf(stderr, "could not insert '%s': Unknown symbol in module, "
-		    "or file not found (see dmesg)\n",
-		    mod ? kmod_module_get_name(mod) : filename);
-	    break;
-	case -ESRCH:
-	    fprintf(stderr, "could not insert '%s': Module has wrong symbol version "
-		    "(see dmesg)\n",
-		    mod ? kmod_module_get_name(mod) : filename);
-	    break;
-	case -EINVAL:
-	    fprintf(stderr, "could not insert '%s': Module has invalid parameters "
-		    "(see dmesg)\n",
-		    mod ? kmod_module_get_name(mod) : filename);
-	    break;
-	default:
+	switch (err) {
+	    case -EEXIST:
+		fprintf(stderr, "could not insert '%s': Module already in kernel\n",
+				mod ? kmod_module_get_name(mod) : filename);
+		break;
+	    case -ENOENT:
+		fprintf(stderr, "could not insert '%s': Unknown symbol in module, "
+				"or file not found (see dmesg)\n",
+				mod ? kmod_module_get_name(mod) : filename);
+		break;
+	    case -ESRCH:
+		fprintf(stderr, "could not insert '%s': Module has wrong symbol version "
+				"(see dmesg)\n",
+				mod ? kmod_module_get_name(mod) : filename);
+		break;
+	    case -EINVAL:
+		fprintf(stderr, "could not insert '%s': Module has invalid parameters "
+				"(see dmesg)\n",
+				mod ? kmod_module_get_name(mod) : filename);
+		break;
+	    default:
 		fprintf(stderr, "could not insert '%s': %s\n",
-			mod ? kmod_module_get_name(mod) : filename,
-			strerror(-err));
-	    break;
-    }
+				mod ? kmod_module_get_name(mod) : filename,
+				strerror(-err));
+		break;
+	}
 }
 
 int insmod(const char *filename, const char *options)
@@ -139,74 +139,74 @@ exit:
 }
 
 int modprobe(const char *alias, const char *extra_options) {
-    struct kmod_ctx *ctx;
-    struct kmod_list *l, *list = NULL;
-    int err = 0, flags = 0;
+	struct kmod_ctx *ctx;
+	struct kmod_list *l, *list = NULL;
+	int err = 0, flags = 0;
 
-    if (!*modules_directory)
-	    find_modules_directory();
+	if (!*modules_directory)
+		find_modules_directory();
 
-    ctx = kmod_new(modules_directory, NULL);
-    if (!ctx) {
-	fputs("Error: kmod_new() failed!\n", stderr);
-	goto exit;
-    }
-    kmod_load_resources(ctx);
+	ctx = kmod_new(modules_directory, NULL);
+	if (!ctx) {
+		fputs("Error: kmod_new() failed!\n", stderr);
+		goto exit;
+	}
+	kmod_load_resources(ctx);
 
-    err = kmod_module_new_from_lookup(ctx, alias, &list);
-    if (err < 0)
-	goto exit;
+	err = kmod_module_new_from_lookup(ctx, alias, &list);
+	if (err < 0)
+		goto exit;
 
-    // No module found...
-    if (list == NULL)
-	goto exit;
+	// No module found...
+	if (list == NULL)
+		goto exit;
 
-    // filter through blacklist
-    struct kmod_list *filtered = NULL;
-    err =  kmod_module_apply_filter(ctx, KMOD_FILTER_BLACKLIST, list, &filtered);
-    kmod_module_unref_list(list);
-    if (err < 0)
-	goto exit;
-    list = filtered;
+	// filter through blacklist
+	struct kmod_list *filtered = NULL;
+	err =  kmod_module_apply_filter(ctx, KMOD_FILTER_BLACKLIST, list, &filtered);
+	kmod_module_unref_list(list);
+	if (err < 0)
+		goto exit;
+	list = filtered;
 
-    kmod_list_foreach(l, list) {
-	struct kmod_module *mod = kmod_module_get_module(l);
-	err = kmod_module_probe_insert_module(mod, flags,
-		extra_options, NULL, NULL, NULL);
+	kmod_list_foreach(l, list) {
+		struct kmod_module *mod = kmod_module_get_module(l);
+		err = kmod_module_probe_insert_module(mod, flags,
+				extra_options, NULL, NULL, NULL);
 
-	if (err >= 0)
-	    /* ignore flag return values such as a mod being blacklisted */
-	    err = 0;
-	else {
-	    switch (err) {
-		case -EEXIST:
-		    fprintf(stderr, "could not insert '%s': Module already in kernel\n",
-			    kmod_module_get_name(mod));
-		    break;
-		case -ENOENT:
-		    fprintf(stderr, "could not insert '%s': Unknown symbol in module, "
-			    "or unknown parameter (see dmesg)\n",
-			    kmod_module_get_name(mod));
-		    break;
-		default:
-		    fprintf(stderr, "could not insert '%s': %s\n",
-			    kmod_module_get_name(mod),
-			    strerror(-err));
-		    break;
-	    }
+		if (err >= 0)
+			/* ignore flag return values such as a mod being blacklisted */
+			err = 0;
+		else {
+			switch (err) {
+			    case -EEXIST:
+				fprintf(stderr, "could not insert '%s': Module already in kernel\n",
+						kmod_module_get_name(mod));
+				break;
+			    case -ENOENT:
+				fprintf(stderr, "could not insert '%s': Unknown symbol in module, "
+						"or unknown parameter (see dmesg)\n",
+						kmod_module_get_name(mod));
+				break;
+			    default:
+				fprintf(stderr, "could not insert '%s': %s\n",
+						kmod_module_get_name(mod),
+						strerror(-err));
+				break;
+			}
+		}
+
+		kmod_module_unref(mod);
+		if (err < 0)
+			break;
 	}
 
-	kmod_module_unref(mod);
-	if (err < 0)
-	    break;
-    }
-
-    kmod_module_unref_list(list);
+	kmod_module_unref_list(list);
 
 exit:
-    kmod_unref(ctx);
+	kmod_unref(ctx);
 
-    return err;
+	return err;
 }
 
 static char *modinfo_do(struct kmod_ctx *ctx, const char *path)
@@ -257,7 +257,7 @@ static int load_modules_descriptions(void)
 	dlist = list_directory(modules_directory);
 	for (modnum = 0; dlist[modnum] && *dlist[modnum]; modnum++);
 
-	modules_descr = calloc((modnum+1), sizeof(*modules_descr));
+	modules_descr = calloc(modnum+1, sizeof(*modules_descr));
 
 	ctx = kmod_new(modules_directory, NULL);
 	if (!ctx) {
@@ -453,7 +453,7 @@ static enum return_type insmod_with_options(char * mod, enum driver_type type)
 
 static int strsortfunc(const void *a, const void *b)
 {
-    return strcmp(* (char * const *) a, * (char * const *) b);
+	return strcmp(* (char * const *) a, * (char * const *) b);
 }
 
 enum return_type ask_insmod(enum driver_type type)
