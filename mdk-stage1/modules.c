@@ -217,10 +217,8 @@ static char *modinfo_do(struct kmod_ctx *ctx, const char *path)
 	char *ret = NULL;
 
 	err = kmod_module_new_from_path(ctx, path, &mod);
-	if (err < 0) {
-		fprintf(stderr, "Module %s not found.\n", path);
-		return ret;
-	}
+	if (err < 0)
+		print_mod_strerror(err, NULL, path);
 
 	err = kmod_module_get_info(mod, &list);
 	if (err < 0) {
