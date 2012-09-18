@@ -1,5 +1,7 @@
 Version 1.28 - 18 September 2012, by Per Øyvind Karlsen
 
+- replace 'ftp' with 'ncftp' as it's more user friendly and doesn't pull in
+  additional library dependencies
 - don't bother shipping host as together with it's dependencies pulled, it
   increases size of the compressed squashfs image by almost 1MB alone, without
   providing much additionally useful functionaly..
