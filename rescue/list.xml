@@ -307,7 +307,6 @@
 <filter command="../tools/simplify-drakx-modules">
   <from dir="." expand="collect-perl-files /usr/lib/libDrakX /usr/lib/libDrakX">
     <to dir="/usr/bin">
-      lsparts
       guessmounts install_bootloader
       <if ARCH="i.86|x86_64">
 	restore_ms_boot
@@ -323,7 +322,6 @@
     fs/remote/davfs.pm <!-- required by fs -->
     fs/remote/smb.pm <!-- required by fs -->
     fs/dmraid.pm <!-- required by fsedit -->
-    fs/proc_partitions.pm <!-- required by lsparts -->
     partition_table/*.pm <!-- required by partimage_whole_disk -->
   </from>
 </filter>
