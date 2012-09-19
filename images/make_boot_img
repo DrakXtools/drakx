@@ -200,7 +200,7 @@ sub initrd {
     my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
 
     _ "rm -rf $tmp_initrd";
-    mkdir_p("$tmp_initrd$_") foreach qw(/etc /firmware /lib /mnt /modules /sbin /tmp /var);
+    mkdir_p("$tmp_initrd$_") foreach qw(/etc /firmware /lib /mnt /modules /sbin /tmp /var/run);
     symlink "../modules", "$tmp_initrd/lib/modules";
     symlink "../firmware", "$tmp_initrd/lib/firmware";
 
