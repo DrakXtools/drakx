@@ -221,22 +221,6 @@ sub initrd {
         $dest =~ s|all.kernels$I/$ext/||;
         _ "cp -a $firm $tmp_initrd/$dest";
     };
-
-    output("$tmp_initrd/hotplug", q{#!/bin/sh 
-if [ "$SUBSYSTEM" = firmware ] && [ "$ACTION" = add ] && [ -n "$FIRMWARE" ] ; then
-  if [ ! -e /sys$DEVPATH/loading ]; then
-    exit 1
-  fi
-  if [ -e "/lib/firmware/$FIRMWARE" ]; then
-    echo 1 > /sys$DEVPATH/loading
-    cat "/lib/firmware/$FIRMWARE" > /sys$DEVPATH/data
-    echo 0 > /sys$DEVPATH/loading
-    exit 0
-  fi
-  echo -1 > /sys$DEVPATH/loading
-  exit 1
-fi
-});
     _ "chmod 755 $tmp_initrd/hotplug";
     symlink "../hotplug", "$tmp_initrd/sbin/hotplug";
     _ "install -m644 tree/etc/fstab		-D $tmp_initrd/etc/fstab";
@@ -259,6 +243,10 @@ fi
     _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/sbin/drvinst";
     _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/sbin/probe-modules";
     _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/usr/bin/serial_probe";
+
+    _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/hotplug";
+    symlink "../hotplug", "$tmp_initrd/sbin/hotplug";
+
 
     if (0) {
 	_ "install -m644 tree/etc/mdev.conf		-D $tmp_initrd/etc/mdev.conf";
