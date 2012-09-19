@@ -168,10 +168,14 @@ display help.msg
 implicit 1
 EOF
     }
-    my $header_gfxboot = <<EOF;
-UI gfxboot.c32 bootlogo
+
+    $header .= <<EOF;
 label harddisk
   localboot 0x80
+EOF
+
+    my $header_gfxboot = <<EOF;
+UI gfxboot.c32 bootlogo
 EOF
     my $header_non_gfxboot = <<EOF;
 F1 help.msg
