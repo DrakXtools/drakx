@@ -41,8 +41,8 @@
 #include "probe-modules.h"
 #include "rescue-gui.h"
 #include "drvinst.h"
+#include "hotplug.h"
 #include "ldetect/lspcidrake.h"
-
 #include "serial_probe/serial_probe.h"
 
 #include "log.h"
@@ -401,6 +401,8 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 		return lspcidrake_main(argc, argv);
 	if (!strcmp(binary_name, "serial_probe"))
 		return serial_probe_main();
+	if (!strcmp(binary_name, "hotplug"))
+		return hotplug_main(argc, argv);
 
 	if (strcmp(binary_name, "stage1")) {
 		fprintf(stderr, "executed as '%s', unknown!\n", binary_name);

@@ -101,7 +101,7 @@ INCLUDES += -Ilibsysfs
 SERIAL_PROBE_SRC = serial_probe/serial.c serial_probe/serial_probe.c
 LOCAL_SRC += $(SERIAL_PROBE_SRC)
 
-BINS_SRC = drvinst.c probe-modules.c rescue-gui.c ldetect/lspcidrake.c
+BINS_SRC = drvinst.c probe-modules.c rescue-gui.c ldetect/lspcidrake.c hotplug.c
 LOCAL_SRC += $(BINS_SRC)
 
 else
@@ -157,7 +157,7 @@ STAGE1OBJS_FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
 
 LOCALOBJS = $(subst .c,.o,$(LOCAL_SRC))
 
-ADD_BINS = dhcp-client rescue-gui probe-modules drvinst lspcidrake serial_probe
+ADD_BINS = dhcp-client rescue-gui probe-modules drvinst lspcidrake serial_probe hotplug
 
 BINS := stage1 $(ADD_BINS)
 
