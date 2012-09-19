@@ -1010,6 +1010,7 @@ enum return_type ftp_prepare(void)
 		char location_full[500];
 		int ftp_serv_response = -1;
 		int fd, size;
+		int need_arch = 0;
 		char ftp_hostname[500];
 
 		if (!IS_AUTOMATIC) {
@@ -1087,8 +1088,10 @@ enum return_type ftp_prepare(void)
 		     asprintf(&with_arch, "%s%s/%s/%s", answers[1][0] == '/' ? "" : "/", answers[1], ARCH, COMPRESSED_FILE_REL("/"));
                      log_message("trying %s...", with_arch);
                      fd = http_download_file(answers[0], with_arch, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
-                     if (0 < fd)
+                     if (0 < fd) {
                           strcpy(location_full, with_arch);
+                          need_arch = 1;
+                     }
                 }
 
 		if (fd < 0) {
@@ -1113,12 +1116,16 @@ enum return_type ftp_prepare(void)
 		if (use_http_proxy) {
                         add_to_env("METHOD", "http");
 		        sprintf(location_full, "ftp://%s%s", ftp_hostname, answers[1]);
+                        if (need_arch)
+                             strcat(location_full, "/" ARCH);
 		        add_to_env("URLPREFIX", location_full);
 			add_to_env("PROXY", http_proxy_host);
 			add_to_env("PROXYPORT", http_proxy_port);
 		} else {
                         add_to_env("METHOD", "ftp");
 		        add_to_env("HOST", answers[0]);
+                        if (need_arch)
+                             strcat(answers[1], "/" ARCH);
 			add_to_env("PREFIX", answers[1]);
 			if (!streq(answers[2], "")) {
 			        add_to_env("LOGIN", answers[2]);
@@ -1154,7 +1161,7 @@ enum return_type http_prepare(void)
 
 	do {
 		char location_full[500];
-		int fd, size;
+		int fd, size, need_arch = 0;
 		int use_http_proxy;
 
 		if (!IS_AUTOMATIC) {
@@ -1199,8 +1206,10 @@ enum return_type http_prepare(void)
 		     asprintf(&with_arch, "%s%s/%s/%s", answers[1][0] == '/' ? "" : "/", answers[1], ARCH, COMPRESSED_FILE_REL("/"));
                      log_message("trying %s...", with_arch);
                      fd = http_download_file(answers[0], with_arch, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
-                     if (0 < fd)
+                     if (0 < fd) {
                           strcpy(location_full, with_arch);
+                          need_arch = 1;
+                     }
                 }
 
 		if (fd < 0) {
@@ -1222,6 +1231,8 @@ enum return_type http_prepare(void)
 
                 add_to_env("METHOD", "http");
 		sprintf(location_full, "http://%s%s%s", answers[0], answers[1][0] == '/' ? "" : "/", answers[1]);
+                if (need_arch)
+                     strcat(location_full, "/" ARCH);
 		add_to_env("URLPREFIX", location_full);
                 if (!streq(http_proxy_host, ""))
 			add_to_env("PROXY", http_proxy_host);

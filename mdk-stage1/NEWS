@@ -1,5 +1,7 @@
-Version 1.61 - 17 September 2012, by Per Øyvind Karlsen
+Version 1.61 - 19 September 2012, by Per Øyvind Karlsen
 
+- fix URL passed to stage2 when user didn't provide the arch in the
+  install path (mga#6823)
 - fix drvinst to only compare the length of drivertype, so ie. comparing
   'STORAGE' against 'STORAGE_IDE' is true again
 - load module descriptions directly from modules rather than distributing
