@@ -1,5 +1,7 @@
 Version 1.61 - 19 September 2012, by Per Øyvind Karlsen
 
+- retry with FTP instead of HTTP when there's no proxy and user didn't
+  provided the architecture in the URL
 - fix URL passed to stage2 when user didn't provide the arch in the
   install path (mga#6823)
 - fix drvinst to only compare the length of drivertype, so ie. comparing

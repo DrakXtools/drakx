@@ -1087,7 +1087,10 @@ enum return_type ftp_prepare(void)
                      char *with_arch = NULL;
 		     asprintf(&with_arch, "%s%s/%s/%s", answers[1][0] == '/' ? "" : "/", answers[1], ARCH, COMPRESSED_FILE_REL("/"));
                      log_message("trying %s...", with_arch);
-                     fd = http_download_file(answers[0], with_arch, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
+                     if (use_http_proxy)
+                          fd = http_download_file(answers[0], with_arch, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
+                     else
+                          fd = ftp_start_download(ftp_serv_response, with_arch, &size);
                      if (0 < fd) {
                           strcpy(location_full, with_arch);
                           need_arch = 1;
@@ -1205,7 +1208,10 @@ enum return_type http_prepare(void)
                      char *with_arch = NULL;
 		     asprintf(&with_arch, "%s%s/%s/%s", answers[1][0] == '/' ? "" : "/", answers[1], ARCH, COMPRESSED_FILE_REL("/"));
                      log_message("trying %s...", with_arch);
-                     fd = http_download_file(answers[0], with_arch, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
+                     if (use_http_proxy)
+                          fd = http_download_file(answers[0], with_arch, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
+                     else
+                          fd = ftp_start_download(ftp_serv_response, with_arch, &size);
                      if (0 < fd) {
                           strcpy(location_full, with_arch);
                           need_arch = 1;
