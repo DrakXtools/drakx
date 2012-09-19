@@ -141,6 +141,44 @@
 
 </from>
 
+<from dir="../images/tree">
+/etc/fstab
+/etc/inittab
+/etc/init.d/functions
+/etc/init.d/rc.newroot
+/etc/init.d/rc.sysinit
+</from>
+
+<from dir="../images/setup">
+	<to dir="/etc">
+		host.conf
+		hosts
+		inputrc
+		profile
+	</to>
+</from>
+
+<from dir="../images/setup/passgrp">
+	<to dir="/etc">
+		group
+		passwd
+	</to>
+</from>
+
+
+<from dir="../mdk-stage1">
+	<to dir="/sbin">
+		stage1
+	</to>
+</from>
+
+<from dir="/usr/uclibc/sbin">
+	<to dir="/sbin">
+		pppd
+		pppoe
+	</to>
+</from>
+
 <from dir="/usr/uclibc/usr/sbin">
   <to dir="/usr/bin">
     dropbearmulti

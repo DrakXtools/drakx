@@ -5,7 +5,7 @@ use lib "/usr/lib/libDrakX";
 use keyboard;
 
 my $tmp = "/tmp/rescue_tmp";
-my $rescue = "rescue.sqfs";
+my $rescue = "rescue.cpio";
 
 if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
@@ -44,6 +44,20 @@ _ "../tools/install-xml-file-list list.xml $tmp";
 #lame..
 _ "ln $tmp/usr/bin/dropbearmulti $tmp/usr/bin/ssh";
 _ "ln $tmp/usr/bin/dropbearmulti $tmp/usr/sbin/dropbear";
+
+_ "ln $tmp/sbin/stage1 $tmp/bin/lspcidrake";
+_ "ln $tmp/sbin/stage1 $tmp/bin/rescue-gui";
+_ "ln $tmp/sbin/stage1 $tmp/sbin/drvinst";
+_ "ln $tmp/sbin/stage1 $tmp/sbin/probe-modules";
+_ "ln $tmp/sbin/stage1 $tmp/usr/bin/serial_probe";
+_ "ln $tmp/sbin/stage1 $tmp/hotplug";
+
+_ "cp /bin/busybox.static $tmp/usr/bin/busybox";
+my @busybox_links = split("\n", `$tmp/usr/bin/busybox --list-full`);
+foreach my $bin (@busybox_links) {
+	_ "test -e $tmp/$bin || ln $tmp/usr/bin/busybox $tmp/$bin";
+}
+_ "ln $tmp/sbin/init $tmp/init";
 
 # XXX: prevent this from being added to begin with
 _ "rm -rf $tmp/usr/share/locale/";
@@ -85,7 +99,5 @@ for f in `find $tmp`; do
 done
 ";
 
-my $MKSQUASHFS_ARGS = $ARGV[0] ? $ARGV[0] : "-comp xz -Xbcj x86";
-
-_ "mksquashfs $tmp $rescue $MKSQUASHFS_ARGS -b 1048576 -no-xattrs -all-root -noappend";
+_ "(cd $tmp; find | cpio -o -H newc | xz --x86 --lzma2 --check=crc32 -v9e > $ENV{PWD}/$rescue)";
 _ "rm -rf $tmp";
