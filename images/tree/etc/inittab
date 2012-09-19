@@ -2,7 +2,7 @@
 #Author: Per Øyvind Karlsen <peroyvind@mandriva.org>
 
 ::sysinit:/etc/init.d/rc.sysinit
-::restart:/etc/init.d/rc.newroot
+::restart:/init
 ::ctrlaltdel:/sbin/reboot
 ::shutdown:/bin/umount -a -r
 ::shutdown:/sbin/swapoff -a
@@ -12,8 +12,9 @@ tty11::once:/usr/bin/tail -f /var/log/stage1.log
 tty12::once:/usr/bin/tail -f /var/log/messages
 
 tty1::once:/sbin/stage1
-#tty2::askfirst:/bin/rescue-gui
+tty2::askfirst:/bin/sh
 tty3::askfirst:/bin/sh
 tty4::askfirst:/bin/sh
 tty5::askfirst:/bin/sh
 tty6::askfirst:/bin/sh
+#::respawn:/sbin/getty -h -t 60 ttyS0 9600 ansi

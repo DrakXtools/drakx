@@ -2,6 +2,13 @@
 
 . /etc/init.d/functions
 
+# Set the hostname.
+action "Setting hostname stage1" hostname stage1
+
+mount /dev
+mkdir /dev/pts /dev/shm
+mount -a
+
 echo -e "\t\t\tWelcome to \\033[1;36mMandriva\\033[0;39m Linux"
 
 # disabled for now..
@@ -22,3 +29,7 @@ else
 	# Set the hostname.
 	action "Setting hostname stage2" hostname stage2
 fi
+
+. /etc/init.d/rc.newroot
+
+#init q
