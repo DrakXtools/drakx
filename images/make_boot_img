@@ -221,8 +221,6 @@ sub initrd {
         $dest =~ s|all.kernels$I/$ext/||;
         _ "cp -a $firm $tmp_initrd/$dest";
     };
-    _ "chmod 755 $tmp_initrd/hotplug";
-    symlink "../hotplug", "$tmp_initrd/sbin/hotplug";
     _ "install -m644 tree/etc/fstab		-D $tmp_initrd/etc/fstab";
     _ "install -m644 tree/etc/inittab		-D $tmp_initrd/etc/inittab";
     _ "install -m644 tree/etc/init.d/functions	-D $tmp_initrd/etc/init.d/functions";
