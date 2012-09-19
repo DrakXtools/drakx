@@ -10,7 +10,7 @@ all: $(RESCUE)
 install: $(RESCUE)
 	install -m644 $< -D $(DESTDIR)$(STAGE2_DEST)/$<
 
-$(RESCUE): list.xml guessmounts lsparts rescue-doc make_rescue_img
+$(RESCUE): list.xml guessmounts rescue-doc make_rescue_img
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_rescue_img "$(MKSQUASHFS_ARGS)"
 
 dist-svn:
