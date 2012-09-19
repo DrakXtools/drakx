@@ -475,7 +475,5 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 	finish_frontend();
 	close_log();
 
-	kill(1, SIGQUIT);
-
 	return 0;
 }
