@@ -43,7 +43,7 @@
 #include "drvinst.h"
 #include "hotplug.h"
 #include "ldetect/lspcidrake.h"
-#include "serial_probe/serial_probe.h"
+#include "serial_probe.h"
 
 #include "log.h"
 #include "probing.h"
@@ -474,6 +474,8 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 
 	finish_frontend();
 	close_log();
+
+	kill(1, SIGHUP);
 
 	return 0;
 }

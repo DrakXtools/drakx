@@ -98,7 +98,7 @@ LIBSYSFS_SRC = libsysfs/dlist.c libsysfs/sysfs_attr.c libsysfs/sysfs_device.c li
 LOCAL_SRC += $(LIBSYSFS_SRC) 
 INCLUDES += -Ilibsysfs
 
-SERIAL_PROBE_SRC = serial_probe/serial.c serial_probe/serial_probe.c
+SERIAL_PROBE_SRC = serial.c serial_probe.c
 LOCAL_SRC += $(SERIAL_PROBE_SRC)
 
 BINS_SRC = drvinst.c probe-modules.c rescue-gui.c ldetect/lspcidrake.c hotplug.c
