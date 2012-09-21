@@ -4,7 +4,7 @@ VERSION=1.63
 PRODUCT=$(FAMILY)-images
 KERNELS=$(shell rpm -qf /lib/modules/3.*)
 IMAGES_DEST = $(ROOTDEST)/install/images
-COMPRESS = xz -v --check=crc32 -9e
+#COMPRESS = xz -v --check=crc32 -9e
 
 all: images
 
@@ -15,7 +15,8 @@ ifeq (1, $(USE_LOCAL_STAGE1))
 STAGE1_BINS = ../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage/lspcidrake
 endif
 
-images: all.kernels/.list images/all.img images/hd_grub.img images/boot.iso isolinux $(STAGE1_BINS)
+images: all.kernels/.list images/hd_grub.img images/boot.iso isolinux $(STAGE1_BINS) list.xml guessmounts rescue-doc make_boot_img
+	echo $@ >> /tmp/testt
 	rm -rf images/alternatives 
 	if [ `ls images/*.img-* 2>/dev/null | wc -l` -gt 0 ]; then	\
 	  mkdir images/alternatives; cd images/alternatives; mv ../*.img-* .; md5sum *.img-* > MD5SUM; \
@@ -27,14 +28,8 @@ $(STAGE1_BINS):
 	make -C ../mdk-stage1 $(shell basename $@)
 
 
-images/all.img images/boot.iso: all.kernels/.list images/$@ $(STAGE1_BINS)
-	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
-
-images/hd_grub.img:
-	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
-
-isolinux: all.kernels/.list
-	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
+images/boot.iso images/hd_grub.img: all.kernels/.list
+	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img
 
 all.kernels/.list: update_kernel ../kernel/list_modules.pm
 	./update_kernel $(KERNELS)

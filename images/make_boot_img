@@ -1,5 +1,9 @@
 #!/usr/bin/perl
 
+use MDK::Common;
+use lib "/usr/lib/libDrakX";
+use keyboard;
+
 use Config;
 use FileHandle;
 use MDK::Common;
@@ -20,8 +24,7 @@ my $wordsize = $arch eq 'x86_64' ? '64' : '32';
 
 my $tmp_mnt = "$ENV{'PWD'}/tmp_mnt";
 my $tmp_initrd = "$ENV{'PWD'}/tmp_initrd";
-my $compress_filter = 'gzip -1';
-
+my $compress_filter;
 
 if ("@ARGV") {
     if ($ARGV[0] eq "--compress") {
@@ -54,36 +57,26 @@ mkdir "images";
 my @kernels = chomp_(cat_('all.kernels/.list'));
 
 my @all_images = (
-		  if_($arch =~ /i.86/, 'isolinux', 'boot.iso', 'all.img', 'hd_grub.img'),
-		  if_($arch =~ /x86_64/, 'isolinux', 'boot.iso', 'all.img', 'hd_grub.img'),
+		  if_($arch =~ /i.86/, 'isolinux', 'boot.iso', 'hd_grub.img'),
+		  if_($arch =~ /x86_64/, 'isolinux', 'boot.iso', 'hd_grub.img'),
 		  if_($arch =~ /ia64/, 'all.img'),
 		  if_($arch =~ /ppc/, 'all.img'),
 		 );
 
 my @images = @ARGV ? @ARGV : map { "images/$_" } @all_images;
 
-foreach my $img (@images) {
-    my ($type, $I, $extension) = $img =~ m!([^/]*)(64)?\.([^.]*)$!;
+if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
+	system("/bin/cp -f isolinux/alt0/$wordsize/* $tftpboot");
+}
 
-    if ($img =~ /hd_grub/) {
-	hd_grub($img);
-    } elsif ($img =~ /isolinux/) {
-	isolinux(\@kernels);
+hd_grub("images/hd_grub.img");
 
-	if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
-	    system("/bin/cp -f isolinux/alt0/$wordsize/* $tftpboot");
-	}
-    } elsif ($img =~ /boot.iso/) {
-	boot_iso($img, \@kernels);
-    } elsif ($extension eq 'rdz') {
-	initrd($type, $I, "$img-$_") foreach @kernels;
-    } elsif ($extension eq 'img') {
-	print STDERR "calling boot_img_$arch for $img\n";
-	$::{"boot_img_$arch"}->($type, $I, "$img-$_", "all.kernels/$_/vmlinuz") foreach @kernels;
-	rename("$img-$kernels[0]", $img);
-    } else {
-	die "unknown image $img";
-    }
+isolinux(\@kernels);
+
+boot_iso("images/boot.iso", \@kernels);
+
+if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
+	system("/bin/cp -f isolinux/alt0/$wordsize/* $tftpboot");
 }
 
 sub usage () {
@@ -197,10 +190,9 @@ EOF
 sub initrd {
     my ($type, $I, $img) = @_;
     my $stage1_root = $ENV{USE_LOCAL_STAGE1} ? "../mdk-stage1" : "/usr/$lib/drakx-installer/binaries";
-    my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
 
     _ "rm -rf $tmp_initrd";
-    mkdir_p("$tmp_initrd$_") foreach qw(/etc /firmware /lib /mnt /modules /sbin /tmp /var/run);
+    mkdir_p("$tmp_initrd$_") foreach qw(/etc /firmware /lib /mnt /sbin /tmp /var/run);
     symlink "../modules", "$tmp_initrd/lib/modules";
     symlink "../firmware", "$tmp_initrd/lib/firmware";
 
@@ -216,35 +208,35 @@ sub initrd {
         my $file = m!^/! ? $_ : "/usr/share/ldetect-lst/$_";
         _ "install -D $file $tmp_initrd$file";
     }
-    foreach my $firm (glob_("all.kernels$I/$ext/firmware/*")) {
+    foreach my $firm (glob_("all.kernels$I/$img/firmware/*")) {
         my $dest=$firm;
-        $dest =~ s|all.kernels$I/$ext/||;
+        $dest =~ s|all.kernels$I/$img/||;
         _ "cp -a $firm $tmp_initrd/$dest";
     };
-    _ "install -m644 tree/etc/fstab		-D $tmp_initrd/etc/fstab";
-    _ "install -m644 tree/etc/inittab		-D $tmp_initrd/etc/inittab";
-    _ "install -m644 tree/etc/init.d/functions	-D $tmp_initrd/etc/init.d/functions";
-    _ "install -m755 tree/etc/init.d/rcS	-D $tmp_initrd/etc/init.d/rcS";
-    _ "install -m755 tree/etc/init.d/rc.newroot	-D $tmp_initrd/etc/init.d/rc.newroot";
-    _ "install -m755 tree/etc/init.d/rc.sysinit	-D $tmp_initrd/etc/init.d/rc.sysinit";
-    _ "install -m644 setup/host.conf		-D $tmp_initrd/etc/host.conf";
-    _ "install -m644 setup/hosts		-D $tmp_initrd/etc/hosts";
-    _ "install -m644 setup/inputrc		-D $tmp_initrd/etc/inputrc";
-    _ "install -m644 setup/profile		-D $tmp_initrd/etc/profile";
-    _ "install -m644 setup/passgrp/group	-D $tmp_initrd/etc/group";
-    _ "install -m644 setup/passgrp/passwd	-D $tmp_initrd/etc/passwd";
-    _ "install -m755 $stage1_root/stage1	-D $tmp_initrd/sbin/stage1";
-    _ "mkdir $tmp_initrd/bin";
-    _ "mkdir -p $tmp_initrd/usr/bin";
-    _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/bin/lspcidrake";
-    _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/bin/rescue-gui";
-    _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/sbin/drvinst";
-    _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/sbin/probe-modules";
-    _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/usr/bin/serial_probe";
 
-    _ "ln $tmp_initrd/sbin/stage1 $tmp_initrd/hotplug";
-    symlink "../hotplug", "$tmp_initrd/sbin/hotplug";
+    my $issue = `linux_logo -l`;
 
+    $issue .= <<EOF;
+
+		[1;37;40mRescue Disk[0m
+
+$ENV{DISTRIB_DESCR}
+
+Use [1;33;40mloadkeys[0m to change your keyboard layout (eg: loadkeys fr)
+Use [1;33;40mmodprobe[0m to load modules (eg: modprobe snd-card-fm801)
+Use [1;33;40mdrvinst[0m to install drivers according to detected devices
+Use [1;33;40mblkid[0m to list your partitions with types
+Use [1;33;40mstartssh[0m to start an ssh daemon
+Use [1;33;40mrescue-gui[0m to go back to the rescue menu
+
+EOF
+
+     output("$tmp_initrd/etc/issue", $issue);
+
+     _ "../tools/install-xml-file-list list.xml $tmp_initrd";
+
+    _ "mkdir -p $tmp_initrd/bin";
+    _ "cp -r tree/* $tmp_initrd";
 
     if (0) {
 	_ "install -m644 tree/etc/mdev.conf		-D $tmp_initrd/etc/mdev.conf";
@@ -254,24 +246,35 @@ sub initrd {
 	_ "install -m755 tree/lib/mdev/usbdisk_link	-D $tmp_initrd/lib/mdev/usbdisk_link";
     }
 
-    foreach ('pppd', 'pppoe') {
-	_ "install /usr/uclibc/sbin/$_ $tmp_initrd/sbin/";
+    _ "cp /bin/busybox.static $tmp_initrd/usr/bin/busybox";
+    my @busybox_links = split("\n", `$tmp_initrd/usr/bin/busybox --list-full`);
+    foreach my $bin (@busybox_links) {
+	    _ "test -e $tmp_initrd/$bin || ln $tmp_initrd/usr/bin/busybox $tmp_initrd/$bin";
     }
+
+    foreach (cat_("aliases")) {
+	    chomp; my ($f, $dest) = split;
+	    _ "ln $tmp_initrd$f $tmp_initrd$dest";
+    }
+
+    my $LANGUAGE = "C";
+    substInFile {
+	    $_ = "export LANGUAGE=$LANGUAGE\n" . "export LC_ALL=$LANGUAGE\n" if /^#LANGUAGE/;	
+    } "$tmp_initrd/etc/init.d/rc.stage2";
+
+    _ "
+    for f in `find $tmp`; do
+	    if [ -n \"`file \$f|grep 'not stripped'`\" ]; then
+		    strip \$f
+	    fi
+    done
+    ";
 
     if ($arch !~ /ppc|ia64/) {
 	mkdir_p("$tmp_initrd/etc/pcmcia");
 	 _ "cp -a /etc/pcmcia/config.opts $tmp_initrd/etc/pcmcia";
     }
-    {
-	my $modz = "all.kernels$I/$ext";
-	mkdir_p("$tmp_initrd/modules/$ext");
-	__ "tar xC $tmp_initrd/modules/$ext -f $modz/${type}_modules.tar";
-        _ "cp -f $modz/modules.$_ $tmp_initrd/modules/$ext" foreach qw(order builtin);
-        substInFile { s,.*/,, } "$tmp_initrd/modules/$ext/modules.order";
-	_ "depmod -b $tmp_initrd $ext";
-	# depmod keeps only available modules in modules.alias, but we want them all
-	_ "cp -f $modz/modules.alias $tmp_initrd/modules/$ext";
-    }
+
     # ka deploy need some files in all.rdz 
     {
 	mkdir_p("$tmp_initrd/$_") foreach qw(bin dev etc/sysconfig/network-scripts media/cdrom media/floppy proc run sys sbin usr/bin usr/sbin var/log var/tmp tmp/newroot tmp/stage2);
@@ -281,7 +284,7 @@ sub initrd {
 	foreach my $bin (@busybox_links) {
 	    _ "test -e $tmp_initrd/$bin || ln $tmp_initrd/usr/bin/busybox $tmp_initrd/$bin";
 	}
-	_ "ln $tmp_initrd/sbin/init $tmp_initrd/init";
+
 	if ($ENV{DEBUG_INSTALL}) {
 		foreach my $f (split("\n", `rpm -ql valgrind`)) {
 			_ "test -d $f || install $f -D ${tmp_initrd}$f";
@@ -291,8 +294,31 @@ sub initrd {
 		}
 	}
     }
+    my $comp = defined($compress_filter) ? $compress_filter : "xz --x86 --lzma2 -v9e --check=crc32";
 
-    _ "(cd $tmp_initrd; find . | cpio -o -c --quiet) | $compress_filter > $img";
+    _ "(cd $tmp_initrd; find . | cpio -o -H newc --quiet) | $comp > $ENV{PWD}/$img";
+    _ "rm -rf $tmp";
+    }
+
+sub modules {
+    my ($type, $I, $img) = @_;
+
+    _ "rm -rf $tmp_initrd";
+    mkdir_p("$tmp_initrd/modules");
+
+    {
+	my $modz = "all.kernels/$I";
+	mkdir_p("$tmp_initrd/lib/modules/$I");
+	__ "tar xC $tmp_initrd/lib/modules/$I -f $modz/${type}_modules.tar";
+        _ "cp -f $modz/modules.$_ $tmp_initrd/lib/modules/$I" foreach qw(order builtin);
+        substInFile { s,.*/,, } "$tmp_initrd/lib/modules/$I/modules.order";
+	_ "/sbin/depmod -b $tmp_initrd $I";
+	# depmod keeps only available modules in modules.alias, but we want them all
+	_ "cp -f $modz/modules.alias $tmp_initrd/lib/modules/$I";
+    }
+    my $comp = defined($compress_filter) ? $compress_filter : "xz -v9e --check=crc32";
+
+    _ "(cd $tmp_initrd; find . | cpio -o -H newc --quiet) | $comp > $ENV{PWD}/$img";
     _ "rm -rf $tmp_initrd";
 }
 
@@ -326,10 +352,10 @@ sub syslinux_cfg_all {
 
     syslinux_cfg([
 	(map {
-	    { kernel => "alt0/$wordsize/vmlinuz", initrd => "alt0/$wordsize/all.rdz", %$_ };
+	    { kernel => "alt0/$wordsize/vmlinuz", initrd => "alt0/$wordsize/modules.rdz,all.rdz", %$_ };
 	} entries_append($type)),
 	(map_index {
-	    { label => "alt$::i", kernel => "alt$::i/$wordsize/vmlinuz", initrd => "alt$::i/$wordsize/all.rdz", 
+	    { label => "alt$::i", kernel => "alt$::i/$wordsize/vmlinuz", initrd => "alt$::i/$wordsize/modules.rdz,all.rdz", 
 	      append => join(' ', grep { $_ } $default_append, $default_acpi, $default_vga) };
 	} @kernels),
 	{ label => 'memtest', kernel => 'memtest' },
@@ -789,8 +815,8 @@ sub syslinux_all_files {
     each_index {
 	mkdir "$dir/alt$::i/$wordsize", 0777;
 	_ "install -m644 all.kernels/$_/vmlinuz -D $dir/alt$::i/$wordsize/vmlinuz";
-	initrd('all', '', "images/all.rdz-$_");
-	rename("images/all.rdz-$_", "$dir/alt$::i/$wordsize/all.rdz");
+	modules('all', "$_", "images/modules.rdz-$_");
+	rename("images/modules.rdz-$_", "$dir/alt$::i/$wordsize/modules.rdz");
     } @$kernels;
 
     _ "install -m 644 -D /boot/memtest* $dir/memtest";
@@ -805,6 +831,7 @@ sub isolinux {
     my ($kernels) = @_;
 
     syslinux_all_files('isolinux', $kernels);
+    initrd('all', '', "isolinux/all.rdz");
 
     _ "cp $isolinux_bin isolinux/isolinux.bin";
     _ "cp /usr/lib/syslinux/ifcpu.c32 isolinux/ifcpu.c32";
@@ -822,7 +849,6 @@ sub xbox_stage1() {
     eval { rm_rf($dir) }; mkdir_p($dir);
 
     _ "cp all.kernels/$xbox_kernel/vmlinuz $dir";
-    initrd('all', '', "images/all.rdz-$xbox_kernel");
     rename("images/all.rdz-$xbox_kernel", "$dir/initrd");
 
     _ "cp /usr/share/cromwell/xromwell-installer.xbe $dir/default.xbe";
@@ -839,6 +865,7 @@ sub boot_iso {
     syslinux_all_files('.boot_iso/isolinux', $kernels);
 
     output('.boot_iso/VERSION', VERSION($kernels));	   
+    _ "ln -f isolinux/all.rdz .boot_iso/isolinux";
    
     # for the boot iso, use standard isolinux
     _ "cp /usr/lib/syslinux/isolinux.bin .boot_iso/isolinux/isolinux.bin";
