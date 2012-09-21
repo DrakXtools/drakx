@@ -89,6 +89,8 @@ full_stage2:
 	$(MAKE) compress
 
 compress:
+	# simple & ugly hack for now..
+	for i in `cat all.rdz.txt`; do test -f $(DESTDIR)/$(STAGE2_DEST)/live/$$i && rm -f $(DESTDIR)/$(STAGE2_DEST)/live/$$i; true; done
 	../../tools/mdkinst_stage2_tool --clean --compress $(DESTDIR)$(STAGE2_DEST)
 
 stage2:

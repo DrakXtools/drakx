@@ -1,54 +1,10 @@
 <list no-arch-libraries="on">
 
 <from expand="binary">
-  ash echo
-  aria2c cp curl md5sum <!-- needed by urpmi -->
-  cpio gzip bzip2
-  <if-not ARCH="ppc">
-    fdisk
-  </if-not>
   <if ARCH="ppc">
     pdisk 
   </if>
-  insmod modinfo rmmod
-  losetup
-  lvm2 mdadm
-  mount mount.nfs umount
-  parted
-  partprobe
-  xz
 
-  udevadm <!-- needed by mouse::detect -->
-
-  badblocks
-  <mode copy="system">
-    mkswap swaplabel mke2fs mkfs.ext2 mkfs.ext3 mkfs.ext4 e2fsck fsck.ext2 fsck.ext3 fsck.ext4
-    tune2fs dumpe2fs resize2fs
-
-    mkfs.reiserfs resize_reiserfs reiserfstune
-  </mode>
-  mkfs.xfs xfs_admin
-  xfs_freeze xfs_io <!-- needed for setup grub on XFS formated / -->
-
-  mkfs.btrfs btrfsctl btrfs btrfsck fsck.btrfs
-  mkfs.nilfs2 nilfs-tune
-  mkfs.jfs fsck.jfs jfs_tune
-
-  tty stty <!-- needed for text mode installer (through unicode_start) -->
-
-  <if ARCH="i.86|x86_64|ia64">
-    mkdosfs
-    dosfslabel
-    mlabel
-    mkntfs
-    ntfsresize
-    ntfslabel
-    dmraid
-  </if>
-  quotacheck
-  cryptsetup dmsetup
-
-  setfont kbd_mode
   <mode copy="dereference">
     Xorg
   </mode>
@@ -63,9 +19,6 @@
     unicode_start
   </filter>
 
-  <if ARCH="i.86|x86_64|ia64">
-    dmidecode 
-  </if>
   <if ARCH="ia64">
   efibootmgr 
   </if>
@@ -78,18 +31,6 @@
   <if set="DEBUG_INSTALL">
     strace bash less ps top gdb
   </if>
-</from>
-
-<!-- when adding udev rules, think whether they're needed in rescue too
-     (../../../rescue/list.xml) -->
-<from dir="/lib/udev/rules.d">
-  10-dm.rules
-  11-dm-lvm.rules
-  13-dm-disk.rules
-  60-persistent-storage.rules
-  64-md-raid.rules
-  65-md-incremental.rules
-  95-dm-notify.rules
 </from>
 
 <from dir="/usr/LIB/xorg/modules">
@@ -178,11 +119,7 @@
 
 <from>
   /etc/urpmi/prefer.vendor.list
-  /etc/mke2fs.conf
-  /etc/netconfig
   /etc/fonts/
-  /etc/passwd
-  /etc/protocols
   /etc/rpm/macros.d/legacy_compat.macros
 <!--  /usr/share/X11/XKeysymDB -->
   /etc/pango/*/pango.modules
@@ -204,15 +141,9 @@
   <mode copy="keep-links">
      /usr/share/doc/installer-help/
   </mode>
-  /usr/lib/rpm/macros
-  /usr/lib/rpm/cpuinfo.yaml
-  /usr/lib/rpm/macros.d/mandriva
-  /usr/share/pci.ids
   /usr/share/usb.ids
   /usr/share/locale/UTF-8
-  /usr/share/terminfo/l/linux
   /bin/brltty
-  /sbin/mount.ntfs-3g <!-- cannot be expanded as binary, not executable for all users -->
   <mode copy="system">
     /sbin/blkid
   </mode>
@@ -222,12 +153,10 @@
 
   /etc/pki/tls/certs/ca-bundle.crt
 
-  /lib/systemd/systemd-udevd
   /lib/udev/ata_id
   /lib/udev/scsi_id
   /lib/udev/pcmcia-socket-startup
 
-  /etc/pcmcia/config.opts
 
   <!-- for GDB: -->
   <if set="DEBUG_INSTALL">
@@ -311,15 +240,11 @@
 
 <from dir="/usr/share/ldetect-lst">
   <filter command="gunzip">
-    dmitable.gz pcitable.gz usbtable.gz
+    dmitable.gz  
   </filter>
-  dkms-modules.alias fallback-modules.alias
   Cards+ MonitorsDB isdn.db
 </from>
 
-<from dir="/lib/module-init-tools">
-  ldetect-lst-modules.alias
-</from>
 
 <from dir="/usr/LIB/pango/*/modules">
   pango-basic-fc.so
@@ -346,7 +271,6 @@
   ISO8859-5.so
   ISO8859-3.so
   ISO8859-2.so
-  ISO8859-1.so
  <from expand="glob"> 
   KOI8-*.so
  </from>
@@ -354,20 +278,12 @@
   CP1251.so
   GEORGIAN-PS.so
   EUC-CN.so
-  gconv-modules
 </from>
 
 <filter subst="/^__END__/ and $_ = '', close ARGV">
 <from expand="main-perl">
-  AutoLoader.pm
-  Carp/Heavy.pm
-  Carp.pm
-  Exporter/Heavy.pm
-  Exporter.pm
-  File/Basename.pm
   File/Find.pm
   FileHandle.pm
-  File/Path.pm
   File/Temp.pm
   Getopt/Long.pm
   IPC/Open2.pm
@@ -381,87 +297,42 @@
   Net/Netrc.pm
   Net/Ping.pm
   PerlIO.pm
-  SelectSaver.pm
   SelfLoader.pm
-  Symbol.pm
-  Tie/Hash.pm
   Time/Local.pm
-  XSLoader.pm
-  base.pm
   bytes_heavy.pl <!-- needed by urpm::mirrors -->
-  bytes.pm
   constant.pm
   dumpvar.pl
-  feature.pm
   integer.pm
   locale.pm
   overload.pm
-  strict.pm
   unicore/Heavy.pl
   unicore/To/Digit.pl
   unicore/To/Fold.pl
   unicore/To/Lower.pl
   unicore/To/Upper.pl
   utf8_heavy.pl
-  utf8.pm
-  vars.pm
-  warnings.pm
-  warnings/register.pm
   ARCH-linux-thread-multi/B.pm
   ARCH-linux-thread-multi/Config_git.pl
   ARCH-linux-thread-multi/Config_heavy.pl
-  ARCH-linux-thread-multi/Config.pm
-  ARCH-linux-thread-multi/Cwd.pm
   ARCH-linux-thread-multi/Data/Dumper.pm
-  ARCH-linux-thread-multi/DynaLoader.pm
-  ARCH-linux-thread-multi/Errno.pm
-  ARCH-linux-thread-multi/Fcntl.pm
-  ARCH-linux-thread-multi/File/Glob.pm
   ARCH-linux-thread-multi/File/Spec.pm
   ARCH-linux-thread-multi/File/Spec/Unix.pm
-  ARCH-linux-thread-multi/_h2ph_pre.ph
   ARCH-linux-thread-multi/IO/File.pm
-  ARCH-linux-thread-multi/IO/Handle.pm
-  ARCH-linux-thread-multi/IO.pm
   ARCH-linux-thread-multi/IO/Seekable.pm
   ARCH-linux-thread-multi/IO/Select.pm
-  ARCH-linux-thread-multi/IO/Socket/INET.pm
-  ARCH-linux-thread-multi/IO/Socket.pm
-  ARCH-linux-thread-multi/IO/Socket/UNIX.pm
   ARCH-linux-thread-multi/List/Util.pm
   ARCH-linux-thread-multi/List/Util/PP.pm
-  ARCH-linux-thread-multi/POSIX.pm
   ARCH-linux-thread-multi/Scalar/Util.pm
   ARCH-linux-thread-multi/Scalar/Util/PP.pm
-  ARCH-linux-thread-multi/Socket.pm
   ARCH-linux-thread-multi/Time/HiRes.pm
   <if ARCH="ia64">
   ARCH-linux-thread-multi/asm-i386/unistd.ph 
   ARCH-linux-thread-multi/asm-x86_64/unistd.ph 
   ARCH-linux-thread-multi/asm/break.ph 
   </if>
-  <if ARCH="i.86|x86_64">
-  ARCH-linux-thread-multi/asm/unistd_32.ph
-  ARCH-linux-thread-multi/asm/unistd_64.ph
-  </if>
-  ARCH-linux-thread-multi/asm/unistd.ph
   ARCH-linux-thread-multi/auto/B/B.so
-  ARCH-linux-thread-multi/auto/Cwd/Cwd.so
   ARCH-linux-thread-multi/auto/Data/Dumper/Dumper.so
-  ARCH-linux-thread-multi/auto/Fcntl/Fcntl.so
-  ARCH-linux-thread-multi/auto/File/Glob/Glob.so
-  ARCH-linux-thread-multi/auto/IO/IO.so
-  ARCH-linux-thread-multi/auto/POSIX/autosplit.ix
-  ARCH-linux-thread-multi/auto/POSIX/load_imports.al
-  ARCH-linux-thread-multi/auto/POSIX/POSIX.so
-  ARCH-linux-thread-multi/auto/Socket/Socket.so
   ARCH-linux-thread-multi/auto/Time/HiRes/HiRes.so
-  ARCH-linux-thread-multi/bits/syscall.ph
-  ARCH-linux-thread-multi/bits/wordsize.ph
-  ARCH-linux-thread-multi/lib.pm
-  ARCH-linux-thread-multi/re.pm
-  ARCH-linux-thread-multi/syscall.ph
-  ARCH-linux-thread-multi/sys/syscall.ph
   <if set="DEBUG_INSTALL">
     perl5db.pl
     Term/ReadLine.pm
@@ -469,13 +340,10 @@
 </from>
 
 <from expand="perl">
-  packdrake.pm
   Config/IniFiles.pm
   MDV/Distribconf.pm
-  MDV/Packdrakeng.pm
   MDV/Snapshot/Common.pm
   MDV/Snapshot/Restore.pm
-  String/ShellQuote.pm
   ARCH-linux-thread-multi/List/MoreUtils.pm
   ARCH-linux-thread-multi/Term/ReadKey.pm
   ARCH-linux-thread-multi/auto/Term/ReadKey/ReadKey.so
@@ -514,14 +382,11 @@
   perl-Curses
   perl-Curses-UI
   perl-File-FnMatch
-  perl-File-Sync
   perl-Filesys-Df
   perl-Clone
   perl-Glib
   perl-Gtk2
   perl-Gtk2-WebKit
-  perl-Locale-gettext
-  perl-MDK-Common
   perl-Pango
   perl-URPM
 </from>
@@ -549,31 +414,6 @@
   </to>
 </from>
 
-<from dir="bkeymaps">
-  <to dir="/usr/share/bkeymaps">
-    <from expand="command">
-    perl -I/usr/lib/libDrakX -Mkeyboard -le '{
-        my $dir = "bkeymaps";
-	mkdir($dir);
-        foreach (keyboard::_keyboards()) {
-          my $kmap = keyboard::keyboard2kmap($_);
-            if (system("loadkeys -b $kmap > $dir/$kmap.bkmap") != 0) {
-              warn "unknown kmap $kmap\n";
-              unlink "$dir/$kmap.bkmap";
-            } else {
-              print "$kmap.bkmap";
-            }
-          }
-	}'
-    </from>
-  </to>
-</from>
-
-<from dir="../../tools">
-  <to dir="/usr/bin">
-    loadkeys
-  </to>
-</from>
 
 <from dir="share">
   <to dir="/usr/share">
