@@ -66,7 +66,6 @@ get_needed_files: xs
 	chmod u-s -R $(DESTDIR)$(DEST) # for mount/umount
 	share/generate-xlocales $(DESTDIR)$(DEST)
 
-	mv -f $(DESTDIR)$(DEST)/usr/$(LIB)/*.so* $(DESTDIR)$(DEST)/$(LIB)
 	../../tools/simplify-drakx-modules $(DESTDIR)$(DEST)/usr/*/*/*/utf8_heavy.pl
 
 	perl -I.. -Mlang -e 'symlink "UTF-8", "$(DESTDIR)$(DEST)/usr/share/locale/$$_" foreach lang::list_langs()'
