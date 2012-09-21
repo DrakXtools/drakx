@@ -23,7 +23,7 @@ export UDEVRULESD=/run/udev/rules.d
 udevadm trigger --type=subsystems --action=add
 udevadm trigger --type=devices --action=add
 
-if [ -x /etc/init.d/rc.stage2 ]; then
+if grep -q rescue /proc/cmdline; then
 	. /etc/init.d/rc.stage2
 else
 	# Set the hostname.

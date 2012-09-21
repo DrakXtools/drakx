@@ -29,7 +29,7 @@ $(STAGE1_BINS):
 
 
 images/boot.iso images/hd_grub.img: all.kernels/.list
-	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img
+	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)"
 
 all.kernels/.list: update_kernel ../kernel/list_modules.pm
 	./update_kernel $(KERNELS)
