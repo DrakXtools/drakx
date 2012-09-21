@@ -16,7 +16,6 @@ STAGE1_BINS = ../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage
 endif
 
 images: all.kernels/.list images/hd_grub.img images/boot.iso isolinux $(STAGE1_BINS) list.xml guessmounts rescue-doc make_boot_img
-	echo $@ >> /tmp/testt
 	rm -rf images/alternatives 
 	if [ `ls images/*.img-* 2>/dev/null | wc -l` -gt 0 ]; then	\
 	  mkdir images/alternatives; cd images/alternatives; mv ../*.img-* .; md5sum *.img-* > MD5SUM; \
