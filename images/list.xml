@@ -240,13 +240,10 @@
 
 
   /sbin/mount.ntfs-3g <!-- can not be expanded as binary, not executable for all users -->
-</from>
 
-<from dir="/usr/lib/rpm" expand="glob">
-  <mode copy="keep-links">
-    macros
-    rpmpopt
-  </mode>
+  /usr/lib/rpm/macros
+  /usr/lib/rpm/cpuinfo.yaml
+  /usr/lib/rpm/macros.d/mandriva
 </from>
 
 <filter subst="/^__END__/ and $_ = '', close ARGV">
