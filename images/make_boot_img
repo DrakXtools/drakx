@@ -37,6 +37,8 @@ if ("@ARGV") {
     #exit(1);
 }
 
+my $target = basename($ARGV[0]);
+
 my $sudo;
 if ($>) {
     $sudo = "sudo";
@@ -65,11 +67,15 @@ my @all_images = (
 
 my @images = @ARGV ? @ARGV : map { "images/$_" } @all_images;
 
-hd_grub("images/hd_grub.img");
-
-isolinux(\@kernels);
-
-boot_iso("images/boot.iso", \@kernels);
+if ($target eq "hd_grub.img") {
+	hd_grub($ARGV[0]);
+} elsif ($target eq 'all.rdz') {
+	initrd('all', '', "$dir/all.rdz");
+} elsif ($target eq 'isolinux' || $target eq 'modules.rdz') {
+	isolinux($ARGV[0], \@kernels);
+} elsif ($target eq "boot.iso") {
+	boot_iso($ARGV[0], \@kernels);
+}
 
 sub usage () {
     print "Usage: make_boot_img [--compress <filter>]\n";
@@ -811,24 +817,24 @@ sub syslinux_all_files {
 }
 
 sub isolinux {
-    my ($kernels) = @_;
+    my ($dir, $kernels) = @_;
 
-    syslinux_all_files('isolinux', $kernels);
-    initrd('all', '', "isolinux/all.rdz");
+    syslinux_all_files($dir, $kernels);
 
-    _ "cp $isolinux_bin isolinux/isolinux.bin";
-    _ "cp /usr/lib/syslinux/ifcpu.c32 isolinux/ifcpu.c32";
-    _ "cp /usr/lib/syslinux/gfxboot.c32 isolinux/gfxboot.c32";
-    output("isolinux/isolinux.cfg", syslinux_cfg_init());
-    output("isolinux/$wordsize.cfg", syslinux_cfg_all('cdrom', 1));
+    _ "cp $isolinux_bin $dir/isolinux.bin";
+    _ "cp /usr/lib/syslinux/ifcpu.c32 $dir/ifcpu.c32";
+    _ "cp /usr/lib/syslinux/gfxboot.c32 $dir/gfxboot.c32";
+    output("$dir/isolinux.cfg", syslinux_cfg_init());
+    output("$dir/$wordsize.cfg", syslinux_cfg_all('cdrom', 1));
 
-    xbox_stage1() if arch() =~ /i.86/;
+    xbox_stage1("$dir/xbox") if arch() =~ /i.86/;
 }
 
 sub xbox_stage1() {
+    my ($dir) = @_;
+
     my $xbox_kernel = find { /xbox/ } all('all.kernels') or return;
 
-    my $dir = 'isolinux/xbox';
     eval { rm_rf($dir) }; mkdir_p($dir);
 
     _ "cp all.kernels/$xbox_kernel/vmlinuz $dir";
@@ -845,10 +851,13 @@ EOF
 sub boot_iso {
     my ($iso, $kernels) = @_;
 
-    syslinux_all_files('.boot_iso/isolinux', $kernels);
+    _ "
+for f in `find isolinux -type f | grep -v -e isolinux.cfg -e $wordsize.cfg`; do
+	mkdir -p .boot_iso/\$(dirname \$f)
+	ln -f \$f .boot_iso/\$f
+done";
 
     output('.boot_iso/VERSION', VERSION($kernels));	   
-    _ "ln -f isolinux/all.rdz .boot_iso/isolinux";
    
     # for the boot iso, use standard isolinux
     _ "cp /usr/lib/syslinux/isolinux.bin .boot_iso/isolinux/isolinux.bin";
