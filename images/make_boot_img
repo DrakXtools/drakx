@@ -65,10 +65,6 @@ my @all_images = (
 
 my @images = @ARGV ? @ARGV : map { "images/$_" } @all_images;
 
-if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
-	system("/bin/cp -f isolinux/alt0/$wordsize/* $tftpboot");
-}
-
 hd_grub("images/hd_grub.img");
 
 isolinux(\@kernels);
