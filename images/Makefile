@@ -30,8 +30,7 @@ $(STAGE1_BINS):
 images/hd_grub.img:
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
 
-#make_boot_img
-isolinux/all.rdz: list.xml guessmounts rescue-doc
+isolinux/all.rdz: list.xml make_boot_img guessmounts rescue-doc
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
 
 images/boot.iso: isolinux/all.rdz isolinux/alt0/$(WORDSIZE)/modules.rdz
