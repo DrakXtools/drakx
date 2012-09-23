@@ -279,7 +279,7 @@ EOF
     {
 	mkdir_p("$tmp_initrd/$_") foreach qw(bin dev etc/sysconfig/network-scripts media/cdrom media/floppy proc run sys sbin usr/bin usr/sbin var/log var/tmp tmp/newroot tmp/stage2);
 	#cp_af("/usr/bin/ka-d-client", "$tmp_initrd/ka/ka-d-client");
-	cp_af("/bin/busybox.static", "$tmp_initrd/usr/bin/busybox");
+	cp_af("/usr/bin/busybox", "$tmp_initrd/usr/bin/busybox");
 	my @busybox_links = split("\n", `/bin/busybox.static --list-full`);
 	foreach my $bin (@busybox_links) {
 	    _ "test -e $tmp_initrd/$bin || ln $tmp_initrd/usr/bin/busybox $tmp_initrd/$bin";
