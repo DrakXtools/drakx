@@ -75,10 +75,6 @@ isolinux(\@kernels);
 
 boot_iso("images/boot.iso", \@kernels);
 
-if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
-	system("/bin/cp -f isolinux/alt0/$wordsize/* $tftpboot");
-}
-
 sub usage () {
     print "Usage: make_boot_img [--compress <filter>]\n";
 
