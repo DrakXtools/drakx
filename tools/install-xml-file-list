@@ -19,7 +19,7 @@ if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 }
 
-#$verbose = 1;
+# $verbose = 1;
 
 my $initial_dir = cwd();
 my $ARCH = arch() =~ /i.86/ ? 'i386' : arch();
@@ -156,7 +156,7 @@ sub collect_needed_libraries {
     }
 }
 sub install_needed_libraries {
-    copy_files('', $DEST, [ keys %needed_libraries ], '', '--dereference');
+    copy_files('', "$ENV{PWD}/$DEST", [ keys %needed_libraries ], '', '--dereference');
 }
 
 sub collect_needed_perl_files {
@@ -195,11 +195,10 @@ sub copy_files {
 	}
     } else {
 	my $options = join(' ', $base_cpio_options, @options);
-	warn "cpio $options to_dir=$ENV{PWD}/$to_dir from=$working_dir: @$files\n" if $verbose;
-	open(my $F, "| cd $working_dir ; $sudo cpio $options $ENV{PWD}/$to_dir");
-	print "cd $working_dir ; $sudo cpio $options $ENV{PWD}/$to_dir\n";
+	warn "cpio $options to_dir=$to_dir from=$working_dir: @$files\n" if $verbose;
+	open(my $F, "| cd $working_dir ; $sudo cpio $options $to_dir");
 	print $F "$_\n" foreach @$files;
-	close($F) or die "cpio $ENV{PWD}/$to_dir failed\n";
+	close($F) or die "cpio $to_dir failed\n";
     }
 }
 
@@ -333,7 +332,7 @@ sub install {
 	my ($local_perl_files, $global_perl_files) = collect_needed_perl_files($local, $to, @files);
 	warn "collect-perl-files gave: ", join(' ', @$local_perl_files), "\n";
 #	warn "                    and: ", join(' ', @$global_perl_files), "\n";
-	copy_and_filter($local =~ m!/! ? $local : "$working_dir/$local", "$DEST$to", $local_perl_files, $env->{filter}, '', '--dereference');
+	copy_and_filter($local =~ m!/! ? $local : "$working_dir/$local", "$DEST/$to", $local_perl_files, $env->{filter}, '', '--dereference');
 	copy_and_filter('', $DEST, $global_perl_files, $env->{filter}, '', '--dereference');
 
     } elsif ($expand) {
@@ -362,16 +361,15 @@ sub install {
 sub copy_and_filter {
     my ($working_dir, $to_dir, $all_files, $filter, $flatten, @copy_options) = @_;
 
-    copy_files($working_dir, $to_dir, $all_files, $flatten, @copy_options);
-    apply_filter($to_dir, $filter, $all_files, $flatten);
+    copy_files($working_dir, "$ENV{PWD}/$to_dir", $all_files, $flatten, @copy_options);
+    apply_filter("$ENV{PWD}/$to_dir", $filter, $all_files, $flatten);
 }
 
 sub apply_filter {
     my ($to_dir, $filter, $all_files, $b_flatten) = @_;
 
-    chdir $to_dir;
     foreach (group_by_n(20, $all_files)) {
-	my @l = $b_flatten ? (map { basename($_) } @$_) : (map { "./$_" } @$_);
+	my @l = $b_flatten ? (map { basename($_) } @$_) : (map { "$to_dir/$_" } @$_);
 	@l = grep { ! -d $_ } @l or next;
 
 	if (my $subst = $filter->{subst}) {
