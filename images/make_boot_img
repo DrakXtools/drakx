@@ -261,8 +261,11 @@ EOF
 	    $_ = "export LANGUAGE=$LANGUAGE\n" . "export LC_ALL=$LANGUAGE\n" if /^#LANGUAGE/;	
     } "$tmp_initrd/etc/init.d/rc.stage2";
 
+    # XXX: prevent this from being added to begin with
+    _ "rm -rf $tmp_initrd/usr/share/locale/";
+
     _ "
-    for f in `find $tmp`; do
+    for f in `find $tmp_initrd`; do
 	    if [ -n \"`file \$f|grep 'not stripped'`\" ]; then
 		    strip \$f
 	    fi
