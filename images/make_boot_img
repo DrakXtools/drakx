@@ -70,7 +70,7 @@ my @images = @ARGV ? @ARGV : map { "images/$_" } @all_images;
 if ($target eq "hd_grub.img") {
 	hd_grub($ARGV[0]);
 } elsif ($target eq 'all.rdz') {
-	initrd('all', '', "$dir/all.rdz");
+	initrd('all', '', $ARGV[0]);
 } elsif ($target eq 'isolinux' || $target eq 'modules.rdz') {
 	isolinux($ARGV[0], \@kernels);
 } elsif ($target eq "boot.iso") {
