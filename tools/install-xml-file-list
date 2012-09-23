@@ -14,8 +14,7 @@ my $want_sudo = $ARGV[0] eq '--sudo' && shift @ARGV;
 my $xml_file_list = $ARGV[0];
 
 my $DEST = "";
-if ($ARGV[0] =~ /^\//) {
-} else {
+if (not $ARGV[1] =~ m!^/!) {
 	$DEST .= "$ENV{PWD}/";
 }
 $DEST .= $ARGV[1];
