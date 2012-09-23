@@ -235,7 +235,6 @@ EOF
 
      _ "../tools/install-xml-file-list list.xml $tmp_initrd";
 
-    _ "mkdir -p $tmp_initrd/bin";
     _ "cp -r tree/* $tmp_initrd";
 
     if (0) {
@@ -249,9 +248,12 @@ EOF
     _ "install -m755 /usr/bin/busybox -D $tmp_initrd/usr/bin/busybox";
     my @busybox_links = split("\n", `$tmp_initrd/usr/bin/busybox --list-full`);
     foreach my $bin (@busybox_links) {
-	    _ "test -e $tmp_initrd/$bin || ln $tmp_initrd/usr/bin/busybox $tmp_initrd/$bin";
+	    if (not -e "$tmp_initrd/$bin") {
+		    _ "mkdir -p `dirname $tmp_initrd/$bin`; ln $tmp_initrd/usr/bin/busybox $tmp_initrd/$bin";
+	    }
     }
 
+    _ "install -m755 $stage1_root/stage1 -D $tmp_initrd/sbin/stage1";
     foreach (cat_("aliases")) {
 	    chomp; my ($f, $dest) = split;
 	    _ "ln $tmp_initrd$f $tmp_initrd$dest";
