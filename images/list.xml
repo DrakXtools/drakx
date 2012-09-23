@@ -83,7 +83,7 @@
     pdisk 
   </if>
   dump dump.ext2 restore restore.ext2 dump.ext3 restore.ext3 dump.xfs restore.xfs
-  parted partimage partprobe
+  parted partprobe
 
   udevadm
 
@@ -141,6 +141,12 @@
 
 </from>
 
+<from dir="/usr/uclibc/usr/sbin">
+	<to dir="/usr/sbin">
+		partimage
+	</to>
+</from>
+
 <from dir="../images/setup">
 	<to dir="/etc">
 		host.conf
@@ -171,7 +177,7 @@
 	</to>
 </from>
 
-<from dir="/usr/uclibc/usr/sbin">
+<from dir="/usr/uclibc/usr/bin">
   <to dir="/usr/bin">
     dropbearmulti
   </to>
