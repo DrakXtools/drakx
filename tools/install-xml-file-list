@@ -186,8 +186,8 @@ sub collect_needed_perl_files {
 sub copy_files {
     my ($working_dir, $to_dir, $files, $b_flatten, @options) = @_;
 
+    mkdir_p($to_dir);
     if ($b_flatten) {
-	mkdir_p($to_dir);
 	my $options = join(' ', '-r', @options);
 	foreach (group_by_n(20, $files)) {
 	    warn "cp $options to_dir $to_dir from $working_dir: @$_\n" if $verbose;
