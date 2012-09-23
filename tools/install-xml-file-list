@@ -195,10 +195,11 @@ sub copy_files {
 	}
     } else {
 	my $options = join(' ', $base_cpio_options, @options);
-	warn "cpio $options to_dir=$to_dir from=$working_dir: @$files\n" if $verbose;
-	open(my $F, "| cd $working_dir ; $sudo cpio $options $to_dir");
+	warn "cpio $options to_dir=$ENV{PWD}/$to_dir from=$working_dir: @$files\n" if $verbose;
+	open(my $F, "| cd $working_dir ; $sudo cpio $options $ENV{PWD}/$to_dir");
+	print "cd $working_dir ; $sudo cpio $options $ENV{PWD}/$to_dir\n";
 	print $F "$_\n" foreach @$files;
-	close($F) or die "cpio $to_dir failed\n";
+	close($F) or die "cpio $ENV{PWD}/$to_dir failed\n";
     }
 }
 
