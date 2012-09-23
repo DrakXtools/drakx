@@ -1,6 +1,7 @@
 <list no-arch-libraries="on">
 
 <from expand="binary">
+  busybox
   sh
 
   false true
@@ -300,6 +301,9 @@
   protocols
   services
   shells
+  <if ARCH="i.86|x86_64">
+    pcmcia/config.opts
+  </if>
 </from>
 
 <from dir="/lib/systemd">

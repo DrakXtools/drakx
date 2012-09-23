@@ -245,7 +245,6 @@ EOF
 	_ "install -m755 tree/lib/mdev/usbdisk_link	-D $tmp_initrd/lib/mdev/usbdisk_link";
     }
 
-    _ "install -m755 /usr/bin/busybox -D $tmp_initrd/usr/bin/busybox";
     my @busybox_links = split("\n", `$tmp_initrd/usr/bin/busybox --list-full`);
     foreach my $bin (@busybox_links) {
 	    if (not -e "$tmp_initrd/$bin") {
@@ -272,11 +271,6 @@ EOF
     done
     ";
 
-    if ($arch !~ /ppc|ia64/) {
-	mkdir_p("$tmp_initrd/etc/pcmcia");
-	 _ "cp -a /etc/pcmcia/config.opts $tmp_initrd/etc/pcmcia";
-    }
-
     # ka deploy need some files in all.rdz 
     {
 	mkdir_p("$tmp_initrd/$_") foreach qw(dev etc/sysconfig/network-scripts media/cdrom media/floppy proc run sys var/log var/tmp tmp/newroot tmp/stage2);
@@ -291,7 +285,7 @@ EOF
 		}
 	}
     }
-    my $comp = defined($compress_filter) ? $compress_filter : "xz --x86 --lzma2 -v9e --check=crc32";
+    my $comp = $compress_filter ? $compress_filter : "xz --x86 --lzma2 -v9e --check=crc32";
 
     _ "(cd $tmp_initrd; find . | cpio -o -H newc --quiet) | $comp > $ENV{PWD}/$img";
     _ "rm -rf $tmp";
@@ -313,7 +307,7 @@ sub modules {
 	# depmod keeps only available modules in modules.alias, but we want them all
 	_ "cp -f $modz/modules.alias $tmp_initrd/lib/modules/$I";
     }
-    my $comp = defined($compress_filter) ? $compress_filter : "xz -v9e --check=crc32";
+    my $comp = $compress_filter ? $compress_filter : "xz -v9e --check=crc32";
 
     _ "(cd $tmp_initrd; find . | cpio -o -H newc --quiet) | $comp > $ENV{PWD}/$img";
     _ "rm -rf $tmp_initrd";
