@@ -11,7 +11,14 @@ use Cwd 'cwd';
 my $want_sudo = $ARGV[0] eq '--sudo' && shift @ARGV;
 
 @ARGV == 2 or die "usage: install-xml-file-list [--sudo] <xml file> <destination>\n";
-my ($xml_file_list, $DEST) = @ARGV;
+my $xml_file_list = $ARGV[0];
+
+my $DEST = "";
+if ($ARGV[0] =~ /^\//) {
+} else {
+	$DEST .= "$ENV{PWD}/";
+}
+$DEST .= $ARGV[1];
 
 my $sudo = '';
 if ($>) {
@@ -156,7 +163,7 @@ sub collect_needed_libraries {
     }
 }
 sub install_needed_libraries {
-    copy_files('', "$ENV{PWD}/$DEST", [ keys %needed_libraries ], '', '--dereference');
+    copy_files('', $DEST, [ keys %needed_libraries ], '', '--dereference');
 }
 
 sub collect_needed_perl_files {
@@ -361,8 +368,8 @@ sub install {
 sub copy_and_filter {
     my ($working_dir, $to_dir, $all_files, $filter, $flatten, @copy_options) = @_;
 
-    copy_files($working_dir, "$ENV{PWD}/$to_dir", $all_files, $flatten, @copy_options);
-    apply_filter("$ENV{PWD}/$to_dir", $filter, $all_files, $flatten);
+    copy_files($working_dir, $to_dir, $all_files, $flatten, @copy_options);
+    apply_filter($to_dir, $filter, $all_files, $flatten);
 }
 
 sub apply_filter {
