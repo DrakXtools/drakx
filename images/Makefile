@@ -36,7 +36,7 @@ isolinux/all.rdz: list.xml make_boot_img guessmounts rescue-doc
 images/boot.iso: isolinux/all.rdz isolinux/alt0/$(WORDSIZE)/modules.rdz
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
 
-isolinux/alt0/$(WORDSIZE)/modules.rdz: all.kernels/.list
+isolinux/alt0/$(WORDSIZE)/modules.rdz isolinux: all.kernels/.list
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
 
 all.kernels/.list: update_kernel ../kernel/list_modules.pm
