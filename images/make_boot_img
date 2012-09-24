@@ -71,7 +71,9 @@ if ($target eq "hd_grub.img") {
 	hd_grub($ARGV[0]);
 } elsif ($target eq 'all.rdz') {
 	initrd('all', '', $ARGV[0]);
-} elsif ($target eq 'isolinux' || $target eq 'modules.rdz') {
+} elsif ($target eq 'modules.rdz') {
+	isolinux("isolinux", \@kernels);
+} elsif ($target eq 'isolinux') {
 	isolinux($ARGV[0], \@kernels);
 } elsif ($target eq "boot.iso") {
 	boot_iso($ARGV[0], \@kernels);
