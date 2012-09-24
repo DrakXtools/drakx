@@ -338,8 +338,8 @@ sub install {
 	my ($local_perl_files, $global_perl_files) = collect_needed_perl_files($local, $to, @files);
 	warn "collect-perl-files gave: ", join(' ', @$local_perl_files), "\n";
 #	warn "                    and: ", join(' ', @$global_perl_files), "\n";
-	copy_and_filter($local =~ m!/! ? $local : "$working_dir/$local", "$DEST/$to", $local_perl_files, $env->{filter}, '', '--dereference');
-	copy_and_filter('', $DEST, $global_perl_files, $env->{filter}, '', '--dereference');
+	copy_and_filter($local =~ m!/! ? $local : "$working_dir/$local", "$DEST/$to", $local_perl_files, $env->{filter}, '', '');
+	copy_and_filter('', $DEST, $global_perl_files, $env->{filter}, '', '');
 
     } elsif ($expand) {
 	die "unknown expand method $expand\n";
@@ -357,7 +357,7 @@ sub install {
     my @all_files = map { $from_file->($_, $expand eq 'glob', $expand ne 'rpm') } @files;
    
     my @options = (
-	if_($copy_mode ne 'keep-links', '--dereference'),
+#	if_($copy_mode ne 'keep-links', '--dereference'),
     );
     if (@all_files) {
 	copy_and_filter($working_dir, $to_dir, \@all_files, $env->{filter}, $env->{to}{flatten}, @options);
