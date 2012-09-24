@@ -51,12 +51,14 @@
   ping hostname ifconfig route
 
   fdformat badblocks
-  mkswap swapoff swapon
-  e2fsck fsck.ext2 fsck.ext3 fsck.ext4
-  mke2fs mkfs.ext2 mkfs.ext3 mkfs.ext4
-  dumpe2fs tune2fs resize2fs debugfs
+  <mode copy="system">
 
-  mkfs.reiserfs resize_reiserfs reiserfstune reiserfsck
+    mkswap swaplabel mke2fs mkfs.ext2 mkfs.ext3 mkfs.ext4 e2fsck fsck.ext2 fsck.ext3 fsck.ext4
+    tune2fs dumpe2fs resize2fs
+
+    mkfs.reiserfs resize_reiserfs reiserfstune reiserfsck
+  </mode>
+
   mkfs.xfs xfs_admin xfs_repair fsck.xfs
   mkfs.ntfs mkdosfs dosfslabel mkntfs ntfsresize ntfslabel
   mkfs.nilfs2 nilfs-tune
@@ -138,7 +140,9 @@
     silo
   </if>
 
-  blkid
+  <mode copy="system">
+    blkid
+  </mode>
 
 </from>
 
