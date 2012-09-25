@@ -68,7 +68,7 @@
   screen
 
   quotacheck
-  cryptsetup dmsetup
+  cryptsetup
 
   <if ARCH="ppc">
     hformat
@@ -87,11 +87,8 @@
     pdisk 
   </if>
   dump dump.ext2 restore restore.ext2 dump.ext3 restore.ext3 dump.xfs restore.xfs
-  parted partprobe
 
-  udevadm
-
-  mdadm lvm2
+  mdadm
   mdmon kpartx
   dmevent_tool
   dmeventd
@@ -140,12 +137,23 @@
   <if ARCH="sparc">
     silo
   </if>
-
-  <mode copy="system">
+</from>
+<from dir="/usr/uclibc/sbin">
+  <to dir="/sbin">
     blkid
-  </mode>
+    dmeventd
+    dmsetup lvm2
+    udevadm
+  </to>
 
 </from>
+
+<from dir="/usr/uclibc/usr/sbin">
+<to dir="/usr/sbin">
+    parted partprobe
+  </to>
+</from>
+
 
 <from dir="/usr/uclibc/usr/sbin">
 	<to dir="/usr/sbin">
