@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+use Carp;
+
 use FileHandle;
 use MDK::Common;
 use XML::Parser;
@@ -25,7 +27,7 @@ if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 }
 
-# $verbose = 1;
+ $verbose = 1;
 
 my $initial_dir = cwd();
 my $ARCH = arch() =~ /i.86/ ? 'i386' : arch();
@@ -50,6 +52,9 @@ install_needed_libraries();
 
 final_cleanup();
 
+sub __ { print @_, "\n"; system(@_) }
+sub _ { __ @_; $? and croak "'" . join(' ', @_) . "failed ($?)\n" }
+
 sub error {
     my ($err) = @_;
     warn "FATAL: $err\n";
@@ -59,6 +64,20 @@ sub error {
 sub final_cleanup() {
     #- cpio creates directory 700, that's not nice
     system("find $DEST -type d -print0 | xargs -0 $sudo chmod 755");
+
+    # ugly, but whatever, no intentions on keep using this ugly tool in the future anyways..
+    _ "
+for dir in /bin /sbin /usr/bin /usr/sbin; do
+	echo $DEST/usr/uclibc\$dir >&2
+	echo jejeje... >&2
+	[ ! -d $DEST/usr/uclibc/\$dir ] && continue
+	[ ! -d $DEST$dir ] && mkdir -p $DEST$dir
+	for f in `find -L $DEST/usr/uclibc\$dir/ -type f`; do
+		echo mv \$f $DEST\$dir
+		mv \$f $DEST\$dir
+	done
+	rmdir $DEST7usr/uclibc/\$dir
+done";
 }
 
 sub handle_nodes {
@@ -276,7 +295,7 @@ sub install {
 
     } elsif ($expand eq 'binary') {
 	$disallow_from_dir->();
-	my @PATH = qw(/sbin /bin /usr/bin /usr/sbin /usr/X11R6/bin);
+	my @PATH = qw(/usr/uclibc/sbin /usr/uclibc/bin /usr/uclibc/usr/bin /usr/uclibc/usr/sbin /sbin /bin /usr/bin /usr/sbin);
 	foreach my $name (map { expand_macros($_) } @text_l) {
 	    if (grep {$_ eq $name } @busybox_funct) {
 		if ($copy_mode eq 'system') {
