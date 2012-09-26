@@ -27,7 +27,7 @@ if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 }
 
- $verbose = 1;
+# $verbose = 1;
 
 my $initial_dir = cwd();
 my $ARCH = arch() =~ /i.86/ ? 'i386' : arch();
@@ -68,12 +68,9 @@ sub final_cleanup() {
     # ugly, but whatever, no intentions on keep using this ugly tool in the future anyways..
     _ "
 for dir in /bin /sbin /usr/bin /usr/sbin; do
-	echo $DEST/usr/uclibc\$dir >&2
-	echo jejeje... >&2
 	[ ! -d $DEST/usr/uclibc/\$dir ] && continue
 	[ ! -d $DEST$dir ] && mkdir -p $DEST$dir
 	for f in `find -L $DEST/usr/uclibc\$dir/ -type f`; do
-		echo mv \$f $DEST\$dir
 		mv \$f $DEST\$dir
 	done
 	rmdir $DEST7usr/uclibc/\$dir
