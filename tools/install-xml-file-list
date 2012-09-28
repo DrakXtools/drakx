@@ -374,6 +374,7 @@ sub install {
    
     my @options = (
 #	if_($copy_mode ne 'keep-links', '--dereference'),
+	if_($copy_mode eq 'dereference', '--dereference'),
     );
     if (@all_files) {
 	copy_and_filter($working_dir, $to_dir, \@all_files, $env->{filter}, $env->{to}{flatten}, @options);
