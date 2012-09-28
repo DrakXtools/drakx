@@ -243,7 +243,13 @@
   </if>
   <!-- needed by mlabel used during Flash upgrades -->
   /usr/LIB/gconv/IBM850.so
-
+  
+  <if ARCH="i.86">
+     /usr/uclibc/lib/ld-uClibc.so.0
+  </if>
+  <if ARCH="x86_64">
+     /usr/uclibc/lib64/ld64-uClibc.so.0
+  </if>
 
   /usr/lib/rpm/macros
   /usr/lib/rpm/cpuinfo.yaml
