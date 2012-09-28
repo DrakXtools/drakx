@@ -50,12 +50,31 @@
 
   ping hostname ifconfig route
 
-  fdformat badblocks
+  fdformat
   swapon swapoff
-  <mode copy="system">
 
-    mkswap swaplabel mke2fs mkfs.ext2 mkfs.ext3 mkfs.ext4 e2fsck fsck.ext2 fsck.ext3 fsck.ext4
-    tune2fs dumpe2fs resize2fs
+
+  <mode copy="system">
+    dropbearmulti
+    pppd
+    pppoe
+
+    parted partprobe
+
+    partimage
+
+    sfdisk quotacheck mkswap swaplabel setterm
+
+    blkid
+    dmeventd
+    dmsetup lvm2
+    udevadm
+
+    mke2fs mkfs.ext2 mkfs.ext3 mkfs.ext4
+    e2fsck fsck.ext2 fsck.ext3 fsck.ext4
+    tune2fs dumpe2fs resize2fs badblocks
+
+    mkswap swaplabel resize2fs
 
     mkfs.reiserfs resize_reiserfs reiserfstune reiserfsck
   </mode>
@@ -103,7 +122,7 @@
   setserial
   mt stinit
 
-  lspci lspcidrake
+  lspci
 
   rpm
   db52_verify
@@ -138,28 +157,6 @@
     silo
   </if>
 </from>
-<from dir="/usr/uclibc/sbin">
-  <to dir="/sbin">
-    blkid
-    dmeventd
-    dmsetup lvm2
-    udevadm
-  </to>
-
-</from>
-
-<from dir="/usr/uclibc/usr/sbin">
-<to dir="/usr/sbin">
-    parted partprobe
-  </to>
-</from>
-
-
-<from dir="/usr/uclibc/usr/sbin">
-	<to dir="/usr/sbin">
-		partimage
-	</to>
-</from>
 
 <from dir="../images/setup">
 	<to dir="/etc">
@@ -182,19 +179,6 @@
 	<to dir="/sbin">
 		stage1
 	</to>
-</from>
-
-<from dir="/usr/uclibc/sbin">
-	<to dir="/sbin">
-		pppd
-		pppoe
-	</to>
-</from>
-
-<from dir="/usr/uclibc/usr/bin">
-  <to dir="/usr/bin">
-    dropbearmulti
-  </to>
 </from>
 
 <from dir="bkeymaps">
