@@ -55,6 +55,8 @@
 
 
   <mode copy="system">
+    ntfs-3g mount.ntfs-3g
+
     dropbearmulti
     pppd
     pppoe
@@ -243,8 +245,6 @@
   /usr/LIB/gconv/IBM850.so
 
 
-  /sbin/mount.ntfs-3g <!-- can not be expanded as binary, not executable for all users -->
-
   /usr/lib/rpm/macros
   /usr/lib/rpm/cpuinfo.yaml
   /usr/lib/rpm/macros.d/mandriva
@@ -331,7 +331,6 @@
   libresolv.so.2
   ld-linux*.so.2
   <!-- needed for mount.ntfs-3g -->
-  libfuse.so.2
 
   <!-- needed by dmraid -->
   libdmraid-events-isw.so
