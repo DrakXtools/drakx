@@ -290,6 +290,7 @@ EOF
     }
     my $comp = $compress_filter ? $compress_filter : "xz --x86 --lzma2 -v9e --check=crc32";
 
+    mkdir_p(dirname("$ENV{PWD}/$img"));
     _ "(cd $tmp_initrd; find . | cpio -o -H newc --quiet) | $comp > $ENV{PWD}/$img";
     _ "rm -rf $tmp";
     }
@@ -312,6 +313,7 @@ sub modules {
     }
     my $comp = $compress_filter ? $compress_filter : "xz -v9e --check=crc32";
 
+    mkdir_p(dirname("$ENV{PWD}/$img"));
     _ "(cd $tmp_initrd; find . | cpio -o -H newc --quiet) | $comp > $ENV{PWD}/$img";
     _ "rm -rf $tmp_initrd";
 }
