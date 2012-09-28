@@ -69,11 +69,11 @@ sub final_cleanup() {
     _ "
 for dir in /bin /sbin /usr/bin /usr/sbin; do
 	[ ! -d $DEST/usr/uclibc/\$dir ] && continue
-	[ ! -d $DEST$dir ] && mkdir -p $DEST$dir
-	for f in `find -L $DEST/usr/uclibc\$dir/ -type f`; do
+	[ ! -d $DEST\$dir ] && mkdir -p $DEST\$dir
+	for f in `find $DEST/usr/uclibc\$dir/ \\( -type f -o -type l \\)`; do
 		mv \$f $DEST\$dir
 	done
-	rmdir $DEST7usr/uclibc/\$dir
+	rmdir $DEST/usr/uclibc/\$dir
 done";
 }
 
