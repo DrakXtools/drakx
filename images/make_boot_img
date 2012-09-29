@@ -72,9 +72,9 @@ if ($target eq "hd_grub.img") {
 } elsif ($target eq 'all.rdz') {
 	initrd('all', '', $ARGV[0]);
 } elsif ($target eq 'modules.rdz') {
-	isolinux("isolinux", \@kernels);
-} elsif ($target eq 'isolinux') {
-	isolinux($ARGV[0], \@kernels);
+	grub("grub", \@kernels);
+} elsif ($target eq 'grub') {
+	grub($ARGV[0], \@kernels);
 } elsif ($target eq "boot.iso") {
 	boot_iso($ARGV[0], \@kernels);
 }
@@ -185,6 +185,67 @@ EOF
     } @$entries;
 
     $header . ($b_gfxboot ? $header_gfxboot : $header_non_gfxboot) . join('', @l);
+}
+
+sub grub_cfg {
+    my ($entries, $b_gfxboot, $type) = @_;
+    my $default = 'linux';
+
+    my $header = "default $default\n";
+    if ($type ne 'cdrom') {
+	$header .= <<EOF;
+prompt 1
+timeout $timeout
+display help.msg
+implicit 1
+EOF
+    }
+
+    $header .= <<EOF;
+label harddisk
+  localboot 0x80
+EOF
+
+    my $header_gfxboot = <<EOF;
+UI gfxboot.c32 bootlogo
+EOF
+
+    my $header_non_gfxboot = <<EOF;
+F1 help.msg
+F2 advanced.msg
+F3 boot.msg
+EOF
+
+    my @l = map {
+	$_->{append} =~ s/\s+/ /g;
+	"label $_->{label}\n" .
+	"  kernel $_->{kernel}\n" .
+	($_->{initrd} ? "  append initrd=$_->{initrd} $_->{append}\n" : '');
+    } @$entries;
+
+    $header . ($b_gfxboot ? $header_gfxboot : $header_non_gfxboot) . join('', @l);
+}
+
+sub grub {
+    my ($dir, $kernels) = @_;
+
+    _ "install -m644 grub_data/grub.cfg -D $dir/boot/grub/grub.cfg";
+    _ "install -m644 grub_data/themes/moondrake/theme.txt -D $dir/boot/grub/themes/moondrake/theme.txt";
+    _ "install -m644 grub_data/themes/moondrake/star_w.png -D $dir/boot/grub/themes/moondrake/star_w.png";
+    _ "install -m644 /usr/share/gfxboot/themes/Mandriva/install/back.jpg -D $dir/boot/grub/themes/moondrake/background.jpg";
+    mkdir_p("$dir/boot/grub/fonts/");
+    _ "grub2-mkfont -o $dir/boot/grub/fonts/dejavu.pf2 /usr/share/fonts/TTF/dejavu/DejaVuSans-Bold.ttf";
+
+    @$kernels or die "grub: no kernel\n";
+
+    each_index {
+	mkdir "$dir/boot/alt$::i/$wordsize", 0755;
+	_ "install -m644 all.kernels/$_/vmlinuz -D $dir/boot/alt$::i/$wordsize/vmlinuz";
+	modules('all', "$_", "images/modules.rdz-$_");
+	rename("images/modules.rdz-$_", "$dir/boot/alt$::i/$wordsize/modules.rdz");
+    } @$kernels;
+
+    _ "install -m 644 -D /boot/memtest* $dir/boot/memtest";
 }
 
 sub initrd {
@@ -856,6 +917,14 @@ EOF
 }
 
 sub boot_iso {
+    my ($iso, $kernels) = @_;
+
+    output('grub/VERSION', VERSION($kernels));	   
+   
+    _ "grub2-mkrescue -o $iso grub";
+}
+
+sub boot_iso_old {
     my ($iso, $kernels) = @_;
 
     _ "

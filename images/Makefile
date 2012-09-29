@@ -16,7 +16,7 @@ ifeq (1, $(USE_LOCAL_STAGE1))
 STAGE1_BINS = ../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage/lspcidrake
 endif
 
-images: images/hd_grub.img images/hd_grub.img images/boot.iso isolinux/alt0/$(WORDSIZE)/modules.rdz
+images: images/hd_grub.img images/hd_grub.img images/boot.iso grub/boot/alt0/$(WORDSIZE)/modules.rdz
 
 
 #../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage1/lspcidrake:
@@ -26,14 +26,14 @@ $(STAGE1_BINS):
 images/hd_grub.img:
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
 
-isolinux/all.rdz: list.xml make_boot_img guessmounts rescue-doc
+grub/boot/all.rdz: list.xml make_boot_img guessmounts rescue-doc
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
 
-images/boot.iso: isolinux/all.rdz isolinux/alt0/$(WORDSIZE)/modules.rdz
+images/boot.iso: grub/boot/all.rdz grub/boot/alt0/$(WORDSIZE)/modules.rdz
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
 	cd images; md5sum boot.iso > MD5SUM
 
-isolinux/alt0/$(WORDSIZE)/modules.rdz: all.kernels/.list
+grub/boot/alt0/$(WORDSIZE)/modules.rdz: grub_data/grub.cfg grub_data/themes/moondrake/theme.txt grub_data/themes/moondrake/star_w.png all.kernels/.list
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
 
 all.kernels/.list: update_kernel ../kernel/list_modules.pm
@@ -65,7 +65,7 @@ dist-git:
 	@cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD images kernel Makefile.config | xz >images/$(PRODUCT)-$(VERSION).tar.xz;
 
 clean:
-	rm -rf images isolinux all.kernels modules.description
+	rm -rf images grub all.kernels modules.description
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
 install:
@@ -73,6 +73,6 @@ install:
 	rm -rf $(DESTDIR)$(IMAGES_DEST)/alternatives 
 	cp -r images/* $(DESTDIR)$(IMAGES_DEST)
 ifneq (,$(findstring $(ARCH), i386 x86_64))
-	rm -rf $(DESTDIR)$(ROOTDEST)/isolinux
-	cp -af isolinux $(DESTDIR)$(ROOTDEST)
+	rm -rf $(DESTDIR)$(ROOTDEST)/grub
+	cp -af grub $(DESTDIR)$(ROOTDEST)
 endif
