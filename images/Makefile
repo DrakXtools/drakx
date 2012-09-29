@@ -31,7 +31,7 @@ isolinux/all.rdz: list.xml make_boot_img guessmounts rescue-doc
 
 images/boot.iso: isolinux/all.rdz isolinux/alt0/$(WORDSIZE)/modules.rdz
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
-	cd images; md5sum *.{img,iso}* > MD5SUM
+	cd images; md5sum boot.iso > MD5SUM
 
 isolinux/alt0/$(WORDSIZE)/modules.rdz: all.kernels/.list
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
