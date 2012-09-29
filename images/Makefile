@@ -17,11 +17,7 @@ STAGE1_BINS = ../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage
 endif
 
 images: images/hd_grub.img images/hd_grub.img images/boot.iso isolinux/alt0/$(WORDSIZE)/modules.rdz
-	rm -rf images/alternatives 
-	if [ `ls images/*.img-* 2>/dev/null | wc -l` -gt 0 ]; then	\
-	  mkdir images/alternatives; cd images/alternatives; mv ../*.img-* .; md5sum *.img-* > MD5SUM; \
-	fi
-	cd images; md5sum *.{img,iso}* > MD5SUM
+
 
 #../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage1/lspcidrake:
 $(STAGE1_BINS):
@@ -35,6 +31,7 @@ isolinux/all.rdz: list.xml make_boot_img guessmounts rescue-doc
 
 images/boot.iso: isolinux/all.rdz isolinux/alt0/$(WORDSIZE)/modules.rdz
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
+	cd images; md5sum *.{img,iso}* > MD5SUM
 
 isolinux/alt0/$(WORDSIZE)/modules.rdz: all.kernels/.list
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
