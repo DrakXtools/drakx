@@ -21,6 +21,8 @@ ARCH := $(patsubst arm%,arm,$(ARCH))
 
 # DEBUG = 1
 
+DYNAMIC = 1
+
  #- default frontend is newt (honoured by main Makefile whenever possible)
 ifdef DEBUG
 FRONTEND = stdio

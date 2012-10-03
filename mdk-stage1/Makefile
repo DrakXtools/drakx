@@ -77,10 +77,10 @@ FRONTEND_LIBS =
  #- frontends
 #ifeq (newt, $(FRONTEND))
 #FRONTEND_SRC += newt-frontend.c
-ifndef DYNAMIC
-SLANG_SRC = slang/slang.c slang/slarith.c slang/slarray.c slang/slarrfun.c slang/slarrmis.c slang/slassoc.c slang/slboseos.c slang/slbstr.c slang/slclass.c slang/slcmd.c slang/slcmplex.c slang/slcommon.c slang/slcompat.c slang/slcurses.c slang/sldisply.c slang/slerrno.c slang/slerr.c slang/slexcept.c slang/slfpu.c slang/slgetkey.c slang/slintall.c slang/slischar.c slang/slistruc.c slang/slkeymap.c slang/slkeypad.c slang/sllist.c slang/sllower.c slang/slmalloc.c slang/slmath.c slang/slmemchr.c slang/slmemcmp.c slang/slmemcpy.c slang/slmemset.c slang/slmisc.c slang/slnspace.c slang/slospath.c slang/slpack.c slang/slparse.c slang/slpath.c slang/slposdir.c slang/slposio.c slang/slprepr.c slang/slproc.c slang/slregexp.c slang/slrline.c slang/slscanf.c slang/slscroll.c slang/slsearch.c slang/slsignal.c slang/slsig.c slang/slsmg.c slang/slstdio.c slang/slstd.c slang/slstring.c slang/slstrops.c slang/slstruct.c slang/sltermin.c slang/sltime.c slang/sltoken.c slang/sltypes.c slang/slupper.c slang/slutf8.c slang/slutty.c slang/slwclut.c slang/slwcwidth.c slang/slxstrng.c
-INCLUDES += -Islang
+#SLANG_SRC = slang/slang.c slang/slarith.c slang/slarray.c slang/slarrfun.c slang/slarrmis.c slang/slassoc.c slang/slboseos.c slang/slbstr.c slang/slclass.c slang/slcmd.c slang/slcmplex.c slang/slcommon.c slang/slcompat.c slang/slcurses.c slang/sldisply.c slang/slerrno.c slang/slerr.c slang/slexcept.c slang/slfpu.c slang/slgetkey.c slang/slintall.c slang/slischar.c slang/slistruc.c slang/slkeymap.c slang/slkeypad.c slang/sllist.c slang/sllower.c slang/slmalloc.c slang/slmath.c slang/slmemchr.c slang/slmemcmp.c slang/slmemcpy.c slang/slmemset.c slang/slmisc.c slang/slnspace.c slang/slospath.c slang/slpack.c slang/slparse.c slang/slpath.c slang/slposdir.c slang/slposio.c slang/slprepr.c slang/slproc.c slang/slregexp.c slang/slrline.c slang/slscanf.c slang/slscroll.c slang/slsearch.c slang/slsignal.c slang/slsig.c slang/slsmg.c slang/slstdio.c slang/slstd.c slang/slstring.c slang/slstrops.c slang/slstruct.c slang/sltermin.c slang/sltime.c slang/sltoken.c slang/sltypes.c slang/slupper.c slang/slutf8.c slang/slutty.c slang/slwclut.c slang/slwcwidth.c slang/slxstrng.c
+#INCLUDES += -Islang
 
+ifndef DYNAMIC
 NEWT_SRC = newt/buttonbar.c newt/button.c  newt/checkbox.c  newt/checkboxtree.c  newt/entry.c  newt/form.c  newt/grid.c newt/label.c   newt/scale.c newt/scrollbar.c	newt/textbox.c	newt/windows.c newt/newt.c  newt/listbox.c
 FRONTEND_SRC += $(NEWT_SRC) $(SLANG_SRC)
 
@@ -98,26 +98,25 @@ LIBSYSFS_SRC = libsysfs/dlist.c libsysfs/sysfs_attr.c libsysfs/sysfs_device.c li
 LOCAL_SRC += $(LIBSYSFS_SRC) 
 INCLUDES += -Ilibsysfs
 
+else
+FRONTEND_LIBS += -lnewt
+endif
+#else
+#FRONTEND_SRC += stdio-frontend.c
+#endif
+
 SERIAL_PROBE_SRC = serial.c serial_probe.c
 LOCAL_SRC += $(SERIAL_PROBE_SRC)
 
 BINS_SRC = drvinst.c probe-modules.c rescue-gui.c ldetect/lspcidrake.c hotplug.c
 LOCAL_SRC += $(BINS_SRC)
 
-else
-FRONTEND_LIBS += -Wl,-Bstatic -lnewt -lslang -Wl,-Bdynamic
-endif
-#else
-#FRONTEND_SRC += stdio-frontend.c
-#endif
-
-
 FRONTEND_OBJS = $(subst .c,.o,$(FRONTEND_SRC))
 
 ifndef DYNAMIC
 STAGE1_LIBS = -lm
 else
-STAGE1_LIBS = -Wl,-Bdynamic -Wl,-Bstatic -lkmod -lpci -lsysfs -Wl,-Bdynamic
+STAGE1_LIBS = -Wl,-Bdynamic -lm -lkmod -lpci -lsysfs
 endif
 
 STAGE1_NETWORK_LIBS =
