@@ -1,5 +1,11 @@
 #!/bin/sh
 
+if [ "`arch`" = "x86_64" ]; then
+    wordsize=64
+else
+    wordsize=32
+fi
+
 initrd() {
     if [ -n "$USE_LOCAL_STAGE1" ]; then
 	stage1_root=../mdk-stage1
@@ -119,27 +125,54 @@ EOF
 }
 
 modules() {
+    out=$1
+    I=$2
     mkdir -p "$tmp_initrd/modules"
-    for I in `cat all.kernels/.list`; do 
-	modz="all.kernels/$I";
-	mkdir -p "$tmp_initrd/lib/modules/$I"
-	tar xC "$tmp_initrd/lib/modules/$I" -f "$modz/all_modules.tar"
-	for n in order builtin; do
+    modz="all.kernels/$I";
+    mkdir -p "$tmp_initrd/lib/modules/$I"
+    tar xC "$tmp_initrd/lib/modules/$I" -f "$modz/all_modules.tar"
+    for n in order builtin; do
 	    cp -f $modz/modules.$n "$tmp_initrd/lib/modules/$I"
-	done
-	sed -e 's#.*/##g' -i "$tmp_initrd/lib/modules/$I/modules.order"
-	/sbin/depmod -b "$tmp_initrd" $I
-	# depmod keeps only available modules in modules.alias, but we want them all
-	cp -f $modz/modules.alias "$tmp_initrd/lib/modules/$I";
-
-	if [ -z "$COMPRESS" ]; then
-	    COMPRESS="xz --lzma2 -v9e --check=crc32"
-	fi
-
-	mkdir -p "`dirname \"$img\"`"
-	(cd "$tmp_initrd"; find . | cpio -o -H newc --quiet) | $COMPRESS > "$img"
-	rm -rf "$tmp_initrd"
     done
+    sed -e 's#.*/##g' -i "$tmp_initrd/lib/modules/$I/modules.order"
+    /sbin/depmod -b "$tmp_initrd" $I
+    # depmod keeps only available modules in modules.alias, but we want them all
+    cp -f $modz/modules.alias "$tmp_initrd/lib/modules/$I";
+
+    if [ -z "$COMPRESS" ]; then
+	    COMPRESS="xz --lzma2 -v9e --check=crc32"
+    fi
+
+    mkdir -p "`dirname \"$out\"`"
+    (cd "$tmp_initrd"; find . | cpio -o -H newc --quiet) | $COMPRESS > "$out"
+    rm -rf "$tmp_initrd"
+}
+
+grub() {
+    dir=$1
+    install -m644 grub_data/grub.cfg -D "$dir/boot/grub/grub.cfg"
+    install -m644 grub_data/themes/moondrake/theme.txt -D "$dir/boot/grub/themes/moondrake/theme.txt"
+    install -m644 grub_data/themes/moondrake/star_w.png -D "$dir/boot/grub/themes/moondrake/star_w.png"
+    install -m644 /usr/share/gfxboot/themes/Mandriva/install/back.jpg -D "$dir/boot/grub/themes/moondrake/background.jpg"
+    mkdir -p "$dir/boot/grub/fonts/"
+    grub2-mkfont -o "$dir/boot/grub/fonts/dejavu.pf2" /usr/share/fonts/TTF/dejavu/DejaVuSans-Bold.ttf;
+
+
+    if [ ! -s all.kernels/.list ]; then
+	    echo grub: no kernel >&2
+    fi
+
+    N=0
+    for I in `cat all.kernels/.list`; do
+	path="$dir/boot/alt$N"
+	N=$((N+1))
+	mkdir -p "$path"
+	install -m644 all.kernels/$I/vmlinuz -D $path/$wordsize/vmlinuz
+	modules images/modules.rdz-$I $I
+	mv "images/modules.rdz-$_" "$path/$wordsize/modules.rdz"
+    done
+
+    install -m644 /boot/memtest* -D $dir/boot/memtest
 }
 
 img="$1"
@@ -152,5 +185,7 @@ rm -rf "$tmp_initrd"
 if [ "$filename" = "all.rdz" ]; then
     initrd
 elif [ "$filename" = "modules.rdz" ]; then
-    modules
+    modules $1
+elif [ "$filename" = "grub" ]; then
+    grub $1
 fi
