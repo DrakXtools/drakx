@@ -24,17 +24,17 @@ $(STAGE1_BINS):
 	make -C ../mdk-stage1 $(shell basename $@)
 
 images/hd_grub.img:
-	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
+	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img.pl --compress "$(COMPRESS)" $@
 
 grub/boot/all.rdz: list.xml make_boot_img guessmounts rescue-doc
-	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
+	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
 
 images/boot.iso: grub/boot/all.rdz grub/boot/alt0/$(WORDSIZE)/modules.rdz
-	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
+	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
 	cd images; md5sum boot.iso > MD5SUM
 
 grub/boot/alt0/$(WORDSIZE)/modules.rdz: grub_data/grub.cfg grub_data/themes/moondrake/theme.txt grub_data/themes/moondrake/star_w.png all.kernels/.list
-	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img --compress "$(COMPRESS)" $@
+	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
 
 all.kernels/.list: update_kernel ../kernel/list_modules.pm
 	./update_kernel $(KERNELS)
