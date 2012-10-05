@@ -168,7 +168,9 @@ grub() {
 	N=$((N+1))
 	mkdir -p "$path"
 	install -m644 all.kernels/$I/vmlinuz -D $path/$wordsize/vmlinuz
-	modules "$path/$wordsize/modules.rdz" $I
+	if [ ! -s "$path/$wordsize/modules.rdz" ]; then
+    	    modules "$path/$wordsize/modules.rdz" $I
+	fi
     done
 
     install -m644 /boot/memtest* -D $dir/boot/memtest
