@@ -583,8 +583,6 @@ sub main {
 
     init_path();
 
-    eval { install::any::spawnShell() };
-
     init_modules_conf();
 
     #- done before auto_install is called to allow the -IP feature on auto_install file name
