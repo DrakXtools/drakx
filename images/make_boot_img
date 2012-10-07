@@ -194,7 +194,9 @@ rm -rf "$tmp_initrd"
 if [ "$filename" = "all.rdz" ]; then
     initrd
 elif [ "$filename" = "modules.rdz" ]; then
-    modules $1
+    for I in `cat all.kernels/.list`; do
+    	modules $1 $I
+    done
 elif [ "$filename" = "grub" ]; then
     grub $1
 elif [ "$filename" = "boot.iso" ]; then
