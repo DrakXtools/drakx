@@ -204,14 +204,21 @@ enum return_type may_load_compressed_image(void)
 	if (!IS_RESCUE && access(IMAGE_LOCATION "/" LIVE_LOCATION_REL, R_OK) == 0) {
 		/* LIVE install */
 		return RETURN_OK;
-	} else {
+	}
+#if 0
+	/* dead, we're no longer using squashfs image, but rather a compressed cpio archive in stead now */
+       	else {
 		/* compressed install */
 		return mount_compressed_image_may_preload(COMPRESSED_NAME(""), STAGE2_LOCATION, compressed_image_preload());
 	}
+#else
+	return RETURN_OK;
+#endif
 }
 
 enum return_type load_compressed_fd(int fd, int size)
 {
+	/* TODO: handle cpio archive in stead of squashfs image */
 	return preload_mount_compressed_fd(fd, size, COMPRESSED_NAME(""), STAGE2_LOCATION);
 }
 
