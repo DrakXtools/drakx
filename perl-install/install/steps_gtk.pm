@@ -123,7 +123,8 @@ sub _launchX {
 
     if (!fork()) {
         c::setsid();
-        exec $server, @options or c::_exit(1);
+        system($server, @options);
+	c::_exit(1);
     }
 
     #- wait for the server to start
