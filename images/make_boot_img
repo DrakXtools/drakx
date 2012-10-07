@@ -48,7 +48,7 @@ initrd() {
 
     [1;37;40mRescue Disk[0m
 
-    $ENV{DISTRIB_DESCR}
+    $DISTRIB_DESCR
 
     Use [1;33;40mloadkeys[0m to change your keyboard layout (eg: loadkeys fr)
     Use [1;33;40mmodprobe[0m to load modules (eg: modprobe snd-card-fm801)
@@ -155,7 +155,7 @@ grub() {
     install -m644 grub_data/themes/moondrake/star_w.png -D "$dir/boot/grub/themes/moondrake/star_w.png"
     install -m644 /usr/share/gfxboot/themes/Mandriva/install/back.jpg -D "$dir/boot/grub/themes/moondrake/background.jpg"
     mkdir -p "$dir/boot/grub/fonts/"
-    grub2-mkfont -o "$dir/boot/grub/fonts/dejavu.pf2" /usr/share/fonts/TTF/dejavu/DejaVuSans-Bold.ttf;
+    grub2-mkfont -o "$dir/boot/grub/fonts/dejavu.pf2" /usr/share/fonts/TTF/dejavu/DejaVuSans-Bold.ttf
 
 
     if [ ! -s all.kernels/.list ]; then
