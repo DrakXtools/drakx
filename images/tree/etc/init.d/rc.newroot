@@ -20,6 +20,7 @@ fi
 
 if [ -x /usr/bin/runinstall2 ]; then
 	sed -e 's|^tty1::once:.*|tty1::respawn:/usr/bin/runinstall2|g' -i /etc/inittab
+else
+	# this gets done by stage1 otherwise..
+	kill -SIGHUP 1
 fi
-
-kill -SIGHUP 1
