@@ -90,8 +90,7 @@ full_stage2:
 
 compress:
 	# simple & ugly hack for now..
-	for i in `cat all.rdz.txt`; do test -f $(DESTDIR)/$(STAGE2_DEST)/live/$$i && rm -f $(DESTDIR)/$(STAGE2_DEST)/live/$$i; true; done
-	../../tools/mdkinst_stage2_tool --clean --compress $(DESTDIR)$(STAGE2_DEST)
+	(cd $(DESTDIR)$(STAGE2_DEST)/live; find | cpio -o -H newc|xz --x86 --lzma2 -ve --check=crc32) > $(DESTDIR)$(STAGE2_DEST)/mdkinst.cpio.xz
 
 stage2:
 	rm -rf $(DESTDIR)$(DEST)

@@ -35,7 +35,7 @@
 
 #define LIVE_LOCATION_REL "install/stage2/live/"
 #define COMPRESSED_LOCATION_REL  "install/stage2/"
-#define COMPRESSED_STAGE2_NAME "mdkinst.sqfs"
+#define COMPRESSED_STAGE2_NAME "mdkinst.cpio.xz"
 #define COMPRESSED_RESCUE_NAME "rescue.sqfs"
 #define COMPRESSED_NAME(prefix) (IS_RESCUE ? prefix COMPRESSED_RESCUE_NAME : prefix COMPRESSED_STAGE2_NAME)
 #define COMPRESSED_FILE_REL(prefix) COMPRESSED_NAME(prefix COMPRESSED_LOCATION_REL)
