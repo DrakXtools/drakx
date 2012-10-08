@@ -2,13 +2,19 @@ import os,perl
 perl.require("URPM")
 
 class IsoImage(object):
-    def __init__(self, name, version, arch, media, includelist, excludelist, repopath = None):
+    def __init__(self, name, version, branch, arch, media, includelist, excludelist, repopath = None):
         self.name = name
         self.version = version
+        self.branch = branch
         self.arch = arch
-        self.media = media
+        self.media = {}
+        for m in media:
+            self.media[m.name] = m
+
         if (repopath):
             self.repopath = repopath
+        else:
+            self.repopath = "/mnt/BIG/distrib/%s/%s/%s" % (self.branch, self.version, self.arch)
 
         includes = []
         for pkglf in includelist:
@@ -29,8 +35,8 @@ class IsoImage(object):
         db = perl.call("URPM::DB::open", "/tmp/rpmdb", 0)
 
         urpm = perl.callm("new", "URPM");
-        for media in self.media:
-            synthesis = "%s/%s/%s/%s" % (self.repopath, self.version, self.arch, media.getSynthesis())
+        for m in self.media.keys():
+            synthesis = self.repopath + "/" + self.media[m].getSynthesis()
             urpm.parse_synthesis(synthesis) 
 
         pattern = ""
@@ -48,31 +54,33 @@ class IsoImage(object):
 
         allpkgs = urpm.resolve_requested__no_suggests_(db, None, cand_pkgs_filtered, __wantarray__ = 1)
 
-        pkgs = {}
         os.system("rm -rf ut")
-        for media in self.media:
-            pkgs[media.name] = []
-            os.system("mkdir -p ut/media/" + media.name)
+        for m in self.media.keys():
+            os.system("mkdir -p ut/media/" + self.media[m].name)
 
             for pkg in allpkgs:
                 if self._shouldExclude(pkg.name()):
                     continue
 
-                source = "%s/%s/%s/media/%s/release/%s.rpm" % (self.repopath, self.version, self.arch, media.name, pkg.fullname())
+                source = "%s/media/%s/release/%s.rpm" % (self.repopath, self.media[m].name, pkg.fullname())
                 if os.path.exists(source):
-                    target = "ut/media/%s/%s.rpm" % (media.name, pkg.fullname())
+                    target = "ut/media/%s/%s.rpm" % (self.media[m].name, pkg.fullname())
                     if not os.path.islink(target):
-                        pkgs[media.name].append(source)
+                        self.media[m].pkgs.append(source)
                         os.symlink(source, target)
+                        s = os.stat(source)
+                        self.media[m].size += s.st_size
 
-            for pkg in pkgs[media.name]:
-                media.pkgs.append(pkg)
-
-            os.system("genhdlist2 ut/media/" + media.name)
-            for (path, dirs, files) in os.walk("ut/media" + media.name):
+            os.system("genhdlist2 ut/media/" + self.media[m].name)
+            for (path, dirs, files) in os.walk("ut/media" + self.media[m].name):
                 for f in files:
                     if f.endswith(".rpm"):
                         os.unlink("%s/%s" % (path,f))
+
+        os.mkdir("ut/media/media_info")
+        f = open("ut/media/media_info/media.cfg", "w")
+        f.write(self.getMediaCfg())
+        f.close()
 
     def _shouldExclude(self, pkgname):
         for exname in self.excludes:
@@ -81,10 +89,24 @@ class IsoImage(object):
                     return True
         return False
 
+    def getMediaCfg(self):
+        mediaCfg = \
+                "[media_info]\n" \
+                "version=%s\n" \
+                "branch=%s\n" \
+                "arch=%s\n" \
+                "minor=%d\n" \
+                "subversion=%d\n" % (self.version, self.branch, self.arch,1,1)
+        # todo: sort keys in a list and iterate over it as keys
+        for name in ['main', 'contrib', 'non-free']:
+            if name in self.media.keys():
+                mediaCfg += self.media[name].getCfgEntry()
+        return mediaCfg
+
     name = None
     version = None
     arch = None
-    repopath = "/mnt/BIG/distrib/devel"
+    repopath = None
     media = []
     excludes = []
 

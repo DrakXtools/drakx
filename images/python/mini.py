@@ -13,4 +13,9 @@ excludelist = []
 for e in ["exclude", "exclude_mini", "exclude_ancient", "exclude_tofix", "exclude_nonfree"]:
     excludelist.append("/home/peroyvind/Dokumenter/mandriva/bcd/lists/" + e)
 
-image = IsoImage("test", "2012", "x86_64", media, includelist, excludelist)
+name = "test"
+version = "2012"
+branch = "devel"
+arch = "x86_64"
+
+image = IsoImage(name, version, branch, arch, media, includelist, excludelist)
