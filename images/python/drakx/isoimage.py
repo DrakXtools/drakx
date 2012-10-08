@@ -39,6 +39,7 @@ class IsoImage(object):
             f.close()
 
 
+        empty_db = perl.callm("new", "URPM")
         urpm = perl.callm("new", "URPM");
         for m in self.media.keys():
             synthesis = self.repopath + "/" + self.media[m].getSynthesis()
@@ -56,10 +57,8 @@ class IsoImage(object):
         my $dep;
         foreach my $pkg (@$choices) {
             if (grep { $_ eq $pkg->name() } @excludes) {
-            print "skipping excluded: " . $pkg->name() . "\n";
                 next;
             }
-            print "pkg: " . $pkg->name() . "\n";
             if (!$dep) {
                 $dep = $pkg;
             } elsif (!$dep->compare_pkg($pkg)) {
@@ -72,7 +71,6 @@ class IsoImage(object):
 
         def search_pkgs(deps):
             perl.call("urpm::select::search_packages", urpm, requested, deps, use_provides=1)
-            empty_db = perl.callm("new", "URPM")
 
             state = perl.get_ref("%")
 
