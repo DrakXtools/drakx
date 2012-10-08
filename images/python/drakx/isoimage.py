@@ -148,7 +148,7 @@ class IsoImage(object):
                 medias += ","
             medias += m
         os.system("smart update %s" % smartopts)
-        os.system("smart check %s --channels=%s" % (smartopts, "main"))
+        os.system("smart check %s --channels=%s" % (smartopts, medias))
         os.system("sleep 5")
 
         # TODO: reimplement clean-rpmsrate in python(?)
