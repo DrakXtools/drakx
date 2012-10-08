@@ -1,5 +1,7 @@
 import shutil,os,perl
 perl.require("URPM")
+perl.require("urpm")
+perl.require("urpm::select")
 
 class IsoImage(object):
     def __init__(self, name, version, branch, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, repopath = None, distribution = "mandriva-linux"):
@@ -36,29 +38,39 @@ class IsoImage(object):
                     self.excludes.append(line)
             f.close()
 
-        db = perl.call("URPM::DB::open", "/tmp/rpmdb", 0)
+        empty_db = perl.callm("new", "URPM")
 
         urpm = perl.callm("new", "URPM");
         for m in self.media.keys():
             synthesis = self.repopath + "/" + self.media[m].getSynthesis()
             urpm.parse_synthesis(synthesis) 
 
-        pattern = ""
-        for pkg in includes:
-            if pattern:
-                pattern += "|"
-            pattern += pkg
+        requested = perl.get_ref("%")
 
-        cand_pkgs = urpm.find_candidate_packages(pattern)
-        cand_pkgs_filtered = {}
-        for key in cand_pkgs.keys():
-            if self._shouldExclude(key):
-                print "skipping1: " + key
-                continue
-            cand_pkgs_filtered[key] = cand_pkgs[key]
+        perl.call("urpm::select::search_packages", urpm, requested, includes, use_provides=1)
 
-        allpkgs = urpm.resolve_requested__no_suggests_(db, None, cand_pkgs_filtered, __wantarray__ = 1)
+        stop_on_choices = perl.eval("$stop_on_choices = sub {"
+                "my (undef, undef, $state_, $choices) = @_;"
+                "$state_->{selected}{join '|', sort { $a <=> $b } map { $_ ? $_->id : () } @$choices} = 0;"
+                "};")
 
+        state = perl.get_ref("%")
+
+        urpm.resolve_requested(empty_db, state, requested, 
+				 no_suggests = 1,
+				 callback_choices = stop_on_choices, nodeps = 1)
+
+        allpkgs = []
+        for pid in state['selected'].keys():
+            pids = pid.split('|')
+            for pid in pids:
+                pid = int(pid)
+                pkg = urpm['depslist'][pid]
+                if self._shouldExclude(pkg.name()):
+                    print "skipping1: %s" % pkg.fullname()
+                    continue
+                allpkgs.append(pkg)
+        
         os.system("rm -rf ut")
         for m in self.media.keys():
             os.system("mkdir -p ut/media/" + self.media[m].name)
