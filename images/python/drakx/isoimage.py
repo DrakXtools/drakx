@@ -38,7 +38,6 @@ class IsoImage(object):
                     self.excludes.append(line)
             f.close()
 
-        empty_db = perl.callm("new", "URPM")
 
         urpm = perl.callm("new", "URPM");
         for m in self.media.keys():
@@ -47,31 +46,74 @@ class IsoImage(object):
 
         requested = perl.get_ref("%")
 
-        perl.call("urpm::select::search_packages", urpm, requested, includes, use_provides=1)
+        perlexc = perl.eval("@excludes = ();")
+        perlexc = perl.get_ref("@excludes")
+        perlexc.extend(self.excludes)
 
-        stop_on_choices = perl.eval("$stop_on_choices = sub {"
-                "my (undef, undef, $state_, $choices) = @_;"
-                "$state_->{selected}{join '|', sort { $a <=> $b } map { $_ ? $_->id : () } @$choices} = 0;"
-                "};")
+        stop_on_choices = perl.eval("""$stop_on_choices = sub {
+        my ($urpm, undef, $state_, $choices, $virtual_pkg_name, $preferred) = @_;
 
-        state = perl.get_ref("%")
+        my $dep;
+        foreach my $pkg (@$choices) {
+            if (grep { $_ eq $pkg->name() } @excludes) {
+            print "skipping excluded: " . $pkg->name() . "\n";
+                next;
+            }
+            print "pkg: " . $pkg->name() . "\n";
+            if (!$dep) {
+                $dep = $pkg;
+            } elsif (!$dep->compare_pkg($pkg)) {
+                $dep = $pkg;
+            }
+        }
 
-        urpm.resolve_requested(empty_db, state, requested, 
-				 no_suggests = 1,
-				 callback_choices = stop_on_choices, nodeps = 1)
+        $state_->{selected}{$dep->id} = 1;
+        }""")
 
-        allpkgs = []
-        for pid in state['selected'].keys():
-            pids = pid.split('|')
-            for pid in pids:
-                pid = int(pid)
-                pkg = urpm['depslist'][pid]
-                if self._shouldExclude(pkg.name()):
-                    print "skipping1: %s" % pkg.fullname()
-                    continue
-                allpkgs.append(pkg)
-        
-        os.system("rm -rf ut")
+        def search_pkgs(deps):
+            perl.call("urpm::select::search_packages", urpm, requested, deps, use_provides=1)
+            empty_db = perl.callm("new", "URPM")
+
+            state = perl.get_ref("%")
+
+            urpm.resolve_requested(empty_db, state, requested, 
+                    no_suggests = 1,
+                    callback_choices = stop_on_choices, nodeps = 1)
+
+            allpkgs = []
+            for pid in state['selected'].keys():
+                pids = pid.split('|')
+            
+                dep = None
+                for pid in pids:
+                    pid = int(pid)
+                    pkg = urpm['depslist'][pid]
+                    if self._shouldExclude(pkg.name()):
+                        print "skipping1: %s" % pkg.fullname()
+                        continue
+                    pkg = urpm['depslist'][pid]
+
+                    if not dep:
+                        dep = pkg
+                    else:
+                        True
+                if dep is None:
+                    print "ouch!"
+                else:
+                    allpkgs.append(dep)
+            return allpkgs
+
+        allpkgs = search_pkgs(includes)
+        # lame, having difficulties figuring out how to properly recursively
+        # resolve dependencies, so just do it manually ofr now..
+        includes = []
+        for p in allpkgs:
+            includes.append(p.name())
+        allpkgs = search_pkgs(includes)
+
+        smartopts = "channel -o sync-urpmi-medialist=no --data-dir smartdata"
+        os.system("rm -rf ut smartdata")
+        os.mkdir("smartdata")
         for m in self.media.keys():
             os.system("mkdir -p ut/media/" + self.media[m].name)
 
@@ -91,11 +133,23 @@ class IsoImage(object):
                         self.media[m].size += s.st_size
             self.media[m].pkgs = pkgs
             os.system("genhdlist2 ut/media/" + self.media[m].name)
+            smartopts = "-o sync-urpmi-medialist=no --data-dir %s/smartdata" % os.getenv("PWD")
+            os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/ut/media/%s/ hdlurl=media_info/synthesis.hdlist.cz" %
+                    (smartopts, m, os.getenv("PWD"), m))
 
         os.mkdir("ut/media/media_info")
         f = open("ut/media/media_info/media.cfg", "w")
         f.write(self.getMediaCfg())
         f.close()
+
+        medias = ""
+        for m in self.media.keys():
+            if medias:
+                medias += ","
+            medias += m
+        os.system("smart update %s" % smartopts)
+        os.system("smart check %s --channels=%s" % (smartopts, "main"))
+        os.system("sleep 5")
 
         # TODO: reimplement clean-rpmsrate in python(?)
         os.system("clean-rpmsrate %s -o ut/media/media_info/rpmsrate" % self.rpmsrate)

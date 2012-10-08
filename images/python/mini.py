@@ -8,7 +8,7 @@ for m in "main", "contrib", "non-free":
 
 srcdir = "/home/peroyvind/Dokumenter/mandriva/bcd/"
 includelist = []
-for l in ["basesystem_mini", "kernel64", "languages", "firmware_nonfree"]:
+for l in ["basesystem_mini", "kernel64_mini", "languages", "firmware_nonfree"]:
     includelist.append(srcdir + "lists/" + l)
 excludelist = []
 for e in ["exclude", "exclude_mini", "exclude_ancient", "exclude_tofix", "exclude_nonfree"]:
