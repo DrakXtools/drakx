@@ -49,7 +49,6 @@ class IsoImage(object):
                 pattern += "|"
             pattern += pkg
 
-        print "pattern: %s\n" % pattern
         cand_pkgs = urpm.find_candidate_packages(pattern)
         cand_pkgs_filtered = {}
         for key in cand_pkgs.keys():
@@ -59,8 +58,6 @@ class IsoImage(object):
             cand_pkgs_filtered[key] = cand_pkgs[key]
 
         allpkgs = urpm.resolve_requested__no_suggests_(db, None, cand_pkgs_filtered, __wantarray__ = 1)
-        for p in allpkgs:
-            print "P: " + p.fullname()
 
         os.system("rm -rf ut")
         for m in self.media.keys():
@@ -81,7 +78,6 @@ class IsoImage(object):
                         s = os.stat(source)
                         self.media[m].size += s.st_size
             self.media[m].pkgs = pkgs
-            print "media: %s pkgs: %s\n\n\n\n\n" % (m, pkgs)
             os.system("genhdlist2 ut/media/" + self.media[m].name)
 
         os.mkdir("ut/media/media_info")
@@ -116,7 +112,6 @@ class IsoImage(object):
         iso = "%s-%s-%s.%s.iso" % (self.distribution, self.version, self.name, self.arch)
         os.system("cp -f ../images/boot.iso " + iso)
 
-        print "writing " + iso
         cmd = "xorriso -dev %s " \
 	    "%s" \
     	"-boot_image grub patch " \
@@ -125,7 +120,6 @@ class IsoImage(object):
 	    "-boot_image any show_status "\
 	    "-commit"\
 	    "" % (iso, filemap)
-        print cmd
         os.system(cmd)
 
     def _shouldExclude(self, pkgname):
