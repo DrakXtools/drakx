@@ -94,9 +94,7 @@ class IsoImage(object):
                 "[media_info]\n" \
                 "version=%s\n" \
                 "branch=%s\n" \
-                "arch=%s\n" \
-                "minor=%d\n" \
-                "subversion=%d\n" % (self.version, self.branch, self.arch,1,1)
+                "arch=%s\n" % (self.version, self.branch, self.arch)
         # todo: sort keys in a list and iterate over it as keys
         for name in ['main', 'contrib', 'non-free']:
             if name in self.media.keys():
