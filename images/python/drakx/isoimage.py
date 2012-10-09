@@ -1,4 +1,4 @@
-import shutil,os,perl
+import shutil,os,perl,string
 perl.require("URPM")
 perl.require("urpm")
 perl.require("urpm::select")
@@ -137,13 +137,16 @@ class IsoImage(object):
             os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/ut/media/%s/ hdlurl=media_info/synthesis.hdlist.cz" %
                     (smartopts, m, os.getenv("PWD"), m))
 
-        os.mkdir("ut/media/media_info")
+        if not os.path.exists("ut/media/media_info"):
+            os.mkdir("ut/media/media_info")
         f = open("ut/media/media_info/media.cfg", "w")
         f.write(self.getMediaCfg())
         f.close()
 
         medias = ""
+        rpmdirs = []
         for m in self.media.keys():
+            rpmdirs.append("ut/media/" + m)
             if medias:
                 medias += ","
             medias += m
@@ -152,10 +155,11 @@ class IsoImage(object):
         os.system("sleep 5")
 
         # TODO: reimplement clean-rpmsrate in python(?)
-        os.system("clean-rpmsrate %s -o ut/media/media_info/rpmsrate" % self.rpmsrate)
-        # something is broken somewhere..?
+        #       can probably replace much of it's functionality with meta packages
+        os.system("clean-rpmsrate -o ut/media/media_info/rpmsrate %s %s" % (self.rpmsrate, string.join(rpmdirs," ")))
         if not os.path.exists("ut/media/media_info/rpmsrate"):
-            shutil.copy(self.rpmsrate, "ut/media/media_info/rpmsrate")
+            print "error in rpmsrate"
+            exit(1)
         shutil.copy(self.compssusers, "ut/media/media_info/compssUsers.pl")
         shutil.copy(self.filedeps, "ut/media/media_info/file-deps")
         os.system("cd ut/media/media_info/; md5sum * > MD5SUM")
