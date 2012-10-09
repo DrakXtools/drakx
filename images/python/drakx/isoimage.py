@@ -4,7 +4,7 @@ perl.require("urpm")
 perl.require("urpm::select")
 
 class IsoImage(object):
-    def __init__(self, name, version, branch, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, repopath = None, distribution = "mandriva-linux"):
+    def __init__(self, name, version, branch, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, repopath = None, distribution = "mandriva-linux", writeiso=True):
         self.distribution = distribution
         self.name = name
         self.version = version
@@ -110,7 +110,9 @@ class IsoImage(object):
         allpkgs = search_pkgs(includes)
 
         smartopts = "channel -o sync-urpmi-medialist=no --data-dir smartdata"
-        os.system("rm -rf ut smartdata")
+        if writeiso:
+            os.system("rm -rf ut")
+        os.system("rm -rf smartdata")
         os.mkdir("smartdata")
         for m in self.media.keys():
             os.system("mkdir -p ut/media/" + self.media[m].name)
@@ -163,7 +165,7 @@ class IsoImage(object):
                 if f.endswith(".rpm"):
                     os.unlink("%s/%s" % (path,f))
 
-        filemap = "-map ut/media /%s/media " \
+        self.filemap = "-map ut/media /%s/media " \
                 "-map ../mdkinst.cpio.xz /%s/install/stage2/mdkinst.cpio.xz " \
                 "-map ../VERSION /%s/install/stage2/VERSION " % \
                 (self.arch, self.arch, self.arch)
@@ -171,7 +173,7 @@ class IsoImage(object):
         for m in self.media.keys():
             for f in self.media[m].pkgs:
                 if os.path.exists(f):
-                    filemap += "-map %s /%s/media/%s/%s " % (f, self.arch, m, os.path.basename(f))
+                    self.filemap += "-map %s /%s/media/%s/%s " % (f, self.arch, m, os.path.basename(f))
 
         iso = "%s-%s-%s.%s.iso" % (self.distribution, self.version, self.name, self.arch)
         os.system("cp -f ../images/boot.iso " + iso)
@@ -183,8 +185,9 @@ class IsoImage(object):
 	    "-boot_image any boot_info_table=on "\
 	    "-boot_image any show_status "\
 	    "-commit"\
-	    "" % (iso, filemap)
-        os.system(cmd)
+	    "" % (iso, self.filemap)
+        if (writeiso):
+            os.system(cmd)
 
     def _shouldExclude(self, pkgname):
         for exname in self.excludes:
