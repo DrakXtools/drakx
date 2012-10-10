@@ -172,32 +172,18 @@ class IsoImage(object):
         shutil.copy(self.filedeps, "ut/media/media_info/file-deps")
         os.system("cd ut/media/media_info/; md5sum * > MD5SUM")
 
-        for (path, dirs, files) in os.walk("ut/media"):
-            for f in files:
-                if f.endswith(".rpm"):
-                    os.unlink("%s/%s" % (path,f))
-
-        self.filemap = "-map ut/media /%s/media " \
-                "-map ../mdkinst.cpio.xz /%s/install/stage2/mdkinst.cpio.xz " \
-                "-map ../VERSION /%s/install/stage2/VERSION " % \
-                (self.arch, self.arch, self.arch)
-
-        for m in self.media.keys():
-            for f in self.media[m].pkgs:
-                if os.path.exists(f):
-                    self.filemap += "-map %s /%s/media/%s/%s " % (f, self.arch, m, os.path.basename(f))
-
         iso = "%s-%s-%s.%s.iso" % (self.distribution, self.version, self.name, self.arch)
         os.system("cp -f ../images/boot.iso " + iso)
 
         cmd = "xorriso -dev %s " \
-	    "%s" \
+        "-follow on " \
+        "-map ut / " \
     	"-boot_image grub patch " \
 	    "-boot_image grub bin_path=boot/grub/i386-pc/eltorito.img "\
 	    "-boot_image any boot_info_table=on "\
 	    "-boot_image any show_status "\
 	    "-commit"\
-	    "" % (iso, self.filemap)
+	    "" % iso
         if (writeiso):
             os.system(cmd)
 
