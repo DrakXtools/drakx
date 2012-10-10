@@ -126,7 +126,7 @@ class IsoImage(object):
         os.system("rm -rf smartdata")
         os.mkdir("smartdata")
         for m in self.media.keys():
-            os.system("mkdir -p %s/media/%s", % (outdir, self.media[m].name)
+            os.system("mkdir -p %s/media/%s" % (outdir, self.media[m].name))
 
             pkgs = []
             for pkg in allpkgs:
@@ -145,8 +145,8 @@ class IsoImage(object):
             self.media[m].pkgs = pkgs
             os.system("genhdlist2 %s/media/%s" % (outdir, self.media[m].name))
             smartopts = "-o sync-urpmi-medialist=no --data-dir %s/smartdata" % os.getenv("PWD")
-            os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/ut/media/%s/ hdlurl=media_info/synthesis.hdlist.cz" %
-                    (smartopts, m, os.getenv("PWD"), m))
+            os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/%s/media/%s/ hdlurl=media_info/synthesis.hdlist.cz" %
+                    (smartopts, m, os.getenv("PWD"), outdir, m))
 
         if not os.path.exists("%s/media/media_info" % outdir):
             os.mkdir("%s/media/media_info" % outdir)
@@ -157,7 +157,7 @@ class IsoImage(object):
         medias = ""
         rpmdirs = []
         for m in self.media.keys():
-            rpmdirs.append("%s/media/%s", (outdir, m))
+            rpmdirs.append("%s/media/%s" % (outdir, m))
             if medias:
                 medias += ","
             medias += m
@@ -173,24 +173,41 @@ class IsoImage(object):
             exit(1)
         shutil.copy(self.compssusers, "%s/media/media_info/compssUsers.pl" % outdir)
         shutil.copy(self.filedeps, "%s/media/media_info/file-deps" % outdir)
-        os.symlink("../mdkinst.cpio.xz", "%s/install/stage2/" % outdir)
-        os.symlink("../VERSION", "%s/install/stage2/" % outdir)
+        os.mkdir("%s/install" % outdir)
+        os.mkdir("%s/install/stage2" % outdir)
+        if True:
+            os.system("ln -sr ../mdkinst.cpio.xz %s/install/stage2/mdkinst.cpio.xz" % outdir)
+            os.system("ln -sr ../VERSION %s/install/stage2/VERSION" % outdir)
+            if not os.path.exists(tmp + "/boot"):
+                os.mkdir(tmp +"/boot")
+            if not os.path.exists(tmp + "/boot/grub"):
+                os.mkdir(tmp + "/boot/grub")
+                os.system("ln -sr ../grub/boot/{all.rdz,memtest} %s/boot" % tmp)   
+                os.system("ln -sr ../grub/boot/grub/* %s/boot/grub/" % tmp)
+            os.system("ln -sr ../grub/boot/* %s/boot" % tmp)   
+        else:
+            shutil.copy("../mdkinst.cpio.xz", "%s/install/stage2/mdkinst.cpio.xz" % outdir)
+            shutil.copy("../VERSION", "%s/install/stage2/VERSION" % outdir)
+
         os.system("cd %s/media/media_info/; md5sum * > MD5SUM" % outdir)
 
         iso = "%s-%s-%s.%s.iso" % (self.distribution, self.version, self.name, self.arch)
-        os.system("cp -f ../images/boot.iso " + iso)
 
-        cmd = "xorriso -dev %s " \
-        "-follow on " \
-        "-map %s / " \
-    	"-boot_image grub patch " \
-	    "-boot_image grub bin_path=boot/grub/i386-pc/eltorito.img "\
-	    "-boot_image any boot_info_table=on "\
-	    "-boot_image any show_status "\
-	    "-commit"\
-	    "" % (outdir, iso)
         if (writeiso):
-            os.system(cmd)
+            os.system("/usr/bin/time grub2-mkrescue -o %s -f --stdio_sync off  -c boot/grub/i386-pc/boot.catalog -R -r %s ../grub" % (iso, tmp))
+
+            #os.system("mkisofs -o %s -f %s" % (iso, outdir))
+        #cmd = "xorriso -dev %s " \
+        #"-follow on " \
+        #"-map %s / " \
+    	#"-boot_image grub patch " \
+	    #"-boot_image grub bin_path=boot/grub/i386-pc/eltorito.img "\
+	    #"-boot_image any boot_info_table=on "\
+	    #"-boot_image any show_status "\
+	    #"-commit"\
+	    #"" % (outdir, iso)
+        #if (writeiso):
+        #    os.system(cmd)
 
     def _shouldExclude(self, pkgname):
         for exname in self.excludes:
