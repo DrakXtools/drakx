@@ -27,7 +27,13 @@ class IsoImage(object):
             f = open(pkglf)
             for line in f.readlines():
                 line = line.strip()
-                if line and line[0] != '#':
+                if not line or line[0] == "#":
+                    continue
+                if line.startswith("CAT_"):
+                    category, weight = line.split()
+                    pkgs = self.get_list_from_CAT(self.rpmsrate, category, weight)
+                    includes.extend(pkgs)
+                else:
                     includes.append(line)
             f.close()
         for exclf in excludelist:
@@ -40,7 +46,9 @@ class IsoImage(object):
 
 
         empty_db = perl.callm("new", "URPM")
-        urpm = perl.callm("new", "URPM");
+        urpm = perl.eval("""my $urpm = new URPM;
+                $urpm->{error} = sub { printf "urpm error: %s\n", $_[0] };
+                $urpm""");
         for m in self.media.keys():
             synthesis = self.repopath + "/" + self.media[m].getSynthesis()
             urpm.parse_synthesis(synthesis) 
@@ -211,6 +219,64 @@ class IsoImage(object):
             if name in self.media.keys():
                 mediaCfg += self.media[name].getCfgEntry()
         return mediaCfg
+
+    """ This is an ugly attempt at rewriting the even uglier perl version which
+    I have difficulties fully understanding, I also think I've fixed some bugs
+    in it..."""
+    def get_list_from_CAT(self, filename, category, threshold):
+        f = open(filename)
+        cat = None
+    
+        pkgs = []
+        weight = None
+        for line in f.readlines():
+            if "META_CLASS" in line:
+                continue
+            line = line.strip()
+            if line.startswith("#"):
+                continue
+            if not line:
+               cat = None
+               weight = None
+               continue
+            if line.startswith("CAT_"):
+                if line == category:
+                    cat = category
+                else:
+                    cat = None
+            line = line.split()
+            unsetCat = False
+            if line[0].isdigit():
+                weight, deps = (line[0], line[1:])
+                if not cat:
+                    for dep in deps:
+                        if dep == category:
+                            cat = category
+                            unsetCat = True
+            else:
+                deps = line
+    
+            if not cat:
+                continue
+    
+            for i in range(len(deps)-1,-1,-1):
+                dep = deps[i]
+                for patt in ("CAT_", "||", "HW", "3D", "HW_", "RADIO", "PHOTO", "LIGHT", "LIVE", "LOCALES"):
+                    if patt in dep:
+                        deps.pop(i)
+    
+            if deps:
+                pkgs.extend(deps)
+    
+                if False:
+                    if int(weight) >= int(threshold):
+                        print "including: %s (%s >= %s)" % (deps,weight,threshold)
+                    else:
+                        print "excluding: %s (%s < %s)" % (deps, weight,threshold)
+            if unsetCat:
+                cat = None
+        f.close()
+        return pkgs
 
     name = None
     version = None
