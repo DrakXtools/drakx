@@ -5,6 +5,9 @@ perl.require("urpm::select")
 
 class IsoImage(object):
     def __init__(self, name, version, branch, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, repopath = None, distribution = "mandriva-linux", writeiso=True):
+        tmp = "ut"
+        outdir = "%s/%s" % (tmp, arch)
+
         self.distribution = distribution
         self.name = name
         self.version = version
@@ -119,11 +122,11 @@ class IsoImage(object):
 
         smartopts = "channel -o sync-urpmi-medialist=no --data-dir smartdata"
         if writeiso:
-            os.system("rm -rf ut")
+            os.system("rm -rf " + outdir)
         os.system("rm -rf smartdata")
         os.mkdir("smartdata")
         for m in self.media.keys():
-            os.system("mkdir -p ut/media/" + self.media[m].name)
+            os.system("mkdir -p %s/media/%s", % (outdir, self.media[m].name)
 
             pkgs = []
             for pkg in allpkgs:
@@ -133,28 +136,28 @@ class IsoImage(object):
 
                 source = "%s/media/%s/release/%s.rpm" % (self.repopath, self.media[m].name, pkg.fullname())
                 if os.path.exists(source):
-                    target = "ut/media/%s/%s.rpm" % (self.media[m].name, pkg.fullname())
+                    target = "%s/media/%s/%s.rpm" % (outdir, self.media[m].name, pkg.fullname())
                     if not os.path.islink(target):
                         pkgs.append(source)
                         os.symlink(source, target)
                         s = os.stat(source)
                         self.media[m].size += s.st_size
             self.media[m].pkgs = pkgs
-            os.system("genhdlist2 ut/media/" + self.media[m].name)
+            os.system("genhdlist2 %s/media/%s" % (outdir, self.media[m].name))
             smartopts = "-o sync-urpmi-medialist=no --data-dir %s/smartdata" % os.getenv("PWD")
             os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/ut/media/%s/ hdlurl=media_info/synthesis.hdlist.cz" %
                     (smartopts, m, os.getenv("PWD"), m))
 
-        if not os.path.exists("ut/media/media_info"):
-            os.mkdir("ut/media/media_info")
-        f = open("ut/media/media_info/media.cfg", "w")
+        if not os.path.exists("%s/media/media_info" % outdir):
+            os.mkdir("%s/media/media_info" % outdir)
+        f = open("%s/media/media_info/media.cfg" % outdir, "w")
         f.write(self.getMediaCfg())
         f.close()
 
         medias = ""
         rpmdirs = []
         for m in self.media.keys():
-            rpmdirs.append("ut/media/" + m)
+            rpmdirs.append("%s/media/%s", (outdir, m))
             if medias:
                 medias += ","
             medias += m
@@ -164,26 +167,28 @@ class IsoImage(object):
 
         # TODO: reimplement clean-rpmsrate in python(?)
         #       can probably replace much of it's functionality with meta packages
-        os.system("clean-rpmsrate -o ut/media/media_info/rpmsrate %s %s" % (self.rpmsrate, string.join(rpmdirs," ")))
-        if not os.path.exists("ut/media/media_info/rpmsrate"):
+        os.system("clean-rpmsrate -o %s/media/media_info/rpmsrate %s %s" % (outdir, self.rpmsrate, string.join(rpmdirs," ")))
+        if not os.path.exists("%s/media/media_info/rpmsrate" % outdir):
             print "error in rpmsrate"
             exit(1)
-        shutil.copy(self.compssusers, "ut/media/media_info/compssUsers.pl")
-        shutil.copy(self.filedeps, "ut/media/media_info/file-deps")
-        os.system("cd ut/media/media_info/; md5sum * > MD5SUM")
+        shutil.copy(self.compssusers, "%s/media/media_info/compssUsers.pl" % outdir)
+        shutil.copy(self.filedeps, "%s/media/media_info/file-deps" % outdir)
+        os.symlink("../mdkinst.cpio.xz", "%s/install/stage2/" % outdir)
+        os.symlink("../VERSION", "%s/install/stage2/" % outdir)
+        os.system("cd %s/media/media_info/; md5sum * > MD5SUM" % outdir)
 
         iso = "%s-%s-%s.%s.iso" % (self.distribution, self.version, self.name, self.arch)
         os.system("cp -f ../images/boot.iso " + iso)
 
         cmd = "xorriso -dev %s " \
         "-follow on " \
-        "-map ut / " \
+        "-map %s / " \
     	"-boot_image grub patch " \
 	    "-boot_image grub bin_path=boot/grub/i386-pc/eltorito.img "\
 	    "-boot_image any boot_info_table=on "\
 	    "-boot_image any show_status "\
 	    "-commit"\
-	    "" % iso
+	    "" % (outdir, iso)
         if (writeiso):
             os.system(cmd)
 
