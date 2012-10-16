@@ -1,4 +1,4 @@
-import shutil,os,perl,string
+import shutil,os,perl,string,fnmatch,re
 perl.require("URPM")
 perl.require("urpm")
 perl.require("urpm::select")
@@ -17,6 +17,7 @@ class Distribution(object):
         self.compssusers = compssusers
         self.filedeps = filedeps
         self.outdir = outdir
+        self.excludere = None
         if (repopath):
             self.repopath = repopath
         else:
@@ -36,14 +37,17 @@ class Distribution(object):
                 else:
                     includes.append(line)
             f.close()
+        excludepattern = ""
         for exclf in excludelist:
             f = open(exclf)
             for line in f.readlines():
                 line = line.strip()
                 if line and line[0] != '#':
-                    self.excludes.append(line)
+                    if excludepattern:
+                        excludepattern += '|'
+                    excludepattern += fnmatch.translate(line)
             f.close()
-
+        self.excludere = re.compile(excludepattern)
 
         empty_db = perl.callm("new", "URPM")
         urpm = perl.eval("""my $urpm = new URPM;
@@ -94,7 +98,7 @@ class Distribution(object):
                 for pid in pids:
                     pid = int(pid)
                     pkg = urpm['depslist'][pid]
-                    if self._shouldExclude(pkg.name()):
+                    if self.excludere.match(pkg.name()):
                         print "skipping1: %s" % pkg.fullname()
                         continue
                     pkg = urpm['depslist'][pid]
@@ -126,7 +130,7 @@ class Distribution(object):
 
             pkgs = []
             for pkg in allpkgs:
-                if self._shouldExclude(pkg.name()):
+                if self.excludere.match(pkg.name())
                     print "skipping2: " + pkg.name()
                     continue
 
@@ -176,13 +180,6 @@ class Distribution(object):
 
         os.system("cd %s/media/media_info/; md5sum * > MD5SUM" % outdir)
 
-
-    def _shouldExclude(self, pkgname):
-        for exname in self.excludes:
-            if len(exname) >= len(pkgname):
-                if exname == pkgname[0:len(exname)]:
-                    return True
-        return False
 
     def getMediaCfg(self):
         mediaCfg = \
