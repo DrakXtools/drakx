@@ -22,4 +22,4 @@ version = "2012"
 branch = "devel"
 
 arch = "i586"
-distrib = Distribution(version, branch, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, "ut/"+ arch)
+distrib = Distribution(version, branch, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, "ut")

@@ -16,7 +16,7 @@ class Distribution(object):
         self.rpmsrate = rpmsrate
         self.compssusers = compssusers
         self.filedeps = filedeps
-        self.outdir = outdir
+        self.outdir = outdir+"/"+arch
         self.excludere = None
         if (repopath):
             self.repopath = repopath
@@ -125,11 +125,11 @@ class Distribution(object):
         allpkgs = search_pkgs(includes)
 
         smartopts = "channel -o sync-urpmi-medialist=no --data-dir smartdata"
-        os.system("rm -rf " + outdir)
+        os.system("rm -rf " + self.outdir)
         os.system("rm -rf smartdata")
         os.mkdir("smartdata")
         for m in self.media.keys():
-            os.system("mkdir -p %s/media/%s" % (outdir, self.media[m].name))
+            os.system("mkdir -p %s/media/%s" % (self.outdir, self.media[m].name))
 
             pkgs = []
             for pkg in allpkgs:
@@ -139,28 +139,28 @@ class Distribution(object):
 
                 source = "%s/media/%s/release/%s.rpm" % (self.repopath, self.media[m].name, pkg.fullname())
                 if os.path.exists(source):
-                    target = "%s/media/%s/%s.rpm" % (outdir, self.media[m].name, pkg.fullname())
+                    target = "%s/media/%s/%s.rpm" % (self.outdir, self.media[m].name, pkg.fullname())
                     if not os.path.islink(target):
                         pkgs.append(source)
                         os.symlink(source, target)
                         s = os.stat(source)
                         self.media[m].size += s.st_size
             self.media[m].pkgs = pkgs
-            os.system("genhdlist2 %s/media/%s" % (outdir, self.media[m].name))
+            os.system("genhdlist2 %s/media/%s" % (self.outdir, self.media[m].name))
             smartopts = "-o sync-urpmi-medialist=no --data-dir %s/smartdata" % os.getenv("PWD")
             os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/%s/media/%s/ hdlurl=media_info/synthesis.hdlist.cz" %
-                    (smartopts, m, os.getenv("PWD"), outdir, m))
+                    (smartopts, m, os.getenv("PWD"), self.outdir, m))
 
-        if not os.path.exists("%s/media/media_info" % outdir):
-            os.mkdir("%s/media/media_info" % outdir)
-        f = open("%s/media/media_info/media.cfg" % outdir, "w")
+        if not os.path.exists("%s/media/media_info" % self.outdir):
+            os.mkdir("%s/media/media_info" % self.outdir)
+        f = open("%s/media/media_info/media.cfg" % self.outdir, "w")
         f.write(self.getMediaCfg())
         f.close()
 
         medias = ""
         rpmdirs = []
         for m in self.media.keys():
-            rpmdirs.append("%s/media/%s" % (outdir, m))
+            rpmdirs.append("%s/media/%s" % (self.outdir, m))
             if medias:
                 medias += ","
             medias += m
@@ -170,18 +170,18 @@ class Distribution(object):
 
         # TODO: reimplement clean-rpmsrate in python(?)
         #       can probably replace much of it's functionality with meta packages
-        os.system("clean-rpmsrate -o %s/media/media_info/rpmsrate %s %s" % (outdir, self.rpmsrate, string.join(rpmdirs," ")))
-        if not os.path.exists("%s/media/media_info/rpmsrate" % outdir):
+        os.system("clean-rpmsrate -o %s/media/media_info/rpmsrate %s %s" % (self.outdir, self.rpmsrate, string.join(rpmdirs," ")))
+        if not os.path.exists("%s/media/media_info/rpmsrate" % self.outdir):
             print "error in rpmsrate"
             exit(1)
-        shutil.copy(self.compssusers, "%s/media/media_info/compssUsers.pl" % outdir)
-        shutil.copy(self.filedeps, "%s/media/media_info/file-deps" % outdir)
-        os.mkdir("%s/install" % outdir)
-        os.mkdir("%s/install/stage2" % outdir)
-        os.system("ln -sr ../mdkinst.cpio.xz %s/install/stage2/mdkinst.cpio.xz" % outdir)
-        os.system("ln -sr ../VERSION %s/install/stage2/VERSION" % outdir)
+        shutil.copy(self.compssusers, "%s/media/media_info/compssUsers.pl" % self.outdir)
+        shutil.copy(self.filedeps, "%s/media/media_info/file-deps" % self.outdir)
+        os.mkdir("%s/install" % self.outdir)
+        os.mkdir("%s/install/stage2" % self.outdir)
+        os.system("ln -sr ../mdkinst.cpio.xz %s/install/stage2/mdkinst.cpio.xz" % self.outdir)
+        os.system("ln -sr ../VERSION %s/install/stage2/VERSION" % self.outdir)
 
-        os.system("cd %s/media/media_info/; md5sum * > MD5SUM" % outdir)
+        os.system("cd %s/media/media_info/; md5sum * > MD5SUM" % self.outdir)
 
 
     def getMediaCfg(self):

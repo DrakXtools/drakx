@@ -25,7 +25,7 @@ branch = "devel"
 
 arch = "x86_64"
 
-outdir="ut/%s" % arch
+outdir="ut"
 os.system("rm -rf "+outdir)
 
 x86_64 = Distribution(version, branch, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, outdir=outdir)
