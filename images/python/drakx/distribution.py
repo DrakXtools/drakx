@@ -45,7 +45,10 @@ class Distribution(object):
                 if line and line[0] != '#':
                     if excludepattern:
                         excludepattern += '|'
-                    excludepattern += fnmatch.translate(line)
+                    if line[0] == '^' or line[-1] == '$':
+                        excludepattern += line
+                    else:
+                        excludepattern += fnmatch.translate(line).replace("\\Z","")
             f.close()
         self.excludere = re.compile(excludepattern)
 
@@ -130,7 +133,7 @@ class Distribution(object):
 
             pkgs = []
             for pkg in allpkgs:
-                if self.excludere.match(pkg.name())
+                if self.excludere.match(pkg.name()):
                     print "skipping2: " + pkg.name()
                     continue
 
