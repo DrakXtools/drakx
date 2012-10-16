@@ -1,7 +1,4 @@
-import shutil,os,perl,string
-perl.require("URPM")
-perl.require("urpm")
-perl.require("urpm::select")
+import os
 
 class IsoImage(object):
     def __init__(self, name, version, arch, distrib, distribution = "mandriva-linux", outdir = "ut"):
