@@ -4,7 +4,7 @@ perl.require("urpm")
 perl.require("urpm::select")
 
 class Distribution(object):
-    def __init__(self, version, branch, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, outdir, repopath = None):
+    def __init__(self, version, branch, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, outdir, suggests = False, repopath = None):
 
         self.version = version
         self.branch = branch
@@ -90,7 +90,7 @@ class Distribution(object):
             state = perl.get_ref("%")
 
             urpm.resolve_requested(empty_db, state, requested, 
-                    no_suggests = 1,
+                    no_suggests = not suggests,
                     callback_choices = stop_on_choices, nodeps = 1)
 
             allpkgs = []

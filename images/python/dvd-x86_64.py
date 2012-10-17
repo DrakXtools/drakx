@@ -28,7 +28,7 @@ arch = "x86_64"
 outdir="ut"
 os.system("rm -rf "+outdir)
 
-x86_64 = Distribution(version, branch, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, outdir=outdir)
+x86_64 = Distribution(version, branch, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, outdir, suggests = True)
 name="moondrake"
 distrib=[x86_64]
 distribution="mandriva-linux"
