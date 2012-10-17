@@ -128,6 +128,9 @@ class Distribution(object):
         os.system("rm -rf " + self.outdir)
         os.system("rm -rf smartdata")
         os.mkdir("smartdata")
+        os.system("mkdir -p %s/media/media_info/" % self.outdir) 
+        shutil.copy(self.compssusers, "%s/media/media_info/compssUsers.pl" % self.outdir)
+        shutil.copy(self.filedeps, "%s/media/media_info/file-deps" % self.outdir)
         for m in self.media.keys():
             os.system("mkdir -p %s/media/%s" % (self.outdir, self.media[m].name))
 
@@ -146,7 +149,7 @@ class Distribution(object):
                         s = os.stat(source)
                         self.media[m].size += s.st_size
             self.media[m].pkgs = pkgs
-            os.system("genhdlist2 %s/media/%s" % (self.outdir, self.media[m].name))
+            os.system("genhdlist2 --file-deps %s/media/media_info/file-deps %s/media/%s" % (self.outdir, self.outdir, self.media[m].name))
             smartopts = "-o sync-urpmi-medialist=no --data-dir %s/smartdata" % os.getenv("PWD")
             os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/%s/media/%s/ hdlurl=media_info/synthesis.hdlist.cz" %
                     (smartopts, m, os.getenv("PWD"), self.outdir, m))
@@ -174,8 +177,6 @@ class Distribution(object):
         if not os.path.exists("%s/media/media_info/rpmsrate" % self.outdir):
             print "error in rpmsrate"
             exit(1)
-        shutil.copy(self.compssusers, "%s/media/media_info/compssUsers.pl" % self.outdir)
-        shutil.copy(self.filedeps, "%s/media/media_info/file-deps" % self.outdir)
         os.mkdir("%s/install" % self.outdir)
         os.mkdir("%s/install/stage2" % self.outdir)
         os.system("ln -sr ../mdkinst.cpio.xz %s/install/stage2/mdkinst.cpio.xz" % self.outdir)
