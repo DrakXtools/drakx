@@ -23,6 +23,7 @@ class Distribution(object):
         else:
             self.repopath = "/mnt/BIG/distrib/%s/%s/%s" % (self.branch, self.version, self.arch)
 
+        print "Parsing lists of packages to include"
         includes = []
         for pkglf in includelist:
             f = open(pkglf)
@@ -37,6 +38,8 @@ class Distribution(object):
                 else:
                     includes.append(line)
             f.close()
+
+        print "Parsing lists of packages to exclude"
         excludepattern = ""
         for exclf in excludelist:
             f = open(exclf)
@@ -58,6 +61,7 @@ class Distribution(object):
                 $urpm""");
         for m in self.media.keys():
             synthesis = self.repopath + "/" + self.media[m].getSynthesis()
+            print "Parsing synthesis for %s: %s" % (m, synthesis)
             urpm.parse_synthesis(synthesis) 
 
         requested = perl.get_ref("%")
@@ -102,7 +106,7 @@ class Distribution(object):
                     pid = int(pid)
                     pkg = urpm['depslist'][pid]
                     if self.excludere.match(pkg.name()):
-                        print "skipping1: %s" % pkg.fullname()
+                        #print "skipping1: %s" % pkg.fullname()
                         continue
                     pkg = urpm['depslist'][pid]
 
@@ -111,19 +115,22 @@ class Distribution(object):
                     else:
                         True
                 if dep is None:
-                    print "ouch!"
+                    #print "ouch!"
+                    continue
                 else:
                     allpkgs.append(dep)
             return allpkgs
 
+        print "Resolving packages"
         allpkgs = search_pkgs(includes)
         # lame, having difficulties figuring out how to properly recursively
-        # resolve dependencies, so just do it manually for now..
+        # resolve dependencies (potentially a bug in urpmi?), so just do it manually for now..
         includes = []
         for p in allpkgs:
             includes.append(p.name())
         allpkgs = search_pkgs(includes)
 
+        print "Initiating distribution tree"
         smartopts = "channel -o sync-urpmi-medialist=no --data-dir smartdata"
         os.system("rm -rf " + self.outdir)
         os.system("rm -rf smartdata")
@@ -131,13 +138,15 @@ class Distribution(object):
         os.system("mkdir -p %s/media/media_info/" % self.outdir) 
         shutil.copy(self.compssusers, "%s/media/media_info/compssUsers.pl" % self.outdir)
         shutil.copy(self.filedeps, "%s/media/media_info/file-deps" % self.outdir)
+
         for m in self.media.keys():
+            print "Generating media tree and metadata for " + m
             os.system("mkdir -p %s/media/%s" % (self.outdir, self.media[m].name))
 
             pkgs = []
             for pkg in allpkgs:
                 if self.excludere.match(pkg.name()):
-                    print "skipping2: " + pkg.name()
+                    #print "skipping2: " + pkg.name()
                     continue
 
                 source = "%s/media/%s/release/%s.rpm" % (self.repopath, self.media[m].name, pkg.fullname())
@@ -154,12 +163,14 @@ class Distribution(object):
             os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/%s/media/%s/ hdlurl=media_info/synthesis.hdlist.cz" %
                     (smartopts, m, os.getenv("PWD"), self.outdir, m))
 
+        print "Writing %s/media/media_info/media.cfg" % self.outdir
         if not os.path.exists("%s/media/media_info" % self.outdir):
             os.mkdir("%s/media/media_info" % self.outdir)
         f = open("%s/media/media_info/media.cfg" % self.outdir, "w")
         f.write(self.getMediaCfg())
         f.close()
 
+        print "Checking packages"
         medias = ""
         rpmdirs = []
         for m in self.media.keys():
@@ -171,17 +182,21 @@ class Distribution(object):
         os.system("smart check %s --channels=%s" % (smartopts, medias))
         os.system("sleep 5");
 
+        print "Generating %s/media/media_info/rpmsrate" % self.outdir
         # TODO: reimplement clean-rpmsrate in python(?)
         #       can probably replace much of it's functionality with meta packages
         os.system("clean-rpmsrate -o %s/media/media_info/rpmsrate %s %s" % (self.outdir, self.rpmsrate, string.join(rpmdirs," ")))
         if not os.path.exists("%s/media/media_info/rpmsrate" % self.outdir):
             print "error in rpmsrate"
             exit(1)
+
+        print "Copying second stage installer: %s/install/stage2/mdkinst.cpio.xz" % self.outdir
         os.mkdir("%s/install" % self.outdir)
         os.mkdir("%s/install/stage2" % self.outdir)
         os.system("ln -sr ../mdkinst.cpio.xz %s/install/stage2/mdkinst.cpio.xz" % self.outdir)
         os.system("ln -sr ../VERSION %s/install/stage2/VERSION" % self.outdir)
 
+        print "Generating %s/media/media_info/MD5SUM" % self.outdir
         os.system("cd %s/media/media_info/; md5sum * > MD5SUM" % self.outdir)
 
 
