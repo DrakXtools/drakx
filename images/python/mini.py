@@ -7,7 +7,7 @@ from mini32 import distrib as i586
 from mini64 import distrib as x86_64
 
 name="moondrake"
-version="2012.0"
+version="2012"
 arch="dual"
 distrib=[i586,x86_64]
 branch="devel"
