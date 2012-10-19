@@ -200,6 +200,8 @@ class Distribution(object):
         os.mkdir("%s/install/stage2" % self.outdir)
         os.system("ln -sr ../mdkinst.cpio.xz %s/install/stage2/mdkinst.cpio.xz" % self.outdir)
         os.system("ln -sr ../VERSION %s/install/stage2/VERSION" % self.outdir)
+        os.mkdir("%s/install/extra" % self.outdir)
+        os.system("ln -sr ../../advertising %s/install/extra/advertising" % self.outdir)
 
         print color("Generating %s/media/media_info/MD5SUM" % self.outdir, GREEN)
         os.system("cd %s/media/media_info/; md5sum * > MD5SUM" % self.outdir)
