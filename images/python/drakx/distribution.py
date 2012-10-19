@@ -139,6 +139,10 @@ class Distribution(object):
         os.system("mkdir -p %s/media/media_info/" % self.outdir) 
         shutil.copy(self.compssusers, "%s/media/media_info/compssUsers.pl" % self.outdir)
         shutil.copy(self.filedeps, "%s/media/media_info/file-deps" % self.outdir)
+        rootfiles = ['COPYING', 'index.htm', 'install.htm', 'INSTALL.txt', 'LICENSE-APPS.txt', 'LICENSE.txt',
+                'product.id', 'README.txt', 'release-notes.html', 'release-notes.txt', 'VERSION', 'doc', 'misc']
+        for f in rootfiles:
+            os.symlink("%s/%s" % (self.repopath, f), "%s/%s" % (self.outdir, f))
 
         for m in self.media.keys():
             print color("Generating media tree and metadata for " + m, GREEN)

@@ -10,6 +10,7 @@ name="moondrake"
 version="2012.0"
 arch="dual"
 distrib=[i586,x86_64]
+branch="devel"
 distribution="moondrake-linux"
 
-image = IsoImage(name, version, arch, distrib, distribution, outdir=outdir)
+image = IsoImage(name, version, arch, distrib, branch, distribution, outdir)

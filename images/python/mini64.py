@@ -22,4 +22,4 @@ version = "2012"
 branch = "devel"
 
 arch = "x86_64"
-distrib = Distribution(version, branch, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, "ut)
+distrib = Distribution(version, branch, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, "ut")

@@ -33,4 +33,4 @@ name="moondrake"
 distrib=[x86_64]
 distribution="mandriva-linux"
 
-image = IsoImage(name, version, arch, x86_64, distribution, outdir)
+image = IsoImage(name, version, arch, x86_64, distribution, branch, outdir)
