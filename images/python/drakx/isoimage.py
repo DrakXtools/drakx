@@ -14,8 +14,7 @@ class IsoImage(object):
             repopath = "/mnt/BIG/distrib/%s/%s/i586" % (branch, version)
 
 
-        os.system("rm -rf "+outdir)
-        os.system("mkdir -p "+outdir)
+        os.system("rm -rf "+destdir)
         os.mkdir(destdir)
         os.system("ln -sr ../grub/boot/{all.rdz,alt*,memtest} %s/" % destdir)
         os.mkdir(grubdir)
