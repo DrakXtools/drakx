@@ -40,7 +40,7 @@ class IsoImage(object):
         iso = release+".iso"
 
 
-        os.system("/usr/bin/time grub2-mkrescue -o %s -f --stdio_sync off  -c boot/grub/i386-pc/boot.catalog -R -r %s" % (iso, outdir))
+        os.system("/usr/bin/time grub2-mkrescue -o %s -f --stdio_sync off  -c boot/grub/i386-pc/boot.catalog -input-charset utf-8 -R -r %s" % (iso, outdir))
 
 
 # vim:ts=4:sw=4:et
