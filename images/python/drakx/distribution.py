@@ -5,7 +5,7 @@ perl.require("urpm")
 perl.require("urpm::select")
 
 class Distribution(object):
-    def __init__(self, config, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = False):
+    def __init__(self, config, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = False, synthfilter = ".cz:gzip -9"):
 
         self.arch = arch
         self.media = {}
@@ -154,7 +154,12 @@ class Distribution(object):
                         s = os.stat(source)
                         self.media[m].size += s.st_size
             self.media[m].pkgs = pkgs
-            os.system("genhdlist2 --file-deps %s/media/media_info/file-deps %s/media/%s" % (outdir, outdir, self.media[m].name))
+            os.system("genhdlist2 --file-deps %s/media/media_info/file-deps --synthesis-filter '%s' %s/media/%s" % (outdir, synthfilter, outdir, self.media[m].name))
+            ext = synthfilter.split(":")[0]
+            # workaround for urpmi spaghetti code which hardcodes .cz
+            if ext != ".cz":
+                os.symlink("synthesis.hdlist%s" % ext, "%s/media/%s/media_info/synthesis.hdlist.cz" % (outdir, self.media[m].name))
+
             os.unlink("%s/media/%s/media_info/hdlist.cz" % (outdir, self.media[m].name))
             smartopts = "-o sync-urpmi-medialist=no --data-dir %s/smartdata" % os.getenv("PWD")
             os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/%s/media/%s/ hdlurl=media_info/synthesis.hdlist.cz" %

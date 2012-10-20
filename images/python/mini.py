@@ -28,8 +28,8 @@ excludelist = []
 for e in ["exclude", "exclude_mini", "exclude_ancient", "exclude_tofix", "exclude_nonfree"]:
     excludelist.append(srcdir + "lists/" + e)
 
-i586 = Distribution(config, "i586", media, includelist32, excludelist, rpmsrate, compssusers, filedeps)
-x86_64 = Distribution(config, "x86_64", media, includelist64, excludelist, rpmsrate, compssusers, filedeps)
+i586 = Distribution(config, "i586", media, includelist32, excludelist, rpmsrate, compssusers, filedeps, synthfilter=".xz:xz --text")
+x86_64 = Distribution(config, "x86_64", media, includelist64, excludelist, rpmsrate, compssusers, filedeps, synthfilter=".xz:xz --text")
 
 distrib=[i586,x86_64]
 
