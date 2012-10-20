@@ -141,14 +141,11 @@ class Distribution(object):
         # unsure about relevance of all these fields, will just hardcode those seeming irrelevant for now..
         f.write("vendor=%s,distribution=%s,type=basic,version=%s,branch=%s,release=1,arch=%s,product=Free\n" % (config.vendor,config.distribution,config.version,config.branch,arch))
         f.close()
-        
-        f = open(outdir+"/VERSION","w")
-        f.write("%s %s %s (%s) %s (%s) %s\n" % (config.distribution, config.version, config.subversion, config.codename, arch, config.flavour, time.strftime("%Y%m%d %R")))
-        f.close()
-
-        for m in self.media.keys():
-            print color("Generating media tree and metadata for " + m, GREEN)
-            os.system("mkdir -p %s/media/%s" % (outdir, self.media[m].name))
+      
+        ext = synthfilter.split(":")[0]
+        for m in media:
+            print color("Generating media tree for " + m.name, GREEN)
+            os.system("mkdir -p %s/media/%s" % (outdir, m.name))
 
             pkgs = []
             for pkg in allpkgs:
@@ -156,32 +153,51 @@ class Distribution(object):
                     #print "skipping2: " + pkg.name()
                     continue
 
-                source = "%s/media/%s/release/%s.rpm" % (repopath, self.media[m].name, pkg.fullname())
+                source = "%s/media/%s/release/%s.rpm" % (repopath, m.name, pkg.fullname())
                 if os.path.exists(source):
-                    target = "%s/media/%s/%s.rpm" % (outdir, self.media[m].name, pkg.fullname())
+                    target = "%s/media/%s/%s.rpm" % (outdir, m.name, pkg.fullname())
                     if not os.path.islink(target):
                         pkgs.append(source)
                         os.symlink(source, target)
                         s = os.stat(source)
-                        self.media[m].size += s.st_size
-            self.media[m].pkgs = pkgs
-            os.system("genhdlist2 --file-deps %s/media/media_info/file-deps --synthesis-filter '%s' %s/media/%s" % (outdir, synthfilter, outdir, self.media[m].name))
-            ext = synthfilter.split(":")[0]
-            # workaround for urpmi spaghetti code which hardcodes .cz
-            if ext != ".cz":
-                os.symlink("synthesis.hdlist%s" % ext, "%s/media/%s/media_info/synthesis.hdlist.cz" % (outdir, self.media[m].name))
-
-            os.unlink("%s/media/%s/media_info/hdlist.cz" % (outdir, self.media[m].name))
-            smartopts = "-o sync-urpmi-medialist=no --data-dir %s/smartdata" % os.getenv("PWD")
-            os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/%s/media/%s/ hdlurl=media_info/synthesis.hdlist%s" %
-                    (smartopts, m, os.getenv("PWD"), outdir, m, ext))
+                        m.size += s.st_size
+            self.media[m.name].pkgs = pkgs
+            if not os.path.exists("%s/media/%s/media_info" % (outdir, m.name)):
+                os.mkdir("%s/media/%s/media_info" % (outdir, m.name))
+            os.symlink("%s/media/%s/release/media_info/pubkey" % (repopath, m.name), "%s/media/%s/media_info/pubkey" % (outdir, m.name))
 
         print color("Writing %s/media/media_info/media.cfg" % outdir, GREEN)
         if not os.path.exists("%s/media/media_info" % outdir):
             os.mkdir("%s/media/media_info" % outdir)
+        mediaCfg = \
+                "[media_info]\n" \
+                "version=%s\n" \
+                "branch=%s\n" \
+                "arch=%s\n" \
+                "synthesis-filter=%s\n" \
+                "xml-info=1\n" \
+                "xml-info-filter=.lzma:lzma --text\n" % (config.version, config.branch, self.arch, synthfilter)
+
+        for m in media:
+            mediaCfg += m.getCfgEntry(ext=ext)
+
         f = open("%s/media/media_info/media.cfg" % outdir, "w")
-        f.write(self.getMediaCfg(config))
+        f.write(mediaCfg)
         f.close()
+        os.system("gendistrib "+outdir)
+        os.system("rm %s/media/media_info/{MD5SUM,*.cz}" % outdir)
+
+        for m in media:
+            # workaround for urpmi spaghetti code which hardcodes .cz
+            if ext != ".cz":
+                os.symlink("synthesis.hdlist%s" % ext, "%s/media/%s/media_info/synthesis.hdlist.cz" % (outdir, m.name))
+
+            os.unlink("%s/media/%s/media_info/hdlist.cz" % (outdir, m.name))
+            os.system("cd %s/media/%s/media_info/; md5sum * > MD5SUM" % (outdir, m.name))
+
+            smartopts = "-o sync-urpmi-medialist=no --data-dir %s/smartdata" % os.getenv("PWD")
+            os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/%s/media/%s/ hdlurl=media_info/synthesis.hdlist%s" %
+                    (smartopts, m.name, os.getenv("PWD"), outdir, m.name, ext))
 
         print color("Checking packages", GREEN)
         medias = ""
@@ -227,18 +243,6 @@ class Distribution(object):
         idxfile.close()
 
 
-
-    def getMediaCfg(self,config):
-        mediaCfg = \
-                "[media_info]\n" \
-                "version=%s\n" \
-                "branch=%s\n" \
-                "arch=%s\n" % (config.version, config.branch, self.arch)
-        # todo: sort keys in a list and iterate over it as keys
-        for name in ['main', 'contrib', 'non-free']:
-            if name in self.media.keys():
-                mediaCfg += self.media[name].getCfgEntry()
-        return mediaCfg
 
     """ This is an ugly attempt at rewriting the even uglier perl version which
     I have difficulties fully understanding, I also think I've fixed some bugs
