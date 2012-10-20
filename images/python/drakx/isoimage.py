@@ -39,6 +39,12 @@ class IsoImage(object):
         idxfile.close()
 
         iso = release+".iso"
+        applicationid = "%s - %s %s (%s)" % (config.distribution, config.version, config.subversion, config.flavour)
+        volumesetid = applicationid + " - %s %s" % (arch, config.medium)
+        datapreparer = "DrakX"
+        volumeid = "%s-%s-%s-%s" % (config.vendor, config.flavour.upper(), config.version, arch)
+        systemid = config.distribution
+        publisher = config.vendor
 
         cmd = "grub2-mkrescue -o '%s' '%s' -f --stdio_sync off -c boot/grub/i386-pc/boot.catalog -input-charset utf-8 -R -r" % (iso, config.outdir)
         # cmd prints size in number of sectors of 2048 bytes, so multiply with 2048 to get the number of bytes
@@ -49,5 +55,8 @@ class IsoImage(object):
             raise Exception
         os.system("/usr/bin/time " + cmd)
 
+        print color("Applying metadata to iso image written", GREEN)
+        os.system("xorriso -dev '%s' -boot_image grub patch -boot_image grub bin_path=boot/grub/i386-pc/eltorito.img -boot_image any boot_info_table=on -boot_image any show_status -publisher '%s'  -volset_id '%s' -volid '%s' -preparer_id '%s' -system_id '%s' -application_id '%s' -commit" %
+                (iso, publisher, volumesetid, volumeid, datapreparer, systemid, applicationid))
 
 # vim:ts=4:sw=4:et
