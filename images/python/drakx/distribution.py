@@ -211,7 +211,7 @@ class Distribution(object):
 
         urpm.traverse(get_pkgs)
         self.pkgs.sort()
-        idxfile = open("%s/%s" % (outdir, "pkg-%s.idx" % config.version), "w")
+        idxfile = open("%s/pkg-%s-%s.idx" % (outdir, config.version, config.flavour.replace(" ","").lower()), "w")
         for pkg in self.pkgs:
             idxfile.write(pkg+"\n")
 
