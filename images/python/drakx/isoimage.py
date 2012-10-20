@@ -23,7 +23,22 @@ class IsoImage(object):
         for f in ['autorun.inf', 'dosutils']:
             os.symlink("%s/%s" % (repopath, f), "%s/%s" % (outdir, f))
 
-        iso = "%s-%s-%s.%s.iso" % (self.distribution, self.version, self.name, self.arch)
+        release = "%s-%s-%s.%s" % (self.distribution, self.version, self.name, self.arch)
+
+        pkgs = []
+        for dist in distrib:
+            pkgs.extend(dist.pkgs)
+        pkgs.sort()
+
+        idxfile = open("%s/%s.idx" % (outdir, release), "w")
+        for pkg in pkgs:
+            idxfile.write(pkg+"\n")
+
+        idxfile.close()
+
+
+        iso = release+".iso"
+
 
         os.system("/usr/bin/time grub2-mkrescue -o %s -f --stdio_sync off  -c boot/grub/i386-pc/boot.catalog -R -r %s" % (iso, outdir))
 

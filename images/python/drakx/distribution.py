@@ -206,6 +206,19 @@ class Distribution(object):
         print color("Generating %s/media/media_info/MD5SUM" % self.outdir, GREEN)
         os.system("cd %s/media/media_info/; md5sum * > MD5SUM" % self.outdir)
 
+        self.pkgs = []
+        def get_pkgs(pkg):
+            self.pkgs.append("%s-%s (%s)" % (pkg.name(), pkg.version(), pkg.arch()))
+
+        urpm.traverse(get_pkgs)
+        self.pkgs.sort()
+        idxfile = open("%s/%s" % (self.outdir, "pkg-%s.idx" % version), "w")
+        for pkg in self.pkgs:
+            idxfile.write(pkg+"\n")
+
+        idxfile.close()
+
+
 
     def getMediaCfg(self):
         mediaCfg = \
