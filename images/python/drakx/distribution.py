@@ -162,8 +162,8 @@ class Distribution(object):
 
             os.unlink("%s/media/%s/media_info/hdlist.cz" % (outdir, self.media[m].name))
             smartopts = "-o sync-urpmi-medialist=no --data-dir %s/smartdata" % os.getenv("PWD")
-            os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/%s/media/%s/ hdlurl=media_info/synthesis.hdlist.cz" %
-                    (smartopts, m, os.getenv("PWD"), outdir, m))
+            os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/%s/media/%s/ hdlurl=media_info/synthesis.hdlist%s" %
+                    (smartopts, m, os.getenv("PWD"), outdir, m, ext))
 
         print color("Writing %s/media/media_info/media.cfg" % outdir, GREEN)
         if not os.path.exists("%s/media/media_info" % outdir):
