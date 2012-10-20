@@ -164,6 +164,7 @@ class Distribution(object):
                         self.media[m].size += s.st_size
             self.media[m].pkgs = pkgs
             os.system("genhdlist2 --file-deps %s/media/media_info/file-deps %s/media/%s" % (self.outdir, self.outdir, self.media[m].name))
+            os.unlink("%s/media/%s/media_info/hdlist.cz" % (self.outdir, self.media[m].name))
             smartopts = "-o sync-urpmi-medialist=no --data-dir %s/smartdata" % os.getenv("PWD")
             os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/%s/media/%s/ hdlurl=media_info/synthesis.hdlist.cz" %
                     (smartopts, m, os.getenv("PWD"), self.outdir, m))
