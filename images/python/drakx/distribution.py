@@ -33,6 +33,7 @@ class Distribution(object):
 
         print color("Parsing lists of packages to exclude", GREEN)
         excludepattern = ""
+        excludes = []
         for exclf in excludelist:
             f = open(exclf)
             for line in f.readlines():
@@ -40,10 +41,11 @@ class Distribution(object):
                 if line and line[0] != '#':
                     if excludepattern:
                         excludepattern += '|'
-                    if line[0] == '^' or line[-1] == '$':
-                        excludepattern += line
-                    else:
-                        excludepattern += fnmatch.translate(line).replace("\\Z","")
+                    if not (line[0] == '^' or line[-1] == '$'):
+                        line = fnmatch.translate(line).replace("\\Z","")
+                    excludepattern += line
+                    excludes.append(line)
+
             f.close()
         excludere = re.compile(excludepattern)
 
@@ -60,7 +62,7 @@ class Distribution(object):
 
         perlexc = perl.eval("@excludes = ();")
         perlexc = perl.get_ref("@excludes")
-        perlexc.extend(self.excludes)
+        perlexc.extend(excludes)
 
         stop_on_choices = perl.eval("""$stop_on_choices = sub {
         my ($urpm, undef, $state_, $choices, $virtual_pkg_name, $preferred) = @_;
@@ -292,6 +294,5 @@ class Distribution(object):
 
     arch = None
     media = []
-    excludes = []
 
 # vim:ts=4:sw=4:et
