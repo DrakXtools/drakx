@@ -13,4 +13,4 @@ distrib=[i586,x86_64]
 branch="devel"
 distribution="moondrake-linux"
 
-image = IsoImage(name, version, arch, distrib, branch, distribution, outdir)
+image = IsoImage(name, version, arch, distrib, branch, distribution, outdir, maxsize=800)

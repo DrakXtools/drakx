@@ -1,7 +1,8 @@
-import os
+import os,subprocess
+from drakx.common import *
 
 class IsoImage(object):
-    def __init__(self, name, version, arch, distrib, branch, distribution = "mandriva-linux", outdir = "ut", repopath = None):
+    def __init__(self, name, version, arch, distrib, branch, distribution = "mandriva-linux", outdir = "ut", repopath = None, maxsize = 4700):
 
         destdir = outdir + "/boot"
         grubdir = destdir + "/grub"
@@ -39,8 +40,14 @@ class IsoImage(object):
 
         iso = release+".iso"
 
-
-        os.system("/usr/bin/time grub2-mkrescue -o %s -f --stdio_sync off  -c boot/grub/i386-pc/boot.catalog -input-charset utf-8 -R -r %s" % (iso, outdir))
+        cmd = "grub2-mkrescue -o %s -f --stdio_sync off  -c boot/grub/i386-pc/boot.catalog -input-charset utf-8 -R -r %s" % (iso, outdir)
+        # cmd prints size in number of sectors of 2048 bytes, so multiply with 2048 to get the number of bytes
+        size = int(subprocess.Popen(cmd + " -print-size", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True).stdout.readlines()[-1].strip()) * 2048
+        print color("Estimated iso size will be %d bytes, %d MB" % (size, size/1000/1000), GREEN)
+        if size > (maxsize*1000*1000):
+            print color("Size is bigger than maximum size of %dMB" % maxsize, RED, WHITE, BRIGHT)
+            raise Exception
+        os.system("/usr/bin/time " + cmd)
 
 
 # vim:ts=4:sw=4:et
