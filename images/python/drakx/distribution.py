@@ -42,8 +42,7 @@ class Distribution(object):
                     if excludepattern:
                         excludepattern += '|'
                     if not (line[0] == '^' or line[-1] == '$'):
-                        line = fnmatch.translate(line).replace("\\Z","")
-                    excludepattern += line
+                        excludepattern += fnmatch.translate(line).replace("\\Z","")
                     excludes.append(line)
 
             f.close()
