@@ -20,7 +20,7 @@ class IsoImage(object):
         if len(distrib) > 1:
             arch = "dual"
         else:
-            arch = distrib[0]
+            arch = distrib[0].arch
         if config.subversion:
             subversion = "-"+config.subversion.replace(" ","").lower()
 
@@ -56,7 +56,8 @@ class IsoImage(object):
         os.system("/usr/bin/time " + cmd)
 
         print color("Applying metadata to iso image written", GREEN)
-        os.system("xorriso -dev '%s' -boot_image grub patch -boot_image grub bin_path=boot/grub/i386-pc/eltorito.img -boot_image any boot_info_table=on -boot_image any show_status -publisher '%s'  -volset_id '%s' -volid '%s' -preparer_id '%s' -system_id '%s' -application_id '%s' -commit" %
-                (iso, publisher, volumesetid, volumeid, datapreparer, systemid, applicationid))
+        cmd = "xorriso -dev '%s' -boot_image grub patch -boot_image grub bin_path=boot/grub/i386-pc/eltorito.img -boot_image any boot_info_table=on -boot_image any show_status -publisher '%s'  -volset_id '%s' -volid '%s' -preparer_id '%s' -system_id '%s' -application_id '%s' -commit" % \
+                (iso, publisher, volumesetid, volumeid, datapreparer, systemid, applicationid)
+        os.system(cmd)
 
 # vim:ts=4:sw=4:et
