@@ -39,12 +39,13 @@ class Distribution(object):
             for line in f.readlines():
                 line = line.strip()
                 if line and line[0] != '#':
+                    excludes.append(line)
                     if excludepattern:
                         excludepattern += '|'
-                    if not (line[0] == '^' or line[-1] == '$'):
+                    if line[0] == '^' or line[-1] == '$':
+                        excludepattern += line
+                    else:
                         excludepattern += fnmatch.translate(line).replace("\\Z","")
-                    excludes.append(line)
-
             f.close()
         excludere = re.compile(excludepattern)
 
