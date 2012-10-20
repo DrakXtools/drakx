@@ -138,7 +138,7 @@ class Distribution(object):
             os.symlink("%s/%s" % (repopath, f), "%s/%s" % (outdir, f))
 
         f = open(outdir+"/product.id", "w")
-        # unsure about relevance about all these fields, will just hardcode those seeming irrelevant for now..
+        # unsure about relevance of all these fields, will just hardcode those seeming irrelevant for now..
         f.write("vendor=%s,distribution=%s,type=basic,version=%s,branch=%s,release=1,arch=%s,product=Free\n" % (config.vendor,config.distribution,config.version,config.branch,arch))
         f.close()
 
