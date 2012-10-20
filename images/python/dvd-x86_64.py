@@ -1,10 +1,18 @@
-from drakx.distribution import Distribution
 from drakx.isoimage import IsoImage
+from drakx.releaseconfig import ReleaseConfig
 from drakx.media import Media
+from drakx.distribution import Distribution
 import os
 
-media = []
+config = ReleaseConfig("2012", "OurDiva", "Non-Free", subversion="Alpha 2", medium="DVD")
+os.system("rm -rf "+config.outdir)
 
+srcdir = "./"
+rpmsrate = srcdir + "rpmsrate"
+compssusers = srcdir + "compssUsers.pl"
+filedeps = srcdir + "file-deps"
+
+media = []
 for m in "main", "contrib", "non-free":
     media.append(Media(m))
 
@@ -16,21 +24,7 @@ excludelist = []
 for e in ["exclude", "exclude_free", "exclude_ancient", "exclude_tofix", "exclude_nonfree", "exclude_contrib64"]:
     excludelist.append(srcdir + "lists/" + e)
 
-rpmsrate = srcdir + "rpmsrate"
-compssusers = srcdir + "compssUsers.pl"
-filedeps = srcdir + "file-deps"
-
-version = "2012"
-branch = "devel"
-
-arch = "x86_64"
-
-outdir="ut"
-os.system("rm -rf "+outdir)
-
-x86_64 = Distribution(version, branch, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, outdir, suggests = True)
-name="moondrake"
+x86_64 = Distribution(config, "x86_64", media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = True)
 distrib=[x86_64]
-distribution="mandriva-linux"
 
-image = IsoImage(name, version, arch, x86_64, distribution, branch, outdir)
+image = IsoImage(config, distrib, maxsize=4700)
