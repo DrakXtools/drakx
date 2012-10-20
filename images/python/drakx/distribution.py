@@ -133,9 +133,14 @@ class Distribution(object):
         shutil.copy(compssusers, "%s/media/media_info/compssUsers.pl" % outdir)
         shutil.copy(filedeps, "%s/media/media_info/file-deps" % outdir)
         rootfiles = ['COPYING', 'index.htm', 'install.htm', 'INSTALL.txt', 'LICENSE-APPS.txt', 'LICENSE.txt',
-                'product.id', 'README.txt', 'release-notes.html', 'release-notes.txt', 'VERSION', 'doc', 'misc']
+                'README.txt', 'release-notes.html', 'release-notes.txt', 'VERSION', 'doc', 'misc']
         for f in rootfiles:
             os.symlink("%s/%s" % (repopath, f), "%s/%s" % (outdir, f))
+
+        f = open(outdir+"/product.id", "w")
+        # unsure about relevance about all these fields, will just hardcode those seeming irrelevant for now..
+        f.write("vendor=%s,distribution=%s,type=basic,version=%s,branch=%s,release=1,arch=%s,product=Free\n" % (config.vendor,config.distribution,config.version,config.branch,arch))
+        f.close()
 
         for m in self.media.keys():
             print color("Generating media tree and metadata for " + m, GREEN)
