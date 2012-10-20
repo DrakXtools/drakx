@@ -42,7 +42,7 @@ class IsoImage(object):
         applicationid = "%s - %s %s (%s)" % (config.distribution, config.version, config.subversion, config.flavour)
         volumesetid = applicationid + " - %s %s" % (arch, config.medium)
         datapreparer = "DrakX"
-        volumeid = "%s-%s-%s-%s" % (config.vendor, config.flavour.upper(), config.version, arch)
+        volumeid = ("%s-%s-%s-%s" % (config.vendor, config.flavour, config.version, arch)).upper()
         systemid = config.distribution
         publisher = config.vendor
 
