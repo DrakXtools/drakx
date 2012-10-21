@@ -134,7 +134,7 @@ N_("Graphical Environment") =>
   { label => N_("LXDE Desktop"),
     flags => [ qw(LXDE X ACCESSIBILITY) ], 
     descr => N_("A lightweight & fast graphical environment with user-friendly set of applications and desktop tools"),
-    default_selected => 1;
+    default_selected => 1,
   },
 ],
 
