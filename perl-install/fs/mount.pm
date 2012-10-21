@@ -83,6 +83,7 @@ sub mount {
     push @mount_opt, 'ro' if $b_rdonly;
 
     $o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
+    modules::load("fuse") if $::isInstall && $fs eq 'ntfs-3g' && ! -e '/dev/fuse';
     run_program::run('mount', '-t', $fs, $dev, $where, if_(@mount_opt, '-o', join(',', @mount_opt))) or die N("mounting partition %s in directory %s failed", $dev, $where);
 }
 
