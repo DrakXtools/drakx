@@ -728,7 +728,7 @@ sub add_kernel {
 
     #- new versions of yaboot do not handle symlinks
     $b_nolink ||= arch() =~ /ppc/;
-    $b_no_initrd //= (arch() =~ /mips|arm/) && !detect_devices::is_mips_gdium();
+    $b_no_initrd //= arch() =~ /mips|arm/ && !detect_devices::is_mips_gdium();
 
     $b_nolink ||= $kernel_str->{use_long_name};
 
