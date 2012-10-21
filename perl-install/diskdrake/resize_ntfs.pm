@@ -22,7 +22,7 @@ sub min_size {
     my ($o) = @_;
     my $r;
     run_program::run('ntfsresize', '>', \$r, '-f', '-i', $o->{dev}) or die "ntfsresize failed:\n$r\n";
-    $r =~ /minimal size: (\d+) KiB/ && $1 * 2; 
+    $r =~ /You might resize at (\d+) bytes or / && $1 / 512; 
 }
 
 sub resize {
