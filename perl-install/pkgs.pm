@@ -184,8 +184,10 @@ sub detect_graphical_drivers {
         @cards = Xconfig::card::probe();
     }
 
+    my @firmware_pkgs = grep { $_ } uniq(map { $_->{FIRMWARE} } @cards);
     my @drivers = grep { $_ } uniq(map { $_->{Driver2} } @cards);
-    map { Xconfig::proprietary::pkgs_for_Driver2($_, $do_pkgs) } @drivers;
+    my @proprietary_pkgs = map { Xconfig::proprietary::pkgs_for_Driver2($_, $do_pkgs) } @drivers;
+    return @firmware_pkgs, @proprietary_pkgs;
 }
 
 sub detect_network_drivers {
