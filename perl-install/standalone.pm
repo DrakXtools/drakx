@@ -2,6 +2,7 @@ package standalone; # $Id$
 
 use c;
 use strict;
+use subs qw(exit);
 use common qw(N N_ if_ backtrace);
 use Config;
 
