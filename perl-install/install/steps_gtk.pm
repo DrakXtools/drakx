@@ -348,7 +348,6 @@ sub reallyChooseGroups {
 		    0, gtknew('HButtonBox', layout => 'edge', children_tight => [
                         gtknew('Install_Button', text => N("Help"), clicked => sub {
                                    interactive::gtk::display_help($o, { interactive_help_id => 'choosePackages#choosePackagesGroups' }, $w) }),
-			  gtknew('Button', text => N("Select All"),   clicked => sub { $_->set_active(1) foreach @entries }),
 			  gtknew('Button', text => N("Unselect All"), clicked => sub { $_->set_active(0) foreach @entries }),
 			  gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
 			 ]),
