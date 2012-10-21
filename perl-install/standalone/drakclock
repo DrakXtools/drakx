@@ -39,14 +39,20 @@ my $timezone = timezone::read();
 my $label_timezone = gtknew('Label', text => $timezone->{timezone}  || N("not defined"));
 
 my $button_time = gtknew('Button', text => N("Change Time Zone"));
+my @timezones = eval { timezone::getTimeZones() };
+my $err = $@;
 $button_time->signal_connect(clicked => sub {
 				   local $::isEmbedded = 0; # to prevent sub window embedding
-				   if ($timezone->{timezone} = $in->ask_from_treelist(N("Timezone - DrakClock"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $timezone->{timezone})) {
+				   if ($timezone->{timezone} = $in->ask_from_treelist(N("Timezone - DrakClock"), N("Which is your timezone?"), '/', \@timezones, $timezone->{timezone})) {
                                        $timezone->{UTC} = $in->ask_yesorno(N("GMT - DrakClock"), N("Is your hardware clock set to GMT?"), $timezone->{UTC});
                                        timezone::write($timezone);
                                    }
                                    $label_timezone->set_text($timezone->{timezone});
 			       });
+if (!@timezones) {
+    warn "Failed to retrieve timezone list: $err\n";
+    $button_time->set_sensitive(0);
+}
 
 my $drawing_area;
 
