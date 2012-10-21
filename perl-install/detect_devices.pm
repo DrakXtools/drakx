@@ -1241,7 +1241,6 @@ sub matching_types() {
 sub hasCPUMicrocode() {
     state $hasCPUMicrocode;
     if (!defined $hasCPUMicrocode) {
-        eval { modules::load('microcode') };
         $hasCPUMicrocode = to_bool(find { 'microcode' } modules::loaded_modules());
     }
     return $hasCPUMicrocode;

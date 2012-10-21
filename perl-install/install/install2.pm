@@ -576,6 +576,9 @@ sub main {
 
     if ($::local_install) {
         init_local_install($o);
+    } else {
+        # load some modules early but asynchronously:
+        run_program::raw({ detach => 1 }, 'modprobe', 'microcode');
     }
 
     $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : "/mnt";
