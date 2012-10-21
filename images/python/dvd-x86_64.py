@@ -8,7 +8,7 @@ config = ReleaseConfig("2012", "OurDiva", "Non-Free", subversion="Alpha 2", medi
 os.system("rm -rf "+config.outdir)
 
 srcdir = "./"
-rpmsrate = srcdir + "rpmsrate"
+rpmsrate = "../../perl-install/install/share/meta-task/rpmsrate-raw"
 compssusers = srcdir + "compssUsers.pl"
 filedeps = srcdir + "file-deps"
 
