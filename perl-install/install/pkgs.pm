@@ -43,13 +43,13 @@ sub extractHeaders {
         eval {
             require packdrake;
             my $packer = new packdrake(install::media::hdlist_on_disk($medium), quiet => 1);
-            $packer->extract_archive("$::prefix/tmp/headers", map { $_->header_filename } @l);
+            $packer->extract_archive("$::prefix/tmp/headers", map { $_->fullname } @l);
         };
         $@ and log::l("packdrake failed: $@");
     }
 
     foreach (@$pkgs) {
-        my $f = "$::prefix/tmp/headers/" . $_->header_filename;
+        my $f = "$::prefix/tmp/headers/" . $_->fullname;
         $_->update_header($f) or log::l("unable to open header file $f"), next;
     }
 }
