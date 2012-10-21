@@ -308,7 +308,8 @@ sub convert_ttf_fonts {
 sub move_fonts {
     my ($src_dir, $dest_dir, @extensions) = @_;
     my @fonts = map { s!.*/!!; $_ } map { glob("$src_dir/*.$_") } @extensions;
-    system("cd $src_dir && mv @fonts $dest_dir") if @fonts;
+    next if !@fonts;
+    system('mv', "$src_dir/$_", $dest_dir) foreach @fonts;
 }
 
 sub my_rm_rf {
@@ -411,7 +412,7 @@ sub remove_fonts() {
     foreach my $i (@font_list) {
         local $_ = $i;
         if (/.pfb$/ || /.gsf$/ || /.pfm$/ || /.pfa$/) {
-            system("mv $_ $drakfont_dir/remove ");
+            system('mv', $_, "$drakfont_dir/remove");
         } else {
 	  next if $::testing;
 	    if (/.ttf$/) {
