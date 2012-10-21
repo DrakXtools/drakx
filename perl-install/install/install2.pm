@@ -368,6 +368,7 @@ sub read_product_id() {
     $o->{product_id} = common::parse_LDAP_namespace_structure($product_id);
  
     $o->{meta_class} ||= {
+        LXDE         => 'lxde',
         One          => 'desktop',
         Free         => 'download',
         Powerpack    => 'powerpack',
