@@ -63,7 +63,7 @@ sub translate_real {
 sub remove_translate_context {
     my ($s) = @_;
     #- translation with context, kde-like 
-    $s =~ s/^_:.*\n//;
+    $s =~ s/^_:.*(?:\n)?//g;
     $s;
 }
 
