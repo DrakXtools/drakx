@@ -154,7 +154,7 @@ my $ttf2pt1      = '/usr/sbin/ttf2pt1';
 my $pfm2afm      = '/usr/sbin/pfm2afm';
 my $type1inst    = '/usr/sbin/type1inst';
 my $chkfontpath  = '/usr/sbin/chkfontpath';
-# mkttfdir only knows about iso-8859-1, using ttmkfdir -u instead -- pablo
+# mkttfdir only knows about iso-8859-1, using ttmkfdir instead -- pablo
 my $ttmkfdir     = '/usr/bin/ttmkfdir';
 my $fccache      = '/usr/bin/fc-cache';
 
@@ -346,7 +346,7 @@ sub put_font_dir() {
         }
         system('cd ' . $temp_dir . ' && cp *.ttf ../../ttf; chmod 644 ../../ttf/*ttf') if glob("$temp_dir/*.ttf");
         interactive_progress($pbar2, 0.20, N("please wait during ttmkfdir..."));
-        put_font_dir_real("ttf", "$ttmkfdir -u > fonts.dir", 0.10, N("True Type install done"));
+        put_font_dir_real("ttf", "$ttmkfdir > fonts.dir", 0.10, N("True Type install done"));
 
         if ($gs) {
             convert_ttf_fonts([ glob("$drakfont_dir/tmp/tmp/*.ttf") ], 1);
@@ -418,7 +418,7 @@ sub remove_fonts() {
 	    if (/.ttf$/) {
 		my_rm_rf($_);
 		# rebuild of the fonts.dir and fc-cache files
-       		system("cd `dirname $_` && $fccache && $ttmkfdir -u > fonts.dir");
+       		system("cd `dirname $_` && $fccache && $ttmkfdir > fonts.dir");
 	    } else { my_rm_rf($i) }
         }
         $i =~ s!/\w*\.\w*!!gi;
