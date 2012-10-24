@@ -44,7 +44,7 @@ initrd() {
     done
 
     cat > "$tmp_initrd/etc/issue" <<EOF
-    `linux_logo -l`
+`linux_logo -l`
 
     [1;37;40mMicro environment[0m
 
@@ -62,6 +62,11 @@ EOF
 	../tools/install-xml-file-list list.xml "$tmp_initrd"
 
 	cp -r tree/* "$tmp_initrd"
+	# This is a quite lame workaround for a tail process to read the output of syslog
+	# etc. to ttys and needs for the files to exist when starting the tail process
+	# before they get written to otherwise. Saner ways and having the output printed
+	# directly to the ttys should be done...
+	touch "$tmp_initrd"/var/log/{stage{1,2}.log,messages}
 
 	if false; then
 	    install -m644 tree/etc/mdev.conf		-D $tmp_initrd/etc/mdev.conf
