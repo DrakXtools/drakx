@@ -100,8 +100,10 @@ class Distribution(object):
                     pid = int(pid)
                     pkg = urpm['depslist'][pid]
                     if excludere.match(pkg.name()):
-                        #print "skipping1: %s" % pkg.fullname()
+                        print color("skipping1: %s" % pkg.fullname(), YELLOW, RESET, DIM)
                         continue
+                    #else:
+                    #    print color("including1: %s" % pkg.fullname(), YELLOW, RESET, BRIGHT)
                     pkg = urpm['depslist'][pid]
 
                     if not dep:
@@ -150,7 +152,7 @@ class Distribution(object):
             pkgs = []
             for pkg in allpkgs:
                 if excludere.match(pkg.name()):
-                    #print "skipping2: " + pkg.name()
+                    print color("skipping2: " + pkg.name(), YELLOW, RESET, DIM)
                     continue
 
                 source = "%s/media/%s/release/%s.rpm" % (repopath, m.name, pkg.fullname())
@@ -292,13 +294,11 @@ class Distribution(object):
                         deps.pop(i)
     
             if deps:
-                pkgs.extend(deps)
-    
-                if False:
-                    if int(weight) >= int(threshold):
-                        print "including: %s (%s >= %s)" % (deps,weight,threshold)
-                    else:
-                        print "excluding: %s (%s < %s)" % (deps, weight,threshold)
+                if int(weight) >= int(threshold):
+                    print color("rpmsrate including: %s (%s >= %s)" % (deps,weight,threshold), YELLOW, RESET, BRIGHT)
+                    pkgs.extend(deps)
+                else:
+                    print color("rpmsrate excluding: %s (%s < %s)" % (deps, weight,threshold), YELLOW, RESET, DIM)
             if unsetCat:
                 cat = None
         f.close()
