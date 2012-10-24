@@ -139,7 +139,7 @@ class Distribution(object):
 
         f = open(outdir+"/product.id", "w")
         # unsure about relevance of all these fields, will just hardcode those seeming irrelevant for now..
-        f.write("vendor=%s,distribution=%s,type=basic,version=%s,branch=%s,release=1,arch=%s,product=Free\n" % (config.vendor,config.distribution,config.version,config.branch,arch))
+        f.write("vendor=%s,distribution=%s,type=basic,version=%s,branch=%s,release=1,arch=%s,product=%s\n" % (config.vendor,config.distribution,config.version,config.branch,arch,config.product))
         f.close()
       
         ext = synthfilter.split(":")[0]
@@ -171,12 +171,14 @@ class Distribution(object):
             os.mkdir("%s/media/media_info" % outdir)
         mediaCfg = \
                 "[media_info]\n" \
+                "mediacfg_version=2\n" \
                 "version=%s\n" \
                 "branch=%s\n" \
+                "product=%s\n" \
                 "arch=%s\n" \
                 "synthesis-filter=%s\n" \
                 "xml-info=1\n" \
-                "xml-info-filter=.lzma:lzma --text\n" % (config.version, config.branch, self.arch, synthfilter)
+                "xml-info-filter=.lzma:lzma --text\n" % (config.version, config.branch, config.product, self.arch, synthfilter)
 
         for m in media:
             mediaCfg += m.getCfgEntry(ext=ext)

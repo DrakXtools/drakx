@@ -4,12 +4,12 @@ from drakx.media import Media
 from drakx.distribution import Distribution
 import os
 
-config = ReleaseConfig("2012", "OurDiva", "Non-Free", subversion="Alpha 2", medium="CD")
+config = ReleaseConfig("2012", "OurDiva", "LXDE", subversion="Alpha 2", medium="CD")
 os.system("rm -rf "+config.outdir)
 
 srcdir = "./"
 rpmsrate = "../../perl-install/install/share/meta-task/rpmsrate-raw"
-compssusers = srcdir + "compssUsers-mini.pl"
+compssusers = "../../perl-install/install/share/meta-task/compssUsers.pl"
 filedeps = srcdir + "file-deps"
 
 

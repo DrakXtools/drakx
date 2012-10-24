@@ -39,10 +39,10 @@ class IsoImage(object):
         idxfile.close()
 
         iso = release+".iso"
-        applicationid = "%s - %s %s (%s)" % (config.distribution, config.version, config.subversion, config.flavour)
+        applicationid = "%s - %s %s (%s)" % (config.distribution, config.version, config.subversion, config.product)
         volumesetid = applicationid + " - %s %s" % (arch, config.medium)
         datapreparer = "DrakX"
-        volumeid = ("%s-%s-%s-%s" % (config.vendor, config.flavour, config.version, arch)).upper()
+        volumeid = ("%s-%s-%s-%s" % (config.vendor, config.product, config.version, arch)).upper()
         systemid = config.distribution
         publisher = config.vendor
 
