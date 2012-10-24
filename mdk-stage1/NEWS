@@ -1,5 +1,7 @@
-Version 1.61 -  7 October 2012, by Per Øyvind Karlsen
+Version 1.61 - 24 October 2012, by Per Øyvind Karlsen
 
+- as we no longer load rescue mode from a separate squashfs image, don't try
+  prepare for fetching it from any specific media
 - don't try mount squashfs image for stage2 installer
 - dynamically link binary rather than statically
 - add firmware loader written in C (based on hotplug2) (mga#6323)

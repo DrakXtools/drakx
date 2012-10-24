@@ -454,7 +454,8 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 				   "your own risk. Alternatively, you may reboot your system now.");
 	}
 
-        method_select_and_prepare();
+	if (!get_param(MODE_RESCUE))
+		method_select_and_prepare();
 
 	thirdparty_destroy();
 
