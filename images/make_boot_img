@@ -173,8 +173,8 @@ grub() {
 	N=$((N+1))
 	mkdir -p "$path"
 	install -m644 all.kernels/$I/vmlinuz -D $path/$wordsize/vmlinuz
-	if [ ! -s "$path/$wordsize/modules.rdz" ]; then
-    	    modules "$path/$wordsize/modules.rdz" $I
+	if [ ! -s "$path/$wordsize/modules.cpio.xz" ]; then
+    	    modules "$path/$wordsize/modules.cpio.xz" $I
 	fi
     done
 
@@ -196,9 +196,9 @@ tmp_initrd="$PWD/tmp_initrd"
 rm -rf "$tmp_initrd"
 
 
-if [ "$filename" = "all.rdz" ]; then
+if [ "$filename" = "all.cpio.xz" ]; then
     initrd
-elif [ "$filename" = "modules.rdz" ]; then
+elif [ "$filename" = "modules.cpio.xz" ]; then
     for I in `cat all.kernels/.list`; do
     	modules $1 $I
     done

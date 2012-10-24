@@ -10,7 +10,7 @@ class IsoImage(object):
 
         os.system("rm -rf "+destdir)
         os.mkdir(destdir)
-        os.system("ln -sr ../grub/boot/{all.rdz,alt*} %s/" % destdir)
+        os.system("ln -sr ../grub/boot/alt* %s/" % destdir)
         os.symlink("/boot/memtest.bin", destdir+"/memtest")
         os.mkdir(grubdir)
         os.system("ln -sr ../grub/boot/grub/* %s/" % grubdir)

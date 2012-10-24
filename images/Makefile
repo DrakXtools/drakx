@@ -5,7 +5,13 @@ PRODUCT=$(FAMILY)-images
 KERNELS=$(shell rpm -qf /lib/modules/3.*)
 IMAGES_DEST = $(ROOTDEST)/install/images
 #COMPRESS = xz -v --check=crc32 -9e
+ARCH=$(shell arch)
+ifeq (x86_64, $(ARCH))
 WORDSIZE = 64
+else
+WORSIZE=32
+ARCH=i586
+endif
 
 all: images
 
@@ -16,7 +22,7 @@ ifeq (1, $(USE_LOCAL_STAGE1))
 STAGE1_BINS = ../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage/lspcidrake
 endif
 
-images: images/hd_grub.img images/hd_grub.img images/boot.iso grub/boot/alt0/$(WORDSIZE)/modules.rdz
+images: images/hd_grub.img images/hd_grub.img images/boot.iso grub/$(ARCH)/install/images/all.cpio.xz grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz
 
 
 #../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage1/lspcidrake:
@@ -26,17 +32,17 @@ $(STAGE1_BINS):
 images/hd_grub.img:
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img.pl --compress "$(COMPRESS)" $@
 
-grub/boot/all.rdz: list.xml make_boot_img guessmounts rescue-doc
+grub/$(ARCH)/install/images/all.cpio.xz: list.xml make_boot_img guessmounts rescue-doc $(STAGE1_BINS)
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
 
-grub/boot/grub/grub.cfg: grub_data/grub.cfg
+grub/boot/grub/grub.cfg: grub_data/grub.cfg grub_data/themes/moondrake/theme.txt grub_data/themes/moondrake/star_w.png 
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img grub
 
-images/boot.iso: grub/boot/grub/grub.cfg grub/boot/all.rdz grub/boot/alt0/$(WORDSIZE)/modules.rdz
+images/boot.iso: grub/boot/grub/grub.cfg grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz grub/$(ARCH)/install/images/all.cpio.xz
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
 	cd images; md5sum boot.iso > MD5SUM
 
-grub/boot/alt0/$(WORDSIZE)/modules.rdz: grub_data/grub.cfg grub_data/themes/moondrake/theme.txt grub_data/themes/moondrake/star_w.png all.kernels/.list
+grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz: all.kernels/.list
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
 
 all.kernels/.list: update_kernel ../kernel/list_modules.pm

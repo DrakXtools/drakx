@@ -5,8 +5,7 @@ perl.require("urpm")
 perl.require("urpm::select")
 
 class Distribution(object):
-    def __init__(self, config, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = False, synthfilter = ".cz:gzip -9"):
-
+    def __init__(self, config, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = False, synthfilter = ".cz:gzip -9", stage1=None, stage2="../mdkinst.cpio.xz", advertising="../../advertising"):
         self.arch = arch
         self.media = {}
         for m in media:
@@ -286,13 +285,22 @@ class Distribution(object):
             print "error in rpmsrate"
             exit(1)
 
-        print color("Copying second stage installer: %s/install/stage2/mdkinst.cpio.xz" % outdir, GREEN)
+        # if none specified, rely on it's presence in grub target tree...
+        if not stage1:
+            stage1 = "../grub/%s/install/images/all.cpio.xz" % self.arch
+        print color("Copying first stage installer: %s -> %s/install/images/all.cpio.xz" % (stage1, outdir), GREEN)
         os.mkdir("%s/install" % outdir)
+        os.mkdir("%s/install/images" % outdir)
+        os.system("ln -sr %s %s/install/images/all.cpio.xz" % (stage1, outdir))
+
+        print color("Copying second stage installer: %s -> %s/install/stage2/mdkinst.cpio.xz" % (stage2, outdir), GREEN)
         os.mkdir("%s/install/stage2" % outdir)
-        os.system("ln -sr ../mdkinst.cpio.xz %s/install/stage2/mdkinst.cpio.xz" % outdir)
+        os.system("ln -sr %s %s/install/stage2/mdkinst.cpio.xz" % (stage2, outdir))
         os.system("ln -sr ../VERSION %s/install/stage2/VERSION" % outdir)
+
+        print color("Copying advertising: %s -> %s/install/extra/advertising" % (advertising, outdir), GREEN)
         os.mkdir("%s/install/extra" % outdir)
-        os.system("ln -sr ../../advertising %s/install/extra/advertising" % outdir)
+        os.system("ln -sr %s %s/install/extra/advertising" % (advertising, outdir))
 
         print color("Generating %s/media/media_info/MD5SUM" % outdir, GREEN)
         os.system("cd %s/media/media_info/; md5sum * > MD5SUM" % outdir)
