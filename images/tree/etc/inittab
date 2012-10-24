@@ -6,7 +6,7 @@
 ::ctrlaltdel:/sbin/reboot
 ::shutdown:/bin/umount -a -r
 ::shutdown:/sbin/swapoff -a
-::once:/sbin/klogd -n -c 6
+::once:/sbin/klogd -n -c 3
 ::once:/sbin/syslogd -n -s 0
 tty11::once:/usr/bin/tail -f /var/log/stage1.log
 tty12::once:/usr/bin/tail -f /var/log/messages
