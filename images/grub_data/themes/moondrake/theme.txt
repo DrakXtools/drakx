@@ -5,8 +5,8 @@ message-color: "#000000"
 message-bg-color: "#ffffff"
 
 + boot_menu {
-    left = 15%
-    top = 15%
+    left = 30%
+    top = 30%
     width = 70%
     height = 40%
     item_color = "#888888"
@@ -20,16 +20,15 @@ message-bg-color: "#ffffff"
     item_icon_space = 0
 }
 
-+ progress_bar {
++ circular_progress {
     id = "__timeout__"
-    left = 20%
-    top = 70%
-    width = 80%
-    height = 18
-    bg_color = "#002266"
-    fg_color = "#334488"
-    text_color = "#ffffff"
-    border_color = "#3344aa"
-    show_text = true
-    text = "@TIMEOUT_NOTIFICATION_LONG@"
+    left = 29%
+    top = 29%
+    width = 50
+    height = 50
+    num_ticks = 300
+    start_angle = -56
+    ticks_disappear = true
+    center_bitmap = "star_shade_w.png"
+    tick_bitmap = "tick.png"
 }
