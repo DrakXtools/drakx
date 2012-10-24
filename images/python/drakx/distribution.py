@@ -51,14 +51,15 @@ class Distribution(object):
 
         empty_db = perl.callm("new", "URPM")
         urpm = perl.eval("""my $urpm = new URPM;
-                $urpm->{error} = sub { printf "urpm error: %s\n", $_[0] };
-                $urpm""");
+                $urpm->{error} = sub { printf "urpm error: %s\n", $_[0] };"""
+                # enable for urpm debug output
+                #"""$urpm->{debug} = sub { printf "urpm debug: %s\n", $_[0] };"""
+                "$urpm;");
+
         for m in self.media.keys():
             synthesis = repopath + "/" + self.media[m].getSynthesis()
             print color("Parsing synthesis for %s: %s" % (m, synthesis), GREEN)
             urpm.parse_synthesis(synthesis) 
-
-        requested = perl.get_ref("%")
 
         perlexc = perl.eval("@excludes = ();")
         perlexc = perl.get_ref("@excludes")
@@ -91,15 +92,68 @@ class Distribution(object):
         }""")
 
         def search_pkgs(deps):
-            perl.call("urpm::select::search_packages", urpm, requested, deps, use_provides=1)
-
+            requested = perl.get_ref("%")
             state = perl.get_ref("%")
+
+            perl.call("urpm::select::search_packages", urpm, requested, deps, use_provides=1)
 
             urpm.resolve_requested(empty_db, state, requested, 
                     no_suggests = not suggests,
                     callback_choices = stop_on_choices, nodeps = 1)
 
             allpkgs = []
+
+            # create a dictionary of URPM::Package object, indexed by fullname
+            # for us to easier lookup packages in
+            pkgdict = dict()
+            for key in requested.keys():
+                key = key.strip()
+                if not key:
+                    continue
+
+                pkgids = key.split("|")
+                for pkgid in pkgids:
+                    pkg = urpm['depslist'][int(pkgid)]
+                    pkgdict[pkg.fullname()] = pkg
+
+            # As we try resolving all packages we'd like to include in the distribution
+            # release at once, there's a fair chance of there being some requested
+            # packages conflicting with eachother, resulting in requested packages
+            # getting rejected. To workaround this, we'll try resolve these packages
+            # separately to still include them and their dependencies.
+            rejects = []
+            for key in state['rejected'].keys():
+                reject = state['rejected'][key]
+                if reject.has_key('backtrack'):
+                    backtrack = reject['backtrack']
+                    if backtrack.has_key('conflicts'):
+                        if key in pkgdict:
+                            pkg = pkgdict[key]
+
+                            if pkg.name() in deps and pkg.name() not in rejects:
+                                conflicts = backtrack['conflicts']
+                                skip = False
+                                for c in conflicts:
+                                    cpkg = pkgdict[c]
+                                    # if it's a package rejected due to conflict with a package of same name,
+                                    # it's most likely some leftover package in repos that haven't been
+                                    # removed yet and that we can safely ignore
+                                    if cpkg.name() == pkg.name():
+                                        skip = True
+                                if not skip:
+                                    print color("The requested package %s has been rejected due to conflicts with: %s" %
+                                            (pkg.fullname(), string.join(conflicts)), RED)
+                                    rejects.append(pkg.name())
+            if rejects:
+                print color("Trying to resolve the following requested packages rejected due to conflicts: %s" %
+                        string.join(rejects, " "), BLUE, RESET, BRIGHT)
+                res = search_pkgs(rejects)
+                for pkg in res:
+                    pkgid = str(pkg.id())
+                    if not pkgid in state['selected'].keys():
+                        print color("adding %s" % pkg.fullname(), BLUE)
+                        state['selected'][pkgid] = 1
+
             for pid in state['selected'].keys():
                 pids = pid.split('|')
             
@@ -117,11 +171,13 @@ class Distribution(object):
                     if not dep:
                         dep = pkg
                     else:
+                        print color("hum: %s" % pkg.fullname(), YELLOW, RESET, DIM)
                         True
                 if dep is None:
-                    #print "ouch!"
+                    print color("dep is none: %s" % pkg.fullname(), YELLOW, RESET, DIM)
                     continue
                 else:
+                    #print color("including: %s" % pkg.fullname(), YELLOW, RESET, BRIGHT)
                     allpkgs.append(dep)
             return allpkgs
 
