@@ -3,7 +3,7 @@
 . /etc/init.d/functions
 
 sed -e 's|^::restart:/etc/init.d/rc.newroot|::restart:/init|g' -i /etc/inittab
-if grep -q rescue /etc/proc/cmdline; then
+if grep -q rescue /proc/cmdline; then
 	sed -e 's|^tty1::once:.*|::respawn:/sbin/getty -n 115200,9600 tty1 linux -l /bin/rescue-gui|g' -i /etc/inittab
 elif [ -x /tmp/stage2/usr/bin/runinstall2 ]; then
 	for f in `(cd /tmp/stage2; find -type f)`; do
