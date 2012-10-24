@@ -154,19 +154,18 @@ class Distribution(object):
                         print color("adding %s" % pkg.fullname(), BLUE)
                         state['selected'][pkgid] = 1
 
-            for pid in state['selected'].keys():
-                pids = pid.split('|')
+            for pkgid in state['selected'].keys():
+                pkgids = pkgid.split('|')
             
                 dep = None
-                for pid in pids:
-                    pid = int(pid)
-                    pkg = urpm['depslist'][pid]
+                for pkgid in pkgids:
+                    pkgid = int(pkgid)
+                    pkg = urpm['depslist'][pkgid]
                     if excludere.match(pkg.name()):
                         print color("skipping1: %s" % pkg.fullname(), YELLOW, RESET, DIM)
                         continue
                     #else:
                     #    print color("including1: %s" % pkg.fullname(), YELLOW, RESET, BRIGHT)
-                    pkg = urpm['depslist'][pid]
 
                     if not dep:
                         dep = pkg
