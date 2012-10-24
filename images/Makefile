@@ -29,7 +29,7 @@ images/hd_grub.img:
 grub/boot/all.rdz: list.xml make_boot_img guessmounts rescue-doc
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
 
-grub/boot/grub/grub.cfg:
+grub/boot/grub/grub.cfg: grub_data/grub.cfg
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img grub
 
 images/boot.iso: grub/boot/grub/grub.cfg grub/boot/all.rdz grub/boot/alt0/$(WORDSIZE)/modules.rdz
