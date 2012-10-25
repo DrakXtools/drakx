@@ -91,29 +91,28 @@ class Distribution(object):
         }""")
 
         def search_pkgs(deps):
-            requested = perl.get_ref("%")
+            requested = dict()
             state = perl.get_ref("%")
 
             perl.call("urpm::select::search_packages", urpm, requested, deps, use_provides=1)
+
+            # create a dictionary of URPM::Package object, indexed by fullname
+            # for us to easier lookup packages in
+            pkgdict = dict()
+            for key in requested.keys():
+                pkgids = key.split("|")
+                for pkgid in pkgids:
+                    pkg = urpm['depslist'][int(pkgid)]
+                    if excludere.match(pkg.name()):
+                        requested.pop(key)
+                        print color("skipping candidate for requested packages: %s" % pkg.fullname(), YELLOW)
+                    pkgdict[pkg.fullname()] = pkg
 
             urpm.resolve_requested(empty_db, state, requested, 
                     no_suggests = not suggests,
                     callback_choices = stop_on_choices, nodeps = 1)
 
             allpkgs = []
-
-            # create a dictionary of URPM::Package object, indexed by fullname
-            # for us to easier lookup packages in
-            pkgdict = dict()
-            for key in requested.keys():
-                key = key.strip()
-                if not key:
-                    continue
-
-                pkgids = key.split("|")
-                for pkgid in pkgids:
-                    pkg = urpm['depslist'][int(pkgid)]
-                    pkgdict[pkg.fullname()] = pkg
 
             # As we try resolving all packages we'd like to include in the distribution
             # release at once, there's a fair chance of there being some requested
