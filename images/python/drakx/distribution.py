@@ -79,10 +79,10 @@ class Distribution(object):
                 print ": \033[33m\033[49m\033[1mincluding\n";
                 $dep = $pkg;
             } elsif (!$dep->compare_pkg($pkg)) {
-                print ": \033[33m\033[49m\033[1mpreferred\n";
+                print ": \033[33m\033[49m\033[1mpreferred over " . $dep->name() . "\n";
                 $dep = $pkg;
             } else {
-                print ": \033[33m\033[49m\033[2mskipped\n";
+                print ": \033[33m\033[49m\033[2mskipped in favour of " . $dep->name() . "\n";
             }
         }
         print "\033[0m";
