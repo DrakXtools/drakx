@@ -266,15 +266,11 @@ class Distribution(object):
                     (smartopts, m.name, os.getenv("PWD"), outdir, m.name, ext))
 
         print color("Checking packages", GREEN)
-        medias = ""
         rpmdirs = []
         for m in self.media.keys():
             rpmdirs.append("%s/media/%s" % (outdir, m))
-            if medias:
-                medias += ","
-            medias += m
         os.system("smart update %s" % smartopts)
-        os.system("smart check %s --channels=%s" % (smartopts, medias))
+        os.system("smart check %s --channels=%s" % (smartopts, string.join(self.media.keys(),",")))
         os.system("sleep 5");
 
         print color("Generating %s/media/media_info/rpmsrate" % outdir, GREEN)
