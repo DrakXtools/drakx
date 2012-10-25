@@ -69,7 +69,7 @@ class Distribution(object):
 
         my $dep;
         foreach my $pkg (@$choices) {
-            print "\033[0mchoice: " . $pkg->name();
+            print "\033[0mchoice: " . $pkg->fullname();
             if (grep { $_ eq $pkg->name() } @excludes) {
             print ": \033[33m\033[49m\033[2mexcluded\n";
                 next;
@@ -79,10 +79,10 @@ class Distribution(object):
                 print ": \033[33m\033[49m\033[1mincluding\n";
                 $dep = $pkg;
             } elsif (!$dep->compare_pkg($pkg)) {
-                print ": \033[33m\033[49m\033[1mpreferred over " . $dep->name() . "\n";
+                print ": \033[33m\033[49m\033[1mpreferred over " . $dep->fullname() . "\n";
                 $dep = $pkg;
             } else {
-                print ": \033[33m\033[49m\033[2mskipped in favour of " . $dep->name() . "\n";
+                print ": \033[33m\033[49m\033[2mskipped in favour of " . $dep->fullname() . "\n";
             }
         }
         print "\033[0m";
