@@ -49,11 +49,14 @@ class Distribution(object):
         excludere = re.compile(excludepattern)
 
         empty_db = perl.callm("new", "URPM")
-        urpm = perl.eval("""my $urpm = new URPM;
-                $urpm->{error} = sub { printf "urpm error: %s\n", $_[0] };"""
+        urpm = perl.eval("""my $urpm = urpm->new();"""
+                """$urpm->{error} = sub { printf "urpm error: %s\n", $_[0] };"""
+                """$urpm->{fatal} = sub { printf "urpm fatal %s\n", $_[0]; };"""
                 # enable for urpm debug output
+                #"""$urpm->{log} = sub { printf "urpm log: %s\n", $_[0] };"""
                 #"""$urpm->{debug} = sub { printf "urpm debug: %s\n", $_[0] };"""
-                "$urpm;");
+                #"""$urpm->{debug_URPM} = sub { printf "URPM debug: %s\n", $_[0] };"""
+                "$urpm;")
 
         for m in self.media.keys():
             synthesis = repopath + "/" + self.media[m].getSynthesis()
@@ -96,17 +99,28 @@ class Distribution(object):
 
             perl.call("urpm::select::search_packages", urpm, requested, deps, use_provides=1)
 
-            # create a dictionary of URPM::Package object, indexed by fullname
+            # create a dictionary of URPM::Package objects, indexed by fullname
             # for us to easier lookup packages in
             pkgdict = dict()
             for key in requested.keys():
                 pkgids = key.split("|")
+
+                dep = None
                 for pkgid in pkgids:
                     pkg = urpm['depslist'][int(pkgid)]
                     if excludere.match(pkg.name()):
                         requested.pop(key)
                         print color("skipping candidate for requested packages: %s" % pkg.fullname(), YELLOW)
-                    pkgdict[pkg.fullname()] = pkg
+                        break
+                    if not dep:
+                        dep = pkg
+                    elif dep.compare_pkg(pkg) < 0:
+                        dep = pkg
+                if dep:
+                    if len(pkgids) > 1:
+                        requested.pop(key)
+                        requested[str(dep.id())] = 1
+                    pkgdict[pkg.fullname()] = dep
 
             urpm.resolve_requested(empty_db, state, requested, 
                     no_suggests = not suggests,
@@ -122,12 +136,14 @@ class Distribution(object):
             rejects = []
             for key in state['rejected'].keys():
                 reject = state['rejected'][key]
+                #print color("rejected: %s" % key, RED, RESET, DIM)
                 if reject.has_key('backtrack'):
                     backtrack = reject['backtrack']
                     if backtrack.has_key('conflicts'):
                         if key in pkgdict:
                             pkg = pkgdict[key]
 
+                            print color("conflicts: %s with %s" % (key, list(backtrack['conflicts'])), RED, RESET, DIM)
                             if pkg.name() in deps and pkg.name() not in rejects:
                                 conflicts = backtrack['conflicts']
                                 skip = False
@@ -140,7 +156,7 @@ class Distribution(object):
                                         skip = True
                                 if not skip:
                                     print color("The requested package %s has been rejected due to conflicts with: %s" %
-                                            (pkg.fullname(), string.join(conflicts)), RED)
+                                            (pkg.fullname(), string.join(conflicts)), RED, RESET, BRIGHT)
                                     rejects.append(pkg.name())
             if rejects:
                 print color("Trying to resolve the following requested packages rejected due to conflicts: %s" %
@@ -180,8 +196,10 @@ class Distribution(object):
 
         print color("Resolving packages", GREEN)
         allpkgs = search_pkgs(includes)
-        # lame, having difficulties figuring out how to properly recursively
-        # resolve dependencies (potentially a bug in urpmi?), so just do it manually for now..
+        # we allow to search through all matches regardless of being able to satisfy
+        # dependencies, for in which case urpmi doesn't check which to prefer in case
+        # several versions of same package is found, urpmi just picks first returned,
+        # so we need to do a second run to make sure that we actually get the right ones
         includes = []
         for p in allpkgs:
             includes.append(p.name())
