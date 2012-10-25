@@ -19,7 +19,8 @@ elif [ -x /tmp/stage2/usr/bin/runinstall2 ]; then
 fi
 
 if [ -x /usr/bin/runinstall2 ]; then
-	sed -e 's|^tty1::once:.*|tty1::respawn:/usr/bin/runinstall2|g' -i /etc/inittab
+	# FIXME: using cttyhack feels dirty.. :p
+	sed -e 's|^tty1::once:.*|tty1::respawn:cttyhack /usr/bin/runinstall2|g' -i /etc/inittab
 else
 	# this gets done by stage1 otherwise..
 	kill -SIGHUP 1
