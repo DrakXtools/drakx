@@ -107,18 +107,15 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 		choice = "";
 		results = ask_from_list("Please choose the desired action.", actions, &choice);
 
-		if (ptr_begins_static_str(choice, install_bootloader)) {
+		if (ptr_begins_static_str(choice, install_bootloader))
 			child_argv[0] = "/usr/bin/install_bootloader";
-		}
 #if ENABLE_RESCUE_MS_BOOT
-		if (ptr_begins_static_str(choice, restore_ms_boot)) {
+		else if (ptr_begins_static_str(choice, restore_ms_boot))
 			child_argv[0] = "/usr/bin/restore_ms_boot";
-		}
 #endif
-		if (ptr_begins_static_str(choice, mount_parts)) {
+		else if (ptr_begins_static_str(choice, mount_parts))
 			child_argv[0] = "/usr/bin/guessmounts";
-		}
-		if (ptr_begins_static_str(choice, reboot_)) {
+		else if (ptr_begins_static_str(choice, reboot_)) {
 			finish_frontend();
                         sync();
 			printf("rebooting system\n");
@@ -127,36 +124,27 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 			child_argv[1] = "-d";
 			child_argv[2] = "2";
 		}
-		if (ptr_begins_static_str(choice, doc)) {
+		else if (ptr_begins_static_str(choice, doc))
 			child_argv[0] = "/usr/bin/rescue-doc";
-		}
-		if (ptr_begins_static_str(choice, go_to_console)) {
+		else if (ptr_begins_static_str(choice, go_to_console)) {
 			child_argv[0] = "/bin/sh";
 			child_argv[1] = "--login";
 		}
-
 		/* Mandriva Flash entries */
-		if (ptr_begins_static_str(choice, rootpass)) {
+		else if (ptr_begins_static_str(choice, rootpass))
 			child_argv[0] = "/usr/bin/reset_rootpass";
-		}
-		if (ptr_begins_static_str(choice, userpass)) {
+		else if (ptr_begins_static_str(choice, userpass))
 			child_argv[0] = "/usr/bin/reset_userpass";
-		}
-		if (ptr_begins_static_str(choice, factory)) {
+		else if (ptr_begins_static_str(choice, factory))
 			child_argv[0] = "/usr/bin/clear_systemloop";
-		}
-		if (ptr_begins_static_str(choice, backup)) {
+		else if (ptr_begins_static_str(choice, backup))
 			child_argv[0] = "/usr/bin/backup_systemloop";
-		}
-		if (ptr_begins_static_str(choice, restore)) {
+		else if (ptr_begins_static_str(choice, restore))
 			child_argv[0] = "/usr/bin/restore_systemloop";
-		}
-		if (ptr_begins_static_str(choice, badblocks)) {
+		else if (ptr_begins_static_str(choice, badblocks))
 			child_argv[0] = "/usr/bin/test_badblocks";
-		}
-		if (ptr_begins_static_str(choice, upgrade)) {
+		else if (ptr_begins_static_str(choice, upgrade))
 			child_argv[0] = "/usr/bin/upgrade";
-		}
 
 		if (child_argv[0]) {
 			int wait_status;
