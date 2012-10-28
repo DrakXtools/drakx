@@ -27,6 +27,7 @@
 #include <sys/ioctl.h>
 #include <linux/unistd.h>
 #include <sys/select.h>
+#include <stdbool.h>
 
 #include "rescue-gui.h"
 #include "config-stage1.h"
@@ -71,7 +72,12 @@ static void PAUSE(void) {
   read(0, &t, 1);
 }
 
-struct filesystem { char * dev; char * name; char * fs; int mounted; };
+struct filesystem {
+	char * dev;
+	char * name;
+	char * fs;
+	bool mounted;
+};
 
 static void unmount_filesystems(void)
 {
@@ -98,7 +104,7 @@ static void unmount_filesystems(void)
 
 	p = buf;
 	while (*p) {
-		fs[numfs].mounted = 1;
+		fs[numfs].mounted = true;
 		fs[numfs].dev = p;
 		while (*p != ' ') p++;
 		*p++ = '\0';
@@ -126,7 +132,7 @@ static void unmount_filesystems(void)
 					del_loop(fs[i].dev);
 				
 				printf("\t%s\n", fs[i].name);
-				fs[i].mounted = 0;
+				fs[i].mounted = false;
 				nb++;
 			}
 		}
