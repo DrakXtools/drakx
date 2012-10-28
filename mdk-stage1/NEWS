@@ -1,5 +1,7 @@
-Version 1.61 - 24 October 2012, by Per Øyvind Karlsen
+Version 1.61 - 28 October 2012, by Per Øyvind Karlsen
 
+- disable SPAWN_SHELL, there's no need for this crippled shell when we now have
+  a lot more complete shell provided by busybox available
 - as we no longer load rescue mode from a separate squashfs image, don't try
   prepare for fetching it from any specific media
 - don't try mount squashfs image for stage2 installer
