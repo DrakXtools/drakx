@@ -379,7 +379,6 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 		open_log();
 		init_frontend("");
 
-		unlink("/etc/resolv.conf"); /* otherwise it is read-only */
 		set_param(MODE_AUTOMATIC);
 		grab_automatic_params("network:dhcp");
 
