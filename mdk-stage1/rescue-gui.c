@@ -132,6 +132,7 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 		}
 		if (ptr_begins_static_str(choice, go_to_console)) {
 			child_argv[0] = "/bin/sh";
+			child_argv[1] = "--login";
 		}
 
 		/* Mandriva Flash entries */
