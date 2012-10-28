@@ -53,9 +53,9 @@ static inline long reboot(void)
 
 static char * env[] = {
 	"PATH=/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:/mnt/bin:/mnt/usr/bin",
-	"LD_LIBRARY_PATH=/lib:/usr/lib:/mnt/lib:/mnt/usr/lib:"
+	"LD_LIBRARY_PATH=/lib:/usr/lib:/mnt/lib:/mnt/usr/lib"
 #if defined(__x86_64__) || defined(__ppc64__)
-	":/lib64:/usr/lib64:/mnt/lib64:/mnt/usr/lib64:"
+	":/lib64:/usr/lib64:/mnt/lib64:/mnt/usr/lib64"
 #endif
 	,
 	"HOME=/",
