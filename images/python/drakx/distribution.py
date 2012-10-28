@@ -103,7 +103,12 @@ class Distribution(object):
             # for us to easier lookup packages in
             pkgdict = dict()
             for key in requested.keys():
+                if not key:
+                    requested.pop(key)
+                    continue
                 pkgids = key.split("|")
+                if not pkgids:
+                    continue
 
                 dep = None
                 for pkgid in pkgids:
