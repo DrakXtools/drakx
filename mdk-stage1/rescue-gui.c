@@ -27,7 +27,6 @@
 #include <sys/ioctl.h>
 #include <linux/unistd.h>
 #include <sys/select.h>
-#include <stdbool.h>
 
 #include "rescue-gui.h"
 #include "config-stage1.h"
@@ -35,17 +34,6 @@
 #include "utils.h"
 #include "params.h"
 #include "lomount.h"
-
-#include <sys/syscall.h>
-
-#define LINUX_REBOOT_MAGIC1    0xfee1dead
-#define LINUX_REBOOT_MAGIC2    672274793
-#define BMAGIC_REBOOT          0x01234567
-
-static inline long reboot(void)
-{
-       return (long) syscall(__NR_reboot, LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, BMAGIC_REBOOT, 0);
-}
 
 #if defined(__i386__) || defined(__x86_64__)
 #define ENABLE_RESCUE_MS_BOOT 1
@@ -58,86 +46,6 @@ static void PAUSE(void) {
   fflush(stdout);
   read(0, &t, 1);
 }
-
-struct filesystem {
-	char * dev;
-	char * name;
-	char * fs;
-	bool mounted;
-};
-
-static void unmount_filesystems(void)
-{
-	int fd, size;
-	char buf[65535];			/* this should be big enough */
-	char *p;
-	struct filesystem fs[500];
-	int numfs = 0;
-	int i, nb;
-	
-	printf("unmounting filesystems...\n"); 
-	
-	fd = open("/proc/mounts", O_RDONLY, 0);
-	if (fd < 1) {
-		printf("ERROR: failed to open /proc/mounts");
-		sleep(2);
-		return;
-	}
-
-	size = read(fd, buf, sizeof(buf) - 1);
-	buf[size] = '\0';
-
-	close(fd);
-
-	p = buf;
-	while (*p) {
-		fs[numfs].mounted = true;
-		fs[numfs].dev = p;
-		while (*p != ' ') p++;
-		*p++ = '\0';
-		fs[numfs].name = p;
-		while (*p != ' ') p++;
-		*p++ = '\0';
-		fs[numfs].fs = p;
-		while (*p != ' ') p++;
-		*p++ = '\0';
-		while (*p != '\n') p++;
-		p++;
-		if (strcmp(fs[numfs].name, "/") != 0) numfs++; /* skip if root, no need to take initrd root in account */
-	}
-
-	/* Pixel's ultra-optimized sorting algorithm:
-	   multiple passes trying to umount everything until nothing moves
-	   anymore (a.k.a holy shotgun method) */
-	do {
-		nb = 0;
-		for (i = 0; i < numfs; i++) {
-			/*printf("trying with %s\n", fs[i].name);*/
-			if (fs[i].mounted && umount(fs[i].name) == 0) { 
-				if (strncmp(fs[i].dev + sizeof("/dev/") - 1, "loop",
-					    sizeof("loop") - 1) == 0)
-					del_loop(fs[i].dev);
-				
-				printf("\t%s\n", fs[i].name);
-				fs[i].mounted = false;
-				nb++;
-			}
-		}
-	} while (nb);
-	
-	for (i = nb = 0; i < numfs; i++)
-		if (fs[i].mounted) {
-			printf("\t%s umount failed\n", fs[i].name);
-			if (strcmp(fs[i].fs, "ext2") == 0) nb++; /* don't count not-ext2 umount failed */
-		}
-	
-	if (nb) {
-		printf("failed to umount some filesystems\n");
-		while (1);
-	}
-}
-/* ------ UUURGH -- end */
-
 
 int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute__ ((unused)), char *env[])
 {
@@ -194,73 +102,69 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 
 	do {
 		int pid;
-		char * binary = NULL;
+		char * child_argv[4] = {NULL, NULL, NULL, NULL};
 
 		choice = "";
 		results = ask_from_list("Please choose the desired action.", actions, &choice);
 
 		if (ptr_begins_static_str(choice, install_bootloader)) {
-			binary = "/usr/bin/install_bootloader";
+			child_argv[0] = "/usr/bin/install_bootloader";
 		}
 #if ENABLE_RESCUE_MS_BOOT
 		if (ptr_begins_static_str(choice, restore_ms_boot)) {
-			binary = "/usr/bin/restore_ms_boot";
+			child_argv[0] = "/usr/bin/restore_ms_boot";
 		}
 #endif
 		if (ptr_begins_static_str(choice, mount_parts)) {
-			binary = "/usr/bin/guessmounts";
+			child_argv[0] = "/usr/bin/guessmounts";
 		}
 		if (ptr_begins_static_str(choice, reboot_)) {
 			finish_frontend();
-                        sync(); sync();
-                        sleep(2);
-			unmount_filesystems();
-                        sync(); sync();
+                        sync();
 			printf("rebooting system\n");
-			sleep(2);
-			reboot();
+			/* FIXME: issues unmounting some (less critical at least) mount points */
+			child_argv[0] = "/sbin/reboot";
+			child_argv[1] = "-d";
+			child_argv[2] = "2";
 		}
 		if (ptr_begins_static_str(choice, doc)) {
-			binary = "/usr/bin/rescue-doc";
+			child_argv[0] = "/usr/bin/rescue-doc";
 		}
 		if (ptr_begins_static_str(choice, go_to_console)) {
-			binary = "/bin/sh";
+			child_argv[0] = "/bin/sh";
 		}
 
 		/* Mandriva Flash entries */
 		if (ptr_begins_static_str(choice, rootpass)) {
-			binary = "/usr/bin/reset_rootpass";
+			child_argv[0] = "/usr/bin/reset_rootpass";
 		}
 		if (ptr_begins_static_str(choice, userpass)) {
-			binary = "/usr/bin/reset_userpass";
+			child_argv[0] = "/usr/bin/reset_userpass";
 		}
 		if (ptr_begins_static_str(choice, factory)) {
-			binary = "/usr/bin/clear_systemloop";
+			child_argv[0] = "/usr/bin/clear_systemloop";
 		}
 		if (ptr_begins_static_str(choice, backup)) {
-			binary = "/usr/bin/backup_systemloop";
+			child_argv[0] = "/usr/bin/backup_systemloop";
 		}
 		if (ptr_begins_static_str(choice, restore)) {
-			binary = "/usr/bin/restore_systemloop";
+			child_argv[0] = "/usr/bin/restore_systemloop";
 		}
 		if (ptr_begins_static_str(choice, badblocks)) {
-			binary = "/usr/bin/test_badblocks";
+			child_argv[0] = "/usr/bin/test_badblocks";
 		}
 		if (ptr_begins_static_str(choice, upgrade)) {
-			binary = "/usr/bin/upgrade";
+			child_argv[0] = "/usr/bin/upgrade";
 		}
 
-		if (binary) {
+		if (child_argv[0]) {
 			int wait_status;
 			suspend_to_console();
 			if (!(pid = fork())) {
 
-				char * child_argv[2];
-				child_argv[0] = binary;
-				child_argv[1] = NULL;
 				execve(child_argv[0], child_argv, env);
 
-				printf("Can't execute binary (%s)\n<press Enter>\n", binary);
+				printf("Can't execute binary (%s)\n<press Enter>\n", child_argv[0]);
 				PAUSE();
 
 				return 33;
