@@ -50,7 +50,7 @@ static inline long reboot(void)
 #define ENABLE_RESCUE_MS_BOOT 1
 #endif
 
-char * env[] = {
+static char * env[] = {
 	"PATH=/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:/mnt/bin:/mnt/usr/bin",
 	"LD_LIBRARY_PATH=/lib:/usr/lib:/mnt/lib:/mnt/usr/lib:/usr/X11R6/lib:/mnt/usr/X11R6/lib"
 #if defined(__x86_64__) || defined(__ppc64__)
@@ -72,7 +72,8 @@ static void PAUSE(void) {
 }
 
 struct filesystem { char * dev; char * name; char * fs; int mounted; };
-void unmount_filesystems(void)
+
+static void unmount_filesystems(void)
 {
 	int fd, size;
 	char buf[65535];			/* this should be big enough */
