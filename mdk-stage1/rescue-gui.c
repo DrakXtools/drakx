@@ -224,7 +224,7 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 			binary = "/usr/bin/rescue-doc";
 		}
 		if (ptr_begins_static_str(choice, go_to_console)) {
-			binary = "/home/peroyvind/Dokumenter/mandriva/drakx/images/tree/bin/login.bash";
+			binary = "/bin/sh";
 		}
 
 		/* Mandriva Flash entries */
