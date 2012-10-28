@@ -388,7 +388,7 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 		return 0;
 	}
 	if (!strcmp(binary_name, "rescue-gui"))
-		return rescue_gui_main(argc, argv);
+		return rescue_gui_main(argc, argv, env);
 	if (!strcmp(binary_name, "probe-modules"))
 		return probe_modules_main(argc, argv);
 	if (!strcmp(binary_name, "drvinst"))

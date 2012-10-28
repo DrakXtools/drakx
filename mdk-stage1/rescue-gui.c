@@ -51,19 +51,6 @@ static inline long reboot(void)
 #define ENABLE_RESCUE_MS_BOOT 1
 #endif
 
-static char * env[] = {
-	"PATH=/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:/mnt/bin:/mnt/usr/bin",
-	"LD_LIBRARY_PATH=/lib:/usr/lib:/mnt/lib:/mnt/usr/lib"
-#if defined(__x86_64__) || defined(__ppc64__)
-	":/lib64:/usr/lib64:/mnt/lib64:/mnt/usr/lib64"
-#endif
-	,
-	"HOME=/",
-	"TERM=linux",
-	"TERMINFO=/etc/terminfo",
-	NULL
-};
-
 /* pause() already exists and causes the invoking process to sleep
    until a signal is received */
 static void PAUSE(void) {
@@ -152,7 +139,7 @@ static void unmount_filesystems(void)
 /* ------ UUURGH -- end */
 
 
-int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute__ ((unused)))
+int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute__ ((unused)), char *env[])
 {
 	enum return_type results;
 
@@ -186,6 +173,16 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 	char * flash_mode;
 	char ** actions;
 	char * choice;
+
+	setenv("PATH", "/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:/mnt/bin:/mnt/usr/bin", 1);
+	setenv("LD_LIBRARY_PATH","/lib:/usr/lib:/mnt/lib:/mnt/usr/lib"
+#if defined(__x86_64__) || defined(__ppc64__)
+			":/lib64:/usr/lib64:/mnt/lib64:/mnt/usr/lib64"
+#endif
+			, 1);
+	setenv("HOME", "/", 0);
+	setenv("TERM", "linux", 1);
+	setenv("TERMINFO", "/etc/terminfo", 1);
 
 	process_cmdline();
 	flash_mode = get_param_valued("flash");
@@ -226,6 +223,9 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 		if (ptr_begins_static_str(choice, doc)) {
 			binary = "/usr/bin/rescue-doc";
 		}
+		if (ptr_begins_static_str(choice, go_to_console)) {
+			binary = "/home/peroyvind/Dokumenter/mandriva/drakx/images/tree/bin/login.bash";
+		}
 
 		/* Mandriva Flash entries */
 		if (ptr_begins_static_str(choice, rootpass)) {
@@ -258,8 +258,8 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 				char * child_argv[2];
 				child_argv[0] = binary;
 				child_argv[1] = NULL;
-
 				execve(child_argv[0], child_argv, env);
+
 				printf("Can't execute binary (%s)\n<press Enter>\n", binary);
 				PAUSE();
 
@@ -276,7 +276,7 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 			}
 		}
 
-	} while (results == RETURN_OK && !ptr_begins_static_str(choice, go_to_console));
+	} while (results == RETURN_OK);
 
 	finish_frontend();
 	printf("Bye.\n");
