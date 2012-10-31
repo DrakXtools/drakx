@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. /etc/init.d/functions
+. /etc/rc.d/init.d/functions
 
 sed -e 's|^::restart:/etc/init.d/rc.newroot|::restart:/init|g' -i /etc/inittab
 if grep -q rescue /proc/cmdline; then

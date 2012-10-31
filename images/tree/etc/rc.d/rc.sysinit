@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. /etc/init.d/functions
+. /etc/rc.d/init.d/functions
 
 # Set the hostname.
 action "Setting hostname stage1" hostname stage1
@@ -24,12 +24,12 @@ udevadm trigger --type=subsystems --action=add
 udevadm trigger --type=devices --action=add
 
 if grep -q rescue /proc/cmdline; then
-	. /etc/init.d/rc.stage2
+	. /etc/rc.d/rc.stage2
 else
 	# Set the hostname.
 	action "Setting hostname stage2" hostname stage2
 fi
 
-. /etc/init.d/rc.newroot
+. /etc/rc.d/rc.newroot
 
 #init q
