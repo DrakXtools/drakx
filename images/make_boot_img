@@ -97,7 +97,7 @@ EOF
     ln -v "$tmp_initrd/sbin/init" "$tmp_initrd/init"
 
     LANGUAGE=C
-    sed -e 's/^#LANGUAGE.*/export LANGUAGE=$LANGUAGE\nexport LC_ALL=$LANGUAGE\n/g' -i "$tmp_initrd/etc/init.d/rc.stage2"
+    sed -e 's/^#LANGUAGE.*/export LANGUAGE=$LANGUAGE\nexport LC_ALL=$LANGUAGE\n/g' -i "$tmp_initrd/etc/rc.d/rc.stage2"
 
     # XXX: prevent this from being added to begin with
     rm -rf "$tmp_initrd/usr/share/locale/"
