@@ -31,7 +31,7 @@ char *my_dirname(const char *path);
 #define scall(retval, msg) scall_(retval, msg, __FILE__, __LINE__)
 void lowercase(char *s);
 
-#define ptr_begins_static_str(pointer,static_str) (!strncmp((const char*)pointer,static_str,sizeof(static_str)-1))
+#define ptr_begins_static_str(pointer,static_str) (pointer != nullptr && !strncmp((const char*)pointer,static_str,sizeof(static_str)-1))
 #define streq(a,b) (!strcmp(a,b))
 
 #endif

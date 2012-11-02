@@ -80,7 +80,7 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 
 	const char * flash_mode;
 	const char ** actions;
-	char * choice;
+	char * choice = NULL;
 
 	setenv("PATH", "/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:/mnt/bin:/mnt/usr/bin", 1);
 	setenv("LD_LIBRARY_PATH","/lib:/usr/lib:/mnt/lib:/mnt/usr/lib"
@@ -104,7 +104,6 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 		int pid;
 		const char * child_argv[4] = {NULL, NULL, NULL, NULL};
 
-		choice = "";
 		results = ask_from_list("Please choose the desired action.", actions, &choice);
 
 		if (ptr_begins_static_str(choice, install_bootloader))
