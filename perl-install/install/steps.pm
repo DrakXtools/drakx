@@ -325,10 +325,8 @@ sub beforeInstallPackages {
 
     if ($o->{isUpgrade}) {
 	$o->{modules_conf}->merge_into(modules::any_conf->read);
-    }
 
-    #- save these files in case of upgrade failure.
-    if ($o->{isUpgrade}) {
+	#- save these files in case of upgrade failure.
 	foreach (@filesToSaveForUpgrade) {
 	    unlink "$::prefix/$_.mdkgisave";
 	    if (-e "$::prefix/$_") {
