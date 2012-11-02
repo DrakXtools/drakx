@@ -61,6 +61,7 @@
 
 #include "probing.h"
 
+using namespace ldetect;
 
 struct media_info {
 	char * name;

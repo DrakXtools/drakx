@@ -71,6 +71,7 @@
 #include "disk.h"
 #endif
 
+using namespace ldetect;
 
 /************************************************************
  * globals */

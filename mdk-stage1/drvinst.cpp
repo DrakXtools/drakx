@@ -32,19 +32,21 @@
 #include "drvinst.h"
 #include "modules.h"
 
+using namespace ldetect;
+
 /* TODO: add_addons... */
 static void load_modules(int argc, char *argv[]) {
     std::vector<pciusb_entry> *entries = pci_probe();
     for (unsigned int i = 0; i < entries->size(); i++) {
 	pciusb_entry &e = (*entries)[i];
-	const char *devclass = pci_class2text(e.class_id);
-	if (e.module.empty() || e.module.find(':') || !strcmp(devclass, "DISPLAY_VGA"))
+	const std::string &devclass = pci_class2text(e.class_id);
+	if (e.module.empty() || e.module.find(':') || devclass == "DISPLAY_VGA")
 	    continue;
 	if (argc > 1) {
 	    int j;
 	    bool skip = true;
 	    for (j = 1; j < argc; j++) {
-		if (!strncasecmp(argv[j], devclass, strlen(argv[j]))) {
+		if (!strncasecmp(argv[j], devclass.c_str(), strlen(argv[j]))) {
 		    skip = false;
 		    break;
 		}
@@ -52,7 +54,7 @@ static void load_modules(int argc, char *argv[]) {
 	    if (skip)
 		continue;
 	}
-	printf("Installing driver %s (for \"%s\" [%s])\n", e.module.c_str(), e.text.c_str(), devclass);
+	printf("Installing driver %s (for \"%s\" [%s])\n", e.module.c_str(), e.text.c_str(), devclass.c_str());
 	modprobe(e.module.c_str(), NULL);
     }
     delete entries;
