@@ -556,7 +556,7 @@ static enum return_type configure_network(struct interface_info * intf)
 		}
 		
 		hostname = answers[0];
-		if ((boulet = strchr(hostname, '.')) != NULL)
+		if ((boulet = (char*)strchr(hostname, '.')) != NULL)
 			boulet[0] = '\0';
 		domain = answers[1];
 	}
@@ -762,7 +762,7 @@ static enum return_type get_http_proxy(char **http_proxy_host, char **http_proxy
 
 static int url_split(const char *url, const char *protocol, char **host, char **path)
 {
-	char *protocol_sep, *host_sep;
+	const char *protocol_sep, *host_sep;
 
 	protocol_sep = strstr(url, "://");
 	if (!protocol_sep) {

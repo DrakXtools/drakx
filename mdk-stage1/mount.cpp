@@ -41,7 +41,7 @@ int ensure_dev_exists(const char * dev)
 	int type = S_IFBLK; /* my default type is block. don't forget to change for chars */
 	const char * name;
 	struct stat buf;
-	char * ptr;
+	const char * ptr;
 	
 	name = &dev[5]; /* we really need that dev be passed as /dev/something.. */
 

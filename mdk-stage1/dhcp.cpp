@@ -552,7 +552,7 @@ enum return_type perform_dhcp(struct interface_info * intf)
 		if (results == RETURN_OK)
 		{
 			dhcp_hostname = answers[0];
-			if ((boulet = strchr(dhcp_hostname, '.')) != NULL)
+			if ((boulet = strchr((char*)dhcp_hostname, '.')) != NULL)
 				boulet[0] = '\0';
 			dhcp_domain = answers[1];
 			

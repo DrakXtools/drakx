@@ -162,7 +162,7 @@ void lowercase(char *s)
 }
 
 char *my_dirname(const char *path) {
-	char *p = strrchr (path, '/');
+	const char *p = strrchr (path, '/');
 	char *tmp;
 	int len;
 	if (!p)
