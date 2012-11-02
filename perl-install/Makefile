@@ -64,7 +64,7 @@ localcopy: clean
 
 localdist: tar
 
-dist-svn: localcopy
+dist dist-svn: localcopy
 	tar cfa $(PACKAGE)-$(PKGVERSION).tar.xz $(PACKAGE)-$(PKGVERSION)
 	rm -rf $(PACKAGE)-$(PKGVERSION)
 
