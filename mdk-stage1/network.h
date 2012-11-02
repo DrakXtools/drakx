@@ -26,6 +26,8 @@
 #include <netinet/ip.h>
 #include <arpa/inet.h>
 
+#include "frontend.h"
+
 enum return_type intf_select_and_up();
 
 enum return_type nfs_prepare(void);
@@ -56,12 +58,12 @@ struct interface_info {
 
 /* these are to be used only by dhcp.c */
 
-char * guess_netmask(char * ip_addr);
+const char * guess_netmask(const char * ip_addr);
 
 int configure_net_device(struct interface_info * intf);
 
-extern char * hostname;
-extern char * domain;
+extern const char * hostname;
+extern const char * domain;
 extern struct in_addr gateway;
 extern struct in_addr dns_server;
 extern struct in_addr dns_server2;

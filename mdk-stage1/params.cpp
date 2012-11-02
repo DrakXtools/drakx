@@ -64,7 +64,7 @@ void process_cmdline(void)
 			i++;
 			continue;
 		}
-		name = _memdup(&buf[j], i-j + 1);
+		name = (char*)_memdup(&buf[j], i-j + 1);
 		name[i-j] = '\0';
 
 		if (buf[i] == '=') {
@@ -72,7 +72,7 @@ void process_cmdline(void)
 			i++;
 			while (buf[i] != ' ' && buf[i] != '\0')
 				i++;
-			value = _memdup(&buf[k], i-k + 1);
+			value = (char*)_memdup(&buf[k], i-k + 1);
 			value[i-k] = '\0';
 		}
 
@@ -149,7 +149,7 @@ int get_param(int i)
 	return (stage1_mode & i);
 }
 
-char * get_param_valued(char *param_name)
+const char * get_param_valued(const char *param_name)
 {
 	int i;
 	for (i = 0; i < param_number ; i++)

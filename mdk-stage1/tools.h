@@ -24,18 +24,20 @@
 #define _TOOLS_H_
 
 #include <stdlib.h>
+
 #include "bootsplash.h"
+#include "frontend.h"
 
 int image_has_stage2();
-enum return_type create_IMAGE_LOCATION(char *location_full);
+enum return_type create_IMAGE_LOCATION(const char *location_full);
 int ramdisk_possible(void);
-enum return_type copy_file(char * from, char * to, void (*callback_func)(int overall));
+enum return_type copy_file(const char * from, char * to, void (*callback_func)(int overall));
 enum return_type preload_mount_compressed_fd(int compressed_fd, int image_size, char *image_name, char *location_mount);
 enum return_type mount_compressed_image(char *compressed_image,  char *location_mount);
 enum return_type mount_compressed_image_may_preload(char *image_name, char *location_mount, int preload);
 enum return_type load_compressed_fd(int fd, int size);
 enum return_type may_load_compressed_image(void);
-int try_mount(char * dev, char * location);
+int try_mount(const char * dev, const char * location);
 #ifndef DISABLE_DISK
 int get_disks(char *** names, char *** models);
 #endif

@@ -15,7 +15,7 @@
 #ifndef _PCMCIA_CARDMGR_INTERFACE_H_
 #define _PCMCIA_CARDMGR_INTERFACE_H_
 
-char * pcmcia_probe(void);
-void pcmcia_socket_startup(int socket_no);
+const char * pcmcia_probe(void);
+void pcmcia_socket_startup(unsigned int socket_no);
 
 #endif

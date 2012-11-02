@@ -38,16 +38,16 @@
 #include "adsl.h"
 
 
-static enum return_type adsl_connect(struct interface_info * intf, char * username, char * password, char * acname)
+static enum return_type adsl_connect(struct interface_info * intf, const char * username, const char * password, const char * acname)
 {
 	char pppoe_call[500];
-	char * pppd_launch[] = { "/sbin/pppd", "pty", pppoe_call, "noipdefault", "noauth", "default-asyncmap", "defaultroute",
+	const char * pppd_launch[] = { "/sbin/pppd", "pty", pppoe_call, "noipdefault", "noauth", "default-asyncmap", "defaultroute",
 				 "hide-password", "nodetach", "usepeerdns", "local", "mtu", "1492", "mru", "1492", "noaccomp",
 				 "noccp", "nobsdcomp", "nodeflate", "nopcomp", "novj", "novjccomp", "user", username,
 				 "password", password, "lcp-echo-interval", "20", "lcp-echo-failure", "3", "lock", "persist", NULL };
 	int fd;
 	int retries = 10;
-	char * tty_adsl = "/dev/tty6";
+	const char tty_adsl[] = "/dev/tty6";
 	enum return_type status = RETURN_ERROR;
 	pid_t ppp_pid;
 
@@ -79,7 +79,7 @@ static enum return_type adsl_connect(struct interface_info * intf, char * userna
 			log_perror("could not set new controlling tty");
 		
 		printf("\t(exec of pppd)\n");
-		execv(pppd_launch[0], pppd_launch);
+		execv(pppd_launch[0], (char * const*)pppd_launch);
 		log_message("execve of %s failed: %s", pppd_launch[0], strerror(errno));
 		exit(-1);
 	}
@@ -125,8 +125,8 @@ static enum return_type adsl_connect(struct interface_info * intf, char * userna
 enum return_type perform_adsl(struct interface_info * intf)
 {
 	struct in_addr addr;
-	char * questions[] = { "Username", "Password", "AC Name", NULL };
-	char * questions_auto[] = { "adsluser", "adslpass", "adslacname", NULL };
+	const char * questions[] = { "Username", "Password", "AC Name", NULL };
+	const char * questions_auto[] = { "adsluser", "adslpass", "adslacname", NULL };
 	static char ** answers = NULL;
 	enum return_type results;
 

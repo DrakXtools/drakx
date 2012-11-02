@@ -34,6 +34,7 @@ LIBC=uclibc
 
 ifeq (uclibc, $(LIBC))
 CC=uclibc-gcc
+CXX=uclibc-g++
 else
 # diet libc syscalls are broken on mips
 # diet libc eabi support is mostly broken
@@ -50,12 +51,12 @@ OPTFLAGS = -Os -fomit-frame-pointer
 endif
 
 #- flags used by all stuff
-CFLAGS = $(OPTFLAGS) -pipe -Wall -Werror=strict-aliasing -Wstrict-aliasing=2
+CXXFLAGS = $(OPTFLAGS) -pipe -Wall -Werror=strict-aliasing -Wstrict-aliasing=2 -std=gnu++11
 WHOLEFLAGS = -Os -fwhole-program -flto
 
 ifneq (ppc, $(ARCH))
 ifneq (sparc, $(ARCH))
-CFLAGS += -Werror
+#CFLAGS += -Werror
 endif
 endif
 

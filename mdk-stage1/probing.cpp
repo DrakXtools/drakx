@@ -95,7 +95,7 @@ static int net_intf_too_early_number = 0;
 static int net_intf_too_early_ptr = 0;
 
 const char * safe_descr(const char * text) {
-	return text ? text : "unknown";
+	return (text && *text) ? text : "unknown";
 }
 
 void prepare_intf_descr(const char * intf_descr)
@@ -123,7 +123,7 @@ void net_discovered_interface(char * intf_name)
 	net_descr_number++;
 }
 
-char * get_net_intf_description(char * intf_name)
+char * get_net_intf_description(const char * intf_name)
 {
 	int i;
 	for (i = 0; i < net_descr_number ; i++)
@@ -133,14 +133,13 @@ char * get_net_intf_description(char * intf_name)
 }
 #endif
 
-static int device_match_modules_list(struct pciusb_entry *e, char **modules, unsigned int modules_len) {
-	int i;
-	if (!e->module)
-		return 0;
-	for (i = 0; i < modules_len; i++)
-		if (!strcmp(modules[i], e->module))
-			return 1;
-	return 0;
+static bool device_match_modules_list(pciusb_entry &e, const char **modules, unsigned int modules_len) {
+	if (e.module.empty())
+		return false;
+	for (unsigned int i = 0; i < modules_len; i++)
+		if (!strcmp(modules[i], e.module.c_str()))
+			return true;
+	return false;
 }
 
 struct pcitable_entry *detected_devices = NULL;
@@ -158,9 +157,9 @@ static struct pcitable_entry *detected_device_new(void)
 	if (detected_devices_len >= detected_devices_maxlen) {
 		detected_devices_maxlen += 32;
 		if (detected_devices == NULL)
- 			detected_devices = malloc(detected_devices_maxlen * sizeof(*detected_devices));
+ 			detected_devices = (struct pcitable_entry*)malloc(detected_devices_maxlen * sizeof(*detected_devices));
 		else
-			detected_devices = realloc(detected_devices, detected_devices_maxlen * sizeof(*detected_devices));
+			detected_devices = (struct pcitable_entry*)realloc(detected_devices, detected_devices_maxlen * sizeof(*detected_devices));
 		if (detected_devices == NULL)
 			log_perror("detected_device_new: could not (re)allocate table. Let it crash, sorry");
 	}
@@ -169,41 +168,41 @@ static struct pcitable_entry *detected_device_new(void)
 
 /* FIXME: factorize with probe_that_type() */
 
-static void add_detected_device(unsigned short vendor, unsigned short device, unsigned int subvendor, unsigned int subdevice, const char *name, const char *module)
+static void add_detected_device(unsigned short vendor, unsigned short device, unsigned int subvendor, unsigned int subdevice, const std::string &name, const std::string &module)
 {
 	struct pcitable_entry *dev = detected_device_new();
 	dev->vendor = vendor;
 	dev->device = device;
 	dev->subvendor = subvendor;
 	dev->subdevice = subdevice;
-	strncpy(dev->module, module, sizeof(dev->module) - 1);
+	strncpy(dev->module, module.c_str(), sizeof(dev->module) - 1);
 	dev->module[sizeof(dev->module) - 1] = '\0';
-	strncpy(dev->description, safe_descr(name), sizeof(dev->description) - 1);
+	strncpy(dev->description, safe_descr(name.c_str()), sizeof(dev->description) - 1);
 	dev->description[sizeof(dev->description) - 1] = '\0';
-	log_message("detected device (%04x, %04x, %04x, %04x, %s, %s)", vendor, device, subvendor, subdevice, name, module);
+	log_message("detected device (%04x, %04x, %04x, %04x, %s, %s)", vendor, device, subvendor, subdevice, name.c_str(), module.c_str());
 }
 
-static int add_detected_device_if_match(struct pciusb_entry *e, char **modules, unsigned int modules_len)
+static int add_detected_device_if_match(pciusb_entry &e, const char **modules, unsigned int modules_len)
 {
 	int ret = device_match_modules_list(e, modules, modules_len);
 	if (ret)
-		add_detected_device(e->vendor, e->device, e->subvendor, e->subdevice,
-				    e->text, e->module);
+		add_detected_device(e.vendor, e.device, e.subvendor, e.subdevice,
+				    e.text, e.module);
 	return ret;
 }
 
 void probing_detect_devices()
 {
-        static int already_detected_devices = 0;
-	struct pciusb_entries entries;
-	int i;
+        static bool already_detected_devices = false;
+	if (already_detected_devices)
+		return;
 
 	if (already_detected_devices)
 		return;
 
-	entries = pci_probe();
-	for (i = 0; i < entries.nb; i++) {
-		struct pciusb_entry *e = &entries.entries[i];
+	std::vector<pciusb_entry>* entries = pci_probe();
+	for (unsigned int i = 0; i < entries->size(); i++) {
+		pciusb_entry &e = (*entries)[i];
 #ifndef DISABLE_PCIADAPTERS
 #ifndef DISABLE_MEDIAS
 		if (add_detected_device_if_match(e, medias_ide_pci_modules, medias_ide_pci_modules_len))
@@ -223,9 +222,9 @@ void probing_detect_devices()
 #endif
 #endif
 		/* device can't be found in built-in pcitables, but keep it */
-		add_detected_device(e->vendor, e->device, e->subvendor, e->subdevice, e->text, e->module);
+		add_detected_device(e.vendor, e.device, e.subvendor, e.subdevice, e.text, e.module);
 	}
-	pciusb_free(&entries);
+	delete entries;
 
 	already_detected_devices = 1;
 }
@@ -275,7 +274,7 @@ void discovered_device(enum driver_type type, const char * description, const ch
 		failed = my_insmod(driver, MEDIA_ADAPTERS, NULL, 1);
 		alternate = get_alternate_module(driver);
 		if (!IS_NOAUTO && alternate) {
-			failed = failed || my_insmod(alternate, MEDIA_ADAPTERS, NULL, 1);
+			failed = my_insmod(alternate, MEDIA_ADAPTERS, NULL, 1);
 		}
 		remove_wait_message();
 		warning_insmod_failed(failed);
@@ -299,20 +298,17 @@ void discovered_device(enum driver_type type, const char * description, const ch
 #endif
 }
 
-void probe_pci_modules(enum driver_type type, char **pci_modules, unsigned int  pci_modules_len) {
-	struct pciusb_entries entries;
-	int i;
-
-	entries = pci_probe();
-	for (i = 0; i < entries.nb; i++) {
-		struct pciusb_entry *e = &entries.entries[i];
+void probe_pci_modules(enum driver_type type, const char **pci_modules, unsigned int  pci_modules_len) {
+	std::vector<pciusb_entry> *entries = pci_probe();
+	for (unsigned int i = 0; i < entries->size(); i++) {
+		pciusb_entry &e = (*entries)[i];
 		if (device_match_modules_list(e, pci_modules, pci_modules_len)) {
 			log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s",
-				    e->vendor, e->device, e->subvendor, e->subdevice, safe_descr(e->text), e->module);
-			discovered_device(type, e->text, e->module);
+				    e.vendor, e.device, e.subvendor, e.subdevice, safe_descr(e.text.c_str()), e.module.c_str());
+			discovered_device(type, e.text.c_str(), e.module.c_str());
 		}
 	}
-	pciusb_free(&entries);
+	delete entries;
 }
 
 /** Loads modules for known virtio devices
@@ -325,16 +321,14 @@ void probe_pci_modules(enum driver_type type, char **pci_modules, unsigned int  
  */
 void probe_virtio_modules(void)
 {
-	struct pciusb_entries entries;
-	int i;
-	char *name;
-	char *options;
+	const char *name;
+	const char *options;
 	int loaded_pci = 0;
 
-	entries = pci_probe();
-	for (i = 0; i < entries.nb; i++) {
-		struct pciusb_entry *e = &entries.entries[i];
-		if (e->vendor == VIRTIO_PCI_VENDOR) {
+	std::vector<pciusb_entry> *entries = pci_probe();
+	for (unsigned int i = 0; i < entries->size(); i++) {
+		pciusb_entry &e = (*entries)[i];
+		if (e.vendor == VIRTIO_PCI_VENDOR) {
 			if (!loaded_pci) {
 				log_message("loading virtio-pci");
 				my_insmod("virtio_pci", ANY_DRIVER_TYPE, NULL, 0);
@@ -344,7 +338,7 @@ void probe_virtio_modules(void)
 			name = NULL;
 			options = NULL;
 
-			switch (e->subdevice) {
+			switch (e.subdevice) {
 			case VIRTIO_ID_NET:
 				name = "virtio_net";
 				options = "csum=0";
@@ -356,7 +350,7 @@ void probe_virtio_modules(void)
 				name = "virtio_balloon";
 				break;
 			default:
-				log_message("warning: unknown virtio device %04x", e->device);
+				log_message("warning: unknown virtio device %04x", e.device);
 			}
 			if (name) {
 				log_message("virtio: loading %s", name);
@@ -364,7 +358,7 @@ void probe_virtio_modules(void)
 			}
 		}
 	}
-	pciusb_free(&entries);
+	delete entries;
 }
 
 #ifdef ENABLE_USB
@@ -420,39 +414,29 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 #ifdef ENABLE_USB
 	/* ---- USB probe ---------------------------------------------- */
 	if ((bus == BUS_USB || bus == BUS_ANY) && !(IS_NOAUTO)) {
-		static int already_mounted_usbdev = 0;
-		struct pciusb_entries entries;
-		int i;
+		static bool already_mounted_usbdev = false;
 
 		if (!already_probed_usb_controllers)
 			probe_that_type(USB_CONTROLLERS, BUS_ANY);
 
-		if (!already_mounted_usbdev) {
-			already_mounted_usbdev = 1;
-			if (mount("none", "/proc/bus/usb", "usbfs", 0, NULL) &&
-			    mount("none", "/proc/bus/usb", "usbdevfs", 0, NULL)) {
-				log_message("USB: couldn't mount /proc/bus/usb");
-				goto end_usb_probe;
-			}
+		if (!already_mounted_usbdev) { /* XXX die..? */
+			already_mounted_usbdev = true;
 			wait_message("Detecting USB devices.");
-			sleep(4); /* sucking background work */
 			my_insmod("usbhid", ANY_DRIVER_TYPE, NULL, 0);
 			remove_wait_message();
 		}
 
-		if (type != NETWORK_DEVICES)
-			goto end_usb_probe;
-
-		entries = usb_probe();
-		for (i = 0; i < entries.nb; i++) {
-			struct pciusb_entry *e = &entries.entries[i];
-			if (device_match_modules_list(e, usb_modules, usb_modules_len)) {
-				log_message("USB: device %04x %04x is \"%s\" (%s)", e->vendor, e->device, safe_descr(e->text), e->module);
-				discovered_device(type, e->text, e->module);
+		if (type == NETWORK_DEVICES) {
+			std::vector<pciusb_entry> *entries = usb_probe();
+			for (unsigned int i = 0; i < entries->size(); i++) {
+				pciusb_entry &e = (*entries)[i];
+				if (device_match_modules_list(e, usb_modules, usb_modules_len)) {
+					log_message("USB: device %04x %04x is \"%s\" (%s)", e.vendor, e.device, safe_descr(e.text.c_str()), e.module.c_str());
+					discovered_device(type, e.text.c_str(), e.module.c_str());
+				}
 			}
+			delete entries;
 		}
-		pciusb_free(&entries);
-	end_usb_probe:;
 	}
 #endif
 
@@ -461,7 +445,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 	if ((bus == BUS_PCMCIA || bus == BUS_ANY) && !(IS_NOAUTO)) {
 		struct pcmcia_alias * pcmciadb = NULL;
 		unsigned int len = 0;
-		char *base = "/sys/bus/pcmcia/devices";
+		const char base[] = "/sys/bus/pcmcia/devices";
 		DIR *dir;
 		struct dirent *dent;
 
@@ -489,7 +473,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
                 for (dent = readdir(dir); dent != NULL; dent = readdir(dir)) {
 			struct sysfs_attribute *modalias_attr;
 			char keyfile[256];
-			int i, id;
+			int id;
 
 			if (dent->d_name[0] == '.')
 				continue;
@@ -507,7 +491,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 
 			log_message("PCMCIA: device found %s", modalias_attr->value);
 
-			for (i = 0; i < len; i++) {
+			for (unsigned int i = 0; i < len; i++) {
 				if (!fnmatch(pcmciadb[i].modalias, modalias_attr->value, 0)) {
 					char product[256];
 
@@ -809,11 +793,11 @@ void find_media(enum media_bus bus)
 	/* ----------------------------------------------- */
 	log_message("looking for Compaq Smart Array media");
 	{
-		char * procfiles[] = { "/proc/driver/cpqarray/ida0", "/proc/driver/cciss/cciss0", // 2.4 style
+		const char * procfiles[] = { "/proc/driver/cpqarray/ida0", "/proc/driver/cciss/cciss0", // 2.4 style
 				       "/proc/array/ida", "/proc/cciss/cciss",                 // 2.2 style
 				       NULL };
 		static char cpq_descr[] = "Compaq RAID logical disk";
-		char ** procfile;
+		const char ** procfile;
 		FILE * f;
 
 		for (procfile = procfiles; procfile && *procfile; procfile++) {
@@ -859,7 +843,7 @@ void find_media(enum media_bus bus)
 							*end = '\0';
 							tmp[count].model = strdup(start);
 						} else
-							tmp[count].model = "(unknown)";
+							tmp[count].model = strdup("(unknown)");
 						log_message("DAC960: found %s (%s)", tmp[count].name, tmp[count].model);
 						count++;
 					}
@@ -909,7 +893,7 @@ void find_media(enum media_bus bus)
 	tmp[count].name = NULL;
 	count++;
 
-	medias = _memdup(tmp, sizeof(struct media_info) * count);
+	medias = (media_info*)_memdup(tmp, sizeof(struct media_info) * count);
 }
 
 
@@ -936,8 +920,8 @@ void get_medias(enum media_type media, char *** names, char *** models, enum med
 	tmp_names[count] = NULL;
 	tmp_models[count++] = NULL;
 
-	*names = _memdup(tmp_names, sizeof(char *) * count);
-	*models = _memdup(tmp_models, sizeof(char *) * count);
+	*names = (char**)_memdup(tmp_names, sizeof(char *) * count);
+	*models = (char**)_memdup(tmp_models, sizeof(char *) * count);
 }
 
 
@@ -945,8 +929,8 @@ void get_medias(enum media_type media, char *** names, char *** models, enum med
 static int is_net_interface_blacklisted(char *intf)
 {
 	/* see detect_devicess::is_lan_interface() */
-	char * blacklist[] = { "lo", "ippp", "isdn", "plip", "ppp", "wifi", "sit", NULL };
-	char ** ptr = blacklist;
+	const char * blacklist[] = { "lo", "ippp", "isdn", "plip", "ppp", "wifi", "sit", NULL };
+	const char ** ptr = blacklist;
 
 	while (ptr && *ptr) {
 		if (!strncmp(intf, *ptr, strlen(*ptr)))
@@ -1003,7 +987,7 @@ char ** get_net_devices(void)
 
 	tmp[i++] = NULL;
 
-	return _memdup(tmp, sizeof(char *) * i);
+	return (char**)_memdup(tmp, sizeof(char *) * i);
 
 }
 #endif /* DISABLE_NETWORK */

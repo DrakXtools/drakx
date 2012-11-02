@@ -22,12 +22,13 @@
 #define _AUTOMATIC_H_
 
 #include "stage1.h"
+#include "frontend.h"
 
-void grab_automatic_params(char * line);
-char * get_auto_value(char * auto_param);
+void grab_automatic_params(const char * line);
+const char * get_auto_value(const char * auto_param);
 
-enum return_type ask_from_list_auto(char *msg, char ** elems, char ** choice, char * auto_param, char ** elems_auto);
-enum return_type ask_from_list_comments_auto(char *msg, char ** elems, char ** elems_comments, char ** choice, char * auto_param, char ** elems_auto);
-enum return_type ask_from_entries_auto(char *msg, char ** questions, char *** answers, int entry_size, char ** questions_auto, void (*callback_func)(char ** strings));
+enum return_type ask_from_list_auto(const char *msg, const char ** elems, char ** choice, const char * auto_param, const char ** elems_auto);
+enum return_type ask_from_list_comments_auto(const char *msg, const char ** elems, const char ** elems_comments, char ** choice, const char * auto_param, const char ** elems_auto);
+enum return_type ask_from_entries_auto(const char *msg, const char ** questions, char *** answers, int entry_size, const char ** questions_auto, void (*callback_func)(char ** strings));
 
 #endif

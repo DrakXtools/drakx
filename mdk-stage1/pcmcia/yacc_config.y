@@ -86,7 +86,7 @@ adjust:   INCLUDE resource
 
 resource: IRQ_NO NUMBER
 		{
-		    $$ = calloc(sizeof(adjust_list_t), 1);
+		    $$ = (adjust_list_t*)calloc(sizeof(adjust_list_t), 1);
 		    $$->adj.Resource = RES_IRQ;
 		    $$->adj.resource.irq.IRQ = $2;
 		}
@@ -96,7 +96,7 @@ resource: IRQ_NO NUMBER
 			yyerror("invalid port range 0x%x-0x%x", $2, $4);
 			YYERROR;
 		    }
-		    $$ = calloc(sizeof(adjust_list_t), 1);
+		    $$ = (adjust_list_t*)calloc(sizeof(adjust_list_t), 1);
 		    $$->adj.Resource = RES_IO_RANGE;
 		    $$->adj.resource.io.BasePort = $2;
 		    $$->adj.resource.io.NumPorts = $4 - $2 + 1;
@@ -107,7 +107,7 @@ resource: IRQ_NO NUMBER
 			yyerror("invalid address range 0x%x-0x%x", $2, $4);
 			YYERROR;
 		    }
-		    $$ = calloc(sizeof(adjust_list_t), 1);
+		    $$ = (adjust_list_t*)calloc(sizeof(adjust_list_t), 1);
 		    $$->adj.Resource = RES_MEMORY_RANGE;
 		    $$->adj.resource.memory.Base = $2;
 		    $$->adj.resource.memory.Size = $4 - $2 + 1;

@@ -77,7 +77,7 @@
 
 
 
-void fatal_error(char *msg)
+void fatal_error(const char *msg)
 {
 	printf("FATAL ERROR IN %s: %s\n\nI can't recover from this.\nYou may reboot your system.\n", binary_name, msg);
 	while (1);
@@ -88,7 +88,7 @@ void fatal_error(char *msg)
  * special frontend functs
  * (the principle is to not pollute frontend code with stage1-specific stuff) */
 
-void stg1_error_message(char *msg, ...)
+void stg1_error_message(const char *msg, ...)
 {
 	va_list args;
 	va_start(args, msg);
@@ -97,7 +97,7 @@ void stg1_error_message(char *msg, ...)
 	va_end(args);
 }
 
-void stg1_fatal_message(char *msg, ...)
+void stg1_fatal_message(const char *msg, ...)
 {
 	va_list args;
 	va_start(args, msg);
@@ -107,7 +107,7 @@ void stg1_fatal_message(char *msg, ...)
         exit(1);
 }
 
-void stg1_info_message(char *msg, ...)
+void stg1_info_message(const char *msg, ...)
 {
 	va_list args;
 	va_start(args, msg);
@@ -164,7 +164,7 @@ static void spawn_shell(void)
 #endif
 
 #ifdef SPAWN_INTERACTIVE
-char * interactive_fifo = "/var/run/stage1-fifo";
+const char interactive_fifo[] = "/var/run/stage1-fifo";
 static pid_t interactive_pid = 0;
 
 /* spawns my small interactive on console #6 */
@@ -225,7 +225,7 @@ static void spawn_interactive(void)
 #ifdef ENABLE_PCMCIA
 static void handle_pcmcia(void)
 {
-        char * pcmcia_adapter;
+        const char * pcmcia_adapter;
 
 	pcmcia_adapter = pcmcia_probe();
 	if (!pcmcia_adapter) {
@@ -248,14 +248,12 @@ static void handle_pcmcia(void)
 
 static void handle_hid(void)
 {
-	struct entries entry_list;
-	unsigned int i;
-
-	entry_list = hid_probe();
-	for (i = 0; i < entry_list.nb; i++) {
-		if (entry_list.entries[i].module != NULL)
-			my_insmod(entry_list.entries[i].module, ANY_DRIVER_TYPE, NULL, 0);
+	std::vector<entry> *entry_list = hid_probe();
+	for (unsigned int i = 0; i < entry_list->size(); i++) {
+		if (!(*entry_list)[i].name.empty())
+			my_insmod((*entry_list)[i].name.c_str(), ANY_DRIVER_TYPE, NULL, 0);
 	}
+	delete entry_list;
 }
 
 
@@ -266,24 +264,24 @@ static void method_select_and_prepare(void)
 {
 	enum return_type results;
 	char * choice;
-	char * means[10], * means_auto[10];
+	const char * means[10], * means_auto[10];
 	int i;
 
 #ifndef DISABLE_DISK
-	char * disk_install = "Hard disk"; char * disk_install_auto = "disk";
+	const char * disk_install = "Hard disk"; const char * disk_install_auto = "disk";
 #endif
 #ifndef DISABLE_CDROM
-	char * cdrom_install = "CDROM drive"; char * cdrom_install_auto = "cdrom";
+	const char * cdrom_install = "CDROM drive"; const char * cdrom_install_auto = "cdrom";
 #endif
 #ifndef DISABLE_NETWORK
-	char * network_nfs_install = "NFS server"; char * network_nfs_install_auto = "nfs";
-	char * network_ftp_install = "FTP server"; char * network_ftp_install_auto = "ftp";
-	char * network_http_install = "HTTP server"; char * network_http_install_auto = "http";
+	const char * network_nfs_install = "NFS server"; const char * network_nfs_install_auto = "nfs";
+	const char * network_ftp_install = "FTP server"; const char * network_ftp_install_auto = "ftp";
+	const char * network_http_install = "HTTP server"; const char * network_http_install_auto = "http";
 #ifndef DISABLE_KA
-	char * network_ka_install = "KA server"; char * network_ka_install_auto = "ka";
+	const char * network_ka_install = "KA server"; const char * network_ka_install_auto = "ka";
 #endif
 #endif
-	char * thirdparty_install = "Load third party modules"; char * thirdparty_install_auto = "thirdparty";
+	const char * thirdparty_install = "Load third party modules"; const char * thirdparty_install_auto = "thirdparty";
 
 	i = 0;
 #ifndef DISABLE_NETWORK

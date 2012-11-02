@@ -139,7 +139,7 @@ char* find_free_loop()
 }
 
 void
-del_loop(char * loopdev)
+del_loop(const char * loopdev)
 {
 	int fd;
 
@@ -160,11 +160,11 @@ del_loop(char * loopdev)
 }
 
 int
-lomount(char *loopfile, char *where, char **dev, int compressed)
+lomount(const char *loopfile, const char *where, const char **dev, int compressed)
 {
   
 	long int flag;
-        char * loopdev;
+        const char * loopdev;
 
 	flag = MS_MGC_VAL;
 	flag |= MS_RDONLY;

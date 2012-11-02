@@ -36,7 +36,7 @@
 
 #include "frontend.h"
 
-void init_frontend_newt(char * welcome_msg)
+void init_frontend_newt(const char * welcome_msg)
 {
 	int i;
 	for (i=0; i<38; i++) printf("\n");
@@ -62,21 +62,21 @@ void finish_frontend_newt(void)
 }
 
 
-void verror_message_newt(char *msg, va_list ap)
+void verror_message_newt(const char *msg, va_list ap)
 {
-	newtWinMessagev("Error", "Ok", msg, ap);
+	newtWinMessagev((char*)"Error", (char*)"Ok", (char*)msg, ap);
 }
 
-void vinfo_message_newt(char *msg, va_list ap)
+void vinfo_message_newt(const char *msg, va_list ap)
 {
-	newtWinMessagev("Notice", "Ok", msg, ap);
+	newtWinMessagev((char*)"Notice", (char*)"Ok", (char*)msg, ap);
 }
 
 
-void vwait_message_newt(char *msg, va_list ap)
+void vwait_message_newt(const char *msg, va_list ap)
 {
 	int width, height;
-	char * title = "Please wait...";
+	const char title[] = "Please wait...";
 	newtComponent c, f;
 	newtGrid grid;
 	char * buf = NULL;
@@ -87,7 +87,7 @@ void vwait_message_newt(char *msg, va_list ap)
 	do {
 		size += 1000;
 		if (buf) free(buf);
-		buf = malloc(size);
+		buf = (char*)malloc(size);
 		i = vsnprintf(buf, size, msg, ap);
 	} while (i >= size || i == -1);
 
@@ -98,7 +98,7 @@ void vwait_message_newt(char *msg, va_list ap)
 
 	grid = newtCreateGrid(1, 1);
 	newtGridSetField(grid, 0, 0, NEWT_GRID_COMPONENT, c, 0, 0, 0, 0, 0, 0);
-	newtGridWrappedWindow(grid, title);
+	newtGridWrappedWindow(grid, (char*)title);
 
 	free(flowed);
 	free(buf);
@@ -118,11 +118,9 @@ void remove_wait_message_newt(void)
 
 
 static newtComponent form = NULL, scale = NULL;
-static int size_progress;
-static int actually_drawn;
-static char * msg_progress;
+static const char * msg_progress;
 
-void init_progression_raw_newt(char *msg, int size)
+void init_progression_raw_newt(const char *msg, int size)
 {
 	size_progress = size;
 	if (size) {
@@ -175,7 +173,7 @@ void end_progression_raw_newt(void)
 }
 
 
-enum return_type ask_from_list_index_newt(char *msg, char ** elems, char ** elems_comments, int * answer)
+enum return_type ask_from_list_index_newt(const char *msg, const char ** elems, const char ** elems_comments, int * answer)
 {
 	char * items[50000];
 	int rc;
@@ -186,7 +184,7 @@ enum return_type ask_from_list_index_newt(char *msg, char ** elems, char ** elem
 	    i = 0;
 	    while (elems && *elems) {
 		    int j = (*elems_comments) ? strlen(*elems_comments) : 0;
-		    items[i] = malloc(sizeof(char) * (strlen(*elems) + j + 4));
+		    items[i] = (char*)malloc(sizeof(char) * (strlen(*elems) + j + 4));
 		    strcpy(items[i], *elems);
 		    if (*elems_comments) {
 			    strcat(items[i], " (");
@@ -200,7 +198,7 @@ enum return_type ask_from_list_index_newt(char *msg, char ** elems, char ** elem
 	    items[i] = NULL;
 	}
 
-	rc = newtWinMenu("Please choose...", msg, 52, 5, 5, 7, elems_comments ? items : elems, answer, "Ok", "Cancel", NULL);
+	rc = newtWinMenu((char*)"Please choose...", (char*)msg, 52, 5, 5, 7, (elems_comments ? items : (char**)elems), answer, (char*)"Ok", (char*)"Cancel", NULL);
 
 	if (rc == 2)
 		return RETURN_BACK;
@@ -208,11 +206,11 @@ enum return_type ask_from_list_index_newt(char *msg, char ** elems, char ** elem
 	return RETURN_OK;
 }
 
-enum return_type ask_yes_no_newt(char *msg)
+enum return_type ask_yes_no_newt(const char *msg)
 {
 	int rc;
 
-	rc = newtWinTernary("Please answer...", "Yes", "No", "Back", msg);
+	rc = newtWinTernary((char*)"Please answer...", (char*)"Yes", (char*)"No", (char*)"Back", (char*) msg);
 
 	if (rc == 1)
 		return RETURN_OK;
@@ -226,7 +224,7 @@ static void (*callback_real_function)(char ** strings) = NULL;
 
 static void default_callback(newtComponent co __attribute__ ((unused)), void * data)
 {
-	newtComponent * entries = data;
+	newtComponent * entries = (newtComponent *)data;
 	char * strings[50], ** ptr;
 
 	if (!callback_real_function)
@@ -242,7 +240,7 @@ static void default_callback(newtComponent co __attribute__ ((unused)), void * d
 	callback_real_function(strings);
 
 	ptr = strings;
-	entries = data;
+	entries = (newtComponent *)data;
 	while (entries && *entries) {
 		newtEntrySet(*entries, strdup(*ptr), 1);
 		entries++;
@@ -342,7 +340,7 @@ static int mynewtWinEntries(char * title, char * text, int suggestedWidth, int f
 }
 
 
-enum return_type ask_from_entries_newt(char *msg, char ** questions, char *** answers, int entry_size, void (*callback_func)(char ** strings))
+enum return_type ask_from_entries_newt(const char *msg, const char ** questions, char *** answers, int entry_size, void (*callback_func)(char ** strings))
 {
 	struct newtWinEntry entries[50];
 	int j, i = 0;
@@ -350,7 +348,7 @@ enum return_type ask_from_entries_newt(char *msg, char ** questions, char *** an
 	char ** already_answers = NULL;
 
 	while (questions && *questions) {
-		entries[i].text = *questions;
+		entries[i].text = (char*)*questions;
 		entries[i].flags = NEWT_FLAG_SCROLL | (!strcmp(*questions, "Password") ? NEWT_FLAG_PASSWORD : 0);
 		i++;
 		questions++;
@@ -372,7 +370,7 @@ enum return_type ask_from_entries_newt(char *msg, char ** questions, char *** an
 			*(entries[j].value) = NULL;
 	}
 
-	rc = mynewtWinEntries("Please fill in entries...", msg, 52, 5, 5, entry_size, callback_func, entries, "Ok", "Cancel", NULL); 
+	rc = mynewtWinEntries((char*)"Please fill in entries...", (char*)msg, 52, 5, 5, entry_size, callback_func, entries, (char*)"Ok", (char*)"Cancel", NULL); 
 
 	if (rc == 3)
 		return RETURN_BACK;

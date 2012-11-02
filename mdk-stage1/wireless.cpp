@@ -108,8 +108,8 @@ static int wireless_set_restricted_key(int socket, const char *ifname, const cha
 enum return_type configure_wireless(const char *ifname)
 {
 	enum return_type results;
-	char * questions[] = { "ESSID", "WEP key", NULL };
-	char * questions_auto[] = { "essid", "wep_key" };
+	const char * questions[] = { "ESSID", "WEP key", NULL };
+	const char * questions_auto[] = { "essid", "wep_key" };
 	static char ** answers = NULL;
 	int wsock = wireless_open_socket();
 

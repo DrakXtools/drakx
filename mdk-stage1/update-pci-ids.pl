@@ -16,11 +16,11 @@ foreach my $type (keys %t) {
 	or die "unable to get PCI modules";
 
     print "#ifndef DISABLE_".uc($type)."
-char* ${type}_pci_modules[] = {
+const char* ${type}_pci_modules[] = {
 ";
     printf qq|\t"%s",\n|, $_ foreach @modules;
     print "};
-unsigned int ${type}_pci_modules_len = sizeof(${type}_pci_modules) / sizeof(char *);
+unsigned int ${type}_pci_modules_len = sizeof(${type}_pci_modules) / sizeof(const char *);
 #endif
 
 ";

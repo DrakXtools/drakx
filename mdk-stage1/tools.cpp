@@ -53,7 +53,7 @@ int image_has_stage2()
 	       access(IMAGE_LOCATION "/" LIVE_LOCATION_REL, R_OK) == 0;
 }
 
-enum return_type create_IMAGE_LOCATION(char *location_full)
+enum return_type create_IMAGE_LOCATION(const char *location_full)
 {
 	struct stat statbuf;
 	int offset = strncmp(location_full, IMAGE_LOCATION_DIR, sizeof(IMAGE_LOCATION_DIR) - 1) == 0 ? sizeof(IMAGE_LOCATION_DIR) - 1 : 0;
@@ -113,7 +113,7 @@ enum return_type save_fd(int from_fd, char * to, void (*callback_func)(int overa
                                 log_message("short write (%s)", strerror(errno));
                                 goto cleanup;
                         }
-                } else if (quantity == -1) {
+                } else if (quantity == (size_t)-1) {
 			log_message("an error occured: %s", strerror(errno));
 			goto cleanup;
 		}
@@ -131,10 +131,10 @@ enum return_type save_fd(int from_fd, char * to, void (*callback_func)(int overa
  close_from:
         close(from_fd);
 
-        return ret;
+        return (enum return_type)ret;
 }
 
-enum return_type copy_file(char * from, char * to, void (*callback_func)(int overall))
+enum return_type copy_file(const char * from, char * to, void (*callback_func)(int overall))
 {
         int from_fd;
 
@@ -149,7 +149,7 @@ enum return_type copy_file(char * from, char * to, void (*callback_func)(int ove
         }
 }
 
-enum return_type mount_compressed_image(char *compressed_image,  char *location_mount)
+enum return_type mount_compressed_image(const char *compressed_image, const char *location_mount)
 {
 	if (lomount(compressed_image, location_mount, NULL, 1)) {
                 stg1_error_message("Could not mount compressed loopback :(.");
@@ -158,12 +158,12 @@ enum return_type mount_compressed_image(char *compressed_image,  char *location_
 	return RETURN_OK;
 }
 
-enum return_type preload_mount_compressed_fd(int compressed_fd, int image_size, char *image_name, char *location_mount)
+enum return_type preload_mount_compressed_fd(int compressed_fd, int image_size, const char *image_name, const char *location_mount)
 {
 	int ret;
 	char *compressed_tmpfs = NULL;
 	asprintf(&compressed_tmpfs, "/tmp/%s", image_name);
-	char *buf = "Loading program into memory...";
+	const char *buf = "Loading program into memory...";
 	if (binary_name && (!strcmp(binary_name, "stage1") || !strcmp(binary_name, "rescue-gui")))
 		init_progression(buf, image_size);
 	else
@@ -172,12 +172,12 @@ enum return_type preload_mount_compressed_fd(int compressed_fd, int image_size, 
 	ret = save_fd(compressed_fd, compressed_tmpfs, update_progression);
 	end_progression();
 	if (ret != RETURN_OK)
-		return ret;
+		return (enum return_type)ret;
 	
 	return mount_compressed_image(compressed_tmpfs, location_mount);
 }
 
-enum return_type mount_compressed_image_may_preload(char *image_name, char *location_mount, int preload)
+enum return_type mount_compressed_image_may_preload(const char *image_name, const char *location_mount, int preload)
 {
 	char *compressed_image = NULL;
 	asprintf(&compressed_image, "%s/%s", COMPRESSED_LOCATION, image_name);
@@ -222,7 +222,7 @@ enum return_type load_compressed_fd(int fd, int size)
 	return preload_mount_compressed_fd(fd, size, COMPRESSED_NAME(""), STAGE2_LOCATION);
 }
 
-int try_mount(char * dev, char * location)
+int try_mount(const char * dev, const char * location)
 {
 	char device_fullname[50];
 	snprintf(device_fullname, sizeof(device_fullname), "/dev/%s", dev);
@@ -299,7 +299,7 @@ char * floppy_device(void)
                                 log_message("\ttrack: %d", ds.track);
                                 if (ds.track >= 0) {
                                         close(fd);
-                                        return "/dev/fd0";
+                                        return strdup("/dev/fd0");
                                 }
                         }
                 } else {
@@ -313,7 +313,7 @@ char * floppy_device(void)
 	if (names && *names) {
 		char *devnames = NULL;
                 asprintf(&devnames, "/dev/%s", *names);
-		return devnames;
+		return strdup(devnames);
 	}
         else
                 return NULL;

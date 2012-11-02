@@ -66,11 +66,11 @@
 
 typedef struct {
     uint16_t	vendor, device;
-    char	*modname;
-    char	*name;
+    const char	*modname;
+    const char	*name;
 } pci_id_t;
 
-pci_id_t pci_id[] = {
+static pci_id_t pci_id[] = {
     { 0x1013, 0x1100, "pd6729", "Cirrus Logic CL 6729" },
     { 0x1013, 0x1110, "yenta_socket", "Cirrus Logic PD 6832" },
     { 0x104c, 0x8011, "yenta_socket", "" },
@@ -131,11 +131,12 @@ pci_id_t pci_id[] = {
 };
 #define PCI_COUNT (sizeof(pci_id)/sizeof(pci_id_t))
 
-char * driver = NULL;
+const char * driver = NULL;
 
 static int pci_probe(void)
 {
-    char s[256], *name = NULL;
+    char s[256];
+    const char *name = NULL;
     uint32_t device, vendor, i;
     FILE *f;
     
@@ -211,7 +212,7 @@ static void i365_bclr(uint16_t sock, uint16_t reg, uint8_t mask)
 int i365_probe(void)
 {
     int val, sock, done;
-    char *name = "i82365sl";
+    const char *name = "i82365sl";
 
     log_message("PCMCIA: probing for Intel PCIC (ISA)..");
     
@@ -412,7 +413,7 @@ int tcic_probe(void)
 } /* tcic_probe */
 
 
-char * pcmcia_probe(void)
+const char * pcmcia_probe(void)
 {
 	if (!pci_probe())
 		return driver;

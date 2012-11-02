@@ -192,8 +192,8 @@ int configure_net_device(struct interface_info * intf)
 }
 
 /* host network informations */ 
-char * hostname = NULL;
-char * domain = NULL;
+const char * hostname = NULL;
+const char * domain = NULL;
 struct in_addr gateway = { 0 };
 struct in_addr dns_server = { 0 };
 struct in_addr dns_server2 = { 0 };
@@ -249,7 +249,7 @@ static int add_default_route(void)
 
 static int write_resolvconf(void)
 {
-	char * filename = "/etc/resolv.conf";
+	const char filename[] = "/etc/resolv.conf";
 	FILE * f;
 	
 	if (dns_server.s_addr == 0) {
@@ -278,7 +278,7 @@ static int write_resolvconf(void)
 
 static int save_netinfo(struct interface_info * intf)
 {
-	char * file_network = "/etc/sysconfig/network";
+	const char file_network[] = "/etc/sysconfig/network";
 	char file_intf[500];
 	FILE * f;
 	
@@ -339,7 +339,7 @@ static int save_netinfo(struct interface_info * intf)
 }
 
 
-char * guess_netmask(char * ip_addr)
+const char * guess_netmask(const char * ip_addr)
 {
 	struct in_addr addr;
 	unsigned long int tmp;
@@ -401,8 +401,8 @@ static void static_ip_callback(char ** strings)
 static enum return_type setup_network_interface(struct interface_info * intf)
 {
 	enum return_type results;
-	char * bootprotos[] = { "DHCP", "Static", "ADSL", NULL };
-	char * bootprotos_auto[] = { "dhcp", "static", "adsl" };
+	const char * bootprotos[] = { "DHCP", "Static", "ADSL", NULL };
+	const char * bootprotos_auto[] = { "dhcp", "static", "adsl" };
 	char * choice;
 
 	if (IS_NETTEST)
@@ -414,8 +414,8 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 	}
 
 	if (!strcmp(choice, "Static")) {
-		char * questions[] = { "IP of this machine", "IP of DNS", "IP of default gateway", "Netmask", NULL };
-		char * questions_auto[] = { "ip", "dns", "gateway", "netmask" };
+		const char * questions[] = { "IP of this machine", "IP of DNS", "IP of default gateway", "Netmask", NULL };
+		const char * questions_auto[] = { "ip", "dns", "gateway", "netmask" };
 		static char ** answers = NULL;
 		struct in_addr addr;
 
@@ -491,7 +491,7 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 	} else
 		return RETURN_ERROR;
 	
-	return add_default_route();
+	return add_default_route() ? RETURN_BACK : RETURN_ERROR;
 }
 
 
@@ -535,8 +535,8 @@ static enum return_type configure_network(struct interface_info * intf)
 		log_message("got domain from DNS fullname, %s", domain);
 	} else {
 		enum return_type results;
-		char * questions[] = { "Host name", "Domain name", NULL };
-		char * questions_auto[] = { "hostname", "domain" };
+		const char * questions[] = { "Host name", "Domain name", NULL };
+		const char * questions_auto[] = { "hostname", "domain" };
 		static char ** answers = NULL;
 		char * boulet;
 
@@ -677,7 +677,7 @@ static char * auto_select_up_intf(int detection_mode)
 }
 
 
-static char * interface_select(void)
+static const char * interface_select(void)
 {
 	char ** interfaces, ** ptr;
 	char * descriptions[50];
@@ -725,7 +725,7 @@ static char * interface_select(void)
 	}
 
 	results = ask_from_list_comments_auto("Please choose the NET device to use for the installation.",
-					      interfaces, descriptions, &choice, "interface", interfaces);
+					      (const char**)interfaces, (const char**)descriptions, &choice, (const char*)"interface", (const char**)interfaces);
 
 	if (results != RETURN_OK)
 		return NULL;
@@ -735,15 +735,15 @@ static char * interface_select(void)
 
 static enum return_type get_http_proxy(char **http_proxy_host, char **http_proxy_port)
 {
-	char *questions[] = { "HTTP proxy host", "HTTP proxy port", NULL };
-	char *questions_auto[] = { "proxy_host", "proxy_port", NULL };
+	const char *questions[] = { "HTTP proxy host", "HTTP proxy port", NULL };
+	const char *questions_auto[] = { "proxy_host", "proxy_port", NULL };
 	static char ** answers = NULL;
 	enum return_type results;
 	
 	if (IS_NETTEST) {
 		answers = (char **) malloc(sizeof(questions));
-		answers[0] = "";
-		answers[1] = "";
+		answers[0] = strdup("");
+		answers[1] = strdup("");
 		results = RETURN_OK;
 	} else
 		results = ask_from_entries_auto("Please enter HTTP proxy host and port if you need it, else leave them blank or cancel.",
@@ -789,7 +789,7 @@ static int url_split(const char *url, const char *protocol, char **host, char **
 #define MIRRORLIST_MAX_ITEMS 500
 typedef char *mirrorlist_t[2][MIRRORLIST_MAX_ITEMS+1];
 
-static enum return_type get_mirrorlist(mirrorlist_t mirrorlist, int start, char *version, const char *protocol, char *http_proxy_host, char *http_proxy_port) {
+static enum return_type get_mirrorlist(mirrorlist_t mirrorlist, int start, const char *version, const char *protocol, const char *http_proxy_host, const char *http_proxy_port) {
 	int fd, size, line_pos = 0;
 	char path[1024];
 	char line[1024];
@@ -847,7 +847,7 @@ static int choose_mirror_from_host_list(mirrorlist_t mirrorlist, char **selected
 
 	do {
 		results = ask_from_list_index("Please select a mirror from the list below.",
-					      mirrorlist[0], NULL, &mirror_idx);
+					      (const char**)mirrorlist[0], NULL, &mirror_idx);
 
 		if (results == RETURN_BACK) {
 			return RETURN_ERROR;
@@ -866,14 +866,14 @@ static int choose_mirror_from_host_list(mirrorlist_t mirrorlist, char **selected
 }
 
 
-static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port, const char *protocol, char **selected_host, char **filepath)
+static int choose_mirror_from_list(const char *http_proxy_host, const char *http_proxy_port, const char *protocol, char **selected_host, char **filepath)
 {
 	enum return_type results;
-	char *versions[] = { "Specify the mirror manually", DISTRIB_NAME " " DISTRIB_VERSION, NULL };
-	char *version = DISTRIB_NAME " " DISTRIB_VERSION;
+	const char *versions[] = { "Specify the mirror manually", DISTRIB_NAME " " DISTRIB_VERSION, NULL };
+	const char *version = DISTRIB_NAME " " DISTRIB_VERSION;
 
 	do {
-		results = ask_from_list("Please select a medium from the list below.", versions, &version);
+		results = ask_from_list("Please select a medium from the list below.", versions, (char**)&version);
 
 		if (results == RETURN_BACK) {
 			return RETURN_BACK;
@@ -884,14 +884,14 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 			} else {
 				/* a medium has been selected */
 				mirrorlist_t mirrorlist;
-				mirrorlist[0][0] = "Specify the mirror manually";
+				mirrorlist[0][0] = strdup("Specify the mirror manually");
 				mirrorlist[1][0] = NULL;
 
 				results = get_mirrorlist(mirrorlist, 1, DISTRIB_VERSION, protocol, http_proxy_host, http_proxy_port);
 				if (results == RETURN_ERROR)
 					return RETURN_ERROR;
 
-				results = choose_mirror_from_host_list(mirrorlist, selected_host, filepath);
+				results = (enum return_type)choose_mirror_from_host_list(mirrorlist, selected_host, filepath);
 			}
 		}
 	} while (results == RETURN_ERROR);
@@ -903,14 +903,14 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 /* -=-=-- */
 
 
-enum return_type intf_select_and_up()
+enum return_type intf_select_and_up(void)
 {
 	static struct interface_info intf[20];
 	static int num_interfaces = 0;
 	struct interface_info * sel_intf = NULL;
 	int i;
 	enum return_type results;
-	char * iface = interface_select();
+	const char * iface = interface_select();
 	
 	if (iface == NULL)
 		return RETURN_BACK;
@@ -938,11 +938,11 @@ enum return_type intf_select_and_up()
 
 enum return_type nfs_prepare(void)
 {
-	char * questions[] = { "NFS server name", DISTRIB_NAME " directory", NULL };
-	char * questions_auto[] = { "server", "directory", NULL };
+	const char * questions[] = { "NFS server name", DISTRIB_NAME " directory", NULL };
+	const char * questions_auto[] = { "server", "directory", NULL };
 	static char ** answers = NULL;
 	char * nfsmount_location;
-	enum return_type results = intf_select_and_up(NULL, NULL);
+	enum return_type results = intf_select_and_up();
 
 	if (results != RETURN_OK)
 		return results;
@@ -956,7 +956,7 @@ enum return_type nfs_prepare(void)
 			return nfs_prepare();
 		}
 		
-		nfsmount_location = malloc(strlen(answers[0]) + strlen(answers[1]) + 2);
+		nfsmount_location = (char*)malloc(strlen(answers[0]) + strlen(answers[1]) + 2);
 		strcpy(nfsmount_location, answers[0]);
 		strcat(nfsmount_location, ":");
 		strcat(nfsmount_location, answers[1]);
@@ -982,8 +982,8 @@ enum return_type nfs_prepare(void)
 
 enum return_type ftp_prepare(void)
 {
-	char * questions[] = { "FTP server", DISTRIB_NAME " directory", "Login", "Password", NULL };
-	char * questions_auto[] = { "server", "directory", "user", "pass", NULL };
+	const char * questions[] = { "FTP server", DISTRIB_NAME " directory", "Login", "Password", NULL };
+	const char * questions_auto[] = { "server", "directory", "user", "pass", NULL };
 	static char ** answers = NULL;
 	enum return_type results;
 	struct utsname kernel_uname;
@@ -1017,7 +1017,7 @@ enum return_type ftp_prepare(void)
 			if (answers == NULL)
 				answers = (char **) calloc(1, sizeof(questions));
 
-			results = choose_mirror_from_list(http_proxy_host, http_proxy_port, "ftp", &answers[0], &answers[1]);
+			results = (enum return_type)choose_mirror_from_list(http_proxy_host, http_proxy_port, "ftp", &answers[0], &answers[1]);
 
 			if (results == RETURN_BACK)
 				return ftp_prepare();
@@ -1098,7 +1098,7 @@ enum return_type ftp_prepare(void)
                 }
 
 		if (fd < 0) {
-			char *msg = str_ftp_error(fd);
+			const char *msg = str_ftp_error(fd);
 			log_message("FTP: error get %d for remote file %s", fd, location_full);
 			stg1_error_message("Error: %s.", msg ? msg : "couldn't retrieve Installation program");
 			results = RETURN_BACK;
@@ -1143,8 +1143,8 @@ enum return_type ftp_prepare(void)
 
 enum return_type http_prepare(void)
 {
-	char * questions[] = { "HTTP server", DISTRIB_NAME " directory", NULL };
-	char * questions_auto[] = { "server", "directory", NULL };
+	const char * questions[] = { "HTTP server", DISTRIB_NAME " directory", NULL };
+	const char * questions_auto[] = { "server", "directory", NULL };
 	static char ** answers = NULL;
 	enum return_type results;
 	char *http_proxy_host, *http_proxy_port;
@@ -1171,10 +1171,10 @@ enum return_type http_prepare(void)
 			if (answers == NULL)
 				answers = (char **) calloc(1, sizeof(questions));
 			if (IS_NETTEST) {
-				answers[0] = "192.168.0.1";
-				answers[1] = "/";
+				answers[0] = strdup("192.168.0.1");
+				answers[1] = strdup("/");
 			} else {
-				results = choose_mirror_from_list(http_proxy_host, http_proxy_port, "http", &answers[0], &answers[1]);
+				results = (enum return_type)choose_mirror_from_list(http_proxy_host, http_proxy_port, "http", &answers[0], &answers[1]);
 
 				if (results == RETURN_BACK)
 					return http_prepare();

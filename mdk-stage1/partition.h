@@ -22,7 +22,7 @@
 #ifndef _PARTITION_H_
 #define _PARTITION_H_
 
-int list_partitions(char * dev_name, char ** parts, char ** comments);
+int list_partitions(const char * dev_name, char ** parts, char ** comments);
 
 #endif
 

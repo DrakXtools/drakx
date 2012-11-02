@@ -31,7 +31,7 @@
 
 enum return_type perform_dhcp(struct interface_info * intf);
 
-extern char * dhcp_hostname;
-extern char * dhcp_domain;
+extern const char * dhcp_hostname;
+extern const char * dhcp_domain;
 
 #endif

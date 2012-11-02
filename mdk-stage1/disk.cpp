@@ -44,7 +44,7 @@
 
 #include "disk.h"
 
-static enum return_type try_automatic_with_partition(char *dev) {
+static enum return_type try_automatic_with_partition(const char *dev) {
 	enum return_type results;
 	int mounted;
 	wait_message("Trying to access " DISTRIB_NAME " disk (partition %s)", dev);
@@ -66,7 +66,7 @@ static enum return_type try_automatic_with_partition(char *dev) {
 	return RETURN_ERROR;
 }
 
-static enum return_type try_automatic_with_disk(char *disk, char *model) {
+static enum return_type try_automatic_with_disk(const char *disk, const char *model) {
 	char * parts[50];
 	char * parts_comments[50];
 	enum return_type results;
@@ -103,10 +103,10 @@ static enum return_type try_automatic(char ** medias, char ** medias_models)
 	return RETURN_ERROR;
 }
 
-static enum return_type try_with_device(char *dev_name)
+static enum return_type try_with_device(const char *dev_name)
 {
-	char * questions_location[] = { "Directory or ISO images directory or ISO image", NULL };
-	char * questions_location_auto[] = { "directory", NULL };
+	const char * questions_location[] = { "Directory or ISO images directory or ISO image", NULL };
+	const char * questions_location_auto[] = { "directory", NULL };
 	static char ** answers_location = NULL;
 	char location_full[500];
 
@@ -121,7 +121,7 @@ static enum return_type try_with_device(char *dev_name)
         }
 
         /* uglyness to allow auto starting with devfs */
-        if (!IS_AUTOMATIC || streq((choice = get_auto_value("partition")), "")) {
+        if (!IS_AUTOMATIC || streq((choice = strdup(get_auto_value("partition"))), "")) {
                 if (parts[0] == NULL) {
                         stg1_error_message("No partition found.");
                         return RETURN_ERROR;
@@ -129,7 +129,7 @@ static enum return_type try_with_device(char *dev_name)
 
                 results = ask_from_list_comments_auto("Please select the partition containing the copy of the "
 						      DISTRIB_NAME " Distribution install source.",
-                                                      parts, parts_comments, &choice, "partition", parts);
+                                                      (const char**)parts, (const char**)parts_comments, &choice, "partition", (const char**)parts);
                 if (results != RETURN_OK)
                         return results;
         }
@@ -215,7 +215,7 @@ enum return_type disk_prepare(void)
 
 	results = ask_from_list_comments_auto("Please select the disk containing the copy of the "
 					      DISTRIB_NAME " Distribution install source.",
-					      medias, medias_models, &choice, "disk", medias);
+					      (const char**)medias, (const char**)medias_models, &choice, "disk", (const char**)medias);
 
 	if (results != RETURN_OK)
 		return results;

@@ -32,7 +32,7 @@
 #include "utils.h"
 #include "lomount.h"
 
-char * extract_list_directory(char * direct)
+char * extract_list_directory(const char * direct)
 {
 	char ** full = list_directory(direct);
 	char tmp[20000] = "";
@@ -47,17 +47,17 @@ char * extract_list_directory(char * direct)
 	return strdup(tmp);
 }
 
-static void choose_iso_in_directory(char *directory, char *location_full) 
+static void choose_iso_in_directory(const char *directory, char *location_full) 
 {
 	char **file;
-	char *stage2_isos[100] = { "Use directory as a mirror tree", "-----" };
+	const char *stage2_isos[100] = { "Use directory as a mirror tree", "-----" };
 	int stage2_iso_number = 2;
 
 	log_message("\"%s\" exists and is a directory, looking for iso files", directory);
 
 	for (file = list_directory(directory); *file; file++) {
 		char isofile[500];
-		char * loopdev = NULL;
+		const char * loopdev = NULL;
 
 		if (strstr(*file, ".iso") != *file + strlen(*file) - 4)
 			/* file doesn't end in .iso, skipping */
@@ -117,9 +117,9 @@ static void choose_iso_in_directory(char *directory, char *location_full)
 }
 
 
-enum return_type try_with_directory(char *directory, char *method_live, char *method_iso) {
+enum return_type try_with_directory(const char *directory, const char *method_live, const char *method_iso) {
 	char location_full[500];
-        char * loopdev = NULL;
+        const char * loopdev = NULL;
 	struct stat statbuf;
 	enum return_type ret = RETURN_OK;
 

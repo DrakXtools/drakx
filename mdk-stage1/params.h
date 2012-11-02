@@ -17,15 +17,15 @@
 
 void process_cmdline(void);
 int get_param(int i);
-char * get_param_valued(char *param_name);
+const char * get_param_valued(const char *param_name);
 void set_param(int i);
 void unset_param(int i);
 void unset_automatic(void);
 
 struct param_elem
 {
-	char * name;
-	char * value;
+	const char * name;
+	const char * value;
 };
 
 #endif

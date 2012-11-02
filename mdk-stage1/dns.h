@@ -24,7 +24,7 @@
 
 #include <netinet/in.h>
 
-int mygethostbyname(char * name, struct in_addr * addr);
-char * mygethostbyaddr(char * ipnum);
+int mygethostbyname(const char * name, struct in_addr * addr);
+char * mygethostbyaddr(const char * ipnum);
 
 #endif

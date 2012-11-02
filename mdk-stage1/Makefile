@@ -15,7 +15,7 @@
  # along with this program; if not, write to the Free Software
  # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-VERSION=1.61
+VERSION=2.0
 PRODUCT = $(FAMILY)-binaries
 
  #
@@ -67,7 +67,7 @@ ROOTDEST = $(LOCATION)/binaries
 
 DEFS = -DDISTRIB_NAME=\""$(DISTRIB_NAME)"\" -DDISTRIB_VERSION=\""$(DISTRIB_VERSION)"\" -DDISTRIB_TYPE=\"$(DISTRIB_TYPE)\" -DDISTRIB_DESCR=\"$(DISTRIB_DESCR)\" $(ADDITIONAL_DEFS) -D_FILE_OFFSET_BITS=64 -DARCH=\"$(ARCHDIR)\"
 
-COMPILE = $(CC) -std=gnu11 $(DEFS) $(CFLAGS)
+COMPILE = $(CXX) $(DEFS) $(CXXFLAGS)
 
 STAGE1_DEFS=-DDISABLE_KA -DDRAKX_ONE_BINARY -D_GNU_SOURCE
 
@@ -102,13 +102,13 @@ else
 FRONTEND_LIBS += -lnewt
 endif
 #else
-#FRONTEND_SRC += stdio-frontend.c
+#FRONTEND_SRC += stdio-frontend.cpp
 #endif
 
-SERIAL_PROBE_SRC = serial.c serial_probe.c
+SERIAL_PROBE_SRC = serial.cpp serial_probe.cpp
 LOCAL_SRC += $(SERIAL_PROBE_SRC)
 
-BINS_SRC = drvinst.c probe-modules.c rescue-gui.c ldetect/lspcidrake.c hotplug.c
+BINS_SRC = drvinst.cpp probe-modules.cpp rescue-gui.cpp ldetect/lspcidrake.cpp hotplug.cpp
 LOCAL_SRC += $(BINS_SRC)
 
 FRONTEND_OBJS = $(subst .c,.o,$(FRONTEND_SRC))
@@ -127,10 +127,10 @@ else
 endif
 
 # - stage1 itself
-STAGE1_SRC = stage1.c log.c utils.c params.c tools.c modules.c probing.c mount.c automatic.c frontend.c frontend-common.c lomount.c thirdparty.c
-CDROMSRC = cdrom.c
-DISKSRC = disk.c directory.c partition.c
-NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c directory.c wireless.c
+STAGE1_SRC = stage1.cpp log.cpp utils.cpp params.cpp tools.cpp modules.cpp probing.cpp mount.cpp automatic.cpp frontend.cpp frontend-common.cpp lomount.cpp thirdparty.cpp
+CDROMSRC = cdrom.cpp
+DISKSRC = disk.cpp directory.cpp partition.cpp
+NETWORKSRC = network.cpp nfsmount.cpp dhcp.cpp url.cpp dns.cpp adsl.cpp directory.cpp wireless.cpp
 #KASRC = ka.c
 
 # use sort to remove duplicates
@@ -142,19 +142,19 @@ ALLSRC = $(STAGE1_ALLSRC) $(FRONTEND_LIBS) $(LOCAL_SRC)
 CDROM_DEFS = -DDISABLE_DISK -DDISABLE_NETWORK
 
 
-STAGE1OBJS_NETWORK = $(subst .c,-NETWORK.o,$(STAGE1_SRC) $(NETWORKSRC))
+STAGE1OBJS_NETWORK = $(subst .cpp,-NETWORK.o,$(STAGE1_SRC) $(NETWORKSRC))
 
 NETWORK_DEFS = -DDISABLE_CDROM -DDISABLE_DISK -DDISABLE_KA
 
 
-STAGE1OBJS_NETWORK_STANDALONE = $(subst .c,-NETWORK-STANDALONE.o,$(STAGE1_SRC) $(NETWORKSRC))
+STAGE1OBJS_NETWORK_STANDALONE = $(subst .cpp,-NETWORK-STANDALONE.o,$(STAGE1_SRC) $(NETWORKSRC))
 
 NETWORK_STANDALONE_DEFS = -DDISABLE_CDROM -DDISABLE_DISK -DENABLE_NETWORK_STANDALONE -DDISABLE_KA
 
 
-STAGE1OBJS_FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
+STAGE1OBJS_FULL = $(subst .cpp,-FULL.o,$(STAGE1_ALLSRC))
 
-LOCALOBJS = $(subst .c,.o,$(LOCAL_SRC))
+LOCALOBJS = $(subst .cpp,.o,$(LOCAL_SRC))
 
 ADD_BINS = dhcp-client rescue-gui probe-modules drvinst lspcidrake serial_probe hotplug
 
@@ -165,7 +165,7 @@ HEADERS = pci-ids.h usb-ids.h
 ifneq (,$(findstring $(ARCH), i386 x86_64))
 	HEADERS += pcmcia-ids.h
 ifneq (0, $(WHOLE_PROGRAM))
-PCMCIA_LIB = pcmcia/probe.c pcmcia/startup.c pcmcia/yacc_config.c pcmcia/lex_config.c
+PCMCIA_LIB = pcmcia/probe.cpp pcmcia/startup.cpp pcmcia/yacc_config.cpp pcmcia/lex_config.cpp
 else
 DIRS += pcmcia
 PCMCIA_LIB = pcmcia/libpcmcia.a
@@ -184,11 +184,11 @@ $(DIRS): $(BUILDDIRS)
 $(BUILDDIRS):
 	$(MAKE) -C $(@:build-%=%)
 
-pcmcia/pcmcia_probe.o: pcmcia/probe.c
+pcmcia/pcmcia_probe.o: pcmcia/probe.cpp
 	$(DIET) $(COMPILE) -fPIC $(INCLUDES) -c $< -o $@
 
-pcmcia/yacc_config.c:
-	$(YACC) $(YFLAGS) -d -o pcmcia/yacc_config.c pcmcia/yacc_config.y
+pcmcia/yacc_config.cpp:
+	$(YACC) $(YFLAGS) -d -o pcmcia/yacc_config.cpp pcmcia/yacc_config.y
 
 pci-ids.h: /usr/share/ldetect-lst/pcitable.gz update-pci-ids.pl
 	perl update-pci-ids.pl > $@ || { rm -f $@; exit 1; }
@@ -232,51 +232,51 @@ dhcp-client: .depend $(STAGE1_SRC) $(NETWORKSRC) $(FRONTEND_SRC)
 		$(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS) \
 		-o $@
 
-rescue-gui: .depend rescue-gui.c frontend-common.c params.c utils.c log.c automatic.c $(FRONTEND_SRC)
+rescue-gui: .depend rescue-gui.cpp frontend-common.cpp params.cpp utils.cpp log.cpp automatic.cpp $(FRONTEND_SRC)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) \
-		rescue-gui.c frontend-common.c params.c utils.c log.c automatic.c $(FRONTEND_SRC) \
+		rescue-gui.cpp frontend-common.cpp params.cpp utils.cpp log.cpp automatic.cpp $(FRONTEND_SRC) \
 		$(FRONTEND_LIBS) $(LIBC_LIBS) \
 		-o $@
 
-probe-modules: .depend $(PCMCIA_LIB) probe-modules.c probing.c modules.c params.c utils.c log.c automatic.c frontend-common.c stdio-frontend.c $(PCMCIA_LIB)
+probe-modules: .depend $(PCMCIA_LIB) probe-modules.cpp probing.cpp modules.cpp params.cpp utils.cpp log.cpp automatic.cpp frontend-common.cpp stdio-frontend.cpp $(PCMCIA_LIB)
 	$(DIET) $(COMPILE) $(LDFLAGS) $(WHOLEFLAGS) \
 		$(INCLUDES) \
-		probe-modules.c probing.c modules.c params.c utils.c log.c automatic.c frontend-common.c stdio-frontend.c $(PCMCIA_LIB) \
+		probe-modules.cpp probing.cpp modules.cpp params.cpp utils.cpp log.cpp automatic.cpp frontend-common.cpp stdio-frontend.cpp $(PCMCIA_LIB) \
 		$(STAGE1_LIBS) $(LIBC_LIBS) \
 		-o $@
 endif
 else
 
 stage1: $(STAGE1OBJS_FULL) $(FRONTEND_OBJS) $(PCMCIA_LIB) $(LOCALOBJS)
-	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
+	$(DIET) $(CXX) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
 
 ifeq (0, $(ONE_BINARY))
 dhcp-client: $(STAGE1OBJS_NETWORK_STANDALONE) $(FRONTEND_OBJS)
-	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
+	$(DIET) $(CXX) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LIBS) $(LIBC_LIBS)
 
 rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(FRONTEND_OBJS)
-	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(FRONTEND_LIBS) $(LIBC_LIBS)
+	$(DIET) $(CXX) $(LDFLAGS) -o $@ $^ $(FRONTEND_LIBS) $(LIBC_LIBS)
 
 probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o $(PCMCIA_LIB)
-	$(DIET) $(CC) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(LIBC_LIBS)
+	$(DIET) $(CXX) $(LDFLAGS) -o $@ $^ $(STAGE1_LIBS) $(LIBC_LIBS)
 
 endif
 
-$(STAGE1OBJS_NETWORK): %-NETWORK.o: %.c .depend
+$(STAGE1OBJS_NETWORK): %-NETWORK.o: %.cpp .depend
 	$(DIET) $(COMPILE) $(INCLUDES) $(STAGE1_DEFS) $(NETWORK_DEFS) $(PCMCIA_DEFS) $(USB_DEFS_GEN) -DENABLE_ADDITIONAL_MODULES -c $< -o $@
 
-$(STAGE1OBJS_NETWORK_STANDALONE): %-NETWORK-STANDALONE.o: %.c .depend
+$(STAGE1OBJS_NETWORK_STANDALONE): %-NETWORK-STANDALONE.o: %.cpp .depend
 	$(DIET) $(COMPILE) $(INCLUDES) $(STAGE1_DEFS) $(NETWORK_STANDALONE_DEFS) $(USB_DEFS_GEN) -c $< -o $@
 
-$(STAGE1OBJS_FULL): %-FULL.o: %.c .depend
+$(STAGE1OBJS_FULL): %-FULL.o: %.cpp .depend
 	$(DIET) $(COMPILE) $(INCLUDES) $(STAGE1_DEFS) $(USB_DEFS_GEN) $(PCMCIA_DEFS) $(STAGE1_DEFS) -c $< -o $@
 
-$(FRONTEND_OBJS) $(LOCALOBJS): %.o: %.c .depend
+$(FRONTEND_OBJS) $(LOCALOBJS): %.o: %.cpp .depend
 	$(DIET) $(COMPILE) $(INCLUDES) $(STAGE1_DEFS) -c $< -o $@
 
 
-.c.o: .depend
+.cpp.o: .depend
 	$(DIET) $(COMPILE) $(INCLUDES) $(STAGE1_DEFS) -c $<
 
 endif
@@ -340,7 +340,7 @@ endif
 
 .DELETE_ON_ERROR:
 .depend: $(HEADERS)
-	$(CPP) $(DEFS) $(INCLUDES) $(CFLAGS) -M $(ALLSRC) > .depend
+	$(CXX) $(DEFS) $(INCLUDES) $(CXXFLAGS) -M $(ALLSRC) > .depend
 
 ifeq (.depend,$(wildcard .depend))
 include .depend

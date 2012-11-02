@@ -144,8 +144,8 @@ exit:
 }
 
 int modprobe(const char *alias, const char *extra_options) {
-	struct kmod_ctx *ctx;
-	struct kmod_list *l, *list = NULL;
+	struct kmod_ctx *ctx = NULL;
+	struct kmod_list *l = NULL, *list = NULL;
 	int err = 0, flags = 0;
 
 	if (!*modules_directory)
@@ -167,6 +167,7 @@ int modprobe(const char *alias, const char *extra_options) {
 		goto exit;
 
 	// filter through blacklist
+	{
 	struct kmod_list *filtered = NULL;
 	err =  kmod_module_apply_filter(ctx, KMOD_FILTER_BLACKLIST, list, &filtered);
 	kmod_module_unref_list(list);
@@ -184,20 +185,20 @@ int modprobe(const char *alias, const char *extra_options) {
 			err = 0;
 		else {
 			switch (err) {
-			    case -EEXIST:
-				fprintf(stderr, "could not insert '%s': Module already in kernel\n",
-						kmod_module_get_name(mod));
-				break;
-			    case -ENOENT:
-				fprintf(stderr, "could not insert '%s': Unknown symbol in module, "
-						"or unknown parameter (see dmesg)\n",
-						kmod_module_get_name(mod));
-				break;
-			    default:
-				fprintf(stderr, "could not insert '%s': %s\n",
-						kmod_module_get_name(mod),
-						strerror(-err));
-				break;
+				case -EEXIST:
+					fprintf(stderr, "could not insert '%s': Module already in kernel\n",
+							kmod_module_get_name(mod));
+					break;
+				case -ENOENT:
+					fprintf(stderr, "could not insert '%s': Unknown symbol in module, "
+							"or unknown parameter (see dmesg)\n",
+							kmod_module_get_name(mod));
+					break;
+				default:
+					fprintf(stderr, "could not insert '%s': %s\n",
+							kmod_module_get_name(mod),
+							strerror(-err));
+					break;
 			}
 		}
 
@@ -207,6 +208,7 @@ int modprobe(const char *alias, const char *extra_options) {
 	}
 
 	kmod_module_unref_list(list);
+	}
 
 exit:
 	kmod_unref(ctx);
@@ -260,7 +262,7 @@ static int load_modules_descriptions(void)
 	dlist = list_directory(modules_directory);
 	for (modnum = 0; dlist[modnum] && *dlist[modnum]; modnum++);
 
-	modules_descr = calloc(modnum+1, sizeof(*modules_descr));
+	modules_descr = (struct module_descr_elem *)calloc(modnum+1, sizeof(*modules_descr));
 
 	ctx = kmod_new(modules_directory, NULL);
 	if (!ctx) {
@@ -305,7 +307,7 @@ void init_modules_insmoding(void)
 static void add_modules_conf(char * str)
 {
 	static char data[5000] = "";
-	char * target = "/etc/modules.conf";
+	const char target[] = "/etc/modules.conf";
 	int fd;
 
 	if (strlen(data) + strlen(str) >= sizeof(data))
@@ -358,7 +360,7 @@ bool module_already_present(const char *name)
 	return present;
 }
 
-static enum insmod_return insmod_with_deps(const char * mod_name, char * options, int allow_modules_floppy)
+static enum insmod_return insmod_with_deps(const char * mod_name, const char * options, int allow_modules_floppy)
 {
 	int err = modprobe(mod_name, options);
 	switch (err){
@@ -373,12 +375,12 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 
 
 #ifndef DISABLE_NETWORK
-enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char * options, int allow_modules_floppy)
+enum insmod_return my_insmod(const char * mod_name, enum driver_type type, const char * options, int allow_modules_floppy)
 #else
-enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attribute__ ((unused)), char * options, int allow_modules_floppy)
+enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attribute__ ((unused)), const char * options, int allow_modules_floppy)
 #endif
 {
-	int i;
+	enum insmod_return i;
 #ifndef DISABLE_NETWORK
 	char ** net_devices = NULL; /* fucking compiler */
 #endif
@@ -403,7 +405,7 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attr
 			asprintf(&cmd, "/sbin/modprobe %s", mod_name);
 
 		log_message("running %s", cmd);
-		i = system(cmd);
+		i = (enum insmod_return)system(cmd);
 	} else
     	    i = insmod_with_deps(mod_name, options, allow_modules_floppy);
 
@@ -437,9 +439,9 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attr
 
 }
 
-static enum return_type insmod_with_options(char * mod, enum driver_type type)
+static enum return_type insmod_with_options(const char * mod, enum driver_type type)
 {
-	char * questions[] = { "Options", NULL };
+	const char * questions[] = { "Options", NULL };
 	static char ** answers = NULL;
 	enum return_type results;
 	char options[500] = "options ";
@@ -472,13 +474,13 @@ enum return_type ask_insmod(enum driver_type type)
 	enum return_type results;
 	char * choice;
 	char ** dlist = list_directory(modules_directory);
-	char ** modules = alloca(sizeof(char *) * (string_array_length(dlist) + 1));
-	char ** descrs = alloca(sizeof(char *) * (string_array_length(dlist) + 1));
+	char ** modules = (char**)alloca(sizeof(char *) * (string_array_length((const char**)dlist) + 1));
+	char ** descrs = (char**)alloca(sizeof(char *) * (string_array_length((const char**)dlist) + 1));
 	char ** p_dlist = dlist;
 	char ** p_modules = modules;
 	char ** p_descrs = descrs;
 
-	qsort(dlist, string_array_length(dlist), sizeof(char *), strsortfunc);
+	qsort(dlist, string_array_length((const char**)dlist), sizeof(char *), strsortfunc);
 
 	unset_automatic(); /* we are in a fallback mode */
 
@@ -505,7 +507,7 @@ enum return_type ask_insmod(enum driver_type type)
 	*p_descrs = NULL;
 
 	if (modules && *modules) {
-		char * mytype;
+		const char * mytype;
 		char msg[200];
 		if (type == MEDIA_ADAPTERS)
 			mytype = "MEDIA";
@@ -515,7 +517,7 @@ enum return_type ask_insmod(enum driver_type type)
 			return RETURN_ERROR;
 
 		snprintf(msg, sizeof(msg), "Which driver should I try to gain %s access?", mytype);
-		results = ask_from_list_comments(msg, modules, descrs, &choice);
+		results = ask_from_list_comments((const char*)msg, (const char**)modules, (const char**)descrs, &choice);
 		if (results == RETURN_OK)
 			return insmod_with_options(choice, type);
 		else

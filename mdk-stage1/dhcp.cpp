@@ -99,7 +99,7 @@ struct bootp_request {
 	char vendor[DHCP_VENDOR_LENGTH];
 } ;
 
-static const char vendor_cookie[] = { 99, 130, 83, 99, 255 };
+static const uint8_t vendor_cookie[] = { 99, 130, 83, 99, 255 };
 
 
 static unsigned int verify_checksum(void * buf2, int length2)
@@ -124,7 +124,7 @@ static int initial_setup_interface(char * device, int s) {
 	} addrp;
 	struct ifreq req;
 	struct rtentry route;
-	int true = 1;
+	int is_true = 1;
 	
 	addrp.sa = &req.ifr_addr;
 	
@@ -173,7 +173,7 @@ static int initial_setup_interface(char * device, int s) {
 		}
 	}
 	
-	if (setsockopt(s, SOL_SOCKET, SO_BROADCAST, &true, sizeof(true))) {
+	if (setsockopt(s, SOL_SOCKET, SO_BROADCAST, &is_true, sizeof(is_true))) {
 		close(s);
 		log_perror("setsockopt");
 		return -1;
@@ -223,7 +223,7 @@ static void parse_reply(struct bootp_request * breq, struct interface_info * int
 
 	chptr = (unsigned char *) breq->vendor;
 	chptr += 4;
-	while (*chptr != 0xFF && (void *) chptr < (void *) breq->vendor + DHCP_VENDOR_LENGTH) {
+	while (*chptr != 0xFF && (unsigned char *) chptr < (unsigned char *) breq->vendor + DHCP_VENDOR_LENGTH) {
 		char tmp_str[500];
 		option = *chptr++;
 		if (!option)
@@ -427,7 +427,7 @@ static int handle_transaction(int s, struct bootp_request * breq, struct bootp_r
 			if (j < (signed)(sizeof(*ip_hdr) + sizeof(*udp_hdr)))
 				continue;
 			
-			ip_hdr = (void *) eth_packet;
+			ip_hdr = static_cast<struct iphdr *>(reinterpret_cast<void*>(eth_packet));
 			if (!verify_checksum(ip_hdr, sizeof(*ip_hdr)))
 				continue;
 
@@ -439,7 +439,7 @@ static int handle_transaction(int s, struct bootp_request * breq, struct bootp_r
 			if (ip_hdr->protocol != IPPROTO_UDP)
 				continue;
 			
-			udp_hdr = (void *) (eth_packet + sizeof(*ip_hdr));
+			udp_hdr = (struct udphdr *) (eth_packet + sizeof(*ip_hdr));
 
 			if (ntohs(udp_hdr->source) != BOOTP_SERVER_PORT)
 				continue;
@@ -483,7 +483,7 @@ static int handle_transaction(int s, struct bootp_request * breq, struct bootp_r
 	return -1;
 }
 
-static void add_vendor_code(struct bootp_request * breq, unsigned char option, unsigned char length, void * data)
+static void add_vendor_code(struct bootp_request * breq, unsigned char option, unsigned char length, const void * data)
 {
 	unsigned char * chptr;
 	int theOption, theLength;
@@ -504,8 +504,8 @@ static void add_vendor_code(struct bootp_request * breq, unsigned char option, u
 }
 
 
-char * dhcp_hostname = NULL;
-char * dhcp_domain = NULL;
+const char * dhcp_hostname = NULL;
+const char * dhcp_domain = NULL;
 
 enum return_type perform_dhcp(struct interface_info * intf)
 {
@@ -532,8 +532,8 @@ enum return_type perform_dhcp(struct interface_info * intf)
 
 	{
 		enum return_type results;
-		char * questions[] = { "Host name", "Domain name", NULL };
-		char * questions_auto[] = { "hostname", "domain" };
+		const char * questions[] = { "Host name", "Domain name", NULL };
+		const char * questions_auto[] = { "hostname", "domain" };
 		static char ** answers = NULL;
 		char * boulet;
 
@@ -541,8 +541,8 @@ enum return_type perform_dhcp(struct interface_info * intf)
 		
 		if (IS_NETTEST) {
 			answers = (char **) malloc(sizeof(questions));
-			answers[0] = "";
-			answers[1] = "";
+			answers[0] = strdup("");
+			answers[1] = strdup("");
 			results = RETURN_OK;
 		} else
 			results = ask_from_entries_auto("If the DHCP server needs to know you by name; please fill in this information. "
@@ -558,7 +558,7 @@ enum return_type perform_dhcp(struct interface_info * intf)
 			
 			if (*dhcp_hostname && *dhcp_domain) {
 				/* if we have both, then create client id from them */
-				client_id_str = malloc(1 + strlen(dhcp_hostname) + 1 + strlen(dhcp_domain) + 1);
+				client_id_str = (char*)malloc(1 + strlen(dhcp_hostname) + 1 + strlen(dhcp_domain) + 1);
 				client_id_str[0] = '\0';
 				sprintf(client_id_str+1, "%s.%s", dhcp_hostname, dhcp_domain);
 			}
@@ -584,7 +584,7 @@ enum return_type perform_dhcp(struct interface_info * intf)
 			add_vendor_code(&breq, DHCP_OPTION_CLIENT_IDENTIFIER, strlen(client_id_str+1)+1, client_id_str);
 		else {  /* usual style (aka windows / dhcpcd) */
 			/* but put MAC in form required for client identifier first */
-			client_id_hwaddr = malloc(IFHWADDRLEN+2);
+			client_id_hwaddr = (char*)malloc(IFHWADDRLEN+2);
 			/* (from pump-0.8.22/dhcp.c)
 			 * Microsoft uses a client identifier field of the 802.3 address with a
 			 * pre-byte of a "1".  In order to re-use the DHCP address that they set

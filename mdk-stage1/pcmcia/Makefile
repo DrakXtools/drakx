@@ -25,9 +25,8 @@ YFLAGS := -d
 all: $(TARGET) pcmcia_probe.o
 
 clean:
-	rm -f *.o $(TARGET) lex_config.c yacc_config.c yacc_config.h
+	rm -f *.o $(TARGET) lex_config.c* yacc_config.cpp yacc_config.h
 
-CFLAGS = -Wall -Werror -Os -fomit-frame-pointer -pipe
 INCLUDES += -I$(top_dir)
 
 # (blino) make sure yynewerror and yyerrlab are uselessly used
@@ -36,18 +35,20 @@ LFLAGS += --nounput
 
 OBJS = probe.o startup.o yacc_config.o lex_config.o
 
+lex_config.cpp: lex_config.c
+	ln -s $< $@
 
-%.c %.h : %.y
+%.cpp %.h : %.y
 	$(YACC) $(YFLAGS) $<
-	mv y.tab.c $*.c
+	mv y.tab.c $*.cpp
 	mv y.tab.h $*.h
 
 $(TARGET): $(OBJS) yacc_config.h
 	ar -cru $@ $^
 	ranlib $@
 
-$(OBJS): %.o: %.c
-	$(DIET) $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(OBJS): %.o: %.cpp
+	$(DIET) $(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
-pcmcia_probe.o: probe.c
-	$(DIET) $(CC) -fPIC $(CFLAGS) $(INCLUDES) -c $< -o $@
+pcmcia_probe.o: probe.cpp
+	$(DIET) $(CXX) -fPIC $(CXXFLAGS) $(INCLUDES) -c $< -o $@

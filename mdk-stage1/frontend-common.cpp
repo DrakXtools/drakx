@@ -22,7 +22,7 @@
 
 const char * binary_name = NULL;
 
-void info_message(char *msg, ...)
+void info_message(const char *msg, ...)
 {
 	va_list args;
 	va_start(args, msg);
@@ -30,7 +30,7 @@ void info_message(char *msg, ...)
 	va_end(args);
 }
 
-void wait_message(char *msg, ...)
+void wait_message(const char *msg, ...)
 {
 	va_list args;
 	va_start(args, msg);
@@ -38,7 +38,7 @@ void wait_message(char *msg, ...)
 	va_end(args);
 }
 
-void error_message(char *msg, ...)
+void error_message(const char *msg, ...)
 {
 	va_list args;
 	va_start(args, msg);
@@ -46,7 +46,7 @@ void error_message(char *msg, ...)
 	va_end(args);
 }
 
-enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_comments, char ** choice)
+enum return_type ask_from_list_comments(const char *msg, const char ** elems, const char ** elems_comments, char ** choice)
 {
 	int answer = 0;
 	enum return_type results;
@@ -59,7 +59,7 @@ enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_
 	return results;
 }
 
-enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
+enum return_type ask_from_list(const char *msg, const char ** elems, char ** choice)
 {
 	return ask_from_list_comments(msg, elems, NULL, choice);
 }

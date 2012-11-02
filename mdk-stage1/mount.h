@@ -26,7 +26,7 @@
 #include "nfsmount.h"
 #endif
 
-int my_mount(char *dev, char *location, char *fs, int force_rw);
+int my_mount(const char *dev, const char *location, const char *fs, int force_rw);
 int ensure_dev_exists(const char * dev);
 
 #endif

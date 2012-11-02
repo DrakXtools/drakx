@@ -81,13 +81,13 @@ struct device {
 	char * driver;		/* driver to load, if any */
 	char * desc;		/* a description */
 	int detached;		/* should we care if it disappears? */
-	struct device *(*newDevice) (struct device *old, struct device *new);
+	struct device *(*newDevice) (struct device *old, struct device *newdev);
 	void (*freeDevice) (struct device *dev);
 	void (*writeDevice) (FILE *file, struct device *dev);
 	int (*compareDevice) (struct device *dev1, struct device *dev2);
 };
 
-struct device *newDevice(struct device *old, struct device *new);
+struct device *newDevice(struct device *old, struct device *newdev);
 void freeDevice(struct device *dev);
 void writeDevice(FILE *file, struct device *dev);
 int compareDevice(struct device *dev1, struct device *dev2);

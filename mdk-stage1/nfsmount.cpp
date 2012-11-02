@@ -717,9 +717,9 @@ static struct {
 	{ NFSERR_WFLUSH,	EWFLUSH		},
 #endif
 	/* Throw in some NFSv3 values for even more fun (HP returns these) */
-	{ 71,			EREMOTE		},
+	{(enum nfsstat) 71,			EREMOTE		},
 
-	{ -1,			EIO		}
+	{ (enum nfsstat)-1,			EIO		}
 };
 
 static char *nfs_strerror(int stat)

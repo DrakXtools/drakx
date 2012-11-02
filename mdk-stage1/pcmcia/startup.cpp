@@ -32,7 +32,7 @@
 struct adjust_list_t *root_adjust = NULL;
 
 /* path for config file, device scripts */
-static char *configpath = "/etc/pcmcia";
+static const char configpath[] = "/etc/pcmcia";
 
 enum {
         RESOURCE_MEM,
@@ -186,7 +186,7 @@ static void load_config(void)
 	syslog(LOG_ERR, "chdir to %s failed: %m", configpath);
 	exit(EXIT_FAILURE);
     }
-    parse_configfile("config.opts");
+    parse_configfile(strdup("config.opts"));
     return;
 }
 
@@ -252,11 +252,11 @@ int main(int argc, char *argv[])
 }
 */
 
-void pcmcia_socket_startup(int socket_no) {
+void pcmcia_socket_startup(unsigned int socket_no) {
 	unsigned long i;
 	unsigned int all_sockets = 0;
 
-        if (socket_no == -1)
+        if (socket_no == (unsigned int)-1)
 		all_sockets = 1;
 
 	load_config();

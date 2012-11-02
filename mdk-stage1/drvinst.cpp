@@ -16,6 +16,7 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
+#include <string>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -33,19 +34,17 @@
 
 /* TODO: add_addons... */
 static void load_modules(int argc, char *argv[]) {
-    struct pciusb_entries entries = pci_probe();
-    unsigned int i;
-
-    for (i = 0; i < entries.nb; i++) {
-	struct pciusb_entry *e = &entries.entries[i];
-	const char *class = pci_class2text(e->class_id);
-	if (!e->module || strchr(e->module, ':') || !strcmp(class, "DISPLAY_VGA"))
+    std::vector<pciusb_entry> *entries = pci_probe();
+    for (unsigned int i = 0; i < entries->size(); i++) {
+	pciusb_entry &e = (*entries)[i];
+	const char *devclass = pci_class2text(e.class_id);
+	if (e.module.empty() || e.module.find(':') || !strcmp(devclass, "DISPLAY_VGA"))
 	    continue;
 	if (argc > 1) {
 	    int j;
 	    bool skip = true;
 	    for (j = 1; j < argc; j++) {
-		if (!strncasecmp(argv[j], class, strlen(argv[j]))) {
+		if (!strncasecmp(argv[j], devclass, strlen(argv[j]))) {
 		    skip = false;
 		    break;
 		}
@@ -53,10 +52,10 @@ static void load_modules(int argc, char *argv[]) {
 	    if (skip)
 		continue;
 	}
-	printf("Installing driver %s (for \"%s\" [%s])\n", e->module, e->text, class);
-	modprobe(e->module, NULL);
+	printf("Installing driver %s (for \"%s\" [%s])\n", e.module.c_str(), e.text.c_str(), devclass);
+	modprobe(e.module.c_str(), NULL);
     }
-    pciusb_free(&entries);
+    delete entries;
 }
 
 int drvinst_main(int argc, char *argv[]) {

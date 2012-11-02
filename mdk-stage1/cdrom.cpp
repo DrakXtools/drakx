@@ -36,7 +36,7 @@
 #include "cdrom.h"
 
 
-static int mount_that_cd_device(char * dev_name)
+static int mount_that_cd_device(const char * dev_name)
 {
 	char device_fullname[50];
 	int mount_result;
@@ -51,9 +51,9 @@ static int mount_that_cd_device(char * dev_name)
 }
 
 
-static enum return_type try_with_device(char * dev_name, char * dev_model);
+static enum return_type try_with_device(const char * dev_name, const char * dev_model);
 
-static enum return_type do_with_device(char * dev_name, char * dev_model)
+static enum return_type do_with_device(const char * dev_name, const char * dev_model)
 {
 	if (!image_has_stage2()) {
 		enum return_type results;
@@ -76,7 +76,7 @@ static enum return_type do_with_device(char * dev_name, char * dev_model)
 	return RETURN_OK;
 }		
 
-static enum return_type try_with_device(char * dev_name, char * dev_model)
+static enum return_type try_with_device(const char * dev_name, const char * dev_model)
 {
 	wait_message("Trying to access a CDROM disc (drive %s)", dev_model);
 
@@ -97,7 +97,7 @@ static enum return_type try_with_device(char * dev_name, char * dev_model)
 	return do_with_device(dev_name, dev_model);
 }
 
-int try_automatic(char ** medias, char ** medias_models)
+static int try_automatic(char ** medias, char ** medias_models)
 {
 	static char * already_tried[50] = { NULL };
 	char ** model = medias_models;
@@ -200,9 +200,9 @@ enum return_type cdrom_prepare(void)
 		return cdrom_prepare();
 	}
 
-	results = ask_from_list_comments("Please choose the CDROM drive to use for the installation.", medias, medias_models, &choice);
+	results = ask_from_list_comments("Please choose the CDROM drive to use for the installation.", (const char**)medias, (const char**)medias_models, &choice);
 	if (results == RETURN_OK) {
-		char ** model = medias_models;
+		const char ** model = (const char**)medias_models;
 		ptr = medias;
 		while (ptr && *ptr && model && *model) {
 			if (!strcmp(*ptr, choice))

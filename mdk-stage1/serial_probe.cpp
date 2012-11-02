@@ -27,29 +27,29 @@ typedef struct device *(newFunc)(struct device *);
 typedef int (initFunc)();
 typedef struct device *(probeFunc)(enum deviceClass, int, struct device *);
 
-char *classStrings[] = {
+const char *classStrings[] = {
 	"UNSPEC", "OTHER", "NETWORK", "SCSI", "VIDEO", "AUDIO",
 	"MOUSE", "MODEM", "CDROM", "TAPE", "FLOPPY", "SCANNER",
 	"HD", "RAID", "PRINTER", "CAPTURE", "KEYBOARD", NULL
 };
 
-struct device *newDevice(struct device *old, struct device *new) {
+struct device *newDevice(struct device *old, struct device *newdev) {
     if (!old) {
-	if (!new) {
-	    new = malloc(sizeof(struct device));
-	    memset(new,'\0',sizeof(struct device));
+	if (!newdev) {
+	    newdev = (struct device*)malloc(sizeof(struct device));
+	    memset(newdev,'\0',sizeof(struct device));
 	}
-     new->type = CLASS_UNSPEC;
+     newdev->type = CLASS_UNSPEC;
     } else {
-	    new->type = old->type;
-	    if (old->device) new->device = strdup(old->device);
-	    if (old->driver) new->driver = strdup(old->driver);
-	    if (old->desc) new->desc = strdup(old->desc);
+	    newdev->type = old->type;
+	    if (old->device) newdev->device = strdup(old->device);
+	    if (old->driver) newdev->driver = strdup(old->driver);
+	    if (old->desc) newdev->desc = strdup(old->desc);
     }
-    new->newDevice = newDevice;
-    new->freeDevice = freeDevice;
-    new->compareDevice = compareDevice;
-    return new;
+    newdev->newDevice = newDevice;
+    newdev->freeDevice = freeDevice;
+    newdev->compareDevice = compareDevice;
+    return newdev;
 }
 
 void freeDevice(struct device *dev) {

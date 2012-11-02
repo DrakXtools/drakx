@@ -32,9 +32,9 @@
 
 
 static struct param_elem * automatic_params;
-static char * value_not_bound = "";
+static const char * value_not_bound = "";
 
-void grab_automatic_params(char * line)
+void grab_automatic_params(const char * line)
 {
 	int i, p;
 	struct param_elem tmp_params[50];
@@ -46,14 +46,14 @@ void grab_automatic_params(char * line)
 		int j = i;
 		while (line[i] != ':' && line[i] != '\0')
 			i++;
-		name = _memdup(&line[j], i-j + 1);
+		name = (char*)_memdup(&line[j], i-j + 1);
 		name[i-j] = 0;
 
 		k = i+1;
 		i++;
 		while (line[i] != ',' && line[i] != '\0')
 			i++;
-		value = _memdup(&line[k], i-k + 1);
+		value = (char*)_memdup(&line[k], i-k + 1);
 		value[i-k] = 0;
 
 		tmp_params[p].name = name;
@@ -65,13 +65,13 @@ void grab_automatic_params(char * line)
 	}
 
 	tmp_params[p++].name = NULL;
-	automatic_params = _memdup(tmp_params, sizeof(struct param_elem) * p);
+	automatic_params = (param_elem*)_memdup(tmp_params, sizeof(struct param_elem) * p);
 
 	log_message("AUTOMATIC MODE: got %d params", p-1);
 }
 
 
-char * get_auto_value(char * auto_param)
+const char * get_auto_value(const char * auto_param)
 {
 	struct param_elem * ptr = automatic_params;
 
@@ -99,7 +99,7 @@ char * get_auto_value(char * auto_param)
 }
 
 
-enum return_type ask_from_list_auto(char *msg, char ** elems, char ** choice, char * auto_param, char ** elems_auto)
+enum return_type ask_from_list_auto(const char *msg, const char ** elems, char ** choice, const char * auto_param, const char ** elems_auto)
 {
 	if (!IS_AUTOMATIC) {
 #ifdef ENABLE_BOOTSPLASH
@@ -108,11 +108,11 @@ enum return_type ask_from_list_auto(char *msg, char ** elems, char ** choice, ch
 #endif
 		return ask_from_list(msg, elems, choice);
 	} else {
-		char ** sav_elems = elems;
-		char * tmp = get_auto_value(auto_param);
+		const char ** sav_elems = elems;
+		const char * tmp = get_auto_value(auto_param);
 		while (elems && *elems) {
 			if (!strcmp(tmp, *elems_auto)) {
-				*choice = *elems;
+				*choice = (char*)*elems;
 				log_message("AUTOMATIC: parameter %s for %s means returning %s", tmp, auto_param, *elems);
 				return RETURN_OK;
 			}
@@ -124,7 +124,7 @@ enum return_type ask_from_list_auto(char *msg, char ** elems, char ** choice, ch
 	}
 }
 
-enum return_type ask_from_list_comments_auto(char *msg, char ** elems, char ** elems_comments, char ** choice, char * auto_param, char ** elems_auto)
+enum return_type ask_from_list_comments_auto(const char *msg, const char ** elems, const char ** elems_comments, char ** choice, const char * auto_param, const char ** elems_auto)
 {
 	if (!IS_AUTOMATIC) {
 #ifdef ENABLE_BOOTSPLASH
@@ -133,11 +133,11 @@ enum return_type ask_from_list_comments_auto(char *msg, char ** elems, char ** e
 #endif
 		return ask_from_list_comments(msg, elems, elems_comments, choice);
 	} else {
-		char ** sav_elems = elems;
-		char * tmp = get_auto_value(auto_param);
+		const char ** sav_elems = elems;
+		const char * tmp = get_auto_value(auto_param);
 		while (elems && *elems) {
 			if (!strcmp(tmp, *elems_auto)) {
-				*choice = *elems;
+				*choice = (char*)*elems;
 				log_message("AUTOMATIC: parameter %s for %s means returning %s", tmp, auto_param, *elems);
 				return RETURN_OK;
 			}
@@ -150,7 +150,7 @@ enum return_type ask_from_list_comments_auto(char *msg, char ** elems, char ** e
 }
 
 
-enum return_type ask_from_entries_auto(char *msg, char ** questions, char *** answers, int entry_size, char ** questions_auto, void (*callback_func)(char ** strings))
+enum return_type ask_from_entries_auto(const char *msg, const char ** questions, char *** answers, int entry_size, const char ** questions_auto, void (*callback_func)(char ** strings))
 {
 	if (!IS_AUTOMATIC) {
 #ifdef ENABLE_BOOTSPLASH
@@ -159,7 +159,7 @@ enum return_type ask_from_entries_auto(char *msg, char ** questions, char *** an
 #endif
 		return ask_from_entries(msg, questions, answers, entry_size, callback_func);
 	} else {
-		char * tmp_answers[50];
+		const char * tmp_answers[50];
 		int i = 0;
 		while (questions && *questions) {
 			tmp_answers[i] = get_auto_value(*questions_auto);
@@ -169,7 +169,7 @@ enum return_type ask_from_entries_auto(char *msg, char ** questions, char *** an
 			questions_auto++;
 			
 		}
-		*answers = _memdup(tmp_answers, sizeof(char *) * i);
+		*answers = (char**)_memdup(tmp_answers, sizeof(char *) * i);
 		return RETURN_OK;
 	}
 }

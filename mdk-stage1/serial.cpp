@@ -129,7 +129,7 @@ static int serialCompareDevice( struct serialDevice *dev1, struct serialDevice *
 struct serialDevice * serialNewDevice(struct serialDevice *dev) {
     struct serialDevice *ret;
     
-    ret = malloc(sizeof(struct serialDevice));
+    ret = (struct serialDevice *)malloc(sizeof(struct serialDevice));
     memset(ret,'\0',sizeof(struct serialDevice));
     ret=(struct serialDevice *)newDevice((struct device *)dev,(struct device *)ret);
     ret->bus = BUS_SERIAL;
@@ -654,7 +654,7 @@ static int read_pnp_string( int fd, char *pnp_string, int *pnp_len, int pnp_stri
 }
 
 /* parse the PnP ID string into components */
-static int parse_pnp_string( char *pnp_id_string, int pnp_len,
+static int parse_pnp_string(const char *pnp_id_string, int pnp_len,
 		     struct pnp_com_id *pnp_id ) {
     unsigned char *p1, *p2;
     unsigned char *start;
@@ -680,21 +680,21 @@ static int parse_pnp_string( char *pnp_id_string, int pnp_len,
     memset(pnp_id, 0, sizeof(*pnp_id));
 
     /* copy pnp_string to temp space */
-    pnp_string = alloca(pnp_len+1);
+    pnp_string = (unsigned char*)alloca(pnp_len+1);
     memcpy(pnp_string, pnp_id_string, pnp_len+1);
     
     /* first find the start of the PnP part of string */
-    p1 = memchr( pnp_string, BeginPnP1, pnp_len );
-    p2 = memchr( pnp_string, BeginPnP2, pnp_len );
+    p1 = (unsigned char*)memchr( pnp_string, BeginPnP1, pnp_len );
+    p2 = (unsigned char*)memchr( pnp_string, BeginPnP2, pnp_len );
 
 
     if (p1) {
         int p_len = pnp_len - (p1 - pnp_string);
-        p1end = memchr(p1, EndPnP1, p_len);
+        p1end = (unsigned char*)memchr(p1, EndPnP1, p_len);
     }
     if (p2) {
         int p_len = pnp_len - (p2 - pnp_string);
-        p2end = memchr(p2, EndPnP2, p_len);
+        p2end = (unsigned char*)memchr(p2, EndPnP2, p_len);
     }
 
     /* use the one which points nearest to start of the string */
@@ -1012,13 +1012,13 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 			len = strlen(pnp_id.eisa_id) +
 			    strlen(pnp_id.product_id) +
 			    strlen(pnp_id.user_name) + 3;
-			foo = malloc(len);
+			foo = (char*)malloc(len);
 			snprintf(foo,len,"%s|%s %s",pnp_id.eisa_id,
 				 pnp_id.product_id,pnp_id.user_name);
 		    } else {
 			len = strlen(pnp_id.eisa_id) +
 			    strlen(pnp_id.product_id) + 3;
-			foo = malloc(len);
+			foo = (char*)malloc(len);
 			snprintf(foo,len,"%s|%s",pnp_id.eisa_id,
 				 pnp_id.product_id);
 		    }

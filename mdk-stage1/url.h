@@ -22,13 +22,13 @@
 #ifndef _URL_H_
 #define _URL_H_
 
-int ftp_open_connection(char * host, char * name, char * password, char * proxy);
-int ftp_get_filesize(int sock, char * remotename);
-int ftp_start_download(int sock, char * remotename, int * size);
+int ftp_open_connection(const char * host, const char * name, const char * password, const char * proxy);
+int ftp_get_filesize(int sock, const char * remotename);
+int ftp_start_download(int sock, const char * remotename, int * size);
 int ftp_end_data_command(int sock);
-char *str_ftp_error(int error);
+const char *str_ftp_error(int error);
 
-int http_download_file(char * hostname, char * remotename, int * size, char * proxyprotocol, char * proxyname, char * proxyport);
+int http_download_file(const char * hostname, const char * remotename, int * size, const char * proxyprotocol, const char * proxyname, const char * proxyport);
 
 
 #define FTPERR_BAD_SERVER_RESPONSE   -1

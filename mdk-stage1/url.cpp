@@ -19,6 +19,7 @@
  *
  */
 
+#include <string>
 #include <alloca.h>
 #include <sys/socket.h>
 #include <sys/types.h>
@@ -132,7 +133,7 @@ static int ftp_check_response(int sock, char ** str)
 	return 0;
 }
 
-static int ftp_command(int sock, char * command, char * param)
+static int ftp_command(int sock, const char * command, const char * param)
 {
 	char buf[500];
 	int rc;
@@ -149,7 +150,7 @@ static int ftp_command(int sock, char * command, char * param)
 	return 0;
 }
 
-static int get_host_address(char * host, struct in_addr * address)
+static int get_host_address(const char * host, struct in_addr * address)
 {
 	if (isdigit(host[0])) {
 		if (!inet_aton(host, address)) {
@@ -163,7 +164,7 @@ static int get_host_address(char * host, struct in_addr * address)
 	return 0;
 }
 
-int ftp_open_connection(char * host, char * name, char * password, char * proxy)
+int ftp_open_connection(const char * host, const char * name, const char * password, const char * proxy)
 {
 	int sock;
 	struct in_addr serverAddress;
@@ -173,6 +174,7 @@ int ftp_open_connection(char * host, char * name, char * password, char * proxy)
 	} destPort;
 	int rc;
 	int port = 21;
+	std::string proxyname;
 
 	if (!strcmp(name, "")) {
 		name = "anonymous";
@@ -180,7 +182,8 @@ int ftp_open_connection(char * host, char * name, char * password, char * proxy)
 	}
 
 	if (strcmp(proxy, "")) {
-		asprintf(&name, "%s@%s", name, host);
+		proxyname.append(name).append("@").append(host);
+		name = proxyname.c_str();
 		host = proxy;
 	}
 
@@ -229,7 +232,7 @@ int ftp_open_connection(char * host, char * name, char * password, char * proxy)
 }
 
 
-int ftp_data_command(int sock, char * command, char * param)
+static int ftp_data_command(int sock, const char * command, const char * param)
 {
 	int dataSocket;
 	union {
@@ -312,7 +315,7 @@ int ftp_data_command(int sock, char * command, char * param)
 }
 
 
-int ftp_get_filesize(int sock, char * remotename)
+int ftp_get_filesize(int sock, const char * remotename)
 {
 	int size = 0;
 	char buf[2000];
@@ -375,7 +378,7 @@ int ftp_get_filesize(int sock, char * remotename)
 }
 
 
-int ftp_start_download(int sock, char * remotename, int * size)
+int ftp_start_download(int sock, const char * remotename, int * size)
 {
 	if ((*size = ftp_get_filesize(sock, remotename)) == -1) {
 		log_message("FTP: could not get filesize (trying to continue)");
@@ -394,7 +397,7 @@ int ftp_end_data_command(int sock)
 }
 
 
-char *str_ftp_error(int error)
+const char *str_ftp_error(int error)
 {
 	return error == FTPERR_PASSIVE_ERROR ? "error with passive connection" :
 	       error == FTPERR_FAILED_CONNECT ? "couldn't connect to server" :
@@ -404,7 +407,7 @@ char *str_ftp_error(int error)
 }
 
 
-static int _http_download_file(char * hostname, char * remotename, int * size, char * proxyprotocol, char * proxyname, char * proxyport, int recursion)
+static int _http_download_file(const char * hostname, const char * remotename, int * size, const char * proxyprotocol, const char * proxyname, const char * proxyport, int recursion)
 {
 	char * buf;
 	char headers[4096];
@@ -420,7 +423,7 @@ static int _http_download_file(char * hostname, char * remotename, int * size, c
 	} destPort;
 	const char * header_content_length = "Content-Length: ";
 	const char * header_location = "Location: http://";
-	char * http_server_name;
+	const char * http_server_name;
 	int http_server_port;
 
 	if (proxyprotocol) {
@@ -565,7 +568,7 @@ static int _http_download_file(char * hostname, char * remotename, int * size, c
 }
 
 
-int http_download_file(char * hostname, char * remotename, int * size, char * proxyprotocol, char * proxyname, char * proxyport)
+int http_download_file(const char * hostname, const char * remotename, int * size, const char * proxyprotocol, const char * proxyname, const char * proxyport)
 {
 	return _http_download_file(hostname, remotename, size, proxyprotocol, proxyname, proxyport, 0);
 }

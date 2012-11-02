@@ -95,8 +95,8 @@ static enum return_type thirdparty_choose_device(char ** device, int probe_only)
 		return RETURN_OK;
 	}
 
-	ptr = medias = malloc((count + 1) * sizeof(char *));
-	ptr_models =medias_models = malloc((count + 1) * sizeof(char *));
+	ptr = medias = (char**)malloc((count + 1) * sizeof(char *));
+	ptr_models =medias_models = (char**)malloc((count + 1) * sizeof(char *));
 #ifndef DISABLE_DISK
 	memcpy(ptr, disk_medias, disk_count * sizeof(char *));
 	memcpy(ptr_models, disk_medias_models, disk_count * sizeof(char *));
@@ -116,7 +116,7 @@ static enum return_type thirdparty_choose_device(char ** device, int probe_only)
 #endif
 	if (floppy_dev) {
 		ptr[0] = floppy_dev;
-		ptr_models[0] = "Floppy device";
+		ptr_models[0] = strdup("Floppy device");
 		ptr++;
 		ptr_models++;
  	}
@@ -128,7 +128,7 @@ static enum return_type thirdparty_choose_device(char ** device, int probe_only)
 	}  else {
 		results = ask_from_list_comments("If you want to insert third-party kernel modules, "
 						 "please select the disk containing the modules.",
-						 medias, medias_models, device);
+						 (const char**)medias, (const char**)medias_models, device);
 		if (results != RETURN_OK)
 			return results;
 	}
@@ -169,7 +169,7 @@ static enum return_type thirdparty_choose_device(char ** device, int probe_only)
 
 	results = ask_from_list_comments("Please select the partition containing "
 					 "the third party modules.",
-					 parts, parts_comments, device);
+					 (const char**)parts, (const char**)parts_comments, device);
 	if (results == RETURN_OK)
 		return RETURN_OK;
 #endif
@@ -180,7 +180,7 @@ static enum return_type thirdparty_choose_device(char ** device, int probe_only)
 }
 
 
-static enum return_type thirdparty_mount_device(char * device)
+static enum return_type thirdparty_mount_device(const char * device)
 {
         log_message("third party: trying to mount device %s", device);
 	if (try_mount(device, THIRDPARTY_MOUNT_LOCATION) != 0) {
@@ -191,13 +191,13 @@ static enum return_type thirdparty_mount_device(char * device)
 }
 
 
-static enum return_type thirdparty_prompt_modules(const char *modules_location, char ** modules_list)
+static enum return_type thirdparty_prompt_modules(const char *modules_location, const char ** modules_list)
 {
 	enum return_type results;
 	char final_name[500];
 	char *module_name;
 	int rc;
-	char * questions[] = { "Options", NULL };
+	const char * questions[] = { "Options", NULL };
 	static char ** answers = NULL;
 
 	while (1) {
@@ -277,8 +277,8 @@ static int thirdparty_is_detected(char *driver) {
 			if (pcitable[j].vendor == detected_devices[i].vendor &&
 			    pcitable[j].device == detected_devices[i].device &&
 			    !strcmp(pcitable[j].module, driver)) {
-				const int subvendor = pcitable[j].subvendor;
-				const int subdevice = pcitable[j].subdevice;
+				const unsigned int subvendor = pcitable[j].subvendor;
+				const unsigned int subdevice = pcitable[j].subdevice;
 				if ((subvendor == PCITABLE_MATCH_ALL && subdevice == PCITABLE_MATCH_ALL) ||
 					(subvendor == detected_devices[i].subvendor && subdevice == detected_devices[i].subdevice)) {
 					log_message("probing: found device for module %s", driver);
@@ -345,7 +345,7 @@ static enum return_type thirdparty_autoload_modules(const char *modules_location
 	return RETURN_OK;
 }
 
-static enum return_type thirdparty_try_directory(char * root_directory, int interactive) {
+static enum return_type thirdparty_try_directory(const char * root_directory, int interactive) {
 	char modules_location[100];
 	char modules_location_release[100];
 	char *list_filename;
@@ -388,7 +388,7 @@ static enum return_type thirdparty_try_directory(char * root_directory, int inte
 		return RETURN_ERROR;
         }
 
-	list_filename = alloca(strlen(modules_location) + 10 /* max: "/to_detect" */ + 1);
+	list_filename = (char*)alloca(strlen(modules_location) + 10 /* max: "/to_detect" */ + 1);
 
 	sprintf(list_filename, "%s/to_load", modules_location);
 	f_load = fopen(list_filename, "rb");
@@ -412,7 +412,7 @@ static enum return_type thirdparty_try_directory(char * root_directory, int inte
 		if (IS_AUTOMATIC)
 			stg1_error_message("I can't find a \"to_load\" file. Please select the modules manually.");
 		log_message("third party: no \"to_load\" file, prompting for modules");
-		return thirdparty_prompt_modules(modules_location, modules_list);
+		return thirdparty_prompt_modules(modules_location, (const char**)modules_list);
 	} else {
 		return RETURN_OK;
 	}
@@ -430,7 +430,7 @@ void thirdparty_load_modules(void)
 
 	device = NULL;
 	if (IS_AUTOMATIC) {
-		device = get_auto_value("thirdparty");
+		device = (char*)get_auto_value("thirdparty");
 		thirdparty_choose_device(NULL, 1); /* probe only to create devices */
 		log_message("third party: trying automatic device %s", device);
 		if (thirdparty_mount_device(device) != RETURN_OK)

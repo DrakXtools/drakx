@@ -22,16 +22,16 @@ off_t file_size(const char * path);
 char * cat_file(const char * file, struct stat * s);
 int line_counts(const char * buf);
 int total_memory(void);
-void * _memdup(void *src, size_t size);
-void add_to_env(char * name, char * value);
-char ** list_directory(char * direct);
-int string_array_length(char ** a);
-int scall_(int retval, char * msg, char * file, int line);
-char *my_dirname(char *path);
+void * _memdup(const void *src, size_t size);
+void add_to_env(const char * name, const char * value);
+char ** list_directory(const char * direct);
+int string_array_length(const char ** a);
+int scall_(int retval, const char * msg, const char * file, int line);
+char *my_dirname(const char *path);
 #define scall(retval, msg) scall_(retval, msg, __FILE__, __LINE__)
 void lowercase(char *s);
 
-#define ptr_begins_static_str(pointer,static_str) (!strncmp(pointer,static_str,sizeof(static_str)-1))
+#define ptr_begins_static_str(pointer,static_str) (!strncmp((const char*)pointer,static_str,sizeof(static_str)-1))
 #define streq(a,b) (!strcmp(a,b))
 
 #endif

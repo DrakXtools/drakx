@@ -30,20 +30,20 @@
 
 enum return_type { RETURN_OK, RETURN_BACK, RETURN_ERROR };
 
-void init_frontend(char * welcome_msg);
+void init_frontend(const char * welcome_msg);
 void finish_frontend(void);
 
-void error_message(char *msg, ...) __attribute__ ((format (printf, 1, 2))); /* blocking */
-void info_message(char *msg, ...) __attribute__ ((format (printf, 1, 2))); /* blocking */
-void wait_message(char *msg, ...) __attribute__ ((format (printf, 1, 2))); /* non-blocking */
+void error_message(const char *msg, ...) __attribute__ ((format (printf, 1, 2))); /* blocking */
+void info_message(const char *msg, ...) __attribute__ ((format (printf, 1, 2))); /* blocking */
+void wait_message(const char *msg, ...) __attribute__ ((format (printf, 1, 2))); /* non-blocking */
 void remove_wait_message(void);
 
-void init_progression_raw(char *msg, int size);
+void init_progression_raw(const char *msg, int size);
 void update_progression_raw(int current_size);
 void end_progression_raw(void);
 
 #ifdef ENABLE_BOOTSPLASH
-void init_progression(char *msg, int size);
+void init_progression(const char *msg, int size);
 void update_progression(int current_size);
 void end_progression(void);
 #else
@@ -52,18 +52,18 @@ void end_progression(void);
 #define end_progression end_progression_raw
 #endif
 
-enum return_type ask_yes_no(char *msg);
-enum return_type ask_from_list_index(char *msg, char ** elems, char ** elems_comments, int *answer);
-enum return_type ask_from_list(char *msg, char ** elems, char ** choice);
-enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_comments, char ** choice);
-enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size, void (*callback_func)(char ** strings));
+enum return_type ask_yes_no(const char *msg);
+enum return_type ask_from_list_index(const char *msg, const char ** elems, const char ** elems_comments, int *answer);
+enum return_type ask_from_list(const char *msg, const char ** elems, char ** choice);
+enum return_type ask_from_list_comments(const char *msg, const char ** elems, const char ** elems_comments, char ** choice);
+enum return_type ask_from_entries(const char *msg, const char ** questions, char *** answers, int entry_size, void (*callback_func)(char ** strings));
 
 void suspend_to_console(void);
 void resume_from_suspend(void);
 
-void verror_message(char *msg, va_list ap);
-void vinfo_message(char *msg, va_list ap);
-void vwait_message(char *msg, va_list ap);
+void verror_message(const char *msg, va_list ap);
+void vinfo_message(const char *msg, va_list ap);
+void vwait_message(const char *msg, va_list ap);
 
 extern const char * binary_name;
 

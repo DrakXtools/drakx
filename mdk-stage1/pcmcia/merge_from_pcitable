@@ -9,7 +9,7 @@ use run_program;
 use c;
 
 my %probes;
-foreach (cat_('probe.c')) {
+foreach (cat_('probe.cpp')) {
     if (/^pci_id_t pci_id\[\] = {/ ... /^};/) {
 	/^\s*{\s*0x([\da-f]+),\s*0x([\da-f]+),\s*"([^"]*)",\s*"([^"]*)"\s*}/
 	  and $probes{"$1$2"} = { vendor => $1, device => $2, driver => $3, name => $4 };
@@ -28,7 +28,7 @@ my @yenta_socket_ids = grep { $_ } map {
 
 
 if (my @missing_in_probe_c = difference2(\@yenta_socket_ids, [ keys %probes ])) {
-    print "Missing in `probe.c':\n",
+    print "Missing in `probe.cpp':\n",
       map { 
 	  my $p = $pcitable{$_};
 	  my $name = c::get_pci_description(hex($p->{vendor}), hex($p->{device}));

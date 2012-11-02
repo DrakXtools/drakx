@@ -116,9 +116,9 @@ char * mygethostbyaddr(char * ipnum)
 union dns_response {
     HEADER hdr;
     u_char buf[PACKETSZ];
-} ;
+};
 
-static int do_query(char * query, int queryType, char ** domainName, struct in_addr * ipNum)
+static int do_query(const char * query, int queryType, char ** domainName, struct in_addr * ipNum)
 {
 	int len, ancount, type;
 	u_char * data, * end;
@@ -134,7 +134,7 @@ static int do_query(char * query, int queryType, char ** domainName, struct in_a
 #endif
 
 
-	len = res_search(query, C_IN, queryType, (void *) &response, sizeof(response));
+	len = res_search(query, C_IN, queryType, response.buf, sizeof(response));
 	if (len <= 0)
 		return -1;
 
@@ -169,7 +169,7 @@ static int do_query(char * query, int queryType, char ** domainName, struct in_a
 			if (len <= 0) return -1;
 			if (queryType == T_PTR && domainName) {
 				/* we wanted a pointer */
-				*domainName = malloc(strlen(name) + 1);
+				*domainName = (char*)malloc(strlen(name) + 1);
 				strcpy(*domainName, name);
 				return 0;
 			}
@@ -189,20 +189,21 @@ static int do_query(char * query, int queryType, char ** domainName, struct in_a
 	return -1;
 }
 
-char * mygethostbyaddr(char * ipnum) {
+char * mygethostbyaddr(const char * ipnum) {
 	int rc;
 	char * result;
 	char * strbuf;
 	char * chptr;
 	char * splits[4];
+	char *myipnum = NULL;
 	int i;
 
 	_res.retry = 1;
 	
-	strbuf = alloca(strlen(ipnum) + 1);
+	strbuf = (char*)alloca(strlen(ipnum) + 1);
 	strcpy(strbuf, ipnum);
 	
-	ipnum = alloca(strlen(strbuf) + 20);
+	myipnum = (char*)alloca(strlen(strbuf) + 20);
 	
 	for (i = 0; i < 4; i++) {
 		chptr = strbuf;
@@ -215,9 +216,9 @@ char * mygethostbyaddr(char * ipnum) {
 		strbuf = chptr + 1;
 	}
 	
-	sprintf(ipnum, "%s.%s.%s.%s.in-addr.arpa", splits[3], splits[2], splits[1], splits[0]);
+	sprintf(myipnum, "%s.%s.%s.%s.in-addr.arpa", splits[3], splits[2], splits[1], splits[0]);
 	
-	rc = do_query(ipnum, T_PTR, &result, NULL);
+	rc = do_query((const char*)myipnum, T_PTR, &result, NULL);
 	
 	if (rc) 
 		return NULL;
@@ -225,7 +226,7 @@ char * mygethostbyaddr(char * ipnum) {
 		return result;
 }
 
-int mygethostbyname(char * name, struct in_addr * addr) {
+int mygethostbyname(const char * name, struct in_addr * addr) {
 	int rc = do_query(name, T_A, NULL, addr);
 	if (!rc)
 		log_message("is-at %s", inet_ntoa(*addr));

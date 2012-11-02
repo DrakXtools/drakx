@@ -177,7 +177,7 @@ int ensure_dev_exists(const char * dev)
 
 
 /* mounts, creating the device if needed+possible */
-int my_mount(char *dev, char *location, char *fs, int force_rw)
+int my_mount(const char *dev, const char *location, const char *fs, int force_rw)
 {
 	unsigned long flags = MS_MGC_VAL | (force_rw ? 0 : MS_RDONLY);
 	char * opts = NULL;
@@ -214,7 +214,7 @@ int my_mount(char *dev, char *location, char *fs, int force_rw)
 	if (!strcmp(fs, "supermount")) {
 		my_insmod("supermount", ANY_DRIVER_TYPE, NULL, 1);
 		my_insmod("isofs", ANY_DRIVER_TYPE, NULL, 1);
-		opts = alloca(500);
+		opts = (char*)alloca(500);
                 sprintf(opts, "dev=%s,fs=iso9660,tray_lock=always", dev);
                 dev = "none";
 	}
@@ -224,7 +224,7 @@ int my_mount(char *dev, char *location, char *fs, int force_rw)
 		my_insmod("nls_cp437", ANY_DRIVER_TYPE, NULL, 1);
 		my_insmod("nls_iso8859_1", ANY_DRIVER_TYPE, NULL, 1);
 		my_insmod("vfat", ANY_DRIVER_TYPE, NULL, 1);
-		opts = "check=relaxed";
+		opts = (char*)"check=relaxed";
 	}
 
 	if (!strcmp(fs, "ntfs")) {

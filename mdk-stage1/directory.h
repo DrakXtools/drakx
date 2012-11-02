@@ -23,7 +23,7 @@
 #ifndef _DIRECTORY_H_
 #define _DIRECTORY_H_
 
-char * extract_list_directory(char * direct);
-enum return_type try_with_directory(char *location_full, char *method_live, char *method_iso);
+char * extract_list_directory(const char * direct);
+enum return_type try_with_directory(const char *location_full, const char *method_live, const char *method_iso);
 
 #endif

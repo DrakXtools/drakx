@@ -59,10 +59,10 @@ enum mode {
 #define	IS_NETTEST     (get_param(MODE_NETTEST))
 #define KEEP_MOUNTED   (!IS_RESCUE || get_param(MODE_KEEP_MOUNTED))
 
-void fatal_error(char *msg) __attribute__ ((noreturn));
+void fatal_error(const char *msg) __attribute__ ((noreturn));
 
 
-void stg1_error_message(char *msg, ...) __attribute__ ((format (printf, 1, 2)));
-void stg1_info_message(char *msg, ...) __attribute__ ((format (printf, 1, 2)));
+void stg1_error_message(const char *msg, ...) __attribute__ ((format (printf, 1, 2)));
+void stg1_info_message(const char *msg, ...) __attribute__ ((format (printf, 1, 2)));
 
 #endif

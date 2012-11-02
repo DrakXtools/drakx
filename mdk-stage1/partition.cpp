@@ -135,7 +135,7 @@ static const char * detect_partition_type(char * dev)
 	return part_type;
 }
 
-int list_partitions(char * dev_name, char ** parts, char ** comments)
+int list_partitions(const char * dev_name, char ** parts, char ** comments)
 {
 	int major, minor, blocks;
 	char name[100];

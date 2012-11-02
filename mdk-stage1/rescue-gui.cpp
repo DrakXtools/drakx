@@ -51,35 +51,35 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 {
 	enum return_type results;
 
-	char install_bootloader[] = "Re-install Boot Loader";
+	const char install_bootloader[] = "Re-install Boot Loader";
 #if ENABLE_RESCUE_MS_BOOT
-	char restore_ms_boot[] = "Restore Windows Boot Loader";
+	const char restore_ms_boot[] = "Restore Windows Boot Loader";
 #endif
-	char mount_parts[] = "Mount your partitions under /mnt";
-	char go_to_console[] = "Go to console";
-	char reboot_[] = "Reboot";
-	char doc[] = "Doc: what's addressed by this Rescue?";
+	const char mount_parts[] = "Mount your partitions under /mnt";
+	const char go_to_console[] = "Go to console";
+	const char reboot_[] = "Reboot";
+	const char doc[] = "Doc: what's addressed by this Rescue?";
 
-	char upgrade[] = "Upgrade to New Version";
-	char rootpass[] = "Reset Root Password";
-	char userpass[] = "Reset User Password";
-	char factory[] = "Reset to Factory Defaults";
-	char backup[] = "Backup User Files";
-	char restore[] = "Restore User Files from Backup";
-	char badblocks[] = "Test Key for Badblocks";
+	const char upgrade[] = "Upgrade to New Version";
+	const char rootpass[] = "Reset Root Password";
+	const char userpass[] = "Reset User Password";
+	const char factory[] = "Reset to Factory Defaults";
+	const char backup[] = "Backup User Files";
+	const char restore[] = "Restore User Files from Backup";
+	const char badblocks[] = "Test Key for Badblocks";
 
-	char * actions_default[] = { install_bootloader,
+	const char * actions_default[] = { install_bootloader,
 #if ENABLE_RESCUE_MS_BOOT
 			             restore_ms_boot,
 #endif
 			             mount_parts, go_to_console, reboot_, doc, NULL };
-	char * actions_flash_rescue[] = { rootpass, userpass, factory, backup, restore,
+	const char * actions_flash_rescue[] = { rootpass, userpass, factory, backup, restore,
 					  badblocks, go_to_console, reboot_, NULL };
-	char * actions_flash_upgrade[] = { upgrade, go_to_console, reboot_, NULL };
+	const char * actions_flash_upgrade[] = { upgrade, go_to_console, reboot_, NULL };
 
 
-	char * flash_mode;
-	char ** actions;
+	const char * flash_mode;
+	const char ** actions;
 	char * choice;
 
 	setenv("PATH", "/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:/mnt/bin:/mnt/usr/bin", 1);
@@ -102,7 +102,7 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 
 	do {
 		int pid;
-		char * child_argv[4] = {NULL, NULL, NULL, NULL};
+		const char * child_argv[4] = {NULL, NULL, NULL, NULL};
 
 		choice = "";
 		results = ask_from_list("Please choose the desired action.", actions, &choice);
@@ -151,7 +151,7 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 			suspend_to_console();
 			if (!(pid = fork())) {
 
-				execve(child_argv[0], child_argv, env);
+				execve(child_argv[0], (char* const*)child_argv, env);
 
 				printf("Can't execute binary (%s)\n<press Enter>\n", child_argv[0]);
 				PAUSE();

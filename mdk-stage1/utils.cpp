@@ -57,7 +57,7 @@ char * cat_file(const char * file, struct stat * s) {
 	}
 	
 	fstat(fd, s);
-	buf = malloc(s->st_size + 1);
+	buf = (char*)malloc(s->st_size + 1);
 	if (read(fd, buf, s->st_size) != (ssize_t)s->st_size) {
 		close(fd);
 		free(buf);
@@ -92,7 +92,7 @@ int total_memory(void)
 }
 
 /* pixel's */
-void * _memdup(void *src, size_t size)
+void * _memdup(const void *src, size_t size)
 {
 	void * r;
 	r = malloc(size);
@@ -100,7 +100,7 @@ void * _memdup(void *src, size_t size)
 	return r;
 }
 
-void add_to_env(char * name, char * value)
+void add_to_env(const char * name, const char * value)
 {
         FILE* fakeenv = fopen("/tmp/env", "a");
         if (fakeenv) {
@@ -113,7 +113,7 @@ void add_to_env(char * name, char * value)
                 log_message("couldn't fopen to fake env");
 }
 
-char ** list_directory(char * direct)
+char ** list_directory(const char * direct)
 {
 	char * tmp[50000]; /* in /dev there can be many many files.. */
 	int i = 0;
@@ -128,10 +128,10 @@ char ** list_directory(char * direct)
 	if (dp)
 		closedir(dp);
 	tmp[i] = NULL;
-	return _memdup(tmp, sizeof(char*) * (i+1));
+	return (char**)_memdup(tmp, sizeof(char*) * (i+1));
 }
 
-int string_array_length(char ** a)
+int string_array_length(const char ** a)
 {
 	int i = 0;
 	if (!a)
@@ -161,14 +161,14 @@ void lowercase(char *s)
        }
 }
 
-char *my_dirname(char *path) {
+char *my_dirname(const char *path) {
 	char *p = strrchr (path, '/');
 	char *tmp;
 	int len;
 	if (!p)
-		return path;
+		return strdup(path);
 	len = p-path+1;
-	tmp = malloc(len);
+	tmp = (char*)malloc(len);
 	strncpy(tmp, path, len-1);
 	tmp[len-1] = '\0';
 	return tmp;

@@ -32,13 +32,13 @@
 #include "frontend.h"
 #include "utils.h"
 
-void init_frontend_stdio(char * welcome_msg)
+void init_frontend_stdio(const char * welcome_msg)
 {
 	printf("%s", welcome_msg);
 	printf("\n");
 }
 
-
+const 
 void finish_frontend_stdio(void)
 {
 }
@@ -164,24 +164,24 @@ static char * get_string_response_stdio(char * initial_string)
 	return strdup(s);
 }
 
-static void blocking_msg_stdio(char *type, char *fmt, va_list ap)
+static void blocking_msg_stdio(const char *type, const char *fmt, va_list ap)
 {
 	printf("%s", type);
 	vprintf(fmt, ap);
 	get_any_response_stdio();
 }
 
-void verror_message_stdio(char *msg, va_list ap)
+void verror_message_stdio(const char *msg, va_list ap)
 {
 	blocking_msg_stdio("> Error! ", msg, ap);
 }
 
-void vinfo_message_stdio(char *msg, va_list ap)
+void vinfo_message_stdio(const char *msg, va_list ap)
 {
 	blocking_msg_stdio("> Notice: ", msg, ap);
 }
 
-void vwait_message_stdio(char *msg, va_list ap)
+void vwait_message_stdio(const char *msg, va_list ap)
 {
 	printf("Please wait: ");
 	vprintf(msg, ap);
@@ -194,10 +194,8 @@ void remove_wait_message_stdio(void)
 }
 
 
-static int size_progress;
-static int actually_drawn;
 #define PROGRESS_SIZE 45
-void init_progression_raw_stdio(char *msg, int size)
+void init_progression_raw_stdio(const char *msg, int size)
 {
 	int i;
 	size_progress = size;
@@ -236,15 +234,15 @@ void end_progression_raw_stdio(void)
 		printf(" done.\n");
 }
 
+static void print_choice_number(int i, int justify_number) {
+	char tmp[500];
+	snprintf(tmp, sizeof(tmp), "[%%%dd]", justify_number);
+	printf(tmp, i);
+}
 
-enum return_type ask_from_list_index_stdio(char *msg, char ** elems, char ** elems_comments, int *answer)
+enum return_type ask_from_list_index_stdio(const char *msg, const char ** elems, const char ** elems_comments, int *answer)
 {
 	int justify_number = 1;
-	void print_choice_number(int i) {
-		char tmp[500];
-		snprintf(tmp, sizeof(tmp), "[%%%dd]", justify_number);
-		printf(tmp, i);
-	}
 	int i = 1;
 	int j = 0;
 
@@ -254,19 +252,19 @@ enum return_type ask_from_list_index_stdio(char *msg, char ** elems, char ** ele
 	i = 1;
 
 	printf("> %s\n", msg);
-	print_choice_number(0);
+	print_choice_number(0, justify_number);
 	printf(" Cancel");
 
 	while (elems && *elems) {
 		if (elems_comments && *elems_comments) {
 			printf("\n");
-			print_choice_number(i);
+			print_choice_number(i, justify_number);
 			printf(" %s (%s)", *elems, *elems_comments);
 			j = 0;
 		} else {
 			if (j == 0)
 				printf("\n");
-			print_choice_number(i);
+			print_choice_number(i, justify_number);
 			printf(" %-14s ", *elems);
 			j++;
 		}
@@ -295,7 +293,7 @@ enum return_type ask_from_list_index_stdio(char *msg, char ** elems, char ** ele
 }
 
 
-enum return_type ask_yes_no_stdio(char *msg)
+enum return_type ask_yes_no_stdio(const char *msg)
 {
 	int j;
 
@@ -311,7 +309,7 @@ enum return_type ask_yes_no_stdio(char *msg)
 }
 
 
-enum return_type ask_from_entries_stdio(char *msg, char ** questions, char *** answers, int entry_size UNUSED, void (*callback_func)(char ** strings) UNUSED)
+enum return_type ask_from_entries_stdio(const char *msg, const char ** questions, char *** answers, int entry_size UNUSED, void (*callback_func)(char ** strings) UNUSED)
 {
 	int j, i = 0;
 	char ** already_answers = NULL;
