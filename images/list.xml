@@ -4,6 +4,8 @@
   busybox
   sh
 
+  gpm
+
   false true
   pwd reset
 
@@ -297,6 +299,7 @@
 </filter>
 
 <from dir="/etc">
+  gpm-root.conf
   mke2fs.conf
   netconfig
   inputrc
@@ -307,6 +310,9 @@
   <if ARCH="i.86|x86_64">
     pcmcia/config.opts
   </if>
+</from>
+<from dir="/etc/rc.d/init.d">
+	gpm
 </from>
 
 <from dir="/lib/systemd">
