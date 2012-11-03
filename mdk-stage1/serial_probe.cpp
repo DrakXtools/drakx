@@ -23,7 +23,7 @@
 #include "serial.h"
 #include "device.h"
 
-#inlude "serial_probe.h"
+#include "serial_probe.h"
 
 typedef struct device *(newFunc)(struct device *);
 typedef int (initFunc)();
