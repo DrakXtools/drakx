@@ -26,9 +26,6 @@ endif
 
 images: images/hd_grub.img images/hd_grub.img images/boot.iso grub/$(ARCH)/install/images/all.cpio.xz grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz
 
-kos:
-	echo $(USE_LOCAL_STAGE1)
-
 #../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage1/lspcidrake:
 $(STAGE1_BINS):
 	make -C ../mdk-stage1 $(shell basename $@)
