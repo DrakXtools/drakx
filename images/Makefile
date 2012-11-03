@@ -32,7 +32,7 @@ $(STAGE1_BINS):
 images/hd_grub.img:
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img.pl --compress "$(COMPRESS)" $@
 
-grub/$(ARCH)/install/images/all.cpio.xz: list.xml guessmounts rescue-doc
+grub/$(ARCH)/install/images/all.cpio.xz: list.xml guessmounts
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
 
 grub/boot/grub/grub.cfg: grub_data/grub.cfg grub_data/themes/moondrake/theme.txt grub_data/themes/moondrake/star_w.png grub_data/themes/moondrake/star_shade_w.png grub_data/themes/moondrake/tick.png make_boot_img
