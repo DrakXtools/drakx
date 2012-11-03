@@ -24,6 +24,9 @@ INITDIR =  $(PREFIX)/etc/rc.d/init.d
 
 all: ../tools/rpcinfo-flushed $(DIRS)
 
+../tools/rpcinfo-flushed: %: %.c
+	$(CC) $(CFLAGS) $(LDFLAGS) $< -ltirpc -o $@
+
 $(DIRS):
 	install -d auto
 	[ ! -e $@/Makefile ] || $(MAKE) -C $@
