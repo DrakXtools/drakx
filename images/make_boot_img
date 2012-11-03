@@ -15,7 +15,7 @@ initrd() {
 
 
     for dir in /dev /etc/sysconfig/network-scripts /etc/X11 /firmware /lib /media/cdrom \
-	/media/floppy /mnt /proc /run /sbin /sys /tmp /var/log /var/run \
+	/media/floppy /mnt /proc /run /sbin /sys /tmp /var/lock/subsys /var/log /var/run \
 	/var/tmp /tmp/newroot /tmp/stage2; do
 	mkdir -p "$tmp_initrd$dir"
     done
