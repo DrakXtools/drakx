@@ -14,7 +14,8 @@ use common;
   selectLanguage     => [
       #-PO: please keep the following messages very short: they must fit in the left list of the installer!!!
       N_("_: Keep these entry short\nLanguage"), 1, 1, '', '', N_("Localization") ],
-  acceptLicense      => [ N_("_: Keep these entry short\nLicense"), 1, -1, '', '', N_("License agreement") ],
+# the license isn't really required nor is it even relevant anymore as the distribution is no longer released by Mandriva S.A.
+#  acceptLicense      => [ N_("_: Keep these entry short\nLicense"), 1, -1, '', '', N_("License agreement") ],
   selectMouse        => [ N_("_: Keep these entry short\nMouse"), 1, 1, '1', '', N_("Mouse") ],
   setupSCSI          => [ N_("_: Keep these entry short\nHard drive detection"), 1, 0, '1', '',
                           N_("_: Keep these entry short\nHard drive detection") ],
