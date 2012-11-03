@@ -52,7 +52,7 @@ mo_files : $(MOFILES)
 # rules to build tarball
 localcopy: clean
 	rm -rf $(PACKAGE)-$(PKGVERSION)*
-	mkdir -p $(PACKAGE)-$(PKGVERSION)/tools
+	mkdir -p $(PACKAGE)-$(PKGVERSION)/{mdk-stage1,tools}
 	svn export -q -rBASE . $(PACKAGE)-$(PKGVERSION)/perl-install
 	for i in $(OTHERS); do svn export -q ../$$i $(PACKAGE)-$(PKGVERSION)/$$i; done
 	rm -rf $(PACKAGE)-$(PKGVERSION)/perl-install/{install,unused,list_modules.pm}
