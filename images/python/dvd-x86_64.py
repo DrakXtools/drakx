@@ -9,7 +9,7 @@ os.system("rm -rf "+config.outdir)
 
 srcdir = "./"
 rpmsrate = "../../perl-install/install/share/meta-task/rpmsrate-raw"
-compssusers = srcdir + "compssUsers.pl"
+compssusers = "../../perl-install/install/share/meta-task/compssUsers.pl"
 filedeps = srcdir + "file-deps"
 
 media = []
