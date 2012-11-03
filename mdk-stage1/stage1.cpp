@@ -44,6 +44,7 @@
 #include "hotplug.h"
 #include "ldetect/lspcidrake.h"
 #include "serial_probe.h"
+#include "consoletype.h"
 
 #include "log.h"
 #include "probing.h"
@@ -398,6 +399,9 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 		return serial_probe_main();
 	if (!strcmp(binary_name, "hotplug"))
 		return hotplug_main(argc, argv);
+	if (!strcmp(binary_name, "consoletype"))
+		return consoletype_main(argc, argv);
+
 
 	if (strcmp(binary_name, "stage1")) {
 		fprintf(stderr, "executed as '%s', unknown!\n", binary_name);
