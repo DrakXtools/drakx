@@ -23,7 +23,9 @@
 #include "serial.h"
 #include "device.h"
 
+#ifdef DRAKX_ONE_BINARY
 #include "serial_probe.h"
+#endif
 
 typedef struct device *(newFunc)(struct device *);
 typedef int (initFunc)();
@@ -68,7 +70,11 @@ void freeDevice(struct device *dev) {
 void writeDevice(FILE *file, struct device *dev) {}
 int compareDevice(struct device *dev1, struct device *dev2) { return 0; }
 
+#ifdef DRAKX_ONE_BINARY
 int serial_probe_main (void) {
+#else
+int main(void) {
+#endif
   struct device* devices = NULL;
   struct serialDevice* serialDevice = NULL;
 
