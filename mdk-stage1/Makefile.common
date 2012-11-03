@@ -78,7 +78,3 @@ ifndef DYNAMIC
 LIBC_LIBS += -static
 endif
 endif
-
-ifeq (glibc, $(LIBC))
-LIBC_LIBS += -ltirpc
-endif
