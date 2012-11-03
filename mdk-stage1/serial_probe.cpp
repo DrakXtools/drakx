@@ -23,6 +23,8 @@
 #include "serial.h"
 #include "device.h"
 
+#inlude "serial_probe.h"
+
 typedef struct device *(newFunc)(struct device *);
 typedef int (initFunc)();
 typedef struct device *(probeFunc)(enum deviceClass, int, struct device *);
@@ -66,7 +68,7 @@ void freeDevice(struct device *dev) {
 void writeDevice(FILE *file, struct device *dev) {}
 int compareDevice(struct device *dev1, struct device *dev2) { return 0; }
 
-int serial_probe_main () {
+int serial_probe_main (void) {
   struct device* devices = NULL;
   struct serialDevice* serialDevice = NULL;
 
