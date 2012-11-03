@@ -35,7 +35,7 @@ images/hd_grub.img:
 grub/$(ARCH)/install/images/all.cpio.xz: list.xml make_boot_img guessmounts rescue-doc $(STAGE1_BINS)
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
 
-grub/boot/grub/grub.cfg: grub_data/grub.cfg grub_data/themes/moondrake/theme.txt grub_data/themes/moondrake/star_w.png 
+grub/boot/grub/grub.cfg: grub_data/grub.cfg grub_data/themes/moondrake/theme.txt grub_data/themes/moondrake/star_w.png grub_data/themes/moondrake/star_shade_w.png grub_data/themes/moondrake/tick.png make_boot_img
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img grub
 
 images/boot.iso: grub/boot/grub/grub.cfg grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz grub/$(ARCH)/install/images/all.cpio.xz
