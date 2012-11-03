@@ -1,8 +1,7 @@
 include ../Makefile.config
 
 CC          = gcc
-CFLAGS      = -Wall -Os -flto
-LDFLAGS     = -Wl,-O2 -flto
+CFLAGS      = -Wall -Os
 
 .PHONY: clean install $(DIRS)
 
