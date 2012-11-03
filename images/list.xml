@@ -401,4 +401,42 @@
   </from>
 </if>
 
+<from dir="./tree/etc">
+    <to dir="/etc">
+	fstab
+	init.d
+	inittab
+	profile
+    </to>
+</from>
+<from dir="./tree/etc/dropbear">
+    <to dir="/etc/dropbear">
+	dropbear_dss_host_key
+	dropbear_rsa_host_key
+    </to>
+</from>
+<from dir="./tree/etc/rc.d">
+    <to dir="/etc/rc.d">
+	rc.newroot
+	rc.stage2
+	rc.sysinit
+    </to>
+</from>
+<from dir="./tree/usr/bin">
+    <to dir="/usr/bin">
+	rescue-doc
+    </to>
+</from>
+<from dir="./tree/usr/sbin">
+    <to dir="/usr/sbin">
+	diskdrake-resize
+	startssh
+    </to>
+</from>
+<from dir="./tree/usr/share/doc/rescue">
+    <to dir="/usr/share/doc/rescue">
+	rescue-doc.txt
+    </to>
+</from>
+
 </list>

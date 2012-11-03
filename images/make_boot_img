@@ -62,7 +62,6 @@ EOF
 	../tools/install-xml-file-list list.xml "$tmp_initrd"
 	[ $? -ne 0 ] && exit $?
 
-	cp -r tree/* "$tmp_initrd"
 	# This is a quite lame workaround for a tail process to read the output of syslog
 	# etc. to ttys and needs for the files to exist when starting the tail process
 	# before they get written to otherwise. Saner ways and having the output printed
