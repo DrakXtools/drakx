@@ -86,13 +86,13 @@ EOF
 	done
 	install -m755 "$stage1_root/stage1" -D "$tmp_initrd/sbin/stage1"
 
-	for symlink in /bin/lspcidrake /bin/rescue-gui /sbin/drvinst \
-	    /sbin/probe-modules /usr/bin/serial_probe /hotplug; do
-	ln -v "$tmp_initrd/sbin/stage1" "$tmp_initrd$symlink"
+	for hardlink in /bin/lspcidrake /bin/rescue-gui /sbin/drvinst \
+	    /sbin/probe-modules /usr/bin/serial_probe /hotplug /sbin/consoletype; do
+	ln -v "$tmp_initrd/sbin/stage1" "$tmp_initrd$hardlink"
     done
 
-    for symlink in /usr/bin/dropbear /usr/bin/ssh /usr/bin/scp; do
-	ln -v "$tmp_initrd/usr/bin/dropbearmulti" "$tmp_initrd$symlink"
+    for hardlink in /usr/bin/dropbear /usr/bin/ssh /usr/bin/scp; do
+	ln -v "$tmp_initrd/usr/bin/dropbearmulti" "$tmp_initrd$hardlink"
     done
 
     ln -v "$tmp_initrd/sbin/init" "$tmp_initrd/init"
