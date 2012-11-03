@@ -6,7 +6,7 @@ PKGVERSION = $(VERSION)
 
 POFILES   = $(shell ls share/po/*.po)
 MOFILES   = $(POFILES:%.po=%.mo)
-OTHERS    = tools/rpcinfo-flushed.c ../mdk-stage1/serial_probe.cpp ../mdk-stage1/serial.cpp ../mdk-stage1/serial.h ../mdk-stage1/device.h ../mdk-stage1/kudzu.h
+OTHERS    = tools/rpcinfo-flushed.c mdk-stage1/serial_probe.cpp mdk-stage1/serial.cpp mdk-stage1/serial.h mdk-stage1/device.h mdk-stage1/kudzu.h
 
 .PHONY: all $(DIRS) install clean
 
