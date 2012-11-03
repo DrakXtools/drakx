@@ -5,7 +5,7 @@ include Makefile.config
 
 INLIBDEST_DIRS = c resize_fat
 HAVEINST_DIRS = share/po standalone/po standalone/interactive_http standalone/menu
-DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) harddrake ../tools/serial_probe
+DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) harddrake
 NAME = libDrakX
 XSETUPLEVEL=40
 XSETUPLEVEL_HARDDRAKE=00
@@ -20,12 +20,16 @@ ETCDEST = $(PREFIX)/etc/gtk
 LIBDEST = $(LIBDIR)/$(NAME)
 PIXDIR = $(DATADIR)/$(NAME)/pixmaps
 INITDIR =  $(PREFIX)/etc/rc.d/init.d
+SERIAL_PROBE = ../mdk-stage1/serial.cpp ../mdk-stage1/serial_probe.cpp
 .PHONY: $(DIRS)
 
-all: ../tools/rpcinfo-flushed $(DIRS)
+all: ../tools/rpcinfo-flushed ../tools/serial_probe $(DIRS)
 
 ../tools/rpcinfo-flushed: %: %.c
 	$(CC) $(CFLAGS) $(LDFLAGS) $< -ltirpc -o $@
+
+../tools/serial_probe: $(SERIAL_PROBE)
+	$(CXX) $(CFLAGS) $(LDFLAGS) -fwhole-program -flto -Wl,--no-warn-common $(SERIAL_PROBE) -o $@
 
 $(DIRS):
 	install -d auto
@@ -36,7 +40,7 @@ install:
 	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{applications,harddrake,pixmaps,icons/{large,mini},autostart} $(PIXDIR) $(INITDIR) $(MENUDIR)
 	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) standalone/convert $(SBINDEST)
-	install -s ../tools/rpcinfo-flushed ../tools/serial_probe/serial_probe $(SBINDEST)
+	install ../tools/rpcinfo-flushed ../tools/serial_probe $(SBINDEST)
 	ln -s XFdrake $(SBINDEST)/Xdrakres
 	ln -s fileshareset $(SBINDEST)/filesharelist
 	mv -f $(SBINDEST)/lsnetdrake $(BINDEST)
