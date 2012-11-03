@@ -15,6 +15,9 @@ install:
 	install -d $(DESTDIR)$(ROOTDEST)/misc
 	install mdkinst_stage2_tool drakx-in-chroot $(DESTDIR)$(ROOTDEST)/misc
 
+rpcinfo-flushed: %: %.c
+	$(CC) $(CFLAGS) $(LDFLAGS) $< -ltirpc -o $@
+
 xhost+: %: %.c
 	$(CC) $(CFLAGS) $(LDFLAGS) $< -lX11 -o $@
 
