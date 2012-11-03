@@ -342,7 +342,10 @@ endif
 
 
 .DELETE_ON_ERROR:
-.depend: $(HEADERS)
+pcmcia/lex_config.cpp: pcmcia/lex_config.c
+	ln -s lex_config.c pcmcia/lex_config.cpp
+
+.depend: $(HEADERS) ldetect/pciclass.cpp ldetect/usbclass.cpp pcmcia/lex_config.c
 	$(CXX) $(DEFS) $(INCLUDES) $(CXXFLAGS) -M $(ALLSRC) > .depend
 
 ifeq (.depend,$(wildcard .depend))
