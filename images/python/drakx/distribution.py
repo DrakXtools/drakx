@@ -5,7 +5,7 @@ perl.require("urpm")
 perl.require("urpm::select")
 
 class Distribution(object):
-    def __init__(self, config, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = False, synthfilter = ".cz:gzip -9", stage1=None, stage2="../mdkinst.cpio.xz", advertising="../../advertising"):
+    def __init__(self, config, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = False, synthfilter = ".cz:gzip -9", stage1=None, stage2="../mdkinst.cpio.xz", advertising="/usr/lib/drakx-installer/root/install/extra/advertising/"):
         self.arch = arch
         self.media = {}
         for m in media:
