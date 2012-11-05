@@ -24,7 +24,7 @@ class IsoImage(object):
         if config.subversion:
             subversion = "-"+config.subversion.replace(" ","").lower()
 
-        release = "%s-%s%s-%s-%s-%s" % (config.distribution.lower().replace(" ", "-").replace("/","-"), config.version, subversion, config.codename.lower(), arch, config.medium.lower())
+        release = "%s-%s%s-%s-%s-%s" % (config.distribution.lower().replace(" ", "-").replace("/","-"), config.version, subversion, config.codename.replace(" ", "-").lower(), arch, config.medium.lower())
         
 
         pkgs = []
