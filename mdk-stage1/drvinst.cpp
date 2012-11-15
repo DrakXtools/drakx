@@ -28,6 +28,8 @@
 #include <string.h>
 
 #include <libldetect.h>
+#include <usb.h>
+#include <pci.h>
 
 #include "drvinst.h"
 #include "modules.h"
@@ -35,10 +37,12 @@
 using namespace ldetect;
 
 /* TODO: add_addons... */
+template <class T, class E>
 static void load_modules(int argc, char *argv[]) {
-    std::vector<pciusb_entry> *entries = pci_probe();
-    for (unsigned int i = 0; i < entries->size(); i++) {
-	pciusb_entry &e = (*entries)[i];
+    T pu;
+    pu.probe();
+    for (uint16_t i = 0; i < pu.size(); i++) {
+	const E &e = pu[i];
 	const std::string &devclass = pci_class2text(e.class_id);
 	if (e.module.empty() || e.module.find(':') || devclass == "DISPLAY_VGA")
 	    continue;
@@ -54,16 +58,17 @@ static void load_modules(int argc, char *argv[]) {
 	    if (skip)
 		continue;
 	}
-	printf("Installing driver %s (for \"%s\" [%s])\n", e.module.c_str(), e.text.c_str(), devclass.c_str());
-	modprobe(e.module.c_str(), NULL);
+	std::cerr << "Installing driver " << e.module << " (for \"" << e.text << "\" [" << devclass << "])" << std::endl;
+	modprobe(e.module.c_str(), nullptr);
     }
-    delete entries;
 }
 
 int drvinst_main(int argc, char *argv[]) {
     if (argc > 1 && !strcmp(argv[0], "--help")) 
 	fprintf(stderr, "usage: drivers_install [drivertype1 [drivertype2 ...]]\n");
-    else
-	load_modules(argc, argv);
+    else {
+	load_modules<pci, pciEntry>(argc, argv);
+	load_modules<usb, usbEntry>(argc, argv);
+    }
     return 0;
 }

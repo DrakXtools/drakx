@@ -35,6 +35,7 @@
 #include <signal.h>
 #include <linux/unistd.h>
 #include <libldetect.h>
+#include <hid.h>
 #include <libgen.h>
 
 #include "stage1.h"
@@ -250,12 +251,12 @@ static void handle_pcmcia(void)
 
 static void handle_hid(void)
 {
-	std::vector<entry> *entry_list = hid_probe();
-	for (unsigned int i = 0; i < entry_list->size(); i++) {
-		if (!(*entry_list)[i].name.empty())
-			my_insmod((*entry_list)[i].name.c_str(), ANY_DRIVER_TYPE, NULL, 0);
-	}
-	delete entry_list;
+    hid h;
+    h.probe();
+    for (uint16_t i = 0; i < h.size(); i++) {
+	if (!h[i].module.empty())
+	    my_insmod(h[i].module.c_str(), ANY_DRIVER_TYPE, NULL, 0);
+    }
 }
 
 

@@ -44,6 +44,8 @@
 #include <sys/mount.h>
 #include <pci/pci.h>
 #include <libldetect.h>
+#include <pci.h>
+#include <usb.h>
 #include "stage1.h"
 
 #include "log.h"
@@ -134,11 +136,11 @@ char * get_net_intf_description(const char * intf_name)
 }
 #endif
 
-static bool device_match_modules_list(pciusb_entry &e, const char **modules, unsigned int modules_len) {
+static bool device_match_modules_list(const pciEntry &e, const char **modules, unsigned int modules_len) {
 	if (e.module.empty())
 		return false;
 	for (unsigned int i = 0; i < modules_len; i++)
-		if (!strcmp(modules[i], e.module.c_str()))
+		if (e.module == modules[i])
 			return true;
 	return false;
 }
@@ -183,7 +185,7 @@ static void add_detected_device(unsigned short vendor, unsigned short device, un
 	log_message("detected device (%04x, %04x, %04x, %04x, %s, %s)", vendor, device, subvendor, subdevice, name.c_str(), module.c_str());
 }
 
-static int add_detected_device_if_match(pciusb_entry &e, const char **modules, unsigned int modules_len)
+static int add_detected_device_if_match(const pciEntry &e, const char **modules, unsigned int modules_len)
 {
 	int ret = device_match_modules_list(e, modules, modules_len);
 	if (ret)
@@ -198,12 +200,10 @@ void probing_detect_devices()
 	if (already_detected_devices)
 		return;
 
-	if (already_detected_devices)
-		return;
-
-	std::vector<pciusb_entry>* entries = pci_probe();
-	for (unsigned int i = 0; i < entries->size(); i++) {
-		pciusb_entry &e = (*entries)[i];
+	pci p;
+	p.probe();
+	for (unsigned int i = 0; i < p.size(); i++) {
+		const pciEntry &e = p[i];
 #ifndef DISABLE_PCIADAPTERS
 #ifndef DISABLE_MEDIAS
 		if (add_detected_device_if_match(e, medias_ide_pci_modules, medias_ide_pci_modules_len))
@@ -225,7 +225,6 @@ void probing_detect_devices()
 		/* device can't be found in built-in pcitables, but keep it */
 		add_detected_device(e.vendor, e.device, e.subvendor, e.subdevice, e.text, e.module);
 	}
-	delete entries;
 
 	already_detected_devices = 1;
 }
@@ -300,16 +299,16 @@ void discovered_device(enum driver_type type, const char * description, const ch
 }
 
 void probe_pci_modules(enum driver_type type, const char **pci_modules, unsigned int  pci_modules_len) {
-	std::vector<pciusb_entry> *entries = pci_probe();
-	for (unsigned int i = 0; i < entries->size(); i++) {
-		pciusb_entry &e = (*entries)[i];
-		if (device_match_modules_list(e, pci_modules, pci_modules_len)) {
-			log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s",
-				    e.vendor, e.device, e.subvendor, e.subdevice, safe_descr(e.text.c_str()), e.module.c_str());
-			discovered_device(type, e.text.c_str(), e.module.c_str());
-		}
+    pci p;
+    p.probe();
+    for (unsigned int i = 0; i < p.size(); i++) {
+	const pciEntry &e = p[i];
+	if (device_match_modules_list(e, pci_modules, pci_modules_len)) {
+	    log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s",
+		    e.vendor, e.device, e.subvendor, e.subdevice, safe_descr(e.text.c_str()), e.module.c_str());
+	    discovered_device(type, e.text.c_str(), e.module.c_str());
 	}
-	delete entries;
+    }
 }
 
 /** Loads modules for known virtio devices
@@ -326,9 +325,10 @@ void probe_virtio_modules(void)
 	const char *options;
 	int loaded_pci = 0;
 
-	std::vector<pciusb_entry> *entries = pci_probe();
-	for (unsigned int i = 0; i < entries->size(); i++) {
-		pciusb_entry &e = (*entries)[i];
+	pci p;
+	p.probe();
+	for (unsigned int i = 0; i < p.size(); i++) {
+		const pciEntry &e = p[i];
 		if (e.vendor == VIRTIO_PCI_VENDOR) {
 			if (!loaded_pci) {
 				log_message("loading virtio-pci");
@@ -359,7 +359,6 @@ void probe_virtio_modules(void)
 			}
 		}
 	}
-	delete entries;
 }
 
 #ifdef ENABLE_USB
@@ -428,15 +427,15 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 		}
 
 		if (type == NETWORK_DEVICES) {
-			std::vector<pciusb_entry> *entries = usb_probe();
-			for (unsigned int i = 0; i < entries->size(); i++) {
-				pciusb_entry &e = (*entries)[i];
-				if (device_match_modules_list(e, usb_modules, usb_modules_len)) {
-					log_message("USB: device %04x %04x is \"%s\" (%s)", e.vendor, e.device, safe_descr(e.text.c_str()), e.module.c_str());
-					discovered_device(type, e.text.c_str(), e.module.c_str());
-				}
+		    pci p;
+		    p.probe();
+		    for (unsigned int i = 0; i < p.size(); i++) {
+			const pciEntry &e = p[i];
+			if (device_match_modules_list(e, usb_modules, usb_modules_len)) {
+			    log_message("USB: device %04x %04x is \"%s\" (%s)", e.vendor, e.device, safe_descr(e.text.c_str()), e.module.c_str());
+			    discovered_device(type, e.text.c_str(), e.module.c_str());
 			}
-			delete entries;
+		    }
 		}
 	}
 #endif
