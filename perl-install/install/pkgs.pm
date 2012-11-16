@@ -1041,7 +1041,7 @@ sub _remove_raw {
     URPM::add_macro(URPM::expand('__dbi_cdb %__dbi_cdb nofsync'));
 
     my $db = open_rpm_db_rw() or die "error opening RPM database: ", URPM::rpmErrorString();
-    my $trans = $db->create_transaction();
+    my $trans = $db->create_transaction;
 
     #- stuff remove all packages that matches $p, not a problem since $p has name-version-release format.
     $trans->remove($_) foreach @$to_remove;
