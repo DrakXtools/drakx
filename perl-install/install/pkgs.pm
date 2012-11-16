@@ -636,31 +636,33 @@ sub _openInstallLog() {
     $LOG;
 }
 
+sub _rebuild_RPM_DB() {
+    if (my $pid = fork()) {
+	waitpid $pid, 0;
+	$? & 0xff00 and die "rebuilding of rpm database failed";
+    } else {
+	log::l("rebuilding rpm database");
+	my $rebuilddb_dir = "$::prefix/var/lib/rpmrebuilddb.$$";
+	if (-d $rebuilddb_dir) {
+	    log::l("removing stale directory $rebuilddb_dir");
+	    rm_rf($rebuilddb_dir);
+	}
+
+	if (!URPM::DB::rebuild($::prefix)) {
+	    log::l("rebuilding of rpm database failed: " . URPM::rpmErrorString());
+	    c::_exit(2);
+	}
+
+	c::_exit(0);
+    }
+}
+
 sub rpmDbOpen {
     my ($b_rebuild_if_needed) = @_;
 
     my $need_rebuild = $b_rebuild_if_needed && !URPM::DB::verify($::prefix);
 
-    if ($need_rebuild) {
-	if (my $pid = fork()) {
-	    waitpid $pid, 0;
-	    $? & 0xff00 and die "rebuilding of rpm database failed";
-	} else {
-	    log::l("rebuilding rpm database");
-	    my $rebuilddb_dir = "$::prefix/var/lib/rpmrebuilddb.$$";
-	    if (-d $rebuilddb_dir) {
-                log::l("removing stale directory $rebuilddb_dir");
-                rm_rf($rebuilddb_dir);
-            }
-
-	    if (!URPM::DB::rebuild($::prefix)) {
-                log::l("rebuilding of rpm database failed: " . URPM::rpmErrorString());
-                c::_exit(2);
-            }
-
-	    c::_exit(0);
-	}
-    }
+    _rebuild_RPM_DB() if $need_rebuild;
 
     my $db;
     if ($db = URPM::DB::open($::prefix)) {
