@@ -700,7 +700,7 @@ my %IM_config =
 	packages => {
 		generic => sub { qw(ibus-table ibus-m17n), if_($is_kde4, 'ibus-qt4') },
 		ja => sub { qw(ibus-mozc) },
-		zh => sub { qw(ibus-pinyin ibus-chewing) },
+		zh => sub { qw(ibus-libpinyin ibus-chewing) },
 		ko => sub { qw(ibus-hangul) },
 	},
    },
