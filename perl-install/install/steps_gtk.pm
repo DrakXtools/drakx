@@ -404,7 +404,7 @@ sub choosePackagesTree {
 			    },
 			    get_info => sub {
 				my $p = install::pkgs::packageByName($packages, $_[0]) or return '';
-                                install::pkgs::extractHeaders([$p], $packages->{media});
+				my $description = install::pkgs::get_pkg_info($p);
 
 				my $imp = translate($install::pkgs::compssListDesc{$p->flag_base ? 5 : $p->rate});
 
@@ -414,7 +414,7 @@ sub choosePackagesTree {
                                     [ N("Version: "), $tag ], [ $p->version . '-' . $p->release . "\n" ],
                                     [ N("Size: "), $tag ], [ N("%d KB\n", $p->size / 1024) ],
                                     if_($imp, [ N("Importance: "), $tag ], [ "$imp\n" ]),
-                                    [ "\n" ], [ formatLines($p->description || N("No description")) ] ];
+                                    [ "\n" ], [ formatLines($description) ] ];
 			    },
 			    toggle_nodes => sub {
 				my $set_state = shift @_;

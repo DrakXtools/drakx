@@ -108,6 +108,44 @@ sub size2time {
     }
 }
 
+# Based on Rpmdrake::pkg::extract_header():
+sub get_pkg_info {
+    my ($p) = @_;
+
+    my $urpm = $::o->{packages};
+    my $name = $p->fullname;
+
+    my $medium = URPM::pkg2media($urpm->{media}, $p);
+    my ($local_source, %xml_info_pkgs, $description);
+    my $dir = urpm::file_from_local_url($medium->{url});
+    $local_source = "$dir/" . $p->filename if $dir;
+
+    if (-s $local_source) {
+	log::l("getting information from $dir...");
+	$p->update_header($local_source) and $description = $p->description;
+	log::l("Warning, could not extract header for $name from $medium!") if !$description;
+    }
+    if (!$description) {
+	my $_w = $::o->wait_message(undef, N("Getting package information from XML meta-data..."));
+	if (my $xml_info_file = eval { urpm::media::any_xml_info($urpm, $medium, 'info', undef, urpm::download::sync_logger) }) {
+	    require urpm::xml_info;
+	    require urpm::xml_info_pkg;
+	    log::l("getting information from $xml_info_file");
+	    my %nodes = eval { urpm::xml_info::get_nodes('info', $xml_info_file, [ $name ]) };
+	    goto header_non_available if $@;
+	    put_in_hash($xml_info_pkgs{$name} ||= {}, $nodes{$name});
+	} else {
+	    $urpm->{info}(N("No xml info for medium \"%s\", only partial result for package %s", $medium->{name}, $name));
+	}
+    }
+
+    if (!$description && $xml_info_pkgs{$name}) {
+	$description = $xml_info_pkgs{$name}{description};
+    }
+  header_non_available:
+    $description || N("No description");
+}
+
 sub packagesProviding {
     my ($packages, $name) = @_;
     grep { $_->is_arch_compat } URPM::packages_providing($packages, $name);
