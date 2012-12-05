@@ -479,7 +479,7 @@ sub setSelectedFromCompssList {
 sub saveSelected {
     my ($packages) = @_;
     my $state = delete $packages->{state};
-    my @l = @{$packages->{depslist}};
+    my @l = @{$packages->{depslist} || []};
     my @flags = map { ($_->flag_requested && 1) + ($_->flag_required && 2) + ($_->flag_upgrade && 4) } @l;
     [ $packages, $state, \@l, \@flags ];
 }
