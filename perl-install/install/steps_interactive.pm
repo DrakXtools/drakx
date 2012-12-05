@@ -579,7 +579,9 @@ sub chooseGroups {
 	install::any::unselectMostPackages($o) if $unselect_all;
 
 	#- if no group have been chosen, ask for using base system only, or no X, or normal.
-	offer_minimal_options($o) if !any { $_->{selected} } @$compssUsers;
+	if (!any { $_->{selected} } @$compssUsers) {
+	    offer_minimal_options($o) or goto &chooseGroups;
+	}
     }
     1;
 }
@@ -601,7 +603,7 @@ Please choose the minimal installation you want:"),
 		      { val => \$docs, type => 'bool', text => N("With basic documentation (recommended!)"), disabled => sub { $minimal } },
 		      { val => \$minimal, type => 'bool', text => N("Truly minimal install (especially no urpmi)") },
 		     ],
-	) or return &chooseGroups;
+	) or return 0;
 
 	if ($minimal) {
 	    $o->{rpmsrate_flags_chosen}{CAT_X} = $docs = $suggests = 0;
@@ -614,6 +616,7 @@ Please choose the minimal installation you want:"),
 	log::l("install settings: no_suggests=$o->{no_suggests}, excludedocs=$o->{excludedocs}, really_minimal_install=$minimal");
 
 	install::any::unselectMostPackages($o);
+	1;
 }
 
 sub reallyChooseGroups {
