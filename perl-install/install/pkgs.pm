@@ -371,7 +371,7 @@ sub empty_packages {
     urpm::set_files($packages, '/mnt');
 
     #- add additional fields used by DrakX.
-    $packages{media} = [];
+    $packages->{media} = [];
 
     urpm::args::set_debug($packages) if $::o->{debug_urpmi};
     $packages->{log} = \&log::l;
