@@ -96,7 +96,6 @@ sub prepare_minimal_root() {
     run_program::run('mount', '--bind', '/dev', "$::prefix/dev");
     eval { fs::mount::mount('none', "$::prefix/proc", 'proc') };
     eval { fs::mount::mount('none', "$::prefix/sys", 'sysfs') };
-    eval { fs::mount::usbfs($::prefix) };
 }
 
 sub getAvailableSpace {

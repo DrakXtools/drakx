@@ -282,10 +282,8 @@ sub when_load_category {
 	eval { load('sd_mod') };
     } elsif ($category eq 'bus/usb') {
 	$conf->add_probeall('usb-interface', $name);
-        -f '/proc/bus/usb/devices' or eval {
-            require fs::mount; fs::mount::usbfs('');
+        -f '/sys/module/usbhid' or eval {
             #- ensure keyboard is working, the kernel must do the job the BIOS was doing
-            sleep 4;
             load("usbhid") if detect_devices::usbKeyboards();
         };
     } elsif ($category eq 'bus/firewire') {

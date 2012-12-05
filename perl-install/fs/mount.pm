@@ -36,7 +36,7 @@ sub mount {
 
     {
 	my @fs_modules = qw(btrfs ext3 ext4 hfs jfs nilfs2 nfs ntfs romfs reiserfs ufs xfs vfat);
-	my @types = (qw(ext2 proc sysfs usbfs usbdevfs iso9660 devpts auto ntfs-3g), @fs_modules);
+	my @types = (qw(ext2 proc sysfs iso9660 devpts auto ntfs-3g), @fs_modules);
 
 	push @types, 'smb', 'cifs', 'davfs2' if !$::isInstall;
 
@@ -224,13 +224,6 @@ sub umount_all {
 	       grep { $_->{mntpoint} && !$_->{real_mntpoint} || isSwap($_) } @$fstab) {
 	umount_part($_);
     }
-}
-
-sub usbfs {
-    my ($prefix) = @_;
-    
-    my $fs = cat_('/proc/filesystems') =~ /usbfs/ ? 'usbfs' : 'usbdevfs';
-    mount('none', "$prefix/proc/bus/usb", $fs);
 }
 
 1;
