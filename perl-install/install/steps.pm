@@ -178,7 +178,6 @@ sub doPartitionDisksBefore {
     my ($o) = @_;
     eval { 
 	eval { fs::mount::umount("$::prefix/sys") };
-	eval { fs::mount::umount("$::prefix/proc/bus/usb") };
 	eval { fs::mount::umount("$::prefix/proc") };
 	eval {          fs::mount::umount_all($o->{fstab}) };
 	eval { sleep 1; fs::mount::umount_all($o->{fstab}) } if $@; #- HACK
