@@ -308,6 +308,10 @@
   ARCH-linux-thread-multi/Config_git.pl
   ARCH-linux-thread-multi/Config_heavy.pl
   ARCH-linux-thread-multi/Data/Dumper.pm
+  ARCH-linux-thread-multi/Encode.pm
+  ARCH-linux-thread-multi/Encode/Alias.pm
+  ARCH-linux-thread-multi/Encode/Config.pm
+  ARCH-linux-thread-multi/Encode/Encoding.pm
   ARCH-linux-thread-multi/File/Spec.pm
   ARCH-linux-thread-multi/File/Spec/Unix.pm
   ARCH-linux-thread-multi/IO/File.pm
@@ -325,6 +329,8 @@
   </if>
   ARCH-linux-thread-multi/auto/B/B.so
   ARCH-linux-thread-multi/auto/Data/Dumper/Dumper.so
+  ARCH-linux-thread-multi/auto/Encode/Encode.so
+  ARCH-linux-thread-multi/auto/List/Util/Util.so
   ARCH-linux-thread-multi/auto/Time/HiRes/HiRes.so
   <if set="DEBUG_INSTALL">
     perl5db.pl
@@ -338,9 +344,20 @@
   MDV/Snapshot/Common.pm
   MDV/Snapshot/Restore.pm
   Parse/EDID.pm
+  XML/SAX/Exception.pm
   ARCH-linux-thread-multi/List/MoreUtils.pm
   ARCH-linux-thread-multi/Term/ReadKey.pm
+  ARCH-linux-thread-multi/XML/LibXML.pm
+  ARCH-linux-thread-multi/XML/LibXML/AttributeHash.pm
+  ARCH-linux-thread-multi/XML/LibXML/Error.pm
+  ARCH-linux-thread-multi/XML/LibXML/NodeList.pm
+  ARCH-linux-thread-multi/XML/LibXML/Reader.pm
+  ARCH-linux-thread-multi/XML/LibXML/XPathContext.pm
+  ARCH-linux-thread-multi/XML/LibXML/Boolean.pm
+  ARCH-linux-thread-multi/XML/LibXML/Literal.pm
+  ARCH-linux-thread-multi/XML/LibXML/Number.pm
   ARCH-linux-thread-multi/auto/Term/ReadKey/ReadKey.so
+  ARCH-linux-thread-multi/auto/XML/LibXML/LibXML.so
   urpm.pm
   urpm/args.pm
   urpm/cdrom.pm
@@ -360,6 +377,8 @@
   urpm/signature.pm
   urpm/util.pm
   urpm/sys.pm
+  urpm/xml_info.pm
+  urpm/xml_info_pkg.pm
   <if set="DEBUG_INSTALL">
     ARCH-linux-thread-multi/Term/ReadLine/Gnu.pm
     ARCH-linux-thread-multi/Term/ReadLine/Gnu/XS.pm
