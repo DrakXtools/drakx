@@ -12,11 +12,12 @@ my $STAGE2_LOCATION_ROOTED = '/tmp/stage2';
 my $LOOP_MOUNT_POINT = "$SLASH_LOCATION/tmp/loop";
 my $LIVE_LOCATION_REL = 'install/stage2/live/';
 my $COMPRESSED_LOCATION_REL = 'install/stage2/';
-my $COMPRESSED_FILE_REL = $COMPRESSED_LOCATION_REL . 'mdkinst.sqfs';
+my $COMPRESSED_STAGE1_REL = $COMPRESSED_LOCATION_REL . 'all.cpio.xz';
+my $COMPRESSED_STAGE2_REL = $COMPRESSED_LOCATION_REL . 'mdkinst.cpio.xz';
 my $AUTO_INSTALL_ROOTED = '/tmp/auto_inst.cfg.pl';
 my $DEFCFG_ROOTED = '/tmp/defcfg.pl';
 my $RPMSRATE_ROOTED = '/tmp/rpmsrate';
-my $resolution = '800x600';
+my $resolution = '1024x768';
 my ($disk_iso_repository, $repository_uri);
 
 @ARGV >= 2 or die "usage: drakx-in-chroot <root of distrib> <dir to install to> [options]\n
@@ -67,13 +68,14 @@ copy_auto_install_files();
 
 my $remote_repository = $repository =~ m!^(ftp|http)://! && $1;
 if ($remote_repository) {
-    my $local_mdkinst = "$SLASH_LOCATION/tmp/mdkinst.sqfs";
-    sys("curl --silent -o $local_mdkinst $repository/$COMPRESSED_FILE_REL");
+    my $local_mdkinst = "$SLASH_LOCATION/tmp/mdkinst.cpio.xz";
+    sys("curl --silent -o $local_mdkinst $repository/$COMPRESSED_STAGE2_REL");
     mount_mdkinst($local_mdkinst);
 } elsif (-d "$repository/$LIVE_LOCATION_REL") {
     sys("$sudo mount -o bind $repository/$LIVE_LOCATION_REL $STAGE2_LOCATION");
-} elsif (-e "$repository/$COMPRESSED_FILE_REL") {
-    mount_mdkinst("$repository/$COMPRESSED_FILE_REL");
+} elsif (-e "$repository/$COMPRESSED_STAGE2_REL") {
+    mount_mdkinst("$repository/$COMPRESSED_STAGE1_REL");
+    mount_mdkinst("$repository/$COMPRESSED_STAGE2_REL");
 }
 
 sys("$sudo mount -o bind $dir $SLASH_LOCATION$prefix_ROOTED");
@@ -173,7 +175,7 @@ sub sys { &system_verbose; $? and die qq(running "@_" failed: $?\n) }
 
 sub mount_mdkinst {
     my ($mdkinst) = @_;
-    sys("$sudo mount -t squashfs -o loop,ro $mdkinst $STAGE2_LOCATION");
+    sys("cd $STAGE2_LOCATION; xzcat $mdkinst | $sudo cpio -id");
 }
 sub create_initial_symlinks() {
     foreach (cat_or_die("$STAGE2_LOCATION/usr/share/symlinks")) {
@@ -193,17 +195,9 @@ sub create_initial_devices() {
 sub umount_all() {
     my $err;
     clean_stage2_updates();
-    my @procs = ('/proc/bus/usb', '/proc', '/sys', '/run/udev', '/run/initramfs', '/run');
+    my @procs = ('/proc', '/sys', '/run/udev', '/run/initramfs', '/run');
     foreach ((map { "$prefix_ROOTED$_" } @procs, '/dev', ''), @procs, $STAGE2_LOCATION_ROOTED, $LOOP_MOUNT_POINT, $MEDIA_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED) {
 	my $dir = "$SLASH_LOCATION$_";
-	rmdir $dir;
-	if (-d $dir) {
-	    if (m!/proc/bus/usb! || begins_with($_, $prefix_ROOTED)) {
-		system_verbose "$sudo umount $dir 2>/dev/null";
-		next;
-	    }
-	    system_verbose "$sudo umount $dir";
-	}
 	rmdir $dir;
 	if (-d $dir) {
 	    warn "$dir is busy\n";
