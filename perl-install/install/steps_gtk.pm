@@ -32,7 +32,7 @@ sub new($$) {
     my ($type, $o) = @_;
 
     $ENV{DISPLAY} ||= $o->{display} || ":0";
-    my $wanted_DISPLAY = $::testing && -x '/usr/bin/Xnest' ? ':9' : $ENV{DISPLAY};
+    my $wanted_DISPLAY = $::testing && -x '/usr/bin/Xephyr' ? ':9' : $ENV{DISPLAY};
 
     if (!$::local_install && 
 	($::testing ? $ENV{DISPLAY} ne $wanted_DISPLAY : $ENV{DISPLAY} =~ /^:\d/)) { #- is the display local or distant?
@@ -71,7 +71,7 @@ sub _setup_and_start_X {
 
     my @servers = qw(Driver:fbdev Driver:vesa); #-)
     if ($::testing) {
-        @servers = 'Xnest';
+        @servers = 'Xephyr';
     } elsif (arch() =~ /ia64/) {
         require Xconfig::card;
         my ($card) = Xconfig::card::probe();
@@ -88,7 +88,7 @@ sub _setup_and_start_X {
 
     foreach (@servers) {
         log::l("Trying with server $_");
-        my ($prog, $Driver) = /Driver:(.*)/ ? ('Xorg', $1) : /Xsun|Xnest|^X_move$/ ? $_ : "XF86_$_";
+        my ($prog, $Driver) = /Driver:(.*)/ ? ('Xorg', $1) : /Xsun|Xnest|Xephyr|^X_move$/ ? $_ : "XF86_$_";
         if (/FB/i) {
             !$o->{vga16} && $o->{allowFB} or next;
 
@@ -108,7 +108,7 @@ sub _launchX {
     mkdir '/var/log' if !-d '/var/log';
 
     my @options = $wanted_DISPLAY;
-    if ($server eq 'Xnest') {
+    if ($server eq 'Xephyr') {
         push @options, '-ac', '-geometry', $o->{vga} || ($o->{vga16} ? '640x480' : '1024x768');
     } else {
         install::gtk::createXconf($f, @{$o->{mouse}}{'Protocol', 'device'}, $o->{mouse}{wacom}[0], $Driver);
