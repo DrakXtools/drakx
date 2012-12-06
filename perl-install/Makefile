@@ -62,13 +62,18 @@ localcopy: clean
 
 localdist: tar
 
-dist dist-svn: localcopy
+dist-svn: localcopy
 	tar cfa $(PACKAGE)-$(PKGVERSION).tar.xz $(PACKAGE)-$(PKGVERSION)
 	rm -rf $(PACKAGE)-$(PKGVERSION)
 
-dist-git:
-	@cd ..; git archive --prefix=$(PACKAGE)-$(PKGVERSION)/ HEAD perl-install/{[^i]*,int*} $(OTHERS) kernel/list_modules.pm Makefile.config | xz >$(PACKAGE)-$(PKGVERSION).tar.xz;
-	@echo "WARNING: this archive is not complete !!! Regenerate it from SVN"
+dist dist-git:
+	rm -rf $(PACKAGE)-$(PKGVERSION)*
+	for i in perl-install $(OTHERS); do git archive --format=tar --remote=.. --prefix=$(PACKAGE)-$(PKGVERSION)/ HEAD $$i | tar -x; done
+	rm -rf $(PACKAGE)-$(PKGVERSION)/perl-install/{install,unused,list_modules.pm}
+	cp -f ../kernel/list_modules.pm $(PACKAGE)-$(PKGVERSION)/perl-install
+	cd $(PACKAGE)-$(PKGVERSION)/perl-install ; mv -f Makefile.drakxtools Makefile
+	@make nuke_perl
+	tar -Jcf $(PACKAGE)-$(PKGVERSION).tar.xz $(PACKAGE)-$(PKGVERSION)
 
 tar:
 	rm -rf $(PACKAGE)*.tar* $(PACKAGE)-$(PKGVERSION)
