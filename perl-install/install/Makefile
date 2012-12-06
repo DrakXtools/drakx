@@ -2,6 +2,7 @@ include ../../Makefile.config
 include ../Makefile.config
 
 PRODUCT=$(FAMILY)-stage2
+COMPRESS ?= xz --x86 --lzma2 -ve --check=crc32
 
 STAGE2_DEST = $(ROOTDEST)/install/stage2
 DEST = $(STAGE2_DEST)/live
@@ -90,7 +91,7 @@ full_stage2:
 
 compress:
 	# simple & ugly hack for now..
-	(cd $(DESTDIR)$(STAGE2_DEST)/live; find | cpio -o -H newc|xz --x86 --lzma2 -ve --check=crc32) > $(DESTDIR)$(STAGE2_DEST)/mdkinst.cpio.xz
+	(cd $(DESTDIR)$(STAGE2_DEST)/live; find | cpio -o -H newc | $(COMPRESS)) > $(DESTDIR)$(STAGE2_DEST)/mdkinst.cpio.xz
 	rm -rf $(DESTDIR)$(STAGE2_DEST)/live
 
 stage2:
