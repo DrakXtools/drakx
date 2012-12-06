@@ -1301,7 +1301,7 @@ sub report_bug {
       header("lsmod"), cat_("/proc/modules"),
       header("cmdline"), cat_("/proc/cmdline"),
       header("pcmcia: stab"), cat_("$::prefix/var/lib/pcmcia/stab") || cat_("$::prefix/var/run/stab"),
-      header("usb"), cat_("/proc/bus/usb/devices"),
+      header("usb"), cat_("/sys/kernel/debug/usb/devices"),
       header("partitions"), cat_("/proc/partitions"),
       header("cpuinfo"), cat_("/proc/cpuinfo"),
       header("syslog"), cat_("/tmp/syslog") || cat_("$::prefix/var/log/syslog"),

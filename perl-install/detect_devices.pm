@@ -867,7 +867,7 @@ sub pci_probe() {
 }
 
 sub usb_probe__real() {
-    -e "/proc/bus/usb/devices" or return;
+    -e "/sys/kernel/debug/usb/devices" or return;
 
     add_addons($usbtable_addons, map {
 	my %l;
@@ -1265,6 +1265,7 @@ sub has_53c94()    { find { /53c94/ } all_files_rec("/proc/device-tree") }
 sub usbKeyboard2country_code {
     my ($usb_kbd) = @_;
     my ($F, $tmp);
+    # usbfs is deprecated, so this will be broken if not mounted, but the code seems unused anyways..(?)
     sysopen($F, sprintf("/proc/bus/usb/%03d/%03d", $usb_kbd->{pci_bus}, $usb_kbd->{pci_device}), 0) and
       sysseek $F, 0x28, 0 and
       sysread $F, $tmp, 1 and

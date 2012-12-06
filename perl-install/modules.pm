@@ -282,9 +282,11 @@ sub when_load_category {
 	eval { load('sd_mod') };
     } elsif ($category eq 'bus/usb') {
 	$conf->add_probeall('usb-interface', $name);
-        -f '/sys/module/usbhid' or eval {
-            #- ensure keyboard is working, the kernel must do the job the BIOS was doing
-            load("usbhid") if detect_devices::usbKeyboards();
+        -f '/sys/kernel/debug/usb/devices' or eval {
+	    require fs::mount; fs::mount::sys_kernel_debug('');
+	    #- ensure keyboard is working, the kernel must do the job the BIOS was doing
+	    sleep 4;
+	    load("usbhid") if detect_devices::usbKeyboards();
         };
     } elsif ($category eq 'bus/firewire') {
 	$conf->set_alias('ieee1394-controller', $name);
