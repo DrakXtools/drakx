@@ -210,7 +210,7 @@ q(<fontconfig>
 sub init_sizes {
     my ($o) = @_;
     ($::rootwidth,  $::rootheight)    = (Gtk2::Gdk->screen_width, Gtk2::Gdk->screen_height);
-    $::stepswidth = $::rootwidth <= 640 ? 0 : 250;
+    $::stepswidth = $::rootwidth <= 640 ? 0 : 196;
     ($::logowidth, $::logoheight) = $::rootwidth <= 640 ? (0, 0) : (800, 75);
     ($o->{windowwidth}, $o->{windowheight}) = ($::rootwidth - $::stepswidth, $::rootheight);
     ($::real_windowwidth, $::real_windowheight) = (601, 600);
