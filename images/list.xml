@@ -373,17 +373,6 @@
   </from>
 </filter>
 
-<from dir=".">
-  <to dir="/usr/bin">
-    rescue-doc
-  </to>
-</from>
-<from dir=".">
-    <to dir="/usr/sbin">
-        diskdrake-resize
-        startssh
-    </to>
-</from>
 <if set="RESCUE_FLASH">
   <from expand="binary">
     dirname
