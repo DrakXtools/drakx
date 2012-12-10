@@ -186,7 +186,7 @@ sub update_steps_position {
 sub init_gtk {
     my ($o) = @_;
 
-    symlink("/tmp/stage2/etc/$_", "/etc/$_") foreach qw(gtk-2.0 pango fonts);
+    symlink("/tmp/stage2/etc/$_", "/etc/$_") foreach qw(gtk-3.0 pango fonts);
 
     if ($o->{vga16}) {
         #- inactivate antialias in VGA16 because it makes fonts look worse

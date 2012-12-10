@@ -33,6 +33,21 @@
   </if>
 </from>
 
+
+<from dir="/usr/LIB/girepository-1.0">
+  Atk-1.0.typelib
+  cairo-1.0.typelib
+  Gdk-3.0.typelib
+  GdkPixbuf-2.0.typelib
+  Gio-2.0.typelib
+  GLib-2.0.typelib
+  GModule-2.0.typelib
+  GObject-2.0.typelib
+  Gtk-3.0.typelib
+  Pango-1.0.typelib
+  xlib-2.0.typelib
+</from>
+
 <from dir="/usr/LIB/xorg/modules">
   drivers/fbdev_drv.so
   drivers/vesa_drv.so
@@ -86,6 +101,7 @@
       */LC_MESSAGES/draksnapshot.mo
       */LC_MESSAGES/drakx-net.mo
       */LC_MESSAGES/drakx-kbd-mouse-x11.mo
+      */LC_MESSAGES/gtk30.mo
       */LC_MESSAGES/urpmi.mo
       */LC_MESSAGES/gtk20.mo
     </from>
@@ -131,8 +147,8 @@
 <!--  /usr/share/X11/XKeysymDB -->
   /etc/pango/*/pango.modules
   /usr/LIB/libgdk_pixbuf-2.0.so.0
-  /usr/LIB/gtk-2.0/*/immodules/im-cedilla.so
-  /usr/LIB/gtk-2.0/*/engines/libia_ora.so
+  /usr/LIB/gtk-3.0/*/immodules/im-cedilla.so
+  /usr/LIB/gtk-3.0/*/theming-engines/liboxygen-gtk.so
   /usr/share/mime/mime.cache
 
   /usr/lib/libDrakX/keyboard.pm
@@ -224,7 +240,6 @@
     </from>
     /usr/LIB/gdk-pixbuf-2.0/*/loaders.cache
     /usr/LIB/gdk-pixbuf-2.0/*/loaders/libpixbufloader-png.so
-    /etc/gtk-2.0/gtk.immodules.*
     /etc/brltty/*.ttb
     /etc/brltty/*.txt
     /LIB/brltty/libbrlttyb??.so
@@ -402,8 +417,11 @@
   perl-Filesys-Df
   perl-Clone
   perl-Glib
-  perl-Gtk2
-  perl-Gtk2-WebKit
+  perl-Glib-Object-Introspection
+  perl-Gtk3
+  perl-Gtk3-WebKit
+  perl-Locale-gettext
+  perl-MDK-Common
   perl-Pango
   perl-URPM
 </from>
@@ -456,12 +474,9 @@
   </to>
 </from>
 
-<from dir="share">
-  <to dir="/etc/gtk-2.0/">
-    gtkrc
-  </to>
+<from dir="/etc/gtk-3.0/">
+  settings.ini
 </from>
-
 
 <from dir="pixmaps">
   <to dir="/usr/share">
