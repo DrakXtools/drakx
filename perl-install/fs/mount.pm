@@ -229,7 +229,7 @@ sub umount_all {
 sub sys_kernel_debug {
     my ($prefix) = @_;
 
-    mount('none', "$prefix/sys/kernel/debug/usb", 'debugfs');
+    mount('none', "$prefix/sys/kernel/debug", 'debugfs');
 }
 
 1;

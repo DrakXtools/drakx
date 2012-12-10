@@ -177,7 +177,7 @@ sub selectInstallClass {
 sub doPartitionDisksBefore {
     my ($o) = @_;
     eval { 
-	eval { fs::mount::umount("$::prefix/sys/kernel/debug/usb") };
+	eval { fs::mount::umount("$::prefix/sys/kernel/debug") };
 	eval { fs::mount::umount("$::prefix/sys") };
 	eval { fs::mount::umount("$::prefix/proc") };
 	eval {          fs::mount::umount_all($o->{fstab}) };
