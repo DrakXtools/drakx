@@ -75,10 +75,12 @@ sub load_font {
     }
 
     my $font = lang::l2pango_font($o->{locale}{lang});
-    my $s = qq(gtk-font-name="$font");
+    my $s = qq(gtk-font-name = $font);
     Gtk3::Rc->parse_string($s);
-    mkdir("/root");
-    output("/root/.gtkrc-2.0", $s);
+    mkdir_p("/.config/gtk-3.0");
+    output("/.config/gtk-3.0/settings.ini", qq([Settings]
+$s
+));
 }
 
 #------------------------------------------------------------------------------
