@@ -1028,12 +1028,6 @@ sub display_release_notes {
         return;
     }
 
-    # workaround too small fonts:
-    $release_notes =~ s!(<head>)!$1      <style type="text/css">
-	      body { font-family: sans-serif; font-size: 13px }
-	      table { font-family: sans-serif; font-size: 13px }
-			</style>!x;
-
     require Gtk2::WebKit;
     require ugtk2;
     ugtk2->import(':all');
