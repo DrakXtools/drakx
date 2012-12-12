@@ -1155,8 +1155,8 @@ sub isServer() {
 }
 
 sub isHyperv() {
-      dmidecode_category('System')->{'Manufacturer'} =~ /Microsoft Corporation/i
-      && dmidecode_category('System')->{'Product Name'} =~ /Virtual Machine/i
+      dmidecode_category('System')->{Manufacturer} =~ /Microsoft Corporation/i
+      && dmidecode_category('System')->{'Product Name'} =~ /Virtual Machine/i;
 }
 
 sub BIGMEM() {
