@@ -535,14 +535,14 @@ sub main {
         $scroll->add($vp);
         $mainbox->add($scroll);
 
-        my $kind = @kinds[$combobox->get_active];
+        my $kind = $kinds[$combobox->get_active];
         my %solutions = partitionWizardSolutions($o, $all_hds, $fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab, diskdrake::hd_gtk::kind2hd($kind));
         delete $solutions{diskdrake} if $b_nodiskdrake;
         $mainw->{kind} = $kind;
         display_choices($o, $contentbox, $mainw, %solutions);
 
         $combobox->signal_connect("changed", sub {        
-            $mainw->{kind} = @kinds[$combobox->get_active];
+            $mainw->{kind} = $kinds[$combobox->get_active];
             my %solutions = partitionWizardSolutions($o, $all_hds, $fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab, diskdrake::hd_gtk::kind2hd($mainw->{kind}));
             delete $solutions{diskdrake} if $b_nodiskdrake;
             display_choices($o, $contentbox, $mainw, %solutions);
