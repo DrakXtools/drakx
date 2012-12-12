@@ -183,7 +183,6 @@ my %menus = (
              );
 
 my %menu_options = (
-                    'PRINTERS_DETECTION' => [ $menus{options}, N("/Autodetect _printers") ],
                     'MODEMS_DETECTION' => [ $menus{options}, N("/Autodetect _modems") ],
                     'JAZZ_DETECTION' => [ $menus{options}, N("/Autodetect _jaz drives") ],
                     'PARALLEL_ZIP_DETECTION' => [ $menus{options}, N("/Autodetect parallel _zip drives") ],
@@ -198,8 +197,6 @@ my @menu_items =
     (
      [ N("/_File"), undef, undef, undef, '<Branch>' ],
      [ N("/_File") . N("/_Quit"), N("<control>Q"), \&quit_global, undef, '<Item>' ],
-     [ join('', @{$menu_options{PRINTERS_DETECTION}}), undef, 
-       sub { $options{PRINTERS_DETECTION} = $check_boxes{PRINTERS_DETECTION}->get_active }, undef, '<CheckItem>' ],
      [ join('', @{$menu_options{MODEMS_DETECTION}}), undef,
        sub { $options{MODEMS_DETECTION} = $check_boxes{MODEMS_DETECTION}->get_active }, undef, '<CheckItem>' ],
      [ join('', @{$menu_options{JAZZ_DETECTION}}), undef,
@@ -393,7 +390,6 @@ foreach my $hw_class (@harddrake::data::tree) {
     next if ref($detector) ne "CODE"; #skip class witouth detector
     next if $Ident =~ /(MODEM|PRINTER)/ && $::testing;
     next if $Ident =~ /JAZZ/ && !$options{JAZZ_DETECTION};
-    next if $Ident =~ /PRINTER/ && !$options{PRINTERS_DETECTION};
     $detect_devices::detect_serial_modem = 0 if $Ident =~ /MODEM/ && !$options{MODEMS_DETECTION};
 
     my @devices = $detector->(\%options);
