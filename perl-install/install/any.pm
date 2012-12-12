@@ -155,6 +155,8 @@ sub prep_net_suppl_media {
     #- install basesystem now
     $o->do_pkgs->ensure_is_installed('basesystem', undef, 1);
 
+    # in case of no network install:
+    $o->{net} ||= {};
     require network::netconnect;
     network::netconnect::real_main($o->{net}, $o, $o->{modules_conf});
     require install::interactive;
