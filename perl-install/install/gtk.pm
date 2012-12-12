@@ -74,14 +74,8 @@ sub load_font {
 	$::WizardWindow->move($::rootwidth - $width - $x, $y);
     }
 
-    my $s = q(
-style "default-font" 
-{
-   font_name = ") . lang::l2pango_font($o->{locale}{lang}) . q("
-}
-widget "*" style "default-font"
-
-);
+    my $font = lang::l2pango_font($o->{locale}{lang});
+    my $s = qq(gtk-font-name="$font");
     Gtk2::Rc->parse_string($s);
     mkdir("/root");
     output("/root/.gtkrc-2.0", $s);
