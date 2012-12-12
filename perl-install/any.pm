@@ -1168,7 +1168,8 @@ sub selectLanguage_install {
 			advanced_messages => formatAlaTeX(N("Mandriva Linux can support multiple languages. Select
 the languages you would like to install. They will be available
 when your installation is complete and you restart your system.")),
-			advanced_label => N("Multi languages"),
+			advanced_label => N("Multiple languages"),
+			advanced_title => N("Select Additional Languages"),
 		    });
 			    
     $in->ask_from_($common, [
