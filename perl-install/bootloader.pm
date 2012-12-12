@@ -746,10 +746,6 @@ sub add_kernel {
 
     if (!$b_no_initrd) {
 	$v->{initrd} = mkinitrd($kernel_str->{version}, $bootloader, $v, "/boot/$initrd_long");
-    } else {
-	# we just set up copy of the universal initrd, and we need to add proper info
-	# in bootloader configuration
-	$v->{initrd} = '/boot/initrd.img';
     }
 
     if (!$b_nolink) {
@@ -762,7 +758,7 @@ sub add_kernel {
 	    _do_the_symlink($bootloader, $v->{kernel_or_dev}, $vmlinuz_long);
 	}
 
-	if ($v->{initrd} && !$b_no_initrd) {
+	if ($v->{initrd}) {
 	    $v->{initrd} = '/boot/' . kernel_str2initrd_short($kernel_str);
 	    if (arch() =~ /mips/) {
 		log::l("link $::prefix/boot/$initrd_long -> $::prefix$v->{initrd}");
@@ -1076,15 +1072,15 @@ sub suggest {
 		if_($options{vga_fb}, vga => $options{vga_fb}), #- using framebuffer
 		if_($options{vga_fb} && $options{splash}, append => "splash"),
 		if_($options{quiet}, append => "splash quiet"),
-	       }, "", 1);
+	       });
 
 	if ($options{vga_fb} && $e->{label} eq 'linux') {
-	    add_kernel($bootloader, $kernel, { root => $root, label => 'linux-nonfb' }, "", 1);
+	    add_kernel($bootloader, $kernel, { root => $root, label => 'linux-nonfb' });
 	}
     }
 
     add_kernel($bootloader, $kernels[0],
-	       { root => $root, label => 'failsafe', append => 'failsafe' }, "", 1)
+	       { root => $root, label => 'failsafe', append => 'failsafe' })
       if @kernels;
 
     if (arch() =~ /ppc/) {
