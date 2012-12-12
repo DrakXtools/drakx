@@ -320,11 +320,13 @@ sub setPackages {
 	my $media = $o->{media} || [ { type => 'media_cfg', url => 'drakx://media' } ];
 	my ($suppl_method, $copy_rpms_on_disk);
 
+	install::pkgs::start_pushing_error();
     	($suppl_method, $copy_rpms_on_disk) = install::media::get_media($o, $media, $urpm);
 
 	if ($suppl_method) {
 	    1 while $o->selectSupplMedia;
 	}
+	install::pkgs::popup_errors();
 
         # actually read synthesis now we have all the ones we want:
         require urpm::media;

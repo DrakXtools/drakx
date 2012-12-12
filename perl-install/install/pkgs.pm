@@ -364,6 +364,19 @@ sub unselectAllPackages {
     _resolve_requested_and_check($packages, $packages->{state}, \%keep_selected);
 }
 
+
+my (@errors, $push_errors);
+sub start_pushing_error() {
+    $push_errors = 1;
+}
+
+sub popup_errors() {
+    if (@errors) {
+	$::o->ask_warn(undef, N("An error occurred:") . "\n\n" . join("\n", @errors));
+    }
+    undef $push_errors;
+}
+
 sub empty_packages {
     my ($o_keep_unrequested_dependencies) = @_;
     my $packages = urpm->new;
@@ -382,6 +395,10 @@ sub empty_packages {
     };
     $packages->{error} = sub {
         log::l("urpmi error: $_[0]");
+	if ($push_errors) {
+	    push @errors, @_;
+	    return;
+	}
         $::o->ask_warn(undef, N("An error occurred:") . "\n\n" . $_[0]);
     };
     $packages->{root} = $::prefix;
