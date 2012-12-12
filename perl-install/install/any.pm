@@ -411,7 +411,7 @@ sub setPackages {
 
         install::pkgs::start_pushing_error();
 	# should we really use this? merged from mageia for easier maintenance..
-        media_screen($o);
+        media_screen($o) if !$::auto_install;
 
         # actually read synthesis now we have all the ones we want:
         require urpm::media;
