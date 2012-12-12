@@ -1,4 +1,4 @@
-package cpufreq;
+package cpupower;
 
 use common;
 use detect_devices;
@@ -110,9 +110,9 @@ sub probe_powernow_k7() {
 sub probe_powernow_k8() {
     any {
         get_vendor($_) eq "AMD" && (
-            ($_->{'cpu family'} == 15 && ($_->{'power management'} =~ /\bfid\b/ || has_flag($_, 'fid'))) # frequency ID control)
+            ( $_->{'cpu family'} == 15 && ($_->{'power management'} =~ /\bfid\b/ || has_flag($_, 'fid')) ) # frequency ID control)
                 ||
-            $_->{'cpu family'} == 16 && ($_->{'power management'} =~ /\bhwpstate\b/) # support for Athlon/Phenom II processors (#58477))
+            ( $_->{'cpu family'} == 16 && ($_->{'power management'} =~ /\bhwpstate\b/ )) # support for Athlon/Phenom II processors (#58477))
         );
     } get_cpus();
 }
@@ -166,7 +166,7 @@ sub find_driver() {
     $m && $m->[0];
 }
 
-my @governor_modules = map { "cpufreq_$_" } qw(powersave conservative ondemand);
+my @governor_modules = map { "cpufreq_$_" } qw(ondemand userspace performance conservative);
 
 sub get_modules() {
     my $module;
