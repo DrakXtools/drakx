@@ -1154,6 +1154,11 @@ sub isServer() {
       || (any { $_->{'model name'} =~ /(Xeon|Opteron)/i } getCPUs());
 }
 
+sub isHyperv() {
+      dmidecode_category('System')->{'Manufacturer'} =~ /Microsoft Corporation/i
+      && dmidecode_category('System')->{'Product Name'} =~ /Virtual Machine/i
+}
+
 sub BIGMEM() {
     arch() !~ /x86_64|ia64/ && $> == 0 && dmi_detect_memory() > 4 * 1024;
 }
@@ -1231,6 +1236,7 @@ sub matching_types() {
 	mips_ict => is_mips_ict(),
 	mips_st_ls2f => is_mips_st_ls2f(),
 	laptop => isLaptop(),
+	hyperv => isHyperv(),
 	'numpad' => hasNumpad(),
 	'touchpad' => hasTouchpad(),
 	'64bit' => to_bool(arch() =~ /64/),

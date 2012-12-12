@@ -277,8 +277,13 @@ sub when_load_category {
     if ($category =~ m,disk/ide,) {
 	$conf->add_probeall('ide-controller', $name);
 	eval { load('ide_gd_mod') };
-    } elsif ($category =~ m,disk/(scsi|hardware_raid|sata|firewire),) {
+    } elsif ($category =~ m,disk/(scsi|hardware_raid|sata|firewire|virtual),) {
 	$conf->add_probeall('scsi_hostadapter', $name);
+	if (detect_devices::isHyperv()) {
+	    log::l("HyperV detected. Loading storvsc");
+	    load('hv_vmbus');
+	    load('hv_storvsc');
+	}
 	eval { load('sd_mod') };
     } elsif ($category eq 'bus/usb') {
 	$conf->add_probeall('usb-interface', $name);
