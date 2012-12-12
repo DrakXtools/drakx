@@ -37,6 +37,18 @@ sub addKdmIcon {
     eval { cp_af(facesdir() . $icon . ".png", $dest) } if $icon;
 }
 
+sub addGdmIcon {
+    my ($user, $icon) = @_;
+    if ($icon) {
+	my $dest = "$::prefix/var/lib/AccountsService/icons/$user";
+	eval {
+	    mkdir_p("$::prefix/var/lib/AccountsService/icons");
+	    run_program::run('convert', '-resize', '96x96', facesdir() . $icon . ".png", $dest);
+	    output_p("$::prefix/var/lib/AccountsService/users/$user", "[User]\nXSession=\nIcon=/var/lib/AccountsService/icons/$user");
+	};
+    }
+}
+
 sub addUserFaceIcon {
     my ($user, $icon) = @_;
     my $dest = "$::prefix/home/$user/.face.icon";
@@ -105,8 +117,15 @@ sub add_users {
     foreach (@$users) {
 	create_user($_, $authentication);
 	run_program::rooted($::prefix, "usermod", "-G", join(",", @{$_->{groups}}), $_->{name}) if !is_empty_array_ref($_->{groups});
-	addKdmIcon($_->{name}, delete $_->{auto_icon} || $_->{icon});
-    addUserFaceIcon($_->{name}, delete $_->{auto_icon} || $_->{icon});
+	my $icon = (delete $_->{auto_icon} || $_->{icon});
+	my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
+	if ($desktop{DESKTOP} eq 'GNOME') {
+	    addGdmIcon($_->{name}, $icon);
+	}
+	else {
+	    addKdmIcon($_->{name}, $icon);
+	    addUserFaceIcon($_->{name}, $icon);
+	}
     }
 }
 
