@@ -319,6 +319,12 @@ sub media_screen {
     my ($o) = @_;
 
     my $urpm = $o->{packages};
+    # FIXME:
+    # - nice info
+    # - ignore already failed media (such as 32bit media on NFS)
+    # - detect if non-free/tainted were selected previously / are now needed
+    #   rpm -qa |grep tainted/non-free + check for kmod with firmwares
+    # - use red color in that case (gtk+ version? interactive::gtk version?)
     my %descriptions = (
         'Main Release' => N("\"%s\" contains the various pieces of the systems and its applications.", _main_medium()),
         'Contrib Release' => N("\"%s\" contains software that's not officially supported and might not receive the same level of maintenance.", _contrib_medium()),
@@ -384,6 +390,7 @@ sub setPackages {
 	install::media::update_media($urpm);
 	install::pkgs::popup_errors();
 
+	# should we really use this? merged from mageia for easier maintenance..
         media_screen($o);
 
         # actually read synthesis now we have all the ones we want:
