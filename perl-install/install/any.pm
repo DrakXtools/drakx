@@ -309,6 +309,61 @@ sub load_rate_files {
     defined $o->{compssUsers} or die "Can't read compssUsers.pl file, aborting installation\n";
 }
 
+sub _main_medium() { N("Main Release") }
+
+sub _contrib_medium() { N("Contrib Release") }
+
+sub _nonfree_medium() { N("Non-free Release") }
+
+sub media_screen {
+    my ($o) = @_;
+
+    my $urpm = $o->{packages};
+    my %descriptions = (
+        'Main Release' => N("\"%s\" contains the various pieces of the systems and its applications.", _main_medium()),
+        'Contrib Release' => N("\"%s\" contains software that's not officially supported and might not receive the same level of maintenance.", _contrib_medium()),
+        'Non-free Release' => N("\"%s\" contains non free software.\n", _nonfree_medium()) .
+          N("It also contains firmwares needed for certain devices to operate (eg: some ATI/AMD graphic cards, some network cards, some RAID cards, ..."),
+    );
+
+    $o->ask_from_({ messages => join("\n",
+                                      N("Media Choice"),
+                                      N("Here you can enable more media if you want."),
+                                  ),
+                     focus_first => sub { 1 } }, [ 
+        map {
+            my $medium = $_;
+	    $medium->{temp_enabled} = !$medium->{ignore};
+	    +{
+                val => \$medium->{temp_enabled}, type => 'bool', text => $medium->{name},
+                # 'Core Release' cannot be unselected:
+                disabled => sub { $medium->{name} eq 'Core Release' },
+                format => sub { $descriptions{$_[0]} || translate(%descriptions) },
+            };
+        } @{$urpm->{media}},
+    ]);
+
+
+    # is there some media to enable?
+    my $todo;
+    foreach my $medium (@{$urpm->{media}}) {
+        if ($medium->{temp_enabled} == $medium->{ignore}) {
+            $medium->{ignore} = !$medium->{temp_enabled};
+            if (!$medium->{ignore}) {
+		delete $medium->{ignore};
+		log::l("Medium '$medium->{name}' needs to be updated to be usable");
+		urpm::media::select_media($urpm, $medium->{name});
+		$todo = 1;
+	    }
+	}
+	delete $medium->{temp_enabled};
+    }
+    return if !$todo;
+    urpm::media::update_media($urpm, allow_failures => 1, nolock => 1, noclean => 1,
+			      callback => \&urpm::download::sync_logger
+			     );
+}
+
 sub setPackages {
     my ($o) = @_;
 
@@ -328,6 +383,8 @@ sub setPackages {
 	}
 	install::media::update_media($urpm);
 	install::pkgs::popup_errors();
+
+        media_screen($o);
 
         # actually read synthesis now we have all the ones we want:
         require urpm::media;
