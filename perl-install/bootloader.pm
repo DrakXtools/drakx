@@ -743,6 +743,10 @@ sub add_kernel {
 
     if (!$b_no_initrd) {
 	$v->{initrd} = mkinitrd($kernel_str->{version}, $bootloader, $v, "/boot/$initrd_long");
+    } else {
+	# we just set up copy of the universal initrd, and we need to add proper info
+	# in bootloader configuration
+	$v->{initrd} = '/boot/initrd.img';
     }
 
     if (!$b_nolink) {
@@ -755,7 +759,7 @@ sub add_kernel {
 	    _do_the_symlink($bootloader, $v->{kernel_or_dev}, $vmlinuz_long);
 	}
 
-	if ($v->{initrd}) {
+	if ($v->{initrd} && !$b_no_initrd) {
 	    $v->{initrd} = '/boot/' . kernel_str2initrd_short($kernel_str);
 	    if (arch() =~ /mips/) {
 		log::l("link $::prefix/boot/$initrd_long -> $::prefix$v->{initrd}");
@@ -1069,15 +1073,15 @@ sub suggest {
 		if_($options{vga_fb}, vga => $options{vga_fb}), #- using framebuffer
 		if_($options{vga_fb} && $options{splash}, append => "splash"),
 		if_($options{quiet}, append => "splash quiet"),
-	       });
+	       }, "", 1);
 
 	if ($options{vga_fb} && $e->{label} eq 'linux') {
-	    add_kernel($bootloader, $kernel, { root => $root, label => 'linux-nonfb' });
+	    add_kernel($bootloader, $kernel, { root => $root, label => 'linux-nonfb' }, "", 1);
 	}
     }
 
     add_kernel($bootloader, $kernels[0],
-	       { root => $root, label => 'failsafe', append => 'failsafe' })
+	       { root => $root, label => 'failsafe', append => 'failsafe' }, "", 1)
       if @kernels;
 
     if (arch() =~ /ppc/) {
@@ -1119,6 +1123,7 @@ sub suggest {
 				    method_choices($all_hds, 0)); # or best if no valid one is installed
 
     if (main_method($bootloader->{method}) eq 'grub') {
+	my %processed_entries = {};
 	foreach my $c (find_other_distros_grub_conf($fstab)) {	    
 	    my %h = (
 		     type => 'grub_configfile',
@@ -1126,7 +1131,19 @@ sub suggest {
 		     kernel_or_dev => "/dev/$c->{bootpart}{device}",
 		     configfile => $c->{grub_conf},
 		    );
-	    add_entry($bootloader, \%h);
+	    if ($c->{root}) {
+		my $key = "$c->{name} - $c->{linux} - $c->{initrd}";
+		next if $processed_entries{$key};
+		$processed_entries{$key} = 1;
+		add_entry($bootloader, {
+		    %h,
+		    linux => $c->{linux},
+		    initrd => $c->{initrd},
+		    root => $c->{root},
+		});
+	    } else {
+		add_entry($bootloader, \%h);
+	    }
 	}
     }
 }
@@ -1829,7 +1846,18 @@ sub write_grub {
 		       if_($entry->{'read-write'}, 'rw'),
 		       if_($vga && $vga ne "normal", "vga=$vga"));
 		push @conf, "module " . $_ foreach @{$entry->{modules} || []};
-		push @conf, join(' ', $entry->{xen} ? 'module' : 'initrd', $file2grub->($entry->{initrd})) if $entry->{initrd};
+		if ($entry->{initrd}) {
+		    # split partition from initrd path and place
+		    # it to a separate 'root' entry.
+		    # Grub2's mkconfig takes initrd entry 'as is',
+		    # but gru2 fails to load smth like '(hd0,1)/boot/initrd' taken from grub-legacy
+		    my $initrd_path = $file2grub->($entry->{initrd});
+		    if ($initrd_path =~ /^(\([^\)]+\))/) {
+			push @conf, "root $1";
+			$initrd_path =~ s/^(\([^\)]+\))//;
+		    }
+		    push @conf, join(' ', $entry->{xen} ? 'module' : 'initrd', $initrd_path);
+		}
 	    } else {
 		my $dev = eval { device_string2grub($entry->{kernel_or_dev}, \@legacy_floppies, \@sorted_hds) };
 		if (!$dev) {
@@ -1838,7 +1866,9 @@ sub write_grub {
 		}
 		push @conf, $title;
 		push @conf, grep { $entry->{$_} } 'lock';
-		push @conf, join(' ', $entry->{rootnoverify} ? 'rootnoverify' : 'root', $dev);
+		if ($entry->{type} ne 'grub_configfile' || $entry->{configfile} !~ /grub\.cfg/ || !$entry->{root}) {
+		    push @conf, join(' ', $entry->{rootnoverify} ? 'rootnoverify' : 'root', $dev);
+		}
 
 		if ($entry->{table}) {
 		    if (my $hd = fs::get::device2part($entry->{table}, \@sorted_hds)) {
@@ -1853,8 +1883,12 @@ sub write_grub {
 		    push @conf, map_each { "map ($::b) ($::a)" } %{$entry->{mapdrive}};
 		}
 		push @conf, "makeactive" if $entry->{makeactive};
-		if ($entry->{type} eq 'grub_configfile') {
+		# grub.cfg is grub2 config, can't use it as configfile for grub-legacy
+		if ($entry->{type} eq 'grub_configfile' && $entry->{configfile} !~ /grub\.cfg/) {
 		    push @conf, "configfile $entry->{configfile}";
+		} elsif ($entry->{linux}) {
+		    push @conf, "root $entry->{root}", "kernel $entry->{linux}";
+		    push @conf, "initrd $entry->{initrd}" if $entry->{initrd};
 		} else {
 		    push @conf, "chainloader +1";
 		}
@@ -2047,6 +2081,15 @@ sub find_other_distros_grub_conf {
 	    my $f = find { -e "$handle->{dir}$bootdir/$_" } 'grub.conf', 'grub/menu.lst' or next;
 	    push @l, { bootpart => $part, bootdir => $bootdir, grub_conf => "$bootdir/$f" };
 	}
+	foreach my $bootdir ('', '/boot', '/boot/grub', '/boot/grub2') {
+	    my $f = find { -e "$handle->{dir}$bootdir/$_" } 'grub.cfg' or next;
+	    my $parttype = partition_table::raw::typeOfMBR($part->{device});
+	    if (!$parttype || $parttype eq "empty") {
+		parse_grub2_config(\@l, "$handle->{dir}/$bootdir/$f", $part);
+	    } else {
+	        push @l, { bootpart => $part, bootdir => $bootdir, grub_conf => "$bootdir/$f" };
+	    }
+	}
 	if (my $f = common::release_file($handle->{dir})) {
 	    my $h = common::parse_release_file($handle->{dir}, $f, $part);
 	    $h->{name} = $h->{release};
@@ -2088,7 +2131,7 @@ sub find_other_distros_grub_conf {
 	    } else {
 		log::l("could not recognise the distribution for $e->{grub_conf} in $e->{bootpart}{device}");
 	    }
-	    $e->{name} ||= "Linux $e->{bootpart}{device}";
+	    $e->{name} = $e->{menuentry} || "Linux $e->{bootpart}{device}";
 	    push @found, $e;
 	}
     }
