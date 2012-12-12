@@ -500,7 +500,7 @@ sub select_only_some_media {
     }
 }
 
-sub configure_media {
+sub update_media {
     my ($packages) = @_;
     urpm::media::update_media($packages, distrib => 1, callback => \&urpm::download::sync_logger) or
         log::l('updating media failed');
