@@ -326,6 +326,7 @@ sub setPackages {
 	if ($suppl_method) {
 	    1 while $o->selectSupplMedia;
 	}
+	install::media::update_media($urpm);
 	install::pkgs::popup_errors();
 
         # actually read synthesis now we have all the ones we want:
