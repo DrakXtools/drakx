@@ -29,6 +29,14 @@ if_(arch() =~ /ppc/,
 	  substr($tmp, 0, 2) eq "\xEBH" or return;
 	  index($tmp, $magic, $min) >= 0 && "grub";
       },
+    sub { my ($F) = @_;
+          #- similar to grub-legacy, grub2 doesn't seem to have good magic
+          #- so scanning a range of possible places where grub can have its string
+          my ($min, $max, $magic) = (0x176, 0x188, "GRUB");
+          my $tmp;
+          sysseek($F, 0, 0) && sysread($F, $tmp, $max + length($magic)) or return;
+    	  index($tmp, $magic, $min) >= 0 && "grub2";
+      },
     [ 'lilo', 0x2,  "LILO" ],
     [ 'lilo', 0x6,  "LILO" ],
     [ 'lilo', 0x6 + 0x40,  "LILO" ], #- when relocated in lilo's bsect_update(), variable "space" on paragraph boundary gives 0x40
