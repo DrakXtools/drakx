@@ -66,7 +66,7 @@ sub laptop {
 #     require do_pkgs;
 #     my $do_pkgs = do_pkgs_standalone->new;
 #     if ($on_laptop) {
-#         $do_pkgs->ensure_is_installed("cpufreq", "/etc/rc.d/init.d/cpufreq");
+#         $do_pkgs->ensure_is_installed("cpupower", "/lib/systemd/system/cpupower.service");
 #         $do_pkgs->ensure_is_installed("apmd", "/usr/bin/apm");
 #         $do_pkgs->ensure_is_installed("hotkeys", "/usr/bin/hotkeys");
 #         $do_pkgs->ensure_is_installed("laptop-mode-tools", "/usr/sbin/laptop_mode");
@@ -77,11 +77,15 @@ sub laptop {
     services::set_status("apmd", -e "/proc/apm");
     services::set_status("laptop-mode", $on_laptop);
     services::set_status("numlock", !$on_laptop);
+    services::set_status("cpupower", !$on_laptop);
+    
+}
+    
 }
 
-sub cpufreq() {
-    require cpufreq;
-    modules::set_preload_modules("cpufreq", cpufreq::get_modules());
+sub cpupower() {
+    require cpupower;
+    modules::set_preload_modules("cpupower", cpupower::get_modules());
 }
 
 sub floppy() {

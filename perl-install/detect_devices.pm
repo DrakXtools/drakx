@@ -1253,10 +1253,11 @@ sub hasCPUMicrocode() {
 }
 
 sub hasCPUFreq()     {
-    require cpufreq;
-     to_bool(cpufreq::get_modules())
+    require cpupower;
+     to_bool(cpupower::get_modules())
        || cat_('/proc/cpuinfo') =~ /AuthenticAMD/ && arch() =~ /x86_64/
-       || cat_('/proc/cpuinfo') =~ /model name.*Intel\(R\) Core\(TM\)2 CPU/;
+#       || cat_('/proc/cpuinfo') =~ /model name.*Intel\(R\) Core\(TM\)2 CPU/
+       || cat_('/proc/cpuinfo') =~ /GenuineIntel/;
 }
 sub hasWacom()     { find { $_->{vendor} == 0x056a || $_->{driver} =~ /wacom/ } usb_probe() }
 sub hasTouchpad()  { any { $_->{Synaptics} || $_->{ALPS} || $_->{Elantech} } getInputDevices() }
