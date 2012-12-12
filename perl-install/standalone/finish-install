@@ -178,6 +178,77 @@ sub ask_users() {
     }
 }
 
+sub ask_services() {
+	# List of services
+	my $services = {
+		'smb'        => { STATE => 0, NAME => "Samba",    DESCRIPTION => N("Windows-compatible sharing system") },
+#		'mdmonitor'  => { STATE => 0, NAME => "Linux MD", DESCRIPTION => N("Software RAID support") },
+		'openvpn'    => { STATE => 0, NAME => "OpenVPN",  DESCRIPTION => N("Virtual Private Network") },
+		'sshd'       => { STATE => 0, NAME => "sshd",     DESCRIPTION => N("OpenSSH server") },
+		'cups'       => { STATE => 0, NAME => "CUPS",     DESCRIPTION => N("Print server") },
+#		'nfs-server' => { STATE => 0, NAME => "NFS",      DESCRIPTION => N("Network File System server") },
+#		'pppoe'      => { STATE => 0, NAME => "PPPoE",    DESCRIPTION => N("Point-to-Point Protocol over Ethernet") },
+#		'pptp'       => { STATE => 0, NAME => "PPTP",     DESCRIPTION => N("Point-to-Point Tunneling Protocol") },
+	};
+	my $checkboxes = [];
+	foreach (sort(keys(%$services))) {
+		# Get the current state of the service
+		$services->{$_}{STATE} = (system("systemctl is-enabled $_.service") ? 0 : 1);
+
+		# Form the checkbox control for the dialog
+		push @$checkboxes, {
+			val => \$services->{$_}{STATE},
+			type => 'bool',
+			text => $services->{$_}{NAME} . ' (' . $services->{$_}{DESCRIPTION} . ')',
+			alignment => 'left'
+		};
+	}
+
+	# Display the dialog
+	$in->ask_from_({ messages => N("Please, specify which services should run at start-up:"),
+			 title => N("Services") },
+			 $checkboxes
+	);
+
+	# Perform enabling/disabling services according to what user specified
+	my @failed_start = ();
+	my @failed_stop = ();
+	foreach (keys(%$services)) {
+		my @sysctl_cmds;     # List of systemctl commands to execute
+		my $failed_list;     # Link to list of failures for enabling/disabing (separately)
+		if ($services->{$_}{STATE}) {
+			@sysctl_cmds = ('enable', 'start');
+			$failed_list = \@failed_start;
+		}
+		else {
+			@sysctl_cmds = ('stop', 'disable');
+			$failed_list = \@failed_stop;
+		}
+
+		# Try to call systemctl with necessary commands for the service
+		my $fail;
+		$fail = system("systemctl $sysctl_cmds[0] $_.service");
+		if (!$fail) {
+			$fail = system("systemctl $sysctl_cmds[1] $_.service");
+		}
+		push(@$failed_list, $_) if ($fail);
+	}
+
+	# Collect information about failures if any
+	my $warn_msg = '';
+	if (scalar(@failed_start) > 0) {
+		$warn_msg .= N("The following services failed to start:\n") . join(', ', map { $services->{$_}{NAME} } @failed_start) . "\n\n";
+	}
+	if (scalar(@failed_stop) > 0) {
+		$warn_msg .= N("The following services failed to stop:\n") . join(', ', map { $services->{$_}{NAME} } @failed_stop) . "\n\n";
+	}
+
+	# Display message about failures
+	if ($warn_msg) {
+		$in->ask_warn(N("Services"), $warn_msg);
+	}
+}
+
 sub ask_glx() {
     require Xconfig::glx;
     my @installed_types = Xconfig::glx::filter_installed_types(\@Xconfig::glx::gl_compositing_types);
@@ -286,6 +357,7 @@ call('urpmi');
 $::Wizard_pix_up = 'redhat-config-users';
 call('authentication');
 call('users');
+call('services');
 call('encrypt_home');
 call('glx');
 setVarsInSh($conf_file, { FINISH_INSTALL => 'no' });
