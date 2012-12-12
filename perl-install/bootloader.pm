@@ -1120,12 +1120,13 @@ sub suggest {
 
     if (main_method($bootloader->{method}) eq 'grub') {
 	foreach my $c (find_other_distros_grub_conf($fstab)) {	    
-	    add_entry($bootloader, { 
-		type => 'grub_configfile',
-		label => $c->{name},
-		kernel_or_dev => "/dev/$c->{bootpart}{device}",
-		configfile => $c->{grub_conf},
-	    });
+	    my %h = (
+		     type => 'grub_configfile',
+		     label => $c->{name},
+		     kernel_or_dev => "/dev/$c->{bootpart}{device}",
+		     configfile => $c->{grub_conf},
+		    );
+	    add_entry($bootloader, \%h);
 	}
     }
 }
