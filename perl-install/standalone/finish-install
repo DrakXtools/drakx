@@ -99,6 +99,7 @@ sub ask_country() {
 
 sub ask_network() {
     require network::tools;
+    require services;
     return if network::tools::has_network_connection();
 
     #- test again connection after waiting for network-up service
