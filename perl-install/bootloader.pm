@@ -375,7 +375,7 @@ sub read_grub_menu_lst {
 	    $e->{append} = join(' ', grep { !/^BOOT_IMAGE=/ } split(' ', $e->{append}));
 	    $e->{root} = $1 if $e->{append} =~ s/root=(\S*)\s*//;
 	    eval { $e->{kernel_or_dev} = grub2file($kernel, $grub2dev, $fstab, $e) };
-	    $e->{keep_verbatim} = 1 unless $e->{kernel_or_dev} && dirname($e->{kernel_or_dev}) eq '/boot';
+	    $e->{keep_verbatim} = 1 if !$e->{kernel_or_dev} || dirname($e->{kernel_or_dev}) ne '/boot';
 	}
 	my ($vga, $other) = partition { /^vga=/ } split(' ', $e->{append});
 	if (@$vga) {
