@@ -43,7 +43,7 @@ sub addGdmIcon {
 	my $dest = "$::prefix/var/lib/AccountsService/icons/$user";
 	eval {
 	    mkdir_p("$::prefix/var/lib/AccountsService/icons");
-	    run_program::run('convert', '-resize', '96x96', facesdir() . $icon . ".png", $dest);
+	    run_program::run('convert', '-resize', '64x64', facesdir() . $icon . ".png", $dest);
 	    output_p("$::prefix/var/lib/AccountsService/users/$user", "[User]\nXSession=\nIcon=/var/lib/AccountsService/icons/$user");
 	};
     }
