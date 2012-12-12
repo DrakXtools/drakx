@@ -31,6 +31,7 @@ use do_pkgs;
 #-  advanced_label       => (deprecated) force the name of the "Advanced" button
 #-  advanced_label_close => (deprecated) force the name of the "Basic" button
 #-  advanced_state       => (deprecated) if set to 1, force the "Advanced" part of the dialog to be opened initially
+#-  advanced_title       => (deprecated) title of the advanced item popup dialog (else reusing main title)
 #-  callbacks            => (deprecated) functions called when something happen: complete advanced ok_disabled
 
 #- ask_from_ takes a list of entries with fields:
