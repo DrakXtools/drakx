@@ -326,7 +326,9 @@ sub setPackages {
 	    1 while $o->selectSupplMedia;
 	}
 
-        install::media::configure_media($urpm);
+        # actually read synthesis now we have all the ones we want:
+        require urpm::media;
+        urpm::media::configure($urpm);
         install::media::adjust_paths_in_urpmi_cfg($urpm);
         log::l('urpmi completely set up');
 
