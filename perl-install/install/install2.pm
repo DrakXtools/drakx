@@ -437,6 +437,7 @@ sub parse_args {
     map_each {
 	my ($n, $v) = @_;
 	my $f = ${{
+	    keyboard  => sub { $o->{keyboard} = $v; push @::auto_steps, 'selectKeyboard' },
 	    lang      => sub { $o->{lang} = $v },
 	    flang     => sub { $o->{lang} = $v; push @::auto_steps, 'selectLanguage' },
 	    langs     => sub { $o->{locale}{langs} = +{ map { $_ => 1 } split(':', $v) } },
