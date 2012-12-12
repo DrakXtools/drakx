@@ -204,7 +204,7 @@ sub bug_handler {
     # we want the full backtrace:
     if ($is_signal) {
         my $ctrace = c::C_backtrace();
-        $ctrace =~ s/0:.*(\d+:[^:]*Perl_sighandler)/\1/sig if $ctrace =~ /0:.*(\d+:[^:]*Perl_sighandler)/sig;
+        $ctrace =~ s/0:.*(\d+:[^:]*Perl_sighandler)/$1/sig if $ctrace =~ /0:.*(\d+:[^:]*Perl_sighandler)/sig;
         $error .= "\nGlibc's trace:\n$ctrace\n";
     }
     $error .= "Perl's trace:\n" . common::backtrace() if $error;
