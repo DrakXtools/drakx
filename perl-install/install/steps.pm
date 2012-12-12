@@ -474,7 +474,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     #- configure PCMCIA services if needed.
     harddrake::autoconf::pcmcia($o->{pcmcia});
     #- configure CPU frequency modules
-    harddrake::autoconf::cpufreq();
+    harddrake::autoconf::cpupower();
     harddrake::autoconf::floppy();
 
     #- for mandrake_firstime

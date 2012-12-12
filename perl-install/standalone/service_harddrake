@@ -388,7 +388,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         harddrake::autoconf::mouse_conf($modules_conf);
         next;
     } elsif ($Ident eq "CPU") {
-        harddrake::autoconf::cpufreq();
+        harddrake::autoconf::cpupower();
     } elsif ($Ident eq "FLOPPY") {
         harddrake::autoconf::floppy();
     }
