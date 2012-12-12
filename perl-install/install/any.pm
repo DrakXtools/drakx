@@ -149,6 +149,9 @@ sub prep_net_suppl_media {
 
     # needed so that one can install basesystem before adding suppl network media:
     install::media::update_media($o->{packages});
+    require urpm::media;
+    urpm::media::configure($o->{packages});
+
     #- install basesystem now
     $o->do_pkgs->ensure_is_installed('basesystem', undef, 1);
 
