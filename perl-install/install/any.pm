@@ -315,6 +315,23 @@ sub _contrib_medium() { N("Contrib Release") }
 
 sub _nonfree_medium() { N("Non-free Release") }
 
+# FIXME: move me in ../any.pm or in harddrake::*, might be needed by rpmdrake/harddrake:
+sub is_firmware_needed {
+    my ($o) = @_;
+    require pkgs;
+    pkgs::detect_graphical_drivers($o->do_pkgs);
+}
+
+sub msg_if_firmware_needed {
+    my ($o) = @_;
+    return if !is_firmware_needed($o);
+    join("\n",
+	 # FIXME: actually can be proprietary drivers (same medium eventually):
+         N("Some hardware on your machine needs some non free firmwares in order for the free software drivers to work."),
+         N("You should enable \"%s\"", _nonfree_medium()),
+     );
+}
+
 sub media_screen {
     my ($o) = @_;
 
@@ -336,6 +353,7 @@ sub media_screen {
     $o->ask_from_({ messages => join("\n",
                                       N("Media Choice"),
                                       N("Here you can enable more media if you want."),
+                                      msg_if_firmware_needed($o)
                                   ),
                      focus_first => sub { 1 } }, [ 
         map {
@@ -391,12 +409,16 @@ sub setPackages {
 	install::media::update_media($urpm);
 	install::pkgs::popup_errors();
 
+        install::pkgs::start_pushing_error();
 	# should we really use this? merged from mageia for easier maintenance..
         media_screen($o);
 
         # actually read synthesis now we have all the ones we want:
         require urpm::media;
         urpm::media::configure($urpm);
+
+        install::pkgs::popup_errors();
+
         install::media::adjust_paths_in_urpmi_cfg($urpm);
         log::l('urpmi completely set up');
 
