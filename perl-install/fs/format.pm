@@ -114,6 +114,7 @@ sub part {
 	$wait_message->(N("Formatting partition %s", $part->{device})) if $wait_message;
 	part_raw($part, $wait_message);
     }
+    undef $part->{toFormat};
 }
 
 sub write_label {
