@@ -312,30 +312,30 @@ sub load_rate_files {
 sub setPackages {
     my ($o) = @_;
 
+    my $urpm;
     require install::pkgs;
     {
-	$o->{packages} = install::pkgs::empty_packages($o->{keep_unrequested_dependencies});
+	$urpm = $o->{packages} = install::pkgs::empty_packages($o->{keep_unrequested_dependencies});
 	
 	my $media = $o->{media} || [ { type => 'media_cfg', url => 'drakx://media' } ];
 	my ($suppl_method, $copy_rpms_on_disk);
 
-	my ($suppl_method, $copy_rpms_on_disk) = install::media::get_media($o, $media, $o->{packages});
-    	($suppl_method, $copy_rpms_on_disk) = install::media::get_media($o, $media, $o->{packages});
+    	($suppl_method, $copy_rpms_on_disk) = install::media::get_media($o, $media, $urpm);
 
 	if ($suppl_method) {
 	    1 while $o->selectSupplMedia;
 	}
 
-        install::media::configure_media($o->{packages});
-        install::media::adjust_paths_in_urpmi_cfg($o->{packages});
+        install::media::configure_media($urpm);
+        install::media::adjust_paths_in_urpmi_cfg($urpm);
         log::l('urpmi completely set up');
 
 	#- open rpm db according to right mode needed
-	$o->{packages}{rpmdb} ||= install::pkgs::rpmDbOpen('rebuild_if_needed');
+	$urpm->{rpmdb} ||= install::pkgs::rpmDbOpen('rebuild_if_needed');
 
 	{
 	    my $_wait = $o->wait_message('', N("Looking at packages already installed..."));
-	    install::pkgs::selectPackagesAlreadyInstalled($o->{packages});
+	    install::pkgs::selectPackagesAlreadyInstalled($urpm);
 	}
 
         remove_package_for_upgrade($o);
@@ -344,15 +344,15 @@ sub setPackages {
 
 	#- always try to select basic kernel (else on upgrade, kernel will never be updated provided a kernel is already
 	#- installed and provides what is necessary).
-	my $kernel_pkg = install::pkgs::bestKernelPackage($o->{packages}, $o->{match_all_hardware});
-	install::pkgs::selectPackage($o->{packages}, $kernel_pkg, 1);
-	if ($o->{isUpgrade} && $o->{packages}{sizes}{dkms} && $kernel_pkg =~ /(.*)-latest/) {
+	my $kernel_pkg = install::pkgs::bestKernelPackage($urpm, $o->{match_all_hardware});
+	install::pkgs::selectPackage($urpm, $kernel_pkg, 1);
+	if ($o->{isUpgrade} && $urpm->{sizes}{dkms} && $kernel_pkg =~ /(.*)-latest/) {
 	    my $devel_kernel_pkg = "$1-devel-latest";
 	    log::l("selecting $devel_kernel_pkg (since dkms was installed)");
-	    install::pkgs::select_by_package_names($o->{packages}, [ $devel_kernel_pkg ], 1);
+	    install::pkgs::select_by_package_names($urpm, [ $devel_kernel_pkg ], 1);
 	}
 
-	install::pkgs::select_by_package_names_or_die($o->{packages}, ['basesystem'], 1);
+	install::pkgs::select_by_package_names_or_die($urpm, ['basesystem'], 1);
 
 	my $rpmsrate_flags_was_chosen = $o->{rpmsrate_flags_chosen};
 
@@ -370,7 +370,7 @@ sub setPackages {
     if ($o->{isUpgrade}) {
 	{
 	    my $_w = $o->wait_message('', N("Finding packages to upgrade..."));
-	    install::pkgs::selectPackagesToUpgrade($o->{packages});
+	    install::pkgs::selectPackagesToUpgrade($urpm);
 	}
 	if ($o->{packages}{sizes}{'kdebase-progs'}) {
 	    log::l("selecting task-kde (since kdebase-progs was installed)");
