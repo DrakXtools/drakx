@@ -1955,6 +1955,12 @@ sub restore_previous_MBR_bootloader {
     output($dev, scalar cat_(_dev_to_MBR_backup($dev)));
 }
 
+sub install_grub2 {
+    my ($bootloader, $all_hds) = @_;
+    my $error;
+    run_program::rooted($::prefix, 'grub2-install', '2>', \$error, $bootloader->{boot}) or die "grub2 failed: $error";
+}
+    
 sub install_grub {
     my ($bootloader, $all_hds) = @_;
 
