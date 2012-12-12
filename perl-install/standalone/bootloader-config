@@ -372,5 +372,6 @@ sub remove_splash() {
 }
 
 sub detectloader() {
+    print "grub2\n" if $have_grub2;
     print uc(bootloader::main_method($bootloader->{method})), "\n" if $bootloader;
 }
