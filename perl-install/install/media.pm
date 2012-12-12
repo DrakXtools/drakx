@@ -433,15 +433,6 @@ sub urpmidir() {
     -w $v ? $v : '/tmp';
 }
 
-sub hdlist_on_disk {
-    my ($m) = @_;
-
-    #urpmidir() . "/hdlist.$m->{fakemedium}.cz";
-    require urpm;
-    # FIXME: download hdlist if needed:
-    return urpm::is_local_medium($m) ? join('/', $m->{url}, $m->{media_info_dir}, "hdlist.cz") : '';
-}
-
 sub _allow_copy_rpms_on_disk {
     my ($medium, $hdlists) = @_;
 
