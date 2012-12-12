@@ -342,7 +342,7 @@ sub media_screen {
     # - detect if non-free/tainted were selected previously / are now needed
     #   rpm -qa |grep tainted/non-free + check for kmod with firmwares
     # - use red color in that case (gtk+ version? interactive::gtk version?)
-    # - present media as trees (eg 3 main branches (core/nonfree/tainted and sub medium below (release/updates/...)
+    # - present media as trees (eg 3 main branches (main/contrib/nonfree and sub medium below (release/updates/...)
     # - enable to add media from the media screen
     # - use keywords (backports,testing,testing,sources) to blacklist
     # - introduce 'mandatory' keyword for guessing media that can *not* be disabled

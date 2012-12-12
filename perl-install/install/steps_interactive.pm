@@ -774,7 +774,7 @@ Do you want to install the updates?")),
     if (any::urpmi_add_all_media($o, $o->{previous_release})) {
 	my $binary = find { whereis_binary($_, $::prefix) } 'gurpmi2', 'urpmi' or return;
 	my $log_file = '/root/drakx/updates.log';
-	run_program::rooted($::prefix, $binary, '>>', $log_file, '2>>', $log_file, '--auto-select', '--update');
+	run_program::rooted($::prefix, $binary, '>>', $log_file, '2>>', $log_file, '--auto-select');
     }
 
     #- not downing network, even ppp. We don't care much since it is the end of install :)
