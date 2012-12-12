@@ -425,8 +425,8 @@ sub display_choices {
     my @solutions = sort { $solutions{$b}[0] <=> $solutions{$a}[0] } keys %solutions;
     my @sol = grep { $solutions{$_}[0] >= 0 } @solutions;
 
-    log::l(''  . "solutions found: " . join('', map { $solutions{$_}[1] } @sol) .
-           " (all solutions found: " . join('', map { $solutions{$_}[1] } @solutions) . ")");
+    log::l(''  . "solutions found: " . join(', ', map { $solutions{$_}[1] } @sol) .
+           " (all solutions found: " . join(', ', map { $solutions{$_}[1] } @solutions) . ")");
 
     @solutions = @sol if @sol > 1;
     log::l("solutions: ", int @solutions);
@@ -572,8 +572,8 @@ sub main {
         my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
 
         my @sol = grep { $_->[0] >= 0 } @solutions;
-        log::l(''  . "solutions found: " . join('', map { $_->[1] } @sol) . 
-               " (all solutions found: " . join('', map { $_->[1] } @solutions) . ")");
+        log::l(''  . "solutions found: " . join(', ', map { $_->[1] } @sol) . 
+               " (all solutions found: " . join(', ', map { $_->[1] } @solutions) . ")");
         @solutions = @sol if @sol > 1;
         log::l("solutions: ", int @solutions);
         @solutions or $o->ask_warn(N("Partitioning"), N("I cannot find any room for installing")), die 'already displayed';
