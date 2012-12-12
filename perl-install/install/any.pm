@@ -325,6 +325,7 @@ sub media_screen {
     # - detect if non-free/tainted were selected previously / are now needed
     #   rpm -qa |grep tainted/non-free + check for kmod with firmwares
     # - use red color in that case (gtk+ version? interactive::gtk version?)
+    # - present media as trees (eg 3 main branches (core/nonfree/tainted and sub medium below (release/updates/...)
     my %descriptions = (
         'Main Release' => N("\"%s\" contains the various pieces of the systems and its applications.", _main_medium()),
         'Contrib Release' => N("\"%s\" contains software that's not officially supported and might not receive the same level of maintenance.", _contrib_medium()),
@@ -346,7 +347,7 @@ sub media_screen {
                 disabled => sub { $medium->{name} eq 'Core Release' },
                 format => sub { $descriptions{$_[0]} || translate(%descriptions) },
             };
-        } @{$urpm->{media}},
+        } grep { $_->{name} =~ /Release$|Updates$/ } @{$urpm->{media}},
     ]);
 
 
