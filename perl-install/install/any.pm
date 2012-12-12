@@ -343,7 +343,9 @@ sub media_screen {
     #   rpm -qa |grep tainted/non-free + check for kmod with firmwares
     # - use red color in that case (gtk+ version? interactive::gtk version?)
     # - present media as trees (eg 3 main branches (core/nonfree/tainted and sub medium below (release/updates/...)
+    # - enable to add media from the media screen
     # - use keywords (backports,testing,testing,sources) to blacklist
+    # - introduce 'mandatory' keyword for guessing media that can *not* be disabled
     my %descriptions = (
         'Main Release' => N("\"%s\" contains the various pieces of the systems and its applications.", _main_medium()),
         'Contrib Release' => N("\"%s\" contains software that's not officially supported and might not receive the same level of maintenance.", _contrib_medium()),
