@@ -1991,6 +1991,43 @@ sub ensure_pkg_is_installed {
     1;
 }
 
+sub parse_grub2_config {
+    my ($l, $grubcfg, $part) = @_;
+
+    my ($linux, $menuentry, $root, $root_dev, $initrd);
+
+    foreach (cat_($grubcfg)) {
+	chomp;
+	if (/^menuentry\s+['"]([^']+)["']/) {
+	    if ($menuentry && $root) {
+		my $parttype = partition_table::raw::typeOfMBR($root_dev);
+		if ((!$parttype || $parttype eq "empty") && $linux) {
+	    	    push @$l, { menuentry => $menuentry, bootpart => $part, root => $root, linux => $linux, initrd => $initrd, grub_conf => $grubcfg };
+		}
+	    }
+	    $menuentry = $1;
+	    $root = $linux = undef;
+	} elsif (/set root='(\([^\)]+\))'/) {
+	    $root = $1;
+
+	    if ($root =~ /\(([^,]+),msdos(\d+)\)/) {
+		my $dev_title = "/" . $1;
+		my $part_num = $2;
+		my $dec_part_num = $part_num-1;
+		$dev_title =~ s!hd!dev/sd!;
+		$dev_title =~ tr/0123456789/abcdefghi/;
+
+	        $root_dev = $part_num ? $dev_title . $part_num : $dev_title;
+               $root =~ s/msdos$part_num/$dec_part_num/;
+	    }
+	} elsif (/^\s+linux\s+(.+)/) {
+	    $linux = $1;
+	} elsif (/^\s+initrd\s+(.+)/) {
+	    $initrd = $1;
+	}
+    }
+}
+
 sub find_other_distros_grub_conf {
     my ($fstab) = @_;
 
