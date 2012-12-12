@@ -230,7 +230,7 @@ sub prefix_for_dev {
 
 sub should_prefer_UUID {
     my ($dev) = @_;
-    $dev =~ /^((?:[hsv]|xv)d)/;
+    $dev =~ /^((?:[hsvm]|xv)d)/;
 }
 
 sub symlink_now_and_register {
