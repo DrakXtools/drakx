@@ -362,8 +362,8 @@ sub media_screen {
 	    $medium->{temp_enabled} = !$medium->{ignore};
 	    +{
                 val => \$medium->{temp_enabled}, type => 'bool', text => $medium->{name},
-                # 'Core Release' cannot be unselected:
-                disabled => sub { $medium->{name} eq 'Core Release' },
+                # 'Main Release' cannot be unselected:
+                disabled => sub { $medium->{name} eq 'Main Release' },
                 format => sub { $descriptions{$_[0]} || translate(%descriptions) },
             };
         } grep { $_->{name} !~ /Debug|Testing|Sources|Backports/ } @{$urpm->{media}},
