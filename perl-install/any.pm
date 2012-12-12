@@ -99,6 +99,7 @@ sub create_user {
 			     ? ('-l', $u->{name}, $u->{rename_from})
 			     : $u->{name}));
 	symlink($u->{home}, $symlink_home_from) if $symlink_home_from;
+	eval { chmod(0751, (getpwnam($u->{home}))[7]); };
     }
 
     my (undef, undef, $uid, $gid, undef, undef, undef, $home) = getpwnam($u->{name});
