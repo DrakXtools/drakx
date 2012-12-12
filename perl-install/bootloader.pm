@@ -1856,7 +1856,7 @@ sub write_grub {
 		    # split partition from initrd path and place
 		    # it to a separate 'root' entry.
 		    # Grub2's mkconfig takes initrd entry 'as is',
-		    # but gru2 fails to load smth like '(hd0,1)/boot/initrd' taken from grub-legacy
+		    # but grub2 fails to load smth like '(hd0,1)/boot/initrd' taken from grub-legacy
 		    my $initrd_path = $file2grub->($entry->{initrd});
 		    if ($initrd_path =~ /^(\([^\)]+\))/) {
 			push @conf, "root $1";
