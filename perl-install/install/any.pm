@@ -401,6 +401,7 @@ sub setPackages {
     my $urpm;
     require install::pkgs;
     {
+	#  (update_media will open rpmdb for listing existing pubkeys,
 	$urpm = $o->{packages} = install::pkgs::empty_packages($o->{keep_unrequested_dependencies});
 	
 	my $media = $o->{media} || [ { type => 'media_cfg', url => 'drakx://media' } ];
