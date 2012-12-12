@@ -317,8 +317,10 @@ sub setPackages {
 	$o->{packages} = install::pkgs::empty_packages($o->{keep_unrequested_dependencies});
 	
 	my $media = $o->{media} || [ { type => 'media_cfg', url => 'drakx://media' } ];
+	my ($suppl_method, $copy_rpms_on_disk);
 
 	my ($suppl_method, $copy_rpms_on_disk) = install::media::get_media($o, $media, $o->{packages});
+    	($suppl_method, $copy_rpms_on_disk) = install::media::get_media($o, $media, $o->{packages});
 
 	if ($suppl_method) {
 	    1 while $o->selectSupplMedia;
