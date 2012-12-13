@@ -447,7 +447,11 @@ sub create_widget {
 	$w = gtknew('HBox', children_tight => [
             gtknew('Install_Button', text => $e->{text},
                    clicked => sub {
-                       ask_fromW($o, { title => $common->{advanced_title} || $common->{title} || N("Advanced") }, $children) }
+                       eval { ask_fromW($o, { title => $common->{advanced_title} || $common->{title} || N("Advanced") }, $children) };
+		       if (my $err = $@) {
+			   die $err if $err !~ /^wizcancel/;
+		       }
+		   }
                )
         ]);
     } elsif ($e->{type} =~ /list/) {
