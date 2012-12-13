@@ -477,7 +477,7 @@ sub backend_mod() {
 sub interactive_mode() {
     $interactive = 1;
     $window1 = ugtk2->new(N("Font Installation"));
-    $::main_window = $window1->{real_window};
+    mygtk2::register_main_window($window1->{real_window});
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     $window1->{rwindow}->set_position('center') if !$::isEmbedded;
     

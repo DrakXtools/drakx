@@ -59,7 +59,7 @@ sub main {
     local $in->{grab} = 1;
 
     $w = ugtk2->new(N("Partitioning"));
-    $::main_window = $w->{real_window} if !$::isEmbedded && !$::isInstall;
+    mygtk2::register_main_window($w->{real_window}) if !$::isEmbedded && !$::isInstall;
 
     load_theme();
 

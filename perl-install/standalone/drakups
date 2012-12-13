@@ -328,7 +328,7 @@ if (member('--wizard', @ARGV)) {
 
 $w = ugtk2->new(N("UPS Management"));
 if (!$::isEmbedded) {
-    $::main_window = $w->{real_window};
+    mygtk2::register_main_window($w->{real_window});
     $w->{window}->set_size_request(500, 550);
     $w->{rwindow}->set_title(N("DrakUPS"));
 }
