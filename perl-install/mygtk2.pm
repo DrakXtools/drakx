@@ -1212,6 +1212,22 @@ sub mygtk2::MagicWindow::AUTOLOAD {
     $w->{$s1}->$meth(@args);
 }
 
+sub quit_callback { 
+    my ($w) = @_;
+
+    if ($::isWizard) {
+	$w->destroy; 
+	die 'wizcancel';
+    } else { 
+	if (Gtk2->main_level) {
+	    Gtk2->main_quit;
+	} else {
+	    # block window deletion if not in main loop (eg: while starting the GUI)
+	    return 1;
+	}
+    } 
+}
+
 sub _create_Window {
     my ($opts, $special_center) = @_;
 
@@ -1232,19 +1248,7 @@ sub _create_Window {
     my $w = _gtk(undef, 'Window', 'gtknew', $opts);
 
     #- when the window is closed using the window manager "X" button (or alt-f4)
-    $w->signal_connect(delete_event => sub { 
-	if ($::isWizard) {
-	    $w->destroy; 
-	    die 'wizcancel';
-	} else { 
-	    if (Gtk2->main_level) {
-                Gtk2->main_quit;
-	    } else {
-                # block window deletion if not in main loop (eg: while starting the GUI)
-                return 1;
-	    }
-	} 
-    });
+    $w->signal_connect(delete_event => \&quit_callback);
 
     if ($::isInstall && !$::isStandalone) {
 	require install::gtk; #- for perl_checker
