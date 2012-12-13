@@ -422,7 +422,7 @@ sub setPackages {
 	# should we really use this? merged from mageia for easier maintenance..
         media_screen($o) if !$::auto_install;
         my @choosen_media = map { $_->{name} } grep { !$_->{ignore} } @{$urpm->{media}};
-        log::l("choosen media: ", join(',', @choosen_media));
+        log::l("choosen media: ", join(', ', @choosen_media));
         die "no choosen media" if !@choosen_media;
 
         # actually read synthesis now we have all the ones we want:
