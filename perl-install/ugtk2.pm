@@ -748,7 +748,7 @@ sub new {
 	if_(!$::isInstall, icon_no_error => wm_icon()),
 	if_($o->{transient}, transient_for => $o->{transient}), 
     );
-    push @::main_windows, $::main_window = $window->{real_window} if !$opts{do_not_track_main_window};
+    mygtk2::register_main_window($window->{real_window}) if !$opts{do_not_track_main_window};
     $window->set_border_width(10) if !$window->{pop_it} && !$::noborderWhenEmbedded;
 
     $o->{rwindow} = $o->{window} = $window;
