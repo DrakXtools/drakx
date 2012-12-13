@@ -2025,7 +2025,7 @@ sub ensure_pkg_is_installed {
     my ($do_pkgs, $bootloader) = @_;
 
     my $main_method = main_method($bootloader->{method});
-    if ($main_method eq 'grub' || $main_method eq 'lilo') {
+    if (member($main_method, qw(grub grub2 lilo))) {
 	$do_pkgs->ensure_binary_is_installed($main_method, $main_method, 1) or return 0;
 	if ($bootloader->{method} eq 'grub-graphic') {
 	    $do_pkgs->ensure_is_installed('mandriva-gfxboot-theme', '/usr/share/gfxboot/themes/Mandriva/boot/message', 1) or return 0;
