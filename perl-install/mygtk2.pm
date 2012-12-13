@@ -1212,9 +1212,23 @@ sub mygtk2::MagicWindow::AUTOLOAD {
     $w->{$s1}->$meth(@args);
 }
 
+state $in_callback;
+sub quit_popup() {
+   if (!$in_callback) {
+	$in_callback = 1;
+	my $_guard = before_leaving { undef $in_callback };
+	require ugtk2;
+	my $w = ugtk2->new(N("Confirmation"), grab => 1);
+	ugtk2::_ask_okcancel($w, N("Are you sure you want to quit?"), N("Quit"), N("Cancel"));
+	my $ret = ugtk2::main($w);
+	return 1 if !$ret;
+    }
+}
+
 sub quit_callback { 
     my ($w) = @_;
-
+    
+    return 1 if quit_popup();
     if ($::isWizard) {
 	$w->destroy; 
 	die 'wizcancel';
