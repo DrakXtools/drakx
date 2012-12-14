@@ -225,6 +225,7 @@ sub read {
 }
 
 sub read_grub2 {
+    +{};
 }
 
 sub read_grub {
