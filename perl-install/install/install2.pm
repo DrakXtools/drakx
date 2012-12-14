@@ -661,10 +661,12 @@ sub real_main() {
     MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep($o)) {
 	$o->{steps}{$o->{step}}{entered}++;
 	$o->enteringStep($o->{step});
+	my $time = time();
 	eval {
 	    &{$install::install2::{$o->{step}}}($o->{steps}{$o->{step}}{auto});
 	};
 	my $err = $@;
+	log::l("step \"$o->{step}\" took: ", formatTimeRaw(time() - $time));
 	$o->kill_action;
 	if ($err) {
 	    local $_ = $err;
