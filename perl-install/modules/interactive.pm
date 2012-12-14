@@ -81,9 +81,9 @@ sub load_category__prompt_for_more {
 
 my %category2text = (
     'bus/usb' => N_("Installing driver for USB controller"),
-    'bus/firewire' => N_("Installing driver for firewire controller %s"),
-    'disk/card_reader|ide|scsi|hardware_raid|sata|firewire|virtual' => N_("Installing driver for hard disk drive controller %s"),
-    list_modules::ethernet_categories() => N_("Installing driver for ethernet controller %s"),
+    'bus/firewire' => N_("Installing driver for firewire controller \"%s\""),
+    'disk/card_reader|ide|scsi|hardware_raid|sata|firewire|virtual' => N_("Installing driver for hard disk drive controller \"%s\""),
+    list_modules::ethernet_categories() => N_("Installing driver for ethernet controller \"%s\""),
 );
 
 sub wait_load_module {
