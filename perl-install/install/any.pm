@@ -359,7 +359,6 @@ sub media_screen {
     );
 
     $o->ask_from_({ messages => join("\n",
-                                      N("Media Choice"),
                                       N("Here you can enable more media if you want."),
                                       msg_if_firmware_needed($o)
                                   ),
