@@ -235,6 +235,14 @@ sub selectMouse {
     } 
 }
 
+sub setPackages {
+    my ($o) = @_;
+    my (undef, $old_title) = get_default_step_items();
+    set_default_step_items(N("Media Selection") || $old_title);
+    install::any::setPackages($o);
+    set_default_step_items($old_title);
+}
+
 sub reallyChooseDesktop {
     my ($o, $title, $message, $choices, $choice) = @_;
 
@@ -806,5 +814,6 @@ It will then continue from the hard disk drive and the packages will remain avai
     $_->{ignore} = !$selection{$_->{name}} foreach @$hdlists;
     log::l("keeping media " . join ',', map { $_->{rpmsdir} } grep { !$_->{ignore} } @$hdlists);
 }
+
 
 1;
