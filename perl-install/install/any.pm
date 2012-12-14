@@ -355,7 +355,7 @@ sub media_screen {
         'Main Release' => N("\"%s\" contains the various pieces of the systems and its applications.", _main_medium()),
         'Contrib Release' => N("\"%s\" contains software that's not officially supported and might not receive the same level of maintenance.", _contrib_medium()),
         'Non-free Release' => N("\"%s\" contains non free software.\n", _nonfree_medium()) .
-          N("It also contains firmwares needed for certain devices to operate (eg: some ATI/AMD graphic cards, some network cards, some RAID cards, ..."),
+          N("It also contains firmwares needed for certain devices to operate (eg: some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"),
     );
 
     $o->ask_from_({ messages => join("\n",
