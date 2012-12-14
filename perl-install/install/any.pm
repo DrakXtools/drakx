@@ -114,7 +114,7 @@ sub ask_suppl_media_method {
 
 
 Do you have a supplementary installation medium to configure?",
-	    "\n\n\n" . join(",\n\n", map { "- $_->{name}" } install::media::allMediums($o->{packages}))));
+	    "\n\n\n" . join(",\n\n", map { "- $_->{name}" . ($_->{ignore} ? " (disabled)" : '') } install::media::allMediums($o->{packages}))));
 
     my %l = my @l = (
 	''      => N("None"),
