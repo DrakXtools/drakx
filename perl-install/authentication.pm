@@ -693,12 +693,12 @@ sub configure_krb5_for_AD {
  $uc_domain = {
   kdc = $authentication->{AD_server}:88
   admin_server = $authentication->{AD_server}:749
-  default_domain = $authentication->{DNS_domain}
+  default_domain = $authentication->{AD_domain}
  }
 EOF
 		    domain_realm => <<EOF,
- .$authentication->{DNS_domain} = $uc_domain
- $authentication->{DNS_domain} = $uc_domain
+ .$authentication->{AD_domain} = $uc_domain
+ $authentication->{AD_domain} = $uc_domain
 EOF
 		    kdc => <<'EOF',
  profile = /etc/kerberos/krb5kdc/kdc.conf
