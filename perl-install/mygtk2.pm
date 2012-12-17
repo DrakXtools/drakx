@@ -25,7 +25,7 @@ sub init() {
     Glib->enable_exceptions2;
 }
 init() unless $::no_ugtk_init;
-Gtk2->croak_execeptions if $::isInstall;
+Glib->enable_exceptions2 if $::isInstall;
 
 
 
