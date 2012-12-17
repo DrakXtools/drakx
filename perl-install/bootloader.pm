@@ -1961,9 +1961,13 @@ sub restore_previous_MBR_bootloader {
 sub install_grub2 {
     my ($bootloader, $_all_hds) = @_;
     my $error;
-    run_program::rooted($::prefix, 'grub2-install', '2>', \$error, $bootloader->{boot}) or die "grub2 failed: $error";
+    my $grub2_cfg = "/boot/grub2/grub.cfg";
+    if (!-s "$::prefix/$grub2_cfg") {
+	run_program::rooted($::prefix, 'grub2-mkconfig', '2>', \$error, '-o', $grub2_cfg) or die "grub2-mkconfig failed: $error";
+    }
+    run_program::rooted($::prefix, 'grub2-install', '2>', \$error, $bootloader->{boot}) or die "grub2-install failed: $error";
 }
-    
+
 sub install_grub {
     my ($bootloader, $all_hds) = @_;
 
