@@ -1468,7 +1468,7 @@ sub sync_flush {
 
 sub register_main_window {
     my ($w) = @_;
-    push @::main_windows, $::main_window = $w
+    push @::main_windows, $::main_window = $w;
 }
 
 sub may_destroy {
