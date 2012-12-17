@@ -22,7 +22,7 @@ sub init() {
         if_($::isRestore, 'draksnapshot'), if_($::isInstall, 'urpmi'),
         'drakx-net', 'drakx-kbd-mouse-x11', # shared translation
           @::textdomains;
-    Gtk2->croak_execeptions;
+    Glib->enable_exceptions2;
 }
 init() unless $::no_ugtk_init;
 Gtk2->croak_execeptions if $::isInstall;
