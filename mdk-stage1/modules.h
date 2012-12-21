@@ -27,7 +27,6 @@
 enum insmod_return { INSMOD_OK, INSMOD_FAILED, INSMOD_FAILED_FILE_NOT_FOUND };
 
 void init_modules_insmoding(void);
-void init_firmware_loader(void);
 
 int insmod(const char *filename, const char *options);
 int modprobe(const char *alias, const char *extra_options);

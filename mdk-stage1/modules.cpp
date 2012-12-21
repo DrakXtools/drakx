@@ -42,9 +42,6 @@
 #include "modules.h"
 #include "drvinst.h"
 
-#define UEVENT_HELPER_FILE "/sys/kernel/uevent_helper"
-#define UEVENT_HELPER_VALUE "/sbin/hotplug"
-
 struct module_descr_elem {
     char * modname;
     char * description;
@@ -282,17 +279,6 @@ static int load_modules_descriptions(void)
 	kmod_unref(ctx);
 
 	return 0;
-}
-
-void init_firmware_loader(void)
-{
-	int fd = open(UEVENT_HELPER_FILE, O_WRONLY|O_TRUNC, 0666);
-	if (!fd) {
-		log_message("warning, unable to set firmware loader");
-		return;
-	}
-	write(fd, UEVENT_HELPER_VALUE, strlen(UEVENT_HELPER_VALUE));
-	close(fd);
 }
 
 void init_modules_insmoding(void)

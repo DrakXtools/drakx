@@ -108,7 +108,7 @@ endif
 SERIAL_PROBE_SRC = serial.cpp serial_probe.cpp
 LOCAL_SRC += $(SERIAL_PROBE_SRC)
 
-BINS_SRC = drvinst.cpp probe-modules.cpp rescue-gui.cpp ldetect/lspcidrake.cpp hotplug.cpp consoletype.cpp
+BINS_SRC = drvinst.cpp probe-modules.cpp rescue-gui.cpp ldetect/lspcidrake.cpp consoletype.cpp
 LOCAL_SRC += $(BINS_SRC)
 
 FRONTEND_OBJS = $(subst .c,.o,$(FRONTEND_SRC))
@@ -159,7 +159,7 @@ STAGE1OBJS_FULL = $(subst .cpp,-FULL.o,$(STAGE1_ALLSRC))
 
 LOCALOBJS = $(subst .cpp,.o,$(LOCAL_SRC))
 
-ADD_BINS = dhcp-client rescue-gui probe-modules drvinst lspcidrake serial_probe hotplug consoletype
+ADD_BINS = dhcp-client rescue-gui probe-modules drvinst lspcidrake serial_probe consoletype
 
 BINS := stage1 $(ADD_BINS)
 

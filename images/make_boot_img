@@ -86,7 +86,7 @@ EOF
 	install -m755 "$stage1_root/stage1" -D "$tmp_initrd/sbin/stage1"
 
 	for hardlink in /bin/lspcidrake /bin/rescue-gui /sbin/drvinst \
-	    /sbin/probe-modules /usr/bin/serial_probe /hotplug /sbin/consoletype; do
+	    /sbin/probe-modules /usr/bin/serial_probe /sbin/consoletype; do
 	ln -v "$tmp_initrd/sbin/stage1" "$tmp_initrd$hardlink"
     done
 
