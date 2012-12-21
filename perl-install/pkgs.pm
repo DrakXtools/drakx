@@ -109,7 +109,7 @@ sub read_rpmsrate {
             $p = install::pkgs::packageByName($packages, $_) or next;
             if (my @l = map { /locales-(.*)/ ? qq(LOCALES"$1") : () } $p->requires_nosense) {
                 if (@l > 1) {
-                    log::l("ERROR: package $_ is requiring many locales") if $_ ne 'lsb';
+                    log::l("ERROR: package $_ is requiring many locales") if !member($_, qw(lsb libreoffice-langpack-br));
                 } else {
                     push @flags, @l;
                 }
