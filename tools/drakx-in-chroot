@@ -39,6 +39,8 @@ foreach (@ARGV) {
         $repository_uri = $1;
     } elsif (/--gdb/) {
         $wrapper = "gdb -q --args";
+    } elsif (/--strace/) {
+        $wrapper = "strace -e file";
     }
 }
 my ($repository_without_arch, $repository_arch) = basename($repository) eq arch() ? (dirname($repository), '/' . arch()) : ($repository, '');
