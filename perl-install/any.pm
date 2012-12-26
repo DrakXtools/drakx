@@ -685,7 +685,7 @@ You can create additional entries or change the existing ones."), [ {
         format => sub {
 	    my ($e) = @_;
 	    ref($e) ? 
-	      ($b->{default} eq $e->{label} ? "  *  " : "     ") . "$e->{label} ($e->{kernel_or_dev})" : 
+	      ($b->{default} eq $e->{label} ? "  *  " : "     ") . "$e->{label} ($e->{kernel_or_dev})" : 
 		translate($e);
 	}, list => $b->{entries},
     } ], Add => $Add, Modify => $Modify, Remove => $Remove, Up => $Up, Down => $Down)) {
