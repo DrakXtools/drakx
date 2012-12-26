@@ -80,8 +80,6 @@ sub laptop {
     #services::set_status("cpupower", $on_laptop);
     
 }
-    
-}
 
 sub cpupower() {
     require cpupower;
