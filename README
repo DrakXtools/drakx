@@ -1,0 +1,62 @@
+= Meta-task package =
+
+== rpmsrate ==
+
+'rpmsrate' file is used to 'define categories' of packages. In each categories
+there is a list of packages, with a weigth from 1 to 5. All packages with
+weight >= 3 will be installed by default.  Be sure to use the correct package
+name in rpmrate file, it's case sensitive.  Before adding a package, check it
+is not already present in the 'rpmsrate-raw' file, if already, try to use the
+previous definition, and if you can't, use the same weight.
+
+some syntax examples:
+  * !CAT_XFCE !CAT_KDE homebank
+    - install 'homebank' only if XFCE and KDE categories are not selected
+  * META_CLASS"powerpack"
+    - if you want to be able to install a package 'only' on a 'powerpack'
+  * CAT_KDE || CAT_GNOME || CAT_XFCE openoffice.org-openclipart
+    - install openoffice.org-openclipart if KDE, GNOME or XFCE are selected
+  * CAT_GNOME gnome-audio
+    - install gnome-audio if GNOME is selected
+  * !LIVE dasher
+    - if it is a liveCD 'don't install dasher'
+  * TYPE"64bit" DRIVER"^snd_" lib64alsa-plugins
+    - install lib64alsa-plugins if it is a '64bits box with sound'
+  * HW"ACR38" acr38u
+    - if 'ACR38 hardware' detected, 'install acr38u' package
+
+To convert an rpmsrate-raw to an rpmsrate you have to use 'clean-rpmsrate' from
+the mkcd package.  You 'must' do your 'change' in the 'rpmsrate-raw' file,
+because rpmsrate is generated using it.  The 'clean-rpmsrate' script will
+expande languages when needed and remove all comments.
+
+== check rpmsrate ==
+Before commiting your rpmsrate, please check it:
+
+$ perl -I /usr/lib/libDrakX -Mpkgs -e 'pkgs::read_rpmsrate_raw($ARGV[0])' PATH_TO_rpmsrate/rpmsrate
+
+error will be displayed. Common error are:
+  * a package listed twice in different categorie with different weight
+  * no weigth
+  * bad categories definition
+
+
+== compssUsers.pl ==
+
+This file describes wich categories will be displayed in the individual package
+installation step.  There is some check, to preselect some categories (laptop,
+server etc...).
+
+IE:
+--
+  { label => N_("Database"),
+    descr => N_("PostgreSQL or MySQL database server"),
+    flags => [ qw(DATABASES DATABASES_SERVER) ],
+    default_selected => 1,
+  },
+--
+
+The Database word will appear in the individual package selection. It will be
+selected by default, so according to flags: CAT_DATABASES CAT_DATABASES_SERVER
+will be selected by default in the rpmsrate.
+

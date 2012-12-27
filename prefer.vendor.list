@@ -1,0 +1,114 @@
+########## base ################################################################
+# webfetch
+curl
+
+# webclient
+lynx
+
+# bootloader
+grub
+
+# "Free" release (ie not PowerPack, Flash...)
+free-kde-config
+free-kde4-config
+mandriva-release-Free
+mandriva-theme-Free
+mandriva-theme-Free-screensaver
+mandriva-lxde-config-Free
+
+# vim
+vim-minimal
+
+# always prefer perl-base over weird packages auto-providing same modules (perl-PathTools, perl-Tk, , perl-PDL...)
+perl-base
+
+# libGL.so.1 (also provided by proprietary drivers)
+libmesagl1
+lib64mesagl1
+
+# prefer openssh-askpass over openssh-askpass-gnome (for keychain)
+openssh-askpass
+
+# python 2.6
+python
+
+########## multimedia ##########################################################
+# festival-voice
+festvox-kallpc16k
+
+# gnome-speech-driver
+gnome-speech-driver-espeak
+
+# esound
+pulseaudio-esound-compat
+
+# gst-install-plugins-helper
+codeina
+
+# libbaconvideowidget.so.0 (totem backend)
+libbaconvideowidget-gstreamer0
+lib64baconvideowidget-gstreamer0
+
+# phonon-backend
+phonon-gstreamer
+
+# amarok (KDE4 version)
+amarok
+
+# gimp 2.4 by default
+libgimp2.0_0
+lib64gimp2.0_0
+
+########## devel ###############################################################
+# xemacs-extras provides ctags, prefer simple ctags
+ctags
+
+# uClibc-devel provides a few things similar to glibc-devel
+glibc-devel
+
+# prefer gcc over gcc3.3
+# (gcc-cpp and gcc-c++ are no more needed, but keeping just in case)
+gcc-cpp
+gcc
+gcc-c++
+libstdc++-devel
+
+########## servers #############################################################
+# sendmail-command and mail-server
+postfix
+
+# apache
+apache-mpm-prefork
+
+# ftpserver
+proftpd
+
+# portmapper
+portmap
+
+# syslog-daemon
+sysklogd
+
+# vnc
+tigervnc
+
+########## various #############################################################
+# sane (also provided by saned)
+sane-backends
+
+# virtual-notification-daemon
+notification-daemon
+
+# sgml-tools
+# (the other choice is linuxdoc-tools which requires docbook-utils anyway)
+docbook-utils
+
+# input method
+scim-bridge
+
+# lxde session manager
+lxsession-lite
+
+# drupal database storage
+drupal-mysqli
+
