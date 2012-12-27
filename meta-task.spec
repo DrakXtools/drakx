@@ -41,7 +41,7 @@ install -d %{buildroot}%{_sysconfdir}/urpmi
 install -m644 %{SOURCE3} %{buildroot}%{_sysconfdir}/urpmi
 
 %check
-ERR=`./check-rpmsrate %{buildroot}%{_datadir}/%{name}/rpmsrate-raw 2>&1`
+ERR=`perl ./check-rpmsrate %{buildroot}%{_datadir}/%{name}/rpmsrate-raw 2>&1`
 [ -z "$ERR" ]
 
 %files
