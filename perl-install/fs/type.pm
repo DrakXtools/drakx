@@ -273,7 +273,7 @@ sub call_blkid {
 
     my %h = map {
 	if_(/(.*?)=(.*)/, $1 => $2);
-    } run_program::get_stdout_raw({ timeout => 30 }, 'blkid', '2>', '/dev/null', '-o', 'udev', '-p', devices::make($part->{device}));
+    } run_program::get_stdout_raw({ timeout => 30 }, 'blkid', '2>', '/dev/null', '-o', 'udev', devices::make($part->{device}));
 
     \%h;
 }
