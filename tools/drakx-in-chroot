@@ -90,7 +90,8 @@ sys("$sudo mount -t tmpfs none $SLASH_LOCATION/run");
 # - Ensure we mount the udev run dir for various extra metadata from udevadm
 # - If dracut has been used (and thus udev has yummy metadata) make sure
 #   drakx knows about it when running in the chroot
-foreach my $dir (qw(initramfs udev)) {
+# - Also speedup blkid by using its cache
+foreach my $dir (qw(initramfs udev blkid)) {
     next if !-d "/run/$dir";
     mkdir_p("$SLASH_LOCATION/run/$dir");
     sys("$sudo mount -o bind /run/$dir $SLASH_LOCATION/run/$dir");
@@ -193,7 +194,7 @@ sub create_initial_devices() {
 sub umount_all() {
     my $err;
     clean_stage2_updates();
-    my @procs = ('/proc', '/sys/kernel/debug', '/sys', '/run/udev', '/run/initramfs', '/run');
+    my @procs = ('/proc', '/sys/kernel/debug', '/sys', '/run/udev', '/run/blkid', '/run/initramfs', '/run');
     foreach ((map { "$prefix_ROOTED$_" } @procs, '/dev', ''), @procs, $LOOP_MOUNT_POINT, $MEDIA_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED) {
 	my $dir = "$SLASH_LOCATION$_";
 	if (!run("mountpoint -q $dir")) {
