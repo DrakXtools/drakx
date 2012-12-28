@@ -121,7 +121,7 @@ sub _launchX {
         }
 
         push @options, '-allowMouseOpenFail';
-	if (defined($f)) {
+        if (defined($f)) {
             push @options, '-xf86config', $f;
         }
         push @options, 'vt7', '-dpi', '75';
@@ -131,7 +131,7 @@ sub _launchX {
     if (!fork()) {
         c::setsid();
         system($server, @options);
-	c::_exit(1);
+        c::_exit(1);
     }
 
     #- wait for the server to start
@@ -165,8 +165,8 @@ sub _may_configure_framebuffer_640x480 {
     my ($o) = @_;
 
     if ($::rootwidth == 640 && !$o->{allowFB}) {
-	$o->{vga} = 785;
-	$o->{allowFB} = 1;
+        $o->{vga} = 785;
+        $o->{allowFB} = 1;
     }
 }
 
@@ -202,7 +202,7 @@ sub interactive_help_has_id {
 sub interactive_help_get_id {
     my ($_o, @l) = @_;
     @l = map { 
-	join("\n\n", map { s/\n/ /mg; $_ } split("\n\n", translate($install::help::help::{$_}->())));
+    join("\n\n", map { s/\n/ /mg; $_ } split("\n\n", translate($install::help::help::{$_}->())));
     } grep { exists $install::help::help::{$_} } @l;
     join("\n\n\n", @l);
 }

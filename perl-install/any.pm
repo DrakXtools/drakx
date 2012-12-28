@@ -1227,7 +1227,7 @@ sub selectCountry {
     $in->ask_from_(
 		  { title => N("Country / Region"), 
 		    messages => N("Please choose your country"),
-		    interactive_help_id => 'misc-params.html#drakxid-selectCountry',
+		    interactive_help_id => 'selectCountry.html',
 		    if_(@best, advanced_messages => N("Here is the full list of available countries")),
 		    advanced_label => @best ? N("Other Countries") : N("Advanced"),
 		  },
@@ -1545,7 +1545,7 @@ sub configure_time_more {
     my $tz_prefix = timezone::get_timezone_prefix();
     local $ENV{TZ} = ':' . $tz_prefix . '/' . $timezone->{timezone};
 
-    $in->ask_from_({ interactive_help_id => 'misc-params#drakxid-configureTimezoneGMT',
+    $in->ask_from_({ interactive_help_id => 'configureTimezoneUTC',
                        title => N("Date, Clock & Time Zone Settings"), 
                  }, [
 	  { label => N("Date, Clock & Time Zone Settings"), title => 1 },
