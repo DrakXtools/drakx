@@ -52,6 +52,9 @@ endif
 
 #- flags used by all stuff
 CXXFLAGS = $(OPTFLAGS) -pipe -Wall -Werror=strict-aliasing -Wstrict-aliasing=2 -std=gnu++11
+ifeq (uclibc, $(LIBC))
+CXXFLAGS += -fno-rtti -fno-exceptions
+endif
 WHOLEFLAGS = -Os -fwhole-program -flto
 
 ifneq (ppc, $(ARCH))
