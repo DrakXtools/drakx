@@ -14,6 +14,7 @@ use devices;
 use run_program;
 use modules;
 use c;
+use LDetect;
 use feature 'state';
 
 #-#####################################################################################
@@ -853,7 +854,7 @@ sub pci_probe__real() {
 	$l{bus} = 'PCI';
 	$l{sysfs_device} = '/sys/bus/pci/devices/' . get_pci_sysfs_path(\%l);
 	\%l;
-    } c::pci_probe());
+    } LDetect::pci_probe());
 }
 sub pci_probe() {
     state $done;
@@ -877,7 +878,7 @@ sub usb_probe__real() {
 	$l{sysfs_device} = "/sys/bus/usb/devices/$l{pci_bus}-" . ($l{usb_port} + 1);
 	$l{bus} = 'USB';
 	\%l;
-    } c::usb_probe());
+    } LDetect::usb_probe());
 }
 sub usb_probe() {
     if ($::isStandalone && @usb) {
@@ -969,7 +970,7 @@ sub dmi_probe() {
     }
     $dmi_probe ||= [ map {
 	/(.*?)\t(.*)/ && { bus => 'DMI', driver => $1, description => $2 };
-    } $> ? () : c::dmi_probe() ];
+    } $> ? () : LDetect::dmi_probe() ];
     @$dmi_probe;
 }
 

@@ -51,8 +51,6 @@ typedef __uint8_t u8;
 # define HID_MAX_USAGES 1024
 #include <linux/hiddev.h>
 
-#include <libldetect.h>
-
 #include <string.h>
 
 #define SECTORSIZE 512
@@ -243,66 +241,6 @@ _exit(status)
 void
 usleep(microseconds)
   unsigned long microseconds
-
-
-char*
-get_pci_description(int vendor_id,int device_id)
-
-void
-pci_probe()
-  PPCODE:
-    //proc_pci_path = "/tmp/pci";
-    struct pciusb_entries entries = pci_probe();
-    char buf[2048];
-    int i;
-
-    EXTEND(SP, entries.nb);
-    for (i = 0; i < entries.nb; i++) {
-      struct pciusb_entry *e = &entries.entries[i];
-      snprintf(buf, sizeof(buf), "%04x\t%04x\t%04x\t%04x\t%d\t%d\t%d\t%d\t%d\t%d\t%s\t%s\t%s\t%s", 
-               e->vendor, e->device, e->subvendor, e->subdevice, e->pci_domain, e->pci_bus,
-               e->pci_device, e->pci_function, e->pci_revision, e->is_pciexpress,
-               pci_class2text(e->class_id), e->class, e->module ? e->module : "unknown", e->text);
-      PUSHs(sv_2mortal(newSVpv(buf, 0)));
-    }
-    pciusb_free(&entries);
-
-void
-usb_probe()
-  PPCODE:
-    struct pciusb_entries entries = usb_probe();
-    char buf[2048];
-    int i;
-
-    EXTEND(SP, entries.nb);
-    for (i = 0; i < entries.nb; i++) {
-      struct pciusb_entry *e = &entries.entries[i];
-      struct usb_class_text class_text = usb_class2text(e->class_id);
-      snprintf(buf, sizeof(buf), "%04x\t%04x\t%s|%s|%s\t%s\t%s\t%d\t%d\t%d", 
-               e->vendor, e->device, class_text.usb_class_text, class_text.usb_sub_text,
-               class_text.usb_prot_text, e->module ? e->module : "unknown", e->text,
-               e->pci_bus, e->pci_device, e->usb_port);
-      PUSHs(sv_2mortal(newSVpv(buf, 0)));
-    }
-    pciusb_free(&entries);
-
-void
-dmi_probe()
-  PPCODE:
-    //dmidecode_file = "/usr/share/ldetect-lst/dmidecode.Laptop.Dell-Latitude-C810";
-    //dmidecode_file = "../../soft/ldetect-lst/test/dmidecode.Laptop.Sony-Vaio-GRX316MP";
-
-    struct dmi_entries entries = dmi_probe();
-    char buf[2048];
-    int i;
-
-    EXTEND(SP, entries.nb);
-    for (i = 0; i < entries.nb; i++) {
-      snprintf(buf, sizeof(buf), "%s\t%s", 
-               entries.entries[i].module, entries.entries[i].constraints);
-      PUSHs(sv_2mortal(newSVpv(buf, 0)));
-    }
-    dmi_entries_free(entries);
 
 
 unsigned int
