@@ -437,8 +437,8 @@ sub alert_config() {
                                    N("Please enter your email address below ") . "\n" .
                                    N("and enter the name (or the IP) of the SMTP server you wish to use"),
                                    data => [
-                                            { label => "Email address", val => \$options{MAIL} },
-                                            { label => "Email server", val => \$options{SMTP} },
+                                            { label => N("Email address"), val => \$options{MAIL} },
+                                            { label => N("Email server"), val => \$options{SMTP} },
                                            ],
                                    complete => sub {
                                        if ($options{MAIL} !~ /[\w.-]*\@[\w.-]/ && !member($options{MAIL}, map { $_->[0] } list_passwd())) {
