@@ -200,8 +200,8 @@ sub dorepl_new {
 }
 
 sub dorepl {
-    s/gtkdestroy\(/mygtk2::may_destroy(/ ||
-    s/gtkset_background\(/mygtk2::set_root_window_background(/ ||
+    s/gtkdestroy\(/mygtk3::may_destroy(/ ||
+    s/gtkset_background\(/mygtk3::set_root_window_background(/ ||
     s/gtkset_tip\($re,\s*($re),\s*($re)\)/gtkset($1, tip => $2)/ ||
     s/gtkset_size_request\(($re),\s*($re), ($re)\)/"gtkset($1" . ($2 && $2 ne '-1' ? ", width => $2" : '') . ($3 && $3 ne '-1'  ? ", height => $3" : '') . ')'/e ||
     s/gtkset_(modal)\(($re),\s*($re)\)/gtkset($2, $1 => $3)/ ||

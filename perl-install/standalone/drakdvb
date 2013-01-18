@@ -31,7 +31,7 @@ my $title = N("DVB");
 $ugtk2::wm_icon = "/usr/share/mcc/themes/default/tv-mdk.png";
 my $w = ugtk2->new($title);
 $w->{window}->signal_connect('destroy' => \&exitapp);
-mygtk2::register_main_window($w->{real_window});
+mygtk3::register_main_window($w->{real_window});
 my $in = 'interactive'->vnew;
 
 my $config_file = "$ENV{HOME}/.mplayer/channels.conf";

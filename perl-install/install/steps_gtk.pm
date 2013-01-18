@@ -279,17 +279,17 @@ sub reallyChooseDesktop {
 
                 my $wp = ugtk2->new($title{$val->[0]}, transient => $w->{real_window}, modal => 1);
                 gtkadd($wp->{rwindow},
-                       gtkpack_(Gtk2::VBox->new,
+                       gtknew('VBox', children => [
                                 0, gtknew('Title2', label => N("Here's a preview of the '%s' desktop.", $val->[1]),
                                           # workaround infamous 6 years old gnome bug #101968:
                                           width => mygtk2::get_label_width(), 
                                       ),
                                 1, gtknew('Image', file => "desktop-$val->[0]-big"),
-                                0, Gtk2::HSeparator->new,
-                                0, gtkpack(create_hbox('end'),
+                                0, gtknew('HSeparator'),
+                                0, gtknew('HButtonBox', layout => 'end', children_loose => [
                                            gtknew('Button', text => N("Close"), clicked => sub { Gtk2->main_quit })
-                                       ),
-                            ),
+                                       ]),
+                            ]),
                    );
                 $wp->{real_window}->set_size_request(-1, -1);
                 $wp->{real_window}->grab_focus;
@@ -350,7 +350,7 @@ sub reallyChooseGroups {
                         0, gtknew('CheckButton', text => N("Individual package selection"), active_ref => $individual),
                     ),
 		    0, $w_size,
-		    0, Gtk2::HSeparator->new,
+		    0, gtknew('HSeparator'),
 		    0, gtknew('HButtonBox', layout => 'edge', children_tight => [
                         gtknew('Install_Button', text => N("Help"), clicked => sub {
                                    interactive::gtk::display_help($o, { interactive_help_id => 'choosePackageGroups' }) }),
