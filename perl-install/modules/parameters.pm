@@ -13,10 +13,6 @@ use modules;
 sub parameters {
   my ($module) = @_;
 
-  if (!$::isStandalone && !$::testing) {
-      ($module) = modules::extract_modules('/tmp', $module);
-  }
-
   map {
       chomp;
       (my $name, $_) = /(\w+):(.*)/s or warn "modules::parameters::parameters($module): unknown line\n";

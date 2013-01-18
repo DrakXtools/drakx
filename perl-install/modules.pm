@@ -90,8 +90,6 @@ sub load_raw {
 
     if ($::testing || $::local_install) {
 	log::l("i would load module $_ ($h_options->{$_})") foreach @$l;
-    } elsif ($::isInstall) {
-	load_raw_install($l, $h_options);
     } else {
 	run_program::run('/sbin/modprobe', $_, split(' ', $h_options->{$_})) 
 	  or !run_program::run('/sbin/modprobe', '-n', $_) #- ignore missing modules
@@ -303,58 +301,6 @@ sub when_load_category {
         my @modules = ('mmc_block', if_($name =~ /tifm_7xx1/, 'tifm_sd'));
         $conf->set_above($name, join(' ', @modules));
     }
-}
-
-#-###############################################################################
-#- isInstall functions
-#-###############################################################################
-sub module_extension() { ".ko" }
-
-sub extract_modules {
-    my ($dir, @modules) = @_;
-    map {
-	my $modname = $_;
-	my $path = list_modules::modname2path($modname);
-	my $f = $modname . module_extension();
-	my $extension = module_extension();
-	if (-e $path) {
-	    if ($path =~ /\.gz$/) { 
-	    	system("gzip -dc $path > $dir/$f 2>/dev/null") == 0 or unlink "$dir/$f";
-	    } elsif ($path =~ /\.xz$/) {
-	        system("xz -d < $path > $dir/$f") == 0 or unlink "$dir/$f";
-	    } else {
-	    	system("cp $path $dir/$f") == 0 or unlink "$dir/$f";
-	    }
-	} else {
-	    log::l("warning: unable to get module filename for $modname (path: $path)");
-	}
-	"$dir/$f";
-    } @modules;
-}
-
-sub load_raw_install {
-    my ($l, $options) = @_;
-
-    extract_modules('/tmp', @$l);
-    my @failed = grep {
-	my $m = '/tmp/' . $_ . module_extension();
-	if (-e $m) {
-            my $stdout;
-            my $rc = run_program::run('/sbin/insmod', '2>', \$stdout, $m, split(' ', $options->{$_}));
-            log::l(chomp_($stdout)) if $stdout;
-            # if whether we succeeded or module is already loaded:
-            if ($rc || $stdout =~ /: -1 File exists/) {
-                unlink $m;
-                '';
-            }
-	} else {
-	    log::l("missing module $_");
-	    'error';
-	}
-    } @$l;
-
-    die "insmod'ing module " . join(", ", @failed) . " failed" if @failed;
-
 }
 
 1;
