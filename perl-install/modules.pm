@@ -111,7 +111,7 @@ sub load_with_options {
     my @l = map {
 	if_(member($_, 'plip', @parallel_zip_modules), 'parport_pc'),
 	if_($_ eq 'vfat', 'nls_cp437', 'nls_iso8859_1'),
-	if_($_ eq 'btrfs', 'crc32c', 'crc32c-intel'),
+	if_(member($_, qw(btrfs xfs)), 'crc32c', 'crc32c-intel'),
 	dependencies_closure(cond_mapping_24_26($_));
     } @$l;
 
