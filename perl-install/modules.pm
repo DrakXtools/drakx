@@ -110,7 +110,7 @@ sub load_with_options {
 	if_(member($_, 'plip', @parallel_zip_modules), 'parport_pc'),
 	if_($_ eq 'vfat', 'nls_cp437', 'nls_iso8859_1'),
 	if_(member($_, qw(btrfs xfs)), 'crc32c', 'crc32c-intel'),
-	dependencies_closure(cond_mapping_24_26($_));
+	cond_mapping_24_26($_);
     } @$l;
 
     @l = filter_out_loaded_modules(@l) or return;
@@ -127,7 +127,7 @@ sub load {
 sub load_and_configure {
     my ($conf, $module, $o_options) = @_;
 
-    my @l = filter_out_loaded_modules(dependencies_closure(cond_mapping_24_26($module)));
+    my @l = filter_out_loaded_modules(cond_mapping_24_26($module));
     load_raw(\@l, { cond_mapping_24_26($module) => $o_options });
 
     if (member($module, @parallel_zip_modules)
