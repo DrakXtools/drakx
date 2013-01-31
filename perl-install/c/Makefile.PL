@@ -6,7 +6,7 @@ use Config;
 
 my $lib = arch() =~ /x86_64/ ? 'lib64' : 'lib';
 
-my $libs = '-lldetect -lparted';
+my $libs = '-lparted';
 
 my $pcmcia_probe_o = "/usr/$lib/drakx-installer/binaries/pcmcia_probe.o";
 
