@@ -41,6 +41,8 @@ extern int yyparse(void); /* mdk-stage1 */
 char *current_file;
 int current_lineno;
 
+static int lex_number(const char *s);
+static int lex_string(const char *s);
 static void do_source(char *fn);
 static int do_eof(void);
 
@@ -67,6 +69,12 @@ port		return PORT;
 memory		return MEMORY;
 module		/* skip */ ;
 
+{int}		return lex_number(yytext);
+
+{hex}		return lex_number(yytext);
+
+{str}		return lex_string(yytext);
+
 .		return yytext[0];
 
 %%
@@ -81,7 +89,20 @@ int yywrap() { return 1; }
 
 ======================================================================*/
 
-
+static int lex_number(const char *s)
+{
+    yylval.num = strtoul(s, NULL, 0);
+    return NUMBER;
+}
+ 
+static int lex_string(const char *s)
+{
+    int n = strlen(s);
+    yylval.str = malloc(n-1);
+    strncpy(yylval.str, s+1, n-2);
+    yylval.str[n-2] = '\0';
+    return STRING;
+}
 
 /*======================================================================
 
