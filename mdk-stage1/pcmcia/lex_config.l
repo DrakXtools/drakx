@@ -1,5 +1,6 @@
 /* Special state for handling include files */
 %x src
+%option noinput nounput
 
 %{
 /*
@@ -33,8 +34,6 @@
 
 #include "yacc_config.h"
 
-#define YY_NO_INPUT 1 /* mdk-stage1 */
-#define YY_NO_UNPUT 1 /* mdk-stage1 */
 extern int yyparse(void); /* mdk-stage1 */
 
 /* For assembling nice error messages */

@@ -31,7 +31,6 @@ INCLUDES += -I$(top_dir)
 
 # (blino) make sure yynewerror and yyerrlab are uselessly used
 INCLUDES += -Dlint
-LFLAGS += --nounput
 
 OBJS = probe.o startup.o yacc_config.o lex_config.o
 
