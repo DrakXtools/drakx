@@ -98,7 +98,7 @@ static int lex_number(const char *s)
 static int lex_string(const char *s)
 {
     int n = strlen(s);
-    yylval.str = malloc(n-1);
+    yylval.str = reinterpret_cast<char*>(malloc(n-1));
     strncpy(yylval.str, s+1, n-2);
     yylval.str[n-2] = '\0';
     return STRING;
