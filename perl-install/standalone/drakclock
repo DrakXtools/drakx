@@ -82,7 +82,7 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
                                                                                                 }),
                                                                            0, $hb_ntp = gtknew('HBox', border_width => 5, children => [
                                                                                        0, gtknew('Label', text => N("Server:")),
-                                                                                       1, $combo_ntpserver = Gtk3::Combo->new
+                                                                                       1, $combo_ntpserver = Gtk3::ComboBox->new
                                                                                       ])
                                                                           ]))
                                                        ]),
