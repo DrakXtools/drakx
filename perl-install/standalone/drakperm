@@ -103,8 +103,6 @@ $permList->signal_connect(button_press_event => sub {
                  });
 
 
-my $tips = Gtk3::Tooltips->new;
-
 $W->add(gtknew('VBox', spacing => 5, children => [
     if_(!$::isEmbedded, 0, Gtk3::Banner->new('/usr/share/mcc/themes/default/drakperm-mdk.png', N("Permissions"))),
                  0, gtknew('Label_Left', text => N("Here you can see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will overwrite the default rules."), alignment => [ 0.5, 0 ]),
@@ -118,7 +116,7 @@ Select permissions to see/edit", $level), alignment => [ 0, 0 ]),
                                     1, gtknew('ScrolledWindow', child => $permList),
                                     0, my $up_down_box = gtknew('HBox', spacing => 5, children_loose => [ @buttons =
                                                                 map {
-                                                                    gtkset_tip($tips, 
+                                                                    gtkset_tip(
                                                                                gtknew('Button', text => $_->[0], clicked => $_->[2]),
                                                                                $_->[1]);
                                                                 } ([ N("Up"), N("Move selected rule up one level"), sub { move_callback('up') } ], 
@@ -292,7 +290,7 @@ sub row_setting_dialog {
                         ]
                        );
 
-    my $usr_check = gtksignal_connect(gtkset_tip($tips, gtknew('CheckButton', text => N("Current user")),
+    my $usr_check = gtksignal_connect(gtkset_tip(gtknew('CheckButton', text => N("Current user")),
                                                  N("When checked, owner and group will not be changed")),
                                       clicked => sub { $id_box->set_sensitive(!$_[0]->get_active) });
      
@@ -343,8 +341,7 @@ sub row_setting_dialog {
                                                      map {
                                                          my $c = $_;
                                                          my $active = $perms{$owner}{$c};
-                                                         $perms{$owner}{$c} = gtknew('CheckButton');
-                                                         $tips->set_tip($perms{$owner}{$c},
+                                                         $perms{$owner}{$c} = gtkset_tip(gtknew('CheckButton'),
                                                                         $checks{$c}{tip}{$owner},
                                                                        );
                                                          gtkset_active($perms{$owner}{$c}, $active);

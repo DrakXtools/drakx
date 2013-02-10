@@ -46,7 +46,6 @@ sub create_boxradio {
 
     my $boxradio = gtkpack2__(Gtk3::VBox->new,
 			      my @radios = gtkradio('', @{$e->{formatted_list}}));
-    my $tips = Gtk3::Tooltips->new;
     mapn {
 	my ($txt, $w) = @_;
 	# workaround infamous 6 years old gnome bug #101968:
@@ -59,7 +58,7 @@ sub create_boxradio {
 	    $onchange_f->(sub { $txt });
 	});
 	if ($e->{help}) {
-	    gtkset_tip($tips, $w,
+	    $w->set_tooltip_text(
 		       ref($e->{help}) eq 'HASH' ? $e->{help}{$txt} :
 		       ref($e->{help}) eq 'CODE' ? $e->{help}($txt) : $e->{help});
 	}
@@ -750,9 +749,8 @@ sub create_widgets {
 
     my $box = create_widgets_block($o, $common, $l, $update, \$ignore);
 
-    my $tooltips = Gtk3::Tooltips->new;
     foreach my $e (@all) {
-	$tooltips->set_tip($e->{w}, $e->{help}) if $e->{help} && !ref($e->{help});
+	$e->{w}->set_tooltip_text($e->{help}) if $e->{help} && !ref($e->{help});
     }
 
     $box, $set_all;

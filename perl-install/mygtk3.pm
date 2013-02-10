@@ -97,8 +97,6 @@ sub gtkval_modify {
     }
 }
 
-my $global_tooltips;
-
 sub _gtk {
     my ($w, $class, $action, $opts) = @_;
 
@@ -122,8 +120,7 @@ sub _gtk {
     $w->signal_connect(realize => delete $opts->{realize}) if exists $opts->{realize};
     (delete $opts->{size_group})->add_widget($w) if $opts->{size_group};
     if (my $tip = delete $opts->{tip}) {
-	$global_tooltips ||= Gtk3::Tooltips->new;
-	$global_tooltips->set_tip($w, $tip);
+	$w->set_tooltip_text($tip);
     }
 
     #- WARNING: hide_ref and show_ref are not effective until you gtkval_modify the ref

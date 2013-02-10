@@ -78,7 +78,7 @@ sub gtkset_mousecursor_wait   { gtkset_mousecursor('watch', @_) }
 sub gtkset_relief             { $_[0]->set_relief($_[1]); $_[0] }
 sub gtkset_sensitive          { $_[0]->set_sensitive($_[1]); $_[0] }
 sub gtkset_visibility         { $_[0]->set_visibility($_[1]); $_[0] }
-sub gtkset_tip                { $_[0]->set_tip($_[1], $_[2]) if $_[2]; $_[1] }
+sub gtkset_tip                { $_[0]->set_tooltip_text($_[1]) if $_[1]; $_[0] }
 sub gtkset_shadow_type        { $_[0]->set_shadow_type($_[1]); $_[0] }
 sub gtkset_style              { $_[0]->set_style($_[1]); $_[0] }
 sub gtkset_size_request       { $_[0]->set_size_request($_[1], $_[2]); $_[0] }
