@@ -1456,7 +1456,7 @@ sub sync {
 }
 
 sub flush() { 
-    Gtk3->main_iteration while Gtk3->events_pending;
+    Gtk3::main_iteration() while Gtk3::events_pending();
 }
 
 sub enable_sync_flush {
