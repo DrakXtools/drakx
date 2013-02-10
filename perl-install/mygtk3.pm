@@ -1489,7 +1489,7 @@ sub may_destroy {
 
 sub root_window() {
     state $root;
-    $root ||= Gtk3::Gdk->get_default_root_window;
+    $root ||= Gtk3::Gdk::get_default_root_window();
 }
 
 sub rgb2color {
