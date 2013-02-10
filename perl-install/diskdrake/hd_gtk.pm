@@ -412,7 +412,7 @@ sub filesystems_button_box() {
                   my $w = gtknew('Button', text => translate($_), widget_name => 'PART_' . ($t || 'empty'),
                                  tip => N("Filesystem types:"),
                                  clicked => sub { try_('', \&createOrChangeType, $t, current_hd(), current_part()) });
-		  $w->can_focus(0);
+		  $w->set_can_focus(0);
 		  $w;
 	    } @types);
 }

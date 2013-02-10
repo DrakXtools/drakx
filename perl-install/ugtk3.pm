@@ -344,7 +344,7 @@ sub create_box_with_title {
 	$wtext->set_justification('fill');
 	$wtext->set_left_margin(12);
 	$wtext->set_right_margin(12);
-	$wtext->can_focus($has_scroll);
+	$wtext->set_can_focus($has_scroll);
 	my $width = 400;
 	my $scroll = gtknew('ScrolledWindow', child => $wtext, width => $width, height => 200);
 	$scroll->signal_connect(realize => sub {

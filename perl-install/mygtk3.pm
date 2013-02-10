@@ -113,7 +113,7 @@ sub _gtk {
 	$w->move($position->[0], $position->[1]);
     }
     $w->set_name(delete $opts->{widget_name}) if exists $opts->{widget_name};
-    $w->can_focus(delete $opts->{can_focus}) if exists $opts->{can_focus};
+    $w->set_can_focus(delete $opts->{can_focus}) if exists $opts->{can_focus};
     $w->set_can_default(delete $opts->{can_default}) if exists $opts->{can_default};
     $w->grab_focus if delete $opts->{grab_focus};
     $w->set_padding(@{delete $opts->{padding}}) if exists $opts->{padding};
