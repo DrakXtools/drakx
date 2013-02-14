@@ -271,6 +271,7 @@ sub fs_type_from_magic {
 sub call_blkid {
     my ($part) = @_;
 
+    # IMPORTANT: Always use the -p argument with blkid. See r7324 commit msg
     my %h = map {
 	if_(/(.*?)=(.*)/, $1 => $2);
     } run_program::get_stdout_raw({ timeout => 30 }, 'blkid', '2>', '/dev/null', '-o', 'udev', '-p', devices::make($part->{device}));
