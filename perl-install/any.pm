@@ -453,6 +453,14 @@ sub setupBootloader__general {
 	$in->ask_from_({ #messages => N("Bootloader main options"),
 			 title => N("Bootloader main options"),
 			 interactive_help_id => 'setupBootloader',
+			 validate => sub {
+				 if ($b->{method} eq 'grub2' && $b->{boot} =~ /\d$/) {
+				     log::l("Impossible to install Grub2 on something else than a MBR.\nWe should chain load grub2 when not on MBR");
+				     $in->ask_warn(N("Error"), N("Grub2 cannot be installed on a partition, only on the MBR (whole disk)"));
+				     return 0;
+				 }
+				 return 1;
+			 },
 		       }, [
 			 #title => N("Bootloader main options"),
             { label => N("Bootloader"), title => 1 },
