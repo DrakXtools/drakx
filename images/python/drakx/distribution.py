@@ -72,9 +72,9 @@ class Distribution(object):
 
         my $dep;
         foreach my $pkg (@$choices) {
-            print "\033[0mchoice: " . $pkg->fullname();
+            print "\033[0mchoice($virtual_pkg_name): " . $pkg->fullname();
             if (grep { $_ eq $pkg->name() } @excludes) {
-            print ": \033[33m\033[49m\033[2mexcluded\n";
+                print ": \033[33m\033[49m\033[2mexcluded\n";
                 next;
             }
 
@@ -90,7 +90,11 @@ class Distribution(object):
         }
         print "\033[0m";
 
-        $state_->{selected}{$dep->id} = 1;
+        if (defined($dep)) {
+            $state_->{selected}{$dep->id} = 1;
+        } else {
+                 print "choice($virtual_pkg_name): \033[33m\033[49m\033[2mnone chosen!\n";
+        }
         }""")
 
         def search_pkgs(deps):
