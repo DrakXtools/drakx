@@ -547,7 +547,7 @@ sub suggest_onmbr {
     if (my $type = partition_table::raw::typeOfMBR($hd->{device})) {
 	if (member($type, qw(dos dummy empty))) {
 	    $unsafe = 0;
-	} elsif (!member($type, qw(lilo grub))) {
+	} elsif (!member($type, qw(lilo grub grub2))) {
 	    $onmbr = 0;
 	}
 	log::l("bootloader::suggest_onmbr: type $type, onmbr $onmbr, unsafe $unsafe");
