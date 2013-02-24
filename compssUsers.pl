@@ -6,6 +6,7 @@ my $low_resources = detect_devices::has_low_resources();
 my $netbook_desktop = detect_devices::is_netbook_nettop();
 my $light_desktop = detect_devices::need_light_desktop();
 my $meta_class = $::o->{meta_class};
+my $light = $meta_class eq 'light';
 my $powerpack = $meta_class eq 'powerpack';
 my $server = $meta_class eq 'server';
 
@@ -20,8 +21,9 @@ N_("Workstation") =>
   },
   if_(!$server,
   { label => N_("Game station"),
-    descr => N_("Amusement programs: arcade, boards, strategy, etc"),
+    descr => N_("Amusement programs: arcade, boards, strategy, etc."),
     flags => [ qw(GAMES) ], 
+    default_selected => 1,
   },
   { label => N_("Multimedia station"),
     descr => N_("Sound and video playing/editing programs"),
@@ -29,6 +31,11 @@ N_("Workstation") =>
     default_selected => 1,
   },
   ),
+  { label => N_("Toys"),
+    descr => N_("Apps and tools of less useful value, yet entertaining..."),
+    flags => [ qw(TOYS) ],
+    default_selected => 1,
+  },
   { label => N_("Internet station"),
     descr => N_("Set of tools to read and send mail and news (mutt, tin..) and to browse the Web"),
     flags => [ qw(NETWORKING_WWW NETWORKING_MAIL NETWORKING_NEWS COMMUNICATIONS NETWORKING_CHAT NETWORKING_FILE_TRANSFER NETWORKING_IRC NETWORKING_INSTANT_MESSAGING NETWORKING_DNS) ],
@@ -66,6 +73,7 @@ N_("Workstation") =>
   ),
 ],
 
+if_(!$light,
 N_("Server") =>
 [
   $server ? (
@@ -128,9 +136,12 @@ N_("Server") =>
   },
   ),
 ],
+),
 
 N_("Graphical Environment") => 
 [
+
+  if_(!$light,
   { label => N_("KDE Workstation"),
     descr => N_("The K Desktop Environment, the basic graphical environment with a collection of accompanying tools"),
     flags => [ qw(KDE X ACCESSIBILITY THEMES) ],
@@ -141,15 +152,18 @@ N_("Graphical Environment") =>
     flags => [ qw(GNOME X THEMES), if_(!$light_desktop, qw(ACCESSIBILITY)) ],
     default_selected => $netbook_desktop,
   },
+  ),
   { label => N_("LXDE Desktop"),
     flags => [ qw(LXDE X ACCESSIBILITY) ], 
     descr => N_("A lightweight & fast graphical environment with user-friendly set of applications and desktop tools"),
-    default_selected => $low_resources,
+    default_selected => $low_resources || $light,
   },
+  if_(!$light,
   { label => N_("Other Graphical Desktops"),
     descr => N_("Window Maker, Enlightenment, Fvwm, etc"),
     flags => [ qw(GRAPHICAL_DESKTOP X ACCESSIBILITY E17) ], 
   },
+  ),
 ],
 
 if_($server,
@@ -238,7 +252,7 @@ my $gtk_display_compssUsers = sub {
 				      $entries_in_path->('Development'),
 				      $entries_in_path->('Utilities'),
 				    ) : (
-				      $entries_in_path->('Server'),
+				      $light ? () : $entries_in_path->('Server'),
 				      $entries_in_path->('Graphical Environment'),
                                     ),
 	    );

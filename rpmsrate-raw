@@ -17,11 +17,18 @@ CAT_LSB
   5 CAT_KDE lsb-qt4
 
 CAT_LXDE
-  5 task-lxde
-  4 halevt halevt-user
-  4 META_CLASS"download" mandriva-lxde-config-Free
-  4 META_CLASS"desktop" mandriva-lxde-config-One
-  4 META_CLASS"powerpack" mandriva-lxde-config-Powerpack
+  5 task-lxde mandriva-lxde-config
+  5 lxdm
+  4 lxrandr lxinput lxlauncher lxmenu-data
+  4 lxde-icon-theme lxmusic lxnm lxpanel
+  4 lxpolkit lxsession-edit
+  4 elementary-icons elementary-theme
+  # these are suggests of task-lxde
+  4 gpicview leafpad lxtask lxrandr scrot xmessage parcellite volumeicon catfish fskbsetting
+  3 lxpanelx
+
+CAT_TOYS
+  5 linux_logo
 
 CAT_GRAPHICAL_DESKTOP
   4 WindowMaker
@@ -73,7 +80,7 @@ CAT_XFCE
   5 thunar-archive-plugin thunar-thumbnailers
   5 gigolo xfswitch-plugin xfce4-screenshooter
   4 CAT_THEMES xfwm4-themes xfce4-artwork
-  4 META_CLASS"download" mandriva-xfce-config-Free
+  4 META_CLASS"download" || META_CLASS"light" mandriva-xfce-config-Free
   4 META_CLASS"desktop" mandriva-xfce-config-One
   4 META_CLASS"powerpack" mandriva-xfce-config-Powerpack
   2 task-xfce-plugins
@@ -198,9 +205,10 @@ CAT_EDUCATION
   4 CAT_KDE kdeedu4-core
 
 CAT_EDITORS
+  5 CAT_LXDE vim-x11
   4 !CAT_GNOME !CAT_KDE !CAT_XFCE CAT_X emacs
   4 !CAT_X emacs-nox
-  3 CAT_X vim-X11
+  3 !CAT_LXDE CAT_X vim-X11
   3 yudit
   2 poedit
   2 cooledit emacs-tramp emacs-leim jed-xjed joe nedit xemacs xemacs-extras
@@ -271,7 +279,7 @@ CAT_NETWORKING_INSTANT_MESSAGING
   3 ayttm
 
 CAT_NETWORKING_IRC
-  5 CAT_XFCE xchat
+  5 CAT_XFCE || CAT_LXDE xchat
   5 CAT_KDE konversation
   4 CAT_GNOME xchat-gnome
   3 irssi
@@ -378,7 +386,7 @@ CAT_NETWORKING_WWW
   5 CAT_VIDEO !CAT_GNOME !CAT_KDE CAT_XFCE mplayerplugin
   5 CAT_VIDEO CAT_GNOME || CAT_KDE totem-mozilla
   5 META_CLASS"powerpack" flashplayer
-  5 META_CLASS"powerpack" || META_CLASS"deskt:p" flashplayer-plugin
+  5 META_CLASS"powerpack" || META_CLASS"desktop" flashplayer-plugin
   # java browser plugin
   5 icedtea-web
   5 lightspark-mozilla-plugin lightspark-pulse
@@ -456,6 +464,7 @@ CAT_DATABASES
     1 mysql-bench libmysql-devel
 
 CAT_GAMES
+  5 digger
   5 frozen-bubble
   5 lbreakout2
   5 supertux
@@ -648,7 +657,7 @@ CAT_X
     LOCALES"zh_TW" LIVE fonts-ttf-wqy-microhei
     LOCALES"zh_TW" !LIVE fonts-ttf-chinese
   5 CAT_THEMES mandriva-gfxboot-theme
-  4 META_CLASS"download" mandriva-theme-Free mandriva-theme-Free-screensaver
+  4 META_CLASS"download" || META_CLASS"light" mandriva-theme-Free mandriva-theme-Free-screensaver
   4 META_CLASS"desktop" mandriva-theme-One mandriva-theme-One-screensaver
   4 META_CLASS"powerpack" mandriva-theme-Powerpack mandriva-theme-Powerpack-screensaver
   4 !LIVE mandriva-theme-extra
@@ -671,7 +680,7 @@ CAT_SYSTEM
     locales iputils urpmi msec tmpwatch dracut acpi acpid
 
   5 SMP irqbalance
-  5 META_CLASS"download" mandriva-release-Free
+  5 META_CLASS"download" || META_CLASS"light" mandriva-release-Free
   5 META_CLASS"desktop" mandriva-release-One
   5 META_CLASS"powerpack" mandriva-release-Powerpack
 
@@ -817,7 +826,7 @@ INSTALL
     5 kernel-desktop kernel-generic kernel-server
       mdadm lvm2 reiserfsprogs jfsutils xfsprogs quota dosfstools
       alsa-utils aoss task-x11
-      i8kutils toshutils linux_logo
+      i8kutils toshutils
     5 task-printing-scanning
     4 brltty
 
