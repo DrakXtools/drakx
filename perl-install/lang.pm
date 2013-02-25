@@ -1144,7 +1144,7 @@ sub write {
 
     my ($name, $acm) = l2console_font($locale, 0);
     if ($name && !$b_user_only) {
-	my $p = "$::prefix/usr/lib/kbd";
+	my $p = "$::prefix/lib/kbd";
 	if ($name) {
 	    eval {
 		log::explanations(qq(Set system font to "$name"));
@@ -1374,8 +1374,8 @@ sub load_mo {
 #- used in share/list.xml during "make get_needed_files"
 sub console_font_files() {
     map { -e $_ ? $_ : "$_.gz" }
-      (map { my $p = "/usr/lib/kbd/consolefonts/$_"; -e "$p.psfu" || -e "$p.psfu.gz" ? "$p.psfu" : "$p.psf" } uniq grep { $_ } map { $_->[0] } values %charsets),
-      (map { "/usr/lib/kbd/consoletrans/${_}_to_uni.trans" } uniq grep { $_ } map { $_->[2] } values %charsets);
+      (map { my $p = "/lib/kbd/consolefonts/$_"; -e "$p.psfu" || -e "$p.psfu.gz" ? "$p.psfu" : "$p.psf" } uniq grep { $_ } map { $_->[0] } values %charsets),
+      (map { "/lib/kbd/consoletrans/${_}_to_uni.trans" } uniq grep { $_ } map { $_->[2] } values %charsets);
 }
 
 sub load_console_font {
