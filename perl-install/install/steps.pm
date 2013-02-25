@@ -455,7 +455,7 @@ Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm\"
 ") if any { m|read failed: Input/output error| } cat_("$::prefix/root/drakx/install.log");
 
     if (arch() !~ /^sparc/ && !$o->{justdb}) { #- TODO restore it as may be needed for sparc
-	-x "$::prefix/usr/bin/dumpkeys" or $::testing or die 
+	-x "$::prefix/bin/dumpkeys" or $::testing or die 
 "Some important packages did not get installed properly.
 
 Please switch to console 2 (using ctrl-alt-f2)
