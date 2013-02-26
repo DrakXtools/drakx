@@ -29,8 +29,8 @@ sub set {
     my @levelnames = ('none', 'standard', 'secure');
     # use Standard level if specified level is out of range
     $security = 1 if $security > $#levelnames;
-    run_program::rooted($::prefix, 'msec', '-q', '-f', @levelnames[$security]);
-    run_program::rooted($::prefix, 'msecperms', '-q', '-e', @levelnames[$security]);
+    run_program::rooted($::prefix, 'msec', '-q', '-f', $levelnames[$security]);
+    run_program::rooted($::prefix, 'msecperms', '-q', '-e', $levelnames[$security]);
 }
 
 sub level_choose {
