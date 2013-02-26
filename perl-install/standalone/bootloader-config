@@ -61,7 +61,6 @@ if ($image) {
 my $all_hds = fsedit::get_hds();
 fs::get_info_from_fstab($all_hds);
 
-my $have_grub2 = -e "/boot/grub2/grub.cfg";
 my $bootloader;
 $bootloader = bootloader::read($all_hds);
 if (!$bootloader) {
@@ -88,12 +87,6 @@ sub remove_kernel() {
     unlink "/lib/modules/$kernel_version/build";
     unlink "/lib/modules/$kernel_version/source";
     remove_now_broken_boot_symlinks();
-
-    if ($have_grub2) {
-        system('grub2-mkconfig', '-o', '/boot/grub2/grub.cfg');
-        modify_bootloader();
-        return;
-    }
 
     if (!$bootloader) {
 	#- removing the initrd for weird configs where no mdv bootloader is configured
@@ -166,16 +159,12 @@ sub add_kernel() {
 		(grep_each { member($::a, 'vga', 'lock') } %{$bootloader->{default_options}}),
 	       );
 
-    if ($have_grub2) {
-        system('grub2-mkconfig', '-o', '/boot/grub2/grub.cfg');
-    } else {
         #- short name
 	bootloader::add_kernel($bootloader, $kernel_str, { %opts }, 0, $no_initrd) if !$no_short_name;
 
         #- long name
 	$kernel_str->{use_long_name} = 1;
         bootloader::add_kernel($bootloader, $kernel_str, { %opts }, 1, $no_initrd);
-    }
 
     modify_bootloader();
 }
@@ -192,12 +181,6 @@ sub configure_ide_controller() {
 }
 
 sub modify_bootloader() {
-    if ($have_grub2) {
-        my $boot_partition = `df -h /boot |(read; awk '{print \$1; exit}'|sed 's/[[:digit:]]*\$//')`;
-        system('grub2-install', $boot_partition);
-        return;
-    }
-
     !$no_entry or return;
 
     bootloader::action($bootloader, 'write', $all_hds);
