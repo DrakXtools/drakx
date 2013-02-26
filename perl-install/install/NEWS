@@ -1,8 +1,9 @@
 Version 14.37 -  9 March 2013, by Per Øyvind Karlsen
 
 - summary:
-  o suggests MBR by default for grub2 too (Manuel Hiebel, #8851)
   o prevent installing grub2 somewhere else than MBR
+  o read & write /boot/grub2/drakboot.conf
+  o suggests MBR by default for grub2 too (Manuel Hiebel, #8851)
 - always bypass blkid cache (the cache only includes a subset of the data we need)
 - use modprobe instead of insmod (mga#8676)
 - load 'crc32c' module for XFS too (mga#8676)

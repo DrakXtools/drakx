@@ -225,7 +225,7 @@ sub read {
 }
 
 sub read_grub2 {
-    {};
+    my %bootloader = getVarsFromSh("$::prefix/boot/grub2/drakboot.conf");
 }
 
 sub read_grub {
@@ -1966,6 +1966,7 @@ sub install_grub2 {
 	run_program::rooted($::prefix, 'grub2-mkconfig', '2>', \$error, '-o', $grub2_cfg) or die "grub2-mkconfig failed: $error";
     }
     run_program::rooted($::prefix, 'grub2-install', '2>', \$error, $bootloader->{boot}) or die "grub2-install failed: $error";
+    setVarsInSh("$::prefix/boot/grub2/drakboot.conf", { boot => $bootloader->{boot} });
 }
 
 sub install_grub {
