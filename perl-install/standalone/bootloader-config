@@ -61,16 +61,14 @@ if ($image) {
 my $all_hds = fsedit::get_hds();
 fs::get_info_from_fstab($all_hds);
 
-my $have_grub2 = -e "/boot/grub2/grub.cfg"; # FIXME: check detectloader
+my $have_grub2 = -e "/boot/grub2/grub.cfg";
 my $bootloader;
-if (!$have_grub2) {
-    $bootloader = bootloader::read($all_hds);
-    if (!$bootloader) {
-        if (member($action, 'add-kernel', 'remove-kernel')) {
-	    warn "Cannot find a boot loader installed. Only taking care of initrd\n";
-        } else {
-    	    die "Cannot find a boot loader installed\n";
-        }
+$bootloader = bootloader::read($all_hds);
+if (!$bootloader) {
+    if (member($action, 'add-kernel', 'remove-kernel')) {
+	warn "Cannot find a boot loader installed. Only taking care of initrd\n";
+    } else {
+	die "Cannot find a boot loader installed\n";
     }
 }
 
@@ -372,6 +370,5 @@ sub remove_splash() {
 }
 
 sub detectloader() {
-    print "grub2\n" if $have_grub2;
     print uc(bootloader::main_method($bootloader->{method})), "\n" if $bootloader;
 }
