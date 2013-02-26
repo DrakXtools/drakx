@@ -1769,6 +1769,12 @@ sub crypt_grub_password {
     chomp_($res);
 }
 
+sub write_grub2 {
+    my ($bootloader, $_all_hds, $o_backup_extension) = @_;
+    my $error;
+    my $grub2_cfg = '/boot/grub2/grub.cfg';
+    run_program::rooted($::prefix, 'grub2-mkconfig', '2>', \$error, '-o', $grub2_cfg) or die "grub2-mkconfig failed: $error";
+}
 
 sub write_grub {
     my ($bootloader, $all_hds, $o_backup_extension) = @_;
@@ -2002,6 +2008,11 @@ sub install_raw_grub() {
     log::l("Installing boot loader...");
     my $error;
     run_program::rooted($::prefix, "sh", "2>", \$error, '/boot/grub/install.sh') or die "grub failed: $error";
+}
+
+sub when_config_changed_grub2 {
+    my ($_bootloader) = @_;
+    #- do not do anything
 }
 
 sub when_config_changed_grub {
