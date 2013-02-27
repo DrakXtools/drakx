@@ -1999,8 +1999,9 @@ sub install_grub2 {
     my ($bootloader, $all_hds) = @_;
     my $error;
     write_grub2($bootloader, $all_hds);
-    run_program::rooted($::prefix, 'grub2-install', '2>', \$error, $bootloader->{boot}) or die "grub2-install failed: $error";
-    setVarsInSh("$::prefix/boot/grub2/drakboot.conf", { boot => $bootloader->{boot} });
+    my $boot = $bootloader->{boot}
+    run_program::rooted($::prefix, 'grub2-install', '2>', \$error, $boot) or die "grub2-install failed: $error";
+    setVarsInSh("$::prefix/boot/grub2/drakboot.conf", { boot => $boot });
 }
 
 sub install_grub {
