@@ -1791,8 +1791,9 @@ sub write_grub2 {
     # set default parameters:
     my ($entry) = grep { $_->{kernel_or_dev} =~ /vmlin/ } @{$bootloader->{entries}};
     my $append = $entry->{append};
-    $append =~ s/root=\S+//;
-    $append =~ s/\bro\b//;
+    $append =~ s/root=\S+//g;
+    $append =~ s/\bro\b//g;
+    $append =~ s/\s+/ /g;
 
     my $f = "$::prefix/etc/default/grub";
     my %conf = getVarsFromSh($f);
