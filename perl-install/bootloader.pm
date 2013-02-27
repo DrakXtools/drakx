@@ -1968,12 +1968,9 @@ sub restore_previous_MBR_bootloader {
 }
 
 sub install_grub2 {
-    my ($bootloader, $_all_hds) = @_;
+    my ($bootloader, $all_hds) = @_;
     my $error;
-    my $grub2_cfg = "/boot/grub2/grub.cfg";
-    if (!-s "$::prefix/$grub2_cfg") {
-	run_program::rooted($::prefix, 'grub2-mkconfig', '2>', \$error, '-o', $grub2_cfg) or die "grub2-mkconfig failed: $error";
-    }
+    write_grub2($bootloader, $all_hds);
     run_program::rooted($::prefix, 'grub2-install', '2>', \$error, $bootloader->{boot}) or die "grub2-install failed: $error";
     setVarsInSh("$::prefix/boot/grub2/drakboot.conf", { boot => $bootloader->{boot} });
 }
