@@ -226,7 +226,20 @@ sub read {
 
 sub read_grub2 {
     my %bootloader = getVarsFromSh("$::prefix/boot/grub2/drakboot.conf");
-    $bootloader{entries} = [ map { if_(/menuentry\s+['"]([^']+)["']/, { label => $1 }) }  cat_("$::prefix/boot/grub2/grub.cfg") ];
+    $bootloader{entries} = [];
+    my $entry;
+    foreach (cat_("$::prefix/boot/grub2/grub.cfg")) {
+	next if /^#/;
+	if (/menuentry\s+['"]([^']+)["']/) {
+	    push @{$bootloader{entries}}, $entry if $entry;
+	    $entry = { label => $1 };
+	} elsif (/linux\s+(\S+)\s+(.*)?/) {
+	    @$entry{qw(kernel_or_dev append)} = ($1, $2);
+	} elsif (/initrd\s+(\S+)/) {
+	    $entry->{initrd} = $1;
+	}
+    }
+
     $bootloader{method} = 'grub2';
     \%bootloader;
 }
