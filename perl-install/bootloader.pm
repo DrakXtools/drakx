@@ -226,6 +226,8 @@ sub read {
 
 sub read_grub2 {
     my %bootloader = getVarsFromSh("$::prefix/boot/grub2/drakboot.conf");
+    my %h = getVarsFromSh("$::prefix/etc/default/grub");
+    $bootloader{timeout} = $h{GRUB_TIMEOUT};
     $bootloader{entries} = [];
     my $entry;
     foreach (cat_("$::prefix/boot/grub2/grub.cfg")) {
@@ -1795,6 +1797,7 @@ sub write_grub2 {
     my $f = "$::prefix/etc/default/grub";
     my %conf = getVarsFromSh($f);
     $conf{GRUB_CMDLINE_LINUX_DEFAULT} = $append;
+    $conf{GRUB_TIMEOUT} = $bootloader->{timeout};
     setVarsInSh($f, \%conf);
 
     my $grub2_cfg = '/boot/grub2/grub.cfg';
