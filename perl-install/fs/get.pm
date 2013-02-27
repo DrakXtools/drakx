@@ -22,7 +22,7 @@ sub fstab {
 sub really_all_fstab {
     my ($all_hds) = @_;
     my @l = fstab($all_hds);
-    @l, @{$all_hds->{raw_hds}}, @{$all_hds->{nfss}}, @{$all_hds->{smbs}}, @{$all_hds->{davs}};
+    @l, (grep { !$_->{is_removable} } @{$all_hds->{raw_hds}}), @{$all_hds->{nfss}}, @{$all_hds->{smbs}}, @{$all_hds->{davs}};
 }
 
 sub fstab_and_holes {
