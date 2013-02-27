@@ -1196,10 +1196,10 @@ sub method_choices_raw {
     arch() =~ /mips/ ? 'pmon2000' : 
     arch() =~ /arm/ ? 'uboot' :
       (
-       if_(!$b_prefix_mounted || whereis_binary('grub', $::prefix), 
-	   'grub-graphic', 'grub-menu'),
        if_(!$b_prefix_mounted || whereis_binary('grub2-reboot', $::prefix), 
 	   'grub2'),
+       if_(!$b_prefix_mounted || whereis_binary('grub', $::prefix), 
+	   'grub-graphic', 'grub-menu'),
        if_(!$b_prefix_mounted || whereis_binary('lilo', $::prefix), 
 	   'lilo-menu'),
       );
