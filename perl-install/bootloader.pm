@@ -2000,7 +2000,12 @@ sub install_grub2 {
     my $error;
     write_grub2($bootloader, $all_hds);
     my $boot = $bootloader->{boot}
-    run_program::rooted($::prefix, 'grub2-install', '2>', \$error, $boot) or die "grub2-install failed: $error";
+    # if (member($boot, map { "/dev/$_->{device}" } @{$all_hds->{hds}}) {
+    if ($boot =~ /\d$/) {
+       run_program::rooted($::prefix, 'grub2-install', '2>', \$error, '--grub-setup=/bin/true', $boot) or die "grub2-install failed: $error";
+    } else {
+       run_program::rooted($::prefix, 'grub2-install', '2>', \$error, $boot) or die "grub2-install failed: $error";
+    }
     setVarsInSh("$::prefix/boot/grub2/drakboot.conf", { boot => $boot });
 }
 
