@@ -1785,6 +1785,18 @@ sub crypt_grub_password {
 sub write_grub2 {
     my ($bootloader, $_all_hds, $o_backup_extension) = @_;
     my $error;
+
+    # set default parameters:
+    my ($entry) = grep { $_->{kernel_or_dev} =~ /vmlin/ } @{$bootloader->{entries}};
+    my $append = $entry->{append};
+    $append =~ s/root=\S+//;
+    $append =~ s/\bro\b//;
+
+    my $f = "$::prefix/etc/default/grub";
+    my %conf = getVarsFromSh($f);
+    $conf{GRUB_CMDLINE_LINUX_DEFAULT} = $append;
+    setVarsInSh($f, \%conf);
+
     my $grub2_cfg = '/boot/grub2/grub.cfg';
     run_program::rooted($::prefix, 'grub2-mkconfig', '2>', \$error, '-o', $grub2_cfg) or die "grub2-mkconfig failed: $error";
 }
