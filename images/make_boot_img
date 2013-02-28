@@ -156,14 +156,10 @@ modules() {
 grub() {
     dir=$1
     install -m644 grub_data/grub.cfg -D "$dir/boot/grub/grub.cfg"
-    install -m644 grub_data/themes/moondrake/theme.txt -D "$dir/boot/grub/themes/moondrake/theme.txt"
-    install -m644 grub_data/themes/moondrake/star_w.png -D "$dir/boot/grub/themes/moondrake/star_w.png"
-    install -m644 grub_data/themes/moondrake/star_shade_w.png -D "$dir/boot/grub/themes/moondrake/star_shade_w.png"
-    install -m644 grub_data/themes/moondrake/tick.png -D "$dir/boot/grub/themes/moondrake/tick.png"
-    install -m644 /usr/share/gfxboot/themes/Mandriva/install/back.jpg -D "$dir/boot/grub/themes/moondrake/background.jpg"
+    install -d "$dir/boot/grub/themes"
+    cp -a /boot/grub2/themes/rosa "$dir/boot/grub/themes/rosa"
     mkdir -p "$dir/boot/grub/fonts/"
     grub2-mkfont --verbose -b --size=18 -o "$dir/boot/grub/fonts/dejavu.pf2" /usr/share/fonts/TTF/liberation/LiberationSans-Bold.ttf
-
 
     if [ ! -s all.kernels/.list ]; then
 	    echo grub: no kernel >&2
