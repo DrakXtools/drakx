@@ -1,4 +1,4 @@
-package list_modules; # $Id$
+package list_modules;
 
 use MDK::Common;
 
@@ -39,16 +39,15 @@ our %l = (
       ),
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
       # add all phys
-      qw(amd broadcom cicada davicom et1011c icplus lxt marvell micrel),
+      qw(amd at803x bcm87xx broadcom cicada davicom et1011c icplus lxt marvell micrel),
       qw(national qsemi realtek smsc ste10Xp vitesse),
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(atl1 atl1c atl1e be2net bna bnx2 bnx2x cxgb cxgb3 cxgb4 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe),
-      qw(myri_sbus myri10ge netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io sfc sxg_nic),
+      qw(alx atl1 atl1c atl1e at91_ether be2net bna bnx2 bnx2x cxgb cxgb3 cxgb4 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe),
+      qw(macb mvmdio myri_sbus myri10ge netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io sfc sxg_nic),
       qw(sis190 sk98lin skge sky2 slicoss spidernet stmmac tehuti tg3 via-velocity virtio_net vxge yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
-      qw(broadcom libphy), # needed to get tg3 working
     ],
 
     raw => [
@@ -63,21 +62,20 @@ our %l = (
    #- protocol reported are not accurate) so we match network adapters against
    #- known drivers :-(
     usb => [ 
-      qw(asix catc cdc_ether dm9601 kaweth mcs7830 pegasus rtl8150 smsc75xx smsc95xx usbnet),
+      qw(asix catc cdc_ether cdc_mbim dm9601 kaweth mcs7830 pegasus rtl8150 smsc75xx smsc95xx usbnet),
     ],
     wireless => [
       qw(acx-pci acx-usb adm8211 agnx airo airo_cs aironet4500_cs),
-      qw(aironet_cs ar9170usb arlan arusb_lnx at76_usb at76c50x_usb ath5k ath6kl ath6kl_usb ath9k ath9k_htc),
+      qw(aironet_cs ar5523 ar9170usb arlan arusb_lnx at76_usb at76c50x_usb ath5k ath6kl ath6kl_usb ath9k ath9k_htc),
       qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx bcm_wimax brcm80211 brcmsmac brcmfmac carl9170 com20020_cs),
-      qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx bcm_wimax brcm80211 brcmsmac carl9170 com20020_cs),
-      qw(dyc_ar5 hostap_cs hostap_pci hostap_plx i2400m-usb ipw2100),
-      qw(i2400m_usb ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwlwifi madwifi_pci),
+      qw(dyc_ar5 hostap_cs hostap_pci hostap_plx i2400m_usb ipw2100),
+      qw(ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwldvm iwlwifi madwifi_pci),
       qw(mwifiex_usb mwl8k ndiswrapper netwave_cs orinoco orinoco_cs),
       qw(orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd orinoco_usb p54pci),
       qw(p54usb prism2_cs prism2_pci prism2_usb prism54 qmi_wwan r8180),
-      qw(r8187se r8192_pci r8192s_usb r8192u_usb r8712u ray_cs rndis_wlan rt2400 rt2400pci rt2500),
+      qw(r8187se r8192_pci r8192s_usb r8192u_usb r8712u rtl8723ae ray_cs rndis_wlan rt2400 rt2400pci rt2500),
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
-      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtusb ),
+      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se rtusb ),
       qw(rtl8192se rtl8192cu rtl8192de spectrum_cs usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
       qw(wavelan_cs wl wl3501_cs wvlan_cs zd1201 zd1211rw),
       if_(arch() =~ /ppc/, qw(airport)),
@@ -96,7 +94,6 @@ our %l = (
     slmodem => [
       qw(slamr slusb snd-ali5451 snd-atiixp-modem snd-intel8x0m snd-via82xx-modem),
     ],
-    tokenring => [ qw(3c359 abyss ibmtr lanstreamer olympic proteon skisa smctr tms380tr tmspci) ],
     wan => [ qw(c101 cosa cyclomx cycx_drv dlci dscc4 farsync hdlc hostess_sv11 lapbether lmc n2 pc300 pci200syn sbni sdla sdladrv sealevel syncppp wanxl z85230) ],
     usb_dsl => [ qw(cxacru speedtch ueagle-atm usbatm xusbatm) ],
     virtual => [ qw(xen-netfront) ],
@@ -119,7 +116,7 @@ our %l = (
 	'53c7,8xx',
         qw(a100u2w advansys aha152x aha1542 aha1740 AM53C974 atp870u),
         qw(be2iscsi bfa BusLogic dc395x dc395x_trm dmx3191d dtc eata eata_dma),
-        qw(eata_pio fdomain g_NCR5380 in2000 initio mpt2sas mvsas NCR53c406a),
+        qw(eata_pio fdomain g_NCR5380 in2000 initio mpt2sas mpt3sas mvsas NCR53c406a),
         qw(nsp32 pas16 pci2220i pm8001 psi240i qla1280 qla2x00 qla2xxx),
         qw(qlogicfas qlogicfc seagate shasta sim710 stex sym53c416),
         qw(t128 tmscsim u14-34f ultrastor vmw_pvscsi wd7000),
@@ -151,7 +148,7 @@ our %l = (
       if_(arch() !~ /alpha|sparc/,
         # 3w-xxxx drives ATA-RAID, 3w-9xxx and arcmsr drive SATA-RAID
         qw(3w-9xxx 3w-sas 3w-xxxx a320raid aacraid arcmsr cciss cpqarray),
-        qw(cpqfc DAC960 dpt_i2o gdth hpsa hptiop i2o_block imm ipr ips isci),
+        qw(cpqfc csiostor DAC960 dpt_i2o gdth hpsa hptiop i2o_block imm ipr ips isci),
         qw(it8212 it821x iteraid megaide megaraid megaraid_mbox),
         qw(megaraid_sas mptfc mptsas mptscsih mptspi pdc-ultra pmcraid ppa),
         qw(qla2100 qla2200 qla2300 qla2322 qla4xxx qla6312 qla6322),
@@ -163,7 +160,7 @@ our %l = (
     usb => [ qw(keucr uas ums-alauda ums-cypress ums-datafab ums-eneub6250 ums-freecom ums-isd200),
 	     qw(ums-jumpshot ums-karma ums-onetouch ums-realtek ums-sddr09 ums-sddr55 ums-usbat usb-storage) ],
     firewire => [ qw(sbp2) ],
-    cdrom => [ qw(sr_mod) ],
+    cdrom => [ qw(ide-cd_mod sr_mod) ],
     card_reader => [ qw(sdhci sdhci-pci tifm_sd tifm_7xx1) ],
   },
 
@@ -171,9 +168,10 @@ our %l = (
 
   bus => 
   {
-    usb => [ qw(c67x00 ehci-hcd fhci hwa-hc imx21-hcd isp116x-hcd isp1362-hcd
-	    isp1760 ohci-hcd oxu210hp-hcd r8a66597-hcd renesas-usbhs sl811_cs
-	    sl811-hcd u132-hcd uhci-hcd usb-ohci usb-uhci whci-hcd xhci-hcd) ],
+    usb => [ qw(bcma-hcd c67x00 ehci-hcd ehci-pci ehci-platform fhci hwa-hc
+		imx21-hcd isp116x-hcd isp1362-hcd isp1760 ohci-hcd oxu210hp-hcd
+		r8a66597-hcd renesas-usbhs sl811_cs sl811-hcd ssb-hcd u132-hcd
+		uhci-hcd usb-ohci usb-uhci whci-hcd xhci-hcd) ],
     bluetooth => [ qw(bcm203x bfusb bpa10x btusb) ],
     firewire => [ qw(ohci1394) ],
     i2c => [
@@ -184,18 +182,17 @@ our %l = (
     pcmcia => [
       if_(arch() !~ /^sparc/, qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket)), # cb_enabler
     ],
-    hid => [ qw(ff-memless hid-a4tech hid-apple hid-aureal hid-belkin hid-cypress
-	    hid-cherry hid hid-axff hid-dr hid-elecom hid-emsff hid-holtekff
-	    hid-hyperv hid-lcpower hid-magicmouse hid-multitouch hid-ortek
-	    hid-picolcd hid-primax hid-prodikeys hid-roccat hid-roccat-arvo
-	    hid-roccat-common hid-roccat-isku hid-roccat-kone
-	    hid-roccat-koneplus hid-roccat-kovaplus hid-roccat-pyra
-	    hid-speedlink hid-twinhan hid-waltop hid-wiimote hid-zydacron
-	    hid-chicony hid-drff hid-ezkey hid-gaff hid-gyration hid-kensington
-	    hid-keytouch hid-kye hid-logitech hid-logitech-dj hid-microsoft
-	    hid-monterey hid-multilaser hid-ntrig hid-petalynx hid-pl hid-saitek 
-	    hid-samsung hid-sjoy hid-sony hid-sunplus hid-tivo hid-tmff hid-topseed
-	    hid-uclogic hid-wacom hid-zpff ) ],
+    hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-aureal hid-axff hid-belkin
+	    hid-cherry hid-chicony hid-cypress hid-dr hid-drff hid-elecom hid-emsff
+	    hid-ezkey hid-gaff hid-generic hid-gyration hid-holtek-kbd hid-holtekff
+	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-lenovo-tpkbd
+	    hid-logitech hid-logitech-dj hid-magicmouse hid-microsoft hid-monterey
+	    hid-multilaser hid-multitouch hid-ntrig hid-ortek hid-petalynx hid-picolcd
+	    hid-pl hid-primax hid-prodikeys hid-roccat hid-roccat-arvo hid-roccat-common
+	    hid-roccat-isku hid-roccat-kone hid-roccat-koneplus hid-roccat-kovaplus hid-roccat-lua
+	    hid-roccat-pyra hid-roccat-savu hid-saitek hid-samsung hid-sensor-hub hid-sjoy hid-sony
+	    hid-speedlink hid-sunplus hid-tivo hid-tmff hid-topseed hid-twinhan
+	    hid-uclogic hid-wacom hid-waltop hid-wiimote hid-zpff hid-zydacron) ],
 
    #serial_cs
    #ftl_cs 3c575_cb apa1480_cb epic_cb serial_cb tulip_cb iflash2+_mtd iflash2_mtd
@@ -204,14 +201,14 @@ our %l = (
 
   fs => 
   {
-    network => [ qw(af_packet nfs smbfs) ],
+    network => [ qw(af_packet nfs nfsv2 nfsv3 nfsv4 smbfs) ],
     cdrom => [ qw(isofs) ],
-    loopback => [ qw(isofs loop squashfs overlayfs) ],
+    loopback => [ qw(isofs loop squashfs) ],
     local => [
       if_(arch() =~ /^ppc/, qw(hfs)),
       qw(btrfs ext3 ext4 jfs nilfs2 ntfs reiserfs vfat xfs),
     ],
-    various => [ qw(romfs ufs unionfs fuse) ],
+    various => [ qw(overlayfs romfs ufs fuse) ],
 
   },
 
@@ -260,7 +257,7 @@ our %l = (
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-gemtek-pci radio-maestro radio-maxiradio radio-miropcm20 radio-usb-si470x) ],
     scanner => [ qw(scanner microtek) ],
-    firewire => [ qw(snd-firewire-speakers snd-isight) ],
+    firewire => [ qw(snd-firewire-speakers snd-isight snd-scs1x) ],
     gameport => [ qw(cs461x ns558 emu10k1-gp fm801-gp lightning ns558 vortex) ],
     usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-6fire snd-usb-caiaq snd-usb-usx2y usb-midi) ],
     webcam => [
@@ -429,7 +426,7 @@ sub module2category {
 }
 
 sub ethernet_categories() {
-    'network/main|gigabit|pcmcia|tokenring|usb|wireless|firewire';
+    'network/main|gigabit|pcmcia|usb|wireless|firewire';
 }
 
 sub sub_categories {
