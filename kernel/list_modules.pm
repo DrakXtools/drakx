@@ -330,7 +330,7 @@ our %l = (
       #- these need checking
       qw(rrunner meye),
 
-      qw(virtio virtio_pci virtio_balloon),
+      qw(virtio virtio_balloon virtio_pci virtio_ring),
       qw(mei pch_phub),
     ],
     agpgart => [
