@@ -90,7 +90,7 @@ EOF
 	ln -v "$tmp_initrd/sbin/stage1" "$tmp_initrd$hardlink"
     done
 
-    for hardlink in /usr/bin/dropbear /usr/bin/ssh /usr/bin/scp; do
+    for hardlink in /usr/bin/dropbear /usr/bin/ssh /usr/bin/scp /usr/bin/dbclient; do
 	ln -v "$tmp_initrd/usr/bin/dropbearmulti" "$tmp_initrd$hardlink"
     done
 
