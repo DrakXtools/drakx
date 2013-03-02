@@ -46,7 +46,7 @@ our %l = (
     gigabit => [
       qw(alx atl1 atl1c atl1e at91_ether be2net bna bnx2 bnx2x cxgb cxgb3 cxgb4 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe),
       qw(macb mvmdio myri_sbus myri10ge netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io sfc sxg_nic),
-      qw(sis190 sk98lin skge sky2 slicoss spidernet stmmac tehuti tg3 via-velocity virtio_net vxge yellowfin),
+      qw(sis190 sk98lin skge sky2 slicoss spidernet stmmac tehuti tg3 via-velocity vxge yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
     ],
 
@@ -96,7 +96,7 @@ our %l = (
     ],
     wan => [ qw(c101 cosa cyclomx cycx_drv dlci dscc4 farsync hdlc hostess_sv11 lapbether lmc n2 pc300 pci200syn sbni sdla sdladrv sealevel syncppp wanxl z85230) ],
     usb_dsl => [ qw(cxacru speedtch ueagle-atm usbatm xusbatm) ],
-    virtual => [ qw(xen-netfront) ],
+    virtual => [ qw(virtio_net xen-netfront) ],
   },
 
   ################################################################################
@@ -154,7 +154,7 @@ our %l = (
         qw(qla2100 qla2200 qla2300 qla2322 qla4xxx qla6312 qla6322),
       ),
     ],
-    virtual => [ qw(hv_storvsc virtio_blk virtio_scsi xenblk) ],
+    virtual => [ qw(hv_storvsc virtio_blk virtio_scsi xenblk xen-blkfront) ],
     pcmcia => [ qw(aha152x_cs fdomain_cs nsp_cs qlogic_cs ide-cs pata_pcmcia sym53c500_cs) ],
     raw => [ qw(ide-gd_mod sd_mod) ],
     usb => [ qw(keucr uas ums-alauda ums-cypress ums-datafab ums-eneub6250 ums-freecom ums-isd200),
@@ -330,7 +330,7 @@ our %l = (
       #- these need checking
       qw(rrunner meye),
 
-      qw(virtio_pci virtio_balloon),
+      qw(virtio virtio_pci virtio_balloon),
       qw(mei pch_phub),
     ],
     agpgart => [
