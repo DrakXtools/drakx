@@ -1098,7 +1098,7 @@ sub get_release_notes {
 sub run_display_release_notes {
     my ($release_notes) = @_;
     output('/tmp/release_notes.html', $release_notes);
-    run_program::raw({ detach => 1 }, '/usr/bin/display_release_notes.pl');
+    system('/usr/bin/display_release_notes.pl');
 }
 
 sub acceptLicense {
