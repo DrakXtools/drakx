@@ -807,15 +807,15 @@ sub get_html_file {
     $anchor ? "$url#$anchor" : $url;
 }
 
-sub display_help {
-    my ($o, $common, $mainw) = @_;
+sub display_help_window {
+    my ($o, $common) = @_;
     if (my $file = $common->{interactive_help_id}) {
         require Gtk2::WebKit;
         my $view = gtknew('WebKit_View');
 
         load_from_uri($view, $file);
 
-        my $w = ugtk2->new(N("Help"), transient => $mainw->{real_window}, modal => 1);
+        my $w = ugtk2->new(N("Help"), modal => 1);
         gtkadd($w->{rwindow},
                gtkpack_(Gtk2::VBox->new,
                         1, create_scrolled_window(gtkset_border_width($view, 5),
@@ -837,6 +837,16 @@ sub display_help {
     }
 }
 
+sub display_help {
+    my ($_o, $common) = @_;
+    # not very safe but we run in a restricted environment anyway:
+    my $f = '/tmp/help.txt';
+    if ($common->{interactive_help}) {
+       output($f, $common->{interactive_help}->());
+    }
+    system('display_installer_help', $common->{interactive_help_id} || $f); 
+}
+
 sub ask_fromW {
     my ($o, $common, $l) = @_;
 
@@ -855,7 +865,7 @@ sub ask_fromW {
     my @more_buttons = (
 			if_($common->{interactive_help} || $common->{interactive_help_id}, 
                             [ gtknew('Install_Button', text => N("Help"),
-                                     clicked => sub { display_help($o, $common, $mainw) }), undef, 1 ]),
+                                     clicked => sub { display_help($o, $common) }), undef, 1 ]),
 			if_($common->{more_buttons}, @{$common->{more_buttons}}),
 		       );
     my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @more_buttons);
