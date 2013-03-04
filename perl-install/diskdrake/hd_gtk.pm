@@ -173,7 +173,7 @@ sub add_kind2notebook {
 
 sub interactive_help() {
     if ($::isInstall) {
-        $in->display_help({ interactive_help_id => 'diskdrake' }, $w);
+        $in->display_help({ interactive_help_id => 'diskdrake' });
     } else {
         require run_program;
         run_program::raw({ detach => 1 }, 'drakhelp', '--id', 'diskdrake');

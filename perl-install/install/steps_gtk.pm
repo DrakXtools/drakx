@@ -314,7 +314,7 @@ sub reallyChooseDesktop {
                                                     clicked => sub {
                                                         interactive::gtk::display_help(
                                                             $o,
-                                                            { interactive_help_id => 'choosePackages#choose-graphical-env' }, $w);
+                                                            { interactive_help_id => 'chooseDesktop' });
                                                     }), undef, 1 ])
 		]));
     $w->main;
@@ -355,7 +355,7 @@ sub reallyChooseGroups {
 		    0, Gtk2::HSeparator->new,
 		    0, gtknew('HButtonBox', layout => 'edge', children_tight => [
                         gtknew('Install_Button', text => N("Help"), clicked => sub {
-                                   interactive::gtk::display_help($o, { interactive_help_id => 'choosePackages#choosePackagesGroups' }, $w) }),
+                                   interactive::gtk::display_help($o, { interactive_help_id => 'choosePackageGroups' }) }),
 			  gtknew('Button', text => N("Unselect All"), clicked => sub { $_->set_active(0) foreach @entries }),
 			  gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
 			 ]),
@@ -510,8 +510,7 @@ sub choosePackagesTree {
 			    interactive_help => sub { 
                                 interactive::gtk::display_help($o,
                                                                { interactive_help_id => 
-                                                                   # FIXME: missing ref to upper window:
-                                                                   'choosePackages#choosePackagesTree' }, my $w) },
+                                                                   'choosePackagesTree' }) },
 
 			    ok => N("Install"),
 			    cancel => N("Previous"),
@@ -745,7 +744,7 @@ sub summary_prompt {
     };
     $set_entry_labels->();
 
-    my $help_sub = sub { interactive::gtk::display_help($o, { interactive_help_id => 'misc-params' }, $w) };
+    my $help_sub = sub { interactive::gtk::display_help($o, { interactive_help_id => 'misc-params' }) };
 
     ugtk2::gtkadd($w->{window},
 	   gtknew('VBox', spacing => 5, children => [
@@ -804,7 +803,7 @@ It will then continue from the hard disk drive and the packages will remain avai
 		),
 		0, gtknew('HButtonBox', layout => 'edge', children_tight => [
                     gtknew('Install_Button', text => N("Help"), clicked => sub {
-                               interactive::gtk::display_help($o, { interactive_help_id => 'choosePackages' }, $w) }),
+                               interactive::gtk::display_help($o, { interactive_help_id => 'choosePackagesTree' }) }),
 		    gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
 		]),
 	    ]),

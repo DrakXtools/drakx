@@ -553,7 +553,7 @@ sub main {
             if_($::isInstall, 
             [ gtknew('Install_Button',
                      text => N("Help"),
-                     clicked => sub { interactive::gtk::display_help($o, {interactive_help_id => 'doPartitionDisks' }, $mainw) }),
+                     clicked => sub { interactive::gtk::display_help($o, {interactive_help_id => 'doPartitionDisks' }) }),
               undef, 1 ]),
             );
         my $buttons_pack = $mainw->create_okcancel(N("Next"), undef, '', @more_buttons);

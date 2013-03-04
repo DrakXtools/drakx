@@ -210,7 +210,7 @@ sub ask_ {
                                interactive_help => sub { 
                                    interactive::gtk::display_help($in,
                                                                { interactive_help_id => 
-                                                                   'misc-params#drakxid-configureServices' }, $::main_window) },
+                                                                   'configureServices' }) },
 			      }) or return $l, $on_services; #- no change on cancel.
     [ grep { $services{$_} } @$l ];
 }
