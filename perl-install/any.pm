@@ -441,7 +441,6 @@ sub setupBootloader__general {
 	foreach (bootloader::allowed_boot_parts($b, $all_hds)) {
 	    my $dev = "/dev/$_->{device}";
 	    push @boot_devices, $dev;
-	    my $desc = formatXiB($_->{size}*512);
 	    my $name = $_->{mntpoint} || $_->{info} || $_->{device_LABEL};
 	    unless ($name) {
 		$name = formatXiB($_->{size}*512) . " " if $_->{size};
