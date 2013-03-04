@@ -312,9 +312,7 @@ sub reallyChooseDesktop {
 		    0, $w->create_okcancel(N("Next"), undef, '',
                                            [ gtknew('Install_Button', text => N("Help"),
                                                     clicked => sub {
-                                                        interactive::gtk::display_help(
-                                                            $o,
-                                                            { interactive_help_id => 'chooseDesktop' });
+                                                        interactive::gtk::display_help($o, { interactive_help_id => 'chooseDesktop' });
                                                     }), undef, 1 ])
 		]));
     $w->main;
@@ -508,9 +506,7 @@ sub choosePackagesTree {
 			    },
 			    auto_deps => N("Show automatically selected packages"),
 			    interactive_help => sub { 
-                                interactive::gtk::display_help($o,
-                                                               { interactive_help_id => 
-                                                                   'choosePackagesTree' }) },
+                                interactive::gtk::display_help($o, { interactive_help_id => 'choosePackagesTree' }) },
 
 			    ok => N("Install"),
 			    cancel => N("Previous"),
