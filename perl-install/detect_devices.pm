@@ -313,7 +313,6 @@ sub getIDE() {
 
     #- Great. 2.2 kernel, things are much easier and less error prone.
     foreach my $d (sort @{[glob_('/proc/ide/hd*')]}) {
-	cat_("$d/driver") =~ /ide-scsi/ and next; #- already appears in /proc/scsi/scsi
 	my $t = chomp_(cat_("$d/media"));
 	my $type = ${{ disk => 'hd', cdrom => 'cdrom', tape => 'tape', floppy => 'fd' }}{$t} or next;
 	my $info = chomp_(cat_("$d/model")) || "(none)";

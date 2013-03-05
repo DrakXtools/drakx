@@ -171,12 +171,6 @@ sub setupBootloaderBefore {
 	$bootloader->{message_text} = delete $bootloader->{message};
     }
 
-    #- remove previous ide-scsi lines
-    bootloader::modify_append($bootloader, sub {
-	my ($_simple, $dict) = @_;
-	@$dict = grep { $_->[1] ne 'ide-scsi' } @$dict;
-    });
-
     if (cat_("/proc/cmdline") =~ /mem=nopentium/) {
 	bootloader::set_append_with_key($bootloader, mem => 'nopentium');
     }
