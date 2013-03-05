@@ -835,6 +835,8 @@ sub _install_raw {
     # bug present in 2009.0, 2008.1, 2008.0, ... (probably since r11141 aka when switching to rpm-4.2 in URPM-0.83)
     local $packages->{options}{script_fd} = fileno $LOG;
 
+    start_pushing_error();
+
     log::l("rpm transactions start");
 
     my $exit_code = urpm::main_loop::run($packages, $packages->{state}, undef, undef, undef, {
@@ -886,6 +888,11 @@ sub _install_raw {
             if (!$packages->{options}{auto}) {
                 $::o->ask_warn(N("Error"), N("%d installation transactions failed", $nok) . "\n\n" .
                                  N("Installation of packages failed:") . "\n\n" . join("\n", @$errors));
+            }
+        },
+        completed => sub {
+            if (!$packages->{options}{auto}) {
+                popup_errors();
             }
         },
         message => sub {
