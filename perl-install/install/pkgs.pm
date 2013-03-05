@@ -368,6 +368,7 @@ sub unselectAllPackages {
 my (@errors, $push_errors);
 sub start_pushing_error() {
     $push_errors = 1;
+    undef @errors;
 }
 
 sub popup_errors() {
