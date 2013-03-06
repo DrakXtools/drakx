@@ -44,7 +44,7 @@ static void load_modules(int argc, char *argv[]) {
     for (uint16_t i = 0; i < pu.size(); i++) {
 	const E &e = pu[i];
 	const std::string &devclass = pci_class2text(e.class_id);
-	if (e.module.empty() || e.module.find(':') || devclass == "DISPLAY_VGA")
+	if (e.module.empty() || e.module.find(':') != std::string::npos || devclass == "DISPLAY_VGA")
 	    continue;
 	if (argc > 1) {
 	    int j;
