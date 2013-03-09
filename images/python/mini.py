@@ -4,7 +4,7 @@ from drakx.media import Media
 from drakx.distribution import Distribution
 import os
 
-config = ReleaseConfig("2012", "OurDiva", "LXDE", subversion="Alpha 2", medium="CD")
+config = ReleaseConfig("2013", "Aspiring Vaporware", "LXDE", subversion="Alpha 3", medium="CD")
 os.system("rm -rf "+config.outdir)
 
 srcdir = "./"
@@ -29,7 +29,7 @@ for e in ["exclude", "exclude_mini", "exclude_ancient", "exclude_tofix", "exclud
     excludelist.append(srcdir + "lists/" + e)
 
 x86_64 = Distribution(config, "x86_64", media, includelist64, excludelist, rpmsrate, compssusers, filedeps, synthfilter=".xz:xz --text")
-i586 = Distribution(config, "i586", media, includelist32, excludelist, rpmsrate, compssusers, filedeps, synthfilter=".xz:xz --text")
+i586 = Distribution(config, "i586", media, includelist32, excludelist, rpmsrate, compssusers, filedeps, synthfilter=".xz:xz --text", stage2="../mdkinst-i586.cpio.xz")
 
 distrib=[i586,x86_64]
 

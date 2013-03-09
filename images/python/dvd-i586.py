@@ -4,7 +4,7 @@ from drakx.media import Media
 from drakx.distribution import Distribution
 import os
 
-config = ReleaseConfig("2012", "OurDiva", "Non-Free", subversion="Alpha 2", medium="DVD")
+config = ReleaseConfig("2013", "Aspiring Vaporware", "Non-Free", subversion="Alpha 3", medium="DVD")
 os.system("rm -rf "+config.outdir)
 
 srcdir = "./"
@@ -24,7 +24,7 @@ excludelist = []
 for e in ["exclude", "exclude_free", "exclude_ancient", "exclude_tofix", "exclude_nonfree", "exclude_contrib64"]:
     excludelist.append(srcdir + "lists/" + e)
 
-i586 = Distribution(config, "i586", media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = True)
+i586 = Distribution(config, "i586", media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = True, stage2="../mdkinst-i586.cpio.xz")
 distrib=[i586]
 
 image = IsoImage(config, distrib, maxsize=4700)
