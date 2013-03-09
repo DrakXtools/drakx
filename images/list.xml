@@ -163,7 +163,9 @@
 </from>
 
 <from dir="/usr/LIB/device-mapper">
-  *.so
+  <from expand="glob"> 
+    *.so
+  </from>
 </from>
 
 <from dir="../images/setup">
