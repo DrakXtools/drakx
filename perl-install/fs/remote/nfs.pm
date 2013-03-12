@@ -5,6 +5,7 @@ use diagnostics;
 
 use common;
 use fs::remote;
+use network::tools;
 use log;
 
 our @ISA = 'fs::remote';
@@ -28,34 +29,36 @@ sub to_dev_raw {
 
 sub check {
     my ($_class, $in) = @_;
-    $in->do_pkgs->ensure_binary_is_installed('nfs-utils-clients', 'showmount') or return;
+    $in->do_pkgs->ensure_files_are_installed([ [ 'nfs-utils' , '/usr/sbin/showmount' ] , [ 'nmap' , '/usr/bin/nmap' ] ]);
     require services;
-    services::start_not_running_service('portmap');
+    services::start_not_running_service('rpcbind');
     services::start('nfs-common'); #- TODO: once nfs-common is fixed, it could use start_not_running_service()
     1;
 }
 
 sub find_servers {
-    open(my $F2, "rpcinfo-flushed -b mountd 2 |");
-    open(my $F3, "rpcinfo-flushed -b mountd 3 |");
-
-    common::nonblock($F2);
-    common::nonblock($F3);
-    my $domain = chomp_(`domainname`);
-    my ($s, %servers);
-    my $quit;
-    while (!$quit) {
-	$quit = 1;
-	sleep 1;
-	while ($s = <$F2> || <$F3>) {
-	    $quit = 0;
-	    my ($ip, $name) = $s =~ /(\S+)\s+(\S+)/ or log::explanations("bad line in rpcinfo output"), next;
-	    $name =~ s/\.$//;
-	    $domain && $name =~ s/\Q.$domain\E$//
-	      || $name =~ s/^([^.]*)\.local$/$1/;
-	    $servers{$ip} ||= { ip => $ip, if_($name ne '(unknown)', name => $name) };
+    my @hosts;
+    my %servers;
+    my @routes = cat_("/proc/net/route");
+    @routes = reverse(@routes) if common::cmp_kernel_versions(c::kernel_version(), "2.6.39") >= 0;
+    foreach (@routes) {
+	if (/^(\S+)\s+([0-9A-F]+)\s+([0-9A-F]+)\s+[0-9A-F]+\s+\d+\s+\d+\s+(\d+)\s+([0-9A-F]+)/) {
+	    my $net = network::tools::host_hex_to_dotted($2);
+	    my $gateway = $3;
+	    # get the netmask in binary and remove leading zeros
+	    my $mask = unpack('B*', pack('h*', $5));
+	    $mask =~ s/^0*//;
+	    push @hosts, $net . "/" . length($mask) if $gateway eq '00000000' && $net ne '169.254.0.0';
 	}
+     }
+    # runs the nmap command on the local subnet
+    my $cmd = "/usr/bin/nmap -p 111 --open --system-dns -oG - " . (join ' ',@hosts);
+    open my $FH, "$cmd |" or die "Could not perform nmap scan - $!";
+    foreach (<$FH>) { 
+      my ($ip, $name) = /^H\S+\s(\S+)\s+\((\S*)\).+Port/ or next;
+      $servers{$ip} ||= { ip => $ip, name => $name || $ip };
     }
+    close $FH;
     values %servers;
 }
 
