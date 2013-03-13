@@ -52,18 +52,11 @@ static char modules_directory[100] = "";
 static struct module_descr_elem * modules_descr = NULL;
 
 static char *filename2modname(char * filename) {
-	char *modname, *p;
+	char *modname;
 
 	modname = strdup(basename(filename));
 	if (strstr(modname, kernel_module_extension)) {
 		modname[strlen(modname)-(sizeof(kernel_module_extension)-1)] = '\0'; /* remove trailing .ko.gz */
-	}
-
-	p = modname;
-	while (p && *p) {
-		if (*p == '-')
-			*p = '_';
-		p++;
 	}
 
 	return modname;
