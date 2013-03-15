@@ -52,10 +52,10 @@ my $lib = (arch() =~ /x86_64/ ? 'lib64' : 'lib');
 my %kind2packages = (
     local     => [],
     SmartCard => [ 'castella-pam' ],
-    LDAP      => [ 'openldap-clients', 'nss_ldap', 'pam_ldap', 'autofs', 'nss_updatedb' ],
-    KRB5       => [ 'nss_ldap', 'pam_krb5', "${lib}sasl2-plug-gssapi", 'nss_updatedb' ],
+    LDAP      => [ 'openldap-clients', 'nss-pam-ldapd', 'pam_ldap', 'autofs', 'nss_updatedb' ],
+    KRB5       => [ 'nss-pam-ldapd', 'pam_krb5', "${lib}sasl2-plug-gssapi", 'nss_updatedb' ],
     NIS       => [ 'ypbind', 'autofs' ],
-    winbind   => [ 'samba-winbind', 'nss_ldap', 'pam_krb5', "${lib}sasl2-plug-gssapi" ],
+    winbind   => [ 'samba-winbind', 'nss-pam-ldapd', 'pam_krb5', "${lib}sasl2-plug-gssapi" ],
 );
 
 
