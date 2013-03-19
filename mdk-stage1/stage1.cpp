@@ -398,8 +398,6 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 		return lspcidrake_main(argc, argv);
 	if (!strcmp(binary_name, "serial_probe"))
 		return serial_probe_main();
-	if (!strcmp(binary_name, "hotplug"))
-		return hotplug_main(argc, argv);
 	if (!strcmp(binary_name, "consoletype"))
 		return consoletype_main(argc, argv);
 
