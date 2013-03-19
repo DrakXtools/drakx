@@ -428,7 +428,6 @@ int main(int argc __attribute__ ((unused)), char *argv[], char *env[])
 	spawn_shell();
 #endif
 	init_modules_insmoding();
-	init_firmware_loader();
 	init_frontend("Welcome to " DISTRIB_DESCR ", " __DATE__ " " __TIME__);
 
 	probe_that_type(VIRTIO_DEVICES, BUS_ANY);
