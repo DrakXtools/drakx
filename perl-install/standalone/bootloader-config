@@ -65,6 +65,9 @@ my $bootloader;
 $bootloader = bootloader::read($all_hds);
 if (!$bootloader) {
     if (member($action, 'add-kernel', 'remove-kernel')) {
+	if ($no_initrd) {
+	    die "Cannot find a bootloader installed and initrd build suppressed\n";
+	}
 	warn "Cannot find a boot loader installed. Only taking care of initrd\n";
     } else {
 	die "Cannot find a boot loader installed\n";

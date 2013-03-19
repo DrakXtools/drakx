@@ -1,5 +1,8 @@
 Version 14.37 - 18 March 2013, by Per Øyvind Karlsen
 
+- bootloader-config:
+  o do not build initrd if no bootloader is detected and
+    --no-initd argument is supplied
 - drakauth:
   o install nss-pam-ldapd instead of nss_ldap (mga#9375)
 - fix mounting NFS server (Derek Jennings, mga#207)
