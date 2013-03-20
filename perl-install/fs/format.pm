@@ -195,7 +195,7 @@ sub part_raw {
 
     # Preserve UUID on fs where we couldn't enforce it while formatting
     (undef, $cmd) = @{$preserve_UUID{$fs_type}};
-    run_program::raw($cmd, '-U', devices::make($dev)) if $cmd;
+    run_program::raw({}, $cmd, '-U', devices::make($dev)) if $cmd;
     
     if (member($fs_type, qw(ext3 ext4))) {
 	disable_forced_fsck($dev);
