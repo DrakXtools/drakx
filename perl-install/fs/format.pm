@@ -64,7 +64,7 @@ my %edit_LABEL = ( # package, command, option
 );
 
 # Preserve UUID on fs where we couldn't enforce it while formatting
-my %preserve_UUID = ( # package, commande
+my %preserve_UUID = ( # package, command
     #btrfs    => [ 'btrfs-progs', 'FIXME' ],
     jfs      => [ 'jfsutils', 'jfs_tune', ],
     xfs      => [ 'xfsprogs', 'xfs_admin' ],
