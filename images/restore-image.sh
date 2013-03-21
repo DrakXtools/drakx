@@ -389,7 +389,6 @@ EOF
 		if [ -n "$MKINITRD" ]; then
 		    mount -t sysfs none "$mnt_dir/sys"
 		    mount -t proc none "$mnt_dir/proc"
-		    echo > /proc/sys/kernel/modprobe # rescue's modprobe does not handle modprobe -q and aliases
 		    chroot $mnt_dir bootloader-config --action rebuild-initrds
 		    umount "$mnt_dir/sys"
 		    umount "$mnt_dir/proc"
