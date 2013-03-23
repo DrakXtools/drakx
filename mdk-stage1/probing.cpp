@@ -271,10 +271,10 @@ void discovered_device(enum driver_type type, const char * description, const ch
 	if (type == MEDIA_ADAPTERS) {
 		const char * alternate = NULL;
 		wait_message("Loading driver for media adapter:\n \n%s", description);
-		failed = my_modprobe(driver, MEDIA_ADAPTERS, NULL, 1);
+		failed = my_modprobe(driver, MEDIA_ADAPTERS, NULL);
 		alternate = get_alternate_module(driver);
 		if (!IS_NOAUTO && alternate) {
-			failed = my_modprobe(alternate, MEDIA_ADAPTERS, NULL, 1);
+			failed = my_modprobe(alternate, MEDIA_ADAPTERS, NULL);
 		}
 		remove_wait_message();
 		warning_insmod_failed(failed);
@@ -284,7 +284,7 @@ void discovered_device(enum driver_type type, const char * description, const ch
 	if (type == NETWORK_DEVICES) {
 		wait_message("Loading driver for network device:\n \n%s", description);
 		prepare_intf_descr(description);
-		failed = my_modprobe(driver, NETWORK_DEVICES, NULL, 1);
+		failed = my_modprobe(driver, NETWORK_DEVICES, NULL);
 		warning_insmod_failed(failed);
 		remove_wait_message();
 		if (intf_descr_for_discover) /* for modules providing more than one net intf */
@@ -294,7 +294,7 @@ void discovered_device(enum driver_type type, const char * description, const ch
 #ifdef ENABLE_USB
 	if (type == USB_CONTROLLERS)
                 /* we can't allow additional modules floppy since we need usbhid for keystrokes of usb keyboards */
-		failed = my_modprobe(driver, USB_CONTROLLERS, NULL, 0);
+		failed = my_modprobe(driver, USB_CONTROLLERS, NULL);
 #endif
 }
 
@@ -332,7 +332,7 @@ void probe_virtio_modules(void)
 		if (e.vendor == VIRTIO_PCI_VENDOR) {
 			if (!loaded_pci) {
 				log_message("loading virtio-pci");
-				my_modprobe("virtio_pci", ANY_DRIVER_TYPE, NULL, 0);
+				my_modprobe("virtio_pci", ANY_DRIVER_TYPE, NULL);
 				loaded_pci = 1;
 			}
 
@@ -355,7 +355,7 @@ void probe_virtio_modules(void)
 			}
 			if (name) {
 				log_message("virtio: loading %s", name);
-				my_modprobe(name, ANY_DRIVER_TYPE, options, 0);
+				my_modprobe(name, ANY_DRIVER_TYPE, options);
 			}
 		}
 	}
@@ -422,7 +422,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 		if (!already_mounted_usbdev) { /* XXX die..? */
 			already_mounted_usbdev = true;
 			wait_message("Detecting USB devices.");
-			my_modprobe("usbhid", ANY_DRIVER_TYPE, NULL, 0);
+			my_modprobe("usbhid", ANY_DRIVER_TYPE, NULL);
 			remove_wait_message();
 		}
 
@@ -535,9 +535,9 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
             already_probed_usb_controllers && !already_loaded_usb_scsi) {
                 already_loaded_usb_scsi = 1;
                 /* we can't allow additional modules floppy since we need usbkbd for keystrokes of usb keyboards */
-                my_modprobe("usb_storage", MEDIA_ADAPTERS, NULL, 0); 
+                my_modprobe("usb_storage", MEDIA_ADAPTERS, NULL); 
                 if (module_already_present("ieee1394"))
-                        my_modprobe("sbp2", MEDIA_ADAPTERS, NULL, 0);
+                        my_modprobe("sbp2", MEDIA_ADAPTERS, NULL);
                 wait_message("Detecting USB mass-storage devices.");
 #ifndef DEBUG
                 sleep(10); /* sucking background work */

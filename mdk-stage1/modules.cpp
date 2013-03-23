@@ -339,7 +339,7 @@ bool module_already_present(const char *name)
 	return present;
 }
 
-static enum insmod_return insmod_with_deps(const char * mod_name, const char * options, int allow_modules_floppy)
+static enum insmod_return insmod_with_deps(const char * mod_name, const char * options)
 {
 	int err = modprobe(mod_name, options);
 	switch (err){
@@ -354,9 +354,9 @@ static enum insmod_return insmod_with_deps(const char * mod_name, const char * o
 
 
 #ifndef DISABLE_NETWORK
-enum insmod_return my_modprobe(const char * mod_name, enum driver_type type, const char * options, int allow_modules_floppy)
+enum insmod_return my_modprobe(const char * mod_name, enum driver_type type, const char * options)
 #else
-enum insmod_return my_modprobe(const char * mod_name, enum driver_type type __attribute__ ((unused)), const char * options, int allow_modules_floppy)
+enum insmod_return my_modprobe(const char * mod_name, enum driver_type type __attribute__ ((unused)), const char * options)
 #endif
 {
 	enum insmod_return i;
@@ -386,7 +386,7 @@ enum insmod_return my_modprobe(const char * mod_name, enum driver_type type __at
 		log_message("running %s", cmd);
 		i = (enum insmod_return)system(cmd);
 	} else
-    	    i = insmod_with_deps(mod_name, options, allow_modules_floppy);
+    	    i = insmod_with_deps(mod_name, options);
 
 	if (i == 0) {
 		log_message("\tsucceeded %s", mod_name);
@@ -433,7 +433,7 @@ static enum return_type insmod_with_options(const char * mod, enum driver_type t
 	strcat(options, " ");
 	strcat(options, answers[0]); // because my_modprobe will eventually modify the string
 	
-	if (my_modprobe(mod, type, answers[0], 1) != INSMOD_OK) {
+	if (my_modprobe(mod, type, answers[0]) != INSMOD_OK) {
 		stg1_error_message("Insmod failed.");
 		return RETURN_ERROR;
 	}

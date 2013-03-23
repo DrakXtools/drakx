@@ -578,7 +578,7 @@ static enum return_type bringup_networking(struct interface_info * intf)
         /* badly */
         fd = open("/proc/net/packet", O_RDONLY);
         if (fd < 0)
-               my_modprobe("af_packet", ANY_DRIVER_TYPE, NULL, 1);
+               my_modprobe("af_packet", ANY_DRIVER_TYPE, NULL);
         else
                close(fd);
 

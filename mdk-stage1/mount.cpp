@@ -212,8 +212,8 @@ int my_mount(const char *dev, const char *location, const char *fs, int force_rw
 	}
 
 	if (!strcmp(fs, "supermount")) {
-		my_modprobe("supermount", ANY_DRIVER_TYPE, NULL, 1);
-		my_modprobe("isofs", ANY_DRIVER_TYPE, NULL, 1);
+		my_modprobe("supermount", ANY_DRIVER_TYPE, NULL);
+		my_modprobe("isofs", ANY_DRIVER_TYPE, NULL);
 		opts = (char*)alloca(500);
                 sprintf(opts, "dev=%s,fs=iso9660,tray_lock=always", dev);
                 dev = "none";
@@ -221,41 +221,41 @@ int my_mount(const char *dev, const char *location, const char *fs, int force_rw
 
 #ifndef DISABLE_MEDIAS
 	if (!strcmp(fs, "vfat")) {
-		my_modprobe("nls_cp437", ANY_DRIVER_TYPE, NULL, 1);
-		my_modprobe("nls_iso8859_1", ANY_DRIVER_TYPE, NULL, 1);
-		my_modprobe("vfat", ANY_DRIVER_TYPE, NULL, 1);
+		my_modprobe("nls_cp437", ANY_DRIVER_TYPE, NULL);
+		my_modprobe("nls_iso8859_1", ANY_DRIVER_TYPE, NULL);
+		my_modprobe("vfat", ANY_DRIVER_TYPE, NULL);
 		opts = (char*)"check=relaxed";
 	}
 
 	if (!strcmp(fs, "ntfs")) {
-		my_modprobe("ntfs", ANY_DRIVER_TYPE, NULL, 1);
+		my_modprobe("ntfs", ANY_DRIVER_TYPE, NULL);
 	}
 
 	if (!strcmp(fs, "reiserfs"))
-		my_modprobe("reiserfs", ANY_DRIVER_TYPE, NULL, 1);
+		my_modprobe("reiserfs", ANY_DRIVER_TYPE, NULL);
 
 	if (!strcmp(fs, "reiser4"))
-		my_modprobe("reiser4", ANY_DRIVER_TYPE, NULL, 1);
+		my_modprobe("reiser4", ANY_DRIVER_TYPE, NULL);
 
 	if (!strcmp(fs, "jfs"))
-		my_modprobe("jfs", ANY_DRIVER_TYPE, NULL, 1);
+		my_modprobe("jfs", ANY_DRIVER_TYPE, NULL);
 
 	if (!strcmp(fs, "xfs"))
-		my_modprobe("xfs", ANY_DRIVER_TYPE, NULL, 1);
+		my_modprobe("xfs", ANY_DRIVER_TYPE, NULL);
 
 	if (!strcmp(fs, "ext4"))
-		my_modprobe("ext4", ANY_DRIVER_TYPE, NULL, 1);
+		my_modprobe("ext4", ANY_DRIVER_TYPE, NULL);
 
 	if (!strcmp(fs, "btrfs"))
-		my_modprobe("btrfs", ANY_DRIVER_TYPE, NULL, 1);
+		my_modprobe("btrfs", ANY_DRIVER_TYPE, NULL);
 
 #endif
 	if (!strcmp(fs, "iso9660"))
-		my_modprobe("isofs", ANY_DRIVER_TYPE, NULL, 1);
+		my_modprobe("isofs", ANY_DRIVER_TYPE, NULL);
 
 #ifndef DISABLE_NETWORK
 	if (!strcmp(fs, "nfs")) {
-		my_modprobe("nfs", ANY_DRIVER_TYPE, NULL, 1);
+		my_modprobe("nfs", ANY_DRIVER_TYPE, NULL);
 		log_message("preparing nfsmount for %s", dev);
 		rc = nfsmount_prepare(dev, &opts);
 		if (rc != 0)

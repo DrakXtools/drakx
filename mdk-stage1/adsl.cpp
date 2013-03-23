@@ -155,8 +155,8 @@ enum return_type perform_adsl(struct interface_info * intf)
 	intf->boot_proto = BOOTPROTO_ADSL_PPPOE;
 
 	wait_message("Waiting for ADSL connection to show up...");
-	my_modprobe("ppp_generic", ANY_DRIVER_TYPE, NULL, 1);
-	my_modprobe("ppp_async", ANY_DRIVER_TYPE, NULL, 1);
+	my_modprobe("ppp_generic", ANY_DRIVER_TYPE, NULL);
+	my_modprobe("ppp_async", ANY_DRIVER_TYPE, NULL);
 	results = adsl_connect(intf, answers[0], answers[1], answers[2]);
 	remove_wait_message();
 

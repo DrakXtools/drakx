@@ -138,7 +138,7 @@ enum return_type cdrom_prepare(void)
 	enum return_type results;
 	static int already_probed_ide_generic = 0;
 
-	my_modprobe("sd_mod", ANY_DRIVER_TYPE, NULL, 0);
+	my_modprobe("sd_mod", ANY_DRIVER_TYPE, NULL);
 
 	if (IS_AUTOMATIC) {
 		get_medias(CDROM, &medias, &medias_models, BUS_IDE);
@@ -149,7 +149,7 @@ enum return_type cdrom_prepare(void)
 		if ((i = try_automatic(medias, medias_models)) != -1)
 			return do_with_device(medias[i], medias_models[i]);
 		
-		my_modprobe("sr_mod", ANY_DRIVER_TYPE, NULL, 0);
+		my_modprobe("sr_mod", ANY_DRIVER_TYPE, NULL);
 		get_medias(CDROM, &medias, &medias_models, BUS_SCSI);
 		if ((i = try_automatic(medias, medias_models)) != -1)
 			return do_with_device(medias[i], medias_models[i]);
@@ -159,7 +159,7 @@ enum return_type cdrom_prepare(void)
 			return do_with_device(medias[i], medias_models[i]);
 
 		/* detect hybrid isos (isos dumped to an USB stick) */
-		my_modprobe("sd_mod", ANY_DRIVER_TYPE, NULL, 0);
+		my_modprobe("sd_mod", ANY_DRIVER_TYPE, NULL);
 		get_medias(DISK, &medias, &medias_models, BUS_USB);
 		if ((i = try_automatic(medias, medias_models)) != -1) {
 			return do_with_device(medias[i], medias_models[i]);
@@ -167,7 +167,7 @@ enum return_type cdrom_prepare(void)
 
 		unset_automatic();
 	} else
-		my_modprobe("sr_mod", ANY_DRIVER_TYPE, NULL, 0);
+		my_modprobe("sr_mod", ANY_DRIVER_TYPE, NULL);
 
 
 	get_medias(CDROM, &medias, &medias_models, BUS_ANY);
@@ -180,7 +180,7 @@ enum return_type cdrom_prepare(void)
 	if (count == 0) {
 		if (!already_probed_ide_generic) {
 			already_probed_ide_generic = 1;
-			my_modprobe("ide_generic", ANY_DRIVER_TYPE, NULL, 0);
+			my_modprobe("ide_generic", ANY_DRIVER_TYPE, NULL);
 			return cdrom_prepare();
 		}
 		stg1_error_message("No CDROM device found.");

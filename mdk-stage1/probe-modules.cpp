@@ -45,7 +45,7 @@ int probe_modules_main(int argc, char *argv[])
 	init_modules_insmoding();
 
 	if (module) {
-		my_modprobe(module, ANY_DRIVER_TYPE, options, 0);
+		my_modprobe(module, ANY_DRIVER_TYPE, options);
 	} else {
 		find_media(bus);
 	}
