@@ -235,12 +235,12 @@ static void handle_pcmcia(void)
 		log_message("no pcmcia adapter found");
 		return;
 	}
-	my_insmod("pcmcia_core", ANY_DRIVER_TYPE, NULL, 0);
-	my_insmod(pcmcia_adapter, ANY_DRIVER_TYPE, NULL, 0);
+	my_modprobe("pcmcia_core", ANY_DRIVER_TYPE, NULL, 0);
+	my_modprobe(pcmcia_adapter, ANY_DRIVER_TYPE, NULL, 0);
 	/* ds is an alias for pcmcia in recent 2.6 kernels
            but we don't have modules.alias in install, so try to load both */
-	my_insmod("ds", ANY_DRIVER_TYPE, NULL, 0);
-	my_insmod("pcmcia", ANY_DRIVER_TYPE, NULL, 0);
+	my_modprobe("ds", ANY_DRIVER_TYPE, NULL, 0);
+	my_modprobe("pcmcia", ANY_DRIVER_TYPE, NULL, 0);
 	
         /* setup a dynamic resource database for non statically mapped PCMCIA sockets */
 	pcmcia_socket_startup(-1);
@@ -255,7 +255,7 @@ static void handle_hid(void)
     h.probe();
     for (uint16_t i = 0; i < h.size(); i++) {
 	if (!h[i].module.empty())
-	    my_insmod(h[i].module.c_str(), ANY_DRIVER_TYPE, NULL, 0);
+	    my_modprobe(h[i].module.c_str(), ANY_DRIVER_TYPE, NULL, 0);
     }
 }
 

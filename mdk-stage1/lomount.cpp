@@ -169,10 +169,10 @@ lomount(const char *loopfile, const char *where, const char **dev, int compresse
 	flag = MS_MGC_VAL;
 	flag |= MS_RDONLY;
 
-	my_insmod("loop", ANY_DRIVER_TYPE, "max_loop=256", 1);
-	my_insmod("overlayfs", ANY_DRIVER_TYPE, NULL, 1);
+	my_modprobe("loop", ANY_DRIVER_TYPE, "max_loop=256", 1);
+	my_modprobe("overlayfs", ANY_DRIVER_TYPE, NULL, 1);
 	if (compressed) {
-	    my_insmod("squashfs", ANY_DRIVER_TYPE, NULL, 1);
+	    my_modprobe("squashfs", ANY_DRIVER_TYPE, NULL, 1);
 	}
 
         if (!(loopdev = find_free_loop())) {

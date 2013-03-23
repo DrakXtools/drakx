@@ -334,7 +334,7 @@ static enum return_type thirdparty_autoload_modules(const char *modules_location
 			entry++;
 		}
 		if (!entry || !*entry) {
-			enum insmod_return ret = my_insmod(module, ANY_DRIVER_TYPE, options, 0);
+			enum insmod_return ret = my_modprobe(module, ANY_DRIVER_TYPE, options, 0);
 			if (ret != INSMOD_OK) {
 				log_message("\t%s (marfile): failed", module);
 				stg1_error_message("Insmod %s (marfile) failed.", module);

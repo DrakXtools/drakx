@@ -31,7 +31,7 @@ void init_modules_insmoding(void);
 int insmod(const char *filename, const char *options);
 int modprobe(const char *alias, const char *extra_options);
 
-enum insmod_return my_insmod(const char * mod_name, enum driver_type type, const char * options, int allow_modules_floppy);
+enum insmod_return my_modprobe(const char * mod_name, enum driver_type type, const char * options, int allow_modules_floppy);
 enum return_type ask_insmod(enum driver_type);
 bool module_already_present(const char * name);
 

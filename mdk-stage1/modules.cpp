@@ -354,9 +354,9 @@ static enum insmod_return insmod_with_deps(const char * mod_name, const char * o
 
 
 #ifndef DISABLE_NETWORK
-enum insmod_return my_insmod(const char * mod_name, enum driver_type type, const char * options, int allow_modules_floppy)
+enum insmod_return my_modprobe(const char * mod_name, enum driver_type type, const char * options, int allow_modules_floppy)
 #else
-enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attribute__ ((unused)), const char * options, int allow_modules_floppy)
+enum insmod_return my_modprobe(const char * mod_name, enum driver_type type __attribute__ ((unused)), const char * options, int allow_modules_floppy)
 #endif
 {
 	enum insmod_return i;
@@ -431,9 +431,9 @@ static enum return_type insmod_with_options(const char * mod, enum driver_type t
 
 	strcat(options, mod);
 	strcat(options, " ");
-	strcat(options, answers[0]); // because my_insmod will eventually modify the string
+	strcat(options, answers[0]); // because my_modprobe will eventually modify the string
 	
-	if (my_insmod(mod, type, answers[0], 1) != INSMOD_OK) {
+	if (my_modprobe(mod, type, answers[0], 1) != INSMOD_OK) {
 		stg1_error_message("Insmod failed.");
 		return RETURN_ERROR;
 	}

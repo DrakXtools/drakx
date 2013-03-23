@@ -248,8 +248,8 @@ int get_disks(char *** names, char *** models)
 	char ** ptr;
 	int count = 0;
 
-	my_insmod("ide_disk", ANY_DRIVER_TYPE, NULL, 0);
-	my_insmod("sd_mod", ANY_DRIVER_TYPE, NULL, 0);
+	my_modprobe("ide_disk", ANY_DRIVER_TYPE, NULL, 0);
+	my_modprobe("sd_mod", ANY_DRIVER_TYPE, NULL, 0);
 
 	get_medias(DISK, names, models, BUS_ANY);
 
@@ -269,8 +269,8 @@ int get_cdroms(char *** names, char *** models)
 	char ** ptr;
 	int count = 0;
 
-//	my_insmod("ide_cd_mod", ANY_DRIVER_TYPE, NULL, 0);
-	my_insmod("sr_mod", ANY_DRIVER_TYPE, NULL, 0);
+//	my_modprobe("ide_cd_mod", ANY_DRIVER_TYPE, NULL, 0);
+	my_modprobe("sr_mod", ANY_DRIVER_TYPE, NULL, 0);
 
 	get_medias(CDROM, names, models, BUS_ANY);
 
@@ -288,7 +288,7 @@ char * floppy_device(void)
 {
         char ** names, ** models;
         int fd;
-	my_insmod("floppy", ANY_DRIVER_TYPE, NULL, 0);
+	my_modprobe("floppy", ANY_DRIVER_TYPE, NULL, 0);
         fd = open("/dev/fd0", O_RDONLY|O_NONBLOCK);
         if (fd != -1) {
                 char drivtyp[17];
@@ -308,7 +308,7 @@ char * floppy_device(void)
                 close(fd);
         }
         log_message("seems that you don't have a regular floppy drive");
-        my_insmod("sd_mod", ANY_DRIVER_TYPE, NULL, 0);
+        my_modprobe("sd_mod", ANY_DRIVER_TYPE, NULL, 0);
 	get_medias(FLOPPY, &names, &models, BUS_ANY);
 	if (names && *names) {
 		char *devnames = NULL;
