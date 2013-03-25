@@ -601,7 +601,7 @@ sub installPackages {
 
     my $digger_pid = fork();
     if (!$digger_pid) {
-	    exec "/usr/games/digger", "/X:$xid";
+	    exec "/usr/games/digger", "/X:$xid", "/Q";
     }
     # TODO: kill pid after finished installing packages rather than leaving zombie process
 
