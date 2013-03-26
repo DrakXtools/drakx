@@ -42,7 +42,6 @@
 #include "probe-modules.h"
 #include "rescue-gui.h"
 #include "drvinst.h"
-#include "hotplug.h"
 #include "ldetect/lspcidrake.h"
 #include "serial_probe.h"
 #include "consoletype.h"
