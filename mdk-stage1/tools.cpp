@@ -269,7 +269,7 @@ int get_cdroms(char *** names, char *** models)
 	char ** ptr;
 	int count = 0;
 
-//	my_modprobe("ide_cd_mod", ANY_DRIVER_TYPE, NULL);
+	my_modprobe("ide_cd_mod", ANY_DRIVER_TYPE, NULL);
 	my_modprobe("sr_mod", ANY_DRIVER_TYPE, NULL);
 
 	get_medias(CDROM, names, models, BUS_ANY);
