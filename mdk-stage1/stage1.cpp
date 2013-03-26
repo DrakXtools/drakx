@@ -257,6 +257,7 @@ static void handle_hid(void)
 	if (!h[i].module.empty())
 	    my_modprobe(h[i].module.c_str(), ANY_DRIVER_TYPE, NULL);
     }
+    my_modprobe("hid_generic", ANY_DRIVER_TYPE, NULL);
 }
 
 
