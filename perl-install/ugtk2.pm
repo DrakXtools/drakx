@@ -1623,7 +1623,8 @@ sub show {
                                         $info->{timeout}->() if $info->{timeout};
                                         $self->process_next;
                                     });
-    eval { $notification->show };
+    # this makes net_applet to segfault (mga#9102):
+    #eval { $notification->show };
 }
 
 1;
