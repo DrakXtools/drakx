@@ -262,6 +262,18 @@ our %l = (
     usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-6fire snd-usb-caiaq snd-usb-usx2y usb-midi) ],
     webcam => [
         qw(cafe_ccic cpia2 cpia_usb cyber2000fb em28xx et61x251 gspca),
+        qw(gspca_benq gspca_conex gspca_cpia1 gspca_etoms
+        gspca_finepix gspca_gl860 gspca_jeilinj gspca_jl2005bcd
+        gspca_kinect gspca_konica gspca_m5602 gspca_mars
+        gspca_mr97310a gspca_nw80x gspca_ov519 gspca_ov534
+        gspca_ov534_9 gspca_pac207 gspca_pac7302 gspca_pac7311
+        gspca_se401 gspca_sn9c2028 gspca_sn9c20x gspca_sonixb
+        gspca_sonixj gspca_spca1528 gspca_spca500 gspca_spca501
+        gspca_spca505 gspca_spca506 gspca_spca508 gspca_spca561
+        gspca_sq905 gspca_sq905c gspca_sq930x gspca_stk014
+        gspca_stv0680 gspca_stv06xx gspca_sunplus gspca_t613
+        gspca_topro gspca_tv8532 gspca_vc032x gspca_vicam
+        gspca_xirlink_cit gspca_zc3xx),
         qw(ibmcam konicawc mod_quickcam ov511 ov511-alt ov518_decomp),
         qw(ov51x-jpeg ovfx2 pwc qc-usb-messenger quickcam quickcam_messenger),
         # both STV06xx & stv06xx b/c drivers/media/video/gspca/stv06xx/stv06xx.h
