@@ -391,7 +391,7 @@ sub getXenBlk() {
     map {   
             s/block://;
             { device => basename($_), info => "Xen block device", media_type => 'hd', bus => 'xen' };
-    } glob("/sys/bus/xen/devices/*/block*");
+    } glob("/sys/block/xvd*");
 }
 
 sub getVirtIO() {
