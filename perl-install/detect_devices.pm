@@ -390,7 +390,7 @@ sub getXenBlk() {
     -d '/sys/bus/xen/devices' or return;
     map {   
             s/block://;
-            { device => basename($_), info => "Xen block device", media_type => 'xvd', bus => 'xen' };
+            { device => basename($_), info => "Xen block device", media_type => 'hd', bus => 'xen' };
     } glob("/sys/bus/xen/devices/*/block*");
 }
 
