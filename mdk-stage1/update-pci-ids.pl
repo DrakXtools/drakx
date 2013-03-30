@@ -6,7 +6,7 @@ use MDK::Common;
 
 
 my %t = ( 
-    network => 'network/main|gigabit|wireless|pcmcia',
+    network => 'network/main|gigabit|pcmcia|wireless',
     medias_ide  => 'disk/ide',
     medias_other => 'disk/scsi|hardware_raid|sata bus/firewire',
 );
