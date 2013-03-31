@@ -412,7 +412,8 @@ sub read_grub_menu_lst {
 	$b{default} = min($b{default}, scalar(@{$b{entries}}) - 1);
 	$b{default} = $b{entries}[$b{default}]{label};
     }
-    $b{method} = $b{gfxmenu} ? 'grub-graphic' :  'grub-menu';
+    #$b{method} = $b{gfxmenu} ? 'grub-graphic' :  'grub-menu';
+    $b{method} = 'grub2';
 
     \%b;
 }
