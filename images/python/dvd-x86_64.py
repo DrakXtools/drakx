@@ -18,7 +18,7 @@ for m in "main", "contrib", "non-free":
 
 srcdir = "./"
 includelist = []
-for l in ["basesystem_mini", "input_cat", "theme-free", "kernel64", "languages", "firmware_nonfree", "input_contrib", "input_nonfree"]:
+for l in ["basesystem_mini", "input_cat", "theme-moondrake", "kernel64", "languages", "firmware_nonfree", "input_contrib", "input_nonfree"]:
     includelist.append(srcdir + "lists/" + l)
 excludelist = []
 for e in ["exclude", "exclude_free", "exclude_ancient", "exclude_tofix", "exclude_nonfree", "exclude_contrib64"]:
