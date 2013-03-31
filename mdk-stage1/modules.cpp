@@ -247,7 +247,7 @@ static int load_modules_descriptions(void)
 	struct kmod_ctx *ctx;
 	char modpath[PATH_MAX];
 
-	log_message("loading modules descriptions");
+	log_message("loading module descriptions");
 
 	dlist = list_directory(modules_directory);
 	for (modnum = 0; dlist[modnum] && *dlist[modnum]; modnum++);
