@@ -19,7 +19,9 @@ use fs;
 use c;
 
 sub facesdir() {
-    "$::prefix/usr/share/mdk/faces/";
+    my $dir = "$::prefix/usr/share/mdk/faces/";
+    @themes = glob("$dir/*-*/");
+    @themes ? $themes[0] : $dir;
 }
 sub face2png {
     my ($face) = @_;
