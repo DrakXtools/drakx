@@ -680,7 +680,7 @@ sub configure_firewall {
 	require network::drakfirewall;
 	$o->{firewall_ports} ||= ''; #- don't open any port by default
 	network::drakfirewall::set_ports($o->do_pkgs, 0, $o->{firewall_ports}, 'log_net_drop');
-	network::drakfirewall::set_ifw($o->do_pkgs, 1, [ 'psd' ], '');
+	#network::drakfirewall::set_ifw($o->do_pkgs, 1, [ 'psd' ], '');
     }
 }
 
