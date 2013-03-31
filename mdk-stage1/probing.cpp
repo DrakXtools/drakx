@@ -137,11 +137,13 @@ char * get_net_intf_description(const char * intf_name)
 #endif
 
 static bool device_match_modules_list(const pciEntry &e, const char **modules, unsigned int modules_len) {
-	if (e.module.empty())
+	if (e.module.empty() && e.kmodules.empty())
 		return false;
-	for (unsigned int i = 0; i < modules_len; i++)
-		if (e.module == modules[i])
+	const std::string &module = (e.module.empty() && !e.kmodules.empty()) ? e.kmodules.front() : e.module;
+	for (unsigned int i = 0; i < modules_len; i++) {
+		if (module == modules[i])
 			return true;
+	}
 	return false;
 }
 
@@ -188,9 +190,11 @@ static void add_detected_device(unsigned short vendor, unsigned short device, un
 static int add_detected_device_if_match(const pciEntry &e, const char **modules, unsigned int modules_len)
 {
 	int ret = device_match_modules_list(e, modules, modules_len);
-	if (ret)
+	if (ret) {
+		const std::string &module = (e.module.empty() && !e.kmodules.empty()) ? e.kmodules.front() : e.module;
 		add_detected_device(e.vendor, e.device, e.subvendor, e.subdevice,
-				    e.text, e.module);
+				    e.text, module);
+	}
 	return ret;
 }
 
@@ -223,7 +227,8 @@ void probing_detect_devices()
 #endif
 #endif
 		/* device can't be found in built-in pcitables, but keep it */
-		add_detected_device(e.vendor, e.device, e.subvendor, e.subdevice, e.text, e.module);
+		const std::string &module = (e.module.empty() && !e.kmodules.empty()) ? e.kmodules.front() : e.module;
+		add_detected_device(e.vendor, e.device, e.subvendor, e.subdevice, e.text, module);
 	}
 
 	already_detected_devices = 1;
@@ -304,9 +309,10 @@ void probe_pci_modules(enum driver_type type, const char **pci_modules, unsigned
     for (unsigned int i = 0; i < p.size(); i++) {
 	const pciEntry &e = p[i];
 	if (device_match_modules_list(e, pci_modules, pci_modules_len)) {
+	    const std::string &module = (e.module.empty() && !e.kmodules.empty()) ? e.kmodules.front() : e.module;
 	    log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s",
-		    e.vendor, e.device, e.subvendor, e.subdevice, safe_descr(e.text.c_str()), e.module.c_str());
-	    discovered_device(type, e.text.c_str(), e.module.c_str());
+		    e.vendor, e.device, e.subvendor, e.subdevice, safe_descr(e.text.c_str()), module.c_str());
+	    discovered_device(type, e.text.c_str(), module.c_str());
 	}
     }
 }
@@ -432,8 +438,9 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 		    for (unsigned int i = 0; i < p.size(); i++) {
 			const pciEntry &e = p[i];
 			if (device_match_modules_list(e, usb_modules, usb_modules_len)) {
-			    log_message("USB: device %04x %04x is \"%s\" (%s)", e.vendor, e.device, safe_descr(e.text.c_str()), e.module.c_str());
-			    discovered_device(type, e.text.c_str(), e.module.c_str());
+			    const std::string &module = (e.module.empty() && !e.kmodules.empty()) ? e.kmodules.front() : e.module;
+			    log_message("USB: device %04x %04x is \"%s\" (%s)", e.vendor, e.device, safe_descr(e.text.c_str()), module.c_str());
+			    discovered_device(type, e.text.c_str(), module.c_str());
 			}
 		    }
 		}

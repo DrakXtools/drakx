@@ -44,8 +44,10 @@ static void load_modules(int argc, char *argv[]) {
     for (uint16_t i = 0; i < pu.size(); i++) {
 	const E &e = pu[i];
 	const std::string &devclass = pci_class2text(e.class_id);
-	if (e.module.empty() || e.module.find(':') != std::string::npos || devclass == "DISPLAY_VGA")
+	if ((e.kmodules.empty() && (e.module.empty() || e.module.find(':') != std::string::npos)) || devclass == "DISPLAY_VGA")
 	    continue;
+	const std::string &module = e.module.empty() ? e.kmodules.front() : e.module;
+
 	if (argc > 1) {
 	    int j;
 	    bool skip = true;
@@ -58,8 +60,8 @@ static void load_modules(int argc, char *argv[]) {
 	    if (skip)
 		continue;
 	}
-	std::cerr << "Installing driver " << e.module << " (for \"" << e.text << "\" [" << devclass << "])" << std::endl;
-	modprobe(e.module.c_str(), nullptr);
+	std::cerr << "Installing driver " << module << " (for \"" << e.text << "\" [" << devclass << "])" << std::endl;
+	modprobe(e.module.empty() ? e.kmodules.front().c_str() : e.module.c_str(), nullptr);
     }
 }
 
