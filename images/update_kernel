@@ -69,7 +69,12 @@ sub extract_installed_rpm {
     my $file; while ($file = <$F>) {
 	chomp($file);
 	system('cp', $file, "$local_dir/modules/" . basename($file)) == 0
-	  or warn "conflict for $file\n";
+	    or warn "conflict for $file\n";
+	if ($file =~ /\.xz$/) {
+	    system('unxz', "$local_dir/modules/" . basename($file));
+	} elsif ($file =~ /\.gz$/) {
+	    system('gunzip', "$local_dir/modules/" . basename($file));
+	}
     }
 
     sys('perl', '../kernel/modules.pl', 'remove_unneeded_modules', $kern_ver);
