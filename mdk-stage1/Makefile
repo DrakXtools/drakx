@@ -295,7 +295,8 @@ $(CLEANDIRS):
 .PHONY: subdirs ldetect
 .PHONY: all clean test
 
-dist: tar
+dist: dist-git
+
 tar:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
 	@if [ -e "../.svn" ]; then \
@@ -319,7 +320,13 @@ dist-svn:
 	rm -rf $(PRODUCT)-$(VERSION)
 
 dist-git:
-	@cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD mdk-stage1 kernel Makefile.config | xz >mdk-stage1/$(PRODUCT)-$(VERSION).tar.xz;
+	mkdir -p $(PRODUCT)-$(VERSION)
+	cd ..; git archive HEAD mdk-stage1 kernel Makefile.config | (cd mdk-stage1/$(PRODUCT)-$(VERSION) && tar xf -)
+	cd ldetect; git archive --prefix=mdk-stage1/ldetect/ HEAD | (cd ../$(PRODUCT)-$(VERSION)  && tar xf -)
+	tar -Jcf $(PRODUCT)-$(VERSION).tar.xz $(PRODUCT)-$(VERSION)
+	rm -rf $(PRODUCT)-$(VERSION)
+	$(info $(PRODUCT)-$(VERSION).tar.xz is ready)
+
 
 install:
 	install -m755 stage1 -D $(DESTDIR)$(ROOTDEST)/stage1
