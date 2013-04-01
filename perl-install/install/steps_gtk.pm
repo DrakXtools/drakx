@@ -549,6 +549,7 @@ sub installPackages {
     local $::noborderWhenEmbedded = 1;
     my $w = ugtk2->new(N("Installing"));
     state $show_advertising;
+    state $video_game;
     my $show_release_notes;
 
     my $pkg_log_widget = gtknew('TextView', editable => 0);
@@ -576,6 +577,12 @@ sub installPackages {
     };
 
     my $cancel = gtknew('Button', text => N("Cancel"), clicked => sub { $install::pkgs::cancel_install = 1 });
+    my $bossbutton = gtknew('Button', text_ref => \$video_game, 
+			 format => sub { $video_game ? N("Bored?") : N("Boss button") },
+			 clicked => sub {
+			     gtkval_modify(\$video_game, !$video_game);
+			 });
+
     my $details = gtknew('Button', text_ref => \$show_advertising, 
 			 format => sub { $show_advertising ? N("Details") : N("No details") },
 			 clicked => sub {
@@ -618,7 +625,7 @@ sub installPackages {
 	gtknew('HButtonBox', spacing => 0, layout => 'edge', children_loose => [
             if_($release_notes, $rel_notes),
             gtknew('HButtonBox', spacing => 5, layout => 'end',
-                   children_loose => [ $cancel, $details ]),
+                   children_loose => [ $cancel, $bossbutton, $details ]),
              ]),
     ])), 0, 1, 0);
     
