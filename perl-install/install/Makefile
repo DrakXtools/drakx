@@ -15,7 +15,7 @@ all: xs
 clean xs:
 	make -C .. $@
 
-dist: dist-svn
+dist: dist-git
 
 dist-svn:
 	mkdir -p $(PRODUCT)-$(VERSION)
