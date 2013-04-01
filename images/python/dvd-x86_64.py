@@ -4,7 +4,7 @@ from drakx.media import Media
 from drakx.distribution import Distribution
 import os
 
-config = ReleaseConfig("2013", "Aspiring Vaporware", "Non-Free", subversion="Alpha 3", medium="DVD")
+config = ReleaseConfig("2013", "Twelve Angry Penguins", "Non-Free", subversion="Beta", medium="DVD")
 os.system("rm -rf "+config.outdir)
 
 srcdir = "./"
