@@ -8,6 +8,9 @@ lynx
 # bootloader
 grub
 
+# initrd
+dracut
+
 # "Free" release (ie not PowerPack, Flash...)
 free-kde-config
 free-kde4-config
@@ -15,6 +18,7 @@ mandriva-release-Free
 mandriva-theme-Free
 mandriva-theme-Free-screensaver
 mandriva-lxde-config-Free
+mandriva-xfce-config-Free
 
 # vim
 vim-minimal
@@ -87,7 +91,8 @@ proftpd
 portmap
 
 # syslog-daemon
-sysklogd
+# systemd now provides a fully functional syslog feature
+systemd
 
 # vnc
 tigervnc
