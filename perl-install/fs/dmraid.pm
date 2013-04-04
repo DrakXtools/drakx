@@ -44,6 +44,7 @@ sub _raid_devices_raw() {
     log::l("_raid_devices_raw");
     my %vgs;
     my %pv2vg = map {
+	chomp();
 	log::l("got: $_");
 	my %l; @l{qw(name size stride level status subsets devs spares)} = split(':');
 	$vgs{$l{name}} = 1 if defined $l{spares};
