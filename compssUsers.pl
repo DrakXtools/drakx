@@ -15,7 +15,7 @@ N_("Workstation") =>
 [
   { label => N_("Office Workstation"),
     descr => 
-      N_("Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets (OpenOffice.org Calc, Kspread), PDF viewers, etc"),
+      N_("Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets (LibreOffice Calc, Kspread), PDF viewers, etc"),
     flags => [ qw(OFFICE SPELLCHECK PIM ARCHIVING ), if_(!$light_desktop, qw(PUBLISHING)) ],
     default_selected => 1,
   },
