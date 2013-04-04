@@ -153,7 +153,7 @@ sub add_kernel() {
 	return;
     }
 
-    my $root_part = fs::get::root([ fs::get::fstab($all_hds) ]) or die "cannot find root partition\n";
+    my $root_part = fs::get::root_([ fs::get::fstab($all_hds) ]) or warn "cannot find root partition in /etc/fstab\n";
     my %opts = (
 		root => fs::wild_device::from_part('', $root_part), 
 		initrd_options => $initrd_options,
