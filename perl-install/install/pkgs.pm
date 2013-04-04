@@ -777,6 +777,8 @@ sub install {
     log::l("install::pkgs::install the following: ", join(" ", map { $_->name } values %packages));
 
     URPM::read_config_files();
+    # force loading libnss*
+    getgrent();
     URPM::add_macro(join(' ', '__dbi_cdb', URPM::expand('%__dbi_cdb'), 'nofsync'));
     my $LOG = _openInstallLog();
 
