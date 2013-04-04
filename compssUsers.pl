@@ -161,7 +161,7 @@ N_("Graphical Environment") =>
   if_(!$light,
   { label => N_("Other Graphical Desktops"),
     descr => N_("Window Maker, Enlightenment, Fvwm, etc"),
-    flags => [ qw(GRAPHICAL_DESKTOP X ACCESSIBILITY E17) ], 
+    flags => [ qw(GRAPHICAL_DESKTOP X ACCESSIBILITY E17 XFCE) ], 
   },
   ),
 ],
