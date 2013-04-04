@@ -1,3 +1,7 @@
+- drakx-in-chroot:
+  o do not copy /etc/resolv.conf in chroot if not using either remote
+    display or remote repository (thus fixing goup lookups, mga#9326)
+
 Version 14.39 -  1 April 2013, by Per Øyvind Karlsen
 
 - ship with vmware video driver as vmware seems to have problems with using
