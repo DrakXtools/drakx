@@ -117,7 +117,12 @@ sub vgs() {
 
 	#- device should exist, created by dmraid(8) using libdevmapper
 	#- if it doesn't, we suppose it's not in use
-	if_(-e "/dev/$dev", $vg); 
+	if (-e "/dev/$dev") {
+	    $vg; 
+	} else {
+	    log::l("ignoring $dev as /dev/$dev doesn't exist");
+	    ();
+	}
 
     } grep { 
 	if ($_->{status} eq 'ok') {
