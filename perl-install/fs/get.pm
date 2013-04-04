@@ -119,6 +119,15 @@ sub has_mntpoint {
     my ($mntpoint, $all_hds) = @_;
     mntpoint2part($mntpoint, [ really_all_fstab($all_hds) ]);
 }
+
+sub root_from_mounted() {
+    foreach (`df -P`) {
+        next if m!^[^/]!; # ignore tootfs
+        my ($fs, undef, undef, undef, undef, $mntpnt) = split(/\s+/);
+        return $fs if $mntpnt eq '/';
+    }
+}
+
 sub root_ {
     my ($fstab, $o_boot) = @_;
     $o_boot && mntpoint2part("/boot", $fstab) || mntpoint2part("/", $fstab);
