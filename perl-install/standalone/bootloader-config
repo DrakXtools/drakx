@@ -149,7 +149,7 @@ sub add_kernel() {
 	my $fake_bootloader = { vga => undef };
 	my %opts = (initrd_options => $initrd_options);
 	my $initrd_long = bootloader::kernel_str2initrd_long($kernel_str);
-	bootloader::mkinitrd($kernel_str->{version}, $fake_bootloader, { %opts }, "/boot/$initrd_long");
+	bootloader::mkinitrd($kernel_str->{version}, $fake_bootloader, \%opts, "/boot/$initrd_long");
 	return;
     }
 
