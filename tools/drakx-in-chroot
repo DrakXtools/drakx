@@ -118,9 +118,7 @@ mkdir_p("$dir/dev");
 eval { cp_af($_, "$dir$_") } foreach qw(/dev/root);
 
 #- if the DISPLAY is remote, we may need to resolve the name:
-if ($remote_repository || $ENV{DISPLAY} !~ /^:/) {
-    eval { cp_af('/etc/resolv.conf', "$SLASH_LOCATION/resolv.conf") };
-}
+eval { cp_af('/etc/resolv.conf', "$SLASH_LOCATION/resolv.conf") };
 
 {
     chomp(my $kernel_version = `uname -r`);
