@@ -235,9 +235,9 @@ sub read_grub2 {
 	if (/menuentry\s+['"]([^']+)["']/) {
 	    push @{$bootloader{entries}}, $entry if $entry;
 	    $entry = { label => $1 };
-	} elsif (/linux\s+(\S+)\s+(.*)?/) {
+	} elsif (/linux\s+(\S+)\s+(.*)?/ || /module\s+(\S+vmlinu\S+)\s+(.*)?/) {
 	    @$entry{qw(kernel_or_dev append)} = ($1, $2);
-	} elsif (/initrd\s+(\S+)/) {
+	} elsif (/initrd\s+(\S+)/ || /module\s+(\S+initrd\S+)\s+(.*)?/) {
 	    $entry->{initrd} = $1;
 	}
     }
