@@ -25,4 +25,6 @@ my $in = 'interactive'->vnew('su');
 # so that we popup above drakx:
 any::set_wm_hints_if_needed($in);
 
+# Fake enough $o for retrieving the proper translation:
+$o->{locale}{lang} = $ARGV[1];
 $in->display_help_window({ interactive_help_id => $ARGV[0] });

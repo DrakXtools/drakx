@@ -838,13 +838,13 @@ sub display_help_window {
 }
 
 sub display_help {
-    my ($_o, $common) = @_;
+    my ($o, $common) = @_;
     # not very safe but we run in a restricted environment anyway:
     my $f = '/tmp/help.txt';
     if ($common->{interactive_help}) {
        output($f, $common->{interactive_help}->());
     }
-    system('display_installer_help', $common->{interactive_help_id} || $f); 
+    system('display_installer_help', $common->{interactive_help_id} || $f, $o->{locale}{lang}); 
 }
 
 sub ask_fromW {
