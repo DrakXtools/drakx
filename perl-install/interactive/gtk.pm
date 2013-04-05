@@ -778,7 +778,7 @@ sub filter_widgets {
     }
 }
 
-my $help_path = "/usr/share/doc/installer-help/";
+my $help_path = "/usr/share/doc/installer-help";
 
 sub is_help_file_exist {
     my ($_o, $id) = @_;
