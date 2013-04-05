@@ -236,6 +236,7 @@ sub read_grub2 {
 	    push @{$bootloader{entries}}, $entry if $entry;
 	    $entry = { label => $1 };
 	} elsif (/linux\s+(\S+)\s+(.*)?/ || /module\s+(\S+vmlinu\S+)\s+(.*)?/) {
+	    $entry->{type} = 'image';
 	    @$entry{qw(kernel_or_dev append)} = ($1, $2);
 	} elsif (/initrd\s+(\S+)/ || /module\s+(\S+initrd\S+)\s+(.*)?/) {
 	    $entry->{initrd} = $1;

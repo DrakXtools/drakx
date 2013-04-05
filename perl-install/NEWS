@@ -1,6 +1,8 @@
 - drakboot:
   o assume grub2.cfg is UTF-8 encoded
   o read back xen conf from grub2
+  o set entries type when reading back grub2 conf, thus fixing
+    switching back to grub-legacy (mga#9563)
 - draksound
   o update draksound troubleshooting text (mga#4162)
 - bootloader-config:
