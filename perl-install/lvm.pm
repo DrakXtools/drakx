@@ -119,10 +119,13 @@ sub get_lvs {
       [
        map {
 	   my $device = "$lvm->{VG_name}/$_";
+	   my $p = fs::wild_device::to_subpart("/dev/$device");
 	   my $part = {
 	     device => $device, 
 	     lv_name => $_,
 	     rootDevice => $lvm->{VG_name},
+	     minor => $p->{minor},
+	     major => $p->{major},
 	     size => get_lv_size($device) };
 	   if (my $type = -e "/dev/$device" && fs::type::type_subpart_from_magic($part)) {
                 put_in_hash($part, $type); 	       
