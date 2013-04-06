@@ -2194,7 +2194,7 @@ sub find_other_distros_grub_conf {
 	    } else {
 		log::l("could not recognise the distribution for $e->{grub_conf} in $e->{bootpart}{device}");
 	    }
-	    $e->{name} = $e->{menuentry} || "Linux $e->{bootpart}{device}";
+	    $e->{name} ||= "Linux $e->{bootpart}{device}";
 	    push @found, $e;
 	}
     }
