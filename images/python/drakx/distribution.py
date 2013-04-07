@@ -127,8 +127,10 @@ class Distribution(object):
                         dep = pkg
                 if dep:
                     if len(pkgids) > 1:
-                        requested.pop(key)
-                        requested[str(dep.id())] = 1
+                        # XXX
+                        if key in requested:
+                            requested.pop(key)
+                            requested[str(dep.id())] = 1
                     pkgdict[pkg.fullname()] = dep
 
             urpm.resolve_requested(empty_db, state, requested, 
@@ -157,11 +159,15 @@ class Distribution(object):
                                 conflicts = backtrack['conflicts']
                                 skip = False
                                 for c in conflicts:
-                                    cpkg = pkgdict[c]
-                                    # if it's a package rejected due to conflict with a package of same name,
-                                    # it's most likely some leftover package in repos that haven't been
-                                    # removed yet and that we can safely ignore
-                                    if cpkg.name() == pkg.name():
+                                    # XXX
+                                    if c in pkgdict:
+                                        cpkg = pkgdict[c]
+                                        # if it's a package rejected due to conflict with a package of same name,
+                                        # it's most likely some leftover package in repos that haven't been
+                                        # removed yet and that we can safely ignore
+                                        if cpkg.name() == pkg.name():
+                                            skip = True
+                                    else:
                                         skip = True
                                 if not skip:
                                     print color("The requested package %s has been rejected due to conflicts with: %s" %
@@ -350,6 +356,7 @@ class Distribution(object):
     
         pkgs = []
         weight = None
+        # XXX
         breaknext = False
         for line in f.readlines():
             if "META_CLASS" in line:
