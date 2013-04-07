@@ -344,6 +344,7 @@ our %l = (
 
       qw(virtio virtio_balloon virtio_pci virtio_ring),
       qw(mei pch_phub),
+      qw(vmvgfx),
     ],
     agpgart => [
       if_(arch() =~ /alpha/, qw(alpha-agp)),
