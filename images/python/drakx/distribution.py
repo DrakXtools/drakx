@@ -350,6 +350,7 @@ class Distribution(object):
     
         pkgs = []
         weight = None
+        breaknext = False
         for line in f.readlines():
             if "META_CLASS" in line:
                 continue
@@ -357,9 +358,15 @@ class Distribution(object):
             if line.startswith("#"):
                 continue
             if not line:
-               cat = None
-               weight = None
-               continue
+                if breaknext:
+                    cat = None
+                    weight = None
+                    breaknext = False
+                else:
+                    breaknext = True
+                continue
+            if breaknext:
+               breaknext = False
             if line.startswith("CAT_"):
                 if line == category:
                     cat = category
