@@ -116,7 +116,9 @@ sub ask_network() {
 
 sub ask_urpmi() {
     #- configure urpmi media if no media are configured
-    run_program::get_stdout('urpmq', '--list-media') and return;
+    my @media_url = map { top(split(' ', $_)) } run_program::get_stdout('urpmq', '--list-url');
+    my @online_media = grep { !m,^(?:file://)?/, } @media_url;
+    @online_media and return;
     any::urpmi_add_all_media($in);
 }
 
