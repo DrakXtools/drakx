@@ -162,7 +162,7 @@ sub collect_needed_libraries {
     while (@to_check) {
 	my $to_check = join(' ', @to_check);
 	# we add LD_LIBRARY_PATH so that ldd will be able to pick up the uClibc elf loader..
-	my $libpath = "";
+	my $libpath = "/lib:/lib64:/usr/lib:/usr/lib64";
 	if (`chrpath -l $to_check 2>/dev/null` =~ /uclibc/) {
 	    $libpath = "/usr/uclibc/$LIB";
 	}
