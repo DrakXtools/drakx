@@ -6,6 +6,10 @@ perl.require("urpm::select")
 
 class Distribution(object):
     def __init__(self, config, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = False, synthfilter = ".cz:gzip -9", stage1=None, stage2="../mdkinst.cpio.xz", advertising="/usr/lib/drakx-installer/root/install/extra/advertising/"):
+        volumeid = ("%s-%s-%s-%s" % (config.vendor, config.product, config.version, arch)).upper()
+        if len(volumeid) > 32:
+            print "length of volumeid '%s' (%d) > 32" % (volumeid, len(volumeid))
+            exit(1)
         self.arch = arch
         self.media = {}
         for m in media:
