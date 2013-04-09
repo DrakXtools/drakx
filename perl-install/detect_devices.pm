@@ -849,7 +849,6 @@ sub pci_probe__real() {
     add_addons($pcitable_addons, map {
 	my %l;
 	@l{qw(vendor id subvendor subid pci_domain pci_bus pci_device pci_function pci_revision is_pciexpress media_type nice_media_type driver description)} = split "\t";
-	$l{$_} = hex $l{$_} foreach qw(vendor id subvendor subid);
 	$l{bus} = 'PCI';
 	$l{sysfs_device} = '/sys/bus/pci/devices/' . get_pci_sysfs_path(\%l);
 	\%l;
@@ -873,7 +872,6 @@ sub usb_probe__real() {
 	my %l;
 	@l{qw(vendor id media_type driver description pci_bus pci_device usb_port)} = split "\t";
 	$l{media_type} = join('|', grep { $_ ne '(null)' } split('\|', $l{media_type}));
-	$l{$_} = hex $l{$_} foreach qw(vendor id);
 	$l{sysfs_device} = "/sys/bus/usb/devices/$l{pci_bus}-" . ($l{usb_port} + 1);
 	$l{bus} = 'USB';
 	\%l;
