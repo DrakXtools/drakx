@@ -501,7 +501,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 	}
     }
     log::l("fix hostname");
-    system("echo mdv2012 &> $::prefix/etc/hostname");
+    system("echo mdk2013 &> $::prefix/etc/hostname");
     
     log::l("fix missing /media/cdrom");
     run_program::rooted($::prefix, "mkdir", "/media/cdrom");
