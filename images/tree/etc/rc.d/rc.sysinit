@@ -10,7 +10,7 @@ mkdir /dev/pts /dev/shm
 mount /proc
 mount -a
 
-echo -e "\t\t\tWelcome to \\033[1;36mMoondrake\\033[0;39m GNU/Linux"
+cat /usr/share/moondrake.logo
 
 # disabled for now..
 #echo "/sbin/mdev" > /proc/sys/kernel/hotplug

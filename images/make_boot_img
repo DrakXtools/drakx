@@ -43,6 +43,9 @@ initrd() {
 	cp -a "$firm" "$tmp_initrd/firmware/$file"
     done
 
+    # Make it available for use as ~bootsplash as well :o)
+    `linux_logo -l` > $tmp_initrd/usr/share/moondrake.logo
+
     cat > "$tmp_initrd/etc/issue" <<EOF
 `linux_logo -l`
 
