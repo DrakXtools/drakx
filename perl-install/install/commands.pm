@@ -13,11 +13,6 @@ use vars qw($printable_chars *ROUTE *DF *PS);
 #-######################################################################################
 use common;
 
-sub lspcidrake {
-    require detect_devices;
-    print join "\n", detect_devices::stringlist($_[0] eq '-v'), '';
-}
-
 sub bug {
     my ($h) = getopts(\@_, "h");
     my ($o_part_device) = @_;
