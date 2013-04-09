@@ -5,7 +5,6 @@ from drakx.distribution import Distribution
 import os
 
 config = ReleaseConfig("2013", "Aspiring Vaporware", "LXDE", subversion="Alpha 3", medium="CD")
-os.system("rm -rf "+config.outdir)
 
 srcdir = "./"
 rpmsrate = "../../perl-install/install/share/meta-task/rpmsrate-raw"
@@ -29,8 +28,10 @@ for e in ["exclude", "exclude_mini", "exclude_ancient", "exclude_tofix", "exclud
     excludelist.append(srcdir + "lists/" + e)
 
 x86_64 = Distribution(config, "x86_64", media, includelist64, excludelist, rpmsrate, compssusers, filedeps, synthfilter=".xz:xz --text")
-i586 = Distribution(config, "i586", media, includelist32, excludelist, rpmsrate, compssusers, filedeps, synthfilter=".xz:xz --text", stage2="../mdkinst-i586.cpio.xz")
+#i586 = Distribution(config, "i586", media, includelist32, excludelist, rpmsrate, compssusers, filedeps, synthfilter=".xz:xz --text", stage2="../mdkinst-i586.cpio.xz")
 
-distrib=[i586,x86_64]
+distrib=[x86_64]
+
+#distrib=[i586,x86_64]
 
 image = IsoImage(config, distrib, maxsize=800)

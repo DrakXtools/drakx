@@ -5,7 +5,6 @@ from drakx.distribution import Distribution
 import os
 
 config = ReleaseConfig("2013", "Aspiring Vaporware", "Non-Free", subversion="Alpha 3", medium="DVD")
-os.system("rm -rf "+config.outdir)
 
 srcdir = "./"
 rpmsrate = "../../perl-install/install/share/meta-task/rpmsrate-raw"
