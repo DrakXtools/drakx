@@ -1174,9 +1174,9 @@ sub selectLanguage_install {
     my $non_utf8 = 0;
     add2hash($common, { cancel => '',
 			focus_first => 1,
-			advanced_messages => formatAlaTeX(N("Mandriva Linux can support multiple languages. Select
+			advanced_messages => formatAlaTeX(N("%s can support multiple languages. Select
 the languages you would like to install. They will be available
-when your installation is complete and you restart your system.")),
+when your installation is complete and you restart your system.", "Moondrake GNU/Linux")),
 			advanced_label => N("Multiple languages"),
 			advanced_title => N("Select Additional Languages"),
 		    });

@@ -10,17 +10,17 @@ sub main_license() {
 #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
 N("Introduction
 
-The operating system and the different components available in the Mandriva Linux distribution 
+The operating system and the different components available in the Moondrake GNU/Linux distribution 
 shall be called the \"Software Products\" hereafter. The Software Products include, but are not 
 restricted to, the set of programs, methods, rules and documentation related to the operating 
-system and the different components of the Mandriva Linux distribution, and any applications 
-distributed with these products provided by Mandriva's licensors or suppliers.
+system and the different components of the Moondrake GNU/Linux distribution, and any applications 
+distributed with these products provided by Moondrake's licensors or suppliers.
 
 
 1. License Agreement
 
 Please read this document carefully. This document is a license agreement between you and  
-Mandriva S.A. which applies to the Software Products.
+Moondrake which applies to the Software Products.
 By installing, duplicating or using any of the Software Products in any manner, you explicitly 
 accept and fully agree to conform to the terms and conditions of this License. 
 If you disagree with any portion of the License, you are not allowed to install, duplicate or use 
@@ -35,21 +35,21 @@ Software Products.
 
 The Software Products and attached documentation are provided \"as is\", with no warranty, to the 
 extent permitted by law.
-Neither Mandriva S.A. nor its licensors or suppliers will, in any circumstances and to the extent 
+Neither Moondrake nor its licensors or suppliers will, in any circumstances and to the extent 
 permitted by law, be liable for any special, incidental, direct or indirect damages whatsoever 
 (including without limitation damages for loss of business, interruption of business, financial 
 loss, legal fees and penalties resulting from a court judgment, or any other consequential loss) 
-arising out of  the use or inability to use the Software Products, even if Mandriva S.A. or its 
+arising out of  the use or inability to use the Software Products, even if Moondrake or its 
 licensors or suppliers have been advised of the possibility or occurrence of such damages.
 
 LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME COUNTRIES
 
-To the extent permitted by law, neither Mandriva S.A. nor its licensors, suppliers or
+To the extent permitted by law, neither Moondrake nor its licensors, suppliers or
 distributors will, in any circumstances, be liable for any special, incidental, direct or indirect 
 damages whatsoever (including without limitation damages for loss of business, interruption of 
 business, financial loss, legal fees and penalties resulting from a court judgment, or any 
 other consequential loss) arising out of the possession and use of software components or 
-arising out of  downloading software components from one of Mandriva Linux sites which are 
+arising out of  downloading software components from one of Moondrake GNU/Linux sites which are 
 prohibited or restricted in some countries by local laws.
 This limited liability applies to, but is not restricted to, the strong cryptography components 
 included in the Software Products.
@@ -63,9 +63,9 @@ The Software Products consist of components created by different persons or enti
 Most of these licenses allow you to use, duplicate, adapt or redistribute the components which 
 they cover. Please read carefully the terms and conditions of the license agreement for each component 
 before using any component. Any question on a component license should be addressed to the component 
-licensor or supplier and not to Mandriva.
-The programs developed by Mandriva S.A. are governed by the GPL License. Documentation written 
-by Mandriva S.A. is governed by a specific license. Please refer to the documentation for 
+licensor or supplier and not to Moondrake.
+The programs developed by Moondrake are governed by the GPL License. Documentation written 
+by Moondrake is governed by a specific license. Please refer to the documentation for 
 further details.
 
 
@@ -73,9 +73,9 @@ further details.
 
 All rights to the components of the Software Products belong to their respective authors and are 
 protected by intellectual property and copyright laws applicable to software programs.
-Mandriva S.A. and its suppliers and licensors reserves their rights to modify or adapt the Software 
+Moondrake and its suppliers and licensors reserves their rights to modify or adapt the Software 
 Products, as a whole or in parts, by all means and for all purposes.
-\"Mandriva\", \"Mandriva Linux\" and associated logos are trademarks of Mandriva S.A.  
+\"Moondrake", \"Moondrake GNU/Linux\" and associated logos are trademarks of Moondrake  
 
 
 5. Governing Laws 
@@ -86,7 +86,7 @@ agreement.
 The terms and conditions of this License are governed by the Laws of France.
 All disputes on the terms of this license will preferably be settled out of court. As a last 
 resort, the dispute will be referred to the appropriate Courts of Law of Paris - France.
-For any question on this document, please contact Mandriva S.A.",
+For any question on this document, please contact Moondrake",
 $us ? "\n\n" . N("You agree not to (i) sell, export, re-export, transfer, divert, disclose technical data, or 
 dispose of, any Software to any person, entity, or destination prohibited by US export laws 
 or regulations including, without limitation, Cuba, Iran, North Korea, Sudan and Syria; or 
@@ -151,7 +151,7 @@ N("Congratulations, installation is complete.
 Remove the boot media and press Enter to reboot.
 
 
-For information on fixes which are available for this release of Mandriva Linux,
+For information on fixes which are available for this release of Moondrake GNU/Linux,
 consult the Errata available from:
 
 
@@ -159,7 +159,7 @@ consult the Errata available from:
 
 
 Information on configuring your system is available in the post
-install chapter of the Official Mandriva Linux User's Guide.",
+install chapter of the Official Moondrake GNU/Linux User's Guide.",
 'http://www.mandriva.com/en/security/advisories');
 }
 

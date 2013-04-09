@@ -20,7 +20,7 @@ if_(arch() =~ /ppc/,
     [ 'grub', 0, "\xEBH", 0x17e, "stage1 \0" ],
     [ 'grub', 0, "\xEBH", 0x18a, "stage1 \0" ],
     sub { my ($F) = @_;
-	  #- standard grub has no good magic (Mandriva's grub is patched to have "GRUB" at offset 6)
+	  #- standard grub has no good magic (Moondrake's grub is patched to have "GRUB" at offset 6)
 	  #- so scanning a range of possible places where grub can have its string
 	  #- 0x176 found on Conectiva 10
 	  my ($min, $max, $magic) = (0x176, 0x181, "GRUB \0");

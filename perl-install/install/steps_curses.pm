@@ -19,7 +19,7 @@ use common;
 my $banner;
 sub banner {
     my ($cui, $step) = @_;
-    my $text = N("Mandriva Linux Installation %s", "| $step");
+    my $text = N("%s Installation %s", "Moondrake GNU/Linux", "| $step");
     $banner ||= do {
 	my $win = $cui->add(undef, 'Window', '-x' => 1, '-y' => 0, '-height' => 1);
 	$win->add(undef, 'Label');

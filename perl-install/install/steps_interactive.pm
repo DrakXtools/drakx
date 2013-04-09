@@ -212,13 +212,13 @@ sub _warn_unsafe_upgrade {
     );
 
     my $choice;
-    $o->ask_from_({ messages => N("Installer has detected that your installed Mandriva Linux system could not
+    $o->ask_from_({ messages => N("Installer has detected that your installed %s system could not
 safely be upgraded to %s.
 
 New installation replacing your previous one is recommended.
 
 Warning : you should backup all your personal data before choosing \"New
-Installation\".", 'Mandriva Linux 2009') },
+Installation\".", "Moondrake GNU/Linux", 'Mandriva Linux 2009') }, # 2009? heavily dated, but whatever, don't care about now..
 		  [ { val => \$choice, type => 'list', list => \@choices, format => \&translate } ]);
 
     log::l("_warn_unsafe_upgrade: got $choice");

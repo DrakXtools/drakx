@@ -12,7 +12,7 @@ push @::textdomains, 'DrakX-help';
 #            you want it changed.
 sub acceptLicense() {
     N("Before continuing, you should carefully read the terms of the license. It
-covers the entire Mandriva Linux distribution. If you agree with all the
+covers the entire Moondrake GNU/Linux distribution. If you agree with all the
 terms it contains, check the \"%s\" box. If not, clicking on the \"%s\"
 button will reboot your computer.", N("Accept"), N("Quit"));
 }
@@ -85,7 +85,7 @@ With SCSI hard disk drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means
 \"second lowest SCSI ID\", etc.");
 }
 sub chooseCd() {
-    N("The Mandriva Linux installation is distributed on several CD-ROMs. If a
+    N("The Moondrake GNU/Linux installation is distributed on several CD-ROMs. If a
 selected package is located on another CD-ROM, DrakX will eject the current
 CD and ask you to insert the required one. If you do not have the requested
 CD at hand, just click on \"%s\", the corresponding packages will not be
@@ -93,11 +93,11 @@ installed.", N("Cancel"));
 }
 sub choosePackages() {
     N("It's now time to specify which programs you wish to install on your system.
-There are thousands of packages available for Mandriva Linux, and to make it
+There are thousands of packages available for Moondrake GNU/Linux, and to make it
 simpler to manage, they have been placed into groups of similar
 applications.
 
-Mandriva Linux sorts package groups in four categories. You can mix and
+Moondrake GNU/Linux sorts package groups in four categories. You can mix and
 match applications from the various categories, so a ``Workstation''
 installation can still have applications from the ``Server'' category
 installed.
@@ -159,10 +159,10 @@ right to let you know the purpose of that package.
 !! If a server package has been selected, either because you specifically
 chose the individual package or because it was part of a group of packages,
 you'll be asked to confirm that you really want those servers to be
-installed. By default Mandriva Linux will automatically start any installed
+installed. By default Moondrake GNU/Linux will automatically start any installed
 services at boot time. Even if they are safe and have no known issues at
 the time the distribution was shipped, it is entirely possible that
-security holes were discovered after this version of Mandriva Linux was
+security holes were discovered after this version of Moondrake GNU/Linux was
 finalized. If you do not know what a particular service is supposed to do or
 why it's being installed, then click \"%s\". Clicking \"%s\" will install
 the listed services and they will be started automatically at boot time. !!
@@ -226,7 +226,7 @@ best suits your needs.");
 sub configureX_chooser() {
     N("X (for X Window System) is the heart of the GNU/Linux graphical interface
 on which all the graphical environments (KDE, GNOME, AfterStep,
-WindowMaker, etc.) bundled with Mandriva Linux rely upon.
+WindowMaker, etc.) bundled with Moondrake GNU/Linux rely upon.
 
 You'll see a list of different parameters to change to get an optimal
 graphical display.
@@ -309,12 +309,12 @@ want to check \"%s\" if your machine is to act as a server, or if you were
 not successful in getting the display configured.", N("No"));
 }
 sub doPartitionDisks() {
-    N("You now need to decide where you want to install the Mandriva Linux
+    N("You now need to decide where you want to install the Moondrake GNU/Linux
 operating system on your hard drive. If your hard drive is empty or if an
 existing operating system is using all the available space you will have to
 partition the drive. Basically, partitioning a hard drive means to
 logically divide it to create the space needed to install your new
-Mandriva Linux system.
+Moondrake GNU/Linux system.
 
 Because the process of partitioning a hard drive is usually irreversible
 and can lead to data losses, partitioning can be intimidating and stressful
@@ -341,7 +341,7 @@ data (see ``Erase entire disk'' solution) or resize your Microsoft Windows
 FAT or NTFS partition. Resizing can be performed without the loss of any
 data, provided you've previously defragmented the Windows partition.
 Backing up your data is strongly recommended. Using this option is
-recommended if you want to use both Mandriva Linux and Microsoft Windows on
+recommended if you want to use both Moondrake GNU/Linux and Microsoft Windows on
 the same computer.
 
    Before choosing this option, please understand that after this
@@ -350,7 +350,7 @@ than when you started. You'll have less free space under Microsoft Windows
 to store your data or to install new software.
 
  * \"%s\". If you want to delete all data and all partitions present on
-your hard drive and replace them with your new Mandriva Linux system, choose
+your hard drive and replace them with your new Moondrake GNU/Linux system, choose
 this option. Be careful, because you will not be able to undo this operation
 after you confirm.
 
@@ -421,13 +421,13 @@ will not be able to recover it.
 Click on \"%s\" when you're ready to format the partitions.
 
 Click on \"%s\" if you want to choose another partition for your new
-Mandriva Linux operating system installation.
+Moondrake GNU/Linux operating system installation.
 
 Click on \"%s\" if you wish to select partitions which will be checked for
 bad blocks on the disk.", N("Next"), N("Previous"), N("Advanced"));
 }
 sub installUpdates() {
-    N("By the time you install Mandriva Linux, it's likely that some packages will
+    N("By the time you install Moondrake GNU/Linux, it's likely that some packages will
 have been updated since the initial release. Bugs may have been fixed,
 security issues resolved. To allow you to benefit from these updates,
 you're now able to download them from the Internet. Check \"%s\" if you
@@ -447,7 +447,7 @@ exposed to the Internet. The trade-off that a higher security level is
 generally obtained at the expense of ease of use.
 
 If you do not know what to choose, keep the default option. You'll be able
-to change it later with the draksec tool, which is part of Mandriva Linux
+to change it later with the draksec tool, which is part of Moondrake GNU/Linux
 Control Center.
 
 Fill the \"%s\" field with the e-mail address of the person responsible for
@@ -455,7 +455,7 @@ security. Security messages will be sent to that address.", N("Security Administ
 }
 sub partition_with_diskdrake() {
     N("At this point, you need to choose which partition(s) will be used for the
-installation of your Mandriva Linux system. If partitions have already been
+installation of your Moondrake GNU/Linux system. If partitions have already been
 defined, either from a previous installation of GNU/Linux or by another
 partitioning tool, you can use existing partitions. Otherwise, hard disk drive
 partitions must be defined.
@@ -528,7 +528,7 @@ emergency boot situations.", N("Clear all"), N("Auto allocate"), N("More"), N("S
 sub resizeFATChoose() {
     N("More than one Microsoft partition has been detected on your hard drive.
 Please choose the one which you want to resize in order to install your new
-Mandriva Linux operating system.
+Moondrake GNU/Linux operating system.
 
 Each partition is listed as follows: \"Linux name\", \"Windows name\"
 \"Capacity\".
@@ -566,7 +566,7 @@ sub selectInstallClass() {
 found on your machine.
 
 DrakX now needs to know if you want to perform a new installation or an
-upgrade of an existing Mandriva Linux system:
+upgrade of an existing Moondrake GNU/Linux system:
 
  * \"%s\". For the most part, this completely wipes out the old system.
 However, depending on your partitioning scheme, you can prevent some of
@@ -575,13 +575,13 @@ If you wish to change how your hard disk drives are partitioned, or to change
 the filesystem, you should use this option.
 
  * \"%s\". This installation class allows you to update the packages
-currently installed on your Mandriva Linux system. Your current partitioning
+currently installed on your Moondrake GNU/Linux system. Your current partitioning
 scheme and user data will not be altered. Most of the other configuration
 steps remain available and are similar to a standard installation.
 
-Using the ``Upgrade'' option should work fine on Mandriva Linux systems
+Using the ``Upgrade'' option should work fine on Moondrake GNU/Linux systems
 running version \"8.1\" or later. Performing an upgrade on versions prior
-to Mandriva Linux version \"8.1\" is not recommended.", N("Install"), N("Upgrade"));
+to Moondrake GNU/Linux version \"8.1\" is not recommended.", N("Install"), N("Upgrade"));
 }
 sub selectKeyboard() {
     N("Depending on the language you chose (), DrakX will automatically select a
@@ -616,7 +616,7 @@ the tree view and \"%s\" in the Advanced section.
 
 About UTF-8 (unicode) support: Unicode is a new character encoding meant to
 cover all existing languages. However full support for it in GNU/Linux is
-still under development. For that reason, Mandriva Linux's use of UTF-8 will
+still under development. For that reason, Moondrake GNU/Linux's use of UTF-8 will
 depend on the user's choices:
 
  * If you choose a language with a strong legacy encoding (latin1
@@ -699,7 +699,7 @@ know what you're doing.", N("First sector of drive (MBR)"), N("Skip"));
 }
 sub setupDefaultSpooler() {
     N("Now, it's time to select a printing system for your computer. Other
-operating systems may offer you one, but Mandriva Linux offers two. Each of
+operating systems may offer you one, but Moondrake GNU/Linux offers two. Each of
 the printing systems is best suited to particular types of configuration.
 
  * \"%s\" -- which is an acronym for ``print, do not queue'', is the choice
@@ -720,7 +720,7 @@ emulate a \"lpd\" server, make sure you turn on the \"cups-lpd\" daemon.
 options and for managing the printer.
 
 If you make a choice now, and later find that you do not like your printing
-system you may change it by running PrinterDrake from the Mandriva Linux
+system you may change it by running PrinterDrake from the Moondrake GNU/Linux
 Control Center and clicking on the \"%s\" button.", N("pdq"), N("pdq"), N("CUPS"), N("CUPS"), N("Expert"));
 }
 sub setupSCSI() {
@@ -785,7 +785,7 @@ the card if you feel the configuration is wrong.
 
  * \"%s\": if you wish to configure your Internet or local network access,
 you can do so now. Refer to the printed documentation or use the
-Mandriva Linux Control Center after the installation has finished to benefit
+Moondrake GNU/Linux Control Center after the installation has finished to benefit
 from full in-line help.
 
  * \"%s\": allows to configure HTTP and FTP proxy addresses if the machine
@@ -802,7 +802,7 @@ firewall settings.
  * \"%s\": if you wish to change your bootloader configuration, click this
 button. This should be reserved to advanced users. Refer to the printed
 documentation or the in-line help about bootloader configuration in the
-Mandriva Linux Control Center.
+Moondrake GNU/Linux Control Center.
 
  * \"%s\": through this entry you can fine tune which services will be run
 on your machine. If you plan to use this machine as a server it's a good
@@ -810,7 +810,7 @@ idea to review this setup.", N("Configure"), N("Keyboard"), N("Country / Region"
 }
 sub takeOverHdChoose() {
     N("Choose the hard drive you want to erase in order to install your new
-Mandriva Linux partition. Be careful, all data on this drive will be lost
+Moondrake GNU/Linux partition. Be careful, all data on this drive will be lost
 and will not be recoverable!");
 }
 sub takeOverHdConfirm() {

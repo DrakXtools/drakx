@@ -8,7 +8,7 @@ my $themes_dir = "/usr/share/bootsplash/themes";
 my $themes_config_dir = "/etc/bootsplash/themes";
 my $sysconfig_file = "/etc/sysconfig/bootsplash";
 my $bootsplash_scripts = "/usr/share/bootsplash/scripts";
-my $default_theme = 'Mandrivalinux';
+my $default_theme = 'Moondrake';
 our $default_thumbnail = '/usr/share/libDrakX/pixmaps/nosplash_thumb.png';
 our @resolutions = uniq(map { "$_->{X}x$_->{Y}" } Xconfig::resolution_and_depth::bios_vga_modes());
 
