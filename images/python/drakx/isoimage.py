@@ -4,18 +4,19 @@ from drakx.common import *
 class IsoImage(object):
     def __init__(self, config, distrib, maxsize = 4700):
 
-        destdir = config.outdir + "/boot"
+        destdir = config.tmpdir + "/boot"
         grubdir = destdir + "/grub"
         repopath = config.repopath + "/" + distrib[0].arch
 
         os.system("rm -rf "+destdir)
+        #os.mkdir(config.tmpdir)
         os.mkdir(destdir)
         os.system("ln -sr ../grub/boot/alt* %s/" % destdir)
         os.symlink("/boot/memtest.bin", destdir+"/memtest")
         os.mkdir(grubdir)
         os.system("ln -sr ../grub/boot/grub/* %s/" % grubdir)
         for f in ['autorun.inf', 'dosutils']:
-            os.symlink("%s/%s" % (repopath, f), "%s/%s" % (config.outdir, f))
+            os.symlink("%s/%s" % (repopath, f), "%s/%s" % (config.tmpdir, f))
 
         if len(distrib) > 1:
             arch = "dual"
@@ -32,13 +33,13 @@ class IsoImage(object):
             pkgs.extend(dist.pkgs)
         pkgs.sort()
 
-        idxfile = open("%s/%s.idx" % (config.outdir, release), "w")
+        idxfile = open("%s/%s.idx" % (config.tmpdir, release), "w")
         for pkg in pkgs:
             idxfile.write(pkg+"\n")
 
         idxfile.close()
 
-        iso = release+".iso"
+        iso = "%s/%s.iso" % (config.outdir, release)
         applicationid = "%s - %s %s (%s)" % (config.distribution, config.version, config.subversion, config.product)
         volumesetid = applicationid + " - %s %s" % (arch, config.medium)
         datapreparer = "DrakX"
@@ -46,7 +47,7 @@ class IsoImage(object):
         systemid = config.distribution
         publisher = config.vendor
 
-        cmd = "grub2-mkrescue -o '%s' '%s' -f --stdio_sync off -c boot/grub/i386-pc/boot.catalog -input-charset utf-8 -R -r" % (iso, config.outdir)
+        cmd = "grub2-mkrescue -o '%s' '%s' -f --stdio_sync off -c boot/grub/i386-pc/boot.catalog -input-charset utf-8 -R -r" % (iso, config.tmpdir)
         # cmd prints size in number of sectors of 2048 bytes, so multiply with 2048 to get the number of bytes
         size = int(subprocess.Popen(cmd + " -print-size", shell=True, stdout=subprocess.PIPE, close_fds=True).stdout.readlines()[-1].strip()) * 2048
         print color("Estimated iso size will be %d bytes, %d MB" % (size, size/1000/1000), GREEN)
