@@ -467,6 +467,8 @@ Consoles 1,3,4,7 may also contain interesting information";
     #-  why not? cuz weather is nice today :-) [pixel]
     common::sync(); common::sync();
 
+    run_program::rooted($::prefix, "systemd-machine-id-setup");
+
     #- generate /etc/lvmtab needed for rc.sysinit
     run_program::rooted($::prefix, 'lvm2', 'vgscan') if -e '/etc/lvmtab';
 
