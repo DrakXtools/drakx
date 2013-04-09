@@ -232,7 +232,7 @@ sub grub {
     _ "install -m644 grub_data/grub.cfg -D $dir/boot/grub/grub.cfg";
     _ "install -m644 grub_data/themes/moondrake/theme.txt -D $dir/boot/grub/themes/moondrake/theme.txt";
     _ "install -m644 grub_data/themes/moondrake/star_w.png -D $dir/boot/grub/themes/moondrake/star_w.png";
-    _ "install -m644 /usr/share/gfxboot/themes/Mandriva/install/back.jpg -D $dir/boot/grub/themes/moondrake/background.jpg";
+    _ "install -m644 /usr/share/gfxboot/themes/Moondrake/install/back.jpg -D $dir/boot/grub/themes/moondrake/background.jpg";
     mkdir_p("$dir/boot/grub/fonts/");
     _ "grub2-mkfont -o $dir/boot/grub/fonts/dejavu.pf2 /usr/share/fonts/TTF/dejavu/DejaVuSans-Bold.ttf";
 
@@ -619,9 +619,9 @@ To Build a Bootable CD-ROM, try:
 	-f "$type.rdz" ? _ "cp -f $type.rdz $dir" : initrd($type, $I, "$dir/$type.rdz");
 
 	output("$dir/boot.msg", "
-Welcome to Mandriva Linux
+Welcome to Moondrake GNU/Linux
 
-Press <Enter> to install or upgrade a system 7mMandriva Linux7m
+Press <Enter> to install or upgrade a system 7mMoondrake GNU/Linux7m
 ");
 
 	output("$dir/silo.conf", qq(
@@ -668,7 +668,7 @@ sub boot_img_ppc {
 MacRISC
 </COMPATIBLE>
 <DESCRIPTION>
-Mandriva Linux PPC bootloader
+Moondrake GNU/Linux PPC bootloader
 </DESCRIPTION>
 <BOOT-SCRIPT>
 " screen" output
@@ -680,7 +680,7 @@ device-end
 3 to foreground-color
 0 to background-color
 " "(0C)" fb8-write drop
-" Booting Mandriva Linux PPC..." fb8-write drop 100 ms
+" Booting Moondrake GNU/Linux PPC..." fb8-write drop 100 ms
 boot cd:,\boot\yaboot
 </BOOT-SCRIPT>
 <OS-BADGE-ICONS>
@@ -738,7 +738,7 @@ boot cd:,\boot\yaboot
 ');
 
 	output("images/yaboot.conf", '
-init-message = "\nWelcome to Mandriva Linux PPC!\nHit <TAB> for boot options.\n\n"
+init-message = "\nWelcome to Moondrake GNU/Linux PPC!\nHit <TAB> for boot options.\n\n"
 timeout = 150
 device=cd:
 default = install-gui
@@ -830,7 +830,7 @@ image = enet:0,vmlinux-power4
 ');
 
 	output("images/yaboot.msg", '
-Thanks for choosing Mandriva Linux PPC.  The following is a short
+Thanks for choosing Moondrake GNU/Linux PPC.  The following is a short
 explanation of the various options for booting the install CD.
 
 All options ending with "-power4" use the BOOT kernel for ppc 9xx and POWER4.
@@ -867,7 +867,7 @@ sub syslinux_all_files {
     @$kernels or die "syslinux_all_files: no kernel\n";
 
     $default_vga =~ /791/ or die 'we rely on vga=791 for bootsplash';
-    my $theme = $ENV{THEME} || 'Mandriva-Free';
+    my $theme = $ENV{THEME} || 'Moondrake';
 
     each_index {
 	mkdir "$dir/alt$::i/$wordsize", 0777;
@@ -939,7 +939,7 @@ done";
     _ "cp /usr/lib/syslinux/isolinux.bin .boot_iso/isolinux/isolinux.bin";
 
     my $with_gfxboot = 0;
-    _ "cp /usr/share/gfxboot/themes/Mandriva/install/* .boot_iso/isolinux" if $with_gfxboot;
+    _ "cp /usr/share/gfxboot/themes/Moondrake/install/* .boot_iso/isolinux" if $with_gfxboot;
 # _ "cp /home/pixel/cooker/soft/theme/mandriva-gfxboot-theme/inst/* .boot_iso/isolinux" if $with_gfxboot;
     #_ "cp /home/teuf/mdv/src/mandriva-gfxboot-theme/inst/* .boot_iso/isolinux" if $with_gfxboot;
     _ "cp /usr/lib/syslinux/gfxboot.c32 .boot_iso/isolinux/gfxboot.c32" if $with_gfxboot;
@@ -971,7 +971,7 @@ timeout 10
 default 0
 fallback 1
 
-title Mandriva Linux Install
+title Moondrake GNU/Linux Install
 
 root (hd0,0)
 kernel /cooker/isolinux/alt0/$wordsize/vmlinuz $default_append $default_acpi $default_vga automatic=method:disk
@@ -983,13 +983,13 @@ pause To display the help, press <space> until you reach "HELP END"
 pause .
 pause Please see http://qa.mandriva.com/hd_grub.cgi for a friendlier solution
 pause .
-pause To specify the location where Mandriva Linux is copied,
-pause choose "Mandriva Linux Install", and press "e".
+pause To specify the location where Moondrake GNU/Linux is copied,
+pause choose "Moondrake GNU/Linux Install", and press "e".
 pause Then change "root (hd0,0)". FYI:
 pause - (hd0,0) is the first partition on first bios hard drive (usually hda1)
 pause - (hd0,4) is the first extended partition (usually hda5)
 pause - (hd1,0) is the first partition on second bios hard drive
-pause Replace /cooker to suits the directory containing Mandriva Linux
+pause Replace /cooker to suits the directory containing Moondrake GNU/Linux
 pause .
 pause HELP END
 EOF

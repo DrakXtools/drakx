@@ -38,7 +38,7 @@ mozilla_files=".apps/FirefoxPortable/Data/profile/*.sqlite \
 
 function prepare() {
 
-    echo "Mounting Mandriva Flash key..."
+    echo "Mounting Moondrake Flash key..."
     echo
 
     modprobe unionfs > /dev/null 2>&1
@@ -188,7 +188,7 @@ function restore_portable_apps_user_data() {
 
 function copy_new_version() {
 
-    echo "Copying new Mandriva Flash system..."
+    echo "Copying new Moondrake Flash system..."
 
     rm -rf $rootdir$boot_rel
     rm -f $rootdir$loopbacks_rel/.*sqf
@@ -301,7 +301,7 @@ echo
 
 cleanup
 
-echo "Congratulations! Your Mandriva Flash system is now upgraded."
+echo "Congratulations! Your Moondrake Flash system is now upgraded."
 echo
 
 exit 0

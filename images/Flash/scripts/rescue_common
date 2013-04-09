@@ -108,7 +108,7 @@ function insert_pendrive() {
     modprobe vfat > /dev/null 2>&1
 
     echo
-    echo -n 'Please insert your Mandriva Flash pen drive and press ENTER when ready: '
+    echo -n 'Please insert your Moondrake Flash pen drive and press ENTER when ready: '
     read READY
     echo
     echo -n 'Detecting pen drive: '
@@ -125,7 +125,7 @@ EOF
 
             if ! check_vendor; then
                 echo
-                echo "This is not an official Mandriva Flash key!"
+                echo "This is not an official Moondrake Flash key!"
                 echo
             fi
 
@@ -142,7 +142,7 @@ EOF
 
     echo
     echo
-    echo "Couldn't detect Mandriva Flash pen drive!"
+    echo "Couldn't detect Moondrake Flash pen drive!"
     echo
 
     return 1

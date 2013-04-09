@@ -31,7 +31,7 @@ my $release = common::mandrake_release($::prefix) ||
   };
 
 if ($release) {
-    $release =~ /Mandrake|Mandriva/ or die "release file doesn't contain 'Mandriva', exiting.\n";
+    $release =~ /Mandrake|Mandriva|Moondrake|Mageia/ or die "release file doesn't contain 'Moondrake', exiting.\n";
 } elsif (fs::get::mntpoint2part($::prefix, [ fs::read_fstab('', '/proc/mounts') ])) {
     die "unknown distribution mounted in $::prefix\n";
 } else {
@@ -60,7 +60,7 @@ if (@main_methods == 0) {
 
 my $install = $bootloader::{'install_raw_' . $main_method} or die "unknown bootloader method install_raw_$main_method\n";
 
-print "About to re-install Boot Loader $main_method of following Mandriva Linux distribution:\n\t",
+print "About to re-install Boot Loader $main_method of following Moondrake GNU/Linux distribution:\n\t",
   $release, "\n";
 if (!$auto) {
     print "=> ok? <press Enter to continue, 'n' and Enter to cancel> ";
