@@ -316,7 +316,7 @@ $in = 'interactive'->vnew;
 $ugtk2::wm_icon = "drakups";
 
 if (!$::testing) {
-    $in->do_pkgs->ensure_is_installed('nut-server', '/etc/rc.d/init.d/upsd') or $in->exit(1);
+    $in->do_pkgs->ensure_is_installed('nut-server', '/usr/sbin/upsd') or $in->exit(1);
 }
 
 if (member('--wizard', @ARGV)) {
