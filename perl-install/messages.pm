@@ -75,7 +75,7 @@ All rights to the components of the Software Products belong to their respective
 protected by intellectual property and copyright laws applicable to software programs.
 Moondrake and its suppliers and licensors reserves their rights to modify or adapt the Software 
 Products, as a whole or in parts, by all means and for all purposes.
-\"Moondrake", \"Moondrake GNU/Linux\" and associated logos are trademarks of Moondrake  
+\"Moondrake\", \"Moondrake GNU/Linux\" and associated logos are trademarks of Moondrake  
 
 
 5. Governing Laws 
