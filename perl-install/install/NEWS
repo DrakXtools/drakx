@@ -1,5 +1,9 @@
 Version 14.41,  9 April 2013, by Per Øyvind Karlsen
 
+- authentication:
+  o 'nss-pam-ldapd' obsoletes 'pam_ldap' (mga#9769)
+- library:
+  o fix detecting some USB devices due to not reporting their class (mga#9674)
 - bind mount /run in chroot, thus fixing dracut runs (Dave Hodgins, mga#9213)
 - create /etc/machine-id after all packages has been installed
 - drop perl 'lspcidrake' command as we now ship with 'lspcidrake' itself
