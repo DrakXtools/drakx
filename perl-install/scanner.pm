@@ -35,7 +35,7 @@ our $scannerDB = readScannerDB("$scannerDBdir/ScannerDB");
 
 sub confScanner {
     my ($model, $port, $vendor, $product, $firmware) = @_;
-    $port ||= "$::prefix/dev/scanner";
+    $port ||= "/dev/scanner";
     my $a = $scannerDB->{$model}{server};
     #print "file:[$a]\t[$model]\t[$port]\n| ", (join "\n| ", @{$scannerDB->{$model}{lines}}),"\n";
     my @driverconf = cat_("$sanedir/$a.conf");

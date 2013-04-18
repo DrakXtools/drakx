@@ -11,7 +11,7 @@ sub analyze {
 
     if ($dev =~ m!^/u?dev/(.*)!) {
 	'dev', $dev;
-    } elsif ($dev !~ m!^/! && (-e "/dev/$dev" || -e "$::prefix/dev/$dev")) {
+    } elsif ($dev !~ m!^/! && (-e "/dev/$dev" || -e "/dev/$dev")) {
 	'dev', "/dev/$dev";
     } elsif ($dev =~ /^LABEL=(.*)/) {
 	'label', $1;
@@ -40,11 +40,11 @@ sub to_subpart {
 	    $part->{device_UUID} = $val;
 	} elsif ($kind eq 'dev') {
 	    my %part = (faked_device => 0);
-	    if (my $rdev = (stat "$::prefix$dev")[6]) {
+	    if (my $rdev = (stat "$dev")[6]) {
 		($part{major}, $part{minor}) = unmakedev($rdev);
 	    }
 
-	    my $symlink = $dev !~ m!mapper/! ? readlink("$::prefix$dev") : undef;
+	    my $symlink = $dev !~ m!mapper/! ? readlink("$dev") : undef;
 	    $dev =~ s!/u?dev/!!;
 
 	    if ($symlink && $symlink !~ m!^/!) {
@@ -67,7 +67,7 @@ sub to_subpart {
 	    return \%part;
 	}
     } else {
-	if ($dev =~ m!^/! && -f "$::prefix$dev") {
+	if ($dev =~ m!^/! && -f "$dev") {
 	    #- it must be a loopback file or directory to bind
 	} else {
 	    log::l("part_from_wild_device_name: unknown device $dev");

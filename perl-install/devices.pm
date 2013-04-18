@@ -241,7 +241,7 @@ sub symlink_now_and_register {
     #- eg, ttySL0 is a symlink created by a daemon
     symlinkf($if, "$::prefix/lib/udev/devices/$of");
 
-    symlinkf($if, "$::prefix/dev/$of");
+    symlinkf($if, "/dev/$of");
 }
 
 
