@@ -44,7 +44,7 @@ sub to_subpart {
 		($part{major}, $part{minor}) = unmakedev($rdev);
 	    }
 
-	    my $symlink = $dev =~ m!mapper/! ? readlink("$::prefix$dev") : undef;
+	    my $symlink = $dev !~ m!mapper/! ? readlink("$::prefix$dev") : undef;
 	    $dev =~ s!/u?dev/!!;
 
 	    if ($symlink && $symlink !~ m!^/!) {
