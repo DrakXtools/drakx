@@ -1,0 +1,51 @@
+#!/bin/bash
+
+if ! mountpoint -q /mnt ; then
+  echo "I do not seem to see a Mageia install mounted on /mnt. You need to mount it first!" >&2
+  exit 1
+fi
+
+if [ ! -f /mnt/etc/machine-id ]; then
+  echo "Cannot find machine-id file (/mnt/etc/machine-id)" >&2
+  exit 1
+fi
+
+MID=$(cat /mnt/etc/machine-id)
+echo
+echo "Found machine-id: $MID"
+if [ ! -d /mnt/var/log/journal/$MID ]; then
+  echo "Cannot find journal log directory (/mnt/var/log/journal/<machine-id>)" >&2
+  exit 1
+fi
+
+TIMEFRAME=24
+if [ -n "$1" ]; then
+  NEWTIMEFRAME=$(( 0 + $1 ))
+  if [ $NEWTIMEFRAME -gt 0 ]; then
+    TIMEFRAME=$NEWTIMEFRAME
+  fi
+fi
+SINCE="$(LC_ALL=c date --date=$TIMEFRAME' hours ago' +'%F %T')"
+echo "Will collect logs from the last $TIMEFRAME hour(s)"
+echo "  NB give numeric argument to override capture period"
+
+TEMPFILE=$(mktemp /tmp/grabjournallogs.XXXXXX)
+echo -n "Extracting logs... "
+journalctl -D /mnt/var/log/journal/$MID --since "$SINCE" -o short >$TEMPFILE
+echo "done"
+
+if [ $(cat $TEMPFILE | wc -l) -lt 2 ]; then
+  rm -f $TEMPFILE
+  echo >&2
+  echo "Cannot find any logs. Consider increasing the capture period by passing a" >&2
+  echo "numeric argument larger than $TIMEFRAME." >&2
+  exit 1
+fi
+
+echo -n "Compressing logs... "
+cat $TEMPFILE | xz >/journallogs.xz
+rm -f $TEMPFILE
+echo "done"
+
+echo
+echo "Your logs have been extracted to the file 'journallogs.xz'"
