@@ -25,14 +25,14 @@ sub _ensure_initialized() {
     $initialized++ or init();
 }
 
-sub read_crypttab {
-    my ($all_hds) = @_;
+sub read_crypttab_ {
+    my ($all_hds, $crypttab) = @_;
 
-    -e _crypttab() or return;
+    -e $crypttab or return;
 
     my @raw_parts = grep { fs::type::isRawLUKS($_) } fs::get::really_all_fstab($all_hds);
 
-    foreach (cat_(_crypttab())) {
+    foreach (cat_($crypttab)) {
 	my ($dm_name, $dev) = split;
 
 	my $raw_part = fs::get::device2part($dev, \@raw_parts)
@@ -42,8 +42,13 @@ sub read_crypttab {
     }
 }
 
-sub save_crypttab {
+sub read_crypttab {
     my ($all_hds) = @_;
+    read_crypttab_($all_hds, _crypttab());
+}
+
+sub save_crypttab_ {
+    my ($all_hds, $crypttab) = @_;
 
     my @raw_parts = grep { $_->{dm_name} } fs::get::really_all_fstab($all_hds) or return;
 
@@ -57,7 +62,12 @@ sub save_crypttab {
 	if (eof) {
 	    $_ .= join('', map { "$_ $names{$_}\n" } sort keys %names);
 	}
-    } _crypttab();
+    } $crypttab;
+}
+
+sub save_crypttab {
+    my ($all_hds) = @_;
+    save_crypttab_($all_hds, _crypttab());
 }
 
 sub format_part {
