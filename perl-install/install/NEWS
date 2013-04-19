@@ -1,4 +1,9 @@
-Version 14.41,  9 April 2013, by Per Øyvind Karlsen
+Version 14.43, 20 April 2013, by Per Øyvind Karlsen
+
+- partionning (mga#5661):
+  o fix loosing crypt key when re-reading partition tables
+
+Version 14.42, 18 April 2013, by Per Øyvind Karlsen
 
 - authentication:
   o 'nss-pam-ldapd' obsoletes 'pam_ldap' (mga#9769)
@@ -7,6 +12,9 @@ Version 14.41,  9 April 2013, by Per Øyvind Karlsen
 - bind mount /run in chroot, thus fixing dracut runs (Dave Hodgins, mga#9213)
 - create /etc/machine-id after all packages has been installed
 - drop perl 'lspcidrake' command as we now ship with 'lspcidrake' itself
+
+Version 14.41,  9 April 2013, by Per Øyvind Karlsen
+
 - rebrand to Moondrake
 
 Version 14.40,  6 April 2013, by Per Øyvind Karlsen
