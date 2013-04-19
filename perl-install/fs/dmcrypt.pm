@@ -39,6 +39,7 @@ sub read_crypttab_ {
 	  or log::l("crypttab: unknown device $dev for $dm_name"), next;
 
 	$raw_part->{dm_name} = $dm_name;
+	_get_existing_one_with_state($raw_part);
     }
 }
 
@@ -90,9 +91,15 @@ sub open_part {
     });
     run_program::run('udevadm', 'settle');
 
+    push @$dmcrypts, _get_existing_one_with_state($part);
+}
+
+
+sub _get_existing_one_with_state {
+    my ($part) = @_;
     my $active_dmcrypt = _parse_dmsetup_table($part->{dm_name}, 
 					      run_program::get_stdout('dmsetup', 'table', $part->{dm_name}));
-    push @$dmcrypts, _get_existing_one([$part], $active_dmcrypt);
+    _get_existing_one([$part], $active_dmcrypt);
 }
 
 sub close_part {
