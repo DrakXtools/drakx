@@ -952,8 +952,18 @@ sub dmcrypt_open {
 	delete $part->{dmcrypt_key};
 	die(($? >> 8) == 255 ? N("Invalid key") : $@);
     }
-    # Detect LVMs on top of dmcrypt
+    detect_lvms_on_dmcrypt($all_hds);
+}
+
+# Detect LVMs on top of dmcrypt
+sub detect_lvms_on_dmcrypt {
+    my ($all_hds) = @_,
+    require File::Temp;
+    my (undef, $tmp_file) = File::Temp::mkstemp('/tmp/crypttab.XXXXXXX');
+    fs::dmcrypt::save_crypttab_($all_hds, $tmp_file);
     $all_hds->{lvms} = [ fsedit::lvms($all_hds) ];
+    fs::dmcrypt::read_crypttab_($all_hds, $tmp_file);
+    rm_rf($tmp_file);
 }
 
 sub Add2RAID {
