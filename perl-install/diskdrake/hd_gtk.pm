@@ -97,7 +97,7 @@ sub main {
 	current_entry_changed($current_kind, $current_entry);
 	$lock = 0;
 	if ($o_refresh_gui) {
-            my $new_page = $o_refresh_gui > 1 ? $notebook_widget->get_current_page() : 0;
+            my $new_page = $o_refresh_gui > 1 ? $notebook_widget->get_current_page : 0;
             $notebook_widget->set_current_page(-1);
             $notebook_widget->set_current_page($new_page);
 	}
@@ -141,7 +141,7 @@ sub try_ {
     }
 
     if (!diskdrake::interactive::is_part_existing($current_entry, $all_hds)) {
-        $current_entry = '' ;
+        $current_entry = '';
     } elsif (!$dm_active_before && $current_entry->{dm_active} && $current_entry->{dm_name}) {
         if (my $mapped_part = fs::get::device2part("mapper/$current_entry->{dm_name}", $all_hds->{dmcrypts})) {
             $current_entry = $mapped_part;
