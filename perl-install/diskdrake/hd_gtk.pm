@@ -97,8 +97,9 @@ sub main {
 	current_entry_changed($current_kind, $current_entry);
 	$lock = 0;
 	if ($o_refresh_gui) {
+            my $new_page = $o_refresh_gui > 1 ? $notebook_widget->get_current_page() : 0;
             $notebook_widget->set_current_page(-1);
-            $notebook_widget->set_current_page(0);
+            $notebook_widget->set_current_page($new_page);
 	}
     };
     create_automatic_notebooks($notebook_widget);
@@ -128,17 +129,26 @@ sub try {
 sub try_ {
     my ($name, $f, @args) = @_;
 
+    my $dm_active_before = ($current_entry && $current_entry->{dm_active} && $current_entry->{dm_name});
     my $v = eval { $f->($in, @args, $all_hds) };
     if (my $err = $@) {
 	$in->ask_warn(N("Error"), formatError($err));
     }
+    my $refresh = 0;
     if ($v eq 'force_reload') {	
 	$all_hds = $do_force_reload->();
-        $update_all->(1);
+        $refresh = 1;
     }
 
-    $current_entry = '' if !diskdrake::interactive::is_part_existing($current_entry, $all_hds);
-    $update_all->();
+    if (!diskdrake::interactive::is_part_existing($current_entry, $all_hds)) {
+        $current_entry = '' ;
+    } elsif (!$dm_active_before && $current_entry->{dm_active} && $current_entry->{dm_name}) {
+        if (my $mapped_part = fs::get::device2part("mapper/$current_entry->{dm_name}", $all_hds->{dmcrypts})) {
+            $current_entry = $mapped_part;
+            $refresh = 2;
+        }
+    }
+    $update_all->($refresh);
 
     Gtk2->main_quit if $v && member($name, 'Done');
 }
