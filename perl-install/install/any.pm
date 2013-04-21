@@ -125,6 +125,7 @@ Do you have a supplementary installation medium to configure?",
     );
 
     $o->ask_from_({ messages => $msg,
+		    interactive_help_id => 'add_supplemental_media',
 		  },
 	[ {
 	    val => \my $suppl,
@@ -362,6 +363,7 @@ sub media_screen {
                                       N("Here you can enable more media if you want."),
                                       msg_if_firmware_needed($o)
                                   ),
+		    interactive_help_id => 'media_selection',
                      focus_first => sub { 1 } }, [ 
         map {
             my $medium = $_;
