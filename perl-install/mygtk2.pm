@@ -1212,8 +1212,15 @@ sub mygtk2::MagicWindow::AUTOLOAD {
     $w->{$s1}->$meth(@args);
 }
 
+my $enable_quit_popup;
+sub enable_quit_popup {
+    my ($bool) = @_;
+    $enable_quit_popup = $bool;
+}
+
 state $in_callback;
 sub quit_popup() {
+   return if !$enable_quit_popup;
    if (!$in_callback) {
 	$in_callback = 1;
 	my $_guard = before_leaving { undef $in_callback };
