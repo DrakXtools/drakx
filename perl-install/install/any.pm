@@ -124,8 +124,8 @@ Do you have a supplementary installation medium to configure?",
 	'nfs'   => N("Network (NFS)"),
     );
 
-    $o->ask_from(
-	'', $msg,
+    $o->ask_from_({ messages => $msg,
+		  },
 	[ {
 	    val => \my $suppl,
 	    list => [ map { $_->[0] } group_by2(@l) ],
