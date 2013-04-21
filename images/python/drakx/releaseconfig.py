@@ -9,7 +9,7 @@ class ReleaseConfig(object):
         self.distribution = distribution
         self.outdir = outdir
         self.tmpdir = tmpdir
-        os.system("rm -rf " + config.tmpdir)
+        os.system("rm -rf " + tmpdir + "/*")
         self.branch = branch
         if (not repopath):
             self.repopath += "%s/%s" % (branch, version)
