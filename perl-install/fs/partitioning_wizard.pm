@@ -39,6 +39,7 @@ sub partition_with_diskdrake {
 	$ok = 1;
 	my $do_force_reload = sub {
             require File::Temp;
+            require fs::dmcrypt;
             my (undef, $tmp_file) = File::Temp::mkstemp('/tmp/crypttab.XXXXXXX');
             fs::dmcrypt::save_crypttab_($all_hds, $tmp_file);
             my $new_hds = fs::get::empty_all_hds();
