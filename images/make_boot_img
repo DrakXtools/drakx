@@ -38,7 +38,9 @@ initrd() {
 	install $alias -D "$tmp_initrd/usr/share/ldetect-lst/$file"
     done
 
-    for firm in all.kernels$I/$img/firmware/*; do
+    kernel=`head all.kernels/.list`
+
+    for firm in all.kernels/$kernel/firmware/*; do
 	file="`basename $firm`"
 	cp -a "$firm" "$tmp_initrd/firmware/$file"
     done
