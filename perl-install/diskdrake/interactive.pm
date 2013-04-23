@@ -964,6 +964,7 @@ sub detect_lvms_on_dmcrypt {
     $all_hds->{lvms} = [ fsedit::lvms($all_hds) ];
     fs::dmcrypt::read_crypttab_($all_hds, $tmp_file);
     rm_rf($tmp_file);
+    require lvm;
     lvm::detect_during_install() if $::isInstall;
 }
 
