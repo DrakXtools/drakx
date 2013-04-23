@@ -247,6 +247,25 @@ sub detect_unselected_locale_packages {
     member($selected_locale, @available_locales) ? difference2(\@available_locales, [ $selected_locale ]) : ();
 }
 
+sub remove_unused_locale_packages {
+    my ($in, $do_pkgs, $o_prefix) = @_;
+
+    my $wait;
+    $wait = $in->wait_message(N("Please wait"), N("Gathering system information..."));
+    my @unselected_locales = detect_unselected_locale_packages($do_pkgs);
+    undef $wait;
+
+    # Packages to not remove even if they seem unused
+    my @wanted_locale_packages = qw(locales-en);
+    @unselected_locales = difference2(\@unselected_locales, \@wanted_locale_packages);
+
+    #- we should have some gurpme
+    $wait = $in->wait_message(N("Please wait"), N("Preparing for installation..."));
+    run_program::rooted($o_prefix, 'urpme', '--auto', @unselected_locales,
+        );
+    #- use script from One to list language files (/usr/share/locale mainly) and remove them?
+}
+
 sub remove_unused_packages {
     my ($in, $do_pkgs, $o_prefix) = @_;
 
