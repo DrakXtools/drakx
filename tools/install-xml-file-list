@@ -396,6 +396,7 @@ sub apply_filter {
 	@l = grep { ! -d $_ } @l or next;
 
 	if (my $subst = $filter->{subst}) {
+	    warn "running substition $subst \n" if $verbose;
 	    system('perl', '-pi', '-e', $subst, @l);
 	}
 	if (my $command = $filter->{command}) {
