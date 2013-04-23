@@ -471,6 +471,8 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     #- generate /etc/lvmtab needed for rc.sysinit
     run_program::rooted($::prefix, 'lvm2', 'vgscan') if -e '/etc/lvmtab';
+    # necessary?
+    system("cat /etc/mdadm.conf >> $::prefix/etc/mdadm.conf") if -e "/etc/mdadm.conf";
 
     require harddrake::autoconf;
     #- configure PCMCIA services if needed.
