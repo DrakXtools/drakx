@@ -24,7 +24,7 @@ ifneq (0, $(USE_LOCAL_STAGE1))
 STAGE1_BINS = ../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage/lspcidrake
 endif
 
-images: images/hd_grub.img images/hd_grub.img images/boot.iso grub/$(ARCH)/install/images/all.cpio.xz grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz
+images: images/hd_grub.img images/hd_grub.img images/boot.iso grub/$(ARCH)/install/images/all.cpio.xz grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz grub/boot/firmware.cpio.xz
 
 #../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage1/lspcidrake:
 $(STAGE1_BINS):
@@ -39,11 +39,14 @@ grub/$(ARCH)/install/images/all.cpio.xz: list.xml guessmounts
 grub/boot/grub/grub.cfg: grub_data/grub.cfg grub_data/themes/moondrake/theme.txt grub_data/themes/moondrake/star_w.png grub_data/themes/moondrake/star_shade_w.png grub_data/themes/moondrake/tick.png make_boot_img all.kernels/.list
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img grub
 
-images/boot.iso: grub/boot/grub/grub.cfg grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz grub/$(ARCH)/install/images/all.cpio.xz
+images/boot.iso: grub/boot/grub/grub.cfg grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz grub/$(ARCH)/install/images/all.cpio.xz grub/boot/firmware.cpio.xz
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
 	cd images; md5sum boot.iso > MD5SUM
 
 grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz: all.kernels/.list
+	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
+
+grub/boot/firmware.cpio.xz: grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
 
 all.kernels/.list: update_kernel ../kernel/list_modules.pm

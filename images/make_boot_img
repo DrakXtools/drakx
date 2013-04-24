@@ -14,13 +14,11 @@ initrd() {
     fi
 
 
-    for dir in /dev /etc/sysconfig/network-scripts /etc/X11 /firmware /lib /media/cdrom \
+    for dir in /dev /etc/sysconfig/network-scripts /etc/X11 /lib /media/cdrom \
 	/media/floppy /mnt /proc /run /sbin /sys /tmp /var/lock/subsys /var/log /var/run \
 	/var/tmp /tmp/newroot /tmp/stage2; do
 	mkdir -p "$tmp_initrd$dir"
     done
-    ln -s ../modules "$tmp_initrd/lib/modules"
-    ln -s ../firmware "$tmp_initrd/lib/firmware"
     ln -s /proc/mounts "$tmp_initrd/etc/mtab"
     # XXX: drop
     ln -s ../tmp "$tmp_initrd/var/run/"
@@ -38,12 +36,6 @@ initrd() {
 	install $alias -D "$tmp_initrd/usr/share/ldetect-lst/$file"
     done
 
-    kernel=`head all.kernels/.list`
-
-    for firm in all.kernels/$kernel/firmware/*; do
-	file="`basename $firm`"
-	cp -a "$firm" "$tmp_initrd/firmware/$file"
-    done
 
     # Make it available for use as ~bootsplash as well :o)
     linux_logo -l > $tmp_initrd/usr/share/moondrake.logo
@@ -139,7 +131,6 @@ EOF
 modules() {
     out=$1
     I=$2
-    mkdir -p "$tmp_initrd/modules"
     modz="all.kernels/$I";
     mkdir -p "$tmp_initrd/lib/modules/$I"
     tar xC "$tmp_initrd/lib/modules/$I" -f "$modz/all_modules.tar"
@@ -156,6 +147,25 @@ modules() {
     fi
 
     mkdir -p "`dirname \"$out\"`"
+    (cd "$tmp_initrd"; find . | cpio -o -H newc --quiet) | $COMPRESS > "$out"
+    rm -rf "$tmp_initrd"
+}
+
+firmware() {
+    out="$1"
+    rm -rf "$tmp_initrd"
+    kernel=`head all.kernels/.list`
+
+    mkdir -p "$tmp_initrd/lib/firmware"
+    for firm in all.kernels/$kernel/firmware/*; do
+	file="`basename $firm`"
+	cp -a "$firm" "$tmp_initrd/lib/firmware/$file"
+    done
+
+    if [ -z "$COMPRESS" ]; then
+	COMPRESS="xz --lzma2 -v9e --check=crc32"
+    fi
+
     (cd "$tmp_initrd"; find . | cpio -o -H newc --quiet) | $COMPRESS > "$out"
     rm -rf "$tmp_initrd"
 }
@@ -209,6 +219,8 @@ elif [ "$filename" = "modules.cpio.xz" ]; then
     for I in `cat all.kernels/.list`; do
     	modules $1 $I
     done
+elif [ "$filename" = "firmware.cpio.xz" ]; then
+    firmware "$1"
 elif [ "$filename" = "grub" ]; then
     grub $1
 elif [ "$filename" = "boot.iso" ]; then
