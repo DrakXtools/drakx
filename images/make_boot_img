@@ -174,7 +174,7 @@ grub() {
     dir=$1
     install -m644 grub_data/grub.cfg -D "$dir/boot/grub/grub.cfg"
     install -d "$dir/boot/grub/themes"
-    cp -a /boot/grub2/themes/rosa "$dir/boot/grub/themes/rosa"
+    cp -a /boot/grub2/themes/moondrake "$dir/boot/grub/themes/moondrake"
     mkdir -p "$dir/boot/grub/fonts/"
     cp -a /boot/grub2/fonts/* "$dir/boot/grub/fonts"
     mkdir -p "$dir/boot/grub/fonts/"
