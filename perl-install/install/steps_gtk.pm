@@ -650,7 +650,7 @@ sub installPackages {
 	    $o->{install_start_time} = 0;
 	    mygtk2::gtkadd($pkg_log_widget, text => P("%d package", "%d packages", $nb, $nb));
 	    $w->flush;
-	} elsif ($type eq 'open') {
+	} elsif ($type eq 'inst' && $subtype eq 'start') {
 	    gtkval_modify(\$pkg_progress, 0);
 	    my $p = $packages->{depslist}[$id];
 	    mygtk2::gtkadd($pkg_log_widget, text => sprintf("\n%s: %s", $p->name, translate($p->summary)));
