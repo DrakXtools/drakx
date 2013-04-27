@@ -615,7 +615,7 @@ sub add_entry {
 
     my $to_add = $v;
     my $label = $v->{label};
-    for (my $i = 0; $i < 10;) {
+    for (my $i = 0; $i < 100;) {
 	my $conflicting = get_label($label, $bootloader);
 
 	$to_add->{label} = $label;
