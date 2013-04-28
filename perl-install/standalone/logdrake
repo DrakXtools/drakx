@@ -27,6 +27,7 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use c;
 use common;
 use interactive;
+use do_pkgs;
 use mygtk2 qw(gtknew); #- do not import gtkadd which conflicts with ugtk2 version
 use ugtk2 qw(:create :dialogs :helpers :wrappers);
 
@@ -42,6 +43,9 @@ foreach (@ARGV) {
     /^--word=(.*)$/ and do { $isWord = ($Word) = $1; next };
     /^--alert$/ and do { alert_config(); quit() };
 }
+
+my $do_pkgs = do_pkgs::do_pkgs($in);
+$do_pkgs->ensure_is_installed("syslog-daemon") or exit(0);
 
 my $isTail = $isFile;
 $| = 1 if $isTail;
