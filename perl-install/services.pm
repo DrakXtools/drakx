@@ -153,7 +153,7 @@ sub ask_ {
 			 # FIXME: split part of 'Internet' into 'Security' or 'Firewall'?
 			 N("Internet") => [ qw(adsl boa cddbp ftp httpd ibod ip6tables ippl iptables iptoip ipvsadm
                                                isdn4linux jabber jabber-icq jail.init junkbuster mandi nessusd pftp portsentry 
-                                               prelude proftpd proftpd-xinetd pure-ftpd ipsec radvd roxen shorewall squid
+                                               prelude proftpd proftpd-xinetd pure-ftpd ipsec radvd roxen shorewall shorewall-ipv6 squid
                                                tftp) ],
 
 			 N("_: Keep these entry short\nNetworking") => [ qw(network network-auth network-up resolvconf) ],
