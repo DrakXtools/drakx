@@ -30,6 +30,8 @@ initrd() {
 	zcat /usr/share/ldetect-lst/$table.gz > "$tmp_initrd/usr/share/ldetect-lst/$table"
     done
     install /usr/share/pci.ids -D "$tmp_initrd/usr/share/pci.ids"
+    install /usr/share/usb.ids -D "$tmp_initrd/usr/share/usb.ids"
+
 
     for alias in /usr/share/ldetect-lst/{dkms-modules,fallback-modules}.alias /lib/module-init-tools/ldetect-lst-modules.alias; do
 	file="`basename $alias`"
