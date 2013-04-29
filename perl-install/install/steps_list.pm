@@ -34,7 +34,7 @@ use common;
   setRootPassword_addUser
                      => [ N_("_: Keep these entry short\nUsers"), 1, 1, '', "installPackages",
                           N_("User management") ],
-  configureNetwork   => [ N_("_: Keep these entry short\nNetworking"), 1, 1, '', "formatPartitions",
+  configureNetwork   => [ N_("_: Keep these entry short\nNetworking"), 1, 1, '1', "formatPartitions",
                           N_("_: Keep these entry short\nNetworking") ],
   setupBootloader    => [ N_("_: Keep these entry short\nBootloader"), 1, 0, '1', "installPackages",
                           N_("_: Keep these entry short\nBootloader")  ],
