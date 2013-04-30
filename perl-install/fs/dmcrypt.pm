@@ -33,6 +33,7 @@ sub read_crypttab_ {
     my @raw_parts = grep { fs::type::isRawLUKS($_) } fs::get::really_all_fstab($all_hds);
 
     foreach (cat_($crypttab)) {
+	next if /^#/;
 	my ($dm_name, $dev) = split;
 
 	my $raw_part = fs::get::device2part($dev, \@raw_parts)
