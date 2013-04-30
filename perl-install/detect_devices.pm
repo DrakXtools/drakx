@@ -965,7 +965,7 @@ sub dmi_probe() {
     if (arch() !~ /86/) {
         return [];
     }
-    $dmi_probe ||= $> ? [] : [ ldetect::dmi_probe() ];
+    $dmi_probe ||= $> ? [] : [ LDetect::dmi_probe() ];
     @$dmi_probe;
 }
 
