@@ -771,7 +771,7 @@ sub g_auto_install {
     require install::pkgs;
     $o->{default_packages} = install::pkgs::selected_leaves($::o->{packages});
 
-    my @fields = qw(mntpoint fs_type size);
+    my @fields = qw(fs_type hd level mntpoint parts size VG_name);
     $o->{partitions} = [ map { 
 	my %l; @l{@fields} = @$_{@fields}; \%l;
     } grep { 
