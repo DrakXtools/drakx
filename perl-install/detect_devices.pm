@@ -847,11 +847,11 @@ my (@pci, @usb);
 
 sub pci_probe__real() {
     add_addons($pcitable_addons, map {
-	my %l;
-	@l{qw(vendor id subvendor subid pci_domain pci_bus pci_device pci_function pci_revision is_pciexpress media_type nice_media_type driver description)} = split "\t";
-	$l{bus} = 'PCI';
-	$l{sysfs_device} = '/sys/bus/pci/devices/' . get_pci_sysfs_path(\%l);
-	\%l;
+	my $l = $_;
+	$l->{$_} = hex $l->{$_} foreach qw(vendor id subvendor subid);
+	$l->{bus} = 'PCI';
+	$l->{sysfs_device} = '/sys/bus/pci/devices/' . get_pci_sysfs_path($l);
+	$l;
     } LDetect::pci_probe());
 }
 sub pci_probe() {
@@ -869,12 +869,12 @@ sub usb_probe__real() {
     -e "/sys/kernel/debug/usb/devices" or return;
 
     add_addons($usbtable_addons, map {
-	my %l;
-	@l{qw(vendor id media_type driver description pci_bus pci_device usb_port)} = split "\t";
-	$l{media_type} = join('|', grep { $_ ne '(null)' } split('\|', $l{media_type}));
-	$l{sysfs_device} = "/sys/bus/usb/devices/$l{pci_bus}-" . ($l{usb_port} + 1);
-	$l{bus} = 'USB';
-	\%l;
+	my $l = $_;
+	$l->{media_type} = join('|', grep { $_ ne '(null)' } split('\|', $l->{media_type}));
+	$l->{$_} = hex $l->{$_} foreach qw(vendor id);
+	$l->{sysfs_device} = "/sys/bus/usb/devices/$l->{pci_bus}-" . ($l->{usb_port} + 1);
+	$l->{bus} = 'USB';
+	$l;
     } LDetect::usb_probe());
 }
 sub usb_probe() {
@@ -965,9 +965,7 @@ sub dmi_probe() {
     if (arch() !~ /86/) {
         return [];
     }
-    $dmi_probe ||= [ map {
-	/(.*?)\t(.*)/ && { bus => 'DMI', driver => $1, description => $2 };
-    } $> ? () : LDetect::dmi_probe() ];
+    $dmi_probe ||= $> ? [] : [ ldetect::dmi_probe() ];
     @$dmi_probe;
 }
 
