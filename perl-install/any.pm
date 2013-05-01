@@ -734,15 +734,15 @@ sub is_standalone_autologin_needed {
 }
 
 sub set_autologin {
-    my ($do_pkgs, $autologin) = @_;
+    my ($do_pkgs, $autologin, $o_auto) = @_;
     log::l("set_autologin $autologin->{user} $autologin->{desktop}");
     my $do_autologin = bool2text($autologin->{user});
 
     $autologin->{dm} ||= 'xdm';
-    $do_pkgs->ensure_is_installed($autologin->{dm})
+    $do_pkgs->ensure_is_installed($autologin->{dm}, undef, $o_auto)
       or return;
     if ($autologin->{user} && is_standalone_autologin_needed($autologin->{dm})) {
-        $do_pkgs->ensure_is_installed('autologin', '/usr/bin/startx.autologin')
+        $do_pkgs->ensure_is_installed('autologin', '/usr/bin/startx.autologin', $o_auto)
           or return;
     }
 
