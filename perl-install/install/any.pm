@@ -148,13 +148,13 @@ sub prep_net_suppl_media {
     return if our $net_suppl_media_configured && network::tools::has_network_connection();
     $net_suppl_media_configured = 1;
 
-    # needed so that one can install basesystem before adding suppl network media:
+    # needed so that one can install basesystem-minimal before adding suppl network media:
     install::media::update_media($o->{packages});
     require urpm::media;
     urpm::media::configure($o->{packages});
 
-    #- install basesystem now
-    $o->do_pkgs->ensure_is_installed('basesystem', undef, 1);
+    #- install basesystem-minimal now
+    $o->do_pkgs->ensure_is_installed('basesystem-minimal', undef, 1);
 
     # in case of no network install:
     $o->{net} ||= {};
