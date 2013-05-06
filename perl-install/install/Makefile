@@ -27,7 +27,7 @@ dist-svn:
 	rm -rf $(PRODUCT)-$(VERSION)
 
 dist-git:
-	cd ../..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD kernel perl-install tools Makefile.config > $(PRODUCT)-$(VERSION).tar
+	cd ../..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD kernel perl-install tools images/tree/root Makefile.config > $(PRODUCT)-$(VERSION).tar
 	cd share/meta-task; \
 	git archive --format=tar --prefix=$(PRODUCT)-$(VERSION)/perl-install/install/share/meta-task/ HEAD . > meta-task-$(PRODUCT)-$(VERSION).tar
 	cd ../..; tar --concatenate --file=$(PRODUCT)-$(VERSION).tar perl-install/install/share/meta-task/meta-task-$(PRODUCT)-$(VERSION).tar
