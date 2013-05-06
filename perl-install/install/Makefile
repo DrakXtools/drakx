@@ -32,7 +32,7 @@ dist-git:
 	git archive --format=tar --prefix=$(PRODUCT)-$(VERSION)/perl-install/install/share/meta-task/ HEAD . > meta-task-$(PRODUCT)-$(VERSION).tar
 	cd ../..; tar --concatenate --file=$(PRODUCT)-$(VERSION).tar perl-install/install/share/meta-task/meta-task-$(PRODUCT)-$(VERSION).tar
 	rm share/meta-task/meta-task-$(PRODUCT)-$(VERSION).tar
-	xz -v ../../$(PRODUCT)-$(VERSION).tar
+	xz -vf ../../$(PRODUCT)-$(VERSION).tar
 
 
 tar:
