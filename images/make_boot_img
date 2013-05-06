@@ -180,7 +180,7 @@ grub() {
     install -d "$dir/boot/grub/themes"
     cp -a /boot/grub2/themes/moondrake "$dir/boot/grub/themes/moondrake"
     mkdir -p "$dir/boot/grub/fonts/"
-    cp -a /boot/grub2/fonts/* "$dir/boot/grub/fonts"
+    cp -a /usr/share/grub/unicode.pf2 "$dir/boot/grub/fonts"
     mkdir -p "$dir/boot/grub/fonts/"
     grub2-mkfont --verbose -b --size=18 -o "$dir/boot/grub/fonts/dejavu.pf2" /usr/share/fonts/TTF/liberation/LiberationSans-Bold.ttf
 
