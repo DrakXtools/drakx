@@ -77,6 +77,8 @@ EOF
 	    install -m755 tree/lib/mdev/usbdisk_link	-D $tmp_initrd/lib/mdev/usbdisk_link
 	fi
 
+	ln -s rc.d/init.d $tmp_initrd/etc/init.d
+
 	for bin in `$tmp_initrd/usr/bin/busybox --list-full`; do
 	    dir="`dirname \"$tmp_initrd/$bin\"`"
 	    if [ ! -d "$dir" ]; then
