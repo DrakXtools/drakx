@@ -75,7 +75,7 @@ dist-svn:
 	rm -rf $(PRODUCT)-$(VERSION)
 
 dist-git:
-	@cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD images kernel Makefile.config | xz >images/$(PRODUCT)-$(VERSION).tar.xz;
+	@cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD tools/install-xml-file-list images kernel Makefile.config | xz >images/$(PRODUCT)-$(VERSION).tar.xz;
 
 clean:
 	rm -rf images grub all.kernels modules.description
