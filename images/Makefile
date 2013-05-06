@@ -20,15 +20,13 @@ images/:
 
 USE_LOCAL_STAGE1 = $(shell test -f ../mdk-stage1/stage1 && echo 1 || echo 0)
 
-ifneq (0, $(USE_LOCAL_STAGE1))
-STAGE1_BINS = ../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage/lspcidrake
+ifeq (1, $(USE_LOCAL_STAGE1))
+STAGE1_BINS = ../mdk-stage1/stage1
+$(STAGE1_BINS):
+	make -C ../mdk-stage1 $(shell basename $@)
 endif
 
 images: images/hd_grub.img images/hd_grub.img images/boot.iso grub/$(ARCH)/install/images/all.cpio.xz grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz grub/boot/firmware.cpio.xz
-
-#../mdk-stage1/dhcp-client ../mdk-stage1/probe-modules ../mdk-stage1/rescue-gui ../mdk-stage1/stage1 ../mdk-stage1/drvinst ../mdk-stage1/lspcidrake:
-$(STAGE1_BINS):
-	make -C ../mdk-stage1 $(shell basename $@)
 
 images/hd_grub.img:
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img.pl --compress "$(COMPRESS)" $@

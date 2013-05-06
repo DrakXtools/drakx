@@ -7,7 +7,7 @@ else
 fi
 
 initrd() {
-    if [ -n "$USE_LOCAL_STAGE1" ]; then
+    if [ "$USE_LOCAL_STAGE1" = "1" ]; then
 	stage1_root=../mdk-stage1
     else
 	stage1_root=/usr/$lib/drakx-installer/binaries
