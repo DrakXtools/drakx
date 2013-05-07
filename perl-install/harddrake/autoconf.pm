@@ -25,7 +25,16 @@ sub xconf {
 }
 
 sub network_conf {
-    my ($obj) = @_;
+    my ($modules_conf) = @_;
+    $modules_conf->remove_alias_regexp('^(wlan|eth)[0-9]*$');
+    modules::load_category($modules_conf, 'network/main|gigabit|usb|wireless|firewire|pcmcia');
+    require network::connection::ethernet;
+    network::connection::ethernet::configure_eth_aliases($modules_conf);
+    require network::rfswitch;
+    network::rfswitch::configure();
+    require network::shorewall;
+    network::shorewall::update_interfaces_list();
+    $modules_conf->write;
 }
 
 sub mouse_conf {

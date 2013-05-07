@@ -336,15 +336,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         harddrake::sound::configure_sound_slots($modules_conf);
         next;
     } elsif ($Ident eq "ETHERNET") {
-        $modules_conf->remove_alias_regexp('^(wlan|eth)[0-9]*$');
-        modules::load_category($modules_conf, 'network/main|gigabit|usb|wireless|firewire|pcmcia');
-        require network::connection::ethernet;
-        network::connection::ethernet::configure_eth_aliases($modules_conf);
-        require network::rfswitch;
-        network::rfswitch::configure();
-        require network::shorewall;
-        network::shorewall::update_interfaces_list();
-        $modules_conf->write;
+        harddrake::autoconf::network_conf($modules_conf);
         next;
     } elsif (member($Ident, qw(ATA_STORAGE CARD_READER RAID_STORAGE SATA_STORAGE SCSI_CONTROLLER))) {
         # set scsi_hostadapter in modprobe.conf:
