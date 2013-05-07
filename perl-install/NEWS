@@ -1,3 +1,8 @@
+- harddrake:
+  o do not disable bluetooth service if adapter disappears
+    (for example if disabled by Fn keys)
+    systemd will automatically disable the service if needed
+
 Version 14.47,  6 May 2013, by Per Øyvind Karlsen
 
 - skip comments in /etc/crypttab (Colin, mga#9905)

@@ -46,6 +46,11 @@ sub pcmcia {
 
 sub bluetooth {
     my ($enable) = @_;
+    # do not disable bluetooth service if adapter disappears
+    # (for example if disabled by Fn keys)
+    # systemd will automatically disable the service if needed
+    return if !$enable;
+
 #- FIXME: make sure these packages are installed when needed
 #     if ($enable) {
 #         require do_pkgs;
