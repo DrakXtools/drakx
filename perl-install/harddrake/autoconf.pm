@@ -40,7 +40,7 @@ sub setup_ethernet_device {
     require network::connection_manager;
     my $net = {};
     network::network::read_net_conf($net);
-    my $cmanager = network::connection_manager->new($in, $net, undef, undef);
+    my $cmanager = network::connection_manager->new($in, $net);
     $cmanager->set_connection($connection);
 
     # this will installed required packages
