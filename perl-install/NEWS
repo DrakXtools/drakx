@@ -1,7 +1,9 @@
-- harddrake:
+- harddrake service:
   o do not disable bluetooth service if adapter disappears
     (for example if disabled by Fn keys)
     systemd will automatically disable the service if needed
+  o install ethernet/wireless packages when a new device is detected,
+    this shoud help for Broadcom devices
 
 Version 14.47,  6 May 2013, by Per Øyvind Karlsen
 

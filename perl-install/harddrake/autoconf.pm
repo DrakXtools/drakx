@@ -24,10 +24,36 @@ sub xconf {
     modules::load_category($modules_conf, 'various/agpgart'); 
 }
 
+sub setup_ethernet_device {
+    my ($in, $device) = @_;
+
+    require network::connection;
+    require network::connection::ethernet;
+    require network::connection::wireless;
+    my @connection_types = qw(network::connection::ethernet  network::connection::wireless);
+    my @all_connections = map { $_->get_connections(automatic_only => 1) } @connection_types;
+    my $interface = network::connection::ethernet::device_to_interface($device)
+      or return;
+    my $connection = find { $_->get_interface eq $interface } @all_connections
+      or return;
+
+    require network::connection_manager;
+    my $net = {};
+    network::network::read_net_conf($net);
+    my $cmanager = network::connection_manager->new($in, $net, undef, undef);
+    $cmanager->set_connection($connection);
+
+    # this will installed required packages
+    $cmanager->setup_connection;
+}
+
 sub network_conf {
-    my ($modules_conf) = @_;
+    my ($modules_conf, $in, $added) = @_;
     $modules_conf->remove_alias_regexp('^(wlan|eth)[0-9]*$');
     modules::load_category($modules_conf, 'network/main|gigabit|usb|wireless|firewire|pcmcia');
+
+    setup_ethernet_device($in, $_) foreach @{$added || {}};
+
     require network::connection::ethernet;
     network::connection::ethernet::configure_eth_aliases($modules_conf);
     require network::rfswitch;
