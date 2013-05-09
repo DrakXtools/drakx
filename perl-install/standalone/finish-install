@@ -342,26 +342,26 @@ sub call {
     }
 }
 
-#call('language');
-#call('license');
+call('language');
+call('license');
 # "Previous" button isn't functiunnal and acts like "next" (#25349)
 $::Wizard_no_previous = 1;
-#call('timezone');
-#call('country');
-#call('keyboard');
-#call('network');
+call('timezone');
+call('country');
+call('keyboard');
+call('network');
 if (defined $::WizardWindow) {
     $::WizardWindow->destroy;
     undef $::WizardWindow;
 }
 call('remove_unused_packages');
 call('urpmi');
-#$::Wizard_pix_up = 'redhat-config-users';
-#call('authentication');
-#call('users');
-#call('services');
-#call('encrypt_home');
-#call('glx');
-#setVarsInSh($conf_file, { FINISH_INSTALL => 'no' });
+$::Wizard_pix_up = 'redhat-config-users';
+call('authentication');
+call('users');
+call('services');
+call('encrypt_home');
+call('glx');
+setVarsInSh($conf_file, { FINISH_INSTALL => 'no' });
 
 $in->exit(0);
