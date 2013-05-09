@@ -704,7 +704,9 @@ sub is_wireless_interface {
     #-   wlan-ng (prism2_*) need some special tweaks to support it
     #- use sysfs as fallback to detect wireless interfaces,
     #- i.e interfaces for which get_wireless_stats() is available
-    c::isNetDeviceWirelessAware($interface) || -e "/sys/class/net/$interface/wireless";
+    c::isNetDeviceWirelessAware($interface)
+        || -e "/sys/class/net/$interface/wireless"
+        || -e "/sys/class/net/$interface/phy80211";
 }
 
 sub get_all_net_devices() {
