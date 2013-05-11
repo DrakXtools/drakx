@@ -291,7 +291,7 @@ get_netdevices()
      ifc.ifc_buf = NULL;
      for (;;) {
           ifc.ifc_len = sizeof(struct ifreq) * numreqs;
-          ifc.ifc_buf = realloc(ifc.ifc_buf, ifc.ifc_len);
+          ifc.ifc_buf = (char*)realloc(ifc.ifc_buf, ifc.ifc_len);
 
           if (ioctl(s, SIOCGIFCONF, &ifc) < 0) {
                perror("SIOCGIFCONF");
