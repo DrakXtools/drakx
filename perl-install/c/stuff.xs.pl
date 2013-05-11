@@ -59,7 +59,7 @@ typedef __uint8_t u8;
 ';
 
 $Config{archname} =~ /i.86/ and print '
-char *pcmcia_probe(void);
+const char *pcmcia_probe(void);
 ';
 
 print '
@@ -99,7 +99,7 @@ MODULE = c::stuff		PACKAGE = c::stuff
 ';
 
 $Config{archname} =~ /i.86/ and print '
-char *
+const char *
 pcmcia_probe()
 ';
 
