@@ -1098,7 +1098,7 @@ sub get_release_notes {
             my $d = find { -e "$_/$file" } glob_("/usr/share/doc/*-release-*");
             $d && cat_("$d/$file");
         }
-    } "release-notes$ext", 'release-notes.' . arch() . $ext);
+    } "release-notes$ext", 'release-notes.' . $ext);
 
     # we do not handle links:
     $release_notes =~ s!<a href=".*?">(.*?)</a>!$1!g;
