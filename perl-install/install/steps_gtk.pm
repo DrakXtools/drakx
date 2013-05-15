@@ -652,12 +652,6 @@ sub installPackages {
 	    $w->flush;
 	} elsif ($type eq 'open') {
 	    $advertize->(1) if $show_advertising && $total_size > 20_000_000 && time() - $change_time > 20;
-	} elsif ($type eq 'inst' && $subtype eq 'start') {
-	    gtkval_modify(\$pkg_progress, 0);
-	    my $p = $packages->{depslist}[$id];
-	    mygtk2::gtkadd($pkg_log_widget, text => sprintf("\n%s: %s", $p->name, translate($p->summary)));
-	    $current_total_size += $last_size;
-	    $last_size = $p->size;
 
             # display release notes if requested, when not chrooted:
             if ($show_release_notes) {
@@ -665,6 +659,12 @@ sub installPackages {
                 any::run_display_release_notes($release_notes);
                 $w->flush;
             }
+	} elsif ($type eq 'inst' && $subtype eq 'start') {
+	    gtkval_modify(\$pkg_progress, 0);
+	    my $p = $packages->{depslist}[$id];
+	    mygtk2::gtkadd($pkg_log_widget, text => sprintf("\n%s: %s", $p->name, translate($p->summary)));
+	    $current_total_size += $last_size;
+	    $last_size = $p->size;
 
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'progress') {
