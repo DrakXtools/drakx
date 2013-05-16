@@ -923,7 +923,9 @@ sub ask_user_and_root {
 	  if_($::isInstall && $superuser, cancel => ''),
         }, [ 
 	      $superuser ? (
+	  if_(0,
 	  { text => N("Enable guest account"), val => \$xguest, type => 'bool', advanced => 1 },
+	  ),
 	  { label => N("Set administrator (root) password"), title => 1 },
 	  { label => N("Password"), val => \$superuser->{password},  hidden => 1, alignment => 'right', weakness_check => 1,
 	    focus => sub { 1 },
