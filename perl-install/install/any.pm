@@ -325,7 +325,9 @@ sub _nonfree_medium() { N("Non-free Release") }
 sub is_firmware_needed {
     my ($o) = @_;
     require pkgs;
-    pkgs::detect_graphical_drivers($o->do_pkgs);
+    my @xpkgs = pkgs::detect_graphical_drivers($o->do_pkgs);
+    log::l("the following nonfree firmware(s) are needed for X.org: " . join(', ', @xpkgs)) if @xpkgs;
+    @xpkgs;
 }
 
 sub msg_if_firmware_needed {
