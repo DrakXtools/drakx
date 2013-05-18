@@ -67,4 +67,6 @@ if (!$auto) {
     <STDIN> =~ /^n/i and exit 0;
 }
 
+run_program::run('mount', '--bind', '/dev', "$::prefix/dev");
 $install->();
+run_program::run('umount', "$::prefix/dev");
