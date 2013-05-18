@@ -278,7 +278,7 @@ sub remove_unused_packages {
     undef $wait;
 
     # Packages to not remove even if they seem unused
-    my @wanted_hardware_packages = qw(gnome-bluetooth gnome-phone-manager kbluetooth kppp ppp wireless-tools wpa_supplicant);
+    my @wanted_hardware_packages = qw(gnome-bluetooth gnome-phone-manager bluedevil kppp ppp wireless-tools wpa_supplicant);
     @unused_hardware_packages = difference2(\@unused_hardware_packages, \@wanted_hardware_packages);
 
     @unused_hardware_packages || @unselected_locales or return;
