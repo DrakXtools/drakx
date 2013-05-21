@@ -322,19 +322,12 @@ sub _contrib_medium() { N("Contrib Release") }
 sub _nonfree_medium() { N("Non-free Release") }
 
 # FIXME: move me in ../any.pm or in harddrake::*, might be needed by rpmdrake/harddrake:
-sub is_firmware_needed_ {
+sub is_firmware_needed {
     my ($o) = @_;
     require pkgs;
     my @xpkgs = pkgs::detect_graphical_drivers($o->do_pkgs);
     log::l("the following nonfree firmware(s) are needed for X.org: " . join(', ', @xpkgs)) if @xpkgs;
     @xpkgs;
-}
-
-sub is_firmware_needed {
-    my ($o) = @_;
-    state $res;
-    $res = is_firmware_needed_($o) if !defined $res;
-    $res;
 }
 
 sub msg_if_firmware_needed {
