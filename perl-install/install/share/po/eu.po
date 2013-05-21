@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-31 17:24+0200\n"
+"POT-Creation-Date: 2013-05-21 21:54+0200\n"
 "PO-Revision-Date: 2009-09-19 08:21+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-doc@kde.org>\n"
@@ -378,6 +378,10 @@ msgstr "Zerbitzaria konfiguratzeko morroiak"
 #: ../../advertising/MandrivaOne-advert-6.pl:1
 #: ../../advertising/MandrivaOne-advert-7.pl:1
 #: ../../advertising/MandrivaOne-advert-8.pl:1
+#, c-format
+msgid "Moondrake GNU/Linux 2013 Beta (Twelve Angry Penguins)"
+msgstr ""
+
 #: ../../advertising/MandrivaOne-advert-9.pl:1
 #, c-format
 msgid "Mandriva Linux 2012 Alpha (Tenacious Underdog)"
@@ -422,153 +426,150 @@ msgstr "Sarea (FTP)"
 msgid "Network (NFS)"
 msgstr "Sarea (NFS)"
 
-#: any.pm:171
+#: any.pm:172
 #, c-format
 msgid "URL of the mirror?"
 msgstr "Ispiluaren URL?"
 
-#: any.pm:177
+#: any.pm:178
 #, c-format
 msgid "URL must start with ftp:// or http://"
 msgstr "URL-ak ftp:// edo http:// aurretik izan behar du"
 
-#: any.pm:188
-#, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+#: any.pm:189
+#, fuzzy, c-format
+msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
 "Mandriva Linux web gunearekin konektatzen, ispilu erabilgarrien zerrenda "
 "lortzeko..."
 
-#: any.pm:193
-#, c-format
-msgid ""
-"Failed contacting Mandriva Linux web site to get the list of available "
-"mirrors"
+#: any.pm:194
+#, fuzzy, c-format
+msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
 "Mandriva Linux web gunearekin eskuragarri dauden ispiluen zerrenda lortzeko "
 "harremanak huts egin du"
 
-#: any.pm:203
+#: any.pm:204
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "Aukeratu ispilu bat paketeak bertatik hartzeko"
 
-#: any.pm:233
+#: any.pm:234
 #, c-format
 msgid "NFS setup"
 msgstr "NFS ezarpena"
 
-#: any.pm:234
+#: any.pm:235
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
 msgstr "Mesedez sartu zure NFS euskarriaren ostalari izena eta direktorioa"
 
-#: any.pm:238
+#: any.pm:239
 #, c-format
 msgid "Hostname missing"
 msgstr "Ostalari izena falta da"
 
-#: any.pm:239
+#: any.pm:240
 #, c-format
 msgid "Directory must begin with \"/\""
 msgstr "Direktorioa honekin \"/\" hasi behar da"
 
-#: any.pm:243
+#: any.pm:244
 #, c-format
 msgid "Hostname of the NFS mount ?"
 msgstr "NFS muntaiaren ostalari izena?"
 
-#: any.pm:244
+#: any.pm:245
 #, c-format
 msgid "Directory"
 msgstr "Direktorioa"
 
-#: any.pm:266
+#: any.pm:267
 #, c-format
 msgid "Supplementary"
 msgstr "Osagarria"
 
-#: any.pm:301
+#: any.pm:302
 #, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
 msgstr "Ezin aurkitu hdlist fitxategia ispilu honetan"
 
-#: any.pm:317
+#: any.pm:318
 #, c-format
 msgid "Main Release"
 msgstr ""
 
-#: any.pm:319
+#: any.pm:320
 #, c-format
 msgid "Contrib Release"
 msgstr ""
 
-#: any.pm:321
+#: any.pm:322
 #, c-format
 msgid "Non-free Release"
 msgstr ""
 
-#: any.pm:335
+#: any.pm:350
 #, c-format
 msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
 "free software drivers to work."
 msgstr ""
 
-#: any.pm:336
+#: any.pm:351
 #, c-format
 msgid "You should enable \"%s\""
 msgstr ""
 
-#: any.pm:355
+#: any.pm:370
 #, c-format
 msgid "\"%s\" contains the various pieces of the systems and its applications."
 msgstr ""
 
-#: any.pm:356
+#: any.pm:371
 #, c-format
 msgid ""
 "\"%s\" contains software that's not officially supported and might not "
 "receive the same level of maintenance."
 msgstr ""
 
-#: any.pm:357
+#: any.pm:372
 #, c-format
 msgid "\"%s\" contains non free software.\n"
 msgstr ""
 
-#: any.pm:358
+#: any.pm:373
 #, c-format
 msgid ""
 "It also contains firmware needed for certain devices to operate (eg: some "
 "ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
 msgstr ""
 
-#: any.pm:362
+#: any.pm:377
 #, c-format
 msgid "Here you can enable more media if you want."
 msgstr ""
 
-#: any.pm:440
+#: any.pm:456
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Instalatutako paketeak bilatzen..."
 
-#: any.pm:475
+#: any.pm:491
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Bertsio berritzeko paketeak bilatzen..."
 
-#: any.pm:493
+#: any.pm:509
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "Paketeak ezabatzen bertsioa berritu aurretik..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:707
+#: any.pm:723
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -581,72 +582,72 @@ msgstr ""
 "\n"
 "Ziur zaude pakete hauek kendu nahi dituzula?\n"
 
-#: any.pm:926
+#: any.pm:942
 #, c-format
 msgid "Error reading file %s"
 msgstr "Errorea %s fitxategia irakurtzean"
 
-#: any.pm:1134
+#: any.pm:1150
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Ondoko diskoa(k) berrizendatu egin d(ir)a:"
 
-#: any.pm:1136
+#: any.pm:1152
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (lehenago %s deitua)"
 
-#: any.pm:1193
+#: any.pm:1209
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1193
+#: any.pm:1209
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1193
+#: any.pm:1209
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1212 steps_interactive.pm:960
+#: any.pm:1228 steps_interactive.pm:960
 #, c-format
 msgid "Network"
 msgstr "Sarea"
 
-#: any.pm:1216
+#: any.pm:1232
 #, c-format
 msgid "Please choose a media"
 msgstr "Aukeratu euskarri bat mesedez"
 
-#: any.pm:1232
+#: any.pm:1248
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Fitxategia badago lehendik ere. Gainidatzi?"
 
-#: any.pm:1236
+#: any.pm:1252
 #, c-format
 msgid "Permission denied"
 msgstr "Baimena ukatuta"
 
-#: any.pm:1284
+#: any.pm:1300
 #, c-format
 msgid "Bad NFS name"
 msgstr "NFS izen okerra"
 
-#: any.pm:1305
+#: any.pm:1321
 #, c-format
 msgid "Bad media %s"
 msgstr "%s okerreko euskarria"
 
-#: any.pm:1349
+#: any.pm:1365
 #, c-format
 msgid "Cannot make screenshots before partitioning"
 msgstr "Ezin da pantaila-argazkirik egin partizioak egin aurretik"
 
-#: any.pm:1357
+#: any.pm:1373
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr ""
@@ -760,17 +761,17 @@ msgstr "Akats bat gertatu da:"
 msgid "A fatal error occurred: %s."
 msgstr "Akats bat gertatu da:"
 
-#: pkgs.pm:876 pkgs.pm:918
+#: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
 msgstr ""
 
-#: pkgs.pm:892
+#: pkgs.pm:894
 #, c-format
 msgid "%d installation transactions failed"
 msgstr "%d instaketa eragiketek huts egin dute"
 
-#: pkgs.pm:893
+#: pkgs.pm:895
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "Paketeen instalaketak huts egin du:"
@@ -803,9 +804,9 @@ msgid "Entering step `%s'\n"
 msgstr "`%s'. urratsean sartzen\n"
 
 #: steps_curses.pm:22
-#, c-format
-msgid "Mandriva Linux Installation %s"
-msgstr "Mandriva Linux %s instalazioa"
+#, fuzzy, c-format
+msgid "%s Installation %s"
+msgstr "Instalaketa"
 
 #: steps_curses.pm:32
 #, c-format
@@ -818,30 +819,29 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg zerbitzariaren hasiera motela da. Itxoin mesedez..."
 
 #: steps_gtk.pm:211
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
-"Mandriva Linux. If that occurs, you can try a text install instead. For "
-"this,\n"
+"%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Sistemak baliabide gutxi ditu. Arazoak izan ditzakezu Mandriva Linux \n"
 "instalatzeko. Horrela bada, testu-instalazioa egiten saia zaitezke. \n"
 "Horretarako, sakatu `F1' CD-ROMetik abiaraztean, eta idatzi `text'."
 
-#: steps_gtk.pm:241 steps_gtk.pm:776
+#: steps_gtk.pm:241 steps_gtk.pm:777
 #, c-format
 msgid "Media Selection"
 msgstr "Euskarri hautaketa"
 
 #: steps_gtk.pm:252
-#, c-format
-msgid "Install Mandriva KDE Desktop"
+#, fuzzy, c-format
+msgid "Install %s KDE Desktop"
 msgstr "Instalatu Mandriva KDE Idaztegia"
 
 #: steps_gtk.pm:253
-#, c-format
-msgid "Install Mandriva GNOME Desktop"
+#, fuzzy, c-format
+msgid "Install %s GNOME Desktop"
 msgstr "Instalatu Mandriva GNOME Idaztegia"
 
 #: steps_gtk.pm:254
@@ -1043,22 +1043,22 @@ msgid_plural "%d packages"
 msgstr[0] "pakete %d"
 msgstr[1] "%d pakete"
 
-#: steps_gtk.pm:706 steps_interactive.pm:824 steps_list.pm:44
+#: steps_gtk.pm:707 steps_interactive.pm:824 steps_list.pm:44
 #, c-format
 msgid "Summary"
 msgstr "Laburpena"
 
-#: steps_gtk.pm:725
+#: steps_gtk.pm:726
 #, c-format
 msgid "Configure"
 msgstr "Konfiguratu"
 
-#: steps_gtk.pm:742 steps_interactive.pm:820 steps_interactive.pm:973
+#: steps_gtk.pm:743 steps_interactive.pm:820 steps_interactive.pm:973
 #, c-format
 msgid "not configured"
 msgstr "konfiguratu gabe"
 
-#: steps_gtk.pm:785 steps_interactive.pm:336
+#: steps_gtk.pm:786 steps_interactive.pm:336
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -1067,7 +1067,7 @@ msgstr ""
 "Ondorengo instalazio euskarriak aurkitu dira.\n"
 "Horietako batzuk erabiltzerik nahi ez baduzu, haututik kendu ditzakezu orain."
 
-#: steps_gtk.pm:801 steps_interactive.pm:342
+#: steps_gtk.pm:802 steps_interactive.pm:342
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard disk drive "
@@ -1079,7 +1079,7 @@ msgstr ""
 "Disko zurrunetik jarraituko du orduan eta paketeak eskuragarri egongo dira "
 "sistema osorik instalatu ondoren."
 
-#: steps_gtk.pm:803 steps_interactive.pm:344
+#: steps_gtk.pm:804 steps_interactive.pm:344
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Kopiatu CD osoak"
@@ -1142,9 +1142,9 @@ msgid "Upgrade previous installation (not recommended)"
 msgstr "Aurreko instalaketa bertsio berritu (ez da gomendatzen)"
 
 #: steps_interactive.pm:215
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Installer has detected that your installed Mandriva Linux system could not\n"
+"Installer has detected that your installed %s system could not\n"
 "safely be upgraded to %s.\n"
 "\n"
 "New installation replacing your previous one is recommended.\n"
@@ -1651,6 +1651,9 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Irten"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux %s instalazioa"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
