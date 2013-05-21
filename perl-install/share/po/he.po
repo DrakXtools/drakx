@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-25 11:38+0200\n"
+"POT-Creation-Date: 2013-05-21 21:54+0200\n"
 "PO-Revision-Date: 2008-03-24 03:26+0200\n"
 "Last-Translator: Dotan Kamber <kamberd@yahoo.com>\n"
 "Language-Team: Hebrew\n"
@@ -24,21 +24,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: any.pm:268 any.pm:978 diskdrake/interactive.pm:645
+#: any.pm:284 any.pm:995 diskdrake/interactive.pm:645
 #: diskdrake/interactive.pm:869 diskdrake/interactive.pm:929
-#: diskdrake/interactive.pm:1034 diskdrake/interactive.pm:1264
-#: diskdrake/interactive.pm:1322 do_pkgs.pm:242 do_pkgs.pm:287
-#: harddrake/sound.pm:270 interactive.pm:587 pkgs.pm:285
+#: diskdrake/interactive.pm:1047 diskdrake/interactive.pm:1277
+#: diskdrake/interactive.pm:1335 do_pkgs.pm:242 do_pkgs.pm:287
+#: harddrake/sound.pm:270 interactive.pm:588 pkgs.pm:254 pkgs.pm:263
+#: pkgs.pm:306
 #, c-format
 msgid "Please wait"
 msgstr "נא להמתין"
 
-#: any.pm:268
+#: any.pm:284
 #, c-format
 msgid "Bootloader installation in progress"
 msgstr "התקנת מנהל האתחול"
 
-#: any.pm:279
+#: any.pm:295
 #, c-format
 msgid ""
 "LILO wants to assign a new Volume ID to drive %s.  However, changing\n"
@@ -54,12 +55,12 @@ msgstr ""
 "\n"
 "האם להקצות תג זיהוי חדש?"
 
-#: any.pm:290
+#: any.pm:306
 #, c-format
 msgid "Installation of bootloader failed. The following error occurred:"
 msgstr "התקנת מנהל האתחול נכשלה. השגיאות הבאות התרחשו:"
 
-#: any.pm:296
+#: any.pm:312
 #, c-format
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
@@ -75,7 +76,7 @@ msgstr ""
 "Command-Option-O-F בזמן האתחול ולהזין setenv boot-device %s,\\\\:tbxi\n"
 "אחר כך יש להקליד shut-down. באתחול הבא צפוי להופיע מנהל האתחול."
 
-#: any.pm:336
+#: any.pm:352
 #, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
@@ -89,268 +90,268 @@ msgstr ""
 "\n"
 "מהו הכונן ממנו נטענת המערכת? "
 
-#: any.pm:347
+#: any.pm:363
 #, fuzzy, c-format
 msgid "Bootloader Installation"
 msgstr "התקנת מנהל האתחול"
 
-#: any.pm:351
+#: any.pm:367
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "איפה ברצונך להתקין את מנהל האתחול?"
 
-#: any.pm:375
+#: any.pm:391
 #, fuzzy, c-format
 msgid "First sector (MBR) of drive %s"
 msgstr "מקטע ראשון של הכונן (MBR)"
 
-#: any.pm:377
+#: any.pm:393
 #, c-format
 msgid "First sector of drive (MBR)"
 msgstr "מקטע ראשון של הכונן (MBR)"
 
-#: any.pm:379
+#: any.pm:395
 #, c-format
 msgid "First sector of the root partition"
 msgstr "מקטע ראשון של מחיצת השורש"
 
-#: any.pm:381
+#: any.pm:397
 #, c-format
 msgid "On Floppy"
 msgstr "על תקליטון"
 
-#: any.pm:383 pkgs.pm:281 ugtk2.pm:526
+#: any.pm:399 pkgs.pm:302 ugtk2.pm:526
 #, c-format
 msgid "Skip"
 msgstr "דילוג"
 
-#: any.pm:418
+#: any.pm:434
 #, c-format
 msgid "Boot Style Configuration"
 msgstr "הגדרת סגנון מנהל אתחול"
 
-#: any.pm:434 any.pm:467 any.pm:468
+#: any.pm:449 any.pm:482 any.pm:483
 #, c-format
 msgid "Bootloader main options"
 msgstr "הגדרות עיקריות של מנהל האתחול"
 
-#: any.pm:438
+#: any.pm:453
 #, c-format
 msgid "Bootloader"
 msgstr "מנהל אתחול"
 
-#: any.pm:439 any.pm:471
+#: any.pm:454 any.pm:486
 #, c-format
 msgid "Bootloader to use"
 msgstr "מנהל אתחול (ברירת מחדל):"
 
-#: any.pm:442 any.pm:474
+#: any.pm:457 any.pm:489
 #, c-format
 msgid "Boot device"
 msgstr "מחיצת האתחול (ברירת מחדל):"
 
-#: any.pm:445
+#: any.pm:460
 #, c-format
 msgid "Main options"
 msgstr "אפשרויות ראשיות"
 
-#: any.pm:446
+#: any.pm:461
 #, c-format
 msgid "Delay before booting default image"
 msgstr "השהייה לפני אתחול מערכת ברירת המחדל"
 
-#: any.pm:447
+#: any.pm:462
 #, c-format
 msgid "Enable ACPI"
 msgstr "הפעלת ACPI (ניהול צריכת אנרגיה מתקדמת)"
 
-#: any.pm:448
+#: any.pm:463
 #, fuzzy, c-format
 msgid "Enable SMP"
 msgstr "הפעלת ACPI (ניהול צריכת אנרגיה מתקדמת)"
 
-#: any.pm:449
+#: any.pm:464
 #, c-format
 msgid "Enable APIC"
 msgstr "הפעלת APIC"
 
-#: any.pm:451
+#: any.pm:466
 #, c-format
 msgid "Enable Local APIC"
 msgstr "הפעלת APIC מקומי"
 
-#: any.pm:452 security/level.pm:51
+#: any.pm:467 security/level.pm:51
 #, c-format
 msgid "Security"
 msgstr "הגדרות אבטחה"
 
-#: any.pm:453 any.pm:913 any.pm:932 authentication.pm:249
+#: any.pm:468 any.pm:930 any.pm:949 authentication.pm:249
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "סיסמה"
 
-#: any.pm:456 authentication.pm:260
+#: any.pm:471 authentication.pm:260
 #, c-format
 msgid "The passwords do not match"
 msgstr "הסיסמאות לא זהות"
 
-#: any.pm:456 authentication.pm:260 diskdrake/interactive.pm:1497
+#: any.pm:471 authentication.pm:260 diskdrake/interactive.pm:1510
 #, c-format
 msgid "Please try again"
 msgstr "יש לנסות שנית"
 
-#: any.pm:458
+#: any.pm:473
 #, c-format
 msgid "You cannot use a password with %s"
 msgstr "אסור להשתמש בסיסמה עם %s"
 
-#: any.pm:462 any.pm:916 any.pm:934 authentication.pm:250
+#: any.pm:477 any.pm:933 any.pm:951 authentication.pm:250
 #, c-format
 msgid "Password (again)"
 msgstr "סיסמה (שוב)"
 
-#: any.pm:463
+#: any.pm:478
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "ניקוי קבצים זמניים בספריית tmp/ בכל אתחול"
 
-#: any.pm:473
+#: any.pm:488
 #, c-format
 msgid "Init Message"
 msgstr "הודעת אתחול"
 
-#: any.pm:475
+#: any.pm:490
 #, c-format
 msgid "Open Firmware Delay"
 msgstr "השהיית קושחה (Firmware) פתוחה"
 
-#: any.pm:476
+#: any.pm:491
 #, c-format
 msgid "Kernel Boot Timeout"
 msgstr "משך המתנה מירבי לאתחול גרעין"
 
-#: any.pm:477
+#: any.pm:492
 #, c-format
 msgid "Enable CD Boot?"
 msgstr "האם לאפשר אתחול מתקליטור?"
 
-#: any.pm:478
+#: any.pm:493
 #, c-format
 msgid "Enable OF Boot?"
 msgstr "האם לאפשר אתחול OF?"
 
-#: any.pm:479
+#: any.pm:494
 #, c-format
 msgid "Default OS?"
 msgstr "מהי מערכת הפעלה שתיטען כברירת מחדל?"
 
-#: any.pm:553
+#: any.pm:568
 #, c-format
 msgid "Image"
 msgstr "תצורה"
 
-#: any.pm:554 any.pm:568
+#: any.pm:569 any.pm:583
 #, c-format
 msgid "Root"
 msgstr "מנהל מערכת (root)"
 
-#: any.pm:555 any.pm:581
+#: any.pm:570 any.pm:596
 #, c-format
 msgid "Append"
 msgstr "הוספה"
 
-#: any.pm:557
+#: any.pm:572
 #, c-format
 msgid "Xen append"
 msgstr "הוספת Xen"
 
-#: any.pm:559
+#: any.pm:574
 #, c-format
 msgid "Requires password to boot"
 msgstr ""
 
-#: any.pm:561
+#: any.pm:576
 #, c-format
 msgid "Video mode"
 msgstr "תצורת תצוגה"
 
-#: any.pm:563
+#: any.pm:578
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:564
+#: any.pm:579
 #, c-format
 msgid "Network profile"
 msgstr "תצורת רשת"
 
-#: any.pm:573 any.pm:578 any.pm:580 diskdrake/interactive.pm:411
+#: any.pm:588 any.pm:593 any.pm:595 diskdrake/interactive.pm:411
 #, c-format
 msgid "Label"
 msgstr "תווית"
 
-#: any.pm:575 any.pm:583 harddrake/v4l.pm:438
+#: any.pm:590 any.pm:598 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "ברירת מחדל"
 
-#: any.pm:582
+#: any.pm:597
 #, c-format
 msgid "NoVideo"
 msgstr "ללא תצוגה"
 
-#: any.pm:593
+#: any.pm:608
 #, c-format
 msgid "Empty label not allowed"
 msgstr "אסור להגדיר תווית שם ריקה"
 
-#: any.pm:594
+#: any.pm:609
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "חובה להגדיר תמונת גרעין"
 
-#: any.pm:594
+#: any.pm:609
 #, c-format
 msgid "You must specify a root partition"
 msgstr "חובה להגדיר מחיצת שורש"
 
-#: any.pm:595
+#: any.pm:610
 #, c-format
 msgid "This label is already used"
 msgstr "התווית הזאת כבר בשימוש"
 
-#: any.pm:613
+#: any.pm:628
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "איזה סוג כניסה ברצונך להוסיף?"
 
-#: any.pm:614
+#: any.pm:629
 #, c-format
 msgid "Linux"
 msgstr "לינוקס"
 
-#: any.pm:614
+#: any.pm:629
 #, c-format
 msgid "Other OS (SunOS...)"
 msgstr "מערכת הפעלה אחרת (SunOS...)"
 
-#: any.pm:615
+#: any.pm:630
 #, c-format
 msgid "Other OS (MacOS...)"
 msgstr "מערכת הפעלה אחרת (MacOS...)"
 
-#: any.pm:615
+#: any.pm:630
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "מערכת הפעלה אחרת (חלונות...)"
 
-#: any.pm:662
+#: any.pm:677
 #, fuzzy, c-format
 msgid "Bootloader Configuration"
 msgstr "הגדרת סגנון מנהל אתחול"
 
-#: any.pm:663
+#: any.pm:678
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -359,198 +360,198 @@ msgstr ""
 "להלן הרשומות שהוגדרו כבר בתפריט האתחול\n"
 "ניתן להוסיף רשומות או לשנות רשומות קיימות."
 
-#: any.pm:874
+#: any.pm:889
 #, c-format
 msgid "access to X programs"
 msgstr "גישה ליישומים גרפיים"
 
-#: any.pm:875
+#: any.pm:890
 #, c-format
 msgid "access to rpm tools"
 msgstr "גישה לכלי התקנת תוכנה"
 
-#: any.pm:876
+#: any.pm:891
 #, c-format
 msgid "allow \"su\""
 msgstr "איפשור שינוי למנהל מערכת (\"su\")"
 
-#: any.pm:877
+#: any.pm:892
 #, c-format
 msgid "access to administrative files"
 msgstr "אפשרות גישה לקבצי ניהול"
 
-#: any.pm:878
+#: any.pm:893
 #, c-format
 msgid "access to network tools"
 msgstr "אפשרות גישה לכלי רשת"
 
-#: any.pm:879
+#: any.pm:894
 #, c-format
 msgid "access to compilation tools"
 msgstr "אפשרות גישה לכלי הידור"
 
-#: any.pm:885
+#: any.pm:900
 #, c-format
 msgid "(already added %s)"
 msgstr "(כבר נוסף %s)"
 
-#: any.pm:891
+#: any.pm:906
 #, c-format
 msgid "Please give a user name"
 msgstr "עליך להגדיר שם משתמש"
 
-#: any.pm:892
+#: any.pm:907
 #, fuzzy, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
 msgstr "שם המשתמש יכול להכיל אך ורק אותיות קטנות, מספרים, `-' ו `_'"
 
-#: any.pm:893
+#: any.pm:908
 #, c-format
 msgid "The user name is too long"
 msgstr "שם המשתמש ארוך מדי"
 
-#: any.pm:894
+#: any.pm:909
 #, c-format
 msgid "This user name has already been added"
 msgstr "שם משתמש זה כבר קיים"
 
-#: any.pm:900 any.pm:936
+#: any.pm:915 any.pm:953
 #, c-format
 msgid "User ID"
 msgstr "קוד זיהוי משתמש"
 
-#: any.pm:900 any.pm:937
+#: any.pm:915 any.pm:954
 #, c-format
 msgid "Group ID"
 msgstr "קוד זיהוי קבוצה"
 
-#: any.pm:901
+#: any.pm:916
 #, c-format
 msgid "%s must be a number"
 msgstr "הערך %s חייב להיות מספר"
 
-#: any.pm:902
+#: any.pm:917
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s צריך להיות מעל 500. האם להמשיך בכל זאת?"
 
-#: any.pm:906
+#: any.pm:921
 #, c-format
 msgid "User management"
 msgstr "ניהול משתמשים"
 
-#: any.pm:911
+#: any.pm:927
 #, c-format
 msgid "Enable guest account"
 msgstr ""
 
-#: any.pm:912 authentication.pm:236
+#: any.pm:929 authentication.pm:236
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "קביעת סיסמת מנהל"
 
-#: any.pm:918
+#: any.pm:935
 #, c-format
 msgid "Enter a user"
 msgstr "הזנת משתמש"
 
-#: any.pm:920
+#: any.pm:937
 #, c-format
 msgid "Icon"
 msgstr "סמל"
 
-#: any.pm:923
+#: any.pm:940
 #, c-format
 msgid "Real name"
 msgstr "שם אמיתי"
 
-#: any.pm:930
+#: any.pm:947
 #, c-format
 msgid "Login name"
 msgstr "שם משתמש"
 
-#: any.pm:935
+#: any.pm:952
 #, c-format
 msgid "Shell"
 msgstr "מעטפת"
 
-#: any.pm:978
+#: any.pm:995
 #, c-format
 msgid "Please wait, adding media..."
 msgstr "נא להמתין, מוסיף מקור..."
 
-#: any.pm:1010 security/l10n.pm:14
+#: any.pm:1040 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "כניסה-אוטומטית"
 
-#: any.pm:1011
+#: any.pm:1041
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "ניתן להגדיר שכאשר המערכת תופעל היא תכנס אוטומטית לחשבון של אחד  המשתמשים."
 
-#: any.pm:1012
+#: any.pm:1042
 #, c-format
 msgid "Use this feature"
 msgstr "הפעל אפשרות זו"
 
-#: any.pm:1013
+#: any.pm:1043
 #, c-format
 msgid "Choose the default user:"
 msgstr "בחירת משתמש ברירת המחדל: "
 
-#: any.pm:1014
+#: any.pm:1044
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "יש לבחור את מנהל החלונות:"
 
-#: any.pm:1025 any.pm:1045 any.pm:1118
+#: any.pm:1055 any.pm:1069 any.pm:1143
 #, c-format
 msgid "Release Notes"
 msgstr "הערות שחרור"
 
-#: any.pm:1052 any.pm:1406 interactive/gtk.pm:822
+#: any.pm:1076 any.pm:1432 interactive/gtk.pm:826
 #, c-format
 msgid "Close"
 msgstr "סגור"
 
-#: any.pm:1104
+#: any.pm:1129
 #, c-format
 msgid "License agreement"
 msgstr "הסכם משתמש"
 
-#: any.pm:1106 diskdrake/dav.pm:26
+#: any.pm:1131 diskdrake/dav.pm:26 mygtk2.pm:1229
 #, c-format
 msgid "Quit"
 msgstr "יציאה"
 
-#: any.pm:1113
+#: any.pm:1138
 #, fuzzy, c-format
 msgid "Do you accept this license ?"
 msgstr "האם יש לך עוד אחד?"
 
-#: any.pm:1114
+#: any.pm:1139
 #, c-format
 msgid "Accept"
 msgstr "הסכמה"
 
-#: any.pm:1114
+#: any.pm:1139
 #, c-format
 msgid "Refuse"
 msgstr "סירוב"
 
-#: any.pm:1140 any.pm:1202
+#: any.pm:1165 any.pm:1228
 #, c-format
 msgid "Please choose a language to use"
 msgstr "יש לבחור את השפה העיקרית"
 
-#: any.pm:1168
-#, c-format
+#: any.pm:1193
+#, fuzzy, c-format
 msgid ""
-"Mandriva Linux can support multiple languages. Select\n"
+"%s can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
@@ -558,77 +559,82 @@ msgstr ""
 "את השפות שברצונך להתקין. השפות יהיו זמינות כאשר\n"
 "ההתקנה תסתיים והמחשב יופעל מחדש."
 
-#: any.pm:1171
-#, c-format
-msgid "Multi languages"
+#: any.pm:1196
+#, fuzzy, c-format
+msgid "Multiple languages"
 msgstr "ריבוי שפות"
 
-#: any.pm:1180 any.pm:1211
+#: any.pm:1197
+#, c-format
+msgid "Select Additional Languages"
+msgstr ""
+
+#: any.pm:1206 any.pm:1237
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "קידוד עם תאימות לאחור (לא UTF-8)"
 
-#: any.pm:1181
+#: any.pm:1207
 #, c-format
 msgid "All languages"
 msgstr "כל השפות"
 
-#: any.pm:1203
+#: any.pm:1229
 #, c-format
 msgid "Language choice"
 msgstr "בחירת שפה"
 
-#: any.pm:1257
+#: any.pm:1283
 #, c-format
 msgid "Country / Region"
 msgstr "מדינה / אזור"
 
-#: any.pm:1258
+#: any.pm:1284
 #, c-format
 msgid "Please choose your country"
 msgstr "עליך לבחור את המדינה שלך"
 
-#: any.pm:1260
+#: any.pm:1286
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "להלן הרשימה המלאה של המדינות הזמינות"
 
-#: any.pm:1261
+#: any.pm:1287
 #, c-format
 msgid "Other Countries"
 msgstr "מדינות אחרות"
 
-#: any.pm:1261 interactive.pm:488 interactive/gtk.pm:450
+#: any.pm:1287 interactive.pm:489 interactive/gtk.pm:450
 #, c-format
 msgid "Advanced"
 msgstr "מתקדם"
 
-#: any.pm:1267
+#: any.pm:1293
 #, c-format
 msgid "Input method:"
 msgstr "שיטת קלט:"
 
-#: any.pm:1270
+#: any.pm:1296
 #, c-format
 msgid "None"
 msgstr "כלום"
 
-#: any.pm:1351
+#: any.pm:1377
 #, c-format
 msgid "No sharing"
 msgstr "ללא שיתוף"
 
-#: any.pm:1351
+#: any.pm:1377
 #, c-format
 msgid "Allow all users"
 msgstr "הרשה לכל המשתמשים"
 
-#: any.pm:1351
+#: any.pm:1377
 #, c-format
 msgid "Custom"
 msgstr "מותאם אישית"
 
-#: any.pm:1355
+#: any.pm:1381
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -642,7 +648,7 @@ msgstr ""
 "\n"
 "\" התאמה אישית\" תאפשר התאמה לכל משתמש.\n"
 
-#: any.pm:1367
+#: any.pm:1393
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -650,7 +656,7 @@ msgid ""
 msgstr ""
 "NFS: מערכת שיתוף הקבצים המסורתית של יוניקס, עם תמיכה פחותה במק וחלונות."
 
-#: any.pm:1370
+#: any.pm:1396
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -659,18 +665,18 @@ msgstr ""
 "SMB: מערכת שיתוף קבצים הנמצאת בשימוש בחלונות, Mac OS X ומערכות לינוקס "
 "מודרניות רבות."
 
-#: any.pm:1378
+#: any.pm:1404
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "ניתן לייצא בעזרת NFS או SMB. עליך לבחור במה להשתמש."
 
-#: any.pm:1406
+#: any.pm:1432
 #, c-format
 msgid "Launch userdrake"
 msgstr "הפעלת userdrake"
 
-#: any.pm:1408
+#: any.pm:1434
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -679,54 +685,54 @@ msgstr ""
 "השיתוף לכל משתמש, משתמש בהגדרתקבוצה \"שיתוף-קבצים\".\n"
 "ביכולתך להשתמש בעורך המשתמשים כדי להוסיף משתמשים לקבוצה זו."
 
-#: any.pm:1515
+#: any.pm:1541
 #, fuzzy, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
 "logout now."
 msgstr "עליך להתנתק ולהתחבר שנית כדי שהשינויים יחולו."
 
-#: any.pm:1519
+#: any.pm:1545
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "עליך להתנתק ולהתחבר שנית כדי שהשינויים יחולו."
 
-#: any.pm:1554
+#: any.pm:1580
 #, c-format
 msgid "Timezone"
 msgstr "אזור זמן"
 
-#: any.pm:1554
+#: any.pm:1580
 #, c-format
 msgid "Which is your timezone?"
 msgstr "מהו אזור הזמן שלך?"
 
-#: any.pm:1577 any.pm:1579
+#: any.pm:1603 any.pm:1605
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "הגדרות תאריך, שעון ואזור-זמן"
 
-#: any.pm:1580
+#: any.pm:1606
 #, c-format
 msgid "What is the best time?"
 msgstr "מה הזמן הנכון?"
 
-#: any.pm:1584
+#: any.pm:1610
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (שעון מערכת מכוון ל-UTC)"
 
-#: any.pm:1585
+#: any.pm:1611
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (שעון מערכת מכוון לזמן המקומי)"
 
-#: any.pm:1587
+#: any.pm:1613
 #, c-format
 msgid "NTP Server"
 msgstr "שרת NTP"
 
-#: any.pm:1588
+#: any.pm:1614
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "סנכרון זמן אוטומטי (שימוש ב-NTP)"
@@ -1053,7 +1059,7 @@ msgid "Domain Admin Password"
 msgstr "סיסמת מנהל המתחם"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:982
+#: bootloader.pm:1005
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1068,49 +1074,54 @@ msgstr ""
 "wait for default boot.\n"
 "\n"
 
-#: bootloader.pm:1160
+#: bootloader.pm:1197
 #, c-format
 msgid "LILO with text menu"
 msgstr "מנהל אתחול 'לילו' עם תפריט טקסט"
 
-#: bootloader.pm:1161
+#: bootloader.pm:1198
+#, fuzzy, c-format
+msgid "GRUB2 with graphical menu"
+msgstr "מנהל אתחול 'גראב' עם תפריט גרפי"
+
+#: bootloader.pm:1199
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr "מנהל אתחול 'גראב' עם תפריט גרפי"
 
-#: bootloader.pm:1162
+#: bootloader.pm:1200
 #, c-format
 msgid "GRUB with text menu"
 msgstr "מנהל אתחול 'גראב' עם תפריט טקסט"
 
-#: bootloader.pm:1163
+#: bootloader.pm:1201
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:1164
+#: bootloader.pm:1202
 #, c-format
 msgid "SILO"
 msgstr "SILO"
 
-#: bootloader.pm:1248
+#: bootloader.pm:1288
 #, c-format
 msgid "not enough room in /boot"
 msgstr "אין מספיק מקום ב-/boot"
 
-#: bootloader.pm:1974
+#: bootloader.pm:2070
 #, c-format
 msgid "You cannot install the bootloader on a %s partition\n"
 msgstr "אי אפשר להתקין את מנהל האתחול על המחיצה %s\n"
 
-#: bootloader.pm:2095
+#: bootloader.pm:2239
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
 msgstr "יש צורך בעדכון תצורת טוען המערכת שלך מאחר ושונו מספרי מחיצות"
 
-#: bootloader.pm:2108
+#: bootloader.pm:2252
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1119,7 +1130,7 @@ msgstr ""
 "אין אפשרות להתקין את טוען המערכת באופן תקין. עליך להפעיל את המערכת  באופן "
 "rescue ולבחור \"%s\""
 
-#: bootloader.pm:2109
+#: bootloader.pm:2253
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "התקנה חוזרת של מנהל האתחול"
@@ -1260,31 +1271,31 @@ msgid "Mount point"
 msgstr "נקודת עיגון"
 
 #: diskdrake/dav.pm:67 diskdrake/interactive.pm:410
-#: diskdrake/interactive.pm:1161 diskdrake/removable.pm:24
+#: diskdrake/interactive.pm:1174 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
 msgstr "אפשרויות"
 
-#: diskdrake/dav.pm:68 interactive.pm:387 interactive/gtk.pm:458
+#: diskdrake/dav.pm:68 interactive.pm:388 interactive/gtk.pm:462
 #, c-format
 msgid "Remove"
 msgstr "הסרה"
 
-#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:193 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:203 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "סיום"
 
-#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:133 diskdrake/hd_gtk.pm:299
+#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:135 diskdrake/hd_gtk.pm:309
 #: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
 #: diskdrake/interactive.pm:456 diskdrake/interactive.pm:527
 #: diskdrake/interactive.pm:545 diskdrake/interactive.pm:550
-#: diskdrake/interactive.pm:712 diskdrake/interactive.pm:1000
-#: diskdrake/interactive.pm:1052 diskdrake/interactive.pm:1207
-#: diskdrake/interactive.pm:1220 diskdrake/interactive.pm:1223
-#: diskdrake/interactive.pm:1497 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23
+#: diskdrake/interactive.pm:712 diskdrake/interactive.pm:1013
+#: diskdrake/interactive.pm:1065 diskdrake/interactive.pm:1220
+#: diskdrake/interactive.pm:1233 diskdrake/interactive.pm:1236
+#: diskdrake/interactive.pm:1510 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23
 #: do_pkgs.pm:28 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:83
 #: fsedit.pm:246 interactive/http.pm:117 interactive/http.pm:118
 #: modules/interactive.pm:19 scanner.pm:95 scanner.pm:106 scanner.pm:113
@@ -1303,12 +1314,12 @@ msgstr "נא להכניס את כתובת שרת ה-WevDAV"
 msgid "The URL must begin with http:// or https://"
 msgstr "שם האתר חייב להתחיל בhttp:// או בhttps://"
 
-#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:424 diskdrake/interactive.pm:306
+#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:434 diskdrake/interactive.pm:306
 #: diskdrake/interactive.pm:391 diskdrake/interactive.pm:597
 #: diskdrake/interactive.pm:815 diskdrake/interactive.pm:880
-#: diskdrake/interactive.pm:1032 diskdrake/interactive.pm:1074
-#: diskdrake/interactive.pm:1075 diskdrake/interactive.pm:1307
-#: diskdrake/interactive.pm:1345 diskdrake/interactive.pm:1496 do_pkgs.pm:19
+#: diskdrake/interactive.pm:1045 diskdrake/interactive.pm:1087
+#: diskdrake/interactive.pm:1088 diskdrake/interactive.pm:1320
+#: diskdrake/interactive.pm:1358 diskdrake/interactive.pm:1509 do_pkgs.pm:19
 #: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:78 harddrake/sound.pm:399
 #, c-format
 msgid "Warning"
@@ -1325,22 +1336,22 @@ msgid "Server: "
 msgstr "שרת:"
 
 #: diskdrake/dav.pm:126 diskdrake/interactive.pm:501
-#: diskdrake/interactive.pm:1369 diskdrake/interactive.pm:1457
+#: diskdrake/interactive.pm:1382 diskdrake/interactive.pm:1470
 #, c-format
 msgid "Mount point: "
 msgstr "נקודת עיגון: "
 
-#: diskdrake/dav.pm:127 diskdrake/interactive.pm:1464
+#: diskdrake/dav.pm:127 diskdrake/interactive.pm:1477
 #, c-format
 msgid "Options: %s"
 msgstr "אפשרויות: %s"
 
 #: diskdrake/hd_gtk.pm:61 diskdrake/interactive.pm:301
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:108
-#: fs/partitioning_wizard.pm:55 fs/partitioning_wizard.pm:238
-#: fs/partitioning_wizard.pm:246 fs/partitioning_wizard.pm:285
-#: fs/partitioning_wizard.pm:433 fs/partitioning_wizard.pm:496
-#: fs/partitioning_wizard.pm:579 fs/partitioning_wizard.pm:582
+#: fs/partitioning_wizard.pm:61 fs/partitioning_wizard.pm:244
+#: fs/partitioning_wizard.pm:252 fs/partitioning_wizard.pm:291
+#: fs/partitioning_wizard.pm:439 fs/partitioning_wizard.pm:502
+#: fs/partitioning_wizard.pm:585 fs/partitioning_wizard.pm:588
 #, c-format
 msgid "Partitioning"
 msgstr "חלוקה למחיצות"
@@ -1350,35 +1361,35 @@ msgstr "חלוקה למחיצות"
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr ""
 
-#: diskdrake/hd_gtk.pm:115 diskdrake/interactive.pm:1182
-#: diskdrake/interactive.pm:1192 diskdrake/interactive.pm:1245
+#: diskdrake/hd_gtk.pm:116 diskdrake/interactive.pm:1195
+#: diskdrake/interactive.pm:1205 diskdrake/interactive.pm:1258
 #, c-format
 msgid "Read carefully"
 msgstr "יש לקרוא בעיון"
 
-#: diskdrake/hd_gtk.pm:115
+#: diskdrake/hd_gtk.pm:116
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "יש לגבות את המידע שעל המערכת לפני ביצוע פעולה זו"
 
-#: diskdrake/hd_gtk.pm:116 diskdrake/interactive.pm:240
+#: diskdrake/hd_gtk.pm:117 diskdrake/interactive.pm:240
 #, c-format
 msgid "Exit"
 msgstr "יציאה"
 
-#: diskdrake/hd_gtk.pm:116
+#: diskdrake/hd_gtk.pm:117
 #, c-format
 msgid "Continue"
 msgstr "המשך"
 
-#: diskdrake/hd_gtk.pm:188 fs/partitioning_wizard.pm:555 interactive.pm:653
-#: interactive/gtk.pm:814 interactive/gtk.pm:832 interactive/gtk.pm:853
+#: diskdrake/hd_gtk.pm:198 fs/partitioning_wizard.pm:561 interactive.pm:654
+#: interactive/gtk.pm:818 interactive/gtk.pm:836 interactive/gtk.pm:867
 #: ugtk2.pm:936
 #, c-format
 msgid "Help"
 msgstr "עזרה"
 
-#: diskdrake/hd_gtk.pm:234
+#: diskdrake/hd_gtk.pm:244
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1389,88 +1400,88 @@ msgstr ""
 "מומלץ לשנות את גודל המחיצה בתור פעולה ראשונה\n"
 "(עליך לבחור את המחיצה, ואז ללחוץ על \"שינוי גודל\")"
 
-#: diskdrake/hd_gtk.pm:236
+#: diskdrake/hd_gtk.pm:246
 #, c-format
 msgid "Please click on a partition"
 msgstr "עליך לבחור מחיצה"
 
-#: diskdrake/hd_gtk.pm:250 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:260 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "פרטים"
 
-#: diskdrake/hd_gtk.pm:299
+#: diskdrake/hd_gtk.pm:309
 #, c-format
 msgid "No hard disk drives found"
 msgstr "לא נמצאו כוננים קשיחים"
 
-#: diskdrake/hd_gtk.pm:330
+#: diskdrake/hd_gtk.pm:340
 #, c-format
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: diskdrake/hd_gtk.pm:395
+#: diskdrake/hd_gtk.pm:405
 #, fuzzy, c-format
 msgid "Ext4"
 msgstr "יציאה"
 
-#: diskdrake/hd_gtk.pm:395 fs/partitioning_wizard.pm:403
+#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:395 fs/partitioning_wizard.pm:403
+#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
 #, c-format
 msgid "Swap"
 msgstr "זיכרון החלפה"
 
-#: diskdrake/hd_gtk.pm:395 fs/partitioning_wizard.pm:403
+#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:395 fs/partitioning_wizard.pm:403
+#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:395 fs/partitioning_wizard.pm:403
+#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
 #, c-format
 msgid "Windows"
 msgstr "חלונות"
 
-#: diskdrake/hd_gtk.pm:396 fs/partitioning_wizard.pm:404 services.pm:192
+#: diskdrake/hd_gtk.pm:406 fs/partitioning_wizard.pm:410 services.pm:192
 #, c-format
 msgid "Other"
 msgstr "אחר"
 
-#: diskdrake/hd_gtk.pm:396 diskdrake/interactive.pm:1384
-#: fs/partitioning_wizard.pm:404
+#: diskdrake/hd_gtk.pm:406 diskdrake/interactive.pm:1397
+#: fs/partitioning_wizard.pm:410
 #, c-format
 msgid "Empty"
 msgstr "ריק"
 
-#: diskdrake/hd_gtk.pm:403
+#: diskdrake/hd_gtk.pm:413
 #, c-format
 msgid "Filesystem types:"
 msgstr "סוגי מערכות קבצים:"
 
-#: diskdrake/hd_gtk.pm:424
+#: diskdrake/hd_gtk.pm:434
 #, c-format
 msgid "This partition is already empty"
 msgstr "מחיצה זו כבר ריקה"
 
-#: diskdrake/hd_gtk.pm:433
+#: diskdrake/hd_gtk.pm:443
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "נא לבחור קודם כל ב\"ניתוק\""
 
-#: diskdrake/hd_gtk.pm:433
+#: diskdrake/hd_gtk.pm:443
 #, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "השתמש ב''%s'' במקום (במצב מומחה)"
 
-#: diskdrake/hd_gtk.pm:433 diskdrake/interactive.pm:409
+#: diskdrake/hd_gtk.pm:443 diskdrake/interactive.pm:409
 #: diskdrake/interactive.pm:639 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
@@ -1494,7 +1505,7 @@ msgid "More"
 msgstr "מתקדם"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
-#: diskdrake/interactive.pm:1291
+#: diskdrake/interactive.pm:1304 mygtk2.pm:1228
 #, c-format
 msgid "Confirmation"
 msgstr "אישור"
@@ -1519,7 +1530,7 @@ msgstr "האם לצאת בלי לשמור את טבלת המחיצות?"
 msgid "Do you want to save the /etc/fstab modifications?"
 msgstr "האם ברצונך לשמור את שינויי /etc/fstab"
 
-#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:285
+#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:291
 #, c-format
 msgid "You need to reboot for the partition table modifications to take effect"
 msgstr "יש צורך בהפעלת המחשב מחדש בכדי שהשינויים בטבלת המחיצות יכנסו לתוקף"
@@ -1604,12 +1615,12 @@ msgstr "שנה גודל"
 msgid "Format"
 msgstr "יצירת מערכת קבצים"
 
-#: diskdrake/interactive.pm:415 diskdrake/interactive.pm:963
+#: diskdrake/interactive.pm:415 diskdrake/interactive.pm:976
 #, c-format
 msgid "Add to RAID"
 msgstr "הוספה ל-RAID"
 
-#: diskdrake/interactive.pm:416 diskdrake/interactive.pm:982
+#: diskdrake/interactive.pm:416 diskdrake/interactive.pm:995
 #, c-format
 msgid "Add to LVM"
 msgstr "הוספה ל-LVM"
@@ -1669,12 +1680,12 @@ msgstr "יצרת מחיצה חדשה"
 msgid "Start sector: "
 msgstr "מקטע התחלה:"
 
-#: diskdrake/interactive.pm:497 diskdrake/interactive.pm:1067
+#: diskdrake/interactive.pm:497 diskdrake/interactive.pm:1080
 #, c-format
 msgid "Size in MB: "
 msgstr "גודל ב-MB: "
 
-#: diskdrake/interactive.pm:499 diskdrake/interactive.pm:1068
+#: diskdrake/interactive.pm:499 diskdrake/interactive.pm:1081
 #, c-format
 msgid "Filesystem type: "
 msgstr "סוג מערכת קבצים: "
@@ -1699,12 +1710,12 @@ msgstr "אלגוריתם הצפנה"
 msgid "Encryption key "
 msgstr "מפתח הצפנה"
 
-#: diskdrake/interactive.pm:512 diskdrake/interactive.pm:1501
+#: diskdrake/interactive.pm:512 diskdrake/interactive.pm:1514
 #, c-format
 msgid "Encryption key (again)"
 msgstr "חזרה על מפתח הצפנה"
 
-#: diskdrake/interactive.pm:524 diskdrake/interactive.pm:1497
+#: diskdrake/interactive.pm:524 diskdrake/interactive.pm:1510
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "מפתחות ההצפנה לא תואמים"
@@ -1801,7 +1812,7 @@ msgid "Where do you want to mount %s?"
 msgstr "לאן ברצונך לעגן את %s?"
 
 #: diskdrake/interactive.pm:773 diskdrake/interactive.pm:869
-#: fs/partitioning_wizard.pm:131 fs/partitioning_wizard.pm:207
+#: fs/partitioning_wizard.pm:137 fs/partitioning_wizard.pm:213
 #, c-format
 msgid "Resizing"
 msgstr "משנה גודל"
@@ -1846,7 +1857,7 @@ msgstr "גודל מזערי: %s MB"
 msgid "Maximum size: %s MB"
 msgstr "גודל מירבי: %s MB"
 
-#: diskdrake/interactive.pm:880 fs/partitioning_wizard.pm:215
+#: diskdrake/interactive.pm:880 fs/partitioning_wizard.pm:221
 #, fuzzy, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
@@ -1855,7 +1866,7 @@ msgstr ""
 "על מנת להבטיח את שלמות הנתונים אחרי שינוי גודל המחיצה(ות) \n"
 "תiפעל בדיקה של מערכת הקבצים באתחול הבא של חלונות"
 
-#: diskdrake/interactive.pm:944 diskdrake/interactive.pm:1492
+#: diskdrake/interactive.pm:944 diskdrake/interactive.pm:1505
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "מפתח ההצפנה של המערכת"
@@ -1865,7 +1876,7 @@ msgstr "מפתח ההצפנה של המערכת"
 msgid "Enter your filesystem encryption key"
 msgstr "עליך לבחור את מפתח ההצפנה של המערכת שלך"
 
-#: diskdrake/interactive.pm:946 diskdrake/interactive.pm:1500
+#: diskdrake/interactive.pm:946 diskdrake/interactive.pm:1513
 #, c-format
 msgid "Encryption key"
 msgstr "מפתח הצפנה"
@@ -1875,37 +1886,37 @@ msgstr "מפתח הצפנה"
 msgid "Invalid key"
 msgstr ""
 
-#: diskdrake/interactive.pm:963
+#: diskdrake/interactive.pm:976
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "יש לבחור RAID קיים אליו יש להוסיף"
 
-#: diskdrake/interactive.pm:965 diskdrake/interactive.pm:984
+#: diskdrake/interactive.pm:978 diskdrake/interactive.pm:997
 #, c-format
 msgid "new"
 msgstr "חדש"
 
-#: diskdrake/interactive.pm:982
+#: diskdrake/interactive.pm:995
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "יש לבחור LVM קיים אליו יש להוסיף"
 
-#: diskdrake/interactive.pm:994 diskdrake/interactive.pm:1003
+#: diskdrake/interactive.pm:1007 diskdrake/interactive.pm:1016
 #, fuzzy, c-format
 msgid "LVM name"
 msgstr "שם LVM?"
 
-#: diskdrake/interactive.pm:995
+#: diskdrake/interactive.pm:1008
 #, c-format
 msgid "Enter a name for the new LVM volume group"
 msgstr ""
 
-#: diskdrake/interactive.pm:1000
+#: diskdrake/interactive.pm:1013
 #, fuzzy, c-format
 msgid "\"%s\" already exists"
 msgstr "קובץ זה כבר קיים. האם להשתמש בו?"
 
-#: diskdrake/interactive.pm:1032
+#: diskdrake/interactive.pm:1045
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
@@ -1914,117 +1925,117 @@ msgstr ""
 "המחיצה הפיזית %s עדיין בשימוש.\n"
 "האם ברצונך להעביר את החלקים שבשימוש במחיצה זו למחיצה אחרת?"
 
-#: diskdrake/interactive.pm:1034
+#: diskdrake/interactive.pm:1047
 #, c-format
 msgid "Moving physical extents"
 msgstr "מעביר הרחבות פיזיות"
 
-#: diskdrake/interactive.pm:1052
+#: diskdrake/interactive.pm:1065
 #, c-format
 msgid "This partition cannot be used for loopback"
 msgstr "לא יכול לעשות שימוש במחיצה זאת עבור loopback"
 
-#: diskdrake/interactive.pm:1065
+#: diskdrake/interactive.pm:1078
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:1066
+#: diskdrake/interactive.pm:1079
 #, c-format
 msgid "Loopback file name: "
 msgstr "שם קובץ loopback: "
 
-#: diskdrake/interactive.pm:1071
+#: diskdrake/interactive.pm:1084
 #, c-format
 msgid "Give a file name"
 msgstr "עליך להגדיר שם קובץ"
 
-#: diskdrake/interactive.pm:1074
+#: diskdrake/interactive.pm:1087
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "הקובץ בשימוש loopback אחר, נא לבחור קובץ אחר."
 
-#: diskdrake/interactive.pm:1075
+#: diskdrake/interactive.pm:1088
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "קובץ זה כבר קיים. האם להשתמש בו?"
 
-#: diskdrake/interactive.pm:1107 diskdrake/interactive.pm:1110
+#: diskdrake/interactive.pm:1120 diskdrake/interactive.pm:1123
 #, c-format
 msgid "Mount options"
 msgstr "אפשרויות עיגון"
 
-#: diskdrake/interactive.pm:1117
+#: diskdrake/interactive.pm:1130
 #, c-format
 msgid "Various"
 msgstr "שונות"
 
-#: diskdrake/interactive.pm:1163
+#: diskdrake/interactive.pm:1176
 #, c-format
 msgid "device"
 msgstr "התקן"
 
-#: diskdrake/interactive.pm:1164
+#: diskdrake/interactive.pm:1177
 #, c-format
 msgid "level"
 msgstr "רמה"
 
-#: diskdrake/interactive.pm:1165
+#: diskdrake/interactive.pm:1178
 #, c-format
 msgid "chunk size in KiB"
 msgstr "גודל חתיכה ב KiB"
 
-#: diskdrake/interactive.pm:1183
+#: diskdrake/interactive.pm:1196
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "זהירות: פעולה זו מסוכנת."
 
-#: diskdrake/interactive.pm:1198
+#: diskdrake/interactive.pm:1211
 #, fuzzy, c-format
 msgid "Partitioning Type"
 msgstr "חלוקה למחיצות"
 
-#: diskdrake/interactive.pm:1198
+#: diskdrake/interactive.pm:1211
 #, c-format
 msgid "What type of partitioning?"
 msgstr "איזה סוג חלוקה למחיצות?"
 
-#: diskdrake/interactive.pm:1236
+#: diskdrake/interactive.pm:1249
 #, c-format
 msgid "You'll need to reboot before the modification can take effect"
 msgstr "יש צורך להפעיל מחדש את המחשב בכדי שהשינויים יכנסו לתוקף"
 
-#: diskdrake/interactive.pm:1245
+#: diskdrake/interactive.pm:1258
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "טבלת המחיצות של הכונן %s עומדת להיכתב לכונן"
 
-#: diskdrake/interactive.pm:1264 fs/format.pm:107 fs/format.pm:114
+#: diskdrake/interactive.pm:1277 fs/format.pm:107 fs/format.pm:114
 #, c-format
 msgid "Formatting partition %s"
 msgstr "מפרמט את המחיצה %s"
 
-#: diskdrake/interactive.pm:1277
+#: diskdrake/interactive.pm:1290
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "אחרי יצירת מערכת קבצים במחיצה %s, כל המידע במחיצה זו יאבד"
 
-#: diskdrake/interactive.pm:1291
+#: diskdrake/interactive.pm:1304
 #, fuzzy, c-format
 msgid "Check bad blocks?"
 msgstr "האם לבדוק בלוקים עם שגיאות?"
 
-#: diskdrake/interactive.pm:1306
+#: diskdrake/interactive.pm:1319
 #, c-format
 msgid "Move files to the new partition"
 msgstr "העבר קבצים למחיצה החדשה"
 
-#: diskdrake/interactive.pm:1306
+#: diskdrake/interactive.pm:1319
 #, c-format
 msgid "Hide files"
 msgstr "הסתר קבצים"
 
-#: diskdrake/interactive.pm:1307
+#: diskdrake/interactive.pm:1320
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -2040,128 +2051,128 @@ msgstr ""
 "באפשרותך לבחור בהעברת הקבצים למחיצה שתעוגן באותו מקום או להשאירם במקומם (מה "
 "שיביא להסתרתם על ידי תוכן המחיצה שתעוגן)"
 
-#: diskdrake/interactive.pm:1322
+#: diskdrake/interactive.pm:1335
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "מעביר קבצים למחיצה החדשה"
 
-#: diskdrake/interactive.pm:1326
+#: diskdrake/interactive.pm:1339
 #, c-format
 msgid "Copying %s"
 msgstr "מעתיק %s"
 
-#: diskdrake/interactive.pm:1330
+#: diskdrake/interactive.pm:1343
 #, c-format
 msgid "Removing %s"
 msgstr "מסיר את %s"
 
-#: diskdrake/interactive.pm:1344
+#: diskdrake/interactive.pm:1357
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "המחיצה %s זמינה כעת כ-%s"
 
-#: diskdrake/interactive.pm:1345
+#: diskdrake/interactive.pm:1358
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "מספרי המחיצות שונו: "
 
-#: diskdrake/interactive.pm:1370 diskdrake/interactive.pm:1441
+#: diskdrake/interactive.pm:1383 diskdrake/interactive.pm:1454
 #, c-format
 msgid "Device: "
 msgstr "התקן:"
 
-#: diskdrake/interactive.pm:1371
+#: diskdrake/interactive.pm:1384
 #, c-format
 msgid "Volume label: "
 msgstr "שם המחיצה:"
 
-#: diskdrake/interactive.pm:1372
+#: diskdrake/interactive.pm:1385
 #, c-format
 msgid "UUID: "
 msgstr "UUID: "
 
-#: diskdrake/interactive.pm:1373
+#: diskdrake/interactive.pm:1386
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "אות כונן חלונות: %s (לפי ניחוש)\n"
 
-#: diskdrake/interactive.pm:1377 diskdrake/interactive.pm:1386
-#: diskdrake/interactive.pm:1460
+#: diskdrake/interactive.pm:1390 diskdrake/interactive.pm:1399
+#: diskdrake/interactive.pm:1473
 #, c-format
 msgid "Type: "
 msgstr "סוג: "
 
-#: diskdrake/interactive.pm:1381 diskdrake/interactive.pm:1445
+#: diskdrake/interactive.pm:1394 diskdrake/interactive.pm:1458
 #, c-format
 msgid "Name: "
 msgstr "שם: "
 
-#: diskdrake/interactive.pm:1388
+#: diskdrake/interactive.pm:1401
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "התחלה: מקטע %s\n"
 
-#: diskdrake/interactive.pm:1389
+#: diskdrake/interactive.pm:1402
 #, c-format
 msgid "Size: %s"
 msgstr "גודל: %s"
 
-#: diskdrake/interactive.pm:1391
+#: diskdrake/interactive.pm:1404
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s מקטעים"
 
-#: diskdrake/interactive.pm:1393
+#: diskdrake/interactive.pm:1406
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "מסילה %d עד %d\n"
 
-#: diskdrake/interactive.pm:1394
+#: diskdrake/interactive.pm:1407
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "מספר הרחבות לוגיות: %d\n"
 
-#: diskdrake/interactive.pm:1395
+#: diskdrake/interactive.pm:1408
 #, c-format
 msgid "Formatted\n"
 msgstr "מפורמט\n"
 
-#: diskdrake/interactive.pm:1396
+#: diskdrake/interactive.pm:1409
 #, c-format
 msgid "Not formatted\n"
 msgstr "לא מפורמט\n"
 
-#: diskdrake/interactive.pm:1397
+#: diskdrake/interactive.pm:1410
 #, c-format
 msgid "Mounted\n"
 msgstr "מעוגן\n"
 
-#: diskdrake/interactive.pm:1398
+#: diskdrake/interactive.pm:1411
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1400
+#: diskdrake/interactive.pm:1413
 #, fuzzy, c-format
 msgid "Encrypted"
 msgstr "מפתח הצפנה"
 
-#: diskdrake/interactive.pm:1402
+#: diskdrake/interactive.pm:1415
 #, c-format
 msgid " (mapped on %s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1403
+#: diskdrake/interactive.pm:1416
 #, c-format
 msgid " (to map on %s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1404
+#: diskdrake/interactive.pm:1417
 #, c-format
 msgid " (inactive)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1411
+#: diskdrake/interactive.pm:1424
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2170,7 +2181,7 @@ msgstr ""
 "קבצי Loopback:\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1412
+#: diskdrake/interactive.pm:1425
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2179,27 +2190,27 @@ msgstr ""
 "מחיצה מאתחלת כברירת מחדל\n"
 "    (לאתחול מ-DOS, לא מ-Lilo)\n"
 
-#: diskdrake/interactive.pm:1414
+#: diskdrake/interactive.pm:1427
 #, c-format
 msgid "Level %s\n"
 msgstr "שלב %s\n"
 
-#: diskdrake/interactive.pm:1415
+#: diskdrake/interactive.pm:1428
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "גודל חתיכה %d KiB\n"
 
-#: diskdrake/interactive.pm:1416
+#: diskdrake/interactive.pm:1429
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "כונני RAID %s\n"
 
-#: diskdrake/interactive.pm:1418
+#: diskdrake/interactive.pm:1431
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "שם קובץ Loopback: %s"
 
-#: diskdrake/interactive.pm:1421
+#: diskdrake/interactive.pm:1434
 #, c-format
 msgid ""
 "\n"
@@ -2212,7 +2223,7 @@ msgstr ""
 "מחיצה של מנהלי התקנים. כנראה שעליך\n"
 "להשאירה כמות שהיא.\n"
 
-#: diskdrake/interactive.pm:1424
+#: diskdrake/interactive.pm:1437
 #, c-format
 msgid ""
 "\n"
@@ -2224,57 +2235,57 @@ msgstr ""
 "מחיצת אתחול מיוחדת הזאת \n"
 "היא עבור אתחול כפול של המערכת שלך.\n"
 
-#: diskdrake/interactive.pm:1433
+#: diskdrake/interactive.pm:1446
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr "שטח פנוי על %s (%s)"
 
-#: diskdrake/interactive.pm:1442
+#: diskdrake/interactive.pm:1455
 #, c-format
 msgid "Read-only"
 msgstr "קריאה-בלבד"
 
-#: diskdrake/interactive.pm:1443
+#: diskdrake/interactive.pm:1456
 #, c-format
 msgid "Size: %s\n"
 msgstr "גודל: %s\n"
 
-#: diskdrake/interactive.pm:1444
+#: diskdrake/interactive.pm:1457
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "תכונות: %s מסילות, %s ראשים, %s מקטעים\n"
 
-#: diskdrake/interactive.pm:1446
+#: diskdrake/interactive.pm:1459
 #, c-format
 msgid "Medium type: "
 msgstr "סוג מקור: "
 
-#: diskdrake/interactive.pm:1447
+#: diskdrake/interactive.pm:1460
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "כונני LVM %s\n"
 
-#: diskdrake/interactive.pm:1448
+#: diskdrake/interactive.pm:1461
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "סוג טבלת המחיצות: %s\n"
 
-#: diskdrake/interactive.pm:1449
+#: diskdrake/interactive.pm:1462
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "בערוץ %d זיהוי %d\n"
 
-#: diskdrake/interactive.pm:1493
+#: diskdrake/interactive.pm:1506
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "עליך לבחור את מפתח ההצפנה של המערכת שלך"
 
-#: diskdrake/interactive.pm:1496
+#: diskdrake/interactive.pm:1509
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr "מפתח ההצפנה פשוט מדי (חייב להיות באורך של %d תווים לפחות)"
 
-#: diskdrake/interactive.pm:1503
+#: diskdrake/interactive.pm:1516
 #, c-format
 msgid "Encryption algorithm"
 msgstr "אלגוריתם הצפנה"
@@ -2284,10 +2295,10 @@ msgstr "אלגוריתם הצפנה"
 msgid "Change type"
 msgstr "שינוי סוג"
 
-#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:129 interactive.pm:550
+#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:130 interactive.pm:551
 #: interactive/curses.pm:267 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:846 ugtk2.pm:415
-#: ugtk2.pm:517 ugtk2.pm:526 ugtk2.pm:812
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:846
+#: mygtk2.pm:1229 ugtk2.pm:415 ugtk2.pm:517 ugtk2.pm:526 ugtk2.pm:812
 #, c-format
 msgid "Cancel"
 msgstr "ביטול"
@@ -2364,7 +2375,7 @@ msgstr "החבילות הבאות יותקנו:\n"
 msgid "Installing packages..."
 msgstr "מתקין חבילות..."
 
-#: do_pkgs.pm:287 pkgs.pm:285
+#: do_pkgs.pm:287 pkgs.pm:306
 #, c-format
 msgid "Removing packages..."
 msgstr "מסיר חבילות..."
@@ -2378,7 +2389,7 @@ msgstr ""
 "ארעה שגיאה - לא נמצאו התקנים עליהם ניתן ליצור מערכת קבצים חדשה. עליך לבדוק "
 "את החומרה שברשותך כדי לברר את הסיבה לבעיה"
 
-#: fs/any.pm:76 fs/partitioning_wizard.pm:64
+#: fs/any.pm:75 fs/partitioning_wizard.pm:70
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "חייבת להיות מחיצת FAT מעוגנת ב- boot/efi/"
@@ -2388,22 +2399,22 @@ msgstr "חייבת להיות מחיצת FAT מעוגנת ב- boot/efi/"
 msgid "Creating and formatting file %s"
 msgstr "יוצר ומפרמט את הקובץ %s"
 
-#: fs/format.pm:130
+#: fs/format.pm:131
 #, fuzzy, c-format
 msgid "I do not know how to set label on %s with type %s"
 msgstr "לא ידוע לי איך לפרמט את %s בסוג %s"
 
-#: fs/format.pm:142
+#: fs/format.pm:143
 #, fuzzy, c-format
 msgid "setting label on %s failed, is it formatted?"
 msgstr "אתחול %s של %s נכשל"
 
-#: fs/format.pm:183
+#: fs/format.pm:184
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "לא ידוע לי איך לפרמט את %s בסוג %s"
 
-#: fs/format.pm:188 fs/format.pm:190
+#: fs/format.pm:189 fs/format.pm:191
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "אתחול %s של %s נכשל"
@@ -2418,42 +2429,42 @@ msgstr "עיגונים מעגליים %s\n"
 msgid "Mounting partition %s"
 msgstr "מעגן את המחיצה %s"
 
-#: fs/mount.pm:86
+#: fs/mount.pm:87
 #, c-format
 msgid "mounting partition %s in directory %s failed"
 msgstr "עיגון המחיצה %s לתיקייה %s נכשל"
 
-#: fs/mount.pm:91 fs/mount.pm:108
+#: fs/mount.pm:92 fs/mount.pm:109
 #, c-format
 msgid "Checking %s"
 msgstr "בודק %s"
 
-#: fs/mount.pm:125 partition_table.pm:422
+#: fs/mount.pm:126 partition_table.pm:422
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "שגיאה בניתוק %s: %s"
 
-#: fs/mount.pm:140
+#: fs/mount.pm:141
 #, c-format
 msgid "Enabling swap partition %s"
 msgstr "מאפשר מחיצת זיכרון החלפה %s"
 
-#: fs/mount_options.pm:113
+#: fs/mount_options.pm:114
 #, c-format
 msgid "Enable POSIX Access Control Lists"
 msgstr ""
 
-#: fs/mount_options.pm:115
+#: fs/mount_options.pm:116
 #, c-format
 msgid "Flush write cache on file close"
 msgstr "מחק זכרון מטמון לכתיבה בסגירת קובץ"
 
-#: fs/mount_options.pm:117
+#: fs/mount_options.pm:118
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr "אפשר הקצאת שטח דיסק לקבוצות וכאפשרות גם החלת מגבלות."
 
-#: fs/mount_options.pm:119
+#: fs/mount_options.pm:120
 #, c-format
 msgid ""
 "Do not update inode access times on this filesystem\n"
@@ -2462,7 +2473,7 @@ msgstr ""
 "אל תעדכן זמני גישה ל inode במערכת קבצים זו\n"
 "(יכול לשמש לכוונון שרתים)"
 
-#: fs/mount_options.pm:122
+#: fs/mount_options.pm:123
 #, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
@@ -2471,7 +2482,7 @@ msgstr ""
 "עדכון זמני גישה ל inode במערכת קבצים זו באופן יעיל יותר\n"
 "(לדוגמה עבור גישה מהירה יותר לאוגרי החדשות להאצת שרתי חדשות)."
 
-#: fs/mount_options.pm:125
+#: fs/mount_options.pm:126
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -2480,12 +2491,12 @@ msgstr ""
 "אפשר עיגון ישיר בלבד (דהיינו mount -a\n"
 "לא יגרום לעיגון אוטומטי של מערכת קבצים זו)"
 
-#: fs/mount_options.pm:128
+#: fs/mount_options.pm:129
 #, c-format
 msgid "Do not interpret character or block special devices on the filesystem."
 msgstr "אל תפענח התקני character והתקני block על מערכת קבצים זו."
 
-#: fs/mount_options.pm:130
+#: fs/mount_options.pm:131
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -2496,7 +2507,7 @@ msgstr ""
 "לאחר העיגון. אפשרות זו עשויה לשמש בהגדרת שרתים\n"
 "המאכסנים קבצים בינאריים למעבדים שונים מזה שלהם."
 
-#: fs/mount_options.pm:134
+#: fs/mount_options.pm:135
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -2507,42 +2518,42 @@ msgstr ""
 "(גם אם הדבר נראה בטוח, הוא עלול לגרום לפרצת\n"
 "אבטחה באם suidperl מותקן)."
 
-#: fs/mount_options.pm:138
+#: fs/mount_options.pm:139
 #, c-format
 msgid "Mount the filesystem read-only."
 msgstr "עגן את מערכת הקבצים לקריאה בלבד."
 
-#: fs/mount_options.pm:140
+#: fs/mount_options.pm:141
 #, c-format
 msgid "All I/O to the filesystem should be done synchronously."
 msgstr "כל גישות כתיבה/קריאה למערכת הקבצים אמורות להתבצע באופן סינכרוני."
 
-#: fs/mount_options.pm:142
+#: fs/mount_options.pm:143
 #, c-format
 msgid "Allow every user to mount and umount the filesystem."
 msgstr "אפשר לכל משתמש לעגן ולהתיר את עגינת מערכת הקבצים."
 
-#: fs/mount_options.pm:144
+#: fs/mount_options.pm:145
 #, c-format
 msgid "Allow an ordinary user to mount the filesystem."
 msgstr "אפשר למשתמש רגיל לעגן את מערכת הקבצים."
 
-#: fs/mount_options.pm:146
+#: fs/mount_options.pm:147
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr "אפשר הקצאת שטח דיסק למשתמשים וכאפשרות גם להחיל מגבלות."
 
-#: fs/mount_options.pm:148
+#: fs/mount_options.pm:149
 #, c-format
 msgid "Support \"user.\" extended attributes"
 msgstr "תמיכה מורחבת בשימוש עם \"user.\""
 
-#: fs/mount_options.pm:150
+#: fs/mount_options.pm:151
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "אפשר הרשאת כתיבה למשתמשים רגילים"
 
-#: fs/mount_options.pm:152
+#: fs/mount_options.pm:153
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "אפשר הרשאת קריאה בלבד למשתמשים רגילים"
@@ -2591,7 +2602,7 @@ msgstr ""
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr "אין די זיכרון חלופה (swap) להשלמת ההתקנה. נא להוסיף."
 
-#: fs/partitioning_wizard.pm:55
+#: fs/partitioning_wizard.pm:61
 #, c-format
 msgid ""
 "You must have a root partition.\n"
@@ -2602,7 +2613,7 @@ msgstr ""
 "לשם כך יש ליצור מחיצה (או ללחוץ על מחיצה קייימת).\n"
 "אזי יש לבחור \"נקודת עיגון\" ולכוון ל-`/'"
 
-#: fs/partitioning_wizard.pm:61
+#: fs/partitioning_wizard.pm:67
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2613,52 +2624,52 @@ msgstr ""
 "\n"
 "להמשיך בכל זאת?"
 
-#: fs/partitioning_wizard.pm:95
+#: fs/partitioning_wizard.pm:101
 #, c-format
 msgid "Use free space"
 msgstr "השתמש במקום פנוי"
 
-#: fs/partitioning_wizard.pm:97
+#: fs/partitioning_wizard.pm:103
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "אין די מקום פנוי להקצאת מחיצות חדשות"
 
-#: fs/partitioning_wizard.pm:105
+#: fs/partitioning_wizard.pm:111
 #, c-format
 msgid "Use existing partitions"
 msgstr "השתמש במחיצות קימות"
 
-#: fs/partitioning_wizard.pm:107
+#: fs/partitioning_wizard.pm:113
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "אין מחיצה קיימת לשימוש"
 
-#: fs/partitioning_wizard.pm:131
+#: fs/partitioning_wizard.pm:137
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "מחשב את גודל מחיצת מערכת החלונות"
 
-#: fs/partitioning_wizard.pm:167
+#: fs/partitioning_wizard.pm:173
 #, fuzzy, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "השתמש במקום הפנוי במחיצת החלונות"
 
-#: fs/partitioning_wizard.pm:171
+#: fs/partitioning_wizard.pm:177
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "גודל של איזו מחיצה ברצונך לשנות?"
 
-#: fs/partitioning_wizard.pm:174
-#, c-format
+#: fs/partitioning_wizard.pm:180
+#, fuzzy, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
-"the Mandriva Linux installation."
+"the %s installation."
 msgstr ""
 "מחיצת מערכת החלונות שלך מקוטעת יתר על המידה. יש לאתחל את המחשב ותחת חלונות "
 "להריץ את כלי האיחוי, בסיום יש לאתחל מחדש את התקנת מנדריבה לינוקס."
 
-#: fs/partitioning_wizard.pm:182
+#: fs/partitioning_wizard.pm:188
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2692,75 +2703,75 @@ msgstr ""
 "אם הכל מובן יש להקיש %s."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:191 fs/partitioning_wizard.pm:559
-#: interactive.pm:549 interactive/curses.pm:270 ugtk2.pm:519
+#: fs/partitioning_wizard.pm:197 fs/partitioning_wizard.pm:565
+#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519
 #, c-format
 msgid "Next"
 msgstr "המשך"
 
-#: fs/partitioning_wizard.pm:197
+#: fs/partitioning_wizard.pm:203
 #, c-format
 msgid "Partitionning"
 msgstr "חלוקה למחיצות"
 
-#: fs/partitioning_wizard.pm:197
+#: fs/partitioning_wizard.pm:203
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr "כמה מקום ברצונך להותיר למערכת החלונות על המחיצה %s?"
 
-#: fs/partitioning_wizard.pm:198
+#: fs/partitioning_wizard.pm:204
 #, c-format
 msgid "Size"
 msgstr "גודל"
 
-#: fs/partitioning_wizard.pm:207
+#: fs/partitioning_wizard.pm:213
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "משנה את גודל מחיצת חלונות"
 
-#: fs/partitioning_wizard.pm:212
+#: fs/partitioning_wizard.pm:218
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "כשל בשינוי גודל מחיצת FAT: %s"
 
-#: fs/partitioning_wizard.pm:228
+#: fs/partitioning_wizard.pm:234
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "אין מחיצת FAT לשנות את גודלה (או שלא נותר די מקום)"
 
-#: fs/partitioning_wizard.pm:233
+#: fs/partitioning_wizard.pm:239
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "הסר את מערכת חלונות"
 
-#: fs/partitioning_wizard.pm:233
+#: fs/partitioning_wizard.pm:239
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "מחק והשתמש בדיסק כולו"
 
-#: fs/partitioning_wizard.pm:237
+#: fs/partitioning_wizard.pm:243
 #, fuzzy, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
 msgstr "יש לך יותר מדיסק קשיח אחד, על איזה מהם ברצונך להתקין לינוקס?"
 
-#: fs/partitioning_wizard.pm:245 fsedit.pm:634
+#: fs/partitioning_wizard.pm:251 fsedit.pm:634
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "כל המחיצות הקיימות והמידע שבהן יאבדו מדיסק %s"
 
-#: fs/partitioning_wizard.pm:255
+#: fs/partitioning_wizard.pm:261
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "חלוקת מחיצות מותאמת אישית"
 
-#: fs/partitioning_wizard.pm:261
+#: fs/partitioning_wizard.pm:267
 #, c-format
 msgid "Use fdisk"
 msgstr "השתמש ב-fdisk"
 
-#: fs/partitioning_wizard.pm:264
+#: fs/partitioning_wizard.pm:270
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2769,37 +2780,37 @@ msgstr ""
 "באפשרותך ליצור כעת מחיצות ב-%s.\n"
 "בסיום יש לשמור בעזרת `w'"
 
-#: fs/partitioning_wizard.pm:403
+#: fs/partitioning_wizard.pm:409
 #, fuzzy, c-format
 msgid "Ext2/3/4"
 msgstr "Ext3"
 
-#: fs/partitioning_wizard.pm:433 fs/partitioning_wizard.pm:579
+#: fs/partitioning_wizard.pm:439 fs/partitioning_wizard.pm:585
 #, c-format
 msgid "I cannot find any room for installing"
 msgstr "איני מוצא מקום להתקנה"
 
-#: fs/partitioning_wizard.pm:442 fs/partitioning_wizard.pm:586
+#: fs/partitioning_wizard.pm:448 fs/partitioning_wizard.pm:592
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "אשף החלוקה למחיצות של DrakX מצא את הפתרונות הבאים:"
 
-#: fs/partitioning_wizard.pm:512
+#: fs/partitioning_wizard.pm:518
 #, c-format
 msgid "Here is the content of your disk drive "
 msgstr ""
 
-#: fs/partitioning_wizard.pm:596
+#: fs/partitioning_wizard.pm:602
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "כשל בחלוקה למחיצות: %s"
 
-#: fs/type.pm:389
+#: fs/type.pm:384
 #, c-format
 msgid "You cannot use JFS for partitions smaller than 16MB"
 msgstr "אין אפשרות להשתמש ב-JFS עבור מחיצה קטנה מ- 16MB"
 
-#: fs/type.pm:390
+#: fs/type.pm:385
 #, c-format
 msgid "You cannot use ReiserFS for partitions smaller than 32MB"
 msgstr "אין אפשרות להשתמש ב-ReiserFS למחיצה קטנה מ-32MB"
@@ -3292,7 +3303,7 @@ msgstr ""
 "- המנשק הישן התואם ל-OSS\n"
 "- המנשק החדש של ALSA המספק יכולות מתקדמות אך דורש את הספריה של ALSA.\n"
 
-#: harddrake/sound.pm:385 harddrake/sound.pm:468
+#: harddrake/sound.pm:385 harddrake/sound.pm:487
 #, c-format
 msgid "Driver:"
 msgstr "מנהל התקן:"
@@ -3345,57 +3356,74 @@ msgstr "פתרון בעיות קול"
 #: harddrake/sound.pm:430
 #, c-format
 msgid ""
-"The classic bug sound tester is to run the following commands:\n"
+"Below are some basic tips to help debug audio problems, but for accurate and "
+"up-to-date tips and tricks, please see:\n"
+"\n"
+"https://wiki.mageia.org/en/Support:DebuggingSoundProblems\n"
 "\n"
 "\n"
-"- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
-"uses\n"
-"by default\n"
 "\n"
-"- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
-"currently uses\n"
+"- General Recommendation: Enable PulseAudio. If you have opted to not to use "
+"PulseAudio, we would strongly advise you enable it. For the vast majority of "
+"desktop use cases, PulseAudio is the recommended and best supported option.\n"
 "\n"
-"- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
-"loaded or not\n"
 "\n"
-"- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" will\n"
-"tell you if sound and alsa services are configured to be run on\n"
-"initlevel 3\n"
 "\n"
-"- \"aumix -q\" will tell you if the sound volume is muted or not\n"
+"- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and \"pauvucontrol"
+"\" (generic) will launch graphical applications to allow you to view your "
+"sound devices and adjust volume levels\n"
 "\n"
-"- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
+"\n"
+"- \"ps aux | grep pulseaudio\" will check that PulseAudio is running.\n"
+"\n"
+"\n"
+"- \"pactl stat\" will check that you can connect to the PulseAudio daemon "
+"correctly.\n"
+"\n"
+"\n"
+"- \"pactl list sink-inputs\" will tell you which programs are currently "
+"playing sound via PulseAudio.\n"
+"\n"
+"\n"
+"- \"systemctl status osspd.service\" will tell you the current state of the "
+"OSS Proxy Daemon. This is used to enable sound from legacy applications "
+"which use the OSS sound API. You should install the \"ossp\" package if you "
+"need this functionality.\n"
+"\n"
+"\n"
+"- \"pacmd ls\" will give you a LOT of debug information about the current "
+"state of your audio.\n"
+"\n"
+"\n"
+"- \"lspcidrake -v | grep -i audio\" will tell you which low-level driver "
+"your card uses by default.\n"
+"\n"
+"\n"
+"- \"/usr/sbin/lsmod | grep snd\" will enable you to check which sound "
+"related kernel modules (drivers) are loaded.\n"
+"\n"
+"\n"
+"- \"alsamixer -c 0\" will give you a text-based mixer to the low level ALSA "
+"mixer controls for first sound card\n"
+"\n"
+"\n"
+"- \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" will tell which programs are "
+"currently using the sound card directly (normally this should only show "
+"PulseAudio)\n"
 msgstr ""
-"הבדיקה הקלאסית לבעיות במערכת הקול היא הרצת הפקודות הבאות:\n"
-"\n"
-"\n"
-"- \"lspcidrake -v | fgrep -i AUDIO\" יאמר מה הוא התקן ההינע בו משתמש הכרטיס\n"
-"שלך כברירת מחדל\n"
-"\n"
-"- \"grep sound-slot /etc/modprobe.conf\" יאמר מה הוא ההתקן ההינע שכרגע\n"
-"נעשה בו שימוש\n"
-"\n"
-"- \"/sbin/lsmod\" יאפשר לך לבדוק אם התקן ההינע טעון או לא\n"
-"\n"
-"- \"/sbin/chkconfig --list sound\" ו- \"/sbin/chkconfig --list alsa\" יאמרו\n"
-"אם שירותי הקול ו-alsa מוגדרים לריצה ברמת אתחול 3\n"
-"\n"
-"- \"aumix -q\" יאמר לך אם הקול מושתק או לא\n"
-"\n"
-"- \"/sbin/fuser -v /dev/dsp\" יאמר לך איזו תוכנה משתמשת בכרטיס הקול.\n"
 
-#: harddrake/sound.pm:457
+#: harddrake/sound.pm:476
 #, c-format
 msgid "Let me pick any driver"
 msgstr "תן לי לבחור מנהל התקן כלשהו"
 
-#: harddrake/sound.pm:460
+#: harddrake/sound.pm:479
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "בחירת מנהל התקן באופן שרירותי"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:463
+#: harddrake/sound.pm:482
 #, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -3452,7 +3480,7 @@ msgstr "דגם הכרטיס:"
 msgid "Tuner type:"
 msgstr "סוג כוונן (Tuner):"
 
-#: interactive.pm:128 interactive.pm:549 interactive/curses.pm:270
+#: interactive.pm:129 interactive.pm:550 interactive/curses.pm:270
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
 #: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:846
 #: ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
@@ -3460,37 +3488,37 @@ msgstr "סוג כוונן (Tuner):"
 msgid "Ok"
 msgstr "אישור"
 
-#: interactive.pm:228 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:157
+#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:157
 #, c-format
 msgid "Yes"
 msgstr "כן"
 
-#: interactive.pm:228 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:157
+#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:157
 #, c-format
 msgid "No"
 msgstr "לא"
 
-#: interactive.pm:262
+#: interactive.pm:263
 #, c-format
 msgid "Choose a file"
 msgstr "בחירת קובץ"
 
-#: interactive.pm:387 interactive/gtk.pm:458
+#: interactive.pm:388 interactive/gtk.pm:462
 #, c-format
 msgid "Add"
 msgstr "הוספה"
 
-#: interactive.pm:387 interactive/gtk.pm:458
+#: interactive.pm:388 interactive/gtk.pm:462
 #, c-format
 msgid "Modify"
 msgstr "שינוי"
 
-#: interactive.pm:549 interactive/curses.pm:270 ugtk2.pm:519
+#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519
 #, c-format
 msgid "Finish"
 msgstr "סיום"
 
-#: interactive.pm:550 interactive/curses.pm:267 ugtk2.pm:517
+#: interactive.pm:551 interactive/curses.pm:267 ugtk2.pm:517
 #, c-format
 msgid "Previous"
 msgstr "קודם"
@@ -3515,7 +3543,7 @@ msgstr "אין ספרייה כזו"
 msgid "No such file"
 msgstr "אין קובץ כזה"
 
-#: interactive/gtk.pm:597
+#: interactive/gtk.pm:601
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr "לתשומת לבך, Caps Lock מופעל."
@@ -4801,17 +4829,17 @@ msgstr "ברוך בואך ל-%s"
 msgid "Moving used physical extents to other physical volumes failed"
 msgstr "העברת החלקים הפיזיים שבשימוש לחלק פיזי אחר כשלה"
 
-#: lvm.pm:149
+#: lvm.pm:152
 #, c-format
 msgid "Physical volume %s is still in use"
 msgstr "החלק הפיזי %s עדיין בשימוש"
 
-#: lvm.pm:159
+#: lvm.pm:162
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "יש ראשית להסיר את החלקים הלוגיים\n"
 
-#: lvm.pm:202
+#: lvm.pm:205
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr "מנהל האתחול אינו יכול לעבוד עם boot/ על מספר חלקים פיזיים"
@@ -4821,15 +4849,15 @@ msgstr "מנהל האתחול אינו יכול לעבוד עם boot/ על מס�
 msgid ""
 "Introduction\n"
 "\n"
-"The operating system and the different components available in the Mandriva "
-"Linux distribution \n"
+"The operating system and the different components available in the Moondrake "
+"GNU/Linux distribution \n"
 "shall be called the \"Software Products\" hereafter. The Software Products "
 "include, but are not \n"
 "restricted to, the set of programs, methods, rules and documentation related "
 "to the operating \n"
-"system and the different components of the Mandriva Linux distribution, and "
-"any applications \n"
-"distributed with these products provided by Mandriva's licensors or "
+"system and the different components of the Moondrake GNU/Linux distribution, "
+"and any applications \n"
+"distributed with these products provided by Moondrake's licensors or "
 "suppliers.\n"
 "\n"
 "\n"
@@ -4837,7 +4865,7 @@ msgid ""
 "\n"
 "Please read this document carefully. This document is a license agreement "
 "between you and  \n"
-"Mandriva S.A. which applies to the Software Products.\n"
+"Moondrake which applies to the Software Products.\n"
 "By installing, duplicating or using any of the Software Products in any "
 "manner, you explicitly \n"
 "accept and fully agree to conform to the terms and conditions of this "
@@ -4859,8 +4887,8 @@ msgid ""
 "The Software Products and attached documentation are provided \"as is\", "
 "with no warranty, to the \n"
 "extent permitted by law.\n"
-"Neither Mandriva S.A. nor its licensors or suppliers will, in any "
-"circumstances and to the extent \n"
+"Neither Moondrake nor its licensors or suppliers will, in any circumstances "
+"and to the extent \n"
 "permitted by law, be liable for any special, incidental, direct or indirect "
 "damages whatsoever \n"
 "(including without limitation damages for loss of business, interruption of "
@@ -4868,14 +4896,14 @@ msgid ""
 "loss, legal fees and penalties resulting from a court judgment, or any other "
 "consequential loss) \n"
 "arising out of  the use or inability to use the Software Products, even if "
-"Mandriva S.A. or its \n"
+"Moondrake or its \n"
 "licensors or suppliers have been advised of the possibility or occurrence of "
 "such damages.\n"
 "\n"
 "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME "
 "COUNTRIES\n"
 "\n"
-"To the extent permitted by law, neither Mandriva S.A. nor its licensors, "
+"To the extent permitted by law, neither Moondrake nor its licensors, "
 "suppliers or\n"
 "distributors will, in any circumstances, be liable for any special, "
 "incidental, direct or indirect \n"
@@ -4885,8 +4913,8 @@ msgid ""
 "judgment, or any \n"
 "other consequential loss) arising out of the possession and use of software "
 "components or \n"
-"arising out of  downloading software components from one of Mandriva Linux "
-"sites which are \n"
+"arising out of  downloading software components from one of Moondrake GNU/"
+"Linux sites which are \n"
 "prohibited or restricted in some countries by local laws.\n"
 "This limited liability applies to, but is not restricted to, the strong "
 "cryptography components \n"
@@ -4907,10 +4935,10 @@ msgid ""
 "agreement for each component \n"
 "before using any component. Any question on a component license should be "
 "addressed to the component \n"
-"licensor or supplier and not to Mandriva.\n"
-"The programs developed by Mandriva S.A. are governed by the GPL License. "
+"licensor or supplier and not to Moondrake.\n"
+"The programs developed by Moondrake are governed by the GPL License. "
 "Documentation written \n"
-"by Mandriva S.A. is governed by a specific license. Please refer to the "
+"by Moondrake is governed by a specific license. Please refer to the "
 "documentation for \n"
 "further details.\n"
 "\n"
@@ -4921,11 +4949,11 @@ msgid ""
 "respective authors and are \n"
 "protected by intellectual property and copyright laws applicable to software "
 "programs.\n"
-"Mandriva S.A. and its suppliers and licensors reserves their rights to "
-"modify or adapt the Software \n"
+"Moondrake and its suppliers and licensors reserves their rights to modify or "
+"adapt the Software \n"
 "Products, as a whole or in parts, by all means and for all purposes.\n"
-"\"Mandriva\", \"Mandriva Linux\" and associated logos are trademarks of "
-"Mandriva S.A.  \n"
+"\"Moondrake\", \"Moondrake GNU/Linux\" and associated logos are trademarks "
+"of Moondrake  \n"
 "\n"
 "\n"
 "5. Governing Laws \n"
@@ -4941,7 +4969,7 @@ msgid ""
 "court. As a last \n"
 "resort, the dispute will be referred to the appropriate Courts of Law of "
 "Paris - France.\n"
-"For any question on this document, please contact Mandriva S.A."
+"For any question on this document, please contact Moondrake"
 msgstr ""
 "מבוא\n"
 "\n"
@@ -5171,14 +5199,14 @@ msgstr ""
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: messages.pm:150
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press Enter to reboot.\n"
 "\n"
 "\n"
-"For information on fixes which are available for this release of Mandriva "
-"Linux,\n"
+"For information on fixes which are available for this release of Moondrake "
+"GNU/Linux,\n"
 "consult the Errata available from:\n"
 "\n"
 "\n"
@@ -5186,7 +5214,7 @@ msgid ""
 "\n"
 "\n"
 "Information on configuring your system is available in the post\n"
-"install chapter of the Official Mandriva Linux User's Guide."
+"install chapter of the Official Moondrake GNU/Linux User's Guide."
 msgstr ""
 "ברכותינו, ההתקנה הסתיימה.\n"
 "עליך להוציא את תקליטור ההתקנה ולאחר מכן ללחוץ על \"הפעלה מחדש\" להמשך.\n"
@@ -5242,18 +5270,18 @@ msgid "Installing driver for USB controller"
 msgstr "התקנת מנהל התקן עבור בקר USB"
 
 #: modules/interactive.pm:84
-#, c-format
-msgid "Installing driver for firewire controller %s"
+#, fuzzy, c-format
+msgid "Installing driver for firewire controller \"%s\""
 msgstr "התקנת מנהל התקן עבור בקר firewire שסימונו %s"
 
 #: modules/interactive.pm:85
-#, c-format
-msgid "Installing driver for hard disk drive controller %s"
+#, fuzzy, c-format
+msgid "Installing driver for hard disk drive controller \"%s\""
 msgstr "התקנת מנהל התקן עבור בקר כונן קשיח שסימונו %s"
 
 #: modules/interactive.pm:86
-#, c-format
-msgid "Installing driver for ethernet controller %s"
+#, fuzzy, c-format
+msgid "Installing driver for ethernet controller \"%s\""
 msgstr "התקנת מנהל התקן עבור בקר Ethernet שסימונו %s"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
@@ -5334,17 +5362,22 @@ msgstr ""
 "טעינת המודול %s נכשלה.\n"
 "האם ברצונך לנסות שוב עם פרמטרים אחרים?"
 
-#: mygtk2.pm:1540 mygtk2.pm:1541
+#: mygtk2.pm:1229
+#, fuzzy, c-format
+msgid "Are you sure you want to quit?"
+msgstr "האם ברצונך ללחוץ על כפתור זה?"
+
+#: mygtk2.pm:1571 mygtk2.pm:1572
 #, c-format
 msgid "Password is trivial to guess"
 msgstr ""
 
-#: mygtk2.pm:1542
+#: mygtk2.pm:1573
 #, c-format
 msgid "Password should be resistant to basic attacks"
 msgstr ""
 
-#: mygtk2.pm:1543 mygtk2.pm:1544
+#: mygtk2.pm:1574 mygtk2.pm:1575
 #, fuzzy, c-format
 msgid "Password seems secure"
 msgstr "סיסמה עבור המשתמש"
@@ -5370,7 +5403,7 @@ msgstr ""
 "הפתרון היחידי הוא להזיז את המחיצה הראשית כדי למקם את השטח\n"
 "הפנוי ליד המחיצות המורחבות."
 
-#: partition_table/raw.pm:288
+#: partition_table/raw.pm:296
 #, c-format
 msgid ""
 "Something bad is happening on your hard disk drive. \n"
@@ -5382,39 +5415,49 @@ msgstr ""
 "בדיקת תקינות המידע נכשלה.\n"
 "יתכן שהחומרה פגומה וכתוצאה מכך נאבד המידע שהיה שמור בכונן."
 
-#: pkgs.pm:252 pkgs.pm:255 pkgs.pm:268
+#: pkgs.pm:254
+#, c-format
+msgid "Gathering system information..."
+msgstr ""
+
+#: pkgs.pm:263
+#, c-format
+msgid "Preparing for installation..."
+msgstr ""
+
+#: pkgs.pm:273 pkgs.pm:276 pkgs.pm:289
 #, c-format
 msgid "Unused packages removal"
 msgstr ""
 
-#: pkgs.pm:252
+#: pkgs.pm:273
 #, c-format
 msgid "Finding unused hardware packages..."
 msgstr ""
 
-#: pkgs.pm:255
+#: pkgs.pm:276
 #, c-format
 msgid "Finding unused localization packages..."
 msgstr ""
 
-#: pkgs.pm:269
+#: pkgs.pm:290
 #, c-format
 msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
 msgstr ""
 
-#: pkgs.pm:270
+#: pkgs.pm:291
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
 msgstr ""
 
-#: pkgs.pm:273 pkgs.pm:274
+#: pkgs.pm:294 pkgs.pm:295
 #, fuzzy, c-format
 msgid "Unused hardware support"
 msgstr "עיון במידע אודות החומרה"
 
-#: pkgs.pm:277 pkgs.pm:278
+#: pkgs.pm:298 pkgs.pm:299
 #, c-format
 msgid "Unused localization"
 msgstr ""
@@ -5575,8 +5618,8 @@ msgid ""
 "\n"
 "- none if set to \"None\".\n"
 "\n"
-"To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
-"(5))."
+"To authorize the services you need, use /etc/hosts.allow (see hosts."
+"allow(5))."
 msgstr ""
 "אישור:\n"
 "\n"
@@ -6217,7 +6260,7 @@ msgstr ""
 
 #: services.pm:25
 #, c-format
-msgid "Set CPU frequency settings"
+msgid "Set CPU powersafe mode"
 msgstr ""
 
 #: services.pm:26
@@ -6716,7 +6759,7 @@ msgstr "ניהול מרחוק"
 msgid "Database Server"
 msgstr "שרת בסיס-נתונים"
 
-#: services.pm:187 services.pm:226
+#: services.pm:187 services.pm:224
 #, c-format
 msgid "Services"
 msgstr "שרותים"
@@ -6731,22 +6774,22 @@ msgstr "עליך לבחור אלו שרותים יופעלו אוטומטית ב
 msgid "%d activated for %d registered"
 msgstr "%d שרותים מופעלים מתוך %d שרותים מוגדרים"
 
-#: services.pm:242
+#: services.pm:240
 #, c-format
 msgid "running"
 msgstr "פועל"
 
-#: services.pm:242
+#: services.pm:240
 #, c-format
 msgid "stopped"
 msgstr "מופסק"
 
-#: services.pm:247
+#: services.pm:245
 #, c-format
 msgid "Services and daemons"
 msgstr "שרותים ותהליכי רקע"
 
-#: services.pm:253
+#: services.pm:251
 #, c-format
 msgid ""
 "No additional information\n"
@@ -6755,32 +6798,32 @@ msgstr ""
 "מצטער, אין מידע \n"
 "נוסף על שירות זה."
 
-#: services.pm:258 ugtk2.pm:924
+#: services.pm:256 ugtk2.pm:924
 #, c-format
 msgid "Info"
 msgstr "מידע"
 
-#: services.pm:261
+#: services.pm:259
 #, c-format
 msgid "Start when requested"
 msgstr "הפעל לפי הצורך"
 
-#: services.pm:261
+#: services.pm:259
 #, c-format
 msgid "On boot"
 msgstr "בזמן אתחול"
 
-#: services.pm:279
+#: services.pm:277
 #, c-format
 msgid "Start"
 msgstr "הפעל"
 
-#: services.pm:279
+#: services.pm:277
 #, c-format
 msgid "Stop"
 msgstr "הפסק"
 
-#: standalone.pm:25
+#: standalone.pm:26
 #, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify\n"
@@ -6812,7 +6855,7 @@ msgstr ""
 "של GNU; במידה שלא, עליך לכתוב ל Free Software Foundation, Inc.,\n"
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n"
 
-#: standalone.pm:44
+#: standalone.pm:45
 #, c-format
 msgid ""
 "[--config-info] [--daemon] [--debug] [--default] [--show-conf]\n"
@@ -6838,7 +6881,7 @@ msgstr ""
 "--help                : הצגת מסך זה.\n"
 "--version             : הצגת מספר גרסה.\n"
 
-#: standalone.pm:56
+#: standalone.pm:57
 #, c-format
 msgid ""
 "[--boot]\n"
@@ -6851,15 +6894,15 @@ msgstr ""
 "  --boot            - אפשר אפיון טוען המערכת\n"
 "מצב ברירת המחדל: הצע לאפיין את אפשרויות הכניסה האוטומטית"
 
-#: standalone.pm:60
-#, c-format
+#: standalone.pm:61
+#, fuzzy, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
 "\n"
 "OPTIONS:\n"
 "  --help            - print this help message.\n"
-"  --report          - program should be one of Mandriva Linux tools\n"
-"  --incident        - program should be one of Mandriva Linux tools"
+"  --report          - program should be one of %s tools\n"
+"  --incident        - program should be one of %s tools"
 msgstr ""
 "[OPTIONS] [PROGRAM_NAME]\n"
 "\n"
@@ -6868,7 +6911,7 @@ msgstr ""
 "  --report          - שם התכנית צ\"ל אחד מהכלים של מנדריבה לינוקס\n"
 "  --incident        - שם התכנית צ\"ל אחד מהכלים של מנדריבה לינוקס"
 
-#: standalone.pm:66
+#: standalone.pm:67
 #, c-format
 msgid ""
 "[--add]\n"
@@ -6885,7 +6928,7 @@ msgstr ""
 "  --internet        - הגדרת אינטרנט\n"
 "  --wizard          - כמו --add"
 
-#: standalone.pm:72
+#: standalone.pm:73
 #, c-format
 msgid ""
 "\n"
@@ -6916,11 +6959,11 @@ msgstr ""
 "                 : name_of_application like  so for staroffice \n"
 "                 : and gs for ghostscript for only this one."
 
-#: standalone.pm:87
-#, c-format
+#: standalone.pm:88
+#, fuzzy, c-format
 msgid ""
 "[OPTIONS]...\n"
-"Mandriva Linux Terminal Server Configurator\n"
+"%s Terminal Server Configurator\n"
 "--enable         : enable MTS\n"
 "--disable        : disable MTS\n"
 "--start          : start MTS\n"
@@ -6946,17 +6989,17 @@ msgstr ""
 "--delclient      : MTS מחיקת מחשב לקוח מ(requires MAC address, IP, nbi image "
 "name)"
 
-#: standalone.pm:99
+#: standalone.pm:100
 #, c-format
 msgid "[keyboard]"
 msgstr "[מקלדת]"
 
-#: standalone.pm:100
+#: standalone.pm:101
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 msgstr "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 
-#: standalone.pm:101
+#: standalone.pm:102
 #, c-format
 msgid ""
 "[OPTIONS]\n"
@@ -6978,12 +7021,12 @@ msgstr ""
 "--force : used with (dis)connect : force (dis)connection.\n"
 "--status : החזר 1 אם מחובר, 0 אחרת--quiet : לפעול בצורה בלתי אינטראקטיבית"
 
-#: standalone.pm:111
-#, c-format
+#: standalone.pm:112
+#, fuzzy, c-format
 msgid ""
 "[OPTION]...\n"
-"  --no-confirmation      do not ask first confirmation question in Mandriva "
-"Update mode\n"
+"  --no-confirmation      do not ask first confirmation question in %s Update "
+"mode\n"
 "  --no-verify-rpm        do not verify packages signatures\n"
 "  --changelog-first      display changelog before filelist in the "
 "description window\n"
@@ -6995,18 +7038,18 @@ msgstr ""
 "  --changelog-first      הצג רישום-שינוי לפני רשימת הקבצים בחלון התיאור\n"
 "  --merge-all-rpmnew      שנמצאו .rpmnew/.rpmsave מיועד למזג את כל קבצי"
 
-#: standalone.pm:116
-#, c-format
-msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
-"usbtable] [--dynamic=dev]"
-msgstr ""
-"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
-"usbtable] [--dynamic=dev]"
-
 #: standalone.pm:117
 #, c-format
 msgid ""
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
+msgstr ""
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
+
+#: standalone.pm:118
+#, c-format
+msgid ""
 " [everything]\n"
 "       XFdrake [--noauto] monitor\n"
 "       XFdrake resolution"
@@ -7015,7 +7058,7 @@ msgstr ""
 "       XFdrake [--noauto] monitor\n"
 "       XFdrake resolution"
 
-#: standalone.pm:153
+#: standalone.pm:154
 #, c-format
 msgid ""
 "\n"
@@ -7104,6 +7147,50 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "ההתקנה נכשלה"
+
+#~ msgid ""
+#~ "The classic bug sound tester is to run the following commands:\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
+#~ "uses\n"
+#~ "by default\n"
+#~ "\n"
+#~ "- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
+#~ "currently uses\n"
+#~ "\n"
+#~ "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
+#~ "loaded or not\n"
+#~ "\n"
+#~ "- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" "
+#~ "will\n"
+#~ "tell you if sound and alsa services are configured to be run on\n"
+#~ "initlevel 3\n"
+#~ "\n"
+#~ "- \"aumix -q\" will tell you if the sound volume is muted or not\n"
+#~ "\n"
+#~ "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound "
+#~ "card.\n"
+#~ msgstr ""
+#~ "הבדיקה הקלאסית לבעיות במערכת הקול היא הרצת הפקודות הבאות:\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | fgrep -i AUDIO\" יאמר מה הוא התקן ההינע בו משתמש "
+#~ "הכרטיס\n"
+#~ "שלך כברירת מחדל\n"
+#~ "\n"
+#~ "- \"grep sound-slot /etc/modprobe.conf\" יאמר מה הוא ההתקן ההינע שכרגע\n"
+#~ "נעשה בו שימוש\n"
+#~ "\n"
+#~ "- \"/sbin/lsmod\" יאפשר לך לבדוק אם התקן ההינע טעון או לא\n"
+#~ "\n"
+#~ "- \"/sbin/chkconfig --list sound\" ו- \"/sbin/chkconfig --list alsa\" "
+#~ "יאמרו\n"
+#~ "אם שירותי הקול ו-alsa מוגדרים לריצה ברמת אתחול 3\n"
+#~ "\n"
+#~ "- \"aumix -q\" יאמר לך אם הקול מושתק או לא\n"
+#~ "\n"
+#~ "- \"/sbin/fuser -v /dev/dsp\" יאמר לך איזו תוכנה משתמשת בכרטיס הקול.\n"
 
 #~ msgid ""
 #~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
@@ -7372,8 +7459,8 @@ msgstr "ההתקנה נכשלה"
 #~ "If networking is not yet enabled, Drakx will attempt to join the domain "
 #~ "after the network setup step.\n"
 #~ "Should this setup fail for some reason and domain authentication is not "
-#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows"
-#~ "(tm) Domain, and Admin Username/Password, after system boot.\n"
+#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your "
+#~ "Windows(tm) Domain, and Admin Username/Password, after system boot.\n"
 #~ "The command 'wbinfo -t' will test whether your authentication secrets are "
 #~ "good."
 #~ msgstr ""
