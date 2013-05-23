@@ -1429,62 +1429,55 @@ use MDK::Common;
 use mygtk3 qw(gtknew);
 use ugtk3 qw(:helpers :wrappers);
 
-sub set_pixmap {
-    my ($darea) = @_;
-    return if !$darea->get_realized;
-    ugtk3::set_back_pixbuf($darea, $darea->{back_pixbuf});
-    update_text($darea);
+sub set_style {
+   my ($w) = @_;
+   my $pl = Gtk3::CssProvider->new;
+   $pl->load_from_data("Layout, GtkLabel {font: 15px; background-color: #ffffff }");
+   $w->{label}->get_style_context->add_provider($pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
+   my $p = Gtk3::CssProvider->new;
+   $w->get_style_context->add_provider($p, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 sub update_text {
     my ($darea) = @_;
-    $darea->{layout} = $darea->create_pango_layout($darea->{text});
-    $darea->{txt_width} = first($darea->{layout}->get_pixel_size);
     $darea->queue_draw;
 }
-
 
 sub new {
     my ($_class, $icon, $text, $o_options) = @_;
 
     mygtk3::import_style_ressources();
-    my $w = gtknew('DrawingArea', widget_name => 'Banner');
-    $w->{back_pixbuf} = gtknew('Pixbuf', file => 'banner-background');
-    my $d_height = $w->{back_pixbuf}->get_allocated_height;
-    $w->set_size_request(-1, $d_height);
-    $w->modify_font(Pango::FontDescription->from_string("13"));
-    eval { $w->{icon} = ugtk3::gtkcreate_pixbuf($icon) };
-    $w->{icon} ||= ugtk3::gtkcreate_pixbuf(ugtk3::wm_icon());
+    my $icon = eval { ugtk3::gtkcreate_pixbuf($icon) };
+    $icon ||= ugtk3::gtkcreate_pixbuf(ugtk3::wm_icon());
     my $is_rtl = mygtk3::text_direction_rtl();
     my $blue_part = eval { gtknew('Pixbuf', file => 'banner-blue-part', flip => $is_rtl) };
-    my $blue_width = $blue_part->get_width;
-    $w->{text} = $text;
 
-    $w->signal_connect(realize => \&set_pixmap);
-    $w->signal_connect("style-set" => \&set_pixmap);
-    $w->signal_connect(expose_event => sub {
-                               my $style = $w->get_style;
-                               my $height = $w->{icon}->get_height;
-                               my $width = $w->{icon}->get_width;
-                               # fix icon position when not using the default height:
-                               (undef, undef, undef, $d_height) = $w->get_window->get_geometry;
-                               my $padding = int(($d_height - $height)/2);
-                               my $d_width = $w->get_allocation->width;
-                               my $x_blue = $is_rtl ? $d_width - $blue_width : 0;
-                               my $x_icon = $is_rtl ? $d_width - 12 - $width : 12;
-                               # here: 48 is the amount of white background in the blue background we wish to ignore:
-                               my $x_text = $is_rtl ? $d_width - $blue_width + 48 - $w->{txt_width} : $blue_width - 48;
-                               $w->{layout_height} ||= second($w->{layout}->get_pixel_size);
-                               $blue_part->render_to_drawable($w->get_window, $style->bg_gc('normal'),
-                                                                  0, 0, $x_blue, 0, -1, -1, 'none', 0, 0);
-                               $w->{icon}->render_to_drawable($w->get_window, $style->bg_gc('normal'),
-                                                                  0, 0, $x_icon, $padding, -1, -1, 'none', 0, 0);
-                               $w->get_window->draw_layout($style->fg_gc('normal'), $x_text,
-                                                           $o_options->{txt_ypos} || ($d_height - $w->{layout_height})/2,
-                                                           $w->{layout});
-                               1;
-                           });
-                               
+    my $d_height = $blue_part->get_height;
+    
+
+    my $img = gtknew('Image', pixbuf => $blue_part, alignment => [ 0, 0 ]);
+
+    my $label = gtknew('Label', text => $text); # for update_text()
+    my $w = gtknew('Overlay', height => $d_height, main_child => $label, children => [
+		       gtknew('Overlay', main_child => $img, children => [
+				  my $icon_img = gtknew('Image', pixbuf => $icon, alignment => [ 0, 0 ]),
+			      ])
+		   ]);
+
+    # fix Icon position:
+    if ($is_rtl) {
+	$icon_img->set_margin_right(12);
+    } else {
+	$icon_img->set_margin_left(12);
+    }
+    $icon_img->set_margin_top(($blue_part->get_height-$icon->get_height)/2-4);
+
+    $w->{label} = $label;
+    $w->set_size_request(-1, $d_height);
+
+    $w->signal_connect(realize => \&set_style);
+    $w->signal_connect("style-updated" => \&set_style);
+    $w->show_all;
     return $w;
 }
 
