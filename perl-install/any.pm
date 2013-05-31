@@ -145,7 +145,7 @@ sub install_acpi_pkgs {
     my $acpi = bootloader::get_append_with_key($b, 'acpi');
     my $use_acpi = !member($acpi, 'off', 'ht');
     if ($use_acpi) {
-	$do_pkgs->ensure_files_are_installed([ [ qw(acpi /usr/bin/acpi) ], [ qw(acpid /usr/sbin/acpid) ] ], $::isInstall);
+	$do_pkgs->ensure_files_are_installed([ [ qw(acpi acpi) ], [ qw(acpid acpid) ] ], $::isInstall);
     }
     require services;
     services::set_status($_, $use_acpi, $::isInstall) foreach qw(acpi acpid);
