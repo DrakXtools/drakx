@@ -44,7 +44,7 @@ our %l = (
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(alx atl1 atl1c atl1e at91_ether be2net bna bnx2 bnx2x cxgb cxgb3 cxgb4 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe),
+      qw(alx atl1 atl1c atl1e at91_ether ax88179_178a be2net bna bnx2 bnx2x cxgb cxgb3 cxgb4 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe),
       qw(macb mvmdio myri_sbus myri10ge netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io sfc sxg_nic),
       qw(sis190 sk98lin skge sky2 slicoss spidernet stmmac tehuti tg3 via-velocity vxge yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
@@ -69,7 +69,7 @@ our %l = (
       qw(aironet_cs ar5523 ar9170usb arlan arusb_lnx at76c50x_usb ath5k ath6kl ath6kl_usb ath9k ath9k_htc),
       qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx bcm_wimax brcm80211 brcmsmac brcmfmac carl9170 com20020_cs),
       qw(dyc_ar5 hostap_cs hostap_pci hostap_plx i2400m_usb ipw2100),
-      qw(ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwldvm iwlwifi madwifi_pci),
+      qw(ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwldvm iwlmvm iwlwifi madwifi_pci),
       qw(mwifiex_usb mwl8k ndiswrapper netwave_cs orinoco orinoco_cs),
       qw(orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd orinoco_usb p54pci),
       qw(p54usb prism2_cs prism2_pci prism2_usb prism54 qmi_wwan r8180),
@@ -169,7 +169,7 @@ our %l = (
 
   bus => 
   {
-    usb => [ qw(bcma-hcd c67x00 ehci-hcd ehci-pci ehci-platform fhci hwa-hc
+    usb => [ qw(bcma-hcd c67x00 dwc3 dwc3-pci ehci-hcd ehci-pci ehci-platform fhci hwa-hc
 		imx21-hcd isp116x-hcd isp1362-hcd isp1760 ohci-hcd oxu210hp-hcd
 		r8a66597-hcd renesas-usbhs sl811_cs sl811-hcd ssb-hcd u132-hcd
 		uhci-hcd usb-ohci usb-uhci whci-hcd xhci-hcd) ],
