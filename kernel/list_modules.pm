@@ -118,7 +118,7 @@ our %l = (
         qw(be2iscsi bfa BusLogic dc395x dc395x_trm dmx3191d dtc eata eata_dma),
         qw(eata_pio fdomain g_NCR5380 in2000 initio mpt2sas mpt3sas mvsas NCR53c406a),
         qw(nsp32 pas16 pci2220i pm8001 psi240i qla1280 qla2x00 qla2xxx),
-        qw(qlogicfas qlogicfc seagate shasta sim710 stex sym53c416),
+        qw(qlogicfas qlogicfc rsxx seagate shasta sim710 stex sym53c416),
         qw(t128 tmscsim u14-34f ultrastor vmw_pvscsi wd7000),
       ),
       qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicfas408 sym53c8xx lpfc lpfcdd), # ncr53c8xx
@@ -192,7 +192,7 @@ our %l = (
 	    hid-pl hid-primax hid-prodikeys hid-roccat hid-roccat-arvo hid-roccat-common
 	    hid-roccat-isku hid-roccat-kone hid-roccat-koneplus hid-roccat-kovaplus hid-roccat-lua
 	    hid-roccat-pyra hid-roccat-savu hid-saitek hid-samsung hid-sensor-hub hid-sjoy hid-sony
-	    hid-speedlink hid-sunplus hid-tivo hid-tmff hid-topseed hid-twinhan
+	    hid-speedlink hid-steelseries hid-sunplus hid-tivo hid-thingm hid-tmff hid-topseed hid-twinhan
 	    hid-uclogic hid-wacom hid-waltop hid-wiimote hid-zpff hid-zydacron) ],
 
    #serial_cs
@@ -256,7 +256,9 @@ our %l = (
         qw(hexium_orion pluto2 skystar2 smsusb ttusb_dec),
     ],
     photo => [ qw(dc2xx mdc800) ],
-    radio => [ qw(radio-gemtek-pci radio-maestro radio-maxiradio radio-miropcm20 radio-usb-si470x) ],
+    radio => [ qw(radio-gemtek-pci radio-keene radio-maestro radio-ma901
+	    radio-maxiradio radio-miropcm20 radio-mr800  radio-shark
+	    radio-usb-si470x shark2) ],
     scanner => [ qw(scanner microtek) ],
     firewire => [ qw(snd-firewire-speakers snd-isight snd-scs1x) ],
     gameport => [ qw(cs461x ns558 emu10k1-gp fm801-gp lightning ns558 vortex) ],
