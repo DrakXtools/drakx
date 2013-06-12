@@ -73,7 +73,7 @@ sub ensure_files_are_installed {
     my ($do, $pkgs, $b_auto) = @_;
 
     my @not_installed = map { my ($package, $file) = @$_; if_(!whereis_binary($file, $::prefix), $package) } @$pkgs;
-    return if !@not_installed;
+    return 1 if !@not_installed;
 
     $do->in->ask_okcancel(N("Warning"), N("The following packages need to be installed:\n") . join(', ', @not_installed), 1)
 	  or return if !$b_auto && $do->in;
