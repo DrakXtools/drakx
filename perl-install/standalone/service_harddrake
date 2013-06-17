@@ -468,7 +468,7 @@ if ($reboot_needed && ! -e "/tmp/.X11-unix/X0") {
     ($reply, $timedout) = dialog_with_timeout("okcancel", N("Display driver setup"), N("The system has to be rebooted due to a display driver change.") . "\n\n"
 			. N("Press Cancel within %d seconds to abort.", 30), 30, $plymouth);
     if ($reply || $timedout) {
-	exec("/sbin/reboot");
+	exec("/bin/reboot");
     }
 }
 
@@ -481,7 +481,7 @@ if ($reboot_needed && ! -e "/tmp/.X11-unix/X0") {
     ($reply, $timedout) = ask_with_timeout(N("Display driver setup"), N("The system has to be rebooted due to a display driver change.") . "\n\n"
 			. N("Press Cancel within %d seconds to abort.", 30), 30, $plymouth);
     if ($reply || $timedout) {
-	exec("/sbin/reboot");
+	exec("/bin/reboot");
     }
 }
 
