@@ -26,8 +26,6 @@ load sr_mod
 
 action "Bringing up local loop interface" ifconfig lo up
 
-grep -q noauto /proc/cmdline || drvinst SERIAL_USB
-
 partimage_default_dir=/data/box
 partimage_dir=$(getarg BOX `cat /proc/cmdline`)
 [ -z "$partimage_dir" ] && partimage_dir=$partimage_default_dir
