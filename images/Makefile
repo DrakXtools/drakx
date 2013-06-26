@@ -77,7 +77,8 @@ dist-git:
 	cd setup; git archive --prefix=$(PRODUCT)-$(VERSION)/images/setup/ HEAD . > setup-$(PRODUCT)-$(VERSION).tar
 	tar --concatenate --file=../$(PRODUCT)-$(VERSION).tar setup/setup-$(PRODUCT)-$(VERSION).tar
 	rm setup/setup-$(PRODUCT)-$(VERSION).tar
-	xz -vf ../$(PRODUCT)-$(VERSION).tar
+	mv ../$(PRODUCT)-$(VERSION).tar .
+	xz -vf $(PRODUCT)-$(VERSION).tar
 
 
 clean:
