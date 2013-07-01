@@ -10,7 +10,7 @@ if [ -f /etc/sysconfig/finish-install -a -x /usr/sbin/finish-install ]; then
 	    export LANGUAGE LC_ADDRESS LC_COLLATE LC_NAME LC_NUMERIC LC_MEASUREMENT LC_TIME \
 	    LANG LC_IDENTIFICATION LC_MESSAGES LC_CTYPE LC_TELEPHONE LC_MONETARY LC_PAPER
 	fi
-	. /etc/profile.d/10mandriva-release.sh
+	. /etc/profile.d/10distro-release.sh
 	xsetroot -cursor_name left_ptr
 	/usr/sbin/finish-install
 	# used in live systems, so that dm gets restarted with the new defaults
