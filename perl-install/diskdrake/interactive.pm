@@ -893,7 +893,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®"));
 	    mkdir_p($dir);
 	    fs::mount::mount(devices::make($part->{device}), $dir, $part->{fs_type});
 	}
-	if (!run_program::run("btrfsctl", "-r", $part->{size}*512, $dir)) {
+	if (!run_program::run(qw(btrfs filesystem resize), $part->{size}*512, $dir)) {
 	    $nice_resize{btrfs} = undef;
 	    if (!$part->{isMounted}) {
 		fs::mount::umount($dir);
