@@ -40,7 +40,7 @@ our %l = (
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
       # add all phys
       qw(amd at803x bcm87xx broadcom cicada davicom et1011c icplus lxt marvell micrel),
-      qw(national qsemi realtek smsc ste10Xp vitesse),
+      qw(national qsemi r8152 realtek smsc ste10Xp vitesse),
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
@@ -73,7 +73,7 @@ our %l = (
       qw(mwifiex_usb mwl8k ndiswrapper netwave_cs orinoco orinoco_cs),
       qw(orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd orinoco_usb p54pci),
       qw(p54usb prism2_cs prism2_pci prism2_usb prism54 qmi_wwan r8180),
-      qw(r8187se r8192_pci r8192s_usb r8192u_usb r8712u rtl8723ae ray_cs rndis_wlan rt2400 rt2400pci rt2500),
+      qw(r8187se rtl8188ee r8192_pci r8192s_usb r8192u_usb r8712u rtl8723ae ray_cs rndis_wlan rt2400 rt2400pci rt2500),
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
       qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se rtusb ),
       qw(rtl8192se rtl8192cu rtl8192de spectrum_cs usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
@@ -117,7 +117,7 @@ our %l = (
         qw(a100u2w advansys aha152x aha1542 aha1740 AM53C974 atp870u),
         qw(be2iscsi bfa BusLogic dc395x dc395x_trm dmx3191d dtc eata eata_dma),
         qw(eata_pio fdomain g_NCR5380 in2000 initio mpt2sas mpt3sas mvsas NCR53c406a),
-        qw(nsp32 pas16 pci2220i pm8001 psi240i qla1280 qla2x00 qla2xxx),
+        qw(nsp32 pas16 pci2220i pm80xx pm8001 psi240i qla1280 qla2x00 qla2xxx),
         qw(qlogicfas qlogicfc rsxx seagate shasta sim710 stex sym53c416),
         qw(t128 tmscsim u14-34f ultrastor vmw_pvscsi wd7000),
       ),
@@ -183,14 +183,14 @@ our %l = (
     pcmcia => [
       if_(arch() !~ /^sparc/, qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket)), # cb_enabler
     ],
-    hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-aureal hid-axff hid-belkin
+    hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-appleir hid-aureal hid-axff hid-belkin
 	    hid-cherry hid-chicony hid-cypress hid-dr hid-drff hid-elecom hid-emsff
 	    hid-ezkey hid-gaff hid-generic hid-gyration hid-holtek-kbd hid-holtekff
 	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-lenovo-tpkbd
 	    hid-logitech hid-logitech-dj hid-magicmouse hid-microsoft hid-monterey
 	    hid-multilaser hid-multitouch hid-ntrig hid-ortek hid-petalynx hid-picolcd
 	    hid-pl hid-primax hid-prodikeys hid-roccat hid-roccat-arvo hid-roccat-common
-	    hid-roccat-isku hid-roccat-kone hid-roccat-koneplus hid-roccat-kovaplus hid-roccat-lua
+	    hid-roccat-isku hid-roccat-kone hid-roccat-koneplus hid-roccat-konepure hid-roccat-kovaplus hid-roccat-lua
 	    hid-roccat-pyra hid-roccat-savu hid-saitek hid-samsung hid-sensor-hub hid-sjoy hid-sony
 	    hid-speedlink hid-steelseries hid-sunplus hid-tivo hid-thingm hid-tmff hid-topseed hid-twinhan
 	    hid-uclogic hid-wacom hid-waltop hid-wiimote hid-zpff hid-zydacron) ],
@@ -209,7 +209,7 @@ our %l = (
       if_(arch() =~ /^ppc/, qw(hfs)),
       qw(btrfs ext3 ext4 jfs nilfs2 ntfs reiserfs vfat xfs),
     ],
-    various => [ qw(overlayfs romfs ufs fuse) ],
+    various => [ qw(efivarfs overlayfs romfs ufs fuse) ],
 
   },
 
@@ -345,7 +345,7 @@ our %l = (
       #- these need checking
       qw(rrunner meye),
 
-      qw(virtio virtio_balloon virtio_pci virtio_ring),
+      qw(virtio virtio_balloon virtio_pci virtio_ring vhost_scsi),
       qw(mei pch_phub),
       qw(vmvgfx),
     ],
