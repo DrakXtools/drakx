@@ -19,9 +19,7 @@ use fs;
 use c;
 
 sub facesdir() {
-    my $dir = "$::prefix/usr/share/mdk/faces/";
-    @themes = glob("$dir/*-*/");
-    @themes ? $themes[0] : $dir;
+    "$::prefix/usr/share/mdk/faces/";
 }
 sub face2png {
     my ($face) = @_;
@@ -29,8 +27,8 @@ sub face2png {
 }
 sub facesnames() {
     my $dir = facesdir();
-    my @l = grep { /^[A-Z]/ } all($dir);
-    map { if_(/(.*)\.png/, $1) } (@l ? @l : all($dir));
+    my @l = grep { /^[A-Z]/ } all_files_rec($dir);
+    map { if_(/$dir\/(.*)\.png/, $1) } (@l ? @l : all_files_rec($dir));
 }
 
 sub addKdmIcon {
