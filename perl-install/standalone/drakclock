@@ -24,8 +24,7 @@ my $its_reset = 0;
 $ugtk2::wm_icon = "/usr/share/mcc/themes/default/time-mdk.png";
 
 my $ntpfile = '/etc/ntp.conf';
-my $ntpdlock = '/var/lock/subsys/ntpd';
-my $ntpdsystemdlock = '/sys/fs/cgroup/systemd/system/ntpd.service';
+my $ntpdsystemdlock = '/sys/fs/cgroup/systemd/system.slice/chronyd.service';
 
 my $my_win = ugtk2->new(N("Date, Clock & Time Zone Settings"));
 
@@ -77,7 +76,7 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
                                                                            0, gtksignal_connect(gtkset_active($check_ntp = gtknew('CheckButton', text => N("Enable Network Time Protocol")), $mode),  clicked => sub { 
                                                                                                     $mode = !$mode; 
                                                                                                     $hb_ntp->set_sensitive($mode);
-                                                                                                    if ($mode == 1 && !$in->do_pkgs->is_installed('ntp')) {
+                                                                                                    if ($mode == 1 && !$in->do_pkgs->is_installed('chrony')) {
                                                                                                         install_ntp();
                                                                                                     }
                                                                                                 }),
@@ -116,15 +115,14 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
                                                                 return;
                                                             }
                                                             timezone::set_ntp_server($choosed_serv);
-                                                            system(qw(/sbin/chkconfig --level 35 ntpd on));
+                                                            system(qw(systemctl enable chronyd.service));
                                                             # FIXME: Change to use systemctl when will not support old iniscript anymore
-                                                            system(qw(service ntpd stop));
+                                                            system(qw(systemctl stop chronyd.service));
                                                             #verify that we have a valid hostname (thx sam)
                                                             $choosed_serv =~ s/[^-a-zA-Z0-9.]//g;
-							    if (!system("/usr/sbin/ntpdate", $choosed_serv)) {
+							    if (!system(qw(systemctl start chronyd.service)) {
+								system(qw(systemctl restart chrony-wait.service));
 								update_time(); #- get the new time before updating the hwclock
-                                # FIXME: Change to use systemctl when will not support old iniscript anymore
-								system(qw(service ntpd start));
 								$need_date = 0;
 							    } else {
                                                                 $in->ask_from_no_check({
@@ -135,13 +133,9 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
                                                                 }, []) or return;
 							    }
                                                         } else {
-                                                            if (-e $ntpdlock) { 
-								system(qw(service ntpd stop));
-								system(qw(/sbin/chkconfig --level 35 ntpd off));
-							    }
-							    elsif (-e $ntpdsystemdlock) {
-								system(qw(systemctl stop ntpd.service));
-								system(qw(systemctl disable ntpd.service));
+							    if (-e $ntpdsystemdlock) {
+								system(qw(systemctl stop chronyd.service));
+								system(qw(systemctl disable chronyd.service));
 							    }
 							}
 							if ($need_date) {
@@ -174,7 +168,7 @@ $time_box->set_direction('ltr');
 
 my $servers = get_server();
 $combo_ntpserver->set_popdown_strings(@$servers);
-if (-e $ntpfile && ( -e $ntpdsystemdlock || -e $ntpdlock)) {
+if (-e $ntpfile && -e $ntpdsystemdlock) {
     $ntp = timezone::ntp_server();
     $ntp and ntp_widget_state(1);
     my $fullntp = $ntp;
@@ -238,7 +232,7 @@ sub ntp_widget_state {
 }
 sub install_ntp() {
     $my_win->{window}->set_sensitive(0);
-    $in->do_pkgs->ensure_is_installed('ntp') or ntp_widget_state(0);
+    $in->do_pkgs->ensure_is_installed('chrony') or ntp_widget_state(0);
     $my_win->{window}->set_sensitive(1);
 }
 sub get_server() {
