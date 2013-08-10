@@ -5,7 +5,7 @@ perl.require("urpm")
 perl.require("urpm::select")
 
 class Distribution(object):
-    def __init__(self, config, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = False, synthfilter = ".cz:gzip -9", root="..", stage1=None, stage2="../mdkinst.cpio.xz", advertising="/usr/lib/drakx-installer/root/install/extra/advertising/"):
+    def __init__(self, config, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = False, synthfilter = ".cz:gzip -9", root="..", stage1=None, stage2="../mdkinst.cpio.xz", advertising="/usr/lib/drakx-installer/root/install/extra/advertising/", gpgName=None, gpgPass=None):
         volumeid = ("%s-%s-%s-%s" % (config.vendor, config.product, config.version, arch)).upper()
         if len(volumeid) > 32:
             print "length of volumeid '%s' (%d) > 32" % (volumeid, len(volumeid))
@@ -263,6 +263,8 @@ class Distribution(object):
                         s = os.stat(source)
                         m.size += s.st_size
             self.media[m.name].pkgs = pkgs
+            if (gpgName):
+                signPackage(gpgName, gpgPass, " ".join(pkgs))
             if not os.path.exists("%s/media/%s/media_info" % (tmpdir, m.name)):
                 os.mkdir("%s/media/%s/media_info" % (tmpdir, m.name))
             os.symlink("%s/media/%s/release/media_info/pubkey" % (repopath, m.name), "%s/media/%s/media_info/pubkey" % (tmpdir, m.name))
