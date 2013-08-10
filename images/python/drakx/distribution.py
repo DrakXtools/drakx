@@ -336,7 +336,7 @@ class Distribution(object):
         os.system("ln -sr ../VERSION %s/install/stage2/VERSION" % tmpdir)
 
         if not advertising:
-            advertising="%s/install/extra/advertising"
+            advertising="%s/install/extra/advertising" % config.rootdir
         print color("Copying advertising: %s -> %s/install/extra/advertising" % (advertising, tmpdir), GREEN)
         os.mkdir("%s/install/extra" % tmpdir)
         os.system("ln -sr %s %s/install/extra/advertising" % (advertising, tmpdir))
