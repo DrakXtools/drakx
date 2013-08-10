@@ -267,7 +267,8 @@ class Distribution(object):
                 signPackage(gpgName, gpgPass, " ".join(pkgs))
             if not os.path.exists("%s/media/%s/media_info" % (tmpdir, m.name)):
                 os.mkdir("%s/media/%s/media_info" % (tmpdir, m.name))
-            os.symlink("%s/media/%s/release/media_info/pubkey" % (repopath, m.name), "%s/media/%s/media_info/pubkey" % (tmpdir, m.name))
+            if gpgName:
+                os.system("gpg --export --armor %s > " % "%s/media/%s/media_info/pubkey" % (tmpdir, m.name))
 
         print color("Writing %s/media/media_info/media.cfg" % tmpdir, GREEN)
         if not os.path.exists("%s/media/media_info" % tmpdir):
