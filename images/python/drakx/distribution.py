@@ -329,7 +329,7 @@ class Distribution(object):
         os.system("ln -sr %s %s/install/images/all.cpio.xz" % (stage1, tmpdir))
 
         if not stage2:
-            stage2 = "%s/install/stage2" % config.rootdir
+            stage2 = "%s/install/stage2/mdkinst.cpio.xz" % config.rootdir
         print color("Copying second stage installer: %s -> %s/install/stage2/mdkinst.cpio.xz" % (stage2, tmpdir), GREEN)
         os.mkdir("%s/install/stage2" % tmpdir)
         os.system("ln -sr %s %s/install/stage2/mdkinst.cpio.xz" % (stage2, tmpdir))
