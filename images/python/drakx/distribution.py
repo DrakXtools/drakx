@@ -263,12 +263,11 @@ class Distribution(object):
                         s = os.stat(source)
                         m.size += s.st_size
             self.media[m.name].pkgs = pkgs
-            if (gpgName):
-                signPackage(gpgName, gpgPass, " ".join(pkgs))
             if not os.path.exists("%s/media/%s/media_info" % (tmpdir, m.name)):
                 os.mkdir("%s/media/%s/media_info" % (tmpdir, m.name))
             if gpgName:
-                os.system("gpg --export --armor %s > " % "%s/media/%s/media_info/pubkey" % (tmpdir, m.name))
+                signPackage(gpgName, gpgPass, " ".join(pkgs))
+                os.system("gpg --export --armor %s %s > " % "%s/media/%s/media_info/pubkey" % (tmpdir, m.name))
 
         print color("Writing %s/media/media_info/media.cfg" % tmpdir, GREEN)
         if not os.path.exists("%s/media/media_info" % tmpdir):
