@@ -5,7 +5,7 @@ perl.require("urpm")
 perl.require("urpm::select")
 
 class Distribution(object):
-    def __init__(self, config, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = False, synthfilter = ".cz:gzip -9", root="..", stage1=None, stage2="../mdkinst.cpio.xz", advertising="/usr/lib/drakx-installer/root/install/extra/advertising/", gpgName=None, gpgPass=None):
+    def __init__(self, config, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = False, synthfilter = ".cz:gzip -9", root="/usr/lib64/drakx-installer/root", stage1=None, stage2=None, advertising=None, gpgName=None, gpgPass=None):
         volumeid = ("%s-%s-%s-%s" % (config.vendor, config.product, config.version, arch)).upper()
         if len(volumeid) > 32:
             print "length of volumeid '%s' (%d) > 32" % (volumeid, len(volumeid))
@@ -322,17 +322,21 @@ class Distribution(object):
 
         # if none specified, rely on it's presence in grub target tree...
         if not stage1:
-            stage1 = "../grub/%s/install/images/all.cpio.xz" % self.arch
+            stage1 = "%s/grub/%s/install/images/all.cpio.xz" % (config.rootdir, self.arch)
         print color("Copying first stage installer: %s -> %s/install/images/all.cpio.xz" % (stage1, tmpdir), GREEN)
         os.mkdir("%s/install" % tmpdir)
         os.mkdir("%s/install/images" % tmpdir)
         os.system("ln -sr %s %s/install/images/all.cpio.xz" % (stage1, tmpdir))
 
+        if not stage2:
+            stage2 = "%s/install/stage2" % config.rootdir
         print color("Copying second stage installer: %s -> %s/install/stage2/mdkinst.cpio.xz" % (stage2, tmpdir), GREEN)
         os.mkdir("%s/install/stage2" % tmpdir)
         os.system("ln -sr %s %s/install/stage2/mdkinst.cpio.xz" % (stage2, tmpdir))
         os.system("ln -sr ../VERSION %s/install/stage2/VERSION" % tmpdir)
 
+        if not advertising:
+            advertising="%s/install/extra/advertising"
         print color("Copying advertising: %s -> %s/install/extra/advertising" % (advertising, tmpdir), GREEN)
         os.mkdir("%s/install/extra" % tmpdir)
         os.system("ln -sr %s %s/install/extra/advertising" % (advertising, tmpdir))
