@@ -236,8 +236,9 @@ foreach my $path (keys %$h) {
 }
 
 sub _filter {
-	grep { $_->{required} ? install::pkgs::packageByName($::o->{packages}, $_->{required}) : 1
-	} map { @$_ } @_;
+
+    grep { $_->{required} ? (any { install::pkgs::packageByName($::o->{packages}, $_ ) } @{$_->{required}}) : 1 } map { @$_ } @_;
+
 }
 
 my $compssUsers = [ _filter(values %$h) ];
