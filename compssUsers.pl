@@ -201,7 +201,7 @@ N_("Utilities") =>
     flags => [ qw(MONITORING NETWORKING_FILE) ],
     default_selected => 1,
   },
-  { label => N_("Mandriva Wizards"),
+  { label => N_("Distribution Wizards"),
     descr => N_("Wizards to configure server"),
     flags => [ qw(WIZARDS) ],
     default_selected => 1,
