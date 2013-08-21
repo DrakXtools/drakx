@@ -1,3 +1,6 @@
+# Default distribution release
+distro-release-OpenMandriva
+
 ########## base ################################################################
 # webfetch
 curl
@@ -6,19 +9,10 @@ curl
 lynx
 
 # bootloader
-grub
+grub2
 
 # initrd
 dracut
-
-# "Free" release (ie not PowerPack, Flash...)
-free-kde-config
-free-kde4-config
-mandriva-release-Free
-mandriva-theme-Free
-mandriva-theme-Free-screensaver
-mandriva-lxde-config-Free
-mandriva-xfce-config-Free
 
 # vim
 vim-minimal
@@ -27,13 +21,13 @@ vim-minimal
 perl-base
 
 # libGL.so.1 (also provided by proprietary drivers)
-libmesagl1
-lib64mesagl1
+libgl1
+lib64gl1
 
 # prefer openssh-askpass over openssh-askpass-gnome (for keychain)
 openssh-askpass
 
-# python 2.6
+# python 2.7
 python
 
 ########## multimedia ##########################################################
@@ -47,7 +41,10 @@ gnome-speech-driver-espeak
 pulseaudio-esound-compat
 
 # gst-install-plugins-helper
-codeina
+packagekit-gstreamer-plugin
+
+# kde4-config-file
+default-kde4-config
 
 # libbaconvideowidget.so.0 (totem backend)
 libbaconvideowidget-gstreamer0
@@ -80,6 +77,9 @@ libstdc++-devel
 ########## servers #############################################################
 # sendmail-command and mail-server
 postfix
+
+# nfs-server
+nfs-utils
 
 # apache
 apache-mpm-prefork
@@ -120,3 +120,11 @@ drupal-mysqli
 # polkit-agent
 polkit-gnome
 
+# pinentry
+pinentry-qt4
+
+# java
+java-1.7.0-openjdk
+
+# java plugin
+icedtea-web
