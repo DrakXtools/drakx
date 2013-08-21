@@ -252,7 +252,7 @@ my $gtk_display_compssUsers = sub {
 
     my $entries_in_path = sub {
 	my ($path) = @_;
-        my @items = map { $entry->($_) } @{ [ _filter($h->{$path}) ] };
+        my @items = map { $entry->($_) } _filter($h->{$path});
 
         # ensure we have an even number of items:
         if (@items % 2) {
