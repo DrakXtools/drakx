@@ -175,6 +175,7 @@ N_("Graphical Environment") =>
     flags => [ qw(LXDE X ACCESSIBILITY) ], 
     descr => N_("A lightweight & fast graphical environment with user-friendly set of applications and desktop tools"),
     default_selected => $low_resources || $light,
+    required => [ 'task-lxde' ],
   },
   if_(!$light,
   { label => N_("Other Graphical Desktops"),
