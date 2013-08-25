@@ -663,7 +663,6 @@ sub default_packages {
     add_n_log("needed for firewall/security", qw(shorewall shorewall-ipv6 mandi-ifw));
     # only needed for CDs/DVDs installations:
     add_n_log("method='cdrom'", 'perl-Hal-Cdroms') if $o->{method} eq 'cdrom';
-    # only needed for CDs/DVDs installations:
     add_n_log("needed for VMware hypervisor", 'open-vm-tools') if detect_devices::is_vmware();
 
     my $dmi_BIOS = detect_devices::dmidecode_category('BIOS');
