@@ -29,7 +29,7 @@ sub to_dev_raw {
 
 sub check {
     my ($_class, $in) = @_;
-    $in->do_pkgs->ensure_files_are_installed([ [ 'nfs-utils' , '/usr/sbin/showmount' ] , [ 'nmap' , '/usr/bin/nmap' ] ]);
+    $in->do_pkgs->ensure_files_are_installed([ [ qw(nfs-utils showmount) ] , [ qw(nmap nmap) ] ]);
     require services;
     services::start_not_running_service('rpcbind');
     services::start('nfs-common'); #- TODO: once nfs-common is fixed, it could use start_not_running_service()
