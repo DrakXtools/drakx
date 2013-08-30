@@ -112,7 +112,10 @@ sub vnew {
     }
     require_root_capability() if $su;
     if (check_for_xserver()) {
-	eval { require interactive::gtk };
+	eval {
+		use Glib::Object::Introspection;
+		require interactive::gtk;
+	};
 	if (!$@) {
 	    my $o = interactive::gtk->new;
 	    if ($o_icon && $o_icon ne 'default' && !$::isWizard) { $o->{icon} = $o_icon } else { undef $o->{icon} }
