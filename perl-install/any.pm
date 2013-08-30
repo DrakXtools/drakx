@@ -1234,7 +1234,7 @@ sub selectLanguage_standalone {
     ]);
     $locale->{utf8} = !$non_utf8;
     lang::set($locale);
-    Gtk3->set_locale if $in->isa('interactive::gtk');
+    c::init_setlocale() if $in->isa('interactive::gtk');
     lang::lang_changed($locale) if $old_lang ne $locale->{lang};
 }
 

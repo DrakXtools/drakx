@@ -181,7 +181,7 @@ sub leavingStep {
 
 sub charsetChanged {
     my ($o) = @_;
-    Gtk3->set_locale;
+    c::init_setlocale();
     install::gtk::load_font($o);
     install::gtk::create_steps_window($o);
 }
