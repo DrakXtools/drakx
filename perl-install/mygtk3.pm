@@ -1547,7 +1547,7 @@ sub import_style_ressources() {
 }
 
 sub text_direction_rtl() {
-    Gtk3::Widget->get_default_direction eq 'rtl';
+    Gtk3::Widget::get_default_direction eq 'rtl';
 }
 
 sub _get_weakness_icon {
