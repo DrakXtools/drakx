@@ -36,7 +36,7 @@ $view->signal_connect('close-web-view', sub { ugtk3::exit(0) });
 $view->open($ARGV[0]);
 
 # FIXME: merge this with mcc code into new mygtk3::set_standalone_main_window_size()?
-my ($rootwin_width, $rootwin_height) = gtkroot()->get_size;
+my ($rootwin_width, $rootwin_height) = mygtk3::root_window_size();
 my ($default_width, $default_height);
 my $wm = any::running_window_manager();
 my $is_firstime = to_bool($wm =~ /drakx-matchbox-window-manager/);

@@ -15,7 +15,7 @@ my $forgetTime = 1000; #- in milli-seconds
 
 sub new {
     my $w = &interactive::new;
-    ($w->{windowwidth}, $w->{windowheight}) = gtkroot()->get_size if !$::isInstall;
+    ($w->{windowwidth}, $w->{windowheight}) = mygtk3::root_window_size() if !$::isInstall;
     $w;
 }
 sub enter_console { my ($o) = @_; $o->{suspended} = common::setVirtual(1) }
