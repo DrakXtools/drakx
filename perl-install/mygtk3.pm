@@ -891,7 +891,7 @@ sub _gtk__MagicWindow {
     my $pop_it = delete $opts->{pop_it} || !$::isWizard && !$::isEmbedded || $::WizardTable && do {
 	#- do not take into account the wizard banner
         # FIXME!!!
-	any { !$_->isa('Gtk3::DrawingArea') && $_->visible } $::WizardTable->get_children;
+	any { !$_->isa('Gtk3::DrawingArea') && $_->get_visible } $::WizardTable->get_children;
     };
 
     my $pop_and_reuse = delete $opts->{pop_and_reuse} && $pop_it;
