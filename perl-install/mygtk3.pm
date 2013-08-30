@@ -666,7 +666,7 @@ sub _gtk__ScrolledWindow {
 	$child->set_left_margin(6) if ref($child) =~ /Gtk3::TextView/ && $child->get_left_margin <= 6;
 	$child->show;
 
-	$w->child->set_shadow_type(delete $opts->{shadow_type}) if exists $opts->{shadow_type};
+	$w->get_child->set_shadow_type(delete $opts->{shadow_type}) if exists $opts->{shadow_type};
 
 	if (ref($child) eq 'Gtk3::TextView' && delete $opts->{to_bottom}) {
 	    $child->{to_bottom} = _allow_scroll_TextView_to_bottom($w, $child);
@@ -909,7 +909,7 @@ sub _gtk__MagicWindow {
 
     if ($previous_popped_and_reuse_window && $pop_and_reuse) {
 	$w = $previous_popped_and_reuse_window;
-	$w->remove($w->child);
+	$w->remove($w->get_child);
 
 	gtkadd($w, child => $sub_child);
 	%$opts = ();

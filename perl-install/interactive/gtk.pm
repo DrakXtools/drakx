@@ -49,7 +49,7 @@ sub create_boxradio {
     mapn {
 	my ($txt, $w) = @_;
 	# workaround infamous 6 years old gnome bug #101968:
-	$w->child->set_size_request(mygtk3::get_label_width(), -1) if $e->{alignment} ne 'right' && !$e->{label};
+	$w->get_child->set_size_request(mygtk3::get_label_width(), -1) if $e->{alignment} ne 'right' && !$e->{label};
 	$w->signal_connect(button_press_event => $double_click) if $double_click;
 
 	$w->signal_connect(key_press_event => $e->{may_go_to_next});
@@ -416,7 +416,7 @@ sub create_widget {
 	$w = gtknew(($e->{install_button} ? 'Install_Button' : 'Button'), 
                     text => '', clicked => $e->{clicked_may_quit_cooked});
 	$set = sub {
-            my $w = $w->child;
+            my $w = $w->get_child;
             # handle Install_Buttons:
             if (ref($w) =~ /Gtk3::HBox/) {
                 ($w) = find { ref($_) =~ /Gtk3::Label/ } $w->get_children;
@@ -519,11 +519,11 @@ sub create_widget {
 		if ($e->{not_edit}) {
 		    $real_w = $w = Gtk3::ComboBoxText->new;
 		    # FIXME: the following causes Gtk-CRITICAL but not solvable at realize time:
-		    first($w->child->get_cells)->set_property('ellipsize', 'end') if !$e->{do_not_ellipsize};
+		    first($w->get_child->get_cells)->set_property('ellipsize', 'end') if !$e->{do_not_ellipsize};
 		    $w->set_wrap_width($e->{gtk}{wrap_width}) if exists $e->{gtk}{wrap_width};
 		} else {
 		    $w = Gtk3::ComboBoxEntry->new_text;
-		    ($real_w, $w) = ($w, $w->child);
+		    ($real_w, $w) = ($w, $w->get_child);
 		}
 		$real_w->set_popdown_strings(@formatted_list);
 	    } else {
