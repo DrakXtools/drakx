@@ -1492,6 +1492,12 @@ sub root_window() {
     $root ||= Gtk3::Gdk::get_default_root_window();
 }
 
+sub root_window_size() {
+    state $root;
+    $root ||= [Gtk3::Gdk::Screen::width, Gtk3::Gdk::Screen::height];
+    @$root;
+}
+
 sub rgb2color {
     my ($r, $g, $b) = @_;
     my $color = Gtk3::Gdk::Color->new($r, $g, $b);
