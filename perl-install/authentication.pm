@@ -649,7 +649,7 @@ sub read_ldap_conf() {
     my %conf = map { 
 	s/^\s*#.*//; 
 	if_(_after_read_ldap_line($_) =~ /(\S+)\s+(.*)/, $1 => $2);
-    } cat_("$::prefix/etc/ldap.conf");
+    } cat_("$::prefix/etc/nslcd.conf");
     \%conf;
 }
 
@@ -669,7 +669,7 @@ sub update_ldap_conf {
 		$_ .= _pre_write_ldap_line("$cmd $val\n");
 	    }
 	}
-    } "$::prefix/etc/ldap.conf";
+    } "$::prefix/etc/nslcd.conf";
 }
 
 sub configure_krb5_for_AD {
@@ -897,23 +897,23 @@ sub fetch_dn {
 sub configure_nss_ldap {
 	my ($authentication) = @_;
 	update_ldap_conf(
-                         host => $authentication->{LDAP_server},
+			 uri => "ldaps://" . $authentication->{LDAP_server} . "/",
                          base => $authentication->{LDAPDOMAIN},
                         );
 
         if ($authentication->{nssgrp} eq '1') {
 
         update_ldap_conf(
-                         nss_base_shadow => $authentication->{nss_shadow} . "?sub",
-                         nss_base_passwd => $authentication->{nss_pwd} . "?sub",
-                         nss_base_group => $authentication->{nss_grp} . "?sub",
+                         'base shadow' => $authentication->{nss_shadow},
+                         'base passwd' => $authentication->{nss_pwd},
+                         'base group' => $authentication->{nss_grp},
                         );
         } else {
 
         update_ldap_conf(
-                         nss_base_shadow => $authentication->{LDAPDOMAIN} . "?sub",
-                         nss_base_passwd => $authentication->{LDAPDOMAIN} . "?sub",
-                         nss_base_group => $authentication->{LDAPDOMAIN}  . "?sub",
+                         'base shadow' => $authentication->{LDAPDOMAIN},
+                         'base passwd' => $authentication->{LDAPDOMAIN},
+                         'base group' => $authentication->{LDAPDOMAIN},
                         );
                 }
         if ($authentication->{anonymous} eq '1') {
@@ -926,7 +926,7 @@ sub configure_nss_ldap {
         if ($authentication->{cafile} eq '1') {
                  update_ldap_conf(
                  ssl => "on",
-                 tls_checkpeer => "yes",
+                 tls_reqcert => "demand",
                  tls_cacertfile => $authentication->{file},
                 );
         }
