@@ -907,6 +907,7 @@ sub configure_nss_ldap {
                          'base shadow' => $authentication->{nss_shadow},
                          'base passwd' => $authentication->{nss_pwd},
                          'base group' => $authentication->{nss_grp},
+			 scope => sub,
                         );
         } else {
 
@@ -914,6 +915,7 @@ sub configure_nss_ldap {
                          'base shadow' => $authentication->{LDAPDOMAIN},
                          'base passwd' => $authentication->{LDAPDOMAIN},
                          'base group' => $authentication->{LDAPDOMAIN},
+			 scope => sub,
                         );
                 }
         if ($authentication->{anonymous} eq '1') {
