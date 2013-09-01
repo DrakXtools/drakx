@@ -1361,6 +1361,8 @@ use MDK::Common;
 # try to get combox <==> option menu mapping
 sub set_popdown_strings {
     my ($w, @strs) = @_;
+    my $model = $w->get_model;
+    return if !$model;
     $w->get_model->clear;
     # keep string list around for ->set_text compatibilty helper
     $w->{strings} = \@strs;
