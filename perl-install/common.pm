@@ -381,19 +381,10 @@ sub get_parent_uid() {
     cat_('/proc/' . getppid() . '/status') =~ /Uid:\s*(\d+)/ ? $1 : undef;
 }
 
-sub wrap_command_for_root {
-    my ($name, @args) = @_;
-    ([ 'consolehelper', $name ], @args);
-}
-
 sub require_root_capability() {
     return if $::testing || !$>; # we're already root
 
-    my ($command, @args) = wrap_command_for_root($0, @ARGV);
-    exec { $command->[0] } $command->[1], @args or die N("command %s missing", $command->[0]);
-
-    # still not root ?
-    die "you must be root to run this program" if $>;
+    die "you must be root to run this program";
 }
 
 sub check_for_xserver() {
