@@ -24,7 +24,7 @@ sub read() {
     { timezone => $t{ZONE}, UTC => text2bool($t{UTC}) };
 }
 
-my $ntp_conf_file = "/etc/ntp.conf";
+my $ntp_conf_file = "/etc/chrony.conf";
 
 sub ntp_server() {
     find { $_ ne '127.127.1.0' } map { if_(/^\s*server\s+(\S*)/, $1) } cat_($::prefix . $ntp_conf_file);
@@ -45,10 +45,11 @@ sub set_ntp_server {
             $added = 1;
         }
     } $f;
-    output_p("$::prefix/etc/ntp/step-tickers", join('', map { "$_\n" } @servers));
+    # FIXME
+    output_p("$::prefix/etc/step-tickers", join('', map { "$_\n" } @servers));
 
     require services;
-    services::set_status('ntpd', to_bool($server), $::isInstall);
+    services::set_status('chronyd', to_bool($server), $::isInstall);
 }
 
 sub write {
