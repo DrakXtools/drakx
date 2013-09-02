@@ -23,7 +23,7 @@ my $its_reset = 0;
 
 $ugtk2::wm_icon = "/usr/share/mcc/themes/default/time-mdk.png";
 
-my $ntpfile = '/etc/ntp.conf';
+my $ntpfile = '/etc/chrony.conf';
 my $ntpdsystemdlock = '/sys/fs/cgroup/systemd/system.slice/chronyd.service';
 
 my $my_win = ugtk2->new(N("Date, Clock & Time Zone Settings"));
