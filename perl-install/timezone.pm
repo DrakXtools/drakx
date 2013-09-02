@@ -45,8 +45,6 @@ sub set_ntp_server {
             $added = 1;
         }
     } $f;
-    # FIXME
-    output_p("$::prefix/etc/step-tickers", join('', map { "$_\n" } @servers));
 
     require services;
     services::set_status('chronyd', to_bool($server), $::isInstall);
