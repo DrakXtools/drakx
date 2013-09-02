@@ -41,7 +41,7 @@ sub set_ntp_server {
     my $added = 0;
     substInFile {
         if (/^#?\s*server\s+(\S*)/ && $1 ne '127.127.1.0') {
-            $_ = $added ? $_ =~ $pool_match ? undef : "#server $1\n" : join('', map { "server $_\n" } @servers);
+            $_ = $added ? $_ =~ $pool_match ? undef : "#server $1\n" : join('', map { "server $_ iburst\n" } @servers);
             $added = 1;
         }
     } $f;
