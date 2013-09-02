@@ -120,7 +120,7 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
                                                             system(qw(systemctl stop chronyd.service));
                                                             #verify that we have a valid hostname (thx sam)
                                                             $choosed_serv =~ s/[^-a-zA-Z0-9.]//g;
-							    if (!system(qw(systemctl start chronyd.service)) {
+							    if (!system("systemctl", "start", "chronyd.service")) {
 								system(qw(systemctl restart chrony-wait.service));
 								update_time(); #- get the new time before updating the hwclock
 								$need_date = 0;
