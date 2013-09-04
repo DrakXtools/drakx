@@ -110,6 +110,12 @@ EOF
 	    strip "$f"
 	fi
     done
+    
+    echo "Prelinking files"
+    sed -e "s# /# $tmp_initrd/#g" /etc/prelink.conf > ucdrakx-prelink.conf
+    /usr/sbin/prelink -a -N -c ucdrakx-prelink.conf
+    rm ucdrakx-prelink.conf
+
 
     # ka deploy need some files in all.rdz 
 
