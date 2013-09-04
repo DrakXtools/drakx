@@ -104,6 +104,7 @@ EOF
 
     # XXX: prevent this from being added to begin with
     rm -rf "$tmp_initrd/usr/share/locale/"
+    rm -rf "$tmp_initrd/usr/lib/locale"
 
     for f in `find "$tmp_initrd"`; do
 	if [ -n "`file \"$f\"|grep 'not stripped'`" ]; then
