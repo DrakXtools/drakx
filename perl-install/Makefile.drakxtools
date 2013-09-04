@@ -16,10 +16,12 @@ DATADIR = $(PREFIX)/usr/share
 ICONSDIR= $(DATADIR)/icons
 BINDEST = $(PREFIX)/usr/bin
 SBINDEST = $(PREFIX)/usr/sbin
+LIBEXECDEST = $(PREFIX)/usr/libexec
 ETCDEST = $(PREFIX)/etc/gtk
 LIBDEST = $(LIBDIR)/$(NAME)
 PIXDIR = $(DATADIR)/$(NAME)/pixmaps
 INITDIR =  $(PREFIX)/etc/rc.d/init.d
+POLKITPOLICYDEST = $(PREFIX)/usr/share/polkit-1/actions
 SERIAL_PROBE = ../mdk-stage1/serial.cpp ../mdk-stage1/serial_probe.cpp
 .PHONY: $(DIRS)
 
@@ -37,7 +39,7 @@ $(DIRS):
 
 install:
 	perl -pi -e "s/\"VER\"(; # version)/\"$(VERSION)\"\1/" standalone.pm
-	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{applications,harddrake,pixmaps,icons/{large,mini},autostart} $(PIXDIR) $(INITDIR) $(MENUDIR)
+	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{applications,harddrake,pixmaps,icons/{large,mini},autostart} $(PIXDIR) $(INITDIR) $(MENUDIR) $(LIBEXECDEST) $(POLKITPOLICYDEST)
 	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) standalone/convert $(SBINDEST)
 	install -s ../tools/rpcinfo-flushed ../tools/serial_probe/serial_probe $(SBINDEST)
@@ -49,6 +51,11 @@ install:
 	mv -f $(SBINDEST)/display_help $(BINDEST)
 	mv -f $(SBINDEST)/display_release_notes.pl $(BINDEST)
 	mv -f $(SBINDEST)/localedrake $(BINDEST)
+	# All the things handled by polkit
+	mv -f $(SBINDEST)/drak{auth,boot,clock,font,ups,xservices} $(LIBEXECDEST)
+	mv -f $(SBINDEST)/logdrake $(LIBEXECDEST)/draklog
+	install polkit/wrappers/* $(BINDEST)
+	install polkit/policy/* $(POLKITPOLICYDEST)
 
 	install -m 644 *.pm $(LIBDEST)
 	for i in $(PMS_DIRS); do install -d $(LIBDEST)/$$i ; install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
@@ -85,7 +92,7 @@ install:
 	ln -s {drakclock,$(SBINDEST)/clock.pl}
 	ln -s {harddrake2,$(SBINDEST)/drakhardware}
 	ln -s {localedrake,$(BINDEST)/draklocale}
-	ln -s {logdrake,$(SBINDEST)/draklog}
+	ln -s {draklog,$(BINDEST)/logdrake}
 	ln -s {scannerdrake,$(SBINDEST)/drakscanner}
 
 check:
