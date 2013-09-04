@@ -88,12 +88,16 @@ install:
 	mv $(SBINDEST)/convert $(DATADIR)/harddrake
 	mv $(SBINDEST)/service_harddrake $(DATADIR)/harddrake/
 	mv $(SBINDEST)/notify-x11-free-driver-switch $(DATADIR)/harddrake/
-	ln -s diskdrake $(SBINDEST)/drakdisk
-	ln -s drakclock $(SBINDEST)/clock.pl
-	ln -s harddrake2 $(SBINDEST)/drakhardware
-	ln -s localedrake $(BINDEST)/draklocale
+	mv $(SBINDEST)/diskdrake $(SBINDEST)/drakdisk
+	mv $(SBINDEST)/harddrake2 $(SBINDEST)/drakhardware
+	mv $(BINDEST)/localedrake $(BINDEST)/draklocale
+	mv $(SBINDEST)/scannerdrake $(SBINDEST)/drakscanner
+	ln -s drakdisk $(SBINDEST)/diskdrake
+	ln -s drakclock $(BINDEST)/clock.pl
+	ln -s drakhardware $(SBINDEST)/harddrake2
+	ln -s draklocale $(BINDEST)/localedrake
 	ln -s draklog $(BINDEST)/logdrake
-	ln -s scannerdrake $(SBINDEST)/drakscanner
+	ln -s drakscanner $(SBINDEST)/scannerdrake
 
 check:
 	rm -f share/po/libDrakX.pot standalone/po/libDrakX-standalone.pot
