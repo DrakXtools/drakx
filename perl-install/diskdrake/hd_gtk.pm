@@ -64,6 +64,7 @@ sub main {
     mygtk3::register_main_window($w->{real_window}) if !$::isEmbedded && !$::isInstall;
 
     load_theme();
+    $w->{window}->signal_connect('style-updated' => \&load_theme);
 
     # TODO
 #    is_empty_array_ref($all_hds->{raids}) or raid::stopAll;
