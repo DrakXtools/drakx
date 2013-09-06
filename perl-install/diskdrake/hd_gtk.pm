@@ -45,10 +45,12 @@ notebook current_kind[]
 =cut
 
 sub load_theme() {
-    my $rc = "/usr/share/libDrakX/diskdrake.rc";
-    -r $rc or $rc = dirname(__FILE__) . "/../diskdrake.rc";
-    -r $rc or $rc = dirname(__FILE__) . "/../share/diskdrake.rc";
-    Gtk3::Rc->parse($rc);
+    my $css = "/usr/share/libDrakX/diskdrake.css";
+    -r $css or $css = dirname(__FILE__) . "/../diskdrake.css";
+    -r $css or $css = dirname(__FILE__) . "/../share/diskdrake.css";
+    my $pl = Gtk3::CssProvider->new;
+    $pl->load_from_path($css);
+    my $cx = Gtk3::StyleContext::add_provider_for_screen(Gtk3::Gdk::Screen::get_default(), $pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 sub main {
