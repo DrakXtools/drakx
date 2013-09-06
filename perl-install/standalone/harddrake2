@@ -310,7 +310,6 @@ $tree->get_selection->signal_connect('changed' => sub {
         ($current_device, $current_class) = @{$data[$idx]};
         
         if ($idx ne -1) {
-            use Pango;
             my %device_fields = map {
                 # The U+200E character is to force LTR display, as what what follows the colon is always in LTR (device names, paths, etc),
                 # this ensures proper displaying of names like /dev/fd0 (otherwise it gets 'dev/fd0/').
