@@ -653,7 +653,7 @@ sub gtkfontinfo {
     foreach (qw(ascent descent approximate_char_width approximate_digit_width)) {
 	no strict;
 	my $func = "get_$_";
-	$fontinfo{$_} = Pango->pixels($metrics->$func);
+	$fontinfo{$_} = Pango::units_to_double($metrics->$func);
     }
     %fontinfo;
 }
