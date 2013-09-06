@@ -417,7 +417,7 @@ sub _gtk__Label {
 	$w->set_justify(delete $opts->{justify}) if exists $opts->{justify};
 	$w->set_line_wrap(delete $opts->{line_wrap}) if exists $opts->{line_wrap};
 	$w->set_alignment(@{delete $opts->{alignment}}) if exists $opts->{alignment};
-	$w->modify_font(Pango::FontDescription->from_string(delete $opts->{font})) if exists $opts->{font};
+	$w->override_font(Pango::FontDescription->from_string(delete $opts->{font})) if exists $opts->{font};
     }
 
     if (my $text_ref = delete $opts->{text_ref}) {

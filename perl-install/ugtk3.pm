@@ -8,7 +8,7 @@ use locale;
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     wrappers => [ qw(gtkadd gtkadd_widget gtkappend gtkappend_page gtkappenditems gtkcombo_setpopdown_strings gtkdestroy
-                     gtkentry gtkflush gtkhide gtkmodify_font gtkmove gtkpack gtkpack2 gtkpack2_
+                     gtkentry gtkflush gtkhide gtkoverride_font gtkmove gtkpack gtkpack2 gtkpack2_
                      gtkpack2__ gtkpack_ gtkpack__ gtkpowerpack gtkput gtkradio gtkresize gtkroot
                      gtkset_active gtkset_border_width gtkset_editable gtkset_justify gtkset_alignment gtkset_layout gtkset_line_wrap
                      gtkset_markup gtkset_modal gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_name
@@ -658,9 +658,9 @@ sub gtkfontinfo {
     %fontinfo;
 }
 
-sub gtkmodify_font {
+sub gtkoverride_font {
     my ($w, $arg) = @_;
-    $w->modify_font(ref($arg) ? $arg : Pango::FontDescription->from_string($arg));
+    $w->override_font(ref($arg) ? $arg : Pango::FontDescription->from_string($arg));
     $w;
 }
 
