@@ -113,9 +113,11 @@ sub main {
     $notebook_widget->signal_connect(realize => $update_all);
     $w->sync;
     $done_button->grab_focus;
-    $in->ask_from_list_(N("Warning"), N("Please make a backup of your data first."), 
-			[ N_("Exit"), N_("Continue") ], N_("Continue")) eq N_("Continue") or $in->exit(0)
-      if $::isStandalone;
+    if (!$::testing) {
+      $in->ask_from_list_(N("Read carefully"), N("Please make a backup of your data first"), 
+			  [ N_("Exit"), N_("Continue") ], N_("Continue")) eq N_("Continue") or return
+        if $::isStandalone;
+    }
 
     undef $initializing;
     $w->main;
