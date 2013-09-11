@@ -796,6 +796,27 @@ sub _gtk__Fixed {
     $w;
 }
 
+sub _gtk__Overlay {
+    my ($w, $opts, $_class, $_action) = @_;
+
+    if (!$w) {
+	$w = Gtk3::Overlay->new;
+        _gtknew_handle_overlay_children($w, $opts);
+    }
+    $w;
+}
+
+sub _gtknew_handle_overlay_children {
+    my ($w, $opts) = @_;
+        $w->add(delete $opts->{main_child}) if $opts->{main_child};
+        $opts->{children} ||= [];
+        foreach (@{$opts->{children}}) {
+            $w->add_overlay($_);
+        }
+        delete $opts->{children};
+}
+
+
 sub _gtk__Layout {
     my ($w, $opts, $_class, $_action) = @_;
 	
