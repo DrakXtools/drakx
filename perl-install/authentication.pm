@@ -897,7 +897,7 @@ sub fetch_dn {
 sub configure_nss_ldap {
 	my ($authentication) = @_;
 	update_ldap_conf(
-			 uri => "ldaps://" . $authentication->{LDAP_server} . "/",
+			 uri => $authentication->{cafile} eq '1' ? "ldaps://" . $authentication->{LDAP_server} . "/" : "ldap://" . $authentication->{LDAP_server} . "/",
                          base => $authentication->{LDAPDOMAIN},
                         );
 
@@ -928,7 +928,7 @@ sub configure_nss_ldap {
         if ($authentication->{cafile} eq '1') {
                  update_ldap_conf(
                  ssl => "on",
-                 tls_reqcert => "demand",
+                 tls_reqcert => "allow",
                  tls_cacertfile => $authentication->{file},
                 );
         }
