@@ -1083,8 +1083,8 @@ sub lang_changed {
 
 sub read {
     my ($b_user_only) = @_;
-    my ($f1, $f2) = ("$::prefix$ENV{HOME}/.i18n", "$::prefix/etc/sysconfig/i18n");
-    my %h = getVarsFromSh($b_user_only && -e $f1 ? $f1 : $f2);
+    my ($f1, $f2, $f3) = ("$::prefix$ENV{HOME}/.i18n", "$::prefix/etc/sysconfig/i18n", "$::prefix/etc/locale.conf");
+    my %h = getVarsFromSh($b_user_only && -e $f1 ? $f1 : $f2 && $f3);
     my $locale = system_locales_to_ourlocale($h{LC_MESSAGES} || 'en_US', $h{LC_MONETARY} || 'en_US');
     
     if (find { $h{$_} } @IM_i18n_fields) {
@@ -1190,7 +1190,7 @@ sub write {
         add2hash($h, { CONSOLE_NOT_LOCALIZED => 'yes' });
     }
 
-    my $file = $b_user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n';
+    my $file = $b_user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n' && '/etc/locale.conf';
     log::explanations(qq(Setting l10n configuration in "$file"));
     setVarsInShMode($::prefix . $file, 0644, $h);
 

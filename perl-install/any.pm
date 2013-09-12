@@ -1344,6 +1344,7 @@ sub report_bug {
       header("urpmi.cfg"), cat_("$::prefix/etc/urpmi/urpmi.cfg"),
       header("modprobe.preload"), cat_("$::prefix/etc/modprobe.preload"),
       header("sysconfig/i18n"), cat_("$::prefix/etc/sysconfig/i18n"),
+      header("locale.conf"), cat_("$::prefix/etc/locale.conf"),
       header("/proc/iomem"), cat_("/proc/iomem"),
       header("/proc/ioport"), cat_("/proc/ioports"),
       map_index { even($::i) ? header($_) : $_ } @other;
