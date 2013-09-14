@@ -115,7 +115,12 @@ sub mirrors_raw {
     #- contact the following URL to retrieve the list of mirrors.
     #- http://wiki.mandriva.com/en/Product_id
     my $type = lc($product_id->{type}); $type =~ s/\s//g;
-    my $list = "https://api.mandriva.com/mirrors/$type.$product_id->{version}.$product_id->{arch}.list?product=$product_id->{product}";
+    my $list;
+    if ($product_id->{branch} == "Devel") {
+        $list = "http://downloads.openmandriva.org/mirrors/cooker.$product_id->{arch}.list?product=$product_id->{product}";
+    } else {
+        $list = "http://downloads.openmandriva.org/mirrors/openmandriva.$product_id->{version}.$product_id->{arch}.list?product=$product_id->{product}";
+    } 
     log::explanations("trying mirror list from $list");
     my @lines = $::isInstall ? _mirrors_raw_install($list) : _mirrors_raw_standalone($list);
     map { common::parse_LDAP_namespace_structure(chomp_($_)) } @lines;
