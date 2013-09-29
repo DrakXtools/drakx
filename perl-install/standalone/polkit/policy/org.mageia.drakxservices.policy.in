@@ -7,16 +7,16 @@
  <vendor>Mageia</vendor>
  <vendor_url>http://www.mageia.org/</vendor_url>
 
- <action id="org.mageia.drakauth.pkexec.run">
-    <description>Run Mageia Authentication Configuration</description>
-    <message>Authentication is required to run Mageia Authentication Configuration</message>
+ <action id="org.mageia.drakxservices.pkexec.run">
+    <_description>Run Mageia Service Configuration</_description>
+    <_message>Authentication is required to run Mageia Service Configuration</_message>
     <icon_name>drakconf</icon_name>
     <defaults>
      <allow_any>no</allow_any>
      <allow_inactive>no</allow_inactive>
      <allow_active>auth_admin_keep</allow_active>
     </defaults>
-    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/drakauth</annotate>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/drakxservices</annotate>
     <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
  </action>
 </policyconfig>

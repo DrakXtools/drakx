@@ -40,7 +40,7 @@ install: $(MOFILES)
 	done
 
 POTFILES.in:
-	(cd .. ; /bin/ls data/*.desktop.in data/*.directory.in) > POTFILES.in
+	(cd .. ; /bin/ls -1 menu/*.desktop.in polkit/policy/*.policy.in; ) > POTFILES.in
 
 
 clean:

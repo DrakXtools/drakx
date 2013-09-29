@@ -5,7 +5,8 @@ include Makefile.config
 
 INLIBDEST_DIRS = c resize_fat
 HAVEINST_DIRS = share/po standalone/po standalone/interactive_http standalone/menu
-DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) harddrake
+HAVEINST_DIRS = share/po standalone/po standalone/interactive_http standalone/menu standalone/polkit/policy
+DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) harddrake ../tools/serial_probe
 NAME = libDrakX
 XSETUPLEVEL=40
 XSETUPLEVEL_HARDDRAKE=00
@@ -39,7 +40,7 @@ $(DIRS):
 
 install:
 	perl -pi -e "s/\"VER\"(; # version)/\"$(VERSION)\"\1/" standalone.pm
-	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{applications,harddrake,pixmaps,icons/{large,mini},autostart} $(PIXDIR) $(INITDIR) $(MENUDIR) $(LIBEXECDEST) $(POLKITPOLICYDEST)
+	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{applications,harddrake,pixmaps,icons/{large,mini},autostart} $(PIXDIR) $(INITDIR) $(MENUDIR) $(LIBEXECDEST)
 	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) standalone/convert $(SBINDEST)
 	install -s ../tools/rpcinfo-flushed ../tools/serial_probe/serial_probe $(SBINDEST)
@@ -55,7 +56,6 @@ install:
 	mv -f $(SBINDEST)/drak{auth,boot,clock,font,ups,xservices} $(LIBEXECDEST)
 	mv -f $(SBINDEST)/logdrake $(LIBEXECDEST)/draklog
 	install standalone/polkit/wrappers/* $(BINDEST)
-	install standalone/polkit/policy/* $(POLKITPOLICYDEST)
 
 	install -m 644 *.pm $(LIBDEST)
 	for i in $(PMS_DIRS); do install -d $(LIBDEST)/$$i ; install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
