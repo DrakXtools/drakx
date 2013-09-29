@@ -54,8 +54,8 @@ install:
 	# All the things handled by polkit
 	mv -f $(SBINDEST)/drak{auth,boot,clock,font,ups,xservices} $(LIBEXECDEST)
 	mv -f $(SBINDEST)/logdrake $(LIBEXECDEST)/draklog
-	install polkit/wrappers/* $(BINDEST)
-	install polkit/policy/* $(POLKITPOLICYDEST)
+	install standalone/polkit/wrappers/* $(BINDEST)
+	install standalone/polkit/policy/* $(POLKITPOLICYDEST)
 
 	install -m 644 *.pm $(LIBDEST)
 	for i in $(PMS_DIRS); do install -d $(LIBDEST)/$$i ; install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
