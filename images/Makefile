@@ -89,7 +89,7 @@ install:
 	install -d $(DESTDIR)$(IMAGES_DEST)
 	rm -rf $(DESTDIR)$(IMAGES_DEST)/alternatives 
 	cp -r images/* $(DESTDIR)$(IMAGES_DEST)
-ifneq (,$(findstring $(ARCH), i386 x86_64))
+ifneq (,$(findstring $(ARCH), i586 x86_64))
 	rm -rf $(DESTDIR)$(ROOTDEST)/grub
 	cp -af grub $(DESTDIR)$(ROOTDEST)
 endif
