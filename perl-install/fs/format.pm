@@ -23,7 +23,7 @@ my %cmds = (
     swap     => [ 'util-linux', 'mkswap' ],
     ntfs     => [ 'ntfsprogs', 'mkntfs', '--fast' ],
    'ntfs-3g' => [ 'ntfsprogs', 'mkntfs', '--fast' ],
-    btrfs    => [ 'btrfs-progs', 'mkfs.btrfs' ],
+    btrfs    => [ 'btrfs-progs', 'mkfs.btrfs', '-f' ],
     nilfs2   => [ 'nilfs-utils', 'mkfs.nilfs2' ],
 );
 
