@@ -59,10 +59,8 @@
   fdformat
   swapon swapoff
 
-  smartmontools
+  smartd
   smartctl
-  /etc/smartd.conf
-  /usr/share/smartmontools/drivedb.h
   sg_verify
   sg_reassign
 
@@ -204,6 +202,17 @@
        <to dir="/sbin">
                stage1
        </to>
+</from>
+
+<from dir="/etc">
+  <to dir="/etc">
+    smartd.conf
+  </to>
+</from>
+<from dir="/usr/share/smartmontools">
+  <to dir="/usr/share/smartmontools">
+    /usr/share/smartmontools/drivedb.h
+  </to>
 </from>
 
 <from dir="bkeymaps">
