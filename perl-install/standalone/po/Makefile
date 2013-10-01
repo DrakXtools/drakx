@@ -44,4 +44,4 @@ POTFILES.in:
 
 
 clean:
-	@rm -rf *.mo $(POFILES:%=%t)
+	@rm -rf *.mo $(POFILES:%=%t) POTFILES.in
