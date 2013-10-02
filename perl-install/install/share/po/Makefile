@@ -16,7 +16,7 @@ default: $(MOFILES)
 
 update_n_merge: $(NAME).pot merge
 
-merge:
+merge: $(NAME).pot
 	for n in $(POFILES); do \
 	  echo "Merging $$n"; \
 	  msgmerge $$n $(NAME).pot > "$$n"t ; \
