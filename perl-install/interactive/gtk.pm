@@ -522,7 +522,7 @@ sub create_widget {
 		    first($w->get_child->get_cells)->set_property('ellipsize', 'end') if !$e->{do_not_ellipsize};
 		    $w->set_wrap_width($e->{gtk}{wrap_width}) if exists $e->{gtk}{wrap_width};
 		} else {
-		    $w = Gtk3::ComboBoxEntry->new_text;
+		    $w = Gtk3::ComboBoxText->new_with_entry;
 		    ($real_w, $w) = ($w, $w->get_child);
 		}
 		$real_w->set_popdown_strings(@formatted_list);
