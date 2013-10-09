@@ -132,6 +132,7 @@ sub try_ {
     my $dm_active_before = ($current_entry && $current_entry->{dm_active} && $current_entry->{dm_name});
     my $v = eval { $f->($in, @args, $all_hds) };
     if (my $err = $@) {
+	warn $err, "\n", backtrace() if $in->isa('interactive::gtk');
 	$in->ask_warn(N("Error"), formatError($err));
     }
     my $refresh = 0;
