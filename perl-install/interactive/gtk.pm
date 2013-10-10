@@ -939,7 +939,7 @@ sub wait_messageW {
 }
 sub wait_message_nextW {
     my ($_o, $message, $Window) = @_;
-    return if $message eq $Window->{wait_messageW}->get_text; #- needed otherwise no expose_event :(
+    return if $message eq $Window->{wait_messageW}->get_text; #- needed otherwise no draw :(
     $Window->{displayed} = 0;
     $Window->{wait_messageW}->set($message);
     mygtk3::sync($Window) while !$Window->{displayed};
@@ -962,7 +962,7 @@ sub wait_message_with_progress_bar {
     my $progress = gtknew('ProgressBar');
     my $w = $in->wait_message($o_title, $progress);
     my $displayed;
-    $progress->signal_connect(expose_event => sub { $displayed = 1; 0 });
+    $progress->signal_connect(draw => sub { $displayed = 1; 0 });
     $w, sub {
 	my ($msg, $current, $total) = @_;
 	if ($msg) {

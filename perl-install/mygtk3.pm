@@ -116,7 +116,7 @@ sub _gtk {
     $w->grab_focus if delete $opts->{grab_focus};
     $w->set_padding(@{delete $opts->{padding}}) if exists $opts->{padding};
     $w->set_sensitive(delete $opts->{sensitive}) if exists $opts->{sensitive};
-    $w->signal_connect(expose_event => delete $opts->{expose_event}) if exists $opts->{expose_event};
+    $w->signal_connect(draw => delete $opts->{draw}) if exists $opts->{draw};
     $w->signal_connect(realize => delete $opts->{realize}) if exists $opts->{realize};
     (delete $opts->{size_group})->add_widget($w) if $opts->{size_group};
     if (my $tip = delete $opts->{tip}) {
@@ -342,7 +342,7 @@ sub _gtk__Image {
             my ($width, $height) = ($pixbuf->get_width, $pixbuf->get_height);
             $w->set_size_request($width, $height);
             $w->{pixbuf} = $pixbuf;
-            $w->signal_connect(expose_event => sub {
+            $w->signal_connect(draw => sub {
                                    my (undef, $event) = @_;
                                    if (!$w->{x}) {
                                        my $alloc = $w->get_allocation;
@@ -1482,7 +1482,7 @@ sub flush() {
 
 sub enable_sync_flush {
     my ($w) = @_;
-    $w->signal_connect(expose_event => sub { $w->{displayed} = 1; 0 });
+    $w->signal_connect(draw => sub { $w->{displayed} = 1; 0 });
 }
 
 sub sync_flush {
