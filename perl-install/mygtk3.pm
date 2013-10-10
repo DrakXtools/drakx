@@ -319,8 +319,6 @@ sub _gtk__Pixbuf {
 
 # Image_using_pixmap is rendered using DITHER_MAX which is much better on 16bpp displays
 sub _gtk__Image_using_pixmap { &_gtk__Image }
-# Image_using_pixbuf is rendered using DITHER_MAX & transparency which is much better on 16bpp displays
-sub _gtk__Image_using_pixbuf { &_gtk__Image }
 sub _gtk__Image {
     my ($w, $opts, $class) = @_;
 
@@ -336,31 +334,6 @@ sub _gtk__Image {
             my ($w, $file) = @_;
             my $pixmap = mygtk3::pixmap_from_pixbuf($w, gtknew('Pixbuf', file => $file));
 	    $w->set_from_pixmap($pixmap, undef);
-        } : $class =~ /using_pixbuf/ ? sub { 
-            my ($w, $file) = @_;
-            my $pixbuf = _pixbuf_render_alpha(gtknew('Pixbuf', file => $file, %{$w->{options}}), 255);
-            my ($width, $height) = ($pixbuf->get_width, $pixbuf->get_height);
-            $w->set_size_request($width, $height);
-            $w->{pixbuf} = $pixbuf;
-            $w->signal_connect(draw => sub {
-                                   my (undef, $event) = @_;
-                                   if (!$w->{x}) {
-                                       my $alloc = $w->get_allocation;
-                                       $w->{x} = $alloc->x;
-                                       $w->{y} = $alloc->y;
-                                   }
-                                   # workaround Gtk+ bug: in installer, first event is not complete and rectables are bogus:
-                                   if ($::isInstall) {
-                                       $pixbuf->render_to_drawable($w->get_window, $w->style->fg_gc('normal'),
-                                                                   0, 0, $w->{x}, $w->{y}, $width, $height, 'max', 0, 0);
-                                       return;
-                                   }
-                                   foreach my $rect ($event->region->get_rectangles) {
-                                       my @values = $rect->values;
-                                       $pixbuf->render_to_drawable($w->get_window, $w->style->fg_gc('normal'),
-                                                               @values[0..1], $w->{x}+$values[0], $w->{y}+$values[1], @values[2..3], 'max', 0, 0);
-				   }
-                               });
         } : sub { 
             my ($w, $file, $o_size) = @_;
             my $pixbuf = gtknew('Pixbuf', file => $file, if_($o_size, size => $o_size), %{$w->{options}});
@@ -731,7 +704,7 @@ sub _gtk__MDV_Notebook {
         my $is_flip_needed = text_direction_rtl();
         my $filler = gtknew('Image', file => 'left-background-filler.png');
         my $filler_height = $filler->get_pixbuf->get_height;
-        my $left_background = gtknew('Image_using_pixbuf', file => 'left-background.png');
+        my $left_background = gtknew('Image', file => 'left-background.png');
         my $lf_height = $left_background->{pixbuf}->get_height;
         my @right_background = $::isInstall ? 
           gtknew('Image', file => "right-white-background_left_part$suffix", flip => $is_flip_needed)
@@ -764,7 +737,7 @@ sub _gtk__MDV_Notebook {
                 [ $selection_arrow = gtknew('Image', file => 'steps_on', flip => $is_flip_needed), $arrow_x, 0, ],
             ]),
             1, delete $opts->{right_child} || 
-              gtknew('Image_using_pixbuf', file => "right-white-background_right_part$suffix", flip => $is_flip_needed),
+              gtknew('Image', file => "right-white-background_right_part$suffix", flip => $is_flip_needed),
         ]);
 
         $w->signal_connect('size-allocate' => sub {
