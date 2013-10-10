@@ -766,7 +766,10 @@ connection.
 
 Do you want to install the updates?")),
 			   interactive_help_id => 'installUpdates',
-					       }, 1) or return;
+					       }, 1) or do {
+	log::l("installUpdates: skipping since user say no to updates");
+	return;
+    };
 
     #- bring all interface up for installing updates packages.
     install::interactive::upNetwork($o);
