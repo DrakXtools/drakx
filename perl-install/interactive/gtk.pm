@@ -921,7 +921,7 @@ sub wait_messageW {
     Glib::Source->remove($reuse_timeout) if $reuse_timeout; $reuse_timeout = '';
 
     my $Window = gtknew('MagicWindow',
-			title => $title,
+			if_($title, title => $title),
 			pop_it => defined $o->{pop_wait_messages} ? $o->{pop_wait_messages} : 1, 
 			pop_and_reuse => $::isInstall,
 			modal => 1, 
