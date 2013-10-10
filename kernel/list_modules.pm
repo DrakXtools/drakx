@@ -26,7 +26,7 @@ our %l = (
         qw(iph5526), #- fibre channel
         qw(jme lance ne ni5010 ni52 ni65 nvnet),
         qw(prism2_plx qlge r6040 rcpci rhineget),
-        qw(sb1000 sc92031 smc-ultra smc9194 smsc9420 smsc95xx),
+        qw(sb1000 sc92031 sh_eth smc-ultra smsc911x smc9194 smsc9420 smsc95xx),
         qw(tc35815 tlan uli526x vmxnet3),
       ),
       if_(arch() !~ /alpha/,
@@ -39,8 +39,8 @@ our %l = (
       ),
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
       # add all phys
-      qw(amd at803x bcm87xx broadcom cicada davicom et1011c icplus lxt marvell micrel),
-      qw(national qsemi r8152 realtek smsc ste10Xp vitesse),
+      qw(amd at803x bcm87xx broadcom cicada davicom et1011c icplus lxt marvell mdio-bitbang mdio-gpiomicrel),
+      qw(national qsemi r8152 r815x realtek smsc ste10Xp vitesse),
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
@@ -66,7 +66,7 @@ our %l = (
     ],
     wireless => [
       qw(acx-pci acx-usb adm8211 agnx airo airo_cs aironet4500_cs),
-      qw(aironet_cs ar5523 ar9170usb arlan arusb_lnx at76c50x_usb ath5k ath6kl ath6kl_usb ath9k ath9k_htc),
+      qw(aironet_cs ar5523 ar9170usb arlan arusb_lnx at76c50x_usb ath10k_pci ath5k ath6kl ath6kl_usb ath9k ath9k_htc),
       qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx bcm_wimax bcma brcm80211 brcmsmac brcmfmac carl9170 com20020_cs),
       qw(dyc_ar5 hostap_cs hostap_pci hostap_plx i2400m_usb ipw2100),
       qw(ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwldvm iwlmvm iwlwifi madwifi_pci),
@@ -75,7 +75,7 @@ our %l = (
       qw(p54usb prism2_cs prism2_pci prism2_usb prism54 qmi_wwan r8180),
       qw(r8187se rtl8188ee r8192_pci r8192s_usb r8192u_usb r8712u rtl8723ae ray_cs rndis_wlan rt2400 rt2400pci rt2500),
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
-      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se rtusb ),
+      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se rtl_pci rtl_usb rtusb),
       qw(rtl8192se rtl8192cu rtl8192de spectrum_cs ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
       qw(wavelan_cs wl wl3501_cs wvlan_cs zd1201 zd1211rw),
       if_(arch() =~ /ppc/, qw(airport)),
@@ -127,7 +127,7 @@ our %l = (
       # note that ata_piix manage RAID devices on ICH6R
       qw(ahci aic94xx ata_adma ata_piix pata_pdc2027x pdc_adma),
       qw(sata_fsl sata_inic162x sata_mv sata_nv sata_promise),
-      qw(sata_qstor sata_sil sata_sil24 sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
+      qw(sata_qstor sata_rcar sata_sil sata_sil24 sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
       # new drivers: old ide drivers ported over libata:
       qw(ata_generic mv-ahci pata_ali pata_amd pata_artop pata_atiixp pata_atp867x),
       qw(pata_bf54x pata_cmd640 pata_cmd64x pata_cs5520 pata_cs5530),
@@ -184,8 +184,8 @@ our %l = (
       if_(arch() !~ /^sparc/, qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket)), # cb_enabler
     ],
     hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-appleir hid-aureal hid-axff hid-belkin
-	    hid-cherry hid-chicony hid-cypress hid-dr hid-drff hid-elecom hid-emsff
-	    hid-ezkey hid-gaff hid-generic hid-gyration hid-holtek-kbd hid-holtekff
+	    hid-cherry hid-chicony hid-cypress hid-dr hid-drff hid-elecom hid-elo hid-emsff
+	    hid-ezkey hid-gaff hid-generic hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse hid-huion
 	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-lenovo-tpkbd
 	    hid-logitech hid-logitech-dj hid-magicmouse hid-microsoft hid-monterey
 	    hid-multilaser hid-multitouch hid-ntrig hid-ortek hid-petalynx hid-picolcd
@@ -262,7 +262,7 @@ our %l = (
     scanner => [ qw(scanner microtek) ],
     firewire => [ qw(snd-firewire-speakers snd-isight snd-scs1x) ],
     gameport => [ qw(cs461x ns558 emu10k1-gp fm801-gp lightning ns558 vortex) ],
-    usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-6fire snd-usb-caiaq snd-usb-usx2y usb-midi) ],
+    usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-6fire snd-usb-caiaq snd-usb-hiface snd-usb-usx2y usb-midi) ],
     webcam => [
         qw(cafe_ccic cpia2 cpia_usb cyber2000fb em28xx et61x251 gspca),
         qw(gspca_benq gspca_conex gspca_cpia1 gspca_etoms
