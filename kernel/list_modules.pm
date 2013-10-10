@@ -169,8 +169,8 @@ our %l = (
 
   bus => 
   {
-    usb => [ qw(bcma-hcd c67x00 dwc3 dwc3-pci ehci-hcd ehci-pci ehci-platform fhci hwa-hc
-		imx21-hcd isp116x-hcd isp1362-hcd isp1760 ohci-hcd oxu210hp-hcd
+    usb => [ qw(bcma-hcd c67x00 dwc3 dwc3-pci ehci-hcd ehci-pci ehci-platform ehci-tegra fhci fusbh200-hcd hwa-hc
+		imx21-hcd isp116x-hcd isp1362-hcd isp1760 ohci-hcd ohci-pci ohci-platform oxu210hp-hcd
 		r8a66597-hcd renesas-usbhs sl811_cs sl811-hcd ssb-hcd u132-hcd
 		uhci-hcd usb-ohci usb-uhci whci-hcd xhci-hcd) ],
     bluetooth => [ qw(ath3k bcm203x bfusb bluecard_cs bpa10x bt3c_cs btusb dtl1_cs) ],
@@ -340,7 +340,7 @@ our %l = (
 
       qw(crc32c crc32c-intel),
       
-      qw(evdev), qw(usblp printer), 'floppy', 'microcode',
+      qw(evdev), qw(usblp printer), 'floppy', 'microcode', 'usb_common'
 
       #- these need checking
       qw(rrunner meye),
