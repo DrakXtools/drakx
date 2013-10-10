@@ -340,7 +340,7 @@ our %l = (
 
       qw(crc32c crc32c-intel),
       
-      qw(evdev), qw(usblp printer), 'floppy', 'microcode', 'usb_common'
+      qw(evdev), qw(usblp printer), 'floppy', 'microcode', 'usb_common',
 
       #- these need checking
       qw(rrunner meye),
