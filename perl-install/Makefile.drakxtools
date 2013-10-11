@@ -4,8 +4,7 @@ include Makefile.config
 .PHONY: install
 
 INLIBDEST_DIRS = c resize_fat
-HAVEINST_DIRS = share/po standalone/po standalone/interactive_http standalone/menu
-HAVEINST_DIRS = share/po standalone/po standalone/interactive_http standalone/menu standalone/polkit/policy
+HAVEINST_DIRS = share/po standalone/po standalone/interactive_http standalone/menu standalone/polkit
 DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) harddrake ../tools/serial_probe
 NAME = libDrakX
 XSETUPLEVEL=40

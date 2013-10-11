@@ -16,7 +16,7 @@ clean:
 	@echo -e "#!/bin/sh\n$(BINDIR)/pkexec $(LIBEXECDIR)/$@ $$""*" > $@
 
 %.policy: %.policy.in
-	intltool-merge --utf8 ../../po $< $@ -x -u -c ../../po/.intltool-merge-cache
+	intltool-merge --utf8 ../po $< $@ -x -u -c ../po/.intltool-merge-cache
 
 install: all
 	install -d $(BINDEST) $(POLKITPOLICYDEST)
