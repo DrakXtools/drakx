@@ -52,8 +52,13 @@ install:
 	mv -f $(SBINDEST)/display_release_notes.pl $(BINDEST)
 	mv -f $(SBINDEST)/localedrake $(BINDEST)
 	# All the things handled by polkit
-	mv -f $(SBINDEST)/drak{auth,boot,clock,font,ups,xservices} $(LIBEXECDEST)
+	mv -f $(SBINDEST)/drak{auth,boot,clock,font,perm,sec,ups,xservices} $(LIBEXECDEST)
 	mv -f $(SBINDEST)/logdrake $(LIBEXECDEST)/draklog
+	mv -f $(SBINDEST)/drakedm $(LIBEXECDEST)/drakdm
+	mv -f $(SBINDEST)/diskdrake $(LIBEXECDEST)/drakdisk
+	mv -f $(SBINDEST)/harddrake2 $(LIBEXECDEST)/drakhardware
+	mv -f $(SBINDEST)/scannerdrake $(LIBEXECDEST)/drakscanner
+
 
 	install -m 644 *.pm $(LIBDEST)
 	for i in $(PMS_DIRS); do install -d $(LIBDEST)/$$i ; install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
@@ -86,16 +91,17 @@ install:
 	mv $(SBINDEST)/convert $(DATADIR)/harddrake
 	mv $(SBINDEST)/service_harddrake $(DATADIR)/harddrake/
 	mv $(SBINDEST)/notify-x11-free-driver-switch $(DATADIR)/harddrake/
-	mv $(SBINDEST)/diskdrake $(SBINDEST)/drakdisk
-	mv $(SBINDEST)/harddrake2 $(SBINDEST)/drakhardware
+	# Better public names
 	mv $(BINDEST)/localedrake $(BINDEST)/draklocale
-	mv $(SBINDEST)/scannerdrake $(SBINDEST)/drakscanner
-	ln -s drakdisk $(SBINDEST)/diskdrake
+	# Compatibility names/links
+	# (ideally everything would be in /usr/bin...)
+	ln -s ../bin/drakdm $(SBINDEST)/drakedm
+	ln -s ../bin/drakdisk $(SBINDEST)/diskdrake
+	ln -s ../bin/drakhardware $(SBINDEST)/harddrake2
+	ln -s ../bin/drakscanner $(SBINDEST)/scannerdrake
 	ln -s drakclock $(BINDEST)/clock.pl
-	ln -s drakhardware $(SBINDEST)/harddrake2
 	ln -s draklocale $(BINDEST)/localedrake
 	ln -s draklog $(BINDEST)/logdrake
-	ln -s drakscanner $(SBINDEST)/scannerdrake
 
 check:
 	rm -f share/po/libDrakX.pot standalone/po/libDrakX-standalone.pot
