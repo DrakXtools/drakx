@@ -13,7 +13,7 @@ clean:
 	rm -f  $(WRAPPERS) $(POLICY)
 
 %: org.mageia.%.policy.in
-	@echo -e "#!/bin/sh\n$(BINDIR)/pkexec $(LIBEXECDIR)/$@ $$""*" > $@
+	@echo -e "#!/bin/sh\nexec $(BINDIR)/pkexec $(LIBEXECDIR)/$@ $$""*" > $@
 
 %.policy: %.policy.in
 	intltool-merge --utf8 ../po $< $@ -x -u -c ../po/.intltool-merge-cache
