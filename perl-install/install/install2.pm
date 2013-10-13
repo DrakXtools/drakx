@@ -702,7 +702,7 @@ sub finish_install() {
     install::steps::cleanIfFailedUpgrade($o);
 
     #- drop urpmi DB if urpmi is not installed:
-    -e "$::prefix/usr/sbin/urpmi.update" or eval { rm_rf("$::prefix/var/lib/urpmi") };
+    -e "$::prefix/usr/sbin/urpmi" or eval { rm_rf("$::prefix/var/lib/urpmi") };
 
     system("chroot", $::prefix, "bash", "-c", $o->{postInstallBeforeReboot}) if $o->{postInstallBeforeReboot};
 
