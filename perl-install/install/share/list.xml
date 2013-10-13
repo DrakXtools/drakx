@@ -236,10 +236,6 @@
   <from expand="command">
     perl -Mlang -I.. -le 'print foreach lang::console_font_files()'
   </from>
-
-  <if set="DEBUG_INSTALL">
-    /etc/termcap
-  </if>
 </from>
 
 <from dir="/usr/share/ldetect-lst">
