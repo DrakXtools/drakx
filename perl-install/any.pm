@@ -1012,7 +1012,7 @@ sub urpmi_add_all_media {
         foreach my $media (qw(Non-free Restricted)) {
             $in->do_pkgs->are_installed("*" . lc($media) . "*") or next;
             foreach my $type (qw(Release Updates)) {
-                run_program::rooted($::prefix, 'urpmi.update', '--no-ignore', "$media $type");
+                run_program::rooted($::prefix, '/usr/libexec/urpmi.update', '--no-ignore', "$media $type");
             }
         }
     }
