@@ -22,7 +22,7 @@ our %l = (
         qw(82596 ac3200 acenic aironet4500_card amd8111e at1700 atl2 atp),
         qw(bcm4400 cassini cs89x0 cx82310_eth de600 de620),
         qw(depca dmfe e2100 eepro eexpress enic eth16i),
-        qw(ewrk3 hp hp-plus hp100),
+        qw(ewrk3 hp hp-plus hp100 i40e),
         qw(iph5526), #- fibre channel
         qw(jme lance ne ni5010 ni52 ni65 nvnet),
         qw(prism2_plx qlge r6040 rcpci rhineget),
@@ -75,8 +75,8 @@ our %l = (
       qw(p54usb prism2_cs prism2_pci prism2_usb prism54 qmi_wwan r8180),
       qw(r8187se rtl8188ee r8192_pci r8192s_usb r8192u_usb r8712u rtl8723ae ray_cs rndis_wlan rt2400 rt2400pci rt2500),
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
-      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se rtl_pci rtl_usb rtusb),
-      qw(rtl8192se rtl8192cu rtl8192de spectrum_cs ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
+      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se r8188eu rtl_pci rtl_usb rtusb),
+      qw(rtl8192se rtl8192cu rtl8192de spectrum_cs sr9700 ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
       qw(wavelan_cs wl wl3501_cs wvlan_cs zd1201 zd1211rw),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
@@ -148,7 +148,7 @@ our %l = (
       if_(arch() !~ /alpha|sparc/,
         # 3w-xxxx drives ATA-RAID, 3w-9xxx and arcmsr drive SATA-RAID
         qw(3w-9xxx 3w-sas 3w-xxxx a320raid aacraid arcmsr cciss cpqarray),
-        qw(cpqfc csiostor DAC960 dpt_i2o gdth hpsa hptiop i2o_block imm ipr ips isci),
+        qw(cpqfc csiostor DAC960 dpt_i2o esas2r gdth hpsa hptiop i2o_block imm ipr ips isci),
         qw(it8212 it821x iteraid megaide megaraid megaraid_mbox),
         qw(megaraid_sas mptfc mptsas mptscsih mptspi pdc-ultra pmcraid ppa),
         qw(qla2100 qla2200 qla2300 qla2322 qla4xxx qla6312 qla6322),
@@ -193,7 +193,7 @@ our %l = (
 	    hid-roccat-isku hid-roccat-kone hid-roccat-koneplus hid-roccat-konepure hid-roccat-kovaplus hid-roccat-lua
 	    hid-roccat-pyra hid-roccat-savu hid-saitek hid-samsung hid-sensor-hub hid-sjoy hid-sony
 	    hid-speedlink hid-steelseries hid-sunplus hid-tivo hid-thingm hid-tmff hid-topseed hid-twinhan
-	    hid-uclogic hid-wacom hid-waltop hid-wiimote hid-zpff hid-zydacron) ],
+	    hid-uclogic hid-wacom hid-waltop hid-wiimote hid-xinmo hid-zpff hid-zydacron) ],
 
    #serial_cs
    #ftl_cs 3c575_cb apa1480_cb epic_cb serial_cb tulip_cb iflash2+_mtd iflash2_mtd
@@ -273,7 +273,7 @@ our %l = (
         gspca_se401 gspca_sn9c2028 gspca_sn9c20x gspca_sonixb
         gspca_sonixj gspca_spca1528 gspca_spca500 gspca_spca501
         gspca_spca505 gspca_spca506 gspca_spca508 gspca_spca561
-        gspca_sq905 gspca_sq905c gspca_sq930x gspca_stk014
+        gspca_sq905 gspca_sq905c gspca_sq930x gspca_stk014 gspca_stk1135
         gspca_stv0680 gspca_stv06xx gspca_sunplus gspca_t613
         gspca_topro gspca_tv8532 gspca_vc032x gspca_vicam
         gspca_xirlink_cit gspca_zc3xx),
