@@ -266,7 +266,7 @@ class Distribution(object):
             if not os.path.exists("%s/media/%s/media_info" % (tmpdir, m.name)):
                 os.mkdir("%s/media/%s/media_info" % (tmpdir, m.name))
             if gpgName:
-                signPackage(gpgName, gpgPass, " ".join(pkgs))
+                #signPackage(gpgName, gpgPass, " ".join(pkgs))
                 os.system("gpg --export --armor %s > %s/media/%s/media_info/pubkey" % (gpgName, tmpdir, m.name))
 
         print color("Writing %s/media/media_info/media.cfg" % tmpdir, GREEN)
