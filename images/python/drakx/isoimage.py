@@ -57,8 +57,9 @@ class IsoImage(object):
         os.system("/usr/bin/time " + cmd)
 
         print color("Applying metadata to iso image written", GREEN)
-        cmd = "xorriso -dev '%s' -boot_image grub patch -boot_image grub bin_path=boot/grub/i386-pc/eltorito.img -boot_image any boot_info_table=on -boot_image any show_status -publisher '%s'  -volset_id '%s' -volid '%s' -preparer_id '%s' -system_id '%s' -application_id '%s' -commit" % \
+        cmd = "xorriso -dev '%s' -boot_image grub patch -boot_image grub bin_path=boot/grub/i386-pc/eltorito.img -boot_image any boot_info_table=on -boot_image any show_status -boot_image grub grub2_boot_info=off -publisher '%s'  -volset_id '%s' -volid '%s' -preparer_id '%s' -system_id '%s' -application_id '%s' -commit" % \
                 (iso, publisher, volumesetid, volumeid, datapreparer, systemid, applicationid)
+        print cmd
         os.system(cmd)
 
 # vim:ts=4:sw=4:et
