@@ -23,7 +23,7 @@ excludelist = []
 for e in ["exclude", "exclude_free", "exclude_ancient", "exclude_tofix", "exclude_nonfree", "exclude_contrib64"]:
     excludelist.append(srcdir + "lists/" + e)
 
-x86_64 = Distribution(config, "x86_64", media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = True)
+x86_64 = Distribution(config, "x86_64", media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = True)#, gpgName="26752624")
 distrib=[x86_64]
 
 image = IsoImage(config, distrib, maxsize=4700)
