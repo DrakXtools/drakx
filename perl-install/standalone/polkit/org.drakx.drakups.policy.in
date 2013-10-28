@@ -4,19 +4,19 @@
 "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 <policyconfig>
 
- <vendor>Mageia</vendor>
- <vendor_url>http://www.mageia.org/</vendor_url>
+ <vendor>Moondrake</vendor>
+ <vendor_url>http://www.moondrake.org/</vendor_url>
 
- <action id="org.mageia.drakclock.pkexec.run">
-    <_description>Run Mageia Date and Time Configuration</_description>
-    <_message>Authentication is required to run Mageia Date and Time Configuration</_message>
+ <action id="org.drakx.drakups.pkexec.run">
+    <_description>Run DrakX UPS Configuration</_description>
+    <_message>Authentication is required to run DrakX UPS Configuration</_message>
     <icon_name>drakconf</icon_name>
     <defaults>
      <allow_any>no</allow_any>
      <allow_inactive>no</allow_inactive>
-     <allow_active>yes</allow_active>
+     <allow_active>auth_admin_keep</allow_active>
     </defaults>
-    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/drakclock</annotate>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/drakups</annotate>
     <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
  </action>
 </policyconfig>

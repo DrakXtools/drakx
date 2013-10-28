@@ -5,14 +5,14 @@ POLKITPOLICYDEST = $(PREFIX)/usr/share/polkit-1/actions
 
 POLICY_IN := $(wildcard *.policy.in)
 POLICY = $(POLICY_IN:.policy.in=.policy)
-WRAPPERS = $(patsubst org.mageia.%.policy,%,$(POLICY))
+WRAPPERS = $(patsubst org.drakx.%.policy,%,$(POLICY))
 
 all: $(WRAPPERS) $(POLICY)
 
 clean:
 	rm -f  $(WRAPPERS) $(POLICY)
 
-%: org.mageia.%.policy.in
+%: org.drakx.%.policy.in
 	@echo -e "#!/bin/sh\nexec $(BINDIR)/pkexec $(LIBEXECDIR)/$@ $$""*" > $@
 
 %.policy: %.policy.in

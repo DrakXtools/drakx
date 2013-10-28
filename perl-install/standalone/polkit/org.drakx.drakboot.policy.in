@@ -4,19 +4,19 @@
 "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 <policyconfig>
 
- <vendor>Mageia</vendor>
- <vendor_url>http://www.mageia.org/</vendor_url>
+ <vendor>Moondrake</vendor>
+ <vendor_url>http://www.moondrake.org/</vendor_url>
 
- <action id="org.mageia.drakhardware.pkexec.run">
-    <_description>Run Mageia Hardware Configuration</_description>
-    <_message>Authentication is required to run Mageia Hardware Configuration</_message>
+ <action id="org.drakx.drakboot.pkexec.run">
+    <_description>Run DrakX Boot Configuration</_description>
+    <_message>Authentication is required to run DrakX Boot Configuration</_message>
     <icon_name>drakconf</icon_name>
     <defaults>
      <allow_any>no</allow_any>
      <allow_inactive>no</allow_inactive>
      <allow_active>auth_admin_keep</allow_active>
     </defaults>
-    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/drakhardware</annotate>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/drakboot</annotate>
     <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
  </action>
 </policyconfig>
