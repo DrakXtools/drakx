@@ -184,7 +184,6 @@ my %menus = (
 
 my %menu_options = (
                     'MODEMS_DETECTION' => [ $menus{options}, N("/Autodetect _modems") ],
-                    'JAZZ_DETECTION' => [ $menus{options}, N("/Autodetect _jaz drives") ],
                     'PARALLEL_ZIP_DETECTION' => [ $menus{options}, N("/Autodetect parallel _zip drives") ],
                     );
 
@@ -199,8 +198,6 @@ my @menu_items =
      [ N("/_File") . N("/_Quit"), N("<control>Q"), \&quit_global, undef, '<Item>' ],
      [ join('', @{$menu_options{MODEMS_DETECTION}}), undef,
        sub { $options{MODEMS_DETECTION} = $check_boxes{MODEMS_DETECTION}->get_active }, undef, '<CheckItem>' ],
-     [ join('', @{$menu_options{JAZZ_DETECTION}}), undef,
-       sub { $options{JAZZ_DETECTION} = $check_boxes{JAZZ_DETECTION}->get_active }, undef, '<CheckItem>' ],
      [ join('', @{$menu_options{PARALLEL_ZIP_DETECTION}}), undef,
        sub { $options{PARALLEL_ZIP_DETECTION} = $check_boxes{PARALLEL_ZIP_DETECTION}->get_active }, undef, '<CheckItem>' ],
      [ $menus{help}, undef, undef, undef, '<Branch>' ],
