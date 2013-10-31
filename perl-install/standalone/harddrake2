@@ -196,53 +196,18 @@ my @menu_items =
     (
      [ N("/_File"), undef, undef, undef, '<Branch>' ],
      [ N("/_File") . N("/_Quit"), N("<control>Q"), \&quit_global, undef, '<Item>' ],
-     [ join('', @{$menu_options{MODEMS_DETECTION}}), undef,
-       sub { $options{MODEMS_DETECTION} = $check_boxes{MODEMS_DETECTION}->get_active }, undef, '<CheckItem>' ],
-     [ join('', @{$menu_options{PARALLEL_ZIP_DETECTION}}), undef,
-       sub { $options{PARALLEL_ZIP_DETECTION} = $check_boxes{PARALLEL_ZIP_DETECTION}->get_active }, undef, '<CheckItem>' ],
+     [ join('', @{$menu_options{MODEMS_DETECTION}}), undef, \&handle_modem_option, undef, '<CheckItem>' ],
+     [ join('', @{$menu_options{PARALLEL_ZIP_DETECTION}}), undef, \&handle_zip_option, undef, '<CheckItem>' ],
      [ $menus{help}, undef, undef, undef, '<Branch>' ],
      if_(-x "/usr/sbin/drakhelp_inst",
-	 [ $menus{help} . N("/_Help"), undef, sub { run_program::raw({ detach => 1 }, 'drakhelp', '--id', 'harddrake') }, undef, '<Item>' ],
+	 [ $menus{help} . N("/_Help"), undef, \&run_help, undef, '<Item>' ],
 	),
-     [ $menus{help} . N("/_Fields description"), undef, sub {
-           if ($current_device) {
-               create_dialog(N("Harddrake help"), 
-                             '<big><b>' . N("Description of the fields:\n\n") . '</b></big>'
-                             . join("\n\n", map {
-                                 my $info = lookup_field($_);
-                                 if_($info->[0], formatAlaTeX(qq(<span foreground="royalblue3">$info->[0]:</span> $info->[1])));
-                             } sort keys %$current_device),
-                             { use_markup => 1, transient => $w->{real_window}, height => 400, scroll => 1 });
-
-           } else {
-               create_dialog(N("Select a device!"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"), { transient => $w->{real_window} });
-           }
-       },
-       undef, '<Item>'
+     [ $menus{help} . N("/_Fields description"), undef, \&fields_help, undef, '<Item>'
      ],
      if_(!-e "/etc/sysconfig/oem",
-	 [ $menus{help} . N("/_Report Bug"), undef, sub { run_program::raw({ detach => 1 }, 'drakbug', '--report', 'harddrake') }, undef, '<Item>' ],
+	 [ $menus{help} . N("/_Report Bug"), undef, \&run_drakbug, undef, '<Item>' ],
 	),
-     [ $menus{help} . N("/_About..."), undef, sub {
-         my $license = formatAlaTeX(translate($::license));
-         $license =~ s/\n/\n\n/sg; # nicer formatting
-         my $w = gtknew('AboutDialog', name => N("Harddrake"),
-                        version => mandrake_release_info()->{version},
-                        copyright => N("Copyright (C) %s by Mandriva", '2001-2008'),
-                        license => $license, wrap_license => 1,
-                        comments => N("This is HardDrake, a %s hardware configuration tool.", $distro_name),
-                        website => 'http://mandrivalinux.com',
-                        website_label => N("Mandriva Linux"),
-                        authors => 'Thierry Vignaud <vignaud@mandriva.com>',
-                        artists => 'Hélène Durosini <ln@mandriva.com>',
-                        translator_credits =>
-                          #-PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-                          N("_: Translator(s) name(s) & email(s)\n"),
-                        transient_for => $::main_window, modal => 1, position_policy => 'center-on-parent',
-                    );
-         $w->show_all;
-         $w->run;
-       }, undef, '<Item>'
+     [ $menus{help} . N("/_About..."), undef, \&about, undef, '<Item>'
      ]
     );
 
@@ -540,11 +505,60 @@ fill_default_text($text);
 
 $w->main;
 
+sub about() {
+    my $license = formatAlaTeX(translate($::license));
+    $license =~ s/\n/\n\n/sg; # nicer formatting
+    my $w = gtknew('AboutDialog', name => N("Harddrake"),
+                   version => mageia_release_info()->{version},
+                   copyright => N("Copyright (C) %s by %s", '2001-2008', 'Mandriva') . "\n" . N("Copyright (C) %s by %s", '2011', N("Mageia")),
+                   license => $license, wrap_license => 1,
+                   comments => N("This is HardDrake, a %s hardware configuration tool.", $distro_name),
+                   website => 'http://www.mageia.org',
+                   website_label => N("Mageia"),
+                   authors => 'Thierry Vignaud <thierry.vignaud.com>',
+                   translator_credits =>
+                     #-PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
+                     N("_: Translator(s) name(s) & email(s)\n"),
+                   transient_for => $::main_window, modal => 1, position_policy => 'center-on-parent',
+               );
+    $w->show_all;
+    $w->run;
+}
+
+sub fields_help() {
+    if ($current_device) {
+        create_dialog(N("Harddrake help"),
+                      '<big><b>' . N("Description of the fields:\n\n") . '</b></big>'
+                      . join("\n\n", map {
+                          my $info = lookup_field($_);
+                          if_($info->[0], formatAlaTeX(qq(<span foreground="royalblue3">$info->[0]:</span> $info->[1])));
+                      } sort keys %$current_device),
+               { use_markup => 1, transient => $w->{real_window}, height => 400, scroll => 1 });
+    } else {
+        create_dialog(N("Select a device!"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"), { transient => $w->{real_window} });
+    }
+}
 
 sub quit_global() {
     kill(15, $pid) if $pid;
     setVarsInSh($conffile, \%options) if !$::testing;
     ugtk3->exit(0);
+}
+
+sub run_drakbug() {
+    run_program::raw({ detach => 1 }, 'drakbug', '--report', 'harddrake');
+}
+
+sub run_help() {
+    run_program::raw({ detach => 1 }, 'drakhelp', '--id', 'harddrake');
+}
+
+sub handle_modem_option() {
+    $options{MODEMS_DETECTION} = $check_boxes{MODEMS_DETECTION}->get_active;
+}
+
+sub handle_zip_option() {
+    $options{PARALLEL_ZIP_DETECTION} = $check_boxes{PARALLEL_ZIP_DETECTION}->get_active;
 }
 
 sub show_hide {
