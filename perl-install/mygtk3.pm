@@ -552,6 +552,18 @@ sub _gtk__ActionGroup {
     $w;
 }
 
+sub _gtk__Builder {
+    my ($w, $opts, $_class, $action) = @_;
+
+    if (!$w) {
+	$w = Gtk3::Builder->new;
+	$w->add_from_file(delete $opts->{file}) if exists $opts->{file};
+	$w->add_from_string(delete $opts->{string}) if exists $opts->{string};
+	$w->connect_signals(undef);
+    }
+    $w;
+}
+
 sub _gtk__UIManager {
     my ($w, $opts, $_class, $action) = @_;
 
