@@ -539,6 +539,34 @@ sub _gtk__WeaknessCheckEntry {
     $w;
 }
 
+sub _gtk__ActionGroup {
+    my ($w, $opts, $_class, $action) = @_;
+
+    if (!$w) {
+	$w = Gtk3::ActionGroup->new(delete $opts->{name});
+	if ($opts->{actions}) {
+	    $w->add_actions(delete $opts->{actions}, undef);
+	    $w->add_toggle_actions(delete $opts->{toggle_actions}, undef) if $opts->{toggle_actions};
+	}
+    }
+    $w;
+}
+
+sub _gtk__UIManager {
+    my ($w, $opts, $_class, $action) = @_;
+
+    if (!$w) {
+	$w = Gtk3::UIManager->new;
+	if ($opts->{actions}) {
+	    $w->insert_action_group(gtknew('ActionGroup', name => 'Actions',
+				    map { exists $opts->{$_} ? ($_ => delete $opts->{$_}) : () } qw(actions toggle_actions)),
+				    0);
+	}
+	$w->add_ui_from_string(delete $opts->{string}) if exists $opts->{string};
+    }
+    $w;
+}
+
 sub _gtk__TextView {
     my ($w, $opts, $_class, $action) = @_;
 	
