@@ -175,16 +175,9 @@ my ($current_device, $current_class, $current_configurator);
 my %sysh = distrib();
 my $distro_name = $sysh{system};
 
-my %menus = (
-             'options' => 
-             #-PO: please keep all "/" characters !!!
-             N("/_Options"),
-             'help' => N("/_Help")
-             );
-
 my %menu_options = (
-                    'MODEMS_DETECTION' => [ $menus{options}, N("/Autodetect _modems") ],
-                    'PARALLEL_ZIP_DETECTION' => [ $menus{options}, N("/Autodetect parallel _zip drives") ],
+                    'MODEMS_DETECTION' => N("Autodetect _modems"),
+                    'PARALLEL_ZIP_DETECTION' => N("Autodetect parallel _zip drives"),
                     );
 
 $ugtk3::wm_icon = "harddrake";
@@ -192,24 +185,42 @@ $w = ugtk3->new(N("Hardware Configuration"));
 # fake diagnostics pragma:
 local $::main_window = $w->{real_window};
 
-my @menu_items = 
-    (
-     [ N("/_File"), undef, undef, undef, '<Branch>' ],
-     [ N("/_File") . N("/_Quit"), N("<control>Q"), \&quit_global, undef, '<Item>' ],
-     [ join('', @{$menu_options{MODEMS_DETECTION}}), undef, \&handle_modem_option, undef, '<CheckItem>' ],
-     [ join('', @{$menu_options{PARALLEL_ZIP_DETECTION}}), undef, \&handle_zip_option, undef, '<CheckItem>' ],
-     [ $menus{help}, undef, undef, undef, '<Branch>' ],
-     if_(-x "/usr/sbin/drakhelp_inst",
-	 [ $menus{help} . N("/_Help"), undef, \&run_help, undef, '<Item>' ],
-	),
-     [ $menus{help} . N("/_Fields description"), undef, \&fields_help, undef, '<Item>'
-     ],
-     if_(!-e "/etc/sysconfig/oem",
-	 [ $menus{help} . N("/_Report Bug"), undef, \&run_drakbug, undef, '<Item>' ],
-	),
-     [ $menus{help} . N("/_About..."), undef, \&about, undef, '<Item>'
-     ]
-    );
+my $has_help = -x "/usr/sbin/drakhelp_inst";
+my $ui = gtknew('UIManager', actions => [
+		    # [name, stock_id, value, label, accelerator, tooltip, callback]
+		    [ 'FileMenu',        undef, N("_File") ],
+		    [ 'Quit', undef, N("_Quit"), N("<control>Q"), undef, \&quit_global ],
+		    [ 'OptionsMenu',        undef, '_Options' ],
+		    [ 'HelpMenu',        undef, '_Help' ],
+		    if_($has_help, [ 'Help', undef, N("_Help"), N("<control>Q"), undef, \&run_help ]),
+		    [ 'Fields description', undef, N("_Fields description"), undef, undef, \&fields_help ],
+		    [ 'Report Bug', undef, N("_Report Bug"), undef, undef, \&run_drakbug ],
+		    [ 'About', undef, N("_About..."), '', undef, \&about ],
+		],
+		toggle_actions => [
+		    [ 'MODEMS_DETECTION', undef, $menu_options{MODEMS_DETECTION}, undef, undef, \&handle_modem_option ],
+		    [ 'PARALLEL_ZIP_DETECTION', undef, $menu_options{PARALLEL_ZIP_DETECTION}, undef, undef, \&handle_zip_option ],
+		],
+		string =>
+		join("\n",
+		     qq(<ui>
+  <menubar name='MenuBar'>
+    <menu action='FileMenu'>
+      <menuitem action='Quit'/>
+    </menu>
+    <menu action='OptionsMenu'>
+      <menuitem action='MODEMS_DETECTION'/>
+      <menuitem action='PARALLEL_ZIP_DETECTION'/>
+    </menu>
+    <menu action='HelpMenu'>),
+		     if_($has_help, "<menuitem action='Help'/>"),
+		     qq(
+      <menuitem action='Fields description'/>
+      <menuitem action='Report Bug'/>
+      <menuitem action='About'/>
+    </menu>
+  </menubar>
+</ui>)));
 
 $in = 'interactive'->vnew('su'); #require_root_capability();
 
@@ -221,7 +232,7 @@ add_icon_path('/usr/share/pixmaps/harddrake2/');
 $::noborderWhenEmbedded = 1;
 
 
-my ($menubar, $factory) = create_factory_menu($w->{real_window}, @menu_items);
+my $menubar = $ui->get_widget('/MenuBar');
 $w->{window}->set_size_request(805, 550) if !$::isEmbedded;
 
 my $tree_model = Gtk3::TreeStore->new("Gtk3::Gdk::Pixbuf", "Glib::String", "Glib::Int");
@@ -338,6 +349,7 @@ $tree->get_selection->signal_connect('changed' => sub {
     $module_cfg_button->hide;
 });
 
+$w->{rwindow}->add_accel_group($ui->get_accel_group);
 # show the main window earlier (so that sub dialogs can use main
 # window's icon and so that no Gtk+ critical message got displayed):
 $w->{rwindow}->show_all;
@@ -473,9 +485,8 @@ $w->{rwindow}->signal_connect(delete_event => \&quit_global);
 $w->{rwindow}->set_position('center') unless $::isEmbedded;
 
 foreach (keys %menu_options) {
-    my $title = strip_first_underscore(@{$menu_options{$_}});
     $options{$_} = 0 unless defined($options{$_}); # force detection by default
-    $check_boxes{$_} = $factory->get_widget("<main>" . $title);
+    $check_boxes{$_} = $ui->get_widget('/MenuBar/OptionsMenu/' . $_);
     $check_boxes{$_}->set_active($options{$_});    # restore saved values
 }
 

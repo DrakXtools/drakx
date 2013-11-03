@@ -43,11 +43,19 @@ unless ($::isEmbedded) {
     
     ### menus definition
     # the menus are not shown but they provides shiny shortcut like C-q
-    create_factory_menu($window->{rwindow}, ( 
-                                             { path => N("/_File"), item_type => '<Branch>' },
-                                             { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback => sub { ugtk3->exit(0) } },
-                                            )
-                       );
+    my $ui = gtknew('UIManager', actions => [
+			# [name, stock_id, value, label, accelerator, tooltip, callback]
+			[ 'FileMenu',        undef, N("_File") ],
+			[ 'Quit', undef, N("_Quit"), N("<control>Q"), undef, sub { ugtk3->exit(0) } ],
+		    ],
+		    string => qq(<ui>
+  <menubar name='MenuBar'>
+    <menu action='FileMenu'>
+      <menuitem action='Quit'/>
+    </menu>
+  </menubar>
+</ui>));
+       $window->{rwindow}->add_accel_group($ui->get_accel_group);
 }
 
 

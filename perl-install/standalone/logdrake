@@ -72,20 +72,23 @@ my $cal_butt = gtksignal_connect(Gtk3::CheckButton->new(N("Show only for the sel
 ### menus definition
 # the menus are not shown
 # but they provides shiny shortcut like C-q (Broken: FIXME)
-my @menu_items = (
-		  { path => N("/_File"), item_type => '<Branch>' },
-		  { path => N("/File/_New"), accelerator => N("<control>N") },
-		  { path => N("/File/_Open"), accelerator => N("<control>O") },
-		  { path => N("/File/_Save"), accelerator => N("<control>S"), callback => \&save },
-		  { path => N("/File/Save _As") },
-		  { path => N("/File/-"), item_type => '<Separator>' },
-		  { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback => \&quit },
-		  { path => N("/_Options"), item_type => '<Branch>' },
-		  { path => N("/Options/Test") },
-		  { path => N("/_Help"), item_type => '<LastBranch>' },
-		  { path => N("/Help/_About...") } 
-		 );
-my $_menubar = $::isEmbedded ? create_factory_menu($my_win->{rwindow}, @menu_items) : undef;
+if ($::isEmbedded) {
+	my $ui = gtknew('UIManager', actions => [
+                   # [name, stock_id, value, label, accelerator, tooltip, callback]
+                   [ 'FileMenu',        undef, N("_File") ],
+                   [ 'Save', undef, N("_Quit"), N("<control>Q"), undef, \&save ],
+                   [ 'Quit', undef, N("_Quit"), N("<control>Q"), undef, \&quit ],
+               ],
+               string => qq(<ui>
+  <menubar name='MenuBar'>
+    <menu action='FileMenu'>
+      <menuitem action='Save'/>
+      <menuitem action='Quit'/>
+    </menu>
+  </menubar>
+</ui>));
+	$my_win->{rwindow}->add_accel_group($ui->get_accel_group);
+}
 ######### menus end
 
 

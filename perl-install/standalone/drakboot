@@ -85,10 +85,20 @@ sub run_boot_window {
         $window->set_border_width(2);
         ### menus definition
         # the menus are not shown but they provides shiny shortcut like C-q
-        my @menu_items = ([ N("/_File"), undef, undef, undef, '<Branch>' ],
-                          [ N("/File/_Quit"), N("<control>Q"), sub { ugtk3->exit(0) }, undef, '<Item>' ],
-                         );
-        create_factory_menu($w->{rwindow}, @menu_items);
+	my $ui = gtknew('UIManager', actions => [
+                   # [name, stock_id, value, label, accelerator, tooltip, callback]
+                   [ 'FileMenu',        undef, N("_File") ],
+                   [ 'Quit', undef, N("_Quit"), N("<control>Q"), undef, sub { ugtk3->exit(0) } ],
+               ],
+               string => qq(<ui>
+  <menubar name='MenuBar'>
+    <menu action='FileMenu'>
+      <menuitem action='Quit'/>
+    </menu>
+  </menubar>
+</ui>));
+	$w->{rwindow}->add_accel_group($ui->get_accel_group);
+
         ######### menus end
     }
     gtkadd($window, gtknew('VBox', children => [
