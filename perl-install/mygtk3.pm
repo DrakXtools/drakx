@@ -596,6 +596,8 @@ sub _gtk__TextView {
 sub _gtk__WebKit_View {
     my ($w, $opts, $_class, $_action) = @_;
     if (!$w) {
+        require Gtk3::WebKit;
+        Gtk3::WebKit->import; # needed for initializing introspection
         $w = Gtk3::WebKit::WebView->new;
     }
 
