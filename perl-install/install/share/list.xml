@@ -150,6 +150,17 @@
   /etc/urpmi/prefer.vendor.list
   /etc/fonts/
   /etc/rpm/macros.d/legacy_compat.macros
+
+  <!-- for gtk+3 that needs dbus to be initialized -->
+  <from dir="share">
+    <to dir="/etc">
+      <!-- abusing '<from expand="command">' -->
+      <from expand="command">
+	  dbus-uuidgen > share/machine-id; echo machine-id
+      </from>
+    </to>
+  </from>
+
 <!--  /usr/share/X11/XKeysymDB -->
   /etc/pango/*/pango.modules
   /usr/LIB/libgdk_pixbuf-2.0.so.0
