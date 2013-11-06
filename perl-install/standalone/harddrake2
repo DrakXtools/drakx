@@ -568,7 +568,7 @@ sub lookup_field {
 
 sub titleFormat {
     my ($title) = @_;
-    [ $title . "\n", { 'weight' => Pango->PANGO_WEIGHT_BOLD, scale => Pango->PANGO_SCALE_LARGE } ];
+    [ $title . "\n", { 'weight' => Pango->PANGO_WEIGHT_BOLD, scale => 1.4399999999999 } ]; # Pango->PANGO_SCALE_LARGE
 }
 
 sub force_rename_field {
