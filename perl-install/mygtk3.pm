@@ -751,13 +751,13 @@ sub _gtk__MDV_Notebook {
         my $filler = gtknew('Image', file => 'left-background-filler.png');
         my $filler_height = $filler->get_pixbuf->get_height;
         my $left_background = gtknew('Image', file => 'left-background.png');
-        my $lf_height = $left_background->{pixbuf}->get_height;
+        my $lf_height = $left_background->get_allocated_height;
         my @right_background = $::isInstall ? 
           gtknew('Image', file => "right-white-background_left_part$suffix", flip => $is_flip_needed)
             : map {
                 gtknew('Image', file => "right-white-background_left_part-$_", flip => $is_flip_needed);
             } 1, 2, 2, 3;
-        my $width1 = $left_background->{pixbuf}->get_width;
+        my $width1 = $left_background->get_allocated_width;
         my $total_width = $width1 + $right_background[0]->get_pixbuf->get_width;
         my $arrow_x = text_direction_rtl() ? $offset/2 - 4 : $width1 - $offset - 3;
         $w = gtknew('HBox', spacing => 0, children => [
