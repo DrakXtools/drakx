@@ -14,6 +14,7 @@ use detect_devices;
 #-INTERN CONSTANT
 #-#####################################################################################
 
+# FIXME: either drop 'doc' option or convert this to CSS!
 #- if we're running for the doc team, we want screenshots with
 #- a good B&W contrast: we'll override values of our theme
 my $theme_overriding_for_doc = q(style "galaxy-default"
@@ -53,13 +54,15 @@ widget "*logo*" style "background-logo"
 );
 
 #------------------------------------------------------------------------------
-sub load_rc {
+sub load_css {
     my ($o, $name) = @_;
 
     my $f = $name;
-    -r $name or $f = find { -r $_ } map { "$_/themes-$name.rc" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__) . '/..');
+    -r $name or $f = find { -r $_ } map { "$_/themes-$name.css" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__) . '/..');
     if ($f) {
-	Gtk3::Rc->parse_string($o->{doc} ? $theme_overriding_for_doc : scalar cat_($f));
+	my $pl = Gtk3::CssProvider->new;
+	$pl->load_from_data($o->{doc} ? $theme_overriding_for_doc : scalar cat_($f));
+	my $cx = Gtk3::StyleContext::add_provider_for_screen(Gtk3::Gdk::Screen::get_default(), $pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
    }
 }
 
@@ -94,7 +97,7 @@ my $root_window;
 sub install_theme {
     my ($o) = @_;
 
-    load_rc($o, $o->{theme} ||= default_theme($o));
+    load_css($o, $o->{theme} ||= default_theme($o));
     load_font($o);
 
     my $win = gtknew('Window', widget_name => 'background', title => 'root window');
