@@ -208,7 +208,7 @@ q(<fontconfig>
 #------------------------------------------------------------------------------
 sub init_sizes {
     my ($o) = @_;
-    ($::rootwidth,  $::rootheight)    = (Gtk3::Gdk->screen_width, Gtk3::Gdk->screen_height);
+    ($::rootwidth,  $::rootheight)    = (Gtk3::Gdk::Screen::width, Gtk3::Gdk::Screen::height);
     $::stepswidth = $::rootwidth <= 640 ? 0 : 196;
     ($::logowidth, $::logoheight) = $::rootwidth <= 640 ? (0, 0) : (800, 75);
     ($o->{windowwidth}, $o->{windowheight}) = ($::rootwidth - $::stepswidth, $::rootheight);
