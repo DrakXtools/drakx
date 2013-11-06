@@ -736,8 +736,14 @@ sub _gtk__MDV_Notebook {
         import_style_ressources();
 
         my ($layout, $selection_arrow, $selection_bar);
-        my $parent_window = delete $opts->{parent_window} || root_window();
-        my $root_height = first($parent_window->get_size);
+        my @size;
+        if ($opts->{parent_window}) {
+            my $pw = delete $opts->{parent_window};
+            @size = $pw->get_allocated_width;
+        } else {
+            @size = root_window_size();
+        }
+        my $root_height = first(@size);
         my $suffix = $root_height == 800 && !$::isStandalone ? '_600' : '_768';
         # the white square is a little bit above the actual left sidepanel:
         my $offset = 20;
