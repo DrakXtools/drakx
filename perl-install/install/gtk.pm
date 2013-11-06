@@ -80,6 +80,7 @@ sub load_font {
     my $font = lang::l2pango_font($o->{locale}{lang});
     my $s = qq(gtk-font-name = $font);
     Gtk3::Rc->parse_string($s);
+    # FIXME: this should be done in /mnt too for forked app such as gurpmi{,.addmedia} (mga#67):
     mkdir_p("/.config/gtk-3.0");
     output("/.config/gtk-3.0/settings.ini", qq([Settings]
 $s
