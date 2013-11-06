@@ -106,7 +106,6 @@ sub install_theme {
     my $win = gtknew('Window', widget_name => 'background', title => 'root window');
     $win->set_type_hint('desktop'); # for matchbox window manager
     $win->realize;
-    mygtk3::set_root_window_background_with_gc($win->style->bg_gc('normal'));
     $root_window = $win;
 }
 
