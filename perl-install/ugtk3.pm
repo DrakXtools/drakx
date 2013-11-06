@@ -349,7 +349,7 @@ sub create_box_with_title {
 	my $scroll = gtknew('ScrolledWindow', child => $wtext, width => $width, height => 200);
 	$scroll->signal_connect(realize => sub {
                                 my $layout = $wtext->create_pango_layout($text);
-                                $layout->set_width(($width - 10) * Pango::SCALE);
+                                $layout->set_width(Pango::units_from_double($width - 10));
                                 $wtext->set_size_request($width,  min(200, second($layout->get_pixel_size) + 10));
                                 $scroll->set_size_request($width, min(200, second($layout->get_pixel_size) + 10));
                                 $o->{rwindow}->queue_resize;
