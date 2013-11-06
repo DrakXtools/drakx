@@ -790,7 +790,7 @@ sub _gtk__MDV_Notebook {
         $w->signal_connect('size-allocate' => sub {
                                my (undef, $requisition) = @_;
                                state $width ||= $right_bg_width;
-                               $box->set_size_request($width, $requisition->height);
+                               $box->set_size_request($width, $requisition->{height});
                            });
         $_->set_property('no-show-all', 1) foreach $selection_bar, $selection_arrow;
         bless($w, 'Gtk3::MDV_Notebook');
@@ -1320,7 +1320,7 @@ sub _create_Window {
 	my ($wi, $he);
 	$w->signal_connect(size_allocate => sub {
 	    my (undef, $event) = @_;
-	    my @w_size = $event->values;
+	    my @w_size = @$event{qw(height width)};
 
 	    # ignore bogus sizing events:
 	    return if $w_size[2] < 5;
@@ -1636,7 +1636,7 @@ sub move_selection {
     my $layout = $w->{layout};
     $layout->{arrow_ydiff} ||=
       ($w->{selection_arrow}->get_pixbuf->get_height - $w->{selection_bar}->get_pixbuf->get_height)/2;
-    my $bar_y = $label->get_allocation->y - ($w->{selection_bar}->get_pixbuf->get_height - $label->allocation->height)/2;
+    my $bar_y = $label->get_allocation->{y} - ($w->{selection_bar}->get_pixbuf->get_height - $label->get_allocation->{height})/2;
     $layout->move($w->{selection_bar}, 0, $bar_y);
     $layout->move($w->{selection_arrow}, $w->{arrow_x}, $bar_y - $layout->{arrow_ydiff}); # arrow is higer
     $_->show foreach $w->{selection_bar}, $w->{selection_arrow};
