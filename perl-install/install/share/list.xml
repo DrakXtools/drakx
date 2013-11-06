@@ -44,7 +44,10 @@
   GModule-2.0.typelib
   GObject-2.0.typelib
   Gtk-3.0.typelib
+  JavaScriptCore-3.0.typelib <!-- needed by WebKit-3.0.typelib -->
   Pango-1.0.typelib
+  Soup-2.4.typelib <!-- needed by WebKit-3.0.typelib -->
+  WebKit-3.0.typelib
   xlib-2.0.typelib
 </from>
 
@@ -128,6 +131,9 @@
 
   <!-- needed by dmraid -->
   libdmraid-events-isw.so
+
+  <!-- needed fro Gtk3-WebKit -->
+  libwebkitgtk-3.0.so.0
 </from>
 </filter>
 
