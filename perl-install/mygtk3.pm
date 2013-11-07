@@ -318,8 +318,6 @@ sub _gtk__Pixbuf {
     $w;
 }
 
-# Image_using_pixmap is rendered using DITHER_MAX which is much better on 16bpp displays
-sub _gtk__Image_using_pixmap { &_gtk__Image }
 sub _gtk__Image {
     my ($w, $opts, $class) = @_;
 
@@ -331,11 +329,7 @@ sub _gtk__Image {
 
         $w->{options} = { flip => delete $opts->{flip} };
 
-        $w->{set_from_file} = $class =~ /using_pixmap/ ? sub { 
-            my ($w, $file) = @_;
-            my $pixmap = mygtk3::pixmap_from_pixbuf($w, gtknew('Pixbuf', file => $file));
-	    $w->set_from_pixmap($pixmap, undef);
-        } : sub { 
+        $w->{set_from_file} = sub { 
             my ($w, $file, $o_size) = @_;
             my $pixbuf = gtknew('Pixbuf', file => $file, if_($o_size, size => $o_size), %{$w->{options}});
             $w->set_from_pixbuf($pixbuf);
