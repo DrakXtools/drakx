@@ -224,7 +224,7 @@ sub ask_standalone_gtk {
     ugtk3->import(qw(:wrappers :create));
 
     my $W = ugtk3->new(N("Services"));
-    my ($x, $y, $w_popup);
+    my ($x, $y, $w_popup) = (0, 0);
     my $nopop = sub { $w_popup and $w_popup->destroy; undef $w_popup };
     my $display = sub { 
 	my ($text) = @_;
