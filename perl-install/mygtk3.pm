@@ -278,6 +278,7 @@ sub _gtk__ProgressBar {
     }
 
     if (my $fraction_ref = delete $opts->{fraction_ref}) {
+	$$fraction_ref ||= 0;
 	my $set = sub { $w->set_fraction($$fraction_ref) };
 	gtkval_register($w, $fraction_ref, $set);
 	$set->();
