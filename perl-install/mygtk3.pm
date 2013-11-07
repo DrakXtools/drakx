@@ -1448,7 +1448,7 @@ sub _allow_scroll_TextView_to_bottom {
     sub {
 	my ($o_force) = @_;
 	my $adjustment = $scrolledWindow->get_vadjustment;
-	if ($o_force || $adjustment->get_property("page_size") + $adjustment->get_value == $adjustment->upper) {
+	if ($o_force || $adjustment->get_property("page_size") + $adjustment->get_value == $adjustment->get_property("upper")) {
 	    flush(); #- one must flush before scrolling to end, otherwise the text just added *may* not be taken into account correctly, and so it doesn't really scroll to end
 	    $textView->scroll_to_mark($textView->get_buffer->get_mark('end'), 0, 1, 0, 1);
 	}
