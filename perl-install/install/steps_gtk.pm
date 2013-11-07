@@ -598,10 +598,10 @@ sub installPackages {
 
     ugtk3::gtkadd($w->{window}, my $box = gtknew('VBox', children_tight => [ 
 	# TODO: allow for both advertising and game?
-	#gtknew('Image_using_pixmap', file_ref => \$advertising_image, show_ref => \$show_advertising),
+	#gtknew('Image', file_ref => \$advertising_image, show_ref => \$show_advertising),
     ]));
 
-    my $digger = new Gtk2::Socket;
+    my $digger = new Gtk3::Socket;
     $frame->add ($digger);
     $frame->set_size_request (640, 400);
     $w->{window}->show_all;
