@@ -315,7 +315,7 @@ sub determine_radian {
 
 sub draw {
     my ($widget, $event) = @_;
-    my ($x, $y, $width, $height) = $event->area->values;
+    my ($x, $y, $width, $height) = $event->area->get_values;
     $widget->get_window->draw_drawable($widget->style->fg_gc('normal'), $pixmap, $x, $y, $x, $y, $width, $height);
     0;
 }
