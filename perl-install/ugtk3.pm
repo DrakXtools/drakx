@@ -241,8 +241,9 @@ sub gtktreeview_children {
     my ($model, $iter) = @_;
     my @l;
     $model or return;
-    for (my $p = $model->iter_children($iter); $p; $p = $model->iter_next($p)) {
-	push @l, $p;
+    my $p = $model->iter_children($iter);
+    while ($model->iter_next($p)) {
+	push @l, $p->copy;
     }
     @l;
 }
@@ -1273,7 +1274,8 @@ sub get_path_str {
 
 sub iter_each_children {
     my ($model, $iter, $f) = @_;
-    for (my $child = $model->iter_children($iter); $child; $child = $model->iter_next($child)) {
+    my $child = $model->iter_children($iter);
+    while ($child = $model->iter_next($child)) {
 	$f->($child);
     }
 }
