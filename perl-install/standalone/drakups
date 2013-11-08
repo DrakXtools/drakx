@@ -201,7 +201,7 @@ sub edit_row {
     $dialog->set_transient_for($w->{real_window});
     $dialog->set_modal(1);
 
-    gtkpack_($dialog->vbox,
+    gtkpack_($dialog->get_child,
              #map {
              #}
             );

@@ -135,7 +135,7 @@ sub pref_dialog() {
         $col->set_min_width((200, 50)[$::i]);
     } (N("Module name"), N("Size"));
     
-    gtkpack_($dialog->vbox,
+    gtkpack_($dialog->get_child,
              0, gtknew('Frame', text => N("Mkinitrd optional arguments"), child => 
                        gtknew('VBox', spacing => 5, children_tight => [
                                  $buttons{force} = gtknew('CheckButton', text => N("force")),

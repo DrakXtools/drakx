@@ -314,7 +314,7 @@ sub row_setting_dialog {
                     });
     my %perms;
 
-    gtkpack_($dlg->vbox,
+    gtkpack_($dlg->get_child,
              0, gtknew('Title2', label => N("Path")),
              0, gtknew('HBox', border_width => 18, children => [
                                 1, $file,

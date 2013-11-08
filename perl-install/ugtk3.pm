@@ -401,7 +401,7 @@ sub create_dialog {
     my $dialog =  gtkset_border_width(_create_dialog($title, $o_options), 10);
     $dialog->set_border_width(10);
     my $text = ref($label) ? $label : $o_options->{use_markup} ? gtknew('WrappedLabel', text_markup => $label) : gtknew('WrappedLabel', text => $label);
-    gtkpack($dialog->vbox,
+    gtkpack($dialog->get_child,
             gtknew('HBox', children => [
                      if_($o_options->{stock},
                          0, Gtk3::Image->new_from_stock($o_options->{stock}, 'dialog'),
