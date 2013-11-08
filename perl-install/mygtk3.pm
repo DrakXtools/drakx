@@ -200,6 +200,7 @@ sub _gtk_any_Button {
 	$w->signal_connect(clicked => delete $opts->{clicked}) if exists $opts->{clicked};
     } else {
 	if (my $active_ref = delete $opts->{active_ref}) {
+	    $$active_ref ||= 0;
 	    my $set = sub { $w->set_active($$active_ref) };
 	    $w->signal_connect(toggled => sub {
 		gtkval_modify($active_ref, $w->get_active, $set);
