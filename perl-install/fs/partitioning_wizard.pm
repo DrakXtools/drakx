@@ -474,7 +474,7 @@ sub display_choices {
                               text => $solutions{$s}[1],
                               alignment => [0, 0]));
         ugtk3::gtkpack($vbox, $item) if defined($item);
-        $button->set_group($oldbutton->get_group) if $oldbutton;
+        $button->join_group($oldbutton) if $oldbutton;
         $oldbutton = $button;
         $button->signal_connect('toggled', sub { $mainw->{sol} = $solutions{$s} if $_[0]->get_active });
         ugtk3::gtkpack2__($choicesbox, $button);
