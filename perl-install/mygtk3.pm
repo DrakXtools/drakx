@@ -889,7 +889,7 @@ sub _gtk_any_Window {
 	    $w->set_type_hint('dialog'); # for matchbox window manager
 	}
 
-	$w->set_modal(delete $opts->{modal}) if exists $opts->{modal};
+	$w->set_modal(to_bool(delete $opts->{modal})) if exists $opts->{modal};
 	$opts->{transient_for} ||= $::main_window if $::main_window;
 	$w->set_modal(1) if exists $opts->{transient_for};
 	$w->set_transient_for(delete $opts->{transient_for}) if exists $opts->{transient_for};
@@ -1038,7 +1038,7 @@ sub _gtk__AboutDialog {
         $w->set_documenters(delete $opts->{documenters}) if exists $opts->{documenters};
         $w->set_translator_credits(delete $opts->{translator_credits}) if exists $opts->{translator_credits};
         $w->set_artists(delete $opts->{artists}) if exists $opts->{artists};
-        $w->set_modal(delete $opts->{modal}) if exists $opts->{modal};
+        $w->set_modal(to_bool(delete $opts->{modal})) if exists $opts->{modal};
         $w->set_transient_for(delete $opts->{transient_for}) if exists $opts->{transient_for};
         $w->set_position(delete $opts->{position_policy}) if exists $opts->{position_policy};
     }

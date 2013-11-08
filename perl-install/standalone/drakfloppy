@@ -122,7 +122,7 @@ sub pref_dialog() {
     $tree_model = Gtk3::TreeStore->new(("Glib::String") x 2, "Glib::Int");
     $tree = Gtk3::TreeView->new_with_model($tree_model);
     $tree->set_headers_visible(0);
-    $tree->append_column(Gtk3::TreeViewColumn->new_with_attributes(undef, Gtk3::CellRendererText->new, 'text' => 0));
+    $tree->append_column(Gtk3::TreeViewColumn->new_with_attributes("", Gtk3::CellRendererText->new, 'text' => 0));
     $tree->signal_connect('row-expanded', \&expand_tree);
     $tree->get_selection->signal_connect('changed' => \&selected_tree);
 
