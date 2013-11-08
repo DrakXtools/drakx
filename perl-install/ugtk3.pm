@@ -412,7 +412,7 @@ sub create_dialog {
            );
 
     if ($o_options->{cancel}) {
-	$dialog->action_area->pack_start(
+	$dialog->get_action_area->pack_start(
 	    gtknew('Button', text => N("Cancel"),
 		   clicked => sub { $ret = 0; $dialog->destroy; Gtk3->main_quit },
 		   can_default => 1), 
@@ -421,7 +421,7 @@ sub create_dialog {
 
     my $button = gtknew('Button', text => N("Ok"), can_default => 1,
 			clicked => sub { $ret = 1; $dialog->destroy; Gtk3->main_quit });
-    $dialog->action_area->pack_start($button, 1, 1, 0);
+    $dialog->get_action_area->pack_start($button, 1, 1, 0);
     $button->grab_default;
 
     $dialog->set_has_separator(0);

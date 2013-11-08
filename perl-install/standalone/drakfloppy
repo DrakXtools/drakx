@@ -180,7 +180,7 @@ sub pref_dialog() {
     $remove_but->set_sensitive(scalar @modules);
     @temp_modules = ();
 
-    gtkadd($dialog->action_area,
+    gtkadd($dialog->get_action_area,
            create_okcancel({
                             cancel_clicked => sub { $dialog->destroy },
                             ok_clicked => sub { 

@@ -206,7 +206,7 @@ sub edit_row {
              #}
             );
 
-    gtkadd($dialog->action_area,
+    gtkadd($dialog->get_action_area,
            gtksignal_connect(Gtk3::Button->new(N("Ok")), clicked => sub {
                                  # create new item if needed (that is when adding a new one) at end of list
                                  $iter ||= $model->append;

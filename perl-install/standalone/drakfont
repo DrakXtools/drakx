@@ -615,7 +615,7 @@ sub dialog {
     $dialog->signal_connect(delete_event => \&exitdialog);
     $dialog->set_size_request(@{$o_options->{size}}) if ref $o_options->{size};
     gtkpack_($dialog->get_child, @$widgets);
-    gtkpack($dialog->action_area, @$buttons) if $buttons;
+    gtkpack($dialog->get_action_area, @$buttons) if $buttons;
     $dialog->show_all;
     if ($o_main_loop) {
       gtkflush();

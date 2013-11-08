@@ -362,7 +362,7 @@ sub row_setting_dialog {
 
     $dlg->set_has_separator(0);
 
-    gtkadd($dlg->action_area, 
+    gtkadd($dlg->get_action_area, 
            create_okcancel(my $w =
                            {
                             cancel_clicked => sub { $dlg->destroy },
