@@ -1174,6 +1174,7 @@ sub ask_browse_tree_info_given_widgets {
     });
     $w->{tree}->signal_connect(button_press_event => sub {  #- not too good, but CellRendererPixbuf does not have the needed signals :(
 	my (undef, $event) = @_;
+	return if $event =~ /Gtk3::Gdk::Event=/;
 	my ($path, $column) = $w->{tree}->get_path_at_pos($event->x, $event->y);
 	if ($path && $column) {
 	    $column->{is_pix} and $mouse_toggle_pending = $w->{tree_model}->get($w->{tree_model}->get_iter($path), 0);
