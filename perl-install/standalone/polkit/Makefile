@@ -13,7 +13,7 @@ clean:
 	rm -f  $(WRAPPERS) $(POLICY)
 
 %: org.drakx.%.policy.in
-	@echo -e "#!/bin/sh\nexec $(BINDIR)/pkexec $(LIBEXECDIR)/$@ $$""*" > $@
+	@echo -e '#!/bin/sh\nif  [[ "$(id -u)" != "0" ]] ; then" >\n    exec $(BINDIR)/pkexec $(LIBEXECDIR)/$@ $$""*\nelse\n    exec $(LIBEXECDIR)/$@ $$""*\nfi\n' > $@
 
 %.policy: %.policy.in
 	intltool-merge --utf8 ../po $< $@ -x -u -c ../po/.intltool-merge-cache
