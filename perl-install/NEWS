@@ -3,7 +3,8 @@ Version 14.52, 12 January 2014, by Per Øyvind Karlsen
 - fix issue with ldetect & autodetection of gfx adapters etc. (fixes omv#422)
 
 Version 14.51, 29 October 2013, by Per Øyvind Karlsen
-
+- dont remove radeon-firmware or any network related firmwares as we dont
+  know when some hw gets plugged that needs it
 - fix path to urpmi.update (so it works without mgaonline installed mga#11125)
 - recognize new kernel-3.12 drivers
 - wrap more standalone tools in polkit (mga#11125, mga#11418)
