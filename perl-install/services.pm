@@ -242,7 +242,7 @@ sub ask_standalone_gtk {
 	$label->set_label($started ? N("running") : N("stopped"));
     };
     my $b = Gtk3::EventBox->new;
-    $b->set_events('pointer_motion_mask');
+    $b->set_events(${ Gtk3::Gdk::EventMask->new("pointer_motion_mask") });
     gtkadd($W->{window}, gtkadd($b, gtkpack_($W->create_box_with_title,
 	0, mygtk3::gtknew('Title1', label => N("Services and daemons")),
 	1, gtkset_size_request(create_scrolled_window(create_packtable({ col_spacings => 10, row_spacings => 3 },
