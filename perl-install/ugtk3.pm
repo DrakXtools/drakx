@@ -1542,7 +1542,7 @@ sub RENDER { # not that efficient...
       ? 'selected'
       : 'active';
   } else {
-    $state = $widget->state eq 'insensitive'
+    $state = $widget->get_state eq 'insensitive'
       ? 'insensitive'
       : 'normal';
   }
