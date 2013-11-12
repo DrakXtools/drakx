@@ -171,6 +171,7 @@ sub _gtk_any_Button {
 	  delete $opts->{mnemonic} ? "Gtk3::$class"->new_with_mnemonic(@radio_options, delete $opts->{text} || '') :
 	    $opts->{text} ? "Gtk3::$class"->new_with_label(@radio_options, delete $opts->{text} || '') :
            "Gtk3::$class"->new(@radio_options);
+	$w->join_group(delete $opts->{join}) if $opts->{join};
 
 	$w->{format} = delete $opts->{format} if exists $opts->{format};
     }
