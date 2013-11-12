@@ -316,7 +316,7 @@ sub determine_radian {
 sub draw {
     my ($widget, $event) = @_;
     my ($x, $y, $width, $height) = $event->area->get_values;
-    $widget->get_window->draw_drawable($widget->style->fg_gc('normal'), $pixmap, $x, $y, $x, $y, $width, $height);
+    $widget->get_window->draw_drawable($widget->get_style->fg_gc('normal'), $pixmap, $x, $y, $x, $y, $width, $height);
     0;
 }
 
@@ -344,15 +344,15 @@ sub Repaint {
     my $dRadians_hour_real = $dRadians_hour + $dRadians_min / 12;
     my $dRadians_min_real  = POSIX::floor($dRadians_min / $PI * 30) * $PI / 30;
     my $dRadians_sec_real  = $dRadians_sec;
-    my $gc = $drawing_area->style->white_gc;
+    my $gc = $drawing_area->get_style->white_gc;
     # fix race on ugtk3->exit that causes a crash (#33894)
     return 0  if !$gc;
-    $pixmap->draw_rectangle($drawing_area->style->white_gc, 1, 0, 0, $width, $height);
+    $pixmap->draw_rectangle($drawing_area->get_style->white_gc, 1, 0, 0, $width, $height);
     my ($midx, $midy) = ($width / 2, $height / 2);
     $radius = ($midx < $midy ? $midx : $midy) - 10;
 
-    my $gray_gc  = $drawing_area->style->bg_gc('normal');
-    my $black_gc = $drawing_area->style->black_gc;
+    my $gray_gc  = $drawing_area->get_style->bg_gc('normal');
+    my $black_gc = $drawing_area->get_style->black_gc;
     foreach ([ $gray_gc, 5 ], [ $black_gc, 0 ]) {
       &DrawTickAt($pixmap,  $_->[0], $midx, $midy, $_->[1]);
       &DrawHour($pixmap, $_->[0], $midx, $midy, $dRadians_hour_real, $_->[1]);

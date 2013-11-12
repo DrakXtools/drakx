@@ -1583,7 +1583,7 @@ sub pixmap_from_pixbuf {
     my $window = $widget->get_window or internal_error("you can't use this function if the widget is not realised");
     my ($width, $height) = ($pixbuf->get_width, $pixbuf->get_height);
     my $pixmap = Gtk3::Gdk::Pixmap->new($window, $width, $height, $window->get_depth);
-    $pixbuf->render_to_drawable($pixmap, $widget->style->fg_gc('normal'), 0, 0, 0, 0, $width, $height, 'max', 0, 0);
+    $pixbuf->render_to_drawable($pixmap, $widget->get_style->fg_gc('normal'), 0, 0, 0, 0, $width, $height, 'max', 0, 0);
     $pixmap;
 }
 
