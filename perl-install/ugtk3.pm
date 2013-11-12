@@ -1556,13 +1556,13 @@ sub RENDER { # not that efficient...
   my ($x_offset, $y_offset, $_width, $_height) = calc_size($cell, $layout);
   my $pixbuf = $cell->get('pixbuf');
   my ($pwidth, $pheight) = pixbuf_size($cell);
-  my $txt_offset = $cell_area->x + $x_offset + $x_padding * 2 + $pwidth;
+  my $txt_offset = $cell_area->{x} + $x_offset + $x_padding * 2 + $pwidth;
 
   if ($pixbuf) {
       $pixbuf->render_to_drawable($window, $widget->style->fg_gc('normal'), 
                                   0, 0,
-                                  $is_rtl ? $cell_area->width - $cell_area->x - $pwidth : $cell_area->x ,#+ $x_padding,
-                                  $cell_area->y, #+ $y_padding,
+                                  $is_rtl ? $cell_area->{width} - $cell_area->{x} - $pwidth : $cell_area->{x} ,#+ $x_padding,
+                                  $cell_area->{y}, #+ $y_padding,
                                   $pwidth, $pheight, 'none', 0, 0);
   }
   $widget->get_style->paint_layout($window,
@@ -1571,8 +1571,8 @@ sub RENDER { # not that efficient...
                                        $cell_area,
                                        $widget,
                                        "cellrenderertext",
-                                       $is_rtl ? $cell_area->width - $txt_width - $txt_offset : $txt_offset,
-                                       $cell_area->y + $y_offset + $y_padding,
+                                       $is_rtl ? $cell_area->{width} - $txt_width - $txt_offset : $txt_offset,
+                                       $cell_area->{y} + $y_offset + $y_padding,
                                        $layout);
 
 }
