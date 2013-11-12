@@ -866,7 +866,10 @@ sub ask_user_and_root {
 	$id >= 500 or $in->ask_yesorno('', N("%s should be above 500. Accept anyway?", $name)) or return;
 	'ok';
     };
-    my $ret = $in->ask_from_(
+    
+    my $rootret = 0;
+    if ($superuser) {
+    $rootret = $in->ask_from_(
         { title => N("User management"),
           interactive_help_id => 'addUser',
 	  if_($::isInstall && $superuser, cancel => ''),
@@ -881,6 +884,21 @@ sub ask_user_and_root {
 	    validate => sub { authentication::check_given_password($in, $superuser, 2 * $security) } },
 	  { label => N("Password (again)"), val => \$superuser->{password2}, hidden => 1, alignment => 'right' },
               ) : (),
+	  ],
+      );
+      } else {
+        $rootret = 1;
+      }
+      
+    my $userret = 0;
+    
+    if ($rootret){
+    
+    $userret = $in->ask_from_(
+        { title => N("User management"),
+          interactive_help_id => 'addUser',
+	  if_($::isInstall && $superuser, cancel => ''),
+        }, [ 
 	  { label => N("Enter a user"), title => 1 }, if_($names, { label => $names }),
            if_($security <= 3 && !$options{noicons} && @icons,
 	  { label => N("Icon"), val => \ ($u->{icon} ||= 'default'), list => \@icons, icon2f => \&face2png,
@@ -908,6 +926,7 @@ sub ask_user_and_root {
                ),
 	  ],
     );
+    }
 
     if ($xguest && !is_xguest_installed()) {
         $in->do_pkgs->ensure_is_installed('xguest', '/etc/security/namespace.d/xguest.conf');
@@ -919,7 +938,7 @@ sub ask_user_and_root {
 
     push @$users, $u if $u->{name};
 
-    $ret && $u;
+    $rootret && $userret && $u;
 }
 
 sub sessions() {
