@@ -716,7 +716,7 @@ sub _gtk__Expander {
     if ($w) {
 	$w->set_label(delete $opts->{text}) if exists $opts->{text};
     } else {
-	$w = Gtk3::Expander->new(delete $opts->{text});
+	$w = Gtk3::Expander->new(delete $opts->{text} || '');
     }
 
     $w->signal_connect(activate => delete $opts->{activate}) if exists $opts->{activate};
