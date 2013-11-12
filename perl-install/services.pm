@@ -224,18 +224,6 @@ sub ask_standalone_gtk {
     ugtk3->import(qw(:wrappers :create));
 
     my $W = ugtk3->new(N("Services"));
-    my ($x, $y, $w_popup) = (0, 0);
-    my $nopop = sub { $w_popup and $w_popup->destroy; undef $w_popup };
-    my $display = sub { 
-	my ($text) = @_;
-	$nopop->(); 
-	gtkshow(gtkadd($w_popup = Gtk3::Window->new('popup'),
-		       gtksignal_connect(gtkadd(Gtk3::EventBox->new,
-						gtkadd(gtkset_shadow_type(Gtk3::Frame->new, 'etched_out'),
-						       gtkset_justify(Gtk3::Label->new($text), 'left'))),
-					 button_press_event => sub { $nopop->() }
-					)))->move($x, $y) if $text;
-    };
     my $update_service = sub {
 	my ($service, $label) = @_;
 	my $started = is_service_running($service);
@@ -253,9 +241,8 @@ sub ask_standalone_gtk {
                 $infos ||= N("No additional information\nabout this service, sorry.");
 		my $label = gtkset_justify(Gtk3::Label->new, 'left');
                 $update_service->($service, $label) if !$is_xinetd_service;
-		[ gtkpack__(Gtk3::HBox->new(0,0), $_),
+		[ gtkpack__(Gtk3::HBox->new(0,0), gtkset_tip(Gtk3::Label->new($_), $infos)),
 		  gtkpack__(Gtk3::HBox->new(0,0), $label),
-		  gtkpack__(Gtk3::HBox->new(0,0), gtksignal_connect(Gtk3::Button->new(N("Info")), clicked => sub { $display->($infos) })),
 
                   gtkpack__(Gtk3::HBox->new(0,0), gtkset_active(gtksignal_connect(
                           Gtk3::CheckButton->new($is_xinetd_service ? N("Start when requested") : N("On boot")),
@@ -274,7 +261,6 @@ sub ask_standalone_gtk {
 			      local $_ = `GP_LANG="UTF-8" service $service $action 2>&1`; s/\033\[[^mG]*[mG]//g;
 			      c::set_tagged_utf8($_);
 			      $update_service->($service, $label);
-			      $display->($_);
 			  })) if !$is_xinetd_service;
 		  } (N_("Start"), N_("Stop"))
 		];
@@ -283,10 +269,6 @@ sub ask_standalone_gtk {
             0, gtkpack(gtkset_border_width(Gtk3::HBox->new(0,0),5), $W->create_okcancel)
             ))
 	  );
-    $b->signal_connect(motion_notify_event => sub { my ($w, $e) = @_;
-						    my ($ox, $oy) = $w->get_window->get_origin;
-						    $x = $e->x+$ox; $y = $e->y+$oy });
-    $b->signal_connect(button_press_event => sub { $nopop->() });
     $::isEmbedded and gtkflush();
     $W->main or return;
     $on_services;
