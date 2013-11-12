@@ -255,7 +255,13 @@ $text->set_wrap_mode('word');
 $frame->set_size_request(300, 450) unless $::isEmbedded;
 #    $tree->set_column_auto_resize(0, 1);
 my (@data, @configurators);
-$tree->append_column(my $textcolumn = Gtk3::TreeViewColumn->new_with_attributes('', Gtk3::MDV::CellRendererPixWithLabel->new, 'pixbuf' => 0, label => 1));
+$tree->append_column(my $textcolumn = Gtk3::TreeViewColumn->new);
+$textcolumn->pack_start(my $img_renderer = Gtk3::CellRendererPixbuf->new, 0);
+$textcolumn->set_attributes($img_renderer, pixbuf => 0);
+
+$textcolumn->pack_start(my $text_renderer = Gtk3::CellRendererText->new, 1);
+$textcolumn->set_attributes($text_renderer, text => 1);
+
 $tree->set_headers_visible(0);
 
 sub fill_default_text {
