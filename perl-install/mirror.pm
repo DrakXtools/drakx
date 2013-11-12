@@ -116,7 +116,7 @@ sub mirrors_raw {
     #- http://wiki.mandriva.com/en/Product_id
     my $type = lc($product_id->{type}); $type =~ s/\s//g;
     my $list;
-    if ($product_id->{branch} == "Devel") {
+    if ($product_id->{branch} eq "Devel") {
         $list = "http://downloads.openmandriva.org/mirrors/cooker.$product_id->{arch}.list?product=$product_id->{product}";
     } else {
         $list = "http://downloads.openmandriva.org/mirrors/openmandriva.$product_id->{version}.$product_id->{arch}.list?product=$product_id->{product}";
