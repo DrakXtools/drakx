@@ -1,3 +1,9 @@
+- polkit: fix wrappers to properly escape arguments when calling the binary
+
+Version 15.72.2 - 11 November 2013
+
+- properly escape $$UID
+- use $$UID instead of $$(id -u)
 - use $UID instead of $(id -u)
 - use /usr/libexec/drakrpm-addmedia directly in stage2 (colin, #11319)
 - don't force default color depth as some gpus won't necessary support 16bpp
