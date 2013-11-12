@@ -1,0 +1,22 @@
+#!/bin/sh
+cat <<EOF
+You can now type "run" in order to start the installer from within the debugger.
+If it segfaults, you can:
+- go back to tty2 by pressing Alt+Ctlr+F2.
+- type "gcore" in order to generate a core file
+- type "exit" to go back to the shell.
+- you can then:
+  o either plug a USB key to your physical/virtual machine and copy the
+    core.XXXX file on it
+  o copy it to /mnt if you already passed the partitionning step ;
+    you can later retrieve it from another OS (dual boot) or using guestfish if
+    it's a virtual machine
+
+On a real Moondrake system, you can then install the needed debuginfo packages and
+get a proper stack trace with GDB. You would probably need at least the
+following packages:
+  urpmi {glibc,perl{,-Glib,-Gtk2},glib2.0,gtk+2.0}-debuginfo
+
+
+EOF
+exec gdb -q --args perl /usr/bin/install2
