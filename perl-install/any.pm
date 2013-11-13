@@ -973,11 +973,18 @@ sub sessions_with_order() {
 sub urpmi_add_all_media {
     my ($in, $o_previous_release) = @_;
 
-    my $binary = find { whereis_binary($_, $::prefix) } if_(check_for_xserver(), 'gurpmi.addmedia'), 'urpmi.addmedia' or return;
+    my $binary = find { whereis_binary($_, $::prefix) } if_(check_for_xserver(), 'gurpmi.addmedia'), 'urpmi.addmedia';
+    if (!$binary) {
+	log::l("urpmi.addmedia not found!");
+	return;
+    }
     
     #- configure urpmi media if network is up
     require network::tools;
-    return if !network::tools::has_network_connection();
+    if (!network::tools::has_network_connection()) {
+	log::l("no network connexion!");
+	return;
+    }
     my $wait;
     my @options = ('--distrib', '--mirrorlist', '$MIRRORLIST');
     if ($binary eq 'urpmi.addmedia') {
