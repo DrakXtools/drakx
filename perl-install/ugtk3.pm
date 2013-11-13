@@ -927,8 +927,8 @@ sub ask_browse_tree_info {
 				     ) ]),
 		    0, Gtk3::HSeparator->new,
 		    0, my $status = gtknew('Label'),
-		    if_($common->{auto_deps},
-		        0, gtknew('CheckButton', text => $common->{auto_deps}, active_ref => \$common->{state}{auto_deps})
+		    ($common->{auto_deps} ?
+		        (0, gtknew('CheckButton', text => $common->{auto_deps}, active_ref => \$common->{state}{auto_deps})) : ()
 		    ),
 		    0, Gtk3::HSeparator->new,
 		    0, my $box2 = gtknew('HBox', spacing => 10),
