@@ -1440,8 +1440,8 @@ sub set_style {
 
 # used by install::steps_gtk::installPackages()
 sub update_text {
-    my ($darea) = @_;
-    $darea->queue_draw;
+    my ($banner) = @_;
+    $banner->queue_draw;
 }
 
 sub new {
