@@ -120,7 +120,7 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
                                                             #verify that we have a valid hostname (thx sam)
                                                             $choosed_serv =~ s/[^-a-zA-Z0-9.]//g;
                                                             my $sync_ok;
-                                                            if ($ntpd == "chronyd") {
+                                                            if ($ntpd eq "chronyd") {
                                                                 system('systemctl', 'start', "$ntpd.service");
                                                                 # Wait up to 30s for sync
                                                                 $sync_ok = !system('chronyc', 'waitsync', '30', '0.1');
