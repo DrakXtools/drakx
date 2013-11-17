@@ -23,8 +23,8 @@ my $its_reset = 0;
 
 $ugtk2::wm_icon = "/usr/share/mcc/themes/default/time-mdk.png";
 
-my $ntpfile = '/etc/chrony.conf';
-my $ntpdsystemdlock = '/sys/fs/cgroup/systemd/system.slice/chronyd.service';
+my $ntpd = $timezone::ntp . 'd';
+my $ntpfile = '/etc/' . $timezone::ntp . '.conf';
 
 my $my_win = ugtk2->new(N("Date, Clock & Time Zone Settings"));
 
@@ -76,7 +76,7 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
                                                                            0, gtksignal_connect(gtkset_active($check_ntp = gtknew('CheckButton', text => N("Enable Network Time Protocol")), $mode),  clicked => sub { 
                                                                                                     $mode = !$mode; 
                                                                                                     $hb_ntp->set_sensitive($mode);
-                                                                                                    if ($mode == 1 && !$in->do_pkgs->is_installed('chrony')) {
+                                                                                                    if ($mode == 1 && !$in->do_pkgs->is_installed('ntp') && !$in->do_pkgs->is_installed('chrony')) {
                                                                                                         install_ntp();
                                                                                                     }
                                                                                                 }),
@@ -115,13 +115,21 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
                                                                 return;
                                                             }
                                                             timezone::set_ntp_server($choosed_serv);
-                                                            system(qw(systemctl enable chronyd.service));
-                                                            # FIXME: Change to use systemctl when will not support old iniscript anymore
-                                                            system(qw(systemctl stop chronyd.service));
+                                                            system('systemctl', 'enable', "$ntpd.service");
+                                                            system('systemctl', 'stop', "$ntpd.service");
                                                             #verify that we have a valid hostname (thx sam)
                                                             $choosed_serv =~ s/[^-a-zA-Z0-9.]//g;
-							    if (!system("systemctl", "start", "chronyd.service")) {
-								system(qw(systemctl restart chrony-wait.service));
+                                                            my $sync_ok;
+                                                            if ($ntpd == "chronyd") {
+                                                                system('systemctl', 'start', "$ntpd.service");
+                                                                # Wait up to 30s for sync
+                                                                $sync_ok = !system('chronyc', 'waitsync', '30', '0.1');
+                                                                system('systemctl', 'stop', "$ntpd.service") if (!$sync_ok);
+                                                            } else {
+                                                                $sync_ok = !system('/usr/sbin/ntpdate', $choosed_serv);
+                                                                system('systemctl', 'start', "$ntpd.service") if ($sync_ok);
+                                                            }
+							    if ($sync_ok) {
 								update_time(); #- get the new time before updating the hwclock
 								$need_date = 0;
 							    } else {
@@ -133,9 +141,9 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
                                                                 }, []) or return;
 							    }
                                                         } else {
-							    if (-e $ntpdsystemdlock) {
-								system(qw(systemctl stop chronyd.service));
-								system(qw(systemctl disable chronyd.service));
+							    if (is_ntp_daemon_running()) {
+								system('systemctl', 'stop', "$ntpd.service");
+								system('systemctl', 'disable', "$ntpd.service");
 							    }
 							}
 							if ($need_date) {
@@ -168,7 +176,7 @@ $time_box->set_direction('ltr');
 
 my $servers = get_server();
 $combo_ntpserver->set_popdown_strings(@$servers);
-if (-e $ntpfile && -e $ntpdsystemdlock) {
+if (-e $ntpfile && is_ntp_daemon_running()) {
     $ntp = timezone::ntp_server();
     $ntp and ntp_widget_state(1);
     my $fullntp = $ntp;
@@ -234,6 +242,9 @@ sub install_ntp() {
     $my_win->{window}->set_sensitive(0);
     $in->do_pkgs->ensure_is_installed('chrony') or ntp_widget_state(0);
     $my_win->{window}->set_sensitive(1);
+}
+sub is_ntp_daemon_running() {
+    !system("systemctl is-active $ntpd.service >/dev/null");
 }
 sub get_server() {
     my $servs = timezone::ntp_servers();

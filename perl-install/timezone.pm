@@ -24,15 +24,20 @@ sub read() {
     { timezone => $t{ZONE}, UTC => text2bool($t{UTC}) };
 }
 
-my $ntp_conf_file = "/etc/chrony.conf";
+our $ntp = "chrony";
+my $servername_config_suffix = " iburst";
+unless (-f $::prefix . "/etc/" . $ntp . ".conf") {
+    $ntp = "ntp";
+    $servername_config_suffix = "";
+}
 
 sub ntp_server() {
-    find { $_ ne '127.127.1.0' } map { if_(/^\s*server\s+(\S*)/, $1) } cat_($::prefix . $ntp_conf_file);
+    find { $_ ne '127.127.1.0' } map { if_(/^\s*server\s+(\S*)/, $1) } cat_($::prefix . "/etc/" . $ntp . ".conf");
 }
 
 sub set_ntp_server {
     my ($server) = @_;
-    my $f = $::prefix . $ntp_conf_file;
+    my $f = $::prefix . "/etc/" . $ntp . ".conf";
     -f $f or return;
 
     my $pool_match = qr/\.pool\.ntp\.org$/;
@@ -41,13 +46,16 @@ sub set_ntp_server {
     my $added = 0;
     substInFile {
         if (/^#?\s*server\s+(\S*)/ && $1 ne '127.127.1.0') {
-            $_ = $added ? $_ =~ $pool_match ? undef : "#server $1\n" : join('', map { "server $_ iburst\n" } @servers);
+            $_ = $added ? $_ =~ $pool_match ? undef : "#server $1\n" : join('', map { "server $_$servername_config_suffix\n" } @servers);
             $added = 1;
         }
     } $f;
+    if ($ntp eq "ntp") {
+	output_p("$::prefix/etc/ntp/step-tickers", join('', map { "$_\n" } @servers));
+    }
 
     require services;
-    services::set_status('chronyd', to_bool($server), $::isInstall);
+    services::set_status($ntp . 'd', to_bool($server), $::isInstall);
 }
 
 sub write {

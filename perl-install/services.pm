@@ -23,6 +23,8 @@ atd => N_("Runs commands scheduled by the at command at the time specified when
 at was run, and runs batch commands when the load average is low enough."),
 'avahi-deamon' => N_("Avahi is a ZeroConf daemon which implements an mDNS stack"),
 cpupower => N_("Set CPU powersafe mode"),
+chronyd => N_("An NTP client/server"),
+cpufreq => N_("Set CPU frequency settings"),
 crond => N_("cron is a standard UNIX program that runs user-specified programs
 at periodic scheduled times. vixie cron adds a number of features to the basic
 UNIX cron, including better security and more powerful configuration options."),
