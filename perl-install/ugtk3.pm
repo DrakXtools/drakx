@@ -1440,8 +1440,9 @@ sub set_style {
 
 # used by install::steps_gtk::installPackages()
 sub update_text {
-    my ($banner) = @_;
-    $banner->queue_draw;
+    my ($banner, $new_text) = @_;
+    $banner->{label}->set_text($new_text);
+    $banner->{label}->queue_draw;
 }
 
 sub new {
