@@ -34,7 +34,7 @@ images/hd_grub.img:
 grub/$(ARCH)/install/images/all.cpio.xz: list.xml guessmounts
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
 
-grub/boot/grub/grub.cfg: grub_data/grub.cfg grub_data/themes/moondrake/theme.txt grub_data/themes/moondrake/star_w.png grub_data/themes/moondrake/star_shade_w.png grub_data/themes/moondrake/tick.png make_boot_img all.kernels/.list
+grub/boot/grub/grub.cfg: grub_data/grub.cfg grub_data/themes/Moondrake/theme.txt grub_data/themes/Moondrake/star_w.png grub_data/themes/Moondrake/star_shade_w.png grub_data/themes/Moondrake/tick.png make_boot_img all.kernels/.list
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img grub
 
 images/boot.iso: grub/boot/grub/grub.cfg grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz grub/$(ARCH)/install/images/all.cpio.xz grub/boot/firmware.cpio.xz
