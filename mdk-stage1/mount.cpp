@@ -211,14 +211,6 @@ int my_mount(const char *dev, const char *location, const char *fs, int force_rw
 		}
 	}
 
-	if (!strcmp(fs, "supermount")) {
-		my_modprobe("supermount", ANY_DRIVER_TYPE, NULL);
-		my_modprobe("isofs", ANY_DRIVER_TYPE, NULL);
-		opts = (char*)alloca(500);
-                sprintf(opts, "dev=%s,fs=iso9660,tray_lock=always", dev);
-                dev = "none";
-	}
-
 #ifndef DISABLE_MEDIAS
 	if (!strcmp(fs, "vfat")) {
 		my_modprobe("nls_cp437", ANY_DRIVER_TYPE, NULL);
