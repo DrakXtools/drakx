@@ -1438,6 +1438,7 @@ sub set_style {
    $w->get_style_context->add_provider($p, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
+# used by install::steps_gtk::installPackages()
 sub update_text {
     my ($darea) = @_;
     $darea->queue_draw;
