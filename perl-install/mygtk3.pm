@@ -326,6 +326,7 @@ sub _gtk__Image {
 
     if (!$w) {
 	$w = Gtk3::Image->new;
+	$w->set_alignment(@{delete $opts->{alignment}}) if exists $opts->{alignment};
 	$w->{format} = delete $opts->{format} if exists $opts->{format};
         
         $w->set_from_stock(delete $opts->{stock}, 'button') if exists $opts->{stock};
