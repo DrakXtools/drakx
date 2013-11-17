@@ -41,6 +41,7 @@ void net_discovered_interface(char * intf_name);
 char * get_net_intf_description(const char * intf_name);
 void prepare_intf_descr(const char * intf_descr);
 void probe_that_type(enum driver_type type, enum media_bus bus);
+void handle_hid(void);
 
 /* Make sure the MATCH_ALL value is greater than all possible values
    for subvendor & subdevice: this simplifies the orderer */

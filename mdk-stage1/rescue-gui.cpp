@@ -34,6 +34,7 @@
 #include "utils.h"
 #include "params.h"
 #include "lomount.h"
+#include "probing.h"
 
 #if defined(__i386__) || defined(__x86_64__)
 #define ENABLE_RESCUE_MS_BOOT 1
@@ -99,6 +100,10 @@ int rescue_gui_main(int argc __attribute__ ((unused)), char *argv[] __attribute_
 	    streq(flash_mode, "upgrade") ? actions_flash_upgrade : actions_flash_rescue;
 
 	init_frontend("Welcome to " DISTRIB_NAME " Rescue (" DISTRIB_VERSION ") " __DATE__ " " __TIME__);
+
+        /* load usb interface as soon as possible, helps usb keyboard & mouse  */
+	probe_that_type(USB_CONTROLLERS, BUS_USB);
+	handle_hid();
 
 	do {
 		int pid;

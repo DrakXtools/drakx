@@ -44,6 +44,7 @@
 #include <sys/mount.h>
 #include <pci/pci.h>
 #include <libldetect.h>
+#include <hid.h>
 #include <pci.h>
 #include <usb.h>
 #include "stage1.h"
@@ -997,4 +998,16 @@ char ** get_net_devices(void)
 	return (char**)_memdup(tmp, sizeof(char *) * i);
 
 }
+
+void handle_hid(void)
+{
+    hid h;
+    h.probe();
+    for (uint16_t i = 0; i < h.size(); i++) {
+	if (!h[i].module.empty())
+	    my_modprobe(h[i].module.c_str(), ANY_DRIVER_TYPE, NULL);
+    }
+    my_modprobe("hid_generic", ANY_DRIVER_TYPE, NULL);
+}
+
 #endif /* DISABLE_NETWORK */
