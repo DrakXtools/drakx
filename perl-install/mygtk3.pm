@@ -350,6 +350,8 @@ sub _gtk__Image {
 	};
 	gtkval_register($w, $file_ref, $set);
 	$set->() if $$file_ref;
+    } elsif (my $pixbuf = delete $opts->{pixbuf}) {
+	$w->set_from_pixbuf($pixbuf);
     }
     $w;
 }
