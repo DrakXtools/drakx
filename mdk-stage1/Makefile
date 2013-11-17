@@ -108,7 +108,7 @@ endif
 SERIAL_PROBE_SRC = serial.cpp serial_probe.cpp
 LOCAL_SRC += $(SERIAL_PROBE_SRC)
 
-BINS_SRC = drvinst.cpp probe-modules.cpp rescue-gui.cpp ldetect/lspcidrake.cpp consoletype.cpp
+BINS_SRC = drvinst.cpp probe-modules.cpp rescue-gui.cpp ldetect/lspcidrake.cpp consoletype.cpp reboot.cpp
 LOCAL_SRC += $(BINS_SRC)
 
 FRONTEND_OBJS = $(subst .c,.o,$(FRONTEND_SRC))
@@ -159,7 +159,7 @@ STAGE1OBJS_FULL = $(subst .cpp,-FULL.o,$(STAGE1_ALLSRC))
 
 LOCALOBJS = $(subst .cpp,.o,$(LOCAL_SRC))
 
-ADD_BINS = dhcp-client rescue-gui probe-modules drvinst lspcidrake serial_probe consoletype
+ADD_BINS = dhcp-client rescue-gui probe-modules drvinst lspcidrake serial_probe consoletype reboot
 
 BINS := stage1 $(ADD_BINS)
 
@@ -336,12 +336,14 @@ ifeq (0, $(ONE_BINARY))
 	install -m755 probe-modules -D $(DESTDIR)$(ROOTDEST)/probe-modules
 	install -m755 drvinst -D $(DESTDIR)$(ROOTDEST)/drvinst
 	install -m755 lspcidrake -D $(DESTDIR)$(ROOTDEST)/lspcidrake
+	install -m755 reboot -D $(DESTDIR)$(ROOTDEST)/reeboot
 else
 	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/rescue-gui
 	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/dhcp-client
 	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/probe-modules
 	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/drvinst
 	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/lspcidrake
+	ln -f $(DESTDIR)$(ROOTDEST)/stage1 $(DESTDIR)$(ROOTDEST)/reboot
 endif
 	if [ -e pcmcia/pcmcia_probe.o ]; then \
 		install -m644 pcmcia/pcmcia_probe.o -D $(DESTDIR)$(ROOTDEST)/pcmcia_probe.o; \
