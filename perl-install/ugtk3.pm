@@ -1448,44 +1448,44 @@ sub new {
     my ($_class, $icon, $text, $o_options) = @_;
 
     mygtk3::import_style_ressources();
-    my $darea = gtknew('DrawingArea', widget_name => 'Banner');
-    $darea->{back_pixbuf} = gtknew('Pixbuf', file => 'banner-background');
-    my $d_height = $darea->{back_pixbuf}->get_allocated_height;
-    $darea->set_size_request(-1, $d_height);
-    $darea->modify_font(Pango::FontDescription->from_string("13"));
-    eval { $darea->{icon} = ugtk3::gtkcreate_pixbuf($icon) };
-    $darea->{icon} ||= ugtk3::gtkcreate_pixbuf(ugtk3::wm_icon());
+    my $w = gtknew('DrawingArea', widget_name => 'Banner');
+    $w->{back_pixbuf} = gtknew('Pixbuf', file => 'banner-background');
+    my $d_height = $w->{back_pixbuf}->get_allocated_height;
+    $w->set_size_request(-1, $d_height);
+    $w->modify_font(Pango::FontDescription->from_string("13"));
+    eval { $w->{icon} = ugtk3::gtkcreate_pixbuf($icon) };
+    $w->{icon} ||= ugtk3::gtkcreate_pixbuf(ugtk3::wm_icon());
     my $is_rtl = mygtk3::text_direction_rtl();
     my $blue_part = eval { gtknew('Pixbuf', file => 'banner-blue-part', flip => $is_rtl) };
     my $blue_width = $blue_part->get_width;
-    $darea->{text} = $text;
+    $w->{text} = $text;
 
-    $darea->signal_connect(realize => \&set_pixmap);
-    $darea->signal_connect("style-set" => \&set_pixmap);
-    $darea->signal_connect(expose_event => sub {
-                               my $style = $darea->get_style;
-                               my $height = $darea->{icon}->get_height;
-                               my $width = $darea->{icon}->get_width;
+    $w->signal_connect(realize => \&set_pixmap);
+    $w->signal_connect("style-set" => \&set_pixmap);
+    $w->signal_connect(expose_event => sub {
+                               my $style = $w->get_style;
+                               my $height = $w->{icon}->get_height;
+                               my $width = $w->{icon}->get_width;
                                # fix icon position when not using the default height:
-                               (undef, undef, undef, $d_height) = $darea->get_window->get_geometry;
+                               (undef, undef, undef, $d_height) = $w->get_window->get_geometry;
                                my $padding = int(($d_height - $height)/2);
-                               my $d_width = $darea->get_allocation->width;
+                               my $d_width = $w->get_allocation->width;
                                my $x_blue = $is_rtl ? $d_width - $blue_width : 0;
                                my $x_icon = $is_rtl ? $d_width - 12 - $width : 12;
                                # here: 48 is the amount of white background in the blue background we wish to ignore:
-                               my $x_text = $is_rtl ? $d_width - $blue_width + 48 - $darea->{txt_width} : $blue_width - 48;
-                               $darea->{layout_height} ||= second($darea->{layout}->get_pixel_size);
-                               $blue_part->render_to_drawable($darea->get_window, $style->bg_gc('normal'),
+                               my $x_text = $is_rtl ? $d_width - $blue_width + 48 - $w->{txt_width} : $blue_width - 48;
+                               $w->{layout_height} ||= second($w->{layout}->get_pixel_size);
+                               $blue_part->render_to_drawable($w->get_window, $style->bg_gc('normal'),
                                                                   0, 0, $x_blue, 0, -1, -1, 'none', 0, 0);
-                               $darea->{icon}->render_to_drawable($darea->get_window, $style->bg_gc('normal'),
+                               $w->{icon}->render_to_drawable($w->get_window, $style->bg_gc('normal'),
                                                                   0, 0, $x_icon, $padding, -1, -1, 'none', 0, 0);
-                               $darea->get_window->draw_layout($style->fg_gc('normal'), $x_text,
-                                                           $o_options->{txt_ypos} || ($d_height - $darea->{layout_height})/2,
-                                                           $darea->{layout});
+                               $w->get_window->draw_layout($style->fg_gc('normal'), $x_text,
+                                                           $o_options->{txt_ypos} || ($d_height - $w->{layout_height})/2,
+                                                           $w->{layout});
                                1;
                            });
                                
-    return $darea;
+    return $w;
 }
 
 
