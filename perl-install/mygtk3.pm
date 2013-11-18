@@ -239,7 +239,7 @@ sub _gtk__SpinButton {
     if (!$w) {
 	$opts->{adjustment} ||= do {
 	    add2hash_($opts, { step_increment => 1, page_increment => 5, page_size => 1, value => delete $opts->{lower} });
-	    Gtk3::Adjustment->new(delete $opts->{value}, delete $opts->{lower}, delete $opts->{upper}, delete $opts->{step_increment}, delete $opts->{page_increment}, delete $opts->{page_size});
+	    Gtk3::Adjustment->new(delete $opts->{value}, 0, delete $opts->{upper}, delete $opts->{step_increment}, delete $opts->{page_increment}, delete $opts->{page_size});
 	};
 	$w = Gtk3::SpinButton->new(delete $opts->{adjustment}, delete $opts->{climb_rate} || 0, delete $opts->{digits} || 0);
     }
