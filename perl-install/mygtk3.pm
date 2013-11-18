@@ -760,7 +760,7 @@ sub _gtk__MDV_Notebook {
             : map {
                 gtknew('Image', file => "right-white-background_left_part-$_", flip => $is_flip_needed);
             } 1, 2, 2, 3;
-        my $width1 = $left_background->get_allocated_width;
+        my $width1 = $left_background->get_pixbuf->get_width;
         my $right_bg_width = $right_background[0]->get_pixbuf->get_width;
         my $total_width = $width1 + $right_bg_width;
         my $arrow_x = text_direction_rtl() ? $offset/2 - 4 : $width1 - $offset - 3;
