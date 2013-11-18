@@ -1455,11 +1455,10 @@ sub new {
     $darea->modify_font(Pango::FontDescription->from_string("13"));
     eval { $darea->{icon} = ugtk3::gtkcreate_pixbuf($icon) };
     $darea->{icon} ||= ugtk3::gtkcreate_pixbuf(ugtk3::wm_icon());
-    my $blue_part = eval { gtknew('Pixbuf', file => 'banner-blue-part', flip => mygtk3::text_direction_rtl()) };
+    my $is_rtl = mygtk3::text_direction_rtl();
+    my $blue_part = eval { gtknew('Pixbuf', file => 'banner-blue-part', flip => $is_rtl) };
     my $blue_width = $blue_part->get_width;
     $darea->{text} = $text;
-    require lang;
-    my $is_rtl = lang::text_direction_rtl();
 
     $darea->signal_connect(realize => \&set_pixmap);
     $darea->signal_connect("style-set" => \&set_pixmap);
