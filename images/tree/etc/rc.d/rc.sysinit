@@ -24,7 +24,19 @@ export UDEVRULESD=/run/udev/rules.d
 udevadm trigger --type=subsystems --action=add
 udevadm trigger --type=devices --action=add
 
-grep -q noauto /proc/cmdline || drvinst SERIAL_USB
+modprobe usb_common
+modprobe usb_core
+modprobe ehci_pci
+modprobe ohci_pci
+modprobe hid
+modprobe usbhid
+modprobe hid_generic
+
+grep -q noauto /proc/cmdline || drvinst
+
+sleep 5
+udhcpc -i eth0
+dropbear -E -B
 
 /etc/rc.d/init.d/gpm start
 

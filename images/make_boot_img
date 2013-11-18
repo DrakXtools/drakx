@@ -99,6 +99,8 @@ EOF
 
     ln -v "$tmp_initrd/sbin/init" "$tmp_initrd/init"
 
+    install -m700 -d  "$tmp_initrd/root/.ssh"
+    install -m600 ~/.ssh/authorized_keys ~/.ssh/id_dsa.pub "$tmp_initrd/root/.ssh"
     LANGUAGE=C
     sed -e 's/^#LANGUAGE.*/export LANGUAGE=$LANGUAGE\nexport LC_ALL=$LANGUAGE\n/g' -i "$tmp_initrd/etc/rc.d/rc.stage2"
 
