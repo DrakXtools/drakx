@@ -671,15 +671,6 @@ sub gtkset_property {
     $w;
 }
 
-sub set_back_pixbuf {
-    my ($widget, $pixbuf) = @_;
-    my $window = $widget->get_window;
-    my ($width, $height) = ($pixbuf->get_width, $pixbuf->get_height);
-    my $pixmap = Gtk3::Gdk::Pixmap->new($window, $width, $height, $window->get_depth);
-    $pixbuf->render_to_drawable($pixmap, $widget->get_style->fg_gc('normal'), 0, 0, 0, 0, $width, $height, 'max', 0, 0);
-    $window->set_back_pixmap($pixmap, 0);
-}
-
 sub set_back_pixmap {
     my ($w) = @_;
     return if !$w->get_realized;
