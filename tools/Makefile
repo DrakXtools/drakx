@@ -5,7 +5,7 @@ CFLAGS      = -Wall -Os
 
 .PHONY: clean install $(DIRS)
 
-all: $(DIRS) xhost+ rpcinfo-flushed
+all: $(DIRS) rpcinfo-flushed
 
 $(DIRS):
 	make -C $@
