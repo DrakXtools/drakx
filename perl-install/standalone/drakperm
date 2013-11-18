@@ -360,8 +360,6 @@ sub row_setting_dialog {
     $perms{gid}->set_active($s_right{write});
     $perms{suid}->set_active($s_right{read});
 
-    $dlg->set_has_separator(0);
-
     gtkadd($dlg->get_action_area, 
            create_okcancel(my $w =
                            {
