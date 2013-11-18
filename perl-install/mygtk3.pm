@@ -131,6 +131,7 @@ sub _gtk {
     }
 
     if (my $sensitive_ref = delete $opts->{sensitive_ref}) {
+	$$sensitive_ref ||= 0;
 	my $set = sub { $w->set_sensitive($$sensitive_ref) };
 	gtkval_register($w, $sensitive_ref, $set);
 	$set->();
