@@ -755,7 +755,7 @@ sub _gtk__MDV_Notebook {
         my $filler = gtknew('Image', file => 'left-background-filler.png');
         my $filler_height = $filler->get_pixbuf->get_height;
         my $left_background = gtknew('Image', file => 'left-background.png');
-        my $lf_height = $left_background->get_allocated_height;
+        my $lf_height = $left_background->get_pixbuf->get_height;
         my @right_background = $::isInstall ? 
           gtknew('Image', file => "right-white-background_left_part$suffix", flip => $is_flip_needed)
             : map {
