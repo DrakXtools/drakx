@@ -1640,7 +1640,8 @@ sub move_selection {
     my $layout = $w->{layout};
     $layout->{arrow_ydiff} ||=
       ($w->{selection_arrow}->get_pixbuf->get_height - $w->{selection_bar}->get_pixbuf->get_height)/2;
-    my $bar_y = $label->get_allocation->{y} - ($w->{selection_bar}->get_pixbuf->get_height - $label->get_allocation->{height})/2;
+    my $alloc = $label->get_allocation;
+    my $bar_y = $alloc->{y} - ($w->{selection_bar}->get_pixbuf->get_height - $alloc->{height})/2;
     $layout->move($w->{selection_bar}, 0, $bar_y);
     $layout->move($w->{selection_arrow}, $w->{arrow_x}, $bar_y - $layout->{arrow_ydiff}); # arrow is higer
     $_->show foreach $w->{selection_bar}, $w->{selection_arrow};
