@@ -64,7 +64,7 @@ sub to_i18n { map { $translations{$_} || $_ } @_ }
 sub from_i18n { $inv_translations{$_[0]} || $_[0] }
 sub resize { gtkset($_[0], width => 50) }
 
-# factorize this with rpmdrake and harddrake2
+# factorize this with drakrpm and harddrake2
 sub wait_msg {
     my $mainw = ugtk2->new(N("Please wait"), (modal => 1, transient => $w->{real_window}));
     $mainw->{window}->add(gtknew('WrappedLabel', text => $_[0]));
@@ -163,11 +163,11 @@ EOF
 
 my %descr = (
     
-    rpmdrake => N("Software Management"),
-    mandrivaupdate => N("Mandriva Update"),
-    'drakrpm-edit-media' => N("Software Media Manager"),
+    drakrpm => N("Software Management"),
+    'drakrpm-update' => N("%s Update", N("DrakX")),
+    'drakrpm-editmedia' => N("Software Media Manager"),
     drak3d => N("Configure 3D Desktop effects"),
-    xfdrake => N("Graphical Server Configuration"),
+    drakx11 => N("Graphical Server Configuration"),
     drakmouse => N("Mouse Configuration"),
     drakkeyboard => N("Keyboard Configuration"),
     drakups => N("UPS Configuration"),
@@ -183,7 +183,7 @@ my %descr = (
     drakfont => N("Import fonts"),
     draklog => N("Logs"),
     drakxservices => N("Services"),
-    userdrake => N("Users"),
+    drakuser => N("Users"),
     drakclock => N("Date, Clock & Time Zone Settings"),
     drakboot => N("Boot Configuration"),
 );
@@ -218,10 +218,10 @@ gtkpack_($vbox,
 				     } split(' ', $progs)
 				);
 			    } (
-				[ N("Software Management"), 'rpmdrake mandrivaupdate drakrpm-edit-media' ],
-				[ N("Hardware"), 'drak3d xfdrake drakmouse drakkeyboard drakups' ],
+				[ N("Software Management"), 'drakrpm drakrpm-update drakrpm-editmedia' ],
+				[ N("Hardware"), 'drak3d drakx11 drakmouse drakkeyboard drakups' ],
 				[ N("Network"), 'drakconnect drakhosts draknetcenter drakroam drakvpn drakproxy drakgw' ],
-				[ N("System"), 'drakauth drakbackup drakfont draklog drakxservices userdrake drakclock' ],
+				[ N("System"), 'drakauth drakbackup drakfont draklog drakxservices drakuser drakclock' ],
 				[ N("Boot"), 'drakboot' ],
 			    )
 			)
