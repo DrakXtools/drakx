@@ -107,36 +107,57 @@ my $common_opts = { col_spacings => 10, row_spacings => 5, mcc => 1 };
 ######################## AUTH ###################################
 my %progs;
 
-my $auth_string = N("Configure authentication required to access Mandriva tools");
+my $auth_string = N("Configure authentication required to access DrakX tools");
 
 my %auth = (
+      default => N("Default"),
       no_passwd => N("No password"),
       root_passwd => N("Root password"),
       user_passwd => N("User password"),
 );
 
+my $polkit_rules_file = "/etc/polkit-1/rules.d/51-draksec.rules";
+my %overrides = map { if ( /case '([^']+)': return polkit\.Result\.(YES|AUTH_ADMIN_KEEP|AUTH_SELF_KEEP)/ ) { ($1, $2) } } cat_($polkit_rules_file);
+
+
 sub default_auth_value {
     my ($prog) = @_;
-    my $link = readlink("/etc/pam.d/$prog");
-    if ($link =~ /mandriva-console-auth/) {
-        return $auth{no_passwd};
-    } elsif ($link =~ /mandriva-simple-auth/) {
-        my ($user) = cat_("/etc/security/console.apps/$prog") =~ /USER=(.*)/;
-        return $auth{root_passwd} if $user eq 'root';
-        return $auth{user_passwd} if $user eq '<user>';
-    }
+
+    return $auth{no_passwd} if $overrides{$prog} eq 'YES';
+    return $auth{root_passwd} if $overrides{$prog} eq 'AUTH_ADMIN_KEEP';
+    return $auth{user_passwd} if $overrides{$prog} eq 'AUTH_SELF_KEEP';
+    return $auth{default};
 }
 
 sub set_auth_value {
     my ($prog, $auth) = @_;
     if ($auth eq 'no_passwd') {
-        symlinkf('../../etc/pam.d/mandriva-console-auth', "/etc/pam.d/$prog");
+        $overrides{$prog} = 'YES';
+    } elsif ($auth eq 'root_passwd') {
+        $overrides{$prog} = 'AUTH_ADMIN_KEEP';
+    } elsif ($auth eq 'user_passwd') {
+        $overrides{$prog} = 'AUTH_SELF_KEEP';
     } else {
-        symlinkf('../../etc/pam.d/mandriva-simple-auth', "/etc/pam.d/$prog");
-        my $value = $auth eq 'user_passwd' ? '<user>' : 'root';
-        substInFile {
-            s/^USER=.*/USER=$value/;
-        } "/etc/security/console.apps/$prog";
+        delete $overrides{$prog};
+    }
+}
+
+sub write_rules() {
+    my $contents = '';
+    keys %overrides;
+    while(my($k, $v) = each %overrides) {
+        $contents .= "case '$k': return polkit.Result.$v;\n" if ($k && $v);
+    }
+
+    if ($contents) {
+        output($polkit_rules_file, <<EOF);
+// This file is written by draksec. Do not edit.
+var drakToolAuth = function(tool){switch (tool){
+$contents
+}return polkit.Result.NOT_HANDLED;};
+EOF
+    } else {
+        rm_rf($polkit_rules_file);
     }
 }
 
@@ -188,7 +209,7 @@ gtkpack_($vbox,
 					 [
 					     gtkshow(gtknew('Label_Left', line_wrap => 1, text => $descr{$_} || $_)),
 						 $progs{$_} = new_nonedit_combo([
-						     @auth{qw(user_passwd root_passwd no_passwd)}
+						     @auth{qw(default user_passwd root_passwd no_passwd)}
 						 ],
 										default_auth_value($_)
 										#$msec->get_check_value($opt)
@@ -217,6 +238,7 @@ gtkpack_($vbox,
                                     set_auth_value($key, $rev_auth{$value});
                                 }
 
+                                write_rules();
                                 remove_wait_msg($w);
                                 ugtk2->exit(0);
                             }
