@@ -285,7 +285,7 @@ $tree->get_selection->signal_connect('changed' => sub {
                 my $field = lookup_field($_);
                 if_($_ && $field->[0], $_ =>
                    [
-                    [ $field->[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Pango->PANGO_WEIGHT_BOLD } ],
+                    [ $field->[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => 'bold' } ],
                     [ ($current_device->{$_} =~ /^(unknown)/ ? N("unknown") :
                        $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : 
                        $current_device->{$_} eq 'yes' ? N("Yes") : 
@@ -585,7 +585,7 @@ sub lookup_field {
 
 sub titleFormat {
     my ($title) = @_;
-    [ $title . "\n", { 'weight' => Pango->PANGO_WEIGHT_BOLD, scale => 1.4399999999999 } ]; # Pango->PANGO_SCALE_LARGE
+    [ $title . "\n", { 'weight' => 'bold', scale => 1.4399999999999 } ]; # Pango->PANGO_SCALE_LARGE
 }
 
 sub force_rename_field {

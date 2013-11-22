@@ -311,7 +311,7 @@ sub markup_to_TextView_format {
     foreach (@$l) {
 	my ($_txt, $attrs) = @$_;
 	if ($attrs) {
-         $attrs->{weight} eq 'bold' and $attrs->{weight} = Pango->PANGO_WEIGHT_BOLD;
+         $attrs->{weight} eq 'bold' and $attrs->{weight} = 'bold';
          $attrs->{size} eq 'larger' and do {
              $attrs->{scale} = 1.4399999999999; # PANGO_SCALE_X_LARGE: equivalent to Label's size => 'larger'
              delete $attrs->{size};
