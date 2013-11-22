@@ -404,7 +404,7 @@ sub create_dialog {
     gtkpack($dialog->get_child,
             gtknew('HBox', children => [
                      if_($o_options->{stock},
-                         0, Gtk3::Image->new_from_stock($o_options->{stock}, 'dialog'),
+                         0, Gtk3::Image->new_from_stock($o_options->{stock} || '', 'dialog'),
                          0, gtknew('Label', text => "   "),
                         ),
                      1, $o_options->{scroll} ? create_scrolled_window($text, [ 'never', 'automatic' ]) : $text,
