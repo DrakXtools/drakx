@@ -194,6 +194,7 @@ $drawing_area->set_events(${ Gtk3::Gdk::EventMask->new([ 'button_press_mask', 'b
 $drawing_area->signal_connect(draw => \&draw);
 $drawing_area->signal_connect(realize => sub {
                                   my $window = $drawing_area->get_window;
+                                  return; #FIXME
                                   $pixmap = Gtk3::Gdk::Pixmap->new($window, @image_size, $window->get_depth);
                               });
 
@@ -228,7 +229,7 @@ $timer = Glib::Timeout->add(120, \&update_time);
 
 $drawing_area->show;
 $my_win->{window}->show_all;
-my ($midx, $midy) = ($drawing_area->get_allocation->width/2, $drawing_area->get_allocation->height/2);
+my ($midx, $midy); # FIXME = ($drawing_area->get_allocation->width/2, $drawing_area->get_allocation->height/2);
 $my_win->main;
 ugtk3->exit(0);
 
@@ -315,6 +316,7 @@ sub determine_radian {
 
 sub draw {
     my ($widget, $event) = @_;
+    return; #FIXME
     my ($x, $y, $width, $height) = $event->area->get_values;
     $widget->get_window->draw_drawable($widget->get_style->fg_gc('normal'), $pixmap, $x, $y, $x, $y, $width, $height);
     0;
@@ -340,6 +342,7 @@ sub Repaint {
     my ($drawing_area, $o_update_time) = @_;
     my ($sec, $min, $hour) = localtime(time());
     time_to_rad($sec, $min, $hour) if $o_update_time;
+    return; #FIXME
     my ($width, $height) = ($drawing_area->get_allocation->width, $drawing_area->get_allocation->height);
     my $dRadians_hour_real = $dRadians_hour + $dRadians_min / 12;
     my $dRadians_min_real  = POSIX::floor($dRadians_min / $PI * 30) * $PI / 30;
