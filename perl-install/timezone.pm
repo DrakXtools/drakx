@@ -24,11 +24,11 @@ sub read() {
     { timezone => $t{ZONE}, UTC => text2bool($t{UTC}) };
 }
 
-our $ntp = "chrony";
-my $servername_config_suffix = " iburst";
+our $ntp = "ntp";
+my $servername_config_suffix = "";
 unless (-f $::prefix . "/etc/" . $ntp . ".conf") {
-    $ntp = "ntp";
-    $servername_config_suffix = "";
+    $ntp = "chrony";
+    $servername_config_suffix = " iburst";
 }
 
 sub ntp_server() {
