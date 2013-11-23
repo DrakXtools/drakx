@@ -193,7 +193,7 @@ sub autologin_choice() {
         push @users, $user;
     }
     my $user_combo = gtknew('ComboBox', text => $user, list => \@users);
-    my $desktop_combo = Gtk3::ComboBox->new_with_strings(\@sessions, if_(member($auto_mode->{desktop}, @sessions), $auto_mode->{desktop}));
+    my $desktop_combo = Gtk3::ComboBoxText->new_with_strings(\@sessions, if_(member($auto_mode->{desktop}, @sessions), $auto_mode->{desktop}));
 
     my $auto_box = gtknew('Table', col_spacings => 5, row_spacings => 5, homogeneous => 1, children => [
                                     [ gtknew('Label_Left', text => N("Default user")), $user_combo ],
