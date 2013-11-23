@@ -1428,9 +1428,9 @@ sub add {
 }
 
 sub show {
-    my ($self) = @_; # perl_checker: $self = Gtk3::Notify->new
+    my ($self) = @_; # perl_checker: $self = Gtk3::Notify::Notification->new
     my $info = $self->{queue}[0];
-    my $notification = Gtk3::Notify->new($info->{title}, $info->{message}, $self->{statusicon});
+    my $notification = Gtk3::Notify::Notification->new($info->{title}, $info->{message}, $self->{statusicon});
     $notification->set_icon_from_pixbuf($info->{pixbuf}) if $info->{pixbuf};
     $notification->set_urgency($info->{urgency}) if $info->{urgency};
     foreach my $a (@{$info->{actions} || []}) {
