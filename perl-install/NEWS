@@ -1,6 +1,8 @@
-- draksec: make sure to restart polkitd after writing rules
-- timezone: assume chrony rather than ntp when neither is installed
-- draksec: support polkit rules editing for permissions overrides
+- drakclock:
+  o assume chrony rather than ntp when neither is installed
+- draksec:
+  o make sure to restart polkitd after writing rules
+  o support polkit rules editing for permissions overrides
 
 Version 15.73.1 - 19 November 2013
 - add chrony support to drakclock mga#11092
