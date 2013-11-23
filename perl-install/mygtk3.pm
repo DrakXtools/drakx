@@ -687,7 +687,7 @@ sub _gtk__ScrolledWindow {
     my $faked_w = $w;
 
     if (my $child = delete $opts->{child}) {
-	if (member(ref($child), qw(Gtk3::Layout Gtk3::Html2::View  Gtk3::SimpleList Gtk3::SourceView::View Gtk3::Text Gtk3::TextView Gtk3::TreeView Gtk3::WebKit::WebView))) {
+	if (member(ref($child), qw(Gtk3::Layout Gtk3::Html2::View Gtk3::SimpleList Gtk3::SourceView::View Gtk3::Text Gtk3::TextView Gtk3::TreeView Gtk3::WebKit::WebView))) {
 	    $w->add($child);
 	} else {
 	    $w->add_with_viewport($child);
