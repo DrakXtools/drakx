@@ -218,6 +218,19 @@ sub _gtk_any_Button {
     $w;
 }
 
+sub _gtk__ToolButton {
+    my ($w, $opts, $class) = @_;
+
+    if (!$w) {
+	$w = "Gtk3::$class"->new(gtknew('Image', file => delete $opts->{file}),
+				 delete $opts->{label});
+	$w->set_tooltip_text(delete $opts->{tooltip}) if $opts->{tooltip};
+	$w->signal_connect(clicked => delete $opts->{clicked}) if exists $opts->{clicked};
+    }
+
+    $w;
+}
+
 sub _gtk__CheckMenuItem {
     my ($w, $opts, $class) = @_;
 
