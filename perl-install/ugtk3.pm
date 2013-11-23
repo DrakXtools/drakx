@@ -1316,6 +1316,15 @@ sub set_text {
 }
 
 
+package Gtk3::ComboBoxText;
+
+# try to get combox <==> option menu mapping
+*new_with_strings    = *Gtk3::ComboBox::new_with_strings;
+*set_popdown_strings = *Gtk3::ComboBox::set_popdown_strings;
+*get_text = *Gtk3::ComboBox::get_text;
+*set_text = *Gtk3::ComboBox::set_text;
+
+
 package Gtk3::Label;
 sub set {
     my ($label, $text) = @_;
