@@ -21,7 +21,7 @@ use locale;
                     get_default_step_items set_default_step_items
                     string_size string_width) ],
 
-    create => [ qw(create_adjustment create_box_with_title create_dialog create_factory_menu create_factory_popup_menu
+    create => [ qw(create_adjustment create_box_with_title create_dialog 
                    create_hbox create_hpaned create_menu create_notebook create_okcancel create_packtable
                    create_scrolled_window create_vbox create_vpaned _create_dialog gtkcreate_frame) ],
 
@@ -452,17 +452,6 @@ sub err_dialog {
 
 sub create_hbox { gtknew('HButtonBox', layout => $_[0]) }
 sub create_vbox { gtknew('VButtonBox', layout => $_[0]) }
-
-sub create_factory_menu_ {
-    my ($type, $name, $window, @menu_items) = @_;
-    my $widget = Gtk3::ItemFactory->new($type, $name, my $accel_group = Gtk3::AccelGroup->new);
-    $widget->create_items($window, @menu_items);
-    $window->add_accel_group($accel_group);
-    ($widget->get_widget($name), $widget);
-}
-
-sub create_factory_popup_menu { create_factory_menu_("Gtk3::Menu", '<main>', @_) }
-sub create_factory_menu { create_factory_menu_("Gtk3::MenuBar", '<main>', @_) }
 
 sub create_menu {
     my $title = shift;
