@@ -1424,7 +1424,10 @@ sub process_next {
 sub add {
     my ($self, $info) = @_;
     push @{$self->{queue}}, $info;
-    @{$self->{queue}} == 1 and $self->show;
+    # We don't always receive the 'closed' signal (especially when not clicked)
+    # and in those case we'll never show the next notifications:
+    #@{$self->{queue}} == 1 and
+    $self->show;
 }
 
 sub show {
