@@ -185,9 +185,8 @@ sub _gtk_any_Button {
     $w->set_relief(delete $opts->{relief}) if exists $opts->{relief};
 
     if (my $text_ref = delete $opts->{text_ref}) {
-	$$text_ref ||= '';
 	my $set = sub {
-	    eval { $w->set_label(may_apply($w->{format}, $$text_ref)) };
+	    eval { $w->set_label(may_apply($w->{format}, $$text_ref || '')) };
 	};
 	gtkval_register($w, $text_ref, $set);
 	$set->();
