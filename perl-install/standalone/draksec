@@ -157,8 +157,10 @@ $contents
 }return polkit.Result.NOT_HANDLED;};
 EOF
     } else {
-        rm_rf($polkit_rules_file);
+        rm_rf($polkit_rules_file) if -f $polkit_rules_file;
     }
+
+    system('systemctl', 'try-restart', 'polkit.service');
 }
 
 my %descr = (
