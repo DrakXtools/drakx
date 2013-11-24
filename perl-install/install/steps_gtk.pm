@@ -573,7 +573,8 @@ sub installPackages {
 	    my ($title);
 	    my $pl = $f; $pl =~ s/\.png$/.pl/;
 	    eval(cat_($pl)) if -e $pl;    
-	    Gtk3::Banner::update_text($banner, $title);
+	    # FIXME: This hasn't actually worked for years:
+	    #Gtk3::Banner::update_text($banner, $title);
 	}
     };
 
