@@ -561,6 +561,9 @@ sub _gtk__ActionGroup {
 	if ($opts->{actions}) {
 	    $w->add_actions(delete $opts->{actions}, undef);
 	    $w->add_toggle_actions(delete $opts->{toggle_actions}, undef) if $opts->{toggle_actions};
+	    if (my $radios = delete $opts->{radio_actions}) {
+		$w->add_radio_actions(@$_) foreach @$radios;
+	    }
 	}
     }
     $w;
@@ -585,7 +588,7 @@ sub _gtk__UIManager {
 	$w = Gtk3::UIManager->new;
 	if ($opts->{actions}) {
 	    $w->insert_action_group(gtknew('ActionGroup', name => 'Actions',
-				    map { exists $opts->{$_} ? ($_ => delete $opts->{$_}) : () } qw(actions toggle_actions)),
+				    map { exists $opts->{$_} ? ($_ => delete $opts->{$_}) : () } qw(actions radio_actions toggle_actions)),
 				    0);
 	}
 	$w->add_ui_from_string(delete $opts->{string}) if exists $opts->{string};
