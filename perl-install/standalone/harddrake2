@@ -583,11 +583,6 @@ sub show_hide {
     if ($bool) { $button->show } else { $button->hide }
 }
 
-
-sub strip_first_underscore {
-    join '', map { s/_//; $_ } @_;
-}
-
 sub lookup_field {
     my ($field) = @_;
     my $class = find { defined $fields{$_} && defined $fields{$_}{$field} } ($current_class, 'generic');
