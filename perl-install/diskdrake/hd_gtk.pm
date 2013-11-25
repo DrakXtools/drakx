@@ -342,7 +342,7 @@ sub create_buttons4partitions {
 	    my $p = find { $entry->{dm_name} eq $_->{dmcrypt_name} } @{$all_hds->{dmcrypts}};
 	    $entry = $p if $p;
 	}
-	my $info = $entry->{mntpoint} || $entry->{device_LABEL};
+	my $info = $entry->{mntpoint} || $entry->{device_LABEL} || '';
 	$info .= "\n" . ($entry->{size} ? formatXiB($entry->{size}, 512) : N("Unknown")) if $info;
 	my $w = Gtk3::ToggleButton->new_with_label($info) or internal_error('new_with_label');
 	$w->signal_connect(clicked => sub { 
