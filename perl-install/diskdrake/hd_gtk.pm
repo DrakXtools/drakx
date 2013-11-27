@@ -324,7 +324,8 @@ sub create_buttons4partitions {
     $width = $w->{window}->get_allocated_width - first(get_action_box_size()) - 25 if $w->{window}->get_window;
 
     my $ratio = $totalsectors ? ($width - @parts * $minwidth) / $totalsectors : 1;
-    while (1) {
+    my $i = 1;
+    while ($i < 30) {
 	my $totalwidth = sum(map { $_->{size} * $ratio + $minwidth } @parts);
 	$totalwidth <= $width and last;
 	$ratio /= $totalwidth / $width * 1.1;
