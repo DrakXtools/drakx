@@ -721,7 +721,7 @@ sub summary_prompt {
                 gtknew('Title1', 
                        label => mygtk3::asteriskize(escape_text_for_TextView_markup_format($group))) ]), '' ];
 	}
-	$e->{widget} = gtknew('Label_Right', width => $::real_windowwidth * 0.72, alignment => [ 1, 1 ]);
+	$e->{widget} = gtknew('Label_Right', width => $::real_windowwidth * 0.72, alignment => [ 1, 1 ], line_wrap => 1);
 
 	push @table, [], [ gtknew('HBox', children_tight => [ $e->{widget}, gtknew('Alignment', width => 10) ]),
 			   gtknew('Button', text => N("Configure"), clicked => sub { 
