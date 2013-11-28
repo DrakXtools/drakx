@@ -126,10 +126,10 @@ $my_win->{window}->add(
 				system('systemctl', 'start', "$ntpd.service");
 				# Wait up to 30s for sync
 				$sync_ok = !system('chronyc', 'waitsync', '30', '0.1');
-				system('systemctl', 'stop', "$ntpd.service") if (!$sync_ok);
+				system('systemctl', 'stop', "$ntpd.service") if !$sync_ok;
 			    } else {
 				$sync_ok = !system('/usr/sbin/ntpdate', $choosed_serv);
-				system('systemctl', 'start', "$ntpd.service") if ($sync_ok);
+				system('systemctl', 'start', "$ntpd.service") if $sync_ok;
 			    }
 			    if ($sync_ok) {
 				update_time(); #- get the new time before updating the hwclock
