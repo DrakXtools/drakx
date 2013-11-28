@@ -1384,7 +1384,7 @@ sub new {
     my $img = gtknew('Image', pixbuf => $blue_part, alignment => [ 0, 0 ]);
 
     my $label = gtknew('Label', text => $text, padding => [ 100, 0 ], alignment => [ 0, 0.5 ]); # for update_text()
-    my $w = gtknew('Overlay', height => $d_height, main_child => $label, children => [
+    my $w = gtknew('Overlay', height => $d_height, widget_name => 'Banner', main_child => $label, children => [
 		       gtknew('Overlay', main_child => $img, children => [
 				  my $icon_img = gtknew('Image', pixbuf => $icon, alignment => [ 0, 0 ]),
 			      ])
