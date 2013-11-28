@@ -197,7 +197,7 @@ sub quit() { ugtk3->exit(0) }
 # search functions
 #-------------------------------------------------------------
 sub search() {
-    my $window = $log_text->get_window;
+    my $window = $log_text->get_window('widget');
     return if !$window;
     $window->freeze_updates;
     $log_buf->set_text('');
