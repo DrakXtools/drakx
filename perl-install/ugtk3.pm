@@ -951,7 +951,8 @@ sub ask_browse_tree_info {
     }
     my %toolbar = @toolbar;
     foreach (grep_index { $::i % 2 == 0 } @toolbar) {
-	$toolbar->append_item(undef, $toolbar{$_}[0], undef, gtkcreate_img("$_.png"), $toolbar{$_}[1]);
+	my $t = gtknew('ToolButton', tooltip => $toolbar{$_}[0], file => "$_.png", clicked => $toolbar{$_}[1]);
+	$toolbar->insert($t, -1);
     }
 
     $pixcolumn->{is_pix} = 1;
