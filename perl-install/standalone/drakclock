@@ -41,13 +41,13 @@ my $button_time = gtknew('Button', text => N("Change Time Zone"));
 my @timezones = eval { timezone::getTimeZones() };
 my $err = $@;
 $button_time->signal_connect(clicked => sub {
-				   local $::isEmbedded = 0; # to prevent sub window embedding
-				   if ($timezone->{timezone} = $in->ask_from_treelist(N("Timezone - DrakClock"), N("Which is your timezone?"), '/', \@timezones, $timezone->{timezone})) {
-                                       $timezone->{UTC} = $in->ask_yesorno(N("GMT - DrakClock"), N("Is your hardware clock set to GMT?"), $timezone->{UTC});
-                                       timezone::write($timezone);
-                                   }
-                                   $label_timezone->set_text($timezone->{timezone});
-			       });
+    local $::isEmbedded = 0; # to prevent sub window embedding
+    if ($timezone->{timezone} = $in->ask_from_treelist(N("Timezone - DrakClock"), N("Which is your timezone?"), '/', \@timezones, $timezone->{timezone})) {
+	$timezone->{UTC} = $in->ask_yesorno(N("GMT - DrakClock"), N("Is your hardware clock set to GMT?"), $timezone->{UTC});
+	timezone::write($timezone);
+    }
+    $label_timezone->set_text($timezone->{timezone});
+			     });
 if (!@timezones) {
     warn "Failed to retrieve timezone list: $err\n";
     $button_time->set_sensitive(0);
@@ -66,110 +66,112 @@ my (undef, undef, $h_old, $old_day, $old_month, $old_year) = localtime(time());
 
 my @image_size = (200, 200);
 
-$my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, children => [
-                                1, gtknew('HBox', children => [
-                                            1, gtknew('VBox', children => [
-                                                        0, $calendar,
-                                                        1, gtknew('Frame', text => N("Network Time Protocol"), shadow_type => 'etched_in', child => 
-                                                                  gtknew('VBox', border_width => 5, children => [
-                                                                           0, gtknew('Label', text => N("Your computer can synchronize its clock\n with a remote time server using NTP")),
-                                                                           0, gtksignal_connect(gtkset_active($check_ntp = gtknew('CheckButton', text => N("Enable Network Time Protocol")), $mode),  clicked => sub { 
-                                                                                                    $mode = !$mode; 
-                                                                                                    $hb_ntp->set_sensitive($mode);
-                                                                                                    if ($mode == 1 && !$in->do_pkgs->is_installed('ntp') && !$in->do_pkgs->is_installed('chrony')) {
-                                                                                                        install_ntp();
-                                                                                                    }
-                                                                                                }),
-                                                                           0, $hb_ntp = gtknew('HBox', border_width => 5, children => [
-                                                                                       0, gtknew('Label', text => N("Server:")),
-                                                                                       1, $combo_ntpserver = Gtk3::ComboBoxText->new
-                                                                                      ])
-                                                                          ]))
-                                                       ]),
-                                            0, gtknew('VBox', children => [
-                                                        0, gtknew('HBox', children => [
-                                                                    0, $drawing_area = gtkset_size_request(Gtk3::DrawingArea->new, @image_size),
-                                                                   ]),
-                                                        0, my $time_box = gtknew('HBox', homogenous => 1, children => [
-                                                                    0, my $spinner_h = Gtk3::SpinButton->new($adjh, 0, 0),
-                                                                    0, my $spinner_m = Gtk3::SpinButton->new($adjm, 0, 0),
-                                                                    0, my $spinner_s = Gtk3::SpinButton->new($adjs, 0, 0),
-                                                                   ]),
-                                                        1, gtknew('Frame', text => N("Timezone"), shadow_type => 'etched_in', child => 
-                                                                  gtknew('VBox', border_width => 5, children_tight => [
-                                                                            $label_timezone,
-                                                                            $button_time ])),
-                                                       ]),
-                                           ]),
-                                0, create_okcancel(my $w =
-                                                   {
-                                                    cancel_clicked => sub { ugtk3->exit(0) },
-                                                    ok_clicked => sub {
-							my $need_date = 1;
-                                                        any::disable_x_screensaver();
-                                                        if ($check_ntp->get_active) {
-                                                            my $choosed_serv = $combo_ntpserver->entry->get_text;
-                                                            $choosed_serv =~ s/^[^:]+: (.+)/$1/;
-                                                            if (!$choosed_serv) {
-                                                                err_dialog(N("Error"), N("Please enter a valid NTP server address."));
-                                                                return;
-                                                            }
-                                                            timezone::set_ntp_server($choosed_serv);
-                                                            system('systemctl', 'enable', "$ntpd.service");
-                                                            system('systemctl', 'stop', "$ntpd.service");
-                                                            #verify that we have a valid hostname (thx sam)
-                                                            $choosed_serv =~ s/[^-a-zA-Z0-9.]//g;
-                                                            my $sync_ok;
-                                                            if ($ntpd eq "chronyd") {
-                                                                system('systemctl', 'start', "$ntpd.service");
-                                                                # Wait up to 30s for sync
-                                                                $sync_ok = !system('chronyc', 'waitsync', '30', '0.1');
-                                                                system('systemctl', 'stop', "$ntpd.service") if (!$sync_ok);
-                                                            } else {
-                                                                $sync_ok = !system('/usr/sbin/ntpdate', $choosed_serv);
-                                                                system('systemctl', 'start', "$ntpd.service") if ($sync_ok);
-                                                            }
-							    if ($sync_ok) {
-								update_time(); #- get the new time before updating the hwclock
-								$need_date = 0;
-							    } else {
-                                                                $in->ask_from_no_check({
-                                                                    title => N("Error"),
-                                                                    messages => N("Could not synchronize with %s.", $choosed_serv),
-                                                                    ok => N("Quit"),
-                                                                    cancel => N("Retry"),
-                                                                }, []) or return;
-							    }
-                                                        } else {
-							    if (is_ntp_daemon_running()) {
-								system('systemctl', 'stop', "$ntpd.service");
-								system('systemctl', 'disable', "$ntpd.service");
-							    }
-							}
-							if ($need_date) {
-							    my ($year, $month, $day) = $calendar->get_date;
-							    $month++;
-							    my ($hour, $min, $sec) = ($adjh->get_value, $adjm->get_value, $adjs->get_value);
-							    system("date " .
-							           join('', map { print_it0($_) } ($month, $day, $hour, $min, $year)) . '.' . print_it0($sec));
-							}
-							-e '/sbin/hwclock' and system('/sbin/hwclock', '--systohc');
-                                                        any::enable_x_screensaver();
-                                                        system(qw(dcop kicker Panel restart)) if $ENV{DESKTOP} eq 'kde';
-                                                        ugtk3->exit(0);
-                                                    },
-                                                   },
-                                                   undef, undef, '',
-                                                   [ N("Reset"), sub {
-                                                         $its_reset = 1;
-                                                         $timer = Glib::Timeout->add(120, \&update_time);
-                                                         Repaint($drawing_area, 1);
-                                                         $button_reset->set_sensitive(0);
-                                                         $its_reset = 0;
-                                                     } ]
-                                                  ),
-                               ])
-                      );
+$my_win->{window}->add(
+    gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, children => [
+	    1, gtknew('HBox', children => [
+		    1, gtknew('VBox', children => [
+			    0, $calendar,
+			    1, gtknew('Frame', text => N("Network Time Protocol"), shadow_type => 'etched_in', child => 
+				gtknew('VBox', border_width => 5, children => [
+					0, gtknew('Label', text => N("Your computer can synchronize its clock\n with a remote time server using NTP")),
+					0, gtksignal_connect(gtkset_active($check_ntp = gtknew('CheckButton', text => N("Enable Network Time Protocol")), $mode),  clicked => sub { 
+					    $mode = !$mode; 
+					    $hb_ntp->set_sensitive($mode);
+					    if ($mode == 1 && !$in->do_pkgs->is_installed('ntp') && !$in->do_pkgs->is_installed('chrony')) {
+						install_ntp();
+					    }
+							     }),
+					0, $hb_ntp = gtknew('HBox', border_width => 5, children => [
+								0, gtknew('Label', text => N("Server:")),
+								1, $combo_ntpserver = Gtk3::ComboBoxText->new
+							    ])
+				    ]))
+			]),
+		    0, gtknew('VBox', children => [
+			    0, gtknew('HBox', children => [
+					  0, $drawing_area = gtkset_size_request(Gtk3::DrawingArea->new, @image_size),
+				      ]),
+			    0, my $time_box = gtknew('HBox', homogenous => 1, children => [
+							 0, my $spinner_h = Gtk3::SpinButton->new($adjh, 0, 0),
+							 0, my $spinner_m = Gtk3::SpinButton->new($adjm, 0, 0),
+							 0, my $spinner_s = Gtk3::SpinButton->new($adjs, 0, 0),
+						     ]),
+			    1, gtknew('Frame', text => N("Timezone"), shadow_type => 'etched_in', child => 
+				      gtknew('VBox', border_width => 5, children_tight => [
+						 $label_timezone,
+						 $button_time ])),
+			]),
+		]),
+	    0, create_okcancel(
+		my $w =
+		{
+		    cancel_clicked => sub { ugtk3->exit(0) },
+		    ok_clicked => sub {
+			my $need_date = 1;
+			any::disable_x_screensaver();
+			if ($check_ntp->get_active) {
+			    my $choosed_serv = $combo_ntpserver->entry->get_text;
+			    $choosed_serv =~ s/^[^:]+: (.+)/$1/;
+			    if (!$choosed_serv) {
+				err_dialog(N("Error"), N("Please enter a valid NTP server address."));
+				return;
+			    }
+			    timezone::set_ntp_server($choosed_serv);
+			    system('systemctl', 'enable', "$ntpd.service");
+			    system('systemctl', 'stop', "$ntpd.service");
+			    #verify that we have a valid hostname (thx sam)
+			    $choosed_serv =~ s/[^-a-zA-Z0-9.]//g;
+			    my $sync_ok;
+			    if ($ntpd eq "chronyd") {
+				system('systemctl', 'start', "$ntpd.service");
+				# Wait up to 30s for sync
+				$sync_ok = !system('chronyc', 'waitsync', '30', '0.1');
+				system('systemctl', 'stop', "$ntpd.service") if (!$sync_ok);
+			    } else {
+				$sync_ok = !system('/usr/sbin/ntpdate', $choosed_serv);
+				system('systemctl', 'start', "$ntpd.service") if ($sync_ok);
+			    }
+			    if ($sync_ok) {
+				update_time(); #- get the new time before updating the hwclock
+				$need_date = 0;
+			    } else {
+				$in->ask_from_no_check({
+				    title => N("Error"),
+				    messages => N("Could not synchronize with %s.", $choosed_serv),
+				    ok => N("Quit"),
+				    cancel => N("Retry"),
+						       }, []) or return;
+			    }
+			} else {
+			    if (is_ntp_daemon_running()) {
+				system('systemctl', 'stop', "$ntpd.service");
+				system('systemctl', 'disable', "$ntpd.service");
+			    }
+			}
+			if ($need_date) {
+			    my ($year, $month, $day) = $calendar->get_date;
+			    $month++;
+			    my ($hour, $min, $sec) = ($adjh->get_value, $adjm->get_value, $adjs->get_value);
+			    system("date " .
+				   join('', map { print_it0($_) } ($month, $day, $hour, $min, $year)) . '.' . print_it0($sec));
+			}
+			-e '/sbin/hwclock' and system('/sbin/hwclock', '--systohc');
+			any::enable_x_screensaver();
+			system(qw(dcop kicker Panel restart)) if $ENV{DESKTOP} eq 'kde';
+			ugtk3->exit(0);
+		    },
+		},
+		undef, undef, '',
+		[ N("Reset"), sub {
+		    $its_reset = 1;
+		    $timer = Glib::Timeout->add(120, \&update_time);
+		    Repaint($drawing_area, 1);
+		    $button_reset->set_sensitive(0);
+		    $its_reset = 0;
+		  } ]
+	    ),
+	])
+    );
 $button_reset = $w->{buttons}{N("Reset")};
 
 $time_box->set_direction('ltr');
