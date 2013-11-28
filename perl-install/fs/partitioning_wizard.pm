@@ -332,10 +332,8 @@ sub create_display_box {
                                                         $ratio * MB(600), 0));
 
             my $hpane = Gtk3::HPaned->new;
-            $hpane->add1($part_widget);
-            $hpane->child1_shrink(0);
-            $hpane->add2($mdv_widget);
-            $hpane->child2_shrink(0);
+            $hpane->pack1($part_widget, 1, 0);
+            $hpane->pack2($mdv_widget, 1, 0);
             $hpane->set_position(ceil($ratio * $entry->{req_size}));
             ugtk3::gtkset_size_request($hpane, $entry->{width}, 0);
             ugtk3::gtkpack__($display_box, $hpane);
