@@ -99,10 +99,6 @@ sub load {
     modules::load_and_configure($modules_conf, $name) if $::isStandalone;
 }
 
-sub get_alternative {
-    "unknown";
-}
-
 sub do_switch {
     my ($in, $modules_conf, $old_driver, $new_driver, $index) = @_;
     return if $old_driver eq $new_driver;
@@ -132,9 +128,9 @@ sub switch {
     my ($in, $modules_conf, $device) = @_;
     my $driver = $device->{current_driver} || $device->{driver};
 
-    my @alternative = $driver ne 'unknown' ? get_alternative($driver) : ();
-    unless ($driver eq $device->{driver} || member($device->{driver}, @alternative)) {
-	push @alternative, get_alternative($device->{driver}), $device->{driver};
+    my @alternative;
+    if ($driver ne $device->{driver}) {
+	push @alternative, $device->{driver};
     }
     if (@alternative) {
         my $new_driver = $driver;
@@ -342,7 +338,7 @@ sub configure_sound_slots {
     my $altered = 0;
     each_index {
         my $default_driver = $modules_conf->get_alias("sound-slot-$::i");
-        if (!member($default_driver, get_alternative($_->{driver}), $_->{driver})) {
+        if (!member($default_driver, $_->{driver})) {
             $altered ||= $default_driver;
             configure_one_sound_slot($modules_conf, $::i, $_->{driver});
         }
