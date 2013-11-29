@@ -124,7 +124,7 @@ sub do_switch {
     rooted("service sound start") if $::isStandalone;
 }
 
-sub switch {
+sub config {
     my ($in, $modules_conf, $device) = @_;
     my $driver = $device->{current_driver} || $device->{driver};
 
@@ -243,12 +243,6 @@ To use alsa, one can either use:
     }
   end:
 }
-
-sub config {
-    my ($in, $modules_conf, $device) = @_;
-    switch($in, $modules_conf, $device);
-}
-
 
 sub trouble {
     my ($in) = @_;
