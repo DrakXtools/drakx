@@ -230,11 +230,6 @@ To use alsa, one can either use:
             do_switch($in, $modules_conf, $device->{current_driver}, $new_driver, $device->{sound_slot_index});
             $device->{current_driver} = $new_driver;
         }
-    } elsif ($driver =~ /^Bad:/) {
-        $driver =~ s/^Bad://;
-        $in->ask_warn(N("No open source driver"), 
-                      N("There's no free driver for your sound card (%s), but there's a proprietary driver at \"%s\".",
-                        $device->{description}, $driver));
     } elsif ($driver eq "unknown") {
         $in->ask_from(N("No known driver"), 
                       N("There's no known driver for your sound card (%s)",
