@@ -162,7 +162,6 @@ sub config {
         };
 
         my @common = (
-            get_any_driver_entry($in, $modules_conf, $driver, $device),
             {
                 text => N("Enable PulseAudio"),
                 type => 'bool', val => \$is_pulseaudio_enabled,
