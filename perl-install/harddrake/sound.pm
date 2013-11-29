@@ -128,10 +128,7 @@ sub switch {
     my ($in, $modules_conf, $device) = @_;
     my $driver = $device->{current_driver} || $device->{driver};
 
-    my @alternative;
-    if ($driver ne $device->{driver}) {
-	push @alternative, $device->{driver};
-    }
+    my @alternative = $driver ne $device->{driver} ? $device->{driver} : ();
     if (@alternative) {
         my $new_driver = $driver;
         push @alternative, $driver;
