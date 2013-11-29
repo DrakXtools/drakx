@@ -220,7 +220,6 @@ To use alsa, one can either use:
 				if_(@alternative,
                                 { 
                                     label => N("Driver:"), val => \$new_driver, list => \@alternative, default => $new_driver, sort =>1,
-                                    allow_empty_list => 1, 
                                     format => sub { my ($drv) = @_;
                                                     $drv eq 'unknown' ? $drv :
                                                       sprintf(($des{$drv} ? "$des{$drv} (%s [%s])"
