@@ -1003,18 +1003,6 @@ sub urpmi_add_all_media {
     my $log_file = '/root/drakx/updates.log';
     my $val = run_program::rooted($::prefix, $binary, '>>', $log_file, '2>>', $log_file, @options);
 
-    if ($val) {
-        #- enable Non-free/Restricted repositories if a package having a matching name is installed
-        #- FIXME: this only works for Non-free for now thanks to kernel-firmware-nonfree
-        #- for Restricted to work and for better Non-free support, we should search in package releases as well
-        foreach my $media (qw(Non-free Restricted)) {
-            $in->do_pkgs->are_installed("*" . lc($media) . "*") or next;
-            foreach my $type (qw(Release Updates)) {
-                run_program::rooted($::prefix, '/usr/libexec/urpmi.update', '--no-ignore', "$media $type");
-            }
-        }
-    }
-
     undef $wait;
     $val;
 }
