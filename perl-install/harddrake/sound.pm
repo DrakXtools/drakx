@@ -129,7 +129,12 @@ sub config {
     my $driver = $device->{current_driver} || $device->{driver};
 
     my @alternative = $driver ne $device->{driver} ? $device->{driver} : ();
-    if (@alternative) {
+    if ($driver eq "unknown") {
+        $in->ask_from(N("No known driver"), 
+                      N("There's no known driver for your sound card (%s)",
+                        $device->{description}),
+                      [ get_any_driver_entry($in, $modules_conf, $driver, $device) ]);
+    } else {
         my $new_driver = $driver;
         push @alternative, $driver;
         my %des = modules::category2modules_and_description('multimedia/sound');
@@ -212,6 +217,7 @@ To use alsa, one can either use:
                                         },
 				},
                                [
+				if_(@alternative,
                                 { 
                                     label => N("Driver:"), val => \$new_driver, list => \@alternative, default => $new_driver, sort =>1,
                                     allow_empty_list => 1, 
@@ -220,7 +226,7 @@ To use alsa, one can either use:
                                                       sprintf(($des{$drv} ? "$des{$drv} (%s [%s])"
                                                                 : "%s [%s]"), $drv, $drv =~ /^snd_/ ? 'ALSA' : 'OSS');
                                                 }
-                                },
+                                }),
                                 @common,
                                 ]))
         {
@@ -230,11 +236,6 @@ To use alsa, one can either use:
             do_switch($in, $modules_conf, $device->{current_driver}, $new_driver, $device->{sound_slot_index});
             $device->{current_driver} = $new_driver;
         }
-    } elsif ($driver eq "unknown") {
-        $in->ask_from(N("No known driver"), 
-                      N("There's no known driver for your sound card (%s)",
-                        $device->{description}),
-                      [ get_any_driver_entry($in, $modules_conf, $driver, $device) ]);
     }
   end:
 }
