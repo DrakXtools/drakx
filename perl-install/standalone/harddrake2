@@ -410,13 +410,6 @@ foreach (@classes) {
             $_->{capacity} =~ s/DVD/$dvd/;
         }
         $configurator .= harddrake::data::set_removable_configurator($Ident, $_);
-        if ($Ident eq "AUDIO") {
-            require harddrake::sound;
-            my @alter = harddrake::sound::get_alternative($_->{driver});
-            if (my $alternative_drivers = join(', ', @alter)) {
-		$_->{alternative_drivers} = $alternative_drivers;
-	    }
-        }
         if ($Ident eq "HARDDISK") {
             my $hd = $_;
             my $info = find { $_->{device} eq $hd->{device} } @{$all_hds->{hds}};
