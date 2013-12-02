@@ -295,7 +295,7 @@ sub create_display_box {
     my @parts = diskdrake::hd_gtk::kind2parts($kind);
     my $totalsectors = diskdrake::hd_gtk::kind2sectors($kind, @parts);
 
-    my $width = 540;
+    my $width = 520;
     my $minwidth = 40;
 
     my $display_box = ugtk3::gtkset_size_request(Gtk3::HBox->new(0,0), -1, 26);
@@ -460,7 +460,7 @@ sub display_choices {
             $item = Gtk3::EventBox->new;
             my $b2 = gtknew("Image", file => "small-logo");
             $item->add($b2);
-            $item->set_size_request(540,26);
+            $item->set_size_request(520,26);
             $item->set_name("PART_new");
         } elsif ($s eq 'diskdrake') {
         } else {
