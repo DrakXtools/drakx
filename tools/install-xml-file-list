@@ -292,7 +292,7 @@ sub install {
 
     } elsif ($expand eq 'binary') {
 	$disallow_from_dir->();
-	my @PATH = qw(/usr/uclibc/sbin /usr/uclibc/bin /usr/uclibc/usr/bin /usr/uclibc/usr/sbin /sbin /bin /usr/bin /usr/sbin);
+	my @PATH = qw(/usr/uclibc/sbin /usr/uclibc/bin /usr/uclibc/usr/bin /usr/uclibc/usr/sbin /sbin /bin /usr/sbin /usr/bin);
 	foreach my $name (map { expand_macros($_) } @text_l) {
 	    if (grep {$_ eq $name } @busybox_funct) {
 		if ($copy_mode eq 'system') {
