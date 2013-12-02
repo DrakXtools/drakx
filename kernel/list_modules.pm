@@ -333,7 +333,8 @@ our %l = (
     other => [
       qw(defxx ide-floppy ide-tape loop lp nbd sg st),
       qw(parport_pc parport_serial),
-      qw(btaudio mmc_block),
+      qw(btaudio),
+      qw(mmc_block sdhci-acpi), # eMMC
 
       'cryptoloop',
       if_(arch() =~ /sparc/, 'openprom'),
