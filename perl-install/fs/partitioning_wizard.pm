@@ -369,7 +369,7 @@ sub create_display_box {
             };
             $hpane->signal_connect('size-allocate' => sub {
                 my (undef, $alloc) = @_;
-                $entry->{width} = $alloc->width;
+                $entry->{width} = $alloc->{width};
                 $update_ratio->();
                 0;
             });
