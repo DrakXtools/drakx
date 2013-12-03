@@ -212,7 +212,7 @@ sub make($) {
 
 sub simple_partition_scan {
     my ($part) = @_;
-    $part->{device} =~ /((?:[hsv]|xv)d[a-z])(\d+)$/;
+    $part->{device} =~ /((?:[hsv]|xv)d[a-z]|mmcblk\d+p)(\d+)$/;
 }
 sub part_number {
     my ($part) = @_;
