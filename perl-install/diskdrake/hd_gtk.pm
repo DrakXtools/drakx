@@ -321,7 +321,7 @@ sub create_automatic_notebooks {
 sub create_buttons4partitions {
     my ($kind, $totalsectors, @parts) = @_;
 
-    $width = $w->{window}->get_allocated_width - first(get_action_box_size()) - 50 if $w->{window}->get_window;
+    $width = $w->{window}->get_allocated_width - first(get_action_box_size()) - 60 if $w->{window}->get_window;
 
     my $ratio = $totalsectors ? ($width - @parts * $minwidth) / $totalsectors : 1;
     my $i = 1;
@@ -346,7 +346,8 @@ sub create_buttons4partitions {
 	}
 	my $info = $entry->{mntpoint} || $entry->{device_LABEL} || '';
 	$info .= "\n" . ($entry->{size} ? formatXiB($entry->{size}, 512) : N("Unknown")) if $info;
-	my $w = Gtk3::ToggleButton->new() or internal_error('new_with_label');
+	my $w = Gtk3::ToggleButton->new_with_label($info) or internal_error('new_with_label');
+	$w->get_child->set_ellipsize('end');
 	$w->set_tooltip_text($info);
 	$w->signal_connect(clicked => sub { 
 	    $current_button != $w or return;
