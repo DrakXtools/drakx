@@ -393,7 +393,7 @@ sub create_widget {
 	    $w = ugtk3::gtkadd(Gtk3::CheckButton->new, gtkshow(gtkcreate_img($e->{image})));
 	} else {
 	    #-		warn "\"text\" member should have been used instead of \"label\" one at:\n", common::backtrace(), "\n" if $e->{label} && !$e->{text};
-	    $w = Gtk3::CheckButton->new_with_label($e->{text});
+	    $w = Gtk3::CheckButton->new_with_label($e->{text} || '');
 	}
 	$w->signal_connect(clicked => $onchange->(sub { $w->get_active }));
 	${$e->{val}} ||= 0;
