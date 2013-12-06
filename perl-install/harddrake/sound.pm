@@ -1,14 +1,4 @@
 package harddrake::sound;
-# lists filled with Danny Tholen help, enhanced by Thierry Vignaud
-#
-# No ALSA for OSS's 
-#    o isa cards: msnd_pinnacle, pas2, 
-#    o pci cards: ad1889, sam9407
-# No OSS for ALSA's
-#    o pci cards: snd_als4000, snd_es968, snd_hdsp
-#    o isa cards: snd_azt2320, snd_cs4231, snd_cs4236, 
-#      snd_dt0197h, snd_korg1212, snd_rme32
-#    o pcmcia cards: snd_vxp440 snd_vxpocket
 
 # TODO: 
 #    o ensure sound is not user (either dsp/midi/sequencer/mixer)
