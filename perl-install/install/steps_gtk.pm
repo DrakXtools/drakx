@@ -343,10 +343,8 @@ sub reallyChooseGroups {
     #- when restarting this step, it might be necessary to reload the compssUsers.pl (bug 11558). kludgy.
     if (!ref $o->{gtk_display_compssUsers}) { install::any::load_rate_files($o) }
     ugtk3::gtkadd($w->{window},
-       gtknew('ScrolledWindow', child =>
-	   gtknew('VBox', children => [
-		    1, $o->{gtk_display_compssUsers}->($entry),
-		    1, '',
+       gtknew('VBox', children => [
+		  1, gtknew('ScrolledWindow', child =>	$o->{gtk_display_compssUsers}->($entry)),
 		    if_($individual,
                         0, gtknew('CheckButton', text => N("Individual package selection"), active_ref => $individual),
                     ),
@@ -358,7 +356,7 @@ sub reallyChooseGroups {
 			  gtknew('Button', text => N("Unselect All"), clicked => sub { $_->set_active(0) foreach @entries }),
 			  gtknew('Button', text => N("Next"), clicked => sub { Gtk3->main_quit }),
                     ]),
-		  ]),
+		  ],
 	    )
 	  );
     $w->main;
