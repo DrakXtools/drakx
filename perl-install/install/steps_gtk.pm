@@ -345,18 +345,18 @@ sub reallyChooseGroups {
     ugtk3::gtkadd($w->{window},
        gtknew('VBox', children => [
 		  1, gtknew('ScrolledWindow', child =>	$o->{gtk_display_compssUsers}->($entry)),
-		    if_($individual,
-                        0, gtknew('CheckButton', text => N("Individual package selection"), active_ref => $individual),
-                    ),
-		    0, $w_size,
-		    0, gtknew('HSeparator'),
-		    0, gtknew('HButtonBox', layout => 'edge', children_tight => [
-                        gtknew('Install_Button', text => N("Help"), clicked => sub {
-                                   interactive::gtk::display_help($o, { interactive_help_id => 'choosePackageGroups' }) }),
-			  gtknew('Button', text => N("Unselect All"), clicked => sub { $_->set_active(0) foreach @entries }),
-			  gtknew('Button', text => N("Next"), clicked => sub { Gtk3->main_quit }),
-                    ]),
-		  ],
+		  if_($individual,
+		      0, gtknew('CheckButton', text => N("Individual package selection"), active_ref => $individual),
+		  ),
+		  0, $w_size,
+		  0, gtknew('HSeparator'),
+		  0, gtknew('HButtonBox', layout => 'edge', children_tight => [
+				gtknew('Install_Button', text => N("Help"), clicked => sub {
+				    interactive::gtk::display_help($o, { interactive_help_id => 'choosePackageGroups' }) }),
+				gtknew('Button', text => N("Unselect All"), clicked => sub { $_->set_active(0) foreach @entries }),
+				gtknew('Button', text => N("Next"), clicked => sub { Gtk3->main_quit }),
+			    ]),
+	      ],
 	    )
 	  );
     $w->main;
