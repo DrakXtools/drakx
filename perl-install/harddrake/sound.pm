@@ -187,10 +187,10 @@ sub config {
         } elsif ($in->ask_from_({ title => N("Sound configuration"),
                                   messages => 
 				    $device->{description} .
-                          #-PO: here the first %s is either "OSS" or "ALSA", 
+                          #-PO: here the first %s is either "ALSA", 
                           #-PO: the second %s is the name of the current driver
                           #-PO: and the third %s is the name of the default driver
-				  N("\n\nYour card currently uses the %s\"%s\" driver (the default driver for your card is \"%s\")", ($driver =~ /^snd_/ ? "ALSA " : "OSS "), $driver, $device->{driver}),
+				  N("\n\nYour card currently uses the %s\"%s\" driver (the default driver for your card is \"%s\")", "ALSA ", $driver, $device->{driver}),
 				  interactive_help => sub {  
 				      N("OSS (Open Sound System) was the first sound API. It's an OS independent sound API (it's available on most UNIX(tm) systems) but it's a very basic and limited API.
 What's more, OSS drivers all reinvent the wheel.
