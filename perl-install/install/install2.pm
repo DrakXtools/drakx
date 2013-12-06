@@ -390,7 +390,7 @@ sub read_stage1_net_conf() {
     #- get stage1 network configuration if any.
     log::l('found /tmp/network');
     add2hash($o->{net}{network} ||= {}, network::network::read_conf('/tmp/network'));
-    if (my ($file) = glob_('/tmp/ifcfg-*')) {
+    if (my ($file) = grep { -f $_ } glob_('/tmp/ifcfg-*')) {
         log::l("found network config file $file");
         my $l = network::network::read_interface_conf($file);
         $o->{net}{ifcfg}{$l->{DEVICE}} ||= $l;
