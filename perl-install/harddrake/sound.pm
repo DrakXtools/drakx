@@ -186,7 +186,7 @@ sub config {
             }
         } elsif ($in->ask_from_({ title => N("Sound configuration"),
                                   messages => 
-				    $device->{description}.
+				    $device->{description} .
                           #-PO: here the first %s is either "OSS" or "ALSA", 
                           #-PO: the second %s is the name of the current driver
                           #-PO: and the third %s is the name of the default driver
