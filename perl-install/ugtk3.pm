@@ -242,6 +242,7 @@ sub gtktreeview_children {
     my @l;
     $model or return;
     my $p = $model->iter_children($iter);
+    $p or return;
     while ($model->iter_next($p)) {
 	push @l, $p->copy;
     }
