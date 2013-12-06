@@ -737,6 +737,7 @@ sub _gtk__Expander {
     } else {
 	$w = Gtk3::Expander->new(delete $opts->{text} || '');
     }
+    $w->set_use_markup(delete $opts->{use_markup}) if exists $opts->{use_markup};
 
     $w->signal_connect(activate => delete $opts->{activate}) if exists $opts->{activate};
 
