@@ -595,6 +595,7 @@ sub main {
         if ($err =~ /wizcancel/) {
             $_->destroy foreach $::WizardTable->get_children;
         } else {
+            log::l("Partitioning failed: $err");
             $o->ask_warn('', N("Partitioning failed: %s", formatError($err)));
         }
     }
