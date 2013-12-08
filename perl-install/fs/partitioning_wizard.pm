@@ -73,13 +73,13 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 }
 
 sub partitionWizardSolutions {
-    my ($in, $all_hds, $all_fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab, $target) = @_;
+    my ($in, $all_hds, $all_fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab, $o_target) = @_;
     my $hds = $all_hds->{hds};
     my $fstab;
     my $full_fstab = [ fs::get::fstab($all_hds) ];
-    if ($target) {
-        $hds = [ $target ];
-        $fstab = [ grep { $_->{rootDevice} eq $target->{device} } fs::get::fstab($all_hds) ];
+    if ($o_target) {
+        $hds = [ $o_target ];
+        $fstab = [ grep { $_->{rootDevice} eq $o_target->{device} } fs::get::fstab($all_hds) ];
     } else {
         $fstab = $full_fstab;
     }
@@ -244,7 +244,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®")) if $
                                                      },
                                                      \&partition_table::description, \@hds_rw) or return;
                 } else {
-                    $hd = $target;
+                    $hd = $o_target;
                 }
 		$in->ask_okcancel_({ messages => N("ALL existing partitions and their data will be lost on drive %s", partition_table::description($hd)),
 				    title => N("Partitioning"),
