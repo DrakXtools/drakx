@@ -112,7 +112,7 @@ sub main {
 	$current_entry = '';
 	$update_all->();
     });
-    # ensure partitions bar is properlyz size on first display:
+    # ensure partitions bar is properly sized on first display:
     $notebook_widget->signal_connect(realize => $update_all);
     $w->sync;
     $done_button->grab_focus;
