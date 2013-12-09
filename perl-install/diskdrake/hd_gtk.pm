@@ -115,6 +115,12 @@ sub main {
     # ensure partitions bar is properly sized on first display:
     $notebook_widget->signal_connect(realize => $update_all);
     $w->sync;
+    # workaround for $notebook_widget being realized too early:
+    if (!$done_button) {
+	$notebook_widget->set_current_page(-1);
+	$notebook_widget->set_current_page(0);
+	$update_all->(2);
+    }
     $done_button->grab_focus;
     if (!$::testing) {
       $in->ask_from_list_(N("Read carefully"), N("Please make a backup of your data first"), 
