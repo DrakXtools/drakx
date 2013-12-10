@@ -541,7 +541,8 @@ sub create_widget {
 
 	    my $get = sub {
 		my $i = $model ? do {
-		    my $s = $model->get_string_from_iter($w->get_active_iter);
+		    my (undef, $iter) = $w->get_active_iter;
+		    my $s = $model->get_string_from_iter($iter);
 		    eval { find_index { $s eq $_ } @{$model->{path_str_list}} };
 		} : do {
 		    my $s = $w->get_text;
