@@ -896,6 +896,7 @@ sub _gtk_any_Window {
 	if ($class eq 'Window') {
 	    $w = "Gtk3::$class"->new(delete $opts->{type} || 'toplevel');
 	} elsif ($class eq 'Plug') {
+	    delete $opts->{title};
 	    $opts->{socket_id} or internal_error("cannot create a Plug without a socket_id");
 	    $w = "Gtk3::$class"->new(delete $opts->{socket_id});
 	} elsif ($class eq 'FileChooserDialog') {
