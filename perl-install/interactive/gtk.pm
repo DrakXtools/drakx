@@ -397,7 +397,7 @@ sub create_widget {
 	}
 	$w->signal_connect(clicked => $onchange->(sub { $w->get_active }));
 	${$e->{val}} ||= 0;
-	$set = sub { $w->set_active($_[0]) };
+	$set = sub { $w->set_active($_[0] || 0) };
         $real_w = add_padding($w);
     } elsif ($e->{type} eq 'only_label') {
         my @common = (
