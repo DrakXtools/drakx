@@ -634,7 +634,7 @@ sub advanced_install() {
     $list->get_selection->set_mode('browse');
     $list->set_rules_hint(1);
     $model->signal_connect("row-inserted" => sub { $button and $button->set_sensitive(1) });
-    $model->signal_connect("row-deleted" => sub { $button and $button->set_sensitive($model->get_iter_first) });
+    $model->signal_connect("row-deleted" => sub { $button and $button->set_sensitive($model->get_iter_first || 0) });
 
     dialog(N("Import fonts"),
            [
