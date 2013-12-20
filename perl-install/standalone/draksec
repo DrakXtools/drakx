@@ -117,7 +117,7 @@ my %auth = (
 );
 
 my $polkit_rules_file = "/etc/polkit-1/rules.d/51-draksec.rules";
-my %overrides = map { if ( /case '([^']+)': return polkit\.Result\.(YES|AUTH_ADMIN_KEEP|AUTH_SELF_KEEP)/ ) { ($1, $2) } } cat_($polkit_rules_file);
+my %overrides = map { if (/case '([^']+)': return polkit\.Result\.(YES|AUTH_ADMIN_KEEP|AUTH_SELF_KEEP)/) { ($1, $2) } } cat_($polkit_rules_file);
 
 
 sub default_auth_value {
@@ -145,8 +145,8 @@ sub set_auth_value {
 sub write_rules() {
     my $contents = '';
     keys %overrides;
-    while(my($k, $v) = each %overrides) {
-        $contents .= "case '$k': return polkit.Result.$v;\n" if ($k && $v);
+    while (my ($k, $v) = each %overrides) {
+        $contents .= "case '$k': return polkit.Result.$v;\n" if $k && $v;
     }
 
     if ($contents) {
