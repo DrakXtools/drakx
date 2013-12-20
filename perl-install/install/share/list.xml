@@ -189,8 +189,7 @@
     /sbin/blkid
   </mode>
 
-  /usr/bin/drakx-matchbox-window-manager
-  /usr/share/matchbox/mbnoapp.xpm
+  /usr/bin/mutter
 
   /usr/share/icons/gnome/scalable/status/dialog-warning-symbolic.svg
 
@@ -246,18 +245,7 @@
   </if>
 
   <from expand="glob">
-    <from spaces_in_filename="1">
-       /usr/share/themes/Ia Ora*
-    </from>
-    <from spaces_in_filename="1">
-       /usr/share/themes/Ia Ora*/*
-    </from>
-    <from spaces_in_filename="1">
-       /usr/share/themes/Ia Ora*/matchbox/*
-    </from>
-    <from spaces_in_filename="1">
-       /usr/share/themes/Ia Ora*/gtk-2.0/gtkrc
-    </from>
+    /usr/share/themes/oxygen-gtk*
     /usr/LIB/gdk-pixbuf-2.0/*/loaders.cache
     /usr/LIB/gdk-pixbuf-2.0/*/loaders/libpixbufloader-png.so
     /etc/brltty/*.ttb
