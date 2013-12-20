@@ -327,7 +327,18 @@ sub is_firmware_needed {
     require pkgs;
     my @xpkgs = pkgs::detect_graphical_drivers($o->do_pkgs);
     log::l("the following nonfree firmware(s) are needed for X.org: " . join(', ', @xpkgs)) if @xpkgs;
-    @xpkgs;
+
+    my $need_microcode = detect_devices::hasCPUMicrocode();
+    log::l("nonfree firmware is needed for the CPU (microcode)") if $need_microcode;
+
+    @need || @xpkgs || $need_microcode;
+}
+
+sub is_firmware_needed {
+    my ($o) = @_;
+    state $res;
+    $res = is_firmware_needed_($o) if !defined $res;
+    $res;
 }
 
 sub msg_if_firmware_needed {
