@@ -599,7 +599,7 @@ enum return_type perform_dhcp(struct interface_info * intf)
 		log_message("DHCP: telling server to use name = %s", dhcp_hostname);
 	}
 
-	memset(&client_addr.in.sin_addr, 0, sizeof(&client_addr.in.sin_addr));
+	memset(&client_addr.in.sin_addr, 0, sizeof(client_addr.in.sin_addr));
 	client_addr.in.sin_family = AF_INET;
 	client_addr.in.sin_port = htons(BOOTP_CLIENT_PORT);	/* bootp client */
 
