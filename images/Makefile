@@ -1,9 +1,9 @@
 include ../Makefile.config
 
-VERSION=2.1
+VERSION=2.2
 PRODUCT=$(FAMILY)-images
 KERNELS=$(shell rpm -qf /lib/modules/3.*)
-IMAGES_DEST = $(ROOTDEST)/install/images
+2MAGES_DEST = $(ROOTDEST)/install/images
 #COMPRESS = xz -v --check=crc32 -9e
 ARCH=$(shell arch)
 ifeq (x86_64, $(ARCH))
@@ -79,6 +79,7 @@ dist-git:
 	rm setup/setup-$(PRODUCT)-$(VERSION).tar
 	mv ../$(PRODUCT)-$(VERSION).tar .
 	xz -vf $(PRODUCT)-$(VERSION).tar
+	git tag mdk-$(PRODUCT)-$(VERSION)
 
 
 clean:
