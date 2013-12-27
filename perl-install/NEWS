@@ -1,6 +1,7 @@
 - detecting input devices:
   o display the real accessed /dev/input/eventX file (mga#8232)
   o do not crash if /dev/input/eventX doesn't exist (mga#10296)
+  o do not fill logs with "Cannot open /dev/input/eventX" (mga#8232)
 - draksec:
   o use expanders for clarity
 

@@ -569,8 +569,13 @@ sub getInputDevices() {
 	    if (!$> && ! -f "/dev/input/$event") {
 		    devices::make("/dev/input/$event");
 	    }
-	    my @KEYS = c::EVIocGBitKey("/dev/input/$event");
-	    $device->{SIDE} = 1 if $KEYS[0] & (1 << 0x13);
+	    if (-r "/dev/input/$event") {
+		my @KEYS = c::EVIocGBitKey("/dev/input/$event");
+		$device->{SIDE} = 1 if $KEYS[0] & (1 << 0x13);
+	    } else {
+		my $KEY = hex($1);
+		$device->{SIDE} = 1 if $KEY & (1 << 0x13);
+	    }
 
         } elsif (/^\s*$/) {
 	    push @devices, $device if $device;
