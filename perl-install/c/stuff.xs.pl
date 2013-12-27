@@ -438,7 +438,7 @@ EVIocGBitKey (char *file)
 
 		fd = open (file, O_RDONLY);
 		if (fd < 0) {
-			perror("Cannot open /dev/input/eventX");
+			warn("Cannot open %s: %s\n", file, strerror(errno));
 			return;
 		}
 
