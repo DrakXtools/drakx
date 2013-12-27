@@ -566,7 +566,7 @@ sub getInputDevices() {
 	    #- KEY=30000 0 0 0 0 0 0 0 0  #=> BTN_LEFT BTN_RIGHT
 	    #- KEY=70000 0 0 0 0 0 0 0 0  #=> BTN_LEFT BTN_RIGHT BTN_MIDDLE
 	    #- KEY=1f0000 0 0 0 0 0 0 0 0 #=> BTN_LEFT BTN_RIGHT BTN_MIDDLE BTN_SIDE BTN_EXTRA
-	    if (! -f "/dev/input/$event") {
+	    if (!$> && ! -f "/dev/input/$event") {
 		    devices::make("/dev/input/$event");
 	    }
 	    my @KEYS = c::EVIocGBitKey("/dev/input/$event");
