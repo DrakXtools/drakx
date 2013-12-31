@@ -1432,6 +1432,7 @@ sub write_and_install {
 	$do_pkgs->ensure_are_installed(\@packages, 1);
     }
     &write($locale, $b_user_only, $b_dont_touch_kde_files);
+    services::restart("systemd-localed");
 }
 
 =item write ($locale, $b_user_only, $b_dont_touch_kde_files)
@@ -1495,7 +1496,7 @@ sub write {
         add2hash($h, { CONSOLE_NOT_LOCALIZED => 'yes' });
     }
 
-    my $file = $b_user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n' && '/etc/locale.conf';
+    my $file = $b_user_only ? "$ENV{HOME}/.i18n" : "$ENV{HOME}/.config/locale.conf" && '/etc/locale.conf';
     log::explanations(qq(Setting l10n configuration in "$file"));
     setVarsInShMode($::prefix . $file, 0644, $h);
 
