@@ -198,11 +198,12 @@ sub raw {
 
     my $home;
     if ($options->{as_user}) {
-        my $user;
-        $user = $ENV{USERHELPER_UID} && getpwuid($ENV{USERHELPER_UID});
-        $user ||= common::get_parent_uid();
-        $options->{setuid} = getpwnam($user) if $user;
-        $home = $user->[7] if $user;
+        my $uid;
+        $uid = $ENV{USERHELPER_UID} && getpwuid($ENV{USERHELPER_UID});
+        $uid ||= common::get_parent_uid();
+        $options->{setuid} = getpwnam($uid) if $uid;
+        my ($full_user) = grep { $_->[2] eq $uid } list_passwd();
+        $home = $full_user->[7] if $full_user;
     }
     local $ENV{HOME} = $home if $home;
 
