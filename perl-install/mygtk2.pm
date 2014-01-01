@@ -1437,8 +1437,9 @@ sub set_main_window_size {
 my @icon_paths;
 sub add_icon_path { push @icon_paths, @_ }
 sub _icon_paths() {
-   (@icon_paths, (exists $ENV{SHARE_PATH} ? ($ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps") : ()),
-    "/usr/lib/libDrakX/icons", "pixmaps", 'data/icons', 'data/pixmaps', 'standalone/icons', '/usr/share/rpmdrake/icons');
+    my $loc = (($ENV{'LC_MESSAGES'} =~ m/ru_RU/) ? 'ru' : 'en');
+    (@icon_paths, (exists $ENV{SHARE_PATH} ? ($ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps/$loc", "$ENV{SHARE_PATH}/libDrakX/pixmaps") : ()),
+    "/usr/lib/libDrakX/icons", "pixmaps/$loc", "pixmaps", 'data/icons', 'data/pixmaps', 'standalone/icons', '/usr/share/rpmdrake/icons');
 }  
 
 sub main {
