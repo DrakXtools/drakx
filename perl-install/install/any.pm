@@ -804,7 +804,7 @@ sub default_packages {
     }
 
     add_n_log("/proc/cmdline=~/brltty=/", "brltty") if cat_("/proc/cmdline") =~ /brltty=/;
-    add_n_log("method==nfs", "nfs-utils-clients") if $o->{method} eq "nfs";
+    add_n_log("method==nfs", "nfs-utils") if $o->{method} eq "nfs";
     add_n_log("have RAID", "mdadm") if !is_empty_array_ref($o->{all_hds}{raids});
     add_n_log("have LVM", "lvm2") if !is_empty_array_ref($o->{all_hds}{lvms});
     add_n_log("have crypted DM", "cryptsetup") if !is_empty_array_ref($o->{all_hds}{dmcrypts});
