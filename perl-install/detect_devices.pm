@@ -1435,7 +1435,7 @@ sub usbKeyboard2country_code {
     my ($usb_kbd) = @_;
     my ($F, $tmp);
     # usbfs is deprecated, so this will be broken if not mounted, but the code seems unused anyways..(?)
-    sysopen($F, sprintf("/proc/bus/usb/%03d/%03d", $usb_kbd->{pci_bus}, $usb_kbd->{pci_device}), 0) and
+    sysopen($F, sprintf("/sys/kernel/debug/usb/%03d/%03d", $usb_kbd->{pci_bus}, $usb_kbd->{pci_device}), 0) and
       sysseek $F, 0x28, 0 and
       sysread $F, $tmp, 1 and
       unpack("C", $tmp);
