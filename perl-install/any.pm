@@ -639,7 +639,7 @@ sub get_autologin() {
     my %desktop_to_dm = (
         GNOME => 'gdm',
         KDE4 => 'kdm',
-        xfce4 => 'lightdm',
+        xfce4 => 'slim',
         LXDE => 'lxdm',
     );
     my %dm_canonical = (
