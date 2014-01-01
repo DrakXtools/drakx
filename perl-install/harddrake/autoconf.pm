@@ -101,21 +101,18 @@ sub bluetooth {
 sub laptop {
     my ($on_laptop) = @_;
 #- FIXME: make sure these packages are installed when needed
-#     require do_pkgs;
-#     my $do_pkgs = do_pkgs_standalone->new;
-#     if ($on_laptop) {
-#         $do_pkgs->ensure_is_installed("cpupower", "/lib/systemd/system/cpupower.service");
-#         $do_pkgs->ensure_is_installed("apmd", "/usr/bin/apm");
-#         $do_pkgs->ensure_is_installed("hotkeys", "/usr/bin/hotkeys");
-#         $do_pkgs->ensure_is_installed("laptop-mode-tools", "/usr/sbin/laptop_mode");
-#     } else {
-#         $do_pkgs->ensure_is_installed("numlock", "/etc/rc.d/init.d/numlock");
-#     }
+     require do_pkgs;
+     my $do_pkgs = do_pkgs_standalone->new;
+     if ($on_laptop) {
+         $do_pkgs->ensure_is_installed("cpupower", "/lib/systemd/system/cpupower.service");
+         $do_pkgs->ensure_is_installed("apmd", "/usr/bin/apm");
+     } else {
+         $do_pkgs->ensure_is_installed("numlock", "/etc/rc.d/init.d/numlock");
+     }
     require services;
     services::set_status("apmd", -e "/proc/apm");
-    #services::set_status("laptop-mode", $on_laptop);
     services::set_status("numlock", !$on_laptop);
-    #services::set_status("cpupower", $on_laptop);
+    services::set_status("cpupower", $on_laptop);
     
 }
 
