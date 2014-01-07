@@ -712,8 +712,8 @@ sub get_autologin() {
         my %conf = read_gnomekderc($kdm_file, 'X-:0-Core');
         $autologin_user = text2bool($conf{AutoLoginEnable}) && $conf{AutoLoginUser};
     } elsif ($dm eq "lightdm") {
-        my %conf = read_gnomekderc($lightdm_file, 'SeatDefaults');
-        $autologin_user = text2bool($conf{'#dummy-autologin'}) && $conf{autologin-user};
+        my %conf = read_gnomekderc($lightdm_conffile, 'SeatDefaults');
+        $autologin_user = text2bool($conf{'#dummy-autologin'}) && $conf{"autologin-user"};
     } else {
         my %conf = getVarsFromSh($autologin_file);
         $autologin_user = text2bool($conf{AUTOLOGIN}) && $conf{USER};
