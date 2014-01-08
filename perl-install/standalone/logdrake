@@ -76,7 +76,7 @@ if ($::isEmbedded) {
 	my $ui = gtknew('UIManager', actions => [
                    # [name, stock_id, value, label, accelerator, tooltip, callback]
                    [ 'FileMenu',        undef, N("_File") ],
-                   [ 'Save', undef, N("_Quit"), N("<control>Q"), undef, \&save ],
+                   [ 'Save', undef, N("_Quit"), N("<control>S"), undef, \&save ],
                    [ 'Quit', undef, N("_Quit"), N("<control>Q"), undef, \&quit ],
                ],
                string => qq(<ui>

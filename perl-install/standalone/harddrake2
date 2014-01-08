@@ -192,7 +192,7 @@ my $ui = gtknew('UIManager', actions => [
 		    [ 'Quit', undef, N("_Quit"), N("<control>Q"), undef, \&quit_global ],
 		    [ 'OptionsMenu',        undef, '_Options' ],
 		    [ 'HelpMenu',        undef, '_Help' ],
-		    if_($has_help, [ 'Help', undef, N("_Help"), N("<control>Q"), undef, \&run_help ]),
+		    if_($has_help, [ 'Help', undef, N("_Help"), N("<control>H"), undef, \&run_help ]),
 		    [ 'Fields description', undef, N("_Fields description"), undef, undef, \&fields_help ],
 		    [ 'Report Bug', undef, N("_Report Bug"), undef, undef, \&run_drakbug ],
 		    [ 'About', undef, N("_About..."), '', undef, \&about ],
