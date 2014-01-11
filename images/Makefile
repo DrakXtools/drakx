@@ -3,7 +3,7 @@ include ../Makefile.config
 VERSION=2.2
 PRODUCT=$(FAMILY)-images
 KERNELS=$(shell rpm -qf /lib/modules/3.*)
-2MAGES_DEST = $(ROOTDEST)/install/images
+IMAGES_DEST = $(ROOTDEST)/install/images
 #COMPRESS = xz -v --check=crc32 -9e
 ARCH=$(shell arch)
 ifeq (x86_64, $(ARCH))
