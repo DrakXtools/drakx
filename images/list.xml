@@ -96,7 +96,7 @@
   mkfs.ntfs mkdosfs fatlabel dosfslabel mkntfs ntfsresize ntfslabel
   mkfs.btrfs btrfs btrfsck fsck.btrfs
   mkfs.nilfs2 nilfs-tune
-  mkfs.jfs fsck.jfs jfs_tune
+  jfs_debugfs mkfs.jfs fsck.jfs jfs_fscklog jfs_logdump jfs_tune
 
   btrfs btrfsck btrfs-convert btrfs-debug-tree
   btrfs-map-logical mkfs.btrfs fsck.btrfs
