@@ -988,10 +988,17 @@ sub matching_driver__regexp {
     my ($regexp) = @_;
     grep { $_->{driver} =~ /$regexp/i } probeall();
 }
-
+sub matching_card__regexp {
+    my ($regexp) = @_;
+    grep { $_->{card} =~ /$regexp/i } probeall();
+}
 sub matching_driver {
     my (@list) = @_;
     grep { member($_->{driver}, @list) } probeall();
+}
+sub matching_card {
+    my (@list) = @_;
+    grep { member($_->{card}, @list) } probeall();
 }
 sub probe_name {
     my ($name) = @_;
@@ -1204,7 +1211,7 @@ sub is_virtualbox() {
 }
 
 sub is_vmware() {
-    any { $_->{driver} =~ /Card:VMware/ } detect_devices::pci_probe();
+    any { $_->{card} =~ /Card:VMware/ } detect_devices::pci_probe();
 }
 
 sub is_netbook_nettop() {
