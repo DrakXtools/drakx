@@ -308,7 +308,7 @@ $tree->get_selection->signal_connect('changed' => sub {
             my ($grouped, $ungrouped) = partition {
                 my $field = $_;
                 member($field, map { @$_ } values %groups);
-            } keys %device_fields;
+            } sort keys %device_fields;
             my @formated;
             foreach my $group ($identification, grep { $_ ne $identification } keys %groups) {
                 my @fields = @{$groups{$group}};
