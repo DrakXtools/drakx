@@ -1,5 +1,7 @@
 - partitioning:
   o do not propose check bad blocks for btrfs (Manuel Hiebel, mga#10116)
+  o increase minimum partition width for Oxygen (mga#11977)
+    (if not enough, we will disable labels on partitions buttons again)
 - revert back to matchbox instead of mutter as it doesn't fix
   diskdrake issues (mga#11977)
   (thus fixing missing window decorations (mga#12218))
