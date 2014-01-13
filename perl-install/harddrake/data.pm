@@ -384,7 +384,7 @@ our @tree =
       string => N("Bluetooth devices"),
       icon => "hw_network.png",
       configurator => "",
-      detector => sub { f(detect_devices::probe_category('bus/bluetooth')), f(grep { $_->{description} =~ /Bluetooth Dongle/ } @devices) },
+      detector => sub { f(detect_devices::probe_category('bus/bluetooth')), f(grep { $_->{description} =~ /Bluetooth Dongle|WLAN/ } @devices) },
       checked_on_boot => 1,
      },
 
