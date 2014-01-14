@@ -284,8 +284,11 @@ sub _set_service {
     
     my @xinetd_services = map { $_->[0] } xinetd_services();
 
+    # General Note: We use --no-reload here as this code is sometimes triggered
+    # from code at boot and reloading systemd during boot is generally a bit
+    # racy just now it seems.
     if (member($service, @xinetd_services)) {
-        run_program::rooted($::prefix, "chkconfig", $enable ? "--add" : "--del", $service);
+        run_program::rooted($::prefix, "chkconfig", "--no-reload", $enable ? "--add" : "--del", $service); # Probably still a bug here as xinet support in chkconfig shells out to /sbin/service....
     } elsif (running_systemd() || has_systemd()) {
         # systemctl rejects any symlinked units. You have to enabled the real file
         if (-l "/lib/systemd/system/$service.service") {
@@ -293,13 +296,13 @@ sub _set_service {
         } else {
             $service = $service . ".service";
         }
-        run_program::rooted($::prefix, "/bin/systemctl", $enable ? "enable" : "disable", $service);
+        run_program::rooted($::prefix, "/bin/systemctl", $enable ? "enable" : "disable", "--no-reload", $service);
     } else {
         my $script = "/etc/rc.d/init.d/$service";
-        run_program::rooted($::prefix, "chkconfig", $enable ? "--add" : "--del", $service);
+        run_program::rooted($::prefix, "chkconfig", "--no-reload", $enable ? "--add" : "--del", $service);
         #- FIXME: handle services with no chkconfig line and with no Default-Start levels in LSB header
         if ($enable && cat_("$::prefix$script") =~ /^#\s+chkconfig:\s+-/m) {
-            run_program::rooted($::prefix, "chkconfig", "--level", "35", $service, "on");
+            run_program::rooted($::prefix, "chkconfig", "--no-reload", "--level", "35", $service, "on");
         }
     }
 }

@@ -1,3 +1,6 @@
+- services:
+  o use --no-block with chkconfig and systemctl enable to prevent systemd reload
+    and potential crash (especially during first/live boot)
 - harddrake:
   o fix detecting some wireless devices as scanners (mga#9895)
   o fix random order of fields with perl-5.18
