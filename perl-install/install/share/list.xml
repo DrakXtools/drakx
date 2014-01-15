@@ -66,6 +66,12 @@
   libvbe.so
 </from>
 
+<from dir="/usr/share/glib-2.0/schemas">
+  <from expand="glob">
+    gschema*
+  </from>
+</from>
+
 <from dir="/usr/share/X11/xkb">
  <filter subst="s!//.*!!">
   geometry/pc
