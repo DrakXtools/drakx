@@ -1433,6 +1433,7 @@ sub _text_insert {
             }
         }
     } else {
+        $t ||= '';
         if ($opts{append}) {
             $buffer->insert($buffer->get_end_iter, $t);
         } else {
