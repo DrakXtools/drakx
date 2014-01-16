@@ -1,7 +1,8 @@
 Version 16.22 - 15 January 2014
 
-- fix "No GSettings schemas are installed on the system" error when inspecting
-  partitions (mga#12279)
+- partitioning:
+  o fix "No GSettings schemas are installed on the system" error when
+    inspecting partitions (mga#12279)
 - services:
   o use --no-block with chkconfig and systemctl enable to prevent systemd reload
     and potential crash (especially during first/live boot)
