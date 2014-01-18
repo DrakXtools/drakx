@@ -14,7 +14,7 @@ $CC = 'g++';
 
 WriteMakefile(
     'NAME'	=> 'stuff',
-    'OPTIMIZE'  => '-Os',
+    'OPTIMIZE'  => '-Os -Wall',
     'MAKEFILE'  => 'Makefile_c',
     'OBJECT'    => "stuff.o " . (-e $pcmcia_probe_o && " $pcmcia_probe_o"),
     'VERSION_FROM' => 'stuff.pm', # finds $VERSION
