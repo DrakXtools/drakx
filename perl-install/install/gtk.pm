@@ -255,7 +255,8 @@ sub createXconf {
     return if !$Driver;
 
      my ($mouse_driver, $mouse_protocol) = detect_devices::is_vmware() ? qw(vmmouse auto) : ('mouse', $mouse_type);
-     output($file, sprintf(<<'END', $mouse_driver, $mouse_protocol, $Driver, $Driver eq 'fbdev' ? '"default"' : '"1024x768" "800x600" "640x480"'));
+     my $resolution = $Driver eq 'fbdev' ? '"default"' : '"1024x768" "800x600" "640x480"';
+     output($file, sprintf(<<'END', $mouse_driver, $mouse_protocol, $Driver, $resolution));
 Section "ServerFlags"
    Option "AutoAddDevices" "False"
 EndSection
