@@ -154,7 +154,7 @@ init_setlocale()
    setlocale(LC_NUMERIC, "C"); /* otherwise eval "1.5" returns 1 in fr_FR for example */
 
 char *
-setlocale(category, locale = 0) 
+setlocale(category, locale = NULL)
     int     category
     char *      locale
 
