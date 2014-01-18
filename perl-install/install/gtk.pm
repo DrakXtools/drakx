@@ -252,6 +252,9 @@ sub createXconf {
     $mouse_type = 'IMPS/2' if $mouse_type eq 'vboxmouse';
     symlinkf(devices::make($mouse_dev), "/dev/mouse") if $mouse_dev ne 'none';
 
+    #- remove "error opening security policy file" warning
+    symlink("/tmp/stage2/etc/X11", "/etc/X11");
+
     return if !$Driver;
 
      my ($mouse_driver, $mouse_protocol) = detect_devices::is_vmware() ? qw(vmmouse auto) : ('mouse', $mouse_type);
