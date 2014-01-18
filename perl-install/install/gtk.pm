@@ -264,6 +264,10 @@ Section "ServerFlags"
    Option "AutoAddDevices" "False"
 EndSection
 
+Section "Module"
+      Disable "glx"
+EndSection
+
 Section "Files"
    FontPath   "/usr/share/fonts:unscaled"
 EndSection
