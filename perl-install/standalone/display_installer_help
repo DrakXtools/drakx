@@ -20,6 +20,7 @@
 use lib qw(/usr/lib/libDrakX);
 use interactive;
 use any;
+use lang;
 
 # so that screenshots works:
 use install::any;
@@ -32,4 +33,7 @@ any::set_wm_hints_if_needed($in);
 # Fake enough $o for retrieving the proper translation:
 $::o = $in;
 $::o->{locale}{lang} = $ARGV[1];
+$::prefix = '/';
+lang::set($::o->{locale});
+
 $in->display_help_window({ interactive_help_id => $ARGV[0] });

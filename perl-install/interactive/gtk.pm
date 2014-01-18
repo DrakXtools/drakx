@@ -838,6 +838,7 @@ sub display_help {
     if ($common->{interactive_help}) {
        output($f, $common->{interactive_help}->());
     }
+    local $ENV{LC_ALL} = $::o->{locale}{lang} || 'C';
     system('display_installer_help', $common->{interactive_help_id} || $f, $o->{locale}{lang}); 
 }
 
