@@ -199,7 +199,8 @@ sub choosePackages {
     log::l("rpmsrate_flags_chosen's: ", join(' ', sort @flags));
 
     #- check pre-condition that basesystem package must be selected.
-    install::pkgs::packageByName($o->{packages}, 'basesystem')->flag_available or die "basesystem package not selected";
+    my $base_pkg = install::pkgs::packageByName($o->{packages}, 'basesystem');
+    $base_pkg->flag_available or $base_pkg->flag_installed or die "basesystem package not selected";
 
     #- check if there are packages that need installation.
     $o->{steps}{installPackages}{done} = 0 if $o->{steps}{installPackages}{done} && install::pkgs::packagesToInstall($o->{packages}) > 0;
