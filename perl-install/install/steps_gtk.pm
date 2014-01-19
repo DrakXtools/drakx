@@ -261,7 +261,7 @@ sub reallyChooseDesktop {
                        tip => $tips{$val->[0]},
 		       toggled => sub { $choice = $val if $_[0]->get_active },
                        active => $choice == $val,
-		       $prev ? (join => $prev) : ());
+		       if_($prev, join => $prev));
 	$prev->signal_connect(key_press_event => sub {
 				  my (undef, $event) = @_;
 				  if (!$event || ($event->keyval & 0x7f) == 0xd) {
