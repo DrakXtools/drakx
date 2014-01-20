@@ -1337,7 +1337,7 @@ sub _create_Window {
 
 	    # ignore bogus sizing events:
 	    return if $w_size[2] < 5;
-	    return if $w_size[2] == $wi && $w_size[3] == $he; #BUG
+	    return if $w_size[2] == $wi && $w_size[3] == $he;
 	    (undef, undef, $wi, $he) = @w_size;
 
             $w->move(max(0, $::rootwidth - ($::o->{windowwidth} + $wi) / 2), 
