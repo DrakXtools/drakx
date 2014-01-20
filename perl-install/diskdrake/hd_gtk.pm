@@ -356,14 +356,8 @@ sub create_buttons4partitions {
 	}
 	my $info = $entry->{mntpoint} || $entry->{device_LABEL} || '';
 	$info .= "\n" . ($entry->{size} ? formatXiB($entry->{size}, 512) : N("Unknown")) if $info;
-	my $w;
-	if ($::isInstall) {
-	    $w = Gtk3::ToggleButton->new();
-	}else {
-	    $w = Gtk3::ToggleButton->new_with_label($info);
-	    $w->get_child->set_ellipsize('end');
-	}
-	$w or internal_error('new_with_label');
+	my $w = Gtk3::ToggleButton->new_with_label($info) or internal_error('new_with_label');
+	$w->get_child->set_ellipsize('end');
 	$w->set_tooltip_text($info);
 	$w->signal_connect(clicked => sub { 
 	    $current_button != $w or return;
