@@ -1333,7 +1333,7 @@ sub _create_Window {
 	my ($wi, $he);
 	$w->signal_connect(size_allocate => sub {
 	    my (undef, $event) = @_;
-	    my @w_size = @$event{qw(height width)};
+	    my @w_size = @$event{qw(width height)};
 
 	    # ignore bogus sizing events:
 	    return if $w_size[2] < 5;
