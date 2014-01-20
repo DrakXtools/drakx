@@ -50,7 +50,7 @@ sub load_theme() {
     -r $css or $css = dirname(__FILE__) . "/../share/diskdrake.css";
     my $pl = Gtk3::CssProvider->new;
     $pl->load_from_path($css);
-    my $cx = Gtk3::StyleContext::add_provider_for_screen(Gtk3::Gdk::Screen::get_default(), $pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
+    Gtk3::StyleContext::add_provider_for_screen(Gtk3::Gdk::Screen::get_default(), $pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 sub main {

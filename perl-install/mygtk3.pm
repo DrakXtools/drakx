@@ -335,7 +335,7 @@ sub _gtk__Pixbuf {
 }
 
 sub _gtk__Image {
-    my ($w, $opts, $class) = @_;
+    my ($w, $opts) = @_;
 
     if (!$w) {
 	$w = Gtk3::Image->new;
@@ -529,7 +529,7 @@ sub _gtk__WeaknessCheckEntry {
 }
 
 sub _gtk__ActionGroup {
-    my ($w, $opts, $_class, $action) = @_;
+    my ($w, $opts, $_class) = @_;
 
     if (!$w) {
 	$w = Gtk3::ActionGroup->new(delete $opts->{name});
@@ -545,7 +545,7 @@ sub _gtk__ActionGroup {
 }
 
 sub _gtk__Builder {
-    my ($w, $opts, $_class, $action) = @_;
+    my ($w, $opts, $_class) = @_;
 
     if (!$w) {
 	$w = Gtk3::Builder->new;
@@ -557,7 +557,7 @@ sub _gtk__Builder {
 }
 
 sub _gtk__UIManager {
-    my ($w, $opts, $_class, $action) = @_;
+    my ($w, $opts, $_class) = @_;
 
     if (!$w) {
 	$w = Gtk3::UIManager->new;
@@ -1580,7 +1580,7 @@ sub import_style_ressources() {
     if (!$::isInstall) {
         my $pl = Gtk3::CssProvider->new;
         $pl->load_from_path('/usr/share/libDrakX/themes-galaxy.css'); # FIXME DEBUG
-        my $cx = Gtk3::StyleContext::add_provider_for_screen(Gtk3::Gdk::Screen::get_default(), $pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
+        Gtk3::StyleContext::add_provider_for_screen(Gtk3::Gdk::Screen::get_default(), $pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 }
 

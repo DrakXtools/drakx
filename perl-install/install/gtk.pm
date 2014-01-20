@@ -62,7 +62,7 @@ sub load_css {
     if ($f) {
 	my $pl = Gtk3::CssProvider->new;
 	$pl->load_from_data($o->{doc} ? $theme_overriding_for_doc : scalar cat_($f));
-	my $cx = Gtk3::StyleContext::add_provider_for_screen(Gtk3::Gdk::Screen::get_default(), $pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
+	Gtk3::StyleContext::add_provider_for_screen(Gtk3::Gdk::Screen::get_default(), $pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
    }
 }
 
@@ -81,7 +81,7 @@ sub load_font {
     my $s = qq(gtk-font-name = $font);
     my $pl = Gtk3::CssProvider->new;
     $pl->load_from_data("GtkWindow { font: $font }");
-    my $cx = Gtk3::StyleContext::add_provider_for_screen(Gtk3::Gdk::Screen::get_default(), $pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
+    Gtk3::StyleContext::add_provider_for_screen(Gtk3::Gdk::Screen::get_default(), $pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
     # FIXME: this should be done in /mnt too for forked app such as gurpmi{,.addmedia} (mga#67):
     mkdir_p("/.config/gtk-3.0");
     output("/.config/gtk-3.0/settings.ini", qq([Settings]
