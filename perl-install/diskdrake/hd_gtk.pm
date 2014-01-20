@@ -16,7 +16,7 @@ use log;
 use fsedit;
 use feature qw(state);
 
-my ($width, $height, $minwidth) = (400, 50, 5);
+my ($width, $height, $minwidth) = (400, 50, 16);
 my ($all_hds, $in, $do_force_reload, $current_kind, $current_entry, $update_all);
 my ($w, @notebook, $done_button);
 
