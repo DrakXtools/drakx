@@ -1368,6 +1368,9 @@ sub take_screenshot {
     $nb++ while -e "$dir/$nb.png";
     system('fb2png', '/dev/fb0', "$dir/$nb.png", '0');
 
+    # help doesn't remember warning has been shown (one shot processes):
+    $warned ||= -e "$dir/1.png";
+
     if (!$warned && !$nowarn) {
 	$warned = 1;
 	$in->ask_warn('', N("Screenshots will be available after install in %s", "/root/DrakX-screenshots"));
