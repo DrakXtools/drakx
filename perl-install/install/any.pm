@@ -1369,7 +1369,7 @@ sub take_screenshot {
     run_program::run('fb2png', '/dev/fb0', "$dir/$nb.png", '0');
 
     # help doesn't remember warning has been shown (one shot processes):
-    $warned ||= -e "$dir/1.png";
+    $warned ||= -e "$dir/2.png";
 
     if (!$warned && !$nowarn) {
 	$warned = 1;
