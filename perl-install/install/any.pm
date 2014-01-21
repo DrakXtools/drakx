@@ -1366,7 +1366,7 @@ sub take_screenshot {
     }
     my $nb = 1;
     $nb++ while -e "$dir/$nb.png";
-    system('fb2png', '/dev/fb0', "$dir/$nb.png", '0');
+    run_program::run('fb2png', '/dev/fb0', "$dir/$nb.png", '0');
 
     # help doesn't remember warning has been shown (one shot processes):
     $warned ||= -e "$dir/1.png";
