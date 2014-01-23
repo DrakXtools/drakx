@@ -955,6 +955,7 @@ sub ask_browse_tree_info {
 	$toolbar->insert($t, -1);
     }
 
+    $box2->show_all;
     $pixcolumn->{is_pix} = 1;
     $common->{widgets} = { w => $w, tree => $tree, tree_model => $tree_model,
                            info => $info, status => $status };
