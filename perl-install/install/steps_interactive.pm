@@ -880,6 +880,11 @@ sub summary {
 	label => N("User management"),
 	clicked => sub { 
 	    if (my $u = any::ask_user($o, $o->{users}, $o->{security}, needauser => 1)) {
+		if ($::prefix) {
+			#- getpwnam, getgrnam, getgrid works
+			symlinkf("$::prefix/etc/passwd", '/etc/passwd');
+			symlinkf("$::prefix/etc/group", '/etc/group');
+		}
 		any::add_users([$u], $o->{authentication});
 	    }
 	},
