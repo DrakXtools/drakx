@@ -939,19 +939,14 @@ sub ask_browse_tree_info {
     $buttons[0]->grab_focus;
     $w->{rwindow}->show;
 
-    my @toolbar;
     foreach my $ic (@{$common->{icons} || []}) {
-	push @toolbar, ($ic->{icon} => [ $ic->{help}, sub {
+	my $t = gtknew('ToolButton', tooltip => $ic->{help}, file => "$ic->{icon}.png", clicked => sub {
 					     if ($ic->{code}) {
 						 my $_w = $ic->{wait_message} && $common->{wait_message}->('', $ic->{wait_message});
 						 $ic->{code}();
 						 $common->{rebuild_tree}->();
 					     }
-					 } ]);
-    }
-    my %toolbar = @toolbar;
-    foreach (grep_index { $::i % 2 == 0 } @toolbar) {
-	my $t = gtknew('ToolButton', tooltip => $toolbar{$_}[0], file => "$_.png", clicked => $toolbar{$_}[1]);
+					 });
 	$toolbar->insert($t, -1);
     }
 
