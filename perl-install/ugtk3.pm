@@ -1374,8 +1374,8 @@ sub new {
     my ($_class, $icon, $text, $o_options) = @_;
 
     mygtk3::import_style_ressources();
-    my $icon = eval { ugtk3::gtkcreate_pixbuf($icon) };
-    $icon ||= ugtk3::gtkcreate_pixbuf(ugtk3::wm_icon());
+    my $icon_w = eval { ugtk3::gtkcreate_pixbuf($icon) };
+    $icon_w ||= ugtk3::gtkcreate_pixbuf(ugtk3::wm_icon());
     my $is_rtl = mygtk3::text_direction_rtl();
     my $blue_part = eval { gtknew('Pixbuf', file => 'banner-blue-part', flip => $is_rtl) };
 
@@ -1387,7 +1387,7 @@ sub new {
     my $label = gtknew('Label', text => $text, padding => [ 100, 0 ], alignment => [ 0, 0.5 ]); # for update_text()
     my $w = gtknew('Overlay', height => $d_height, widget_name => 'Banner', main_child => $label, children => [
 		       gtknew('Overlay', main_child => $img, children => [
-				  my $icon_img = gtknew('Image', pixbuf => $icon, alignment => [ 0, 0 ]),
+				  my $icon_img = gtknew('Image', pixbuf => $icon_w, alignment => [ 0, 0 ]),
 			      ])
 		   ]);
 
@@ -1397,7 +1397,7 @@ sub new {
     } else {
 	$icon_img->set_margin_left(12);
     }
-    $icon_img->set_margin_top(($blue_part->get_height-$icon->get_height)/2-4);
+    $icon_img->set_margin_top(($blue_part->get_height-$icon_w->get_height)/2-4);
 
     $w->{label} = $label;
     $w->set_size_request(-1, $d_height);
