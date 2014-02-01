@@ -190,7 +190,7 @@ my $ui = gtknew('UIManager', actions => [
 		    # [name, stock_id, value, label, accelerator, tooltip, callback]
 		    [ 'FileMenu',        undef, N("_File") ],
 		    [ 'Quit', undef, N("_Quit"), N("<control>Q"), undef, \&quit_global ],
-		    [ 'OptionsMenu',        undef, '_Options' ],
+		    [ 'OptionsMenu',        undef, N("_Options") ],
 		    [ 'HelpMenu',        undef, N("_Help") ],
 		    if_($has_help, [ 'Help', undef, N("_Help"), N("<control>H"), undef, \&run_help ]),
 		    [ 'Fields description', undef, N("_Fields description"), undef, undef, \&fields_help ],
