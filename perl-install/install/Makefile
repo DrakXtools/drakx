@@ -90,6 +90,7 @@ get_needed_files: xs
 	rm -rf $(DESTDIR)$(DEST)/usr/share/locale_special/{be,fur,ta}
 
 full_stage2:
+	convert -quality 100 -layers flatten -flatten pixmaps/left-background.xcf pixmaps/left-background.png
 	$(MAKE) stage2
 	@if [ "$${DEBUG_INSTALL+xxx}" ]; then make dont_run_directly_stage2; else : ; fi
 	$(MAKE) compress
