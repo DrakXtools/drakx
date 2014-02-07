@@ -184,12 +184,11 @@ firmware() {
 grub() {
     dir=$1
     install -m644 grub_data/grub.cfg -D "$dir/boot/grub/grub.cfg"
-    install -d "$dir/boot/grub/themes"
-    cp -a /boot/grub2/themes/Moondrake "$dir/boot/grub/themes/Moondrake"
+    install -d "$dir/boot/grub/themes/Moondrake"
+    cp -a /boot/grub2/themes/Moondrake/* "$dir/boot/grub/themes/Moondrake"
+    cp grub_data/themes/Moondrake/theme.txt "$dir/boot/grub/themes/Moondrake"
     mkdir -p "$dir/boot/grub/fonts/"
-    cp -a /usr/share/grub/unicode.pf2 "$dir/boot/grub/fonts"
-    mkdir -p "$dir/boot/grub/fonts/"
-    grub2-mkfont --verbose -b --size=18 -o "$dir/boot/grub/fonts/dejavu.pf2" /usr/share/fonts/TTF/liberation/LiberationSans-Bold.ttf
+    cp -a /boot/grub2/fonts/* "$dir/boot/grub/fonts"
 
     if [ ! -s all.kernels/.list ]; then
 	    echo grub: no kernel >&2
