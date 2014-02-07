@@ -1,3 +1,9 @@
+
+- nuke create_link_source(), as we haven't supported building against an
+  unprepared source for ages, and currently also can trigger wrong symlinks
+  when kernel-source is installed before for example kernel-linus as found
+  out during QA for mga#12518 and debugging the issue on irc
+
 Version 16.26.8 - 4 February 2014
 
 - harddrake:

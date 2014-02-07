@@ -1260,22 +1260,6 @@ sub keytable {
     -r "$::prefix/$f" && $f;
 }
 
-
-sub create_link_source() {
-    #- we simply do it for all kernels :)
-    #- so this can be used in %post of kernel and also of kernel-source
-    foreach (all("$::prefix/usr/src")) {
-	my ($version) = /^linux-(\d+\.\d+.*)/ or next;
-	foreach (glob("$::prefix/lib/modules/$version*")) {
-	    -d $_ or next;
-	    log::l("creating symlink $_/build");
-	    symlink "/usr/src/linux-$version", "$_/build";
-	    log::l("creating symlink $_/source");
-	    symlink "/usr/src/linux-$version", "$_/source";
-	}
-    }
-}
-
 sub dev2yaboot {
     my ($dev) = @_;
 
