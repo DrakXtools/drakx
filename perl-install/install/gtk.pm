@@ -253,14 +253,6 @@ Section "ServerFlags"
    Option "AutoAddDevices" "False"
 EndSection
 
-Section "Module"
-      Disable "dbe"
-      Disable "record"
-      Disable "dri"
-      Disable "dri2"
-      Disable "glx"
-EndSection
-
 Section "Files"
    FontPath   "/usr/share/fonts:unscaled"
 EndSection
