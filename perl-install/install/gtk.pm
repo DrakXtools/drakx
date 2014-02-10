@@ -287,9 +287,7 @@ Section "Screen"
     Identifier "screen"
     Device "device"
     Monitor "monitor"
-    DefaultColorDepth 16
     Subsection "Display"
-        Depth 16
         Modes %s
     EndSubsection
 EndSection
