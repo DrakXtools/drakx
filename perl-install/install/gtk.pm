@@ -71,7 +71,7 @@ sub load_font {
     my ($o) = @_;
 
     if (defined($::WizardWindow) && lang::text_direction_rtl()) {
-	Gtk3::Widget->set_default_direction('rtl'); 
+	Gtk3::Widget::set_default_direction('rtl');
 	my ($x, $y) = $::WizardWindow->get_position;
 	my ($width) = $::WizardWindow->get_size;
 	$::WizardWindow->move($::rootwidth - $width - $x, $y);
