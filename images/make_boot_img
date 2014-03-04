@@ -185,8 +185,9 @@ grub() {
     dir=$1
     install -m644 grub_data/grub.cfg -D "$dir/boot/grub/grub.cfg"
     install -d "$dir/boot/grub/themes/Moondrake"
-    cp -a /boot/grub2/themes/Moondrake/* "$dir/boot/grub/themes/Moondrake"
-    cp grub_data/themes/Moondrake/theme.txt "$dir/boot/grub/themes/Moondrake"
+    cp -a /boot/grub2/themes/Moondrake/*png "$dir/boot/grub/themes/Moondrake"
+    CODENAME="$(cat /etc/os-release|grep VERSION=|sed -e 's#.*(\(.*\)).*#\1#g')"
+    sed -e "s#\(title-text:\)#\1 \"$CODENAME\"#g" grub_data/themes/Moondrake/theme.txt > "$dir/boot/grub/themes/Moondrake"
     mkdir -p "$dir/boot/grub/fonts/"
     cp -a /boot/grub2/fonts/* "$dir/boot/grub/fonts"
 
