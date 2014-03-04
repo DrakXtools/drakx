@@ -13,6 +13,7 @@ DESTREP4PMS = $(DEST)$(REP4PMS)
 all: xs
 
 clean xs:
+	rm -f pixmaps/left-background.png
 	make -C .. $@
 
 dist: dist-git
@@ -89,8 +90,12 @@ get_needed_files: xs
 # ta: font problem
 	rm -rf $(DESTDIR)$(DEST)/usr/share/locale_special/{be,fur,ta}
 
-full_stage2:
-	convert -quality 100 -layers optimize -flatten pixmaps/left-background.xcf pixmaps/left-background.png
+
+pixmaps/left-background.png:
+	../../tools/xcf2png pixmaps/left-background.xcf pixmaps/left-background.png
+	pngrewrite pixmaps/left-background.png pixmaps/left-background.png
+
+full_stage2: pixmaps/left-background.png
 	$(MAKE) stage2
 	@if [ "$${DEBUG_INSTALL+xxx}" ]; then make dont_run_directly_stage2; else : ; fi
 	$(MAKE) compress
