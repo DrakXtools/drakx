@@ -132,7 +132,7 @@ EOF
     #	}
     #    }
     if [ -z "$COMPRESS" ]; then
-	COMPRESS="xz --x86 --lzma2 -v9e --check=crc32"
+	COMPRESS="xz -T0 --x86 --lzma2 -v9e --check=crc32"
     fi
 
     mkdir -p "`dirname \"$img\"`"
@@ -154,7 +154,7 @@ modules() {
     cp -f $modz/modules.alias "$tmp_initrd/lib/modules/$I";
 
     if [ -z "$COMPRESS" ]; then
-	    COMPRESS="xz --lzma2 -v9e --check=crc32"
+	    COMPRESS="xz -T0 --lzma2 -v9e --check=crc32"
     fi
 
     mkdir -p "`dirname \"$out\"`"
@@ -174,7 +174,7 @@ firmware() {
     done
 
     if [ -z "$COMPRESS" ]; then
-	COMPRESS="xz --lzma2 -v9e --check=crc32"
+	COMPRESS="xz -T0 --lzma2 -v9e --check=crc32"
     fi
 
     (cd "$tmp_initrd"; find . | cpio -o -H newc --quiet --owner=root:root) | $COMPRESS > "$out"
