@@ -396,7 +396,7 @@ sub update_server() {
 	    # trying to start the server...
 	    my ($f) = grep { -f $_ } map { "/lib/systemd/system/$_" } 'smb.service', 'nmb.service';
 	    if ($f) {
-		system(systemctl,$_,File::Basename::basename($f)) foreach 'stop', 'start';
+		system("systemctl",$_,File::Basename::basename($f)) foreach 'stop', 'start';
 	    } else {
 		print STDERR "Error: Can't find the samba init script \n";
 	    }
