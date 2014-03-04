@@ -1,0 +1,17 @@
+#!/bin/sh
+
+
+gimp-console --gegl-threads=$(getconf _NPROCESSORS_ONLN) -i --batch-interpreter=python-fu-eval -b - << EOF
+import gimpfu
+
+def convert(input, output):
+    img = pdb.gimp_file_load(input, input)
+    layer = pdb.gimp_image_merge_visible_layers(img, 1)
+
+    pdb.gimp_file_save(img, layer, output, output)
+    pdb.gimp_image_delete(img)
+
+convert('${1}', '${2}')
+
+pdb.gimp_quit(1)
+EOF
