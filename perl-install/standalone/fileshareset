@@ -394,9 +394,9 @@ sub update_server() {
 	if (system('PATH=/bin:/sbin pidof smbd >/dev/null') != 0 ||
 	    system('PATH=/bin:/sbin pidof nmbd >/dev/null') != 0) {
 	    # trying to start the server...
-	    my ($f) = grep { -f $_ } map { "/etc/init.d/$_" } 'smb', 'samba', 'rc.samba';
+	    my ($f) = grep { -f $_ } map { "/lib/systemd/system/$_" } 'smb.service', 'nmb.service';
 	    if ($f) {
-		system($f, $_) foreach 'stop', 'start';
+		system(systemctl,$_,File::Basename::basename($f)) foreach 'stop', 'start';
 	    } else {
 		print STDERR "Error: Can't find the samba init script \n";
 	    }
