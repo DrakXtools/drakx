@@ -398,7 +398,7 @@ sub update_server() {
 	    if ($f) {
 		system("systemctl",$_,File::Basename::basename($f)) foreach 'stop', 'start';
 	    } else {
-		print STDERR "Error: Can't find the samba init script \n";
+		print STDERR "Error: Can't find the samba service file \n";
 	    }
 	}
 	exit 0;
