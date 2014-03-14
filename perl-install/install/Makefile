@@ -91,7 +91,7 @@ get_needed_files: xs
 	rm -rf $(DESTDIR)$(DEST)/usr/share/locale_special/{be,fur,ta}
 
 
-pixmaps/left-background.png:
+pixmaps/left-background.png: pixmaps/left-background.xcf
 	../../tools/xcf2png pixmaps/left-background.xcf pixmaps/left-background.png
 	pngrewrite pixmaps/left-background.png pixmaps/left-background.png
 
