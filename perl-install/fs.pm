@@ -49,27 +49,6 @@ sub read_fstab {
 
 	$options = 'defaults' if $options eq 'rw'; # clean-up for mtab read
 
-	if ($fs_type eq 'supermount') {
-	    log::l("dropping supermount");
-	    $options = join(",", grep {
-		if (/fs=(.*)/) {
-		    $fs_type = $1;
-
-		    #- with supermount, the type could be something like ext2:vfat
-		    #- but this cannot be done without supermount, so switching to "auto"
-		    $fs_type = 'auto' if $fs_type =~ /:/;
-
-		    0;
-		} elsif (/dev=(.*)/) {
-		    $dev = $1;
-		    0;
-		} elsif ($_ eq '--') {
-		    0;
-		} else {
-		    1;
-		}
-	    } split(',', $options));
-	}
 	s/\\040/ /g foreach $mntpoint, $dev, $options;
 
 	if ($fs_type eq 'ext4') {
