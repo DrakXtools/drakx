@@ -12,7 +12,10 @@ DESTREP4PMS = $(DEST)$(REP4PMS)
 
 all: pixmaps/left-background.png xs
 
-clean xs:
+xs:
+	make -C .. $@
+
+clean:
 	rm -f pixmaps/left-background.png
 	make -C .. $@
 
@@ -92,8 +95,8 @@ get_needed_files: xs
 
 
 pixmaps/left-background.png: pixmaps/left-background.xcf
-	../../tools/xcf2png pixmaps/left-background.xcf pixmaps/left-background.png
-	pngrewrite pixmaps/left-background.png pixmaps/left-background.png
+	../../tools/xcf2png $^ $@
+	pngrewrite $@ $@
 
 full_stage2:
 	$(MAKE) stage2
