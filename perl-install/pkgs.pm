@@ -185,7 +185,7 @@ sub detect_graphical_drivers {
     }
 
     my @firmware_pkgs = grep { $_ } uniq(map { $_->{FIRMWARE} } @cards);
-    my @drivers = grep { $_ } uniq(map { split(/\,/, $_->{Driver2}) } @cards);
+    my @drivers = grep { $_ } uniq(map { $_->{Driver2} } @cards);
     my @proprietary_pkgs = map { Xconfig::proprietary::pkgs_for_Driver2($_, $do_pkgs) } @drivers;
     return @firmware_pkgs, @proprietary_pkgs;
 }
