@@ -1373,7 +1373,7 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
 	}
 	foreach (keys %types) {
 	    my ($pkg, $service, $_descr) = @{$types{$_}};
-	    my $file = "/etc/init.d/$service";
+	    my $file = "/lib/systemd/system/$service.service";
 	    if ($l{$_}) {
 		$in->do_pkgs->ensure_is_installed($pkg, $file) or return;
 		services::start($service);

@@ -276,8 +276,7 @@ sub update_server() {
 	if (system('PATH=/bin:/sbin pidof rpc.mountd >/dev/null') != 0 ||
 	    system('PATH=/bin:/sbin pidof nfsd >/dev/null') != 0) {
 	    # trying to start the server...
-	    system('/etc/init.d/portmap start') if system('/etc/init.d/portmap status >/dev/null') != 0;
-	    system('/etc/init.d/nfs', $_) foreach 'stop', 'start';
+	    system('systemctl', $_, 'nfs-server.service') foreach 'stop', 'start';
 	}
 	exit 0;
     }
