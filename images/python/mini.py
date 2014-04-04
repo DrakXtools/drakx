@@ -4,7 +4,7 @@ from drakx.media import Media
 from drakx.distribution import Distribution
 import os
 
-config = ReleaseConfig("2013", "Twelve Angry Penguins", "LXDE", subversion="Beta", medium="CD", outdir="/mnt/BIG/distrib/iso")
+config = ReleaseConfig("2013", "Twelve Angry Penguins", "LXDE", subversion="Beta", medium="CD", outdir="/mnt/BIG/")
 
 srcdir = "./"
 rpmsrate = "../../perl-install/install/share/meta-task/rpmsrate-raw"
@@ -13,7 +13,7 @@ filedeps = srcdir + "file-deps"
 
 
 media = []
-for m in "moondrake", "main", "main.old", "contrib", "contrib.old", "non-free", "non-free.old", "restricted":
+for m in "moondrake", "main", "main-updates", "contrib", "contrib-updates", "non-free", "non-free-updates", "restricted", "restricted-updates":
     media.append(Media(m))
 
 includelist = []

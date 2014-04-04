@@ -10,9 +10,12 @@ DEST = $(STAGE2_DEST)/live
 REP4PMS     = /usr/lib/libDrakX
 DESTREP4PMS = $(DEST)$(REP4PMS)
 
-all: xs
+all: pixmaps/left-background.png xs
 
-clean xs:
+xs:
+	make -C .. $@
+
+clean:
 	rm -f pixmaps/left-background.png
 	make -C .. $@
 
@@ -91,11 +94,11 @@ get_needed_files: xs
 	rm -rf $(DESTDIR)$(DEST)/usr/share/locale_special/{be,fur,ta}
 
 
-pixmaps/left-background.png:
-	../../tools/xcf2png pixmaps/left-background.xcf pixmaps/left-background.png
-	pngrewrite pixmaps/left-background.png pixmaps/left-background.png
+pixmaps/left-background.png: pixmaps/left-background.xcf
+	../../tools/xcf2png $^ $@
+	pngrewrite $@ $@
 
-full_stage2: pixmaps/left-background.png
+full_stage2:
 	$(MAKE) stage2
 	@if [ "$${DEBUG_INSTALL+xxx}" ]; then make dont_run_directly_stage2; else : ; fi
 	$(MAKE) compress
