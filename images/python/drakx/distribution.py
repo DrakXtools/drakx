@@ -67,6 +67,11 @@ class Distribution(object):
             synthesis = repopath + "/" + self.media[m].getSynthesis()
             print color("Parsing synthesis for %s: %s" % (m, synthesis), GREEN)
             urpm.parse_synthesis(synthesis) 
+            updates = repopath + "/" + self.media[m].getSynthesis("updates")
+            if os.path.exists(updates):
+                print color("Parsing updates synthesis for %s: %s" % (m, synthesis), GREEN)
+                urpm.parse_synthesis(updates) 
+
 
         perlexc = perl.eval("@excludes = ();")
         perlexc = perl.get_ref("@excludes")
@@ -253,15 +258,15 @@ class Distribution(object):
                 if excludere.match(pkg.name()):
                     print color("skipping2: " + pkg.name(), YELLOW, RESET, DIM)
                     continue
-
-                source = "%s/media/%s/release/%s.rpm" % (repopath, m.name, pkg.fullname())
-                if os.path.exists(source):
-                    target = "%s/media/%s/%s.rpm" % (tmpdir, m.name, pkg.fullname())
-                    if not os.path.islink(target):
-                        pkgs.append(source)
-                        os.symlink(source, target)
-                        s = os.stat(source)
-                        m.size += s.st_size
+                for rep in "release", "updates":
+                    source = "%s/media/%s/%s/%s.rpm" % (repopath, m.name, rep, pkg.fullname())
+                    if os.path.exists(source):
+                        target = "%s/media/%s/%s.rpm" % (tmpdir, m.name, pkg.fullname())
+                        if not os.path.islink(target):
+                            pkgs.append(source)
+                            os.symlink(source, target)
+                            s = os.stat(source)
+                            m.size += s.st_size
             self.media[m.name].pkgs = pkgs
             if not os.path.exists("%s/media/%s/media_info" % (tmpdir, m.name)):
                 os.mkdir("%s/media/%s/media_info" % (tmpdir, m.name))
