@@ -187,7 +187,7 @@ grub() {
     install -d "$dir/boot/grub/themes/Moondrake"
     cp -a /boot/grub2/themes/Moondrake/*png "$dir/boot/grub/themes/Moondrake"
     CODENAME="$(cat /etc/os-release|grep VERSION=|sed -e 's#.*(\(.*\)).*#\1#g')"
-    sed -e "s#\(title-text:\)#\1 \"$CODENAME\"#g" grub_data/themes/Moondrake/theme.txt > "$dir/boot/grub/themes/Moondrake"
+    sed -e "s#\(title-text:\)#\1 \"$CODENAME\"#g" grub_data/themes/Moondrake/theme.txt > "$dir/boot/grub/themes/Moondrake/theme.txt"
     mkdir -p "$dir/boot/grub/fonts/"
     cp -a /boot/grub2/fonts/* "$dir/boot/grub/fonts"
 
