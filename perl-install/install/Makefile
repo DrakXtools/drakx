@@ -2,7 +2,7 @@ include ../../Makefile.config
 include ../Makefile.config
 
 PRODUCT=$(FAMILY)-stage2
-COMPRESS ?= xz -T0 --x86 --lzma2 -ve --check=crc32
+COMPRESS ?= xz -T0 --x86 --lzma2 -ve9 --check=crc32
 
 STAGE2_DEST = $(ROOTDEST)/install/stage2
 DEST = $(STAGE2_DEST)/live
@@ -36,7 +36,7 @@ dist-git:
 	git archive --format=tar --prefix=$(PRODUCT)-$(VERSION)/perl-install/install/share/meta-task/ HEAD . > meta-task-$(PRODUCT)-$(VERSION).tar
 	tar --concatenate --file=$(PRODUCT)-$(VERSION).tar share/meta-task/meta-task-$(PRODUCT)-$(VERSION).tar
 	rm share/meta-task/meta-task-$(PRODUCT)-$(VERSION).tar
-	xz -vf $(PRODUCT)-$(VERSION).tar
+	xz -v9ef -T0 $(PRODUCT)-$(VERSION).tar
 
 
 tar:
