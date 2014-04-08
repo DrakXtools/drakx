@@ -33,7 +33,7 @@ my $initial_dir = cwd();
 my $ARCH = arch() =~ /i.86/ ? 'i386' : arch();
 my $LIB = arch() =~ /x86_64/ ? "lib64" : "lib";
 
-my @busybox_funct = split("\n", `busybox.static --list`);
+my @busybox_funct = split("\n", `busybox --list`);
 
 my $base_cpio_options = '-pumd --quiet';
 

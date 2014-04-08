@@ -35,7 +35,6 @@
   cpio ncftp tar
   rsync
   telnet
-  tcpdump
 
   date
   dmesg
@@ -44,10 +43,10 @@
   sync
 
   eject
-  mount mount.nfs umount
+  mount umount
   losetup
 
-  kill killall5 ps strace
+  kill ps strace
   sed tr
   strings
 
@@ -179,7 +178,7 @@
   </if>
 </from>
 
-<from dir="/LIB/device-mapper">
+<from dir="/usr/uclibc/LIB/device-mapper">
   <from expand="glob"> 
     *.so
   </from>
@@ -214,7 +213,7 @@
 </from>
 <from dir="/usr/share/smartmontools">
   <to dir="/usr/share/smartmontools">
-    /usr/share/smartmontools/drivedb.h
+    drivedb.h
   </to>
 </from>
 
