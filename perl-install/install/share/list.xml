@@ -139,7 +139,12 @@
   <!-- needed by dmraid -->
   libdmraid-events-isw.so
 
-  <!-- needed fro Gtk3-WebKit -->
+</from>
+</filter>
+
+<filter command="strip">
+<from dir="/usr/LIB">
+  <!-- needed for Gtk3-WebKit -->
   libwebkitgtk-3.0.so.0
 </from>
 </filter>
