@@ -285,7 +285,7 @@ sub get_any_driver_entry {
                               formatAlaTeX(
                                            #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
                                            N("If you really think that you know which driver is the right one for your card
-you can pick one from the above list.
+you can pick one from the list below.
 
 The current driver for your \"%s\" sound card is \"%s\" ", $device->{description}, $driver)),
                               [
