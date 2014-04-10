@@ -1,9 +1,191 @@
+Version 16.27 - 18 February 2014
+
+- nuke create_link_source(), as we haven't supported building against an
+  unprepared source for ages, and currently also can trigger wrong symlinks
+  when kernel-source is installed before for example kernel-linus as found
+  out during QA for mga#12518 and debugging the issue on irc
+
+Version 16.26.8 - 4 February 2014
+
+- harddrake:
+  o fix untranslated "Help" entry in menu (mga#12497)
+
+Version 16.26.7 - 25 January 2014
+
+- do not exec pkexec but run it so it has a parent process to fix double fork
+  issues mga#11184 mga#12364
+
+Version 16.26.1 - 20 January 2014
+
+- diskdrake:
+  o increase back minimum partition width for Oxygen (mga#11977)
+
+Version 16.26 - 20 January 2014
+
+- diskdrake:
+  o fix sizing partition widgets
+  o revert minimum partition width to its pre-gtk3 value
+
+Version 16.23 - 16 January 2014
+
+- dont remove pulseaudio-module-bluetooth (mga#12323)
+- fix a rpmdrake crash (mga#12331)
+
+Version 16.22 - 15 January 2014
+
+- services:
+  o use --no-block with chkconfig and systemctl enable to prevent systemd reload
+    and potential crash (especially during first/live boot)
+- harddrake:
+  o fix detecting some wireless devices as scanners (mga#9895)
+  o fix random order of fields with perl-5.18
+
+Version 16.21 - 13 January 2014
+
+- diskdrake:
+  o do not propose check bad blocks for btrfs (Manuel Hiebel, mga#10116)
+  o increase minimum partition width for Oxygen (mga#11977)
+    (if not enough, we will disable labels on partitions buttons again)
+- drakboot:
+  o add minimal/experimental lightdm autologin support (mga#11746)
+- harddrake, logdrake:
+  o fix menu accelerators
+- --version option:
+  o display mga copyright too (mga#10289)
+
+Version 16.18 - 28 December 2013
+
+- detecting input devices:
+  o display the real accessed /dev/input/eventX file (mga#8232)
+  o do not crash if /dev/input/eventX doesn't exist (mga#10296)
+  o do not fill logs with "Cannot open /dev/input/eventX" (mga#8232)
+- draksec:
+  o use expanders for clarity
+
+Version 16.17 - 20 December 2013
+
+- drakfont:
+  o fix a crash (mga#12057)
+
+Version 16.16 - 16 December 2013
+
+- fix a drakx crash (mga#6031)
+
+Version 16.15 - 12 December 2013
+
+- workaround a gtk+3 issue resulting in blacked embbeded tools with some
+  locales (eg: pl/uk) (mga#11969)
+
+Version 16.13 - 10 December 2013
+
+- localedrake:
+  o fix crash when selecting an input method (mga#11939)
+
+Version 16.12 - 9 December 2013
+
+- partitioning wizard:
+  o log failures (mga#11924)
+  o workaround a crash (mga#11924)
+
+Version 16.11 - 6 December 2013
+
+- fix a crash in rpmdrake when package list is empty (mga#11901)
+
+Version 16.8 - 5 December 2013
+
+- prevent drakxtools-backend to require Glib::Object::Introspection (mga#11842)
+
+Version 16.7 - 5 December 2013
+
+- diskdrake:
+  o fix a crash when creating partitions (mga#11876)
+
+Version 16.6 - 4 December 2013
+
+- fix blue background behind left panel text (mga#11866)
+  (for not yet released gtk3 mcc)
+
+Version 16.5 - 3 December 2013
+
+- diskdrake:
+  o detect eMMc block devices (Luc Menut, mga#11812)
+  o fix a crash in partitioning wizard (mga#11820)
+  o show labels on partition buttons again but ellipsized (mga#11858)
+
+Version 16.4 - 2 December 2013
+
+- fix banners not being blue anymore with Oxygen-gtk theme (kbo#328270)
+- diskdrake:
+  o fix diskdrake colorized partition tabs with Adwaita (bgo#719624)
+
+Version 16.3 - 30 November 2013
+
+- harddrake:
+  o fix starting after draksound drop OSS/ALSA switch
+
+Version 16.2 - 29 November 2013
+
+- diskdrake:
+  o fix dialog keeping growing when switching tabs (mga#11822):
+    move partition labels to toolips
+- draksound:
+  o do not offer to switch to OSS
+  o do not offer to switch to another driver if there's none
+  o do not offer to pick a random driver when we've a default one
+- finish-install:
+  o no more run urpmi.update when adding media
+    (uneeded with urpmi-7.27+)
+- mygtk3 layer:
+  o add support for RadioMenuItems for rpmdrake
+- ugtk3 layer:
+  o make shrinking window work again (eg: draknfs)
+
+Version 16.1 - 28 November 2013
+
+- mcc:
+  o restore galaxy RC file, thus fixing left panel text color (mga#11773)
+  o fix Gtk2 banners' text position (mga#11778)
+- Banners:
+  o align text to left instead of centering it
+  o text is rendered as blue again
+- diskdrake:
+  o prevent looping forever when sizing partition tabs
+- logdrake:
+  o fix Gtk3::TextView::get_window() passed too few parameters (mga#11807)
+
+Version 16.0 - 23 November 2013
+
+- switch from Gtk+-2 to Gtk+-3:
+  o Banners: most themes work OK but Oxygen-gtk3...
+  o diskdrake: most themes work OK but Oxygen-gtk3...
+  o drakclock cannot temporary changes the clock
+  o notifications work again for net_applet
+- detect_devices:
+  fix ids to be numeric
+- drakxservices:
+  o simplify: just use tooltips for service descriptions"
+- drakclock:
+  o assume chrony rather than ntp when neither is installed
+- draksec:
+  o make sure to restart polkitd after writing rules
+  o support polkit rules editing for permissions overrides
+
+Version 15.73.1 - 19 November 2013
+
+- add chrony support to drakclock mga#11092
+
+Version 15.73 - 12 November 2013
+
+- polkit: fix wrappers to properly escape arguments when calling the binary
+
 Version 14.52, 12 January 2014, by Per Øyvind Karlsen
 
 - fix issue with ldetect & autodetection of gfx adapters etc. (fixes omv#422)
 
 Version 14.51, 29 October 2013, by Per Øyvind Karlsen
 
+- dont remove radeon-firmware or any network related firmwares as we dont
+  know when some hw gets plugged that needs it
 - fix path to urpmi.update (so it works without mgaonline installed mga#11125)
 - recognize new kernel-3.12 drivers
 - wrap more standalone tools in polkit (mga#11125, mga#11418)

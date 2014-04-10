@@ -13,8 +13,6 @@ use partition_table;
 use partition_table::raw;
 use partition_table::dos;
 use POSIX qw(ceil);
-use mygtk2;
-use ugtk2 qw(:wrappers);
 
 #- unit of $mb is mega bytes, min and max are in sectors, this
 #- function is used to convert back to sectors count the size of
@@ -75,13 +73,13 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 }
 
 sub partitionWizardSolutions {
-    my ($in, $all_hds, $all_fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab, $target) = @_;
+    my ($in, $all_hds, $all_fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab, $o_target) = @_;
     my $hds = $all_hds->{hds};
     my $fstab;
     my $full_fstab = [ fs::get::fstab($all_hds) ];
-    if ($target) {
-        $hds = [ $target ];
-        $fstab = [ grep { $_->{rootDevice} eq $target->{device} } fs::get::fstab($all_hds) ];
+    if ($o_target) {
+        $hds = [ $o_target ];
+        $fstab = [ grep { $_->{rootDevice} eq $o_target->{device} } fs::get::fstab($all_hds) ];
     } else {
         $fstab = $full_fstab;
     }
@@ -246,7 +244,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®")) if $
                                                      },
                                                      \&partition_table::description, \@hds_rw) or return;
                 } else {
-                    $hd = $target;
+                    $hd = $o_target;
                 }
 		$in->ask_okcancel_({ messages => N("ALL existing partitions and their data will be lost on drive %s", partition_table::description($hd)),
 				    title => N("Partitioning"),
@@ -297,17 +295,17 @@ sub create_display_box {
     my @parts = diskdrake::hd_gtk::kind2parts($kind);
     my $totalsectors = diskdrake::hd_gtk::kind2sectors($kind, @parts);
 
-    my $width = 540;
+    my $width = 520;
     my $minwidth = 40;
 
-    my $display_box = ugtk2::gtkset_size_request(Gtk2::HBox->new(0,0), -1, 26);
+    my $display_box = ugtk3::gtkset_size_request(Gtk3::HBox->new(0,0), -1, 26);
 
     my $sep_count = @parts - 1;
     #- ratio used to compute initial partition pixel width (each partition should be > min_width)
     #- though, the pixel/sectors ratio cannot be the same for all the partitions
     my $initial_ratio = $totalsectors ? ($width - @parts * $minwidth - $sep_count) / $totalsectors : 1;
 
-    my $vbox = Gtk2::VBox->new;
+    my $vbox = Gtk3::VBox->new;
 
     my $part_sep;
     my $desc;
@@ -315,9 +313,9 @@ sub create_display_box {
     my $last = $resize && $resize->[-1];
 
     foreach my $entry (@parts) {
-	my $part_info = Gtk2::Label->new($entry->{device_LABEL});
+	my $part_info = Gtk3::Label->new($entry->{device_LABEL});
 	my @colorized_fs_types = qw(ext2 ext3 ext4 xfs swap vfat ntfs ntfs-3g);
-        my $part_widget = Gtk2::EventBox->new;
+        my $part_widget = Gtk3::EventBox->new;
         $entry->{width} = int($entry->{size} * $initial_ratio) + $minwidth;
         if ($last && $last->{device} eq $entry->{device}) {
             #- entry is the last resizable partition
@@ -329,33 +327,31 @@ sub create_display_box {
             $part_widget->set_name("PART_vfat");
             $part_info->set_size_request(ceil($ratio * $entry->{min_win}), 0);
 
-            my $mdv_widget = gtkadd(gtkset_name(Gtk2::EventBox->new, "PART_new"),
+            my $mdv_widget = gtkadd(gtkset_name(Gtk3::EventBox->new, "PART_new"),
                                     gtkset_size_request(gtknew("Image", file => "small-logo"),
                                                         $ratio * MB(600), 0));
 
-            my $hpane = Gtk2::HPaned->new;
-            $hpane->add1($part_widget);
-            $hpane->child1_shrink(0);
-            $hpane->add2($mdv_widget);
-            $hpane->child2_shrink(0);
+            my $hpane = Gtk3::HPaned->new;
+            $hpane->pack1($part_widget, 1, 0);
+            $hpane->pack2($mdv_widget, 1, 0);
             $hpane->set_position(ceil($ratio * $entry->{req_size}));
-            ugtk2::gtkset_size_request($hpane, $entry->{width}, 0);
-            ugtk2::gtkpack__($display_box, $hpane);
+            ugtk3::gtkset_size_request($hpane, $entry->{width}, 0);
+            ugtk3::gtkpack__($display_box, $hpane);
 
             my $add_part_size_info = sub {
                 my ($name, $label) = @_;
-                ugtk2::gtkpack__($desc,
-                                 gtkadd(gtkset_name(Gtk2::EventBox->new, $name),
-                                        Gtk2::Label->new(" " x 4)),
+                ugtk3::gtkpack__($desc,
+                                 gtkadd(gtkset_name(Gtk3::EventBox->new, $name),
+                                        Gtk3::Label->new(" " x 4)),
                                  gtkset_size_request(gtkset_alignment($label, 0, 0.5),
                                                      150, 20));
             };
-            $desc = Gtk2::HBox->new(0,0);
+            $desc = Gtk3::HBox->new(0,0);
 
-            my $win_size_label = Gtk2::Label->new;
+            my $win_size_label = Gtk3::Label->new;
             $add_part_size_info->("PART_vfat", $win_size_label);
 
-            my $mdv_size_label = Gtk2::Label->new;
+            my $mdv_size_label = Gtk3::Label->new;
             $add_part_size_info->("PART_new", $mdv_size_label);
 
             my $update_size_labels = sub {
@@ -373,7 +369,7 @@ sub create_display_box {
             };
             $hpane->signal_connect('size-allocate' => sub {
                 my (undef, $alloc) = @_;
-                $entry->{width} = $alloc->width;
+                $entry->{width} = $alloc->{width};
                 $update_ratio->();
                 0;
             });
@@ -396,12 +392,12 @@ sub create_display_box {
                                          'other'));
             }
             $part_widget->set_size_request($entry->{width}, 0);
-            ugtk2::gtkpack($display_box, $part_widget);
+            ugtk3::gtkpack($display_box, $part_widget);
         }
 	$part_widget->add($part_info);
 
-	$part_sep = gtkadd(Gtk2::EventBox->new,
-                     gtkset_size_request(Gtk2::Label->new("."), 1, 0));
+	$part_sep = gtkadd(Gtk3::EventBox->new,
+                     gtkset_size_request(Gtk3::Label->new("."), 1, 0));
 	gtkpack__($display_box, $part_sep);
     }
     $display_box->remove($part_sep) if $part_sep;
@@ -409,11 +405,11 @@ sub create_display_box {
         my @types = (N_("Ext2/3/4"), N_("XFS"), N_("Swap"), arch() =~ /sparc/ ? N_("SunOS") : arch() eq "ppc" ? N_("HFS") : N_("Windows"),
                     N_("Other"), N_("Empty"));
         my %name2fs_type = ('Ext2/3/4' => 'ext3', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
-        $desc = ugtk2::gtkpack(Gtk2::HBox->new,
+        $desc = ugtk3::gtkpack(Gtk3::HBox->new,
                 map {
                      my $t = $name2fs_type{$_};
-                     my $ev = Gtk2::EventBox->new;
-		     my $w = Gtk2::Label->new(translate($_));
+                     my $ev = Gtk3::EventBox->new;
+		     my $w = Gtk3::Label->new(translate($_));
 	             $ev->add($w);
 		     $ev->set_name('PART_' . ($t || 'empty'));
                      $ev;
@@ -443,8 +439,8 @@ sub display_choices {
     $contentbox->foreach(sub { $contentbox->remove($_[0]) });
 
     $mainw->{kind}{display_box} ||= create_display_box($mainw->{kind});
-    ugtk2::gtkpack2__($contentbox, $mainw->{kind}{display_box});
-    ugtk2::gtkpack__($contentbox, gtknew('Label',
+    ugtk3::gtkpack2__($contentbox, $mainw->{kind}{display_box});
+    ugtk3::gtkpack__($contentbox, gtknew('Label',
                                          text => N("The DrakX Partitioning wizard found the following solutions:"),
                                          alignment => [0, 0]));
 
@@ -461,30 +457,30 @@ sub display_choices {
             $item = create_display_box($mainw->{kind}, $solutions{$s}[3], undef, $button);
         } elsif ($s eq 'existing_part') {
         } elsif ($s eq 'wipe_drive') {
-            $item = Gtk2::EventBox->new;
+            $item = Gtk3::EventBox->new;
             my $b2 = gtknew("Image", file => "small-logo");
             $item->add($b2);
-            $item->set_size_request(540,26);
+            $item->set_size_request(520,26);
             $item->set_name("PART_new");
         } elsif ($s eq 'diskdrake') {
         } else {
             log::l($s);
             next;
         }
-        ugtk2::gtkpack($vbox, 
+        ugtk3::gtkpack($vbox, 
                        gtknew('Label',
                               text => $solutions{$s}[1],
                               alignment => [0, 0]));
-        ugtk2::gtkpack($vbox, $item) if defined($item);
-        $button->set_group($oldbutton->get_group) if $oldbutton;
+        ugtk3::gtkpack($vbox, $item) if defined($item);
+        $button->join_group($oldbutton) if $oldbutton;
         $oldbutton = $button;
         $button->signal_connect('toggled', sub { $mainw->{sol} = $solutions{$s} if $_[0]->get_active });
-        ugtk2::gtkpack2__($choicesbox, $button);
+        ugtk3::gtkpack2__($choicesbox, $button);
         $sep = gtknew('HSeparator');
-        ugtk2::gtkpack2__($choicesbox, $sep);
+        ugtk3::gtkpack2__($choicesbox, $sep);
     }
     $choicesbox->remove($sep);
-    ugtk2::gtkadd($contentbox, $choicesbox);
+    ugtk3::gtkadd($contentbox, $choicesbox);
     $mainw->{sol} = $solutions{@solutions[0]};
 }
 
@@ -494,30 +490,30 @@ sub main {
     my $sol;
 
     if ($o->isa('interactive::gtk')) {
-        require mygtk2;
-        mygtk2->import(qw(gtknew));
-        require ugtk2;
-        ugtk2->import(qw(:wrappers));
+        require mygtk3;
+        mygtk3->import(qw(gtknew));
+        require ugtk3;
+        ugtk3->import(qw(:wrappers));
 
-        my $mainw = ugtk2->new(N("Partitioning"), %$o, if__($::main_window, transient => $::main_window));
+        my $mainw = ugtk3->new(N("Partitioning"), %$o, if__($::main_window, transient => $::main_window));
         $mainw->{box_allow_grow} = 1;
 
-        mygtk2::set_main_window_size($mainw->{rwindow});
+        mygtk3::set_main_window_size($mainw->{rwindow});
 
         require diskdrake::hd_gtk;
         diskdrake::hd_gtk::load_theme();
 
-        my $mainbox = Gtk2::VBox->new;
+        my $mainbox = Gtk3::VBox->new;
 
         my @kinds = map { diskdrake::hd_gtk::hd2kind($_) } sort { $a->{is_removable} <=> $b->{is_removable} } @{ $all_hds->{hds} };
         push @kinds, diskdrake::hd_gtk::raid2real_kind($_) foreach @{$all_hds->{raids}};
         push @kinds, map { diskdrake::hd_gtk::lvm2kind($_) } @{$all_hds->{lvms}};
 
-        my $hdchoice = Gtk2::HBox->new;
+        my $hdchoice = Gtk3::HBox->new;
 
-        my $hdchoicelabel = Gtk2::Label->new(N("Here is the content of your disk drive "));
+        my $hdchoicelabel = Gtk3::Label->new(N("Here is the content of your disk drive "));
 
-        my $combobox = Gtk2::ComboBox->new_text;
+        my $combobox = Gtk3::ComboBoxText->new;
         foreach (@kinds) {
             my $info = $_->{val}{info} || $_->{val}{device};
             $info =~ s|^(?:.*/)?(.{24}).*|$1|;
@@ -526,16 +522,16 @@ sub main {
         }
         $combobox->set_active(0);
 
-        ugtk2::gtkpack2__($hdchoice, $hdchoicelabel);
+        ugtk3::gtkpack2__($hdchoice, $hdchoicelabel);
         $hdchoice->add($combobox);
 
-        ugtk2::gtkpack2__($mainbox, $hdchoice);
+        ugtk3::gtkpack2__($mainbox, $hdchoice);
 
-        my $contentbox = Gtk2::VBox->new(0, 12);
+        my $contentbox = Gtk3::VBox->new(0, 12);
 
-        my $scroll = Gtk2::ScrolledWindow->new;
+        my $scroll = Gtk3::ScrolledWindow->new;
         $scroll->set_policy('never', 'automatic'),
-        my $vp = Gtk2::Viewport->new;
+        my $vp = Gtk3::Viewport->new;
         $vp->set_shadow_type('none');
         $vp->add($contentbox);
         $scroll->add($vp);
@@ -564,7 +560,7 @@ sub main {
             );
         my $buttons_pack = $mainw->create_okcancel(N("Next"), undef, '', @more_buttons);
         $mainbox->pack_end($buttons_pack, 0, 0, 0);
-        ugtk2::gtkadd($mainw->{window}, $mainbox);
+        ugtk3::gtkadd($mainw->{window}, $mainbox);
         $mainw->{window}->show_all;
 
         $mainw->main;
@@ -599,6 +595,7 @@ sub main {
         if ($err =~ /wizcancel/) {
             $_->destroy foreach $::WizardTable->get_children;
         } else {
+            log::l("Partitioning failed: $err");
             $o->ask_warn('', N("Partitioning failed: %s", formatError($err)));
         }
     }

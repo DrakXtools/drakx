@@ -685,11 +685,13 @@ sub get_autologin() {
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
     my $gdm_file = "$::prefix/etc/X11/gdm/custom.conf";
     my $kdm_file = common::read_alternative('kdm4-config');
+    my $lightdm_conffile = "$::prefix/etc/lightdm/lightdm.conf.d/50-mageia-autologin.conf";
     my $autologin_file = "$::prefix/etc/sysconfig/autologin";
     my $desktop = $desktop{DESKTOP} || first(sessions());
     my %desktop_to_dm = (
         GNOME => 'gdm',
         KDE4 => 'kdm',
+        xfce4 => 'lightdm',
         LXDE => 'lxdm',
     );
     my %dm_canonical = (
@@ -709,6 +711,9 @@ sub get_autologin() {
     } elsif ($dm eq "kdm") {
         my %conf = read_gnomekderc($kdm_file, 'X-:0-Core');
         $autologin_user = text2bool($conf{AutoLoginEnable}) && $conf{AutoLoginUser};
+    } elsif ($dm eq "lightdm") {
+        my %conf = read_gnomekderc($lightdm_conffile, 'SeatDefaults');
+        $autologin_user = text2bool($conf{'#dummy-autologin'}) && $conf{"autologin-user"};
     } else {
         my %conf = getVarsFromSh($autologin_file);
         $autologin_user = text2bool($conf{AUTOLOGIN}) && $conf{USER};
@@ -748,6 +753,13 @@ sub set_autologin {
 	AutomaticLoginEnable => $do_autologin,
 	AutomaticLogin => $autologin->{user},
     )) } if -e $gdm_conffile;
+
+    #- Configure LIGHTDM
+    my $lightdm_conffile = "$::prefix/etc/lightdm/lightdm.conf.d/50-mageia-autologin.conf";
+    eval { update_gnomekderc($lightdm_conffile, SeatDefaults => (
+	'#dummy-autologin' => $do_autologin,
+	'autologin-user' => $autologin->{user}
+    )) } if -e $lightdm_conffile;
 
     my $xdm_autologin_cfg = "$::prefix/etc/sysconfig/autologin";
     # TODO: configure lxdm in /etx/lxdm/lxdm.conf
@@ -973,18 +985,25 @@ sub sessions_with_order() {
 sub urpmi_add_all_media {
     my ($in, $o_previous_release) = @_;
 
-    my $binary = find { whereis_binary($_, $::prefix) } if_(check_for_xserver(), 'gurpmi.addmedia'), 'urpmi.addmedia' or return;
+    my $binary = find { whereis_binary($_, $::prefix) } if_(check_for_xserver(), 'gurpmi.addmedia'), 'urpmi.addmedia';
+    if (!$binary) {
+	log::l("urpmi.addmedia not found!");
+	return;
+    }
     
     #- configure urpmi media if network is up
     require network::tools;
-    return if !network::tools::has_network_connection();
+    if (!network::tools::has_network_connection()) {
+	log::l("no network connexion!");
+	return;
+    }
     my $wait;
     my @options = ('--distrib', '--mirrorlist', '$MIRRORLIST');
     if ($binary eq 'urpmi.addmedia') {
 	$wait = $in->wait_message(N("Please wait"), N("Please wait, adding media..."));
     } elsif ($in->isa('interactive::gtk')) {
 	push @options, '--silent-success';
-	mygtk2::flush();
+	mygtk3::flush();
     }
 
     my $reason = join(',', $o_previous_release ? 
@@ -995,18 +1014,6 @@ sub urpmi_add_all_media {
 
     my $log_file = '/root/drakx/updates.log';
     my $val = run_program::rooted($::prefix, $binary, '>>', $log_file, '2>>', $log_file, @options);
-
-    if ($val) {
-        #- enable Non-free/Restricted repositories if a package having a matching name is installed
-        #- FIXME: this only works for Non-free for now thanks to kernel-firmware-nonfree
-        #- for Restricted to work and for better Non-free support, we should search in package releases as well
-        foreach my $media (qw(Non-free Restricted)) {
-            $in->do_pkgs->are_installed("*" . lc($media) . "*") or next;
-            foreach my $type (qw(Release Updates)) {
-                run_program::rooted($::prefix, '/usr/libexec/urpmi.update', '--no-ignore', "$media $type");
-            }
-        }
-    }
 
     undef $wait;
     $val;
@@ -1047,27 +1054,27 @@ sub display_release_notes {
         return;
     }
 
-    require Gtk2::WebKit;
-    require ugtk2;
-    ugtk2->import(':all');
-    require mygtk2;
-    mygtk2->import('gtknew');
+    require Gtk3::WebKit;
+    require ugtk3;
+    ugtk3->import(':all');
+    require mygtk3;
+    mygtk3->import('gtknew');
     my $view = gtknew('WebKit_View', no_popup_menu => 1);
     $view->load_html_string($release_notes, '/');
                                
-    my $w = ugtk2->new(N("Release Notes"), transient => $::main_window, modal => 1, pop_it => 1);
+    my $w = ugtk3->new(N("Release Notes"), transient => $::main_window, modal => 1, pop_it => 1);
     gtkadd($w->{rwindow},
-           gtkpack_(Gtk2::VBox->new,
-                    1, create_scrolled_window(ugtk2::gtkset_border_width($view, 5),
+           gtkpack_(Gtk3::VBox->new,
+                    1, create_scrolled_window(ugtk3::gtkset_border_width($view, 5),
                                               [ 'never', 'automatic' ],
                                           ),
                     0, gtkpack(create_hbox('end'),
                                gtknew('Button', text => N("Close"),
-                                      clicked => sub { Gtk2->main_quit })
+                                      clicked => sub { Gtk3->main_quit })
                            ),
                 ),
        );
-    mygtk2::set_main_window_size($w->{rwindow});
+    mygtk3::set_main_window_size($w->{rwindow});
     $w->{real_window}->grab_focus;
     $w->{real_window}->show_all;
     $w->main;
@@ -1099,7 +1106,8 @@ sub get_release_notes {
 sub run_display_release_notes {
     my ($release_notes) = @_;
     output('/tmp/release_notes.html', $release_notes);
-    system('/usr/bin/display_release_notes.pl');
+    local $ENV{LC_ALL} = $::o->{locale}{lang} || 'C';
+    run_program::raw({ detach => 1 }, '/usr/bin/display_release_notes.pl');
 }
 
 sub acceptLicense {
@@ -1227,7 +1235,7 @@ sub selectLanguage_standalone {
     ]);
     $locale->{utf8} = !$non_utf8;
     lang::set($locale);
-    Gtk2->set_locale if $in->isa('interactive::gtk');
+    c::init_setlocale() if $in->isa('interactive::gtk');
     lang::lang_changed($locale) if $old_lang ne $locale->{lang};
 }
 

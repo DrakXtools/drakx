@@ -62,7 +62,7 @@ our %l = (
    #- protocol reported are not accurate) so we match network adapters against
    #- known drivers :-(
     usb => [ 
-      qw(asix catc cdc_ether cdc_mbim dm9601 kaweth mcs7830 pegasus rtl8150 smsc75xx smsc95xx usbnet),
+      qw(asix catc cdc_ether cdc_mbim dm9601 huawei_cdc_ncm kaweth mcs7830 pegasus rtl8150 smsc75xx smsc95xx usbnet),
     ],
     wireless => [
       qw(acx-pci acx-usb adm8211 agnx airo airo_cs aironet4500_cs),
@@ -77,7 +77,7 @@ our %l = (
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
       qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se r8188eu rtl_pci rtl_usb rtusb),
       qw(rtl8192se rtl8192cu rtl8192de spectrum_cs sr9700 ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
-      qw(wavelan_cs wl wl3501_cs wvlan_cs zd1201 zd1211rw),
+      qw(wavelan_cs wcn36xx wl wl3501_cs wvlan_cs zd1201 zd1211rw),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
     isdn => [
@@ -118,7 +118,7 @@ our %l = (
         qw(be2iscsi bfa BusLogic dc395x dc395x_trm dmx3191d dtc eata eata_dma),
         qw(eata_pio fdomain g_NCR5380 in2000 initio mpt2sas mpt3sas mvsas NCR53c406a),
         qw(nsp32 pas16 pci2220i pm80xx pm8001 psi240i qla1280 qla2x00 qla2xxx),
-        qw(qlogicfas qlogicfc rsxx seagate shasta sim710 stex sym53c416),
+        qw(qlogicfas qlogicfc rsxx seagate shasta skd sim710 stex sym53c416),
         qw(t128 tmscsim u14-34f ultrastor vmw_pvscsi wd7000),
       ),
       qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicfas408 sym53c8xx lpfc lpfcdd), # ncr53c8xx
@@ -191,7 +191,7 @@ our %l = (
 	    hid-multilaser hid-multitouch hid-ntrig hid-ortek hid-petalynx hid-picolcd
 	    hid-pl hid-primax hid-prodikeys hid-roccat hid-roccat-arvo hid-roccat-common
 	    hid-roccat-isku hid-roccat-kone hid-roccat-koneplus hid-roccat-konepure hid-roccat-kovaplus hid-roccat-lua
-	    hid-roccat-pyra hid-roccat-savu hid-saitek hid-samsung hid-sensor-hub hid-sjoy hid-sony
+	    hid-roccat-pyra hid-roccat-ryos hid-roccat-savu hid-saitek hid-samsung hid-sensor-hub hid-sjoy hid-sony
 	    hid-speedlink hid-steelseries hid-sunplus hid-tivo hid-thingm hid-tmff hid-topseed hid-twinhan
 	    hid-uclogic hid-wacom hid-waltop hid-wiimote hid-xinmo hid-zpff hid-zydacron) ],
 
@@ -228,7 +228,7 @@ our %l = (
           qw(snd-asihpi snd-at73c213 snd-bt87x snd-ca0106 snd-cmi8330 snd-cmi8788 snd-cmipci),
           qw(snd-cs4231 snd-cs4232 snd-cs4236 snd-cs4281 snd-cs46xx snd-cs5530 snd-cs5535audio),
           qw(snd_ctxfi),
-          qw(snd-darla20 snd-darla24 snd-dt019x snd-echo3g snd-emu10k1 snd-emu10k1x),
+          qw(snd-darla20 snd-darla24 snd-dice snd-dt019x snd-echo3g snd-emu10k1 snd-emu10k1x),
           qw(snd-ens1370 snd-ens1371 snd-es1688 snd-es18xx snd-es1938 snd-es1968 snd-es968),
           qw(snd-fm801 snd-gina20 snd-gina24 snd-gina3g),
           qw(snd-gusclassic snd-gusextreme snd-gusmax),
@@ -299,7 +299,7 @@ our %l = (
       remote => [ qw(ati_remote) ],
       # USB tablets and touchscreens:
       tablet => [ qw(acecad aiptek wacom kbtab) ],
-      touchscreen => [ qw(ads7846_ts gunze hp680_ts_input itmtouch mk712 mtouch usbtouchscreen) ],
+      touchscreen => [ qw(ads7846_ts gunze hp680_ts_input itmtouch mk712 mtouch sur40 usbtouchscreen) ],
   },
 
   various => 
@@ -333,7 +333,8 @@ our %l = (
     other => [
       qw(defxx ide-floppy ide-tape loop lp nbd sg st),
       qw(parport_pc parport_serial),
-      qw(btaudio mmc_block),
+      qw(btaudio),
+      qw(mmc_block sdhci-acpi), # eMMC
 
       'cryptoloop',
       if_(arch() =~ /sparc/, 'openprom'),
@@ -345,7 +346,7 @@ our %l = (
       #- these need checking
       qw(rrunner meye),
 
-      qw(virtio virtio_balloon virtio_pci virtio_ring vhost_scsi),
+      qw(virtio virtio_balloon virtio_pci virtio_ring vhost_scsi hyperv-keyboard),
       qw(mei pch_phub),
       qw(vmvgfx),
     ],

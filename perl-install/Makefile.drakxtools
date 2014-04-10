@@ -64,6 +64,7 @@ install:
 	for i in $(PMS_DIRS); do install -d $(LIBDEST)/$$i ; install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
 	install -m 644 pixmaps/*.* $(PIXDIR)
 	install -m 644 share/*.rc $(DATADIR)/$(NAME)
+	install -m 644 share/*.css $(DATADIR)/$(NAME)
 
 	install -d $(PREFIX)/etc/security
 	echo 'RESTRICT=yes' > $(PREFIX)/etc/security/fileshare.conf

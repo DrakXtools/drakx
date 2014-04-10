@@ -33,6 +33,25 @@
   </if>
 </from>
 
+
+<from dir="/usr/LIB/girepository-1.0">
+  Atk-1.0.typelib
+  cairo-1.0.typelib
+  Gdk-3.0.typelib
+  GdkPixbuf-2.0.typelib
+  GdkX11-3.0.typelib
+  Gio-2.0.typelib
+  GLib-2.0.typelib
+  GModule-2.0.typelib
+  GObject-2.0.typelib
+  Gtk-3.0.typelib
+  JavaScriptCore-3.0.typelib <!-- needed by WebKit-3.0.typelib -->
+  Pango-1.0.typelib
+  Soup-2.4.typelib <!-- needed by WebKit-3.0.typelib -->
+  WebKit-3.0.typelib
+  xlib-2.0.typelib
+</from>
+
 <from dir="/usr/LIB/xorg/modules">
   drivers/fbdev_drv.so
   drivers/vesa_drv.so
@@ -45,6 +64,12 @@
   libint10.so
   libshadow.so
   libvbe.so
+</from>
+
+<from dir="/usr/share/glib-2.0/schemas">
+  <from expand="glob">
+    gschema*
+  </from>
 </from>
 
 <from dir="/usr/share/X11/xkb">
@@ -86,6 +111,7 @@
       */LC_MESSAGES/draksnapshot.mo
       */LC_MESSAGES/drakx-net.mo
       */LC_MESSAGES/drakx-kbd-mouse-x11.mo
+      */LC_MESSAGES/gtk30.mo
       */LC_MESSAGES/urpmi.mo
       */LC_MESSAGES/gtk20.mo
     </from>
@@ -112,6 +138,9 @@
 
   <!-- needed by dmraid -->
   libdmraid-events-isw.so
+
+  <!-- needed fro Gtk3-WebKit -->
+  libwebkitgtk-3.0.so.0
 </from>
 </filter>
 
@@ -128,11 +157,22 @@
   /etc/urpmi/prefer.vendor.list
   /etc/fonts/
   /etc/rpm/macros.d/legacy_compat.macros
+
+  <!-- for gtk+3 that needs dbus to be initialized -->
+  <from dir="share">
+    <to dir="/etc">
+      <!-- abusing '<from expand="command">' -->
+      <from expand="command">
+	  dbus-uuidgen > share/machine-id; echo machine-id
+      </from>
+    </to>
+  </from>
+
 <!--  /usr/share/X11/XKeysymDB -->
   /etc/pango/*/pango.modules
   /usr/LIB/libgdk_pixbuf-2.0.so.0
-  /usr/LIB/gtk-2.0/*/immodules/im-cedilla.so
-  /usr/LIB/gtk-2.0/*/engines/libia_ora.so
+  /usr/LIB/gtk-3.0/*/immodules/im-cedilla.so
+  /usr/LIB/gtk-3.0/*/theming-engines/liboxygen-gtk.so
   /usr/share/mime/mime.cache
 
   /usr/lib/libDrakX/keyboard.pm
@@ -158,6 +198,8 @@
   /usr/bin/drakx-matchbox-window-manager
   /usr/share/matchbox/mbnoapp.xpm
 
+  /usr/share/icons/gnome/scalable/status/dialog-warning-symbolic.svg
+
   /etc/pki/tls/certs/ca-bundle.crt
 
   /lib/udev/ata_id
@@ -181,7 +223,11 @@
     /usr/LIB/python2.7/encodings/__init__.py
     /usr/LIB/python2.7/encodings/utf_8.py
     /usr/LIB/python2.7/genericpath.py
+    /usr/LIB/python2.7/heapq.py
+    /usr/LIB/python2.7/keyword.py
+    /usr/LIB/python2.7/lib-dynload/_collections.so
     /usr/LIB/python2.7/lib-dynload/itertools.so
+    /usr/LIB/python2.7/lib-dynload/operator.so
     /usr/LIB/python2.7/linecache.py
     /usr/LIB/python2.7/os.py
     /usr/LIB/python2.7/posixpath.py
@@ -206,21 +252,13 @@
   </if>
 
   <from expand="glob">
-    <from spaces_in_filename="1">
-       /usr/share/themes/Ia Ora*
-    </from>
-    <from spaces_in_filename="1">
-       /usr/share/themes/Ia Ora*/*
-    </from>
+    <!-- needed by matchbox -->
     <from spaces_in_filename="1">
        /usr/share/themes/Ia Ora*/matchbox/*
     </from>
-    <from spaces_in_filename="1">
-       /usr/share/themes/Ia Ora*/gtk-2.0/gtkrc
-    </from>
+    /usr/share/themes/oxygen-gtk*
     /usr/LIB/gdk-pixbuf-2.0/*/loaders.cache
     /usr/LIB/gdk-pixbuf-2.0/*/loaders/libpixbufloader-png.so
-    /etc/gtk-2.0/gtk.immodules.*
     /etc/brltty/*.ttb
     /etc/brltty/*.txt
     /LIB/brltty/libbrlttyb??.so
@@ -343,6 +381,7 @@
   MDV/Snapshot/Restore.pm
   Parse/EDID.pm
   XML/SAX/Exception.pm
+  ARCH-linux-thread-multi/Cairo.pm
   ARCH-linux-thread-multi/List/MoreUtils.pm
   ARCH-linux-thread-multi/RPMBDB.pm
   ARCH-linux-thread-multi/Term/ReadKey.pm
@@ -356,6 +395,7 @@
   ARCH-linux-thread-multi/XML/LibXML/Literal.pm
   ARCH-linux-thread-multi/XML/LibXML/Number.pm
   ARCH-linux-thread-multi/auto/RPMBDB/RPMBDB.so
+  ARCH-linux-thread-multi/auto/Cairo/Cairo.so
   ARCH-linux-thread-multi/auto/Term/ReadKey/ReadKey.so
   ARCH-linux-thread-multi/auto/XML/LibXML/LibXML.so
   urpm.pm
@@ -396,10 +436,14 @@
   perl-Curses-UI
   perl-File-FnMatch
   perl-Filesys-Df
+  perl-Cairo-GObject
   perl-Clone
   perl-Glib
-  perl-Gtk2
-  perl-Gtk2-WebKit
+  perl-Glib-Object-Introspection
+  perl-Gtk3
+  perl-Gtk3-WebKit
+  perl-Locale-gettext
+  perl-MDK-Common
   perl-Pango
   perl-URPM
 </from>
@@ -417,7 +461,7 @@
 
 <from dir="../../tools">
   <to dir="/usr/bin" flatten="on">
-    xhost+
+    serial_probe/serial_probe 
   </to>
 </from>
 
@@ -452,12 +496,9 @@
   </to>
 </from>
 
-<from dir="share">
-  <to dir="/etc/gtk-2.0/">
-    gtkrc
-  </to>
+<from dir="/etc/gtk-3.0/">
+  settings.ini
 </from>
-
 
 <from dir="pixmaps">
   <to dir="/usr/share">

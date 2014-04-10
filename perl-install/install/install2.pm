@@ -199,7 +199,8 @@ sub choosePackages {
     log::l("rpmsrate_flags_chosen's: ", join(' ', sort @flags));
 
     #- check pre-condition that basesystem package must be selected.
-    install::pkgs::packageByName($o->{packages}, 'basesystem')->flag_available or die "basesystem package not selected";
+    my $base_pkg = install::pkgs::packageByName($o->{packages}, 'basesystem');
+    $base_pkg->flag_available or $base_pkg->flag_installed or die "basesystem package not selected";
 
     #- check if there are packages that need installation.
     $o->{steps}{installPackages}{done} = 0 if $o->{steps}{installPackages}{done} && install::pkgs::packagesToInstall($o->{packages}) > 0;
@@ -390,7 +391,7 @@ sub read_stage1_net_conf() {
     #- get stage1 network configuration if any.
     log::l('found /tmp/network');
     add2hash($o->{net}{network} ||= {}, network::network::read_conf('/tmp/network'));
-    if (my ($file) = glob_('/tmp/ifcfg-*')) {
+    if (my ($file) = grep { -f $_ } glob_('/tmp/ifcfg-*')) {
         log::l("found network config file $file");
         my $l = network::network::read_interface_conf($file);
         $o->{net}{ifcfg}{$l->{DEVICE}} ||= $l;

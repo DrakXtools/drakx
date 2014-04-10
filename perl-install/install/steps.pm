@@ -706,7 +706,14 @@ sub configureTimezone {
     my ($o) = @_;
     install::any::preConfigureTimezone($o);
 
-    $o->pkg_install('ntp') if $o->{timezone}{ntp};
+    if ($o->{timezone}{ntp}) {
+        # We prefer chrony, but we'll deal with ntpd for the sake of upgrades
+        my $pkg = install::pkgs::packageByName($o->{packages}, 'chrony');
+        unless ($pkg && $pkg->flag_installed) {
+            $pkg = install::pkgs::packageByName($o->{packages}, 'ntp');
+            $o->pkg_install('chrony') unless ($pkg && $pkg->flag_installed);
+       }
+    }
 
     require timezone;
     timezone::write($o->{timezone});

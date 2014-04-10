@@ -66,38 +66,48 @@ if ($is_bootloader_mode) {
     $in->exit(0);
 }
 
-require ugtk2;
-ugtk2->import(qw(:helpers :wrappers :create));
-require mygtk2;
-mygtk2->import(qw(gtknew));
+require ugtk3;
+ugtk3->import(qw(:helpers :wrappers :create));
+require mygtk3;
+mygtk3->import(qw(gtknew));
 
 autologin_choice();
 
 sub run_boot_window {
     my ($title, $pack_list, $apply_sub) = @_;
 
-    my $w = ugtk2->new($title);
+    my $w = ugtk3->new($title);
     my $window = $w->{window};
-    mygtk2::register_main_window($w->{real_window});
+    mygtk3::register_main_window($w->{real_window});
 
-    $window->signal_connect(delete_event => sub { ugtk2->exit(0) });
+    $window->signal_connect(delete_event => sub { ugtk3->exit(0) });
     unless ($::isEmbedded) {
         $window->set_border_width(2);
         ### menus definition
         # the menus are not shown but they provides shiny shortcut like C-q
-        my @menu_items = ([ N("/_File"), undef, undef, undef, '<Branch>' ],
-                          [ N("/File/_Quit"), N("<control>Q"), sub { ugtk2->exit(0) }, undef, '<Item>' ],
-                         );
-        create_factory_menu($w->{rwindow}, @menu_items);
+	my $ui = gtknew('UIManager', actions => [
+                   # [name, stock_id, value, label, accelerator, tooltip, callback]
+                   [ 'FileMenu',        undef, N("_File") ],
+                   [ 'Quit', undef, N("_Quit"), N("<control>Q"), undef, sub { ugtk3->exit(0) } ],
+               ],
+               string => qq(<ui>
+  <menubar name='MenuBar'>
+    <menu action='FileMenu'>
+      <menuitem action='Quit'/>
+    </menu>
+  </menubar>
+</ui>));
+	$w->{rwindow}->add_accel_group($ui->get_accel_group);
+
         ######### menus end
     }
     gtkadd($window, gtknew('VBox', children => [
                              @$pack_list,
                              0, create_okcancel({
-                                                 cancel_clicked => sub { ugtk2->exit(0) },
+                                                 cancel_clicked => sub { ugtk3->exit(0) },
                                                  ok_clicked => sub {
                                                      $apply_sub->();
-                                                     ugtk2->exit(0);
+                                                     ugtk3->exit(0);
                                                  }
                                                 }) ]));
     $window->show_all;
@@ -183,7 +193,7 @@ sub autologin_choice() {
         push @users, $user;
     }
     my $user_combo = gtknew('ComboBox', text => $user, list => \@users);
-    my $desktop_combo = Gtk2::ComboBox->new_with_strings(\@sessions, if_(member($auto_mode->{desktop}, @sessions), $auto_mode->{desktop}));
+    my $desktop_combo = Gtk3::ComboBoxText->new_with_strings(\@sessions, if_(member($auto_mode->{desktop}, @sessions), $auto_mode->{desktop}));
 
     my $auto_box = gtknew('Table', col_spacings => 5, row_spacings => 5, homogeneous => 1, children => [
                                     [ gtknew('Label_Left', text => N("Default user")), $user_combo ],

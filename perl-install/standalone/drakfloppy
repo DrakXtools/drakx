@@ -29,25 +29,33 @@ use lib qw(/usr/lib/libDrakX);
 
 use standalone; #- warning, standalone must be loaded very first, for 'explanations'
 use common;
-use mygtk2 qw(gtknew);
-use ugtk2 qw(:create :dialogs :helpers :wrappers);
+use mygtk3 qw(gtknew);
+use ugtk3 qw(:create :dialogs :helpers :wrappers);
 use detect_devices;
 
-$ugtk2::wm_icon = "/usr/share/mcc/themes/default/drakfloppy-mdk.png";
+$ugtk3::wm_icon = "/usr/share/mcc/themes/default/drakfloppy-mdk.png";
 require_root_capability();
 
-my $window = ugtk2->new(N("Boot Floppy"));
+my $window = ugtk3->new(N("Boot Floppy"));
 unless ($::isEmbedded) {
-    $window->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
+    $window->{rwindow}->signal_connect(delete_event => sub { ugtk3->exit(0) });
     $window->{rwindow}->set_border_width(5);
     
     ### menus definition
     # the menus are not shown but they provides shiny shortcut like C-q
-    create_factory_menu($window->{rwindow}, ( 
-                                             { path => N("/_File"), item_type => '<Branch>' },
-                                             { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback => sub { ugtk2->exit(0) } },
-                                            )
-                       );
+    my $ui = gtknew('UIManager', actions => [
+			# [name, stock_id, value, label, accelerator, tooltip, callback]
+			[ 'FileMenu',        undef, N("_File") ],
+			[ 'Quit', undef, N("_Quit"), N("<control>Q"), undef, sub { ugtk3->exit(0) } ],
+		    ],
+		    string => qq(<ui>
+  <menubar name='MenuBar'>
+    <menu action='FileMenu'>
+      <menuitem action='Quit'/>
+    </menu>
+  </menubar>
+</ui>));
+       $window->{rwindow}->add_accel_group($ui->get_accel_group);
 }
 
 
@@ -96,7 +104,7 @@ $window->{window}->add(
                                          ),
                                 1, gtknew('VBox'),
                                 0, create_okcancel({
-                                                    cancel_clicked => sub { ugtk2->exit(0) },
+                                                    cancel_clicked => sub { ugtk3->exit(0) },
                                                     ok_clicked  => \&build_it,
                                                    },
                                                    undef, undef, '',
@@ -108,7 +116,7 @@ $window->{window}->add(
 $window->{rwindow}->show_all;
 
 $window->main;
-ugtk2->exit(0);
+ugtk3->exit(0);
 
 
 my $remove_but;
@@ -119,23 +127,23 @@ sub pref_dialog() {
     
 
     # Create root tree:
-    $tree_model = Gtk2::TreeStore->new(("Glib::String") x 2, "Glib::Int");
-    $tree = Gtk2::TreeView->new_with_model($tree_model);
+    $tree_model = Gtk3::TreeStore->new(("Glib::String") x 2, "Glib::Int");
+    $tree = Gtk3::TreeView->new_with_model($tree_model);
     $tree->set_headers_visible(0);
-    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $tree->append_column(Gtk3::TreeViewColumn->new_with_attributes("", Gtk3::CellRendererText->new, 'text' => 0));
     $tree->signal_connect('row-expanded', \&expand_tree);
     $tree->get_selection->signal_connect('changed' => \&selected_tree);
 
     # Create modules list:
-    $list_model = Gtk2::ListStore->new(("Glib::String") x 3); # relative path, size, (hidden full path)
-    $list  = Gtk2::TreeView->new_with_model($list_model);
+    $list_model = Gtk3::ListStore->new(("Glib::String") x 3); # relative path, size, (hidden full path)
+    $list  = Gtk3::TreeView->new_with_model($list_model);
     each_index {
-        $list->append_column(my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i));
+        $list->append_column(my $col = Gtk3::TreeViewColumn->new_with_attributes($_, Gtk3::CellRendererText->new, 'text' => $::i));
         $col->set_sort_column_id($::i);
         $col->set_min_width((200, 50)[$::i]);
     } (N("Module name"), N("Size"));
     
-    gtkpack_($dialog->vbox,
+    gtkpack_($dialog->get_child,
              0, gtknew('Frame', text => N("Mkinitrd optional arguments"), child => 
                        gtknew('VBox', spacing => 5, children_tight => [
                                  $buttons{force} = gtknew('CheckButton', text => N("force")),
@@ -150,7 +158,7 @@ sub pref_dialog() {
                                                          gtknew('ScrolledWindow', child => $tree),
                                                          200, $::isEmbedded ? 0 : 175),
                                      gtknew('VBox', children => [
-                                              1, gtkadd(Gtk2::ScrolledWindow->new,
+                                              1, gtkadd(Gtk3::ScrolledWindow->new,
                                                         $list
                                                        ),
                                               0, $remove_but = gtknew('Button', text => N("Remove a module"), 
@@ -180,7 +188,7 @@ sub pref_dialog() {
     $remove_but->set_sensitive(scalar @modules);
     @temp_modules = ();
 
-    gtkadd($dialog->action_area,
+    gtkadd($dialog->get_action_area,
            create_okcancel({
                             cancel_clicked => sub { $dialog->destroy },
                             ok_clicked => sub { 
@@ -301,7 +309,7 @@ sub build_it() {
     my $log = join('', <$STATUS>);
     if (close $STATUS) {
         info_dialog(N("Floppy creation completed"), N("The creation of the boot floppy has been successfully completed \n"));
-        ugtk2->exit;
+        ugtk3->exit;
     } else {
         err_dialog(N("Error"),
                    #-PO: Do not alter the <span ..> and </span> tags

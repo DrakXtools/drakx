@@ -26,6 +26,7 @@ my ($disk_iso_repository, $repository_uri);
     --resolution=XXXxYYYY (eg: --resolution=1024x768)\n
     --repository=<path>   path of packages repository
     --text                text mode installer
+    --depth=XX            set screen color depth
 ";
 
 (my $repository, my $dir, @ARGV) = @ARGV;
@@ -41,6 +42,8 @@ foreach (@ARGV) {
         $wrapper = "gdb -q --args";
     } elsif (/--strace/) {
         $wrapper = "strace -e file";
+    } elsif (/--depth=(.*)/) {
+        $resolution .= "x$1";
     }
 }
 my ($repository_without_arch, $repository_arch) = basename($repository) eq arch() ? (dirname($repository), '/' . arch()) : ($repository, '');
@@ -128,7 +131,7 @@ eval { cp_af('/etc/resolv.conf', "$SLASH_LOCATION/etc/resolv.conf") };
 }
 
 my $Xnest_pid;
-my $Xnest_bin = find { whereis_binary($_) } 'Xephyr', 'Xnest';
+my $Xnest_bin = find { whereis_binary($_) } 'Xephyr', 'Xnest' or die "Xephyr not find! Please install x11-server-xephyr!\n";
 if (!-f ($SLASH_LOCATION . $AUTO_INSTALL_ROOTED) && $Xnest_bin && join('', @ARGV) !~ /--text/) {
     my $DISPLAY = ':8';
     $Xnest_pid = fork();

@@ -1,5 +1,176 @@
-Version 15.69 - 3 March 2014
+Version 16.27 - 18 February 2014
 
+- fix crash when choosing a RTL language (mga#12793)
+- Ensure uid/gid extraction works when adding users via summary page
+  (fixes chown'ing user to root when adding existing user on upgrade mga#12375)
+
+Version 16.26.6 - 23 January 2014
+
+- fix hidden icon in individual package selection (mga#12397)
+
+Version 16.26.5 - 22 January 2014
+
+- release notes dialog:
+  o fix untranslated button
+
+Version 16.26.4 - 22 January 2014
+
+- debug image:
+  o add a warning about QWERTY keyboard
+- help dialogs:
+  o do warn on first screenshot (mga#11176)
+  o fix lost help screenshots (mga#11176)
+
+Version 16.26.3 - 21 January 2014
+
+- help dialogs:
+  o do not warn if a screenshot already has been taked (mga#11176)
+
+Version 16.26.2 - 20 January 2014
+
+- left background for final release of Mageia 4
+
+Version 16.26.1 - 20 January 2014
+
+- partitioning:
+  o increase back minimum partition width for Oxygen (mga#11977)
+
+Version 16.26 - 20 January 2014
+
+- fix detecting if basesystem is installed (mga#10722)
+  thus fixing "basesystem package not selected"
+- partitioning:
+  o fix sizing partition widgets
+  o fix not moving window (mga#11790, mga#11988, mga#11977)
+  o revert minimum partition width to its pre-gtk3 value
+  o show labels on partition buttons
+
+Version 16.25 - 19 January 2014
+
+- add Mageia 4 desktop images
+
+Version 16.24 - 18 January 2014
+
+- help dialogs:
+  o make screenshots work (mga#11176)
+  o fix untranslated button & title (mga#9828)
+
+Version 16.23 - 16 January 2014
+
+- partitioning:
+  o do not show labels on partition buttons (mga#11988)
+
+Version 16.22 - 15 January 2014
+
+- partitioning:
+  o fix "No GSettings schemas are installed on the system" error when
+    inspecting partitions (mga#12279)
+- services:
+  o use --no-block with chkconfig and systemctl enable to prevent systemd reload
+    and potential crash (especially during first/live boot)
+
+Version 16.21 - 13 January 2014
+
+- partitioning:
+  o do not propose check bad blocks for btrfs (Manuel Hiebel, mga#10116)
+  o increase minimum partition width for Oxygen (mga#11977)
+    (if not enough, we will disable labels on partitions buttons again)
+- revert back to matchbox instead of mutter as it doesn't fix
+  diskdrake issues (mga#11977)
+  (thus fixing missing window decorations (mga#12218))
+
+Version 16.17 - 20 December 2013
+
+- media step:
+  o hint that nonfree is needed if a CPU needs a microcode
+- install:
+  o fix pausing installing while displaying release notes
+- drakx-in-chroot:
+  o advise to install xephyr if missing
+- use mutter instead of matchbox in order to try to workaround
+  diskdrake issues (mga#11790, mga#11988, ...)
+  as a side effect, stage2 shrinks by 3Mb...
+
+Version 16.14 - 10 December 2013
+
+- Mageia 4 beta 2 left background
+
+Version 16.13 - 10 December 2013
+
+- fix crash when selecting an input method (mga#11939)
+
+Version 16.10 - 6 December 2013
+
+- package group selection:
+  o make bottom buttons always available
+    (by puting the scrolling window only around the package group check boxes)
+
+Version 16.9 - 6 December 2013
+
+- fix retrieving network info from stage2 after dracut migration (mga#11504)
+
+Version 16.7 - 5 December 2013
+
+- partitioning:
+  o fix a crash when creating partitions (mga#11876)
+
+Version 16.6 - 4 December 2013
+
+- fix blue background behind left panel text (mga#11866)
+
+Version 16.5 - 3 December 2013
+
+- partitioning:
+  o detect eMMc block devices (Luc Menut, mga#11812)
+  o fix a crash in partitioning wizard (mga#11820)
+  o show labels on partition buttons again but ellipsized (mga#11858)
+
+Version 16.4 - 2 December 2013
+
+- fix partitioning wizard moving the main window to left (mga#11790)
+- fix titles not being blue anymore
+
+Version 16.2 - 29 November 2013
+
+- no more run urpmi.update when adding media
+  (uneeded with urpmi-7.27+)
+
+Version 16.1 - 28 November 2013
+
+- fix a warning: include dialog-warning-symbolic
+- fix left panel text being black instead of white (mga#11792)
+- fix calling "child1_shrink" via package "Gtk3::HPaned" (mga#11797)
+- fix using old toolbar API that is no more available (mga#11791)
+- wrap too big labels in summary dialog (mga#11793)
+
+Version 16.0 - 23 November 2013
+
+- switch from Gtk+-2 to Gtk+-3:
+  o Banners: most themes work OK but Oxygen-gtk3...
+  o diskdrake: most themes work OK but Oxygen-gtk3...
+- detect_devices:
+  fix ids to be numeric
+- drakx-in-chroot:
+  o add --depth in order to force 16bit colors mode
+
+Version 15.73.1 - 19 November 2013
+
+- debug image:
+  o include enough python in order to generate a stack trace from within stage2
+  o fix passing arguments from drakx-in-chroot
+- do not compile/include xhost+ anymore (unused for years)
+- log why updates were not applied
+
+Version 15.73 - 12 November 2013
+
+- polkit: fix wrappers to properly escape arguments when calling the binary
+
+Version 15.72.2 - 11 November 2013
+
+- properly escape $$UID
+- use $$UID instead of $$(id -u)
+- use $UID instead of $(id -u)
+- use /usr/libexec/drakrpm-addmedia directly in stage2 (colin, #11319)
 - don't force default color depth as some gpus won't necessary support 16bpp
 - drop module section as there's no need for disabling modules that won't be
   present during install anyways, and it also prevents automatic loading of

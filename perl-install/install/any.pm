@@ -327,7 +327,18 @@ sub is_firmware_needed {
     require pkgs;
     my @xpkgs = pkgs::detect_graphical_drivers($o->do_pkgs);
     log::l("the following nonfree firmware(s) are needed for X.org: " . join(', ', @xpkgs)) if @xpkgs;
-    @xpkgs;
+
+    my $need_microcode = detect_devices::hasCPUMicrocode();
+    log::l("nonfree firmware is needed for the CPU (microcode)") if $need_microcode;
+
+    @need || @xpkgs || $need_microcode;
+}
+
+sub is_firmware_needed {
+    my ($o) = @_;
+    state $res;
+    $res = is_firmware_needed_($o) if !defined $res;
+    $res;
 }
 
 sub msg_if_firmware_needed {
@@ -652,7 +663,7 @@ sub default_packages {
     add_n_log("have crypted DM", "cryptsetup") if !is_empty_array_ref($o->{all_hds}{dmcrypts});
     add_n_log("some disks are fake RAID", qw(mdadm dmraid)) if any { fs::type::is_dmraid($_) } @{$o->{all_hds}{hds}};
     add_n_log("CPU needs microcode", "microcode_ctl") if detect_devices::hasCPUMicrocode();
-    add_n_log("CPU needs cpufreq", 'cpufreq') if detect_devices::hasCPUFreq();
+    add_n_log("CPU needs cpupower", 'cpupower') if detect_devices::hasCPUFreq();
     add_n_log("APM support needed", 'apmd') if -e "/proc/apm";
     add_n_log("needed by hardware", detect_devices::probe_name('Pkg'));
     my @ltmp = map { $_->{BOOTPROTO} eq 'dhcp' ? $_->{DHCP_CLIENT} || 'dhcpcd' : () } values %{$o->{net}{ifcfg}};
@@ -1355,7 +1366,10 @@ sub take_screenshot {
     }
     my $nb = 1;
     $nb++ while -e "$dir/$nb.png";
-    system('fb2png', '/dev/fb0', "$dir/$nb.png", '0');
+    run_program::run('fb2png', '/dev/fb0', "$dir/$nb.png", '0');
+
+    # help doesn't remember warning has been shown (one shot processes):
+    $warned ||= -e "$dir/2.png";
 
     if (!$warned && !$nowarn) {
 	$warned = 1;
@@ -1408,8 +1422,8 @@ sub set_security {
 
 sub write_fstab {
     my ($o) = @_;
-    fs::write_fstab($o->{all_hds}, $::prefix) 
-	if !$::local_install && (!$o->{isUpgrade} || $o->{isUpgrade} =~ /redhat|conectiva/ || $o->{migrate_device_names});
+    return if !$::local_install && (!$o->{isUpgrade} || $o->{isUpgrade} =~ /redhat|conectiva/ || $o->{migrate_device_names});
+    fs::write_fstab($o->{all_hds}, $::prefix);
 }
 
 sub adjust_files_mtime_to_timezone() {

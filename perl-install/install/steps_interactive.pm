@@ -36,7 +36,7 @@ use log;
 #-######################################################################################
 sub errorInStep {
     my ($o, $err) = @_;
-    $err = ugtk2::escape_text_for_TextView_markup_format($err) if $o->isa('install::steps_gtk');
+    $err = ugtk3::escape_text_for_TextView_markup_format($err) if $o->isa('install::steps_gtk');
     $o->ask_warn(N("Error"), [ N("An error occurred"), formatError($err) ]);
 }
 
@@ -880,6 +880,11 @@ sub summary {
 	label => N("User management"),
 	clicked => sub { 
 	    if (my $u = any::ask_user($o, $o->{users}, $o->{security}, needauser => 1)) {
+		if ($::prefix) {
+			#- getpwnam, getgrnam, getgrid works
+			symlinkf("$::prefix/etc/passwd", '/etc/passwd');
+			symlinkf("$::prefix/etc/group", '/etc/group');
+		}
 		any::add_users([$u], $o->{authentication});
 	    }
 	},
@@ -962,7 +967,7 @@ sub summary {
 	group => N("Network & Internet"),
 	label => N("Network"),
 	val => sub { $o->{net}{type} },
-	format => sub { s/.*:://; $_ },
+	format => sub { $_[0] =~ s/.*:://; $_[0] },
 	clicked => sub { 
 	    require network::netconnect;
 	    network::netconnect::real_main($o->{net}, $o, $o->{modules_conf});

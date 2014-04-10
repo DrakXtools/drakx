@@ -1425,7 +1425,7 @@ sub get_main_window_size() {
 
 # in order to workaround infamous 6 years old gnome bug #101968:
 sub get_label_width() {
-    first(mygtk2::get_main_window_size()) - 50 - $left_padding;
+    first(mygtk2::get_main_window_size()) - 55 - $left_padding;
 }
 
 sub set_main_window_size {
@@ -1437,9 +1437,8 @@ sub set_main_window_size {
 my @icon_paths;
 sub add_icon_path { push @icon_paths, @_ }
 sub _icon_paths() {
-    my $loc = (($ENV{'LC_MESSAGES'} =~ m/ru_RU/) ? 'ru' : 'en');
-    (@icon_paths, (exists $ENV{SHARE_PATH} ? ($ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps/$loc", "$ENV{SHARE_PATH}/libDrakX/pixmaps") : ()),
-    "/usr/lib/libDrakX/icons", "pixmaps/$loc", "pixmaps", 'data/icons', 'data/pixmaps', 'standalone/icons', '/usr/share/rpmdrake/icons');
+   (@icon_paths, (exists $ENV{SHARE_PATH} ? ($ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps") : ()),
+    "/usr/lib/libDrakX/icons", "pixmaps", 'data/icons', 'data/pixmaps', 'standalone/icons', '/usr/share/rpmdrake/icons');
 }  
 
 sub main {

@@ -22,10 +22,18 @@ use lib qw(/usr/lib/libDrakX);
 use interactive;
 use any;
 use MDK::Common;
+use lang;
 
 my $in = 'interactive'->vnew('su');
 # so that we popup above drakx:
 any::set_wm_hints_if_needed($in);
+
+# Fake enough $o for retrieving the proper translation:
+$::o = $in;
+$::o->{locale}{lang} = $ENV{LC_ALL};
+# must have a value so that we look at locale_special/ :
+$::prefix = '/';
+lang::set($::o->{locale});
 
 # not very safe but we run in a restricted environment anyway:
 my $release_notes = cat_utf8('/tmp/release_notes.html');

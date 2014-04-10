@@ -87,22 +87,22 @@ use lib qw(/usr/lib/libDrakX);
 
 use standalone;    #- warning, standalone must be loaded very first, for 'explanations'
 
-use mygtk2 qw(gtknew); #- do not import gtkadd which conflicts with ugtk2 version
-use ugtk2 qw(:create :dialogs :helpers :wrappers);
+use mygtk3 qw(gtknew); #- do not import gtkadd which conflicts with ugtk3 version
+use ugtk3 qw(:create :dialogs :helpers :wrappers);
 use common;
 use run_program;
 
 require_root_capability();
 
-$ugtk2::wm_icon = "drakfont";
+$ugtk3::wm_icon = "drakfont";
 
 #   global variables needed by each functions
 my $xlsfonts = 0;
 my $windows  = 0;
 my $replace;
-my $so      = -f '/usr/bin/ooffice';
-my $gs      = -f '/usr/bin/gs';
-my $abi     = -f '/usr/bin/abiword';
+my $so      = to_bool(-f '/usr/bin/ooffice');
+my $gs      = to_bool(-f '/usr/bin/gs');
+my $abi     = to_bool(-f '/usr/bin/abiword');
 my $printer = 1;
 my $mode    = -1;
 my @application;
@@ -476,9 +476,9 @@ sub backend_mod() {
 
 sub interactive_mode() {
     $interactive = 1;
-    $window1 = ugtk2->new(N("Font Installation"));
-    mygtk2::register_main_window($window1->{real_window});
-    $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
+    $window1 = ugtk3->new(N("Font Installation"));
+    mygtk3::register_main_window($window1->{real_window});
+    $window1->{rwindow}->signal_connect(delete_event => sub { ugtk3->exit(0) });
     $window1->{rwindow}->set_position('center') if !$::isEmbedded;
     
     my $button = {};
@@ -486,15 +486,15 @@ sub interactive_mode() {
 
     local $::Wizard_no_previous = 1;
     gtkadd($window1->{window},
-	   gtkpack_(Gtk2::VBox->new(0, 2), 
-                 if_(!$::isEmbedded, 0, Gtk2::Banner->new("drakfont", N("DrakFont"))), 
+	   gtkpack_(Gtk3::VBox->new(0, 2), 
+                 if_(!$::isEmbedded, 0, Gtk3::Banner->new("drakfont", N("DrakFont"))), 
                  0, gtknew('Title2', label => N("Font List")),
-                 1, Gtk2::FontSelection->new,
+                 1, Gtk3::FontSelection->new,
                  0, gtkadd(create_hbox(), 
-                             gtksignal_connect(Gtk2::Button->new(N("Get Windows Fonts")), clicked => sub { $windows = 1; import_status(); $windows = 0 }),
+                             gtksignal_connect(Gtk3::Button->new(N("Get Windows Fonts")), clicked => sub { $windows = 1; import_status(); $windows = 0 }),
                          ),
                  0, create_okcancel(my $oc = {
-                                     ok_clicked => sub { Gtk2->main_quit },
+                                     ok_clicked => sub { Gtk3->main_quit },
                                     },
                                     undef, undef, '',
                                     if_(0, [ N("About"),     \&help, 1 ]),
@@ -510,7 +510,7 @@ sub interactive_mode() {
     $window1->{rwindow}->show_all;
     $window1->{rwindow}->realize;
     $window1->main;
-    ugtk2->exit(0);
+    ugtk3->exit(0);
 }
 
 $list_all_font_path || $xlsfonts || $windows || @install || @uninstall ? backend_mod() : interactive_mode();
@@ -523,11 +523,9 @@ sub help() {
                         copyright => N("Copyright (C) %s by Mandriva", '2001-2008'),
                         license => $license, wrap_license => 1,
                         comments => N("Font installer."),
-                        website => 'http://mandrivalinux.com',
-                        website_label => N("Mandriva Linux"),
-                        authors => 'Sébastien Dupont 
-Damien Chaumette
-Thierry Vignaud <vignaud@mandriva.com>',
+                        website => 'http://moondrake.org',
+                        website_label => N("Moondrake GNU/Linux"),
+                        authors => [ 'Sébastien Dupont', 'Damien Chaumette', 'Thierry Vignaud <thierry.vignaud.com>' ],
                         artists => 'Hélène Durosini <ln@mandriva.com>',
                         translator_credits =>
                           #-PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
@@ -542,14 +540,14 @@ sub appli_choice() {
     dialog(N("Options"),
 	   [
 	    0, gtknew('Title2', label => N("Choose the applications that will support the fonts:")),
-	    0, Gtk2::WrappedLabel->new(formatAlaTeX(license_msg())),
+	    0, Gtk3::WrappedLabel->new(formatAlaTeX(license_msg())),
 	    (map {
 	      my ($label, $ref) = @$_;
-	      (0, gtkpack_(Gtk2::HBox->new, 
+	      (0, gtkpack_(Gtk3::HBox->new, 
 			   0, $label,
-			   1, Gtk2::HBox->new, 
+			   1, Gtk3::HBox->new, 
 			   # BUG: that code never had supported canceling
-			   0, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new, $$ref), toggled => sub { $$ref = $$ref ? 0 : 1 }),
+			   0, gtksignal_connect(gtkset_active(Gtk3::CheckButton->new, $$ref), toggled => sub { $$ref = $$ref ? 0 : 1 }),
 			  ),
 	      );
 	    } ([ N("Ghostscript"), \$gs ],
@@ -560,7 +558,7 @@ sub appli_choice() {
 	    ),
 	   ],
 	   [
-	    gtksignal_connect(Gtk2::Button->new(N("Ok")),
+	    gtksignal_connect(Gtk3::Button->new(N("Ok")),
 			      clicked => \&exitdialog,
 			     ),
 	   ],
@@ -570,10 +568,10 @@ sub appli_choice() {
 sub font_choice() {
     my $file_dialog;
     my $_select_font_msg = N("Select the font file or directory and click on 'Add'");
-    $file_dialog = Gtk2::FileChooserDialog->new(N("File Selection"), $::main_window, 'open', N("Cancel") => 'cancel', N("Ok") => 'ok'); # 'select_folder'
+    $file_dialog = Gtk3::FileChooserDialog->new(N("File Selection"), $::main_window, 'open', N("Cancel") => 'cancel', N("Ok") => 'ok'); # 'select_folder'
     $file_dialog->set_select_multiple(1);
 
-    my $filter = Gtk2::FileFilter->new;
+    my $filter = Gtk3::FileFilter->new;
     $filter->set_name(N("Fonts"));
     $filter->add_pattern("*.$_") foreach @font_extensions, map { uc($_) } @font_extensions;
     $file_dialog->add_filter($filter);
@@ -605,7 +603,7 @@ sub list_remove() { #- TODO : multi-selection
     $treeStore->remove($iter);
 }
 
-sub exitdialog() { Gtk2->main_quit }
+sub exitdialog() { Gtk3->main_quit }
 
 sub dialog {
     my ($title, $widgets, $buttons, $o_main_loop, $o_options) = @_;
@@ -614,14 +612,14 @@ sub dialog {
     local $::main_window = $dialog;
     $dialog->signal_connect(delete_event => \&exitdialog);
     $dialog->set_size_request(@{$o_options->{size}}) if ref $o_options->{size};
-    gtkpack_($dialog->vbox, @$widgets);
-    gtkpack($dialog->action_area, @$buttons) if $buttons;
+    gtkpack_($dialog->get_child, @$widgets);
+    gtkpack($dialog->get_action_area, @$buttons) if $buttons;
     $dialog->show_all;
     if ($o_main_loop) {
       gtkflush();
       $o_main_loop->();
     } else {
-      Gtk2->main;
+      Gtk3->main;
     }
     $dialog->destroy if $dialog;
     undef $dialog;
@@ -629,14 +627,14 @@ sub dialog {
 
 sub advanced_install() {
     my $button;
-    $model = Gtk2::TreeStore->new("Glib::String");
-    $list = Gtk2::TreeView->new_with_model($model);
-    $list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $model = Gtk3::TreeStore->new("Glib::String");
+    $list = Gtk3::TreeView->new_with_model($model);
+    $list->append_column(Gtk3::TreeViewColumn->new_with_attributes('', Gtk3::CellRendererText->new, 'text' => 0));
     $list->set_headers_visible(0);
     $list->get_selection->set_mode('browse');
     $list->set_rules_hint(1);
     $model->signal_connect("row-inserted" => sub { $button and $button->set_sensitive(1) });
-    $model->signal_connect("row-deleted" => sub { $button and $button->set_sensitive($model->get_iter_first) });
+    $model->signal_connect("row-deleted" => sub { $button and $button->set_sensitive($model->get_iter_first || 0) });
 
     dialog(N("Import fonts"),
            [
@@ -644,14 +642,14 @@ sub advanced_install() {
                1, gtknew('HBox', children => [
                    1, create_scrolled_window($list),
                    0, gtknew('VBox', children_tight => [
-                       gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => \&font_choice),
-                       gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => \&list_remove),
+                       gtksignal_connect(Gtk3::Button->new(N("Add")), clicked => \&font_choice),
+                       gtksignal_connect(Gtk3::Button->new(N("Remove")), clicked => \&list_remove),
                    ]),
                ]),
            ],
            [
-            gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => \&exitdialog),
-            gtksignal_connect($button = gtkset_sensitive(Gtk2::Button->new(N("Install")), 0),
+            gtksignal_connect(Gtk3::Button->new(N("Cancel")), clicked => \&exitdialog),
+            gtksignal_connect($button = gtkset_sensitive(Gtk3::Button->new(N("Install")), 0),
                               clicked => sub {
                                   import_status() if @install;
                               }),
@@ -664,16 +662,17 @@ sub advanced_install() {
 sub list_to_remove() {
     #my @files_path = grep(!/fonts/, all($current_path)); garbage ?
     gtkflush();
-    my (@tux) = $left_list->get_selection->get_selected_rows; #- get tree & paths
+    my ($indices) = $selection->get_selected_rows;
+    my (@tux) = @$indices; #- get tree & paths
     push @uninstall, map { $left_model->get($left_model->get_iter($_), 0) } @tux;
     #push @uninstall, $current_path . "/" . $files_path[$_] foreach @number_to_remove; garbage ?
     show_list_to_remove();
 }
 
 sub show_list_to_remove() {
-    my $model = Gtk2::TreeStore->new("Glib::String");
-    my $list = Gtk2::TreeView->new_with_model($model);
-    $list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    my $model = Gtk3::TreeStore->new("Glib::String");
+    my $list = Gtk3::TreeView->new_with_model($model);
+    $list->append_column(Gtk3::TreeViewColumn->new_with_attributes('', Gtk3::CellRendererText->new, 'text' => 0));
     $list->set_headers_visible(0);
     $list->get_selection->set_mode('browse');
     $list->set_rules_hint(1);
@@ -682,13 +681,13 @@ sub show_list_to_remove() {
 
     dialog(N("Warning"),
 	   [
-            0, Gtk2::Label->new(N("Are you sure you want to uninstall the following fonts?")),
-	    1, gtkpack_(Gtk2::HBox->new(0, 4), 1, create_scrolled_window($list)), 
+            0, Gtk3::Label->new(N("Are you sure you want to uninstall the following fonts?")),
+	    1, gtkpack_(Gtk3::HBox->new(0, 4), 1, create_scrolled_window($list)), 
 	   ],
 	   [
-	    gtksignal_connect(Gtk2::Button->new(N("Yes")),
+	    gtksignal_connect(Gtk3::Button->new(N("Yes")),
 			      clicked => sub { import_status_uninstall(); exitdialog() }),
-	    gtksignal_connect(Gtk2::Button->new(N("No")),
+	    gtksignal_connect(Gtk3::Button->new(N("No")),
 			      clicked => \&exitdialog
 			     ),
 	   ],
@@ -702,9 +701,9 @@ sub uninstall() { #- TODO : add item to right list with gtksignal_connect
     chk_empty_xfs_path();
     
     #- left part
-    $left_model = Gtk2::TreeStore->new("Glib::String");
-    $left_list = Gtk2::TreeView->new_with_model($left_model);
-    $left_list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $left_model = Gtk3::TreeStore->new("Glib::String");
+    $left_list = Gtk3::TreeView->new_with_model($left_model);
+    $left_list->append_column(Gtk3::TreeViewColumn->new_with_attributes('', Gtk3::CellRendererText->new, 'text' => 0));
     $left_list->set_headers_visible(0);
     $left_list->set_rules_hint(1);
     $left_list->get_selection->set_mode('multiple');
@@ -712,29 +711,29 @@ sub uninstall() { #- TODO : add item to right list with gtksignal_connect
     $left_model->append_set(undef, [ 0 => $_ ]) foreach sort @installed_fonts_path;
 
     #- right part
-    $right_model = Gtk2::TreeStore->new("Glib::String");
-    $right_list = Gtk2::TreeView->new_with_model($right_model);
-    $right_list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $right_model = Gtk3::TreeStore->new("Glib::String");
+    $right_list = Gtk3::TreeView->new_with_model($right_model);
+    $right_list->append_column(Gtk3::TreeViewColumn->new_with_attributes('', Gtk3::CellRendererText->new, 'text' => 0));
     $right_list->set_headers_visible(0);
     $right_list->get_selection->set_mode('multiple');
     $right_list->set_rules_hint(1);
 
     dialog(N("Uninstall"),
 	   [
-	    1, gtkpack_(Gtk2::HBox->new(0, 4), 
+	    1, gtkpack_(Gtk3::HBox->new(0, 4), 
 			1, create_scrolled_window($left_list),
 			#1, create_scrolled_window($right_list)
 		       ), 
 	   ],
 	   [
-	    gtksignal_connect(Gtk2::Button->new(N("Unselect All")),
+	    gtksignal_connect(Gtk3::Button->new(N("Unselect All")),
 			      clicked => sub { $left_list->get_selection->unselect_all }
 			     ),
-	    gtksignal_connect(Gtk2::Button->new(N("Select All")),
+	    gtksignal_connect(Gtk3::Button->new(N("Select All")),
 			      clicked => sub { $left_list->get_selection->select_all }
 			     ),
-	    gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub { exitdialog(); list_to_remove() }),
-	    gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => \&exitdialog),
+	    gtksignal_connect(Gtk3::Button->new(N("Remove")), clicked => sub { exitdialog(); list_to_remove() }),
+	    gtksignal_connect(Gtk3::Button->new(N("Cancel")), clicked => \&exitdialog),
 	   ],
            undef,
            { size => [ -1, 300 ] }
@@ -743,10 +742,10 @@ sub uninstall() { #- TODO : add item to right list with gtksignal_connect
 }
 
 sub import_status() {
-    $pbar  = Gtk2::ProgressBar->new;
-    $pbar1 = Gtk2::ProgressBar->new;
-    $pbar2 = Gtk2::ProgressBar->new;
-    $pbar3 = Gtk2::ProgressBar->new;
+    $pbar  = Gtk3::ProgressBar->new;
+    $pbar1 = Gtk3::ProgressBar->new;
+    $pbar2 = Gtk3::ProgressBar->new;
+    $pbar3 = Gtk3::ProgressBar->new;
     dialog(N("Importing fonts"),
            [
             0, create_packtable({ col_spacings => 10, row_spacings => 50 },
@@ -763,9 +762,9 @@ sub import_status() {
 }
 
 sub import_status_uninstall() {
-    $pbar  = Gtk2::ProgressBar->new;
-    $pbar1 = Gtk2::ProgressBar->new;
-    $pbar2 = Gtk2::ProgressBar->new;
+    $pbar  = Gtk3::ProgressBar->new;
+    $pbar1 = Gtk3::ProgressBar->new;
+    $pbar2 = Gtk3::ProgressBar->new;
     dialog(N("Removing fonts"),
 	   [
 	    0, create_packtable({ col_spacings => 10, row_spacings => 50 },

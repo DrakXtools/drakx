@@ -22,21 +22,21 @@ use lib qw(/usr/lib/libDrakX);
 use MDK::Common;
 use common;
 use standalone;
-use mygtk2;
+use mygtk3;
 use interactive;
-use ugtk2 qw(:create :helpers :wrappers);
-use Gtk2::SimpleList;
+use ugtk3 qw(:create :helpers :wrappers);
+use Gtk3::SimpleList;
 
 my $title = N("DVB");
-$ugtk2::wm_icon = "/usr/share/mcc/themes/default/tv-mdk.png";
-my $w = ugtk2->new($title);
+$ugtk3::wm_icon = "/usr/share/mcc/themes/default/tv-mdk.png";
+my $w = ugtk3->new($title);
 $w->{window}->signal_connect('destroy' => \&exitapp);
-mygtk2::register_main_window($w->{real_window});
+mygtk3::register_main_window($w->{real_window});
 my $in = 'interactive'->vnew;
 
 my $config_file = "$ENV{HOME}/.mplayer/channels.conf";
 
-my $channel_list = Gtk2::SimpleList->new(N("Channel") => "text", "id" => "hidden");
+my $channel_list = Gtk3::SimpleList->new(N("Channel") => "text", "id" => "hidden");
 my %buttons;
 my $pid;
 my $wait;
@@ -49,14 +49,14 @@ sub get_selected_channel() {
 sub exitapp() {
     local $SIG{TERM} = 'IGNORE';
     kill TERM => -$$;
-    Gtk2->main_quit;
+    Gtk3->main_quit;
 }
 
 sub detect_channels() {
     if (-s $config_file) {
         $in->ask_okcancel(N("Warning"), N("%s already exists and its contents will be lost", $config_file)) or return;
     }
-    gtkset_mousecursor_wait($w->{window}->window);
+    gtkset_mousecursor_wait($w->{window}->get_window);
     $channel_list->set_sensitive(0);
     $_->set_sensitive(0) foreach values %buttons;
 
@@ -73,11 +73,11 @@ sub detect_channels() {
         } else {
             $in->ask_warn(N("Error"), N("Could not get the list of available channels"));
         }
-        gtkset_mousecursor_normal($w->{window}->window);
+        gtkset_mousecursor_normal($w->{window}->get_window);
         $buttons{detect}->set_sensitive(1);
         $channel_list->set_sensitive(1);
     };
-    $wait = ugtk2->new(N("Please wait"), grab => 1);
+    $wait = ugtk3->new(N("Please wait"), grab => 1);
     $wait->{window}->signal_connect('destroy' => \&exitapp);
     if ($pid = fork()) {
         gtkadd($wait->{window},
@@ -142,7 +142,7 @@ sub launch_tv() {
 
 gtkadd($w->{window},
        gtknew('VBox', spacing => 5, children => [
-                  $::isEmbedded ? () : (0, Gtk2::Banner->new($ugtk2::wm_icon, $title)),
+                  $::isEmbedded ? () : (0, Gtk3::Banner->new($ugtk3::wm_icon, $title)),
                   1, gtknew('ScrolledWindow', width => 300, height => 400, child => $channel_list),
                   0, gtknew('HButtonBox', layout => 'end', children_loose => [
                                 $buttons{detect} = gtknew('Button', text => N("Detect Channels"), clicked => \&detect_channels),

@@ -12,11 +12,11 @@ use common;
 # i18n: IMPORTANT: to get correct namespace (drakconf instead of only libDrakX)
 BEGIN { unshift @::textdomains, 'drakconf' }
 
-use mygtk2 qw(gtknew); #- do not import gtkadd which conflicts with ugtk2 version
-use ugtk2 qw(:create :helpers :wrappers);
+use mygtk3 qw(gtknew); #- do not import gtkadd which conflicts with ugtk3 version
+use ugtk3 qw(:create :helpers :wrappers);
 use interactive;
 use modules::parameters;
-use harddrake::data;  #- needs to stay after use-ugtk2 as long as this module defines globals containing some N()
+use harddrake::data;  #- needs to stay after use-ugtk3 as long as this module defines globals containing some N()
 use fsedit;
 use pkgs;
 use POSIX qw(:sys_wait_h);
@@ -175,79 +175,52 @@ my ($current_device, $current_class, $current_configurator);
 my %sysh = distrib();
 my $distro_name = $sysh{system};
 
-my %menus = (
-             'options' => 
-             #-PO: please keep all "/" characters !!!
-             N("/_Options"),
-             'help' => N("/_Help")
-             );
-
 my %menu_options = (
-                    'MODEMS_DETECTION' => [ $menus{options}, N("/Autodetect _modems") ],
-                    'JAZZ_DETECTION' => [ $menus{options}, N("/Autodetect _jaz drives") ],
-                    'PARALLEL_ZIP_DETECTION' => [ $menus{options}, N("/Autodetect parallel _zip drives") ],
+                    'MODEMS_DETECTION' => N("Autodetect _modems"),
+                    'PARALLEL_ZIP_DETECTION' => N("Autodetect parallel _zip drives"),
                     );
 
-$ugtk2::wm_icon = "harddrake";
-$w = ugtk2->new(N("Hardware Configuration"));
+$ugtk3::wm_icon = "harddrake";
+$w = ugtk3->new(N("Hardware Configuration"));
 # fake diagnostics pragma:
 local $::main_window = $w->{real_window};
 
-my @menu_items = 
-    (
-     [ N("/_File"), undef, undef, undef, '<Branch>' ],
-     [ N("/_File") . N("/_Quit"), N("<control>Q"), \&quit_global, undef, '<Item>' ],
-     [ join('', @{$menu_options{MODEMS_DETECTION}}), undef,
-       sub { $options{MODEMS_DETECTION} = $check_boxes{MODEMS_DETECTION}->get_active }, undef, '<CheckItem>' ],
-     [ join('', @{$menu_options{JAZZ_DETECTION}}), undef,
-       sub { $options{JAZZ_DETECTION} = $check_boxes{JAZZ_DETECTION}->get_active }, undef, '<CheckItem>' ],
-     [ join('', @{$menu_options{PARALLEL_ZIP_DETECTION}}), undef,
-       sub { $options{PARALLEL_ZIP_DETECTION} = $check_boxes{PARALLEL_ZIP_DETECTION}->get_active }, undef, '<CheckItem>' ],
-     [ $menus{help}, undef, undef, undef, '<Branch>' ],
-     if_(-x "/usr/sbin/drakhelp_inst",
-	 [ $menus{help} . N("/_Help"), undef, sub { run_program::raw({ detach => 1 }, 'drakhelp', '--id', 'harddrake') }, undef, '<Item>' ],
-	),
-     [ $menus{help} . N("/_Fields description"), undef, sub {
-           if ($current_device) {
-               create_dialog(N("Harddrake help"), 
-                             '<big><b>' . N("Description of the fields:\n\n") . '</b></big>'
-                             . join("\n\n", map {
-                                 my $info = lookup_field($_);
-                                 if_($info->[0], formatAlaTeX(qq(<span foreground="royalblue3">$info->[0]:</span> $info->[1])));
-                             } sort keys %$current_device),
-                             { use_markup => 1, transient => $w->{real_window}, height => 400, scroll => 1 });
-
-           } else {
-               create_dialog(N("Select a device!"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"), { transient => $w->{real_window} });
-           }
-       },
-       undef, '<Item>'
-     ],
-     if_(!-e "/etc/sysconfig/oem",
-	 [ $menus{help} . N("/_Report Bug"), undef, sub { run_program::raw({ detach => 1 }, 'drakbug', '--report', 'harddrake') }, undef, '<Item>' ],
-	),
-     [ $menus{help} . N("/_About..."), undef, sub {
-         my $license = formatAlaTeX(translate($::license));
-         $license =~ s/\n/\n\n/sg; # nicer formatting
-         my $w = gtknew('AboutDialog', name => N("Harddrake"),
-                        version => mandrake_release_info()->{version},
-                        copyright => N("Copyright (C) %s by Mandriva", '2001-2008'),
-                        license => $license, wrap_license => 1,
-                        comments => N("This is HardDrake, a %s hardware configuration tool.", $distro_name),
-                        website => 'http://mandrivalinux.com',
-                        website_label => N("Mandriva Linux"),
-                        authors => 'Thierry Vignaud <vignaud@mandriva.com>',
-                        artists => 'Hélène Durosini <ln@mandriva.com>',
-                        translator_credits =>
-                          #-PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-                          N("_: Translator(s) name(s) & email(s)\n"),
-                        transient_for => $::main_window, modal => 1, position_policy => 'center-on-parent',
-                    );
-         $w->show_all;
-         $w->run;
-       }, undef, '<Item>'
-     ]
-    );
+my $has_help = -x "/usr/sbin/drakhelp_inst";
+my $ui = gtknew('UIManager', actions => [
+		    # [name, stock_id, value, label, accelerator, tooltip, callback]
+		    [ 'FileMenu',        undef, N("_File") ],
+		    [ 'Quit', undef, N("_Quit"), N("<control>Q"), undef, \&quit_global ],
+		    [ 'OptionsMenu',        undef, N("_Options") ],
+		    [ 'HelpMenu',        undef, N("_Help") ],
+		    if_($has_help, [ 'Help', undef, N("_Help"), N("<control>H"), undef, \&run_help ]),
+		    [ 'Fields description', undef, N("_Fields description"), undef, undef, \&fields_help ],
+		    [ 'Report Bug', undef, N("_Report Bug"), undef, undef, \&run_drakbug ],
+		    [ 'About', undef, N("_About..."), '', undef, \&about ],
+		],
+		toggle_actions => [
+		    [ 'MODEMS_DETECTION', undef, $menu_options{MODEMS_DETECTION}, undef, undef, \&handle_modem_option ],
+		    [ 'PARALLEL_ZIP_DETECTION', undef, $menu_options{PARALLEL_ZIP_DETECTION}, undef, undef, \&handle_zip_option ],
+		],
+		string =>
+		join("\n",
+		     qq(<ui>
+  <menubar name='MenuBar'>
+    <menu action='FileMenu'>
+      <menuitem action='Quit'/>
+    </menu>
+    <menu action='OptionsMenu'>
+      <menuitem action='MODEMS_DETECTION'/>
+      <menuitem action='PARALLEL_ZIP_DETECTION'/>
+    </menu>
+    <menu action='HelpMenu'>),
+		     if_($has_help, "<menuitem action='Help'/>"),
+		     qq(
+      <menuitem action='Fields description'/>
+      <menuitem action='Report Bug'/>
+      <menuitem action='About'/>
+    </menu>
+  </menubar>
+</ui>)));
 
 $in = 'interactive'->vnew('su'); #require_root_capability();
 
@@ -259,26 +232,26 @@ add_icon_path('/usr/share/pixmaps/harddrake2/');
 $::noborderWhenEmbedded = 1;
 
 
-my ($menubar, $factory) = create_factory_menu($w->{real_window}, @menu_items);
+my $menubar = $ui->get_widget('/MenuBar');
 $w->{window}->set_size_request(805, 550) if !$::isEmbedded;
 
-my $tree_model = Gtk2::TreeStore->new("Gtk2::Gdk::Pixbuf", "Glib::String", "Glib::Int");
-$w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
+my $tree_model = Gtk3::TreeStore->new("Gtk3::Gdk::Pixbuf", "Glib::String", "Glib::Int");
+$w->{window}->add(gtkpack_(0, Gtk3::VBox->new(0, 0),
                            0, $menubar,
-                           0, Gtk2::Banner->new("/usr/share/mcc/themes/default/harddrake-mdk.png", translate("Hardware")),
-                           1, create_hpaned(gtkadd(Gtk2::Frame->new(N("Detected hardware")), 
-                                                   create_scrolled_window(gtkset_size_request(my $tree = Gtk2::TreeView->new_with_model($tree_model), 350, -1), ['automatic', 'automatic'])),
-                                            gtkpack_(0, Gtk2::VBox->new(0, 0),
-                                                     1, gtkadd(my $frame = Gtk2::Frame->new(N("Information")),
-                                                               create_scrolled_window(my $text = Gtk2::TextView->new)),
-                                                     0, my $module_cfg_button = gtksignal_connect(Gtk2::Button->new(N("Set current driver options")),
+                           0, Gtk3::Banner->new("/usr/share/mcc/themes/default/harddrake-mdk.png", translate("Hardware")),
+                           1, create_hpaned(gtkadd(Gtk3::Frame->new(N("Detected hardware")), 
+                                                   create_scrolled_window(gtkset_size_request(my $tree = Gtk3::TreeView->new_with_model($tree_model), 350, -1), ['automatic', 'automatic'])),
+                                            gtkpack_(0, Gtk3::VBox->new(0, 0),
+                                                     1, gtkadd(my $frame = Gtk3::Frame->new(N("Information")),
+                                                               create_scrolled_window(my $text = Gtk3::TextView->new)),
+                                                     0, my $module_cfg_button = gtksignal_connect(Gtk3::Button->new(N("Set current driver options")),
                                                                                                   clicked => sub {
                                                                                                       local $SIG{CHLD} = undef;
                                                                                                       require modules::interactive;
                                                                                                       modules::interactive::config_window($in, $current_device);
                                                                                                       gtkset_mousecursor_normal();
                                                                                                   }),
-                                                     0, my $config_button = gtksignal_connect(Gtk2::Button->new(N("Run config tool")),
+                                                     0, my $config_button = gtksignal_connect(Gtk3::Button->new(N("Run config tool")),
                                                                                               # we've a configurator, let's add a button for it and show it
                                                                                               clicked => sub {
                                                                                                   return 1 if defined $pid;
@@ -293,7 +266,13 @@ $text->set_wrap_mode('word');
 $frame->set_size_request(300, 450) unless $::isEmbedded;
 #    $tree->set_column_auto_resize(0, 1);
 my (@data, @configurators);
-$tree->append_column(my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::MDV::CellRendererPixWithLabel->new, 'pixbuf' => 0, label => 1));
+$tree->append_column(my $textcolumn = Gtk3::TreeViewColumn->new);
+$textcolumn->pack_start(my $img_renderer = Gtk3::CellRendererPixbuf->new, 0);
+$textcolumn->set_attributes($img_renderer, pixbuf => 0);
+
+$textcolumn->pack_start(my $text_renderer = Gtk3::CellRendererText->new, 1);
+$textcolumn->set_attributes($text_renderer, text => 1);
+
 $tree->set_headers_visible(0);
 
 sub fill_default_text {
@@ -310,7 +289,6 @@ $tree->get_selection->signal_connect('changed' => sub {
         ($current_device, $current_class) = @{$data[$idx]};
         
         if ($idx ne -1) {
-            use Gtk2::Pango;
             my %device_fields = map {
                 # The U+200E character is to force LTR display, as what what follows the colon is always in LTR (device names, paths, etc),
                 # this ensures proper displaying of names like /dev/fd0 (otherwise it gets 'dev/fd0/').
@@ -318,7 +296,7 @@ $tree->get_selection->signal_connect('changed' => sub {
                 my $field = lookup_field($_);
                 if_($_ && $field->[0], $_ =>
                    [
-                    [ $field->[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->PANGO_WEIGHT_BOLD } ],
+                    [ $field->[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => 'bold' } ],
                     [ ($current_device->{$_} =~ /^(unknown)/ ? N("unknown") :
                        $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : 
                        $current_device->{$_} eq 'yes' ? N("Yes") : 
@@ -330,7 +308,7 @@ $tree->get_selection->signal_connect('changed' => sub {
             my ($grouped, $ungrouped) = partition {
                 my $field = $_;
                 member($field, map { @$_ } values %groups);
-            } keys %device_fields;
+            } sort keys %device_fields;
             my @formated;
             foreach my $group ($identification, grep { $_ ne $identification } keys %groups) {
                 my @fields = @{$groups{$group}};
@@ -371,10 +349,11 @@ $tree->get_selection->signal_connect('changed' => sub {
     $module_cfg_button->hide;
 });
 
+$w->{rwindow}->add_accel_group($ui->get_accel_group);
 # show the main window earlier (so that sub dialogs can use main
 # window's icon and so that no Gtk+ critical message got displayed):
 $w->{rwindow}->show_all;
-my $flush_guard = Gtk2::GUI_Update_Guard->new;
+my $flush_guard = Gtk3::GUI_Update_Guard->new;
 $_->hide foreach $module_cfg_button, $config_button; # hide buttons while no device
 my $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
 gtkflush() if !$::isEmbedded;
@@ -431,13 +410,6 @@ foreach (@classes) {
             $_->{capacity} =~ s/DVD/$dvd/;
         }
         $configurator .= harddrake::data::set_removable_configurator($Ident, $_);
-        if ($Ident eq "AUDIO") {
-            require harddrake::sound;
-            my @alter = harddrake::sound::get_alternative($_->{driver});
-            if (my $alternative_drivers = join(', ', @alter)) {
-		$_->{alternative_drivers} = $alternative_drivers;
-	    }
-        }
         if ($Ident eq "HARDDISK") {
             my $hd = $_;
             my $info = find { $_->{device} eq $hd->{device} } @{$all_hds->{hds}};
@@ -506,9 +478,8 @@ $w->{rwindow}->signal_connect(delete_event => \&quit_global);
 $w->{rwindow}->set_position('center') unless $::isEmbedded;
 
 foreach (keys %menu_options) {
-    my $title = strip_first_underscore(@{$menu_options{$_}});
     $options{$_} = 0 unless defined($options{$_}); # force detection by default
-    $check_boxes{$_} = $factory->get_widget("<main>" . $title);
+    $check_boxes{$_} = $ui->get_widget('/MenuBar/OptionsMenu/' . $_);
     $check_boxes{$_}->set_active($options{$_});    # restore saved values
 }
 
@@ -516,7 +487,7 @@ $textcolumn->set_min_width(350);
 #$textcolumn->set_minmax_width(400);
 $textcolumn->set_sizing('GTK_TREE_VIEW_COLUMN_AUTOSIZE');#GROW_ONLY
 #$tree->columns_autosize();
-$tree->signal_connect(realize => sub { $tree->get_selection->select_path(Gtk2::TreePath->new_first) });
+$tree->signal_connect(realize => sub { $tree->get_selection->select_path(Gtk3::TreePath->new_first) });
 
 {
     $SIG{CHLD} = undef;
@@ -544,21 +515,65 @@ fill_default_text($text);
 
 $w->main;
 
+sub about() {
+    my $license = formatAlaTeX(translate($::license));
+    $license =~ s/\n/\n\n/sg; # nicer formatting
+    my $w = gtknew('AboutDialog', name => N("Harddrake"),
+                   version => mageia_release_info()->{version},
+                   copyright => N("Copyright (C) %s by %s", '2001-2008', 'Mandriva') . "\n" . N("Copyright (C) %s by %s", '2011', N("Mageia")),
+                   license => $license, wrap_license => 1,
+                   comments => N("This is HardDrake, a %s hardware configuration tool.", $distro_name),
+                   website => 'http://www.mageia.org',
+                   website_label => N("Mageia"),
+                   authors => [ 'Thierry Vignaud <thierry.vignaud.com>' ],
+                   translator_credits =>
+                     #-PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
+                     N("_: Translator(s) name(s) & email(s)\n"),
+                   transient_for => $::main_window, modal => 1, position_policy => 'center-on-parent',
+               );
+    $w->show_all;
+    $w->run;
+}
+
+sub fields_help() {
+    if ($current_device) {
+        create_dialog(N("Harddrake help"),
+                      '<big><b>' . N("Description of the fields:\n\n") . '</b></big>'
+                      . join("\n\n", map {
+                          my $info = lookup_field($_);
+                          if_($info->[0], formatAlaTeX(qq(<span foreground="royalblue3">$info->[0]:</span> $info->[1])));
+                      } sort keys %$current_device),
+               { use_markup => 1, transient => $w->{real_window}, height => 400, scroll => 1 });
+    } else {
+        create_dialog(N("Select a device!"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"), { transient => $w->{real_window} });
+    }
+}
 
 sub quit_global() {
     kill(15, $pid) if $pid;
     setVarsInSh($conffile, \%options) if !$::testing;
-    ugtk2->exit(0);
+    ugtk3->exit(0);
+}
+
+sub run_drakbug() {
+    run_program::raw({ detach => 1 }, 'drakbug', '--report', 'harddrake');
+}
+
+sub run_help() {
+    run_program::raw({ detach => 1 }, 'drakhelp', '--id', 'harddrake');
+}
+
+sub handle_modem_option() {
+    $options{MODEMS_DETECTION} = $check_boxes{MODEMS_DETECTION}->get_active;
+}
+
+sub handle_zip_option() {
+    $options{PARALLEL_ZIP_DETECTION} = $check_boxes{PARALLEL_ZIP_DETECTION}->get_active;
 }
 
 sub show_hide {
     my ($bool, $button) = @_;
     if ($bool) { $button->show } else { $button->hide }
-}
-
-
-sub strip_first_underscore {
-    join '', map { s/_//; $_ } @_;
 }
 
 sub lookup_field {
@@ -569,7 +584,7 @@ sub lookup_field {
 
 sub titleFormat {
     my ($title) = @_;
-    [ $title . "\n", { 'weight' => Gtk2::Pango->PANGO_WEIGHT_BOLD, scale => Gtk2::Pango->PANGO_SCALE_LARGE } ];
+    [ $title . "\n", { 'weight' => 'bold', scale => 1.4399999999999 } ]; # Pango->PANGO_SCALE_LARGE
 }
 
 sub force_rename_field {

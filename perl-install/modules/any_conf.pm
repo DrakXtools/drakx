@@ -139,10 +139,7 @@ sub write {
     #- Substitute new config (if config has changed)
     substInFile {
 	my ($type, $module, $val) = split(' ', chomp_($_), 3);
-	if ($type eq 'post-install' && $module eq 'supermount') {	    
-	    #- remove the post-install supermount stuff.
-	    $_ = '';
-	} elsif (member($type, $conf->handled_fields)) {
+	if (member($type, $conf->handled_fields)) {
 	    my $new_val = $conf->{$module}{$type};
 	    if (!$new_val) {
 		$_ = '';

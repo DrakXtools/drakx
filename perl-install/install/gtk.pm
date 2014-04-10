@@ -3,8 +3,8 @@ package install::gtk; # $Id$
 use diagnostics;
 use strict;
 
-use ugtk2;
-use mygtk2;
+use ugtk3;
+use mygtk3;
 use common;
 use lang;
 use devices;
@@ -14,6 +14,7 @@ use detect_devices;
 #-INTERN CONSTANT
 #-#####################################################################################
 
+# FIXME: either drop 'doc' option or convert this to CSS!
 #- if we're running for the doc team, we want screenshots with
 #- a good B&W contrast: we'll override values of our theme
 my $theme_overriding_for_doc = q(style "galaxy-default"
@@ -53,13 +54,15 @@ widget "*logo*" style "background-logo"
 );
 
 #------------------------------------------------------------------------------
-sub load_rc {
+sub load_css {
     my ($o, $name) = @_;
 
     my $f = $name;
-    -r $name or $f = find { -r $_ } map { "$_/themes-$name.rc" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__) . '/..');
+    -r $name or $f = find { -r $_ } map { "$_/themes-$name.css" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__) . '/..');
     if ($f) {
-	Gtk2::Rc->parse_string($o->{doc} ? $theme_overriding_for_doc : scalar cat_($f));
+	my $pl = Gtk3::CssProvider->new;
+	$pl->load_from_data($o->{doc} ? $theme_overriding_for_doc : scalar cat_($f));
+	Gtk3::StyleContext::add_provider_for_screen(Gtk3::Gdk::Screen::get_default(), $pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
    }
 }
 
@@ -68,17 +71,22 @@ sub load_font {
     my ($o) = @_;
 
     if (defined($::WizardWindow) && lang::text_direction_rtl()) {
-	Gtk2::Widget->set_default_direction('rtl'); 
+	Gtk3::Widget::set_default_direction('rtl');
 	my ($x, $y) = $::WizardWindow->get_position;
 	my ($width) = $::WizardWindow->get_size;
 	$::WizardWindow->move($::rootwidth - $width - $x, $y);
     }
 
     my $font = lang::l2pango_font($o->{locale}{lang});
-    my $s = qq(gtk-font-name="$font");
-    Gtk2::Rc->parse_string($s);
-    mkdir("/root");
-    output("/root/.gtkrc-2.0", $s);
+    my $s = qq(gtk-font-name = $font);
+    my $pl = Gtk3::CssProvider->new;
+    $pl->load_from_data("GtkWindow { font: $font }");
+    Gtk3::StyleContext::add_provider_for_screen(Gtk3::Gdk::Screen::get_default(), $pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
+    # FIXME: this should be done in /mnt too for forked app such as gurpmi{,.addmedia} (mga#67):
+    mkdir_p("/.config/gtk-3.0");
+    output("/.config/gtk-3.0/settings.ini", qq([Settings]
+$s
+));
 }
 
 #------------------------------------------------------------------------------
@@ -92,13 +100,12 @@ my $root_window;
 sub install_theme {
     my ($o) = @_;
 
-    load_rc($o, $o->{theme} ||= default_theme($o));
+    load_css($o, $o->{theme} ||= default_theme($o));
     load_font($o);
 
     my $win = gtknew('Window', widget_name => 'background', title => 'root window');
     $win->set_type_hint('desktop'); # for matchbox window manager
     $win->realize;
-    mygtk2::set_root_window_background_with_gc($win->style->bg_gc('normal'));
     $root_window = $win;
 }
 
@@ -169,7 +176,7 @@ sub update_steps_position {
 	exists $steps{steps}{$_} or next;
 	if ($o->{steps}{$_}{entered} && !$o->{steps}{$_}{done}) {
             # we need to flush the X queue since else we got a temporary Y position of -1 when switching locales:
-            mygtk2::flush(); #- for auto_installs which never go through the Gtk2 main loop
+            mygtk3::flush(); #- for auto_installs which never go through the Gtk3 main loop
             $o->{steps_widget}->move_selection($steps{steps}{$_}{text});
 
             if ($last_step) {
@@ -179,14 +186,14 @@ sub update_steps_position {
 	}
         $last_step = $_;
     }
-    mygtk2::flush(); #- for auto_installs which never go through the Gtk2 main loop
+    mygtk3::flush(); #- for auto_installs which never go through the Gtk3 main loop
 }
 
 #------------------------------------------------------------------------------
 sub init_gtk {
     my ($o) = @_;
 
-    symlink("/tmp/stage2/etc/$_", "/etc/$_") foreach qw(gtk-2.0 pango fonts);
+    symlink("/tmp/stage2/etc/$_", "/etc/$_") foreach qw(gtk-3.0 pango fonts);
 
     if ($o->{vga16}) {
         #- inactivate antialias in VGA16 because it makes fonts look worse
@@ -199,14 +206,14 @@ q(<fontconfig>
         $ENV{FONTCONFIG_FILE} = '/tmp/fonts.conf';
     }
 
-    Gtk2->init;
-    Gtk2->set_locale;
+    Gtk3->init;
+    c::init_setlocale();
 }
 
 #------------------------------------------------------------------------------
 sub init_sizes {
     my ($o) = @_;
-    ($::rootwidth,  $::rootheight)    = (Gtk2::Gdk->screen_width, Gtk2::Gdk->screen_height);
+    ($::rootwidth,  $::rootheight)    = (Gtk3::Gdk::Screen::width, Gtk3::Gdk::Screen::height);
     $::stepswidth = $::rootwidth <= 640 ? 0 : 196;
     ($::logowidth, $::logoheight) = $::rootwidth <= 640 ? (0, 0) : (800, 75);
     ($o->{windowwidth}, $o->{windowheight}) = ($::rootwidth - $::stepswidth, $::rootheight);
@@ -228,12 +235,12 @@ sub handle_unsafe_mouse {
 
 sub special_shortcuts {
     my (undef, $event) = @_;
-    my $d = ${{ $Gtk2::Gdk::Keysyms{F2} => 'screenshot', $Gtk2::Gdk::Keysyms{Home} => 'restart' }}{$event->keyval};
+    my $d = ${{ Gtk3::Gdk::KEY_F2 => 'screenshot', Gtk3::Gdk::KEY_Home => 'restart' }}{$event->keyval};
     if ($d eq 'screenshot') {
 	install::any::take_screenshot($::o);
     } elsif ($d eq 'restart' && member('control-mask', @{$event->state}) && member('mod1-mask', @{$event->state})) {
 	log::l("restarting install");
-	ugtk2->exit(0x35);
+	ugtk3->exit(0x35);
     }
     0;
 }
@@ -245,12 +252,20 @@ sub createXconf {
     $mouse_type = 'IMPS/2' if $mouse_type eq 'vboxmouse';
     symlinkf(devices::make($mouse_dev), "/dev/mouse") if $mouse_dev ne 'none';
 
+    #- remove "error opening security policy file" warning
+    symlink("/tmp/stage2/etc/X11", "/etc/X11");
+
     return if !$Driver;
 
      my ($mouse_driver, $mouse_protocol) = detect_devices::is_vmware() ? qw(vmmouse auto) : ('mouse', $mouse_type);
-     output($file, sprintf(<<'END', $mouse_driver, $mouse_protocol, $Driver, $Driver eq 'fbdev' ? '"default"' : '"1024x768" "800x600" "640x480"'));
+     my $resolution = $Driver eq 'fbdev' ? '"default"' : '"1024x768" "800x600" "640x480"';
+     output($file, sprintf(<<'END', $mouse_driver, $mouse_protocol, $Driver, $resolution));
 Section "ServerFlags"
    Option "AutoAddDevices" "False"
+EndSection
+
+Section "Module"
+      Disable "glx"
 EndSection
 
 Section "Files"

@@ -34,7 +34,7 @@ sub get() {
     #- 2. The first SCSI device if SCSI exists. Or
     #- 3. The first RAID device if RAID exists.
 
-    getIDE(), getSCSI(), getXenBlk(), getVirtIO(), getDAC960(), getCompaqSmartArray(), getATARAID();
+    getIDE(), getSCSI(), getMmcBlk(), getXenBlk(), getVirtIO(), getDAC960(), getCompaqSmartArray(), getATARAID();
 }
 sub hds()         { grep { may_be_a_hd($_) } get() }
 sub tapes()       { grep { $_->{media_type} eq 'tape' } get() }
@@ -402,6 +402,14 @@ sub getVirtIO() {
     glob("/sys/bus/virtio/devices/*/block/*");
 }
 
+sub getMmcBlk() {
+    -d '/sys/bus/mmc/devices' or return;
+    map {
+            { device => basename($_), info => "MMC block device", media_type => 'hd', bus => 'mmc' };
+    }
+    glob("/sys/bus/mmc/devices/*/block/*");
+}
+
 # cpu_name : arch() =~ /^alpha/ ? "cpu	" :
 # arch() =~ /^ppc/ ? "processor" : "vendor_id"
 
@@ -558,11 +566,16 @@ sub getInputDevices() {
 	    #- KEY=30000 0 0 0 0 0 0 0 0  #=> BTN_LEFT BTN_RIGHT
 	    #- KEY=70000 0 0 0 0 0 0 0 0  #=> BTN_LEFT BTN_RIGHT BTN_MIDDLE
 	    #- KEY=1f0000 0 0 0 0 0 0 0 0 #=> BTN_LEFT BTN_RIGHT BTN_MIDDLE BTN_SIDE BTN_EXTRA
-	    if (! -f "/dev/input/$event") {
+	    if (!$> && ! -f "/dev/input/$event") {
 		    devices::make("/dev/input/$event");
 	    }
-	    my @KEYS = c::EVIocGBitKey("/dev/input/$event");
-	    $device->{SIDE} = 1 if $KEYS[0] & (1 << 0x13);
+	    if (-r "/dev/input/$event") {
+		my @KEYS = c::EVIocGBitKey("/dev/input/$event");
+		$device->{SIDE} = 1 if $KEYS[0] & (1 << 0x13);
+	    } else {
+		my $KEY = hex($1);
+		$device->{SIDE} = 1 if $KEY & (1 << 0x13);
+	    }
 
         } elsif (/^\s*$/) {
 	    push @devices, $device if $device;

@@ -69,7 +69,7 @@ sub remove_translate_context {
 
 sub translate {
     my $s = translate_real(@_);
-    $::one_message_has_been_translated ||= join(':', (caller(1))[1,2]); #- see mygtk2.pm
+    $::one_message_has_been_translated ||= join(':', (caller(1))[1,2]); #- see mygtk3.pm
     remove_translate_context($s);
 }
 
@@ -84,7 +84,7 @@ sub to_utf8 {
     $str;
 }
 
-#- This is needed because text printed by Gtk2 will always be encoded
+#- This is needed because text printed by Gtk3 will always be encoded
 #- in UTF-8;
 #- we first check if LC_ALL is defined, because if it is, changing
 #- only LC_COLLATE will have no effect.

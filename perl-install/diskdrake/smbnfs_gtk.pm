@@ -9,8 +9,8 @@ use common;
 use interactive;
 use fs::remote::smb;
 use fs::remote::nfs;
-use mygtk2 qw(gtknew gtkset);
-use ugtk2 qw(:helpers :wrappers :create);
+use mygtk3 qw(gtknew gtkset);
+use ugtk3 qw(:helpers :wrappers :create);
 
 my ($all_hds, $in, $tree_model, $current_entry, $current_leaf, %icons);
 
@@ -19,7 +19,7 @@ sub main {
     my ($kind) = $type eq 'smb' ? smb2kind() : nfs2kind();
     $kind->check($in) or return;
 
-    my $w = ugtk2->new(N("Partitioning"));
+    my $w = ugtk3->new(N("Partitioning"));
 
     add_smbnfs($w->{window}, $kind);
     $w->{rwindow}->set_default_size(400, 300) if $w->{rwindow}->can('set_default_size');
@@ -42,7 +42,7 @@ sub try_ {
 	$in->ask_warn(N("Error"), formatError($err));
     }
     update($kind);
-    Gtk2->main_quit if member($name, 'Cancel', 'Done');
+    Gtk3->main_quit if member($name, 'Cancel', 'Done');
 }
 
 sub raw_hd_options {
@@ -127,14 +127,14 @@ sub import_tree {
     my ($kind, $info_box) = @_;
     my (%servers_displayed, %wservers, %wexports);
 
-    $tree_model = Gtk2::TreeStore->new("Gtk2::Gdk::Pixbuf", "Glib::String");
-    my $tree = Gtk2::TreeView->new_with_model($tree_model);
+    $tree_model = Gtk3::TreeStore->new("Gtk3::Gdk::Pixbuf", "Glib::String");
+    my $tree = Gtk3::TreeView->new_with_model($tree_model);
     $tree->get_selection->set_mode('browse');
 
-    my $col = Gtk2::TreeViewColumn->new;
-    $col->pack_start(my $pixrender = Gtk2::CellRendererPixbuf->new, 0);
+    my $col = Gtk3::TreeViewColumn->new;
+    $col->pack_start(my $pixrender = Gtk3::CellRendererPixbuf->new, 0);
     $col->add_attribute($pixrender, 'pixbuf', 0);
-    $col->pack_start(my $texrender = Gtk2::CellRendererText->new, 1);
+    $col->pack_start(my $texrender = Gtk3::CellRendererText->new, 1);
     $col->add_attribute($texrender, 'text', 1);
     $tree->append_column($col);
 
@@ -226,10 +226,10 @@ sub import_tree {
 	    $current_entry = find_fstab_entry($kind, $wexports{$tree_model->get_path_str($curr)} || die(''), 'add');
 	} else {
 	    if (!$tree_model->iter_has_child($curr)) {
-		gtkset_mousecursor_wait($tree->window);
-		ugtk2::flush();
+		gtkset_mousecursor_wait($tree->get_window);
+		ugtk3::flush();
 		$add_exports->($curr);		
-		gtkset_mousecursor_normal($tree->window);
+		gtkset_mousecursor_normal($tree->get_window);
 	    }
 	    $current_entry = undef;
 	}

@@ -42,11 +42,6 @@ use urpm::media;
 our $postinstall_rpms = '';
 my %mounted_media;
 
-sub _free_medium_id {
-    my ($media) = @_;
-    int(@$media);
-}
-
 sub allMediums {
     my ($packages) = @_;
 

@@ -28,10 +28,10 @@ use c;
 use common;
 use interactive;
 use do_pkgs;
-use mygtk2 qw(gtknew); #- do not import gtkadd which conflicts with ugtk2 version
-use ugtk2 qw(:create :dialogs :helpers :wrappers);
+use mygtk3 qw(gtknew); #- do not import gtkadd which conflicts with ugtk3 version
+use ugtk3 qw(:create :dialogs :helpers :wrappers);
 
-$ugtk2::wm_icon = "/usr/share/mcc/themes/default/logdrake-mdk.png";
+$ugtk3::wm_icon = "/usr/share/mcc/themes/default/logdrake-mdk.png";
 my $in = 'interactive'->vnew('su');
 
 my ($isExplain, $Explain, $isFile, $File, $isWord, $Word);
@@ -44,15 +44,17 @@ foreach (@ARGV) {
     /^--alert$/ and do { alert_config(); quit() };
 }
 
-do_pkgs_standalone->new($in)->ensure_is_installed("syslog-daemon", "/etc/systemd/system/syslog.service") or exit(0);
+if (!$::testing) {
+   do_pkgs_standalone->new($in)->ensure_is_installed("syslog-daemon", "/etc/systemd/system/syslog.service") or exit(0);
+}
 
 my $isTail = $isFile;
 $| = 1 if $isTail;
 my $h = chomp_(`hostname -s`);
 
-$ugtk2::wm_icon = "logdrake";
-my $explain_title = N("Mandriva Linux Tools Logs");
-my $my_win = ugtk2->new($isExplain ? $explain_title : N("Logs"));
+$ugtk3::wm_icon = "logdrake";
+my $explain_title = N("DrakX Tools Logs");
+my $my_win = ugtk3->new($isExplain ? $explain_title : N("Logs"));
 
 unless ($::isEmbedded) {
     $my_win->{window}->set_border_width(5);
@@ -60,30 +62,33 @@ unless ($::isEmbedded) {
 }
 $my_win->{window}->signal_connect(delete_event => \&quit);
 
-my $cal = gtkset_sensitive(Gtk2::Calendar->new, 0);
+my $cal = gtkset_sensitive(Gtk3::Calendar->new, 0);
 my $mday = (localtime(time()))[3];
 $cal->select_day($mday);
 my @months = qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec);
 my $cal_mode = 0;
-my $cal_butt = gtksignal_connect(Gtk2::CheckButton->new(N("Show only for the selected day")), clicked => sub { $cal_mode = !$cal_mode; gtkset_sensitive($cal,$cal_mode) });
+my $cal_butt = gtksignal_connect(Gtk3::CheckButton->new(N("Show only for the selected day")), clicked => sub { $cal_mode = !$cal_mode; gtkset_sensitive($cal,$cal_mode) });
 
 ### menus definition
 # the menus are not shown
 # but they provides shiny shortcut like C-q (Broken: FIXME)
-my @menu_items = (
-		  { path => N("/_File"), item_type => '<Branch>' },
-		  { path => N("/File/_New"), accelerator => N("<control>N") },
-		  { path => N("/File/_Open"), accelerator => N("<control>O") },
-		  { path => N("/File/_Save"), accelerator => N("<control>S"), callback => \&save },
-		  { path => N("/File/Save _As") },
-		  { path => N("/File/-"), item_type => '<Separator>' },
-		  { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback => \&quit },
-		  { path => N("/_Options"), item_type => '<Branch>' },
-		  { path => N("/Options/Test") },
-		  { path => N("/_Help"), item_type => '<LastBranch>' },
-		  { path => N("/Help/_About...") } 
-		 );
-my $_menubar = $::isEmbedded ? create_factory_menu($my_win->{rwindow}, @menu_items) : undef;
+if ($::isEmbedded) {
+	my $ui = gtknew('UIManager', actions => [
+                   # [name, stock_id, value, label, accelerator, tooltip, callback]
+                   [ 'FileMenu',        undef, N("_File") ],
+                   [ 'Save', undef, N("_Quit"), N("<control>S"), undef, \&save ],
+                   [ 'Quit', undef, N("_Quit"), N("<control>Q"), undef, \&quit ],
+               ],
+               string => qq(<ui>
+  <menubar name='MenuBar'>
+    <menu action='FileMenu'>
+      <menuitem action='Save'/>
+      <menuitem action='Quit'/>
+    </menu>
+  </menubar>
+</ui>));
+	$my_win->{rwindow}->add_accel_group($ui->get_accel_group);
+}
 ######### menus end
 
 
@@ -117,9 +122,9 @@ my %files = (
 	     "explanations" => { file => "/var/log/explanations", desc => $explain_title }
 );
 
-my $yy = gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("search")) , clicked => \&search),0);
+my $yy = gtkset_sensitive(gtksignal_connect(Gtk3::Button->new(N("search")) , clicked => \&search),0);
 
-my $log_text = gtktext_insert(Gtk2::TextView->new, [ [ '' ] ]);
+my $log_text = gtktext_insert(Gtk3::TextView->new, [ [ '' ] ]);
 
 my $log_buf = $log_text->get_buffer;
 my $refcount_search;
@@ -128,19 +133,19 @@ my $refcount_search;
 my %toggle;
 
 gtkadd($my_win->{window},
-       gtkpack_(Gtk2::VBox->new(0,0),
+       gtkpack_(Gtk3::VBox->new(0,0),
 		if_(!$::isEmbedded, 0, gtknew('Title1', label => N("A tool to monitor your logs"))),
-		if_(!$isFile, 0, gtkpack__(Gtk2::VBox->new(0,2),
+		if_(!$isFile, 0, gtkpack__(Gtk3::VBox->new(0,2),
                                      gtknew('Title2', label => N("Settings")),
 							      # N("Show lines"),
-							      gtkpack__(Gtk2::HBox->new(0,0),
-									" " . N("Matching") . " ", my $e_yes = Gtk2::Entry->new,
-									" " . N("but not matching") . " ", my $e_no = Gtk2::Entry->new
+							      gtkpack__(Gtk3::HBox->new(0,0),
+									" " . N("Matching") . " ", my $e_yes = Gtk3::Entry->new,
+									" " . N("but not matching") . " ", my $e_no = Gtk3::Entry->new
 									),
-						    gtkpack_(Gtk2::HBox->new(0,0),
-							     1, gtkadd(gtkset_border_width(Gtk2::Frame->new(N("Choose file")),2),
-								       gtkpack(gtkset_border_width(Gtk2::VBox->new(0,0),0),
-										map { $toggle{$_} = gtksignal_connect(Gtk2::CheckButton->new($files{$_}{desc}), 
+						    gtkpack_(Gtk3::HBox->new(0,0),
+							     1, gtkadd(gtkset_border_width(Gtk3::Frame->new(N("Choose file")),2),
+								       gtkpack(gtkset_border_width(Gtk3::VBox->new(0,0),0),
+										map { $toggle{$_} = gtksignal_connect(Gtk3::CheckButton->new($files{$_}{desc}), 
 														      clicked => sub {
 															  $refcount_search++; 
 															  gtkset_sensitive($yy, $refcount_search);
@@ -150,8 +155,8 @@ gtkadd($my_win->{window},
                                                     } sort keys %files,
 										)
 								       ),
-							     0, gtkadd(gtkset_border_width(Gtk2::Frame->new(N("Calendar")),2),
-								       gtkpack__(gtkset_border_width(Gtk2::VBox->new(0,0),5),
+							     0, gtkadd(gtkset_border_width(Gtk3::Frame->new(N("Calendar")),2),
+								       gtkpack__(gtkset_border_width(Gtk3::VBox->new(0,0),5),
 										 $cal_butt, $cal
 										 )
 								       )
@@ -162,8 +167,8 @@ gtkadd($my_win->{window},
 		!$isExplain ? (0, gtknew('Title2', label => N("Content of the file")),
 					   1, create_scrolled_window($log_text)
 					   ) : (1, create_scrolled_window($log_text)),
-		0, gtkadd(gtkset_border_width(gtkset_layout(Gtk2::HButtonBox->new, 'end'), 5),
-					      if_(!$isFile, gtksignal_connect(Gtk2::Button->new(N("Mail alert")), 
+		0, gtkadd(gtkset_border_width(gtkset_layout(Gtk3::HButtonBox->new, 'end'), 5),
+					      if_(!$isFile, gtksignal_connect(Gtk3::Button->new(N("Mail alert")), 
 										clicked => sub { 
                                                       eval { alert_config() };
                                                       my $err = $@;
@@ -174,8 +179,8 @@ gtkadd($my_win->{window},
                                                                      . "\n\n" . $err);
                                                       }
                                                   })),
-					      gtksignal_connect(Gtk2::Button->new(N("Save")), clicked => \&save),
-					      gtksignal_connect(Gtk2::Button->new($::isEmbedded ? N("Cancel") : N("Quit")), clicked => \&quit)
+					      gtksignal_connect(Gtk3::Button->new(N("Save")), clicked => \&save),
+					      gtksignal_connect(Gtk3::Button->new($::isEmbedded ? N("Cancel") : N("Quit")), clicked => \&quit)
 					      )
 		)
        );
@@ -186,14 +191,15 @@ $my_win->{window}->show_all;
 search() if $isFile;
 $my_win->main;
 
-sub quit() { ugtk2->exit(0) }
+sub quit() { ugtk3->exit(0) }
 
 #-------------------------------------------------------------
 # search functions
 #-------------------------------------------------------------
 sub search() {
-    return if !$log_text->window;
-    $log_text->window->freeze_updates;
+    my $window = $log_text->get_window('widget');
+    return if !$window;
+    $window->freeze_updates;
     $log_buf->set_text('');
     if ($isFile) {
 	parse_file($File, $File);
@@ -202,7 +208,7 @@ sub search() {
 	    parse_file($files{$_}{file}, $files{$_}{desc}) if $toggle{$_}->get_active;
 	}
     }
-    $log_text->window->thaw_updates;
+    $window->thaw_updates;
     $log_text->show;
     gtkflush();
 }
@@ -220,10 +226,10 @@ sub parse_file {
   my ($pbar, $win_pb);
   unless ($::isEmbedded && $isExplain) {
       local $::main_window = $my_win->{real_window};
-      gtkadd($win_pb = gtkset_modal(Gtk2::Window->new('toplevel'), 1),
-             gtkpack(Gtk2::VBox->new(2,0),
-                     Gtk2::Label->new(" " . N("please wait, parsing file: %s", $descr) . " "),
-                     $pbar = Gtk2::ProgressBar->new
+      gtkadd($win_pb = gtkset_modal(Gtk3::Window->new('toplevel'), 1),
+             gtkpack(Gtk3::VBox->new(2,0),
+                     Gtk3::Label->new(" " . N("please wait, parsing file: %s", $descr) . " "),
+                     $pbar = Gtk3::ProgressBar->new
                      )
              );
       $win_pb->set_transient_for($my_win->{real_window});
@@ -272,7 +278,7 @@ sub parse_file {
       $i++;
       if ($pbar && $i % 10) { 
 	  $pbar->set_fraction($i/$taille);
-       $win_pb->window->process_updates(1); # no gtkflush() because we do not want to refresh the TextView
+       $win_pb->get_window->process_updates(1); # no gtkflush() because we do not want to refresh the TextView
       }
       
       logcolorize($_) if $test->($_);
@@ -355,7 +361,7 @@ sub logcolorize {
 }
 
 
-#    log_output (Gtk2::TextView, [ [ ... ] ])
+#    log_output (Gtk3::TextView, [ [ ... ] ])
 sub log_output {
     my ($text, $font, $col) = @_;
     my $tag = join('', $font, $col);
@@ -364,7 +370,7 @@ sub log_output {
 }
 
 sub insert_text_n_scroll() {
-    ugtk2::gtktext_insert($log_text, \@logs, append => 1);
+    ugtk3::gtktext_insert($log_text, \@logs, append => 1);
     $log_text->scroll_to_iter($log_buf->get_end_iter, 0, 1, 0.5, 0.5);
     undef @logs;
 }
