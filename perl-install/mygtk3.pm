@@ -1023,14 +1023,6 @@ sub _gtk__AboutDialog {
         $w->set_icon(gtknew('Pixbuf', file => delete $opts->{icon})) if exists $opts->{icon};
         $w->set_logo(gtknew('Pixbuf', file => delete $opts->{logo})) if exists $opts->{logo};
         $w->set_copyright(delete $opts->{copyright}) if exists $opts->{copyright};
-        $w->set_url_hook(sub {
-            my (undef, $url) = @_;
-            run_program::raw({ detach => 1 }, 'www-browser', $url);
-        });
-        $w->set_email_hook(sub {
-            my (undef, $url) = @_;
-            run_program::raw({ detach => 1 }, 'www-browser', $url);
-        });
 
         if (my $url = delete $opts->{website}) {
             $url =~ s/^https:/http:/; # Gtk3::About doesn't like "https://..." like URLs
