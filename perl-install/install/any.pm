@@ -322,7 +322,7 @@ sub _contrib_medium() { N("Contrib Release") }
 sub _nonfree_medium() { N("Non-free Release") }
 
 # FIXME: move me in ../any.pm or in harddrake::*, might be needed by rpmdrake/harddrake:
-sub is_firmware_needed {
+sub is_firmware_needed_ {
     my ($o) = @_;
     require list_firmwares;
     my @l = map { $_->{driver} } detect_devices::probeall();
