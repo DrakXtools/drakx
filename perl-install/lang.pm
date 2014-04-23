@@ -5,6 +5,8 @@ use strict;
 use common;
 use utf8;
 use log;
+use services;
+use bootloader;
 
 #- key: lang name (locale name for some (~5) special cases needing
 #-      extra distinctions)
@@ -1194,9 +1196,7 @@ sub write {
     log::explanations(qq(Setting l10n configuration in "$file"));
     setVarsInShMode($::prefix . $file, 0644, $h);
 
-    configure_hal($locale) if !$b_user_only;
-
-    run_program::rooted($::prefix, 'grub-gfxmenu', '--quiet', '--lang', $locale->{lang}) if !$b_user_only;
+    bootloader::set_default_grub_var('locale.lang',$h->{LANG}) if !$b_user_only;
     
     my $charset = l2charset($locale->{lang});
     my $qtglobals = $b_user_only ? "$ENV{HOME}/.qt/qtrc" : "$::prefix/etc/qtrc";
@@ -1251,58 +1251,6 @@ sub write {
         my $path = find { basename($_) eq $wanted } map { $_->{file} } @{$alternative->{alternatives}};
         common::symlinkf_update_alternatives($name, $path) if $path;
     }
-}
-
-sub configure_hal {
-    my ($locale) = @_;
-    my $option = sub {
-	my ($cat, $val) = @_;
-	qq(\t\t<merge key="$cat.policy.mount_option.$val" type="bool">true</merge>);
-    };
-    my %options = (fs_options($locale), utf8 => 1);
-    my %known_options = (
-	auto  => [ 'iocharset', 'codepage' ],
-	vfat  => [ 'iocharset', 'codepage' ],
-	msdos => [ 'iocharset', 'codepage' ],
-	ntfs  => [ 'iocharset', 'utf8' ],
-	cdrom => [ 'iocharset', 'codepage', 'utf8' ],
-    );
-    my $options = sub {
-	my ($cat, $name) = @_;
-	join("\n", map { 
-	    $option->($cat, $_ eq 'utf8' ? $_ : "$_=$options{$_}");
-	} grep { $options{$_} } @{$known_options{$name}});
-    };
-    my $options_per_fs = join('', map {
-	my $s = $options->('volume', $_);
-	$s && sprintf(<<'EOF', $_, $s);
-	<match key="volume.fstype" string="%s">
-%s
-	</match>
-EOF
-    } 'auto', 'vfat', 'msdos', 'ntfs');
-    
-    output_p("$::prefix/usr/share/hal/fdi/30osvendor/locale-policy.fdi", 
-	     sprintf(<<'EOF', $options_per_fs, $options->('storage', 'cdrom')));
-<?xml version="1.0" encoding="UTF-8"?> <!-- -*- SGML -*- --> 
-
-<deviceinfo version="0.2">
-
-  <device>
-    <match key="block.is_volume" bool="true">
-      <match key="volume.fsusage" string="filesystem">
-
-%s 
-      </match>
-    </match>
-
-    <match key="storage.drive_type" string="cdrom">
-%s
-    </match>    
-  </device>
-
-</deviceinfo>
-EOF
 }
 
 sub configure_kdeglobals {

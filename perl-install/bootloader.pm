@@ -252,6 +252,52 @@ sub read_grub2 {
     \%bootloader;
 }
 
+sub set_default_grub_var {
+        my ($var,$var_value) = (@_);
+
+	# Read the current Grub2 configuration
+	my $grub;
+	open($grub, '<', '/etc/default/grub') or return 0;
+	my @lines = <$grub>;
+	close($grub);
+
+	# Update the kernel command line with KMS option
+	my $cmdline_found = 0;
+	foreach my $line (@lines) {
+		# Skip comments
+		next if ($line =~ m/^\s*#/);
+
+		# If found the command line update it
+		if ($line =~ m/^\s*GRUB_CMDLINE_LINUX_DEFAULT\s*=\s*(.*)/) {
+			$cmdline_found = 1;
+			# Strip the value from surrounding quotes (if any)
+			my $value = $1;
+			$value =~ s/^['"]//;
+			$value =~ s/['"]$//;
+			# To avoid messing with starting/trailing spaces, just split the list of parameters
+			# and join it afterwards
+			my @params = split(m/\s+/, $value);
+
+			$value = join(' ', (grep { $_ !~ /^${var}=/ } @params), "$var=$var_value");
+
+			# Finally update the source line of the config
+			$line = "GRUB_CMDLINE_LINUX_DEFAULT=\"$value\"\n";
+		}
+	}
+
+	# Save resultant config file
+	open($grub, '>', '/etc/default/grub') or return 0;
+	if (!$cmdline_found && !$kms_ok) {
+		# We needed to add nokmsboot, but the command line option was not present in the config -> add it manually
+		print $grub "GRUB_CMDLINE_LINUX_DEFAULT=\"$var=$value\"\n"
+	}
+	foreach (@lines) {
+		print $grub $_;
+	}
+	close($grub);
+	system('grub2-mkconfig -o /boot/grub2/grub.cfg');
+}
+
 sub read_grub {
     my ($fstab) = @_;
 
