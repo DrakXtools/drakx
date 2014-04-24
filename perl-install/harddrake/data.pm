@@ -432,7 +432,7 @@ our @tree =
       string => N("Memory"),
       icon => "hw-memory.png",
       configurator => "",
-      detector => sub { grep { member($_->{name}, 'Cache', 'Memory Module') } detect_devices::dmidecode() },
+      detector => sub { grep { member($_->{name}, 'Cache', 'Memory Device') } detect_devices::dmidecode() },
       checked_on_boot => 0,
      },
 
