@@ -24,7 +24,7 @@ our %l = (
         qw(depca dmfe e2100 eepro eexpress enic eth16i),
         qw(ewrk3 hp hp-plus hp100 i40e),
         qw(iph5526), #- fibre channel
-        qw(jme lance ne ni5010 ni52 ni65 nvnet),
+        qw(i40evf jme lance ne ni5010 ni52 ni65 nvnet),
         qw(prism2_plx qlge r6040 rcpci rhineget),
         qw(sb1000 sc92031 sh_eth smc-ultra smsc911x smc9194 smsc9420 smsc95xx),
         qw(tc35815 tlan uli526x vmxnet3),
@@ -76,7 +76,7 @@ our %l = (
       qw(r8187se rtl8188ee r8192_pci r8192s_usb r8192u_usb r8712u rtl8723ae ray_cs rndis_wlan rt2400 rt2400pci rt2500),
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
       qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se r8188eu rtl_pci rtl_usb rtusb),
-      qw(rtl8192se rtl8192cu rtl8192de spectrum_cs sr9700 ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
+      qw(rtl8192se rtl8192cu rtl8192de rtl8821ae spectrum_cs sr9700 sr9800 ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
       qw(wavelan_cs wcn36xx wl wl3501_cs wvlan_cs zd1201 zd1211rw),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
@@ -257,7 +257,7 @@ our %l = (
     ],
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-gemtek-pci radio-keene radio-maestro radio-ma901
-	    radio-maxiradio radio-miropcm20 radio-mr800  radio-shark
+	    radio-maxiradio radio-miropcm20 radio-mr800 radio-raremono radio-shark
 	    radio-usb-si470x shark2) ],
     scanner => [ qw(scanner microtek) ],
     firewire => [ qw(snd-firewire-speakers snd-isight snd-scs1x) ],
