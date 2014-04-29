@@ -436,18 +436,15 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL skal starte med ftp:// eller http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr ""
-"Kontakter Mandriva Linux' netsted for at hente listen over tilgængelige "
-"spejle"
+msgstr "Kontakter %s' netsted for at hente listen over tilgængelige spejle"
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Kunne ikke kontakte Mandriva Linux' netsted for at hente listen over "
-"tilgængelige spejle"
+"Kunne ikke kontakte %s' netsted for at hente listen over tilgængelige spejle"
 
 #: any.pm:204
 #, c-format
@@ -736,12 +733,12 @@ msgstr ""
 #: pkgs.pm:111
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
-msgstr ""
+msgstr "Ingen xml info for medie \"%s\", kun delvist resultat for pakke %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Ingen beskrivelse"
 
 #: pkgs.pm:280
 #, c-format
@@ -758,14 +755,14 @@ msgid "An error occurred:"
 msgstr "Der opstod en fejl:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Der opstod en fejl:"
+msgstr "En fatal fejl skete: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Spørg ikke igen"
 
 #: pkgs.pm:894
 #, c-format
@@ -806,9 +803,9 @@ msgid "Entering step `%s'\n"
 msgstr "Går til trin `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Installation"
+msgstr "%s Installation %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -821,15 +818,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg-server er langsom at starte. Vent venligst..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Dit system har kun få resurser. Du kan få problemer med at installere\n"
-"Mandriva Linux. Hvis dette sker, kan du prøve en tekst-baseret installation "
-"i stedet.\n"
+"%s. Hvis dette sker, kan du prøve en tekst-baseret installation i stedet.\n"
 "Dette gøres ved at trykke 'F1' ved opstart fra cdrommen, og så skrive 'text'."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
@@ -838,14 +834,14 @@ msgid "Media Selection"
 msgstr "Valg af pakkemedie"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Installér Mandrivas KDE-skrivebord"
+msgstr "Installér %ss KDE-skrivebord"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Installér Mandrivas GNOME-skrivebord"
+msgstr "Installér %ss GNOME-skrivebord"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -890,7 +886,7 @@ msgstr "Individuelt pakkevalg"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Fravalgte alt"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1660,31 +1656,138 @@ msgid ""
 "Exit"
 msgstr "Afslut"
 
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Grafisk miljø"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Et grafisk miljø med brugervenlig samling af programmer og værktøjer"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Et let og hurtigt grafisk miljø med brugervenlig samling af programmer og "
+#~ "skrivebordsværktøjer"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Underholdnings-programmer: arkade, bræt, strategi, osv."
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Arbejdsmaskine"
+
+#, fuzzy
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Installationsprogrammet har opdaget at dit installerede Moondrake-system "
+#~ "ikke kunne \n"
+#~ "opgraderes sikkert til %s.\n"
+#~ "\n"
+#~ "En ny installation som erstatter dit tidligere system anbefales.\n"
+#~ "\n"
+#~ "Advarsel: Du bør tage en sikkerhedskopi af alle dine personlige data før "
+#~ "du vælger \"Ny\n"
+#~ "Installation\"."
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Gnome-arbejdsmaskine"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Konfigurationsprogrammer for Moondrake"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Kontor-programmer: Tekstbehandling (LibreOffice tekstbehandler, Kword), "
+#~ "regneark (LibreOffice Regneark, Kspread ), PDF-visere, o.lign."
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Kontor-arbejdsmaskine"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL- og MariaDB-databaseserver"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL- eller MariaDB-databaseserver"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Forbereder opstartsindlæser..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Tilpasset skrivebord"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Overspring alle pakker fra medie '%s'"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, osv."
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE-arbejdsmaskine"
+
+#~ msgid "A full Mandriva Linux desktop, with support"
+#~ msgstr "Et fuldt Mandriva Linux-skrivebord, med vedligeholdelse"
+
+#~ msgid "A full Moondrake desktop, with support"
+#~ msgstr "Et fuldt Moondrake-skrivebord, med vedligeholdelse"
+
+#~ msgid "Bad package"
+#~ msgstr "Dårlig pakke"
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Udforsk Linux nemt med Mandriva One"
+
+#~ msgid "Explore Linux easily with Moondrake One"
+#~ msgstr "Udforsk Linux nemt med Moondrake One"
+
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linux Installation %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: distributioner for ethvert behov"
+
+#~ msgid "Moondrake: distributions for everybody's needs"
+#~ msgstr "Moondrake: distributioner for ethvert behov"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Forbereder opstartsindlæser..."
+
+#~ msgid "Select All"
+#~ msgstr "Valgte alt"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "Linux distributionen Mandriva med 100%% frit programmel"
+
+#~ msgid "The 100%% open source Moondrake distribution"
+#~ msgstr "Linux distributionen Moondrake med 100%% frit programmel"
+
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Dit skrivebord på en USB-nøgle"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "License"
 #~ msgstr "Licens"
-
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Dit skrivebord på en USB-nøgle"
-
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "Linux distributionen Mandriva med 100%% frit programmel"
-
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Udforsk Linux nemt med Mandriva One"
-
-#~ msgid "A full Mandriva Linux desktop, with support"
-#~ msgstr "Et fuldt Mandriva Linux-skrivebord, med vedligeholdelse"
-
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: distributioner for ethvert behov"
-
-#~ msgid "Bad package"
-#~ msgstr "Dårlig pakke"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"

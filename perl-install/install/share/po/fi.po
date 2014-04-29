@@ -445,17 +445,15 @@ msgid "URL must start with ftp:// or http://"
 msgstr "Osoitteen täytyy alkaa etuliitteellä ftp:// tai http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr ""
-"Otetaan yhteys Mandriva Linuxin sivustolle peilipalvelinlistan hakemiseksi..."
+msgstr "Otetaan yhteys %sin sivustolle peilipalvelinlistan hakemiseksi..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Yhteydenotto Mandriva Linuxin sivustolle peilipalvelinlistan hakemiseksi "
-"epäonnistui"
+"Yhteydenotto %sin sivustolle peilipalvelinlistan hakemiseksi epäonnistui"
 
 #: any.pm:204
 #, c-format
@@ -744,11 +742,12 @@ msgstr ""
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Medialla \"%s\" ei ole XML-tietoja, vain osittainen hakutulos paketille %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Ei kuvausta"
 
 #: pkgs.pm:280
 #, c-format
@@ -765,14 +764,14 @@ msgid "An error occurred:"
 msgstr "Virhe:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Virhe:"
+msgstr "Tapahtui ohittamaton virhe: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Älä kysy uudelleen"
 
 #: pkgs.pm:894
 #, c-format
@@ -812,9 +811,9 @@ msgid "Entering step `%s'\n"
 msgstr "Siirrytään vaiheeseen %s\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Asennus"
+msgstr "%sin asennus %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -827,13 +826,13 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "X.org-palvelin on hidas käynnistää. Odota..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Järjestelmän resurssit ovat lopussa. Mandriva Linuxia asennettaessa\n"
+"Järjestelmän resurssit ovat lopussa. %sia asennettaessa\n"
 "voi ilmetä ongelmia. Jos näin tapahtuu, voidaan graafisen asennuksen\n"
 "sijaan käyttää tekstipohjaista asennusta. Tekstipohjainen asennus\n"
 "käynnistetään painamalla käynnistysruudussa näppäintä F1,\n"
@@ -845,14 +844,14 @@ msgid "Media Selection"
 msgstr "Asennusmedioiden valinta"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Asenna Mandriva KDE-työpöytäympäristöllä"
+msgstr "Asenna %s KDE-työpöytäympäristöllä"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Asenna Mandriva GNOME-työpöytäympäristöllä"
+msgstr "Asenna %s GNOME-työpöytäympäristöllä"
 
 # Asennuksen sivuvalikko
 #: steps_gtk.pm:254
@@ -898,7 +897,7 @@ msgstr "Yksittäisten pakettien valinta"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Poista valinnat"
 
 # mat
 #: steps_gtk.pm:375 steps_interactive.pm:557
@@ -1673,41 +1672,132 @@ msgid ""
 "Exit"
 msgstr "Lopetus"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linuxin asennus %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Graafinen ympäristö"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Graafinen ympäristö käyttäjäystävällisillä sovelluksilla ja työkaluilla."
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Kevyt ja nopea, etenkin minikannettaville suunniteltu, graafinen "
+#~ "ympäristö käyttäjäystävällisillä työkaluilla ja työpöytäsovelluksilla."
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Viihdeohjelmat: tasohyppely, korttipelit, strategia jne"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Työasema"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Lisenssi"
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Asennusohjelma havaitsi, että asennettua Linux-järjestelmää ei voida\n"
+#~ "päivittää turvallisesti versioon %s.\n"
+#~ "\n"
+#~ "On suositeltavaa suorittaa asennus, joka korvaa edellisen asennuksen.\n"
+#~ "\n"
+#~ "HUOM! Ota varmuuskopio tärkeistä ja henkilökohtaisista tiedostoista\n"
+#~ "ennen kuin valitset \"Uusi asennus\"."
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Työpöytä USB-tikulla"
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME-työasema"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "Mandriva Linux - 100%% vapaan lähdekoodin jakelu"
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondraken asetusvelhot"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Tutustu Linuxiin helposti Mandriva One:n avulla"
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Toimisto-ohjelmistot: tekstinkäsittely (LibreOffice Writer, Kword), "
+#~ "taulukkolaskenta (LibreOffice calc, Kspread), PDF-lukijat jne"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Toimistotyöasema"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL- ja MariaDB-tietokantapalvelin"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL- tai MariaDB-tietokantapalvelin"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Valmistellaan käynnistyslatainta..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Mukautettu"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Ohita kaikki paketit medialta \"%s\""
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, FVWM jne."
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE-työasema"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Käyttäjätuella varustettu täysi Mandriva Linux -jakelu"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: jakeluja jokaisen tarpeisiin"
+#~ msgid "A full Moondrake desktop, with support"
+#~ msgstr "Käyttäjätuella varustettu täysi Moondrake -jakelu"
+
+#~ msgid "Automated"
+#~ msgstr "Automaattinen"
 
 #~ msgid "Bad package"
 #~ msgstr "Viallinen paketti"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Verkko"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Yhdistetään peilipalvelimeen uusimman pakettilistan saamiseksi..."
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Päivitykset"
+#~ msgid "Downloading file %s..."
+#~ msgstr "Haetaan tiedosto %s ..."
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Tutustu Linuxiin helposti Mandriva One:n avulla"
+
+#~ msgid "Explore Linux easily with Moondrake One"
+#~ msgstr "Tutustu Linuxiin helposti Moondrake One:n avulla"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Luo automaattinen asennuslevyke"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm Työpöytä"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linuxin asennus %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: jakeluja jokaisen tarpeisiin"
+
+#~ msgid "Moondrake, the new Linux distribution"
+#~ msgstr "Moondrake, uusi Linux-jakelu"
+
+#~ msgid "Moondrake: distributions for everybody's needs"
+#~ msgstr "Moondrake: jakeluja jokaisen tarpeisiin"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1715,6 +1805,55 @@ msgstr "Lopetus"
 #~ msgstr ""
 #~ "Toimisto-ohjelmistot: tekstinkäsittely (kword, abiword), taulukkolaskenta "
 #~ "(kspread, gnumeric), pdf-lukijat jne"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Valmistellaan käynnistyslatainta..."
+
+#~ msgid "Proceed"
+#~ msgstr "Jatka"
+
+#~ msgid "Replay"
+#~ msgstr "Toista"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Tallenna pakettien valinta"
+
+#~ msgid "Select All"
+#~ msgstr "Valitse kaikki"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "Mandriva Linux - 100%% vapaan lähdekoodin jakelu"
+
+#~ msgid "The 100%% open source Moondrake distribution"
+#~ msgstr "Moondrake - 100%% vapaan lähdekoodin jakelu"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Automaattinen asennus voi olla täysin automatisoitu,\n"
+#~ "jos niin halutaan. Siinä tapauksessa asennus täyttää\n"
+#~ "koko kiintolevyn! (tarkoitettu toisen koneen asentamiseksi),\n"
+#~ "\n"
+#~ "Ehkä haluat mieluummin toistaa asennuksen.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Yhteyttä peilipalvelimeen %s ei voitu muodostaa"
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr ""
+#~ "Päivittäminen 32-bittisestä jakelusta 64-bittiseen jakeluun ei ole tuettu."
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr ""
+#~ "Päivittäminen 64-bittisestä jakelusta 32-bittiseen jakeluun ei ole tuettu."
+
+#~ msgid "Welcome"
+#~ msgstr "Tervetuloa"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1734,23 +1873,6 @@ msgstr "Lopetus"
 #~ "säilyttää, täytyy tietokone käynnistää uudelleen ja järjestelmä\n"
 #~ "päivittää käyttämällä Mandrivan päivityssovelmaa\n"
 #~ "(Mandriva Update)."
-
-#~ msgid "Proceed"
-#~ msgstr "Jatka"
-
-#~ msgid "retrieval of [%s] failed"
-#~ msgstr "[%s] lataaminen epäonnistui"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "Haetaan tiedosto %s ..."
-
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr ""
-#~ "Päivittäminen 32-bittisestä jakelusta 64-bittiseen jakeluun ei ole tuettu."
-
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr ""
-#~ "Päivittäminen 64-bittisestä jakelusta 32-bittiseen jakeluun ei ole tuettu."
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1778,36 +1900,23 @@ msgstr "Lopetus"
 #~ "\n"
 #~ "Haluatko todella asentaa nämä palvelimet?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm Työpöytä"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Yhdistetään peilipalvelimeen uusimman pakettilistan saamiseksi..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Yhteyttä peilipalvelimeen %s ei voitu muodostaa"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Luo automaattinen asennuslevyke"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Työpöytä USB-tikulla"
 
 #~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Automaattinen asennus voi olla täysin automatisoitu,\n"
-#~ "jos niin halutaan. Siinä tapauksessa asennus täyttää\n"
-#~ "koko kiintolevyn! (tarkoitettu toisen koneen asentamiseksi),\n"
-#~ "\n"
-#~ "Ehkä haluat mieluummin toistaa asennuksen.\n"
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Lisenssi"
 
-#~ msgid "Replay"
-#~ msgstr "Toista"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Verkko"
 
-#~ msgid "Automated"
-#~ msgstr "Automaattinen"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Päivitykset"
 
-#~ msgid "Save packages selection"
-#~ msgstr "Tallenna pakettien valinta"
+#~ msgid "retrieval of [%s] failed"
+#~ msgstr "[%s] lataaminen epäonnistui"

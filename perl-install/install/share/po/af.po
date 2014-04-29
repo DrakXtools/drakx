@@ -438,9 +438,9 @@ msgid "URL must start with ftp:// or http://"
 msgstr ""
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr "Kontak Mandriva Linux se webwerf vir 'n lys van spieëlwebplekke...."
+msgstr "Kontak %s se webwerf vir 'n lys van spieëlwebplekke...."
 
 #: any.pm:194
 #, fuzzy, c-format
@@ -752,9 +752,9 @@ msgid "An error occurred:"
 msgstr "'n Fout het voorgekom"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "'n Fout het voorgekom"
+msgstr "'n Ernstige fout het voorgekom: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -799,9 +799,9 @@ msgid "Entering step `%s'\n"
 msgstr "Gaan stap '%s' binne\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Besig met installasie"
+msgstr "%s Installasie %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -814,7 +814,7 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
@@ -822,7 +822,7 @@ msgid ""
 msgstr ""
 "U stelsel het min hulpbronne beskikbaar. U mag dalk probleme\n"
 "ondervind met die installering\n"
-"van Mandriva Linux. In so 'n geval probeer eerder die teksinstallasie.\n"
+"van %s. In so 'n geval probeer eerder die teksinstallasie.\n"
 "Daarvoor moet u\n"
 "'F1' druk wanneer u vanaf die CDROM herlaai en dan 'text' op die\n"
 "instruksielyn intik."
@@ -885,7 +885,7 @@ msgstr "Individuele pakket-seleksie"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Herstel Keuses"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1230,9 +1230,9 @@ msgid "Bad file"
 msgstr "Laai lêer"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1634,20 +1634,154 @@ msgid ""
 "Exit"
 msgstr "Verlaat"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux Installasie %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Grafiese Omgewing"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "'n Grafiese omgewing met  gebruikersvriendelike stel applikasies en "
+#~ "werkskerm-hulpprogramme"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "'n Grafiese omgewing met  gebruikersvriendelike stel applikasies en "
+#~ "werkskerm-hulpprogramme"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Vermaak: Arkade, Bordspel, Strategie ens."
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Werkstasie"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME-werkstasie"
+
+#, fuzzy
+#~ msgid "Moondrake Wizards"
+#~ msgstr "<b>Moondrake Store</b>"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Lisensie"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Kantoorprogramme: Woordverwerkers(LibreOffice Writer, Kword), spreistate "
+#~ "(LibreOffice Calc, Kspread), PDF-sigprogramme, ens."
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Kantoorwerkstasie"
+
+#, fuzzy
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL of MariaDB databasisbediener"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL of MariaDB databasisbediener"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Herlaaistelsel word voorberei..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "'n Werkstasie"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, ens."
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE Werkstasie"
+
+#~ msgid "%d packages"
+#~ msgstr "%d pakkette"
+
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "(%d pakket, %d MB)"
+#~ msgstr[1] "(%d pakkette, %d MB)"
+
+#~ msgid "All"
+#~ msgstr "Alles"
+
+#~ msgid "Automated"
+#~ msgstr "Outomaties"
 
 #~ msgid "Bad package"
 #~ msgstr "Foutiewe pakket"
 
+#~ msgid "Boot"
+#~ msgstr "Selflaai"
+
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Kan nie die toegang tot die 'kernel'-modules vir hierdie 'kernel' kry "
+#~ "nie. ( lêer %s is soek). Dit beteken normaalweg dat u selflaaiskyf "
+#~ "verskil van die Installasie-media sin ( skep assebleif 'n nuwer disket)"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Kies pakkette om te installeer"
+
+#~ msgid "Configure X"
+#~ msgstr "Stel X op"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Spieël word gekontak vir die lys van pakkette..."
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Wil u aboot gebruik?"
+
+#, fuzzy
+#~ msgid "Downloading file %s..."
+#~ msgstr "Stuur lêers..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Die 'aboot' installasie het gefaal. Wil u 'n installasie afwurg al\n"
+#~ "word die eerste partisie vernietig?"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Skatting"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Skep outoinstallasieskyf"
+
+#, fuzzy
+#~ msgid "IceWm Desktop"
+#~ msgstr "'n Werkstasie"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "Kies installasieklas"
+
+#~ msgid "Language"
+#~ msgstr "Taal"
+
+#~ msgid "License"
+#~ msgstr "Lisensie"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux Installasie %s"
+
+#~ msgid "Networking"
 #~ msgstr "Netwerk"
 
 #~ msgid ""
@@ -1658,8 +1792,42 @@ msgstr "Verlaat"
 #~ "gnumeric), PDF-sigprogramme, ens."
 
 #, fuzzy
-#~ msgid "Downloading file %s..."
-#~ msgstr "Stuur lêers..."
+#~ msgid "Preparing boot images..."
+#~ msgstr "Herlaaistelsel word voorberei..."
+
+#~ msgid "Replay"
+#~ msgstr "Herspeel"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Stoor pakketseleksie"
+
+#~ msgid "Select All"
+#~ msgstr "Kies almal"
+
+#~ msgid "TV card"
+#~ msgstr "TV-kaart"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Die outomatiese installasie kan ten volle geoutomatiseer\n"
+#~ "word, in daardie geval kan dit die hardeskyf oorskryf!!!\n"
+#~ "(dit is vir die installasie op 'n ander rekenaar).\n"
+#~ "\n"
+#~ "U mag verkies om hierdie installasie elders te herhaal.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Kon nie die spieëlwebplek %s kontak nie"
+
+#~ msgid "Users"
+#~ msgstr "Gebruikers"
+
+#~ msgid "Welcome"
+#~ msgstr "Welkom"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1685,108 +1853,17 @@ msgstr "Verlaat"
 #~ "\n"
 #~ "Verlang u nog steeds hierdie dienste?\n"
 
-#, fuzzy
-#~ msgid "IceWm Desktop"
-#~ msgstr "'n Werkstasie"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Spieël word gekontak vir die lys van pakkette..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Kon nie die spieëlwebplek %s kontak nie"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Skep outoinstallasieskyf"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Die outomatiese installasie kan ten volle geoutomatiseer\n"
-#~ "word, in daardie geval kan dit die hardeskyf oorskryf!!!\n"
-#~ "(dit is vir die installasie op 'n ander rekenaar).\n"
-#~ "\n"
-#~ "U mag verkies om hierdie installasie elders te herhaal.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Herspeel"
-
-#~ msgid "Automated"
-#~ msgstr "Outomaties"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Stoor pakketseleksie"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Wil u aboot gebruik?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Die 'aboot' installasie het gefaal. Wil u 'n installasie afwurg al\n"
-#~ "word die eerste partisie vernietig?"
-
-#~ msgid "All"
-#~ msgstr "Alles"
-
-#~ msgid "TV card"
-#~ msgstr "TV-kaart"
-
-#~ msgid "Boot"
-#~ msgstr "Selflaai"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Magtiging"
 
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "(%d pakket, %d MB)"
-#~ msgstr[1] "(%d pakkette, %d MB)"
-
-#~ msgid "%d packages"
-#~ msgstr "%d pakkette"
-
-#~ msgid "Language"
-#~ msgstr "Taal"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Lisensie"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "Kies installasieklas"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "Skatting"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Kies pakkette om te installeer"
-
-#~ msgid "Users"
-#~ msgstr "Gebruikers"
-
-#~ msgid "Networking"
-#~ msgstr "Netwerk"
-
-#~ msgid "Configure X"
-#~ msgstr "Stel X op"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Kan nie die toegang tot die 'kernel'-modules vir hierdie 'kernel' kry "
-#~ "nie. ( lêer %s is soek). Dit beteken normaalweg dat u selflaaiskyf "
-#~ "verskil van die Installasie-media sin ( skep assebleif 'n nuwer disket)"
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Netwerk"

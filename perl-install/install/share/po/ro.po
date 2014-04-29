@@ -474,18 +474,18 @@ msgid "URL must start with ftp:// or http://"
 msgstr "Adresa URL trebuie să înceapă cu ftp:// sau http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Se contactează situl Mandriva Linux pentru obținerea listei serverelor "
-"alternative disponibile..."
+"Se contactează situl %s pentru obținerea listei de servere alternative "
+"disponibile ..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Contactarea sitului Mandriva Linux pentru obținerea listei serverelor "
-"alternative disponibile a eșuat"
+"Nu s-a putut contacta situl %s pentru obținerea listei de servere "
+"alternative disponibile"
 
 #: any.pm:204
 #, c-format
@@ -557,11 +557,13 @@ msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
 "free software drivers to work."
 msgstr ""
+"Anumite componente materiale din configurația de față necesită un microcod "
+"proprietar pentru funcționarea corectă a piloților."
 
 #: any.pm:351
 #, c-format
 msgid "You should enable \"%s\""
-msgstr ""
+msgstr "Ar trebui să activați „%s”"
 
 #: any.pm:370
 #, c-format
@@ -578,7 +580,7 @@ msgstr ""
 #: any.pm:372
 #, c-format
 msgid "\"%s\" contains non free software.\n"
-msgstr ""
+msgstr "„%s” conține aplicații proprietare.\n"
 
 #: any.pm:373
 #, c-format
@@ -590,7 +592,7 @@ msgstr ""
 #: any.pm:377
 #, c-format
 msgid "Here you can enable more media if you want."
-msgstr ""
+msgstr "Aici puteți activa mai multe medii dacă doriți."
 
 #: any.pm:456
 #, c-format
@@ -770,17 +772,19 @@ msgstr "eventual"
 #: pkgs.pm:102
 #, c-format
 msgid "Getting package information from XML meta-data..."
-msgstr ""
+msgstr "Se obțin informațiile despre pachet din metadatele XML..."
 
 #: pkgs.pm:111
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Nu există informații XML pentru mediul „%s”, numai rezultate parțiale pentru "
+"pachetul %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Nici o descriere"
 
 #: pkgs.pm:280
 #, c-format
@@ -797,14 +801,14 @@ msgid "An error occurred:"
 msgstr "S-a produs o eroare:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "S-a produs o eroare:"
+msgstr "A apărut o eroare fatală: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Nu mai întreba"
 
 #: pkgs.pm:894
 #, c-format
@@ -844,9 +848,9 @@ msgid "Entering step `%s'\n"
 msgstr "Se începe etapa „%s”\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Instalare"
+msgstr "%s instalare %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -859,16 +863,17 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Serverul Xorg este încet la pornire. Așteptați vă rog..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Sistemul are resurse puține. Puteți întîmpina probleme la instalarea\n"
-"Mandriva Linux. Dacă se întîmplă acest lucru, puteți încerca o instalare\n"
-"în mod text. Pentru aceasta, apăsați „F1” cînd porniți de pe CDROM,\n"
-"apoi introduceți „text”."
+"Sistemul are resurse puține. Este posibil să aveți probleme în timpul "
+"instalării %s.\n"
+"În acest caz puteți încerca o instalare în mod text. Pentru aceasta, apăsați "
+"„F1”\n"
+"la pornirea de pe CD-ROM, apoi introduceți „text”."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
 #, c-format
@@ -876,14 +881,14 @@ msgid "Media Selection"
 msgstr "Selectare mediu"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Instalare de Mandriva cu birou KDE"
+msgstr "Instalează biroul %s KDE"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Instalare de Mandriva cu birou GNOME"
+msgstr "Instalează biroul %s GNOME"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -928,7 +933,7 @@ msgstr "Selectare individuală a pachetelor"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Deselectează tot"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1516,9 +1521,9 @@ msgid "Preparing bootloader..."
 msgstr "Se pregătește încărcătorul de sistem..."
 
 #: steps_interactive.pm:1050
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing initial startup program..."
-msgstr "Se pregătește instalarea"
+msgstr "Se pregătește pornirea programului inițial..."
 
 #: steps_interactive.pm:1051
 #, c-format
@@ -1696,41 +1701,166 @@ msgid ""
 "Exit"
 msgstr "Ieșire"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Instalare Mandriva Linux %s"
+#~ msgid ""
+#~ "\"%s\" contains software that can not be distributed in every country due "
+#~ "to software patents."
+#~ msgstr ""
+#~ "„%s” conține aplicații care nu pot fi distribuite în toate țările din "
+#~ "cauza brevetelor."
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Licență"
+#~ "\"%s\" contains the various pieces of the systems and its applications"
+#~ msgstr "„%s” conține diverse părți din sistem și aplicațiile sale"
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Biroul vostru pe o cheie USB"
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Un mediu grafic bazat pe GNOME"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "Distribuția Mandriva Linux 100%% cu sursă deschisă"
+#~ msgid "A less developed lightweight fast graphical environment"
+#~ msgstr "Un mediu grafic lejer și rapid mai puțin dezvoltat"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Explorați facil Linux cu Mandriva One"
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Un mediu grafic lejer cu un set de unelte de birou și de aplicații "
+#~ "prietenoase"
+
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr "Un mediu grafic rapid și lejer cu adepți dedicați"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Programe de amuzament: jocuri de acțiune, table, strategie etc."
+
+#~ msgid "Be Free!"
+#~ msgstr "Fiți liberi!"
+
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Stație de lucru Cinnamon"
+
+#~ msgid "Core Release"
+#~ msgstr "Ediția de bază"
+
+#~ msgid "Enlightenment e17 Desktop"
+#~ msgstr "Birou Enlightenment e17"
+
+#~ msgid "For developers!"
+#~ msgstr "Pentru dezvoltatori!"
+
+#~ msgid "For family!"
+#~ msgstr "Pentru întreaga familie!"
+
+#~ msgid "For kids"
+#~ msgstr "Pentru copii"
+
+#~ msgid "Home entertainment"
+#~ msgstr "Divertisment"
+
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Instalatorul a detectat că sistemul Moondrake Linux instalat actual nu va "
+#~ "putea\n"
+#~ "fi actualizat în siguranță la %s.\n"
+#~ "\n"
+#~ "Se recomandă o instalare nouă care să o înlocuiască pe cea precedentă.\n"
+#~ "\n"
+#~ "Atenție: trebuie să vă faceți o copie de siguranță cu toate datele "
+#~ "personale\n"
+#~ "înainte de a alege \"Instalare nouă\"."
+
+#~ msgid ""
+#~ "It also contains firmwares needed for certain devices to operate (eg: "
+#~ "some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
+#~ msgstr ""
+#~ "Conține și microcod necesar pentru buna funcționare a anumitor "
+#~ "dispozitive (ex: unele plăci grafice ATI/AMD, unele plăci de rețea, unele "
+#~ "plăci RAID, ...)"
+
+#~ msgid ""
+#~ "It also contains software from \"%s\" rebuild with additional "
+#~ "capabilities."
+#~ msgstr ""
+#~ "Conține și aplicații din „%s” recompilate cu funcționalități suplimentare."
+
+#~ msgid "Join Us!"
+#~ msgstr "Alăturați-vă nouă!"
+
+#~ msgid "MATE Workstation"
+#~ msgstr "Stație de lucru MATE"
+
+#~ msgid "Make it yours!"
+#~ msgstr "Personalizați după plac!"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Asistenții Moondrake"
+
+#~ msgid "Nonfree Release"
+#~ msgstr "Ediția proprietară"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Programe de birotică: procesoare de text (LibreOffice Writer, Kword), "
+#~ "calcul tabelar (LibreOffice Calc, Kspread), vizualizatoare de fișiere "
+#~ "PDF, etc."
+
+#~ msgid "Office tools"
+#~ msgstr "Unelte de birotică"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Server de baze de date MariaDB și PostgreSQL"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Serverul de baze de date MariaDB sau PostgreSQL"
+
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Se pregătește actualizarea majoră..."
+
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Birou RazorQT"
+
+#~ msgid "Tainted Release"
+#~ msgstr "Ediția nuanțată"
+
+#~ msgid "Thank you!"
+#~ msgstr "Vă mulțumim!"
+
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Acest mediu furnizează actualizări pentru mediul „%s”"
+
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Fvwm, etc."
+
+#~ msgid "XFCE Workstation"
+#~ msgstr "Stație de lucru XFCE"
+
+#~ msgid "Your choice!"
+#~ msgstr "Alegerea voastră!"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Un birou Mandriva Linux complet, cu suport"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: distribuții pentru nevoile fiecăruia"
-
 #~ msgid "Bad package"
 #~ msgstr "Pachet defectuos"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Rețea"
+#~ msgid "Downloading file %s..."
+#~ msgstr "Se descarcă fișierul %s..."
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Actualizări"
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Explorați facil Linux cu Mandriva One"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Instalare Mandriva Linux %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: distribuții pentru nevoile fiecăruia"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1738,6 +1868,22 @@ msgstr "Ieșire"
 #~ msgstr ""
 #~ "Programe de birotică: procesoare de text (kword, abiword), calcul tabelar "
 #~ "(kspread, gnumeric), vizualizatoare de fișiere pdf etc."
+
+#~ msgid "Proceed"
+#~ msgstr "Procedează"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "Distribuția Mandriva Linux 100%% cu sursă deschisă"
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr ""
+#~ "Actualizarea majoră de la o distribuție pe 32 de biți la una pe 64 de "
+#~ "biți nu este suportată."
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr ""
+#~ "Actualizarea majoră de la o distribuție pe 64 de biți la una pe 32 de "
+#~ "biți nu este suportată."
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1759,21 +1905,23 @@ msgstr "Ieșire"
 #~ "reporniți sistemul și lansați actualizarea majoră din miniaplicația de "
 #~ "actualizare Mandriva."
 
-#~ msgid "Proceed"
-#~ msgstr "Procedează"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Biroul vostru pe o cheie USB"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Licență"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Rețea"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Actualizări"
 
 #~ msgid "retrieval of [%s] failed"
 #~ msgstr "preluarea lui [%s] a eșuat"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "Se descarcă fișierul %s..."
-
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr ""
-#~ "Actualizarea majoră de la o distribuție pe 32 de biți la una pe 64 de "
-#~ "biți nu este suportată."
-
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr ""
-#~ "Actualizarea majoră de la o distribuție pe 64 de biți la una pe 32 de "
-#~ "biți nu este suportată."

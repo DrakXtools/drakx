@@ -432,17 +432,17 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL-i alguses peab seisma ftp:// või http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Mandriva Linuxi veebisaidilt saadaolevate peeglite nimekirja hankimine..."
+"Ühendumine %s veebileheküljega saadaolevate peeglite nimekirja hankimiseks..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Ühenduse loomine Mandriva Linuxi veebisaidiga saadaolevate peeglite "
-"nimekirja hankimiseks nurjus"
+"Ühendumine %s veebileheküljega saadaolevate peeglite nimekirja hankimiseks "
+"nurjus"
 
 #: any.pm:204
 #, c-format
@@ -514,11 +514,13 @@ msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
 "free software drivers to work."
 msgstr ""
+"Osa Teie masina riistvarast vajab mittevaba püsivara, et vaba tarkvara "
+"draiverid saaksid korralikult töötada."
 
 #: any.pm:351
 #, c-format
 msgid "You should enable \"%s\""
-msgstr ""
+msgstr "Teil tuleks lubada \"%s\" kasutamine"
 
 #: any.pm:370
 #, c-format
@@ -535,7 +537,7 @@ msgstr ""
 #: any.pm:372
 #, c-format
 msgid "\"%s\" contains non free software.\n"
-msgstr ""
+msgstr "\"%s\" sisaldab, nagu nimigi ütleb, mittevaba tarkvara.\n"
 
 #: any.pm:373
 #, c-format
@@ -547,7 +549,7 @@ msgstr ""
 #: any.pm:377
 #, c-format
 msgid "Here you can enable more media if you want."
-msgstr ""
+msgstr "Siin saab soovi korral lubada rohkemate andmekandjate kasutamist."
 
 #: any.pm:456
 #, c-format
@@ -725,17 +727,18 @@ msgstr "võib olla"
 #: pkgs.pm:102
 #, c-format
 msgid "Getting package information from XML meta-data..."
-msgstr ""
+msgstr "Paketi teabe hankimine XML-metaandmetest..."
 
 #: pkgs.pm:111
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Andmekandjal \"%s\" puudub XML-info, paketil %s on ainult osaline tulemus"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Kirjeldus puudub"
 
 #: pkgs.pm:280
 #, c-format
@@ -752,14 +755,14 @@ msgid "An error occurred:"
 msgstr "Tekkis viga:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Tekkis viga:"
+msgstr "Tekkis saatuslik viga: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Rohkem ei küsita"
 
 #: pkgs.pm:894
 #, c-format
@@ -798,9 +801,9 @@ msgid "Entering step `%s'\n"
 msgstr "Järgmine samm: %s\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Paigaldamine"
+msgstr "%s paigaldamine: %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -813,15 +816,15 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorgi server käivitub aeglaselt. Palun oodake..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Teie süsteemil napib ressurse ja paigaldamine ei pruugi õnnestuda.\n"
-"Kui nii juhtub, proovige palun tekstipõhist paigaldamist. Selleks\n"
-"vajutage CD-lt laadimisel F1 ja sisestage \"text\""
+"Teie süsteemil napib ressursse ja %s paigaldamine ei pruugi õnnestuda.\n"
+"Kui nii juhtub, proovige palun tekstipõhist paigaldamist.\n"
+"Selleks vajutage CD-lt laadimisel F1 ja sisestage \"text\"."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
 #, c-format
@@ -829,14 +832,14 @@ msgid "Media Selection"
 msgstr "Andmekandjate valik"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Mandriva KDE töölaua paigaldamine"
+msgstr "%s KDE töölaua paigaldamine"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Mandriva GNOME töölaua paigaldamine"
+msgstr "%s GNOME töölaua paigaldamine"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -881,7 +884,7 @@ msgstr "Valik paketthaaval"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Tühista kõigi valimine"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1461,9 +1464,9 @@ msgid "Preparing bootloader..."
 msgstr "Alglaaduri ettevalmistamine..."
 
 #: steps_interactive.pm:1050
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing initial startup program..."
-msgstr "Paigaldamiseks valmistumine"
+msgstr "Alglaadimisprogrammi ettevalmistamine..."
 
 #: steps_interactive.pm:1051
 #, c-format
@@ -1544,7 +1547,7 @@ msgid ""
 msgstr "Hiir"
 
 #: steps_list.pm:20 steps_list.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Hard drive detection"
@@ -1641,41 +1644,234 @@ msgid ""
 "Exit"
 msgstr "Välju"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linuxi paigaldamine %s"
+#~ msgid ""
+#~ "\"%s\" contains software that can not be distributed in every country due "
+#~ "to software patents."
+#~ msgstr ""
+#~ "\"%s\" sisaldab tarkvara, mida ei ole tarkvarapatentide tõttu võimalik "
+#~ "kõigis riikides vabalt levitada."
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Litsents"
+#~ "\"%s\" contains the various pieces of the systems and its applications"
+#~ msgstr ""
+#~ "\"%s\" sisaldab mitmesugust süsteemile vajalikku tarkvara ja rakendusi"
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Kogu töölaud USB-pulgal"
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "GNOME-l põhinev graafiline keskkond"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "100%% vaba tarkvaraga Mandriva Linuxi distributsioon"
+#~ msgid "A less developed lightweight fast graphical environment"
+#~ msgstr "Kergemat sorti kiire graafiline töökeskkond"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Linuxi hõlpus tundmaõppimine Mandriva One abil"
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Kergemat sorti graafiline töökeskkond koos kasutajasõbralike rakendustega"
+
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Kergemat sorti kiire graafiline töökeskkond andunud kasutajaskonnaga"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Meelelahutus: põnevus-, laua-, strateegiamängud jne"
+
+#~ msgid "Be Free!"
+#~ msgstr "Tundke end vabalt!"
+
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Cinnamoni tööjaam"
+
+#~ msgid "Core Release"
+#~ msgstr "Tuumiktarkvara (core)"
+
+#~ msgid "Enlightenment e17 Desktop"
+#~ msgstr "Enlightenment e17 töölaud"
+
+#~ msgid "For developers!"
+#~ msgstr "Arendajatele!"
+
+#~ msgid "For family!"
+#~ msgstr "Perele!"
+
+#~ msgid "For kids"
+#~ msgstr "Lastele"
+
+#~ msgid "Home entertainment"
+#~ msgstr "Kodune meelelahutus"
+
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Paigaldusprogramm leidis, et Teie olemasolevat Moondrake Linuxi süsteemi\n"
+#~ "ei saa turvaliselt uuendada versioonile %s.\n"
+#~ "\n"
+#~ "Soovitatav on valida uus paigaldus, mis asendab senise.\n"
+#~ "\n"
+#~ "Hoiatus: Te peaksite varundama kõik oma isiklikud andmed,\n"
+#~ "enne kui valite võimaluse \"Uus paigaldus\"."
+
+#~ msgid ""
+#~ "It also contains firmwares needed for certain devices to operate (eg: "
+#~ "some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
+#~ msgstr ""
+#~ "Samuti sisaldab see püsivara, mida vajavad oma töös mõningad seadmed (nt. "
+#~ "mõned ATI/AMD graafikakaardid, mõned võrgukaardid, mõned RAID-i kaardid "
+#~ "jne.)"
+
+#~ msgid ""
+#~ "It also contains software from \"%s\" rebuild with additional "
+#~ "capabilities."
+#~ msgstr "Samuti sisaldab see lisaomaduste huvides ümber ehitatud \"%s\"."
+
+#~ msgid "Join Us!"
+#~ msgstr "Ühinege meiega!"
+
+#~ msgid "MATE Workstation"
+#~ msgstr "MATE tööjaam"
+
+#~ msgid "Make it yours!"
+#~ msgstr "Võtke see omaks!"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake nõustajad"
+
+#~ msgid "Nonfree Release"
+#~ msgstr "Mittevaba tarkvara (non-free)"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Kontoritöö programmid: tekstitöötlus (LibreOffice Writer, KWord), "
+#~ "tabelitöötlus (LibreOffice Calc, KSpread), PDF-failide näitajad jne"
+
+#~ msgid "Office tools"
+#~ msgstr "Kontoritöö vahendid"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL- ja MariaDB-andmebaasiserver"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL- või MariaDB-andmebaasiserver"
+
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Uuendamiseks valmistumine..."
+
+#~ msgid "RazorQT Desktop"
+#~ msgstr "RazorQT töölaud"
+
+#~ msgid "Tainted Release"
+#~ msgstr "Piirangutega tarkvara (tainted)"
+
+#~ msgid "Thank you!"
+#~ msgstr "Täname Teid!"
+
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "See andmekandja sisaldab \"%s\" uuendusi"
+
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Fvwm jt"
+
+#~ msgid "XFCE Workstation"
+#~ msgstr "XFCE tööjaam"
+
+#~ msgid "Your choice!"
+#~ msgstr "Teie valik!"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Täielik Mandriva Linuxi töölaud koos kasutajatoega"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: distributsioone igale maitsele ja kõigiks vajadusteks"
+#~ msgid "All"
+#~ msgstr "Kõik"
+
+#~ msgid "Automated"
+#~ msgstr "Automaatne"
 
 #~ msgid "Bad package"
 #~ msgstr "Vigane pakett"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Võrk"
+#~ msgid "Boot"
+#~ msgstr "Alglaadimine"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Uuendused"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Ligipääs Teie kernelile vastavatele kerneli moodulitele ebaõnnestus "
+#~ "(puudub fail %s), mis enamasti tähendab, et Teie alglaadimisdiskett ei "
+#~ "ole sünkroonis paigaldus-andmekandjaga (palun looge uus "
+#~ "alglaadimisdiskett)"
+
+#~ msgid "Choosing packages"
+#~ msgstr "Pakettide valik"
+
+#~ msgid "Configure X"
+#~ msgstr "X'i seadistamine"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Peeglilt pakettide nimekirja lugemine..."
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Kas soovite kasutada aboot-i?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "Faili %s allalaadimine..."
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Viga aboot-i paigaldamisel, \n"
+#~ "kas sundida peale, riskides esimese partitsiooni hävinguga?"
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Linuxi hõlpus tundmaõppimine Mandriva One abil"
+
+#~ msgid "For contributors"
+#~ msgstr "Kaasautoritele"
+
+#~ msgid "For people"
+#~ msgstr "Kõigile"
+
+#~ msgid "For you"
+#~ msgstr "Sulle"
+
+#~ msgid "Formatting"
+#~ msgstr "Vormindamine"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Loo kiirpaigaldusdiskett"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWM töölaud"
+
+#~ msgid "Installation class"
+#~ msgstr "Paigaldamismeetod"
+
+#~ msgid "Language"
+#~ msgstr "Keel"
+
+#~ msgid "License"
+#~ msgstr "Litsents"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linuxi paigaldamine %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: distributsioone igale maitsele ja kõigiks vajadusteks"
+
+#~ msgid "Moondrake, the new Linux distribution"
+#~ msgstr "Moondrake, uus Linuxi distributsioon"
+
+#~ msgid "Networking"
+#~ msgstr "Võrk"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1683,6 +1879,63 @@ msgstr "Välju"
 #~ msgstr ""
 #~ "Kontoritöö programmid: tekstitöötlus (KWord, Abiword), tabelitöötlus "
 #~ "(KSpread, Gnumeric), PDF-failide näitajad jne"
+
+#~ msgid "People!"
+#~ msgstr "Rahvas!"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Alglaaduri ettevalmistamine..."
+
+#~ msgid "Proceed"
+#~ msgstr "Jätka"
+
+#~ msgid "Replay"
+#~ msgstr "Kordamine"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Salvesta paketivalik"
+
+#~ msgid "Select All"
+#~ msgstr "Kõigi valimine"
+
+#~ msgid "TV card"
+#~ msgstr "TV kaart"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "100%% vaba tarkvaraga Mandriva Linuxi distributsioon"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Automaatne paigaldamine võib olla ka sedavõrd tegija,\n"
+#~ "et kasutab ära kogu kõvaketta!\n"
+#~ "\n"
+#~ "Võite valida ka lihtsalt paigaldamise kordamise.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Ühendust peegliga %s ei saadud"
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr ""
+#~ "Uuendamine 32-bitiselt distributsioonilt 64-bitisele ei ole toetatud"
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr ""
+#~ "Uuendamine 64-bitiselt distributsioonilt 32-bitisele ei ole toetatud"
+
+#~ msgid "Users"
+#~ msgstr "Kasutajad"
+
+#~ msgid "Welcome"
+#~ msgstr "Tere tulemast"
+
+#~ msgid "Welcome!"
+#~ msgstr "Tere tulemast!"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1702,23 +1955,6 @@ msgstr "Välju"
 #~ "säiliks,\n"
 #~ "käivitage oma süsteem uuesti ja sooritage uuendamine Mandriva "
 #~ "uuendusapleti abil."
-
-#~ msgid "Proceed"
-#~ msgstr "Jätka"
-
-#~ msgid "retrieval of [%s] failed"
-#~ msgstr "[%s] tõmbamine nurjus"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "Faili %s allalaadimine..."
-
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr ""
-#~ "Uuendamine 32-bitiselt distributsioonilt 64-bitisele ei ole toetatud"
-
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr ""
-#~ "Uuendamine 64-bitiselt distributsioonilt 32-bitisele ei ole toetatud"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1744,93 +1980,28 @@ msgstr "Välju"
 #~ "\n"
 #~ "Kas tõesti paigaldada need serverid?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWM töölaud"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Peeglilt pakettide nimekirja lugemine..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Ühendust peegliga %s ei saadud"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Loo kiirpaigaldusdiskett"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Automaatne paigaldamine võib olla ka sedavõrd tegija,\n"
-#~ "et kasutab ära kogu kõvaketta!\n"
-#~ "\n"
-#~ "Võite valida ka lihtsalt paigaldamise kordamise.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Kordamine"
-
-#~ msgid "Automated"
-#~ msgstr "Automaatne"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Salvesta paketivalik"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Kas soovite kasutada aboot-i?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Viga aboot-i paigaldamisel, \n"
-#~ "kas sundida peale, riskides esimese partitsiooni hävinguga?"
-
-#~ msgid "All"
-#~ msgstr "Kõik"
-
-#~ msgid "TV card"
-#~ msgstr "TV kaart"
-
-#~ msgid "Boot"
-#~ msgstr "Alglaadimine"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Kogu töölaud USB-pulgal"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Autentimisviis"
 
-#~ msgid "Language"
-#~ msgstr "Keel"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Litsents"
 
-#~ msgid "Installation class"
-#~ msgstr "Paigaldamismeetod"
-
-#~ msgid "Formatting"
-#~ msgstr "Vormindamine"
-
-#~ msgid "Choosing packages"
-#~ msgstr "Pakettide valik"
-
-#~ msgid "Users"
-#~ msgstr "Kasutajad"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Võrk"
 
-#~ msgid "Configure X"
-#~ msgstr "X'i seadistamine"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Ligipääs Teie kernelile vastavatele kerneli moodulitele ebaõnnestus "
-#~ "(puudub fail %s), mis enamasti tähendab, et Teie alglaadimisdiskett ei "
-#~ "ole sünkroonis paigaldus-andmekandjaga (palun looge uus "
-#~ "alglaadimisdiskett)"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Uuendused"
+
+#~ msgid "retrieval of [%s] failed"
+#~ msgstr "[%s] tõmbamine nurjus"

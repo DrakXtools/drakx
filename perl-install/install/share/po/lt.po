@@ -729,7 +729,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Nėra aprašymo"
 
 #: pkgs.pm:280
 #, c-format
@@ -751,7 +751,7 @@ msgstr "Įvyko klaida"
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Kitą kartą nebeklausti"
 
 #: pkgs.pm:894
 #, c-format
@@ -791,9 +791,9 @@ msgid "Entering step `%s'\n"
 msgstr "Įeinama į žingsnį „%s“\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Įdiegiama"
+msgstr "%s įdiegimas %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -806,14 +806,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Tavo sistemoje mažai resursų. Tu gali susidurti su bėdomis, įdiegdamas\n"
-"Mandriva Linux. Jei taip atsitiktų, gali pabandyti tekstinį diegimo būdą:\n"
+"%s. Jei taip atsitiktų, gali pabandyti tekstinį diegimo būdą:\n"
 "Kai užsikrauna iš CDROM'o, paspausk `F1', o tada įvesk \"text\"."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
@@ -907,9 +907,9 @@ msgid "You cannot select/unselect this package"
 msgstr "Tu negali pažymėti/atžymėti šio paketo"
 
 #: steps_gtk.pm:461
-#, fuzzy, c-format
+#, c-format
 msgid "due to missing %s"
-msgstr "nieko"
+msgstr "dėl trūkstamo %s"
 
 #: steps_gtk.pm:462
 #, c-format
@@ -1210,9 +1210,9 @@ msgid "Bad file"
 msgstr "Įkelti bylą"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1399,9 +1399,9 @@ msgid "Security Level"
 msgstr "Saugumo lygis"
 
 #: steps_interactive.pm:1003
-#, fuzzy, c-format
+#, c-format
 msgid "Firewall"
-msgstr "Serveris, Firewall/Routeris"
+msgstr "Ugniasienė"
 
 #: steps_interactive.pm:1007
 #, fuzzy, c-format
@@ -1598,26 +1598,136 @@ msgid ""
 "Exit"
 msgstr "Išeiti"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux įdiegimas %s"
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Grafinė aplinka su vartotojui draugiškų programų ir darbalaukio įrankių "
+#~ "rinkiniu"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Grafinė aplinka su vartotojui draugiškų programų ir darbalaukio įrankių "
+#~ "rinkiniu"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr ""
+#~ "Programos pasilinksminimui: lentos, strateginiai, kortų žaidimai ir pan."
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "KDE darbo stotis"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Gnome darbo stotis"
+
+#, fuzzy
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Prisijungti prie interneto"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Licencija"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Biuro programos: tekstų redaktoriai (LibreOffice Writer, Kword), "
+#~ "skaičiuoklės (LibreOffice Calc, Kspread), pdf peržiūros programos ir pan."
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Biuro darbo stotis"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Ruošiama įkrovos tvarkyklė"
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Darbastalis"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "IceWM, Window Maker, Enlightenment, Fvwm ir pan."
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE darbo stotis"
+
+#~ msgid "%d packages"
+#~ msgstr "%d paketų"
+
+#, fuzzy
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "%d paketų"
+#~ msgstr[1] "%d paketų"
+#~ msgstr[2] "%d paketų"
+
+#~ msgid "All"
+#~ msgstr "Visos"
+
+#~ msgid "Automated"
+#~ msgstr "Automatinis"
 
 #~ msgid "Bad package"
 #~ msgstr "Blogas paketas"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Tinklai"
+#~ msgid "Boot"
+#~ msgstr "Įkelties nustatymai"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Pasirinkti paketus"
+
+#~ msgid "Configure X"
+#~ msgstr "Nustatyti X"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Jungiamasi prie atvaizdžio (mirror), kad gautume prieinamų paketų sąrašą"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Ar nori naudoti aboot?"
+
+#, fuzzy
+#~ msgid "Downloading file %s..."
+#~ msgstr "Išsaugoti į bylą"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Atnaujinimai"
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Klaida įdiegiant aboot,\n"
+#~ "bandyti įdiegti priverstinai, net jei tai sunaikintų pirmąjį skirsnį?"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Skaičiuojama"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Sukurti automatinio įdiegimo diskelį"
+
+#, fuzzy
+#~ msgid "IceWm Desktop"
+#~ msgstr "Darbastalis"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "Parink įdiegimo klasę"
+
+#~ msgid "Language"
+#~ msgstr "Pasirink savo kalbą"
+
+#~ msgid "License"
+#~ msgstr "Licencija"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux įdiegimas %s"
+
+#~ msgid "Networking"
+#~ msgstr "Tinklai"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1627,23 +1737,21 @@ msgstr "Išeiti"
 #~ "(kspread, gnumeric), pdf peržiūros programos ir pan."
 
 #, fuzzy
-#~ msgid "Downloading file %s..."
-#~ msgstr "Išsaugoti į bylą"
+#~ msgid "Preparing boot images..."
+#~ msgstr "Ruošiama įkrovos tvarkyklė"
+
+#~ msgid "Replay"
+#~ msgstr "Parodyti vėl"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Išsaugoti paketų pasirinkimą"
 
 #, fuzzy
-#~ msgid "IceWm Desktop"
-#~ msgstr "Darbastalis"
+#~ msgid "Select All"
+#~ msgstr "Pasirink bylą"
 
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "Jungiamasi prie atvaizdžio (mirror), kad gautume prieinamų paketų sąrašą"
-
-#, fuzzy
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Uždrausti tinklą"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Sukurti automatinio įdiegimo diskelį"
+#~ msgid "TV card"
+#~ msgstr "TV plokštė"
 
 #~ msgid ""
 #~ "The auto install can be fully automated if wanted,\n"
@@ -1658,72 +1766,32 @@ msgstr "Išeiti"
 #~ "\n"
 #~ "Jūs galbūt norėsite pakartoti įdiegimą.\n"
 
-#~ msgid "Replay"
-#~ msgstr "Parodyti vėl"
+#, fuzzy
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Uždrausti tinklą"
 
-#~ msgid "Automated"
-#~ msgstr "Automatinis"
+#~ msgid "Users"
+#~ msgstr "Vartotojai"
 
-#~ msgid "Save packages selection"
-#~ msgstr "Išsaugoti paketų pasirinkimą"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Ar nori naudoti aboot?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Klaida įdiegiant aboot,\n"
-#~ "bandyti įdiegti priverstinai, net jei tai sunaikintų pirmąjį skirsnį?"
-
-#~ msgid "All"
-#~ msgstr "Visos"
-
-#~ msgid "TV card"
-#~ msgstr "TV plokštė"
-
-#~ msgid "Boot"
-#~ msgstr "Įkelties nustatymai"
+#~ msgid "Welcome"
+#~ msgstr "Sveiki"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Autentikacija"
 
-#, fuzzy
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "%d paketų"
-#~ msgstr[1] "%d paketų"
-#~ msgstr[2] "%d paketų"
-
-#~ msgid "%d packages"
-#~ msgstr "%d paketų"
-
-#~ msgid "Language"
-#~ msgstr "Pasirink savo kalbą"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Licencija"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "Parink įdiegimo klasę"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "Skaičiuojama"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Pasirinkti paketus"
-
-#~ msgid "Users"
-#~ msgstr "Vartotojai"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Tinklai"
 
-#~ msgid "Configure X"
-#~ msgstr "Nustatyti X"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Atnaujinimai"

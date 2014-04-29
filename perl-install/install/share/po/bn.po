@@ -433,14 +433,14 @@ msgid "URL must start with ftp:// or http://"
 msgstr "ইউআরএল অবশ্যই ftp:// অথবা http:// দিয়ে শুরু হবে"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr "উপস্থিত মিররের তালিকার জন্য Mandriva Linux-এ সংযুক্ত করা হচ্ছে..."
+msgstr "উপস্থিত মিররের তালিকার জন্য %s-এ সংযুক্ত করা হচ্ছে..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
-msgstr "উপস্থিত মিররের তালিকার জন্য Mandriva Linux-এ যোগাযোগ করতে ব্যর্থ হয়েছে..."
+msgstr "উপস্থিত মিররের তালিকার জন্য %s-এ যোগাযোগ করতে ব্যর্থ হয়েছে..."
 
 #: any.pm:204
 #, c-format
@@ -731,7 +731,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "বিবরণ নেই"
 
 #: pkgs.pm:280
 #, c-format
@@ -746,9 +746,9 @@ msgid "An error occurred:"
 msgstr "একটি ত্রুটি সম্পাদিত হয়েছে"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "একটি ত্রুটি সম্পাদিত হয়েছে"
+msgstr "একটি মারাত্মক ত্রুটি ঘটেছে: %s"
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -794,9 +794,9 @@ msgid "Entering step `%s'\n"
 msgstr "`%s' স্টেপে প্রবেশ করছি\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr " ইনস্টলেশন"
+msgstr "%s ইনস্টলেশন %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -879,7 +879,7 @@ msgstr "আলাদাভাবে প্যাকেজ নির্বাচ�
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "সব কিছু অনির্বাচিতকরণ"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1229,9 +1229,9 @@ msgid "Bad file"
 msgstr "অগ্রহণযোগ্য ফাইল"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "কেডিই (KDE)"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1634,26 +1634,196 @@ msgid ""
 "Exit"
 msgstr "বাহির"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux ইনস্টলেশন %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "গ্রাফিকাল পরিবেশ"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "ব্যবহারকারীর বন্ধুসূলভ কিছু এপ্লিকেশন এবং ডোক্সটপ টুলের সমন্বয়ে একটি গ্রাফিকাল "
+#~ "পরিবেশ"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "ব্যবহারকারীর বন্ধুসূলভ কিছু এপ্লিকেশন এবং ডোক্সটপ টুলের সমন্বয়ে একটি গ্রাফিকাল "
+#~ "পরিবেশ"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "উদ্দীপনামূলক প্রোগ্রামসমূহ: আর্কেড, বোর্ড, স্ট্রেটেজি, ইত্যাদি"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "ওয়ার্কষ্টেশন"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "গুহনোম ওয়ার্কষ্টেশন"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake উইজার্ডসমূহ"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "লাইসেন্স"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "অফিস প্রোগ্রামসমূহ: ওয়ার্ডপ্রসেসর (LibreOffice Writer, Kword), স্প্রেডসিট "
+#~ "(LibreOffice Calc, Kspread), PDF ফাইল প্রদর্শক ইত্যাদী"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "অফিস ওয়ার্কষ্টেশন"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL অথবা MariaDB ডেটাবেস সার্ভার"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL অথবা MariaDB ডেটাবেস সার্ভার"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Bootloader প্রস্তুত করা হচ্ছে..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "IceWm ডেস্কটপ"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "\"%s\" মাধ্যমের সব প্যাকেজ এড়িয়ে যাও"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, ইত্যাদি"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE ওয়ার্কষ্টেশন"
+
+#~ msgid "%d packages"
+#~ msgstr "%d প্যাকেজ সমূহ"
+
+#, fuzzy
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "%d প্যাকেজ সমূহ"
+#~ msgstr[1] "%d প্যাকেজ সমূহ"
+
+#~ msgid "2007 product line"
+#~ msgstr "২০০৭ পণ্য লাইন"
+
+#~ msgid "3D"
+#~ msgstr "থ্রিডি"
+
+#~ msgid "All"
+#~ msgstr "সকল"
+
+#~ msgid "Arkeia"
+#~ msgstr "আরকেইয়া"
+
+#~ msgid "Automated"
+#~ msgstr "সয়ংক্রিয়ভাবে"
 
 #~ msgid "Bad package"
 #~ msgstr "বাজে প্যাকেজ"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "নেটওয়ার্ক করা"
+#~ msgid "Boot"
+#~ msgstr "বুট"
+
+#~ msgid "CMS"
+#~ msgstr "সিএমএস"
+
+#~ msgid "CRM"
+#~ msgstr "সিআরএম"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "আপডেট"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "আপনার কার্ণেলের কার্ণেল মডিউলগুলোতে প্রবেশ করতে পারছে না (%s ফাইলটি হারিয়া "
+#~ "গেছে), এর স্বাভাবিক অর্থ হচ্ছে আপনার বুট ফ্লপি ইনস্টলেশন মিডিয়ামের সাথে sync এ "
+#~ "নেই (অনুগ্রহ করে একটি নতুন বুট ফ্লপি তৈরী করুন)"
+
+#~ msgid "Choosing packages"
+#~ msgstr "প্যাকেজ পছন্দ করা হচ্ছে"
+
+#~ msgid "Configure X"
+#~ msgstr "X কনফিগার"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "প্যাকেজের তালিকার জন্য মিররের সাথে সংযুক্ত করা হচ্ছে..."
+
+#~ msgid "Discovery Live Mode"
+#~ msgstr "লাইভ মডিউল অনুসন্ধান"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "আপনি কি aboot ব্যবহার করতে চান?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "%s ফাইল ডাউনলোড করা হচ্ছে..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Aboot ইনস্টলে ব্যর্থ হয়েছে,\n"
+#~ "জোর করে ইনস্টলের চেষ্টা করবো যদিও সেটা প্রথম পার্টিশনকে নষ্ট করতে পারে?"
+
+#~ msgid "Flatout"
+#~ msgstr "ফ্ল্যাটআউট"
+
+#~ msgid "Formatting"
+#~ msgstr "ফরম্যাট করা হচ্ছে"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "সয়ংক্রিয় ইনস্টল ফ্লপি প্রস্তুত করো"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#~ msgid "How to register"
+#~ msgstr "কিভাবে রেজিস্টার করবেন"
+
+#, fuzzy
+#~ msgid "IceWm Desktop"
+#~ msgstr "প্লাকার ডেস্কটপ"
+
+#~ msgid "Installation class"
+#~ msgstr "ইনস্টলেশনের শ্রেনী"
+
+#~ msgid "Invictus Firewall"
+#~ msgstr "ইনভিকটাস ফায়ারওয়াল"
+
+#~ msgid "Kaspersky"
+#~ msgstr "ক্যসপারস্কাই"
+
+#~ msgid "Language"
+#~ msgstr "ভাষা"
+
+#~ msgid "License"
+#~ msgstr "লাইসেন্স"
+
+#~ msgid "LinDVD"
+#~ msgstr "লিনডিভিডি"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux ইনস্টলেশন %s"
+
+#~ msgid "Mandriva Online Services"
+#~ msgstr "Mandriva অনলাইন সেবা"
+
+#~ msgid "Networking"
+#~ msgstr "নেটওয়ার্ক করা"
+
+#~ msgid "New Theme"
+#~ msgstr "নতুন থীম"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1662,8 +1832,55 @@ msgstr "বাহির"
 #~ "অফিস প্রোগ্রামসমূহ: ওয়ার্ডপ্রসেসর (kword, abiword), স্প্রেডসিট (kspread, "
 #~ "gnumeric), PDF ফাইল প্রদর্শক ইত্যাদী"
 
-#~ msgid "Downloading file %s..."
-#~ msgstr "%s ফাইল ডাউনলোড করা হচ্ছে..."
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Bootloader প্রস্তুত করা হচ্ছে..."
+
+#~ msgid "Replay"
+#~ msgstr "জবাব"
+
+#~ msgid "Rpmdrake 2"
+#~ msgstr "আরপিএমড্র্যাক ২"
+
+#~ msgid "Save packages selection"
+#~ msgstr "প্যাকেজের নির্বাচন সংরক্ষণ করে রাখো"
+
+#~ msgid "Select All"
+#~ msgstr "সব কিছু নির্বাচিত"
+
+#~ msgid "Skype"
+#~ msgstr "স্কাইপ"
+
+#~ msgid "TV card"
+#~ msgstr "টিভি কার্ড"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "যদি আপনি চান স্বয়ংক্রিয় ইনস্টল পুরোপুরি স্বয়ংক্রয়ভাবে হবে,\n"
+#~ "সেক্ষেত্রে সেটা হার্ড ড্রাইভের কর্তৃত্বে!!\n"
+#~ "(এর মানে হচ্ছে অন্য একটি বাক্সে ইনস্টল)।\n"
+#~ "\n"
+#~ "আপনি তার চেয়ে পুনরায় ইনস্টলেশন চালু করুন।\n"
+
+#~ msgid "Transgaming/Cedega"
+#~ msgstr "Transgaming/Cedega"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "%s মিররের সাথে সংযুক্ত হওয়া গেলনা"
+
+#~ msgid "Users"
+#~ msgstr "ব্যবহারকারী"
+
+#~ msgid "Web 2.0"
+#~ msgstr "ওয়েব ২.০"
+
+#~ msgid "Welcome"
+#~ msgstr "স্বাগতম"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1688,160 +1905,22 @@ msgstr "বাহির"
 #~ "\n"
 #~ "আপনি কি আসলেই এই সার্ভারগুলো ইনস্টল করতে চান?\n"
 
-#, fuzzy
-#~ msgid "IceWm Desktop"
-#~ msgstr "প্লাকার ডেস্কটপ"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "প্যাকেজের তালিকার জন্য মিররের সাথে সংযুক্ত করা হচ্ছে..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "%s মিররের সাথে সংযুক্ত হওয়া গেলনা"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "সয়ংক্রিয় ইনস্টল ফ্লপি প্রস্তুত করো"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "যদি আপনি চান স্বয়ংক্রিয় ইনস্টল পুরোপুরি স্বয়ংক্রয়ভাবে হবে,\n"
-#~ "সেক্ষেত্রে সেটা হার্ড ড্রাইভের কর্তৃত্বে!!\n"
-#~ "(এর মানে হচ্ছে অন্য একটি বাক্সে ইনস্টল)।\n"
-#~ "\n"
-#~ "আপনি তার চেয়ে পুনরায় ইনস্টলেশন চালু করুন।\n"
-
-#~ msgid "Replay"
-#~ msgstr "জবাব"
-
-#~ msgid "Automated"
-#~ msgstr "সয়ংক্রিয়ভাবে"
-
-#~ msgid "Save packages selection"
-#~ msgstr "প্যাকেজের নির্বাচন সংরক্ষণ করে রাখো"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "আপনি কি aboot ব্যবহার করতে চান?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Aboot ইনস্টলে ব্যর্থ হয়েছে,\n"
-#~ "জোর করে ইনস্টলের চেষ্টা করবো যদিও সেটা প্রথম পার্টিশনকে নষ্ট করতে পারে?"
-
-#~ msgid "All"
-#~ msgstr "সকল"
-
-#~ msgid "TV card"
-#~ msgstr "টিভি কার্ড"
-
-#~ msgid "Boot"
-#~ msgstr "বুট"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "অনুমোদন"
 
-#~ msgid "Arkeia"
-#~ msgstr "আরকেইয়া"
-
-#~ msgid "Flatout"
-#~ msgstr "ফ্ল্যাটআউট"
-
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#~ msgid "3D"
-#~ msgstr "থ্রিডি"
-
-#~ msgid "CMS"
-#~ msgstr "সিএমএস"
-
-#~ msgid "CRM"
-#~ msgstr "সিআরএম"
-
-#~ msgid "2007 product line"
-#~ msgstr "২০০৭ পণ্য লাইন"
-
-#~ msgid "Invictus Firewall"
-#~ msgstr "ইনভিকটাস ফায়ারওয়াল"
-
-#~ msgid "Discovery Live Mode"
-#~ msgstr "লাইভ মডিউল অনুসন্ধান"
-
-#~ msgid "How to register"
-#~ msgstr "কিভাবে রেজিস্টার করবেন"
-
-#~ msgid "Rpmdrake 2"
-#~ msgstr "আরপিএমড্র্যাক ২"
-
-#~ msgid "Mandriva Online Services"
-#~ msgstr "Mandriva অনলাইন সেবা"
-
-#~ msgid "New Theme"
-#~ msgstr "নতুন থীম"
-
-#~ msgid "Web 2.0"
-#~ msgstr "ওয়েব ২.০"
-
-#~ msgid "Kaspersky"
-#~ msgstr "ক্যসপারস্কাই"
-
-#~ msgid "LinDVD"
-#~ msgstr "লিনডিভিডি"
-
-#~ msgid "Skype"
-#~ msgstr "স্কাইপ"
-
-#~ msgid "Transgaming/Cedega"
-#~ msgstr "Transgaming/Cedega"
-
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#, fuzzy
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "%d প্যাকেজ সমূহ"
-#~ msgstr[1] "%d প্যাকেজ সমূহ"
-
-#~ msgid "%d packages"
-#~ msgstr "%d প্যাকেজ সমূহ"
-
-#~ msgid "Language"
-#~ msgstr "ভাষা"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "লাইসেন্স"
 
-#~ msgid "Installation class"
-#~ msgstr "ইনস্টলেশনের শ্রেনী"
-
-#~ msgid "Formatting"
-#~ msgstr "ফরম্যাট করা হচ্ছে"
-
-#~ msgid "Choosing packages"
-#~ msgstr "প্যাকেজ পছন্দ করা হচ্ছে"
-
-#~ msgid "Users"
-#~ msgstr "ব্যবহারকারী"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "নেটওয়ার্ক করা"
 
-#~ msgid "Configure X"
-#~ msgstr "X কনফিগার"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "আপনার কার্ণেলের কার্ণেল মডিউলগুলোতে প্রবেশ করতে পারছে না (%s ফাইলটি হারিয়া "
-#~ "গেছে), এর স্বাভাবিক অর্থ হচ্ছে আপনার বুট ফ্লপি ইনস্টলেশন মিডিয়ামের সাথে sync এ "
-#~ "নেই (অনুগ্রহ করে একটি নতুন বুট ফ্লপি তৈরী করুন)"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "আপডেট"

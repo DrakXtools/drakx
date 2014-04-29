@@ -450,18 +450,17 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL må starte med ftp:// eller http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Kontakter nettstedet til Mandriva Linux for å få listen over tilgjengelige "
-"speil … "
+"Kontakter nettstedet til %s for å få listen over tilgjengelige speil … "
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Klarte ikke å kontakte nettstedet til Mandriva Linux for å få listen over "
-"tilgjengelige speil"
+"Klarte ikke å kontakte nettstedet til %s for å få listen over tilgjengelige "
+"speil"
 
 #: any.pm:204
 #, c-format
@@ -750,12 +749,12 @@ msgstr ""
 #: pkgs.pm:111
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
-msgstr ""
+msgstr "Ingen xml-info for mediet «%s», bare delvis resultat for pakke %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Ingen beskrivelse"
 
 #: pkgs.pm:280
 #, c-format
@@ -772,14 +771,14 @@ msgid "An error occurred:"
 msgstr "En feil oppstod:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "En feil oppstod:"
+msgstr "Det oppsto en kritisk feil: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Ikke spør igjen"
 
 #: pkgs.pm:894
 #, c-format
@@ -819,9 +818,9 @@ msgid "Entering step `%s'\n"
 msgstr "Entrer trinn `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Installasjon"
+msgstr "%s-installasjon %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -834,15 +833,15 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg-tjeneren er treg å starte. Vennligst vent … "
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Systemet ditt har lite ressurser. Du kan muligens oppleve noen problemer\n"
-"ved installering av Mandriva Linux. Hvis dette skjer kan du prøve "
-"installasjon i tekstmodus\n"
+"ved installering av %s. Hvis dette skjer kan du prøve installasjon i "
+"tekstmodus\n"
 "i stedet. Trykk `F1' ved oppstart av CD-ROM, skriv så `text'."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
@@ -851,14 +850,14 @@ msgid "Media Selection"
 msgstr "Medievalg"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Installer Mandriva KDE-skrivebord"
+msgstr "Installer %s KDE-skrivebord"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Installer Mandriva GNOME-skrivebord"
+msgstr "Installer %s GNOME-skrivebord"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -903,7 +902,7 @@ msgstr "Individuelt pakkevalg"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Velg bort alle"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1669,31 +1668,147 @@ msgid ""
 "Exit"
 msgstr "Avslutt"
 
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Grafisk miljø"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Et grafisk miljø med et brukervennlig sett av programmer og "
+#~ "skrivebordsverktøy"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Et lettvekts og raskt grafisk miljø med et brukervennlig sett av "
+#~ "programmer og skrivebordsverktøy"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Underholdningsprogrammer: arkade, brettspill, strategi, etc"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Arbeidsstasjon"
+
+#, fuzzy
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Installasjonsprogrammet har oppdaga at den gamle utgava av Moondrake som "
+#~ "du har installert ikke kan trygt oppgraderes til %s.\n"
+#~ "\n"
+#~ "Du bør velge en nyinstallering, som da vil erstatta den gamle versjonen.\n"
+#~ "\n"
+#~ "Advarsel: Du bør ta reservekopi av alle personlige data før du velger "
+#~ "«Nyinstallering»."
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME-arbeidsstasjon"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake-veivisere"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Kontorstøtteprogrammer: tekstbehandlere (LibreOffice Writer, Kword), "
+#~ "regneark (LibreOffice Calc, Kspread), PDF-framvisere, etc"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Kontorarbeidsstasjon"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL- og MariaDB-databasetjener"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL eller MariaDB-databasetjener"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Klargjør oppstartslaster … "
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Tilpasset skrivebord"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Hopp over alle pakker fra media \"%s\""
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm etc"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE-arbeidsstasjon"
+
+#~ msgid "A full Mandriva Linux desktop, with support"
+#~ msgstr "Et fullt Mandriva Linux-skrivebord – med brukerstøtte"
+
+#~ msgid "A full Moondrake desktop, with support"
+#~ msgstr "Et fullt Moondrake-skrivebord – med brukerstøtte"
+
+#~ msgid "Bad package"
+#~ msgstr "Ugyldig pakke"
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Utforsk Linux med Mandriva One"
+
+#~ msgid "Explore Linux easily with Moondrake One"
+#~ msgstr "Utforsk Linux med Moondrake One"
+
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linux-installasjon %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: Distribusjoner for alle behov"
+
+#~ msgid "Moondrake: distributions for everybody's needs"
+#~ msgstr "Moondrake: Distribusjoner for alle behov"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+#~ "gnumeric), pdf viewers, etc"
+#~ msgstr ""
+#~ "Kontorstøtteprogrammer: tekstbehandlere (kword, abiword), regneark "
+#~ "(kspread, gnumeric), pdf-framvisere etc"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Klargjør oppstartslaster … "
+
+#~ msgid "Select All"
+#~ msgstr "Velg alle"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "Mandriva Linux-distribusjonen med 100 %% åpen kildekode"
+
+#~ msgid "The 100%% open source Moondrake distribution"
+#~ msgstr "Moondrake-distribusjonen med 100 %% åpen kildekode"
+
+#~ msgid "Welcome"
+#~ msgstr "Velkommen"
+
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Skrivebordet på en minnepinne"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "License"
 #~ msgstr "Lisens"
-
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Skrivebordet på en minnepinne"
-
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "Mandriva Linux-distribusjonen med 100 %% åpen kildekode"
-
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Utforsk Linux med Mandriva One"
-
-#~ msgid "A full Mandriva Linux desktop, with support"
-#~ msgstr "Et fullt Mandriva Linux-skrivebord – med brukerstøtte"
-
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: Distribusjoner for alle behov"
-
-#~ msgid "Bad package"
-#~ msgstr "Ugyldig pakke"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
@@ -1704,10 +1819,3 @@ msgstr "Avslutt"
 #~ "_: Keep these entry short\n"
 #~ "Updates"
 #~ msgstr "Oppdateringer"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
-#~ "gnumeric), pdf viewers, etc"
-#~ msgstr ""
-#~ "Kontorstøtteprogrammer: tekstbehandlere (kword, abiword), regneark "
-#~ "(kspread, gnumeric), pdf-framvisere etc"

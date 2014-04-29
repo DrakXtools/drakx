@@ -434,18 +434,15 @@ msgid "URL must start with ftp:// or http://"
 msgstr "Slóð verður að byrja á ftp:// eða http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr ""
-"Hef samband við Mandriva Linux vefinn til að sækja lista yfir fáanlega "
-"spegla..."
+msgstr "Hef samband við %s vefinn til að sækja lista yfir fáanlega spegla..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Mistókst að tengjast við Mandriva Linux vefinn til að sækja lista yfir "
-"fáanlega spegla"
+"Mistókst að tengjast við %s vefinn til að sækja lista yfir fáanlega spegla"
 
 #: any.pm:204
 #, c-format
@@ -689,7 +686,7 @@ msgstr "Bíðið, sæki skrá"
 #: media.pm:717
 #, c-format
 msgid "unable to add medium"
-msgstr ""
+msgstr "get ekki bætt við miðli"
 
 #: media.pm:757
 #, c-format
@@ -735,11 +732,13 @@ msgstr ""
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Engin XML-info skrá fyrir miðil \"%s\", aðeins takmarkaðar upplýsingar fyrir "
+"pakka %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Engin lýsing til"
 
 #: pkgs.pm:280
 #, c-format
@@ -756,9 +755,9 @@ msgid "An error occurred:"
 msgstr "Villa kom upp:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Villa kom upp:"
+msgstr "Banvæn villa kom upp: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -803,9 +802,9 @@ msgid "Entering step `%s'\n"
 msgstr "Byrja skref `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Set inn"
+msgstr "%s uppsetning %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -818,14 +817,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg miðlari er seinn að ræsa. Bíddu við..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Ef vélin þín er vanbúin að einhverju leyti þá getur þú átt\n"
-"í vandræðum með að setja upp Mandriva Linux.\n"
+"í vandræðum með að setja upp %s.\n"
 "Ef svo er, þá gætir þú reynt að nota texta-uppsetningu.\n"
 "Til þess að gera það, ýttu á F1 þegar þú ræsir af\n"
 "geisladisknum og sláðu síðan inn `text'."
@@ -836,14 +835,14 @@ msgid "Media Selection"
 msgstr "Val á miðlum"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Setja inn Mandriva KDE umhverfi"
+msgstr "Setja inn %s KDE umhverfi"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Setja inn Mandriva GNOME umhverfi"
+msgstr "Setja inn %s GNOME umhverfi"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -888,7 +887,7 @@ msgstr "Val á einstökum pökkum"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Afvelja allt"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1650,41 +1649,117 @@ msgid ""
 "Exit"
 msgstr "Hætta"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux uppsetning %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Myndrænt umhverfi"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr "Gluggastjóri með notendavænum forritum og skjáborðs-tólum"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Létt og hratt gluggaumhverfi með notendavænum forritum og skjáborðs-tólum"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Leikjaforrit, skotleikir, borðleikir, herkænskuleikir og fleira"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Vinnustöð"
+
+#, fuzzy
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Uppsetningarforritið hefur ályktað að ekki sé hægt með öryggi að uppfæra "
+#~ "Moondrake kerfið þitt í %s.\n"
+#~ "\n"
+#~ "Mælt er með að setja inn nýja uppsetningu sem kemur í stað þeirrar "
+#~ "fyrri.\n"
+#~ "\n"
+#~ "Aðvörun : þú ættir að afrita öll persónuleg gögn áður en þú velur \"Ný "
+#~ "Uppsetning\"."
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Gnome vinnustöð"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake Ráðgjafar"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Notkunarskilmálar"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Skrifstofu forrit: ritvinnsla (LibreOffice Writer, Kword), töflureiknar "
+#~ "(LibreOffice Calc, Kspread) pdf skoðarar, o.s.frv"
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Vinnustöðin þín á USB lykli"
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Skrifstofu-vinnustöð"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "Mandriva uppsetningin með 100%% frjálsum, opnum hugbúnaði"
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL og MariaDB gagnagrunns-miðlarar"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Kannaðu Linux með Mandriva One"
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL eða MariaDB gagnagrunns-miðlarar"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Set upp ræsistjórann..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Sérsniðið Skjáborð"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Sleppa ölum pökkum af miðli \"%s\""
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, o.s.frv"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE Vinnustöð"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Full Mandriva Linux vinnustöð, með þjónustu"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: dreifingar við allra hæfi"
+#~ msgid "A full Moondrake desktop, with support"
+#~ msgstr "Full Moondrake vinnustöð, með þjónustu"
 
 #~ msgid "Bad package"
 #~ msgstr "Skemmdur pakki"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Net"
+#~ msgid "Downloading file %s..."
+#~ msgstr "Sæki skrá %s..."
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Uppfærslur"
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Kannaðu Linux með Mandriva One"
+
+#~ msgid "Explore Linux easily with Moondrake One"
+#~ msgstr "Kannaðu Linux með Moondrake One"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux uppsetning %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: dreifingar við allra hæfi"
+
+#~ msgid "Moondrake: distributions for everybody's needs"
+#~ msgstr "Moondrake: dreifingar við allra hæfi"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1692,6 +1767,28 @@ msgstr "Hætta"
 #~ msgstr ""
 #~ "Skrifstofu forrit: ritvinnsla (kword, abiword), töflureiknar (kspread, "
 #~ "gnumeric) pdf skoðarar, o.s.frv"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Set upp ræsistjórann..."
+
+#~ msgid "Proceed"
+#~ msgstr "Halda áfram"
+
+#~ msgid "Select All"
+#~ msgstr "Velja allt"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "Mandriva uppsetningin með 100%% frjálsum, opnum hugbúnaði"
+
+#~ msgid "The 100%% open source Moondrake distribution"
+#~ msgstr "Moondrake uppsetningin með 100%% frjálsum, opnum hugbúnaði"
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr "Ekki er stutt við uppfærslu frá 32-bita í 64-bita dreifingu"
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr "Ekki er stutt við uppfærslu frá 64-bita í 32-bita dreifingu"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1712,14 +1809,20 @@ msgstr "Hætta"
 #~ "endurræstu\n"
 #~ "þá tölvuna þína og notaðu Mandriva bakka-uppfærsluforritið."
 
-#~ msgid "Proceed"
-#~ msgstr "Halda áfram"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Vinnustöðin þín á USB lykli"
 
-#~ msgid "Downloading file %s..."
-#~ msgstr "Sæki skrá %s..."
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Notkunarskilmálar"
 
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr "Ekki er stutt við uppfærslu frá 32-bita í 64-bita dreifingu"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Net"
 
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr "Ekki er stutt við uppfærslu frá 64-bita í 32-bita dreifingu"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Uppfærslur"

@@ -308,18 +308,18 @@ msgstr ""
 "العاديين"
 
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:156
-#, fuzzy, c-format
+#, c-format
 msgid "LXDE Desktop"
-msgstr "سطح مكتب كِدي"
+msgstr "سطح مكتب LXDE"
 
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:158
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "A lightweight & fast graphical environment with user-friendly set of "
 "applications and desktop tools"
 msgstr ""
-"بيئة رسومية مع مجموعة من التطبيقات وأدوات سطح المكتب المناسبة للمستخدمين "
-"العاديين"
+"بيئة رسومية خفيفة وسريعة مع مجموعة من التطبيقات وأدوات سطح المكتب المناسبة "
+"للمستخدمين العاديين"
 
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:162
 #, c-format
@@ -439,15 +439,14 @@ msgid "URL must start with ftp:// or http://"
 msgstr "يجب أن يبدأ المسار بـ http:// أو بـ ftp://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr ""
-"يجري الاتصال بموقع لينكس ماندريفا للحصول على قائمة بالمرايا المتوفرة..."
+msgstr "جاري الاتصال بموقع %s للحصول على قائمة بالمرايا المتوفرة..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
-msgstr "فشل الاتصال بموقع لينكس ماندريفا للحصول على قائمة بالمرايا المتوفرة"
+msgstr "فشل الاتصال بموقع %s للحصول على قائمة بالمرايا المتوفرة"
 
 #: any.pm:204
 #, c-format
@@ -517,11 +516,13 @@ msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
 "free software drivers to work."
 msgstr ""
+"بعض قطع العتاد في جهازك تحتاج بعض المكتبات الغير حرة لتتمكن التعاريف الحرة "
+"من العمل."
 
 #: any.pm:351
 #, c-format
 msgid "You should enable \"%s\""
-msgstr ""
+msgstr "يجب أن تفعل \"%s\""
 
 #: any.pm:370
 #, c-format
@@ -538,7 +539,7 @@ msgstr ""
 #: any.pm:372
 #, c-format
 msgid "\"%s\" contains non free software.\n"
-msgstr ""
+msgstr "\"%s\" يحتوي على برمجيات غير حرة. \n"
 
 #: any.pm:373
 #, c-format
@@ -550,7 +551,7 @@ msgstr ""
 #: any.pm:377
 #, c-format
 msgid "Here you can enable more media if you want."
-msgstr ""
+msgstr "هنا يمكنك تفعيل وسائط أكثر إن أردت."
 
 #: any.pm:456
 #, c-format
@@ -688,7 +689,7 @@ msgstr "انتظر رجاءً، يجري جلب الملف"
 #: media.pm:717
 #, c-format
 msgid "unable to add medium"
-msgstr ""
+msgstr "لا يمكن إضافة وسيط"
 
 #: media.pm:757
 #, c-format
@@ -728,17 +729,18 @@ msgstr "ربما"
 #: pkgs.pm:102
 #, c-format
 msgid "Getting package information from XML meta-data..."
-msgstr ""
+msgstr "جاري جلب معلومات الحزم من ملف XML..."
 
 #: pkgs.pm:111
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"لا توجد معلومات xml للوسيط \"%s\"، إنما توجد معلومات جزئية فقط عن الحزمة %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "وصف غير متوفر"
 
 #: pkgs.pm:280
 #, c-format
@@ -750,29 +752,29 @@ msgstr ""
 "%s"
 
 #: pkgs.pm:376 pkgs.pm:403
-#, fuzzy, c-format
+#, c-format
 msgid "An error occurred:"
-msgstr "حدث خطأ"
+msgstr "حدث خطأ:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "حدث خطأ"
+msgstr "حدث خطأ فادح: %s"
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "لا تسأل مرة أخرى"
 
 #: pkgs.pm:894
 #, c-format
 msgid "%d installation transactions failed"
-msgstr ""
+msgstr "فشلت عملية تثبيت %d"
 
 #: pkgs.pm:895
-#, fuzzy, c-format
+#, c-format
 msgid "Installation of packages failed:"
-msgstr "تثبيت الحزمة %s"
+msgstr "فشل تثبيت الحزمة:"
 
 #: steps.pm:85
 #, c-format
@@ -801,9 +803,9 @@ msgid "Entering step `%s'\n"
 msgstr "الانتقال للخطوة `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "التثبيت"
+msgstr "%s تثبيت %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -816,14 +818,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "تشغيل خادم Xorg بطيء، لذا انتظر رجاء"
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "موارد نظامك قليلة، لذا قد تقابل بعض المشكلات قي تثبيت\n"
-"لينكس ماندريفا. إذا حدث ذلك، فيمكنك تجربة التثبيت النصي بديلاً. ولفعل ذلك،\n"
+"%s. إذا حدث ذلك، فيمكنك تجربة التثبيت النصي كبديل. للقيام بذلك،\n"
 "اضغط `F1' عند الإقلاع من القرص المدمج، ثم اكتب `text'."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
@@ -832,14 +834,14 @@ msgid "Media Selection"
 msgstr "انتقاء الوسائط"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "تثبيت ماندريفا بسطح مكتب كِدي"
+msgstr "تثبيت %s بسطح مكتب كدي"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "تثبيت ماندريفا بسطح مكتب جنوم"
+msgstr "تثبيت %s بسطح مكتب جنوم"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -884,7 +886,7 @@ msgstr "انتقاء مفرد للحزم"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "إلغاء اختيار الكل"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1281,9 +1283,9 @@ msgid "With X"
 msgstr "مع X"
 
 #: steps_interactive.pm:602
-#, fuzzy, c-format
+#, c-format
 msgid "Install suggested packages"
-msgstr "تثبيت الحزمة %s"
+msgstr "تثبيت الحزم المقترحة"
 
 #: steps_interactive.pm:603
 #, c-format
@@ -1461,14 +1463,14 @@ msgid "Preparing bootloader..."
 msgstr "محمّل الإقلاع يُحضَّر..."
 
 #: steps_interactive.pm:1050
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing initial startup program..."
-msgstr "التثبيت يُحضَّر"
+msgstr "تحضير برنامج بدء التشغيل الأولي..."
 
 #: steps_interactive.pm:1051
 #, c-format
 msgid "Be patient, this may take a while..."
-msgstr ""
+msgstr "كن صبورا، ستستغرق العملية بعض الوقت..."
 
 #: steps_interactive.pm:1062
 #, c-format
@@ -1640,41 +1642,170 @@ msgid ""
 "Exit"
 msgstr "اخرج"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "تثبيت لينكس ماندريفا %s"
+#~ msgid ""
+#~ "\"%s\" contains software that can not be distributed in every country due "
+#~ "to software patents."
+#~ msgstr ""
+#~ "\"%s\"  يحتوى على برمجيات لا يمكن إعادة نشرها في جميع بقاع العالم بسبب "
+#~ "براءات الاختراع.  "
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "الرخصة"
+#~ "\"%s\" contains the various pieces of the systems and its applications"
+#~ msgstr "\"%s\" يحتوي على مختلف مكونات النظام وتطبيقاته"
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "سطح مكتبك على وحدة USB"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "بيئات رسومية"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "توزيعة لينكس ماندريفا مفتوحة المصدر 100%%"
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "بيئة رسومية مع مجموعة من التطبيقات وأدوات سطح المكتب المناسبة للمستخدمين "
+#~ "العاديين"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "اكتشف لينكس بسهولة مع ماندريفا ون"
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "بيئة رسومية خفيفة وسريعة مع مجموعة من التطبيقات وأدوات سطح المكتب "
+#~ "المناسبة للمستخدمين العاديين"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "برامج تسلية: ألعاب فيديو، ألعاب لوحات، ألعاب استراتيجية، إلخ"
+
+#~ msgid "Be Free!"
+#~ msgstr "كن حراً!"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "محطة عمل"
+
+#~ msgid "Core Release"
+#~ msgstr "مخزن Core Release"
+
+#~ msgid "For developers!"
+#~ msgstr "للمطورين!"
+
+#~ msgid "For family!"
+#~ msgstr "للعائلة!"
+
+#~ msgid "For kids"
+#~ msgstr "للأطفال"
+
+#~ msgid "Home entertainment"
+#~ msgstr "الترفيه المنزلي"
+
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "تبين للمثبت أنه لا يمكن للنظام السابق\n"
+#~ " أن يرقَّ بأمان لـ %s\n"
+#~ " \n"
+#~ " ينصح بثبيت جديد يحل محل التثبيت السابق\n"
+#~ " \n"
+#~ " تحذير: ينبغي أن تنسخ جميع بياناتك الشخصية قبل اختيار\"تثبيت جديد\""
+
+#~ msgid ""
+#~ "It also contains firmwares needed for certain devices to operate (eg: "
+#~ "some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
+#~ msgstr ""
+#~ "يحتوى أيضا على بعض المكتبات الضرورية لتشغيل قطع عتاد معينة ( على سبيل "
+#~ "المثال: كروت الشاشة ATI/AMD، بعض كروت الشبكة، بعض كروت RAID، ...)"
+
+#~ msgid ""
+#~ "It also contains software from \"%s\" rebuild with additional "
+#~ "capabilities."
+#~ msgstr "يحتوي أيضا على برمجيات من \"%s\" تم إعادة بنائها بإمكانيات إضافية."
+
+#~ msgid "Join Us!"
+#~ msgstr "انضم إلينا!"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "محطة عمل جنوم"
+
+#~ msgid "Make it yours!"
+#~ msgstr "لتكن ملكك!"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "مرشدو ماجيا"
+
+#~ msgid "Nonfree Release"
+#~ msgstr "مخزن Nonfree Release"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "برامج مكتبية: معالجات نصوص (OpenOffice.org Writer، Kword)، جداول ممتدة "
+#~ "(OpenOffice.org Calc، Kspread)، برامج عرض pdf، إلخ"
+
+#~ msgid "Office tools"
+#~ msgstr "أدوات مكتبية"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "خادم قواعد بيانات PostgreSQL و MariaDB"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "خادم قواعد بيانات PostgreSQL أو MariaDB"
+
+#~ msgid "Preparing upgrade..."
+#~ msgstr "التحضير للترقية..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "سطح مكتب مخصص"
+
+#~ msgid "Tainted Release"
+#~ msgstr "مخزن Tainted Release"
+
+#~ msgid "Thank you!"
+#~ msgstr "شكرا لك!"
+
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "هذا الوسيط يوفر تحديثات للبرمجيات للوسيط \"%s\""
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Icewm، Window Maker، Enlightenment، Fvwm، إلخ"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "محطة عمل كدي"
+
+#~ msgid "Your choice!"
+#~ msgstr "اختيارك!"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "سطح مكتب لينكس ماندريفا كامل مع الدعم"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "ماندريفا: توزيعات تلبي احتياجات الجميع"
-
 #~ msgid "Bad package"
 #~ msgstr "حزمة فاسدة"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "الشبكات"
+#~ msgid "Downloading file %s..."
+#~ msgstr "يجري تنزيل الملف %s ..."
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "التحديثات"
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "اكتشف لينكس بسهولة مع ماندريفا ون"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "سطح مكتب IceWm"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "تثبيت لينكس ماندريفا %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "ماندريفا: توزيعات تلبي احتياجات الجميع"
+
+#~ msgid "Moondrake, the new Linux distribution"
+#~ msgstr "ماجيّا ، توزيعة لينكس الجديدة"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1682,6 +1813,21 @@ msgstr "اخرج"
 #~ msgstr ""
 #~ "برامج مكتبية: معالجات كلمات (kword، abiword)، جداول ممتدة (kspread، "
 #~ "gnumeric)، برامج عرض pdf، إلخ"
+
+#~ msgid "Preparing boot images..."
+#~ msgstr "جاري تحضير محمل الإقلاع..."
+
+#~ msgid "Select All"
+#~ msgstr "اختيار الكل"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "توزيعة لينكس ماندريفا مفتوحة المصدر 100%%"
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr "الترقية من توزيعة 32 بت إلى 64 بت غير مدعومة"
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr "الترقية من توزيعة 64 بت إلى 32 بت غير مدعومة"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1697,15 +1843,6 @@ msgstr "اخرج"
 #~ "المواصلة، ستحل كيدي 4 مكان كيدي 3.5، وستفقد إعدادات كِدي الشخصية\n"
 #~ " إن أردت الترقية مع إبقاء كِدي 3.5 والاحتفاظ بإعداداتك الشخصية\n"
 #~ " فقم بإعادة الحاسوب والترقية باستخدام بريمج تحديث ماندريفا."
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "يجري تنزيل الملف %s ..."
-
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr "الترقية من توزيعة 32 بت إلى 64 بت غير مدعومة"
-
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr "الترقية من توزيعة 64 بت إلى 32 بت غير مدعومة"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1730,5 +1867,20 @@ msgstr "اخرج"
 #~ "\n"
 #~ "هل أنت متأكد أنك تريد تثبيت هذه الخوادم؟\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "سطح مكتب IceWm"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "سطح مكتبك على وحدة USB"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "الرخصة"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "الشبكات"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "التحديثات"

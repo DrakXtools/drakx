@@ -431,15 +431,14 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL 주소는 ftp:// 또는 http:// 로 시작되어야 합니다."
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr "유효한 미러 목록을 받기 위해 Mandriva Linux 홈페이지에 접속 중..."
+msgstr "유효한 미러 목록을 받기 위해 %s 홈페이지에 접속 중..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
-msgstr ""
-"Mandriva Linux 홈페이지에 접속하여 미러사이트목록을 받는 데 실패했습니다."
+msgstr "%s 홈페이지에 접속하여 미러사이트목록을 받는 데 실패했습니다."
 
 #: any.pm:204
 #, c-format
@@ -731,7 +730,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "설명 없음"
 
 #: pkgs.pm:280
 #, c-format
@@ -793,9 +792,9 @@ msgid "Entering step `%s'\n"
 msgstr "%s 단계로 넘어갑니다.\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "설치중"
+msgstr "%s 설치 %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -878,7 +877,7 @@ msgstr "개별 팩키지 선택"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "모든 선택 해제"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1227,9 +1226,9 @@ msgid "Bad file"
 msgstr "손상된 파일 혹은 없는 파일입니다."
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1633,26 +1632,156 @@ msgid ""
 "Exit"
 msgstr "종료"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux 설치 %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "그래픽 환경"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr "사용자 친화적 응용 프로그램들과 데스크탑 도구들을 가진 그래픽 환경"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr "사용자 친화적 응용 프로그램들과 데스크탑 도구들을 가진 그래픽 환경"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "간단한 게임모음: 아케이드, 보드, 전략 등등"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "워크스테이션"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME 워크스테이션"
+
+#, fuzzy
+#~ msgid "Moondrake Wizards"
+#~ msgstr "맨드리바 제어 센터"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "라이센스"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "오피스 프로그램들: 워드프로세서 (LibreOffice Writer, Kword), 스프레드쉬트 "
+#~ "(LibreOffice Calc, Kspread), PDF 뷰어, 등등"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "오피스 워크스테이션"
+
+#, fuzzy
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL 또는 MariaDB 데이터베이스 서버"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL 또는 MariaDB 데이터베이스 서버"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "부트 로더 준비중"
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "IceWm 데스크탑"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "\"%s\"에서 모든 패키지를 설치하지 않음"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Icewm, 윈도우 메이커, 인라이튼먼트, Fvwm, 등등"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "K 데스크탑 환경 기반 워크스테이션"
+
+#~ msgid "2007 product line"
+#~ msgstr "2007 제품 라인"
+
+#~ msgid "3D"
+#~ msgstr "3차원"
+
+#~ msgid "All"
+#~ msgstr "모두"
+
+#~ msgid "Arkeia"
+#~ msgstr "아르케이아"
+
+#~ msgid "Automated"
+#~ msgstr "자동"
 
 #~ msgid "Bad package"
 #~ msgstr "잘못된 팩키지"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "망 설정"
+#~ msgid "Boot"
+#~ msgstr "부트"
+
+#~ msgid "CMS"
+#~ msgstr "CMS"
+
+#~ msgid "CRM"
+#~ msgstr "CRM"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "사용할 패키지의 리스트를 미러 사이트에서 받습니다."
+
+#~ msgid "Discovery Live Mode"
+#~ msgstr "Discovery Live Mode"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "aboot를 사용하시겠습니까?"
+
+#, fuzzy
+#~ msgid "Downloading file %s..."
+#~ msgstr "파일 전송 중 ..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "드레이크VPN - 가상사설통신망"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "업데이트"
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "aboot 설치 실패. \n"
+#~ "강제설치합니까? - 첫번째 파티션이 훼손될 수 있습니다."
+
+#~ msgid "Flatout"
+#~ msgstr "플래트아웃(최고속도로)"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "자동 설치 플로피 디스크 생성"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#~ msgid "How to register"
+#~ msgstr "등록하는 법"
+
+#, fuzzy
+#~ msgid "IceWm Desktop"
+#~ msgstr "일터"
+
+#~ msgid "Invictus Firewall"
+#~ msgstr "인빅투스 방화벽"
+
+#~ msgid "Kaspersky"
+#~ msgstr "캐스퍼 스카이(인터넷보안업체)"
+
+#~ msgid "LinDVD"
+#~ msgstr "LinDVD"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux 설치 %s"
+
+#~ msgid "Mandriva Online Services"
+#~ msgstr "맨드리바 온라인 서비스"
+
+#~ msgid "New Theme"
+#~ msgstr "새 테마"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1662,8 +1791,50 @@ msgstr "종료"
 #~ "gnumeric), pdf 뷰어, 등등"
 
 #, fuzzy
-#~ msgid "Downloading file %s..."
-#~ msgstr "파일 전송 중 ..."
+#~ msgid "Preparing boot images..."
+#~ msgstr "부트 로더 준비중"
+
+#~ msgid "Replay"
+#~ msgstr "재시도"
+
+#~ msgid "Rpmdrake 2"
+#~ msgstr "Rpmdrake 2"
+
+#~ msgid "Save packages selection"
+#~ msgstr "선택된 패키지 목록 저장"
+
+#~ msgid "Select All"
+#~ msgstr "모두 선택"
+
+#~ msgid "Skype"
+#~ msgstr "스카이프(인터넷 전화)"
+
+#~ msgid "TV card"
+#~ msgstr "TV 카드"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "자동 설치는 원한다면 완벽한 자동화가 가능합니다.\n"
+#~ "이럴 경우, 하드 드라이브를 점유해 버립니다!\n"
+#~ "(이것은 또 다른 컴퓨터에 동일하게 설치할 때를 위한 것입니다.)\n"
+#~ "일반적으로 직접 설치하는 것이 좋습니다.\n"
+
+#~ msgid "Transgaming/Cedega"
+#~ msgstr "Cedega - 윈도우용 게임 실행기"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "미러사이트 %s에 접속할 수 없습니다"
+
+#~ msgid "Web 2.0"
+#~ msgstr "웹 2.0"
+
+#~ msgid "Welcome"
+#~ msgstr "어서 오세요."
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1689,117 +1860,22 @@ msgstr "종료"
 #~ "\n"
 #~ "정말로 이 서버들을 설치합니까?\n"
 
-#, fuzzy
-#~ msgid "IceWm Desktop"
-#~ msgstr "일터"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "사용할 패키지의 리스트를 미러 사이트에서 받습니다."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "미러사이트 %s에 접속할 수 없습니다"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "자동 설치 플로피 디스크 생성"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "자동 설치는 원한다면 완벽한 자동화가 가능합니다.\n"
-#~ "이럴 경우, 하드 드라이브를 점유해 버립니다!\n"
-#~ "(이것은 또 다른 컴퓨터에 동일하게 설치할 때를 위한 것입니다.)\n"
-#~ "일반적으로 직접 설치하는 것이 좋습니다.\n"
-
-#~ msgid "Replay"
-#~ msgstr "재시도"
-
-#~ msgid "Automated"
-#~ msgstr "자동"
-
-#~ msgid "Save packages selection"
-#~ msgstr "선택된 패키지 목록 저장"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "aboot를 사용하시겠습니까?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "aboot 설치 실패. \n"
-#~ "강제설치합니까? - 첫번째 파티션이 훼손될 수 있습니다."
-
-#~ msgid "All"
-#~ msgstr "모두"
-
-#~ msgid "TV card"
-#~ msgstr "TV 카드"
-
-#~ msgid "Arkeia"
-#~ msgstr "아르케이아"
-
-#~ msgid "Flatout"
-#~ msgstr "플래트아웃(최고속도로)"
-
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#~ msgid "3D"
-#~ msgstr "3차원"
-
-#~ msgid "CMS"
-#~ msgstr "CMS"
-
-#~ msgid "CRM"
-#~ msgstr "CRM"
-
-#~ msgid "2007 product line"
-#~ msgstr "2007 제품 라인"
-
-#~ msgid "Invictus Firewall"
-#~ msgstr "인빅투스 방화벽"
-
-#~ msgid "Discovery Live Mode"
-#~ msgstr "Discovery Live Mode"
-
-#~ msgid "How to register"
-#~ msgstr "등록하는 법"
-
-#~ msgid "Rpmdrake 2"
-#~ msgstr "Rpmdrake 2"
-
-#~ msgid "Mandriva Online Services"
-#~ msgstr "맨드리바 온라인 서비스"
-
-#~ msgid "New Theme"
-#~ msgstr "새 테마"
-
-#~ msgid "Web 2.0"
-#~ msgstr "웹 2.0"
-
-#~ msgid "Kaspersky"
-#~ msgstr "캐스퍼 스카이(인터넷보안업체)"
-
-#~ msgid "LinDVD"
-#~ msgstr "LinDVD"
-
-#~ msgid "Skype"
-#~ msgstr "스카이프(인터넷 전화)"
-
-#~ msgid "Transgaming/Cedega"
-#~ msgstr "Cedega - 윈도우용 게임 실행기"
-
-#~ msgid "DrakVPN"
-#~ msgstr "드레이크VPN - 가상사설통신망"
-
-#~ msgid "Boot"
-#~ msgstr "부트"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "사용자 인증"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "라이센스"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "망 설정"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "업데이트"

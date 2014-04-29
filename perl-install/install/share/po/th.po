@@ -715,7 +715,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "ไม่มีคำอธิบายรายละเอียด"
 
 #: pkgs.pm:280
 #, c-format
@@ -792,14 +792,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "เครื่องของคุณมีทรัพยากรค่อนข้างต่ำคุณอาจมีปัญหาติดตั้ง \n"
-"Mandriva Linux  ถ้าเป็นเช่นนั้น กรุณาทดลองติดตั้งแบบ text \n"
+"%s  ถ้าเป็นเช่นนั้น กรุณาทดลองติดตั้งแบบ text \n"
 "กรุณากด F1 ขณะ boot จาก cdrom แล้วพิมพ์ text"
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
@@ -1193,9 +1193,9 @@ msgid "Bad file"
 msgstr "เปิดแฟ้ม"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1581,39 +1581,120 @@ msgid ""
 "Exit"
 msgstr "เลิกทำงาน"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "การติดตั้งลีนุกซ์-แมนเดรก %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "การทำงานแบบกราฟฟิก"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "สัญญาอนุญาต"
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Workstation ที่ทำงาน"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Workstation ที่ทำงาน"
+
+#, fuzzy
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Control Center"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Workstation ที่ทำงาน"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "กำลังเตรียมบูตโหลดเดอร์"
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "พื้นที่ทำงาน"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "Workstation ที่ทำงาน"
+
+#~ msgid "%d packages"
+#~ msgstr "แพ็คเก็จ %d ชุด"
+
+#~ msgid "All"
+#~ msgstr "ทั้งหมด"
+
+#~ msgid "Automated"
+#~ msgstr "อัตโนมัติ"
 
 #~ msgid "Bad package"
 #~ msgstr "แพ็คเก็จชำรุด"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "ระบบเครือข่าย"
+#~ msgid "Boot"
+#~ msgstr "บู๊ต"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "เลือกแพ็คเก็จ"
+
+#~ msgid "Configure X"
+#~ msgstr "คอนฟิกระบบ X"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "กำลังติดต่อกับมิลเรอร์ไซต์เพื่อหารายการของแพ็คเก็จที่มีให้"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "คุณต้องการใช้ aboot หรือไม่"
 
 #, fuzzy
 #~ msgid "Downloading file %s..."
 #~ msgstr "บันทึกลงไฟล์"
 
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "การติดตั้ง aboot ล้มเหลว\n"
+#~ "พยายามติดตั้งถึงแม้พาติชั่นแรกอาจจะเสียหาย?"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "การประเมิน"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "สร้างfloppyสำหรับการติดตั้งแบบออโตเมติก"
+
 #, fuzzy
 #~ msgid "IceWm Desktop"
 #~ msgstr "พื้นที่ทำงาน"
 
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "กำลังติดต่อกับมิลเรอร์ไซต์เพื่อหารายการของแพ็คเก็จที่มีให้"
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "เลือกชุดการติดตั้ง"
+
+#~ msgid "Language"
+#~ msgstr "เลือกภาษาที่คุณใช้"
+
+#~ msgid "License"
+#~ msgstr "สัญญาอนุญาต"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "การติดตั้งลีนุกซ์-แมนเดรก %s"
+
+#~ msgid "Networking"
+#~ msgstr "ระบบเครือข่าย"
 
 #, fuzzy
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "ไม่สามารถ forkได้.%s"
+#~ msgid "Preparing boot images..."
+#~ msgstr "กำลังเตรียมบูตโหลดเดอร์"
 
-#~ msgid "Generate auto install floppy"
-#~ msgstr "สร้างfloppyสำหรับการติดตั้งแบบออโตเมติก"
+#~ msgid "Replay"
+#~ msgstr "เรียกอีกครั้ง"
+
+#~ msgid "Save packages selection"
+#~ msgstr "บันทึกกลุ่มแพ็คเก็จที่เลือก"
+
+#, fuzzy
+#~ msgid "Select All"
+#~ msgstr "เลือกไฟล์"
+
+#~ msgid "TV card"
+#~ msgstr "TV card"
 
 #~ msgid ""
 #~ "The auto install can be fully automated if wanted,\n"
@@ -1627,65 +1708,27 @@ msgstr "เลิกทำงาน"
 #~ "(มันเหมาะกับการติดตั้งบนเครื่องอื่น)\n"
 #~ "คุณอาจอยากกลับไปเริ่มต้นติดตั้งใหม่\n"
 
-#~ msgid "Replay"
-#~ msgstr "เรียกอีกครั้ง"
+#, fuzzy
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "ไม่สามารถ forkได้.%s"
 
-#~ msgid "Automated"
-#~ msgstr "อัตโนมัติ"
+#~ msgid "Users"
+#~ msgstr "ผู้ใช้"
 
-#~ msgid "Save packages selection"
-#~ msgstr "บันทึกกลุ่มแพ็คเก็จที่เลือก"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "คุณต้องการใช้ aboot หรือไม่"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "การติดตั้ง aboot ล้มเหลว\n"
-#~ "พยายามติดตั้งถึงแม้พาติชั่นแรกอาจจะเสียหาย?"
-
-#~ msgid "All"
-#~ msgstr "ทั้งหมด"
-
-#~ msgid "TV card"
-#~ msgstr "TV card"
-
-#~ msgid "Boot"
-#~ msgstr "บู๊ต"
+#~ msgid "Welcome"
+#~ msgstr "ยินดีต้อนรับ"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "การตรวจสอบสิทธิ์การใช้งาน"
 
-#~ msgid "%d packages"
-#~ msgstr "แพ็คเก็จ %d ชุด"
-
-#~ msgid "Language"
-#~ msgstr "เลือกภาษาที่คุณใช้"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "สัญญาอนุญาต"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "เลือกชุดการติดตั้ง"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "การประเมิน"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "เลือกแพ็คเก็จ"
-
-#~ msgid "Users"
-#~ msgstr "ผู้ใช้"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "ระบบเครือข่าย"
-
-#~ msgid "Configure X"
-#~ msgstr "คอนฟิกระบบ X"

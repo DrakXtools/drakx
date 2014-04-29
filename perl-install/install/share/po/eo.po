@@ -432,18 +432,18 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL devas komenci per ftp:// aŭ http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Mi kontaktas la Mandriva Linuksan retpaĝon por havigi la liston de "
-"disponeblaj speguloj..."
+"Mi kontaktas la %s Linuksan retpaĝon por havigi la liston de disponeblaj "
+"speguloj..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Mi malsukcesis kontakti la Mandriva Linuksan retpaĝon por havigi la liston "
-"de disponeblaj speguloj..."
+"Mi malsukcesis kontakti la %s Linuksan retpaĝon por havigi la liston de "
+"disponeblaj speguloj..."
 
 #: any.pm:204
 #, c-format
@@ -733,11 +733,12 @@ msgstr ""
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Nenia xml-informo por aŭdvidaĵo \"%s\", nur parta rezulto por pakaĵo %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Nenia priskribo"
 
 #: pkgs.pm:280
 #, c-format
@@ -754,9 +755,9 @@ msgid "An error occurred:"
 msgstr "Eraro okazis"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Eraro okazis"
+msgstr "Okazis fatala eraro: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -801,9 +802,9 @@ msgid "Entering step `%s'\n"
 msgstr "Eniras paŝon `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Instalado"
+msgstr "%s Instalado %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -816,14 +817,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Via sistemo havas malmulte da risurcoj.  Eble vi havos problemojn pri\n"
-"instali Linuks-Mandrejkon.  Se tio okazos, vi povos anstataŭ provi tekstan\n"
+"instali %s.  Se tio okazos, vi povos anstataŭ provi tekstan\n"
 "instaladon.  Por ĉi tio, premu `F1' kiam vi startas de KDROM, kaj sekve\n"
 "tajpu `text'."
 
@@ -833,14 +834,14 @@ msgid "Media Selection"
 msgstr "Elektado de Pakaĵaj Grupoj"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Instalo de la labortablo Mandriva KDE"
+msgstr "Instalo de la labortablo %s KDE"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Instalo de la labortablo Mandriva GNOME"
+msgstr "Instalo de la labortablo %s GNOME"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -1237,9 +1238,9 @@ msgid "Bad file"
 msgstr "Malbona dosiero"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1647,26 +1648,101 @@ msgid ""
 "Exit"
 msgstr "Eliro"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Linuks-Mandrejka Instalado %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Grafika medio"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr "Grafika medio kun uzfacila aplikaĵaro kaj tabul-iloj"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr "Grafika medio kun uzfacila aplikaĵaro kaj tabul-iloj"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Amuz-programoj: arcade, tabuloj [boards], strategio, ktp."
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Laborstacio"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Gnoma Laborstacio"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Sorĉiloj de Moondrake"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Licenco"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Oficejaj programoj: tekstiloj (LibreOffice Writer, Verkilo [Kword]), "
+#~ "tabelkalkuliloj (LibreOffice Calc, Kspread), PDF-vidigiloj, ktp."
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Oficeja laborstacio"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Datenbaz-serviloj PostgreSQL kaj MariaDB"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Datenbaz-servilo PostgreSQL aŭ MariaDB"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Preparas startŝargilon"
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Labortabulo IceWm"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Transsalti ĉiujn pakaĵojn de la datenportilo \"%s\""
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, ktp."
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE Laborstacio"
+
+#~ msgid "Automated"
+#~ msgstr "Aŭtomata"
 
 #~ msgid "Bad package"
 #~ msgstr "Malbona pakaĵo"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Retumado"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Kontaktu la spegulon por havigi la liston de havebla pakaĵoj"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Ĉu vi deziras uzi aboot-on?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "Mi deŝutas dosieron %s..."
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Ĝisdatigoj"
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Eraro daŭre mi instalis \"aboot\",\n"
+#~ "Ĉu mi devus provi perforte instali eĉ se tio detruas la unuan subdiskon?"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Kreu aŭtoinstalan disketon"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "Labortablo IceWm"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Linuks-Mandrejka Instalado %s"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1675,14 +1751,44 @@ msgstr "Eliro"
 #~ "Oficej-programoj: tekstiloj (Verkilo [kword], aboword), tabelkalkuliloj "
 #~ "(kspread, gnumeric), pdf-vidigiloj, ktp."
 
-#~ msgid "Downloading file %s..."
-#~ msgstr "Mi deŝutas dosieron %s..."
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Preparas startŝargilon"
+
+#~ msgid "Replay"
+#~ msgstr "Reludu"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Konservu la pakaĵ-elekton"
+
+#, fuzzy
+#~ msgid "Select All"
+#~ msgstr "Elektu dosieron"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "La meminstalo povas esti plene aŭtomatigita se vi deziras,\n"
+#~ "tiukaze ĝi transprenas la fiksdiskon!!\n"
+#~ "(tio estas farita por instali sur alian aparaton).\n"
+#~ "\n"
+#~ "Vi eble preferas ripeti la instaladon.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Ne povis kontakti spegulon %s"
 
 #~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 #~ msgstr "Ĝisdatigo de 32-bita al 64-bita eldono ne estas subtenata"
 
 #~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 #~ msgstr "Ĝisdatigo de 64-bita al 32-bita eldono ne estas subtenata"
+
+#~ msgid "Welcome"
+#~ msgstr "Bonvenon"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1709,46 +1815,17 @@ msgstr "Eliro"
 #~ "\n"
 #~ "Ĉu vi vere deziras instali tiujn servilojn?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "Labortablo IceWm"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Kontaktu la spegulon por havigi la liston de havebla pakaĵoj"
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Ne povis kontakti spegulon %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Kreu aŭtoinstalan disketon"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Licenco"
 
 #~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "La meminstalo povas esti plene aŭtomatigita se vi deziras,\n"
-#~ "tiukaze ĝi transprenas la fiksdiskon!!\n"
-#~ "(tio estas farita por instali sur alian aparaton).\n"
-#~ "\n"
-#~ "Vi eble preferas ripeti la instaladon.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Reludu"
-
-#~ msgid "Automated"
-#~ msgstr "Aŭtomata"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Konservu la pakaĵ-elekton"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Ĉu vi deziras uzi aboot-on?"
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Retumado"
 
 #~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Eraro daŭre mi instalis \"aboot\",\n"
-#~ "Ĉu mi devus provi perforte instali eĉ se tio detruas la unuan subdiskon?"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Ĝisdatigoj"

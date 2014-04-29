@@ -334,9 +334,9 @@ msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "Le programme « %s » a planté (SEGV) avec l'erreur suivante :"
 
 #: drakbug:144
-#, fuzzy, c-format
+#, c-format
 msgid "Used theme: %s"
-msgstr "Utilisateur : %s"
+msgstr "Thème utilisé : %s"
 
 #: drakbug:146
 #, c-format
@@ -797,7 +797,7 @@ msgstr "Ghostscript"
 #: drakfont:556
 #, c-format
 msgid "LibreOffice"
-msgstr ""
+msgstr "LibreOffice"
 
 #: drakfont:557
 #, c-format
@@ -1682,7 +1682,7 @@ msgid "Keyboard"
 msgstr "Clavier"
 
 #: finish-install:58
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Veuillez choisir votre type de clavier."
 
@@ -2496,7 +2496,7 @@ msgid "Run config tool"
 msgstr "Lancer l'outil de configuration"
 
 #: harddrake2:301
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
 "information here."
@@ -2836,14 +2836,14 @@ msgstr ""
 "et entrez le nom (ou l'adresse IP) du serveur SMTP que vous désirez utiliser"
 
 #: logdrake:440
-#, fuzzy, c-format
+#, c-format
 msgid "Email address"
-msgstr "Adresse IP"
+msgstr "Adresse email"
 
 #: logdrake:441
-#, fuzzy, c-format
+#, c-format
 msgid "Email server"
-msgstr "Serveur Samba"
+msgstr "Serveur email"
 
 #: logdrake:445
 #, c-format
@@ -2884,12 +2884,12 @@ msgstr "Enregistrer sous..."
 #: service_harddrake:487
 #, c-format
 msgid "Display driver setup"
-msgstr ""
+msgstr "Configuration du pilote d'affichage"
 
 #: notify-x11-free-driver-switch:20
 #, c-format
 msgid "The display driver has been automatically switched to '%s'."
-msgstr ""
+msgstr "Le pilote d'affichage a été changé automatiquement pour « %s »."
 
 #: notify-x11-free-driver-switch:21
 #, c-format
@@ -3190,13 +3190,13 @@ msgstr ""
 "sane-%s» pour le lire."
 
 #: scannerdrake:407 scannerdrake:416
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"Vous pouvez maintenant scanner des documents en utilisant « XSane » ou "
-"« Kooka » à partir du menu Applications->Multimédia->Graphisme."
+"Vous pourrez ensuite numériser des documents en utilisant « XSane » ou « %s "
+"» dans le menu des applications « Multimédia/Graphique »."
 
 #: scannerdrake:411
 #, c-format
@@ -3227,15 +3227,15 @@ msgid "Congratulations!"
 msgstr "Félicitations !"
 
 #: scannerdrake:419
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"Votre %s a été configuré.\n"
-"Vous pouvez maintenant scanner des documents en utilisant « XSane » ou "
-"« Kooka » à partir du menu général Multimédia->Graphisme."
+"Votre « %s » a été configuré.\n"
+"Vous pouvez maintenant numériser des documents en utilisant « XSane » ou « "
+"%s » dans le menu des applications « Multimédia/Graphique »."
 
 #: scannerdrake:444
 #, c-format
@@ -3445,17 +3445,17 @@ msgstr ""
 "Impossible d'installer les paquetages nécessaires au partage de vos scanners."
 
 #: service_harddrake:173
-#, fuzzy, c-format
+#, c-format
 msgid "The graphics card '%s' is no longer supported by driver '%s'"
 msgstr "La carte « %s » n'est plus supportée par le pilote « %s »"
 
 #: service_harddrake:183
 #, c-format
 msgid "New release, reconfiguring X for %s"
-msgstr ""
+msgstr "Nouvelle version, X est reconfiguré pour %s"
 
 #: service_harddrake:274
-#, fuzzy, c-format
+#, c-format
 msgid "The proprietary kernel driver was not found for X.org driver '%s'"
 msgstr ""
 "Le pilote noyau propriétaire n'a pas été trouvé pour le pilote X.org « %s »"
@@ -3499,7 +3499,7 @@ msgstr "Détection du matériel en cours"
 #: service_harddrake:453 service_harddrake:458
 #, c-format
 msgid "Display driver issue"
-msgstr ""
+msgstr "Problème lié au pilote d'affichage"
 
 #: service_harddrake:454
 #, c-format
@@ -3509,6 +3509,10 @@ msgid ""
 "boot process. Startup of the X server may now fail as that option was not "
 "specified."
 msgstr ""
+"Vous devez utiliser l'option « nokmsboot » du pilote d'affichage que vous "
+"utilisez actuellement pour empêcher le pilote KMS du noyau d'être chargé "
+"durant le processus d'amorçage. Il est possible que le serveur X ne se lance "
+"pas car cette option n'a pas été spécifiée."
 
 #: service_harddrake:459
 #, c-format
@@ -3517,16 +3521,21 @@ msgid ""
 "driver the X server is configured to use. Startup of the X server may now "
 "fail."
 msgstr ""
+"Un conflit a été détecté entre un module du noyau chargé pour le pilote "
+"d'affichage et le pilote que le serveur X est censé utiliser. Le démarrage "
+"du serveur X est susceptible d'échouer."
 
 #: service_harddrake:474 service_harddrake:487
 #, c-format
 msgid "The system has to be rebooted due to a display driver change."
 msgstr ""
+"Le système doit être redémarré à cause d'une modification du pilote "
+"d'affichage."
 
 #: service_harddrake:475 service_harddrake:488
 #, c-format
 msgid "Press Cancel within %d seconds to abort."
-msgstr ""
+msgstr "Appuyez sur « Annuler » avant %d secondes pour abandonner."
 
 #: ../menu/localedrake-system.desktop.in.h:1
 msgid "System Regional Settings"
@@ -3556,21 +3565,255 @@ msgstr "Paramètres régionaux"
 msgid "Language & country configuration"
 msgstr "Configuration de la langue et du pays"
 
+#~ msgid "  --help                - display this help     \n"
+#~ msgstr "--help                - afficher ce message\n"
+
+#~ msgid ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Usage: \n"
+#~ msgstr ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake\n"
+#~ "Ce logiciel est libre et peut être redistribué sous les conditions de la "
+#~ "licence GNU GPL.\n"
+#~ "\n"
+#~ "Utilisation :\n"
+
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Outil de rapport de bug de %s"
+
+#~ msgid "%s Control Center"
+#~ msgstr "Centre de Contrôle de %s"
+
+#~ msgid "%s Help Center"
+#~ msgstr "Centre d'aide de %s"
+
+#~ msgid "%s Online"
+#~ msgstr "%s Online"
+
+#~ msgid "%s Tools Logs"
+#~ msgstr "Journaux des outils de %s"
+
+#~ msgid "%s Update"
+#~ msgstr "Mise à jour de %s"
+
+#~ msgid "<control>H"
+#~ msgstr "<control>H"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Application Security "
+#~ "Configuration"
+#~ msgstr ""
+#~ "Une authentification est nécessaire pour configurer la sécurité des "
+#~ "logiciels dans Moondrake"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Authentication Configuration"
+#~ msgstr ""
+#~ "Une authentification est nécessaire pour configurer l'authentification "
+#~ "des outils Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake Boot Configuration"
+#~ msgstr ""
+#~ "Une authentification est nécessaire pour configurer le démarrage du "
+#~ "système Moondrake"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Date and Time Configuration"
+#~ msgstr ""
+#~ "Une authentification est nécessaire pour configurer la date et l'heure de "
+#~ "Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake Disk Layout Editor"
+#~ msgstr ""
+#~ "Une authentification est nécessaire pour configurer les partitions des "
+#~ "disques durs"
+
+#~ msgid "Authentication is required to run Moondrake Font Configuration"
+#~ msgstr ""
+#~ "Une authentification est nécessaire pour configurer les polices de "
+#~ "Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake Hardware Configuration"
+#~ msgstr ""
+#~ "Une authentification est nécessaire pour lancer l'outil de configuration "
+#~ "du matériel"
+
+#~ msgid "Authentication is required to run Moondrake Log Viewer"
+#~ msgstr ""
+#~ "Une authentification est nécessaire pour visionner les journaux de "
+#~ "Moondrake"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Login Manager Configuration"
+#~ msgstr ""
+#~ "Une authentification est nécessaire pour configurer le gestionnaire de "
+#~ "connexion Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake Scanner Configuration"
+#~ msgstr "Une authentification est nécessaire pour configurer le scanneur"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Security Permissions "
+#~ "Configuration"
+#~ msgstr ""
+#~ "Une authentification est nécessaire pour configurer les autorisations de "
+#~ "sécurité de Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake Service Configuration"
+#~ msgstr ""
+#~ "Une authentification est nécessaire pour configurer les services du "
+#~ "système Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake UPS Configuration"
+#~ msgstr "Une authentification est nécessaire pour configurer un onduleur"
+
+#~ msgid "Autodetect _modems"
+#~ msgstr "Auto-détecter les _modems"
+
+#~ msgid "Autodetect parallel _zip drives"
+#~ msgstr "Auto-détecter les périphériques parallèles _Zip"
+
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Configurer l'authentification requise pour accéder aux outils de %s"
+
+#~ msgid "Copyright (C) %s by %s"
+#~ msgstr "Copyright (C) %s par %s"
+
+#~ msgid ""
+#~ "Here you can see files to use in order to fix permissions, owners, and "
+#~ "groups via msec.\n"
+#~ "You can also edit your own rules which will overwrite the default rules."
+#~ msgstr ""
+#~ "Ici, il est possible de voir les fichiers à utiliser pour corriger les "
+#~ "permissions, les propriétaires et les groupes grâce à msec.\n"
+#~ "Vous pouvez aussi éditer vos propres règles, prioritaires devant celles "
+#~ "par défaut."
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in"
+#~ msgstr ""
+#~ "Aucune carte son n'a été détectée dans votre ordinateur. Veuillez "
+#~ "vérifier qu'une carte son compatible avec Linux est branchée correctement."
+
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in."
+#~ msgstr ""
+#~ "Aucune carte TV n'a été détectée dans votre ordinateur. Veuillez vérifier "
+#~ "qu'une carte vidéo/TV compatible avec Linux est branchée correctement."
+
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Configurer la sécurité des logiciels dans Moondrake"
+
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Configurer l'authentification pour les outils Moondrake"
+
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "Configurer le démarrage du système Moondrake"
+
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Configurer la date et l'heure de Moondrake"
+
+#~ msgid "Run Moondrake Disk Layout Editor"
+#~ msgstr "Configurer les partitions des disques durs"
+
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Configurer les polices de Moondrake"
+
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Lancer l'outil de configuration du matériel"
+
+#~ msgid "Run Moondrake Log Viewer"
+#~ msgstr "Visionner les journaux de Moondrake"
+
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Configurer le gestionnaire de connexion Moondrake"
+
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Configurer le scanneur"
+
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Configurer les autorisations de sécurité de Moondrake"
+
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Configurer les services du système Moondrake"
+
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "Configurer un onduleur"
+
+#~ msgid "Select %s Tool:"
+#~ msgstr "Sélectionner l'outil de %s :"
+
+#~ msgid "_About..."
+#~ msgstr "_A propos…"
+
+#~ msgid "_Fields description"
+#~ msgstr "_Description des champs"
+
+#~ msgid "_File"
+#~ msgstr "_Fichier"
+
+#~ msgid "_Help"
+#~ msgstr "_Aide"
+
+#~ msgid "_Options"
+#~ msgstr "_Options"
+
+#~ msgid "_Quit"
+#~ msgstr "_Quitter"
+
+#~ msgid "_Report Bug"
+#~ msgstr "_Signaler un bogue"
+
 #~ msgid "/Autodetect _printers"
 #~ msgstr "/Auto-détecter les _imprimantes"
 
-#~ msgid "Its GDB trace is:"
-#~ msgstr "Sa trace GDB est : "
+#~ msgid "Background color"
+#~ msgstr "Couleur de fond"
 
-#~ msgid "OpenOffice.org"
-#~ msgstr "OpenOffice.org"
+#~ msgid "Bugs"
+#~ msgstr "Bogues"
 
-#~ msgid ""
-#~ "The proprietary driver for your graphic card cannot be found, the system "
-#~ "is now using the free software driver (%s)."
-#~ msgstr ""
-#~ "Le pilote propriétaire pour votre carte graphique n'a pu être trouvé, le "
-#~ "système utilise désormais le pilote libre (%s)."
+#~ msgid "Choose picture"
+#~ msgstr "Choisissez l'image"
+
+#~ msgid "Choose progress bar background"
+#~ msgstr "Choisissez le fond de la barre de progression"
+
+#~ msgid "Choose progress bar color 1"
+#~ msgstr "Choisissez la couleur de la barre de progression 1"
+
+#~ msgid "Choose progress bar color 2"
+#~ msgstr "Choisissez la couleur de la barre de progression 2"
+
+#~ msgid "Choose text color"
+#~ msgstr "Choisissez la couleur du texte"
+
+#~ msgid "Choose text zone color"
+#~ msgstr "Choisissez la couleur de la zone de texte"
+
+#~ msgid "Color selection"
+#~ msgstr "Sélection de la couleur"
+
+#~ msgid "Coma bug"
+#~ msgstr "Bogue de « coma »"
+
+#~ msgid "Create new theme"
+#~ msgstr "Créer un nouveau thème"
+
+#~ msgid "Display logo on Console"
+#~ msgstr "Afficher le logo dans la console"
 
 #~ msgid ""
 #~ "Display theme\n"
@@ -3579,20 +3822,87 @@ msgstr "Configuration de la langue et du pays"
 #~ "Affiche le thème\n"
 #~ "dans la console"
 
-#~ msgid "Create new theme"
-#~ msgstr "Créer un nouveau thème"
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "Les premiers Pentium produits ont un bogue dans leur unité de calcul en "
+#~ "nombres flottants qui empêche d'avoir la précision nécessaire lors d'une "
+#~ "opération de division en flottants (FDIV)."
 
-#~ msgid "X coordinate of text box"
-#~ msgstr "Coordonnée x de la zone texte"
+#~ msgid "F00f bug"
+#~ msgstr "Bogue f00f"
 
-#~ msgid "Y coordinate of text box"
-#~ msgstr "Coordonnée y de la zone de texte"
+#~ msgid "FPU"
+#~ msgstr "Coprocesseur arithmétique"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Bogue de l'instruction FDIV"
+
+#~ msgid "Final resolution"
+#~ msgstr "Résolution finale"
+
+#~ msgid "Gradient type"
+#~ msgstr "Type de gradient"
+
+#~ msgid "Halt bug"
+#~ msgstr "Bogue de l'instruction halt"
+
+#~ msgid "Is FPU present"
+#~ msgstr "Coprocesseur arithmétique présent"
+
+#~ msgid "Its GDB trace is:"
+#~ msgstr "Sa trace GDB est : "
+
+#~ msgid "OpenOffice.org"
+#~ msgstr "OpenOffice.org"
+
+#~ msgid "Please enter a theme name"
+#~ msgstr "Veuillez entrer un nom de thème"
+
+#~ msgid "Please select a splash image"
+#~ msgstr "Veuillez sélectionner une image"
+
+#~ msgid "Progress Bar"
+#~ msgstr "Barre de progression"
+
+#~ msgid "Progress box transparency"
+#~ msgstr "Transparence de la barre de progression"
+
+#~ msgid "Save theme"
+#~ msgstr "Sauvegarder le thème"
+
+#~ msgid "Silent bootsplash"
+#~ msgstr "Mode silencieux"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Certaines vieilles puces i486DX-100 ne peuvent pas redémarrer de façon "
+#~ "fiable après une instruction « halt »."
+
+#~ msgid "Text"
+#~ msgstr "Texte"
+
+#~ msgid "Text box height"
+#~ msgstr "Hauteur de la zone de texte"
+
+#~ msgid "Text box transparency"
+#~ msgstr "Transparence de la zone de texte"
 
 #~ msgid "Text box width"
 #~ msgstr "Largeur de la zone de texte"
 
-#~ msgid "Text box height"
-#~ msgstr "Hauteur de la zone de texte"
+#~ msgid "Text color"
+#~ msgstr "Couleur du texte"
+
+#~ msgid "Text size"
+#~ msgstr "Taille du texte"
+
+#~ msgid "The height of the progress bar"
+#~ msgstr "Hauteur de la barre de progression"
 
 #~ msgid ""
 #~ "The progress bar X coordinate\n"
@@ -3608,129 +3918,45 @@ msgstr "Configuration de la langue et du pays"
 #~ "Coordonnées y du coin supérieur gauche\n"
 #~ "de la barre de progression"
 
+#~ msgid ""
+#~ "The proprietary driver for your graphic card cannot be found, the system "
+#~ "is now using the free software driver (%s)."
+#~ msgstr ""
+#~ "Le pilote propriétaire pour votre carte graphique n'a pu être trouvé, le "
+#~ "système utilise désormais le pilote libre (%s)."
+
 #~ msgid "The width of the progress bar"
 #~ msgstr "Largeur de la barre de progression"
-
-#~ msgid "The height of the progress bar"
-#~ msgstr "Hauteur de la barre de progression"
-
-#~ msgid "X coordinate of the text"
-#~ msgstr "Coordonnée (x) du texte"
-
-#~ msgid "Y coordinate of the text"
-#~ msgstr "Coordonnée (y) du texte"
-
-#~ msgid "Text box transparency"
-#~ msgstr "Transparence de la zone de texte"
-
-#~ msgid "Progress box transparency"
-#~ msgstr "Transparence de la barre de progression"
-
-#~ msgid "Text size"
-#~ msgstr "Taille du texte"
-
-#~ msgid "Progress Bar"
-#~ msgstr "Barre de progression"
-
-#~ msgid "Choose progress bar color 1"
-#~ msgstr "Choisissez la couleur de la barre de progression 1"
-
-#~ msgid "Choose progress bar color 2"
-#~ msgstr "Choisissez la couleur de la barre de progression 2"
-
-#~ msgid "Choose progress bar background"
-#~ msgstr "Choisissez le fond de la barre de progression"
-
-#~ msgid "Gradient type"
-#~ msgstr "Type de gradient"
-
-#~ msgid "Text"
-#~ msgstr "Texte"
-
-#~ msgid "Choose text color"
-#~ msgstr "Choisissez la couleur du texte"
-
-#~ msgid "Choose picture"
-#~ msgstr "Choisissez l'image"
-
-#~ msgid "Silent bootsplash"
-#~ msgstr "Mode silencieux"
-
-#~ msgid "Choose text zone color"
-#~ msgstr "Choisissez la couleur de la zone de texte"
-
-#~ msgid "Text color"
-#~ msgstr "Couleur du texte"
-
-#~ msgid "Background color"
-#~ msgstr "Couleur de fond"
-
-#~ msgid "Verbose bootsplash"
-#~ msgstr "Mode verbeux"
 
 #~ msgid "Theme name"
 #~ msgstr "Nom du thème"
 
-#~ msgid "Final resolution"
-#~ msgstr "Résolution finale"
-
-#~ msgid "Display logo on Console"
-#~ msgstr "Afficher le logo dans la console"
-
-#~ msgid "Save theme"
-#~ msgstr "Sauvegarder le thème"
-
-#~ msgid "Please enter a theme name"
-#~ msgstr "Veuillez entrer un nom de thème"
-
-#~ msgid "Please select a splash image"
-#~ msgstr "Veuillez sélectionner une image"
-
-#~ msgid "saving Bootsplash theme..."
-#~ msgstr "sauvegarde du thème de démarrage..."
-
 #~ msgid "Unable to load image file %s"
 #~ msgstr "Impossible de charger l'image %s"
 
-#~ msgid "choose image"
-#~ msgstr "choisissez l'image"
+#~ msgid "Unknown/Others"
+#~ msgstr "Inconnus/Autres"
 
-#~ msgid "Color selection"
-#~ msgstr "Sélection de la couleur"
-
-#~ msgid "Coma bug"
-#~ msgstr "Bogue de « coma »"
-
-#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-#~ msgstr "le processeur a-t-il le bogue « coma » du Cyrix 6x86 ?"
-
-#~ msgid "Fdiv bug"
-#~ msgstr "Bogue de l'instruction FDIV"
-
-#~ msgid ""
-#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
-#~ "processor which did not achieve the required precision when performing a "
-#~ "Floating point DIVision (FDIV)"
-#~ msgstr ""
-#~ "Les premiers Pentium produits ont un bogue dans leur unité de calcul en "
-#~ "nombres flottants qui empêche d'avoir la précision nécessaire lors d'une "
-#~ "opération de division en flottants (FDIV)."
-
-#~ msgid "Is FPU present"
-#~ msgstr "Coprocesseur arithmétique présent"
-
-#~ msgid "yes means the processor has an arithmetic coprocessor"
-#~ msgstr "« oui » signifie qu'un coprocesseur arithmétique est présent"
+#~ msgid "Verbose bootsplash"
+#~ msgstr "Mode verbeux"
 
 #~ msgid "Whether the FPU has an irq vector"
 #~ msgstr "Est-ce que le FPU a un vecteur d'IRQ"
 
-#~ msgid ""
-#~ "yes means the arithmetic coprocessor has an exception vector attached"
-#~ msgstr "« oui » signifie que le coprocesseur possède un vecteur d'exception"
+#~ msgid "X coordinate of text box"
+#~ msgstr "Coordonnée x de la zone texte"
 
-#~ msgid "F00f bug"
-#~ msgstr "Bogue f00f"
+#~ msgid "X coordinate of the text"
+#~ msgstr "Coordonnée (x) du texte"
+
+#~ msgid "Y coordinate of text box"
+#~ msgstr "Coordonnée y de la zone de texte"
+
+#~ msgid "Y coordinate of the text"
+#~ msgstr "Coordonnée (y) du texte"
+
+#~ msgid "choose image"
+#~ msgstr "choisissez l'image"
 
 #~ msgid ""
 #~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
@@ -3738,21 +3964,15 @@ msgstr "Configuration de la langue et du pays"
 #~ "les premiers Pentium étaient bogués et se bloquaient pendant le décodage "
 #~ "du bytecode f00f"
 
-#~ msgid "Halt bug"
-#~ msgstr "Bogue de l'instruction halt"
+#~ msgid "saving Bootsplash theme..."
+#~ msgstr "sauvegarde du thème de démarrage..."
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "le processeur a-t-il le bogue « coma » du Cyrix 6x86 ?"
 
 #~ msgid ""
-#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
-#~ "mode after the \"halt\" instruction is used"
-#~ msgstr ""
-#~ "Certaines vieilles puces i486DX-100 ne peuvent pas redémarrer de façon "
-#~ "fiable après une instruction « halt »."
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "« oui » signifie que le coprocesseur possède un vecteur d'exception"
 
-#~ msgid "Bugs"
-#~ msgstr "Bogues"
-
-#~ msgid "FPU"
-#~ msgstr "Coprocesseur arithmétique"
-
-#~ msgid "Unknown/Others"
-#~ msgstr "Inconnus/Autres"
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "« oui » signifie qu'un coprocesseur arithmétique est présent"

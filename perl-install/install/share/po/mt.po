@@ -427,11 +427,10 @@ msgid "URL must start with ftp:// or http://"
 msgstr ""
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Qed nikkuntattja l-website ta' Mandriva Linux biex nikseb lista tal-mirja "
-"disponibbli"
+"Qed nikkuntattja l-website ta' %s biex nikseb lista tal-mirja disponibbli"
 
 #: any.pm:194
 #, fuzzy, c-format
@@ -744,9 +743,9 @@ msgid "An error occurred:"
 msgstr "Inqalgħet problema"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Inqalgħet problema"
+msgstr "Inqalgħet problema fatali: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -791,9 +790,9 @@ msgid "Entering step `%s'\n"
 msgstr "Dieħel fil-pass \"%s\"\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Qed ninstalla"
+msgstr "Installazzjoni %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -806,15 +805,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Is-sistema hija nieqsa mir-riżorsi. Jista' jkollok problema biex tinstalla \n"
-"l-Mandriva Linux. Jekk jiġri dan, ipprova installazzjoni testwali. Għal "
-"dan,\n"
+"l-%s. Jekk jiġri dan, ipprova installazzjoni testwali. Għal dan,\n"
 "agħfas F1 meta titla' s-CD, imbagħad ittajpja \"text\"."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
@@ -875,7 +873,7 @@ msgstr "Agħżel pakketti individwalment"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Xejn magħżul"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1220,9 +1218,9 @@ msgid "Bad file"
 msgstr "fajl veru"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1630,26 +1628,154 @@ msgid ""
 "Exit"
 msgstr "Oħroġ"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Installazzjoni Mandriva Linux %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Ambjent Grafiku"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr "Ambjent grafiku b' għażla ta' programmi u għodda faċli"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr "Ambjent grafiku b' għażla ta' programmi u għodda faċli"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr ""
+#~ "Programmi ta' divertiment: logħob tal-arcaDES, karti, strateġija eċċ"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Workstation"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Stazzjon GNOME"
+
+#, fuzzy
+#~ msgid "Moondrake Wizards"
+#~ msgstr "<b>Prodotti Moondrake</b>"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Liċenzja"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Programmi tal-uffiċċju: wordprocessors (LibreOffice Writer, Kword), "
+#~ "spreadsheet (LibreOffice Calc, Kspread) eċċ"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Kompjuter tal-Uffiċċju"
+
+#, fuzzy
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Server tad-database PostgreSQL jew MariaDB"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Server tad-database PostgreSQL jew MariaDB"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Qed nipprepara l-bootloader"
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Desktop"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, eċċ"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "Stazzjon KDE"
+
+#~ msgid "%d packages"
+#~ msgstr "%d pakketti"
+
+#, fuzzy
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "%d pakketti"
+#~ msgstr[1] "%d pakketti"
+
+#~ msgid "All"
+#~ msgstr "Kollha"
+
+#~ msgid "Automated"
+#~ msgstr "Awtomatizzata"
 
 #~ msgid "Bad package"
 #~ msgstr "Pakkett ħażin"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Networking"
+#~ msgid "Boot"
+#~ msgstr "Boot"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Aġġornamenti"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Ma nistax naċċessa moduli tal-kernel li jikkorrispondu għall-kernel (fajl "
+#~ "%s nieqes). Dan normalment ifisser li l-flopi mhuwiex sinkronizzat mal- "
+#~ "installazzjoni. Jekk jogħġbok oħloq flopi ġdida biex tistartja fuqha."
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Agħżel pakketti biex tinstalla"
+
+#~ msgid "Configure X"
+#~ msgstr "Ikkonfigura X"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Qed nikkuntattja l-mera biex nikseb lista tal-pakketti disponibbli"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Trid tuża \"aboot\"?"
+
+#, fuzzy
+#~ msgid "Downloading file %s..."
+#~ msgstr "Qed nibgħat fajls..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Problema fl-installazzjoni ta' aboot.\n"
+#~ "trid tipprova timponi l-installazzjoni anke jekk tħassar l-ewwel "
+#~ "partizzjoni?"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Qed nieħu stima"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Oħloq flopi awto-installa"
+
+#, fuzzy
+#~ msgid "IceWm Desktop"
+#~ msgstr "Desktop"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "Agħżel klassi ta' installazzjoni"
+
+#~ msgid "Language"
+#~ msgstr "Agħżel il-lingwa"
+
+#~ msgid "License"
+#~ msgstr "Liċenzja"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Installazzjoni Mandriva Linux %s"
+
+#~ msgid "Networking"
+#~ msgstr "Networking"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1659,8 +1785,42 @@ msgstr "Oħroġ"
 #~ "(kspread, gnumeric) eċċ"
 
 #, fuzzy
-#~ msgid "Downloading file %s..."
-#~ msgstr "Qed nibgħat fajls..."
+#~ msgid "Preparing boot images..."
+#~ msgstr "Qed nipprepara l-bootloader"
+
+#~ msgid "Replay"
+#~ msgstr "Replay"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Ikteb l-għażla ta' pakketti"
+
+#~ msgid "Select All"
+#~ msgstr "Kollox magħżul"
+
+#~ msgid "TV card"
+#~ msgstr "Kard TV"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "L-awto-installazzjoni tista' tkun totalment awtomatizzata\n"
+#~ "jekk trid. F'dak il-każ tieħu l-ħard disk kollu!!\n"
+#~ "(dan huwa ntenzjonat għal installazzjoni fuq kompjuter ġdid)\n"
+#~ "\n"
+#~ "Forsi tippreferi tuża \"replay\" tal-installazzjoni.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Ma stajtx nikkuntattja l-mera %s"
+
+#~ msgid "Users"
+#~ msgstr "Users"
+
+#~ msgid "Welcome"
+#~ msgstr "Merħba"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1687,110 +1847,22 @@ msgstr "Oħroġ"
 #~ "\n"
 #~ "Żgur li trid tinstalla dawn is-servers?\n"
 
-#, fuzzy
-#~ msgid "IceWm Desktop"
-#~ msgstr "Desktop"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Qed nikkuntattja l-mera biex nikseb lista tal-pakketti disponibbli"
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Ma stajtx nikkuntattja l-mera %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Oħloq flopi awto-installa"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "L-awto-installazzjoni tista' tkun totalment awtomatizzata\n"
-#~ "jekk trid. F'dak il-każ tieħu l-ħard disk kollu!!\n"
-#~ "(dan huwa ntenzjonat għal installazzjoni fuq kompjuter ġdid)\n"
-#~ "\n"
-#~ "Forsi tippreferi tuża \"replay\" tal-installazzjoni.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Replay"
-
-#~ msgid "Automated"
-#~ msgstr "Awtomatizzata"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Ikteb l-għażla ta' pakketti"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Trid tuża \"aboot\"?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Problema fl-installazzjoni ta' aboot.\n"
-#~ "trid tipprova timponi l-installazzjoni anke jekk tħassar l-ewwel "
-#~ "partizzjoni?"
-
-#~ msgid "All"
-#~ msgstr "Kollha"
-
-#~ msgid "TV card"
-#~ msgstr "Kard TV"
-
-#~ msgid "Boot"
-#~ msgstr "Boot"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Awtentikazzjoni"
 
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#, fuzzy
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "%d pakketti"
-#~ msgstr[1] "%d pakketti"
-
-#~ msgid "%d packages"
-#~ msgstr "%d pakketti"
-
-#~ msgid "Language"
-#~ msgstr "Agħżel il-lingwa"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Liċenzja"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "Agħżel klassi ta' installazzjoni"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "Qed nieħu stima"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Agħżel pakketti biex tinstalla"
-
-#~ msgid "Users"
-#~ msgstr "Users"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Networking"
 
-#~ msgid "Configure X"
-#~ msgstr "Ikkonfigura X"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Ma nistax naċċessa moduli tal-kernel li jikkorrispondu għall-kernel (fajl "
-#~ "%s nieqes). Dan normalment ifisser li l-flopi mhuwiex sinkronizzat mal- "
-#~ "installazzjoni. Jekk jogħġbok oħloq flopi ġdida biex tistartja fuqha."
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Aġġornamenti"

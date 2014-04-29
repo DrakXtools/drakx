@@ -536,17 +536,17 @@ msgid "Please choose a language to use"
 msgstr "请选择要使用的语言。"
 
 #: any.pm:1183
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
-"Mandriva Linux 可以支持多种语言。请选择您想要安装的语言。\n"
+"%s 可以支持多种语言。请选择您想要安装的语言。\n"
 "安装完成并重新启动系统后它们就可以使用。"
 
 #: any.pm:1186
-#, fuzzy, c-format
+#, c-format
 msgid "Multiple languages"
 msgstr "多语言"
 
@@ -1300,7 +1300,7 @@ msgid "Warning"
 msgstr "警告"
 
 #: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete this mount point?"
 msgstr "您确定想要删除此挂载点吗?"
 
@@ -1389,9 +1389,9 @@ msgid "Unknown"
 msgstr "未知"
 
 #: diskdrake/hd_gtk.pm:405
-#, fuzzy, c-format
+#, c-format
 msgid "Ext4"
-msgstr "退出"
+msgstr "Ext4"
 
 #: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
 #, c-format
@@ -1667,12 +1667,12 @@ msgid "Logical volume name "
 msgstr "逻辑卷标"
 
 #: diskdrake/interactive.pm:510
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypt partition"
-msgstr "加密算法"
+msgstr "加密分区"
 
 #: diskdrake/interactive.pm:511
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key "
 msgstr "加密密钥"
 
@@ -1687,9 +1687,9 @@ msgid "The encryption keys do not match"
 msgstr "两次加密密钥不符"
 
 #: diskdrake/interactive.pm:525
-#, fuzzy, c-format
+#, c-format
 msgid "Missing encryption key"
-msgstr "文件系统加密密钥"
+msgstr "缺少加密密钥"
 
 #: diskdrake/interactive.pm:545
 #, c-format
@@ -2626,14 +2626,14 @@ msgid "Which partition do you want to resize?"
 msgstr "您需要改变哪个分区的大小?"
 
 #: fs/partitioning_wizard.pm:180
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the %s installation."
 msgstr ""
 "您的 Microsoft Windows® 分区有太多碎片, 请重新启动, 进入 Microsoft Windows®, "
-"运行磁盘碎片整理程序, 然后重新开始安装 Mandriva Linux"
+"运行磁盘碎片整理程序, 然后重新开始安装 %s"
 
 #: fs/partitioning_wizard.pm:188
 #, c-format
@@ -2716,11 +2716,11 @@ msgid "Erase and use entire disk"
 msgstr "清除并使用整个磁盘"
 
 #: fs/partitioning_wizard.pm:243
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
-msgstr "您有不只一个硬盘, 您要在哪个上面安装 Linux?"
+msgstr "您有不只一个硬盘, 您要在哪个上面安装系统?"
 
 #: fs/partitioning_wizard.pm:251 fsedit.pm:634
 #, c-format
@@ -2747,9 +2747,9 @@ msgstr ""
 "做完之后, 不要忘记用“w”命令保存您的修改"
 
 #: fs/partitioning_wizard.pm:409
-#, fuzzy, c-format
+#, c-format
 msgid "Ext2/3/4"
-msgstr "Ext3"
+msgstr "Ext2/3/4"
 
 #: fs/partitioning_wizard.pm:439 fs/partitioning_wizard.pm:585
 #, c-format
@@ -2835,7 +2835,7 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "已经有一个分区的挂载点是 %s\n"
 
 #: fsedit.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
@@ -2846,14 +2846,13 @@ msgstr ""
 "所以, 请增加一个 /boot 分区。"
 
 #: fsedit.pm:440
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Metadata version unsupported for a boot partition. Please be sure to add a "
 "separate /boot partition."
 msgstr ""
-"您选择了把软件 RAID 分区作为根(/)。\n"
-"如果没有一个 /boot 分区, 各种启动引导程序都无法处理这种情况。\n"
-"所以, 请增加一个 /boot 分区。"
+"启动分区不支持元数据版本。\n"
+"所以, 请增加一个单独的 /boot 分区。"
 
 #: fsedit.pm:448
 #, fuzzy, c-format
@@ -2882,12 +2881,12 @@ msgstr ""
 "所以, 请增加一个 /boot 分区。"
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr "挂载点 %s 不能使用用加密的文件系统"
 
 #: fsedit.pm:469
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You cannot use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
@@ -3386,11 +3385,11 @@ msgstr "选择其它驱动"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:482
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -5180,19 +5179,19 @@ msgid "Installing driver for USB controller"
 msgstr "正在安装 USB 控制器的驱动程序"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller \"%s\""
-msgstr "正在安装火线控制器 %s 的驱动程序"
+msgstr "正在安装火线控制器 \"%s\" 的驱动程序"
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard disk drive controller \"%s\""
-msgstr "正在安装硬盘控制器 %s 的驱动程序"
+msgstr "正在安装硬盘控制器 \"%s\" 的驱动程序"
 
 #: modules/interactive.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller \"%s\""
-msgstr "正在安装以太网控制器 %s 的驱动程序"
+msgstr "正在安装以太网控制器 \"%s\" 的驱动程序"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -6607,7 +6606,7 @@ msgstr "互联网"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "联网"
 
 #: services.pm:161
 #, c-format
@@ -7007,11 +7006,244 @@ msgstr ""
 msgid "Installation failed"
 msgstr "安装失败"
 
+#~ msgid "1. License Agreement"
+#~ msgstr "1. 许可协议"
+
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. 有限担保"
+
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. GPL 许可协议和其它有关协议"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. 知识产权"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. 适用法律"
+
+#~ msgid ""
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
+#~ msgstr ""
+#~ "本软件产品的各个组件的所有权利属于它们各自的作者, 并受到所有可适用于软件程"
+#~ "序的知识产权和版权法律的保护。Moondrake 保留对本软件产品进行全面或部分的更"
+#~ "改或调整的权利, 不论采用任何方法, 不论出于任何目的。\n"
+#~ "“Moondrake”和相关的标志是 %s 的商标。"
+
+#, fuzzy
+#~ msgid "An NTP client/server"
+#~ msgstr "NTP 服务器"
+
+#~ msgid ""
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
+#~ msgstr "恭喜。安装完成了。请取出启动介质, 然后按 Enter 重新启动。"
+
+#~ msgid ""
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "要了解此版本 Moondrake 的修订, 请访问以下勘误表: \n"
+#~ "%s关于安装后如何配置您的系统, 请查看 Moondrake 官方用户手册。"
+
+#~ msgid ""
+#~ "If any portion of this agreement is held void, illegal or inapplicable by "
+#~ "a court judgment, this \n"
+#~ "portion is excluded from this contract. You remain bound by the other "
+#~ "applicable sections of the \n"
+#~ "agreement.\n"
+#~ "The terms and conditions of this License are governed by the Laws of "
+#~ "France.\n"
+#~ "All disputes on the terms of this license will preferably be settled out "
+#~ "of court. As a last \n"
+#~ "resort, the dispute will be referred to the appropriate Courts of Law of "
+#~ "Paris - France.\n"
+#~ "For any question on this document, please contact Moondrake."
+#~ msgstr ""
+#~ "如果本协议的任何部分被法院裁定为无效、非法或不适用, 该部分将被排除在本协议"
+#~ "之外。您仍然需要遵守本协议的其它可使用的部分。本协议的内容和条件受法国法律"
+#~ "管辖。有关本协议的任何争议最好在法庭外解决。作为最后的手段, 争议将被提交法"
+#~ "国巴黎适当的法院审理。对本文档有任何疑问, 请联系 Moondrake。"
+
+#~ msgid ""
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
+#~ msgstr "关于安装后如何配置您的系统, 请查看 Moondrake 官方用户手册。"
+
+#~ msgid "Introduction"
+#~ msgstr "简介"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "请事先备份您的数据"
+
+#~ msgid ""
+#~ "Please read this document carefully. This document is a license agreement "
+#~ "between you and  \n"
+#~ "Moondrake which applies to the Software Products.\n"
+#~ "By installing, duplicating or using any of the Software Products in any "
+#~ "manner, you explicitly \n"
+#~ "accept and fully agree to conform to the terms and conditions of this "
+#~ "License. \n"
+#~ "If you disagree with any portion of the License, you are not allowed to "
+#~ "install, duplicate or use \n"
+#~ "the Software Products. \n"
+#~ "Any attempt to install, duplicate or use the Software Products in a "
+#~ "manner which does not comply \n"
+#~ "with the terms and conditions of this License is void and will terminate "
+#~ "your rights under this \n"
+#~ "License. Upon termination of the License,  you must immediately destroy "
+#~ "all copies of the \n"
+#~ "Software Products."
+#~ msgstr ""
+#~ "请仔细阅读此文档。此文档是您与 Moondrake 之间关于本软件产品的一个许可协"
+#~ "议。如果您安装、复制或使用本软件产品, 即表明您接受并完全同意遵守本许可协议"
+#~ "的内容和条件。如果您不同意本许可协议中的任何部分, 您将无权安装、复制或使用"
+#~ "本软件产品任何试图不遵守本许可协议的内容和条件, 而安装、复制或使用本软件产"
+#~ "品的行为都是非法的, 并将导致本许可协议赋予您的各种权利立即作废, 根据许可协"
+#~ "议的条款, 您将必须立即销毁本软件产品的任何副本。"
+
+#~ msgid ""
+#~ "The Software Products and attached documentation are provided \"as is\", "
+#~ "with no warranty, to the \n"
+#~ "extent permitted by law.\n"
+#~ "Neither Moondrake nor its licensors or suppliers will, in any "
+#~ "circumstances and to the extent \n"
+#~ "permitted by law, be liable for any special, incidental, direct or "
+#~ "indirect damages whatsoever \n"
+#~ "(including without limitation damages for loss of business, interruption "
+#~ "of business, financial \n"
+#~ "loss, legal fees and penalties resulting from a court judgment, or any "
+#~ "other consequential loss) \n"
+#~ "arising out of  the use or inability to use the Software Products, even "
+#~ "if Moondrake or its \n"
+#~ "licensors or suppliers have been advised of the possibility or occurrence "
+#~ "of such damages.\n"
+#~ "\n"
+#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN "
+#~ "SOME COUNTRIES\n"
+#~ "\n"
+#~ "To the extent permitted by law, neither Moondrake nor its licensors, "
+#~ "suppliers or\n"
+#~ "distributors will, in any circumstances, be liable for any special, "
+#~ "incidental, direct or indirect \n"
+#~ "damages whatsoever (including without limitation damages for loss of "
+#~ "business, interruption of \n"
+#~ "business, financial loss, legal fees and penalties resulting from a court "
+#~ "judgment, or any \n"
+#~ "other consequential loss) arising out of the possession and use of "
+#~ "software components or \n"
+#~ "arising out of  downloading software components from one of Moondrake "
+#~ "sites which are \n"
+#~ "prohibited or restricted in some countries by local laws.\n"
+#~ "This limited liability applies to, but is not restricted to, the strong "
+#~ "cryptography components \n"
+#~ "included in the Software Products.\n"
+#~ "However, because some jurisdictions do not allow the exclusion or "
+#~ "limitation of liability for \n"
+#~ "consequential or incidental damages, the above limitation may not apply "
+#~ "to you."
+#~ msgstr ""
+#~ "本软件产品和附带的文档是一经发表即“不再修改”, 在法律允许的范围内没有任何担"
+#~ "保。在法律允许的范围内 Moondrake 对因使用或不能使用本软件产品而引起的特"
+#~ "定、偶然、直接、间接的无论任何损失(包括但不限于生意的丧失、生意的中断、财"
+#~ "务损失、因法院裁决产生的法律费用和处罚或其他因此产生的损失)将不承担责任, "
+#~ "即使 Moondrake 已经被告知有发生这种损失的可能性。\n"
+#~ "\n"
+#~ "在某些国家中关于拥有和使用被禁止的软件的有限责任\n"
+#~ "\n"
+#~ "在法律允许的范围内 Moondrake 或其分销者对因拥有或使用, 或从任何 Moondrake "
+#~ "的网站下载在某些国家中被当地法律禁止或限制的软件而引起的特定、偶然、直接、"
+#~ "间接的无论任何损失 (包括但不限于生意的丧失、生意的中断、财务损失、因法院裁"
+#~ "决产生的法律费用和处罚或其他因此产生的损失)将不承担责任。这种有限责任适用"
+#~ "但不限于本软件产品所包括的强大数据加密组件。"
+
+#, fuzzy
+#~ msgid ""
+#~ "The Software Products consist of components created by different persons "
+#~ "or entities.\n"
+#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
+#~ "the components which \n"
+#~ "they cover. Please read carefully the terms and conditions of the license "
+#~ "agreement for each component \n"
+#~ "before using any component. Any question on a component license should be "
+#~ "addressed to the component \n"
+#~ "licensor or supplier and not to Moondrake.\n"
+#~ "The programs developed by Moondrake are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by Moondrake is governed by \"%s\" License."
+#~ msgstr ""
+#~ "本软件产品由不同个人或组织所创作的各部分组成。这些许可协议大多允许您使用、"
+#~ "复制、修改或重新发表协议所覆盖的部分。使用这些软件之前, 请仔细阅读有关许可"
+#~ "协议的条款和条件。如果对任何部分的许可协议有疑问, 应该与该部分的作者联系, "
+#~ "Moondrake 无法解答这些问题。由 Moondrake 开发的各个程序受 GPL 许可协议保"
+#~ "护。由 Moondrake 创作的文档采用一个特别的许可协议。详情见有关的文档。"
+
+#~ msgid ""
+#~ "The operating system and the different components available in the "
+#~ "Moondrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software "
+#~ "Products include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation "
+#~ "related to the operating \n"
+#~ "system and the different components of the Moondrake distribution, and "
+#~ "any applications \n"
+#~ "distributed with these products provided by Moondrake's licensors or "
+#~ "suppliers."
+#~ msgstr ""
+#~ "Moondrake 发行版中提供的操作系统和各种程序在此后简称为“本软件产品”。软件产"
+#~ "品包括但不限于 Moondrake 许可商或供应商提供的与 Moondrake 发行版的操作系统"
+#~ "和各个部分有关的程序、方法、规则和文档。"
+
+#~ msgid ""
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
+#~ msgstr ""
+#~ "警告: 自由软件并不一定是没有专利的, 一些自由软件可能包含一些在您的国家享有"
+#~ "专利的成分。比方说, MP3 解码器在用作更多用途时可能需要许可证(请参看 "
+#~ "http://www.mp3licensing.com 以获得更多信息)。如果您对专利是否适用于您感到"
+#~ "疑惑, 请查看当地的法律。"
+
 #~ msgid "Clean /tmp at each boot"
 #~ msgstr "每次启动时清除 /tmp"
 
-#~ msgid "command %s missing"
-#~ msgstr "缺少命令 %s"
+#~ msgid "Enable 5.1 sound with Pulse Audio"
+#~ msgstr "启用 Pulse Audio 的5.1声道"
+
+#~ msgid "Enable user switching for audio applications"
+#~ msgstr "让用户能选择音频程序"
+
+#~ msgid "File sharing"
+#~ msgstr "文件共享"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "启动内核 2.2 的数据包过滤功能, 设置防火墙\n"
+#~ "以保护您的机器不受网络攻击。"
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr "没有密码不能使用“限定命令行选项”"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "限制命令行选项"
 
 #~ msgid ""
 #~ "The classic bug sound tester is to run the following commands:\n"
@@ -7054,37 +7286,17 @@ msgstr "安装失败"
 #~ "- “/sbin/fuser -v /dev/dsp”将会告诉您哪个程序使用声卡。\n"
 
 #~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
-#~ msgstr ""
-#~ "启动内核 2.2 的数据包过滤功能, 设置防火墙\n"
-#~ "以保护您的机器不受网络攻击。"
-
-#~ msgid "Enable 5.1 sound with Pulse Audio"
-#~ msgstr "启用 Pulse Audio 的5.1声道"
-
-#~ msgid "Enable user switching for audio applications"
-#~ msgstr "让用户能选择音频程序"
-
-#~ msgid "File sharing"
-#~ msgstr "文件共享"
-
-#~ msgid "Restrict command line options"
-#~ msgstr "限制命令行选项"
-
-#~ msgid "restrict"
-#~ msgstr "限制"
-
-#~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
-#~ msgstr "没有密码不能使用“限定命令行选项”"
-
-#~ msgid "Use an encrypted filesystem"
-#~ msgstr "使用加密的文件系统"
-
-#~ msgid ""
 #~ "To ensure data integrity after resizing the partition(s), \n"
 #~ "filesystem checks will be run on your next boot into Microsoft Windows®"
 #~ msgstr ""
 #~ "为了保证更改分区大小之后的数据完整性, 在您下次启动进入 Microsoft Windows® "
 #~ "时可能会自动运行文件系统检查。"
+
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr "使用加密的文件系统"
+
+#~ msgid "command %s missing"
+#~ msgstr "缺少命令 %s"
+
+#~ msgid "restrict"
+#~ msgstr "限制"

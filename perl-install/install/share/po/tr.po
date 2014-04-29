@@ -443,18 +443,14 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL bağlantı adresi ftp:// veya http:// ile başlamak zorundadır."
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr ""
-"Yansı adreslerini almak için Mandriva Linux web sayfasına bağlantı "
-"kuruluyor..."
+msgstr "Yansı adreslerini almak için %s web sayfasına bağlantı kuruluyor..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
-msgstr ""
-"Yansı adreslerini almak için Mandriva Linux web sayfasına bağlantı kurma "
-"başarısız"
+msgstr "Yansı adreslerini almak için %s web sayfasına bağlantı kurma başarısız"
 
 #: any.pm:204
 #, c-format
@@ -526,11 +522,13 @@ msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
 "free software drivers to work."
 msgstr ""
+"Makinenizdeki bazı donanımların özgür yazılım sürücülerinin çalışması için, "
+"özgür olmayan üretici yazılımına gereksinimi vardır."
 
 #: any.pm:351
 #, c-format
 msgid "You should enable \"%s\""
-msgstr ""
+msgstr "\"%s\" etkinleştirmelisiniz"
 
 #: any.pm:370
 #, c-format
@@ -547,7 +545,7 @@ msgstr ""
 #: any.pm:372
 #, c-format
 msgid "\"%s\" contains non free software.\n"
-msgstr ""
+msgstr "\"%s\" özgür olmayan yazılım içerir.\n"
 
 #: any.pm:373
 #, c-format
@@ -559,7 +557,7 @@ msgstr ""
 #: any.pm:377
 #, c-format
 msgid "Here you can enable more media if you want."
-msgstr ""
+msgstr "İsterseniz burada daha fazla ortam etkinleştirebilirsiniz."
 
 #: any.pm:456
 #, c-format
@@ -737,12 +735,13 @@ msgstr "belki"
 #: pkgs.pm:102
 #, c-format
 msgid "Getting package information from XML meta-data..."
-msgstr ""
+msgstr "XML meta-data'dan paket bilgileri alınıyor..."
 
 #: pkgs.pm:111
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"\"%s\" ortamı için xml bilgisi yok, yalnız %s paketi için kısmi bir sonuç,"
 
 #: pkgs.pm:119
 #, c-format
@@ -811,9 +810,9 @@ msgid "Entering step `%s'\n"
 msgstr "`%s' adımına başlanıyor\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Kurulum"
+msgstr "%s Kurulum %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -826,13 +825,13 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg sunucusunun başlaması yavaş. Lütfen bekleyin..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Sistem kaynaklarınız kısıtlı. Mandriva Linux'yi kurarken sorunlarınız\n"
+"Sistem kaynaklarınız kısıtlı. %s'yi kurarken sorunlarınız\n"
 "olabilir. Bu durum oluşursa, metin tabanlı kurulumu deneyebilirsiniz.\n"
 "Bunun için CDROM'dan açtıktan sonra `F1'e basın, ve komut satırına\n"
 "`text' yazın."
@@ -843,14 +842,14 @@ msgid "Media Selection"
 msgstr "Paket Grubu Seçimi"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Mandriva KDE Masaüstünü Kur"
+msgstr "%s KDE Masaüstünü Kur"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Mandriva GNOME Masaüstünü Kur"
+msgstr "%s GNOME Masaüstünü Kur"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -895,7 +894,7 @@ msgstr "Tek tek paket seçimi"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Tümünü Seçimden Çıkar"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1660,44 +1659,173 @@ msgid ""
 "Exit"
 msgstr "Çıkış"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux Kurulum %s"
+#~ msgid ""
+#~ "\"%s\" contains software that can not be distributed in every country due "
+#~ "to software patents."
+#~ msgstr ""
+#~ "\"%s\" yazılım patentlerinden dolayı her ülkede dağıtılamayan yazılım "
+#~ "içerir."
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Lisans"
+#~ "\"%s\" contains the various pieces of the systems and its applications"
+#~ msgstr "\"%s\" sistemlerin çeşitli parçalarını ve uygulamalarını içerir"
 
-#~ msgid "Mandriva 2011 Powerpack"
-#~ msgstr "Mandriva 2011 PowerPack"
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "GNOME temelli bir grafik ortamı"
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Masaüstünüz bir USB anahtarda"
+#~ msgid "A less developed lightweight fast graphical environment"
+#~ msgstr "Daha az gelişmiş, hafif ve hızlı grafiksel bir ortam"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "100%% açık kaynaklı Mandriva Linux Dağıtımı"
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Kullanıcı dostu uygulamalar ve masaüstü araçlarına sahip hafif bir görsel "
+#~ "bir ortam "
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Mandriva One ile Linux' u zahmetsizce keşfedin"
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr "Bunlara özgülenmiş hızlı ve hafif bir görsel ortam"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Eğlence programları: kart oyunları, taktik ve strateji, vb.."
+
+#~ msgid "Be Free!"
+#~ msgstr "Özgür olun!"
+
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Cinnamon İş istasyonu"
+
+#~ msgid "Core Release"
+#~ msgstr "Core Release"
+
+#~ msgid "Enlightenment e17 Desktop"
+#~ msgstr "Enlightenment e17 Masaüstü"
+
+#~ msgid "For developers!"
+#~ msgstr "Geliştiriciler için!"
+
+#~ msgid "For family!"
+#~ msgstr "Aile için!"
+
+#~ msgid "For kids"
+#~ msgstr "Çocuklar için"
+
+#~ msgid "Home entertainment"
+#~ msgstr "Ev eğlencesi"
+
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Kurulum aracı, halihazırda kurulu olan Moondrake sisteminizin güvenli "
+#~ "bir\n"
+#~ "biçimde %s sistemine yükseltilemeyeceğini algıladı.\n"
+#~ "\n"
+#~ "Önceki kurulumunuzun yerini alacak yeni bir kurulum önerilir.\n"
+#~ "\n"
+#~ "Uyarı: \"Yeni Kurulum\"u seçmeden önce tüm kişisel verilerinizi "
+#~ "yedeklemeniz\n"
+#~ "önerilir."
+
+#~ msgid ""
+#~ "It also contains firmwares needed for certain devices to operate (eg: "
+#~ "some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
+#~ msgstr ""
+#~ "Belirli aygıtların çalışması için gereken üretici yazılımlarını da içerir "
+#~ "(örn: bazı ATI/AMD ekran kartları, bazı ağ kartları, bazı RAID "
+#~ "kartları, ...)"
+
+#~ msgid ""
+#~ "It also contains software from \"%s\" rebuild with additional "
+#~ "capabilities."
+#~ msgstr "İlave yeteneklerle yenilenen \"%s\" adresinden yazılım da içerir."
+
+#~ msgid "Join Us!"
+#~ msgstr "Bize Katılın!"
+
+#~ msgid "MATE Workstation"
+#~ msgstr "MATE İş istasyonu"
+
+#~ msgid "Make it yours!"
+#~ msgstr "Sizin olsun!"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake Sihirbazları"
+
+#~ msgid "Nonfree Release"
+#~ msgstr "Nonfree Release"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Ofis programları: kelime işlemciler (LibreOffice Writer, Kword), "
+#~ "LibreOffice Calc, Kspread, pdf göstericiler, vb.."
+
+#~ msgid "Office tools"
+#~ msgstr "Ofis araçları"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL veya MariaDB veritabanı sunucusu"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL veya MariaDB veritabanı sunucusu"
+
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Yükseltme hazırlanıyor..."
+
+#~ msgid "RazorQT Desktop"
+#~ msgstr "RazorQT Masaüstü"
+
+#~ msgid "Tainted Release"
+#~ msgstr "Tainted Release"
+
+#~ msgid "Thank you!"
+#~ msgstr "Teşekkürler!"
+
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Bu araç \"%s\" ortamı için paket güncellemelerini sağlar"
+
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Fvwm, v.b."
+
+#~ msgid "XFCE Workstation"
+#~ msgstr "XFCE İş istasyonu"
+
+#~ msgid "Your choice!"
+#~ msgstr "Sizin seçiminiz!"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Tam bir Mandriva masaüstü ve desteği"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: herkesin gereksinimine göre dağıtımlar"
-
 #~ msgid "Bad package"
 #~ msgstr "Hatalı paket"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Ağ"
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Mandriva One ile Linux' u zahmetsizce keşfedin"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Güncellemeler"
+#~ msgid "For contributors"
+#~ msgstr "Katkıcılar için"
+
+#~ msgid "For people"
+#~ msgstr "Kişiler için"
+
+#~ msgid "For you"
+#~ msgstr "Sizin için"
+
+#~ msgid "Mandriva 2011 Powerpack"
+#~ msgstr "Mandriva 2011 PowerPack"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux Kurulum %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: herkesin gereksinimine göre dağıtımlar"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1705,6 +1833,21 @@ msgstr "Çıkış"
 #~ msgstr ""
 #~ "Ofis programları: kelime işlemciler (kword, abiword), kspread, gnumeric, "
 #~ "pdf göstericiler, vb.."
+
+#~ msgid "People!"
+#~ msgstr "Kişiler"
+
+#~ msgid "Proceed"
+#~ msgstr "Onayla"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "100%% açık kaynaklı Mandriva Linux Dağıtımı"
+
+#~ msgid "Welcome"
+#~ msgstr "Hoşgeldiniz"
+
+#~ msgid "Welcome!"
+#~ msgstr "Hoşgeldiniz!"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1725,8 +1868,23 @@ msgstr "Çıkış"
 #~ " lütfen sisteminizi yeniden başlatarak Mandriva güncelleme programcığını "
 #~ "kullanmak  suretiyle yükseltme yapın."
 
-#~ msgid "Proceed"
-#~ msgstr "Onayla"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Masaüstünüz bir USB anahtarda"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Lisans"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Ağ"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Güncellemeler"
 
 #~ msgid "retrieval of [%s] failed"
 #~ msgstr "[%s] getirilemedi"

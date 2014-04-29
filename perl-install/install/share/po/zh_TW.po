@@ -443,14 +443,14 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL 開頭必須是 ftp:// 或 http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr "正在連結到 Mandriva Linux 網站查詢可用的映射站台..."
+msgstr "請到 %s 網站取得映射站台清單..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
-msgstr "無法連結到 Mandriva Linux 網站取得可用的映射站台"
+msgstr "到 %s 網站取得映射站台清單失敗"
 
 #: any.pm:204
 #, c-format
@@ -519,12 +519,12 @@ msgstr ""
 msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
 "free software drivers to work."
-msgstr ""
+msgstr "您的機器上的某些硬體需要非自由的軔體才能夠讓自由的驅動程式運作。"
 
 #: any.pm:351
 #, c-format
 msgid "You should enable \"%s\""
-msgstr ""
+msgstr "您應該啟用 \"%s\""
 
 #: any.pm:370
 #, c-format
@@ -541,7 +541,7 @@ msgstr ""
 #: any.pm:372
 #, c-format
 msgid "\"%s\" contains non free software.\n"
-msgstr ""
+msgstr "\"%s\" 包含非自由的軟體套件。\n"
 
 #: any.pm:373
 #, c-format
@@ -553,7 +553,7 @@ msgstr ""
 #: any.pm:377
 #, c-format
 msgid "Here you can enable more media if you want."
-msgstr ""
+msgstr "您可以在這裡啟用更多媒體。"
 
 #: any.pm:456
 #, c-format
@@ -731,17 +731,17 @@ msgstr "或許"
 #: pkgs.pm:102
 #, c-format
 msgid "Getting package information from XML meta-data..."
-msgstr ""
+msgstr "正在從 XML 資料中取得套件資訊..."
 
 #: pkgs.pm:111
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
-msgstr ""
+msgstr "\"%s\" 媒體沒有 XML 資訊，所以 %s 套件只會有部份內容可用"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "沒有描述"
 
 #: pkgs.pm:280
 #, c-format
@@ -758,14 +758,14 @@ msgid "An error occurred:"
 msgstr "發生一個錯誤："
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "發生一個錯誤："
+msgstr "發生了一個致命的錯誤：%s。"
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "不要再詢問"
 
 #: pkgs.pm:894
 #, c-format
@@ -804,9 +804,9 @@ msgid "Entering step `%s'\n"
 msgstr "進入步驟 `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "安裝"
+msgstr "%s 安裝 %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -819,15 +819,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg 伺服器的啟動較為緩慢。請稍候..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"您的系統資源太少，可能會在安裝 Mandriva Linux 的過程中遇到問題。\n"
-"如果真的發生問題，您或許可以改用文字模式的安裝方式來進行。\n"
-"要如此作的話，請在光碟開機時按下 `F1'，然後輸入 `text'。"
+"您的系統資源不足，可能在安裝 %s 時會發生問題。如果真的發生問題，您可以試著改"
+"用文字介面安裝。只要在用光碟開機後的選單中按下 F1，並輸入 text 即可。"
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
 #, c-format
@@ -835,14 +834,14 @@ msgid "Media Selection"
 msgstr "選擇安裝媒介"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "安裝 Mandriva KDE 桌面"
+msgstr "安裝 %s KDE 桌面系統"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "安裝 Mandriva GNOME 桌面"
+msgstr "安裝 %s GNOME 桌面系統"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -887,7 +886,7 @@ msgstr "單一套件選取"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "取消選取所有項目"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1457,9 +1456,9 @@ msgid "Preparing bootloader..."
 msgstr "正在準備開機載入程式..."
 
 #: steps_interactive.pm:1050
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing initial startup program..."
-msgstr "正在準備安裝"
+msgstr "正在準備初始化啟動程式..."
 
 #: steps_interactive.pm:1051
 #, c-format
@@ -1635,31 +1634,140 @@ msgid ""
 "Exit"
 msgstr "離開"
 
+#~ msgid ""
+#~ "\"%s\" contains software that can not be distributed in every country due "
+#~ "to software patents."
+#~ msgstr "\"%s\" 包含因為軟體專利而無法在所有國家散佈的軟體套件。"
+
+#~ msgid ""
+#~ "\"%s\" contains the various pieces of the systems and its applications"
+#~ msgstr "\"%s\" 包含各種系統元件和應用程式"
+
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "圖形環境"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr "包含友善的應用程式、桌面軟體的圖型化使用環境"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr "包含友善的應用程式、桌面軟體的輕量級圖型化使用環境"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "娛樂的一些程式：紙牌、益智、動作、策略等"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "工作站"
+
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "安裝器偵測到您所安裝的 Moondrake Linux 系統無法安全地更新到 %s。\n"
+#~ "\n"
+#~ "建議您重新安裝，而不要用升級的。\n"
+#~ "\n"
+#~ "警告：在您選擇「新安裝」之前，您應該備份您所有的個人資料。"
+
+#~ msgid ""
+#~ "It also contains firmwares needed for certain devices to operate (eg: "
+#~ "some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
+#~ msgstr ""
+#~ "它也包含某些裝置運作時所需要的軔體(如：某些 ATI/AMD 顯示卡、網路卡、RAID介"
+#~ "面卡...)"
+
+#~ msgid ""
+#~ "It also contains software from \"%s\" rebuild with additional "
+#~ "capabilities."
+#~ msgstr "它也包含了 \"%s\" 中以不同方式編譯的軟體套件。"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME 工作站"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake 精靈"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "辦公軟體：文書處理軟體 (LibreOffice Writer、Kword)、試算表 (OpenOffice."
+#~ "org Calc、Kspread)、PDF 檢視器等等"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "辦公軟體平台"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL 與 MariaDB 資料庫伺服器"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL、MariaDB 資料庫"
+
+#~ msgid "Preparing upgrade..."
+#~ msgstr "正在準備升級..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "自訂桌面"
+
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "這個媒體包含 \"%s\" 媒體的套件更新"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker、Enlightenment、Fvwm 等"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE 工作站"
+
+#~ msgid "A full Mandriva Linux desktop, with support"
+#~ msgstr "完整的 Mandriva Linux 桌面，並有支援"
+
+#~ msgid "Bad package"
+#~ msgstr "壞掉的套件"
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "用 Mandriva One 輕鬆探索 Linux"
+
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linux 安裝程式 %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva：可以符合所有使用者需求的套件"
+
+#~ msgid "Moondrake, the new Linux distribution"
+#~ msgstr "Moondrake，新的 Linux 套件"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "正在準備開機載入程式..."
+
+#~ msgid "Select All"
+#~ msgstr "選取所有項目"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "百分之百開放源碼 Mandriva Linux 套件"
+
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "在 USB 上的桌面"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "License"
 #~ msgstr "授權"
-
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "在 USB 上的桌面"
-
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "百分之百開放源碼 Mandriva Linux 套件"
-
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "用 Mandriva One 輕鬆探索 Linux"
-
-#~ msgid "A full Mandriva Linux desktop, with support"
-#~ msgstr "完整的 Mandriva Linux 桌面，並有支援"
-
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva：可以符合所有使用者需求的套件"
-
-#~ msgid "Bad package"
-#~ msgstr "壞掉的套件"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"

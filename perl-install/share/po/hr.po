@@ -1578,7 +1578,7 @@ msgstr "Detaljne informacije"
 #: diskdrake/interactive.pm:407
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "Pogled"
 
 #: diskdrake/interactive.pm:412 diskdrake/interactive.pm:828
 #, c-format
@@ -2901,7 +2901,7 @@ msgstr ""
 "Zato budite pažljivi da dodate /boot particiju"
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr ""
 "Ne možete koristiti enkriptirani datotečni sustav za točku montiranja %s"
@@ -3389,7 +3389,7 @@ msgstr "Odaberite nametnuti upravljački program"
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -6682,7 +6682,7 @@ msgstr "Internet"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "Mreža"
 
 #: services.pm:161
 #, c-format
@@ -7029,115 +7029,266 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Instalacija nije uspjela"
 
-#~ msgid "Clean /tmp at each boot"
-#~ msgstr "Očisti /tmp na svakom podizanju"
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Licencni Dogovor"
+
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Ograničeno Jamstvo"
+
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. GPL Licenca i slične licence"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Prava na intelektualno vlasništvo"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Državni zakoni"
 
 #~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
 #~ msgstr ""
-#~ "Pokreće paketno filtriranje za Linux kernel 2.2 serije, za postavljanje\n"
-#~ "vatrozida za zaštitu vašeg računala od mrežnih napada."
-
-#~ msgid "File sharing"
-#~ msgstr "Dijeljenje datoteka"
-
-#~ msgid "Restrict command line options"
-#~ msgstr "Ograničene opcije na komandnoj liniji"
-
-#~ msgid "restrict"
-#~ msgstr "ograniči"
-
-#~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
-#~ msgstr ""
-#~ "Postavka ``Ograničene opcije na komandnoj liniji'' nema svrhe ako ne "
-#~ "unesete lozinku"
+#~ "Sva prava komponenti Software-skog Produkta pripada njihovim uvaženim "
+#~ "autorima i \n"
+#~ "zaštićeni su intelektualnim vlasništvom i autorskim zakonima primjenjivim "
+#~ "na software-ske programe.\n"
+#~ "Moondrake zadržava svoje pravo za izmjenu ili prilagođavanje Software-"
+#~ "skog Produkta, kao cijelinu ili u\n"
+#~ "dijelovima, u svim slučajevima za sve namjene.\n"
+#~ "\"Moondrake\" i pripadajući logoi su zaštićeni prodajni znaci %s"
 
 #, fuzzy
-#~ msgid "Use an encrypted filesystem"
-#~ msgstr ""
-#~ "Ne možete koristiti enkriptirani datotečni sustav za točku montiranja %s"
-
-#~ msgid "Use the Microsoft Windows® partition for loopback"
-#~ msgstr "Koristi Microsoft Windows® particiju za loopback"
-
-#~ msgid "Which partition do you want to use for Linux4Win?"
-#~ msgstr "Koju particiju želite koristiti za Linux4Win?"
-
-#~ msgid "Choose the sizes"
-#~ msgstr "Odaberite veličinu"
-
-#~ msgid "Root partition size in MB: "
-#~ msgstr "Veličina korijenske particije u MB: "
-
-#~ msgid "Swap partition size in MB: "
-#~ msgstr "Veličina swap particiju u MB: "
+#~ msgid "An NTP client/server"
+#~ msgstr "NTP Poslužitelj"
 
 #, fuzzy
 #~ msgid ""
-#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
 #~ msgstr ""
-#~ "Nema FAT particije za mjenjanje veličine ili za korištenje loopback-a "
-#~ "(ili nema dovoljno prostora)"
+#~ "Čestitam, instalacija je kompletna.\n"
+#~ "Uklonite boot medij i pritisnite return za ponovno podizanje."
 
 #~ msgid ""
-#~ "The FAT resizer is unable to handle your partition, \n"
-#~ "the following error occurred: %s"
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
 #~ msgstr ""
-#~ "Program koji mjenja veličinu FAT-a ne može rukovati vašom particijom, \n"
-#~ "slijedeća greška se dogodila: %s"
-
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "Molim prvo se odjavite te pritisnite Ctrl-Alt-BackSpace"
-
-#~ msgid "Welcome To Crackers"
-#~ msgstr "Dobrodošli Crackeri"
-
-#~ msgid "Poor"
-#~ msgstr "Slab"
-
-#~ msgid "High"
-#~ msgstr "Visok"
-
-#~ msgid "Higher"
-#~ msgstr "Viši"
-
-#~ msgid "Paranoid"
-#~ msgstr "Paranoidan"
+#~ "Za informacije o popravcima koji su raspoloživi za ovo izdanje Moondrake-"
+#~ "a,\n"
+#~ "konzultirajte Eratu raspoloživu na\n"
+#~ "%s"
 
 #~ msgid ""
-#~ "This level is to be used with care. It makes your system more easy to "
-#~ "use,\n"
-#~ "but very sensitive. It must not be used for a machine connected to "
-#~ "others\n"
-#~ "or to the Internet. There is no password access."
+#~ "If any portion of this agreement is held void, illegal or inapplicable by "
+#~ "a court judgment, this \n"
+#~ "portion is excluded from this contract. You remain bound by the other "
+#~ "applicable sections of the \n"
+#~ "agreement.\n"
+#~ "The terms and conditions of this License are governed by the Laws of "
+#~ "France.\n"
+#~ "All disputes on the terms of this license will preferably be settled out "
+#~ "of court. As a last \n"
+#~ "resort, the dispute will be referred to the appropriate Courts of Law of "
+#~ "Paris - France.\n"
+#~ "For any question on this document, please contact Moondrake."
 #~ msgstr ""
-#~ "Ova razina se treba koristiti sa pažnjom. Ona čini vaš sustav mnogo "
-#~ "lakšim za korištenje,\n"
-#~ "ali vrlo osjetljiv: ne smije biti korišten za računala koja su povezana u "
-#~ "mreži ili na Internet. Naime, nema lozinke za pristup."
+#~ "Ukoliko neki dio ovog dogovora govori ništa, ilegalan ili neprikladan "
+#~ "sudstvu, taj \n"
+#~ "dio može se isključiti iz ovog ugovora. Ali ostajete obveznu drugim "
+#~ "primjenjivim sekcijama\n"
+#~ "ugovora.\n"
+#~ "Za stavke i uvjete ove Licence je nadležan zakon Francuske.\n"
+#~ "Sve sporove oko stavaka licence će preferirano biti uređeno sudom. Kao "
+#~ "zadnji \n"
+#~ "izlaz, spor će biti predan odgovarajućem Sudu u Parizu - Francuska.\n"
+#~ "Za bilo kakva pitanja o ovom dokumentu, molimo kontaktirajte Moondrake S."
+#~ "A."
 
 #~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
 #~ msgstr ""
-#~ "Lozinke su sada uključene međutim još ne preporučam korištenje ovog "
-#~ "računala u mrežnom okolišu."
+#~ "Informacije o konfiguriranju vašeg sustava je raspoloživo u poslije\n"
+#~ "instalacijskom poglavlju od Official Moondrake User's Guide."
+
+#~ msgid "Introduction"
+#~ msgstr "Uvod"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "Prvo napravite backup podataka"
 
 #~ msgid ""
-#~ "There are already some restrictions, and more automatic checks are run "
-#~ "every night."
+#~ "Please read this document carefully. This document is a license agreement "
+#~ "between you and  \n"
+#~ "Moondrake which applies to the Software Products.\n"
+#~ "By installing, duplicating or using any of the Software Products in any "
+#~ "manner, you explicitly \n"
+#~ "accept and fully agree to conform to the terms and conditions of this "
+#~ "License. \n"
+#~ "If you disagree with any portion of the License, you are not allowed to "
+#~ "install, duplicate or use \n"
+#~ "the Software Products. \n"
+#~ "Any attempt to install, duplicate or use the Software Products in a "
+#~ "manner which does not comply \n"
+#~ "with the terms and conditions of this License is void and will terminate "
+#~ "your rights under this \n"
+#~ "License. Upon termination of the License,  you must immediately destroy "
+#~ "all copies of the \n"
+#~ "Software Products."
 #~ msgstr ""
-#~ "Već postoje neka ograničenja i više automatskih provjera se pokreće svake "
-#~ "noći."
+#~ "Molimo pažljivo pročitajte ovaj dokument. Ovaj dokument je licenci "
+#~ "dogovor između vas i \n"
+#~ "Moondrake koji se primjenjuje na Software-ske produkte.\n"
+#~ "Instaliranjem, dupliciranjem ili korištenjem Software-skih Produkata u "
+#~ "bilo kojem obliku,eksplicitno \n"
+#~ "prihvaćate i potpuno se slažete da ćete prihvatiti stavke i uvjete ove "
+#~ "Licence. \n"
+#~ "Ukoliko se ne slažete sa bilo kojim dijelom licence, nije vam dozvoljeno "
+#~ "instalirati, duplicirati ili koristiti \n"
+#~ "Software-ski produkt. \n"
+#~ "Svaki pokušaj instalacije, dupliciranja ili korištenja Software-skog "
+#~ "Produkta u obliku kojem ne priliči \n"
+#~ "sa stavkama i uvjetima ove licence je prazno i uništiti će vaša prava pod "
+#~ "ovom\n"
+#~ "Licencom. Uslijed uništenja licence, morate odmah unišititi sve kopije \n"
+#~ "Software-skog Produkta."
 
 #~ msgid ""
-#~ "This is similar to the previous level, but the system is entirely closed "
-#~ "and security features are at their maximum."
+#~ "The Software Products and attached documentation are provided \"as is\", "
+#~ "with no warranty, to the \n"
+#~ "extent permitted by law.\n"
+#~ "Neither Moondrake nor its licensors or suppliers will, in any "
+#~ "circumstances and to the extent \n"
+#~ "permitted by law, be liable for any special, incidental, direct or "
+#~ "indirect damages whatsoever \n"
+#~ "(including without limitation damages for loss of business, interruption "
+#~ "of business, financial \n"
+#~ "loss, legal fees and penalties resulting from a court judgment, or any "
+#~ "other consequential loss) \n"
+#~ "arising out of  the use or inability to use the Software Products, even "
+#~ "if Moondrake or its \n"
+#~ "licensors or suppliers have been advised of the possibility or occurrence "
+#~ "of such damages.\n"
+#~ "\n"
+#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN "
+#~ "SOME COUNTRIES\n"
+#~ "\n"
+#~ "To the extent permitted by law, neither Moondrake nor its licensors, "
+#~ "suppliers or\n"
+#~ "distributors will, in any circumstances, be liable for any special, "
+#~ "incidental, direct or indirect \n"
+#~ "damages whatsoever (including without limitation damages for loss of "
+#~ "business, interruption of \n"
+#~ "business, financial loss, legal fees and penalties resulting from a court "
+#~ "judgment, or any \n"
+#~ "other consequential loss) arising out of the possession and use of "
+#~ "software components or \n"
+#~ "arising out of  downloading software components from one of Moondrake "
+#~ "sites which are \n"
+#~ "prohibited or restricted in some countries by local laws.\n"
+#~ "This limited liability applies to, but is not restricted to, the strong "
+#~ "cryptography components \n"
+#~ "included in the Software Products.\n"
+#~ "However, because some jurisdictions do not allow the exclusion or "
+#~ "limitation of liability for \n"
+#~ "consequential or incidental damages, the above limitation may not apply "
+#~ "to you."
 #~ msgstr ""
-#~ "Temeljeno na prijašnjoj razini, ali je sustav potpuno zatvoren.\n"
-#~ "Sigurnosne značajke su na maksimumu."
+#~ "Software-ski Produkt i pripadajuća dokumentacija je pružena \"kako je\", "
+#~ "bez jamstva, do \n"
+#~ "mjere dozvoljene zakonom.\n"
+#~ "Moondrake neće, u bilo kojim slučajevima i do te mjere dozvoljene "
+#~ "zakonom, biti odgovaran za bilo kakvu specijalnu,\n"
+#~ "nesretnu, direktnu ili indirektnu štetu bilo kakvu (uključujući granice "
+#~ "štete od gubitka\n"
+#~ "posla, prestanka posla, financijskih gubitaka, legalnih plaćanja i kazni "
+#~ "posljedica sudskih \n"
+#~ "presuda, ili bilo kakvih drugih posljedica gubitka) što je posljedica "
+#~ "korištenja ili nemogućnosti korištenja Software-skog \n"
+#~ "Produkta, iako je Moondrake bio upozoren od mogućnosti takve \n"
+#~ "štete.\n"
+#~ "\n"
+#~ "OGRANIČENA ODGOVORNOST POVEZANA SA POSJEDOVANJEM ILI KORIŠTENJEM "
+#~ "ZABRANJENOG SOFTWARE-A U NEKIM ZEMLJAMA\n"
+#~ "\n"
+#~ "Do granice dozvoljene zakonom, Moondrake ili njegovi distributori neće, u "
+#~ "bilo kakvim slučajevima, biti \n"
+#~ "odgovaran za bilo kakvu specijalnu, nesretnu, direktnu ili indirektnu "
+#~ "štetu bilo kako (uključujući \n"
+#~ "ograničene štete zbog gubitka posla, prekida posla, financijskog gubitka, "
+#~ "legalnih plaćanja \n"
+#~ "i kazni posljedica sudskih presuda, ili bilo kakvih drugih "
+#~ "posljedicagubitka) što je posljedica \n"
+#~ "posjedovanja ili korištenja software-skih komponenti ili kao posljedica "
+#~ "skidanja (download-a) software-skih komponenti \n"
+#~ "sa jednog od Moondrake site-ova koja su zabranjena ili ograničena u nekim "
+#~ "zemljama po lokalnim zakonima.\n"
+#~ "Ova ograničena odgovornost se primjenjuje na, ali nije ograničena, jake "
+#~ "kriptografske komponente \n"
+#~ "uključene u Software-ski Produkt."
+
+#, fuzzy
+#~ msgid ""
+#~ "The Software Products consist of components created by different persons "
+#~ "or entities.\n"
+#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
+#~ "the components which \n"
+#~ "they cover. Please read carefully the terms and conditions of the license "
+#~ "agreement for each component \n"
+#~ "before using any component. Any question on a component license should be "
+#~ "addressed to the component \n"
+#~ "licensor or supplier and not to Moondrake.\n"
+#~ "The programs developed by Moondrake are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by Moondrake is governed by \"%s\" License."
+#~ msgstr ""
+#~ "Software-ski Prodkt se sastoji od komponenti napravljenih od raznih ljudi "
+#~ "ili entiteta.  Veliki \n"
+#~ "broj tih komponenti je pokriveno pod stavkama i uvjetima GNU Opće Javne \n"
+#~ "Licence, u daljnjem tekstu zvana \"GPL\", ili  sličnih licenci. Veliki "
+#~ "broj tih licenci dozvoljava vam korištenje, \n"
+#~ "dupliciranje, prilagođavanje ili redistribuciju komponenti koju ona "
+#~ "pokriva. Molimo pročitajte pažljivo stavke \n"
+#~ "i uvjete licencnog dogovora svake komponente prije korištenja bilo koje "
+#~ "komponente. Bilo koje pitanje \n"
+#~ "o licenci komponente trebao bi biti adresiran autoru komponente a ne "
+#~ "Moondrake-u.\n"
+#~ "Programe razvijeni od strane Moondrake su pokriveni GPL licencom. "
+#~ "Dokumentacija napisana \n"
+#~ "od strane Moondrake je pokrivena specifičnom licencom. Molimo pogledajte "
+#~ "dokumentaciju za \n"
+#~ "više detalja."
+
+#~ msgid ""
+#~ "The operating system and the different components available in the "
+#~ "Moondrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software "
+#~ "Products include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation "
+#~ "related to the operating \n"
+#~ "system and the different components of the Moondrake distribution, and "
+#~ "any applications \n"
+#~ "distributed with these products provided by Moondrake's licensors or "
+#~ "suppliers."
+#~ msgstr ""
+#~ "Operativni sustav i njegove različite komponente raspoložive u Moondrake "
+#~ "distribuciji \n"
+#~ "će se zvati \"Software-ski Produkti\" daljnje u tekstu. Software-ski "
+#~ "Produkti  uključuju, ali nisu \n"
+#~ "ograničeni na, skup programa, metoda, zakona i dokumentacija vezanih uz "
+#~ "operativni\n"
+#~ "sustav i različite komponente Moondrake distribucije."
 
 #~ msgid ""
 #~ "\n"
@@ -7200,160 +7351,16 @@ msgstr "Instalacija nije uspjela"
 #~ "uvaženim autorima i zaštićeni su intelektualnim vlasništvom i \n"
 #~ "autorskim zakonima primjenjivim na software-ske programe.\n"
 
-#~ msgid "Use libsafe for servers"
-#~ msgstr "Koristi libsafe za poslužitelje"
+#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 
 #~ msgid ""
 #~ "A library which defends against buffer overflow and format string attacks."
 #~ msgstr ""
 #~ "Biblioteka koja štiti od prekoračenja spremnika i format string napada."
 
-#~ msgid "LILO/grub Installation"
-#~ msgstr "LILO/grub instalacija"
-
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "Precizna veličina RAMa (pronađeno %d MB)"
-
-#~ msgid "Give the ram size in MB"
-#~ msgstr "Upišite veličinu RAM u Mb"
-
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "Ukoliko želite koristiti aboot morate ostaviti dovoljno mjesta (npr. 2048 "
-#~ "sektora) na\n"
-#~ "početku diska"
-
-#~ msgid "Security level"
-#~ msgstr "Sigurnosna razina"
-
-#~ msgid "Expand Tree"
-#~ msgstr "Proširi stablo"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "Sažmi stablo"
-
-#~ msgid "Toggle between flat and group sorted"
-#~ msgstr "Prebaci između ravno i grupno sortiranog"
-
-#~ msgid "Choose action"
-#~ msgstr "Izaberite akciju"
-
-#, fuzzy
-#~ msgid "Active Directory with SFU"
-#~ msgstr "Povrati sve pohrane"
-
-#, fuzzy
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Povrati sve pohrane"
-
-#, fuzzy
-#~ msgid "Active Directory with SFU:"
-#~ msgstr "Povrati sve pohrane"
-
-#, fuzzy
-#~ msgid "Active Directory with Winbind:"
-#~ msgstr "Povrati sve pohrane"
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "LDAP Autentifikacija"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#, fuzzy
-#~ msgid "Authentication Active Directory"
-#~ msgstr "Provjera autentičnosti"
-
-#, fuzzy
-#~ msgid "LDAP users database"
-#~ msgstr "Baze"
-
-#~ msgid "Authentication NIS"
-#~ msgstr "NIS Autentifikacija"
-
-#, fuzzy
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "LDAP Autentifikacija"
-
-#~ msgid "Undo"
-#~ msgstr "Vrati"
-
-#~ msgid "Save partition table"
-#~ msgstr "Spremi particijsku tabelu"
-
-#~ msgid "Restore partition table"
-#~ msgstr "Vrati particijsku tabelu"
-
-#~ msgid ""
-#~ "The backup partition table has not the same size\n"
-#~ "Still continue?"
-#~ msgstr ""
-#~ "Backup particijske tablice nema istu veličinu\n"
-#~ "Da ipak nastavim?"
-
-#~ msgid "Info: "
-#~ msgstr "Info: "
-
-#, fuzzy
-#~ msgid "Unknown driver"
-#~ msgstr "Nepoznati model"
-
-#~ msgid "Error reading file %s"
-#~ msgstr "Greška prilikom čitanja datoteke %s"
-
-#~ msgid "Restoring from file %s failed: %s"
-#~ msgstr "Vraćanje iz datoteke %s nije uspjelo: %s"
-
-#~ msgid "Bad backup file"
-#~ msgstr "Loša backup datoteka"
-
-#~ msgid "Error writing to file %s"
-#~ msgstr "Greška prilikom pisanja u datoteku %s"
-
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr ""
-#~ "Greška:  \"%s\" upravljački program za vašu zvučnu karticu nije prisutan "
-#~ "na listi"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "Journalised FS"
-#~ msgstr "Journalised FS"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr ""
-#~ "Pokreće X Pismovni Poslužitelj (ovo je nužno za Xorg da se pokrene)."
-
-#~ msgid "Add user"
-#~ msgstr "Dodaj korisnika"
-
 #~ msgid "Accept user"
 #~ msgstr "Prihvati korisnika"
-
-#, fuzzy
-#~ msgid ""
-#~ "Do not update directory inode access times on this filesystem\n"
-#~ "(e.g, for faster access on the news spool to speed up news servers)."
-#~ msgstr ""
-#~ "Ne osvježavaj vremenski pristup inodeu na ovom datotečnom sustavu\n"
-#~ "(na primjer za brži pristup na odlagalište diskusija da se ubrzaju "
-#~ "poslužitelji vijesti (newsa))"
-
-#~ msgid "Rescue partition table"
-#~ msgstr "Spasi particijsku tabelu"
-
-#~ msgid "Removable media automounting"
-#~ msgstr "Automatsko montiranje prenosivog medija"
-
-#~ msgid "Trying to rescue partition table"
-#~ msgstr "Pokušavam spasiti particijsku tablicu"
 
 #~ msgid "Accept/Refuse bogus IPv4 error messages."
 #~ msgstr "Prihvati/odbij lažne IPv4 poruke o greškama"
@@ -7365,8 +7372,65 @@ msgstr "Instalacija nije uspjela"
 #~ msgstr "Prihvati/Odbij icmp echo."
 
 #, fuzzy
+#~ msgid "Active Directory with SFU"
+#~ msgstr "Povrati sve pohrane"
+
+#, fuzzy
+#~ msgid "Active Directory with SFU:"
+#~ msgstr "Povrati sve pohrane"
+
+#, fuzzy
+#~ msgid "Active Directory with Winbind"
+#~ msgstr "Povrati sve pohrane"
+
+#, fuzzy
+#~ msgid "Active Directory with Winbind:"
+#~ msgstr "Povrati sve pohrane"
+
+#~ msgid "Add user"
+#~ msgstr "Dodaj korisnika"
+
+#, fuzzy
 #~ msgid "Allow/Forbid remote root login."
 #~ msgstr "(na ovom računalu)"
+
+#, fuzzy
+#~ msgid "Authentication Active Directory"
+#~ msgstr "Provjera autentičnosti"
+
+#~ msgid "Authentication LDAP"
+#~ msgstr "LDAP Autentifikacija"
+
+#~ msgid "Authentication NIS"
+#~ msgstr "NIS Autentifikacija"
+
+#, fuzzy
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "LDAP Autentifikacija"
+
+#~ msgid "Bad backup file"
+#~ msgstr "Loša backup datoteka"
+
+#~ msgid "Choose action"
+#~ msgstr "Izaberite akciju"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Odaberite veličinu"
+
+#~ msgid "Clean /tmp at each boot"
+#~ msgstr "Očisti /tmp na svakom podizanju"
+
+#~ msgid "Collapse Tree"
+#~ msgstr "Sažmi stablo"
+
+#, fuzzy
+#~ msgid ""
+#~ "Do not update directory inode access times on this filesystem\n"
+#~ "(e.g, for faster access on the news spool to speed up news servers)."
+#~ msgstr ""
+#~ "Ne osvježavaj vremenski pristup inodeu na ovom datotečnom sustavu\n"
+#~ "(na primjer za brži pristup na odlagalište diskusija da se ubrzaju "
+#~ "poslužitelji vijesti (newsa))"
 
 #~ msgid "Enable/Disable IP spoofing protection."
 #~ msgstr "Omogući/isključi zaštitu lažiranja IP adresa"
@@ -7374,21 +7438,218 @@ msgstr "Instalacija nije uspjela"
 #~ msgid "Enable/Disable libsafe if libsafe is found on the system."
 #~ msgstr "Omogući/isključi libsafe ako je libsafe pronađen na sistemu"
 
-#~ msgid "Enable/Disable the logging of IPv4 strange packets."
-#~ msgstr "Omogući/isključi vođenje zapisa o čudnim IPv4 paketima."
-
 #~ msgid "Enable/Disable msec hourly security check."
 #~ msgstr "Omogući/isključi sigurnosnu provjeru msec-a svaki sat"
 
+#~ msgid "Enable/Disable the logging of IPv4 strange packets."
+#~ msgstr "Omogući/isključi vođenje zapisa o čudnim IPv4 paketima."
+
+#~ msgid "Error reading file %s"
+#~ msgstr "Greška prilikom čitanja datoteke %s"
+
+#~ msgid "Error writing to file %s"
+#~ msgstr "Greška prilikom pisanja u datoteku %s"
+
+#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
+#~ msgstr ""
+#~ "Greška:  \"%s\" upravljački program za vašu zvučnu karticu nije prisutan "
+#~ "na listi"
+
+#~ msgid "Expand Tree"
+#~ msgstr "Proširi stablo"
+
+#~ msgid "Ext2"
+#~ msgstr "Ext2"
+
+#~ msgid "File sharing"
+#~ msgstr "Dijeljenje datoteka"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Upišite veličinu RAM u Mb"
+
+#~ msgid "High"
+#~ msgstr "Visok"
+
+#~ msgid "Higher"
+#~ msgstr "Viši"
+
+#~ msgid ""
+#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
+#~ "is enough)\n"
+#~ "at the beginning of the disk"
+#~ msgstr ""
+#~ "Ukoliko želite koristiti aboot morate ostaviti dovoljno mjesta (npr. 2048 "
+#~ "sektora) na\n"
+#~ "početku diska"
+
+#~ msgid "Info: "
+#~ msgstr "Info: "
+
+#~ msgid "Journalised FS"
+#~ msgstr "Journalised FS"
+
+#, fuzzy
+#~ msgid "LDAP users database"
+#~ msgstr "Baze"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/grub instalacija"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "Pokreće paketno filtriranje za Linux kernel 2.2 serije, za postavljanje\n"
+#~ "vatrozida za zaštitu vašeg računala od mrežnih napada."
+
 #~ msgid "Number of capture buffers:"
 #~ msgstr "Broj međuspremnika za hvatanje "
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr ""
+#~ "Postavka ``Ograničene opcije na komandnoj liniji'' nema svrhe ako ne "
+#~ "unesete lozinku"
 
 #, fuzzy
 #~ msgid "PLL setting:"
 #~ msgstr "Postavka opterećenja"
 
+#~ msgid "Paranoid"
+#~ msgstr "Paranoidan"
+
+#~ msgid ""
+#~ "Passwords are now enabled, but use as a networked computer is still not "
+#~ "recommended."
+#~ msgstr ""
+#~ "Lozinke su sada uključene međutim još ne preporučam korištenje ovog "
+#~ "računala u mrežnom okolišu."
+
+#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
+#~ msgstr "Molim prvo se odjavite te pritisnite Ctrl-Alt-BackSpace"
+
+#~ msgid "Poor"
+#~ msgstr "Slab"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Precizna veličina RAMa (pronađeno %d MB)"
+
 #~ msgid "Radio support:"
 #~ msgstr "Podrška za  radio:"
 
-#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
-#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+#~ msgid "Removable media automounting"
+#~ msgstr "Automatsko montiranje prenosivog medija"
+
+#~ msgid "Rescue partition table"
+#~ msgstr "Spasi particijsku tabelu"
+
+#~ msgid "Restore partition table"
+#~ msgstr "Vrati particijsku tabelu"
+
+#~ msgid "Restoring from file %s failed: %s"
+#~ msgstr "Vraćanje iz datoteke %s nije uspjelo: %s"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Ograničene opcije na komandnoj liniji"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Veličina korijenske particije u MB: "
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "Save partition table"
+#~ msgstr "Spremi particijsku tabelu"
+
+#~ msgid "Security level"
+#~ msgstr "Sigurnosna razina"
+
+#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
+#~ msgstr ""
+#~ "Pokreće X Pismovni Poslužitelj (ovo je nužno za Xorg da se pokrene)."
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Veličina swap particiju u MB: "
+
+#~ msgid "TLS"
+#~ msgstr "TLS"
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "Program koji mjenja veličinu FAT-a ne može rukovati vašom particijom, \n"
+#~ "slijedeća greška se dogodila: %s"
+
+#~ msgid ""
+#~ "The backup partition table has not the same size\n"
+#~ "Still continue?"
+#~ msgstr ""
+#~ "Backup particijske tablice nema istu veličinu\n"
+#~ "Da ipak nastavim?"
+
+#~ msgid ""
+#~ "There are already some restrictions, and more automatic checks are run "
+#~ "every night."
+#~ msgstr ""
+#~ "Već postoje neka ograničenja i više automatskih provjera se pokreće svake "
+#~ "noći."
+
+#, fuzzy
+#~ msgid ""
+#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ msgstr ""
+#~ "Nema FAT particije za mjenjanje veličine ili za korištenje loopback-a "
+#~ "(ili nema dovoljno prostora)"
+
+#~ msgid ""
+#~ "This is similar to the previous level, but the system is entirely closed "
+#~ "and security features are at their maximum."
+#~ msgstr ""
+#~ "Temeljeno na prijašnjoj razini, ali je sustav potpuno zatvoren.\n"
+#~ "Sigurnosne značajke su na maksimumu."
+
+#~ msgid ""
+#~ "This level is to be used with care. It makes your system more easy to "
+#~ "use,\n"
+#~ "but very sensitive. It must not be used for a machine connected to "
+#~ "others\n"
+#~ "or to the Internet. There is no password access."
+#~ msgstr ""
+#~ "Ova razina se treba koristiti sa pažnjom. Ona čini vaš sustav mnogo "
+#~ "lakšim za korištenje,\n"
+#~ "ali vrlo osjetljiv: ne smije biti korišten za računala koja su povezana u "
+#~ "mreži ili na Internet. Naime, nema lozinke za pristup."
+
+#~ msgid "Toggle between flat and group sorted"
+#~ msgstr "Prebaci između ravno i grupno sortiranog"
+
+#~ msgid "Trying to rescue partition table"
+#~ msgstr "Pokušavam spasiti particijsku tablicu"
+
+#~ msgid "Undo"
+#~ msgstr "Vrati"
+
+#, fuzzy
+#~ msgid "Unknown driver"
+#~ msgstr "Nepoznati model"
+
+#, fuzzy
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr ""
+#~ "Ne možete koristiti enkriptirani datotečni sustav za točku montiranja %s"
+
+#~ msgid "Use libsafe for servers"
+#~ msgstr "Koristi libsafe za poslužitelje"
+
+#~ msgid "Use the Microsoft Windows® partition for loopback"
+#~ msgstr "Koristi Microsoft Windows® particiju za loopback"
+
+#~ msgid "Welcome To Crackers"
+#~ msgstr "Dobrodošli Crackeri"
+
+#~ msgid "Which partition do you want to use for Linux4Win?"
+#~ msgstr "Koju particiju želite koristiti za Linux4Win?"
+
+#~ msgid "restrict"
+#~ msgstr "ograniči"

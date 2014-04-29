@@ -1595,7 +1595,7 @@ msgid "Keyboard"
 msgstr "Tastatur"
 
 #: finish-install:58
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Vælg tastaturlayout."
 
@@ -3337,7 +3337,7 @@ msgstr ""
 "Kunne ikke installere de nødvendige pakker til deling af dine skannere."
 
 #: service_harddrake:173
-#, fuzzy, c-format
+#, c-format
 msgid "The graphics card '%s' is no longer supported by driver '%s'"
 msgstr "Grafikkortet %s understøttes ikke længere af %s-driveren."
 
@@ -3347,7 +3347,7 @@ msgid "New release, reconfiguring X for %s"
 msgstr "Ny udgave, genkonfigurerer X for %s"
 
 #: service_harddrake:274
-#, fuzzy, c-format
+#, c-format
 msgid "The proprietary kernel driver was not found for X.org driver '%s'"
 msgstr "Den leverandørejede kernedriver blev ikke fundet for '%s' X.org driver"
 
@@ -3450,21 +3450,226 @@ msgstr "Regionale indstillinger"
 msgid "Language & country configuration"
 msgstr "Opsætning af sprog og land"
 
+#, fuzzy
+#~ msgid "  --help                - display this help     \n"
+#~ msgstr " --help                - vis denne hjælpetekst     \n"
+
+#, fuzzy
+#~ msgid ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Usage: \n"
+#~ msgstr ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright © %s Mandriva.\n"
+#~ "Dette er frit programmel og kan redistribueres under betingelserne i GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Brug: \n"
+
+#, fuzzy
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Moondrake' værktøj til fejlrapportering"
+
+#~ msgid "%s Control Center"
+#~ msgstr "%s kontrolcenter"
+
+#, fuzzy
+#~ msgid "%s Help Center"
+#~ msgstr "Moondrake hjælpecentral"
+
+#, fuzzy
+#~ msgid "%s Online"
+#~ msgstr "Moondrake Online"
+
+#, fuzzy
+#~ msgid "%s Tools Logs"
+#~ msgstr "Moondrake' værktøj-logger"
+
+#, fuzzy
+#~ msgid "%s Update"
+#~ msgstr "Moondrake Update"
+
+#, fuzzy
+#~ msgid "<control>H"
+#~ msgstr "<control>Q"
+
+#~ msgid "Autodetect _modems"
+#~ msgstr "Auto-detektér modemmer"
+
+#~ msgid "Autodetect parallel _zip drives"
+#~ msgstr "Automatisk fundne parallelle _zip-drev"
+
+#, fuzzy
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr ""
+#~ "Konfigurér autentifikation krævet for at få adgang til Moondrake-værktøjer"
+
+#~ msgid "Copyright (C) %s by %s"
+#~ msgstr "Ophavsret © %s ved %s"
+
+#~ msgid ""
+#~ "Here you can see files to use in order to fix permissions, owners, and "
+#~ "groups via msec.\n"
+#~ "You can also edit your own rules which will overwrite the default rules."
+#~ msgstr ""
+#~ "Her kan du se filer til brug for at rette tilladelser, ejere og grupper "
+#~ "via msec.\n"
+#~ "Du kan også redigere dine egne regler som vil tilsidesætte standard-"
+#~ "reglerne."
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#, fuzzy
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in"
+#~ msgstr ""
+#~ "Intet tv-kort blev genkendt på din maskine. Tjek venligst at et video/tv-"
+#~ "kort der understøttes af Linux er korrekt isat.\n"
+#~ "\n"
+#~ "\n"
+#~ "Du kan besøge vores database over udstyr på:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
+
+#, fuzzy
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in."
+#~ msgstr ""
+#~ "Intet tv-kort blev genkendt på din maskine. Tjek venligst at et video/tv-"
+#~ "kort der understøttes af Linux er korrekt isat.\n"
+#~ "\n"
+#~ "\n"
+#~ "Du kan besøge vores database over udstyr på:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
+
+#, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Konfiguration af postpåmindelse"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Konfiguration af postpåmindelse"
+
+#, fuzzy
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "Konfiguration af opstart"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Konfiguration af postpåmindelse"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Opsætning af sprog og land"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Konfiguration af grafisk server"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Opsætning af sprog og land"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Konfiguration af grafisk server"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Konfiguration af grafisk server"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Konfiguration af grafisk server"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "Konfiguration af UPS"
+
+#, fuzzy
+#~ msgid "Select %s Tool:"
+#~ msgstr "Vælg Moondrake-værktøj:"
+
+#~ msgid "_About..."
+#~ msgstr "_Om..."
+
+#~ msgid "_Fields description"
+#~ msgstr "_Feltbeskrivelse"
+
+#~ msgid "_File"
+#~ msgstr "_Fil"
+
+#~ msgid "_Help"
+#~ msgstr "_Hjælp"
+
+#~ msgid "_Options"
+#~ msgstr "_Indstillinger"
+
+#~ msgid "_Quit"
+#~ msgstr "_Afslut"
+
+#~ msgid "_Report Bug"
+#~ msgstr "_Rapportér fejl"
+
 #~ msgid "/Autodetect _printers"
 #~ msgstr "/Auto-detektér printere"
 
-#~ msgid "Its GDB trace is:"
-#~ msgstr "dets GDB spor er:"
+#~ msgid "Autodetect _jaz drives"
+#~ msgstr "Autodetektér _jaz-drev"
 
-#~ msgid "OpenOffice.org"
-#~ msgstr "OpenOffice.org"
+#~ msgid "Autodetect _printers"
+#~ msgstr "Auto-detektér printere"
 
-#~ msgid ""
-#~ "The proprietary driver for your graphic card cannot be found, the system "
-#~ "is now using the free software driver (%s)."
-#~ msgstr ""
-#~ "Den proprietære driver til dit grafikkort kan ikke findes, systemet "
-#~ "bruger nu den frie driver (%s)"
+#~ msgid "Background color"
+#~ msgstr "Baggrundsfarve"
+
+#~ msgid "Bugs"
+#~ msgstr "Fejl"
+
+#~ msgid "Choose picture"
+#~ msgstr "Vælg billede"
+
+#~ msgid "Choose progress bar background"
+#~ msgstr "Vælg baggrund for fremskridtsbjælke"
+
+#~ msgid "Choose progress bar color 1"
+#~ msgstr "Vælg farve 1 for fremskridtsbjælke"
+
+#~ msgid "Choose progress bar color 2"
+#~ msgstr "Vælg farve 2 for fremskridtsbjælke"
+
+#~ msgid "Choose text color"
+#~ msgstr "Vælg farve på tekst"
+
+#~ msgid "Choose text zone color"
+#~ msgstr "Vælg farve på tekstzone"
+
+#~ msgid "Color selection"
+#~ msgstr "Farvevalg"
+
+#~ msgid "Coma bug"
+#~ msgstr "Coma-fejl"
+
+#, fuzzy
+#~ msgid "Copyright (C) %s by Moondrake"
+#~ msgstr "Ophavsret © %s ved Moondrake"
+
+#~ msgid "Create new theme"
+#~ msgstr "Opret nyt tema"
+
+#~ msgid "Display logo on Console"
+#~ msgstr "Vis logo på konsol"
 
 #~ msgid ""
 #~ "Display theme\n"
@@ -3473,20 +3678,111 @@ msgstr "Opsætning af sprog og land"
 #~ "Visningstema\n"
 #~ "under konsol"
 
-#~ msgid "Create new theme"
-#~ msgstr "Opret nyt tema"
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "Tidlige Intel Pentium chips har en bug i deres flydendetalsprocessor, "
+#~ "hvilket gør at de ikke kan lave den krævede precision når de udfører en "
+#~ "flydendetalsdivision (FDIV)"
 
-#~ msgid "X coordinate of text box"
-#~ msgstr "X-koordinat på tekst-felt"
+#~ msgid "F00f bug"
+#~ msgstr "F00f-fejl"
 
-#~ msgid "Y coordinate of text box"
-#~ msgstr "Y-koordinat på tekst-felt"
+#~ msgid "FPU"
+#~ msgstr "FPU"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Fdiv-fejl"
+
+#~ msgid "File/-"
+#~ msgstr "Fil/-"
+
+#~ msgid "File/Save _As"
+#~ msgstr "Fil/Gem _som"
+
+#~ msgid "File/_New"
+#~ msgstr "Fil/_Ny"
+
+#~ msgid "File/_Open"
+#~ msgstr "Fil/_Åbn"
+
+#~ msgid "File/_Quit"
+#~ msgstr "Fil/_Afslut"
+
+#~ msgid "File/_Save"
+#~ msgstr "Fil/_Gem"
+
+#~ msgid "Final resolution"
+#~ msgstr "Endelig opløsning"
+
+#~ msgid "Gradient type"
+#~ msgstr "Type af farveovergang"
+
+#~ msgid "Halt bug"
+#~ msgstr "Halt-fejl"
+
+#~ msgid "Help/_About..."
+#~ msgstr "Hjælp/_Om..."
+
+#~ msgid "Is FPU present"
+#~ msgstr "Er FPU tilstede"
+
+#~ msgid "Its GDB trace is:"
+#~ msgstr "dets GDB spor er:"
+
+#~ msgid "OpenOffice.org"
+#~ msgstr "OpenOffice.org"
+
+#~ msgid "Options/Test"
+#~ msgstr "Indstillinger/Test"
+
+#~ msgid "Please enter a theme name"
+#~ msgstr "Indtast et navn for et tema"
+
+#~ msgid "Please select a splash image"
+#~ msgstr "Vælg et opstarts-billede"
+
+#~ msgid "Progress Bar"
+#~ msgstr "Fremskridtsbjælke"
+
+#~ msgid "Progress box transparency"
+#~ msgstr "Gennemsigtighed af frenskridtsfelt"
+
+#~ msgid "Save theme"
+#~ msgstr "gem temaer"
+
+#~ msgid "Silent bootsplash"
+#~ msgstr "Stille bootsplask"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Nogen af de tidlige i486DX-100-chip kan ikke altid returnere til kørende "
+#~ "tilstand efter 'halt'-instruktionen er brugt"
+
+#~ msgid "Text"
+#~ msgstr "Tekst"
+
+#~ msgid "Text box height"
+#~ msgstr "Højde på tekstrude"
+
+#~ msgid "Text box transparency"
+#~ msgstr "Gennemsigtighed af tekstfelt"
 
 #~ msgid "Text box width"
 #~ msgstr "Bredde på tekstfelt"
 
-#~ msgid "Text box height"
-#~ msgstr "Højde på tekstrude"
+#~ msgid "Text color"
+#~ msgstr "Tekstfarve"
+
+#~ msgid "Text size"
+#~ msgstr "Tekststørrelse"
+
+#~ msgid "The height of the progress bar"
+#~ msgstr "Højden på forløbslinjen"
 
 #~ msgid ""
 #~ "The progress bar X coordinate\n"
@@ -3502,131 +3798,42 @@ msgstr "Opsætning af sprog og land"
 #~ "Y-koordinatet for forløbsindikatorens\n"
 #~ "øvre venstre hjørne"
 
+#~ msgid ""
+#~ "The proprietary driver for your graphic card cannot be found, the system "
+#~ "is now using the free software driver (%s)."
+#~ msgstr ""
+#~ "Den proprietære driver til dit grafikkort kan ikke findes, systemet "
+#~ "bruger nu den frie driver (%s)"
+
 #~ msgid "The width of the progress bar"
 #~ msgstr "Bredden på forløbslinjen"
-
-#~ msgid "The height of the progress bar"
-#~ msgstr "Højden på forløbslinjen"
-
-#~ msgid "X coordinate of the text"
-#~ msgstr "X-koordinat på teksten"
-
-#~ msgid "Y coordinate of the text"
-#~ msgstr "Y-koordinat på teksten"
-
-#~ msgid "Text box transparency"
-#~ msgstr "Gennemsigtighed af tekstfelt"
-
-#~ msgid "Progress box transparency"
-#~ msgstr "Gennemsigtighed af frenskridtsfelt"
-
-#~ msgid "Text size"
-#~ msgstr "Tekststørrelse"
-
-#~ msgid "Progress Bar"
-#~ msgstr "Fremskridtsbjælke"
-
-#~ msgid "Choose progress bar color 1"
-#~ msgstr "Vælg farve 1 for fremskridtsbjælke"
-
-#~ msgid "Choose progress bar color 2"
-#~ msgstr "Vælg farve 2 for fremskridtsbjælke"
-
-#~ msgid "Choose progress bar background"
-#~ msgstr "Vælg baggrund for fremskridtsbjælke"
-
-#~ msgid "Gradient type"
-#~ msgstr "Type af farveovergang"
-
-#~ msgid "Text"
-#~ msgstr "Tekst"
-
-#~ msgid "Choose text color"
-#~ msgstr "Vælg farve på tekst"
-
-#~ msgid "Choose picture"
-#~ msgstr "Vælg billede"
-
-#~ msgid "Silent bootsplash"
-#~ msgstr "Stille bootsplask"
-
-#~ msgid "Choose text zone color"
-#~ msgstr "Vælg farve på tekstzone"
-
-#~ msgid "Text color"
-#~ msgstr "Tekstfarve"
-
-#~ msgid "Background color"
-#~ msgstr "Baggrundsfarve"
-
-#~ msgid "Verbose bootsplash"
-#~ msgstr "Informativ bootsplask"
 
 #~ msgid "Theme name"
 #~ msgstr "Tema-navn"
 
-#~ msgid "Final resolution"
-#~ msgstr "Endelig opløsning"
-
-#~ msgid "Display logo on Console"
-#~ msgstr "Vis logo på konsol"
-
-#~ msgid "Save theme"
-#~ msgstr "gem temaer"
-
-#~ msgid "Please enter a theme name"
-#~ msgstr "Indtast et navn for et tema"
-
-#~ msgid "Please select a splash image"
-#~ msgstr "Vælg et opstarts-billede"
-
-#~ msgid "saving Bootsplash theme..."
-#~ msgstr "gemmer startskærmstema..."
-
 #~ msgid "Unable to load image file %s"
 #~ msgstr "Kunne ikke indlæse billedfil %s"
 
-#~ msgid "choose image"
-#~ msgstr "vælg billede"
-
-#~ msgid "Color selection"
-#~ msgstr "Farvevalg"
-
-#~ msgid "Coma bug"
-#~ msgstr "Coma-fejl"
-
-#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-#~ msgstr "om denne processor har Cyrix 6x86 Coma-fejlen eller ej"
-
-#~ msgid "Fdiv bug"
-#~ msgstr "Fdiv-fejl"
-
-#~ msgid ""
-#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
-#~ "processor which did not achieve the required precision when performing a "
-#~ "Floating point DIVision (FDIV)"
-#~ msgstr ""
-#~ "Tidlige Intel Pentium chips har en bug i deres flydendetalsprocessor, "
-#~ "hvilket gør at de ikke kan lave den krævede precision når de udfører en "
-#~ "flydendetalsdivision (FDIV)"
-
-#~ msgid "Is FPU present"
-#~ msgstr "Er FPU tilstede"
-
-#~ msgid "yes means the processor has an arithmetic coprocessor"
-#~ msgstr "ja betyder at processoren har en aritmetisk koprocessor"
+#~ msgid "Verbose bootsplash"
+#~ msgstr "Informativ bootsplask"
 
 #~ msgid "Whether the FPU has an irq vector"
 #~ msgstr "Om FPU-en har en irq-vektor"
 
-#~ msgid ""
-#~ "yes means the arithmetic coprocessor has an exception vector attached"
-#~ msgstr ""
-#~ "ja betyder at den aritmetiske koprocessor har tilknyttet en "
-#~ "undtagelsesvektor"
+#~ msgid "X coordinate of text box"
+#~ msgstr "X-koordinat på tekst-felt"
 
-#~ msgid "F00f bug"
-#~ msgstr "F00f-fejl"
+#~ msgid "X coordinate of the text"
+#~ msgstr "X-koordinat på teksten"
+
+#~ msgid "Y coordinate of text box"
+#~ msgstr "Y-koordinat på tekst-felt"
+
+#~ msgid "Y coordinate of the text"
+#~ msgstr "Y-koordinat på teksten"
+
+#~ msgid "choose image"
+#~ msgstr "vælg billede"
 
 #~ msgid ""
 #~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
@@ -3634,18 +3841,17 @@ msgstr "Opsætning af sprog og land"
 #~ "tidlige pentiummer var fejlbehæftede og frøs ved afkodning af bytekoden "
 #~ "F00F"
 
-#~ msgid "Halt bug"
-#~ msgstr "Halt-fejl"
+#~ msgid "saving Bootsplash theme..."
+#~ msgstr "gemmer startskærmstema..."
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "om denne processor har Cyrix 6x86 Coma-fejlen eller ej"
 
 #~ msgid ""
-#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
-#~ "mode after the \"halt\" instruction is used"
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
 #~ msgstr ""
-#~ "Nogen af de tidlige i486DX-100-chip kan ikke altid returnere til kørende "
-#~ "tilstand efter 'halt'-instruktionen er brugt"
+#~ "ja betyder at den aritmetiske koprocessor har tilknyttet en "
+#~ "undtagelsesvektor"
 
-#~ msgid "Bugs"
-#~ msgstr "Fejl"
-
-#~ msgid "FPU"
-#~ msgstr "FPU"
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "ja betyder at processoren har en aritmetisk koprocessor"

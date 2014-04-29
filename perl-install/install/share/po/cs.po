@@ -437,17 +437,14 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL musí začínat na ftp:// nebo http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr ""
-"Kontaktuji web Mandriva Linux pro získání seznamu dostupných zrcadel..."
+msgstr "Navazuji spojení se stránkami %s za účelem získání seznamu zrcadel..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
-msgstr ""
-"Selhalo kontaktování webu Mandriva Linux pro získání seznamu dostupných "
-"zrcadel"
+msgstr "Nepodařilo se kontaktovat stránky %s a stáhnout seznam zrcadel"
 
 #: any.pm:204
 #, c-format
@@ -737,11 +734,12 @@ msgstr ""
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Chybí XML informace pro zdroj \"%s\", pouze částečný výsledek pro balíček %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Žádný popis"
 
 #: pkgs.pm:280
 #, c-format
@@ -758,14 +756,14 @@ msgid "An error occurred:"
 msgstr "Nastala chyba:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Nastala chyba:"
+msgstr "Vyskytla se fatální chyba: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Více se již neptat"
 
 #: pkgs.pm:894
 #, c-format
@@ -804,9 +802,9 @@ msgid "Entering step `%s'\n"
 msgstr "Začínám krok '%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Instalace"
+msgstr "%s instalace %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -819,16 +817,15 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Server Xorg startuje delší dobu. Prosím počkejte..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Váš systém má málo systémových prostředků. Při instalaci Mandriva Linuxu se\n"
-"můžete setkat s různými problémy. Pokud se tak stane, zkuste textovou\n"
-"verzi instalačního programu. Ta se spouští tak, že při startu\n"
-"z CD mechaniky stisknete 'F1' a poté napíšete 'text'."
+"Váš systém nemusí mít dostatečné vybavení pro bezproblémovou instalaci %s. V "
+"případě potíží zvolte instalaci v textovém režimu. Pro její spuštění "
+"stiskněte při nabíhání systému z CD klávesu 'F1' a následně napište 'text'."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
 #, c-format
@@ -836,14 +833,14 @@ msgid "Media Selection"
 msgstr "Výběr zdrojů"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Instalovat pracovní prostředí Mandriva KDE"
+msgstr "Instalovat %s KDE Desktop"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Instalovat pracovní prostředí Mandriva GNOME"
+msgstr "Instalovat %s GNOME Desktop"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -888,7 +885,7 @@ msgstr "Výběr jednotlivých balíčků"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Zrušit celý výběr"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1654,41 +1651,123 @@ msgid ""
 "Exit"
 msgstr "Konec"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux Instalace %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Grafické prostředí"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Grafické prostředí s uživatelsky přívětivým seskupením aplikací a "
+#~ "pracovní plochou"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Jednoduché a rychlé grafické prostředí s uživatelsky přívětivou sadou "
+#~ "aplikací a nástrojů"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Zábavné programy: deskové hry, strategie, atd."
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Pracovní stanice"
+
+#, fuzzy
+#~ msgid "For developers!"
+#~ msgstr "Pro vývojáře"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Licence"
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Instalátor zjistil, že nainstalovaný systém Moondrake Linux nemůže \n"
+#~ "být bezpečně povýšen na %s.\n"
+#~ "\n"
+#~ "Proto doporučujeme provést novou instalaci a nahradit tak zcela \n"
+#~ "instalaci původní.\n"
+#~ "\n"
+#~ "Varování: měli byste zálohovat veškerá data před tím, než \n"
+#~ "spustíte \"Novou instalaci.\""
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Vaše pracovní prostředí na USB klíči"
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Pracovní stanice s GNOME"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "Distribuce Mandriva Linux se 100%% otevřenými zdrojovými kódy"
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Průvodce nastavením Moondrake"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Zkoumejte Linux jednoduše díky Mandriva One"
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Programy pro kancelář: textové procesory (LibreOffice Writer, Kword), "
+#~ "tabulkové procesory (LibreOffice Calc, Kspread), prohlížeče PDF a další"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Kancelářská stanice"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Databázové servery PostgreSQL a MariaDB"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Databázové servery PostgreSQL nebo MariaDB"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Připravuji zaváděcí program..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Vlastní desktop"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Vynechat všechny balíčky ze zdroje \"%s\""
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm a další"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "Pracovní stanice s KDE"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Plné pracovní prostředí Mandriva Linux, s podporou"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: distribuce pro potřeby všech"
-
 #~ msgid "Bad package"
 #~ msgstr "Špatný balíček"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Sítě"
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Zkoumejte Linux jednoduše díky Mandriva One"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Aktualizace"
+#~ msgid "For contributors"
+#~ msgstr "Pro přispěvatele"
+
+#~ msgid "For people"
+#~ msgstr "Pro lidi"
+
+#~ msgid "For you"
+#~ msgstr "Pro Vás"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux Instalace %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: distribuce pro potřeby všech"
+
+#~ msgid "Moondrake, the new Linux distribution"
+#~ msgstr "Nová linuxová distribuce Moondrake"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1696,6 +1775,28 @@ msgstr "Konec"
 #~ msgstr ""
 #~ "Programy pro kancelář: textové procesory (KWord, Abiword), tabulkové "
 #~ "procesory (KSpread, Gnumeric), prohlížeče PDF a další"
+
+#~ msgid "People!"
+#~ msgstr "Lidé!"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Připravuji zaváděcí program..."
+
+#~ msgid "Proceed"
+#~ msgstr "Pokračovat"
+
+#~ msgid "Select All"
+#~ msgstr "Vybrat vše"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "Distribuce Mandriva Linux se 100%% otevřenými zdrojovými kódy"
+
+#~ msgid "Welcome"
+#~ msgstr "Vítejte"
+
+#~ msgid "Welcome!"
+#~ msgstr "Vítejte!"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1716,8 +1817,23 @@ msgstr "Konec"
 #~ "restartujte prosím systém\n"
 #~ "a aktualizujte systém pomocí apletu pro aktualizaci distribuce Mandriva."
 
-#~ msgid "Proceed"
-#~ msgstr "Pokračovat"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Vaše pracovní prostředí na USB klíči"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Licence"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Sítě"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Aktualizace"
 
 #~ msgid "retrieval of [%s] failed"
 #~ msgstr "získání [%s] selhalo"

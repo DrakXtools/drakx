@@ -436,18 +436,18 @@ msgid "URL must start with ftp:// or http://"
 msgstr "Lokacija se mora začeti z ftp:// ali s http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Vzpostavljanje povezave s spletno stranjo Mandriva Linux in pridobivanje "
-"seznama dosegljivih zrcalnih strežnikov ..."
+"Vzpostavljanje povezave s spletno stranjo %s in pridobivanje seznama "
+"dosegljivih zrcalnih strežnikov ..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Vzpostavljanje povezave s spletno stranjo Mandriva Linux in pridobivanje "
-"seznama dosegljivih zrcalnih strežnikov nista uspela"
+"Vzpostavljanje povezave s spletno stranjo %s in pridobivanje seznama "
+"dosegljivih zrcalnih strežnikov ni uspelo"
 
 #: any.pm:204
 #, c-format
@@ -519,11 +519,13 @@ msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
 "free software drivers to work."
 msgstr ""
+"Nekateri deli vaše strojne opreme za pravilno delovanje odprtokodnih "
+"gonilnikov potrebujejo lastniško strojno programsko opremo."
 
 #: any.pm:351
 #, c-format
 msgid "You should enable \"%s\""
-msgstr ""
+msgstr "Priporočljivo je omogočiti vir »%s«"
 
 #: any.pm:370
 #, c-format
@@ -540,7 +542,7 @@ msgstr ""
 #: any.pm:372
 #, c-format
 msgid "\"%s\" contains non free software.\n"
-msgstr ""
+msgstr "Vir »%s« vsebuje lastniško programsko opremo.\n"
 
 #: any.pm:373
 #, c-format
@@ -552,7 +554,7 @@ msgstr ""
 #: any.pm:377
 #, c-format
 msgid "Here you can enable more media if you want."
-msgstr ""
+msgstr "Tu lahko po želji omogočite več virov."
 
 #: any.pm:456
 #, c-format
@@ -732,17 +734,17 @@ msgstr "morda"
 #: pkgs.pm:102
 #, c-format
 msgid "Getting package information from XML meta-data..."
-msgstr ""
+msgstr "Pridobivanje informacij o paketu iz metapodatkov XML ..."
 
 #: pkgs.pm:111
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
-msgstr ""
+msgstr "Za vir »%s« ni metapodatkov, zato rezultati za paket %s niso popolni"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Brez opisa"
 
 #: pkgs.pm:280
 #, c-format
@@ -759,14 +761,14 @@ msgid "An error occurred:"
 msgstr "Prišlo je do napake:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Prišlo je do napake:"
+msgstr "Zgodila se je usodna napaka: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Ne sprašuj več"
 
 #: pkgs.pm:894
 #, c-format
@@ -806,9 +808,9 @@ msgid "Entering step `%s'\n"
 msgstr "Pričetek koraka »%s«\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Namestitev"
+msgstr "Namestitev %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -821,14 +823,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Grafični strežnik se zaganja počasi. Prosimo, počakajte ..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Vaš sistem ni zelo zmogljiv. Lahko, da boste imeli pri namestitvi\n"
-"Mandriva Linuxa težave. V tem primeru lahko poskusite z namestitvijo\n"
+"%s težave. V tem primeru lahko poskusite z namestitvijo\n"
 "v besedilnem načinu.\n"
 "Po zagonu z namestitvenega nosilca pritisnite »F1« in vnesite »text«."
 
@@ -838,14 +840,14 @@ msgid "Media Selection"
 msgstr "Izbira virov"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Namizje KDE"
+msgstr "Namestitev %s namizja KDE"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Namizje GNOME"
+msgstr "Namestitev %s namizja GNOME"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -890,7 +892,7 @@ msgstr "Izbira posamičnih paketov"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Odstrani izbiro"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1478,9 +1480,9 @@ msgid "Preparing bootloader..."
 msgstr "Pripravljanje zagonskega nalagalnika ..."
 
 #: steps_interactive.pm:1050
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing initial startup program..."
-msgstr "Pripravljanje namestitve"
+msgstr "Pripravljanje začetnega zagonskega programa ..."
 
 #: steps_interactive.pm:1051
 #, c-format
@@ -1658,41 +1660,200 @@ msgid ""
 "Exit"
 msgstr "Izhod"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Namestitev Mandriva Linuxa %s"
+#~ msgid ""
+#~ "\"%s\" contains software that can not be distributed in every country due "
+#~ "to software patents."
+#~ msgstr ""
+#~ "Vir »%s« vsebuje programsko opremo, ki je zaradi patentne zaščite v "
+#~ "nekaterih državah ni možno prosto razširjati."
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Licenca"
+#~ "\"%s\" contains the various pieces of the systems and its applications"
+#~ msgstr ""
+#~ "Vir »%s« vsebuje različne sistemske dele in pripadajočo programsko opremo"
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Vaše namizje na USB ključku"
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Grafično okolje osnovano na GNOME"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "100 %% odprto-kodna distribucija Mandriva Linux"
+#~ msgid "A less developed lightweight fast graphical environment"
+#~ msgstr "Majhno in hitro, a manj razvito grafično okolje"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Z Mandriva One je odkrivanje Linuxa preprosto"
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Majhno grafično okolje z naborom uporabniku prijaznih programov in "
+#~ "namiznimi orodji"
+
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr "Majhno in hitro grafično okolje s predanimi privrženci"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Programi za zabavo: arkade, deske, strategije, itd"
+
+#~ msgid "Be Free!"
+#~ msgstr "Bodite svobodni!"
+
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Delovna postaja Cinnamon"
+
+#~ msgid "Core Release"
+#~ msgstr "Glavni (core) - izdajni"
+
+#~ msgid "Enlightenment e17 Desktop"
+#~ msgstr "Namizje Enlightenment e17"
+
+#~ msgid "For developers!"
+#~ msgstr "Za razvijalce!"
+
+#~ msgid "For family!"
+#~ msgstr "Za družino!"
+
+#~ msgid "For kids"
+#~ msgstr "Za otroke"
+
+#~ msgid "Home entertainment"
+#~ msgstr "Domača zabava"
+
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Namestitveni program je zaznal, da obstoječe namestitve\n"
+#~ "Linuxa ni mogoče varno nadgraditi na različico %s.\n"
+#~ "\n"
+#~ "Priporočena je nova namestitev, ki nadomesti obstoječo.\n"
+#~ "\n"
+#~ "Opozorilo: Pred nadaljevanjem z novo namestitvijo napravite\n"
+#~ "varnostno kopijo vseh osebnih podatkov."
+
+#~ msgid ""
+#~ "It also contains firmwares needed for certain devices to operate (eg: "
+#~ "some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
+#~ msgstr ""
+#~ "Vsebuje tudi strojno programsko opremo, ki je potrebna za delovanje "
+#~ "nekaterih naprav (npr.: nekatere grafične kartice ATI/AMD, določene "
+#~ "mrežne kartice, nekatere kartice RAID) ..."
+
+#~ msgid ""
+#~ "It also contains software from \"%s\" rebuild with additional "
+#~ "capabilities."
+#~ msgstr "Vsebuje tudi pakete iz vira »%s«, a z dodatnimi zmožnostmi."
+
+#~ msgid "Join Us!"
+#~ msgstr "Pridružite se nam!"
+
+#~ msgid "MATE Workstation"
+#~ msgstr "Delovna postaja MATE"
+
+#~ msgid "Make it yours!"
+#~ msgstr "Osvojite jo!"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Magejini čarovniki"
+
+#~ msgid "Nonfree Release"
+#~ msgstr "Lastniški (nonfree) - izdajni"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Pisarniški programi: urejavalniki besedil (LibreOffice Writer, KWord), "
+#~ "preglednice (LibreOffice Calc, KSpread), pregledovalniki PDF, itd"
+
+#~ msgid "Office tools"
+#~ msgstr "Pisarniška orodja"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Strežnik podatkovnih baz PostgreSQL in MariaDB"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Strežnik podatkovnih baz PostgreSQL ali MariaDB"
+
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Pripravljanje nadgradnje ..."
+
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Namizje RazorQT"
+
+#~ msgid "Tainted Release"
+#~ msgstr "Patentno zaščiteni (tainted) - izdajni"
+
+#~ msgid "Thank you!"
+#~ msgstr "Hvala!"
+
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Ta vir ponuja posodobitve paketov za vir »%s«"
+
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, FVWM ..."
+
+#~ msgid "XFCE Workstation"
+#~ msgstr "Delovna postaja XFCE"
+
+#~ msgid "Your choice!"
+#~ msgstr "Vaša izbira!"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Popolno namizje Mandriva Linux, s podporo"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: distribucije za potrebe vsakogar"
+#~ msgid "Automated"
+#~ msgstr "Samodejno"
 
 #~ msgid "Bad package"
 #~ msgstr "Paket je poškodovan"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Omrežje"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Vzpostavljanje povezave z zrcalnim strežnikom in pridobivanje seznama "
+#~ "dosegljivih paketov...."
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Ali želite uporabiti aboot?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "Prenos datoteke %s ..."
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Posodobitve"
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Napaka pri namestitvi aboot\n"
+#~ "Ali želite nadaljevati z namestitvijo, čeprav bo s tem prvi razdelek "
+#~ "uničen?"
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Z Mandriva One je odkrivanje Linuxa preprosto"
+
+#~ msgid "For contributors"
+#~ msgstr "Za vse, ki prispevajo"
+
+#~ msgid "For people"
+#~ msgstr "Za ljudi"
+
+#~ msgid "For you"
+#~ msgstr "Za vsakogar"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Ustvari disketo za samodejno namestitev"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "Namizje IceWM"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Namestitev Mandriva Linuxa %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: distribucije za potrebe vsakogar"
+
+#~ msgid "Moondrake, the new Linux distribution"
+#~ msgstr "Moondrake, nova distribucija Linuxa"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1700,6 +1861,56 @@ msgstr "Izhod"
 #~ msgstr ""
 #~ "Pisarniški programi: urejanje besedila (KWord, AbiWord), preglednice "
 #~ "(KSpread, Gnumeric), pregledovalniki PDF, itd"
+
+#~ msgid "People!"
+#~ msgstr "Ljudje"
+
+#~ msgid "Preparing boot images..."
+#~ msgstr "Pripravljanje zagonskega nalagalnika ..."
+
+#~ msgid "Proceed"
+#~ msgstr "Nadaljuj"
+
+#~ msgid "Replay"
+#~ msgstr "Ponovi"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Shrani izbiro paketov"
+
+#~ msgid "Select All"
+#~ msgstr "Izberi vse"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "100 %% odprto-kodna distribucija Mandriva Linux"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Namestitev je lahko povsem samodejna, V tem\n"
+#~ "primeru se uporabi ves trdi disk!!\n"
+#~ "(Takšen način je uporaben, če želite namestitev\n"
+#~ "zagnati na drugem računalniku.)\n"
+#~ "\n"
+#~ "Morda vam bolj ustreza ponovitev namestitve.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Povezave z zrcalnim strežnikom %s ni mogoče vzpostaviti."
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr "Posodobitev z 32-bitnega na 64-bitni sistem ni podprta"
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr "Posodobitev s 64-bitnega na 32-bitni sistem ni podprta"
+
+#~ msgid "Welcome"
+#~ msgstr "Dobrodošli"
+
+#~ msgid "Welcome!"
+#~ msgstr "Dobrodošli"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1719,21 +1930,6 @@ msgstr "Izhod"
 #~ "znova \n"
 #~ "zaženite računalnik in opravite posodobitev z uporabo programčka Mandriva "
 #~ "Update."
-
-#~ msgid "Proceed"
-#~ msgstr "Nadaljuj"
-
-#~ msgid "retrieval of [%s] failed"
-#~ msgstr "pridobivanje [%s] ni uspelo"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "Prenos datoteke %s ..."
-
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr "Posodobitev z 32-bitnega na 64-bitni sistem ni podprta"
-
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr "Posodobitev s 64-bitnega na 32-bitni sistem ni podprta"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1759,50 +1955,23 @@ msgstr "Izhod"
 #~ "\n"
 #~ "Ali ste prepričani, da želite namestiti navedene strežnike?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "Namizje IceWM"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "Vzpostavljanje povezave z zrcalnim strežnikom in pridobivanje seznama "
-#~ "dosegljivih paketov...."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Povezave z zrcalnim strežnikom %s ni mogoče vzpostaviti."
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Ustvari disketo za samodejno namestitev"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Vaše namizje na USB ključku"
 
 #~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Namestitev je lahko povsem samodejna, V tem\n"
-#~ "primeru se uporabi ves trdi disk!!\n"
-#~ "(Takšen način je uporaben, če želite namestitev\n"
-#~ "zagnati na drugem računalniku.)\n"
-#~ "\n"
-#~ "Morda vam bolj ustreza ponovitev namestitve.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Ponovi"
-
-#~ msgid "Automated"
-#~ msgstr "Samodejno"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Shrani izbiro paketov"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Ali želite uporabiti aboot?"
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Licenca"
 
 #~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Napaka pri namestitvi aboot\n"
-#~ "Ali želite nadaljevati z namestitvijo, čeprav bo s tem prvi razdelek "
-#~ "uničen?"
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Omrežje"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Posodobitve"
+
+#~ msgid "retrieval of [%s] failed"
+#~ msgstr "pridobivanje [%s] ni uspelo"

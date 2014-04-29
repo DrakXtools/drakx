@@ -73,7 +73,7 @@ msgstr ""
 "girerseniz, sonraki açılışta önyükleyici komut satırını görmeniz gerekir."
 
 #: any.pm:352
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
 "This implies you already have a bootloader on the hard disk drive you boot "
@@ -82,10 +82,10 @@ msgid ""
 "On which drive are you booting?"
 msgstr ""
 "Sistem yükleyicinizi bir disk bölümüne yüklemeye karar verdiniz.\n"
-"Bu durum önyükleme yaptığınız  sabit disk üzerinde bir önyükleyicinin "
-"olduğunu gösteriyor.(örn: System Commander)\n"
+"Bu durum sistemi boot ettiğiniz hard disk sürücüsü üzerinde bir sistem "
+"yükleyicinin olduğunu gösteriyor.(örn: System Commander)\n"
 "\n"
-"Hangi sabit diskten önyükleme gerçekleştiriyorsunuz?"
+"Hangi sürücüden sistemi önyükleme(boot) gerçekleştiriyorsunuz?"
 
 #: any.pm:363
 #, c-format
@@ -545,25 +545,25 @@ msgid "Please choose a language to use"
 msgstr "Lütfen kullanacağınız dili seçiniz"
 
 #: any.pm:1183
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
-"Mandriva Linux çoklu dil desteğine sahiptir. Kurulum\n"
+"%s çoklu dil desteğine sahiptir. Kurulum\n"
 "tamamlandığında ve sistemi yeniden başlattığınızda kullanabileceğiniz\n"
 "dilleri seçin."
 
 #: any.pm:1186
-#, fuzzy, c-format
+#, c-format
 msgid "Multiple languages"
 msgstr "Çoklu Dil"
 
 #: any.pm:1187
 #, c-format
 msgid "Select Additional Languages"
-msgstr ""
+msgstr "Ek dilleri seçiniz"
 
 #: any.pm:1196 any.pm:1227
 #, c-format
@@ -1098,9 +1098,9 @@ msgid "LILO with text menu"
 msgstr "Metin tabanlı LILO"
 
 #: bootloader.pm:1203
-#, fuzzy, c-format
+#, c-format
 msgid "GRUB2 with graphical menu"
-msgstr "Grafik tabanlı GRUB"
+msgstr "Grafik tabanlı GRUB2"
 
 #: bootloader.pm:1204
 #, c-format
@@ -1346,7 +1346,7 @@ msgid "Warning"
 msgstr "Uyarı"
 
 #: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete this mount point?"
 msgstr "Bu bağlama noktasını silmek istediğinizden emin misiniz?"
 
@@ -2521,7 +2521,7 @@ msgstr ""
 "-a seçeneği dosya sisteminin bağlanmasını sağlayamayacaktır)."
 
 #: fs/mount_options.pm:129
-#, fuzzy, c-format
+#, c-format
 msgid "Do not interpret character or block special devices on the filesystem."
 msgstr "Dosya sistemindeki karakter veya blok özellikli aygıtları yorumlama."
 
@@ -2559,7 +2559,7 @@ msgid "All I/O to the filesystem should be done synchronously."
 msgstr "Dosya sistemine tüm I/O işlemleri eş zamanlı yapılmalıdır."
 
 #: fs/mount_options.pm:143
-#, fuzzy, c-format
+#, c-format
 msgid "Allow every user to mount and umount the filesystem."
 msgstr "Her kullanıcının dosya sistemini bağlamasına veya ayırmasına izin ver."
 
@@ -2693,15 +2693,15 @@ msgid "Which partition do you want to resize?"
 msgstr "Hangi bölümü yeniden boyutlandırmak istiyorsunuz?"
 
 #: fs/partitioning_wizard.pm:180
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the %s installation."
 msgstr ""
 "Microsoft Windows® bölümünüz çok parçalanmış. Lütfen önce Microsoft Windows® "
-"ile bilgisayarınızı başlatın, ``defrag'' aracını çalıştırın; ondan sonra "
-"Mandriva Linux kurulumunu yeniden başlatın."
+"ile bilgisayarınızı başlatın, ``defrag'' aracını çalıştırın; ondan sonra %s "
+"kurulumunu yeniden başlatın."
 
 #: fs/partitioning_wizard.pm:188
 #, c-format
@@ -2874,7 +2874,7 @@ msgid "BIOS software RAID detected on disks %s. Activate it?"
 msgstr "%s disklerinde BIOS RAID yazılımı algılandı. Etkinleştirilsin mi?"
 
 #: fsedit.pm:247
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "I cannot read the partition table of device %s, it's too corrupted for me :"
 "(\n"
@@ -2919,7 +2919,7 @@ msgstr ""
 "Bu nedenle bir /boot bölümü eklediğinize emin olun."
 
 #: fsedit.pm:440
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Metadata version unsupported for a boot partition. Please be sure to add a "
 "separate /boot partition."
@@ -2967,7 +2967,7 @@ msgstr ""
 "noktası  olarak kullanmazsınız"
 
 #: fsedit.pm:471
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
@@ -3299,7 +3299,7 @@ msgstr ""
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:369
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -3312,7 +3312,7 @@ msgstr ""
 "tanımlısı \"%s\" sürücüsüdür)"
 
 #: harddrake/sound.pm:371
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
 "sound API (it's available on most UNIX(tm) systems) but it's a very basic "
@@ -3472,7 +3472,7 @@ msgstr "İsteğe bağlı bir sürücü seçiliyor"
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -3502,7 +3502,7 @@ msgid "Unknown|CPH06X (bt878) [many vendors]"
 msgstr "Bilinmeyen|CPH06X (bt878) [çok sayıda üretici]"
 
 #: harddrake/v4l.pm:475
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-"
 "detect the rights parameters.\n"
@@ -5386,19 +5386,19 @@ msgid "Installing driver for USB controller"
 msgstr "USB denetleyicisi için sürücü kuruluyor"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller \"%s\""
-msgstr "Firewire denetleyicisi %s için sürücü kuruluyor"
+msgstr "Firewire denetleyicisi \"%s\" için sürücü kuruluyor"
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard disk drive controller \"%s\""
-msgstr "Sabit disk denetleyicisi %s için sürücü kuruluyor"
+msgstr "Sabit disk denetleyicisi \"%s\" için sürücü kuruluyor"
 
 #: modules/interactive.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller \"%s\""
-msgstr "Ethernet denetleyicisi %s için sürücü kuruluyor"
+msgstr "Ethernet denetleyicisi \"%s\" için sürücü kuruluyor"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -5480,9 +5480,9 @@ msgstr ""
 "Tekrar başka parametrelerle denemek ister misiniz?"
 
 #: mygtk2.pm:1229
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to quit?"
-msgstr "Bu bağlama noktasını silmek istediğinizden emin misiniz?"
+msgstr "Çıkmak istediğinizden emin misiniz?"
 
 #: mygtk2.pm:1571 mygtk2.pm:1572
 #, c-format
@@ -5510,7 +5510,7 @@ msgid "Extended partition not supported on this platform"
 msgstr "Mantıksal bölüm bu platform tarafından desteklenmiyor"
 
 #: partition_table.pm:558
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
 "The only solution is to move your primary partitions to have the hole next "
@@ -7060,7 +7060,7 @@ msgstr ""
 " default mode: otomatik giriş özelliğini yapılandırmayı öner"
 
 #: standalone.pm:61
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
 "\n"
@@ -7073,8 +7073,8 @@ msgstr ""
 "\n"
 "SEÇENEKLER:\n"
 "  --help            - bu yardım mesajını görüntüle.\n"
-"  --report          - program Mandriva'nin araçlarından olmalı\n"
-"  --incident        - program Mandriva'nin araçlarından olmalı"
+"  --report          - program %s araçlarından olmalı\n"
+"  --incident        - program %s araçlarından olmalı"
 
 #: standalone.pm:67
 #, c-format
@@ -7125,7 +7125,7 @@ msgstr ""
 "                  : ve ghostscript için gs."
 
 #: standalone.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS]...\n"
 "%s Terminal Server Configurator\n"
@@ -7142,7 +7142,7 @@ msgid ""
 "IP, nbi image name)"
 msgstr ""
 "[SEÇENEKLER]...\n"
-" Mandriva Linux Terminal Sunucu Yapılandırıcı\n"
+" %s Terminal Sunucu Yapılandırıcı\n"
 " --enable         : MTS etkinleştir\n"
 " --disable        : MTS devre dışı bırak\n"
 " --start          : MTS başlat\n"
@@ -7190,7 +7190,7 @@ msgstr ""
 " --quiet : etkileşimli değil. (dis) connect ile kullanılır."
 
 #: standalone.pm:112
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTION]...\n"
 "  --no-confirmation      do not ask first confirmation question in %s Update "
@@ -7201,8 +7201,7 @@ msgid ""
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
 "[SEÇENEK]...\n"
-"   --no-confirmation      Mandriva Güncelleme kipinde ilk onaylama sorusunu  "
-"sorma\n"
+"   --no-confirmation     %s kipinde ilk onaylama sorusunu  sorma\n"
 "  --no-verify-rpm        paket imzalarını doğrulama\n"
 "  --changelog-first      açıklama penceresinde dosya listesinden önce "
 "değişiklik günlüklerini göster\n"
@@ -7319,11 +7318,404 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Kurulum başarısız!"
 
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Lisans Sözleşmesi"
+
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Sınırlı Garanti"
+
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. GPL Lisansı ve İlgili Lisanslar"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Marka Tescil Hakları"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Uygulanacak Yasalar"
+
+#~ msgid ""
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
+#~ msgstr ""
+#~ "Yazılım ürünleri üzerindeki tüm haklar bu yazılımın geliştiricisine "
+#~ "aittir;\n"
+#~ " yazılıma uygulanan marka ve patent yasalarıyla\n"
+#~ "korunmaktadırlar. Moondrake, sağlayıcıları ve tescil sahipleri,  yazılım "
+#~ "ürünleri üzerinde, \n"
+#~ "kısmen veya tamamen, her türlü değişikliği yapma \n"
+#~ "haklarını saklı tutarlar. \"Moondrake\" ve ilgili logolar\" %s'nın "
+#~ "müseccel markalarıdır."
+
+#~ msgid "An NTP client/server"
+#~ msgstr "Bir NTP istemcisi/sunucusu"
+
+#~ msgid ""
+#~ "Below are some basic tips to help debug audio problems, but for accurate "
+#~ "and up-to-date tips and tricks, please see:\n"
+#~ "\n"
+#~ "https://wiki.moondrake.org/en/Support:DebuggingSoundProblems\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- General Recommendation: Enable PulseAudio. If you have opted to not to "
+#~ "use PulseAudio, we would strongly advise you enable it. For the vast "
+#~ "majority of desktop use cases, PulseAudio is the recommended and best "
+#~ "supported option.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and "
+#~ "\"pauvucontrol\" (generic) will launch graphical applications to allow "
+#~ "you to view your sound devices and adjust volume levels\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"ps aux | grep pulseaudio\" will check that PulseAudio is running.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl stat\" will check that you can connect to the PulseAudio daemon "
+#~ "correctly.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl list sink-inputs\" will tell you which programs are currently "
+#~ "playing sound via PulseAudio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"systemctl status osspd.service\" will tell you the current state of "
+#~ "the OSS Proxy Daemon. This is used to enable sound from legacy "
+#~ "applications which use the OSS sound API. You should install the \"ossp\" "
+#~ "package if you need this functionality.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pacmd ls\" will give you a LOT of debug information about the current "
+#~ "state of your audio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | grep -i audio\" will tell you which low-level driver "
+#~ "your card uses by default.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/lsmod | grep snd\" will enable you to check which sound "
+#~ "related kernel modules (drivers) are loaded.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"alsamixer -c 0\" will give you a text-based mixer to the low level "
+#~ "ALSA mixer controls for first sound card\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" will tell which programs "
+#~ "are currently using the sound card directly (normally this should only "
+#~ "show PulseAudio)\n"
+#~ msgstr ""
+#~ "Aşağıda ses sorunlarında hata ayıklamak için bazı temel ipuçları vardır; "
+#~ "ama doğru ve güncel ipuçları ve püf noktaları için bakınız: \n"
+#~ "\n"
+#~ "https://wiki.moondrake.org/en/Support:DebuggingSoundProblems\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ " - Genel öneri: PulseAudio'yu etkinleştirin. PulseAudio'yu kullanmak "
+#~ "istemez iseniz de şiddetle etkinleştirmenizi öneririz. Masaüstü kullanım "
+#~ "örneklerinin büyük çoğunluğu için PulseAudio önerilen ve en iyi "
+#~ "desteklenen seçenektir.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "-\"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) ve \"pauvucontrol"
+#~ "\" (genel) ses aygıtlarınızı görüntülemek ve ses düzeylerini ayarlamak "
+#~ "için grafiksel uygulamaları çalıştırırlar\n"
+#~ "\n"
+#~ "\n"
+#~ "-\"ps aux | grep pulseaudio\" PulseAudio'nun çalışıp çalışmadığını "
+#~ "denetler.\n"
+#~ "\n"
+#~ "\n"
+#~ "-\"pactl stat\" PulseAudio art sürecine düzgün biçimde bağlanıp "
+#~ "bağlanamadığınızı denetler.\n"
+#~ "\n"
+#~ "\n"
+#~ "-\"pactl list sink-inputs\" PulseAudio ile hangi uygulamaların şu anda "
+#~ "ses çaldığını gösterir.\n"
+#~ "\n"
+#~ "\n"
+#~ "-\"systemctl statuts osspd.service\" OSS Proxy Daemon mevcut durumunu "
+#~ "gösterir. Bu, OSS ses API'si kullanan eski uygulamalar için sesi "
+#~ "etkinleştirmek için kullanılır. Bu işleve ihtiyacınızı varsa \"ossp\" "
+#~ "paketini yüklemelisiniz.\n"
+#~ "\n"
+#~ "\n"
+#~ "-\"pacmd ls\" Sesin geçerli durumuyla ilgili bir çok hata ayıklama "
+#~ "bilgisi verecektir.\n"
+#~ "\n"
+#~ "\n"
+#~ "-\"lspcidrake - v | grep -i audio\" kartınızın varsayılan olarak "
+#~ "kullandığı düşük seviyeli sürücüyü size bildirecektir.\n"
+#~ "\n"
+#~ "\n"
+#~ "-\"/ usr/sbin/lsmod | grep snd\" ses ile ilgili hangi çekirdek "
+#~ "modüllerinin (sürücüler) yüklendiğini denetlemenize olanak sağlar.\n"
+#~ "\n"
+#~ "\n"
+#~ "-\"alsamixer -c 0\" ilk ses kartı için düşük seviye ALSA karıştırıcı "
+#~ "denetimlerini yapmak üzere bir metin tabanlı karıştırıcı verecektir\n"
+#~ "\n"
+#~ "\n"
+#~ "-\"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" hangi uygulamanın doğrudan "
+#~ "ses kartını kullanmakta olduğunu söyleyecektir. (normalde bu, yalnızca "
+#~ "PulseAudio göstermelidir)\n"
+
+#~ msgid ""
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
+#~ msgstr ""
+#~ "Tebrikler, kurulum tamamlandı.\n"
+#~ "CD-ROM ve/veya disketi çıkartın ve Enter'a basarak bilgisayarınızıyeniden "
+#~ "başlatın."
+
+#~ msgid ""
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Moondrake Linux' un bu sürümündeki güncellemeler hakkında bilgi\n"
+#~ "almak için: \n"
+#~ "%s"
+
+#~ msgid ""
+#~ "If any portion of this agreement is held void, illegal or inapplicable by "
+#~ "a court judgment, this \n"
+#~ "portion is excluded from this contract. You remain bound by the other "
+#~ "applicable sections of the \n"
+#~ "agreement.\n"
+#~ "The terms and conditions of this License are governed by the Laws of "
+#~ "France.\n"
+#~ "All disputes on the terms of this license will preferably be settled out "
+#~ "of court. As a last \n"
+#~ "resort, the dispute will be referred to the appropriate Courts of Law of "
+#~ "Paris - France.\n"
+#~ "For any question on this document, please contact Moondrake."
+#~ msgstr ""
+#~ "Bu lisansın herhangi bir hükmü bir mahkeme tarafından yasa dışı ya da\n"
+#~ "uygulanamaz bulunursa, o kısım bu sözleşme haricinde bırakılacaktır.\n"
+#~ "Diğer hükümlerle bağlı olamaya devam edeceksiniz. Bu lisans ile ilgili "
+#~ "her türlü hukuki\n"
+#~ "ihtilaf Fransız yasalarına göre çözümlenir. Bu lisansın şartlarına her "
+#~ "türlü itiraz ve dava\n"
+#~ "Paris Mahkemeleri tarafından görülecektir.\n"
+#~ "Bu belge hakkında herhangi bir\n"
+#~ "soru için lütfen Moondrake'ya başvurun."
+
+#~ msgid ""
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
+#~ msgstr ""
+#~ "adresine bakabilirsiniz. Sisteminizin ayarları hakkında daha geniş\n"
+#~ "bilgiyi Moondrake Linux Kullanıcı Kılavuzunda bulabilirsiniz."
+
+#~ msgid "Introduction"
+#~ msgstr "Giriş"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "Önce verinizin yedeğini alınız"
+
+#~ msgid ""
+#~ "Please read this document carefully. This document is a license agreement "
+#~ "between you and  \n"
+#~ "Moondrake which applies to the Software Products.\n"
+#~ "By installing, duplicating or using any of the Software Products in any "
+#~ "manner, you explicitly \n"
+#~ "accept and fully agree to conform to the terms and conditions of this "
+#~ "License. \n"
+#~ "If you disagree with any portion of the License, you are not allowed to "
+#~ "install, duplicate or use \n"
+#~ "the Software Products. \n"
+#~ "Any attempt to install, duplicate or use the Software Products in a "
+#~ "manner which does not comply \n"
+#~ "with the terms and conditions of this License is void and will terminate "
+#~ "your rights under this \n"
+#~ "License. Upon termination of the License,  you must immediately destroy "
+#~ "all copies of the \n"
+#~ "Software Products."
+#~ msgstr ""
+#~ "Lütfen bu belgeyi dikkatle okuyun. Bu belge Yazılım Ürünlerine "
+#~ "uygulanacak Moondrake ile sizin\n"
+#~ "aranızdaki lisans sözleşmesidir. Yazılım Ürünlerini \n"
+#~ "kurulum yaparak, çoğaltarak, ya da herhangi bir amaçla kullanarak\n"
+#~ "bu lisans sözleşmesinin tüm şartlarına uyacağınızı açık ve tam olarak "
+#~ "kabul etmiş bulunuyorsunuz.\n"
+#~ "Bu lisans sözleşmesinin herhangi bir şartını kabul etmiyorsanız; Yazılım "
+#~ "Ürünlerini kurma, çoğaltma veya kullanma\n"
+#~ "hakkınız yoktur. \n"
+#~ "Yazılım Ürünlerini işbu lisansın şartlarına aykırı olarak herhangi bir "
+#~ "şekilde kurma, çoğaltma ya da\n"
+#~ "kullanma teşebbüsü, işbu sözleşme ile size verilen hakları ortadan "
+#~ "kaldıracaktır.\n"
+#~ "Bu sözleşmenin ihlali durumunda, Yazılım Ürünlerinin tüm kopyalarını "
+#~ "derhal\n"
+#~ "yok etmeniz gerekmektedir."
+
+#~ msgid ""
+#~ "The Software Products and attached documentation are provided \"as is\", "
+#~ "with no warranty, to the \n"
+#~ "extent permitted by law.\n"
+#~ "Neither Moondrake nor its licensors or suppliers will, in any "
+#~ "circumstances and to the extent \n"
+#~ "permitted by law, be liable for any special, incidental, direct or "
+#~ "indirect damages whatsoever \n"
+#~ "(including without limitation damages for loss of business, interruption "
+#~ "of business, financial \n"
+#~ "loss, legal fees and penalties resulting from a court judgment, or any "
+#~ "other consequential loss) \n"
+#~ "arising out of  the use or inability to use the Software Products, even "
+#~ "if Moondrake or its \n"
+#~ "licensors or suppliers have been advised of the possibility or occurrence "
+#~ "of such damages.\n"
+#~ "\n"
+#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN "
+#~ "SOME COUNTRIES\n"
+#~ "\n"
+#~ "To the extent permitted by law, neither Moondrake nor its licensors, "
+#~ "suppliers or\n"
+#~ "distributors will, in any circumstances, be liable for any special, "
+#~ "incidental, direct or indirect \n"
+#~ "damages whatsoever (including without limitation damages for loss of "
+#~ "business, interruption of \n"
+#~ "business, financial loss, legal fees and penalties resulting from a court "
+#~ "judgment, or any \n"
+#~ "other consequential loss) arising out of the possession and use of "
+#~ "software components or \n"
+#~ "arising out of  downloading software components from one of Moondrake "
+#~ "sites which are \n"
+#~ "prohibited or restricted in some countries by local laws.\n"
+#~ "This limited liability applies to, but is not restricted to, the strong "
+#~ "cryptography components \n"
+#~ "included in the Software Products.\n"
+#~ "However, because some jurisdictions do not allow the exclusion or "
+#~ "limitation of liability for \n"
+#~ "consequential or incidental damages, the above limitation may not apply "
+#~ "to you."
+#~ msgstr ""
+#~ "Yazılım Ürünleri ve yanlarında gelen belgeler \"oldukları gibi\", ve "
+#~ "kanunların izin verdiği\n"
+#~ "ölçüde garanti dışıdırlar.\n"
+#~ "Ne Moondrake ne de lisans sağlayıcıları veya destekleyicileri hiçbir "
+#~ "koşulda ve\n"
+#~ "yasaların  izin verdiği oranda, kullanıcının\n"
+#~ "Yazılım Ürünlerini kullanmak konusunda\n"
+#~ "yetkin olmaması nedeniyle oluşan (iş kaybı, işin aksaması,\n"
+#~ "maddi kayıp, hukuki cezalara çarptırılma\n"
+#~ "vb. neden olacak) doğrudan ya da dolaylı (Moondrake bu tür zararların\n"
+#~ "oluşabileceğini duyursa bile) hiçbir zarar nedeniyle sorumluluk taşımaz.\n"
+#~ "\n"
+#~ "BAZI ÜLKELERDE YASAKLANMIŞ YAZILIMA SAHİP OLMAYA YA DA ONU KULLANMAYA "
+#~ "BAĞLI SINIRLI SORUMLULUK\n"
+#~ "\n"
+#~ "Kanunların verdiği yetkilere göre, ne Moondrake ne de lisans sahipleri,\n"
+#~ "sağlayıcılar veya dağıtımcıları kullanıcının,\n"
+#~ "bulunduğu ülkede yasak olduğu halde, yazılım ürünlerini kullanması,\n"
+#~ "onlara sahip olması, onları Moondrake sitelerinden indirmesi\n"
+#~ "nedeniyle oluşan (iş kaybı, işin aksaması, maddi kayıp, hukuki cezalara \n"
+#~ "çarptırılma vb. neden olacak) doğrudan ya da dolaylı\n"
+#~ "(Moondrake bu tür zararların oluşabileceğini\n"
+#~ "duyursa bile) hiçbir zarar nedeniyle\n"
+#~ "sorumluluk taşımaz. Bu sınırlı sorumluluk, yazılım ürünleri içindeki "
+#~ "güçlü\n"
+#~ "şifreleme araçlarını kapsar, fakat bunlarla sınırlı değildir."
+
+#~ msgid ""
+#~ "The Software Products consist of components created by different persons "
+#~ "or entities.\n"
+#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
+#~ "the components which \n"
+#~ "they cover. Please read carefully the terms and conditions of the license "
+#~ "agreement for each component \n"
+#~ "before using any component. Any question on a component license should be "
+#~ "addressed to the component \n"
+#~ "licensor or supplier and not to Moondrake.\n"
+#~ "The programs developed by Moondrake are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by Moondrake is governed by \"%s\" License."
+#~ msgstr ""
+#~ "Yazılım Ürünleri farklı kişiler veya kuruluşlar tarafından oluşturulmuş "
+#~ "bileşenlerden meydana gelmektedir.\n"
+#~ "Lisansların çoğu kapsadıkları bileşenlerin kullanımına,çoğaltılmasına, "
+#~ "değiştirilmesine ya da tekrar dağıtımının yapılmasına izin\n"
+#~ "vermektedir. Lütfen kullanımdan önce her bir yazılım ürünü için, onu "
+#~ "ilgilendiren lisans(lar)ın\n"
+#~ "tüm şartlarını okuyunuz. Bir yazılım ürünü lisansı hakkındaki herhangi "
+#~ "bir soru, Moondrake'a değil,\n"
+#~ "o ürünün lisans sağlayıcısına veya geliştiricisine\n"
+#~ "yöneltilmelidir. Moondrake tarafından geliştirilmiş yazılımlar GPL\n"
+#~ "lisansıyla korunmaktadır. Moondrake tarafından hazırlanan belgeler \"%s\" "
+#~ "Lisansa tabidir."
+
+#~ msgid ""
+#~ "The operating system and the different components available in the "
+#~ "Moondrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software "
+#~ "Products include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation "
+#~ "related to the operating \n"
+#~ "system and the different components of the Moondrake distribution, and "
+#~ "any applications \n"
+#~ "distributed with these products provided by Moondrake's licensors or "
+#~ "suppliers."
+#~ msgstr ""
+#~ "İşletim sistemi ve Moondrake Linux dağıtımında bulunan farklı bileşenler "
+#~ "buradan itibaren\n"
+#~ "\"Yazılım Ürünleri\" olarak adlandırılacaktır. Yazılım Ürünleri işletim "
+#~ "sistemiyle ilgili program kümeleri,\n"
+#~ "yöntemleri, kuralları ve belgeleri, Moondrake Linux'un farklı "
+#~ "bileşenlerini ve Moondrake' nın lisans\n"
+#~ "sağlayıcıları ve destekleyicileri tarafından dağıtılan uygulamaları "
+#~ "içermektedir,\n"
+#~ "fakat bunlarla sınırlandırılmamaktadır."
+
+#~ msgid ""
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
+#~ msgstr ""
+#~ "Uyarı: Özgür Yazılım patentlerden bağımsız olmak zorunda değildir. Bazı\n"
+#~ "Özgür Yazılımlar ülkenizde patent hakları ile korunmakta olabilir. "
+#~ "Örneğin; MP3\n"
+#~ "çözücüler daha ileri bir kullanım için bir lisans gerektirebilirler. "
+#~ "(Ayrıntılı\n"
+#~ " bilgi için: http://www.mp3licensing.com ). Bir patent hakkını ihlal edip "
+#~ "etmediğinizden emin\n"
+#~ "değilseniz ülkeniz yasalarını araştırın."
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr ""
+#~ "UYARI: Bu lisans belgesinin çevirisi gayriresmi nitelikte olup hukuki bir "
+#~ "belge olarak kullanılamaz."
+
 #~ msgid "Clean /tmp at each boot"
 #~ msgstr "/tmp dizinini her açılışta temizle"
 
-#~ msgid "command %s missing"
-#~ msgstr "%s komutu kayıp"
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "Bilgisayarınızı diğer ağlardan koruma amacıyla ateş duvarı kurma "
+#~ "uygulaması için\n"
+#~ "Linux kernel 2.2 serisi için hazırlanmış paket filtrelemesini başlatır."
+
+#~ msgid "Set CPU frequency settings"
+#~ msgstr "CPU frekanslarını ayarla"
 
 #~ msgid ""
 #~ "The classic bug sound tester is to run the following commands:\n"
@@ -7374,13 +7766,5 @@ msgstr "Kurulum başarısız!"
 #~ "- \"/sbin/fuser -v /dev/dsp\" ses kartını hangi uygulamanın kullandığını "
 #~ "söyler.\n"
 
-#~ msgid "Set CPU frequency settings"
-#~ msgstr "CPU frekanslarını ayarla"
-
-#~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
-#~ msgstr ""
-#~ "Bilgisayarınızı diğer ağlardan koruma amacıyla ateş duvarı kurma "
-#~ "uygulaması için\n"
-#~ "Linux kernel 2.2 serisi için hazırlanmış paket filtrelemesini başlatır."
+#~ msgid "command %s missing"
+#~ msgstr "%s komutu kayıp"

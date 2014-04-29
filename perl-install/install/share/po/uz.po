@@ -437,18 +437,18 @@ msgid "URL must start with ftp:// or http://"
 msgstr "Manzil ftp:// yoki http:// bilan boshlanishi kerak"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Mavjud boʻlgan oynalarning roʻyxatini olish uchun Mandriva Linux sayti bilan "
-"aloqa oʻrnatilmoqda..."
+"Mavjud boʻlgan oynalarning roʻyxatini olish uchun %s sayti bilan aloqa "
+"oʻrnatilmoqda..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Mavjud boʻlgan oynalarning roʻyxatini olish uchun Mandriva Linux sayti bilan "
-"aloqa oʻrnatib boʻlmadi"
+"Mavjud boʻlgan oynalarning roʻyxatini olish uchun %s sayti bilan aloqa "
+"oʻrnatib boʻlmadi"
 
 #: any.pm:204
 #, c-format
@@ -742,7 +742,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Taʼrif yoʻq"
 
 #: pkgs.pm:280
 #, c-format
@@ -759,9 +759,9 @@ msgid "An error occurred:"
 msgstr "Xato roʻy berdi:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Xato roʻy berdi:"
+msgstr "Juda jiddiy xato roʻy berdi: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -806,9 +806,9 @@ msgid "Entering step `%s'\n"
 msgstr "%s bosqichga oʻtilmoqda\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Oʻrnatish"
+msgstr "%s OTni oʻrnatish %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -821,13 +821,13 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg dasturi juda sekin ishga tushyapti. Iltimos kutib turing..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Tizimda resurslar yetishmaydi. Mandriva Linux tizimini oʻrnatish mobaynida\n"
+"Tizimda resurslar yetishmaydi. %s tizimini oʻrnatish mobaynida\n"
 "muammoga duch kelishingiz mumkin. Agar shunday boʻlsa, matn usulida "
 "oʻrnatish vositasidan foydalanib koʻring,\n"
 "Buning uchun diskdan yuklanayotganda `F1' tugmasini bosing va `text' deb "
@@ -891,7 +891,7 @@ msgstr "Paketlarni bittama-bitta tanlash"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Hech qaysi tanlanmasin"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1645,41 +1645,118 @@ msgid ""
 "Exit"
 msgstr "Chiqish"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux OTni oʻrnatish %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Grafik muhit"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Foydalanuvchilar uchun qulay dasturlar va ish stoli vositalaridan iborat "
+#~ "grafik muhit"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Foydalanuvchi uchun qulay dasturlar va ish stoli vosilari mavjud boʻlgan "
+#~ "yengil va tez ishlovchi grafik muhit"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Ovunchoq dasturlar: arkada, stol oʻyinlari, strategiya va hokazo"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Ish stansiyasi"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME stansiyasi"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake yordamchilari"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Litsenziya"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Idora uchun dasturlar: matn protsessorlari (LibreOffice Writer, Kword), "
+#~ "elektron jadvallar (LibreOffice Calc, Kspread), PDF koʻruvchilar va hokazo"
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Sizning ish stolingiz USB kalitda"
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Idora stansiyasi"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "100%% ochiq kodli Mandriva Linux distributivi"
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL va MariaDB maʼlumot bazasi"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Mandriva One yordamida Linux'ni osongina kashf eting"
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL yoki MariaDB maʼlumot bazasi"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "OT yuklagichi tayyorlanmoqda..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Boshqa ish stoli"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "\"%s\" toʻplamidan hamma paketlarga eʼtibor berilmasin"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, va hokazo"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE stansiyasi"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Toʻliq Mandriva Linux ish stoli, qoʻllab-quvvatlash bilan"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: barchaga moʻljallangan distributiv"
+#~ msgid "A full Moondrake desktop, with support"
+#~ msgstr "Toʻliq Moondrake ish stoli, qoʻllab-quvvatlash bilan"
+
+#~ msgid "Automated"
+#~ msgstr "Avtomatik"
 
 #~ msgid "Bad package"
 #~ msgstr "Yomon paket"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Tarmoq"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Mavjud boʻlgan paketlarning roʻyxatini olish uchun oyna bilan aloqa "
+#~ "oʻrnatilmoqda..."
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Yangilanishlar"
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "aboot dasturidan foydalanishni istaysizmi?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "%s fayli yozib olinmoqda..."
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Mandriva One yordamida Linux'ni osongina kashf eting"
+
+#~ msgid "Explore Linux easily with Moondrake One"
+#~ msgstr "Moondrake One yordamida Linux'ni osongina kashf eting"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Avto-oʻrnatish disketni yaratish"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm ish stoli"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux OTni oʻrnatish %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: barchaga moʻljallangan distributiv"
+
+#~ msgid "Moondrake: distributions for everybody's needs"
+#~ msgstr "Moondrake: barchaga moʻljallangan distributiv"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1688,8 +1765,30 @@ msgstr "Chiqish"
 #~ "Idora uchun dasturlar: matn protsessorlari (kword, abiword), elektron "
 #~ "jadvallar (kspread, gnumeric), PDF koʻruvchilar va hokazo"
 
-#~ msgid "Downloading file %s..."
-#~ msgstr "%s fayli yozib olinmoqda..."
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "OT yuklagichi tayyorlanmoqda..."
+
+#~ msgid "Replay"
+#~ msgstr "Qaytarish"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Paketlar tanlovini saqlash"
+
+#~ msgid "Select All"
+#~ msgstr "Hammasini tanlash"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "100%% ochiq kodli Mandriva Linux distributivi"
+
+#~ msgid "The 100%% open source Moondrake distribution"
+#~ msgstr "100%% ochiq kodli Moondrake distributivi"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Oyna (%s)bilan aloqa oʻrnatib boʻlmadi."
+
+#~ msgid "Welcome"
+#~ msgstr "Marhamat"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1715,28 +1814,20 @@ msgstr "Chiqish"
 #~ "\n"
 #~ "Bu server dasturlarni rostdan ham oʻrnatishni istaysizmi?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm ish stoli"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Sizning ish stolingiz USB kalitda"
 
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "Mavjud boʻlgan paketlarning roʻyxatini olish uchun oyna bilan aloqa "
-#~ "oʻrnatilmoqda..."
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Litsenziya"
 
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Oyna (%s)bilan aloqa oʻrnatib boʻlmadi."
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Tarmoq"
 
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Avto-oʻrnatish disketni yaratish"
-
-#~ msgid "Replay"
-#~ msgstr "Qaytarish"
-
-#~ msgid "Automated"
-#~ msgstr "Avtomatik"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Paketlar tanlovini saqlash"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "aboot dasturidan foydalanishni istaysizmi?"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Yangilanishlar"

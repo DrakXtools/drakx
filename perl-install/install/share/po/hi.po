@@ -730,7 +730,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "कोई वर्णन नहीं"
 
 #: pkgs.pm:280
 #, c-format
@@ -745,9 +745,9 @@ msgid "An error occurred:"
 msgstr "एक त्रुटि हो गयी है"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "एक त्रुटि हो गयी है"
+msgstr "एक घातक त्रुटि घटित हुई है: %s "
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -877,7 +877,7 @@ msgstr "अलग-अलग पैकेजों का चयन"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "सभी को अचयनित करें"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1218,9 +1218,9 @@ msgid "Bad file"
 msgstr "फ़ाइल लोड करें"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "आई०डी०ई०"
+msgstr "के०डी०ई०"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1621,26 +1621,159 @@ msgid ""
 "Exit"
 msgstr "निकास"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "मैनड्रिव लिनक्स संसाधन %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "सचित्र वातावरण"
 
+#, fuzzy
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "प्रमाण-पत्र"
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "एक सचित्र वातावरण, उपयोगकर्ता-मित्रवत कार्यक्रमों के समुच्चय और डेस्कटाप औजारों के साथ"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "एक सचित्र वातावरण, उपयोगकर्ता-मित्रवत कार्यक्रमों के समुच्चय और डेस्कटाप औजारों के साथ"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "मनोरंजक कार्यक्रम: आरकेड, बोर्ड, व्यूह-रचना, इत्यादि "
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "कार्यकेंद्र"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "गनोम कार्यकेन्द्र"
+
+#, fuzzy
+#~ msgid "Moondrake Wizards"
+#~ msgstr "<b>मैनड्रिव स्टोर</b>"
+
+#, fuzzy
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "ऑफ़िस के कार्यक्रम: शब्दसंसाधक (केवर्ड, आबीवर्ड), स्प्रेडशीट (केस्प्रेड, जीन्यूमेरिक), "
+#~ "पीडीएफ़ अवलोक्क, इत्यादि"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "ऑफ़िस कार्यकेन्द्र"
+
+#, fuzzy
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "पोस्टग्रीसीक्यूअल या माईसीक्यूअल डाटाबेस सर्वर"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "पोस्टग्रीसीक्यूअल या माईसीक्यूअल डाटाबेस सर्वर"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "बूटलोडर को तैयार किया जा रहा है..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "डेस्कटाप"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "आईसीडब्लूएम, विण्डो मेकर, एनलाइटमेन्ट, एफ़वीडब्लूएम, इत्यादि"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "केडीई कार्यकेन्द्र"
+
+#~ msgid "%d packages"
+#~ msgstr "%d पैकेज"
+
+#, fuzzy
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "%d पैकेज"
+#~ msgstr[1] "%d पैकेज"
+
+#~ msgid "All"
+#~ msgstr "सभी"
+
+#~ msgid "Automated"
+#~ msgstr "स्वचालित"
 
 #~ msgid "Bad package"
 #~ msgstr "निकृष्ट पैकेज"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "नेटवर्किंग"
+#~ msgid "Boot"
+#~ msgstr "बूट"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "उन्नयन"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "आपके कर्नल के अनुरूप कर्नल मॉडयूलो तक नहीं पहुँचा जा सकता है ( %s संचिका विलुप्त है),"
+#~ "इसका सामान्यता अर्थ है कि आपकी बूट फ़्लापी संसाधन माध्यम के साथ ताल-बद्व नहीं है(कृपया "
+#~ "एक और नयी बूट फ़्लापी का निर्माण करें)"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "संसाधन करने हेतु पैकेजों का चयन करें"
+
+#~ msgid "Configure X"
+#~ msgstr "एक्स को संरचित करें"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "उपलब्ध पैकेजों की सूची प्राप्त करने के लिए मिरर से सम्पर्क स्थापित किया जा रहा है..."
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "क्या आप ऐबूट का का उपयोग करना चाहते है?"
+
+#, fuzzy
+#~ msgid "Downloading file %s..."
+#~ msgstr "संचिकायें प्रेषित की जा रही..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "ड्रैक वीपीएन"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "एक बूट को संसाधित करने में त्रुटि, \n"
+#~ "संसाधन को बलपूर्वक करने का प्रयास करे, चाहे कि प्रथम विभाजन नष्ट हो जायें?"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "अनुमान लगाया जा रहा है"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "स्वतः संसाधान फ़्लापी का निर्माण किया जा रहा है"
+
+#~ msgid "Gwenview"
+#~ msgstr "ग्वेनव्यू"
+
+#, fuzzy
+#~ msgid "IceWm Desktop"
+#~ msgstr "डेस्कटाप"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "संसाधन प्रकार का चयन करें"
+
+#~ msgid "Language"
+#~ msgstr "भाषा"
+
+#~ msgid "License"
+#~ msgstr "प्रमाण-पत्र"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "मैनड्रिव लिनक्स संसाधन %s"
+
+#~ msgid "Networking"
+#~ msgstr "नेटवर्किंग"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1650,8 +1783,42 @@ msgstr "निकास"
 #~ "पीडीएफ़ अवलोक्क, इत्यादि"
 
 #, fuzzy
-#~ msgid "Downloading file %s..."
-#~ msgstr "संचिकायें प्रेषित की जा रही..."
+#~ msgid "Preparing boot images..."
+#~ msgstr "बूटलोडर को तैयार किया जा रहा है..."
+
+#~ msgid "Replay"
+#~ msgstr "पुनः चलाना"
+
+#~ msgid "Save packages selection"
+#~ msgstr "पैकेजों के चयन को सुरक्षित करें"
+
+#~ msgid "Select All"
+#~ msgstr "सभी का चयन"
+
+#~ msgid "TV card"
+#~ msgstr "टीवी कार्ड"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "यदि आवश्यकता हो तो स्वतः संसाधन को पूर्णतया स्वचालित बनाया जा सकता है,\n"
+#~ "ऐसी अवस्था में यह हार्ड ड्राइव पर पूर्ण अधिकार कर लेगा !!\n"
+#~ "(यह समान संसाधन को अन्य मशीन पर संसाधित करने के लिए होता है)।\n"
+#~ "\n"
+#~ "आप हो सकता है कि संसाधन को रीप्ले करन चाहते हो।\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "%s मिरर प्रणाली से संबंध स्थापित करने में असमर्थ"
+
+#~ msgid "Users"
+#~ msgstr "उपयोगकर्ताओ"
+
+#~ msgid "Welcome"
+#~ msgstr "स्वागत"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1677,113 +1844,22 @@ msgstr "निकास"
 #~ "\n"
 #~ "क्या आप वास्तव में इन सर्वरों को संसाधित करना चाहते है?\n"
 
-#, fuzzy
-#~ msgid "IceWm Desktop"
-#~ msgstr "डेस्कटाप"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "उपलब्ध पैकेजों की सूची प्राप्त करने के लिए मिरर से सम्पर्क स्थापित किया जा रहा है..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "%s मिरर प्रणाली से संबंध स्थापित करने में असमर्थ"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "स्वतः संसाधान फ़्लापी का निर्माण किया जा रहा है"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "यदि आवश्यकता हो तो स्वतः संसाधन को पूर्णतया स्वचालित बनाया जा सकता है,\n"
-#~ "ऐसी अवस्था में यह हार्ड ड्राइव पर पूर्ण अधिकार कर लेगा !!\n"
-#~ "(यह समान संसाधन को अन्य मशीन पर संसाधित करने के लिए होता है)।\n"
-#~ "\n"
-#~ "आप हो सकता है कि संसाधन को रीप्ले करन चाहते हो।\n"
-
-#~ msgid "Replay"
-#~ msgstr "पुनः चलाना"
-
-#~ msgid "Automated"
-#~ msgstr "स्वचालित"
-
-#~ msgid "Save packages selection"
-#~ msgstr "पैकेजों के चयन को सुरक्षित करें"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "क्या आप ऐबूट का का उपयोग करना चाहते है?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "एक बूट को संसाधित करने में त्रुटि, \n"
-#~ "संसाधन को बलपूर्वक करने का प्रयास करे, चाहे कि प्रथम विभाजन नष्ट हो जायें?"
-
-#~ msgid "All"
-#~ msgstr "सभी"
-
-#~ msgid "TV card"
-#~ msgstr "टीवी कार्ड"
-
-#~ msgid "Boot"
-#~ msgstr "बूट"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "प्रमाणीकरण"
 
-#~ msgid "Gwenview"
-#~ msgstr "ग्वेनव्यू"
-
-#~ msgid "DrakVPN"
-#~ msgstr "ड्रैक वीपीएन"
-
-#, fuzzy
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "%d पैकेज"
-#~ msgstr[1] "%d पैकेज"
-
-#~ msgid "%d packages"
-#~ msgstr "%d पैकेज"
-
-#~ msgid "Language"
-#~ msgstr "भाषा"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "प्रमाण-पत्र"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "संसाधन प्रकार का चयन करें"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "अनुमान लगाया जा रहा है"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "संसाधन करने हेतु पैकेजों का चयन करें"
-
-#~ msgid "Users"
-#~ msgstr "उपयोगकर्ताओ"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "नेटवर्किंग"
 
-#~ msgid "Configure X"
-#~ msgstr "एक्स को संरचित करें"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "आपके कर्नल के अनुरूप कर्नल मॉडयूलो तक नहीं पहुँचा जा सकता है ( %s संचिका विलुप्त है),"
-#~ "इसका सामान्यता अर्थ है कि आपकी बूट फ़्लापी संसाधन माध्यम के साथ ताल-बद्व नहीं है(कृपया "
-#~ "एक और नयी बूट फ़्लापी का निर्माण करें)"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "उन्नयन"

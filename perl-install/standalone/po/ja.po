@@ -1587,7 +1587,7 @@ msgid "Keyboard"
 msgstr "キーボード"
 
 #: finish-install:58
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your keyboard layout."
 msgstr "キーボードの配列を選んでください。"
 
@@ -3429,77 +3429,200 @@ msgstr "言語と国の設定"
 msgid "Language & country configuration"
 msgstr "言語と国の設定"
 
+#, fuzzy
+#~ msgid "  --help                - display this help     \n"
+#~ msgstr " --help                - このヘルプを表示     \n"
+
+#, fuzzy
+#~ msgid ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Usage: \n"
+#~ msgstr ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "使い方: \n"
+
+#, fuzzy
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Moondrake バグ報告ツール"
+
+#~ msgid "%s Control Center"
+#~ msgstr "%s コントロールセンター"
+
+#, fuzzy
+#~ msgid "%s Help Center"
+#~ msgstr "Moondrake ヘルプセンター"
+
+#, fuzzy
+#~ msgid "%s Online"
+#~ msgstr "Moondrake オンライン"
+
+#, fuzzy
+#~ msgid "%s Tools Logs"
+#~ msgstr "Moondrake ツールのログ"
+
+#, fuzzy
+#~ msgid "%s Update"
+#~ msgstr "Moondrake アップデート"
+
+#, fuzzy
+#~ msgid "<control>H"
+#~ msgstr "<control>Q"
+
+#~ msgid "Autodetect _modems"
+#~ msgstr "モデムを自動検出(_M)"
+
+#~ msgid "Autodetect parallel _zip drives"
+#~ msgstr "パラレル Zip ドライブを自動検出(_Z)"
+
+#, fuzzy
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Moondrake ツールにアクセスするための認証方法を設定"
+
+#~ msgid "Copyright (C) %s by %s"
+#~ msgstr "Copyright (C) %s by %s"
+
+#~ msgid ""
+#~ "Here you can see files to use in order to fix permissions, owners, and "
+#~ "groups via msec.\n"
+#~ "You can also edit your own rules which will overwrite the default rules."
+#~ msgstr ""
+#~ "ここでは、権限/所有者/グループの設定を変更する際に msec が使用するファイル"
+#~ "を一覧できます。\n"
+#~ "デフォルトの設定を上書きする自分のルールを編集することもできます。"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#, fuzzy
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in"
+#~ msgstr ""
+#~ "テレビカードを検出できませんでした。Linux がサポートしている\n"
+#~ "ビデオ/テレビカードが正しく挿入されているか確認してください。\n"
+#~ "\n"
+#~ "\n"
+#~ "弊社のハードウェアデータベースを参照してください:\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
+
+#, fuzzy
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in."
+#~ msgstr ""
+#~ "テレビカードを検出できませんでした。Linux がサポートしている\n"
+#~ "ビデオ/テレビカードが正しく挿入されているか確認してください。\n"
+#~ "\n"
+#~ "\n"
+#~ "弊社のハードウェアデータベースを参照してください:\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
+
+#, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "メール警告を設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "メール警告を設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "起動の設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "メール警告を設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "言語と国の設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "グラフィカルサーバの設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "言語と国の設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "グラフィカルサーバの設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "グラフィカルサーバの設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "グラフィカルサーバの設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "UPS の設定"
+
+#, fuzzy
+#~ msgid "Select %s Tool:"
+#~ msgstr "Moondrake のツールを選択:"
+
+#~ msgid "_About..."
+#~ msgstr "情報(_A)..."
+
+#~ msgid "_Fields description"
+#~ msgstr "項目の説明(_F)"
+
+#~ msgid "_File"
+#~ msgstr "ファイル(_F)"
+
+#~ msgid "_Help"
+#~ msgstr "ヘルプ(_H)"
+
+#~ msgid "_Options"
+#~ msgstr "オプション(_O)"
+
+#~ msgid "_Quit"
+#~ msgstr "終了(_Q)"
+
+#~ msgid "_Report Bug"
+#~ msgstr "バグを報告(_R)"
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(デフォルトの設定: %s)"
+
 #~ msgid "/Autodetect _printers"
 #~ msgstr "/プリンタを自動検出(_P)"
 
-#~ msgid "Its GDB trace is:"
-#~ msgstr "GDB トレース:"
+#~ msgid "Autodetect _jaz drives"
+#~ msgstr "Jaz ドライブを自動検出(_J)"
 
-#~ msgid "OpenOffice.org"
-#~ msgstr "OpenOffice.org"
+#~ msgid "Autodetect _printers"
+#~ msgstr "プリンタを自動検出(_P)"
 
-#~ msgid ""
-#~ "The proprietary driver for your graphic card cannot be found, the system "
-#~ "is now using the free software driver (%s)."
-#~ msgstr ""
-#~ "お使いのグラフィックカード用のプロプライエタリドライバが見つかりません。代"
-#~ "わりにフリーのドライバ (%s) を使います。"
+#~ msgid "Background color"
+#~ msgstr "背景の色"
 
-#~ msgid ""
-#~ "Display theme\n"
-#~ "under console"
-#~ msgstr ""
-#~ "コンソールで\n"
-#~ "テーマを表示"
+#~ msgid "Basic options"
+#~ msgstr "基本オプション"
 
-#~ msgid "Create new theme"
-#~ msgstr "新しいテーマを作成"
+#~ msgid "Bugs"
+#~ msgstr "バグ"
 
-#~ msgid "X coordinate of text box"
-#~ msgstr "テキストボックスの X 座標"
+#~ msgid "Choose picture"
+#~ msgstr "画像を選択"
 
-#~ msgid "Y coordinate of text box"
-#~ msgstr "テキストボックスの Y 座標"
-
-#~ msgid "Text box width"
-#~ msgstr "テキストボックスの幅"
-
-#~ msgid "Text box height"
-#~ msgstr "テキストボックスの高さ"
-
-#~ msgid ""
-#~ "The progress bar X coordinate\n"
-#~ "of its upper left corner"
-#~ msgstr "進行バー左上隅の X 座標"
-
-#~ msgid ""
-#~ "The progress bar Y coordinate\n"
-#~ "of its upper left corner"
-#~ msgstr "進行バー左上隅の Y 座標"
-
-#~ msgid "The width of the progress bar"
-#~ msgstr "進行バーの幅"
-
-#~ msgid "The height of the progress bar"
-#~ msgstr "進行バーの高さ"
-
-#~ msgid "X coordinate of the text"
-#~ msgstr "テキストの X 座標"
-
-#~ msgid "Y coordinate of the text"
-#~ msgstr "テキストの Y 座標"
-
-#~ msgid "Text box transparency"
-#~ msgstr "テキストボックスの透明度"
-
-#~ msgid "Progress box transparency"
-#~ msgstr "進行ボックスの透明度"
-
-#~ msgid "Text size"
-#~ msgstr "テキストのサイズ"
-
-#~ msgid "Progress Bar"
-#~ msgstr "進行バー"
+#~ msgid "Choose progress bar background"
+#~ msgstr "進行バーの背景を選択"
 
 #~ msgid "Choose progress bar color 1"
 #~ msgstr "進行バーの色 1 を選択"
@@ -3507,62 +3630,11 @@ msgstr "言語と国の設定"
 #~ msgid "Choose progress bar color 2"
 #~ msgstr "進行バーの色 2 を選択"
 
-#~ msgid "Choose progress bar background"
-#~ msgstr "進行バーの背景を選択"
-
-#~ msgid "Gradient type"
-#~ msgstr "グラデーションの種類"
-
-#~ msgid "Text"
-#~ msgstr "テキスト"
-
 #~ msgid "Choose text color"
 #~ msgstr "テキストの色を選択"
 
-#~ msgid "Choose picture"
-#~ msgstr "画像を選択"
-
-#~ msgid "Silent bootsplash"
-#~ msgstr "サイレント起動スプラッシュ"
-
 #~ msgid "Choose text zone color"
 #~ msgstr "テキストゾーンの色を選択"
-
-#~ msgid "Text color"
-#~ msgstr "テキストの色"
-
-#~ msgid "Background color"
-#~ msgstr "背景の色"
-
-#~ msgid "Verbose bootsplash"
-#~ msgstr "詳細起動スプラッシュ"
-
-#~ msgid "Theme name"
-#~ msgstr "テーマ名"
-
-#~ msgid "Final resolution"
-#~ msgstr "最終的な解像度"
-
-#~ msgid "Display logo on Console"
-#~ msgstr "コンソールにロゴを表示"
-
-#~ msgid "Save theme"
-#~ msgstr "テーマを保存"
-
-#~ msgid "Please enter a theme name"
-#~ msgstr "テーマの名前を入力してください"
-
-#~ msgid "Please select a splash image"
-#~ msgstr "スプラッシュ画像を選んでください"
-
-#~ msgid "saving Bootsplash theme..."
-#~ msgstr "起動スプラッシュのテーマを保存中..."
-
-#~ msgid "Unable to load image file %s"
-#~ msgstr "画像ファイル %s をロードできません"
-
-#~ msgid "choose image"
-#~ msgstr "画像を選択"
 
 #~ msgid "Color selection"
 #~ msgstr "色の選択"
@@ -3570,11 +3642,22 @@ msgstr "言語と国の設定"
 #~ msgid "Coma bug"
 #~ msgstr "Coma バグ"
 
-#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-#~ msgstr "この CPU に Cyrix 6x86 の Coma バグがあるかどうか"
+#, fuzzy
+#~ msgid "Copyright (C) %s by Moondrake"
+#~ msgstr "Copyright (C) %s by %s"
 
-#~ msgid "Fdiv bug"
-#~ msgstr "Fdiv バグ"
+#~ msgid "Create new theme"
+#~ msgstr "新しいテーマを作成"
+
+#~ msgid "Display logo on Console"
+#~ msgstr "コンソールにロゴを表示"
+
+#~ msgid ""
+#~ "Display theme\n"
+#~ "under console"
+#~ msgstr ""
+#~ "コンソールで\n"
+#~ "テーマを表示"
 
 #~ msgid ""
 #~ "Early Intel Pentium chips manufactured have a bug in their floating point "
@@ -3585,44 +3668,44 @@ msgstr "言語と国の設定"
 #~ "ため、FDIV (Floating point DIVision) の実行時に、必要な精密性を実現できま"
 #~ "せん。"
 
-#~ msgid "Is FPU present"
-#~ msgstr "FPU の状態を表示"
-
-#~ msgid "yes means the processor has an arithmetic coprocessor"
-#~ msgstr "プロセッサが演算コプロセッサを有しているかどうか"
-
-#~ msgid "Whether the FPU has an irq vector"
-#~ msgstr "FPU に irq vector があるかどうか"
-
-#~ msgid ""
-#~ "yes means the arithmetic coprocessor has an exception vector attached"
-#~ msgstr "演算コプロセッサに exception vector が付いているかどうか"
-
 #~ msgid "F00f bug"
 #~ msgstr "F00F バグ"
-
-#~ msgid ""
-#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
-#~ msgstr "初期のペンティアムは F00F バイトコードをデコードすると固まります。"
-
-#~ msgid "Halt bug"
-#~ msgstr "Halt バグ"
-
-#~ msgid ""
-#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
-#~ "mode after the \"halt\" instruction is used"
-#~ msgstr ""
-#~ "初期の i486DX-100 チップの一部は、「halt」機能を使うと操作に戻れなくことが"
-#~ "あります"
-
-#~ msgid "Bugs"
-#~ msgstr "バグ"
 
 #~ msgid "FPU"
 #~ msgstr "FPU"
 
-#~ msgid "Unknown/Others"
-#~ msgstr "不明/その他"
+#~ msgid "Fdiv bug"
+#~ msgstr "Fdiv バグ"
+
+#~ msgid "File/-"
+#~ msgstr "ファイル(F)/-"
+
+#~ msgid "File/Save _As"
+#~ msgstr "ファイル(F)/名前を付けて保存(_A)"
+
+#~ msgid "File/_New"
+#~ msgstr "ファイル(F)/新規(_N)"
+
+#~ msgid "File/_Open"
+#~ msgstr "ファイル(F)/開く(_O)"
+
+#~ msgid "File/_Quit"
+#~ msgstr "ファイル(F)/終了(_Q)"
+
+#~ msgid "File/_Save"
+#~ msgstr "ファイル(F)/保存(_S)"
+
+#~ msgid "Final resolution"
+#~ msgstr "最終的な解像度"
+
+#~ msgid "Gradient type"
+#~ msgstr "グラデーションの種類"
+
+#~ msgid "Halt bug"
+#~ msgstr "Halt バグ"
+
+#~ msgid "Help/_About..."
+#~ msgstr "ヘルプ(H)/情報(_A)..."
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "
@@ -3714,32 +3797,151 @@ msgstr "言語と国の設定"
 #~ "が、このレベルではシステムは完全に閉ざされ、セキュリティ機能が最大に設定さ"
 #~ "れます。"
 
-#~ msgid "(default value: %s)"
-#~ msgstr "(デフォルトの設定: %s)"
+#~ msgid "Is FPU present"
+#~ msgstr "FPU の状態を表示"
 
-#~ msgid "Security Level:"
-#~ msgstr "セキュリティレベル:"
-
-#~ msgid "Security Alerts:"
-#~ msgstr "セキュリティ警告:"
-
-#~ msgid "Security Administrator:"
-#~ msgstr "セキュリティ管理者:"
-
-#~ msgid "Basic options"
-#~ msgstr "基本オプション"
+#~ msgid "Its GDB trace is:"
+#~ msgstr "GDB トレース:"
 
 #~ msgid "Network Options"
 #~ msgstr "ネットワークオプション"
 
-#~ msgid "System Options"
-#~ msgstr "システムオプション"
+#~ msgid "OpenOffice.org"
+#~ msgstr "OpenOffice.org"
+
+#~ msgid "Options/Test"
+#~ msgstr "オプション(O)/テスト"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "定期的なチェック"
+
+#~ msgid "Please enter a theme name"
+#~ msgstr "テーマの名前を入力してください"
+
+#~ msgid "Please select a splash image"
+#~ msgstr "スプラッシュ画像を選んでください"
 
 #~ msgid "Please wait, setting security level..."
 #~ msgstr "セキュリティレベルを設定しています。お待ちください..."
 
 #~ msgid "Please wait, setting security options..."
 #~ msgstr "セキュリティオプションを設定しています。お待ちください..."
+
+#~ msgid "Progress Bar"
+#~ msgstr "進行バー"
+
+#~ msgid "Progress box transparency"
+#~ msgstr "進行ボックスの透明度"
+
+#~ msgid "Save theme"
+#~ msgstr "テーマを保存"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "セキュリティ管理者:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "セキュリティ警告:"
+
+#~ msgid "Security Level:"
+#~ msgstr "セキュリティレベル:"
+
+#~ msgid "Silent bootsplash"
+#~ msgstr "サイレント起動スプラッシュ"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "初期の i486DX-100 チップの一部は、「halt」機能を使うと操作に戻れなくことが"
+#~ "あります"
+
+#~ msgid "System Options"
+#~ msgstr "システムオプション"
+
+#~ msgid "Text"
+#~ msgstr "テキスト"
+
+#~ msgid "Text box height"
+#~ msgstr "テキストボックスの高さ"
+
+#~ msgid "Text box transparency"
+#~ msgstr "テキストボックスの透明度"
+
+#~ msgid "Text box width"
+#~ msgstr "テキストボックスの幅"
+
+#~ msgid "Text color"
+#~ msgstr "テキストの色"
+
+#~ msgid "Text size"
+#~ msgstr "テキストのサイズ"
+
+#~ msgid "The height of the progress bar"
+#~ msgstr "進行バーの高さ"
+
+#~ msgid ""
+#~ "The progress bar X coordinate\n"
+#~ "of its upper left corner"
+#~ msgstr "進行バー左上隅の X 座標"
+
+#~ msgid ""
+#~ "The progress bar Y coordinate\n"
+#~ "of its upper left corner"
+#~ msgstr "進行バー左上隅の Y 座標"
+
+#~ msgid ""
+#~ "The proprietary driver for your graphic card cannot be found, the system "
+#~ "is now using the free software driver (%s)."
+#~ msgstr ""
+#~ "お使いのグラフィックカード用のプロプライエタリドライバが見つかりません。代"
+#~ "わりにフリーのドライバ (%s) を使います。"
+
+#~ msgid "The width of the progress bar"
+#~ msgstr "進行バーの幅"
+
+#~ msgid "Theme name"
+#~ msgstr "テーマ名"
+
+#~ msgid "Unable to load image file %s"
+#~ msgstr "画像ファイル %s をロードできません"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "不明/その他"
+
+#~ msgid "Verbose bootsplash"
+#~ msgstr "詳細起動スプラッシュ"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "FPU に irq vector があるかどうか"
+
+#~ msgid "X coordinate of text box"
+#~ msgstr "テキストボックスの X 座標"
+
+#~ msgid "X coordinate of the text"
+#~ msgstr "テキストの X 座標"
+
+#~ msgid "Y coordinate of text box"
+#~ msgstr "テキストボックスの Y 座標"
+
+#~ msgid "Y coordinate of the text"
+#~ msgstr "テキストの Y 座標"
+
+#~ msgid "choose image"
+#~ msgstr "画像を選択"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr "初期のペンティアムは F00F バイトコードをデコードすると固まります。"
+
+#~ msgid "saving Bootsplash theme..."
+#~ msgstr "起動スプラッシュのテーマを保存中..."
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "この CPU に Cyrix 6x86 の Coma バグがあるかどうか"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "演算コプロセッサに exception vector が付いているかどうか"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "プロセッサが演算コプロセッサを有しているかどうか"

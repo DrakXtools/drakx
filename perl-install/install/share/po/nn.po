@@ -431,16 +431,16 @@ msgid "URL must start with ftp:// or http://"
 msgstr "Adresser må starta med «ftp://» eller «http://»."
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr "Kontaktar Mandriva Linux-nettstaden for oversikt over speglar …"
+msgstr "Kontaktar %s-nettstaden for oversikt over speglar …"
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Klarte ikkje få kontakt med Mandriva Linux-nettstaden for å henta oversikt "
-"over tilgjengelege speglar."
+"Klarte ikkje få kontakt med %s-nettstaden for å henta oversikt over "
+"tilgjengelege speglar."
 
 #: any.pm:204
 #, c-format
@@ -728,11 +728,12 @@ msgstr ""
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Ingen XML-informasjon for mediet «%s». Berre delvis resultat for pakken «%s»."
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Inga skildring"
 
 #: pkgs.pm:280
 #, c-format
@@ -749,14 +750,14 @@ msgid "An error occurred:"
 msgstr "Det oppstod ein feil:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Det oppstod ein feil:"
+msgstr "Det oppstod ein kritisk feil: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Ikkje spør igjen"
 
 #: pkgs.pm:894
 #, c-format
@@ -795,9 +796,9 @@ msgid "Entering step `%s'\n"
 msgstr "Køyrer steg «%s»\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Installering"
+msgstr "%s-installering %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -810,14 +811,13 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "X.Org-tenaren tek tid å starta. Vent litt …"
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Du har lite systemressursar, og kan få vanskar med å installera Mandriva "
-"Linux.\n"
+"Du har lite systemressursar, og kan få vanskar med å installera %s Linux.\n"
 "Du kan då installera i tekstmodus i staden for. Trykk «F1» ved oppstart av\n"
 "CD-plata, og skriv «text» om du ønskjer dette."
 
@@ -827,14 +827,14 @@ msgid "Media Selection"
 msgstr "Medieval"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Installer Mandriva KDE-skrivebord"
+msgstr "Installer %s KDE-skrivebord"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Installer Mandriva GNOME-skrivebord"
+msgstr "Installer %s GNOME-skrivebord"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -879,7 +879,7 @@ msgstr "Direkte pakkeval"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Valde vekk alle"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1646,41 +1646,142 @@ msgid ""
 "Exit"
 msgstr "Avslutt"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux-installering %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Grafisk miljø"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Eit grafisk skrivebordsmiljø med brukarvenlege program og "
+#~ "skrivebordsverktøy"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Eit kjapt og lite ressurskrevande grafisk skrivebordsmiljø med "
+#~ "brukarvenlege program og skrivebordsverktøy"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Moroprogram: Arkadespel, brettspel, strategispel, med meir"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Arbeidstasjon"
+
+#, fuzzy
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Installasjonsprogrammet har oppdaga at den gamle utgåva av Moondrake som "
+#~ "du har installert ikkje kan trygt oppgraderast til %s.\n"
+#~ "\n"
+#~ "Du bør velja ei nyinstallering, som då vil erstatta den gamle versjonen.\n"
+#~ "\n"
+#~ "Åtvaring: Du bør ta reservekopi av alle personlege data før du vel "
+#~ "«Nyinstallering»."
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME-arbeidsstasjon"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake-vegvisarar"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Lisensvilkår"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Kontorprogramvare: Teksthandsamarar (LibreOffice Writer, Kword), rekneark "
+#~ "(LibreOffice Calc, Kspread), PDF-viseprogram, med meir"
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Skrivebordet på ein minnepinne"
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Kontormaskin"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "Mandriva Linux-distribusjonen med 100 %% open kjeldekode"
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL- og MariaDB-databasetenar"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Utforsk Linux med Mandriva One"
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL- eller MariaDB-databasetenar"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Førebur oppstartslastar …"
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Sjølvvalt skrivebord"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Hopp over alle pakkar frå mediet «%s»"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, med fleire"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE-arbeidsstasjon"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Eit fullt Mandriva Linux-skrivebord – med brukarstøtte"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: Distribusjonar for alle behov"
+#~ msgid "A full Moondrake desktop, with support"
+#~ msgstr "Eit fullt Moondrake-skrivebord – med brukarstøtte"
+
+#~ msgid "Automated"
+#~ msgstr "Automatisert"
 
 #~ msgid "Bad package"
 #~ msgstr "Ugyldig pakke"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Nettverk"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Kontaktar spegel for oversikt over pakkar …"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Vil du bruka aboot?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "Lastar ned «%s» …"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Oppdateringar"
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Feil ved installering av «aboot».\n"
+#~ "Vil du prøva å tvinga gjennom installering, sjølv om det kan øydeleggja "
+#~ "den første partisjonen?"
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Utforsk Linux med Mandriva One"
+
+#~ msgid "Explore Linux easily with Moondrake One"
+#~ msgstr "Utforsk Linux med Moondrake One"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Lag diskett for automatisk installasjon"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm-skrivebord"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux-installering %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: Distribusjonar for alle behov"
+
+#~ msgid "Moondrake: distributions for everybody's needs"
+#~ msgstr "Moondrake: Distribusjonar for alle behov"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1688,6 +1789,53 @@ msgstr "Avslutt"
 #~ msgstr ""
 #~ "Kontorprogramvare: Teksthandsamarar (KWord, AbiWord), rekneark (KSpread, "
 #~ "gnumeric), PDF-viseprogram, med meir"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Førebur oppstartslastar …"
+
+#~ msgid "Proceed"
+#~ msgstr "Hald fram"
+
+#~ msgid "Replay"
+#~ msgstr "Spel av"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Lagra pakkeval"
+
+#~ msgid "Select All"
+#~ msgstr "Valde alle"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "Mandriva Linux-distribusjonen med 100 %% open kjeldekode"
+
+#~ msgid "The 100%% open source Moondrake distribution"
+#~ msgstr "Moondrake-distribusjonen med 100 %% open kjeldekode"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Du kan heilautomatisera autoinstalleringa om du ønskjer. Denne vil då "
+#~ "overskriva heile harddisken. (Dette er meint for installering på ei anna "
+#~ "maskin.)\n"
+#~ "\n"
+#~ "Du kan òg velja å køyra gjennom installasjonen på nytt.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Klarte ikkje kontakta spegelen «%s»"
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr "Oppgradering frå 32 bits til 64 bits er ikkje støtta"
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr "Oppgradering frå 64 bits til 32 bits er ikkje støtta"
+
+#~ msgid "Welcome"
+#~ msgstr "Velkommen"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1707,21 +1855,6 @@ msgstr "Avslutt"
 #~ "dine, \n"
 #~ "må du starta maskina på nytt, og så oppgradera med Mandriva-"
 #~ "oppdateringsprogrammet som du finn i systemtrauet."
-
-#~ msgid "Proceed"
-#~ msgstr "Hald fram"
-
-#~ msgid "retrieval of [%s] failed"
-#~ msgstr "klarte ikkje henta [%s]"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "Lastar ned «%s» …"
-
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr "Oppgradering frå 32 bits til 64 bits er ikkje støtta"
-
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr "Oppgradering frå 64 bits til 32 bits er ikkje støtta"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1748,47 +1881,23 @@ msgstr "Avslutt"
 #~ "\n"
 #~ "Er du sikker på at du vil installera tenarane?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm-skrivebord"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Kontaktar spegel for oversikt over pakkar …"
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Klarte ikkje kontakta spegelen «%s»"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Lag diskett for automatisk installasjon"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Skrivebordet på ein minnepinne"
 
 #~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Du kan heilautomatisera autoinstalleringa om du ønskjer. Denne vil då "
-#~ "overskriva heile harddisken. (Dette er meint for installering på ei anna "
-#~ "maskin.)\n"
-#~ "\n"
-#~ "Du kan òg velja å køyra gjennom installasjonen på nytt.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Spel av"
-
-#~ msgid "Automated"
-#~ msgstr "Automatisert"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Lagra pakkeval"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Vil du bruka aboot?"
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Lisensvilkår"
 
 #~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Feil ved installering av «aboot».\n"
-#~ "Vil du prøva å tvinga gjennom installering, sjølv om det kan øydeleggja "
-#~ "den første partisjonen?"
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Nettverk"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Oppdateringar"
+
+#~ msgid "retrieval of [%s] failed"
+#~ msgstr "klarte ikkje henta [%s]"

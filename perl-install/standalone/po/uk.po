@@ -272,9 +272,9 @@ msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "В програмі \"%s\" сталася наступна помилка сегментації:"
 
 #: drakbug:144
-#, fuzzy, c-format
+#, c-format
 msgid "Used theme: %s"
-msgstr "Користувач: %s"
+msgstr "Тема: %s"
 
 #: drakbug:146
 #, c-format
@@ -714,7 +714,7 @@ msgstr "Ghostscript"
 #: drakfont:556
 #, c-format
 msgid "LibreOffice"
-msgstr ""
+msgstr "LibreOffice"
 
 #: drakfont:557
 #, c-format
@@ -1595,7 +1595,7 @@ msgid "Keyboard"
 msgstr "Клавіатура"
 
 #: finish-install:58
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Будь ласка, виберіть розкладку клавіатури."
 
@@ -2743,14 +2743,14 @@ msgstr ""
 "і введіть назву (або IP-адресу) сервера SMTP, який Ви хочете використовувати"
 
 #: logdrake:440
-#, fuzzy, c-format
+#, c-format
 msgid "Email address"
-msgstr "IP-адреса"
+msgstr "Адреса ел. пошти"
 
 #: logdrake:441
-#, fuzzy, c-format
+#, c-format
 msgid "Email server"
-msgstr "Сервер Samba"
+msgstr "Сервер ел. пошти"
 
 #: logdrake:445
 #, c-format
@@ -2787,12 +2787,12 @@ msgstr "Зберегти як.."
 #: service_harddrake:487
 #, c-format
 msgid "Display driver setup"
-msgstr ""
+msgstr "Налаштування драйвера дисплея"
 
 #: notify-x11-free-driver-switch:20
 #, c-format
 msgid "The display driver has been automatically switched to '%s'."
-msgstr ""
+msgstr "Драйвер дисплея було автоматично змінено на «%s»."
 
 #: notify-x11-free-driver-switch:21
 #, c-format
@@ -3092,13 +3092,13 @@ msgstr ""
 "%s\", щоб прочитати її."
 
 #: scannerdrake:407 scannerdrake:416
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"Після цього Ви зможете сканувати документи з допомогою \"XSane\" або \"Kooka"
-"\" з меню програм Мультимедія/Графіка."
+"Після цього ви зможете сканувати документи з допомогою \"XSane\" або \"%s\" "
+"з меню програм «Звук і відео/Графіка»."
 
 #: scannerdrake:411
 #, c-format
@@ -3129,15 +3129,15 @@ msgid "Congratulations!"
 msgstr "Вітання!"
 
 #: scannerdrake:419
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
 "Ваш %s було налаштовано.\n"
-"Тепер Ви можете сканувати документи з допомогою \"XSane\" або \"Kooka\" з "
-"меню програм Мультимедія/Графіка."
+"Тепер ви можете сканувати документи з допомогою \"XSane\" або \"%s\" з меню "
+"програм «Звук і відео/Графіка»."
 
 #: scannerdrake:444
 #, c-format
@@ -3342,17 +3342,17 @@ msgstr ""
 "сканерів."
 
 #: service_harddrake:173
-#, fuzzy, c-format
+#, c-format
 msgid "The graphics card '%s' is no longer supported by driver '%s'"
 msgstr "Графічна картка «%s» вже не підтримується драйвером «%s»"
 
 #: service_harddrake:183
 #, c-format
 msgid "New release, reconfiguring X for %s"
-msgstr ""
+msgstr "Новий випуск, повторне налаштування графічного сервера для %s"
 
 #: service_harddrake:274
-#, fuzzy, c-format
+#, c-format
 msgid "The proprietary kernel driver was not found for X.org driver '%s'"
 msgstr ""
 "Для драйвера X.org «%s» не знайдено відповідного пропрієтарного драйвера "
@@ -3396,7 +3396,7 @@ msgstr "Відбувається визначення пристроїв"
 #: service_harddrake:453 service_harddrake:458
 #, c-format
 msgid "Display driver issue"
-msgstr ""
+msgstr "Вада драйвера дисплея"
 
 #: service_harddrake:454
 #, c-format
@@ -3406,6 +3406,10 @@ msgid ""
 "boot process. Startup of the X server may now fail as that option was not "
 "specified."
 msgstr ""
+"Для запобігання завантаженню драйвера KMS ядра під час завантаження системи, "
+"поточний налаштований драйвер вимагає використання параметра завантаження "
+"«nokmsboot». Якщо цей параметр не буде вказано, ймовірно, запустити "
+"графічний сервер не вдасться."
 
 #: service_harddrake:459
 #, c-format
@@ -3414,16 +3418,20 @@ msgid ""
 "driver the X server is configured to use. Startup of the X server may now "
 "fail."
 msgstr ""
+"Виявлено завантажений модуль ядра драйвера дисплея, який конфліктує з "
+"драйвером, на використання якого налаштовано графічний сервер. Ймовірно, "
+"запустити графічний сервер тепер не вдасться."
 
 #: service_harddrake:474 service_harddrake:487
 #, c-format
 msgid "The system has to be rebooted due to a display driver change."
 msgstr ""
+"Через зміни у налаштуваннях драйвера дисплея систему слід перезавантажити."
 
 #: service_harddrake:475 service_harddrake:488
 #, c-format
 msgid "Press Cancel within %d seconds to abort."
-msgstr ""
+msgstr "Протягом %d секунд ви можете натиснути «Скасувати», щоб перервати дію."
 
 #: ../menu/localedrake-system.desktop.in.h:1
 msgid "System Regional Settings"
@@ -3453,21 +3461,265 @@ msgstr "Регіональні налаштування"
 msgid "Language & country configuration"
 msgstr "Налаштування мови і країни"
 
+#~ msgid "  --help                - display this help     \n"
+#~ msgstr " --help                — вивести цю довідку     \n"
+
+#~ msgid ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Usage: \n"
+#~ msgstr ""
+#~ " drakhelp 0.1\n"
+#~ "©Mandriva, %s.\n"
+#~ "©Moondrake, %s.\n"
+#~ "Ця програма безкоштовна і може розповсюджуватися згідно умов Загальної "
+#~ "публічної ліцензії GNU GPL\n"
+#~ "\n"
+#~ "Використання: \n"
+
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Програма для створення звітів щодо помилок у %s"
+
+#~ msgid "%s Control Center"
+#~ msgstr "Центр керування %s"
+
+#~ msgid "%s Help Center"
+#~ msgstr "Центр довідки %s"
+
+#~ msgid "%s Online"
+#~ msgstr "%s Online"
+
+#~ msgid "%s Tools Logs"
+#~ msgstr "Журнал інструментів %s"
+
+#~ msgid "%s Update"
+#~ msgstr "Оновлення %s"
+
+#~ msgid "<control>H"
+#~ msgstr "<control>H"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Application Security "
+#~ "Configuration"
+#~ msgstr ""
+#~ "Щоб запустити засіб налаштовування захисту програм Moondrake, слід пройти "
+#~ "розпізнавання"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Authentication Configuration"
+#~ msgstr ""
+#~ "Щоб запустити засіб налаштовування розпізнавання у Moondrake, слід пройти "
+#~ "розпізнавання"
+
+#~ msgid "Authentication is required to run Moondrake Boot Configuration"
+#~ msgstr ""
+#~ "Щоб запустити засіб налаштовування завантаження Moondrake, слід пройти "
+#~ "розпізнавання"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Date and Time Configuration"
+#~ msgstr ""
+#~ "Щоб запустити засіб налаштовування дати і часу у Moondrake, слід пройти "
+#~ "розпізнавання"
+
+#~ msgid "Authentication is required to run Moondrake Disk Layout Editor"
+#~ msgstr ""
+#~ "Щоб запустити редактор компонування диска Moondrake, слід пройти "
+#~ "розпізнавання"
+
+#~ msgid "Authentication is required to run Moondrake Font Configuration"
+#~ msgstr ""
+#~ "Щоб запустити засіб налаштовування шрифтів Moondrake, слід пройти "
+#~ "розпізнавання"
+
+#~ msgid "Authentication is required to run Moondrake Hardware Configuration"
+#~ msgstr ""
+#~ "Щоб запустити засіб налаштовування обладнання Moondrake, слід пройти "
+#~ "розпізнавання"
+
+#~ msgid "Authentication is required to run Moondrake Log Viewer"
+#~ msgstr ""
+#~ "Щоб запустити засіб перегляду журналу Moondrake, слід пройти розпізнавання"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Login Manager Configuration"
+#~ msgstr ""
+#~ "Щоб запустити засіб керування входом до Moondrake, слід пройти "
+#~ "розпізнавання"
+
+#~ msgid "Authentication is required to run Moondrake Scanner Configuration"
+#~ msgstr ""
+#~ "Щоб запустити засіб налаштовування сканера Moondrake, слід пройти "
+#~ "розпізнавання"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Security Permissions "
+#~ "Configuration"
+#~ msgstr ""
+#~ "Щоб запустити засіб налаштовування захисних правил доступу Moondrake, "
+#~ "слід пройти розпізнавання"
+
+#~ msgid "Authentication is required to run Moondrake Service Configuration"
+#~ msgstr ""
+#~ "Щоб запустити засіб налаштовування служб Moondrake, слід пройти "
+#~ "розпізнавання"
+
+#~ msgid "Authentication is required to run Moondrake UPS Configuration"
+#~ msgstr ""
+#~ "Щоб запустити засіб налаштовування UPS Moondrake, слід пройти "
+#~ "розпізнавання"
+
+#~ msgid "Autodetect _modems"
+#~ msgstr "Автовизначення _модемів"
+
+#~ msgid "Autodetect parallel _zip drives"
+#~ msgstr "Автовизначення паралельних п_ристроїв zip"
+
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Налаштувати запити розпізнавання для доступу до інструментів %s"
+
+#~ msgid "Copyright (C) %s by %s"
+#~ msgstr "© %s, %s"
+
+#~ msgid ""
+#~ "Here you can see files to use in order to fix permissions, owners, and "
+#~ "groups via msec.\n"
+#~ "You can also edit your own rules which will overwrite the default rules."
+#~ msgstr ""
+#~ "Тут ви можете переглянути файли з метою зміни прав,\n"
+#~ "власників і груп з допомогою msec.\n"
+#~ "Ви також можете редагувати свої власні права, які\n"
+#~ "стануть типовими."
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in"
+#~ msgstr ""
+#~ "На вашому комп’ютері не виявлено жодних звукових карток. Будь ласка, "
+#~ "перевірте, чи з’єднано з комп’ютером Linux-сумісну звукову картку."
+
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in."
+#~ msgstr ""
+#~ "На вашому комп’ютері не виявлено жодних ТБ-карток карток. Будь ласка, "
+#~ "перевірте, чи з’єднано з комп’ютером Linux-сумісну відеокартку або ТБ-"
+#~ "картку."
+
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Запуск засобу налаштовування захисту програм Moondrake"
+
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Запуск засобу налаштовування розпізнавання у Moondrake"
+
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "Запуск засобу налаштовування завантаження Moondrake"
+
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Запуск засобу налаштовування дати і часу у Moondrake"
+
+#~ msgid "Run Moondrake Disk Layout Editor"
+#~ msgstr "Запуск редактора компонування диска Moondrake"
+
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Запуск засобу налаштовування шрифтів Moondrake"
+
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Запуск засобу налаштовування обладнання Moondrake"
+
+#~ msgid "Run Moondrake Log Viewer"
+#~ msgstr "Запуск засобу перегляду журналу Moondrake"
+
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Запуск засобу керування входом до Moondrake"
+
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Запуск засобу налаштовування сканера Moondrake"
+
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Запуск засобу налаштовування захисних правил доступу Moondrake"
+
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Запуск засобу налаштовування служб Moondrake"
+
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "Запуск засобу налаштовування UPS Moondrake"
+
+#~ msgid "Select %s Tool:"
+#~ msgstr "Виберіть інструмент %s:"
+
+#~ msgid "_About..."
+#~ msgstr "_Про програму…"
+
+#~ msgid "_Fields description"
+#~ msgstr "Описи по_лів"
+
+#~ msgid "_File"
+#~ msgstr "_Файл"
+
+#~ msgid "_Help"
+#~ msgstr "_Довідка"
+
+#~ msgid "_Options"
+#~ msgstr "_Параметри"
+
+#~ msgid "_Quit"
+#~ msgstr "Ви_йти"
+
+#~ msgid "_Report Bug"
+#~ msgstr "По_відомити про помилку"
+
 #~ msgid "/Autodetect _printers"
 #~ msgstr "/Користуватися автовизначенням друкарок"
 
-#~ msgid "Its GDB trace is:"
-#~ msgstr "Трасування GDB:"
+#~ msgid "Autodetect _jaz drives"
+#~ msgstr "Автовизн_ачення пристроїв jaz"
 
-#~ msgid "OpenOffice.org"
-#~ msgstr "OpenOffice.org"
+#~ msgid "Autodetect _printers"
+#~ msgstr "Користуватися автовизначенням друкарок"
 
-#~ msgid ""
-#~ "The proprietary driver for your graphic card cannot be found, the system "
-#~ "is now using the free software driver (%s)."
-#~ msgstr ""
-#~ "Драйвер виробника для Вашої графічної плати не знайдено, система "
-#~ "використовує зараз вільний драйвер (%s)."
+#~ msgid "Background color"
+#~ msgstr "Колір тла"
+
+#~ msgid "Bugs"
+#~ msgstr "Помилки"
+
+#~ msgid "Choose picture"
+#~ msgstr "Виберіть малюнок"
+
+#~ msgid "Choose progress bar background"
+#~ msgstr "Виберіть тло індикатора поступу"
+
+#~ msgid "Choose progress bar color 1"
+#~ msgstr "Виберіть колір 1 індикатора поступу"
+
+#~ msgid "Choose progress bar color 2"
+#~ msgstr "Виберіть колір 2 індикатора поступу"
+
+#~ msgid "Choose text color"
+#~ msgstr "Виберіть колір тексту"
+
+#~ msgid "Choose text zone color"
+#~ msgstr "Виберіть колір текстової області"
+
+#~ msgid "Color selection"
+#~ msgstr "Вибір кольору"
+
+#~ msgid "Coma bug"
+#~ msgstr "Coma bug"
+
+#~ msgid "Create new theme"
+#~ msgstr "Створити нову тему"
+
+#~ msgid "Display logo on Console"
+#~ msgstr "Показувати логотип в консолі"
 
 #~ msgid ""
 #~ "Display theme\n"
@@ -3476,20 +3728,111 @@ msgstr "Налаштування мови і країни"
 #~ "Показувати тему\n"
 #~ "над консоллю"
 
-#~ msgid "Create new theme"
-#~ msgstr "Створити нову тему"
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "Перші чіпи Intel Pentium мали помилку в математичному співпроцесорі, яка "
+#~ "не забезпечувала необхідної точності при діленні з плаваючою крапкою "
+#~ "(FDIV)"
 
-#~ msgid "X coordinate of text box"
-#~ msgstr "Координата X текстового вікна"
+#~ msgid "F00f bug"
+#~ msgstr "Помилка F00f"
 
-#~ msgid "Y coordinate of text box"
-#~ msgstr "Координата Y текстового вікна"
+#~ msgid "FPU"
+#~ msgstr "FPU"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Помилка Fdiv"
+
+#~ msgid "File/-"
+#~ msgstr "Файл/-"
+
+#~ msgid "File/Save _As"
+#~ msgstr "Файл/Зберегти _як…"
+
+#~ msgid "File/_New"
+#~ msgstr "Файл/С_творити"
+
+#~ msgid "File/_Open"
+#~ msgstr "Файл/_Відкрити"
+
+#~ msgid "File/_Quit"
+#~ msgstr "Файл/_Вийти"
+
+#~ msgid "File/_Save"
+#~ msgstr "Файл/_Зберегти"
+
+#~ msgid "Final resolution"
+#~ msgstr "Кінцева роздільна здатність"
+
+#~ msgid "Gradient type"
+#~ msgstr "Тип градієнту"
+
+#~ msgid "Halt bug"
+#~ msgstr "Помилка зупину"
+
+#~ msgid "Help/_About..."
+#~ msgstr "Довідка/_Про програму…"
+
+#~ msgid "Is FPU present"
+#~ msgstr "Чи є FPU"
+
+#~ msgid "Its GDB trace is:"
+#~ msgstr "Трасування GDB:"
+
+#~ msgid "OpenOffice.org"
+#~ msgstr "OpenOffice.org"
+
+#~ msgid "Options/Test"
+#~ msgstr "Параметри/Перевірка"
+
+#~ msgid "Please enter a theme name"
+#~ msgstr "Введіть назву теми"
+
+#~ msgid "Please select a splash image"
+#~ msgstr "Виберіть малюнок для заставки"
+
+#~ msgid "Progress Bar"
+#~ msgstr "Смуга поступу"
+
+#~ msgid "Progress box transparency"
+#~ msgstr "Прозорість вікна індикатора поступу"
+
+#~ msgid "Save theme"
+#~ msgstr "Зберегти тему"
+
+#~ msgid "Silent bootsplash"
+#~ msgstr "Спрощене завантаження"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Деякі з ранніх чіпів i486DX-100 не могли точно повертатися в робочий "
+#~ "режим після використання інструкції \"halt\""
+
+#~ msgid "Text"
+#~ msgstr "Текст"
+
+#~ msgid "Text box height"
+#~ msgstr "Висота текстового вікна"
+
+#~ msgid "Text box transparency"
+#~ msgstr "Прозорість текстового вікна"
 
 #~ msgid "Text box width"
 #~ msgstr "Ширина текстового вікна"
 
-#~ msgid "Text box height"
-#~ msgstr "Висота текстового вікна"
+#~ msgid "Text color"
+#~ msgstr "Колір тексту"
+
+#~ msgid "Text size"
+#~ msgstr "Розмір тексту"
+
+#~ msgid "The height of the progress bar"
+#~ msgstr "Висота індикатора поступу"
 
 #~ msgid ""
 #~ "The progress bar X coordinate\n"
@@ -3505,122 +3848,55 @@ msgstr "Налаштування мови і країни"
 #~ "Координата y верхнього лівого\n"
 #~ "кута індикатора поступу"
 
+#~ msgid ""
+#~ "The proprietary driver for your graphic card cannot be found, the system "
+#~ "is now using the free software driver (%s)."
+#~ msgstr ""
+#~ "Драйвер виробника для Вашої графічної плати не знайдено, система "
+#~ "використовує зараз вільний драйвер (%s)."
+
 #~ msgid "The width of the progress bar"
 #~ msgstr "Ширина індикатора поступу"
-
-#~ msgid "The height of the progress bar"
-#~ msgstr "Висота індикатора поступу"
-
-#~ msgid "X coordinate of the text"
-#~ msgstr "Координата X тексту"
-
-#~ msgid "Y coordinate of the text"
-#~ msgstr "Координата Y тексту"
-
-#~ msgid "Text box transparency"
-#~ msgstr "Прозорість текстового вікна"
-
-#~ msgid "Progress box transparency"
-#~ msgstr "Прозорість вікна індикатора поступу"
-
-#~ msgid "Text size"
-#~ msgstr "Розмір тексту"
-
-#~ msgid "Progress Bar"
-#~ msgstr "Смуга поступу"
-
-#~ msgid "Choose progress bar color 1"
-#~ msgstr "Виберіть колір 1 індикатора поступу"
-
-#~ msgid "Choose progress bar color 2"
-#~ msgstr "Виберіть колір 2 індикатора поступу"
-
-#~ msgid "Choose progress bar background"
-#~ msgstr "Виберіть тло індикатора поступу"
-
-#~ msgid "Gradient type"
-#~ msgstr "Тип градієнту"
-
-#~ msgid "Text"
-#~ msgstr "Текст"
-
-#~ msgid "Choose text color"
-#~ msgstr "Виберіть колір тексту"
-
-#~ msgid "Choose picture"
-#~ msgstr "Виберіть малюнок"
-
-#~ msgid "Silent bootsplash"
-#~ msgstr "Спрощене завантаження"
-
-#~ msgid "Choose text zone color"
-#~ msgstr "Виберіть колір текстової області"
-
-#~ msgid "Text color"
-#~ msgstr "Колір тексту"
-
-#~ msgid "Background color"
-#~ msgstr "Колір тла"
-
-#~ msgid "Verbose bootsplash"
-#~ msgstr "Детальне завантаження"
 
 #~ msgid "Theme name"
 #~ msgstr "Назва теми"
 
-#~ msgid "Final resolution"
-#~ msgstr "Кінцева роздільна здатність"
-
-#~ msgid "Display logo on Console"
-#~ msgstr "Показувати логотип в консолі"
-
-#~ msgid "Save theme"
-#~ msgstr "Зберегти тему"
-
-#~ msgid "Please enter a theme name"
-#~ msgstr "Введіть назву теми"
-
-#~ msgid "Please select a splash image"
-#~ msgstr "Виберіть малюнок для заставки"
-
-#~ msgid "saving Bootsplash theme..."
-#~ msgstr "зберігається тема Bootsplash..."
-
 #~ msgid "Unable to load image file %s"
 #~ msgstr "Неможливо завантажити файл малюнку %s"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Невідомий/Інші"
+
+#~ msgid "Verbose bootsplash"
+#~ msgstr "Детальне завантаження"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Чи має FPU вектор irq"
+
+#~ msgid "X coordinate of text box"
+#~ msgstr "Координата X текстового вікна"
+
+#~ msgid "X coordinate of the text"
+#~ msgstr "Координата X тексту"
+
+#~ msgid "Y coordinate of text box"
+#~ msgstr "Координата Y текстового вікна"
+
+#~ msgid "Y coordinate of the text"
+#~ msgstr "Координата Y тексту"
 
 #~ msgid "choose image"
 #~ msgstr "виберіть малюнок"
 
-#~ msgid "Color selection"
-#~ msgstr "Вибір кольору"
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr "ранні пентіуми мали помилку і зависали при декодуванні F00F"
 
-#~ msgid "Coma bug"
-#~ msgstr "Coma bug"
+#~ msgid "saving Bootsplash theme..."
+#~ msgstr "зберігається тема Bootsplash..."
 
 #~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
 #~ msgstr "якщо цей процесор має помилку Cyrix 6x86 Coma"
-
-#~ msgid "Fdiv bug"
-#~ msgstr "Помилка Fdiv"
-
-#~ msgid ""
-#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
-#~ "processor which did not achieve the required precision when performing a "
-#~ "Floating point DIVision (FDIV)"
-#~ msgstr ""
-#~ "Перші чіпи Intel Pentium мали помилку в математичному співпроцесорі, яка "
-#~ "не забезпечувала необхідної точності при діленні з плаваючою крапкою "
-#~ "(FDIV)"
-
-#~ msgid "Is FPU present"
-#~ msgstr "Чи є FPU"
-
-#~ msgid "yes means the processor has an arithmetic coprocessor"
-#~ msgstr "'так' означає, що процесор має арифметичний співпроцесор"
-
-#~ msgid "Whether the FPU has an irq vector"
-#~ msgstr "Чи має FPU вектор irq"
 
 #~ msgid ""
 #~ "yes means the arithmetic coprocessor has an exception vector attached"
@@ -3628,28 +3904,5 @@ msgstr "Налаштування мови і країни"
 #~ "так означає, що арифметичний співпроцесор має вмонтований вектор "
 #~ "виняткових операцій"
 
-#~ msgid "F00f bug"
-#~ msgstr "Помилка F00f"
-
-#~ msgid ""
-#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
-#~ msgstr "ранні пентіуми мали помилку і зависали при декодуванні F00F"
-
-#~ msgid "Halt bug"
-#~ msgstr "Помилка зупину"
-
-#~ msgid ""
-#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
-#~ "mode after the \"halt\" instruction is used"
-#~ msgstr ""
-#~ "Деякі з ранніх чіпів i486DX-100 не могли точно повертатися в робочий "
-#~ "режим після використання інструкції \"halt\""
-
-#~ msgid "Bugs"
-#~ msgstr "Помилки"
-
-#~ msgid "FPU"
-#~ msgstr "FPU"
-
-#~ msgid "Unknown/Others"
-#~ msgstr "Невідомий/Інші"
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "'так' означає, що процесор має арифметичний співпроцесор"

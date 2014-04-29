@@ -721,7 +721,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Апісаньне адсутнічае"
 
 #: pkgs.pm:280
 #, c-format
@@ -783,9 +783,9 @@ msgid "Entering step `%s'\n"
 msgstr "Пераход на крок ‛%s’\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Усталёўваем"
+msgstr "Усталяванне %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -798,14 +798,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "У Вашай сістэме маецца недахоп рэсурсаў, таму магчымы праблемы\n"
-"пры ўсталяванні Mandriva Linux. У гэтым выпадку паспрабуйце тэкставую\n"
+"пры ўсталяванні %s. У гэтым выпадку паспрабуйце тэкставую\n"
 "праграму ўсталявання. Для гэтага націсніце ‛F1’ у час загрузкі, а потым\n"
 "набярыце ‛text’ і націсніце <ENTER>."
 
@@ -1204,9 +1204,9 @@ msgid "Bad file"
 msgstr "Загрузка файла"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1591,51 +1591,100 @@ msgid ""
 "Exit"
 msgstr "Выход"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Усталяванне Mandriva Linux %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Абалонка"
 
-#~ msgid "Bad package"
-#~ msgstr "Дрэнны пакет"
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Графічнае асяродзе са зручным дзеля выкарыстання наборам прыкладанняў і  "
+#~ "інструментальных сродкаў"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Графічнае асяродзе са зручным дзеля выкарыстання наборам прыкладанняў і  "
+#~ "інструментальных сродкаў"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Забаўляльныя праграмы: аркады, стратэгіі і г.д."
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Канфігурацыя"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Інфармацыя аб памяці"
+
+#, fuzzy
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Цэнтар кіраваньня"
 
 #~ msgid ""
-#~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
-#~ "gnumeric), pdf viewers, etc"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
 #~ msgstr ""
-#~ "Офісныя праграмы: працэсары словаў (kword, abiword), электроныя табліцы, "
-#~ "аглядальнікі pdf-файлаў, і г.д."
+#~ "Офісныя праграмы: працэсары словаў (LibreOffice Writer, Kword), "
+#~ "электроныя табліцы, аглядальнікі pdf-файлаў, і г.д."
 
 #, fuzzy
-#~ msgid "Downloading file %s..."
-#~ msgstr "Вызначэнне прыладаў..."
+#~ msgid "Office tools"
+#~ msgstr "Працоўныя мейсцы"
 
 #, fuzzy
-#~ msgid "IceWm Desktop"
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Падрыхтоўка загрузчыка"
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
 #~ msgstr "Працоўны стол"
 
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Сувязь з люрам для атрымання спісу даступных пакетаў"
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "Канфігурацыя"
+
+#~ msgid "%d packages"
+#~ msgstr "%d пакетаў"
 
 #, fuzzy
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Немагчыма адчыніць файл %s\n"
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "%d пакетаў"
+#~ msgstr[1] "%d пакетаў"
 
-#, fuzzy
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Стварэнне дыскеты для ўсталявання"
-
-#, fuzzy
-#~ msgid "Replay"
-#~ msgstr "Граць"
+#~ msgid "All"
+#~ msgstr "Усё"
 
 #~ msgid "Automated"
 #~ msgstr "Аўтаматычны"
 
+#~ msgid "Bad package"
+#~ msgstr "Дрэнны пакет"
+
 #, fuzzy
-#~ msgid "Save packages selection"
-#~ msgstr "Асабісты выбар пакетаў"
+#~ msgid "Boot"
+#~ msgstr "Манітор"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Выбар пакетаў"
+
+#~ msgid "Configure X"
+#~ msgstr "Настройка X Window"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Сувязь з люрам для атрымання спісу даступных пакетаў"
 
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "Вы жадаеце выкарыстоўваць aboot?"
+
+#, fuzzy
+#~ msgid "Downloading file %s..."
+#~ msgstr "Вызначэнне прыладаў..."
 
 #~ msgid ""
 #~ "Error installing aboot, \n"
@@ -1645,26 +1694,21 @@ msgstr "Выход"
 #~ "спрабаваць усталёўваць, негледзячы на магчымасць парушэння першага "
 #~ "разделу?"
 
-#~ msgid "All"
-#~ msgstr "Усё"
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Чакаецца"
 
 #, fuzzy
-#~ msgid "Boot"
-#~ msgstr "Манітор"
-
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Authentication"
-#~ msgstr "Аўтэнтыфікацыя"
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Стварэнне дыскеты для ўсталявання"
 
 #, fuzzy
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "%d пакетаў"
-#~ msgstr[1] "%d пакетаў"
+#~ msgid "IceWm Desktop"
+#~ msgstr "Працоўны стол"
 
-#~ msgid "%d packages"
-#~ msgstr "%d пакетаў"
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "Клас усталявання"
 
 #~ msgid "Language"
 #~ msgstr "Выбар мовы"
@@ -1673,24 +1717,47 @@ msgstr "Выход"
 #~ msgid "License"
 #~ msgstr "Ліхтэнштайн"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "Клас усталявання"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "Чакаецца"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Выбар пакетаў"
-
-#~ msgid "Users"
-#~ msgstr "Карыстальнікі"
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Усталяванне Mandriva Linux %s"
 
 #, fuzzy
 #~ msgid "Networking"
 #~ msgstr "Сетка"
 
-#~ msgid "Configure X"
-#~ msgstr "Настройка X Window"
+#~ msgid ""
+#~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+#~ "gnumeric), pdf viewers, etc"
+#~ msgstr ""
+#~ "Офісныя праграмы: працэсары словаў (kword, abiword), электроныя табліцы, "
+#~ "аглядальнікі pdf-файлаў, і г.д."
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Падрыхтоўка загрузчыка"
+
+#, fuzzy
+#~ msgid "Replay"
+#~ msgstr "Граць"
+
+#, fuzzy
+#~ msgid "Save packages selection"
+#~ msgstr "Асабісты выбар пакетаў"
+
+#, fuzzy
+#~ msgid "Select All"
+#~ msgstr "Абярыце файл"
+
+#, fuzzy
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Немагчыма адчыніць файл %s\n"
+
+#~ msgid "Users"
+#~ msgstr "Карыстальнікі"
+
+#~ msgid "Welcome"
+#~ msgstr "Вітаем"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "Аўтэнтыфікацыя"

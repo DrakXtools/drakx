@@ -430,16 +430,16 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL は ftp:// または http:// で始まらなければなりません"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr "Mandriva Linux のサイトに接続してミラーのリストを取得しています..."
+msgstr "%s のサイトに接続してミラーのリストを取得しています..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Mandriva Linux ウェブサイトへの接続に失敗したため、利用可能なミラーのリストを"
-"取得できませんでした"
+"%s ウェブサイトへの接続に失敗したため、利用可能なミラーのリストを取得できませ"
+"んでした"
 
 #: any.pm:204
 #, c-format
@@ -683,7 +683,7 @@ msgstr "ファイルを取得しています。お待ちください。"
 #: media.pm:717
 #, c-format
 msgid "unable to add medium"
-msgstr ""
+msgstr "メディアを追加できません"
 
 #: media.pm:757
 #, c-format
@@ -729,11 +729,12 @@ msgstr ""
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"メディア %s に XML 情報がないため、パッケージ %s の検索結果は不完全です"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "説明なし"
 
 #: pkgs.pm:280
 #, c-format
@@ -750,14 +751,14 @@ msgid "An error occurred:"
 msgstr "エラーが発生しました"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "エラーが発生しました"
+msgstr "致命的なエラーが発生: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "次回から確認しない"
 
 #: pkgs.pm:894
 #, c-format
@@ -796,9 +797,9 @@ msgid "Entering step `%s'\n"
 msgstr "%s を開始\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "インストール"
+msgstr "%s のインストール %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -811,13 +812,13 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg サーバの起動には時間がかかります。お待ちください..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"システムのリソースが十分でないため、Mandriva Linux のインストール中に\n"
+"システムのリソースが十分でないため、%s のインストール中に\n"
 "問題が発生する可能性があります。その場合は次の要領でテキストモードによる\n"
 "インストールを試してみてください。\n"
 "CD-ROM から起動 -> F1 を押す -> 'text' と入力"
@@ -828,14 +829,14 @@ msgid "Media Selection"
 msgstr "メディアの選択"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Mandriva KDE デスクトップをインストール"
+msgstr "%s KDE デスクトップをインストール"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Mandriva GNOME デスクトップをインストール"
+msgstr "%s GNOME デスクトップをインストール"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -880,7 +881,7 @@ msgstr "パッケージを個別に選択"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "すべて選択解除"
 
 # Changed "total size" to "total", due to problem of available
 # space on screen.
@@ -1643,26 +1644,102 @@ msgid ""
 "Exit"
 msgstr "終了"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux のインストール %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "グラフィカル環境"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "使いやすいアプリケーションとデスクトップツールを含むグラフィカル環境"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "使いやすいアプリケーションとデスクトップツールを含むグラフィカル環境"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "ゲームプログラム: アーケードゲーム, ボードゲーム, 戦略ゲームなど"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "ワークステーション"
+
+#, fuzzy
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "インストーラは既にインストールされている Moondrake を\n"
+#~ "安全に %s にアップグレードできませんでした。\n"
+#~ "\n"
+#~ "アップグレードせずに新しくインストールすることをお勧めします。\n"
+#~ "\n"
+#~ "警告: 「新しくインストール」を選択する前に、必ず個人データの\n"
+#~ "バックアップを作成してください。"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME ワークステーション"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake ウィザード"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "ライセンス"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "オフィスソフト: ワープロ (LibreOffice Writer, Kword), 表計算 (OpenOffice."
+#~ "org Calc, Kspread), PDF ビューアなど"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "オフィスワークステーション"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL/MariaDBデータベースサーバ"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL/MariaDB データベースサーバ"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "ブートローダを準備中..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "カスタムデスクトップ"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "メディア %s のすべてのパッケージを飛ばす"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm など"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE ワークステーション"
 
 #~ msgid "Bad package"
 #~ msgstr "不正なパッケージ"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "ネットワーク"
+#~ msgid "Downloading file %s..."
+#~ msgstr "ファイル %s をダウンロード中..."
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "更新"
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm デスクトップ"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux のインストール %s"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1671,11 +1748,15 @@ msgstr "終了"
 #~ "オフィスソフト: ワープロ (kword,abiword), 表計算 (kspread,gnumeric), PDF "
 #~ "ビューアなど"
 
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "ブートローダを準備中..."
+
 #~ msgid "Proceed"
 #~ msgstr "続行"
 
-#~ msgid "Downloading file %s..."
-#~ msgstr "ファイル %s をダウンロード中..."
+#~ msgid "Select All"
+#~ msgstr "すべて選択"
 
 #~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 #~ msgstr ""
@@ -1686,6 +1767,9 @@ msgstr "終了"
 #~ msgstr ""
 #~ "64bit から 32bit ディストリビューションへのアップグレードはサポートされて"
 #~ "いません"
+
+#~ msgid "Welcome"
+#~ msgstr "ようこそ"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1710,5 +1794,17 @@ msgstr "終了"
 #~ "\n"
 #~ "本当にこれらのサーバをインストールしますか？\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm デスクトップ"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "ライセンス"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "ネットワーク"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "更新"

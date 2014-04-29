@@ -271,9 +271,9 @@ msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "Il programma \"%s\" si è interrotto(SEGV) per questo errore:"
 
 #: drakbug:144
-#, fuzzy, c-format
+#, c-format
 msgid "Used theme: %s"
-msgstr "Utente: %s"
+msgstr "Tema utilizzato: %s"
 
 #: drakbug:146
 #, c-format
@@ -714,7 +714,7 @@ msgstr "Ghostscript"
 #: drakfont:556
 #, c-format
 msgid "LibreOffice"
-msgstr ""
+msgstr "LibreOffice"
 
 #: drakfont:557
 #, c-format
@@ -1598,7 +1598,7 @@ msgid "Keyboard"
 msgstr "Tastiera"
 
 #: finish-install:58
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Indica la mappatura della tastiera."
 
@@ -2411,7 +2411,7 @@ msgid "Run config tool"
 msgstr "Lancia il tool di configurazione"
 
 #: harddrake2:301
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
 "information here."
@@ -2749,14 +2749,14 @@ msgid "and enter the name (or the IP) of the SMTP server you wish to use"
 msgstr "e fornisci il nome (o l'IP) del server SMTP che vuoi utilizzare"
 
 #: logdrake:440
-#, fuzzy, c-format
+#, c-format
 msgid "Email address"
-msgstr "Indirizzo IP"
+msgstr "Indirizzo Email"
 
 #: logdrake:441
-#, fuzzy, c-format
+#, c-format
 msgid "Email server"
-msgstr "Server Samba"
+msgstr "Server Mail"
 
 #: logdrake:445
 #, c-format
@@ -2797,7 +2797,7 @@ msgstr "Impostazione del driver video"
 #: notify-x11-free-driver-switch:20
 #, c-format
 msgid "The display driver has been automatically switched to '%s'."
-msgstr ""
+msgstr "Il driver del display è stato impostato automaticamente a '%s'."
 
 #: notify-x11-free-driver-switch:21
 #, c-format
@@ -3097,13 +3097,13 @@ msgstr ""
 "sane-%s\" per leggerla."
 
 #: scannerdrake:407 scannerdrake:416
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"Dopo di che sarà possibile digitalizzare documenti usando \"XSane\" o \"Kooka"
-"\" (sezione Multimedia/Grafica del menu delle applicazioni)."
+"Dopo di che è possibile digitalizzare documenti utilizzando \"XSane\" o \"%s"
+"\" da Multimedia/Grafica nel menu applicazioni."
 
 #: scannerdrake:411
 #, c-format
@@ -3134,15 +3134,15 @@ msgid "Congratulations!"
 msgstr "Congratulazioni!"
 
 #: scannerdrake:419
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"Lo scanner %s è stato configurato.\n"
-"Adesso è possibile digitalizzare documenti usando \"XSane\" o \"Kooka"
-"\" (sezione Multimedia/Grafica del menu delle applicazioni)."
+"%s è stato configurato.\n"
+"Ora puoi digitalizzare documenti utilizzando \"XSane\" o \"%s\" da "
+"Multimedia/Grafica dal menu applicazioni."
 
 #: scannerdrake:444
 #, c-format
@@ -3348,10 +3348,9 @@ msgstr ""
 "scanner."
 
 #: service_harddrake:173
-#, fuzzy, c-format
+#, c-format
 msgid "The graphics card '%s' is no longer supported by driver '%s'"
-msgstr ""
-"La scheda grafica %s non è supportata da questa versione del driver %s."
+msgstr "La scheda grafica '%s' non è più supportata dal driver '%s'."
 
 #: service_harddrake:183
 #, c-format
@@ -3359,7 +3358,7 @@ msgid "New release, reconfiguring X for %s"
 msgstr "Nuovo rilascio, riconfigurazione di X per %s"
 
 #: service_harddrake:274
-#, fuzzy, c-format
+#, c-format
 msgid "The proprietary kernel driver was not found for X.org driver '%s'"
 msgstr ""
 "Impossibile trovare il modulo kernel proprietario per il driver X.org \"%s\"."
@@ -3425,6 +3424,9 @@ msgid ""
 "driver the X server is configured to use. Startup of the X server may now "
 "fail."
 msgstr ""
+"E' stato rilevato un modulo del kernel, driver del display, che è in "
+"conflitto con il driver che il server X è configurato per utilizzare. "
+"L'avvio del server X quindi potrebbe fallire."
 
 #: service_harddrake:474 service_harddrake:487
 #, c-format
@@ -3465,21 +3467,195 @@ msgstr "Impostazioni locali"
 msgid "Language & country configuration"
 msgstr "Configurazione di lingua e paese"
 
+#~ msgid "  --help                - display this help     \n"
+#~ msgstr "--Aiuto                -mostra questo messaggio     \n"
+
+#~ msgid ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Usage: \n"
+#~ msgstr ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "Questo è software libero e può essere ridistribuito secondo i termini "
+#~ "della licenza GNU GPL.\n"
+#~ "\n"
+#~ "Uso:\n"
+
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Strumento di segnalazione bug %s"
+
+#~ msgid "%s Control Center"
+#~ msgstr "Centro di Controllo %s"
+
+#~ msgid "%s Help Center"
+#~ msgstr "Centro di Aiuto %s"
+
+#~ msgid "%s Online"
+#~ msgstr "%s Online"
+
+#~ msgid "%s Tools Logs"
+#~ msgstr "Log degli strumenti %s"
+
+#~ msgid "%s Update"
+#~ msgstr "Aggiornamento di %s"
+
+#, fuzzy
+#~ msgid "<control>H"
+#~ msgstr "<control>Q"
+
+#~ msgid "Autodetect _modems"
+#~ msgstr "Rileva automaticamente i _modem"
+
+#~ msgid "Autodetect parallel _zip drives"
+#~ msgstr "Riconoscimento automatico drive _zip su porta parallela"
+
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr ""
+#~ "È richiesta la configurazione dell'autenticazione per l'accesso agli "
+#~ "strumenti %s"
+
+#~ msgid "Copyright (C) %s by %s"
+#~ msgstr "Copyright (C) %s di %s"
+
+#~ msgid ""
+#~ "Here you can see files to use in order to fix permissions, owners, and "
+#~ "groups via msec.\n"
+#~ "You can also edit your own rules which will overwrite the default rules."
+#~ msgstr ""
+#~ "Qua puoi vedere i file da usare per modificare permessi, proprietari e "
+#~ "gruppi tramite msec.\n"
+#~ "Puoi aggiungere anche delle tue regole che verranno usate al posto di "
+#~ "quelle di default."
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in"
+#~ msgstr ""
+#~ "Non è stata rilevata nessuna scheda audio nel sistema. Verifica che una "
+#~ "scheda audio supportata da Linux sia stata inserita correttamente."
+
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in."
+#~ msgstr ""
+#~ "Non è stata rilevata nessuna scheda TV nel sistema. Verifica che una "
+#~ "scheda TV/video supportata da Linux sia stata inserita correttamente."
+
+#, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Configurazione avvisi via email"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Configurazione avvisi via email"
+
+#, fuzzy
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "Configurazione del boot"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Configurazione avvisi via email"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Configurazione di lingua e paese"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Configurazione del server grafico"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Configurazione di lingua e paese"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Configurazione del server grafico"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Configurazione del server grafico"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Configurazione del server grafico"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "Configurazione UPS"
+
+#~ msgid "Select %s Tool:"
+#~ msgstr "Seleziona strumento %s:"
+
+#~ msgid "_About..."
+#~ msgstr "_Informazioni su..."
+
+#~ msgid "_Fields description"
+#~ msgstr "_Descrizione dei campi"
+
+#~ msgid "_File"
+#~ msgstr "_File"
+
+#~ msgid "_Help"
+#~ msgstr "_Guida"
+
+#~ msgid "_Options"
+#~ msgstr "_Opzioni"
+
+#~ msgid "_Quit"
+#~ msgstr "_Esci"
+
+#~ msgid "_Report Bug"
+#~ msgstr "_Segnala bug"
+
 #~ msgid "/Autodetect _printers"
 #~ msgstr "/Rileva automaticamente le _stampanti"
 
-#~ msgid "Its GDB trace is:"
-#~ msgstr "GDB lo ha registrato così:"
+#~ msgid "Autodetect _jaz drives"
+#~ msgstr "Rileva automaticamente dispositivi _jaz"
 
-#~ msgid "OpenOffice.org"
-#~ msgstr "OpenOffice.org"
+#~ msgid "Autodetect _printers"
+#~ msgstr "Rileva automaticamente le _stampanti"
 
-#~ msgid ""
-#~ "The proprietary driver for your graphic card cannot be found, the system "
-#~ "is now using the free software driver (%s)."
-#~ msgstr ""
-#~ "Impossibile trovare il driver proprietario per la tua scheda grafica, il "
-#~ "sistema ora sta utilizzando il driver free (%s)."
+#~ msgid "Background color"
+#~ msgstr "Colore sfondo"
+
+#~ msgid "Choose picture"
+#~ msgstr "Scegli l'immagine"
+
+#~ msgid "Choose progress bar background"
+#~ msgstr "Scelta colore sfondo  per barra di progressione"
+
+#~ msgid "Choose progress bar color 1"
+#~ msgstr "Scelta del colore per la barra di progressione 1"
+
+#~ msgid "Choose progress bar color 2"
+#~ msgstr "Scelta del colore per la barra di progressione 2"
+
+#~ msgid "Choose text color"
+#~ msgstr "Scelta colore testo"
+
+#~ msgid "Choose text zone color"
+#~ msgstr "Scelta colore area testuale"
+
+#~ msgid "Color selection"
+#~ msgstr "Selezione colore"
+
+#~ msgid "Create new theme"
+#~ msgstr "Crea un nuovo tema"
+
+#~ msgid "Display logo on Console"
+#~ msgstr "Mostra il logo nella console"
 
 #~ msgid ""
 #~ "Display theme\n"
@@ -3488,20 +3664,80 @@ msgstr "Configurazione di lingua e paese"
 #~ "Mostra il tema\n"
 #~ "nella console"
 
-#~ msgid "Create new theme"
-#~ msgstr "Crea un nuovo tema"
+#~ msgid "File/-"
+#~ msgstr "File/-"
 
-#~ msgid "X coordinate of text box"
-#~ msgstr "Ascissa (x) del riquadro di testo"
+#~ msgid "File/Save _As"
+#~ msgstr "File/Salv_a con nome"
 
-#~ msgid "Y coordinate of text box"
-#~ msgstr "Ordinata (y) del riquadro di testo"
+#~ msgid "File/_New"
+#~ msgstr "File/_Nuovo"
+
+#~ msgid "File/_Open"
+#~ msgstr "File/_Apri"
+
+#~ msgid "File/_Quit"
+#~ msgstr "File/_Esci"
+
+#~ msgid "File/_Save"
+#~ msgstr "File/_Salva"
+
+#~ msgid "Final resolution"
+#~ msgstr "Risoluzione finale"
+
+#~ msgid "Gradient type"
+#~ msgstr "Tipo di gradiente"
+
+#~ msgid "Help/_About..."
+#~ msgstr "Guida/_Informazioni su..."
+
+#~ msgid "Its GDB trace is:"
+#~ msgstr "GDB lo ha registrato così:"
+
+#~ msgid "OpenOffice.org"
+#~ msgstr "OpenOffice.org"
+
+#~ msgid "Options/Test"
+#~ msgstr "Opzioni/Prova"
+
+#~ msgid "Please enter a theme name"
+#~ msgstr "Fornisci il nome di un tema"
+
+#~ msgid "Please select a splash image"
+#~ msgstr "Scegli un'immagine splash"
+
+#~ msgid "Progress Bar"
+#~ msgstr "Barra di avanzamento"
+
+#~ msgid "Progress box transparency"
+#~ msgstr "Trasparenza della barra di progressione"
+
+#~ msgid "Save theme"
+#~ msgstr "Salva il tema"
+
+#~ msgid "Silent bootsplash"
+#~ msgstr "Bootsplash senza messaggi"
+
+#~ msgid "Text"
+#~ msgstr "Testo"
+
+#~ msgid "Text box height"
+#~ msgstr "Altezza del riquadro di testo"
+
+#~ msgid "Text box transparency"
+#~ msgstr "Trasparenza riquadro testo"
 
 #~ msgid "Text box width"
 #~ msgstr "Larghezza del testo"
 
-#~ msgid "Text box height"
-#~ msgstr "Altezza del riquadro di testo"
+#~ msgid "Text color"
+#~ msgstr "Colore del testo"
+
+#~ msgid "Text size"
+#~ msgstr "Dimensione testo"
+
+#~ msgid "The height of the progress bar"
+#~ msgstr "L'altezza della barra di avanzamento"
 
 #~ msgid ""
 #~ "The progress bar X coordinate\n"
@@ -3517,92 +3753,39 @@ msgstr "Configurazione di lingua e paese"
 #~ "Barra di avanzamento: ordinata (y)\n"
 #~ "del suo angolo superiore sinistro"
 
+#~ msgid ""
+#~ "The proprietary driver for your graphic card cannot be found, the system "
+#~ "is now using the free software driver (%s)."
+#~ msgstr ""
+#~ "Impossibile trovare il driver proprietario per la tua scheda grafica, il "
+#~ "sistema ora sta utilizzando il driver free (%s)."
+
 #~ msgid "The width of the progress bar"
 #~ msgstr "Lo spessore della barra di avanzamento"
-
-#~ msgid "The height of the progress bar"
-#~ msgstr "L'altezza della barra di avanzamento"
-
-#~ msgid "X coordinate of the text"
-#~ msgstr "Coordinata x del testo"
-
-#~ msgid "Y coordinate of the text"
-#~ msgstr "Coordinata y del testo"
-
-#~ msgid "Text box transparency"
-#~ msgstr "Trasparenza riquadro testo"
-
-#~ msgid "Progress box transparency"
-#~ msgstr "Trasparenza della barra di progressione"
-
-#~ msgid "Text size"
-#~ msgstr "Dimensione testo"
-
-#~ msgid "Progress Bar"
-#~ msgstr "Barra di avanzamento"
-
-#~ msgid "Choose progress bar color 1"
-#~ msgstr "Scelta del colore per la barra di progressione 1"
-
-#~ msgid "Choose progress bar color 2"
-#~ msgstr "Scelta del colore per la barra di progressione 2"
-
-#~ msgid "Choose progress bar background"
-#~ msgstr "Scelta colore sfondo  per barra di progressione"
-
-#~ msgid "Gradient type"
-#~ msgstr "Tipo di gradiente"
-
-#~ msgid "Text"
-#~ msgstr "Testo"
-
-#~ msgid "Choose text color"
-#~ msgstr "Scelta colore testo"
-
-#~ msgid "Choose picture"
-#~ msgstr "Scegli l'immagine"
-
-#~ msgid "Silent bootsplash"
-#~ msgstr "Bootsplash senza messaggi"
-
-#~ msgid "Choose text zone color"
-#~ msgstr "Scelta colore area testuale"
-
-#~ msgid "Text color"
-#~ msgstr "Colore del testo"
-
-#~ msgid "Background color"
-#~ msgstr "Colore sfondo"
-
-#~ msgid "Verbose bootsplash"
-#~ msgstr "Bootsplash con messaggi"
 
 #~ msgid "Theme name"
 #~ msgstr "Nome del tema"
 
-#~ msgid "Final resolution"
-#~ msgstr "Risoluzione finale"
-
-#~ msgid "Display logo on Console"
-#~ msgstr "Mostra il logo nella console"
-
-#~ msgid "Save theme"
-#~ msgstr "Salva il tema"
-
-#~ msgid "Please enter a theme name"
-#~ msgstr "Fornisci il nome di un tema"
-
-#~ msgid "Please select a splash image"
-#~ msgstr "Scegli un'immagine splash"
-
-#~ msgid "saving Bootsplash theme..."
-#~ msgstr "Salvo il tema del Bootsplash..."
-
 #~ msgid "Unable to load image file %s"
 #~ msgstr "Impossibile caricare il file %s con l'immagine"
+
+#~ msgid "Verbose bootsplash"
+#~ msgstr "Bootsplash con messaggi"
+
+#~ msgid "X coordinate of text box"
+#~ msgstr "Ascissa (x) del riquadro di testo"
+
+#~ msgid "X coordinate of the text"
+#~ msgstr "Coordinata x del testo"
+
+#~ msgid "Y coordinate of text box"
+#~ msgstr "Ordinata (y) del riquadro di testo"
+
+#~ msgid "Y coordinate of the text"
+#~ msgstr "Coordinata y del testo"
 
 #~ msgid "choose image"
 #~ msgstr "scegli un'immagine"
 
-#~ msgid "Color selection"
-#~ msgstr "Selezione colore"
+#~ msgid "saving Bootsplash theme..."
+#~ msgstr "Salvo il tema del Bootsplash..."

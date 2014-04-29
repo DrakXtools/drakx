@@ -211,9 +211,9 @@ msgid "ProFTPd"
 msgstr ""
 
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:104
-#, fuzzy, c-format
+#, c-format
 msgid "DNS/NIS"
-msgstr "FND/NIS"
+msgstr "DNS/NIS"
 
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:105
 #, c-format
@@ -435,11 +435,11 @@ msgid "URL must start with ftp:// or http://"
 msgstr ""
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Свързване с Mandriva Linux web сайт за получаване на списъка с налични "
-"огледални сървъри..."
+"Свързване с %s web сайт за получаване на списъка с налични огледални "
+"сървъри..."
 
 #: any.pm:194
 #, fuzzy, c-format
@@ -739,7 +739,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Без описание"
 
 #: pkgs.pm:280
 #, c-format
@@ -754,14 +754,14 @@ msgid "An error occurred:"
 msgstr "Появи се грешка"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Появи се грешка"
+msgstr "Получи се непоправима грешка: %s"
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Без въпроси отново"
 
 #: pkgs.pm:894
 #, c-format
@@ -801,9 +801,9 @@ msgid "Entering step `%s'\n"
 msgstr "Навлизам в етап `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Инсталирам"
+msgstr "Инсталация на %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -816,15 +816,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Вашата система е с малки ресурси. Може да имате проблеми с инсталирането\n"
-"на Mandriva Linux. Ако се появи проблем опитайте с текстовата инсалация. "
-"Зацелта,\n"
+"на %s. Ако се появи проблем опитайте с текстовата инсалация. Зацелта,\n"
 "натиснете 'F1', когато стартирате от CDROM и въведете 'теьт'."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
@@ -1231,9 +1230,9 @@ msgid "Bad file"
 msgstr "Зареждане на файл"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1312,7 +1311,7 @@ msgstr "Да продължа ли все пак ?"
 #: steps_interactive.pm:696
 #, c-format
 msgid "Retry"
-msgstr ""
+msgstr "Повторен опит"
 
 #: steps_interactive.pm:697
 #, c-format
@@ -1627,26 +1626,151 @@ msgid ""
 "Exit"
 msgstr "Излез"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Инсталация на Mandriva Linux %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Графична среда"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Графична среда с потребителски набор от приложения и desktop инструменти"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Графична среда с потребителски набор от приложения и desktop инструменти"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Забавни програми: аркадни игри, игри на маса, стратегии и т.н."
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Работна станция"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Gnome работна станция"
+
+#, fuzzy
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Контролен център на Moondrake"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Лиценз"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Офис програми: word-процесори (LibreOffice Writer, Kword), таблици "
+#~ "(LibreOffice Calc, Kspread), преглед на PDF, и т.н."
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Офисна работна станция"
+
+#, fuzzy
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL или MariaDB сървър за бази-данни"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL или MariaDB сървър за бази-данни"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Подготовка на bootloader"
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "настолен компютър"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm и т.н."
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE работна станция"
+
+#~ msgid "%d packages"
+#~ msgstr "%d пакета"
+
+#, fuzzy
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "%d пакета"
+#~ msgstr[1] "%d пакета"
+
+#~ msgid "All"
+#~ msgstr "Всички"
+
+#~ msgid "Automated"
+#~ msgstr "Автоматизиран"
 
 #~ msgid "Bad package"
 #~ msgstr "Лош пакет"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Мрежа"
+#~ msgid "Boot"
+#~ msgstr "Зареждане"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Обновяване"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Нямам достъп да модулите на ядрото съответстващи на вашият (файл %s "
+#~ "липсва), това означава, че вашето флопи не е синхронизирано с "
+#~ "инсталационният носител (моля направете ново boot флопи)"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Пакети за инсталиране"
+
+#~ msgid "Configure X"
+#~ msgstr "Настройка на Х"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Свързване с огледалния сървър за получаване на списъка с пакетите"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Искате ли да използвате aboot ?"
+
+#, fuzzy
+#~ msgid "Downloading file %s..."
+#~ msgstr "Изпращам файлове..."
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Грешка при инсталиране на aboot, \n"
+#~ "да се опитам ли да продължа инсталацията дори, ако това унижтожи първия "
+#~ "дял ?"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Пресмятане"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Подготви дискета за автоматична инсталация"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm графична среда"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "Избор на клас инсталация"
+
+#~ msgid "Language"
+#~ msgstr "Избор на език"
+
+#~ msgid "License"
+#~ msgstr "Лиценз"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Инсталация на Mandriva Linux %s"
+
+#~ msgid "Networking"
+#~ msgstr "Мрежи"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1656,8 +1780,42 @@ msgstr "Излез"
 #~ "gnumeric), преглед на PDF, и т.н."
 
 #, fuzzy
-#~ msgid "Downloading file %s..."
-#~ msgstr "Изпращам файлове..."
+#~ msgid "Preparing boot images..."
+#~ msgstr "Подготовка на bootloader"
+
+#~ msgid "Replay"
+#~ msgstr "Повтори"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Запази избор на пакети"
+
+#~ msgid "Select All"
+#~ msgstr "Избира всичко"
+
+#~ msgid "TV card"
+#~ msgstr "TV карта"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Автоматичната инсталация може да бъде напълно автоматизирана,\n"
+#~ "в такъв случай ще превземе твърдия ви диск !!!\n"
+#~ "(това е за предназначено за инсталиране на друга машина).\n"
+#~ "\n"
+#~ "Може би искате да повторите инсталацията.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Не мога да се свръжа с огледален сървър' %s"
+
+#~ msgid "Users"
+#~ msgstr "Потребители"
+
+#~ msgid "Welcome"
+#~ msgstr "Добре дошли"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1683,106 +1841,22 @@ msgstr "Излез"
 #~ "\n"
 #~ "Наистина ли искате да инсталирате тези сървъри ?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm графична среда"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Свързване с огледалния сървър за получаване на списъка с пакетите"
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Не мога да се свръжа с огледален сървър' %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Подготви дискета за автоматична инсталация"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Автоматичната инсталация може да бъде напълно автоматизирана,\n"
-#~ "в такъв случай ще превземе твърдия ви диск !!!\n"
-#~ "(това е за предназначено за инсталиране на друга машина).\n"
-#~ "\n"
-#~ "Може би искате да повторите инсталацията.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Повтори"
-
-#~ msgid "Automated"
-#~ msgstr "Автоматизиран"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Запази избор на пакети"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Искате ли да използвате aboot ?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Грешка при инсталиране на aboot, \n"
-#~ "да се опитам ли да продължа инсталацията дори, ако това унижтожи първия "
-#~ "дял ?"
-
-#~ msgid "All"
-#~ msgstr "Всички"
-
-#~ msgid "TV card"
-#~ msgstr "TV карта"
-
-#~ msgid "Boot"
-#~ msgstr "Зареждане"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Идентификация"
 
-#, fuzzy
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "%d пакета"
-#~ msgstr[1] "%d пакета"
-
-#~ msgid "%d packages"
-#~ msgstr "%d пакета"
-
-#~ msgid "Language"
-#~ msgstr "Избор на език"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Лиценз"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "Избор на клас инсталация"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "Пресмятане"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Пакети за инсталиране"
-
-#~ msgid "Users"
-#~ msgstr "Потребители"
-
-#~ msgid "Networking"
-#~ msgstr "Мрежи"
-
-#~ msgid "Configure X"
-#~ msgstr "Настройка на Х"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Мрежа"
 
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Нямам достъп да модулите на ядрото съответстващи на вашият (файл %s "
-#~ "липсва), това означава, че вашето флопи не е синхронизирано с "
-#~ "инсталационният носител (моля направете ново boot флопи)"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Обновяване"

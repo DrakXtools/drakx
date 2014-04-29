@@ -428,14 +428,14 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL 必须以 ftp:// 或 http:// 开始"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr "正在连接 Mandriva Linux 网站获得可用镜像的列表..."
+msgstr "正在连接 %s 网站获得可用镜像的列表..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
-msgstr "连接 Mandriva Linux 网站以获得可用镜像的列表失败"
+msgstr "连接 %s 网站以获得可用镜像的列表失败"
 
 #: any.pm:204
 #, c-format
@@ -721,12 +721,12 @@ msgstr ""
 #: pkgs.pm:111
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
-msgstr ""
+msgstr "未找到介质“%s”的 XML 信息，只返回软件包 %s 的部分结果"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "无描述"
 
 #: pkgs.pm:280
 #, c-format
@@ -743,14 +743,14 @@ msgid "An error occurred:"
 msgstr "发生了一个错误:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "发生了一个错误:"
+msgstr "发生了一个致命错误: %s。"
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "不要再次询问"
 
 #: pkgs.pm:894
 #, c-format
@@ -789,9 +789,9 @@ msgid "Entering step `%s'\n"
 msgstr "进入步骤“%s”\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "安装"
+msgstr "%s 安装 %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -804,13 +804,13 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg 启动很慢，请稍候..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"您系统的资源过低。您在安装 Mandriva Linux 的过程中可能遇到问题。\n"
+"您系统的资源过低。您在安装 %s 的过程中可能遇到问题。\n"
 "如果您真的遇到问题的话，可以试试文本安装。要进入文本安装，请在启动时按“F1”，"
 "然后输入“text”。"
 
@@ -820,14 +820,14 @@ msgid "Media Selection"
 msgstr "介质选择"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "安装 Mandriva KDE 桌面"
+msgstr "安装 %s KDE 桌面"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "安装 Mandriva GNOME 桌面"
+msgstr "安装 %s GNOME 桌面"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -872,7 +872,7 @@ msgstr "选择单个软件包"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "全部不选"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1441,9 +1441,9 @@ msgid "Preparing bootloader..."
 msgstr "正在准备引导程序..."
 
 #: steps_interactive.pm:1050
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing initial startup program..."
-msgstr "正在准备安装"
+msgstr "正在准备安装初始安装程序..."
 
 #: steps_interactive.pm:1051
 #, c-format
@@ -1618,31 +1618,124 @@ msgid ""
 "Exit"
 msgstr "退出"
 
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "图形环境"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr "配备了用户友善的应用程序与桌面工具的图形环境"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr "配备了用户友善的应用程序与桌面工具的轻量级图形环境"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "游戏程序: 街机、棋盘、战略等等"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "工作站"
+
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "安装程序检测到您所安装的 Linux 系统无法安全升级到 %s。\n"
+#~ "\n"
+#~ "我们建议您进行全新安装，以便替换您先前的系统。\n"
+#~ "\n"
+#~ "警告：您在选择“全新安装”之前应该备份您所有的个人数据。"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME 工作站"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake 向导"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "办公程序: 字处理(LibreOffice Writer、Kword), 电子表格(LibreOffice Calc、"
+#~ "Kspread)、PDF 阅读器等"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "办公工作站"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL 和 MariaDB 数据库服务"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL 或 MariaDB 数据库服务"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "正在准备引导程序..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "自定义桌面"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "跳过介质“%s”中的全部软件包"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker、Enlightenment、Fvwm 等"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE 工作站"
+
+#~ msgid "A full Mandriva Linux desktop, with support"
+#~ msgstr "Mandriva Linux 桌面旗舰产品，附带完善的售后服务支持"
+
+#~ msgid "Bad package"
+#~ msgstr "有错的软件包"
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "用 Mandriva One 轻松探索 Linux"
+
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linux 安装 %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva 在手，应用无忧"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+#~ "gnumeric), pdf viewers, etc"
+#~ msgstr ""
+#~ "办公程序: 字处理(kword、abiword), 电子表格(kspread、gnumeric)、pdf 阅读器"
+#~ "等"
+
+#~ msgid "Select All"
+#~ msgstr "全部选中"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "100%% 开放源代码的 Mandriva Linux 发行版"
+
+#~ msgid "Welcome"
+#~ msgstr "欢迎"
+
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "U 盘上的桌面"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "License"
 #~ msgstr "许可"
-
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "U 盘上的桌面"
-
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "100%% 开放源代码的 Mandriva Linux 发行版"
-
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "用 Mandriva One 轻松探索 Linux"
-
-#~ msgid "A full Mandriva Linux desktop, with support"
-#~ msgstr "Mandriva Linux 桌面旗舰产品，附带完善的售后服务支持"
-
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva 在手，应用无忧"
-
-#~ msgid "Bad package"
-#~ msgstr "有错的软件包"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
@@ -1653,10 +1746,3 @@ msgstr "退出"
 #~ "_: Keep these entry short\n"
 #~ "Updates"
 #~ msgstr "更新"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
-#~ "gnumeric), pdf viewers, etc"
-#~ msgstr ""
-#~ "办公程序: 字处理(kword、abiword), 电子表格(kspread、gnumeric)、pdf 阅读器"
-#~ "等"

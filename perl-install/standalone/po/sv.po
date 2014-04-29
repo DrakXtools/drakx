@@ -1603,7 +1603,7 @@ msgid "Keyboard"
 msgstr "Tangentbord"
 
 #: finish-install:58
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Välj tangentbordslayout."
 
@@ -2797,7 +2797,7 @@ msgstr "Spara som..."
 #: service_harddrake:487
 #, c-format
 msgid "Display driver setup"
-msgstr ""
+msgstr "Konfigurering av grafikdrivrutin"
 
 #: notify-x11-free-driver-switch:20
 #, c-format
@@ -3100,12 +3100,12 @@ msgstr ""
 "\" för att läsa manualen."
 
 #: scannerdrake:407 scannerdrake:416
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"Efteråt kan du läsa in dokument med \"XSane\" ellr \"Kooka\" från Multimedia/"
+"Efteråt kan du läsa in dokument med \"XSane\" ellr \"%s\" från Multimedia/"
 "Grafik i menyn Program."
 
 #: scannerdrake:411
@@ -3137,15 +3137,15 @@ msgid "Congratulations!"
 msgstr "Gratulerar!"
 
 #: scannerdrake:419
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
 "Din %s har blivit konfigurerad.\n"
-"Du kan nu läsa in dokument med \"XSane\" ellr \"Kooka\" från Multimedia/"
-"Grafik i menyn Program."
+"Du kan nu läsa in dokument med \"XSane\" ellr \"%s\" från Multimedia/Grafik "
+"i menyn Program."
 
 #: scannerdrake:444
 #, c-format
@@ -3350,17 +3350,17 @@ msgstr ""
 "scanner."
 
 #: service_harddrake:173
-#, fuzzy, c-format
+#, c-format
 msgid "The graphics card '%s' is no longer supported by driver '%s'"
 msgstr "Grafikkortet '%s' stöds inte mera av drivrutinen '%s'"
 
 #: service_harddrake:183
 #, c-format
 msgid "New release, reconfiguring X for %s"
-msgstr ""
+msgstr "Ny release, konfigurerar om X för %s"
 
 #: service_harddrake:274
-#, fuzzy, c-format
+#, c-format
 msgid "The proprietary kernel driver was not found for X.org driver '%s'"
 msgstr ""
 "Den patentskyddade kärn-drivrutinen hittades inte för '%s' X.org drivrutinen"
@@ -3403,7 +3403,7 @@ msgstr "Hårdvaruidentifiering pågår"
 #: service_harddrake:453 service_harddrake:458
 #, c-format
 msgid "Display driver issue"
-msgstr ""
+msgstr "Problem med grafikdrivrutinen"
 
 #: service_harddrake:454
 #, c-format
@@ -3413,6 +3413,10 @@ msgid ""
 "boot process. Startup of the X server may now fail as that option was not "
 "specified."
 msgstr ""
+"Grafikdrivrutinen som nu är konfigurerad kräver att du använder 'nokmsboot' "
+"startalternativ för att förhindra kärnans KMS-drivrutin att laddas under "
+"uppstart. Start av X-servern kommer ny att misslyckas eftersom "
+"startalternativet inte var angett."
 
 #: service_harddrake:459
 #, c-format
@@ -3425,12 +3429,12 @@ msgstr ""
 #: service_harddrake:474 service_harddrake:487
 #, c-format
 msgid "The system has to be rebooted due to a display driver change."
-msgstr ""
+msgstr "Systemet bör startas om på grund av utbytt grafikdrivrutin."
 
 #: service_harddrake:475 service_harddrake:488
 #, c-format
 msgid "Press Cancel within %d seconds to abort."
-msgstr ""
+msgstr "Klicka på Avbryt inom %d sekunder för att avbryta."
 
 #: ../menu/localedrake-system.desktop.in.h:1
 msgid "System Regional Settings"
@@ -3460,21 +3464,209 @@ msgstr "Regionala Inställningar"
 msgid "Language & country configuration"
 msgstr "Språk & landsinställningar"
 
+#~ msgid "  --help                - display this help     \n"
+#~ msgstr " --help                - visa denna hjälp     \n"
+
+#~ msgid ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Usage: \n"
+#~ msgstr ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "Detta är fri mjukvara som kan spridas under de villkor som definieras i "
+#~ "GNU GPL.\n"
+#~ "\n"
+#~ "Användning: \n"
+
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Felrapporteringsverkyg för %s"
+
+#~ msgid "%s Control Center"
+#~ msgstr "%s kontrollcentral"
+
+#~ msgid "%s Help Center"
+#~ msgstr "%s kontrollcentral"
+
+#~ msgid "%s Online"
+#~ msgstr "%s Online"
+
+#~ msgid "%s Tools Logs"
+#~ msgstr "%s verktygens loggar"
+
+#~ msgid "%s Update"
+#~ msgstr "%s Update"
+
+#, fuzzy
+#~ msgid "<control>H"
+#~ msgstr "<control>Q"
+
+#~ msgid "Autodetect _modems"
+#~ msgstr "Identifiera modem auto_matiskt"
+
+#~ msgid "Autodetect parallel _zip drives"
+#~ msgstr "Detektera parallella zip enheter automatiskt"
+
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Konfigurera autentikering som behövs för att komma åt %s verktyg"
+
+#~ msgid "Copyright (C) %s by %s"
+#~ msgstr "Copyright (C) %s, %s"
+
+#~ msgid ""
+#~ "Here you can see files to use in order to fix permissions, owners, and "
+#~ "groups via msec.\n"
+#~ "You can also edit your own rules which will overwrite the default rules."
+#~ msgstr ""
+#~ "Här kan du se filer som används för att korrigera behörigheter, ägare och "
+#~ "grupper via msec.\n"
+#~ "Du kan också redigera dina egna regler vilka kommer att överskrida "
+#~ "standardreglerna."
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in"
+#~ msgstr ""
+#~ "Inget ljudkort kunde hittas i datorn. Kontrollera att ljudkortet har stöd "
+#~ "för Linux och att det sitter i ordentligt."
+
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in."
+#~ msgstr ""
+#~ "Inget TV-kort kunde hittas i datorn. Kontrollera att TV-kortet har stöd "
+#~ "för Linux och att det sitter i ordentligt."
+
+#, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Konfiguration av e-postunderrättelse"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Konfiguration av e-postunderrättelse"
+
+#, fuzzy
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "Start Konfiguration"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Konfiguration av e-postunderrättelse"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Språk & landsinställningar"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Grafisk Server Konfiguration"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Språk & landsinställningar"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Grafisk Server Konfiguration"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Grafisk Server Konfiguration"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Grafisk Server Konfiguration"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "UPS Konfiguration"
+
+#~ msgid "Select %s Tool:"
+#~ msgstr "Välj %s verktyg:"
+
+#~ msgid "_About..."
+#~ msgstr "_Om..."
+
+#~ msgid "_Fields description"
+#~ msgstr "_Fältbeskrivningar"
+
+#~ msgid "_File"
+#~ msgstr "_Arkiv"
+
+#~ msgid "_Help"
+#~ msgstr "_Hjälp"
+
+#~ msgid "_Options"
+#~ msgstr "A_lternativ"
+
+#~ msgid "_Quit"
+#~ msgstr "_Avsluta"
+
+#~ msgid "_Report Bug"
+#~ msgstr "_Rapportera fel"
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(standardvärde: %s)"
+
 #~ msgid "/Autodetect _printers"
 #~ msgstr "/Identifiera skrivare a_utomatiskt"
 
-#~ msgid "Its GDB trace is:"
-#~ msgstr "GDB-trace är:"
+#~ msgid "Autodetect _jaz drives"
+#~ msgstr "Identifiera _Jaz-enheter automatiskt"
 
-#~ msgid "OpenOffice.org"
-#~ msgstr "OpenOffice.org"
+#~ msgid "Autodetect _printers"
+#~ msgstr "Identifiera skrivare a_utomatiskt"
 
-#~ msgid ""
-#~ "The proprietary driver for your graphic card cannot be found, the system "
-#~ "is now using the free software driver (%s)."
-#~ msgstr ""
-#~ "En komersiell drivrutin gör ditt grafikkort kan inte hittas, systemet "
-#~ "använder nu den öppna källkods-drivrutinen (%s)."
+#~ msgid "Background color"
+#~ msgstr "Bakgrundsfärg"
+
+#~ msgid "Basic options"
+#~ msgstr "Grundinställningar"
+
+#~ msgid "Bugs"
+#~ msgstr "Buggar"
+
+#~ msgid "Choose picture"
+#~ msgstr "Välj bild"
+
+#~ msgid "Choose progress bar background"
+#~ msgstr "Välj bakgrund för förloppsindikator"
+
+#~ msgid "Choose progress bar color 1"
+#~ msgstr "Välj förloppsindikatorns färg 1"
+
+#~ msgid "Choose progress bar color 2"
+#~ msgstr "Välj förloppsindikatorns färg 2"
+
+#~ msgid "Choose text color"
+#~ msgstr "Välj textfärg"
+
+#~ msgid "Choose text zone color"
+#~ msgstr "Välj textzon färg"
+
+#~ msgid "Color selection"
+#~ msgstr "Färgval"
+
+#~ msgid "Coma bug"
+#~ msgstr "Coma-fel"
+
+#, fuzzy
+#~ msgid "Copyright (C) %s by Moondrake"
+#~ msgstr "Copyright (C) %s, Mandriva"
+
+#~ msgid "Create new theme"
+#~ msgstr "Skapa nytt tema"
+
+#~ msgid "Display logo on Console"
+#~ msgstr "Visa logo på konsoll"
 
 #~ msgid ""
 #~ "Display theme\n"
@@ -3483,133 +3675,9 @@ msgstr "Språk & landsinställningar"
 #~ "Visa tema\n"
 #~ "under konsoll"
 
-#~ msgid "Create new theme"
-#~ msgstr "Skapa nytt tema"
-
-#~ msgid "X coordinate of text box"
-#~ msgstr "X koordinat för textruta"
-
-#~ msgid "Y coordinate of text box"
-#~ msgstr "Y koordinat för textruta"
-
-#~ msgid "Text box width"
-#~ msgstr "Textruta bredd"
-
-#~ msgid "Text box height"
-#~ msgstr "Höjd på textruta"
-
-#~ msgid ""
-#~ "The progress bar X coordinate\n"
-#~ "of its upper left corner"
-#~ msgstr ""
-#~ "X-koordinaten för förloppsindikatorns\n"
-#~ "övre vänstra hörn"
-
-#~ msgid ""
-#~ "The progress bar Y coordinate\n"
-#~ "of its upper left corner"
-#~ msgstr ""
-#~ "Y-koordinaten för förloppsindikatorns\n"
-#~ "övre vänstra hörn"
-
-#~ msgid "The width of the progress bar"
-#~ msgstr "Bredden på förloppsindikatorn"
-
-#~ msgid "The height of the progress bar"
-#~ msgstr "Höjden på förloppsindikatorn"
-
-#~ msgid "X coordinate of the text"
-#~ msgstr "X koordinat för text "
-
-#~ msgid "Y coordinate of the text"
-#~ msgstr "Y koordinat för text"
-
-#~ msgid "Text box transparency"
-#~ msgstr "Textruta transparens"
-
-#~ msgid "Progress box transparency"
-#~ msgstr "Förloppsindikator transparens"
-
-#~ msgid "Text size"
-#~ msgstr "Textstorlek"
-
-#~ msgid "Progress Bar"
-#~ msgstr "Förloppsindikator"
-
-#~ msgid "Choose progress bar color 1"
-#~ msgstr "Välj förloppsindikatorns färg 1"
-
-#~ msgid "Choose progress bar color 2"
-#~ msgstr "Välj förloppsindikatorns färg 2"
-
-#~ msgid "Choose progress bar background"
-#~ msgstr "Välj bakgrund för förloppsindikator"
-
-#~ msgid "Gradient type"
-#~ msgstr "Graderingstyp"
-
-#~ msgid "Text"
-#~ msgstr "Text"
-
-#~ msgid "Choose text color"
-#~ msgstr "Välj textfärg"
-
-#~ msgid "Choose picture"
-#~ msgstr "Välj bild"
-
-#~ msgid "Silent bootsplash"
-#~ msgstr "Tyst startgrafik"
-
-#~ msgid "Choose text zone color"
-#~ msgstr "Välj textzon färg"
-
-#~ msgid "Text color"
-#~ msgstr "Textfärg"
-
-#~ msgid "Background color"
-#~ msgstr "Bakgrundsfärg"
-
-#~ msgid "Verbose bootsplash"
-#~ msgstr "Informativ startgrafik"
-
-#~ msgid "Theme name"
-#~ msgstr "Temanamn"
-
-#~ msgid "Final resolution"
-#~ msgstr "Slutgiltiga steget"
-
-#~ msgid "Display logo on Console"
-#~ msgstr "Visa logo på konsoll"
-
-#~ msgid "Save theme"
-#~ msgstr "spara tema"
-
-#~ msgid "Please enter a theme name"
-#~ msgstr "Vänligen ange ett temanamn"
-
-#~ msgid "Please select a splash image"
-#~ msgstr "Välj splash bild"
-
-#~ msgid "saving Bootsplash theme..."
-#~ msgstr "sparar startskärmstema..."
-
-#~ msgid "Unable to load image file %s"
-#~ msgstr "Kan inte ladda bildfil %s"
-
-#~ msgid "choose image"
-#~ msgstr "välj avbild"
-
-#~ msgid "Color selection"
-#~ msgstr "Färgval"
-
-#~ msgid "Coma bug"
-#~ msgstr "Coma-fel"
-
-#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-#~ msgstr "om den här processorn har Cyrix 6x86 Coma-felet eller inte"
-
-#~ msgid "Fdiv bug"
-#~ msgstr "Fdiv-fel"
+#, fuzzy
+#~ msgid "Do you want to remove these packages?"
+#~ msgstr "Vill du köra konfigurationsverktyget för detta?"
 
 #~ msgid ""
 #~ "Early Intel Pentium chips manufactured have a bug in their floating point "
@@ -3620,48 +3688,44 @@ msgstr "Språk & landsinställningar"
 #~ "gör att de inte kan nå den krävda precisionen då de utför en "
 #~ "flyttalsdivision (FDIV)"
 
-#~ msgid "Is FPU present"
-#~ msgstr "Är FPU närvarande"
-
-#~ msgid "yes means the processor has an arithmetic coprocessor"
-#~ msgstr "ja betyder att processorn har en aritmetisk hjälpprocessor"
-
-#~ msgid "Whether the FPU has an irq vector"
-#~ msgstr "Om FPU:n har en IRQ-vektor"
-
-#~ msgid ""
-#~ "yes means the arithmetic coprocessor has an exception vector attached"
-#~ msgstr ""
-#~ "ja betyder att den matematiska hjälpprocessorn har en undantagsvektor "
-#~ "kopplad till sig"
-
 #~ msgid "F00f bug"
 #~ msgstr "F00f-fel"
-
-#~ msgid ""
-#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
-#~ msgstr ""
-#~ "tidiga Pentium-processorer var felaktiga och låste sig vid avkodning av "
-#~ "F00F-bytkod"
-
-#~ msgid "Halt bug"
-#~ msgstr "Avstängningsfel"
-
-#~ msgid ""
-#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
-#~ "mode after the \"halt\" instruction is used"
-#~ msgstr ""
-#~ "Några av de tidiga i486DX-100-chippen kan inte helt säkert återvända till "
-#~ "operativt läge efter \"halt\"-instruktionen har använts."
-
-#~ msgid "Bugs"
-#~ msgstr "Buggar"
 
 #~ msgid "FPU"
 #~ msgstr "FPU"
 
-#~ msgid "Unknown/Others"
-#~ msgstr "Okänd/Andra"
+#~ msgid "Fdiv bug"
+#~ msgstr "Fdiv-fel"
+
+#~ msgid "File/-"
+#~ msgstr "Arkiv/-"
+
+#~ msgid "File/Save _As"
+#~ msgstr "Arkiv/Spara so_m"
+
+#~ msgid "File/_New"
+#~ msgstr "Arkiv/_Nytt"
+
+#~ msgid "File/_Open"
+#~ msgstr "Arkiv/_Öppna"
+
+#~ msgid "File/_Quit"
+#~ msgstr "Arkiv/A_vsluta"
+
+#~ msgid "File/_Save"
+#~ msgstr "Arkiv/_Spara"
+
+#~ msgid "Final resolution"
+#~ msgstr "Slutgiltiga steget"
+
+#~ msgid "Gradient type"
+#~ msgstr "Graderingstyp"
+
+#~ msgid "Halt bug"
+#~ msgstr "Avstängningsfel"
+
+#~ msgid "Help/_About..."
+#~ msgstr "Hjälp/_Om..."
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "
@@ -3759,29 +3823,32 @@ msgstr "Språk & landsinställningar"
 #~ "nivå, men systemet är helt stängt.\n"
 #~ "Alla säkerhetsfunktioner är aktiverade."
 
-#~ msgid "(default value: %s)"
-#~ msgstr "(standardvärde: %s)"
+#~ msgid "Is FPU present"
+#~ msgstr "Är FPU närvarande"
 
-#~ msgid "Security Level:"
-#~ msgstr "Säkerhetsnivå:"
-
-#~ msgid "Security Alerts:"
-#~ msgstr "Säkerhetsunderrättelser:"
-
-#~ msgid "Security Administrator:"
-#~ msgstr "Säkerhetsadministratör:"
-
-#~ msgid "Basic options"
-#~ msgstr "Grundinställningar"
+#~ msgid "Its GDB trace is:"
+#~ msgstr "GDB-trace är:"
 
 #~ msgid "Network Options"
 #~ msgstr "Nätverksalternativ"
 
-#~ msgid "System Options"
-#~ msgstr "Systemalternativ"
+#~ msgid "OpenOffice.org"
+#~ msgstr "OpenOffice.org"
+
+#~ msgid "Options/Test"
+#~ msgstr "Alternativ/Testa"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "Periodiska kontroller"
+
+#~ msgid "Please enter a theme name"
+#~ msgstr "Vänligen ange ett temanamn"
+
+#~ msgid "Please select a splash image"
+#~ msgstr "Välj splash bild"
+
+#~ msgid "Please wait, adding media..."
+#~ msgstr "Vänta, lägger till media..."
 
 #~ msgid "Please wait, setting security level..."
 #~ msgstr "Vänta, ställer in säkerhetsnivå..."
@@ -3789,27 +3856,147 @@ msgstr "Språk & landsinställningar"
 #~ msgid "Please wait, setting security options..."
 #~ msgstr "Vänta, ställer in säkerhetsalternativ..."
 
-#, fuzzy
-#~ msgid ""
-#~ "The following localization packages do not seem to be useful for your "
-#~ "system:"
-#~ msgstr "Följande paket måste installeras:\n"
+#~ msgid "Progress Bar"
+#~ msgstr "Förloppsindikator"
 
-#, fuzzy
-#~ msgid "Do you want to remove these packages?"
-#~ msgstr "Vill du köra konfigurationsverktyget för detta?"
+#~ msgid "Progress box transparency"
+#~ msgstr "Förloppsindikator transparens"
+
+#~ msgid "Restart XFS"
+#~ msgstr "Starta om XFS"
+
+#~ msgid "Save theme"
+#~ msgstr "spara tema"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Säkerhetsadministratör:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Säkerhetsunderrättelser:"
+
+#~ msgid "Security Level:"
+#~ msgstr "Säkerhetsnivå:"
+
+#~ msgid "Silent bootsplash"
+#~ msgstr "Tyst startgrafik"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Några av de tidiga i486DX-100-chippen kan inte helt säkert återvända till "
+#~ "operativt läge efter \"halt\"-instruktionen har använts."
+
+#~ msgid "System Options"
+#~ msgstr "Systemalternativ"
+
+#~ msgid "Text"
+#~ msgstr "Text"
+
+#~ msgid "Text box height"
+#~ msgstr "Höjd på textruta"
+
+#~ msgid "Text box transparency"
+#~ msgstr "Textruta transparens"
+
+#~ msgid "Text box width"
+#~ msgstr "Textruta bredd"
+
+#~ msgid "Text color"
+#~ msgstr "Textfärg"
+
+#~ msgid "Text size"
+#~ msgstr "Textstorlek"
+
+#~ msgid "The change is done, but to be effective you must logout"
+#~ msgstr ""
+#~ "Ändringen är genomförd men för att den ska aktiveras måste du logga ut."
 
 #, fuzzy
 #~ msgid ""
 #~ "The following hardware packages do not seem to be useful for your system:"
 #~ msgstr "Följande paket måste installeras:\n"
 
-#~ msgid "Please wait, adding media..."
-#~ msgstr "Vänta, lägger till media..."
+#, fuzzy
+#~ msgid ""
+#~ "The following localization packages do not seem to be useful for your "
+#~ "system:"
+#~ msgstr "Följande paket måste installeras:\n"
 
-#~ msgid "The change is done, but to be effective you must logout"
+#~ msgid "The height of the progress bar"
+#~ msgstr "Höjden på förloppsindikatorn"
+
+#~ msgid ""
+#~ "The progress bar X coordinate\n"
+#~ "of its upper left corner"
 #~ msgstr ""
-#~ "Ändringen är genomförd men för att den ska aktiveras måste du logga ut."
+#~ "X-koordinaten för förloppsindikatorns\n"
+#~ "övre vänstra hörn"
 
-#~ msgid "Restart XFS"
-#~ msgstr "Starta om XFS"
+#~ msgid ""
+#~ "The progress bar Y coordinate\n"
+#~ "of its upper left corner"
+#~ msgstr ""
+#~ "Y-koordinaten för förloppsindikatorns\n"
+#~ "övre vänstra hörn"
+
+#~ msgid ""
+#~ "The proprietary driver for your graphic card cannot be found, the system "
+#~ "is now using the free software driver (%s)."
+#~ msgstr ""
+#~ "En komersiell drivrutin gör ditt grafikkort kan inte hittas, systemet "
+#~ "använder nu den öppna källkods-drivrutinen (%s)."
+
+#~ msgid "The width of the progress bar"
+#~ msgstr "Bredden på förloppsindikatorn"
+
+#~ msgid "Theme name"
+#~ msgstr "Temanamn"
+
+#~ msgid "Unable to load image file %s"
+#~ msgstr "Kan inte ladda bildfil %s"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Okänd/Andra"
+
+#~ msgid "Verbose bootsplash"
+#~ msgstr "Informativ startgrafik"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Om FPU:n har en IRQ-vektor"
+
+#~ msgid "X coordinate of text box"
+#~ msgstr "X koordinat för textruta"
+
+#~ msgid "X coordinate of the text"
+#~ msgstr "X koordinat för text "
+
+#~ msgid "Y coordinate of text box"
+#~ msgstr "Y koordinat för textruta"
+
+#~ msgid "Y coordinate of the text"
+#~ msgstr "Y koordinat för text"
+
+#~ msgid "choose image"
+#~ msgstr "välj avbild"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "tidiga Pentium-processorer var felaktiga och låste sig vid avkodning av "
+#~ "F00F-bytkod"
+
+#~ msgid "saving Bootsplash theme..."
+#~ msgstr "sparar startskärmstema..."
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "om den här processorn har Cyrix 6x86 Coma-felet eller inte"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr ""
+#~ "ja betyder att den matematiska hjälpprocessorn har en undantagsvektor "
+#~ "kopplad till sig"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "ja betyder att processorn har en aritmetisk hjälpprocessor"

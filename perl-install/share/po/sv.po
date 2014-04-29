@@ -548,14 +548,14 @@ msgid "Please choose a language to use"
 msgstr "Välj språket som ska användas"
 
 #: any.pm:1183
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
-"Mandralinux stöder flera språk. Du kan välja ytterligare språk som ska "
-"finnas tillgängliga efter installationen."
+"%s stöder flera språk. Du kan välja ytterligare språk som ska finnas "
+"tillgängliga efter installationen."
 
 #: any.pm:1186
 #, fuzzy, c-format
@@ -1339,7 +1339,7 @@ msgid "Warning"
 msgstr "Varning"
 
 #: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete this mount point?"
 msgstr "Är du säker du vill radera denna anslutnings-punkt?"
 
@@ -2695,14 +2695,14 @@ msgid "Which partition do you want to resize?"
 msgstr "Vilken partition vill du ändra storlek på?"
 
 #: fs/partitioning_wizard.pm:180
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the %s installation."
 msgstr ""
 "Microsoft Windows®-partitionen är för fragmenterad, kör \"Defrag\" under "
-"Microsoft Windows® först."
+"Microsoft Windows® först. Starta därefter om %s installationen."
 
 #: fs/partitioning_wizard.pm:188
 #, c-format
@@ -2788,11 +2788,13 @@ msgid "Erase and use entire disk"
 msgstr "Radera och använd hela hårddisken"
 
 #: fs/partitioning_wizard.pm:243
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
-msgstr "Du har mer än en hårddisk, vilken vill du installera Linux på?"
+msgstr ""
+"Du har mer än en hårddisk, vilken vill du installationsprogrammet skall "
+"använda?"
 
 #: fs/partitioning_wizard.pm:251 fsedit.pm:634
 #, c-format
@@ -2908,8 +2910,9 @@ msgstr "Monteringspunkter får bara innehålla alfanumeriska tecken"
 msgid "There is already a partition with mount point %s\n"
 msgstr "Det finns redan en partition med monteringspunkt %s\n"
 
+# c-format
 #: fsedit.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
@@ -2917,16 +2920,16 @@ msgid ""
 msgstr ""
 "Du har valt en mjukvaru-RAID-partition som rot (/).\n"
 "Det finns ingen starthanterare som hanterar detta utan\n"
-"en /boot-partition. Se till att lägga till en /boot-partition."
+"en /boot-partition. Se till att lägga till en separat /boot-partition."
 
 #: fsedit.pm:440
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Metadata version unsupported for a boot partition. Please be sure to add a "
 "separate /boot partition."
 msgstr ""
-"Metadata version stöds inte för boot partition. Se till att lägga till en /"
-"boot-partition."
+"Metadata version stöds inte för boot partition. Se till att lägga till en "
+"separat /boot-partition."
 
 #: fsedit.pm:448
 #, c-format
@@ -2943,7 +2946,7 @@ msgid "Metadata version unsupported for a boot partition."
 msgstr "Metadata version stöds inte för boot partition."
 
 #: fsedit.pm:459
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
@@ -2951,15 +2954,15 @@ msgid ""
 msgstr ""
 "Du har valt en krypterad partition som rot (/).\n"
 "Det finns ingen starthanterare som hanterar detta utan\n"
-"en /boot-partition. Se till att lägga till en /boot-partition."
+"en /boot-partition. Se till att lägga till en separat /boot-partition."
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr "Du kan inte använda ett krypterat filsystem för monteringspunkten %s"
 
 #: fsedit.pm:469
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You cannot use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
@@ -2968,7 +2971,7 @@ msgstr ""
 "spridd på flera fysiska volymer"
 
 #: fsedit.pm:471
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
@@ -2978,7 +2981,7 @@ msgstr ""
 "Du har valt LVM logisk volym som root (/).\n"
 "Starthanteraren kan inte hantera detta när volymen sträcker sig över fysiska "
 "volymer.\n"
-"Du bör skapa en skilld /boot partition först"
+"Du bör skapa en separat /boot partition först"
 
 #: fsedit.pm:475 fsedit.pm:477
 #, c-format
@@ -3302,7 +3305,7 @@ msgstr ""
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:369
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -3471,11 +3474,11 @@ msgstr "Väljer en godtycklig drivrutin"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:482
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -5397,19 +5400,19 @@ msgid "Installing driver for USB controller"
 msgstr "Installerar drivrutin för USB-kontroller"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller \"%s\""
-msgstr "Installerar drivrutin för firewire-kontroller %s"
+msgstr "Installerar drivrutin för firewire-kontroller \"%s\""
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard disk drive controller \"%s\""
-msgstr "Installerar drivrutin för hårddisk-kontroller %s"
+msgstr "Installerar drivrutin för hårddisk-kontroller \"%s\""
 
 #: modules/interactive.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller \"%s\""
-msgstr "Installerar drivrutin för ethernet-kontroller %s"
+msgstr "Installerar drivrutin för ethernet-kontroller \"%s\""
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -6896,7 +6899,7 @@ msgstr "Internet"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "Nätverk"
 
 #: services.pm:161
 #, c-format
@@ -7054,7 +7057,7 @@ msgstr ""
 "standardfunktion: erbjud konfigurering av autologin funktion"
 
 #: standalone.pm:61
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
 "\n"
@@ -7067,8 +7070,8 @@ msgstr ""
 "\n"
 "FLAGGOR:\n"
 "  --help            - visa det här hjälpmeddelandet.\n"
-"  --report          - programmet ska vara ett Mandriva Linux-verktyg\n"
-"  --incident        - programmet ska vara ett Mandriva Linux-verktyg"
+"  --report          - programmet ska vara ett %s verktyg\n"
+"  --incident        - programmet ska vara ett %s verktyg"
 
 #: standalone.pm:67
 #, c-format
@@ -7121,7 +7124,7 @@ msgstr ""
 "                 : eller \"gs\" för Ghostscript-stöd för detta teckensnitt."
 
 #: standalone.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS]...\n"
 "%s Terminal Server Configurator\n"
@@ -7138,7 +7141,7 @@ msgid ""
 "IP, nbi image name)"
 msgstr ""
 "[FLAGGOR]...\n"
-"konfiguration av Mandriva Linux terminalserver\n"
+"konfiguration av %s terminalserver\n"
 "--enable         : aktivera MTS\n"
 "--disable        : inaktivera MTS\n"
 "--start          : starta MTS\n"
@@ -7186,7 +7189,7 @@ msgstr ""
 "--quiet : ingen interaktion med användaren. Använd med connect/disconnect."
 
 #: standalone.pm:112
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTION]...\n"
 "  --no-confirmation      do not ask first confirmation question in %s Update "
@@ -7197,8 +7200,8 @@ msgid ""
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
 "[FLAGGOR]...\n"
-"  --no-confirmation      fråga inte den första bekräftelsefrågan iMandriva "
-"Update-läge\n"
+"  --no-confirmation      fråga inte den första bekräftelsefrågan i %s Update-"
+"läge\n"
 "  --no-verify-rpm        verifiera inte paketsignaturer\n"
 "  --changelog-first      visa ändringslogg före fillista i "
 "beskrivningsfönstret\n"
@@ -7315,183 +7318,283 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Installationen misslyckades"
 
-#~ msgid "Clean /tmp at each boot"
-#~ msgstr "Rensa /tmp vid varje start"
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Licens"
 
-#~ msgid "command %s missing"
-#~ msgstr "kommando %s saknas"
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Begränsad garanti"
 
-#~ msgid ""
-#~ "The classic bug sound tester is to run the following commands:\n"
-#~ "\n"
-#~ "\n"
-#~ "- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
-#~ "uses\n"
-#~ "by default\n"
-#~ "\n"
-#~ "- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
-#~ "currently uses\n"
-#~ "\n"
-#~ "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
-#~ "loaded or not\n"
-#~ "\n"
-#~ "- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" "
-#~ "will\n"
-#~ "tell you if sound and alsa services are configured to be run on\n"
-#~ "initlevel 3\n"
-#~ "\n"
-#~ "- \"aumix -q\" will tell you if the sound volume is muted or not\n"
-#~ "\n"
-#~ "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound "
-#~ "card.\n"
-#~ msgstr ""
-#~ "Den klassiska feltestaren för ljud kör följande kommandon:\n"
-#~ "\n"
-#~ "\n"
-#~ "- \"lspcidrake -v | fgrep -i AUDIO\" talar om för dig vilken drivrutin\n"
-#~ "ljudkortet använder som standard\n"
-#~ "\n"
-#~ "- \"grep sound-slot /etc/modprobe.conf\" talar om för dig vilken "
-#~ "drivrutin\n"
-#~ "som används för tillfället\n"
-#~ "\n"
-#~ "- \"/sbin/lsmod\" kan användas för att kontrollera om dess modul "
-#~ "(drivrutin) är\n"
-#~ "laddad eller inte\n"
-#~ "\n"
-#~ "- \"/sbin/chkconfig --list sound\" och \"/sbin/chkconfig --list alsa\" "
-#~ "talar om\n"
-#~ "för dig om ljud- och Alsa-tjänsterna är inställda för att köras i\n"
-#~ "körnivå 3\n"
-#~ "\n"
-#~ "- \"aumix -q\" talar om för dig om ljudet är avstängt eller inte\n"
-#~ "\n"
-#~ "- \"/sbin/fuser -v /dev/dsp\" talar om för dig vilka program som använder "
-#~ "ljudkortet.\n"
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. GPL och relaterade licenser"
 
-#~ msgid "Set CPU frequency settings"
-#~ msgstr "Ange CPU frekvensinställningar"
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Upphovsrätt"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Lagar"
 
 #~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
 #~ msgstr ""
-#~ "Starta paketfiltrering för 2.2-serien av Linuxkärnan, för att sätta\n"
-#~ "upp en brandvägg som skyddar datorn från nätverksattacker."
+#~ " Alla rättigheter till Mjukvaruproduktens komponenter tillhör deras\n"
+#~ "respektive upphovsmän och är skyddade av\n"
+#~ "immaterialrätt/copyrightlagstiftning som kan appliceras på mjukvara.\n"
+#~ " Moondrake har rätt att ändra mjukvaruprodukten, helt eller\n"
+#~ "delvis, på alla sätt och för alla ändamål.\n"
+#~ " \"Moondrake\" och associerade logotyper är\n"
+#~ "registrerade varumärken tillhörande %s"
 
-#~ msgid "Enable 5.1 sound with Pulse Audio"
-#~ msgstr "Aktivera 5.1 ljud med PulseAudio"
-
-#~ msgid "Enable user switching for audio applications"
-#~ msgstr "Aktivera användarebyte för ljudapplikationer"
-
-#~ msgid "File sharing"
-#~ msgstr "Fildelning"
-
-#~ msgid "Restrict command line options"
-#~ msgstr "Begränsa alternativen för kommandoraden"
-
-#~ msgid "restrict"
-#~ msgstr "begränsa"
+#, fuzzy
+#~ msgid "An NTP client/server"
+#~ msgstr "NTP-server"
 
 #~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
 #~ msgstr ""
-#~ "Alternativet \"Begränsa alternativen för kommandoraden\" är värdelöst "
-#~ "utan lösenord."
-
-#~ msgid "Use an encrypted filesystem"
-#~ msgstr "Använd ett krypterat filsystem"
+#~ "Gratulerar! Installationen är färdig.\n"
+#~ "Ta ur diskett och/eller cd-skiva och tryck Enter för att starta om datorn."
 
 #~ msgid ""
-#~ "To ensure data integrity after resizing the partition(s), \n"
-#~ "filesystem checks will be run on your next boot into Microsoft Windows®"
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
 #~ msgstr ""
-#~ "För att säkerställa dataintegritet efter storleksändring av partitioner \n"
-#~ "kommer filsystemskontroller att köras vid nästa Windows(TM)-start."
-
-#~ msgid "Use the Microsoft Windows® partition for loopback"
-#~ msgstr "Använd Microsoft Windows®-partitionen för loopback"
-
-#~ msgid "Which partition do you want to use for Linux4Win?"
-#~ msgstr "Vilken partition vill du använda för Linux4Win?"
-
-#~ msgid "Choose the sizes"
-#~ msgstr "Välj storlekar"
-
-#~ msgid "Root partition size in MB: "
-#~ msgstr "Storleken på rotpartitionen i MB: "
-
-#~ msgid "Swap partition size in MB: "
-#~ msgstr "Storleken på växlingspartitionen i MB: "
+#~ "Information om uppdateringar för denna version av Moondrake hittar du "
+#~ "på:\n"
+#~ "%s"
 
 #~ msgid ""
-#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ "If any portion of this agreement is held void, illegal or inapplicable by "
+#~ "a court judgment, this \n"
+#~ "portion is excluded from this contract. You remain bound by the other "
+#~ "applicable sections of the \n"
+#~ "agreement.\n"
+#~ "The terms and conditions of this License are governed by the Laws of "
+#~ "France.\n"
+#~ "All disputes on the terms of this license will preferably be settled out "
+#~ "of court. As a last \n"
+#~ "resort, the dispute will be referred to the appropriate Courts of Law of "
+#~ "Paris - France.\n"
+#~ "For any question on this document, please contact Moondrake."
 #~ msgstr ""
-#~ "Det finns ingen FAT-partition att använda som loopback (eller ej "
-#~ "tillräckligt utrymme)"
+#~ " Skulle någon del av detta avtal hållas olagligt, icke applicerbart\n"
+#~ "eller ogiltigt av domstol, ska denna del exkluderas från avtalet. Ni\n"
+#~ "fortsätter då att vara bunden av de återstående delarna av detta\n"
+#~ "avtal.\n"
+#~ " Detta avtals regler regleras av Frankrikes lagar.\n"
+#~ " Alla stridigheter över reglerna i detta avtal ska i första hand\n"
+#~ "göras upp utom domstol, och om detta ej är möjligt, inom en domstol i\n"
+#~ "Paris, Frankrike.\n"
+#~ " För alla frågor rörande denna text, kontakta Moondrake"
 
 #~ msgid ""
-#~ "The FAT resizer is unable to handle your partition, \n"
-#~ "the following error occurred: %s"
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
 #~ msgstr ""
-#~ "Det gick inte att ändra storlek på FAT-partitionen, \n"
-#~ "följande fel uppstod: %s"
+#~ "Information om anpassning av systemet finns i kapitlet \"post install\" "
+#~ "i\n"
+#~ "boken \"Official Moondrake User's Guide\"."
 
-#~ msgid "Automatic routing from ALSA to PulseAudio"
-#~ msgstr "Automatisk ruttning från ALSA till PulseAudio"
+#~ msgid "Introduction"
+#~ msgstr "Introduktion"
 
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "Logga ut och använd sedan Ctrl+Alt+Backsteg"
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
 
-#~ msgid "Welcome To Crackers"
-#~ msgstr "Välkommen crackers"
-
-#~ msgid "Poor"
-#~ msgstr "Låg"
-
-#~ msgid "High"
-#~ msgstr "Hög"
-
-#~ msgid "Higher"
-#~ msgstr "Högre"
-
-#~ msgid "Paranoid"
-#~ msgstr "Paranoid"
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "Säkerhetskopiera dina data först"
 
 #~ msgid ""
-#~ "This level is to be used with care. It makes your system more easy to "
-#~ "use,\n"
-#~ "but very sensitive. It must not be used for a machine connected to "
-#~ "others\n"
-#~ "or to the Internet. There is no password access."
+#~ "Please read this document carefully. This document is a license agreement "
+#~ "between you and  \n"
+#~ "Moondrake which applies to the Software Products.\n"
+#~ "By installing, duplicating or using any of the Software Products in any "
+#~ "manner, you explicitly \n"
+#~ "accept and fully agree to conform to the terms and conditions of this "
+#~ "License. \n"
+#~ "If you disagree with any portion of the License, you are not allowed to "
+#~ "install, duplicate or use \n"
+#~ "the Software Products. \n"
+#~ "Any attempt to install, duplicate or use the Software Products in a "
+#~ "manner which does not comply \n"
+#~ "with the terms and conditions of this License is void and will terminate "
+#~ "your rights under this \n"
+#~ "License. Upon termination of the License,  you must immediately destroy "
+#~ "all copies of the \n"
+#~ "Software Products."
 #~ msgstr ""
-#~ "Den här nivån ska användas med varsamhet. Den gör systemet enklare\n"
-#~ "att använda, men även väldigt känsligt. Den ska inte användas på en "
-#~ "dator\n"
-#~ "som är ansluten till andra datorer eller till Internet. Lösenord används "
-#~ "inte."
+#~ " Läs denna text noggrant. Den är en licensavtal mellan dig\n"
+#~ "och Moondrake, gällande mjukvaruprodukterna. Genom att\n"
+#~ "installera, kopiera, eller använda mjukvaruprodukterna på något sätt,\n"
+#~ "accepterar du detta avtal, och godkänner att rätta dig efter dess\n"
+#~ "regler.\n"
+#~ "Om det finns någon del av detta avtal som du inte godkänner så har\n"
+#~ "du ej tillåtelse att installera, kopiera eller använda "
+#~ "mjukvaruprodukterna.\n"
+#~ "Genom att installera, kopiera eller använda mjukvaruprodukterna på\n"
+#~ "något sätt som inte tillåts enligt detta avtal, har du brutit avtalet,\n"
+#~ "som då upphör, och därigenom förverkat alla de rättigheter det ger\n"
+#~ "dig. Skulle avtalet upphöra, måste du omedelbart förstöra alla kopior\n"
+#~ "av mjukvaruprodukten."
 
 #~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
+#~ "The Software Products and attached documentation are provided \"as is\", "
+#~ "with no warranty, to the \n"
+#~ "extent permitted by law.\n"
+#~ "Neither Moondrake nor its licensors or suppliers will, in any "
+#~ "circumstances and to the extent \n"
+#~ "permitted by law, be liable for any special, incidental, direct or "
+#~ "indirect damages whatsoever \n"
+#~ "(including without limitation damages for loss of business, interruption "
+#~ "of business, financial \n"
+#~ "loss, legal fees and penalties resulting from a court judgment, or any "
+#~ "other consequential loss) \n"
+#~ "arising out of  the use or inability to use the Software Products, even "
+#~ "if Moondrake or its \n"
+#~ "licensors or suppliers have been advised of the possibility or occurrence "
+#~ "of such damages.\n"
+#~ "\n"
+#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN "
+#~ "SOME COUNTRIES\n"
+#~ "\n"
+#~ "To the extent permitted by law, neither Moondrake nor its licensors, "
+#~ "suppliers or\n"
+#~ "distributors will, in any circumstances, be liable for any special, "
+#~ "incidental, direct or indirect \n"
+#~ "damages whatsoever (including without limitation damages for loss of "
+#~ "business, interruption of \n"
+#~ "business, financial loss, legal fees and penalties resulting from a court "
+#~ "judgment, or any \n"
+#~ "other consequential loss) arising out of the possession and use of "
+#~ "software components or \n"
+#~ "arising out of  downloading software components from one of Moondrake "
+#~ "sites which are \n"
+#~ "prohibited or restricted in some countries by local laws.\n"
+#~ "This limited liability applies to, but is not restricted to, the strong "
+#~ "cryptography components \n"
+#~ "included in the Software Products.\n"
+#~ "However, because some jurisdictions do not allow the exclusion or "
+#~ "limitation of liability for \n"
+#~ "consequential or incidental damages, the above limitation may not apply "
+#~ "to you."
 #~ msgstr ""
-#~ "Lösenord är nu aktiverade, men att använda datorn i ett nätverk är ändå "
-#~ "inte att rekommendera."
+#~ " Mjukvaruprodukten och medföljande dokumentation tillhandahålls \"som\n"
+#~ "den är\", utan någon som helst garanti, endast begränsat av vad lagen\n"
+#~ "kräver. Varken Moondrake dess licensiater eller distributörer ska,\n"
+#~ "under inga omständigheter, till den grad lagen tillåter det, hållas\n"
+#~ "ansvariga för olycks-, direkt eller indirekt skada (bland annat, men\n"
+#~ "inte begränsat till, minskad försäljning, drifts-/affärs-avbrott, "
+#~ "finansiella\n"
+#~ "förluster, rättsavgifter och böter i en rättsprocess mot er, eller några "
+#~ "andra\n"
+#~ "därav följande förluster) som orsakats av användandet, eller oförmågan\n"
+#~ "att använda mjukvaruprodukten, även om Moondrake eller deras licenciater\n"
+#~ "eller distributörer skulle ha vetskap om möjligheten av en sådan "
+#~ "händelse.\n"
+#~ "\n"
+#~ "BEGRÄNSAT ANSVAR GÄLLANDE ÄGANDET ELLER ANVÄNDANDET AV PROGRAMVARA "
+#~ "FÖRBJUDEN I VISSA LÄNDER\n"
+#~ "\n"
+#~ " Moondrake dess licensiater eller distributörer ska, under inga\n"
+#~ "omständigheter, till den grad lagen tillåter det, hållas ansvariga för \n"
+#~ "olycks-, direkt eller indirekt skada (bland annat, men inte begränsat "
+#~ "till,\n"
+#~ "minskad försäljning, drifts-/affärs-avbrott, finansiella förluster,\n"
+#~ "rättsavgifter och böter i en rättsprocess mot er, eller några andra\n"
+#~ "därav följande förluster) som orsakats av ägandet, användandet eller\n"
+#~ "nedladdandet, från någon av Moondrake platser, av\n"
+#~ "mjukvarukomponenter som är förbjudna eller begränsade av landets\n"
+#~ "lagar. Detta begränsade ansvar gäller bland annat, men är inte\n"
+#~ "begränsat till, det kryptografiska mjukvarukomponenter som ingår i\n"
+#~ "Mjukvaruprodukten.\n"
+#~ "Men eftersom vissa jurisdiktioner inte tillåter uteslutning eller "
+#~ "begränsning\n"
+#~ "av ansvar över påföljande eller av misstag uppkomna skador, kan ovan\n"
+#~ "nämda begränsning beröra dig eller ej."
+
+#, fuzzy
+#~ msgid ""
+#~ "The Software Products consist of components created by different persons "
+#~ "or entities.\n"
+#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
+#~ "the components which \n"
+#~ "they cover. Please read carefully the terms and conditions of the license "
+#~ "agreement for each component \n"
+#~ "before using any component. Any question on a component license should be "
+#~ "addressed to the component \n"
+#~ "licensor or supplier and not to Moondrake.\n"
+#~ "The programs developed by Moondrake are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by Moondrake is governed by \"%s\" License."
+#~ msgstr ""
+#~ " Mjukvaruprodukten består av komponenter med olika upphovsmän (fysiska\n"
+#~ "eller juridiska).\n"
+#~ "De flesta av dessa komponenter distribueras under\n"
+#~ "The GNU General Public License, hädanefter kallad \"GPL\", eller\n"
+#~ "liknande licenser. De flesta av dessa licenser tillåter dig att\n"
+#~ "använda, kopiera, ändra och distribuera de licensierade\n"
+#~ "komponenterna. Läs avtalet för varje enskild komponent noga\n"
+#~ "innan ni använder komponenten i fråga. Varje fråga angående licensen\n"
+#~ "för en given komponent ska ställas till komponentens upphovsman,\n"
+#~ "inte till Moondrake\n"
+#~ " Program skrivna av Moondrake distribueras under GPL.\n"
+#~ " Dokumentation skriven av Moondrake distribueras under en\n"
+#~ "speciell licens. Se dokumentationen för detaljer."
 
 #~ msgid ""
-#~ "There are already some restrictions, and more automatic checks are run "
-#~ "every night."
+#~ "The operating system and the different components available in the "
+#~ "Moondrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software "
+#~ "Products include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation "
+#~ "related to the operating \n"
+#~ "system and the different components of the Moondrake distribution, and "
+#~ "any applications \n"
+#~ "distributed with these products provided by Moondrake's licensors or "
+#~ "suppliers."
 #~ msgstr ""
-#~ "Det finns några begränsningar och fler automatiska kontroller körs varje "
-#~ "natt."
+#~ " Hädanefter avses med beteckningen \"Mjukvaruprodukter\",\n"
+#~ "operativsystemet, samt de olika komponenter som ingår i\n"
+#~ "Moondrake-distributionen. Mjukvaruprodukterna inkluderar, men är\n"
+#~ "inte begränsade till, programmen, metoderna, reglerna och\n"
+#~ "dokumentationen relaterade till operativsystemet och de olika\n"
+#~ "komponenterna i Moondrake-distributionen, och vilka som helst\n"
+#~ "program som distribueras med dessa produkter tillhandahållna av \n"
+#~ "Moondrake licensiater och leverantörer."
 
 #~ msgid ""
-#~ "This is similar to the previous level, but the system is entirely closed "
-#~ "and security features are at their maximum."
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
 #~ msgstr ""
-#~ "Baserat på föregående nivå, men systemet är helt stängt.\n"
-#~ "Alla säkerhetsfunktioner är aktiverade."
+#~ "Varning: Fria program är inte nödvändigtvis fria från patent så endel "
+#~ "inkluderad Fri Programvara kan täckas av patent i ditt land. T.ex. kan "
+#~ "MP3-dekodrarn kräva en licens för att användas. See http://www."
+#~ "mp3licensing.com för mera detaljer. \n"
+#~ "Om du är osäker på om ett patent gäller dig måste du kontrollera med "
+#~ "gällande lagstiftning,\n"
+#~ "Lagstiftningen kring mjukvarupatent är under omarbetande inom EU."
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr ""
+#~ "Detta är en inofficiell översättning av licensavtalet för Moondrake.\n"
+#~ "Denna text bestämmer inte reglerna för mjukvara i denna distribution - \n"
+#~ "endast originaltexten för Moondrake-licensen gör det. Denna text \n"
+#~ "tillhandahålls för att hjälpa dig som svensktalande att förstå licensen \n"
+#~ "bättre."
 
 #~ msgid ""
 #~ "\n"
@@ -7553,91 +7656,60 @@ msgstr "Installationen misslyckades"
 #~ "respektive upphovsmän, och är skyddade av\n"
 #~ "imaterialrätt/copyright-lagstiftning som kan appliceras på mjukvara.\n"
 
-#~ msgid "Use libsafe for servers"
-#~ msgstr "Använd \"libsafe\" för servrar"
-
 #~ msgid ""
 #~ "A library which defends against buffer overflow and format string attacks."
 #~ msgstr "Skydd mot \"buffer overflow\"- och \"format string\"- attacker."
 
-#~ msgid "LILO/grub Installation"
-#~ msgstr "Installation av Lilo/Grub"
-
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "Ange RAM-storlek om nödvändigt (hittade %d MB)"
-
-#~ msgid "Give the ram size in MB"
-#~ msgstr "Ange RAM-storlek i MB"
-
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "Om du tänker använda aboot, se till att lämna ledigt utrymme (2048 "
-#~ "sektorer räcker)\n"
-#~ "i början av disken."
-
-#~ msgid "Security level"
-#~ msgstr "Säkerhetsnivå"
-
-#~ msgid "Expand Tree"
-#~ msgstr "Expandera träd"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "Komprimera träd"
-
-#~ msgid "Toggle between flat and group sorted"
-#~ msgstr "Byt mellan rak och gruppvis sortering"
-
-#~ msgid "Choose action"
-#~ msgstr "Välj åtgärd"
-
 #~ msgid "Active Directory with SFU"
 #~ msgstr "Active Directory med SFU"
-
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Active Directory med Winbind "
-
-#~ msgid "Use information stored in local files for all authentication"
-#~ msgstr "Använd information sparad i lokala filer för all autentikering"
 
 #~ msgid "Active Directory with SFU:"
 #~ msgstr "Active Directory med SFU:"
 
+#~ msgid "Active Directory with Winbind"
+#~ msgstr "Active Directory med Winbind "
+
 #~ msgid "Active Directory with Winbind:"
 #~ msgstr "Active Directory med Winbind:"
-
-#~ msgid ""
-#~ "Winbind allows the system to authenticate users in a Windows Active "
-#~ "Directory Server."
-#~ msgstr ""
-#~ "Winbind låter systemet autentikera användrare i en Windows Active "
-#~ "Directory Server."
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "LDAP-autentisering"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "säkerhetslayout (SASL/Kerberos)"
 
 #~ msgid "Authentication Active Directory"
 #~ msgstr "Autentisering: Active Directory"
 
-#~ msgid "LDAP users database"
-#~ msgstr "LDAP-användardatabas"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "LDAP-användare tillåts bläddra i Active Directory"
+#~ msgid "Authentication LDAP"
+#~ msgstr "LDAP-autentisering"
 
 #~ msgid "Authentication NIS"
 #~ msgstr "Autentisering NIS"
+
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "Autentiserande Windows-domän"
+
+#~ msgid "Automatic routing from ALSA to PulseAudio"
+#~ msgstr "Automatisk ruttning från ALSA till PulseAudio"
+
+#~ msgid "Choose action"
+#~ msgstr "Välj åtgärd"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Välj storlekar"
+
+#~ msgid "Clean /tmp at each boot"
+#~ msgstr "Rensa /tmp vid varje start"
+
+#~ msgid "Collapse Tree"
+#~ msgstr "Komprimera träd"
+
+#~ msgid "Enable 5.1 sound with Pulse Audio"
+#~ msgstr "Aktivera 5.1 ljud med PulseAudio"
+
+#~ msgid "Enable user switching for audio applications"
+#~ msgstr "Aktivera användarebyte för ljudapplikationer"
+
+#~ msgid "Expand Tree"
+#~ msgstr "Expandera träd"
+
+#~ msgid "File sharing"
+#~ msgstr "Fildelning"
 
 #~ msgid ""
 #~ "For this to work for a W2K PDC, you will probably need to have the admin "
@@ -7667,5 +7739,214 @@ msgstr "Installationen misslyckades"
 #~ "Kommandot \"wbinfo -t\" kommer att testa om dina "
 #~ "autentiseringshemligheter är dugliga."
 
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Autentiserande Windows-domän"
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Ange RAM-storlek i MB"
+
+#~ msgid "High"
+#~ msgstr "Hög"
+
+#~ msgid "Higher"
+#~ msgstr "Högre"
+
+#~ msgid ""
+#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
+#~ "is enough)\n"
+#~ "at the beginning of the disk"
+#~ msgstr ""
+#~ "Om du tänker använda aboot, se till att lämna ledigt utrymme (2048 "
+#~ "sektorer räcker)\n"
+#~ "i början av disken."
+
+#~ msgid "LDAP user allowed to browse the Active Directory"
+#~ msgstr "LDAP-användare tillåts bläddra i Active Directory"
+
+#~ msgid "LDAP users database"
+#~ msgstr "LDAP-användardatabas"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Installation av Lilo/Grub"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "Starta paketfiltrering för 2.2-serien av Linuxkärnan, för att sätta\n"
+#~ "upp en brandvägg som skyddar datorn från nätverksattacker."
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr ""
+#~ "Alternativet \"Begränsa alternativen för kommandoraden\" är värdelöst "
+#~ "utan lösenord."
+
+#~ msgid "Paranoid"
+#~ msgstr "Paranoid"
+
+#~ msgid ""
+#~ "Passwords are now enabled, but use as a networked computer is still not "
+#~ "recommended."
+#~ msgstr ""
+#~ "Lösenord är nu aktiverade, men att använda datorn i ett nätverk är ändå "
+#~ "inte att rekommendera."
+
+#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
+#~ msgstr "Logga ut och använd sedan Ctrl+Alt+Backsteg"
+
+#~ msgid "Poor"
+#~ msgstr "Låg"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Ange RAM-storlek om nödvändigt (hittade %d MB)"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Begränsa alternativen för kommandoraden"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Storleken på rotpartitionen i MB: "
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "Security level"
+#~ msgstr "Säkerhetsnivå"
+
+#~ msgid "Set CPU frequency settings"
+#~ msgstr "Ange CPU frekvensinställningar"
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Storleken på växlingspartitionen i MB: "
+
+#~ msgid "TLS"
+#~ msgstr "TLS"
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "Det gick inte att ändra storlek på FAT-partitionen, \n"
+#~ "följande fel uppstod: %s"
+
+#~ msgid ""
+#~ "The classic bug sound tester is to run the following commands:\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
+#~ "uses\n"
+#~ "by default\n"
+#~ "\n"
+#~ "- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
+#~ "currently uses\n"
+#~ "\n"
+#~ "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
+#~ "loaded or not\n"
+#~ "\n"
+#~ "- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" "
+#~ "will\n"
+#~ "tell you if sound and alsa services are configured to be run on\n"
+#~ "initlevel 3\n"
+#~ "\n"
+#~ "- \"aumix -q\" will tell you if the sound volume is muted or not\n"
+#~ "\n"
+#~ "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound "
+#~ "card.\n"
+#~ msgstr ""
+#~ "Den klassiska feltestaren för ljud kör följande kommandon:\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | fgrep -i AUDIO\" talar om för dig vilken drivrutin\n"
+#~ "ljudkortet använder som standard\n"
+#~ "\n"
+#~ "- \"grep sound-slot /etc/modprobe.conf\" talar om för dig vilken "
+#~ "drivrutin\n"
+#~ "som används för tillfället\n"
+#~ "\n"
+#~ "- \"/sbin/lsmod\" kan användas för att kontrollera om dess modul "
+#~ "(drivrutin) är\n"
+#~ "laddad eller inte\n"
+#~ "\n"
+#~ "- \"/sbin/chkconfig --list sound\" och \"/sbin/chkconfig --list alsa\" "
+#~ "talar om\n"
+#~ "för dig om ljud- och Alsa-tjänsterna är inställda för att köras i\n"
+#~ "körnivå 3\n"
+#~ "\n"
+#~ "- \"aumix -q\" talar om för dig om ljudet är avstängt eller inte\n"
+#~ "\n"
+#~ "- \"/sbin/fuser -v /dev/dsp\" talar om för dig vilka program som använder "
+#~ "ljudkortet.\n"
+
+#~ msgid ""
+#~ "There are already some restrictions, and more automatic checks are run "
+#~ "every night."
+#~ msgstr ""
+#~ "Det finns några begränsningar och fler automatiska kontroller körs varje "
+#~ "natt."
+
+#~ msgid ""
+#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ msgstr ""
+#~ "Det finns ingen FAT-partition att använda som loopback (eller ej "
+#~ "tillräckligt utrymme)"
+
+#~ msgid ""
+#~ "This is similar to the previous level, but the system is entirely closed "
+#~ "and security features are at their maximum."
+#~ msgstr ""
+#~ "Baserat på föregående nivå, men systemet är helt stängt.\n"
+#~ "Alla säkerhetsfunktioner är aktiverade."
+
+#~ msgid ""
+#~ "This level is to be used with care. It makes your system more easy to "
+#~ "use,\n"
+#~ "but very sensitive. It must not be used for a machine connected to "
+#~ "others\n"
+#~ "or to the Internet. There is no password access."
+#~ msgstr ""
+#~ "Den här nivån ska användas med varsamhet. Den gör systemet enklare\n"
+#~ "att använda, men även väldigt känsligt. Den ska inte användas på en "
+#~ "dator\n"
+#~ "som är ansluten till andra datorer eller till Internet. Lösenord används "
+#~ "inte."
+
+#~ msgid ""
+#~ "To ensure data integrity after resizing the partition(s), \n"
+#~ "filesystem checks will be run on your next boot into Microsoft Windows®"
+#~ msgstr ""
+#~ "För att säkerställa dataintegritet efter storleksändring av partitioner \n"
+#~ "kommer filsystemskontroller att köras vid nästa Windows(TM)-start."
+
+#~ msgid "Toggle between flat and group sorted"
+#~ msgstr "Byt mellan rak och gruppvis sortering"
+
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr "Använd ett krypterat filsystem"
+
+#~ msgid "Use information stored in local files for all authentication"
+#~ msgstr "Använd information sparad i lokala filer för all autentikering"
+
+#~ msgid "Use libsafe for servers"
+#~ msgstr "Använd \"libsafe\" för servrar"
+
+#~ msgid "Use the Microsoft Windows® partition for loopback"
+#~ msgstr "Använd Microsoft Windows®-partitionen för loopback"
+
+#~ msgid "Welcome To Crackers"
+#~ msgstr "Välkommen crackers"
+
+#~ msgid "Which partition do you want to use for Linux4Win?"
+#~ msgstr "Vilken partition vill du använda för Linux4Win?"
+
+#~ msgid ""
+#~ "Winbind allows the system to authenticate users in a Windows Active "
+#~ "Directory Server."
+#~ msgstr ""
+#~ "Winbind låter systemet autentikera användrare i en Windows Active "
+#~ "Directory Server."
+
+#~ msgid "command %s missing"
+#~ msgstr "kommando %s saknas"
+
+#~ msgid "restrict"
+#~ msgstr "begränsa"
+
+#~ msgid "security layout (SASL/Kerberos)"
+#~ msgstr "säkerhetslayout (SASL/Kerberos)"

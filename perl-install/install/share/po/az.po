@@ -431,11 +431,9 @@ msgid "URL must start with ftp:// or http://"
 msgstr ""
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr ""
-"Mövcud əkslərin siyahısını almaq üçün Mandriva Linux səhifəsi ilə təmas "
-"qurulur..."
+msgstr "Mövcud əkslərin siyahısını almaq üçün %s səhifəsi ilə təmas qurulur..."
 
 #: any.pm:194
 #, fuzzy, c-format
@@ -734,7 +732,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "İzahat yoxdur"
 
 #: pkgs.pm:280
 #, c-format
@@ -749,9 +747,9 @@ msgid "An error occurred:"
 msgstr "Bir xəta oldu"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Bir xəta oldu"
+msgstr "Ölümcül xəta yarandı: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -796,9 +794,9 @@ msgid "Entering step `%s'\n"
 msgstr "Başlanğıc addımı `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Qurulur"
+msgstr "%s Qurulumu %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -881,7 +879,7 @@ msgstr "Fərdi paket seçimi"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Seçili olmayan hamısını"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1222,9 +1220,9 @@ msgid "Bad file"
 msgstr "Səhv fayl"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "İDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1626,26 +1624,155 @@ msgid ""
 "Exit"
 msgstr "Çıxış"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux Qurulumu %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Qrafiki Mühit"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "İstifadəçi dostu proqram və masa üstü ilə bərabər qrafiki ara üz "
+#~ "vasitələri"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "İstifadəçi dostu proqram və masa üstü ilə bərabər qrafiki ara üz "
+#~ "vasitələri"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Məzəli proqramlar: arkad, lövhə oyunları, strategiya, vs"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "İş Stansiyası"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME iş stansiyası"
+
+#, fuzzy
+#~ msgid "Moondrake Wizards"
+#~ msgstr "<b>Moondrake Store</b>"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Lisenziya"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "İdarə proqramları: kəlmə işləyənlər (LibreOffice Writer, Kword), "
+#~ "hesablayıcılar və pdf göstəriciləri, vs."
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Ofis İş Stansiyası"
+
+#, fuzzy
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL ya da MariaDB mə'lumat bazası vericisi"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL ya da MariaDB mə'lumat bazası vericisi"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Açılış yükləyici hazırlanır"
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Masa üstü"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, vs."
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE iş stansiyası"
+
+#~ msgid "%d packages"
+#~ msgstr "%d paket"
+
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "(%d paket, %d MB)"
+
+#~ msgid "All"
+#~ msgstr "Hamısı"
+
+#~ msgid "Automated"
+#~ msgstr "Avtomatlaşdırılmış"
 
 #~ msgid "Bad package"
 #~ msgstr "Xətalı paket"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Şəbəkə"
+#~ msgid "Boot"
+#~ msgstr "Açılış"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Yeniləmələr"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Çəyirdəyinizə uyğun gələn çəyirdək modullarına yetişilə bilmədi (%s faylı "
+#~ "əksikdir), bu çox vaxt açılış disketinizin Qurulum mediyası ilə "
+#~ "sinxronluq içində olmadığı mə'nasına gəlir (xahiş edirik, yeni disket "
+#~ "yaradın)."
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Qurulacaq paketlərin seçimi"
+
+#~ msgid "Configure X"
+#~ msgstr "X quraşdırılması"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Əks ünvanına bağlantı qurulur"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "aboot istifadə etmək istəyirsiniz?"
+
+#, fuzzy
+#~ msgid "Downloading file %s..."
+#~ msgstr "Fayllar göndərilir..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "aboot qurulumunda xata, \n"
+#~ "ilk disk bölməsini yox etsə belə yenə də qurulmasını istəyirsiniz?"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Təxmini olaraq hesaplanır"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Avtomatik qurulum disketi hazırla"
+
+#, fuzzy
+#~ msgid "IceWm Desktop"
+#~ msgstr "Masa üstü"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "Qurulum sinifinin seçimi"
+
+#~ msgid "Language"
+#~ msgstr "Dil"
+
+#~ msgid "License"
+#~ msgstr "Lisenziya"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux Qurulumu %s"
+
+#~ msgid "Networking"
+#~ msgstr "Şəbəkə"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1655,8 +1782,42 @@ msgstr "Çıxış"
 #~ "pdf göstəriciləri, vs."
 
 #, fuzzy
-#~ msgid "Downloading file %s..."
-#~ msgstr "Fayllar göndərilir..."
+#~ msgid "Preparing boot images..."
+#~ msgstr "Açılış yükləyici hazırlanır"
+
+#~ msgid "Replay"
+#~ msgstr "Təkrarla"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Paket seçkilərini qeyd et"
+
+#~ msgid "Select All"
+#~ msgstr "Hamısı Seçildi"
+
+#~ msgid "TV card"
+#~ msgstr "TV kartı"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Avtomatik qurulum tamamilə avtomatikləşdirilə bilər,\n"
+#~ "ancaq bu zaman o bütün sabit diskə əl qoyacaq!!!\n"
+#~ "(bu başqa kompüterdə də sistemi qura bilmək üçündür).\n"
+#~ "\n"
+#~ "Gələcəkdə bu qurulumu təkrarlamaq istəyə bilərsiniz.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "%s əksi ilə rabitə qurula bilmir"
+
+#~ msgid "Users"
+#~ msgstr "İstifadəçilər"
+
+#~ msgid "Welcome"
+#~ msgstr "Xoş Gəldiniz"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1682,108 +1843,22 @@ msgstr "Çıxış"
 #~ "\n"
 #~ "Bu vericiləri həqiqətən də qurmaq istəyirsiniz?\n"
 
-#, fuzzy
-#~ msgid "IceWm Desktop"
-#~ msgstr "Masa üstü"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Əks ünvanına bağlantı qurulur"
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "%s əksi ilə rabitə qurula bilmir"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Avtomatik qurulum disketi hazırla"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Avtomatik qurulum tamamilə avtomatikləşdirilə bilər,\n"
-#~ "ancaq bu zaman o bütün sabit diskə əl qoyacaq!!!\n"
-#~ "(bu başqa kompüterdə də sistemi qura bilmək üçündür).\n"
-#~ "\n"
-#~ "Gələcəkdə bu qurulumu təkrarlamaq istəyə bilərsiniz.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Təkrarla"
-
-#~ msgid "Automated"
-#~ msgstr "Avtomatlaşdırılmış"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Paket seçkilərini qeyd et"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "aboot istifadə etmək istəyirsiniz?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "aboot qurulumunda xata, \n"
-#~ "ilk disk bölməsini yox etsə belə yenə də qurulmasını istəyirsiniz?"
-
-#~ msgid "All"
-#~ msgstr "Hamısı"
-
-#~ msgid "TV card"
-#~ msgstr "TV kartı"
-
-#~ msgid "Boot"
-#~ msgstr "Açılış"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Tanıtma"
 
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "(%d paket, %d MB)"
-
-#~ msgid "%d packages"
-#~ msgstr "%d paket"
-
-#~ msgid "Language"
-#~ msgstr "Dil"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Lisenziya"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "Qurulum sinifinin seçimi"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "Təxmini olaraq hesaplanır"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Qurulacaq paketlərin seçimi"
-
-#~ msgid "Users"
-#~ msgstr "İstifadəçilər"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Şəbəkə"
 
-#~ msgid "Configure X"
-#~ msgstr "X quraşdırılması"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Çəyirdəyinizə uyğun gələn çəyirdək modullarına yetişilə bilmədi (%s faylı "
-#~ "əksikdir), bu çox vaxt açılış disketinizin Qurulum mediyası ilə "
-#~ "sinxronluq içində olmadığı mə'nasına gəlir (xahiş edirik, yeni disket "
-#~ "yaradın)."
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Yeniləmələr"

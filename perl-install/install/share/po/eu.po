@@ -437,18 +437,17 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL-ak ftp:// edo http:// aurretik izan behar du"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Mandriva Linux web gunearekin konektatzen, ispilu erabilgarrien zerrenda "
-"lortzeko..."
+"%s web gunearekin konektatzen, ispilu erabilgarrien zerrenda lortzeko..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Mandriva Linux web gunearekin eskuragarri dauden ispiluen zerrenda lortzeko "
-"harremanak huts egin du"
+"%s web gunearekin eskuragarri dauden ispiluen zerrenda lortzeko harremanak "
+"huts egin du"
 
 #: any.pm:204
 #, c-format
@@ -736,11 +735,13 @@ msgstr ""
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Ez dago \"%s\" euskarriarentzako xml info, soilik emaitza partziala %s "
+"paketearentzako"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Azalpenik ez"
 
 #: pkgs.pm:280
 #, c-format
@@ -757,9 +758,9 @@ msgid "An error occurred:"
 msgstr "Akats bat gertatu da:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Akats bat gertatu da:"
+msgstr "Akats larria gertatu da: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -804,9 +805,9 @@ msgid "Entering step `%s'\n"
 msgstr "`%s'. urratsean sartzen\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Instalaketa"
+msgstr "%s %s instalazioa"
 
 #: steps_curses.pm:32
 #, c-format
@@ -819,13 +820,13 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg zerbitzariaren hasiera motela da. Itxoin mesedez..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Sistemak baliabide gutxi ditu. Arazoak izan ditzakezu Mandriva Linux \n"
+"Sistemak baliabide gutxi ditu. Arazoak izan ditzakezu %s \n"
 "instalatzeko. Horrela bada, testu-instalazioa egiten saia zaitezke. \n"
 "Horretarako, sakatu `F1' CD-ROMetik abiaraztean, eta idatzi `text'."
 
@@ -835,14 +836,14 @@ msgid "Media Selection"
 msgstr "Euskarri hautaketa"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Instalatu Mandriva KDE Idaztegia"
+msgstr "Instalatu %s KDE Idaztegia"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Instalatu Mandriva GNOME Idaztegia"
+msgstr "Instalatu %s GNOME Idaztegia"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -887,7 +888,7 @@ msgstr "Pakete indibidualen hautapena"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Desautatutako guztiak"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1652,41 +1653,124 @@ msgid ""
 "Exit"
 msgstr "Irten"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux %s instalazioa"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Ingurune grafikoa"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Aplikazio-multzo eta mahaigaineko tresna lagungarri eta atseginak dituen "
+#~ "ingurune grafikoa"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Ingurune grafiko arin eta azkarra aplikazio multzo eta mahaigaineko "
+#~ "tresna erabilerrazak dituena"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr ""
+#~ "Denbora-pasako programak: makina-jokoak, taula-jokoak, estrategiakoak, "
+#~ "etab."
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Lanpostua"
+
+#, fuzzy
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Instalatzaileak detektatu du instalatuta duzun Moondrake sistema ezin\n"
+#~ "dela era seguruan %s-ra bertsio berritu.\n"
+#~ "\n"
+#~ "Zure aurreko sistema ordezkatuko duen instalaketa berria gomendatzen da.\n"
+#~ "\n"
+#~ "Erne: zure datu pertsonalen babeskopia egin behar zenuke \"Instalaketa\n"
+#~ "Berria\" aukeratu aurretik\"."
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME lanpostua"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake Morroiak"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Lizentzia"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Bulego programak: testu-prozetzaileak (LibreOffice Writer, Kword), "
+#~ "kalkulu-orriak (LibreOffice Calc, Kspread), PDF ikustaileak, etab"
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Zure idaztegia USB giltza batean"
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Bulegoko lanpostua"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "100%% iturburu irekia duen Mandriva Linux banaketa"
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL eta MariaDB Datubase Zerbitzaria"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Esploratu Linux era errazean Mandriva One-kin"
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL edo MariaDB datu-baseen zerbitzaria"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Abioko kargatzailea prestatzen..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Idaztegia pertsonalizatua"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "\"%s\" euskarriko pakete guztiak utzi"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, etab."
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE lanpostua"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Mandriva Linux idaztegi oso bat, eukarriarekin"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: guztientzako beharrak asetzeko banaketak"
+#~ msgid "A full Moondrake desktop, with support"
+#~ msgstr "Moondrake idaztegi oso bat, eukarriarekin"
 
 #~ msgid "Bad package"
 #~ msgstr "Pakete txarra"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Saregintza"
+#~ msgid "Downloading file %s..."
+#~ msgstr "%s fitxategiak jaisten..."
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Eguneraketak"
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Esploratu Linux era errazean Mandriva One-kin"
+
+#~ msgid "Explore Linux easily with Moondrake One"
+#~ msgstr "Esploratu Linux era errazean Moondrake One-kin"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm Idaztegia"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux %s instalazioa"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: guztientzako beharrak asetzeko banaketak"
+
+#~ msgid "Moondrake: distributions for everybody's needs"
+#~ msgstr "Moondrake: guztientzako beharrak asetzeko banaketak"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1694,6 +1778,30 @@ msgstr "Irten"
 #~ msgstr ""
 #~ "Bulego-lanetako programak: testu prozesatzaileak (kword, abiword), "
 #~ "kalkulu orriak (kspread, gnumeric), pdf erakusleak, etab."
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Abioko kargatzailea prestatzen..."
+
+#~ msgid "Proceed"
+#~ msgstr "Jarratiu"
+
+#~ msgid "Select All"
+#~ msgstr "Hautatutako guztiak"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "100%% iturburu irekia duen Mandriva Linux banaketa"
+
+#~ msgid "The 100%% open source Moondrake distribution"
+#~ msgstr "100%% iturburu irekia duen Moondrake banaketa"
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr ""
+#~ "32bit-eko banaketa batetik 64bit-ekora bertsio berritzea ez da onartzen"
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr ""
+#~ "64bit-eko banaketa batetik 32bit-ekora bertsio berritzea ez da onartzen"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1713,23 +1821,6 @@ msgstr "Irten"
 #~ "KDE 3.5-ekin bertsio berritu eta zure ezarpen pertsonalak mantentzeko, \n"
 #~ "berrabiatu zure sistema eta bertsio berritu Mandrivaren eguneraketa "
 #~ "appleta erabiliz."
-
-#~ msgid "Proceed"
-#~ msgstr "Jarratiu"
-
-#~ msgid "retrieval of [%s] failed"
-#~ msgstr "[%s]-ren berreskuratzeak huts egin du"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "%s fitxategiak jaisten..."
-
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr ""
-#~ "32bit-eko banaketa batetik 64bit-ekora bertsio berritzea ez da onartzen"
-
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr ""
-#~ "64bit-eko banaketa batetik 32bit-ekora bertsio berritzea ez da onartzen"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1755,5 +1846,23 @@ msgstr "Irten"
 #~ "\n"
 #~ "Ziur zaude zerbitzari hauek instalatu nahi dituzula?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm Idaztegia"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Zure idaztegia USB giltza batean"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Lizentzia"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Saregintza"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Eguneraketak"
+
+#~ msgid "retrieval of [%s] failed"
+#~ msgstr "[%s]-ren berreskuratzeak huts egin du"

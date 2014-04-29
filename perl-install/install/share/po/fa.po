@@ -740,9 +740,9 @@ msgid "An error occurred:"
 msgstr "خطائی رخ داد"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "خطائی رخ داد"
+msgstr "یک خطای مهلک رخ داد: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -872,7 +872,7 @@ msgstr "انتخاب بسته‌ی تکی"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "همه انتخاب نشده‌اند"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1218,9 +1218,9 @@ msgid "Bad file"
 msgstr "پرونده بد"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1623,26 +1623,153 @@ msgid ""
 "Exit"
 msgstr "خروج"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "نصب لینوکس ماندریبا %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "محیط گرافیکی"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "محیط گرافیکی کاربر-دوستانه با مجموعه‌ای از برنامه‌ها و ابزارهای رومیزی"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "محیط گرافیکی کاربر-دوستانه با مجموعه‌ای از برنامه‌ها و ابزارهای رومیزی"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "برنامه‌های سرگرمی: آرکید، تخته‌ها، تاکتیکی، غیره"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "ایستگاه‌کار"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "ایستگاه‌کار گنوم"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "جادوگران نرم افزار ماندریبا"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "مجوز"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "برنامه های دفتری: واژه پردازان (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "ایستگاه‌کار دفتری"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "کارگزار پایگاه داده‌ی PostgreSQL و MariaDB "
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "کارگزار بانک اطلاعاتی PostgreSQL یا MariaDB "
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "آماده کردن بارگذار آغازگر..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "رومیزی Plucker"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etc"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "ایستگاه‌کار KDE "
+
+#~ msgid "%d packages"
+#~ msgstr "بسته‌های %d"
+
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "(بسته‌های %d، %d مگابایت)"
+
+#~ msgid "All"
+#~ msgstr "همه"
+
+#~ msgid "Automated"
+#~ msgstr "خودکار"
 
 #~ msgid "Bad package"
 #~ msgstr "بسته‌ی خراب"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "شبکه‌کاری"
+#~ msgid "Boot"
+#~ msgstr "آغازگری"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "بروزسازی‌ها"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "نمی‌توان به ماژول‌های هسته مربوط به هسته‌ی شما (پرونده %s وجود ندارد) "
+#~ "دستیابی یافت، این معمولاً بدین معنی است که دیسکچه‌ی آغازگرتان با رسانه‌ی نصب "
+#~ "هم‌گاهی ندارد (لطفاً دیسکچه‌ی آغازگری جدیدی ایجاد کنید)"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "انتخاب بسته‌ها برای نصب کردن"
+
+#~ msgid "Configure X"
+#~ msgstr "پیکربندی ایکس"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "تماس گرفتن با آینه برای گرفتن لیست بسته‌های موجود..."
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "آیا می‌خواهید از aboot استفاده کنید؟"
+
+#, fuzzy
+#~ msgid "Downloading file %s..."
+#~ msgstr "فرستادن پرونده‌ها..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "خطا در نصب aboot, \n"
+#~ "تلاش به اجبار نصب می‌کنید حتی اگر آن اولین قسمت‌بندی را خراب کند؟"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "تخمین زدن"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "تولید دیسکچه‌ی نصب خودکار"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#, fuzzy
+#~ msgid "IceWm Desktop"
+#~ msgstr "رومیزی Plucker"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "انتخاب رده‌ی نصب"
+
+#~ msgid "Language"
+#~ msgstr "زبان"
+
+#~ msgid "License"
+#~ msgstr "مجوز"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "نصب لینوکس ماندریبا %s"
+
+#~ msgid "Networking"
+#~ msgstr "شبکه‌کاری"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1652,8 +1779,42 @@ msgstr "خروج"
 #~ "gnumeric), نماگرهای pdf و غیره"
 
 #, fuzzy
-#~ msgid "Downloading file %s..."
-#~ msgstr "فرستادن پرونده‌ها..."
+#~ msgid "Preparing boot images..."
+#~ msgstr "آماده کردن بارگذار آغازگر..."
+
+#~ msgid "Replay"
+#~ msgstr "بازپخش"
+
+#~ msgid "Save packages selection"
+#~ msgstr "ذخیره‌ی مجموعه بسته‌ها"
+
+#~ msgid "Select All"
+#~ msgstr "همه انتخاب شده‌اند"
+
+#~ msgid "TV card"
+#~ msgstr "کارت تلویزیون"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "اگر بخواهید نصب خودکار می‌تواند کاملا خودکار عمل کند، \n"
+#~ "که در آن صورت گرداننده‌ی دیسک را در اختیار می‌گیرد!! \n"
+#~ "(این برای نصب بر رایانه دیگری منظور شده است) \n"
+#~ "\n"
+#~ "ممکن است ترجیح دهید نصب را اجرای مجدد کنید.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "نمی‌توان با آینه %s تماس برقرار کرد"
+
+#~ msgid "Users"
+#~ msgstr "کاربران"
+
+#~ msgid "Welcome"
+#~ msgstr "خوش آمدید"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1678,110 +1839,22 @@ msgstr "خروج"
 #~ "\n"
 #~ "آیا واقعا می‌خواهید این کارگزارها را نصب کنید؟\n"
 
-#, fuzzy
-#~ msgid "IceWm Desktop"
-#~ msgstr "رومیزی Plucker"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "تماس گرفتن با آینه برای گرفتن لیست بسته‌های موجود..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "نمی‌توان با آینه %s تماس برقرار کرد"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "تولید دیسکچه‌ی نصب خودکار"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "اگر بخواهید نصب خودکار می‌تواند کاملا خودکار عمل کند، \n"
-#~ "که در آن صورت گرداننده‌ی دیسک را در اختیار می‌گیرد!! \n"
-#~ "(این برای نصب بر رایانه دیگری منظور شده است) \n"
-#~ "\n"
-#~ "ممکن است ترجیح دهید نصب را اجرای مجدد کنید.\n"
-
-#~ msgid "Replay"
-#~ msgstr "بازپخش"
-
-#~ msgid "Automated"
-#~ msgstr "خودکار"
-
-#~ msgid "Save packages selection"
-#~ msgstr "ذخیره‌ی مجموعه بسته‌ها"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "آیا می‌خواهید از aboot استفاده کنید؟"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "خطا در نصب aboot, \n"
-#~ "تلاش به اجبار نصب می‌کنید حتی اگر آن اولین قسمت‌بندی را خراب کند؟"
-
-#~ msgid "All"
-#~ msgstr "همه"
-
-#~ msgid "TV card"
-#~ msgstr "کارت تلویزیون"
-
-#~ msgid "Boot"
-#~ msgstr "آغازگری"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "تأیید هویت"
 
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "(بسته‌های %d، %d مگابایت)"
-
-#~ msgid "%d packages"
-#~ msgstr "بسته‌های %d"
-
-#~ msgid "Language"
-#~ msgstr "زبان"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "مجوز"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "انتخاب رده‌ی نصب"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "تخمین زدن"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "انتخاب بسته‌ها برای نصب کردن"
-
-#~ msgid "Users"
-#~ msgstr "کاربران"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "شبکه‌کاری"
 
-#~ msgid "Configure X"
-#~ msgstr "پیکربندی ایکس"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "نمی‌توان به ماژول‌های هسته مربوط به هسته‌ی شما (پرونده %s وجود ندارد) "
-#~ "دستیابی یافت، این معمولاً بدین معنی است که دیسکچه‌ی آغازگرتان با رسانه‌ی نصب "
-#~ "هم‌گاهی ندارد (لطفاً دیسکچه‌ی آغازگری جدیدی ایجاد کنید)"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "بروزسازی‌ها"

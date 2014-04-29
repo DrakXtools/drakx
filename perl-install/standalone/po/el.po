@@ -279,9 +279,9 @@ msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "Το πρόγραμμα \"%s\" παρουσίασε σφάλμα (SEGV) με το ακόλουθο μήνυμα :"
 
 #: drakbug:144
-#, fuzzy, c-format
+#, c-format
 msgid "Used theme: %s"
-msgstr "Χρήστης : %s"
+msgstr "Θέμα που χρησιμοποιείται: %s"
 
 #: drakbug:146
 #, c-format
@@ -724,7 +724,7 @@ msgstr "Ghostscript"
 #: drakfont:556
 #, c-format
 msgid "LibreOffice"
-msgstr ""
+msgstr "LibreOffice"
 
 #: drakfont:557
 #, c-format
@@ -1611,9 +1611,9 @@ msgid "Keyboard"
 msgstr "Πληκτρολόγιο"
 
 #: finish-install:58
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your keyboard layout."
-msgstr "Παρακαλώ επιλέξτε την διάταξη του πληκτρολογίου."
+msgstr "Παρακαλώ, επιλέξτε την διάταξη του πληκτρολογίου σας."
 
 #: finish-install:106
 #, c-format
@@ -2770,14 +2770,14 @@ msgstr ""
 "επιθυμείτε να χρησιμοποιήσετε"
 
 #: logdrake:440
-#, fuzzy, c-format
+#, c-format
 msgid "Email address"
-msgstr "Διεύθυνση IP"
+msgstr "Διεύθυνση ηλ. αλληλογραφίας"
 
 #: logdrake:441
-#, fuzzy, c-format
+#, c-format
 msgid "Email server"
-msgstr "Εξυπηρετητής Samba"
+msgstr "Εξυπηρετητής ηλ. αλληλογραφίας"
 
 #: logdrake:445
 #, c-format
@@ -2815,12 +2815,12 @@ msgstr "Αποθήκευση Ως.."
 #: service_harddrake:487
 #, c-format
 msgid "Display driver setup"
-msgstr ""
+msgstr "Ρύθμιση οδηγού απεικόνισης"
 
 #: notify-x11-free-driver-switch:20
 #, c-format
 msgid "The display driver has been automatically switched to '%s'."
-msgstr ""
+msgstr "Έγινε αυτόματη εναλλαγή του οδηγού απεικόνισης σε «%s»."
 
 #: notify-x11-free-driver-switch:21
 #, c-format
@@ -3123,13 +3123,13 @@ msgstr ""
 "εντολή «man sane- %s» για να την διαβάσετε."
 
 #: scannerdrake:407 scannerdrake:416
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"Έπειτα μπορείτε να σαρώσετε έγγραφα με το \"XSane\" από το Πολυμέσα/Γραφικά "
-"στο μενού εφαρμογών."
+"Έπειτα μπορείτε να σαρώσετε έγγραφα με το «XSane» ή το «%s» από το μενού "
+"Εφαρμογές -> Γραφικά."
 
 #: scannerdrake:411
 #, c-format
@@ -3160,15 +3160,15 @@ msgid "Congratulations!"
 msgstr "Συγχαρητήρια !"
 
 #: scannerdrake:419
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
 "Το %s έχει ρυθμιστεί. \n"
-"Μπορείτε τώρα να σαρώσετε έγγραφα με το « XSane » από το Πολυμέσα/Γραφικά "
-"στο μενού εφαρμογών."
+"Μπορείτε τώρα να σαρώσετε έγγραφα με το «XSane» ή το «%s» από το μενού "
+"Εφαρμογές -> Γραφικά."
 
 #: scannerdrake:444
 #, c-format
@@ -3378,19 +3378,19 @@ msgstr ""
 "σαρωτών."
 
 #: service_harddrake:173
-#, fuzzy, c-format
+#, c-format
 msgid "The graphics card '%s' is no longer supported by driver '%s'"
-msgstr "Η κάρτα γραφικών « %s » δεν υποστηρίζεται πια από τον οδηγό « %s »"
+msgstr "Η κάρτα γραφικών «%s» δεν υποστηρίζεται πια από τον οδηγό «%s»"
 
 #: service_harddrake:183
 #, c-format
 msgid "New release, reconfiguring X for %s"
-msgstr ""
+msgstr "Νέα έκδοση, επαναρύθμιση του X για τη %s"
 
 #: service_harddrake:274
-#, fuzzy, c-format
+#, c-format
 msgid "The proprietary kernel driver was not found for X.org driver '%s'"
-msgstr "Δεν βρέθηκε ο ιδιόκτητος οδηγός πυρήνα για τον οδηγό X.org « %s »"
+msgstr "Δεν βρέθηκε ο ιδιόκτητος οδηγός πυρήνα για τον οδηγό X.org «%s»"
 
 #: service_harddrake:313
 #, c-format
@@ -3430,7 +3430,7 @@ msgstr "Ανίχνευση υλικού σε εξέλιξη"
 #: service_harddrake:453 service_harddrake:458
 #, c-format
 msgid "Display driver issue"
-msgstr ""
+msgstr "Πρόβλημα με τον οδηγό απεικόνισης"
 
 #: service_harddrake:454
 #, c-format
@@ -3440,6 +3440,10 @@ msgid ""
 "boot process. Startup of the X server may now fail as that option was not "
 "specified."
 msgstr ""
+"Ο οδηγός απεικόνισης που έχει ρυθμιστεί απαιτεί να χρησιμοποιήσετε την "
+"επιλογή εκκίνησης «nokmsboot»  για την αποτροπή φόρτωσης του οδηγού KMS του "
+"πυρήνα κατά την εκκίνηση. Η εκκίνηση του εξυπηρετητή X μπορεί τώρα να "
+"αποτύχει αφού αυτή η επιλογή δεν έχει καθοριστεί."
 
 #: service_harddrake:459
 #, c-format
@@ -3448,16 +3452,21 @@ msgid ""
 "driver the X server is configured to use. Startup of the X server may now "
 "fail."
 msgstr ""
+"Εντοπίστηκε ένα φορτωμένο άρθρωμα πυρήνα οδηγού απεικόνισης το οποίο "
+"συγκρούεται με τον οδηγό που έχει ρυθμιστεί να χρησιμοποιεί ο εξυπηρετητής "
+"X. Η εκκίνηση του εξυπηρετητή X μπορεί τώρα να αποτύχει."
 
 #: service_harddrake:474 service_harddrake:487
 #, c-format
 msgid "The system has to be rebooted due to a display driver change."
 msgstr ""
+"Θα πρέπει να κάνετε επανεκκίνηση του συστήματος λόγω μιας αλλαγής στον οδηγό "
+"απεικόνισης."
 
 #: service_harddrake:475 service_harddrake:488
 #, c-format
 msgid "Press Cancel within %d seconds to abort."
-msgstr ""
+msgstr "Πατήστε Ακύρωση  σε %d δευτερόλεπτα για να εγκαταλείψετε."
 
 #: ../menu/localedrake-system.desktop.in.h:1
 msgid "System Regional Settings"
@@ -3487,21 +3496,305 @@ msgstr "Τοπικές ρυθμίσεις"
 msgid "Language & country configuration"
 msgstr "Ρύθμιση της γλώσσας και της χώρας"
 
+#~ msgid "  --help                - display this help     \n"
+#~ msgstr " --help                - εμφάνιση αυτού του μηνύματος     \n"
+
+#~ msgid ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Usage: \n"
+#~ msgstr ""
+#~ " drakhelp 0.1\n"
+#~ "Πνευματικά δικαιώματα © %s Mandriva.\n"
+#~ "Πνευματικά δικαιώματα © %s Moondrake.\n"
+#~ "Αυτό το πρόγραμμα ανήκει στην κατηγορία του ελεύθερου λογισμικού και "
+#~ "επιτρέπεται\n"
+#~ "η αναδιανομή σύμφωνα με τους όρους της άδειας GNU GPL.\n"
+#~ "\n"
+#~ "Χρήση : \n"
+
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Εργαλείο αναφοράς σφαλμάτων %s"
+
+#~ msgid "%s Control Center"
+#~ msgstr "Κέντρο Ελέγχου %s"
+
+#~ msgid "%s Help Center"
+#~ msgstr "Κέντρο βοήθειας της %s"
+
+#~ msgid "%s Online"
+#~ msgstr "%s Online"
+
+#~ msgid "%s Tools Logs"
+#~ msgstr "Καταγραφές των εργαλείων της %s"
+
+#~ msgid "%s Update"
+#~ msgstr "Ενημέρωση %s"
+
+#~ msgid "<control>H"
+#~ msgstr "<control>H"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Application Security "
+#~ "Configuration"
+#~ msgstr ""
+#~ "Απαιτείται πιστοποίηση για την εκτέλεση της Διαμόρφωσης Ασφαλείας "
+#~ "Εφαρμογών Moondrake"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Authentication Configuration"
+#~ msgstr ""
+#~ "Απαιτείται πιστοποίηση για την εκτέλεση της Διαμόρφωσης Πιστοποίησης "
+#~ "Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake Boot Configuration"
+#~ msgstr ""
+#~ "Απαιτείται πιστοποίηση για την εκτέλεση της Διαμόρφωσης Εκκίνησης "
+#~ "Moondrake"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Date and Time Configuration"
+#~ msgstr ""
+#~ "Απαιτείται πιστοποίηση για την εκτέλεση της Διαμόρφωσης Ημερομηνίας και "
+#~ "Ώρας Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake Disk Layout Editor"
+#~ msgstr ""
+#~ "Απαιτείται πιστοποίηση για την εκτέλεση του Επεξεργαστή Διάταξης Δίσκων "
+#~ "Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake Font Configuration"
+#~ msgstr ""
+#~ "Απαιτείται πιστοποίηση για την εκτέλεση της Διαμόρφωσης Γραμματοσειρών "
+#~ "Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake Hardware Configuration"
+#~ msgstr ""
+#~ "Απαιτείται πιστοποίηση για την εκτέλεση της Διαμόρφωσης Υλικού Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake Log Viewer"
+#~ msgstr ""
+#~ "Απαιτείται πιστοποίηση για την εκτέλεση του Προβολέα Καταγραφών Moondrake"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Login Manager Configuration"
+#~ msgstr ""
+#~ "Απαιτείται πιστοποίηση για την εκτέλεση της Διαμόρφωσης του Διαχειριστή "
+#~ "Σύνδεσης Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake Scanner Configuration"
+#~ msgstr ""
+#~ "Απαιτείται πιστοποίηση για την εκτέλεση της Διαμόρφωσης Σαρωτή Moondrake"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Security Permissions "
+#~ "Configuration"
+#~ msgstr ""
+#~ "Απαιτείται πιστοποίηση για την εκτέλεση της Διαμόρφωσης Αδειών Ασφαλείας "
+#~ "Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake Service Configuration"
+#~ msgstr ""
+#~ "Απαιτείται πιστοποίηση για την εκτέλεση της Διαμόρφωσης Υπηρεσιών "
+#~ "Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake UPS Configuration"
+#~ msgstr ""
+#~ "Απαιτείται πιστοποίηση για την εκτέλεση της Διαμόρφωσης UPS Moondrake"
+
+#~ msgid "Autodetect _modems"
+#~ msgstr "Αυτόματος εντοπισμός _μόντεμ"
+
+#~ msgid "Autodetect parallel _zip drives"
+#~ msgstr "Αυτόματος εντοπισμός παράλληλων οδηγών _zip"
+
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr ""
+#~ "Ρυθμίστε την πιστοποίηση που απαιτείται για την πρόσβαση στα εργαλεία %s"
+
+#~ msgid "Copyright (C) %s by %s"
+#~ msgstr "Πνευματικά δικαιώματα %s από τη %s"
+
+#~ msgid ""
+#~ "Here you can see files to use in order to fix permissions, owners, and "
+#~ "groups via msec.\n"
+#~ "You can also edit your own rules which will overwrite the default rules."
+#~ msgstr ""
+#~ "Εδώ έχετε την δυνατότητα να δείτε τα αρχεία προς χρήση για να διορθώσετε "
+#~ "τις άδειες, τους ιδιοκτήτες και τις ομάδες με το msec.\n"
+#~ "Μπορείτε επίσης να ρυθμίσετε τους δικούς σας κανόνες οι οποίοι θα "
+#~ "αντικαταστήσουν τους προκαθορισμένους."
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in"
+#~ msgstr ""
+#~ "Δεν εντοπίστηκε καμιά κάρτα ήχου στον υπολογιστή σας. Παρακαλώ "
+#~ "βεβαιωθείτε ότι μια κάρτα ήχου που υποστηρίζεται από το Linux είναι "
+#~ "συνδεδεμένη σωστά."
+
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in."
+#~ msgstr ""
+#~ "Δεν βρέθηκε καμιά κάρτα τηλεόρασης στον υπολογιστή σας. Παρακαλώ "
+#~ "βεβαιωθείτε ότι μια κάρτα βίντεο/τηλεόρασης που υποστηρίζεται από το "
+#~ "Linux είναι συνδεδεμένη σωστά."
+
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Εκτέλεση της Διαμόρφωσης Ασφαλείας Εφαρμογών Moondrake"
+
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Εκτέλεση της Διαμόρφωσης Πιστοποίησης Moondrake"
+
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "Εκτέλεση της Διαμόρφωσης Εκκίνησης Moondrake"
+
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Εκτέλεση της Διαμόρφωσης Ημερομηνίας και Ώρας Moondrake"
+
+#~ msgid "Run Moondrake Disk Layout Editor"
+#~ msgstr "Εκτέλεση του Επεξεργαστή Διάταξης Δίσκων Moondrake"
+
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Εκτέλεση της Διαμόρφωσης Γραμματοσειρών Moondrake"
+
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Εκτέλεση της Διαμόρφωσης Υλικού Moondrake"
+
+#~ msgid "Run Moondrake Log Viewer"
+#~ msgstr "Εκτέλεση του Προβολέα Καταγραφών Moondrake"
+
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Εκτέλεση της Διαμόρφωσης του Διαχειριστή Σύνδεσης Moondrake"
+
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Εκτέλεση της Διαμόρφωσης Σαρωτή Moondrake"
+
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Εκτέλεση της Διαμόρφωσης Αδειών Ασφαλείας Moondrake"
+
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Εκτέλεση της Διαμόρφωσης Υπηρεσιών Moondrake"
+
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "Εκτέλεση της Διαμόρφωσης UPS Moondrake"
+
+#~ msgid "Select %s Tool:"
+#~ msgstr "Επιλέξτε ένα εργαλείο %s:"
+
+#~ msgid "_About..."
+#~ msgstr "_Σχετικά με..."
+
+#~ msgid "_Fields description"
+#~ msgstr "_Περιγραφή των πεδίων"
+
+#~ msgid "_File"
+#~ msgstr "_Αρχείο"
+
+#~ msgid "_Help"
+#~ msgstr "_Βοήθεια"
+
+#~ msgid "_Options"
+#~ msgstr "_Επιλογές"
+
+#~ msgid "_Quit"
+#~ msgstr "_Έξοδος"
+
+#~ msgid "_Report Bug"
+#~ msgstr "_Αναφορά σφάλματος"
+
+#~ msgid ""
+#~ "\n"
+#~ "Welcome.\n"
+#~ "\n"
+#~ "The parameters of the auto-install are available in the sections on the "
+#~ "left"
+#~ msgstr ""
+#~ "\n"
+#~ " Καλώς Ορίσατε\n"
+#~ "\n"
+#~ "Οι παράμετροι για την αυτόματη εγκατάσταση υπάρχουν στα τμήματα αριστερά"
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(Προεπιλεγμένη τιμή: %s)"
+
 #~ msgid "/Autodetect _printers"
 #~ msgstr "/Εντοπισμός _εκτυπωτών"
 
-#~ msgid "Its GDB trace is:"
-#~ msgstr "Το ίχνος GDB είναι :"
+#~ msgid "Add an item"
+#~ msgstr "Προσθήκη στοιχείου"
 
-#~ msgid "OpenOffice.org"
-#~ msgstr "OpenOffice.org"
+#~ msgid "Auto Install"
+#~ msgstr "Αυτόματη εγκατάσταση"
 
-#~ msgid ""
-#~ "The proprietary driver for your graphic card cannot be found, the system "
-#~ "is now using the free software driver (%s)."
-#~ msgstr ""
-#~ "Ο ιδιόκτητος οδηγός για την κάρτα γραφικών σας δεν βρέθηκε, το σύστημα "
-#~ "χρησιμοποιεί τώρα τον ανοιχτού κώδικα οδηγό (%s)."
+#~ msgid "Auto Install Configurator"
+#~ msgstr "Ρυθμίσεις αυτόματης εγκατάστασης"
+
+#~ msgid "Autodetect _jaz drives"
+#~ msgstr "Αυτόματος εντοπισμός _οδηγών jaz"
+
+#~ msgid "Autodetect _printers"
+#~ msgstr "Αυτόματος εντοπισμός _εκτυπωτών"
+
+#~ msgid "Automatic Steps Configuration"
+#~ msgstr "Ρύθμιση Αυτόματων Βημάτων"
+
+#~ msgid "Background color"
+#~ msgstr "Χρώμα φόντου"
+
+#~ msgid "Basic options"
+#~ msgstr "Βασικές επιλογές"
+
+#~ msgid "Bugs"
+#~ msgstr "Δυσλειτουργίες"
+
+#~ msgid "Choose picture"
+#~ msgstr "Επιλέξτε εικόνα"
+
+#~ msgid "Choose progress bar background"
+#~ msgstr "Επιλέξτε το παρασκήνιο της γραμμής προόδου"
+
+#~ msgid "Choose progress bar color 1"
+#~ msgstr "Επιλέξτε χρώμα της γραμμής προόδου 1"
+
+#~ msgid "Choose progress bar color 2"
+#~ msgstr "Επιλέξτε χρώμα της γραμμής προόδου 2"
+
+#~ msgid "Choose text color"
+#~ msgstr "Επιλέξτε το χρώμα της γραμματοσειράς"
+
+#~ msgid "Choose text zone color"
+#~ msgstr "Επιλέξτε το χρώμα της ζώνης κειμένου"
+
+#~ msgid "Color selection"
+#~ msgstr "Επιλογή χρώματος"
+
+#~ msgid "Coma bug"
+#~ msgstr "Σφάλμα Coma"
+
+#~ msgid "Copyright (C) 2001-2008 by Mandriva"
+#~ msgstr "Copyright (C) 2001-2008 by Mandriva"
+
+#~ msgid "Create new theme"
+#~ msgstr "Δημιουργία νέου θέματος"
+
+#~ msgid "Creating auto install floppy"
+#~ msgstr "Δημιουργία δισκέτας αυτόματης εγκατάστασης"
+
+#, fuzzy
+#~ msgid "Creating auto install floppy (drivers disk)"
+#~ msgstr "Δημιουργία δισκέτας αυτόματης εγκατάστασης"
+
+#~ msgid "Display logo on Console"
+#~ msgstr "Εμφάνιση λογότυπου στην Κονσόλα"
 
 #~ msgid ""
 #~ "Display theme\n"
@@ -3510,133 +3803,9 @@ msgstr "Ρύθμιση της γλώσσας και της χώρας"
 #~ "Εμφάνιση θέματος\n"
 #~ "στην κονσόλα"
 
-#~ msgid "Create new theme"
-#~ msgstr "Δημιουργία νέου θέματος"
-
-#~ msgid "X coordinate of text box"
-#~ msgstr "Συντεταγμένη Χ της ζώνης του κειμένου"
-
-#~ msgid "Y coordinate of text box"
-#~ msgstr "Συντεταγμένη Υ της ζώνης του κειμένου"
-
-#~ msgid "Text box width"
-#~ msgstr "Πλάτος πλαισίου κειμένου"
-
-#~ msgid "Text box height"
-#~ msgstr "Ύψος πλαισίου κειμένου"
-
-#~ msgid ""
-#~ "The progress bar X coordinate\n"
-#~ "of its upper left corner"
-#~ msgstr ""
-#~ "Συντεταγμένη X της γραμμής προόδου\n"
-#~ "από την επάνω αριστερή γωνία"
-
-#~ msgid ""
-#~ "The progress bar Y coordinate\n"
-#~ "of its upper left corner"
-#~ msgstr ""
-#~ "Συντεταγμένη Y της γραμμής προόδου\n"
-#~ "από την επάνω αριστερή γωνία"
-
-#~ msgid "The width of the progress bar"
-#~ msgstr "Το πλάτος της γραμμής προόδου"
-
-#~ msgid "The height of the progress bar"
-#~ msgstr "Το ύψος της γραμμής προόδου"
-
-#~ msgid "X coordinate of the text"
-#~ msgstr "Συντεταγμένη Χ του κειμένου"
-
-#~ msgid "Y coordinate of the text"
-#~ msgstr "Συντεταγμένη Υ του κειμένου"
-
-#~ msgid "Text box transparency"
-#~ msgstr "Διαφάνεια του πλαισίου κειμένου"
-
-#~ msgid "Progress box transparency"
-#~ msgstr "Διαφάνεια της γραμμής προόδου"
-
-#~ msgid "Text size"
-#~ msgstr "Μέγεθος κειμένου"
-
-#~ msgid "Progress Bar"
-#~ msgstr "Γραμμή Προόδου"
-
-#~ msgid "Choose progress bar color 1"
-#~ msgstr "Επιλέξτε χρώμα της γραμμής προόδου 1"
-
-#~ msgid "Choose progress bar color 2"
-#~ msgstr "Επιλέξτε χρώμα της γραμμής προόδου 2"
-
-#~ msgid "Choose progress bar background"
-#~ msgstr "Επιλέξτε το παρασκήνιο της γραμμής προόδου"
-
-#~ msgid "Gradient type"
-#~ msgstr "Τύπος βάθους χρωμάτων"
-
-#~ msgid "Text"
-#~ msgstr "Κείμενο"
-
-#~ msgid "Choose text color"
-#~ msgstr "Επιλέξτε το χρώμα της γραμματοσειράς"
-
-#~ msgid "Choose picture"
-#~ msgstr "Επιλέξτε εικόνα"
-
-#~ msgid "Silent bootsplash"
-#~ msgstr "Bootsplash εικόνα χωρίς κείμενο"
-
-#~ msgid "Choose text zone color"
-#~ msgstr "Επιλέξτε το χρώμα της ζώνης κειμένου"
-
-#~ msgid "Text color"
-#~ msgstr "Χρώμα κειμένου"
-
-#~ msgid "Background color"
-#~ msgstr "Χρώμα φόντου"
-
-#~ msgid "Verbose bootsplash"
-#~ msgstr "Εικόνα bootsplash με κείμενο"
-
-#~ msgid "Theme name"
-#~ msgstr "Όνομα θέματος"
-
-#~ msgid "Final resolution"
-#~ msgstr "τελική ανάλυση"
-
-#~ msgid "Display logo on Console"
-#~ msgstr "Εμφάνιση λογότυπου στην Κονσόλα"
-
-#~ msgid "Save theme"
-#~ msgstr "Aποθήκευση θέματος"
-
-#~ msgid "Please enter a theme name"
-#~ msgstr "Παρακαλώ εισάγετε το όνομα του θέματος"
-
-#~ msgid "Please select a splash image"
-#~ msgstr "Παρακαλώ επιλέξτε μία εικόνα splash"
-
-#~ msgid "saving Bootsplash theme..."
-#~ msgstr "αποθήκευση θέματος Bootsplash ..."
-
-#~ msgid "Unable to load image file %s"
-#~ msgstr "Αδυνατο το άνοιγμα του αρχείου εικόνας %s"
-
-#~ msgid "choose image"
-#~ msgstr "επιλέξτε εικόνα"
-
-#~ msgid "Color selection"
-#~ msgstr "Επιλογή χρώματος"
-
-#~ msgid "Coma bug"
-#~ msgstr "Σφάλμα Coma"
-
-#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-#~ msgstr "ο επεξεργαστής εχει το bug « coma » του Cyrix 6x86 ;"
-
-#~ msgid "Fdiv bug"
-#~ msgstr "Σφάλμα Fdiv"
+#, fuzzy
+#~ msgid "Do you want to remove these packages?"
+#~ msgstr "Θέλετε να δοκιμάσετε τις ρυθμίσεις;"
 
 #~ msgid ""
 #~ "Early Intel Pentium chips manufactured have a bug in their floating point "
@@ -3647,49 +3816,47 @@ msgstr "Ρύθμιση της γλώσσας και της χώρας"
 #~ "floating το οποίο εμποδίζει τον υπολογισμό με ακρίβεια του Floatting "
 #~ "point DIVision (FDIV)"
 
-#~ msgid "Is FPU present"
-#~ msgstr "Το FPU είναι παρόν"
-
-#~ msgid "yes means the processor has an arithmetic coprocessor"
-#~ msgstr ""
-#~ "« ναι » σημαίνει πως ο επεξεργαστής έχει έναν αριθμητικό συνεπεξεργαστή"
-
-#~ msgid "Whether the FPU has an irq vector"
-#~ msgstr "Είτε το FPU έχει ένα διάνυσμα irq"
-
-#~ msgid ""
-#~ "yes means the arithmetic coprocessor has an exception vector attached"
-#~ msgstr ""
-#~ "« ναι » σημαίνει πως ο αριθμητικός συνεπεξεργαστής έχει ένα διάνυσμα κατ' "
-#~ "εξαίρεση"
+#~ msgid "Error!"
+#~ msgstr "Σφάλμα!"
 
 #~ msgid "F00f bug"
 #~ msgstr "Σφάλμα F00f"
 
-#~ msgid ""
-#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
-#~ msgstr ""
-#~ "οι πρώτοι Pentium ήταν buggy και πάγωναν κατά την αποκωδικοποίηση του "
-#~ "F00F bytecode"
+#~ msgid "FPU"
+#~ msgstr "FPU"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Σφάλμα Fdiv"
+
+#~ msgid "File/-"
+#~ msgstr "Αρχείο/-"
+
+#~ msgid "File/Save _As"
+#~ msgstr "Αρχείο/Αποθήκευση _Ως"
+
+#~ msgid "File/_New"
+#~ msgstr "Αρχείο/_Νέο"
+
+#~ msgid "File/_Open"
+#~ msgstr "Αρχείο/Ά_νοιγμα"
+
+#~ msgid "File/_Quit"
+#~ msgstr "Αρχείο/Έ_ξοδος"
+
+#~ msgid "File/_Save"
+#~ msgstr "Αρχείο/Απο_θήκευση"
+
+#~ msgid "Final resolution"
+#~ msgstr "τελική ανάλυση"
+
+#~ msgid "Gradient type"
+#~ msgstr "Τύπος βάθους χρωμάτων"
 
 #~ msgid "Halt bug"
 #~ msgstr "Bug της εντολής Halt"
 
-#~ msgid ""
-#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
-#~ "mode after the \"halt\" instruction is used"
-#~ msgstr ""
-#~ "Ορισμένα από τα πρώτα i486DX-100 chips δεν μπορούν να επαναλειτουργήσουν "
-#~ "με αξιοπιστία μετά από χρήση της εντολής « halt »"
-
-#~ msgid "Bugs"
-#~ msgstr "Δυσλειτουργίες"
-
-#~ msgid "FPU"
-#~ msgstr "FPU"
-
-#~ msgid "Unknown/Others"
-#~ msgstr "Άγνωστο/Άλλο"
+#~ msgid "Help/_About..."
+#~ msgstr "Βοήθεια/_Σχετικά με..."
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "
@@ -3791,29 +3958,55 @@ msgstr "Ρύθμιση της γλώσσας και της χώρας"
 #~ "προηγούμενο, αλλά το σύστημα θα είναι τελείως κλειστό και το επίπεδο\n"
 #~ "ασφαλείας στο μέγιστο."
 
-#~ msgid "(default value: %s)"
-#~ msgstr "(Προεπιλεγμένη τιμή: %s)"
+#~ msgid "I cannot find needed image file `%s'."
+#~ msgstr "Δεν μπορώ να βρω το απαραίτητο αρχείο εικόνας `%s'."
 
-#~ msgid "Security Level:"
-#~ msgstr "Επίπεδο ασφαλείας:"
+#~ msgid "Insert a blank floppy in drive %s"
+#~ msgstr "Εισάγετε άδεια δισκέτα στον οδηγό %s"
 
-#~ msgid "Security Alerts:"
-#~ msgstr "Ειδοποιήσεις Ασφαλείας:"
+#, fuzzy
+#~ msgid "Insert another blank floppy in drive %s (for drivers disk)"
+#~ msgstr "Εισάγετε άδεια δισκέτα στον οδηγό %s"
 
-#~ msgid "Security Administrator:"
-#~ msgstr "Διαχειριστής Ασφαλείας:"
+#~ msgid "Is FPU present"
+#~ msgstr "Το FPU είναι παρόν"
 
-#~ msgid "Basic options"
-#~ msgstr "Βασικές επιλογές"
+#~ msgid "Its GDB trace is:"
+#~ msgstr "Το ίχνος GDB είναι :"
+
+#~ msgid "Menudrake"
+#~ msgstr "Menudrake"
+
+#~ msgid "Msec"
+#~ msgstr "Msec"
 
 #~ msgid "Network Options"
 #~ msgstr "Επιλογές Δικτύου"
 
-#~ msgid "System Options"
-#~ msgstr "Επιλογές Συστήματος"
+#~ msgid "OpenOffice.org"
+#~ msgstr "OpenOffice.org"
+
+#~ msgid "Options/Test"
+#~ msgstr "Επιλογές/Δοκιμή"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "Περιοδικοί Έλεγχοι"
+
+#~ msgid ""
+#~ "Please choose for each step whether it will replay like your install, or "
+#~ "it will be manual"
+#~ msgstr ""
+#~ "Παρακαλώ καθορίστε εάν για κάθε βήμα θα γίνει επανάληψη της εγκατάστασης, "
+#~ "ή εάν γίνει χειροκίνητα"
+
+#~ msgid "Please enter a theme name"
+#~ msgstr "Παρακαλώ εισάγετε το όνομα του θέματος"
+
+#~ msgid "Please select a splash image"
+#~ msgstr "Παρακαλώ επιλέξτε μία εικόνα splash"
+
+#~ msgid "Please wait, adding media..."
+#~ msgstr "Παρακαλώ περιμένετε, προσθήκη μέσου..."
 
 #~ msgid "Please wait, setting security level..."
 #~ msgstr "Παρακαλώ περιμένετε, ρυθμίζεται το επίπεδο ασφαλείας..."
@@ -3821,41 +4014,141 @@ msgstr "Ρύθμιση της γλώσσας και της χώρας"
 #~ msgid "Please wait, setting security options..."
 #~ msgstr "Παρακαλώ περιμένετε, ορίζονται οι επιλογές ασφαλείας..."
 
-#, fuzzy
-#~ msgid ""
-#~ "The following localization packages do not seem to be useful for your "
-#~ "system:"
-#~ msgstr "Τα παρακάτω πακέτα πρέπει να εγκατασταθούν:\n"
+#~ msgid "Progress Bar"
+#~ msgstr "Γραμμή Προόδου"
 
-#, fuzzy
-#~ msgid "Do you want to remove these packages?"
-#~ msgstr "Θέλετε να δοκιμάσετε τις ρυθμίσεις;"
+#~ msgid "Progress box transparency"
+#~ msgstr "Διαφάνεια της γραμμής προόδου"
+
+#~ msgid "Remove the last item"
+#~ msgstr "Αφαίρεση του τελευταίου στοιχείου"
+
+#~ msgid "Restart XFS"
+#~ msgstr "Επανεκκίνηση XFS"
+
+#~ msgid "Save theme"
+#~ msgstr "Aποθήκευση θέματος"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Διαχειριστής Ασφαλείας:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Ειδοποιήσεις Ασφαλείας:"
+
+#~ msgid "Security Level:"
+#~ msgstr "Επίπεδο ασφαλείας:"
+
+#~ msgid "Silent bootsplash"
+#~ msgstr "Bootsplash εικόνα χωρίς κείμενο"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Ορισμένα από τα πρώτα i486DX-100 chips δεν μπορούν να επαναλειτουργήσουν "
+#~ "με αξιοπιστία μετά από χρήση της εντολής « halt »"
+
+#~ msgid "System Options"
+#~ msgstr "Επιλογές Συστήματος"
+
+#~ msgid "Text"
+#~ msgstr "Κείμενο"
+
+#~ msgid "Text box height"
+#~ msgstr "Ύψος πλαισίου κειμένου"
+
+#~ msgid "Text box transparency"
+#~ msgstr "Διαφάνεια του πλαισίου κειμένου"
+
+#~ msgid "Text box width"
+#~ msgstr "Πλάτος πλαισίου κειμένου"
+
+#~ msgid "Text color"
+#~ msgstr "Χρώμα κειμένου"
+
+#~ msgid "Text size"
+#~ msgstr "Μέγεθος κειμένου"
+
+#~ msgid "The change is done, but to be effective you must logout"
+#~ msgstr "Η αλλαγή έγινε, αλλά για να ισχύσει θα πρέπει να γίνει αποσύνδεση"
+
+#~ msgid ""
+#~ "The floppy has been successfully generated.\n"
+#~ "You may now replay your installation."
+#~ msgstr ""
+#~ "Η δισκέτα δημιουργήθηκε με επιτυχία.\n"
+#~ "Μπορείτε τώρα να επαναλάβετε την εγκατάσταση."
 
 #, fuzzy
 #~ msgid ""
 #~ "The following hardware packages do not seem to be useful for your system:"
 #~ msgstr "Τα παρακάτω πακέτα πρέπει να εγκατασταθούν:\n"
 
-#~ msgid "Please wait, adding media..."
-#~ msgstr "Παρακαλώ περιμένετε, προσθήκη μέσου..."
+#, fuzzy
+#~ msgid ""
+#~ "The following localization packages do not seem to be useful for your "
+#~ "system:"
+#~ msgstr "Τα παρακάτω πακέτα πρέπει να εγκατασταθούν:\n"
 
-#~ msgid "The change is done, but to be effective you must logout"
-#~ msgstr "Η αλλαγή έγινε, αλλά για να ισχύσει θα πρέπει να γίνει αποσύνδεση"
+#~ msgid "The height of the progress bar"
+#~ msgstr "Το ύψος της γραμμής προόδου"
 
-#~ msgid "Restart XFS"
-#~ msgstr "Επανεκκίνηση XFS"
+#~ msgid ""
+#~ "The progress bar X coordinate\n"
+#~ "of its upper left corner"
+#~ msgstr ""
+#~ "Συντεταγμένη X της γραμμής προόδου\n"
+#~ "από την επάνω αριστερή γωνία"
 
-#~ msgid "Copyright (C) 2001-2008 by Mandriva"
-#~ msgstr "Copyright (C) 2001-2008 by Mandriva"
+#~ msgid ""
+#~ "The progress bar Y coordinate\n"
+#~ "of its upper left corner"
+#~ msgstr ""
+#~ "Συντεταγμένη Y της γραμμής προόδου\n"
+#~ "από την επάνω αριστερή γωνία"
 
-#~ msgid "Error!"
-#~ msgstr "Σφάλμα!"
+#~ msgid ""
+#~ "The proprietary driver for your graphic card cannot be found, the system "
+#~ "is now using the free software driver (%s)."
+#~ msgstr ""
+#~ "Ο ιδιόκτητος οδηγός για την κάρτα γραφικών σας δεν βρέθηκε, το σύστημα "
+#~ "χρησιμοποιεί τώρα τον ανοιχτού κώδικα οδηγό (%s)."
 
-#~ msgid "I cannot find needed image file `%s'."
-#~ msgstr "Δεν μπορώ να βρω το απαραίτητο αρχείο εικόνας `%s'."
+#~ msgid "The width of the progress bar"
+#~ msgstr "Το πλάτος της γραμμής προόδου"
 
-#~ msgid "Auto Install Configurator"
-#~ msgstr "Ρυθμίσεις αυτόματης εγκατάστασης"
+#~ msgid "Theme name"
+#~ msgstr "Όνομα θέματος"
+
+#~ msgid "Unable to load image file %s"
+#~ msgstr "Αδυνατο το άνοιγμα του αρχείου εικόνας %s"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Άγνωστο/Άλλο"
+
+#~ msgid "Urpmi"
+#~ msgstr "Urpmi"
+
+#~ msgid "Userdrake"
+#~ msgstr "Userdrake"
+
+#~ msgid "Verbose bootsplash"
+#~ msgstr "Εικόνα bootsplash με κείμενο"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Είτε το FPU έχει ένα διάνυσμα irq"
+
+#~ msgid "X coordinate of text box"
+#~ msgstr "Συντεταγμένη Χ της ζώνης του κειμένου"
+
+#~ msgid "X coordinate of the text"
+#~ msgstr "Συντεταγμένη Χ του κειμένου"
+
+#~ msgid "Y coordinate of text box"
+#~ msgstr "Συντεταγμένη Υ της ζώνης του κειμένου"
+
+#~ msgid "Y coordinate of the text"
+#~ msgstr "Συντεταγμένη Υ του κειμένου"
 
 #, fuzzy
 #~ msgid ""
@@ -3880,72 +4173,33 @@ msgstr "Ρύθμιση της γλώσσας και της χώρας"
 #~ "\n"
 #~ " Ολοκληρώθηκε?"
 
-#~ msgid "replay"
-#~ msgstr "επανάληψη"
+#~ msgid "choose image"
+#~ msgstr "επιλέξτε εικόνα"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "οι πρώτοι Pentium ήταν buggy και πάγωναν κατά την αποκωδικοποίηση του "
+#~ "F00F bytecode"
 
 #~ msgid "manual"
 #~ msgstr "χειροκίνητα"
 
-#~ msgid "Automatic Steps Configuration"
-#~ msgstr "Ρύθμιση Αυτόματων Βημάτων"
+#~ msgid "replay"
+#~ msgstr "επανάληψη"
+
+#~ msgid "saving Bootsplash theme..."
+#~ msgstr "αποθήκευση θέματος Bootsplash ..."
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "ο επεξεργαστής εχει το bug « coma » του Cyrix 6x86 ;"
 
 #~ msgid ""
-#~ "Please choose for each step whether it will replay like your install, or "
-#~ "it will be manual"
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
 #~ msgstr ""
-#~ "Παρακαλώ καθορίστε εάν για κάθε βήμα θα γίνει επανάληψη της εγκατάστασης, "
-#~ "ή εάν γίνει χειροκίνητα"
+#~ "« ναι » σημαίνει πως ο αριθμητικός συνεπεξεργαστής έχει ένα διάνυσμα κατ' "
+#~ "εξαίρεση"
 
-#~ msgid "Insert a blank floppy in drive %s"
-#~ msgstr "Εισάγετε άδεια δισκέτα στον οδηγό %s"
-
-#~ msgid "Creating auto install floppy"
-#~ msgstr "Δημιουργία δισκέτας αυτόματης εγκατάστασης"
-
-#, fuzzy
-#~ msgid "Insert another blank floppy in drive %s (for drivers disk)"
-#~ msgstr "Εισάγετε άδεια δισκέτα στον οδηγό %s"
-
-#, fuzzy
-#~ msgid "Creating auto install floppy (drivers disk)"
-#~ msgstr "Δημιουργία δισκέτας αυτόματης εγκατάστασης"
-
-#~ msgid ""
-#~ "\n"
-#~ "Welcome.\n"
-#~ "\n"
-#~ "The parameters of the auto-install are available in the sections on the "
-#~ "left"
+#~ msgid "yes means the processor has an arithmetic coprocessor"
 #~ msgstr ""
-#~ "\n"
-#~ " Καλώς Ορίσατε\n"
-#~ "\n"
-#~ "Οι παράμετροι για την αυτόματη εγκατάσταση υπάρχουν στα τμήματα αριστερά"
-
-#~ msgid ""
-#~ "The floppy has been successfully generated.\n"
-#~ "You may now replay your installation."
-#~ msgstr ""
-#~ "Η δισκέτα δημιουργήθηκε με επιτυχία.\n"
-#~ "Μπορείτε τώρα να επαναλάβετε την εγκατάσταση."
-
-#~ msgid "Auto Install"
-#~ msgstr "Αυτόματη εγκατάσταση"
-
-#~ msgid "Add an item"
-#~ msgstr "Προσθήκη στοιχείου"
-
-#~ msgid "Remove the last item"
-#~ msgstr "Αφαίρεση του τελευταίου στοιχείου"
-
-#~ msgid "Menudrake"
-#~ msgstr "Menudrake"
-
-#~ msgid "Msec"
-#~ msgstr "Msec"
-
-#~ msgid "Urpmi"
-#~ msgstr "Urpmi"
-
-#~ msgid "Userdrake"
-#~ msgstr "Userdrake"
+#~ "« ναι » σημαίνει πως ο επεξεργαστής έχει έναν αριθμητικό συνεπεξεργαστή"

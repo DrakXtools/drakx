@@ -1511,9 +1511,9 @@ msgstr "Көбүрөөк"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
 #: diskdrake/interactive.pm:1304 mygtk2.pm:1228
-#, fuzzy, c-format
+#, c-format
 msgid "Confirmation"
-msgstr "Конфигурациялоо"
+msgstr "Тактоо"
 
 #: diskdrake/interactive.pm:281
 #, c-format
@@ -1607,7 +1607,7 @@ msgstr "Кеңири маалымат"
 #: diskdrake/interactive.pm:407
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "Видео"
 
 #: diskdrake/interactive.pm:412 diskdrake/interactive.pm:828
 #, c-format
@@ -2912,12 +2912,12 @@ msgstr ""
 "/boot бөлүмү бар экендигин тактаңыз."
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr "Сиз %s биригүү чекити үчүн шифрделген файл системасын колдоно албайсыз"
 
 #: fsedit.pm:469
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You cannot use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
@@ -3427,11 +3427,11 @@ msgstr "Каалаган драйверди тандоо"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:482
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -6456,7 +6456,7 @@ msgstr "Интернет"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "Тармактар"
 
 #: services.pm:161
 #, c-format
@@ -6775,8 +6775,194 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Орнотуу ийгиликсиз аяктады"
 
+#, fuzzy
+#~ msgid "An NTP client/server"
+#~ msgstr "NIS сервери"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "Адегенде беримдериңиздин көчүрмөсүн даярдаңыз"
+
+#~ msgid "Accept user"
+#~ msgstr "Кабыл алуу"
+
+#~ msgid "Active Directory with SFU"
+#~ msgstr "SFU'су бар актив директория"
+
+#~ msgid "Active Directory with SFU:"
+#~ msgstr "SFU колдонгон актив директория:"
+
+#~ msgid "Active Directory with Winbind"
+#~ msgstr "Winbind'и бар актив директория"
+
+#~ msgid "Active Directory with Winbind:"
+#~ msgstr "Winbind колдонгон актив директория:"
+
+#~ msgid "Add user"
+#~ msgstr "Колдонуучу кошуу"
+
+#~ msgid "Authentication Active Directory"
+#~ msgstr "Active Directory аутентификациялануусу"
+
+#~ msgid "Authentication LDAP"
+#~ msgstr "LDAP аутентификациясы"
+
+#~ msgid "Authentication NIS"
+#~ msgstr "NIS аутентификациясы"
+
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "Windows доменин аутентификациялоо"
+
+#~ msgid "Choose action"
+#~ msgstr "Аракет тандоо"
+
+#, fuzzy
+#~ msgid "Choose the sizes"
+#~ msgstr "Жыңы көлөмүн тандаңыз"
+
 #~ msgid "Clean /tmp at each boot"
 #~ msgstr "Ар бир жүктөгөн сайын /tmp каталогун тазалоо"
+
+#~ msgid "Collapse Tree"
+#~ msgstr "Бутактарды жыйуу"
+
+#, fuzzy
+#~ msgid ""
+#~ "Do not update directory inode access times on this filesystem\n"
+#~ "(e.g, for faster access on the news spool to speed up news servers)."
+#~ msgstr ""
+#~ "Бул файл системасынын inode'на жетүү убактысы жаңыланууда\n"
+#~ "(М. жаңылыктар серверинин жаңылыктар спулуна ылдам жетүү үчүн)."
+
+#~ msgid "Error reading file %s"
+#~ msgstr "%s файлын окуудагы ката"
+
+#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
+#~ msgstr "Ката: Сиздин добуш картаңыз үчүн \"%s\" драйвери тизмеде жок"
+
+#~ msgid "Expand Tree"
+#~ msgstr "Бутактарды жазуу"
+
+#~ msgid "Ext2"
+#~ msgstr "Ext2"
+
+#~ msgid ""
+#~ "For this to work for a W2K PDC, you will probably need to have the admin "
+#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
+#~ "add and reboot the server.\n"
+#~ "You will also need the username/password of a Domain Admin to join the "
+#~ "machine to the Windows(TM) domain.\n"
+#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
+#~ "after the network setup step.\n"
+#~ "Should this setup fail for some reason and domain authentication is not "
+#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your "
+#~ "Windows(tm) Domain, and Admin Username/Password, after system boot.\n"
+#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
+#~ "good."
+#~ msgstr ""
+#~ "W2K PDC иштетүү үчүн, сиз админ катары C:\\>net localgroup \"Pre-Windows "
+#~ "2000 Compatible Access\" everyone /add аткарып, андан соң серверди кайра "
+#~ "жүктөңүз.\n"
+#~ "Машинаны Windows(TM) доменине кошуу үчүн сизге домен администраторунун "
+#~ "колдонуучу_аты/паролу керек болушу мүмкүн.\n"
+#~ "Эгер желе учурда иштетилбеген болсо, Drakx желени орнотуу кадамынан кийин "
+#~ "доменге кошулууга аракет жасайт. Кандайдыр бир себептер менен бул иш "
+#~ "ийгиликсиз\n"
+#~ "аяктаса жана домен аутентификациясы иштебесе, система кайра жүктөлгөндөн "
+#~ "кийин Windows(tm) домен аты, жана админ колдонуучу_аты/паролу жардамы "
+#~ "менен 'smbpasswd -j ДОМЕН -U КОЛДОНУУЧУ%%ПАРОЛЬ' аткарыңыз.\n"
+#~ "Бул 'wbinfo -t' командасы аутентификацияңыз канчалык жашыруун экендигин "
+#~ "текшерет."
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "RAM өлчөмүн Мб катары бериңиз"
+
+#~ msgid ""
+#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
+#~ "is enough)\n"
+#~ "at the beginning of the disk"
+#~ msgstr ""
+#~ "Эгер aboot колдонууну пландаштырсаңыз, дисктин башынан бош орун\n"
+#~ "калтырууну унутпаңыз (2048 сектор жетиштүү)"
+
+#~ msgid "Info: "
+#~ msgstr "Маалымат: "
+
+#~ msgid "Journalised FS"
+#~ msgstr "Журналдануучу FS"
+
+#~ msgid "LDAP user allowed to browse the Active Directory"
+#~ msgstr "LDAP колдонуучусуна актив директорияны кыдырууга уруксат берилген"
+
+#~ msgid "LDAP users database"
+#~ msgstr "LDAP колдонуучуларынын беримдер базасы"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/grub орнотуу"
+
+#~ msgid "No supermount"
+#~ msgstr "Supermount жок"
+
+#~ msgid "Number of capture buffers:"
+#~ msgstr "Кармап алынуучу буферлер саны:"
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr ""
+#~ "``Командалык саптын опцияларын чектөө'' опциясы паролсуз колдонулбайт"
+
+#~ msgid "PLL setting:"
+#~ msgstr "PLL параметрлери:"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "RAM так көлөмүн көрсөтүңүз (табылганы %d Мб)"
+
+#~ msgid "Radio support:"
+#~ msgstr "Радиону колдоо:"
+
+#~ msgid "Removable media automounting"
+#~ msgstr "Чыгарылма түзүлүштү автобириктирүү"
+
+#~ msgid "Rescue partition table"
+#~ msgstr "Бөлүмдөр таблицасын сактап калуу"
+
+#~ msgid "Restore partition table"
+#~ msgstr "Бөлүмдөр таблицасын калыбына келтирүү"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Командалык саптын опцияларын чектөө"
+
+#, fuzzy
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Жаңы көлөмү (Мб): "
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "Save partition table"
+#~ msgstr "Бөлүмдөр таблицасын сактоо"
+
+#~ msgid "Supermount"
+#~ msgstr "Supermount"
+
+#~ msgid "Supermount except for CDROM drives"
+#~ msgstr "CDROM түзүлүштөрүнөн башканы supermount кылуу"
+
+#, fuzzy
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Жаңы көлөмү (Мб): "
+
+#~ msgid "TLS"
+#~ msgstr "TLS"
+
+#~ msgid ""
+#~ "The backup partition table has not the same size\n"
+#~ "Still continue?"
+#~ msgstr ""
+#~ "Бөлүмдөр таблицасынын резервдик копиясынын өлчөмү башка\n"
+#~ "Ага карабай улантайынбы?"
 
 #~ msgid ""
 #~ "The classic bug sound tester is to run the following commands:\n"
@@ -6824,20 +7010,6 @@ msgstr "Орнотуу ийгиликсиз аяктады"
 #~ "- \"/sbin/fuser -v /dev/dsp\" добуш картасын кайсы программа\n"
 #~ "колдонгондугун көрсөтөт.\n"
 
-#~ msgid "Restrict command line options"
-#~ msgstr "Командалык саптын опцияларын чектөө"
-
-#~ msgid "restrict"
-#~ msgstr "чектөө"
-
-#~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
-#~ msgstr ""
-#~ "``Командалык саптын опцияларын чектөө'' опциясы паролсуз колдонулбайт"
-
-#~ msgid "Use an encrypted filesystem"
-#~ msgstr "Шифрленген файл системасын колдонуу"
-
 #~ msgid ""
 #~ "To ensure data integrity after resizing the partition(s), \n"
 #~ "filesystem checks will be run on your next boot into Microsoft Windows®"
@@ -6846,64 +7018,26 @@ msgstr "Орнотуу ийгиликсиз аяктады"
 #~ "камсыздоо үчүн, Windows(TM) кийинки жүктөлгөндө\n"
 #~ "файл системасын текшерүү ишке ашырылат"
 
-#, fuzzy
-#~ msgid "Which partition do you want to use for Linux4Win?"
-#~ msgstr "Аны кайсы секторго жылдыргыңыз келет?"
-
-#, fuzzy
-#~ msgid "Choose the sizes"
-#~ msgstr "Жыңы көлөмүн тандаңыз"
-
-#, fuzzy
-#~ msgid "Root partition size in MB: "
-#~ msgstr "Жаңы көлөмү (Мб): "
-
-#, fuzzy
-#~ msgid "Swap partition size in MB: "
-#~ msgstr "Жаңы көлөмү (Мб): "
-
-#~ msgid "LILO/grub Installation"
-#~ msgstr "LILO/grub орнотуу"
-
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "RAM так көлөмүн көрсөтүңүз (табылганы %d Мб)"
-
-#~ msgid "Give the ram size in MB"
-#~ msgstr "RAM өлчөмүн Мб катары бериңиз"
-
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "Эгер aboot колдонууну пландаштырсаңыз, дисктин башынан бош орун\n"
-#~ "калтырууну унутпаңыз (2048 сектор жетиштүү)"
-
-#~ msgid "Expand Tree"
-#~ msgstr "Бутактарды жазуу"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "Бутактарды жыйуу"
-
 #~ msgid "Toggle between flat and group sorted"
 #~ msgstr ""
 #~ "Жөнөкөй жана группалары боюнча иреттелген тизмектердин ортосунда "
 #~ "алмаштыруу"
 
-#~ msgid "Choose action"
-#~ msgstr "Аракет тандоо"
+#~ msgid "Trying to rescue partition table"
+#~ msgstr "Бөлүмдөр таблицасын сактап калуу аракети"
 
-#~ msgid "Active Directory with SFU"
-#~ msgstr "SFU'су бар актив директория"
+#~ msgid "Undo"
+#~ msgstr "Аракеттен айнуу"
 
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Winbind'и бар актив директория"
+#~ msgid "Unknown driver"
+#~ msgstr "Белгисиз драйвер"
 
-#~ msgid "Active Directory with SFU:"
-#~ msgstr "SFU колдонгон актив директория:"
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr "Шифрленген файл системасын колдонуу"
 
-#~ msgid "Active Directory with Winbind:"
-#~ msgstr "Winbind колдонгон актив директория:"
+#, fuzzy
+#~ msgid "Which partition do you want to use for Linux4Win?"
+#~ msgstr "Аны кайсы секторго жылдыргыңыз келет?"
 
 #~ msgid ""
 #~ "Winbind allows the system to authenticate users in a Windows Active "
@@ -6912,135 +7046,11 @@ msgstr "Орнотуу ийгиликсиз аяктады"
 #~ "Winbind колонуучуларды Windows Active Directory Server аркылуу "
 #~ "аутентификациялоого жол берет."
 
-#~ msgid "Authentication LDAP"
-#~ msgstr "LDAP аутентификациясы"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "коопсуздук катмары (SASL/Kerberos)"
-
-#~ msgid "Authentication Active Directory"
-#~ msgstr "Active Directory аутентификациялануусу"
-
-#~ msgid "LDAP users database"
-#~ msgstr "LDAP колдонуучуларынын беримдер базасы"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "LDAP колдонуучусуна актив директорияны кыдырууга уруксат берилген"
-
-#~ msgid "Authentication NIS"
-#~ msgstr "NIS аутентификациясы"
-
-#~ msgid ""
-#~ "For this to work for a W2K PDC, you will probably need to have the admin "
-#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
-#~ "add and reboot the server.\n"
-#~ "You will also need the username/password of a Domain Admin to join the "
-#~ "machine to the Windows(TM) domain.\n"
-#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
-#~ "after the network setup step.\n"
-#~ "Should this setup fail for some reason and domain authentication is not "
-#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your "
-#~ "Windows(tm) Domain, and Admin Username/Password, after system boot.\n"
-#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
-#~ "good."
-#~ msgstr ""
-#~ "W2K PDC иштетүү үчүн, сиз админ катары C:\\>net localgroup \"Pre-Windows "
-#~ "2000 Compatible Access\" everyone /add аткарып, андан соң серверди кайра "
-#~ "жүктөңүз.\n"
-#~ "Машинаны Windows(TM) доменине кошуу үчүн сизге домен администраторунун "
-#~ "колдонуучу_аты/паролу керек болушу мүмкүн.\n"
-#~ "Эгер желе учурда иштетилбеген болсо, Drakx желени орнотуу кадамынан кийин "
-#~ "доменге кошулууга аракет жасайт. Кандайдыр бир себептер менен бул иш "
-#~ "ийгиликсиз\n"
-#~ "аяктаса жана домен аутентификациясы иштебесе, система кайра жүктөлгөндөн "
-#~ "кийин Windows(tm) домен аты, жана админ колдонуучу_аты/паролу жардамы "
-#~ "менен 'smbpasswd -j ДОМЕН -U КОЛДОНУУЧУ%%ПАРОЛЬ' аткарыңыз.\n"
-#~ "Бул 'wbinfo -t' командасы аутентификацияңыз канчалык жашыруун экендигин "
-#~ "текшерет."
-
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Windows доменин аутентификациялоо"
-
-#~ msgid "Undo"
-#~ msgstr "Аракеттен айнуу"
-
-#~ msgid "Save partition table"
-#~ msgstr "Бөлүмдөр таблицасын сактоо"
-
-#~ msgid "Restore partition table"
-#~ msgstr "Бөлүмдөр таблицасын калыбына келтирүү"
-
-#~ msgid ""
-#~ "The backup partition table has not the same size\n"
-#~ "Still continue?"
-#~ msgstr ""
-#~ "Бөлүмдөр таблицасынын резервдик копиясынын өлчөмү башка\n"
-#~ "Ага карабай улантайынбы?"
-
-#~ msgid "Info: "
-#~ msgstr "Маалымат: "
-
-#~ msgid "Unknown driver"
-#~ msgstr "Белгисиз драйвер"
-
-#~ msgid "Error reading file %s"
-#~ msgstr "%s файлын окуудагы ката"
-
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr "Ката: Сиздин добуш картаңыз үчүн \"%s\" драйвери тизмеде жок"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "Journalised FS"
-#~ msgstr "Журналдануучу FS"
-
-#~ msgid "Add user"
-#~ msgstr "Колдонуучу кошуу"
-
-#~ msgid "Accept user"
-#~ msgstr "Кабыл алуу"
-
-#, fuzzy
-#~ msgid ""
-#~ "Do not update directory inode access times on this filesystem\n"
-#~ "(e.g, for faster access on the news spool to speed up news servers)."
-#~ msgstr ""
-#~ "Бул файл системасынын inode'на жетүү убактысы жаңыланууда\n"
-#~ "(М. жаңылыктар серверинин жаңылыктар спулуна ылдам жетүү үчүн)."
-
-#~ msgid "No supermount"
-#~ msgstr "Supermount жок"
-
-#~ msgid "Supermount"
-#~ msgstr "Supermount"
-
-#~ msgid "Supermount except for CDROM drives"
-#~ msgstr "CDROM түзүлүштөрүнөн башканы supermount кылуу"
-
-#~ msgid "Rescue partition table"
-#~ msgstr "Бөлүмдөр таблицасын сактап калуу"
-
-#~ msgid "Removable media automounting"
-#~ msgstr "Чыгарылма түзүлүштү автобириктирүү"
-
-#~ msgid "Trying to rescue partition table"
-#~ msgstr "Бөлүмдөр таблицасын сактап калуу аракети"
-
-#~ msgid "Number of capture buffers:"
-#~ msgstr "Кармап алынуучу буферлер саны:"
-
 #~ msgid "number of capture buffers for mmap'ed capture"
 #~ msgstr "mmap кармап алуу үчүн кармап алуу буферлер саны"
 
-#~ msgid "PLL setting:"
-#~ msgstr "PLL параметрлери:"
+#~ msgid "restrict"
+#~ msgstr "чектөө"
 
-#~ msgid "Radio support:"
-#~ msgstr "Радиону колдоо:"
+#~ msgid "security layout (SASL/Kerberos)"
+#~ msgstr "коопсуздук катмары (SASL/Kerberos)"

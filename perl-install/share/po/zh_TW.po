@@ -551,24 +551,24 @@ msgid "Please choose a language to use"
 msgstr "請選擇要使用那個語言。"
 
 #: any.pm:1183
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
-"Mandriva Linux 能支援多種語言，請選擇您想安裝的語言。\n"
-"它們將可供您完成安裝並重新啟動系統之後使用。"
+"%s 可以支援多重語言。請選擇您要安裝的語言。這些語言在安裝完成並重新啟動系統後"
+"即可使用。"
 
 #: any.pm:1186
-#, fuzzy, c-format
+#, c-format
 msgid "Multiple languages"
 msgstr "多語系"
 
 #: any.pm:1187
 #, c-format
 msgid "Select Additional Languages"
-msgstr ""
+msgstr "選擇更多語言"
 
 #: any.pm:1196 any.pm:1227
 #, c-format
@@ -775,7 +775,7 @@ msgstr "本地端檔案："
 #, c-format
 msgid ""
 "Use local for all authentication and information user tell in local file"
-msgstr ""
+msgstr "所有認證與使用者資訊都使用本地檔"
 
 #: authentication.pm:66
 #, c-format
@@ -941,7 +941,7 @@ msgstr "用 DNS 來定位領域的 KDC"
 #: authentication.pm:150
 #, c-format
 msgid "Use DNS to locate realms"
-msgstr ""
+msgstr "用 DNS 來定位領域"
 
 #: authentication.pm:155
 #, c-format
@@ -997,7 +997,7 @@ msgstr "網域模型"
 #: authentication.pm:219
 #, c-format
 msgid "Active Directory Realm "
-msgstr ""
+msgstr "Active Directory 領域"
 
 #: authentication.pm:220
 #, c-format
@@ -1077,9 +1077,9 @@ msgid "LILO with text menu"
 msgstr "LILO 文字介面選單"
 
 #: bootloader.pm:1203
-#, fuzzy, c-format
+#, c-format
 msgid "GRUB2 with graphical menu"
-msgstr "GRUB 圖形介面選單"
+msgstr "GRUB2 圖形介面選單"
 
 #: bootloader.pm:1204
 #, c-format
@@ -1316,9 +1316,9 @@ msgid "Warning"
 msgstr "警告"
 
 #: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete this mount point?"
-msgstr "您確定要刪除這個掛載點嗎?"
+msgstr "您確定您要刪除此掛載點嗎？"
 
 #: diskdrake/dav.pm:125
 #, c-format
@@ -2148,12 +2148,12 @@ msgstr "已加密"
 #: diskdrake/interactive.pm:1415
 #, c-format
 msgid " (mapped on %s)"
-msgstr ""
+msgstr "(映射於 %s)"
 
 #: diskdrake/interactive.pm:1416
 #, c-format
 msgid " (to map on %s)"
-msgstr ""
+msgstr "(要映射於 %s)"
 
 #: diskdrake/interactive.pm:1417
 #, c-format
@@ -2439,7 +2439,7 @@ msgstr "正在啟用 swap 分割區 %s"
 #: fs/mount_options.pm:114
 #, c-format
 msgid "Enable POSIX Access Control Lists"
-msgstr ""
+msgstr "開啟 POSIX 存取控制清單"
 
 #: fs/mount_options.pm:116
 #, c-format
@@ -2457,6 +2457,8 @@ msgid ""
 "Do not update inode access times on this filesystem\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
+"不要在此檔案系統內更新　inode　的存取時間\n"
+"（這樣可以加速新聞伺服器的存取）。"
 
 #: fs/mount_options.pm:123
 #, c-format
@@ -2464,6 +2466,8 @@ msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
+"以更有效率的方式更新此檔案系統中的 inode 存取時間 (例如，快速存取新聞內容以便"
+"加速新聞伺服器)。"
 
 #: fs/mount_options.pm:126
 #, c-format
@@ -2477,7 +2481,7 @@ msgstr ""
 #: fs/mount_options.pm:129
 #, c-format
 msgid "Do not interpret character or block special devices on the filesystem."
-msgstr ""
+msgstr "不要解譯檔案系統中的字元或區塊特殊裝置。"
 
 #: fs/mount_options.pm:131
 #, c-format
@@ -2486,6 +2490,8 @@ msgid ""
 "filesystem. This option might be useful for a server that has filesystems\n"
 "containing binaries for architectures other than its own."
 msgstr ""
+"不允許在此已掛載的檔案系統中執行任何檔案。這個選項適用於伺服器中有個檔案系統"
+"裡面的執行檔架構與伺服器不同時。"
 
 #: fs/mount_options.pm:135
 #, c-format
@@ -2637,14 +2643,14 @@ msgid "Which partition do you want to resize?"
 msgstr "您要重新調整那個分割區的大小？"
 
 #: fs/partitioning_wizard.pm:180
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the %s installation."
 msgstr ""
-"您的 Microsoft Windows® 分割區太支離破碎。請先用 Microsoft Windows® 重新開"
-"機，執行 ``defrag'' 工具程式，然後重新開始安裝 Mandriva Linux 。"
+"您的 Microsoft Windows® 分割區太過零散，需要重整。請先將您的系統開到 "
+"Microsoft Windows® 下執行 ``defrag''，執行完畢後再重新啟動 %s 安裝。"
 
 #: fs/partitioning_wizard.pm:188
 #, c-format
@@ -2727,11 +2733,11 @@ msgid "Erase and use entire disk"
 msgstr "清除並使用整個磁碟"
 
 #: fs/partitioning_wizard.pm:243
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
-msgstr "您有多個硬碟，您打算用那一個來安裝 linux？"
+msgstr "您有一個以上的硬碟機。您要使用哪一個？"
 
 #: fs/partitioning_wizard.pm:251 fsedit.pm:634
 #, c-format
@@ -2775,7 +2781,7 @@ msgstr "DrakX 分割精靈找到了下列方案："
 #: fs/partitioning_wizard.pm:518
 #, c-format
 msgid "Here is the content of your disk drive "
-msgstr ""
+msgstr "這是您的磁碟內容 "
 
 #: fs/partitioning_wizard.pm:602
 #, c-format
@@ -2846,74 +2852,67 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "已經有分割區分配到掛載點 %s 了\n"
 
 #: fsedit.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a separate /boot partition"
 msgstr ""
-"您選擇了將一塊軟體磁碟陣列的分割區作為根目錄 (/) 的掛載點。\n"
-"但開機載入程式無法處理這種 /boot 目錄不位於實體分割區的情況。\n"
-"請確定會新增一個掛載於實體分割區的 /boot 目錄"
+"您選擇了一個軟體 RAID 分割區做為根分割區。\n"
+"若是沒有單獨的 /boot 分割區，開機載入器無法處理這種狀況。\n"
+"請新增一個 /boot 分割區"
 
 #: fsedit.pm:440
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Metadata version unsupported for a boot partition. Please be sure to add a "
 "separate /boot partition."
-msgstr ""
-"您選擇了將一塊軟體磁碟陣列的分割區作為根目錄 (/) 的掛載點。\n"
-"但開機載入程式無法處理這種 /boot 目錄不位於實體分割區的情況。\n"
-"請確定會新增一個掛載於實體分割區的 /boot 目錄"
+msgstr "中繼資料版本不支援開機分割區。請新增一個 /boot 分割區。"
 
 #: fsedit.pm:448
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as /boot.\n"
 "No bootloader is able to handle this."
-msgstr ""
-"您選擇了將一塊軟體磁碟陣列的分割區作為根目錄 (/) 的掛載點。\n"
-"但開機載入程式無法處理這種 /boot 目錄不位於實體分割區的情況。\n"
-"請確定會新增一個掛載於實體分割區的 /boot 目錄"
+msgstr "您將 /boot 掛在一個軟體 RAID 分割區下。開機載入器無法處理這種狀況。"
 
 #: fsedit.pm:452
 #, c-format
 msgid "Metadata version unsupported for a boot partition."
-msgstr ""
+msgstr "中繼資料版本不支援開機分割區。"
 
 #: fsedit.pm:459
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a separate /boot partition"
 msgstr ""
-"您選擇了將一塊加密過的分割區作為根目錄 (/) 的掛載點。\n"
-"但如果沒有獨立的 /boot 分割區，那麼開機載入程式將無法處理這種情況。\n"
-"請確定有加入一個獨立的 /boot 分割區"
+"您將根分割區（/）做加密。開機載入器無法在沒有單獨的 /boot 分割區的狀況下這麼"
+"做。請新增一個 /boot 分割區"
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
-msgstr "您不能使用加密過的檔案系統來作為 %s 的掛載點"
+msgstr "您不能在掛載點 %s 使用加密的檔案系統"
 
 #: fsedit.pm:469
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You cannot use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
-msgstr "您不能使用 LVM 邏輯磁區來作為 %s 的掛載點，因為它跨越了實體磁區"
+msgstr "您不能使用 LVM 邏輯磁碟區來掛載 %s，因為它跨越了實體磁碟區"
 
 #: fsedit.pm:471
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
 "volumes.\n"
 "You should create a separate /boot partition first"
 msgstr ""
-"您選擇了一塊 LVM 邏輯磁區作為根目錄 (/) 。\n"
-"但開機載入程式無法在這個磁區跨越了實體磁區的情況下運作。\n"
+"您選擇了 LVM 邏輯磁碟區做為根分割區（/）。\n"
+"而磁碟區跨越了實體磁碟區時，開機載入器無法處理這種狀況。\n"
 "您應該先建立一個 /boot 分割區"
 
 #: fsedit.pm:475 fsedit.pm:477
@@ -3158,7 +3157,7 @@ msgstr "滑鼠"
 #: harddrake/data.pm:512
 #, c-format
 msgid "Biometry"
-msgstr ""
+msgstr "生物識別"
 
 #: harddrake/data.pm:520
 #, c-format
@@ -3191,9 +3190,9 @@ msgid "Enable PulseAudio"
 msgstr "啟用 PulseAudio"
 
 #: harddrake/sound.pm:336
-#, fuzzy, c-format
+#, c-format
 msgid "Use Glitch-Free mode"
-msgstr "使用離線模式"
+msgstr "使用無干擾(Glitch-Free)模式"
 
 #: harddrake/sound.pm:342
 #, c-format
@@ -3235,7 +3234,7 @@ msgstr "您可以選擇使用其他的 (OSS 或者 ALSA) 的驅動程式給您�
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:369
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -3243,8 +3242,7 @@ msgid ""
 "card is \"%s\")"
 msgstr ""
 "\n"
-"\n"
-"您的音效卡現在正在使用 %s\"%s\" 驅動程式 (您的音效卡預設的驅動程式為 \"%s\")"
+"您的卡目前使用 %s\"%s\"　驅動程式（您的卡的預設驅動程式為 \"%s\"）"
 
 #: harddrake/sound.pm:371
 #, c-format
@@ -3397,11 +3395,11 @@ msgstr "正在選擇任意的驅動程式"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:482
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -4800,12 +4798,12 @@ msgstr "歡迎使用 %s"
 #: lvm.pm:92
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr ""
+msgstr "移動已使用的實體區段到其它的實體磁碟區的動作失敗"
 
 #: lvm.pm:152
 #, c-format
 msgid "Physical volume %s is still in use"
-msgstr ""
+msgstr "實體磁碟區 %s 仍在使用中"
 
 #: lvm.pm:162
 #, c-format
@@ -5130,19 +5128,19 @@ msgid "Installing driver for USB controller"
 msgstr "正在安裝 USB 控制器的驅動程式"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller \"%s\""
-msgstr "正在安裝 Firewire 控制器的驅動程式 %s"
+msgstr "正在安裝 Firewire 控制器的驅動程式 \"%s\""
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard disk drive controller \"%s\""
-msgstr "正在安裝硬碟控制器的驅動程式 %s"
+msgstr "安裝硬碟機控制器 \"%s\" 的驅動程式中"
 
 #: modules/interactive.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller \"%s\""
-msgstr "正在安裝網路卡控制器的驅動程式 %s"
+msgstr "正在安裝網路卡控制器的驅動程式 \"%s\""
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -5223,9 +5221,9 @@ msgstr ""
 "您要用其他參數再試一次嗎?"
 
 #: mygtk2.pm:1229
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to quit?"
-msgstr "您確定要刪除這個掛載點嗎?"
+msgstr "您確定您要離開嗎？"
 
 #: mygtk2.pm:1571 mygtk2.pm:1572
 #, c-format
@@ -5396,6 +5394,11 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
+"若是設定為「全部」，則 /etc/issue 與 /etc/issue.net 都可以存在。\n"
+"\n"
+"若是設定為「無」，則兩者都不允許存在。\n"
+"\n"
+"否則只有 /etc/issue 可以存在。"
 
 #: security/help.pm:27
 #, c-format
@@ -5426,6 +5429,9 @@ msgid ""
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
+"當從 root 帳號傳給其他使用者時允許匯出顯示。\n"
+"\n"
+"詳情請參考 pam_xauth(8)。"
 
 #: security/help.pm:40
 #, c-format
@@ -5438,6 +5444,13 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
+"允許 X 連線：\n"
+"\n"
+"「全部」（所有連線都允許），\n"
+"\n"
+"「本地端」（只允許本地端的主機連線），\n"
+"\n"
+"「無」（不允許連線）。"
 
 #: security/help.pm:48
 #, c-format
@@ -5464,6 +5477,17 @@ msgid ""
 "To authorize the services you need, use /etc/hosts.allow (see hosts."
 "allow(5))."
 msgstr ""
+"授權：\n"
+"\n"
+"「全部」表示所有由 tcp_wrappers 控制的服務（請參考 hosts.deny(5) man "
+"page），\n"
+"\n"
+"「本地端」表示只授權本地端服務，\n"
+"\n"
+"「無」表示不授權任何服務。\n"
+"\n"
+"要授權您所需要的服務，請用 /etc/hosts.allow（詳情請參考 hosts.allow(5) man "
+"page）。"
 
 #: security/help.pm:63
 #, c-format
@@ -5477,6 +5501,12 @@ msgid ""
 "add a service if it is present in the file during the installation of\n"
 "packages."
 msgstr ""
+"如果在 /etc/security/msec/security.conf 中的 SERVER_LEVEL (若沒有 "
+"SERVER_LEVEL 則看 SECURE_LEVEL) 大於 3 的時候，建立一個符號連結 /etc/"
+"security/msec/server 指向 /etc/security/msec/server.<SERVER_LEVEL>。\n"
+"\n"
+"這個 /etc/security/msec/server 檔是給 chkconfig -add 用的，它會查看在安裝套件"
+"的過程中是否該服務存在於此檔案中，來決定是否新增此服務。"
 
 #: security/help.pm:72
 #, c-format
@@ -5486,6 +5516,10 @@ msgid ""
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
+"開放使用者使用 crontab 與 at。\n"
+"\n"
+"將允許使用的使用者放入 /etc/cron.allow 與 /etc/at.allow（詳情請參考 at(1) 與 "
+"crontab(1) man page）。"
 
 #: security/help.pm:77
 #, c-format
@@ -5497,7 +5531,7 @@ msgstr "啟用系統日誌回報到 console 12 上"
 msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
-msgstr ""
+msgstr "開啟名稱解析偽裝保護。若 %s 為真，則也會回報到 syslog。"
 
 #: security/help.pm:80
 #, c-format
@@ -5507,7 +5541,7 @@ msgstr "安全警示："
 #: security/help.pm:82
 #, c-format
 msgid "Enable IP spoofing protection."
-msgstr ""
+msgstr "開啟 IP 偽裝保護。"
 
 #: security/help.pm:84
 #, c-format
@@ -5555,12 +5589,12 @@ msgstr "在單一使用者模式啟用 sulogin(8)。"
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr ""
+msgstr "將此使用者標記為 msec 處理密碼有效期限時的例外帳號。"
 
 #: security/help.pm:102
 #, c-format
 msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
-msgstr ""
+msgstr "將密碼有效期限標記為「最大」，延後變更為「無效」的時間"
 
 #: security/help.pm:104
 #, c-format
@@ -5621,7 +5655,7 @@ msgstr "如果設定為 yes，執行每日安全性檢查。"
 #: security/help.pm:120
 #, c-format
 msgid "if set to yes, check additions/removals of sgid files."
-msgstr ""
+msgstr "如果設定為「是」，則檢查是否有新增或移除 sgid 的檔案。"
 
 #: security/help.pm:121
 #, c-format
@@ -5631,12 +5665,12 @@ msgstr "如果設定為 yes，檢查 /etc/shadow 內的空白密碼。"
 #: security/help.pm:122
 #, c-format
 msgid "if set to yes, verify checksum of the suid/sgid files."
-msgstr ""
+msgstr "如果設定為「是」，則檢查 suid/sgid 檔的檢查碼是否正確。"
 
 #: security/help.pm:123
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr ""
+msgstr "如果設定為「是」，則檢查是否有新增或移除 suid root 的檔案。"
 
 #: security/help.pm:124
 #, c-format
@@ -5817,7 +5851,7 @@ msgstr "使用密碼來認證使用者"
 #: security/l10n.pm:34
 #, c-format
 msgid "Ethernet cards promiscuity check"
-msgstr ""
+msgstr "乙太網卡監控模式檢查"
 
 #: security/l10n.pm:35
 #, c-format
@@ -5887,7 +5921,7 @@ msgstr "檢查使用者家目錄下的檔案權限"
 #: security/l10n.pm:48
 #, c-format
 msgid "Check if the network devices are in promiscuous mode"
-msgstr ""
+msgstr "檢查是否網路裝置正在監控模式（promiscuous mode)中"
 
 #: security/l10n.pm:49
 #, c-format
@@ -5982,6 +6016,8 @@ msgid ""
 "system security\n"
 "on your own."
 msgstr ""
+"這個等級必須小心使用，因為它會關閉所有 msec 所提供的額外安全性檢查。只有在您"
+"打算自己處理系統安全性問題的時候再使用這個選項。"
 
 #: security/level.pm:43
 #, c-format
@@ -6034,7 +6070,7 @@ msgstr "登入或郵件帳號："
 #: services.pm:17
 #, c-format
 msgid "Listen and dispatch ACPI events from the kernel"
-msgstr ""
+msgstr "監聽並發送從核心來的 ACPI 事件"
 
 #: services.pm:18
 #, c-format
@@ -6065,7 +6101,7 @@ msgstr "atd 服務程式, 能夠讓您在在命令列指定某個時間執行某
 #: services.pm:24
 #, c-format
 msgid "Avahi is a ZeroConf daemon which implements an mDNS stack"
-msgstr ""
+msgstr "Avahi 是一個實作 mDNS 堆疊的 ZeroConf 伺服程式"
 
 #: services.pm:25
 #, c-format
@@ -6117,6 +6153,10 @@ msgid ""
 "applications and \n"
 "scripts can access the LCD via a simple API."
 msgstr ""
+"G15Daemon 允許使用者透過 linux UNINPUT 驅動程式，存取所有額外金鑰，將它解碼或"
+"是放回核心。此驅動程式必須在 g15daemon 可以用於鍵盤存取之前載入。亦支援 G15 "
+"LCD。預設在沒有其它客戶端程式作用時，g15daemon 會顯示一個時鐘。客戶端應用程式"
+"與文稿可以透過簡單的 API 存取此 LCD。"
 
 #: services.pm:38
 #, c-format
@@ -6167,18 +6207,18 @@ msgstr ""
 #: services.pm:49
 #, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
-msgstr ""
+msgstr "用 ip6tables 自動做封包過濾"
 
 #: services.pm:50
 #, c-format
 msgid "Automates a packet filtering firewall with iptables"
-msgstr ""
+msgstr "用 iptables 自動做封包過濾"
 
 #: services.pm:51
 #, c-format
 msgid ""
 "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
-msgstr ""
+msgstr "平均地分配 IRQ 負載到多個 CPU　以改進效能"
 
 #: services.pm:52
 #, c-format
@@ -6238,7 +6278,7 @@ msgstr "Linux Virtual Server, 用來架設一個高效能與高效率的 LVS 伺
 #: services.pm:65
 #, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
-msgstr ""
+msgstr "監控網路 (互動式防火牆與無線"
 
 #: services.pm:66
 #, c-format
@@ -6269,7 +6309,7 @@ msgstr ""
 #: services.pm:70
 #, c-format
 msgid "Initializes network console logging"
-msgstr ""
+msgstr "初始化網路主控台紀錄"
 
 #: services.pm:71
 #, c-format
@@ -6290,12 +6330,12 @@ msgstr "在系統開機時, 選擇啟動網路功能, 或者是關閉不啟動�
 #: services.pm:75
 #, c-format
 msgid "Requires network to be up if enabled"
-msgstr ""
+msgstr "開啟的話，需要啟動網路"
 
 #: services.pm:76
 #, c-format
 msgid "Wait for the hotplugged network to be up"
-msgstr ""
+msgstr "等待插入的網路啟動"
 
 #: services.pm:77
 #, c-format
@@ -6451,7 +6491,7 @@ msgstr "SANE (Scanner Access Now Easy) 能夠存取掃描器、攝影機、等�
 #: services.pm:111
 #, c-format
 msgid "Packet filtering firewall"
-msgstr ""
+msgstr "封包過濾"
 
 #: services.pm:112
 #, c-format
@@ -6468,7 +6508,7 @@ msgstr "在您的系統上啟動音效服務系統"
 #: services.pm:114
 #, c-format
 msgid "layer for speech analysis"
-msgstr ""
+msgstr "語音分析層"
 
 #: services.pm:115
 #, c-format
@@ -6490,7 +6530,7 @@ msgstr ""
 #: services.pm:118
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
-msgstr ""
+msgstr "將產生的永久 udev 規則移到 /etc/udev/rules.d"
 
 #: services.pm:119
 #, c-format
@@ -6527,7 +6567,7 @@ msgstr "Internet"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "網路"
 
 #: services.pm:161
 #, c-format
@@ -6655,6 +6695,16 @@ msgid ""
 "--help                : show this message.\n"
 "--version             : show version number.\n"
 msgstr ""
+"[--config-info] [--daemon] [--debug] [--default] [--show-conf]\n"
+"備份與還原應用程式\n"
+"\n"
+"--default             : 儲存預設目錄。\n"
+"--debug               : 顯示所有除錯訊息。\n"
+"--show-conf           : 列出要備份的檔案或目錄。\n"
+"--config-info         : 說明設定檔裡的選項(給非圖形介面使用者)。\n"
+"--daemon              : 使用伺服程式設定。\n"
+"--help                : 顯示此說明訊息。\n"
+"--version             : 顯示版號。\n"
 
 #: standalone.pm:57
 #, c-format
@@ -6664,6 +6714,10 @@ msgid ""
 "  --boot            - enable to configure boot loader\n"
 "default mode: offer to configure autologin feature"
 msgstr ""
+"[--boot]\n"
+"選項：\n"
+"  --boot            - 開啟以設定開機載入器。\n"
+"預設模式：指定以設定自動登入功能。"
 
 #: standalone.pm:61
 #, c-format
@@ -6675,6 +6729,12 @@ msgid ""
 "  --report          - program should be one of %s tools\n"
 "  --incident        - program should be one of %s tools"
 msgstr ""
+"[選項] [程式名稱]\n"
+"\n"
+"選項：\n"
+"  --help      - 印出此說明訊息\n"
+"  --report    - 程式應該為 %s 工具之一\n"
+"  --incident  - 程式應該為 %s 工具之一"
 
 #: standalone.pm:67
 #, c-format
@@ -6686,6 +6746,12 @@ msgid ""
 "  --internet        - configure internet\n"
 "  --wizard          - like --add"
 msgstr ""
+"[--add]\n"
+"  --add             - 「新增網路介面」精靈\n"
+"  --del             - 「刪除網路介面」精靈\n"
+"  --skip-wizard     - 管理連線\n"
+"  --internet        - 設定網際網路\n"
+"  --wizard          - 與 --add 相似"
 
 #: standalone.pm:73
 #, c-format
@@ -6704,6 +6770,19 @@ msgid ""
 "                 : name_of_application like  so for staroffice \n"
 "                 : and gs for ghostscript for only this one."
 msgstr ""
+"\n"
+"字型匯入與管理應用程式\n"
+"\n"
+"選項：\n"
+"--windows_import : 從所有可使用的 Windows 分割區中匯入。\n"
+"--xls_fonts      : 顯示所有已經在 xls 中存在的字型。\n"
+"--install        : 安裝字型檔與字型目錄。\n"
+"--uninstall      : 解除安裝字型或字型目錄。\n"
+"--replace        : 若字型已存在則取代之。\n"
+"--application    : 0 表示沒有支援應用程式。\n"
+"                 : 1 表示支援所有可用的應用程式。\n"
+"                 : 輸入應用程式名稱，如 staroffice\n"
+"                 : 或 ghostscript 表示只適用於此程式。"
 
 #: standalone.pm:88
 #, c-format
@@ -6722,6 +6801,18 @@ msgid ""
 "--delclient      : delete a client machine from MTS (requires MAC address, "
 "IP, nbi image name)"
 msgstr ""
+"[選項]...⏎\n"
+"%s 終端伺服器設定器\n"
+"--enable         : 開啟 MTS\n"
+"--disable        : 關閉 MTS\n"
+"--start          : 啟動 MTS\n"
+"--stop           : 停止 MTS\n"
+"--adduser        : 將現有的系統使用者新增到 MTS (需要指定使用者名稱)\n"
+"--deluser        : 將現有的系統使用者從 MTS 中刪除 (需要指定使用者名稱)\n"
+"--addclient      : 新增客戶端機器到 MTS (需要指定 MAC 位址，IP 位址，nbi 映像"
+"名稱等)\n"
+"--delclient      : 從 MTS 中刪除客戶端機器 (需要指定 MAC 位址，IP 位址，nbi "
+"映像名稱等)"
 
 #: standalone.pm:100
 #, c-format
@@ -6731,7 +6822,7 @@ msgstr "[鍵盤]"
 #: standalone.pm:101
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
-msgstr ""
+msgstr "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 
 #: standalone.pm:102
 #, c-format
@@ -6746,6 +6837,15 @@ msgid ""
 "--status : returns 1 if connected 0 otherwise, then exit.\n"
 "--quiet : do not be interactive. To be used with (dis)connect."
 msgstr ""
+"[選項]\n"
+"網路與網際網路連線與監控應用程式\n"
+"\n"
+"--defaultintf <介面> : 預設顯示此介面\n"
+"--connect : 如果尚未連線，則連線到網際網路\n"
+"--disconnect : 如果已連線，則斷線\n"
+"--force : 與 connect 或 disconnect 一起使用，強制連線或斷線\n"
+"--status : 若已連線則傳回 1，未連線則傳回 0，然後離開\n"
+"--quiet : 無互動模式。與 connect 或 disconnect 一起使用。"
 
 #: standalone.pm:112
 #, c-format
@@ -6758,6 +6858,12 @@ msgid ""
 "description window\n"
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
+"[選項]...⏎\n"
+"  --no-confirmation      在 %s 更新模式中不要詢問確認的問題\n"
+"  --no-verify-rpm        不要檢查套件的簽章\n"
+"  --changelog-first      在說明視窗中將變更紀錄顯示在檔案清單之前\n"
+"  --merge-all-rpmnew     設法將所有 .rpmnew 新設定檔與所有找到的 .rpmsave 舊"
+"設定檔合併"
 
 #: standalone.pm:117
 #, c-format
@@ -6765,6 +6871,8 @@ msgid ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
 "usbtable] [--dynamic=dev]"
 msgstr ""
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 
 #: standalone.pm:118
 #, c-format
@@ -6773,6 +6881,9 @@ msgid ""
 "       XFdrake [--noauto] monitor\n"
 "       XFdrake resolution"
 msgstr ""
+" [everything]⏎\n"
+"       XFdrake [--noauto] <螢幕>⏎\n"
+"       XFdrake <解析度>"
 
 #: standalone.pm:154
 #, c-format
@@ -6864,11 +6975,179 @@ msgstr ""
 msgid "Installation failed"
 msgstr "安裝失敗"
 
+#~ msgid "An NTP client/server"
+#~ msgstr "一個 NTP 用戶端/伺服器"
+
+#~ msgid ""
+#~ "Below are some basic tips to help debug audio problems, but for accurate "
+#~ "and up-to-date tips and tricks, please see:\n"
+#~ "\n"
+#~ "https://wiki.moondrake.org/en/Support:DebuggingSoundProblems\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- General Recommendation: Enable PulseAudio. If you have opted to not to "
+#~ "use PulseAudio, we would strongly advise you enable it. For the vast "
+#~ "majority of desktop use cases, PulseAudio is the recommended and best "
+#~ "supported option.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and "
+#~ "\"pauvucontrol\" (generic) will launch graphical applications to allow "
+#~ "you to view your sound devices and adjust volume levels\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"ps aux | grep pulseaudio\" will check that PulseAudio is running.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl stat\" will check that you can connect to the PulseAudio daemon "
+#~ "correctly.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl list sink-inputs\" will tell you which programs are currently "
+#~ "playing sound via PulseAudio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"systemctl status osspd.service\" will tell you the current state of "
+#~ "the OSS Proxy Daemon. This is used to enable sound from legacy "
+#~ "applications which use the OSS sound API. You should install the \"ossp\" "
+#~ "package if you need this functionality.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pacmd ls\" will give you a LOT of debug information about the current "
+#~ "state of your audio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | grep -i audio\" will tell you which low-level driver "
+#~ "your card uses by default.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/lsmod | grep snd\" will enable you to check which sound "
+#~ "related kernel modules (drivers) are loaded.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"alsamixer -c 0\" will give you a text-based mixer to the low level "
+#~ "ALSA mixer controls for first sound card\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" will tell which programs "
+#~ "are currently using the sound card directly (normally this should only "
+#~ "show PulseAudio)\n"
+#~ msgstr ""
+#~ "以下是一些有助於排除音效問題的基本技巧，若需要最新且正確的小技巧，請參"
+#~ "閱：\n"
+#~ "\n"
+#~ "https://wiki.moondrake.org/en/Support:DebuggingSoundProblems\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- 一般建議：啟用 PulseAudio。如果您選擇不要使用 PulseAudio，我們會強烈建議"
+#~ "您啟用它。 在大多數桌面使用情境下， PulseAudio 是建議且支援最好的選項。\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) 和 \"pauvucontrol"
+#~ "\" (通用) 會開啟圖形應用程式讓您檢視您的音效裝置並調整音量。\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"ps aux | grep pulseaudio\" 可以檢查 PulseAudio 是否運作。\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl stat\" 可以檢查您是否正確地連接到 PulseAudio 服務程式。\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl list sink-inputs\" 會告訴您哪個程式正在透過 PulseAudio 播放聲"
+#~ "音。\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"systemctl status osspd.service\" 會告訴您 OSS Proxy 服務程式的狀態。這"
+#~ "是讓使用 OSS 音效 API 的舊式應用程式能啟用音效。如果您需要這項功能，您應該"
+#~ "安裝 \"ossp\" 套件。\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pacmd ls\" 會提供關於您的目前音效狀態的大量除錯資訊。\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | grep -i audio\" 會告訴您在預設時您的音效卡使用什麼低階"
+#~ "驅動程式。\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/lsmod | grep snd\" 讓您檢查哪些音效相關的核心模組 (驅動程"
+#~ "式) 已經載入了。\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"alsamixer -c 0\" 提供一個以文字為主的混音器來控制第1張音效卡的低階的 "
+#~ "ALSA 混音。\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" 會告訴您哪個程式正在直接使"
+#~ "用音效卡 (通常這應該只會顯示 PulseAudio)。\n"
+
+#~ msgid ""
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
+#~ msgstr ""
+#~ "恭喜！安裝已完成。\n"
+#~ "請將開機媒體移除後，按下 Enter 重新開機。"
+
+#~ msgid ""
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "要瞭解此版本的 Moondrake 裡有哪些修正，請參考：\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
+#~ msgstr ""
+#~ "要瞭解設定您的系統的資訊，請參考 Moondrake Linux 使用者手冊中的「安裝之"
+#~ "後」（post install）的章節。"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "請您先備份您的資料"
+
+#~ msgid ""
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
+#~ msgstr ""
+#~ "警告：自由軟體不見得代表沒有專利，有些包含在內的自由軟體可能包含有在您的國"
+#~ "家已註冊的專利。例如，包含在內的 MP3 解碼器可能需要在使用前先取得授權（詳"
+#~ "情請參考 http://www.mp3licensing.com）。若您不確定某個專利是否適用於您，請"
+#~ "諮詢您當地的法律顧問。"
+
 #~ msgid "Clean /tmp at each boot"
 #~ msgstr "每次開機時清理 /tmp"
 
-#~ msgid "command %s missing"
-#~ msgstr "指令 %s 遺失"
+#~ msgid "Enable 5.1 sound with Pulse Audio"
+#~ msgstr "以 PulseAudio 啟用 5.1 音效"
+
+#~ msgid "Enable user switching for audio applications"
+#~ msgstr "啟用使用者切換音效應用程式"
+
+#~ msgid "File sharing"
+#~ msgstr "檔案分享"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "啟動 Linux Kernel 2.2 系列的防火牆機制, 用來保護您的機器不會遭受\n"
+#~ "外來的網路攻擊。"
+
+#~ msgid "Set CPU frequency settings"
+#~ msgstr "設定 CPU 頻率選項"
 
 #~ msgid ""
 #~ "The classic bug sound tester is to run the following commands:\n"
@@ -6911,21 +7190,5 @@ msgstr "安裝失敗"
 #~ "\n"
 #~ "- \"/sbin/fuser -v /dev/dsp\" 將指出哪個程式在使用音效卡。\n"
 
-#~ msgid "Set CPU frequency settings"
-#~ msgstr "設定 CPU 頻率選項"
-
-#~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
-#~ msgstr ""
-#~ "啟動 Linux Kernel 2.2 系列的防火牆機制, 用來保護您的機器不會遭受\n"
-#~ "外來的網路攻擊。"
-
-#~ msgid "Enable 5.1 sound with Pulse Audio"
-#~ msgstr "以 PulseAudio 啟用 5.1 音效"
-
-#~ msgid "Enable user switching for audio applications"
-#~ msgstr "啟用使用者切換音效應用程式"
-
-#~ msgid "File sharing"
-#~ msgstr "檔案分享"
+#~ msgid "command %s missing"
+#~ msgstr "指令 %s 遺失"

@@ -304,9 +304,9 @@ msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "Programul „%s” a crăpat (segfault) cu următoarea eroare:"
 
 #: drakbug:144
-#, fuzzy, c-format
+#, c-format
 msgid "Used theme: %s"
-msgstr "Utilizator: %s"
+msgstr "Tematica utilizată: %s"
 
 #: drakbug:146
 #, c-format
@@ -753,7 +753,7 @@ msgstr "Ghostscript"
 #: drakfont:556
 #, c-format
 msgid "LibreOffice"
-msgstr ""
+msgstr "LibreOffice"
 
 #: drakfont:557
 #, c-format
@@ -1637,7 +1637,7 @@ msgid "Keyboard"
 msgstr "Tastatură"
 
 #: finish-install:58
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Alegeți dispunerea tastaturii."
 
@@ -2798,14 +2798,14 @@ msgstr ""
 "utilizați"
 
 #: logdrake:440
-#, fuzzy, c-format
+#, c-format
 msgid "Email address"
-msgstr "Adresă IP"
+msgstr "Adresă e-mail"
 
 #: logdrake:441
-#, fuzzy, c-format
+#, c-format
 msgid "Email server"
-msgstr "Server Samba"
+msgstr "Server de mesagerie"
 
 #: logdrake:445
 #, c-format
@@ -2846,7 +2846,7 @@ msgstr "Configurarea pilotului de ecran"
 #: notify-x11-free-driver-switch:20
 #, c-format
 msgid "The display driver has been automatically switched to '%s'."
-msgstr ""
+msgstr "Pilotul afișajului a fost schimbat automat pe „%s”."
 
 #: notify-x11-free-driver-switch:21
 #, c-format
@@ -3144,13 +3144,13 @@ msgstr ""
 "„man sane-%s”."
 
 #: scannerdrake:407 scannerdrake:416
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"După aceea vă puteți scana documentele folosind „XSane” sau „Kooka” din "
-"meniul de aplicații Multimedia/Grafică."
+"După aceea vă puteți scana documentele utilizînd „XSane” sau „%s” din meniul "
+"de aplicații Multimedia/Grafică."
 
 #: scannerdrake:411
 #, c-format
@@ -3181,14 +3181,14 @@ msgid "Congratulations!"
 msgstr "Felicitări!"
 
 #: scannerdrake:419
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
 "Scanerul %s a fost configurat.\n"
-"Acum puteți scana documente folosind „XSane” sau „Kooka” din meniul de "
+"Acum puteți scana documente utilizînd „XSane” sau „%s” din meniul de "
 "aplicații Multimedia/Grafică."
 
 #: scannerdrake:444
@@ -3391,7 +3391,7 @@ msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Nu se pot instala pachetele necesare pentru partajarea scanerului."
 
 #: service_harddrake:173
-#, fuzzy, c-format
+#, c-format
 msgid "The graphics card '%s' is no longer supported by driver '%s'"
 msgstr "Placa grafică „%s” nu mai este suportată de pilotul „%s”"
 
@@ -3401,7 +3401,7 @@ msgid "New release, reconfiguring X for %s"
 msgstr "Versiune nouă, se reconfigurează X pentru %s"
 
 #: service_harddrake:274
-#, fuzzy, c-format
+#, c-format
 msgid "The proprietary kernel driver was not found for X.org driver '%s'"
 msgstr "Pilotul de nucleu proprietar nu a fost găsit pentru pilotul X.org „%s”"
 
@@ -3466,6 +3466,9 @@ msgid ""
 "driver the X server is configured to use. Startup of the X server may now "
 "fail."
 msgstr ""
+"S-a detectat un conflict între modulul încărcat de nucleu pentru pilotul de "
+"afișare și pilotul cu care serverul X a fost configurat. Repornirea "
+"serverului X acum poate eșua."
 
 #: service_harddrake:474 service_harddrake:487
 #, c-format
@@ -3505,14 +3508,257 @@ msgstr "Parametri regionali"
 msgid "Language & country configuration"
 msgstr "Configurare limbă & țară"
 
+#~ msgid "  --help                - display this help     \n"
+#~ msgstr " --help                - afișează acest ajutor     \n"
+
+#~ msgid ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Usage: \n"
+#~ msgstr ""
+#~ " drakhelp 0.1\n"
+#~ "Drepturi de autor (C) %s Mandriva.\n"
+#~ "Drepturi de autor (C) %s Moondrake.\n"
+#~ "Aceasta este o aplicație liberă și poate fi redistribuită conform "
+#~ "licenței GNU GPL.\n"
+#~ "\n"
+#~ "Utilizare: \n"
+
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Utilitarul de raportat erori %s"
+
+#~ msgid "%s Control Center"
+#~ msgstr "Centrul de control %s"
+
+#~ msgid "%s Help Center"
+#~ msgstr "Centrul de ajutor %s"
+
+#~ msgid "%s Online"
+#~ msgstr "%s Online"
+
+#~ msgid "%s Tools Logs"
+#~ msgstr "Jurnalele uneltelor %s"
+
+#~ msgid "%s Update"
+#~ msgstr "Actualizare %s"
+
+#, fuzzy
+#~ msgid "<control>H"
+#~ msgstr "<control>Q"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Application Security "
+#~ "Configuration"
+#~ msgstr ""
+#~ "Autentificare necesară pentru lansarea aplicației Moondrake de configurat "
+#~ "securitatea aplicațiilor"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Authentication Configuration"
+#~ msgstr ""
+#~ "Autentificare necesară pentru lansarea aplicației Moondrake de configurat "
+#~ "autentificarea"
+
+#~ msgid "Authentication is required to run Moondrake Boot Configuration"
+#~ msgstr ""
+#~ "Autentificare necesară pentru lansarea aplicației Moondrake de configurat "
+#~ "demararea"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Date and Time Configuration"
+#~ msgstr ""
+#~ "Autentificare necesară pentru lansarea aplicației Moondrake de configurat "
+#~ "data și ora"
+
+#~ msgid "Authentication is required to run Moondrake Disk Layout Editor"
+#~ msgstr ""
+#~ "Autentificare necesară pentru lansarea aplicației Moondrake de editat "
+#~ "configurarea discului"
+
+#~ msgid "Authentication is required to run Moondrake Font Configuration"
+#~ msgstr ""
+#~ "Autentificare necesară pentru lansarea aplicației Moondrake de configurat "
+#~ "fonturile"
+
+#~ msgid "Authentication is required to run Moondrake Hardware Configuration"
+#~ msgstr ""
+#~ "Autentificare necesară pentru lansarea aplicației Moondrake de "
+#~ "configurare materială"
+
+#~ msgid "Authentication is required to run Moondrake Log Viewer"
+#~ msgstr ""
+#~ "Autentificare necesară pentru lansarea aplicației Moondrake de vizualizat "
+#~ "fișiere jurnal"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Login Manager Configuration"
+#~ msgstr ""
+#~ "Autentificare necesară pentru lansarea aplicației Moondrake de configurat "
+#~ "gestionarul de autentificare"
+
+#~ msgid "Authentication is required to run Moondrake Scanner Configuration"
+#~ msgstr ""
+#~ "Autentificare necesară pentru lansarea aplicației Moondrake de configurat "
+#~ "scanerul"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Security Permissions "
+#~ "Configuration"
+#~ msgstr ""
+#~ "Autentificare necesară pentru lansarea aplicației Moondrake de configurat "
+#~ "permisiunile de securitate"
+
+#~ msgid "Authentication is required to run Moondrake Service Configuration"
+#~ msgstr ""
+#~ "Autentificare necesară pentru lansarea configurării serviciilor Moondrake"
+
+#~ msgid "Authentication is required to run Moondrake UPS Configuration"
+#~ msgstr ""
+#~ "Autentificare necesară pentru lansarea programului Moondrake de "
+#~ "configurat UPS-ul"
+
+#~ msgid "Autodetect _modems"
+#~ msgstr "Auto-detecție _modemuri"
+
+#~ msgid "Autodetect parallel _zip drives"
+#~ msgstr "Autodetectare unități _zip pe port paralel"
+
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Configurează autentificarea necesară pentru accesarea uneltelor %s"
+
+#~ msgid "Copyright (C) %s by %s"
+#~ msgstr "Drepturi de autor (C) %s de către %s"
+
+#~ msgid ""
+#~ "Here you can see files to use in order to fix permissions, owners, and "
+#~ "groups via msec.\n"
+#~ "You can also edit your own rules which will overwrite the default rules."
+#~ msgstr ""
+#~ "Aici puteți vedea fișierele de utilizat pentru a corecta drepturile, "
+#~ "proprietarii și grupurile via msec.\n"
+#~ "De asemenea, vă puteți edita propriile reguli, prioritare peste cele "
+#~ "implicite."
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in"
+#~ msgstr ""
+#~ "Nu s-a detectat nici o placă de sunet pe această mașină. Verificați dacă "
+#~ "ați conectat corect o placă de sunet suportată pe Linux."
+
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in."
+#~ msgstr ""
+#~ "Nu s-a detectat nici o placă TV pe această mașină. Verificați dacă ați "
+#~ "conectat corect o placă TV suportată pe Linux."
+
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Lansează configurarea securității aplicațiilor pentru Moondrake"
+
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Lansează configurarea autentificării pentru Moondrake"
+
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "Lansează configurarea demarării pentru Moondrake"
+
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Lansează configurarea datei și orei pentru Moondrake"
+
+#~ msgid "Run Moondrake Disk Layout Editor"
+#~ msgstr "Lansează editorul de configurare al discurilor pentru Moondrake"
+
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Lansează configurarea fonturilor pentru Moondrake"
+
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Lansează configurarea materială pentru Moondrake"
+
+#~ msgid "Run Moondrake Log Viewer"
+#~ msgstr "Lansează vizualizatorul de fișiere jurnal pentru Moondrake"
+
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr ""
+#~ "Lansează configurarea gestionarului de autentificare pentru Moondrake"
+
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Lansează configurarea scanerului pentru Moondrake"
+
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Lansează configurarea permisiunilor de securitate pentru Moondrake"
+
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Lansează configurarea seviciilor Moondrake"
+
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "Lansează configurarea UPS-ului pentru Moondrake"
+
+#~ msgid "Select %s Tool:"
+#~ msgstr "Alegeți unealta %s:"
+
+#~ msgid "_About..."
+#~ msgstr "Despre..."
+
+#~ msgid "_Fields description"
+#~ msgstr "_Descriere cîmpuri"
+
+#~ msgid "_File"
+#~ msgstr "_Fișier"
+
+#~ msgid "_Help"
+#~ msgstr "_Ajutor"
+
+#~ msgid "_Options"
+#~ msgstr "_Opțiuni"
+
+#~ msgid "_Quit"
+#~ msgstr "_Termină"
+
+#~ msgid "_Report Bug"
+#~ msgstr "_Raportare eroare"
+
 #~ msgid "/Autodetect _printers"
 #~ msgstr "/Auto-detecție im_primante"
+
+#~ msgid "Autodetect _jaz drives"
+#~ msgstr "Auto-detecție unități _JAZ"
+
+#~ msgid "File/-"
+#~ msgstr "Fișier/-"
+
+#~ msgid "File/Save _As"
+#~ msgstr "Fișier/S_alvează ca..."
+
+#~ msgid "File/_New"
+#~ msgstr "Fișier/_Nou"
+
+#~ msgid "File/_Open"
+#~ msgstr "Fișier/_Deschide"
+
+#~ msgid "File/_Quit"
+#~ msgstr "Fișier/_Terminare"
+
+#~ msgid "File/_Save"
+#~ msgstr "Fișier/_Salvează"
+
+#~ msgid "Help/_About..."
+#~ msgstr "Ajutor/_Despre..."
 
 #~ msgid "Its GDB trace is:"
 #~ msgstr "Urma sa GDB este:"
 
 #~ msgid "OpenOffice.org"
 #~ msgstr "OpenOffice.org"
+
+#~ msgid "Options/Test"
+#~ msgstr "Opțiuni/Testează"
 
 #~ msgid ""
 #~ "The proprietary driver for your graphic card cannot be found, the system "

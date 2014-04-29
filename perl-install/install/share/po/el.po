@@ -439,18 +439,18 @@ msgid "URL must start with ftp:// or http://"
 msgstr "Το URL πρέπει να ξεκινά με ftp:// ή http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Σύνδεση με την τοποθεσία της Mandriva Linux, για λήψη της λίστας με τις "
-"εναλλακτικές διευθύνσεις..."
+"Σύνδεση με την ιστοσελίδα της %s για λήψη της λίστας με τους διαθέσιμους "
+"καθρεπτισμούς..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Αδυναμία σύνδεσης με την τοποθεσία της Mandriva Linux, για λήψη της λίστας "
-"με τις εναλλακτικές διευθύνσεις"
+"Αδυναμία σύνδεσης με την ιστοσελίδα της %s για λήψη της λίστας με τους "
+"διαθέσιμους καθρεπτισμούς"
 
 #: any.pm:204
 #, c-format
@@ -524,11 +524,13 @@ msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
 "free software drivers to work."
 msgstr ""
+"Στο μηχάνημά σας υπάρχει υλικό που απαιτεί μη ελεύθερο firmware ώστε να "
+"λειτουργούν οι οδηγοί ανοιχτού κώδικα. "
 
 #: any.pm:351
 #, c-format
 msgid "You should enable \"%s\""
-msgstr ""
+msgstr "Θα πρέπει να ενεργοποιήσετε το «%s»"
 
 #: any.pm:370
 #, c-format
@@ -545,7 +547,7 @@ msgstr ""
 #: any.pm:372
 #, c-format
 msgid "\"%s\" contains non free software.\n"
-msgstr ""
+msgstr "Το «%s» περιέχει μη ελεύθερο λογισμικό.\n"
 
 #: any.pm:373
 #, c-format
@@ -558,6 +560,8 @@ msgstr ""
 #, c-format
 msgid "Here you can enable more media if you want."
 msgstr ""
+"Αν το επιθυμείτε, εδώ μπορείτε να ενεργοποιήσετε περισσότερες πηγές "
+"λογισμικού."
 
 #: any.pm:456
 #, c-format
@@ -737,17 +741,19 @@ msgstr "ίσως"
 #: pkgs.pm:102
 #, c-format
 msgid "Getting package information from XML meta-data..."
-msgstr ""
+msgstr "Λήψη των πληροφοριών του πακέτου από τα μεταδεδομένα XML..."
 
 #: pkgs.pm:111
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Δεν βρέθηκαν πληροφορίες xml για το μέσο «%s», μόνον εν μέρει αποτελέσματα "
+"για το πακέτο %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Χωρίς περιγραφή"
 
 #: pkgs.pm:280
 #, c-format
@@ -764,14 +770,14 @@ msgid "An error occurred:"
 msgstr "Προκλήθηκε σφάλμα :"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Προκλήθηκε σφάλμα :"
+msgstr "Παρουσιάστηκε ένα κρίσιμο σφάλμα: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Να μην ξαναγίνει η ερώτηση"
 
 #: pkgs.pm:894
 #, c-format
@@ -811,9 +817,9 @@ msgid "Entering step `%s'\n"
 msgstr "Βήμα `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Εγκατάσταση"
+msgstr "%s Εγκατάσταση της %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -827,18 +833,17 @@ msgstr ""
 "Ο εξυπηρετητής Xorg θέλει χρόνο για να ξεκινήσει. Παρακαλώ περιμένετε..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Το σύστημά σας δεν έχει αρκετούς πόρους. Μπορεί να αντιμετωπίσετε "
-"προβλήματα\n"
-"στην εγκατάσταση της Mandriva Linux. Εάν συμβεί αυτό, μπορείτε να δοκιμάσετε "
-"την εγκατάσταση κειμένου.\n"
-"Για να γίνει αυτό, πατήστε F1 κατά την εκκίνηση από το CDROM, και μετά "
-"γράψτε `text'."
+"Το σύστημά σας διαθέτει περιορισμένους πόρους. Ίσως συναντήσετε προβλήματα\n"
+"κατά την εγκατάσταση της %s. Αν συμβεί αυτό, μπορείτε να προσπαθήσετε\n"
+"την εγκατάσταση σε λειτουργία κειμένου. Για να το πραγματοποιήσετε, πατήστε "
+"«F1»\n"
+"κατά την εκκίνηση του CD-ROM και εισάγετε «text»."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
 #, c-format
@@ -846,14 +851,14 @@ msgid "Media Selection"
 msgstr "Επιλογή Μέσου"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Εγκατάσταση του Mandriva KDE Desktop"
+msgstr "Εγκατάσταση του περιβάλλοντος KDE της %s"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Εγκατάσταση του Mandriva GNOME Desktop"
+msgstr "Εγκατάσταση του περιβάλλοντος GNOME της %s"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -898,7 +903,7 @@ msgstr "Επιλογή ξεχωριστών πακέτων"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Αποεπιλογή όλων"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1496,9 +1501,9 @@ msgid "Preparing bootloader..."
 msgstr "Προετοιμασία του προγράμματος εκκίνησης..."
 
 #: steps_interactive.pm:1050
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing initial startup program..."
-msgstr "Προετοιμασία της εγκατάστασης"
+msgstr "Προετοιμασία του αρχικού προγράμματος εκκίνησης..."
 
 #: steps_interactive.pm:1051
 #, c-format
@@ -1580,11 +1585,11 @@ msgid ""
 msgstr "Ποντίκι"
 
 #: steps_list.pm:20 steps_list.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Hard drive detection"
-msgstr "Εντοπισμός δίσκου"
+msgstr "Ανίχνευση σκληρών δίσκων"
 
 #: steps_list.pm:22 steps_list.pm:23
 #, c-format
@@ -1677,41 +1682,253 @@ msgid ""
 "Exit"
 msgstr "Έξοδος"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Εγκατάσταση της Mandriva Linux %s"
+#~ msgid ""
+#~ "\"%s\" contains software that can not be distributed in every country due "
+#~ "to software patents."
+#~ msgstr ""
+#~ "Το «%s» περιέχει λογισμικό που δεν μπορεί να διανεμηθεί σε όλες τις χώρες "
+#~ "λόγω περιορισμού των διπλωμάτων ευρεσιτεχνίας."
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Άδεια Χρήσης"
+#~ "\"%s\" contains the various pieces of the systems and its applications"
+#~ msgstr ""
+#~ "Το «%s» περιέχει τα διάφορα τμήματα του συστήματος και τις εφαρμογές του"
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Το προσωπικό σου σύστημα εργασίας σε ένα USB"
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Γραφικό περιβάλλον βασισμένο στο GNOME"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "Η 100%% ανοιχτού κώδικα, διανομή του Mandriva Linux"
+#~ msgid "A less developed lightweight fast graphical environment"
+#~ msgstr "Ένα υποανάπτυξη ελαφρύ και γρήγορο γραφικό περιβάλλον"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Εξερεύνησε το Λίνουξ, εύκολα, με το Mandriva One"
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr "Ένα ελαφρύ γραφικό περιβάλλον με φιλικά εργαλεία και εφαρμογές"
+
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr "Ένα ελαφρύ & γρήγορο γραφικό περιβάλλον με αφοσιωμένους οπαδούς "
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr ""
+#~ "Προγράμματα διασκέδασης: ηλεκτρονικά παιχνίδια, επιτραπέζια, στρατηγικής, "
+#~ "κλπ"
+
+#~ msgid "Be Free!"
+#~ msgstr "Ελευθερωθείτε!"
+
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Σταθμός εργασίας Cinnamon"
+
+#~ msgid "Core Release"
+#~ msgstr "Core Release"
+
+#~ msgid "Enlightenment e17 Desktop"
+#~ msgstr "Περιβάλλον εργασίας Enlightenment e17 "
+
+#~ msgid "For developers!"
+#~ msgstr "Για προγραμματιστές!"
+
+#~ msgid "For family!"
+#~ msgstr "Για την οικογένεια!"
+
+#~ msgid "For kids"
+#~ msgstr "Για τα παιδιά"
+
+#~ msgid "Home entertainment"
+#~ msgstr "Οικιακή ψυχαγωγία"
+
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Ο εγκαταστάτης εντόπισε ότι το εγκατεστημένο σας σύστημα Moondrake Linux "
+#~ "δεν μπορεί\n"
+#~ "να αναβαθμιστεί με ασφάλεια σε %s.\n"
+#~ "\n"
+#~ "Συνιστάται να αντικαταστήσετε την εγκατάστασή σας με μια νέα.\n"
+#~ "\n"
+#~ "Προσοχή: θα πρέπει να πάρετε αντίγραφα ασφαλείας όλων των προσωπικών σας "
+#~ "δεδομένων πριν επιλέξετε\n"
+#~ "«Νέα εγκατάσταση»."
+
+#~ msgid ""
+#~ "It also contains firmwares needed for certain devices to operate (eg: "
+#~ "some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
+#~ msgstr ""
+#~ "Επίσης, περιέχει firmware που απαιτούνται για την λειτουργία ορισμένων "
+#~ "συσκευών (πχ: μερικές κάρτες γραφικών ATI/AMD, μερικές κάρτες δικτύου, "
+#~ "μερικές κάρτες RAID, ...)"
+
+#~ msgid ""
+#~ "It also contains software from \"%s\" rebuild with additional "
+#~ "capabilities."
+#~ msgstr ""
+#~ "Επίσης, περιέχει λογισμικό από το «%s» επαναδημιουργημένο με επιπλέον "
+#~ "χαρακτηριστικά."
+
+#~ msgid "Join Us!"
+#~ msgstr "Ελάτε μαζί μας!"
+
+#~ msgid "MATE Workstation"
+#~ msgstr "Σταθμός Εργασίας MATE"
+
+#~ msgid "Make it yours!"
+#~ msgstr "Κάντε τη δική σας!"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Οδηγοί Moondrake"
+
+#~ msgid "Nonfree Release"
+#~ msgstr "Nonfree Release"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Εργαλεία γραφείου: επεξεργαστές κειμένου (LibreOffice Writer, Kword), "
+#~ "λογιστικών φύλλων (LibreOffice Calc, Kspread), προβολείς pdf, κλπ"
+
+#~ msgid "Office tools"
+#~ msgstr "Εργαλεία γραφείου"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Εξυπηρετητής βάσης δεδομένων PostgreSQL και MariaDB"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Εξυπηρετητής βάσης δεδομένων PostgreSQL ή MariaDB"
+
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Προετοιμασία της αναβάθμισης..."
+
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Περιβάλλον εργασίας RazorQt"
+
+#~ msgid "Tainted Release"
+#~ msgstr "Tainted Release"
+
+#~ msgid "Thank you!"
+#~ msgstr "Ευχαριστούμε!"
+
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Αυτό το μέσο παρέχει ενημερώσεις πακέτων για το μέσο «%s»"
+
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Fvwm, κλπ"
+
+#~ msgid "XFCE Workstation"
+#~ msgstr "Σταθμός εργασίας XFCE"
+
+#~ msgid "Your choice!"
+#~ msgstr "Η επιλογή σας!"
+
+#~ msgid "%d packages"
+#~ msgstr "%d πακέτα"
+
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "(%d πακέτο, %d MB)"
+#~ msgstr[1] "(%d πακέτα, %d MB)"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Ένα πλήρες σύστημα desktop Mandriva Linux, με υποστήριξη"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: συστήματα Λίνουξ για όλες τις χρήσεις"
+#~ msgid "All"
+#~ msgstr "Όλα"
+
+#~ msgid "Automated"
+#~ msgstr "Αυτόματο"
 
 #~ msgid "Bad package"
 #~ msgstr "Λάθος πακέτο"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Δικτύωση"
+#~ msgid "Boot"
+#~ msgstr "Εκκίνηση"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Ενημερώσεις"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Αδυναμία πρόσβασης των αρθρωμάτων που αντιστοιχούν στον πυρήνα σας (το "
+#~ "αρχείο %s λείπει), γενικά αυτό σημαίνει ότι η δισκέτα εκκίνησης δεν είναι "
+#~ "σε συγχρονισμό με το Μέσο εγκατάστασης ( παρακαλώ δημιουργήστε μια νέα "
+#~ "δισκέτα εκκίνησης)"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Επιλογή πακέτων"
+
+#~ msgid "Configure X"
+#~ msgstr "Ρύθμιση Χ"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Σύνδεση με τον τόπο για την λήψη των διαθέσιμων πακέτων..."
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Θέλετε να χρησιμοποιήσετε το aboot;"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "Λήψη αρχείου %s..."
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Σφάλμα κατά την εγκατάσταση του aboot. \n"
+#~ "Να γίνει ππροσπάθεια βεβιασμένης εγκατάστασης, ακόμα και αν αυτό έχει σαν "
+#~ "αποτέλεσμα την καταστροφή της πρώτης κατάτμησης;"
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Εξερεύνησε το Λίνουξ, εύκολα, με το Mandriva One"
+
+#~ msgid "For contributors"
+#~ msgstr "Για συνεισφέροντες"
+
+#~ msgid "For people"
+#~ msgstr "Για ανθρώπους"
+
+#~ msgid "For you"
+#~ msgstr "Για σας"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Εκτίμηση"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Δημιουργία δισκέτας αυτόματης εγκατάστασης"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm Desktop"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "Επιλέξτε εγκατάσταση"
+
+#~ msgid "Language"
+#~ msgstr "Επιλέξτε γλώσσα"
+
+#~ msgid "License"
+#~ msgstr "Άδεια Χρήσης"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Εγκατάσταση της Mandriva Linux %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: συστήματα Λίνουξ για όλες τις χρήσεις"
+
+#~ msgid "Moondrake, the new Linux distribution"
+#~ msgstr "Moondrake, η νέα διανομή Linux"
+
+#~ msgid "Networking"
+#~ msgstr "Δικτύωση"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1719,6 +1936,62 @@ msgstr "Έξοδος"
 #~ msgstr ""
 #~ "Εργαλεία γραφείου: Επεξεργαστές κειμένου(kword, abiword), λογιστικά φύλλα "
 #~ "(kspread, gnumeric), αρχεία pdf κλπ"
+
+#~ msgid "People!"
+#~ msgstr "Άνθρωποι!"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Προετοιμασία του προγράμματος εκκίνησης..."
+
+#~ msgid "Proceed"
+#~ msgstr "Συνέχεια"
+
+#~ msgid "Replay"
+#~ msgstr "Επανάληψη"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Αποθήκευση επιλογής πακέτων"
+
+#~ msgid "Select All"
+#~ msgstr "Επιλογή όλων"
+
+#~ msgid "TV card"
+#~ msgstr "Κάρτα TV"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "Η 100%% ανοιχτού κώδικα, διανομή του Mandriva Linux"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Η αυτόματη εγκατάσταση μπορεί να είναι πλήρως αυτόματη, κατά προτίμηση.\n"
+#~ "Σε αυτή την περίπτωση, θα πάρει τον έλεγχο του σκληρού δίσκου\n"
+#~ "(αυτό είναι χρήσιμο σε περιπτώσεις εγκατάστασης σε άλλο υπολογιστή).\n"
+#~ "\n"
+#~ "Ίσως να προτιμούσες να επαναλάβεις την εγκατάσταση.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Αδυναμία επικοινωνίας με την εναλλακτική τοποθεσία %s"
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr "Η αναβάθμιση της διανομής από 32bit σε 64bit δεν υποστηρίζεται "
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr "Η αναβάθμιση της διανομής από 64bit σε 32bit δεν υποστηρίζεται"
+
+#~ msgid "Users"
+#~ msgstr "Χρήστες"
+
+#~ msgid "Welcome"
+#~ msgstr "Καλώς ήρθατε"
+
+#~ msgid "Welcome!"
+#~ msgstr "Καλώς ήρθατε!"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1737,21 +2010,6 @@ msgstr "Έξοδος"
 #~ "Για να κάνετε την αναβάθμιση διατηρώντας τις προσωπικές σας ρυθμίσεις, \n"
 #~ "παρακαλώ επανεκκινήστε τον υπολογιστή σας και κάντε την αναβάθμιση από "
 #~ "την εφαρμογή ενημέρωσης του συστήματος Mandriva."
-
-#~ msgid "Proceed"
-#~ msgstr "Συνέχεια"
-
-#~ msgid "retrieval of [%s] failed"
-#~ msgstr "αποτυχία ανάκτησης του [%s]"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "Λήψη αρχείου %s..."
-
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr "Η αναβάθμιση της διανομής από 32bit σε 64bit δεν υποστηρίζεται "
-
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr "Η αναβάθμιση της διανομής από 64bit σε 32bit δεν υποστηρίζεται"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1778,109 +2036,28 @@ msgstr "Έξοδος"
 #~ "\n"
 #~ "Είστε βέβαιοι για την εγκατάσταση αυτών των διακομιστών;\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm Desktop"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Σύνδεση με τον τόπο για την λήψη των διαθέσιμων πακέτων..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Αδυναμία επικοινωνίας με την εναλλακτική τοποθεσία %s"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Θέλετε να χρησιμοποιήσετε το aboot;"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Σφάλμα κατά την εγκατάσταση του aboot. \n"
-#~ "Να γίνει ππροσπάθεια βεβιασμένης εγκατάστασης, ακόμα και αν αυτό έχει σαν "
-#~ "αποτέλεσμα την καταστροφή της πρώτης κατάτμησης;"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Δημιουργία δισκέτας αυτόματης εγκατάστασης"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Η αυτόματη εγκατάσταση μπορεί να είναι πλήρως αυτόματη, κατά προτίμηση.\n"
-#~ "Σε αυτή την περίπτωση, θα πάρει τον έλεγχο του σκληρού δίσκου\n"
-#~ "(αυτό είναι χρήσιμο σε περιπτώσεις εγκατάστασης σε άλλο υπολογιστή).\n"
-#~ "\n"
-#~ "Ίσως να προτιμούσες να επαναλάβεις την εγκατάσταση.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Επανάληψη"
-
-#~ msgid "Automated"
-#~ msgstr "Αυτόματο"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Αποθήκευση επιλογής πακέτων"
-
-#~ msgid "All"
-#~ msgstr "Όλα"
-
-#~ msgid "TV card"
-#~ msgstr "Κάρτα TV"
-
-#~ msgid "Boot"
-#~ msgstr "Εκκίνηση"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Το προσωπικό σου σύστημα εργασίας σε ένα USB"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Πιστοποίηση"
 
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "(%d πακέτο, %d MB)"
-#~ msgstr[1] "(%d πακέτα, %d MB)"
-
-#~ msgid "%d packages"
-#~ msgstr "%d πακέτα"
-
-#~ msgid "Language"
-#~ msgstr "Επιλέξτε γλώσσα"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Άδεια Χρήσης"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "Επιλέξτε εγκατάσταση"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "Εκτίμηση"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Επιλογή πακέτων"
-
-#~ msgid "Users"
-#~ msgstr "Χρήστες"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Δικτύωση"
 
-#~ msgid "Configure X"
-#~ msgstr "Ρύθμιση Χ"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Αδυναμία πρόσβασης των αρθρωμάτων που αντιστοιχούν στον πυρήνα σας (το "
-#~ "αρχείο %s λείπει), γενικά αυτό σημαίνει ότι η δισκέτα εκκίνησης δεν είναι "
-#~ "σε συγχρονισμό με το Μέσο εγκατάστασης ( παρακαλώ δημιουργήστε μια νέα "
-#~ "δισκέτα εκκίνησης)"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Ενημερώσεις"
+
+#~ msgid "retrieval of [%s] failed"
+#~ msgstr "αποτυχία ανάκτησης του [%s]"

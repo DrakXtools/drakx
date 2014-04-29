@@ -80,9 +80,9 @@ msgid "Where do you want to install the bootloader?"
 msgstr "Pelec'h e mennit staliañ ar c'harger loc'hañ ?"
 
 #: any.pm:391
-#, fuzzy, c-format
+#, c-format
 msgid "First sector (MBR) of drive %s"
-msgstr "Rann gentañ ar bladenn (MBR)"
+msgstr "Rann gentañ (MBR) pladenn %s"
 
 #: any.pm:393
 #, c-format
@@ -145,9 +145,9 @@ msgid "Enable ACPI"
 msgstr "Bevaat ACPI"
 
 #: any.pm:462
-#, fuzzy, c-format
+#, c-format
 msgid "Enable SMP"
-msgstr "Bevaat ACPI"
+msgstr "Bevaat SMP"
 
 #: any.pm:463
 #, c-format
@@ -375,13 +375,13 @@ msgid "Please give a user name"
 msgstr "Roit un anv arveriad mar plij"
 
 #: any.pm:897
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
 msgstr ""
-"An anv arveriad a zle bezañ ennañ lizherennoù munut, sifroù, `-' ha `_' "
-"hepken"
+"An anv arveriad a zle krogiñ gant ul lizherenn munut ha war he lerc'h "
+"lizherennoù munut, sifroù, `-' ha `_' hepken"
 
 #: any.pm:898
 #, c-format
@@ -526,17 +526,20 @@ msgid "Please choose a language to use"
 msgstr "Dibabit ar yezh da implijout, mar plij"
 
 #: any.pm:1183
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
-msgstr "Gallout a rit dibab yezhoù all hag a vo hegerz goude staliañ"
+msgstr ""
+"%s a c'hell bezañ implijet gant meur a yezh. Gallout a rit dibab\n"
+" yezhoù all hag a vo hegerz goude staliañ (ur wech e vo bet adloc'het\n"
+" ar reizhiad)"
 
 #: any.pm:1186
-#, fuzzy, c-format
+#, c-format
 msgid "Multiple languages"
-msgstr "Meur a yezh"
+msgstr "Liesyezh"
 
 #: any.pm:1187
 #, c-format
@@ -730,7 +733,7 @@ msgstr "Domani Windows"
 #: authentication.pm:29
 #, c-format
 msgid "Kerberos 5"
-msgstr ""
+msgstr "Kerberos 5"
 
 #: authentication.pm:65
 #, c-format
@@ -856,9 +859,9 @@ msgid "Bind DN "
 msgstr ""
 
 #: authentication.pm:122 authentication.pm:174
-#, fuzzy, c-format
+#, c-format
 msgid "Bind Password "
-msgstr "Tremenger"
+msgstr "Tremenger Bind"
 
 #: authentication.pm:124
 #, c-format
@@ -888,9 +891,9 @@ msgid ""
 msgstr ""
 
 #: authentication.pm:145
-#, fuzzy, c-format
+#, c-format
 msgid "Realm "
-msgstr "Anv gwirion"
+msgstr "Rouantelezh "
 
 #: authentication.pm:147
 #, c-format
@@ -908,14 +911,14 @@ msgid "Use DNS to locate realms"
 msgstr ""
 
 #: authentication.pm:155
-#, fuzzy, c-format
+#, c-format
 msgid "Use local file for users information"
-msgstr "Implijit libsafe evit ar servijerien"
+msgstr "Implijit restroù lec'hel evit titouroù diwar-benn an arveriaded"
 
 #: authentication.pm:156
-#, fuzzy, c-format
+#, c-format
 msgid "Use LDAP for users information"
-msgstr "Titouroù ar bladenn"
+msgstr "Implij LDAP evit titouroù diwar-benn an arveriaded"
 
 #: authentication.pm:162
 #, c-format
@@ -954,9 +957,9 @@ msgid ""
 msgstr ""
 
 #: authentication.pm:217
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Model "
-msgstr "Domani"
+msgstr "Seurt domani"
 
 #: authentication.pm:219
 #, c-format
@@ -964,14 +967,14 @@ msgid "Active Directory Realm "
 msgstr ""
 
 #: authentication.pm:220
-#, fuzzy, c-format
+#, c-format
 msgid "DNS Domain"
-msgstr "Domani NIS"
+msgstr "Domani DNS"
 
 #: authentication.pm:221
-#, fuzzy, c-format
+#, c-format
 msgid "DC Server"
-msgstr "Servijered KDC"
+msgstr "Servijer DC"
 
 #: authentication.pm:235 authentication.pm:251
 #, c-format
@@ -1041,9 +1044,9 @@ msgid "LILO with text menu"
 msgstr "LILO gant meuziad skrid"
 
 #: bootloader.pm:1203
-#, fuzzy, c-format
+#, c-format
 msgid "GRUB2 with graphical menu"
-msgstr "GRUB gant meuziad grafek"
+msgstr "GRUB2 gant meuziad grafek"
 
 #: bootloader.pm:1204
 #, c-format
@@ -1281,9 +1284,9 @@ msgid "Warning"
 msgstr "Ho evezh"
 
 #: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete this mount point?"
-msgstr "Mennout a rit klikit ouzh an nozel-se ?"
+msgstr "Ha fellout a ra deoc'h da vat lemel ar poent marc'hañ-mañ ?"
 
 #: diskdrake/dav.pm:125
 #, c-format
@@ -1370,9 +1373,9 @@ msgid "Unknown"
 msgstr "Anavez"
 
 #: diskdrake/hd_gtk.pm:405
-#, fuzzy, c-format
+#, c-format
 msgid "Ext4"
-msgstr "Kuitaat"
+msgstr "Ext4"
 
 #: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
 #, c-format
@@ -1549,7 +1552,7 @@ msgstr "Titouroù gant munudoù"
 #: diskdrake/interactive.pm:407
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "Gwel"
 
 #: diskdrake/interactive.pm:412 diskdrake/interactive.pm:828
 #, c-format
@@ -1572,9 +1575,9 @@ msgid "Add to LVM"
 msgstr "Ouzhpennañ da LVM"
 
 #: diskdrake/interactive.pm:417
-#, fuzzy, c-format
+#, c-format
 msgid "Use"
-msgstr "ID an arveriad"
+msgstr "Implij"
 
 #: diskdrake/interactive.pm:419
 #, c-format
@@ -1592,9 +1595,9 @@ msgid "Remove from LVM"
 msgstr "Lemel diwar LVM"
 
 #: diskdrake/interactive.pm:422
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from dm"
-msgstr "Lemel diwar LVM"
+msgstr "Lemel diwar dm"
 
 #: diskdrake/interactive.pm:423
 #, c-format
@@ -1612,9 +1615,9 @@ msgid "Create"
 msgstr "Krouiñ"
 
 #: diskdrake/interactive.pm:456
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to mount partition"
-msgstr "Dilec'hiañ retroù er parzhadur nevez"
+msgstr "Sac'het en ur marc'hañ ar parzhadur"
 
 #: diskdrake/interactive.pm:490 diskdrake/interactive.pm:492
 #, c-format
@@ -1652,7 +1655,7 @@ msgid "Encrypt partition"
 msgstr "Algoritm enrinegadur"
 
 #: diskdrake/interactive.pm:511
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key "
 msgstr "Alc'hwez enrinegadur"
 
@@ -1667,9 +1670,9 @@ msgid "The encryption keys do not match"
 msgstr "An alc'hwezoù enrinegadur ne glot ket"
 
 #: diskdrake/interactive.pm:525
-#, fuzzy, c-format
+#, c-format
 msgid "Missing encryption key"
-msgstr "Alc'hwez enrinegadur ar reizhiad restroù"
+msgstr "Mankout a ra an alc'hwez enrinegadur"
 
 #: diskdrake/interactive.pm:545
 #, c-format
@@ -1707,9 +1710,9 @@ msgid "Switching from %s to %s"
 msgstr "Gwintañ eus %s da %s"
 
 #: diskdrake/interactive.pm:680
-#, fuzzy, c-format
+#, c-format
 msgid "Set volume label"
-msgstr "Pe anv levrenn ?"
+msgstr "Termeniñ an anv levrenn"
 
 #: diskdrake/interactive.pm:682
 #, c-format
@@ -1814,9 +1817,9 @@ msgid "Filesystem encryption key"
 msgstr "Alc'hwez enrinegadur ar reizhiad restroù"
 
 #: diskdrake/interactive.pm:945
-#, fuzzy, c-format
+#, c-format
 msgid "Enter your filesystem encryption key"
-msgstr "Dibab hoc'h alc'hwez enrinegadur ar reizhiad restroù"
+msgstr "Skrivit hoc'h alc'hwez enrinegadur ar reizhiad restroù"
 
 #: diskdrake/interactive.pm:946 diskdrake/interactive.pm:1513
 #, c-format
@@ -1826,7 +1829,7 @@ msgstr "Alc'hwez enrinegadur"
 #: diskdrake/interactive.pm:953
 #, c-format
 msgid "Invalid key"
-msgstr ""
+msgstr "N'eo ket mat an alc'hwez"
 
 #: diskdrake/interactive.pm:976
 #, c-format
@@ -1844,19 +1847,19 @@ msgid "Choose an existing LVM to add to"
 msgstr "Dibabit da be LVM ouzhpennañ"
 
 #: diskdrake/interactive.pm:1007 diskdrake/interactive.pm:1016
-#, fuzzy, c-format
+#, c-format
 msgid "LVM name"
-msgstr "Anv LVM ?"
+msgstr "Anv LVM"
 
 #: diskdrake/interactive.pm:1008
 #, c-format
 msgid "Enter a name for the new LVM volume group"
-msgstr ""
+msgstr "Skrivit un anv evit ar strollad levrenn LVM nevez"
 
 #: diskdrake/interactive.pm:1013
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" already exists"
-msgstr "Ar restr zo endeo. E implijout ?"
+msgstr "« %s » zo endeo"
 
 #: diskdrake/interactive.pm:1045
 #, c-format
@@ -1940,9 +1943,9 @@ msgid "Be careful: this operation is dangerous."
 msgstr "Bezit war evezh : arvarus eo an obererezh-mañ."
 
 #: diskdrake/interactive.pm:1211
-#, fuzzy, c-format
+#, c-format
 msgid "Partitioning Type"
-msgstr "O parzhañ"
+msgstr "Doare parzhañ"
 
 #: diskdrake/interactive.pm:1211
 #, c-format
@@ -2098,9 +2101,9 @@ msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
 #: diskdrake/interactive.pm:1413
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypted"
-msgstr "Alc'hwez enrinegadur"
+msgstr "Enrineget"
 
 #: diskdrake/interactive.pm:1415
 #, c-format
@@ -2115,7 +2118,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1417
 #, c-format
 msgid " (inactive)"
-msgstr ""
+msgstr " (marv)"
 
 #: diskdrake/interactive.pm:1424
 #, c-format
@@ -2176,7 +2179,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1446
 #, c-format
 msgid "Free space on %s (%s)"
-msgstr ""
+msgstr "Egor dieub war %s (%s)"
 
 #: diskdrake/interactive.pm:1455
 #, c-format
@@ -2340,14 +2343,14 @@ msgid "Creating and formatting file %s"
 msgstr "O krouiñ hag o furmadiñ ar restr saveteiñ %s"
 
 #: fs/format.pm:131
-#, fuzzy, c-format
+#, c-format
 msgid "I do not know how to set label on %s with type %s"
-msgstr "N'ouzon ket penaos furmadiñ %s er seurt %s"
+msgstr "N'ouzon ket penaos mod reiñ un anv da %s gant ar seurt %s"
 
 #: fs/format.pm:143
-#, fuzzy, c-format
+#, c-format
 msgid "setting label on %s failed, is it formatted?"
-msgstr "furmadiñ ar seurt %s eus %s zo sac'het"
+msgstr "lakkat ur skridennad war %s zo sac'het, hag-eñ eo furmadet ?"
 
 #: fs/format.pm:184
 #, c-format
@@ -2675,13 +2678,12 @@ msgid "Erase and use entire disk"
 msgstr "Chetañ hag implij an holl planedenn"
 
 #: fs/partitioning_wizard.pm:243
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
 msgstr ""
-"Meur a bladenn oc'h eus. Pehini oc'h eus c'hoant da implij evit staliñ "
-"Linux ?"
+"Meur a bladenn hoc’h eus. Pehini hoc’h eus c'hoant da implij evit staliañ ?"
 
 #: fs/partitioning_wizard.pm:251 fsedit.pm:634
 #, c-format
@@ -2709,9 +2711,9 @@ msgstr ""
 "Pa 'z eo graet, na zisoñjit ket enrollañ dre implijout `w'"
 
 #: fs/partitioning_wizard.pm:409
-#, fuzzy, c-format
+#, c-format
 msgid "Ext2/3/4"
-msgstr "Ext3"
+msgstr "Ext2/3/4"
 
 #: fs/partitioning_wizard.pm:439 fs/partitioning_wizard.pm:585
 #, c-format
@@ -2726,7 +2728,7 @@ msgstr "Kinnig eo deoc'h gant ar skoazeller parzhadur DrakX :"
 #: fs/partitioning_wizard.pm:518
 #, c-format
 msgid "Here is the content of your disk drive "
-msgstr ""
+msgstr "Setu ar pezh a zo war ho pladenn "
 
 #: fs/partitioning_wizard.pm:602
 #, c-format
@@ -2799,15 +2801,15 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "Bez' ez eus ur parzhadur e boent marc'hañ %s endeo\n"
 
 #: fsedit.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a separate /boot partition"
 msgstr ""
-"Choizh o'ch eus oc'h implij RAID evit gwrizienn (/).\n"
+"Choazh o'ch eus oc'h implij RAID software evit gwrizienn (/).\n"
 "N'eus ket moaien da loc'hañ hep ur barzhadur /boot.\n"
-"Bezit sur oc'h eus ouzhpennet ur barzhadur /boot"
+"Bezit sur hoc’h eus ouzhpennet ur barzhadur /boot"
 
 #: fsedit.pm:440
 #, fuzzy, c-format
@@ -2820,14 +2822,13 @@ msgstr ""
 "Bezit sur oc'h eus ouzhpennet ur barzhadur /boot"
 
 #: fsedit.pm:448
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as /boot.\n"
 "No bootloader is able to handle this."
 msgstr ""
-"Choizh o'ch eus oc'h implij RAID evit gwrizienn (/).\n"
-"N'eus ket moaien da loc'hañ hep ur barzhadur /boot.\n"
-"Bezit sur oc'h eus ouzhpennet ur barzhadur /boot"
+"Choazet hoc’h eus implij ur RAID software evit /boot.\n"
+"N'eus ket moaien da loc'hañ hep ur barzhadur /boot."
 
 #: fsedit.pm:452
 #, c-format
@@ -2835,15 +2836,16 @@ msgid "Metadata version unsupported for a boot partition."
 msgstr ""
 
 #: fsedit.pm:459
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a separate /boot partition"
 msgstr ""
-"Choizh o'ch eus oc'h implij RAID evit gwrizienn (/).\n"
+"Choazh o'ch eus oc'h implij ur reizhiad restroù enrineget evit gwrizienn "
+"(/).\n"
 "N'eus ket moaien da loc'hañ hep ur barzhadur /boot.\n"
-"Bezit sur oc'h eus ouzhpennet ur barzhadur /boot"
+"Bezit sur hoc’h eus ouzhpennet ur barzhadur /boot"
 
 #: fsedit.pm:465 fsedit.pm:485
 #, c-format
@@ -2862,15 +2864,15 @@ msgstr ""
 "peogwir e vez implijet meur a levrenn fizikel gantañ"
 
 #: fsedit.pm:471
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
 "volumes.\n"
 "You should create a separate /boot partition first"
 msgstr ""
-"Choizh o'ch eus oc'h implij LVM evit gwrizienn (/).\n"
-"N'eus ket moaien da loc'hañ gant /boot war meur a levrenn fizikel.\n"
+"Choazet hoc’h eus oc'h implij LVM evit gwrizienn (/).\n"
+"N'eus ket moaien da loc'hañ pa emañ al levrenn war meur a levrenn fizikel.\n"
 "Mat vije deoc'h krouiñ ur barzhadur loc'hañ da gentañ"
 
 #: fsedit.pm:475 fsedit.pm:477
@@ -2890,7 +2892,7 @@ msgstr ""
 #: fsedit.pm:550
 #, c-format
 msgid "Not enough free space for auto-allocating"
-msgstr ""
+msgstr "N'eus ket plas dieub a-walac'h"
 
 #: fsedit.pm:552
 #, c-format
@@ -3146,7 +3148,7 @@ msgstr "Gortozit mar plij, o lakaat ar c'hefluniadur"
 #: harddrake/sound.pm:331
 #, c-format
 msgid "Enable PulseAudio"
-msgstr ""
+msgstr "Bevaat PulseAudio"
 
 #: harddrake/sound.pm:336
 #, c-format
@@ -3195,7 +3197,7 @@ msgstr ""
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:369
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -3345,7 +3347,7 @@ msgstr "Choazh ur sturier dre ziouer"
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -5063,19 +5065,19 @@ msgid "Installing driver for USB controller"
 msgstr "O staliañ ur sturier evit ar kontroller USB"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller \"%s\""
-msgstr "O staliañ ur sturier evit ar kontroller firewire %s"
+msgstr "O staliañ ur sturier evit ar kontroller firewire \"%s\""
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard disk drive controller \"%s\""
-msgstr "O staliañ ur sturier evit kontroller ar pladennoù %s"
+msgstr "O staliañ ur sturier evit kontroller ar pladennoù \"%s\""
 
 #: modules/interactive.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller \"%s\""
-msgstr "O staliañ ur sturier evit ar kontroller erthernet %s"
+msgstr "O staliañ ur sturier evit ar kontroller Ethernet \"%s\""
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -5157,9 +5159,9 @@ msgstr ""
 "Mennout a rit klask adarre gant arventennoù all ?"
 
 #: mygtk2.pm:1229
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to quit?"
-msgstr "Mennout a rit klikit ouzh an nozel-se ?"
+msgstr "Ha fellout a ra deoc'h da vat kuitaat ?"
 
 #: mygtk2.pm:1571 mygtk2.pm:1572
 #, c-format
@@ -5172,9 +5174,9 @@ msgid "Password should be resistant to basic attacks"
 msgstr ""
 
 #: mygtk2.pm:1574 mygtk2.pm:1575
-#, fuzzy, c-format
+#, c-format
 msgid "Password seems secure"
-msgstr "Tremenger evit an arveriad"
+msgstr "Seblantout a ra mat an tremenger"
 
 #: partition_table.pm:428
 #, c-format
@@ -5219,7 +5221,7 @@ msgstr ""
 #: pkgs.pm:273 pkgs.pm:276 pkgs.pm:289
 #, c-format
 msgid "Unused packages removal"
-msgstr ""
+msgstr "Lemel ar pakadoù a servij da netra"
 
 #: pkgs.pm:273
 #, c-format
@@ -5251,7 +5253,7 @@ msgstr "Gwelet titouroù periantel"
 #: pkgs.pm:298 pkgs.pm:299
 #, c-format
 msgid "Unused localization"
-msgstr ""
+msgstr "Troidigezh ha n'eo ket implijet"
 
 #: raid.pm:43
 #, c-format
@@ -5885,7 +5887,7 @@ msgstr ""
 #: security/level.pm:10
 #, c-format
 msgid "Disable msec"
-msgstr ""
+msgstr "Dizoberiañ msec"
 
 #: security/level.pm:11
 #, c-format
@@ -5893,9 +5895,9 @@ msgid "Standard"
 msgstr "Skouer"
 
 #: security/level.pm:12
-#, fuzzy, c-format
+#, c-format
 msgid "Secure"
-msgstr "Diogelroez"
+msgstr "Mad"
 
 #: security/level.pm:40
 #, c-format
@@ -6352,13 +6354,13 @@ msgstr ""
 "muzulioù barregezh diwar ne vern pe ardivink er rouedad-se."
 
 #: services.pm:105
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
 "system log files.  It is a good idea to always run rsyslog."
 msgstr ""
-"Syslog zo ur gwazerezh ma enroll drezañ an diaouled niverus o c'hemennadoù\n"
-"e kerzhlevrioù liesseurt ar reizhiad. Ur mennozh mat eo seveniñ ingal syslog."
+"Syslog zo ur gwazerezh ma enroll drezañ an diaouled niverus o c'hemennadoù e "
+"kerzhlevrioù liesseurt ar reizhiad. Ur mennozh mat eo seveniñ ingal syslog."
 
 #: services.pm:106
 #, c-format
@@ -6464,7 +6466,7 @@ msgstr "Kenrouedad"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "Rouedad"
 
 #: services.pm:161
 #, c-format
@@ -6787,48 +6789,212 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Sac'het eo ar staliadur"
 
+#, fuzzy
+#~ msgid "An NTP client/server"
+#~ msgstr "Servijer NTP"
+
+#~ msgid ""
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
+#~ msgstr ""
+#~ "Gourc'hemennoù, peurc'hraet eo ar staliadur.\n"
+#~ "Lamit ar bladenn loc'hañ ha gwaskit enkas evit adloc'hañ."
+
+#~ msgid ""
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Evit titouroù war palastroù hegerz evit stumm-mañ Moondrake,\n"
+#~ "sellit ouzh an Errata war : \n"
+#~ "%s"
+
+#~ msgid ""
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
+#~ msgstr ""
+#~ "Titouroù war gefluniañ ho reizhiad zo hegerz e rannbennad Goude\n"
+#~ "Staliañ Sturier ofisiel an Arveriad Moondrake."
+
+#~ msgid "Introduction"
+#~ msgstr "Digoradur"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "Gwarezit ho roadoù da gentañ mar plij"
+
+#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+#~ msgstr "[--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+
+#~ msgid "Accept user"
+#~ msgstr "Aotren an arveriad"
+
+#~ msgid "Active Directory with SFU"
+#~ msgstr "Active Directory gant SFU"
+
+#~ msgid "Active Directory with SFU:"
+#~ msgstr "Active Directory gant SFU :"
+
+#~ msgid "Active Directory with Winbind"
+#~ msgstr "Active Directory gant Winbind"
+
+#~ msgid "Active Directory with Winbind:"
+#~ msgstr "Active Directory gant Winbind :"
+
+#~ msgid "Add user"
+#~ msgstr "Ouzhpennañ un arveriad"
+
+#~ msgid "Allow/Forbid remote root login."
+#~ msgstr "Bevaat/Marvaat ereañ a-bell gant root."
+
+#~ msgid "Authentication LDAP"
+#~ msgstr "Dilesadur LDAP"
+
+#~ msgid "Authentication NIS"
+#~ msgstr "Dilesadur NIS"
+
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "Dilesadur Domani Windows"
+
+#~ msgid "Bad backup file"
+#~ msgstr "Restr gwareziñ siek"
+
+#~ msgid "Choose action"
+#~ msgstr "Dibabit un obererezh"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Dibabit ar mentoù"
+
 #~ msgid "Clean /tmp at each boot"
 #~ msgstr "Skarañ /tmp bep ma loc'her"
 
-#~ msgid "command %s missing"
-#~ msgstr "mankout a ra an urzhiad %s"
+#~ msgid "Collapse Tree"
+#~ msgstr "Plegañ ar wezenn"
+
+#~ msgid "Error reading file %s"
+#~ msgstr "Fazi en ur lenn ar restr %s"
+
+#~ msgid "Error writing to file %s"
+#~ msgstr "Fazi en ur skrivañ er restr %s"
+
+#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
+#~ msgstr "Fazi : n'eo ket rollet ar sturier « %s » evit ho kartenn gwelet"
+
+#~ msgid "Expand Tree"
+#~ msgstr "Astenn ar wezenn"
+
+#~ msgid "Ext2"
+#~ msgstr "Ext2"
 
 #~ msgid "File sharing"
 #~ msgstr "Rannañ restroù"
 
-#~ msgid "Restrict command line options"
-#~ msgstr "Strishaat dibarzhoù al linenn urzhiañ"
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Roit ment ar memor vev e Mo"
 
-#~ msgid "restrict"
-#~ msgstr "strishaat"
+#~ msgid "High"
+#~ msgstr "Uhel"
+
+#~ msgid "Higher"
+#~ msgstr "Uheloc'h"
+
+#~ msgid ""
+#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
+#~ "is enough)\n"
+#~ "at the beginning of the disk"
+#~ msgstr ""
+#~ "M'emaoc'h e soñj implijout aboot, taolit evezh leuskel un egor dieub "
+#~ "(2048 rann\n"
+#~ "zo a-walc'h) e deroù ar bladenn"
+
+#~ msgid "Info: "
+#~ msgstr "Titouroù : "
+
+#~ msgid "Journalised FS"
+#~ msgstr "RR gant ur levr-bourzh"
+
+#~ msgid "LDAP users database"
+#~ msgstr "Stlennvon an arveriaded LDAP"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Staliadur LILO/grub"
+
+#~ msgid "No supermount"
+#~ msgstr "N'eus Supermount ebet"
 
 #~ msgid ""
 #~ "Option ``Restrict command line options'' is of no use without a password"
 #~ msgstr ""
 #~ "Didalvout eo « Strishaat dibarzhoù al linenn urzhiañ » hep tremenger"
 
-#~ msgid "Use an encrypted filesystem"
-#~ msgstr "Implijit ur reizhiad restroù enrineget"
+#~ msgid "PLL setting:"
+#~ msgstr "Kefluniadur ar PLL :"
 
-#~ msgid "Use the Microsoft Windows® partition for loopback"
-#~ msgstr "Implij ar barzhadur Microsoft Windows® evit saveteiñ"
+#~ msgid "Paranoid"
+#~ msgstr "Ankeniet"
 
-#~ msgid "Which partition do you want to use for Linux4Win?"
-#~ msgstr "Pe barzhadur a vennit implijout evit lakaat Linux4Win ?"
+#~ msgid ""
+#~ "Passwords are now enabled, but use as a networked computer is still not "
+#~ "recommended."
+#~ msgstr ""
+#~ "Gweredekaet eo bremañ an tremenger, hogen dierbedet eo c'hoazh an implij "
+#~ "en ur rouedad"
 
-#~ msgid "Choose the sizes"
-#~ msgstr "Dibabit ar mentoù"
+#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
+#~ msgstr "Dizereit mar plij ha neuze implijit Ctrl-Alt-WarGil"
+
+#~ msgid "Poor"
+#~ msgstr "Paour"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Spisait ment ar memor bev diouzh ret (kavet %d Mo)"
+
+#~ msgid "Removable media automounting"
+#~ msgstr "Emvarc'hañ ar skoroù lem/laka"
+
+#~ msgid "Rescue partition table"
+#~ msgstr "Taolenn barzhañ saveteerezh"
+
+#~ msgid "Restore partition table"
+#~ msgstr "Adaozañ an daolenn barzhañ"
+
+#~ msgid "Restoring from file %s failed: %s"
+#~ msgstr "Assevel adalek ar restr %s sac'het %s"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Strishaat dibarzhoù al linenn urzhiañ"
 
 #~ msgid "Root partition size in MB: "
 #~ msgstr "Ment ar barzhadur kentañ e Mo : "
 
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "Save partition table"
+#~ msgstr "Skrivañ an daolenn barzhañ"
+
+#~ msgid "Security level"
+#~ msgstr "Live surentez"
+
+# Enaou ha dizenaou ar servijer Fontoù X da vare al loc'hañ hag al lazhañ
+#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
+#~ msgstr ""
+#~ "Loc'hañ ar servijer fontoù X (red eo d'ober evel-se evit implijout Xorg)."
+
+#~ msgid "Supermount"
+#~ msgstr "Supermount"
+
+#~ msgid "Supermount except for CDROM drives"
+#~ msgstr "Supermount evit CDROMoù hepken"
+
 #~ msgid "Swap partition size in MB: "
 #~ msgstr "Ment ar barzhadur disloañ e Mo : "
 
-#~ msgid ""
-#~ "There is no FAT partition to use as loopback (or not enough space left)"
-#~ msgstr ""
-#~ "N'eus ket ur barzhadur FAT evit saveteiñ (n'eus ket a-walc'h egor dieub)"
+#~ msgid "TLS"
+#~ msgstr "TLS"
 
 #~ msgid ""
 #~ "The FAT resizer is unable to handle your partition, \n"
@@ -6837,23 +7003,24 @@ msgstr "Sac'het eo ar staliadur"
 #~ "N'eus ket moaien d'adenvañ ho parzhadur gant an adventer FAT,\n"
 #~ "degouezhet ez eus ar fazi a-heul : %s"
 
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "Dizereit mar plij ha neuze implijit Ctrl-Alt-WarGil"
+#~ msgid ""
+#~ "The backup partition table has not the same size\n"
+#~ "Still continue?"
+#~ msgstr ""
+#~ "N'eo ket heñvel ment an daolenn barzhañ gwarezet\n"
+#~ "Kenderc'hel memestra ?"
 
-#~ msgid "Welcome To Crackers"
-#~ msgstr "Bezit deuet mat, preizherien"
+#~ msgid ""
+#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ msgstr ""
+#~ "N'eus ket ur barzhadur FAT evit saveteiñ (n'eus ket a-walc'h egor dieub)"
 
-#~ msgid "Poor"
-#~ msgstr "Paour"
-
-#~ msgid "High"
-#~ msgstr "Uhel"
-
-#~ msgid "Higher"
-#~ msgstr "Uheloc'h"
-
-#~ msgid "Paranoid"
-#~ msgstr "Ankeniet"
+#~ msgid ""
+#~ "This is similar to the previous level, but the system is entirely closed "
+#~ "and security features are at their maximum."
+#~ msgstr ""
+#~ "Kemer a reomp arc'hweloù al live diaraok, hogen bremañ eo peurserret ar "
+#~ "reizhiad hag an arc'hweloù surentez zo en o muiañ."
 
 #~ msgid ""
 #~ "This level is to be used with care. It makes your system more easy to "
@@ -6868,166 +7035,38 @@ msgstr "Sac'het eo ar staliadur"
 #~ "kevreet ouzh lod all pe ouzh ar genrouedad. N'eus ket a haeziñ dre "
 #~ "dremenger."
 
-#~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
-#~ msgstr ""
-#~ "Gweredekaet eo bremañ an tremenger, hogen dierbedet eo c'hoazh an implij "
-#~ "en ur rouedad"
-
-#~ msgid ""
-#~ "This is similar to the previous level, but the system is entirely closed "
-#~ "and security features are at their maximum."
-#~ msgstr ""
-#~ "Kemer a reomp arc'hweloù al live diaraok, hogen bremañ eo peurserret ar "
-#~ "reizhiad hag an arc'hweloù surentez zo en o muiañ."
-
-#~ msgid "Use libsafe for servers"
-#~ msgstr "Implijit libsafe evit ar servijerien"
-
-#~ msgid "LILO/grub Installation"
-#~ msgstr "Staliadur LILO/grub"
-
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "Spisait ment ar memor bev diouzh ret (kavet %d Mo)"
-
-#~ msgid "Give the ram size in MB"
-#~ msgstr "Roit ment ar memor vev e Mo"
-
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "M'emaoc'h e soñj implijout aboot, taolit evezh leuskel un egor dieub "
-#~ "(2048 rann\n"
-#~ "zo a-walc'h) e deroù ar bladenn"
-
-#~ msgid "Security level"
-#~ msgstr "Live surentez"
-
-#~ msgid "Expand Tree"
-#~ msgstr "Astenn ar wezenn"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "Plegañ ar wezenn"
-
 #~ msgid "Toggle between flat and group sorted"
 #~ msgstr "Gwintañ etre kompez ha rummet dre strollad"
-
-#~ msgid "Choose action"
-#~ msgstr "Dibabit un obererezh"
-
-#~ msgid "Active Directory with SFU"
-#~ msgstr "Active Directory gant SFU"
-
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Active Directory gant Winbind"
-
-#~ msgid "Active Directory with SFU:"
-#~ msgstr "Active Directory gant SFU :"
-
-#~ msgid "Active Directory with Winbind:"
-#~ msgstr "Active Directory gant Winbind :"
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "Dilesadur LDAP"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "reizhadur ar surantez (SASL/Kerberos)"
-
-#~ msgid "LDAP users database"
-#~ msgstr "Stlennvon an arveriaded LDAP"
-
-#~ msgid "Authentication NIS"
-#~ msgstr "Dilesadur NIS"
-
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Dilesadur Domani Windows"
-
-#~ msgid "Undo"
-#~ msgstr "Dizober"
-
-#~ msgid "Save partition table"
-#~ msgstr "Skrivañ an daolenn barzhañ"
-
-#~ msgid "Restore partition table"
-#~ msgstr "Adaozañ an daolenn barzhañ"
-
-#~ msgid ""
-#~ "The backup partition table has not the same size\n"
-#~ "Still continue?"
-#~ msgstr ""
-#~ "N'eo ket heñvel ment an daolenn barzhañ gwarezet\n"
-#~ "Kenderc'hel memestra ?"
-
-#~ msgid "Info: "
-#~ msgstr "Titouroù : "
-
-#~ msgid "Unknown driver"
-#~ msgstr "Mollad anavez"
-
-#~ msgid "Error reading file %s"
-#~ msgstr "Fazi en ur lenn ar restr %s"
-
-#~ msgid "Restoring from file %s failed: %s"
-#~ msgstr "Assevel adalek ar restr %s sac'het %s"
-
-#~ msgid "Bad backup file"
-#~ msgstr "Restr gwareziñ siek"
-
-#~ msgid "Error writing to file %s"
-#~ msgstr "Fazi en ur skrivañ er restr %s"
-
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr "Fazi : n'eo ket rollet ar sturier « %s » evit ho kartenn gwelet"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "Journalised FS"
-#~ msgstr "RR gant ur levr-bourzh"
-
-# Enaou ha dizenaou ar servijer Fontoù X da vare al loc'hañ hag al lazhañ
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr ""
-#~ "Loc'hañ ar servijer fontoù X (red eo d'ober evel-se evit implijout Xorg)."
-
-#~ msgid "Add user"
-#~ msgstr "Ouzhpennañ un arveriad"
-
-#~ msgid "Accept user"
-#~ msgstr "Aotren an arveriad"
-
-#~ msgid "No supermount"
-#~ msgstr "N'eus Supermount ebet"
-
-#~ msgid "Supermount"
-#~ msgstr "Supermount"
-
-#~ msgid "Supermount except for CDROM drives"
-#~ msgstr "Supermount evit CDROMoù hepken"
-
-#~ msgid "Rescue partition table"
-#~ msgstr "Taolenn barzhañ saveteerezh"
-
-#~ msgid "Removable media automounting"
-#~ msgstr "Emvarc'hañ ar skoroù lem/laka"
 
 #~ msgid "Trying to rescue partition table"
 #~ msgstr "O klask assevel an daolenn barzhañ"
 
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "Bevaat/Marvaat ereañ a-bell gant root."
+#~ msgid "Undo"
+#~ msgstr "Dizober"
 
-#~ msgid "PLL setting:"
-#~ msgstr "Kefluniadur ar PLL :"
+#~ msgid "Unknown driver"
+#~ msgstr "Mollad anavez"
 
-#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
-#~ msgstr "[--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr "Implijit ur reizhiad restroù enrineget"
+
+#~ msgid "Use libsafe for servers"
+#~ msgstr "Implijit libsafe evit ar servijerien"
+
+#~ msgid "Use the Microsoft Windows® partition for loopback"
+#~ msgstr "Implij ar barzhadur Microsoft Windows® evit saveteiñ"
+
+#~ msgid "Welcome To Crackers"
+#~ msgstr "Bezit deuet mat, preizherien"
+
+#~ msgid "Which partition do you want to use for Linux4Win?"
+#~ msgstr "Pe barzhadur a vennit implijout evit lakaat Linux4Win ?"
+
+#~ msgid "command %s missing"
+#~ msgstr "mankout a ra an urzhiad %s"
+
+#~ msgid "restrict"
+#~ msgstr "strishaat"
+
+#~ msgid "security layout (SASL/Kerberos)"
+#~ msgstr "reizhadur ar surantez (SASL/Kerberos)"

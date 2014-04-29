@@ -440,18 +440,18 @@ msgid "URL must start with ftp:// or http://"
 msgstr "Az URL-nek ftp:// vagy http:// előtaggal kell kezdődnie"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Kapcsolódás a Mandriva Linux webkiszolgálójához; az elérhető "
-"tükörkiszolgálók listájának lekérdezése..."
+"Kapcsolódás a %s webkiszolgálójához; az elérhető tükörkiszolgálók listájának "
+"lekérdezése..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Nem sikerült lekérdezni az elérhető tükörkiszolgálók listáját a Mandriva "
-"Linux webkiszolgálójától"
+"Nem sikerült lekérdezni az elérhető tükörkiszolgálók listáját a %s "
+"webkiszolgálójától"
 
 #: any.pm:204
 #, c-format
@@ -744,11 +744,13 @@ msgstr ""
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Nincs xml információ a \"%s\" adatforráshoz, a %s csomagról csak részleges "
+"információit sikerült szerezni."
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Nincs leírás"
 
 #: pkgs.pm:280
 #, c-format
@@ -765,14 +767,14 @@ msgid "An error occurred:"
 msgstr "Hiba lépett fel:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Hiba lépett fel:"
+msgstr "Végzetes hiba történt: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Ne kérdezze mégegyszer"
 
 #: pkgs.pm:894
 #, c-format
@@ -813,9 +815,9 @@ msgid "Entering step `%s'\n"
 msgstr "A következő lépés: \"%s\"\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Telepítés"
+msgstr "%s telepítés %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -828,14 +830,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Az Xorg kiszolgáló lassan indul. Kérem várjon..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "A rendszer gyenge erőforrásokkal rendelkezik. Előfordulhat, hogy problémái\n"
-"lesznek a Mandriva Linux telepítésével. Ha így történik, próbálkozzon\n"
+"lesznek a %s telepítésével. Ha így történik, próbálkozzon\n"
 "szöveges módú telepítéssel: CD-ről való rendszerindítást követően nyomjon\n"
 "\"F1\"-et, majd írja be azt, hogy \"text\"."
 
@@ -845,14 +847,14 @@ msgid "Media Selection"
 msgstr "Adathordozó kiválasztása"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "A Mandriva KDE asztalának telepítése"
+msgstr "A %s KDE asztalának telepítése"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "A Mandriva GNOME asztalának telepítése"
+msgstr "A %s GNOME asztalának telepítése"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -897,7 +899,7 @@ msgstr "Csomagok egyedi kiválasztása"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Kijelölések megszüntetése"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1678,41 +1680,143 @@ msgid ""
 "Exit"
 msgstr "Kilépés"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux telepítés %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Grafikus környezet"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Grafikus környezet felhasználóbarát alkalmazásokkal és segédprogramokkal"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Egy könnyű és gyors grafikus környezet felhasználóbarát alkalmazásokkal "
+#~ "és segédprogramokkal"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Játékprogramok: lövöldözős, táblás, stratégiai, ..."
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Munkaállomás"
+
+#, fuzzy
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "A Telepítő olyan előzőleg telepített Moondrake rendszert talált, \n"
+#~ "melyet nem biztonságos frissíteni %s-re.\n"
+#~ "\n"
+#~ "Ajánlott egy új telepítéssel lecserélni a régi rendszert.\n"
+#~ "\n"
+#~ "Figyelem: ha az \"Új telepítést\" választja, akkor ajánlott minden \n"
+#~ "személyes adat előzetes lementése."
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME munkaállomás"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake varázslók"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Licenc"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Irodai programok: szövegszerkesztők (LibreOffice Writer, KWord), "
+#~ "táblázatkezelők (LibreOffice Calc, KSpread), PDF-megjelenítők, ..."
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Az Ön munkaasztala egy USB kulcson"
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Irodai munkaállomás"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "A 100%%-ban nyílt forráskódú Mandriva Linux disztribúció"
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL és MariaDB adatbázis kiszolgáló"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "A Linux könnyed kipróbálása: Mandriva One"
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL vagy MariaDB adatbázis kiszolgáló"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Rendszerbetöltő előkészítése..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Egyéni munkaasztal"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "A(z) \"%s\" adathordozón levő összes csomag kihagyása"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "WindowMaker, Enlightenment, Fvwm, ..."
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE munkaállomás"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Egy teljes Mandriva Linux munkaasztal, támogatással"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: disztribúciók minden igényre"
+#~ msgid "A full Moondrake desktop, with support"
+#~ msgstr "Egy teljes Moondrake munkaasztal, támogatással"
+
+#~ msgid "Automated"
+#~ msgstr "Automatikus"
 
 #~ msgid "Bad package"
 #~ msgstr "Hibás csomag"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Hálózat"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Kapcsolatfelvétel a tükörkiszolgálóval; az elérhető csomagok listájának "
+#~ "letöltése..."
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Szeretné az aboot-ot használni?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "%s fájl letöltése..."
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Frissítések"
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Hiba az aboot telepítésekor.\n"
+#~ "Próbáljam újra a telepítést akkor is, ha ez esetleg tönkreteszi az első\n"
+#~ "partíciót?"
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "A Linux könnyed kipróbálása: Mandriva One"
+
+#~ msgid "Explore Linux easily with Moondrake One"
+#~ msgstr "A Linux könnyed kipróbálása: Moondrake One"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Automatikus telepítőfloppy készítése"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm-munkaasztal"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux telepítés %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: disztribúciók minden igényre"
+
+#~ msgid "Moondrake: distributions for everybody's needs"
+#~ msgstr "Moondrake: disztribúciók minden igényre"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1720,6 +1824,54 @@ msgstr "Kilépés"
 #~ msgstr ""
 #~ "Irodai programok: szövegszerkesztők (KWord, AbiWord), táblázatkezelők "
 #~ "(KSpread, Gnumeric), PDF-nézegetők, ..."
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Rendszerbetöltő előkészítése..."
+
+#~ msgid "Proceed"
+#~ msgstr "Feldolgozva"
+
+#~ msgid "Replay"
+#~ msgstr "Újrajátszás"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Csomagösszeállítás mentése"
+
+#~ msgid "Select All"
+#~ msgstr "Mindent kijelöl"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "A 100%%-ban nyílt forráskódú Mandriva Linux disztribúció"
+
+#~ msgid "The 100%% open source Moondrake distribution"
+#~ msgstr "A 100%%-ban nyílt forráskódú Moondrake disztribúció"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Az automatikus telepítés akár teljesen automatikus is lehet,\n"
+#~ "ebben az esetben az egész merevlemez tartalmát módosíthatja.\n"
+#~ "Elsősorban akkor ajánlott, ha másik gépre is telepíteni kívánja\n"
+#~ "a rendszert.\n"
+#~ "\n"
+#~ "Lehetőség van a telepítés újrajátszására is.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Nem sikerült kapcsolódni ehhez a tükörkiszolgálóhoz: %s"
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr "32 bites disztribúcióról 64 bitesre való frissítés nem támogatott"
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr "64 bites disztribúcióról 32 bitesre való frissítés nem támogatott"
+
+#~ msgid "Welcome"
+#~ msgstr "Üdvözöljük"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1739,21 +1891,6 @@ msgstr "Kilépés"
 #~ "A KDE 3.5 frissítéséhez, illetve a személyes adatainak a megőrzéséhez \n"
 #~ "kérjük indítsa el a saját rendszerét, és használja a Mandriva frissítő "
 #~ "alkalmazását."
-
-#~ msgid "Proceed"
-#~ msgstr "Feldolgozva"
-
-#~ msgid "retrieval of [%s] failed"
-#~ msgstr "hibával [%s] tért vissza"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "%s fájl letöltése..."
-
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr "32 bites disztribúcióról 64 bitesre való frissítés nem támogatott"
-
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr "64 bites disztribúcióról 32 bitesre való frissítés nem támogatott"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1779,50 +1916,23 @@ msgstr "Kilépés"
 #~ "\n"
 #~ "Biztosan telepíteni szeretné a kiszolgálóprogramo(ka)t?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm-munkaasztal"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "Kapcsolatfelvétel a tükörkiszolgálóval; az elérhető csomagok listájának "
-#~ "letöltése..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Nem sikerült kapcsolódni ehhez a tükörkiszolgálóhoz: %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Automatikus telepítőfloppy készítése"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Az Ön munkaasztala egy USB kulcson"
 
 #~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Az automatikus telepítés akár teljesen automatikus is lehet,\n"
-#~ "ebben az esetben az egész merevlemez tartalmát módosíthatja.\n"
-#~ "Elsősorban akkor ajánlott, ha másik gépre is telepíteni kívánja\n"
-#~ "a rendszert.\n"
-#~ "\n"
-#~ "Lehetőség van a telepítés újrajátszására is.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Újrajátszás"
-
-#~ msgid "Automated"
-#~ msgstr "Automatikus"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Csomagösszeállítás mentése"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Szeretné az aboot-ot használni?"
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Licenc"
 
 #~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Hiba az aboot telepítésekor.\n"
-#~ "Próbáljam újra a telepítést akkor is, ha ez esetleg tönkreteszi az első\n"
-#~ "partíciót?"
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Hálózat"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Frissítések"
+
+#~ msgid "retrieval of [%s] failed"
+#~ msgstr "hibával [%s] tért vissza"

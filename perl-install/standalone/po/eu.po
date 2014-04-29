@@ -1589,7 +1589,7 @@ msgid "Keyboard"
 msgstr "Teklatua"
 
 #: finish-install:58
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Aukeratu zure teklatu-diseinua."
 
@@ -3331,7 +3331,7 @@ msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Ezin dira instalatu eskanerrak partekatzeko behar diren paketeak."
 
 #: service_harddrake:173
-#, fuzzy, c-format
+#, c-format
 msgid "The graphics card '%s' is no longer supported by driver '%s'"
 msgstr ""
 "'%s' txartela grafikoari ez dio aurrerantzean '%s' gidariak euskarri emango"
@@ -3342,7 +3342,7 @@ msgid "New release, reconfiguring X for %s"
 msgstr "Askapen berria, X birkonfiguratzen %s-rentzako"
 
 #: service_harddrake:274
-#, fuzzy, c-format
+#, c-format
 msgid "The proprietary kernel driver was not found for X.org driver '%s'"
 msgstr "Ez da aurkitu '%s' X.org gidariaren jabetzadun nukleo gidaria"
 
@@ -3446,81 +3446,202 @@ msgstr "Eskualdeko ezarpenak"
 msgid "Language & country configuration"
 msgstr "Hizkuntza eta herrialde konfiguraketa"
 
+#, fuzzy
+#~ msgid "  --help                - display this help     \n"
+#~ msgstr " --help                - laguntza hau erakusten du     \n"
+
+#, fuzzy
+#~ msgid ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Usage: \n"
+#~ msgstr ""
+#~ "drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Software librea da, eta birbana daiteke GNU GPL lizentziaren baldintzak "
+#~ "betetzen badira.\n"
+#~ "\n"
+#~ "Erabilera:\n"
+
+#, fuzzy
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Moondrake-en programa-erroreen berri emateko tresna"
+
+#~ msgid "%s Control Center"
+#~ msgstr "%s Aginte Gunea"
+
+#, fuzzy
+#~ msgid "%s Help Center"
+#~ msgstr "Moondrake Laguntza Gunea"
+
+#, fuzzy
+#~ msgid "%s Online"
+#~ msgstr "Moondrake Online"
+
+#, fuzzy
+#~ msgid "%s Tools Logs"
+#~ msgstr "Moondrake Tresnen Erregistroak"
+
+#, fuzzy
+#~ msgid "%s Update"
+#~ msgstr "Moondrake Eguneratu"
+
+#, fuzzy
+#~ msgid "<control>H"
+#~ msgstr "<control>Q"
+
+#~ msgid "Autodetect _modems"
+#~ msgstr "Autodetektatu _modemak"
+
+#~ msgid "Autodetect parallel _zip drives"
+#~ msgstr "Autodetektatu zip _unitate paraleloak"
+
+#, fuzzy
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Konfiguratu Moondrake tresnak atzitzeko beharrezko autentikazioa"
+
+#~ msgid "Copyright (C) %s by %s"
+#~ msgstr "Copyright (C) %s %s"
+
+#~ msgid ""
+#~ "Here you can see files to use in order to fix permissions, owners, and "
+#~ "groups via msec.\n"
+#~ "You can also edit your own rules which will overwrite the default rules."
+#~ msgstr ""
+#~ "msec bidez baimenak, jabeak eta taldeak konpontzeko erabil ditzakezun "
+#~ "fitxategiak dauzkazu hemen.\n"
+#~ "Arau lehenetsiak gainidatziko dituzten zure arauak ere edita ditzekezu."
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#, fuzzy
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in"
+#~ msgstr ""
+#~ "Telebista-txartelik ez da detektatu zure makinan. Egiazta ezazu Linux-ek "
+#~ "onartutako bideo/telebista-txartela behar bezala sartuta dagoela.\n"
+#~ "\n"
+#~ "\n"
+#~ "Gure hardwarearen datu-basea bisita dezakezu:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
+
+#, fuzzy
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in."
+#~ msgstr ""
+#~ "Telebista-txartelik ez da detektatu zure makinan. Egiazta ezazu Linux-ek "
+#~ "onartutako bideo/telebista-txartela behar bezala sartuta dagoela.\n"
+#~ "\n"
+#~ "\n"
+#~ "Gure hardwarearen datu-basea bisita dezakezu:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
+
+#, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Posta-abisuen konfigurazioa"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Posta-abisuen konfigurazioa"
+
+#, fuzzy
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "Abio konfiguraketa"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Posta-abisuen konfigurazioa"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Hizkuntza eta herrialde konfiguraketa"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Zerbitzari grafikoaren konfiguraketa"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Hizkuntza eta herrialde konfiguraketa"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Zerbitzari grafikoaren konfiguraketa"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Zerbitzari grafikoaren konfiguraketa"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Zerbitzari grafikoaren konfiguraketa"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "UPS konfiguraketa"
+
+#, fuzzy
+#~ msgid "Select %s Tool:"
+#~ msgstr "Aukeratu Moondrake Tresna:"
+
+#~ msgid "_About..."
+#~ msgstr "_Honi buruz..."
+
+#~ msgid "_Fields description"
+#~ msgstr "_Eremuen azalpena"
+
+#~ msgid "_File"
+#~ msgstr "_Fitxategia"
+
+#~ msgid "_Help"
+#~ msgstr "_Laguntza"
+
+#~ msgid "_Options"
+#~ msgstr "_Aukerak"
+
+#~ msgid "_Quit"
+#~ msgstr "_Irten"
+
+#~ msgid "_Report Bug"
+#~ msgstr "_Akatsen berri-ematea"
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(balio lehenetsia: %s)"
+
 #~ msgid "/Autodetect _printers"
 #~ msgstr "/Autodetektatu _inprimagailuak"
 
-#~ msgid "Its GDB trace is:"
-#~ msgstr "Bere GDB aztarna:"
+#~ msgid "Autodetect _jaz drives"
+#~ msgstr "Autodetektatu _jaz unitateak"
 
-#~ msgid "OpenOffice.org"
-#~ msgstr "OpenOffice.org"
+#~ msgid "Autodetect _printers"
+#~ msgstr "Autodetektatu _inprimagailuak"
 
-#~ msgid ""
-#~ "The proprietary driver for your graphic card cannot be found, the system "
-#~ "is now using the free software driver (%s)."
-#~ msgstr ""
-#~ "Zure txartela grafikoarentzako jabetzadun gidaria ezin da aurkitu, "
-#~ "sistema software askedun gidaria erabiltzen ari da (%s)."
+#~ msgid "Background color"
+#~ msgstr "Atzeko planoaren kolorea"
 
-#~ msgid ""
-#~ "Display theme\n"
-#~ "under console"
-#~ msgstr ""
-#~ "Bistaratu gaia\n"
-#~ "kontsolan"
+#~ msgid "Basic options"
+#~ msgstr "Oinarrizko aukerak"
 
-#~ msgid "Create new theme"
-#~ msgstr "Sortu gai berria"
+#~ msgid "Bugs"
+#~ msgstr "Akatsak"
 
-#~ msgid "X coordinate of text box"
-#~ msgstr "Testu laukiaren x koordenatua"
+#~ msgid "Choose picture"
+#~ msgstr "Aukeratu irudia"
 
-#~ msgid "Y coordinate of text box"
-#~ msgstr "Testu laukiaren y koordenatua"
-
-#~ msgid "Text box width"
-#~ msgstr "Testu laukiaren zabalera"
-
-#~ msgid "Text box height"
-#~ msgstr "Testu laukiaren altuera"
-
-#~ msgid ""
-#~ "The progress bar X coordinate\n"
-#~ "of its upper left corner"
-#~ msgstr ""
-#~ "Aurrerapen barraren ezkerreko goi-ertzaren\n"
-#~ "x koordenatua"
-
-#~ msgid ""
-#~ "The progress bar Y coordinate\n"
-#~ "of its upper left corner"
-#~ msgstr ""
-#~ "Aurrerapen barraren ezkerreko goi-ertzaren\n"
-#~ "y koordenatua"
-
-#~ msgid "The width of the progress bar"
-#~ msgstr "Aurrerapen barraren zabalera"
-
-#~ msgid "The height of the progress bar"
-#~ msgstr "Aurrerapen barraren altuera"
-
-#~ msgid "X coordinate of the text"
-#~ msgstr "Testuaren x koordenatua"
-
-#~ msgid "Y coordinate of the text"
-#~ msgstr "Testuaren y koordenatua"
-
-#~ msgid "Text box transparency"
-#~ msgstr "Testu laukiaren gardentasuna"
-
-#~ msgid "Progress box transparency"
-#~ msgstr "Aurrerapen laukiaren gardentasuna"
-
-#~ msgid "Text size"
-#~ msgstr "Testu neurria"
-
-#~ msgid "Progress Bar"
-#~ msgstr "Aurrerapen barra"
+#~ msgid "Choose progress bar background"
+#~ msgstr "Aukeratu aurrerapen barraren hondo kolorea"
 
 #~ msgid "Choose progress bar color 1"
 #~ msgstr "Aukeratu aurrerapen barraren kolore 1"
@@ -3528,62 +3649,11 @@ msgstr "Hizkuntza eta herrialde konfiguraketa"
 #~ msgid "Choose progress bar color 2"
 #~ msgstr "Aukeratu aurrerapen barraren kolore 2"
 
-#~ msgid "Choose progress bar background"
-#~ msgstr "Aukeratu aurrerapen barraren hondo kolorea"
-
-#~ msgid "Gradient type"
-#~ msgstr "Gradiente mota"
-
-#~ msgid "Text"
-#~ msgstr "Testua"
-
 #~ msgid "Choose text color"
 #~ msgstr "Aukeratu testu kolorea"
 
-#~ msgid "Choose picture"
-#~ msgstr "Aukeratu irudia"
-
-#~ msgid "Silent bootsplash"
-#~ msgstr "Modu isila"
-
 #~ msgid "Choose text zone color"
 #~ msgstr "Aukeratu testu gunearen kolorea"
-
-#~ msgid "Text color"
-#~ msgstr "Testuaren kolorea"
-
-#~ msgid "Background color"
-#~ msgstr "Atzeko planoaren kolorea"
-
-#~ msgid "Verbose bootsplash"
-#~ msgstr "Modu berritsua"
-
-#~ msgid "Theme name"
-#~ msgstr "Gaiaren izena"
-
-#~ msgid "Final resolution"
-#~ msgstr "Azken bereizmena"
-
-#~ msgid "Display logo on Console"
-#~ msgstr "Kontsolan logoa bistaratu"
-
-#~ msgid "Save theme"
-#~ msgstr "Gaia gorde"
-
-#~ msgid "Please enter a theme name"
-#~ msgstr "Mesedez sartu gai baten izena"
-
-#~ msgid "Please select a splash image"
-#~ msgstr "Mesedez aukeratu plast irudi bat"
-
-#~ msgid "saving Bootsplash theme..."
-#~ msgstr "Bootsplash gaia gordetzen..."
-
-#~ msgid "Unable to load image file %s"
-#~ msgstr "Ezin da %s irudi fitxategia zamatu"
-
-#~ msgid "choose image"
-#~ msgstr "hautatu imajina"
 
 #~ msgid "Color selection"
 #~ msgstr "Kolore aukeraketa"
@@ -3591,11 +3661,22 @@ msgstr "Hizkuntza eta herrialde konfiguraketa"
 #~ msgid "Coma bug"
 #~ msgstr "Coma programa-errorea"
 
-#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-#~ msgstr "PUZ honek Cyrix 6x86 Coma programa-errorea baduen ala ez"
+#, fuzzy
+#~ msgid "Copyright (C) %s by Moondrake"
+#~ msgstr "Copyright (C) %s Mandriva"
 
-#~ msgid "Fdiv bug"
-#~ msgstr "Fdiv programa-errorea"
+#~ msgid "Create new theme"
+#~ msgstr "Sortu gai berria"
+
+#~ msgid "Display logo on Console"
+#~ msgstr "Kontsolan logoa bistaratu"
+
+#~ msgid ""
+#~ "Display theme\n"
+#~ "under console"
+#~ msgstr ""
+#~ "Bistaratu gaia\n"
+#~ "kontsolan"
 
 #~ msgid ""
 #~ "Early Intel Pentium chips manufactured have a bug in their floating point "
@@ -3606,50 +3687,44 @@ msgstr "Hizkuntza eta herrialde konfiguraketa"
 #~ "prozesatzailean, eta ez dute lortzen behar adinako doitasuna koma "
 #~ "higikorreko zatiketetan (FDIV)"
 
-#~ msgid "Is FPU present"
-#~ msgstr "FPU badago"
-
-#~ msgid "yes means the processor has an arithmetic coprocessor"
-#~ msgstr ""
-#~ "baiezkoak prozesatzaileak koprozesatzaile aritmetiko bat duela adierazten "
-#~ "du"
-
-#~ msgid "Whether the FPU has an irq vector"
-#~ msgstr "FPUk irq bektorea duen edo ez"
-
-#~ msgid ""
-#~ "yes means the arithmetic coprocessor has an exception vector attached"
-#~ msgstr ""
-#~ "baiezkoak koprozesatzaile aritmetikoak salbuespen bektore bat erantsita "
-#~ "duela adierazten du"
-
 #~ msgid "F00f bug"
 #~ msgstr "F00f programa-errorea"
-
-#~ msgid ""
-#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
-#~ msgstr ""
-#~ "hasierako pentium-ek programa-errore asko zituzten eta blokeatu egiten "
-#~ "ziren FOOF bytecode deskodetzean"
-
-#~ msgid "Halt bug"
-#~ msgstr "Halt instrukzioaren programa-errorea"
-
-#~ msgid ""
-#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
-#~ "mode after the \"halt\" instruction is used"
-#~ msgstr ""
-#~ "i486DX-100 txip zahar batzuk ezin dira behar bezala berrabiarazi \"halt\" "
-#~ "instrukzioa erabili ondoren"
-
-#~ msgid "Bugs"
-#~ msgstr "Akatsak"
 
 #~ msgid "FPU"
 #~ msgstr "FPU"
 
-#~ msgid "Unknown/Others"
-#~ msgstr "Ezezaguna/Beste batzuk"
+#~ msgid "Fdiv bug"
+#~ msgstr "Fdiv programa-errorea"
+
+#~ msgid "File/-"
+#~ msgstr "Fitxategia/-"
+
+#~ msgid "File/Save _As"
+#~ msgstr "Fitxategia/Gorde _honela"
+
+#~ msgid "File/_New"
+#~ msgstr "Fitxategia/_Berria"
+
+#~ msgid "File/_Open"
+#~ msgstr "Fitxategia/_Ireki"
+
+#~ msgid "File/_Quit"
+#~ msgstr "Fitxategia/I_rten"
+
+#~ msgid "File/_Save"
+#~ msgstr "Fitxategia/_Gorde"
+
+#~ msgid "Final resolution"
+#~ msgstr "Azken bereizmena"
+
+#~ msgid "Gradient type"
+#~ msgstr "Gradiente mota"
+
+#~ msgid "Halt bug"
+#~ msgstr "Halt instrukzioaren programa-errorea"
+
+#~ msgid "Help/_About..."
+#~ msgstr "Laguntza/_Honi buruz..."
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "
@@ -3751,32 +3826,161 @@ msgstr "Hizkuntza eta herrialde konfiguraketa"
 #~ "da, baina sistema erabat itxita uzten du eta segurtasun ezaugarriak\n"
 #~ " mailarik handienean daudehandiena da"
 
-#~ msgid "(default value: %s)"
-#~ msgstr "(balio lehenetsia: %s)"
+#~ msgid "Is FPU present"
+#~ msgstr "FPU badago"
 
-#~ msgid "Security Level:"
-#~ msgstr "Segurtasun-maila:"
-
-#~ msgid "Security Alerts:"
-#~ msgstr "Segurtasun-abisuak:"
-
-#~ msgid "Security Administrator:"
-#~ msgstr "Segurtasun-administratzailea:"
-
-#~ msgid "Basic options"
-#~ msgstr "Oinarrizko aukerak"
+#~ msgid "Its GDB trace is:"
+#~ msgstr "Bere GDB aztarna:"
 
 #~ msgid "Network Options"
 #~ msgstr "Sare-aukerak"
 
-#~ msgid "System Options"
-#~ msgstr "Sistema-aukerak"
+#~ msgid "OpenOffice.org"
+#~ msgstr "OpenOffice.org"
+
+#~ msgid "Options/Test"
+#~ msgstr "Aukerak/Probatu"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "Aldizkako egiaztapenak"
+
+#~ msgid "Please enter a theme name"
+#~ msgstr "Mesedez sartu gai baten izena"
+
+#~ msgid "Please select a splash image"
+#~ msgstr "Mesedez aukeratu plast irudi bat"
 
 #~ msgid "Please wait, setting security level..."
 #~ msgstr "Itxaron, segurtasun-maila ezartzen..."
 
 #~ msgid "Please wait, setting security options..."
 #~ msgstr "Itxaron, segurtasun-aukerak ezartzen..."
+
+#~ msgid "Progress Bar"
+#~ msgstr "Aurrerapen barra"
+
+#~ msgid "Progress box transparency"
+#~ msgstr "Aurrerapen laukiaren gardentasuna"
+
+#~ msgid "Save theme"
+#~ msgstr "Gaia gorde"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Segurtasun-administratzailea:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Segurtasun-abisuak:"
+
+#~ msgid "Security Level:"
+#~ msgstr "Segurtasun-maila:"
+
+#~ msgid "Silent bootsplash"
+#~ msgstr "Modu isila"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "i486DX-100 txip zahar batzuk ezin dira behar bezala berrabiarazi \"halt\" "
+#~ "instrukzioa erabili ondoren"
+
+#~ msgid "System Options"
+#~ msgstr "Sistema-aukerak"
+
+#~ msgid "Text"
+#~ msgstr "Testua"
+
+#~ msgid "Text box height"
+#~ msgstr "Testu laukiaren altuera"
+
+#~ msgid "Text box transparency"
+#~ msgstr "Testu laukiaren gardentasuna"
+
+#~ msgid "Text box width"
+#~ msgstr "Testu laukiaren zabalera"
+
+#~ msgid "Text color"
+#~ msgstr "Testuaren kolorea"
+
+#~ msgid "Text size"
+#~ msgstr "Testu neurria"
+
+#~ msgid "The height of the progress bar"
+#~ msgstr "Aurrerapen barraren altuera"
+
+#~ msgid ""
+#~ "The progress bar X coordinate\n"
+#~ "of its upper left corner"
+#~ msgstr ""
+#~ "Aurrerapen barraren ezkerreko goi-ertzaren\n"
+#~ "x koordenatua"
+
+#~ msgid ""
+#~ "The progress bar Y coordinate\n"
+#~ "of its upper left corner"
+#~ msgstr ""
+#~ "Aurrerapen barraren ezkerreko goi-ertzaren\n"
+#~ "y koordenatua"
+
+#~ msgid ""
+#~ "The proprietary driver for your graphic card cannot be found, the system "
+#~ "is now using the free software driver (%s)."
+#~ msgstr ""
+#~ "Zure txartela grafikoarentzako jabetzadun gidaria ezin da aurkitu, "
+#~ "sistema software askedun gidaria erabiltzen ari da (%s)."
+
+#~ msgid "The width of the progress bar"
+#~ msgstr "Aurrerapen barraren zabalera"
+
+#~ msgid "Theme name"
+#~ msgstr "Gaiaren izena"
+
+#~ msgid "Unable to load image file %s"
+#~ msgstr "Ezin da %s irudi fitxategia zamatu"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Ezezaguna/Beste batzuk"
+
+#~ msgid "Verbose bootsplash"
+#~ msgstr "Modu berritsua"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "FPUk irq bektorea duen edo ez"
+
+#~ msgid "X coordinate of text box"
+#~ msgstr "Testu laukiaren x koordenatua"
+
+#~ msgid "X coordinate of the text"
+#~ msgstr "Testuaren x koordenatua"
+
+#~ msgid "Y coordinate of text box"
+#~ msgstr "Testu laukiaren y koordenatua"
+
+#~ msgid "Y coordinate of the text"
+#~ msgstr "Testuaren y koordenatua"
+
+#~ msgid "choose image"
+#~ msgstr "hautatu imajina"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "hasierako pentium-ek programa-errore asko zituzten eta blokeatu egiten "
+#~ "ziren FOOF bytecode deskodetzean"
+
+#~ msgid "saving Bootsplash theme..."
+#~ msgstr "Bootsplash gaia gordetzen..."
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "PUZ honek Cyrix 6x86 Coma programa-errorea baduen ala ez"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr ""
+#~ "baiezkoak koprozesatzaile aritmetikoak salbuespen bektore bat erantsita "
+#~ "duela adierazten du"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr ""
+#~ "baiezkoak prozesatzaileak koprozesatzaile aritmetiko bat duela adierazten "
+#~ "du"

@@ -544,17 +544,18 @@ msgid "Please choose a language to use"
 msgstr "Prosím zvolte si jazyk, který chcete používat"
 
 #: any.pm:1183
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
-"Mandriva Linux podporuje více jazyků. Můžete si zvolit další jazyky,\n"
-"které budou dostupné po instalaci a následném restartu systému."
+"%s podporuje vícero jazyků. Zvolte prosím, pro které jazyky \n"
+"chcete nainstalovat podporu. Tyto budou dostupné po dokončení\n"
+"instalace a restartu systému."
 
 #: any.pm:1186
-#, fuzzy, c-format
+#, c-format
 msgid "Multiple languages"
 msgstr "Více jazyků"
 
@@ -1343,9 +1344,9 @@ msgid "Warning"
 msgstr "Varování"
 
 #: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete this mount point?"
-msgstr "Chcete opravdu odstranit tento přípojný bod?"
+msgstr "Chcete opravdu smazat tento mount point?"
 
 #: diskdrake/dav.pm:125
 #, c-format
@@ -2688,15 +2689,15 @@ msgid "Which partition do you want to resize?"
 msgstr "Na kterém oddílu chcete změnit velikost?"
 
 #: fs/partitioning_wizard.pm:180
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the %s installation."
 msgstr ""
-"Váš diskový oddíl s Microsoft Windows® je příliš fragmentovaný. Restartujte "
-"počítač do systému Microsoft Windows®, použijte program 'defrag' a potom "
-"spusťte opět instalaci Mandriva Linuxu."
+"Váš oddíl s Microsoft Windows® je příliš fragmentován. Prosím, restartujte "
+"váš počítač do Microsoft Windows® a použijte nástroj \"defrag\". Poté "
+"spusťte znovu instalaci %s."
 
 #: fs/partitioning_wizard.pm:188
 #, c-format
@@ -2784,11 +2785,11 @@ msgid "Erase and use entire disk"
 msgstr "Smazat a použít celý disk"
 
 #: fs/partitioning_wizard.pm:243
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
-msgstr "Máte více než jeden pevný disk, na který chcete instalovat Linux?"
+msgstr "Máte více než jeden pevný disk. Který chcete k instalaci použít?"
 
 #: fs/partitioning_wizard.pm:251 fsedit.pm:634
 #, c-format
@@ -2904,24 +2905,24 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "Oddíl s přípojným bodem %s už existuje\n"
 
 #: fsedit.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a separate /boot partition"
 msgstr ""
-"Zvolili jste softwarový RAID oddíl jako kořenový oddíl (/).\n"
-"S tím se není schopný vypořádat žádný zaváděcí program bez použití oddílu\n"
-"/boot. Ujistěte se prosím, že jste tento oddíl přidali"
+"Jako kořenový oddíl (/) jste zvolili RAIDový oddíl.\n"
+"Žádný zavaděč neumí zavést systém, pakliže nemáte separátní oddíl\n"
+"/boot. Prosím ujistěte se, že máte oddělený oddíl /boot."
 
 #: fsedit.pm:440
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Metadata version unsupported for a boot partition. Please be sure to add a "
 "separate /boot partition."
 msgstr ""
-"Verze metadat není podporována jako zaváděcí oddíl. Ujistěte se prosím, že "
-"jste přidali zaváděcí oddíl /boot."
+"Tato verze metadat není pro kompatibilní se stávajícím zaváděcím oddílem."
+"Prosím ujistěte se, že máte oddělený oddíl /boot."
 
 #: fsedit.pm:448
 #, c-format
@@ -2938,42 +2939,41 @@ msgid "Metadata version unsupported for a boot partition."
 msgstr "Verze metadat není podporovaná jako zaváděcí oddíl."
 
 #: fsedit.pm:459
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a separate /boot partition"
 msgstr ""
-"Zvolili jste šifrovaný oddíl jako kořenový oddíl (/).\n"
-"S tím se není schopný vypořádat žádný zaváděcí program bez použití oddílu\n"
-"/boot. Ujistěte se prosím, že jste tento oddíl přidali"
+"Jako kořenový oddíl (/) jste zvolili šifrovaný oddíl.\n"
+"Žádný zavaděč neumí zavést systém, pakliže nemáte separátní oddíl\n"
+"/boot. Prosím ujistěte se, že máte oddělený oddíl /boot."
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
-msgstr "Nelze použít kryptovaný souborový systém na připojený bod %s"
+msgstr "Pro mount point (adresář připojení) %s nemůžete použít šifrovaný oddíl"
 
 #: fsedit.pm:469
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You cannot use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
-"Pro přípojný bod %s nemůžete použít Logický svazek LVM, jelikož spadá do "
-"více fyzických svazků"
+"Pro mount point (adresář připojení) %s nemůžete použít oddíl na LVM, jelikož "
+"tento zahrnuje fyzických částí (PV)"
 
 #: fsedit.pm:471
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
 "volumes.\n"
 "You should create a separate /boot partition first"
 msgstr ""
-"Vybrali jste Logický svazek LVM jako kořenový adresář (/).\n"
-"Zavaděč s takovým svazkem neumí pracovat, pokud zasahuje do více fyzických "
-"svazků.\n"
-"Měli byste vytvořit nejprve oddíl /boot"
+"Jako kořenový oddíl (/) jste zvolili LV oddíl s více fyzickými \n"
+"částmi (PV). Žádný zavaděč neumí zavést systém, pakliže nemáte \n"
+"separátní oddíl /boot. Prosím ujistěte se, že máte oddělený oddíl /boot."
 
 #: fsedit.pm:475 fsedit.pm:477
 #, c-format
@@ -3297,7 +3297,7 @@ msgstr ""
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:369
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -3306,8 +3306,8 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Vaše karta nyní používá ovladač %s\"%s\" (výchozí ovladač pro vaši kartu je "
-"\"%s\")"
+"Vaše karta používá ovladač %s\"%s\" (výchozí ovladač pro vaši kartu je \"%s"
+"\")"
 
 #: harddrake/sound.pm:371
 #, c-format
@@ -3464,11 +3464,11 @@ msgstr "Výběr libovolného ovladače"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:482
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -5400,19 +5400,19 @@ msgid "Installing driver for USB controller"
 msgstr "Instaluji ovladač pro řadič USB"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller \"%s\""
-msgstr "Instaluji ovladač pro řadič Firewire %s"
+msgstr "Instaluji ovladač pro řadič Firewire \"%s\""
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard disk drive controller \"%s\""
-msgstr "Instaluji ovladač pro řadič pevného disku %s"
+msgstr "Instaluji ovladač pro řadič pevného disku \"%s\""
 
 #: modules/interactive.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller \"%s\""
-msgstr "Instaluji ovladač pro síťovou kartu (Ethernet) %s"
+msgstr "Instaluji ovladač pro síťovou kartu (Ethernet) \"%s\""
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -6897,7 +6897,7 @@ msgstr "Internet"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "Sítě"
 
 #: services.pm:161
 #, c-format
@@ -7049,7 +7049,7 @@ msgstr ""
 "výchozí režim: nabídne nastavení vlastností pro automatické přihlášení"
 
 #: standalone.pm:61
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
 "\n"
@@ -7058,12 +7058,12 @@ msgid ""
 "  --report          - program should be one of %s tools\n"
 "  --incident        - program should be one of %s tools"
 msgstr ""
-"[VOLBY] [NAZEV_PROGRAMU]\n"
-"\n"
-"[VOLBY]:\n"
-"  --help            - vypíše tuto nápovědu.\n"
-"  --report          - program může být libovolný Mandriva Linux nástroj\n"
-"  --incident        - program může být libovolný Mandriva Linux nástroj"
+"[VOLBY] [JMÉNO_PROGRAMU]\n"
+" \n"
+"VOLBY: \n"
+"   -- help - vypíše tuto nápovědu. \n"
+"   -- report - program by měl být jedním z nástrojů %s\n"
+"   -- incident - program by měl být jedním z nástrojů pro %s"
 
 #: standalone.pm:67
 #, c-format
@@ -7115,7 +7115,7 @@ msgstr ""
 "                 : a gs pro ghostscript."
 
 #: standalone.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS]...\n"
 "%s Terminal Server Configurator\n"
@@ -7132,19 +7132,19 @@ msgid ""
 "IP, nbi image name)"
 msgstr ""
 "[VOLBY]\n"
-"Nastavení pro Mandriva Linux Terminal Server (MTS)\n"
-"--enable         : povolí MTS\n"
-"--disable        : zakáže MTS\n"
-"--start          : spustí MTS\n"
-"--stop           : ukončí MTS\n"
-"--adduser        : přidá existujícího uživatele do MTS (vyžaduje jméno "
-"uživatele)\n"
-"--deluser        : odebere existujícího uživatele z MTS (vyžaduje jméno "
-"uživatele)\n"
-"--addclient      : přidá klienta do MTS (vyžaduje MAC adresu, IP, název nbi "
-"obrazu)\n"
-"--delclient      : odebere klienta z MTS (vyžaduje MAC address, IP, název "
-"nbi obrazu)"
+"%s Nastavení Terminálového serveru \n"
+"--enable                  : aktivovat MTS\n"
+"--disable                 : deaktivovat MTS\n"
+"--start                   : spustit MTS\n"
+"--stop                    : zastavit MTS\n"
+"--adduser                 : přidá do MTS nového uživatele (vyžaduje "
+"uživatelské jméno)\n"
+"--deluser                 : odebere z MTS uživatele (vyžaduje uživatelské "
+"jméno)\n"
+"addclient                 : přidá klienta do MTS (vyžaduje MACovou adresu, "
+"IP, jméno obrazu nbi)\n"
+"--delclient               : odebere klienta z MTS (vyžaduje MACovou adresu, "
+"IP, jméno obrazu nbi)"
 
 #: standalone.pm:100
 #, c-format
@@ -7180,7 +7180,7 @@ msgstr ""
 "--quiet : tichý režim. Používá se při (při)odpojování."
 
 #: standalone.pm:112
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTION]...\n"
 "  --no-confirmation      do not ask first confirmation question in %s Update "
@@ -7190,12 +7190,13 @@ msgid ""
 "description window\n"
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
-"[VOLBY]...\n"
-"  -no-confirmation      nepotvrzuje první otázku v režimu Mandriva Update\n"
-"  --no-verify-rpm       neprovádí ověření podpisu u balíčků\n"
-"  --changelog-first      v okně s popisem nejdříve zobrazí changelog před "
+"[VOLBA]... \n"
+"    -- no-confirmation            program se v režimu aktualizací neptá na "
+"%s\n"
+"    --no-verify-rpm               nekontrolovat podpisy balíčků\n"
+"    --changelog-first             v okně s popisem zobrazit seznam změn před "
 "seznamem souborů\n"
-"  --merge-all-rpmnew    navrhne spojit všechny nalezené soubory .rpmnew/."
+"    --merge-all-rpmnew            navrhne sloučení všech souborů .rpmnew/."
 "rpmsave"
 
 #: standalone.pm:117
@@ -7309,11 +7310,295 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Instalace selhala"
 
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Licenční smlouva"
+
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Omezení odpovědnosti"
+
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. Licence GPL a podobné"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Práva duševního vlastnictví"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Rozhodné právo"
+
+#~ msgid ""
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
+#~ msgstr ""
+#~ "Veškerá práva duševního vlastnictví, zejména práva autorská, náleží "
+#~ "autorům konkrétních součástí Software a jsou chráněna zejm. Autorským "
+#~ "zákonem v platném znění. Sdružení Moondrake jakož i jednotliví autoři si "
+#~ "vyhrazují právo kdykoliv pozměnit či upravit Software či jeho součásti "
+#~ "bez omezení. \n"
+#~ "\"Moondrake\" a její loga jsou ochrannými známkami sdružení %s."
+
+#, fuzzy
+#~ msgid "An NTP client/server"
+#~ msgstr "NTP Server"
+
+#~ msgid ""
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
+#~ msgstr ""
+#~ "Gratulujeme, instalace byla dokončena.\n"
+#~ "Vyjměte prosím instalační médium a restartujte systém stisknutímEnter."
+
+#~ msgid ""
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Pro informace o opravách a vylepšeních dostupných pro toto \n"
+#~ "vydání Moondrake si přečtěte stránky Errata zde:\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "If any portion of this agreement is held void, illegal or inapplicable by "
+#~ "a court judgment, this \n"
+#~ "portion is excluded from this contract. You remain bound by the other "
+#~ "applicable sections of the \n"
+#~ "agreement.\n"
+#~ "The terms and conditions of this License are governed by the Laws of "
+#~ "France.\n"
+#~ "All disputes on the terms of this license will preferably be settled out "
+#~ "of court. As a last \n"
+#~ "resort, the dispute will be referred to the appropriate Courts of Law of "
+#~ "Paris - France.\n"
+#~ "For any question on this document, please contact Moondrake."
+#~ msgstr ""
+#~ "Pokud se jakákoliv část této smlouvy stane neplatnou či neúčinnou z "
+#~ "rozhodnutí soudu, pak zbytek smlouvy zůstává v platnosti. Ve zbytku "
+#~ "zůstáváte vázáni touto smlouvou. \n"
+#~ "Strany sjednávají, že se tato smlouva řídí právem Francouzské "
+#~ "republiky. \n"
+#~ "Veškeré spory vzniklé z této smlouvy nebo v souvislosti s ní budou řešeny "
+#~ "dohodou stran. Nepovede-li dohoda k řešení, dohodly se strany na "
+#~ "prorogaci k soudům v Paříži, Francie.\n"
+#~ "\n"
+#~ "Máte-li k tomuto dokumentu jakékoliv dotazy, kontaktujte sdružení "
+#~ "Moondrake."
+
+#~ msgid ""
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
+#~ msgstr ""
+#~ "Bližší informace o nastavení Vašeho systému naleznete v kapitole\n"
+#~ "Po instalaci ve vaší Oficiální příručce uživatele Moondrake."
+
+#~ msgid "Introduction"
+#~ msgstr "Úvodem"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "Zálohujte si nejdřív svá data, prosím"
+
+#~ msgid ""
+#~ "Please read this document carefully. This document is a license agreement "
+#~ "between you and  \n"
+#~ "Moondrake which applies to the Software Products.\n"
+#~ "By installing, duplicating or using any of the Software Products in any "
+#~ "manner, you explicitly \n"
+#~ "accept and fully agree to conform to the terms and conditions of this "
+#~ "License. \n"
+#~ "If you disagree with any portion of the License, you are not allowed to "
+#~ "install, duplicate or use \n"
+#~ "the Software Products. \n"
+#~ "Any attempt to install, duplicate or use the Software Products in a "
+#~ "manner which does not comply \n"
+#~ "with the terms and conditions of this License is void and will terminate "
+#~ "your rights under this \n"
+#~ "License. Upon termination of the License,  you must immediately destroy "
+#~ "all copies of the \n"
+#~ "Software Products."
+#~ msgstr ""
+#~ "Prosím přečtěte si pozorně tento dokument. Tento dokument tvoří licenční "
+#~ "smlouvu mezi Vámi a sdružením Moondrake a týká se Softwaru.\n"
+#~ "Instalací, vytvářením kopií a/nebo jakýmkoliv užíváním Software "
+#~ "vyjadřujete svůj výslovný souhlas s touto smlouvou a jejími jednotlivými "
+#~ "ustanoveními a zavazujete se závazky a povinnosti touto smlouvou uložené "
+#~ "plnit.\n"
+#~ "Pokud nesouhlasíte byť i s částí této smlouvy, smlouva tím není uzavřena "
+#~ "a Vy nemáte žádná práva k Softwaru, zejména užívat jej, šířit jej nebo "
+#~ "jej instalovat.\n"
+#~ "Jakýkoliv pokus instalovat, šířit nebo užívat Software způsobem, který je "
+#~ "v rozporu s touto smlouvou vede k automatickému odstoupení od smlouvy ex "
+#~ "tunc ze strany sdružení Moondrake. V případě, že dojde k odstoupení od "
+#~ "smlouvy, musíte okamžitě přestat užívat Software a zničit všechny jeho "
+#~ "kopie."
+
+#~ msgid ""
+#~ "The Software Products and attached documentation are provided \"as is\", "
+#~ "with no warranty, to the \n"
+#~ "extent permitted by law.\n"
+#~ "Neither Moondrake nor its licensors or suppliers will, in any "
+#~ "circumstances and to the extent \n"
+#~ "permitted by law, be liable for any special, incidental, direct or "
+#~ "indirect damages whatsoever \n"
+#~ "(including without limitation damages for loss of business, interruption "
+#~ "of business, financial \n"
+#~ "loss, legal fees and penalties resulting from a court judgment, or any "
+#~ "other consequential loss) \n"
+#~ "arising out of  the use or inability to use the Software Products, even "
+#~ "if Moondrake or its \n"
+#~ "licensors or suppliers have been advised of the possibility or occurrence "
+#~ "of such damages.\n"
+#~ "\n"
+#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN "
+#~ "SOME COUNTRIES\n"
+#~ "\n"
+#~ "To the extent permitted by law, neither Moondrake nor its licensors, "
+#~ "suppliers or\n"
+#~ "distributors will, in any circumstances, be liable for any special, "
+#~ "incidental, direct or indirect \n"
+#~ "damages whatsoever (including without limitation damages for loss of "
+#~ "business, interruption of \n"
+#~ "business, financial loss, legal fees and penalties resulting from a court "
+#~ "judgment, or any \n"
+#~ "other consequential loss) arising out of the possession and use of "
+#~ "software components or \n"
+#~ "arising out of  downloading software components from one of Moondrake "
+#~ "sites which are \n"
+#~ "prohibited or restricted in some countries by local laws.\n"
+#~ "This limited liability applies to, but is not restricted to, the strong "
+#~ "cryptography components \n"
+#~ "included in the Software Products.\n"
+#~ "However, because some jurisdictions do not allow the exclusion or "
+#~ "limitation of liability for \n"
+#~ "consequential or incidental damages, the above limitation may not apply "
+#~ "to you."
+#~ msgstr ""
+#~ "Software je poskytován tak jak stojí a leží, bez jakékoliv záruky. Ani "
+#~ "sdružení Moondrake, ani žádný další subjekt, dodavatel či držitel "
+#~ "autorských práv neodpovídá za přímou či nepřímou škodu, která může vlivem "
+#~ "užívání či držby Software vzniknout. Strany sjednávají, že maximální výše "
+#~ "předvídatelné škody, zahrnující též případné náklady řízení a veškeré "
+#~ "další náklady spojené se soudním řízením, která může užíváním či držbou "
+#~ "Software vzniknout je 1,-- Kč. Toto omezení se vztahuje též na "
+#~ "kryptografické knihovny obsažené v Software."
+
+#, fuzzy
+#~ msgid ""
+#~ "The Software Products consist of components created by different persons "
+#~ "or entities.\n"
+#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
+#~ "the components which \n"
+#~ "they cover. Please read carefully the terms and conditions of the license "
+#~ "agreement for each component \n"
+#~ "before using any component. Any question on a component license should be "
+#~ "addressed to the component \n"
+#~ "licensor or supplier and not to Moondrake.\n"
+#~ "The programs developed by Moondrake are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by Moondrake is governed by \"%s\" License."
+#~ msgstr ""
+#~ "Tento Software se skládá z mnoha komponentů vytvořených různými osobami "
+#~ "či entitami.\n"
+#~ "Většina licencí Vám umožňuje jednotlivé součásti užívat, šířit, měnit a "
+#~ "takto změněné části šířit dále. Prosíme, přečtěte si řádně licence k "
+#~ "jednotlivým částem Software, abyste se seznámili se svými právy a to "
+#~ "ještě před tím, než je začnete užívat. Máte-li k těmto licencím jakékoliv "
+#~ "dotazy, ptejte se přímo autorů či poskytovatelů konkrétní součásti "
+#~ "Software a ne sdružení Moondrake.\n"
+#~ "Veškeré programové vybavení vytvořené sdružením Moondrake je vydáno pod "
+#~ "licencí GPL. Dokumentace sepsaná sdružením Moondrake je vydávána pod "
+#~ "specifickou licencí. Prosím nahlédněte do dokumentace pro další detaily."
+
+#~ msgid ""
+#~ "The operating system and the different components available in the "
+#~ "Moondrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software "
+#~ "Products include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation "
+#~ "related to the operating \n"
+#~ "system and the different components of the Moondrake distribution, and "
+#~ "any applications \n"
+#~ "distributed with these products provided by Moondrake's licensors or "
+#~ "suppliers."
+#~ msgstr ""
+#~ "Operační systém a jeho jednotlivé části dostupné v distribuci Moondrake "
+#~ "jsou pro potřeby této smlouvy označeny jako \"Software\". Software "
+#~ "zahrnuje též soustavu programů, pravidel, řešení a dokumentace, která "
+#~ "tvoří příslušenství operačního systému a jednotlivé komponenty distribuce "
+#~ "Moondrake, jakož i veškeré aplikace šířené spolu s touto distribucí "
+#~ "poskytnuté třetími subjekty a držiteli autorských práv."
+
+#~ msgid ""
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
+#~ msgstr ""
+#~ "Varování: Svobodný Software nemusí být vždy nezávislý na patentech\n"
+#~ "a některý Svobodný Software může být ve vaší zemi chráněn patentem.\n"
+#~ "Například zahrnuté dekodéry pro MP3 mohou vyžadovat licenci pro další\n"
+#~ "použití (více detailů najdete na http://www.mp3licensing.com). Pokud si\n"
+#~ "nejste jisti, zda se na vás nevztahuje některý patent, prostudujte si\n"
+#~ "vaše místně příslušné právní normy."
+
+#~ msgid "Automatic routing from ALSA to PulseAudio"
+#~ msgstr "Automatické směrování z ALSA na PulseAudio"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Zvolte velikosti"
+
 #~ msgid "Clean /tmp at each boot"
 #~ msgstr "Vyčistit adresář /tmp při každém startu"
 
-#~ msgid "command %s missing"
-#~ msgstr "chybí příkaz %s"
+#~ msgid "Enable 5.1 sound with Pulse Audio"
+#~ msgstr "Povolit zvuk 5.1 s PulseAudio"
+
+#~ msgid "Enable user switching for audio applications"
+#~ msgstr "Povolit přepínání uživatelů u zvukových aplikací"
+
+#~ msgid "File sharing"
+#~ msgstr "Sdílení souborů"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "Spustit paketový filtr pro jádra řady 2.2, který chrání počítač\n"
+#~ "proti útokům ze sítě."
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr ""
+#~ "Volba ''Omezení nastavení z příkazové řádky'' je bezpředmětné bez hesla"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Omezení nastavení z příkazové řádky"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Velikost kořenového oddílu v MB:"
+
+#~ msgid "Set CPU frequency settings"
+#~ msgstr "Nastavit volby frekvence CPU"
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Velikost odkládacího oddílu v MB: "
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "Změnu velikost FAT není možné provést, \n"
+#~ "vyskytla se následující chyba: %s"
 
 #~ msgid ""
 #~ "The classic bug sound tester is to run the following commands:\n"
@@ -7362,38 +7647,11 @@ msgstr "Instalace selhala"
 #~ "- \"/sbin/fuser -v /dev/dsp\" vám řekne, který program používá zvukovou "
 #~ "kartu.\n"
 
-#~ msgid "Set CPU frequency settings"
-#~ msgstr "Nastavit volby frekvence CPU"
-
 #~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
+#~ "There is no FAT partition to use as loopback (or not enough space left)"
 #~ msgstr ""
-#~ "Spustit paketový filtr pro jádra řady 2.2, který chrání počítač\n"
-#~ "proti útokům ze sítě."
-
-#~ msgid "Enable 5.1 sound with Pulse Audio"
-#~ msgstr "Povolit zvuk 5.1 s PulseAudio"
-
-#~ msgid "Enable user switching for audio applications"
-#~ msgstr "Povolit přepínání uživatelů u zvukových aplikací"
-
-#~ msgid "File sharing"
-#~ msgstr "Sdílení souborů"
-
-#~ msgid "Restrict command line options"
-#~ msgstr "Omezení nastavení z příkazové řádky"
-
-#~ msgid "restrict"
-#~ msgstr "omezení"
-
-#~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
-#~ msgstr ""
-#~ "Volba ''Omezení nastavení z příkazové řádky'' je bezpředmětné bez hesla"
-
-#~ msgid "Use an encrypted filesystem"
-#~ msgstr "Použít šifrovaný souborový systém"
+#~ "Nejsou zde žádné FAT oddíly, které by bylo možné použít pro loopback "
+#~ "(nebo není dostatek místa)"
 
 #~ msgid ""
 #~ "To ensure data integrity after resizing the partition(s), \n"
@@ -7402,33 +7660,17 @@ msgstr "Instalace selhala"
 #~ "Pro zachování integrity po provedené změně velikosti oddílu(ů) bude při\n"
 #~ "dalším spuštění systému Windows provedena kontrola souborového systému."
 
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr "Použít šifrovaný souborový systém"
+
 #~ msgid "Use the Microsoft Windows® partition for loopback"
 #~ msgstr "Použít oddíl Microsoft Windows® jako loopback"
 
 #~ msgid "Which partition do you want to use for Linux4Win?"
 #~ msgstr "Který diskový oddíl chcete použít pro Linux4Win?"
 
-#~ msgid "Choose the sizes"
-#~ msgstr "Zvolte velikosti"
+#~ msgid "command %s missing"
+#~ msgstr "chybí příkaz %s"
 
-#~ msgid "Root partition size in MB: "
-#~ msgstr "Velikost kořenového oddílu v MB:"
-
-#~ msgid "Swap partition size in MB: "
-#~ msgstr "Velikost odkládacího oddílu v MB: "
-
-#~ msgid ""
-#~ "There is no FAT partition to use as loopback (or not enough space left)"
-#~ msgstr ""
-#~ "Nejsou zde žádné FAT oddíly, které by bylo možné použít pro loopback "
-#~ "(nebo není dostatek místa)"
-
-#~ msgid ""
-#~ "The FAT resizer is unable to handle your partition, \n"
-#~ "the following error occurred: %s"
-#~ msgstr ""
-#~ "Změnu velikost FAT není možné provést, \n"
-#~ "vyskytla se následující chyba: %s"
-
-#~ msgid "Automatic routing from ALSA to PulseAudio"
-#~ msgstr "Automatické směrování z ALSA na PulseAudio"
+#~ msgid "restrict"
+#~ msgstr "omezení"

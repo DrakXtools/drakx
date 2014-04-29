@@ -272,9 +272,9 @@ msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "Ohjelma \"%s\" kaatui segfault-virheeseen:"
 
 #: drakbug:144
-#, fuzzy, c-format
+#, c-format
 msgid "Used theme: %s"
-msgstr "Käyttäjä: %s"
+msgstr "Teema: %s"
 
 #: drakbug:146
 #, c-format
@@ -1594,7 +1594,7 @@ msgid "Keyboard"
 msgstr "Näppäimistö"
 
 #: finish-install:58
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Valitse näppäimistöasettelu."
 
@@ -3082,13 +3082,13 @@ msgstr ""
 "lukeaksesi sitä."
 
 #: scannerdrake:407 scannerdrake:416
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"Tämän jälkeen asiakirjoja voidaan skannata käyttämällä esim. ohjelmia \"XSane"
-"\" tai \"Kooka\"."
+"Tämän jälkeen asiakirjoja voidaan skannata käyttämällä ohjelmaa XSane tai %s "
+"ohjelmavalikosta."
 
 #: scannerdrake:411
 #, c-format
@@ -3119,15 +3119,15 @@ msgid "Congratulations!"
 msgstr "Onnittelut!"
 
 #: scannerdrake:419
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
 "Kuvanlukija %s on asetettu.\n"
-"Asiakirjoja voidaan nyt skannata käyttämällä esim. ohjelmia \"XSane\" tai "
-"\"Kooka\"."
+"Asiakirjoja voidaan nyt skannata käyttämällä ohjelmaa XSane tai %s "
+"ohjelmavalikosta."
 
 #: scannerdrake:444
 #, c-format
@@ -3332,7 +3332,7 @@ msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Kuvanlukijan jakamiseen tarvittavia paketteja ei voitu asentaa."
 
 #: service_harddrake:173
-#, fuzzy, c-format
+#, c-format
 msgid "The graphics card '%s' is no longer supported by driver '%s'"
 msgstr "Näytönohjain %s ei ole enää tuettu ajurin %s kanssa."
 
@@ -3342,7 +3342,7 @@ msgid "New release, reconfiguring X for %s"
 msgstr "Uusi julkaisu, asetetaan X uudelleen %s:lle"
 
 #: service_harddrake:274
-#, fuzzy, c-format
+#, c-format
 msgid "The proprietary kernel driver was not found for X.org driver '%s'"
 msgstr "X.org-ajurin %s suljettua versiota ei löytynyt."
 
@@ -3447,21 +3447,244 @@ msgstr "Maa-asetukset"
 msgid "Language & country configuration"
 msgstr "Kieli- ja maa-asetukset"
 
+#~ msgid "  --help                - display this help     \n"
+#~ msgstr "  --help                - näytä tämä ohje     \n"
+
+#~ msgid ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Usage: \n"
+#~ msgstr ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "Tämä on vapaa ohjelmisto ja voit levittää sitä GNU GPL -lisenssin "
+#~ "mukaisesti.\n"
+#~ "\n"
+#~ "Käyttö: \n"
+
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "%s:n virheenraportointityökalu"
+
+#~ msgid "%s Control Center"
+#~ msgstr "%s:n Ohjauskeskus"
+
+#~ msgid "%s Help Center"
+#~ msgstr "%s:n ohjeet"
+
+#~ msgid "%s Online"
+#~ msgstr "%s Online"
+
+#~ msgid "%s Tools Logs"
+#~ msgstr "%s:n työkalujen lokit"
+
+#~ msgid "%s Update"
+#~ msgstr "%s:n päivitys"
+
+#, fuzzy
+#~ msgid "<control>H"
+#~ msgstr "<control>L"
+
+#~ msgid "Autodetect _modems"
+#~ msgstr "_Modeemien automaattitunnistus"
+
+#~ msgid "Autodetect parallel _zip drives"
+#~ msgstr "Rinnakkaisporttiin liitettyjen _ZIP-asemien automaattitunnistus"
+
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Määritä %s:n asetustyökalujen käyttämiseen tarvittavat oikeudet"
+
+#~ msgid "Copyright (C) %s by %s"
+#~ msgstr "Copyright (C) %s, %s"
+
+#~ msgid ""
+#~ "Here you can see files to use in order to fix permissions, owners, and "
+#~ "groups via msec.\n"
+#~ "You can also edit your own rules which will overwrite the default rules."
+#~ msgstr ""
+#~ "Täällä voit nähdä käytettävät tiedostot oikeuksien, omistajien ja ryhmien "
+#~ "muuttamiseksi msec:n avulla.\n"
+#~ "Voit myös lisätä oletussääntöjä ohittavia omia sääntöjä."
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in"
+#~ msgstr ""
+#~ "Yhtään äänikortti ei löytynyt. Varmista, että Linuxissa tuettu äänikortti "
+#~ "on oikein kytketty."
+
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in."
+#~ msgstr ""
+#~ "Yhtään TV-korttia ei löytynyt. Varmista, että Linuxissa tuettu Video/TV-"
+#~ "kortti on oikein kytketty."
+
+#, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Automaattisten vaiheiden asetukset"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Automaattisten vaiheiden asetukset"
+
+#, fuzzy
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "Käynnistymisasetukset"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Postihälytyksen asetukset"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Kieli- ja maa-asetukset"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Graafisen palvelimen asetukset"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Kieli- ja maa-asetukset"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Graafisen palvelimen asetukset"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Graafisen palvelimen asetukset"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Graafisen palvelimen asetukset"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "UPS-asetukset"
+
+#~ msgid "Select %s Tool:"
+#~ msgstr "Valitse %s:n työkalu"
+
+#~ msgid "_About..."
+#~ msgstr "_Tietoja..."
+
+#~ msgid "_Fields description"
+#~ msgstr "_Kenttien kuvaus"
+
+#~ msgid "_File"
+#~ msgstr "_Tiedosto"
+
+#~ msgid "_Help"
+#~ msgstr "O_hje"
+
+#~ msgid "_Options"
+#~ msgstr "_Asetukset"
+
+#~ msgid "_Quit"
+#~ msgstr "_Lopeta"
+
+#~ msgid "_Report Bug"
+#~ msgstr "_Raportoi virheestä"
+
+#~ msgid ""
+#~ "\n"
+#~ "Welcome.\n"
+#~ "\n"
+#~ "The parameters of the auto-install are available in the sections on the "
+#~ "left"
+#~ msgstr ""
+#~ "\n"
+#~ "Tervetuloa.\n"
+#~ "\n"
+#~ "Automaattisen asennuksen parametrit löytyvät vasemmalla olevista lohkoista"
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(oletusarvo: %s)"
+
 #~ msgid "/Autodetect _printers"
 #~ msgstr "/_Tulostimien automaattitunnistus"
 
-#~ msgid "Its GDB trace is:"
-#~ msgstr "Ohjelman GDB-jäljitys:"
+#~ msgid "Add an item"
+#~ msgstr "Lisää alkio"
 
-#~ msgid "OpenOffice.org"
-#~ msgstr "OpenOffice.org"
+#~ msgid "Auto Install"
+#~ msgstr "Automaattinen asennus"
 
-#~ msgid ""
-#~ "The proprietary driver for your graphic card cannot be found, the system "
-#~ "is now using the free software driver (%s)."
-#~ msgstr ""
-#~ "Järjestelmästä ei löytynyt suljettuja ajureita näytönohjaimelle, joten "
-#~ "käytetään vapaita ajureita (%s)."
+#~ msgid "Auto Install Configurator"
+#~ msgstr "Automaattisen asennuksen muokkaaja"
+
+#~ msgid "Autodetect _jaz drives"
+#~ msgstr "_Jaz-asemien automaattitunnistus"
+
+#~ msgid "Autodetect _printers"
+#~ msgstr "_Tulostimien automaattitunnistus"
+
+#~ msgid "Automatic Steps Configuration"
+#~ msgstr "Automaattisten vaiheiden asetukset"
+
+#~ msgid "Background color"
+#~ msgstr "Taustaväri"
+
+#~ msgid "Basic options"
+#~ msgstr "Perusoptiot"
+
+#~ msgid "Bugs"
+#~ msgstr "Virheet"
+
+#~ msgid "Choose picture"
+#~ msgstr "Kuva"
+
+#~ msgid "Choose progress bar background"
+#~ msgstr "Edistymispalkin taustaväri"
+
+#~ msgid "Choose progress bar color 1"
+#~ msgstr "Edistymispalkin väri 1"
+
+#~ msgid "Choose progress bar color 2"
+#~ msgstr "Edistymispalkin väri 2"
+
+#~ msgid "Choose text color"
+#~ msgstr "Tekstin väri"
+
+#~ msgid "Choose text zone color"
+#~ msgstr "Tekstialueen väri"
+
+#~ msgid "Color selection"
+#~ msgstr "Värin valinta"
+
+#~ msgid "Coma bug"
+#~ msgstr "Coma-virhe"
+
+#, fuzzy
+#~ msgid "Copyright (C) %s by Moondrake"
+#~ msgstr "Copyright (C) %s, Mandriva"
+
+#~ msgid "Copyright (C) 2001-2008 by %s"
+#~ msgstr "Copyright (C) 2001-2008 by %s"
+
+#~ msgid "Copyright (C) 2001-2008 by Mandriva"
+#~ msgstr "Copyright (C) 2001-2008 by Mandriva"
+
+#~ msgid "Create new theme"
+#~ msgstr "Luo uusi teema"
+
+#~ msgid "Creating auto install floppy"
+#~ msgstr "Luodaan automaattisen asennuksen levykettä"
+
+#~ msgid "Creating auto install floppy (drivers disk)"
+#~ msgstr "Luodaan automaattisen asennuksen levykettä (ajurit)"
+
+#~ msgid "Display logo on Console"
+#~ msgstr "Näytä logo konsolissa"
 
 #~ msgid ""
 #~ "Display theme\n"
@@ -3470,133 +3693,9 @@ msgstr "Kieli- ja maa-asetukset"
 #~ "Näytön teema\n"
 #~ "konsolissa"
 
-#~ msgid "Create new theme"
-#~ msgstr "Luo uusi teema"
-
-#~ msgid "X coordinate of text box"
-#~ msgstr "Tekstiruudun sijainti (X-koordinaatti)"
-
-#~ msgid "Y coordinate of text box"
-#~ msgstr "Tekstiruudun sijainti (Y-koordinaatti)"
-
-#~ msgid "Text box width"
-#~ msgstr "Tekstiruudun leveys"
-
-#~ msgid "Text box height"
-#~ msgstr "Tekstiruudun korkeus"
-
-#~ msgid ""
-#~ "The progress bar X coordinate\n"
-#~ "of its upper left corner"
-#~ msgstr ""
-#~ "Edistymispalkin vasemman\n"
-#~ "yläkulman X-koordinaatti"
-
-#~ msgid ""
-#~ "The progress bar Y coordinate\n"
-#~ "of its upper left corner"
-#~ msgstr ""
-#~ "Edistymispalkin vasemman\n"
-#~ "yläkulman Y-koordinaatti"
-
-#~ msgid "The width of the progress bar"
-#~ msgstr "Edistymispalkin leveys"
-
-#~ msgid "The height of the progress bar"
-#~ msgstr "Edistymispalkin korkeus"
-
-#~ msgid "X coordinate of the text"
-#~ msgstr "Tekstin sijainti (X-koordinaatti)"
-
-#~ msgid "Y coordinate of the text"
-#~ msgstr "Tekstin sijainti (Y-koordinaatti)"
-
-#~ msgid "Text box transparency"
-#~ msgstr "Tekstiruudun läpinäkyvyys"
-
-#~ msgid "Progress box transparency"
-#~ msgstr "Edistymispalkin läpinäkyvyys"
-
-#~ msgid "Text size"
-#~ msgstr "Tekstin koko"
-
-#~ msgid "Progress Bar"
-#~ msgstr "Edistymispalkki"
-
-#~ msgid "Choose progress bar color 1"
-#~ msgstr "Edistymispalkin väri 1"
-
-#~ msgid "Choose progress bar color 2"
-#~ msgstr "Edistymispalkin väri 2"
-
-#~ msgid "Choose progress bar background"
-#~ msgstr "Edistymispalkin taustaväri"
-
-#~ msgid "Gradient type"
-#~ msgstr "Gradientin tyyppi"
-
-#~ msgid "Text"
-#~ msgstr "Teksti"
-
-#~ msgid "Choose text color"
-#~ msgstr "Tekstin väri"
-
-#~ msgid "Choose picture"
-#~ msgstr "Kuva"
-
-#~ msgid "Silent bootsplash"
-#~ msgstr "Hiljainen"
-
-#~ msgid "Choose text zone color"
-#~ msgstr "Tekstialueen väri"
-
-#~ msgid "Text color"
-#~ msgstr "Tekstin väri"
-
-#~ msgid "Background color"
-#~ msgstr "Taustaväri"
-
-#~ msgid "Verbose bootsplash"
-#~ msgstr "Monisanainen"
-
-#~ msgid "Theme name"
-#~ msgstr "Teeman nimi"
-
-#~ msgid "Final resolution"
-#~ msgstr "Lopullinen tarkkuus"
-
-#~ msgid "Display logo on Console"
-#~ msgstr "Näytä logo konsolissa"
-
-#~ msgid "Save theme"
-#~ msgstr "Tallenna teema"
-
-#~ msgid "Please enter a theme name"
-#~ msgstr "Anna teemalle nimi"
-
-#~ msgid "Please select a splash image"
-#~ msgstr "Valitse käytettävä kuva"
-
-#~ msgid "saving Bootsplash theme..."
-#~ msgstr "tallennetaan Bootsplash-teema..."
-
-#~ msgid "Unable to load image file %s"
-#~ msgstr "Kuvaa %s ei voida avata"
-
-#~ msgid "choose image"
-#~ msgstr "valitse kuva"
-
-#~ msgid "Color selection"
-#~ msgstr "Värin valinta"
-
-#~ msgid "Coma bug"
-#~ msgstr "Coma-virhe"
-
-#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-#~ msgstr "Onko prosessorissa \"Cyrix 6x86 Coma\"-virhe."
-
-#~ msgid "Fdiv bug"
-#~ msgstr "Fdiv-virhe"
+#, fuzzy
+#~ msgid "Do you want to remove these packages?"
+#~ msgstr "Haluatko suorittaa tarvittavan asetustyökalun?"
 
 #~ msgid ""
 #~ "Early Intel Pentium chips manufactured have a bug in their floating point "
@@ -3606,47 +3705,47 @@ msgstr "Kieli- ja maa-asetukset"
 #~ "Varhaisimmista Intel Pentium -prosessorien liukulukuyksiköistä löytyy "
 #~ "virhe, joka heikentää tarkkuutta, kun suoritetaan liukuluvun jakoa (FDIV)."
 
-#~ msgid "Is FPU present"
-#~ msgstr "Löytyykö FPU"
-
-#~ msgid "yes means the processor has an arithmetic coprocessor"
-#~ msgstr "Kyllä tarkoittaa, että prosessorissa on liukulukuyksikkö."
-
-#~ msgid "Whether the FPU has an irq vector"
-#~ msgstr "Löytyykö FPU:sta irq-vektori"
-
-#~ msgid ""
-#~ "yes means the arithmetic coprocessor has an exception vector attached"
-#~ msgstr ""
-#~ "Kyllä tarkoittaa, että matematiikkaprosessorista löytyy poikkeusvektori"
+#~ msgid "Error!"
+#~ msgstr "Virhe!"
 
 #~ msgid "F00f bug"
 #~ msgstr "F00F-virhe"
 
-#~ msgid ""
-#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
-#~ msgstr ""
-#~ "Ensimmäiset Pentium-prosessorit olivat virheellisiä ja jumiutuivat "
-#~ "purettaessa F00F tavukoodia."
+#~ msgid "FPU"
+#~ msgstr "Liukulukuyksikkö"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Fdiv-virhe"
+
+#~ msgid "File/-"
+#~ msgstr "Tiedosto/-"
+
+#~ msgid "File/Save _As"
+#~ msgstr "Tiedosto/Tallenna _nimellä"
+
+#~ msgid "File/_New"
+#~ msgstr "Tiedosto/_Uusi"
+
+#~ msgid "File/_Open"
+#~ msgstr "Tiedosto/_Avaa"
+
+#~ msgid "File/_Quit"
+#~ msgstr "Tiedosto/_Lopeta"
+
+#~ msgid "File/_Save"
+#~ msgstr "Tiedosto/_Tallenna"
+
+#~ msgid "Final resolution"
+#~ msgstr "Lopullinen tarkkuus"
+
+#~ msgid "Gradient type"
+#~ msgstr "Gradientin tyyppi"
 
 #~ msgid "Halt bug"
 #~ msgstr "Halt-virhe"
 
-#~ msgid ""
-#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
-#~ "mode after the \"halt\" instruction is used"
-#~ msgstr ""
-#~ "Jotkut aikaisimmista \"i486DX-100\"-prosessoreista eivät osaa palata "
-#~ "luotettavasti palata käyttötilaan \"halt\"-käskyn jälkeen."
-
-#~ msgid "Bugs"
-#~ msgstr "Virheet"
-
-#~ msgid "FPU"
-#~ msgstr "Liukulukuyksikkö"
-
-#~ msgid "Unknown/Others"
-#~ msgstr "Tuntematon/Muut"
+#~ msgid "Help/_About..."
+#~ msgstr "Ohje/_Tietoja..."
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "
@@ -3744,29 +3843,54 @@ msgstr "Kieli- ja maa-asetukset"
 #~ "edellinen, mutta järjestelmä on\n"
 #~ "täysin suljettu ja turvallisuusasetukset ovat tiukimmillaan."
 
-#~ msgid "(default value: %s)"
-#~ msgstr "(oletusarvo: %s)"
+#~ msgid "I cannot find needed image file `%s'."
+#~ msgstr "Tarvittavaa kuvatiedostoa `%s' ei löytynyt."
 
-#~ msgid "Security Level:"
-#~ msgstr "Turvallisuustaso:"
+#~ msgid "Insert a blank floppy in drive %s"
+#~ msgstr "Aseta tyhjä levyke levykeasemaan %s"
 
-#~ msgid "Security Alerts:"
-#~ msgstr "Tietoturvahälytykset:"
+#~ msgid "Insert another blank floppy in drive %s (for drivers disk)"
+#~ msgstr "Aseta toinen tyhjä levyke levykeasemaan %s (ajurit)"
 
-#~ msgid "Security Administrator:"
-#~ msgstr "Tietoturvan ylläpitäjä:"
+#~ msgid "Is FPU present"
+#~ msgstr "Löytyykö FPU"
 
-#~ msgid "Basic options"
-#~ msgstr "Perusoptiot"
+#~ msgid "Its GDB trace is:"
+#~ msgstr "Ohjelman GDB-jäljitys:"
+
+#~ msgid "Menudrake"
+#~ msgstr "Menudrake"
+
+#~ msgid "Msec"
+#~ msgstr "Msec"
 
 #~ msgid "Network Options"
 #~ msgstr "Verkko-optiot"
 
-#~ msgid "System Options"
-#~ msgstr "Järjestelmäoptiot"
+#~ msgid "OpenOffice.org"
+#~ msgstr "OpenOffice.org"
+
+#~ msgid "Options/Test"
+#~ msgstr "Asetukset/Testaa"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "Ajottaiset tarkistukset"
+
+#~ msgid ""
+#~ "Please choose for each step whether it will replay like your install, or "
+#~ "it will be manual"
+#~ msgstr ""
+#~ "Valitse jokaiselle vaiheelle toistetaanko asennus samalla tapaa kuin nyt "
+#~ "vai onko kyseinen vaihe manuaalinen"
+
+#~ msgid "Please enter a theme name"
+#~ msgstr "Anna teemalle nimi"
+
+#~ msgid "Please select a splash image"
+#~ msgstr "Valitse käytettävä kuva"
+
+#~ msgid "Please wait, adding media..."
+#~ msgstr "Odota, lisätään lähteet..."
 
 #~ msgid "Please wait, setting security level..."
 #~ msgstr "Odota hetki, asetetaan turvatasoa..."
@@ -3774,42 +3898,142 @@ msgstr "Kieli- ja maa-asetukset"
 #~ msgid "Please wait, setting security options..."
 #~ msgstr "Odota hetki, asetetaan turvaoptiot..."
 
-#, fuzzy
-#~ msgid ""
-#~ "The following localization packages do not seem to be useful for your "
-#~ "system:"
-#~ msgstr "Seuraavat paketit pitää asentaa:\n"
+#~ msgid "Progress Bar"
+#~ msgstr "Edistymispalkki"
 
-#, fuzzy
-#~ msgid "Do you want to remove these packages?"
-#~ msgstr "Haluatko suorittaa tarvittavan asetustyökalun?"
+#~ msgid "Progress box transparency"
+#~ msgstr "Edistymispalkin läpinäkyvyys"
+
+#~ msgid "Remove the last item"
+#~ msgstr "Poista viimeinen alkio"
+
+#~ msgid "Restart XFS"
+#~ msgstr "Käynnistä XFS uudelleen"
+
+#~ msgid "Save theme"
+#~ msgstr "Tallenna teema"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Tietoturvan ylläpitäjä:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Tietoturvahälytykset:"
+
+#~ msgid "Security Level:"
+#~ msgstr "Turvallisuustaso:"
+
+#~ msgid "Silent bootsplash"
+#~ msgstr "Hiljainen"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Jotkut aikaisimmista \"i486DX-100\"-prosessoreista eivät osaa palata "
+#~ "luotettavasti palata käyttötilaan \"halt\"-käskyn jälkeen."
+
+#~ msgid "System Options"
+#~ msgstr "Järjestelmäoptiot"
+
+#~ msgid "Text"
+#~ msgstr "Teksti"
+
+#~ msgid "Text box height"
+#~ msgstr "Tekstiruudun korkeus"
+
+#~ msgid "Text box transparency"
+#~ msgstr "Tekstiruudun läpinäkyvyys"
+
+#~ msgid "Text box width"
+#~ msgstr "Tekstiruudun leveys"
+
+#~ msgid "Text color"
+#~ msgstr "Tekstin väri"
+
+#~ msgid "Text size"
+#~ msgstr "Tekstin koko"
+
+#~ msgid "The change is done, but to be effective you must logout"
+#~ msgstr ""
+#~ "Muutos on tehty, mutta ottaaksesi sen käyttöön sinun pitää kirjautua ulos"
+
+#~ msgid ""
+#~ "The floppy has been successfully generated.\n"
+#~ "You may now replay your installation."
+#~ msgstr ""
+#~ "Levykkeen luominen onnistui.\n"
+#~ "Voit nyt toistaa asennuksesi."
 
 #, fuzzy
 #~ msgid ""
 #~ "The following hardware packages do not seem to be useful for your system:"
 #~ msgstr "Seuraavat paketit pitää asentaa:\n"
 
-#~ msgid "Please wait, adding media..."
-#~ msgstr "Odota, lisätään lähteet..."
+#, fuzzy
+#~ msgid ""
+#~ "The following localization packages do not seem to be useful for your "
+#~ "system:"
+#~ msgstr "Seuraavat paketit pitää asentaa:\n"
 
-#~ msgid "The change is done, but to be effective you must logout"
+#~ msgid "The height of the progress bar"
+#~ msgstr "Edistymispalkin korkeus"
+
+#~ msgid ""
+#~ "The progress bar X coordinate\n"
+#~ "of its upper left corner"
 #~ msgstr ""
-#~ "Muutos on tehty, mutta ottaaksesi sen käyttöön sinun pitää kirjautua ulos"
+#~ "Edistymispalkin vasemman\n"
+#~ "yläkulman X-koordinaatti"
 
-#~ msgid "Restart XFS"
-#~ msgstr "Käynnistä XFS uudelleen"
+#~ msgid ""
+#~ "The progress bar Y coordinate\n"
+#~ "of its upper left corner"
+#~ msgstr ""
+#~ "Edistymispalkin vasemman\n"
+#~ "yläkulman Y-koordinaatti"
 
-#~ msgid "Copyright (C) 2001-2008 by Mandriva"
-#~ msgstr "Copyright (C) 2001-2008 by Mandriva"
+#~ msgid ""
+#~ "The proprietary driver for your graphic card cannot be found, the system "
+#~ "is now using the free software driver (%s)."
+#~ msgstr ""
+#~ "Järjestelmästä ei löytynyt suljettuja ajureita näytönohjaimelle, joten "
+#~ "käytetään vapaita ajureita (%s)."
 
-#~ msgid "Error!"
-#~ msgstr "Virhe!"
+#~ msgid "The width of the progress bar"
+#~ msgstr "Edistymispalkin leveys"
 
-#~ msgid "I cannot find needed image file `%s'."
-#~ msgstr "Tarvittavaa kuvatiedostoa `%s' ei löytynyt."
+#~ msgid "Theme name"
+#~ msgstr "Teeman nimi"
 
-#~ msgid "Auto Install Configurator"
-#~ msgstr "Automaattisen asennuksen muokkaaja"
+#~ msgid "Unable to load image file %s"
+#~ msgstr "Kuvaa %s ei voida avata"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Tuntematon/Muut"
+
+#~ msgid "Urpmi"
+#~ msgstr "Urpmi"
+
+#~ msgid "Userdrake"
+#~ msgstr "Userdrake"
+
+#~ msgid "Verbose bootsplash"
+#~ msgstr "Monisanainen"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Löytyykö FPU:sta irq-vektori"
+
+#~ msgid "X coordinate of text box"
+#~ msgstr "Tekstiruudun sijainti (X-koordinaatti)"
+
+#~ msgid "X coordinate of the text"
+#~ msgstr "Tekstin sijainti (X-koordinaatti)"
+
+#~ msgid "Y coordinate of text box"
+#~ msgstr "Tekstiruudun sijainti (Y-koordinaatti)"
+
+#~ msgid "Y coordinate of the text"
+#~ msgstr "Tekstin sijainti (Y-koordinaatti)"
 
 #~ msgid ""
 #~ "You are about to configure an Auto Install floppy. This feature is "
@@ -3838,70 +4062,31 @@ msgstr "Kieli- ja maa-asetukset"
 #~ "\n"
 #~ "Haluatko jatkaa?"
 
-#~ msgid "replay"
-#~ msgstr "toista"
+#~ msgid "choose image"
+#~ msgstr "valitse kuva"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "Ensimmäiset Pentium-prosessorit olivat virheellisiä ja jumiutuivat "
+#~ "purettaessa F00F tavukoodia."
 
 #~ msgid "manual"
 #~ msgstr "manuaalinen"
 
-#~ msgid "Automatic Steps Configuration"
-#~ msgstr "Automaattisten vaiheiden asetukset"
+#~ msgid "replay"
+#~ msgstr "toista"
+
+#~ msgid "saving Bootsplash theme..."
+#~ msgstr "tallennetaan Bootsplash-teema..."
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "Onko prosessorissa \"Cyrix 6x86 Coma\"-virhe."
 
 #~ msgid ""
-#~ "Please choose for each step whether it will replay like your install, or "
-#~ "it will be manual"
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
 #~ msgstr ""
-#~ "Valitse jokaiselle vaiheelle toistetaanko asennus samalla tapaa kuin nyt "
-#~ "vai onko kyseinen vaihe manuaalinen"
+#~ "Kyllä tarkoittaa, että matematiikkaprosessorista löytyy poikkeusvektori"
 
-#~ msgid "Insert a blank floppy in drive %s"
-#~ msgstr "Aseta tyhjä levyke levykeasemaan %s"
-
-#~ msgid "Creating auto install floppy"
-#~ msgstr "Luodaan automaattisen asennuksen levykettä"
-
-#~ msgid "Insert another blank floppy in drive %s (for drivers disk)"
-#~ msgstr "Aseta toinen tyhjä levyke levykeasemaan %s (ajurit)"
-
-#~ msgid "Creating auto install floppy (drivers disk)"
-#~ msgstr "Luodaan automaattisen asennuksen levykettä (ajurit)"
-
-#~ msgid ""
-#~ "\n"
-#~ "Welcome.\n"
-#~ "\n"
-#~ "The parameters of the auto-install are available in the sections on the "
-#~ "left"
-#~ msgstr ""
-#~ "\n"
-#~ "Tervetuloa.\n"
-#~ "\n"
-#~ "Automaattisen asennuksen parametrit löytyvät vasemmalla olevista lohkoista"
-
-#~ msgid ""
-#~ "The floppy has been successfully generated.\n"
-#~ "You may now replay your installation."
-#~ msgstr ""
-#~ "Levykkeen luominen onnistui.\n"
-#~ "Voit nyt toistaa asennuksesi."
-
-#~ msgid "Auto Install"
-#~ msgstr "Automaattinen asennus"
-
-#~ msgid "Add an item"
-#~ msgstr "Lisää alkio"
-
-#~ msgid "Remove the last item"
-#~ msgstr "Poista viimeinen alkio"
-
-#~ msgid "Menudrake"
-#~ msgstr "Menudrake"
-
-#~ msgid "Msec"
-#~ msgstr "Msec"
-
-#~ msgid "Urpmi"
-#~ msgstr "Urpmi"
-
-#~ msgid "Userdrake"
-#~ msgstr "Userdrake"
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "Kyllä tarkoittaa, että prosessorissa on liukulukuyksikkö."

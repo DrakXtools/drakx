@@ -427,11 +427,9 @@ msgid "URL must start with ftp:// or http://"
 msgstr ""
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr ""
-"Đang kết nối với website của Mandriva Linux để lấy danh sách các mirrors "
-"hiệncó..."
+msgstr "Đang kết nối với website của %s để lấy danh sách các mirrors hiệncó..."
 
 #: any.pm:194
 #, fuzzy, c-format
@@ -729,7 +727,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Không có mô tả"
 
 #: pkgs.pm:280
 #, c-format
@@ -744,14 +742,14 @@ msgid "An error occurred:"
 msgstr "Lỗi xảy ra"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Lỗi xảy ra"
+msgstr "Xả ra lỗi trầm trọng: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Đừng hỏi nữa "
 
 #: pkgs.pm:894
 #, c-format
@@ -790,9 +788,9 @@ msgid "Entering step `%s'\n"
 msgstr "Bắt đầu bước `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Đang cài đặt"
+msgstr "Cài đặt %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -805,15 +803,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Hệ thống của bạn có cấu hình thấp. Bạn có thể gặp một số trục trặc khi\n"
-"cài đặt Mandriva Linux. Nếu xảy ra lỗi, bạn có thể thay thế bằng kiểu cài "
-"đặt trong\n"
+"cài đặt %s. Nếu xảy ra lỗi, bạn có thể thay thế bằng kiểu cài đặt trong\n"
 "chế độ văn bản bằng cách nhấn phím `F1' khi khởi động từ CDROM, rồi nhập "
 "`text'."
 
@@ -875,7 +872,7 @@ msgstr "Chọn các gói riêng"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Mọi thứ không được chọn"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1220,9 +1217,9 @@ msgid "Bad file"
 msgstr "Tập tin lỗi"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1626,26 +1623,147 @@ msgid ""
 "Exit"
 msgstr "Thoát ra"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Cài đặt Mandriva Linux %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Môi trường đồ hoạ"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Môi trường đồ họa thân thiện cho các ứng dụng và các tiện ích màn hình nền"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Môi trường đồ họa thân thiện cho các ứng dụng và các tiện ích màn hình nền"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Các chương trình giải trí: arcade, boards, strategy, v.v..."
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Máy trạm"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME Workstation"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Đồ thuật Moondrake"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Giấy phép"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Các chương trình văn phòng: wordprocessors (LibreOffice Writer, Kword), "
+#~ "spreadsheets (LibreOffice Calc, Kspread), chương trình xem PDF, v.v..."
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Văn phòng"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Máy chủ cơ sở dữ liệu PostgreSQL và MariaDB"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL hay MariaDB máy chủ cơ sở dữ liệu"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Đang chuẩn bị trình khởi động"
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "IceWm Desktop"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, v.v..."
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE"
+
+#~ msgid "%d packages"
+#~ msgstr "%d các gói"
+
+#~ msgid "All"
+#~ msgstr "Toàn bộ"
+
+#~ msgid "Automated"
+#~ msgstr "Tự động"
 
 #~ msgid "Bad package"
 #~ msgstr "Gói hỏng"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Chạy mạng"
+#~ msgid "Boot"
+#~ msgstr "Khởi động"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Cập nhật"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Không thể truy cập các mô-đun kernel tương ứng với kernel của bạn (thiếu "
+#~ "tập tin %s), thường là do đĩa mềm khởi động không đồng bộ với các phương "
+#~ "tiện cài đặt (hãy tạo một đĩa mềm khởi động mới hơn)"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Chọn các gói cài đặt"
+
+#~ msgid "Configure X"
+#~ msgstr "Cấu hình X"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Đang kết nối với mirror để lấy danh sách các gói hiện có"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Bạn có muốn sử dụng aboot không?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "Đang tải về tập tin %s..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Lỗi khi cài đặt aboot, \n"
+#~ "Cố gắng cài đặt kể cả khi nó có thể phá hỏng phân vùng đầu tiên?"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Đang ước lượng"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Tạo đĩa mềm cài đặt tự động"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm Desktop"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "Chọn kiểu cài đặt"
+
+#~ msgid "Language"
+#~ msgstr "Chọn ngôn ngữ"
+
+#~ msgid "License"
+#~ msgstr "Giấy phép"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Cài đặt Mandriva Linux %s"
+
+#~ msgid "Networking"
+#~ msgstr "Chạy mạng"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1654,8 +1772,43 @@ msgstr "Thoát ra"
 #~ "Các chương trình văn phòng: wordprocessors (kword, abiword), spreadsheets "
 #~ "(kspread, gnumeric), pdf viewers, v.v..."
 
-#~ msgid "Downloading file %s..."
-#~ msgstr "Đang tải về tập tin %s..."
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Đang chuẩn bị trình khởi động"
+
+#~ msgid "Replay"
+#~ msgstr "Diễn lại"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Lưu lựa chọn các gói"
+
+#~ msgid "Select All"
+#~ msgstr "Mọi thứ được chọn"
+
+#~ msgid "TV card"
+#~ msgstr "Card TV"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Cài đặt tự động có thể hoàn toàn tự động nếu\n"
+#~ "muốn, trong trường hợp này nó sẽ tiếp nối ổ cứng!!\n"
+#~ "(Nghĩa là tiến hành cài đặt lên một ổ khác).\n"
+#~ "\n"
+#~ "Có thể bạn thích diễn lại quá trình cài đặt.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Không thể kết nối được với mirror %s"
+
+#~ msgid "Users"
+#~ msgstr "Người dùng"
+
+#~ msgid "Welcome"
+#~ msgstr "Chào mừng "
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1681,105 +1834,22 @@ msgstr "Thoát ra"
 #~ "\n"
 #~ "Bạn có thật sự muốn cài đặt các máy chủ này không?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm Desktop"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Đang kết nối với mirror để lấy danh sách các gói hiện có"
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Không thể kết nối được với mirror %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Tạo đĩa mềm cài đặt tự động"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Cài đặt tự động có thể hoàn toàn tự động nếu\n"
-#~ "muốn, trong trường hợp này nó sẽ tiếp nối ổ cứng!!\n"
-#~ "(Nghĩa là tiến hành cài đặt lên một ổ khác).\n"
-#~ "\n"
-#~ "Có thể bạn thích diễn lại quá trình cài đặt.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Diễn lại"
-
-#~ msgid "Automated"
-#~ msgstr "Tự động"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Lưu lựa chọn các gói"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Bạn có muốn sử dụng aboot không?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Lỗi khi cài đặt aboot, \n"
-#~ "Cố gắng cài đặt kể cả khi nó có thể phá hỏng phân vùng đầu tiên?"
-
-#~ msgid "All"
-#~ msgstr "Toàn bộ"
-
-#~ msgid "TV card"
-#~ msgstr "Card TV"
-
-#~ msgid "Boot"
-#~ msgstr "Khởi động"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Xác nhận"
 
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#~ msgid "%d packages"
-#~ msgstr "%d các gói"
-
-#~ msgid "Language"
-#~ msgstr "Chọn ngôn ngữ"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Giấy phép"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "Chọn kiểu cài đặt"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "Đang ước lượng"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Chọn các gói cài đặt"
-
-#~ msgid "Users"
-#~ msgstr "Người dùng"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Chạy mạng"
 
-#~ msgid "Configure X"
-#~ msgstr "Cấu hình X"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Không thể truy cập các mô-đun kernel tương ứng với kernel của bạn (thiếu "
-#~ "tập tin %s), thường là do đĩa mềm khởi động không đồng bộ với các phương "
-#~ "tiện cài đặt (hãy tạo một đĩa mềm khởi động mới hơn)"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Cập nhật"

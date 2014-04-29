@@ -1583,7 +1583,7 @@ msgid "Keyboard"
 msgstr "Tastatur"
 
 #: finish-install:58
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Vel tastaturoppsett"
 
@@ -3318,7 +3318,7 @@ msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Klarte ikkje installera pakkane for deling av skannar(ar)."
 
 #: service_harddrake:173
-#, fuzzy, c-format
+#, c-format
 msgid "The graphics card '%s' is no longer supported by driver '%s'"
 msgstr "Skjermkortet «%s» er ikkje lenger støtta av «%s»-drivaren."
 
@@ -3328,7 +3328,7 @@ msgid "New release, reconfiguring X for %s"
 msgstr ""
 
 #: service_harddrake:274
-#, fuzzy, c-format
+#, c-format
 msgid "The proprietary kernel driver was not found for X.org driver '%s'"
 msgstr "Fann ikkje ikkje-fri kjernedrivar for X.org-drivaren «%s»"
 
@@ -3427,21 +3427,230 @@ msgstr "Språk og land"
 msgid "Language & country configuration"
 msgstr "Oppsett av språk og land"
 
+#, fuzzy
+#~ msgid "  --help                - display this help     \n"
+#~ msgstr " --help                – Vis denne hjelpeteksten.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Usage: \n"
+#~ msgstr ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright © %s Mandriva.\n"
+#~ "Dette er fri programvare, og du kan distribuera det under GNU GPL-"
+#~ "lisensen.\n"
+#~ "\n"
+#~ "Bruk: \n"
+
+#, fuzzy
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Feilrapporteringsverktøy for Moondrake"
+
+#~ msgid "%s Control Center"
+#~ msgstr "%s-kontrollsenter"
+
+#, fuzzy
+#~ msgid "%s Help Center"
+#~ msgstr "Moondrake-hjelpesenter"
+
+#, fuzzy
+#~ msgid "%s Online"
+#~ msgstr "Moondrake Online"
+
+#, fuzzy
+#~ msgid "%s Tools Logs"
+#~ msgstr "Loggverktøy for Moondrake"
+
+#, fuzzy
+#~ msgid "%s Update"
+#~ msgstr "Moondrake-oppdatering"
+
+#, fuzzy
+#~ msgid "<control>H"
+#~ msgstr "<control>Q"
+
+#~ msgid "Autodetect _modems"
+#~ msgstr "Finn automatisk _modem"
+
+#~ msgid "Autodetect parallel _zip drives"
+#~ msgstr "Finn automatisk _Zip-stasjonar på parallellport"
+
+#, fuzzy
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Set opp autentisering for tilgang til Moondrake-verktøya"
+
+#~ msgid "Copyright (C) %s by %s"
+#~ msgstr "Copyright © %s %s"
+
+#~ msgid ""
+#~ "Here you can see files to use in order to fix permissions, owners, and "
+#~ "groups via msec.\n"
+#~ "You can also edit your own rules which will overwrite the default rules."
+#~ msgstr ""
+#~ "Her kan du sjå filer som du kan retta tilgangsløyve og eigarar til via "
+#~ "msec.\n"
+#~ "Du kan òg leggja til eigne reglar, som så vil overstyra standardreglane."
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#, fuzzy
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in"
+#~ msgstr ""
+#~ "Fann ikkje noko fjernsynskort kopla til maskina. Kontroller at du har eit "
+#~ "fjernsynskort som er støtta i Linux kopla til.\n"
+#~ "\n"
+#~ "\n"
+#~ "Du finn maskinvaredatabasen vår på:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandriva.com/en/hardware/"
+
+#, fuzzy
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in."
+#~ msgstr ""
+#~ "Fann ikkje noko fjernsynskort kopla til maskina. Kontroller at du har eit "
+#~ "fjernsynskort som er støtta i Linux kopla til.\n"
+#~ "\n"
+#~ "\n"
+#~ "Du finn maskinvaredatabasen vår på:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandriva.com/en/hardware/"
+
+#, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Set opp e-postvarsel"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Set opp e-postvarsel"
+
+#, fuzzy
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "Oppstartsoppsett"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Set opp e-postvarsel"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Oppsett av språk og land"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Oppsett av skjermtenar"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Oppsett av språk og land"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Oppsett av skjermtenar"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Oppsett av skjermtenar"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Oppsett av skjermtenar"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "UPS-oppsett"
+
+#, fuzzy
+#~ msgid "Select %s Tool:"
+#~ msgstr "Vel Moondrake-verktøy:"
+
+#~ msgid "_About..."
+#~ msgstr "_Om …"
+
+#~ msgid "_Fields description"
+#~ msgstr "_Feltskildring"
+
+#~ msgid "_File"
+#~ msgstr "_Fil"
+
+#~ msgid "_Help"
+#~ msgstr "_Hjelp"
+
+#~ msgid "_Options"
+#~ msgstr "_Val"
+
+#~ msgid "_Quit"
+#~ msgstr "_Avslutt"
+
+#~ msgid "_Report Bug"
+#~ msgstr "_Meld frå om feil"
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(standardverdi: %s)"
+
 #~ msgid "/Autodetect _printers"
 #~ msgstr "/Finn automatisk _skrivarar"
 
-#~ msgid "Its GDB trace is:"
-#~ msgstr "GDB-logger er:"
+#~ msgid "Autodetect _jaz drives"
+#~ msgstr "Finn automatisk _Jaz-stasjonar"
 
-#~ msgid "OpenOffice.org"
-#~ msgstr "OpenOffice.org"
+#~ msgid "Autodetect _printers"
+#~ msgstr "Finn automatisk _skrivarar"
 
-#~ msgid ""
-#~ "The proprietary driver for your graphic card cannot be found, the system "
-#~ "is now using the free software driver (%s)."
-#~ msgstr ""
-#~ "Fann ikkje den godseigde skjermkortdrivaren. Brukar derfor den frie "
-#~ "drivaren (%s)."
+#~ msgid "Background color"
+#~ msgstr "Bakgrunnsfarge"
+
+#~ msgid "Basic options"
+#~ msgstr "Grunnleggjande val"
+
+#~ msgid "Bugs"
+#~ msgstr "Feil"
+
+#~ msgid "Choose picture"
+#~ msgstr "Vel bilete"
+
+#~ msgid "Choose progress bar background"
+#~ msgstr "Vel bakgrunn for framgangslinje"
+
+#~ msgid "Choose progress bar color 1"
+#~ msgstr "Vel farge 1 for framgangslinje"
+
+#~ msgid "Choose progress bar color 2"
+#~ msgstr "Vel farge 2 for framgangslinje"
+
+#~ msgid "Choose text color"
+#~ msgstr "Vel tekstfarge"
+
+#~ msgid "Choose text zone color"
+#~ msgstr "Vel tekstsonefarge"
+
+#~ msgid "Color selection"
+#~ msgstr "Fargeval"
+
+#~ msgid "Coma bug"
+#~ msgstr "Coma-feil"
+
+#, fuzzy
+#~ msgid "Copyright (C) %s by Moondrake"
+#~ msgstr "Copyright © %s Mandriva"
+
+#~ msgid "Create new theme"
+#~ msgstr "Lag nytt tema"
+
+#~ msgid "Display logo on Console"
+#~ msgstr "Vis logo på konsoll"
 
 #~ msgid ""
 #~ "Display theme\n"
@@ -3450,134 +3659,8 @@ msgstr "Oppsett av språk og land"
 #~ "Vis tema\n"
 #~ "under konsoll"
 
-#~ msgid "Create new theme"
-#~ msgstr "Lag nytt tema"
-
-#~ msgid "X coordinate of text box"
-#~ msgstr "X-koordinat til tekstboksen"
-
-#~ msgid "Y coordinate of text box"
-#~ msgstr "Y-koordinat til tekstboksen"
-
-#~ msgid "Text box width"
-#~ msgstr "Breidd på tekstboks"
-
-#~ msgid "Text box height"
-#~ msgstr "Høgd på tekstboks"
-
-#~ msgid ""
-#~ "The progress bar X coordinate\n"
-#~ "of its upper left corner"
-#~ msgstr ""
-#~ "X-koordinaten til øvre venstre\n"
-#~ "hjørne til framgangsvisaren."
-
-#~ msgid ""
-#~ "The progress bar Y coordinate\n"
-#~ "of its upper left corner"
-#~ msgstr ""
-#~ "Y-koordinaten til øvre venstre\n"
-#~ "hjørne til framgangsvisaren."
-
-#~ msgid "The width of the progress bar"
-#~ msgstr "Breidda til tekstboksen."
-
-#~ msgid "The height of the progress bar"
-#~ msgstr "Høgda til tekstboksen."
-
-#~ msgid "X coordinate of the text"
-#~ msgstr "X-koordinat til tekst"
-
-#~ msgid "Y coordinate of the text"
-#~ msgstr "Y-koordinat til tekst"
-
-#~ msgid "Text box transparency"
-#~ msgstr "Gjennomsikt til tekstboks"
-
-#~ msgid "Progress box transparency"
-#~ msgstr "Gjennomsikt til framgangslinje"
-
-#~ msgid "Text size"
-#~ msgstr "Tekststorleik"
-
-#~ msgid "Progress Bar"
-#~ msgstr "Framdriftsvisar "
-
-#~ msgid "Choose progress bar color 1"
-#~ msgstr "Vel farge 1 for framgangslinje"
-
-#~ msgid "Choose progress bar color 2"
-#~ msgstr "Vel farge 2 for framgangslinje"
-
-#~ msgid "Choose progress bar background"
-#~ msgstr "Vel bakgrunn for framgangslinje"
-
-#~ msgid "Gradient type"
-#~ msgstr "Fargeovergangtype"
-
-#~ msgid "Text"
-#~ msgstr "Tekst"
-
-#~ msgid "Choose text color"
-#~ msgstr "Vel tekstfarge"
-
-#~ msgid "Choose picture"
-#~ msgstr "Vel bilete"
-
-#~ msgid "Silent bootsplash"
-#~ msgstr "Stille oppstart"
-
-#~ msgid "Choose text zone color"
-#~ msgstr "Vel tekstsonefarge"
-
-#~ msgid "Text color"
-#~ msgstr "Tekstfarge"
-
-#~ msgid "Background color"
-#~ msgstr "Bakgrunnsfarge"
-
-#~ msgid "Verbose bootsplash"
-#~ msgstr "Oppstart med utvida meldingar"
-
-#~ msgid "Theme name"
-#~ msgstr "Temanamn"
-
-#~ msgid "Final resolution"
-#~ msgstr "Endeleg oppløysing"
-
-#~ msgid "Display logo on Console"
-#~ msgstr "Vis logo på konsoll"
-
-#~ msgid "Save theme"
-#~ msgstr "Lagra tema"
-
-#~ msgid "Please enter a theme name"
-#~ msgstr "Skriv inn temanamn"
-
-#~ msgid "Please select a splash image"
-#~ msgstr "Vel oppstartsbilete"
-
-#~ msgid "saving Bootsplash theme..."
-#~ msgstr "Lagrar oppstartstema …"
-
-#~ msgid "Unable to load image file %s"
-#~ msgstr "Klarte ikkje opna biletfila «%s»"
-
-#~ msgid "choose image"
-#~ msgstr "Vel bilete"
-
-#~ msgid "Color selection"
-#~ msgstr "Fargeval"
-
-#~ msgid "Coma bug"
-#~ msgstr "Coma-feil"
-
-# skip-rule: gongeteikn
-#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-#~ msgstr "om prosessoren har Cyrix 6x86 Coma-feilen"
-
-#~ msgid "Fdiv bug"
-#~ msgstr "FDIV-feil"
+#~ msgid "Do you want to remove these packages?"
+#~ msgstr "Vil du fjerna desse pakkane?"
 
 #~ msgid ""
 #~ "Early Intel Pentium chips manufactured have a bug in their floating point "
@@ -3587,46 +3670,53 @@ msgstr "Oppsett av språk og land"
 #~ "Tidlege Intel Pentim-brikker hadde ein feil i flyttalsprosessoren som "
 #~ "førte til dårleg presisjon ved flyttalsdivisjonar (FDIV)"
 
-#~ msgid "Is FPU present"
-#~ msgstr "Finst FPU"
-
-#~ msgid "yes means the processor has an arithmetic coprocessor"
-#~ msgstr "«ja» tyder at prosessoren har ein mattekoprosessor"
-
-#~ msgid "Whether the FPU has an irq vector"
-#~ msgstr "Om mattekoprosessoren har ein avbruddsvektor"
-
-#~ msgid ""
-#~ "yes means the arithmetic coprocessor has an exception vector attached"
-#~ msgstr "«ja» tyder at den mattekoprosessoren har ein unntaksvektor tilkopla"
-
 #~ msgid "F00f bug"
 #~ msgstr "F00F-feil"
-
-#~ msgid ""
-#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
-#~ msgstr ""
-#~ "tidlege Pentium-prosessorar inneheld ein feil, og fraus ved dekoding av "
-#~ "F00F-bytekode"
-
-#~ msgid "Halt bug"
-#~ msgstr "Halt-feil"
-
-#~ msgid ""
-#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
-#~ "mode after the \"halt\" instruction is used"
-#~ msgstr ""
-#~ "Nokre av dei tidlege i486DX-100-brikkene kan ikkje venda tilbake til "
-#~ "køyremodus etter at «halt»-instruksjonen er brukt"
-
-#~ msgid "Bugs"
-#~ msgstr "Feil"
 
 #~ msgid "FPU"
 #~ msgstr "FPU"
 
-#~ msgid "Unknown/Others"
-#~ msgstr "Ukjend/andre"
+#~ msgid "Fdiv bug"
+#~ msgstr "FDIV-feil"
+
+#~ msgid "File/-"
+#~ msgstr "Fil/–"
+
+#~ msgid "File/Save _As"
+#~ msgstr "Fil/Lagra _som"
+
+#~ msgid "File/_New"
+#~ msgstr "Fil/_Ny"
+
+#~ msgid "File/_Open"
+#~ msgstr "Fil/_Opna"
+
+#~ msgid "File/_Quit"
+#~ msgstr "Fil/_Avslutt"
+
+#~ msgid "File/_Save"
+#~ msgstr "Fil/_Lagra"
+
+#~ msgid "Final resolution"
+#~ msgstr "Endeleg oppløysing"
+
+#~ msgid "Finding unused hardware packages..."
+#~ msgstr "Søkjer etter ubrukte maskinvarepakkar …"
+
+#~ msgid "Finding unused localization packages..."
+#~ msgstr "Finn ubrukte språkpakkar …"
+
+#~ msgid "Gradient type"
+#~ msgstr "Fargeovergangtype"
+
+#~ msgid "Halt bug"
+#~ msgstr "Halt-feil"
+
+#~ msgid "Hardware packages removal"
+#~ msgstr "Fjerning av maskinvarepakkar"
+
+#~ msgid "Help/_About..."
+#~ msgstr "Hjelp/_Om …"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "
@@ -3720,29 +3810,35 @@ msgstr "Oppsett av språk og land"
 #~ "nivå, men systemet er fullstendig lukka, og alle tryggleiksfunksjonar "
 #~ "køyrer på høgste nivå."
 
-#~ msgid "(default value: %s)"
-#~ msgstr "(standardverdi: %s)"
+#~ msgid "Is FPU present"
+#~ msgstr "Finst FPU"
 
-#~ msgid "Security Level:"
-#~ msgstr "Tryggleiksnivå:"
+#~ msgid "Its GDB trace is:"
+#~ msgstr "GDB-logger er:"
 
-#~ msgid "Security Alerts:"
-#~ msgstr "Tryggleiksvarsel:"
-
-#~ msgid "Security Administrator:"
-#~ msgstr "Tryggleiksansvarleg:"
-
-#~ msgid "Basic options"
-#~ msgstr "Grunnleggjande val"
+#~ msgid "Localization packages removal"
+#~ msgstr "Fjerning av språkpakkar"
 
 #~ msgid "Network Options"
 #~ msgstr "Nettverksval"
 
-#~ msgid "System Options"
-#~ msgstr "Systemval"
+#~ msgid "OpenOffice.org"
+#~ msgstr "OpenOffice.org"
+
+#~ msgid "Options/Test"
+#~ msgstr "Val/Test"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "Regelmessige kontrollar"
+
+#~ msgid "Please enter a theme name"
+#~ msgstr "Skriv inn temanamn"
+
+#~ msgid "Please select a splash image"
+#~ msgstr "Vel oppstartsbilete"
+
+#~ msgid "Please wait, adding media..."
+#~ msgstr "Legg til medium. Vent litt ..."
 
 #~ msgid "Please wait, setting security level..."
 #~ msgstr "Set tryggleiksnivå. Vent litt …"
@@ -3750,11 +3846,70 @@ msgstr "Oppsett av språk og land"
 #~ msgid "Please wait, setting security options..."
 #~ msgstr "Set tryggleiksval. Vent litt …"
 
-#~ msgid "Localization packages removal"
-#~ msgstr "Fjerning av språkpakkar"
+#~ msgid "Progress Bar"
+#~ msgstr "Framdriftsvisar "
 
-#~ msgid "Finding unused localization packages..."
-#~ msgstr "Finn ubrukte språkpakkar …"
+#~ msgid "Progress box transparency"
+#~ msgstr "Gjennomsikt til framgangslinje"
+
+#~ msgid "Removing packages..."
+#~ msgstr "Fjernar pakkar …"
+
+#~ msgid "Restart XFS"
+#~ msgstr "Start XFS på nytt"
+
+#~ msgid "Save theme"
+#~ msgstr "Lagra tema"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Tryggleiksansvarleg:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Tryggleiksvarsel:"
+
+#~ msgid "Security Level:"
+#~ msgstr "Tryggleiksnivå:"
+
+#~ msgid "Silent bootsplash"
+#~ msgstr "Stille oppstart"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Nokre av dei tidlege i486DX-100-brikkene kan ikkje venda tilbake til "
+#~ "køyremodus etter at «halt»-instruksjonen er brukt"
+
+#~ msgid "System Options"
+#~ msgstr "Systemval"
+
+#~ msgid "Text"
+#~ msgstr "Tekst"
+
+#~ msgid "Text box height"
+#~ msgstr "Høgd på tekstboks"
+
+#~ msgid "Text box transparency"
+#~ msgstr "Gjennomsikt til tekstboks"
+
+#~ msgid "Text box width"
+#~ msgstr "Breidd på tekstboks"
+
+#~ msgid "Text color"
+#~ msgstr "Tekstfarge"
+
+#~ msgid "Text size"
+#~ msgstr "Tekststorleik"
+
+#~ msgid "The change is done, but to be effective you must logout"
+#~ msgstr ""
+#~ "Endringa er gjort, men vil først trå i kraft etter at du har logga inn på "
+#~ "nytt."
+
+#~ msgid ""
+#~ "The following hardware packages do not seem to be useful for your system:"
+#~ msgstr ""
+#~ "Desse maskinvarepakkane ser ikkje ut til å vera nyttige for denne maskina:"
 
 #~ msgid ""
 #~ "The following localization packages do not seem to be useful for your "
@@ -3762,30 +3917,79 @@ msgstr "Oppsett av språk og land"
 #~ msgstr ""
 #~ "Desse språkpakkane ser ikkje ut til å vera nyttige på denne maskina:"
 
-#~ msgid "Do you want to remove these packages?"
-#~ msgstr "Vil du fjerna desse pakkane?"
-
-#~ msgid "Removing packages..."
-#~ msgstr "Fjernar pakkar …"
-
-#~ msgid "Hardware packages removal"
-#~ msgstr "Fjerning av maskinvarepakkar"
-
-#~ msgid "Finding unused hardware packages..."
-#~ msgstr "Søkjer etter ubrukte maskinvarepakkar …"
+#~ msgid "The height of the progress bar"
+#~ msgstr "Høgda til tekstboksen."
 
 #~ msgid ""
-#~ "The following hardware packages do not seem to be useful for your system:"
+#~ "The progress bar X coordinate\n"
+#~ "of its upper left corner"
 #~ msgstr ""
-#~ "Desse maskinvarepakkane ser ikkje ut til å vera nyttige for denne maskina:"
+#~ "X-koordinaten til øvre venstre\n"
+#~ "hjørne til framgangsvisaren."
 
-#~ msgid "Please wait, adding media..."
-#~ msgstr "Legg til medium. Vent litt ..."
-
-#~ msgid "The change is done, but to be effective you must logout"
+#~ msgid ""
+#~ "The progress bar Y coordinate\n"
+#~ "of its upper left corner"
 #~ msgstr ""
-#~ "Endringa er gjort, men vil først trå i kraft etter at du har logga inn på "
-#~ "nytt."
+#~ "Y-koordinaten til øvre venstre\n"
+#~ "hjørne til framgangsvisaren."
 
-#~ msgid "Restart XFS"
-#~ msgstr "Start XFS på nytt"
+#~ msgid ""
+#~ "The proprietary driver for your graphic card cannot be found, the system "
+#~ "is now using the free software driver (%s)."
+#~ msgstr ""
+#~ "Fann ikkje den godseigde skjermkortdrivaren. Brukar derfor den frie "
+#~ "drivaren (%s)."
+
+#~ msgid "The width of the progress bar"
+#~ msgstr "Breidda til tekstboksen."
+
+#~ msgid "Theme name"
+#~ msgstr "Temanamn"
+
+#~ msgid "Unable to load image file %s"
+#~ msgstr "Klarte ikkje opna biletfila «%s»"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Ukjend/andre"
+
+#~ msgid "Verbose bootsplash"
+#~ msgstr "Oppstart med utvida meldingar"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Om mattekoprosessoren har ein avbruddsvektor"
+
+#~ msgid "X coordinate of text box"
+#~ msgstr "X-koordinat til tekstboksen"
+
+#~ msgid "X coordinate of the text"
+#~ msgstr "X-koordinat til tekst"
+
+#~ msgid "Y coordinate of text box"
+#~ msgstr "Y-koordinat til tekstboksen"
+
+#~ msgid "Y coordinate of the text"
+#~ msgstr "Y-koordinat til tekst"
+
+#~ msgid "choose image"
+#~ msgstr "Vel bilete"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "tidlege Pentium-prosessorar inneheld ein feil, og fraus ved dekoding av "
+#~ "F00F-bytekode"
+
+#~ msgid "saving Bootsplash theme..."
+#~ msgstr "Lagrar oppstartstema …"
+
+# skip-rule: gongeteikn
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "om prosessoren har Cyrix 6x86 Coma-feilen"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "«ja» tyder at den mattekoprosessoren har ein unntaksvektor tilkopla"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "«ja» tyder at prosessoren har ein mattekoprosessor"

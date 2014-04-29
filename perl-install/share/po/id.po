@@ -97,9 +97,9 @@ msgstr ""
 "Pada drive mana Anda melakukan booting?"
 
 #: any.pm:363
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader Installation"
-msgstr "Proses installasi Bootloader"
+msgstr "Instalasi Bootloader"
 
 #: any.pm:367
 #, c-format
@@ -107,9 +107,9 @@ msgid "Where do you want to install the bootloader?"
 msgstr "Dimana Anda akan menginstall Bootloader?"
 
 #: any.pm:391
-#, fuzzy, c-format
+#, c-format
 msgid "First sector (MBR) of drive %s"
-msgstr "Sektor pertama pada drive (MBR)"
+msgstr "Sektor pertama (MBR) dari drive %s"
 
 #: any.pm:393
 #, c-format
@@ -172,9 +172,9 @@ msgid "Enable ACPI"
 msgstr "Aktifkan ACPI"
 
 #: any.pm:462
-#, fuzzy, c-format
+#, c-format
 msgid "Enable SMP"
-msgstr "Aktifkan ACPI"
+msgstr "Hidupkan SMP"
 
 #: any.pm:463
 #, c-format
@@ -270,7 +270,7 @@ msgstr "Tambahkan Xen"
 #: any.pm:564
 #, c-format
 msgid "Requires password to boot"
-msgstr ""
+msgstr "Memerlukan sandi untuk boot"
 
 #: any.pm:566
 #, c-format
@@ -348,9 +348,9 @@ msgid "Other OS (Windows...)"
 msgstr "OS Lain (Windows...)"
 
 #: any.pm:667
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader Configuration"
-msgstr "Konfigurasi Gaya Boot"
+msgstr "Konfigurasi Bootloader"
 
 #: any.pm:668
 #, c-format
@@ -402,11 +402,13 @@ msgid "Please give a user name"
 msgstr "Silakan berikan nama pengguna"
 
 #: any.pm:897
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
-msgstr "Nama pengguna hanya boleh terdiri dari huruf, angka, `-' dan `_'"
+msgstr ""
+"Nama pengguna harus dimulai dengan huruf kecil diikuti oleh hanya huruf "
+"kecil, nomor, `-' dan `_'"
 
 #: any.pm:898
 #, c-format
@@ -446,7 +448,7 @@ msgstr "Manajemen pengguna"
 #: any.pm:917
 #, c-format
 msgid "Enable guest account"
-msgstr ""
+msgstr "Hidupkan akun tamu"
 
 #: any.pm:919 authentication.pm:236
 #, c-format
@@ -529,9 +531,9 @@ msgid "Quit"
 msgstr "Keluar"
 
 #: any.pm:1128
-#, fuzzy, c-format
+#, c-format
 msgid "Do you accept this license ?"
-msgstr "Apakah Anda punya lagi?"
+msgstr "Apakah Anda menerima lisensi ini?"
 
 #: any.pm:1129
 #, c-format
@@ -549,25 +551,25 @@ msgid "Please choose a language to use"
 msgstr "Pilihlah bahasa yang akan dipakai"
 
 #: any.pm:1183
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
-"Mandriva Linux mendukung beberapa bahasa. Pilihlah\n"
-"bahasa yang akan diinstall. Bahasa pilihan akan ditampilkan\n"
-"setelah proses installasi selesai dan Anda merestart sistem Anda."
+"%s bisa mendukung banyak bahasa. Pilih\n"
+"bahasa yang ingin Anda install. Mereka akan tersedia\n"
+"setelah instalasi selesai dan Anda merestart sistem."
 
 #: any.pm:1186
-#, fuzzy, c-format
+#, c-format
 msgid "Multiple languages"
 msgstr "Banyak bahasa"
 
 #: any.pm:1187
 #, c-format
 msgid "Select Additional Languages"
-msgstr ""
+msgstr "Pilih Bahasa Tambahan"
 
 #: any.pm:1196 any.pm:1227
 #, c-format
@@ -689,11 +691,13 @@ msgstr ""
 "Anda menggunakan userdrake untuk menambah user pada grup ini."
 
 #: any.pm:1532
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
 "logout now."
-msgstr "Anda harus log out dan kembali agar perubahan berlaku"
+msgstr ""
+"Anda perlu logout dan masuk kembali agar perubahan berlaku. Tekan OK untuk "
+"logout sekarang."
 
 #: any.pm:1536
 #, c-format
@@ -768,7 +772,7 @@ msgstr "Domain Windows"
 #: authentication.pm:29
 #, c-format
 msgid "Kerberos 5"
-msgstr ""
+msgstr "Kerberos 5"
 
 #: authentication.pm:65
 #, c-format
@@ -828,7 +832,7 @@ msgstr ""
 #: authentication.pm:69
 #, c-format
 msgid "Kerberos 5 :"
-msgstr ""
+msgstr "Kerberos 5 :"
 
 #: authentication.pm:69
 #, c-format
@@ -841,13 +845,13 @@ msgstr ""
 #: authentication.pm:865
 #, c-format
 msgid " "
-msgstr ""
+msgstr " "
 
 #: authentication.pm:107 authentication.pm:141 authentication.pm:187
 #: authentication.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid "Welcome to the Authentication Wizard"
-msgstr "Otentikasi Domain Dibutuhkan"
+msgstr "Selamat Datang di Wizard Otentikasi"
 
 #: authentication.pm:109
 #, c-format
@@ -855,6 +859,7 @@ msgid ""
 "You have selected LDAP authentication. Please review the configuration "
 "options below "
 msgstr ""
+"Anda telah memilih otentikasi LDAP. Silakan lihat opsi konfigurasi di bawah "
 
 #: authentication.pm:111 authentication.pm:166
 #, c-format
@@ -862,70 +867,70 @@ msgid "LDAP Server"
 msgstr "Server LDAP"
 
 #: authentication.pm:112 authentication.pm:167
-#, fuzzy, c-format
+#, c-format
 msgid "Base dn"
-msgstr "LDAP Base dn"
+msgstr "Base dn"
 
 #: authentication.pm:113
 #, c-format
 msgid "Fetch base Dn "
-msgstr ""
+msgstr "Fetch base Dn "
 
 #: authentication.pm:115 authentication.pm:170
 #, c-format
 msgid "Use encrypt connection with TLS "
-msgstr ""
+msgstr "Gunakan koneksi terenkripsi dengan TLS "
 
 #: authentication.pm:116 authentication.pm:171
 #, c-format
 msgid "Download CA Certificate "
-msgstr ""
+msgstr "Download Sertifikat CA "
 
 #: authentication.pm:118 authentication.pm:151
 #, c-format
 msgid "Use Disconnect mode "
-msgstr ""
+msgstr "Gunakan mode Tak Terkoneksi "
 
 #: authentication.pm:119 authentication.pm:172
-#, fuzzy, c-format
+#, c-format
 msgid "Use anonymous BIND "
-msgstr "Gunakan BIND anonymous"
+msgstr "Gunakan BIND anonim "
 
 #: authentication.pm:120 authentication.pm:123 authentication.pm:125
 #: authentication.pm:129
 #, c-format
 msgid "  "
-msgstr ""
+msgstr "  "
 
 #: authentication.pm:121 authentication.pm:173
 #, c-format
 msgid "Bind DN "
-msgstr ""
+msgstr "Bind DN "
 
 #: authentication.pm:122 authentication.pm:174
-#, fuzzy, c-format
+#, c-format
 msgid "Bind Password "
-msgstr "Kata sandi"
+msgstr "Sandi Bind "
 
 #: authentication.pm:124
 #, c-format
 msgid "Advanced path for group "
-msgstr ""
+msgstr "Path tingkat lanjut untuk grup "
 
 #: authentication.pm:126
-#, fuzzy, c-format
+#, c-format
 msgid "Password base"
-msgstr "Kata sandi"
+msgstr "Basis sandi"
 
 #: authentication.pm:127
-#, fuzzy, c-format
+#, c-format
 msgid "Group base"
-msgstr "ID Grup"
+msgstr "Basis grup"
 
 #: authentication.pm:128
 #, c-format
 msgid "Shadow base"
-msgstr ""
+msgstr "Basis bayangan"
 
 #: authentication.pm:143
 #, c-format
@@ -933,36 +938,38 @@ msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
 msgstr ""
+"Anda telah memilih otentikasi Kerberos 5. Silakan lihat opsi konfigurasi di "
+"bawah "
 
 #: authentication.pm:145
-#, fuzzy, c-format
+#, c-format
 msgid "Realm "
-msgstr "Nama asli"
+msgstr "Wilayah "
 
 #: authentication.pm:147
-#, fuzzy, c-format
+#, c-format
 msgid "KDCs Servers"
-msgstr "Server LDAP"
+msgstr "Server KDCs"
 
 #: authentication.pm:149
 #, c-format
 msgid "Use DNS to locate KDC for the realm"
-msgstr ""
+msgstr "Gunakan DNS untuk menempatkan KDC untuk wilayah"
 
 #: authentication.pm:150
 #, c-format
 msgid "Use DNS to locate realms"
-msgstr ""
+msgstr "Gunakan DNS untuk menempatkan wilayah"
 
 #: authentication.pm:155
-#, fuzzy, c-format
+#, c-format
 msgid "Use local file for users information"
-msgstr "Gunakan libsafe untuk server"
+msgstr "Gunakan file lokal untuk informasi pengguna"
 
 #: authentication.pm:156
-#, fuzzy, c-format
+#, c-format
 msgid "Use LDAP for users information"
-msgstr "Info hard disk drive"
+msgstr "Gunakan LDAP untuk informasi pengguna"
 
 #: authentication.pm:162
 #, c-format
@@ -970,11 +977,13 @@ msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
 "type of users information "
 msgstr ""
+"Anda telah memilih Kerberos 5 untuk otentikasi, sekarang Anda harus memilih "
+"tipe informasi pengguna "
 
 #: authentication.pm:168
 #, c-format
 msgid "Fecth base Dn "
-msgstr ""
+msgstr "Fecth base Dn "
 
 #: authentication.pm:189
 #, c-format
@@ -982,6 +991,7 @@ msgid ""
 "You have selected NIS authentication. Please review the configuration "
 "options below "
 msgstr ""
+"Anda telah memilih otentikasi NIS. Silakan lihat opsi konfigurasi di bawah "
 
 #: authentication.pm:191
 #, c-format
@@ -999,11 +1009,13 @@ msgid ""
 "You have selected Windows Domain authentication. Please review the "
 "configuration options below "
 msgstr ""
+"Anda telah memilih otentikasi Domain Windows. Silakan lihat opsi konfigurasi "
+"di bawah "
 
 #: authentication.pm:217
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Model "
-msgstr "Domain"
+msgstr "Model Domain "
 
 #: authentication.pm:219
 #, c-format
@@ -1011,14 +1023,14 @@ msgid "Active Directory Realm "
 msgstr "Active Directory Realm "
 
 #: authentication.pm:220
-#, fuzzy, c-format
+#, c-format
 msgid "DNS Domain"
-msgstr "Domain NIS"
+msgstr "Domain DNS"
 
 #: authentication.pm:221
-#, fuzzy, c-format
+#, c-format
 msgid "DC Server"
-msgstr "Server LDAP"
+msgstr "Server DC"
 
 #: authentication.pm:235 authentication.pm:251
 #, c-format
@@ -1052,9 +1064,9 @@ msgid "Select file"
 msgstr "Pilih file"
 
 #: authentication.pm:866
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Windows for authentication : "
-msgstr "Otentikasi Domain Dibutuhkan"
+msgstr "Domain Windows untuk otentikasi : "
 
 #: authentication.pm:868
 #, c-format
@@ -1093,9 +1105,9 @@ msgid "LILO with text menu"
 msgstr "LILO dengan menu teks"
 
 #: bootloader.pm:1203
-#, fuzzy, c-format
+#, c-format
 msgid "GRUB2 with graphical menu"
-msgstr "GRUB dengan menu grafis"
+msgstr "GRUB2 dengan menu grafis"
 
 #: bootloader.pm:1204
 #, c-format
@@ -1337,9 +1349,9 @@ msgid "Warning"
 msgstr "Peringatan"
 
 #: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete this mount point?"
-msgstr "Apakah Anda ingin meng-klik pada tombol ini?"
+msgstr "Apakah Anda yakin ingin menghapus titik mount ini?"
 
 #: diskdrake/dav.pm:125
 #, c-format
@@ -1371,6 +1383,7 @@ msgstr "Pembuatan partisi"
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr ""
+"Klik pada sebuah partisi, pilih tipe sistem file lalu pilih sebuah aksi"
 
 #: diskdrake/hd_gtk.pm:116
 #, fuzzy, c-format
@@ -1426,9 +1439,9 @@ msgid "Unknown"
 msgstr "Tidak dikenal"
 
 #: diskdrake/hd_gtk.pm:405
-#, fuzzy, c-format
+#, c-format
 msgid "Ext4"
-msgstr "Keluar"
+msgstr "Ext4"
 
 #: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
 #, c-format
@@ -1482,9 +1495,9 @@ msgid "Use ``Unmount'' first"
 msgstr "Gunakan ``unmount'' terlebih dahulu"
 
 #: diskdrake/hd_gtk.pm:443
-#, fuzzy, c-format
+#, c-format
 msgid "Use ``%s'' instead (in expert mode)"
-msgstr "Gunakan ``%s'' saja"
+msgstr "Gunakan ``%s'' saja (dalam mode ahli)"
 
 #: diskdrake/hd_gtk.pm:443 diskdrake/interactive.pm:409
 #: diskdrake/interactive.pm:639 diskdrake/removable.pm:25
@@ -1608,7 +1621,7 @@ msgstr "Informasi detail"
 #: diskdrake/interactive.pm:407
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "Lihat"
 
 #: diskdrake/interactive.pm:412 diskdrake/interactive.pm:828
 #, c-format
@@ -1631,9 +1644,9 @@ msgid "Add to LVM"
 msgstr "Tambahkan ke LVM"
 
 #: diskdrake/interactive.pm:417
-#, fuzzy, c-format
+#, c-format
 msgid "Use"
-msgstr "ID Pengguna"
+msgstr "Gunakan"
 
 #: diskdrake/interactive.pm:419
 #, c-format
@@ -1651,9 +1664,9 @@ msgid "Remove from LVM"
 msgstr "Hapus dari LVM"
 
 #: diskdrake/interactive.pm:422
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from dm"
-msgstr "Hapus dari LVM"
+msgstr "Hapus dari dm"
 
 #: diskdrake/interactive.pm:423
 #, c-format
@@ -1671,9 +1684,9 @@ msgid "Create"
 msgstr "Buat"
 
 #: diskdrake/interactive.pm:456
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to mount partition"
-msgstr "Memindahkan file ke partisi baru"
+msgstr "Gagal memount partisi"
 
 #: diskdrake/interactive.pm:490 diskdrake/interactive.pm:492
 #, c-format
@@ -1706,14 +1719,14 @@ msgid "Logical volume name "
 msgstr "Nama volume logical "
 
 #: diskdrake/interactive.pm:510
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypt partition"
-msgstr "Algoritma enkripsi"
+msgstr "Enkripsi partisi"
 
 #: diskdrake/interactive.pm:511
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key "
-msgstr "Kunci enkripsi"
+msgstr "Kunci enkripsi "
 
 #: diskdrake/interactive.pm:512 diskdrake/interactive.pm:1514
 #, c-format
@@ -1726,9 +1739,9 @@ msgid "The encryption keys do not match"
 msgstr "Kunci enkripsi tidak sesuai"
 
 #: diskdrake/interactive.pm:525
-#, fuzzy, c-format
+#, c-format
 msgid "Missing encryption key"
-msgstr "Kunci enkripsi sistem file"
+msgstr "Kunci enkripsi tidak ada"
 
 #: diskdrake/interactive.pm:545
 #, c-format
@@ -1764,24 +1777,24 @@ msgid "Which filesystem do you want?"
 msgstr "Filesystem apa yang Anda inginkan?"
 
 #: diskdrake/interactive.pm:645
-#, fuzzy, c-format
+#, c-format
 msgid "Switching from %s to %s"
-msgstr "Pindah dari ext2 ke ext3"
+msgstr "Berpindah dari %s ke %s"
 
 #: diskdrake/interactive.pm:680
-#, fuzzy, c-format
+#, c-format
 msgid "Set volume label"
-msgstr "Label volume yang mana?"
+msgstr "Atur label volume"
 
 #: diskdrake/interactive.pm:682
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
-msgstr ""
+msgstr "Hati-hati, ini akan ditulis ke disk segera setelah Anda validasi!"
 
 #: diskdrake/interactive.pm:683
 #, c-format
 msgid "Beware, this will be written to disk only after formatting!"
-msgstr ""
+msgstr "Hati-hati, ini akan ditulis ke disk hanya setelah memformat!"
 
 #: diskdrake/interactive.pm:685
 #, c-format
@@ -1865,13 +1878,14 @@ msgid "Maximum size: %s MB"
 msgstr "Ukuran maksimal: %s MB"
 
 #: diskdrake/interactive.pm:880 fs/partitioning_wizard.pm:221
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
-"Untuk memastikan integritas data setelah ukuran partisi berubah,\n"
-"pengujian sistem file akan dilakukan pada boot berikut dalam Windows®"
+"Untuk memastikan integritas data setelah mengubah ukuran partisi,\n"
+"pengujian sistem file akan dilakukan pada boot berikutnya ke Microsoft "
+"Windows®"
 
 #: diskdrake/interactive.pm:944 diskdrake/interactive.pm:1505
 #, c-format
@@ -1879,9 +1893,9 @@ msgid "Filesystem encryption key"
 msgstr "Kunci enkripsi sistem file"
 
 #: diskdrake/interactive.pm:945
-#, fuzzy, c-format
+#, c-format
 msgid "Enter your filesystem encryption key"
-msgstr "Pilih kunci enkripsi sistem file Anda"
+msgstr "Masukkan kunci enkripsi sistem file Anda"
 
 #: diskdrake/interactive.pm:946 diskdrake/interactive.pm:1513
 #, c-format
@@ -1891,7 +1905,7 @@ msgstr "Kunci enkripsi"
 #: diskdrake/interactive.pm:953
 #, c-format
 msgid "Invalid key"
-msgstr ""
+msgstr "Kunci tidak valid"
 
 #: diskdrake/interactive.pm:976
 #, c-format
@@ -1909,19 +1923,19 @@ msgid "Choose an existing LVM to add to"
 msgstr "Pilih LVM yang ada untuk ditambahkan ke"
 
 #: diskdrake/interactive.pm:1007 diskdrake/interactive.pm:1016
-#, fuzzy, c-format
+#, c-format
 msgid "LVM name"
-msgstr "nama LVM?"
+msgstr "Nama LVM"
 
 #: diskdrake/interactive.pm:1008
 #, c-format
 msgid "Enter a name for the new LVM volume group"
-msgstr ""
+msgstr "Masukkan sebuah nama untuk grup volume LVM baru"
 
 #: diskdrake/interactive.pm:1013
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" already exists"
-msgstr "File sudah ada. Gunakan file ini ?"
+msgstr "\"%s\" sudah ada"
 
 #: diskdrake/interactive.pm:1045
 #, c-format
@@ -2005,9 +2019,9 @@ msgid "Be careful: this operation is dangerous."
 msgstr "Hati-hati: operasi ini berbahaya"
 
 #: diskdrake/interactive.pm:1211
-#, fuzzy, c-format
+#, c-format
 msgid "Partitioning Type"
-msgstr "Pembuatan partisi"
+msgstr "Tipe Partisi"
 
 #: diskdrake/interactive.pm:1211
 #, c-format
@@ -2168,24 +2182,24 @@ msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
 #: diskdrake/interactive.pm:1413
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypted"
-msgstr "Kunci enkripsi"
+msgstr "Terenkripsi"
 
 #: diskdrake/interactive.pm:1415
 #, c-format
 msgid " (mapped on %s)"
-msgstr ""
+msgstr " (dipetakan di %s)"
 
 #: diskdrake/interactive.pm:1416
 #, c-format
 msgid " (to map on %s)"
-msgstr ""
+msgstr " (untuk dipetakan di %s)"
 
 #: diskdrake/interactive.pm:1417
 #, c-format
 msgid " (inactive)"
-msgstr ""
+msgstr " (tidak aktif)"
 
 #: diskdrake/interactive.pm:1424
 #, c-format
@@ -2271,9 +2285,9 @@ msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Ukuran: %s silinder, %s head, %s sektor\n"
 
 #: diskdrake/interactive.pm:1459
-#, fuzzy, c-format
+#, c-format
 msgid "Medium type: "
-msgstr "Tipe filesystem: "
+msgstr "Tipe media: "
 
 #: diskdrake/interactive.pm:1460
 #, c-format
@@ -2416,14 +2430,14 @@ msgid "Creating and formatting file %s"
 msgstr "Membuat dan memformat file %s"
 
 #: fs/format.pm:131
-#, fuzzy, c-format
+#, c-format
 msgid "I do not know how to set label on %s with type %s"
-msgstr "tidak bisa melakukan format %s pada tipe %s"
+msgstr "Tidak bisa menetapkan label pada %s dengan tipe %s"
 
 #: fs/format.pm:143
-#, fuzzy, c-format
+#, c-format
 msgid "setting label on %s failed, is it formatted?"
-msgstr "%s proses pemformatan dari %s gagal"
+msgstr "mengatur label pada %s gagal, apakah telah terformat?"
 
 #: fs/format.pm:184
 #, c-format
@@ -2468,7 +2482,7 @@ msgstr "Aktifkan partisi swap %s"
 #: fs/mount_options.pm:114
 #, c-format
 msgid "Enable POSIX Access Control Lists"
-msgstr ""
+msgstr "Hidupkan Daftar Kontrol Akses POSIX"
 
 #: fs/mount_options.pm:116
 #, c-format
@@ -2673,9 +2687,9 @@ msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Menghitung ukuran partisi Microsoft Windows®"
 
 #: fs/partitioning_wizard.pm:173
-#, fuzzy, c-format
+#, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
-msgstr "Gunakan ruang kosong pada partisi Microsoft Windows®"
+msgstr "Gunakan ruang bebas pada partisi Microsoft Windows®"
 
 #: fs/partitioning_wizard.pm:177
 #, c-format
@@ -2683,15 +2697,15 @@ msgid "Which partition do you want to resize?"
 msgstr "Partisi apa yang hendak Anda atur ulang?"
 
 #: fs/partitioning_wizard.pm:180
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the %s installation."
 msgstr ""
-"Partisi Microsoft Windows® Anda terlalu terfragmentasi. Harap reboot "
-"komputer Anda pada Microsoft Windows®, jalankan utilitas ``defrag'', lalu "
-"jalankan kembali installasi Mandriva Linux."
+"Partisi Microsoft Windows® Anda terlalu terfragmentasi. Silakan reboot "
+"komputer Anda ke Microsoft Windows®, jalankan utilitas ``defrag'', lalu "
+"mulai ulang instalasi %s."
 
 #: fs/partitioning_wizard.pm:188
 #, c-format
@@ -2779,13 +2793,13 @@ msgid "Erase and use entire disk"
 msgstr "Hapus dan gunakan semua disk"
 
 #: fs/partitioning_wizard.pm:243
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
 msgstr ""
-"Anda memiliki lebih dari satu hard disk drive, mana yang akan digunakan "
-"untuk menginstall linux?"
+"Anda memiliki lebih dari satu drive hard disk, mana yang ingin Anda gunakan "
+"untuk installer?"
 
 #: fs/partitioning_wizard.pm:251 fsedit.pm:634
 #, c-format
@@ -2812,9 +2826,9 @@ msgstr ""
 "Jika sudah selesai, jangan lupa menyimpan menggunakan `w'"
 
 #: fs/partitioning_wizard.pm:409
-#, fuzzy, c-format
+#, c-format
 msgid "Ext2/3/4"
-msgstr "Ext3"
+msgstr "Ext2/3/4"
 
 #: fs/partitioning_wizard.pm:439 fs/partitioning_wizard.pm:585
 #, c-format
@@ -2829,7 +2843,7 @@ msgstr "Panduan Partisi DrakX menemukan solusi-solusi berikut:"
 #: fs/partitioning_wizard.pm:518
 #, c-format
 msgid "Here is the content of your disk drive "
-msgstr ""
+msgstr "Ini adalah isi dari drive disk Anda"
 
 #: fs/partitioning_wizard.pm:602
 #, c-format
@@ -2901,69 +2915,67 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "Partisi dengan titik mount %s sudah ada\n"
 
 #: fsedit.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a separate /boot partition"
 msgstr ""
 "Anda telah memilih partisi RAID software sebagai root (/).\n"
-"Tanpa partisi /boot, bootloader tidak dapat berbuat apa-apa.\n"
-"Hati-hati dalam menambahkan partisi /boot"
+"Tidak ada bootloader yang bisa menangani ini tanpa partisi /boot.\n"
+"Silakan yakinkan untuk membuat partisi /boot terpisah"
 
 #: fsedit.pm:440
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Metadata version unsupported for a boot partition. Please be sure to add a "
 "separate /boot partition."
 msgstr ""
-"Anda telah memilih partisi RAID software sebagai root (/).\n"
-"Tanpa partisi /boot, bootloader tidak dapat berbuat apa-apa.\n"
-"Hati-hati dalam menambahkan partisi /boot"
+"Versi metadata tidak mendukung partisi boot. Silakan yakinkan untuk membuat "
+"partisi /boot terpisah."
 
 #: fsedit.pm:448
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as /boot.\n"
 "No bootloader is able to handle this."
 msgstr ""
-"Anda telah memilih partisi RAID software sebagai root (/).\n"
-"Tanpa partisi /boot, bootloader tidak dapat berbuat apa-apa.\n"
-"Hati-hati dalam menambahkan partisi /boot"
+"Anda telah memilih partisi RAID software sebagai /boot.\n"
+"Tidak ada bootloader yang bisa menangani ini."
 
 #: fsedit.pm:452
 #, c-format
 msgid "Metadata version unsupported for a boot partition."
-msgstr ""
+msgstr "Versi metadata tidak mendukung partisi boot."
 
 #: fsedit.pm:459
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a separate /boot partition"
 msgstr ""
-"Anda telah memilih partisi RAID software sebagai root (/).\n"
-"Tanpa partisi /boot, bootloader tidak dapat berbuat apa-apa.\n"
-"Hati-hati dalam menambahkan partisi /boot"
+"Anda telah memilih partisi terenkripsi sebagai root (/).\n"
+"Tidak ada bootloader yang bisa menangani ini tanpa partisi /boot.\n"
+"Silakan yakinkan untuk membuat partisi /boot terpisah"
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr ""
-"Anda tidak dapat menggunakan sistem file terenkripsi untuk mount point %s"
+"Anda tidak bisa menggunakan sistem file terenkripsi untuk titik mount %s"
 
 #: fsedit.pm:469
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You cannot use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
-"Anda tidak bisa menggunakan sebuah Volume Logical LVM untuk titik mount %s "
-"karena ia melebihi volume fisik"
+"Anda tidak bisa menggunakan Volume Logical LVM untuk titik mount %s karena "
+"melebihi volume fisik"
 
 #: fsedit.pm:471
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
@@ -2971,8 +2983,8 @@ msgid ""
 "You should create a separate /boot partition first"
 msgstr ""
 "Anda telah memilih Volume Logical LVM sebagai root (/).\n"
-"Bootloader belum mampu menanganinya ketika volume melebihi volume fisik.\n"
-"Anda harus membuat partisi /boot terlebih dahulu"
+"Bootloader tidak bisa menangani ini ketika volume melebihi volume fisik.\n"
+"Anda harus membuat partisi /boot terpisah terlebih dahulu"
 
 #: fsedit.pm:475 fsedit.pm:477
 #, c-format
@@ -3247,17 +3259,17 @@ msgstr "Harap tunggu... Menerapkan konfigurasi"
 #: harddrake/sound.pm:331
 #, c-format
 msgid "Enable PulseAudio"
-msgstr ""
+msgstr "Hidupkan PulseAudio"
 
 #: harddrake/sound.pm:336
 #, c-format
 msgid "Use Glitch-Free mode"
-msgstr ""
+msgstr "Gunakan mode Glitch-Free"
 
 #: harddrake/sound.pm:342
 #, c-format
 msgid "Reset sound mixer to default values"
-msgstr ""
+msgstr "Reset mixer suara ke nilai default"
 
 #: harddrake/sound.pm:347
 #, c-format
@@ -3296,7 +3308,7 @@ msgstr ""
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:369
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -3305,8 +3317,8 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Kartu Anda kini memakai driver %s\"%s\" (driver standar kartu Anda adalah "
-"\"%s\")"
+"Perangkat suara Anda saat ini menggunakan driver %s\"%s\" (driver default "
+"untuk perangkat suara Anda adalah \"%s\")"
 
 #: harddrake/sound.pm:371
 #, c-format
@@ -3461,11 +3473,11 @@ msgstr "Pilih sembarang driver"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:482
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -5317,19 +5329,19 @@ msgid "Installing driver for USB controller"
 msgstr "Menginstal driver untuk pengontrol USB"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller \"%s\""
-msgstr "Menginstal driver untuk pengontrol firewire %s"
+msgstr "Menginstall driver untuk kontroler firewire \"%s\""
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard disk drive controller \"%s\""
-msgstr "Menginstal driver untuk pengontrol hard disk %s"
+msgstr "Menginstall driver untuk kontroler drive hard disk \"%s\""
 
 #: modules/interactive.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller \"%s\""
-msgstr "Menginstal driver untuk pengontrol ethernet %s"
+msgstr "Menginstall driver untuk kontroler ethernet \"%s\""
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -5341,7 +5353,7 @@ msgstr "Menginstal driver untuk kartu %s %s"
 #: modules/interactive.pm:100
 #, c-format
 msgid "Configuring Hardware"
-msgstr ""
+msgstr "Mengkonfigurasi Hardware"
 
 #: modules/interactive.pm:111
 #, c-format
@@ -5411,24 +5423,24 @@ msgstr ""
 "Apakah Anda mau mencoba dengan parameter yang lain?"
 
 #: mygtk2.pm:1229
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to quit?"
-msgstr "Apakah Anda ingin meng-klik pada tombol ini?"
+msgstr "Apakah Anda yakin ingin keluar?"
 
 #: mygtk2.pm:1571 mygtk2.pm:1572
 #, c-format
 msgid "Password is trivial to guess"
-msgstr ""
+msgstr "Sandi mudah ditebak"
 
 #: mygtk2.pm:1573
 #, c-format
 msgid "Password should be resistant to basic attacks"
-msgstr ""
+msgstr "Sandi harus tahan terhadap serangan dasar"
 
 #: mygtk2.pm:1574 mygtk2.pm:1575
-#, fuzzy, c-format
+#, c-format
 msgid "Password seems secure"
-msgstr "Kata sandi untuk pengguna"
+msgstr "Sandi sepertinya aman"
 
 #: partition_table.pm:428
 #, c-format
@@ -5477,17 +5489,17 @@ msgstr ""
 #: pkgs.pm:273 pkgs.pm:276 pkgs.pm:289
 #, c-format
 msgid "Unused packages removal"
-msgstr ""
+msgstr "Menghapus paket tak terpakai"
 
 #: pkgs.pm:273
 #, c-format
 msgid "Finding unused hardware packages..."
-msgstr ""
+msgstr "Menemukan paket hardware tak terpakai..."
 
 #: pkgs.pm:276
 #, c-format
 msgid "Finding unused localization packages..."
-msgstr ""
+msgstr "Menemukan paket lokalisasi tak terpakai..."
 
 #: pkgs.pm:290
 #, c-format
@@ -5495,21 +5507,23 @@ msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
 msgstr ""
+"Terdeteksi beberapa paket yang tidak diperlukan untuk konfigurasi sistem "
+"Anda."
 
 #: pkgs.pm:291
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
-msgstr ""
+msgstr "Paket berikut akan dihapus, kecuali Anda memilih sebaliknya:"
 
 #: pkgs.pm:294 pkgs.pm:295
-#, fuzzy, c-format
+#, c-format
 msgid "Unused hardware support"
-msgstr "aktifkan dukungan radio"
+msgstr "Dukungan hardware tak terpakai"
 
 #: pkgs.pm:298 pkgs.pm:299
 #, c-format
 msgid "Unused localization"
-msgstr ""
+msgstr "Lokalisasi tak terpakai"
 
 #: raid.pm:43
 #, c-format
@@ -6202,7 +6216,7 @@ msgstr "Laporkan hasil pengujian ke tty"
 #: security/level.pm:10
 #, c-format
 msgid "Disable msec"
-msgstr ""
+msgstr "Matikan msec"
 
 #: security/level.pm:11
 #, c-format
@@ -6210,9 +6224,9 @@ msgid "Standard"
 msgstr "Standar"
 
 #: security/level.pm:12
-#, fuzzy, c-format
+#, c-format
 msgid "Secure"
-msgstr "Keamanan"
+msgstr "Aman"
 
 #: security/level.pm:40
 #, c-format
@@ -6222,6 +6236,11 @@ msgid ""
 "system security\n"
 "on your own."
 msgstr ""
+"Level ini untuk digunakan dengan hati-hati, karena ini mematikan semua "
+"keamanan\n"
+"tambahan yang disediakan oleh msec. Gunakan hanya ketika Anda ingin mengurus "
+"semua aspek keamanan\n"
+"sistem Anda sendiri."
 
 #: security/level.pm:43
 #, c-format
@@ -6262,7 +6281,7 @@ msgstr "Pilih tingkat keamanan yang diinginkan"
 #: security/level.pm:58
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: security/level.pm:61
 #, c-format
@@ -6272,12 +6291,12 @@ msgstr "Administrator Keamanan:"
 #: security/level.pm:62
 #, c-format
 msgid "Login or email:"
-msgstr ""
+msgstr "Login atau email:"
 
 #: services.pm:17
 #, c-format
 msgid "Listen and dispatch ACPI events from the kernel"
-msgstr ""
+msgstr "Dengarkan dan kirim event ACPI dari kernel"
 
 #: services.pm:18
 #, c-format
@@ -6311,7 +6330,7 @@ msgstr ""
 #: services.pm:24
 #, c-format
 msgid "Avahi is a ZeroConf daemon which implements an mDNS stack"
-msgstr ""
+msgstr "Avahi adalah daemon ZeroConf yang mengimplementasikan susunan mDNS"
 
 #: services.pm:25
 #, c-format
@@ -6366,6 +6385,15 @@ msgid ""
 "applications and \n"
 "scripts can access the LCD via a simple API."
 msgstr ""
+"G15Daemon memungkinkan pengguna mengakses semua kunci ektra dengan cara "
+"decoding \n"
+"dan mendorong kembali ke kernel via driver UINPUT linux. Driver ini harus "
+"dimuat sebelum \n"
+"g15daemon bisa digunakan untuk akses keyboard. LCD G15 juga didukung. Secara "
+"default, \n"
+"tanpa klien lain aktif, g15daemon akan menampilkan jam. Aplikasi dan skrip "
+"klien \n"
+"bisa mengakses LCD via API sederhana."
 
 #: services.pm:38
 #, c-format
@@ -6422,18 +6450,19 @@ msgstr ""
 #: services.pm:49
 #, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
-msgstr ""
+msgstr "Mengotomatiskan penyaringan paket firewall dengan ip6tables"
 
 #: services.pm:50
 #, c-format
 msgid "Automates a packet filtering firewall with iptables"
-msgstr ""
+msgstr "Mengotomatiskan penyaringan paket firewall dengan iptables"
 
 #: services.pm:51
 #, c-format
 msgid ""
 "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
 msgstr ""
+"Meratakan distribusi beban IRQ ke beberapa CPU untuk meningkatkan performa"
 
 #: services.pm:52
 #, c-format
@@ -6463,7 +6492,7 @@ msgstr "Pendeteksian dan konfigurasi otomatis perangkat keras saat boot."
 #: services.pm:58
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
-msgstr ""
+msgstr "Optimalkan perilaku sistem untuk memperpanjang umur baterai"
 
 #: services.pm:59
 #, c-format
@@ -6495,12 +6524,12 @@ msgstr ""
 #: services.pm:65
 #, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
-msgstr ""
+msgstr "Memonitor jaringan (Firewall Interaktif dan nirkabel)"
 
 #: services.pm:66
 #, c-format
 msgid "Software RAID monitoring and management"
-msgstr ""
+msgstr "Pengawasan dan manajemen RAID software"
 
 #: services.pm:67
 #, c-format
@@ -6514,7 +6543,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Enables MSEC security policy on system startup"
-msgstr ""
+msgstr "Hidupkan kebijakan keamanan MSEC saat memulai sistem"
 
 #: services.pm:69
 #, c-format
@@ -6528,7 +6557,7 @@ msgstr ""
 #: services.pm:70
 #, c-format
 msgid "Initializes network console logging"
-msgstr ""
+msgstr "Inisialisasi pencatatan konsol jaringan"
 
 #: services.pm:71
 #, c-format
@@ -6551,12 +6580,12 @@ msgstr ""
 #: services.pm:75
 #, c-format
 msgid "Requires network to be up if enabled"
-msgstr ""
+msgstr "Memerlukan jaringan menyala jika dihidupkan"
 
 #: services.pm:76
 #, c-format
 msgid "Wait for the hotplugged network to be up"
-msgstr ""
+msgstr "Menunggu jaringan hotplugged menyala"
 
 #: services.pm:77
 #, c-format
@@ -6598,7 +6627,7 @@ msgstr "Dukung OKI 4w and winprinter yang kompatibel."
 #: services.pm:86
 #, c-format
 msgid "Checks if a partition is close to full up"
-msgstr ""
+msgstr "Periksa jika ada partisi yang hampir penuh"
 
 #: services.pm:87
 #, c-format
@@ -6627,7 +6656,7 @@ msgstr ""
 #: services.pm:93
 #, c-format
 msgid "Reserves some TCP ports"
-msgstr ""
+msgstr "Menyiapkan beberapa port TCP"
 
 #: services.pm:94
 #, c-format
@@ -6658,9 +6687,9 @@ msgstr ""
 "untuk digunakan oleh aplikasi semacam Oracle atau pemutar DVD"
 
 #: services.pm:99
-#, fuzzy, c-format
+#, c-format
 msgid "Nameserver information manager"
-msgstr "Info hard disk drive"
+msgstr "Manajer informasi nama server"
 
 #: services.pm:100
 #, c-format
@@ -6684,13 +6713,14 @@ msgstr ""
 "metrik performa untuk sembarang komputer pada jaringan."
 
 #: services.pm:105
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
 "system log files.  It is a good idea to always run rsyslog."
 msgstr ""
-"Syslog adalah fasilitas yang digunakan para daemon untuk mencatat\n"
-"pesan log sistem pada file. Sebaiknya syslog selalu hidup."
+"Syslog adalah fasilitas yang digunakan oleh banyak daemon untuk mencatat "
+"pesan ke berbagai file log sistem. Akan sangat baik jika rsyslog selalu "
+"dijalankan."
 
 #: services.pm:106
 #, c-format
@@ -6721,7 +6751,7 @@ msgstr ""
 #: services.pm:111
 #, c-format
 msgid "Packet filtering firewall"
-msgstr ""
+msgstr "Firewall penyaringan paket"
 
 #: services.pm:112
 #, c-format
@@ -6740,7 +6770,7 @@ msgstr "Jalankan sistem suara pada komputer Anda"
 #: services.pm:114
 #, c-format
 msgid "layer for speech analysis"
-msgstr ""
+msgstr "layer untuk analisis ucapan"
 
 #: services.pm:115
 #, c-format
@@ -6763,7 +6793,7 @@ msgstr ""
 #: services.pm:118
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
-msgstr ""
+msgstr "Memindahkan aturan udev tangguh yang dihasilkan ke /etc/udev/rules.d"
 
 #: services.pm:119
 #, c-format
@@ -6773,7 +6803,7 @@ msgstr "Muat driver untuk perangkat USB Anda"
 #: services.pm:120
 #, c-format
 msgid "A lightweight network traffic monitor"
-msgstr ""
+msgstr "Monitor lalu lintas jaringan yang ringan"
 
 #: services.pm:121
 #, c-format
@@ -6800,7 +6830,7 @@ msgstr "Internet"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "Jaringan"
 
 #: services.pm:161
 #, c-format
@@ -6953,7 +6983,7 @@ msgstr ""
 "mode default: menawarkan untuk mengkonfigurasi fitur autologin"
 
 #: standalone.pm:61
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
 "\n"
@@ -6965,9 +6995,9 @@ msgstr ""
 "[OPSI] [NAMA_PROGRAM]\n"
 "\n"
 "OPSI:\n"
-"  --help            - cetak pesan ini.\n"
-"  --report          - program harus berupa aplikasi Mandriva Linux\n"
-"  --incident        - program harus berupa aplikasi Mandriva Linux"
+"  --help            - tampilkan pesan bantuan ini.\n"
+"  --report          - program harus salah satu dari peralatan %s\n"
+"  --incident        - program harus salah satu dari peralatan %s"
 
 #: standalone.pm:67
 #, c-format
@@ -7018,7 +7048,7 @@ msgstr ""
 "                 : dan gs untuk ghostscript."
 
 #: standalone.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS]...\n"
 "%s Terminal Server Configurator\n"
@@ -7035,19 +7065,19 @@ msgid ""
 "IP, nbi image name)"
 msgstr ""
 "[OPSI]...\n"
-"Konfigurator Server Terminal Mandriva\n"
-"--enable         : aktifkan MTS\n"
+"Konfigurator Server Terminal %s\n"
+"--enable         : hidupkan MTS\n"
 "--disable        : matikan MTS\n"
-"--start          : jalankan MTS\n"
-"--stop           : stop MTS\n"
-"--adduser        : tambahkan pengguna yang telah ada pada MTS (membutuhkan "
+"--start          : mulai MTS\n"
+"--stop           : hentikan MTS\n"
+"--adduser        : tambahkan pengguna sistem yang ada ke MTS (memerlukan "
 "nama pengguna)\n"
-"--deluser        : hapus pengguna yang telah ada dari MTS (membutuhkan nama "
+"--deluser        : hapus pengguna sistem yang ada dari MTS (memerlukan nama "
 "pengguna)\n"
-"--addclient      : tambahkan komputer klien pada MTS (membutuhkan alamat "
-"MAC, IP, nama image nbi)\n"
-"--delclient      : hapus komputer klien dari MTS (membutuhkan alamat MAC, "
-"IP, nama image nbi)"
+"--addclient      : tambahkan komputer klien ke MTS (memerlukan alamat MAC, "
+"IP, nama image nbi)\n"
+"--delclient      : hapus komputer klien dari MTS (memerlukan alamat MAC, IP, "
+"nama image nbi)"
 
 #: standalone.pm:100
 #, c-format
@@ -7083,7 +7113,7 @@ msgstr ""
 "--quiet : tidak interaktif. Digunakan dengan (dis)connect."
 
 #: standalone.pm:112
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTION]...\n"
 "  --no-confirmation      do not ask first confirmation question in %s Update "
@@ -7094,13 +7124,13 @@ msgid ""
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
 "[OPSI]...\n"
-"  --no-confirmation      tidak ada konfirmasi awal pada mode Mandriva "
-"Update\n"
-"  --no-verify-rpm        tidak ada verifikasi tandatangan paket\n"
-"  --changelog-first      tampilkan changelog sebelum filelist di window "
-"penjelasan\n"
-"  --merge-all-rpmnew     menggabungkan semua file .rpmnew/.rpmsave yang "
-"ditemukan"
+"  --no-confirmation      jangan tanya konfirmasi pertama pada mode Update "
+"%s\n"
+"  --no-verify-rpm        jangan verifikasi tanda tangan paket\n"
+"  --changelog-first      tampilkan changelog sebelum filelist dalam jendela "
+"deskripsi\n"
+"  --merge-all-rpmnew     usulkan untuk menggabung semua file .rpmnew/."
+"rpmsave yang ditemukan"
 
 #: standalone.pm:117
 #, c-format
@@ -7212,171 +7242,413 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Installasi gagal"
 
-#~ msgid "Clean /tmp at each boot"
-#~ msgstr "Hapus /tmp setiap boot"
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Perjanjian Lisensi"
 
-#~ msgid "command %s missing"
-#~ msgstr "perintah %s tidak ada"
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Jaminan Terbatas"
 
-#~ msgid ""
-#~ "The classic bug sound tester is to run the following commands:\n"
-#~ "\n"
-#~ "\n"
-#~ "- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
-#~ "uses\n"
-#~ "by default\n"
-#~ "\n"
-#~ "- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
-#~ "currently uses\n"
-#~ "\n"
-#~ "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
-#~ "loaded or not\n"
-#~ "\n"
-#~ "- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" "
-#~ "will\n"
-#~ "tell you if sound and alsa services are configured to be run on\n"
-#~ "initlevel 3\n"
-#~ "\n"
-#~ "- \"aumix -q\" will tell you if the sound volume is muted or not\n"
-#~ "\n"
-#~ "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound "
-#~ "card.\n"
-#~ msgstr ""
-#~ "Penguji kesalahan suara klasik akan menjalankan perintah berikut:\n"
-#~ "\n"
-#~ "\n"
-#~ "- \"lspcidrake -v | fgrep -i AUDIO\" akan memberitahu Anda driver mana "
-#~ "yang\n"
-#~ "dipakai oleh kartu Anda secara default\n"
-#~ "\n"
-#~ "- \"grep sound-slot /etc/modprobe.conf\" memberitahu driver apa yang "
-#~ "dipakai\n"
-#~ "sekarang\n"
-#~ "\n"
-#~ "- \"/sbin/lsmod\" menguji apakah modul (driver) dimuat atau tidak\n"
-#~ "\n"
-#~ "- \"/sbin/chkconfig --list sound\" dan \"/sbin/chkconfig --list alsa\" "
-#~ "akan\n"
-#~ "memberitahu Anda apakah layanan suara dan alsa terkonfigurasi untuk "
-#~ "dijalankan\n"
-#~ "pada initlevel 3\n"
-#~ "\n"
-#~ "- \"aumix -q\" memberitahu apakah volume suara dipadamkan atau tidak\n"
-#~ "\n"
-#~ "- \"/sbin/fuser -v /dev/dsp\" akan memberitahu program mana yang memakai\n"
-#~ "kartu suara.\n"
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. Lisensi GPL dan Lisensi Terkait"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Hak Kekayaan Intelektual"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Wilayah Hukum"
 
 #~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
 #~ msgstr ""
-#~ "Jalankan filter paket untuk Linux kernel seri 2.2, untuk set-up\n"
-#~ "firewall yang melindungi komputer Anda dari serangan jaringan."
+#~ "Semua hak atas komponen Produk Software adalah milik penulis yang "
+#~ "bersangkutan dan dilindungi \n"
+#~ "oleh hak kekayaan intelektual dan hukum hak cipta yang berlaku untuk "
+#~ "program software.\n"
+#~ "Moondrake dan pemasok dan pemberi lisensi menggunakan hak tersebut untuk "
+#~ "memodifikasi atau menyesuaikan \n"
+#~ "Produk Software, secara keseluruhan atau sebagian, dengan semua cara dan "
+#~ "untuk semua keperluan.\n"
+#~ "\"Moondrake\" dan logo terkait adalah merk dagang dari %s"
 
-#~ msgid "File sharing"
-#~ msgstr "Berbagi file"
-
-#~ msgid "Restrict command line options"
-#~ msgstr "Batasi parameter perintah baris"
-
-#~ msgid "restrict"
-#~ msgstr "batasi"
+#~ msgid "An NTP client/server"
+#~ msgstr "Klien/server NTP"
 
 #~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ "Below are some basic tips to help debug audio problems, but for accurate "
+#~ "and up-to-date tips and tricks, please see:\n"
+#~ "\n"
+#~ "https://wiki.moondrake.org/en/Support:DebuggingSoundProblems\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- General Recommendation: Enable PulseAudio. If you have opted to not to "
+#~ "use PulseAudio, we would strongly advise you enable it. For the vast "
+#~ "majority of desktop use cases, PulseAudio is the recommended and best "
+#~ "supported option.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and "
+#~ "\"pauvucontrol\" (generic) will launch graphical applications to allow "
+#~ "you to view your sound devices and adjust volume levels\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"ps aux | grep pulseaudio\" will check that PulseAudio is running.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl stat\" will check that you can connect to the PulseAudio daemon "
+#~ "correctly.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl list sink-inputs\" will tell you which programs are currently "
+#~ "playing sound via PulseAudio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"systemctl status osspd.service\" will tell you the current state of "
+#~ "the OSS Proxy Daemon. This is used to enable sound from legacy "
+#~ "applications which use the OSS sound API. You should install the \"ossp\" "
+#~ "package if you need this functionality.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pacmd ls\" will give you a LOT of debug information about the current "
+#~ "state of your audio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | grep -i audio\" will tell you which low-level driver "
+#~ "your card uses by default.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/lsmod | grep snd\" will enable you to check which sound "
+#~ "related kernel modules (drivers) are loaded.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"alsamixer -c 0\" will give you a text-based mixer to the low level "
+#~ "ALSA mixer controls for first sound card\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" will tell which programs "
+#~ "are currently using the sound card directly (normally this should only "
+#~ "show PulseAudio)\n"
 #~ msgstr ""
-#~ "Pilihan ``Batasi parameter perintah baris'' tidak ada gunanya tanpa kata "
-#~ "sandi"
-
-#~ msgid "Use an encrypted filesystem"
-#~ msgstr "Gunakan sistem file terenkripsi"
+#~ "Di bawah adalah beberapa tips dasar untuk membantu mendebug masalah "
+#~ "audio, tapi untuk tips dan trik akurat dan terbaru, silakan lihat:\n"
+#~ "\n"
+#~ "https://wiki.moondrake.org/en/Support:DebuggingSoundProblems\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- Rekomendasi Umum: Hidupkan PulseAudio. Jika Anda telah memilih untuk "
+#~ "tidak menggunakan PulseAudio, sangat dianjurkan untuk menghidupkannya. "
+#~ "Untuk penggunaan desktop secara luas, PulseAudio adalah pilihan terbaik "
+#~ "dan direkomendasikan.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) dan "
+#~ "\"pauvucontrol\" (generik) akan menjalankan aplikasi grafis yang "
+#~ "memungkinkan Anda untuk melihat perangkat suara dan menyesuaikan level "
+#~ "volume\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"ps aux | grep pulseaudio\" akan memeriksa bahwa PulseAudio berjalan.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl stat\" akan memeriksa bahwa Anda bisa terhubung ke daemon "
+#~ "PulseAudio dengan benar.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl list sink-inputs\" akan memberitahu Anda program mana yang "
+#~ "sedang memainkan suara melalui PulseAudio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"systemctl status osspd.service\" akan memberitahu Anda status dari "
+#~ "Daemon Proxy OSS. Ini digunakan untuk menghidupkan suara dari aplikasi "
+#~ "yang menggunakan API suara OSS. Anda harus menginstall paket \"ossp\" "
+#~ "jika Anda memerlukan fungsionalitas ini.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pacmd ls\" akan memberi Anda BANYAK informasi debug tentang status "
+#~ "dari perangkat suara Anda.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | grep -i audio\" akan memberitahu Anda driver level "
+#~ "bawah yang mana yang digunakan oleh perangkat Anda secara default.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/lsmod | grep snd\" akan memungkinkan Anda untuk memeriksa "
+#~ "modul kernel (driver) yang terkait dengan suara yang mana yang dimuat.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"alsamixer -c 0\" akan memberikan Anda mixer berbasis teks untuk "
+#~ "kontrol mixer ALSA level bawah untuk perangkat suara pertama\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" akan memberitahu program "
+#~ "mana yang sedang menggunakan perangkat suara secara langsung (normalnya "
+#~ "ini hanya menampilkan PulseAudio)\n"
 
 #~ msgid ""
-#~ "To ensure data integrity after resizing the partition(s), \n"
-#~ "filesystem checks will be run on your next boot into Microsoft Windows®"
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
 #~ msgstr ""
-#~ "Untuk memastikan integritas data setelah ukuran partisi berubah,\n"
-#~ "pengujian sistem file akan dilakukan pada boot berikut dalam Windows®"
-
-#~ msgid "Use the Microsoft Windows® partition for loopback"
-#~ msgstr "Gunakan partisi Microsoft Windows® untuk loopback"
-
-#~ msgid "Which partition do you want to use for Linux4Win?"
-#~ msgstr "Partisi mana yang hendak Anda gunakan untuk Linux4Win?"
-
-#~ msgid "Choose the sizes"
-#~ msgstr "Pilih ukuran"
-
-#~ msgid "Root partition size in MB: "
-#~ msgstr "Ukuran partisi root dalam MB: "
-
-#~ msgid "Swap partition size in MB: "
-#~ msgstr "Ukuran partisi swap dalam MB: "
+#~ "Selamat, instalasi selesai.\n"
+#~ "Keluarkan media boot dan tekan Enter untuk reboot."
 
 #~ msgid ""
-#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
 #~ msgstr ""
-#~ "Tidak terdapat partisi FAT yang akan digunakan sebagai loopback (atau "
-#~ "tidak tersedia ruang kosong)"
+#~ "Untuk informasi tentang perbaikan yang tersedia untuk rilis Moondrake "
+#~ "ini,\n"
+#~ "silakan lihat Errata yang tersedia pada:\n"
+#~ "%s"
 
 #~ msgid ""
-#~ "The FAT resizer is unable to handle your partition, \n"
-#~ "the following error occurred: %s"
+#~ "If any portion of this agreement is held void, illegal or inapplicable by "
+#~ "a court judgment, this \n"
+#~ "portion is excluded from this contract. You remain bound by the other "
+#~ "applicable sections of the \n"
+#~ "agreement.\n"
+#~ "The terms and conditions of this License are governed by the Laws of "
+#~ "France.\n"
+#~ "All disputes on the terms of this license will preferably be settled out "
+#~ "of court. As a last \n"
+#~ "resort, the dispute will be referred to the appropriate Courts of Law of "
+#~ "Paris - France.\n"
+#~ "For any question on this document, please contact Moondrake."
 #~ msgstr ""
-#~ "Pengatur ulang FAT tidak mampu menangani partisi Anda, \n"
-#~ "kesalahan berikut terjadi: %s"
-
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "Silakan log out dan tekan Ctrl-Alt-BackSpace"
-
-#~ msgid "Welcome To Crackers"
-#~ msgstr "Selamat Datang di Crackers"
-
-#~ msgid "Poor"
-#~ msgstr "Lemah"
-
-#~ msgid "High"
-#~ msgstr "Kuat"
-
-#~ msgid "Higher"
-#~ msgstr "Lebih Kuat"
-
-#~ msgid "Paranoid"
-#~ msgstr "Paranoid"
+#~ "Jika ada bagian dari perjanjian ini yang dibatalkan, ilegal atau tidak "
+#~ "dapat diterapkan oleh \n"
+#~ "keputusan pengadilan, bagian tersebut akan dikecualikan dari kontrak ini. "
+#~ "Anda tetap terikat \n"
+#~ "oleh bagian lain yang masih berlaku dari perjanjian ini.\n"
+#~ "Syarat dan ketentuan dari Lisensi ini diatur oleh Undang-Undang "
+#~ "Perancis.\n"
+#~ "Semua perselisihan tentang syarat-syarat lisensi ini sebaiknya "
+#~ "diselesaikan di luar pengadilan. \n"
+#~ "Sebagai usaha terakhir, perselisihan tersebut akan dirujuk ke Pengadilan "
+#~ "sesuai Hukum Paris - \n"
+#~ "Perancis. Untuk pertanyaan dari dokumen ini, silakan kontak Moondrake."
 
 #~ msgid ""
-#~ "This level is to be used with care. It makes your system more easy to "
-#~ "use,\n"
-#~ "but very sensitive. It must not be used for a machine connected to "
-#~ "others\n"
-#~ "or to the Internet. There is no password access."
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
 #~ msgstr ""
-#~ "Level ini harus digunakan hati-hati. Ia akan membuat sistem Anda akan "
-#~ "mudah\n"
-#~ "digunakan, tapi sangat sensitif. Tidak boleh digunakan untuk komputer "
-#~ "yang\n"
-#~ "terhubung ke komputer lain atau ke Internet. Tidak ada akses kata sandi."
+#~ "Informasi tentang konfigurasi sistem Anda tersedia pada bab pasca\n"
+#~ "install di Panduan Pengguna Resmi Moondrake."
+
+#~ msgid "Introduction"
+#~ msgstr "Pengantar"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "Silakan backup terlebih dahulu data Anda"
 
 #~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
+#~ "Please read this document carefully. This document is a license agreement "
+#~ "between you and  \n"
+#~ "Moondrake which applies to the Software Products.\n"
+#~ "By installing, duplicating or using any of the Software Products in any "
+#~ "manner, you explicitly \n"
+#~ "accept and fully agree to conform to the terms and conditions of this "
+#~ "License. \n"
+#~ "If you disagree with any portion of the License, you are not allowed to "
+#~ "install, duplicate or use \n"
+#~ "the Software Products. \n"
+#~ "Any attempt to install, duplicate or use the Software Products in a "
+#~ "manner which does not comply \n"
+#~ "with the terms and conditions of this License is void and will terminate "
+#~ "your rights under this \n"
+#~ "License. Upon termination of the License,  you must immediately destroy "
+#~ "all copies of the \n"
+#~ "Software Products."
 #~ msgstr ""
-#~ "Kata sandi diaktifkan, tapi penggunaan sebagai komputer jaringan tidak "
-#~ "direkomendasikan."
+#~ "Silakan baca dokumen ini secara seksama. Dokumen ini adalah perjanjian "
+#~ "lisensi antara Anda  \n"
+#~ "dan Moondrake yang berlaku untuk Produk Software.\n"
+#~ "Dengan menginstall, menduplikasi atau menggunakan Produk Software dengan "
+#~ "cara apapun, Anda secara \n"
+#~ "eksplisit menerima dan setuju untuk sesuai dengan syarat dan ketentuan "
+#~ "dari Lisensi ini. \n"
+#~ "Jika Anda tidak setuju dengan bagian manapun dari Lisensi, Anda tidak "
+#~ "diizinkan untuk menginstall, \n"
+#~ "menduplikasi atau menggunakan Produk Software. \n"
+#~ "Setiap usaha untuk menginstall, menduplikasi atau menggunakan Produk "
+#~ "Software dengan tujuan yang \n"
+#~ "tidak sesuai dengan syarat dan ketentuan akan membatalkan hak-hak Anda di "
+#~ "bawah Lisensi ini. \n"
+#~ "Pada saat berakhirnya Lisensi,  Anda harus segera memusnahkan semua "
+#~ "salinan dari Produk Software."
+
+#~ msgid "Set CPU frequency settings"
+#~ msgstr "Atur pengaturan frekuensi CPU"
 
 #~ msgid ""
-#~ "There are already some restrictions, and more automatic checks are run "
-#~ "every night."
+#~ "The Software Products and attached documentation are provided \"as is\", "
+#~ "with no warranty, to the \n"
+#~ "extent permitted by law.\n"
+#~ "Neither Moondrake nor its licensors or suppliers will, in any "
+#~ "circumstances and to the extent \n"
+#~ "permitted by law, be liable for any special, incidental, direct or "
+#~ "indirect damages whatsoever \n"
+#~ "(including without limitation damages for loss of business, interruption "
+#~ "of business, financial \n"
+#~ "loss, legal fees and penalties resulting from a court judgment, or any "
+#~ "other consequential loss) \n"
+#~ "arising out of  the use or inability to use the Software Products, even "
+#~ "if Moondrake or its \n"
+#~ "licensors or suppliers have been advised of the possibility or occurrence "
+#~ "of such damages.\n"
+#~ "\n"
+#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN "
+#~ "SOME COUNTRIES\n"
+#~ "\n"
+#~ "To the extent permitted by law, neither Moondrake nor its licensors, "
+#~ "suppliers or\n"
+#~ "distributors will, in any circumstances, be liable for any special, "
+#~ "incidental, direct or indirect \n"
+#~ "damages whatsoever (including without limitation damages for loss of "
+#~ "business, interruption of \n"
+#~ "business, financial loss, legal fees and penalties resulting from a court "
+#~ "judgment, or any \n"
+#~ "other consequential loss) arising out of the possession and use of "
+#~ "software components or \n"
+#~ "arising out of  downloading software components from one of Moondrake "
+#~ "sites which are \n"
+#~ "prohibited or restricted in some countries by local laws.\n"
+#~ "This limited liability applies to, but is not restricted to, the strong "
+#~ "cryptography components \n"
+#~ "included in the Software Products.\n"
+#~ "However, because some jurisdictions do not allow the exclusion or "
+#~ "limitation of liability for \n"
+#~ "consequential or incidental damages, the above limitation may not apply "
+#~ "to you."
 #~ msgstr ""
-#~ "Terdapat beberapa batasan, dan beberapa pengujian otomatis berjalan "
-#~ "setiap malam."
+#~ "Produk Software dan dokumentasi terlampir disediakan \"seperti\", dengan "
+#~ "tanpa jaminan, sampai \n"
+#~ "batas yang diizinkan oleh hukum.\n"
+#~ "Tidak Moondrake tidak juga pelisensinya atau pemasok akan, dalam situasi "
+#~ "apapun dan sejauh yang diizinkan \n"
+#~ "oleh hukum, bertanggung jawab atas kerusakan khusus, insidental, langsung "
+#~ "atau tidak langsung \n"
+#~ "(termasuk tanpa batasan untuk kerugian bisnis, gangguan bisnis, kerugian "
+#~ "finansial, biaya hukum \n"
+#~ "dan denda dari hasil keputusan pengadilan, atau konsekuensi kerugian "
+#~ "lainnya) yang timbul dari \n"
+#~ "penggunaan atau ketidakmampuan untuk menggunakan Produk Software, bahkan "
+#~ "jika Moondrake atau pemberi \n"
+#~ "lisensi atau pemasok telah diberitahukan mengenai kemungkinan akan "
+#~ "terjadinya kerusakan tersebut.\n"
+#~ "\n"
+#~ "KEWAJIBAN TERBATAS TERKAIT DENGAN PENGGUNAAN SOFTWARE YANG DILARANG DI "
+#~ "BEBERAPA NEGARA\n"
+#~ "\n"
+#~ "Sejauh yang diizinkan oleh hukum, tidak Moondrake tidak juga "
+#~ "pelisensinya, pemasok atau distributor \n"
+#~ "akan, dalam situasi apapun, bertanggung atas kerusakan khusus, "
+#~ "insidental, langsung atau \n"
+#~ "tidak langsung apapun (termasuk tanpa batasan untuk kerugian bisnis, "
+#~ "gangguan bisnis, \n"
+#~ "kerugian finansial, biaya hukum dan denda dari hasil keputusan "
+#~ "pengadilan, atau konsekuensi \n"
+#~ "kerugian lainya) yang timbul dari penggunaan komponen software atau "
+#~ "timbul dari mendownload \n"
+#~ "komponen software dari salah satu situs Moondrake yang dilarang atau "
+#~ "dibatasi di beberapa negara \n"
+#~ "oleh hukum setempat.\n"
+#~ "Kewajiban terbatas ini berlaku untuk, tapi tidak terbatas pada, komponen "
+#~ "kriptografi yang kuat \n"
+#~ "yang disertakan dalam Produk Software.\n"
+#~ "Namun, karena beberapa wilayah hukum tidak mengizinkan pengecualian atau "
+#~ "pembatasan atau kewajiban \n"
+#~ "untuk kerusakan konsekuensional atau insidental, pembatasan di atas "
+#~ "mungkin tidak berlaku."
 
 #~ msgid ""
-#~ "This is similar to the previous level, but the system is entirely closed "
-#~ "and security features are at their maximum."
+#~ "The Software Products consist of components created by different persons "
+#~ "or entities.\n"
+#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
+#~ "the components which \n"
+#~ "they cover. Please read carefully the terms and conditions of the license "
+#~ "agreement for each component \n"
+#~ "before using any component. Any question on a component license should be "
+#~ "addressed to the component \n"
+#~ "licensor or supplier and not to Moondrake.\n"
+#~ "The programs developed by Moondrake are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by Moondrake is governed by \"%s\" License."
 #~ msgstr ""
-#~ "Hal ini sama dengan level sebelumnya, tapi sistem sepenuhnya ditutup.\n"
-#~ "Fitur keamanan maksimal."
+#~ "Produk Software terdiri dari komponen yang dibuat oleh orang atau badan "
+#~ "yang berbeda.\n"
+#~ "Kebanyakan dari lisensi ini mengizinkan Anda untuk menggunakan, "
+#~ "menduplikasi, menyesuaikan atau \n"
+#~ "menyebarluaskan komponen mereka. Silakan baca secara seksama syarat dan "
+#~ "ketentuan dari perjanjian \n"
+#~ "lisensi dari setiap komponen sebelum menggunakannya. Setiap pertanyaan "
+#~ "pada lisensi komponen \n"
+#~ "harus ditujukan ke pemberi lisensi atau pemasok komponen dan bukan ke "
+#~ "Moondrake.\n"
+#~ "Program yang dikembangkan oleh Moondrake diatur oleh Lisensi GPL. "
+#~ "Dokumentasi yang ditulis oleh \n"
+#~ "Moondrake diatur oleh Lisensi \"%s\"."
+
+#~ msgid ""
+#~ "The operating system and the different components available in the "
+#~ "Moondrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software "
+#~ "Products include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation "
+#~ "related to the operating \n"
+#~ "system and the different components of the Moondrake distribution, and "
+#~ "any applications \n"
+#~ "distributed with these products provided by Moondrake's licensors or "
+#~ "suppliers."
+#~ msgstr ""
+#~ "Sistem operasi dan berbagai komponen yang tersedia dalam distribusi "
+#~ "Moondrake akan disebut \n"
+#~ "\"Produk Software\". Produk Software termasuk, namun tidak terbatas pada, "
+#~ "sekumpulan \n"
+#~ "program, metode, aturan dan dokumentasi yang berkaitan dengan sistem "
+#~ "operasi dan komponen \n"
+#~ "yang berbeda dari distribusi Moondrake, dan setiap aplikasi yang "
+#~ "didistribusikan dengan \n"
+#~ "produk yang disediakan oleh pemberi lisensi Moondrake atau pemasok."
+
+#~ msgid ""
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
+#~ msgstr ""
+#~ "Peringatan: Free Software belum tentu bebas paten, dan beberapa Free "
+#~ "Software\n"
+#~ "yang disertakan mungkin dilindungi oleh paten di negara Anda. Contohnya, "
+#~ "dekoder\n"
+#~ "MP3 yang disertakan mungkin memerlukan lisensi untuk penggunaan lebih "
+#~ "lanjut (lihat\n"
+#~ "http://www.mp3licensing.com untuk lebih jelasnya). Jika Anda tidak yakin "
+#~ "paten\n"
+#~ "mungkin berlaku untuk Anda, periksa hukum lokal di daerah Anda."
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr ""
+#~ "Perjanjian Lisensi resmi adalah License Agreement berbahasa Inggris. "
+#~ "Terjemahan bahasa Indonesia ini dibuat sebagai informasi untuk memudahkan "
+#~ "pengguna berbahasa Indonesia memahami isi dari License Agreement tersebut."
 
 #~ msgid ""
 #~ "\n"
@@ -7438,8 +7710,8 @@ msgstr "Installasi gagal"
 #~ "masing-masing dan dilindungi oleh hukum hak cipta dan hak intelektual\n"
 #~ "yang berlaku untuk program komputer.\n"
 
-#~ msgid "Use libsafe for servers"
-#~ msgstr "Gunakan libsafe untuk server"
+#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 
 #~ msgid ""
 #~ "A library which defends against buffer overflow and format string attacks."
@@ -7447,83 +7719,100 @@ msgstr "Installasi gagal"
 #~ "Sebuah pustaka yang menjaga terhadap serangan buffer overflow dan format "
 #~ "string."
 
-#~ msgid "LILO/grub Installation"
-#~ msgstr "Installasi LILO/grub"
+#~ msgid "Accept user"
+#~ msgstr "Menerima pengguna"
 
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "Ukuran RAM yang tepat jika diperlukan (ditemukan %d MB)"
+#~ msgid "Accept/Refuse bogus IPv4 error messages."
+#~ msgstr "Terima/Tolak pesan kesalahan IPv4."
 
-#~ msgid "Give the ram size in MB"
-#~ msgstr "Berikan ukuran RAM dalam MB"
+#~ msgid "Accept/Refuse broadcasted icmp echo."
+#~ msgstr "Terima/Tolak echo icmp tersiar."
 
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "Jika Anda ingin menggunakan aboot, sisakan ruang kosong (cukup 2048 "
-#~ "sektor) di awal disk"
-
-#~ msgid "Security level"
-#~ msgstr "Tingkat keamanan"
-
-#~ msgid "Expand Tree"
-#~ msgstr "Perluas Tree"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "Tutup Tree"
-
-#~ msgid "Toggle between flat and group sorted"
-#~ msgstr "Pindah tampilan antara terurut rata dan grup"
-
-#~ msgid "Choose action"
-#~ msgstr "Pilih aksi"
+#~ msgid "Accept/Refuse icmp echo."
+#~ msgstr "Terima/Tolak echo icmp."
 
 #~ msgid "Active Directory with SFU"
 #~ msgstr "Active Directory dengan SFU"
 
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Active Directory dengan Winbind"
-
-#~ msgid "Use information stored in local files for all authentication"
-#~ msgstr "Informasi pengguna disimpan pada file lokal untuk semua otentikasi"
-
 #~ msgid "Active Directory with SFU:"
 #~ msgstr "Active Directory dengan SFU:"
+
+#~ msgid "Active Directory with Winbind"
+#~ msgstr "Active Directory dengan Winbind"
 
 #~ msgid "Active Directory with Winbind:"
 #~ msgstr "Active Directory dengan Winbind:"
 
-#~ msgid ""
-#~ "Winbind allows the system to authenticate users in a Windows Active "
-#~ "Directory Server."
-#~ msgstr ""
-#~ "Winbind mengijinkan sistem untuk mengotentikasi pengguna dalam Active "
-#~ "Directory Server Windows"
+#~ msgid "Add user"
+#~ msgstr "Tambah pengguna"
 
-#~ msgid "Authentication LDAP"
-#~ msgstr "Otentikasi LDAP"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "layout keamanan (SASL/Kerberos)"
+#~ msgid "Allow/Forbid remote root login."
+#~ msgstr "Izinkan/Larang login root remote."
 
 #~ msgid "Authentication Active Directory"
 #~ msgstr "Otentikasi Active Directory"
 
-#~ msgid "LDAP users database"
-#~ msgstr "Basis Data pengguna LDAP"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "Pengguna LDAP diijinkan untuk menjelajah Active Directory"
+#~ msgid "Authentication LDAP"
+#~ msgstr "Otentikasi LDAP"
 
 #~ msgid "Authentication NIS"
 #~ msgstr "Otentikasi NIS"
+
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "Otentikasi Domain Windows"
+
+#~ msgid "Bad backup file"
+#~ msgstr "File backup rusak"
+
+#~ msgid "Choose action"
+#~ msgstr "Pilih aksi"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Pilih ukuran"
+
+#~ msgid "Clean /tmp at each boot"
+#~ msgstr "Hapus /tmp setiap boot"
+
+#~ msgid "Collapse Tree"
+#~ msgstr "Tutup Tree"
+
+#~ msgid ""
+#~ "Do not update directory inode access times on this filesystem\n"
+#~ "(e.g, for faster access on the news spool to speed up news servers)."
+#~ msgstr ""
+#~ "Jangan update waktu akses inode direktori pada sistem file ini\n"
+#~ "(mis: untuk akses lebih cepat di spool berita untuk mempercepat server "
+#~ "berita)."
+
+#~ msgid "Enable/Disable IP spoofing protection."
+#~ msgstr "Aktifkan/Matikan proteksi pemalsuan IP."
+
+#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
+#~ msgstr "Aktifkan/Matikan libsafe jika libsafe ditemukan pada sistem."
+
+#~ msgid "Enable/Disable msec hourly security check."
+#~ msgstr "Aktifkan/Matikan pengujian keamanan tiap jam oleh msec."
+
+#~ msgid "Enable/Disable the logging of IPv4 strange packets."
+#~ msgstr "Aktifkan/Matikan pencatatan paket aneh IPv4."
+
+#~ msgid "Error reading file %s"
+#~ msgstr "Kesalahan membaca file %s"
+
+#~ msgid "Error writing to file %s"
+#~ msgstr "Kesalahan penulisan ke file %s"
+
+#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
+#~ msgstr "Kesalahan: driver \"%s\" untuk kartu suara Anda tidak terdaftar"
+
+#~ msgid "Expand Tree"
+#~ msgstr "Perluas Tree"
+
+#~ msgid "Ext2"
+#~ msgstr "Ext2"
+
+#~ msgid "File sharing"
+#~ msgstr "Berbagi file"
 
 #~ msgid ""
 #~ "For this to work for a W2K PDC, you will probably need to have the admin "
@@ -7551,17 +7840,130 @@ msgstr "Installasi gagal"
 #~ "Kata sandi Admin, setelah boot system.\n"
 #~ "Perintah 'wbinfo -t' akan menguji apakah rahasia otentikasi Anda baik."
 
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Otentikasi Domain Windows"
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Berikan ukuran RAM dalam MB"
 
-#~ msgid "Undo"
-#~ msgstr "Kembali"
+#~ msgid "High"
+#~ msgstr "Kuat"
+
+#~ msgid "Higher"
+#~ msgstr "Lebih Kuat"
+
+#~ msgid ""
+#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
+#~ "is enough)\n"
+#~ "at the beginning of the disk"
+#~ msgstr ""
+#~ "Jika Anda ingin menggunakan aboot, sisakan ruang kosong (cukup 2048 "
+#~ "sektor) di awal disk"
+
+#~ msgid "Info: "
+#~ msgstr "Info: "
+
+#~ msgid "Journalised FS"
+#~ msgstr "FS terjournal"
+
+#~ msgid "LDAP user allowed to browse the Active Directory"
+#~ msgstr "Pengguna LDAP diijinkan untuk menjelajah Active Directory"
+
+#~ msgid "LDAP users database"
+#~ msgstr "Basis Data pengguna LDAP"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Installasi LILO/grub"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "Jalankan filter paket untuk Linux kernel seri 2.2, untuk set-up\n"
+#~ "firewall yang melindungi komputer Anda dari serangan jaringan."
+
+#~ msgid "No supermount"
+#~ msgstr "Tanpa supermount"
+
+#~ msgid "Number of capture buffers:"
+#~ msgstr "Jumlah capture buffer :"
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr ""
+#~ "Pilihan ``Batasi parameter perintah baris'' tidak ada gunanya tanpa kata "
+#~ "sandi"
+
+#~ msgid "PLL setting:"
+#~ msgstr "setting PLL :"
+
+#~ msgid "Paranoid"
+#~ msgstr "Paranoid"
+
+#~ msgid ""
+#~ "Passwords are now enabled, but use as a networked computer is still not "
+#~ "recommended."
+#~ msgstr ""
+#~ "Kata sandi diaktifkan, tapi penggunaan sebagai komputer jaringan tidak "
+#~ "direkomendasikan."
+
+#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
+#~ msgstr "Silakan log out dan tekan Ctrl-Alt-BackSpace"
+
+#~ msgid "Poor"
+#~ msgstr "Lemah"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Ukuran RAM yang tepat jika diperlukan (ditemukan %d MB)"
+
+#~ msgid "Radio support:"
+#~ msgstr "Dukungan radio :"
+
+#~ msgid "Removable media automounting"
+#~ msgstr "Mount otomatis media removable"
+
+#~ msgid "Rescue partition table"
+#~ msgstr "Selamatkan tabel partisi"
+
+#~ msgid "Restore partition table"
+#~ msgstr "Kembalikan tabel partisi"
+
+#~ msgid "Restoring from file %s failed: %s"
+#~ msgstr "Proses pengembalian dari file %s gagal: %s"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Batasi parameter perintah baris"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Ukuran partisi root dalam MB: "
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
 
 #~ msgid "Save partition table"
 #~ msgstr "Simpan tabel partisi"
 
-#~ msgid "Restore partition table"
-#~ msgstr "Kembalikan tabel partisi"
+#~ msgid "Security level"
+#~ msgstr "Tingkat keamanan"
+
+#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
+#~ msgstr "Jalankan Server Font X (agar Xorg dapat berjalan)"
+
+#~ msgid "Supermount"
+#~ msgstr "Supermount"
+
+#~ msgid "Supermount except for CDROM drives"
+#~ msgstr "Supermount kecuali untuk drive CDROM"
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Ukuran partisi swap dalam MB: "
+
+#~ msgid "TLS"
+#~ msgstr "TLS"
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "Pengatur ulang FAT tidak mampu menangani partisi Anda, \n"
+#~ "kesalahan berikut terjadi: %s"
 
 #~ msgid ""
 #~ "The backup partition table has not the same size\n"
@@ -7570,103 +7972,139 @@ msgstr "Installasi gagal"
 #~ "Backup tabel partisi tidak memiliki ukuran yang sama\n"
 #~ "Lanjutkan?"
 
-#~ msgid "Info: "
-#~ msgstr "Info: "
-
-#~ msgid "Unknown driver"
-#~ msgstr "Driver tak dikenal"
-
-#~ msgid "Error reading file %s"
-#~ msgstr "Kesalahan membaca file %s"
-
-#~ msgid "Restoring from file %s failed: %s"
-#~ msgstr "Proses pengembalian dari file %s gagal: %s"
-
-#~ msgid "Bad backup file"
-#~ msgstr "File backup rusak"
-
-#~ msgid "Error writing to file %s"
-#~ msgstr "Kesalahan penulisan ke file %s"
-
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr "Kesalahan: driver \"%s\" untuk kartu suara Anda tidak terdaftar"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "Journalised FS"
-#~ msgstr "FS terjournal"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr "Jalankan Server Font X (agar Xorg dapat berjalan)"
-
-#~ msgid "Add user"
-#~ msgstr "Tambah pengguna"
-
-#~ msgid "Accept user"
-#~ msgstr "Menerima pengguna"
+#~ msgid ""
+#~ "The classic bug sound tester is to run the following commands:\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
+#~ "uses\n"
+#~ "by default\n"
+#~ "\n"
+#~ "- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
+#~ "currently uses\n"
+#~ "\n"
+#~ "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
+#~ "loaded or not\n"
+#~ "\n"
+#~ "- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" "
+#~ "will\n"
+#~ "tell you if sound and alsa services are configured to be run on\n"
+#~ "initlevel 3\n"
+#~ "\n"
+#~ "- \"aumix -q\" will tell you if the sound volume is muted or not\n"
+#~ "\n"
+#~ "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound "
+#~ "card.\n"
+#~ msgstr ""
+#~ "Penguji kesalahan suara klasik akan menjalankan perintah berikut:\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | fgrep -i AUDIO\" akan memberitahu Anda driver mana "
+#~ "yang\n"
+#~ "dipakai oleh kartu Anda secara default\n"
+#~ "\n"
+#~ "- \"grep sound-slot /etc/modprobe.conf\" memberitahu driver apa yang "
+#~ "dipakai\n"
+#~ "sekarang\n"
+#~ "\n"
+#~ "- \"/sbin/lsmod\" menguji apakah modul (driver) dimuat atau tidak\n"
+#~ "\n"
+#~ "- \"/sbin/chkconfig --list sound\" dan \"/sbin/chkconfig --list alsa\" "
+#~ "akan\n"
+#~ "memberitahu Anda apakah layanan suara dan alsa terkonfigurasi untuk "
+#~ "dijalankan\n"
+#~ "pada initlevel 3\n"
+#~ "\n"
+#~ "- \"aumix -q\" memberitahu apakah volume suara dipadamkan atau tidak\n"
+#~ "\n"
+#~ "- \"/sbin/fuser -v /dev/dsp\" akan memberitahu program mana yang memakai\n"
+#~ "kartu suara.\n"
 
 #~ msgid ""
-#~ "Do not update directory inode access times on this filesystem\n"
-#~ "(e.g, for faster access on the news spool to speed up news servers)."
+#~ "There are already some restrictions, and more automatic checks are run "
+#~ "every night."
 #~ msgstr ""
-#~ "Jangan update waktu akses inode direktori pada sistem file ini\n"
-#~ "(mis: untuk akses lebih cepat di spool berita untuk mempercepat server "
-#~ "berita)."
+#~ "Terdapat beberapa batasan, dan beberapa pengujian otomatis berjalan "
+#~ "setiap malam."
 
-#~ msgid "No supermount"
-#~ msgstr "Tanpa supermount"
+#~ msgid ""
+#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ msgstr ""
+#~ "Tidak terdapat partisi FAT yang akan digunakan sebagai loopback (atau "
+#~ "tidak tersedia ruang kosong)"
 
-#~ msgid "Supermount"
-#~ msgstr "Supermount"
+#~ msgid ""
+#~ "This is similar to the previous level, but the system is entirely closed "
+#~ "and security features are at their maximum."
+#~ msgstr ""
+#~ "Hal ini sama dengan level sebelumnya, tapi sistem sepenuhnya ditutup.\n"
+#~ "Fitur keamanan maksimal."
 
-#~ msgid "Supermount except for CDROM drives"
-#~ msgstr "Supermount kecuali untuk drive CDROM"
+#~ msgid ""
+#~ "This level is to be used with care. It makes your system more easy to "
+#~ "use,\n"
+#~ "but very sensitive. It must not be used for a machine connected to "
+#~ "others\n"
+#~ "or to the Internet. There is no password access."
+#~ msgstr ""
+#~ "Level ini harus digunakan hati-hati. Ia akan membuat sistem Anda akan "
+#~ "mudah\n"
+#~ "digunakan, tapi sangat sensitif. Tidak boleh digunakan untuk komputer "
+#~ "yang\n"
+#~ "terhubung ke komputer lain atau ke Internet. Tidak ada akses kata sandi."
 
-#~ msgid "Rescue partition table"
-#~ msgstr "Selamatkan tabel partisi"
+#~ msgid ""
+#~ "To ensure data integrity after resizing the partition(s), \n"
+#~ "filesystem checks will be run on your next boot into Microsoft Windows®"
+#~ msgstr ""
+#~ "Untuk memastikan integritas data setelah ukuran partisi berubah,\n"
+#~ "pengujian sistem file akan dilakukan pada boot berikut dalam Windows®"
 
-#~ msgid "Removable media automounting"
-#~ msgstr "Mount otomatis media removable"
+#~ msgid "Toggle between flat and group sorted"
+#~ msgstr "Pindah tampilan antara terurut rata dan grup"
 
 #~ msgid "Trying to rescue partition table"
 #~ msgstr "Mencoba menyelamatkan tabel partisi"
 
-#~ msgid "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr "Terima/Tolak pesan kesalahan IPv4."
+#~ msgid "Undo"
+#~ msgstr "Kembali"
 
-#~ msgid "Accept/Refuse broadcasted icmp echo."
-#~ msgstr "Terima/Tolak echo icmp tersiar."
+#~ msgid "Unknown driver"
+#~ msgstr "Driver tak dikenal"
 
-#~ msgid "Accept/Refuse icmp echo."
-#~ msgstr "Terima/Tolak echo icmp."
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr "Gunakan sistem file terenkripsi"
 
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "Izinkan/Larang login root remote."
+#~ msgid "Use information stored in local files for all authentication"
+#~ msgstr "Informasi pengguna disimpan pada file lokal untuk semua otentikasi"
 
-#~ msgid "Enable/Disable IP spoofing protection."
-#~ msgstr "Aktifkan/Matikan proteksi pemalsuan IP."
+#~ msgid "Use libsafe for servers"
+#~ msgstr "Gunakan libsafe untuk server"
 
-#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
-#~ msgstr "Aktifkan/Matikan libsafe jika libsafe ditemukan pada sistem."
+#~ msgid "Use the Microsoft Windows® partition for loopback"
+#~ msgstr "Gunakan partisi Microsoft Windows® untuk loopback"
 
-#~ msgid "Enable/Disable the logging of IPv4 strange packets."
-#~ msgstr "Aktifkan/Matikan pencatatan paket aneh IPv4."
+#~ msgid "Welcome To Crackers"
+#~ msgstr "Selamat Datang di Crackers"
 
-#~ msgid "Enable/Disable msec hourly security check."
-#~ msgstr "Aktifkan/Matikan pengujian keamanan tiap jam oleh msec."
+#~ msgid "Which partition do you want to use for Linux4Win?"
+#~ msgstr "Partisi mana yang hendak Anda gunakan untuk Linux4Win?"
 
-#~ msgid "Number of capture buffers:"
-#~ msgstr "Jumlah capture buffer :"
+#~ msgid ""
+#~ "Winbind allows the system to authenticate users in a Windows Active "
+#~ "Directory Server."
+#~ msgstr ""
+#~ "Winbind mengijinkan sistem untuk mengotentikasi pengguna dalam Active "
+#~ "Directory Server Windows"
+
+#~ msgid "command %s missing"
+#~ msgstr "perintah %s tidak ada"
 
 #~ msgid "number of capture buffers for mmap'ed capture"
 #~ msgstr "Jumlah capture buffer untuk penangkapan mmap"
 
-#~ msgid "PLL setting:"
-#~ msgstr "setting PLL :"
+#~ msgid "restrict"
+#~ msgstr "batasi"
 
-#~ msgid "Radio support:"
-#~ msgstr "Dukungan radio :"
-
-#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
-#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+#~ msgid "security layout (SASL/Kerberos)"
+#~ msgstr "layout keamanan (SASL/Kerberos)"

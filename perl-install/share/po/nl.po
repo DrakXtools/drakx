@@ -272,7 +272,7 @@ msgstr "Xen toevoegen"
 #: any.pm:564
 #, c-format
 msgid "Requires password to boot"
-msgstr ""
+msgstr "Vereist een wachtwoord om op te starten"
 
 #: any.pm:566
 #, c-format
@@ -404,12 +404,13 @@ msgid "Please give a user name"
 msgstr "Geef een gebruikersnaam"
 
 #: any.pm:897
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
 msgstr ""
-"De gebruikersnaam mag slechts kleine letters, cijfers, `-' en`_' bevatten"
+"De gebruikersnaam moet beginnen met een kleine letter en mag slechts gevolgd "
+"worden door kleine letters, cijfers, `-' en `_'"
 
 #: any.pm:898
 #, c-format
@@ -449,7 +450,7 @@ msgstr "Gebruikersbeheer"
 #: any.pm:917
 #, c-format
 msgid "Enable guest account"
-msgstr ""
+msgstr "Activeer het 'gast'-account"
 
 #: any.pm:919 authentication.pm:236
 #, c-format
@@ -552,25 +553,25 @@ msgid "Please choose a language to use"
 msgstr "Kies de taal die u wenst te gebruiken"
 
 #: any.pm:1183
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
-"Mandriva Linux kan meerdere talen aan. Selecteer de talen\n"
+"%s kan meerdere talen ondersteunen. Selecteer de talen\n"
 "die u wenst te installeren. Ze zullen beschikbaar zijn wanneer\n"
 "de installatie afgerond is en u uw computer opnieuw start."
 
 #: any.pm:1186
-#, fuzzy, c-format
+#, c-format
 msgid "Multiple languages"
 msgstr "Meerdere talen"
 
 #: any.pm:1187
 #, c-format
 msgid "Select Additional Languages"
-msgstr ""
+msgstr "Selecteer Additionele Talen"
 
 #: any.pm:1196 any.pm:1227
 #, c-format
@@ -1107,9 +1108,9 @@ msgid "LILO with text menu"
 msgstr "LILO met tekst-menu"
 
 #: bootloader.pm:1203
-#, fuzzy, c-format
+#, c-format
 msgid "GRUB2 with graphical menu"
-msgstr "GRUB met grafisch menu"
+msgstr "GRUB2 met grafisch menu"
 
 #: bootloader.pm:1204
 #, c-format
@@ -1352,9 +1353,9 @@ msgid "Warning"
 msgstr "Waarschuwing"
 
 #: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete this mount point?"
-msgstr "Wilt u op deze knop klikken?"
+msgstr "Weet u zeker dat u dit aanhechtpunt wilt verwijderen?"
 
 #: diskdrake/dav.pm:125
 #, c-format
@@ -1441,9 +1442,9 @@ msgid "Unknown"
 msgstr "Onbekend"
 
 #: diskdrake/hd_gtk.pm:405
-#, fuzzy, c-format
+#, c-format
 msgid "Ext4"
-msgstr "Afsluiten"
+msgstr "Ext4"
 
 #: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
 #, c-format
@@ -1687,9 +1688,9 @@ msgid "Create"
 msgstr "Aanmaken"
 
 #: diskdrake/interactive.pm:456
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to mount partition"
-msgstr "Bestanden naar de nieuwe partitie verplaatsen"
+msgstr "De partitie kon niet aan het aanhechtpunt gekoppeld worden"
 
 #: diskdrake/interactive.pm:490 diskdrake/interactive.pm:492
 #, c-format
@@ -1722,14 +1723,14 @@ msgid "Logical volume name "
 msgstr "Logische volumenaam "
 
 #: diskdrake/interactive.pm:510
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypt partition"
-msgstr "Versleutelingsalgoritme"
+msgstr "Versleutel de partitie"
 
 #: diskdrake/interactive.pm:511
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key "
-msgstr "Vercijferingssleutel"
+msgstr "Versleutelingssleutel"
 
 #: diskdrake/interactive.pm:512 diskdrake/interactive.pm:1514
 #, c-format
@@ -1742,9 +1743,9 @@ msgid "The encryption keys do not match"
 msgstr "De versleuteling-sleutels kloppen niet met elkaar"
 
 #: diskdrake/interactive.pm:525
-#, fuzzy, c-format
+#, c-format
 msgid "Missing encryption key"
-msgstr "Sleutel voor bestandssysteemversleuteling"
+msgstr "Sleutel voor bestandssysteemversleuteling ontbreekt"
 
 #: diskdrake/interactive.pm:545
 #, c-format
@@ -1931,19 +1932,19 @@ msgid "Choose an existing LVM to add to"
 msgstr "Kies een bestaande LVM om aan toe te voegen"
 
 #: diskdrake/interactive.pm:1007 diskdrake/interactive.pm:1016
-#, fuzzy, c-format
+#, c-format
 msgid "LVM name"
-msgstr "Naam van de LVM?"
+msgstr "Naam van de LVM"
 
 #: diskdrake/interactive.pm:1008
 #, c-format
 msgid "Enter a name for the new LVM volume group"
-msgstr ""
+msgstr "Geef een naam voor de nieuwe LVM-volumegroep"
 
 #: diskdrake/interactive.pm:1013
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" already exists"
-msgstr "Het bestand bestaat al. Wenst u het te gebruiken?"
+msgstr "\"%s\" bestaat reeds"
 
 #: diskdrake/interactive.pm:1045
 #, c-format
@@ -2499,7 +2500,7 @@ msgstr "Bezig met inschakelen van virtueel geheugen-partitie %s"
 #: fs/mount_options.pm:114
 #, c-format
 msgid "Enable POSIX Access Control Lists"
-msgstr ""
+msgstr "Gebruik POSIX Access Control Lijsten"
 
 #: fs/mount_options.pm:116
 #, c-format
@@ -2712,7 +2713,7 @@ msgid "Which partition do you want to resize?"
 msgstr "Van welke partitie wilt u de grootte veranderen?"
 
 #: fs/partitioning_wizard.pm:180
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
@@ -2720,7 +2721,7 @@ msgid ""
 msgstr ""
 "Uw Microsoft Windows®-partitie is te gefragmenteerd. Start uw computer "
 "opnieuw op onder Microsoft Windows®, gebruik het ``defrag''-hulpprogramma, "
-"en herstart vervolgens de installatie van Mandriva Linux."
+"en herstart vervolgens de installatie van %s."
 
 #: fs/partitioning_wizard.pm:188
 #, c-format
@@ -2808,11 +2809,13 @@ msgid "Erase and use entire disk"
 msgstr "Volledige harde schijf wissen en gebruiken"
 
 #: fs/partitioning_wizard.pm:243
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
-msgstr "U heeft meer dan één harde schijf, op welke wilt u Linux installeren?"
+msgstr ""
+"U heeft meer dan één harde schijf, welke wilt u dat het installatieprogramma "
+"gebruikt?"
 
 #: fs/partitioning_wizard.pm:251 fsedit.pm:634
 #, c-format
@@ -2841,9 +2844,9 @@ msgstr ""
 "Vergeet niet op te slaan met `w' wanneer u klaar bent."
 
 #: fs/partitioning_wizard.pm:409
-#, fuzzy, c-format
+#, c-format
 msgid "Ext2/3/4"
-msgstr "Ext3"
+msgstr "Ext2/3/4"
 
 #: fs/partitioning_wizard.pm:439 fs/partitioning_wizard.pm:585
 #, c-format
@@ -2858,7 +2861,7 @@ msgstr "De partitionerings-wizard heeft de volgende oplossingen gevonden:"
 #: fs/partitioning_wizard.pm:518
 #, c-format
 msgid "Here is the content of your disk drive "
-msgstr ""
+msgstr "Hier is de inhoud van uw disk drive"
 
 #: fs/partitioning_wizard.pm:602
 #, c-format
@@ -2934,7 +2937,7 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "Er is al een partitie met als koppelpunt %s\n"
 
 #: fsedit.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
@@ -2945,48 +2948,46 @@ msgstr ""
 "Vergeet dus niet om ook een /boot-partitie toe te voegen."
 
 #: fsedit.pm:440
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Metadata version unsupported for a boot partition. Please be sure to add a "
 "separate /boot partition."
 msgstr ""
-"U heeft een software RAID partitie als root (/) geselecteerd.\n"
-"Geen enkele opstartlader kan dit aan zonder een /boot partitie.\n"
-"Vergeet dus niet om ook een /boot-partitie toe te voegen."
+"Metadata versies worden niet ondersteund voor opstartpartities. Vergeet dus "
+"niet om ook een separate /boot-partitie toe te voegen."
 
 #: fsedit.pm:448
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as /boot.\n"
 "No bootloader is able to handle this."
 msgstr ""
 "U heeft een software RAID partitie als root (/) geselecteerd.\n"
-"Geen enkele opstartlader kan dit aan zonder een /boot partitie.\n"
-"Vergeet dus niet om ook een /boot-partitie toe te voegen."
+"Geen enkele opstartlader kan dit aan zonder een /boot partitie."
 
 #: fsedit.pm:452
 #, c-format
 msgid "Metadata version unsupported for a boot partition."
-msgstr ""
+msgstr "De metadata versie wordt niet ondersteund voor een opstartpartitie."
 
 #: fsedit.pm:459
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a separate /boot partition"
 msgstr ""
-"U heeft een software RAID partitie als root (/) geselecteerd.\n"
+"U heeft een versleutelde partitie als root (/) geselecteerd.\n"
 "Geen enkele opstartlader kan dit aan zonder een /boot partitie.\n"
 "Vergeet dus niet om ook een /boot-partitie toe te voegen."
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr "U kunt geen versleuteld bestandssysteem voor koppelpunt %s gebruiken"
 
 #: fsedit.pm:469
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You cannot use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
@@ -2995,14 +2996,14 @@ msgstr ""
 "het fysieke volumes omvat"
 
 #: fsedit.pm:471
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
 "volumes.\n"
 "You should create a separate /boot partition first"
 msgstr ""
-"U heeft een LVM Logisch Volumen als root (/) geselecteerd.\n"
+"U heeft een LVM Logisch Volume als root (/) geselecteerd.\n"
 "De opstartlader is niet in staat hiermee om te gaan als het volume fysieke "
 "volumina omvat.\n"
 "U dient eerst een /boot partitie te creëren"
@@ -3283,9 +3284,9 @@ msgid "Enable PulseAudio"
 msgstr "PulseAudio inschakelen"
 
 #: harddrake/sound.pm:336
-#, fuzzy, c-format
+#, c-format
 msgid "Use Glitch-Free mode"
-msgstr "Disconnect-modus gebruiken"
+msgstr "Storingsvrije-modus gebruiken"
 
 #: harddrake/sound.pm:342
 #, c-format
@@ -3329,7 +3330,7 @@ msgstr ""
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:369
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -3338,7 +3339,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Uw kaart gebruikt momenteel het %s\"%s\"-stuurprogramma (standaard "
+"Uw kaart gebruikt momenteel het %s\"%s\"-stuurprogramma (het standaard "
 "stuurprogramma voor uw kaart is \"%s\")"
 
 #: harddrake/sound.pm:371
@@ -3499,11 +3500,11 @@ msgstr "Kiezen van willekeurig stuurprogramma"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:482
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -5431,19 +5432,20 @@ msgid "Installing driver for USB controller"
 msgstr "Installeren van stuurprogramma voor USB-besturingsapparaat"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller \"%s\""
-msgstr "Installeren van stuurprogramma voor Firewire-besturingsapparaat %s"
+msgstr "Installeren van stuurprogramma voor Firewire-besturingsapparaat \"%s\""
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard disk drive controller \"%s\""
-msgstr "Installeren van stuurprogramma voor harde schijf-besturingsapparaat %s"
+msgstr ""
+"Installeren van stuurprogramma voor harde schijf-besturingsapparaat \"%s\""
 
 #: modules/interactive.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller \"%s\""
-msgstr "Installeren van stuurprogramma voor ethernetapparaat %s"
+msgstr "Installeren van stuurprogramma voor ethernetapparaat \"%s\""
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -5525,24 +5527,26 @@ msgstr ""
 "Wenst u opnieuw te proberen met andere parameters?"
 
 #: mygtk2.pm:1229
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to quit?"
-msgstr "Wilt u op deze knop klikken?"
+msgstr "Weet u zeker dat u wilt stoppen?"
 
 #: mygtk2.pm:1571 mygtk2.pm:1572
 #, c-format
 msgid "Password is trivial to guess"
-msgstr ""
+msgstr "Wachtwoord is te makkelijk te raden"
 
 #: mygtk2.pm:1573
 #, c-format
 msgid "Password should be resistant to basic attacks"
 msgstr ""
+"Het wachtwoord dient resistent te zijn tegen veelvoorkomende en eenvoudige "
+"aanvallen"
 
 #: mygtk2.pm:1574 mygtk2.pm:1575
-#, fuzzy, c-format
+#, c-format
 msgid "Password seems secure"
-msgstr "Wachtwoordbasis"
+msgstr "Wachtwoord lijkt veilig te zijn"
 
 #: partition_table.pm:428
 #, c-format
@@ -6417,7 +6421,7 @@ msgstr "Aanmeldnaam of e-mailadres:"
 #: services.pm:17
 #, c-format
 msgid "Listen and dispatch ACPI events from the kernel"
-msgstr ""
+msgstr "Luister naar en verstuur ACPI-gebeurtenissen van de kernel"
 
 #: services.pm:18
 #, c-format
@@ -6454,7 +6458,7 @@ msgstr ""
 #: services.pm:24
 #, c-format
 msgid "Avahi is a ZeroConf daemon which implements an mDNS stack"
-msgstr ""
+msgstr "Avahi is een ZeroConf daemon welke een mDNS stack implementeert"
 
 #: services.pm:25
 #, c-format
@@ -6510,6 +6514,16 @@ msgid ""
 "applications and \n"
 "scripts can access the LCD via a simple API."
 msgstr ""
+"De G15daemon stelt gebruikers in staat om alle extra toetsen te gebruiken "
+"door hun codes te \n"
+"decoderen en deze terug te sturen naar de kernel via het UINPT-"
+"stuurprogramma. Dit stuur-\n"
+"programma moet geladen zijn voordat de g15daemon gebruikt kan worden voor "
+"toetsenbord-\n"
+"toegang. De G15 LCD wordt ook ondersteund. Wanneer er geen andere clients "
+"actief zijn toont de\n"
+"g15daemon een klok. Applicaties en scripts kunnen de LCD aansturen via een "
+"simpele API."
 
 #: services.pm:38
 #, c-format
@@ -6566,18 +6580,20 @@ msgstr ""
 #: services.pm:49
 #, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
-msgstr ""
+msgstr "Automatiseer een pakket filterend firewall met ip6tables"
 
 #: services.pm:50
 #, c-format
 msgid "Automates a packet filtering firewall with iptables"
-msgstr ""
+msgstr "Automatiseer een pakket filterend firewall met iptables"
 
 #: services.pm:51
 #, c-format
 msgid ""
 "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
 msgstr ""
+"Verdeelt de IRQ werkdruk op een eerlijke manier over meerdere processoren "
+"voor verbeterde prestaties"
 
 #: services.pm:52
 #, c-format
@@ -6608,7 +6624,7 @@ msgstr "Automatisch vinden en instellen van hardware bij het opstarten"
 #: services.pm:58
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
-msgstr ""
+msgstr "Verandert het systeemgedrag om de accuduur te verlangen"
 
 #: services.pm:59
 #, c-format
@@ -6641,12 +6657,12 @@ msgstr ""
 #: services.pm:65
 #, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
-msgstr ""
+msgstr "Netwerktoezicht (Interactieve Firewall en draadloos"
 
 #: services.pm:66
 #, c-format
 msgid "Software RAID monitoring and management"
-msgstr ""
+msgstr "Software RAID toezicht en beheer"
 
 #: services.pm:67
 #, c-format
@@ -6660,7 +6676,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Enables MSEC security policy on system startup"
-msgstr ""
+msgstr "Activeert MSEC beveiligingsbeleid bij systeemstart"
 
 #: services.pm:69
 #, c-format
@@ -6674,7 +6690,7 @@ msgstr ""
 #: services.pm:70
 #, c-format
 msgid "Initializes network console logging"
-msgstr ""
+msgstr "Initialiseer netwerk console logbestanden"
 
 #: services.pm:71
 #, c-format
@@ -6697,12 +6713,12 @@ msgstr ""
 #: services.pm:75
 #, c-format
 msgid "Requires network to be up if enabled"
-msgstr ""
+msgstr "Het netwerk dient in de lucht te zijn wanneer deze is ingeschakeld"
 
 #: services.pm:76
 #, c-format
 msgid "Wait for the hotplugged network to be up"
-msgstr ""
+msgstr "Wacht tot het 'hotplugged' netwerk in de lucht is"
 
 #: services.pm:77
 #, c-format
@@ -6748,7 +6764,7 @@ msgstr "Ondersteun de OKI 4w en compatibele winprinters"
 #: services.pm:86
 #, c-format
 msgid "Checks if a partition is close to full up"
-msgstr ""
+msgstr "Controleert of een partitie bijna vol is"
 
 #: services.pm:87
 #, c-format
@@ -6779,7 +6795,7 @@ msgstr ""
 #: services.pm:93
 #, c-format
 msgid "Reserves some TCP ports"
-msgstr ""
+msgstr "Reserveert een aantal TCP-poorten"
 
 #: services.pm:94
 #, c-format
@@ -6809,9 +6825,9 @@ msgstr ""
 "direct aanspreken voor het gebruik van toepassingen als Oracle of DVD-spelers"
 
 #: services.pm:99
-#, fuzzy, c-format
+#, c-format
 msgid "Nameserver information manager"
-msgstr "Informatie over harde schijf"
+msgstr "Nameserver informatiemanager"
 
 #: services.pm:100
 #, c-format
@@ -6834,14 +6850,14 @@ msgstr ""
 "voor elke machine op dat netwerk op te vragen."
 
 #: services.pm:105
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
 "system log files.  It is a good idea to always run rsyslog."
 msgstr ""
 "Syslog is de manier die vele daemons gebruiken om boodschappen te loggen "
 "naar\n"
-"verscheidene systeem-logbestanden. Het is een goed idee syslog altijd te "
+"verscheidene systeem-logbestanden. Het is een goed idee altijd rsyslog te "
 "draaien."
 
 #: services.pm:106
@@ -6873,7 +6889,7 @@ msgstr ""
 #: services.pm:111
 #, c-format
 msgid "Packet filtering firewall"
-msgstr ""
+msgstr "Pakket filterende firewall"
 
 #: services.pm:112
 #, c-format
@@ -6892,7 +6908,7 @@ msgstr "Schakel het geluidssysteem van uw machine in"
 #: services.pm:114
 #, c-format
 msgid "layer for speech analysis"
-msgstr ""
+msgstr "laag voor spraakanalyse"
 
 #: services.pm:115
 #, c-format
@@ -6918,16 +6934,18 @@ msgstr ""
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
 msgstr ""
+"Verplaatst de gegenereerde blijvende udev regels naar /etc/udev/rules.d"
 
 #: services.pm:119
 #, c-format
 msgid "Load the drivers for your usb devices."
 msgstr "Laad de stuurprogramma's voor uw USB-apparaten"
 
+# Wellicht is "lichtgewicht" een te letterlijke vertaling met een te zware negatieve klank die er in het Engels niet is?
 #: services.pm:120
 #, c-format
 msgid "A lightweight network traffic monitor"
-msgstr ""
+msgstr "Een lichtgewicht monitor voor netwerkverkeer"
 
 #: services.pm:121
 #, c-format
@@ -6954,7 +6972,7 @@ msgstr "Internet"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "Netwerktoepassingen"
 
 #: services.pm:161
 #, c-format
@@ -7112,7 +7130,7 @@ msgstr ""
 "standaardmodus: configureren van de automatische aameldingsfunctie"
 
 #: standalone.pm:61
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
 "\n"
@@ -7125,8 +7143,8 @@ msgstr ""
 "\n"
 "OPTIES:\n"
 "  --help            - deze hulptekst tonen.\n"
-"  --report          - moet een Mandriva Linux-hulpprogramma zijn\n"
-"  --incident        - moet een Mandriva Linux-hulpprogramma zijn"
+"  --report          - moet een %s-hulpprogramma zijn\n"
+"  --incident        - moet een %s-hulpprogramma zijn"
 
 #: standalone.pm:67
 #, c-format
@@ -7177,7 +7195,7 @@ msgstr ""
 "                 : en gs voor ghostscript voor slechts deze."
 
 #: standalone.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS]...\n"
 "%s Terminal Server Configurator\n"
@@ -7194,7 +7212,7 @@ msgid ""
 "IP, nbi image name)"
 msgstr ""
 "[OPTIES]...\n"
-"Mandriva Linux Terminal Server Configuratieprogramma\n"
+"%s Terminal Server Configuratieprogramma\n"
 "--enable         : MTS inschakelen\n"
 "--disable        : MTS uitschakelen\n"
 "--start          : MTS starten\n"
@@ -7242,7 +7260,7 @@ msgstr ""
 "--quiet : niet interactief. Te gebruiken met (dis)connect."
 
 #: standalone.pm:112
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTION]...\n"
 "  --no-confirmation      do not ask first confirmation question in %s Update "
@@ -7253,8 +7271,8 @@ msgid ""
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
 "[OPTION]...\n"
-"  --no-confirmation      eerste bevestigingsvraag niet stellen in Mandriva "
-"Update modus\n"
+"  --no-confirmation      eerste bevestigingsvraag niet stellen in %s Update "
+"modus\n"
 "  --no-verify-rpm        pakket-handtekeningen niet verifiëren\n"
 "  --changelog-first      veranderingenlogboek voor bestandslijst weergeven "
 "in omschrijvingsvenster\n"
@@ -7371,11 +7389,473 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Installatie mislukt"
 
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Licentieovereenkomst"
+
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Beperkte garantie"
+
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. De GPL-licentie en gerelateerde licenties"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Intellectuele eigendomsrechten"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Geldende wetten"
+
+#~ msgid ""
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
+#~ msgstr ""
+#~ "Alle rechten op de componenten van de Software Producten behoren toe aan "
+#~ "hun respectievelijke\n"
+#~ "auteurs en zijn beschermd door intellectuele eigendoms- en copyright-"
+#~ "wetten welke gelden voor\n"
+#~ "computerprogrammatuur.\n"
+#~ "Moondrake behoudt zich het recht voor om de Software Producten te "
+#~ "veranderen in hun geheel\n"
+#~ "of in onderdelen, op welke manier dan ook en voor welk doel dan ook.\n"
+#~ "\"Moondrake\" en geassocieerde logo's zijn handelsmerken van %s"
+
+#~ msgid "An NTP client/server"
+#~ msgstr "Een NTP-client/-server"
+
+#~ msgid ""
+#~ "Below are some basic tips to help debug audio problems, but for accurate "
+#~ "and up-to-date tips and tricks, please see:\n"
+#~ "\n"
+#~ "https://wiki.moondrake.org/en/Support:DebuggingSoundProblems\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- General Recommendation: Enable PulseAudio. If you have opted to not to "
+#~ "use PulseAudio, we would strongly advise you enable it. For the vast "
+#~ "majority of desktop use cases, PulseAudio is the recommended and best "
+#~ "supported option.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and "
+#~ "\"pauvucontrol\" (generic) will launch graphical applications to allow "
+#~ "you to view your sound devices and adjust volume levels\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"ps aux | grep pulseaudio\" will check that PulseAudio is running.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl stat\" will check that you can connect to the PulseAudio daemon "
+#~ "correctly.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl list sink-inputs\" will tell you which programs are currently "
+#~ "playing sound via PulseAudio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"systemctl status osspd.service\" will tell you the current state of "
+#~ "the OSS Proxy Daemon. This is used to enable sound from legacy "
+#~ "applications which use the OSS sound API. You should install the \"ossp\" "
+#~ "package if you need this functionality.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pacmd ls\" will give you a LOT of debug information about the current "
+#~ "state of your audio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | grep -i audio\" will tell you which low-level driver "
+#~ "your card uses by default.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/lsmod | grep snd\" will enable you to check which sound "
+#~ "related kernel modules (drivers) are loaded.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"alsamixer -c 0\" will give you a text-based mixer to the low level "
+#~ "ALSA mixer controls for first sound card\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" will tell which programs "
+#~ "are currently using the sound card directly (normally this should only "
+#~ "show PulseAudio)\n"
+#~ msgstr ""
+#~ "Hieronder volgen enkele basistips om audio-problemen te helpen oplossen, "
+#~ "maar voor accurate en actuele tips en trucs, bezoekt u:\n"
+#~ "\n"
+#~ "https://wiki.moondrake.org/en/Support:DebuggingSoundProblems\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- Algemene aanbeveling: Schakel PulseAudio in. Als u ervoor gekozen heeft "
+#~ "om PulseAudio niet te gebruiken, adviseren wij u nadrukkelijk om het in "
+#~ "te schakelen. Voor de overgrote meerderheid van de gevallen bij huis-, "
+#~ "tuin- en keukengebruik, is PulseAudio de aanbevolen en best ondersteunde "
+#~ "optie.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and \"pavucontrol"
+#~ "\" (generiek) starten grafische toepassingen die u in staat stellen uw "
+#~ "audio-apparaten te bekijken en de geluidsniveaus af te regelen\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"ps aux | grep pulseaudio\" controleert of PulseAudio draait.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl stat\" controleert of u correct kunt verbinden met de "
+#~ "PulseAudio-voorziening.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl list sink-inputs\" vertelt u welke programma's op dit moment "
+#~ "geluid afspelen via PulseAudio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"systemctl status osspd.service\" vertelt u de huidige staat van de "
+#~ "OSS-proxy-voorziening. Deze dient om geluid van ouderwetse toepassingen "
+#~ "mogelijk te maken die de OSS-sound API gebruiken. U dient het pakket "
+#~ "‘ossp’ te installeren als u deze functionaliteit nodig heeft.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pacmd ls\" geeft u VEEL debuginformatie over de huidige status van uw "
+#~ "audio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | grep -i audio\" vertelt u welk low-level "
+#~ "stuurprogramma uw geluidskaart standaard gebruikt.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/lsmod | grep snd\" stelt u in staat te controleren welke "
+#~ "geluidsgerelateerde kernelmodules geladen zijn.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"alsamixer -c 0\" geeft u een tekstgebaseerde mixer die de low-level "
+#~ "ALSA-mixerschuiven bedient voor de eerste geluidskaart\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" vertelt u welke "
+#~ "programma's momenteel de geluidskaart direct gebruiken (normaal gesproken "
+#~ "zou dit slechts PulseAudio mogen tonen)\n"
+
+#~ msgid ""
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
+#~ msgstr ""
+#~ "Gefeliciteerd, de installatie is voltooid. \n"
+#~ "Verwijder het opstartmedium en druk op Enter om opnieuw op te starten."
+
+#~ msgid ""
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Voor informatie over verbeteringen die voor deze versie van Moondrake\n"
+#~ "beschikbaar zijn, raadpleegt u de Errata, beschikbaar van:\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "If any portion of this agreement is held void, illegal or inapplicable by "
+#~ "a court judgment, this \n"
+#~ "portion is excluded from this contract. You remain bound by the other "
+#~ "applicable sections of the \n"
+#~ "agreement.\n"
+#~ "The terms and conditions of this License are governed by the Laws of "
+#~ "France.\n"
+#~ "All disputes on the terms of this license will preferably be settled out "
+#~ "of court. As a last \n"
+#~ "resort, the dispute will be referred to the appropriate Courts of Law of "
+#~ "Paris - France.\n"
+#~ "For any question on this document, please contact Moondrake."
+#~ msgstr ""
+#~ "Als welk deel dan ook van deze overeenkomst niet geldig, illegaal of niet "
+#~ "toepasselijk wordt\n"
+#~ "bevonden door een rechterlijke uitspraak, dan wordt het betreffende deel "
+#~ "uitgesloten van dit\n"
+#~ "contract. U blijft verder wel gebonden aan de overige toepasselijke "
+#~ "secties van de overeenkomst.\n"
+#~ "De voorwaarden van deze licentie vallen onder de wetten van Frankrijk.\n"
+#~ "Alle meningsverschillen ten aanzien van deze licentie worden het liefst "
+#~ "buiten een rechtszaak om\n"
+#~ "geschikt. Als een laatste oplossing kan de zaak doorverwezen worden naar "
+#~ "de geschikte\n"
+#~ "gerechtshoven van Parijs - Frankrijk.\n"
+#~ "Bij vragen over dit document, gelieve contact op te nemen met Moondrake.\n"
+#~ "\n"
+#~ "Dit document is vanuit het Engels vertaald door een onbeëdigde vertaler. "
+#~ "Voor het rechtsgeldig\n"
+#~ "laten maken van dit document zult u dus een originele versie van dit "
+#~ "document op moeten halen\n"
+#~ "en deze laten vertalen door een beëdigd vertaler."
+
+#~ msgid ""
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
+#~ msgstr ""
+#~ "Informatie over het configureren van uw systeem is beschikbaar in het\n"
+#~ "\"post install\"-hoofdstuk van de Official Moondrake User's Guide."
+
+#~ msgid "Introduction"
+#~ msgstr "Introductie"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "Maak eerst een veiligheidskopie van uw gegevens"
+
+#~ msgid ""
+#~ "Please read this document carefully. This document is a license agreement "
+#~ "between you and  \n"
+#~ "Moondrake which applies to the Software Products.\n"
+#~ "By installing, duplicating or using any of the Software Products in any "
+#~ "manner, you explicitly \n"
+#~ "accept and fully agree to conform to the terms and conditions of this "
+#~ "License. \n"
+#~ "If you disagree with any portion of the License, you are not allowed to "
+#~ "install, duplicate or use \n"
+#~ "the Software Products. \n"
+#~ "Any attempt to install, duplicate or use the Software Products in a "
+#~ "manner which does not comply \n"
+#~ "with the terms and conditions of this License is void and will terminate "
+#~ "your rights under this \n"
+#~ "License. Upon termination of the License,  you must immediately destroy "
+#~ "all copies of the \n"
+#~ "Software Products."
+#~ msgstr ""
+#~ "Lees dit document zorgvuldig. Dit document is een licentieovereenkomst "
+#~ "tussen u en\n"
+#~ "Moondrake welke van toepassing is op de Software Producten.\n"
+#~ "Door het installeren, dupliceren of gebruiken van de Software Producten "
+#~ "in welke vorm dan ook,\n"
+#~ "gaat u expliciet akkoord en bent het volledig eens met de voorwaarden van "
+#~ "deze\n"
+#~ "licentie. Indien u het met welk onderdeel van de Licentie dan ook niet "
+#~ "eens bent, dan is het u\n"
+#~ "niet toegestaan deze Software Producten te installeren, dupliceren of "
+#~ "gebruiken.\n"
+#~ "Elke poging om de Software Producten te installeren, dupliceren of "
+#~ "gebruiken op een wijze die\n"
+#~ "niet in overeenstemming is met de voorwaarden van deze licentie is "
+#~ "nietig\n"
+#~ "en beëindigt uw rechten onder deze Licentie. Bij beëindiging van de "
+#~ "Licentie dient u onmiddelijk\n"
+#~ "alle kopieën van de Software Producten te vernietigen."
+
+#~ msgid "Set CPU frequency settings"
+#~ msgstr "Stel CPU-frequentieinstellingen in"
+
+#~ msgid ""
+#~ "The Software Products and attached documentation are provided \"as is\", "
+#~ "with no warranty, to the \n"
+#~ "extent permitted by law.\n"
+#~ "Neither Moondrake nor its licensors or suppliers will, in any "
+#~ "circumstances and to the extent \n"
+#~ "permitted by law, be liable for any special, incidental, direct or "
+#~ "indirect damages whatsoever \n"
+#~ "(including without limitation damages for loss of business, interruption "
+#~ "of business, financial \n"
+#~ "loss, legal fees and penalties resulting from a court judgment, or any "
+#~ "other consequential loss) \n"
+#~ "arising out of  the use or inability to use the Software Products, even "
+#~ "if Moondrake or its \n"
+#~ "licensors or suppliers have been advised of the possibility or occurrence "
+#~ "of such damages.\n"
+#~ "\n"
+#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN "
+#~ "SOME COUNTRIES\n"
+#~ "\n"
+#~ "To the extent permitted by law, neither Moondrake nor its licensors, "
+#~ "suppliers or\n"
+#~ "distributors will, in any circumstances, be liable for any special, "
+#~ "incidental, direct or indirect \n"
+#~ "damages whatsoever (including without limitation damages for loss of "
+#~ "business, interruption of \n"
+#~ "business, financial loss, legal fees and penalties resulting from a court "
+#~ "judgment, or any \n"
+#~ "other consequential loss) arising out of the possession and use of "
+#~ "software components or \n"
+#~ "arising out of  downloading software components from one of Moondrake "
+#~ "sites which are \n"
+#~ "prohibited or restricted in some countries by local laws.\n"
+#~ "This limited liability applies to, but is not restricted to, the strong "
+#~ "cryptography components \n"
+#~ "included in the Software Products.\n"
+#~ "However, because some jurisdictions do not allow the exclusion or "
+#~ "limitation of liability for \n"
+#~ "consequential or incidental damages, the above limitation may not apply "
+#~ "to you."
+#~ msgstr ""
+#~ "De Software Producten en meegeleverde documentatie zijn geleverd \"als "
+#~ "zodanig\" zonder garantie,\n"
+#~ "voorzover dat dat wettelijk is toegestaan.\n"
+#~ "Moondrake zal in geen enkele omstandigheid, en voorzover dat wettelijk is "
+#~ "toegestaan,\n"
+#~ "aansprakelijk zijn voor elke vorm van speciale, incidentele, directe of "
+#~ "indirecte schade (inclusief\n"
+#~ "zonder beperking schade door verlies van zaken, interruptie van zaken, "
+#~ "financieel verlies, juridische\n"
+#~ "kosten en boetes resulterend uit een rechterlijke uitspraak, of andere "
+#~ "daaruit volgende verliezen)\n"
+#~ "veroorzaakt door het gebruik of het niet kunnen gebruiken van de Software "
+#~ "Producten, zelfs als\n"
+#~ "Moondrake op de hoogte was van de mogelijkheid danwel voorkomen van "
+#~ "dergelijke schades.\n"
+#~ "\n"
+#~ "BEPERKTE AANSPRAKELIJKHEID GEKOPPELD AAN HET BEZIT OF GEBRUIK VAN\n"
+#~ "VERBODEN SOFTWARE IN SOMMIGE LANDEN\n"
+#~ "\n"
+#~ "Moondrake of zijn distributeurs zullen, voorzover wettelijk toegestaan, "
+#~ "in geen geval aansprakelijk\n"
+#~ "zijn voor welke vorm van speciale, incidentele, directe of indirecte "
+#~ "schade dan ook (inclusief\n"
+#~ "zonder beperking schade door verlies van zaken, interruptie van zaken, "
+#~ "financieel verlies, juridische\n"
+#~ "kosten en boetes resulterend uit een rechterlijke uitspraak, of andere "
+#~ "daaruit volgende verliezen)\n"
+#~ "voortkomend uit het bezit of gebruik van softwarecomponenten of "
+#~ "voortkomend uit het downloaden van\n"
+#~ "softwarecomponenten van één van Moondrake sites, welke verboden of "
+#~ "beperkt zijn in sommige\n"
+#~ "landen door lokale wetgeving.\n"
+#~ "Deze beperkte aansprakelijkheid geldt voor, maar is niet beperkt tot de "
+#~ "sterke versleutelingscomponenten\n"
+#~ "meegeleverd met de Software Producten.\n"
+#~ "Echter, aangezien bepaalde gebieden geen uitsluiting of beperking of "
+#~ "aansprakelijkheid voor\n"
+#~ "opvolgende of incidentele schade toestaan, is bovenstaande beperking "
+#~ "misschien niet op u \n"
+#~ "van toepassing.  "
+
+#~ msgid ""
+#~ "The Software Products consist of components created by different persons "
+#~ "or entities.\n"
+#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
+#~ "the components which \n"
+#~ "they cover. Please read carefully the terms and conditions of the license "
+#~ "agreement for each component \n"
+#~ "before using any component. Any question on a component license should be "
+#~ "addressed to the component \n"
+#~ "licensor or supplier and not to Moondrake.\n"
+#~ "The programs developed by Moondrake are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by Moondrake is governed by \"%s\" License."
+#~ msgstr ""
+#~ "De Software Producten bestaan uit componenten die ontwikkeld zijn door "
+#~ "verschillende personen\n"
+#~ "of entiteiten.\n"
+#~ "De meeste componenten vallen onder een licentie die u toestaat deze "
+#~ "componenten te gebruiken,\n"
+#~ "te dupliceren, aan te passen of herdistribueren. Leest u aandachtig de "
+#~ "bewoording en voorwaarden van deze\n"
+#~ " licentieovereenkomsten alvorens enige component te gebruiken. Elke vraag "
+#~ "over een componentlicentie dient\n"
+#~ "u te richten aan de desbetreffende auteur en niet aan Moondrake.\n"
+#~ "De programmatuur ontwikkeld door Moondrake valt onder de GPL-licentie. "
+#~ "Documentatie\n"
+#~ "geschreven door Moondrake valt onder de \"%s\"-licentie."
+
+#~ msgid ""
+#~ "The operating system and the different components available in the "
+#~ "Moondrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software "
+#~ "Products include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation "
+#~ "related to the operating \n"
+#~ "system and the different components of the Moondrake distribution, and "
+#~ "any applications \n"
+#~ "distributed with these products provided by Moondrake's licensors or "
+#~ "suppliers."
+#~ msgstr ""
+#~ "Het besturingssysteem en de verschillende componenten beschikbaar in de "
+#~ "Moondrake\n"
+#~ "distributie zullen vanaf nu \"Software Producten\" heten. De Software "
+#~ "Producten omvatten,\n"
+#~ "maar zijn niet beperkt tot de programma's, methoden, regels en "
+#~ "documentatie gerelateerd aan\n"
+#~ "het besturingssysteem en de verschillende onderdelen van de Moondrake "
+#~ "distributie, en \n"
+#~ "alle programma's die met deze producten verspreid worden geleverd door "
+#~ "licentienemers of leveranciers van Moondrake."
+
+#~ msgid ""
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
+#~ msgstr ""
+#~ "Waarschuwing: Vrije Software is niet altijd vrij van patenten, en "
+#~ "sommige\n"
+#~ "van de meegeleverde software zou onder patenten kunnen vallen die gelden\n"
+#~ "in uw land. Bijvoorbeeld de meegeleverde MP3-decoders zouden een "
+#~ "licentie\n"
+#~ "kunnen vereisen voordat ze gebruikt mogen worden (zie \n"
+#~ "http://www.mp3licensing.com voor verdere details). Indien u onzeker bent\n"
+#~ "of een patent op u toepasbaar is, raadpleeg dan uw lokale wetgeving."
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr ""
+#~ "LET OP: Deze tekst is vertaald vanuit het Engels en heeft geen "
+#~ "rechtsgeldigheid. Refereert u alstublieft voor de precieze voorwaarden "
+#~ "naar de licentietekst(en) in de oorspronkelijke taal."
+
+#~ msgid "Automatic routing from ALSA to PulseAudio"
+#~ msgstr "Automatisch omleiden van ALSA naar PulseAudio"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Kies de grootte"
+
 #~ msgid "Clean /tmp at each boot"
 #~ msgstr "Elke keer bij opstarten /tmp legen"
 
-#~ msgid "command %s missing"
-#~ msgstr "opdracht %s is niet aanwezig"
+#~ msgid "Enable 5.1 sound with Pulse Audio"
+#~ msgstr "5.1-geluid inschakelen met PulseAudio"
+
+#~ msgid "Enable user switching for audio applications"
+#~ msgstr "Wisselen van gebruiker inschakelen voor audiotoepassingen"
+
+#~ msgid "File sharing"
+#~ msgstr "Bestanden delen"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "Pakket-filtering inschakelen voor Linux kernel 2.2-serie, om \n"
+#~ "een firewall op te zetten die uw machine beschermt tegen \n"
+#~ "aanvallen vanuit het netwerk."
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr ""
+#~ "De optie ``Opdrachtregel-opties beperken'' heeft geen nut zonder "
+#~ "wachtwoord"
+
+#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
+#~ msgstr "Gelieve uit te loggen en daarna op Ctrl-Alt-Backspace te drukken"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Opdrachtregel-opties beperken"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Root-partitie-grootte in MB:"
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Swap-partitie-grootte in MB: "
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "De FAT grootte-aanpasser was niet instaat met uw partitie om te gaan, \n"
+#~ "de volgende fout is opgetreden: %s"
 
 #~ msgid ""
 #~ "The classic bug sound tester is to run the following commands:\n"
@@ -7428,36 +7908,10 @@ msgstr "Installatie mislukt"
 #~ "gebruikt.\n"
 
 #~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
+#~ "There is no FAT partition to use as loopback (or not enough space left)"
 #~ msgstr ""
-#~ "Pakket-filtering inschakelen voor Linux kernel 2.2-serie, om \n"
-#~ "een firewall op te zetten die uw machine beschermt tegen \n"
-#~ "aanvallen vanuit het netwerk."
-
-#~ msgid "Enable 5.1 sound with Pulse Audio"
-#~ msgstr "5.1-geluid inschakelen met PulseAudio"
-
-#~ msgid "Enable user switching for audio applications"
-#~ msgstr "Wisselen van gebruiker inschakelen voor audiotoepassingen"
-
-#~ msgid "File sharing"
-#~ msgstr "Bestanden delen"
-
-#~ msgid "Restrict command line options"
-#~ msgstr "Opdrachtregel-opties beperken"
-
-#~ msgid "restrict"
-#~ msgstr "beperken"
-
-#~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
-#~ msgstr ""
-#~ "De optie ``Opdrachtregel-opties beperken'' heeft geen nut zonder "
-#~ "wachtwoord"
-
-#~ msgid "Use an encrypted filesystem"
-#~ msgstr "Gebruik een versleuteld bestandssysteem"
+#~ "Er is geen FAT-partitie om als loopback te gebruiken (of er is te weinig "
+#~ "ruimte over)"
 
 #~ msgid ""
 #~ "To ensure data integrity after resizing the partition(s), \n"
@@ -7467,36 +7921,17 @@ msgstr "Installatie mislukt"
 #~ "te garanderen, zal het bestandssysteem worden gecontroleerd\n"
 #~ "de volgende keer dat u Windows(TM) opstart"
 
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr "Gebruik een versleuteld bestandssysteem"
+
 #~ msgid "Use the Microsoft Windows® partition for loopback"
 #~ msgstr "Gebruik de Microsoft Windows® partitie voor loopback "
 
 #~ msgid "Which partition do you want to use for Linux4Win?"
 #~ msgstr "Welke partitie wenst u te gebruiken voor Linux4Win?"
 
-#~ msgid "Choose the sizes"
-#~ msgstr "Kies de grootte"
+#~ msgid "command %s missing"
+#~ msgstr "opdracht %s is niet aanwezig"
 
-#~ msgid "Root partition size in MB: "
-#~ msgstr "Root-partitie-grootte in MB:"
-
-#~ msgid "Swap partition size in MB: "
-#~ msgstr "Swap-partitie-grootte in MB: "
-
-#~ msgid ""
-#~ "There is no FAT partition to use as loopback (or not enough space left)"
-#~ msgstr ""
-#~ "Er is geen FAT-partitie om als loopback te gebruiken (of er is te weinig "
-#~ "ruimte over)"
-
-#~ msgid ""
-#~ "The FAT resizer is unable to handle your partition, \n"
-#~ "the following error occurred: %s"
-#~ msgstr ""
-#~ "De FAT grootte-aanpasser was niet instaat met uw partitie om te gaan, \n"
-#~ "de volgende fout is opgetreden: %s"
-
-#~ msgid "Automatic routing from ALSA to PulseAudio"
-#~ msgstr "Automatisch omleiden van ALSA naar PulseAudio"
-
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "Gelieve uit te loggen en daarna op Ctrl-Alt-Backspace te drukken"
+#~ msgid "restrict"
+#~ msgstr "beperken"

@@ -431,11 +431,11 @@ msgid "URL must start with ftp:// or http://"
 msgstr ""
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Nakikipag-alam sa web site ng Mandriva Linux para makuha ang talaan ng mga "
-"available na mirror..."
+"Nakikipag-alam sa web site ng %s para makuha ang talaan ng mga available na "
+"mirror..."
 
 #: any.pm:194
 #, fuzzy, c-format
@@ -750,9 +750,9 @@ msgid "An error occurred:"
 msgstr "May \"error\" na nangyari"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "May \"error\" na nangyari"
+msgstr "May nangyaring fatal error: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -797,9 +797,9 @@ msgid "Entering step `%s'\n"
 msgstr "Pumpasok sa hakbang na `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Nag-i-install"
+msgstr "Pag-install ng %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -812,14 +812,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Ang inyong sistema mababa sa kakayahan. Maaari kayong magkaproblema\n"
-"sa pag-install ng Mandriva Linux. Kung mangyari ito, maaari ninyong subukan\n"
+"sa pag-install ng %s. Kung mangyari ito, maaari ninyong subukan\n"
 "ang \"text install\". Para dito, pindutin ang `F1' kapag nagbo-boot sa "
 "CDROM,\n"
 "at ipasok ang `text'."
@@ -882,7 +882,7 @@ msgstr "Isa-isang pagpili ng package"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Di-nakapili Lahat"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1227,9 +1227,9 @@ msgid "Bad file"
 msgstr "I-load ang mga file"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1638,26 +1638,162 @@ msgid ""
 "Exit"
 msgstr "Exit"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Pag-install ng Mandriva Linux %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Graphical na Kapaligiran"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Isang graphical environment na may kumpol ng mga user-friendly (madaling "
+#~ "gamitin) na application at kagamitang pang-desktop"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Isang graphical environment na may kumpol ng mga user-friendly (madaling "
+#~ "gamitin) na application at kagamitang pang-desktop"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Mga nakakalibang na program: arcade, mga board game, strategy, etc"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Workstation"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME Workstation"
+
+#, fuzzy
+#~ msgid "Moondrake Wizards"
+#~ msgstr "<b>Moondrake Store</b>"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Lisensiya"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Mga pang-opisinang program: mga wordprocessor (LibreOffice Writer, "
+#~ "Kword), mga spreadsheet (LibreOffice Calc, Kspread), mga pdf viewer, etc"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Pang-opisina na Workstation"
+
+#, fuzzy
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL o MariaDB database server"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL o MariaDB database server"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Inihahanda ang bootloader..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Desktop"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etc"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE Workstation"
+
+#~ msgid "%d packages"
+#~ msgstr "%d mga package"
+
+#, fuzzy
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "%d mga package"
+#~ msgstr[1] "%d mga package"
+
+#~ msgid "All"
+#~ msgstr "Lahat"
+
+#~ msgid "Automated"
+#~ msgstr "Na-automatic"
 
 #~ msgid "Bad package"
 #~ msgstr "Sirang package"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Pagne-Network"
+#~ msgid "Boot"
+#~ msgstr "Boot"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Mga update"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Hindi mapasok ang mga \"kernel module\" na katapat ng inyong kernel (ang "
+#~ "file na %s ay nawawala), nangangahulugang hindi naka-sync ang inyong boot "
+#~ "floppy sa Installation medium (lumikha ng bagong boot floppy)"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Piliin ang mga package na ii-install"
+
+#~ msgid "Configure X"
+#~ msgstr "I-configure ang X"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Nakikipag-alam sa mirror para makuha nag talaan ng mga available na "
+#~ "package..."
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Gusto ninyong gamiting ang aboot?"
+
+#, fuzzy
+#~ msgid "Downloading file %s..."
+#~ msgstr "Ipinapadala ang mga file..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "May error sa pag-install ng aboot,\n"
+#~ "subukang ipilit ang pag-i-install kahit na sirain nito ang unang "
+#~ "partisyon?"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Nagkukuro-kuro"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Gumawa ng auto install floppy"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#, fuzzy
+#~ msgid "IceWm Desktop"
+#~ msgstr "Desktop"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "Piliin ang klase ng pag-i-install"
+
+#~ msgid "Language"
+#~ msgstr "Wika"
+
+#~ msgid "License"
+#~ msgstr "Lisensiya"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Pag-install ng Mandriva Linux %s"
+
+#~ msgid "Networking"
+#~ msgstr "Pagne-Network"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1667,8 +1803,43 @@ msgstr "Exit"
 #~ "spreadsheet (kspread, gnumeric), mga pdf viewer, etc"
 
 #, fuzzy
-#~ msgid "Downloading file %s..."
-#~ msgstr "Ipinapadala ang mga file..."
+#~ msgid "Preparing boot images..."
+#~ msgstr "Inihahanda ang bootloader..."
+
+#~ msgid "Replay"
+#~ msgstr "Gawin ulit"
+
+#~ msgid "Save packages selection"
+#~ msgstr "I-save ang mga piniling package"
+
+#~ msgid "Select All"
+#~ msgstr "Pinili Lahat"
+
+#~ msgid "TV card"
+#~ msgstr "TV card"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Ang auto install ay maaaring maging talagang\n"
+#~ "automatic kung gugustuhin. Sa ganitong kaso\n"
+#~ "hahawakan nito ang hard disk drive!! (Ito ay sinadya\n"
+#~ "para sa pag-i-install sa ibang box o makina).\n"
+#~ "\n"
+#~ "Maaari ninyong naising i-replay ang pag-i-install.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Hindi nakayang makipag-alam sa mirror na %s"
+
+#~ msgid "Users"
+#~ msgstr "Users"
+
+#~ msgid "Welcome"
+#~ msgstr "Maligayang pagdating"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1694,116 +1865,22 @@ msgstr "Exit"
 #~ "\n"
 #~ "Gusto ninyo talagang i-install ang mga server na ito?\n"
 
-#, fuzzy
-#~ msgid "IceWm Desktop"
-#~ msgstr "Desktop"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "Nakikipag-alam sa mirror para makuha nag talaan ng mga available na "
-#~ "package..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Hindi nakayang makipag-alam sa mirror na %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Gumawa ng auto install floppy"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Ang auto install ay maaaring maging talagang\n"
-#~ "automatic kung gugustuhin. Sa ganitong kaso\n"
-#~ "hahawakan nito ang hard disk drive!! (Ito ay sinadya\n"
-#~ "para sa pag-i-install sa ibang box o makina).\n"
-#~ "\n"
-#~ "Maaari ninyong naising i-replay ang pag-i-install.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Gawin ulit"
-
-#~ msgid "Automated"
-#~ msgstr "Na-automatic"
-
-#~ msgid "Save packages selection"
-#~ msgstr "I-save ang mga piniling package"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Gusto ninyong gamiting ang aboot?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "May error sa pag-install ng aboot,\n"
-#~ "subukang ipilit ang pag-i-install kahit na sirain nito ang unang "
-#~ "partisyon?"
-
-#~ msgid "All"
-#~ msgstr "Lahat"
-
-#~ msgid "TV card"
-#~ msgstr "TV card"
-
-#~ msgid "Boot"
-#~ msgstr "Boot"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Authentication"
 
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#, fuzzy
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "%d mga package"
-#~ msgstr[1] "%d mga package"
-
-#~ msgid "%d packages"
-#~ msgstr "%d mga package"
-
-#~ msgid "Language"
-#~ msgstr "Wika"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Lisensiya"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "Piliin ang klase ng pag-i-install"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "Nagkukuro-kuro"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Piliin ang mga package na ii-install"
-
-#~ msgid "Users"
-#~ msgstr "Users"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Pagne-Network"
 
-#~ msgid "Configure X"
-#~ msgstr "I-configure ang X"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Hindi mapasok ang mga \"kernel module\" na katapat ng inyong kernel (ang "
-#~ "file na %s ay nawawala), nangangahulugang hindi naka-sync ang inyong boot "
-#~ "floppy sa Installation medium (lumikha ng bagong boot floppy)"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Mga update"

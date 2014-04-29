@@ -436,18 +436,17 @@ msgid "URL must start with ftp:// or http://"
 msgstr "La URL tien d'entamar con ftp:// o http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Contautando col sitiu web de Mandriva Linux p'algamar la llista d'espeyos "
-"disponibles"
+"Contautando col sitiu web de %s p'algamar la llista d'espeyos disponibles"
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Nun pudo coneutase col sitiu web de Mandriva Linux p'algamar la llista "
-"d'espeyos disponibles"
+"Nun pudo coneutase col sitiu web de %s p'algamar la llista d'espeyos "
+"disponibles"
 
 #: any.pm:204
 #, c-format
@@ -740,11 +739,13 @@ msgstr ""
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Nun hai información XML pa mediu \"%s\", namái resultaos parciales pal "
+"paquete %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Ensin descripción"
 
 #: pkgs.pm:280
 #, c-format
@@ -761,9 +762,9 @@ msgid "An error occurred:"
 msgstr "Hebo un fallu:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Hebo un fallu:"
+msgstr "Hebo un fallu grave: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -808,9 +809,9 @@ msgid "Entering step `%s'\n"
 msgstr "Entrando na etapa '%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Instalación"
+msgstr "Instalación de %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -823,15 +824,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "El sirvidor Xorg tarda n'aniciar. Por favor, espera..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "El to sistema tien pocos recursos. Puedes tener dalgún problema instalando\n"
-"Mandriva Linux. De ser asina, puedes intentar una instalación de la triba "
-"testu.\n"
+"%s. De ser asina, puedes intentar una instalación de la triba testu.\n"
 "Pa ello, calca 'F1' cuando anicie'l CDROM, ya introduz 'text'."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
@@ -840,14 +840,14 @@ msgid "Media Selection"
 msgstr "Seleición de preseos"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Instalar l'escritoriu KDE de Mandriva"
+msgstr "Instalar l'escritoriu KDE de %s"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Instalar l'escritoriu GNOME de Mandriva"
+msgstr "Instalar l'escritoriu GNOME de %s"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -1660,41 +1660,144 @@ msgid ""
 "Exit"
 msgstr "Colar"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Instalación de Mandriva Linux %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Entornu gráficu"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Entornu gráficu con un conxuntu de ferramientes d'escritoriu y "
+#~ "aplicaciones amigables"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Un entornu gráficu llixeru y rápidu con un conxuntu de ferramientes "
+#~ "d'escritoriu y aplicaciones amigables"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Programes d'entretenimientu: arcade, tableros, estratexía, etc"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Estación de trabayu"
+
+#, fuzzy
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "L'instalador deteutó que nun puede anovase con seguridá'l to\n"
+#~ "sistema Moondrake ya instaláu a la versión %s.\n"
+#~ "\n"
+#~ "Encamiéntase una instalación nueva que camude a la anterior.\n"
+#~ "\n"
+#~ "¡Atención: tendríes de facer copia de respaldu de tolos tos datos\n"
+#~ "enantes d'entamar cola instalación nueva!"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Estación de trabayu GNOME"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Asistentes de Moondrake"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Llicencia"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Programes d'Oficina: procesadores de testu (LibreOffice Writer, Kword), "
+#~ "fueyes de cálculu (LibreOffice Calc, Kspread), visualizadores PDF, etc"
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "El to escritoriu nun llápiz USB"
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Estación de trabayu d'Oficina"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "La distribución Mandriva Linux 100%% códigu llibre"
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Sirvidor de base de datos PostgreSQL y MariaDB"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Restola Linux con facilidá per aciu de Mandriva One"
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Sirvidor de base de datos PostgreSQL o MariaDB"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Tresnando'l cargador d'arranque"
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Escritoriu personalizáu"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Omitir tolos paquetes del preséu \"%s\""
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, etc"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "Estación de trabayu KDE"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Un escritoriu Mandriva Linux completu, con sofitu"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: distribuciones pa les necesidaes de toos"
+#~ msgid "A full Moondrake desktop, with support"
+#~ msgstr "Un escritoriu Moondrake completu, con sofitu"
+
+#~ msgid "Automated"
+#~ msgstr "Automatizada"
 
 #~ msgid "Bad package"
 #~ msgstr "Paquete incorreutu"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Rede"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Contactando con el sitio de réplica para obtener la lista de los paquetes "
+#~ "disponibles..."
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "¿Desea usar aboot?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "Descargando el archivo %s..."
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Anovamientos"
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Ocurrió un error al instalar aboot, \n"
+#~ "¿desea forzar la instalación incluso si ello implicara la destrucción de "
+#~ "la primera partición?"
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Restola Linux con facilidá per aciu de Mandriva One"
+
+#~ msgid "Explore Linux easily with Moondrake One"
+#~ msgstr "Restola Linux con facilidá per aciu de Moondrake One"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Generar un disquete de instalación automática"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "Escritorio IceWm"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Instalación de Mandriva Linux %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: distribuciones pa les necesidaes de toos"
+
+#~ msgid "Moondrake: distributions for everybody's needs"
+#~ msgstr "Moondrake: distribuciones pa les necesidaes de toos"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1702,6 +1805,52 @@ msgstr "Colar"
 #~ msgstr ""
 #~ "Programes d'Oficina: procesadores de pallabres (kword, abiword), plantíes "
 #~ "de cálculu (kspread, gnumeric), visualizadores PDF, etc"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Tresnando'l cargador d'arranque"
+
+#~ msgid "Proceed"
+#~ msgstr "Continuar"
+
+#~ msgid "Replay"
+#~ msgstr "Reproducir"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Guardar la selección de paquetes"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "La distribución Mandriva Linux 100%% códigu llibre"
+
+#~ msgid "The 100%% open source Moondrake distribution"
+#~ msgstr "La distribución Moondrake 100%% códigu llibre"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "La instalación automática puede automatizarse por completo si lo desea,\n"
+#~ "¡¡en ese caso se adueñará del disco rígido!!\n"
+#~ "(la intención de esto es instalarlo en otro ordenador).\n"
+#~ "\n"
+#~ "Puede preferir reproducir la instalación.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "No se puede contactar al sitio de réplica %s"
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr ""
+#~ "No se soporta la acutalización de una distribución 32 bit a una 64 bit"
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr ""
+#~ "No se soporta la actualización de una distribución 64 bit a una 32 bit"
+
+#~ msgid "Welcome"
+#~ msgstr "Bienvenido"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1719,23 +1868,6 @@ msgstr "Colar"
 #~ "Para actualizar con KDE 3.5 y preservar su configuración, por favor\n"
 #~ "vuelva a iniciar su sistema y actualize utilizando el applet Mandriva "
 #~ "Update."
-
-#~ msgid "Proceed"
-#~ msgstr "Continuar"
-
-#~ msgid "retrieval of [%s] failed"
-#~ msgstr "La recuperación de [%s] falló"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "Descargando el archivo %s..."
-
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr ""
-#~ "No se soporta la acutalización de una distribución 32 bit a una 64 bit"
-
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr ""
-#~ "No se soporta la actualización de una distribución 64 bit a una 32 bit"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1761,49 +1893,23 @@ msgstr "Colar"
 #~ "\n"
 #~ "¿Realmente desea instalar estos servidores?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "Escritorio IceWm"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "Contactando con el sitio de réplica para obtener la lista de los paquetes "
-#~ "disponibles..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "No se puede contactar al sitio de réplica %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Generar un disquete de instalación automática"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "El to escritoriu nun llápiz USB"
 
 #~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "La instalación automática puede automatizarse por completo si lo desea,\n"
-#~ "¡¡en ese caso se adueñará del disco rígido!!\n"
-#~ "(la intención de esto es instalarlo en otro ordenador).\n"
-#~ "\n"
-#~ "Puede preferir reproducir la instalación.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Reproducir"
-
-#~ msgid "Automated"
-#~ msgstr "Automatizada"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Guardar la selección de paquetes"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "¿Desea usar aboot?"
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Llicencia"
 
 #~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Ocurrió un error al instalar aboot, \n"
-#~ "¿desea forzar la instalación incluso si ello implicara la destrucción de "
-#~ "la primera partición?"
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Rede"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Anovamientos"
+
+#~ msgid "retrieval of [%s] failed"
+#~ msgstr "La recuperación de [%s] falló"

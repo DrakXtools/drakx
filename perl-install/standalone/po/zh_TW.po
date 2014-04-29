@@ -275,9 +275,9 @@ msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "程式 \"%s\" 發生了記憶體區段錯誤，錯誤訊息如下："
 
 #: drakbug:144
-#, fuzzy, c-format
+#, c-format
 msgid "Used theme: %s"
-msgstr "使用者：%s"
+msgstr "使用的主題：%s"
 
 #: drakbug:146
 #, c-format
@@ -712,7 +712,7 @@ msgstr "GhostScript"
 #: drakfont:556
 #, c-format
 msgid "LibreOffice"
-msgstr ""
+msgstr "LibreOffice"
 
 #: drakfont:557
 #, c-format
@@ -1584,7 +1584,7 @@ msgid "Keyboard"
 msgstr "鍵盤"
 
 #: finish-install:58
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your keyboard layout."
 msgstr "請選取鍵盤排列的格式是那一種。"
 
@@ -2020,9 +2020,9 @@ msgid "ACPI ID"
 msgstr "ACPI ID"
 
 #: harddrake2:84
-#, fuzzy, c-format
+#, c-format
 msgid "Siblings"
-msgstr "設定"
+msgstr "同類商品"
 
 #: harddrake2:85
 #, c-format
@@ -2721,14 +2721,14 @@ msgid "and enter the name (or the IP) of the SMTP server you wish to use"
 msgstr "並輸入您要使用的 SMTP 伺服器名稱 (或 IP)"
 
 #: logdrake:440
-#, fuzzy, c-format
+#, c-format
 msgid "Email address"
-msgstr "IP 位址"
+msgstr "郵件位址"
 
 #: logdrake:441
-#, fuzzy, c-format
+#, c-format
 msgid "Email server"
-msgstr "Samba 伺服器"
+msgstr "郵件伺服器"
 
 #: logdrake:445
 #, c-format
@@ -2763,12 +2763,12 @@ msgstr "另存新檔..."
 #: service_harddrake:487
 #, c-format
 msgid "Display driver setup"
-msgstr ""
+msgstr "顯示卡驅動程式設定"
 
 #: notify-x11-free-driver-switch:20
 #, c-format
 msgid "The display driver has been automatically switched to '%s'."
-msgstr ""
+msgstr "顯示驅動程式已經自動轉換成「%s」。"
 
 #: notify-x11-free-driver-switch:21
 #, c-format
@@ -3052,13 +3052,13 @@ msgstr ""
 "驅動程式使用手冊中有更多的資訊。請執行如下指令 \"man sane-%s\" 來閱讀。"
 
 #: scannerdrake:407 scannerdrake:416
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"之後您就可以使用應用程式選單的多媒體/圖形分類中的 \"XSane\" 或\"Kooka\" 來掃"
-"描文件。"
+"之後您就可以使用應用程式選單的多媒體/圖形分類中的 \"XSane\" 或 \"%s\" 來掃描"
+"文件。"
 
 #: scannerdrake:411
 #, c-format
@@ -3086,15 +3086,15 @@ msgid "Congratulations!"
 msgstr "恭喜！"
 
 #: scannerdrake:419
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
 "您的 %s 已經設定完成。\n"
-"您現在可以立即使用應用程式選單的多媒體/圖形分類中的 \"XSane\" 或 \"Kooka\"來"
-"掃描文件。"
+"您現在可以立即使用應用程式選單的多媒體/圖形分類中的 \"XSane\" 或 \"%s\"來掃描"
+"文件。"
 
 #: scannerdrake:444
 #, c-format
@@ -3293,17 +3293,17 @@ msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "無法安裝分享掃描器所需的套件。"
 
 #: service_harddrake:173
-#, fuzzy, c-format
+#, c-format
 msgid "The graphics card '%s' is no longer supported by driver '%s'"
 msgstr "'%s' 顯示卡已經不再被 '%s' 驅動程式所支援"
 
 #: service_harddrake:183
 #, c-format
 msgid "New release, reconfiguring X for %s"
-msgstr ""
+msgstr "有新的發行版，為 %s 重新設定 X"
 
 #: service_harddrake:274
-#, fuzzy, c-format
+#, c-format
 msgid "The proprietary kernel driver was not found for X.org driver '%s'"
 msgstr "找不到 '%s' X.org 驅動程式的專利核心驅動"
 
@@ -3345,7 +3345,7 @@ msgstr "硬體偵測正在進行中"
 #: service_harddrake:453 service_harddrake:458
 #, c-format
 msgid "Display driver issue"
-msgstr ""
+msgstr "顯示卡驅動程式問題"
 
 #: service_harddrake:454
 #, c-format
@@ -3355,6 +3355,8 @@ msgid ""
 "boot process. Startup of the X server may now fail as that option was not "
 "specified."
 msgstr ""
+"目前設定的顯示卡驅動程式需要您使用 'nokmsboot' 開機選項來避免核心中的 KMS 驅"
+"動程式在開機過程中被載入。若未指定該選項，X 伺服器可能無法啟動。"
 
 #: service_harddrake:459
 #, c-format
@@ -3363,16 +3365,18 @@ msgid ""
 "driver the X server is configured to use. Startup of the X server may now "
 "fail."
 msgstr ""
+"偵測到載入的顯示驅動核心模組和 X server 設定要使用的驅動衝突。現在啟動 X "
+"server 可能會失敗。"
 
 #: service_harddrake:474 service_harddrake:487
 #, c-format
 msgid "The system has to be rebooted due to a display driver change."
-msgstr ""
+msgstr "因為顯示卡驅動程式已變更，系統必須重新開機。"
 
 #: service_harddrake:475 service_harddrake:488
 #, c-format
 msgid "Press Cancel within %d seconds to abort."
-msgstr ""
+msgstr "請在 %d 秒內按下「取消」以中止。"
 
 #: ../menu/localedrake-system.desktop.in.h:1
 msgid "System Regional Settings"
@@ -3402,14 +3406,224 @@ msgstr "區域設定"
 msgid "Language & country configuration"
 msgstr "語言與國家設定"
 
+#~ msgid "  --help                - display this help     \n"
+#~ msgstr " --help                - 顯示本說明\n"
+
+#~ msgid ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Usage: \n"
+#~ msgstr ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "這是自由軟體並可於 GNU GPL 條款下重新散佈。\n"
+#~ "\n"
+#~ "用法：\n"
+
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "%s 錯誤回報工具"
+
+#~ msgid "%s Control Center"
+#~ msgstr "%s 控制中心"
+
+#~ msgid "%s Help Center"
+#~ msgstr "%s 說明中心"
+
+#~ msgid "%s Online"
+#~ msgstr "%s 線上支援"
+
+#~ msgid "%s Tools Logs"
+#~ msgstr "%s 工具紀錄"
+
+#~ msgid "%s Update"
+#~ msgstr "%s 更新"
+
+#, fuzzy
+#~ msgid "<control>H"
+#~ msgstr "<control>Q"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Application Security "
+#~ "Configuration"
+#~ msgstr "執行 Moondrake 應用程式安全設定需要認證"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Authentication Configuration"
+#~ msgstr "執行 Moondrake 認證設定需要認證"
+
+#~ msgid "Authentication is required to run Moondrake Boot Configuration"
+#~ msgstr "執行 Moondrake 開機設定需要認證"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Date and Time Configuration"
+#~ msgstr "執行 Moondrake 時間和日期設定需要認證"
+
+#~ msgid "Authentication is required to run Moondrake Disk Layout Editor"
+#~ msgstr "執行 Moondrake 磁碟分割設定需要認證"
+
+#~ msgid "Authentication is required to run Moondrake Font Configuration"
+#~ msgstr "執行 Moondrake 字型設定需要認證"
+
+#~ msgid "Authentication is required to run Moondrake Hardware Configuration"
+#~ msgstr "執行 Moondrake 硬體設定需要認證"
+
+#~ msgid "Authentication is required to run Moondrake Log Viewer"
+#~ msgstr "執行 Moondrake 記錄檔檢視器需要認證"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Login Manager Configuration"
+#~ msgstr "執行 Moondrake 登入管理員設定需要認證"
+
+#~ msgid "Authentication is required to run Moondrake Scanner Configuration"
+#~ msgstr "執行 Moondrake 掃描器設定需要認證"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Security Permissions "
+#~ "Configuration"
+#~ msgstr "執行 Moondrake 安全權限設定需要認證"
+
+#~ msgid "Authentication is required to run Moondrake Service Configuration"
+#~ msgstr "執行 Moondrake 服務設定需要認證"
+
+#~ msgid "Authentication is required to run Moondrake UPS Configuration"
+#~ msgstr "執行 Moondrake UPS 設定需要認證"
+
+#~ msgid "Autodetect _modems"
+#~ msgstr "自動偵測數據機 (_M)"
+
+#~ msgid "Autodetect parallel _zip drives"
+#~ msgstr "自動偵測平行埠的 ZIP 磁碟 (_Z)"
+
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "設定存取 %s 工具時所需要的認證"
+
+#~ msgid "Copyright (C) %s by %s"
+#~ msgstr "Copyright (C) %s by %s"
+
+#~ msgid ""
+#~ "Here you can see files to use in order to fix permissions, owners, and "
+#~ "groups via msec.\n"
+#~ "You can also edit your own rules which will overwrite the default rules."
+#~ msgstr ""
+#~ "這裡讓您可以藉由 msec 檢視以及修改重要檔案的權限、擁有者、群組等資訊。\n"
+#~ "另外您也可以編輯自訂的規則以取代預設的項目。"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in"
+#~ msgstr "在您的系統中偵測不到音效卡。請檢查是否已經將音效卡插入"
+
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in."
+#~ msgstr "在您的系統中偵測不到電視卡。請檢查是否已經將電視卡插入。"
+
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "執行 Moondrake 應用程式安全設定"
+
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "執行 Moondrake 認證設定"
+
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "執行 Moondrake 開機設定"
+
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "執行 Moondrake 時間和日期設定"
+
+#~ msgid "Run Moondrake Disk Layout Editor"
+#~ msgstr "執行 Moondrake 磁碟分割設定"
+
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "執行 Moondrake 字型設定"
+
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "執行 Moondrake 硬體設定"
+
+#~ msgid "Run Moondrake Log Viewer"
+#~ msgstr "執行 Moondrake 記錄檔檢視器"
+
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "執行 Moondrake 登入管理員設定"
+
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "執行 Moondrake 掃描器設定"
+
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "執行 Moondrake 安全權限設定"
+
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "執行 Moondrake 服務設定"
+
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "執行 Moondrake UPS 設定"
+
+#~ msgid "Select %s Tool:"
+#~ msgstr "請選擇 %s 工具："
+
+#~ msgid "_About..."
+#~ msgstr "關於 (_A)"
+
+#~ msgid "_Fields description"
+#~ msgstr "欄位的描述資訊 (_F)"
+
+#~ msgid "_File"
+#~ msgstr "檔案 (_F)"
+
+#~ msgid "_Help"
+#~ msgstr "說明 (_H)"
+
+#~ msgid "_Options"
+#~ msgstr "選項 (_O)"
+
+#~ msgid "_Quit"
+#~ msgstr "結束 (_Q)"
+
+#~ msgid "_Report Bug"
+#~ msgstr "報告錯誤 (_R)"
+
 #~ msgid "/Autodetect _printers"
 #~ msgstr "/自動偵測印表機 (_P)"
+
+#~ msgid "Autodetect _jaz drives"
+#~ msgstr "自動偵測 Jaz 裝置 (_J)"
+
+#~ msgid "File/-"
+#~ msgstr "檔案/-"
+
+#~ msgid "File/Save _As"
+#~ msgstr "檔案/另存新檔 (_A)"
+
+#~ msgid "File/_New"
+#~ msgstr "檔案/新增 (_N)"
+
+#~ msgid "File/_Open"
+#~ msgstr "檔案/開啟 (_O)"
+
+#~ msgid "File/_Quit"
+#~ msgstr "檔案 (F)/結束 (_Q)"
+
+#~ msgid "File/_Save"
+#~ msgstr "檔案/儲存 (_S)"
+
+#~ msgid "Help/_About..."
+#~ msgstr "說明/關於 (_A)"
 
 #~ msgid "Its GDB trace is:"
 #~ msgstr "它的 GDB 追蹤為："
 
 #~ msgid "OpenOffice.org"
 #~ msgstr "OpenOffice.org"
+
+#~ msgid "Options/Test"
+#~ msgstr "選項/測試"
 
 #~ msgid ""
 #~ "The proprietary driver for your graphic card cannot be found, the system "

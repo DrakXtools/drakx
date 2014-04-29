@@ -430,11 +430,11 @@ msgid "URL must start with ftp:// or http://"
 msgstr ""
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Pieslēdzos Mandriva Linux tīmeklim, lai saņemtu pieejamo spoguļserveru "
-"sarakstu sarakstu..."
+"Pieslēdzos %s tīmeklim, lai saņemtu pieejamo spoguļserveru sarakstu "
+"sarakstu..."
 
 #: any.pm:194
 #, fuzzy, c-format
@@ -794,9 +794,9 @@ msgid "Entering step `%s'\n"
 msgstr "Uzsāku soli `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Instalēju"
+msgstr "%s instalēšana %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -809,13 +809,13 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Jūsu sistēmai trūkst resursu. Mandriva Linux instalēšanas laikā var\n"
+"Jūsu sistēmai trūkst resursu. %s instalēšanas laikā var\n"
 "rasties problēmas. Ja tā notiek, varat pamēģināt teksta instalēšanu.\n"
 "Lai to izdarītu, nospiediet`F1', ka notiek ielāde no CDROM, tad ievadiet\n"
 "`text'."
@@ -1222,9 +1222,9 @@ msgid "Bad file"
 msgstr "Ielādēt failu"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1624,20 +1624,153 @@ msgid ""
 "Exit"
 msgstr "Iziet"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux instalēšana %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Grafiskā vide"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Grafiskā vide ar lietotājiem draudzīgu programmu komplektu un "
+#~ "darbavirsmas rīkiem"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Grafiskā vide ar lietotājiem draudzīgu programmu komplektu un "
+#~ "darbavirsmas rīkiem"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Izklaides programmas: arkāde, galdiņspēles, stratēģija u.c."
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Darbastacija"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Gnome darbastacija"
+
+#, fuzzy
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake kontroles centrs"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Licence"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Biroja programmas: teksta procesori (LibreOffice Writer, Kword), "
+#~ "izklājlapas (LibreOffice Calc, Kspread), pdf skatītāji, u.c."
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Biroja dators"
+
+#, fuzzy
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL vai MariaDB datubāzu serveris"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL vai MariaDB datubāzu serveris"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Sagatavoju sāknētāju"
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Darbavirsma"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm u.c."
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE darbastacija"
+
+#~ msgid "%d packages"
+#~ msgstr "%d pakotnes"
+
+#, fuzzy
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "%d pakotnes"
+#~ msgstr[1] "%d pakotnes"
+#~ msgstr[2] "%d pakotnes"
+
+#~ msgid "All"
+#~ msgstr "Viss"
+
+#~ msgid "Automated"
+#~ msgstr "Automātisks"
 
 #~ msgid "Bad package"
 #~ msgstr "Slikta pakotne"
 
+#~ msgid "Boot"
+#~ msgstr "Sāknēt"
+
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Nevar piekļūt kodola moduļiem, atbilstošiem Jūsu kodolam (fails %s nav "
+#~ "atrodams), parasti tas nozīmē, ka ielādes diskete nav sinhronizēta ar "
+#~ "instalācijas datu nesēju (lūdzu izveidojiet jaunāku ielādes disketi)"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Instalējamo pakotņu izvēle"
+
+#~ msgid "Configure X"
+#~ msgstr "X konfigurēšana"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Pieslēdzos spoguļserverim, lai saņemtu pieejamo pakotņu sarakstu"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Vai vēlaties izmantot aboot?"
+
+#, fuzzy
+#~ msgid "Downloading file %s..."
+#~ msgstr "Nosūtu failus..."
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Kļūda, instalējot aboot, \n"
+#~ "vai instalēt piespiedu kārtā pat tad, ja tiks iznīcināta pirmā sadaļa?"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Aprēķinu"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Sagatavot auto instalēšanas disketi"
+
+#, fuzzy
+#~ msgid "IceWm Desktop"
+#~ msgstr "Darbavirsma"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "Instalēšanas klases izvēle"
+
+#~ msgid "Language"
+#~ msgstr "Valodas izvēle"
+
+#~ msgid "License"
+#~ msgstr "Licence"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux instalēšana %s"
+
+#~ msgid "Networking"
 #~ msgstr "Tīkli"
 
 #~ msgid ""
@@ -1648,8 +1781,30 @@ msgstr "Iziet"
 #~ "(kspread, gnumeric), pdf skatītāji, u.c."
 
 #, fuzzy
-#~ msgid "Downloading file %s..."
-#~ msgstr "Nosūtu failus..."
+#~ msgid "Preparing boot images..."
+#~ msgstr "Sagatavoju sāknētāju"
+
+#~ msgid "Replay"
+#~ msgstr "Atkārtot"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Saglabāt pakotņu izvēli"
+
+#~ msgid "Select All"
+#~ msgstr "Atzīmēti visi"
+
+#~ msgid "TV card"
+#~ msgstr "TV karte"
+
+#, fuzzy
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Nevar atdalīt: %s"
+
+#~ msgid "Users"
+#~ msgstr "Lietotāji"
+
+#~ msgid "Welcome"
+#~ msgstr "Laipni lūdzam"
 
 #, fuzzy
 #~ msgid ""
@@ -1677,95 +1832,17 @@ msgstr "Iziet"
 #~ "\n"
 #~ "Vai tiešām vēlaties instalēt šos serverus?\n"
 
-#, fuzzy
-#~ msgid "IceWm Desktop"
-#~ msgstr "Darbavirsma"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Pieslēdzos spoguļserverim, lai saņemtu pieejamo pakotņu sarakstu"
-
-#, fuzzy
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Nevar atdalīt: %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Sagatavot auto instalēšanas disketi"
-
-#~ msgid "Replay"
-#~ msgstr "Atkārtot"
-
-#~ msgid "Automated"
-#~ msgstr "Automātisks"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Saglabāt pakotņu izvēli"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Vai vēlaties izmantot aboot?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Kļūda, instalējot aboot, \n"
-#~ "vai instalēt piespiedu kārtā pat tad, ja tiks iznīcināta pirmā sadaļa?"
-
-#~ msgid "All"
-#~ msgstr "Viss"
-
-#~ msgid "TV card"
-#~ msgstr "TV karte"
-
-#~ msgid "Boot"
-#~ msgstr "Sāknēt"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Autentifikācija"
 
-#, fuzzy
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "%d pakotnes"
-#~ msgstr[1] "%d pakotnes"
-#~ msgstr[2] "%d pakotnes"
-
-#~ msgid "%d packages"
-#~ msgstr "%d pakotnes"
-
-#~ msgid "Language"
-#~ msgstr "Valodas izvēle"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Licence"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "Instalēšanas klases izvēle"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "Aprēķinu"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Instalējamo pakotņu izvēle"
-
-#~ msgid "Users"
-#~ msgstr "Lietotāji"
-
-#~ msgid "Networking"
-#~ msgstr "Tīkli"
-
-#~ msgid "Configure X"
-#~ msgstr "X konfigurēšana"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Nevar piekļūt kodola moduļiem, atbilstošiem Jūsu kodolam (fails %s nav "
-#~ "atrodams), parasti tas nozīmē, ka ielādes diskete nav sinhronizēta ar "
-#~ "instalācijas datu nesēju (lūdzu izveidojiet jaunāku ielādes disketi)"
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Tīkli"

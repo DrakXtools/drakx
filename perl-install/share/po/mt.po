@@ -1598,7 +1598,7 @@ msgstr "Informazzjoni dettaljata"
 #: diskdrake/interactive.pm:407
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "Video"
 
 #: diskdrake/interactive.pm:412 diskdrake/interactive.pm:828
 #, c-format
@@ -2933,7 +2933,7 @@ msgstr ""
 "Għalhekk aċċerta li jkollok partizzjoni /boot mhux fuq ir-RAID."
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr "Ma tistax tuża filesystem iċċifrat għall-punt ta' mmuntar %s"
 
@@ -3444,11 +3444,11 @@ msgstr "Agħżel drajver arbitrarju"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:482
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -6664,7 +6664,7 @@ msgstr "Internet"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "Networking"
 
 #: services.pm:161
 #, c-format
@@ -7001,169 +7001,58 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Installazzjoni falliet"
 
-#~ msgid "Clean /tmp at each boot"
-#~ msgstr "Naddaf /tmp kull meta tixgħel"
-
-#~ msgid ""
-#~ "The classic bug sound tester is to run the following commands:\n"
-#~ "\n"
-#~ "\n"
-#~ "- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
-#~ "uses\n"
-#~ "by default\n"
-#~ "\n"
-#~ "- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
-#~ "currently uses\n"
-#~ "\n"
-#~ "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
-#~ "loaded or not\n"
-#~ "\n"
-#~ "- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" "
-#~ "will\n"
-#~ "tell you if sound and alsa services are configured to be run on\n"
-#~ "initlevel 3\n"
-#~ "\n"
-#~ "- \"aumix -q\" will tell you if the sound volume is muted or not\n"
-#~ "\n"
-#~ "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound "
-#~ "card.\n"
-#~ msgstr ""
-#~ "It-tester klassiku ta' bugs ta' l-awdjo se jħaddem dawn il-kmandijiet:\n"
-#~ "\n"
-#~ "\n"
-#~ "- \"lspcidrake -v | fgrep -i AUDIO\" jgħidlek liema drajver juża "
-#~ "impliċitament\n"
-#~ "il-kard tiegħek.\n"
-#~ "- \"grep sound-slot /etc/modprobe.conf\" jgħidlek liema drajver juża "
-#~ "bħalissa\n"
-#~ "\n"
-#~ "- \"/sbin/lsmod\" jippermettilek tiċċekkja jekk il-modulu (drajver) hux\n"
-#~ "imtella' jew le.\n"
-#~ "\n"
-#~ "- \"/sbin/chkconfig --list sound\" u \"/sbin/chkconfig --list alsa\" \n"
-#~ "jgħidulek jekk is-servizzi sound u alsa humiex konfigurati biex jitilgħu\n"
-#~ "f'initlevel 3\n"
-#~ "\n"
-#~ "- \"aumix -q\" jgħidlek jekk il-volum tal-awdjo hux mitfu jew le\n"
-#~ "\n"
-#~ "- \"/sbin/fuser -v /dev/dsp\" jgħidlek liema programm qed juża l-kard\n"
-#~ "tal-awdjo.\n"
-
-#~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
-#~ msgstr ""
-#~ "Ħaddem filtrar ta' pakketti għall-kernel verżjoni 2.2 tal-Linux,\n"
-#~ "biex tissettja firewall biex tipproteġi l-kompjuter minn attakki \n"
-#~ "min-network"
-
-#~ msgid "File sharing"
-#~ msgstr "Qsim ta' fajls"
-
-#~ msgid "Restrict command line options"
-#~ msgstr "Irrestrinġi l-għażliet tal-linja tal-kmand"
-
-#~ msgid "restrict"
-#~ msgstr "restrict"
-
-#~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
-#~ msgstr ""
-#~ "L-għażla \"irrestrinġi l-għażliet tal-linja tal-kmand\" m'għandha ebda "
-#~ "effett minngħajr password"
-
 #, fuzzy
-#~ msgid "Use an encrypted filesystem"
-#~ msgstr "Ma tistax tuża filesystem iċċifrat għall-punt ta' mmuntar %s"
+#~ msgid "An NTP client/server"
+#~ msgstr "Server NTP"
 
 #~ msgid ""
-#~ "To ensure data integrity after resizing the partition(s), \n"
-#~ "filesystem checks will be run on your next boot into Microsoft Windows®"
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
 #~ msgstr ""
-#~ "Biex tassigura l-integrità tad-data wara li tibdel id-daqs tal-"
-#~ "partizzjoni(jiet),\n"
-#~ "se jiġu ċċekkjati l-filesystems meta terġa' tibbutja l-Windows(TM)"
-
-#~ msgid "Use the Microsoft Windows® partition for loopback"
-#~ msgstr "Uża l-partizzjoni tal-Microsoft Windows® għal loopback"
-
-#~ msgid "Which partition do you want to use for Linux4Win?"
-#~ msgstr "Liema partizzjoni trid tuża għal Linux4Win?"
-
-#~ msgid "Choose the sizes"
-#~ msgstr "Agħżel id-daqsijiet"
-
-#~ msgid "Root partition size in MB: "
-#~ msgstr "Daqs tal-partizzjoni root f' MB: "
-
-#~ msgid "Swap partition size in MB: "
-#~ msgstr "Daqs tal-partizzjoni Swap f' MB: "
+#~ "Prosit! L-installazzjoni issa lesta.\n"
+#~ "Neħħi l-flopi/CD u agħfas Enter biex tirristartja."
 
 #~ msgid ""
-#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
 #~ msgstr ""
-#~ "M'hemmx partizzjonijiet FAT biex tintuża bħala loopback (jew m'hemmx\n"
-#~ "biżżejjed spazju)"
-
-#~ msgid ""
-#~ "The FAT resizer is unable to handle your partition, \n"
-#~ "the following error occurred: %s"
-#~ msgstr ""
-#~ "Il-programm biex tibdel id-daqs ta' partizzjoni FAT m'hux\n"
-#~ "kapaċi tbiddel din il-partizzjoni - instabet din il-problema:\n"
+#~ "Għal informazzjoni dwar aġġornamenti li saru għal din il-verżjoni ta' \n"
+#~ "Moondrake, iċċekkja s-sezzjoni \"Errata\" li hemm fuq:\n"
 #~ "%s"
 
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "Jekk jogħġbok oħroġ mid-desktop u agħfas Ctrl-Alt-Backspace"
+#~ msgid ""
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
+#~ msgstr ""
+#~ "Informazzjoni dwar kif tissettja s-sistema tinstab fil-kapitlu \"Post-"
+#~ "install\"\n"
+#~ "fil-Moondrake User's Guide uffiċjali."
 
-#~ msgid "Welcome To Crackers"
-#~ msgstr "Bieb miftuħ beraħ!"
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
 
-#~ msgid "Poor"
-#~ msgstr "Ftit li xejn"
-
-#~ msgid "High"
-#~ msgstr "Tajjeb"
-
-#~ msgid "Higher"
-#~ msgstr "Tajjeb ħafna"
-
-#~ msgid "Paranoid"
-#~ msgstr "Paranojku"
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "Ħu kopja tad-data kollha qabel tkompli"
 
 #~ msgid ""
-#~ "This level is to be used with care. It makes your system more easy to "
-#~ "use,\n"
-#~ "but very sensitive. It must not be used for a machine connected to "
-#~ "others\n"
-#~ "or to the Internet. There is no password access."
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
 #~ msgstr ""
-#~ "Oqgħod attent jekk tuża dan il-livell. Il-kompjuter tiegħek jista' ikun "
-#~ "iżjed faċli tużah, imma jkun vulnerabbli ħafna. Qatt m'għandu jintuża fuq "
-#~ "kompjuter imqabbad ma' oħrajn permezz ta' network jew ma' l-internet. Ma "
-#~ "hemm ebda password."
-
-#~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
-#~ msgstr ""
-#~ "Il-passwords issa huma mixgħula, imma l-użu fuq l-internet jew network "
-#~ "xorta m'hux rakkomandat."
-
-#~ msgid ""
-#~ "There are already some restrictions, and more automatic checks are run "
-#~ "every night."
-#~ msgstr ""
-#~ "Diġà hemm xi restrizzjonijiet, u iżjed testijiet awtomatiċi jitħaddmu "
-#~ "kuljum bil-lejl."
-
-#~ msgid ""
-#~ "This is similar to the previous level, but the system is entirely closed "
-#~ "and security features are at their maximum."
-#~ msgstr ""
-#~ "Ibbażat fuq il-livell ta' qabel, imma issa s-sistema hija magħluqa għal "
-#~ "kollox.\n"
-#~ "Is-setings tas-sigurtà qegħdin fil-massimu."
+#~ "Twissija: Softwer Ħieles mhux neċessarjament ħieles minn patenti, u "
+#~ "ċerti \n"
+#~ "Softwer Ħieles inkluż jista' jkun kopert minn patenti fil-pajjiż fejn "
+#~ "tużah.\n"
+#~ "Per eżempju, programmi MP3 inklużi jistgħu jeħtieġu liċenzja biex "
+#~ "tużahom\n"
+#~ "(ara http://www.mp3licensing.com għal dettalji). Jekk m'intix ċert jekk\n"
+#~ "patent japplikax għalik, iċċekkja l-liġijiet lokali."
 
 #~ msgid ""
 #~ "\n"
@@ -7234,82 +7123,106 @@ msgstr "Installazzjoni falliet"
 #~ "applikabbli\n"
 #~ "għal programmi ta' softwer.\n"
 
-#~ msgid "Use libsafe for servers"
-#~ msgstr "Uża libsafe għas-servers"
-
 #~ msgid ""
 #~ "A library which defends against buffer overflow and format string attacks."
 #~ msgstr ""
 #~ "Din hija librerija li tipproteġi kontra attakki \"buffer overflow\" u "
 #~ "\"format string\"."
 
-#~ msgid "LILO/grub Installation"
-#~ msgstr "Installazzjoni LILO/grub"
+#~ msgid "Accept user"
+#~ msgstr "Aċċetta user"
 
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "Daqs eżatt ta' memorja jekk meħtieġ (sibt %d RAM)"
+#~ msgid "Accept/Refuse bogus IPv4 error messages."
+#~ msgstr "Aċċetta/iċħad messaġġi fittizji ta' żbalji IPv4."
 
-#~ msgid "Give the ram size in MB"
-#~ msgstr "Agħti d-daqs tar-RAM f'MB"
+#~ msgid "Accept/Refuse broadcasted icmp echo."
+#~ msgstr "Aċċetta/iċħad icmp echo imxandra."
 
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "Jekk bi ħsiebek tuża aboot, kun ċert li tħalli spazju fil-bidu tad-diska "
-#~ "(2048 setturi biżżejjed)"
-
-#~ msgid "Security level"
-#~ msgstr "Livell ta' sigurtà"
-
-#~ msgid "Expand Tree"
-#~ msgstr "Espandi friegħi"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "Agħlaq friegħi"
-
-#~ msgid "Toggle between flat and group sorted"
-#~ msgstr "Aqleb bejn lista sempliċi jew kategorizzata"
-
-#~ msgid "Choose action"
-#~ msgstr "Agħżel azzjoni"
+#~ msgid "Accept/Refuse icmp echo."
+#~ msgstr "Aċċetta/iċħad icmp echo."
 
 #~ msgid "Active Directory with SFU"
 #~ msgstr "Active Directory b' SFU"
 
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Active Directory b' Winbind"
-
 #~ msgid "Active Directory with SFU:"
 #~ msgstr "Active Directory b' SFU:"
+
+#~ msgid "Active Directory with Winbind"
+#~ msgstr "Active Directory b' Winbind"
 
 #~ msgid "Active Directory with Winbind:"
 #~ msgstr "Active Directory b' Winbind:"
 
-#~ msgid "Authentication LDAP"
-#~ msgstr "Awtentikazzjoni LDAP"
+#~ msgid "Add user"
+#~ msgstr "Żid user"
 
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "tqassim tas-sigurtà (SASL/Kerberos)"
+#~ msgid "Allow/Forbid remote root login."
+#~ msgstr "Ippermetti/iċħad reboot remot mill-utent root."
 
 #~ msgid "Authentication Active Directory"
 #~ msgstr "Awtentikazzjoni Active Directory"
 
-#~ msgid "LDAP users database"
-#~ msgstr "Databażi ta' utenti LDAP"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "Utent LDAP jitħalla jibbrawżja l-Active Directory"
+#~ msgid "Authentication LDAP"
+#~ msgstr "Awtentikazzjoni LDAP"
 
 #~ msgid "Authentication NIS"
 #~ msgstr "Awtentikazzjoni NIS"
+
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "Awtentikazzjoni Dominju Windows"
+
+#~ msgid "Bad backup file"
+#~ msgstr "Fajl ta' kopja tas-sigurtà ħażin"
+
+#~ msgid "Choose action"
+#~ msgstr "Agħżel azzjoni"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Agħżel id-daqsijiet"
+
+#~ msgid "Clean /tmp at each boot"
+#~ msgstr "Naddaf /tmp kull meta tixgħel"
+
+#~ msgid "Collapse Tree"
+#~ msgstr "Agħlaq friegħi"
+
+#, fuzzy
+#~ msgid ""
+#~ "Do not update directory inode access times on this filesystem\n"
+#~ "(e.g, for faster access on the news spool to speed up news servers)."
+#~ msgstr ""
+#~ "Taġġornax ħinijiet ta' aċċess fuq din is-sistema ta' fajls\n"
+#~ "(eż, għal aċċess iżjed malajr fid-direttorju spool ta' news server)."
+
+#~ msgid "Enable/Disable IP spoofing protection."
+#~ msgstr "Igħel/itfi protezzjoni kontra IP spoofing."
+
+#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
+#~ msgstr "Ixgħel/ifti libsafe jekk dan jinstab fuq is-sistema."
+
+#~ msgid "Enable/Disable msec hourly security check."
+#~ msgstr "Ixgħel/itfi l-kontroll ta' sigurtà msec ta' kull siegħa"
+
+#~ msgid "Enable/Disable the logging of IPv4 strange packets."
+#~ msgstr "Ixgħel/itfi l-illoggjar tal-pakketti strambi IPv4."
+
+#~ msgid "Error reading file %s"
+#~ msgstr "Problema fil-qari tal-fajl %s"
+
+#~ msgid "Error writing to file %s"
+#~ msgstr "Problema waqt kitba fil-fajl %s"
+
+#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
+#~ msgstr "Problema: Id-drajver %s għall-kard awdjo tiegħek mhux elenkat"
+
+#~ msgid "Expand Tree"
+#~ msgstr "Espandi friegħi"
+
+#~ msgid "Ext2"
+#~ msgstr "Ext2"
+
+#~ msgid "File sharing"
+#~ msgstr "Qsim ta' fajls"
 
 #~ msgid ""
 #~ "For this to work for a W2K PDC, you will probably need to have the admin "
@@ -7339,17 +7252,123 @@ msgstr "Installazzjoni falliet"
 #~ "Il-kmand \"wbinfo -t\" jittestja jekk is-sigrieti ta' awtentikazzjoni "
 #~ "humiex tajbin."
 
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Awtentikazzjoni Dominju Windows"
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Agħti d-daqs tar-RAM f'MB"
 
-#~ msgid "Undo"
-#~ msgstr "Annulla"
+#~ msgid "High"
+#~ msgstr "Tajjeb"
+
+#~ msgid "Higher"
+#~ msgstr "Tajjeb ħafna"
+
+#~ msgid ""
+#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
+#~ "is enough)\n"
+#~ "at the beginning of the disk"
+#~ msgstr ""
+#~ "Jekk bi ħsiebek tuża aboot, kun ċert li tħalli spazju fil-bidu tad-diska "
+#~ "(2048 setturi biżżejjed)"
+
+#~ msgid "Info: "
+#~ msgstr "Info: "
+
+#~ msgid "Journalised FS"
+#~ msgstr "Journalised FS"
+
+#~ msgid "LDAP user allowed to browse the Active Directory"
+#~ msgstr "Utent LDAP jitħalla jibbrawżja l-Active Directory"
+
+#~ msgid "LDAP users database"
+#~ msgstr "Databażi ta' utenti LDAP"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Installazzjoni LILO/grub"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "Ħaddem filtrar ta' pakketti għall-kernel verżjoni 2.2 tal-Linux,\n"
+#~ "biex tissettja firewall biex tipproteġi l-kompjuter minn attakki \n"
+#~ "min-network"
+
+#~ msgid "Number of capture buffers:"
+#~ msgstr "Numru ta' buffers għall-kattura :"
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr ""
+#~ "L-għażla \"irrestrinġi l-għażliet tal-linja tal-kmand\" m'għandha ebda "
+#~ "effett minngħajr password"
+
+#~ msgid "PLL setting:"
+#~ msgstr "Seting PLL :"
+
+#~ msgid "Paranoid"
+#~ msgstr "Paranojku"
+
+#~ msgid ""
+#~ "Passwords are now enabled, but use as a networked computer is still not "
+#~ "recommended."
+#~ msgstr ""
+#~ "Il-passwords issa huma mixgħula, imma l-użu fuq l-internet jew network "
+#~ "xorta m'hux rakkomandat."
+
+#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
+#~ msgstr "Jekk jogħġbok oħroġ mid-desktop u agħfas Ctrl-Alt-Backspace"
+
+#~ msgid "Poor"
+#~ msgstr "Ftit li xejn"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Daqs eżatt ta' memorja jekk meħtieġ (sibt %d RAM)"
+
+#~ msgid "Radio support:"
+#~ msgstr "Sapport għar-radju :"
+
+#~ msgid "Removable media automounting"
+#~ msgstr "Awtomuntar ta' diski li jinħarġu"
+
+#~ msgid "Rescue partition table"
+#~ msgstr "Salva tabella ta' partizzjonijiet"
+
+#~ msgid "Restore partition table"
+#~ msgstr "Erġa' tella' tabella ta' partizzjonijiet"
+
+#~ msgid "Restoring from file %s failed: %s"
+#~ msgstr "Restawr minn fajl %s falliet: %s"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Irrestrinġi l-għażliet tal-linja tal-kmand"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Daqs tal-partizzjoni root f' MB: "
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
 
 #~ msgid "Save partition table"
 #~ msgstr "Ikteb it-tabella ta' partizzjonijiet"
 
-#~ msgid "Restore partition table"
-#~ msgstr "Erġa' tella' tabella ta' partizzjonijiet"
+#~ msgid "Security level"
+#~ msgstr "Livell ta' sigurtà"
+
+#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
+#~ msgstr "Itella' l-\"X Font Server\" (dan huwa meħtieġ biex jaħdem l-Xorg)."
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Daqs tal-partizzjoni Swap f' MB: "
+
+#~ msgid "TLS"
+#~ msgstr "TLS"
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "Il-programm biex tibdel id-daqs ta' partizzjoni FAT m'hux\n"
+#~ "kapaċi tbiddel din il-partizzjoni - instabet din il-problema:\n"
+#~ "%s"
 
 #~ msgid ""
 #~ "The backup partition table has not the same size\n"
@@ -7358,91 +7377,125 @@ msgstr "Installazzjoni falliet"
 #~ "Il-kopja tat-tabella tal-partizzjonijiet m'għandiex l-istess daqs.\n"
 #~ "Tkompli xorta?"
 
-#~ msgid "Info: "
-#~ msgstr "Info: "
-
-#~ msgid "Unknown driver"
-#~ msgstr "Drajver mhux magħruf"
-
-#~ msgid "Error reading file %s"
-#~ msgstr "Problema fil-qari tal-fajl %s"
-
-#~ msgid "Restoring from file %s failed: %s"
-#~ msgstr "Restawr minn fajl %s falliet: %s"
-
-#~ msgid "Bad backup file"
-#~ msgstr "Fajl ta' kopja tas-sigurtà ħażin"
-
-#~ msgid "Error writing to file %s"
-#~ msgstr "Problema waqt kitba fil-fajl %s"
-
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr "Problema: Id-drajver %s għall-kard awdjo tiegħek mhux elenkat"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "Journalised FS"
-#~ msgstr "Journalised FS"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr "Itella' l-\"X Font Server\" (dan huwa meħtieġ biex jaħdem l-Xorg)."
-
-#~ msgid "Add user"
-#~ msgstr "Żid user"
-
-#~ msgid "Accept user"
-#~ msgstr "Aċċetta user"
-
-#, fuzzy
 #~ msgid ""
-#~ "Do not update directory inode access times on this filesystem\n"
-#~ "(e.g, for faster access on the news spool to speed up news servers)."
+#~ "The classic bug sound tester is to run the following commands:\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
+#~ "uses\n"
+#~ "by default\n"
+#~ "\n"
+#~ "- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
+#~ "currently uses\n"
+#~ "\n"
+#~ "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
+#~ "loaded or not\n"
+#~ "\n"
+#~ "- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" "
+#~ "will\n"
+#~ "tell you if sound and alsa services are configured to be run on\n"
+#~ "initlevel 3\n"
+#~ "\n"
+#~ "- \"aumix -q\" will tell you if the sound volume is muted or not\n"
+#~ "\n"
+#~ "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound "
+#~ "card.\n"
 #~ msgstr ""
-#~ "Taġġornax ħinijiet ta' aċċess fuq din is-sistema ta' fajls\n"
-#~ "(eż, għal aċċess iżjed malajr fid-direttorju spool ta' news server)."
+#~ "It-tester klassiku ta' bugs ta' l-awdjo se jħaddem dawn il-kmandijiet:\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | fgrep -i AUDIO\" jgħidlek liema drajver juża "
+#~ "impliċitament\n"
+#~ "il-kard tiegħek.\n"
+#~ "- \"grep sound-slot /etc/modprobe.conf\" jgħidlek liema drajver juża "
+#~ "bħalissa\n"
+#~ "\n"
+#~ "- \"/sbin/lsmod\" jippermettilek tiċċekkja jekk il-modulu (drajver) hux\n"
+#~ "imtella' jew le.\n"
+#~ "\n"
+#~ "- \"/sbin/chkconfig --list sound\" u \"/sbin/chkconfig --list alsa\" \n"
+#~ "jgħidulek jekk is-servizzi sound u alsa humiex konfigurati biex jitilgħu\n"
+#~ "f'initlevel 3\n"
+#~ "\n"
+#~ "- \"aumix -q\" jgħidlek jekk il-volum tal-awdjo hux mitfu jew le\n"
+#~ "\n"
+#~ "- \"/sbin/fuser -v /dev/dsp\" jgħidlek liema programm qed juża l-kard\n"
+#~ "tal-awdjo.\n"
 
-#~ msgid "Rescue partition table"
-#~ msgstr "Salva tabella ta' partizzjonijiet"
+#~ msgid ""
+#~ "There are already some restrictions, and more automatic checks are run "
+#~ "every night."
+#~ msgstr ""
+#~ "Diġà hemm xi restrizzjonijiet, u iżjed testijiet awtomatiċi jitħaddmu "
+#~ "kuljum bil-lejl."
 
-#~ msgid "Removable media automounting"
-#~ msgstr "Awtomuntar ta' diski li jinħarġu"
+#~ msgid ""
+#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ msgstr ""
+#~ "M'hemmx partizzjonijiet FAT biex tintuża bħala loopback (jew m'hemmx\n"
+#~ "biżżejjed spazju)"
+
+#~ msgid ""
+#~ "This is similar to the previous level, but the system is entirely closed "
+#~ "and security features are at their maximum."
+#~ msgstr ""
+#~ "Ibbażat fuq il-livell ta' qabel, imma issa s-sistema hija magħluqa għal "
+#~ "kollox.\n"
+#~ "Is-setings tas-sigurtà qegħdin fil-massimu."
+
+#~ msgid ""
+#~ "This level is to be used with care. It makes your system more easy to "
+#~ "use,\n"
+#~ "but very sensitive. It must not be used for a machine connected to "
+#~ "others\n"
+#~ "or to the Internet. There is no password access."
+#~ msgstr ""
+#~ "Oqgħod attent jekk tuża dan il-livell. Il-kompjuter tiegħek jista' ikun "
+#~ "iżjed faċli tużah, imma jkun vulnerabbli ħafna. Qatt m'għandu jintuża fuq "
+#~ "kompjuter imqabbad ma' oħrajn permezz ta' network jew ma' l-internet. Ma "
+#~ "hemm ebda password."
+
+#~ msgid ""
+#~ "To ensure data integrity after resizing the partition(s), \n"
+#~ "filesystem checks will be run on your next boot into Microsoft Windows®"
+#~ msgstr ""
+#~ "Biex tassigura l-integrità tad-data wara li tibdel id-daqs tal-"
+#~ "partizzjoni(jiet),\n"
+#~ "se jiġu ċċekkjati l-filesystems meta terġa' tibbutja l-Windows(TM)"
+
+#~ msgid "Toggle between flat and group sorted"
+#~ msgstr "Aqleb bejn lista sempliċi jew kategorizzata"
 
 #~ msgid "Trying to rescue partition table"
 #~ msgstr "Qed nipprova nsalva t-tabella ta' partizzjonijiet"
 
-#~ msgid "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr "Aċċetta/iċħad messaġġi fittizji ta' żbalji IPv4."
+#~ msgid "Undo"
+#~ msgstr "Annulla"
 
-#~ msgid "Accept/Refuse broadcasted icmp echo."
-#~ msgstr "Aċċetta/iċħad icmp echo imxandra."
+#~ msgid "Unknown driver"
+#~ msgstr "Drajver mhux magħruf"
 
-#~ msgid "Accept/Refuse icmp echo."
-#~ msgstr "Aċċetta/iċħad icmp echo."
+#, fuzzy
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr "Ma tistax tuża filesystem iċċifrat għall-punt ta' mmuntar %s"
 
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "Ippermetti/iċħad reboot remot mill-utent root."
+#~ msgid "Use libsafe for servers"
+#~ msgstr "Uża libsafe għas-servers"
 
-#~ msgid "Enable/Disable IP spoofing protection."
-#~ msgstr "Igħel/itfi protezzjoni kontra IP spoofing."
+#~ msgid "Use the Microsoft Windows® partition for loopback"
+#~ msgstr "Uża l-partizzjoni tal-Microsoft Windows® għal loopback"
 
-#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
-#~ msgstr "Ixgħel/ifti libsafe jekk dan jinstab fuq is-sistema."
+#~ msgid "Welcome To Crackers"
+#~ msgstr "Bieb miftuħ beraħ!"
 
-#~ msgid "Enable/Disable the logging of IPv4 strange packets."
-#~ msgstr "Ixgħel/itfi l-illoggjar tal-pakketti strambi IPv4."
-
-#~ msgid "Enable/Disable msec hourly security check."
-#~ msgstr "Ixgħel/itfi l-kontroll ta' sigurtà msec ta' kull siegħa"
-
-#~ msgid "Number of capture buffers:"
-#~ msgstr "Numru ta' buffers għall-kattura :"
+#~ msgid "Which partition do you want to use for Linux4Win?"
+#~ msgstr "Liema partizzjoni trid tuża għal Linux4Win?"
 
 #~ msgid "number of capture buffers for mmap'ed capture"
 #~ msgstr "numru ta' buffers għall-kattura mmapp"
 
-#~ msgid "PLL setting:"
-#~ msgstr "Seting PLL :"
+#~ msgid "restrict"
+#~ msgstr "restrict"
 
-#~ msgid "Radio support:"
-#~ msgstr "Sapport għar-radju :"
+#~ msgid "security layout (SASL/Kerberos)"
+#~ msgstr "tqassim tas-sigurtà (SASL/Kerberos)"

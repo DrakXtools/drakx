@@ -446,18 +446,17 @@ msgid "URL must start with ftp:// or http://"
 msgstr "O URL deve começar por ftp:// ou http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"A contactar o sítio 'web' Mandriva Linux para obter a lista de espelhos "
-"disponíveis..."
+"A contactar o sítio 'web' %s para obter a lista de espelhos disponíveis..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Falha ao contactar o sítio 'web' Mandriva Linux para obter a lista de "
-"espelhos disponíveis"
+"Falha ao contactar o sítio 'web' %s para obter a lista de espelhos "
+"disponíveis"
 
 #: any.pm:204
 #, c-format
@@ -655,9 +654,9 @@ msgid "Bad media %s"
 msgstr "Média danificada %s"
 
 #: any.pm:1365
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot make screenshots before partitioning"
-msgstr "Não é possível criar capturas do ecrã antes de particionar"
+msgstr "Não é possível capturar imagens do ecrã antes de particionar"
 
 #: any.pm:1373
 #, c-format
@@ -747,11 +746,12 @@ msgstr ""
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Nenhuma informação xml da média \"%s\", apenas resultado parcial do pacote %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Nenhuma descrição"
 
 #: pkgs.pm:280
 #, c-format
@@ -768,14 +768,14 @@ msgid "An error occurred:"
 msgstr "Ocorreu um erro:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Ocorreu um erro:"
+msgstr "Ocorreu um erro fatal: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Não perguntar novamente"
 
 #: pkgs.pm:894
 #, c-format
@@ -815,9 +815,9 @@ msgid "Entering step `%s'\n"
 msgstr "A entrar na etapa `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Instalação"
+msgstr "Instalação %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -830,15 +830,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "O servidor Xorg está lento para iniciar. Por favor aguarde..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "O seu sistema é baixo em recursos. Pode ter algum problema ao instalar\n"
-"o Mandriva Linux. Se isso ocorrer, pode tentar uma instalação em modo "
-"texto.\n"
+"o %s. Se isso ocorrer, pode tentar uma instalação em modo texto.\n"
 "Para isso, prima `F1' quando arrancar do CDROM, e depois digite `text'."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
@@ -847,14 +846,14 @@ msgid "Media Selection"
 msgstr "Selecção de Média"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Instalar Ecrã KDE Mandriva"
+msgstr "Instalar Ecrã KDE %s"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Instalar Ecrã GNOME Mandriva"
+msgstr "Instalar Ecrã GNOME %s"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -899,7 +898,7 @@ msgstr "Selecção individual de pacotes"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Desmarcar Tudo"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1483,9 +1482,9 @@ msgid "Preparing bootloader..."
 msgstr "A preparar o carregador de arranque..."
 
 #: steps_interactive.pm:1050
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing initial startup program..."
-msgstr "A preparar instalação"
+msgstr "A preparar o programa inicial de arranque..."
 
 #: steps_interactive.pm:1051
 #, c-format
@@ -1663,42 +1662,141 @@ msgid ""
 "Exit"
 msgstr "Sair"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Instalação Mandriva Linux %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Ambiente Gráfico"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Um ambiente gráfico com um conjunto de aplicações amigáveis e ferramentas "
+#~ "de ecrâ"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Um ambiente gráfico leve e rápido com um conjunto de aplicações amigáveis "
+#~ "e ferramentas de ecrâ"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Programas de divertimento: arcada, tabuleiros, estratégia, etc"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Estação de Trabalho"
+
+#, fuzzy
+#~ msgid "For developers!"
+#~ msgstr "Para desenvolvedores"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Licença"
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "O instalador detectou que o seu sistema Linux instalados não pode\n"
+#~ "ser seguramente actualizado para %s.\n"
+#~ "\n"
+#~ "Recomenda-se que substitua a sua instalação anterior.\n"
+#~ "\n"
+#~ "Aviso: deve salvaguardar todos os seus dados pessoais antes de\n"
+#~ "escolher \"Nova Instalação\"."
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "O seu ecrã num dispositivo USB"
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Estação de Trabalho GNOME"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "A distribuição Mandriva Linux 100%% código livre"
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Assistentes Moondrake"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Programas Office: processadores de texto (LibreOffice Writer, Kword), "
+#~ "folhas de cálculo (LibreOffice Calc, Kspread), visualizadores PDF, etc"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Estação de Trabalho de Escritório"
+
+#, fuzzy
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Servidor de Base de Dados PostgreSQL e MySQL"
+
+#, fuzzy
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Servidor de Base de Dados PostgreSQL ou MySQL"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "A preparar o carregador de arranque..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Ecrâ Personalizado"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Saltar todos os pacotes da média \"%s\""
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, etc"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "Estação de Trabalho KDE"
+
+#~ msgid "A full Mandriva Linux desktop, with support"
+#~ msgstr "Um ecrã Mandriva Linux completo, com suporte"
+
+#~ msgid "A full Moondrake desktop, with support"
+#~ msgstr "Um ecrã Moondrake completo, com suporte"
+
+#~ msgid "Bad package"
+#~ msgstr "Pacote danificado"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "A transferir o ficheiro %s..."
 
 #~ msgid "Explore Linux easily with Mandriva One"
 #~ msgstr "Explore o Linux facilmente com o Mandriva One"
 
-#~ msgid "A full Mandriva Linux desktop, with support"
-#~ msgstr "Um ecrã Mandriva Linux completo, com suporte"
+#~ msgid "Explore Linux easily with Moondrake One"
+#~ msgstr "Explore o Linux facilmente com o Moondrake One"
+
+#~ msgid "For contributors"
+#~ msgstr "Para contribuidores"
+
+#~ msgid "For people"
+#~ msgstr "Para pessoas"
+
+#~ msgid "For you"
+#~ msgstr "Para si"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "Ecrã IceWm"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Instalação Mandriva Linux %s"
 
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr ""
 #~ "Mandriva: distribuições para as necessidades de todos os utilizadores"
 
-#~ msgid "Bad package"
-#~ msgstr "Pacote danificado"
+#~ msgid "Moondrake, the new Linux distribution"
+#~ msgstr "Moondrake, a nova distribuição Linux"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Rede"
-
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Actualizações"
+#~ msgid "Moondrake: distributions for everybody's needs"
+#~ msgstr ""
+#~ "Moondrake: distribuições para as necessidades de todos os utilizadores"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1706,6 +1804,36 @@ msgstr "Sair"
 #~ msgstr ""
 #~ "Programas office: processadores de texto (kword, abiword), folhas de "
 #~ "cálculo (kspread, gnumeric), visualizadores pdf, etc"
+
+#~ msgid "People!"
+#~ msgstr "Pessoas!"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "A preparar o carregador de arranque..."
+
+#~ msgid "Select All"
+#~ msgstr "Seleccionar Tudo"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "A distribuição Mandriva Linux 100%% código livre"
+
+#~ msgid "The 100%% open source Moondrake distribution"
+#~ msgstr "A distribuição Moondrake 100%% código livre"
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr ""
+#~ "A actualização de uma distribuição 32bit para uma 64bit não é suportada"
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr ""
+#~ "A actualização de uma distribuição 64bit para uma 32bit não é suportada"
+
+#~ msgid "Welcome"
+#~ msgstr "Bem-vindo"
+
+#~ msgid "Welcome!"
+#~ msgstr "Bem-vindo!"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1725,17 +1853,6 @@ msgstr "Sair"
 #~ "perservadas,\n"
 #~ "por favor reinicie o seu sistema e actualize usando a ferramenta de "
 #~ "actualização Mandriva."
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "A transferir o ficheiro %s..."
-
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr ""
-#~ "A actualização de uma distribuição 32bit para uma 64bit não é suportada"
-
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr ""
-#~ "A actualização de uma distribuição 64bit para uma 32bit não é suportada"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1761,5 +1878,20 @@ msgstr "Sair"
 #~ "\n"
 #~ "Deseja realmente instalar estes servidores?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "Ecrã IceWm"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "O seu ecrã num dispositivo USB"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Licença"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Rede"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Actualizações"

@@ -456,9 +456,9 @@ msgid "Shell"
 msgstr "Čaula"
 
 #: any.pm:985
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, adding media..."
-msgstr "lyudzu pagaidit cikom izpyldās ttmkfdir..."
+msgstr "Lyudzu pagaidit, davīnoj datu nesieju..."
 
 #: any.pm:1030 security/l10n.pm:14
 #, c-format
@@ -1477,9 +1477,9 @@ msgstr "Vairuok"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
 #: diskdrake/interactive.pm:1304 mygtk2.pm:1228
-#, fuzzy, c-format
+#, c-format
 msgid "Confirmation"
-msgstr "Konfiguraceja"
+msgstr "Apstyprynuošona"
 
 #: diskdrake/interactive.pm:281
 #, c-format
@@ -1575,7 +1575,7 @@ msgstr "Detalizeita informaceja"
 #: diskdrake/interactive.pm:407
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "Video"
 
 #: diskdrake/interactive.pm:412 diskdrake/interactive.pm:828
 #, c-format
@@ -2624,15 +2624,14 @@ msgid "Which partition do you want to resize?"
 msgstr "Kurys sadalis izmāru gribit izmaineit?"
 
 #: fs/partitioning_wizard.pm:180
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the %s installation."
 msgstr ""
 "Microsoft Windows® sadaļa ir puoruok fragmenteita. Vyspyrms nu Microsoft "
-"Windows® vidis palaidit ``defrag'' i tod atsuocit Mandriva Linux "
-"instaleišonu."
+"Windows® vidis palaidit ``defrag'' i tod atsuocit %s instaleišonu."
 
 #: fs/partitioning_wizard.pm:188
 #, c-format
@@ -2887,7 +2886,7 @@ msgstr ""
 "Tāpēc neaizmirstiet izveidot /boot sadaļu."
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr "Jius navarit lītuot šifreitū failsistemu monteišonys punktā %s"
 
@@ -3389,7 +3388,7 @@ msgstr ""
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -6532,7 +6531,7 @@ msgstr "Internets"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "Teikluošona"
 
 #: services.pm:161
 #, c-format
@@ -6851,95 +6850,42 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Instalaceja naizadeve"
 
-#~ msgid "Clean /tmp at each boot"
-#~ msgstr "Izteireit /tmp kotrys suokneišonys laikā"
-
-#~ msgid "File sharing"
-#~ msgstr "Failu kūplītuošuona"
-
-#~ msgid "Restrict command line options"
-#~ msgstr "Īrobežuot komandryndys opcejis"
-
-#~ msgid "restrict"
-#~ msgstr "īrībežuot"
-
-#~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
-#~ msgstr "Opcejai ``Īrūbežuot komandryndys opcejis'' nav jāgys bez parolis"
+#, fuzzy
+#~ msgid "An NTP client/server"
+#~ msgstr "NTP servers"
 
 #, fuzzy
-#~ msgid "Use an encrypted filesystem"
-#~ msgstr "Jius navarit lītuot šifreitū failsistemu monteišonys punktā %s"
-
-#~ msgid "Use the Microsoft Windows® partition for loopback"
-#~ msgstr "Lītuot Microsoft Windows® sadali prīkš loopback"
-
-#~ msgid "Which partition do you want to use for Linux4Win?"
-#~ msgstr "Kuru sadali gribit izmontuot prīkš Linux4Win?"
-
-#~ msgid "Choose the sizes"
-#~ msgstr "Izavielejit izmārus"
-
-#~ msgid "Root partition size in MB: "
-#~ msgstr "Saknis sadalis izmārs (MB): "
-
-#~ msgid "Swap partition size in MB: "
-#~ msgstr "Swap sadalis izmārs (MB): "
+#~ msgid ""
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
+#~ msgstr ""
+#~ "Apsveicam, instaleišona ir pabeigta.\n"
+#~ "Izjemit suokneišonys datu nesieju i nūspīdit īvodu, lai puorstarteitu "
+#~ "datoru."
 
 #~ msgid ""
-#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
 #~ msgstr ""
-#~ "Nav FAT sadalis, lai izmontuotu kai loopback (voi napīteik breivys vītys)"
+#~ "Lai sajimtu informaceju par lobuojumim, kas ir pīejami itam Moondrake\n"
+#~ "izdavumam, skotit Errata failu, kas atrūnams\n"
+#~ "%s"
 
 #~ msgid ""
-#~ "The FAT resizer is unable to handle your partition, \n"
-#~ "the following error occurred: %s"
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
 #~ msgstr ""
-#~ "FAT izmāra maineituojs naspiej izmaineit jiusu sadali,\n"
-#~ "atkluota sekuojūša kliuda: %s"
+#~ "Informaceja par jiusu sistemys konfigureišonu ir pīejama Oficialajā\n"
+#~ "Moondrake lītuotuoja rūkysgruomotys piecinstaleišonys (post install) "
+#~ "nūdaļā."
 
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "Lyudzu aizverit seseju i nūspīdit Ctrl-Alt-BackSpace"
+#~ msgid "Moondrake"
+#~ msgstr "Mageya"
 
-#~ msgid "Welcome To Crackers"
-#~ msgstr "Laipni lyudzam pi hakerim"
-
-#~ msgid "Poor"
-#~ msgstr "Vuojs"
-
-#~ msgid "High"
-#~ msgstr "Augsts"
-
-#~ msgid "Higher"
-#~ msgstr "Paaugstynuots"
-
-#~ msgid "Paranoid"
-#~ msgstr "Paranoisks"
-
-#~ msgid ""
-#~ "This level is to be used with care. It makes your system more easy to "
-#~ "use,\n"
-#~ "but very sensitive. It must not be used for a machine connected to "
-#~ "others\n"
-#~ "or to the Internet. There is no password access."
-#~ msgstr ""
-#~ "Šū leimini ir juoizmontoj uzmaneigi. Tys padora jiusu sistemu vīgļuok\n"
-#~ "izmontojamu, bet ļūti nadrūšu: tū nadreikst izmontuot datoram, kas ir\n"
-#~ "savīnuots ar cytim datorim voi ar Internetu. Nateik praseita parole."
-
-#~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
-#~ msgstr ""
-#~ "Tagad teik izmontuota parole, bet izmontuot datoru teiklā vēl aizviņ\n"
-#~ "nav īteicams."
-
-#~ msgid ""
-#~ "This is similar to the previous level, but the system is entirely closed "
-#~ "and security features are at their maximum."
-#~ msgstr ""
-#~ "Itys ir leidzeigs īprīkšejam leimiņam, bet sistema ir piļneibā slāgta i "
-#~ "drūšeibys īspiejis ir pošys maksimaluokuos."
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "Vyspyrms izveidojit datu rezervis kopeju"
 
 #~ msgid ""
 #~ "\n"
@@ -7010,23 +6956,92 @@ msgstr "Instalaceja naizadeve"
 #~ "attīceigajim autorim, i tuos aizsargoj intelektualuo īpašuma i\n"
 #~ "autortīseibu lykumi, kas atsatiec iz programmnūdrūšynuojumu.\n"
 
-#~ msgid "Use libsafe for servers"
-#~ msgstr "Lītuot libsafe prīkš serverim"
-
 #~ msgid ""
 #~ "A library which defends against buffer overflow and format string attacks."
 #~ msgstr ""
 #~ "Biblioteka, kas aizsorgoj pret bufera puorpiļdeišonys i ryndys formata "
 #~ "uzbrukumim."
 
-#~ msgid "LILO/grub Installation"
-#~ msgstr "LILO/grub instaleišona"
+#~ msgid "Accept user"
+#~ msgstr "Apstyprynuot lītuotuoju"
 
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "Ja napīcīšoms, precizejit RAM apjūmu (atrosti %d MB)"
+#, fuzzy
+#~ msgid "Active Directory with SFU"
+#~ msgstr "Atjaunuot vysys rezervis kopejis"
+
+#, fuzzy
+#~ msgid "Active Directory with SFU:"
+#~ msgstr "Atjaunuot vysys rezervis kopejis"
+
+#, fuzzy
+#~ msgid "Active Directory with Winbind"
+#~ msgstr "Atjaunuot vysys rezervis kopejis"
+
+#, fuzzy
+#~ msgid "Active Directory with Winbind:"
+#~ msgstr "Atjaunuot vysys rezervis kopejis"
+
+#~ msgid "Add user"
+#~ msgstr "Pīvīnuot lītuotuoju"
+
+#~ msgid "Allow/Forbid remote root login."
+#~ msgstr "Atļaut/Aizlīgt attuolu root dasasliegšonu sistemai"
+
+#, fuzzy
+#~ msgid "Authentication Active Directory"
+#~ msgstr "Autentifikacejis_metode"
+
+#~ msgid "Authentication LDAP"
+#~ msgstr "LDAP autentikaceja"
+
+#~ msgid "Authentication NIS"
+#~ msgstr "NIS autentikaceja"
+
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "Windows domena autentikaceja"
+
+#~ msgid "Bad backup file"
+#~ msgstr "Slykts rezervis kopejis fails"
+
+#~ msgid "Choose action"
+#~ msgstr "Izavielejit darbeibu"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Izavielejit izmārus"
+
+#~ msgid "Clean /tmp at each boot"
+#~ msgstr "Izteireit /tmp kotrys suokneišonys laikā"
+
+#~ msgid "Collapse Tree"
+#~ msgstr "Sakļaut kūku"
+
+#~ msgid "Error reading file %s"
+#~ msgstr "Kliuda, nūlosūt failu %s"
+
+#~ msgid "Error writing to file %s"
+#~ msgstr "Kliuda, īrokstūt failā %s"
+
+#, fuzzy
+#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
+#~ msgstr "Nav zināmu draiveru jūsu skaņu kartei (%s)"
+
+#~ msgid "Expand Tree"
+#~ msgstr "Izvērst kūku"
+
+#~ msgid "Ext2"
+#~ msgstr "Ext2"
+
+#~ msgid "File sharing"
+#~ msgstr "Failu kūplītuošuona"
 
 #~ msgid "Give the ram size in MB"
 #~ msgstr "Nūruodit atminis apjūmu MB"
+
+#~ msgid "High"
+#~ msgstr "Augsts"
+
+#~ msgid "Higher"
+#~ msgstr "Paaugstynuots"
 
 #, fuzzy
 #~ msgid ""
@@ -7037,66 +7052,91 @@ msgstr "Instalaceja naizadeve"
 #~ "Ja planavojit izmontuot aboot, naaizmierstit atstuot breivu vītu diska\n"
 #~ "suokumā (pīteik ar 2048 sektorim)"
 
-#~ msgid "Security level"
-#~ msgstr "Drūšeibys leimins"
+#~ msgid "Info: "
+#~ msgstr "Informaceja: "
 
-#~ msgid "Expand Tree"
-#~ msgstr "Izvērst kūku"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "Sakļaut kūku"
-
-#~ msgid "Toggle between flat and group sorted"
-#~ msgstr "Sakuortuots vīnā sarokstā voi pa grupom"
-
-#~ msgid "Choose action"
-#~ msgstr "Izavielejit darbeibu"
-
-#, fuzzy
-#~ msgid "Active Directory with SFU"
-#~ msgstr "Atjaunuot vysys rezervis kopejis"
-
-#, fuzzy
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Atjaunuot vysys rezervis kopejis"
-
-#, fuzzy
-#~ msgid "Active Directory with SFU:"
-#~ msgstr "Atjaunuot vysys rezervis kopejis"
-
-#, fuzzy
-#~ msgid "Active Directory with Winbind:"
-#~ msgstr "Atjaunuot vysys rezervis kopejis"
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "LDAP autentikaceja"
-
-#, fuzzy
-#~ msgid "TLS"
-#~ msgstr "LSB"
-
-#, fuzzy
-#~ msgid "Authentication Active Directory"
-#~ msgstr "Autentifikacejis_metode"
+#~ msgid "Journalised FS"
+#~ msgstr "Žurnaleita FS"
 
 #, fuzzy
 #~ msgid "LDAP users database"
 #~ msgstr "Datubāzis"
 
-#~ msgid "Authentication NIS"
-#~ msgstr "NIS autentikaceja"
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/grub instaleišona"
 
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Windows domena autentikaceja"
+#~ msgid "Number of capture buffers:"
+#~ msgstr "Uztveršonys buferu skaits:"
 
-#~ msgid "Undo"
-#~ msgstr "Atsaukt"
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr "Opcejai ``Īrūbežuot komandryndys opcejis'' nav jāgys bez parolis"
+
+#~ msgid "PLL setting:"
+#~ msgstr "PLL uzstuodiejums:"
+
+#~ msgid "Paranoid"
+#~ msgstr "Paranoisks"
+
+#~ msgid ""
+#~ "Passwords are now enabled, but use as a networked computer is still not "
+#~ "recommended."
+#~ msgstr ""
+#~ "Tagad teik izmontuota parole, bet izmontuot datoru teiklā vēl aizviņ\n"
+#~ "nav īteicams."
+
+#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
+#~ msgstr "Lyudzu aizverit seseju i nūspīdit Ctrl-Alt-BackSpace"
+
+#~ msgid "Poor"
+#~ msgstr "Vuojs"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Ja napīcīšoms, precizejit RAM apjūmu (atrosti %d MB)"
+
+#~ msgid "Radio support:"
+#~ msgstr "Radejis atbolsts:"
+
+#~ msgid "Removable media automounting"
+#~ msgstr "Izjamama datu nesieja automonteišona"
+
+#~ msgid "Rescue partition table"
+#~ msgstr "Salobuot sadaļu tabulu"
+
+#~ msgid "Restore partition table"
+#~ msgstr "Atjaunuot sadaļu tabulu"
+
+#~ msgid "Restoring from file %s failed: %s"
+#~ msgstr "Atjaunuošona nu faila %s naizadeve: %s"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Īrobežuot komandryndys opcejis"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Saknis sadalis izmārs (MB): "
 
 #~ msgid "Save partition table"
 #~ msgstr "Īraksteit sadaļu tabulu"
 
-#~ msgid "Restore partition table"
-#~ msgstr "Atjaunuot sadaļu tabulu"
+#~ msgid "Security level"
+#~ msgstr "Drūšeibys leimins"
+
+#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
+#~ msgstr "Startē X fontu serveri (obligati, lai izpiļdeitu Xorg)."
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Swap sadalis izmārs (MB): "
+
+#, fuzzy
+#~ msgid "TLS"
+#~ msgstr "LSB"
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "FAT izmāra maineituojs naspiej izmaineit jiusu sadali,\n"
+#~ "atkluota sekuojūša kliuda: %s"
 
 #~ msgid ""
 #~ "The backup partition table has not the same size\n"
@@ -7105,63 +7145,59 @@ msgstr "Instalaceja naizadeve"
 #~ "Sadaļu tabulys rezervis kopejai ir atškireigs izmārs\n"
 #~ "Tūmār turpynuot?"
 
-#~ msgid "Info: "
-#~ msgstr "Informaceja: "
+#~ msgid ""
+#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ msgstr ""
+#~ "Nav FAT sadalis, lai izmontuotu kai loopback (voi napīteik breivys vītys)"
 
-#~ msgid "Unknown driver"
-#~ msgstr "Nazynuoms draivers"
+#~ msgid ""
+#~ "This is similar to the previous level, but the system is entirely closed "
+#~ "and security features are at their maximum."
+#~ msgstr ""
+#~ "Itys ir leidzeigs īprīkšejam leimiņam, bet sistema ir piļneibā slāgta i "
+#~ "drūšeibys īspiejis ir pošys maksimaluokuos."
 
-#~ msgid "Error reading file %s"
-#~ msgstr "Kliuda, nūlosūt failu %s"
+#~ msgid ""
+#~ "This level is to be used with care. It makes your system more easy to "
+#~ "use,\n"
+#~ "but very sensitive. It must not be used for a machine connected to "
+#~ "others\n"
+#~ "or to the Internet. There is no password access."
+#~ msgstr ""
+#~ "Šū leimini ir juoizmontoj uzmaneigi. Tys padora jiusu sistemu vīgļuok\n"
+#~ "izmontojamu, bet ļūti nadrūšu: tū nadreikst izmontuot datoram, kas ir\n"
+#~ "savīnuots ar cytim datorim voi ar Internetu. Nateik praseita parole."
 
-#~ msgid "Restoring from file %s failed: %s"
-#~ msgstr "Atjaunuošona nu faila %s naizadeve: %s"
-
-#~ msgid "Bad backup file"
-#~ msgstr "Slykts rezervis kopejis fails"
-
-#~ msgid "Error writing to file %s"
-#~ msgstr "Kliuda, īrokstūt failā %s"
-
-#, fuzzy
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr "Nav zināmu draiveru jūsu skaņu kartei (%s)"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "Journalised FS"
-#~ msgstr "Žurnaleita FS"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr "Startē X fontu serveri (obligati, lai izpiļdeitu Xorg)."
-
-#~ msgid "Add user"
-#~ msgstr "Pīvīnuot lītuotuoju"
-
-#~ msgid "Accept user"
-#~ msgstr "Apstyprynuot lītuotuoju"
-
-#~ msgid "Rescue partition table"
-#~ msgstr "Salobuot sadaļu tabulu"
-
-#~ msgid "Removable media automounting"
-#~ msgstr "Izjamama datu nesieja automonteišona"
+#~ msgid "Toggle between flat and group sorted"
+#~ msgstr "Sakuortuots vīnā sarokstā voi pa grupom"
 
 #~ msgid "Trying to rescue partition table"
 #~ msgstr "Mieginu izgluobt sadaļu tabulu"
 
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "Atļaut/Aizlīgt attuolu root dasasliegšonu sistemai"
+#~ msgid "Undo"
+#~ msgstr "Atsaukt"
 
-#~ msgid "Number of capture buffers:"
-#~ msgstr "Uztveršonys buferu skaits:"
+#~ msgid "Unknown driver"
+#~ msgstr "Nazynuoms draivers"
+
+#, fuzzy
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr "Jius navarit lītuot šifreitū failsistemu monteišonys punktā %s"
+
+#~ msgid "Use libsafe for servers"
+#~ msgstr "Lītuot libsafe prīkš serverim"
+
+#~ msgid "Use the Microsoft Windows® partition for loopback"
+#~ msgstr "Lītuot Microsoft Windows® sadali prīkš loopback"
+
+#~ msgid "Welcome To Crackers"
+#~ msgstr "Laipni lyudzam pi hakerim"
+
+#~ msgid "Which partition do you want to use for Linux4Win?"
+#~ msgstr "Kuru sadali gribit izmontuot prīkš Linux4Win?"
 
 #~ msgid "number of capture buffers for mmap'ed capture"
 #~ msgstr "uztveršonys buferu skaits mmap-eitai uztveršonai"
 
-#~ msgid "PLL setting:"
-#~ msgstr "PLL uzstuodiejums:"
-
-#~ msgid "Radio support:"
-#~ msgstr "Radejis atbolsts:"
+#~ msgid "restrict"
+#~ msgstr "īrībežuot"

@@ -549,20 +549,20 @@ msgid "Please choose a language to use"
 msgstr "Por favor escolha a língua a usar"
 
 #: any.pm:1183
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
-"A Mandriva Linux pode suportar várias línguas. Seleccione\n"
-"as línguas que deseja instalar. Irão estar disponíveis quando\n"
+"%s pode suportar vários idiomas. Selecione\n"
+"os idiomas que deseja instalar. Estarão disponíveis quando\n"
 "terminar a instalação e reiniciar o seu sistema."
 
 #: any.pm:1186
-#, fuzzy, c-format
+#, c-format
 msgid "Multiple languages"
-msgstr "Multilingue"
+msgstr "Vários idiomas"
 
 #: any.pm:1187
 #, c-format
@@ -1349,7 +1349,7 @@ msgid "Warning"
 msgstr "Aviso"
 
 #: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete this mount point?"
 msgstr "Tem certeza que deseja apagar este ponto de montagem?"
 
@@ -1957,7 +1957,7 @@ msgid "Moving physical extents"
 msgstr "A mover extensões físicas"
 
 #: diskdrake/interactive.pm:1065
-#, fuzzy, c-format
+#, c-format
 msgid "This partition cannot be used for loopback"
 msgstr "Esta partição não pode ser usada para 'loopback'"
 
@@ -2710,7 +2710,7 @@ msgid "Which partition do you want to resize?"
 msgstr "Que partição deseja redimensionar?"
 
 #: fs/partitioning_wizard.pm:180
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
@@ -2718,7 +2718,7 @@ msgid ""
 msgstr ""
 "A sua partição Microsoft Windows® está demasiado fragmentada. Por favor "
 "reinicie o seu computador no Microsoft Windows®, execute o utilitário "
-"``defrag'', depois recomece a instalação Mandriva Linux."
+"``defrag'', depois recomece a instalação %s."
 
 #: fs/partitioning_wizard.pm:188
 #, c-format
@@ -2804,11 +2804,11 @@ msgid "Erase and use entire disk"
 msgstr "Apagar e usar o  todo o disco"
 
 #: fs/partitioning_wizard.pm:243
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
-msgstr "Tem mais que um disco rígido, em que disco deseja instalar o linux?"
+msgstr "Tem mais que um disco rígido, em que disco deseja que seja instalado?"
 
 #: fs/partitioning_wizard.pm:251 fsedit.pm:634
 #, c-format
@@ -2924,23 +2924,23 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "Já existe uma partição no ponto de montagem %s\n"
 
 #: fsedit.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a separate /boot partition"
 msgstr ""
-"Seleccionou uma partição RAID como raiz (/). Nenhum\n"
+"Selecionou uma partição RAID como raiz (/). Nenhum\n"
 "carregador de arranque consegue aceder a esta partição sem\n"
 "uma partição /boot. Certifique-se que adiciona uma partição /boot"
 
 #: fsedit.pm:440
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Metadata version unsupported for a boot partition. Please be sure to add a "
 "separate /boot partition."
 msgstr ""
-"Versão de dados meta não suportada para uma partição de arranque. Certifique-"
+"Versão de meta-dados não suportada para uma partição de arranque. Certifique-"
 "se que adiciona uma partição /boot"
 
 #: fsedit.pm:448
@@ -2959,24 +2959,24 @@ msgid "Metadata version unsupported for a boot partition."
 msgstr "Versão de dados meta não suportada para uma partção de arranque."
 
 #: fsedit.pm:459
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a separate /boot partition"
 msgstr ""
-"Seleccionou uma partição encriptada como raíz (/). Nenhum carregador de "
-"arranque consegue aceder a esta partição\n"
+"Selecionou uma partição encriptada como raiz (/).\n"
+"Nenhum carregador de arranque consegue aceder a esta partição\n"
 "sem uma partição /boot. Certifique-se que adiciona uma partição /boot"
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr ""
 "Não pode usar um sistema de ficheiros encriptado para o ponto de montagem %s"
 
 #: fsedit.pm:469
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You cannot use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
@@ -2985,14 +2985,14 @@ msgstr ""
 "os volumes físicos"
 
 #: fsedit.pm:471
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
 "volumes.\n"
 "You should create a separate /boot partition first"
 msgstr ""
-"Seleccionou um Volume Lógico LVM como raiz (/).\n"
+"Selecionou um Volume Lógico LVM como raiz (/).\n"
 "O carregador de arranque não o consegue gerir quando o volume atrasa os "
 "volumes físicos.\n"
 "Deve primeiro criar uma partição de arranque /boot"
@@ -3319,7 +3319,7 @@ msgstr ""
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:369
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -3328,8 +3328,8 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"A sua placa actualmente usa o controlador %s\"%s\" (o controlador "
-"predefinido para a sua placa é \"%s\")"
+"A sua placa atualmente usa o controlador %s\"%s\" (o controlador predefinido "
+"para a sua placa é \"%s\")"
 
 #: harddrake/sound.pm:371
 #, c-format
@@ -3486,11 +3486,11 @@ msgstr "Escolher um controlador arbitrário"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:482
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -5429,19 +5429,19 @@ msgid "Installing driver for USB controller"
 msgstr "A instalar o controlador para o dispositivo USB"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller \"%s\""
-msgstr "A instalar o controlador para o dispositivo firewire %s"
+msgstr "A instalar o controlador para o dispositivo 'firewire' \"%s\""
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard disk drive controller \"%s\""
-msgstr "A instalar o controlador dispositivo do disco %s"
+msgstr "A instalar o controlador dispositivo do disco \"%s\""
 
 #: modules/interactive.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller \"%s\""
-msgstr "A instalar o controlador para o dispositivo ethernet %s"
+msgstr "A instalar o controlador para o dispositivo 'ethernet' \"%s\""
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -6964,7 +6964,7 @@ msgstr "Internet"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "Rede"
 
 #: services.pm:161
 #, c-format
@@ -7119,7 +7119,7 @@ msgstr ""
 " de arranque: oferece para configurar a opção auto-autenticar"
 
 #: standalone.pm:61
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
 "\n"
@@ -7132,8 +7132,8 @@ msgstr ""
 "\n"
 "OPÇOES:\n"
 "  --help            - mostra esta mensagem de ajuda.\n"
-"  --report          - o programa deve ser um das ferramentas Mandriva Linux\n"
-"  --incident        - o programa deve ser um das ferramentas Mandriva Linux"
+"  --report          - o programa deve ser uma das ferramentas %s\n"
+"  --incident        - o programa deve ser uma das ferramentas %s"
 
 #: standalone.pm:67
 #, c-format
@@ -7185,7 +7185,7 @@ msgstr ""
 "                 : e gs para ghostscript apenas para esta."
 
 #: standalone.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS]...\n"
 "%s Terminal Server Configurator\n"
@@ -7202,9 +7202,9 @@ msgid ""
 "IP, nbi image name)"
 msgstr ""
 "[OPÇÕES]...\n"
-"Configurador do Servidor de Terminais Mandriva Linux\n"
+"Configurador do Servidor de Terminais %s\n"
 "--enable         : activa o MTS\n"
-"--disable        : desactiva o MTS\n"
+"--disable        : desativa o MTS\n"
 "--start          : inicia o MTS\n"
 "--stop           : pára o MTS\n"
 "--adduser        : adiciona um utilizador do sistema ao MTS (requer nome do "
@@ -7251,7 +7251,7 @@ msgstr ""
 "--quiet : não é interactivo. Para ser usado com (dis)connect."
 
 #: standalone.pm:112
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTION]...\n"
 "  --no-confirmation      do not ask first confirmation question in %s Update "
@@ -7262,8 +7262,8 @@ msgid ""
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
 "[OPÇÃO]...\n"
-"  --no-confirmation      não pede a primeira confirmação em modo Mandriva "
-"Update\n"
+"  --no-confirmation      não pede a primeira confirmação em modo Atualização "
+"%s\n"
 "  --no-verify-rpm        não verifica as assinaturas dos pacotes\n"
 "  --changelog-first      mostra o registo das alterações antes da lista dos "
 "ficheiros na janela de descrição\n"
@@ -7380,11 +7380,359 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Instalação falhada"
 
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Acordo de licença"
+
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Garantia Limitada"
+
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. A licença GPL e as Licenças Relacionadas"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Direitos de Propriedade Intelectual"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Legislação em Vigor"
+
+#~ msgid ""
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
+#~ msgstr ""
+#~ "Todos os direitos dos componentes dos Produtos de 'Software' pertencem "
+#~ "aos seus respetivos\n"
+#~ "autores e são protegidos pela propriedade intelectual e pelas leis de "
+#~ "Direitos de Autor aplicáveis\n"
+#~ "aos programas. A Moondrake e os seus fornecedores e licenciadores "
+#~ "reservam-se ao direito\n"
+#~ "de modificar ou adaptar os Produtos de 'Software', como um todo ou em "
+#~ "partes, por todos os meios\n"
+#~ "e para todos os efeitos.em qualquer sentido e para todos os fins.\n"
+#~ "A \"Moondrake\" e os logótipos associados são marcas registadas da %s"
+
+#, fuzzy
+#~ msgid "An NTP client/server"
+#~ msgstr "Servidor NTP"
+
+#~ msgid ""
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
+#~ msgstr ""
+#~ "Parabéns, a instalação está completa.\n"
+#~ "Retire a média de instalação e prima a tecla 'Entrar' para reiniciar."
+
+#~ msgid ""
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Para informação acerca das correções disponíveis para esta versão\n"
+#~ "Moondrake, consulte a Errata disponível em: \n"
+#~ "%s"
+
+#~ msgid ""
+#~ "If any portion of this agreement is held void, illegal or inapplicable by "
+#~ "a court judgment, this \n"
+#~ "portion is excluded from this contract. You remain bound by the other "
+#~ "applicable sections of the \n"
+#~ "agreement.\n"
+#~ "The terms and conditions of this License are governed by the Laws of "
+#~ "France.\n"
+#~ "All disputes on the terms of this license will preferably be settled out "
+#~ "of court. As a last \n"
+#~ "resort, the dispute will be referred to the appropriate Courts of Law of "
+#~ "Paris - France.\n"
+#~ "For any question on this document, please contact Moondrake."
+#~ msgstr ""
+#~ "Se alguma parte deste contrato for considerada nula, ilegal ou "
+#~ "inaplicável por decisão judicial,\n"
+#~ "essa parte será excluída deste contrato. Você continuará ligado às outras "
+#~ "secções aplicáveis\n"
+#~ "do contrato.\n"
+#~ "Os termos e condições desta Licença são governados pelas Leis Francesas.\n"
+#~ "Todas as disputas acerca dos dos termos desta licença serão "
+#~ "preferencialmente resolvidos fora de\n"
+#~ "um tribunal. Como um último recurso, a disputa será referida ao Tribunal "
+#~ "de Paris - França.\n"
+#~ "Para qualquer questão acerca deste documento, contacte a Moondrake."
+
+#~ msgid ""
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
+#~ msgstr ""
+#~ "A informação acerca de como configurar o seu sistema está disponível no\n"
+#~ "capítulo pós-instalação do Guia Oficial do Utilizador Moondrake."
+
+#~ msgid "Introduction"
+#~ msgstr "Introdução"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "Por favor faça primeiro uma salvaguarda dos seus dados"
+
+#~ msgid ""
+#~ "Please read this document carefully. This document is a license agreement "
+#~ "between you and  \n"
+#~ "Moondrake which applies to the Software Products.\n"
+#~ "By installing, duplicating or using any of the Software Products in any "
+#~ "manner, you explicitly \n"
+#~ "accept and fully agree to conform to the terms and conditions of this "
+#~ "License. \n"
+#~ "If you disagree with any portion of the License, you are not allowed to "
+#~ "install, duplicate or use \n"
+#~ "the Software Products. \n"
+#~ "Any attempt to install, duplicate or use the Software Products in a "
+#~ "manner which does not comply \n"
+#~ "with the terms and conditions of this License is void and will terminate "
+#~ "your rights under this \n"
+#~ "License. Upon termination of the License,  you must immediately destroy "
+#~ "all copies of the \n"
+#~ "Software Products."
+#~ msgstr ""
+#~ "Por favor leia com atenção. Este documento é a licença do acordo entre si "
+#~ "e a Moondrake\n"
+#~ "que se aplica aos Produtos de 'Software'.\n"
+#~ "Ao instalar, duplicar ou usar qualquer dos programas, seja de que maneira "
+#~ "for, aceita totalmente\n"
+#~ "e explicitamente os termos e condições desta Licença.\n"
+#~ "Se discorda de alguma parte não lhe é permitido instalar, duplicar ou "
+#~ "usar os Produtos de 'Software'.\n"
+#~ "Qualquer tentativa de instalar, duplicar ou usar os programas que não "
+#~ "esteja de acordo com os\n"
+#~ "termos e condições desta Licença é proibida e retira-lhe quaisquer "
+#~ "direitos sob o uso da mesma.\n"
+#~ "Após terminar a Licença, deve imediatamente destruir todas as copias dos "
+#~ "Produtos de 'Software'."
+
+#~ msgid ""
+#~ "The Software Products and attached documentation are provided \"as is\", "
+#~ "with no warranty, to the \n"
+#~ "extent permitted by law.\n"
+#~ "Neither Moondrake nor its licensors or suppliers will, in any "
+#~ "circumstances and to the extent \n"
+#~ "permitted by law, be liable for any special, incidental, direct or "
+#~ "indirect damages whatsoever \n"
+#~ "(including without limitation damages for loss of business, interruption "
+#~ "of business, financial \n"
+#~ "loss, legal fees and penalties resulting from a court judgment, or any "
+#~ "other consequential loss) \n"
+#~ "arising out of  the use or inability to use the Software Products, even "
+#~ "if Moondrake or its \n"
+#~ "licensors or suppliers have been advised of the possibility or occurrence "
+#~ "of such damages.\n"
+#~ "\n"
+#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN "
+#~ "SOME COUNTRIES\n"
+#~ "\n"
+#~ "To the extent permitted by law, neither Moondrake nor its licensors, "
+#~ "suppliers or\n"
+#~ "distributors will, in any circumstances, be liable for any special, "
+#~ "incidental, direct or indirect \n"
+#~ "damages whatsoever (including without limitation damages for loss of "
+#~ "business, interruption of \n"
+#~ "business, financial loss, legal fees and penalties resulting from a court "
+#~ "judgment, or any \n"
+#~ "other consequential loss) arising out of the possession and use of "
+#~ "software components or \n"
+#~ "arising out of  downloading software components from one of Moondrake "
+#~ "sites which are \n"
+#~ "prohibited or restricted in some countries by local laws.\n"
+#~ "This limited liability applies to, but is not restricted to, the strong "
+#~ "cryptography components \n"
+#~ "included in the Software Products.\n"
+#~ "However, because some jurisdictions do not allow the exclusion or "
+#~ "limitation of liability for \n"
+#~ "consequential or incidental damages, the above limitation may not apply "
+#~ "to you."
+#~ msgstr ""
+#~ "Os Produtos de 'Software' e a documentação são fornecidos \"como estão\", "
+#~ "sem qualquer garantia,\n"
+#~ "ao que é permitido por lei.\n"
+#~ "Nem a Moondrake, nem os seus licenciadores ou fornecedores irão, em "
+#~ "qualquer circunstância e\n"
+#~ "ao que é permitido por lei, ser responsáveis por qualquer incidente, "
+#~ "danos diretos ou indiretos\n"
+#~ "(inclusive os resultantes de perda de lucros, interrupção de negócio, "
+#~ "perda de informações e dividas\n"
+#~ "legais resultantes de decisão judicial, ou qualquer outra perda "
+#~ "consequente) decorrentes do uso\n"
+#~ "ou da impossibilidade do uso dos Produtos de 'Software', ainda que a "
+#~ "Moondrake tenha\n"
+#~ "sido avisada da possibilidade de tais danos.\n"
+#~ "\n"
+#~ "RESPONSABILIDADE LIMITADA À POSSESSÃO OU USO DE PROGRAMAS PROIBIDOS EM "
+#~ "CERTOS PAÍSES\n"
+#~ "\n"
+#~ "Ao que é permitido por lei, a Moondrake ou os seus distribuidores, não "
+#~ "irão em circunstância alguma\n"
+#~ "ser responsáveis por quaisquer danos diretos ou indiretos (inclusive os "
+#~ "resultantes\n"
+#~ "da perda de lucros, interrupção de negócios, perda de informações e "
+#~ "dívidas legais, resultantes\n"
+#~ "de decisão judicial, ou qualquer perda consequente) decorrentes da "
+#~ "possessão, do uso ou\n"
+#~ "transferência dos Produtos de 'Software' a partir de um dos servidores "
+#~ "Moondrake que sejam\n"
+#~ "proibidos ou limitados em certos países pelas leis locais.\n"
+#~ "Este limite de responsabilidade aplica-se a, mas não estando restringido, "
+#~ "às fortes componentes de\n"
+#~ "criptografia incluídos nos Produtos de 'Software'.\n"
+#~ "No entanto, como algumas jurisdições não permite a exclusão ou limitação "
+#~ "ou responsabilidade\n"
+#~ "para danos consequentes ou incidentes, a limitação em cima pode-se não "
+#~ "aplicar a si."
+
+#, fuzzy
+#~ msgid ""
+#~ "The Software Products consist of components created by different persons "
+#~ "or entities.\n"
+#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
+#~ "the components which \n"
+#~ "they cover. Please read carefully the terms and conditions of the license "
+#~ "agreement for each component \n"
+#~ "before using any component. Any question on a component license should be "
+#~ "addressed to the component \n"
+#~ "licensor or supplier and not to Moondrake.\n"
+#~ "The programs developed by Moondrake are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by Moondrake is governed by \"%s\" License."
+#~ msgstr ""
+#~ "Os Produtos de 'Software' consistem em elementos criados por pessoas ou "
+#~ "identidades.\n"
+#~ "A maior parte destas licenças permitem o uso, duplicação, adaptação ou "
+#~ "redistribuição dos componentes que cobrem.\n"
+#~ "Por favor leia com atenção os termos e condições do acordo de licença "
+#~ "para cada componente\n"
+#~ "antes do uso dos mesmos. Qualquer questão acerca de uma componente deve "
+#~ "ser endereçada ao\n"
+#~ "licenciador ou distribuidor da componente e não à Moondrake. Os programas "
+#~ "desenvolvidos pela Moondrake são governados pela licença GPL.\n"
+#~ "A documentação escrita pela Moondrake é governada por uma licença "
+#~ "específica.\n"
+#~ "Por favor veja a documentação para mais detalhes."
+
+#~ msgid ""
+#~ "The operating system and the different components available in the "
+#~ "Moondrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software "
+#~ "Products include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation "
+#~ "related to the operating \n"
+#~ "system and the different components of the Moondrake distribution, and "
+#~ "any applications \n"
+#~ "distributed with these products provided by Moondrake's licensors or "
+#~ "suppliers."
+#~ msgstr ""
+#~ "O sistema operativo e as diferentes componentes disponíveis na "
+#~ "distribuição Moondrake\n"
+#~ "serão chamados a partir daqui de \"Produtos de Software\". Os Produtos de "
+#~ "Software (não estão\n"
+#~ "restringidos apenas ao conjunto de programas) incluem métodos, regras e "
+#~ "documentação\n"
+#~ "relativos ao sistema operativo e às diferentes componentes e a quaisquer "
+#~ "aplicações distribuídas\n"
+#~ "com os produtos distribuídos pelas licenças ou fornecedores da "
+#~ "distribuição Moondrake."
+
+#~ msgid ""
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
+#~ msgstr ""
+#~ "Aviso: Um Programas Livre pode não ser necessariamente livre de "
+#~ "patentes,\n"
+#~ "e algum Programa Livre incluído pode ser coberto por patentes no seu "
+#~ "país.\n"
+#~ "Por exemplo os descodificadores MP3 incluídos podem requerer uma\n"
+#~ "licença para uso futuro (ver http://www.mp3licensing.com para mais "
+#~ "detalhes).\n"
+#~ "Se não tem a certeza que uma patente possa ser aplicada a si, veja as "
+#~ "suas leis locais."
+
+#~ msgid "Automatic routing from ALSA to PulseAudio"
+#~ msgstr "Roteamento automático ALSA para PulseAudio"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Escolha os tamanhos"
+
 #~ msgid "Clean /tmp at each boot"
 #~ msgstr "Limpar /tmp em cada arranque"
 
-#~ msgid "command %s missing"
-#~ msgstr "comando %s em falta"
+#~ msgid "Enable 5.1 sound with Pulse Audio"
+#~ msgstr "Activar som 5.1 com PulseAudio"
+
+#~ msgid "Enable user switching for audio applications"
+#~ msgstr "Activar mudança de utilizador para aplicações áudio"
+
+#~ msgid "File sharing"
+#~ msgstr "Partilha de ficheiros"
+
+#~ msgid "High"
+#~ msgstr "Elevado"
+
+#~ msgid "Higher"
+#~ msgstr "Superior"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "Lança um filtro de pacotes para o Linux kernel 2.2, para definir\n"
+#~ "uma 'firewall' para proteger a sua máquina de ataques da rede."
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr ""
+#~ "A opção ``Restringir opções da linha de comando'' não tem qualquer uso "
+#~ "sem uma senha"
+
+#~ msgid "Paranoid"
+#~ msgstr "Paranóico"
+
+#~ msgid ""
+#~ "Passwords are now enabled, but use as a networked computer is still not "
+#~ "recommended."
+#~ msgstr ""
+#~ "As senhas agora estão activas, mas o uso como computador de rede ainda "
+#~ "não é recomendado."
+
+#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
+#~ msgstr "Por favor saia desta sessão e depois use Ctrl-Alt-BackSpace"
+
+#~ msgid "Poor"
+#~ msgstr "Baixo"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Restringir opções da linha de comando"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Tamanho da partição de raiz em MB: "
+
+#~ msgid "Set CPU frequency settings"
+#~ msgstr "Definir as configurações de frequência do CPU"
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Tamanho da partição swap em MB: "
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "O redimensionador FAT não consegue redimensionar a sua partição, \n"
+#~ "ocorreu o seguinte erro: %s"
 
 #~ msgid ""
 #~ "The classic bug sound tester is to run the following commands:\n"
@@ -7432,62 +7780,12 @@ msgstr "Instalação falhada"
 #~ "\n"
 #~ "- \"/sbin/fuser -v /dev/dsp\" diz-lhe que programa a placa de som usa.\n"
 
-#~ msgid "Set CPU frequency settings"
-#~ msgstr "Definir as configurações de frequência do CPU"
-
 #~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
+#~ "There are already some restrictions, and more automatic checks are run "
+#~ "every night."
 #~ msgstr ""
-#~ "Lança um filtro de pacotes para o Linux kernel 2.2, para definir\n"
-#~ "uma 'firewall' para proteger a sua máquina de ataques da rede."
-
-#~ msgid "Enable 5.1 sound with Pulse Audio"
-#~ msgstr "Activar som 5.1 com PulseAudio"
-
-#~ msgid "Enable user switching for audio applications"
-#~ msgstr "Activar mudança de utilizador para aplicações áudio"
-
-#~ msgid "File sharing"
-#~ msgstr "Partilha de ficheiros"
-
-#~ msgid ""
-#~ "To ensure data integrity after resizing the partition(s),\n"
-#~ "filesystem checks will be run on your next boot into Microsoft WindowsÂ®"
-#~ msgstr ""
-#~ "Para assegurar a integridade dos dados após redimensionar\n"
-#~ "a(s) partição(ões), as verificações do sistema de ficheiros serão\n"
-#~ "executadas na próxima vez que arrancar o Microsoft Windows®"
-
-#~ msgid "Restrict command line options"
-#~ msgstr "Restringir opções da linha de comando"
-
-#~ msgid "restrict"
-#~ msgstr "restringir"
-
-#~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
-#~ msgstr ""
-#~ "A opção ``Restringir opções da linha de comando'' não tem qualquer uso "
-#~ "sem uma senha"
-
-#~ msgid "Use an encrypted filesystem"
-#~ msgstr "Usar sistema de ficheiros encriptado"
-
-#~ msgid "Use the Microsoft Windows® partition for loopback"
-#~ msgstr "Usar a partição Microsoft Windows® para loopback"
-
-#~ msgid "Which partition do you want to use for Linux4Win?"
-#~ msgstr "Que partição deseja usar para o Linux4Win?"
-
-#~ msgid "Choose the sizes"
-#~ msgstr "Escolha os tamanhos"
-
-#~ msgid "Root partition size in MB: "
-#~ msgstr "Tamanho da partição de raiz em MB: "
-
-#~ msgid "Swap partition size in MB: "
-#~ msgstr "Tamanho da partição swap em MB: "
+#~ "Já há algumas restrições, e mais controlos automáticos são executados "
+#~ "todas as noites."
 
 #~ msgid ""
 #~ "There is no FAT partition to use as loopback (or not enough space left)"
@@ -7496,32 +7794,11 @@ msgstr "Instalação falhada"
 #~ "suficiente)"
 
 #~ msgid ""
-#~ "The FAT resizer is unable to handle your partition, \n"
-#~ "the following error occurred: %s"
+#~ "This is similar to the previous level, but the system is entirely closed "
+#~ "and security features are at their maximum."
 #~ msgstr ""
-#~ "O redimensionador FAT não consegue redimensionar a sua partição, \n"
-#~ "ocorreu o seguinte erro: %s"
-
-#~ msgid "Automatic routing from ALSA to PulseAudio"
-#~ msgstr "Roteamento automático ALSA para PulseAudio"
-
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "Por favor saia desta sessão e depois use Ctrl-Alt-BackSpace"
-
-#~ msgid "Welcome To Crackers"
-#~ msgstr "Bem-vindo ao Crackers"
-
-#~ msgid "Poor"
-#~ msgstr "Baixo"
-
-#~ msgid "High"
-#~ msgstr "Elevado"
-
-#~ msgid "Higher"
-#~ msgstr "Superior"
-
-#~ msgid "Paranoid"
-#~ msgstr "Paranóico"
+#~ "Este é similar ao nível anterior, mas o sistema está completamente "
+#~ "fechado e as características de segurança estão no máximo."
 
 #~ msgid ""
 #~ "This level is to be used with care. It makes your system more easy to "
@@ -7535,22 +7812,27 @@ msgstr "Instalação falhada"
 #~ "conectada a outras ou à Internet. Não existe acesso por senha."
 
 #~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
+#~ "To ensure data integrity after resizing the partition(s),\n"
+#~ "filesystem checks will be run on your next boot into Microsoft WindowsÂ®"
 #~ msgstr ""
-#~ "As senhas agora estão activas, mas o uso como computador de rede ainda "
-#~ "não é recomendado."
+#~ "Para assegurar a integridade dos dados após redimensionar\n"
+#~ "a(s) partição(ões), as verificações do sistema de ficheiros serão\n"
+#~ "executadas na próxima vez que arrancar o Microsoft Windows®"
 
-#~ msgid ""
-#~ "There are already some restrictions, and more automatic checks are run "
-#~ "every night."
-#~ msgstr ""
-#~ "Já há algumas restrições, e mais controlos automáticos são executados "
-#~ "todas as noites."
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr "Usar sistema de ficheiros encriptado"
 
-#~ msgid ""
-#~ "This is similar to the previous level, but the system is entirely closed "
-#~ "and security features are at their maximum."
-#~ msgstr ""
-#~ "Este é similar ao nível anterior, mas o sistema está completamente "
-#~ "fechado e as características de segurança estão no máximo."
+#~ msgid "Use the Microsoft Windows® partition for loopback"
+#~ msgstr "Usar a partição Microsoft Windows® para loopback"
+
+#~ msgid "Welcome To Crackers"
+#~ msgstr "Bem-vindo ao Crackers"
+
+#~ msgid "Which partition do you want to use for Linux4Win?"
+#~ msgstr "Que partição deseja usar para o Linux4Win?"
+
+#~ msgid "command %s missing"
+#~ msgstr "comando %s em falta"
+
+#~ msgid "restrict"
+#~ msgstr "restringir"

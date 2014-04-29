@@ -443,16 +443,15 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL ftp:// же http:// менен башталышы керек"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr "Бар болгон күзгүлөр тизмесин Mandriva Linux веб сайтындан алынууда..."
+msgstr "Бар болгон күзгүлөр тизмесин %s веб сайтындан алынууда..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Бар болгон күзгүлөр тизмесин Mandriva Linux веб сайтындан алынууда "
-"ийгиликсиз айяктады..."
+"Бар болгон күзгүлөр тизмесин %s веб сайтындан алынууда ийгиликсиз айяктады..."
 
 #: any.pm:204
 #, c-format
@@ -743,11 +742,13 @@ msgstr ""
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"\"%s\" булагында xml-info табылган жок. %s пакети үчүн жарым ганарезультат "
+"алынды"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Баяндалбады"
 
 #: pkgs.pm:280
 #, c-format
@@ -764,9 +765,9 @@ msgid "An error occurred:"
 msgstr "Жаңылыштык орун алды:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Жаңылыштык орун алды:"
+msgstr "Фаталдык ката пайда болду: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -811,9 +812,9 @@ msgid "Entering step `%s'\n"
 msgstr "`%s' кадамына өтүү аракети\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Орнотуу"
+msgstr "%s %s орнотуу"
 
 #: steps_curses.pm:32
 #, c-format
@@ -826,13 +827,13 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg жай башталып жатат. Күтө туруңуз..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Системага жетеринче ресурс жетпей жатат. Mandriva Linux системасын\n"
+"Системага жетеринче ресурс жетпей жатат. %s системасын\n"
 "орнотууда проблемалар чыгышы мүмкүн. Андай болсо тексттик режимде\n"
 "орнотууну текшерип көрүңүз. Ал үчүн, дисктен жүктөлүп жаткан учурда\n"
 "`F1' клавишасын басып `text' сөзүн кириңиз."
@@ -843,14 +844,14 @@ msgid "Media Selection"
 msgstr "Пакеттердин группасын тандоо"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Mandriva KDE иш столун орнотуу"
+msgstr "%s KDE иш столун орнотуу"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Mandriva GNOME иш столун орнотуу"
+msgstr "%s GNOME иш столун орнотуу"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -1660,41 +1661,155 @@ msgid ""
 "Exit"
 msgstr "Чыгуу"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux %s орнотуу"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Графикалык чөйрө"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Колдонуучуга ыңгайлашкан тиркемелерин жана иш столунун кураларын камтыган "
+#~ "графикалык чөйрө"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Колдонуучуга ыңгайлашкан тиркемелерин жана иш столунун кураларын камтыган "
+#~ "графикалык чөйрө"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr ""
+#~ "Оюн-зоок программалары: аркада оюндары, тактай оюндары, стратегия "
+#~ "оюндары, ж.б."
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Иш станциясы"
+
+#, fuzzy
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Орноткуч учурдагы орнотулган Moondrake системанын %s жаңылоосун\n"
+#~ "толук алалбашы мүмкүн.\n"
+#~ "\n"
+#~ "Учурдагы системаны жаңыдан жаңы версиясы менен орнотуу сунушталат.\n"
+#~ "\n"
+#~ "Эскертүү : \"Жаңы орнотулуш\" тандоодон мурун, бардык жеке\n"
+#~ "маалыматтарды архивдөө менен көчүрүп алышыңыз керек."
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME иш станциясы"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake Усталары"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Лицензия"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Офис программалары: текст процессорлору (LibreOffice Writer, Kword), "
+#~ "электрондук таблицалар  (LibreOffice Calc, Kspread), pdf файлдарын көрүү "
+#~ "программалары, ж.б."
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Сиздин иш столуңуз USBде"
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Офис станциясы"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "100%% ачык кодду Mandriva Linux дистрибутиви"
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL жана MariaDB берилиштер базасынын сервери"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Linux'ту Mandriva One менен аралап үйрөнүү"
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL же MariaDB берилиштер базасынын сервери"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Система жүктөөгүч даярдалууда..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Менчик иш столу"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "\"%s\" ичинен бардык пакеттерди аттап өтүү"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, ж.б. "
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE иш станциясы"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Толук Mandriva Linux иш столу жардам менен"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: ар бирдин керектеген дистрибутив"
+#~ msgid "A full Moondrake desktop, with support"
+#~ msgstr "Толук Moondrake иш столу жардам менен"
+
+#~ msgid "All"
+#~ msgstr "Бардыгы"
+
+#~ msgid "Automated"
+#~ msgstr "Автоматтык"
 
 #~ msgid "Bad package"
 #~ msgstr "Туура эмес пакет"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Тармактар"
+#~ msgid "Boot"
+#~ msgstr "Жүктөө"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Жаңылоолор"
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Орнотуу үчүн пакеттерди тандаңыз"
+
+#~ msgid "Configure X"
+#~ msgstr "X конфигурациялоо"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "%s файлы жүктөөлүп жатат..."
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Linux'ту Mandriva One менен аралап үйрөнүү"
+
+#~ msgid "Explore Linux easily with Moondrake One"
+#~ msgstr "Linux'ту Moondrake One менен аралап үйрөнүү"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Болжолдуу убакыт"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm иш столу"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "Орнотуу классын тандоо"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux %s орнотуу"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: ар бирдин керектеген дистрибутив"
+
+#~ msgid "Moondrake: distributions for everybody's needs"
+#~ msgstr "Moondrake: ар бирдин керектеген дистрибутив"
+
+#~ msgid "Networking"
+#~ msgstr "Тармактар"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1702,6 +1817,40 @@ msgstr "Чыгуу"
 #~ msgstr ""
 #~ "Офис программалары: текст процессорлору (kword, abiword), электрондук "
 #~ "таблицалар  (kspread, gnumeric), pdf файлдарын көрүү программалары, ж.б."
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Система жүктөөгүч даярдалууда..."
+
+#~ msgid "Proceed"
+#~ msgstr "Аткарылды"
+
+#~ msgid "Replay"
+#~ msgstr "Кайталоо"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Тандалган пакеттерди сактоо"
+
+#~ msgid "TV card"
+#~ msgstr "ТВ-карта"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "100%% ачык кодду Mandriva Linux дистрибутиви"
+
+#~ msgid "The 100%% open source Moondrake distribution"
+#~ msgstr "100%% ачык кодду Moondrake дистрибутиви"
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr "32bit тен 64bit ке жаңылоо мүмкүе эмес"
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr "64bit тен 32bit ке жаңылоо мүмкүн эмес"
+
+#~ msgid "Users"
+#~ msgstr "Колдонуучулар"
+
+#~ msgid "Welcome"
+#~ msgstr "Кош келиңиз"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1721,21 +1870,6 @@ msgstr "Чыгуу"
 #~ "үчүн, \n"
 #~ "системаны кайрадан жүктөп жана Mandriva жаңылоо аплети менен жаңыланым "
 #~ "көрүңүз."
-
-#~ msgid "Proceed"
-#~ msgstr "Аткарылды"
-
-#~ msgid "retrieval of [%s] failed"
-#~ msgstr "[%s] чыгаруу ийгиликсиз аякталды"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "%s файлы жүктөөлүп жатат..."
-
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr "32bit тен 64bit ке жаңылоо мүмкүе эмес"
-
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr "64bit тен 32bit ке жаңылоо мүмкүн эмес"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1762,52 +1896,28 @@ msgstr "Чыгуу"
 #~ "\n"
 #~ "Сиз бул серверлерди орнотууну каалайсызбы?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm иш столу"
-
-#~ msgid "Replay"
-#~ msgstr "Кайталоо"
-
-#~ msgid "Automated"
-#~ msgstr "Автоматтык"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Тандалган пакеттерди сактоо"
-
-#~ msgid "All"
-#~ msgstr "Бардыгы"
-
-#~ msgid "TV card"
-#~ msgstr "ТВ-карта"
-
-#~ msgid "Boot"
-#~ msgstr "Жүктөө"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Сиздин иш столуңуз USBде"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Аутентификация"
 
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Лицензия"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "Орнотуу классын тандоо"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "Болжолдуу убакыт"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Орнотуу үчүн пакеттерди тандаңыз"
-
-#~ msgid "Users"
-#~ msgstr "Колдонуучулар"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Тармактар"
 
-#~ msgid "Configure X"
-#~ msgstr "X конфигурациялоо"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Жаңылоолор"
+
+#~ msgid "retrieval of [%s] failed"
+#~ msgstr "[%s] чыгаруу ийгиликсиз аякталды"

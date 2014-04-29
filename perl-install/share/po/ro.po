@@ -241,7 +241,7 @@ msgid "Please try again"
 msgstr "Încercați din nou"
 
 #: any.pm:472
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use a password with %s"
 msgstr "Nu puteți utiliza o parolă cu %s"
 
@@ -584,25 +584,25 @@ msgid "Please choose a language to use"
 msgstr "Alegeți limba ce va fi utilizată"
 
 #: any.pm:1183
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
-"Mandriva Linux permite utilizarea mai multor limbi.\n"
-"Selectați limbile pe care doriți să le instalați. Ele vor fi disponibile\n"
-"după încheierea instalării și repornirea sistemului."
+"%s poate suporta mai multe limbi. Selectați\n"
+"limbile pe care doriți să le instalați. Acestea vor fi\n"
+"disponibile după încheierea instalării și repornirea calculatorului."
 
 #: any.pm:1186
-#, fuzzy, c-format
+#, c-format
 msgid "Multiple languages"
 msgstr "Multilingv"
 
 #: any.pm:1187
 #, c-format
 msgid "Select Additional Languages"
-msgstr ""
+msgstr "Selectați limbile adiționale"
 
 #: any.pm:1196 any.pm:1227
 #, c-format
@@ -1092,7 +1092,7 @@ msgstr ""
 "Această parolă este prea scurtă (ar trebui să fie de cel puțin %d caractere)"
 
 #: authentication.pm:373
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot use broadcast with no NIS domain"
 msgstr "Nu se poate utiliza difuzarea fără nici un domeniu NIS"
 
@@ -1138,9 +1138,9 @@ msgid "LILO with text menu"
 msgstr "LILO cu meniu text"
 
 #: bootloader.pm:1203
-#, fuzzy, c-format
+#, c-format
 msgid "GRUB2 with graphical menu"
-msgstr "GRUB cu meniu grafic"
+msgstr "GRUB2 cu meniu grafic"
 
 #: bootloader.pm:1204
 #, c-format
@@ -1382,7 +1382,7 @@ msgid "Warning"
 msgstr "Avertisment"
 
 #: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete this mount point?"
 msgstr "Sigur doriți să ștergeți acest punct de montare?"
 
@@ -1580,7 +1580,7 @@ msgid "Quit without writing the partition table?"
 msgstr "Doriți să ieșiți fără să se scrie tabela de partiții?"
 
 #: diskdrake/interactive.pm:294
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to save the /etc/fstab modifications?"
 msgstr "Doriți să se salveze modificările în /etc/fstab?"
 
@@ -1886,9 +1886,9 @@ msgid "This partition is not resizeable"
 msgstr "Dimensiunea acestei partiții nu poate fi modificată"
 
 #: diskdrake/interactive.pm:820
-#, fuzzy, c-format
+#, c-format
 msgid "All data on this partition should be backed up"
-msgstr "Toate datele de pe această partiție ar trebui salvate mai întîi."
+msgstr "Toate datele de pe această partiție ar trebui salvate"
 
 #: diskdrake/interactive.pm:822
 #, c-format
@@ -1993,7 +1993,7 @@ msgid "Moving physical extents"
 msgstr "Deplasare de unități de alocare fizice"
 
 #: diskdrake/interactive.pm:1065
-#, fuzzy, c-format
+#, c-format
 msgid "This partition cannot be used for loopback"
 msgstr "Această partiție nu poate fi utilizată pentru loopback"
 
@@ -2524,7 +2524,7 @@ msgid "Enabling swap partition %s"
 msgstr "Se activează partiția swap %s"
 
 #: fs/mount_options.pm:114
-#, fuzzy, c-format
+#, c-format
 msgid "Enable POSIX Access Control Lists"
 msgstr "Activează listele POSIX de control al accesului"
 
@@ -2738,15 +2738,15 @@ msgid "Which partition do you want to resize?"
 msgstr "Care partiție doriți s-o redimensionați?"
 
 #: fs/partitioning_wizard.pm:180
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the %s installation."
 msgstr ""
-"Partiția voastră Microsoft Windows® este prea fragmentată. Reporniți "
-"calculatorul în Microsoft Windows®, lansați utilitarul „defrag”, apoi "
-"reporniți instalarea Mandriva Linux."
+"Partiția Microsoft Windows ® este prea fragmentată. Vă rugăm să reporniți "
+"calculatorul în  Microsoft Windows ®, executați utilitarul „defrag”, apoi "
+"reporniţi instalarea %s."
 
 #: fs/partitioning_wizard.pm:188
 #, c-format
@@ -2833,12 +2833,11 @@ msgid "Erase and use entire disk"
 msgstr "Șterge și utilizează tot discul"
 
 #: fs/partitioning_wizard.pm:243
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
-msgstr ""
-"Aveți mai multe discuri dure, pe care din ele doriți să instalați Linux?"
+msgstr "Aveți mai multe discuri dure, pe care din ele doriți să-l utilizați?"
 
 #: fs/partitioning_wizard.pm:251 fsedit.pm:634
 #, c-format
@@ -2890,12 +2889,12 @@ msgid "Partitioning failed: %s"
 msgstr "Partiționarea a eșuat: %s"
 
 #: fs/type.pm:384
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use JFS for partitions smaller than 16MB"
 msgstr "Nu puteți utiliza JFS pentru partiții mai mici de 16Mo"
 
 #: fs/type.pm:385
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use ReiserFS for partitions smaller than 32MB"
 msgstr "Nu puteți utiliza ReiserFS pentru partiții mai mici de 32Mo"
 
@@ -2954,24 +2953,25 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "Există deja o partiție cu punctul de montare %s\n"
 
 #: fsedit.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a separate /boot partition"
 msgstr ""
 "Ați selectat o partiție RAID software pentru root (/).\n"
-"Nici un încărcător de sistem nu suportă această configurație fără\n"
-"o partiție /boot separată. Adăugați, deci, o partiție /boot"
+"Nici un încărcător de sistem nu suportă această configurație fără o "
+"partiție /boot separată.\n"
+"Adăugați, deci, o partiție /boot"
 
 #: fsedit.pm:440
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Metadata version unsupported for a boot partition. Please be sure to add a "
 "separate /boot partition."
 msgstr ""
 "Versiune nesuportată de metadate pentru o partiție de pornire. Asigurați-vă "
-"că ați adăugat o partiție /boot."
+"că ați adăugat o partiție /boot separată."
 
 #: fsedit.pm:448
 #, c-format
@@ -2988,25 +2988,25 @@ msgid "Metadata version unsupported for a boot partition."
 msgstr "Versiune nesuportată de metadate pentru o partiție de pornire."
 
 #: fsedit.pm:459
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a separate /boot partition"
 msgstr ""
 "Ați selectat o partiție criptată pentru root (/).\n"
-"Nici un încărcător de sistem nu suportă această configurație fără\n"
-"o partiție /boot separată.\n"
+"Nici un încărcător de sistem nu suportă această configurație fără o "
+"partiție /boot separată.\n"
 "Adăugați, deci, o partiție /boot"
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr ""
 "Nu puteți utiliza un sistem de fișiere criptat pentru punctul de montare %s"
 
 #: fsedit.pm:469
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You cannot use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
@@ -3015,7 +3015,7 @@ msgstr ""
 "este repartizat pe mai multe volume fizice."
 
 #: fsedit.pm:471
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
@@ -3349,7 +3349,7 @@ msgstr ""
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:369
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -3358,7 +3358,8 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Actualmente placa utilizează pilotul %s„%s” (pilotul ei implicit este „%s”)"
+"Placa grafică utilizează pilotul %s „%s” (pilotul implicit al acestei plăci "
+"grafice este „%s”)"
 
 #: harddrake/sound.pm:371
 #, c-format
@@ -3515,11 +3516,11 @@ msgstr "Alegere arbitrară de pilot "
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:482
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -5471,19 +5472,19 @@ msgid "Installing driver for USB controller"
 msgstr "Se instalează pilotul pentru controlerul USB"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller \"%s\""
-msgstr "Se instalează pilotul pentru controlerul Firewire %s"
+msgstr "Se instalează pilotul pentru controlerul Firewire \"%s\""
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard disk drive controller \"%s\""
-msgstr "Se instalează pilotul pentru controlerul de disc %s"
+msgstr "Se instalează pilotul pentru controlerul de disc dur \"%s\""
 
 #: modules/interactive.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller \"%s\""
-msgstr "Se instalează pilotul pentru controlerul Ethernet %s"
+msgstr "Se instalează pilotul pentru controlerul Ethernet \"%s\""
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -5565,9 +5566,9 @@ msgstr ""
 "Doriți să încercați cu alți parametri?"
 
 #: mygtk2.pm:1229
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to quit?"
-msgstr "Sigur doriți să ștergeți acest punct de montare?"
+msgstr "Sigur doriți să părăsiți?"
 
 #: mygtk2.pm:1571 mygtk2.pm:1572
 #, c-format
@@ -7001,7 +7002,7 @@ msgstr "Internet"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "Rețea"
 
 #: services.pm:161
 #, c-format
@@ -7156,7 +7157,7 @@ msgstr ""
 "mod implicit: configurează autentificarea automată"
 
 #: standalone.pm:61
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
 "\n"
@@ -7169,10 +7170,8 @@ msgstr ""
 "\n"
 "OPȚIUNI:\n"
 "  --help            - afișează acest mesaj.\n"
-"  --report          - programul trebuie să fie una din uneltele Mandriva "
-"Linux\n"
-"  --incident        - programul trebuie să fie una din uneltele Mandriva "
-"Linux"
+"  --report          - programul trebuie să fie una din uneltele %s\n"
+"  --incident        - programul trebuie să fie una din uneltele %s"
 
 #: standalone.pm:67
 #, c-format
@@ -7223,7 +7222,7 @@ msgstr ""
 "                 : și gs pentru ghostscript (numai pentru aceasta)."
 
 #: standalone.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS]...\n"
 "%s Terminal Server Configurator\n"
@@ -7240,7 +7239,7 @@ msgid ""
 "IP, nbi image name)"
 msgstr ""
 "[OPȚIUNI]...\n"
-"Configurator Mandriva Linux Terminal Server\n"
+"Configurator %s Terminal Server\n"
 "--enable         : activează MTS\n"
 "--disable        : dezactivează MTS\n"
 "--start          : pornește MTS\n"
@@ -7288,7 +7287,7 @@ msgstr ""
 "--quiet : mod neinteractiv, a se utiliza cu (de)conectat"
 
 #: standalone.pm:112
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTION]...\n"
 "  --no-confirmation      do not ask first confirmation question in %s Update "
@@ -7299,7 +7298,7 @@ msgid ""
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
 "[OPȚIUNI]...\n"
-"  --no-confirmation      nu cere prima confirmare în modul Mandriva Update\n"
+"  --no-confirmation      nu cere prima confirmare în modul %s Update\n"
 "  --no-verify-rpm        nu se verifică semnăturile pachetelor\n"
 "  --changelog-first      afișează istoricul modificărilor înaintea "
 "fișierelor în fereastra descriptivă\n"
@@ -7416,11 +7415,433 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Instalarea a eșuat"
 
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Contract de licență"
+
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Garanție și limite de garanție"
+
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. Licența GPL și licențele asociate"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Drepturi de proprietate intelectuală"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Dispoziții diverse"
+
+#~ msgid ""
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
+#~ msgstr ""
+#~ "Toate drepturile asupra componentelor produselor informatice aparțin "
+#~ "autorilor respectivi și sînt \n"
+#~ "protejate de drepturile proprietății intelectuale ce se aplică produselor "
+#~ "informatice.\n"
+#~ "Moondrake, licențiații și furnizorii săi își rezervă dreptul de a "
+#~ "modifica sau adapta produsele lor informatice,\n"
+#~ "parțial sau în totalitate, prin orice mijloace și în orice scop.\n"
+#~ "Mărcile „Moondrake” cît și siglele asociate sînt mărci înregistrate ale "
+#~ "asociației %s."
+
+#~ msgid "An NTP client/server"
+#~ msgstr "Un client/server NTP"
+
+#~ msgid ""
+#~ "Below are some basic tips to help debug audio problems, but for accurate "
+#~ "and up-to-date tips and tricks, please see:\n"
+#~ "\n"
+#~ "https://wiki.moondrake.org/en/Support:DebuggingSoundProblems\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- General Recommendation: Enable PulseAudio. If you have opted to not to "
+#~ "use PulseAudio, we would strongly advise you enable it. For the vast "
+#~ "majority of desktop use cases, PulseAudio is the recommended and best "
+#~ "supported option.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and "
+#~ "\"pauvucontrol\" (generic) will launch graphical applications to allow "
+#~ "you to view your sound devices and adjust volume levels\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"ps aux | grep pulseaudio\" will check that PulseAudio is running.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl stat\" will check that you can connect to the PulseAudio daemon "
+#~ "correctly.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl list sink-inputs\" will tell you which programs are currently "
+#~ "playing sound via PulseAudio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"systemctl status osspd.service\" will tell you the current state of "
+#~ "the OSS Proxy Daemon. This is used to enable sound from legacy "
+#~ "applications which use the OSS sound API. You should install the \"ossp\" "
+#~ "package if you need this functionality.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pacmd ls\" will give you a LOT of debug information about the current "
+#~ "state of your audio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | grep -i audio\" will tell you which low-level driver "
+#~ "your card uses by default.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/lsmod | grep snd\" will enable you to check which sound "
+#~ "related kernel modules (drivers) are loaded.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"alsamixer -c 0\" will give you a text-based mixer to the low level "
+#~ "ALSA mixer controls for first sound card\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" will tell which programs "
+#~ "are currently using the sound card directly (normally this should only "
+#~ "show PulseAudio)\n"
+#~ msgstr ""
+#~ "Mai jos puteți găsi cîteva instrucțiuni simple pentru depanarea "
+#~ "problemelelor de sunet, însă pentru instrucțiuni mai precise și la zi vă "
+#~ "recomandăm să vizitați:\n"
+#~ "\n"
+#~ "https://wiki.moondrake.org/en/Support:DebuggingSoundProblems\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- Recomandare generală: activați PulseAudio. Dacă ați optat să nu "
+#~ "utilizați PulseAudio, vă recomandăm cu insistență să-l activați. Pentru "
+#~ "marea majoritate a cazurilor, PulseAudio este opțiunea cea mai suportată "
+#~ "și recomandată.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) și \"pauvucontrol"
+#~ "\" (generic) vor lansa aplicații grafice care vor afișa dispozitivele "
+#~ "audio și vă vor permite reglarea volumelor.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"ps aux | grep pulseaudio\" va verifica dacă este lansat PulseAudio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl stat\" va verifica dacă puteți conecta corect la serviciul "
+#~ "PulseAudio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl list sink-inputs\" vă va spune care aplicații redau sunentul "
+#~ "prin PulseAudio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"systemctl status osspd.service\" vă va spune starea actuală a "
+#~ "serviciului OSS Proxy. Acesta este utilizat pentru redarea sunetului în "
+#~ "unele aplicații vechi care utilizează biblioteca de sunet OSS. Trebuie să "
+#~ "instalați pachetul „ossp” dacă aveți nevoie de această funcționalitate.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pacmd ls\" vă va oferi MULTE informații de depanare despre starea "
+#~ "configurației audio actuale.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | grep -i audio\" vă va spune ce pilot de nivel jos "
+#~ "este utilizat implicit de placa de sunet.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/lsmod | grep snd\" vă va permite să verificați care module "
+#~ "(piloți) de sunet sînt încărcate în nucleu.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"alsamixer -c 0\" vă va oferi un panou de control ALSA în mod text "
+#~ "pentru prima placă de sunet\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" vă va spune care "
+#~ "aplicații utilizează placa de sunet în mod direct (în mod normal al "
+#~ "trebui să afișeze numai PulseAudio)\n"
+
+#~ msgid ""
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
+#~ msgstr ""
+#~ "Felicitări, instalarea este încheiată.\n"
+#~ "Îndepărtați mediul de pe care s-a pornit și apăsați „Enter” pentru a "
+#~ "reporni."
+
+#~ msgid ""
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Pentru informații despre actualizările disponibile pentru această "
+#~ "versiune de Moondrake,\n"
+#~ "consultați erata disponibilă la:\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "If any portion of this agreement is held void, illegal or inapplicable by "
+#~ "a court judgment, this \n"
+#~ "portion is excluded from this contract. You remain bound by the other "
+#~ "applicable sections of the \n"
+#~ "agreement.\n"
+#~ "The terms and conditions of this License are governed by the Laws of "
+#~ "France.\n"
+#~ "All disputes on the terms of this license will preferably be settled out "
+#~ "of court. As a last \n"
+#~ "resort, the dispute will be referred to the appropriate Courts of Law of "
+#~ "Paris - France.\n"
+#~ "For any question on this document, please contact Moondrake."
+#~ msgstr ""
+#~ "Dacă o dispoziție din acest contract de licență este declarată nulă și "
+#~ "neavenită, ilegală sau nu se \n"
+#~ "poate aplica de o hotărîre a unei instanțe, această dispoziție va fi "
+#~ "exclusă din acest contract.\n"
+#~ "Veți avea obligația de a respecta celelalte secțiuni ale contractului.\n"
+#~ "Termenii și condițiile acestei licențe sînt reglementate de legislația "
+#~ "franceză.\n"
+#~ "Toate disputele privind termenii acestei licențe vor fi rezolvate, de "
+#~ "preferință, în mod amiabil.\n"
+#~ "În caz de dezacord, litigiul va fi referit Instanței Judecătorești din "
+#~ "Paris - Franța.\n"
+#~ "Pentru orice întrebare cu privire la acest document, vă rugăm să "
+#~ "contactați Moondrake."
+
+#~ msgid ""
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
+#~ msgstr ""
+#~ "Informații legate despre cum să vă configurați sistemul sînt disponibile "
+#~ "în capitolul\n"
+#~ "post instalare din ghidul utilizator oficial Moondrake."
+
+#~ msgid "Introduction"
+#~ msgstr "Introducere"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr ""
+#~ "Înainte de a utiliza programul de partiționare a discurilor,\n"
+#~ "este prudent să vă salvgardați datele!"
+
+#~ msgid ""
+#~ "Please read this document carefully. This document is a license agreement "
+#~ "between you and  \n"
+#~ "Moondrake which applies to the Software Products.\n"
+#~ "By installing, duplicating or using any of the Software Products in any "
+#~ "manner, you explicitly \n"
+#~ "accept and fully agree to conform to the terms and conditions of this "
+#~ "License. \n"
+#~ "If you disagree with any portion of the License, you are not allowed to "
+#~ "install, duplicate or use \n"
+#~ "the Software Products. \n"
+#~ "Any attempt to install, duplicate or use the Software Products in a "
+#~ "manner which does not comply \n"
+#~ "with the terms and conditions of this License is void and will terminate "
+#~ "your rights under this \n"
+#~ "License. Upon termination of the License,  you must immediately destroy "
+#~ "all copies of the \n"
+#~ "Software Products."
+#~ msgstr ""
+#~ "Vă rugăm să citiți cu atenție acest document. Acest document este un "
+#~ "contract de licență între dumneavoastră și  \n"
+#~ "Moondrake, care se aplică în cazul produselor informatice.\n"
+#~ "Prin instalarea, duplicarea sau utilizarea oricăruia din produsele "
+#~ "informatice, indiferent \n"
+#~ "de maniera aleasă, atestă că ați luat la cunoștință în mod explicit și că "
+#~ "acceptați să vă conformați \n"
+#~ "în deplin de acord cu termenii și condițiile acestui contract de "
+#~ "licență.\n"
+#~ "Dacă nu sînteți de acord cu oricare porțiune de licență, nu sînteți "
+#~ "autorizat să instalați, duplicați sau \n"
+#~ "să utilizați acest produs.\n"
+#~ "Contractul de licență va fi reziliat în mod automat și fără preaviz în "
+#~ "cazul în care nu vă conformați \n"
+#~ "dispozițiilor prezentului contract.\n"
+#~ "În caz de reziliere,  sînteți obligat să distrugeți imediat toate "
+#~ "exemplarele, toate copiile ale tuturor \n"
+#~ "produselor informatice."
+
+#~ msgid ""
+#~ "The Software Products and attached documentation are provided \"as is\", "
+#~ "with no warranty, to the \n"
+#~ "extent permitted by law.\n"
+#~ "Neither Moondrake nor its licensors or suppliers will, in any "
+#~ "circumstances and to the extent \n"
+#~ "permitted by law, be liable for any special, incidental, direct or "
+#~ "indirect damages whatsoever \n"
+#~ "(including without limitation damages for loss of business, interruption "
+#~ "of business, financial \n"
+#~ "loss, legal fees and penalties resulting from a court judgment, or any "
+#~ "other consequential loss) \n"
+#~ "arising out of  the use or inability to use the Software Products, even "
+#~ "if Moondrake or its \n"
+#~ "licensors or suppliers have been advised of the possibility or occurrence "
+#~ "of such damages.\n"
+#~ "\n"
+#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN "
+#~ "SOME COUNTRIES\n"
+#~ "\n"
+#~ "To the extent permitted by law, neither Moondrake nor its licensors, "
+#~ "suppliers or\n"
+#~ "distributors will, in any circumstances, be liable for any special, "
+#~ "incidental, direct or indirect \n"
+#~ "damages whatsoever (including without limitation damages for loss of "
+#~ "business, interruption of \n"
+#~ "business, financial loss, legal fees and penalties resulting from a court "
+#~ "judgment, or any \n"
+#~ "other consequential loss) arising out of the possession and use of "
+#~ "software components or \n"
+#~ "arising out of  downloading software components from one of Moondrake "
+#~ "sites which are \n"
+#~ "prohibited or restricted in some countries by local laws.\n"
+#~ "This limited liability applies to, but is not restricted to, the strong "
+#~ "cryptography components \n"
+#~ "included in the Software Products.\n"
+#~ "However, because some jurisdictions do not allow the exclusion or "
+#~ "limitation of liability for \n"
+#~ "consequential or incidental damages, the above limitation may not apply "
+#~ "to you."
+#~ msgstr ""
+#~ "Produsele informatice și documentația care le însoțește sînt oferite „așa "
+#~ "cum sînt”, fără nici o garanție, \n"
+#~ "în măsura permisă de lege.\n"
+#~ "Nici Moondrake și nici licențiații sau furnizorii săi, în nici un caz nu "
+#~ "vor fi responsabili, și în măsura permisă de \n"
+#~ "lege, pentru daunele speciale, directe sau indirecte, sau incidentele "
+#~ "(incluzînd fără limitări, daune \n"
+#~ "pentru pierderi de afaceri, întrerupere de activitate, pierderi "
+#~ "financiare, de taxele legale și de \n"
+#~ "sancțiunile care pot rezulta dintr-o hotărîre judecătorească sau orice "
+#~ "alte pierderi) care decurg \n"
+#~ "din utilizarea sau incapacitatea de utilizare a produselor sale, chiar "
+#~ "dacă Moondrake sau licențiații și furnizorii săi \n"
+#~ "au fost informați de apariția sau de posibilitatea unor astfel de daune.\n"
+#~ "\n"
+#~ "AVERTISMENT CU PRIVIRE LA DEȚINEREA SAU UTILIZAREA PROGRAMELOR INTERZISE "
+#~ "ÎN ANUMITE ȚĂRI\n"
+#~ "\n"
+#~ "În măsura permisă de lege, nici Moondrake, nici licențiații, furnizorii "
+#~ "sau distribuitorii săi nu vor fi, în nici un caz, \n"
+#~ "responsabili pentru orice un fel de daune speciale, incidente, directe "
+#~ "sau indirecte (incluzînd fără \n"
+#~ "limitări daunele pentru pierderi de afaceri, întrerupere de activitate, "
+#~ "pierderi financiare, taxe legale \n"
+#~ "și de sancțiuni rezultate dintr-o hotărîre judecătorească, sau orice alte "
+#~ "pierderi) care decurg din \n"
+#~ "deținerea și utilizarea programelor sau a componentelor descărcate de pe "
+#~ "unul din siturile Moondrake care sînt \n"
+#~ "interzise sau restricționate de legile locale în unele țări.\n"
+#~ "Această răspundere limitată se aplică, dar nu se limitează la, și "
+#~ "nivelului de criptare inclus în produsele \n"
+#~ "sale informatice.\n"
+#~ "Cu toate acestea, deoarece unele jurisdicții nu permit excluderea, sau "
+#~ "limitarea, sau răspunderea pentru \n"
+#~ "consecințele sau daunele incidentale, limitarea de mai sus ar putea să nu "
+#~ "se aplice în cazul dumneavoastră.  "
+
+#~ msgid ""
+#~ "The Software Products consist of components created by different persons "
+#~ "or entities.\n"
+#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
+#~ "the components which \n"
+#~ "they cover. Please read carefully the terms and conditions of the license "
+#~ "agreement for each component \n"
+#~ "before using any component. Any question on a component license should be "
+#~ "addressed to the component \n"
+#~ "licensor or supplier and not to Moondrake.\n"
+#~ "The programs developed by Moondrake are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by Moondrake is governed by \"%s\" License."
+#~ msgstr ""
+#~ "Produsele informatice sînt alcătuite din componente create de diferite "
+#~ "persoane sau entități. \n"
+#~ "Cele mai multe dintre aceste licențe vă permit să utilizați, duplicați, "
+#~ "adaptați sau să redistribuiți \n"
+#~ "componentele pe care le acoperă. Vă rugăm să citiți cu atenție termenii "
+#~ "și condițiile din contractul \n"
+#~ "de licență pentru fiecare componentă înainte de a-o utiliza. Orice "
+#~ "întrebare cu privire la licența unei \n"
+#~ "componente trebuie abordată cu autorul ei și nu cu Moondrake.\n"
+#~ "Programele dezvoltate de Moondrake sînt reglementate de licența GPL. "
+#~ "Documentația scrisă \n"
+#~ "de Moondrake este reglementată de licența „%s”."
+
+#~ msgid ""
+#~ "The operating system and the different components available in the "
+#~ "Moondrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software "
+#~ "Products include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation "
+#~ "related to the operating \n"
+#~ "system and the different components of the Moondrake distribution, and "
+#~ "any applications \n"
+#~ "distributed with these products provided by Moondrake's licensors or "
+#~ "suppliers."
+#~ msgstr ""
+#~ "Sistemul de operare și diferitele componente disponibile în distribuția "
+#~ "Moondrake vor fi \n"
+#~ "denumite „Produse Informatice” în cele ce urmează. Produsele informatice "
+#~ "includ, dar fără limitare \n"
+#~ "la, un set de programe, metode, reguli și documentația relativă la "
+#~ "sistemele de operare și a \n"
+#~ "diferitelor componente ale distribuției Moondrake, precum și oricare din "
+#~ "aplicațiile \n"
+#~ "distribuite cu aceste produse oferite de furnizori sau licențiați "
+#~ "Moondrake."
+
+#~ msgid ""
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
+#~ msgstr ""
+#~ "Avertisment: nu toate programele libere (Free Software) sînt lipsite de "
+#~ "licențe,\n"
+#~ "iar unele dintre ele pot fi chiar protejate de brevete în țara voastră. "
+#~ "De exemplu,\n"
+#~ "decodoarele MP3 incluse, pot necesita o licență pentru o utilizare mai "
+#~ "avansată\n"
+#~ "(vizitați http://www.mp3licensing.com pentru mai multe detalii). În caz "
+#~ "de\n"
+#~ "incertitudine, vă invităm să verificați legile din țara voastră."
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr " "
+
 #~ msgid "Clean /tmp at each boot"
 #~ msgstr "Curăță /tmp la fiecare pornire"
 
-#~ msgid "command %s missing"
-#~ msgstr "comanda %s lipsește"
+#~ msgid "Enable 5.1 sound with Pulse Audio"
+#~ msgstr "Activează sunet 5.1 cu Pulse Audio"
+
+#~ msgid "Enable user switching for audio applications"
+#~ msgstr "Activează schimbarea utilizatorului pentru aplicațiile audio"
+
+#~ msgid "File sharing"
+#~ msgstr "Partajare fișiere"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "Lansează filtrarea de pachete pentru nucleele din seria 2.2,\n"
+#~ "pentru a configura un parafoc împotriva atacurilor din rețea."
+
+#~ msgid "Set CPU frequency settings"
+#~ msgstr "Configurează parametrii de frecvență ai procesorului"
 
 #~ msgid ""
 #~ "The classic bug sound tester is to run the following commands:\n"
@@ -7468,21 +7889,5 @@ msgstr "Instalarea a eșuat"
 #~ "- „/sbin/fuser -v /dev/dsp” va afișa care din programe utilizează placa\n"
 #~ "de sunet.\n"
 
-#~ msgid "Set CPU frequency settings"
-#~ msgstr "Configurează parametrii de frecvență ai procesorului"
-
-#~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
-#~ msgstr ""
-#~ "Lansează filtrarea de pachete pentru nucleele din seria 2.2,\n"
-#~ "pentru a configura un parafoc împotriva atacurilor din rețea."
-
-#~ msgid "Enable 5.1 sound with Pulse Audio"
-#~ msgstr "Activează sunet 5.1 cu Pulse Audio"
-
-#~ msgid "Enable user switching for audio applications"
-#~ msgstr "Activează schimbarea utilizatorului pentru aplicațiile audio"
-
-#~ msgid "File sharing"
-#~ msgstr "Partajare fișiere"
+#~ msgid "command %s missing"
+#~ msgstr "comanda %s lipsește"

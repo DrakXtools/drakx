@@ -439,18 +439,16 @@ msgid "URL must start with ftp:// or http://"
 msgstr "Li hårdêye doet cmincî avou «ftp://» ou «http://»"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr ""
-"Dj' atôtche li waibe da Mandriva Linux po-z aveur li djivêye des muroes k' i "
-"gn a"
+msgstr "Dj' atôtche li waibe da %s po-z aveur li djivêye des muroes k' i gn a"
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Dji n' a savou atôtchî l' waibe da Mandriva Linux po-z aveur li djivêye des "
-"muroes k' i gn a"
+"Dji n' a savou atôtchî l' waibe da %s po-z aveur li djivêye des muroes k' i "
+"gn a"
 
 #: any.pm:204
 #, c-format
@@ -744,7 +742,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Nou discrijhaedje"
 
 #: pkgs.pm:280
 #, c-format
@@ -759,9 +757,9 @@ msgid "An error occurred:"
 msgstr "Dj' aroke so ene sacwè"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Dj' aroke so ene sacwè"
+msgstr "I gn a-st avou èn aroke moirt: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -807,9 +805,9 @@ msgid "Entering step `%s'\n"
 msgstr "Intrant e l' etape '%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Astalaedje"
+msgstr "Astalåcion di %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -822,14 +820,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Vosse sistinme a po di rsources. Vos pôrîz aveur des rujhes po\n"
-"l' astalåcion di Mandriva Linux. Si çoula arive, vos ploz sayî ene\n"
+"l' astalåcion di %s. Si çoula arive, vos ploz sayî ene\n"
 "astalåcion e môde tecse. Po çoula, tchoûkîz sol tape «F1» a l' enondaedje\n"
 "et poy tapez «text»."
 
@@ -891,7 +889,7 @@ msgstr "Tchoezi tchaeke pacaedje sepårumint"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Distchoezi tot"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1246,9 +1244,9 @@ msgid "Bad file"
 msgstr "Måva fitchî"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1655,26 +1653,197 @@ msgid ""
 "Exit"
 msgstr "Moussî foû"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Astalåcion di Mandriva Linux %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Evironmint grafike"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Èn evironmint grafike avou on hopea di programes amiståves et d' usteyes "
+#~ "pol sicribanne"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Èn evironmint grafike avou on hopea di programes amiståves et d' usteyes "
+#~ "pol sicribanne"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Programes pasmints d' tins: årcåde, plateas, stratedjeye, evnd."
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Posse éndjolrece"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Posse éndjolrece GNOME"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Macreas Moondrake"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Licince"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Programes di buro: aspougneus di tecse (LibreOffice Writer, Kword), "
+#~ "tåvleus (LibreOffice Calc, Kspread), håyneus pdf, evnd."
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Posse di buro"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Sierveu båze di dnêyes PostgreSQL eyet MariaDB"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Sierveu båze di dnêyes PostgreSQL ou MariaDB"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Dj' aprestêye l' enondrece"
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Sicribanne IceWm"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Passer houte di tos les pacaedjes do sopoirt «%s»"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, evnd."
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "Posse éndjolrece KDE"
+
+#~ msgid "%d packages"
+#~ msgstr "%d pacaedjes"
+
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "(%d pacaedje, %d Mo)"
+#~ msgstr[1] "(%d pacaedjes, %d Mo)"
+
+#~ msgid "2007 product line"
+#~ msgstr "ligne di prodûts 2007"
+
+#~ msgid "3D"
+#~ msgstr "3D"
+
+#~ msgid "All"
+#~ msgstr "Totafwait"
+
+#~ msgid "Arkeia"
+#~ msgstr "Arkeia"
+
+#~ msgid "Automated"
+#~ msgstr "Otomatike"
 
 #~ msgid "Bad package"
 #~ msgstr "Måva pacaedje"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Rantoele"
+#~ msgid "Boot"
+#~ msgstr "Enondaedje"
+
+#~ msgid "CMS"
+#~ msgstr "CMS"
+
+#~ msgid "CRM"
+#~ msgstr "CRM"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Metaedjes a djoû"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Dji n' sai vey les modules po vosse nawea (i gn a pont d' fitchî %s), "
+#~ "çoula vout probåblumint dire ki vosse plakete d' enondaedje n' a nén stî "
+#~ "fwait pol sopoirt d' astalaedje ki vos vloz eployî. Vos dvrîz fé ene "
+#~ "nouve plakete, a pårti des imådjes ki vnèt avou li modêye di Mandriva "
+#~ "Linux ki vos vloz astaler"
+
+#~ msgid "Choosing packages"
+#~ msgstr "Tchoezi les pacaedjes"
+
+#~ msgid "Configure X"
+#~ msgstr "Apontyî X"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Dj' atôche li muroe po-z aveur li djivêye des pacaedjes"
+
+#~ msgid "Discovery Live Mode"
+#~ msgstr "Môde «Discovery Live»"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Voloz vs eployî aboot?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "Aberwetaedje do fitchî %s..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Åk n' a nén stî tot astalant aboot, \n"
+#~ "voloz vs ki dji saye di foirci l' astalåcion, minme si çoula pout\n"
+#~ "distrure li prumire pårticion?"
+
+#~ msgid "Flatout"
+#~ msgstr "Flatout"
+
+#~ msgid "Formatting"
+#~ msgstr "Abwesnaedje"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Fé li plakete d' astalaedje otomatike"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#~ msgid "How to register"
+#~ msgstr "Kimint s' edjîstrer"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "Sicribanne IceWm"
+
+#~ msgid "Installation class"
+#~ msgstr "Li classe d' astalåcion"
+
+#~ msgid "Invictus Firewall"
+#~ msgstr "Côpe feu Invictus"
+
+#~ msgid "Kaspersky"
+#~ msgstr "Kaspersky"
+
+#~ msgid "Language"
+#~ msgstr "Lingaedje"
+
+#~ msgid "License"
+#~ msgstr "Licince"
+
+#~ msgid "LinDVD"
+#~ msgstr "LinDVD"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Astalåcion di Mandriva Linux %s"
+
+#~ msgid "Mandriva Online Services"
+#~ msgstr "Siervices so les fyis di Mandriva"
+
+#~ msgid "Networking"
+#~ msgstr "Rantoele"
+
+#~ msgid "New Theme"
+#~ msgstr "Novea tinme"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1683,8 +1852,55 @@ msgstr "Moussî foû"
 #~ "Programes di buro: aspougneus di tecse (kword, abiword), tåvleus "
 #~ "(kspread, gnumeric), håyneus pdf, evnd."
 
-#~ msgid "Downloading file %s..."
-#~ msgstr "Aberwetaedje do fitchî %s..."
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Dj' aprestêye l' enondrece"
+
+#~ msgid "Replay"
+#~ msgstr "Rifé"
+
+#~ msgid "Rpmdrake 2"
+#~ msgstr "Rpmdrake 2"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Schaper li tchuze des pacaedjes"
+
+#~ msgid "Select All"
+#~ msgstr "Tchoezi tot"
+
+#~ msgid "Skype"
+#~ msgstr "Skype"
+
+#~ msgid "TV card"
+#~ msgstr "Cåte tévé"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "L' astalaedje pout esse totafwait otomatike si vos vloz,\n"
+#~ "dins ci cas i va abwesner totafwait li deure plake!!\n"
+#~ "(dj' ô bén c' est po-z astaler sor ene nouve éndjole).\n"
+#~ "\n"
+#~ "Motoit ki vos vloz rifé l' astalåcion.\n"
+
+#~ msgid "Transgaming/Cedega"
+#~ msgstr "Transgaming/Cedega"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Dji n' a savou m' raloyî å muroe %s"
+
+#~ msgid "Users"
+#~ msgstr "Uzeus"
+
+#~ msgid "Web 2.0"
+#~ msgstr "Web 2.0"
+
+#~ msgid "Welcome"
+#~ msgstr "Bénvnowe"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1711,161 +1927,22 @@ msgstr "Moussî foû"
 #~ "\n"
 #~ "Voloz vs vormint astaler ces sierveus?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "Sicribanne IceWm"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Dj' atôche li muroe po-z aveur li djivêye des pacaedjes"
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Dji n' a savou m' raloyî å muroe %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Fé li plakete d' astalaedje otomatike"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "L' astalaedje pout esse totafwait otomatike si vos vloz,\n"
-#~ "dins ci cas i va abwesner totafwait li deure plake!!\n"
-#~ "(dj' ô bén c' est po-z astaler sor ene nouve éndjole).\n"
-#~ "\n"
-#~ "Motoit ki vos vloz rifé l' astalåcion.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Rifé"
-
-#~ msgid "Automated"
-#~ msgstr "Otomatike"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Schaper li tchuze des pacaedjes"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Voloz vs eployî aboot?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Åk n' a nén stî tot astalant aboot, \n"
-#~ "voloz vs ki dji saye di foirci l' astalåcion, minme si çoula pout\n"
-#~ "distrure li prumire pårticion?"
-
-#~ msgid "All"
-#~ msgstr "Totafwait"
-
-#~ msgid "TV card"
-#~ msgstr "Cåte tévé"
-
-#~ msgid "Boot"
-#~ msgstr "Enondaedje"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Otintifiaedje"
 
-#~ msgid "Arkeia"
-#~ msgstr "Arkeia"
-
-#~ msgid "Flatout"
-#~ msgstr "Flatout"
-
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#~ msgid "3D"
-#~ msgstr "3D"
-
-#~ msgid "CMS"
-#~ msgstr "CMS"
-
-#~ msgid "CRM"
-#~ msgstr "CRM"
-
-#~ msgid "2007 product line"
-#~ msgstr "ligne di prodûts 2007"
-
-#~ msgid "Invictus Firewall"
-#~ msgstr "Côpe feu Invictus"
-
-#~ msgid "Discovery Live Mode"
-#~ msgstr "Môde «Discovery Live»"
-
-#~ msgid "How to register"
-#~ msgstr "Kimint s' edjîstrer"
-
-#~ msgid "Rpmdrake 2"
-#~ msgstr "Rpmdrake 2"
-
-#~ msgid "Mandriva Online Services"
-#~ msgstr "Siervices so les fyis di Mandriva"
-
-#~ msgid "New Theme"
-#~ msgstr "Novea tinme"
-
-#~ msgid "Web 2.0"
-#~ msgstr "Web 2.0"
-
-#~ msgid "Kaspersky"
-#~ msgstr "Kaspersky"
-
-#~ msgid "LinDVD"
-#~ msgstr "LinDVD"
-
-#~ msgid "Skype"
-#~ msgstr "Skype"
-
-#~ msgid "Transgaming/Cedega"
-#~ msgstr "Transgaming/Cedega"
-
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "(%d pacaedje, %d Mo)"
-#~ msgstr[1] "(%d pacaedjes, %d Mo)"
-
-#~ msgid "%d packages"
-#~ msgstr "%d pacaedjes"
-
-#~ msgid "Language"
-#~ msgstr "Lingaedje"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Licince"
 
-#~ msgid "Installation class"
-#~ msgstr "Li classe d' astalåcion"
-
-#~ msgid "Formatting"
-#~ msgstr "Abwesnaedje"
-
-#~ msgid "Choosing packages"
-#~ msgstr "Tchoezi les pacaedjes"
-
-#~ msgid "Users"
-#~ msgstr "Uzeus"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Rantoele"
 
-#~ msgid "Configure X"
-#~ msgstr "Apontyî X"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Dji n' sai vey les modules po vosse nawea (i gn a pont d' fitchî %s), "
-#~ "çoula vout probåblumint dire ki vosse plakete d' enondaedje n' a nén stî "
-#~ "fwait pol sopoirt d' astalaedje ki vos vloz eployî. Vos dvrîz fé ene "
-#~ "nouve plakete, a pårti des imådjes ki vnèt avou li modêye di Mandriva "
-#~ "Linux ki vos vloz astaler"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Metaedjes a djoû"

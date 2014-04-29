@@ -1584,7 +1584,7 @@ msgstr "ਵਿਸਥਾਰ ਜਾਣਕਾਰੀ"
 #: diskdrake/interactive.pm:407
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "ਵੇਖੋ"
 
 #: diskdrake/interactive.pm:412 diskdrake/interactive.pm:828
 #, c-format
@@ -2883,7 +2883,7 @@ msgstr ""
 "ਕਿਰਪਾ ਕਰਕੇ ਯਕੀਨਨ /boot ਭਾਗ ਸ਼ਾਮਿਲ ਕਰੋ"
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr "ਤੁਸੀਂ ਮਾਊਂਟ %s ਸਥਿਤੀ ਲਈ ਇਨਕ੍ਰਿਪਡ ਫਾਇਲ ਸਿਸਟਮ ਨਹੀਂ ਵਰਤ ਸਕਦੇ"
 
@@ -3390,11 +3390,11 @@ msgstr "ਅਨਕੂਲ ਡਰਾਈਵਰ ਚੁਣ ਰਿਹਾ ਹੈ"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:482
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -5115,19 +5115,19 @@ msgid "Installing driver for USB controller"
 msgstr "USB ਕੰਟਰੋਲਰ ਲਈ ਡਰਾਈਵਰ ਇੰਸਟਾਲ ਹੋ ਰਿਹਾ ਹੈ"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller \"%s\""
-msgstr "firewire ਕੰਟਰੋਲਰ %s ਲਈ ਡਰਾਈਵਰ ਇੰਸਟਾਲ ਹੋ ਰਿਹਾ ਹੈ"
+msgstr "firewire ਕੰਟਰੋਲਰ \"%s\" ਲਈ ਡਰਾਈਵਰ ਇੰਸਟਾਲ ਹੋ ਰਿਹਾ ਹੈ"
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard disk drive controller \"%s\""
-msgstr "ਹਾਰਡ ਡਰਾਈਵ ਕੰਟਰੋਲਰ %s ਲਈ ਡਰਾਈਵਰ ਇੰਸਟਾਲ ਹੋ ਰਿਹਾ ਹੈ"
+msgstr "ਹਾਰਡ ਡਰਾਈਵ ਕੰਟਰੋਲਰ \"%s\" ਲਈ ਡਰਾਈਵਰ ਇੰਸਟਾਲ ਹੋ ਰਿਹਾ ਹੈ"
 
 #: modules/interactive.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller \"%s\""
-msgstr "ਈਥਰਨੈੱਟ ਕੰਟਰੋਲਰ %s ਲਈ ਡਰਾਈਵਰ ਇੰਸਟਾਲ ਹੋ ਰਿਹਾ ਹੈ"
+msgstr "ਈਥਰਨੈੱਟ ਕੰਟਰੋਲਰ \"%s\" ਲਈ ਡਰਾਈਵਰ ਇੰਸਟਾਲ ਹੋ ਰਿਹਾ ਹੈ"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -6547,7 +6547,7 @@ msgstr "ਇੰਟਰਨੈਟ"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "ਨੈਟਵਰਕਿੰਗ"
 
 #: services.pm:161
 #, c-format
@@ -6899,8 +6899,272 @@ msgstr ""
 msgid "Installation failed"
 msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਅਸਫਲ"
 
+#, fuzzy
+#~ msgid "An NTP client/server"
+#~ msgstr "NTP ਸਰਵਰ"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਆਪਣੇ ਡਾਟੇ ਦਾ ਬੈਕਅੱਪ ਲਵੋ"
+
+#~ msgid ""
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
+#~ msgstr ""
+#~ "ਚੇਤਾਵਨੀ: ਮੁਕਤ ਸਾਫਟਵੇਅਰ ਪੇਟਿੰਟ ਮੁਕਤ ਹੋਣੇ ਜਰੂਰੀ ਨਹੀਂ ਹੋ ਸਕਦੇ, ਅਤੇ ਕੁਝ ਸ਼ਾਮਿਲ ਮੁਕਤ\n"
+#~ "ਸਾਫਟਵੇਅਰ ਤੁਹਾਡੇ ਦੇਸ਼ ਵਿੱਚ ਪੇਟਿੰਟ ਦੁਆਰਾ ਸ਼ਾਮਿਲ ਕੀਤੇ ਹਨ। ਉਦਾਹਰਨ ਲਈ, ਸ਼ਾਮਿਲ MP3\n"
+#~ "ਡੀਕੋਡਰਾਂ ਨੂੰ ਅੱਗੇ ਵਰਤੋਂ ਲਈ ਲਾਈਸਿੰਸ ਦੀ ਲੋੜ ਪੈ ਸਕਦੀ ਹੈ (ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਲਈ\n"
+#~ "http://www.mp3licensing.com ਵੇਖੋ)। ਜੇ ਤੁਹਾਨੂੰ ਯਕੀਨ ਨਹੀਂ ਕਿ ਤੁਹਾਡਾ \n"
+#~ "ਪੇਟਿੰਟ ਤੁਹਾਨੂੰ ਉਪਲੱਬਧ ਹੋ ਸਕਦਾ ਹੈ, ਆਪਣੇ ਲੋਕਲ ਨਿਯਮਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।"
+
+#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+
+#~ msgid ""
+#~ "A library which defends against buffer overflow and format string attacks."
+#~ msgstr "ਇੱਕ ਲਾਇਬ੍ਰੇਰੀ ਜੋ ਬਫਰ ਭਰਨ ਅਤੇ ਫਾਰਮਿਟ ਸਤਰ ਹਮਲੇ ਤੋਂ ਰੱਖਿਆ ਕਰਦੀ ਹੈ।"
+
+#~ msgid "Accept user"
+#~ msgstr "ਉਪਭੋਗੀ ਸਵੀਕਾਰ"
+
+#~ msgid "Accept/Refuse bogus IPv4 error messages."
+#~ msgstr "ਬੱਗ IPv4 ਗਲਤੀ ਸੁਨੇਹੇ ਸਵੀਕਾਰ/ਇਨਕਾਰ।"
+
+#~ msgid "Accept/Refuse broadcasted icmp echo."
+#~ msgstr "ਬਰਾਡਕਾਸਟ icmp echo ਸਵੀਕਾਰ/ਇਨਕਾਰ।"
+
+#~ msgid "Accept/Refuse icmp echo."
+#~ msgstr "icmp echo ਸਵੀਕਾਰ/ਇਨਕਾਰ।"
+
+#~ msgid "Active Directory with SFU"
+#~ msgstr "SFU ਨਾਲ ਸਰਗਰਮ ਡਾਇਰੈਕਟਰੀ"
+
+#~ msgid "Active Directory with SFU:"
+#~ msgstr "SFU ਨਾਲ ਸਰਗਰਮ ਡਾਇਰੈਕਟਰੀ:"
+
+#~ msgid "Active Directory with Winbind"
+#~ msgstr "Winbind ਨਾਲ ਸਰਗਰਮ ਡਾਇਰੈਕਟਰੀ"
+
+#~ msgid "Active Directory with Winbind:"
+#~ msgstr "Winbind ਨਾਲ ਸਰਗਰਮ ਡਾਇਰੈਕਟਰੀ:"
+
+#~ msgid "Add user"
+#~ msgstr "ਉਪਭੋਗੀ ਸ਼ਾਮਿਲ"
+
+#~ msgid "Allow/Forbid remote root login."
+#~ msgstr "ਰਿਮੋਟ ਪ੍ਰਬੰਧਕ (root) ਲਾਗਇਨ ਇਜਾਜ਼ਤ/ਮਨਾਹੀ।"
+
+#~ msgid "Authentication Active Directory"
+#~ msgstr "ਪ੍ਰਮਾਣਿਕਤਾ ਸਰਗਰਮ ਡਾਇਰੈਕਟਰੀ"
+
+#~ msgid "Authentication LDAP"
+#~ msgstr "LDAP ਪ੍ਰਮਾਣਿਕਤਾ"
+
+#~ msgid "Authentication NIS"
+#~ msgstr "ਪ੍ਰਮਾਣਕਿਤਾ NIS"
+
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "ਪ੍ਰਮਾਣਿਕਤਾ Windows ਡੋਮੇਨ"
+
+#~ msgid "Bad backup file"
+#~ msgstr "ਗਲਤ ਬੈਕਅੱਪ ਫਾਇਲ"
+
+#~ msgid "Choose action"
+#~ msgstr "ਕਾਰਵਾਈ ਚੁਣੋ"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "ਅਕਾਰ ਚੁਣੋ"
+
 #~ msgid "Clean /tmp at each boot"
 #~ msgstr "ਹਰੇਕ ਬੂਟ ਦੌਰਾਨ /tmp ਸਾਫ ਕਰੋ"
+
+#~ msgid "Collapse Tree"
+#~ msgstr "ਲੜੀ ਸਮੇਟੋ"
+
+#, fuzzy
+#~ msgid ""
+#~ "Do not update directory inode access times on this filesystem\n"
+#~ "(e.g, for faster access on the news spool to speed up news servers)."
+#~ msgstr ""
+#~ "ਇਸ ਫਾਇਲ ਸਿਸਟਮ ਤੇ inode ਪਹੁੰਚ ਸਮੇਂ ਦਾ ਨਵੀਨੀਕਰਨ ਨਾ ਕਰੋ\n"
+#~ "(ਜਿਵੇਂ, ਖਬਰ ਸਰਵਰ ਦੀ ਗਤੀ ਵਧਾਉਣ ਲਈ ਖਬਰ ਸਪੂਲ ਵਿੱਚ ਤੇਜ ਪਹੁੰਚ)।"
+
+#~ msgid "Enable/Disable IP spoofing protection."
+#~ msgstr "IP spoofing ਬਚਾਓ ਯੋਗ/ਅਯੋਗ।"
+
+#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
+#~ msgstr "libsafe ਯੋਗ/ਅਯੋਗ ਜੇ ਸਿਸਟਮ ਤੇ libsafe ਨਹੀਂ ਲੱਭਿਆ।"
+
+#~ msgid "Enable/Disable msec hourly security check."
+#~ msgstr "ਮਿ:ਸੈ: ਘੰਟੇ ਵਾਲੀ ਸੁਰੱਖਿਆ ਜਾਂਚ ਯੋਗ/ਅਯੋਗ।"
+
+#~ msgid "Enable/Disable the logging of IPv4 strange packets."
+#~ msgstr "IPv4 ਅਜੀਬ ਪੈਕਟਾਂ ਦੀ ਲਾਗਿੰਗ ਯੋਗ/ਅਯੋਗ।"
+
+#~ msgid "Error reading file %s"
+#~ msgstr "ਫਾਇਲ %s ਪੜਨ ਵਿੱਚ ਗਲਤੀ"
+
+#~ msgid "Error writing to file %s"
+#~ msgstr "ਫਾਇਲ %s ਲਿਖਣ ਵਿੱਚ ਗਲਤੀ"
+
+#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
+#~ msgstr "ਗਲਤੀ: ਤੁਹਾਡੇ ਸਾਊਂਡ ਕਾਰਡ ਲਈ \"%s\" ਡਰਾਈਵਰ ਵਿਖਾਇਆ ਨਹੀਂ ਹੈ"
+
+#~ msgid "Expand Tree"
+#~ msgstr "ਲੜੀ ਫੈਲਾਓ"
+
+#~ msgid "Ext2"
+#~ msgstr "Ext2"
+
+#~ msgid "File sharing"
+#~ msgstr "ਫਾਇਲ ਸ਼ੇਅਰਿੰਗ"
+
+#~ msgid ""
+#~ "For this to work for a W2K PDC, you will probably need to have the admin "
+#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
+#~ "add and reboot the server.\n"
+#~ "You will also need the username/password of a Domain Admin to join the "
+#~ "machine to the Windows(TM) domain.\n"
+#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
+#~ "after the network setup step.\n"
+#~ "Should this setup fail for some reason and domain authentication is not "
+#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your "
+#~ "Windows(tm) Domain, and Admin Username/Password, after system boot.\n"
+#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
+#~ "good."
+#~ msgstr ""
+#~ "ਇਸ ਨੂੰ W2K PDC ਲਈ ਕੰਮ ਕਰਨ ਲਈ, ਤੁਹਾਨੂੰ ਸੰਭਾਵੀ ਹੀ admin ਚਲਾਉਣ ਦੀ ਲੋੜ ਪਵੇਗੀ: C:\\>ਨੈੱਟ "
+#~ "ਲੋਕਲ-ਗਰੁੱਪ \"Pre-Windows 2000 ਅਨੁਕੂਲ ਪਹੁੰਚ\" ਹਰੇਕ ਸਰਵਰ ਨੂੰ /ਸ਼ਾਮਿਲ ਅਤੇ ਮੁੜ ਚਲਾਉਂਦਾ ਹੈ।\n"
+#~ "ਤੁਹਾਨੂੰ Windows(TM) ਡੋਮੇਨ ਨਾਲ ਮਸ਼ੀਨ ਜੋੜਨ ਲਈ ਡੋਮੇਨ Admin ਦੇ ਉਪਭੋਗੀ-ਨਾਂ/ਗੁਪਤ-ਕੋਡ ਦੀ ਲੋੜ "
+#~ "ਪਵੇਗੀ।\n"
+#~ "ਜੇ ਹਾਲੇ ਨੈੱਟਵਰਕਿੰਗ ਯੋਗ ਨਹੀਂ, Drakx ਨੈੱਟਵਰਕ ਨਿਰਧਾਰਨ ਪਗ਼ ਤੋਂ ਬਾਅਦ ਜੋੜਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੇਗਾ।\n"
+#~ "ਕੀ ਇਹ ਪਗ਼ ਕੁਝ ਕਾਰਨਾ ਕਰਕੇ ਅਸਫਲ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ ਅਤੇ ਡੋਮੇਨ ਪ੍ਰਮਾਣਿਕਤਾ ਕੰਮ ਨਹੀਂ ਕਰਦੀ, "
+#~ "ਸਿਸਟਮ ਬੂਟ ਹੋਣ ਮਗਰੋਂ ਆਪਣੇ Windows(tm) ਡੋਮੇਨ, ਅਤੇ Admin ਉਪਭੋਗੀ-ਨਾਂ/ਗੁਪਤ-ਕੋਡ ਵਰਤ ਕੇ "
+#~ "'smbpasswd -j DOMAIN -U USER%%PASSWORD' ਚਲਾਓ।\n"
+#~ "ਕਮਾਂਡ 'wbinfo -t' ਜਾਂਚ ਕਰੇਗੀ ਕਿ ਕੀ ਤੁਹਾਡੀ ਪ੍ਰਮਾਣਿਕਤਾ ਸਹੀ ਹੈ ਜਾਂ ਨਹੀਂ।"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "ਮੈਬਾ ਵਿੱਚ ਰੈਮ ਅਕਾਰ ਦਿਓ"
+
+#~ msgid "High"
+#~ msgstr "ਜਿਆਦਾ"
+
+#~ msgid "Higher"
+#~ msgstr "ਬਹੁਤ-ਜਿਆਦਾ"
+
+#~ msgid ""
+#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
+#~ "is enough)\n"
+#~ "at the beginning of the disk"
+#~ msgstr ""
+#~ "ਜੇ ਤੁਸੀਂ aboot ਵਰਤਣ ਬਾਰੇ ਸੋਚਿਆ ਹੈ, ਡਿਸਕ ਦੇ ਸ਼ੁਰੂ ਵਿੱਚ ਖਾਲੀ ਥਾਂ (2048 ਸੈਕਟਰ ਕਾਫੀ ਹਨ)\n"
+#~ " ਛੱਡਣ ਦਾ ਧਿਆਨ ਰੱਖੋ।"
+
+#~ msgid "Info: "
+#~ msgstr "ਜਾਣਕਾਰੀ:"
+
+#~ msgid "Journalised FS"
+#~ msgstr "ਜਰਨਲਾਈਜ਼ਡ FS"
+
+#~ msgid "LDAP user allowed to browse the Active Directory"
+#~ msgstr "LDAP ਉਪਭੋਗੀ ਨੂੰ ਸਰਗਰਮ ਡਾਇਰੈਕਟਰੀ ਵੇਖਣ ਦੀ ਇਜਾਜ਼ਤ ਹੈ"
+
+#~ msgid "LDAP users database"
+#~ msgstr "LDAP ਉਪਭੋਗੀ ਡਾਟਾਬੇਸ"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/grub ਇੰਸਟਾਲੇਸ਼ਨ"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "ਨੈੱਟਵਰਕ ਹਮਲਿਆਂ ਤੋਂ ਆਪਣੀ ਮਸ਼ੀਨ ਬਚਾਉਣ ਲਈ ਫਾਇਲਵਾਲ ਨਿਰਧਾਰਿਤ \n"
+#~ "ਕਰਨ ਵਾਸਤੇ, ਲੀਨਕਸ ਕਰਨਲ 2.2 ਲੜੀ ਲਈ ਪੈਕੇਟ ਫਿਲਟਰਿੰਗ ਚਲਾਓ।"
+
+#~ msgid "Number of capture buffers:"
+#~ msgstr "ਖੋਜੇ ਬਫਰਾਂ ਦੀ ਗਿਣਤੀ"
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr "ਚੋਣ ``ਕਮਾਂਡ ਲਾਈਨ ਚੋਣ ਮਨਾਹੀ'' ਦਾ ਗੁਪਤ-ਕੋਡ ਤੋਂ ਬਿਨਾ ਕੋਈ ਮਤਲਬ ਨਹੀਂ"
+
+#~ msgid "PLL setting:"
+#~ msgstr "PLL ਵਿਵਸਥਾ:"
+
+#~ msgid "Paranoid"
+#~ msgstr "ਪੈਰਾਨਾਇਡ"
+
+#~ msgid ""
+#~ "Passwords are now enabled, but use as a networked computer is still not "
+#~ "recommended."
+#~ msgstr "ਗੁਪਤ-ਕੋਡ ਹੁਣ ਯੋਗ ਹੈ, ਪਰ ਨੈੱਟਵਰਕ ਕੰਪਿਊਟਰ ਤੌਰ ਤੇ ਵਰਤਣ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।"
+
+#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
+#~ msgstr "ਕਿਰਪਾ ਕਰਕੇ ਲਾਗ-ਆਊਟ ਕਰੋ ਅਤੇ Ctrl-Alt-BackSpace ਵਰਤੋ"
+
+#~ msgid "Poor"
+#~ msgstr "ਘੱਟ"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "ਜੇ ਲੋੜ ਹੈ RAM ਅਕਾਰ ਠੀਕ ਕਰੋ (%d ਮੈਬਾ ਲੱਭਿਆ ਹੈ)"
+
+#~ msgid "Radio support:"
+#~ msgstr "ਰੇਡੀਓ ਸਹਿਯੋਗ:"
+
+#~ msgid "Removable media automounting"
+#~ msgstr "ਹਟਾਉਣ ਯੋਗ ਮਾਧਿਅਮ ਸਵੈ-ਮਾਊਂਟ ਹੋ ਰਿਹਾ ਹੈ"
+
+#~ msgid "Rescue partition table"
+#~ msgstr "ਭਾਗ ਸਾਰਣੀ ਸੰਕਟ-ਕਾਲੀਨ"
+
+#~ msgid "Restore partition table"
+#~ msgstr "ਭਾਗ ਸਾਰਣੀ ਮੁੜ-ਸੰਭਾਲੋ"
+
+#~ msgid "Restoring from file %s failed: %s"
+#~ msgstr "ਫਾਇਲ %s ਤੋਂ ਮੁੜ ਸੰਭਾਲ ਅਸਫਲ ਹੋਈ: %s"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "ਕਮਾਂਡ ਲਾਈਨ ਚੋਣ ਮਨਾਹੀ"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "ਮੈਬਾ ਵਿੱਚ ਪ੍ਰਬੰਧਕ (root) ਭਾਗ ਅਕਾਰ:"
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "Save partition table"
+#~ msgstr "ਭਾਗ ਸਾਰਣੀ ਸੰਭਾਲੋ"
+
+#~ msgid "Security level"
+#~ msgstr "ਸੁਰੱਖਿਆ ਪੱਧਰ"
+
+#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
+#~ msgstr "X ਫੌਂਟ ਸਰਵਰ ਚਲਾਓ (Xorg ਨੂੰ ਚਲਾਉਣ ਲਈ ਜਰੂਰੀ ਹੈ)।"
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "ਮੈਬਾ ਵਿੱਚ ਸਵੈਪ ਭਾਗ ਅਕਾਰ:"
+
+#~ msgid "TLS"
+#~ msgstr "TLS"
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "FAT ਮੁੜ-ਅਕਾਰ ਜੰਤਰ ਤੁਹਾਡੇ ਭਾਗ ਦੇ ਪ੍ਰਬੰਧਨ ਲਈ ਅਸਮਰਥ ਹੈ, \n"
+#~ "ਹੇਠਲੀ ਗਲਤੀ ਹੋਈ ਹੈ: %s"
+
+#~ msgid ""
+#~ "The backup partition table has not the same size\n"
+#~ "Still continue?"
+#~ msgstr ""
+#~ "ਬੈਕਅੱਪ ਭਾਗ ਸਾਰਣੀ ਦਾ ਸਮਾਨ ਅਕਾਰ ਨਹੀਂ ਹੈ\n"
+#~ "ਹਾਲੇ ਜਾਰੀ ਕਰੋ?"
 
 #~ msgid ""
 #~ "The classic bug sound tester is to run the following commands:\n"
@@ -6948,79 +7212,19 @@ msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਅਸਫਲ"
 #~ "- \"/sbin/fuser -v /dev/dsp\" ਦੱਸੇਗੀ ਕਿ ਸਾਊਂਡ ਕਾਰਡ ਕਿਹੜਾ ਪ੍ਰੋਗਰਾਮ ਵਰਤ ਰਿਹਾ ਹੈ\n"
 
 #~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
-#~ msgstr ""
-#~ "ਨੈੱਟਵਰਕ ਹਮਲਿਆਂ ਤੋਂ ਆਪਣੀ ਮਸ਼ੀਨ ਬਚਾਉਣ ਲਈ ਫਾਇਲਵਾਲ ਨਿਰਧਾਰਿਤ \n"
-#~ "ਕਰਨ ਵਾਸਤੇ, ਲੀਨਕਸ ਕਰਨਲ 2.2 ਲੜੀ ਲਈ ਪੈਕੇਟ ਫਿਲਟਰਿੰਗ ਚਲਾਓ।"
-
-#~ msgid "File sharing"
-#~ msgstr "ਫਾਇਲ ਸ਼ੇਅਰਿੰਗ"
-
-#~ msgid "Restrict command line options"
-#~ msgstr "ਕਮਾਂਡ ਲਾਈਨ ਚੋਣ ਮਨਾਹੀ"
-
-#~ msgid "restrict"
-#~ msgstr "ਮਨਾਹੀ"
-
-#~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
-#~ msgstr "ਚੋਣ ``ਕਮਾਂਡ ਲਾਈਨ ਚੋਣ ਮਨਾਹੀ'' ਦਾ ਗੁਪਤ-ਕੋਡ ਤੋਂ ਬਿਨਾ ਕੋਈ ਮਤਲਬ ਨਹੀਂ"
-
-#, fuzzy
-#~ msgid "Use an encrypted filesystem"
-#~ msgstr "ਤੁਸੀਂ ਮਾਊਂਟ %s ਸਥਿਤੀ ਲਈ ਇਨਕ੍ਰਿਪਡ ਫਾਇਲ ਸਿਸਟਮ ਨਹੀਂ ਵਰਤ ਸਕਦੇ"
-
-#~ msgid ""
-#~ "To ensure data integrity after resizing the partition(s), \n"
-#~ "filesystem checks will be run on your next boot into Microsoft Windows®"
-#~ msgstr ""
-#~ "ਭਾਗ ਮੁੜ-ਅਕਾਰ ਤੋਂ ਬਾਅਦ ਡਾਟਾ ਇੱਕਸਾਰਤਾ ਜਾਂਚ ਲਈ, \n"
-#~ "Windows(TM) ਵਿੱਚ ਤੁਹਾਡੀ ਅਗਲੀ ਬੂਟ ਦੌਰਾਨ ਫਾਇਲ ਸਿਸਟਮ ਜਾਂਚ ਚੱਲੇਗੀ"
-
-#~ msgid "Use the Microsoft Windows® partition for loopback"
-#~ msgstr "ਲੂਪਬੈਕ ਲਈ Microsoft Windows® ਭਾਗ ਵਰਤੋ"
-
-#~ msgid "Which partition do you want to use for Linux4Win?"
-#~ msgstr "ਤੁਸੀਂ ਕਿਹੜਾ ਭਾਗ Linux4Win ਲਈ ਵਰਤਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
-
-#~ msgid "Choose the sizes"
-#~ msgstr "ਅਕਾਰ ਚੁਣੋ"
-
-#~ msgid "Root partition size in MB: "
-#~ msgstr "ਮੈਬਾ ਵਿੱਚ ਪ੍ਰਬੰਧਕ (root) ਭਾਗ ਅਕਾਰ:"
-
-#~ msgid "Swap partition size in MB: "
-#~ msgstr "ਮੈਬਾ ਵਿੱਚ ਸਵੈਪ ਭਾਗ ਅਕਾਰ:"
+#~ "There are already some restrictions, and more automatic checks are run "
+#~ "every night."
+#~ msgstr "ਇੱਥੇ ਪਹਿਲਾਂ ਹੀ ਕੁਝ ਪਾਬੰਦੀਆਂ ਹਨ, ਅਤੇ ਹਰ ਰਾਤ ਨੂੰ ਬਹੁਤ ਸਾਰੀ ਸਵੈ ਜਾਂਚ ਚਲੱਦੀ ਹੈ।"
 
 #~ msgid ""
 #~ "There is no FAT partition to use as loopback (or not enough space left)"
 #~ msgstr "ਇੱਥੇ ਲੂਪਬੈਕ ਲਈ ਵਰਤਣ ਵਾਸਤੇ ਕੋਈ FAT ਭਾਗ ਨਹੀਂ ਹੈ (ਜਾਂ ਲੋੜੀਂਦੀ ਬਾਕੀ ਥਾਂ ਨਹੀਂ ਹੈ)"
 
 #~ msgid ""
-#~ "The FAT resizer is unable to handle your partition, \n"
-#~ "the following error occurred: %s"
+#~ "This is similar to the previous level, but the system is entirely closed "
+#~ "and security features are at their maximum."
 #~ msgstr ""
-#~ "FAT ਮੁੜ-ਅਕਾਰ ਜੰਤਰ ਤੁਹਾਡੇ ਭਾਗ ਦੇ ਪ੍ਰਬੰਧਨ ਲਈ ਅਸਮਰਥ ਹੈ, \n"
-#~ "ਹੇਠਲੀ ਗਲਤੀ ਹੋਈ ਹੈ: %s"
-
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "ਕਿਰਪਾ ਕਰਕੇ ਲਾਗ-ਆਊਟ ਕਰੋ ਅਤੇ Ctrl-Alt-BackSpace ਵਰਤੋ"
-
-#~ msgid "Welcome To Crackers"
-#~ msgstr "ਖੋਜੀਆਂ ਵੱਲੋਂ ਜੀ ਆਇਆਂ ਨੂੰ"
-
-#~ msgid "Poor"
-#~ msgstr "ਘੱਟ"
-
-#~ msgid "High"
-#~ msgstr "ਜਿਆਦਾ"
-
-#~ msgid "Higher"
-#~ msgstr "ਬਹੁਤ-ਜਿਆਦਾ"
-
-#~ msgid "Paranoid"
-#~ msgstr "ਪੈਰਾਨਾਇਡ"
+#~ "ਇਹ ਪਿਛਲੇ ਪੱਧਰ ਦੇ ਸਮਾਨ ਹੈ, ਪਰ ਸਿਸਟਮ ਪੂਰੀ ਤਰਾਂ ਬੰਦ ਹੈ ਅਤੇ ਸੁਰੱਖਿਆ ਵਿਸ਼ੇਸ਼ਤਾ ਆਪਣੇ ਸਿਖਰ ਤੇ ਹੈ।"
 
 #~ msgid ""
 #~ "This level is to be used with care. It makes your system more easy to "
@@ -7034,227 +7238,45 @@ msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਅਸਫਲ"
 #~ "ਹੈ। ਇੱਥੇ ਕੋਈ ਗੁਪਤ-ਕੋਡ ਪਹੁੰਚ ਨਹੀਂ।"
 
 #~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
-#~ msgstr "ਗੁਪਤ-ਕੋਡ ਹੁਣ ਯੋਗ ਹੈ, ਪਰ ਨੈੱਟਵਰਕ ਕੰਪਿਊਟਰ ਤੌਰ ਤੇ ਵਰਤਣ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।"
-
-#~ msgid ""
-#~ "There are already some restrictions, and more automatic checks are run "
-#~ "every night."
-#~ msgstr "ਇੱਥੇ ਪਹਿਲਾਂ ਹੀ ਕੁਝ ਪਾਬੰਦੀਆਂ ਹਨ, ਅਤੇ ਹਰ ਰਾਤ ਨੂੰ ਬਹੁਤ ਸਾਰੀ ਸਵੈ ਜਾਂਚ ਚਲੱਦੀ ਹੈ।"
-
-#~ msgid ""
-#~ "This is similar to the previous level, but the system is entirely closed "
-#~ "and security features are at their maximum."
+#~ "To ensure data integrity after resizing the partition(s), \n"
+#~ "filesystem checks will be run on your next boot into Microsoft Windows®"
 #~ msgstr ""
-#~ "ਇਹ ਪਿਛਲੇ ਪੱਧਰ ਦੇ ਸਮਾਨ ਹੈ, ਪਰ ਸਿਸਟਮ ਪੂਰੀ ਤਰਾਂ ਬੰਦ ਹੈ ਅਤੇ ਸੁਰੱਖਿਆ ਵਿਸ਼ੇਸ਼ਤਾ ਆਪਣੇ ਸਿਖਰ ਤੇ ਹੈ।"
-
-#~ msgid "Use libsafe for servers"
-#~ msgstr "ਸਰਵਰਾਂ ਲਈ libsafe ਵਰਤੋ"
-
-#~ msgid ""
-#~ "A library which defends against buffer overflow and format string attacks."
-#~ msgstr "ਇੱਕ ਲਾਇਬ੍ਰੇਰੀ ਜੋ ਬਫਰ ਭਰਨ ਅਤੇ ਫਾਰਮਿਟ ਸਤਰ ਹਮਲੇ ਤੋਂ ਰੱਖਿਆ ਕਰਦੀ ਹੈ।"
-
-#~ msgid "LILO/grub Installation"
-#~ msgstr "LILO/grub ਇੰਸਟਾਲੇਸ਼ਨ"
-
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "ਜੇ ਲੋੜ ਹੈ RAM ਅਕਾਰ ਠੀਕ ਕਰੋ (%d ਮੈਬਾ ਲੱਭਿਆ ਹੈ)"
-
-#~ msgid "Give the ram size in MB"
-#~ msgstr "ਮੈਬਾ ਵਿੱਚ ਰੈਮ ਅਕਾਰ ਦਿਓ"
-
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "ਜੇ ਤੁਸੀਂ aboot ਵਰਤਣ ਬਾਰੇ ਸੋਚਿਆ ਹੈ, ਡਿਸਕ ਦੇ ਸ਼ੁਰੂ ਵਿੱਚ ਖਾਲੀ ਥਾਂ (2048 ਸੈਕਟਰ ਕਾਫੀ ਹਨ)\n"
-#~ " ਛੱਡਣ ਦਾ ਧਿਆਨ ਰੱਖੋ।"
-
-#~ msgid "Security level"
-#~ msgstr "ਸੁਰੱਖਿਆ ਪੱਧਰ"
-
-#~ msgid "Expand Tree"
-#~ msgstr "ਲੜੀ ਫੈਲਾਓ"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "ਲੜੀ ਸਮੇਟੋ"
+#~ "ਭਾਗ ਮੁੜ-ਅਕਾਰ ਤੋਂ ਬਾਅਦ ਡਾਟਾ ਇੱਕਸਾਰਤਾ ਜਾਂਚ ਲਈ, \n"
+#~ "Windows(TM) ਵਿੱਚ ਤੁਹਾਡੀ ਅਗਲੀ ਬੂਟ ਦੌਰਾਨ ਫਾਇਲ ਸਿਸਟਮ ਜਾਂਚ ਚੱਲੇਗੀ"
 
 #~ msgid "Toggle between flat and group sorted"
 #~ msgstr "ਕ੍ਰਮਬੱਧ ਫਲੈਟ ਅਤੇ ਸਮੂਹ ਵਿੱਚ ਤਬਦੀਲੀ"
 
-#~ msgid "Choose action"
-#~ msgstr "ਕਾਰਵਾਈ ਚੁਣੋ"
-
-#~ msgid "Active Directory with SFU"
-#~ msgstr "SFU ਨਾਲ ਸਰਗਰਮ ਡਾਇਰੈਕਟਰੀ"
-
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Winbind ਨਾਲ ਸਰਗਰਮ ਡਾਇਰੈਕਟਰੀ"
-
-#~ msgid "Active Directory with SFU:"
-#~ msgstr "SFU ਨਾਲ ਸਰਗਰਮ ਡਾਇਰੈਕਟਰੀ:"
-
-#~ msgid "Active Directory with Winbind:"
-#~ msgstr "Winbind ਨਾਲ ਸਰਗਰਮ ਡਾਇਰੈਕਟਰੀ:"
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "LDAP ਪ੍ਰਮਾਣਿਕਤਾ"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "ਸੁਰੱਖਿਆ ਖਾਕਾ (SASL/Kerberos)"
-
-#~ msgid "Authentication Active Directory"
-#~ msgstr "ਪ੍ਰਮਾਣਿਕਤਾ ਸਰਗਰਮ ਡਾਇਰੈਕਟਰੀ"
-
-#~ msgid "LDAP users database"
-#~ msgstr "LDAP ਉਪਭੋਗੀ ਡਾਟਾਬੇਸ"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "LDAP ਉਪਭੋਗੀ ਨੂੰ ਸਰਗਰਮ ਡਾਇਰੈਕਟਰੀ ਵੇਖਣ ਦੀ ਇਜਾਜ਼ਤ ਹੈ"
-
-#~ msgid "Authentication NIS"
-#~ msgstr "ਪ੍ਰਮਾਣਕਿਤਾ NIS"
-
-#~ msgid ""
-#~ "For this to work for a W2K PDC, you will probably need to have the admin "
-#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
-#~ "add and reboot the server.\n"
-#~ "You will also need the username/password of a Domain Admin to join the "
-#~ "machine to the Windows(TM) domain.\n"
-#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
-#~ "after the network setup step.\n"
-#~ "Should this setup fail for some reason and domain authentication is not "
-#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your "
-#~ "Windows(tm) Domain, and Admin Username/Password, after system boot.\n"
-#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
-#~ "good."
-#~ msgstr ""
-#~ "ਇਸ ਨੂੰ W2K PDC ਲਈ ਕੰਮ ਕਰਨ ਲਈ, ਤੁਹਾਨੂੰ ਸੰਭਾਵੀ ਹੀ admin ਚਲਾਉਣ ਦੀ ਲੋੜ ਪਵੇਗੀ: C:\\>ਨੈੱਟ "
-#~ "ਲੋਕਲ-ਗਰੁੱਪ \"Pre-Windows 2000 ਅਨੁਕੂਲ ਪਹੁੰਚ\" ਹਰੇਕ ਸਰਵਰ ਨੂੰ /ਸ਼ਾਮਿਲ ਅਤੇ ਮੁੜ ਚਲਾਉਂਦਾ ਹੈ।\n"
-#~ "ਤੁਹਾਨੂੰ Windows(TM) ਡੋਮੇਨ ਨਾਲ ਮਸ਼ੀਨ ਜੋੜਨ ਲਈ ਡੋਮੇਨ Admin ਦੇ ਉਪਭੋਗੀ-ਨਾਂ/ਗੁਪਤ-ਕੋਡ ਦੀ ਲੋੜ "
-#~ "ਪਵੇਗੀ।\n"
-#~ "ਜੇ ਹਾਲੇ ਨੈੱਟਵਰਕਿੰਗ ਯੋਗ ਨਹੀਂ, Drakx ਨੈੱਟਵਰਕ ਨਿਰਧਾਰਨ ਪਗ਼ ਤੋਂ ਬਾਅਦ ਜੋੜਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੇਗਾ।\n"
-#~ "ਕੀ ਇਹ ਪਗ਼ ਕੁਝ ਕਾਰਨਾ ਕਰਕੇ ਅਸਫਲ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ ਅਤੇ ਡੋਮੇਨ ਪ੍ਰਮਾਣਿਕਤਾ ਕੰਮ ਨਹੀਂ ਕਰਦੀ, "
-#~ "ਸਿਸਟਮ ਬੂਟ ਹੋਣ ਮਗਰੋਂ ਆਪਣੇ Windows(tm) ਡੋਮੇਨ, ਅਤੇ Admin ਉਪਭੋਗੀ-ਨਾਂ/ਗੁਪਤ-ਕੋਡ ਵਰਤ ਕੇ "
-#~ "'smbpasswd -j DOMAIN -U USER%%PASSWORD' ਚਲਾਓ।\n"
-#~ "ਕਮਾਂਡ 'wbinfo -t' ਜਾਂਚ ਕਰੇਗੀ ਕਿ ਕੀ ਤੁਹਾਡੀ ਪ੍ਰਮਾਣਿਕਤਾ ਸਹੀ ਹੈ ਜਾਂ ਨਹੀਂ।"
-
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "ਪ੍ਰਮਾਣਿਕਤਾ Windows ਡੋਮੇਨ"
+#~ msgid "Trying to rescue partition table"
+#~ msgstr "ਸੰਕਟ-ਕਾਲੀਨ ਭਾਗ ਸਾਰਣੀ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰ ਰਿਹਾ ਹੈ"
 
 #~ msgid "Undo"
 #~ msgstr "ਵਾਪਿਸ"
 
-#~ msgid "Save partition table"
-#~ msgstr "ਭਾਗ ਸਾਰਣੀ ਸੰਭਾਲੋ"
-
-#~ msgid "Restore partition table"
-#~ msgstr "ਭਾਗ ਸਾਰਣੀ ਮੁੜ-ਸੰਭਾਲੋ"
-
-#~ msgid ""
-#~ "The backup partition table has not the same size\n"
-#~ "Still continue?"
-#~ msgstr ""
-#~ "ਬੈਕਅੱਪ ਭਾਗ ਸਾਰਣੀ ਦਾ ਸਮਾਨ ਅਕਾਰ ਨਹੀਂ ਹੈ\n"
-#~ "ਹਾਲੇ ਜਾਰੀ ਕਰੋ?"
-
-#~ msgid "Info: "
-#~ msgstr "ਜਾਣਕਾਰੀ:"
-
 #~ msgid "Unknown driver"
 #~ msgstr "ਅਣਪਛਾਤਾ ਡਰਾਈਵਰ"
 
-#~ msgid "Error reading file %s"
-#~ msgstr "ਫਾਇਲ %s ਪੜਨ ਵਿੱਚ ਗਲਤੀ"
-
-#~ msgid "Restoring from file %s failed: %s"
-#~ msgstr "ਫਾਇਲ %s ਤੋਂ ਮੁੜ ਸੰਭਾਲ ਅਸਫਲ ਹੋਈ: %s"
-
-#~ msgid "Bad backup file"
-#~ msgstr "ਗਲਤ ਬੈਕਅੱਪ ਫਾਇਲ"
-
-#~ msgid "Error writing to file %s"
-#~ msgstr "ਫਾਇਲ %s ਲਿਖਣ ਵਿੱਚ ਗਲਤੀ"
-
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr "ਗਲਤੀ: ਤੁਹਾਡੇ ਸਾਊਂਡ ਕਾਰਡ ਲਈ \"%s\" ਡਰਾਈਵਰ ਵਿਖਾਇਆ ਨਹੀਂ ਹੈ"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "Journalised FS"
-#~ msgstr "ਜਰਨਲਾਈਜ਼ਡ FS"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr "X ਫੌਂਟ ਸਰਵਰ ਚਲਾਓ (Xorg ਨੂੰ ਚਲਾਉਣ ਲਈ ਜਰੂਰੀ ਹੈ)।"
-
-#~ msgid "Add user"
-#~ msgstr "ਉਪਭੋਗੀ ਸ਼ਾਮਿਲ"
-
-#~ msgid "Accept user"
-#~ msgstr "ਉਪਭੋਗੀ ਸਵੀਕਾਰ"
-
 #, fuzzy
-#~ msgid ""
-#~ "Do not update directory inode access times on this filesystem\n"
-#~ "(e.g, for faster access on the news spool to speed up news servers)."
-#~ msgstr ""
-#~ "ਇਸ ਫਾਇਲ ਸਿਸਟਮ ਤੇ inode ਪਹੁੰਚ ਸਮੇਂ ਦਾ ਨਵੀਨੀਕਰਨ ਨਾ ਕਰੋ\n"
-#~ "(ਜਿਵੇਂ, ਖਬਰ ਸਰਵਰ ਦੀ ਗਤੀ ਵਧਾਉਣ ਲਈ ਖਬਰ ਸਪੂਲ ਵਿੱਚ ਤੇਜ ਪਹੁੰਚ)।"
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr "ਤੁਸੀਂ ਮਾਊਂਟ %s ਸਥਿਤੀ ਲਈ ਇਨਕ੍ਰਿਪਡ ਫਾਇਲ ਸਿਸਟਮ ਨਹੀਂ ਵਰਤ ਸਕਦੇ"
 
-#~ msgid "Rescue partition table"
-#~ msgstr "ਭਾਗ ਸਾਰਣੀ ਸੰਕਟ-ਕਾਲੀਨ"
+#~ msgid "Use libsafe for servers"
+#~ msgstr "ਸਰਵਰਾਂ ਲਈ libsafe ਵਰਤੋ"
 
-#~ msgid "Removable media automounting"
-#~ msgstr "ਹਟਾਉਣ ਯੋਗ ਮਾਧਿਅਮ ਸਵੈ-ਮਾਊਂਟ ਹੋ ਰਿਹਾ ਹੈ"
+#~ msgid "Use the Microsoft Windows® partition for loopback"
+#~ msgstr "ਲੂਪਬੈਕ ਲਈ Microsoft Windows® ਭਾਗ ਵਰਤੋ"
 
-#~ msgid "Trying to rescue partition table"
-#~ msgstr "ਸੰਕਟ-ਕਾਲੀਨ ਭਾਗ ਸਾਰਣੀ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰ ਰਿਹਾ ਹੈ"
+#~ msgid "Welcome To Crackers"
+#~ msgstr "ਖੋਜੀਆਂ ਵੱਲੋਂ ਜੀ ਆਇਆਂ ਨੂੰ"
 
-#~ msgid "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr "ਬੱਗ IPv4 ਗਲਤੀ ਸੁਨੇਹੇ ਸਵੀਕਾਰ/ਇਨਕਾਰ।"
-
-#~ msgid "Accept/Refuse broadcasted icmp echo."
-#~ msgstr "ਬਰਾਡਕਾਸਟ icmp echo ਸਵੀਕਾਰ/ਇਨਕਾਰ।"
-
-#~ msgid "Accept/Refuse icmp echo."
-#~ msgstr "icmp echo ਸਵੀਕਾਰ/ਇਨਕਾਰ।"
-
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "ਰਿਮੋਟ ਪ੍ਰਬੰਧਕ (root) ਲਾਗਇਨ ਇਜਾਜ਼ਤ/ਮਨਾਹੀ।"
-
-#~ msgid "Enable/Disable IP spoofing protection."
-#~ msgstr "IP spoofing ਬਚਾਓ ਯੋਗ/ਅਯੋਗ।"
-
-#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
-#~ msgstr "libsafe ਯੋਗ/ਅਯੋਗ ਜੇ ਸਿਸਟਮ ਤੇ libsafe ਨਹੀਂ ਲੱਭਿਆ।"
-
-#~ msgid "Enable/Disable the logging of IPv4 strange packets."
-#~ msgstr "IPv4 ਅਜੀਬ ਪੈਕਟਾਂ ਦੀ ਲਾਗਿੰਗ ਯੋਗ/ਅਯੋਗ।"
-
-#~ msgid "Enable/Disable msec hourly security check."
-#~ msgstr "ਮਿ:ਸੈ: ਘੰਟੇ ਵਾਲੀ ਸੁਰੱਖਿਆ ਜਾਂਚ ਯੋਗ/ਅਯੋਗ।"
-
-#~ msgid "Number of capture buffers:"
-#~ msgstr "ਖੋਜੇ ਬਫਰਾਂ ਦੀ ਗਿਣਤੀ"
+#~ msgid "Which partition do you want to use for Linux4Win?"
+#~ msgstr "ਤੁਸੀਂ ਕਿਹੜਾ ਭਾਗ Linux4Win ਲਈ ਵਰਤਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
 #~ msgid "number of capture buffers for mmap'ed capture"
 #~ msgstr "mmap'ed ਖੋਜ ਲਈ ਖੋਜੇ ਬਫਰਾਂ ਦੀ ਗਿਣਤੀ"
 
-#~ msgid "PLL setting:"
-#~ msgstr "PLL ਵਿਵਸਥਾ:"
+#~ msgid "restrict"
+#~ msgstr "ਮਨਾਹੀ"
 
-#~ msgid "Radio support:"
-#~ msgstr "ਰੇਡੀਓ ਸਹਿਯੋਗ:"
-
-#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
-#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+#~ msgid "security layout (SASL/Kerberos)"
+#~ msgstr "ਸੁਰੱਖਿਆ ਖਾਕਾ (SASL/Kerberos)"

@@ -439,18 +439,14 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL mora počinjati sa ftp:// ili http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr ""
-"Kontaktiram Mandriva Linux web stranicu da bih saznao listu dostupnih "
-"mirrora..."
+msgstr "Kontaktiram %s web stranicu da bih saznao listu dostupnih mirrora..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
-msgstr ""
-"Nisam uspio kontaktirati Mandriva Linux web stranicu radi liste dostupnih "
-"mirrora"
+msgstr "Nisam uspio kontaktirati %s web stranicu radi liste dostupnih mirrora"
 
 #: any.pm:204
 #, c-format
@@ -745,7 +741,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Bez opisa"
 
 #: pkgs.pm:280
 #, c-format
@@ -760,9 +756,9 @@ msgid "An error occurred:"
 msgstr "Došlo je do greške"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Došlo je do greške"
+msgstr "Došlo je do fatalne greške: %s"
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -807,9 +803,9 @@ msgid "Entering step `%s'\n"
 msgstr "Prelazim na korak '%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Instalacija"
+msgstr "%s instalacija %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -822,15 +818,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Vašem sistemu ponestaje resursa. Možda imate neki problem sa instalacijom\n"
-"Mandriva Linuxa. Ako se ovo desi, možete pokušati tekstualnu instalaciju. Za "
-"ovo,\n"
+"%sa. Ako se ovo desi, možete pokušati tekstualnu instalaciju. Za ovo,\n"
 "pritisnite 'F1' prilikom pokretanja instalacije, zatim unesite riječ 'text'."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
@@ -891,7 +886,7 @@ msgstr "Izbor pojedinačnih paketa"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Ništa izabrano"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1239,9 +1234,9 @@ msgid "Bad file"
 msgstr "Neispravna datoteka"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1646,26 +1641,192 @@ msgid ""
 "Exit"
 msgstr "Izlaz"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux instalacija %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Grafičko okruženje"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Grafička okolina sa skupom korisnički orjentisanih programa i alata za "
+#~ "radnu površinu"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Grafička okolina sa skupom korisnički orjentisanih programa i alata za "
+#~ "radnu površinu"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Zabavni programi: arkadne igre, stolne igre, strategije itd."
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Radna stanica"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME radna stanica"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake čarobnjaci"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Licenca"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Uredski programi: obrada teksta (LibreOffice Write, KWord), tablični "
+#~ "proračun (LibreOffice Calc, KSpread), PDF preglednici itd."
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Uredska radna stanica"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Server PostgreSQL ili MariaDB baze podataka"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL ili MariaDB baza podataka"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Pripremam bootloader..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "IceWm okruženje"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm itd."
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE radna stanica"
+
+#~ msgid "%d packages"
+#~ msgstr "%d paketa"
+
+#, fuzzy
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "(%d paketa, %d MB)"
+#~ msgstr[1] "(%d paketa, %d MB)"
+#~ msgstr[2] "(%d paketa, %d MB)"
+
+#~ msgid "2007 product line"
+#~ msgstr "2007 linija proizvoda"
+
+#~ msgid "3D"
+#~ msgstr "3D"
+
+#~ msgid "All"
+#~ msgstr "Sve"
+
+#~ msgid "Arkeia"
+#~ msgstr "Arkeia"
+
+#~ msgid "Automated"
+#~ msgstr "Automatizovano"
 
 #~ msgid "Bad package"
 #~ msgstr "Neispravan paket"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Mreža"
+#~ msgid "Boot"
+#~ msgstr "Boot"
+
+#~ msgid "CMS"
+#~ msgstr "CMS"
+
+#~ msgid "CRM"
+#~ msgstr "CRM"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Ažuriranje"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Ne mogu pristupiti kernelskim modulima koji odgovaraju vašem kernelu "
+#~ "(nedostaje datoteka %s), što obično znači da je vaša boot disketa "
+#~ "zastarjela u odnosu na instalacioni medij (napravite noviju boot disketu)"
+
+#~ msgid "Choosing packages"
+#~ msgstr "Izbor paketa"
+
+#~ msgid "Configure X"
+#~ msgstr "Podešavanje X"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Kontaktiram mirror da bih saznao listu dostupnih paketa..."
+
+#~ msgid "Discovery Live Mode"
+#~ msgstr "Discovery Live režim"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Da li želite koristiti aboot?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "Preuzimam datoteku %s..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Greška u instaliranju aboota, \n"
+#~ "da li da pokušam nasilnu instalaciju čak i ako to uništi prvu particiju?"
+
+#~ msgid "Flatout"
+#~ msgstr "Flatout"
+
+#~ msgid "Formatting"
+#~ msgstr "Formatiram"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Napravi autoinstalacijsku disketu"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#~ msgid "How to register"
+#~ msgstr "Kako se registrovati"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm okruženje"
+
+#~ msgid "Installation class"
+#~ msgstr "Klasa instalacije"
+
+#~ msgid "Invictus Firewall"
+#~ msgstr "Invictus Firewall"
+
+#~ msgid "Kaspersky"
+#~ msgstr "Kaspersky"
+
+#~ msgid "Language"
+#~ msgstr "Jezik"
+
+#~ msgid "License"
+#~ msgstr "Licenca"
+
+#~ msgid "LinDVD"
+#~ msgstr "LinDVD"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux instalacija %s"
+
+#~ msgid "Mandriva Online Services"
+#~ msgstr "Mandriva Online usluge"
+
+#~ msgid "Networking"
+#~ msgstr "Mreža"
+
+#~ msgid "New Theme"
+#~ msgstr "Nova tema"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1674,8 +1835,55 @@ msgstr "Izlaz"
 #~ "Uredski programi: obrada teksta (kword, abiword), tablični alati "
 #~ "(kspread, gnumeric), pdf preglednici itd."
 
-#~ msgid "Downloading file %s..."
-#~ msgstr "Preuzimam datoteku %s..."
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Pripremam bootloader..."
+
+#~ msgid "Replay"
+#~ msgstr "Ponovi"
+
+#~ msgid "Rpmdrake 2"
+#~ msgstr "Rpmdrake 2"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Spasi izbor paketa"
+
+#~ msgid "Select All"
+#~ msgstr "Sve izabrano"
+
+#~ msgid "Skype"
+#~ msgstr "Skype"
+
+#~ msgid "TV card"
+#~ msgstr "TV kartica"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Ova auto instalacija može biti potpuno automatizovana ako želite,\n"
+#~ "u kojem slučaju će hard disk biti prebrisan\n"
+#~ "(ovo je namjenjeno za instaliranje na drugi računar).\n"
+#~ "\n"
+#~ "Možda ćete radije željeti ponoviti instalaciju.\n"
+
+#~ msgid "Transgaming/Cedega"
+#~ msgstr "Transgaming/Cedega"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Ne mogu pristupiti mirroru %s"
+
+#~ msgid "Users"
+#~ msgstr "Korisnici"
+
+#~ msgid "Web 2.0"
+#~ msgstr "Web 2.0"
+
+#~ msgid "Welcome"
+#~ msgstr "Dobro došli"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1702,160 +1910,22 @@ msgstr "Izlaz"
 #~ "\n"
 #~ "Da li zaista želite instalirati ove servere?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm okruženje"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Kontaktiram mirror da bih saznao listu dostupnih paketa..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Ne mogu pristupiti mirroru %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Napravi autoinstalacijsku disketu"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Ova auto instalacija može biti potpuno automatizovana ako želite,\n"
-#~ "u kojem slučaju će hard disk biti prebrisan\n"
-#~ "(ovo je namjenjeno za instaliranje na drugi računar).\n"
-#~ "\n"
-#~ "Možda ćete radije željeti ponoviti instalaciju.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Ponovi"
-
-#~ msgid "Automated"
-#~ msgstr "Automatizovano"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Spasi izbor paketa"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Da li želite koristiti aboot?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Greška u instaliranju aboota, \n"
-#~ "da li da pokušam nasilnu instalaciju čak i ako to uništi prvu particiju?"
-
-#~ msgid "All"
-#~ msgstr "Sve"
-
-#~ msgid "TV card"
-#~ msgstr "TV kartica"
-
-#~ msgid "Boot"
-#~ msgstr "Boot"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Metod autentikacije"
 
-#~ msgid "Arkeia"
-#~ msgstr "Arkeia"
-
-#~ msgid "Flatout"
-#~ msgstr "Flatout"
-
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#~ msgid "3D"
-#~ msgstr "3D"
-
-#~ msgid "CMS"
-#~ msgstr "CMS"
-
-#~ msgid "CRM"
-#~ msgstr "CRM"
-
-#~ msgid "2007 product line"
-#~ msgstr "2007 linija proizvoda"
-
-#~ msgid "Invictus Firewall"
-#~ msgstr "Invictus Firewall"
-
-#~ msgid "Discovery Live Mode"
-#~ msgstr "Discovery Live režim"
-
-#~ msgid "How to register"
-#~ msgstr "Kako se registrovati"
-
-#~ msgid "Rpmdrake 2"
-#~ msgstr "Rpmdrake 2"
-
-#~ msgid "Mandriva Online Services"
-#~ msgstr "Mandriva Online usluge"
-
-#~ msgid "New Theme"
-#~ msgstr "Nova tema"
-
-#~ msgid "Web 2.0"
-#~ msgstr "Web 2.0"
-
-#~ msgid "Kaspersky"
-#~ msgstr "Kaspersky"
-
-#~ msgid "LinDVD"
-#~ msgstr "LinDVD"
-
-#~ msgid "Skype"
-#~ msgstr "Skype"
-
-#~ msgid "Transgaming/Cedega"
-#~ msgstr "Transgaming/Cedega"
-
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#, fuzzy
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "(%d paketa, %d MB)"
-#~ msgstr[1] "(%d paketa, %d MB)"
-#~ msgstr[2] "(%d paketa, %d MB)"
-
-#~ msgid "%d packages"
-#~ msgstr "%d paketa"
-
-#~ msgid "Language"
-#~ msgstr "Jezik"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Licenca"
 
-#~ msgid "Installation class"
-#~ msgstr "Klasa instalacije"
-
-#~ msgid "Formatting"
-#~ msgstr "Formatiram"
-
-#~ msgid "Choosing packages"
-#~ msgstr "Izbor paketa"
-
-#~ msgid "Users"
-#~ msgstr "Korisnici"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Mreža"
 
-#~ msgid "Configure X"
-#~ msgstr "Podešavanje X"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Ne mogu pristupiti kernelskim modulima koji odgovaraju vašem kernelu "
-#~ "(nedostaje datoteka %s), što obično znači da je vaša boot disketa "
-#~ "zastarjela u odnosu na instalacioni medij (napravite noviju boot disketu)"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Ažuriranje"

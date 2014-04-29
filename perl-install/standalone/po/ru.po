@@ -275,9 +275,9 @@ msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "В программе \"%s\" произошла ошибка сегментации со следующей ошибкой:"
 
 #: drakbug:144
-#, fuzzy, c-format
+#, c-format
 msgid "Used theme: %s"
-msgstr "Пользователь: %s"
+msgstr "Используемая тема: %s"
 
 #: drakbug:146
 #, c-format
@@ -717,7 +717,7 @@ msgstr "Ghostscript"
 #: drakfont:556
 #, c-format
 msgid "LibreOffice"
-msgstr ""
+msgstr "LibreOffice"
 
 #: drakfont:557
 #, c-format
@@ -1601,7 +1601,7 @@ msgid "Keyboard"
 msgstr "Клавиатура"
 
 #: finish-install:58
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Выберите раскладку клавиатуры."
 
@@ -2747,14 +2747,14 @@ msgid "and enter the name (or the IP) of the SMTP server you wish to use"
 msgstr "и введите имя (или IP) SMTP сервера, который желаете использовать"
 
 #: logdrake:440
-#, fuzzy, c-format
+#, c-format
 msgid "Email address"
-msgstr "IP-адрес"
+msgstr "Email-адрес"
 
 #: logdrake:441
-#, fuzzy, c-format
+#, c-format
 msgid "Email server"
-msgstr "Сервер Samba"
+msgstr "Сервер Email"
 
 #: logdrake:445
 #, c-format
@@ -2796,7 +2796,7 @@ msgstr "Настройка драйвера дисплея"
 #: notify-x11-free-driver-switch:20
 #, c-format
 msgid "The display driver has been automatically switched to '%s'."
-msgstr ""
+msgstr "Драйвер дисплея был автоматически переключен на '%s'."
 
 #: notify-x11-free-driver-switch:21
 #, c-format
@@ -3095,13 +3095,13 @@ msgstr ""
 "\" чтобы прочесть."
 
 #: scannerdrake:407 scannerdrake:416
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"После этого вы сможете сканировать документы с помощью \"XSane\" или \"Kooka"
-"\" из меню приложений Мультимедиа/Графика."
+"После этого вы сможете сканировать документы с помощью \"XSane\" или \"%s\" "
+"из меню приложений Мультимедиа/Графика."
 
 #: scannerdrake:411
 #, c-format
@@ -3132,14 +3132,14 @@ msgid "Congratulations!"
 msgstr "Поздравляем!"
 
 #: scannerdrake:419
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
 "Ваш %s был настроен.\n"
-"Теперь вы можете сканировать документы при помощи \"XSane\"или \"Kooka\" из "
+"Теперь вы можете сканировать документы при помощи \"XSane\"или \"%s\" из "
 "меню приложений Мультимедиа/Графика."
 
 #: scannerdrake:444
@@ -3345,7 +3345,7 @@ msgstr ""
 "ваших сканеров."
 
 #: service_harddrake:173
-#, fuzzy, c-format
+#, c-format
 msgid "The graphics card '%s' is no longer supported by driver '%s'"
 msgstr "Видеокарта '%s' больше не поддерживается драйвером '%s'"
 
@@ -3355,7 +3355,7 @@ msgid "New release, reconfiguring X for %s"
 msgstr "Новый релиз, настраиваем X-сы для %s"
 
 #: service_harddrake:274
-#, fuzzy, c-format
+#, c-format
 msgid "The proprietary kernel driver was not found for X.org driver '%s'"
 msgstr "Проприетарный драйвер ядра не найден для для драйвера X.org '%s'"
 
@@ -3419,6 +3419,9 @@ msgid ""
 "driver the X server is configured to use. Startup of the X server may now "
 "fail."
 msgstr ""
+"Выявлено, что загружен модуль ядра драйвера дисплея, который конфликтует с "
+"драйвером, на использование которого настроен графический сервер. Вероятно, "
+"запустить графический сервер теперь не удастся."
 
 #: service_harddrake:474 service_harddrake:487
 #, c-format
@@ -3458,8 +3461,301 @@ msgstr "Региональные настройки"
 msgid "Language & country configuration"
 msgstr "Настройка языковых и региональных параметров"
 
+#~ msgid "  --help                - display this help     \n"
+#~ msgstr " --help                - вывести эту справку     \n"
+
+#~ msgid ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Usage: \n"
+#~ msgstr ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "Это свободное программное обеспечение, и оно может распространяться в "
+#~ "соответствии с условиями лицензии GNU GPL.\n"
+#~ "\n"
+#~ "Использование: \n"
+
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Утилита создания отчёта об ошибке %s"
+
+#~ msgid "%s Control Center"
+#~ msgstr "Центр управления %s"
+
+#~ msgid "%s Help Center"
+#~ msgstr "Центр справки %s"
+
+#~ msgid "%s Online"
+#~ msgstr "%s Online"
+
+#~ msgid "%s Tools Logs"
+#~ msgstr "Журналы утилит %s"
+
+#~ msgid "%s Update"
+#~ msgstr "%s Update"
+
+#~ msgid "<control>H"
+#~ msgstr "<control>H"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Application Security "
+#~ "Configuration"
+#~ msgstr "Необходима аутентификация для запуска настройки защиты программ"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Authentication Configuration"
+#~ msgstr "Необходима аутентификация для запуска настройки аутентификации"
+
+#~ msgid "Authentication is required to run Moondrake Boot Configuration"
+#~ msgstr "Необходима аутентификация для запуска настройки загрузки"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Date and Time Configuration"
+#~ msgstr "Необходима аутентификация для запуска настройки даты и времени"
+
+#~ msgid "Authentication is required to run Moondrake Disk Layout Editor"
+#~ msgstr "Необходима аутентификация для запуска редактора компоновки диска"
+
+#~ msgid "Authentication is required to run Moondrake Font Configuration"
+#~ msgstr "Необходима аутентификация для запуска настройки шрифтов"
+
+#~ msgid "Authentication is required to run Moondrake Hardware Configuration"
+#~ msgstr "Необходима аутентификация для запуска настройки оборудования"
+
+#~ msgid "Authentication is required to run Moondrake Log Viewer"
+#~ msgstr "Необходима аутентификация для запуска просмотра журналов"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Login Manager Configuration"
+#~ msgstr "Необходима аутентификация для запуска настройки управления входом"
+
+#~ msgid "Authentication is required to run Moondrake Scanner Configuration"
+#~ msgstr "Необходима аутентификация для запуска настройки сканеров"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Security Permissions "
+#~ "Configuration"
+#~ msgstr "Необходима аутентификация для запуска настройки прав доступа"
+
+#~ msgid "Authentication is required to run Moondrake Service Configuration"
+#~ msgstr "Необходима аутентификация для запуска настройки сервисов"
+
+#~ msgid "Authentication is required to run Moondrake UPS Configuration"
+#~ msgstr "Необходима аутентификация для запуска настройки ИБП"
+
+#~ msgid "Autodetect _modems"
+#~ msgstr "Автоопределение _модемов"
+
+#~ msgid "Autodetect parallel _zip drives"
+#~ msgstr "Автоопределение параллельных приводов j_az"
+
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Настройка аутентификации для доступа к служебным программам %s"
+
+#~ msgid "Copyright (C) %s by %s"
+#~ msgstr "Copyright (C) %s %s"
+
+#~ msgid ""
+#~ "Here you can see files to use in order to fix permissions, owners, and "
+#~ "groups via msec.\n"
+#~ "You can also edit your own rules which will overwrite the default rules."
+#~ msgstr ""
+#~ "Здесь вы можете просмотреть использующиеся файлы с целью исправления "
+#~ "прав, владельцев и групп при помощи msec.\n"
+#~ "Вы также можете редактировать свои собственные правила, которые "
+#~ "перезапишут правила по умолчанию."
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in"
+#~ msgstr ""
+#~ "На машине не обнаружена звуковая карта. Проверьте, хорошо ли вставлена "
+#~ "Linux-совместимая звуковая карта"
+
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in."
+#~ msgstr ""
+#~ "На машине не обнаружена ТВ-карта. Проверьте, хорошо ли вставлена Linux-"
+#~ "совместимая видео/ТВ-карта."
+
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Запуск настройки защиты программ"
+
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Запуск настройки аутентификации"
+
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "Запуск настройки загрузки"
+
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Запуск настройки даты и времени"
+
+#~ msgid "Run Moondrake Disk Layout Editor"
+#~ msgstr "Запуск редактора компоновки диска"
+
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Запуск настройки шрифтов"
+
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Запуск настройки оборудования"
+
+#~ msgid "Run Moondrake Log Viewer"
+#~ msgstr "Запуск просмотра журналов"
+
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Запуск настройки управления входом"
+
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Запуск настройки сканеров"
+
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Запуск настройки прав доступа"
+
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Запуск настройки сервисов"
+
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "Запуск настройки ИБП"
+
+#~ msgid "Select %s Tool:"
+#~ msgstr "Выберите утилиту %s:"
+
+#~ msgid "_About..."
+#~ msgstr "_О программе..."
+
+#~ msgid "_Fields description"
+#~ msgstr "_Поля с описанием"
+
+#~ msgid "_File"
+#~ msgstr "_Файл"
+
+#~ msgid "_Help"
+#~ msgstr "_Справка"
+
+#~ msgid "_Options"
+#~ msgstr "_Параметры"
+
+#~ msgid "_Quit"
+#~ msgstr "_Выход"
+
+#~ msgid "_Report Bug"
+#~ msgstr "Сообщить об о_шибке"
+
 #~ msgid "/Autodetect _printers"
 #~ msgstr "/Автоопределение _принтеров"
+
+#~ msgid "Autodetect _jaz drives"
+#~ msgstr "Автоопределение приводов _jaz"
+
+#~ msgid "Autodetect _printers"
+#~ msgstr "Автоопределение _принтеров"
+
+#~ msgid "Background color"
+#~ msgstr "Цвет фона"
+
+#~ msgid "Bugs"
+#~ msgstr "Ошибки"
+
+#~ msgid "Choose picture"
+#~ msgstr "Выбрать изображение"
+
+#~ msgid "Choose progress bar background"
+#~ msgstr "Выбрать фон индикатора выполнения"
+
+#~ msgid "Choose progress bar color 1"
+#~ msgstr "Выбрать цвет 1 индикатора выполнения"
+
+#~ msgid "Choose progress bar color 2"
+#~ msgstr "Выбрать цвет 2 индикатора выполнения"
+
+#~ msgid "Choose text color"
+#~ msgstr "Выбрать цвет текста"
+
+#~ msgid "Choose text zone color"
+#~ msgstr "Выбрать цвет текстовой области"
+
+#~ msgid "Color selection"
+#~ msgstr "Выбор цвета"
+
+#~ msgid "Coma bug"
+#~ msgstr "Coma ошибка"
+
+#, fuzzy
+#~ msgid "Copyright (C) %s by Moondrake"
+#~ msgstr "Copyright (C) %s Mandriva"
+
+#~ msgid "Create new theme"
+#~ msgstr "Создать новую тему"
+
+#~ msgid "Display logo on Console"
+#~ msgstr "Показывать логотип в консоли"
+
+#~ msgid ""
+#~ "Display theme\n"
+#~ "under console"
+#~ msgstr ""
+#~ "Показывать темы\n"
+#~ "в консоли"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "Выпущенные ранее чипы Intel Pentium имеют ошибку в узле вычислений с "
+#~ "плавающей точкой, который не достиг требуемой точности при выполнении "
+#~ "деления с плавающей точкой (FDIV)"
+
+#~ msgid "F00f bug"
+#~ msgstr "Ошибка F00f"
+
+#~ msgid "FPU"
+#~ msgstr "FPU"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Ошибка Fdiv"
+
+#~ msgid "File/-"
+#~ msgstr "Файл/-"
+
+#~ msgid "File/Save _As"
+#~ msgstr "Файл/Сохранить _как"
+
+#~ msgid "File/_New"
+#~ msgstr "Файл/_Новый"
+
+#~ msgid "File/_Open"
+#~ msgstr "Файл/_Открыть"
+
+#~ msgid "File/_Quit"
+#~ msgstr "Файл/_Выход"
+
+#~ msgid "File/_Save"
+#~ msgstr "Файл/_Сохранить"
+
+#~ msgid "Final resolution"
+#~ msgstr "Конечное разрешение"
+
+#~ msgid "Gradient type"
+#~ msgstr "Тип градиента"
+
+#~ msgid "Halt bug"
+#~ msgstr "Ошибка Halt"
+
+#~ msgid "Help/_About..."
+#~ msgstr "Справка/_О программе..."
+
+#~ msgid "Is FPU present"
+#~ msgstr "Имеется ли FPU"
 
 #~ msgid "Its GDB trace is:"
 #~ msgstr "Трассировка GDB:"
@@ -3467,9 +3763,129 @@ msgstr "Настройка языковых и региональных пара
 #~ msgid "OpenOffice.org"
 #~ msgstr "OpenOffice.org"
 
+#~ msgid "Options/Test"
+#~ msgstr "Параметры/Проверка"
+
+#~ msgid "Please enter a theme name"
+#~ msgstr "Введите название темы"
+
+#~ msgid "Please select a splash image"
+#~ msgstr "Выберите изображение для заставки"
+
+#~ msgid "Progress Bar"
+#~ msgstr "Индикатор состояния"
+
+#~ msgid "Progress box transparency"
+#~ msgstr "прозрачность окна индикатора выполнения"
+
+#~ msgid "Save theme"
+#~ msgstr "Сохранить тему"
+
+#~ msgid "Silent bootsplash"
+#~ msgstr "Упрощённая загрузка"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Некоторые из ранних чипов i486DX-100 не могли точно возвращаться в "
+#~ "рабочий режим после использования инструкции \"halt\""
+
+#~ msgid "Text"
+#~ msgstr "Текст"
+
+#~ msgid "Text box height"
+#~ msgstr "высота текстового окна"
+
+#~ msgid "Text box transparency"
+#~ msgstr "прозрачность текстового окна"
+
+#~ msgid "Text box width"
+#~ msgstr "ширина текстового окна"
+
+#~ msgid "Text color"
+#~ msgstr "Цвет текста"
+
+#~ msgid "Text size"
+#~ msgstr "размер текста"
+
+#~ msgid "The height of the progress bar"
+#~ msgstr "высота индикатора выполнения"
+
+#~ msgid ""
+#~ "The progress bar X coordinate\n"
+#~ "of its upper left corner"
+#~ msgstr ""
+#~ "координата X индикатора выполнения\n"
+#~ "от верхнего левого угла"
+
+#~ msgid ""
+#~ "The progress bar Y coordinate\n"
+#~ "of its upper left corner"
+#~ msgstr ""
+#~ "координата Y индикатора выполнения\n"
+#~ "от верхнего левого угла"
+
 #~ msgid ""
 #~ "The proprietary driver for your graphic card can not be found, the system "
 #~ "is now using the free software driver (%s)."
 #~ msgstr ""
 #~ "Проприетарный драйвер для вашей графической карты не найден - система "
 #~ "будет использовать свободный драйвер  (%s)."
+
+#~ msgid ""
+#~ "The proprietary driver for your graphic card cannot be found, the system "
+#~ "is now using the free software driver (%s)."
+#~ msgstr ""
+#~ "Проприетарный драйвер для вашей графической карты не найден - система "
+#~ "будет использовать свободный драйвер  (%s)."
+
+#~ msgid "The width of the progress bar"
+#~ msgstr "ширина индикатора выполнения"
+
+#~ msgid "Theme name"
+#~ msgstr "Название темы"
+
+#~ msgid "Unable to load image file %s"
+#~ msgstr "Невозможно загрузить файл изображения %s"
+
+#~ msgid "Verbose bootsplash"
+#~ msgstr "Подробная загрузка"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Имеет ли FPU вектор прерываний"
+
+#~ msgid "X coordinate of text box"
+#~ msgstr "координата X текстового окна"
+
+#~ msgid "X coordinate of the text"
+#~ msgstr "координата X текста"
+
+#~ msgid "Y coordinate of text box"
+#~ msgstr "координата Y текстового окна"
+
+#~ msgid "Y coordinate of the text"
+#~ msgstr "координата Y текста"
+
+#~ msgid "choose image"
+#~ msgstr "Выбор изображения"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "раньше Pentium-ы имели ошибки и зависали при декодировании байт-кода F00F"
+
+#~ msgid "saving Bootsplash theme..."
+#~ msgstr "сохраняется тема заставки..."
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "имеет ли этот процессор ошибку запятой Cyrix 6x86"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr ""
+#~ "да означает, что арифметический сопроцессор имеет встроенный вектор "
+#~ "исключительных операций"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "да означает, что процессор имеет арифметический сопроцессор"

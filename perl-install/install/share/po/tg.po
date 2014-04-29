@@ -439,10 +439,10 @@ msgid "URL must start with ftp:// or http://"
 msgstr ""
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Барои ба даст даровардани рӯйхати қуттиҳои дастрас пайвастшавӣ ба Mandriva "
+"Барои ба даст даровардани рӯйхати қуттиҳои дастрас пайвастшавӣ ба %s "
 "Linuxweb site ба роҳ монда шудааст..."
 
 #: any.pm:194
@@ -744,7 +744,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Бе тавсифҳо"
 
 #: pkgs.pm:280
 #, c-format
@@ -759,9 +759,9 @@ msgid "An error occurred:"
 msgstr "Хатогӣ рух дод"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Хатогӣ рух дод"
+msgstr "Хатогии ҷиддӣ рӯй дод: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -807,9 +807,9 @@ msgid "Entering step `%s'\n"
 msgstr "Гузориш ба қадами `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Коргузорӣ шуда истодааст"
+msgstr "Коргузории %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -822,16 +822,16 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Дар системи шумо захира кам аст. Ҳангоми коргузорӣ намудани Mandriva Linux "
-"шумо метавонед бо муаммоҳо дучор гардед. Агар ин рӯй диҳад, онгоҳ шумо "
-"метавонед коргузории матниро ба амал оред. Ҳангоми худборкунии CDROM ба`F1' "
-"ангушт занед  ва сониян ба `text' дохил шавед."
+"Дар системи шумо захира кам аст. Ҳангоми коргузорӣ намудани %s шумо "
+"метавонед бо муаммоҳо дучор гардед. Агар ин рӯй диҳад, онгоҳ шумо метавонед "
+"коргузории матниро ба амал оред. Ҳангоми худборкунии CDROM ба`F1' ангушт "
+"занед  ва сониян ба `text' дохил шавед."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
 #, fuzzy, c-format
@@ -891,7 +891,7 @@ msgstr "Интихоби қуттиҳои алоҳида"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Ноинтихоби Ҳама"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1242,9 +1242,9 @@ msgid "Bad file"
 msgstr "Пурбокунии файлҳо"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1651,26 +1651,158 @@ msgid ""
 "Exit"
 msgstr "Хуруҷ"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Коргузории Mandriva Linux %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Муҳити Графикӣ"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Муҳити графикӣ бо маҷмӯи замимаҳо ва мизи кории бо корванд иртиботи "
+#~ "дӯстона дошта"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Муҳити графикӣ бо маҷмӯи замимаҳо ва мизи кории бо корванд иртиботи "
+#~ "дӯстона дошта"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Барномаҳои шавқовар: аркадаҳо, бозиҳои рӯи мизӣ, стратегия ва ғайра"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Истгоҳи корӣ"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Истгоҳи кории Gnome"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Устодҳои Moondrake"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Лисензия"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Барномаҳои идорӣ: пардозандаҳои матнӣ (LibreOffice Writer, Kword), "
+#~ "ҷадвалҳои густурда (LibreOffice Calc, Kspread), азназаргузарҳои PDF ва "
+#~ "ғайра"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Истгоҳи Кории Идораӣ"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL ва MariaDB Хидматрасони Манбаи Додаҳо"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Хидматрасони манбаи маълумоти PostgreSQL ё MariaDB"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Корандози худборшави аввала тайёр мешавад..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Мизи Кории Ғалатёб"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, ва ғайра"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "Истгоҳи кории KDE"
+
+#~ msgid "%d packages"
+#~ msgstr "%d қуттиҳо"
+
+#, fuzzy
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "%d қуттиҳо"
+#~ msgstr[1] "%d қуттиҳо"
+
+#~ msgid "All"
+#~ msgstr "Ҳама"
+
+#~ msgid "Automated"
+#~ msgstr "Автоматикунонида"
 
 #~ msgid "Bad package"
 #~ msgstr "Қуттии бад"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Шабака"
+#~ msgid "Boot"
+#~ msgstr "Boot"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Нав кардан"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Иҷозат барои дастёбӣ ба модули ҳаста, ки ба ҳастаи шумо мутобиқат мекунад "
+#~ "(файли %s партофта шудааст), гирифта нашуда истодааст, одатан ин маънои "
+#~ "онро дорад, ки диски нарми худборшавии шумо бо миёнаи Коргузорӣ ҳамзамон "
+#~ "карда нашудааст (марҳамат карда диски нарми худборшавии навтар офаред)"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Барои коргузорӣ қуттиҳоро интихоб намоед"
+
+#~ msgid "Configure X"
+#~ msgstr "Танзими X"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Пайвастшавӣ ба оина барои гирифтани рӯйхати қуттиҳои дастрас иҷро "
+#~ "мешавад..."
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Мехоҳед, ки aboot-ро истифода баред?"
+
+#, fuzzy
+#~ msgid "Downloading file %s..."
+#~ msgstr "Файлҳо фиристода шуда истодааст..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Хатогии коргузории aboot, \n"
+#~ "бо мақсади тезонидани коргузорӣ кӯшиш намудан, ҳатто агар ин қисми якумро "
+#~ "нобуд созад?"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Баҳодиҳии тахминӣ"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Дискети коргузории автоматиро офаридан"
+
+#~ msgid "Gwenview"
+#~ msgstr "НамоишиGwen"
+
+#, fuzzy
+#~ msgid "IceWm Desktop"
+#~ msgstr "Мизи Кории Ғалатёб"
+
+#~ msgid "Language"
+#~ msgstr "Забон"
+
+#~ msgid "License"
+#~ msgstr "Лисензия"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Коргузории Mandriva Linux %s"
+
+#~ msgid "Networking"
+#~ msgstr "Шабака"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1680,8 +1812,43 @@ msgstr "Хуруҷ"
 #~ "(kspread, gnumeric), pdf баррасҳо ва ғайра"
 
 #, fuzzy
-#~ msgid "Downloading file %s..."
-#~ msgstr "Файлҳо фиристода шуда истодааст..."
+#~ msgid "Preparing boot images..."
+#~ msgstr "Корандози худборшави аввала тайёр мешавад..."
+
+#~ msgid "Replay"
+#~ msgstr "Такрор намудан"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Интихоби қуттиҳоро нигоҳ доштан"
+
+#~ msgid "Select All"
+#~ msgstr "Интихоби Ҳама"
+
+#~ msgid "TV card"
+#~ msgstr "TV корт"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Мувофиқи хоҳиш коргузории автоматӣ мумкин ба таври\n"
+#~ "пурра автоматикона мешавад\n"
+#~ "дар ин ҳолат он диски сахтро нусхабардорӣ хоҳад намуд!!\n"
+#~ "(ба коргузорӣ намудан ба дигар компютер пешбинӣ шудааст).\n"
+#~ "\n"
+#~ "Мумкин, шумо коргузории такрориро афзалтар шуморед.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Имконияти пайвастшавӣ бо оинаи %s мавҷуд нест"
+
+#~ msgid "Users"
+#~ msgstr "Корвандҳо"
+
+#~ msgid "Welcome"
+#~ msgstr "Марҳамат Намоед"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1710,113 +1877,22 @@ msgstr "Хуруҷ"
 #~ "\n"
 #~ "Шумо дар ҳақиқат ин хидматрасонҳоро коргузорӣ карданӣ ҳастед?\n"
 
-#, fuzzy
-#~ msgid "IceWm Desktop"
-#~ msgstr "Мизи Кории Ғалатёб"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "Пайвастшавӣ ба оина барои гирифтани рӯйхати қуттиҳои дастрас иҷро "
-#~ "мешавад..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Имконияти пайвастшавӣ бо оинаи %s мавҷуд нест"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Дискети коргузории автоматиро офаридан"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Мувофиқи хоҳиш коргузории автоматӣ мумкин ба таври\n"
-#~ "пурра автоматикона мешавад\n"
-#~ "дар ин ҳолат он диски сахтро нусхабардорӣ хоҳад намуд!!\n"
-#~ "(ба коргузорӣ намудан ба дигар компютер пешбинӣ шудааст).\n"
-#~ "\n"
-#~ "Мумкин, шумо коргузории такрориро афзалтар шуморед.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Такрор намудан"
-
-#~ msgid "Automated"
-#~ msgstr "Автоматикунонида"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Интихоби қуттиҳоро нигоҳ доштан"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Мехоҳед, ки aboot-ро истифода баред?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Хатогии коргузории aboot, \n"
-#~ "бо мақсади тезонидани коргузорӣ кӯшиш намудан, ҳатто агар ин қисми якумро "
-#~ "нобуд созад?"
-
-#~ msgid "All"
-#~ msgstr "Ҳама"
-
-#~ msgid "TV card"
-#~ msgstr "TV корт"
-
-#~ msgid "Boot"
-#~ msgstr "Boot"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Аслшиносӣ"
 
-#~ msgid "Gwenview"
-#~ msgstr "НамоишиGwen"
-
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#, fuzzy
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "%d қуттиҳо"
-#~ msgstr[1] "%d қуттиҳо"
-
-#~ msgid "%d packages"
-#~ msgstr "%d қуттиҳо"
-
-#~ msgid "Language"
-#~ msgstr "Забон"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Лисензия"
 
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "Баҳодиҳии тахминӣ"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Барои коргузорӣ қуттиҳоро интихоб намоед"
-
-#~ msgid "Users"
-#~ msgstr "Корвандҳо"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Шабака"
 
-#~ msgid "Configure X"
-#~ msgstr "Танзими X"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Иҷозат барои дастёбӣ ба модули ҳаста, ки ба ҳастаи шумо мутобиқат мекунад "
-#~ "(файли %s партофта шудааст), гирифта нашуда истодааст, одатан ин маънои "
-#~ "онро дорад, ки диски нарми худборшавии шумо бо миёнаи Коргузорӣ ҳамзамон "
-#~ "карда нашудааст (марҳамат карда диски нарми худборшавии навтар офаред)"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Нав кардан"

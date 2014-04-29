@@ -1183,9 +1183,9 @@ msgid "System requirements warning"
 msgstr ""
 
 #: common.pm:142
-#, fuzzy, c-format
+#, c-format
 msgid "B"
-msgstr "ك.ب."
+msgstr "B"
 
 #: common.pm:142
 #, c-format
@@ -1494,9 +1494,9 @@ msgstr "المزيد"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
 #: diskdrake/interactive.pm:1304 mygtk2.pm:1228
-#, fuzzy, c-format
+#, c-format
 msgid "Confirmation"
-msgstr "التهيئة"
+msgstr "التأكيد"
 
 #: diskdrake/interactive.pm:281
 #, c-format
@@ -1589,7 +1589,7 @@ msgstr "معلومات مفصّلة"
 #: diskdrake/interactive.pm:407
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "عرض"
 
 #: diskdrake/interactive.pm:412 diskdrake/interactive.pm:828
 #, c-format
@@ -1888,7 +1888,7 @@ msgid "Choose an existing LVM to add to"
 msgstr "اختيار LVM، موجود للإضافة إليه"
 
 #: diskdrake/interactive.pm:1007 diskdrake/interactive.pm:1016
-#, fuzzy, c-format
+#, c-format
 msgid "LVM name"
 msgstr "اسم LVM؟"
 
@@ -3409,11 +3409,11 @@ msgstr "جاري اختيار مشغل عام"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:482
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -5240,19 +5240,19 @@ msgid "Installing driver for USB controller"
 msgstr "جاري تثبيت مشغل لمتحكّم USB"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller \"%s\""
-msgstr "جاري تثبيت مشغل لمتحكّم firewire %s"
+msgstr "جاري تثبيت مشغل لمتحكّم firewire \"%s\""
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard disk drive controller \"%s\""
-msgstr "جاري تثبيت مشغل لمتحكّم القرص الصّلب %s"
+msgstr "جاري تثبيت مشغل لمتحكّم القرص الصّلب \"%s\""
 
 #: modules/interactive.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller \"%s\""
-msgstr "جاري تثبيت مشغل لمتحكّم إيثرنت %s"
+msgstr "جاري تثبيت مشغل لمتحكّم إيثرنت \"%s\""
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -6703,7 +6703,7 @@ msgstr "الإنترنت"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "الشبكات"
 
 #: services.pm:161
 #, c-format
@@ -7113,157 +7113,33 @@ msgstr ""
 msgid "Installation failed"
 msgstr "فشل التّثبيت"
 
-#~ msgid "Clean /tmp at each boot"
-#~ msgstr "تنظيف /tmp عند كل إقلاع"
-
-#~ msgid ""
-#~ "The classic bug sound tester is to run the following commands:\n"
-#~ "\n"
-#~ "\n"
-#~ "- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
-#~ "uses\n"
-#~ "by default\n"
-#~ "\n"
-#~ "- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
-#~ "currently uses\n"
-#~ "\n"
-#~ "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
-#~ "loaded or not\n"
-#~ "\n"
-#~ "- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" "
-#~ "will\n"
-#~ "tell you if sound and alsa services are configured to be run on\n"
-#~ "initlevel 3\n"
-#~ "\n"
-#~ "- \"aumix -q\" will tell you if the sound volume is muted or not\n"
-#~ "\n"
-#~ "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound "
-#~ "card.\n"
-#~ msgstr ""
-#~ "الاختبار الكلاسيكي لعلّة الصوت هو تشغيل الأوامر التّالية:\n"
-#~ "\n"
-#~ "\n"
-#~ "- \"lspcidrake -v | fgrep -i AUDIO\" سيخبرك باسم مشغّل الذي تستخدمه بطاقتك "
-#~ "الصّوتيّة بشكل افتراضي\n"
-#~ "\n"
-#~ "- \"grep sound-slot /etc/modprobe.conf\" سيخبرك باسم مشغّل\n"
-#~ "المستخدم حاليّاً\n"
-#~ "\n"
-#~ "- \"/sbin/lsmod\" سيمكّنك من التحقّق من أن وحدته (مشغّل) هي\n"
-#~ "مُحمّلة أم لا\n"
-#~ "\n"
-#~ "- \"/sbin/chkconfig --list sound\" و \"/sbin/chkconfig --list alsa\" سوف\n"
-#~ "يخبرك إن كانت خدمات الصّوت وalsa مُهيّئة للعمل على\n"
-#~ "initlevel 3\n"
-#~ "\n"
-#~ "- \"aumix -q\" سيخبرك ما إذا كان الصّوت مكتوماً أم لا\n"
-#~ "\n"
-#~ "- \"/sbin/fuser -v /dev/dsp\" سيخبرك عن أيّ برنامج يستخدم بطاقة الصّوت.\n"
-
-#~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
-#~ msgstr ""
-#~ "شغّل تصفية الرّزم لنواة لينكس من السّلسلة 2.2 كي تُعدّ جداراً ناريّاً لحماية "
-#~ "ماكينتك من هجمات الشّبكة."
-
-#~ msgid "File sharing"
-#~ msgstr "مشاركة الملفات"
-
-#~ msgid "Restrict command line options"
-#~ msgstr "تشديد خيارات سطر الأوامر"
-
-#~ msgid "restrict"
-#~ msgstr "تشديد"
-
-#~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
-#~ msgstr "خيار ``تشديد خيارات سطر الأوامر`` لا ينفع دون كلمة مرور"
-
 #, fuzzy
-#~ msgid "Use an encrypted filesystem"
-#~ msgstr "لا يمكنك استخدام نظام ملفات مرمّز لمكان التركيب %s"
+#~ msgid "An NTP client/server"
+#~ msgstr "خادم NTP"
+
+#~ msgid "Moondrake"
+#~ msgstr "ماجيّا"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "رجاء نسخ بياناتك احتياطيّاً أولاً"
 
 #~ msgid ""
-#~ "To ensure data integrity after resizing the partition(s), \n"
-#~ "filesystem checks will be run on your next boot into Microsoft Windows®"
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
 #~ msgstr ""
-#~ "للتأكد من صحة البيانات بعد إعادة تحجيم التجزيئات، \n"
-#~ "سيتم الدقيق على نظام الملفات عند التشغيل القادم لويندوز(TM)"
-
-#~ msgid "Use the Microsoft Windows® partition for loopback"
-#~ msgstr "استخدم تجزيء ويندوز كـloopback"
-
-#~ msgid "Which partition do you want to use for Linux4Win?"
-#~ msgstr "أي تجزيء تريد استخدامه من أجل Linux4Win"
-
-#~ msgid "Choose the sizes"
-#~ msgstr "اختيار الأحجام"
-
-#~ msgid "Root partition size in MB: "
-#~ msgstr "حجم التجزيء الجذري بالميغابايت:"
-
-#~ msgid "Swap partition size in MB: "
-#~ msgstr "حجم تجزيء التبديل بالميغابايت:"
-
-#~ msgid ""
-#~ "There is no FAT partition to use as loopback (or not enough space left)"
-#~ msgstr ""
-#~ "لا يوجد تجزيء FAT لاستخدامه كـloopback )أو لا توجد مساحة كافية متبقية)"
-
-#~ msgid ""
-#~ "The FAT resizer is unable to handle your partition, \n"
-#~ "the following error occurred: %s"
-#~ msgstr ""
-#~ "لم تتمكن أداة تغيير حجم FAT من التعامل مع تجزيئك، \n"
-#~ "ظهر الخطأ التالي: %s"
-
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "يرجى تسجيل الخروج ثم استخدام Ctrl-Alt-BackSpace"
-
-#~ msgid "Welcome To Crackers"
-#~ msgstr "مرحبا بالمخترقين"
-
-#~ msgid "Poor"
-#~ msgstr "فقير"
-
-#~ msgid "High"
-#~ msgstr "مرتفع"
-
-#~ msgid "Higher"
-#~ msgstr "أكثر ارتفاعاً"
-
-#~ msgid "Paranoid"
-#~ msgstr "مذعور"
-
-#~ msgid ""
-#~ "This level is to be used with care. It makes your system more easy to "
-#~ "use,\n"
-#~ "but very sensitive. It must not be used for a machine connected to "
-#~ "others\n"
-#~ "or to the Internet. There is no password access."
-#~ msgstr ""
-#~ "يجب استخدام هذا المستوى الأمني بحذر. فهو يجعل نظامك أسهل في الإستخدام،\n"
-#~ "لكن يكون حساساً جداً. لذا لا يجب استخدامه لماكينة متصلة بماكينات أخرى\n"
-#~ "أو إلى الإنترنت. لا يوجد دخول بكلمة المرور."
-
-#~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
-#~ msgstr "كلمات المرور ممكّنة الآن، لكن الاستخدام كحاسب في شبكة يزال غير مفضّل."
-
-#~ msgid ""
-#~ "There are already some restrictions, and more automatic checks are run "
-#~ "every night."
-#~ msgstr ""
-#~ "توجد بعض القيود، كما يتم تشغيل برامج للتأكد من النظام أوتوماتيكياً كل ليلة."
-
-#~ msgid ""
-#~ "This is similar to the previous level, but the system is entirely closed "
-#~ "and security features are at their maximum."
-#~ msgstr ""
-#~ "هذا مماثل للمستوى السابق، و لكن النظام مغلق كلياً و المزايا الأمني على "
-#~ "حدها الأقصى."
+#~ "تحذير: البرامج الحرّة ليس من الضّروري أن تكون خالية من براءة الاختراع، وبعد "
+#~ "البرامج الحرّة\n"
+#~ "المشمولة قد تكون محميّة ببراءة اختراع مسجّلة في بلدك. مثلاً، MP3 decoders "
+#~ "المشمولة قد تتطلّب رخصة لاستخدامها )انظر\n"
+#~ "http://www.mp3licensing.com للمزيد من التّفاصيل(. إن لم تكن متأكّداً إن "
+#~ "كانت \n"
+#~ "براءة الاختراع\n"
+#~ "قد تنطبق عليك، تحقّق من القوانين المحليّة لبلدك."
 
 #~ msgid ""
 #~ "\n"
@@ -7326,80 +7202,107 @@ msgstr "فشل التّثبيت"
 #~ "المدمج التالي مملوكة لأصحابها و محمية بموجب قوانين الملكية \n"
 #~ "الفكرية المنطبقة على البرمجيات.\n"
 
-#~ msgid "Use libsafe for servers"
-#~ msgstr "استخدام libsafe للخادمات"
+#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 
 #~ msgid ""
 #~ "A library which defends against buffer overflow and format string attacks."
 #~ msgstr "مكتبة تحمي من هجمات buffer overflow و format string"
 
-#~ msgid "LILO/grub Installation"
-#~ msgstr "تثبيت LILO/grub"
+#~ msgid "Accept user"
+#~ msgstr "قبول المستخدم"
 
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "حجم الذاكرة الدقيق عند الحاجة (عثر على %d م.ب.)"
+#~ msgid "Accept/Refuse bogus IPv4 error messages."
+#~ msgstr "قبول/رفض رسائل أخطاء IPv4 الزّائفة."
 
-#~ msgid "Give the ram size in MB"
-#~ msgstr "اكتب حجم الذاكرة بالميغابايت"
+#~ msgid "Accept/Refuse broadcasted icmp echo."
+#~ msgstr "قبول/رفض صدى بثّ icmp"
 
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "إن كنت تريد استخدام aboot، فلا تنْسَ أن تترك مساحة فارغة (يكفي 2048 قِطاع)\n"
-#~ "في بداية القُرص"
-
-#~ msgid "Security level"
-#~ msgstr "مستوى الأمن"
-
-#~ msgid "Expand Tree"
-#~ msgstr "توسيع الشّجرة"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "ضمّ الفروع"
-
-#~ msgid "Toggle between flat and group sorted"
-#~ msgstr "تبديل بين فرز السّرد أو المجموعة"
-
-#~ msgid "Choose action"
-#~ msgstr "اختيار عمل"
+#~ msgid "Accept/Refuse icmp echo."
+#~ msgstr "قبول/رفض صدى icmp"
 
 #~ msgid "Active Directory with SFU"
 #~ msgstr "Active Directory مع SFU"
 
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Active Directory مع Winbind"
-
 #~ msgid "Active Directory with SFU:"
 #~ msgstr "Active Directory مع SFU:"
+
+#~ msgid "Active Directory with Winbind"
+#~ msgstr "Active Directory مع Winbind"
 
 #~ msgid "Active Directory with Winbind:"
 #~ msgstr "Active Directory مع Winbind:"
 
-#~ msgid "Authentication LDAP"
-#~ msgstr "تحقق LDAP"
+#~ msgid "Add user"
+#~ msgstr "إضافة مستخدم"
 
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "النّسق الأمني (SASL/Kerberos("
+#~ msgid "Allow/Forbid remote root login."
+#~ msgstr "سماح/منع دخول المستخدم الجذر من بعيد."
 
 #~ msgid "Authentication Active Directory"
 #~ msgstr "مواثقة Active Directory"
 
-#~ msgid "LDAP users database"
-#~ msgstr "قاعدة بيانات مستخدمي LDAP"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "مسموح لمستخدم LDAP بتصفّح Active Directory"
+#~ msgid "Authentication LDAP"
+#~ msgstr "تحقق LDAP"
 
 #~ msgid "Authentication NIS"
 #~ msgstr "مواثقة NIS"
+
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "نطاق مواثقة ويندوز"
+
+#~ msgid "Bad backup file"
+#~ msgstr "ملف نسخ احتياطي سيئ"
+
+#~ msgid "Choose action"
+#~ msgstr "اختيار عمل"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "اختيار الأحجام"
+
+#~ msgid "Clean /tmp at each boot"
+#~ msgstr "تنظيف /tmp عند كل إقلاع"
+
+#~ msgid "Collapse Tree"
+#~ msgstr "ضمّ الفروع"
+
+#, fuzzy
+#~ msgid ""
+#~ "Do not update directory inode access times on this filesystem\n"
+#~ "(e.g, for faster access on the news spool to speed up news servers)."
+#~ msgstr ""
+#~ "عدم تحديث أوقات الوصول إلى inode على نظام الملفّات هذا\n"
+#~ "(مثلا، من أجل وصول أسرع إلى مخزن الأخبار لتسرّع خادمات الأخبار)."
+
+#~ msgid "Enable/Disable IP spoofing protection."
+#~ msgstr "تمكين/تعطيل حماية IP spoofing"
+
+#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
+#~ msgstr "تمكين/تعطيل libsafe إن كان موجوداً على النّظام."
+
+#~ msgid "Enable/Disable msec hourly security check."
+#~ msgstr "تمكين/تعطيل اختبارات msec الأمنية كل ساعة"
+
+#~ msgid "Enable/Disable the logging of IPv4 strange packets."
+#~ msgstr "تمكين/تعطيل تسجيل رزم IPv4 الغريبة."
+
+#~ msgid "Error reading file %s"
+#~ msgstr "خطأ في قراءة الملف %s"
+
+#~ msgid "Error writing to file %s"
+#~ msgstr "خطأ أثناء الكتابة إلى الملف %s"
+
+#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
+#~ msgstr "خطأ: مشغل \"%s\" لبطاقة الصوت الخاصة بك غير موجود في القائمة"
+
+#~ msgid "Expand Tree"
+#~ msgstr "توسيع الشّجرة"
+
+#~ msgid "Ext2"
+#~ msgstr "Ext2"
+
+#~ msgid "File sharing"
+#~ msgstr "مشاركة الملفات"
 
 #~ msgid ""
 #~ "For this to work for a W2K PDC, you will probably need to have the admin "
@@ -7427,17 +7330,117 @@ msgstr "فشل التّثبيت"
 #~ "المدير، بعد إقلاع النّظام.\n"
 #~ "سيختبر الأمر 'wbinfo -t' ما إذا كانت أسرار مواثقتك جيّدة."
 
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "نطاق مواثقة ويندوز"
+#~ msgid "Give the ram size in MB"
+#~ msgstr "اكتب حجم الذاكرة بالميغابايت"
 
-#~ msgid "Undo"
-#~ msgstr "تراجع"
+#~ msgid "High"
+#~ msgstr "مرتفع"
+
+#~ msgid "Higher"
+#~ msgstr "أكثر ارتفاعاً"
+
+#~ msgid ""
+#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
+#~ "is enough)\n"
+#~ "at the beginning of the disk"
+#~ msgstr ""
+#~ "إن كنت تريد استخدام aboot، فلا تنْسَ أن تترك مساحة فارغة (يكفي 2048 قِطاع)\n"
+#~ "في بداية القُرص"
+
+#~ msgid "Info: "
+#~ msgstr "معلومات: "
+
+#~ msgid "Journalised FS"
+#~ msgstr "Journalised FS"
+
+#~ msgid "LDAP user allowed to browse the Active Directory"
+#~ msgstr "مسموح لمستخدم LDAP بتصفّح Active Directory"
+
+#~ msgid "LDAP users database"
+#~ msgstr "قاعدة بيانات مستخدمي LDAP"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "تثبيت LILO/grub"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "شغّل تصفية الرّزم لنواة لينكس من السّلسلة 2.2 كي تُعدّ جداراً ناريّاً لحماية "
+#~ "ماكينتك من هجمات الشّبكة."
+
+#~ msgid "Number of capture buffers:"
+#~ msgstr "عدد مخازن اللّقطات:"
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr "خيار ``تشديد خيارات سطر الأوامر`` لا ينفع دون كلمة مرور"
+
+#~ msgid "PLL setting:"
+#~ msgstr "إعداد PLL:"
+
+#~ msgid "Paranoid"
+#~ msgstr "مذعور"
+
+#~ msgid ""
+#~ "Passwords are now enabled, but use as a networked computer is still not "
+#~ "recommended."
+#~ msgstr "كلمات المرور ممكّنة الآن، لكن الاستخدام كحاسب في شبكة يزال غير مفضّل."
+
+#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
+#~ msgstr "يرجى تسجيل الخروج ثم استخدام Ctrl-Alt-BackSpace"
+
+#~ msgid "Poor"
+#~ msgstr "فقير"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "حجم الذاكرة الدقيق عند الحاجة (عثر على %d م.ب.)"
+
+#~ msgid "Radio support:"
+#~ msgstr "دعم الراديو:"
+
+#~ msgid "Removable media automounting"
+#~ msgstr "التركيب الآلي للوسائط القابلة للإزالة"
+
+#~ msgid "Rescue partition table"
+#~ msgstr "إنقاذ جدول التجزئة"
+
+#~ msgid "Restore partition table"
+#~ msgstr "استعادة جدول التجزئة"
+
+#~ msgid "Restoring from file %s failed: %s"
+#~ msgstr "فشلت الإستعادة من الملف %s: %s"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "تشديد خيارات سطر الأوامر"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "حجم التجزيء الجذري بالميغابايت:"
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
 
 #~ msgid "Save partition table"
 #~ msgstr "حفظ جدول التجزئة"
 
-#~ msgid "Restore partition table"
-#~ msgstr "استعادة جدول التجزئة"
+#~ msgid "Security level"
+#~ msgstr "مستوى الأمن"
+
+#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
+#~ msgstr "يبدأ خادم خطوط X (هذا واجب لكي يعمل Xorg)."
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "حجم تجزيء التبديل بالميغابايت:"
+
+#~ msgid "TLS"
+#~ msgstr "TLS"
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "لم تتمكن أداة تغيير حجم FAT من التعامل مع تجزيئك، \n"
+#~ "ظهر الخطأ التالي: %s"
 
 #~ msgid ""
 #~ "The backup partition table has not the same size\n"
@@ -7446,94 +7449,119 @@ msgstr "فشل التّثبيت"
 #~ "جدول التجزئة المحفوظ ليس بنفس الحجم\n"
 #~ "لا زلت تريد الاستمرار؟"
 
-#~ msgid "Info: "
-#~ msgstr "معلومات: "
-
-#~ msgid "Unknown driver"
-#~ msgstr "مشغل غير معروف"
-
-#~ msgid "Error reading file %s"
-#~ msgstr "خطأ في قراءة الملف %s"
-
-#~ msgid "Restoring from file %s failed: %s"
-#~ msgstr "فشلت الإستعادة من الملف %s: %s"
-
-#~ msgid "Bad backup file"
-#~ msgstr "ملف نسخ احتياطي سيئ"
-
-#~ msgid "Error writing to file %s"
-#~ msgstr "خطأ أثناء الكتابة إلى الملف %s"
-
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr "خطأ: مشغل \"%s\" لبطاقة الصوت الخاصة بك غير موجود في القائمة"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "Journalised FS"
-#~ msgstr "Journalised FS"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr "يبدأ خادم خطوط X (هذا واجب لكي يعمل Xorg)."
-
-#~ msgid "Add user"
-#~ msgstr "إضافة مستخدم"
-
-#~ msgid "Accept user"
-#~ msgstr "قبول المستخدم"
-
-#, fuzzy
 #~ msgid ""
-#~ "Do not update directory inode access times on this filesystem\n"
-#~ "(e.g, for faster access on the news spool to speed up news servers)."
+#~ "The classic bug sound tester is to run the following commands:\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
+#~ "uses\n"
+#~ "by default\n"
+#~ "\n"
+#~ "- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
+#~ "currently uses\n"
+#~ "\n"
+#~ "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
+#~ "loaded or not\n"
+#~ "\n"
+#~ "- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" "
+#~ "will\n"
+#~ "tell you if sound and alsa services are configured to be run on\n"
+#~ "initlevel 3\n"
+#~ "\n"
+#~ "- \"aumix -q\" will tell you if the sound volume is muted or not\n"
+#~ "\n"
+#~ "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound "
+#~ "card.\n"
 #~ msgstr ""
-#~ "عدم تحديث أوقات الوصول إلى inode على نظام الملفّات هذا\n"
-#~ "(مثلا، من أجل وصول أسرع إلى مخزن الأخبار لتسرّع خادمات الأخبار)."
+#~ "الاختبار الكلاسيكي لعلّة الصوت هو تشغيل الأوامر التّالية:\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | fgrep -i AUDIO\" سيخبرك باسم مشغّل الذي تستخدمه بطاقتك "
+#~ "الصّوتيّة بشكل افتراضي\n"
+#~ "\n"
+#~ "- \"grep sound-slot /etc/modprobe.conf\" سيخبرك باسم مشغّل\n"
+#~ "المستخدم حاليّاً\n"
+#~ "\n"
+#~ "- \"/sbin/lsmod\" سيمكّنك من التحقّق من أن وحدته (مشغّل) هي\n"
+#~ "مُحمّلة أم لا\n"
+#~ "\n"
+#~ "- \"/sbin/chkconfig --list sound\" و \"/sbin/chkconfig --list alsa\" سوف\n"
+#~ "يخبرك إن كانت خدمات الصّوت وalsa مُهيّئة للعمل على\n"
+#~ "initlevel 3\n"
+#~ "\n"
+#~ "- \"aumix -q\" سيخبرك ما إذا كان الصّوت مكتوماً أم لا\n"
+#~ "\n"
+#~ "- \"/sbin/fuser -v /dev/dsp\" سيخبرك عن أيّ برنامج يستخدم بطاقة الصّوت.\n"
 
-#~ msgid "Rescue partition table"
-#~ msgstr "إنقاذ جدول التجزئة"
+#~ msgid ""
+#~ "There are already some restrictions, and more automatic checks are run "
+#~ "every night."
+#~ msgstr ""
+#~ "توجد بعض القيود، كما يتم تشغيل برامج للتأكد من النظام أوتوماتيكياً كل ليلة."
 
-#~ msgid "Removable media automounting"
-#~ msgstr "التركيب الآلي للوسائط القابلة للإزالة"
+#~ msgid ""
+#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ msgstr ""
+#~ "لا يوجد تجزيء FAT لاستخدامه كـloopback )أو لا توجد مساحة كافية متبقية)"
+
+#~ msgid ""
+#~ "This is similar to the previous level, but the system is entirely closed "
+#~ "and security features are at their maximum."
+#~ msgstr ""
+#~ "هذا مماثل للمستوى السابق، و لكن النظام مغلق كلياً و المزايا الأمني على "
+#~ "حدها الأقصى."
+
+#~ msgid ""
+#~ "This level is to be used with care. It makes your system more easy to "
+#~ "use,\n"
+#~ "but very sensitive. It must not be used for a machine connected to "
+#~ "others\n"
+#~ "or to the Internet. There is no password access."
+#~ msgstr ""
+#~ "يجب استخدام هذا المستوى الأمني بحذر. فهو يجعل نظامك أسهل في الإستخدام،\n"
+#~ "لكن يكون حساساً جداً. لذا لا يجب استخدامه لماكينة متصلة بماكينات أخرى\n"
+#~ "أو إلى الإنترنت. لا يوجد دخول بكلمة المرور."
+
+#~ msgid ""
+#~ "To ensure data integrity after resizing the partition(s), \n"
+#~ "filesystem checks will be run on your next boot into Microsoft Windows®"
+#~ msgstr ""
+#~ "للتأكد من صحة البيانات بعد إعادة تحجيم التجزيئات، \n"
+#~ "سيتم الدقيق على نظام الملفات عند التشغيل القادم لويندوز(TM)"
+
+#~ msgid "Toggle between flat and group sorted"
+#~ msgstr "تبديل بين فرز السّرد أو المجموعة"
 
 #~ msgid "Trying to rescue partition table"
 #~ msgstr "جاري محاولة إنقاذ جدول التجزئة"
 
-#~ msgid "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr "قبول/رفض رسائل أخطاء IPv4 الزّائفة."
+#~ msgid "Undo"
+#~ msgstr "تراجع"
 
-#~ msgid "Accept/Refuse broadcasted icmp echo."
-#~ msgstr "قبول/رفض صدى بثّ icmp"
+#~ msgid "Unknown driver"
+#~ msgstr "مشغل غير معروف"
 
-#~ msgid "Accept/Refuse icmp echo."
-#~ msgstr "قبول/رفض صدى icmp"
+#, fuzzy
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr "لا يمكنك استخدام نظام ملفات مرمّز لمكان التركيب %s"
 
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "سماح/منع دخول المستخدم الجذر من بعيد."
+#~ msgid "Use libsafe for servers"
+#~ msgstr "استخدام libsafe للخادمات"
 
-#~ msgid "Enable/Disable IP spoofing protection."
-#~ msgstr "تمكين/تعطيل حماية IP spoofing"
+#~ msgid "Use the Microsoft Windows® partition for loopback"
+#~ msgstr "استخدم تجزيء ويندوز كـloopback"
 
-#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
-#~ msgstr "تمكين/تعطيل libsafe إن كان موجوداً على النّظام."
+#~ msgid "Welcome To Crackers"
+#~ msgstr "مرحبا بالمخترقين"
 
-#~ msgid "Enable/Disable the logging of IPv4 strange packets."
-#~ msgstr "تمكين/تعطيل تسجيل رزم IPv4 الغريبة."
-
-#~ msgid "Enable/Disable msec hourly security check."
-#~ msgstr "تمكين/تعطيل اختبارات msec الأمنية كل ساعة"
-
-#~ msgid "Number of capture buffers:"
-#~ msgstr "عدد مخازن اللّقطات:"
+#~ msgid "Which partition do you want to use for Linux4Win?"
+#~ msgstr "أي تجزيء تريد استخدامه من أجل Linux4Win"
 
 #~ msgid "number of capture buffers for mmap'ed capture"
 #~ msgstr "عدد مخازن اللّقطات للقطات mmap'ed"
 
-#~ msgid "PLL setting:"
-#~ msgstr "إعداد PLL:"
+#~ msgid "restrict"
+#~ msgstr "تشديد"
 
-#~ msgid "Radio support:"
-#~ msgstr "دعم الراديو:"
-
-#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
-#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+#~ msgid "security layout (SASL/Kerberos)"
+#~ msgstr "النّسق الأمني (SASL/Kerberos("

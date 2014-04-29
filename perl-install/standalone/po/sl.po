@@ -269,9 +269,9 @@ msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "Program »%s« se je sesul s tem sporočilom o napaki:"
 
 #: drakbug:144
-#, fuzzy, c-format
+#, c-format
 msgid "Used theme: %s"
-msgstr "Uporabnik: %s"
+msgstr "Trenutna tema: %s"
 
 #: drakbug:146
 #, c-format
@@ -717,7 +717,7 @@ msgstr "Ghostscript"
 #: drakfont:556
 #, c-format
 msgid "LibreOffice"
-msgstr ""
+msgstr "LibreOffice"
 
 #: drakfont:557
 #, c-format
@@ -1595,9 +1595,9 @@ msgid "Keyboard"
 msgstr "Tipkovnica"
 
 #: finish-install:58
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your keyboard layout."
-msgstr "Izberite razpored tipkovnice"
+msgstr "Izberite razpored tipkovnice."
 
 #: finish-install:106
 #, c-format
@@ -2405,7 +2405,7 @@ msgid "Run config tool"
 msgstr "Poženi nastavitveno orodje"
 
 #: harddrake2:301
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
 "information here."
@@ -2745,14 +2745,14 @@ msgid "and enter the name (or the IP) of the SMTP server you wish to use"
 msgstr "in vnesite ime (ali IP) strežnika SMTP, ki ga želite uporabiti"
 
 #: logdrake:440
-#, fuzzy, c-format
+#, c-format
 msgid "Email address"
-msgstr "Naslov IP"
+msgstr "E-poštni naslov"
 
 #: logdrake:441
-#, fuzzy, c-format
+#, c-format
 msgid "Email server"
-msgstr "Strežnik Samba"
+msgstr "E-poštni strežnik"
 
 #: logdrake:445
 #, c-format
@@ -2792,7 +2792,7 @@ msgstr "Nastavitev gonilnika za grafično kartico"
 #: notify-x11-free-driver-switch:20
 #, c-format
 msgid "The display driver has been automatically switched to '%s'."
-msgstr ""
+msgstr "Samodejno je bil izbran gonilnik za zaslon »%s«."
 
 #: notify-x11-free-driver-switch:21
 #, c-format
@@ -3094,13 +3094,13 @@ msgstr ""
 "sane-%s«."
 
 #: scannerdrake:407 scannerdrake:416
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"Zdaj lahko skenirate dokumente s programoma »XSane« ali »Kooka« iz menija "
-"Večpredstavnost / Grafika. "
+"Potem lahko pričnete z optičnim branjem dokumentov s programom »XSane« ali "
+"»%s«, ki ju najdete v meniju »Zvok in video«."
 
 #: scannerdrake:411
 #, c-format
@@ -3131,15 +3131,15 @@ msgid "Congratulations!"
 msgstr "Čestitke!"
 
 #: scannerdrake:419
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"Vaš %s je nastavljen.\n"
-"Zdaj lahko s programoma XSane in Kooka iz menija Večpredstavnost / Grafika "
-"skenirate dokumente."
+"Vaš optični bralnik %s je nastavljen.\n"
+"Sedaj lahko pričnete z optičnim branjem dokumentov s programom »XSane« ali "
+"»%s«, ki ju najdete v meniju »Zvok in video«."
 
 #: scannerdrake:444
 #, c-format
@@ -3344,7 +3344,7 @@ msgstr ""
 "namestiti."
 
 #: service_harddrake:173
-#, fuzzy, c-format
+#, c-format
 msgid "The graphics card '%s' is no longer supported by driver '%s'"
 msgstr "Grafične kartice »%s« gonilnik »%s« ne podpira več"
 
@@ -3354,9 +3354,9 @@ msgid "New release, reconfiguring X for %s"
 msgstr "Nova izdaja, ponastavljanje grafičnega sistema X za %s"
 
 #: service_harddrake:274
-#, fuzzy, c-format
+#, c-format
 msgid "The proprietary kernel driver was not found for X.org driver '%s'"
-msgstr "Zaprto-kodnega gonilnika za X.Org gonilnik »%s« ni bilo moč najti"
+msgstr "Lastniškega jedrnega gonilnika za X.Org »%s« ni bilo mogoče najti"
 
 #: service_harddrake:313
 #, c-format
@@ -3418,6 +3418,8 @@ msgid ""
 "driver the X server is configured to use. Startup of the X server may now "
 "fail."
 msgstr ""
+"Naložen je modul jedra z gonilnikom zaslona, ki ni združljiv z nastavljenim "
+"gonilnikom strežnika X. Zagon strežnika X lahko spodleti."
 
 #: service_harddrake:474 service_harddrake:487
 #, c-format
@@ -3459,81 +3461,223 @@ msgstr "Področne nastavitve"
 msgid "Language & country configuration"
 msgstr "Nastavitev jezika in države"
 
+#~ msgid "  --help                - display this help     \n"
+#~ msgstr "  --help                - prikaže tole pomoč     \n"
+
+#~ msgid ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "This is free software and may be redistributed under the terms of the GNU "
+#~ "GPL.\n"
+#~ "\n"
+#~ "Usage: \n"
+#~ msgstr ""
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "Copyright (C) %s Moondrake.\n"
+#~ "To je prosto programje in se lahko razširja pod pogoji splošnega "
+#~ "dovoljenja GPL.\n"
+#~ "\n"
+#~ "Uporaba: \n"
+
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Orodje distribucije %s za poročanje o napakah"
+
+#~ msgid "%s Control Center"
+#~ msgstr "Nadzorno središče %s"
+
+#~ msgid "%s Help Center"
+#~ msgstr "Središče za pomoč %s"
+
+#~ msgid "%s Online"
+#~ msgstr "%s na spletu"
+
+#~ msgid "%s Tools Logs"
+#~ msgstr "Dnevniki orodij %s"
+
+#~ msgid "%s Update"
+#~ msgstr "Posodabljanje distribucije %s"
+
+#~ msgid "<control>H"
+#~ msgstr "<control>H"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Application Security "
+#~ "Configuration"
+#~ msgstr "Za zagon nastavitev varnosti programov Mageje je potrebno overjanje"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Authentication Configuration"
+#~ msgstr "Za zagon nastavitev overjanja Mageje je potrebno overjanje"
+
+#~ msgid "Authentication is required to run Moondrake Boot Configuration"
+#~ msgstr "Za zagon nastavitev zagona Mageje je potrebno overjanje"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Date and Time Configuration"
+#~ msgstr "Za zagon nastavitev datuma in časa Mageje je potrebno overjanje"
+
+#~ msgid "Authentication is required to run Moondrake Disk Layout Editor"
+#~ msgstr ""
+#~ "Za zagon upravljalnika z diskovnimi razdelki Mageje je potrebno overjanje"
+
+#~ msgid "Authentication is required to run Moondrake Font Configuration"
+#~ msgstr "Za zagon nastavitev pisav Mageje je potrebno overjanje"
+
+#~ msgid "Authentication is required to run Moondrake Hardware Configuration"
+#~ msgstr "Za zagon nastavitev strojne opreme Mageje je potrebno overjanje"
+
+#~ msgid "Authentication is required to run Moondrake Log Viewer"
+#~ msgstr "Za zagon pregledovalnika dnevnikov Mageje je potrebno overjanje"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Login Manager Configuration"
+#~ msgstr "Za zagon nastavitev upravitelja prijav Mageje je potrebno overjanje"
+
+#~ msgid "Authentication is required to run Moondrake Scanner Configuration"
+#~ msgstr "Za zagon nastavitev optičnih bralnikov Mageje je potrebno overjanje"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Security Permissions "
+#~ "Configuration"
+#~ msgstr ""
+#~ "Za zagon nastavitev varnostnih dovoljenj Mageje je potrebno overjanje"
+
+#~ msgid "Authentication is required to run Moondrake Service Configuration"
+#~ msgstr "Za zagon nastavitev storitev Mageje je potrebno overjanje"
+
+#~ msgid "Authentication is required to run Moondrake UPS Configuration"
+#~ msgstr ""
+#~ "Za zagon nastavitev neprekinjenega napajanja Mageje je potrebno overjanje"
+
+#~ msgid "Autodetect _modems"
+#~ msgstr "Samozaznava _modemov"
+
+#~ msgid "Autodetect parallel _zip drives"
+#~ msgstr "Samozaznava pogonov _zip (vzporednih)"
+
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Nastavite overjanje, ki je potrebno za dostop do orodij %s"
+
+#~ msgid "Copyright (C) %s by %s"
+#~ msgstr "Avtorske pravice (C) %s %s"
+
+#~ msgid ""
+#~ "Here you can see files to use in order to fix permissions, owners, and "
+#~ "groups via msec.\n"
+#~ "You can also edit your own rules which will overwrite the default rules."
+#~ msgstr ""
+#~ "Tukaj vidite datoteke, katerim msec popravlja dovoljenja, lastnike ter "
+#~ "pripadnost skupinam.\n"
+#~ "Tu lahko tudi urejate svoja pravila, ki prepišejo privzeta pravila."
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in"
+#~ msgstr ""
+#~ "Zvočna kartica v vašem računalniku ni bila zaznana. Preverite, da je "
+#~ "pravilno vstavljena in podprta v Linuxu."
+
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in."
+#~ msgstr ""
+#~ "TV kartica v vašem računalniku ni bila zaznana. Preverite, da je pravilno "
+#~ "vstavljena in podprta v Linuxu."
+
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Zagon nastavitev varnosti programov Mageje"
+
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Zagon nastavitev overjanja Mageje"
+
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "Zagon nastavitev zagona Mageje"
+
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Zagon nastavitev datuma in časa Mageje"
+
+#~ msgid "Run Moondrake Disk Layout Editor"
+#~ msgstr "Zagon upravljalnika z diskovnimi razdelki Mageje"
+
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Zagon nastavitev pisav Mageje"
+
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Zagon nastavitev strojne opreme Mageje"
+
+#~ msgid "Run Moondrake Log Viewer"
+#~ msgstr "Zagon pregledovalnika dnevnikov Mageje"
+
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Zagon nastavitev upravitelja prijav Mageje"
+
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Zagon nastavitev optičnih bralnikov Mageje"
+
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Zagon nastavitev varnostnih dovoljenj Mageje"
+
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Zagon nastavitev storitev Mageje"
+
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "Zagon nastavitev neprekinjenega napajanja Mageje"
+
+#~ msgid "Select %s Tool:"
+#~ msgstr "Izberite orodje %s:"
+
+#~ msgid "_About..."
+#~ msgstr "_O ..."
+
+#~ msgid "_Fields description"
+#~ msgstr "Opisi _polj"
+
+#~ msgid "_File"
+#~ msgstr "_Datoteka"
+
+#~ msgid "_Help"
+#~ msgstr "_Pomoč"
+
+#~ msgid "_Options"
+#~ msgstr "_Nastavitve"
+
+#~ msgid "_Quit"
+#~ msgstr "_Končaj"
+
+#~ msgid "_Report Bug"
+#~ msgstr "po_ročaj o napaki"
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(privzeta vrednost: %s)"
+
 #~ msgid "/Autodetect _printers"
 #~ msgstr "/Samozaznava _tiskalnikov"
 
-#~ msgid "Its GDB trace is:"
-#~ msgstr "Povratna sled je:"
+#~ msgid "Autodetect _jaz drives"
+#~ msgstr "Samozaznava pogonov _jaz"
 
-#~ msgid "OpenOffice.org"
-#~ msgstr "OpenOffice.org"
+#~ msgid "Autodetect _printers"
+#~ msgstr "Samozaznava _tiskalnikov"
 
-#~ msgid ""
-#~ "The proprietary driver for your graphic card cannot be found, the system "
-#~ "is now using the free software driver (%s)."
-#~ msgstr ""
-#~ "Zaprto-kodnega gonilnika za grafično kartico ni moč najti. Računalnik "
-#~ "sedaj uporablja odprto-kodni gonilnik (%s)."
+#~ msgid "Background color"
+#~ msgstr "Barva ozadja"
 
-#~ msgid ""
-#~ "Display theme\n"
-#~ "under console"
-#~ msgstr ""
-#~ "Prikaži temo\n"
-#~ "pod konzolo"
+#~ msgid "Basic options"
+#~ msgstr "Osnovne možnosti"
 
-#~ msgid "Create new theme"
-#~ msgstr "Ustvari novo temo"
+#~ msgid "Bugs"
+#~ msgstr "Hrošči"
 
-#~ msgid "X coordinate of text box"
-#~ msgstr "Koordinata x za polje z besedilom"
+#~ msgid "Choose picture"
+#~ msgstr "Izbor slike"
 
-#~ msgid "Y coordinate of text box"
-#~ msgstr "Koordinata y za polje z besedilom"
-
-#~ msgid "Text box width"
-#~ msgstr "Širina polja z besedilom"
-
-#~ msgid "Text box height"
-#~ msgstr "Višina besedilnega polja"
-
-#~ msgid ""
-#~ "The progress bar X coordinate\n"
-#~ "of its upper left corner"
-#~ msgstr ""
-#~ "X koordinata kazalnika poteka\n"
-#~ "iz zgornjega levega kota"
-
-#~ msgid ""
-#~ "The progress bar Y coordinate\n"
-#~ "of its upper left corner"
-#~ msgstr ""
-#~ "Y koordinata kazalnika poteka\n"
-#~ "iz zgornjega levega kota"
-
-#~ msgid "The width of the progress bar"
-#~ msgstr "širina kazalnika poteka"
-
-#~ msgid "The height of the progress bar"
-#~ msgstr "Višina kazalnika poteka"
-
-#~ msgid "X coordinate of the text"
-#~ msgstr "Koordinata x za besedilo"
-
-#~ msgid "Y coordinate of the text"
-#~ msgstr "Koordinata y za besedilo"
-
-#~ msgid "Text box transparency"
-#~ msgstr "Prosojnost polja z besedilom"
-
-#~ msgid "Progress box transparency"
-#~ msgstr "Prosojnost prikaza napredka"
-
-#~ msgid "Text size"
-#~ msgstr "Velikost besedila"
-
-#~ msgid "Progress Bar"
-#~ msgstr "Kazalnik napredka"
+#~ msgid "Choose progress bar background"
+#~ msgstr "Izbor barve ozadja za prikaz napredka"
 
 #~ msgid "Choose progress bar color 1"
 #~ msgstr "Izbor prve barve za prikaz napredka"
@@ -3541,62 +3685,11 @@ msgstr "Nastavitev jezika in države"
 #~ msgid "Choose progress bar color 2"
 #~ msgstr "Izbor druge barve za prikaz napredka"
 
-#~ msgid "Choose progress bar background"
-#~ msgstr "Izbor barve ozadja za prikaz napredka"
-
-#~ msgid "Gradient type"
-#~ msgstr "Vrsta preliva"
-
-#~ msgid "Text"
-#~ msgstr "Besedilo"
-
 #~ msgid "Choose text color"
 #~ msgstr "Izbor barve besedila"
 
-#~ msgid "Choose picture"
-#~ msgstr "Izbor slike"
-
-#~ msgid "Silent bootsplash"
-#~ msgstr "Tiha zagonska tema"
-
 #~ msgid "Choose text zone color"
 #~ msgstr "Izbor barve področja z besedilom"
-
-#~ msgid "Text color"
-#~ msgstr "Barva besedila"
-
-#~ msgid "Background color"
-#~ msgstr "Barva ozadja"
-
-#~ msgid "Verbose bootsplash"
-#~ msgstr "Gostobesedna zagonska tema"
-
-#~ msgid "Theme name"
-#~ msgstr "Ime teme"
-
-#~ msgid "Final resolution"
-#~ msgstr "Končna ločljivost"
-
-#~ msgid "Display logo on Console"
-#~ msgstr "Prikaži logotip na konzoli"
-
-#~ msgid "Save theme"
-#~ msgstr "Shrani temo"
-
-#~ msgid "Please enter a theme name"
-#~ msgstr "Vnesite ime teme."
-
-#~ msgid "Please select a splash image"
-#~ msgstr "Izberite sliko za zagon sistema."
-
-#~ msgid "saving Bootsplash theme..."
-#~ msgstr "Shranjevanje teme Uvodnega zaslona..."
-
-#~ msgid "Unable to load image file %s"
-#~ msgstr "Ni moč naložiti slike %s"
-
-#~ msgid "choose image"
-#~ msgstr "izberite sliko"
 
 #~ msgid "Color selection"
 #~ msgstr "Izbor barve"
@@ -3604,11 +3697,18 @@ msgstr "Nastavitev jezika in države"
 #~ msgid "Coma bug"
 #~ msgstr "Hrošč Coma"
 
-#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-#~ msgstr "ali ima ta CPE Cyrix 6x86 hrošča Coma"
+#~ msgid "Create new theme"
+#~ msgstr "Ustvari novo temo"
 
-#~ msgid "Fdiv bug"
-#~ msgstr "Hrošč FDIV"
+#~ msgid "Display logo on Console"
+#~ msgstr "Prikaži logotip na konzoli"
+
+#~ msgid ""
+#~ "Display theme\n"
+#~ "under console"
+#~ msgstr ""
+#~ "Prikaži temo\n"
+#~ "pod konzolo"
 
 #~ msgid ""
 #~ "Early Intel Pentium chips manufactured have a bug in their floating point "
@@ -3619,46 +3719,44 @@ msgstr "Nastavitev jezika in države"
 #~ "ni dosegel zahtevane točnosti ob izvajanju deljenja (Floating point "
 #~ "DIVision (FDIV))"
 
-#~ msgid "Is FPU present"
-#~ msgstr "Enota za plavajočo vejico"
-
-#~ msgid "yes means the processor has an arithmetic coprocessor"
-#~ msgstr "»da« pomeni, da ima procesor aritmetični koprocesor"
-
-#~ msgid "Whether the FPU has an irq vector"
-#~ msgstr "Enota za plavajočo vejico ima vektor IRQ"
-
-#~ msgid ""
-#~ "yes means the arithmetic coprocessor has an exception vector attached"
-#~ msgstr "»da« pomeni, da ima aritmetični koprocesor vgrajen vektor za izjeme"
-
 #~ msgid "F00f bug"
 #~ msgstr "Hrošč F00F"
-
-#~ msgid ""
-#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
-#~ msgstr ""
-#~ "zgodnji Pentiumi so bili hroščati in so se prenehali odzivati, ko so "
-#~ "dekodirali bitno kodo F00F"
-
-#~ msgid "Halt bug"
-#~ msgstr "Hrošč Halt"
-
-#~ msgid ""
-#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
-#~ "mode after the \"halt\" instruction is used"
-#~ msgstr ""
-#~ "nekateri od zgodnjih čipov i486DX-100 se niso mogli zanesljivo vrniti v "
-#~ "način delovanja po tem, ko je bil uporabljen ukaz »halt«"
-
-#~ msgid "Bugs"
-#~ msgstr "Hrošči"
 
 #~ msgid "FPU"
 #~ msgstr "Enota za računanje s plavajočo vejico"
 
-#~ msgid "Unknown/Others"
-#~ msgstr "Neznane naprave"
+#~ msgid "Fdiv bug"
+#~ msgstr "Hrošč FDIV"
+
+#~ msgid "File/-"
+#~ msgstr "Datoteka/-"
+
+#~ msgid "File/Save _As"
+#~ msgstr "Datoteka/Shrani_kot"
+
+#~ msgid "File/_New"
+#~ msgstr "Datoteka/_Nova"
+
+#~ msgid "File/_Open"
+#~ msgstr "Datoteka/_Odpri"
+
+#~ msgid "File/_Quit"
+#~ msgstr "Datoteka/_Končaj"
+
+#~ msgid "File/_Save"
+#~ msgstr "Datoteka/_Shrani"
+
+#~ msgid "Final resolution"
+#~ msgstr "Končna ločljivost"
+
+#~ msgid "Gradient type"
+#~ msgstr "Vrsta preliva"
+
+#~ msgid "Halt bug"
+#~ msgstr "Hrošč Halt"
+
+#~ msgid "Help/_About..."
+#~ msgstr "Pomoč/_O ..."
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "
@@ -3758,29 +3856,32 @@ msgstr "Nastavitev jezika in države"
 #~ "na\n"
 #~ "višku."
 
-#~ msgid "(default value: %s)"
-#~ msgstr "(privzeta vrednost: %s)"
+#~ msgid "Is FPU present"
+#~ msgstr "Enota za plavajočo vejico"
 
-#~ msgid "Security Level:"
-#~ msgstr "Stopnja varnosti:"
-
-#~ msgid "Security Alerts:"
-#~ msgstr "Varnostna opozorila:"
-
-#~ msgid "Security Administrator:"
-#~ msgstr "Varnostni administrator:"
-
-#~ msgid "Basic options"
-#~ msgstr "Osnovne možnosti"
+#~ msgid "Its GDB trace is:"
+#~ msgstr "Povratna sled je:"
 
 #~ msgid "Network Options"
 #~ msgstr "Omrežne možnosti"
 
-#~ msgid "System Options"
-#~ msgstr "Sistemske možnosti"
+#~ msgid "OpenOffice.org"
+#~ msgstr "OpenOffice.org"
+
+#~ msgid "Options/Test"
+#~ msgstr "Možnosti/Test"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "Redna preverjanja"
+
+#~ msgid "Please enter a theme name"
+#~ msgstr "Vnesite ime teme."
+
+#~ msgid "Please select a splash image"
+#~ msgstr "Izberite sliko za zagon sistema."
+
+#~ msgid "Please wait, adding media..."
+#~ msgstr "Prosim počakajte, dodajanje vira ..."
 
 #~ msgid "Please wait, setting security level..."
 #~ msgstr "Prosim počakajte, nastavljanje stopnje varnosti ..."
@@ -3788,11 +3889,133 @@ msgstr "Nastavitev jezika in države"
 #~ msgid "Please wait, setting security options..."
 #~ msgstr "Prosim počakajte, nastavljanje varnostnih možnosti ..."
 
-#~ msgid "Please wait, adding media..."
-#~ msgstr "Prosim počakajte, dodajanje vira ..."
+#~ msgid "Progress Bar"
+#~ msgstr "Kazalnik napredka"
+
+#~ msgid "Progress box transparency"
+#~ msgstr "Prosojnost prikaza napredka"
+
+#~ msgid "Restart XFS"
+#~ msgstr "Znova zaženi XFS"
+
+#~ msgid "Save theme"
+#~ msgstr "Shrani temo"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Varnostni administrator:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Varnostna opozorila:"
+
+#~ msgid "Security Level:"
+#~ msgstr "Stopnja varnosti:"
+
+#~ msgid "Silent bootsplash"
+#~ msgstr "Tiha zagonska tema"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "nekateri od zgodnjih čipov i486DX-100 se niso mogli zanesljivo vrniti v "
+#~ "način delovanja po tem, ko je bil uporabljen ukaz »halt«"
+
+#~ msgid "System Options"
+#~ msgstr "Sistemske možnosti"
+
+#~ msgid "Text"
+#~ msgstr "Besedilo"
+
+#~ msgid "Text box height"
+#~ msgstr "Višina besedilnega polja"
+
+#~ msgid "Text box transparency"
+#~ msgstr "Prosojnost polja z besedilom"
+
+#~ msgid "Text box width"
+#~ msgstr "Širina polja z besedilom"
+
+#~ msgid "Text color"
+#~ msgstr "Barva besedila"
+
+#~ msgid "Text size"
+#~ msgstr "Velikost besedila"
 
 #~ msgid "The change is done, but to be effective you must logout"
 #~ msgstr "Da bi uveljavili spremembe, se morate odjaviti."
 
-#~ msgid "Restart XFS"
-#~ msgstr "Znova zaženi XFS"
+#~ msgid "The height of the progress bar"
+#~ msgstr "Višina kazalnika poteka"
+
+#~ msgid ""
+#~ "The progress bar X coordinate\n"
+#~ "of its upper left corner"
+#~ msgstr ""
+#~ "X koordinata kazalnika poteka\n"
+#~ "iz zgornjega levega kota"
+
+#~ msgid ""
+#~ "The progress bar Y coordinate\n"
+#~ "of its upper left corner"
+#~ msgstr ""
+#~ "Y koordinata kazalnika poteka\n"
+#~ "iz zgornjega levega kota"
+
+#~ msgid ""
+#~ "The proprietary driver for your graphic card cannot be found, the system "
+#~ "is now using the free software driver (%s)."
+#~ msgstr ""
+#~ "Zaprto-kodnega gonilnika za grafično kartico ni moč najti. Računalnik "
+#~ "sedaj uporablja odprto-kodni gonilnik (%s)."
+
+#~ msgid "The width of the progress bar"
+#~ msgstr "širina kazalnika poteka"
+
+#~ msgid "Theme name"
+#~ msgstr "Ime teme"
+
+#~ msgid "Unable to load image file %s"
+#~ msgstr "Ni moč naložiti slike %s"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Neznane naprave"
+
+#~ msgid "Verbose bootsplash"
+#~ msgstr "Gostobesedna zagonska tema"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Enota za plavajočo vejico ima vektor IRQ"
+
+#~ msgid "X coordinate of text box"
+#~ msgstr "Koordinata x za polje z besedilom"
+
+#~ msgid "X coordinate of the text"
+#~ msgstr "Koordinata x za besedilo"
+
+#~ msgid "Y coordinate of text box"
+#~ msgstr "Koordinata y za polje z besedilom"
+
+#~ msgid "Y coordinate of the text"
+#~ msgstr "Koordinata y za besedilo"
+
+#~ msgid "choose image"
+#~ msgstr "izberite sliko"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "zgodnji Pentiumi so bili hroščati in so se prenehali odzivati, ko so "
+#~ "dekodirali bitno kodo F00F"
+
+#~ msgid "saving Bootsplash theme..."
+#~ msgstr "Shranjevanje teme Uvodnega zaslona..."
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "ali ima ta CPE Cyrix 6x86 hrošča Coma"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "»da« pomeni, da ima aritmetični koprocesor vgrajen vektor za izjeme"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "»da« pomeni, da ima procesor aritmetični koprocesor"

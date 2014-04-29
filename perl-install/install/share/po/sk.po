@@ -426,10 +426,9 @@ msgid "URL must start with ftp:// or http://"
 msgstr ""
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr ""
-"Pripájam sa k web stránke Mandriva Linux pre stiahnutie zoznamu zrkadiel..."
+msgstr "Pripájam sa k web stránke %s pre stiahnutie zoznamu zrkadiel..."
 
 #: any.pm:194
 #, fuzzy, c-format
@@ -727,7 +726,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Bez popisu"
 
 #: pkgs.pm:280
 #, c-format
@@ -742,14 +741,14 @@ msgid "An error occurred:"
 msgstr "Vyskytla sa chyba"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Vyskytla sa chyba"
+msgstr "Nastala fatálna chyba: %s"
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Nepýtať sa znovu"
 
 #: pkgs.pm:894
 #, c-format
@@ -788,9 +787,9 @@ msgid "Entering step `%s'\n"
 msgstr "Spúšťam krok %s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Inštalujem"
+msgstr "Inštalácia %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -803,15 +802,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Váš systém má nedostatok prostriedkov. Možno budete mať problémy s\n"
-"inštaláciou Mandriva Linux. Ak sa tak stane, skúste textovú inštaláciu. Pre "
-"jej\n"
+"inštaláciou %s. Ak sa tak stane, skúste textovú inštaláciu. Pre jej\n"
 "spustenie stlačte `F1' po naštartovaní z CDROMky a zadajte `text'."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
@@ -872,7 +870,7 @@ msgstr "Osobitná voľba balíkov"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Odznačiť všetky"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1222,9 +1220,9 @@ msgid "Bad file"
 msgstr "Zlý súbor"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1629,26 +1627,161 @@ msgid ""
 "Exit"
 msgstr "Koniec"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Inštalácia Mandriva Linux %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Grafické prostredie"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr "Grafické rozhranie s aplikáciami a desktopovými nástrojmi"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr "Grafické rozhranie s aplikáciami a desktopovými nástrojmi"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Zábavne programy: stolové, stratégie, atď"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Pracovná stanica"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME pracovná stanica"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Sprievodcovia Moondrake"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Licencia"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Kancelárske programy: editory (LibreOffice Writer, Kword), tabuľkové "
+#~ "procesory (LibreOffice Calc, Kspread), pdf prehliadače, atď"
+
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Kancelárska stanica"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Databázový server PostgreSQL a MariaDB"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL, alebo MariaDB databázový server"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Pripravuje sa zavádzač..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Pracovná plocha IceWm"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, atď"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE pracovná stanica"
+
+#~ msgid "%d packages"
+#~ msgstr "%d balíky"
+
+#, fuzzy
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "%d balíky"
+#~ msgstr[1] "%d balíky"
+#~ msgstr[2] "%d balíky"
+
+#~ msgid "All"
+#~ msgstr "Všetko"
+
+#~ msgid "Automated"
+#~ msgstr "Automatická"
 
 #~ msgid "Bad package"
 #~ msgstr "Chybný balík"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Sieť"
+#~ msgid "Boot"
+#~ msgstr "Boot"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Aktualizácie"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Nie je možné načítať moduly pre vaše jadro (súbor %s chýba), toto sa "
+#~ "stáva hlavne vtedy, ak vaša disketa nie je vytvorená pre inštalačné "
+#~ "médium, ktoré používate (vytvorte si prosím novú štartovaciu disketu)"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Výber balíkov"
+
+#~ msgid "Configure X"
+#~ msgstr "Konfigurácia X"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Pripájanie k zrkadliacemu serveru a získavanie zoznamu možných balíkov..."
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Chcete použiť aboot?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "Sťahovanie súboru %s..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Chyba inštalácie aboot.\n"
+#~ "Skúsiť silovú inštaláciu s možnosťou zničenia prvého oddielu?"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Odhadujem"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Príprava auto inštalačnej diskety"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "Pracovná plocha IceWm"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "Voľba triedy inštalácie"
+
+#, fuzzy
+#~ msgid "Invictus Firewall"
+#~ msgstr "Interaktívny firewall"
+
+#~ msgid "Language"
+#~ msgstr "Jazyk"
+
+#~ msgid "License"
+#~ msgstr "Licencia"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Inštalácia Mandriva Linux %s"
+
+#~ msgid "Networking"
+#~ msgstr "Sieť"
+
+#, fuzzy
+#~ msgid "New Theme"
+#~ msgstr "Nová téma pre webmin"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1657,8 +1790,40 @@ msgstr "Koniec"
 #~ "Kancelárske programy: editory (kword, abiword), tabuľkové procesory "
 #~ "(kspread, gnumeric), pdf prehliadače, atď"
 
-#~ msgid "Downloading file %s..."
-#~ msgstr "Sťahovanie súboru %s..."
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Pripravuje sa zavádzač..."
+
+#~ msgid "Replay"
+#~ msgstr "Zopakovať"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Uložiť výber balíkov"
+
+#~ msgid "Select All"
+#~ msgstr "Vyber všetko"
+
+#~ msgid "TV card"
+#~ msgstr "TV karta"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Automatická inštalácia môže byť plne automatizovaná\n"
+#~ "v tom prípade však inštalácia zaberie celý pevný disk.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Nebolo možné spojiť sa so zrkadliacim serverom %s"
+
+#~ msgid "Users"
+#~ msgstr "Používatelia"
+
+#~ msgid "Welcome"
+#~ msgstr "Vitajte"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1685,118 +1850,22 @@ msgstr "Koniec"
 #~ "\n"
 #~ "Naozaj si želáte inštalovať tieto služby?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "Pracovná plocha IceWm"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "Pripájanie k zrkadliacemu serveru a získavanie zoznamu možných balíkov..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Nebolo možné spojiť sa so zrkadliacim serverom %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Príprava auto inštalačnej diskety"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Automatická inštalácia môže byť plne automatizovaná\n"
-#~ "v tom prípade však inštalácia zaberie celý pevný disk.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Zopakovať"
-
-#~ msgid "Automated"
-#~ msgstr "Automatická"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Uložiť výber balíkov"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Chcete použiť aboot?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Chyba inštalácie aboot.\n"
-#~ "Skúsiť silovú inštaláciu s možnosťou zničenia prvého oddielu?"
-
-#~ msgid "All"
-#~ msgstr "Všetko"
-
-#~ msgid "TV card"
-#~ msgstr "TV karta"
-
-#~ msgid "Boot"
-#~ msgstr "Boot"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Autentifikácia"
 
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#, fuzzy
-#~ msgid "Invictus Firewall"
-#~ msgstr "Interaktívny firewall"
-
-#, fuzzy
-#~ msgid "New Theme"
-#~ msgstr "Nová téma pre webmin"
-
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#, fuzzy
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "%d balíky"
-#~ msgstr[1] "%d balíky"
-#~ msgstr[2] "%d balíky"
-
-#~ msgid "%d packages"
-#~ msgstr "%d balíky"
-
-#~ msgid "Language"
-#~ msgstr "Jazyk"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Licencia"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "Voľba triedy inštalácie"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "Odhadujem"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Výber balíkov"
-
-#~ msgid "Users"
-#~ msgstr "Používatelia"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Sieť"
 
-#~ msgid "Configure X"
-#~ msgstr "Konfigurácia X"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Nie je možné načítať moduly pre vaše jadro (súbor %s chýba), toto sa "
-#~ "stáva hlavne vtedy, ak vaša disketa nie je vytvorená pre inštalačné "
-#~ "médium, ktoré používate (vytvorte si prosím novú štartovaciu disketu)"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Aktualizácie"

@@ -444,17 +444,17 @@ msgid "URL must start with ftp:// or http://"
 msgstr "Посилання має починатися з ftp:// або http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Зв'язуюсь з веб-сайтом Mandriva Linux, щоб отримати список наявних джерел..."
+"Встановлення зв’язку з веб-сайтом %s для отримання списку доступних дзеркал…"
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Помилка зв'язку з веб-сайтом Mandriva Linux, щоб отримати список наявних "
-"джерел..."
+"Не вдалося встановити зв’язок з веб-сайтом %s для отримання списку доступних "
+"дзеркал"
 
 #: any.pm:204
 #, c-format
@@ -526,11 +526,14 @@ msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
 "free software drivers to work."
 msgstr ""
+"Для роботи частини обладнання на вашому комп’ютері слід встановити "
+"мікропрограми з закритим кодом, потрібні для роботи драйверів з відкритим "
+"кодом."
 
 #: any.pm:351
 #, c-format
 msgid "You should enable \"%s\""
-msgstr ""
+msgstr "Вам слід уможливити встановлення зі сховища «%s»"
 
 #: any.pm:370
 #, c-format
@@ -548,6 +551,8 @@ msgstr ""
 #, c-format
 msgid "\"%s\" contains non free software.\n"
 msgstr ""
+"У сховищі «%s» містяться пакунки з програмним забезпеченням, яке не є "
+"вільним.\n"
 
 #: any.pm:373
 #, c-format
@@ -559,7 +564,7 @@ msgstr ""
 #: any.pm:377
 #, c-format
 msgid "Here you can enable more media if you want."
-msgstr ""
+msgstr "Тут ви можете увімкнути додаткові сховища, якщо це вам потрібно."
 
 #: any.pm:456
 #, c-format
@@ -740,17 +745,19 @@ msgstr "можливо"
 #: pkgs.pm:102
 #, c-format
 msgid "Getting package information from XML meta-data..."
-msgstr ""
+msgstr "Отримання даних щодо пакунків з метаданих у форматі XML…"
 
 #: pkgs.pm:111
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Для джерела «%s» немає xml-info. Отримано лише частковий результат для "
+"пакунка %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Немає опису"
 
 #: pkgs.pm:280
 #, c-format
@@ -767,14 +774,14 @@ msgid "An error occurred:"
 msgstr "Сталася помилка:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Сталася помилка:"
+msgstr "Сталася невиправна помилка: %s"
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Більше не питати"
 
 #: pkgs.pm:894
 #, c-format
@@ -813,9 +820,9 @@ msgid "Entering step `%s'\n"
 msgstr "Починається крок `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Встановлення"
+msgstr "Встановлення %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -828,16 +835,17 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Сервер Xorg стартує повільно. Зачекайте..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Система має замало ресурсів. Ви можете мати проблеми з встановленням\n"
-"Мандріва лінакса. Якщо це станеться, можете спробувати встановлення в\n"
-"текстовому режимі. Для цього під час завантаження з компакт-диску\n"
-"натисніть F1 і потім введіть \"text\"."
+"Ваша система не є достатньо потужною. У вас можуть виникнути проблеми\n"
+"зі встановленням %s. Якщо такі проблеми виникнуть, спробуйте встановити\n"
+"систему у текстовому режимі. Щоб зробити це, натисніть F1 під час "
+"завантаження\n"
+"з компакт-диска, а потім введіть «text»."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
 #, c-format
@@ -845,14 +853,14 @@ msgid "Media Selection"
 msgstr "Вибір носія"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Встановити робочу станцію Mandriva KDE"
+msgstr "Встановити робочу станцію %s KDE"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Встановити робочу станцію Mandriva GNOME"
+msgstr "Встановити робочу станцію %s GNOME"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -897,7 +905,7 @@ msgstr "Індивідуальний вибір пакунків"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Скасувати весь вибір"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1484,9 +1492,9 @@ msgid "Preparing bootloader..."
 msgstr "Підготовлюю завантажувач..."
 
 #: steps_interactive.pm:1050
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing initial startup program..."
-msgstr "Підготовка встановлення"
+msgstr "Приготування початкової програми запуску…"
 
 #: steps_interactive.pm:1051
 #, c-format
@@ -1567,11 +1575,11 @@ msgid ""
 msgstr "Миша"
 
 #: steps_list.pm:20 steps_list.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Hard drive detection"
-msgstr "Визначення твердого диску"
+msgstr "Визначення твердого диска"
 
 #: steps_list.pm:22 steps_list.pm:23
 #, c-format
@@ -1664,42 +1672,182 @@ msgid ""
 "Exit"
 msgstr "Вийти"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Встановлення Мандріва Лінакс %s"
+#~ msgid ""
+#~ "\"%s\" contains software that can not be distributed in every country due "
+#~ "to software patents."
+#~ msgstr ""
+#~ "У сховищі «%s» містяться пакунки з програмним забезпеченням, яке не можна "
+#~ "вільно поширювати у деяких країнах через порушення патентних прав на це "
+#~ "програмне забезпечення."
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Ліцензія"
-
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Ваша стільниця на пристрої USB"
-
-#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ "\"%s\" contains the various pieces of the systems and its applications"
 #~ msgstr ""
-#~ "Дистрибутив Mandriva Linux зі 100%% вільного програмного забезпечення"
+#~ "У сховищі «%s» містяться різноманітні частини операційної системи та її "
+#~ "програм"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "З Linux просто ознайомитися за допомогою Mandriva One"
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Графічне середовище на основі GNOME"
+
+#~ msgid "A less developed lightweight fast graphical environment"
+#~ msgstr ""
+#~ "Швидке, невибагливе до ресурсів, але менш розвинене графічне середовище"
+
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Полегшене графічне середовище з дружнім інтерфейсом та програмами, засоби "
+#~ "для стільниці"
+
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Швидке, невибагливе до ресурсів графічне середовище з відданими "
+#~ "прихильниками"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr ""
+#~ "Програми для розваг: ігри-перегони, ігри на дошці, стратегічні, тощо"
+
+#~ msgid "Be Free!"
+#~ msgstr "Будьте вільними!"
+
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Робоча станція Cinnamon"
+
+#~ msgid "Core Release"
+#~ msgstr "Основне (випуск)"
+
+#~ msgid "Enlightenment e17 Desktop"
+#~ msgstr "Стільниця Enlightenment e17"
+
+#~ msgid "For developers!"
+#~ msgstr "Для розробників!"
+
+#~ msgid "For family!"
+#~ msgstr "Для сім’ї!"
+
+#~ msgid "For kids"
+#~ msgstr "Для дітей"
+
+#~ msgid "Home entertainment"
+#~ msgstr "Домашня розважальна система"
+
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Програма для встановлення виявила, що раніше встановлена система\n"
+#~ "Moondrake Linux не може бути безпечно поновлена до %s.\n"
+#~ "\n"
+#~ "Рекомендується виконати нове встановлення системи, яке замінить "
+#~ "попереднє.\n"
+#~ "\n"
+#~ "Попередження: вам слід зробити резервну копію особистих даних\n"
+#~ "перед тим, як виберете «Нове встановлення»."
+
+#~ msgid ""
+#~ "It also contains firmwares needed for certain devices to operate (eg: "
+#~ "some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
+#~ msgstr ""
+#~ "Там також мітяться пакунки з мікрокодом, потрібним для роботи деяких "
+#~ "пристроїв (наприклад деяких відеокарток ATI/AMD, деяких мережевих карток, "
+#~ "деяких карток RAID…)"
+
+#~ msgid ""
+#~ "It also contains software from \"%s\" rebuild with additional "
+#~ "capabilities."
+#~ msgstr ""
+#~ "Також у сховищі «%s» містяться пакунки, які зібрано з додатковими "
+#~ "можливостями, використання яких обмежується патентним законодавством."
+
+#~ msgid "Join Us!"
+#~ msgstr "Долучайтеся до нас!"
+
+#~ msgid "MATE Workstation"
+#~ msgstr "Робоча станція MATE"
+
+#~ msgid "Make it yours!"
+#~ msgstr "Підлаштуйте систему під себе!"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Помічники Moondrake"
+
+#~ msgid "Nonfree Release"
+#~ msgstr "Невільні (випуск)"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Програми для офісу: текстові процесори (LibreOffice Writer, Kword), "
+#~ "електронні таблиці (LibreOffice Calc, Kspread), переглядачі файлів PDF, "
+#~ "тощо"
+
+#~ msgid "Office tools"
+#~ msgstr "Офісні інструменти"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Сервери баз даних PostgreSQL і MariaDB"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Сервери баз даних PostgreSQL або MariaDB"
+
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Готуємося до оновлення…"
+
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Стільниця RazorQT"
+
+#~ msgid "Tainted Release"
+#~ msgstr "Сумнівні (випуск)"
+
+#~ msgid "Thank you!"
+#~ msgstr "Дякуємо!"
+
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "У цьому сховищі містяться оновлення пакунків зі сховища «%s»"
+
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Fvwm, тощо"
+
+#~ msgid "XFCE Workstation"
+#~ msgstr "Робоча станція XFCE"
+
+#~ msgid "Your choice!"
+#~ msgstr "Вибір за вами!"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Повноцінна стільниця Mandriva Linux з підтримкою"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: дистрибутиви для будь-яких потреб"
-
 #~ msgid "Bad package"
 #~ msgstr "Поганий пакунок"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Робота в мережі"
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "З Linux просто ознайомитися за допомогою Mandriva One"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Поновлення"
+#~ msgid "For contributors"
+#~ msgstr "Для учасників"
+
+#~ msgid "For people"
+#~ msgstr "Для всіх"
+
+#~ msgid "For you"
+#~ msgstr "Для вас"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Встановлення Мандріва Лінакс %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: дистрибутиви для будь-яких потреб"
+
+#~ msgid "Moondrake, the new Linux distribution"
+#~ msgstr "Moondrake, новий дистрибутив Linux"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1707,6 +1855,29 @@ msgstr "Вийти"
 #~ msgstr ""
 #~ "Програми для офісу: текстові процесори (kword, abiword), бухгалтерські "
 #~ "таблиці (kspread, gnumeric), переглядачі файлів pdf, тощо"
+
+#~ msgid "People!"
+#~ msgstr "всіх!"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Готуємо завантажувач…"
+
+#~ msgid "Proceed"
+#~ msgstr "Продовжувати"
+
+#~ msgid "Select All"
+#~ msgstr "Вибрати все"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr ""
+#~ "Дистрибутив Mandriva Linux зі 100%% вільного програмного забезпечення"
+
+#~ msgid "Welcome"
+#~ msgstr "Вітаємо"
+
+#~ msgid "Welcome!"
+#~ msgstr "Вітаємо'"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1728,8 +1899,23 @@ msgstr "Вийти"
 #~ "перезавантажте систему, а потім виконайте оновлення за допомогою аплету\n"
 #~ "оновлення Mandriva."
 
-#~ msgid "Proceed"
-#~ msgstr "Продовжувати"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Ваша стільниця на пристрої USB"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Ліцензія"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Робота в мережі"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Поновлення"
 
 #~ msgid "retrieval of [%s] failed"
 #~ msgstr "пошук [%s] завершився невдачею"

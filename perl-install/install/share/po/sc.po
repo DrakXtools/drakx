@@ -420,10 +420,9 @@ msgid "URL must start with ftp:// or http://"
 msgstr ""
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr ""
-"Cuntatu su jassu web de Mandriva Linux po tenni sa lista de is sprigus..."
+msgstr "Cuntatu su jassu web de %s po tenni sa lista de is sprigus..."
 
 #: any.pm:194
 #, fuzzy, c-format
@@ -716,7 +715,7 @@ msgstr ""
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Nisçuna descriidura"
 
 #: pkgs.pm:280
 #, c-format
@@ -731,9 +730,9 @@ msgid "An error occurred:"
 msgstr "Faddina"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Faddina"
+msgstr "Faddina mortali: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -774,9 +773,9 @@ msgid "Entering step `%s'\n"
 msgstr ""
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Seu aposentendi"
+msgstr "Aposentadura de %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -1188,9 +1187,9 @@ msgid "Bad file"
 msgstr "File malu"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1573,16 +1572,137 @@ msgid ""
 "Exit"
 msgstr "Bessi"
 
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Ambienti Gràfigu"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Workstation"
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "GNOME Workstation"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Server po Database PostGreSQL e MariaDB"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Server po Database PostGreSQL e MariaDB"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Apariçu su bootloader..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "IceWm Desktop"
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, etc"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "KDE Workstation"
+
+#~ msgid "%d packages"
+#~ msgstr "%d pakitus"
+
+#, fuzzy
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "%d pakitus"
+#~ msgstr[1] "%d pakitus"
+
+#~ msgid "All"
+#~ msgstr "Totu"
+
+#~ msgid "Automated"
+#~ msgstr "Automatisau"
+
+#~ msgid "Bad package"
+#~ msgstr "Pakitu malu"
+
+#~ msgid "Boot"
+#~ msgstr "Alluidura"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Sçobera pakitus de aposentai"
+
+#~ msgid "Configure X"
+#~ msgstr "Assètia X"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Cuntatu su sprigu po tenni sa lista de is pakitus a disposta..."
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Bolis impreai aboot?"
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Seu carculendi"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Crea unu floppy de aposentadura automàtiga"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm Desktop"
+
+#, fuzzy
+#~ msgid "Invictus Firewall"
+#~ msgstr "Interactive firewall"
+
+#~ msgid "Language"
+#~ msgstr "Lìngua"
+
+#~ msgid "License"
+#~ msgstr "Permissu"
+
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Aposentadura de Mandriva Linux %s"
+
+#~ msgid "Networking"
+#~ msgstr "Arretza"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Apariçu su bootloader..."
+
+#~ msgid "Replay"
+#~ msgstr "Faiddu torra"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Sarva su sçoberu de is pakitus"
+
+#~ msgid "TV card"
+#~ msgstr "Skeda TV"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "No potzu cuntatai su sprigu %s"
+
+#~ msgid "Users"
+#~ msgstr "Umperadoris"
+
+#~ msgid "Welcome"
+#~ msgstr "Beni beniu"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "Autentigadura"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "License"
 #~ msgstr "Permissu"
-
-#~ msgid "Bad package"
-#~ msgstr "Pakitu malu"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
@@ -1593,83 +1713,3 @@ msgstr "Bessi"
 #~ "_: Keep these entry short\n"
 #~ "Updates"
 #~ msgstr "Ajorronus"
-
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm Desktop"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Cuntatu su sprigu po tenni sa lista de is pakitus a disposta..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "No potzu cuntatai su sprigu %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Crea unu floppy de aposentadura automàtiga"
-
-#~ msgid "Replay"
-#~ msgstr "Faiddu torra"
-
-#~ msgid "Automated"
-#~ msgstr "Automatisau"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Sarva su sçoberu de is pakitus"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Bolis impreai aboot?"
-
-#~ msgid "All"
-#~ msgstr "Totu"
-
-#~ msgid "TV card"
-#~ msgstr "Skeda TV"
-
-#~ msgid "Boot"
-#~ msgstr "Alluidura"
-
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Authentication"
-#~ msgstr "Autentigadura"
-
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#, fuzzy
-#~ msgid "Invictus Firewall"
-#~ msgstr "Interactive firewall"
-
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#, fuzzy
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "%d pakitus"
-#~ msgstr[1] "%d pakitus"
-
-#~ msgid "%d packages"
-#~ msgstr "%d pakitus"
-
-#~ msgid "Language"
-#~ msgstr "Lìngua"
-
-#~ msgid "License"
-#~ msgstr "Permissu"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "Seu carculendi"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Sçobera pakitus de aposentai"
-
-#~ msgid "Users"
-#~ msgstr "Umperadoris"
-
-#~ msgid "Networking"
-#~ msgstr "Arretza"
-
-#~ msgid "Configure X"
-#~ msgstr "Assètia X"

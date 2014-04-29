@@ -2935,7 +2935,7 @@ msgstr ""
 "Така че добавете /boot дял"
 
 #: fsedit.pm:465 fsedit.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr ""
 "Вие не може да използвате криптирана файлова система за точка на монтиране %s"
@@ -3431,11 +3431,11 @@ msgstr "Избор на произволен драйвер"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:482
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -5276,19 +5276,19 @@ msgid "Installing driver for USB controller"
 msgstr "Инсталиране на драйвер за USB контролер"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller \"%s\""
-msgstr "Инсталиране на драйвер за Firewire контролер %s"
+msgstr "Инсталиране на драйвер за Firewire контролер \"%s\""
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard disk drive controller \"%s\""
-msgstr "Инсталиране на драйвер за дисков контролер %s"
+msgstr "Инсталиране на драйвер за дисков контролер \"%s\""
 
 #: modules/interactive.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller \"%s\""
-msgstr "Инсталиране на драйвер за Ethernet контролер %s"
+msgstr "Инсталиране на драйвер за Ethernet контролер \"%s\""
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -6719,7 +6719,7 @@ msgstr "Интернет"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "Мрежа"
 
 #: services.pm:161
 #, c-format
@@ -7043,123 +7043,271 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Инсталацията провалена"
 
-#~ msgid "Clean /tmp at each boot"
-#~ msgstr "Почистване на директория /tmp при всяко зареждане"
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Лицензионен договор"
 
-#~ msgid "command %s missing"
-#~ msgstr "командата %s липсва"
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Ограничена гаранция"
 
-#~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
-#~ msgstr ""
-#~ "Включи филтрирането на пакети за Linux ядра серия 2.2, за\n"
-#~ "настройка на защитната стена, защитаваща на машината ви от\n"
-#~ "мрежови атаки."
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. GPL Лиценза и придружаващи лицензи"
 
-#~ msgid "Enable 5.1 sound with Pulse Audio"
-#~ msgstr "Позволи 5.1 звук с PulseAudio"
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Права за Интелектуална Собственост"
 
-#~ msgid "Enable user switching for audio applications"
-#~ msgstr "Позволи потребителско превключване за звуковите приложения"
-
-#~ msgid "File sharing"
-#~ msgstr "Поделяне на файлове"
-
-#~ msgid "Restrict command line options"
-#~ msgstr "Ограничи опциите, задавани от командния ред"
-
-#~ msgid "restrict"
-#~ msgstr "ограничи"
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Управляващи Закони"
 
 #~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
 #~ msgstr ""
-#~ "Опцията ``Ограничи опциите от командния ред'' е безполезна без парола"
+#~ "Всички права към компонентите на Софтуерния Продукт принадлежат на "
+#~ "съответните им автори и са\n"
+#~ "защитени от законите за интелектуалната собственост и за копиране "
+#~ "прилагани за софтуерните програми.\n"
+#~ "Moondrake запазва правото си да модифицира и пригодява Софтуерния "
+#~ "Продукт, като цяло или на\n"
+#~ "части, по всякакъв начин и с всякакви цели.\n"
+#~ "\"Moondrake\" и свързаните логота са запазена марка на %s"
 
-#~ msgid "Use an encrypted filesystem"
-#~ msgstr "Използвайте криптирана файлова система "
-
-#~ msgid "Use the Microsoft Windows® partition for loopback"
-#~ msgstr "Използвай за Microsoft Windows® дялът за loopback"
-
-#~ msgid "Which partition do you want to use for Linux4Win?"
-#~ msgstr "Кой дял искате да използвате за Linux4Win ?"
-
-#~ msgid "Choose the sizes"
-#~ msgstr "Изберете големините"
-
-#~ msgid "Root partition size in MB: "
-#~ msgstr "Големина на root-дяла в MB: "
-
-#~ msgid "Swap partition size in MB: "
-#~ msgstr "Големина на swap-дяла в MB: "
+#, fuzzy
+#~ msgid "An NTP client/server"
+#~ msgstr "NTP сървър"
 
 #~ msgid ""
-#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
 #~ msgstr ""
-#~ "Няма FAT дялове за използване като loopback (или няма достатъчно място на "
-#~ "диска)"
+#~ "Поздравления, инсталацията е преключена.\n"
+#~ "Извадете инсталационния диск и натисене Enter за да рестартирайте."
 
 #~ msgid ""
-#~ "The FAT resizer is unable to handle your partition, \n"
-#~ "the following error occurred: %s"
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
 #~ msgstr ""
-#~ "Не възможност за работа с вашия FAT дял, \n"
-#~ "поради получената грешка: %s"
-
-#~ msgid "Automatic routing from ALSA to PulseAudio"
-#~ msgstr "Автоматично препращане от ALSA към PulseAudio"
-
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "Моля излезте от текущата сесия и използвайте Ctrl-Alt-BackSpace"
-
-#~ msgid "Welcome To Crackers"
-#~ msgstr "Добре дошли при Cracker-ите"
-
-#~ msgid "Poor"
-#~ msgstr "Лошо"
-
-#~ msgid "High"
-#~ msgstr "Високо"
-
-#~ msgid "Higher"
-#~ msgstr "По-високо"
-
-#~ msgid "Paranoid"
-#~ msgstr "Параноично"
+#~ "За информация, относно известни вече проблеми как се решават, свързани с "
+#~ "тази версия на Moondrake,\n"
+#~ "се консултирайте с документа Errata, на адрес : \n"
+#~ "%s"
 
 #~ msgid ""
-#~ "This level is to be used with care. It makes your system more easy to "
-#~ "use,\n"
-#~ "but very sensitive. It must not be used for a machine connected to "
-#~ "others\n"
-#~ "or to the Internet. There is no password access."
+#~ "If any portion of this agreement is held void, illegal or inapplicable by "
+#~ "a court judgment, this \n"
+#~ "portion is excluded from this contract. You remain bound by the other "
+#~ "applicable sections of the \n"
+#~ "agreement.\n"
+#~ "The terms and conditions of this License are governed by the Laws of "
+#~ "France.\n"
+#~ "All disputes on the terms of this license will preferably be settled out "
+#~ "of court. As a last \n"
+#~ "resort, the dispute will be referred to the appropriate Courts of Law of "
+#~ "Paris - France.\n"
+#~ "For any question on this document, please contact Moondrake."
 #~ msgstr ""
-#~ "Това ниво се използва с внимание. Това кара системата ви по-лесна за\n"
-#~ "употреба, но е по-чувствително: не трябва да бъде използвана на машини\n"
-#~ "свързани с други или по Интернет. Няма достъп с пароли."
+#~ "Ако някоя част от този договор се води забранена, нелегална или "
+#~ "неприложима според решение на съд,\n"
+#~ "тази част се изключва от договора. Вие оставате ограничени от останалите "
+#~ "приложими секции на договора.\n"
+#~ "Сроковете и условията на този Лиценз се управляват от Законите на "
+#~ "Франция.\n"
+#~ "Всички спорове по условията на този лиценз би било добре да се отнесат до "
+#~ "съда. Като крайна мярка,\n"
+#~ "споровете ще бъдат отнасяни до подходящия правни съдилища на Париж - "
+#~ "Франция.\n"
+#~ "За всякакви въпроси по този документ, моля, свържете се с Moondrake\n"
+#~ "\n"
+#~ "ЗАБЕЛЕЖКА: Това е български приблизителен превод на документа, което "
+#~ "означава, че той\n"
+#~ "вероятно не е достатъчно точен. Като по-достоверен източник ползвайте "
+#~ "неговия оригинал на\n"
+#~ "английски."
 
 #~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
 #~ msgstr ""
-#~ "Паролата сега е включена, но използването като мрежов компютър не е "
-#~ "препоръчително."
+#~ "Информация за настройване на вашата система можете да намерите в\n"
+#~ "в официалното Moondrake ръководство на потребителя."
+
+#~ msgid "Introduction"
+#~ msgstr "Въведение"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "Първо създайте архивно копие на своите данни"
 
 #~ msgid ""
-#~ "There are already some restrictions, and more automatic checks are run "
-#~ "every night."
+#~ "Please read this document carefully. This document is a license agreement "
+#~ "between you and  \n"
+#~ "Moondrake which applies to the Software Products.\n"
+#~ "By installing, duplicating or using any of the Software Products in any "
+#~ "manner, you explicitly \n"
+#~ "accept and fully agree to conform to the terms and conditions of this "
+#~ "License. \n"
+#~ "If you disagree with any portion of the License, you are not allowed to "
+#~ "install, duplicate or use \n"
+#~ "the Software Products. \n"
+#~ "Any attempt to install, duplicate or use the Software Products in a "
+#~ "manner which does not comply \n"
+#~ "with the terms and conditions of this License is void and will terminate "
+#~ "your rights under this \n"
+#~ "License. Upon termination of the License,  you must immediately destroy "
+#~ "all copies of the \n"
+#~ "Software Products."
 #~ msgstr ""
-#~ "Вече има някой ограничения, и повече автоматични проверки ще се "
-#~ "изпълняват всяка вечер."
+#~ "Моля, прочетете внимателно този документ. Този документ е лицензионен "
+#~ "договор между вас и\n"
+#~ "Moondrake, който се отнася до Софтуерния Продукт. Чрез инсталирането, "
+#~ "копирането\n"
+#~ "или използването на Софтуерния Продукт по какъвто и да е начин вие "
+#~ "изрично приемате и\n"
+#~ "напълно се съгласявате да спазвате сроковете и условията на този Лиценз.\n"
+#~ "Ако не се съгласявате с някоя част на Лиценза, нямате право да "
+#~ "инсталирате, копирате или\n"
+#~ "използвате Софтуерния Продукт. Опитите да се инсталира, копира или "
+#~ "използва Софтуерния Продукт\n"
+#~ "несъобразно със сроковете и условията на този Лиценз се забраняват и "
+#~ "такива прекратяват правата\n"
+#~ "ви по този Лиценз. При прекратяване на Лиценза, трябва незабавно да "
+#~ "унижтожите всички\n"
+#~ "копия на Софтуерния лиценз."
 
 #~ msgid ""
-#~ "This is similar to the previous level, but the system is entirely closed "
-#~ "and security features are at their maximum."
+#~ "The Software Products and attached documentation are provided \"as is\", "
+#~ "with no warranty, to the \n"
+#~ "extent permitted by law.\n"
+#~ "Neither Moondrake nor its licensors or suppliers will, in any "
+#~ "circumstances and to the extent \n"
+#~ "permitted by law, be liable for any special, incidental, direct or "
+#~ "indirect damages whatsoever \n"
+#~ "(including without limitation damages for loss of business, interruption "
+#~ "of business, financial \n"
+#~ "loss, legal fees and penalties resulting from a court judgment, or any "
+#~ "other consequential loss) \n"
+#~ "arising out of  the use or inability to use the Software Products, even "
+#~ "if Moondrake or its \n"
+#~ "licensors or suppliers have been advised of the possibility or occurrence "
+#~ "of such damages.\n"
+#~ "\n"
+#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN "
+#~ "SOME COUNTRIES\n"
+#~ "\n"
+#~ "To the extent permitted by law, neither Moondrake nor its licensors, "
+#~ "suppliers or\n"
+#~ "distributors will, in any circumstances, be liable for any special, "
+#~ "incidental, direct or indirect \n"
+#~ "damages whatsoever (including without limitation damages for loss of "
+#~ "business, interruption of \n"
+#~ "business, financial loss, legal fees and penalties resulting from a court "
+#~ "judgment, or any \n"
+#~ "other consequential loss) arising out of the possession and use of "
+#~ "software components or \n"
+#~ "arising out of  downloading software components from one of Moondrake "
+#~ "sites which are \n"
+#~ "prohibited or restricted in some countries by local laws.\n"
+#~ "This limited liability applies to, but is not restricted to, the strong "
+#~ "cryptography components \n"
+#~ "included in the Software Products.\n"
+#~ "However, because some jurisdictions do not allow the exclusion or "
+#~ "limitation of liability for \n"
+#~ "consequential or incidental damages, the above limitation may not apply "
+#~ "to you."
 #~ msgstr ""
-#~ "Подобно на предишното ниво, но системата е напълно затворена.\n"
-#~ "Нивото на сигурност е на максимума си."
+#~ "Софтуерните Продукти и приложената документация се предоставят \"такива "
+#~ "каквито са\", без гаранция,\n"
+#~ "в рамките на разрешеното от закона.\n"
+#~ "Moondrake, при никакви обстоятелства и в рамките на закона, не е "
+#~ "отговорна за каквито да e\n"
+#~ "умишлени, случайни, преки или косвени щети (включително загуба на данни "
+#~ "за работа, прекратяване на,\n"
+#~ "работа, финансови загуби, законни данъци и наказания в резултат на "
+#~ "съдебно решение или каквато и да е\n"
+#~ "друга произлизащи от това загуби) произтичащи от употребата или от "
+#~ "невъзможността да се употреби\n"
+#~ "Софтуерния Продукт, даже ако Moondrake да е известила за възможността или "
+#~ "случването на такава загуба.\n"
+#~ "\n"
+#~ "ОГРАНИЧЕНА ОТГОВОРНОСТ СВЪРЗАНА С ПРИТЕЖАВАНЕТО ИЛИ ИЗПОЛЗВАНЕТО НА "
+#~ "ЗАБРАНЕН СОФТУЕР В НЯКОИ СТРАНИ\n"
+#~ "\n"
+#~ "В рамките на закона, Moondrake и нейните дистрибутори няма при никакви "
+#~ "условия да бъдат\n"
+#~ "отговорни за каквито и да било умишлени, случайни, преки или косвени щети "
+#~ "(включително загуба на данни\n"
+#~ "за работа, прекратяване на, работа, финансови загуби, законни данъци и "
+#~ "наказания в резултат на\n"
+#~ "съдебно решение или каквато и да е друга произлизащи от това загуби) "
+#~ "произтичащи от притежаването\n"
+#~ "и употребата на софтуерни компоненти и от изтеглянето на софтуерни "
+#~ "компоненти от сайтовете на Moondrake,\n"
+#~ "които са забранени в някои страни от местното законодателство.\n"
+#~ "Тази ограничена отговорност се отнася до, но не само за, мощните "
+#~ "криптографски компоненти включени\n"
+#~ "в Софтуерния Продукт."
+
+#, fuzzy
+#~ msgid ""
+#~ "The Software Products consist of components created by different persons "
+#~ "or entities.\n"
+#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
+#~ "the components which \n"
+#~ "they cover. Please read carefully the terms and conditions of the license "
+#~ "agreement for each component \n"
+#~ "before using any component. Any question on a component license should be "
+#~ "addressed to the component \n"
+#~ "licensor or supplier and not to Moondrake.\n"
+#~ "The programs developed by Moondrake are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by Moondrake is governed by \"%s\" License."
+#~ msgstr ""
+#~ "Софтуерният Продукт се състои от компоненти създадени от различни хора "
+#~ "или организации. Повечето от\n"
+#~ "тези компоненти се управляват от сроковете и условията на GNU Общия "
+#~ "Публичен Лиценз, оттук нататък наричан\n"
+#~ "\"GPL\", или подобни нему лицензи. Повечето от тези лицензи ви позволяват "
+#~ "да използвате, копирате, или\n"
+#~ "редистрибутирате компонентите, които те покриват. Моля, прочетете "
+#~ "внимателно сроковете и условията на\n"
+#~ "лицензионния договор на всеки компонент преди да го използвате. Всякакви "
+#~ "въпроси относно лиценза\n"
+#~ "на компонентите би трябвало да бъдат насочени към съответния им автор, а "
+#~ "не към Moondrake.\n"
+#~ "Програмите разработени от Moondrake се управляват от GPL Лиценза. "
+#~ "Документацията написана\n"
+#~ "от Moondrake се управлява от специален лиценз. Моля, погледнете "
+#~ "документацията за\n"
+#~ "повече информация."
+
+#~ msgid ""
+#~ "The operating system and the different components available in the "
+#~ "Moondrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software "
+#~ "Products include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation "
+#~ "related to the operating \n"
+#~ "system and the different components of the Moondrake distribution, and "
+#~ "any applications \n"
+#~ "distributed with these products provided by Moondrake's licensors or "
+#~ "suppliers."
+#~ msgstr ""
+#~ "Операционната система и различните компоненти достъпни в Moondrake "
+#~ "дистрибуцията по-долу ще се\n"
+#~ "наричат \"Софтуерен Продукти\". Софтуерните Продукти включват, но не се "
+#~ "ограничават само до, набора\n"
+#~ "програми, методи, правила и документация отнасяща се до операционната "
+#~ "система и различните\n"
+#~ "компоненти на Moondrake дистрибуцията."
 
 #~ msgid ""
 #~ "\n"
@@ -7225,8 +7373,8 @@ msgstr "Инсталацията провалена"
 #~ "съответните им автори и са защитени като интелектуална собственост от\n"
 #~ "законите за авторски права приложими за софтуерните програми.\n"
 
-#~ msgid "Use libsafe for servers"
-#~ msgstr "Използвайте libsafe за сървъри"
+#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 
 #~ msgid ""
 #~ "A library which defends against buffer overflow and format string attacks."
@@ -7234,14 +7382,84 @@ msgstr "Инсталацията провалена"
 #~ "Библиотека, която осигурява защита от атаки с препълване на буфер и "
 #~ "форматни стрингове."
 
-#~ msgid "LILO/grub Installation"
-#~ msgstr "LILO/grub инсталация"
+#~ msgid "Accept user"
+#~ msgstr "Приеми потребител"
 
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "Точен размер на RAM-паметта, ако е необходимо (намерени %d MB)"
+#~ msgid "Accept/Refuse bogus IPv4 error messages."
+#~ msgstr "Позволява/Забранява съобщения за IPv4 грешки."
+
+#~ msgid "Accept/Refuse broadcasted icmp echo."
+#~ msgstr "Позволява/Забранява broadcasted icmp echo."
+
+#~ msgid "Add user"
+#~ msgstr "Добави потребител"
+
+#~ msgid "Allow/Forbid remote root login."
+#~ msgstr "Позволява/Забранява отдалечено влизане на root."
+
+#, fuzzy
+#~ msgid "Authentication Active Directory"
+#~ msgstr "идентификация"
+
+#~ msgid "Authentication LDAP"
+#~ msgstr "LDAP ауторизация"
+
+#~ msgid "Authentication NIS"
+#~ msgstr "NIS идентификация"
+
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "Идентификация на Windows Домейн"
+
+#~ msgid "Automatic routing from ALSA to PulseAudio"
+#~ msgstr "Автоматично препращане от ALSA към PulseAudio"
+
+#~ msgid "Bad backup file"
+#~ msgstr "Лош backup-файл"
+
+#~ msgid "Choose action"
+#~ msgstr "Изберете действие"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Изберете големините"
+
+#~ msgid "Clean /tmp at each boot"
+#~ msgstr "Почистване на директория /tmp при всяко зареждане"
+
+#~ msgid "Collapse Tree"
+#~ msgstr "Изчисти дървото"
+
+#~ msgid "Enable 5.1 sound with Pulse Audio"
+#~ msgstr "Позволи 5.1 звук с PulseAudio"
+
+#~ msgid "Enable user switching for audio applications"
+#~ msgstr "Позволи потребителско превключване за звуковите приложения"
+
+#~ msgid "Error reading file %s"
+#~ msgstr "Грешка при четенето на файла %s"
+
+#~ msgid "Error writing to file %s"
+#~ msgstr "Грешка при запис във файла %s"
+
+#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
+#~ msgstr "Грешка: \"%s\" драйвер за вашата карта е инсталиран"
+
+#~ msgid "Expand Tree"
+#~ msgstr "Разшири дървото"
+
+#~ msgid "Ext2"
+#~ msgstr "Ext2"
+
+#~ msgid "File sharing"
+#~ msgstr "Поделяне на файлове"
 
 #~ msgid "Give the ram size in MB"
 #~ msgstr "Дава размера RAM-памет в Mb"
+
+#~ msgid "High"
+#~ msgstr "Високо"
+
+#~ msgid "Higher"
+#~ msgstr "По-високо"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
@@ -7252,52 +7470,99 @@ msgstr "Инсталацията провалена"
 #~ "сектора\n"
 #~ "са достатъчни) в началото на диска"
 
-#~ msgid "Security level"
-#~ msgstr "Ниво на сигурност"
+#~ msgid "Info: "
+#~ msgstr "Информация: "
 
-#~ msgid "Expand Tree"
-#~ msgstr "Разшири дървото"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "Изчисти дървото"
-
-#~ msgid "Toggle between flat and group sorted"
-#~ msgstr "Превключване между нормално и сортиране по групи"
-
-#~ msgid "Choose action"
-#~ msgstr "Изберете действие"
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "LDAP ауторизация"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#, fuzzy
-#~ msgid "Authentication Active Directory"
-#~ msgstr "идентификация"
+#~ msgid "Journalised FS"
+#~ msgstr "Журнална FS"
 
 #, fuzzy
 #~ msgid "LDAP users database"
 #~ msgstr "Сървър, Бази-данни"
 
-#~ msgid "Authentication NIS"
-#~ msgstr "NIS идентификация"
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/grub инсталация"
 
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Идентификация на Windows Домейн"
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "Включи филтрирането на пакети за Linux ядра серия 2.2, за\n"
+#~ "настройка на защитната стена, защитаваща на машината ви от\n"
+#~ "мрежови атаки."
 
-#~ msgid "Undo"
-#~ msgstr "Върни"
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr ""
+#~ "Опцията ``Ограничи опциите от командния ред'' е безполезна без парола"
+
+#~ msgid "PLL setting:"
+#~ msgstr "PLL настройки:"
+
+#~ msgid "Paranoid"
+#~ msgstr "Параноично"
+
+#~ msgid ""
+#~ "Passwords are now enabled, but use as a networked computer is still not "
+#~ "recommended."
+#~ msgstr ""
+#~ "Паролата сега е включена, но използването като мрежов компютър не е "
+#~ "препоръчително."
+
+#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
+#~ msgstr "Моля излезте от текущата сесия и използвайте Ctrl-Alt-BackSpace"
+
+#~ msgid "Poor"
+#~ msgstr "Лошо"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Точен размер на RAM-паметта, ако е необходимо (намерени %d MB)"
+
+#~ msgid "Radio support:"
+#~ msgstr "Подръжка на радио:"
+
+#~ msgid "Removable media automounting"
+#~ msgstr "Автоматично монтиране на сменяем носител"
+
+#~ msgid "Rescue partition table"
+#~ msgstr "Спасяване таблицата с дяловете"
+
+#~ msgid "Restore partition table"
+#~ msgstr "Възстанови таблицата с дяловете"
+
+#~ msgid "Restoring from file %s failed: %s"
+#~ msgstr "Възстановяването от файла %s не успя: %s"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Ограничи опциите, задавани от командния ред"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Големина на root-дяла в MB: "
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
 
 #~ msgid "Save partition table"
 #~ msgstr "Запази таблицата с дяловете"
 
-#~ msgid "Restore partition table"
-#~ msgstr "Възстанови таблицата с дяловете"
+#~ msgid "Security level"
+#~ msgstr "Ниво на сигурност"
+
+#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
+#~ msgstr "Стартира X Font Server (това е задължително, за да тръгне Xorg)."
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Големина на swap-дяла в MB: "
+
+#~ msgid "TLS"
+#~ msgstr "TLS"
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "Не възможност за работа с вашия FAT дял, \n"
+#~ "поради получената грешка: %s"
 
 #~ msgid ""
 #~ "The backup partition table has not the same size\n"
@@ -7306,66 +7571,67 @@ msgstr "Инсталацията провалена"
 #~ "Резервната таблица на дяловете не е със същата големина\n"
 #~ "Да продължа ли все пак ?"
 
-#~ msgid "Info: "
-#~ msgstr "Информация: "
+#~ msgid ""
+#~ "There are already some restrictions, and more automatic checks are run "
+#~ "every night."
+#~ msgstr ""
+#~ "Вече има някой ограничения, и повече автоматични проверки ще се "
+#~ "изпълняват всяка вечер."
+
+#~ msgid ""
+#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ msgstr ""
+#~ "Няма FAT дялове за използване като loopback (или няма достатъчно място на "
+#~ "диска)"
+
+#~ msgid ""
+#~ "This is similar to the previous level, but the system is entirely closed "
+#~ "and security features are at their maximum."
+#~ msgstr ""
+#~ "Подобно на предишното ниво, но системата е напълно затворена.\n"
+#~ "Нивото на сигурност е на максимума си."
+
+#~ msgid ""
+#~ "This level is to be used with care. It makes your system more easy to "
+#~ "use,\n"
+#~ "but very sensitive. It must not be used for a machine connected to "
+#~ "others\n"
+#~ "or to the Internet. There is no password access."
+#~ msgstr ""
+#~ "Това ниво се използва с внимание. Това кара системата ви по-лесна за\n"
+#~ "употреба, но е по-чувствително: не трябва да бъде използвана на машини\n"
+#~ "свързани с други или по Интернет. Няма достъп с пароли."
+
+#~ msgid "Toggle between flat and group sorted"
+#~ msgstr "Превключване между нормално и сортиране по групи"
+
+#~ msgid "Trying to rescue partition table"
+#~ msgstr "Опитвам се да спася таблицата на дяловете"
+
+#~ msgid "Undo"
+#~ msgstr "Върни"
 
 #, fuzzy
 #~ msgid "Unknown driver"
 #~ msgstr "Неизвестен драйвер"
 
-#~ msgid "Error reading file %s"
-#~ msgstr "Грешка при четенето на файла %s"
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr "Използвайте криптирана файлова система "
 
-#~ msgid "Restoring from file %s failed: %s"
-#~ msgstr "Възстановяването от файла %s не успя: %s"
+#~ msgid "Use libsafe for servers"
+#~ msgstr "Използвайте libsafe за сървъри"
 
-#~ msgid "Bad backup file"
-#~ msgstr "Лош backup-файл"
+#~ msgid "Use the Microsoft Windows® partition for loopback"
+#~ msgstr "Използвай за Microsoft Windows® дялът за loopback"
 
-#~ msgid "Error writing to file %s"
-#~ msgstr "Грешка при запис във файла %s"
+#~ msgid "Welcome To Crackers"
+#~ msgstr "Добре дошли при Cracker-ите"
 
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr "Грешка: \"%s\" драйвер за вашата карта е инсталиран"
+#~ msgid "Which partition do you want to use for Linux4Win?"
+#~ msgstr "Кой дял искате да използвате за Linux4Win ?"
 
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
+#~ msgid "command %s missing"
+#~ msgstr "командата %s липсва"
 
-#~ msgid "Journalised FS"
-#~ msgstr "Журнална FS"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr "Стартира X Font Server (това е задължително, за да тръгне Xorg)."
-
-#~ msgid "Add user"
-#~ msgstr "Добави потребител"
-
-#~ msgid "Accept user"
-#~ msgstr "Приеми потребител"
-
-#~ msgid "Rescue partition table"
-#~ msgstr "Спасяване таблицата с дяловете"
-
-#~ msgid "Removable media automounting"
-#~ msgstr "Автоматично монтиране на сменяем носител"
-
-#~ msgid "Trying to rescue partition table"
-#~ msgstr "Опитвам се да спася таблицата на дяловете"
-
-#~ msgid "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr "Позволява/Забранява съобщения за IPv4 грешки."
-
-#~ msgid "Accept/Refuse broadcasted icmp echo."
-#~ msgstr "Позволява/Забранява broadcasted icmp echo."
-
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "Позволява/Забранява отдалечено влизане на root."
-
-#~ msgid "PLL setting:"
-#~ msgstr "PLL настройки:"
-
-#~ msgid "Radio support:"
-#~ msgstr "Подръжка на радио:"
-
-#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
-#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+#~ msgid "restrict"
+#~ msgstr "ограничи"

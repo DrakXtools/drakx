@@ -314,18 +314,18 @@ msgstr ""
 "pengguna"
 
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:156
-#, fuzzy, c-format
+#, c-format
 msgid "LXDE Desktop"
-msgstr "Desktop IceWm"
+msgstr "Desktop LXDE"
 
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:158
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "A lightweight & fast graphical environment with user-friendly set of "
 "applications and desktop tools"
 msgstr ""
-"Lingkungan grafis dengan kumpulan aplikasi dan aplikasi desktop yang ramah "
-"pengguna"
+"Sebuah lingkungan grafis yang ringan & cepat dengan kumpulan aplikasi dan "
+"peralatan desktop yang mudah digunakan"
 
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:162
 #, c-format
@@ -445,16 +445,16 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL harus diawali dengan ftp:// atau http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr "Menghubungi situs Mandriva Linux untuk mengambil daftar mirror..."
+msgstr ""
+"Menghubungi situs web %s untuk mendapatkan daftar mirror yang tersedia..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Gagal menghubungi situs Mandriva Linux untuk mengambil daftar mirror yang "
-"tersedia"
+"Gagal menghubungi situs web %s untuk mendapatkan daftar mirror yang tersedia"
 
 #: any.pm:204
 #, c-format
@@ -526,11 +526,13 @@ msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
 "free software drivers to work."
 msgstr ""
+"Beberapa hardware pada komputer Anda memerlukan beberapa firmwares non free "
+"agar driver free software bisa bekerja."
 
 #: any.pm:351
 #, c-format
 msgid "You should enable \"%s\""
-msgstr ""
+msgstr "Anda harus menghidupkan \"%s\""
 
 #: any.pm:370
 #, c-format
@@ -547,7 +549,7 @@ msgstr ""
 #: any.pm:372
 #, c-format
 msgid "\"%s\" contains non free software.\n"
-msgstr ""
+msgstr "\"%s\" berisi software non free.\n"
 
 #: any.pm:373
 #, c-format
@@ -560,6 +562,7 @@ msgstr ""
 #, c-format
 msgid "Here you can enable more media if you want."
 msgstr ""
+"Di sini Anda bisa menghidupkan lebih banyak media jika Anda menginginkannya"
 
 #: any.pm:456
 #, c-format
@@ -692,12 +695,12 @@ msgstr "Menonaktifkan jaringan"
 #: media.pm:409
 #, c-format
 msgid "Please wait, retrieving file"
-msgstr ""
+msgstr "Silakan tunggu, mengambil file"
 
 #: media.pm:717
 #, c-format
 msgid "unable to add medium"
-msgstr ""
+msgstr "tidak bisa menambah media"
 
 #: media.pm:757
 #, c-format
@@ -737,17 +740,18 @@ msgstr "mungkin"
 #: pkgs.pm:102
 #, c-format
 msgid "Getting package information from XML meta-data..."
-msgstr ""
+msgstr "Mendapatkan informasi paket dari meta-data XML..."
 
 #: pkgs.pm:111
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Tidak ada info xml untuk media \"%s\", hanya sebagian hasil untuk paket %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Tidak ada deskripsi"
 
 #: pkgs.pm:280
 #, c-format
@@ -759,19 +763,19 @@ msgstr ""
 "%s"
 
 #: pkgs.pm:376 pkgs.pm:403
-#, fuzzy, c-format
+#, c-format
 msgid "An error occurred:"
-msgstr "Terjadi kesalahan"
+msgstr "Sebuah error terjadi:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Terjadi kesalahan"
+msgstr "Sebuah error fatal terjadi: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Jangan tanya lagi"
 
 #: pkgs.pm:894
 #, c-format
@@ -779,9 +783,9 @@ msgid "%d installation transactions failed"
 msgstr "transaksi installasi %d gagal"
 
 #: pkgs.pm:895
-#, fuzzy, c-format
+#, c-format
 msgid "Installation of packages failed:"
-msgstr "Menginstall paket %s"
+msgstr "Instalasi paket gagal:"
 
 #: steps.pm:85
 #, c-format
@@ -811,9 +815,9 @@ msgid "Entering step `%s'\n"
 msgstr "Memasuki langkah `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Installasi"
+msgstr "Instalasi %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -823,34 +827,35 @@ msgstr "<Tab>/<Alt-Tab> antar elemen"
 #: steps_gtk.pm:147
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
-msgstr ""
+msgstr "Server Xorg lambat memulai. Silakan tunggu..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Sumber daya sistem Anda rendah. Anda akan mengalami kesulitan\n"
-"menginstall Mandriva Linux. Jika terjadi, Anda bisa mencoba\n"
-"installasi berbasis teks. Untuk melakukannya, tekan `F1' saat\n"
-"booting pada CDROM, lalu ketikkan `text'."
+"Sistem Anda memiliki sumber daya yang rendah. Anda mungkin menemukan "
+"beberapa\n"
+"masalah instalasi %s. Jika ini terjadi, Anda bisa mencoba instalasi berbasis "
+"teks.\n"
+"Untuk melakukannya, tekan `F1' saat booting pada CDROM, lalu masukkan `text'."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
-#, fuzzy, c-format
+#, c-format
 msgid "Media Selection"
-msgstr "Pilihan Grup Paket"
+msgstr "Pemilihan Media"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Install Desktop KDE Mandriva"
+msgstr "Install Desktop KDE %s"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Install Desktop GNOME Mandriva"
+msgstr "Install Desktop GNOME %s"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -858,29 +863,29 @@ msgid "Custom install"
 msgstr "Installasi kustomisasi"
 
 #: steps_gtk.pm:275
-#, fuzzy, c-format
+#, c-format
 msgid "KDE Desktop"
-msgstr "Desktop IceWm"
+msgstr "Desktop KDE"
 
 #: steps_gtk.pm:276
-#, fuzzy, c-format
+#, c-format
 msgid "GNOME Desktop"
-msgstr "Desktop IceWm"
+msgstr "Desktop GNOME"
 
 #: steps_gtk.pm:277
-#, fuzzy, c-format
+#, c-format
 msgid "Custom Desktop"
-msgstr "Desktop IceWm"
+msgstr "Desktop kustomisasi"
 
 #: steps_gtk.pm:283
 #, c-format
 msgid "Here's a preview of the '%s' desktop."
-msgstr ""
+msgstr "Ini adalah pratampil desktop '%s'."
 
 #: steps_gtk.pm:310
 #, c-format
 msgid "Click on images in order to see a bigger preview"
-msgstr ""
+msgstr "Klik pada gambar untuk melihat pratampil lebih besar"
 
 #: steps_gtk.pm:326 steps_interactive.pm:628 steps_list.pm:31
 #, c-format
@@ -895,7 +900,7 @@ msgstr "Pilih paket individu"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Jangan pilih Semua"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1036,14 +1041,14 @@ msgid "No details"
 msgstr "Tanpa Detail"
 
 #: steps_gtk.pm:620
-#, fuzzy, c-format
+#, c-format
 msgid "Time remaining:"
-msgstr "Sisa waktu"
+msgstr "Waktu tersisa:"
 
 #: steps_gtk.pm:621
-#, fuzzy, c-format
+#, c-format
 msgid "(estimating...)"
-msgstr "Memperkirakan"
+msgstr "(memperkirakan...)"
 
 #: steps_gtk.pm:651
 #, c-format
@@ -1103,9 +1108,9 @@ msgid "Please choose your keyboard layout"
 msgstr "Pilih layout keyboard Anda"
 
 #: steps_interactive.pm:109
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available keyboards:"
-msgstr "Berikut daftar keyboard yang tersedia"
+msgstr "Ini adalah daftar lengkap keyboard yang tersedia:"
 
 #: steps_interactive.pm:148
 #, c-format
@@ -1137,17 +1142,17 @@ msgstr "Kunci enkripsi untuk %s"
 #: steps_interactive.pm:209
 #, c-format
 msgid "Cancel installation, reboot system"
-msgstr ""
+msgstr "Batalkan instalasi, reboot sistem"
 
 #: steps_interactive.pm:210
-#, fuzzy, c-format
+#, c-format
 msgid "New Installation"
-msgstr "Installasi"
+msgstr "Instalasi Baru"
 
 #: steps_interactive.pm:211
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
-msgstr ""
+msgstr "Upgrade instalasi sebelumnya (tidak direkomendasikan)"
 
 #: steps_interactive.pm:215
 #, c-format
@@ -1242,9 +1247,9 @@ msgid "Bad file"
 msgstr "File rusak"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1252,15 +1257,14 @@ msgid "GNOME"
 msgstr "GNOME"
 
 #: steps_interactive.pm:482
-#, fuzzy, c-format
+#, c-format
 msgid "Desktop Selection"
-msgstr "Pilihan Grup Paket"
+msgstr "Pemilihan Desktop"
 
 #: steps_interactive.pm:483
-#, fuzzy, c-format
+#, c-format
 msgid "You can choose your workstation desktop profile."
-msgstr ""
-"Anda bisa memilih profil desktop workstation Anda: KDE, GNOME atau Kustom"
+msgstr "Anda bisa memilih profil desktop workstation Anda."
 
 #: steps_interactive.pm:571
 #, c-format
@@ -1287,9 +1291,9 @@ msgid "With X"
 msgstr "Dengan X"
 
 #: steps_interactive.pm:602
-#, fuzzy, c-format
+#, c-format
 msgid "Install suggested packages"
-msgstr "Menginstall paket %s"
+msgstr "Install paket yang disarankan"
 
 #: steps_interactive.pm:603
 #, c-format
@@ -1469,14 +1473,14 @@ msgid "Preparing bootloader..."
 msgstr "Mempersiapkan bootloader..."
 
 #: steps_interactive.pm:1050
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing initial startup program..."
-msgstr "Mempersiapkan installasi"
+msgstr "Menyiapkan program startup awal..."
 
 #: steps_interactive.pm:1051
 #, c-format
 msgid "Be patient, this may take a while..."
-msgstr ""
+msgstr "Harap bersabar, ini mungkin akan memakan waktu..."
 
 #: steps_interactive.pm:1062
 #, c-format
@@ -1649,26 +1653,267 @@ msgid ""
 "Exit"
 msgstr "Keluar"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Installasi Mandriva Linux %s"
+#~ msgid ""
+#~ "\"%s\" contains software that can not be distributed in every country due "
+#~ "to software patents."
+#~ msgstr ""
+#~ "\"%s\" berisi software yang tidak bisa didistribusikan di setiap negara "
+#~ "karena masalah paten software."
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Lisensi"
+#~ "\"%s\" contains the various pieces of the systems and its applications"
+#~ msgstr "\"%s\" berisi beberapa bagian dari sistem dan aplikasinya"
+
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Lingkungan grafis berbasis GNOME"
+
+#~ msgid "A less developed lightweight fast graphical environment"
+#~ msgstr "Lingkungan grafis cepat dan ringan yang kurang dikembangkan"
+
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Lingkungan grafis yang ringan dengan seperangkat aplikasi dan peralatan "
+#~ "desktop yang mudah digunakan"
+
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr "Lingkungan grafis yang cepat dan ringan"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Program hiburan: arcade, papan, strategi, dll"
+
+#~ msgid "Be Free!"
+#~ msgstr "Bebaskan!"
+
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Lingkungan kerja Cinnamon"
+
+#~ msgid "Core Release"
+#~ msgstr "Core Rilis"
+
+#~ msgid "Enlightenment e17 Desktop"
+#~ msgstr "Desktop Enlightenment e17"
+
+#~ msgid "For developers!"
+#~ msgstr "Untuk developer!"
+
+#~ msgid "For family!"
+#~ msgstr "Untuk keluarga!"
+
+#~ msgid "For kids"
+#~ msgstr "Untuk anak-anak"
+
+#~ msgid "Home entertainment"
+#~ msgstr "Hiburan rumah"
+
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Installer telah mendeteksi bahwa Linux yang terinstall di sistem Anda\n"
+#~ "tidak bisa diupgrade dengan aman ke %s.\n"
+#~ "\n"
+#~ "Instalasi baru untuk menggantikan sistem lama Anda direkomendasikan.\n"
+#~ "\n"
+#~ "Peringatan : Anda harus membackup semua data pribadi Anda sebelum "
+#~ "memilih \n"
+#~ "\"Instalasi Baru\"."
+
+#~ msgid ""
+#~ "It also contains firmwares needed for certain devices to operate (eg: "
+#~ "some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
+#~ msgstr ""
+#~ "Juga berisi firmware yang diperlukan untuk device tertentu untuk "
+#~ "beroperasi (misal: beberapa perangkat grafis ATI/AMD, beberapa perangkat "
+#~ "jaringan, beberapa perangkat RAID, ...)"
+
+#~ msgid ""
+#~ "It also contains software from \"%s\" rebuild with additional "
+#~ "capabilities."
+#~ msgstr ""
+#~ "Juga berisi software dari \"%s\" yang dibangun ulang dengan kemampuan "
+#~ "tambahan."
+
+#~ msgid "Join Us!"
+#~ msgstr "Bergabunglah Bersama Kami!"
+
+#~ msgid "MATE Workstation"
+#~ msgstr "Lingkungan kerja MATE"
+
+#~ msgid "Make it yours!"
+#~ msgstr "Buatlah ini milik Anda!"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Wizard Moondrake"
+
+#~ msgid "Nonfree Release"
+#~ msgstr "Nonfree Rilis"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Program perkantoran: pengolah kata (LibreOffice Writer, Kword), "
+#~ "spreadsheets (LibreOffice Calc, Kspread), pembaca PDF, dll"
+
+#~ msgid "Office tools"
+#~ msgstr "Peralatan perkantoran"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Server Basis Data PostgreSQL dan MariaDB"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Server basis data PostgreSQL atau MariaDB"
+
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Menyiapkan upgrade..."
+
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Desktop RazorQT"
+
+#~ msgid "Tainted Release"
+#~ msgstr "Tainted Rilis"
+
+#~ msgid "Thank you!"
+#~ msgstr "Terima kasih!"
+
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Media ini menyediakan update paket untuk media \"%s\""
+
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Fvwm, dsb"
+
+#~ msgid "XFCE Workstation"
+#~ msgstr "Lingkungan kerja XFCE"
+
+#~ msgid "Your choice!"
+#~ msgstr "Pilihan Anda!"
+
+#~ msgid "%d packages"
+#~ msgstr "%d paket"
+
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "(%d paket, %d MB)"
+#~ msgstr[1] "(%d paket, %d MB)"
+
+#~ msgid "2007 product line"
+#~ msgstr "Jajaran produk 2007"
+
+#~ msgid "3D"
+#~ msgstr "3D"
+
+#~ msgid "All"
+#~ msgstr "Semua"
+
+#~ msgid "Arkeia"
+#~ msgstr "Arkeia"
+
+#~ msgid "Automated"
+#~ msgstr "Otomatis"
 
 #~ msgid "Bad package"
 #~ msgstr "Paket rusak"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Jaringan"
+#~ msgid "Boot"
+#~ msgstr "Boot"
+
+#~ msgid "CMS"
+#~ msgstr "CMS"
+
+#~ msgid "CRM"
+#~ msgstr "CRM"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Update"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Tidak bisa mengakses modul kernel yang berhubungan dengan kernal Anda "
+#~ "(file %s hilang), ini biasanya berarti disket boot tidak sinkron dengan "
+#~ "media installasi (buatlah disket boot baru)"
+
+#~ msgid "Choosing packages"
+#~ msgstr "Memilih paket-paket"
+
+#~ msgid "Configure X"
+#~ msgstr "Konfigurasi X"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Menghubungi mirror untuk mendapatkan daftar paket yang tersedia..."
+
+#~ msgid "Discovery Live Mode"
+#~ msgstr "Mode Discovery Live"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Apakah Anda ingin menggunakan aboot?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "Mendownload file %s..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Kesalahan menginstall aboot,\n"
+#~ "paksakan installasi meskipun merusak partisi pertama?"
+
+#~ msgid "Flatout"
+#~ msgstr "Flatout"
+
+#~ msgid "Formatting"
+#~ msgstr "Memformat"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Membuat disket installasi otomatis"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#~ msgid "How to register"
+#~ msgstr "Bagaimana mendaftarkan diri"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "Desktop IceWm"
+
+#~ msgid "Installation class"
+#~ msgstr "Kelas installasi"
+
+#~ msgid "Invictus Firewall"
+#~ msgstr "Firewall Invictus"
+
+#~ msgid "Kaspersky"
+#~ msgstr "Kaspersky"
+
+#~ msgid "Language"
+#~ msgstr "Bahasa"
+
+#~ msgid "License"
+#~ msgstr "Lisensi"
+
+#~ msgid "LinDVD"
+#~ msgstr "LinDVD"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Installasi Mandriva Linux %s"
+
+#~ msgid "Mandriva Online Services"
+#~ msgstr "Layanan Online Mandriva"
+
+#~ msgid "Networking"
+#~ msgstr "Jaringan"
+
+#~ msgid "New Theme"
+#~ msgstr "Tema baru"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1677,14 +1922,51 @@ msgstr "Keluar"
 #~ "Program office: pengolah kata (kword, abiword), spreadsheet (kspread, "
 #~ "gnumeric), viewer pdf, dll"
 
-#~ msgid "Downloading file %s..."
-#~ msgstr "Mendownload file %s..."
+#~ msgid "Replay"
+#~ msgstr "Ulang"
+
+#~ msgid "Rpmdrake 2"
+#~ msgstr "Rpmdrake 2"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Simpan pilihan paket"
+
+#~ msgid "Skype"
+#~ msgstr "Skype"
+
+#~ msgid "TV card"
+#~ msgstr "Kartu TV"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Installasi otomatis dapat dibuat otomatis penuh jika\n"
+#~ "diinginkan, pada kasus ini akan mengambil hard disk!!\n"
+#~ "(ini berarti untuk menginstall pada komputer lain).\n"
+#~ "\n"
+#~ "Anda mungkin memilih untuk mengulangi installasi.\n"
+
+#~ msgid "Transgaming/Cedega"
+#~ msgstr "Transgaming/Cedega"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Tidak dapat menghubungi mirror %s"
 
 #~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 #~ msgstr "Upgrade dari distribusi 32bit ke 64bit tidak didukung"
 
 #~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 #~ msgstr "Upgrade dari distribusi 64bit ke 32bit tidak didukung"
+
+#~ msgid "Users"
+#~ msgstr "Pengguna"
+
+#~ msgid "Web 2.0"
+#~ msgstr "Web 2.0"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1709,158 +1991,22 @@ msgstr "Keluar"
 #~ "\n"
 #~ "Apakah Anda hendak menginstall server ini?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "Desktop IceWm"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Menghubungi mirror untuk mendapatkan daftar paket yang tersedia..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Tidak dapat menghubungi mirror %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Membuat disket installasi otomatis"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Installasi otomatis dapat dibuat otomatis penuh jika\n"
-#~ "diinginkan, pada kasus ini akan mengambil hard disk!!\n"
-#~ "(ini berarti untuk menginstall pada komputer lain).\n"
-#~ "\n"
-#~ "Anda mungkin memilih untuk mengulangi installasi.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Ulang"
-
-#~ msgid "Automated"
-#~ msgstr "Otomatis"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Simpan pilihan paket"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Apakah Anda ingin menggunakan aboot?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Kesalahan menginstall aboot,\n"
-#~ "paksakan installasi meskipun merusak partisi pertama?"
-
-#~ msgid "All"
-#~ msgstr "Semua"
-
-#~ msgid "TV card"
-#~ msgstr "Kartu TV"
-
-#~ msgid "Boot"
-#~ msgstr "Boot"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Otentikasi"
 
-#~ msgid "Arkeia"
-#~ msgstr "Arkeia"
-
-#~ msgid "Flatout"
-#~ msgstr "Flatout"
-
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#~ msgid "3D"
-#~ msgstr "3D"
-
-#~ msgid "CMS"
-#~ msgstr "CMS"
-
-#~ msgid "CRM"
-#~ msgstr "CRM"
-
-#~ msgid "2007 product line"
-#~ msgstr "Jajaran produk 2007"
-
-#~ msgid "Invictus Firewall"
-#~ msgstr "Firewall Invictus"
-
-#~ msgid "Discovery Live Mode"
-#~ msgstr "Mode Discovery Live"
-
-#~ msgid "How to register"
-#~ msgstr "Bagaimana mendaftarkan diri"
-
-#~ msgid "Rpmdrake 2"
-#~ msgstr "Rpmdrake 2"
-
-#~ msgid "Mandriva Online Services"
-#~ msgstr "Layanan Online Mandriva"
-
-#~ msgid "New Theme"
-#~ msgstr "Tema baru"
-
-#~ msgid "Web 2.0"
-#~ msgstr "Web 2.0"
-
-#~ msgid "Kaspersky"
-#~ msgstr "Kaspersky"
-
-#~ msgid "LinDVD"
-#~ msgstr "LinDVD"
-
-#~ msgid "Skype"
-#~ msgstr "Skype"
-
-#~ msgid "Transgaming/Cedega"
-#~ msgstr "Transgaming/Cedega"
-
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "(%d paket, %d MB)"
-#~ msgstr[1] "(%d paket, %d MB)"
-
-#~ msgid "%d packages"
-#~ msgstr "%d paket"
-
-#~ msgid "Language"
-#~ msgstr "Bahasa"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Lisensi"
 
-#~ msgid "Installation class"
-#~ msgstr "Kelas installasi"
-
-#~ msgid "Formatting"
-#~ msgstr "Memformat"
-
-#~ msgid "Choosing packages"
-#~ msgstr "Memilih paket-paket"
-
-#~ msgid "Users"
-#~ msgstr "Pengguna"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Jaringan"
 
-#~ msgid "Configure X"
-#~ msgstr "Konfigurasi X"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Tidak bisa mengakses modul kernel yang berhubungan dengan kernal Anda "
-#~ "(file %s hilang), ini biasanya berarti disket boot tidak sinkron dengan "
-#~ "media installasi (buatlah disket boot baru)"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Update"

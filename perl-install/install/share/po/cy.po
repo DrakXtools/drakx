@@ -440,15 +440,14 @@ msgid "URL must start with ftp:// or http://"
 msgstr "Rhaid i'r URL gychwyn gyda ftp:// neu http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
-msgstr "Cysylltu â safle gwe Mandriva Linux i estyn y rhestr o ddrychau..."
+msgstr "Cysylltu â safle gwe %s i estyn y rhestr o ddrychau..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
-msgstr ""
-"Methwyd cysylltu â safle gwe Mandriva Linux i estyn y rhestr o ddrychau"
+msgstr "Methwyd cysylltu â safle gwe %s i estyn y rhestr o ddrychau"
 
 #: any.pm:204
 #, c-format
@@ -738,11 +737,13 @@ msgstr ""
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Dim gwybodaeth xml ar gyfer cyfrwng \"%s\", dim ond canlyniad rhannol ar "
+"gyfer pecyn %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Dim disgrifiad"
 
 #: pkgs.pm:280
 #, c-format
@@ -759,9 +760,9 @@ msgid "An error occurred:"
 msgstr "Digwyddodd gwall:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Digwyddodd gwall:"
+msgstr "Digwyddodd gwall terfynol:%s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
@@ -806,9 +807,9 @@ msgid "Entering step `%s'\n"
 msgstr "Cychwyn cam '%s\"\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Gosod"
+msgstr "Gosod %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -821,14 +822,14 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "Mae gweinydd Xorg yn araf ei gychwyn. Arhoswch..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Mae eich system yn brin o adnoddau. Efallai bod gennych broblem wrth osod\n"
-"Mandriva Linux. Os yw hynny'n digwydd, defnyddiwch y gosod testun  yn lle\n"
+"%s. Os yw hynny'n digwydd, defnyddiwch y gosod testun  yn lle\n"
 "hynny. I wneud hynny pwyswch 'F1' wrth gychwyn ar CD-ROM, ac yna teipio "
 "'text'."
 
@@ -838,14 +839,14 @@ msgid "Media Selection"
 msgstr "Dewis Cyfrwng"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Gosod Bwrdd Gwaith Mandriva KDE"
+msgstr "Gosod Bwrdd Gwaith %s KDE"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Gosod Bwrdd Gwaith Mandriva GNOME"
+msgstr "Gosod Bwrdd Gwaith %s GNOME"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -890,7 +891,7 @@ msgstr "Dewis pecynnau unigol."
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Dad ddewis Popeth"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1650,41 +1651,233 @@ msgid ""
 "Exit"
 msgstr "Gorffen"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Gosod Mandriva Linux %s"
+#, fuzzy
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Amgylchedd Graffig"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Amgylchedd graffig gyda chasgliad o raglenni ac offer bwrdd gwaith hawdd "
+#~ "eu defnyddio."
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Amgylchedd graffig ysgafn a chyflym gyda chasgliad o raglenni ac offer "
+#~ "bwrdd gwaith hawdd eu defnyddio."
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Rhaglenni difyrrwch: arcêd, gemau bwrdd, strategaeth, ag ati"
+
+#, fuzzy
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Gweithfan"
+
+#, fuzzy
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Mae'r gosodwr wedi canfod nad yw hi'n ddiogel diweddaru eich system \n"
+#~ "Moondrake i %s.\n"
+#~ "\n"
+#~ "Mae gosod o'r newydd yn cael ei argymell.\n"
+#~ "\n"
+#~ "Rhybudd : dylech wneud copi wrth gefn o'ch data personol cvyn dewis "
+#~ "\"New\n"
+#~ "Installation\"."
+
+#, fuzzy
+#~ msgid "MATE Workstation"
+#~ msgstr "Man Gwaith Gnome"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Dewiniaid Moondrake"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Trwydded"
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Rhaglenni swyddfa: prosesydd geiriau (LibreOffice Writer, Kword), "
+#~ "taenlenni (LibreOffice Calc, Kspread), ddarllenydd pdf, ag ati"
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Eich bwrdd gwaith ar allwedd USB"
+#, fuzzy
+#~ msgid "Office tools"
+#~ msgstr "Gweithfan Swyddfa"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "Mandriva Linux - y dosbarthiad cod agored 100%%"
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Gweinydd CronfaDdata PostgreSQL a MariaDB"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Arbrofi rhwydd gyda Mandriva One"
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Gweinydd cronfa data PostgreSQL neu MariaDB"
+
+#, fuzzy
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Paratoi cychwynnwr..."
+
+#, fuzzy
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Bwrdd Gwaith Addasu"
+
+#, fuzzy
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Hepgor pob pecyn o gyfrwng \"%s\""
+
+#, fuzzy
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Enlightenment, Fvwm, ag ati"
+
+#, fuzzy
+#~ msgid "XFCE Workstation"
+#~ msgstr "Man Gwaith KDE"
+
+#~ msgid "%d packages"
+#~ msgstr "%d pecyn"
+
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "(%d pecyn, %d MB)"
+#~ msgstr[1] "(%d pecyn, %d MB)"
+
+#~ msgid "2007 product line"
+#~ msgstr "Cynnyrch 2007"
+
+#~ msgid "3D"
+#~ msgstr "3D"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Bwrdd gwaith Mandriva Linux llawn, gyda chefnogaeth"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: dosbarthiad ar gyfer angen pawb"
+#~ msgid "A full Moondrake desktop, with support"
+#~ msgstr "Bwrdd gwaith Moondrake llawn, gyda chefnogaeth"
+
+#~ msgid "All"
+#~ msgstr "Popeth"
+
+#~ msgid "Arkeia"
+#~ msgstr "Arkeia"
+
+#~ msgid "Automated"
+#~ msgstr "Awtomeiddwyd"
 
 #~ msgid "Bad package"
 #~ msgstr "Pecyn gwallus"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Rhwydweithio"
+#~ msgid "Boot"
+#~ msgstr "Cychwyn"
+
+#~ msgid "CMS"
+#~ msgstr "CMS"
+
+#~ msgid "CRM"
+#~ msgstr "CRM"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Diweddaru"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Methu cael mynediad i modiwlau'r cnewyllyn sy'n cyfateb i'ch cnewyllyn "
+#~ "chi (mae ffeil %s ar goll), mae hyn yn golygu, fel arfer, nad yw eich "
+#~ "disg cychwyn yn cydweddu gyda'r cyfrwng Gosod (crëwch ddisg cychwyn "
+#~ "meddal newydd)"
+
+#~ msgid "Choosing packages"
+#~ msgstr "Dewis pecynnau"
+
+#~ msgid "Configure X"
+#~ msgstr "Ffurfweddu X"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Cysylltu â'r drych i estyn y rhestr o becynnau sydd ar gael..."
+
+#~ msgid "Discovery Live Mode"
+#~ msgstr "Modd Byw Discovery"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Ydych chi eisiau defnyddio aboot?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "Llwytho ffeil %s..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Gwall gosod aboot, \n"
+#~ "ceisiwch orfodi gosodiad hyd yn oed os yw hynny'n dinistrio'r rhaniad "
+#~ "cyntaf?"
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Arbrofi rhwydd gyda Mandriva One"
+
+#~ msgid "Explore Linux easily with Moondrake One"
+#~ msgstr "Arbrofi rhwydd gyda Moondrake One"
+
+#~ msgid "Flatout"
+#~ msgstr "Flatout"
+
+#~ msgid "Formatting"
+#~ msgstr "Fformatio"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Creu disg meddal awto gosod"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#~ msgid "How to register"
+#~ msgstr "Sut i gofrestru"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "Bwrdd Gwaith IceWm"
+
+#~ msgid "Installation class"
+#~ msgstr "Dosbarth gosod"
+
+#~ msgid "Invictus Firewall"
+#~ msgstr "Mur Cadarn Invictus"
+
+#~ msgid "Kaspersky"
+#~ msgstr "Kaspersky"
+
+#~ msgid "Language"
+#~ msgstr "Iaith"
+
+#~ msgid "License"
+#~ msgstr "Trwydded"
+
+#~ msgid "LinDVD"
+#~ msgstr "LinDVD"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Gosod Mandriva Linux %s"
+
+#~ msgid "Mandriva Online Services"
+#~ msgstr "Mandriva Online Services"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva: dosbarthiad ar gyfer angen pawb"
+
+#~ msgid "Moondrake: distributions for everybody's needs"
+#~ msgstr "Moondrake: dosbarthiad ar gyfer angen pawb"
+
+#~ msgid "Networking"
+#~ msgstr "Rhwydweithio"
+
+#~ msgid "New Theme"
+#~ msgstr "Thema Newydd"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1692,6 +1885,72 @@ msgstr "Gorffen"
 #~ msgstr ""
 #~ "Rhaglenni swyddfa: prosesydd geiriau (Kword, abiword), taenlenni "
 #~ "(kspread, gnumeric), ddarllenydd pdf, ag ati"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Paratoi cychwynnwr..."
+
+#~ msgid "Proceed"
+#~ msgstr "Parhau"
+
+#~ msgid "Replay"
+#~ msgstr "Ail chwarae"
+
+#~ msgid "Rpmdrake 2"
+#~ msgstr "Rpmdrake 2"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Cadw'r dewis o becynnau"
+
+#~ msgid "Select All"
+#~ msgstr "Dewis Popeth"
+
+#~ msgid "Skype"
+#~ msgstr "Skype"
+
+#~ msgid "TV card"
+#~ msgstr "Cerdyn Teledu"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "Mandriva Linux - y dosbarthiad cod agored 100%%"
+
+#~ msgid "The 100%% open source Moondrake distribution"
+#~ msgstr "Moondrake - y dosbarthiad cod agored 100%%"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Mae modd awtomeiddio'r awto gosod, os hoffech\n"
+#~ "chi, yn yr achos hwnnw bydd yn cymryd drosodd y\n"
+#~ "disg caled!!\n"
+#~ "(mae hyn ar gyfer gosod ar flwch arall).\n"
+#~ "\n"
+#~ "Efallai byddai'n well gennych ai osod y gosodiad.\n"
+
+#~ msgid "Transgaming/Cedega"
+#~ msgstr "Transgaming/Cedega"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Methu canfod drych: %s."
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr "Nid yw diweddaru o ddosbarthiad 32did i 64did yn cael ei gynnal"
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr "Nid yw diweddaru o ddosbarthiad 64did i 32did yn cael ei gynnal"
+
+#~ msgid "Users"
+#~ msgstr "Defnyddwyr"
+
+#~ msgid "Web 2.0"
+#~ msgstr "Web 2.0"
+
+#~ msgid "Welcome"
+#~ msgstr "Croeso"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1711,21 +1970,6 @@ msgstr "Gorffen"
 #~ "I ddiweddaru KDE 3.5 gan gadw eich gosodiadau personol, \n"
 #~ "ail gychwynnwch eich system a diweddaru gan ddefnyddio rhaglennig "
 #~ "diweddaru Mandriva."
-
-#~ msgid "Proceed"
-#~ msgstr "Parhau"
-
-#~ msgid "retrieval of [%s] failed"
-#~ msgstr "methodd estyn  [%s]"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "Llwytho ffeil %s..."
-
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr "Nid yw diweddaru o ddosbarthiad 32did i 64did yn cael ei gynnal"
-
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr "Nid yw diweddaru o ddosbarthiad 64did i 32did yn cael ei gynnal"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1750,161 +1994,28 @@ msgstr "Gorffen"
 #~ "\n"
 #~ "Ydych chi wir eisiau gosod y gweinyddion hyn?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "Bwrdd Gwaith IceWm"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Cysylltu â'r drych i estyn y rhestr o becynnau sydd ar gael..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Methu canfod drych: %s."
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Creu disg meddal awto gosod"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Mae modd awtomeiddio'r awto gosod, os hoffech\n"
-#~ "chi, yn yr achos hwnnw bydd yn cymryd drosodd y\n"
-#~ "disg caled!!\n"
-#~ "(mae hyn ar gyfer gosod ar flwch arall).\n"
-#~ "\n"
-#~ "Efallai byddai'n well gennych ai osod y gosodiad.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Ail chwarae"
-
-#~ msgid "Automated"
-#~ msgstr "Awtomeiddwyd"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Cadw'r dewis o becynnau"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Ydych chi eisiau defnyddio aboot?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Gwall gosod aboot, \n"
-#~ "ceisiwch orfodi gosodiad hyd yn oed os yw hynny'n dinistrio'r rhaniad "
-#~ "cyntaf?"
-
-#~ msgid "All"
-#~ msgstr "Popeth"
-
-#~ msgid "TV card"
-#~ msgstr "Cerdyn Teledu"
-
-#~ msgid "Boot"
-#~ msgstr "Cychwyn"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Eich bwrdd gwaith ar allwedd USB"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Dilysu"
 
-#~ msgid "Arkeia"
-#~ msgstr "Arkeia"
-
-#~ msgid "Flatout"
-#~ msgstr "Flatout"
-
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#~ msgid "3D"
-#~ msgstr "3D"
-
-#~ msgid "CMS"
-#~ msgstr "CMS"
-
-#~ msgid "CRM"
-#~ msgstr "CRM"
-
-#~ msgid "2007 product line"
-#~ msgstr "Cynnyrch 2007"
-
-#~ msgid "Invictus Firewall"
-#~ msgstr "Mur Cadarn Invictus"
-
-#~ msgid "Discovery Live Mode"
-#~ msgstr "Modd Byw Discovery"
-
-#~ msgid "How to register"
-#~ msgstr "Sut i gofrestru"
-
-#~ msgid "Rpmdrake 2"
-#~ msgstr "Rpmdrake 2"
-
-#~ msgid "Mandriva Online Services"
-#~ msgstr "Mandriva Online Services"
-
-#~ msgid "New Theme"
-#~ msgstr "Thema Newydd"
-
-#~ msgid "Web 2.0"
-#~ msgstr "Web 2.0"
-
-#~ msgid "Kaspersky"
-#~ msgstr "Kaspersky"
-
-#~ msgid "LinDVD"
-#~ msgstr "LinDVD"
-
-#~ msgid "Skype"
-#~ msgstr "Skype"
-
-#~ msgid "Transgaming/Cedega"
-#~ msgstr "Transgaming/Cedega"
-
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "(%d pecyn, %d MB)"
-#~ msgstr[1] "(%d pecyn, %d MB)"
-
-#~ msgid "%d packages"
-#~ msgstr "%d pecyn"
-
-#~ msgid "Language"
-#~ msgstr "Iaith"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Trwydded"
 
-#~ msgid "Installation class"
-#~ msgstr "Dosbarth gosod"
-
-#~ msgid "Formatting"
-#~ msgstr "Fformatio"
-
-#~ msgid "Choosing packages"
-#~ msgstr "Dewis pecynnau"
-
-#~ msgid "Users"
-#~ msgstr "Defnyddwyr"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Rhwydweithio"
 
-#~ msgid "Configure X"
-#~ msgstr "Ffurfweddu X"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Methu cael mynediad i modiwlau'r cnewyllyn sy'n cyfateb i'ch cnewyllyn "
-#~ "chi (mae ffeil %s ar goll), mae hyn yn golygu, fel arfer, nad yw eich "
-#~ "disg cychwyn yn cydweddu gyda'r cyfrwng Gosod (crëwch ddisg cychwyn "
-#~ "meddal newydd)"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Diweddaru"
+
+#~ msgid "retrieval of [%s] failed"
+#~ msgstr "methodd estyn  [%s]"

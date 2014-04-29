@@ -307,18 +307,18 @@ msgstr ""
 "d'utilitzar"
 
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:156
-#, fuzzy, c-format
+#, c-format
 msgid "LXDE Desktop"
-msgstr "Escriptori IceWm"
+msgstr "Escriptori LXDE"
 
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:158
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "A lightweight & fast graphical environment with user-friendly set of "
 "applications and desktop tools"
 msgstr ""
-"Entorn gràfic amb un conjunt d'aplicacions i eines d'escriptori fàcil "
-"d'utilitzar"
+"Un entorn gràfic lleuger i ràpid amb un conjunt d'aplicacions i eines "
+"d'escriptori amigables"
 
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:162
 #, c-format
@@ -346,11 +346,10 @@ msgstr "Servidor SSH"
 msgid "Webmin"
 msgstr "Webmin"
 
-#
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:195
 #, c-format
 msgid "Webmin Remote Configuration Server"
-msgstr ""
+msgstr "Servidor remot de configuració de Webmin"
 
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:199
 #, c-format
@@ -360,7 +359,7 @@ msgstr "Utilitats de xarxa/Monitorització"
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:200
 #, c-format
 msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-msgstr ""
+msgstr "Eines de monitoratge, comptabilitat de processos, tcpdump, nmap..."
 
 #: /home/peroyvind/ABF/meta-task//compssUsers.pl:204
 #, c-format
@@ -392,7 +391,7 @@ msgstr ""
 #: any.pm:110
 #, c-format
 msgid "Do you have further supplementary media?"
-msgstr ""
+msgstr "Teniu més suports addicionals?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: any.pm:113
@@ -403,6 +402,11 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
+"S'han trobat els següents suports i es faran servir durant la instal·lació: "
+"%s\n"
+"\n"
+"\n"
+"Teniu algun suport d'instal·lació addicional per a configurar?"
 
 #: any.pm:121
 #, c-format
@@ -432,21 +436,21 @@ msgstr "URL de la rèplica?"
 #: any.pm:178
 #, c-format
 msgid "URL must start with ftp:// or http://"
-msgstr ""
+msgstr "La URL ha de començar amb ftp:// o bé http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"S'està contactant amb el servidor Mandriva Linux per obtenir la llista de "
-"rèpliques disponibles..."
+"S'està contactant amb el servidor %s per obtenir la llista de rèpliques "
+"disponibles..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"S'està contactant amb el servidor Mandriva Linux per obtenir la llista de "
-"rèpliques disponibles..."
+"Ha fallat la connexió amb el lloc web %s per a obtenir la llista de "
+"rèpliques disponibles"
 
 #: any.pm:204
 #, c-format
@@ -456,27 +460,27 @@ msgstr "Escolliu una rèplica des de la qual aconseguir els paquets"
 #: any.pm:234
 #, c-format
 msgid "NFS setup"
-msgstr ""
+msgstr "Configuració NFS"
 
 #: any.pm:235
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
-msgstr ""
+msgstr "Introduïu el nom de l'ordinador i del directori del suport NFS"
 
 #: any.pm:239
 #, c-format
 msgid "Hostname missing"
-msgstr ""
+msgstr "Falta el nom de l'ordinador"
 
 #: any.pm:240
 #, c-format
 msgid "Directory must begin with \"/\""
-msgstr ""
+msgstr "El directori ha de començar amb «/»"
 
 #: any.pm:244
 #, c-format
 msgid "Hostname of the NFS mount ?"
-msgstr ""
+msgstr "Nom de l'ordinador del muntatge NFS?"
 
 #: any.pm:245
 #, c-format
@@ -486,7 +490,7 @@ msgstr "Directori"
 #: any.pm:267
 #, c-format
 msgid "Supplementary"
-msgstr ""
+msgstr "Addicional"
 
 #: any.pm:302
 #, c-format
@@ -516,11 +520,13 @@ msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
 "free software drivers to work."
 msgstr ""
+"Algun maquinari de l'ordinador requereix microprogramari no lliure perquè "
+"els controladors lliures funcionin."
 
 #: any.pm:351
 #, c-format
 msgid "You should enable \"%s\""
-msgstr ""
+msgstr "Hauríeu d'habilitar «%s»"
 
 #: any.pm:370
 #, c-format
@@ -537,7 +543,7 @@ msgstr ""
 #: any.pm:372
 #, c-format
 msgid "\"%s\" contains non free software.\n"
-msgstr ""
+msgstr "«%s» conté programari no lliure.\n"
 
 #: any.pm:373
 #, c-format
@@ -549,7 +555,7 @@ msgstr ""
 #: any.pm:377
 #, c-format
 msgid "Here you can enable more media if you want."
-msgstr ""
+msgstr "Aquí podeu habilitar més suports si voleu."
 
 #: any.pm:456
 #, c-format
@@ -564,7 +570,7 @@ msgstr "S'estan cercant els paquets a actualitzar"
 #: any.pm:509
 #, c-format
 msgid "Removing packages prior to upgrade..."
-msgstr ""
+msgstr "S'estan eliminant els paquets abans de l'actualització..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: any.pm:723
@@ -588,12 +594,12 @@ msgstr "S'ha produït un error en llegir el fitxer %s"
 #: any.pm:1150
 #, c-format
 msgid "The following disk(s) were renamed:"
-msgstr ""
+msgstr "El(s) següent(s) disc(s) ha(n) estat reanomenat(s)"
 
 #: any.pm:1152
 #, c-format
 msgid "%s (previously named as %s)"
-msgstr ""
+msgstr "%s (abans anomenat %s)"
 
 #: any.pm:1209
 #, c-format
@@ -616,9 +622,9 @@ msgid "Network"
 msgstr "Xarxa"
 
 #: any.pm:1232
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose a media"
-msgstr "Si us plau escolliu"
+msgstr "Escolliu un suport"
 
 #: any.pm:1248
 #, c-format
@@ -636,9 +642,9 @@ msgid "Bad NFS name"
 msgstr "Nom NFS incorrecte"
 
 #: any.pm:1321
-#, fuzzy, c-format
+#, c-format
 msgid "Bad media %s"
-msgstr "s'ha afegit la font %s"
+msgstr "Suport incorrecte %s"
 
 #: any.pm:1365
 #, c-format
@@ -651,9 +657,9 @@ msgid "Screenshots will be available after install in %s"
 msgstr "Les captures estaran disponibles després d'instal·lar a %s"
 
 #: gtk.pm:128
-#, fuzzy, c-format
+#, c-format
 msgid "Installation"
-msgstr "S'està instal·lant"
+msgstr "Instal·lació"
 
 #: install2.pm:168
 #, c-format
@@ -682,17 +688,17 @@ msgstr "S'està desactivant la xarxa"
 #: media.pm:409
 #, c-format
 msgid "Please wait, retrieving file"
-msgstr ""
+msgstr "S'està recuperant el fitxer"
 
 #: media.pm:717
 #, c-format
 msgid "unable to add medium"
-msgstr ""
+msgstr "no s'ha pogut afegir el suport"
 
 #: media.pm:757
 #, c-format
 msgid "Copying some packages on disks for future use"
-msgstr ""
+msgstr "S'estan copiant alguns paquets al disc per a un ús futur"
 
 #: media.pm:810
 #, c-format
@@ -727,17 +733,19 @@ msgstr "potser"
 #: pkgs.pm:102
 #, c-format
 msgid "Getting package information from XML meta-data..."
-msgstr ""
+msgstr "S'està obtenint informació del paquet des de les metadades XML..."
 
 #: pkgs.pm:111
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"No s'ha trobat informació xml per al suport «%s»; només resultat parcial per "
+"al paquet %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Cap descripció"
 
 #: pkgs.pm:280
 #, c-format
@@ -745,31 +753,33 @@ msgid ""
 "Some packages requested by %s cannot be installed:\n"
 "%s"
 msgstr ""
+"Alguns paquets sol·licitats per %s no es poden instal·lar:\n"
+"%s"
 
 #: pkgs.pm:376 pkgs.pm:403
-#, fuzzy, c-format
+#, c-format
 msgid "An error occurred:"
-msgstr "S'ha produït un error"
+msgstr "S'ha produït un error:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "S'ha produït un error"
+msgstr "S'ha produït un error fatal: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "No tornar a preguntar"
 
 #: pkgs.pm:894
-#, fuzzy, c-format
+#, c-format
 msgid "%d installation transactions failed"
-msgstr "Instal·lació fallida"
+msgstr "Han fallat %d transaccions d'instal·lació"
 
 #: pkgs.pm:895
-#, fuzzy, c-format
+#, c-format
 msgid "Installation of packages failed:"
-msgstr "S'està instal·lant el paquet %s"
+msgstr "La instal·lació de paquets ha fallat:"
 
 #: steps.pm:85
 #, c-format
@@ -799,9 +809,9 @@ msgid "Entering step `%s'\n"
 msgstr "S'està entrant en el pas '%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "S'està instal·lant"
+msgstr "Instal·lació del %s %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -811,65 +821,64 @@ msgstr "<Tab>/<Alt-Tab> entre elements"
 #: steps_gtk.pm:147
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
-msgstr ""
+msgstr "El servidor Xorg triga a arrencar. Espereu..."
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "El vostre sistema està baix de recursos; podeu tenir algun problema en\n"
-"instal·lar el Mandriva Linux. Si això passa, podeu provar d'instal·lar-lo "
-"en\n"
+"instal·lar %s. Si això passa, podeu provar d'instal·lar-lo en\n"
 "mode text. Per fer-ho, premeu 'F1' en arrencar des del CD-ROM i escriviu "
 "'text'."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
-#, fuzzy, c-format
+#, c-format
 msgid "Media Selection"
-msgstr "Selecció del grup de paquets"
+msgstr "Selecció de suports"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Escriptori IceWm"
+msgstr "Instal·la %s l'escriptori KDE"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Escriptori IceWm"
+msgstr "Instal·la %s l'escriptori GNOME"
 
 #: steps_gtk.pm:254
-#, fuzzy, c-format
+#, c-format
 msgid "Custom install"
-msgstr "Instal·lació mínima"
+msgstr "Instal·lació personalitzada"
 
 #: steps_gtk.pm:275
-#, fuzzy, c-format
+#, c-format
 msgid "KDE Desktop"
-msgstr "Escriptori IceWm"
+msgstr "Escriptori KDE"
 
 #: steps_gtk.pm:276
-#, fuzzy, c-format
+#, c-format
 msgid "GNOME Desktop"
-msgstr "Escriptori IceWm"
+msgstr "Escriptori GNOME"
 
 #: steps_gtk.pm:277
-#, fuzzy, c-format
+#, c-format
 msgid "Custom Desktop"
-msgstr "Escriptori IceWm"
+msgstr "Escriptori personalitzat"
 
 #: steps_gtk.pm:283
 #, c-format
 msgid "Here's a preview of the '%s' desktop."
-msgstr ""
+msgstr "Aquesta és una previsualització de l'escriptori '%s'."
 
 #: steps_gtk.pm:310
 #, c-format
 msgid "Click on images in order to see a bigger preview"
-msgstr ""
+msgstr "Feu clic a les imatges per a veure una previsualització més gran."
 
 #: steps_gtk.pm:326 steps_interactive.pm:628 steps_list.pm:31
 #, c-format
@@ -884,7 +893,7 @@ msgstr "Selecció individual de paquets"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Desselecciona-ho tot"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -929,7 +938,7 @@ msgstr "degut a %s no satisfetes"
 #: steps_gtk.pm:463
 #, c-format
 msgid "trying to promote %s"
-msgstr ""
+msgstr "s'està intentant promoure %s"
 
 #: steps_gtk.pm:464
 #, c-format
@@ -1026,14 +1035,14 @@ msgid "No details"
 msgstr "Sense detalls"
 
 #: steps_gtk.pm:620
-#, fuzzy, c-format
+#, c-format
 msgid "Time remaining:"
-msgstr "Temps restant "
+msgstr "Temps restant:"
 
 #: steps_gtk.pm:621
-#, fuzzy, c-format
+#, c-format
 msgid "(estimating...)"
-msgstr "S'està estimant"
+msgstr "(s'està estimant...)"
 
 #: steps_gtk.pm:651
 #, c-format
@@ -1063,6 +1072,8 @@ msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
+"S'han trobat els següents suports d'instal·lació.\n"
+"Si en voleu ometre alguns, els podeu desseleccionar ara."
 
 #: steps_gtk.pm:802 steps_interactive.pm:342
 #, c-format
@@ -1072,6 +1083,10 @@ msgid ""
 "It will then continue from the hard disk drive and the packages will remain "
 "available once the system is fully installed."
 msgstr ""
+"Teniu l'opció de copiar el contingut dels CDs en el disc dur abans de la "
+"instal·lació.\n"
+"Llavors es continuarà des del disc dur i els paquets continuaran disponibles "
+"un cop el sistema estigui instal·lat."
 
 #: steps_gtk.pm:804 steps_interactive.pm:344
 #, c-format
@@ -1089,9 +1104,9 @@ msgid "Please choose your keyboard layout"
 msgstr "Si us plau, seleccioneu la disposició del vostre teclat"
 
 #: steps_interactive.pm:109
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available keyboards:"
-msgstr "Aquesta és la llista completa de teclats disponibles"
+msgstr "Aquesta és la llista completa de teclats disponibles:"
 
 #: steps_interactive.pm:148
 #, c-format
@@ -1104,11 +1119,11 @@ msgid "Is this an install or an upgrade?"
 msgstr "Es tracta d'una instal·lació o d'una actualització?"
 
 #: steps_interactive.pm:154
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
-msgstr "Instal·la"
+msgstr "Instal·lació"
 
 #: steps_interactive.pm:156
 #, c-format
@@ -1123,17 +1138,17 @@ msgstr "Clau de xifratge per a %s"
 #: steps_interactive.pm:209
 #, c-format
 msgid "Cancel installation, reboot system"
-msgstr ""
+msgstr "Cancel·la la instal·lació, reinicia el sistema"
 
 #: steps_interactive.pm:210
-#, fuzzy, c-format
+#, c-format
 msgid "New Installation"
-msgstr "S'està instal·lant"
+msgstr "Nova instal·lació"
 
 #: steps_interactive.pm:211
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
-msgstr ""
+msgstr "Actualitza la instal·lació anterior (no recomanable)"
 
 #: steps_interactive.pm:215
 #, c-format
@@ -1168,15 +1183,14 @@ msgstr ""
 "bootstrap amb el DiskDrake"
 
 #: steps_interactive.pm:299
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
 "to boot your system, you'll need to create the bootstrap partition in "
 "DiskDrake"
 msgstr ""
-"No hi ha prou espai lliure per un 1MB de bootstrap! La instal·lació "
-"continuarà, però per iniciar el sistema necessitareu crear la partició de "
-"bootstrap amb el DiskDrake"
+"Heu de crear un bootstrap PPC PReP! La instal·lació continuarà, però per "
+"iniciar el sistema haureu de crear la partició de bootstrap amb el DiskDrake"
 
 #: steps_interactive.pm:375
 #, c-format
@@ -1203,16 +1217,17 @@ msgid ""
 "Your system does not have enough space left for installation or upgrade "
 "(%dMB > %dMB)"
 msgstr ""
+"El vostre sistema no té prou espai de disc lliure per a la instal·lació o "
+"actualització (%dMB > %dMB)"
 
 #: steps_interactive.pm:451
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please choose load or save package selection.\n"
 "The format is the same as auto_install generated files."
 msgstr ""
-"Si us plau, carregueu o deseu la selecció de paquets en el disquet.\n"
-"El format és el mateix que en els disquets generats d'instal·lació "
-"automàtica."
+"Trieu carregar o desar la selecció de paquets.\n"
+"El format és el mateix que el dels fitxers generats per auto_install."
 
 #: steps_interactive.pm:453
 #, c-format
@@ -1230,9 +1245,9 @@ msgid "Bad file"
 msgstr "Fitxer incorrecte"
 
 #: steps_interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:479
 #, c-format
@@ -1240,14 +1255,14 @@ msgid "GNOME"
 msgstr "GNOME"
 
 #: steps_interactive.pm:482
-#, fuzzy, c-format
+#, c-format
 msgid "Desktop Selection"
-msgstr "Selecció del grup de paquets"
+msgstr "Selecció de l'escriptori"
 
 #: steps_interactive.pm:483
 #, c-format
 msgid "You can choose your workstation desktop profile."
-msgstr ""
+msgstr "Podeu triar el vostre perfil d'escriptori d'estació de treball."
 
 #: steps_interactive.pm:571
 #, c-format
@@ -1274,9 +1289,9 @@ msgid "With X"
 msgstr "Amb X"
 
 #: steps_interactive.pm:602
-#, fuzzy, c-format
+#, c-format
 msgid "Install suggested packages"
-msgstr "S'està instal·lant el paquet %s"
+msgstr "Instal·la els paquets suggerits"
 
 #: steps_interactive.pm:603
 #, c-format
@@ -1311,27 +1326,27 @@ msgstr "Voleu seguir igualment?"
 #: steps_interactive.pm:696
 #, c-format
 msgid "Retry"
-msgstr ""
+msgstr "Reintenta"
 
 #: steps_interactive.pm:697
 #, c-format
 msgid "Skip this package"
-msgstr ""
+msgstr "Omet aquest paquet"
 
 #: steps_interactive.pm:698
 #, c-format
 msgid "Skip all packages from medium \"%s\""
-msgstr ""
+msgstr "Omet tots els paquets del suport «%s»"
 
 #: steps_interactive.pm:699
-#, fuzzy, c-format
+#, c-format
 msgid "Go back to media and packages selection"
-msgstr "Desa la selecció de paquets"
+msgstr "Torna enrere cap a la selecció de suports i paquets"
 
 #: steps_interactive.pm:702
-#, fuzzy, c-format
+#, c-format
 msgid "There was an error installing package %s."
-msgstr "S'ha produït un error en instal·lar els paquets:"
+msgstr "S'ha produït un error en la instal·lació del paquet %s."
 
 #: steps_interactive.pm:721
 #, c-format
@@ -1341,7 +1356,7 @@ msgstr "Configuració posterior a la instal·lació"
 #: steps_interactive.pm:728
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
-msgstr ""
+msgstr "Assegureu-vos que el suport Actualitza Mòduls és a la unitat %s"
 
 #: steps_interactive.pm:759
 #, c-format
@@ -1459,27 +1474,27 @@ msgid "Preparing bootloader..."
 msgstr "S'està preparant el carregador de l'arrencada..."
 
 #: steps_interactive.pm:1050
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing initial startup program..."
-msgstr "S'està preparant la instal·lació"
+msgstr "S'està preparant el programa d'arrencada..."
 
 #: steps_interactive.pm:1051
 #, c-format
 msgid "Be patient, this may take a while..."
-msgstr ""
+msgstr "Tingueu paciència, això pot trigar una estona..."
 
 #: steps_interactive.pm:1062
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
 "will not work for you. The install will continue, but you'll need to use "
 "BootX or some other means to boot your machine. The kernel argument for the "
 "root fs is: root=%s"
 msgstr ""
-"Sembla que teniu un OldWorld o una màquina\n"
-"desconeguda; el carregador d'arrencada yaboot no us funcionarà.\n"
-"La instal·lació continuarà, però us caldrà utilitzar el BootX\n"
-"o algun altre mètode per arrencar l'ordinador"
+"Sembla que teniu una màquina OldWorld o bé Desconeguda, el carregador "
+"d'arrencada yaboot no us funcionarà. La instal·lació continuarà, però haureu "
+"de fer servir BootX o bé algun altre mecanisme per a iniciar la vostra "
+"màquina. L'argument del nucli per al sistema de fitxers arrel és: root=%s"
 
 #: steps_interactive.pm:1075
 #, c-format
@@ -1532,7 +1547,7 @@ msgstr "Escolliu el vostre idioma"
 #: steps_list.pm:16 steps_list.pm:24
 #, c-format
 msgid "Localization"
-msgstr ""
+msgstr "Localització"
 
 #: steps_list.pm:19
 #, c-format
@@ -1553,7 +1568,7 @@ msgstr "Detecció del disc dur"
 msgid ""
 "_: Keep these entry short\n"
 "Installation class"
-msgstr ""
+msgstr "Classe d'instal·lació"
 
 #: steps_list.pm:24
 #, c-format
@@ -1581,14 +1596,14 @@ msgstr "Particionament"
 msgid ""
 "_: Keep these entry short\n"
 "Formatting"
-msgstr ""
+msgstr "Formatació"
 
 #: steps_list.pm:30
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Choosing packages"
-msgstr ""
+msgstr "Tria de paquets"
 
 #: steps_list.pm:32
 #, c-format
@@ -1639,26 +1654,252 @@ msgid ""
 "Exit"
 msgstr "Surt"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Instal·lació del Mandriva Linux %s"
+#~ msgid ""
+#~ "\"%s\" contains software that can not be distributed in every country due "
+#~ "to software patents."
+#~ msgstr ""
+#~ "«%s» conté programari que no es pot distribuir a tots els països degut a "
+#~ "patents de programari."
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Llicència"
+#~ "\"%s\" contains the various pieces of the systems and its applications"
+#~ msgstr ""
+#~ "«%s» conté els diversos components dels sistemes i les seves aplicacions"
+
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Entorn gràfic basat en GNOME"
+
+#~ msgid "A less developed lightweight fast graphical environment"
+#~ msgstr "Un entorn gràfic lleuger, ràpid i menys desenvolupat"
+
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Entorn gràfic més lleuger amb un conjunt d'aplicacions i eines "
+#~ "d'escriptori fàcil d'utilitzar"
+
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr "Un entorn gràfic lleuger i ràpid amb un seguiment dedicat"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Programes d'entreteniment: acció, jocs de taula, estratègia, etc."
+
+#~ msgid "Be Free!"
+#~ msgstr "Sigueu lliures!"
+
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Estació de treball Cinnamon"
+
+#~ msgid "Core Release"
+#~ msgstr "Core Release"
+
+#~ msgid "Enlightenment e17 Desktop"
+#~ msgstr "Escriptori Enlightenment e17"
+
+#~ msgid "For developers!"
+#~ msgstr "Per als desenvolupadors!"
+
+#~ msgid "For family!"
+#~ msgstr "Per a la família!"
+
+#~ msgid "For kids"
+#~ msgstr "Per als nens"
+
+#~ msgid "Home entertainment"
+#~ msgstr "Oci de la llar"
+
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "L'instal·lador ha detectat que el vostre Linux instal·lat no es pot "
+#~ "actualitzar a %s de forma segura.\n"
+#~ "\n"
+#~ "Es recomana una nova instal·lació que substitueixi l'anterior.\n"
+#~ "\n"
+#~ "Avís: hauríeu de fer una còpia de seguretat de les vostres dades "
+#~ "personals abans de triar «Nova instal·lació»."
+
+#~ msgid ""
+#~ "It also contains firmwares needed for certain devices to operate (eg: "
+#~ "some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
+#~ msgstr ""
+#~ "També conté microprogramari necessari per al funcionament d'alguns "
+#~ "dispositius (per exemple: algunes targetes gràfiques ATI/AMD, algunes "
+#~ "targetes de xarxa, algunes targetes RAID, ...)"
+
+#~ msgid ""
+#~ "It also contains software from \"%s\" rebuild with additional "
+#~ "capabilities."
+#~ msgstr ""
+#~ "També conté programari de «%s» recompilat amb capacitats addicionals."
+
+#~ msgid "Join Us!"
+#~ msgstr "Adheriu-vos!"
+
+#~ msgid "MATE Workstation"
+#~ msgstr "Estació de treball MATE"
+
+#~ msgid "Make it yours!"
+#~ msgstr "Feu-lo vostre!"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Auxiliars de Moondrake"
+
+#~ msgid "Nonfree Release"
+#~ msgstr "Nonfree Release"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Programes d'ofimàtica: processadors de textos (LibreOffice Writer, "
+#~ "Kword), fulls de càlcul (LibreOffice Calc, Kspread), visualitzadors pdf, "
+#~ "etc."
+
+#~ msgid "Office tools"
+#~ msgstr "Eines d'oficina"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Servidor de bases de dades PostgreSQL i MariaDB"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Servidor de bases de dades PostgreSQL o MariaDB"
+
+#~ msgid "Preparing upgrade..."
+#~ msgstr "S'està preparant l'actualització..."
+
+#~ msgid "RazorQT Desktop"
+#~ msgstr "Escriptori RazorQT"
+
+#~ msgid "Tainted Release"
+#~ msgstr "Tainted Release"
+
+#~ msgid "Thank you!"
+#~ msgstr "Gràcies!"
+
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr ""
+#~ "Aquest suport proporciona actualitzacions de paquets per al suport «%s»"
+
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Fvwm, etc."
+
+#~ msgid "XFCE Workstation"
+#~ msgstr "Estació de treball XFCE"
+
+#~ msgid "Your choice!"
+#~ msgstr "La vostra tria!"
+
+#~ msgid "%d packages"
+#~ msgstr "%d paquets"
+
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "(%d paquet, %d MB)"
+#~ msgstr[1] "(%d paquets, %d MB)"
+
+#~ msgid "All"
+#~ msgstr "Tot"
+
+#~ msgid "Automated"
+#~ msgstr "Automàtica"
 
 #~ msgid "Bad package"
 #~ msgstr "Paquet incorrecte"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Xarxa"
+#~ msgid "Boot"
+#~ msgstr "Arrencada"
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Actualitzacions"
+#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "No es pot accedir als mòduls del nucli corresponents al vostre nucli (no "
+#~ "s'ha trobat el fitxer %s). Això generalment vol dir que el vostre disquet "
+#~ "d'arrencada no està sincronitzat amb el suport d'instal·lació (si us "
+#~ "plau, creeu un nou disquet d'arrencada)"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "Paquets a instal·lar"
+
+#~ msgid "Configure X"
+#~ msgstr "Configura l'X"
+
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "S'està contactant amb la rèplica per obtenir la llista dels paquets "
+#~ "disponibles..."
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Voleu utilitzar l'aboot?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "S'està descarregant el fitxer %s..."
+
+#~ msgid "DrakVPN"
+#~ msgstr "DrakVPN"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "S'ha produït un error en instal·lar l'aboot. \n"
+#~ "Voleu intentar igualment la instal·lació encara que això destrueixi la "
+#~ "primera partició?"
+
+#~ msgid "For contributors"
+#~ msgstr "Per als col·laboradors"
+
+#~ msgid "For people"
+#~ msgstr "Per a la gent"
+
+#~ msgid "For you"
+#~ msgstr "Per a tu"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "S'està estimant"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Genera un disquet per a la instal·lació automàtica"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "Escriptori IceWm"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "Tipus d'instal·lació"
+
+#, fuzzy
+#~ msgid "Invictus Firewall"
+#~ msgstr "Tallafocs interactiu"
+
+#~ msgid "Language"
+#~ msgstr "Escolliu el vostre idioma"
+
+#~ msgid "License"
+#~ msgstr "Llicència"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Instal·lació del Mandriva Linux %s"
+
+#~ msgid "Moondrake, the new Linux distribution"
+#~ msgstr "Moondrake, la nova distribució Linux"
+
+#~ msgid "Networking"
+#~ msgstr "Xarxa"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1667,8 +1908,50 @@ msgstr "Surt"
 #~ "Programes d'ofimàtica: processadors de textos (kword, abiword), fulls de "
 #~ "càlcul (kspread, gnumeric), visualitzadors pdf, etc."
 
-#~ msgid "Downloading file %s..."
-#~ msgstr "S'està descarregant el fitxer %s..."
+#~ msgid "People!"
+#~ msgstr "Gent!"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "S'està preparant el carregador de l'arrencada..."
+
+#~ msgid "Replay"
+#~ msgstr "Repeteix"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Desa la selecció de paquets"
+
+#~ msgid "Select All"
+#~ msgstr "Selecciona-ho tot"
+
+#~ msgid "TV card"
+#~ msgstr "Targeta de TV"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Si ho desitgeu, la instal·lació automàtica es pot\n"
+#~ "automatitzar completament, però en aquest cas\n"
+#~ "prendrà el control del disc dur!\n"
+#~ "(Això està pensat per a la instal·lació en un altre ordinador.)\n"
+#~ "\n"
+#~ "Potser preferireu repetir la instal·lació.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "No es pot contactar amb la rèplica: %s"
+
+#~ msgid "Users"
+#~ msgstr "Usuaris"
+
+#~ msgid "Welcome"
+#~ msgstr "Benvinguda"
+
+#~ msgid "Welcome!"
+#~ msgstr "Benvingut!"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1695,119 +1978,22 @@ msgstr "Surt"
 #~ "\n"
 #~ "Voleu realment instal·lar aquests servidors?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "Escriptori IceWm"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "S'està contactant amb la rèplica per obtenir la llista dels paquets "
-#~ "disponibles..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "No es pot contactar amb la rèplica: %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Genera un disquet per a la instal·lació automàtica"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Si ho desitgeu, la instal·lació automàtica es pot\n"
-#~ "automatitzar completament, però en aquest cas\n"
-#~ "prendrà el control del disc dur!\n"
-#~ "(Això està pensat per a la instal·lació en un altre ordinador.)\n"
-#~ "\n"
-#~ "Potser preferireu repetir la instal·lació.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Repeteix"
-
-#~ msgid "Automated"
-#~ msgstr "Automàtica"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Desa la selecció de paquets"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Voleu utilitzar l'aboot?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "S'ha produït un error en instal·lar l'aboot. \n"
-#~ "Voleu intentar igualment la instal·lació encara que això destrueixi la "
-#~ "primera partició?"
-
-#~ msgid "All"
-#~ msgstr "Tot"
-
-#~ msgid "TV card"
-#~ msgstr "Targeta de TV"
-
-#~ msgid "Boot"
-#~ msgstr "Arrencada"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Autenticació"
 
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#, fuzzy
-#~ msgid "Invictus Firewall"
-#~ msgstr "Tallafocs interactiu"
-
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "(%d paquet, %d MB)"
-#~ msgstr[1] "(%d paquets, %d MB)"
-
-#~ msgid "%d packages"
-#~ msgstr "%d paquets"
-
-#~ msgid "Language"
-#~ msgstr "Escolliu el vostre idioma"
-
-#~ msgid "License"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "License"
 #~ msgstr "Llicència"
 
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "Tipus d'instal·lació"
-
-#, fuzzy
-#~ msgid "Formatting"
-#~ msgstr "S'està estimant"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "Paquets a instal·lar"
-
-#~ msgid "Users"
-#~ msgstr "Usuaris"
-
-#~ msgid "Networking"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
 #~ msgstr "Xarxa"
 
-#~ msgid "Configure X"
-#~ msgstr "Configura l'X"
-
 #~ msgid ""
-#~ "Cannot access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "No es pot accedir als mòduls del nucli corresponents al vostre nucli (no "
-#~ "s'ha trobat el fitxer %s). Això generalment vol dir que el vostre disquet "
-#~ "d'arrencada no està sincronitzat amb el suport d'instal·lació (si us "
-#~ "plau, creeu un nou disquet d'arrencada)"
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Actualitzacions"

@@ -77,7 +77,7 @@ msgstr ""
 "При следующей загрузке вы должны увидеть приглашение начального загрузчика."
 
 #: any.pm:352
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
 "This implies you already have a bootloader on the hard disk drive you boot "
@@ -547,25 +547,25 @@ msgid "Please choose a language to use"
 msgstr "Выберите используемый язык"
 
 #: any.pm:1183
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
-"В ОС Mandriva Linux поддерживается несколько языков. Выберите\n"
+"%s может поддерживать несколько языков. Выберите\n"
 "языки, которые необходимо установить. Они будут доступны после\n"
-"завершения установкаи и перезапуска системы."
+"завершения установки и перезапуска системы."
 
 #: any.pm:1186
-#, fuzzy, c-format
+#, c-format
 msgid "Multiple languages"
 msgstr "Многоязычность"
 
 #: any.pm:1187
 #, c-format
 msgid "Select Additional Languages"
-msgstr ""
+msgstr "Выберите дополнительные языки"
 
 #: any.pm:1196 any.pm:1227
 #, c-format
@@ -1091,9 +1091,9 @@ msgid "LILO with text menu"
 msgstr "LILO с текстовым меню"
 
 #: bootloader.pm:1203
-#, fuzzy, c-format
+#, c-format
 msgid "GRUB2 with graphical menu"
-msgstr "GRUB с графическим меню"
+msgstr "GRUB2 с графическим меню"
 
 #: bootloader.pm:1204
 #, c-format
@@ -1335,7 +1335,7 @@ msgid "Warning"
 msgstr "Внимание"
 
 #: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete this mount point?"
 msgstr "Вы уверены, что хотите удалить эту точку монтирования?"
 
@@ -2508,7 +2508,7 @@ msgstr ""
 "серверов новостей)."
 
 #: fs/mount_options.pm:126
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
 "the -a option will not cause the filesystem to be mounted)."
@@ -2517,7 +2517,7 @@ msgstr ""
 "опция -a  не приведет к монтированию файловой системы)."
 
 #: fs/mount_options.pm:129
-#, fuzzy, c-format
+#, c-format
 msgid "Do not interpret character or block special devices on the filesystem."
 msgstr ""
 "Не интерпретировать символьные или специальные блочные устройства в файловой "
@@ -2693,7 +2693,7 @@ msgid "Which partition do you want to resize?"
 msgstr "Размер какого из разделов нужно изменить?"
 
 #: fs/partitioning_wizard.pm:180
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
@@ -2701,7 +2701,7 @@ msgid ""
 msgstr ""
 "Раздел Microsoft Windows® слишком фрагментирован. Перезагрузите компьютер в "
 "систему Microsoft Windows®, запустите утилиту «defrag», а затем повторно "
-"запустите установку Mandriva Linux."
+"запустите установку %s."
 
 #: fs/partitioning_wizard.pm:188
 #, c-format
@@ -2786,12 +2786,13 @@ msgid "Erase and use entire disk"
 msgstr "очистить и использовать весь диск"
 
 #: fs/partitioning_wizard.pm:243
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
 msgstr ""
-"Доступно более одного жёсткого диска. На какой из них нужно установить Linux?"
+"Доступно более одного жёсткого диска. Какой из них следует использовать "
+"инсталлятору?"
 
 #: fs/partitioning_wizard.pm:251 fsedit.pm:634
 #, c-format
@@ -2876,7 +2877,7 @@ msgid "BIOS software RAID detected on disks %s. Activate it?"
 msgstr "На дисках %s обнаружен программный (BIOS) RAID-массив. Включить его?"
 
 #: fsedit.pm:247
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "I cannot read the partition table of device %s, it's too corrupted for me :"
 "(\n"
@@ -2911,7 +2912,7 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "Уже есть раздел с точкой монтирования %s\n"
 
 #: fsedit.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
@@ -2919,16 +2920,16 @@ msgid ""
 msgstr ""
 "Вы выбрали программный раздел RAID в качестве корневого (/).\n"
 "Никакой загрузчик не в состоянии управлять им без раздела /boot.\n"
-"Пожалуйста, убедитесь, что раздел /boot добавлен"
+"Пожалуйста, убедитесь, что отдельный раздел /boot добавлен"
 
 #: fsedit.pm:440
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Metadata version unsupported for a boot partition. Please be sure to add a "
 "separate /boot partition."
 msgstr ""
-"Версия метаданных не подеррживается для загрузочного раздела. Убедитесь, что "
-"добавили раздел /boot."
+"Версия метаданных не поддерживается для загрузочного раздела. Убедитесь, что "
+"добавили отдельный раздел /boot."
 
 #: fsedit.pm:448
 #, c-format
@@ -2945,15 +2946,15 @@ msgid "Metadata version unsupported for a boot partition."
 msgstr "Версия метаданных не поддерживается для загрузочного раздела."
 
 #: fsedit.pm:459
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a separate /boot partition"
 msgstr ""
-"Вы выбрали зашифрованный в качестве корневого (/).\n"
+"Вы выбрали зашифрованный раздел в качестве корневого (/).\n"
 "Никакой загрузчик не в состоянии управлять им без раздела /boot.\n"
-"Пожалуйста, убедитесь, что раздел /boot добавлен"
+"Пожалуйста, убедитесь, что отдельный раздел /boot добавлен"
 
 #: fsedit.pm:465 fsedit.pm:485
 #, c-format
@@ -2972,7 +2973,7 @@ msgstr ""
 "поскольку он распределён по физическим разделам"
 
 #: fsedit.pm:471
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
@@ -2982,7 +2983,7 @@ msgstr ""
 "Вы выбрали логический том LVM в качестве корневого (/).\n"
 "Загрузчик не сможет управлять им, если том распределён по физическим "
 "разделам.\n"
-"Вам следует сначала создать раздел /boot"
+"Вам следует сначала создать отдельный раздел /boot"
 
 #: fsedit.pm:475 fsedit.pm:477
 #, c-format
@@ -3306,7 +3307,7 @@ msgstr ""
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:369
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -3315,11 +3316,11 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"В настоящий момент для карты используется драйвер %s «%s» (драйвером по "
-"умолчанию является «%s»)"
+"В настоящий момент для карты используется драйвер %s\"%s\" (драйвером по "
+"умолчанию является \"%s\")"
 
 #: harddrake/sound.pm:371
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
 "sound API (it's available on most UNIX(tm) systems) but it's a very basic "
@@ -3349,8 +3350,8 @@ msgstr ""
 "Она также предоставляет значительно большую API, чем OSS.\n"
 "\n"
 "Для поддержки alsa можно использовать:\n"
-"- старую api, совместимую с OSS\n"
-"- новую api ALSA, предоставляющую много расширенных возможностей, но "
+"- старую API, совместимую с OSS\n"
+"- новую API ALSA, предоставляющую много расширенных возможностей, но "
 "требующую библиотеку ALSA.\n"
 
 #: harddrake/sound.pm:385 harddrake/sound.pm:487
@@ -3479,7 +3480,7 @@ msgstr "Выбор произвольного драйвера"
 msgid ""
 "If you really think that you know which driver is the right one for your "
 "card\n"
-"you can pick one from the above list.\n"
+"you can pick one from the list below.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
@@ -3510,7 +3511,7 @@ msgid "Unknown|CPH06X (bt878) [many vendors]"
 msgstr "Неизвестный|CPH06X (bt878) [большинство производителей]"
 
 #: harddrake/v4l.pm:475
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-"
 "detect the rights parameters.\n"
@@ -5435,19 +5436,19 @@ msgid "Installing driver for USB controller"
 msgstr "Установка драйвера для USB контроллера"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller \"%s\""
-msgstr "Установка драйвера для firewire-контроллера %s"
+msgstr "Установка драйвера для firewire-контроллера \"%s\""
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard disk drive controller \"%s\""
-msgstr "Установка драйвера для контроллера жёсткого диска %s"
+msgstr "Установка драйвера для контроллера жёсткого диска \"%s\""
 
 #: modules/interactive.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller \"%s\""
-msgstr "Установка драйвера для ethernet-контроллера %s"
+msgstr "Установка драйвера для ethernet-контроллера \"%s\""
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -5529,9 +5530,9 @@ msgstr ""
 "Попытаться ещё раз с другими параметрами?"
 
 #: mygtk2.pm:1229
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to quit?"
-msgstr "Вы уверены, что хотите удалить эту точку монтирования?"
+msgstr "Вы уверены, что хотите выйти?"
 
 #: mygtk2.pm:1571 mygtk2.pm:1572
 #, c-format
@@ -5559,7 +5560,7 @@ msgid "Extended partition not supported on this platform"
 msgstr "Расширенный раздел не поддерживается на этой платформе"
 
 #: partition_table.pm:558
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
 "The only solution is to move your primary partitions to have the hole next "
@@ -6968,7 +6969,7 @@ msgstr "Интернет"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr ""
+msgstr "Сеть"
 
 #: services.pm:161
 #, c-format
@@ -7123,7 +7124,7 @@ msgstr ""
 "режим по умолчанию: предлагать настроить возможность автологина"
 
 #: standalone.pm:61
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
 "\n"
@@ -7136,8 +7137,8 @@ msgstr ""
 "\n"
 "ОПЦИИ:\n"
 "  --help            - вывести это справочное сообщение.\n"
-"  --report          - программа должна быть из пакета утилит Mandriva Linux\n"
-"  --incident        - программа должна быть из пакета утилит Mandriva Linux"
+"  --report          - программа должна быть из пакета утилит %s\n"
+"  --incident        - программа должна быть из пакета утилит %s"
 
 #: standalone.pm:67
 #, c-format
@@ -7188,7 +7189,7 @@ msgstr ""
 "                 : и gs для ghostscript только для этого приложения."
 
 #: standalone.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS]...\n"
 "%s Terminal Server Configurator\n"
@@ -7205,7 +7206,7 @@ msgid ""
 "IP, nbi image name)"
 msgstr ""
 "[ОПЦИИ]...\n"
-"Конфигуратор Сервера терминалов Mandriva Linux\n"
+"Конфигуратор Сервера терминалов %s\n"
 "--enable         : включить MTS\n"
 "--disable        : выключить MTS\n"
 "--start          : запустить MTS\n"
@@ -7255,7 +7256,7 @@ msgstr ""
 "--quiet : не быть интерактивным. Используется с (dis)connect."
 
 #: standalone.pm:112
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTION]...\n"
 "  --no-confirmation      do not ask first confirmation question in %s Update "
@@ -7266,7 +7267,7 @@ msgid ""
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
 "[ОПЦИЯ]...\n"
-"  --no-confirmation      не просить первого подтверждения в режиме Mandriva "
+"  --no-confirmation      не просить первого подтверждения в режиме %s "
 "Update\n"
 "  --no-verify-rpm        не проверять подписи пакетов\n"
 "  --changelog-first      показывать журнал изменений перед списком файлов в "
@@ -7384,11 +7385,448 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Установка завершилась неудачей"
 
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Лицензионное соглашение"
+
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Ограниченные гарантийные обязательства"
+
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. Лицензия GPL и связанные лицензии"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Права на объекты интеллектуальной собственности"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Регулирующие законы"
+
+#~ msgid ""
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
+#~ msgstr ""
+#~ "Все права на компоненты Программных Продуктов принадлежат их "
+#~ "соответствующим авторам \n"
+#~ "и защищены законами об интеллектуальной собственности и авторском праве, "
+#~ "применительно \n"
+#~ "к программному обеспечению. Компания Moondrake и её поставщики и "
+#~ "лицензиары сохраняют \n"
+#~ "за собой право изменять или адаптировать Программные Продукты (как "
+#~ "целиком, так и по частям) \n"
+#~ "любым образом и для любых целей.\n"
+#~ "«Moondrake» и соответствующие логотипы являются товарными знаками \n"
+#~ "компании %s"
+
+#~ msgid "An NTP client/server"
+#~ msgstr "NTP клиент/сервер"
+
+#~ msgid ""
+#~ "Below are some basic tips to help debug audio problems, but for accurate "
+#~ "and up-to-date tips and tricks, please see:\n"
+#~ "\n"
+#~ "https://wiki.moondrake.org/en/Support:DebuggingSoundProblems\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- General Recommendation: Enable PulseAudio. If you have opted to not to "
+#~ "use PulseAudio, we would strongly advise you enable it. For the vast "
+#~ "majority of desktop use cases, PulseAudio is the recommended and best "
+#~ "supported option.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and "
+#~ "\"pauvucontrol\" (generic) will launch graphical applications to allow "
+#~ "you to view your sound devices and adjust volume levels\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"ps aux | grep pulseaudio\" will check that PulseAudio is running.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl stat\" will check that you can connect to the PulseAudio daemon "
+#~ "correctly.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl list sink-inputs\" will tell you which programs are currently "
+#~ "playing sound via PulseAudio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"systemctl status osspd.service\" will tell you the current state of "
+#~ "the OSS Proxy Daemon. This is used to enable sound from legacy "
+#~ "applications which use the OSS sound API. You should install the \"ossp\" "
+#~ "package if you need this functionality.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pacmd ls\" will give you a LOT of debug information about the current "
+#~ "state of your audio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | grep -i audio\" will tell you which low-level driver "
+#~ "your card uses by default.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/lsmod | grep snd\" will enable you to check which sound "
+#~ "related kernel modules (drivers) are loaded.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"alsamixer -c 0\" will give you a text-based mixer to the low level "
+#~ "ALSA mixer controls for first sound card\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" will tell which programs "
+#~ "are currently using the sound card directly (normally this should only "
+#~ "show PulseAudio)\n"
+#~ msgstr ""
+#~ "Ниже приведены несколько простых советов, чтобы помочь отладить проблемы "
+#~ "со звуком, но для точных и актуальных советов и рекомендаций см..:\n"
+#~ "\n"
+#~ "https://wiki.moondrake.org/en/Support:DebuggingSoundProblems\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- Общая рекомендация: Включить PulseAudio. Если вы решили не использовать "
+#~ "PulseAudio, мы настоятельно советуем вам его включить. Для подавляющего "
+#~ "большинства вариантов использования, PulseAudio является рекомендуемым и "
+#~ "лучше поддерживается.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and \"pavucontrol"
+#~ "\" (generic) запустит графические приложения, чтобы позволить вам "
+#~ "просматривать ваши звуковые устройства и настраивать уровни громкости\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"ps aux | grep pulseaudio\" проверить работает ли  PulseAudio в "
+#~ "системе.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl stat\" проверка соединения к службе PulseAudio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pactl list sink-inputs\" покажет вам, какие программы в настоящее "
+#~ "время проигрывают звук через PulseAudio.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"systemctl status osspd.service\" скажет вам текущее состояние демона "
+#~ "OSS. Это используется, для того чтобы включить звук из унаследованных "
+#~ "приложений, которые используют звук OSS API. Вы должны установить \"ossp"
+#~ "\" пакет, если вам нужна эта функциональность.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"pacmd ls\" даст вам много отладочной информации о текущем состоянии "
+#~ "вашего аудио устройства.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | grep -i audio\" покажет вам, какой драйвер низкого "
+#~ "уровня вашей карты используется по умолчанию.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/lsmod | grep snd\" позволит вам проверить, какие связанные "
+#~ "модули ядра (драйверы) для звука  загружаются.\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"alsamixer -c 0\" предоставит вам псевдографическое управление "
+#~ "микшером ALSA для первой звуковой карты\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" покажет, какие программы "
+#~ "в настоящее время используют звуковой карту напрямую (как правило, должно "
+#~ "показать только касаемо PulseAudio)\n"
+
+#~ msgid ""
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
+#~ msgstr ""
+#~ "Установка успешно завершена.\n"
+#~ "Извлеките загрузочный диск и нажмите клавишу «Enter» для перезагрузки."
+
+#~ msgid ""
+#~ "For information on fixes which are available for this release of "
+#~ "Moondrake,\n"
+#~ "consult the Errata available from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Сведения об исправлениях, доступных для этой версии Moondrake,\n"
+#~ "см. в списке Errata на сайте:\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "If any portion of this agreement is held void, illegal or inapplicable by "
+#~ "a court judgment, this \n"
+#~ "portion is excluded from this contract. You remain bound by the other "
+#~ "applicable sections of the \n"
+#~ "agreement.\n"
+#~ "The terms and conditions of this License are governed by the Laws of "
+#~ "France.\n"
+#~ "All disputes on the terms of this license will preferably be settled out "
+#~ "of court. As a last \n"
+#~ "resort, the dispute will be referred to the appropriate Courts of Law of "
+#~ "Paris - France.\n"
+#~ "For any question on this document, please contact Moondrake."
+#~ msgstr ""
+#~ "Если какая-либо часть данного соглашения является недействительной, "
+#~ "противозаконной \n"
+#~ "или неприменимой по решению суда, эта часть исключается из данного "
+#~ "соглашения. \n"
+#~ "На вас по-прежнему налагаются ограничения других пригодных разделов "
+#~ "соглашения.\n"
+#~ "Условия и положения данной Лицензии регулируются законодательством "
+#~ "Франции.\n"
+#~ "Все споры по условиям и положениям данной лицензии лучше оспаривать вне "
+#~ "суда. В крайнем \n"
+#~ "случае спор будет передан в соответствующий суд общей юрисдикции Парижа, "
+#~ "Франция. \n"
+#~ "По любым вопросам, касающимся этого документа, обращайтесь в компанию  "
+#~ "Moondrake"
+
+#~ msgid ""
+#~ "Information on configuring your system is available in the post\n"
+#~ "install chapter of the Official Moondrake User's Guide."
+#~ msgstr ""
+#~ "Сведения о настройке системы см. в главе «Действия после\n"
+#~ " установки» руководства пользователя Moondrake."
+
+#~ msgid "Introduction"
+#~ msgstr "Введение"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
+
+#~ msgid "Please make a backup of your data first"
+#~ msgstr "Пожалуйста, сначала сделайте резервную копию данных"
+
+#~ msgid ""
+#~ "Please read this document carefully. This document is a license agreement "
+#~ "between you and  \n"
+#~ "Moondrake which applies to the Software Products.\n"
+#~ "By installing, duplicating or using any of the Software Products in any "
+#~ "manner, you explicitly \n"
+#~ "accept and fully agree to conform to the terms and conditions of this "
+#~ "License. \n"
+#~ "If you disagree with any portion of the License, you are not allowed to "
+#~ "install, duplicate or use \n"
+#~ "the Software Products. \n"
+#~ "Any attempt to install, duplicate or use the Software Products in a "
+#~ "manner which does not comply \n"
+#~ "with the terms and conditions of this License is void and will terminate "
+#~ "your rights under this \n"
+#~ "License. Upon termination of the License,  you must immediately destroy "
+#~ "all copies of the \n"
+#~ "Software Products."
+#~ msgstr ""
+#~ "Внимательно прочтите данный документ. Этот документ является "
+#~ "лицензионным \n"
+#~ "соглашением, заключаемым между вами и компанией Moondrake, применительно "
+#~ "к \n"
+#~ "Программным Продуктам. Устанавливая, тиражируя или используя Программные "
+#~ "Продукты \n"
+#~ "в любых других целях, вы явным образом принимаете и полностью "
+#~ "соглашаетесь с \n"
+#~ "условиями и положениями данной Лицензии. Если вы не согласны с какой-либо "
+#~ "частью данной \n"
+#~ "Лицензии, вам не разрешается устанавливать, тиражировать или использовать "
+#~ "Программные \n"
+#~ "Продукты.\n"
+#~ "Любые попытки использовать, тиражировать или использовать Программные "
+#~ "Продукты \n"
+#~ "способом, противоречащим условиям данной Лицензии, являются "
+#~ "аннулированием, \n"
+#~ "и освобождают вас от всех прав, предоставляемых данной Лицензией. При "
+#~ "прекращении \n"
+#~ "действия Лицензии вы должны немедленно удалить все копии Программных "
+#~ "Продуктов."
+
+#~ msgid ""
+#~ "The Software Products and attached documentation are provided \"as is\", "
+#~ "with no warranty, to the \n"
+#~ "extent permitted by law.\n"
+#~ "Neither Moondrake nor its licensors or suppliers will, in any "
+#~ "circumstances and to the extent \n"
+#~ "permitted by law, be liable for any special, incidental, direct or "
+#~ "indirect damages whatsoever \n"
+#~ "(including without limitation damages for loss of business, interruption "
+#~ "of business, financial \n"
+#~ "loss, legal fees and penalties resulting from a court judgment, or any "
+#~ "other consequential loss) \n"
+#~ "arising out of  the use or inability to use the Software Products, even "
+#~ "if Moondrake or its \n"
+#~ "licensors or suppliers have been advised of the possibility or occurrence "
+#~ "of such damages.\n"
+#~ "\n"
+#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN "
+#~ "SOME COUNTRIES\n"
+#~ "\n"
+#~ "To the extent permitted by law, neither Moondrake nor its licensors, "
+#~ "suppliers or\n"
+#~ "distributors will, in any circumstances, be liable for any special, "
+#~ "incidental, direct or indirect \n"
+#~ "damages whatsoever (including without limitation damages for loss of "
+#~ "business, interruption of \n"
+#~ "business, financial loss, legal fees and penalties resulting from a court "
+#~ "judgment, or any \n"
+#~ "other consequential loss) arising out of the possession and use of "
+#~ "software components or \n"
+#~ "arising out of  downloading software components from one of Moondrake "
+#~ "sites which are \n"
+#~ "prohibited or restricted in some countries by local laws.\n"
+#~ "This limited liability applies to, but is not restricted to, the strong "
+#~ "cryptography components \n"
+#~ "included in the Software Products.\n"
+#~ "However, because some jurisdictions do not allow the exclusion or "
+#~ "limitation of liability for \n"
+#~ "consequential or incidental damages, the above limitation may not apply "
+#~ "to you."
+#~ msgstr ""
+#~ "Программные Продукты и прилагаемая документация предоставляются «как "
+#~ "есть», без какой-либо \n"
+#~ "гарантии, в пределах, дозволенных законом.\n"
+#~ "Ни компания Moondrake, ни её лицензиары ни при каких условиях и в "
+#~ "пределах, дозволенных \n"
+#~ "законом, не несут ответственности за какие-либо специальные, случайные, "
+#~ "прямые или косвенные убытки \n"
+#~ "(включая неограниченные убытки от потери бизнеса, прерывания коммерческой "
+#~ "деятельности, финансовых \n"
+#~ "потерь, судебных издержек и штрафов, являющихся результатом судебного "
+#~ "решения, или любых других \n"
+#~ "косвенных потерь), являющихся  результатом использования Программных "
+#~ "Продуктов, даже, если компании \n"
+#~ "Moondrake или её лицензиарам было известно о возможности или случаях "
+#~ "такого ущерба.\n"
+#~ "\n"
+#~ "ОГРАНИЧЕННАЯ ОТВЕТСТВЕННОСТЬ, СВЯЗАННАЯ С ВЛАДЕНИЕМ ИЛИ ИСПОЛЬЗОВАНИЕМ "
+#~ "ЗАПРЕЩЁННОГО ПРОГРАММНОГО \n"
+#~ "ОБЕСПЕЧЕНИЯ В НЕКОТОРЫХ СТРАНАХ\n"
+#~ "\n"
+#~ "В пределах, дозволенных законом, ни компания Moondrake, ни её лицензиары, "
+#~ "поставщики \n"
+#~ "или распространители ни при каких условиях не несут ответственности за "
+#~ "какие-либо специальные, \n"
+#~ "случайные, прямые или косвенные убытки (включая неограниченные убытки от "
+#~ "потери бизнеса, прерывания \n"
+#~ "коммерческой деятельности, финансовых потерь, судебных издержек и "
+#~ "штрафов, являющихся результатом \n"
+#~ "судебного решения, или любых других косвенных потерь), связанных с "
+#~ "владением, использованием \n"
+#~ "или загрузкой программных компонентов с одного из веб-сайтов Moondrake, "
+#~ "на которые наложен \n"
+#~ "запрет или ограничение в некоторых странах согласно местному "
+#~ "законодательству.\n"
+#~ "Данная ограниченная ответственность применяется, но не ограничивается, к "
+#~ "компонентам усиленной \n"
+#~ "криптографии, относящихся к Программным Продуктам.\n"
+#~ "Однако, поскольку в ряде юрисдикций не допускается исключение или "
+#~ "ограничение ответственности \n"
+#~ "за косвенные или случайные убытки, то указанные выше ограничения могут к "
+#~ "вам не относиться."
+
+#~ msgid ""
+#~ "The Software Products consist of components created by different persons "
+#~ "or entities.\n"
+#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
+#~ "the components which \n"
+#~ "they cover. Please read carefully the terms and conditions of the license "
+#~ "agreement for each component \n"
+#~ "before using any component. Any question on a component license should be "
+#~ "addressed to the component \n"
+#~ "licensor or supplier and not to Moondrake.\n"
+#~ "The programs developed by Moondrake are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by Moondrake is governed by \"%s\" License."
+#~ msgstr ""
+#~ "Программные Продукты состоят из компонентов, созданных различными людьми "
+#~ "или организациями.\n"
+#~ "Большинство этих лицензий позволяют вам использовать, тиражировать, "
+#~ "адаптировать \n"
+#~ "или перераспределять  компоненты, на которые распространяется действие "
+#~ "лицензий. Перед \n"
+#~ "использованием какого-либо компонента внимательно прочтите положения и "
+#~ "условия лицензионного \n"
+#~ "соглашения для этого компонента. Любые вопросы относительно лицензии "
+#~ "компонента следует\n"
+#~ "направлять разработчику компонента, а не компании Moondrake.\n"
+#~ "На программы, разработанные компанией Moondrake, распространяется "
+#~ "действие лицензии GPL. \n"
+#~ "На документацию, написанную компанией Moondrake, распространяется "
+#~ "действие особой лицензии \"%s\". \n"
+#~ "Дополнительные сведения см. в документации."
+
+#~ msgid ""
+#~ "The operating system and the different components available in the "
+#~ "Moondrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software "
+#~ "Products include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation "
+#~ "related to the operating \n"
+#~ "system and the different components of the Moondrake distribution, and "
+#~ "any applications \n"
+#~ "distributed with these products provided by Moondrake's licensors or "
+#~ "suppliers."
+#~ msgstr ""
+#~ "Операционная система и различные компоненты, доступные в дистрибутиве "
+#~ "Moondrake Linux, далее будут \n"
+#~ "называться «Программными Продуктами». Программные Продукты включают (но "
+#~ "не ограничиваются) \n"
+#~ "программы, методы, правила и документацию, связанные с операционной "
+#~ "системой и различными \n"
+#~ "компонентами дистрибутива Moondrake и любыми приложениями, "
+#~ "распространяемыми с этими \n"
+#~ "продуктами лицензиарами или поставщиками компании Moondrake."
+
+#~ msgid ""
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
+#~ msgstr ""
+#~ "Предупреждение: свободное программное обеспечение не обязательно может \n"
+#~ "быть свободным от патентов, и некоторое свободное ПО в дистрибутиве \n"
+#~ "может быть запатентовано в вашей стране. Например, для MP3-декодеров в \n"
+#~ "дистрибутиве может потребоваться лицензия для дальнейшего использования \n"
+#~ "(подробности см. на веб-сайте http://www.mp3licensing.com). Если вы не "
+#~ "уверены \n"
+#~ "в наличии патента, ознакомьтесь со своим местным законодательством"
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr "_: Вы можете предупредить о неофициальном переводе здесь"
+
 #~ msgid "Clean /tmp at each boot"
 #~ msgstr "Очищать /tmp при каждой загрузке"
 
-#~ msgid "command %s missing"
-#~ msgstr "отсутствует команда %s"
+#~ msgid "Enable 5.1 sound with Pulse Audio"
+#~ msgstr "Включить 5.1-звук через Pulse Audio"
+
+#~ msgid "Enable user switching for audio applications"
+#~ msgstr "Включить переключение пользователей для звуковых приложений"
+
+#~ msgid "File sharing"
+#~ msgstr "Общий доступ к файлам"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "Запуск фильтрации пакетов для ядер Linux серии 2.2, чтобы установить\n"
+#~ "файервол для защиты своей машины от сетевых атак."
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr ""
+#~ "Параметр «Ограничить параметры командной строки» не используется без "
+#~ "пароля"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Ограничить параметры командной строки"
+
+#~ msgid "Set CPU frequency settings"
+#~ msgstr "Задание настроек частоты процессора"
 
 #~ msgid ""
 #~ "The classic bug sound tester is to run the following commands:\n"
@@ -7435,21 +7873,19 @@ msgstr "Установка завершилась неудачей"
 #~ "- \"/sbin/fuser -v /dev/dsp\" сообщит, какая программа использует\n"
 #~ "звуковую карту.\n"
 
-#~ msgid "Set CPU frequency settings"
-#~ msgstr "Задание настроек частоты процессора"
-
 #~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
+#~ "To ensure data integrity after resizing the partition(s), \n"
+#~ "filesystem checks will be run on your next boot into Microsoft Windows®"
 #~ msgstr ""
-#~ "Запуск фильтрации пакетов для ядер Linux серии 2.2, чтобы установить\n"
-#~ "файервол для защиты своей машины от сетевых атак."
+#~ "Для обеспечения целостности данных после изменения размера \n"
+#~ "раздела(ов) при следующей загрузке в Microsoft Windows® будет \n"
+#~ "запущена проверка файловой системы "
 
-#~ msgid "Enable 5.1 sound with Pulse Audio"
-#~ msgstr "Включить 5.1-звук через Pulse Audio"
+#~ msgid "Use an encrypted filesystem"
+#~ msgstr "Использовать шифрованную файловую систему"
 
-#~ msgid "Enable user switching for audio applications"
-#~ msgstr "Включить переключение пользователей для звуковых приложений"
+#~ msgid "command %s missing"
+#~ msgstr "отсутствует команда %s"
 
-#~ msgid "File sharing"
-#~ msgstr "Общий доступ к файлам"
+#~ msgid "restrict"
+#~ msgstr "ограничить"

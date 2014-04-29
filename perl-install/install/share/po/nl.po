@@ -441,18 +441,18 @@ msgid "URL must start with ftp:// or http://"
 msgstr "URL dient te starten met ftp:// of http://"
 
 #: any.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
-"Bezig te verbinden met de Mandriva Linux-website om de lijst met beschikbare "
-"mirrors op te halen…"
+"Er wordt verbinding gemaakt met de %s website om een lijst met beschikbare "
+"spiegelservers te verkrijgen..."
 
 #: any.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
-"Het verbinden met de Mandriva Linux-website om de lijst met beschikbare "
-"mirrors op te halen is mislukt"
+"Er kon geen verbinding gemaakt worden met %s website om een lijst met "
+"beschikbare spiegelservers te verkrijgen"
 
 #: any.pm:204
 #, c-format
@@ -524,11 +524,13 @@ msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
 "free software drivers to work."
 msgstr ""
+"Bepaalde hardware in uw machine behoeft niet-vrije firmware alvorens de "
+"vrije stuurprogrammatuur kan werken."
 
 #: any.pm:351
 #, c-format
 msgid "You should enable \"%s\""
-msgstr ""
+msgstr "U dient \"%s\" in te schakelen"
 
 #: any.pm:370
 #, c-format
@@ -545,7 +547,7 @@ msgstr ""
 #: any.pm:372
 #, c-format
 msgid "\"%s\" contains non free software.\n"
-msgstr ""
+msgstr "\"%s\" bevat niet-vrije software.\n"
 
 #: any.pm:373
 #, c-format
@@ -557,7 +559,7 @@ msgstr ""
 #: any.pm:377
 #, c-format
 msgid "Here you can enable more media if you want."
-msgstr ""
+msgstr "Hier kunt u indien gewenst meerdere media inschakelen."
 
 #: any.pm:456
 #, c-format
@@ -736,17 +738,18 @@ msgstr "misschien"
 #: pkgs.pm:102
 #, c-format
 msgid "Getting package information from XML meta-data..."
-msgstr ""
+msgstr "Pakketinformatie wordt uit de XML-metadata geëxtraheerd..."
 
 #: pkgs.pm:111
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
+"Geen XML-info voor medium ‘%s’, slechts gedeeltelijk resultaat voor pakket %s"
 
 #: pkgs.pm:119
 #, c-format
 msgid "No description"
-msgstr ""
+msgstr "Geen omschrijving"
 
 #: pkgs.pm:280
 #, c-format
@@ -763,14 +766,14 @@ msgid "An error occurred:"
 msgstr "Er is een fout opgetreden:"
 
 #: pkgs.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "A fatal error occurred: %s."
-msgstr "Er is een fout opgetreden:"
+msgstr "Er is een fatale fout opgetreden: %s."
 
 #: pkgs.pm:878 pkgs.pm:920
 #, c-format
 msgid "Do not ask again"
-msgstr ""
+msgstr "Vraag niet nogmaals"
 
 #: pkgs.pm:894
 #, c-format
@@ -810,9 +813,9 @@ msgid "Entering step `%s'\n"
 msgstr "Overgang naar stap `%s'\n"
 
 #: steps_curses.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "%s Installation %s"
-msgstr "Installatie"
+msgstr "%s Installatie %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -825,16 +828,16 @@ msgid "Xorg server is slow to start. Please wait..."
 msgstr "De Xorg-server start langzaam. Even geduld…"
 
 #: steps_gtk.pm:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "%s. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Uw systeem heeft weinig bronnen beschikbaar. U zou problemen kunnen\n"
-"ondervinden bij het installeren van Mandriva Linux. Als dit gebeurt,\n"
-"kunt u een tekstinstallatie proberen. Om dit te doen, drukt u op `F1'\n"
-"terwijl de CDROM opstart, en dan voert u `text' in."
+"Uw systeem heeft weinig systeembronnen beschikbaar. Het kan zijn dat u "
+"problemen ondervindt bij het installeren van %s. In dat geval kunt u een "
+"tekstinstallatie proberen. Druk 'F1' bij het opstarten van de disc, en toets "
+"dan in: 'text'."
 
 #: steps_gtk.pm:241 steps_gtk.pm:777
 #, c-format
@@ -842,14 +845,14 @@ msgid "Media Selection"
 msgstr "Mediaselectie"
 
 #: steps_gtk.pm:252
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s KDE Desktop"
-msgstr "Mandriva KDE-werkomgeving installeren"
+msgstr "Installeer de %s KDE Desktop"
 
 #: steps_gtk.pm:253
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s GNOME Desktop"
-msgstr "Mandriva GNOME-werkomgeving installeren"
+msgstr "Installeer de %s GNOME Desktop"
 
 #: steps_gtk.pm:254
 #, c-format
@@ -894,7 +897,7 @@ msgstr "Individuele pakketselectie"
 #: steps_gtk.pm:357
 #, c-format
 msgid "Unselect All"
-msgstr ""
+msgstr "Alle gedeselecteerd"
 
 #: steps_gtk.pm:375 steps_interactive.pm:557
 #, c-format
@@ -1302,9 +1305,9 @@ msgid "With X"
 msgstr "Met X"
 
 #: steps_interactive.pm:602
-#, fuzzy, c-format
+#, c-format
 msgid "Install suggested packages"
-msgstr "Bezig met installeren van pakket %s"
+msgstr "Installeer aangeraden pakketten"
 
 #: steps_interactive.pm:603
 #, c-format
@@ -1483,9 +1486,9 @@ msgid "Preparing bootloader..."
 msgstr "Klaarmaken van opstartlader…"
 
 #: steps_interactive.pm:1050
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing initial startup program..."
-msgstr "Bezig met voorbereiden van installatie"
+msgstr "Bezig met voorbereiden van het initiële startprogramma..."
 
 #: steps_interactive.pm:1051
 #, c-format
@@ -1567,11 +1570,11 @@ msgid ""
 msgstr "Muis"
 
 #: steps_list.pm:20 steps_list.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Hard drive detection"
-msgstr "Harde schijf-detectie"
+msgstr "Harddisk detectie"
 
 #: steps_list.pm:22 steps_list.pm:23
 #, c-format
@@ -1664,41 +1667,193 @@ msgid ""
 "Exit"
 msgstr "Afsluiten"
 
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Mandriva Linux installatie %s"
+#~ msgid ""
+#~ "\"%s\" contains software that can not be distributed in every country due "
+#~ "to software patents."
+#~ msgstr ""
+#~ "\"%s\" bevat software welke niet in alle landen vrijelijk gedistribueerd "
+#~ "kan worden als gevolg van software patenten."
 
 #~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "License"
-#~ msgstr "Licentie"
+#~ "\"%s\" contains the various pieces of the systems and its applications"
+#~ msgstr ""
+#~ "\"%s\" bevat de diverse onderdelen van de systemen en hun toepassingen"
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Uw bureaublad op een USB-stick"
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Een op GNOME gebaseerde grafische omgeving"
 
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "De 100%% opensource Mandriva Linux-distributie"
+#~ msgid "A less developed lightweight fast graphical environment"
+#~ msgstr "Een minder ontwikkelde, snelle lichtgewicht grafische omgeving"
 
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Gemakkelijk Linux verkennen met Mandriva One"
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Een lichtere grafische omgeving met een gebruiksvriendelijke set "
+#~ "toepassingen en bureaublad-programma's"
+
+#~ msgid "A lightweight fast graphical environment with a dedicated following"
+#~ msgstr ""
+#~ "Een snelle lichtgewicht grafische omgeving met gebruiksvriendelijke set "
+#~ "toepassingen en bureaublad-programma's"
+
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Amusementsprogramma's: arcade, bordspellen, strategie etc"
+
+#~ msgid "Be Free!"
+#~ msgstr "Wees Vrij!"
+
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Cinnamon-werkomgeving"
+
+#~ msgid "Core Release"
+#~ msgstr "Core-uitgave"
+
+#~ msgid "Enlightenment e17 Desktop"
+#~ msgstr "Enlightnement e17-werkomgeving"
+
+#~ msgid "For developers!"
+#~ msgstr "Voor ontwikkelaars!"
+
+#~ msgid "For family!"
+#~ msgstr "Voor gezinnen!"
+
+#~ msgid "For kids"
+#~ msgstr "Voor kinderen"
+
+#~ msgid "Home entertainment"
+#~ msgstr "Home-entertainment"
+
+#~ msgid ""
+#~ "Installer has detected that your installed Linux system could not\n"
+#~ "safely be upgraded to %s.\n"
+#~ "\n"
+#~ "New installation replacing your previous one is recommended.\n"
+#~ "\n"
+#~ "Warning : you should backup all your personal data before choosing \"New\n"
+#~ "Installation\"."
+#~ msgstr ""
+#~ "Het installatieprogramma heeft vastgesteld dat uw Linux-systeem niet "
+#~ "veilig kan worden bijgewerkt naar %s.\n"
+#~ "\n"
+#~ "Een nieuwe installatie ter vervang van uw vorige wordt aangeraden.\n"
+#~ "\n"
+#~ "WAARSCHUWING: Maak een eerst een back-up van al uw persoonlijke data "
+#~ "voordat u een nieuwe installatie kiest."
+
+#~ msgid ""
+#~ "It also contains firmwares needed for certain devices to operate (eg: "
+#~ "some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
+#~ msgstr ""
+#~ "Het bevat ook firmware-bestanden welke nodig zijn om bepaalde apparatuur "
+#~ "te laten werken (bijv: bepaalde ATI/AMD-grafische kaarten, bepaalde "
+#~ "netwerkkaarten, bepaalde RAID-kaarten, ...)"
+
+#~ msgid ""
+#~ "It also contains software from \"%s\" rebuild with additional "
+#~ "capabilities."
+#~ msgstr ""
+#~ "Het bevat ook software uit \"%s\" welke herbouwd is met additionele "
+#~ "mogelijkheden."
+
+#~ msgid "Join Us!"
+#~ msgstr "Sluit u bij ons aan!"
+
+#~ msgid "MATE Workstation"
+#~ msgstr "MATE-werkomgeving"
+
+#~ msgid "Make it yours!"
+#~ msgstr "Maak het u eigen!"
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake-wizards"
+
+#~ msgid "Nonfree Release"
+#~ msgstr "Nonfree-uitgave"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Kantoorprogramma's: tekstverwerkers (LibreOffice Writer, Kword), "
+#~ "rekenbladen (LibreOffice Calc, Kspread), PDF-lezers, etc"
+
+#~ msgid "Office tools"
+#~ msgstr "Kantoortools"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL en MariaDB database-server"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL of MariaDB database-server"
+
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Voorbereiden van de opwaardering..."
+
+#~ msgid "RazorQT Desktop"
+#~ msgstr "RazorQT-werkomgeving"
+
+#~ msgid "Tainted Release"
+#~ msgstr "Tainted-uitgave"
+
+#~ msgid "Thank you!"
+#~ msgstr "Dank u!"
+
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Dit medium biedt updates voor \"%s\""
+
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Fvwm, enz"
+
+#~ msgid "XFCE Workstation"
+#~ msgstr "XFCE-werkomgeving"
+
+#~ msgid "Your choice!"
+#~ msgstr "Uw keuze!"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Een volledig Mandriva Linux-bureaublad, met ondersteuning"
 
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva-distributies: voor elk wat wils"
+#~ msgid "Automated"
+#~ msgstr "Geautomatiseerd"
 
 #~ msgid "Bad package"
 #~ msgstr "Onbruikbaar pakket"
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Networking"
-#~ msgstr "Netwerktoepassingen"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Bezig met verbinden met de mirror om de lijst met beschikbare pakketten "
+#~ "op te halen..."
 
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr "Herzieningen"
+#~ msgid "Downloading file %s..."
+#~ msgstr "Bestand %s wordt gedownload…"
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Gemakkelijk Linux verkennen met Mandriva One"
+
+#~ msgid "For contributors"
+#~ msgstr "Voor de gemeenschap"
+
+#~ msgid "For people"
+#~ msgstr "Voor mensen"
+
+#~ msgid "For you"
+#~ msgstr "Voor u"
+
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Auto-installatiediskette aanmaken"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm Desktop"
+
+#~ msgid "Mandriva Linux Installation %s"
+#~ msgstr "Mandriva Linux installatie %s"
+
+#~ msgid "Mandriva: distributions for everybody's needs"
+#~ msgstr "Mandriva-distributies: voor elk wat wils"
+
+#~ msgid "Moondrake, the new Linux distribution"
+#~ msgstr "Moondrake, de nieuwe Linux-distributie"
 
 #~ msgid ""
 #~ "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -1706,6 +1861,60 @@ msgstr "Afsluiten"
 #~ msgstr ""
 #~ "Kantoorprogramma's: tekstverwerkers (kword, abiword), rekenbladen "
 #~ "(kspread, gnumeric), PDF-lezers, etc"
+
+#~ msgid "People!"
+#~ msgstr "Mensen!"
+
+#, fuzzy
+#~ msgid "Preparing boot images..."
+#~ msgstr "Klaarmaken van opstartlader…"
+
+#~ msgid "Proceed"
+#~ msgstr "Doorgaan"
+
+#~ msgid "Replay"
+#~ msgstr "Herhalen"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Pakketselectie opslaan"
+
+#~ msgid "Select All"
+#~ msgstr "Alles geselecteerd"
+
+#~ msgid "The 100%% open source Mandriva Linux distribution"
+#~ msgstr "De 100%% opensource Mandriva Linux-distributie"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard disk drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Desgewenst kan de auto-installatie volledig geautomatiseerd worden,\n"
+#~ "in dat geval zal het de harde schijf overnemen!\n"
+#~ "(Deze functie is bedoeld voor het installeren op een andere machine.)\n"
+#~ "\n"
+#~ "Wellicht geeft u de voorkeur aan het herhalen van de installatie.\n"
+
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Verbinden met mirror %s is onmogelijk"
+
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr ""
+#~ "Opwaarderen van een 32-bit naar een 64-bit-distributie wordt niet "
+#~ "ondersteund"
+
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr ""
+#~ "Opwaarderen van een 64-bit naar een 32-bit-distributie wordt niet "
+#~ "ondersteund"
+
+#~ msgid "Welcome"
+#~ msgstr "Welkom"
+
+#~ msgid "Welcome!"
+#~ msgstr "Welkom!"
 
 #~ msgid ""
 #~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
@@ -1726,25 +1935,6 @@ msgstr "Afsluiten"
 #~ "behouden, \n"
 #~ "gelieve uw systeem te herstarten en op te waarderen met behulp van het "
 #~ "Mandriva-herzieningenapplet."
-
-#~ msgid "Proceed"
-#~ msgstr "Doorgaan"
-
-#~ msgid "retrieval of [%s] failed"
-#~ msgstr "ophalen van [%s] mislukt"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "Bestand %s wordt gedownload…"
-
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr ""
-#~ "Opwaarderen van een 32-bit naar een 64-bit-distributie wordt niet "
-#~ "ondersteund"
-
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr ""
-#~ "Opwaarderen van een 64-bit naar een 32-bit-distributie wordt niet "
-#~ "ondersteund"
 
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
@@ -1769,38 +1959,23 @@ msgstr "Afsluiten"
 #~ "\n"
 #~ "Weet u zeker dat u deze servers wilt installeren?\n"
 
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm Desktop"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "Bezig met verbinden met de mirror om de lijst met beschikbare pakketten "
-#~ "op te halen..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Verbinden met mirror %s is onmogelijk"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Auto-installatiediskette aanmaken"
+#~ msgid "Your desktop on a USB key"
+#~ msgstr "Uw bureaublad op een USB-stick"
 
 #~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard disk drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Desgewenst kan de auto-installatie volledig geautomatiseerd worden,\n"
-#~ "in dat geval zal het de harde schijf overnemen!\n"
-#~ "(Deze functie is bedoeld voor het installeren op een andere machine.)\n"
-#~ "\n"
-#~ "Wellicht geeft u de voorkeur aan het herhalen van de installatie.\n"
+#~ "_: Keep these entry short\n"
+#~ "License"
+#~ msgstr "Licentie"
 
-#~ msgid "Replay"
-#~ msgstr "Herhalen"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Networking"
+#~ msgstr "Netwerktoepassingen"
 
-#~ msgid "Automated"
-#~ msgstr "Geautomatiseerd"
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr "Herzieningen"
 
-#~ msgid "Save packages selection"
-#~ msgstr "Pakketselectie opslaan"
+#~ msgid "retrieval of [%s] failed"
+#~ msgstr "ophalen van [%s] mislukt"
