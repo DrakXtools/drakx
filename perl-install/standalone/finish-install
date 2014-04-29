@@ -354,10 +354,10 @@ if (defined $::WizardWindow) {
     $::WizardWindow->destroy;
     undef $::WizardWindow;
 }
-call('remove_unused_packages') if network::tools::has_network_connection();
-call('urpmi') if network::tools::has_network_connection();
+call('remove_unused_packages');
+call('urpmi');
 $::Wizard_pix_up = 'redhat-config-users';
-call('authentication') if network::tools::has_network_connection();
+call('authentication');
 call('users');
 call('services');
 call('encrypt_home');
