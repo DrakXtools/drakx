@@ -258,6 +258,10 @@ sub are_available {
 	if (!$urpm) {
 	    $urpm = urpm->new;
 	    $urpm->{log} = \&log::l;
+	   
+            # we dont want urpmi fatal errors to kill us
+            local $urpm->{fatal} = $urpm->{error};
+
 	    urpm::media::configure($urpm, 
 				   nocheck_access => 1,
 				   no_skiplist => 1,
