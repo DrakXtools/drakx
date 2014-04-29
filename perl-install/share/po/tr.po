@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
 "Report-Msgid-Bugs-To: https://qa.mandriva.com\n"
-"POT-Creation-Date: 2013-10-29 01:26+0100\n"
+"POT-Creation-Date: 2014-04-29 20:39+0200\n"
 "PO-Revision-Date: 2012-06-09 04:29+0300\n"
 "Last-Translator: Atilla ÖNTAŞ <tarakbumba@gmail.com>\n"
 "Language-Team: Transifex Turkish Translation Team\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Virtaal 0.7.1\n"
 
-#: any.pm:284 any.pm:985 diskdrake/interactive.pm:645
+#: any.pm:284 any.pm:1003 diskdrake/interactive.pm:645
 #: diskdrake/interactive.pm:869 diskdrake/interactive.pm:929
 #: diskdrake/interactive.pm:1047 diskdrake/interactive.pm:1277
 #: diskdrake/interactive.pm:1335 do_pkgs.pm:242 do_pkgs.pm:287
-#: harddrake/sound.pm:270 interactive.pm:588 pkgs.pm:254 pkgs.pm:263
+#: harddrake/sound.pm:95 interactive.pm:588 pkgs.pm:254 pkgs.pm:263
 #: pkgs.pm:306
 #, c-format
 msgid "Please wait"
@@ -117,7 +117,7 @@ msgstr "Kök bölümünün ilk sektörü"
 msgid "On Floppy"
 msgstr "Açılış Disketinden"
 
-#: any.pm:399 pkgs.pm:302 ugtk2.pm:526
+#: any.pm:399 pkgs.pm:302 ugtk2.pm:526 ugtk3.pm:516
 #, c-format
 msgid "Skip"
 msgstr "Atla"
@@ -182,7 +182,7 @@ msgstr "Yerel APIC özelliğini etkinleştir"
 msgid "Security"
 msgstr "Güvenlik"
 
-#: any.pm:467 any.pm:920 any.pm:939 authentication.pm:249
+#: any.pm:467 any.pm:931 any.pm:950 authentication.pm:249
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
@@ -203,7 +203,7 @@ msgstr "Lütfen tekrar deneyin"
 msgid "You cannot use a password with %s"
 msgstr "%s ile bir parola kullanamazsınız"
 
-#: any.pm:476 any.pm:923 any.pm:941 authentication.pm:250
+#: any.pm:476 any.pm:934 any.pm:952 authentication.pm:250
 #, c-format
 msgid "Password (again)"
 msgstr "Parola (tekrar)"
@@ -353,47 +353,47 @@ msgstr ""
 "Buradaki seçeneklere yenilerini ekleyebilir ya da mevcut olanları "
 "değiştirebilirsiniz."
 
-#: any.pm:879
+#: any.pm:890
 #, c-format
 msgid "access to X programs"
 msgstr "X uygulamalarına erişim"
 
-#: any.pm:880
+#: any.pm:891
 #, c-format
 msgid "access to rpm tools"
 msgstr "rpm araçlarına erişim"
 
-#: any.pm:881
+#: any.pm:892
 #, c-format
 msgid "allow \"su\""
 msgstr "\"su\" komutuna izin ver"
 
-#: any.pm:882
+#: any.pm:893
 #, c-format
 msgid "access to administrative files"
 msgstr "yönetimsel dosyalara erişim"
 
-#: any.pm:883
+#: any.pm:894
 #, c-format
 msgid "access to network tools"
 msgstr "ağ araçlarına erişim"
 
-#: any.pm:884
+#: any.pm:895
 #, c-format
 msgid "access to compilation tools"
 msgstr "derleme araçlarına erişim"
 
-#: any.pm:890
+#: any.pm:901
 #, c-format
 msgid "(already added %s)"
 msgstr "(%s zaten ekli)"
 
-#: any.pm:896
+#: any.pm:907
 #, c-format
 msgid "Please give a user name"
 msgstr "Lütfen bir kullanıcı adı verin"
 
-#: any.pm:897
+#: any.pm:908
 #, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
@@ -402,149 +402,149 @@ msgstr ""
 "Kullanıcı adında sadece küçük harfler, sayılar, `-' ve `_' karakterleri "
 "bulunabilir"
 
-#: any.pm:898
+#: any.pm:909
 #, c-format
 msgid "The user name is too long"
 msgstr "Seçilen kullanıcı adı çok uzun"
 
-#: any.pm:899
+#: any.pm:910
 #, c-format
 msgid "This user name has already been added"
 msgstr "Bu kullanıcı adı daha önce eklenmiş"
 
-#: any.pm:905 any.pm:943
+#: any.pm:916 any.pm:954
 #, c-format
 msgid "User ID"
 msgstr "Kullanıcı Kimliği"
 
-#: any.pm:905 any.pm:944
+#: any.pm:916 any.pm:955
 #, c-format
 msgid "Group ID"
 msgstr "Grup Kimliği"
 
-#: any.pm:906
+#: any.pm:917
 #, c-format
 msgid "%s must be a number"
 msgstr "%s seçeneği bir sayı olmalıdır"
 
-#: any.pm:907
+#: any.pm:918
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s seçeneği 500'den yukarı olmalıdır. Yine de kabul edilsin mi?"
 
-#: any.pm:911
+#: any.pm:922
 #, c-format
 msgid "User management"
 msgstr "Kullanıcı yönetimi"
 
-#: any.pm:917
+#: any.pm:928
 #, c-format
 msgid "Enable guest account"
 msgstr "Konuk hesabını etkinleştir"
 
-#: any.pm:919 authentication.pm:236
+#: any.pm:930 authentication.pm:236
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Yönetici (kök) parolasını ayarla"
 
-#: any.pm:925
+#: any.pm:936
 #, c-format
 msgid "Enter a user"
 msgstr "Bir kullanıcı girin"
 
-#: any.pm:927
+#: any.pm:938
 #, c-format
 msgid "Icon"
 msgstr "Simge"
 
-#: any.pm:930
+#: any.pm:941
 #, c-format
 msgid "Real name"
 msgstr "Gerçek adı"
 
-#: any.pm:937
+#: any.pm:948
 #, c-format
 msgid "Login name"
 msgstr "Giriş Adı"
 
-#: any.pm:942
+#: any.pm:953
 #, c-format
 msgid "Shell"
 msgstr "Kabuk"
 
-#: any.pm:985
+#: any.pm:1003
 #, c-format
 msgid "Please wait, adding media..."
 msgstr "Kurulum kaynağı ekleniyor, lütfen bekleyiniz..."
 
-#: any.pm:1030 security/l10n.pm:14
+#: any.pm:1036 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Otomatik Giriş"
 
-#: any.pm:1031
+#: any.pm:1037
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "Bilgisayar açıldığında otomatik olarak bir kullanıcının sisteme giriş "
 "yapmasını sağlayabilirim."
 
-#: any.pm:1032
+#: any.pm:1038
 #, c-format
 msgid "Use this feature"
 msgstr "Bu özelliği kullan"
 
-#: any.pm:1033
+#: any.pm:1039
 #, c-format
 msgid "Choose the default user:"
 msgstr "Öntanımlı kullanıcıyı seçiniz:"
 
-#: any.pm:1034
+#: any.pm:1040
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Çalıştırmak istediğiniz pencere yöneticisini seçiniz:"
 
-#: any.pm:1045 any.pm:1059 any.pm:1133
+#: any.pm:1051 any.pm:1065 any.pm:1140
 #, c-format
 msgid "Release Notes"
 msgstr "Sürüm Notları"
 
-#: any.pm:1066 any.pm:1423 interactive/gtk.pm:826
+#: any.pm:1072 any.pm:1430 interactive/gtk.pm:820
 #, c-format
 msgid "Close"
 msgstr "Kapat"
 
-#: any.pm:1119
+#: any.pm:1126
 #, c-format
 msgid "License agreement"
 msgstr "Lisans anlaşması"
 
-#: any.pm:1121 diskdrake/dav.pm:26 mygtk2.pm:1229
+#: any.pm:1128 diskdrake/dav.pm:26 mygtk2.pm:1229 mygtk3.pm:1255
 #, c-format
 msgid "Quit"
 msgstr "Çık"
 
-#: any.pm:1128
+#: any.pm:1135
 #, c-format
 msgid "Do you accept this license ?"
 msgstr "Bu lisans sözleşmesini kabul ediyor musunuz?"
 
-#: any.pm:1129
+#: any.pm:1136
 #, c-format
 msgid "Accept"
 msgstr "Kabul"
 
-#: any.pm:1129
+#: any.pm:1136
 #, c-format
 msgid "Refuse"
 msgstr "Red"
 
-#: any.pm:1155 any.pm:1218
+#: any.pm:1162 any.pm:1225
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Lütfen kullanacağınız dili seçiniz"
 
-#: any.pm:1183
+#: any.pm:1190
 #, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
@@ -555,82 +555,82 @@ msgstr ""
 "tamamlandığında ve sistemi yeniden başlattığınızda kullanabileceğiniz\n"
 "dilleri seçin."
 
-#: any.pm:1186
+#: any.pm:1193
 #, c-format
 msgid "Multiple languages"
 msgstr "Çoklu Dil"
 
-#: any.pm:1187
+#: any.pm:1194
 #, c-format
 msgid "Select Additional Languages"
 msgstr "Ek dilleri seçiniz"
 
-#: any.pm:1196 any.pm:1227
+#: any.pm:1203 any.pm:1234
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Eskiye uyumlu (UTF-8 olmayan) çözümleme"
 
-#: any.pm:1197
+#: any.pm:1204
 #, c-format
 msgid "All languages"
 msgstr "Tüm diller"
 
-#: any.pm:1219
+#: any.pm:1226
 #, c-format
 msgid "Language choice"
 msgstr "Dil seçimi"
 
-#: any.pm:1273
+#: any.pm:1280
 #, c-format
 msgid "Country / Region"
 msgstr "Ülke / Bölge"
 
-#: any.pm:1274
+#: any.pm:1281
 #, c-format
 msgid "Please choose your country"
 msgstr "Lütfen ülkenizi seçiniz"
 
-#: any.pm:1276
+#: any.pm:1283
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Mevcut tüm ülkelerin listesi"
 
-#: any.pm:1277
+#: any.pm:1284
 #, c-format
 msgid "Other Countries"
 msgstr "Diğer Ülkeler"
 
-#: any.pm:1277 interactive.pm:489 interactive/gtk.pm:450
+#: any.pm:1284 interactive.pm:489 interactive/gtk.pm:444
 #, c-format
 msgid "Advanced"
 msgstr "Gelişmiş"
 
-#: any.pm:1283
+#: any.pm:1290
 #, c-format
 msgid "Input method:"
 msgstr "Girdi yöntemi:"
 
-#: any.pm:1286
+#: any.pm:1293
 #, c-format
 msgid "None"
 msgstr "Hiçbiri"
 
-#: any.pm:1368
+#: any.pm:1375
 #, c-format
 msgid "No sharing"
 msgstr "Paylaşımsız"
 
-#: any.pm:1368
+#: any.pm:1375
 #, c-format
 msgid "Allow all users"
 msgstr "Tüm kullanıcılara izin ver"
 
-#: any.pm:1368
+#: any.pm:1375
 #, c-format
 msgid "Custom"
 msgstr "Özel"
 
-#: any.pm:1372
+#: any.pm:1379
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -645,7 +645,7 @@ msgstr ""
 "\n"
 "\"İsteğe bağlı\" kullanıcı bazında izin tanımı sağlar.\n"
 
-#: any.pm:1384
+#: any.pm:1391
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -654,7 +654,7 @@ msgstr ""
 "NFS: Geleneksel Unix dosya paylaşım sistemidir. Mac ve Windows üzerinde daha "
 "az destek sunar."
 
-#: any.pm:1387
+#: any.pm:1394
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -663,19 +663,19 @@ msgstr ""
 "SMB: Pek çok yeni Linux dağıtımı, Windows ve Mac OS X tarafından kullanılan "
 "bir dosya paylaşım sistemidir."
 
-#: any.pm:1395
+#: any.pm:1402
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr ""
 "NFS ya da SMB kullanarak sunabilirsiniz. Hangisini kullanmak isterseniz."
 
-#: any.pm:1423
+#: any.pm:1430
 #, c-format
 msgid "Launch userdrake"
 msgstr "userdrake uygulamasını çalıştır"
 
-#: any.pm:1425
+#: any.pm:1432
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -684,7 +684,7 @@ msgstr ""
 "Kullanıcılar paylaşım için \"fileshare\" grubunu kullanır.\n"
 "Bu gruba bir kullanıcı eklemek için userdrake aracını kullanabilirsiniz."
 
-#: any.pm:1532
+#: any.pm:1539
 #, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
@@ -693,49 +693,49 @@ msgstr ""
 "Değişikliklerin etkili olması için oturumdan çıkarak yeniden giriş "
 "yapmalısınız. Şimdi çıkmak için TAMAM tıklayın."
 
-#: any.pm:1536
+#: any.pm:1543
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr ""
 "Değişikliklerin etkili olması için oturumdan çıkarak yeniden giriş "
 "yapmalısınız"
 
-#: any.pm:1571
+#: any.pm:1578
 #, c-format
 msgid "Timezone"
 msgstr "Zaman Dilimi"
 
-#: any.pm:1571
+#: any.pm:1578
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Bulunduğunuz zaman dilimi hangisi?"
 
-#: any.pm:1594 any.pm:1596
+#: any.pm:1601 any.pm:1603
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Tarih, Saat & Zaman Dilimi Ayarları"
 
-#: any.pm:1597
+#: any.pm:1604
 #, c-format
 msgid "What is the best time?"
 msgstr "En iyi zaman hangisi?"
 
-#: any.pm:1601
+#: any.pm:1608
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (Donanım saati UTC' ye göre ayarlansın)"
 
-#: any.pm:1602
+#: any.pm:1609
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (Donanım saati yerel zamana göre ayarlansın)"
 
-#: any.pm:1604
+#: any.pm:1611
 #, c-format
 msgid "NTP Server"
 msgstr "Zaman sunucusu"
 
-#: any.pm:1605
+#: any.pm:1612
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Otomatik saat ayarı (NTP kullanarak)"
@@ -1122,17 +1122,17 @@ msgstr "Yaboot"
 msgid "SILO"
 msgstr "SILO"
 
-#: bootloader.pm:1293
+#: bootloader.pm:1277
 #, c-format
 msgid "not enough room in /boot"
 msgstr "/boot içinde yeterli yer yok"
 
-#: bootloader.pm:2080
+#: bootloader.pm:2064
 #, c-format
 msgid "You cannot install the bootloader on a %s partition\n"
 msgstr "Açılış yükleyicisini %s bölümüne yükleyemezsiniz\n"
 
-#: bootloader.pm:2249
+#: bootloader.pm:2233
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1141,7 +1141,7 @@ msgstr ""
 "Bölüm yeniden numaralandığı için önyükleyici yapılandırmasının güncellenmesi "
 "gerekli"
 
-#: bootloader.pm:2262
+#: bootloader.pm:2246
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1150,7 +1150,7 @@ msgstr ""
 "Önyükleyici düzgün olarak kurulamadı. Kurtarma kipinde başlatmalı ve \"%s\"  "
 "seçeneğini seçmelisiniz"
 
-#: bootloader.pm:2263
+#: bootloader.pm:2247
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Önyükleyiciyi Yeniden Kurun"
@@ -1296,18 +1296,18 @@ msgstr "Bağlama noktası"
 msgid "Options"
 msgstr "Seçenekler"
 
-#: diskdrake/dav.pm:68 interactive.pm:388 interactive/gtk.pm:462
+#: diskdrake/dav.pm:68 interactive.pm:388 interactive/gtk.pm:456
 #, c-format
 msgid "Remove"
 msgstr "Kaldır"
 
-#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:203 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:215 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Bitti"
 
-#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:135 diskdrake/hd_gtk.pm:309
+#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:147 diskdrake/hd_gtk.pm:321
 #: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
 #: diskdrake/interactive.pm:456 diskdrake/interactive.pm:527
 #: diskdrake/interactive.pm:545 diskdrake/interactive.pm:550
@@ -1333,14 +1333,13 @@ msgstr "Lütfen WebDAV sunucusu URL'ini giriniz"
 msgid "The URL must begin with http:// or https://"
 msgstr "URL http:// veya https:// ile başlamalıdır"
 
-#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:116 diskdrake/hd_gtk.pm:434
-#: diskdrake/interactive.pm:306 diskdrake/interactive.pm:391
-#: diskdrake/interactive.pm:597 diskdrake/interactive.pm:815
-#: diskdrake/interactive.pm:880 diskdrake/interactive.pm:1045
-#: diskdrake/interactive.pm:1087 diskdrake/interactive.pm:1088
-#: diskdrake/interactive.pm:1320 diskdrake/interactive.pm:1358
-#: diskdrake/interactive.pm:1509 do_pkgs.pm:19 do_pkgs.pm:39 do_pkgs.pm:57
-#: do_pkgs.pm:78 harddrake/sound.pm:399
+#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:454 diskdrake/interactive.pm:306
+#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:597
+#: diskdrake/interactive.pm:815 diskdrake/interactive.pm:880
+#: diskdrake/interactive.pm:1045 diskdrake/interactive.pm:1087
+#: diskdrake/interactive.pm:1088 diskdrake/interactive.pm:1320
+#: diskdrake/interactive.pm:1358 diskdrake/interactive.pm:1509 do_pkgs.pm:19
+#: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:78
 #, c-format
 msgid "Warning"
 msgstr "Uyarı"
@@ -1366,44 +1365,50 @@ msgstr "Bağlama noktası: "
 msgid "Options: %s"
 msgstr "Seçenekler: %s"
 
-#: diskdrake/hd_gtk.pm:61 diskdrake/interactive.pm:301
+#: diskdrake/hd_gtk.pm:63 diskdrake/interactive.pm:301
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:108
-#: fs/partitioning_wizard.pm:61 fs/partitioning_wizard.pm:244
-#: fs/partitioning_wizard.pm:252 fs/partitioning_wizard.pm:291
-#: fs/partitioning_wizard.pm:439 fs/partitioning_wizard.pm:502
-#: fs/partitioning_wizard.pm:585 fs/partitioning_wizard.pm:588
+#: fs/partitioning_wizard.pm:59 fs/partitioning_wizard.pm:242
+#: fs/partitioning_wizard.pm:250 fs/partitioning_wizard.pm:289
+#: fs/partitioning_wizard.pm:435 fs/partitioning_wizard.pm:498
+#: fs/partitioning_wizard.pm:581 fs/partitioning_wizard.pm:584
 #, c-format
 msgid "Partitioning"
 msgstr "Bölümlendirme"
 
-#: diskdrake/hd_gtk.pm:73
+#: diskdrake/hd_gtk.pm:76
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr "Bir bölüme tıklayın, bir dosya sistemi türü seçin ve bir eylem seçin"
 
-#: diskdrake/hd_gtk.pm:116
-#, fuzzy, c-format
-msgid "Please make a backup of your data first."
+#: diskdrake/hd_gtk.pm:126 diskdrake/interactive.pm:1195
+#: diskdrake/interactive.pm:1205 diskdrake/interactive.pm:1258
+#, c-format
+msgid "Read carefully"
+msgstr "Dikkatli Okuyun"
+
+#: diskdrake/hd_gtk.pm:126
+#, c-format
+msgid "Please make a backup of your data first"
 msgstr "Önce verinizin yedeğini alınız"
 
-#: diskdrake/hd_gtk.pm:117 diskdrake/interactive.pm:240
+#: diskdrake/hd_gtk.pm:127 diskdrake/interactive.pm:240
 #, c-format
 msgid "Exit"
 msgstr "Çıkış"
 
-#: diskdrake/hd_gtk.pm:117
+#: diskdrake/hd_gtk.pm:127
 #, c-format
 msgid "Continue"
 msgstr "Devam"
 
-#: diskdrake/hd_gtk.pm:198 fs/partitioning_wizard.pm:561 interactive.pm:654
-#: interactive/gtk.pm:818 interactive/gtk.pm:836 interactive/gtk.pm:867
-#: ugtk2.pm:936
+#: diskdrake/hd_gtk.pm:210 fs/partitioning_wizard.pm:557 interactive.pm:654
+#: interactive/gtk.pm:812 interactive/gtk.pm:830 interactive/gtk.pm:862
+#: ugtk2.pm:936 ugtk3.pm:917
 #, c-format
 msgid "Help"
 msgstr "Yardım"
 
-#: diskdrake/hd_gtk.pm:244
+#: diskdrake/hd_gtk.pm:256
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1414,88 +1419,88 @@ msgstr ""
 "Size Öncelikle bu disk bölümünün boyutunu düzenlemenizi öneriyoruz.\n"
 "(Önce bölümün üzerine, sonra \"Yeniden Boyutlandır\" düğmesine tıklayın)"
 
-#: diskdrake/hd_gtk.pm:246
+#: diskdrake/hd_gtk.pm:258
 #, c-format
 msgid "Please click on a partition"
 msgstr "Lütfen bir bölüm üzerine tıklayın"
 
-#: diskdrake/hd_gtk.pm:260 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:272 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Ayrıntılar"
 
-#: diskdrake/hd_gtk.pm:309
+#: diskdrake/hd_gtk.pm:321
 #, c-format
 msgid "No hard disk drives found"
 msgstr "Hiçbir sabit disk bulunamadı"
 
-#: diskdrake/hd_gtk.pm:340
+#: diskdrake/hd_gtk.pm:358
 #, c-format
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
-#: diskdrake/hd_gtk.pm:405
+#: diskdrake/hd_gtk.pm:425
 #, c-format
 msgid "Ext4"
 msgstr "Ext4"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "Swap"
 msgstr "Takas"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:406 fs/partitioning_wizard.pm:410 services.pm:192
+#: diskdrake/hd_gtk.pm:426 fs/partitioning_wizard.pm:406 services.pm:194
 #, c-format
 msgid "Other"
 msgstr "Diğer"
 
-#: diskdrake/hd_gtk.pm:406 diskdrake/interactive.pm:1397
-#: fs/partitioning_wizard.pm:410
+#: diskdrake/hd_gtk.pm:426 diskdrake/interactive.pm:1397
+#: fs/partitioning_wizard.pm:406
 #, c-format
 msgid "Empty"
 msgstr "Boş"
 
-#: diskdrake/hd_gtk.pm:413
+#: diskdrake/hd_gtk.pm:433
 #, c-format
 msgid "Filesystem types:"
 msgstr "Dosya sistemi türü:"
 
-#: diskdrake/hd_gtk.pm:434
+#: diskdrake/hd_gtk.pm:454
 #, c-format
 msgid "This partition is already empty"
 msgstr "Bu bölüm zaten boş"
 
-#: diskdrake/hd_gtk.pm:443
+#: diskdrake/hd_gtk.pm:463
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Önce ``Ayır''ı kullanın"
 
-#: diskdrake/hd_gtk.pm:443
+#: diskdrake/hd_gtk.pm:463
 #, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Yerine ``%s'' kullanın (uzman kipinde)"
 
-#: diskdrake/hd_gtk.pm:443 diskdrake/interactive.pm:409
+#: diskdrake/hd_gtk.pm:463 diskdrake/interactive.pm:409
 #: diskdrake/interactive.pm:639 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
@@ -1519,7 +1524,7 @@ msgid "More"
 msgstr "Ayrıntı"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
-#: diskdrake/interactive.pm:1304 mygtk2.pm:1228
+#: diskdrake/interactive.pm:1304 mygtk2.pm:1228 mygtk3.pm:1254
 #, c-format
 msgid "Confirmation"
 msgstr "Onayla"
@@ -1544,7 +1549,7 @@ msgstr "Bölümlendirme tablosunu kaydetmeden mi çıkıyorsunuz?"
 msgid "Do you want to save the /etc/fstab modifications?"
 msgstr "/etc/fstab değişikliklerini kaydetmek istiyor musunuz ?"
 
-#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:291
+#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:289
 #, c-format
 msgid "You need to reboot for the partition table modifications to take effect"
 msgstr ""
@@ -1828,7 +1833,7 @@ msgid "Where do you want to mount %s?"
 msgstr "%s aygıtını nereye bağlamak istersiniz?"
 
 #: diskdrake/interactive.pm:773 diskdrake/interactive.pm:869
-#: fs/partitioning_wizard.pm:137 fs/partitioning_wizard.pm:213
+#: fs/partitioning_wizard.pm:135 fs/partitioning_wizard.pm:211
 #, c-format
 msgid "Resizing"
 msgstr "Yeniden boyutlandırma"
@@ -1874,7 +1879,7 @@ msgstr "En az boyut: %s MB"
 msgid "Maximum size: %s MB"
 msgstr "En fazla boyut: %s MB"
 
-#: diskdrake/interactive.pm:880 fs/partitioning_wizard.pm:221
+#: diskdrake/interactive.pm:880 fs/partitioning_wizard.pm:219
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
@@ -2003,12 +2008,6 @@ msgstr "seviye"
 #, c-format
 msgid "chunk size in KiB"
 msgstr "KiB bazında parça boyutu"
-
-#: diskdrake/interactive.pm:1195 diskdrake/interactive.pm:1205
-#: diskdrake/interactive.pm:1258
-#, c-format
-msgid "Read carefully"
-msgstr "Dikkatli Okuyun"
 
 #: diskdrake/interactive.pm:1196
 #, c-format
@@ -2324,7 +2323,9 @@ msgstr "Türünü değiştir"
 #: diskdrake/smbnfs_gtk.pm:81 interactive.pm:130 interactive.pm:551
 #: interactive/curses.pm:267 interactive/http.pm:104 interactive/http.pm:160
 #: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:846
-#: mygtk2.pm:1229 ugtk2.pm:415 ugtk2.pm:517 ugtk2.pm:526 ugtk2.pm:812
+#: mygtk2.pm:1229 mygtk3.pm:880 mygtk3.pm:1255 ugtk2.pm:415 ugtk2.pm:517
+#: ugtk2.pm:526 ugtk2.pm:812 ugtk3.pm:417 ugtk3.pm:507 ugtk3.pm:516
+#: ugtk3.pm:793
 #, c-format
 msgid "Cancel"
 msgstr "İptal"
@@ -2415,7 +2416,7 @@ msgstr ""
 "Bir hata oluştu. Yeni dosya sisteminin oluşturulacağı geçerli bir sürücü "
 "bulunamadı. Bu sorunu çözmek için donanımınızı kontrol edin"
 
-#: fs/any.pm:75 fs/partitioning_wizard.pm:70
+#: fs/any.pm:75 fs/partitioning_wizard.pm:68
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "/boot/efi ye bağlanmış bir FAT bölümüne ihtiyacınız var"
@@ -2634,7 +2635,7 @@ msgstr ""
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr "Kurulumu tamamlamak için yeterli takas alanı yok, lütfen ekleme yapın"
 
-#: fs/partitioning_wizard.pm:61
+#: fs/partitioning_wizard.pm:59
 #, c-format
 msgid ""
 "You must have a root partition.\n"
@@ -2646,7 +2647,7 @@ msgstr ""
 "oluşturabilirsiniz.\n"
 "Bundan sonra da ``Bağlama Noktası''nı `/' olarak değiştirmelisiniz."
 
-#: fs/partitioning_wizard.pm:67
+#: fs/partitioning_wizard.pm:65
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2657,42 +2658,42 @@ msgstr ""
 "\n"
 "Yine de devam edilsin mi?"
 
-#: fs/partitioning_wizard.pm:101
+#: fs/partitioning_wizard.pm:99
 #, c-format
 msgid "Use free space"
 msgstr "Boş alan kullanılsın"
 
-#: fs/partitioning_wizard.pm:103
+#: fs/partitioning_wizard.pm:101
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Yeni bölümleri açmak için yeterli yer yok"
 
-#: fs/partitioning_wizard.pm:111
+#: fs/partitioning_wizard.pm:109
 #, c-format
 msgid "Use existing partitions"
 msgstr "Mevcut disk bölümü kullanılsın"
 
-#: fs/partitioning_wizard.pm:113
+#: fs/partitioning_wizard.pm:111
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "Kullanılabilecek bir bölüm bulunamadı"
 
-#: fs/partitioning_wizard.pm:137
+#: fs/partitioning_wizard.pm:135
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Microsoft Windows® bölümünün boyutu hesaplanıyor"
 
-#: fs/partitioning_wizard.pm:173
+#: fs/partitioning_wizard.pm:171
 #, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "Microsoft Windows® bölümündeki boş alan kullanılsın"
 
-#: fs/partitioning_wizard.pm:177
+#: fs/partitioning_wizard.pm:175
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Hangi bölümü yeniden boyutlandırmak istiyorsunuz?"
 
-#: fs/partitioning_wizard.pm:180
+#: fs/partitioning_wizard.pm:178
 #, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2703,7 +2704,7 @@ msgstr ""
 "ile bilgisayarınızı başlatın, ``defrag'' aracını çalıştırın; ondan sonra %s "
 "kurulumunu yeniden başlatın."
 
-#: fs/partitioning_wizard.pm:188
+#: fs/partitioning_wizard.pm:186
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2739,53 +2740,53 @@ msgstr ""
 "Devam etmek için hazır olduğunuzda %s tuşuna basın."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:197 fs/partitioning_wizard.pm:565
-#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519
+#: fs/partitioning_wizard.pm:195 fs/partitioning_wizard.pm:561
+#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:509
 #, c-format
 msgid "Next"
 msgstr "İleri"
 
-#: fs/partitioning_wizard.pm:203
+#: fs/partitioning_wizard.pm:201
 #, c-format
 msgid "Partitionning"
 msgstr "Bölümlendirme"
 
-#: fs/partitioning_wizard.pm:203
+#: fs/partitioning_wizard.pm:201
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr "Microsoft Windows® için %s bölümünde ne kadar yer bırakacaksınız?"
 
-#: fs/partitioning_wizard.pm:204
+#: fs/partitioning_wizard.pm:202
 #, c-format
 msgid "Size"
 msgstr "Boyut"
 
-#: fs/partitioning_wizard.pm:213
+#: fs/partitioning_wizard.pm:211
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Microsoft Windows® dosya sistemi sınırları hesaplanıyor"
 
-#: fs/partitioning_wizard.pm:218
+#: fs/partitioning_wizard.pm:216
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "FAT yeniden boyutlandırması başarısız: %s"
 
-#: fs/partitioning_wizard.pm:234
+#: fs/partitioning_wizard.pm:232
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "Yeniden boyutlandırılacak hiç FAT bölümü yok (ya da boş alan kalmamış)"
 
-#: fs/partitioning_wizard.pm:239
+#: fs/partitioning_wizard.pm:237
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "MS Windows™ silinsin"
 
-#: fs/partitioning_wizard.pm:239
+#: fs/partitioning_wizard.pm:237
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "Tüm diski sil ve kullan"
 
-#: fs/partitioning_wizard.pm:243
+#: fs/partitioning_wizard.pm:241
 #, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
@@ -2794,22 +2795,22 @@ msgstr ""
 "Birden çok sabit diskiniz var, kurulum aracının hangisini kullanmasını "
 "istiyorsunuz?"
 
-#: fs/partitioning_wizard.pm:251 fsedit.pm:634
+#: fs/partitioning_wizard.pm:249 fsedit.pm:634
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "%s diski üzerindeki TÜM bölümler ve veriler silinecektir"
 
-#: fs/partitioning_wizard.pm:261
+#: fs/partitioning_wizard.pm:259
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Özel Disk Bölümlendirme"
 
-#: fs/partitioning_wizard.pm:267
+#: fs/partitioning_wizard.pm:265
 #, c-format
 msgid "Use fdisk"
 msgstr "Fdisk kullanılsın"
 
-#: fs/partitioning_wizard.pm:270
+#: fs/partitioning_wizard.pm:268
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2818,27 +2819,27 @@ msgstr ""
 "Şimdi %s'i bölümlendirebilirsiniz.\n"
 "İşiniz bittiğinde `w'yi kullanarak değişiklikleri kaydetmeyi unutmayın."
 
-#: fs/partitioning_wizard.pm:409
+#: fs/partitioning_wizard.pm:405
 #, c-format
 msgid "Ext2/3/4"
 msgstr "Ext2/3/4"
 
-#: fs/partitioning_wizard.pm:439 fs/partitioning_wizard.pm:585
+#: fs/partitioning_wizard.pm:435 fs/partitioning_wizard.pm:581
 #, c-format
 msgid "I cannot find any room for installing"
 msgstr "Kurulum için boş yer bulunamıyor"
 
-#: fs/partitioning_wizard.pm:448 fs/partitioning_wizard.pm:592
+#: fs/partitioning_wizard.pm:444 fs/partitioning_wizard.pm:588
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "DrakX Bölümlendirme sihirbazı şu çözümleri buldu:"
 
-#: fs/partitioning_wizard.pm:518
+#: fs/partitioning_wizard.pm:514
 #, c-format
 msgid "Here is the content of your disk drive "
 msgstr "Disk sürücünüzün içeriği buradadır"
 
-#: fs/partitioning_wizard.pm:602
+#: fs/partitioning_wizard.pm:599
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Bölümlendirme başarısız: %s"
@@ -3243,37 +3244,47 @@ msgstr "Bilinmeyen/Diğerleri"
 msgid "cpu # "
 msgstr "cpu # "
 
-#: harddrake/sound.pm:270
+#: harddrake/sound.pm:95
 #, c-format
 msgid "Please Wait... Applying the configuration"
 msgstr "Lütfen Bekleyiniz... Yapılandırmalar uygulanıyor"
 
-#: harddrake/sound.pm:331
+#: harddrake/sound.pm:123
+#, c-format
+msgid "No known driver"
+msgstr "Bilinmeyen sürücü"
+
+#: harddrake/sound.pm:124
+#, c-format
+msgid "There's no known driver for your sound card (%s)"
+msgstr "Ses kartınız (%s) için bilinen bir sürücü yok"
+
+#: harddrake/sound.pm:156
 #, c-format
 msgid "Enable PulseAudio"
 msgstr "PulseAudio' yu etkinleştir"
 
-#: harddrake/sound.pm:336
+#: harddrake/sound.pm:161
 #, c-format
 msgid "Use Glitch-Free mode"
 msgstr "Kusursuz kipi kullan"
 
-#: harddrake/sound.pm:342
+#: harddrake/sound.pm:167
 #, c-format
 msgid "Reset sound mixer to default values"
 msgstr "Ses karıştırıcısını ön tanımlı değerlere sıfırla"
 
-#: harddrake/sound.pm:347
+#: harddrake/sound.pm:172
 #, c-format
 msgid "Troubleshooting"
 msgstr "Sorun çözme"
 
-#: harddrake/sound.pm:354
+#: harddrake/sound.pm:179
 #, c-format
 msgid "No alternative driver"
 msgstr "Alternatif bir sürücü yok"
 
-#: harddrake/sound.pm:355
+#: harddrake/sound.pm:180
 #, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
@@ -3282,23 +3293,15 @@ msgstr ""
 "%s sürücüsünü kullanan Ses kartınız (%s) için, bilinen başka OSS/ALSA "
 "sürücüsü yok"
 
-#: harddrake/sound.pm:362
+#: harddrake/sound.pm:187
 #, c-format
 msgid "Sound configuration"
 msgstr "Ses yapılandırması"
 
-#: harddrake/sound.pm:364
-#, c-format
-msgid ""
-"Here you can select an alternative driver (either OSS or ALSA) for your "
-"sound card (%s)."
-msgstr ""
-"Buradan ses kartınız(%s) için başka bir sürücü (OSS veya ALSA) seçebilirsiniz"
-
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
-#: harddrake/sound.pm:369
+#: harddrake/sound.pm:193
 #, c-format
 msgid ""
 "\n"
@@ -3311,7 +3314,7 @@ msgstr ""
 "Ses kartınız şu anda %s\"%s\" sürücüsünü kullanıyor (ses kartınız için ön "
 "tanımlısı \"%s\" sürücüsüdür)"
 
-#: harddrake/sound.pm:371
+#: harddrake/sound.pm:195
 #, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
@@ -3347,57 +3350,18 @@ msgstr ""
 "- yeni ALSA api . Çok daha gelişmiş özellikleri vardır fakat ALSA "
 "kütüphanesinin yüklü olmasını ister\n"
 
-#: harddrake/sound.pm:385 harddrake/sound.pm:487
+#: harddrake/sound.pm:210 harddrake/sound.pm:292
 #, c-format
 msgid "Driver:"
 msgstr "Sürücü:"
 
-#: harddrake/sound.pm:399
-#, c-format
-msgid ""
-"The old \"%s\" driver is blacklisted.\n"
-"\n"
-"It has been reported to oops the kernel on unloading.\n"
-"\n"
-"The new \"%s\" driver will only be used on next bootstrap."
-msgstr ""
-"Eski \"%s\" sürücüsü kara listededir.\n"
-"\n"
-"Çekirdek yüklenirken sürekli hatalar raporlamaktadır.\n"
-"\n"
-"Yeni \"%s\" sürücüsü ancak sonraki açılışta kullanılabilir."
-
-#: harddrake/sound.pm:407
-#, c-format
-msgid "No open source driver"
-msgstr "Açık kaynak sürücü yok"
-
-#: harddrake/sound.pm:408
-#, c-format
-msgid ""
-"There's no free driver for your sound card (%s), but there's a proprietary "
-"driver at \"%s\"."
-msgstr ""
-"Ses kartınız (%s) için özgür yazılım bir sürücü yok, ama \"%s\" adresinde "
-"bir  tescilli sürücü var."
-
-#: harddrake/sound.pm:411
-#, c-format
-msgid "No known driver"
-msgstr "Bilinmeyen sürücü"
-
-#: harddrake/sound.pm:412
-#, c-format
-msgid "There's no known driver for your sound card (%s)"
-msgstr "Ses kartınız (%s) için bilinen bir sürücü yok"
-
-#: harddrake/sound.pm:427
+#: harddrake/sound.pm:232
 #, c-format
 msgid "Sound troubleshooting"
 msgstr "Ses sorunu giderme"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:430
+#: harddrake/sound.pm:235
 #, c-format
 msgid ""
 "Below are some basic tips to help debug audio problems, but for accurate and "
@@ -3456,18 +3420,18 @@ msgid ""
 "PulseAudio)\n"
 msgstr ""
 
-#: harddrake/sound.pm:476
+#: harddrake/sound.pm:281
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Sürücünün yerini ben belirteceğim"
 
-#: harddrake/sound.pm:479
+#: harddrake/sound.pm:284
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "İsteğe bağlı bir sürücü seçiliyor"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:482
+#: harddrake/sound.pm:287
 #, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -3527,17 +3491,20 @@ msgstr "Tuner türü:"
 #: interactive.pm:129 interactive.pm:550 interactive/curses.pm:270
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
 #: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:846
-#: ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
+#: mygtk3.pm:880 ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
+#: ugtk3.pm:423 ugtk3.pm:509 ugtk3.pm:793 ugtk3.pm:816
 #, c-format
 msgid "Ok"
 msgstr "Tamam"
 
-#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:157
+#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:792
+#: wizards.pm:157
 #, c-format
 msgid "Yes"
 msgstr "Evet"
 
-#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:157
+#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:792
+#: wizards.pm:157
 #, c-format
 msgid "No"
 msgstr "Hayır"
@@ -3547,47 +3514,47 @@ msgstr "Hayır"
 msgid "Choose a file"
 msgstr "Bir dosya seçin"
 
-#: interactive.pm:388 interactive/gtk.pm:462
+#: interactive.pm:388 interactive/gtk.pm:456
 #, c-format
 msgid "Add"
 msgstr "Ekle"
 
-#: interactive.pm:388 interactive/gtk.pm:462
+#: interactive.pm:388 interactive/gtk.pm:456
 #, c-format
 msgid "Modify"
 msgstr "Değiştir"
 
-#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519
+#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:509
 #, c-format
 msgid "Finish"
 msgstr "Bitti"
 
-#: interactive.pm:551 interactive/curses.pm:267 ugtk2.pm:517
+#: interactive.pm:551 interactive/curses.pm:267 ugtk2.pm:517 ugtk3.pm:507
 #, c-format
 msgid "Previous"
 msgstr "Geri"
 
-#: interactive/curses.pm:576 ugtk2.pm:872
+#: interactive/curses.pm:576 ugtk2.pm:872 ugtk3.pm:853
 #, c-format
 msgid "No file chosen"
 msgstr "Hiç dosya seçilmedi"
 
-#: interactive/curses.pm:580 ugtk2.pm:876
+#: interactive/curses.pm:580 ugtk2.pm:876 ugtk3.pm:857
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "Bir dizin seçtiniz, dosya değil"
 
-#: interactive/curses.pm:582 ugtk2.pm:878
+#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:859
 #, c-format
 msgid "No such directory"
 msgstr "Öyle bir dizin yok"
 
-#: interactive/curses.pm:582 ugtk2.pm:878
+#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:859
 #, c-format
 msgid "No such file"
 msgstr "Böyle bir dosya yok"
 
-#: interactive/gtk.pm:601
+#: interactive/gtk.pm:596
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr "Dikkat, Caps Lock tuşu etkin"
@@ -3679,7 +3646,7 @@ msgstr "default:LTR"
 msgid "Andorra"
 msgstr "Andora"
 
-#: lang.pm:221 timezone.pm:227
+#: lang.pm:221 timezone.pm:235
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Birleşik Arap Emirlikleri"
@@ -3724,7 +3691,7 @@ msgstr "Angola"
 msgid "Antarctica"
 msgstr "Antartika"
 
-#: lang.pm:230 timezone.pm:272
+#: lang.pm:230 timezone.pm:280
 #, c-format
 msgid "Argentina"
 msgstr "Arjantin"
@@ -3734,12 +3701,12 @@ msgstr "Arjantin"
 msgid "American Samoa"
 msgstr "Amerikan Samoası"
 
-#: lang.pm:232 mirror.pm:12 timezone.pm:230
+#: lang.pm:232 mirror.pm:12 timezone.pm:238
 #, c-format
 msgid "Austria"
 msgstr "Avusturya"
 
-#: lang.pm:233 mirror.pm:11 timezone.pm:268
+#: lang.pm:233 mirror.pm:11 timezone.pm:276
 #, c-format
 msgid "Australia"
 msgstr "Avusturalya"
@@ -3764,12 +3731,12 @@ msgstr "Bosna-Hersek"
 msgid "Barbados"
 msgstr "Barbados"
 
-#: lang.pm:238 timezone.pm:212
+#: lang.pm:238 timezone.pm:220
 #, c-format
 msgid "Bangladesh"
 msgstr "Bangladeş"
 
-#: lang.pm:239 mirror.pm:13 timezone.pm:232
+#: lang.pm:239 mirror.pm:13 timezone.pm:240
 #, c-format
 msgid "Belgium"
 msgstr "Belçika"
@@ -3779,7 +3746,7 @@ msgstr "Belçika"
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: lang.pm:241 timezone.pm:233
+#: lang.pm:241 timezone.pm:241
 #, c-format
 msgid "Bulgaria"
 msgstr "Bulgaristan"
@@ -3814,7 +3781,7 @@ msgstr "Bruney Darüsselam"
 msgid "Bolivia"
 msgstr "Bolivya"
 
-#: lang.pm:248 mirror.pm:14 timezone.pm:273
+#: lang.pm:248 mirror.pm:14 timezone.pm:281
 #, c-format
 msgid "Brazil"
 msgstr "Brezilya"
@@ -3839,7 +3806,7 @@ msgstr "Bouvet Adası"
 msgid "Botswana"
 msgstr "Botsvana"
 
-#: lang.pm:253 timezone.pm:231
+#: lang.pm:253 timezone.pm:239
 #, c-format
 msgid "Belarus"
 msgstr "Belarus"
@@ -3849,7 +3816,7 @@ msgstr "Belarus"
 msgid "Belize"
 msgstr "Belize"
 
-#: lang.pm:255 mirror.pm:15 timezone.pm:262
+#: lang.pm:255 mirror.pm:15 timezone.pm:270
 #, c-format
 msgid "Canada"
 msgstr "Kanada"
@@ -3874,7 +3841,7 @@ msgstr "Orta Afrika Cumhuriyeti"
 msgid "Congo (Brazzaville)"
 msgstr "Congo (Brazzaville)"
 
-#: lang.pm:260 mirror.pm:39 timezone.pm:256
+#: lang.pm:260 mirror.pm:39 timezone.pm:264
 #, c-format
 msgid "Switzerland"
 msgstr "İsviçre"
@@ -3889,7 +3856,7 @@ msgstr "Cote d'Ivoire"
 msgid "Cook Islands"
 msgstr "Cook Adaları"
 
-#: lang.pm:263 timezone.pm:274
+#: lang.pm:263 timezone.pm:282
 #, c-format
 msgid "Chile"
 msgstr "Şili"
@@ -3899,7 +3866,7 @@ msgstr "Şili"
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: lang.pm:265 timezone.pm:213
+#: lang.pm:265 timezone.pm:221
 #, c-format
 msgid "China"
 msgstr "Çin"
@@ -3939,12 +3906,12 @@ msgstr "Christmas Adası"
 msgid "Cyprus"
 msgstr "Kıbrıs"
 
-#: lang.pm:273 mirror.pm:17 timezone.pm:234
+#: lang.pm:273 mirror.pm:17 timezone.pm:242
 #, c-format
 msgid "Czech Republic"
 msgstr "Çek Cumhuriyeti"
 
-#: lang.pm:274 mirror.pm:22 timezone.pm:239
+#: lang.pm:274 mirror.pm:22 timezone.pm:247
 #, c-format
 msgid "Germany"
 msgstr "Almanya"
@@ -3954,7 +3921,7 @@ msgstr "Almanya"
 msgid "Djibouti"
 msgstr "Cibuti"
 
-#: lang.pm:276 mirror.pm:18 timezone.pm:235
+#: lang.pm:276 mirror.pm:18 timezone.pm:243
 #, c-format
 msgid "Denmark"
 msgstr "Danimarka"
@@ -3979,7 +3946,7 @@ msgstr "Cezayir"
 msgid "Ecuador"
 msgstr "Ekvator"
 
-#: lang.pm:281 mirror.pm:19 timezone.pm:236
+#: lang.pm:281 mirror.pm:19 timezone.pm:244
 #, c-format
 msgid "Estonia"
 msgstr "Estonya"
@@ -3999,7 +3966,7 @@ msgstr "Batı Sahra"
 msgid "Eritrea"
 msgstr "Eritre"
 
-#: lang.pm:285 mirror.pm:37 timezone.pm:254
+#: lang.pm:285 mirror.pm:37 timezone.pm:262
 #, c-format
 msgid "Spain"
 msgstr "İspanya"
@@ -4009,7 +3976,7 @@ msgstr "İspanya"
 msgid "Ethiopia"
 msgstr "Etiyopya"
 
-#: lang.pm:287 mirror.pm:20 timezone.pm:237
+#: lang.pm:287 mirror.pm:20 timezone.pm:245
 #, c-format
 msgid "Finland"
 msgstr "Finlandiya"
@@ -4034,7 +4001,7 @@ msgstr "Micronesia"
 msgid "Faroe Islands"
 msgstr "Faroe Adaları"
 
-#: lang.pm:292 mirror.pm:21 timezone.pm:238
+#: lang.pm:292 mirror.pm:21 timezone.pm:246
 #, c-format
 msgid "France"
 msgstr "Fransa"
@@ -4044,7 +4011,7 @@ msgstr "Fransa"
 msgid "Gabon"
 msgstr "Gabon"
 
-#: lang.pm:294 timezone.pm:258
+#: lang.pm:294 timezone.pm:266
 #, c-format
 msgid "United Kingdom"
 msgstr "İngiltere"
@@ -4099,7 +4066,7 @@ msgstr "Guadalup"
 msgid "Equatorial Guinea"
 msgstr "Ekvatoral Gine"
 
-#: lang.pm:305 mirror.pm:23 timezone.pm:240
+#: lang.pm:305 mirror.pm:23 timezone.pm:248
 #, c-format
 msgid "Greece"
 msgstr "Yunanistan"
@@ -4109,7 +4076,7 @@ msgstr "Yunanistan"
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Güney Georgia ve Güney Sandwich Adasları"
 
-#: lang.pm:307 timezone.pm:263
+#: lang.pm:307 timezone.pm:271
 #, c-format
 msgid "Guatemala"
 msgstr "Guetemala"
@@ -4154,27 +4121,27 @@ msgstr "Hırvatistan"
 msgid "Haiti"
 msgstr "Haiti"
 
-#: lang.pm:316 mirror.pm:24 timezone.pm:241
+#: lang.pm:316 mirror.pm:24 timezone.pm:249
 #, c-format
 msgid "Hungary"
 msgstr "Macaristan"
 
-#: lang.pm:317 timezone.pm:216
+#: lang.pm:317 timezone.pm:224
 #, c-format
 msgid "Indonesia"
 msgstr "Endonezya"
 
-#: lang.pm:318 mirror.pm:25 timezone.pm:242
+#: lang.pm:318 mirror.pm:25 timezone.pm:250
 #, c-format
 msgid "Ireland"
 msgstr "İrlanda"
 
-#: lang.pm:319 mirror.pm:26 timezone.pm:218
+#: lang.pm:319 mirror.pm:26 timezone.pm:226
 #, c-format
 msgid "Israel"
 msgstr "İsrail"
 
-#: lang.pm:320 timezone.pm:215
+#: lang.pm:320 timezone.pm:223
 #, c-format
 msgid "India"
 msgstr "Hindistan"
@@ -4189,7 +4156,7 @@ msgstr "Hint Okyanusu İngiliz Sömürgeleri"
 msgid "Iraq"
 msgstr "Irak"
 
-#: lang.pm:323 timezone.pm:217
+#: lang.pm:323 timezone.pm:225
 #, c-format
 msgid "Iran"
 msgstr "İran"
@@ -4199,7 +4166,7 @@ msgstr "İran"
 msgid "Iceland"
 msgstr "İzlanda"
 
-#: lang.pm:325 mirror.pm:27 timezone.pm:243
+#: lang.pm:325 mirror.pm:27 timezone.pm:251
 #, c-format
 msgid "Italy"
 msgstr "İtalya"
@@ -4214,7 +4181,7 @@ msgstr "Jameyka"
 msgid "Jordan"
 msgstr "Ürdün"
 
-#: lang.pm:328 mirror.pm:28 timezone.pm:219
+#: lang.pm:328 mirror.pm:28 timezone.pm:227
 #, c-format
 msgid "Japan"
 msgstr "Japonya"
@@ -4254,7 +4221,7 @@ msgstr "Sen Kitts ve Nevis"
 msgid "Korea (North)"
 msgstr "Kore (Kuzey)"
 
-#: lang.pm:336 timezone.pm:220
+#: lang.pm:336 timezone.pm:228
 #, c-format
 msgid "Korea"
 msgstr "Kore"
@@ -4309,12 +4276,12 @@ msgstr "Liberya"
 msgid "Lesotho"
 msgstr "Lesoto"
 
-#: lang.pm:347 timezone.pm:244
+#: lang.pm:347 timezone.pm:252
 #, c-format
 msgid "Lithuania"
 msgstr "Litvanya"
 
-#: lang.pm:348 timezone.pm:245
+#: lang.pm:348 timezone.pm:253
 #, c-format
 msgid "Luxembourg"
 msgstr "Lüksemburg"
@@ -4414,12 +4381,12 @@ msgstr "Maldiv Adaları"
 msgid "Malawi"
 msgstr "Malavi"
 
-#: lang.pm:368 timezone.pm:264
+#: lang.pm:368 timezone.pm:272
 #, c-format
 msgid "Mexico"
 msgstr "Meksika"
 
-#: lang.pm:369 timezone.pm:221
+#: lang.pm:369 timezone.pm:229
 #, c-format
 msgid "Malaysia"
 msgstr "Malezya"
@@ -4459,12 +4426,12 @@ msgstr "Nigeria"
 msgid "Nicaragua"
 msgstr "Nikaragua"
 
-#: lang.pm:377 mirror.pm:29 timezone.pm:246
+#: lang.pm:377 mirror.pm:29 timezone.pm:254
 #, c-format
 msgid "Netherlands"
 msgstr "Hollanda"
 
-#: lang.pm:378 mirror.pm:31 timezone.pm:247
+#: lang.pm:378 mirror.pm:31 timezone.pm:255
 #, c-format
 msgid "Norway"
 msgstr "Norveç"
@@ -4484,7 +4451,7 @@ msgstr "Nauru"
 msgid "Niue"
 msgstr "Nie"
 
-#: lang.pm:382 mirror.pm:30 timezone.pm:269
+#: lang.pm:382 mirror.pm:30 timezone.pm:277
 #, c-format
 msgid "New Zealand"
 msgstr "Yeni Zellanda"
@@ -4514,7 +4481,7 @@ msgstr "Fransız Polinezyası"
 msgid "Papua New Guinea"
 msgstr "Papua Yeni Gine"
 
-#: lang.pm:388 timezone.pm:222
+#: lang.pm:388 timezone.pm:230
 #, c-format
 msgid "Philippines"
 msgstr "Filipinler"
@@ -4524,7 +4491,7 @@ msgstr "Filipinler"
 msgid "Pakistan"
 msgstr "Pakistan"
 
-#: lang.pm:390 mirror.pm:32 timezone.pm:248
+#: lang.pm:390 mirror.pm:32 timezone.pm:256
 #, c-format
 msgid "Poland"
 msgstr "Polonya"
@@ -4549,7 +4516,7 @@ msgstr "Porto Riko"
 msgid "Palestine"
 msgstr "Palestine"
 
-#: lang.pm:395 mirror.pm:33 timezone.pm:249
+#: lang.pm:395 mirror.pm:33 timezone.pm:257
 #, c-format
 msgid "Portugal"
 msgstr "Portekiz"
@@ -4574,7 +4541,7 @@ msgstr "Katar"
 msgid "Reunion"
 msgstr "Reunion"
 
-#: lang.pm:400 timezone.pm:250
+#: lang.pm:400 timezone.pm:258
 #, c-format
 msgid "Romania"
 msgstr "Romanya"
@@ -4609,12 +4576,12 @@ msgstr "Seyşel Adaları"
 msgid "Sudan"
 msgstr "Sudan"
 
-#: lang.pm:407 mirror.pm:38 timezone.pm:255
+#: lang.pm:407 mirror.pm:38 timezone.pm:263
 #, c-format
 msgid "Sweden"
 msgstr "İsveç"
 
-#: lang.pm:408 timezone.pm:223
+#: lang.pm:408 timezone.pm:231
 #, c-format
 msgid "Singapore"
 msgstr "Singapur"
@@ -4624,7 +4591,7 @@ msgstr "Singapur"
 msgid "Saint Helena"
 msgstr "Sen Helen"
 
-#: lang.pm:410 timezone.pm:253
+#: lang.pm:410 timezone.pm:261
 #, c-format
 msgid "Slovenia"
 msgstr "Slovenya"
@@ -4634,7 +4601,7 @@ msgstr "Slovenya"
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Svalbard ve Jan Mayen Adaları"
 
-#: lang.pm:412 mirror.pm:35 timezone.pm:252
+#: lang.pm:412 mirror.pm:35 timezone.pm:260
 #, c-format
 msgid "Slovakia"
 msgstr "Slovakya"
@@ -4704,7 +4671,7 @@ msgstr "Güney Fransız Toprakları"
 msgid "Togo"
 msgstr "Togo"
 
-#: lang.pm:426 mirror.pm:41 timezone.pm:225
+#: lang.pm:426 mirror.pm:41 timezone.pm:233
 #, c-format
 msgid "Thailand"
 msgstr "Tayland"
@@ -4739,7 +4706,7 @@ msgstr "Tunus"
 msgid "Tonga"
 msgstr "Tonga"
 
-#: lang.pm:433 timezone.pm:226
+#: lang.pm:433 timezone.pm:234
 #, c-format
 msgid "Turkey"
 msgstr "Türkiye"
@@ -4754,17 +4721,17 @@ msgstr "Trinidad ve Tobako"
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: lang.pm:436 mirror.pm:40 timezone.pm:224
+#: lang.pm:436 mirror.pm:40 timezone.pm:232
 #, c-format
 msgid "Taiwan"
 msgstr "Tayvan"
 
-#: lang.pm:437 timezone.pm:209
+#: lang.pm:437 timezone.pm:217
 #, c-format
 msgid "Tanzania"
 msgstr "Tanzanya"
 
-#: lang.pm:438 timezone.pm:257
+#: lang.pm:438 timezone.pm:265
 #, c-format
 msgid "Ukraine"
 msgstr "Ukrayna"
@@ -4779,7 +4746,7 @@ msgstr "Uganda"
 msgid "United States Minor Outlying Islands"
 msgstr "United States Minor Outlying Islands"
 
-#: lang.pm:441 mirror.pm:42 timezone.pm:265
+#: lang.pm:441 mirror.pm:42 timezone.pm:273
 #, c-format
 msgid "United States"
 msgstr "ABD"
@@ -4849,7 +4816,7 @@ msgstr "Yemen"
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: lang.pm:455 mirror.pm:36 timezone.pm:208
+#: lang.pm:455 mirror.pm:36 timezone.pm:216
 #, c-format
 msgid "South Africa"
 msgstr "Güney Afrika"
@@ -5479,22 +5446,22 @@ msgstr ""
 "%s modülü yüklenemedi.\n"
 "Tekrar başka parametrelerle denemek ister misiniz?"
 
-#: mygtk2.pm:1229
+#: mygtk2.pm:1229 mygtk3.pm:1255
 #, c-format
 msgid "Are you sure you want to quit?"
 msgstr "Çıkmak istediğinizden emin misiniz?"
 
-#: mygtk2.pm:1571 mygtk2.pm:1572
+#: mygtk2.pm:1570 mygtk2.pm:1571 mygtk3.pm:1606 mygtk3.pm:1607
 #, c-format
 msgid "Password is trivial to guess"
 msgstr "Parolanızın tahmin edilmesi kolay"
 
-#: mygtk2.pm:1573
+#: mygtk2.pm:1572 mygtk3.pm:1608
 #, c-format
 msgid "Password should be resistant to basic attacks"
 msgstr "Parolanız temel saldırılarla çözülemez"
 
-#: mygtk2.pm:1574 mygtk2.pm:1575
+#: mygtk2.pm:1573 mygtk2.pm:1574 mygtk3.pm:1609 mygtk3.pm:1610
 #, c-format
 msgid "Password seems secure"
 msgstr "Parolanız güvenli"
@@ -6413,6 +6380,16 @@ msgstr ""
 
 #: services.pm:26
 #, c-format
+msgid "An NTP client/server"
+msgstr "Bir NTP istemcisi/sunucusu"
+
+#: services.pm:27
+#, c-format
+msgid "Set CPU frequency settings"
+msgstr "CPU frekanslarını ayarla"
+
+#: services.pm:28
+#, c-format
 msgid ""
 "cron is a standard UNIX program that runs user-specified programs\n"
 "at periodic scheduled times. vixie cron adds a number of features to the "
@@ -6423,7 +6400,7 @@ msgstr ""
 "standart bir UNIX programıdır. vixie cron, standart cron'a eklenmiş birçok\n"
 "yeni özellik içerir."
 
-#: services.pm:29
+#: services.pm:31
 #, c-format
 msgid ""
 "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
@@ -6431,12 +6408,12 @@ msgstr ""
 "Ortak UNIX Yazdırma Sistemi (CUPS) gelişmiş bir yazdırma biriktirme "
 "sistemidir."
 
-#: services.pm:30
+#: services.pm:32
 #, c-format
 msgid "Launches the graphical display manager"
 msgstr "Grafiksel görüntü yöneticisini başlatır."
 
-#: services.pm:31
+#: services.pm:33
 #, c-format
 msgid ""
 "FAM is a file monitoring daemon. It is used to get reports when files "
@@ -6447,7 +6424,7 @@ msgstr ""
 "almak için kullanılır.\n"
 "GNOME ve KDE tarafından kullanılmaktadır."
 
-#: services.pm:33
+#: services.pm:35
 #, c-format
 msgid ""
 "G15Daemon allows users access to all extra keys by decoding them and \n"
@@ -6469,7 +6446,7 @@ msgstr ""
 "uygulamaları ve\n"
 "betikler LCD' ye basit bir api ile ulaşırlar."
 
-#: services.pm:38
+#: services.pm:40
 #, c-format
 msgid ""
 "GPM adds mouse support to text-based Linux applications such the\n"
@@ -6481,13 +6458,13 @@ msgstr ""
 "Ayrıca konsolda fareyle kesme ve yapıştırma işlemlerine izin verir.\n"
 "Konsolda pop-up menü desteği sağlar."
 
-#: services.pm:41
+#: services.pm:43
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
 msgstr ""
 "HAL, donanım hakkında bilgi toplayan ve düzenleyen bir art alan sürecidir."
 
-#: services.pm:42
+#: services.pm:44
 #, c-format
 msgid ""
 "HardDrake runs a hardware probe, and optionally configures\n"
@@ -6496,7 +6473,7 @@ msgstr ""
 "HardDrake donanım analizini ve yapılandırma seçeneklerini başlatır\n"
 "donanım yenileme/değiştirme."
 
-#: services.pm:44
+#: services.pm:46
 #, c-format
 msgid ""
 "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
@@ -6504,7 +6481,7 @@ msgstr ""
 "Apache bir World Wide Web sunucusudur. HTML dosyaları ve CGI sunumu için "
 "kullanılır."
 
-#: services.pm:45
+#: services.pm:47
 #, c-format
 msgid ""
 "The internet superserver daemon (commonly called inetd) starts a\n"
@@ -6522,23 +6499,23 @@ msgstr ""
 "servisleri \n"
 "kaldırmak anlamına gelir."
 
-#: services.pm:49
+#: services.pm:51
 #, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
 msgstr "Ip6tables ile bir paket süzmeli güvenlik duvarını otomatikleştirir."
 
-#: services.pm:50
+#: services.pm:52
 #, c-format
 msgid "Automates a packet filtering firewall with iptables"
 msgstr "Iptables ile bir paket süzmeli güvenlik duvarını otomatikleştirir."
 
-#: services.pm:51
+#: services.pm:53
 #, c-format
 msgid ""
 "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
 msgstr "IRQ yükünü birden çok işlemciye dağıtarak verimliliği arttırır."
 
-#: services.pm:52
+#: services.pm:54
 #, c-format
 msgid ""
 "This package loads the selected keyboard map as set in\n"
@@ -6549,7 +6526,7 @@ msgstr ""
 "Hangi klavye düzeninin kullanılacağı kbdconfig ile ayarlanabilir.\n"
 "Bu, Mandriva kurulan birçok makinede etkin olarak bırakılmalıdır."
 
-#: services.pm:55
+#: services.pm:57
 #, c-format
 msgid ""
 "Automatic regeneration of kernel header in /boot for\n"
@@ -6558,17 +6535,17 @@ msgstr ""
 "/usr/include/linux/{autoconf,version}.h için\n"
 "/boot içinde çekirdek başlığının otomatik yeniden üretimi"
 
-#: services.pm:57
+#: services.pm:59
 #, c-format
 msgid "Automatic detection and configuration of hardware at boot."
 msgstr "Açılışta donanım algılaması ve yapılandırması."
 
-#: services.pm:58
+#: services.pm:60
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
 msgstr "Sistem davranışlarını iyileştirerek batarya ömrünü uzatır."
 
-#: services.pm:59
+#: services.pm:61
 #, c-format
 msgid ""
 "Linuxconf will sometimes arrange to perform various tasks\n"
@@ -6577,7 +6554,7 @@ msgstr ""
 "Linuxconf ile, sistem açılışı sırasında çeşitli işlemlerin uygulanışını\n"
 "sistem yapılandırması bağlamında düzenlenebilir."
 
-#: services.pm:61
+#: services.pm:63
 #, c-format
 msgid ""
 "lpd is the print daemon required for lpr to work properly. It is\n"
@@ -6587,7 +6564,7 @@ msgstr ""
 "lpd temel olarak, yazdırma görevlerini yöneten ve onları yazıcıya gönderen "
 "sunucudur."
 
-#: services.pm:63
+#: services.pm:65
 #, c-format
 msgid ""
 "Linux Virtual Server, used to build a high-performance and highly\n"
@@ -6596,17 +6573,17 @@ msgstr ""
 "Linux Sanal Sunucu, yüksek performans ve yüksek\n"
 "erişilebilirlikteki Sunucular oluşturmak için kullanılır."
 
-#: services.pm:65
+#: services.pm:67
 #, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
 msgstr "Ağı görüntüler (Etkileşimli güvenlik duvarı ve kablosuz)"
 
-#: services.pm:66
+#: services.pm:68
 #, c-format
 msgid "Software RAID monitoring and management"
 msgstr "Yazılımsal RAID izleme ve yönetimi"
 
-#: services.pm:67
+#: services.pm:69
 #, c-format
 msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
@@ -6614,12 +6591,12 @@ msgid ""
 msgstr ""
 "DBUS sistem olaylarını ve diğer iletileri ulaştıran bir art alan sürecidir."
 
-#: services.pm:68
+#: services.pm:70
 #, c-format
 msgid "Enables MSEC security policy on system startup"
 msgstr "Sistem başlangıcında MSEC güvenlik kurallarını etkinleştirir."
 
-#: services.pm:69
+#: services.pm:71
 #, c-format
 msgid ""
 "named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
@@ -6628,12 +6605,12 @@ msgstr ""
 "named (BIND) sunucu isimlerini IP adreslerine dönüştüren Alan Adı "
 "Sunucusudur (DNS)."
 
-#: services.pm:70
+#: services.pm:72
 #, c-format
 msgid "Initializes network console logging"
 msgstr "Ağ konsolu günlüklemeyi başlatır"
 
-#: services.pm:71
+#: services.pm:73
 #, c-format
 msgid ""
 "Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
@@ -6642,7 +6619,7 @@ msgstr ""
 "Bütün Ağ Dosya Sistemlerini (NFS), SMB (Lan Manager/Windows), ve \n"
 "NCP (NetWare) bağlama noktalarını bağlar ve ayırır."
 
-#: services.pm:73
+#: services.pm:75
 #, c-format
 msgid ""
 "Activates/Deactivates all network interfaces configured to start\n"
@@ -6651,17 +6628,17 @@ msgstr ""
 "Açılış sırasında başlamak için ayarlanmış bütün ağ arayüzlerini\n"
 "etkinleştirir/devre dışı bırakır."
 
-#: services.pm:75
+#: services.pm:77
 #, c-format
 msgid "Requires network to be up if enabled"
 msgstr "Etkinleştirilmişse ağın çalışır durumda olmasını gerektirir."
 
-#: services.pm:76
+#: services.pm:78
 #, c-format
 msgid "Wait for the hotplugged network to be up"
 msgstr "Yeni bağlanmış ağın çalışmasını bekle"
 
-#: services.pm:77
+#: services.pm:79
 #, c-format
 msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP networks.\n"
@@ -6672,7 +6649,7 @@ msgstr ""
 "Bu servis, /etc/exports dosyasında ayarları bulunan NFS sunucusunun \n"
 "kullanımını sağlar."
 
-#: services.pm:80
+#: services.pm:82
 #, c-format
 msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP\n"
@@ -6681,12 +6658,12 @@ msgstr ""
 "NFS TCP/IP ağlarda dosya paylaşımı için kullanılan popüler bir \n"
 "protokoldür. Bu servis NFS dosya kilidi kullanımını sağlar."
 
-#: services.pm:82
+#: services.pm:84
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
 msgstr "Sistem zamanını Ağ Zaman Protokolü (NTP) kullanarak eşleştirir"
 
-#: services.pm:83
+#: services.pm:85
 #, c-format
 msgid ""
 "Automatically switch on numlock key locker under console\n"
@@ -6695,17 +6672,17 @@ msgstr ""
 "Başlangıçta Xwindows ve konsol altında tuş kilidini\n"
 "her başlangıçta açar."
 
-#: services.pm:85
+#: services.pm:87
 #, c-format
 msgid "Support the OKI 4w and compatible winprinters."
 msgstr "OKI 4w ve windows uyumlu yazıcıları destekler."
 
-#: services.pm:86
+#: services.pm:88
 #, c-format
 msgid "Checks if a partition is close to full up"
 msgstr "Bir disk bölümünün dolmaya yakın olup olmadığını denetler"
 
-#: services.pm:87
+#: services.pm:89
 #, c-format
 msgid ""
 "PCMCIA support is usually to support things like ethernet and\n"
@@ -6719,7 +6696,7 @@ msgstr ""
 "duyulmayan \n"
 "makinelerde kurulu olması sorun oluşturmayacaktır."
 
-#: services.pm:90
+#: services.pm:92
 #, c-format
 msgid ""
 "The portmapper manages RPC connections, which are used by\n"
@@ -6731,12 +6708,12 @@ msgstr ""
 "bağlantılarını düzenler. Portmap sunucusu RPC mekanizmasını kullanan\n"
 "protokollerle servis yapan makinelerde kurulu ve çalışıyor durumda olmalıdır."
 
-#: services.pm:93
+#: services.pm:95
 #, c-format
 msgid "Reserves some TCP ports"
 msgstr "Bazı TCP portlarını rezerve eder"
 
-#: services.pm:94
+#: services.pm:96
 #, c-format
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
@@ -6745,7 +6722,7 @@ msgstr ""
 "Postfix, elektronik postaları bir makineden diğerine yollayan Elektronik "
 "Posta Aktarma Uygulamasıdır."
 
-#: services.pm:95
+#: services.pm:97
 #, c-format
 msgid ""
 "Saves and restores system entropy pool for higher quality random\n"
@@ -6754,7 +6731,7 @@ msgstr ""
 "Yüksek kalite rastgele sayı üretimi için sistem  havuzunun \n"
 "saklanması ve yeniden eski haline getirilmesini sağlar."
 
-#: services.pm:97
+#: services.pm:99
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard disk drive\n"
@@ -6763,12 +6740,12 @@ msgstr ""
 "Oracle gibi bazı uygulamalarla kullanmak için\n"
 "blok aygıtlarını (örn: sabit disk bölümleri) temel aygıtlarla eşleştir"
 
-#: services.pm:99
+#: services.pm:101
 #, c-format
 msgid "Nameserver information manager"
 msgstr "SunucuAdı bilgi yöneticisi"
 
-#: services.pm:100
+#: services.pm:102
 #, c-format
 msgid ""
 "The routed daemon allows for automatic IP router table updated via\n"
@@ -6779,7 +6756,7 @@ msgstr ""
 "yenilenmesine izin verir. RIP genelde küçük ağlarda kullanılır, daha büyük\n"
 "ağlarda daha karmaşık routing protokollerine ihtiyaç vardır."
 
-#: services.pm:103
+#: services.pm:105
 #, c-format
 msgid ""
 "The rstat protocol allows users on a network to retrieve\n"
@@ -6788,7 +6765,7 @@ msgstr ""
 "rstat protokolü bir ağdaki kullanıcıların o ağdaki herhangi bir\n"
 "makine hakkında performans ölçüleri alabilmelerini sağlar."
 
-#: services.pm:105
+#: services.pm:107
 #, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
@@ -6798,7 +6775,7 @@ msgstr ""
 "tutmalarına izin verir. Syslog'un her zaman çalışır durumda olması akıllıca "
 "bir davranıştır."
 
-#: services.pm:106
+#: services.pm:108
 #, c-format
 msgid ""
 "The rusers protocol allows users on a network to identify who is\n"
@@ -6807,7 +6784,7 @@ msgstr ""
 "rusers protokolü bir ağdaki kullanıcıların o ağda bulunan makinelerde\n"
 "çalışan kullanıcıları görmenizi sağlar."
 
-#: services.pm:108
+#: services.pm:110
 #, c-format
 msgid ""
 "The rwho protocol lets remote users get a list of all of the users\n"
@@ -6816,7 +6793,7 @@ msgstr ""
 "rwho protokolü, uzak kullanıcıların, rwho artsureci çalıştıran bir makinede\n"
 "bulunan tüm kullanıcıları görmelerine izin verir."
 
-#: services.pm:110
+#: services.pm:112
 #, c-format
 msgid ""
 "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
@@ -6824,12 +6801,12 @@ msgstr ""
 "SANE (Tarayıcı Erişimi Şimdi Kolay-Scanner Access Now Easy) tarayıcılara, "
 "video kameralara v.b. erişimi sağlar."
 
-#: services.pm:111
+#: services.pm:113
 #, c-format
 msgid "Packet filtering firewall"
 msgstr "Paket süzmeli güvenlik duvarı"
 
-#: services.pm:112
+#: services.pm:114
 #, c-format
 msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
@@ -6838,17 +6815,17 @@ msgstr ""
 "SMP/CIFS protokolü dosyalar & yazıcılara erişimi paylaştırmayı sağlar ve "
 "ayrıca bir Windows Sunucu alanı ile eşleştirir."
 
-#: services.pm:113
+#: services.pm:115
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Ses sistemini Makinede uygula"
 
-#: services.pm:114
+#: services.pm:116
 #, c-format
 msgid "layer for speech analysis"
 msgstr "Konuşma çözümlemesi için katman"
 
-#: services.pm:115
+#: services.pm:117
 #, c-format
 msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
@@ -6857,7 +6834,7 @@ msgstr ""
 "Güvenli Kabuk, iki bilgisayar arasında verinin güvenli bir kanal üzerinden "
 "aktarılmasını sağlayan bir ağ protokolüdür."
 
-#: services.pm:116
+#: services.pm:118
 #, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages\n"
@@ -6866,94 +6843,94 @@ msgstr ""
 "Syslog, birçok artsürecin mesajlarını çeşitli sistem kayıt dosyalarında\n"
 "tutmalarına izin verir.  Syslog'un her zaman çalışır durumda olması önerilir."
 
-#: services.pm:118
+#: services.pm:120
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
 msgstr "Üretilen sürekli udev kurallarını /etc/udev/rules.d dizinine kaydırır"
 
-#: services.pm:119
+#: services.pm:121
 #, c-format
 msgid "Load the drivers for your usb devices."
 msgstr "USB aygıtlarınız için dürücülerini yükleyiniz."
 
-#: services.pm:120
+#: services.pm:122
 #, c-format
 msgid "A lightweight network traffic monitor"
 msgstr "Hafif bir ağ trafiği izleme aracı"
 
-#: services.pm:121
+#: services.pm:123
 #, c-format
 msgid "Starts the X Font Server."
 msgstr "X Yazı Tipi Sunucusunu başlatır."
 
-#: services.pm:122
+#: services.pm:124
 #, c-format
 msgid "Starts other deamons on demand."
 msgstr "İstendiğinde diğer art alan süreçlerini başlat"
 
-#: services.pm:151
+#: services.pm:153
 #, c-format
 msgid "Printing"
 msgstr "Yazdırılıyor"
 
-#: services.pm:154
+#: services.pm:156
 #, c-format
 msgid "Internet"
 msgstr "İnternet"
 
-#: services.pm:159
+#: services.pm:161
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Ağ"
 
-#: services.pm:161
+#: services.pm:163
 #, c-format
 msgid "System"
 msgstr "Sistem"
 
-#: services.pm:167
+#: services.pm:169
 #, c-format
 msgid "Remote Administration"
 msgstr "Uzak Yönetim"
 
-#: services.pm:176
+#: services.pm:178
 #, c-format
 msgid "Database Server"
 msgstr "Veritabanı Sunucusu"
 
-#: services.pm:187 services.pm:224
+#: services.pm:189 services.pm:226
 #, c-format
 msgid "Services"
 msgstr "Hizmetler"
 
-#: services.pm:187
+#: services.pm:189
 #, c-format
 msgid "Choose which services should be automatically started at boot time"
 msgstr "Açılış sırasında otomatik olarak başlatılacak hizmetleri seçiniz"
 
-#: services.pm:205
+#: services.pm:207
 #, c-format
 msgid "%d activated for %d registered"
 msgstr "%d / %d etkinleştirildi"
 
-#: services.pm:240
+#: services.pm:230
 #, c-format
 msgid "running"
 msgstr "çalışıyor"
 
-#: services.pm:240
+#: services.pm:230
 #, c-format
 msgid "stopped"
 msgstr "durdu"
 
-#: services.pm:245
+#: services.pm:235
 #, c-format
 msgid "Services and daemons"
 msgstr "Hizmetler ve artalan süreçleri"
 
-#: services.pm:251
+#: services.pm:241
 #, c-format
 msgid ""
 "No additional information\n"
@@ -6962,27 +6939,22 @@ msgstr ""
 "Bu hizmet hakkında\n"
 "başka bilgi yok."
 
-#: services.pm:256 ugtk2.pm:924
-#, c-format
-msgid "Info"
-msgstr "Bilgi"
-
-#: services.pm:259
+#: services.pm:248
 #, c-format
 msgid "Start when requested"
 msgstr "İstendiğinde başlat"
 
-#: services.pm:259
+#: services.pm:248
 #, c-format
 msgid "On boot"
 msgstr "Önyüklemede"
 
-#: services.pm:277
+#: services.pm:265
 #, c-format
 msgid "Start"
 msgstr "Başlat"
 
-#: services.pm:277
+#: services.pm:265
 #, c-format
 msgid "Stop"
 msgstr "Durdur"
@@ -7227,7 +7199,7 @@ msgstr ""
 "       XFdrake [--noauto] monitör\n"
 "       XFdrake çözünürlük"
 
-#: standalone.pm:154
+#: standalone.pm:155
 #, c-format
 msgid ""
 "\n"
@@ -7238,70 +7210,75 @@ msgstr ""
 "Kullanımı: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
 "testing] [-v|--version] "
 
-#: timezone.pm:160 timezone.pm:161
+#: timezone.pm:168 timezone.pm:169
 #, c-format
 msgid "All servers"
 msgstr "Bütün sunucular"
 
-#: timezone.pm:197
+#: timezone.pm:205
 #, c-format
 msgid "Global"
 msgstr "Evrensel"
 
-#: timezone.pm:200
+#: timezone.pm:208
 #, c-format
 msgid "Africa"
 msgstr "Afrika"
 
-#: timezone.pm:201
+#: timezone.pm:209
 #, c-format
 msgid "Asia"
 msgstr "Asya"
 
-#: timezone.pm:202
+#: timezone.pm:210
 #, c-format
 msgid "Europe"
 msgstr "Avrupa"
 
-#: timezone.pm:203
+#: timezone.pm:211
 #, c-format
 msgid "North America"
 msgstr "Kuzey Amerika"
 
-#: timezone.pm:204
+#: timezone.pm:212
 #, c-format
 msgid "Oceania"
 msgstr "Okyanusya"
 
-#: timezone.pm:205
+#: timezone.pm:213
 #, c-format
 msgid "South America"
 msgstr "Güney Amerika"
 
-#: timezone.pm:214
+#: timezone.pm:222
 #, c-format
 msgid "Hong Kong"
 msgstr "Hong Kong"
 
-#: timezone.pm:251
+#: timezone.pm:259
 #, c-format
 msgid "Russian Federation"
 msgstr "Rusya Federasyonu"
 
-#: timezone.pm:259
+#: timezone.pm:267
 #, c-format
 msgid "Yugoslavia"
 msgstr "Yugoslavya"
 
-#: ugtk2.pm:812
+#: ugtk2.pm:812 ugtk3.pm:793
 #, c-format
 msgid "Is this correct?"
 msgstr "Doğru mu?"
 
-#: ugtk2.pm:874
+#: ugtk2.pm:874 ugtk3.pm:855
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "Bir dosya seçtiniz, dizin değil"
+
+#: ugtk2.pm:924 ugtk3.pm:905
+#, c-format
+msgid "Info"
+msgstr "Bilgi"
 
 #: wizards.pm:96
 #, c-format
@@ -7317,6 +7294,52 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Kurulum başarısız!"
+
+#~ msgid ""
+#~ "Here you can select an alternative driver (either OSS or ALSA) for your "
+#~ "sound card (%s)."
+#~ msgstr ""
+#~ "Buradan ses kartınız(%s) için başka bir sürücü (OSS veya ALSA) "
+#~ "seçebilirsiniz"
+
+#~ msgid ""
+#~ "If you really think that you know which driver is the right one for your "
+#~ "card\n"
+#~ "you can pick one from the above list.\n"
+#~ "\n"
+#~ "The current driver for your \"%s\" sound card is \"%s\" "
+#~ msgstr ""
+#~ "Gerçekten hangi sürücünün kartınız doğru olduğunu biliyorsanız\n"
+#~ "yukarıdaki listedekilerden birini kullanabilirsiniz.\n"
+#~ "\n"
+#~ "\"%s\" sürücü kartınızın şu an kullandığı sürücü \"%s\" "
+
+#~ msgid "No open source driver"
+#~ msgstr "Açık kaynak sürücü yok"
+
+#, fuzzy
+#~ msgid "Please make a backup of your data first."
+#~ msgstr "Önce verinizin yedeğini alınız"
+
+#~ msgid ""
+#~ "The old \"%s\" driver is blacklisted.\n"
+#~ "\n"
+#~ "It has been reported to oops the kernel on unloading.\n"
+#~ "\n"
+#~ "The new \"%s\" driver will only be used on next bootstrap."
+#~ msgstr ""
+#~ "Eski \"%s\" sürücüsü kara listededir.\n"
+#~ "\n"
+#~ "Çekirdek yüklenirken sürekli hatalar raporlamaktadır.\n"
+#~ "\n"
+#~ "Yeni \"%s\" sürücüsü ancak sonraki açılışta kullanılabilir."
+
+#~ msgid ""
+#~ "There's no free driver for your sound card (%s), but there's a "
+#~ "proprietary driver at \"%s\"."
+#~ msgstr ""
+#~ "Ses kartınız (%s) için özgür yazılım bir sürücü yok, ama \"%s\" adresinde "
+#~ "bir  tescilli sürücü var."
 
 #~ msgid "1. License Agreement"
 #~ msgstr "1. Lisans Sözleşmesi"
@@ -7351,9 +7374,6 @@ msgstr "Kurulum başarısız!"
 #~ "kısmen veya tamamen, her türlü değişikliği yapma \n"
 #~ "haklarını saklı tutarlar. \"Moondrake\" ve ilgili logolar\" %s'nın "
 #~ "müseccel markalarıdır."
-
-#~ msgid "An NTP client/server"
-#~ msgstr "Bir NTP istemcisi/sunucusu"
 
 #~ msgid ""
 #~ "Below are some basic tips to help debug audio problems, but for accurate "
@@ -7469,6 +7489,9 @@ msgstr "Kurulum başarısız!"
 #~ "ses kartını kullanmakta olduğunu söyleyecektir. (normalde bu, yalnızca "
 #~ "PulseAudio göstermelidir)\n"
 
+#~ msgid "Clean /tmp at each boot"
+#~ msgstr "/tmp dizinini her açılışta temizle"
+
 #~ msgid ""
 #~ "Congratulations, installation is complete.\n"
 #~ "Remove the boot media and press Enter to reboot."
@@ -7521,11 +7544,16 @@ msgstr "Kurulum başarısız!"
 #~ msgid "Introduction"
 #~ msgstr "Giriş"
 
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "Bilgisayarınızı diğer ağlardan koruma amacıyla ateş duvarı kurma "
+#~ "uygulaması için\n"
+#~ "Linux kernel 2.2 serisi için hazırlanmış paket filtrelemesini başlatır."
+
 #~ msgid "Moondrake"
 #~ msgstr "Moondrake"
-
-#~ msgid "Please make a backup of your data first"
-#~ msgstr "Önce verinizin yedeğini alınız"
 
 #~ msgid ""
 #~ "Please read this document carefully. This document is a license agreement "
@@ -7659,65 +7687,6 @@ msgstr "Kurulum başarısız!"
 #~ "Lisansa tabidir."
 
 #~ msgid ""
-#~ "The operating system and the different components available in the "
-#~ "Moondrake distribution \n"
-#~ "shall be called the \"Software Products\" hereafter. The Software "
-#~ "Products include, but are not \n"
-#~ "restricted to, the set of programs, methods, rules and documentation "
-#~ "related to the operating \n"
-#~ "system and the different components of the Moondrake distribution, and "
-#~ "any applications \n"
-#~ "distributed with these products provided by Moondrake's licensors or "
-#~ "suppliers."
-#~ msgstr ""
-#~ "İşletim sistemi ve Moondrake Linux dağıtımında bulunan farklı bileşenler "
-#~ "buradan itibaren\n"
-#~ "\"Yazılım Ürünleri\" olarak adlandırılacaktır. Yazılım Ürünleri işletim "
-#~ "sistemiyle ilgili program kümeleri,\n"
-#~ "yöntemleri, kuralları ve belgeleri, Moondrake Linux'un farklı "
-#~ "bileşenlerini ve Moondrake' nın lisans\n"
-#~ "sağlayıcıları ve destekleyicileri tarafından dağıtılan uygulamaları "
-#~ "içermektedir,\n"
-#~ "fakat bunlarla sınırlandırılmamaktadır."
-
-#~ msgid ""
-#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
-#~ "Software included may be covered by patents in your country. For example, "
-#~ "the\n"
-#~ "MP3 decoders included may require a license for further usage (see\n"
-#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
-#~ "patent\n"
-#~ "may be applicable to you, check your local laws."
-#~ msgstr ""
-#~ "Uyarı: Özgür Yazılım patentlerden bağımsız olmak zorunda değildir. Bazı\n"
-#~ "Özgür Yazılımlar ülkenizde patent hakları ile korunmakta olabilir. "
-#~ "Örneğin; MP3\n"
-#~ "çözücüler daha ileri bir kullanım için bir lisans gerektirebilirler. "
-#~ "(Ayrıntılı\n"
-#~ " bilgi için: http://www.mp3licensing.com ). Bir patent hakkını ihlal edip "
-#~ "etmediğinizden emin\n"
-#~ "değilseniz ülkeniz yasalarını araştırın."
-
-#~ msgid "_: You can warn about unofficial translation here"
-#~ msgstr ""
-#~ "UYARI: Bu lisans belgesinin çevirisi gayriresmi nitelikte olup hukuki bir "
-#~ "belge olarak kullanılamaz."
-
-#~ msgid "Clean /tmp at each boot"
-#~ msgstr "/tmp dizinini her açılışta temizle"
-
-#~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
-#~ msgstr ""
-#~ "Bilgisayarınızı diğer ağlardan koruma amacıyla ateş duvarı kurma "
-#~ "uygulaması için\n"
-#~ "Linux kernel 2.2 serisi için hazırlanmış paket filtrelemesini başlatır."
-
-#~ msgid "Set CPU frequency settings"
-#~ msgstr "CPU frekanslarını ayarla"
-
-#~ msgid ""
 #~ "The classic bug sound tester is to run the following commands:\n"
 #~ "\n"
 #~ "\n"
@@ -7765,6 +7734,51 @@ msgstr "Kurulum başarısız!"
 #~ "\n"
 #~ "- \"/sbin/fuser -v /dev/dsp\" ses kartını hangi uygulamanın kullandığını "
 #~ "söyler.\n"
+
+#~ msgid ""
+#~ "The operating system and the different components available in the "
+#~ "Moondrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software "
+#~ "Products include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation "
+#~ "related to the operating \n"
+#~ "system and the different components of the Moondrake distribution, and "
+#~ "any applications \n"
+#~ "distributed with these products provided by Moondrake's licensors or "
+#~ "suppliers."
+#~ msgstr ""
+#~ "İşletim sistemi ve Moondrake Linux dağıtımında bulunan farklı bileşenler "
+#~ "buradan itibaren\n"
+#~ "\"Yazılım Ürünleri\" olarak adlandırılacaktır. Yazılım Ürünleri işletim "
+#~ "sistemiyle ilgili program kümeleri,\n"
+#~ "yöntemleri, kuralları ve belgeleri, Moondrake Linux'un farklı "
+#~ "bileşenlerini ve Moondrake' nın lisans\n"
+#~ "sağlayıcıları ve destekleyicileri tarafından dağıtılan uygulamaları "
+#~ "içermektedir,\n"
+#~ "fakat bunlarla sınırlandırılmamaktadır."
+
+#~ msgid ""
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
+#~ msgstr ""
+#~ "Uyarı: Özgür Yazılım patentlerden bağımsız olmak zorunda değildir. Bazı\n"
+#~ "Özgür Yazılımlar ülkenizde patent hakları ile korunmakta olabilir. "
+#~ "Örneğin; MP3\n"
+#~ "çözücüler daha ileri bir kullanım için bir lisans gerektirebilirler. "
+#~ "(Ayrıntılı\n"
+#~ " bilgi için: http://www.mp3licensing.com ). Bir patent hakkını ihlal edip "
+#~ "etmediğinizden emin\n"
+#~ "değilseniz ülkeniz yasalarını araştırın."
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr ""
+#~ "UYARI: Bu lisans belgesinin çevirisi gayriresmi nitelikte olup hukuki bir "
+#~ "belge olarak kullanılamaz."
 
 #~ msgid "command %s missing"
 #~ msgstr "%s komutu kayıp"

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-bg\n"
-"POT-Creation-Date: 2013-10-29 01:26+0100\n"
+"POT-Creation-Date: 2014-04-29 20:39+0200\n"
 "PO-Revision-Date: 2009-03-21 13:58+0200\n"
 "Last-Translator: Kolio Kolev <kolio_kolev@biotronica.net>\n"
 "Language-Team: Bulgarian <Mandriva User Group - Bulgaria <mandriva-"
@@ -23,11 +23,11 @@ msgstr ""
 "X-Generator: Lokalize 0.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: any.pm:284 any.pm:985 diskdrake/interactive.pm:645
+#: any.pm:284 any.pm:1003 diskdrake/interactive.pm:645
 #: diskdrake/interactive.pm:869 diskdrake/interactive.pm:929
 #: diskdrake/interactive.pm:1047 diskdrake/interactive.pm:1277
 #: diskdrake/interactive.pm:1335 do_pkgs.pm:242 do_pkgs.pm:287
-#: harddrake/sound.pm:270 interactive.pm:588 pkgs.pm:254 pkgs.pm:263
+#: harddrake/sound.pm:95 interactive.pm:588 pkgs.pm:254 pkgs.pm:263
 #: pkgs.pm:306
 #, c-format
 msgid "Please wait"
@@ -112,7 +112,7 @@ msgstr "Първия сектор на дисковия дял (PBS) с Mandriva
 msgid "On Floppy"
 msgstr "Запазване на дискета"
 
-#: any.pm:399 pkgs.pm:302 ugtk2.pm:526
+#: any.pm:399 pkgs.pm:302 ugtk2.pm:526 ugtk3.pm:516
 #, c-format
 msgid "Skip"
 msgstr "Пропусни"
@@ -177,7 +177,7 @@ msgstr "Включи Local APIC"
 msgid "Security"
 msgstr "Сигурност"
 
-#: any.pm:467 any.pm:920 any.pm:939 authentication.pm:249
+#: any.pm:467 any.pm:931 any.pm:950 authentication.pm:249
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
@@ -198,7 +198,7 @@ msgstr "Моля, опитайте отново"
 msgid "You cannot use a password with %s"
 msgstr "Вие не можете да използвате парола включваща %s"
 
-#: any.pm:476 any.pm:923 any.pm:941 authentication.pm:250
+#: any.pm:476 any.pm:934 any.pm:952 authentication.pm:250
 #, c-format
 msgid "Password (again)"
 msgstr "Парола (повтори)"
@@ -347,47 +347,47 @@ msgstr ""
 "Това са записите в менюто за начално зареждане.\n"
 "Можете да добавите още или да промените съществуващите."
 
-#: any.pm:879
+#: any.pm:890
 #, c-format
 msgid "access to X programs"
 msgstr "достъп до X програми"
 
-#: any.pm:880
+#: any.pm:891
 #, c-format
 msgid "access to rpm tools"
 msgstr "достъп до rpm инструменти"
 
-#: any.pm:881
+#: any.pm:892
 #, c-format
 msgid "allow \"su\""
 msgstr "позволява \"su\""
 
-#: any.pm:882
+#: any.pm:893
 #, c-format
 msgid "access to administrative files"
 msgstr "достъп до файлове за администриране"
 
-#: any.pm:883
+#: any.pm:894
 #, c-format
 msgid "access to network tools"
 msgstr "достъп до мрежови инструменти"
 
-#: any.pm:884
+#: any.pm:895
 #, c-format
 msgid "access to compilation tools"
 msgstr "достъп до инструменти за разработка"
 
-#: any.pm:890
+#: any.pm:901
 #, c-format
 msgid "(already added %s)"
 msgstr "(вече прибавих %s)"
 
-#: any.pm:896
+#: any.pm:907
 #, c-format
 msgid "Please give a user name"
 msgstr "Моля, задайте потребителско име"
 
-#: any.pm:897
+#: any.pm:908
 #, fuzzy, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
@@ -395,149 +395,149 @@ msgid ""
 msgstr ""
 "Потребителското име може да включва само малки букви, номера, `-' и `_'"
 
-#: any.pm:898
+#: any.pm:909
 #, c-format
 msgid "The user name is too long"
 msgstr "Това потребителско име е твърде дълго"
 
-#: any.pm:899
+#: any.pm:910
 #, c-format
 msgid "This user name has already been added"
 msgstr "Това потребителско име е вече добавено"
 
-#: any.pm:905 any.pm:943
+#: any.pm:916 any.pm:954
 #, c-format
 msgid "User ID"
 msgstr "Потребителски номер"
 
-#: any.pm:905 any.pm:944
+#: any.pm:916 any.pm:955
 #, c-format
 msgid "Group ID"
 msgstr "Номер на група"
 
-#: any.pm:906
+#: any.pm:917
 #, c-format
 msgid "%s must be a number"
 msgstr "%s трябва да е число"
 
-#: any.pm:907
+#: any.pm:918
 #, fuzzy, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s трябва да е над 500. "
 
-#: any.pm:911
+#: any.pm:922
 #, c-format
 msgid "User management"
 msgstr "Управление на потребител"
 
-#: any.pm:917
+#: any.pm:928
 #, c-format
 msgid "Enable guest account"
 msgstr ""
 
-#: any.pm:919 authentication.pm:236
+#: any.pm:930 authentication.pm:236
 #, fuzzy, c-format
 msgid "Set administrator (root) password"
 msgstr "Въведете парола за root"
 
-#: any.pm:925
+#: any.pm:936
 #, c-format
 msgid "Enter a user"
 msgstr "Въведете потребител"
 
-#: any.pm:927
+#: any.pm:938
 #, c-format
 msgid "Icon"
 msgstr "Икона"
 
-#: any.pm:930
+#: any.pm:941
 #, c-format
 msgid "Real name"
 msgstr "Истинско име"
 
-#: any.pm:937
+#: any.pm:948
 #, c-format
 msgid "Login name"
 msgstr "Потебителско име"
 
-#: any.pm:942
+#: any.pm:953
 #, c-format
 msgid "Shell"
 msgstr "Обвивка"
 
-#: any.pm:985
+#: any.pm:1003
 #, c-format
 msgid "Please wait, adding media..."
 msgstr "Моля, изчакайте. Обновява се източник..."
 
-#: any.pm:1030 security/l10n.pm:14
+#: any.pm:1036 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Автоматично влизане"
 
-#: any.pm:1031
+#: any.pm:1037
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "Мога да настроя компютъра ви за автоматично влизане в системата като някой "
 "потребител."
 
-#: any.pm:1032
+#: any.pm:1038
 #, c-format
 msgid "Use this feature"
 msgstr "Използвай тази характеристика"
 
-#: any.pm:1033
+#: any.pm:1039
 #, c-format
 msgid "Choose the default user:"
 msgstr "Изберете подразбиращ се потребител:"
 
-#: any.pm:1034
+#: any.pm:1040
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Изберете графична среда за стартиране:"
 
-#: any.pm:1045 any.pm:1059 any.pm:1133
+#: any.pm:1051 any.pm:1065 any.pm:1140
 #, c-format
 msgid "Release Notes"
 msgstr "Бележки към версията"
 
-#: any.pm:1066 any.pm:1423 interactive/gtk.pm:826
+#: any.pm:1072 any.pm:1430 interactive/gtk.pm:820
 #, c-format
 msgid "Close"
 msgstr "Затвори"
 
-#: any.pm:1119
+#: any.pm:1126
 #, c-format
 msgid "License agreement"
 msgstr "Лицензионен договор"
 
-#: any.pm:1121 diskdrake/dav.pm:26 mygtk2.pm:1229
+#: any.pm:1128 diskdrake/dav.pm:26 mygtk2.pm:1229 mygtk3.pm:1255
 #, c-format
 msgid "Quit"
 msgstr "Изход"
 
-#: any.pm:1128
+#: any.pm:1135
 #, c-format
 msgid "Do you accept this license ?"
 msgstr "Приемате ли този лиценз ?"
 
-#: any.pm:1129
+#: any.pm:1136
 #, c-format
 msgid "Accept"
 msgstr "Приеми"
 
-#: any.pm:1129
+#: any.pm:1136
 #, c-format
 msgid "Refuse"
 msgstr "Откажи"
 
-#: any.pm:1155 any.pm:1218
+#: any.pm:1162 any.pm:1225
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Моля, изберете език"
 
-#: any.pm:1183
+#: any.pm:1190
 #, fuzzy, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
@@ -548,82 +548,82 @@ msgstr ""
 "езиците, които искате да инсталирате. Те ще бъдат налични след\n"
 "като завърши инсталацията и рестартирате системата."
 
-#: any.pm:1186
+#: any.pm:1193
 #, fuzzy, c-format
 msgid "Multiple languages"
 msgstr "Многоезикова поддръжка"
 
-#: any.pm:1187
+#: any.pm:1194
 #, c-format
 msgid "Select Additional Languages"
 msgstr ""
 
-#: any.pm:1196 any.pm:1227
+#: any.pm:1203 any.pm:1234
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Съвместимост с преди използващи се (различни от UTF-8) кодировки"
 
-#: any.pm:1197
+#: any.pm:1204
 #, c-format
 msgid "All languages"
 msgstr "Всички езици"
 
-#: any.pm:1219
+#: any.pm:1226
 #, c-format
 msgid "Language choice"
 msgstr "Избор на език"
 
-#: any.pm:1273
+#: any.pm:1280
 #, c-format
 msgid "Country / Region"
 msgstr "Страна / Регион"
 
-#: any.pm:1274
+#: any.pm:1281
 #, c-format
 msgid "Please choose your country"
 msgstr "Моля, изберете вашата държава"
 
-#: any.pm:1276
+#: any.pm:1283
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Пълен списък на достръпните страни"
 
-#: any.pm:1277
+#: any.pm:1284
 #, c-format
 msgid "Other Countries"
 msgstr "Други държави"
 
-#: any.pm:1277 interactive.pm:489 interactive/gtk.pm:450
+#: any.pm:1284 interactive.pm:489 interactive/gtk.pm:444
 #, c-format
 msgid "Advanced"
 msgstr "Разширени настройки"
 
-#: any.pm:1283
+#: any.pm:1290
 #, c-format
 msgid "Input method:"
 msgstr " Метод за въвеждане:"
 
-#: any.pm:1286
+#: any.pm:1293
 #, c-format
 msgid "None"
 msgstr "Няма"
 
-#: any.pm:1368
+#: any.pm:1375
 #, c-format
 msgid "No sharing"
 msgstr "Без споделяне"
 
-#: any.pm:1368
+#: any.pm:1375
 #, c-format
 msgid "Allow all users"
 msgstr "Позволи на всички потребители"
 
-#: any.pm:1368
+#: any.pm:1375
 #, c-format
 msgid "Custom"
 msgstr "Позволи на отделни потребители"
 
-#: any.pm:1372
+#: any.pm:1379
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -640,7 +640,7 @@ msgstr ""
 "\"Позволи на отделни потребители\" разрешава споделянето само на "
 "потребителите, които са членове на групата \"fileshare\".\n"
 
-#: any.pm:1384
+#: any.pm:1391
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -650,7 +650,7 @@ msgstr ""
 "ограничено \n"
 " приложима за Mac OS X и Windows."
 
-#: any.pm:1387
+#: any.pm:1394
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -660,7 +660,7 @@ msgstr ""
 "повечето\n"
 " съвременни Linux системи."
 
-#: any.pm:1395
+#: any.pm:1402
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
@@ -668,12 +668,12 @@ msgstr ""
 "Вие може да споделяте файлове използвайки NFS или SMB протоколи. \n"
 "Моля, изберете кой от тях ще използвате."
 
-#: any.pm:1423
+#: any.pm:1430
 #, c-format
 msgid "Launch userdrake"
 msgstr "Стартира userdrake"
 
-#: any.pm:1425
+#: any.pm:1432
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -682,7 +682,7 @@ msgstr ""
 "За споделянето на потребителски директории използва група \"fileshare\".\n"
 "Може да използвате userdrake, за да добавите потребител към тази група."
 
-#: any.pm:1532
+#: any.pm:1539
 #, fuzzy, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
@@ -691,49 +691,49 @@ msgstr ""
 "За да се активират направените промени е необходимо да излезете от текущата "
 "сесия и отново да влезете"
 
-#: any.pm:1536
+#: any.pm:1543
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr ""
 "За да се активират направените промени е необходимо да излезете от текущата "
 "сесия и отново да влезете"
 
-#: any.pm:1571
+#: any.pm:1578
 #, c-format
 msgid "Timezone"
 msgstr "Часова зона"
 
-#: any.pm:1571
+#: any.pm:1578
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Коя е вашата времевата зона?"
 
-#: any.pm:1594 any.pm:1596
+#: any.pm:1601 any.pm:1603
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Дата, Часовник и Настройки на часова зона"
 
-#: any.pm:1597
+#: any.pm:1604
 #, c-format
 msgid "What is the best time?"
 msgstr "Кое е най-доброто време?"
 
-#: any.pm:1601
+#: any.pm:1608
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (хадруерният часовник е настроен по GMT)"
 
-#: any.pm:1602
+#: any.pm:1609
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (хадруерният часовник е настроен по локалното време)"
 
-#: any.pm:1604
+#: any.pm:1611
 #, c-format
 msgid "NTP Server"
 msgstr "NTP сървър"
 
-#: any.pm:1605
+#: any.pm:1612
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Автоматична синхронизация на времето (използва NTP)"
@@ -1105,17 +1105,17 @@ msgstr "Yaboot"
 msgid "SILO"
 msgstr "SILO"
 
-#: bootloader.pm:1293
+#: bootloader.pm:1277
 #, c-format
 msgid "not enough room in /boot"
 msgstr "няма достатъчно място в /boot"
 
-#: bootloader.pm:2080
+#: bootloader.pm:2064
 #, c-format
 msgid "You cannot install the bootloader on a %s partition\n"
 msgstr "Не можете да инсталирате програмата за начално зареждане на дяла %s\n"
 
-#: bootloader.pm:2249
+#: bootloader.pm:2233
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1124,7 +1124,7 @@ msgstr ""
 "Конфигурацията на програмата за начално зареждане трябва да се актуализира, "
 "защото дисковите дялове бяха преномерирани"
 
-#: bootloader.pm:2262
+#: bootloader.pm:2246
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1133,7 +1133,7 @@ msgstr ""
 "Програмата за начално зареждане не може да бъде коректно инсталирана. Трябва "
 "да стартирате режим rescue и да изберете  \"%s\""
 
-#: bootloader.pm:2263
+#: bootloader.pm:2247
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Преинсталиране на програмата за начално зареждане"
@@ -1276,18 +1276,18 @@ msgstr "Точка на монтиране"
 msgid "Options"
 msgstr "Опции"
 
-#: diskdrake/dav.pm:68 interactive.pm:388 interactive/gtk.pm:462
+#: diskdrake/dav.pm:68 interactive.pm:388 interactive/gtk.pm:456
 #, c-format
 msgid "Remove"
 msgstr "Премахване"
 
-#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:203 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:215 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Готово"
 
-#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:135 diskdrake/hd_gtk.pm:309
+#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:147 diskdrake/hd_gtk.pm:321
 #: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
 #: diskdrake/interactive.pm:456 diskdrake/interactive.pm:527
 #: diskdrake/interactive.pm:545 diskdrake/interactive.pm:550
@@ -1313,14 +1313,13 @@ msgstr "Моля въведете WebDAV сървър URL"
 msgid "The URL must begin with http:// or https://"
 msgstr "URL трябва да започва с http:// или https://"
 
-#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:116 diskdrake/hd_gtk.pm:434
-#: diskdrake/interactive.pm:306 diskdrake/interactive.pm:391
-#: diskdrake/interactive.pm:597 diskdrake/interactive.pm:815
-#: diskdrake/interactive.pm:880 diskdrake/interactive.pm:1045
-#: diskdrake/interactive.pm:1087 diskdrake/interactive.pm:1088
-#: diskdrake/interactive.pm:1320 diskdrake/interactive.pm:1358
-#: diskdrake/interactive.pm:1509 do_pkgs.pm:19 do_pkgs.pm:39 do_pkgs.pm:57
-#: do_pkgs.pm:78 harddrake/sound.pm:399
+#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:454 diskdrake/interactive.pm:306
+#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:597
+#: diskdrake/interactive.pm:815 diskdrake/interactive.pm:880
+#: diskdrake/interactive.pm:1045 diskdrake/interactive.pm:1087
+#: diskdrake/interactive.pm:1088 diskdrake/interactive.pm:1320
+#: diskdrake/interactive.pm:1358 diskdrake/interactive.pm:1509 do_pkgs.pm:19
+#: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:78
 #, c-format
 msgid "Warning"
 msgstr "Предупреждение"
@@ -1346,46 +1345,52 @@ msgstr "Точка на монтиране: "
 msgid "Options: %s"
 msgstr "Опции: %s"
 
-#: diskdrake/hd_gtk.pm:61 diskdrake/interactive.pm:301
+#: diskdrake/hd_gtk.pm:63 diskdrake/interactive.pm:301
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:108
-#: fs/partitioning_wizard.pm:61 fs/partitioning_wizard.pm:244
-#: fs/partitioning_wizard.pm:252 fs/partitioning_wizard.pm:291
-#: fs/partitioning_wizard.pm:439 fs/partitioning_wizard.pm:502
-#: fs/partitioning_wizard.pm:585 fs/partitioning_wizard.pm:588
+#: fs/partitioning_wizard.pm:59 fs/partitioning_wizard.pm:242
+#: fs/partitioning_wizard.pm:250 fs/partitioning_wizard.pm:289
+#: fs/partitioning_wizard.pm:435 fs/partitioning_wizard.pm:498
+#: fs/partitioning_wizard.pm:581 fs/partitioning_wizard.pm:584
 #, c-format
 msgid "Partitioning"
 msgstr "Управление на дискови дялове"
 
-#: diskdrake/hd_gtk.pm:73
+#: diskdrake/hd_gtk.pm:76
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr ""
 "Моля, посочете дисков дял, изберете вида файлова система\n"
 "и после изберете действие"
 
-#: diskdrake/hd_gtk.pm:116
-#, fuzzy, c-format
-msgid "Please make a backup of your data first."
+#: diskdrake/hd_gtk.pm:126 diskdrake/interactive.pm:1195
+#: diskdrake/interactive.pm:1205 diskdrake/interactive.pm:1258
+#, c-format
+msgid "Read carefully"
+msgstr "Прочетете внимателно"
+
+#: diskdrake/hd_gtk.pm:126
+#, c-format
+msgid "Please make a backup of your data first"
 msgstr "Първо създайте архивно копие на своите данни"
 
-#: diskdrake/hd_gtk.pm:117 diskdrake/interactive.pm:240
+#: diskdrake/hd_gtk.pm:127 diskdrake/interactive.pm:240
 #, c-format
 msgid "Exit"
 msgstr "Изход"
 
-#: diskdrake/hd_gtk.pm:117
+#: diskdrake/hd_gtk.pm:127
 #, c-format
 msgid "Continue"
 msgstr "Продължи"
 
-#: diskdrake/hd_gtk.pm:198 fs/partitioning_wizard.pm:561 interactive.pm:654
-#: interactive/gtk.pm:818 interactive/gtk.pm:836 interactive/gtk.pm:867
-#: ugtk2.pm:936
+#: diskdrake/hd_gtk.pm:210 fs/partitioning_wizard.pm:557 interactive.pm:654
+#: interactive/gtk.pm:812 interactive/gtk.pm:830 interactive/gtk.pm:862
+#: ugtk2.pm:936 ugtk3.pm:917
 #, c-format
 msgid "Help"
 msgstr "Помощ"
 
-#: diskdrake/hd_gtk.pm:244
+#: diskdrake/hd_gtk.pm:256
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1396,88 +1401,88 @@ msgstr ""
 "Добре е първо да намалите големината на този дял\n"
 "(изберете дяла и след това изберете \"Преоразмери\")"
 
-#: diskdrake/hd_gtk.pm:246
+#: diskdrake/hd_gtk.pm:258
 #, c-format
 msgid "Please click on a partition"
 msgstr "Моля, изберете дисков дял"
 
-#: diskdrake/hd_gtk.pm:260 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:272 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Подробности"
 
-#: diskdrake/hd_gtk.pm:309
+#: diskdrake/hd_gtk.pm:321
 #, c-format
 msgid "No hard disk drives found"
 msgstr "Не е намерен твърд диск"
 
-#: diskdrake/hd_gtk.pm:340
+#: diskdrake/hd_gtk.pm:358
 #, c-format
 msgid "Unknown"
 msgstr "Неизвестен"
 
-#: diskdrake/hd_gtk.pm:405
+#: diskdrake/hd_gtk.pm:425
 #, fuzzy, c-format
 msgid "Ext4"
 msgstr "Изход"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "Swap"
 msgstr "Swap"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:406 fs/partitioning_wizard.pm:410 services.pm:192
+#: diskdrake/hd_gtk.pm:426 fs/partitioning_wizard.pm:406 services.pm:194
 #, c-format
 msgid "Other"
 msgstr "Друга"
 
-#: diskdrake/hd_gtk.pm:406 diskdrake/interactive.pm:1397
-#: fs/partitioning_wizard.pm:410
+#: diskdrake/hd_gtk.pm:426 diskdrake/interactive.pm:1397
+#: fs/partitioning_wizard.pm:406
 #, c-format
 msgid "Empty"
 msgstr "Празен"
 
-#: diskdrake/hd_gtk.pm:413
+#: diskdrake/hd_gtk.pm:433
 #, c-format
 msgid "Filesystem types:"
 msgstr "Видове файлови системи:"
 
-#: diskdrake/hd_gtk.pm:434
+#: diskdrake/hd_gtk.pm:454
 #, c-format
 msgid "This partition is already empty"
 msgstr "Този дисков дял е вече празен"
 
-#: diskdrake/hd_gtk.pm:443
+#: diskdrake/hd_gtk.pm:463
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Първо използвайте 'Демонтирай'"
 
-#: diskdrake/hd_gtk.pm:443
+#: diskdrake/hd_gtk.pm:463
 #, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Вместо това използвайте ``%s'' (в експертен режим)"
 
-#: diskdrake/hd_gtk.pm:443 diskdrake/interactive.pm:409
+#: diskdrake/hd_gtk.pm:463 diskdrake/interactive.pm:409
 #: diskdrake/interactive.pm:639 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
@@ -1501,7 +1506,7 @@ msgid "More"
 msgstr "Още"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
-#: diskdrake/interactive.pm:1304 mygtk2.pm:1228
+#: diskdrake/interactive.pm:1304 mygtk2.pm:1228 mygtk3.pm:1254
 #, c-format
 msgid "Confirmation"
 msgstr "Потвърди"
@@ -1526,7 +1531,7 @@ msgstr "Изход, без да запазване на таблицата на 
 msgid "Do you want to save the /etc/fstab modifications?"
 msgstr "Искате ли да запазите направените промени в /etc/fstab"
 
-#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:291
+#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:289
 #, c-format
 msgid "You need to reboot for the partition table modifications to take effect"
 msgstr ""
@@ -1818,7 +1823,7 @@ msgid "Where do you want to mount %s?"
 msgstr "Къде искате да монтирате устройство %s ?"
 
 #: diskdrake/interactive.pm:773 diskdrake/interactive.pm:869
-#: fs/partitioning_wizard.pm:137 fs/partitioning_wizard.pm:213
+#: fs/partitioning_wizard.pm:135 fs/partitioning_wizard.pm:211
 #, c-format
 msgid "Resizing"
 msgstr "Промяна на големината"
@@ -1865,7 +1870,7 @@ msgstr "Минимален размер: %s МБ"
 msgid "Maximum size: %s MB"
 msgstr "Максимален размер: %s МБ "
 
-#: diskdrake/interactive.pm:880 fs/partitioning_wizard.pm:221
+#: diskdrake/interactive.pm:880 fs/partitioning_wizard.pm:219
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
@@ -1994,12 +1999,6 @@ msgstr "ниво"
 #, c-format
 msgid "chunk size in KiB"
 msgstr "размер в КБ"
-
-#: diskdrake/interactive.pm:1195 diskdrake/interactive.pm:1205
-#: diskdrake/interactive.pm:1258
-#, c-format
-msgid "Read carefully"
-msgstr "Прочетете внимателно"
 
 #: diskdrake/interactive.pm:1196
 #, c-format
@@ -2318,7 +2317,9 @@ msgstr "Промяни типа"
 #: diskdrake/smbnfs_gtk.pm:81 interactive.pm:130 interactive.pm:551
 #: interactive/curses.pm:267 interactive/http.pm:104 interactive/http.pm:160
 #: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:846
-#: mygtk2.pm:1229 ugtk2.pm:415 ugtk2.pm:517 ugtk2.pm:526 ugtk2.pm:812
+#: mygtk2.pm:1229 mygtk3.pm:880 mygtk3.pm:1255 ugtk2.pm:415 ugtk2.pm:517
+#: ugtk2.pm:526 ugtk2.pm:812 ugtk3.pm:417 ugtk3.pm:507 ugtk3.pm:516
+#: ugtk3.pm:793
 #, c-format
 msgid "Cancel"
 msgstr "Отказ"
@@ -2413,7 +2414,7 @@ msgstr ""
 "създадени нови файлови системи. Моля проверете твърдия си диск си за "
 "причината за този проблем."
 
-#: fs/any.pm:75 fs/partitioning_wizard.pm:70
+#: fs/any.pm:75 fs/partitioning_wizard.pm:68
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Трябва да имате FAT дял монтиран в /boot/efi"
@@ -2620,7 +2621,7 @@ msgstr ""
 "Няма достатъчно в swap дяла за приключване на инсталацията, моля, добавете "
 "още"
 
-#: fs/partitioning_wizard.pm:61
+#: fs/partitioning_wizard.pm:59
 #, c-format
 msgid ""
 "You must have a root partition.\n"
@@ -2631,7 +2632,7 @@ msgstr ""
 "Затова създайте дял (или изберете някой съществуващ).\n"
 "После натиснете бутона ``Място на монтиране'' и задайте `/'"
 
-#: fs/partitioning_wizard.pm:67
+#: fs/partitioning_wizard.pm:65
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2642,42 +2643,42 @@ msgstr ""
 "\n"
 "Да продължа ли все пак ?"
 
-#: fs/partitioning_wizard.pm:101
+#: fs/partitioning_wizard.pm:99
 #, c-format
 msgid "Use free space"
 msgstr "Използвай свободното място"
 
-#: fs/partitioning_wizard.pm:103
+#: fs/partitioning_wizard.pm:101
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Няма достатъчно място за създаване на нов дял"
 
-#: fs/partitioning_wizard.pm:111
+#: fs/partitioning_wizard.pm:109
 #, c-format
 msgid "Use existing partitions"
 msgstr "Изпозване на съществуващ дял"
 
-#: fs/partitioning_wizard.pm:113
+#: fs/partitioning_wizard.pm:111
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "Няма дял, който мога да използвам"
 
-#: fs/partitioning_wizard.pm:137
+#: fs/partitioning_wizard.pm:135
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Изчислява свободното място на Microsoft Windows® дял"
 
-#: fs/partitioning_wizard.pm:173
+#: fs/partitioning_wizard.pm:171
 #, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "Използвай свободното място от дяла с Microsoft Windows® "
 
-#: fs/partitioning_wizard.pm:177
+#: fs/partitioning_wizard.pm:175
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Кой дял желаете да промените?"
 
-#: fs/partitioning_wizard.pm:180
+#: fs/partitioning_wizard.pm:178
 #, fuzzy, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2687,7 +2688,7 @@ msgstr ""
 "Вашият Microsoft Windows® дял е много фрагментиран, моля първо стартирайте "
 "''defrag''"
 
-#: fs/partitioning_wizard.pm:188
+#: fs/partitioning_wizard.pm:186
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2720,75 +2721,75 @@ msgstr ""
 "Когато сте сигурни, натиснете %s."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:197 fs/partitioning_wizard.pm:565
-#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519
+#: fs/partitioning_wizard.pm:195 fs/partitioning_wizard.pm:561
+#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:509
 #, c-format
 msgid "Next"
 msgstr "Следващ"
 
-#: fs/partitioning_wizard.pm:203
+#: fs/partitioning_wizard.pm:201
 #, c-format
 msgid "Partitionning"
 msgstr "Управление на дискови дялове"
 
-#: fs/partitioning_wizard.pm:203
+#: fs/partitioning_wizard.pm:201
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr "Колко искате да оставите за windows? дял %s?"
 
-#: fs/partitioning_wizard.pm:204
+#: fs/partitioning_wizard.pm:202
 #, c-format
 msgid "Size"
 msgstr "Размер"
 
-#: fs/partitioning_wizard.pm:213
+#: fs/partitioning_wizard.pm:211
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Изчислявам границите на Microsoft Windows® файловата система"
 
-#: fs/partitioning_wizard.pm:218
+#: fs/partitioning_wizard.pm:216
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "Неуспешно преразделяне на FAT: %s"
 
-#: fs/partitioning_wizard.pm:234
+#: fs/partitioning_wizard.pm:232
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "Няма FAT дялове за смяна на големината (или няма достаъчно място)"
 
-#: fs/partitioning_wizard.pm:239
+#: fs/partitioning_wizard.pm:237
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Премахни Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:239
+#: fs/partitioning_wizard.pm:237
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "Изтрий и използвай целия диск"
 
-#: fs/partitioning_wizard.pm:243
+#: fs/partitioning_wizard.pm:241
 #, fuzzy, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
 msgstr "имате повече от един твърди дискове, кой да използвам за инсталацията?"
 
-#: fs/partitioning_wizard.pm:251 fsedit.pm:634
+#: fs/partitioning_wizard.pm:249 fsedit.pm:634
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "ВСИЧКИ съществуващи дялове и данните върху тях на %s ще бъдат загубени"
 
-#: fs/partitioning_wizard.pm:261
+#: fs/partitioning_wizard.pm:259
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Клиентско разделяне на диска"
 
-#: fs/partitioning_wizard.pm:267
+#: fs/partitioning_wizard.pm:265
 #, c-format
 msgid "Use fdisk"
 msgstr "Използвай fdisk"
 
-#: fs/partitioning_wizard.pm:270
+#: fs/partitioning_wizard.pm:268
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2797,27 +2798,27 @@ msgstr ""
 "Сега можете да разделите %s.\n"
 "Когато сте готови, не забравяйте да запишете използвайки `w'"
 
-#: fs/partitioning_wizard.pm:409
+#: fs/partitioning_wizard.pm:405
 #, fuzzy, c-format
 msgid "Ext2/3/4"
 msgstr "Ext3"
 
-#: fs/partitioning_wizard.pm:439 fs/partitioning_wizard.pm:585
+#: fs/partitioning_wizard.pm:435 fs/partitioning_wizard.pm:581
 #, c-format
 msgid "I cannot find any room for installing"
 msgstr "Не мога да намеря никакво място за инсталация"
 
-#: fs/partitioning_wizard.pm:448 fs/partitioning_wizard.pm:592
+#: fs/partitioning_wizard.pm:444 fs/partitioning_wizard.pm:588
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "Помощникът за разделине на дялове на DrakX намери следните решения:"
 
-#: fs/partitioning_wizard.pm:518
+#: fs/partitioning_wizard.pm:514
 #, c-format
 msgid "Here is the content of your disk drive "
 msgstr ""
 
-#: fs/partitioning_wizard.pm:602
+#: fs/partitioning_wizard.pm:599
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Неуспешно разделяне на: %s"
@@ -3226,37 +3227,47 @@ msgstr "Неизвестни/Други"
 msgid "cpu # "
 msgstr "cpu # "
 
-#: harddrake/sound.pm:270
+#: harddrake/sound.pm:95
 #, c-format
 msgid "Please Wait... Applying the configuration"
 msgstr "Моля, почакайте ... Прилагане на настройките"
 
-#: harddrake/sound.pm:331
+#: harddrake/sound.pm:123
+#, c-format
+msgid "No known driver"
+msgstr "Няма известен драйвер"
+
+#: harddrake/sound.pm:124
+#, c-format
+msgid "There's no known driver for your sound card (%s)"
+msgstr "Няма драйвер за вашата звукова карта (%s)"
+
+#: harddrake/sound.pm:156
 #, c-format
 msgid "Enable PulseAudio"
 msgstr "Позволи PulseAudio"
 
-#: harddrake/sound.pm:336
+#: harddrake/sound.pm:161
 #, c-format
 msgid "Use Glitch-Free mode"
 msgstr ""
 
-#: harddrake/sound.pm:342
+#: harddrake/sound.pm:167
 #, c-format
 msgid "Reset sound mixer to default values"
 msgstr "Задай на звуковият пулт стойностите по подразбиране"
 
-#: harddrake/sound.pm:347
+#: harddrake/sound.pm:172
 #, c-format
 msgid "Troubleshooting"
 msgstr ""
 
-#: harddrake/sound.pm:354
+#: harddrake/sound.pm:179
 #, c-format
 msgid "No alternative driver"
 msgstr "Няма алтернативен драйвер"
 
-#: harddrake/sound.pm:355
+#: harddrake/sound.pm:180
 #, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
@@ -3265,24 +3276,15 @@ msgstr ""
 "Няма известнен  OSS/ALSA алтернативен драйвер за вашата звукова карта (%s) "
 "която в момента използва \"%s\""
 
-#: harddrake/sound.pm:362
+#: harddrake/sound.pm:187
 #, c-format
 msgid "Sound configuration"
 msgstr "Настройка за звук"
 
-#: harddrake/sound.pm:364
-#, c-format
-msgid ""
-"Here you can select an alternative driver (either OSS or ALSA) for your "
-"sound card (%s)."
-msgstr ""
-"Тук може да изберете алтернативен драйвер (OSS или ALSA) за вашата звукова "
-"карта (%s)."
-
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
-#: harddrake/sound.pm:369
+#: harddrake/sound.pm:193
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -3295,7 +3297,7 @@ msgstr ""
 "Вашата карта в момента използва %s\"%s\" драйвер (подразбиращ се драйвер за "
 "картата ви е \"%s\")"
 
-#: harddrake/sound.pm:371
+#: harddrake/sound.pm:195
 #, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
@@ -3315,52 +3317,18 @@ msgid ""
 "the ALSA library.\n"
 msgstr ""
 
-#: harddrake/sound.pm:385 harddrake/sound.pm:487
+#: harddrake/sound.pm:210 harddrake/sound.pm:292
 #, c-format
 msgid "Driver:"
 msgstr "Драйвер: "
 
-#: harddrake/sound.pm:399
-#, c-format
-msgid ""
-"The old \"%s\" driver is blacklisted.\n"
-"\n"
-"It has been reported to oops the kernel on unloading.\n"
-"\n"
-"The new \"%s\" driver will only be used on next bootstrap."
-msgstr ""
-
-#: harddrake/sound.pm:407
-#, c-format
-msgid "No open source driver"
-msgstr ""
-
-#: harddrake/sound.pm:408
-#, c-format
-msgid ""
-"There's no free driver for your sound card (%s), but there's a proprietary "
-"driver at \"%s\"."
-msgstr ""
-"Няма свободен драйвер за вашата звукова карта (%s), но има собствени драйвер "
-"на \"%s\"."
-
-#: harddrake/sound.pm:411
-#, c-format
-msgid "No known driver"
-msgstr "Няма известен драйвер"
-
-#: harddrake/sound.pm:412
-#, c-format
-msgid "There's no known driver for your sound card (%s)"
-msgstr "Няма драйвер за вашата звукова карта (%s)"
-
-#: harddrake/sound.pm:427
+#: harddrake/sound.pm:232
 #, c-format
 msgid "Sound troubleshooting"
 msgstr "Затруднения при звук"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:430
+#: harddrake/sound.pm:235
 #, c-format
 msgid ""
 "Below are some basic tips to help debug audio problems, but for accurate and "
@@ -3419,18 +3387,18 @@ msgid ""
 "PulseAudio)\n"
 msgstr ""
 
-#: harddrake/sound.pm:476
+#: harddrake/sound.pm:281
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Ръчно задаване на драйвер"
 
-#: harddrake/sound.pm:479
+#: harddrake/sound.pm:284
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "Избор на произволен драйвер"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:482
+#: harddrake/sound.pm:287
 #, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -3486,17 +3454,20 @@ msgstr "Тип на тунер:"
 #: interactive.pm:129 interactive.pm:550 interactive/curses.pm:270
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
 #: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:846
-#: ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
+#: mygtk3.pm:880 ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
+#: ugtk3.pm:423 ugtk3.pm:509 ugtk3.pm:793 ugtk3.pm:816
 #, c-format
 msgid "Ok"
 msgstr "Готово"
 
-#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:157
+#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:792
+#: wizards.pm:157
 #, c-format
 msgid "Yes"
 msgstr "Да"
 
-#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:157
+#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:792
+#: wizards.pm:157
 #, c-format
 msgid "No"
 msgstr "Не"
@@ -3506,47 +3477,47 @@ msgstr "Не"
 msgid "Choose a file"
 msgstr "Изберете файл"
 
-#: interactive.pm:388 interactive/gtk.pm:462
+#: interactive.pm:388 interactive/gtk.pm:456
 #, c-format
 msgid "Add"
 msgstr "Добавяне"
 
-#: interactive.pm:388 interactive/gtk.pm:462
+#: interactive.pm:388 interactive/gtk.pm:456
 #, c-format
 msgid "Modify"
 msgstr "Промяна"
 
-#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519
+#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:509
 #, c-format
 msgid "Finish"
 msgstr "Край"
 
-#: interactive.pm:551 interactive/curses.pm:267 ugtk2.pm:517
+#: interactive.pm:551 interactive/curses.pm:267 ugtk2.pm:517 ugtk3.pm:507
 #, c-format
 msgid "Previous"
 msgstr "Предишен"
 
-#: interactive/curses.pm:576 ugtk2.pm:872
+#: interactive/curses.pm:576 ugtk2.pm:872 ugtk3.pm:853
 #, c-format
 msgid "No file chosen"
 msgstr "Не е избран файл"
 
-#: interactive/curses.pm:580 ugtk2.pm:876
+#: interactive/curses.pm:580 ugtk2.pm:876 ugtk3.pm:857
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "Вие избрахте директория, а не файл"
 
-#: interactive/curses.pm:582 ugtk2.pm:878
+#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:859
 #, c-format
 msgid "No such directory"
 msgstr "Няма такава директория"
 
-#: interactive/curses.pm:582 ugtk2.pm:878
+#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:859
 #, c-format
 msgid "No such file"
 msgstr "Няма такъв файл"
 
-#: interactive/gtk.pm:601
+#: interactive/gtk.pm:596
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr "Внимание, Caps Lock е натиснат"
@@ -3635,7 +3606,7 @@ msgstr "default:LTR"
 msgid "Andorra"
 msgstr "Андора"
 
-#: lang.pm:221 timezone.pm:227
+#: lang.pm:221 timezone.pm:235
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Обединени Арабски Емирства"
@@ -3680,7 +3651,7 @@ msgstr "Ангола"
 msgid "Antarctica"
 msgstr "Антарктика"
 
-#: lang.pm:230 timezone.pm:272
+#: lang.pm:230 timezone.pm:280
 #, c-format
 msgid "Argentina"
 msgstr "Аржентина"
@@ -3690,12 +3661,12 @@ msgstr "Аржентина"
 msgid "American Samoa"
 msgstr "Американска Самоа"
 
-#: lang.pm:232 mirror.pm:12 timezone.pm:230
+#: lang.pm:232 mirror.pm:12 timezone.pm:238
 #, c-format
 msgid "Austria"
 msgstr "Австрия"
 
-#: lang.pm:233 mirror.pm:11 timezone.pm:268
+#: lang.pm:233 mirror.pm:11 timezone.pm:276
 #, c-format
 msgid "Australia"
 msgstr "Австралия"
@@ -3720,12 +3691,12 @@ msgstr "Босна и Херцеговина"
 msgid "Barbados"
 msgstr "Барбадос"
 
-#: lang.pm:238 timezone.pm:212
+#: lang.pm:238 timezone.pm:220
 #, c-format
 msgid "Bangladesh"
 msgstr "Бангладеш"
 
-#: lang.pm:239 mirror.pm:13 timezone.pm:232
+#: lang.pm:239 mirror.pm:13 timezone.pm:240
 #, c-format
 msgid "Belgium"
 msgstr "Белгия"
@@ -3735,7 +3706,7 @@ msgstr "Белгия"
 msgid "Burkina Faso"
 msgstr "Буркина Фасо"
 
-#: lang.pm:241 timezone.pm:233
+#: lang.pm:241 timezone.pm:241
 #, c-format
 msgid "Bulgaria"
 msgstr "България"
@@ -3770,7 +3741,7 @@ msgstr "Бруней"
 msgid "Bolivia"
 msgstr "Боливия"
 
-#: lang.pm:248 mirror.pm:14 timezone.pm:273
+#: lang.pm:248 mirror.pm:14 timezone.pm:281
 #, c-format
 msgid "Brazil"
 msgstr "Бразилия"
@@ -3795,7 +3766,7 @@ msgstr "Остров Бувет"
 msgid "Botswana"
 msgstr "Ботсвана"
 
-#: lang.pm:253 timezone.pm:231
+#: lang.pm:253 timezone.pm:239
 #, c-format
 msgid "Belarus"
 msgstr "Беларус"
@@ -3805,7 +3776,7 @@ msgstr "Беларус"
 msgid "Belize"
 msgstr "Белиз"
 
-#: lang.pm:255 mirror.pm:15 timezone.pm:262
+#: lang.pm:255 mirror.pm:15 timezone.pm:270
 #, c-format
 msgid "Canada"
 msgstr "Канада"
@@ -3830,7 +3801,7 @@ msgstr "Централноафриканска Република"
 msgid "Congo (Brazzaville)"
 msgstr "Конго (Бразивил)"
 
-#: lang.pm:260 mirror.pm:39 timezone.pm:256
+#: lang.pm:260 mirror.pm:39 timezone.pm:264
 #, c-format
 msgid "Switzerland"
 msgstr "Швейцария"
@@ -3845,7 +3816,7 @@ msgstr "Кот д'ивоар"
 msgid "Cook Islands"
 msgstr "Острови Кук"
 
-#: lang.pm:263 timezone.pm:274
+#: lang.pm:263 timezone.pm:282
 #, c-format
 msgid "Chile"
 msgstr "Чили"
@@ -3855,7 +3826,7 @@ msgstr "Чили"
 msgid "Cameroon"
 msgstr "Камерун"
 
-#: lang.pm:265 timezone.pm:213
+#: lang.pm:265 timezone.pm:221
 #, c-format
 msgid "China"
 msgstr "Китай"
@@ -3895,12 +3866,12 @@ msgstr "Коледни Острови"
 msgid "Cyprus"
 msgstr "Кипър"
 
-#: lang.pm:273 mirror.pm:17 timezone.pm:234
+#: lang.pm:273 mirror.pm:17 timezone.pm:242
 #, c-format
 msgid "Czech Republic"
 msgstr "Чешка Република"
 
-#: lang.pm:274 mirror.pm:22 timezone.pm:239
+#: lang.pm:274 mirror.pm:22 timezone.pm:247
 #, c-format
 msgid "Germany"
 msgstr "Германия"
@@ -3910,7 +3881,7 @@ msgstr "Германия"
 msgid "Djibouti"
 msgstr "Джибути"
 
-#: lang.pm:276 mirror.pm:18 timezone.pm:235
+#: lang.pm:276 mirror.pm:18 timezone.pm:243
 #, c-format
 msgid "Denmark"
 msgstr "Дания"
@@ -3935,7 +3906,7 @@ msgstr "Алжир"
 msgid "Ecuador"
 msgstr "Еквадор"
 
-#: lang.pm:281 mirror.pm:19 timezone.pm:236
+#: lang.pm:281 mirror.pm:19 timezone.pm:244
 #, c-format
 msgid "Estonia"
 msgstr "Естония"
@@ -3955,7 +3926,7 @@ msgstr "Западна Сахара"
 msgid "Eritrea"
 msgstr "Еритрея"
 
-#: lang.pm:285 mirror.pm:37 timezone.pm:254
+#: lang.pm:285 mirror.pm:37 timezone.pm:262
 #, c-format
 msgid "Spain"
 msgstr "Испания"
@@ -3965,7 +3936,7 @@ msgstr "Испания"
 msgid "Ethiopia"
 msgstr "Етиопия"
 
-#: lang.pm:287 mirror.pm:20 timezone.pm:237
+#: lang.pm:287 mirror.pm:20 timezone.pm:245
 #, c-format
 msgid "Finland"
 msgstr "Финландия"
@@ -3990,7 +3961,7 @@ msgstr "Микронезия"
 msgid "Faroe Islands"
 msgstr "Острови Фаро"
 
-#: lang.pm:292 mirror.pm:21 timezone.pm:238
+#: lang.pm:292 mirror.pm:21 timezone.pm:246
 #, c-format
 msgid "France"
 msgstr "Франция"
@@ -4000,7 +3971,7 @@ msgstr "Франция"
 msgid "Gabon"
 msgstr "Габон"
 
-#: lang.pm:294 timezone.pm:258
+#: lang.pm:294 timezone.pm:266
 #, c-format
 msgid "United Kingdom"
 msgstr "Англия"
@@ -4055,7 +4026,7 @@ msgstr "Гваделупа"
 msgid "Equatorial Guinea"
 msgstr "Екваториална Гвинея"
 
-#: lang.pm:305 mirror.pm:23 timezone.pm:240
+#: lang.pm:305 mirror.pm:23 timezone.pm:248
 #, c-format
 msgid "Greece"
 msgstr "Гърция"
@@ -4065,7 +4036,7 @@ msgstr "Гърция"
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Южни Сандвичеви Острови и Южна Джорджия"
 
-#: lang.pm:307 timezone.pm:263
+#: lang.pm:307 timezone.pm:271
 #, c-format
 msgid "Guatemala"
 msgstr "Гватемала"
@@ -4110,27 +4081,27 @@ msgstr "Хърватия"
 msgid "Haiti"
 msgstr "Хаити"
 
-#: lang.pm:316 mirror.pm:24 timezone.pm:241
+#: lang.pm:316 mirror.pm:24 timezone.pm:249
 #, c-format
 msgid "Hungary"
 msgstr "Унгария"
 
-#: lang.pm:317 timezone.pm:216
+#: lang.pm:317 timezone.pm:224
 #, c-format
 msgid "Indonesia"
 msgstr "Индонезия"
 
-#: lang.pm:318 mirror.pm:25 timezone.pm:242
+#: lang.pm:318 mirror.pm:25 timezone.pm:250
 #, c-format
 msgid "Ireland"
 msgstr "Ирландия"
 
-#: lang.pm:319 mirror.pm:26 timezone.pm:218
+#: lang.pm:319 mirror.pm:26 timezone.pm:226
 #, c-format
 msgid "Israel"
 msgstr "Израел"
 
-#: lang.pm:320 timezone.pm:215
+#: lang.pm:320 timezone.pm:223
 #, c-format
 msgid "India"
 msgstr "Индия"
@@ -4145,7 +4116,7 @@ msgstr "Английски територии в Индийския океан"
 msgid "Iraq"
 msgstr "Ирак"
 
-#: lang.pm:323 timezone.pm:217
+#: lang.pm:323 timezone.pm:225
 #, c-format
 msgid "Iran"
 msgstr "Иран"
@@ -4155,7 +4126,7 @@ msgstr "Иран"
 msgid "Iceland"
 msgstr "Исландия"
 
-#: lang.pm:325 mirror.pm:27 timezone.pm:243
+#: lang.pm:325 mirror.pm:27 timezone.pm:251
 #, c-format
 msgid "Italy"
 msgstr "Италия"
@@ -4170,7 +4141,7 @@ msgstr "Ямайка"
 msgid "Jordan"
 msgstr "Йордания"
 
-#: lang.pm:328 mirror.pm:28 timezone.pm:219
+#: lang.pm:328 mirror.pm:28 timezone.pm:227
 #, c-format
 msgid "Japan"
 msgstr "Япония"
@@ -4210,7 +4181,7 @@ msgstr "Свети Китс и Невис"
 msgid "Korea (North)"
 msgstr "Корея (Северна)"
 
-#: lang.pm:336 timezone.pm:220
+#: lang.pm:336 timezone.pm:228
 #, c-format
 msgid "Korea"
 msgstr "Корея"
@@ -4265,12 +4236,12 @@ msgstr "Либерия"
 msgid "Lesotho"
 msgstr "Лесото"
 
-#: lang.pm:347 timezone.pm:244
+#: lang.pm:347 timezone.pm:252
 #, c-format
 msgid "Lithuania"
 msgstr "Литва"
 
-#: lang.pm:348 timezone.pm:245
+#: lang.pm:348 timezone.pm:253
 #, c-format
 msgid "Luxembourg"
 msgstr "Люксембург"
@@ -4370,12 +4341,12 @@ msgstr "Малдиви"
 msgid "Malawi"
 msgstr "Малави"
 
-#: lang.pm:368 timezone.pm:264
+#: lang.pm:368 timezone.pm:272
 #, c-format
 msgid "Mexico"
 msgstr "Мексико"
 
-#: lang.pm:369 timezone.pm:221
+#: lang.pm:369 timezone.pm:229
 #, c-format
 msgid "Malaysia"
 msgstr "Малайзия"
@@ -4415,12 +4386,12 @@ msgstr "Нигерия"
 msgid "Nicaragua"
 msgstr "Никарагуа"
 
-#: lang.pm:377 mirror.pm:29 timezone.pm:246
+#: lang.pm:377 mirror.pm:29 timezone.pm:254
 #, c-format
 msgid "Netherlands"
 msgstr "Холандия"
 
-#: lang.pm:378 mirror.pm:31 timezone.pm:247
+#: lang.pm:378 mirror.pm:31 timezone.pm:255
 #, c-format
 msgid "Norway"
 msgstr "Норвегия"
@@ -4440,7 +4411,7 @@ msgstr "Науру"
 msgid "Niue"
 msgstr "Нию"
 
-#: lang.pm:382 mirror.pm:30 timezone.pm:269
+#: lang.pm:382 mirror.pm:30 timezone.pm:277
 #, c-format
 msgid "New Zealand"
 msgstr "Нова Зеландия"
@@ -4470,7 +4441,7 @@ msgstr "Френска Полинезия"
 msgid "Papua New Guinea"
 msgstr "Папуа Нова Гвинея"
 
-#: lang.pm:388 timezone.pm:222
+#: lang.pm:388 timezone.pm:230
 #, c-format
 msgid "Philippines"
 msgstr "Филипини"
@@ -4480,7 +4451,7 @@ msgstr "Филипини"
 msgid "Pakistan"
 msgstr "Пакистан"
 
-#: lang.pm:390 mirror.pm:32 timezone.pm:248
+#: lang.pm:390 mirror.pm:32 timezone.pm:256
 #, c-format
 msgid "Poland"
 msgstr "Полша"
@@ -4505,7 +4476,7 @@ msgstr "Пуерто Рико"
 msgid "Palestine"
 msgstr "Палестина"
 
-#: lang.pm:395 mirror.pm:33 timezone.pm:249
+#: lang.pm:395 mirror.pm:33 timezone.pm:257
 #, c-format
 msgid "Portugal"
 msgstr "Португалия"
@@ -4530,7 +4501,7 @@ msgstr "Катар"
 msgid "Reunion"
 msgstr "Риюниън"
 
-#: lang.pm:400 timezone.pm:250
+#: lang.pm:400 timezone.pm:258
 #, c-format
 msgid "Romania"
 msgstr "Румъния"
@@ -4565,12 +4536,12 @@ msgstr "Сейшели"
 msgid "Sudan"
 msgstr "Судан"
 
-#: lang.pm:407 mirror.pm:38 timezone.pm:255
+#: lang.pm:407 mirror.pm:38 timezone.pm:263
 #, c-format
 msgid "Sweden"
 msgstr "Швеция"
 
-#: lang.pm:408 timezone.pm:223
+#: lang.pm:408 timezone.pm:231
 #, c-format
 msgid "Singapore"
 msgstr "Сингапур"
@@ -4580,7 +4551,7 @@ msgstr "Сингапур"
 msgid "Saint Helena"
 msgstr "Света Елена"
 
-#: lang.pm:410 timezone.pm:253
+#: lang.pm:410 timezone.pm:261
 #, c-format
 msgid "Slovenia"
 msgstr "Словения"
@@ -4590,7 +4561,7 @@ msgstr "Словения"
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Свалбард и Ян Майен Острови"
 
-#: lang.pm:412 mirror.pm:35 timezone.pm:252
+#: lang.pm:412 mirror.pm:35 timezone.pm:260
 #, c-format
 msgid "Slovakia"
 msgstr "Словакия"
@@ -4660,7 +4631,7 @@ msgstr "Франция Южни Територии"
 msgid "Togo"
 msgstr "Того"
 
-#: lang.pm:426 mirror.pm:41 timezone.pm:225
+#: lang.pm:426 mirror.pm:41 timezone.pm:233
 #, c-format
 msgid "Thailand"
 msgstr "Тайланд"
@@ -4695,7 +4666,7 @@ msgstr "Тунис"
 msgid "Tonga"
 msgstr "Тонга"
 
-#: lang.pm:433 timezone.pm:226
+#: lang.pm:433 timezone.pm:234
 #, c-format
 msgid "Turkey"
 msgstr "Турция"
@@ -4710,17 +4681,17 @@ msgstr "Тринидад и Тобаго"
 msgid "Tuvalu"
 msgstr "Тувалу"
 
-#: lang.pm:436 mirror.pm:40 timezone.pm:224
+#: lang.pm:436 mirror.pm:40 timezone.pm:232
 #, c-format
 msgid "Taiwan"
 msgstr "Тайван"
 
-#: lang.pm:437 timezone.pm:209
+#: lang.pm:437 timezone.pm:217
 #, c-format
 msgid "Tanzania"
 msgstr "Танзания"
 
-#: lang.pm:438 timezone.pm:257
+#: lang.pm:438 timezone.pm:265
 #, c-format
 msgid "Ukraine"
 msgstr "Украйна"
@@ -4735,7 +4706,7 @@ msgstr "Уганда"
 msgid "United States Minor Outlying Islands"
 msgstr "Малки Острови по крайбрежието на САЩ"
 
-#: lang.pm:441 mirror.pm:42 timezone.pm:265
+#: lang.pm:441 mirror.pm:42 timezone.pm:273
 #, c-format
 msgid "United States"
 msgstr "САЩ"
@@ -4805,7 +4776,7 @@ msgstr "Йемен"
 msgid "Mayotte"
 msgstr "Майот"
 
-#: lang.pm:455 mirror.pm:36 timezone.pm:208
+#: lang.pm:455 mirror.pm:36 timezone.pm:216
 #, c-format
 msgid "South Africa"
 msgstr "Южна Африка"
@@ -5369,22 +5340,22 @@ msgstr ""
 "Зареждането на модула %s не успя.\n"
 "Искате ли да опитате отново с други параметри ?"
 
-#: mygtk2.pm:1229
+#: mygtk2.pm:1229 mygtk3.pm:1255
 #, fuzzy, c-format
 msgid "Are you sure you want to quit?"
 msgstr "Искате ли да натиснете този бутон?"
 
-#: mygtk2.pm:1571 mygtk2.pm:1572
+#: mygtk2.pm:1570 mygtk2.pm:1571 mygtk3.pm:1606 mygtk3.pm:1607
 #, c-format
 msgid "Password is trivial to guess"
 msgstr ""
 
-#: mygtk2.pm:1573
+#: mygtk2.pm:1572 mygtk3.pm:1608
 #, c-format
 msgid "Password should be resistant to basic attacks"
 msgstr ""
 
-#: mygtk2.pm:1574 mygtk2.pm:1575
+#: mygtk2.pm:1573 mygtk2.pm:1574 mygtk3.pm:1609 mygtk3.pm:1610
 #, fuzzy, c-format
 msgid "Password seems secure"
 msgstr "Изисква парола"
@@ -6251,6 +6222,16 @@ msgid "Set CPU powersafe mode"
 msgstr ""
 
 #: services.pm:26
+#, fuzzy, c-format
+msgid "An NTP client/server"
+msgstr "NTP сървър"
+
+#: services.pm:27
+#, c-format
+msgid "Set CPU frequency settings"
+msgstr ""
+
+#: services.pm:28
 #, c-format
 msgid ""
 "cron is a standard UNIX program that runs user-specified programs\n"
@@ -6262,18 +6243,18 @@ msgstr ""
 "по разписание. vixie cron добавя множество преимущества над тези на простия\n"
 "UNIX cron, включително по-добра сигурност и мощни настройващи опции."
 
-#: services.pm:29
+#: services.pm:31
 #, c-format
 msgid ""
 "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr ""
 
-#: services.pm:30
+#: services.pm:32
 #, c-format
 msgid "Launches the graphical display manager"
 msgstr ""
 
-#: services.pm:31
+#: services.pm:33
 #, c-format
 msgid ""
 "FAM is a file monitoring daemon. It is used to get reports when files "
@@ -6281,7 +6262,7 @@ msgid ""
 "It is used by GNOME and KDE"
 msgstr ""
 
-#: services.pm:33
+#: services.pm:35
 #, c-format
 msgid ""
 "G15Daemon allows users access to all extra keys by decoding them and \n"
@@ -6294,7 +6275,7 @@ msgid ""
 "scripts can access the LCD via a simple API."
 msgstr ""
 
-#: services.pm:38
+#: services.pm:40
 #, c-format
 msgid ""
 "GPM adds mouse support to text-based Linux applications such the\n"
@@ -6306,12 +6287,12 @@ msgstr ""
 "Midnight Commander. Също така позволява базираните на мишка конзоли\n"
 "режи-и-лепи операции, и включва поддръжка на изкачащи менюта на козолата."
 
-#: services.pm:41
+#: services.pm:43
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
 msgstr ""
 
-#: services.pm:42
+#: services.pm:44
 #, c-format
 msgid ""
 "HardDrake runs a hardware probe, and optionally configures\n"
@@ -6320,7 +6301,7 @@ msgstr ""
 "HardDrake прави проби на хардуера, и евентуално настройва\n"
 "нов/променен хардуер."
 
-#: services.pm:44
+#: services.pm:46
 #, c-format
 msgid ""
 "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
@@ -6329,7 +6310,7 @@ msgstr ""
 "файлове\n"
 "и CGI."
 
-#: services.pm:45
+#: services.pm:47
 #, c-format
 msgid ""
 "The internet superserver daemon (commonly called inetd) starts a\n"
@@ -6344,23 +6325,23 @@ msgstr ""
 "telnet, ftp, rsh и rlogin. Изключването на inetd изключва всички услуги,\n"
 "за които отговаря."
 
-#: services.pm:49
+#: services.pm:51
 #, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
 msgstr ""
 
-#: services.pm:50
+#: services.pm:52
 #, c-format
 msgid "Automates a packet filtering firewall with iptables"
 msgstr ""
 
-#: services.pm:51
+#: services.pm:53
 #, c-format
 msgid ""
 "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
 msgstr ""
 
-#: services.pm:52
+#: services.pm:54
 #, c-format
 msgid ""
 "This package loads the selected keyboard map as set in\n"
@@ -6372,7 +6353,7 @@ msgstr ""
 "Тя може да бъде избрана с инструмента kbdconfig. Трябва да оставите "
 "товавключено за повечето машини."
 
-#: services.pm:55
+#: services.pm:57
 #, c-format
 msgid ""
 "Automatic regeneration of kernel header in /boot for\n"
@@ -6381,17 +6362,17 @@ msgstr ""
 "Автоматично регенериране на header-ите на ядрото, в /boot за\n"
 "/usr/include/linux/{autoconf,version}.h"
 
-#: services.pm:57
+#: services.pm:59
 #, c-format
 msgid "Automatic detection and configuration of hardware at boot."
 msgstr "Автоматично засичане и настройка на хардуера при стартиране."
 
-#: services.pm:58
+#: services.pm:60
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
 msgstr ""
 
-#: services.pm:59
+#: services.pm:61
 #, c-format
 msgid ""
 "Linuxconf will sometimes arrange to perform various tasks\n"
@@ -6400,7 +6381,7 @@ msgstr ""
 "Linuxconf понякога урежда извършването на различни задачи\n"
 "при стартиране за поддръжка на системната настройка."
 
-#: services.pm:61
+#: services.pm:63
 #, c-format
 msgid ""
 "lpd is the print daemon required for lpr to work properly. It is\n"
@@ -6409,7 +6390,7 @@ msgstr ""
 "lpd е демона за печат необходим на lpr да работи нормално. Той просто е\n"
 "сървър, който определя работите за печат на принтер(а/ите)."
 
-#: services.pm:63
+#: services.pm:65
 #, c-format
 msgid ""
 "Linux Virtual Server, used to build a high-performance and highly\n"
@@ -6418,29 +6399,29 @@ msgstr ""
 "Linux Virtual Server се използва за изграждане на високопроизводителен\n"
 "и добре достъпен сървър."
 
-#: services.pm:65
+#: services.pm:67
 #, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
 msgstr ""
 
-#: services.pm:66
+#: services.pm:68
 #, c-format
 msgid "Software RAID monitoring and management"
 msgstr ""
 
-#: services.pm:67
+#: services.pm:69
 #, c-format
 msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
 msgstr ""
 
-#: services.pm:68
+#: services.pm:70
 #, c-format
 msgid "Enables MSEC security policy on system startup"
 msgstr ""
 
-#: services.pm:69
+#: services.pm:71
 #, c-format
 msgid ""
 "named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
@@ -6449,12 +6430,12 @@ msgstr ""
 "named (BIND) е Domain Name Server (DNS), който се използва да превърне\n"
 "името на хоста до IP адрес."
 
-#: services.pm:70
+#: services.pm:72
 #, c-format
 msgid "Initializes network console logging"
 msgstr ""
 
-#: services.pm:71
+#: services.pm:73
 #, c-format
 msgid ""
 "Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
@@ -6463,7 +6444,7 @@ msgstr ""
 "Монтира и демонтира всякакви Network File System (NFS), SMB (LAN\n"
 "Manager/Windows), и NCP (NetWare)."
 
-#: services.pm:73
+#: services.pm:75
 #, c-format
 msgid ""
 "Activates/Deactivates all network interfaces configured to start\n"
@@ -6472,17 +6453,17 @@ msgstr ""
 "Активира/деактивира всички мрежови интерфейси, настроени да се пускат\n"
 "при стартиране на машината."
 
-#: services.pm:75
+#: services.pm:77
 #, c-format
 msgid "Requires network to be up if enabled"
 msgstr ""
 
-#: services.pm:76
+#: services.pm:78
 #, c-format
 msgid "Wait for the hotplugged network to be up"
 msgstr ""
 
-#: services.pm:77
+#: services.pm:79
 #, c-format
 msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP networks.\n"
@@ -6493,7 +6474,7 @@ msgstr ""
 "Тази услуга осигурява функционалността на NFS сървъра, който се настройва\n"
 "чрез файла /etc/exports."
 
-#: services.pm:80
+#: services.pm:82
 #, c-format
 msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP\n"
@@ -6502,12 +6483,12 @@ msgstr ""
 "NFS е популярен протокол за обмен на файлове по TCP/IP мрежи.\n"
 "Тази услуга осигурява функционалността на заключването на NFS файловете."
 
-#: services.pm:82
+#: services.pm:84
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
 msgstr ""
 
-#: services.pm:83
+#: services.pm:85
 #, c-format
 msgid ""
 "Automatically switch on numlock key locker under console\n"
@@ -6516,17 +6497,17 @@ msgstr ""
 "Автоматично включване на numlock клавиша под конзола и\n"
 "Xorg при стартиране."
 
-#: services.pm:85
+#: services.pm:87
 #, c-format
 msgid "Support the OKI 4w and compatible winprinters."
 msgstr "Поддръжка на OKI 4w и съвместими win-принтери."
 
-#: services.pm:86
+#: services.pm:88
 #, c-format
 msgid "Checks if a partition is close to full up"
 msgstr ""
 
-#: services.pm:87
+#: services.pm:89
 #, c-format
 msgid ""
 "PCMCIA support is usually to support things like ethernet and\n"
@@ -6538,7 +6519,7 @@ msgstr ""
 "laptop-и. Това няма да се стартира преди да бъде настроен, така че е\n"
 "по-добре да я имате инсталирана на машини, които не се нуждаят от нея."
 
-#: services.pm:90
+#: services.pm:92
 #, c-format
 msgid ""
 "The portmapper manages RPC connections, which are used by\n"
@@ -6550,12 +6531,12 @@ msgstr ""
 "NFS и NIS. portmap сървъра трябва да е пуснат на машини, които работят като\n"
 "сървър за протоколи, които се нуждаят да използват RPC механизъм."
 
-#: services.pm:93
+#: services.pm:95
 #, c-format
 msgid "Reserves some TCP ports"
 msgstr ""
 
-#: services.pm:94
+#: services.pm:96
 #, c-format
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
@@ -6564,7 +6545,7 @@ msgstr ""
 "Postfix е Main Transport Agent (MTA), който е програма която пренася\n"
 "поща от машина на машина."
 
-#: services.pm:95
+#: services.pm:97
 #, c-format
 msgid ""
 "Saves and restores system entropy pool for higher quality random\n"
@@ -6573,7 +6554,7 @@ msgstr ""
 "Запазва и възстановята потока на системна ентропия за по-голямо качество\n"
 "на произволно генериране на числа."
 
-#: services.pm:97
+#: services.pm:99
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard disk drive\n"
@@ -6582,12 +6563,12 @@ msgstr ""
 "Свържи чисти драйвери с блокови устройства (като дялове\n"
 "на твърдия диск), за употребата от приложения като Oracle или DVD плеъри"
 
-#: services.pm:99
+#: services.pm:101
 #, fuzzy, c-format
 msgid "Nameserver information manager"
 msgstr "Информация за твърдия диск"
 
-#: services.pm:100
+#: services.pm:102
 #, c-format
 msgid ""
 "The routed daemon allows for automatic IP router table updated via\n"
@@ -6598,7 +6579,7 @@ msgstr ""
 "RIP протокола. Докато RIP е широко използвана за малки мрежи, за по-сложни\n"
 "протоколи за рутиране са нужни за сложни мрежи. "
 
-#: services.pm:103
+#: services.pm:105
 #, c-format
 msgid ""
 "The rstat protocol allows users on a network to retrieve\n"
@@ -6607,7 +6588,7 @@ msgstr ""
 "rstat протокола позволява на мрежовите потребители да извличат\n"
 "параметрите на възможностите за всяка машина на мрежата."
 
-#: services.pm:105
+#: services.pm:107
 #, fuzzy, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
@@ -6616,7 +6597,7 @@ msgstr ""
 "Syslog е програма която много демони използват да запазват съобщения в\n"
 "различни системни файлове (логове). Добре е постоянно да я имате работеща."
 
-#: services.pm:106
+#: services.pm:108
 #, c-format
 msgid ""
 "The rusers protocol allows users on a network to identify who is\n"
@@ -6625,7 +6606,7 @@ msgstr ""
 "rusers протокола позволява на мрежовите потребители да проверяват кой е\n"
 "влязъл на друга отговарящата машина."
 
-#: services.pm:108
+#: services.pm:110
 #, c-format
 msgid ""
 "The rwho protocol lets remote users get a list of all of the users\n"
@@ -6635,42 +6616,42 @@ msgstr ""
 "на всички потребители влезли на машина с работещ rwho демон (подобен на "
 "finger)."
 
-#: services.pm:110
+#: services.pm:112
 #, c-format
 msgid ""
 "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 
-#: services.pm:111
+#: services.pm:113
 #, c-format
 msgid "Packet filtering firewall"
 msgstr ""
 
-#: services.pm:112
+#: services.pm:114
 #, c-format
 msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
 msgstr ""
 
-#: services.pm:113
+#: services.pm:115
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Пуснкане звуковата система на машината ви"
 
-#: services.pm:114
+#: services.pm:116
 #, c-format
 msgid "layer for speech analysis"
 msgstr ""
 
-#: services.pm:115
+#: services.pm:117
 #, c-format
 msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
 msgstr ""
 
-#: services.pm:116
+#: services.pm:118
 #, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages\n"
@@ -6679,94 +6660,94 @@ msgstr ""
 "Syslog е програма която много демони използват да запазват съобщения в\n"
 "различни системни файлове (логове). Добре е постоянно да я имате работеща."
 
-#: services.pm:118
+#: services.pm:120
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
 msgstr ""
 
-#: services.pm:119
+#: services.pm:121
 #, c-format
 msgid "Load the drivers for your usb devices."
 msgstr "Зареждане драйвери за вашите USB устройства."
 
-#: services.pm:120
+#: services.pm:122
 #, c-format
 msgid "A lightweight network traffic monitor"
 msgstr ""
 
-#: services.pm:121
+#: services.pm:123
 #, c-format
 msgid "Starts the X Font Server."
 msgstr ""
 
-#: services.pm:122
+#: services.pm:124
 #, c-format
 msgid "Starts other deamons on demand."
 msgstr ""
 
-#: services.pm:151
+#: services.pm:153
 #, c-format
 msgid "Printing"
 msgstr "Печатане"
 
-#: services.pm:154
+#: services.pm:156
 #, c-format
 msgid "Internet"
 msgstr "Интернет"
 
-#: services.pm:159
+#: services.pm:161
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Мрежа"
 
-#: services.pm:161
+#: services.pm:163
 #, c-format
 msgid "System"
 msgstr "Система"
 
-#: services.pm:167
+#: services.pm:169
 #, c-format
 msgid "Remote Administration"
 msgstr "Отдалечена администрация"
 
-#: services.pm:176
+#: services.pm:178
 #, c-format
 msgid "Database Server"
 msgstr "Сървър за бази данни"
 
-#: services.pm:187 services.pm:224
+#: services.pm:189 services.pm:226
 #, c-format
 msgid "Services"
 msgstr "Услуги"
 
-#: services.pm:187
+#: services.pm:189
 #, fuzzy, c-format
 msgid "Choose which services should be automatically started at boot time"
 msgstr "Избира услугите, които трябва да се пуснат при пускане на машината"
 
-#: services.pm:205
+#: services.pm:207
 #, c-format
 msgid "%d activated for %d registered"
 msgstr "%d активирани от %d регистрирани"
 
-#: services.pm:240
+#: services.pm:230
 #, c-format
 msgid "running"
 msgstr "стартиране"
 
-#: services.pm:240
+#: services.pm:230
 #, c-format
 msgid "stopped"
 msgstr "спряна"
 
-#: services.pm:245
+#: services.pm:235
 #, c-format
 msgid "Services and daemons"
 msgstr "Услуги и демони"
 
-#: services.pm:251
+#: services.pm:241
 #, c-format
 msgid ""
 "No additional information\n"
@@ -6775,27 +6756,22 @@ msgstr ""
 "Няма допълнителна информация\n"
 "за тази услуга, съжелявам."
 
-#: services.pm:256 ugtk2.pm:924
-#, c-format
-msgid "Info"
-msgstr "Информация"
-
-#: services.pm:259
+#: services.pm:248
 #, c-format
 msgid "Start when requested"
 msgstr "Стартирай при заявка"
 
-#: services.pm:259
+#: services.pm:248
 #, c-format
 msgid "On boot"
 msgstr "При зареждане"
 
-#: services.pm:277
+#: services.pm:265
 #, c-format
 msgid "Start"
 msgstr "Старт"
 
-#: services.pm:277
+#: services.pm:265
 #, c-format
 msgid "Stop"
 msgstr "Стоп"
@@ -6953,7 +6929,7 @@ msgid ""
 "       XFdrake resolution"
 msgstr ""
 
-#: standalone.pm:154
+#: standalone.pm:155
 #, c-format
 msgid ""
 "\n"
@@ -6964,70 +6940,75 @@ msgstr ""
 "Използване: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
 "testing] [-v|--version] "
 
-#: timezone.pm:160 timezone.pm:161
+#: timezone.pm:168 timezone.pm:169
 #, c-format
 msgid "All servers"
 msgstr "Всички сървъри"
 
-#: timezone.pm:197
+#: timezone.pm:205
 #, c-format
 msgid "Global"
 msgstr "Глобални"
 
-#: timezone.pm:200
+#: timezone.pm:208
 #, c-format
 msgid "Africa"
 msgstr "Африка"
 
-#: timezone.pm:201
+#: timezone.pm:209
 #, c-format
 msgid "Asia"
 msgstr "Азия"
 
-#: timezone.pm:202
+#: timezone.pm:210
 #, c-format
 msgid "Europe"
 msgstr "Европа"
 
-#: timezone.pm:203
+#: timezone.pm:211
 #, c-format
 msgid "North America"
 msgstr "Северна Америка"
 
-#: timezone.pm:204
+#: timezone.pm:212
 #, c-format
 msgid "Oceania"
 msgstr "Океания"
 
-#: timezone.pm:205
+#: timezone.pm:213
 #, c-format
 msgid "South America"
 msgstr "Южна Америка"
 
-#: timezone.pm:214
+#: timezone.pm:222
 #, c-format
 msgid "Hong Kong"
 msgstr "Хонг Конг"
 
-#: timezone.pm:251
+#: timezone.pm:259
 #, c-format
 msgid "Russian Federation"
 msgstr "Руска Федерация"
 
-#: timezone.pm:259
+#: timezone.pm:267
 #, c-format
 msgid "Yugoslavia"
 msgstr "Югославия"
 
-#: ugtk2.pm:812
+#: ugtk2.pm:812 ugtk3.pm:793
 #, c-format
 msgid "Is this correct?"
 msgstr "Всичко правилно ли е ?"
 
-#: ugtk2.pm:874
+#: ugtk2.pm:874 ugtk3.pm:855
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "Трябва да изберете файл, а не директория."
+
+#: ugtk2.pm:924 ugtk3.pm:905
+#, c-format
+msgid "Info"
+msgstr "Информация"
 
 #: wizards.pm:96
 #, c-format
@@ -7043,6 +7024,103 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Инсталацията провалена"
 
+#~ msgid ""
+#~ "Here you can select an alternative driver (either OSS or ALSA) for your "
+#~ "sound card (%s)."
+#~ msgstr ""
+#~ "Тук може да изберете алтернативен драйвер (OSS или ALSA) за вашата "
+#~ "звукова карта (%s)."
+
+#~ msgid ""
+#~ "If you really think that you know which driver is the right one for your "
+#~ "card\n"
+#~ "you can pick one from the above list.\n"
+#~ "\n"
+#~ "The current driver for your \"%s\" sound card is \"%s\" "
+#~ msgstr ""
+#~ "Ако мислите, че знаете кой точно драйвер е подходящ за вашата карта,\n"
+#~ "то вие може да го изберете от горният списък.\n"
+#~ "\n"
+#~ "Текущо използваният драйвер за вашата \"%s\" звукова карта е \"%s\" "
+
+#, fuzzy
+#~ msgid "Please make a backup of your data first."
+#~ msgstr "Първо създайте архивно копие на своите данни"
+
+#~ msgid ""
+#~ "There's no free driver for your sound card (%s), but there's a "
+#~ "proprietary driver at \"%s\"."
+#~ msgstr ""
+#~ "Няма свободен драйвер за вашата звукова карта (%s), но има собствени "
+#~ "драйвер на \"%s\"."
+
+#~ msgid ""
+#~ "\n"
+#~ "Warning\n"
+#~ "\n"
+#~ "Please read carefully the terms below. If you disagree with any\n"
+#~ "portion, you are not allowed to install the next CD media. Press "
+#~ "'Refuse' \n"
+#~ "to continue the installation without using these media.\n"
+#~ "\n"
+#~ "\n"
+#~ "Some components contained in the next CD media are not governed\n"
+#~ "by the GPL License or similar agreements. Each such component is then\n"
+#~ "governed by the terms and conditions of its own specific license. \n"
+#~ "Please read carefully and comply with such specific licenses before \n"
+#~ "you use or redistribute the said components. \n"
+#~ "Such licenses will in general prevent the transfer,  duplication \n"
+#~ "(except for backup purposes), redistribution, reverse engineering, \n"
+#~ "de-assembly, de-compilation or modification of the component. \n"
+#~ "Any breach of agreement will immediately terminate your rights under \n"
+#~ "the specific license. Unless the specific license terms grant you such\n"
+#~ "rights, you usually cannot install the programs on more than one\n"
+#~ "system, or adapt it to be used on a network. In doubt, please contact \n"
+#~ "directly the distributor or editor of the component. \n"
+#~ "Transfer to third parties or copying of such components including the \n"
+#~ "documentation is usually forbidden.\n"
+#~ "\n"
+#~ "\n"
+#~ "All rights to the components of the next CD media belong to their \n"
+#~ "respective authors and are protected by intellectual property and \n"
+#~ "copyright laws applicable to software programs.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Внимание\n"
+#~ "\n"
+#~ "Моля, прочетете условията по-долу. Ако не сте съгласни с някое от тях,\n"
+#~ "не можете да продължите инсталацията на следващия CD носител. Натиснете\n"
+#~ "'Откажи', за да продължите инсталацията без тези носители.\n"
+#~ "\n"
+#~ "\n"
+#~ "Някои компоненти съдържащи се в следващия CD носител не са "
+#~ "разпространяват\n"
+#~ "под GPL Лиценза или подобен такъв. Всеки такъв компонент е под условията\n"
+#~ "и положенията на специфичния му лиценз. Моля, прочетете внимателно и "
+#~ "изцяло\n"
+#~ "тези специфични лицензи преди да използвате или разпространявате "
+#~ "споменатите\n"
+#~ "компоненти.\n"
+#~ "Такива лицензи по принцип предотвратява преноса, копирането (освен с цел\n"
+#~ "съхранение), разпространяването, обратния инженеринг, деасемблирането\n"
+#~ "декомпилацията или модификацията на компонентите.\n"
+#~ "Всяко нарушаване на спогодбата незабавно преустановява правата ви по\n"
+#~ "специфичния лиценз. Освен ако специфичния лиценз ви дава такива права,\n"
+#~ "обикновено не можете да инсталирате програмите на повече от една система\n"
+#~ "или да ги пригаждате за използване в мрежа. Ако не сте сигурни, моля\n"
+#~ "свържете се с дистрибуция или редактора на компонена.\n"
+#~ "Прехвърлянето на трети лица или копирането на всяка компонента, "
+#~ "включително\n"
+#~ "на документацията, обикновено са забранени.\n"
+#~ "\n"
+#~ "\n"
+#~ "Всички права на компонентите от следващия CD носител принадлежат на\n"
+#~ "съответните им автори и са защитени като интелектуална собственост от\n"
+#~ "законите за авторски права приложими за софтуерните програми.\n"
+
+#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+
 #~ msgid "1. License Agreement"
 #~ msgstr "1. Лицензионен договор"
 
@@ -7057,6 +7135,24 @@ msgstr "Инсталацията провалена"
 
 #~ msgid "5. Governing Laws"
 #~ msgstr "5. Управляващи Закони"
+
+#~ msgid ""
+#~ "A library which defends against buffer overflow and format string attacks."
+#~ msgstr ""
+#~ "Библиотека, която осигурява защита от атаки с препълване на буфер и "
+#~ "форматни стрингове."
+
+#~ msgid "Accept user"
+#~ msgstr "Приеми потребител"
+
+#~ msgid "Accept/Refuse bogus IPv4 error messages."
+#~ msgstr "Позволява/Забранява съобщения за IPv4 грешки."
+
+#~ msgid "Accept/Refuse broadcasted icmp echo."
+#~ msgstr "Позволява/Забранява broadcasted icmp echo."
+
+#~ msgid "Add user"
+#~ msgstr "Добави потребител"
 
 #~ msgid ""
 #~ "All rights to the components of the Software Products belong to their "
@@ -7077,9 +7173,39 @@ msgstr "Инсталацията провалена"
 #~ "части, по всякакъв начин и с всякакви цели.\n"
 #~ "\"Moondrake\" и свързаните логота са запазена марка на %s"
 
+#~ msgid "Allow/Forbid remote root login."
+#~ msgstr "Позволява/Забранява отдалечено влизане на root."
+
 #, fuzzy
-#~ msgid "An NTP client/server"
-#~ msgstr "NTP сървър"
+#~ msgid "Authentication Active Directory"
+#~ msgstr "идентификация"
+
+#~ msgid "Authentication LDAP"
+#~ msgstr "LDAP ауторизация"
+
+#~ msgid "Authentication NIS"
+#~ msgstr "NIS идентификация"
+
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "Идентификация на Windows Домейн"
+
+#~ msgid "Automatic routing from ALSA to PulseAudio"
+#~ msgstr "Автоматично препращане от ALSA към PulseAudio"
+
+#~ msgid "Bad backup file"
+#~ msgstr "Лош backup-файл"
+
+#~ msgid "Choose action"
+#~ msgstr "Изберете действие"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Изберете големините"
+
+#~ msgid "Clean /tmp at each boot"
+#~ msgstr "Почистване на директория /tmp при всяко зареждане"
+
+#~ msgid "Collapse Tree"
+#~ msgstr "Изчисти дървото"
 
 #~ msgid ""
 #~ "Congratulations, installation is complete.\n"
@@ -7087,6 +7213,30 @@ msgstr "Инсталацията провалена"
 #~ msgstr ""
 #~ "Поздравления, инсталацията е преключена.\n"
 #~ "Извадете инсталационния диск и натисене Enter за да рестартирайте."
+
+#~ msgid "Enable 5.1 sound with Pulse Audio"
+#~ msgstr "Позволи 5.1 звук с PulseAudio"
+
+#~ msgid "Enable user switching for audio applications"
+#~ msgstr "Позволи потребителско превключване за звуковите приложения"
+
+#~ msgid "Error reading file %s"
+#~ msgstr "Грешка при четенето на файла %s"
+
+#~ msgid "Error writing to file %s"
+#~ msgstr "Грешка при запис във файла %s"
+
+#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
+#~ msgstr "Грешка: \"%s\" драйвер за вашата карта е инсталиран"
+
+#~ msgid "Expand Tree"
+#~ msgstr "Разшири дървото"
+
+#~ msgid "Ext2"
+#~ msgstr "Ext2"
+
+#~ msgid "File sharing"
+#~ msgstr "Поделяне на файлове"
 
 #~ msgid ""
 #~ "For information on fixes which are available for this release of "
@@ -7098,6 +7248,15 @@ msgstr "Инсталацията провалена"
 #~ "тази версия на Moondrake,\n"
 #~ "се консултирайте с документа Errata, на адрес : \n"
 #~ "%s"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Дава размера RAM-памет в Mb"
+
+#~ msgid "High"
+#~ msgstr "Високо"
+
+#~ msgid "Higher"
+#~ msgstr "По-високо"
 
 #~ msgid ""
 #~ "If any portion of this agreement is held void, illegal or inapplicable by "
@@ -7132,6 +7291,18 @@ msgstr "Инсталацията провалена"
 #~ "английски."
 
 #~ msgid ""
+#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
+#~ "is enough)\n"
+#~ "at the beginning of the disk"
+#~ msgstr ""
+#~ "Ако смятате да използвате aboot, оставете свободно пространство (2048 "
+#~ "сектора\n"
+#~ "са достатъчни) в началото на диска"
+
+#~ msgid "Info: "
+#~ msgstr "Информация: "
+
+#~ msgid ""
 #~ "Information on configuring your system is available in the post\n"
 #~ "install chapter of the Official Moondrake User's Guide."
 #~ msgstr ""
@@ -7141,11 +7312,47 @@ msgstr "Инсталацията провалена"
 #~ msgid "Introduction"
 #~ msgstr "Въведение"
 
+#~ msgid "Journalised FS"
+#~ msgstr "Журнална FS"
+
+#, fuzzy
+#~ msgid "LDAP users database"
+#~ msgstr "Сървър, Бази-данни"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/grub инсталация"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "Включи филтрирането на пакети за Linux ядра серия 2.2, за\n"
+#~ "настройка на защитната стена, защитаваща на машината ви от\n"
+#~ "мрежови атаки."
+
 #~ msgid "Moondrake"
 #~ msgstr "Moondrake"
 
-#~ msgid "Please make a backup of your data first"
-#~ msgstr "Първо създайте архивно копие на своите данни"
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr ""
+#~ "Опцията ``Ограничи опциите от командния ред'' е безполезна без парола"
+
+#~ msgid "PLL setting:"
+#~ msgstr "PLL настройки:"
+
+#~ msgid "Paranoid"
+#~ msgstr "Параноично"
+
+#~ msgid ""
+#~ "Passwords are now enabled, but use as a networked computer is still not "
+#~ "recommended."
+#~ msgstr ""
+#~ "Паролата сега е включена, но използването като мрежов компютър не е "
+#~ "препоръчително."
+
+#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
+#~ msgstr "Моля излезте от текущата сесия и използвайте Ctrl-Alt-BackSpace"
 
 #~ msgid ""
 #~ "Please read this document carefully. This document is a license agreement "
@@ -7182,6 +7389,58 @@ msgstr "Инсталацията провалена"
 #~ "ви по този Лиценз. При прекратяване на Лиценза, трябва незабавно да "
 #~ "унижтожите всички\n"
 #~ "копия на Софтуерния лиценз."
+
+#~ msgid "Poor"
+#~ msgstr "Лошо"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Точен размер на RAM-паметта, ако е необходимо (намерени %d MB)"
+
+#~ msgid "Radio support:"
+#~ msgstr "Подръжка на радио:"
+
+#~ msgid "Removable media automounting"
+#~ msgstr "Автоматично монтиране на сменяем носител"
+
+#~ msgid "Rescue partition table"
+#~ msgstr "Спасяване таблицата с дяловете"
+
+#~ msgid "Restore partition table"
+#~ msgstr "Възстанови таблицата с дяловете"
+
+#~ msgid "Restoring from file %s failed: %s"
+#~ msgstr "Възстановяването от файла %s не успя: %s"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Ограничи опциите, задавани от командния ред"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Големина на root-дяла в MB: "
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "Save partition table"
+#~ msgstr "Запази таблицата с дяловете"
+
+#~ msgid "Security level"
+#~ msgstr "Ниво на сигурност"
+
+#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
+#~ msgstr "Стартира X Font Server (това е задължително, за да тръгне Xorg)."
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Големина на swap-дяла в MB: "
+
+#~ msgid "TLS"
+#~ msgstr "TLS"
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "Не възможност за работа с вашия FAT дял, \n"
+#~ "поради получената грешка: %s"
 
 #~ msgid ""
 #~ "The Software Products and attached documentation are provided \"as is\", "
@@ -7290,6 +7549,13 @@ msgstr "Инсталацията провалена"
 #~ "повече информация."
 
 #~ msgid ""
+#~ "The backup partition table has not the same size\n"
+#~ "Still continue?"
+#~ msgstr ""
+#~ "Резервната таблица на дяловете не е със същата големина\n"
+#~ "Да продължа ли все пак ?"
+
+#~ msgid ""
 #~ "The operating system and the different components available in the "
 #~ "Moondrake distribution \n"
 #~ "shall be called the \"Software Products\" hereafter. The Software "
@@ -7308,268 +7574,6 @@ msgstr "Инсталацията провалена"
 #~ "програми, методи, правила и документация отнасяща се до операционната "
 #~ "система и различните\n"
 #~ "компоненти на Moondrake дистрибуцията."
-
-#~ msgid ""
-#~ "\n"
-#~ "Warning\n"
-#~ "\n"
-#~ "Please read carefully the terms below. If you disagree with any\n"
-#~ "portion, you are not allowed to install the next CD media. Press "
-#~ "'Refuse' \n"
-#~ "to continue the installation without using these media.\n"
-#~ "\n"
-#~ "\n"
-#~ "Some components contained in the next CD media are not governed\n"
-#~ "by the GPL License or similar agreements. Each such component is then\n"
-#~ "governed by the terms and conditions of its own specific license. \n"
-#~ "Please read carefully and comply with such specific licenses before \n"
-#~ "you use or redistribute the said components. \n"
-#~ "Such licenses will in general prevent the transfer,  duplication \n"
-#~ "(except for backup purposes), redistribution, reverse engineering, \n"
-#~ "de-assembly, de-compilation or modification of the component. \n"
-#~ "Any breach of agreement will immediately terminate your rights under \n"
-#~ "the specific license. Unless the specific license terms grant you such\n"
-#~ "rights, you usually cannot install the programs on more than one\n"
-#~ "system, or adapt it to be used on a network. In doubt, please contact \n"
-#~ "directly the distributor or editor of the component. \n"
-#~ "Transfer to third parties or copying of such components including the \n"
-#~ "documentation is usually forbidden.\n"
-#~ "\n"
-#~ "\n"
-#~ "All rights to the components of the next CD media belong to their \n"
-#~ "respective authors and are protected by intellectual property and \n"
-#~ "copyright laws applicable to software programs.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Внимание\n"
-#~ "\n"
-#~ "Моля, прочетете условията по-долу. Ако не сте съгласни с някое от тях,\n"
-#~ "не можете да продължите инсталацията на следващия CD носител. Натиснете\n"
-#~ "'Откажи', за да продължите инсталацията без тези носители.\n"
-#~ "\n"
-#~ "\n"
-#~ "Някои компоненти съдържащи се в следващия CD носител не са "
-#~ "разпространяват\n"
-#~ "под GPL Лиценза или подобен такъв. Всеки такъв компонент е под условията\n"
-#~ "и положенията на специфичния му лиценз. Моля, прочетете внимателно и "
-#~ "изцяло\n"
-#~ "тези специфични лицензи преди да използвате или разпространявате "
-#~ "споменатите\n"
-#~ "компоненти.\n"
-#~ "Такива лицензи по принцип предотвратява преноса, копирането (освен с цел\n"
-#~ "съхранение), разпространяването, обратния инженеринг, деасемблирането\n"
-#~ "декомпилацията или модификацията на компонентите.\n"
-#~ "Всяко нарушаване на спогодбата незабавно преустановява правата ви по\n"
-#~ "специфичния лиценз. Освен ако специфичния лиценз ви дава такива права,\n"
-#~ "обикновено не можете да инсталирате програмите на повече от една система\n"
-#~ "или да ги пригаждате за използване в мрежа. Ако не сте сигурни, моля\n"
-#~ "свържете се с дистрибуция или редактора на компонена.\n"
-#~ "Прехвърлянето на трети лица или копирането на всяка компонента, "
-#~ "включително\n"
-#~ "на документацията, обикновено са забранени.\n"
-#~ "\n"
-#~ "\n"
-#~ "Всички права на компонентите от следващия CD носител принадлежат на\n"
-#~ "съответните им автори и са защитени като интелектуална собственост от\n"
-#~ "законите за авторски права приложими за софтуерните програми.\n"
-
-#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
-#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
-
-#~ msgid ""
-#~ "A library which defends against buffer overflow and format string attacks."
-#~ msgstr ""
-#~ "Библиотека, която осигурява защита от атаки с препълване на буфер и "
-#~ "форматни стрингове."
-
-#~ msgid "Accept user"
-#~ msgstr "Приеми потребител"
-
-#~ msgid "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr "Позволява/Забранява съобщения за IPv4 грешки."
-
-#~ msgid "Accept/Refuse broadcasted icmp echo."
-#~ msgstr "Позволява/Забранява broadcasted icmp echo."
-
-#~ msgid "Add user"
-#~ msgstr "Добави потребител"
-
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "Позволява/Забранява отдалечено влизане на root."
-
-#, fuzzy
-#~ msgid "Authentication Active Directory"
-#~ msgstr "идентификация"
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "LDAP ауторизация"
-
-#~ msgid "Authentication NIS"
-#~ msgstr "NIS идентификация"
-
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Идентификация на Windows Домейн"
-
-#~ msgid "Automatic routing from ALSA to PulseAudio"
-#~ msgstr "Автоматично препращане от ALSA към PulseAudio"
-
-#~ msgid "Bad backup file"
-#~ msgstr "Лош backup-файл"
-
-#~ msgid "Choose action"
-#~ msgstr "Изберете действие"
-
-#~ msgid "Choose the sizes"
-#~ msgstr "Изберете големините"
-
-#~ msgid "Clean /tmp at each boot"
-#~ msgstr "Почистване на директория /tmp при всяко зареждане"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "Изчисти дървото"
-
-#~ msgid "Enable 5.1 sound with Pulse Audio"
-#~ msgstr "Позволи 5.1 звук с PulseAudio"
-
-#~ msgid "Enable user switching for audio applications"
-#~ msgstr "Позволи потребителско превключване за звуковите приложения"
-
-#~ msgid "Error reading file %s"
-#~ msgstr "Грешка при четенето на файла %s"
-
-#~ msgid "Error writing to file %s"
-#~ msgstr "Грешка при запис във файла %s"
-
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr "Грешка: \"%s\" драйвер за вашата карта е инсталиран"
-
-#~ msgid "Expand Tree"
-#~ msgstr "Разшири дървото"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "File sharing"
-#~ msgstr "Поделяне на файлове"
-
-#~ msgid "Give the ram size in MB"
-#~ msgstr "Дава размера RAM-памет в Mb"
-
-#~ msgid "High"
-#~ msgstr "Високо"
-
-#~ msgid "Higher"
-#~ msgstr "По-високо"
-
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "Ако смятате да използвате aboot, оставете свободно пространство (2048 "
-#~ "сектора\n"
-#~ "са достатъчни) в началото на диска"
-
-#~ msgid "Info: "
-#~ msgstr "Информация: "
-
-#~ msgid "Journalised FS"
-#~ msgstr "Журнална FS"
-
-#, fuzzy
-#~ msgid "LDAP users database"
-#~ msgstr "Сървър, Бази-данни"
-
-#~ msgid "LILO/grub Installation"
-#~ msgstr "LILO/grub инсталация"
-
-#~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
-#~ msgstr ""
-#~ "Включи филтрирането на пакети за Linux ядра серия 2.2, за\n"
-#~ "настройка на защитната стена, защитаваща на машината ви от\n"
-#~ "мрежови атаки."
-
-#~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
-#~ msgstr ""
-#~ "Опцията ``Ограничи опциите от командния ред'' е безполезна без парола"
-
-#~ msgid "PLL setting:"
-#~ msgstr "PLL настройки:"
-
-#~ msgid "Paranoid"
-#~ msgstr "Параноично"
-
-#~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
-#~ msgstr ""
-#~ "Паролата сега е включена, но използването като мрежов компютър не е "
-#~ "препоръчително."
-
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "Моля излезте от текущата сесия и използвайте Ctrl-Alt-BackSpace"
-
-#~ msgid "Poor"
-#~ msgstr "Лошо"
-
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "Точен размер на RAM-паметта, ако е необходимо (намерени %d MB)"
-
-#~ msgid "Radio support:"
-#~ msgstr "Подръжка на радио:"
-
-#~ msgid "Removable media automounting"
-#~ msgstr "Автоматично монтиране на сменяем носител"
-
-#~ msgid "Rescue partition table"
-#~ msgstr "Спасяване таблицата с дяловете"
-
-#~ msgid "Restore partition table"
-#~ msgstr "Възстанови таблицата с дяловете"
-
-#~ msgid "Restoring from file %s failed: %s"
-#~ msgstr "Възстановяването от файла %s не успя: %s"
-
-#~ msgid "Restrict command line options"
-#~ msgstr "Ограничи опциите, задавани от командния ред"
-
-#~ msgid "Root partition size in MB: "
-#~ msgstr "Големина на root-дяла в MB: "
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "Save partition table"
-#~ msgstr "Запази таблицата с дяловете"
-
-#~ msgid "Security level"
-#~ msgstr "Ниво на сигурност"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr "Стартира X Font Server (това е задължително, за да тръгне Xorg)."
-
-#~ msgid "Swap partition size in MB: "
-#~ msgstr "Големина на swap-дяла в MB: "
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid ""
-#~ "The FAT resizer is unable to handle your partition, \n"
-#~ "the following error occurred: %s"
-#~ msgstr ""
-#~ "Не възможност за работа с вашия FAT дял, \n"
-#~ "поради получената грешка: %s"
-
-#~ msgid ""
-#~ "The backup partition table has not the same size\n"
-#~ "Still continue?"
-#~ msgstr ""
-#~ "Резервната таблица на дяловете не е със същата големина\n"
-#~ "Да продължа ли все пак ?"
 
 #~ msgid ""
 #~ "There are already some restrictions, and more automatic checks are run "

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
-"POT-Creation-Date: 2013-10-29 01:26+0100\n"
+"POT-Creation-Date: 2014-04-29 20:39+0200\n"
 "PO-Revision-Date: 2010-06-07 22:03+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: any.pm:284 any.pm:985 diskdrake/interactive.pm:645
+#: any.pm:284 any.pm:1003 diskdrake/interactive.pm:645
 #: diskdrake/interactive.pm:869 diskdrake/interactive.pm:929
 #: diskdrake/interactive.pm:1047 diskdrake/interactive.pm:1277
 #: diskdrake/interactive.pm:1335 do_pkgs.pm:242 do_pkgs.pm:287
-#: harddrake/sound.pm:270 interactive.pm:588 pkgs.pm:254 pkgs.pm:263
+#: harddrake/sound.pm:95 interactive.pm:588 pkgs.pm:254 pkgs.pm:263
 #: pkgs.pm:306
 #, c-format
 msgid "Please wait"
@@ -113,7 +113,7 @@ msgstr "Første sektor på rotpartisjonen"
 msgid "On Floppy"
 msgstr "På ein diskett"
 
-#: any.pm:399 pkgs.pm:302 ugtk2.pm:526
+#: any.pm:399 pkgs.pm:302 ugtk2.pm:526 ugtk3.pm:516
 #, c-format
 msgid "Skip"
 msgstr "Hopp over"
@@ -178,7 +178,7 @@ msgstr "Bruk lokal APIC"
 msgid "Security"
 msgstr "Tryggleik"
 
-#: any.pm:467 any.pm:920 any.pm:939 authentication.pm:249
+#: any.pm:467 any.pm:931 any.pm:950 authentication.pm:249
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
@@ -199,7 +199,7 @@ msgstr "Prøv igjen"
 msgid "You cannot use a password with %s"
 msgstr "Du kan ikkje bruka eit passord som inneheld «%s»."
 
-#: any.pm:476 any.pm:923 any.pm:941 authentication.pm:250
+#: any.pm:476 any.pm:934 any.pm:952 authentication.pm:250
 #, c-format
 msgid "Password (again)"
 msgstr "Passord (på nytt)"
@@ -348,47 +348,47 @@ msgstr ""
 "Her er oppføringane på oppstartsmenyen.\n"
 "Du kan leggja til fleire, eller endra dei som er der."
 
-#: any.pm:879
+#: any.pm:890
 #, c-format
 msgid "access to X programs"
 msgstr "tilgang til X-program"
 
-#: any.pm:880
+#: any.pm:891
 #, c-format
 msgid "access to rpm tools"
 msgstr "tilgang til rpm-verktøy"
 
-#: any.pm:881
+#: any.pm:892
 #, c-format
 msgid "allow \"su\""
 msgstr "godta «su»"
 
-#: any.pm:882
+#: any.pm:893
 #, c-format
 msgid "access to administrative files"
 msgstr "tilgang til administrative filer"
 
-#: any.pm:883
+#: any.pm:894
 #, c-format
 msgid "access to network tools"
 msgstr "tilgang til nettverksverktøy"
 
-#: any.pm:884
+#: any.pm:895
 #, c-format
 msgid "access to compilation tools"
 msgstr "tilgang til kompileringsverktøy"
 
-#: any.pm:890
+#: any.pm:901
 #, c-format
 msgid "(already added %s)"
 msgstr "(allereie lagt til «%s»)"
 
-#: any.pm:896
+#: any.pm:907
 #, c-format
 msgid "Please give a user name"
 msgstr "Skriv inn brukarnamn"
 
-#: any.pm:897
+#: any.pm:908
 #, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
@@ -396,147 +396,147 @@ msgid ""
 msgstr ""
 "Brukarnamnet kan berre innehelda små bokstavar, tal og teikna «-» og «_»."
 
-#: any.pm:898
+#: any.pm:909
 #, c-format
 msgid "The user name is too long"
 msgstr "Brukarnamnet er for langt"
 
-#: any.pm:899
+#: any.pm:910
 #, c-format
 msgid "This user name has already been added"
 msgstr "Brukarnamnet finst alt"
 
-#: any.pm:905 any.pm:943
+#: any.pm:916 any.pm:954
 #, c-format
 msgid "User ID"
 msgstr "Brukar-ID"
 
-#: any.pm:905 any.pm:944
+#: any.pm:916 any.pm:955
 #, c-format
 msgid "Group ID"
 msgstr "Gruppe-ID"
 
-#: any.pm:906
+#: any.pm:917
 #, c-format
 msgid "%s must be a number"
 msgstr "%s må vera eit tal."
 
-#: any.pm:907
+#: any.pm:918
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s må vera over 500. Vil du likevel bruka dette?"
 
-#: any.pm:911
+#: any.pm:922
 #, c-format
 msgid "User management"
 msgstr "Brukarhandtering"
 
-#: any.pm:917
+#: any.pm:928
 #, c-format
 msgid "Enable guest account"
 msgstr "Legg til gjestekonto"
 
-#: any.pm:919 authentication.pm:236
+#: any.pm:930 authentication.pm:236
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Vel passord for systemansvarleg («root»)"
 
-#: any.pm:925
+#: any.pm:936
 #, c-format
 msgid "Enter a user"
 msgstr "Skriv inn ny brukar"
 
-#: any.pm:927
+#: any.pm:938
 #, c-format
 msgid "Icon"
 msgstr "Ikon"
 
-#: any.pm:930
+#: any.pm:941
 #, c-format
 msgid "Real name"
 msgstr "Fullt namn"
 
-#: any.pm:937
+#: any.pm:948
 #, c-format
 msgid "Login name"
 msgstr "Brukarnamn:"
 
-#: any.pm:942
+#: any.pm:953
 #, c-format
 msgid "Shell"
 msgstr "Skal"
 
-#: any.pm:985
+#: any.pm:1003
 #, c-format
 msgid "Please wait, adding media..."
 msgstr "Legg til medium. Vent litt ..."
 
-#: any.pm:1030 security/l10n.pm:14
+#: any.pm:1036 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Automatisk innlogging"
 
-#: any.pm:1031
+#: any.pm:1037
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr "Du kan automatisk logga på standardbrukaren ved oppstart."
 
-#: any.pm:1032
+#: any.pm:1038
 #, c-format
 msgid "Use this feature"
 msgstr "Bruk denne funksjonen"
 
-#: any.pm:1033
+#: any.pm:1039
 #, c-format
 msgid "Choose the default user:"
 msgstr "Vel standardbrukar:"
 
-#: any.pm:1034
+#: any.pm:1040
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Vel vindaugshandsamar:"
 
-#: any.pm:1045 any.pm:1059 any.pm:1133
+#: any.pm:1051 any.pm:1065 any.pm:1140
 #, c-format
 msgid "Release Notes"
 msgstr "Versjonsnotat"
 
-#: any.pm:1066 any.pm:1423 interactive/gtk.pm:826
+#: any.pm:1072 any.pm:1430 interactive/gtk.pm:820
 #, c-format
 msgid "Close"
 msgstr "Lukk"
 
-#: any.pm:1119
+#: any.pm:1126
 #, c-format
 msgid "License agreement"
 msgstr "Lisensavtale"
 
-#: any.pm:1121 diskdrake/dav.pm:26 mygtk2.pm:1229
+#: any.pm:1128 diskdrake/dav.pm:26 mygtk2.pm:1229 mygtk3.pm:1255
 #, c-format
 msgid "Quit"
 msgstr "Avslutt"
 
-#: any.pm:1128
+#: any.pm:1135
 #, c-format
 msgid "Do you accept this license ?"
 msgstr "Godtek du lisensvilkåra?"
 
-#: any.pm:1129
+#: any.pm:1136
 #, c-format
 msgid "Accept"
 msgstr "Godta"
 
-#: any.pm:1129
+#: any.pm:1136
 #, c-format
 msgid "Refuse"
 msgstr "Ikkje godta"
 
-#: any.pm:1155 any.pm:1218
+#: any.pm:1162 any.pm:1225
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Vel språk"
 
-#: any.pm:1183
+#: any.pm:1190
 #, fuzzy, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
@@ -546,82 +546,82 @@ msgstr ""
 "Mandriva Linux støttar fleire språk. Her\n"
 "kan du velja kva språk du vil ha tilgjengeleg."
 
-#: any.pm:1186
+#: any.pm:1193
 #, fuzzy, c-format
 msgid "Multiple languages"
 msgstr "Fleire språk"
 
-#: any.pm:1187
+#: any.pm:1194
 #, c-format
 msgid "Select Additional Languages"
 msgstr ""
 
-#: any.pm:1196 any.pm:1227
+#: any.pm:1203 any.pm:1234
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Gammal kompatibilitetskoding (ikkje UTF-8)"
 
-#: any.pm:1197
+#: any.pm:1204
 #, c-format
 msgid "All languages"
 msgstr "Alle språk"
 
-#: any.pm:1219
+#: any.pm:1226
 #, c-format
 msgid "Language choice"
 msgstr "Språkval"
 
-#: any.pm:1273
+#: any.pm:1280
 #, c-format
 msgid "Country / Region"
 msgstr "Land/område"
 
-#: any.pm:1274
+#: any.pm:1281
 #, c-format
 msgid "Please choose your country"
 msgstr "Vel land"
 
-#: any.pm:1276
+#: any.pm:1283
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Her er heile lista over land"
 
-#: any.pm:1277
+#: any.pm:1284
 #, c-format
 msgid "Other Countries"
 msgstr "Andre land"
 
-#: any.pm:1277 interactive.pm:489 interactive/gtk.pm:450
+#: any.pm:1284 interactive.pm:489 interactive/gtk.pm:444
 #, c-format
 msgid "Advanced"
 msgstr "Avansert"
 
-#: any.pm:1283
+#: any.pm:1290
 #, c-format
 msgid "Input method:"
 msgstr "Skrivemetode:"
 
-#: any.pm:1286
+#: any.pm:1293
 #, c-format
 msgid "None"
 msgstr "Ingen"
 
-#: any.pm:1368
+#: any.pm:1375
 #, c-format
 msgid "No sharing"
 msgstr "Inga deling"
 
-#: any.pm:1368
+#: any.pm:1375
 #, c-format
 msgid "Allow all users"
 msgstr "Tillat alle brukarar"
 
-#: any.pm:1368
+#: any.pm:1375
 #, c-format
 msgid "Custom"
 msgstr "Sjølvvald"
 
-#: any.pm:1372
+#: any.pm:1379
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -636,7 +636,7 @@ msgstr ""
 "\n"
 "Med «Tilpassa» kan du velja oppsett for kvar brukar for seg.\n"
 
-#: any.pm:1384
+#: any.pm:1391
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -645,7 +645,7 @@ msgstr ""
 "NFS: Det tradisjonelle Unix-fildelingssystemet, og dårleg støtta på Mac og "
 "Windows."
 
-#: any.pm:1387
+#: any.pm:1394
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -654,18 +654,18 @@ msgstr ""
 "SMB: Eit fildelingssystem brukt i Windows, Mac OS X og i fleire moderne "
 "Linux-system."
 
-#: any.pm:1395
+#: any.pm:1402
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Du kan eksportera med NFS og SMB. Vel kven av dei du vil bruka."
 
-#: any.pm:1423
+#: any.pm:1430
 #, c-format
 msgid "Launch userdrake"
 msgstr "Set opp brukarar"
 
-#: any.pm:1425
+#: any.pm:1432
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -675,7 +675,7 @@ msgstr ""
 "«fileshare». Du kan bruka brukaroppsettprogrammet til\n"
 "å leggja til brukarar her."
 
-#: any.pm:1532
+#: any.pm:1539
 #, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
@@ -684,47 +684,47 @@ msgstr ""
 "Du må logga ut og inn att for at endringane skal trå i kraft. Trykk «OK» for "
 "å logga ut."
 
-#: any.pm:1536
+#: any.pm:1543
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "Du må logga ut og inn att for at endringane skal trå i kraft."
 
-#: any.pm:1571
+#: any.pm:1578
 #, c-format
 msgid "Timezone"
 msgstr "Tidssone"
 
-#: any.pm:1571
+#: any.pm:1578
 #, c-format
 msgid "Which is your timezone?"
 msgstr "I kva tidssone held du til?"
 
-#: any.pm:1594 any.pm:1596
+#: any.pm:1601 any.pm:1603
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Dato, klokkeslett og tidssone"
 
-#: any.pm:1597
+#: any.pm:1604
 #, c-format
 msgid "What is the best time?"
 msgstr "Kva er den beste tida?"
 
-#: any.pm:1601
+#: any.pm:1608
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (maskinvareklokka er sett til UTC)"
 
-#: any.pm:1602
+#: any.pm:1609
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (maskinvareklokka er sett til lokaltid)"
 
-#: any.pm:1604
+#: any.pm:1611
 #, c-format
 msgid "NTP Server"
 msgstr "NTP-tenar"
 
-#: any.pm:1605
+#: any.pm:1612
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatisk tidssynkronisering (med NTP)"
@@ -1102,17 +1102,17 @@ msgstr "Yaboot"
 msgid "SILO"
 msgstr "SILO"
 
-#: bootloader.pm:1293
+#: bootloader.pm:1277
 #, c-format
 msgid "not enough room in /boot"
 msgstr "Ikkje nok plass på «/boot»"
 
-#: bootloader.pm:2080
+#: bootloader.pm:2064
 #, c-format
 msgid "You cannot install the bootloader on a %s partition\n"
 msgstr "Du kan ikkje installera oppstartslastaren på ein «%s»-partisjon\n"
 
-#: bootloader.pm:2249
+#: bootloader.pm:2233
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1120,7 +1120,7 @@ msgid ""
 msgstr ""
 "Oppstartslastaren må oppdaterast, då partisjonane har fått ny rekkjefølgje"
 
-#: bootloader.pm:2262
+#: bootloader.pm:2246
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1129,7 +1129,7 @@ msgstr ""
 "Klarte ikkje installera oppstartslastaren. Du må køyra redningsmodus og "
 "velja «%s»"
 
-#: bootloader.pm:2263
+#: bootloader.pm:2247
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Installer oppstartslastar på nytt"
@@ -1271,18 +1271,18 @@ msgstr "Monteringspunkt"
 msgid "Options"
 msgstr "Val"
 
-#: diskdrake/dav.pm:68 interactive.pm:388 interactive/gtk.pm:462
+#: diskdrake/dav.pm:68 interactive.pm:388 interactive/gtk.pm:456
 #, c-format
 msgid "Remove"
 msgstr "Fjern"
 
-#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:203 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:215 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Ferdig"
 
-#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:135 diskdrake/hd_gtk.pm:309
+#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:147 diskdrake/hd_gtk.pm:321
 #: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
 #: diskdrake/interactive.pm:456 diskdrake/interactive.pm:527
 #: diskdrake/interactive.pm:545 diskdrake/interactive.pm:550
@@ -1308,14 +1308,13 @@ msgstr "Skriv inn WebDAV-tenaradresse"
 msgid "The URL must begin with http:// or https://"
 msgstr "Adressa må begynna med «http://» eller «https://»"
 
-#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:116 diskdrake/hd_gtk.pm:434
-#: diskdrake/interactive.pm:306 diskdrake/interactive.pm:391
-#: diskdrake/interactive.pm:597 diskdrake/interactive.pm:815
-#: diskdrake/interactive.pm:880 diskdrake/interactive.pm:1045
-#: diskdrake/interactive.pm:1087 diskdrake/interactive.pm:1088
-#: diskdrake/interactive.pm:1320 diskdrake/interactive.pm:1358
-#: diskdrake/interactive.pm:1509 do_pkgs.pm:19 do_pkgs.pm:39 do_pkgs.pm:57
-#: do_pkgs.pm:78 harddrake/sound.pm:399
+#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:454 diskdrake/interactive.pm:306
+#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:597
+#: diskdrake/interactive.pm:815 diskdrake/interactive.pm:880
+#: diskdrake/interactive.pm:1045 diskdrake/interactive.pm:1087
+#: diskdrake/interactive.pm:1088 diskdrake/interactive.pm:1320
+#: diskdrake/interactive.pm:1358 diskdrake/interactive.pm:1509 do_pkgs.pm:19
+#: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:78
 #, c-format
 msgid "Warning"
 msgstr "Åtvaring"
@@ -1341,44 +1340,50 @@ msgstr "Monteringspunkt: "
 msgid "Options: %s"
 msgstr "Val: %s"
 
-#: diskdrake/hd_gtk.pm:61 diskdrake/interactive.pm:301
+#: diskdrake/hd_gtk.pm:63 diskdrake/interactive.pm:301
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:108
-#: fs/partitioning_wizard.pm:61 fs/partitioning_wizard.pm:244
-#: fs/partitioning_wizard.pm:252 fs/partitioning_wizard.pm:291
-#: fs/partitioning_wizard.pm:439 fs/partitioning_wizard.pm:502
-#: fs/partitioning_wizard.pm:585 fs/partitioning_wizard.pm:588
+#: fs/partitioning_wizard.pm:59 fs/partitioning_wizard.pm:242
+#: fs/partitioning_wizard.pm:250 fs/partitioning_wizard.pm:289
+#: fs/partitioning_wizard.pm:435 fs/partitioning_wizard.pm:498
+#: fs/partitioning_wizard.pm:581 fs/partitioning_wizard.pm:584
 #, c-format
 msgid "Partitioning"
 msgstr "Partisjonering"
 
-#: diskdrake/hd_gtk.pm:73
+#: diskdrake/hd_gtk.pm:76
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr "Trykk på ein partisjon, vel ein filsystemtype og så ei handling."
 
-#: diskdrake/hd_gtk.pm:116
-#, fuzzy, c-format
-msgid "Please make a backup of your data first."
+#: diskdrake/hd_gtk.pm:126 diskdrake/interactive.pm:1195
+#: diskdrake/interactive.pm:1205 diskdrake/interactive.pm:1258
+#, c-format
+msgid "Read carefully"
+msgstr "Les nøye"
+
+#: diskdrake/hd_gtk.pm:126
+#, c-format
+msgid "Please make a backup of your data first"
 msgstr "Hugs å ta reservekopi av alle viktige data først."
 
-#: diskdrake/hd_gtk.pm:117 diskdrake/interactive.pm:240
+#: diskdrake/hd_gtk.pm:127 diskdrake/interactive.pm:240
 #, c-format
 msgid "Exit"
 msgstr "Avslutt"
 
-#: diskdrake/hd_gtk.pm:117
+#: diskdrake/hd_gtk.pm:127
 #, c-format
 msgid "Continue"
 msgstr "Hald fram"
 
-#: diskdrake/hd_gtk.pm:198 fs/partitioning_wizard.pm:561 interactive.pm:654
-#: interactive/gtk.pm:818 interactive/gtk.pm:836 interactive/gtk.pm:867
-#: ugtk2.pm:936
+#: diskdrake/hd_gtk.pm:210 fs/partitioning_wizard.pm:557 interactive.pm:654
+#: interactive/gtk.pm:812 interactive/gtk.pm:830 interactive/gtk.pm:862
+#: ugtk2.pm:936 ugtk3.pm:917
 #, c-format
 msgid "Help"
 msgstr "Hjelp"
 
-#: diskdrake/hd_gtk.pm:244
+#: diskdrake/hd_gtk.pm:256
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1389,88 +1394,88 @@ msgstr ""
 "Du bør først endra storleiken på denne\n"
 "(trykk på han og vel «Endra storleik»)"
 
-#: diskdrake/hd_gtk.pm:246
+#: diskdrake/hd_gtk.pm:258
 #, c-format
 msgid "Please click on a partition"
 msgstr "Trykk på ein partisjon"
 
-#: diskdrake/hd_gtk.pm:260 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:272 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Vis detaljar"
 
-#: diskdrake/hd_gtk.pm:309
+#: diskdrake/hd_gtk.pm:321
 #, c-format
 msgid "No hard disk drives found"
 msgstr "Fann ingen harddiskar"
 
-#: diskdrake/hd_gtk.pm:340
+#: diskdrake/hd_gtk.pm:358
 #, c-format
 msgid "Unknown"
 msgstr "Ukjend"
 
-#: diskdrake/hd_gtk.pm:405
+#: diskdrake/hd_gtk.pm:425
 #, c-format
 msgid "Ext4"
 msgstr "Ext4"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "Swap"
 msgstr "Vekslepartisjon"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:405 fs/partitioning_wizard.pm:409
+#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:406 fs/partitioning_wizard.pm:410 services.pm:192
+#: diskdrake/hd_gtk.pm:426 fs/partitioning_wizard.pm:406 services.pm:194
 #, c-format
 msgid "Other"
 msgstr "Anna"
 
-#: diskdrake/hd_gtk.pm:406 diskdrake/interactive.pm:1397
-#: fs/partitioning_wizard.pm:410
+#: diskdrake/hd_gtk.pm:426 diskdrake/interactive.pm:1397
+#: fs/partitioning_wizard.pm:406
 #, c-format
 msgid "Empty"
 msgstr "Tom"
 
-#: diskdrake/hd_gtk.pm:413
+#: diskdrake/hd_gtk.pm:433
 #, c-format
 msgid "Filesystem types:"
 msgstr "Filsystemtypar:"
 
-#: diskdrake/hd_gtk.pm:434
+#: diskdrake/hd_gtk.pm:454
 #, c-format
 msgid "This partition is already empty"
 msgstr "Denne partisjonen er alt tom."
 
-#: diskdrake/hd_gtk.pm:443
+#: diskdrake/hd_gtk.pm:463
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Bruk «Avmonter» først"
 
-#: diskdrake/hd_gtk.pm:443
+#: diskdrake/hd_gtk.pm:463
 #, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Bruk «%s» i stadenfor (i ekspertmodus)"
 
-#: diskdrake/hd_gtk.pm:443 diskdrake/interactive.pm:409
+#: diskdrake/hd_gtk.pm:463 diskdrake/interactive.pm:409
 #: diskdrake/interactive.pm:639 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
@@ -1494,7 +1499,7 @@ msgid "More"
 msgstr "Meir"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
-#: diskdrake/interactive.pm:1304 mygtk2.pm:1228
+#: diskdrake/interactive.pm:1304 mygtk2.pm:1228 mygtk3.pm:1254
 #, c-format
 msgid "Confirmation"
 msgstr "Stadfesting"
@@ -1519,7 +1524,7 @@ msgstr "Vil du avslutta utan å lagra partisjontabellen?"
 msgid "Do you want to save the /etc/fstab modifications?"
 msgstr "Vil du lagra endringar i «/etc/fstab»"
 
-#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:291
+#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:289
 #, c-format
 msgid "You need to reboot for the partition table modifications to take effect"
 msgstr ""
@@ -1807,7 +1812,7 @@ msgid "Where do you want to mount %s?"
 msgstr "Kor vil du montera «%s»?"
 
 #: diskdrake/interactive.pm:773 diskdrake/interactive.pm:869
-#: fs/partitioning_wizard.pm:137 fs/partitioning_wizard.pm:213
+#: fs/partitioning_wizard.pm:135 fs/partitioning_wizard.pm:211
 #, c-format
 msgid "Resizing"
 msgstr "Endrar storleik"
@@ -1854,7 +1859,7 @@ msgstr "Minste storleik: %s MB"
 msgid "Maximum size: %s MB"
 msgstr "Største storleik: %s MB"
 
-#: diskdrake/interactive.pm:880 fs/partitioning_wizard.pm:221
+#: diskdrake/interactive.pm:880 fs/partitioning_wizard.pm:219
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
@@ -1983,12 +1988,6 @@ msgstr "nivå"
 #, c-format
 msgid "chunk size in KiB"
 msgstr "blokkstorleik i KiB"
-
-#: diskdrake/interactive.pm:1195 diskdrake/interactive.pm:1205
-#: diskdrake/interactive.pm:1258
-#, c-format
-msgid "Read carefully"
-msgstr "Les nøye"
 
 #: diskdrake/interactive.pm:1196
 #, c-format
@@ -2305,7 +2304,9 @@ msgstr "Endra type"
 #: diskdrake/smbnfs_gtk.pm:81 interactive.pm:130 interactive.pm:551
 #: interactive/curses.pm:267 interactive/http.pm:104 interactive/http.pm:160
 #: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:846
-#: mygtk2.pm:1229 ugtk2.pm:415 ugtk2.pm:517 ugtk2.pm:526 ugtk2.pm:812
+#: mygtk2.pm:1229 mygtk3.pm:880 mygtk3.pm:1255 ugtk2.pm:415 ugtk2.pm:517
+#: ugtk2.pm:526 ugtk2.pm:812 ugtk3.pm:417 ugtk3.pm:507 ugtk3.pm:516
+#: ugtk3.pm:793
 #, c-format
 msgid "Cancel"
 msgstr "Avbryt"
@@ -2395,7 +2396,7 @@ msgstr ""
 "Det oppstod ein feil: Fann ingen gyldige einingar for nytt filsystem. "
 "Kontroller maskinvaren."
 
-#: fs/any.pm:75 fs/partitioning_wizard.pm:70
+#: fs/any.pm:75 fs/partitioning_wizard.pm:68
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Du må ha ein FAT-partisjon montert i «/boot/efi»"
@@ -2607,7 +2608,7 @@ msgstr ""
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr "Ikkje nok veksleplass for installering. Du må leggja til meir."
 
-#: fs/partitioning_wizard.pm:61
+#: fs/partitioning_wizard.pm:59
 #, c-format
 msgid ""
 "You must have a root partition.\n"
@@ -2618,7 +2619,7 @@ msgstr ""
 "Lag ein ny partisjon (eller vel ein gammal ein),\n"
 "og vel så «Monteringspunkt». Set dette til «/»."
 
-#: fs/partitioning_wizard.pm:67
+#: fs/partitioning_wizard.pm:65
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2629,42 +2630,42 @@ msgstr ""
 "\n"
 "Vil du likevel halda fram?"
 
-#: fs/partitioning_wizard.pm:101
+#: fs/partitioning_wizard.pm:99
 #, c-format
 msgid "Use free space"
 msgstr "Bruk ledig plass"
 
-#: fs/partitioning_wizard.pm:103
+#: fs/partitioning_wizard.pm:101
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Ikkje nok ledig plass til nye partisjonar"
 
-#: fs/partitioning_wizard.pm:111
+#: fs/partitioning_wizard.pm:109
 #, c-format
 msgid "Use existing partitions"
 msgstr "Bruk gamle partisjonar"
 
-#: fs/partitioning_wizard.pm:113
+#: fs/partitioning_wizard.pm:111
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "Det finst ingen gammal partisjon å bruka"
 
-#: fs/partitioning_wizard.pm:137
+#: fs/partitioning_wizard.pm:135
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Reknar ut storleik på Microsoft Windows®-partisjon"
 
-#: fs/partitioning_wizard.pm:173
+#: fs/partitioning_wizard.pm:171
 #, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "Bruk ledig plass på Microsoft Windows®-partisjonen"
 
-#: fs/partitioning_wizard.pm:177
+#: fs/partitioning_wizard.pm:175
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Kva partisjon vil du endra storleik på?"
 
-#: fs/partitioning_wizard.pm:180
+#: fs/partitioning_wizard.pm:178
 #, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2675,7 +2676,7 @@ msgstr ""
 "Microsoft Windows®, og køyr defragmenteringsverktøyet. Prøv så å installera "
 "%s på nytt."
 
-#: fs/partitioning_wizard.pm:188
+#: fs/partitioning_wizard.pm:186
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2710,77 +2711,77 @@ msgstr ""
 "Trykk «%s» når du er klar."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:197 fs/partitioning_wizard.pm:565
-#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519
+#: fs/partitioning_wizard.pm:195 fs/partitioning_wizard.pm:561
+#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:509
 #, c-format
 msgid "Next"
 msgstr "Neste"
 
-#: fs/partitioning_wizard.pm:203
+#: fs/partitioning_wizard.pm:201
 #, c-format
 msgid "Partitionning"
 msgstr "Partisjonering"
 
-#: fs/partitioning_wizard.pm:203
+#: fs/partitioning_wizard.pm:201
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr "Kva storleik vil du behalda for Microsoft Windows® på partisjon %s?"
 
-#: fs/partitioning_wizard.pm:204
+#: fs/partitioning_wizard.pm:202
 #, c-format
 msgid "Size"
 msgstr "Storleik"
 
-#: fs/partitioning_wizard.pm:213
+#: fs/partitioning_wizard.pm:211
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Endrar storleik på Microsoft Windows®-partisjon"
 
-#: fs/partitioning_wizard.pm:218
+#: fs/partitioning_wizard.pm:216
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "Klarte ikkje krympa/auka FAT: %s"
 
-#: fs/partitioning_wizard.pm:234
+#: fs/partitioning_wizard.pm:232
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Finn ingen FAT-partisjon å endra storleik på (eller det er ikkje nok ledig "
 "plass)."
 
-#: fs/partitioning_wizard.pm:239
+#: fs/partitioning_wizard.pm:237
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Fjern Windows™"
 
-#: fs/partitioning_wizard.pm:239
+#: fs/partitioning_wizard.pm:237
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "Slett og bruk heile disken"
 
-#: fs/partitioning_wizard.pm:243
+#: fs/partitioning_wizard.pm:241
 #, fuzzy, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
 msgstr "Du har meir enn éin harddisk. Kven av dei vil du installera Linux på?"
 
-#: fs/partitioning_wizard.pm:251 fsedit.pm:634
+#: fs/partitioning_wizard.pm:249 fsedit.pm:634
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "Alle gamle partisjonar og data på stasjonen «%s» går tapt."
 
-#: fs/partitioning_wizard.pm:261
+#: fs/partitioning_wizard.pm:259
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Tilpassa partisjonering"
 
-#: fs/partitioning_wizard.pm:267
+#: fs/partitioning_wizard.pm:265
 #, c-format
 msgid "Use fdisk"
 msgstr "Bruk fdisk"
 
-#: fs/partitioning_wizard.pm:270
+#: fs/partitioning_wizard.pm:268
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2789,27 +2790,27 @@ msgstr ""
 "Du kan no partisjonera «%s».\n"
 "Hugs å lagra med «w» når du er ferdig."
 
-#: fs/partitioning_wizard.pm:409
+#: fs/partitioning_wizard.pm:405
 #, c-format
 msgid "Ext2/3/4"
 msgstr "Ext2/3/4"
 
-#: fs/partitioning_wizard.pm:439 fs/partitioning_wizard.pm:585
+#: fs/partitioning_wizard.pm:435 fs/partitioning_wizard.pm:581
 #, c-format
 msgid "I cannot find any room for installing"
 msgstr "Ikkje nok plass for installering"
 
-#: fs/partitioning_wizard.pm:448 fs/partitioning_wizard.pm:592
+#: fs/partitioning_wizard.pm:444 fs/partitioning_wizard.pm:588
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "Partisjonsvegvisaren fann følgjande løysingar:"
 
-#: fs/partitioning_wizard.pm:518
+#: fs/partitioning_wizard.pm:514
 #, c-format
 msgid "Here is the content of your disk drive "
 msgstr "Her er innhaldet på stasjonen "
 
-#: fs/partitioning_wizard.pm:602
+#: fs/partitioning_wizard.pm:599
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Feil ved partisjonering: %s"
@@ -3214,37 +3215,47 @@ msgstr "Ukjend/andre"
 msgid "cpu # "
 msgstr "Prosessornummer "
 
-#: harddrake/sound.pm:270
+#: harddrake/sound.pm:95
 #, c-format
 msgid "Please Wait... Applying the configuration"
 msgstr "Vent litt … Gjer klar oppsett"
 
-#: harddrake/sound.pm:331
+#: harddrake/sound.pm:123
+#, c-format
+msgid "No known driver"
+msgstr "Ingen kjend drivar"
+
+#: harddrake/sound.pm:124
+#, c-format
+msgid "There's no known driver for your sound card (%s)"
+msgstr "Det finst ingen kjend drivar for lydkortet ditt («%s»)"
+
+#: harddrake/sound.pm:156
 #, c-format
 msgid "Enable PulseAudio"
 msgstr "Bruk PulseAudio"
 
-#: harddrake/sound.pm:336
+#: harddrake/sound.pm:161
 #, c-format
 msgid "Use Glitch-Free mode"
 msgstr "Bruk «Glitch-Free»-modus"
 
-#: harddrake/sound.pm:342
+#: harddrake/sound.pm:167
 #, c-format
 msgid "Reset sound mixer to default values"
 msgstr "Tilbakestill lydmiksaren til standardverdiane"
 
-#: harddrake/sound.pm:347
+#: harddrake/sound.pm:172
 #, c-format
 msgid "Troubleshooting"
 msgstr "Feilsøking"
 
-#: harddrake/sound.pm:354
+#: harddrake/sound.pm:179
 #, c-format
 msgid "No alternative driver"
 msgstr "Ingen alternativ drivar"
 
-#: harddrake/sound.pm:355
+#: harddrake/sound.pm:180
 #, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
@@ -3253,23 +3264,15 @@ msgstr ""
 "Det finst ingen OSS- eller ALSA-drivarar for lydkortet ditt («%s») som "
 "brukar «%s»"
 
-#: harddrake/sound.pm:362
+#: harddrake/sound.pm:187
 #, c-format
 msgid "Sound configuration"
 msgstr "Lydoppsett"
 
-#: harddrake/sound.pm:364
-#, c-format
-msgid ""
-"Here you can select an alternative driver (either OSS or ALSA) for your "
-"sound card (%s)."
-msgstr ""
-"Her kan du velja ein annan OSS- eller ALSA-drivar for lydkortet ditt («%s»)."
-
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
-#: harddrake/sound.pm:369
+#: harddrake/sound.pm:193
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -3281,7 +3284,7 @@ msgstr ""
 "\n"
 "Kortet brukar no %s«%s»-drivaren (standarddrivaren for kortet er «%s»)."
 
-#: harddrake/sound.pm:371
+#: harddrake/sound.pm:195
 #, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
@@ -3312,56 +3315,18 @@ msgstr ""
 "For å bruka ALSA kan du enten bruka det gamle OSS-grensesnittet, eller det "
 "nye ALSA-grensesnittet, med mange nye funksjonar.\n"
 
-#: harddrake/sound.pm:385 harddrake/sound.pm:487
+#: harddrake/sound.pm:210 harddrake/sound.pm:292
 #, c-format
 msgid "Driver:"
 msgstr "Drivar:"
 
-#: harddrake/sound.pm:399
-#, c-format
-msgid ""
-"The old \"%s\" driver is blacklisted.\n"
-"\n"
-"It has been reported to oops the kernel on unloading.\n"
-"\n"
-"The new \"%s\" driver will only be used on next bootstrap."
-msgstr ""
-"Den gamle «%s»-drivaren er svartelista, då han visstnok kan «oopsa» kjernen "
-"ved utlasting.\n"
-"\n"
-"Den nye «%s»-drivaren vert berre brukt ved neste oppstart."
-
-#: harddrake/sound.pm:407
-#, c-format
-msgid "No open source driver"
-msgstr "Ingen open kjeldekode-drivar"
-
-#: harddrake/sound.pm:408
-#, c-format
-msgid ""
-"There's no free driver for your sound card (%s), but there's a proprietary "
-"driver at \"%s\"."
-msgstr ""
-"Det finst ingen fri drivar for lydkortet ditt («%s»), men det finst ein "
-"godseigd drivar på «%s»."
-
-#: harddrake/sound.pm:411
-#, c-format
-msgid "No known driver"
-msgstr "Ingen kjend drivar"
-
-#: harddrake/sound.pm:412
-#, c-format
-msgid "There's no known driver for your sound card (%s)"
-msgstr "Det finst ingen kjend drivar for lydkortet ditt («%s»)"
-
-#: harddrake/sound.pm:427
+#: harddrake/sound.pm:232
 #, c-format
 msgid "Sound troubleshooting"
 msgstr "Feilsøking av lyd"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:430
+#: harddrake/sound.pm:235
 #, c-format
 msgid ""
 "Below are some basic tips to help debug audio problems, but for accurate and "
@@ -3420,18 +3385,18 @@ msgid ""
 "PulseAudio)\n"
 msgstr ""
 
-#: harddrake/sound.pm:476
+#: harddrake/sound.pm:281
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Vel drivar"
 
-#: harddrake/sound.pm:479
+#: harddrake/sound.pm:284
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "Val av annan drivar"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:482
+#: harddrake/sound.pm:287
 #, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -3490,17 +3455,20 @@ msgstr "Mottakartype:"
 #: interactive.pm:129 interactive.pm:550 interactive/curses.pm:270
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
 #: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:846
-#: ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
+#: mygtk3.pm:880 ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
+#: ugtk3.pm:423 ugtk3.pm:509 ugtk3.pm:793 ugtk3.pm:816
 #, c-format
 msgid "Ok"
 msgstr "OK"
 
-#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:157
+#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:792
+#: wizards.pm:157
 #, c-format
 msgid "Yes"
 msgstr "Ja"
 
-#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:157
+#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:792
+#: wizards.pm:157
 #, c-format
 msgid "No"
 msgstr "Nei"
@@ -3510,47 +3478,47 @@ msgstr "Nei"
 msgid "Choose a file"
 msgstr "Vel fil"
 
-#: interactive.pm:388 interactive/gtk.pm:462
+#: interactive.pm:388 interactive/gtk.pm:456
 #, c-format
 msgid "Add"
 msgstr "Legg til"
 
-#: interactive.pm:388 interactive/gtk.pm:462
+#: interactive.pm:388 interactive/gtk.pm:456
 #, c-format
 msgid "Modify"
 msgstr "Endra"
 
-#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519
+#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:509
 #, c-format
 msgid "Finish"
 msgstr "Fullfør"
 
-#: interactive.pm:551 interactive/curses.pm:267 ugtk2.pm:517
+#: interactive.pm:551 interactive/curses.pm:267 ugtk2.pm:517 ugtk3.pm:507
 #, c-format
 msgid "Previous"
 msgstr "Førre"
 
-#: interactive/curses.pm:576 ugtk2.pm:872
+#: interactive/curses.pm:576 ugtk2.pm:872 ugtk3.pm:853
 #, c-format
 msgid "No file chosen"
 msgstr "Inga fil vald"
 
-#: interactive/curses.pm:580 ugtk2.pm:876
+#: interactive/curses.pm:580 ugtk2.pm:876 ugtk3.pm:857
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "Du har valt ei mappe og ikkje ei fil."
 
-#: interactive/curses.pm:582 ugtk2.pm:878
+#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:859
 #, c-format
 msgid "No such directory"
 msgstr "Mappa finst ikkje"
 
-#: interactive/curses.pm:582 ugtk2.pm:878
+#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:859
 #, c-format
 msgid "No such file"
 msgstr "Fila finst ikkje"
 
-#: interactive/gtk.pm:601
+#: interactive/gtk.pm:596
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr "Obs! «Caps Lock» er på."
@@ -3642,7 +3610,7 @@ msgstr "default:LTR"
 msgid "Andorra"
 msgstr "Andorra"
 
-#: lang.pm:221 timezone.pm:227
+#: lang.pm:221 timezone.pm:235
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Dei sameinte arabiske emirata"
@@ -3687,7 +3655,7 @@ msgstr "Angola"
 msgid "Antarctica"
 msgstr "Antarktika"
 
-#: lang.pm:230 timezone.pm:272
+#: lang.pm:230 timezone.pm:280
 #, c-format
 msgid "Argentina"
 msgstr "Argentina"
@@ -3697,12 +3665,12 @@ msgstr "Argentina"
 msgid "American Samoa"
 msgstr "Amerikansk Samoa"
 
-#: lang.pm:232 mirror.pm:12 timezone.pm:230
+#: lang.pm:232 mirror.pm:12 timezone.pm:238
 #, c-format
 msgid "Austria"
 msgstr "Austerrike"
 
-#: lang.pm:233 mirror.pm:11 timezone.pm:268
+#: lang.pm:233 mirror.pm:11 timezone.pm:276
 #, c-format
 msgid "Australia"
 msgstr "Australia"
@@ -3727,12 +3695,12 @@ msgstr "Bosnia-Hercegovina"
 msgid "Barbados"
 msgstr "Barbados"
 
-#: lang.pm:238 timezone.pm:212
+#: lang.pm:238 timezone.pm:220
 #, c-format
 msgid "Bangladesh"
 msgstr "Bangladesh"
 
-#: lang.pm:239 mirror.pm:13 timezone.pm:232
+#: lang.pm:239 mirror.pm:13 timezone.pm:240
 #, c-format
 msgid "Belgium"
 msgstr "Belgia"
@@ -3742,7 +3710,7 @@ msgstr "Belgia"
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: lang.pm:241 timezone.pm:233
+#: lang.pm:241 timezone.pm:241
 #, c-format
 msgid "Bulgaria"
 msgstr "Bulgaria"
@@ -3777,7 +3745,7 @@ msgstr "Brunei"
 msgid "Bolivia"
 msgstr "Bolivia"
 
-#: lang.pm:248 mirror.pm:14 timezone.pm:273
+#: lang.pm:248 mirror.pm:14 timezone.pm:281
 #, c-format
 msgid "Brazil"
 msgstr "Brasil"
@@ -3802,7 +3770,7 @@ msgstr "Bouvetøya"
 msgid "Botswana"
 msgstr "Botswana"
 
-#: lang.pm:253 timezone.pm:231
+#: lang.pm:253 timezone.pm:239
 #, c-format
 msgid "Belarus"
 msgstr "Kviterussland"
@@ -3812,7 +3780,7 @@ msgstr "Kviterussland"
 msgid "Belize"
 msgstr "Belize"
 
-#: lang.pm:255 mirror.pm:15 timezone.pm:262
+#: lang.pm:255 mirror.pm:15 timezone.pm:270
 #, c-format
 msgid "Canada"
 msgstr "Canada"
@@ -3837,7 +3805,7 @@ msgstr "Den sentralafrikanske republikken"
 msgid "Congo (Brazzaville)"
 msgstr "Kongo-Brazzaville"
 
-#: lang.pm:260 mirror.pm:39 timezone.pm:256
+#: lang.pm:260 mirror.pm:39 timezone.pm:264
 #, c-format
 msgid "Switzerland"
 msgstr "Sveits"
@@ -3852,7 +3820,7 @@ msgstr "Elfenbeinskysten"
 msgid "Cook Islands"
 msgstr "Cookøyane"
 
-#: lang.pm:263 timezone.pm:274
+#: lang.pm:263 timezone.pm:282
 #, c-format
 msgid "Chile"
 msgstr "Chile"
@@ -3862,7 +3830,7 @@ msgstr "Chile"
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: lang.pm:265 timezone.pm:213
+#: lang.pm:265 timezone.pm:221
 #, c-format
 msgid "China"
 msgstr "Kina"
@@ -3902,12 +3870,12 @@ msgstr "Christmasøya"
 msgid "Cyprus"
 msgstr "Kypros"
 
-#: lang.pm:273 mirror.pm:17 timezone.pm:234
+#: lang.pm:273 mirror.pm:17 timezone.pm:242
 #, c-format
 msgid "Czech Republic"
 msgstr "Tsjekkia"
 
-#: lang.pm:274 mirror.pm:22 timezone.pm:239
+#: lang.pm:274 mirror.pm:22 timezone.pm:247
 #, c-format
 msgid "Germany"
 msgstr "Tyskland"
@@ -3917,7 +3885,7 @@ msgstr "Tyskland"
 msgid "Djibouti"
 msgstr "Djibouti"
 
-#: lang.pm:276 mirror.pm:18 timezone.pm:235
+#: lang.pm:276 mirror.pm:18 timezone.pm:243
 #, c-format
 msgid "Denmark"
 msgstr "Danmark"
@@ -3942,7 +3910,7 @@ msgstr "Algerie"
 msgid "Ecuador"
 msgstr "Ecuador"
 
-#: lang.pm:281 mirror.pm:19 timezone.pm:236
+#: lang.pm:281 mirror.pm:19 timezone.pm:244
 #, c-format
 msgid "Estonia"
 msgstr "Estland"
@@ -3962,7 +3930,7 @@ msgstr "Vest-Sahara"
 msgid "Eritrea"
 msgstr "Eritrea"
 
-#: lang.pm:285 mirror.pm:37 timezone.pm:254
+#: lang.pm:285 mirror.pm:37 timezone.pm:262
 #, c-format
 msgid "Spain"
 msgstr "Spania"
@@ -3972,7 +3940,7 @@ msgstr "Spania"
 msgid "Ethiopia"
 msgstr "Etiopia"
 
-#: lang.pm:287 mirror.pm:20 timezone.pm:237
+#: lang.pm:287 mirror.pm:20 timezone.pm:245
 #, c-format
 msgid "Finland"
 msgstr "Finland"
@@ -3997,7 +3965,7 @@ msgstr "Mikronesiaføderasjonen"
 msgid "Faroe Islands"
 msgstr "Færøyane"
 
-#: lang.pm:292 mirror.pm:21 timezone.pm:238
+#: lang.pm:292 mirror.pm:21 timezone.pm:246
 #, c-format
 msgid "France"
 msgstr "Frankrike"
@@ -4007,7 +3975,7 @@ msgstr "Frankrike"
 msgid "Gabon"
 msgstr "Gabon"
 
-#: lang.pm:294 timezone.pm:258
+#: lang.pm:294 timezone.pm:266
 #, c-format
 msgid "United Kingdom"
 msgstr "Storbritannia"
@@ -4062,7 +4030,7 @@ msgstr "Guadeloupe"
 msgid "Equatorial Guinea"
 msgstr "Ekvatorial-Guinea"
 
-#: lang.pm:305 mirror.pm:23 timezone.pm:240
+#: lang.pm:305 mirror.pm:23 timezone.pm:248
 #, c-format
 msgid "Greece"
 msgstr "Hellas"
@@ -4072,7 +4040,7 @@ msgstr "Hellas"
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Sør-Georgia og dei sørlege Sandwichøyane"
 
-#: lang.pm:307 timezone.pm:263
+#: lang.pm:307 timezone.pm:271
 #, c-format
 msgid "Guatemala"
 msgstr "Guatemala"
@@ -4117,27 +4085,27 @@ msgstr "Kroatia"
 msgid "Haiti"
 msgstr "Haiti"
 
-#: lang.pm:316 mirror.pm:24 timezone.pm:241
+#: lang.pm:316 mirror.pm:24 timezone.pm:249
 #, c-format
 msgid "Hungary"
 msgstr "Ungarn"
 
-#: lang.pm:317 timezone.pm:216
+#: lang.pm:317 timezone.pm:224
 #, c-format
 msgid "Indonesia"
 msgstr "Indonesia"
 
-#: lang.pm:318 mirror.pm:25 timezone.pm:242
+#: lang.pm:318 mirror.pm:25 timezone.pm:250
 #, c-format
 msgid "Ireland"
 msgstr "Irland"
 
-#: lang.pm:319 mirror.pm:26 timezone.pm:218
+#: lang.pm:319 mirror.pm:26 timezone.pm:226
 #, c-format
 msgid "Israel"
 msgstr "Israel"
 
-#: lang.pm:320 timezone.pm:215
+#: lang.pm:320 timezone.pm:223
 #, c-format
 msgid "India"
 msgstr "India"
@@ -4152,7 +4120,7 @@ msgstr "Det britiske området i Indiahavet"
 msgid "Iraq"
 msgstr "Irak"
 
-#: lang.pm:323 timezone.pm:217
+#: lang.pm:323 timezone.pm:225
 #, c-format
 msgid "Iran"
 msgstr "Iran"
@@ -4162,7 +4130,7 @@ msgstr "Iran"
 msgid "Iceland"
 msgstr "Island"
 
-#: lang.pm:325 mirror.pm:27 timezone.pm:243
+#: lang.pm:325 mirror.pm:27 timezone.pm:251
 #, c-format
 msgid "Italy"
 msgstr "Italia"
@@ -4177,7 +4145,7 @@ msgstr "Jamaica"
 msgid "Jordan"
 msgstr "Jordan"
 
-#: lang.pm:328 mirror.pm:28 timezone.pm:219
+#: lang.pm:328 mirror.pm:28 timezone.pm:227
 #, c-format
 msgid "Japan"
 msgstr "Japan"
@@ -4217,7 +4185,7 @@ msgstr "St. Kitts og Nevis"
 msgid "Korea (North)"
 msgstr "Nord-Korea"
 
-#: lang.pm:336 timezone.pm:220
+#: lang.pm:336 timezone.pm:228
 #, c-format
 msgid "Korea"
 msgstr "Sør-Korea"
@@ -4272,12 +4240,12 @@ msgstr "Liberia"
 msgid "Lesotho"
 msgstr "Lesotho"
 
-#: lang.pm:347 timezone.pm:244
+#: lang.pm:347 timezone.pm:252
 #, c-format
 msgid "Lithuania"
 msgstr "Litauen"
 
-#: lang.pm:348 timezone.pm:245
+#: lang.pm:348 timezone.pm:253
 #, c-format
 msgid "Luxembourg"
 msgstr "Luxembourg"
@@ -4377,12 +4345,12 @@ msgstr "Maldivane"
 msgid "Malawi"
 msgstr "Malawi"
 
-#: lang.pm:368 timezone.pm:264
+#: lang.pm:368 timezone.pm:272
 #, c-format
 msgid "Mexico"
 msgstr "Mexico"
 
-#: lang.pm:369 timezone.pm:221
+#: lang.pm:369 timezone.pm:229
 #, c-format
 msgid "Malaysia"
 msgstr "Malaysia"
@@ -4422,12 +4390,12 @@ msgstr "Nigeria"
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
-#: lang.pm:377 mirror.pm:29 timezone.pm:246
+#: lang.pm:377 mirror.pm:29 timezone.pm:254
 #, c-format
 msgid "Netherlands"
 msgstr "Nederland"
 
-#: lang.pm:378 mirror.pm:31 timezone.pm:247
+#: lang.pm:378 mirror.pm:31 timezone.pm:255
 #, c-format
 msgid "Norway"
 msgstr "Noreg"
@@ -4447,7 +4415,7 @@ msgstr "Nauru"
 msgid "Niue"
 msgstr "Niue"
 
-#: lang.pm:382 mirror.pm:30 timezone.pm:269
+#: lang.pm:382 mirror.pm:30 timezone.pm:277
 #, c-format
 msgid "New Zealand"
 msgstr "New Zealand"
@@ -4477,7 +4445,7 @@ msgstr "Fransk Polynesia"
 msgid "Papua New Guinea"
 msgstr "Papua Ny-Guinea"
 
-#: lang.pm:388 timezone.pm:222
+#: lang.pm:388 timezone.pm:230
 #, c-format
 msgid "Philippines"
 msgstr "Filippinane"
@@ -4487,7 +4455,7 @@ msgstr "Filippinane"
 msgid "Pakistan"
 msgstr "Pakistan"
 
-#: lang.pm:390 mirror.pm:32 timezone.pm:248
+#: lang.pm:390 mirror.pm:32 timezone.pm:256
 #, c-format
 msgid "Poland"
 msgstr "Polen"
@@ -4512,7 +4480,7 @@ msgstr "Puerto Rico"
 msgid "Palestine"
 msgstr "Palestina"
 
-#: lang.pm:395 mirror.pm:33 timezone.pm:249
+#: lang.pm:395 mirror.pm:33 timezone.pm:257
 #, c-format
 msgid "Portugal"
 msgstr "Portugal"
@@ -4537,7 +4505,7 @@ msgstr "Qatar"
 msgid "Reunion"
 msgstr "Réunion"
 
-#: lang.pm:400 timezone.pm:250
+#: lang.pm:400 timezone.pm:258
 #, c-format
 msgid "Romania"
 msgstr "Romania"
@@ -4572,12 +4540,12 @@ msgstr "Seychellane"
 msgid "Sudan"
 msgstr "Sudan"
 
-#: lang.pm:407 mirror.pm:38 timezone.pm:255
+#: lang.pm:407 mirror.pm:38 timezone.pm:263
 #, c-format
 msgid "Sweden"
 msgstr "Sverige"
 
-#: lang.pm:408 timezone.pm:223
+#: lang.pm:408 timezone.pm:231
 #, c-format
 msgid "Singapore"
 msgstr "Singapore"
@@ -4587,7 +4555,7 @@ msgstr "Singapore"
 msgid "Saint Helena"
 msgstr "St. Helena"
 
-#: lang.pm:410 timezone.pm:253
+#: lang.pm:410 timezone.pm:261
 #, c-format
 msgid "Slovenia"
 msgstr "Slovenia"
@@ -4597,7 +4565,7 @@ msgstr "Slovenia"
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Svalbard og Jan Mayen"
 
-#: lang.pm:412 mirror.pm:35 timezone.pm:252
+#: lang.pm:412 mirror.pm:35 timezone.pm:260
 #, c-format
 msgid "Slovakia"
 msgstr "Slovakia"
@@ -4667,7 +4635,7 @@ msgstr "Franske sørlege territorium"
 msgid "Togo"
 msgstr "Togo"
 
-#: lang.pm:426 mirror.pm:41 timezone.pm:225
+#: lang.pm:426 mirror.pm:41 timezone.pm:233
 #, c-format
 msgid "Thailand"
 msgstr "Thailand"
@@ -4702,7 +4670,7 @@ msgstr "Tunisia"
 msgid "Tonga"
 msgstr "Tonga"
 
-#: lang.pm:433 timezone.pm:226
+#: lang.pm:433 timezone.pm:234
 #, c-format
 msgid "Turkey"
 msgstr "Turkey"
@@ -4717,17 +4685,17 @@ msgstr "Trinidad og Tobago"
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: lang.pm:436 mirror.pm:40 timezone.pm:224
+#: lang.pm:436 mirror.pm:40 timezone.pm:232
 #, c-format
 msgid "Taiwan"
 msgstr "Taiwan"
 
-#: lang.pm:437 timezone.pm:209
+#: lang.pm:437 timezone.pm:217
 #, c-format
 msgid "Tanzania"
 msgstr "Tanzania"
 
-#: lang.pm:438 timezone.pm:257
+#: lang.pm:438 timezone.pm:265
 #, c-format
 msgid "Ukraine"
 msgstr "Ukraina"
@@ -4742,7 +4710,7 @@ msgstr "Uganda"
 msgid "United States Minor Outlying Islands"
 msgstr "USA, mindre utanforliggjande øyar"
 
-#: lang.pm:441 mirror.pm:42 timezone.pm:265
+#: lang.pm:441 mirror.pm:42 timezone.pm:273
 #, c-format
 msgid "United States"
 msgstr "USA"
@@ -4812,7 +4780,7 @@ msgstr "Jemen"
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: lang.pm:455 mirror.pm:36 timezone.pm:208
+#: lang.pm:455 mirror.pm:36 timezone.pm:216
 #, c-format
 msgid "South Africa"
 msgstr "Sør-Afrika"
@@ -5469,22 +5437,22 @@ msgstr ""
 "Klarte ikkje lasta modulen «%s».\n"
 "Vil du prøva på nytt med andre parametrar?"
 
-#: mygtk2.pm:1229
+#: mygtk2.pm:1229 mygtk3.pm:1255
 #, fuzzy, c-format
 msgid "Are you sure you want to quit?"
 msgstr "Er du sikker på at du vil sletta dette monteringspunktet?"
 
-#: mygtk2.pm:1571 mygtk2.pm:1572
+#: mygtk2.pm:1570 mygtk2.pm:1571 mygtk3.pm:1606 mygtk3.pm:1607
 #, c-format
 msgid "Password is trivial to guess"
 msgstr "Passordet lett å gjetta"
 
-#: mygtk2.pm:1573
+#: mygtk2.pm:1572 mygtk3.pm:1608
 #, c-format
 msgid "Password should be resistant to basic attacks"
 msgstr "Passordet toler enkle åtak"
 
-#: mygtk2.pm:1574 mygtk2.pm:1575
+#: mygtk2.pm:1573 mygtk2.pm:1574 mygtk3.pm:1609 mygtk3.pm:1610
 #, c-format
 msgid "Password seems secure"
 msgstr "Passordet verkar trygt"
@@ -6383,6 +6351,16 @@ msgid "Set CPU powersafe mode"
 msgstr ""
 
 #: services.pm:26
+#, fuzzy, c-format
+msgid "An NTP client/server"
+msgstr "NTP-tenar"
+
+#: services.pm:27
+#, c-format
+msgid "Set CPU frequency settings"
+msgstr "Vel prosessorfrekvensar"
+
+#: services.pm:28
 #, c-format
 msgid ""
 "cron is a standard UNIX program that runs user-specified programs\n"
@@ -6394,18 +6372,18 @@ msgstr ""
 "ei utgåve med fleire funksjonar, blant anna betre tryggleik og avanserte "
 "oppsettval."
 
-#: services.pm:29
+#: services.pm:31
 #, c-format
 msgid ""
 "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "Common UNIX Printing System (CUPS) er eit avansert utskriftskøsystem."
 
-#: services.pm:30
+#: services.pm:32
 #, c-format
 msgid "Launches the graphical display manager"
 msgstr "Startar den grafiske innloggingsveljaren."
 
-#: services.pm:31
+#: services.pm:33
 #, c-format
 msgid ""
 "FAM is a file monitoring daemon. It is used to get reports when files "
@@ -6416,7 +6394,7 @@ msgstr ""
 "vert endra.\n"
 "Tenesta er brukt av GNOME og KDE."
 
-#: services.pm:33
+#: services.pm:35
 #, c-format
 msgid ""
 "G15Daemon allows users access to all extra keys by decoding them and \n"
@@ -6437,7 +6415,7 @@ msgstr ""
 "tilgjengelege. Klientprogram og skript får tilgang til LCD-en via eit enkelt "
 "API."
 
-#: services.pm:38
+#: services.pm:40
 #, c-format
 msgid ""
 "GPM adds mouse support to text-based Linux applications such the\n"
@@ -6449,13 +6427,13 @@ msgstr ""
 "Commander. Programmet gjer det òg mogleg å kopiera og lima inn tekst frå "
 "konsollen."
 
-#: services.pm:41
+#: services.pm:43
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
 msgstr ""
 "HAL er ei teneste som samlar inn og vedlikeheld informasjon om maskinvare."
 
-#: services.pm:42
+#: services.pm:44
 #, c-format
 msgid ""
 "HardDrake runs a hardware probe, and optionally configures\n"
@@ -6463,13 +6441,13 @@ msgid ""
 msgstr ""
 "HardDrake køyrer eit maskinvaresøk, og kan setja opp ny og endra maskinvare."
 
-#: services.pm:44
+#: services.pm:46
 #, c-format
 msgid ""
 "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr "Apache er ein vevtenar."
 
-#: services.pm:45
+#: services.pm:47
 #, c-format
 msgid ""
 "The internet superserver daemon (commonly called inetd) starts a\n"
@@ -6484,23 +6462,23 @@ msgstr ""
 "telnet, ftp, rsh og rlogin. Viss du slår av inetd, kan du ikkje bruka\n"
 "nokon av desse tenestene."
 
-#: services.pm:49
+#: services.pm:51
 #, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
 msgstr "Automatisert pakkefiltreringsbrannmur med ip6tables"
 
-#: services.pm:50
+#: services.pm:52
 #, c-format
 msgid "Automates a packet filtering firewall with iptables"
 msgstr "Automatisert pakkefiltreringsbrannmur med iptables"
 
-#: services.pm:51
+#: services.pm:53
 #, c-format
 msgid ""
 "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
 msgstr "Fordel IRQ-last jamnt på prosessorane, for betre yting"
 
-#: services.pm:52
+#: services.pm:54
 #, c-format
 msgid ""
 "This package loads the selected keyboard map as set in\n"
@@ -6511,7 +6489,7 @@ msgstr ""
 "Du kan velja tastaturkart med programmet kbdconfig.\n"
 "Denne bør stå på for dei fleste maskiner."
 
-#: services.pm:55
+#: services.pm:57
 #, c-format
 msgid ""
 "Automatic regeneration of kernel header in /boot for\n"
@@ -6520,17 +6498,17 @@ msgstr ""
 "Automatisk regenerering av kjernehovudet i /boot for «/usr/include/linux/"
 "{autoconf,versjon}.h»."
 
-#: services.pm:57
+#: services.pm:59
 #, c-format
 msgid "Automatic detection and configuration of hardware at boot."
 msgstr "Automatisk søk etter, og oppsett av, maskinvare ved oppstart."
 
-#: services.pm:58
+#: services.pm:60
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
 msgstr "Tilpassa systemet for lågare batteribruk"
 
-#: services.pm:59
+#: services.pm:61
 #, c-format
 msgid ""
 "Linuxconf will sometimes arrange to perform various tasks\n"
@@ -6539,7 +6517,7 @@ msgstr ""
 "Linuxconf vil av og til setja opp ymse oppgåver ved oppstart\n"
 "for vedlikehald av systemoppsettet."
 
-#: services.pm:61
+#: services.pm:63
 #, c-format
 msgid ""
 "lpd is the print daemon required for lpr to work properly. It is\n"
@@ -6550,7 +6528,7 @@ msgstr ""
 "skrivarar."
 
 # skip-rule: server
-#: services.pm:63
+#: services.pm:65
 #, c-format
 msgid ""
 "Linux Virtual Server, used to build a high-performance and highly\n"
@@ -6559,17 +6537,17 @@ msgstr ""
 "Linux Virtual Server – brukt til å byggja ein rask og godt tilgjengeleg "
 "tenar."
 
-#: services.pm:65
+#: services.pm:67
 #, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
 msgstr "Overvak nettverket (interaktiv brannmur og trådlaustilgang)"
 
-#: services.pm:66
+#: services.pm:68
 #, c-format
 msgid "Software RAID monitoring and management"
 msgstr "Overvaking og handsaming av programvarebasert RAID"
 
-#: services.pm:67
+#: services.pm:69
 #, c-format
 msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
@@ -6578,12 +6556,12 @@ msgstr ""
 "DBUS er ei teneste som kringkastar meldingar om systemhendingar, samt andre "
 "meldingar."
 
-#: services.pm:68
+#: services.pm:70
 #, c-format
 msgid "Enables MSEC security policy on system startup"
 msgstr "MSEC-tryggleikskontrollar ved oppstart"
 
-#: services.pm:69
+#: services.pm:71
 #, c-format
 msgid ""
 "named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
@@ -6592,12 +6570,12 @@ msgstr ""
 "named (BIND) er ein domenamntenar (DNS) som vert brukt å fastsetja IP-"
 "adresser ut frå vertsnamn."
 
-#: services.pm:70
+#: services.pm:72
 #, c-format
 msgid "Initializes network console logging"
 msgstr "Start loggføring av nettverkskonsoll"
 
-#: services.pm:71
+#: services.pm:73
 #, c-format
 msgid ""
 "Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
@@ -6606,7 +6584,7 @@ msgstr ""
 "Monterer og avmonterer alle nettverksfilsystem- (NFS), SMB- (Lan\n"
 "Manager / Windows) og NCP-monteringspunkt (NetWare)."
 
-#: services.pm:73
+#: services.pm:75
 #, c-format
 msgid ""
 "Activates/Deactivates all network interfaces configured to start\n"
@@ -6615,17 +6593,17 @@ msgstr ""
 "Slå på/av alle nettverksgrensesnitt som er sette opp til å startast ved "
 "systemoppstart."
 
-#: services.pm:75
+#: services.pm:77
 #, c-format
 msgid "Requires network to be up if enabled"
 msgstr "Krev at nettverket må vera tilgjengeleg"
 
-#: services.pm:76
+#: services.pm:78
 #, c-format
 msgid "Wait for the hotplugged network to be up"
 msgstr "Vent til nettverket vert tilgjengeleg"
 
-#: services.pm:77
+#: services.pm:79
 #, c-format
 msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP networks.\n"
@@ -6636,7 +6614,7 @@ msgstr ""
 "Denne tenesta gjev NFS-tenarfunksjonalitet, som er sett opp via fila «/etc/"
 "exports»."
 
-#: services.pm:80
+#: services.pm:82
 #, c-format
 msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP\n"
@@ -6645,29 +6623,29 @@ msgstr ""
 "NFS er ein populær protokoll for fildeling over TCP/IP-nettverk.\n"
 "Denne tenesta gjev fillåsingsstøtte i NFS."
 
-#: services.pm:82
+#: services.pm:84
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
 msgstr "Synkroniserer systemklokka med nettverkstidsprotokollen NTP."
 
-#: services.pm:83
+#: services.pm:85
 #, c-format
 msgid ""
 "Automatically switch on numlock key locker under console\n"
 "and Xorg at boot."
 msgstr "Slå automatisk på «Num Lock» på konsollar og X.org ved systemoppstart."
 
-#: services.pm:85
+#: services.pm:87
 #, c-format
 msgid "Support the OKI 4w and compatible winprinters."
 msgstr "Støtte OKI 4w og kompatible Windows-skrivarar."
 
-#: services.pm:86
+#: services.pm:88
 #, c-format
 msgid "Checks if a partition is close to full up"
 msgstr "Kontrollerer om ein partisjon snart er full"
 
-#: services.pm:87
+#: services.pm:89
 #, c-format
 msgid ""
 "PCMCIA support is usually to support things like ethernet and\n"
@@ -6679,7 +6657,7 @@ msgstr ""
 "berbare maskiner. Støtta vert ikkje slått på med mindre ho er\n"
 "sett opp slik at ho er trygg å bruka på maskiner som ikkje treng ho."
 
-#: services.pm:90
+#: services.pm:92
 #, c-format
 msgid ""
 "The portmapper manages RPC connections, which are used by\n"
@@ -6691,12 +6669,12 @@ msgstr ""
 "protokollane NFS og NIS. Du må køyra portmap-tenaren på maskiner\n"
 "som vert brukte som tenarar for protokollar som brukar RPC."
 
-#: services.pm:93
+#: services.pm:95
 #, c-format
 msgid "Reserves some TCP ports"
 msgstr "Reserverer nokre TCP-portar"
 
-#: services.pm:94
+#: services.pm:96
 #, c-format
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
@@ -6704,7 +6682,7 @@ msgid ""
 msgstr ""
 "Postfix er eit program for overføring av elektronisk post mellom maskiner."
 
-#: services.pm:95
+#: services.pm:97
 #, c-format
 msgid ""
 "Saves and restores system entropy pool for higher quality random\n"
@@ -6712,7 +6690,7 @@ msgid ""
 msgstr ""
 "Lagrar og gjenopprettar systementropigrunnlag for betre slumptalsgenerering."
 
-#: services.pm:97
+#: services.pm:99
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard disk drive\n"
@@ -6721,12 +6699,12 @@ msgstr ""
 "Tildeler råeiningar til blokkeiningar (som harddiskpartisjonar) for bruk\n"
 "av program som for eksempel Oracle og DVD-spelarar."
 
-#: services.pm:99
+#: services.pm:101
 #, c-format
 msgid "Nameserver information manager"
 msgstr "Handsam namnetenarinformasjon"
 
-#: services.pm:100
+#: services.pm:102
 #, c-format
 msgid ""
 "The routed daemon allows for automatic IP router table updated via\n"
@@ -6738,7 +6716,7 @@ msgstr ""
 "du\n"
 "treng meir avanserte ruteprotokollar for store nettverk."
 
-#: services.pm:103
+#: services.pm:105
 #, c-format
 msgid ""
 "The rstat protocol allows users on a network to retrieve\n"
@@ -6747,7 +6725,7 @@ msgstr ""
 "Protokollen rstat lèt brukarar på nettverket henta\n"
 "ytingsstatistikk for andre maskiner på nettverket."
 
-#: services.pm:105
+#: services.pm:107
 #, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
@@ -6756,7 +6734,7 @@ msgstr ""
 "Syslog er ei teneste mange andre tenester brukar til å logga meldingar til "
 "systemloggfilene. Du bør alltid køyra rsyslog."
 
-#: services.pm:106
+#: services.pm:108
 #, c-format
 msgid ""
 "The rusers protocol allows users on a network to identify who is\n"
@@ -6765,7 +6743,7 @@ msgstr ""
 "Protokollen rusers lèt brukarar på nettverket identifisera\n"
 "kven som er logga inn på andre maskiner."
 
-#: services.pm:108
+#: services.pm:110
 #, c-format
 msgid ""
 "The rwho protocol lets remote users get a list of all of the users\n"
@@ -6774,7 +6752,7 @@ msgstr ""
 "Protokollen rwho lar fjernbrukarar henta ei oversikt over alle\n"
 "brukarar logga på maskiner som køyrer rwho-tenesta."
 
-#: services.pm:110
+#: services.pm:112
 #, c-format
 msgid ""
 "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
@@ -6782,13 +6760,13 @@ msgstr ""
 "SANE (Scanner Access Now Easy) gjev tilgang til skannarar, filmkamera og "
 "liknande."
 
-#: services.pm:111
+#: services.pm:113
 #, c-format
 msgid "Packet filtering firewall"
 msgstr "Brannmur med pakkefiltrering"
 
 # skip-rule: server
-#: services.pm:112
+#: services.pm:114
 #, c-format
 msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
@@ -6797,17 +6775,17 @@ msgstr ""
 "SMB/CIFS-protokollen gjer det mogleg å dela tilgang til filer og skrivarar, "
 "og integrera med Windows Server-domene."
 
-#: services.pm:113
+#: services.pm:115
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Start lydsystemet på maskina"
 
-#: services.pm:114
+#: services.pm:116
 #, c-format
 msgid "layer for speech analysis"
 msgstr "Taleanalyse-lag"
 
-#: services.pm:115
+#: services.pm:117
 #, c-format
 msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
@@ -6816,7 +6794,7 @@ msgstr ""
 "Secure Shell er ein nettverksprotokoll som gjer det mogleg å dela data over "
 "eit sikkert samband mellom to datamaskiner."
 
-#: services.pm:116
+#: services.pm:118
 #, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages\n"
@@ -6825,94 +6803,94 @@ msgstr ""
 "Syslog er ei teneste mange andre tenester brukar til å logga\n"
 "meldingar til systemloggfilene. Du bør alltid køyra syslog."
 
-#: services.pm:118
+#: services.pm:120
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
 msgstr "Flyttar dei genererte faste udev-reglane til /etc/udev/rules.d"
 
-#: services.pm:119
+#: services.pm:121
 #, c-format
 msgid "Load the drivers for your usb devices."
 msgstr "Last drivarane for USB-einingane dine."
 
-#: services.pm:120
+#: services.pm:122
 #, c-format
 msgid "A lightweight network traffic monitor"
 msgstr "Lett overvaking av nettverkstrafikk"
 
-#: services.pm:121
+#: services.pm:123
 #, c-format
 msgid "Starts the X Font Server."
 msgstr "Startar X-skrifttenaren."
 
-#: services.pm:122
+#: services.pm:124
 #, c-format
 msgid "Starts other deamons on demand."
 msgstr "Startar andre tenester når det trengst."
 
-#: services.pm:151
+#: services.pm:153
 #, c-format
 msgid "Printing"
 msgstr "Utskrift"
 
-#: services.pm:154
+#: services.pm:156
 #, c-format
 msgid "Internet"
 msgstr "Internett"
 
-#: services.pm:159
+#: services.pm:161
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Nettverk"
 
-#: services.pm:161
+#: services.pm:163
 #, c-format
 msgid "System"
 msgstr "System"
 
-#: services.pm:167
+#: services.pm:169
 #, c-format
 msgid "Remote Administration"
 msgstr "Fjernadministrering"
 
-#: services.pm:176
+#: services.pm:178
 #, c-format
 msgid "Database Server"
 msgstr "Databasetenar"
 
-#: services.pm:187 services.pm:224
+#: services.pm:189 services.pm:226
 #, c-format
 msgid "Services"
 msgstr "Tenester"
 
-#: services.pm:187
+#: services.pm:189
 #, c-format
 msgid "Choose which services should be automatically started at boot time"
 msgstr "Vel kva tenester du vil starta automatisk ved oppstart"
 
-#: services.pm:205
+#: services.pm:207
 #, c-format
 msgid "%d activated for %d registered"
 msgstr "%d på av %d registrerte"
 
-#: services.pm:240
+#: services.pm:230
 #, c-format
 msgid "running"
 msgstr "køyrer"
 
-#: services.pm:240
+#: services.pm:230
 #, c-format
 msgid "stopped"
 msgstr "stoppa"
 
-#: services.pm:245
+#: services.pm:235
 #, c-format
 msgid "Services and daemons"
 msgstr "Tenester og tenarar"
 
-#: services.pm:251
+#: services.pm:241
 #, c-format
 msgid ""
 "No additional information\n"
@@ -6921,27 +6899,22 @@ msgstr ""
 "Det finst ingen ekstrainformasjon\n"
 "om denne tenesta."
 
-#: services.pm:256 ugtk2.pm:924
-#, c-format
-msgid "Info"
-msgstr "Informasjon"
-
-#: services.pm:259
+#: services.pm:248
 #, c-format
 msgid "Start when requested"
 msgstr "Start ved førespurnad"
 
-#: services.pm:259
+#: services.pm:248
 #, c-format
 msgid "On boot"
 msgstr "Ved oppstart"
 
-#: services.pm:277
+#: services.pm:265
 #, c-format
 msgid "Start"
 msgstr "Start"
 
-#: services.pm:277
+#: services.pm:265
 #, c-format
 msgid "Stop"
 msgstr "Stopp"
@@ -7187,7 +7160,7 @@ msgstr ""
 "       XFdrake [--noauto] skjerm\n"
 "       XFdrake oppløysing"
 
-#: standalone.pm:154
+#: standalone.pm:155
 #, c-format
 msgid ""
 "\n"
@@ -7198,70 +7171,75 @@ msgstr ""
 "Bruk: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
 "testing] [-v|--version] "
 
-#: timezone.pm:160 timezone.pm:161
+#: timezone.pm:168 timezone.pm:169
 #, c-format
 msgid "All servers"
 msgstr "Alle tenarar"
 
-#: timezone.pm:197
+#: timezone.pm:205
 #, c-format
 msgid "Global"
 msgstr "Global"
 
-#: timezone.pm:200
+#: timezone.pm:208
 #, c-format
 msgid "Africa"
 msgstr "Afrika"
 
-#: timezone.pm:201
+#: timezone.pm:209
 #, c-format
 msgid "Asia"
 msgstr "Asia"
 
-#: timezone.pm:202
+#: timezone.pm:210
 #, c-format
 msgid "Europe"
 msgstr "Europa"
 
-#: timezone.pm:203
+#: timezone.pm:211
 #, c-format
 msgid "North America"
 msgstr "Nord-Amerika"
 
-#: timezone.pm:204
+#: timezone.pm:212
 #, c-format
 msgid "Oceania"
 msgstr "Oseania"
 
-#: timezone.pm:205
+#: timezone.pm:213
 #, c-format
 msgid "South America"
 msgstr "Sør-Amerika"
 
-#: timezone.pm:214
+#: timezone.pm:222
 #, c-format
 msgid "Hong Kong"
 msgstr "Hongkong"
 
-#: timezone.pm:251
+#: timezone.pm:259
 #, c-format
 msgid "Russian Federation"
 msgstr "Russland"
 
-#: timezone.pm:259
+#: timezone.pm:267
 #, c-format
 msgid "Yugoslavia"
 msgstr "Serbia og Montenegro"
 
-#: ugtk2.pm:812
+#: ugtk2.pm:812 ugtk3.pm:793
 #, c-format
 msgid "Is this correct?"
 msgstr "Er dette rett?"
 
-#: ugtk2.pm:874
+#: ugtk2.pm:874 ugtk3.pm:855
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "Du har valt ei fil og ikkje ei mappe."
+
+#: ugtk2.pm:924 ugtk3.pm:905
+#, c-format
+msgid "Info"
+msgstr "Informasjon"
 
 #: wizards.pm:96
 #, c-format
@@ -7277,6 +7255,114 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Feil ved installering."
 
+#~ msgid ""
+#~ "Here you can select an alternative driver (either OSS or ALSA) for your "
+#~ "sound card (%s)."
+#~ msgstr ""
+#~ "Her kan du velja ein annan OSS- eller ALSA-drivar for lydkortet ditt "
+#~ "(«%s»)."
+
+#~ msgid ""
+#~ "If you really think that you know which driver is the right one for your "
+#~ "card\n"
+#~ "you can pick one from the above list.\n"
+#~ "\n"
+#~ "The current driver for your \"%s\" sound card is \"%s\" "
+#~ msgstr ""
+#~ "Vis du kjenner til ein annan drivar som fungerer med lydkortet ditt, kan "
+#~ "du velja han her.\n"
+#~ "\n"
+#~ "Lydkortet «%s» brukar no drivaren «%s»."
+
+#~ msgid "No open source driver"
+#~ msgstr "Ingen open kjeldekode-drivar"
+
+#, fuzzy
+#~ msgid "Please make a backup of your data first."
+#~ msgstr "Hugs å ta reservekopi av alle viktige data først."
+
+#~ msgid ""
+#~ "The old \"%s\" driver is blacklisted.\n"
+#~ "\n"
+#~ "It has been reported to oops the kernel on unloading.\n"
+#~ "\n"
+#~ "The new \"%s\" driver will only be used on next bootstrap."
+#~ msgstr ""
+#~ "Den gamle «%s»-drivaren er svartelista, då han visstnok kan «oopsa» "
+#~ "kjernen ved utlasting.\n"
+#~ "\n"
+#~ "Den nye «%s»-drivaren vert berre brukt ved neste oppstart."
+
+#~ msgid ""
+#~ "There's no free driver for your sound card (%s), but there's a "
+#~ "proprietary driver at \"%s\"."
+#~ msgstr ""
+#~ "Det finst ingen fri drivar for lydkortet ditt («%s»), men det finst ein "
+#~ "godseigd drivar på «%s»."
+
+#~ msgid ""
+#~ "\n"
+#~ "Warning\n"
+#~ "\n"
+#~ "Please read carefully the terms below. If you disagree with any\n"
+#~ "portion, you are not allowed to install the next CD media. Press "
+#~ "'Refuse' \n"
+#~ "to continue the installation without using these media.\n"
+#~ "\n"
+#~ "\n"
+#~ "Some components contained in the next CD media are not governed\n"
+#~ "by the GPL License or similar agreements. Each such component is then\n"
+#~ "governed by the terms and conditions of its own specific license. \n"
+#~ "Please read carefully and comply with such specific licenses before \n"
+#~ "you use or redistribute the said components. \n"
+#~ "Such licenses will in general prevent the transfer,  duplication \n"
+#~ "(except for backup purposes), redistribution, reverse engineering, \n"
+#~ "de-assembly, de-compilation or modification of the component. \n"
+#~ "Any breach of agreement will immediately terminate your rights under \n"
+#~ "the specific license. Unless the specific license terms grant you such\n"
+#~ "rights, you usually cannot install the programs on more than one\n"
+#~ "system, or adapt it to be used on a network. In doubt, please contact \n"
+#~ "directly the distributor or editor of the component. \n"
+#~ "Transfer to third parties or copying of such components including the \n"
+#~ "documentation is usually forbidden.\n"
+#~ "\n"
+#~ "\n"
+#~ "All rights to the components of the next CD media belong to their \n"
+#~ "respective authors and are protected by intellectual property and \n"
+#~ "copyright laws applicable to software programs.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Åtvaring\n"
+#~ "\n"
+#~ "Les nøye gjennom vilkåra nedanfor. Viss du er ueinig me vilkåra, \n"
+#~ "eller delar av vilkåra, har du ikkje rett til å installera dei \n"
+#~ "neste CD-media. Trykk «Ikkje godta» for å halda fram med installeringa \n"
+#~ "utan å bruka desse media.\n"
+#~ "\n"
+#~ "\n"
+#~ "Nokre av komponentane på dei neste CD-media ligg ikkje under GPL-"
+#~ "lisensen \n"
+#~ "eller liknande programvarelisensar. Kvar slik komponent følgjer sine \n"
+#~ "eigne bruks- og installeringsvilkår. Du må lesa nøye gjennom og følgja \n"
+#~ "desse lisensvilkåra før du tek i bruk eller vidareformidlar desse \n"
+#~ "komponentane. Lisensane vil typisk forby overføring, kopiering (med \n"
+#~ "unntak av reservekopiering), vidareformidling, «reverse engineering» \n"
+#~ "(«omvend utvikling»), dekompilering eller endringar. \n"
+#~ "\n"
+#~ "Viss du ikkje følgjer lisensvilkåra, vil du automatisk og umiddelbart \n"
+#~ "mista rettane gjevne av dei aktuelle lisensane. Med mindre lisensen \n"
+#~ "spesifikt gjev deg rett til det, kan du ikkje installera programma på \n"
+#~ "meir enn eitt system, eller bruka dei på eit nettverk. Om du er i tvil, \n"
+#~ "kan du kontakta distributøren eller den ansvarlege for komponenten. \n"
+#~ "Overføring til tredjepartar eller kopiering av komponentane, herunder \n"
+#~ "eventuell dokumentasjon, er vanlegvis forbode.\n"
+#~ "\n"
+#~ "\n"
+#~ "Alle rettane til komponentane på dei neste CD-media høyrer til deira \n"
+#~ "respektive utviklarar, og er verna av lov om opphavsrett og andre "
+#~ "relevante \n"
+#~ "programvarelover.\n"
+
 #~ msgid "1. License Agreement"
 #~ msgstr "1. License Agreement"
 
@@ -7291,6 +7377,38 @@ msgstr "Feil ved installering."
 
 #~ msgid "5. Governing Laws"
 #~ msgstr "5. Governing Laws"
+
+#~ msgid ""
+#~ "A library which defends against buffer overflow and format string attacks."
+#~ msgstr ""
+#~ "Eit bibliotek som vernar mot overflytsfeil og strengformateringsangrep."
+
+#~ msgid "Accept user"
+#~ msgstr "Godta brukar"
+
+#~ msgid "Accept/Refuse bogus IPv4 error messages."
+#~ msgstr "Godta/forkast ugyldig IPv4-feilmeldingar."
+
+#~ msgid "Accept/Refuse broadcasted icmp echo."
+#~ msgstr "Godta/forkast kringkasta icmp-ekko."
+
+#~ msgid "Accept/Refuse icmp echo."
+#~ msgstr "Godta/forkast icmp-ekko."
+
+#~ msgid "Active Directory with SFU"
+#~ msgstr "Active Directory med SFU"
+
+#~ msgid "Active Directory with SFU:"
+#~ msgstr "Active Directory med SFU:"
+
+#~ msgid "Active Directory with Winbind"
+#~ msgstr "Active Directory med Winbind"
+
+#~ msgid "Active Directory with Winbind:"
+#~ msgstr "Active Directory med Winbind:"
+
+#~ msgid "Add user"
+#~ msgstr "Legg til brukarar"
 
 #, fuzzy
 #~ msgid ""
@@ -7312,9 +7430,38 @@ msgstr "Feil ved installering."
 #~ "Products, as a whole or in parts, by all means and for all purposes.\n"
 #~ "“Moondrake” and associated logos are trademarks of %s."
 
-#, fuzzy
-#~ msgid "An NTP client/server"
-#~ msgstr "NTP-tenar"
+#~ msgid "Allow/Forbid remote root login."
+#~ msgstr "Godta/nekt fjerninnlogging."
+
+#~ msgid "Authentication Active Directory"
+#~ msgstr "Autentisering for Active Directory"
+
+#~ msgid "Authentication LDAP"
+#~ msgstr "Autentisering for LDAP"
+
+#~ msgid "Authentication NIS"
+#~ msgstr "Autentisering for NS"
+
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "Autentisering for Windows-domene"
+
+#~ msgid "Automatic routing from ALSA to PulseAudio"
+#~ msgstr "Automatisk vidaresending frå ALSA til PulseAudio"
+
+#~ msgid "Bad backup file"
+#~ msgstr "Ugyldig reservekopifil"
+
+#~ msgid "Choose action"
+#~ msgstr "Vel handling"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Vel storleikar"
+
+#~ msgid "Clean /tmp at each boot"
+#~ msgstr "Tøm «/tmp» ved kvar oppstart"
+
+#~ msgid "Collapse Tree"
+#~ msgstr "Fald saman tre"
 
 #~ msgid ""
 #~ "Congratulations, installation is complete.\n"
@@ -7322,6 +7469,49 @@ msgstr "Feil ved installering."
 #~ msgstr ""
 #~ "Gratulerer! Installeringa er fullført.\n"
 #~ "Fjern oppstartsmediet, og trykk «Enter» for å starta maskina på nytt."
+
+#~ msgid ""
+#~ "Do not update directory inode access times on this filesystem\n"
+#~ "(e.g, for faster access on the news spool to speed up news servers)."
+#~ msgstr ""
+#~ "Ikkje oppdater tilgangstider på inodar på dette filsystemet\n"
+#~ "(for eksempel for å få raskare tilgang til njusfila på njustenarar)."
+
+#~ msgid "Enable 5.1 sound with Pulse Audio"
+#~ msgstr "Bruk 5.1-lyd med PulseAudio"
+
+#~ msgid "Enable user switching for audio applications"
+#~ msgstr "Tillat brukarbyte for lydprogram"
+
+#~ msgid "Enable/Disable IP spoofing protection."
+#~ msgstr "Slå på/av vern mot namneoppslagforfalsking."
+
+#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
+#~ msgstr "Slå på/av «libsafe» om dette er tilgjengeleg på systemet."
+
+#~ msgid "Enable/Disable msec hourly security check."
+#~ msgstr "Slå på/av msec-basert tryggleikskontroll."
+
+#~ msgid "Enable/Disable the logging of IPv4 strange packets."
+#~ msgstr "Slå på/av loggføring av merkelege IPv4-pakkar."
+
+#~ msgid "Error reading file %s"
+#~ msgstr "Klarte ikkje lesa fila «%s»"
+
+#~ msgid "Error writing to file %s"
+#~ msgstr "Klarte ikkje skriva til fila «%s»"
+
+#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
+#~ msgstr "Feil: Drivaren «%s» for lydkortet ditt er ikkje med i lista"
+
+#~ msgid "Expand Tree"
+#~ msgstr "Utvid tre"
+
+#~ msgid "Ext2"
+#~ msgstr "Ext2"
+
+#~ msgid "File sharing"
+#~ msgstr "Fildeling"
 
 #~ msgid ""
 #~ "For information on fixes which are available for this release of "
@@ -7332,6 +7522,42 @@ msgstr "Feil ved installering."
 #~ "Du finn meir informasjon om nye rettingar for denne\n"
 #~ "utgåva av Moondrake på:\n"
 #~ "%s"
+
+#~ msgid ""
+#~ "For this to work for a W2K PDC, you will probably need to have the admin "
+#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
+#~ "add and reboot the server.\n"
+#~ "You will also need the username/password of a Domain Admin to join the "
+#~ "machine to the Windows(TM) domain.\n"
+#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
+#~ "after the network setup step.\n"
+#~ "Should this setup fail for some reason and domain authentication is not "
+#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your "
+#~ "Windows(tm) Domain, and Admin Username/Password, after system boot.\n"
+#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
+#~ "good."
+#~ msgstr ""
+#~ "Du må truleg be systemansvarleg køyra følgjande kommando for at dette "
+#~ "skal verka på W2K-PDC-ar: «C:\\>net localgroup \"Pre-Windows 2000 "
+#~ "Compatible Access\" everyone / add». Start så tenaren på nytt.\n"
+#~ "Du treng og brukarnamnet og passordet til ein domeneadministrator for å "
+#~ "kopla maskina til Windows™-domenet.\n"
+#~ "Om maskina ikkje er sett opp til nettverksbruk enno, vil DrakX vil prøva "
+#~ "å kopla til domenet når dette er gjort.\n"
+#~ "Om nettverksoppsettet ikkje er klart, og domeneautentiseringa ikkje "
+#~ "fungerer, kan du etter ein omstart køyra «smbpasswd -j DOMAIN -U USER%"
+#~ "%PASSWORD» med Windows™-domenenamnet og brukarnamnet og passordet til "
+#~ "administratoren.\n"
+#~ "Kommandoen «wbinfo -t» kontrollerer at autentiseringsløyndomen er god nok."
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Minnestorleik i MiB"
+
+#~ msgid "High"
+#~ msgstr "Høgt"
+
+#~ msgid "Higher"
+#~ msgstr "Høgare"
 
 #~ msgid ""
 #~ "If any portion of this agreement is held void, illegal or inapplicable by "
@@ -7361,6 +7587,17 @@ msgstr "Feil ved installering."
 #~ "For any question on this document, please contact Moondrake"
 
 #~ msgid ""
+#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
+#~ "is enough)\n"
+#~ "at the beginning of the disk"
+#~ msgstr ""
+#~ "Viss du skal bruka aboot må du hugsa å lata det vera litt ledig plass\n"
+#~ "(2048 sektorar er nok) på begynnelsen av disken"
+
+#~ msgid "Info: "
+#~ msgstr "Informasjon: "
+
+#~ msgid ""
 #~ "Information on configuring your system is available in the post\n"
 #~ "install chapter of the Official Moondrake User's Guide."
 #~ msgstr ""
@@ -7371,11 +7608,47 @@ msgstr "Feil ved installering."
 #~ msgid "Introduction"
 #~ msgstr "Introduction"
 
+#~ msgid "Journalised FS"
+#~ msgstr "Journalfilsystem"
+
+#~ msgid "LDAP user allowed to browse the Active Directory"
+#~ msgstr "Tillat LDAP-brukar å sjå gjennom Active Directory"
+
+#~ msgid "LDAP users database"
+#~ msgstr "LDAP-brukardatabase"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO-/grub-installering"
+
+#~ msgid ""
+#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
+#~ "up a firewall to protect your machine from network attacks."
+#~ msgstr ""
+#~ "Køyr pakkefiltrering for Linux-kjernen 2.2, for å setja opp\n"
+#~ "ein brannmur for å verna maskina mot nettverksangrep."
+
 #~ msgid "Moondrake"
 #~ msgstr "Moondrake"
 
-#~ msgid "Please make a backup of your data first"
-#~ msgstr "Hugs å ta reservekopi av alle viktige data først."
+#~ msgid "No supermount"
+#~ msgstr "Inga supermontering"
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr "Valet «Avgrens kommandolinjeval» er ubrukeleg utan passord"
+
+#~ msgid "Paranoid"
+#~ msgstr "Paranoid"
+
+#~ msgid ""
+#~ "Passwords are now enabled, but use as a networked computer is still not "
+#~ "recommended."
+#~ msgstr ""
+#~ "Passord vert no brukt, men du bør likevel ikkje kopla maskina opp mot "
+#~ "andre maskiner eller mot Internett."
+
+#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
+#~ msgstr "Logg ut og bruk «Ctrl + Alt + Rettetast»."
 
 #, fuzzy
 #~ msgid ""
@@ -7414,6 +7687,61 @@ msgstr "Feil ved installering."
 #~ "License. Upon termination of the License,  you must immediately destroy "
 #~ "all copies of the \n"
 #~ "Software Products."
+
+#~ msgid "Poor"
+#~ msgstr "Dårleg"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Nøyaktig minnestorleik om nødvendig (fann %d MiB)"
+
+#~ msgid "Removable media automounting"
+#~ msgstr "Automontering av fjernbare medium"
+
+#~ msgid "Rescue partition table"
+#~ msgstr "Redd partisjonstabell"
+
+#~ msgid "Restore partition table"
+#~ msgstr "Opna partisjonstabell"
+
+#~ msgid "Restoring from file %s failed: %s"
+#~ msgstr "Klarte ikkje gjenoppretta frå fila «%s»: %s"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Avgrens kommandolinjeval"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Storleik på rotpartisjon i MiB: "
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "Save partition table"
+#~ msgstr "Lagra partisjonstabell"
+
+#~ msgid "Security level"
+#~ msgstr "Tryggleiksnivå"
+
+#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
+#~ msgstr "Startar X-skrifttenaren (du treng denne for å køyra X.org)."
+
+#~ msgid "Supermount"
+#~ msgstr "Supermontering"
+
+#~ msgid "Supermount except for CDROM drives"
+#~ msgstr "Supermontering med unntak av CD-ROM-stasjonar"
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Storleik på vekslepartisjon i MiB: "
+
+#~ msgid "TLS"
+#~ msgstr "TLS"
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "Klarte ikkje endra storleik på partisjonen:\n"
+#~ "%s"
 
 #, fuzzy
 #~ msgid ""
@@ -7527,364 +7855,6 @@ msgstr "Feil ved installering."
 #~ "documentation for \n"
 #~ "further details."
 
-#, fuzzy
-#~ msgid ""
-#~ "The operating system and the different components available in the "
-#~ "Moondrake distribution \n"
-#~ "shall be called the \"Software Products\" hereafter. The Software "
-#~ "Products include, but are not \n"
-#~ "restricted to, the set of programs, methods, rules and documentation "
-#~ "related to the operating \n"
-#~ "system and the different components of the Moondrake distribution, and "
-#~ "any applications \n"
-#~ "distributed with these products provided by Moondrake's licensors or "
-#~ "suppliers."
-#~ msgstr ""
-#~ "The operating system and the different components available in the "
-#~ "Moondrake Linux distribution \n"
-#~ "shall be called the “Software Products” hereafter. The Software Products "
-#~ "include, but are not \n"
-#~ "restricted to, the set of programs, methods, rules and documentation "
-#~ "related to the operating \n"
-#~ "system and the different components of the Moondrake distribution, and "
-#~ "any applications \n"
-#~ "distributed with these products provided by Moondrake’s licensors or "
-#~ "suppliers."
-
-#~ msgid ""
-#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
-#~ "Software included may be covered by patents in your country. For example, "
-#~ "the\n"
-#~ "MP3 decoders included may require a license for further usage (see\n"
-#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
-#~ "patent\n"
-#~ "may be applicable to you, check your local laws."
-#~ msgstr ""
-#~ "Åtvaring: Fri programvare er ikkje nødvendigvis fri for patentar, og "
-#~ "nokre\n"
-#~ "program kan innehelda funksjonar som er patenterte i heimlandet ditt.\n"
-#~ "For eksempel kan det vera at MP3-dekodarane krev ein eigen lisens for "
-#~ "vidare\n"
-#~ "bruk (sjå http://www.mp3licensing.com/ for meir informasjon). Om du ikkje "
-#~ "er\n"
-#~ "sikker på om ein patent gjeld deg, bør du sjekka dei lokale lovene der du "
-#~ "bur."
-
-#~ msgid ""
-#~ "\n"
-#~ "Warning\n"
-#~ "\n"
-#~ "Please read carefully the terms below. If you disagree with any\n"
-#~ "portion, you are not allowed to install the next CD media. Press "
-#~ "'Refuse' \n"
-#~ "to continue the installation without using these media.\n"
-#~ "\n"
-#~ "\n"
-#~ "Some components contained in the next CD media are not governed\n"
-#~ "by the GPL License or similar agreements. Each such component is then\n"
-#~ "governed by the terms and conditions of its own specific license. \n"
-#~ "Please read carefully and comply with such specific licenses before \n"
-#~ "you use or redistribute the said components. \n"
-#~ "Such licenses will in general prevent the transfer,  duplication \n"
-#~ "(except for backup purposes), redistribution, reverse engineering, \n"
-#~ "de-assembly, de-compilation or modification of the component. \n"
-#~ "Any breach of agreement will immediately terminate your rights under \n"
-#~ "the specific license. Unless the specific license terms grant you such\n"
-#~ "rights, you usually cannot install the programs on more than one\n"
-#~ "system, or adapt it to be used on a network. In doubt, please contact \n"
-#~ "directly the distributor or editor of the component. \n"
-#~ "Transfer to third parties or copying of such components including the \n"
-#~ "documentation is usually forbidden.\n"
-#~ "\n"
-#~ "\n"
-#~ "All rights to the components of the next CD media belong to their \n"
-#~ "respective authors and are protected by intellectual property and \n"
-#~ "copyright laws applicable to software programs.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Åtvaring\n"
-#~ "\n"
-#~ "Les nøye gjennom vilkåra nedanfor. Viss du er ueinig me vilkåra, \n"
-#~ "eller delar av vilkåra, har du ikkje rett til å installera dei \n"
-#~ "neste CD-media. Trykk «Ikkje godta» for å halda fram med installeringa \n"
-#~ "utan å bruka desse media.\n"
-#~ "\n"
-#~ "\n"
-#~ "Nokre av komponentane på dei neste CD-media ligg ikkje under GPL-"
-#~ "lisensen \n"
-#~ "eller liknande programvarelisensar. Kvar slik komponent følgjer sine \n"
-#~ "eigne bruks- og installeringsvilkår. Du må lesa nøye gjennom og følgja \n"
-#~ "desse lisensvilkåra før du tek i bruk eller vidareformidlar desse \n"
-#~ "komponentane. Lisensane vil typisk forby overføring, kopiering (med \n"
-#~ "unntak av reservekopiering), vidareformidling, «reverse engineering» \n"
-#~ "(«omvend utvikling»), dekompilering eller endringar. \n"
-#~ "\n"
-#~ "Viss du ikkje følgjer lisensvilkåra, vil du automatisk og umiddelbart \n"
-#~ "mista rettane gjevne av dei aktuelle lisensane. Med mindre lisensen \n"
-#~ "spesifikt gjev deg rett til det, kan du ikkje installera programma på \n"
-#~ "meir enn eitt system, eller bruka dei på eit nettverk. Om du er i tvil, \n"
-#~ "kan du kontakta distributøren eller den ansvarlege for komponenten. \n"
-#~ "Overføring til tredjepartar eller kopiering av komponentane, herunder \n"
-#~ "eventuell dokumentasjon, er vanlegvis forbode.\n"
-#~ "\n"
-#~ "\n"
-#~ "Alle rettane til komponentane på dei neste CD-media høyrer til deira \n"
-#~ "respektive utviklarar, og er verna av lov om opphavsrett og andre "
-#~ "relevante \n"
-#~ "programvarelover.\n"
-
-#~ msgid ""
-#~ "A library which defends against buffer overflow and format string attacks."
-#~ msgstr ""
-#~ "Eit bibliotek som vernar mot overflytsfeil og strengformateringsangrep."
-
-#~ msgid "Accept user"
-#~ msgstr "Godta brukar"
-
-#~ msgid "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr "Godta/forkast ugyldig IPv4-feilmeldingar."
-
-#~ msgid "Accept/Refuse broadcasted icmp echo."
-#~ msgstr "Godta/forkast kringkasta icmp-ekko."
-
-#~ msgid "Accept/Refuse icmp echo."
-#~ msgstr "Godta/forkast icmp-ekko."
-
-#~ msgid "Active Directory with SFU"
-#~ msgstr "Active Directory med SFU"
-
-#~ msgid "Active Directory with SFU:"
-#~ msgstr "Active Directory med SFU:"
-
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Active Directory med Winbind"
-
-#~ msgid "Active Directory with Winbind:"
-#~ msgstr "Active Directory med Winbind:"
-
-#~ msgid "Add user"
-#~ msgstr "Legg til brukarar"
-
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "Godta/nekt fjerninnlogging."
-
-#~ msgid "Authentication Active Directory"
-#~ msgstr "Autentisering for Active Directory"
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "Autentisering for LDAP"
-
-#~ msgid "Authentication NIS"
-#~ msgstr "Autentisering for NS"
-
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Autentisering for Windows-domene"
-
-#~ msgid "Automatic routing from ALSA to PulseAudio"
-#~ msgstr "Automatisk vidaresending frå ALSA til PulseAudio"
-
-#~ msgid "Bad backup file"
-#~ msgstr "Ugyldig reservekopifil"
-
-#~ msgid "Choose action"
-#~ msgstr "Vel handling"
-
-#~ msgid "Choose the sizes"
-#~ msgstr "Vel storleikar"
-
-#~ msgid "Clean /tmp at each boot"
-#~ msgstr "Tøm «/tmp» ved kvar oppstart"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "Fald saman tre"
-
-#~ msgid ""
-#~ "Do not update directory inode access times on this filesystem\n"
-#~ "(e.g, for faster access on the news spool to speed up news servers)."
-#~ msgstr ""
-#~ "Ikkje oppdater tilgangstider på inodar på dette filsystemet\n"
-#~ "(for eksempel for å få raskare tilgang til njusfila på njustenarar)."
-
-#~ msgid "Enable 5.1 sound with Pulse Audio"
-#~ msgstr "Bruk 5.1-lyd med PulseAudio"
-
-#~ msgid "Enable user switching for audio applications"
-#~ msgstr "Tillat brukarbyte for lydprogram"
-
-#~ msgid "Enable/Disable IP spoofing protection."
-#~ msgstr "Slå på/av vern mot namneoppslagforfalsking."
-
-#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
-#~ msgstr "Slå på/av «libsafe» om dette er tilgjengeleg på systemet."
-
-#~ msgid "Enable/Disable msec hourly security check."
-#~ msgstr "Slå på/av msec-basert tryggleikskontroll."
-
-#~ msgid "Enable/Disable the logging of IPv4 strange packets."
-#~ msgstr "Slå på/av loggføring av merkelege IPv4-pakkar."
-
-#~ msgid "Error reading file %s"
-#~ msgstr "Klarte ikkje lesa fila «%s»"
-
-#~ msgid "Error writing to file %s"
-#~ msgstr "Klarte ikkje skriva til fila «%s»"
-
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr "Feil: Drivaren «%s» for lydkortet ditt er ikkje med i lista"
-
-#~ msgid "Expand Tree"
-#~ msgstr "Utvid tre"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "File sharing"
-#~ msgstr "Fildeling"
-
-#~ msgid ""
-#~ "For this to work for a W2K PDC, you will probably need to have the admin "
-#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
-#~ "add and reboot the server.\n"
-#~ "You will also need the username/password of a Domain Admin to join the "
-#~ "machine to the Windows(TM) domain.\n"
-#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
-#~ "after the network setup step.\n"
-#~ "Should this setup fail for some reason and domain authentication is not "
-#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your "
-#~ "Windows(tm) Domain, and Admin Username/Password, after system boot.\n"
-#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
-#~ "good."
-#~ msgstr ""
-#~ "Du må truleg be systemansvarleg køyra følgjande kommando for at dette "
-#~ "skal verka på W2K-PDC-ar: «C:\\>net localgroup \"Pre-Windows 2000 "
-#~ "Compatible Access\" everyone / add». Start så tenaren på nytt.\n"
-#~ "Du treng og brukarnamnet og passordet til ein domeneadministrator for å "
-#~ "kopla maskina til Windows™-domenet.\n"
-#~ "Om maskina ikkje er sett opp til nettverksbruk enno, vil DrakX vil prøva "
-#~ "å kopla til domenet når dette er gjort.\n"
-#~ "Om nettverksoppsettet ikkje er klart, og domeneautentiseringa ikkje "
-#~ "fungerer, kan du etter ein omstart køyra «smbpasswd -j DOMAIN -U USER%"
-#~ "%PASSWORD» med Windows™-domenenamnet og brukarnamnet og passordet til "
-#~ "administratoren.\n"
-#~ "Kommandoen «wbinfo -t» kontrollerer at autentiseringsløyndomen er god nok."
-
-#~ msgid "Give the ram size in MB"
-#~ msgstr "Minnestorleik i MiB"
-
-#~ msgid "High"
-#~ msgstr "Høgt"
-
-#~ msgid "Higher"
-#~ msgstr "Høgare"
-
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "Viss du skal bruka aboot må du hugsa å lata det vera litt ledig plass\n"
-#~ "(2048 sektorar er nok) på begynnelsen av disken"
-
-#~ msgid "Info: "
-#~ msgstr "Informasjon: "
-
-#~ msgid "Journalised FS"
-#~ msgstr "Journalfilsystem"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "Tillat LDAP-brukar å sjå gjennom Active Directory"
-
-#~ msgid "LDAP users database"
-#~ msgstr "LDAP-brukardatabase"
-
-#~ msgid "LILO/grub Installation"
-#~ msgstr "LILO-/grub-installering"
-
-#~ msgid ""
-#~ "Launch packet filtering for Linux kernel 2.2 series, to set\n"
-#~ "up a firewall to protect your machine from network attacks."
-#~ msgstr ""
-#~ "Køyr pakkefiltrering for Linux-kjernen 2.2, for å setja opp\n"
-#~ "ein brannmur for å verna maskina mot nettverksangrep."
-
-#~ msgid "No supermount"
-#~ msgstr "Inga supermontering"
-
-#~ msgid ""
-#~ "Option ``Restrict command line options'' is of no use without a password"
-#~ msgstr "Valet «Avgrens kommandolinjeval» er ubrukeleg utan passord"
-
-#~ msgid "Paranoid"
-#~ msgstr "Paranoid"
-
-#~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
-#~ msgstr ""
-#~ "Passord vert no brukt, men du bør likevel ikkje kopla maskina opp mot "
-#~ "andre maskiner eller mot Internett."
-
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "Logg ut og bruk «Ctrl + Alt + Rettetast»."
-
-#~ msgid "Poor"
-#~ msgstr "Dårleg"
-
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "Nøyaktig minnestorleik om nødvendig (fann %d MiB)"
-
-#~ msgid "Removable media automounting"
-#~ msgstr "Automontering av fjernbare medium"
-
-#~ msgid "Rescue partition table"
-#~ msgstr "Redd partisjonstabell"
-
-#~ msgid "Restore partition table"
-#~ msgstr "Opna partisjonstabell"
-
-#~ msgid "Restoring from file %s failed: %s"
-#~ msgstr "Klarte ikkje gjenoppretta frå fila «%s»: %s"
-
-#~ msgid "Restrict command line options"
-#~ msgstr "Avgrens kommandolinjeval"
-
-#~ msgid "Root partition size in MB: "
-#~ msgstr "Storleik på rotpartisjon i MiB: "
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "Save partition table"
-#~ msgstr "Lagra partisjonstabell"
-
-#~ msgid "Security level"
-#~ msgstr "Tryggleiksnivå"
-
-#~ msgid "Set CPU frequency settings"
-#~ msgstr "Vel prosessorfrekvensar"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr "Startar X-skrifttenaren (du treng denne for å køyra X.org)."
-
-#~ msgid "Supermount"
-#~ msgstr "Supermontering"
-
-#~ msgid "Supermount except for CDROM drives"
-#~ msgstr "Supermontering med unntak av CD-ROM-stasjonar"
-
-#~ msgid "Swap partition size in MB: "
-#~ msgstr "Storleik på vekslepartisjon i MiB: "
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid ""
-#~ "The FAT resizer is unable to handle your partition, \n"
-#~ "the following error occurred: %s"
-#~ msgstr ""
-#~ "Klarte ikkje endra storleik på partisjonen:\n"
-#~ "%s"
-
 #~ msgid ""
 #~ "The backup partition table has not the same size\n"
 #~ "Still continue?"
@@ -7933,6 +7903,30 @@ msgstr "Feil ved installering."
 #~ "– «aumix -q» fortel deg om lydvolumet er slått ned.\n"
 #~ "\n"
 #~ "– «/sbin/fuser -v /dev/dsp» fortel deg kva program som brukar lydkortet.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "The operating system and the different components available in the "
+#~ "Moondrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software "
+#~ "Products include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation "
+#~ "related to the operating \n"
+#~ "system and the different components of the Moondrake distribution, and "
+#~ "any applications \n"
+#~ "distributed with these products provided by Moondrake's licensors or "
+#~ "suppliers."
+#~ msgstr ""
+#~ "The operating system and the different components available in the "
+#~ "Moondrake Linux distribution \n"
+#~ "shall be called the “Software Products” hereafter. The Software Products "
+#~ "include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation "
+#~ "related to the operating \n"
+#~ "system and the different components of the Moondrake distribution, and "
+#~ "any applications \n"
+#~ "distributed with these products provided by Moondrake’s licensors or "
+#~ "suppliers."
 
 #~ msgid ""
 #~ "There are already some restrictions, and more automatic checks are run "
@@ -7995,6 +7989,25 @@ msgstr "Feil ved installering."
 
 #~ msgid "Use the Microsoft Windows® partition for loopback"
 #~ msgstr "Bruk Microsoft Windows®-partisjonen til filmontering"
+
+#~ msgid ""
+#~ "Warning: Free Software may not necessarily be patent free, and some Free\n"
+#~ "Software included may be covered by patents in your country. For example, "
+#~ "the\n"
+#~ "MP3 decoders included may require a license for further usage (see\n"
+#~ "http://www.mp3licensing.com for more details). If you are unsure if a "
+#~ "patent\n"
+#~ "may be applicable to you, check your local laws."
+#~ msgstr ""
+#~ "Åtvaring: Fri programvare er ikkje nødvendigvis fri for patentar, og "
+#~ "nokre\n"
+#~ "program kan innehelda funksjonar som er patenterte i heimlandet ditt.\n"
+#~ "For eksempel kan det vera at MP3-dekodarane krev ein eigen lisens for "
+#~ "vidare\n"
+#~ "bruk (sjå http://www.mp3licensing.com/ for meir informasjon). Om du ikkje "
+#~ "er\n"
+#~ "sikker på om ein patent gjeld deg, bør du sjekka dei lokale lovene der du "
+#~ "bur."
 
 #~ msgid "Welcome To Crackers"
 #~ msgstr "Velkommen til Crackers"
