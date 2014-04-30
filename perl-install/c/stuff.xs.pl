@@ -298,7 +298,7 @@ get_netdevices()
                close(s);
                return;
           }
-          if (ifc.ifc_len == sizeof(struct ifreq) * numreqs) {
+          if (ifc.ifc_len == (int)sizeof(struct ifreq) * numreqs) {
                /* assume it overflowed and try again */
                numreqs += 10;                                                                         
                continue;                                                                              
@@ -484,8 +484,8 @@ get_iso_volume_ids(int fd)
     if (voldesc.type[0] == ISO_VD_PRIMARY && !strncmp(voldesc.id, ISO_STANDARD_ID, sizeof(voldesc.id))) {
       size_t vol_id_len = length_of_space_padded(voldesc.volume_id, sizeof(voldesc.volume_id));
       size_t app_id_len = length_of_space_padded(voldesc.application_id, sizeof(voldesc.application_id));
-      XPUSHs(vol_id_len != -1 ? sv_2mortal(newSVpv(voldesc.volume_id, vol_id_len)) : newSVpvs(""));
-      XPUSHs(app_id_len != -1 ? sv_2mortal(newSVpv(voldesc.application_id, app_id_len)) : newSVpvs(""));
+      XPUSHs(vol_id_len != (size_t)-1 ? sv_2mortal(newSVpv(voldesc.volume_id, vol_id_len)) : newSVpvs(""));
+      XPUSHs(app_id_len != (size_t)-1 ? sv_2mortal(newSVpv(voldesc.application_id, app_id_len)) : newSVpvs(""));
     }
   }
 
