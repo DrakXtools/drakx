@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2014-04-29 20:39+0200\n"
+"POT-Creation-Date: 2014-04-30 02:49+0200\n"
 "PO-Revision-Date: 2005-03-27 17:55+0530\n"
 "Last-Translator: Jaswinder Singh Phulewala <jaswinderphulewala@yahoo.com>\n"
 "Language-Team: Punjabi <punlinux-i18n@lists.soruceforge.net>\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: any.pm:284 any.pm:1003 diskdrake/interactive.pm:645
 #: diskdrake/interactive.pm:869 diskdrake/interactive.pm:929
 #: diskdrake/interactive.pm:1047 diskdrake/interactive.pm:1277
-#: diskdrake/interactive.pm:1335 do_pkgs.pm:242 do_pkgs.pm:287
+#: diskdrake/interactive.pm:1335 do_pkgs.pm:242 do_pkgs.pm:291
 #: harddrake/sound.pm:95 interactive.pm:588 pkgs.pm:254 pkgs.pm:263
 #: pkgs.pm:306
 #, c-format
@@ -1052,7 +1052,7 @@ msgid "Domain Admin Password"
 msgstr "ਡੋਮੇਨ ਪ੍ਰਬੰਧਕ ਗੁਪਤ-ਕੋਡ"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:1010
+#: bootloader.pm:1056
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1067,47 +1067,47 @@ msgstr ""
 "wait for default boot.\n"
 "\n"
 
-#: bootloader.pm:1202
+#: bootloader.pm:1248
 #, c-format
 msgid "LILO with text menu"
 msgstr "ਪਾਠ ਮੇਨੂ ਨਾਲ LILO"
 
-#: bootloader.pm:1203
+#: bootloader.pm:1249
 #, c-format
 msgid "GRUB2 with graphical menu"
 msgstr ""
 
-#: bootloader.pm:1204
+#: bootloader.pm:1250
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr ""
 
-#: bootloader.pm:1205
+#: bootloader.pm:1251
 #, c-format
 msgid "GRUB with text menu"
 msgstr ""
 
-#: bootloader.pm:1206
+#: bootloader.pm:1252
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:1207
+#: bootloader.pm:1253
 #, c-format
 msgid "SILO"
 msgstr ""
 
-#: bootloader.pm:1277
+#: bootloader.pm:1323
 #, c-format
 msgid "not enough room in /boot"
 msgstr "/boot ਵਿੱਚ ਲੋੜੀਂਦੀ ਥਾਂ ਨਹੀਂ ਹੈ"
 
-#: bootloader.pm:2064
+#: bootloader.pm:2110
 #, c-format
 msgid "You cannot install the bootloader on a %s partition\n"
 msgstr "ਤੁਸੀਂ %s ਭਾਗ ਤੇ ਬੂਟ ਲੋਡਰ ਇੰਸਟਾਲ ਨਹੀਂ ਕਰ ਸਕਦੇ\n"
 
-#: bootloader.pm:2233
+#: bootloader.pm:2279
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1115,7 +1115,7 @@ msgid ""
 msgstr ""
 "ਤੁਹਾਡੀ ਬੂਟ-ਲੋਡਰ ਸੰਰਚਨਾ ਦਾ ਨਵੀਨੀਕਰਨ ਹੋਣਾ ਜਰੂਰੀ ਹੈ ਕਿਉਂਕਿ ਭਾਗ ਮੁੜ ਅੰਕਿਤ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।"
 
-#: bootloader.pm:2246
+#: bootloader.pm:2292
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1123,7 +1123,7 @@ msgid ""
 msgstr ""
 "ਬੂਟ-ਲੋਡਰ ਠੀਕ ਤਰਾਂ ਇੰਸਟਾਲ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ। ਤੁਹਾਨੂੰ ਸੰਕਟ-ਕਾਲੀਨ ਚਲਾਉਣਾ ਪਵੇਗਾ ਅਤੇ \"%s\" ਚੁਣੋ।"
 
-#: bootloader.pm:2247
+#: bootloader.pm:2293
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "ਬੂਟ ਲੋਡਰ ਮੁੜ ਇੰਸਟਾਲ ਕਰੋ"
@@ -2356,7 +2356,7 @@ msgstr "ਹੇਠਲੇ ਪੈਕੇਜ ਇੰਸਟਾਲ ਹੋਣੇ ਜਰ�
 msgid "Installing packages..."
 msgstr "ਪੈਕੇਜ ਇੰਸਟਾਲ ਹੋ ਰਹੇ ਹਨ..."
 
-#: do_pkgs.pm:287 pkgs.pm:306
+#: do_pkgs.pm:291 pkgs.pm:306
 #, c-format
 msgid "Removing packages..."
 msgstr "ਪੈਕੇਜ ਹਟਾ ਰਿਹਾ ਹੈ"
@@ -3559,1197 +3559,1197 @@ msgstr "ਮੁੜ-ਪੇਸ਼"
 #. -PO: the string "default:LTR" can be translated *ONLY* as "default:LTR"
 #. -PO: or as "default:RTL", depending if your language is written from
 #. -PO: left to right, or from right to left; any other string is wrong.
-#: lang.pm:203
+#: lang.pm:205
 #, c-format
 msgid "default:LTR"
 msgstr "default:LTR"
 
-#: lang.pm:220
+#: lang.pm:222
 #, c-format
 msgid "Andorra"
 msgstr "ਐਂਡੋਰਾ"
 
-#: lang.pm:221 timezone.pm:235
+#: lang.pm:223 timezone.pm:235
 #, c-format
 msgid "United Arab Emirates"
 msgstr "ਸੰਯੁਕਤ ਰਾਜ ਅਮੀਰਾਤ"
 
-#: lang.pm:222
+#: lang.pm:224
 #, c-format
 msgid "Afghanistan"
 msgstr "ਅਫਗਾਨਿਸਤਾਨ"
 
-#: lang.pm:223
+#: lang.pm:225
 #, c-format
 msgid "Antigua and Barbuda"
 msgstr "ਐਟੀਗੂਆ ਤੇ ਬਾਰਬੂਡਾ"
 
-#: lang.pm:224
+#: lang.pm:226
 #, c-format
 msgid "Anguilla"
 msgstr "ਅੰਗੂਲੀਆਂ"
 
-#: lang.pm:225
+#: lang.pm:227
 #, c-format
 msgid "Albania"
 msgstr "ਅਲਬੀਨਾ"
 
-#: lang.pm:226
+#: lang.pm:228
 #, c-format
 msgid "Armenia"
 msgstr "ਅਰਮੀਨਾ"
 
-#: lang.pm:227
+#: lang.pm:229
 #, c-format
 msgid "Netherlands Antilles"
 msgstr "ਨੀਦਰਲੈਂਡ ਐਟੀਲਸ"
 
-#: lang.pm:228
+#: lang.pm:230
 #, c-format
 msgid "Angola"
 msgstr "ਅੰਗੋਲਾ"
 
-#: lang.pm:229
+#: lang.pm:231
 #, c-format
 msgid "Antarctica"
 msgstr "ਅੰਟਾਰਿਕਟਾ"
 
-#: lang.pm:230 timezone.pm:280
+#: lang.pm:232 timezone.pm:280
 #, c-format
 msgid "Argentina"
 msgstr "ਅਰਜਨਟੀਨਾ"
 
-#: lang.pm:231
+#: lang.pm:233
 #, c-format
 msgid "American Samoa"
 msgstr "ਅਮਰੀਕੀ ਸਾਮੋਨਾ"
 
-#: lang.pm:232 mirror.pm:12 timezone.pm:238
+#: lang.pm:234 mirror.pm:12 timezone.pm:238
 #, c-format
 msgid "Austria"
 msgstr "ਆਸਟਰੀਆ"
 
-#: lang.pm:233 mirror.pm:11 timezone.pm:276
+#: lang.pm:235 mirror.pm:11 timezone.pm:276
 #, c-format
 msgid "Australia"
 msgstr "ਅਸਟਰੇਲੀਆ"
 
-#: lang.pm:234
+#: lang.pm:236
 #, c-format
 msgid "Aruba"
 msgstr "ਅਰੂਬਾ"
 
-#: lang.pm:235
+#: lang.pm:237
 #, c-format
 msgid "Azerbaijan"
 msgstr "ਅਜ਼ਰਬਾਈਜਾਨ"
 
-#: lang.pm:236
+#: lang.pm:238
 #, c-format
 msgid "Bosnia and Herzegovina"
 msgstr "ਬੋਸਨੀਅ ਤੇ ਹਰਜ਼ੀਗੋਨੀਆ"
 
-#: lang.pm:237
+#: lang.pm:239
 #, c-format
 msgid "Barbados"
 msgstr "ਬਾਰਬਾਡਾਸ"
 
-#: lang.pm:238 timezone.pm:220
+#: lang.pm:240 timezone.pm:220
 #, c-format
 msgid "Bangladesh"
 msgstr "ਬੰਗਲਾਦੇਸ਼"
 
-#: lang.pm:239 mirror.pm:13 timezone.pm:240
+#: lang.pm:241 mirror.pm:13 timezone.pm:240
 #, c-format
 msgid "Belgium"
 msgstr "ਬੈਲਜੀਅਮ"
 
-#: lang.pm:240
+#: lang.pm:242
 #, c-format
 msgid "Burkina Faso"
 msgstr "ਬੂਪਕੀਨਾ ਫਾਸੋ"
 
-#: lang.pm:241 timezone.pm:241
+#: lang.pm:243 timezone.pm:241
 #, c-format
 msgid "Bulgaria"
 msgstr "ਬੁਲਗਾਰੀਆ"
 
-#: lang.pm:242
+#: lang.pm:244
 #, c-format
 msgid "Bahrain"
 msgstr "ਬਹਿਰਾਨ"
 
-#: lang.pm:243
+#: lang.pm:245
 #, c-format
 msgid "Burundi"
 msgstr "ਬੂਰੂਮਾਡੀ"
 
-#: lang.pm:244
+#: lang.pm:246
 #, c-format
 msgid "Benin"
 msgstr "ਬੀਨਾਨ"
 
-#: lang.pm:245
+#: lang.pm:247
 #, c-format
 msgid "Bermuda"
 msgstr "ਬਾਰਾਮੂਡਾ"
 
-#: lang.pm:246
+#: lang.pm:248
 #, c-format
 msgid "Brunei Darussalam"
 msgstr "ਬਰੂਨਈ ਡਾਰੂਸ਼ਲਾਮ"
 
-#: lang.pm:247
+#: lang.pm:249
 #, c-format
 msgid "Bolivia"
 msgstr "ਬੋਲੋਵੀਆ"
 
-#: lang.pm:248 mirror.pm:14 timezone.pm:281
+#: lang.pm:250 mirror.pm:14 timezone.pm:281
 #, c-format
 msgid "Brazil"
 msgstr "ਬਰਾਜ਼ੀਲ"
 
-#: lang.pm:249
+#: lang.pm:251
 #, c-format
 msgid "Bahamas"
 msgstr "ਬਾਹਾਮਾਸ"
 
-#: lang.pm:250
+#: lang.pm:252
 #, c-format
 msgid "Bhutan"
 msgstr "ਭੁਟਾਨ"
 
-#: lang.pm:251
+#: lang.pm:253
 #, c-format
 msgid "Bouvet Island"
 msgstr "ਬੂਟਵਟ ਟਾਪੂ"
 
-#: lang.pm:252
+#: lang.pm:254
 #, c-format
 msgid "Botswana"
 msgstr "ਬੂਟਸਵਾਨਾ"
 
-#: lang.pm:253 timezone.pm:239
+#: lang.pm:255 timezone.pm:239
 #, c-format
 msgid "Belarus"
 msgstr "ਬੇਲਾਰੂਸ"
 
-#: lang.pm:254
+#: lang.pm:256
 #, c-format
 msgid "Belize"
 msgstr "ਬੀਲੀਜ਼ੀ"
 
-#: lang.pm:255 mirror.pm:15 timezone.pm:270
+#: lang.pm:257 mirror.pm:15 timezone.pm:270
 #, c-format
 msgid "Canada"
 msgstr "ਕੈਨੇਡਾ"
 
-#: lang.pm:256
+#: lang.pm:258
 #, c-format
 msgid "Cocos (Keeling) Islands"
 msgstr "ਕੋਕੋਸ(ਕਿਲਿੰਗ) ਟਾਪੂ"
 
-#: lang.pm:257
+#: lang.pm:259
 #, c-format
 msgid "Congo (Kinshasa)"
 msgstr "ਕੌਂਗੋ (ਕਿਨਸ਼ਾਸਾ)"
 
-#: lang.pm:258
+#: lang.pm:260
 #, c-format
 msgid "Central African Republic"
 msgstr "ਕੇਦਰੀ ਅਫਰੀਕਾ ਗਣਰਾਜ਼"
 
-#: lang.pm:259
+#: lang.pm:261
 #, c-format
 msgid "Congo (Brazzaville)"
 msgstr "ਕੌਂਗੋ (ਬਰਾਜ਼ਾਵਿਲੇ)"
 
-#: lang.pm:260 mirror.pm:39 timezone.pm:264
+#: lang.pm:262 mirror.pm:39 timezone.pm:264
 #, c-format
 msgid "Switzerland"
 msgstr "ਸਵਿਟਰਜ਼ਰਲੈਂਡ"
 
-#: lang.pm:261
+#: lang.pm:263
 #, c-format
 msgid "Cote d'Ivoire"
 msgstr "ਕੋਟੀ ਡੀਵੋਰਆ"
 
-#: lang.pm:262
+#: lang.pm:264
 #, c-format
 msgid "Cook Islands"
 msgstr "ਕੁੱਕ ਟਾਪੂ"
 
-#: lang.pm:263 timezone.pm:282
+#: lang.pm:265 timezone.pm:282
 #, c-format
 msgid "Chile"
 msgstr "ਚਿੱਲੀ"
 
-#: lang.pm:264
+#: lang.pm:266
 #, c-format
 msgid "Cameroon"
 msgstr "ਕੈਮਰੂਨ"
 
-#: lang.pm:265 timezone.pm:221
+#: lang.pm:267 timezone.pm:221
 #, c-format
 msgid "China"
 msgstr "ਚੀਨ"
 
-#: lang.pm:266
+#: lang.pm:268
 #, c-format
 msgid "Colombia"
 msgstr "ਕੋਲੰਬੀਆ"
 
-#: lang.pm:267 mirror.pm:16
+#: lang.pm:269 mirror.pm:16
 #, c-format
 msgid "Costa Rica"
 msgstr "ਕਾਸਟ ਰੀਕਾ"
 
-#: lang.pm:268
+#: lang.pm:270
 #, c-format
 msgid "Serbia & Montenegro"
 msgstr "ਸਰਬੀਆ ਤੇ ਮੌਂਟੇਨੀਗਰੋ"
 
-#: lang.pm:269
+#: lang.pm:271
 #, c-format
 msgid "Cuba"
 msgstr "ਕਿਊਬਾ"
 
-#: lang.pm:270
+#: lang.pm:272
 #, c-format
 msgid "Cape Verde"
 msgstr "ਕੇਪ ਵਾਰਡੀ"
 
-#: lang.pm:271
+#: lang.pm:273
 #, c-format
 msgid "Christmas Island"
 msgstr "ਕ੍ਰਿਸਮਿਸ ਟਾਪੂ"
 
-#: lang.pm:272
+#: lang.pm:274
 #, c-format
 msgid "Cyprus"
 msgstr "ਕਿਊਰੂਸ"
 
-#: lang.pm:273 mirror.pm:17 timezone.pm:242
+#: lang.pm:275 mirror.pm:17 timezone.pm:242
 #, c-format
 msgid "Czech Republic"
 msgstr "ਚੈੱਕ ਗਣਰਾਜ"
 
-#: lang.pm:274 mirror.pm:22 timezone.pm:247
+#: lang.pm:276 mirror.pm:22 timezone.pm:247
 #, c-format
 msgid "Germany"
 msgstr "ਜਰਮਨੀ"
 
-#: lang.pm:275
+#: lang.pm:277
 #, c-format
 msgid "Djibouti"
 msgstr "ਡਜੀਬੂਟੀ"
 
-#: lang.pm:276 mirror.pm:18 timezone.pm:243
+#: lang.pm:278 mirror.pm:18 timezone.pm:243
 #, c-format
 msgid "Denmark"
 msgstr "ਡੈਨਮਾਰਕ"
 
-#: lang.pm:277
+#: lang.pm:279
 #, c-format
 msgid "Dominica"
 msgstr "ਡੋਮੀਨੀਆ"
 
-#: lang.pm:278
+#: lang.pm:280
 #, c-format
 msgid "Dominican Republic"
 msgstr "ਡੋਮੀਨੀਆਨ ਗਣਰਾਜ਼"
 
-#: lang.pm:279
+#: lang.pm:281
 #, c-format
 msgid "Algeria"
 msgstr "ਅਲਜੀਰੀਆ"
 
-#: lang.pm:280
+#: lang.pm:282
 #, c-format
 msgid "Ecuador"
 msgstr "ਏਕਵੇਡਰ"
 
-#: lang.pm:281 mirror.pm:19 timezone.pm:244
+#: lang.pm:283 mirror.pm:19 timezone.pm:244
 #, c-format
 msgid "Estonia"
 msgstr "ਈਸਟੋਨੀਆ"
 
-#: lang.pm:282
+#: lang.pm:284
 #, c-format
 msgid "Egypt"
 msgstr "ਮਿਸਰ"
 
-#: lang.pm:283
+#: lang.pm:285
 #, c-format
 msgid "Western Sahara"
 msgstr "ਦੱਖਣੀ ਸਹਾਰਾ"
 
-#: lang.pm:284
+#: lang.pm:286
 #, c-format
 msgid "Eritrea"
 msgstr "ਈਰਟੀਰਆ"
 
-#: lang.pm:285 mirror.pm:37 timezone.pm:262
+#: lang.pm:287 mirror.pm:37 timezone.pm:262
 #, c-format
 msgid "Spain"
 msgstr "ਸਪੇਨ"
 
-#: lang.pm:286
+#: lang.pm:288
 #, c-format
 msgid "Ethiopia"
 msgstr "ਈਥੋਪਈਆ"
 
-#: lang.pm:287 mirror.pm:20 timezone.pm:245
+#: lang.pm:289 mirror.pm:20 timezone.pm:245
 #, c-format
 msgid "Finland"
 msgstr "ਫ਼ਿਨਲੈਂਡ"
 
-#: lang.pm:288
+#: lang.pm:290
 #, c-format
 msgid "Fiji"
 msgstr "ਫਿਜ਼ੀ"
 
-#: lang.pm:289
+#: lang.pm:291
 #, c-format
 msgid "Falkland Islands (Malvinas)"
 msgstr "ਫਾਲਕਲੈਂਡ ਟਾਪੂ (ਮਲਵੀਨਾਸ)"
 
-#: lang.pm:290
+#: lang.pm:292
 #, c-format
 msgid "Micronesia"
 msgstr "ਮਾਕਰੋਨੀਸ਼ੀਆ"
 
-#: lang.pm:291
+#: lang.pm:293
 #, c-format
 msgid "Faroe Islands"
 msgstr "ਫਾਰੀਓ ਟਾਪੂ"
 
-#: lang.pm:292 mirror.pm:21 timezone.pm:246
+#: lang.pm:294 mirror.pm:21 timezone.pm:246
 #, c-format
 msgid "France"
 msgstr "ਫਰਾਂਸ"
 
-#: lang.pm:293
+#: lang.pm:295
 #, c-format
 msgid "Gabon"
 msgstr "ਗਾਬੋਨ"
 
-#: lang.pm:294 timezone.pm:266
+#: lang.pm:296 timezone.pm:266
 #, c-format
 msgid "United Kingdom"
 msgstr "ਬਰਤਾਨੀਆ"
 
-#: lang.pm:295
+#: lang.pm:297
 #, c-format
 msgid "Grenada"
 msgstr "ਗਰੀਨਾਡਾਆ"
 
-#: lang.pm:296
+#: lang.pm:298
 #, c-format
 msgid "Georgia"
 msgstr "ਜਾਰਜੀਆ"
 
-#: lang.pm:297
+#: lang.pm:299
 #, c-format
 msgid "French Guiana"
 msgstr "ਫਰੈਂਚ ਗੁਆਨਾ"
 
-#: lang.pm:298
+#: lang.pm:300
 #, c-format
 msgid "Ghana"
 msgstr "ਗਾਨਾ"
 
-#: lang.pm:299
+#: lang.pm:301
 #, c-format
 msgid "Gibraltar"
 msgstr "ਗੀਬਰਾਲਟਾਰ"
 
-#: lang.pm:300
+#: lang.pm:302
 #, c-format
 msgid "Greenland"
 msgstr "ਗਰੀਨਲੈਂਡ"
 
-#: lang.pm:301
+#: lang.pm:303
 #, c-format
 msgid "Gambia"
 msgstr "ਗਾਬੀਆ"
 
-#: lang.pm:302
+#: lang.pm:304
 #, c-format
 msgid "Guinea"
 msgstr "ਗੂਈਨੀਆ"
 
-#: lang.pm:303
+#: lang.pm:305
 #, c-format
 msgid "Guadeloupe"
 msgstr "ਗੁਆਡੀਲੂਪੀ"
 
-#: lang.pm:304
+#: lang.pm:306
 #, c-format
 msgid "Equatorial Guinea"
 msgstr "ਭੂ-ਖੰਡੀ ਗੁਆਨਾ"
 
-#: lang.pm:305 mirror.pm:23 timezone.pm:248
+#: lang.pm:307 mirror.pm:23 timezone.pm:248
 #, c-format
 msgid "Greece"
 msgstr "ਗਰੀਸ"
 
-#: lang.pm:306
+#: lang.pm:308
 #, c-format
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "ਦੱਖਣੀ ਜੀਓਰਜੀਆ ਅਤੇ ਦੱਖਣੀ ਸੈਂਡਵਿਚ ਟਾਪੂ"
 
-#: lang.pm:307 timezone.pm:271
+#: lang.pm:309 timezone.pm:271
 #, c-format
 msgid "Guatemala"
 msgstr "ਗੂਆਟੇਮਾਲਾ"
 
-#: lang.pm:308
+#: lang.pm:310
 #, c-format
 msgid "Guam"
 msgstr "ਗੁਆਮ"
 
-#: lang.pm:309
+#: lang.pm:311
 #, c-format
 msgid "Guinea-Bissau"
 msgstr "ਗੁਨੇਆ-ਬਿਸਾਉ"
 
-#: lang.pm:310
+#: lang.pm:312
 #, c-format
 msgid "Guyana"
 msgstr "ਗੁਆਨਾ"
 
-#: lang.pm:311
+#: lang.pm:313
 #, c-format
 msgid "Hong Kong SAR (China)"
 msgstr "ਹਾਂਗ ਕਾਂਗ ਸਾਰ (ਚੀਨ)"
 
-#: lang.pm:312
+#: lang.pm:314
 #, c-format
 msgid "Heard and McDonald Islands"
 msgstr "ਹੀਅਰਡ ਅਤੇ ਮੈਕਡੋਨਾਲਡ ਟਾਪੂ"
 
-#: lang.pm:313
+#: lang.pm:315
 #, c-format
 msgid "Honduras"
 msgstr "ਹਾਨਡੂਰਸ"
 
-#: lang.pm:314
+#: lang.pm:316
 #, c-format
 msgid "Croatia"
 msgstr "ਕਰੋਟੀਆ"
 
-#: lang.pm:315
+#: lang.pm:317
 #, c-format
 msgid "Haiti"
 msgstr "ਹਾਈਟੀ"
 
-#: lang.pm:316 mirror.pm:24 timezone.pm:249
+#: lang.pm:318 mirror.pm:24 timezone.pm:249
 #, c-format
 msgid "Hungary"
 msgstr "ਹੰਗਰੀ"
 
-#: lang.pm:317 timezone.pm:224
+#: lang.pm:319 timezone.pm:224
 #, c-format
 msgid "Indonesia"
 msgstr "ਇੰਡੋਨੇਸੀਆ"
 
-#: lang.pm:318 mirror.pm:25 timezone.pm:250
+#: lang.pm:320 mirror.pm:25 timezone.pm:250
 #, c-format
 msgid "Ireland"
 msgstr "ਆਈਰਲੈਂਡ"
 
-#: lang.pm:319 mirror.pm:26 timezone.pm:226
+#: lang.pm:321 mirror.pm:26 timezone.pm:226
 #, c-format
 msgid "Israel"
 msgstr "ਇਜ਼ਰਾਈਲ"
 
-#: lang.pm:320 timezone.pm:223
+#: lang.pm:322 timezone.pm:223
 #, c-format
 msgid "India"
 msgstr "ਭਾਰਤ"
 
-#: lang.pm:321
+#: lang.pm:323
 #, c-format
 msgid "British Indian Ocean Territory"
 msgstr "ਬਰਤਾਨੀਆ ਭਾਰਤੀ ਸਮੁੰਦਰੀ ਖੇਤਰ"
 
-#: lang.pm:322
+#: lang.pm:324
 #, c-format
 msgid "Iraq"
 msgstr "ਇਰਾਕ"
 
-#: lang.pm:323 timezone.pm:225
+#: lang.pm:325 timezone.pm:225
 #, c-format
 msgid "Iran"
 msgstr "ਈਰਾਨ"
 
-#: lang.pm:324
+#: lang.pm:326
 #, c-format
 msgid "Iceland"
 msgstr "ਟਾਪੂ"
 
-#: lang.pm:325 mirror.pm:27 timezone.pm:251
+#: lang.pm:327 mirror.pm:27 timezone.pm:251
 #, c-format
 msgid "Italy"
 msgstr "ਇਟਲੀ"
 
-#: lang.pm:326
+#: lang.pm:328
 #, c-format
 msgid "Jamaica"
 msgstr "ਜੈਮਾਈਕਾ"
 
-#: lang.pm:327
+#: lang.pm:329
 #, c-format
 msgid "Jordan"
 msgstr "ਜਾਰਡਨ"
 
-#: lang.pm:328 mirror.pm:28 timezone.pm:227
+#: lang.pm:330 mirror.pm:28 timezone.pm:227
 #, c-format
 msgid "Japan"
 msgstr "ਜਾਪਾਨ"
 
-#: lang.pm:329
+#: lang.pm:331
 #, c-format
 msgid "Kenya"
 msgstr "ਕੀਨੀਆ"
 
-#: lang.pm:330
+#: lang.pm:332
 #, c-format
 msgid "Kyrgyzstan"
 msgstr "ਕਿਰਗਸਤਾਨ"
 
-#: lang.pm:331
+#: lang.pm:333
 #, c-format
 msgid "Cambodia"
 msgstr "ਕੋਲੰਬੀਆ"
 
-#: lang.pm:332
+#: lang.pm:334
 #, c-format
 msgid "Kiribati"
 msgstr "ਕੀਰੀਬਾਟੀ"
 
-#: lang.pm:333
+#: lang.pm:335
 #, c-format
 msgid "Comoros"
 msgstr "ਕੋਮੋਰਸ"
 
-#: lang.pm:334
+#: lang.pm:336
 #, c-format
 msgid "Saint Kitts and Nevis"
 msgstr "ਸੇਂਟ ਕਿਟਸ ਅਤੇ ਨੇਵੀਸ"
 
-#: lang.pm:335
+#: lang.pm:337
 #, c-format
 msgid "Korea (North)"
 msgstr "ਕੋਰੀਆ (ਉੱਤਰੀ)"
 
-#: lang.pm:336 timezone.pm:228
+#: lang.pm:338 timezone.pm:228
 #, c-format
 msgid "Korea"
 msgstr "ਕੋਰੀਆ"
 
-#: lang.pm:337
+#: lang.pm:339
 #, c-format
 msgid "Kuwait"
 msgstr "ਕੁਵੈਤ"
 
-#: lang.pm:338
+#: lang.pm:340
 #, c-format
 msgid "Cayman Islands"
 msgstr "ਕਾਯਮਨ ਟਾਪੂ"
 
-#: lang.pm:339
+#: lang.pm:341
 #, c-format
 msgid "Kazakhstan"
 msgstr "ਕਜ਼ਾਕਸਤਾਨ"
 
-#: lang.pm:340
+#: lang.pm:342
 #, c-format
 msgid "Laos"
 msgstr "ਲਿਉਸ"
 
-#: lang.pm:341
+#: lang.pm:343
 #, c-format
 msgid "Lebanon"
 msgstr "ਲੀਬਨਾਨ"
 
-#: lang.pm:342
+#: lang.pm:344
 #, c-format
 msgid "Saint Lucia"
 msgstr "ਸੇਂਟ ਲੂਸੀਆ"
 
-#: lang.pm:343
+#: lang.pm:345
 #, c-format
 msgid "Liechtenstein"
 msgstr "ਲੀਚਟੀਨੀਆ"
 
-#: lang.pm:344
+#: lang.pm:346
 #, c-format
 msgid "Sri Lanka"
 msgstr "ਸ੍ਰੀਲੰਕਾ"
 
-#: lang.pm:345
+#: lang.pm:347
 #, c-format
 msgid "Liberia"
 msgstr "ਲੀਬਾਰੀਆ"
 
-#: lang.pm:346
+#: lang.pm:348
 #, c-format
 msgid "Lesotho"
 msgstr "ਲੀਸੋਥੋ"
 
-#: lang.pm:347 timezone.pm:252
+#: lang.pm:349 timezone.pm:252
 #, c-format
 msgid "Lithuania"
 msgstr "ਲੀਥੂਨੀਆ"
 
-#: lang.pm:348 timezone.pm:253
+#: lang.pm:350 timezone.pm:253
 #, c-format
 msgid "Luxembourg"
 msgstr "ਲ਼ਕਸ਼ਬਰਗ"
 
-#: lang.pm:349
+#: lang.pm:351
 #, c-format
 msgid "Latvia"
 msgstr "ਲਾਟੀਵਾਆ"
 
-#: lang.pm:350
+#: lang.pm:352
 #, c-format
 msgid "Libya"
 msgstr "ਲੀਬੀਆ"
 
-#: lang.pm:351
+#: lang.pm:353
 #, c-format
 msgid "Morocco"
 msgstr "ਮੋਰੋਸ਼ਸ"
 
-#: lang.pm:352
+#: lang.pm:354
 #, c-format
 msgid "Monaco"
 msgstr "ਮੋਨਸ਼ੀਆ"
 
-#: lang.pm:353
+#: lang.pm:355
 #, c-format
 msgid "Moldova"
 msgstr "ਮੋਲਡੋਵਾ"
 
-#: lang.pm:354
+#: lang.pm:356
 #, c-format
 msgid "Madagascar"
 msgstr "ਮੈਡਾਗਾਸਕਰ"
 
-#: lang.pm:355
+#: lang.pm:357
 #, c-format
 msgid "Marshall Islands"
 msgstr "ਮਾਰਸ਼ਲ ਟਾਪੂ"
 
-#: lang.pm:356
+#: lang.pm:358
 #, c-format
 msgid "Macedonia"
 msgstr "ਮੈਕਡੋਨੀਆ"
 
-#: lang.pm:357
+#: lang.pm:359
 #, c-format
 msgid "Mali"
 msgstr "ਮਾਲੀ"
 
-#: lang.pm:358
+#: lang.pm:360
 #, c-format
 msgid "Myanmar"
 msgstr "ਮਿਆਂਮਾਰ"
 
-#: lang.pm:359
+#: lang.pm:361
 #, c-format
 msgid "Mongolia"
 msgstr "ਮੰਗੋਲੀਆ"
 
-#: lang.pm:360
+#: lang.pm:362
 #, c-format
 msgid "Northern Mariana Islands"
 msgstr "ਉੱਤਰੀ ਮਰੀਵੀਆਨਾ ਟਾਪੂ"
 
-#: lang.pm:361
+#: lang.pm:363
 #, c-format
 msgid "Martinique"
 msgstr "ਮਾਰਟੀਨੀਕਿਊ"
 
-#: lang.pm:362
+#: lang.pm:364
 #, c-format
 msgid "Mauritania"
 msgstr "ਮਾਓਰੀਟਆਨਾ"
 
-#: lang.pm:363
+#: lang.pm:365
 #, c-format
 msgid "Montserrat"
 msgstr "ਮੋਨਟਸ਼ਟੀਟ"
 
-#: lang.pm:364
+#: lang.pm:366
 #, c-format
 msgid "Malta"
 msgstr "ਮਾਲਟਾ"
 
-#: lang.pm:365
+#: lang.pm:367
 #, c-format
 msgid "Mauritius"
 msgstr "ਮਾਓਟੀਸ"
 
-#: lang.pm:366
+#: lang.pm:368
 #, c-format
 msgid "Maldives"
 msgstr "ਮਾਲਦੀਪ"
 
-#: lang.pm:367
+#: lang.pm:369
 #, c-format
 msgid "Malawi"
 msgstr "ਮਾਲਾਵੀਆ"
 
-#: lang.pm:368 timezone.pm:272
+#: lang.pm:370 timezone.pm:272
 #, c-format
 msgid "Mexico"
 msgstr "ਮੈਕਸੀਕੋ"
 
-#: lang.pm:369 timezone.pm:229
+#: lang.pm:371 timezone.pm:229
 #, c-format
 msgid "Malaysia"
 msgstr "ਮਲੇਸ਼ੀਆ"
 
-#: lang.pm:370
+#: lang.pm:372
 #, c-format
 msgid "Mozambique"
 msgstr "ਮੋਜ਼ਾਮਬੀਕਿਉ"
 
-#: lang.pm:371
+#: lang.pm:373
 #, c-format
 msgid "Namibia"
 msgstr "ਨੀਮੀਬੀਆ"
 
-#: lang.pm:372
+#: lang.pm:374
 #, c-format
 msgid "New Caledonia"
 msgstr "ਨਵਾਂ ਕਾਲੀਡੋਨੀਆਂ"
 
-#: lang.pm:373
+#: lang.pm:375
 #, c-format
 msgid "Niger"
 msgstr "ਨੀਜ਼ਰ"
 
-#: lang.pm:374
+#: lang.pm:376
 #, c-format
 msgid "Norfolk Island"
 msgstr "ਨੋਰਫੋਕ ਟਾਪੂ"
 
-#: lang.pm:375
+#: lang.pm:377
 #, c-format
 msgid "Nigeria"
 msgstr "ਨੀਜ਼ੀਰਆ"
 
-#: lang.pm:376
+#: lang.pm:378
 #, c-format
 msgid "Nicaragua"
 msgstr "ਨਿਕਾਰਗੁਆ"
 
-#: lang.pm:377 mirror.pm:29 timezone.pm:254
+#: lang.pm:379 mirror.pm:29 timezone.pm:254
 #, c-format
 msgid "Netherlands"
 msgstr "ਨੀਂਦਰਲੈਂਡ"
 
-#: lang.pm:378 mirror.pm:31 timezone.pm:255
+#: lang.pm:380 mirror.pm:31 timezone.pm:255
 #, c-format
 msgid "Norway"
 msgstr "ਨਾਰਵੇ"
 
-#: lang.pm:379
+#: lang.pm:381
 #, c-format
 msgid "Nepal"
 msgstr "ਨੇਪਾਲ"
 
-#: lang.pm:380
+#: lang.pm:382
 #, c-format
 msgid "Nauru"
 msgstr "ਨੀਓਰੂ"
 
-#: lang.pm:381
+#: lang.pm:383
 #, c-format
 msgid "Niue"
 msgstr "ਨੀਊਈ"
 
-#: lang.pm:382 mirror.pm:30 timezone.pm:277
+#: lang.pm:384 mirror.pm:30 timezone.pm:277
 #, c-format
 msgid "New Zealand"
 msgstr "ਨਿਊਜੀਲੈਂਡ"
 
-#: lang.pm:383
+#: lang.pm:385
 #, c-format
 msgid "Oman"
 msgstr "ਓਮਾਨ"
 
-#: lang.pm:384
+#: lang.pm:386
 #, c-format
 msgid "Panama"
 msgstr "ਪੈਨਾਮਾ"
 
-#: lang.pm:385
+#: lang.pm:387
 #, c-format
 msgid "Peru"
 msgstr "ਪੇਰੂ"
 
-#: lang.pm:386
+#: lang.pm:388
 #, c-format
 msgid "French Polynesia"
 msgstr "ਫਰੈਂਚ ਪੋਲੀਸੇਲੇਵੀਆ"
 
-#: lang.pm:387
+#: lang.pm:389
 #, c-format
 msgid "Papua New Guinea"
 msgstr "ਪਾਪੂਆ ਨਵਾਂ ਗੂਈਨਿਆ"
 
-#: lang.pm:388 timezone.pm:230
+#: lang.pm:390 timezone.pm:230
 #, c-format
 msgid "Philippines"
 msgstr "ਫਿਲਿਪੀਨੀਜ਼"
 
-#: lang.pm:389
+#: lang.pm:391
 #, c-format
 msgid "Pakistan"
 msgstr "ਪਾਕਿਸਤਾਨ"
 
-#: lang.pm:390 mirror.pm:32 timezone.pm:256
+#: lang.pm:392 mirror.pm:32 timezone.pm:256
 #, c-format
 msgid "Poland"
 msgstr "ਪੋਲੈਂਡ"
 
-#: lang.pm:391
+#: lang.pm:393
 #, c-format
 msgid "Saint Pierre and Miquelon"
 msgstr "ਸੇਂਟ ਪਿੱਰੇ ਅਤੇ ਮੀਕੇਲੋਨ"
 
-#: lang.pm:392
+#: lang.pm:394
 #, c-format
 msgid "Pitcairn"
 msgstr "ਪਿਟਸਾਰਨ"
 
-#: lang.pm:393
+#: lang.pm:395
 #, c-format
 msgid "Puerto Rico"
 msgstr "ਪੁਈਰਟੋ ਰੀਸੋ"
 
-#: lang.pm:394
+#: lang.pm:396
 #, c-format
 msgid "Palestine"
 msgstr "ਪੇਲੇਸਟਾਈਨ"
 
-#: lang.pm:395 mirror.pm:33 timezone.pm:257
+#: lang.pm:397 mirror.pm:33 timezone.pm:257
 #, c-format
 msgid "Portugal"
 msgstr "ਪੁਰਤਗਾਲ"
 
-#: lang.pm:396
+#: lang.pm:398
 #, c-format
 msgid "Paraguay"
 msgstr "ਪੇਰੂਗਵੇ"
 
-#: lang.pm:397
+#: lang.pm:399
 #, c-format
 msgid "Palau"
 msgstr "ਪਾਲਾਊ"
 
-#: lang.pm:398
+#: lang.pm:400
 #, c-format
 msgid "Qatar"
 msgstr "ਕਤਰ"
 
-#: lang.pm:399
+#: lang.pm:401
 #, c-format
 msgid "Reunion"
 msgstr "ਰੀਯੁਨੀਅਨ"
 
-#: lang.pm:400 timezone.pm:258
+#: lang.pm:402 timezone.pm:258
 #, c-format
 msgid "Romania"
 msgstr "ਰੋਮਾਨੀਆ"
 
-#: lang.pm:401 mirror.pm:34
+#: lang.pm:403 mirror.pm:34
 #, c-format
 msgid "Russia"
 msgstr "ਰੂਸ"
 
-#: lang.pm:402
+#: lang.pm:404
 #, c-format
 msgid "Rwanda"
 msgstr "ਰਵਾਂਡਾਂ"
 
-#: lang.pm:403
+#: lang.pm:405
 #, c-format
 msgid "Saudi Arabia"
 msgstr "ਸਾਊਦੀ ਅਰਬ"
 
-#: lang.pm:404
+#: lang.pm:406
 #, c-format
 msgid "Solomon Islands"
 msgstr "ਸੋਲੋਮੋਨ ਟਾਪੂ"
 
-#: lang.pm:405
+#: lang.pm:407
 #, c-format
 msgid "Seychelles"
 msgstr "ਸੀਆਚਿਲਸ"
 
-#: lang.pm:406
+#: lang.pm:408
 #, c-format
 msgid "Sudan"
 msgstr "ਸੂਡਾਨ"
 
-#: lang.pm:407 mirror.pm:38 timezone.pm:263
+#: lang.pm:409 mirror.pm:38 timezone.pm:263
 #, c-format
 msgid "Sweden"
 msgstr "ਸਵੀਡਨ"
 
-#: lang.pm:408 timezone.pm:231
+#: lang.pm:410 timezone.pm:231
 #, c-format
 msgid "Singapore"
 msgstr "ਸਿੰਘਾਪੁਰ"
 
-#: lang.pm:409
+#: lang.pm:411
 #, c-format
 msgid "Saint Helena"
 msgstr "ਸੇਂਟ ਹੇਲੇਨਾ"
 
-#: lang.pm:410 timezone.pm:261
+#: lang.pm:412 timezone.pm:261
 #, c-format
 msgid "Slovenia"
 msgstr "ਸਲੋਵੀਨੀਆ"
 
-#: lang.pm:411
+#: lang.pm:413
 #, c-format
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "ਸਵਾਲਬੋਰਡ ਅਤੇ ਜਾਨ ਮਾਈਨ ਟਾਪੂ"
 
-#: lang.pm:412 mirror.pm:35 timezone.pm:260
+#: lang.pm:414 mirror.pm:35 timezone.pm:260
 #, c-format
 msgid "Slovakia"
 msgstr "ਸਲੋਵਾਕੀਆ"
 
-#: lang.pm:413
+#: lang.pm:415
 #, c-format
 msgid "Sierra Leone"
 msgstr "ਸੀਈਰਆ ਲਿਏਨ"
 
-#: lang.pm:414
+#: lang.pm:416
 #, c-format
 msgid "San Marino"
 msgstr "ਸਾਨ ਮਾਰੀਨੂ"
 
-#: lang.pm:415
+#: lang.pm:417
 #, c-format
 msgid "Senegal"
 msgstr "ਸੈਨੇਗਾਲ"
 
-#: lang.pm:416
+#: lang.pm:418
 #, c-format
 msgid "Somalia"
 msgstr "ਸੋਮਾਲੀਆ"
 
-#: lang.pm:417
+#: lang.pm:419
 #, c-format
 msgid "Suriname"
 msgstr "ਸੂਰੀਨਾਂ"
 
-#: lang.pm:418
+#: lang.pm:420
 #, c-format
 msgid "Sao Tome and Principe"
 msgstr "ਸਾਓ ਟੋਮ ਅਤੇ ਪ੍ਰਿਨਸਾਈਪ"
 
-#: lang.pm:419
+#: lang.pm:421
 #, c-format
 msgid "El Salvador"
 msgstr "ਈਲ ਸਾਲੇਵਡੋਰ"
 
-#: lang.pm:420
+#: lang.pm:422
 #, c-format
 msgid "Syria"
 msgstr "ਸੀਰੀਆ"
 
-#: lang.pm:421
+#: lang.pm:423
 #, c-format
 msgid "Swaziland"
 msgstr "ਸਵਰਜ਼ਲੈਂਡ"
 
-#: lang.pm:422
+#: lang.pm:424
 #, c-format
 msgid "Turks and Caicos Islands"
 msgstr "ਤੁਰਕਸ ਅਤੇ ਕੇਈਕੋਸ ਟਾਪੂ"
 
-#: lang.pm:423
+#: lang.pm:425
 #, c-format
 msgid "Chad"
 msgstr "ਚੰਦ"
 
-#: lang.pm:424
+#: lang.pm:426
 #, c-format
 msgid "French Southern Territories"
 msgstr "ਫਰੈਂਚ ਦੱਖਣੀ ਖੇਤਰ"
 
-#: lang.pm:425
+#: lang.pm:427
 #, c-format
 msgid "Togo"
 msgstr "ਟੂਗੂ"
 
-#: lang.pm:426 mirror.pm:41 timezone.pm:233
+#: lang.pm:428 mirror.pm:41 timezone.pm:233
 #, c-format
 msgid "Thailand"
 msgstr "ਥਾਈਲੈਂਡ"
 
-#: lang.pm:427
+#: lang.pm:429
 #, c-format
 msgid "Tajikistan"
 msgstr "ਤਜ਼ਾਕਸਤਾਨ"
 
-#: lang.pm:428
+#: lang.pm:430
 #, c-format
 msgid "Tokelau"
 msgstr "ਟੂਕੀਲਾਊ"
 
-#: lang.pm:429
+#: lang.pm:431
 #, c-format
 msgid "East Timor"
 msgstr "ਪੂਰਬੀ ਟੀਮੋਰ"
 
-#: lang.pm:430
+#: lang.pm:432
 #, c-format
 msgid "Turkmenistan"
 msgstr "ਤੁਰਕਸਤਾਨ"
 
-#: lang.pm:431
+#: lang.pm:433
 #, c-format
 msgid "Tunisia"
 msgstr "ਟੁਨੀਸ਼ੀਆ"
 
-#: lang.pm:432
+#: lang.pm:434
 #, c-format
 msgid "Tonga"
 msgstr "ਟੂਨਗਾ"
 
-#: lang.pm:433 timezone.pm:234
+#: lang.pm:435 timezone.pm:234
 #, c-format
 msgid "Turkey"
 msgstr "ਤੁਰਕੀ"
 
-#: lang.pm:434
+#: lang.pm:436
 #, c-format
 msgid "Trinidad and Tobago"
 msgstr "ਟਰਿਨੀਦਾਦ ਅਤੇ ਟੋਬੇਗੋ"
 
-#: lang.pm:435
+#: lang.pm:437
 #, c-format
 msgid "Tuvalu"
 msgstr "ਟੂਵਾਲੂ"
 
-#: lang.pm:436 mirror.pm:40 timezone.pm:232
+#: lang.pm:438 mirror.pm:40 timezone.pm:232
 #, c-format
 msgid "Taiwan"
 msgstr "ਤਾਈਵਾਨ"
 
-#: lang.pm:437 timezone.pm:217
+#: lang.pm:439 timezone.pm:217
 #, c-format
 msgid "Tanzania"
 msgstr "ਤਾਨਜ਼ੀਆ"
 
-#: lang.pm:438 timezone.pm:265
+#: lang.pm:440 timezone.pm:265
 #, c-format
 msgid "Ukraine"
 msgstr "ਯੂਕਰੇਨ"
 
-#: lang.pm:439
+#: lang.pm:441
 #, c-format
 msgid "Uganda"
 msgstr "ਯੂਗਾਂਡਾ"
 
-#: lang.pm:440
+#: lang.pm:442
 #, c-format
 msgid "United States Minor Outlying Islands"
 msgstr "ਅਮਰੀਕਾ ਦੇ ਛੋਟੇ ਟਾਪੂ"
 
-#: lang.pm:441 mirror.pm:42 timezone.pm:273
+#: lang.pm:443 mirror.pm:42 timezone.pm:273
 #, c-format
 msgid "United States"
 msgstr "ਅਮਰੀਕਾ"
 
-#: lang.pm:442
+#: lang.pm:444
 #, c-format
 msgid "Uruguay"
 msgstr "ਉਰੂਗਵੇ"
 
-#: lang.pm:443
+#: lang.pm:445
 #, c-format
 msgid "Uzbekistan"
 msgstr "ਉਜ਼ੇਬਕਸਤਾਨ"
 
-#: lang.pm:444
+#: lang.pm:446
 #, c-format
 msgid "Vatican"
 msgstr "ਵਾਟੀਕਾਨ"
 
-#: lang.pm:445
+#: lang.pm:447
 #, c-format
 msgid "Saint Vincent and the Grenadines"
 msgstr "ਸੇਂਟ ਵਿਨਸਨਟ ਅਤੇ ਗਰੇਨਾਡਾਈਨਸ"
 
-#: lang.pm:446
+#: lang.pm:448
 #, c-format
 msgid "Venezuela"
 msgstr "ਵੈਨੂਜੇਏਲਾ"
 
-#: lang.pm:447
+#: lang.pm:449
 #, c-format
 msgid "Virgin Islands (British)"
 msgstr "ਵਿਰਗਿਨ ਟਾਪੂ (ਬ੍ਰਿਟਿਸ਼)"
 
-#: lang.pm:448
+#: lang.pm:450
 #, c-format
 msgid "Virgin Islands (U.S.)"
 msgstr "ਵਿਰਗਿਨ ਟਾਪੂ (U.S.)"
 
-#: lang.pm:449
+#: lang.pm:451
 #, c-format
 msgid "Vietnam"
 msgstr "ਵੀਅਤਨਾਮ"
 
-#: lang.pm:450
+#: lang.pm:452
 #, c-format
 msgid "Vanuatu"
 msgstr "ਵਾਨੂਟੂ"
 
-#: lang.pm:451
+#: lang.pm:453
 #, c-format
 msgid "Wallis and Futuna"
 msgstr "ਵਾਲਿਸ ਅਤੇ ਫੂਟੂਨਾ"
 
-#: lang.pm:452
+#: lang.pm:454
 #, c-format
 msgid "Samoa"
 msgstr "ਸਾਮੋਆ"
 
-#: lang.pm:453
+#: lang.pm:455
 #, c-format
 msgid "Yemen"
 msgstr "ਯਮਨ"
 
-#: lang.pm:454
+#: lang.pm:456
 #, c-format
 msgid "Mayotte"
 msgstr "ਮਾਈਟੀ"
 
-#: lang.pm:455 mirror.pm:36 timezone.pm:216
+#: lang.pm:457 mirror.pm:36 timezone.pm:216
 #, c-format
 msgid "South Africa"
 msgstr "ਦੱਖਣੀ ਅਫਰੀਕਾ"
 
-#: lang.pm:456
+#: lang.pm:458
 #, c-format
 msgid "Zambia"
 msgstr "ਜ਼ੈਬੀਆ"
 
-#: lang.pm:457
+#: lang.pm:459
 #, c-format
 msgid "Zimbabwe"
 msgstr "ਜਿੰਬਾਬਾਵੇ"
@@ -6877,50 +6877,6 @@ msgstr ""
 msgid "Installation failed"
 msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਅਸਫਲ"
 
-#~ msgid ""
-#~ "Here you can select an alternative driver (either OSS or ALSA) for your "
-#~ "sound card (%s)."
-#~ msgstr "ਇੱਥੇ ਤੁਸੀਂ ਆਪਣੇ ਸਾਊਂਡ ਕਾਰਡ (%s) ਲਈ ਅਨੁਸਾਰੀ ਡਰਾਈਵਰ (OSS ਜਾਂ ALSA) ਚੁਣ ਸਕਦੇ ਹੋ।"
-
-#~ msgid ""
-#~ "If you really think that you know which driver is the right one for your "
-#~ "card\n"
-#~ "you can pick one from the above list.\n"
-#~ "\n"
-#~ "The current driver for your \"%s\" sound card is \"%s\" "
-#~ msgstr ""
-#~ "ਜੇ ਤੁਸੀਂ ਇਹ ਸੋਚਦੇ ਹੋ ਕਿ ਤੁਹਾਨੂੰ ਆਪਣੇ ਕਾਰਡ ਲਈ ਸਹੀ ਡਰਾਈਵਰ ਦਾ ਪਤਾ ਹੈ\n"
-#~ "ਤੁਸੀਂ ਉੱਪਰ ਸੂਚੀ ਵਿੱਚੋਂ ਇੱਕ ਚੁਣ ਸਕਦੇ ਹੋ।\n"
-#~ "\n"
-#~ "ਤੁਹਾਡੇ \"%s\" ਸਾਊਂਡ ਕਾਰਡ ਲਈ ਮੌਜੂਦਾ ਡਰਾਈਵਰ ਹੈ \"%s\""
-
-#~ msgid "No open source driver"
-#~ msgstr "ਕੋਈ ਖੁੱਲਾ ਸਰੋਤ ਡਰਾਈਵਰ ਨਹੀਂ"
-
-#, fuzzy
-#~ msgid "Please make a backup of your data first."
-#~ msgstr "ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਆਪਣੇ ਡਾਟੇ ਦਾ ਬੈਕਅੱਪ ਲਵੋ"
-
-#~ msgid ""
-#~ "The old \"%s\" driver is blacklisted.\n"
-#~ "\n"
-#~ "It has been reported to oops the kernel on unloading.\n"
-#~ "\n"
-#~ "The new \"%s\" driver will only be used on next bootstrap."
-#~ msgstr ""
-#~ "ਪੁਰਾਣਾ \"%s\" ਡਰਾਈਵਰ ਕਾਲੀ-ਸੂਚੀ ਵਿੱਚ ਹੈ।\n"
-#~ "\n"
-#~ "ਇਹ ਅਨ-ਲੋਡ ਕਰਨ ਦੌਰਾਨ ਕਰਨਲ ਨੂੰ oops ਕਰਨ ਲਈ ਰਿਪੋਰਟ ਕੀਤਾ ਹੈ।\n"
-#~ "\n"
-#~ "ਨਵਾਂ \"%s\" ਡਰਾਈਵਰ ਸਿਰਫ ਨਵੇਂ ਬੂਟਸਟਰੈਪ ਦੌਰਾਨ ਵਰਤਿਆ ਜਾਵੇਗਾ।"
-
-#~ msgid ""
-#~ "There's no free driver for your sound card (%s), but there's a "
-#~ "proprietary driver at \"%s\"."
-#~ msgstr ""
-#~ "ਇੱਥੇ ਤੁਹਾਡੇ ਸਾਊਂਡ ਕਾਰਡ (%s) ਲਈ ਕੋਈ ਫਰੀ ਡਰਾਈਵਰ ਨਹੀਂ ਹੈ, ਪਰ \"%s\" ਤੇ ਇੱਕ ਮਲਕੀਅਤ "
-#~ "ਡਰਾਈਵਰ ਹੈ।"
-
 #~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 #~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 
@@ -7050,6 +7006,11 @@ msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਅਸਫਲ"
 #~ msgid "Give the ram size in MB"
 #~ msgstr "ਮੈਬਾ ਵਿੱਚ ਰੈਮ ਅਕਾਰ ਦਿਓ"
 
+#~ msgid ""
+#~ "Here you can select an alternative driver (either OSS or ALSA) for your "
+#~ "sound card (%s)."
+#~ msgstr "ਇੱਥੇ ਤੁਸੀਂ ਆਪਣੇ ਸਾਊਂਡ ਕਾਰਡ (%s) ਲਈ ਅਨੁਸਾਰੀ ਡਰਾਈਵਰ (OSS ਜਾਂ ALSA) ਚੁਣ ਸਕਦੇ ਹੋ।"
+
 #~ msgid "High"
 #~ msgstr "ਜਿਆਦਾ"
 
@@ -7063,6 +7024,18 @@ msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਅਸਫਲ"
 #~ msgstr ""
 #~ "ਜੇ ਤੁਸੀਂ aboot ਵਰਤਣ ਬਾਰੇ ਸੋਚਿਆ ਹੈ, ਡਿਸਕ ਦੇ ਸ਼ੁਰੂ ਵਿੱਚ ਖਾਲੀ ਥਾਂ (2048 ਸੈਕਟਰ ਕਾਫੀ ਹਨ)\n"
 #~ " ਛੱਡਣ ਦਾ ਧਿਆਨ ਰੱਖੋ।"
+
+#~ msgid ""
+#~ "If you really think that you know which driver is the right one for your "
+#~ "card\n"
+#~ "you can pick one from the above list.\n"
+#~ "\n"
+#~ "The current driver for your \"%s\" sound card is \"%s\" "
+#~ msgstr ""
+#~ "ਜੇ ਤੁਸੀਂ ਇਹ ਸੋਚਦੇ ਹੋ ਕਿ ਤੁਹਾਨੂੰ ਆਪਣੇ ਕਾਰਡ ਲਈ ਸਹੀ ਡਰਾਈਵਰ ਦਾ ਪਤਾ ਹੈ\n"
+#~ "ਤੁਸੀਂ ਉੱਪਰ ਸੂਚੀ ਵਿੱਚੋਂ ਇੱਕ ਚੁਣ ਸਕਦੇ ਹੋ।\n"
+#~ "\n"
+#~ "ਤੁਹਾਡੇ \"%s\" ਸਾਊਂਡ ਕਾਰਡ ਲਈ ਮੌਜੂਦਾ ਡਰਾਈਵਰ ਹੈ \"%s\""
 
 #~ msgid "Info: "
 #~ msgstr "ਜਾਣਕਾਰੀ:"
@@ -7086,6 +7059,9 @@ msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਅਸਫਲ"
 #~ "ਨੈੱਟਵਰਕ ਹਮਲਿਆਂ ਤੋਂ ਆਪਣੀ ਮਸ਼ੀਨ ਬਚਾਉਣ ਲਈ ਫਾਇਲਵਾਲ ਨਿਰਧਾਰਿਤ \n"
 #~ "ਕਰਨ ਵਾਸਤੇ, ਲੀਨਕਸ ਕਰਨਲ 2.2 ਲੜੀ ਲਈ ਪੈਕੇਟ ਫਿਲਟਰਿੰਗ ਚਲਾਓ।"
 
+#~ msgid "No open source driver"
+#~ msgstr "ਕੋਈ ਖੁੱਲਾ ਸਰੋਤ ਡਰਾਈਵਰ ਨਹੀਂ"
+
 #~ msgid "Number of capture buffers:"
 #~ msgstr "ਖੋਜੇ ਬਫਰਾਂ ਦੀ ਗਿਣਤੀ"
 
@@ -7106,6 +7082,10 @@ msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਅਸਫਲ"
 
 #~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
 #~ msgstr "ਕਿਰਪਾ ਕਰਕੇ ਲਾਗ-ਆਊਟ ਕਰੋ ਅਤੇ Ctrl-Alt-BackSpace ਵਰਤੋ"
+
+#, fuzzy
+#~ msgid "Please make a backup of your data first."
+#~ msgstr "ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਆਪਣੇ ਡਾਟੇ ਦਾ ਬੈਕਅੱਪ ਲਵੋ"
 
 #~ msgid "Poor"
 #~ msgstr "ਘੱਟ"
@@ -7212,6 +7192,19 @@ msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਅਸਫਲ"
 #~ "- \"/sbin/fuser -v /dev/dsp\" ਦੱਸੇਗੀ ਕਿ ਸਾਊਂਡ ਕਾਰਡ ਕਿਹੜਾ ਪ੍ਰੋਗਰਾਮ ਵਰਤ ਰਿਹਾ ਹੈ\n"
 
 #~ msgid ""
+#~ "The old \"%s\" driver is blacklisted.\n"
+#~ "\n"
+#~ "It has been reported to oops the kernel on unloading.\n"
+#~ "\n"
+#~ "The new \"%s\" driver will only be used on next bootstrap."
+#~ msgstr ""
+#~ "ਪੁਰਾਣਾ \"%s\" ਡਰਾਈਵਰ ਕਾਲੀ-ਸੂਚੀ ਵਿੱਚ ਹੈ।\n"
+#~ "\n"
+#~ "ਇਹ ਅਨ-ਲੋਡ ਕਰਨ ਦੌਰਾਨ ਕਰਨਲ ਨੂੰ oops ਕਰਨ ਲਈ ਰਿਪੋਰਟ ਕੀਤਾ ਹੈ।\n"
+#~ "\n"
+#~ "ਨਵਾਂ \"%s\" ਡਰਾਈਵਰ ਸਿਰਫ ਨਵੇਂ ਬੂਟਸਟਰੈਪ ਦੌਰਾਨ ਵਰਤਿਆ ਜਾਵੇਗਾ।"
+
+#~ msgid ""
 #~ "There are already some restrictions, and more automatic checks are run "
 #~ "every night."
 #~ msgstr "ਇੱਥੇ ਪਹਿਲਾਂ ਹੀ ਕੁਝ ਪਾਬੰਦੀਆਂ ਹਨ, ਅਤੇ ਹਰ ਰਾਤ ਨੂੰ ਬਹੁਤ ਸਾਰੀ ਸਵੈ ਜਾਂਚ ਚਲੱਦੀ ਹੈ।"
@@ -7219,6 +7212,13 @@ msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਅਸਫਲ"
 #~ msgid ""
 #~ "There is no FAT partition to use as loopback (or not enough space left)"
 #~ msgstr "ਇੱਥੇ ਲੂਪਬੈਕ ਲਈ ਵਰਤਣ ਵਾਸਤੇ ਕੋਈ FAT ਭਾਗ ਨਹੀਂ ਹੈ (ਜਾਂ ਲੋੜੀਂਦੀ ਬਾਕੀ ਥਾਂ ਨਹੀਂ ਹੈ)"
+
+#~ msgid ""
+#~ "There's no free driver for your sound card (%s), but there's a "
+#~ "proprietary driver at \"%s\"."
+#~ msgstr ""
+#~ "ਇੱਥੇ ਤੁਹਾਡੇ ਸਾਊਂਡ ਕਾਰਡ (%s) ਲਈ ਕੋਈ ਫਰੀ ਡਰਾਈਵਰ ਨਹੀਂ ਹੈ, ਪਰ \"%s\" ਤੇ ਇੱਕ ਮਲਕੀਅਤ "
+#~ "ਡਰਾਈਵਰ ਹੈ।"
 
 #~ msgid ""
 #~ "This is similar to the previous level, but the system is entirely closed "

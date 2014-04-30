@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
-"POT-Creation-Date: 2014-04-29 20:39+0200\n"
+"POT-Creation-Date: 2014-04-30 02:49+0200\n"
 "PO-Revision-Date: 2010-06-12 10:09+0200\n"
 "Last-Translator: Dimitrios Glentadakis\n"
 "Language-Team: Greek <translators_team@mandrivalinux.gr>\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: any.pm:284 any.pm:1003 diskdrake/interactive.pm:645
 #: diskdrake/interactive.pm:869 diskdrake/interactive.pm:929
 #: diskdrake/interactive.pm:1047 diskdrake/interactive.pm:1277
-#: diskdrake/interactive.pm:1335 do_pkgs.pm:242 do_pkgs.pm:287
+#: diskdrake/interactive.pm:1335 do_pkgs.pm:242 do_pkgs.pm:291
 #: harddrake/sound.pm:95 interactive.pm:588 pkgs.pm:254 pkgs.pm:263
 #: pkgs.pm:306
 #, c-format
@@ -1097,7 +1097,7 @@ msgstr "Κωδικός Πρόσβασης του Διαχειριστή Τομέ
 # so use only 7bit for this message (and do transliteration or
 # leave it in English, as it is the best for your language)
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:1010
+#: bootloader.pm:1056
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1112,47 +1112,47 @@ msgstr ""
 "i perimene yia tin proepilegmeni ekkinisi.\n"
 "\n"
 
-#: bootloader.pm:1202
+#: bootloader.pm:1248
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO με μενού κειμένου"
 
-#: bootloader.pm:1203
+#: bootloader.pm:1249
 #, c-format
 msgid "GRUB2 with graphical menu"
 msgstr "GRUB2 με γραφικό περιβάλλον"
 
-#: bootloader.pm:1204
+#: bootloader.pm:1250
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr "GRUB με γραφικό μενού "
 
-#: bootloader.pm:1205
+#: bootloader.pm:1251
 #, c-format
 msgid "GRUB with text menu"
 msgstr "GRUB με μενού κειμένου"
 
-#: bootloader.pm:1206
+#: bootloader.pm:1252
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:1207
+#: bootloader.pm:1253
 #, c-format
 msgid "SILO"
 msgstr "SILO"
 
-#: bootloader.pm:1277
+#: bootloader.pm:1323
 #, c-format
 msgid "not enough room in /boot"
 msgstr "δεν υπάρχει αρκετός χώρος στο /boot"
 
-#: bootloader.pm:2064
+#: bootloader.pm:2110
 #, c-format
 msgid "You cannot install the bootloader on a %s partition\n"
 msgstr "Δεν μπορείτε να εγκαταστήσετε το πρόγραμμα εκκίνησης σε κατάτμηση %s\n"
 
-#: bootloader.pm:2233
+#: bootloader.pm:2279
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1161,7 +1161,7 @@ msgstr ""
 "Η ρύθμιση του προγράμματος εκκίνησης του υπολογιστή σου πρέπει να ανανεωθεί, "
 "επειδή κάποιες κατατμήσεις έχουν αλλάξει αριθμούς"
 
-#: bootloader.pm:2246
+#: bootloader.pm:2292
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1170,7 +1170,7 @@ msgstr ""
 "Το πρόγραμμα εκκίνησης του υπολογιστή σου δεν μπορεί να εγκατασταθεί σωστά. "
 "Πρέπει να κάνεις εκκίνηση διάσωσης (boot rescue) και να επιλέξεις το \"%s\""
 
-#: bootloader.pm:2247
+#: bootloader.pm:2293
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Επανεγκατάσταση του Προγράμματος Εκκίνησης"
@@ -2438,7 +2438,7 @@ msgstr "Τα παρακάτω πακέτα πρέπει να εγκαταστα�
 msgid "Installing packages..."
 msgstr "Εγκατάσταση πακέτων..."
 
-#: do_pkgs.pm:287 pkgs.pm:306
+#: do_pkgs.pm:291 pkgs.pm:306
 #, c-format
 msgid "Removing packages..."
 msgstr "Αφαιρούνται τα πακέτα..."
@@ -3703,1197 +3703,1197 @@ msgstr "Εισάγετε ξανά"
 #. -PO: the string "default:LTR" can be translated *ONLY* as "default:LTR"
 #. -PO: or as "default:RTL", depending if your language is written from
 #. -PO: left to right, or from right to left; any other string is wrong.
-#: lang.pm:203
+#: lang.pm:205
 #, c-format
 msgid "default:LTR"
 msgstr "default:LTR"
 
-#: lang.pm:220
+#: lang.pm:222
 #, c-format
 msgid "Andorra"
 msgstr "Ανδόρα"
 
-#: lang.pm:221 timezone.pm:235
+#: lang.pm:223 timezone.pm:235
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Ηνωμένα Αραβικά Εμιράτα"
 
-#: lang.pm:222
+#: lang.pm:224
 #, c-format
 msgid "Afghanistan"
 msgstr "Αφγανιστάν"
 
-#: lang.pm:223
+#: lang.pm:225
 #, c-format
 msgid "Antigua and Barbuda"
 msgstr "Αντίγκουα και Μπαρμπούντα"
 
-#: lang.pm:224
+#: lang.pm:226
 #, c-format
 msgid "Anguilla"
 msgstr "Αγκίλα"
 
-#: lang.pm:225
+#: lang.pm:227
 #, c-format
 msgid "Albania"
 msgstr "Αλβανία"
 
-#: lang.pm:226
+#: lang.pm:228
 #, c-format
 msgid "Armenia"
 msgstr "Αρμενία"
 
-#: lang.pm:227
+#: lang.pm:229
 #, c-format
 msgid "Netherlands Antilles"
 msgstr "Ολλανδικές Αντίλλες"
 
-#: lang.pm:228
+#: lang.pm:230
 #, c-format
 msgid "Angola"
 msgstr "Αγκόλα"
 
-#: lang.pm:229
+#: lang.pm:231
 #, c-format
 msgid "Antarctica"
 msgstr "Ανταρκτική"
 
-#: lang.pm:230 timezone.pm:280
+#: lang.pm:232 timezone.pm:280
 #, c-format
 msgid "Argentina"
 msgstr "Αργεντινή"
 
-#: lang.pm:231
+#: lang.pm:233
 #, c-format
 msgid "American Samoa"
 msgstr "Αμερικανική Σαμόα"
 
-#: lang.pm:232 mirror.pm:12 timezone.pm:238
+#: lang.pm:234 mirror.pm:12 timezone.pm:238
 #, c-format
 msgid "Austria"
 msgstr "Αυστρία"
 
-#: lang.pm:233 mirror.pm:11 timezone.pm:276
+#: lang.pm:235 mirror.pm:11 timezone.pm:276
 #, c-format
 msgid "Australia"
 msgstr "Αυστραλία"
 
-#: lang.pm:234
+#: lang.pm:236
 #, c-format
 msgid "Aruba"
 msgstr "Αρούμπα"
 
-#: lang.pm:235
+#: lang.pm:237
 #, c-format
 msgid "Azerbaijan"
 msgstr "Αζερμπαϊτζάν"
 
-#: lang.pm:236
+#: lang.pm:238
 #, c-format
 msgid "Bosnia and Herzegovina"
 msgstr "Βοσνία-Ερζεγοβίνη"
 
-#: lang.pm:237
+#: lang.pm:239
 #, c-format
 msgid "Barbados"
 msgstr "Μπαρμπάντος"
 
-#: lang.pm:238 timezone.pm:220
+#: lang.pm:240 timezone.pm:220
 #, c-format
 msgid "Bangladesh"
 msgstr "Μπανγκλαντές"
 
-#: lang.pm:239 mirror.pm:13 timezone.pm:240
+#: lang.pm:241 mirror.pm:13 timezone.pm:240
 #, c-format
 msgid "Belgium"
 msgstr "Βέλγιο"
 
-#: lang.pm:240
+#: lang.pm:242
 #, c-format
 msgid "Burkina Faso"
 msgstr "Μπουρκίνα Φάσο"
 
-#: lang.pm:241 timezone.pm:241
+#: lang.pm:243 timezone.pm:241
 #, c-format
 msgid "Bulgaria"
 msgstr "Βουλγαρία"
 
-#: lang.pm:242
+#: lang.pm:244
 #, c-format
 msgid "Bahrain"
 msgstr "Μπαχρέιν"
 
-#: lang.pm:243
+#: lang.pm:245
 #, c-format
 msgid "Burundi"
 msgstr "Μπουρούντι"
 
-#: lang.pm:244
+#: lang.pm:246
 #, c-format
 msgid "Benin"
 msgstr "Μπενίν"
 
-#: lang.pm:245
+#: lang.pm:247
 #, c-format
 msgid "Bermuda"
 msgstr "Βερμούδες"
 
-#: lang.pm:246
+#: lang.pm:248
 #, c-format
 msgid "Brunei Darussalam"
 msgstr "Μπρουνέι Νταρουσαλάμ"
 
-#: lang.pm:247
+#: lang.pm:249
 #, c-format
 msgid "Bolivia"
 msgstr "Βολιβία"
 
-#: lang.pm:248 mirror.pm:14 timezone.pm:281
+#: lang.pm:250 mirror.pm:14 timezone.pm:281
 #, c-format
 msgid "Brazil"
 msgstr "Βραζιλία"
 
-#: lang.pm:249
+#: lang.pm:251
 #, c-format
 msgid "Bahamas"
 msgstr "Μπαχάμες"
 
-#: lang.pm:250
+#: lang.pm:252
 #, c-format
 msgid "Bhutan"
 msgstr "Μπουτάν"
 
-#: lang.pm:251
+#: lang.pm:253
 #, c-format
 msgid "Bouvet Island"
 msgstr "Νήσος Μπουβέ"
 
-#: lang.pm:252
+#: lang.pm:254
 #, c-format
 msgid "Botswana"
 msgstr "Μποτσουάνα"
 
-#: lang.pm:253 timezone.pm:239
+#: lang.pm:255 timezone.pm:239
 #, c-format
 msgid "Belarus"
 msgstr "Λευκορωσία"
 
-#: lang.pm:254
+#: lang.pm:256
 #, c-format
 msgid "Belize"
 msgstr "Μπελίζ"
 
-#: lang.pm:255 mirror.pm:15 timezone.pm:270
+#: lang.pm:257 mirror.pm:15 timezone.pm:270
 #, c-format
 msgid "Canada"
 msgstr "Καναδάς"
 
-#: lang.pm:256
+#: lang.pm:258
 #, c-format
 msgid "Cocos (Keeling) Islands"
 msgstr "Νήσοι Κόκος (Κήλινγκ)"
 
-#: lang.pm:257
+#: lang.pm:259
 #, c-format
 msgid "Congo (Kinshasa)"
 msgstr "Κονγκό (Κινσάσα)"
 
-#: lang.pm:258
+#: lang.pm:260
 #, c-format
 msgid "Central African Republic"
 msgstr "Δημοκρατία Κεντρικής Αφρικής"
 
-#: lang.pm:259
+#: lang.pm:261
 #, c-format
 msgid "Congo (Brazzaville)"
 msgstr "Κονγκό (Μπραζαβίλ)"
 
-#: lang.pm:260 mirror.pm:39 timezone.pm:264
+#: lang.pm:262 mirror.pm:39 timezone.pm:264
 #, c-format
 msgid "Switzerland"
 msgstr "Ελβετία"
 
-#: lang.pm:261
+#: lang.pm:263
 #, c-format
 msgid "Cote d'Ivoire"
 msgstr "Ακτή Ελεφαντοστού"
 
-#: lang.pm:262
+#: lang.pm:264
 #, c-format
 msgid "Cook Islands"
 msgstr "Νήσοι Κουκ"
 
-#: lang.pm:263 timezone.pm:282
+#: lang.pm:265 timezone.pm:282
 #, c-format
 msgid "Chile"
 msgstr "Χιλή"
 
-#: lang.pm:264
+#: lang.pm:266
 #, c-format
 msgid "Cameroon"
 msgstr "Καμερούν"
 
-#: lang.pm:265 timezone.pm:221
+#: lang.pm:267 timezone.pm:221
 #, c-format
 msgid "China"
 msgstr "Κίνα"
 
-#: lang.pm:266
+#: lang.pm:268
 #, c-format
 msgid "Colombia"
 msgstr "Κολομβία"
 
-#: lang.pm:267 mirror.pm:16
+#: lang.pm:269 mirror.pm:16
 #, c-format
 msgid "Costa Rica"
 msgstr "Κόστα Ρίκα"
 
-#: lang.pm:268
+#: lang.pm:270
 #, c-format
 msgid "Serbia & Montenegro"
 msgstr "Σερβία & Μαυροβούνιο"
 
-#: lang.pm:269
+#: lang.pm:271
 #, c-format
 msgid "Cuba"
 msgstr "Κούβα"
 
-#: lang.pm:270
+#: lang.pm:272
 #, c-format
 msgid "Cape Verde"
 msgstr "Πράσινο Ακρωτήριο"
 
-#: lang.pm:271
+#: lang.pm:273
 #, c-format
 msgid "Christmas Island"
 msgstr "Νήσοι Χριστουγέννων"
 
-#: lang.pm:272
+#: lang.pm:274
 #, c-format
 msgid "Cyprus"
 msgstr "Κύπρος"
 
-#: lang.pm:273 mirror.pm:17 timezone.pm:242
+#: lang.pm:275 mirror.pm:17 timezone.pm:242
 #, c-format
 msgid "Czech Republic"
 msgstr "Τσέχικη Δημοκρατία"
 
-#: lang.pm:274 mirror.pm:22 timezone.pm:247
+#: lang.pm:276 mirror.pm:22 timezone.pm:247
 #, c-format
 msgid "Germany"
 msgstr "Γερμανία"
 
-#: lang.pm:275
+#: lang.pm:277
 #, c-format
 msgid "Djibouti"
 msgstr "Τζιμπουτί"
 
-#: lang.pm:276 mirror.pm:18 timezone.pm:243
+#: lang.pm:278 mirror.pm:18 timezone.pm:243
 #, c-format
 msgid "Denmark"
 msgstr "Δανία"
 
-#: lang.pm:277
+#: lang.pm:279
 #, c-format
 msgid "Dominica"
 msgstr "Ντομίνικα"
 
-#: lang.pm:278
+#: lang.pm:280
 #, c-format
 msgid "Dominican Republic"
 msgstr "Δομινικανή Δημοκρατία"
 
-#: lang.pm:279
+#: lang.pm:281
 #, c-format
 msgid "Algeria"
 msgstr "Αλγερία"
 
-#: lang.pm:280
+#: lang.pm:282
 #, c-format
 msgid "Ecuador"
 msgstr "Ισημερινός"
 
-#: lang.pm:281 mirror.pm:19 timezone.pm:244
+#: lang.pm:283 mirror.pm:19 timezone.pm:244
 #, c-format
 msgid "Estonia"
 msgstr "Εσθονία"
 
-#: lang.pm:282
+#: lang.pm:284
 #, c-format
 msgid "Egypt"
 msgstr "Αίγυπτος"
 
-#: lang.pm:283
+#: lang.pm:285
 #, c-format
 msgid "Western Sahara"
 msgstr "Δυτική Σαχάρα"
 
-#: lang.pm:284
+#: lang.pm:286
 #, c-format
 msgid "Eritrea"
 msgstr "Ερυθραία"
 
-#: lang.pm:285 mirror.pm:37 timezone.pm:262
+#: lang.pm:287 mirror.pm:37 timezone.pm:262
 #, c-format
 msgid "Spain"
 msgstr "Ισπανία"
 
-#: lang.pm:286
+#: lang.pm:288
 #, c-format
 msgid "Ethiopia"
 msgstr "Αιθιοπία"
 
-#: lang.pm:287 mirror.pm:20 timezone.pm:245
+#: lang.pm:289 mirror.pm:20 timezone.pm:245
 #, c-format
 msgid "Finland"
 msgstr "Φινλανδία"
 
-#: lang.pm:288
+#: lang.pm:290
 #, c-format
 msgid "Fiji"
 msgstr "Φίτζι"
 
-#: lang.pm:289
+#: lang.pm:291
 #, c-format
 msgid "Falkland Islands (Malvinas)"
 msgstr "Νήσοι Φώκλαντ (Μαλβίνες)"
 
-#: lang.pm:290
+#: lang.pm:292
 #, c-format
 msgid "Micronesia"
 msgstr "Μικρονησία"
 
-#: lang.pm:291
+#: lang.pm:293
 #, c-format
 msgid "Faroe Islands"
 msgstr "Νήσοι Φερόες"
 
-#: lang.pm:292 mirror.pm:21 timezone.pm:246
+#: lang.pm:294 mirror.pm:21 timezone.pm:246
 #, c-format
 msgid "France"
 msgstr "Γαλλία"
 
-#: lang.pm:293
+#: lang.pm:295
 #, c-format
 msgid "Gabon"
 msgstr "Γκαμπόν"
 
-#: lang.pm:294 timezone.pm:266
+#: lang.pm:296 timezone.pm:266
 #, c-format
 msgid "United Kingdom"
 msgstr "Ηνωμένο Βασίλειο"
 
-#: lang.pm:295
+#: lang.pm:297
 #, c-format
 msgid "Grenada"
 msgstr "Γρενάδα"
 
-#: lang.pm:296
+#: lang.pm:298
 #, c-format
 msgid "Georgia"
 msgstr "Γεωργία"
 
-#: lang.pm:297
+#: lang.pm:299
 #, c-format
 msgid "French Guiana"
 msgstr "Γαλλική Γουιάνα"
 
-#: lang.pm:298
+#: lang.pm:300
 #, c-format
 msgid "Ghana"
 msgstr "Γκάνα"
 
-#: lang.pm:299
+#: lang.pm:301
 #, c-format
 msgid "Gibraltar"
 msgstr "Γιβραλτάρ"
 
-#: lang.pm:300
+#: lang.pm:302
 #, c-format
 msgid "Greenland"
 msgstr "Γροιλανδία"
 
-#: lang.pm:301
+#: lang.pm:303
 #, c-format
 msgid "Gambia"
 msgstr "Γκάμπια"
 
-#: lang.pm:302
+#: lang.pm:304
 #, c-format
 msgid "Guinea"
 msgstr "Γουινέα"
 
-#: lang.pm:303
+#: lang.pm:305
 #, c-format
 msgid "Guadeloupe"
 msgstr "Γουαδελούπη"
 
-#: lang.pm:304
+#: lang.pm:306
 #, c-format
 msgid "Equatorial Guinea"
 msgstr "Ισημερινή Γουϊνέα"
 
-#: lang.pm:305 mirror.pm:23 timezone.pm:248
+#: lang.pm:307 mirror.pm:23 timezone.pm:248
 #, c-format
 msgid "Greece"
 msgstr "Ελλάδα"
 
-#: lang.pm:306
+#: lang.pm:308
 #, c-format
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Νότια Γεωργία και Νότια Νησιά Σάντουιτς"
 
-#: lang.pm:307 timezone.pm:271
+#: lang.pm:309 timezone.pm:271
 #, c-format
 msgid "Guatemala"
 msgstr "Γουατεμάλα"
 
-#: lang.pm:308
+#: lang.pm:310
 #, c-format
 msgid "Guam"
 msgstr "Γκουάμ"
 
-#: lang.pm:309
+#: lang.pm:311
 #, c-format
 msgid "Guinea-Bissau"
 msgstr "Γουϊνέα-Μπισάου"
 
-#: lang.pm:310
+#: lang.pm:312
 #, c-format
 msgid "Guyana"
 msgstr "Γουιάνα"
 
-#: lang.pm:311
+#: lang.pm:313
 #, c-format
 msgid "Hong Kong SAR (China)"
 msgstr "Χονγκ Κονγκ SAR (Κίνα)"
 
-#: lang.pm:312
+#: lang.pm:314
 #, c-format
 msgid "Heard and McDonald Islands"
 msgstr "Νησί Χερντ και Νήσοι ΜακΝτόναλντ"
 
-#: lang.pm:313
+#: lang.pm:315
 #, c-format
 msgid "Honduras"
 msgstr "Ονδούρα"
 
-#: lang.pm:314
+#: lang.pm:316
 #, c-format
 msgid "Croatia"
 msgstr "Κροατία"
 
-#: lang.pm:315
+#: lang.pm:317
 #, c-format
 msgid "Haiti"
 msgstr "Αϊτή"
 
-#: lang.pm:316 mirror.pm:24 timezone.pm:249
+#: lang.pm:318 mirror.pm:24 timezone.pm:249
 #, c-format
 msgid "Hungary"
 msgstr "Ουγγαρία"
 
-#: lang.pm:317 timezone.pm:224
+#: lang.pm:319 timezone.pm:224
 #, c-format
 msgid "Indonesia"
 msgstr "Ινδονησία"
 
-#: lang.pm:318 mirror.pm:25 timezone.pm:250
+#: lang.pm:320 mirror.pm:25 timezone.pm:250
 #, c-format
 msgid "Ireland"
 msgstr "Ιρλανδία"
 
-#: lang.pm:319 mirror.pm:26 timezone.pm:226
+#: lang.pm:321 mirror.pm:26 timezone.pm:226
 #, c-format
 msgid "Israel"
 msgstr "Ισραήλ"
 
-#: lang.pm:320 timezone.pm:223
+#: lang.pm:322 timezone.pm:223
 #, c-format
 msgid "India"
 msgstr "Ινδία"
 
-#: lang.pm:321
+#: lang.pm:323
 #, c-format
 msgid "British Indian Ocean Territory"
 msgstr "Βρετανικά Εδάφη Ινδικού Ωκεανού"
 
-#: lang.pm:322
+#: lang.pm:324
 #, c-format
 msgid "Iraq"
 msgstr "Ιράκ"
 
-#: lang.pm:323 timezone.pm:225
+#: lang.pm:325 timezone.pm:225
 #, c-format
 msgid "Iran"
 msgstr "Ιράν"
 
-#: lang.pm:324
+#: lang.pm:326
 #, c-format
 msgid "Iceland"
 msgstr "Ισλανδία"
 
-#: lang.pm:325 mirror.pm:27 timezone.pm:251
+#: lang.pm:327 mirror.pm:27 timezone.pm:251
 #, c-format
 msgid "Italy"
 msgstr "Ιταλία"
 
-#: lang.pm:326
+#: lang.pm:328
 #, c-format
 msgid "Jamaica"
 msgstr "Τζαμάικα"
 
-#: lang.pm:327
+#: lang.pm:329
 #, c-format
 msgid "Jordan"
 msgstr "Ιορδανία"
 
-#: lang.pm:328 mirror.pm:28 timezone.pm:227
+#: lang.pm:330 mirror.pm:28 timezone.pm:227
 #, c-format
 msgid "Japan"
 msgstr "Ιαπωνία"
 
-#: lang.pm:329
+#: lang.pm:331
 #, c-format
 msgid "Kenya"
 msgstr "Κένυα"
 
-#: lang.pm:330
+#: lang.pm:332
 #, c-format
 msgid "Kyrgyzstan"
 msgstr "Κιργιστάν"
 
-#: lang.pm:331
+#: lang.pm:333
 #, c-format
 msgid "Cambodia"
 msgstr "Καμπότζη"
 
-#: lang.pm:332
+#: lang.pm:334
 #, c-format
 msgid "Kiribati"
 msgstr "Κιριμπάτι"
 
-#: lang.pm:333
+#: lang.pm:335
 #, c-format
 msgid "Comoros"
 msgstr "Κομόρες"
 
-#: lang.pm:334
+#: lang.pm:336
 #, c-format
 msgid "Saint Kitts and Nevis"
 msgstr "Σαιντ Κιτς και Νέβις"
 
-#: lang.pm:335
+#: lang.pm:337
 #, c-format
 msgid "Korea (North)"
 msgstr "Κορέα (Βόρεια)"
 
-#: lang.pm:336 timezone.pm:228
+#: lang.pm:338 timezone.pm:228
 #, c-format
 msgid "Korea"
 msgstr "Κορέα"
 
-#: lang.pm:337
+#: lang.pm:339
 #, c-format
 msgid "Kuwait"
 msgstr "Κουβέιτ"
 
-#: lang.pm:338
+#: lang.pm:340
 #, c-format
 msgid "Cayman Islands"
 msgstr "Νήσοι Κέυμαν"
 
-#: lang.pm:339
+#: lang.pm:341
 #, c-format
 msgid "Kazakhstan"
 msgstr "Καζακστάν"
 
-#: lang.pm:340
+#: lang.pm:342
 #, c-format
 msgid "Laos"
 msgstr "Λάος"
 
-#: lang.pm:341
+#: lang.pm:343
 #, c-format
 msgid "Lebanon"
 msgstr "Λίβανος"
 
-#: lang.pm:342
+#: lang.pm:344
 #, c-format
 msgid "Saint Lucia"
 msgstr "Άγιος Λουκάς"
 
-#: lang.pm:343
+#: lang.pm:345
 #, c-format
 msgid "Liechtenstein"
 msgstr "Λιχτενστάιν"
 
-#: lang.pm:344
+#: lang.pm:346
 #, c-format
 msgid "Sri Lanka"
 msgstr "Σρι Λάνκα"
 
-#: lang.pm:345
+#: lang.pm:347
 #, c-format
 msgid "Liberia"
 msgstr "Λιβερία"
 
-#: lang.pm:346
+#: lang.pm:348
 #, c-format
 msgid "Lesotho"
 msgstr "Λεσότο"
 
-#: lang.pm:347 timezone.pm:252
+#: lang.pm:349 timezone.pm:252
 #, c-format
 msgid "Lithuania"
 msgstr "Λιθουανία"
 
-#: lang.pm:348 timezone.pm:253
+#: lang.pm:350 timezone.pm:253
 #, c-format
 msgid "Luxembourg"
 msgstr "Λουξεμβούργο"
 
-#: lang.pm:349
+#: lang.pm:351
 #, c-format
 msgid "Latvia"
 msgstr "Λεττονία"
 
-#: lang.pm:350
+#: lang.pm:352
 #, c-format
 msgid "Libya"
 msgstr "Λιβύη"
 
-#: lang.pm:351
+#: lang.pm:353
 #, c-format
 msgid "Morocco"
 msgstr "Μαρόκο"
 
-#: lang.pm:352
+#: lang.pm:354
 #, c-format
 msgid "Monaco"
 msgstr "Μονακό"
 
-#: lang.pm:353
+#: lang.pm:355
 #, c-format
 msgid "Moldova"
 msgstr "Μολδαβία"
 
-#: lang.pm:354
+#: lang.pm:356
 #, c-format
 msgid "Madagascar"
 msgstr "Μαδαγασκάρη"
 
-#: lang.pm:355
+#: lang.pm:357
 #, c-format
 msgid "Marshall Islands"
 msgstr "Νήσοι Μάρσαλ"
 
-#: lang.pm:356
+#: lang.pm:358
 #, c-format
 msgid "Macedonia"
 msgstr "Πρώην Γιουγκοσλαβική Δημοκρατία της Μακεδονίας"
 
-#: lang.pm:357
+#: lang.pm:359
 #, c-format
 msgid "Mali"
 msgstr "Μάλι"
 
-#: lang.pm:358
+#: lang.pm:360
 #, c-format
 msgid "Myanmar"
 msgstr "Μιανμάρ"
 
-#: lang.pm:359
+#: lang.pm:361
 #, c-format
 msgid "Mongolia"
 msgstr "Μογγολία"
 
-#: lang.pm:360
+#: lang.pm:362
 #, c-format
 msgid "Northern Mariana Islands"
 msgstr "Νήσοι Βορείων Μαριάννων"
 
-#: lang.pm:361
+#: lang.pm:363
 #, c-format
 msgid "Martinique"
 msgstr "Μαρτινίκα"
 
-#: lang.pm:362
+#: lang.pm:364
 #, c-format
 msgid "Mauritania"
 msgstr "Μαυριτανία"
 
-#: lang.pm:363
+#: lang.pm:365
 #, c-format
 msgid "Montserrat"
 msgstr "Μονσεράτ"
 
-#: lang.pm:364
+#: lang.pm:366
 #, c-format
 msgid "Malta"
 msgstr "Μάλτα"
 
-#: lang.pm:365
+#: lang.pm:367
 #, c-format
 msgid "Mauritius"
 msgstr "Μαυρίκιος"
 
-#: lang.pm:366
+#: lang.pm:368
 #, c-format
 msgid "Maldives"
 msgstr "Μαλδίβες"
 
-#: lang.pm:367
+#: lang.pm:369
 #, c-format
 msgid "Malawi"
 msgstr "Μαλάουι"
 
-#: lang.pm:368 timezone.pm:272
+#: lang.pm:370 timezone.pm:272
 #, c-format
 msgid "Mexico"
 msgstr "Μεξικό"
 
-#: lang.pm:369 timezone.pm:229
+#: lang.pm:371 timezone.pm:229
 #, c-format
 msgid "Malaysia"
 msgstr "Μαλαισία"
 
-#: lang.pm:370
+#: lang.pm:372
 #, c-format
 msgid "Mozambique"
 msgstr "Μοζαμβίκη"
 
-#: lang.pm:371
+#: lang.pm:373
 #, c-format
 msgid "Namibia"
 msgstr "Ναμίμπια"
 
-#: lang.pm:372
+#: lang.pm:374
 #, c-format
 msgid "New Caledonia"
 msgstr "Νέα Καληδονία"
 
-#: lang.pm:373
+#: lang.pm:375
 #, c-format
 msgid "Niger"
 msgstr "Νίγηρας"
 
-#: lang.pm:374
+#: lang.pm:376
 #, c-format
 msgid "Norfolk Island"
 msgstr "Νήσοι Νόρφολκ"
 
-#: lang.pm:375
+#: lang.pm:377
 #, c-format
 msgid "Nigeria"
 msgstr "Νιγηρία"
 
-#: lang.pm:376
+#: lang.pm:378
 #, c-format
 msgid "Nicaragua"
 msgstr "Νικαράγουα"
 
-#: lang.pm:377 mirror.pm:29 timezone.pm:254
+#: lang.pm:379 mirror.pm:29 timezone.pm:254
 #, c-format
 msgid "Netherlands"
 msgstr "Ολλανδία"
 
-#: lang.pm:378 mirror.pm:31 timezone.pm:255
+#: lang.pm:380 mirror.pm:31 timezone.pm:255
 #, c-format
 msgid "Norway"
 msgstr "Νορβηγία"
 
-#: lang.pm:379
+#: lang.pm:381
 #, c-format
 msgid "Nepal"
 msgstr "Νεπάλ"
 
-#: lang.pm:380
+#: lang.pm:382
 #, c-format
 msgid "Nauru"
 msgstr "Ναούρου"
 
-#: lang.pm:381
+#: lang.pm:383
 #, c-format
 msgid "Niue"
 msgstr "Νίουε"
 
-#: lang.pm:382 mirror.pm:30 timezone.pm:277
+#: lang.pm:384 mirror.pm:30 timezone.pm:277
 #, c-format
 msgid "New Zealand"
 msgstr "Νέα Ζηλανδία"
 
-#: lang.pm:383
+#: lang.pm:385
 #, c-format
 msgid "Oman"
 msgstr "Ομάν"
 
-#: lang.pm:384
+#: lang.pm:386
 #, c-format
 msgid "Panama"
 msgstr "Παναμάς"
 
-#: lang.pm:385
+#: lang.pm:387
 #, c-format
 msgid "Peru"
 msgstr "Περού"
 
-#: lang.pm:386
+#: lang.pm:388
 #, c-format
 msgid "French Polynesia"
 msgstr "Γαλλική Πολυνησία"
 
-#: lang.pm:387
+#: lang.pm:389
 #, c-format
 msgid "Papua New Guinea"
 msgstr "Παπούα-Νέα Γουϊνέα"
 
-#: lang.pm:388 timezone.pm:230
+#: lang.pm:390 timezone.pm:230
 #, c-format
 msgid "Philippines"
 msgstr "Φιλιππίνες"
 
-#: lang.pm:389
+#: lang.pm:391
 #, c-format
 msgid "Pakistan"
 msgstr "Πακιστάν"
 
-#: lang.pm:390 mirror.pm:32 timezone.pm:256
+#: lang.pm:392 mirror.pm:32 timezone.pm:256
 #, c-format
 msgid "Poland"
 msgstr "Πολωνία"
 
-#: lang.pm:391
+#: lang.pm:393
 #, c-format
 msgid "Saint Pierre and Miquelon"
 msgstr "Σαιντ Πιερ και Μικελόν"
 
-#: lang.pm:392
+#: lang.pm:394
 #, c-format
 msgid "Pitcairn"
 msgstr "Νήσοι Πίτκαιρν"
 
-#: lang.pm:393
+#: lang.pm:395
 #, c-format
 msgid "Puerto Rico"
 msgstr "Πουέρτο Ρίκο"
 
-#: lang.pm:394
+#: lang.pm:396
 #, c-format
 msgid "Palestine"
 msgstr "Παλαιστίνη"
 
-#: lang.pm:395 mirror.pm:33 timezone.pm:257
+#: lang.pm:397 mirror.pm:33 timezone.pm:257
 #, c-format
 msgid "Portugal"
 msgstr "Πορτογαλία"
 
-#: lang.pm:396
+#: lang.pm:398
 #, c-format
 msgid "Paraguay"
 msgstr "Παραγουάη"
 
-#: lang.pm:397
+#: lang.pm:399
 #, c-format
 msgid "Palau"
 msgstr "Παλάου"
 
-#: lang.pm:398
+#: lang.pm:400
 #, c-format
 msgid "Qatar"
 msgstr "Κατάρ"
 
-#: lang.pm:399
+#: lang.pm:401
 #, c-format
 msgid "Reunion"
 msgstr "Ρεουνιόν"
 
-#: lang.pm:400 timezone.pm:258
+#: lang.pm:402 timezone.pm:258
 #, c-format
 msgid "Romania"
 msgstr "Ρουμανία"
 
-#: lang.pm:401 mirror.pm:34
+#: lang.pm:403 mirror.pm:34
 #, c-format
 msgid "Russia"
 msgstr "Ρωσία"
 
-#: lang.pm:402
+#: lang.pm:404
 #, c-format
 msgid "Rwanda"
 msgstr "Ρουάντα"
 
-#: lang.pm:403
+#: lang.pm:405
 #, c-format
 msgid "Saudi Arabia"
 msgstr "Σαουδική Αραβία"
 
-#: lang.pm:404
+#: lang.pm:406
 #, c-format
 msgid "Solomon Islands"
 msgstr "Νήσοι Σολομώντος"
 
-#: lang.pm:405
+#: lang.pm:407
 #, c-format
 msgid "Seychelles"
 msgstr "Σεϋχέλλες"
 
-#: lang.pm:406
+#: lang.pm:408
 #, c-format
 msgid "Sudan"
 msgstr "Σουδάν"
 
-#: lang.pm:407 mirror.pm:38 timezone.pm:263
+#: lang.pm:409 mirror.pm:38 timezone.pm:263
 #, c-format
 msgid "Sweden"
 msgstr "Σουηδία"
 
-#: lang.pm:408 timezone.pm:231
+#: lang.pm:410 timezone.pm:231
 #, c-format
 msgid "Singapore"
 msgstr "Σιγγαπούρη"
 
-#: lang.pm:409
+#: lang.pm:411
 #, c-format
 msgid "Saint Helena"
 msgstr "Νήσος Αγίας Ελένης"
 
-#: lang.pm:410 timezone.pm:261
+#: lang.pm:412 timezone.pm:261
 #, c-format
 msgid "Slovenia"
 msgstr "Σλοβενία"
 
-#: lang.pm:411
+#: lang.pm:413
 #, c-format
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Νήσοι Σβάλμπαρντ και Γιαν Μάγιεν"
 
-#: lang.pm:412 mirror.pm:35 timezone.pm:260
+#: lang.pm:414 mirror.pm:35 timezone.pm:260
 #, c-format
 msgid "Slovakia"
 msgstr "Σλοβακία"
 
-#: lang.pm:413
+#: lang.pm:415
 #, c-format
 msgid "Sierra Leone"
 msgstr "Σιέρρα Λεόνε"
 
-#: lang.pm:414
+#: lang.pm:416
 #, c-format
 msgid "San Marino"
 msgstr "Άγιος Μαρίνος"
 
-#: lang.pm:415
+#: lang.pm:417
 #, c-format
 msgid "Senegal"
 msgstr "Σενεγάλη"
 
-#: lang.pm:416
+#: lang.pm:418
 #, c-format
 msgid "Somalia"
 msgstr "Σομαλία"
 
-#: lang.pm:417
+#: lang.pm:419
 #, c-format
 msgid "Suriname"
 msgstr "Σουρινάμ"
 
-#: lang.pm:418
+#: lang.pm:420
 #, c-format
 msgid "Sao Tome and Principe"
 msgstr "Σάο Τόμε και Πρίντσιπε"
 
-#: lang.pm:419
+#: lang.pm:421
 #, c-format
 msgid "El Salvador"
 msgstr "Ελ Σαλβαδόρ"
 
-#: lang.pm:420
+#: lang.pm:422
 #, c-format
 msgid "Syria"
 msgstr "Συρία"
 
-#: lang.pm:421
+#: lang.pm:423
 #, c-format
 msgid "Swaziland"
 msgstr "Σουαζιλάνδη"
 
-#: lang.pm:422
+#: lang.pm:424
 #, c-format
 msgid "Turks and Caicos Islands"
 msgstr "Νήσοι Τούρκς και Καΐκος"
 
-#: lang.pm:423
+#: lang.pm:425
 #, c-format
 msgid "Chad"
 msgstr "Τσαντ"
 
-#: lang.pm:424
+#: lang.pm:426
 #, c-format
 msgid "French Southern Territories"
 msgstr "Γαλλικές Νότιες Περιοχές"
 
-#: lang.pm:425
+#: lang.pm:427
 #, c-format
 msgid "Togo"
 msgstr "Τόγκο"
 
-#: lang.pm:426 mirror.pm:41 timezone.pm:233
+#: lang.pm:428 mirror.pm:41 timezone.pm:233
 #, c-format
 msgid "Thailand"
 msgstr "Ταϊλάνδη"
 
-#: lang.pm:427
+#: lang.pm:429
 #, c-format
 msgid "Tajikistan"
 msgstr "Τατζικιστάν"
 
-#: lang.pm:428
+#: lang.pm:430
 #, c-format
 msgid "Tokelau"
 msgstr "Τοκελάου"
 
-#: lang.pm:429
+#: lang.pm:431
 #, c-format
 msgid "East Timor"
 msgstr "Ανατολικό Τιμόρ"
 
-#: lang.pm:430
+#: lang.pm:432
 #, c-format
 msgid "Turkmenistan"
 msgstr "Τουρκμενιστάν"
 
-#: lang.pm:431
+#: lang.pm:433
 #, c-format
 msgid "Tunisia"
 msgstr "Τυνησία"
 
-#: lang.pm:432
+#: lang.pm:434
 #, c-format
 msgid "Tonga"
 msgstr "Τόγκα"
 
-#: lang.pm:433 timezone.pm:234
+#: lang.pm:435 timezone.pm:234
 #, c-format
 msgid "Turkey"
 msgstr "Τουρκία"
 
-#: lang.pm:434
+#: lang.pm:436
 #, c-format
 msgid "Trinidad and Tobago"
 msgstr "Τρινιντάντ και Τομπάγκο"
 
-#: lang.pm:435
+#: lang.pm:437
 #, c-format
 msgid "Tuvalu"
 msgstr "Τουβαλού"
 
-#: lang.pm:436 mirror.pm:40 timezone.pm:232
+#: lang.pm:438 mirror.pm:40 timezone.pm:232
 #, c-format
 msgid "Taiwan"
 msgstr "Ταϊβάν"
 
-#: lang.pm:437 timezone.pm:217
+#: lang.pm:439 timezone.pm:217
 #, c-format
 msgid "Tanzania"
 msgstr "Τανζανία"
 
-#: lang.pm:438 timezone.pm:265
+#: lang.pm:440 timezone.pm:265
 #, c-format
 msgid "Ukraine"
 msgstr "Ουκρανία"
 
-#: lang.pm:439
+#: lang.pm:441
 #, c-format
 msgid "Uganda"
 msgstr "Ουγκάντα"
 
-#: lang.pm:440
+#: lang.pm:442
 #, c-format
 msgid "United States Minor Outlying Islands"
 msgstr "Μικρά απομονωμένα νησιά Ηνωμένων Πολιτειών"
 
-#: lang.pm:441 mirror.pm:42 timezone.pm:273
+#: lang.pm:443 mirror.pm:42 timezone.pm:273
 #, c-format
 msgid "United States"
 msgstr "Η.Π.Α."
 
-#: lang.pm:442
+#: lang.pm:444
 #, c-format
 msgid "Uruguay"
 msgstr "Ουρουγουάη"
 
-#: lang.pm:443
+#: lang.pm:445
 #, c-format
 msgid "Uzbekistan"
 msgstr "Ουζμπεκιστάν"
 
-#: lang.pm:444
+#: lang.pm:446
 #, c-format
 msgid "Vatican"
 msgstr "Βατικανό"
 
-#: lang.pm:445
+#: lang.pm:447
 #, c-format
 msgid "Saint Vincent and the Grenadines"
 msgstr "Άγιος Βικέντιος και Γρεναντίνες"
 
-#: lang.pm:446
+#: lang.pm:448
 #, c-format
 msgid "Venezuela"
 msgstr "Βενεζουέλα"
 
-#: lang.pm:447
+#: lang.pm:449
 #, c-format
 msgid "Virgin Islands (British)"
 msgstr "Παρθένοι Νήσοι(Βρετανικές)"
 
-#: lang.pm:448
+#: lang.pm:450
 #, c-format
 msgid "Virgin Islands (U.S.)"
 msgstr "Παρθένοι Νήσοι(Αμερικανικές)"
 
-#: lang.pm:449
+#: lang.pm:451
 #, c-format
 msgid "Vietnam"
 msgstr "Βιετνάμ"
 
-#: lang.pm:450
+#: lang.pm:452
 #, c-format
 msgid "Vanuatu"
 msgstr "Βανουάτου"
 
-#: lang.pm:451
+#: lang.pm:453
 #, c-format
 msgid "Wallis and Futuna"
 msgstr "Νήσοι Γουάλις και Φουτούνα"
 
-#: lang.pm:452
+#: lang.pm:454
 #, c-format
 msgid "Samoa"
 msgstr "Σαμόα"
 
-#: lang.pm:453
+#: lang.pm:455
 #, c-format
 msgid "Yemen"
 msgstr "Υεμένη"
 
-#: lang.pm:454
+#: lang.pm:456
 #, c-format
 msgid "Mayotte"
 msgstr "Μαγιότ"
 
-#: lang.pm:455 mirror.pm:36 timezone.pm:216
+#: lang.pm:457 mirror.pm:36 timezone.pm:216
 #, c-format
 msgid "South Africa"
 msgstr "Νότιος Αφρική"
 
-#: lang.pm:456
+#: lang.pm:458
 #, c-format
 msgid "Zambia"
 msgstr "Ζάμπια"
 
-#: lang.pm:457
+#: lang.pm:459
 #, c-format
 msgid "Zimbabwe"
 msgstr "Ζιμπάμπουε"
@@ -7452,40 +7452,6 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Η εγκατάσταση απέτυχε"
 
-#~ msgid ""
-#~ "Here you can select an alternative driver (either OSS or ALSA) for your "
-#~ "sound card (%s)."
-#~ msgstr ""
-#~ "Εδώ μπορείτε να επιλέξετε έναν εναλλακτικό οδηγό (OSS ή ALSA) για την "
-#~ "κάρτα ήχου σας (%s)"
-
-#~ msgid "No open source driver"
-#~ msgstr "Κανένας οδηγός ανοιχτού κώδικα"
-
-#, fuzzy
-#~ msgid "Please make a backup of your data first."
-#~ msgstr "Παρακαλώ κάντε πρώτα ένα αντίγραφο ασφαλείας των δεδομένων σας"
-
-#~ msgid ""
-#~ "The old \"%s\" driver is blacklisted.\n"
-#~ "\n"
-#~ "It has been reported to oops the kernel on unloading.\n"
-#~ "\n"
-#~ "The new \"%s\" driver will only be used on next bootstrap."
-#~ msgstr ""
-#~ "Ο παλιός οδηγός « %s » είναι στη μαύρη λίστα.\n"
-#~ "\n"
-#~ "Έχουν αναφερθεί προβλήματα στον πυρήνα κατά τον τερματισμό του.\n"
-#~ "\n"
-#~ "Ο νέος οδηγός « %s » θα χρησιμοποιηθεί στην επόμενη εκκίνηση."
-
-#~ msgid ""
-#~ "There's no free driver for your sound card (%s), but there's a "
-#~ "proprietary driver at \"%s\"."
-#~ msgstr ""
-#~ "Δεν υπάρχει κάποιος ελεύθερος οδηγός συσκευής για την δικιά σου κάρτα "
-#~ "ήχου (%s). Υπάρχει, όμως, ένας ιδιόκτητος οδηγός συσκευής στο \"%s\"."
-
 #, fuzzy
 #~ msgid ""
 #~ "\n"
@@ -7848,6 +7814,13 @@ msgstr "Η εγκατάσταση απέτυχε"
 #~ msgid "Give the ram size in MB"
 #~ msgstr "Εισάγετε μέγεθος μνήμης σε MB"
 
+#~ msgid ""
+#~ "Here you can select an alternative driver (either OSS or ALSA) for your "
+#~ "sound card (%s)."
+#~ msgstr ""
+#~ "Εδώ μπορείτε να επιλέξετε έναν εναλλακτικό οδηγό (OSS ή ALSA) για την "
+#~ "κάρτα ήχου σας (%s)"
+
 #~ msgid "High"
 #~ msgstr "Υψηλό"
 
@@ -7944,6 +7917,9 @@ msgstr "Η εγκατάσταση απέτυχε"
 #~ msgid "Moondrake"
 #~ msgstr "Moondrake"
 
+#~ msgid "No open source driver"
+#~ msgstr "Κανένας οδηγός ανοιχτού κώδικα"
+
 #~ msgid ""
 #~ "Option ``Restrict command line options'' is of no use without a password"
 #~ msgstr ""
@@ -7965,6 +7941,10 @@ msgstr "Η εγκατάσταση απέτυχε"
 
 #~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
 #~ msgstr "Παρακαλώ αποσυνδεθείτε και μετά πατήστε Ctrl-Alt-BackSpace"
+
+#, fuzzy
+#~ msgid "Please make a backup of your data first."
+#~ msgstr "Παρακαλώ κάντε πρώτα ένα αντίγραφο ασφαλείας των δεδομένων σας"
 
 #~ msgid ""
 #~ "Please read this document carefully. This document is a license agreement "
@@ -8225,6 +8205,19 @@ msgstr "Η εγκατάσταση απέτυχε"
 #~ "κάρτα ήχου.\n"
 
 #~ msgid ""
+#~ "The old \"%s\" driver is blacklisted.\n"
+#~ "\n"
+#~ "It has been reported to oops the kernel on unloading.\n"
+#~ "\n"
+#~ "The new \"%s\" driver will only be used on next bootstrap."
+#~ msgstr ""
+#~ "Ο παλιός οδηγός « %s » είναι στη μαύρη λίστα.\n"
+#~ "\n"
+#~ "Έχουν αναφερθεί προβλήματα στον πυρήνα κατά τον τερματισμό του.\n"
+#~ "\n"
+#~ "Ο νέος οδηγός « %s » θα χρησιμοποιηθεί στην επόμενη εκκίνηση."
+
+#~ msgid ""
 #~ "The operating system and the different components available in the "
 #~ "Moondrake distribution \n"
 #~ "shall be called the \"Software Products\" hereafter. The Software "
@@ -8259,6 +8252,13 @@ msgstr "Η εγκατάσταση απέτυχε"
 #~ msgstr ""
 #~ "Δεν υπάρχει κατάτμηση FAT για χρήση ως loopback (ή δεν υπάρχει αρκετός "
 #~ "χώρος)"
+
+#~ msgid ""
+#~ "There's no free driver for your sound card (%s), but there's a "
+#~ "proprietary driver at \"%s\"."
+#~ msgstr ""
+#~ "Δεν υπάρχει κάποιος ελεύθερος οδηγός συσκευής για την δικιά σου κάρτα "
+#~ "ήχου (%s). Υπάρχει, όμως, ένας ιδιόκτητος οδηγός συσκευής στο \"%s\"."
 
 #~ msgid ""
 #~ "This is similar to the previous level, but the system is entirely closed "

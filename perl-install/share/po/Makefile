@@ -14,7 +14,7 @@ LOCALEDIR=$(DATADIR)/locale
 all: $(MOFILES)
 
 %.mo: %.po
-	msgfmt -o $@ $<
+	msgfmt -c -o $@ $<
 
 update_n_merge: $(NAME).pot merge
 
@@ -35,7 +35,7 @@ merge_mageia_translations: $(NAME).pot
 		sed -e 's#ageia#oondrake#g' -i "$$n"; \
 		msgcat --use-first -o "$$n.temp" -t utf-8 -s "$$n.orig" "$$n"; \
 		git checkout --theirs origin/master "$$n"; \
-		msgcat --use-first -o "$$n.orig" "$$n.header" "$$n.temp"; \
+		msgcat --use-first -o "$$n.orig" -t utf-8 -s "$$n.header" "$$n.temp"; \
 		mv "$$n.orig" "$$n"; \
 		rm "$$n.temp" "$$n.header"; \
 		msgmerge "$$n" $^ > "$$n"t; \
