@@ -340,6 +340,8 @@ getNetDriver(char* device)
             case 1:
                 RETVAL = strdup(drvinfo.bus_info);
                 break;
+	    default:
+		RETVAL = strdup("");
         }
     } else { perror("SIOCETHTOOL"); RETVAL = strdup(""); }
     close(s);
