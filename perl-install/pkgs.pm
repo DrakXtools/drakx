@@ -311,9 +311,14 @@ sub remove_unused_packages {
     #- we should have some gurpme
     $wait = $in->wait_message(N("Please wait"), N("Removing packages..."));
     run_program::rooted($o_prefix, 'urpme', '--auto',
-		     if_($hardware, @unused_hardware_packages),
-		     if_($locales, @unselected_locales),
-	);
+		     if_($hardware, @unused_hardware_packages)
+	) if($hardware);
+
+    foreach my $locale(@unselected_locales)
+    {
+      run_program::rooted($o_prefix, 'urpme', '--auto', $locale);
+    }
+
     #- use script from One to list language files (/usr/share/locale mainly) and remove them?
 }
 
