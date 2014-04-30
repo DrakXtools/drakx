@@ -79,7 +79,7 @@ my $mdk_app = {
 
 my @generic_tool = keys %$mdk_app; 
 my @all_drakxtools = qw(adduserdrake diskdrake drakautoinst drakboot drakbug drakclock drakfloppy drakfont draksec drakxservices drakxtools drakxtv logdrake scannerdrake);
-push @generic_tool, @all_drakxtools, qw(MandrivaUpdate drakbackup drakconnect drakfirewall drakhosts drakmenustyle draknfs draksambashare drakgw drakroam drakvpn keyboarddrake msec mousedrake net_monitor printerdrake urpmi userdrake XFdrake);
+push @generic_tool, @all_drakxtools, qw(MoondrakeUpdate drakbackup drakconnect drakfirewall drakhosts drakmenustyle draknfs draksambashare drakgw drakroam drakvpn keyboarddrake msec mousedrake net_monitor printerdrake urpmi userdrake XFdrake);
 
 my $kernel_release = chomp_(`uname -r`);
 my $distro_release = chomp_(cat_('/etc/release'));
@@ -92,7 +92,7 @@ if ($distro_release =~ /(official|community)/i) {
 } else {
     $distrocode = "cooker";
 }
-my $bugzilla_url = 'http://qa.mandriva.com/enter_bug.cgi';
+my $bugzilla_url = 'http://issues.openmandriva.org/enter_bug.cgi';
 my $wizard_name = "Bugzilla";
 
 $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
@@ -237,7 +237,7 @@ sub get_top_of_trace {
 
 sub report_bug_to_bugzilla() {
     my $p = $package->get_text;
-    my ($product, $version) = $p =~ /^(.*)-([^-]+-[^-]+(mdk|mdv.*))$/; # FIXME: fragile!
+    my ($product, $version) = $p =~ /^(.*)-([^-]+-[^-]+(mdk|mdv|omv.*))$/; # FIXME: fragile!
     my $app = $comb_app->entry->get_text;
     my $_component = $app ?
       if_(member($app, @all_drakxtools), $app) || $mdk_app->{$app} :
@@ -265,7 +265,7 @@ sub report_bug_to_bugzilla() {
                        ($product || $version ? 'cf_rpmpkg=' . join('-', $product, $version) : ()),
                        'version=' . ($rel_data->{branch} eq 'Devel' ? 'Cooker' : $rel_data->{version}),
                        'component=Core%20Packages',
-                       'classification=Mandriva%20Linux',
+                       'classification=Moondrake%20GNU/Linux',
                        "rep_platform=$arch",
                        if_($incident,
                            join('', "short_desc=$prog%20",
