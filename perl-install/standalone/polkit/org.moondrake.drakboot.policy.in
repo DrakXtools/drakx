@@ -7,16 +7,16 @@
  <vendor>Moondrake</vendor>
  <vendor_url>http://www.moondrake.org/</vendor_url>
 
- <action id="org.drakx.drakdm.pkexec.run">
-    <_description>Run DrakX Login Manager Configuration</_description>
-    <_message>Authentication is required to run DrakX Login Manager Configuration</_message>
+ <action id="org.moondrake.drakboot.pkexec.run">
+    <_description>Run DrakX Boot Configuration</_description>
+    <_message>Authentication is required to run DrakX Boot Configuration</_message>
     <icon_name>drakconf</icon_name>
     <defaults>
      <allow_any>no</allow_any>
      <allow_inactive>no</allow_inactive>
      <allow_active>auth_admin_keep</allow_active>
     </defaults>
-    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/drakdm</annotate>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/drakboot</annotate>
     <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
  </action>
 </policyconfig>

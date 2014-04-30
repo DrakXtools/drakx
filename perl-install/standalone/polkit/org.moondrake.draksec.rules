@@ -1,5 +1,5 @@
 polkit.addRule(function(action, subject) {
-  if (typeof drakToolAuth != "function" || action.id.indexOf("org.drakx.") != 0)
+  if (typeof drakToolAuth != "function" || action.id.indexOf("org.moondrake.") != 0)
     return polkit.Result.NOT_HANDLED;
 
   var tool = action.id.split(".")[2];

@@ -7,14 +7,14 @@ POLKITPOLICYDEST = $(PREFIX)/usr/share/polkit-1/actions
 RULES := $(wildcard *.rules)
 POLICY_IN := $(wildcard *.policy.in)
 POLICY = $(POLICY_IN:.policy.in=.policy)
-WRAPPERS = $(patsubst org.drakx.%.policy,%,$(POLICY))
+WRAPPERS = $(patsubst org.moondrake.%.policy,%,$(POLICY))
 
 all: $(WRAPPERS) $(POLICY)
 
 clean:
 	rm -f  $(WRAPPERS) $(POLICY)
 
-%: org.drakx.%.policy.in
+%: org.moondrake.%.policy.in
 	@echo -e '#!/bin/sh\nif  [[ "$$UID" != "0" ]] ; then\n    $(BINDIR)/pkexec $(LIBEXECDIR)/$@ "$$''@"\n    exit $$''?\nfi\nexec $(LIBEXECDIR)/$@ "$$''@"\n' > $@
 
 %.policy: %.policy.in
