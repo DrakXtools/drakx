@@ -1,6 +1,7 @@
 package install::any; # $Id$
 
 use strict;
+use feature 'state';
 
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(addToBeDone);
@@ -8,7 +9,6 @@ our @EXPORT_OK = qw(addToBeDone);
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use feature 'state';
 use common;
 use run_program;
 use fs::type;
