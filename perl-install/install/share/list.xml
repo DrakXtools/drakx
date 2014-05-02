@@ -207,6 +207,7 @@
 
   /etc/pki/tls/certs/ca-bundle.crt
 
+  /etc/pcmcia/config.opts
   /lib/udev/ata_id
   /lib/udev/scsi_id
   /lib/udev/pcmcia-socket-startup
@@ -284,6 +285,7 @@
 
 <from dir="/usr/LIB/pango/*/modules">
   pango-arabic-lang.so
+  pango-basic-fc.so
   pango-indic-lang.so
   pango-thai-lang.so
 </from>
@@ -304,6 +306,7 @@
   ISO8859-5.so
   ISO8859-3.so
   ISO8859-2.so
+  ISO8859-1.so
  <from expand="glob"> 
   KOI8-*.so
  </from>
@@ -311,6 +314,7 @@
   CP1251.so
   GEORGIAN-PS.so
   EUC-CN.so
+  gconv-modules
 </from>
 
 <filter subst="/^__END__/ and $_ = '', close ARGV">
