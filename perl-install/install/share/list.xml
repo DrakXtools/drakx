@@ -315,6 +315,7 @@
 
 <filter subst="/^__END__/ and $_ = '', close ARGV">
 <from expand="main-perl">
+  Env.pm
   File/Find.pm
   FileHandle.pm
   File/Temp.pm
