@@ -92,6 +92,8 @@
   </mode>
 
   mkfs.xfs xfs_admin xfs_repair fsck.xfs
+  xfs_freeze xfs_io <!-- needed for setup grub on XFS formated / -->
+
   mkfs.ntfs mkdosfs fatlabel dosfslabel mkntfs ntfsresize ntfslabel
   mkfs.btrfs btrfs btrfsck fsck.btrfs
   mkfs.nilfs2 nilfs-tune
