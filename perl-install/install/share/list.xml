@@ -126,17 +126,10 @@
 <filter command="strip">
 <from dir="/LIB">
   libnss_nis.so.2
-  libnss_files.so.2
-  libnss_dns.so.2
-  libresolv.so.2
-  <!-- needed for mount.ntfs-3g -->
 
   <!-- modules used by libnss3 -->
   libfreebl3.so
   libsoftokn3.so
-
-  <!-- needed by dmraid -->
-  libdmraid-events-isw.so
 
 </from>
 </filter>
@@ -192,12 +185,8 @@
   <mode copy="keep-links">
      /usr/share/doc/installer-help/
   </mode>
-  /usr/share/usb.ids
   /usr/share/locale/UTF-8
   /bin/brltty
-  <mode copy="system">
-    /sbin/blkid
-  </mode>
 
   /usr/bin/drakx-matchbox-window-manager
   /usr/share/matchbox/mbnoapp.xpm
@@ -205,12 +194,6 @@
   /usr/share/icons/Adwaita/scalable/status/dialog-warning-symbolic.svg
 
   /etc/pki/tls/certs/ca-bundle.crt
-
-  /etc/pcmcia/config.opts
-  /lib/udev/ata_id
-  /lib/udev/scsi_id
-  /lib/udev/pcmcia-socket-startup
-
 
   <!-- for GDB: -->
   <if set="DEBUG_INSTALL">

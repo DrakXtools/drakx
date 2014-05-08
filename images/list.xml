@@ -289,6 +289,10 @@
   /usr/lib/rpm/macros
   /usr/lib/rpm/cpuinfo.yaml
   /usr/lib/rpm/macros.d/mandriva
+
+  /lib/udev/ata_id
+  /lib/udev/scsi_id
+  /lib/udev/pcmcia-socket-startup
 </from>
 
 <filter subst="/^__END__/ and $_ = '', close ARGV">
