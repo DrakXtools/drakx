@@ -249,7 +249,6 @@ sub special_shortcuts {
 sub createXconf {
     my ($file, $mouse_type, $mouse_dev, $_wacom_dev, $Driver) = @_;
 
-    $mouse_type = 'IMPS/2' if $mouse_type eq 'vboxmouse';
     symlinkf(devices::make($mouse_dev), "/dev/mouse") if $mouse_dev ne 'none';
 
     #- remove "error opening security policy file" warning
@@ -257,11 +256,9 @@ sub createXconf {
 
     return if !$Driver;
 
-     my ($mouse_driver, $mouse_protocol) = detect_devices::is_vmware() ? qw(vmmouse auto) : ('mouse', $mouse_type);
      my $resolution = $Driver eq 'fbdev' ? '"default"' : '"1024x768" "800x600" "640x480"';
-     output($file, sprintf(<<'END', $mouse_driver, $mouse_protocol, $Driver, $resolution));
+     output($file, sprintf(<<'END',  $Driver, $resolution));
 Section "ServerFlags"
-   Option "AutoAddDevices" "False"
 EndSection
 
 Section "Module"
@@ -270,21 +267,6 @@ EndSection
 
 Section "Files"
    FontPath   "/usr/share/fonts:unscaled"
-EndSection
-
-Section "InputDevice"
-    Identifier "Keyboard"
-    Driver "keyboard"
-    Option "XkbModel" "pc105"
-    Option "XkbLayout" "us"
-EndSection
-
-Section "InputDevice"
-    Identifier "Mouse"
-    Driver "%s"
-    Option "Protocol" "%s"
-    Option "Device" "/dev/mouse"
-    Option "ZAxisMapping" "4 5"
 EndSection
 
 Section "Monitor"
@@ -314,8 +296,6 @@ Section "ServerLayout"
     Option "OffTime"     "0"
     Identifier "layout"
     Screen "screen"
-    InputDevice "Mouse" "CorePointer"
-    InputDevice "Keyboard" "CoreKeyboard"
 EndSection
 
 END
