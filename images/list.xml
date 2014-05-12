@@ -370,11 +370,16 @@
   10-dm.rules
   11-dm-lvm.rules
   13-dm-disk.rules
+  50-udev-default.rules <!-- needed for input in X11 -->
+  60-keyboard.rules
+  60-persistent-input.rules
   60-persistent-storage.rules
+  61-x11-input.rules
   63-md-raid-arrays.rules
   64-md-raid-assembly.rules
   65-md-incremental.rules
   75-net-description.rules
+  65-libwacom.rules
   95-dm-notify.rules
 </from>
 
