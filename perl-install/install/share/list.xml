@@ -99,6 +99,12 @@
   libvbe.so
 </from>
 
+<from dir="/usr/share/X11/xorg.conf.d">
+  <from expand="glob">
+     *.conf
+  </from>
+</from>
+
 <from dir="/usr/share/glib-2.0/schemas">
   <from expand="glob">
     gschema*
