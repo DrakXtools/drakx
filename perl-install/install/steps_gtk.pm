@@ -111,7 +111,7 @@ sub _launchX {
     if ($server eq 'Xephyr') {
         push @options, '-ac', '-screen', $o->{vga} || ($o->{vga16} ? '640x480' : '1024x768');
     } else {
-        install::gtk::createXconf($f, @{$o->{mouse}}{'Protocol', 'device'}, $o->{mouse}{wacom}[0], $Driver);
+        install::gtk::createXconf($f, $Driver);
 
         push @options, '-allowMouseOpenFail', '-xf86config', $f;
         push @options, 'vt7', '-dpi', '75';

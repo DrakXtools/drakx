@@ -247,7 +247,7 @@ sub special_shortcuts {
 
 #------------------------------------------------------------------------------
 sub createXconf {
-    my ($file, $mouse_type, $mouse_dev, $_wacom_dev, $Driver) = @_;
+    my ($file, $Driver) = @_;
 
     symlinkf(devices::make($mouse_dev), "/dev/mouse") if $mouse_dev ne 'none';
 
