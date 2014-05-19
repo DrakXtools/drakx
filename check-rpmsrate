@@ -1,5 +1,0 @@
-#!/usr/bin/perl
-use lib qw(/usr/lib/libDrakX);
-use pkgs;
-my $f = $ARGV[0] or die "usage: $0 <rpmsrate file>";
-pkgs::read_rpmsrate_raw($f);
