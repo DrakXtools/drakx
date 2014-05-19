@@ -206,6 +206,7 @@
 
   /etc/pki/tls/certs/ca-bundle.crt
 
+  /etc/pcmcia/config.opts
   /lib/udev/ata_id
   /lib/udev/scsi_id
   /lib/udev/pcmcia-socket-startup
@@ -261,6 +262,9 @@
        /usr/share/themes/Ia Ora*/matchbox/*
     </from>
     /usr/share/themes/oxygen-gtk*
+    /usr/LIB/gtk-3.0/*/theming-engines/liboxygen-gtk.so
+    /usr/share/themes/Adwaita*
+    /usr/LIB/gtk-3.0/*/theming-engines/libadwaita.so
     /usr/LIB/gdk-pixbuf-2.0/*/loaders.cache
     /usr/LIB/gdk-pixbuf-2.0/*/loaders/libpixbufloader-png.so
     /etc/brltty/*.ttb
@@ -303,6 +307,7 @@
   ISO8859-5.so
   ISO8859-3.so
   ISO8859-2.so
+  ISO8859-1.so
  <from expand="glob"> 
   KOI8-*.so
  </from>
@@ -310,6 +315,7 @@
   CP1251.so
   GEORGIAN-PS.so
   EUC-CN.so
+  gconv-modules
 </from>
 
 <filter subst="/^__END__/ and $_ = '', close ARGV">
@@ -331,6 +337,7 @@
   Net/Ping.pm
   PerlIO.pm
   SelfLoader.pm
+  Tie/Array.pm
   Time/Local.pm
   bytes_heavy.pl <!-- needed by urpm::mirrors -->
   constant.pm
@@ -434,6 +441,10 @@
 
 <from expand="rpm" matching="m!/usr/lib/perl5/.*/unicore/lib!">
   perl
+</from>
+
+<from expand="rpm">
+  gnome-themes-standard
 </from>
 
 <from expand="rpm" matching="m!^/usr/lib/perl5! and !/\.pod$/">
