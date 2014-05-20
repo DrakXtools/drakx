@@ -48,6 +48,7 @@ class IsoImage(object):
         publisher = config.vendor
 
         cmd = "grub2-mkrescue -o '%s' '%s' -- -f --stdio_sync off -c boot/grub/i386-pc/boot.catalog -input-charset utf-8 -R -r" % (iso, config.tmpdir)
+        print cmd
         # cmd prints size in number of sectors of 2048 bytes, so multiply with 2048 to get the number of bytes
         size = int(subprocess.Popen(cmd + " -print-size", shell=True, stdout=subprocess.PIPE, close_fds=True).stdout.readlines()[-1].strip()) * 2048
         print color("Estimated iso size will be %d bytes, %d MB" % (size, size/1000/1000), GREEN)
