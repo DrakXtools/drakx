@@ -331,20 +331,22 @@ class Distribution(object):
         print color("Copying first stage installer: %s -> %s/install/images/all.cpio.xz" % (stage1, tmpdir), GREEN)
         os.mkdir("%s/install" % tmpdir)
         os.mkdir("%s/install/images" % tmpdir)
-        os.system("ln -sr %s %s/install/images/all.cpio.xz" % (stage1, tmpdir))
+        os.symlink(os.path.realpath(stage1), tmpdir + "/install/images/all.cpio.xz")
 
         if not stage2:
-            stage2 = "%s/install/stage2/mdkinst.cpio.xz" % config.rootdir
+            stage2 = os.path.realpath(config.rootdir) + "/install/stage2/mdkinst.cpio.xz"
+
+        versionFile = os.path.realpath(config.rootdir) + "/grub/VERSION"
         print color("Copying second stage installer: %s -> %s/install/stage2/mdkinst.cpio.xz" % (stage2, tmpdir), GREEN)
-        os.mkdir("%s/install/stage2" % tmpdir)
-        os.system("ln -sr %s %s/install/stage2/mdkinst.cpio.xz" % (stage2, tmpdir))
-        os.system("ln -sr ../VERSION %s/install/stage2/VERSION" % tmpdir)
+        os.mkdir(tmpdir + "/install/stage2")
+        os.symlink(stage2, tmpdir + "/install/stage2/mdkinst.cpio.xz")
+        os.symlink(versionFile, tmpdir + "/install/stage2/VERSION")
 
         if not advertising:
             advertising="%s/install/extra/advertising" % config.rootdir
         print color("Copying advertising: %s -> %s/install/extra/advertising" % (advertising, tmpdir), GREEN)
         os.mkdir("%s/install/extra" % tmpdir)
-        os.system("ln -sr %s %s/install/extra/advertising" % (advertising, tmpdir))
+        os.symlink(os.path.realpath(advertising), tmpdir + "/install/extra/advertising")
 
         print color("Generating %s/media/media_info/MD5SUM" % tmpdir, GREEN)
         os.system("cd %s/media/media_info/; md5sum * > MD5SUM" % tmpdir)

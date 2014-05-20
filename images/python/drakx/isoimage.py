@@ -11,12 +11,12 @@ class IsoImage(object):
         os.system("rm -rf "+destdir)
         #os.mkdir(config.tmpdir)
         os.mkdir(destdir)
-        os.system("ln -sr %s/grub/boot/alt* %s/" % (config.rootdir, destdir))
+        os.system("ln -s %s/grub/boot/alt* %s/" % (os.path.realpath(config.rootdir), destdir))
         os.symlink("/boot/memtest.bin", destdir+"/memtest")
         os.mkdir(grubdir)
-        os.system("ln -sr %s/grub/boot/grub/* %s/" % (config.rootdir,grubdir))
+        os.system("ln -s %s/grub/boot/grub/* %s/" % (os.path.realpath(config.rootdir),grubdir))
         for f in ['autorun.inf', 'dosutils']:
-            os.symlink("%s/%s" % (repopath, f), "%s/%s" % (config.tmpdir, f))
+            os.symlink("%s/%s" % (repopath, f), "%s/%s" % (os.path.realpath(config.tmpdir), f))
 
         if len(distrib) > 1:
             arch = "dual"
