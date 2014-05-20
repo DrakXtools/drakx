@@ -108,7 +108,7 @@ compress:
 	(cd $(DESTDIR)$(STAGE2_DEST)/live; find | cpio -o -H newc | $(COMPRESS)) > $(DESTDIR)$(STAGE2_DEST)/mdkinst.cpio.xz
 	rm -rf $(DESTDIR)$(STAGE2_DEST)/live
 
-stage2:
+stage2: pixmaps/left-background.png
 	rm -rf $(DESTDIR)$(DEST)
 	mkdir -p $(DESTDIR)$(DEST)
 	$(MAKE) get_needed_files 
