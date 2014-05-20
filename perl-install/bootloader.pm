@@ -263,6 +263,8 @@ sub set_default_grub_var {
 
 	# Update the kernel command line with KMS option
 	my $cmdline_found = 0;
+	my $kms_ok = 0;
+	my $value;
 	foreach my $line (@lines) {
 		# Skip comments
 		next if ($line =~ m/^\s*#/);
@@ -271,7 +273,7 @@ sub set_default_grub_var {
 		if ($line =~ m/^\s*GRUB_CMDLINE_LINUX_DEFAULT\s*=\s*(.*)/) {
 			$cmdline_found = 1;
 			# Strip the value from surrounding quotes (if any)
-			my $value = $1;
+			$value = $1;
 			$value =~ s/^['"]//;
 			$value =~ s/['"]$//;
 			# To avoid messing with starting/trailing spaces, just split the list of parameters
