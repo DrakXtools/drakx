@@ -596,20 +596,22 @@ sub installPackages {
 
     ugtk3::gtkadd($w->{window}, my $box = gtknew('VBox', children_tight => [ 
 	# TODO: allow for both advertising and game?
-	#gtknew('Image', file_ref => \$advertising_image, show_ref => \$show_advertising),
+	gtknew('Image', file_ref => \$advertising_image, show_ref => \$show_advertising),
     ]));
 
-    my $digger = new Gtk3::Socket;
-    $frame->add ($digger);
-    $frame->set_size_request (640, 400);
-    $w->{window}->show_all;
-    my $xid = $digger->window->get_xid;
 
-    my $digger_pid = fork();
-    if (!$digger_pid) {
-	    exec "/usr/games/digger", "/X:$xid", "/Q";
-    }
+# disabled for now...
+#    my $digger = new Gtk3::Socket;
+#    $box->add ($digger);
+#    $box->set_size_request (640, 400);
+#    my $xid = $digger->get_id;
+
+ #   my $digger_pid = fork();
+ #   if (!$digger_pid) {
+#	    exec "/usr/games/digger", "/X:$xid", "/Q";
+#    }
     # TODO: kill pid after finished installing packages rather than leaving zombie process
+    #   $w->{window}->show_all;
 
     $box->pack_end(gtkshow(gtknew('VBox', border_width => 7, spacing => 3, children_loose => [
 	gtknew('ScrolledWindow', child => $pkg_log_widget, 
