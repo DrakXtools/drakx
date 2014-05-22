@@ -8,7 +8,7 @@ use common;
 
 =head1 NAME
 
-wizards - a layer on top of interactive that ensure proper stepping
+wizards - a layer on top of L<interactive> that ensure proper stepping
 
 =head1 SYNOPSIS
 
