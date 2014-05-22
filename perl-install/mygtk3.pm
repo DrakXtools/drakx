@@ -13,6 +13,16 @@ use common;
 
 use Gtk3;
 
+=head1 SYNOPSYS
+
+B<mygtk3> enables to write GUIes using Gtk+3 in a functional/logical way
+
+=head1 Functions
+
+=over
+
+=cut
+
 sub init() {
     !check_for_xserver() and print("Cannot be run in console mode.\n"), c::_exit(0);
     $::one_message_has_been_translated and warn("N() was called from $::one_message_has_been_translated BEFORE gtk3 initialisation, replace it with a N_() AND a translate() later.\n"), c::_exit(1);
@@ -28,6 +38,13 @@ init() unless $::no_ugtk_init;
 Gtk3->enable_exceptions if $::isInstall;
 
 
+=item gtknew($class, %opts)
+
+Creates & return a new widget. eg:
+
+  gtknew('Label', text => "Settings");
+
+=cut
 
 sub gtknew {
     my $class = shift;
@@ -1000,10 +1017,16 @@ sub _gtk__MagicWindow {
     }, 'mygtk3::MagicWindow';
 }
 
-# A standard About dialog. Used with:
-# my $w = gtknew('AboutDialog', ...);
-# $w->show_all;
-# $w->run;
+=item _gtk__AboutDialog($w, $opts)
+
+A standard About dialog. Used with:
+
+ my $w = gtknew('AboutDialog', ...);
+ $w->show_all;
+ $w->run;
+
+=cut
+
 sub _gtk__AboutDialog {
     my ($w, $opts) = @_;
 
@@ -1211,11 +1234,25 @@ sub _gtknew_handle_children {
     }
 }
 
-#- this magic function redirects method calls:
-#- * default is to redirect them to the {child}
-#- * if the {child} doesn't handle the method, we try with the {real_window}
-#-   (eg : add_accel_group set_position set_default_size
-#- * a few methods are handled specially
+=item mygtk3::MagicWindow::AUTOLOAD($w, @args)
+
+this magic function redirects method calls:
+
+=over 4
+
+=item * default is to redirect them to the {child}
+
+=item *
+
+if the {child} doesn't handle the method, we try with the {real_window}c
+(eg : add_accel_group(), set_position(), set_default_size(), ...)
+
+=item * a few methods are handled specially
+
+=back
+
+=cut
+
 my %for_real_window = map { $_ => 1 } qw(show_all size_request);
 sub mygtk3::MagicWindow::AUTOLOAD {
     my ($w, @args) = @_;
@@ -1340,32 +1377,49 @@ sub _find_imgfile {
     }
 }
 
-# _text_insert() can be used with any of choose one of theses styles:
-# - no tags:
-#   _text_insert($textview, "My text..");
-# - anonymous tags:
-#   _text_insert($textview, [ [ 'first text',  { 'foreground' => 'blue', 'background' => 'green', ... } ],
-#			        [ 'second text' ],
-#		                [ 'third', { 'font' => 'Serif 15', ... } ],
-#                               ... ]);
-# - named tags:
-#   $textview->{tags} = {
-#                        'blue_green' => { 'foreground' => 'blue', 'background' => 'green', ... },
-#                        'big_font' => { 'font' => 'Serif 35', ... },
-#                       }
-#   _text_insert($textview, [ [ 'first text',  'blue_green' ],
-#		                [ 'second', 'big_font' ],
-#                               ... ]);
-# - mixed anonymous and named tags:
-#   $textview->{tags} = {
-#                        'blue_green' => { 'foreground' => 'blue', 'background' => 'green', ... },
-#                        'big_font' => { 'font' => 'Serif 35', ... },
-#                       }
-#   _text_insert($textview, [ [ 'first text',  'blue_green' ],
-#			        [ 'second text' ],
-#		                [ 'third', 'big_font' ],
-#		                [ 'fourth', { 'font' => 'Serif 15', ... } ],
-#                               ... ]);
+=item _text_insert($textview, $t, %opts)
+
+_text_insert() can be used with any of choose one of theses styles:
+
+=over 4
+
+=item * no tags:
+
+   _text_insert($textview, "My text..");
+
+=item * anonymous tags:
+
+   _text_insert($textview, [ [ 'first text',  { 'foreground' => 'blue', 'background' => 'green', ... } ],
+			        [ 'second text' ],
+		                [ 'third', { 'font' => 'Serif 15', ... } ],
+                               ... ]);
+
+=item * named tags:
+
+   $textview->{tags} = {
+                        'blue_green' => { 'foreground' => 'blue', 'background' => 'green', ... },
+                        'big_font' => { 'font' => 'Serif 35', ... },
+                       }
+   _text_insert($textview, [ [ 'first text',  'blue_green' ],
+		                [ 'second', 'big_font' ],
+                               ... ]);
+
+=item * mixed anonymous and named tags:
+
+   $textview->{tags} = {
+                        'blue_green' => { 'foreground' => 'blue', 'background' => 'green', ... },
+                        'big_font' => { 'font' => 'Serif 35', ... },
+                       }
+   _text_insert($textview, [ [ 'first text',  'blue_green' ],
+			        [ 'second text' ],
+		                [ 'third', 'big_font' ],
+		                [ 'fourth', { 'font' => 'Serif 15', ... } ],
+                               ... ]);
+
+=back
+
+=cut
+
 sub _text_insert {
     my ($textview, $t, %opts) = @_;
     my $buffer = $textview->get_buffer;
@@ -1631,5 +1685,9 @@ sub move_selection {
     $layout->move($w->{selection_arrow}, $w->{arrow_x}, $bar_y - $layout->{arrow_ydiff}); # arrow is higer
     $_->show foreach $w->{selection_bar}, $w->{selection_arrow};
 }
+
+=back
+
+=cut
 
 1;
