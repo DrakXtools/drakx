@@ -40,18 +40,27 @@ use mygtk3 qw(gtknew); #- do not import gtkadd which conflicts with ugtk3 versio
 
 use Gtk3;
 
+=head1 SYNOPSYS
+
+B<ugtk3> enables to write GUIes using Gtk+3. It adds nice wrappers on top of
+L<Gtk3>, notably gtkpowerpack() and its children gtkpack*()
+
+=cut
 
 $border = 5;
 
 sub wm_icon() { $wm_icon || $::Wizard_pix_up || "wiz_default_up.png" }
 
-# -=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---
-#                 wrappers
-#
-# Functional-style wrappers to existing Gtk functions; allows to program in
-# a more functional way, and especially, first, to avoid using temp
-# variables, and second, to "see" directly in the code the user interface
-# you're building.
+=head1 Wrappers
+
+Functional-style wrappers to existing Gtk functions; allows to program in
+a more functional way, and especially, first, to avoid using temp
+variables, and second, to "see" directly in the code the user interface
+you're building.
+
+=over
+
+=cut
 
 sub gtkdestroy                { mygtk3::may_destroy($_[0]) }
 sub gtkflush()                { mygtk3::flush() }
@@ -122,7 +131,12 @@ sub gtkappenditems {
     $w;
 }
 
-# append page to a notebook
+=item gtkappend_page($notebook, $page, $o_title)
+
+append page to a notebook
+
+=cut
+
 sub gtkappend_page {
     my ($notebook, $page, $o_title) = @_;
     $notebook->append_page($page, $o_title);
@@ -249,13 +263,16 @@ sub gtktreeview_children {
     @l;
 }
 
+=back
 
+=head1 Create functions
 
-# -=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---
-#                 create
-#
-# Helpers that allow omitting common operations on common widgets
-# (e.g. create widgets with good default properties)
+Helpers that allow omitting common operations on common widgets
+(e.g. create widgets with good default properties)
+
+=over
+
+=cut
 
 sub create_pixbutton {
     my ($label, $pix, $reverse_order) = @_;
@@ -286,11 +303,15 @@ sub n_line_size {
     round($nbline * ($fontinfo{ascent} + $fontinfo{descent} + $spacing) + 8);
 }
 
-# Glib::Markup::escape_text() if no use for us because it'll do extra
-# s/X/&foobar;/ (such as s/'/&apos;/) that are suitable for
-# Gtk3::Labels but are not for Gtk3::TextViews, resulting in
-# displaying the raw enriched text instead...
-#
+=item escape_text_for_TextView_markup_format($str)
+
+Glib::Markup::escape_text() if no use for us because it'll do extra
+s/X/&foobar;/ (such as s/'/&apos;/) that are suitable for
+Gtk3::Labels but are not for Gtk3::TextViews, resulting in
+displaying the raw enriched text instead...
+
+=cut
+
 sub escape_text_for_TextView_markup_format {
     my ($str) = @_;
     my %rules = ('&' => '&amp;',
@@ -582,12 +603,16 @@ sub gtkcreate_frame {
     gtknew('Frame', text => $label, border_width => 5);
 }
 
+=back
 
-# -=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---
-#                 helpers
-#
-# Functions that do typical operations on widgets, that you may need in
-# several places of your programs.
+=head1 Helpers
+
+Functions that do typical operations on widgets, that you may need in
+several places of your programs.
+
+=over
+
+=cut
 
 sub _find_imgfile {
     my ($name) = @_;
@@ -604,13 +629,23 @@ sub _find_imgfile {
     }
 }
 
-# use it if you want to display an icon/image in your app
+=item gtkcreate_img($file, $o_size)
+
+use it if you want to display an icon/image in your app
+
+=cut
+
 sub gtkcreate_img {
     my ($file, $o_size) = @_;
     gtknew('Image', file => $file, if_($o_size, size => $o_size));
 }
 
-# use it if you want to draw an image onto a drawingarea
+=item gtkcreate_pixbuf($file, $o_size)
+
+use it if you want to draw an image onto a drawingarea
+
+=cut
+
 sub gtkcreate_pixbuf {
     my ($file, $o_size) = @_;
     gtknew('Pixbuf', file => $file, if_($o_size, size => $o_size));
@@ -634,7 +669,12 @@ sub set_main_window_size {
     mygtk3::set_main_window_size($o->{rwindow});
 }
 
-# extracts interesting font metrics for a given widget
+=item gtkfontinfo($widget)
+
+extracts interesting font metrics for a given widget
+
+=cut
+
 sub gtkfontinfo {
     my ($widget) = @_;
     my $context = $widget->get_pango_context;
@@ -699,14 +739,21 @@ sub set_default_step_items {
 
 sub get_default_step_items { ($def_step_title) }
 
-# -=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---
-#                 toplevel window creation helper
-#
-# Use the 'new' function as a method constructor and then 'main' on it to
-# launch the main loop. Use $o->{retval} to indicate that the window needs
-# to terminate.
-# Set $::isWizard to have a wizard appearance.
-# Set $::isEmbedded and $::XID so that the window will plug.
+=back
+
+=head1 Toplevel window creation helper
+
+=over
+
+=item new($type, $title, %opts)
+
+Use the 'new' function as a method constructor and then 'main' on it to
+launch the main loop. Use $o->{retval} to indicate that the window needs
+to terminate.
+Set $::isWizard to have a wizard appearance.
+Set $::isEmbedded and $::XID so that the window will plug.
+
+=cut
 
 sub new {
     my ($type, $title, %opts) = @_;
@@ -782,11 +829,16 @@ sub exit {
 #- in case "exit" above was not called by the program
 END { &exit() }
 
-# -=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---
-#                 ask
-#
-# Full UI managed functions that will return to you the value that the
-# user chose.
+=back
+
+=head1 Ask functions
+
+Full UI managed functions that will return to you the value that the
+user chose.
+
+=over
+
+=cut
 
 sub ask_warn       { my $w = ugtk3->new(shift @_, grab => 1); $w->_ask_warn(@_); main($w) }
 sub ask_yesorno    { my $w = ugtk3->new(shift @_, grab => 1); $w->_ask_okcancel(@_, N("Yes"), N("No")); main($w) }
@@ -1217,7 +1269,13 @@ sub gtk_new_TextView_get_log {
     $log_scroll, $pid;
 }
 
-# misc helpers:
+=back
+
+=head1 Misc helpers & widgets
+
+=over
+
+=cut
 
 package Gtk3::TreeStore;
 sub append_set {
@@ -1231,7 +1289,13 @@ sub append_set {
 
 
 package Gtk3::ListStore;
-# Append a new row, set the values, return the TreeIter
+
+=item Gtk3::ListStore::append_set($model, @values)
+
+Append a new row, set the values, return the TreeIter
+
+=cut
+
 sub append_set {
     my ($model, @values) = @_;
     # compatibility:
@@ -1243,7 +1307,13 @@ sub append_set {
 
 
 package Gtk3::TreeModel;
-# gets the string representation of a TreeIter
+
+=item Gtk3::TreeModel::get_path_str($self, $iter)
+
+gets the string representation of a TreeIter
+
+=cut
+
 sub get_path_str {
     my ($self, $iter) = @_;
     my $path = $self->get_path($iter);
@@ -1260,7 +1330,13 @@ sub iter_each_children {
 }
 
 package Gtk3::TreeView;
-# likewise gtk-1.2 function
+
+=item Gtk3::TreeView;::toggle_expansion($self, $path, $b_open_all)
+
+gtk-1.2 compatibility function
+
+=cut
+
 sub toggle_expansion {
     my ($self, $path, $b_open_all) = @_;
     if ($self->row_expanded($path)) {
@@ -1273,7 +1349,12 @@ sub toggle_expansion {
 package Gtk3::ComboBox;
 use MDK::Common;
 
-# try to get combox <==> option menu mapping
+=item Gtk3::ComboBox::set_popdown_strings($w, @strs)
+
+try to get combox <==> option menu mapping
+
+=cut
+
 sub set_popdown_strings {
     my ($w, @strs) = @_;
     my $model = $w->get_model;
@@ -1344,6 +1425,13 @@ sub new_with_text {
 
 
 package Gtk3::Banner;
+
+=item Gtk3::Banner widget
+
+Used in tools & installer banner bars
+
+=cut
+
 
 use MDK::Common;
 use mygtk3 qw(gtknew);
@@ -1480,5 +1568,9 @@ sub new {
         $SIG{ALRM} = $old_signal || 'DEFAULT';   # restore default action
     };
 }
+
+=back
+
+=cut
 
 1;

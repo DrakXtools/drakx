@@ -9,83 +9,68 @@ use strict;
 use common;
 use do_pkgs;
 
-#- minimal example using interactive:
-#
-#- > use lib qw(/usr/lib/libDrakX);
-#- > use interactive;
-#- > my $in = interactive->vnew;
-#- > $in->ask_okcancel('title', 'question');
-#- > $in->exit;
+=head1 NAME
 
-#- ask_from_ takes global options ($common):
-#-  title                => window title
-#-  messages             => message displayed in the upper part of the window
-#-  ok                   => force the name of the "Ok"/"Next" button
-#-  cancel               => force the name of the "Cancel"/"Previous" button
-#-  focus_cancel         => force focus on the "Cancel" button
-#-  focus_first          => (deprecated) force focus on the first entry
-#-  ok_disabled          => function returning wether {ok} should be disabled (grayed)
-#-  validate             => function called when {ok} is pressed. If it returns false, the first entry is focused, otherwise it quits
-#-  advanced             => (deprecated) function called when the "advanced" expander is toggled
-#-  advanced_messages    => (deprecated) message displayed when "Advanced" is pressed
-#-  advanced_label       => (deprecated) force the name of the "Advanced" button
-#-  advanced_label_close => (deprecated) force the name of the "Basic" button
-#-  advanced_state       => (deprecated) if set to 1, force the "Advanced" part of the dialog to be opened initially
-#-  advanced_title       => (deprecated) title of the advanced item popup dialog (else reusing main title)
-#-  callbacks            => (deprecated) functions called when something happen: complete advanced ok_disabled
+interactive - a GUI layer with multiple backend (text console, Gtk+ GUI, web)
 
-#- ask_from_ takes a list of entries with fields:
-#-  val      => reference to the value
-#-  label    => description
-#-  title    => a boolean: whether the label should be displayed as a title (see GNOME's HIG)
-#-  icon     => icon to put before the description
-#-  help     => tooltip
-#-  advanced => (deprecated) wether it is shown in by default or only in advanced mode
-#-  focus_out => function called when the entry is focused out
-#-  changed  => function called when the entry is modified
-#-  validate => function called when "Ok" is pressed. If it returns false, this entry is focused, otherwise it quits
-#-  disabled => function returning wether it should be disabled (grayed)
-#-  focus    => function returning wether it should be focused
-#-  alignment => preferred alignment
-#-  do_not_expand => do not eat all horizontal space
-#-  install_button => if possible, use improved graphical style
-#-  gtk      => gtk preferences
-#-  type     => 
-#-     button => (with clicked or clicked_may_quit)
-#-               (type defaults to button if clicked or clicked_may_quit is there)
-#-               (val need not be a reference) (if clicked_may_quit return true, it's as if "Ok" was pressed)
-#-     label => (val need not be a reference) (type defaults to label if val is not a reference) 
-#-     bool (with "text" or "image" (which overrides text) giving an image filename)
-#-     range (with min, max, SpinButton)
-#-     combo (with list, not_edit, format)
-#-     list (with list, icon2f (aka icon), separator (aka tree), format (aka pre_format function),
-#-           help can be a hash or a function,
-#-           tree_expanded boolean telling wether the tree should be wide open by default
-#-           quit_if_double_click boolean
-#-           allow_empty_list disables the special cases for 0 and 1 element lists
-#-           image2f is a subroutine which takes a value of the list as parameter, and returns image_file_name
-#-     entry (the default) (with hidden)
-#-     expander (with text, expanded, message, children(a list of sub entries))
-#
-#- heritate from this class and you'll get all made interactivity for same steps.
-#- for this you need to provide
-#- - ask_from_listW(o, title, messages, arrayref, default) returns one string of arrayref
-#-
-#- where
-#- - o is the object
-#- - title is a string
-#- - messages is an refarray of strings
-#- - default is an optional string (default is in arrayref)
-#- - arrayref is an arrayref of strings
-#- - arrayref2 contains booleans telling the default state,
-#-
-#- ask_from_list and ask_from_list_ are wrappers around ask_from_biglist and ask_from_smalllist
-#-
-#- ask_from_list_ just translate arrayref before calling ask_from_list and untranslate the result
-#-
-#- ask_from_listW should handle differently small lists and big ones.
-#-
+=head1 SYNOPSYS
 
+B<interactive> enables to write GUIes that will work everywhere:
+
+=over 4
+
+=item * text console
+
+implemented by L<interactive::stdio> & L<interactive::curses>
+
+=item * web browser
+
+implemented by L<interactive::http>
+
+=item * GUI
+
+implemented by L<interactive::gtk>
+
+=back
+
+=head1 Minimal example using interactive
+
+ use lib qw(/usr/lib/libDrakX);
+ use interactive;
+ my $in = interactive->vnew;
+ $in->ask_okcancel('title', 'question');
+ $in->exit;
+
+=head1 Backends
+
+heritate from this class and you'll get all made interactivity for same steps.
+for this you need to provide
+
+C<ask_from_listW(o, title, messages, arrayref, default)> which returns one string of arrayref
+
+where:
+
+=over 4
+
+=item * B<o> is the object
+
+=item * B<title> is a string
+
+=item * B<messages> is an refarray of strings
+
+=item * B<default> is an optional string (default is in arrayref)
+
+=item * B<arrayref> is an arrayref of strings
+
+=item * B<arrayref>2 contains booleans telling the default state,
+
+=back
+
+=head1 Functions
+
+=over
+
+=cut
 
 #-######################################################################################
 #- OO Stuff
@@ -262,6 +247,18 @@ sub ask_fileW {
     my ($o, $common) = @_;
     $o->ask_from_entry($common->{title}, $common->{message} || N("Choose a file"));
 }
+
+=item ask_from_list($o, $title, $message, $l, $o_def)
+
+=item ask_from_list_($o, $title, $message, $l, $o_def)
+
+ask_from_list() and ask_from_list_() are wrappers around ask_from_biglist and ask_from_smalllist
+
+ask_from_list_() just translate arrayref before calling ask_from_list and untranslate the result
+
+ask_from_listW() should handle differently small lists and big ones.
+
+=cut
 
 sub ask_from_list {
     my ($o, $title, $message, $l, $o_def) = @_;
@@ -514,6 +511,128 @@ sub migrate_advanced {
 		    }) ];
 }
 
+
+=item ask_from_($o, $common, $l)
+
+ask_from_() takes global options ($common):
+
+=over 4
+
+=item * B<title>: window title
+
+=item * B<messages>: message displayed in the upper part of the window
+
+=item * B<ok>: force the name of the "Ok"/"Next" button
+
+=item * B<cancel>: force the name of the "Cancel"/"Previous" button
+
+=item * B<focus_cancel>: force focus on the "Cancel" button
+
+=item * I<focus_first>: (deprecated) force focus on the first entry
+
+=item * B<ok_disabled>: function returning wether {ok} should be disabled (grayed)
+
+=item * B<validate>: function called when {ok} is pressed. If it returns false, the first entry is focused, otherwise it quits
+
+=item * I<advanced>: (deprecated) function called when the "advanced" expander is toggled
+
+=item * I<advanced_messages>: (deprecated) message displayed when "Advanced" is pressed
+
+=item * I<advanced_label>: (deprecated) force the name of the "Advanced" button
+
+=item * I<advanced_label_close>: (deprecated) force the name of the "Basic" button
+
+=item * I<advanced_state>: (deprecated) if set to 1, force the "Advanced" part of the dialog to be opened initially
+
+=item * I<advanced_title>: (deprecated) title of the advanced item popup dialog (else reusing main title)
+
+=item * I<callbacks>: (deprecated) functions called when something happen: complete advanced ok_disabled
+
+=back
+
+ask_from_ takes a list of entries with fields:
+
+=over 4
+
+=item * B<val>: reference to the value
+
+=item * B<label>: description
+
+=item * B<title>: a boolean: whether the label should be displayed as a title (see GNOME's HIG)
+
+=item * B<icon>: icon to put before the description
+
+=item * B<help>: tooltip
+
+=item * I<advanced>: (deprecated) wether it is shown in by default or only in advanced mode
+
+=item * B<focus_out>: function called when the entry is focused out
+
+=item * B<changed>: function called when the entry is modified
+
+=item * B<validate>: function called when "Ok" is pressed. If it returns false, this entry is focused, otherwise it quits
+
+=item * B<disabled>: function returning wether it should be disabled (grayed)
+
+=item * B<focus>: function returning wether it should be focused
+
+=item * B<alignment>: preferred alignment
+
+=item * B<do_not_expand>: do not eat all horizontal space
+
+=item * B<install_button>: if possible, use improved graphical style
+
+=item * B<gtk>: gtk preferences
+
+=item * B<type>:
+
+=over 4
+
+=item * B<button>: (with clicked or clicked_may_quit)
+
+I<type> defaults to button if clicked or clicked_may_quit is there.
+I<val> need not be a reference.
+If I<clicked_may_quit> return true, it's as if "Ok" was pressed.
+
+=item * B<label>:
+I<val> need not be a reference.
+I<type> defaults to label if val is not a reference.
+
+=item * B<bool>: (with "text" or "image" (which overrides text) giving an image filename)
+
+=item * B<range>: (with min, max, SpinButton)
+
+=item * B<combo>: (with list, not_edit, format)
+
+=item * B<list>: (with list, icon2f (aka icon), separator (aka tree), format (aka pre_format function),
+
+It has these optional parameters:
+
+=over 4
+
+=item * B<help>: can be a hash or a function,
+
+=item * B<tree_expanded>: boolean telling wether the tree should be wide open by default
+
+=item * B<quit_if_double_click>: boolean
+
+=item * B<allow_empty_list>: disables the special cases for 0 and 1 element lists
+
+=item * B<image2f>: a subroutine which takes a value of the list as parameter, and returns image_file_name
+
+=back
+
+=item * B<entry>: (the default) (with hidden)
+
+=item * B<expander>: (with text, expanded, message, children(a list of sub entries))
+
+=back
+
+=back
+
+=cut
+
+
 sub ask_from_ {
     my ($o, $common, $l) = @_;
     ask_from_normalize($o, $common, $l);
@@ -653,5 +772,9 @@ sub interactive_help_sub_display_id {
     eval { $o->interactive_help_has_id($id) }
       && sub { $o->ask_warn(N("Help"), $o->interactive_help_get_id($id)) };
 }
+
+=back
+
+=cut
 
 1;
