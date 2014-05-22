@@ -27,20 +27,17 @@ our $SECTORSIZE  = 512;
 #- Functions
 #-#####################################################################################
 
-sub P {
-    my ($s_singular, $s_plural, $nb, @para) = @_; 
-    sprintf(translate($s_singular, $s_plural, $nb), @para);
-}
-
 sub N {
     my ($s, @para) = @_; 
     sprintf(translate($s), @para);
 }
+
 sub N_ { $_[0] }
 
-
-sub makedev { ($_[0] << 8) | $_[1] }
-sub unmakedev { $_[0] >> 8, $_[0] & 0xff }
+sub P {
+    my ($s_singular, $s_plural, $nb, @para) = @_;
+    sprintf(translate($s_singular, $s_plural, $nb), @para);
+}
 
 sub translate_real {
     my ($s, $o_plural, $o_nb) = @_;
@@ -111,6 +108,9 @@ sub nonblock {
     my ($F) = @_;
     fcntl($F, c::F_SETFL(), fcntl($F, c::F_GETFL(), 0) | c::O_NONBLOCK()) or die "cannot fcntl F_SETFL: $!";
 }
+
+sub makedev { ($_[0] << 8) | $_[1] }
+sub unmakedev { $_[0] >> 8, $_[0] & 0xff }
 
 #- return a size in sector
 #- ie MB(1) is 2048 sectors, which is 1MB
