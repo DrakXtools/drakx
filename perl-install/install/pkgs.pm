@@ -779,7 +779,7 @@ sub install {
     URPM::read_config_files();
     # force loading libnss*
     getgrent();
-    URPM::add_macro(join(' ', '__dbi_cdb', URPM::expand('%__dbi_cdb'), 'nofsync'));
+    URPM::add_macro('__nofsync 1');
     my $LOG = _openInstallLog();
 
     $packages->{log} = $packages->{info} = $packages->{print} = sub {
@@ -1042,7 +1042,7 @@ sub _remove_raw {
     log::l("removing: " . join(' ', @$to_remove));
 
     URPM::read_config_files();
-    URPM::add_macro(URPM::expand('__dbi_cdb %__dbi_cdb nofsync'));
+    URPM::add_macro('__nofsync 1');
 
     my $db = open_rpm_db_rw() or die "error opening RPM database: ", URPM::rpmErrorString();
     my $trans = $db->create_transaction;
