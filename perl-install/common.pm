@@ -265,7 +265,7 @@ sub open_file {
 }
 
 # FIXME: callers should just use mkstemp in /tmp instead of relying on $TMPDIR || $ENV{HOME}/tmp
-# or we should just move the choice of directoyr from callers to here:
+# or we should just move the choice of directory from callers to here:
 # my $tmpdir = find { -d $_ } $ENV{TMPDIR}, "$ENV{HOME}/tmp", "$::prefix/tmp";
 sub secured_file {
     my ($f) = @_;
