@@ -795,7 +795,7 @@ sub getUPS() {
     # USB UPSs;
     (map { ($_->{name} = $_->{description}) =~ s/.*\|//; $_ }
         map {
-            if ($_->{description} =~ /^American Power Conversion\|Back-UPS/ && $_->{driver} eq 'usbhid') {
+            if ($_->{description} =~ /Back-UPS/ && $_->{driver} eq 'usbhid') {
                 #- FIXME: should not be hardcoded, use $_->{sysfs_device} . */usb:(hiddev\d+)
                 #- the device should also be assigned to the ups user
                 $_->{port} = "/dev/hiddev0";
