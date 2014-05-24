@@ -272,6 +272,7 @@ sub get() {
     my $authentication = {
 	blowfish => to_bool($system_auth =~ /\$2a\$/),
 	md5      => to_bool($system_auth =~ /md5/), 
+	sha512	 => to_bool($system_auth =~ /sha512/),
 	shadow   => to_bool($system_auth =~ /shadow/),
     };
 
@@ -811,7 +812,9 @@ sub user_crypted_passwd {
 	utf8::encode($u->{password}); #- we don't want perl to do "smart" things in crypt()
 
 	crypt($u->{password}, 
-	      !$authentication || $authentication->{blowfish} ? '$2a$08$' . salt(60) :
+	      !$authentication || $authentication->{sha512} ? '$6$' . salt(86) :
+1020	
+	      $authentication->{blowfish} ? '$2a$08$' . salt(60) :
 	      $authentication->{md5} ? '$1$' . salt(8) : salt(2));
     } else {
 	$u->{pw} || '';
