@@ -339,11 +339,13 @@
   protocols
   services
   shells
+  udhcpd.conf
   <if ARCH="i.86|x86_64">
     pcmcia/config.opts
   </if>
 </from>
 <from dir="/etc/rc.d/init.d">
+	udhcpd
 	functions
 	gpm
 </from>
@@ -354,6 +356,10 @@
   default.nak
   default.renew
   default.script
+</from>
+
+<from>
+  /var/lib/udhcpd/udhcpd.leases
 </from>
 
 <from dir="/lib/systemd">
