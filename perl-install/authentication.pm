@@ -824,38 +824,22 @@ sub user_crypted_passwd {
 sub set_root_passwd {
     my ($superuser, $authentication) = @_;
     $superuser->{name} = 'root';
-    write_passwd_user($superuser, $authentication);    
+    modify_user($superuser, $authentication);
     delete $superuser->{name};
 }
 
-sub write_passwd_user {
+sub modify_user {
     my ($u, $authentication) = @_;
 
-    $u->{pw} = user_crypted_passwd($u, $authentication);
-    $u->{shell} ||= '/bin/bash';
-
-    substInFile {
-	my $l = unpack_passwd($_);
-	if ($l->{name} eq $u->{name}) {
-	    add2hash_($u, $l);
-	    $_ = pack_passwd($u);
-	    $u = {};
-	}
-	if (eof && $u->{name}) {
-	    $_ .= pack_passwd($u);
-	}
-    } "$::prefix/etc/passwd";
-}
-
-my @etc_pass_fields = qw(name pw uid gid realname home shell);
-sub unpack_passwd {
-    my ($l) = @_;
-    my %l; @l{@etc_pass_fields} = split ':', chomp_($l);
-    \%l;
-}
-sub pack_passwd {
-    my ($l) = @_;
-    join(':', @$l{@etc_pass_fields}) . "\n";
+    run_program::raw({ root => $::prefix, sensitive_arguments => 1 },
+			    'usermod',
+			    '-p', user_crypted_passwd($u, $authentication),
+			    if_($uid, '-u', $uid), if_($gid, '-g', $gid),
+			    if_($u->{realname}, '-c', $u->{realname}),
+			    if_($u->{home}, '-d', $u->{home}),
+			    if_($u->{shell}, '-s', $u->{shell}),
+			    $u->{name}
+		    );
 }
 
 sub add_cafile() {
