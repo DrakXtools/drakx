@@ -812,7 +812,7 @@ sub user_crypted_passwd {
 	utf8::encode($u->{password}); #- we don't want perl to do "smart" things in crypt()
 
 	crypt($u->{password}, 
-	      !$authentication || $authentication->{sha512} ? '$6$' . salt(86) :
+	      !$authentication || $authentication->{sha512} ? '$6$' . salt(88) :
 	      $authentication->{blowfish} ? '$2a$08$' . salt(60) :
 	      $authentication->{md5} ? '$1$' . salt(8) : salt(2));
     } else {
