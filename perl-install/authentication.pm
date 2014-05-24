@@ -268,7 +268,7 @@ sub check_given_password {
 }
 
 sub get() {
-    my $system_auth = cat_("/etc/pam.d/system-auth");
+    my $system_auth = cat_("$::prefix/etc/pam.d/system-auth");
     my $authentication = {
 	blowfish => to_bool($system_auth =~ /\$2a\$/),
 	md5      => to_bool($system_auth =~ /md5/), 
