@@ -35,6 +35,9 @@ implemented by L<interactive::gtk>
 
 =back
 
+Interactive inherits from L<do_pkgs> and thus $in->do_pkgs will return
+an usable C<do_pkgs> object suitable for installing packages.
+
 =head1 Minimal example using interactive
 
  use lib qw(/usr/lib/libDrakX);
