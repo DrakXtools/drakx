@@ -1081,12 +1081,6 @@ sub short_ext {
     $short_ext || $kernel_str->{ext};
 }
 
-# deprecated, only for compatibility (nov 2007)
-sub sanitize_ver {    
-    my ($_name, $kernel_str) = @_;
-    _sanitize_ver($kernel_str);
-}
-
 sub _sanitize_ver {
     my ($kernel_str) = @_;
 
