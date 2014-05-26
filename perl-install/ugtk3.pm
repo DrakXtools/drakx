@@ -45,6 +45,8 @@ use Gtk3;
 B<ugtk3> enables to write GUIes using Gtk+3. It adds nice wrappers on top of
 L<Gtk3>, notably gtkpowerpack() and its children gtkpack*()
 
+=head1 Functions
+
 =cut
 
 $border = 5;

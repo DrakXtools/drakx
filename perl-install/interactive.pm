@@ -17,6 +17,8 @@ interactive - a GUI layer with multiple backend (text console, Gtk+ GUI, web)
 
 B<interactive> enables to write GUIes that will work everywhere:
 
+=head1 Functions
+
 =over 4
 
 =item * text console

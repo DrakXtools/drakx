@@ -12,6 +12,16 @@ use devices;
 use fs::type;
 use run_program;
 
+=head1 SYNOPSYS
+
+Manage LVM (PV, VG, LV)
+
+=head1 Functions
+
+=over 4
+
+=cut
+
 #- for partition_table_xxx emulation
 sub new {
     my ($class, $name) = @_;

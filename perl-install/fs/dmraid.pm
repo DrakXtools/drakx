@@ -14,6 +14,20 @@ use fs::wild_device;
 use run_program;
 
 
+=head1 SYNOPSYS
+
+Manage fake RAIDs using dmraid
+
+=head1 Functions
+
+=over
+
+=item init()
+
+Load kernel modules, init device mapper then scan for fake RAIDs.
+
+=cut
+
 sub init() {
     whereis_binary('dmraid') or die "dmraid not installed";
 

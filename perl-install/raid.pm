@@ -13,6 +13,16 @@ use run_program;
 use devices;
 use modules;
 
+=head1 SYNOPSYS
+
+Manage regular soft RAID (MD=Multiple Drive).
+
+=head1 Functions
+
+=over
+
+=cut
+
 sub max_nb() { 31 }
 
 sub check_prog {

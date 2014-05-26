@@ -11,6 +11,16 @@ use fs::type;
 use fs::get;
 use run_program;
 
+=head1 SYNOPSYS
+
+Manage encrypted file systems using cryptsetup
+
+=head1 Functions
+
+=over
+
+=cut
+
 sub _crypttab() { "$::prefix/etc/crypttab" }
 
 sub init() {
