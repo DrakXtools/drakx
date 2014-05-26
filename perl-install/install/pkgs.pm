@@ -152,7 +152,6 @@ sub _bestKernel_extensions {
 
     $::o->{kernel_extension} ? $::o->{kernel_extension} :
     $o_match_all_hardware ? (arch() =~ /i.86/ ? '-desktop586' : '-desktop') :
-      detect_devices::is_xbox() ? '-xbox' :
       detect_devices::is_i586() ? '-desktop586' :
       arch() != /i.86/ && detect_devices::isServer() ? '-server' : '-desktop';
 }
