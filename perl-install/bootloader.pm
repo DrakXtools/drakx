@@ -1423,7 +1423,7 @@ sub write_pmon2000 {
 }
 sub when_config_changed_pmon2000 {
     my ($_bootloader) = @_;
-    log::l("Mips/pmon2000 - nothing to do...");
+    #- do not do anything
 }
 
 sub install_uboot { 
@@ -1436,7 +1436,7 @@ sub write_uboot {
 }
 sub when_config_changed_uboot {
     my ($_bootloader) = @_;
-    log::l("uboot - nothing to do...");
+    #- do not do anything
 }
 
 sub install_cromwell { 
@@ -1449,7 +1449,7 @@ sub write_cromwell {
 }
 sub when_config_changed_cromwell {
     my ($_bootloader) = @_;
-    log::l("XBox/Cromwell - nothing to do...");
+    #- do not do anything
 }
 
 sub simplify_label {
