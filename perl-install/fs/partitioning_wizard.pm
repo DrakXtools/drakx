@@ -269,7 +269,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®")) if $
 When you are done, do not forget to save using `w'", partition_table::description($_));
 		print "\n\n";
 		my $pid = 0;
-			$pid = fork() or exec "fdisk", devices::make($_->{device});
+		$pid = fork() or exec "fdisk", devices::make($_->{device});
 		waitpid($pid, 0);
 	    }
 	    $in->leave_console;
