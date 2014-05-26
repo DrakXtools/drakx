@@ -236,7 +236,7 @@ sub read {
 	    if (m!/fd\d+$!) {
 		warn "not checking the method on floppy, assuming $main_method is right\n";
 		$main_method;
-	    } elsif (member($main_method, qw(yaboot cromwell silo pmon2000 uboot))) {
+	    } elsif (member($main_method, qw(cromwell pmon2000 uboot))) {
 		#- not checking, there's only one bootloader anyway :)
 		$main_method;
 	    } elsif (my $type = partition_table::raw::typeOfMBR($_)) {
@@ -550,33 +550,6 @@ sub read_grub_menu_lst {
     \%b;
 }
 
-sub yaboot2dev {
-    my ($of_path) = @_;
-    find { dev2yaboot($_) eq $of_path } map { "/dev/$_->{dev}" } fs::proc_partitions::read_raw();
-}
-
-# assumes file is in /boot
-# to do: use yaboot2dev for files as well
-#- example of of_path: /pci@f4000000/ata-6@d/disk@0:3,/initrd-2.6.8.1-8mdk.img
-sub yaboot2file {
-    my ($of_path) = @_;
-    
-    if ($of_path =~ /,/) {
-	"$::prefix/boot/" . basename($of_path);
-    } else {
-	yaboot2dev($of_path);
-    }
-}
-
-sub read_silo() {
-    my $bootloader = read_lilo_like("/boot/silo.conf", sub {
-					my ($f) = @_;
-					"/boot$f";
-				    });
-    $bootloader->{method} = 'silo';
-    $bootloader;
-}
-
 # FIXME: actually read back previous conf
 sub read_pmon2000() {
     +{ method => 'pmon2000' };
@@ -589,11 +562,6 @@ sub read_cromwell() {
 }
 
 
-sub read_yaboot() { 
-    my $bootloader = read_lilo_like("/etc/yaboot.conf", \&yaboot2file);
-    $bootloader->{method} = 'yaboot';
-    $bootloader;
-}
 sub read_lilo() {
     my $bootloader = read_lilo_like("/etc/lilo.conf", sub { $_[0] });
 
@@ -887,8 +855,6 @@ sub add_kernel {
 	$v->{append} = pack_append($simple, $dict);
     }
 
-    #- new versions of yaboot do not handle symlinks
-    $b_nolink ||= arch() =~ /ppc/;
     $b_no_initrd //= arch() =~ /mips|arm/ && !detect_devices::is_mips_gdium();
 
     $b_nolink ||= $kernel_str->{use_long_name};
@@ -1153,7 +1119,7 @@ Provides a description text for Lilo
 sub suggest_message_text {
     my ($bootloader) = @_;
 
-    if (!$bootloader->{message} && !$bootloader->{message_text} && arch() !~ /ia64/) {
+    if (!$bootloader->{message} && !$bootloader->{message_text}) {
 	my $msg_en =
 #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 N_("Welcome to the operating system chooser!
@@ -1181,8 +1147,6 @@ sub suggest {
     my $root_part = fs::get::root($fstab);
     my $root = isLoopback($root_part) ? '/dev/loop7' : fs::wild_device::from_part('', $root_part);
     my $boot = fs::get::root($fstab, 'boot')->{device};
-    #- PPC xfs module requires enlarged initrd
-    my $xfsroot = $root_part->{fs_type} eq 'xfs';
     my $mbr;
     
     # If installing onto an USB drive, put the mbr there, else on the first non removable drive
@@ -1193,33 +1157,18 @@ sub suggest {
     }
 
     my ($onmbr, $unsafe) = $bootloader->{crushMbr} ? (1, 0) : suggest_onmbr($mbr);
-    add2hash_($bootloader, arch() =~ /ppc/ ?
-	{
-	 defaultos => "linux",
-	 entries => [],
-	 'init-message' => "Welcome to Moondrake GNU/Linux!",
-	 delay => 30,	#- OpenFirmware delay
-	 timeout => 50,
-	 enableofboot => 1,
-	 enablecdboot => 1,
-	   if_(detect_devices::get_mac_model() =~ /IBM/,
-	 boot => "/dev/sda1",
-           ),
-	 xfsroot => $xfsroot,
-	} :
+    add2hash_($bootloader,
 	{
 	 bootUnsafe => $unsafe,
 	 entries => [],
 	 timeout => $onmbr && 10,
 	 nowarn => 1,
-	   if_(arch() !~ /ia64/,
 	 boot => "/dev/" . ($onmbr ? $mbr->{device} : $boot),
 	 map => "/boot/map",
 	 compact => 1,
     	 'large-memory' => 1,
 	 color => 'black/cyan yellow/cyan',
 	 'menu-scheme' => 'wb:bw:wb:bw'
-         ),
 	});
 
     suggest_message_text($bootloader);
@@ -1257,16 +1206,6 @@ sub suggest {
 	       { root => $root, label => 'failsafe', append => 'failsafe' })
       if @kernels;
 
-    if (arch() =~ /ppc/) {
-	#- if we identified a MacOS partition earlier - add it
-	if (defined $partition_table::mac::macos_part) {
-	    add_entry($bootloader,
-		      {
-		       type => "macos",
-		       kernel_or_dev => $partition_table::mac::macos_part
-		      });
-	}
-    } elsif (arch() !~ /ia64/) {
 	#- search for dos (or windows) boot partition. Do not look in extended partitions!
 	my @windows_boot_parts =
 	  grep { $_->{active}
@@ -1285,7 +1224,6 @@ sub suggest {
 		       makeactive => 1,
 		      });
 	} @windows_boot_parts;
-    }
 
     my @preferred = map { "linux-$_" } 'p3-smp-64GB', 'secure', 'enterprise', 'smp', 'i686-up-4GB';
     if (my $preferred = find { get_label($_, $bootloader) } @preferred) {
@@ -1352,17 +1290,12 @@ sub method2text {
 	'grub2'        => N("GRUB2 with graphical menu"),
 	'grub-graphic' => N("GRUB with graphical menu"),
 	'grub-menu'    => N("GRUB with text menu"),
-	'yaboot'       => N("Yaboot"),
-	'silo'         => N("SILO"),
     }->{$method};
 }
 
 sub method_choices_raw {
     my ($b_prefix_mounted) = @_;
     detect_devices::is_xbox() ? 'cromwell' :
-    arch() =~ /ppc/ ? 'yaboot' : 
-    arch() =~ /ia64/ ? 'lilo' : 
-    arch() =~ /sparc/ ? 'silo' : 
     arch() =~ /mips/ ? 'pmon2000' : 
     arch() =~ /arm/ ? 'uboot' :
       (
@@ -1409,109 +1342,10 @@ sub keytable {
     -r "$::prefix/$f" && $f;
 }
 
-sub dev2yaboot {
-    my ($dev) = @_;
-
-    devices::make("$::prefix$dev"); #- create it in the chroot
-
-    my $of_dev;
-    run_program::rooted_or_die($::prefix, "/usr/sbin/ofpath", ">", \$of_dev, $dev);
-    chomp($of_dev);
-    log::l("OF Device: $of_dev");
-    $of_dev;
-}
-
 sub check_enough_space() {
     my $e = "$::prefix/boot/.enough_space";
     output $e, 1; -s $e or die N("not enough room in /boot");
     unlink $e;
-}
-
-sub write_yaboot {
-    my ($bootloader, $all_hds) = @_;
-
-    my $fstab = [ fs::get::fstab($all_hds) ]; 
-
-    my $file2yaboot = sub {
-	my ($part, $file) = fs::get::file2part($fstab, $_[0]);
-	dev2yaboot('/dev/' . $part->{device}) . "," . $file;
-    };
-
-    #- do not write yaboot.conf for old-world macs
-    my $mac_type = detect_devices::get_mac_model();
-    return if $mac_type =~ /Power Macintosh/;
-
-    $bootloader->{prompt} ||= $bootloader->{timeout};
-
-    if ($bootloader->{message_text}) {
-	eval { output("$::prefix/boot/message", $bootloader->{message_text}) }
-	  and $bootloader->{message} = '/boot/message';
-    }
-
-    my @conf;
-
-    if (!get_label($bootloader->{default}, $bootloader)) {
-	log::l("default bootloader entry $bootloader->{default} is invalid, choosing another one");
-	$bootloader->{default} = $bootloader->{entries}[0]{label};
-    }
-    push @conf, "# yaboot.conf - generated by DrakX/drakboot";
-    push @conf, "# WARNING: do not forget to run ybin after modifying this file\n";
-    push @conf, "default=" . make_label_lilo_compatible($bootloader->{default}) if $bootloader->{default};
-    push @conf, sprintf('init-message="\n%s\n"', $bootloader->{'init-message'}) if $bootloader->{'init-message'};
-
-    if ($bootloader->{boot}) {
-	push @conf, "boot=$bootloader->{boot}";
-	push @conf, "ofboot=" . dev2yaboot($bootloader->{boot}) if $mac_type !~ /IBM/;
-    } else {
-	die "no bootstrap partition defined.";
-    }
-
-    push @conf, map { "$_=$bootloader->{$_}" } grep { $bootloader->{$_} } (qw(delay timeout), if_($mac_type !~ /IBM/, 'defaultos'));
-    push @conf, "install=/usr/lib/yaboot/yaboot";
-    if ($mac_type =~ /IBM/) {
-	push @conf, 'nonvram';
-    } else {
-	push @conf, 'magicboot=/usr/lib/yaboot/ofboot';
-	push @conf, grep { $bootloader->{$_} } qw(enablecdboot enableofboot);
-    }
-    foreach my $entry (@{$bootloader->{entries}}) {
-
-	if ($entry->{type} eq "image") {
-	    push @conf, "$entry->{type}=" . $file2yaboot->($entry->{kernel_or_dev});
-	    my @entry_conf;
-	    push @entry_conf, "label=" . make_label_lilo_compatible($entry->{label});
-	    push @entry_conf, "root=$entry->{root}";
-	    push @entry_conf, "initrd=" . $file2yaboot->($entry->{initrd}) if $entry->{initrd};
-	    #- xfs module on PPC requires larger initrd - say 6MB?
-	    push @entry_conf, "initrd-size=6144" if $bootloader->{xfsroot};
-	    push @entry_conf, qq(append=" $entry->{append}") if $entry->{append};
-	    push @entry_conf, grep { $entry->{$_} } qw(read-write read-only);
-	    push @conf, map { "\t$_" } @entry_conf;
-	} else {
-	    my $of_dev = dev2yaboot($entry->{kernel_or_dev});
-	    push @conf, "$entry->{type}=$of_dev";
-	}
-    }
-    my $f = "$::prefix/etc/yaboot.conf";
-    log::l("writing yaboot config to $f");
-    renamef($f, "$f.old");
-    output($f, map { "$_\n" } @conf);
-}
-
-sub install_yaboot {
-    my ($bootloader, $all_hds) = @_;
-    log::l("Installing boot loader...");
-    write_yaboot($bootloader, $all_hds);
-    when_config_changed_yaboot($bootloader);
-}
-sub when_config_changed_yaboot {
-    my ($bootloader) = @_;
-    $::testing and return;
-    if (defined $partition_table::mac::new_bootstrap) {
-	run_program::run("hformat", $bootloader->{boot}) or die "hformat failed";
-    }	
-    my $error;
-    run_program::rooted($::prefix, "/usr/sbin/ybin", "2>", \$error) or die "ybin failed: $error";
 }
 
 sub install_pmon2000 { 
@@ -1739,7 +1573,7 @@ sub install_raw_lilo {
 
 sub when_config_changed_lilo {
     my ($bootloader) = @_;
-    if (!$::testing && arch() !~ /ia64/ && $bootloader->{method} =~ /lilo/) {
+    if (!$::testing && $bootloader->{method} =~ /lilo/) {
 	log::l("Installing boot loader on $bootloader->{boot}...");
 	install_raw_lilo($bootloader->{force_lilo_answer});
     }

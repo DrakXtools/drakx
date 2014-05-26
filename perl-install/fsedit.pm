@@ -47,7 +47,7 @@ foreach (values %suggestions) {
 
 my @suggestions_mntpoints = (
     "/var/ftp", "/var/www", "/boot", '/usr/local', '/opt',
-    arch() =~ /sparc/ ? "/mnt/sunos" : arch() =~ /ppc/ ? "/mnt/macos" : "/mnt/windows",
+   "/mnt/windows",
 );
 
 #-######################################################################################
@@ -226,7 +226,7 @@ sub get_hds {
 				die sprintf(q(bad dmraid (missing partition %s), you may try rebooting install with option "nodmraid"), $p->{device});
 			    }
 			} else {
-			    fs::proc_partitions::compare($hd) if !detect_devices::is_xbox() && arch() ne 'ppc';
+			    fs::proc_partitions::compare($hd) if !detect_devices::is_xbox();
 			}
 		    }
 		} sub {

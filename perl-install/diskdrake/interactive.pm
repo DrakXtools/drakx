@@ -602,9 +602,6 @@ sub Delete {
 	delete $part->{loopback_device}{loopback} if @$l == 0;
 	fsedit::recompute_loopbacks($all_hds);
     } else {
-	if (arch() =~ /ppc/) {
-	    undef $partition_table::mac::bootstrap_part if isAppleBootstrap($part) && ($part->{device} = $partition_table::mac::bootstrap_part);
-	}
 	partition_table::remove($hd, $part);
 	warn_if_renumbered($in, $hd);
     }
@@ -1384,16 +1381,7 @@ sub format_part_info {
     $info .= N("Volume label: ") . "$part->{device_LABEL}\n" if $part->{device_LABEL};
     $info .= N("UUID: ") . "$part->{device_UUID}\n" if $::expert && $part->{device_UUID};
     $info .= N("DOS drive letter: %s (just a guess)\n", $part->{device_windobe}) if $part->{device_windobe};
-    if (arch() eq "ppc") {
-	my $pType = $part->{pType};
-	$pType =~ s/[^A-Za-z0-9_]//g;
-	$info .= N("Type: ") . $pType . ($::expert ? sprintf " (0x%x)", $part->{pt_type} : '') . "\n";
-	if (defined $part->{pName}) {
-	    my $pName = $part->{pName};
-	    $pName =~ s/[^A-Za-z0-9_]//g;
-	    $info .= N("Name: ") . $pName . "\n";
-	}
-    } elsif (isEmpty($part)) {
+    if (isEmpty($part)) {
 	$info .= N("Empty") . "\n";
     } else {
 	$info .= N("Type: ") . (fs::type::part2type_name($part) || $part->{fs_type}) . ($::expert ? sprintf " (0x%x)", $part->{pt_type} : '') . "\n";

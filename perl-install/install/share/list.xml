@@ -1,10 +1,45 @@
 <list no-arch-libraries="on">
 
 <from expand="binary">
-  aria2c curl <!-- needed by urpmi -->
-  <if ARCH="ppc">
-    pdisk 
+  ash dash.static echo
+  aria2c cp curl md5sum <!-- needed by urpmi -->
+  cpio gzip bzip2
+    fdisk
+  insmod modinfo rmmod modprobe lsmod
+  losetup
+  lvm2 mdadm mdmon
+  mount mount.nfs umount
+  xz
+
+  udevadm <!-- needed by mouse::detect & stage2 -->
+
+  badblocks
+  mkswap swaplabel
+  mkfs.ext2 mkfs.ext3 mkfs.ext4 e2fsck tune2fs dumpe2fs resize2fs
+
+  mkfs.reiserfs resize_reiserfs reiserfstune
+  mkfs.xfs xfs_admin
+  xfs_freeze xfs_io <!-- needed for setup grub on XFS formated / -->
+
+  mkfs.btrfs btrfs btrfsck fsck.btrfs
+  mkfs.nilfs2 nilfs-tune
+
+  tty stty <!-- needed for text mode installer (through unicode_start) -->
+
+  <if ARCH="i.86|x86_64">
+    mkdosfs
+    dosfslabel
+    mlabel
+    mkntfs
+    ntfsresize
+    ntfslabel
+    dmraid
   </if>
+  <if ARCH="i.86|x86_64">
+    mkfs.jfs fsck.jfs jfs_tune
+  </if>
+  quotacheck
+  cryptsetup dmsetup
 
   setfont kbd_mode
   <mode copy="dereference">
@@ -22,16 +57,11 @@
   </filter>
 
   <if ARCH="ia64">
-  efibootmgr 
-  </if>
-
-  <if ARCH="ppc">
-    hattrib hcopy hcd
-    hformat hmount humount 
+    efibootmgr 
   </if>
 
   <if set="DEBUG_INSTALL">
-    gdb
+    strace bash less ps top gdb
   </if>
 </from>
 
@@ -387,11 +417,6 @@
   ARCH-linux-thread-multi/Scalar/Util.pm
   ARCH-linux-thread-multi/Socket.pm
   ARCH-linux-thread-multi/Time/HiRes.pm
-  <if ARCH="ia64">
-  ARCH-linux-thread-multi/asm-i386/unistd.ph 
-  ARCH-linux-thread-multi/asm-x86_64/unistd.ph 
-  ARCH-linux-thread-multi/asm/break.ph 
-  </if>
   <if ARCH="i.86|x86_64">
   ARCH-linux-thread-multi/asm/unistd_32.ph
   ARCH-linux-thread-multi/asm/unistd_64.ph

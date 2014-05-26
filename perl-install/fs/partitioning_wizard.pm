@@ -64,7 +64,7 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	if (!any { isSwap($_) } @fstab) {
 	    $ok &&= $in->ask_okcancel('', N("You do not have a swap partition.\n\nContinue anyway?"));
 	}
-	if (arch() =~ /ia64/ && !fs::get::has_mntpoint("/boot/efi", $all_hds)) {
+	if (!fs::get::has_mntpoint("/boot/efi", $all_hds)) {
 	    $in->ask_warn('', N("You must have a FAT partition mounted in /boot/efi"));
 	    $ok = '';
 	}
@@ -269,11 +269,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®")) if $
 When you are done, do not forget to save using `w'", partition_table::description($_));
 		print "\n\n";
 		my $pid = 0;
-		if (arch() =~ /ppc/) {
-			$pid = fork() or exec "pdisk", devices::make($_->{device});
-		} else {
 			$pid = fork() or exec "fdisk", devices::make($_->{device});
-		}
 		waitpid($pid, 0);
 	    }
 	    $in->leave_console;
@@ -402,7 +398,7 @@ sub create_display_box {
     }
     $display_box->remove($part_sep) if $part_sep;
     unless ($resize || $fill_empty) {
-        my @types = (N_("Ext2/3/4"), N_("XFS"), N_("Swap"), arch() =~ /sparc/ ? N_("SunOS") : arch() eq "ppc" ? N_("HFS") : N_("Windows"),
+        my @types = (N_("Ext2/3/4"), N_("XFS"), N_("Swap"), N_("Windows"),
                     N_("Other"), N_("Empty"));
         my %name2fs_type = ('Ext2/3/4' => 'ext3', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
         $desc = ugtk3::gtkpack(Gtk3::HBox->new,

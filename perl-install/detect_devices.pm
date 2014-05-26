@@ -443,14 +443,11 @@ sub getMmcBlk() {
     glob("/sys/bus/mmc/devices/*/block/*");
 }
 
-# cpu_name : arch() =~ /^alpha/ ? "cpu	" :
-# arch() =~ /^ppc/ ? "processor" : "vendor_id"
+=item getCPUs()
 
-# cpu_model : arch() =~ /^alpha/ ? "cpu model" :
-# arch() =~ /^ppc/ ? "cpu  " : "model name"
+Returns a list of all CPUs.
 
-# cpu_freq = arch() =~ /^alpha/ ? "cycle frequency [Hz]" :
-# arch() =~ /^ppc/ ? "clock" : "cpu MHz"
+=cut
 
 sub getCPUs() { 
     my (@cpus, $cpu);
@@ -476,9 +473,6 @@ sub probe_category {
     require list_modules;
     my @modules = list_modules::category2modules($category);
 
-    if_($category =~ /sound/ && arch() =~ /ppc/ && get_mac_model() !~ /IBM/,
-	{ driver => 'snd_powermac', description => 'Macintosh built-in' },
-    ),
     grep {
 	if ($category eq 'network/isdn') {
 	    my $b = $_->{driver} =~ /ISDN:([^,]*),?([^,]*)(?:,firmware=(.*))?/;
@@ -647,7 +641,7 @@ sub getSerialModem {
     my ($modules_conf, $o_mouse) = @_;
     my $mouse = $o_mouse || {};
     $mouse->{device} = readlink "/dev/mouse";
-    my $serdev = arch() =~ /ppc/ ? "macserial" : arch() =~ /mips/ ? "8250" : "serial";
+    my $serdev = arch() =~ /mips/ ? "8250" : "serial";
 
     eval { modules::load($serdev) };
 
@@ -663,8 +657,6 @@ sub getSerialModem {
     }
     my @devs = pcmcia_probe();
     foreach my $modem (@modems) {
-        #- add an alias for macserial on PPC
-        $modules_conf->set_alias('serial', $serdev) if arch() =~ /ppc/ && $modem->{device};
         foreach (@devs) { $_->{device} and $modem->{device} = $_->{device} }
     }
     @modems;
@@ -1205,8 +1197,6 @@ sub computer_info() {
 #- try to detect a laptop, we assume pcmcia service is an indication of a laptop or
 #- the following regexp to match graphics card apparently only used for such systems.
 sub isLaptop() {
-    arch() =~ /ppc/ ? 
-      get_mac_model() =~ /Book/ :
       computer_info()->{isLaptop}
 	|| glob_("/sys/bus/acpi/devices/PNP0C0D:*") #- ACPI lid button
 	|| (matching_desc__regexp('C&T.*655[45]\d') || matching_desc__regexp('C&T.*68554') ||
@@ -1237,7 +1227,7 @@ sub isHyperv() {
 }
 
 sub BIGMEM() {
-    arch() !~ /x86_64|ia64/ && $> == 0 && dmi_detect_memory() > 4 * 1024;
+    arch() !~ /x86_64/ && $> == 0 && dmi_detect_memory() > 4 * 1024;
 }
 
 sub is_i586() {

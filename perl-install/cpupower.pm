@@ -74,15 +74,6 @@ sub probe_gsx() {
     find_pci_device([ 0x1078, 0x0100 ], [ 0x1078, 0x0002 ], [ 0x1078, 0x0000 ]);
 }
 
-sub probe_powerpc() {
-    arch() =~ /ppc/ && any {
-        member($_->{motherboard}, ('PowerBook3,4', 'PowerBook3,5', 'PowerBook4,1', 'PowerBook3,2', 'MacRISC3')) &&
-        # Kernel contains a special case for the supported 750FX,
-        # not sure if the cpu name can be used, so use same test as kernel
-        first($_->{revision} =~ /\bpvr\s+(\d+)\b/) == 7000;
-    } get_cpus();
-}
-
 sub probe_p4() {
     any {
         get_vendor($_) eq "Intel" && (
@@ -170,7 +161,7 @@ my @governor_modules = map { "cpufreq_$_" } qw(ondemand userspace performance co
 
 sub get_modules() {
     my $module;
-    if (probe_powerpc() || ($module = find_driver())) {
+    if ($module = find_driver()) {
         return if_($module, $module), @governor_modules;
     }
     ();

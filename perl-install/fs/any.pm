@@ -67,10 +67,6 @@ sub check_hds_boot_and_root {
     my ($all_hds, $fstab) = @_;
     fs::get::root_($fstab) or die "Oops, no root partition";
 
-    if (arch() =~ /ppc/ && detect_devices::get_mac_generation() =~ /NewWorld/) {
-	die "Need bootstrap partition to boot system!" if !(defined $partition_table::mac::bootstrap_part);
-    }
-
     if (arch() =~ /ia64/ && !fs::get::has_mntpoint("/boot/efi", $all_hds)) {
 	die N("You must have a FAT partition mounted in /boot/efi");
     }

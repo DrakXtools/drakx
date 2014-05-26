@@ -422,7 +422,7 @@ sub hd2kind {
 }
 
 sub filesystems_button_box() {
-    my @types = (N_("Ext4"), N_("XFS"), N_("Swap"), arch() =~ /sparc/ ? N_("SunOS") : arch() eq "ppc" ? N_("HFS") : N_("Windows"),
+    my @types = (N_("Ext4"), N_("XFS"), N_("Swap"), N_("Windows"),
 		 N_("Other"), N_("Empty"));
     my %name2fs_type = (Ext3 => 'ext3', Ext4 => 'ext4', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
 

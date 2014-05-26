@@ -841,9 +841,6 @@ sub getAndSaveAutoInstallFloppies {
 
     eval { modules::load('loop') };
 
-    if (arch() =~ /ia64/) {
-	#- nothing yet
-    } else {
 	my $mountdir = "$::prefix/root/aif-mount"; -d $mountdir or mkdir $mountdir, 0755;
 	my $param = 'kickstart=floppy ' . generate_automatic_stage1_params($o);
 
@@ -886,7 +883,6 @@ sub getAndSaveAutoInstallFloppies {
 	}
 	rmdir $mountdir;
 	$img;
-    }
 }
 
 
@@ -916,7 +912,7 @@ sub loadO {
 	my $o;
 	foreach (removable_media__early_in_install()) {
             my $dev = devices::make($_->{device});
-            foreach my $fs (arch() =~ /sparc/ ? 'romfs' : ('ext2', 'vfat')) {
+            foreach my $fs (qw(ext2 vfat)) {
                 eval { fs::mount::mount($dev, '/mnt', $fs, 'readonly'); 1 } or next;
 		if (my $abs_f = find { -e $_ } "/mnt/$f", "/mnt/$f.pl") {
 		    $o = loadO_($O, $abs_f);

@@ -9,7 +9,7 @@ use devices;
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(
-   isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isOtherAvailableFS isRawLVM isRawRAID isRawLUKS isRAID isLVM isLUKS isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isWholedisk isFat_or_NTFS isRecovery
+   isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isOtherAvailableFS isRawLVM isRawRAID isRawLUKS isRAID isLVM isLUKS isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isFat_or_NTFS isRecovery
    maybeFormatted set_isFormatted defaultFS
 );
 
@@ -30,11 +30,6 @@ my (%type_name2pt_type, %type_name2fs_type, %fs_type2pt_type, %pt_type2fs_type, 
   0x0b => 'vfat',     'FAT32',
   0x07 => 'ntfs-3g',  'NTFS-3G',
   0x07 => 'ntfs',     'NTFS',
-if_(arch() =~ /ppc/,
-  0x401	=> '',         'Apple Bootstrap',
-  0x402	=> 'hfs',      'Apple HFS Partition',
-  0x41  => '',         'PPC PReP Boot',
-),
 	],
 
         non_fs_type => [
@@ -51,20 +46,7 @@ if_(arch() =~ /ppc/,
 	],
 
 	other => [
- if_(arch() =~ /^ia64/,
-  0x100 => '',         'Various',
-), if_(arch() =~ /^ppc/,
-  0x401	=> 'apple',    'Apple Partition',
-), if_(arch() =~ /^sparc/,
-  0x01 => 'ufs',      'SunOS boot',
-  0x02 => 'ufs',      'SunOS root',
-  0x03 => '',      'SunOS swap',
-  0x04 => 'ufs',      'SunOS usr',
-  0x05 => '',      'Whole disk',
-  0x06 => 'ufs',      'SunOS stand',
-  0x07 => 'ufs',      'SunOS var',
-  0x08 => 'ufs',      'SunOS home',
-), if_(arch() =~ /^i.86|x86_64/,
+ if_(arch() =~ /^i.86|x86_64/,
   0x01 => 'vfat',     'FAT12',
   0x02 => '',         'XENIX root',
   0x03 => '',         'XENIX usr',
@@ -91,9 +73,7 @@ if_(arch() =~ /ppc/,
   0x39 => '',         'Plan 9',
   0x3c => '',         'PartitionMagic recovery',
   0x40 => '',         'Venix 80286',
-if_(arch() !~ /ppc/,
   0x41 => '',         'PPC PReP Boot',
-),
   0x42 => '',         'SFS',
   0x4d => '',         'QNX4.x',
   0x4e => '',         'QNX4.x 2nd part',
@@ -308,13 +288,12 @@ sub true_local_fs_types() { qw(btrfs ext3 ext2 ext4 reiserfs xfs jfs) }
 
 sub isEmpty { !$_[0]{fs_type} && $_[0]{pt_type} == 0 }
 sub isEfi { arch() =~ /ia64/ && $_[0]{pt_type} == 0xef }
-sub isWholedisk { arch() =~ /^sparc/ && $_[0]{pt_type} == 5 }
-sub isExtended { arch() !~ /^sparc/ && ($_[0]{pt_type} == 5 || $_[0]{pt_type} == 0xf || $_[0]{pt_type} == 0x85) }
+sub isExtended { $_[0]{pt_type} == 5 || $_[0]{pt_type} == 0xf || $_[0]{pt_type} == 0x85 }
 sub isRawLVM { $_[0]{pt_type} == 0x8e || $_[0]{type_name} eq 'Linux Logical Volume Manager' }
 sub isRawRAID { $_[0]{pt_type} == 0xfd || $_[0]{type_name} eq 'Linux RAID' }
 sub isRawLUKS { $_[0]{type_name} eq 'Encrypted' }
 sub isSwap { $_[0]{fs_type} eq 'swap' }
-sub isDos { arch() !~ /^sparc/ && ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{pt_type}} }
+sub isDos { ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{pt_type}} }
 sub isFat_or_NTFS { member($_[0]{fs_type}, 'vfat', 'ntfs', 'ntfs-3g') }
 sub isApple { $_[0]{pt_type} == 0x401 && defined $_[0]{isDriver} }
 sub isAppleBootstrap { $_[0]{pt_type} == 0x401 && defined $_[0]{isBoot} }

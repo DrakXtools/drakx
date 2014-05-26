@@ -451,7 +451,7 @@ Either your cdrom drive or your cdrom is defective.
 Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm\"
 ") if any { m|read failed: Input/output error| } cat_("$::prefix/root/drakx/install.log");
 
-    if (arch() !~ /^sparc/ && !$o->{justdb}) { #- TODO restore it as may be needed for sparc
+    if (!$o->{justdb}) {
 	-x "$::prefix/bin/dumpkeys" or $::testing or die 
 "Some important packages did not get installed properly.
 
@@ -864,14 +864,14 @@ sub exitInstall {
     };
     output("$::prefix/root/drakx/package_list.pl", install::any::selected_leaves_pl($o));
 
-    eval { install::any::getAndSaveAutoInstallFloppies($o, 1) } if arch() !~ /^ppc/;
-    eval { output "$::prefix/root/drakx/README", "This directory contains several installation-related files,
+    eval { install::any::getAndSaveAutoInstallFloppies($o, 1) };
+    eval { output "$::prefix/root/drakx/README", sprintf("This directory contains several installation-related files,
 mostly log files (very useful if you ever report a bug!).
 
-Beware that some Moondrake GNU/Linux tools rely on the contents of some
+Beware that some %s tools rely on the contents of some
 of these files... so remove any file from here at your own
 risk!
-" };
+", "Moondrake GNU/Linux"};
     #- wait for remaining processes.
     foreach (@{$o->{waitpids}}) {
 	waitpid $_, 0;

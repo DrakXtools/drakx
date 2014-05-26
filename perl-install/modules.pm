@@ -157,13 +157,6 @@ sub load_category {
       if_($category =~ /scsi/,
 	  if_(detect_devices::usbStorage(), 'usb_storage'),
       ),
-      arch() =~ /ppc/ ? (
-	  if_($category =~ /scsi/,
-	    if_(detect_devices::has_mesh(), 'mesh'),
-	    if_(detect_devices::has_53c94(), 'mac53c94'),
-	  ),
-	  if_($category =~ /net/, 'bmac', 'gmac', 'mace', 'airport'),
-      ) : (),
     );
     my @l = (
 	(map {
@@ -187,8 +180,6 @@ sub load_category {
 
 sub load_parallel_zip {
     my ($conf) = @_;
-
-    arch() !~ /ppc/ or return;
 
     grep { 
 	eval { load_and_configure($conf, $_); 1 };

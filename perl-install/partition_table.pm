@@ -64,12 +64,8 @@ sub verifyInside {
 sub verifyParts_ {
     foreach my $i (@_) {
 	foreach (@_) {
-	    next if !$i || !$_ || $i == $_ || isWholedisk($i) || isExtended($i); #- avoid testing twice for simplicity :-)
-	    if (isWholedisk($_)) {
-		verifyInside($i, $_) or
-		  cdie sprintf("partition sector #$i->{start} (%s) is not inside whole disk (%s)!",
-			       formatXiB($i->{size}, 512), formatXiB($_->{size}, 512));
-	    } elsif (isExtended($_)) {
+	    next if !$i || !$_ || $i == $_ || isExtended($i); #- avoid testing twice for simplicity :-)
+	    if (isExtended($_)) {
 		verifyNotOverlap($i, $_) or
 		  log::l(sprintf("warning partition sector #$i->{start} (%s) is overlapping with extended partition!",
 				 formatXiB($i->{size}, 512))); #- only warning for this one is acceptable
@@ -87,7 +83,7 @@ sub verifyParts {
 }
 sub verifyPrimary {
     my ($pt) = @_;
-    $_->{start} > 0 || arch() =~ /^sparc/ || die "partition must NOT start at sector 0" foreach @{$pt->{normal}};
+    $_->{start} > 0 || die "partition must NOT start at sector 0" foreach @{$pt->{normal}};
     verifyParts_(@{$pt->{normal}}, $pt->{extended});
 }
 
@@ -108,24 +104,7 @@ sub assign_device_numbers {
     my $i = 1;
     my $start = 1; 
     
-    #- on PPC we need to assign device numbers to the holes too - big FUN!
-    #- not if it's an IBM machine using a DOS partition table though
-    if (arch() =~ /ppc/ && detect_devices::get_mac_model() !~ /^IBM/) {
-	#- first sort the normal parts
-	$hd->{primary}{normal} = [ sort { $a->{start} <=> $b->{start} } @{$hd->{primary}{normal}} ];
-    
-	#- now loop through them, assigning partition numbers - reserve one for the holes
-	foreach (@{$hd->{primary}{normal}}) {
-	    if ($_->{start} > $start) {
-		log::l("PPC: found a hole on $hd->{device} before $_->{start}, skipping device..."); 
-		$i++;
-	    }
-	    $_->{part_number} = $i;
-	    compute_device_name($_, $hd);
-	    $start = $_->{start} + $_->{size};
-	    $i++;
-	}
-    } else {
+    {
 	foreach (@{$hd->{primary}{raw}}) {
 	    $_->{part_number} = $i;
 	    compute_device_name($_, $hd);
@@ -234,7 +213,7 @@ sub get_normal_parts_and_holes {
 	my $hole = { start => $current, size => $_->{start} - $current, %$minimal_hole };
 	put_in_hash($hole, hd2minimal_part($hd));
 	$hole, $_;
-    } sort { $a->{start} <=> $b->{start} } grep { !isWholedisk($_) } get_normal_parts($hd);
+    } sort { $a->{start} <=> $b->{start} } get_normal_parts($hd);
 
     push @l, { start => $start, size => min($last - $start, $hd->max_partition_size), %$minimal_hole } if $start < $hd->max_partition_start;
     grep { !isEmpty($_) || $_->{size} >= $hd->cylinder_size } @l;
@@ -244,9 +223,6 @@ sub _default_type {
     my ($hd) = @_;
 
     arch() =~ /ia64/ ? 'gpt' : 
-      arch() eq "alpha" ? "bsd" : 
-      arch() =~ /^sparc/ ? "sun" : 
-      arch() eq "ppc" && detect_devices::get_mac_model() !~ /^IBM/ ? "mac" : 
 	$hd->{totalsectors} > 4 * 1024 * 1024 * 2048 ? 'lvm' : "dos"; #- default to LVM on full disk when >4TB
 }
 
@@ -274,7 +250,7 @@ sub read_primary {
 	my @parttype = (
 	  if_(arch() =~ /^ia64/, 'gpt'),
           # gpt must be tried before dos as it presents a fake compatibility mbr
-	  arch() =~ /^sparc/ ? ('sun', 'bsd') : ('gpt', 'lvm', 'dmcrypt', 'dos', 'bsd', 'sun', 'mac'),
+	  ('gpt', 'lvm', 'dmcrypt', 'dos', 'bsd', 'sun', 'mac'),
 	);
 	foreach ('empty', @parttype, 'unknown') {
 	    /unknown/ and die "unknown partition table format on disk " . $hd->{file};
@@ -452,7 +428,6 @@ sub write {
     $hd->write(0, $hd->{primary}{raw}, $hd->{primary}{info}) or die "writing of partition table failed";
 
     #- should be fixed but a extended exist with no real extended partition, that blanks mbr!
-    if (arch() !~ /^sparc/) {
 	foreach (@{$hd->{extended}}) {
 	    # in case of extended partitions, the start sector must be local to the partition
 	    $_->{normal}{local_start} = $_->{normal}{start} - $_->{start};
@@ -460,7 +435,6 @@ sub write {
 
 	    $hd->write($_->{start}, $_->{raw}) or die "writing of partition table failed";
 	}
-    }
     $hd->{isDirty} = 0;
 
     if (my $tell_kernel = delete $hd->{will_tell_kernel}) {
@@ -537,8 +511,6 @@ sub add_primary {
 }
 
 sub add_extended {
-    arch() =~ /^sparc|ppc/ and die N("Extended partition not supported on this platform");
-
     my ($hd, $part, $extended_type) = @_;
     $extended_type =~ s/Extended_?//;
 
@@ -592,13 +564,12 @@ sub add {
 
     set_isFormatted($part, 0);
     put_in_hash($part, hd2minimal_part($hd));
-    $part->{start} ||= 1 if arch() !~ /^sparc/; #- starting at sector 0 is not allowed
+    $part->{start} ||= 1; #- starting at sector 0 is not allowed
     adjustStartAndEnd($hd, $part) unless $b_forceNoAdjust;
 
     my $nb_primaries = $hd->{device} =~ /^rd/ ? 3 : 1;
 
-    if (arch() =~ /^sparc|ppc/ ||
-	$b_primaryOrExtended eq 'Primary' ||
+    if ($b_primaryOrExtended eq 'Primary' ||
 	$b_primaryOrExtended !~ /Extended/ && @{$hd->{primary}{normal} || []} < $nb_primaries) {
 	eval { add_primary($hd, $part) };
 	goto success if !$@;

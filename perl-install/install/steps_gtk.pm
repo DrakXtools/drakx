@@ -88,7 +88,7 @@ sub _setup_and_start_X {
 
     foreach (@servers) {
         log::l("Trying with server $_");
-        my ($prog, $Driver) = /Driver:(.*)/ ? ('Xorg', $1) : /Xsun|Xnest|Xephyr|^X_move$/ ? $_ : "XF86_$_";
+        my ($prog, $Driver) = /Driver:(.*)/ ? ('Xorg', $1) : /Xnest|Xephyr|^X_move$/ ? $_ : "XF86_$_";
         if (/FB/i) {
             !$o->{vga16} && $o->{allowFB} or next;
 
@@ -113,12 +113,9 @@ sub _launchX {
     } else {
         install::gtk::createXconf($f, @{$o->{mouse}}{'Protocol', 'device'}, $o->{mouse}{wacom}[0], $Driver);
 
-        push @options, '-allowMouseOpenFail', '-xf86config', $f if arch() !~ /^sparc/;
+        push @options, '-allowMouseOpenFail', '-xf86config', $f;
         push @options, 'vt7', '-dpi', '75';
         push @options, '-nolisten', 'tcp';
-
-        #- old weird servers: Xsun
-        push @options, '-fp', '/usr/share/fonts:unscaled' if $server =~ /Xsun/;
     }
 
     if (!fork()) {
