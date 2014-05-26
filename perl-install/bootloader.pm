@@ -19,9 +19,16 @@ use partition_table::raw;
 use run_program;
 use modules;
 
-#-#####################################################################################
-#- Functions
-#-#####################################################################################
+=head1 SYNOPSYS
+
+B<bootloader> enables to configure various boot loaders (LILO, GRUB Legacy, GRUB2, ...)
+
+=head1 Functions
+
+=over
+
+=cut
+
 my $vmlinuz_regexp = 'vmlinu[xz]|win4lin|uImage';
 my $decompose_vmlinuz_name = qr/((?:$vmlinuz_regexp).*?)-(\d+\.\d+.*)/;
 
@@ -316,10 +323,22 @@ sub read_grub {
     $bootloader;
 }
 
-# adapts device.map (aka $grub2dev) when for example hda is now sda
-# nb: 
-# - $boot_part comes from /boot/grub/install.sh "root (hd...)" line
-# - $grub2dev is /boot/grub/device.map
+
+=item _may_fix_grub2dev($fstab, $grub2dev, $boot_part)
+
+Adapts device.map (aka $grub2dev) when for example hda is now sda.
+nb:
+
+=over 4
+
+=item * $boot_part comes from C</boot/grub/install.sh> "C<root (hd...)>" line
+
+=item * $grub2dev is C</boot/grub/device.map>
+
+=back
+
+=cut
+
 sub _may_fix_grub2dev {
     my ($fstab, $grub2dev, $boot_part) = @_;
 
@@ -627,7 +646,13 @@ sub suggest_onmbr {
     ($onmbr, $unsafe);
 }
 
-# list of places where we can install the bootloader
+
+=item allowed_boot_parts($bootloader, $all_hds)
+
+Returns list of places where we can install the bootloader
+
+=cut
+
 sub allowed_boot_parts {
     my ($bootloader, $all_hds) = @_;
     (
@@ -963,7 +988,12 @@ sub set_append_netprofile {
     $e->{append} = pack_append($simple, $dict);
 }
 
-# used when a bootloader $entry has been modified (eg: $entry->{vga})
+=item configure_entry($bootloader, $entry)
+
+Used when a bootloader $entry has been modified (eg: $entry->{vga})
+
+=cut
+
 sub configure_entry {
     my ($bootloader, $entry) = @_;
     $entry->{type} eq 'image' or return;
@@ -1048,7 +1078,12 @@ sub _sanitize_ver {
     $return;
 }
 
-# for lilo
+=item suggest_message_text($bootloader)
+
+Provides a description text for Lilo
+
+=cut
+
 sub suggest_message_text {
     my ($bootloader) = @_;
 
@@ -1721,8 +1756,14 @@ sub write_grub_device_map {
 	   (map_index { "(hd$::i) /dev/$_->{device}\n" } @$sorted_hds));
 }
 
-# parses things like "(hd0,4)/boot/vmlinuz"
-# returns: ("hd0", 4, "boot/vmlinuz")
+=item parse_grub_file($grub_file)
+
+Parses things like "C<(hd0,4)/boot/vmlinuz>"
+
+Returns: ("hd0", 4, "boot/vmlinuz")
+
+=cut
+
 sub parse_grub_file {
     my ($grub_file) = @_;
     my ($grub_dev, $rel_file) = $grub_file =~ m!\((.*?)\)/?(.*)! or return;
@@ -1730,8 +1771,14 @@ sub parse_grub_file {
     ($hd, $part, $rel_file);
 }
 
-# takes things like "(hd0,4)/boot/vmlinuz"
-# returns: ("/dev/sda5", "boot/vmlinuz")
+=item grub2dev_and_file($grub_file, $grub2dev, $o_block_device)
+
+Takes things like "C<(hd0,4)/boot/vmlinuz>"
+
+Returns: ("/dev/sda5", "boot/vmlinuz")
+
+=cut
+
 sub grub2dev_and_file {
     my ($grub_file, $grub2dev, $o_block_device) = @_;
     my ($hd, $part, $rel_file) = parse_grub_file($grub_file) or return;
@@ -1740,16 +1787,34 @@ sub grub2dev_and_file {
     my $device = '/dev/' . ($part eq '' ? $grub2dev->{$hd} : devices::prefix_for_dev($grub2dev->{$hd}) . $part);
     $device, $rel_file;
 }
-# takes things like "(hd0,4)/boot/vmlinuz"
-# returns: "/dev/sda5"
+
+=item grub2devd($grub_file, $grub2dev, $o_block_device)
+
+Takes things like "C<(hd0,4)/boot/vmlinuz>"
+
+Returns: "/dev/sda5"
+
+=cut
+
 sub grub2dev {
     my ($grub_file, $grub2dev, $o_block_device) = @_;
     first(grub2dev_and_file($grub_file, $grub2dev, $o_block_device));
 }
 
-# replaces
-# - "/vmlinuz" with "/boot/vmlinuz" when "root" or "rootnoverify" is set for the entry
-# - "(hdX,Y)" in "(hdX,Y)/boot/vmlinuz..." by appropriate path if possible/needed
+=item grub2file($grub_file, $grub2dev, $fstab, $o_entry)
+
+Replaces
+
+=over 4
+
+=item * "C</vmlinuz>" with "C</boot/vmlinuz>" when "root" or "rootnoverify" is set for the entry
+
+=item * "C<(hdX,Y)>" in "C<(hdX,Y)/boot/vmlinuz...>" by appropriate path if possible/needed
+
+=back
+
+=cut
+
 sub grub2file {
     my ($grub_file, $grub2dev, $fstab, $o_entry) = @_;
 
@@ -2296,5 +2361,9 @@ sub update_for_renumbered_partitions {
     }
     1;
 }
+
+=back
+
+=cut
 
 1;
