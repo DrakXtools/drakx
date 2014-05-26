@@ -1,5 +1,23 @@
 package do_pkgs; # $Id$
 
+=head1 SYNOPSYS
+
+B<do_pkgs> enables to install packages (through urpmi) from our tools.
+It works both during installer and in standalone tools.
+
+
+=head1 Functions
+
+=over
+
+=cut
+
+=item do_pkgs($in)
+
+Returns a new B<do_pkgs> object from a L<interactive> object.
+
+=cut
+
 sub do_pkgs {
     my ($in) = @_;
     ($::isInstall ? 'do_pkgs_during_install' : 'do_pkgs_standalone')->new($in);
@@ -68,7 +86,12 @@ sub ensure_binary_is_installed {
     1;
 }
 
-# takes a list of [ "package", "file" ] and installs package if file is not there
+=item ensure_files_are_installed($do, $pkgs, $b_auto)
+
+Takes a list of [ "package", "file" ] and installs package if file is not there.
+
+=cut
+
 sub ensure_files_are_installed {
     my ($do, $pkgs, $b_auto) = @_;
 
@@ -108,10 +131,20 @@ sub is_installed {
     $do->are_installed($name);
 }
 
-#- takes something like "ati-kernel"
-#- returns:
-#- - the various ati-kernel-2.6.XX-XXmdk available for the installed kernels
-#- - dkms-ati if available
+=item check_kernel_module_packages($do, $base_name)
+
+Takes something like "C<ati-kernel>" and returns:
+
+=over 4
+
+=item * the various C<ati-kernel-2.6.XX-XXmdk> available for the installed kernels
+
+=item * C<dkms-ati> if available
+
+=back
+
+=cut
+
 sub check_kernel_module_packages {
     my ($do, $base_name) = @_;
     
@@ -300,3 +333,7 @@ sub remove_nodeps {
     my ($do, @l) = @_;
     remove($do, '--nodeps', @l) == 0;
 }
+
+=back
+
+=cut
