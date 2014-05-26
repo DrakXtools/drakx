@@ -549,7 +549,7 @@ ask_from_() takes global options ($common):
 
 =item * I<advanced_state>: (deprecated) if set to 1, force the "Advanced" part of the dialog to be opened initially
 
-=item * I<advanced_title>: (deprecated) title of the advanced item popup dialog (else reusing main title)
+=item * I<advanced_title>: title of the advanced item popup dialog (else reusing main title)
 
 =item * I<callbacks>: (deprecated) functions called when something happen: complete advanced ok_disabled
 
