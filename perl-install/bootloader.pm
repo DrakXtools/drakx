@@ -23,6 +23,16 @@ use modules;
 
 B<bootloader> enables to configure various boot loaders (LILO, GRUB Legacy, GRUB2, ...)
 
+Example of usage:
+
+    $all_hds = fsedit::get_hds();
+    fs::get_raw_hds('', $all_hds);
+    fs::get_info_from_fstab($all_hds);
+    $fstab = [ fs::get::fstab($all_hds) ];
+    $bootloader = bootloader::read($all_hds);
+    (...)
+    bootloader::action($bootloader, 'write', $all_hds);
+
 =head1 Functions
 
 =over
@@ -113,6 +123,12 @@ sub get_label {
     undef;
 }
 
+=item mkinitrd($kernel_version, $bootloader, $entry, $initrd)
+
+Regenerates kernel's initrd.
+
+=cut
+
 sub mkinitrd {
     my ($kernel_version, $bootloader, $entry, $initrd) = @_;
 
@@ -140,6 +156,13 @@ sub mkinitrd {
 
     -e "$::prefix/$initrd" && $initrd;
 }
+
+=item rebuild_initrd($kernel_version, $bootloader, $entry, $initrd)
+
+Saves the old initrd then regenerate it.
+If it fails, restore the old initrd.
+
+=cut
 
 sub rebuild_initrd {
     my ($kernel_version, $bootloader, $entry, $initrd) = @_;
@@ -184,6 +207,12 @@ sub update_splash {
 	add_boot_splash($_->{initrd}, $_->{vga} || $bootloader->{vga});
     }
 }
+
+=item read($all_hds)
+
+Reads bootloader config by calling the proper read_XYZ function.
+
+=cut
 
 sub read {
     my ($all_hds) = @_;
@@ -230,6 +259,12 @@ sub read {
 	}
     }
 }
+
+=item read_grub2 ($o_fstab)
+
+Read back GRUB2 config + C</boot/grub2/drakboot.conf>
+
+=cut
 
 sub read_grub2 {
     my %bootloader = getVarsFromSh("$::prefix/boot/grub2/drakboot.conf");
@@ -307,6 +342,12 @@ sub set_default_grub_var {
 	system('grub2-mkconfig -o /boot/grub2/grub.cfg');
 }
 
+=item read_grub($fstab)
+
+Reads back Grub Legacy config.
+
+=cut
+
 sub read_grub {
     my ($fstab) = @_;
 
@@ -364,6 +405,12 @@ sub _may_fix_grub2dev {
     }
     $grub2dev->{$hd_grub} = $real_boot_dev;
 }
+
+=item read_grub_install_sh() {
+
+Reads "config" from /boot/grub/install.sh (mainly used partitions)
+
+=cut
 
 sub read_grub_install_sh() {
     my $s = cat_("$::prefix/boot/grub/install.sh");
@@ -430,10 +477,23 @@ sub _parse_grub_menu_lst() {
     %b;
 }
 
+
+=item is_already_crypted($password)
+
+Returns whether grub password is already crypted or not
+
+=cut
+
 sub is_already_crypted {
     my ($password) = @_;
     $password =~ /^--md5 (.*)/;
 }
+
+=item read_grub_menu_lst($fstab, $grub2dev)
+
+Read config from /boot/grub/menu.lst
+
+=cut
 
 sub read_grub_menu_lst {
     my ($fstab, $grub2dev) = @_;
@@ -872,6 +932,12 @@ sub add_kernel {
 
     add_entry($bootloader, $v);
 }
+
+=item rebuild_initrds($bootloader)
+
+Rebuilds all initrds
+
+=cut
 
 sub rebuild_initrds {
     my ($bootloader) = @_;
@@ -2162,6 +2228,16 @@ sub when_config_changed_grub {
     update_copy_in_boot($_) foreach glob($::prefix . boot_copies_dir() . '/*.link');
 }
 
+=item action($bootloader, $action, @para)
+
+Calls the C<$action> function with @para parameters:
+
+   $actions->($bootloader, @para)
+
+If needed, the function name will be resolved to call a boot loader specific function (eg: for LILO/GRUB/...)
+
+=cut
+
 sub action {
     my ($bootloader, $action, @para) = @_;
 
@@ -2169,6 +2245,12 @@ sub action {
     my $f = $bootloader::{$action . '_' . $main_method} or die "unknown bootloader method $bootloader->{method} ($action)";
     $f->($bootloader, @para);
 }
+
+=item install($bootloader, $all_hds)
+
+Writes back the boot loader config. Calls the proper write_XYZ() function.
+
+=cut
 
 sub install {
     my ($bootloader, $all_hds) = @_;
@@ -2232,6 +2314,12 @@ sub parse_grub2_config {
 	}
     }
 }
+
+=item find_other_distros_grub_conf($fstab)
+
+Returns a list of other distros' grub.conf
+
+=cut
 
 sub find_other_distros_grub_conf {
     my ($fstab) = @_;
