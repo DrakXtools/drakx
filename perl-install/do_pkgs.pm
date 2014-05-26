@@ -27,6 +27,14 @@ sub do_pkgs {
 package do_pkgs_common;
 use common;
 
+=item ensure_is_installed($do, $pkg, $o_file, $b_auto)
+
+Makes sure that the $pkg package is installed.
+If $o_file is provided, the already installed check is I<way> faster.
+If $b_auto is set, (g)urpmi will not ask any questions.
+
+=cut
+
 sub ensure_is_installed {
     my ($do, $pkg, $o_file, $b_auto) = @_;
 
@@ -49,6 +57,15 @@ sub ensure_is_installed {
     1;
 }
 
+=item ensure_are_installed($do, $pkgs, $b_auto)
+
+Makes sure that the packages listed in $pkgs array ref are installed.
+If $b_auto is set, (g)urpmi will not ask any questions.
+
+It's quite costly, so it's better to use the B<ensure_files_are_installed> instead.
+
+=cut
+
 sub ensure_are_installed {
     my ($do, $pkgs, $b_auto) = @_;
 
@@ -67,6 +84,14 @@ sub ensure_are_installed {
     }
     1;
 }
+
+=item ensure_binary_is_installed($do, $pkg, $binary, $b_auto)
+
+Makes sure that the $pkg package is installed.
+$binary is looked for in $PATH. If not found, the package is installed.
+If $b_auto is set, (g)urpmi will not ask any questions.
+
+=cut
 
 sub ensure_binary_is_installed {
     my ($do, $pkg, $binary, $b_auto) = @_;
@@ -89,6 +114,7 @@ sub ensure_binary_is_installed {
 =item ensure_files_are_installed($do, $pkgs, $b_auto)
 
 Takes a list of [ "package", "file" ] and installs package if file is not there.
+If $b_auto is set, (g)urpmi will not ask any questions.
 
 =cut
 
@@ -112,6 +138,12 @@ sub ensure_files_are_installed {
     1;
 }
 
+=item ensure_is_installed_if_available($do, $pkg, $file) = @_;
+
+Install $pkg if $file is not present and if $pkg is actually known to urpmi.
+
+=cut
+
 sub ensure_is_installed_if_available {
     my ($do, $pkg, $file) = @_;
     if (-e "$::prefix$file" || $::testing) {
@@ -121,10 +153,28 @@ sub ensure_is_installed_if_available {
     }
 }
 
+=item is_available($do, $name)
+
+=item are_available($do, @names)
+
+Returns name(s) of package(s) that are available (aka known to urpmi).
+This is somewhat costly (needs to parse urpmi synthesis...)
+
+=cut
+
 sub is_available {
     my ($do, $name) = @_;
     $do->are_available($name);
 }
+
+=item is_installed($do, $name)
+
+=item are_installed($do, @names)
+
+Returns name(s) of package(s) that are already installed on the system.
+This is less costly (needs to query rpmdb)
+
+=cut
 
 sub is_installed {
     my ($do, $name) = @_;
@@ -168,6 +218,12 @@ use run_program;
 use common;
 
 our @ISA = qw(do_pkgs_common);
+
+=item new($type, $in)
+
+Returns a C<do_pkg> object.
+
+=cut
 
 sub new {
     my ($type, $in) = @_;
