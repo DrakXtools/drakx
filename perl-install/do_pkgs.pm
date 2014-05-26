@@ -137,7 +137,7 @@ Takes something like "C<ati-kernel>" and returns:
 
 =over 4
 
-=item * the various C<ati-kernel-2.6.XX-XXmdk> available for the installed kernels
+=item * the various C<ati-kernel-3.Y.XX-ZZmga> available for the installed kernels
 
 =item * C<dkms-ati> if available
 
