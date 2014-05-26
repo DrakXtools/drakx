@@ -17,6 +17,39 @@ use c;
 use LDetect;
 use feature 'state';
 
+
+=head1 SYNOPSYS
+
+The B<detect_devices> modules offers a high level API for detecting devices.*
+It mostly relies on the L<c> modules for gluing  libldetect back into the Perl world, and thus
+being able to enumerate DMI/HID/PCI/USB devices.
+
+Other devices are mostly detected through /proc & /sys.
+
+Then the L<list_modules> enables to map modules into categories such as:
+
+=over
+
+=item network/ethernet,
+
+=item network/wireless,
+
+=item network/wifi,
+
+=item disk/sata,
+
+=item disk/scsi,
+
+=item ...
+
+=back
+
+This enables to detect a category by mapping drivers to categories.
+
+=head1 Listing block devices
+
+=cut
+
 #-#####################################################################################
 #- Globals
 #-#####################################################################################
@@ -602,6 +635,14 @@ sub serialPort2text {
     $_[0] =~ /ttyS(\d+)/ ? "$_[0] / COM" . ($1 + 1) : $_[0];
 }
 
+=back
+
+=head1 Network
+
+=over
+
+=cut
+
 sub getSerialModem {
     my ($modules_conf, $o_mouse) = @_;
     my $mouse = $o_mouse || {};
@@ -740,6 +781,14 @@ sub is_bridge_interface {
     my ($interface) = @_;
     -f "/sys/class/net/$interface/bridge/bridge_id";
 }
+
+=back
+
+=head1 Enumerating devices
+
+=over
+
+=cut
 
 sub get_ids_from_sysfs_device {
     my ($dev_path) = @_;
@@ -1127,6 +1176,18 @@ sub dmi_detect_memory() {
     max(sum(@l1), sum(@l2));
 }
 
+=back
+
+=head1 Test helpers
+
+=over
+
+=item computer_info()
+
+Analyze "Chassis" & "Bios" in dmidecode output and return a hash of flags/values (isLaptop, isServer, BIOS_Year)
+
+=cut
+
 sub computer_info() {
      my $Chassis = dmidecode_category('Chassis')->{Type} =~ /(\S+)/ && $1;
 
@@ -1400,6 +1461,14 @@ sub suggest_mount_point {
     }
     $name;
 }
+
+=back
+
+=head1 SEE ALSO
+
+See L<hardware_detection> for the overall view.
+
+=cut
 
 1;
 
