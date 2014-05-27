@@ -460,8 +460,7 @@ my %countries = (
 );
 sub c2name   { exists $countries{$_[0]} && translate($countries{$_[0]}[0]) }
 sub c2locale { exists $countries{$_[0]} && $countries{$_[0]}[1] }
-sub list_countries {
-    my (%_options) = @_;
+sub list_countries() {
     keys %countries;
 }
 
