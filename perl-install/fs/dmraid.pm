@@ -172,6 +172,14 @@ sub migrate_device_names {
     }
 }
 
+=back
+
+=head1 Debugging
+
+If $ENV{DRAKX_DEBUG_DMRAID} is set, debugging dmraid is done.
+The C<call_dmraid() function is overloaded and will spit out warnings.
+=cut
+
 if ($ENV{DRAKX_DEBUG_DMRAID}) {
     eval(<<'EOF');
     my %debug_data = (
