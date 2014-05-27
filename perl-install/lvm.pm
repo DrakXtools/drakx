@@ -39,6 +39,12 @@ sub cylinder_size {
     $hd->{extent_size};
 }
 
+=item detect_durting_install()
+
+Explicitly scan VGs.
+
+=cut
+
 sub detect_during_install() {
     run_program::run('lvm2', 'vgscan');
     run_program::run('lvm2', 'vgchange', '-a', 'y');

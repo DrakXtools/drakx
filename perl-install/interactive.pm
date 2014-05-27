@@ -535,7 +535,7 @@ ask_from_() takes global options ($common):
 
 =item * I<focus_first>: (deprecated) force focus on the first entry
 
-=item * B<ok_disabled>: function returning wether {ok} should be disabled (grayed)
+=item * B<ok_disabled>: function returning whether {ok} should be disabled (grayed)
 
 =item * B<validate>: function called when {ok} is pressed. If it returns false, the first entry is focused, otherwise it quits
 
@@ -569,7 +569,7 @@ ask_from_ takes a list of entries with fields:
 
 =item * B<help>: tooltip
 
-=item * I<advanced>: (deprecated) wether it is shown in by default or only in advanced mode
+=item * I<advanced>: (deprecated) whether it is shown in by default or only in advanced mode
 
 =item * B<focus_out>: function called when the entry is focused out
 
@@ -577,9 +577,9 @@ ask_from_ takes a list of entries with fields:
 
 =item * B<validate>: function called when "Ok" is pressed. If it returns false, this entry is focused, otherwise it quits
 
-=item * B<disabled>: function returning wether it should be disabled (grayed)
+=item * B<disabled>: function returning whether it should be disabled (grayed)
 
-=item * B<focus>: function returning wether it should be focused
+=item * B<focus>: function returning whether it should be focused
 
 =item * B<alignment>: preferred alignment
 
@@ -617,7 +617,7 @@ It has these optional parameters:
 
 =item * B<help>: can be a hash or a function,
 
-=item * B<tree_expanded>: boolean telling wether the tree should be wide open by default
+=item * B<tree_expanded>: boolean telling whether the tree should be wide open by default
 
 =item * B<quit_if_double_click>: boolean
 

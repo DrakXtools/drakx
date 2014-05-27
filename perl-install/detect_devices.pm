@@ -264,7 +264,7 @@ sub getSCSI() {
 	    $s;
 	};
 
-	# Old hp scanners report themselves as "Processor"s
+	# Old HP scanners report themselves as "Processor"s
 	# (see linux/include/scsi/scsi.h and sans-find-scanner.1)
 	my $raw_type = $scsi_types[$get->('type')];
 
@@ -786,6 +786,13 @@ sub get_all_net_devices() {
 }
 
 sub get_lan_interfaces() { grep { is_lan_interface($_) } get_all_net_devices() }
+
+=item get_net_interfaces()
+
+Returns list of all useful network devices
+
+=cut
+
 sub get_net_interfaces() { grep { is_useful_interface($_) } get_all_net_devices() }
 sub get_wireless_interface() { find { is_wireless_interface($_) } get_lan_interfaces() }
 
@@ -1021,6 +1028,12 @@ sub pcmcia_controller_probe() {
     $controller;
 }
 
+=item pcmcia_probe()
+
+Return list of PCMCIA devices (eg: Ethernet PCMCIA cards, ...)
+
+=cut
+
 sub pcmcia_probe() {
     require modalias;
     require modules;
@@ -1216,7 +1229,7 @@ sub dmi_detect_memory() {
 
 =item computer_info()
 
-Analyze "Chassis" & "Bios" in dmidecode output and return a hash of flags/values (isLaptop, isServer, BIOS_Year)
+Analyse "Chassis" & "Bios" in dmidecode output and return a hash of flags/values (isLaptop, isServer, BIOS_Year)
 
 =cut
 
@@ -1360,9 +1373,21 @@ sub is_netbook_nettop() {
     (any { $_->{'model name'} =~ /(\bIntel\(R\) Celeron\(R\) M processor\b|\bVIA C7-M Processor\b|\bGeode\(TM\)\B)/i && $_->{'cpu MHz'} < 1500 } @cpus);
 }
 
+=item has_low_resources()
+
+Is it a low resource machine?
+
+=cut
+
 sub has_low_resources() {
     availableRamMB() < 100 || arch() =~ /i.86/ && ix86_cpu_frequency() < 350;
 }
+
+=item need_light_desktop()
+
+Does it need a light desktop (netbook or low resources machine)?
+
+=cut
 
 sub need_light_desktop() {
     has_low_resources() || is_netbook_nettop();

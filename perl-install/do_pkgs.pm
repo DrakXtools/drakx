@@ -172,7 +172,7 @@ sub is_available {
 =item are_installed($do, @names)
 
 Returns name(s) of package(s) that are already installed on the system.
-This is less costly (needs to query rpmdb)
+This is less costly (needs to query RPM DB)
 
 =cut
 

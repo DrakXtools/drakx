@@ -250,7 +250,7 @@ The reverse of C<removeXiBSuffix()>, returns a nicely human size. eg:
 
   2097152 => "2MB"
 
-The optional parameter enables to presize the unit size (default is one).
+The optional parameter enables to provide the unit size (default is one).
 eg for a 2000 512 sized sectors:
 
   formatXiB(2000, 512)
@@ -331,7 +331,7 @@ sub formatError {
 
 =item group_by($f, @list)
 
-Group the elements of @list in array references according to the $f comparaison function.
+Group the elements of @list in array references according to the $f comparison function.
 
 =cut
 
@@ -368,7 +368,7 @@ sub group_n_lm {
 
 =item join_lines(@strings)
 
-Concat adjacent strings if laters begin with spaces.
+Concatenate adjacent strings if laters begin with spaces.
 
 =cut
 
@@ -396,7 +396,7 @@ sub read_alternative {
 sub set_alternative {
     my ($command, $executable) = @_;
 
-    #- check the existance of $executable as an alternative for $command
+    #- check the existence of $executable as an alternative for $command
     #- (is this needed???)
     run_program::rooted_get_stdout($::prefix, 'update-alternatives', '--display', $command) =~ /^\Q$executable /m or return;
 

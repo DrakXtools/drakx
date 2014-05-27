@@ -74,7 +74,7 @@ sub kernel_str2short_name {
 
 sub basename2initrd_basename {
     my ($basename) = @_;
-    $basename =~ s!(vmlinu[zx]|uImage)-?!!; #- here we do not use $vmlinuz_regexp since we explictly want to keep all that is not "vmlinuz"
+    $basename =~ s!(vmlinu[zx]|uImage)-?!!; #- here we do not use $vmlinuz_regexp since we explicitly want to keep all that is not "vmlinuz"
     'initrd' . ($basename ? "-$basename" : '');    
 }
 sub kernel_str2vmlinuz_long {
@@ -480,7 +480,7 @@ sub _parse_grub_menu_lst() {
 
 =item is_already_crypted($password)
 
-Returns whether grub password is already crypted or not
+Returns whether grub password is already encrypted or not
 
 =cut
 
@@ -1123,7 +1123,7 @@ wait for default boot.
 
 ");
 	my $msg = translate($msg_en);
-	#- use the english version if more than 40% of 8bits chars
+	#- use the English version if more than 40% of 8bits chars
 	#- else, use the translation but force a conversion to ascii
 	#- to be sure there won't be undisplayable characters
 	if (int(grep { $_ & 0x80 } unpack "c*", $msg) / length($msg) > 0.4) {
@@ -1143,7 +1143,7 @@ sub suggest {
     my $boot = fs::get::root($fstab, 'boot')->{device};
     my $mbr;
     
-    # If installing onto an USB drive, put the mbr there, else on the first non removable drive
+    # If installing onto an USB drive, put the MBR there, else on the first non removable drive
     if ($root_part->{is_removable}) {
         $mbr = fs::get::part2hd($root_part, $all_hds);
     } else {
