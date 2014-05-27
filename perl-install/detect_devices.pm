@@ -24,23 +24,23 @@ The B<detect_devices> modules offers a high level API for detecting devices.*
 It mostly relies on the L<c> modules for gluing  libldetect back into the Perl world, and thus
 being able to enumerate DMI/HID/PCI/USB devices.
 
-Other devices are mostly detected through /proc & /sys.
+Other devices are mostly detected through C</proc> & C</sys>.
 
 Then the L<list_modules> enables to map modules into categories such as:
 
-=over
+=over 4
 
-=item network/ethernet,
+=item * C<network/ethernet,>
 
-=item network/wireless,
+=item * C<network/wireless,>
 
-=item network/wifi,
+=item * C<network/wifi,>
 
-=item disk/sata,
+=item * C<disk/sata,>
 
-=item disk/scsi,
+=item * C<disk/scsi,>
 
-=item ...
+=item * ...
 
 =back
 
@@ -419,6 +419,12 @@ sub getATARAID() {
     values %l;
 }
 
+=item getXenBlk()
+
+Returns a list of all Xen block devices (C</dev/xvd*>).
+
+=cut
+
 sub getXenBlk() {
     -d '/sys/bus/xen/devices' or return;
     map {   
@@ -426,6 +432,12 @@ sub getXenBlk() {
             { device => basename($_), info => "Xen block device", media_type => 'hd', bus => 'xen' };
     } glob("/sys/block/xvd*");
 }
+
+=item getVirtIO()
+
+Returns a list of all VirtIO block devices (/dev/C<vd*>).
+
+=cut
 
 sub getVirtIO() {
     -d '/sys/bus/virtio/devices' or return;
@@ -466,6 +478,14 @@ sub getCPUs() {
 sub ix86_cpu_frequency() {
     cat_('/proc/cpuinfo') =~ /cpu MHz\s*:\s*(\d+)/ && $1;
 }
+
+=item probe_category($category)
+
+Returns a list of devices which drivers are in the asked category. eg:
+
+   my @eth_cards = probe_category('network/ethernet');
+
+=cut
 
 sub probe_category {
     my ($category) = @_;
@@ -909,6 +929,13 @@ sub pci_probe__real() {
 	$l;
     } LDetect::pci_probe());
 }
+
+=item pci_probe()
+
+Cache the result of C<c::pci_probe()> and return the list of items in the PCI devices.
+
+=cut
+
 sub pci_probe() {
     state $done;
     if (!$done) {
@@ -931,6 +958,13 @@ sub usb_probe__real() {
 	$l;
     } LDetect::usb_probe());
 }
+
+=item usb_probe()
+
+Cache the result of C<c::usb_probe()> and return the list of items in the USB devices.
+
+=cut
+
 sub usb_probe() {
     if ($::isStandalone && @usb) {
 	    @usb;
@@ -1013,6 +1047,12 @@ sub pcmcia_probe() {
         };
     } all($dev_dir);
 }
+
+=item dmi_probe()
+
+Cache the result of c::dmi_probe() (aka C<dmidecode>) and return the list of items in the DMI table
+
+=cut
 
 sub dmi_probe() {
     state $dmi_probe;
@@ -1194,8 +1234,44 @@ sub computer_info() {
      };
 }
 
-#- try to detect a laptop, we assume pcmcia service is an indication of a laptop or
-#- the following regexp to match graphics card apparently only used for such systems.
+=item isLaptop()
+
+try to detect a laptop. We assume the following is an indication of a laptop:
+
+=over 4
+
+=item *
+
+pcmcia service
+
+=item *
+
+C<computer_info()> (really C<dmidecode>) telling us it's a laptop
+
+=item *
+
+ACPI lid button
+
+=item *
+
+a regexp to match graphics card apparently only used for such systems.
+
+=item *
+
+Mobility CPU
+
+=item *
+
+having Type as Laptop in some device
+
+=item *
+
+Intel ipw2100/2200/3945 Wireless
+
+=back
+
+=cut
+
 sub isLaptop() {
       computer_info()->{isLaptop}
 	|| glob_("/sys/bus/acpi/devices/PNP0C0D:*") #- ACPI lid button
