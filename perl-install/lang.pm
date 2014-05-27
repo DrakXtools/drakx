@@ -8,20 +8,64 @@ use log;
 use services;
 use bootloader;
 
-#- key: lang name (locale name for some (~5) special cases needing
-#-      extra distinctions)
-#- [0]: lang name in english
-#- [1]: transliterated locale name in the locale name (used for sorting)
-#- [2]: default locale name to use for that language if there is not
-#-      an existing locale for the combination language+country choosen
-#- [3]: geographic groups that this language belongs to (for displaying
-#-      in the menu grouped in smaller lists), 1=Europe, 2=Asia, 3=Africa,
-#-      4=Oceania&Pacific, 5=America (if you wonder, it's the order
-#-      used in the olympic flag)
-#- [4]: special value for LANGUAGE variable (if different of the default
-#-      of 'll_CC:ll_DD:ll' (ll_CC: locale (if exist) resulting of the
-#-      combination of chosen lang (ll) and country (CC), ll_DD: the
-#-      default locale shown here (field [2]) and ll: the language (the key))
+=head1 SYNOPSYS
+
+B<lang> enables to manipulate the system or the user locale settings.
+
+=head1 Data structures & functions
+
+=head2 Languages
+
+=over
+
+=item our %lang
+
+The key is the  lang name (locale name for some (~5) special cases needing
+extra distinctions)
+
+The fields are:
+
+=over 4
+
+=item 0 lang name in English
+
+=item 1 transliterated locale name in the locale name (used for sorting)
+
+=item 2 default locale name to use for that language if there is not
+an existing locale for the combination language+country chosen
+
+=item 3 geographic groups that this language belongs to (for displaying
+in the menu grouped in smaller lists):
+
+=over 4
+
+=item 1=Europe,
+
+=item 2=Asia,
+
+=item 3=Africa,
+
+=item 4=Oceania & Pacific,
+
+=item 5=America
+
+=back
+
+If you wonder, it's the order used in the Olympic flag...
+
+=item 4 special value for LANGUAGE variable (if different of the default
+of 'll_CC:ll_DD:ll' (ll_CC: locale (if exist) resulting of the
+combination of chosen lang (ll) and country (CC), ll_DD: the
+default locale shown here (field [2]) and ll: the language (the key))
+
+=back
+
+Example:
+
+  C<< 'fr' => [ 'French', 'Francais', 'fr_FR', '1 345', 'iso-8859-15' ], >>
+
+=cut
+
 our %langs = (
 'af' =>    [ 'Afrikaans',           'Afrikaans',         'af_ZA', '  3  ', 'iso-8859-1' ],
 'am' =>    [ 'Amharic',             'ZZ emarNa',         'am_ET', '  3  ', 'utf_ethi' ],
@@ -141,7 +185,7 @@ our %langs = (
 'sq' =>    [ 'Albanian',            'Shqip',             'sq_AL', '1    ', 'iso-8859-1' ], 
 'sr' =>    [ 'Serbian Cyrillic',    'Srpska',            'sr_CS', '1    ', 'utf_cyr1', 'sp:sr' ],
 #- "sh" comes first, because otherwise, due to the way glibc does language
-#- fallback, if "sr@Latn" is not there but a "sr" (whichs uses cyrillic)
+#- fallback, if "sr@Latn" is not there but a "sr" (which uses cyrillic)
 #- is there, "sh" will never be used.
 'sr@Latn' => [ 'Serbian Latin',     'Srpska',            'sr_CS', '1    ', 'unicode',  'sh:sr@Latn' ], 
 'ss' =>    [ 'Swati',               'SiSwati',           'ss_ZA', '  3  ', 'utf_lat1', 'ss:en_ZA' ],
@@ -205,19 +249,56 @@ sub text_direction_rtl() {
        	N("default:LTR") eq "default:RTL";
 }
 
+=back
 
-#- key: country name (that should be YY in xx_YY locale)
-#- [0]: country name in natural language
-#- [1]: default locale for that country 
-#- [2]: geographic groups that this country belongs to (for displaying
-#-      in the menu grouped in smaller lists), 1=Europe, 2=Asia, 3=Africa,
-#-      4=Oceania&Pacific, 5=America (if you wonder, it's the order
-#-      used in the olympic flag)
-#-
-#- Note: for countries for which a glibc locale do not exist (yet) I tried to
-#- put a locale that makes sense; and a '#' at the end of the line to show
-#- the locale is not the "correct" one. 'en_US' is used when no good choice
-#- is available.
+=head2 Countries
+
+=over
+
+=item my %countries;
+
+The key is the ISO 639-1 country name code (that should be YY in xx_YY locale).
+
+The fields are:
+
+=over 4
+
+=item 0: country name in natural language
+
+=item 1: default locale for that country
+
+=item 2: geographic groups that this country belongs to (for displaying
+in the menu grouped in smaller lists):
+
+=over 4
+
+=item *1=Europe,
+
+=item *2=Asia,
+
+=item *3=Africa,
+
+=item 4=Oceania & Pacific,
+
+=item 5=America
+
+=back
+
+If you wonder, it's the order used in the Olympic flag.
+
+=back
+
+Note: for countries for which a glibc locale do not exist (yet) I tried to
+put a locale that makes sense; and a '#' at the end of the line to show
+the locale is not the "correct" one. 'en_US' is used when no good choice
+is available.
+
+Example:
+
+   C<< 'FR' => [ N_("France"), 'fr_FR', '1' ], >>
+
+=cut
+
 my %countries = (
 'AD' => [ N_("Andorra"),        'ca_AD', '1' ],
 'AE' => [ N_("United Arab Emirates"), 'ar_AE', '2' ],
@@ -458,11 +539,44 @@ my %countries = (
 'ZM' => [ N_("Zambia"),         'en_US', '3' ], #
 'ZW' => [ N_("Zimbabwe"),       'en_ZW', '5' ],
 );
+
+=item c2name($country_code)
+
+Returns the translated name for $country_code.
+
+=cut
+
 sub c2name   { exists $countries{$_[0]} && translate($countries{$_[0]}[0]) }
+
+=item c2locale($country_code)
+
+Returns default locale for that $country_code.
+
+=cut
+
 sub c2locale { exists $countries{$_[0]} && $countries{$_[0]}[1] }
+
+=item list_countries()
+
+Returns the full list of countries.
+
+=cut
+
 sub list_countries() {
     keys %countries;
 }
+
+=back
+
+=head2 Locales
+
+=over
+
+=item our @locales;
+
+The list of locales supported by glibc.
+
+=cut
 
 #- this list is built with the following command on the compile cluster:
 #- rpm -qpl /cooker/RPMS/release/locales-* | grep LC_CTYPE | egrep '/usr/share/locale/[a-z]' | cut -d'/' -f5 | sed 's/\.\(UTF-8\|ARM\|EUC\|GB.\|ISO\|KOI\|TCVN\).*\|\@\(euro\|iqtelif.*\)//' | sort -u | tr '\n' ' ';echo
@@ -495,6 +609,13 @@ sub force_lang_charset {
     analysed_to_lang($h);
 }
 
+=item analysed_to_lang($h)
+
+The reverse of analyse_locale_name($lang), it takes a hash ref and returns
+the standard ll_CC.cc@VV
+
+=cut
+
 sub analysed_to_lang {
     my ($h) = @_;
     $h->{main} . '_' . $h->{country} . 
@@ -502,11 +623,39 @@ sub analysed_to_lang {
       ($h->{variant} ? '@' . $h->{variant} : '');
 }
 
+=item analyse_locale_name($lang)
+
+Analyse a ll_CC.cc@VV locale and return a hash ref containing:
+
+=over 4
+
+=item * main (langage code)
+
+=item * country code
+
+=item * charset
+
+=item * variant
+
+=back
+
+=cut
+
 sub analyse_locale_name {
     my ($lang) = @_;
     $lang =~ /^(.*?) (?:_(.*?))? (?:\.(.*?))? (?:\@(.*?))? $/x &&
       { main => $1, country => $2, charset => $3, variant => $4 };
 }
+
+=item locale_to_main_locale($lang)
+
+=cut
+
+=item locale_to_main_locale($lang)
+
+Returns the locale code from a ll_LL representation.
+
+=cut
 
 sub locale_to_main_locale {
     my ($lang) = @_;
@@ -555,35 +704,83 @@ sub countries_to_locales {
 }
 
 #-------------------------------------------------------------
-#
-# IM configuration hash tables
-#
-# in order to configure an IM, one has to:
-# - put generic configuration in %IM_config
+=back
 
+=head2 Input Methods (IM)
 
-# This set generic IM fields.
-my @IM_i18n_fields = (
- 'XMODIFIERS', 
-#-      is the environnement variable used by the X11 XIM protocol
-#-	it is of the form XIMODIFIERS="@im=foo"
- 'XIM', 
-#-      is used by some programs, it usually is the like XIMODIFIERS
-#-	with the "@im=" part stripped
- 'GTK_IM_MODULE', 
-#-      the module to use for Gtk programs ("xim" to use an X11
-#-	XIM server; or a a native gtk module if exists)
- 'XIM_PROGRAM',
-#-      the XIM program to run (usually the same as XIM value, but
-#-	in some cases different, particularly if parameters are needed;
- 'QT_IM_MODULE',
-#-     the module to use for Qt programs ("xim" to use an X11
-#-     XIM server; or a Qt plugin if exists)
-);
+Various hash tables enables to configure IMs.
+
+=over
+
+=item my @IM_i18n_fields;
+
+This set generic IM fields:
+
+=over 4
+
+=item * B<XMODIFIERS>: is the environnement variable used by the X11 XIM protocol
+it is of the form XIMODIFIERS="@im=foo"
+
+=item * B<XIM>: is used by some programs, it usually is the like XIMODIFIERS
+with the "@im=" part stripped
+
+=item * B<GTK_IM_MODULE>: the module to use for Gtk programs ("xim" to use an X11
+XIM server; or a a native gtk module if exists)
+
+=item * B<XIM_PROGRAM>: the XIM program to run (usually the same as XIM value, but
+in some cases different, particularly if parameters are needed;
+
+=item * B<QT_IM_MODULE>: the module to use for Qt programs ("xim" to use an X11
+XIM server; or a Qt plugin if exists)
+
+=back
+
+=cut
+
+my @IM_i18n_fields = qw(XMODIFIERS XIM GTK_IM_MODULE XIM_PROGRAM QT_IM_MODULE);
 
 my ($is_kde4);
 
-# keep the 'packages' field in sync with share/rpmsrate:
+=item my %IM_config;
+
+In order to configure an IM, one has to put generic configuration here.
+Fields are :
+
+=over 4
+
+=item * B<GTK_IM_MODULE>: the Gtk+ IM module to use
+
+=item * B<QT_IM_MODULE>: the Qt IM module to use
+
+=item * B<XIM>: 
+
+=item * B<XIM_PROGRAM>: the XIM program to use
+
+=item * B<XMODIFIERS>: the X Modifiers (see X11 config), eg: C<'@im=gcin'>,
+
+See above for those 5 parameters.
+
+=item * B<default_for_lang>: the language codes for which it's the default IM
+=item * B<langs>: 'zh',
+
+=item * B<packages:> a hash ref that contains:
+
+=over 4
+
+=item * B<generic>: packages that must be installed for all languages
+
+=item * B<common>: packages that are specific to some desktop environments
+
+=item * eventually B<code_langs> pointing to per language packages
+
+=back
+
+The 'packages' field must be kept in sync with share/rpmsrate, especially for the per language package selection!
+
+=back
+
+=cut
+
 my %IM_config =
   (
 #   chinput => {
@@ -756,6 +953,12 @@ my %IM_locale_specific_config = (
           );
 
 
+=item get_ims ($lang)
+
+Returns the IMs that are usable for $lang.
+
+=cut
+
 sub get_ims { 
     my ($lang) = @_;
     my $main_lang = analyse_locale_name($lang)->{main};
@@ -767,12 +970,24 @@ sub get_ims {
     } keys %IM_config;
 }          
 
+=item get_default_im ($lang)
+
+Returns the default IM to use for $lang.
+
+=cut
+
 sub get_default_im {
     my ($lang) = @_;
     find { 
 	member($lang, split(' ', $IM_config{$_}{default_for_lang}));
     } keys %IM_config;
 }
+
+=item IM2packages ($locale)
+
+Returns the packages to use for $locale if it's set to use an IM
+
+=cut
 
 sub IM2packages {
     my ($locale) = @_;
@@ -789,11 +1004,32 @@ sub IM2packages {
     } else { () }
 }
 
-#- [0]: console font name
-#- [1]: unused
-#- [2]: console map (none if utf8)
-#- [3]: iocharset param for mount (utf8 if utf8)
-#- [4]: codepage parameter for mount (none if utf8)
+=back
+
+=head2 Charsets
+
+=over
+
+=item my %charsets;
+
+Key is encoding. Fields are:
+
+=over 4
+
+=item 0: console font name
+
+=item 1: unused
+
+=item 2: console map (none if utf8)
+
+=item 3: iocharset param for mount (utf8 if utf8)
+
+=item 4: codepage parameter for mount (none if utf8)
+
+=back
+
+=cut
+
 my %charsets = (
 #- chinese needs special console driver for text mode
 "Big5"        => [ undef,         undef,   undef,           "big5",       "950" ],
@@ -848,7 +1084,12 @@ my %charsets = (
 "unicode"     => [ "LatArCyrHeb-16", undef,   undef,      "utf8",    undef ],
 );
 
-#- for special cases not handled magically
+=item my %charset2kde_charset;
+
+For special cases not handled magically
+
+=cut
+
 my %charset2kde_charset = (
     gb2312 => 'gb2312.1980-0',
     gbk => 'gb2312.1980-0',
@@ -861,6 +1102,12 @@ my %charset2kde_charset = (
 );
 
 #- -------------------
+
+=item l2console_font ($locale, $during_install)
+
+Returns console font name &  console map (none if utf8 and if not during install);
+
+=cut
 
 sub l2console_font {
     my ($locale, $during_install) = @_;
@@ -921,8 +1168,15 @@ sub charset2kde_charset {
     $r || $o_default || 'iso10646-1';
 }
 
-#- font+size for different charsets; the field [0] is the default,
-#- others are overrridens for fixed(1), toolbar(2), menu(3) and taskbar(4)
+=item my %charset2kde_font;
+
+Font+size for different charsets; the field [0] is the default,
+others are overrridens for fixed(1), toolbar(2), menu(3) and taskbar(4)
+
+This is needed because KDE historically doesn't use fontconfig...
+
+=cut
+
 my %charset2kde_font = (
   'C' => [ "Sans,10", "Monospace,10" ],
   'iso-8859-1'  => [ "Sans,10", "Monospace,10" ],
@@ -979,9 +1233,14 @@ sub charset2kde_font {
     "$r,-1,5,0,0,0,0,0,0";
 }
 
-# this define pango name fonts (like "NimbusSans L") depending
-# on the "charset" defined by language array. This allows to selecting
-# an appropriate font for each language for the installer only.
+=item my %charset2pango_font;
+
+This define pango name fonts (like "NimbusSans L") depending
+on the "charset" defined by language array. This allows to selecting
+an appropriate font for each language for the installer only.
+
+=cut
+
 my %charset2pango_font = (
   'utf_geor' =>    "Sans 14",
   'utf_taml' =>    "TSCu_Paranar 14",
@@ -990,6 +1249,12 @@ my %charset2pango_font = (
   'tis620' =>      "Norasi 20",
   'default' =>     "DejaVu Sans 12"
 );
+
+=item charset2pango_font ($charset)
+
+Returns the font to use with $charset or the default one if non is set
+
+=cut
 
 sub charset2pango_font {
     my ($charset) = @_;
@@ -1006,6 +1271,14 @@ sub l2pango_font {
     
     return $font;
 }
+
+=back
+
+=head1 Other functions
+
+=over
+
+=cut
 
 sub set {
     my ($locale, $b_translate_for_console) = @_;
@@ -1082,6 +1355,13 @@ sub lang_changed {
     $locale->{IM} = get_default_im($locale->{lang});
 }
 
+=item read($b_user_only)
+
+Read locale settings from files.
+If $b_user_only is set, reads the user config, else read the system config.
+
+=cut
+
 sub read {
     my ($b_user_only) = @_;
     my ($f1, $f2, $f3) = ("$::prefix$ENV{HOME}/.i18n", "$::prefix/etc/sysconfig/i18n", "$::prefix/etc/locale.conf");
@@ -1135,6 +1415,12 @@ sub write_and_install {
     }
     &write($locale, $b_user_only, $b_dont_touch_kde_files);
 }
+
+=item write ($locale, $b_user_only, $b_dont_touch_kde_files)
+
+Save locale settings, either system ones or per user ones (if $b_user_only is set).
+
+=cut
 
 sub write { 
     my ($locale, $b_user_only, $b_dont_touch_kde_files) = @_;
@@ -1288,6 +1574,12 @@ sub configure_kdeglobals {
        		  ));
 }
 
+=item bindtextdomain()
+
+Binds the translation domains with the proper encoding (UTF-8).
+
+=cut
+
 sub bindtextdomain() {
     #- if $::prefix is set, search for libDrakX.mo in locale_special
     #- NB: not using $::isInstall to make it work more easily at install and standalone
@@ -1301,6 +1593,13 @@ sub bindtextdomain() {
 
     $localedir;
 }
+
+=item load_mo ($o_lang)
+
+Used by the installer: returns the firste existing .mo file to load according to $o_lang.
+If it's not set, we rely on environment variables.
+
+=cut
 
 sub load_mo {
     my ($o_lang) = @_;
@@ -1318,12 +1617,23 @@ sub load_mo {
 }
 
 
-#- used in share/list.xml during "make get_needed_files"
+=item console_font_files()
+
+Used in share/list.xml during "make get_needed_files"
+
+=cut
+
 sub console_font_files() {
     map { -e $_ ? $_ : "$_.gz" }
       (map { my $p = "/lib/kbd/consolefonts/$_"; -e "$p.psfu" || -e "$p.psfu.gz" ? "$p.psfu" : "$p.psf" } uniq grep { $_ } map { $_->[0] } values %charsets),
       (map { "/lib/kbd/consoletrans/${_}_to_uni.trans" } uniq grep { $_ } map { $_->[2] } values %charsets);
 }
+
+=item load_console_font($locale)
+
+Loads the console font...
+
+=cut
 
 sub load_console_font {
     my ($locale) = @_;
@@ -1335,6 +1645,12 @@ sub load_console_font {
     run_program::run('setfont', '-v', $name || 'lat0-16', if_($acm, '-m', $acm));
 }
 
+=item fs_options($locale)
+
+Returns the options suitable for filesystems mounting according to $locale.
+
+=cut
+
 sub fs_options {
     my ($locale) = @_;
     if ($locale->{utf8}) {
@@ -1345,6 +1661,12 @@ sub fs_options {
 	(iocharset => $iocharset, codepage => $codepage);
     }
 }
+
+=item check()
+
+Used by 'make check_full'.
+
+=cut
 
 sub check() {
     $^W = 0;
@@ -1396,5 +1718,9 @@ sub check() {
 
     exit($errors ? 1 : 0);
 }
+
+=back
+
+=cut
 
 1;
