@@ -8,23 +8,96 @@ use MDK::Common;
 use common; # for get_parent_uid()
 use log;
 
+=head1 SYNOPSYS
+
+B<run_program> enables to:
+
+=over 4
+
+=item * run programs in foreground or in background,
+
+=item * to retrieve their stdout or stderr
+
+=item * ...
+
+=back
+
+Most functions exits in a normal form & a rooted one. e.g.:
+
+=over 4
+
+=item * C<run()> & C<rooted()>
+
+=item * C<get_stdout()> & C<rooted_get_stdout()>
+
+=back
+
+Most functions exits in a normal form & one that die. e.g.:
+
+=over 4
+
+=item * C<run()> & C<run_or_die()>
+
+=item * C<rooted()> & C<rooted_or_die()>
+
+=back
+
+=head1 Functions
+
+=over
+
+=cut
+
 1;
 
 my $default_timeout = 10 * 60;
+
+=item set_default_timeout($seconds)
+
+Alters defaults timeout (eg for harddrake service)
+
+=cut
 
 sub set_default_timeout {
     my ($seconds) = @_;
     $default_timeout = $seconds;
 }
 
+=item run_or_die($name, @args)
+
+Runs $name with @args parameterXs. Dies if it exit code is not 0.
+
+=cut
+
 sub run_or_die {
     my ($name, @args) = @_;
     run($name, @args) or die "$name failed\n";
 }
+
+=item rooted_or_die($root, $name, @args)
+
+Similar to run_or_die() but runs in chroot in $root
+
+=cut
+
 sub rooted_or_die {
     my ($root, $name, @args) = @_;
     rooted($root, $name, @args) or die "$name failed\n";
 }
+
+=item get_stdout($name, @args)
+
+Similar to run_or_die() but return stdout of program:
+
+=over 4
+
+=item * a list of lines in list context
+
+=item * a string of concatenated lines in scalar context
+
+=back
+
+=cut
 
 sub get_stdout {
     my ($name, @args) = @_;
@@ -33,12 +106,24 @@ sub get_stdout {
     wantarray() ? @r : join('', @r);
 }
 
+=item get_stdout_raw($options, $name, @args)
+
+Similar to get_stdout() but allow to pass options to raw()
+
+=cut
+
 sub get_stdout_raw {
     my ($options, $name, @args) = @_;
     my @r;
     raw($options, $name, '>', \@r, @args) or return;
     wantarray() ? @r : join('', @r);
 }
+
+=item rooted_get_stdout($root, $name, @args)
+
+Similar to get_stdout() but runs in chroot in $root
+
+=cut
 
 sub rooted_get_stdout {
     my ($root, $name, @args) = @_;
@@ -47,12 +132,60 @@ sub rooted_get_stdout {
     wantarray() ? @r : join('', @r);
 }
 
+=item run($name, @args)
+
+Runs $name with @args parameters.
+
+=cut
+
 sub run { raw({}, @_) }
+
+=item rooted($root, $name, @args)
+
+Similar to run() but runs in chroot in $root
+
+=cut
 
 sub rooted {
     my ($root, $name, @args) = @_;
     raw({ root => $root }, $name, @args);
 }
+
+=item raw($options, $name, @args)
+
+The function used by all the other, making every combination possible.
+Runs $name with @args parameters. $options is a hash ref that can contains:
+
+=over 4
+
+=item * B<root>: $name will be chrooted in $root prior to run
+
+=item * B<as_user>: $name will be run as $ENV{USERHELPER_UID} or with the UID of parent process. Implies I<setuid>
+
+=item * B<sensitive_arguments>: parameters will be hidden in logs (b/c eg there's a password)
+
+=item * B<detach>: $name will be run in the background. Default is foreground
+
+=item * B<chdir>: $name will be run in a different default directory
+
+=item * B<setuid>: contains a getpwnam(3) struct ; $name will be with droped privileges ;
+make sure environment is set right and keep a copy of the X11 cookie
+
+=item * B<timeout>: execution of $name will be aborted after C<timeout> seconds
+
+=back
+
+eg:
+
+=over 4
+
+=item * C<< run_program::raw({ root => $::prefix, sensitive_arguments => 1 }, "echo -e $user->{password} | cryptsetup luksFormat $device"); >>
+
+=item * C<< run_program::raw({ detach => 1 }, '/etc/rc.d/init.d/dm', '>', '/dev/null', '2>', '/dev/null', 'restart'); >>
+
+=back
+
+=cut
 
 sub raw {
     my ($options, $name, @args) = @_;
@@ -186,8 +319,14 @@ sub raw {
 
 }
 
-# run in background a sub that give back data through STDOUT a la run_program::get_stdout but w/ arbitrary perl code instead of external program
 package bg_command;
+
+=item bg_command::new($class, $sub)
+
+Runs in background a sub that give back data through STDOUT a la run_program::get_stdout
+but w/ arbitrary perl code instead of external program
+
+=cut
 
 sub new {
     my ($class, $sub) = @_;
@@ -201,11 +340,21 @@ sub new {
     }
 }
 
+=item bg_command::DESTROY($o)
+
+When undefined (either explicitly or at end of lexical scope), close the fd and wait for the child process.
+
+=cut
+
 sub DESTROY {
     my ($o) = @_;
     close $o->{fd} or warn "kid exited $?";
     waitpid $o->{pid}, 0;
 }
+
+=back
+
+=cut
 
 1;
 
