@@ -371,6 +371,12 @@ sub block_devices() {
       : map { $_->{dev} } do { require fs::proc_partitions; fs::proc_partitions::read_raw() };
 }
 
+=item getCompaqSmartArray()
+
+Returns a list of all CCISS devices (Compaq Smart Array).
+
+=cut
+
 sub getCompaqSmartArray() {
     my (@idi, $f);
 

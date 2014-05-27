@@ -148,11 +148,15 @@ sub vgs() {
     } _sets();
 }
 
-# the goal is to handle migration from /dev/mapper/xxx1 to /dev/mapper/xxxp1,
-# as used by initrd/nash.
-# dmraid has been patched to follow xxxp1 device names.
-# so until the box has rebooted on new initrd/dmraid, we must cope with /dev/mapper/xxx1 device names
-# (cf #44182)
+=item migrate_device_names ($vg)
+
+Handles migration from /dev/mapper/xxx1 to /dev/mapper/xxxp1, as used by initrd/nash.
+dmraid has been patched to follow xxxp1 device names.
+So until the box has rebooted on new initrd/dmraid, we must cope with /dev/mapper/xxx1 device names
+(cf mdk#44182)
+
+=cut
+
 sub migrate_device_names {
     my ($vg) = @_;
 
