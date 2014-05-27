@@ -68,8 +68,33 @@ sub gtkdestroy                { mygtk3::may_destroy($_[0]) }
 sub gtkflush()                { mygtk3::flush() }
 sub gtkhide                   { $_[0]->hide; $_[0] }
 sub gtkmove                   { $_[0]->get_window->move($_[1], $_[2]); $_[0] }
+
+=item gtkpack($container, @widgets)
+
+Pack all @widgets in the container, telling Gtk+ they can all expand if space is available.
+
+=cut
+
 sub gtkpack                   { gtkpowerpack(1, 1, @_) }
+
+=item gtkpack_($container, @widgets)
+
+@widgets is a list of array refs: ([ $can_expand1, $widget1 ], [ $can_expand2, $widget2 ], ...)
+
+Pack all @widgets in the container, telling Gtk+ if each wiget can or cannot expand
+if space is available according to its flag.
+
+=cut
+
 sub gtkpack_                  { gtkpowerpack('arg', 1, @_) }
+
+=item gtkpack__($container, @widgets)
+
+Pack all @widgets in the container, telling Gtk+ they must B<not> expand beyond
+their natural size if space is available.
+
+=cut
+
 sub gtkpack__                 { gtkpowerpack(0, 1, @_) }
 sub gtkpack2                  { gtkpowerpack(1, 0, @_) }
 sub gtkpack2_                 { gtkpowerpack('arg', 0, @_) }
@@ -203,10 +228,25 @@ sub gtkset_name {
 }
 
 
+=item gtkpowerpack()
+
+Get Default Attributes (if any). 2 syntaxes allowed :
+
+=over 4
+
+=item * gtkpowerpack( {expand => 1, fill => 0}, $box...)
+
+the attributes are picked from a specified hash ref
+
+=item * gtkpowerpack(1, 0, 1, $box, ...)
+
+the attributes are picked from the non-ref list, in the order (expand, fill, padding, pack_end).
+
+=back
+
+=cut
+
 sub gtkpowerpack {
-    #- Get Default Attributes (if any). 2 syntaxes allowed :
-    #- gtkpowerpack( {expand => 1, fill => 0}, $box...) : the attributes are picked from a specified hash ref
-    #- gtkpowerpack(1, 0, 1, $box, ...) : the attributes are picked from the non-ref list, in the order (expand, fill, padding, pack_end).
     my @attributes_list = qw(expand fill padding pack_end);
     my $default_attrs = {};
     if (ref($_[0]) eq 'HASH') {
@@ -220,13 +260,35 @@ sub gtkpowerpack {
     my $box = shift;
 
     while (@_) {
-	#- Get attributes (if specified). 4 syntaxes allowed (default values are undef ie. false...) :
-	#- gtkpowerpack({defaultattrs}, $box, $widget1, $widget2, ...) : the attrs are picked from the default ones (if they exist)
-	#- gtkpowerpack($box, {fill=>1, expand=>0, ...}, $widget1, ...) : the attributes are picked from a specified hash ref
-	#- gtkpowerpack($box, [1,0,1], $widget1, ...) : the attributes are picked from the array ref : (expand, fill, padding, pack_end).
-	#- gtkpowerpack({attr=>'arg'}, $box, 1, $widget1, 0, $widget2, etc...) : the 'arg' value will tell gtkpowerpack to always read the 
-	#- attr value directly in the arg list (avoiding confusion between value 0 and Gtk::Label("0"). That can simplify some writings but
-	#- this arg(s) MUST then be present...
+
+=pod
+
+Get attributes (if specified). 4 syntaxes allowed (default values are undef ie. false...) :
+
+=over 4
+
+=item $ gtkpowerpack({defaultattrs}, $box, $widget1, $widget2, ...)
+
+the attrs are picked from the default ones (if they exist)
+
+=item $ gtkpowerpack($box, {fill=>1, expand=>0, ...}, $widget1, ...)
+
+the attributes are picked from a specified hash ref
+
+=item $ gtkpowerpack($box, [1,0,1], $widget1, ...)
+
+the attributes are picked from the array ref : (expand, fill, padding, pack_end).
+
+=item $ gtkpowerpack({attr=>'arg'}, $box, 1, $widget1, 0, $widget2, etc...)
+
+the 'arg' value will tell gtkpowerpack to always read the  attr value directly
+in the arg list (avoiding confusion between value 0 and Gtk::Label("0").
+That can simplify some writings but this arg(s) MUST then be present...
+
+=back
+
+=cut
+
 	my (%attr, $attrs);
 	ref($_[0]) eq 'HASH' || ref($_[0]) eq 'ARRAY' and $attrs = shift;
 	foreach (@attributes_list) {
