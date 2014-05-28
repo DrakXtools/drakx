@@ -140,8 +140,13 @@ Do you have a supplementary installation medium to configure?",
     $suppl;
 }
 
-#- if the supplementary media is networked, but not the main one, network
-#- support must be installed and network started.
+=item prep_net_suppl_media($o)
+
+If the supplementary media is networked, but not the main one, network
+support must be installed and network started.
+
+=cut
+
 sub prep_net_suppl_media {
     my ($o) = @_;
 
@@ -1428,10 +1433,21 @@ sub write_fstab {
     fs::write_fstab($o->{all_hds}, $::prefix);
 }
 
-sub adjust_files_mtime_to_timezone() {
-    #- to ensure linuxconf does not cry against those files being in the future
-    #- to ensure fc-cache works correctly on fonts installed after reboot
+=item adjust_files_mtime_to_timezone() {
 
+Fixes mtime of a couple important files according to timezone in order to:
+
+=over 4
+
+=item * to ensure linuxconf does not cry against those files being in the future
+
+=item * to ensure fc-cache works correctly on fonts installed after reboot
+
+=back
+
+=cut
+
+sub adjust_files_mtime_to_timezone() {
     my $timezone_shift = run_program::rooted_get_stdout($::prefix, 'date', '+%z');
     my ($h, $m) = $timezone_shift =~ /\+(..)(..)/ or return;
     my $now = time() - ($h * 60 + $m * 60) * 60;
