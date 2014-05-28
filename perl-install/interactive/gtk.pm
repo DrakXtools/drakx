@@ -112,7 +112,7 @@ sub create_treeview_list {
 	    } else {
 		$e->{may_go_to_next}(), return 1 if $c eq ' ';
 
-		$curr++ if $starting_word eq '' || $starting_word eq $c;
+		$curr++ if member($starting_word, '', $c);
 		$starting_word .= $c unless $starting_word eq $c;
 	    }
 	    my @l = @{$e->{formatted_list}};
@@ -276,7 +276,7 @@ sub create_treeview_tree {
 		$next = 1;
 	    } else {
 		&$toggle and return 1 if $c eq ' ';
-		$next = 1 if $starting_word eq '' || $starting_word eq $c;
+		$next = 1 if member($starting_word, '', $c);
 		$starting_word .= $c unless $starting_word eq $c;
 	    }
 	    my $word = quotemeta $starting_word;
@@ -561,7 +561,7 @@ sub create_widget {
 			$w->set_active_iter($model->get_iter_from_string($path_str));
 		    };
 		} else {
-		    $w->set_text($s) if $s ne $w->get_text && $_[0] ne $w->get_text;
+		    $w->set_text($s) if !member($w->get_text, $s, $_[0]);
 		}
 	    };
 	} else {

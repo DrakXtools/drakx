@@ -90,7 +90,7 @@ sub translate_real {
      }
 	# when utf8 pragma is in use, Locale::gettext() returns an utf8 string not tagged as such:
 	c::set_tagged_utf8($s2) if !utf8::is_utf8($s2) && utf8::is_utf8($s);
-	return $s2 if $s ne $s2 && $s2 ne $o_plural;
+	return $s2 if !member($s2, $s, $o_plural);
     }
     # didn't lookup anything or locale is "C":
     $s2;

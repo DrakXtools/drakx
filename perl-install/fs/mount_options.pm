@@ -38,7 +38,7 @@ sub unpack {
     push @{$per_fs{$_}}, 'acl' foreach 'ext2', 'ext3', 'ext4', 'reiserfs';
 
     while (my ($fs, $l) = each %per_fs) {
-	$part->{fs_type} eq $fs || $part->{fs_type} eq 'auto' && member($fs, @auto_fs) or next;
+	member($part->{fs_type}, $fs, 'auto') && member($fs, @auto_fs) or next;
 	$non_defaults->{$_} = 1 foreach @$l;
     }
 

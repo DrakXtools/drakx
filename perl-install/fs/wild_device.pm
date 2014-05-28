@@ -17,7 +17,7 @@ sub analyze {
 	'label', $1;
     } elsif ($dev =~ /^UUID=(.*)/) {
 	'uuid', $1;
-    } elsif ($dev eq 'none' || $dev eq 'rootfs') {
+    } elsif (member($dev, qw(none rootfs))) {
 	'virtual';
     } elsif ($dev =~ m!^(\S+):/(\w|$)!) {
 	'nfs';

@@ -290,7 +290,7 @@ That can simplify some writings but this arg(s) MUST then be present...
 =cut
 
 	my (%attr, $attrs);
-	ref($_[0]) eq 'HASH' || ref($_[0]) eq 'ARRAY' and $attrs = shift;
+	member(ref($_[0]), qw(HASH ARRAY)) and $attrs = shift;
 	foreach (@attributes_list) {
 	    if (($default_attrs->{$_} || '') eq 'arg') {
 		ref($_[0]) and internal_error "error in packing definition\n";
@@ -602,7 +602,7 @@ sub create_okcancel {
     if (!defined $wm_is_kde) {
         require any;
         my $wm = any::running_window_manager();
-        $wm_is_kde = !$::isInstall && ($wm eq "kwin" || $wm eq "compiz" && fuzzy_pidofs(qr/\bkde-window-decorator\b/)) || 0;
+        $wm_is_kde = !$::isInstall && (member($wm, qw(kwin compiz)) && fuzzy_pidofs(qr/\bkde-window-decorator\b/)) || 0;
     }
     my $f = sub { $w->{buttons}{$_[0][0]} = ref($_[0][0]) =~ /Gtk3::Button/ ?
                     $_[0][0] :

@@ -105,7 +105,7 @@ sub list {
 
 	my @mirrors = grep {
 	    ($_->{method}, $_->{host}, $_->{dir}) = $_->{url} =~ m!^(ftp|http)://(.*?)(/.*)!;
-	    $_->{method} && ($type eq 'all' || $_->{type} eq $type);
+	    $_->{method} && (member($type, 'all', $_->{type}));
 	} @mirrors_raw or log::explanations("no mirrors of type $type"), return;
 
     @mirrors && \@mirrors;

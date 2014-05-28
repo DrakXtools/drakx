@@ -177,7 +177,7 @@ sub compute_size {
 	$e->{curses}{'-width'} ||= length($s);
     } elsif ($e->{type} eq 'expander') {
 	$e->{curses}{'-width'} ||= length("<+> $e->{text}");
-    } elsif ($e->{type} eq 'text' || $e->{type} eq 'label' || $e->{type} eq 'only_label') {
+    } elsif (member($e->{type}, qw(text label only_label))) {
 	my @text = _messages(min(80, $width_avail - 1), ${$e->{val}}); #- -1 because of the scrollbar
 	$e->{curses}{'-focusable'} = 0;
 	$e->{curses}{'-height'} ||= heights(int(@text), 10, 4);
@@ -352,7 +352,7 @@ sub create_widget {
 	$w->set_binding('focus-up', Curses::KEY_LEFT());
 	$w->set_binding('focus-down', Curses::KEY_RIGHT());
 	$set = sub { $w->set_label(0, sprintf('< %s >', may_apply($e->{format}, $_[0]))) };
-    } elsif ($e->{type} eq 'list' || $e->{type} eq 'combo') {
+    } elsif (member($e->{type}, qw(list combo))) {
 	$w = $win->add(undef, $e->{type} eq 'combo' ? 'Popupmenu' : 'Listbox', 
 		       '-values' => $e->{formatted_list},
 		       '-onchange' => $onchange->(sub { $e->{list}[$w->id] }),
@@ -405,7 +405,7 @@ sub create_widget {
     } elsif ($e->{type} eq 'label' && $e->{curses}{'-height'} == 1) {
 	$w = $win->add(undef, 'Label', %options);
 	$set = sub { $w->text($_[0] || '') };
-    } elsif ($e->{type} eq 'label' || $e->{type} eq 'only_label' || $e->{type} eq 'text') {
+    } elsif (member($e->{type}, qw(label only_label text))) {
 	$w = $win->add(undef, 'TextViewer', %options);
 	$set = sub { 
 	    my ($text) = @_;

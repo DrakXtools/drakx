@@ -93,7 +93,7 @@ my @exports = (
 if ($modify) {
     my ($cmd, $dir) = @ARGV;
     $< = $>;
-    @ARGV == 2 && ($cmd eq '--add' || $cmd eq '--remove') or error($usage);
+    @ARGV == 2 && (member($cmd, qw(--add --remove))) or error($usage);
 
     verify_mntpoint($dir);
 

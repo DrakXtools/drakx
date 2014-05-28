@@ -1177,7 +1177,7 @@ sub _gtknew_handle_children {
 
     foreach (@child) {
 	my ($fill, $child) = @$_;
-	$fill eq '0' || $fill eq '1' || $fill eq 'fill' || $fill eq 'expand' or internal_error("odd {children} parameter must be 0 or 1 (got $fill)");
+	member($fill, qw(0 1 fill expand)) or internal_error("odd {children} parameter must be 0 or 1 (got $fill)");
 	ref $child or $child = Gtk2::WrappedLabel->new($child);
 	my $expand = $fill && $fill ne 'fill' ? 1 : 0;
 	$w->pack_start($child, $expand, $fill, $padding || 0);
@@ -1198,7 +1198,7 @@ sub mygtk2::MagicWindow::AUTOLOAD {
 
     my ($s1, @s2) = $meth eq 'show'
               ? ('real_window', 'banner', 'child') :
-            $meth eq 'destroy' || $meth eq 'hide' ?
+            member($meth, qw(destroy hide)) ?
 	      ($w->{pop_it} ? 'real_window' : ('child', 'banner')) :
             $meth eq 'get' && $args[0] eq 'window-position' ||
 	    $for_real_window{$meth} ||
