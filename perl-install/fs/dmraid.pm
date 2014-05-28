@@ -67,6 +67,7 @@ sub _raid_devices_raw() {
 	    { $2 => $1 }
         }
     } call_dmraid(qw(-d -s -c -c));
+
     map {
 	chomp;
 	log::l("got: $_");
