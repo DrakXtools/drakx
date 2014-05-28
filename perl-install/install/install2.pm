@@ -6,6 +6,12 @@ use vars qw($o);
 
 BEGIN { $::isInstall = 1 }
 
+=head1 SYNOPSYS
+
+The installer stage2 real entry point
+
+=cut
+
 #-######################################################################################
 #- misc imports
 #-######################################################################################
@@ -29,10 +35,26 @@ use fs::any;
 use fs::mount;
 
 #-#######################################################################################
-#-$O
-#-the big struct which contain, well everything (globals + the interactive methods ...)
-#-if you want to do a kickstart file, you just have to add all the required fields (see for example
-#-the variable $default)
+=head1 Data Structure
+
+=head2 $O;
+
+$o (or $::o in other modules) is the big struct which contain, well everything:
+
+=over 4
+
+=item * globals
+
+=item * the interactive methods
+
+=item * ...
+
+=back
+
+if you want to do a kickstart file, you just have to add all the required fields (see for example
+the variable $default)
+
+=cut
 #-#######################################################################################
 $o = $::o = {
 #    bootloader => { linear => 0, message => 1, timeout => 5, restricted => 0 },
@@ -76,21 +98,40 @@ $o = $::o = {
 
 };
 
+=head1 Steps Navigation
+
+=over
+
+=cut
 
 sub installStepsCall {
     my ($o, $auto, $fun, @args) = @_;
     $fun = "install::steps::$fun" if $auto;
     $o->$fun(@args);
 }
+
+=item getNextStep($o)
+
+Returns next step
+
+=cut
+
 sub getNextStep {
     my ($o) = @_;
     find { !$o->{steps}{$_}{done} && $o->{steps}{$_}{reachable} } @{$o->{orderedSteps}};
 }
 
 #-######################################################################################
-#- Steps Functions
-#- each step function are called with two arguments : clicked(because if you are a
-#- beginner you can force the the step) and the entered number
+
+=back
+
+=head1 Steps Functions
+
+Each step function are called with two arguments : clicked(because if you are a
+beginner you can force the the step) and the entered number
+
+=cut
+
 #-######################################################################################
 
 #------------------------------------------------------------------------------
@@ -289,6 +330,54 @@ sub exitInstall {
     installStepsCall($o, $auto, 'exitInstall', getNextStep($::o) eq 'exitInstall');
 }
 
+#-######################################################################################
+
+=head1 Udev Functions
+
+=over
+
+=cut
+
+#-######################################################################################
+
+=item start_udev()
+
+=cut
+
+sub start_udev() {
+    return if fuzzy_pidofs('udevd');
+
+    # Start up udev:
+    mkdir_p("/run/udev/rules.d");
+    $ENV{UDEVRULESD} = "/run/udev/rules.d";
+    run_program::run("/usr/lib/systemd/systemd-udevd", "--daemon", "--resolve-names=never");
+    # Coldplug all devices:
+    run_program::run("udevadm", "trigger", "--type=subsystems", "--action=add");
+    run_program::run("udevadm", "trigger", "--type=devices", "--action=add");
+}
+
+=item stop_udev()
+
+=cut
+
+sub stop_udev() {
+    kill 15, fuzzy_pidofs('udevd');
+    sleep(2);
+    fs::mount::umount($_) foreach '/dev/pts', '/dev/shm';
+}
+
+#-######################################################################################
+
+=back
+
+=head1 Other Functions
+
+=over
+
+=cut
+
+#-######################################################################################
+
 sub init_local_install {
     my ($o) = @_;
     push @::auto_steps, 
@@ -386,6 +475,12 @@ sub sig_segv_handler() {
     install::steps_auto_install_non_interactive::errorInStep($o, $msg);
 }
 
+=item read_stage1_net_conf() {
+
+Reads back netork configuration done by stage1 (see L<stages>).
+
+=cut
+
 sub read_stage1_net_conf() {
     require network::network;
     #- get stage1 network configuration if any.
@@ -413,6 +508,12 @@ sub read_stage1_net_conf() {
         $o->{net}{net_interface} = first(values %{$o->{net}{ifcfg}});
     }
 }
+
+=item parse_args($cfg, $patch)
+
+Parse arguments (which came from either the boot loader command line or its configuration file).
+
+=cut
 
 sub parse_args {
     my ($cfg, $patch);
@@ -541,6 +642,22 @@ sub process_auto_steps() {
     }
 }
 
+=item process_patch($cfg, $patch)
+
+Handle installer live patches:
+
+=over 4
+
+=item * OEM patch (C<install/patch-oem.pl>)
+
+=item * defcfg (the file indicated by the defcfg option)
+
+=item * patch (C<patch> file)
+
+=back
+
+=cut
+
 sub process_patch {
     my ($cfg, $patch) = @_;
     #- oem patch should be read before to still allow patch or defcfg.
@@ -551,7 +668,20 @@ sub process_patch {
 }
 
 #-######################################################################################
-#- MAIN
+
+=item main()
+
+This is the main function, the installer entry point called by runinstall2:
+
+=over 4
+
+=item * initialization
+
+=item * steps
+
+=back
+
+=cut
 #-######################################################################################
 sub main {
     $SIG{SEGV} = \&sig_segv_handler;
@@ -656,8 +786,13 @@ sub main {
     finish_install();
 }
 
+=item real_main() {
+
+Go through the steps cycle
+
+=cut
+
 sub real_main() {
-    #-the main cycle
     MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep($o)) {
 	$o->{steps}{$o->{step}}{entered}++;
 	$o->enteringStep($o->{step});
@@ -688,6 +823,12 @@ sub real_main() {
     }
 }
 
+=item finish_install() {
+
+Clean up the installer before the final reboot.
+
+=cut
+
 sub finish_install() {
     unlink $install::any::compressed_image_on_disk;
     install::media::clean_postinstall_rpms();
@@ -717,5 +858,9 @@ sub finish_install() {
     log::l("files still open by install2: ", readlink($_)) foreach glob_("/proc/self/fd/*");
     print "\n" x 80 if !$::local_install;
 }
+
+=back
+
+=cut
 
 1;
