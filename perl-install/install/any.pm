@@ -23,7 +23,23 @@ use lang;
 use any;
 use log;
 
+=head1 SYNOPSYS
+
+Misc installer specific functions
+
+=head1 Functions
+
+=over
+
+=cut
+
 our @advertising_images;
+
+=item drakx_version($o)
+
+Returns DrakX version as stored in C<install/stage2/VERSION> file
+
+=cut
 
 sub drakx_version { 
     my ($o) = @_;
@@ -39,10 +55,22 @@ sub dont_run_directly_stage2() {
     readlink("/usr/bin/runinstall2") eq "runinstall2.sh";
 }
 
+=item is_network_install($o)
+
+Is it a network install?
+
+=cut
+
 sub is_network_install {
     my ($o) = @_;
     member($o->{method}, qw(ftp http nfs));
 }
+
+=item spawnShell()
+
+Starts a shell on tty2
+
+=cut
 
 sub spawnShell() {
     return if $::local_install || $::testing;
@@ -84,6 +112,12 @@ cant_spawn:
     c::_exit(1);
 }
 
+=item getAvailableSpace($o)
+
+Returns available space
+
+=cut
+
 sub getAvailableSpace {
     my ($o) = @_;
     fs::any::getAvailableSpace($o->{fstab});
@@ -102,6 +136,12 @@ sub preConfigureTimezone {
     my $ntp = timezone::ntp_server();
     add2hash_($o->{timezone}, { UTC => $utc, ntp => $ntp });
 }
+
+=item ask_suppl_media_method($o)
+
+Enables to add supplementary media
+
+=cut
 
 sub ask_suppl_media_method {
     my ($o) = @_;
@@ -171,6 +211,12 @@ sub prep_net_suppl_media {
     sleep(3);
 }
 
+=item ask_url($in, $o_url)
+
+Asks URL of the mirror
+
+=cut
+
 sub ask_url {
     my ($in, $o_url) = @_;
 
@@ -186,6 +232,13 @@ sub ask_url {
 	      }
 	  } } ]) && $url;
 }
+
+=item ask_mirror($o, $type, $o_url)
+
+Retrieves list of mirrors and offers to pick one
+
+=cut
+
 sub ask_mirror {
     my ($o, $type, $o_url) = @_;
     
@@ -255,6 +308,14 @@ sub ask_suppl_media_url {
 	"nfs://$host$dir";
     } else { internal_error("bad method $method") }
 }
+
+
+=item selectSupplMedia($o)
+
+Offers to add a supplementary media. If yes, ask which mirror to use, ...
+
+=cut
+
 sub selectSupplMedia {
     my ($o) = @_;
     my $url;
@@ -309,6 +370,15 @@ sub selectSupplMedia {
     goto ask_url;
 }
 
+=item load_rate_files($o)
+
+Loads the package rates file (C<rpmsrate>) as well as the C<compssUsers.pl>
+file which contains the package groups GUI.
+
+Both files came from the C<meta-task> package.
+
+=cut
+
 sub load_rate_files {
     my ($o) = @_;
     #- must be done after getProvides
@@ -345,6 +415,12 @@ sub is_firmware_needed_ {
     @need || @xpkgs || $need_microcode;
 }
 
+=item is_firmware_needed($o)
+
+Is a firmware needed by some HW?
+
+=cut
+
 sub is_firmware_needed {
     my ($o) = @_;
     state $res;
@@ -361,6 +437,26 @@ sub msg_if_firmware_needed {
          N("You should enable \"%s\"", _nonfree_medium()),
      );
 }
+
+=item enable_nonfree_media($medium)
+
+Enable a disabled Nonfree medium.
+
+=cut
+
+sub enable_nonfree_media {
+    my ($medium) = @_;
+    return if $medium->{name} !~ /Nonfree/ || !$medium->{ignore};
+    log::l("preselecting $medium->{name}");
+    $medium->{temp_enabled} = 1;
+}
+
+=item media_screen($o)
+
+Lists available media with their status (enabled/disabled).
+Suggests to enable Nonfree media if needed.
+
+=cut
 
 sub media_screen {
     my ($o) = @_;
@@ -421,6 +517,28 @@ sub media_screen {
 			      callback => \&urpm::download::sync_logger
 			     );
 }
+
+=item setPackages($o)
+
+=over 4
+
+=item * Initialize urpmi
+
+=item * Retrieves media.cfg
+
+=item * Offers to add supplementary media (according to the install method)
+
+=item * Offers to enable some disabled media
+
+=item * Ensure we have a kernel and basesystem
+
+=item * Flags package rates
+
+=item * Select default packages according to the computer
+
+=back
+
+=cut
 
 sub setPackages {
     my ($o) = @_;
@@ -508,6 +626,12 @@ sub setPackages {
     }
 }
 
+=item remove_package_for_upgrade($o)
+
+Removes packages that must be uninstalled prior to upgrade
+
+=cut
+
 sub remove_package_for_upgrade {
     my ($o) = @_;
     my $extension = $o->{upgrade_by_removing_pkgs_matching};
@@ -529,6 +653,12 @@ sub remove_package_for_upgrade {
     push @{$o->{default_packages}}, install::pkgs::upgrade_by_removing_pkgs($o->{packages}, $callback, $extension, $o->{isUpgrade});
     log::l("Removing packages took: ", formatTimeRaw(time() - $time));
 }
+
+=item count_files($dir)
+
+Returns the number of files in $dir
+
+=cut
 
 sub count_files {
     my ($dir) = @_;
@@ -655,6 +785,12 @@ sub rpmsrate_always_flags {
 
     $rpmsrate_flags_chosen;
 }
+
+=item default_packages($o)
+
+Selects default packages to install according to configuration (FS, HW, ...)
+
+=cut
 
 sub default_packages {
     my ($o) = @_;
@@ -1542,5 +1678,9 @@ sub configure_pcmcia {
     eval { modules::load($o->{pcmcia}, 'pcmcia') };
     run_program::run("/lib/udev/pcmcia-socket-startup");
 }
+
+=back
+
+=cut
 
 1;
