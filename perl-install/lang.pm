@@ -763,19 +763,29 @@ See above for those 5 parameters.
 =item * B<default_for_lang>: the language codes for which it's the default IM
 =item * B<langs>: 'zh',
 
-=item * B<packages:> a hash ref that contains:
+=item * B<packages:> a hash ref that contains subroutine references:
 
 =over 4
 
 =item * B<generic>: packages that must be installed for all languages
 
-=item * B<common>: packages that are specific to some desktop environments
+=item * B<common>: packages that are shared between per language & generic packages
 
-=item * eventually B<code_langs> pointing to per language packages
+=item * eventually several B<code_lang> returning per language packages
 
 =back
 
 The I<packages> field must be kept in sync with meta-task's C<rpmsrate-raw>, especially for the per language package selection!
+
+The actual packages list will consist of:
+
+=over 4
+
+=item * either per language package list or I<generic> list
+
+=item * plus the packages returned by I<common>
+
+=back
 
 =back
 
