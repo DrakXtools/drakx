@@ -775,7 +775,7 @@ See above for those 5 parameters.
 
 =back
 
-The 'packages' field must be kept in sync with share/rpmsrate, especially for the per language package selection!
+The I<packages> field must be kept in sync with meta-task's C<rpmsrate-raw>, especially for the per language package selection!
 
 =back
 
