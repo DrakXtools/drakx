@@ -7,6 +7,16 @@ use feature 'state';
 use common;
 use log;
 
+=head1 SYNOPSYS
+
+B<mirror> enables to manage Mageia distribution mirrors
+
+=head1 Functions
+
+=over
+
+=cut
+
 my %land2tzs = (
 	     N_("Australia") => [ 'Australia/Sydney' ],
 	     N_("Austria") => [ 'Europe/Vienna', 'Europe/Brussels', 'Europe/Berlin' ],
@@ -42,10 +52,22 @@ my %land2tzs = (
 	     N_("United States") => [ 'America/New_York', 'Canada/Atlantic', 'Asia/Tokyo', 'Australia/Sydney', 'Europe/Paris' ],
 	    );
 
+=item mirror2text($mirror)
+
+Returns a displayable string from a mirror struct
+
+=cut
+
 sub mirror2text {
     my ($mirror) = @_;
     translate($mirror->{country})  . '|' . $mirror->{host} . ($mirror->{method} ? " ($mirror->{method})" : '');
 }
+
+=item register_downloader($func)
+
+Sets a downloader program
+
+=cut
 
 my $downloader;
 sub register_downloader {
@@ -78,6 +100,15 @@ sub _mirrors_raw_standalone {
     @lines;
 }
 
+=item mirrors_raw($product_id)
+
+Returns a list of mirrors hash refs from http://mirrors.mageia.org
+
+Note that in standalone mode, one has to actually use register_downloader()
+first in order to provide a downloader callback.
+
+=cut
+
 sub mirrors_raw {
     my ($product_id) = @_;
 
@@ -89,6 +120,15 @@ sub mirrors_raw {
     my @lines = $::isInstall ? _mirrors_raw_install($list) : _mirrors_raw_standalone($list);
     map { common::parse_LDAP_namespace_structure(chomp_($_)) } @lines;
 }
+
+=item list($product_id, $type)
+
+
+Returns a list of mirrors hash refs as returned by mirrors_raw() but filters it.
+
+One can select the type of mirrors ('distrib', 'updates', ...) or 'all'
+
+=cut
 
 sub list {
     my ($product_id, $type) = @_;
@@ -111,6 +151,12 @@ sub list {
     @mirrors && \@mirrors;
 }
 
+=item nearest($timezone, $mirrors)
+
+Randomly returns one of the nearest mirror
+
+=cut
+
 sub nearest {
     my ($timezone, $mirrors) = @_;
 
@@ -126,5 +172,9 @@ sub nearest {
     my @possible = @l ? ((@{$l[0]}) x 2, @{$l[1] || []}) : @$mirrors;
     $possible[rand @possible];
 }
+
+=back
+
+=cut
 
 1;
