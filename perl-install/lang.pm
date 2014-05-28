@@ -1115,7 +1115,7 @@ my %charset2kde_charset = (
 
 =item l2console_font ($locale, $during_install)
 
-Returns console font name &  console map (none if utf8 and if not during install);
+Returns console font name & console map (none if utf8 and if not during install);
 
 =cut
 
