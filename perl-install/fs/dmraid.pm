@@ -39,11 +39,23 @@ sub init() {
     1;
 }
 
-#- call_dmraid is overloaded when debugging, see the end of this file
+=item call_dmraid($option, @args)
+
+Runs dmraid with $option & @args.
+It is overloaded when debugging, see the end of this file.
+
+=cut
+
 sub call_dmraid {
     my ($option, @args) = @_;
     run_program::get_stdout('dmraid', $option, @args);
 }
+
+=item check($in)
+
+Ensures dmraid is installed. If yes, calls init().
+
+=cut
 
 sub check {
     my ($in) = @_;
@@ -53,8 +65,13 @@ sub check {
     1;
 }
 
+=item _raid_devices_raw()
+
+Get the real VG names, needed for ddf1, and safer than begins_with for raid10
+
+=cut
+
 sub _raid_devices_raw() {
-    # get the real vg names, needed for ddf1, and safer than begins_with for raid10
     log::l("_raid_devices_raw");
     my %vgs;
     my %pv2vg = map {
@@ -123,6 +140,12 @@ sub _sets() {
     }
     @sets;
 }
+
+=item vgs()
+
+Returns the list of VGs corresponding to dmraid
+
+=cut
 
 sub vgs() {
     map {
