@@ -283,7 +283,7 @@ sub ask_mirror {
 sub ask_suppl_media_url {
     my ($o, $method, $o_url) = @_;
 
-    if (member($method, qw(ftp http)) {
+    if (member($method, qw(ftp http))) {
 	install::any::ask_mirror($o, 'distrib', $o_url);
     } elsif ($method eq 'cdrom') {
 	'cdrom://';
