@@ -64,7 +64,7 @@ install_pms:
 	cd .. ; for i in $(PMS); do \
 		dest=$(DESTDIR)$(DESTREP4PMS)/`dirname $$i`; \
 		install -d $$dest; \
-		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=(back|begin|head|item)/ .. /^=cut/) || /use (diagnostics|strict|vars|warnings)/' $$i > $(DESTDIR)$(DESTREP4PMS)/$$i; \
+		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=(back|begin|head|item|over|pod)/ .. /^=cut/) || /use (diagnostics|strict|vars|warnings)/' $$i > $(DESTDIR)$(DESTREP4PMS)/$$i; \
 	done
 
 	cp ../share/*.css $(DESTDIR)$(DESTREP4PMS)
