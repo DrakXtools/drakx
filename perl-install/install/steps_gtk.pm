@@ -88,7 +88,7 @@ sub _setup_and_start_X {
 
     foreach (@servers) {
         log::l("Trying with server $_");
-        my ($prog, $Driver) = /Driver:(.*)/ ? ('Xorg', $1) : /Xnest|Xephyr|^X_move$/ ? $_ : "XF86_$_";
+        my ($prog, $Driver) = /Driver:(.*)/ ? ('Xorg', $1) : /Xnest|Xephyr|^X_move$/ ? $_ : '';
         if (/FB/i) {
             !$o->{vga16} && $o->{allowFB} or next;
 
