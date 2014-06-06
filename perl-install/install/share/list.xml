@@ -65,6 +65,25 @@
   </if>
 </from>
 
+<!-- when adding udev rules, think whether they're needed in rescue too
+     (../../../rescue/list.xml) -->
+<from dir="/lib/udev/rules.d">
+  10-dm.rules
+  11-dm-lvm.rules
+  13-dm-disk.rules
+  50-udev-default.rules <!-- needed for input in X11 -->
+  60-keyboard.rules
+  60-persistent-input.rules
+  60-persistent-storage.rules
+  61-x11-input.rules
+  63-md-raid-arrays.rules
+  64-md-raid-assembly.rules
+  65-libwacom.rules
+  69-xorg-vmmouse.rules
+  75-net-description.rules
+  80-net-name-slot.rules
+  95-dm-notify.rules
+</from>
 
 <from dir="/usr/LIB/girepository-1.0">
   Atk-1.0.typelib
@@ -118,14 +137,9 @@
   keycodes/xfree86
   rules/base
   rules/base.lst
-<<<<<<< HEAD
-  rules/evdev
-  rules/evdev.lst
-=======
   <from expand="glob">
      rules/evdev*
   </from>
->>>>>>> f1b22a3... include XKB rules for evdev
   rules/xorg
   rules/xorg.lst
   compat types
