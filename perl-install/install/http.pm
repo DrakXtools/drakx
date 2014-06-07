@@ -1,4 +1,4 @@
-package install::http; # $Id$
+package install::http;
 
 use urpm::download;
 use common;

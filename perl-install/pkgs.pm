@@ -1,4 +1,4 @@
-package pkgs; # $Id$
+package pkgs;
 
 use strict;
 

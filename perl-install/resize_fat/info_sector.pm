@@ -1,4 +1,4 @@
-package resize_fat::info_sector; # $Id$
+package resize_fat::info_sector;
 
 use diagnostics;
 use strict;

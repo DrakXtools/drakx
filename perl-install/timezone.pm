@@ -1,4 +1,4 @@
-package timezone; # $Id$
+package timezone;
 
 use diagnostics;
 use strict;

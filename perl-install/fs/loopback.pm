@@ -1,4 +1,4 @@
-package fs::loopback; # $Id$
+package fs::loopback;
 
 use diagnostics;
 use strict;

@@ -1,4 +1,4 @@
-package partition_table::sun; # $Id$
+package partition_table::sun;
 
 use diagnostics;
 use strict;

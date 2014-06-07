@@ -1,4 +1,4 @@
-package partition_table::raw; # $Id$
+package partition_table::raw;
 
 use diagnostics;
 use strict;

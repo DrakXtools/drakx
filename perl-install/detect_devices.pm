@@ -1,4 +1,4 @@
-package detect_devices; # $Id$
+package detect_devices;
 
 use diagnostics;
 use strict;

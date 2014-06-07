@@ -1,4 +1,4 @@
-package modules::interactive; # $Id$
+package modules::interactive;
 
 use modules;
 use common;

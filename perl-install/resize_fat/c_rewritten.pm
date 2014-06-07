@@ -1,4 +1,4 @@
-package resize_fat::c_rewritten; # $Id$
+package resize_fat::c_rewritten;
 
 use strict;
 

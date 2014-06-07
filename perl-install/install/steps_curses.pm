@@ -1,4 +1,4 @@
-package install::steps_curses; # $Id$
+package install::steps_curses;
 
 use diagnostics;
 use strict;

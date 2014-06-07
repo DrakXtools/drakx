@@ -1,4 +1,4 @@
-package diskdrake::hd_gtk; # $Id$
+package diskdrake::hd_gtk;
 
 use diagnostics;
 use strict;

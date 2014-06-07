@@ -1,4 +1,4 @@
-package fs::wild_device; # $Id$
+package fs::wild_device;
 
 use diagnostics;
 use strict;

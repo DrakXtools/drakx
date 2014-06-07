@@ -1,4 +1,4 @@
-package do_pkgs; # $Id$
+package do_pkgs;
 
 =head1 SYNOPSYS
 

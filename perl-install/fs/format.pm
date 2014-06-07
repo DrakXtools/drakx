@@ -1,4 +1,4 @@
-package fs::format; # $Id$
+package fs::format;
 
 use diagnostics;
 use strict;

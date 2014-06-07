@@ -1,4 +1,4 @@
-package partition_table::dmcrypt; # $Id: $
+package partition_table::dmcrypt;
 
 # dmcrypt on full disk
 

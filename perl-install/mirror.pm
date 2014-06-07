@@ -1,4 +1,4 @@
-package mirror; # $Id$
+package mirror;
 
 use diagnostics;
 use strict;

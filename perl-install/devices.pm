@@ -1,4 +1,4 @@
-package devices; # $Id$
+package devices;
 
 use diagnostics;
 use strict;

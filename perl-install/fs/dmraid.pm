@@ -1,4 +1,4 @@
-package fs::dmraid; # $Id$
+package fs::dmraid;
 
 use diagnostics;
 use strict;

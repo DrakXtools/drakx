@@ -1,4 +1,4 @@
-package interactive::stdio; # $Id$
+package interactive::stdio;
 
 use diagnostics;
 use strict;

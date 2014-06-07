@@ -1,4 +1,4 @@
-package diskdrake::interactive; # $Id$
+package diskdrake::interactive;
 
 use diagnostics;
 use strict;

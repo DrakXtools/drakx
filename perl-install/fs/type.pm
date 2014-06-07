@@ -1,4 +1,4 @@
-package fs::type; # $Id$
+package fs::type;
 
 use diagnostics;
 use strict;

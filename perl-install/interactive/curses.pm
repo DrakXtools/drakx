@@ -3,7 +3,7 @@
 # to debug, use something like
 # PERLDB_OPTS=TTY=`tty` LC_ALL=fr_FR.UTF-8 xterm -geometry 80x25 -e sh -c 'DISPLAY= perl -d t.pl'
 
-package interactive::curses; # $Id$
+package interactive::curses;
 
 use diagnostics;
 use strict;

@@ -1,4 +1,4 @@
-package resize_fat::main; # $Id$
+package resize_fat::main;
 
 # This is mainly a perl rewrite of the work of Andrew Clausen (libresize)
 

@@ -1,4 +1,4 @@
-package partition_table::bsd; # $Id$
+package partition_table::bsd;
 
 use diagnostics;
 use strict;

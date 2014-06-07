@@ -1,4 +1,4 @@
-package log; # $Id$
+package log;
 
 use diagnostics;
 use strict;

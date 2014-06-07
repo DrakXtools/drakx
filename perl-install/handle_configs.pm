@@ -1,7 +1,5 @@
 package handle_configs;
 
-# $Id$
-
 use diagnostics;
 use strict;
 

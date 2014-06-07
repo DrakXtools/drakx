@@ -1,4 +1,4 @@
-package security::various; # $Id$
+package security::various;
 
 use diagnostics;
 use strict;

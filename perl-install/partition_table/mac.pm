@@ -1,4 +1,4 @@
-package partition_table::mac; # $Id$
+package partition_table::mac;
 
 use diagnostics;
 #use strict;   - fixed other PPC code to comply, but program bails on empty partition table - sbenedict

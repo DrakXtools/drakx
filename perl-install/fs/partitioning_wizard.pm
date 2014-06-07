@@ -1,4 +1,4 @@
-package fs::partitioning_wizard; # $Id$
+package fs::partitioning_wizard;
 
 use diagnostics;
 use strict;

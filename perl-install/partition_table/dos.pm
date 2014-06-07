@@ -1,4 +1,4 @@
-package partition_table::dos; # $Id$
+package partition_table::dos;
 
 use diagnostics;
 use strict;

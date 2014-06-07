@@ -1,4 +1,4 @@
-package fs::dmcrypt; # $Id: $
+package fs::dmcrypt;
 
 use diagnostics;
 use strict;

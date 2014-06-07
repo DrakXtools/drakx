@@ -1,4 +1,4 @@
-package run_program; # $Id$
+package run_program;
 
 use diagnostics;
 use strict;

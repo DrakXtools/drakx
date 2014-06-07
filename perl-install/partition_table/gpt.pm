@@ -1,4 +1,4 @@
-package partition_table::gpt; # $Id$
+package partition_table::gpt;
 
 use diagnostics;
 use strict;

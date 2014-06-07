@@ -2,9 +2,7 @@
  #
  #    mdk-stage1 - the program that will load second-stage install
  #
- # $Id$
- #
- # Pixel (pixel@mandriva.com) (mostly done by Guillaume Cottenceau)
+ # Pixel (pixel) (mostly done by Guillaume Cottenceau)
  #
  # Copyright 2000-2004 Mandriva
  #

@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 
 # DrakBoot
-# $Id: display_release_notes 242795 2008-05-29 15:38:07Z tv $
 # Copyright (C) 2009 Mandriva
 # Thierry Vignaud
 #

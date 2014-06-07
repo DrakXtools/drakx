@@ -1,4 +1,4 @@
-package fs::any; # $Id$
+package fs::any;
 
 use diagnostics;
 use strict;

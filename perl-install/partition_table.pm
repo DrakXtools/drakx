@@ -1,4 +1,4 @@
-package partition_table; # $Id$
+package partition_table;
 
 use diagnostics;
 use strict;

@@ -1,4 +1,4 @@
-package diskdrake::smbnfs_gtk; # $Id$
+package diskdrake::smbnfs_gtk;
 
 use diagnostics;
 use strict;

@@ -1,4 +1,4 @@
-package install::steps_auto_install; # $Id$
+package install::steps_auto_install;
 
 use diagnostics;
 use strict;

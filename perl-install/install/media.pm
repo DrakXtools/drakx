@@ -1,4 +1,4 @@
-package install::media; # $Id$
+package install::media;
 
 use strict;
 

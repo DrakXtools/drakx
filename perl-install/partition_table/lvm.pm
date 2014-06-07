@@ -1,4 +1,4 @@
-package partition_table::lvm; # $Id: $
+package partition_table::lvm;
 
 # LVM on full disk
 

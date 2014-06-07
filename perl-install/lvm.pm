@@ -1,4 +1,4 @@
-package lvm; # $Id$
+package lvm;
 
 use diagnostics;
 use strict;

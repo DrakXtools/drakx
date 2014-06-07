@@ -1,4 +1,4 @@
-package install::steps_interactive; # $Id$
+package install::steps_interactive;
 
 
 use strict;

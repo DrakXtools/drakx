@@ -1,4 +1,4 @@
-package raid; # $Id$
+package raid;
 
 use diagnostics;
 use strict;

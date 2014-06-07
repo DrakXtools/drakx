@@ -1,4 +1,4 @@
-package fs::remote; # $Id$
+package fs::remote;
 
 use strict;
 use diagnostics;

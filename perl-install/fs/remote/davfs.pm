@@ -1,4 +1,4 @@
-package fs::remote::davfs; # $Id: smb.pm 231184 2007-10-24 14:36:29Z pixel $
+package fs::remote::davfs;
 
 use strict;
 use diagnostics;

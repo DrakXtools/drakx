@@ -1,5 +1,4 @@
 package scanner;
-# scanner.pm $Id$
 # Yves Duret <yduret at mandriva.com>
 # Till Kamppeter <till at mandriva.com>
 # Copyright (C) 2001-2008 Mandriva

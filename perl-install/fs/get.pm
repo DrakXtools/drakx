@@ -1,4 +1,4 @@
-package fs::get; # $Id$
+package fs::get;
 
 use diagnostics;
 use strict;

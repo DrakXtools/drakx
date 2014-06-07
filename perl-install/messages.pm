@@ -1,4 +1,4 @@
-package messages; # $Id$
+package messages;
 
 use diagnostics;
 use strict;

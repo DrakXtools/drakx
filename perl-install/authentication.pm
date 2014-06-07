@@ -1,4 +1,4 @@
-package authentication; # $Id$
+package authentication;
 
 use common;
 

@@ -1,4 +1,4 @@
-package install::pkgs; # $Id$
+package install::pkgs;
 
 use strict;
 use feature 'state';

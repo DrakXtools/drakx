@@ -1,4 +1,4 @@
-package partition_table::empty; # $Id$
+package partition_table::empty;
 
 #- this is a mainly dummy partition table. If we find it's empty, we just call -
 #- ->clear which will take care of bless'ing us to the partition table type best

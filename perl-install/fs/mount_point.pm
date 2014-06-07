@@ -1,4 +1,4 @@
-package fs::mount_point; # $Id$
+package fs::mount_point;
 
 use diagnostics;
 use strict;

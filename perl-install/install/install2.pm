@@ -1,4 +1,4 @@
-package install::install2; # $Id$
+package install::install2;
 
 use diagnostics;
 use strict;

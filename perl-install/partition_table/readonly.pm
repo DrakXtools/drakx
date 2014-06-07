@@ -1,4 +1,4 @@
-package partition_table::readonly; # $Id: $
+package partition_table::readonly;
 
 use diagnostics;
 use strict;

@@ -1,4 +1,4 @@
-package install::gtk; # $Id$
+package install::gtk;
 
 use diagnostics;
 use strict;

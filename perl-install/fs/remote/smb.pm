@@ -1,4 +1,4 @@
-package fs::remote::smb; # $Id$
+package fs::remote::smb;
 
 use strict;
 use diagnostics;

@@ -1,5 +1,4 @@
 package wizards;
-# $Id$
 
 use strict;
 use c;

@@ -1,4 +1,4 @@
-package install::ftp; # $Id$
+package install::ftp;
 
 use Net::FTP;
 

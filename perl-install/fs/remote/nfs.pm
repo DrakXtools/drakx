@@ -1,4 +1,4 @@
-package fs::remote::nfs; # $Id$
+package fs::remote::nfs;
 
 use strict;
 use diagnostics;

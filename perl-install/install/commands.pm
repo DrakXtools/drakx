@@ -1,4 +1,4 @@
-package install::commands; # $Id$
+package install::commands;
 
 #-########################################################################
 #- This file implements a few shell commands...

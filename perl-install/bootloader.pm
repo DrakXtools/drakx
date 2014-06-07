@@ -1,4 +1,4 @@
-package bootloader; # $Id$
+package bootloader;
 
 use diagnostics;
 use strict;

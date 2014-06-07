@@ -1,4 +1,4 @@
-package fs::mount_options; # $Id$
+package fs::mount_options;
 
 use diagnostics;
 use strict;

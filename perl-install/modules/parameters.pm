@@ -1,4 +1,4 @@
-package modules::parameters; # $Id$
+package modules::parameters;
 
 use diagnostics;
 use strict;

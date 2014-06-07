@@ -1,4 +1,4 @@
-package install::steps_gtk; # $Id$
+package install::steps_gtk;
 
 use diagnostics;
 use strict;

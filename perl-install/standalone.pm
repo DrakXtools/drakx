@@ -1,4 +1,4 @@
-package standalone; # $Id$
+package standalone;
 
 use c;
 use strict;

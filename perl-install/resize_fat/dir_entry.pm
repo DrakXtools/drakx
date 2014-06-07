@@ -1,4 +1,4 @@
-package resize_fat::dir_entry; # $Id$
+package resize_fat::dir_entry;
 
 use diagnostics;
 use strict;

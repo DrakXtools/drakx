@@ -1,4 +1,4 @@
-package fs::proc_partitions; # $Id$
+package fs::proc_partitions;
 
 use common;
 
