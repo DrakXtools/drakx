@@ -249,8 +249,6 @@ sub special_shortcuts {
 sub createXconf {
     my ($file, $Driver) = @_;
 
-    symlinkf(devices::make($mouse_dev), "/dev/mouse") if $mouse_dev ne 'none';
-
     #- remove "error opening security policy file" warning
     symlink("/tmp/stage2/etc/X11", "/etc/X11");
 
