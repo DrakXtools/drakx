@@ -37,141 +37,19 @@
 /* WARNING: this won't work if the argument is not /dev/ based */
 int ensure_dev_exists(const char * dev)
 {
-	int major, minor;
-	int type = S_IFBLK; /* my default type is block. don't forget to change for chars */
-	const char * name;
 	struct stat buf;
-	const char * ptr;
-	
-	name = &dev[5]; /* we really need that dev be passed as /dev/something.. */
 
 	if (!stat(dev, &buf))
 		return 0; /* if the file already exists, we assume it's correct */
 
-	if (ptr_begins_static_str(name, "sd")) {
-		/* SCSI disks */
-		major = 8;
-		minor = (name[2] - 'a') << 4;
-		if (name[3] && name[4]) {
-			minor += 10 + (name[4] - '0');
-			if (name[3] > 1 || name[4] > 5) {
-				log_message("I don't know how to create device %s, please post bugreport to me!", dev);
-				return -1;
-			}
-		} else if (name[3])
-			minor += (name[3] - '0');
-	} else if (ptr_begins_static_str(name, "vd")) {
-		/* Virtual disks */
-		major = 252;
-		minor = (name[2] - 'a') << 4;
-		if (name[3] && name[4]) {
-			minor += 10 + (name[4] - '0');
-			if (name[3] > 1 || name[4] > 5) {
-				log_message("I don't know how to create device %s, please post bugreport to me!", dev);
-				return -1;
-			}
-		} else if (name[3])
-			minor += (name[3] - '0');
-	} else if (ptr_begins_static_str(name, "xvd")) {
-		/* Virtual disks */
-		major = 202;
-		minor = (name[2] - 'a') << 4;
-		if (name[4] && name[5]) {
-			minor += 10 + (name[5] - '0');
-			if (name[4] > 1 || name[5] > 5) {
-				log_message("I don't know how to create device %s, please post bugreport to me!", dev);
-				return -1;
-			}
-		} else if (name[4])
-			minor += (name[4] - '0');
-	} else if (ptr_begins_static_str(name, "hd")) {
-		/* IDE disks/cd's */
-		if (name[2] == 'a')
-			major = 3, minor = 0;
-		else if (name[2] == 'b')
-			major = 3, minor = 64;
-		else if (name[2] == 'c')
-			major = 22, minor = 0;
-		else if (name[2] == 'd')
-			major = 22, minor = 64;
-		else if (name[2] == 'e')
-			major = 33, minor = 0;
-		else if (name[2] == 'f')
-			major = 33, minor = 64;
-		else if (name[2] == 'g')
-			major = 34, minor = 0;
-		else if (name[2] == 'h')
-			major = 34, minor = 64;
-		else if (name[2] == 'i')
-			major = 56, minor = 0;
-		else if (name[2] == 'j')
-			major = 56, minor = 64;
-		else if (name[2] == 'k')
-			major = 57, minor = 0;
-		else if (name[2] == 'l')
-			major = 57, minor = 64;
-		else if (name[2] == 'm')
-			major = 88, minor = 0;
-		else if (name[2] == 'n')
-			major = 88, minor = 64;
-		else if (name[2] == 'o')
-			major = 89, minor = 0;
-		else if (name[2] == 'p')
-			major = 89, minor = 64;
-		else if (name[2] == 'q')
-			major = 90, minor = 0;
-		else if (name[2] == 'r')
-			major = 90, minor = 64;
-		else if (name[2] == 's')
-			major = 91, minor = 0;
-		else if (name[2] == 't')
-			major = 91, minor = 64;
-		else
-			return -1;
-		
-		if (name[3] && name[4])
-			minor += 10 + (name[4] - '0');
-		else if (name[3])
-			minor += (name[3] - '0');
-	} else if (ptr_begins_static_str(name , "sr")) {
-		/* SCSI cd's */
-		major = 11;
-		minor = name[2] - '0';
-	} else if (ptr_begins_static_str(name, "ida/") ||
-		   ptr_begins_static_str(name, "cciss/")) {
-		/* Compaq Smart Array "ida/c0d0{p1}" */
-		ptr = strchr(name, '/');
-		mkdir("/dev/ida", 0755);
-		mkdir("/dev/cciss", 0755);
-		major = ptr_begins_static_str(name, "ida/") ? 72 : 104 + charstar_to_int(ptr+2);
-		ptr = strchr(ptr, 'd');
-		minor = 16 * charstar_to_int(ptr+1);
-		ptr = strchr(ptr, 'p');
-		minor += charstar_to_int(ptr+1);
-	} else if (ptr_begins_static_str(name, "rd/")) {
-		/* DAC960 "rd/cXdXXpX" */
-		mkdir("/dev/rd", 0755);
-		major = 48 + charstar_to_int(name+4);
-		ptr = strchr(name+4, 'd');
-		minor = 8 * charstar_to_int(ptr+1);
-		ptr = strchr(ptr, 'p');
-		minor += charstar_to_int(ptr+1);
-	} else if (ptr_begins_static_str(name, "loop")) {
-		major = 7;
-		minor = name[4] - '0';
-	} else if (ptr_begins_static_str(name, "chloop")) {
-		major = 100;
-		minor = name[6] - '0';
-	} else {
+	// give udev some time to create nodes if module was just insmoded:
+	system("udevadm settle");
+
+	if (!stat(dev, &buf)) {
 		log_message("I don't know how to create device %s, please post bugreport to me!", dev);
 		return -1;
 	}
 
-	if (mknod(dev, type | 0600, makedev(major, minor))) {
-		log_perror(dev);
-		return -1;
-	}
-	
 	return 0;
 }
 

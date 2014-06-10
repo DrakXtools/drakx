@@ -776,7 +776,7 @@ void find_media(enum media_bus bus)
                                                                 mkdir(name, 0755);
                                                         *ptr = '/';
                                                 }							
-                                                if (stat(name, &statbuf) && mknod(name, S_IFBLK | 0600, makedev(major, minor))) {
+                                                if (stat(name, &statbuf)) {
                                                         log_perror(name);
                                                 }
                                         }
