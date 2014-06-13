@@ -1,49 +1,9 @@
 <list no-arch-libraries="on">
 
 <from expand="binary">
-  ash dash.static echo
-  aria2c cp curl md5sum <!-- needed by urpmi -->
-  cpio gzip bzip2
-    fdisk
-  insmod modinfo rmmod modprobe lsmod
-  losetup
-  lvm2 mdadm mdmon
-  mount mount.nfs umount
-  xz
-
-  udevadm <!-- needed by mouse::detect & stage2 -->
-
-  badblocks
-  mkswap swaplabel
-  mkfs.ext2 mkfs.ext3 mkfs.ext4 e2fsck tune2fs dumpe2fs resize2fs
-
-  mkfs.reiserfs resize_reiserfs reiserfstune
-  mkfs.xfs xfs_admin
-  xfs_freeze xfs_io <!-- needed for setup grub on XFS formated / -->
-
-  mkfs.btrfs btrfs btrfsck fsck.btrfs
-  mkfs.nilfs2 nilfs-tune
-
-  tty stty <!-- needed for text mode installer (through unicode_start) -->
+  aria2c curl <!-- needed by urpmi -->
   vmmouse_detect
 
-
-  <if ARCH="i.86|x86_64">
-    mkdosfs
-    dosfslabel
-    mlabel
-    mkntfs
-    ntfsresize
-    ntfslabel
-    dmraid
-  </if>
-  <if ARCH="i.86|x86_64">
-    mkfs.jfs fsck.jfs jfs_tune
-  </if>
-  quotacheck
-  cryptsetup dmsetup
-
-  setfont kbd_mode
   <mode copy="dereference">
     Xorg
   </mode>
@@ -63,28 +23,15 @@
   </if>
 
   <if set="DEBUG_INSTALL">
-    strace bash less ps top gdb
+    bash gdb
   </if>
 </from>
 
 <!-- when adding udev rules, think whether they're needed in rescue too
      (../../../rescue/list.xml) -->
 <from dir="/lib/udev/rules.d">
-  10-dm.rules
-  11-dm-lvm.rules
-  13-dm-disk.rules
-  50-udev-default.rules <!-- needed for input in X11 -->
-  60-keyboard.rules
-  60-persistent-input.rules
-  60-persistent-storage.rules
-  61-x11-input.rules
-  63-md-raid-arrays.rules
-  64-md-raid-assembly.rules
-  65-libwacom.rules
+  69-libwacom.rules
   69-xorg-vmmouse.rules
-  75-net-description.rules
-  80-net-name-slot.rules
-  95-dm-notify.rules
 </from>
 
 <from dir="/usr/LIB/girepository-1.0">
@@ -316,15 +263,6 @@
     perl -Mlang -I.. -le 'print foreach lang::console_font_files()'
   </from>
 </from>
-
-<from dir="/usr/share/ldetect-lst">
-  dkms-modules.alias fallback-modules.alias
-  <filter command="gunzip">
-    dmitable.gz  
-  </filter>
-  Cards+ MonitorsDB isdn.db
-</from>
-
 
 <from dir="/usr/LIB/pango/*/modules">
   pango-arabic-lang.so
