@@ -64,7 +64,7 @@
 
 
   <mode copy="system">
-    ntfs-3g mount.ntfs-3g
+    ntfs-3g mount.ntfs-3g mount.ntfs
 
     dropbearmulti
     pppd
@@ -79,7 +79,7 @@
     blkid
     dmeventd
     dmsetup lvm2
-    udevadm
+    udevadm <!-- needed by mouse::detect & stage2 -->
 
     mke2fs mkfs.ext2 mkfs.ext3 mkfs.ext4
     e2fsck fsck.ext2 fsck.ext3 fsck.ext4
@@ -108,6 +108,7 @@
   cryptsetup
   ddrescue
 
+  setfont kbd_mode
   <if ARCH="ppc">
     hformat
   </if>
@@ -374,17 +375,20 @@
   60-keyboard.rules
   60-persistent-input.rules
   60-persistent-storage.rules
-  61-x11-input.rules
   63-md-raid-arrays.rules
   64-md-raid-assembly.rules
   65-md-incremental.rules
   75-net-description.rules
-  65-libwacom.rules
+  80-net-name-slot.rules
   95-dm-notify.rules
 </from>
 
-<from dir="/lib/module-init-tools">
-  ldetect-lst-modules.alias
+<from dir="/usr/share/ldetect-lst">
+  dkms-modules.alias fallback-modules.alias
+  <filter command="gunzip">
+    dmitable.gz  
+  </filter>
+  Cards+ MonitorsDB isdn.db
 </from>
 
 <mode copy="dereference">
@@ -432,7 +436,6 @@
 <if set="RESCUE_FLASH">
   <from expand="binary">
     dirname
-    losetup
     mlabel
     nash
     pv
