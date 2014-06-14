@@ -871,7 +871,7 @@ mostly log files (very useful if you ever report a bug!).
 Beware that some %s tools rely on the contents of some
 of these files... so remove any file from here at your own
 risk!
-", "Moondrake GNU/Linux"};
+", "Moondrake GNU/Linux") };
     #- wait for remaining processes.
     foreach (@{$o->{waitpids}}) {
 	waitpid $_, 0;
