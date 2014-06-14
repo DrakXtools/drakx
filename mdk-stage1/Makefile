@@ -13,7 +13,7 @@
  # along with this program; if not, write to the Free Software
  # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-VERSION=2.6
+VERSION=2.7
 PRODUCT = $(FAMILY)-binaries
 
  #
