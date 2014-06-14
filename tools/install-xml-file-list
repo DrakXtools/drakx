@@ -231,6 +231,7 @@ sub install {
     my $to_dir = $DEST . expand_macros($env->{to}{dir} || $env->{to}{flatten} && $from_dir || '');
     my $copy_mode = $env->{mode}{copy} || '';
     my $working_dir = '.';
+    print "from_dir: $from_dir to_dir: $to_dir \n";
 
     if ($env->{from}{dir} eq "/usr/LIB/drakx-installer/binaries" and $ENV{USE_LOCAL_STAGE1}) {
 	$from_dir = "../mdk-stage1";
@@ -245,6 +246,7 @@ sub install {
     my $from_file = sub {
 	my ($rel, $b_full_glob, $b_recursive_dirs) = @_;
 	my $f = expand_macros($from_dir ? "$from_dir/$rel" : $rel);
+	print "rel: $rel b_full_glob: $b_full_glob b_recursive_dirs: $b_recursive_dirs F: $f working_dir: $working_dir\n";
 	my @l = $f;
 	chdir $working_dir;
 	if ($f =~ /\*/ || $b_full_glob) {
@@ -257,6 +259,7 @@ sub install {
 		@l = ();
 	    }
 	} elsif (! -e $f) {
+		system("ls -l $f $rel");
 	    error("missing file $f ($rel) in $working_dir");
 	    @l = ();
 	}
@@ -376,6 +379,7 @@ sub install {
 #	if_($copy_mode ne 'keep-links', '--dereference'),
 	if_($copy_mode eq 'dereference', '--dereference'),
     );
+    print "working_dir: $working_dir to_dir: $to_dir \n";
     if (@all_files) {
 	copy_and_filter($working_dir, $to_dir, \@all_files, $env->{filter}, $env->{to}{flatten}, @options);
     }
