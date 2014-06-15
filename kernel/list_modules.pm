@@ -342,6 +342,7 @@ our %l = (
       qw(crc32c crc32c-intel),
       
       qw(evdev), qw(usblp printer), 'floppy', 'microcode', 'usb_common',
+      qw(acpi_cpufreq processor),
 
       #- these need checking
       qw(rrunner meye),
