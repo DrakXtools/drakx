@@ -19,10 +19,10 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
       if_(arch() !~ /alpha|sparc/,
         qw(3c501 3c503 3c505 3c507 3c509 3c515 3c990 3c990fx),
-        qw(82596 ac3200 acenic aironet4500_card amd8111e at1700 atl2 atp),
+        qw(82596 ac3200 acenic aironet4500_card altera_tse amd8111e at1700 atl2 atp),
         qw(bcm4400 cassini cs89x0 cx82310_eth de600 de620),
-        qw(depca dmfe e2100 eepro eexpress enic eth16i),
-        qw(ewrk3 hp hp-plus hp100 i40e),
+        qw(depca dmfe e2100 ec_bhf eepro eexpress enic eth16i),
+        qw(ewrk3 hp hp-plus hp100 i40e i40evf),
         qw(iph5526), #- fibre channel
         qw(i40evf jme lance ne ni5010 ni52 ni65 nvnet),
         qw(prism2_plx qlge r6040 rcpci rhineget),
@@ -39,13 +39,13 @@ our %l = (
       ),
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
       # add all phys
-      qw(amd at803x bcm87xx broadcom cicada davicom et1011c icplus lxt marvell mdio-bitbang mdio-gpiomicrel),
+      qw(amd at803x bcm7xxx bcm87xx broadcom cicada davicom et1011c icplus lxt marvell mdio-bitbang mdio-gpiomicrel),
       qw(national qsemi r8152 r815x realtek smsc ste10Xp vitesse),
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
       qw(alx atl1 atl1c atl1e at91_ether ax88179_178a be2net bna bnx2 bnx2x cxgb cxgb3 cxgb4 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe),
-      qw(macb mvmdio myri_sbus myri10ge netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io sfc sxg_nic),
+      qw(macb mvmdio myri_sbus myri10ge netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io samsung-sxgbe sfc sxg_nic),
       qw(sis190 sk98lin skge sky2 slicoss spidernet stmmac tehuti tg3 via-velocity vxge yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
     ],
@@ -73,10 +73,10 @@ our %l = (
       qw(mwifiex_usb mwl8k ndiswrapper netwave_cs orinoco orinoco_cs),
       qw(orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd orinoco_usb p54pci),
       qw(p54usb prism2_cs prism2_pci prism2_usb prism54 qmi_wwan r8180),
-      qw(r8187se rtl8188ee r8192_pci r8192s_usb r8192u_usb r8712u rtl8723ae ray_cs rndis_wlan rt2400 rt2400pci rt2500),
+      qw(r8187se rtl8188ee r8192_pci r8192s_usb r8192u_usb r8712u ray_cs rndis_wlan rsi_sdio rt2400 rt2400pci rt2500),
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
-      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se r8188eu rtl_pci rtl_usb rtusb),
-      qw(rtl8192se rtl8192cu rtl8192de rtl8821ae spectrum_cs sr9700 sr9800 ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
+      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se r8188eu r8723au rtl8821ae rtl_pci rtl_usb rtusb),
+      qw(rtl8192se rtl8192cu rtl8192de rtl8723ae rtl8723be rtl8821ae spectrum_cs sr9700 sr9800 ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
       qw(wavelan_cs wcn36xx wl wl3501_cs wvlan_cs zd1201 zd1211rw),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
@@ -96,7 +96,7 @@ our %l = (
     ],
     wan => [ qw(c101 cosa cyclomx cycx_drv dlci dscc4 farsync hdlc hostess_sv11 lapbether lmc n2 pc300 pci200syn sbni sdla sdladrv sealevel syncppp wanxl z85230) ],
     usb_dsl => [ qw(cxacru speedtch ueagle-atm usbatm xusbatm) ],
-    virtual => [ qw(virtio_net xen-netfront) ],
+    virtual => [ qw(vboxdrv virtio_net xen-netfront) ],
   },
 
   ################################################################################
@@ -162,7 +162,7 @@ our %l = (
 	     qw(ums-jumpshot ums-karma ums-onetouch ums-realtek ums-sddr09 ums-sddr55 ums-usbat usb-storage) ],
     firewire => [ qw(sbp2) ],
     cdrom => [ qw(ide-cd_mod sr_mod) ],
-    card_reader => [ qw(sdhci sdhci-pci tifm_sd tifm_7xx1) ],
+    card_reader => [ qw(rts5208 sdhci sdhci-pci tifm_sd tifm_7xx1) ],
   },
 
   ################################################################################
@@ -184,7 +184,7 @@ our %l = (
       if_(arch() !~ /^sparc/, qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket)), # cb_enabler
     ],
     hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-appleir hid-aureal hid-axff hid-belkin
-	    hid-cherry hid-chicony hid-cypress hid-dr hid-drff hid-elecom hid-elo hid-emsff
+	    hid-cherry hid-chicony hid-cp2112 hid-cypress hid-dr hid-drff hid-elecom hid-elo hid-emsff
 	    hid-ezkey hid-gaff hid-generic hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse hid-huion
 	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-lenovo-tpkbd
 	    hid-logitech hid-logitech-dj hid-magicmouse hid-microsoft hid-monterey
