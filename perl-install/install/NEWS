@@ -1,3 +1,14 @@
+- include the following more "generic"'ish xorg drivers that might come in
+  handy if any of the other fails:
+	* modesetting_drv.so
+	* vboxvideo_drv.so
+	* vesa_drv.so
+	* vmware_drv.so
+	* evdev_drv.so
+	* mouse_drv.so
+	* kbd_drv.so
+	* synaptics_drv.so
+	* vmmouse_drv.so
 - only complain about missing /boot/efi on EFI systems
 - recognize new kernel-3.15 drivers
 
