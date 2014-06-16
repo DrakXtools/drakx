@@ -662,7 +662,7 @@ sub process_patch {
     my ($cfg, $patch) = @_;
     #- oem patch should be read before to still allow patch or defcfg.
     eval { $o = $::o = install::any::loadO($o, "install/patch-oem.pl"); log::l("successfully read oem patch") };
-    #- patch should be read after defcfg in order to take precedance.
+    #- patch should be read after defcfg in order to take precedence.
     eval { $o = $::o = install::any::loadO($o, $cfg); log::l("successfully read default configuration: $cfg") } if $cfg;
     eval { $o = $::o = install::any::loadO($o, "patch"); log::l("successfully read patch") } if $patch;
 }
