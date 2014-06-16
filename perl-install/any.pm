@@ -259,13 +259,13 @@ sub setupBootloaderUntilInstalled {
 	my ($in, $b, $all_hds, $fstab, $security) = @_;
 	do {
 		my $before = fs::fstab_to_string($all_hds);
+		setupBootloader($in, $b, $all_hds, $fstab, $security) or $in->exit;
 		if ($before ne fs::fstab_to_string($all_hds)) {
 			#- ovitters: This fstab comparison was needed for optionally
 			#- setting up /tmp using tmpfs. That code was removed. Not removing
 			#- this code as I'm not sure if something still relies on this
 			fs::write_fstab($all_hds);
 		}
-		setupBootloader($in, $b, $all_hds, $fstab, $security) or $in->exit;
 	} while !installBootloader($in, $b, $all_hds);
 }
 
