@@ -28,8 +28,8 @@ use scanner;
 use handle_configs;
 use services;
 
-my $distroname = "Mandriva Linux";
-my $shortdistroname = "Mandriva Linux";
+my $distroname = "Moondrake GNU/Linux";
+my $shortdistroname = "Moondrake GNU/Linux";
 
 foreach (@ARGV) {
     /^--update-usbtable$/ and do { scanner::updateScannerDBfromUsbtable(); exit() };
