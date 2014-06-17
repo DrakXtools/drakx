@@ -44,7 +44,7 @@ Returns DrakX version as stored in C<install/stage2/VERSION> file
 sub drakx_version { 
     my ($o) = @_;
 
-	my $version = cat__(getFile_($o->{stage2_phys_medium}, arch() . "install/stage2/VERSION"));
+	my $version = cat__(getFile_($o->{stage2_phys_medium}, arch() . "/install/stage2/VERSION"));
 	sprintf "DrakX v%s", chomp_($version);
 }
 
