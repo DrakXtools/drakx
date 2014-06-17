@@ -318,7 +318,9 @@ sub get_raw_hds {
     $all_hds->{smbs} = [ grep { $_->{fs_type} eq 'cifs' } @fstab ];
     $all_hds->{davs} = [ grep { $_->{fs_type} eq 'davfs2' } @fstab ];
     $all_hds->{special} = [
-       (grep { $_->{fs_type} eq 'tmpfs' } @fstab),
+       (grep { $_->{fs_type} eq 'tmpfs' or $_->{fs_type} eq 'devtmpfs' or
+	       $_->{fs_type} eq 'sysfs' or $_->{fs_type} eq 'devpts' or
+	       $_->{fs_type} eq 'debugfs'} @fstab),
        { device => 'none', mntpoint => '/proc', fs_type => 'proc' },
     ];
 }
