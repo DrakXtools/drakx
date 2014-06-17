@@ -336,7 +336,7 @@ class Distribution(object):
         if not stage2:
             stage2 = os.path.realpath(config.rootdir) + "/install/stage2/mdkinst.cpio.xz"
 
-        versionFile = os.path.realpath(config.rootdir) + "/grub/VERSION"
+        versionFile = os.path.realpath(config.rootdir) + "/install/stage2/VERSION"
         print color("Copying second stage installer: %s -> %s/install/stage2/mdkinst.cpio.xz" % (stage2, tmpdir), GREEN)
         os.mkdir(tmpdir + "/install/stage2")
         os.symlink(stage2, tmpdir + "/install/stage2/mdkinst.cpio.xz")
