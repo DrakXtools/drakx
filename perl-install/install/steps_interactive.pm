@@ -258,11 +258,6 @@ sub setupSCSI {
     modules::interactive::load_category($o, $o->{modules_conf}, 'disk/card_reader|ide|scsi|hardware_raid|sata|firewire|virtual', 1, !$have_non_scsi);
     modules::interactive::load_category($o, $o->{modules_conf}, 'disk/card_reader|ide|scsi|hardware_raid|sata|firewire|virtual') if !detect_devices::hds(); #- we really want a disk!
 
-    if (-d "/proc/ide") { 
-	my $_w = $o->wait_message(N("IDE"), N("Configuring IDE"));
-	modules::load(modules::category2modules('disk/cdrom'));
-    }
-
     install::interactive::tellAboutProprietaryModules($o);
 
     install::any::getHds($o, $o);
