@@ -65,8 +65,10 @@ sub _setup_and_start_X {
     my $f = "/tmp/Xconf";
 
     #- /tmp is mostly tmpfs, but not fully, since it doesn't allow: mount --bind /tmp/.X11-unix /mnt/tmp/.X11-unix
-    mkdir '/tmp/.X11-unix';
-    run_program::run('mount', '-t', 'tmpfs', 'none', '/tmp/.X11-unix');
+    mkdir '/tmp/.X11-unix' if ! -d '/tmp/.X11-unix';
+    if (!run_program::run('/bin/mountpoint', '-q', '/tmp/.X11-unix')) {
+        run_program::run('mount', '-t', 'tmpfs', 'none', '/tmp/.X11-unix');
+    }
 
 
     my @servers = qw(Driver:fbdev Driver:vesa); #-)

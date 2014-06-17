@@ -1,3 +1,9 @@
+- don't keep on mounting a new /tmp/.X11-unix for each time the graphical
+  installer would be restarted/crash, just check whether it's already mounted
+  first
+- fix an inverted conditional which prevents an updated version of /etc/fstab
+  to be written
+
 Version 16.32 - 17 June 2014
 
 - in stead of installing only one package per transaction, increase it to 20
