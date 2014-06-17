@@ -490,13 +490,10 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     #- make sure some services have been enabled (or a catastrophic restart will occur).
     #- these are normally base package post install scripts or important services to start.
-    foreach my $service (qw(netfs network rsyslog networkmanager)) {
+    foreach my $service (qw(netfs network networkmanager)) {
 	if (-f "$::prefix/lib/systemd/system/$service.service") {
-	    log::l("use systemctl enable $service.service");
-	    run_program::rooted($::prefix, "systemctl", "enable", $service . ".service");
-	} else {
-	    log::l("use chkconfig --add $service");
-	    run_program::rooted($::prefix, "chkconfig", "--add", $service);
+	    log::l("use systemctl preset $service.service");
+	    run_program::rooted($::prefix, "/bin/systemctl", "preset", $service . ".service");
 	}
     }
     log::l("fix hostname");
@@ -513,7 +510,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     if ($o->{mouse}{device} =~ /ttyS/) {
 	log::l("disabling gpm for serial mice (does not get along nicely with X)");
-	run_program::rooted($::prefix, "chkconfig", "--del", "gpm"); 
+	run_program::rooted($::prefix, "/bin/systemctl", "disable", "gpm"); 
     }
 
     if ($o->{pcmcia}) {
@@ -914,8 +911,7 @@ sub upNetwork {
     install::any::is_network_install($o) || $::local_install and return 1;
     $o->{modules_conf}->write;
     if (! -e "/etc/resolv.conf") {
-        #- symlink resolv.conf in install root too so that updates and suppl media can be added
-        symlink "$::prefix/etc/resolv.conf", "/etc/resolv.conf";
+	cp_af("/etc/resolv.conf", "$::prefix/etc/resolv.conf");
     }
     if (hasNetwork($o)) {
 	if (network_is_cheap($o)) {
@@ -925,7 +921,7 @@ sub upNetwork {
 	} elsif (!$b_pppAvoided) {
 	    log::l("starting network (ppp: $o->{net}{type})");
 	    eval { modules::load(qw(serial ppp bsd_comp ppp_deflate)) };
-	    run_program::rooted($::prefix, "/etc/rc.d/init.d/syslog", "start");
+	    run_program::rooted($::prefix, "/bin/systemctl", "start", "systemd-journald");
 	    start_network_interface($o);
 	    return 1;
 	} else {
@@ -947,7 +943,7 @@ sub downNetwork {
 	    return 1;
 	} elsif (!network_is_cheap($o)) {
 	    stop_network_interface($o);
-	    run_program::rooted($::prefix, "/etc/rc.d/init.d/syslog", "stop");
+	    run_program::rooted($::prefix, "/bin/systemctl", "stop", "systemd-journald");
 	    eval { modules::unload(qw(ppp_deflate bsd_comp ppp serial)) };
 	    return 1;
 	}
