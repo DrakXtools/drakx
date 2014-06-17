@@ -530,7 +530,7 @@ Returns the release file name.
 
 sub release_file {
     my ($o_dir) = @_;
-    my @names = ('mandrakelinux-release', 'mandrake-release', 'conectiva-release', 'release', 'redhat-release', 'fedora-release', 'SuSE-release');
+    my @names = ('mandrakelinux-release', 'mandrake-release', 'conectiva-release', 'release', 'redhat-release', 'fedora-release', 'SuSE-release', 'mageia-release', 'distro-release');
     find { -r "$o_dir$_" } (
 	(map { "/root/drakx/$_.upgrading" } @names), 
 	(map { "/etc/$_" } @names),
