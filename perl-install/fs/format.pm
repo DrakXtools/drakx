@@ -41,7 +41,7 @@ my %LABELs = ( #- option, length, handled_by_mount
     ntfs     => [ '-L', 128, 0 ],
    'ntfs-3g' => [ '-L', 128, 0 ],
     btrfs    => [ '-L', 256, 1 ],
-    nilfs2   => [ '-L', 16, 1],
+    nilfs2   => [ '-L', 16, 1 ],
 );
 
 my %edit_LABEL = ( # package, command, option
