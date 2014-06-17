@@ -21,7 +21,7 @@ my (%type_name2pt_type, %type_name2fs_type, %fs_type2pt_type, %pt_type2fs_type, 
 	important => [
   0x82 => 'swap',     'Linux swap',
   0x83 => 'ext2',     'Linux native',
-  0x83 => 'ext3',     'Journalised FS: btrfs',
+  0x83 => 'btrfs',    'Journalised FS: btrfs',
   0x83 => 'ext3',     'Journalised FS: ext3',
   0x83 => 'ext4',     'Journalised FS: ext4',
   0x83 => 'reiserfs', 'Journalised FS: ReiserFS',
