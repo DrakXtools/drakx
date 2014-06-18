@@ -85,8 +85,6 @@ sub entry {
 	$minor = 16 * $3 + ($4 || 0);
     } elsif (my ($prefix, $nb) = /(.*?)(\d+)$/) {	
 	my $f = ${{"fd"          => sub { c::S_IFBLK(), 2,  0  },
-		   "hidbp-mse-"  => sub { c::S_IFCHR(), 10, 32 },
-		   "nst"         => sub { c::S_IFCHR(), 9, 128 },
 		   "ubd/"        => sub { c::S_IFBLK(), 98, 0  },
 	       }}{$prefix};
 	if ($f) {
