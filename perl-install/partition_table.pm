@@ -560,7 +560,7 @@ The only solution is to move your primary partitions to have the hole next to th
 sub add {
     my ($hd, $part, $b_primaryOrExtended, $b_forceNoAdjust) = @_;
 
-    get_normal_parts($hd) >= ($hd->{device} =~ /^rd/ ? 7 : $hd->{device} =~ /^(ida|cciss|ataraid)/ ? 15 : 63) and cdie "maximum number of partitions handled by linux reached";
+    get_normal_parts($hd) >= ($hd->{device} =~ /^rd/ ? 7 : $hd->{device} =~ /^(ida|cciss)/ ? 15 : 63) and cdie "maximum number of partitions handled by linux reached";
 
     set_isFormatted($part, 0);
     put_in_hash($part, hd2minimal_part($hd));

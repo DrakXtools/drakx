@@ -67,7 +67,7 @@ sub get() {
     #- 2. The first SCSI device if SCSI exists. Or
     #- 3. The first RAID device if RAID exists.
 
-    getIDE(), getSCSI(), getMmcBlk(), getXenBlk(), getVirtIO(), getDAC960(), getCompaqSmartArray(), getATARAID();
+    getIDE(), getSCSI(), getMmcBlk(), getXenBlk(), getVirtIO(), getDAC960(), getCompaqSmartArray();
 }
 sub hds()         { grep { may_be_a_hd($_) } get() }
 sub tapes()       { grep { $_->{media_type} eq 'tape' } get() }
@@ -413,16 +413,6 @@ sub getDAC960() {
 	$idi{$device} = { info => $info, media_type => 'hd', device => $device, bus => 'dac960' };
     }
     values %idi;
-}
-
-sub getATARAID() {
-    my %l;
-    foreach (syslog()) {
-	my ($device) = m|^\s*(ataraid/d\d+):| or next;
-	$l{$device} = { info => 'ATARAID block device', media_type => 'hd', device => $device, bus => 'ataraid' };
-	log::l("ATARAID: $device");
-    }
-    values %l;
 }
 
 =item getXenBlk()
