@@ -52,11 +52,6 @@ sub find_compressed_image {
     undef;
 }
 
-sub get_dynamic_major {
-    my ($name) = @_;
-    cat_('/proc/devices') =~ /^(\d+) \Q$name\E$/m && $1;
-}
-
 sub init_device_mapper() {
     require modules;
     eval { modules::load('dm-mod') };
