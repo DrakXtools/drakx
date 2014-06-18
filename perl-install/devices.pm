@@ -96,18 +96,8 @@ sub entry {
     }
     unless ($type) {
 	($type, $major, $minor) =
-	     @{ ${{"aztcd"    => [ c::S_IFBLK(), 29, 0  ],
-		   "bpcd"     => [ c::S_IFBLK(), 41, 0  ],
-		   "cdu31a"   => [ c::S_IFBLK(), 15, 0  ],
-		   "cdu535"   => [ c::S_IFBLK(), 24, 0  ],
-		   "cm206cd"  => [ c::S_IFBLK(), 32, 0  ],
-		   "gscd"     => [ c::S_IFBLK(), 16, 0  ],
-		   "mcd"      => [ c::S_IFBLK(), 23, 0  ],
-		   "mcdx"     => [ c::S_IFBLK(), 20, 0  ],
-		   "optcd"    => [ c::S_IFBLK(), 17, 0  ],
+	     @{ ${{
 		   "atibm"    => [ c::S_IFCHR(), 10, 3  ],
-		   "sbpcd"    => [ c::S_IFBLK(), 25, 0  ],
-		   "sjcd"     => [ c::S_IFBLK(), 18, 0  ],
 	       }}{$_} || [] };
     }
     # Lookup non listed devices in /sys
