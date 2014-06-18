@@ -86,17 +86,8 @@ sub entry {
     } elsif (my ($prefix, $nb) = /(.*?)(\d+)$/) {	
 	my $f = ${{"fd"          => sub { c::S_IFBLK(), 2,  0  },
 		   "hidbp-mse-"  => sub { c::S_IFCHR(), 10, 32 },
-		   "lp"          => sub { c::S_IFCHR(), 6,  0  },
-		   "usb/lp"      => sub { c::S_IFCHR(), 180, 0 },
-		   "input/event" => sub { c::S_IFCHR(), 13, 64 },
-		   "loop"        => sub { c::S_IFBLK(), 7,  0  },
-		   "md"          => sub { c::S_IFBLK(), 9,  0  },
 		   "nst"         => sub { c::S_IFCHR(), 9, 128 },
-		   "sr"          => sub { c::S_IFBLK(), 11, 0  },
-		   "tty"         => sub { c::S_IFCHR(), 4,  0  },
-		   "ttyS"        => sub { c::S_IFCHR(), 4, 64  },
 		   "ubd/"        => sub { c::S_IFBLK(), 98, 0  },
-		   "dm-"         => sub { c::S_IFBLK(), get_dynamic_major('device-mapper'), 0 },
 	       }}{$prefix};
 	if ($f) {
 	    ($type, $major, $minor) = $f->();
@@ -113,25 +104,10 @@ sub entry {
 		   "gscd"     => [ c::S_IFBLK(), 16, 0  ],
 		   "mcd"      => [ c::S_IFBLK(), 23, 0  ],
 		   "mcdx"     => [ c::S_IFBLK(), 20, 0  ],
-		   "mem"      => [ c::S_IFCHR(), 1,  1  ],
 		   "optcd"    => [ c::S_IFBLK(), 17, 0  ],
-		   "kbd"      => [ c::S_IFCHR(), 11, 0  ],
-		   "psaux"    => [ c::S_IFCHR(), 10, 1  ],
 		   "atibm"    => [ c::S_IFCHR(), 10, 3  ],
-		   "random"   => [ c::S_IFCHR(), 1,  8  ],
 		   "sbpcd"    => [ c::S_IFBLK(), 25, 0  ],
 		   "sjcd"     => [ c::S_IFBLK(), 18, 0  ],
-		   "tty"      => [ c::S_IFCHR(),  5, 0  ],
-		   "input/mice"
-		              => [ c::S_IFCHR(), 13, 63 ],
-		   "vcsa"     => [ c::S_IFCHR(), 7,  128 ],
-		   "zero"     => [ c::S_IFCHR(), 1,  5  ],		     
-		   "null"     => [ c::S_IFCHR(), 1,  3  ],		     
-
-		   "initrd"   => [ c::S_IFBLK(), 1,  250 ],
-		   "console"  => [ c::S_IFCHR(), 5,  1  ],
-		   "systty"   => [ c::S_IFCHR(), 4,  0  ],
-		   "lvm"   =>    [ c::S_IFBLK(), 109, 0 ],
 	       }}{$_} || [] };
     }
     # Lookup non listed devices in /sys
