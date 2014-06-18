@@ -79,15 +79,13 @@ sub create_minimal_files() {
 	etc/sysconfig/console/consoletrans
 	home mnt run tmp var var/tmp var/lib var/lib/rpm var/lib/urpmi);
     mkdir "$::prefix/$_", 0700 foreach qw(root root/tmp root/drakx);
-
-    devices::make("$::prefix/dev/null");
-    chmod 0666, "$::prefix/dev/null";
 }
 
 sub prepare_minimal_root() {
 
     fs::any::create_minimal_files();
 
+    # ensure we've all needed devices, for bootloader install and mkinitrd:
     run_program::run('mount', '--bind', '/dev', "$::prefix/dev");
     run_program::run('mount', '--bind', '/run', "$::prefix/run");
     eval { fs::mount::mount('none', "$::prefix/proc", 'proc') };
