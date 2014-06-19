@@ -79,7 +79,7 @@ sub entry {
 	$major = ($1 eq 'ida' ? 72 : 104) + $2;
 	$minor = 16 * $3 + ($4 || 0);
     } elsif (my ($prefix, $nb) = /(.*?)(\d+)$/) {	
-	my $f = ${{"fd"          => sub { c::S_IFBLK(), 2,  0  },
+	my $f = ${{
 		   "ubd/"        => sub { c::S_IFBLK(), 98, 0  },
 	       }}{$prefix};
 	if ($f) {

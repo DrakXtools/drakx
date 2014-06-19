@@ -100,7 +100,7 @@ sub floppies {
         #-   then hal probes /dev/fd0 and triggers floppy module loading through kernel's kmod
         if (any { (split)[1] eq 'fd' } cat_("/proc/devices")) {
             @fds = map {
-                my $info = c::floppy_info(devices::make("fd$_"));
+                my $info = c::floppy_info("/dev/fd$_");
                 if_($info && $info ne '(null)', { device => "fd$_", media_type => 'fd', info => $info });
             } qw(0 1);
         }
