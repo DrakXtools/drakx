@@ -93,7 +93,10 @@ sub floppies {
 
     if (!$o_not_detect_legacy_floppies && !$legacy_already_detected) {
         $legacy_already_detected = 1;
-        eval { modules::load("floppy") if $::isInstall };
+        if ($::isInstall) {
+            eval { modules::load("floppy") };
+            system(qw(udevadm settle)) if !$@;
+        }
         #- do not bother probing /dev/fd0 and loading floppy device uselessly,
         #- it takes time and it is already done by boot process (if not in install):
         #-   /dev/fd0 is created by udev (/etc/udev/devices.d/default.nodes)
