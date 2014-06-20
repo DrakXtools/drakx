@@ -42,7 +42,8 @@ my @timezones = eval { timezone::getTimeZones() };
 my $err = $@;
 $button_time->signal_connect(clicked => sub {
     local $::isEmbedded = 0; # to prevent sub window embedding
-    if ($timezone->{timezone} = $in->ask_from_treelist(N("Timezone - DrakClock"), N("Which is your timezone?"), '/', \@timezones, $timezone->{timezone})) {
+    if (my $tz = $in->ask_from_treelist(N("Timezone - DrakClock"), N("Which is your timezone?"), '/', \@timezones, $timezone->{timezone})) {
+	$timezone->{timezone} = $tz;
 	$timezone->{UTC} = $in->ask_yesorno(N("GMT - DrakClock"), N("Is your hardware clock set to GMT?"), $timezone->{UTC});
 	timezone::write($timezone);
 	$label_timezone->set_text($timezone->{timezone});
