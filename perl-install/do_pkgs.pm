@@ -111,6 +111,16 @@ sub ensure_binary_is_installed {
     1;
 }
 
+sub _find_file {
+    my ($file) = @_;
+    if ($file =~ m!/!) {
+	-e "$::prefix$file";
+    } else {
+	# assume it's a binary to search in $PATH:
+	whereis_binary($file, $prefix);
+    }
+}
+
 =item ensure_files_are_installed($do, $pkgs, $b_auto)
 
 Takes a list of [ "package", "file" ] and installs package if file is not there.
@@ -121,7 +131,7 @@ If $b_auto is set, (g)urpmi will not ask any questions.
 sub ensure_files_are_installed {
     my ($do, $pkgs, $b_auto) = @_;
 
-    my @not_installed = map { my ($package, $file) = @$_; if_(!whereis_binary($file, $::prefix), $package) } @$pkgs;
+    my @not_installed = map { my ($package, $file) = @$_; if_(!_find_file($file), $package) } @$pkgs;
     return 1 if !@not_installed;
 
     $do->in->ask_okcancel(N("Warning"), N("The following packages need to be installed:\n") . join(', ', @not_installed), 1)
