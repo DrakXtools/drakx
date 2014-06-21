@@ -117,7 +117,7 @@ sub _find_file {
 	-e "$::prefix$file";
     } else {
 	# assume it's a binary to search in $PATH:
-	whereis_binary($file, $prefix);
+	whereis_binary($file, $::prefix);
     }
 }
 
