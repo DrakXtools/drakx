@@ -583,8 +583,8 @@ sub font_choice() {
             $file_dialog->destroy;
             return;
         } elsif ($answer eq 'ok') {
-            my @files = $file_dialog->get_filenames;
-            foreach my $file_name (difference2(\@files, \@install)) {
+            my $files = $file_dialog->get_filenames;
+            foreach my $file_name (difference2($files, \@install)) {
                 push @install, $file_name;
                 $model->append_set(undef, [ 0 => $file_name ]);
             }
