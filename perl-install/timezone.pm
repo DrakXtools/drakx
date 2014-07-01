@@ -26,7 +26,7 @@ sub read() {
 
 our $ntp = "ntp";
 my $servername_config_suffix = "";
-unless (-f $::prefix . "/etc/" . $ntp . ".conf") {
+if (-f $::prefix . "/etc/chrony.conf") {
     $ntp = "chrony";
     $servername_config_suffix = " iburst";
 }
