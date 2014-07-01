@@ -74,6 +74,7 @@ dist dist-git:
 	cd $(PACKAGE)-$(PKGVERSION)/perl-install ; mv -f Makefile.drakxtools Makefile
 	@make nuke_perl
 	tar -Jcf $(PACKAGE)-$(PKGVERSION).tar.xz $(PACKAGE)-$(PKGVERSION)
+	git tag $(PACKAGE)-$(PKGVERSION)
 
 tar:
 	rm -rf $(PACKAGE)*.tar* $(PACKAGE)-$(PKGVERSION)
