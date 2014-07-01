@@ -13,7 +13,7 @@ sub get_timezone_prefix() {
 
 sub getTimeZones() {
     my $tz_prefix = get_timezone_prefix();
-    open(my $F, "cd $tz_prefix && find [A-Z]* -noleaf -type f |");
+    open(my $F, "cd $tz_prefix && find [A-Z]* -type f |");
     my @l = difference2([ chomp_(<$F>) ], [ 'ROC', 'PRC' ]);
     close $F or die "cannot list the available zoneinfos";
     sort @l;
