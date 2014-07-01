@@ -555,11 +555,11 @@ sub parse_LDAP_namespace_structure {
 
 =item distro_release($o_dir)
 
-returns the content of Mageia release file from given directory (optional).
+returns the content of distro release file from given directory (optional).
 
 =cut
 
-sub ditro_release {
+sub distro_release {
     my ($o_dir) = @_;
     my $f = release_file($o_dir);
     $f && chomp_(cat_("$o_dir$f"));
