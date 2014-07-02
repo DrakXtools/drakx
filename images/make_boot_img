@@ -188,7 +188,7 @@ grub() {
     cp -a /boot/grub2/themes/Moondrake/*png "$dir/boot/grub/themes/Moondrake"
     cp -a /boot/grub2/themes/Moondrake/*pf2 "$dir/boot/grub/themes/Moondrake"
     CODENAME="$(cat /etc/os-release|grep VERSION=|sed -e 's#.*(\(.*\)).*#\1#g')"
-    sed -e "s#\(title-text:\)#\1 \"$CODENAME\"#g" /boot/grub2/themes/Moondrake/theme.txt > "$dir/boot/grub/themes/Moondrake/theme.txt"
+    sed -e "s#\(title-text: \"\)#\1$CODENAME#g" /boot/grub2/themes/Moondrake/theme.txt > "$dir/boot/grub/themes/Moondrake/theme.txt"
 
     if [ ! -s all.kernels/.list ]; then
 	    echo grub: no kernel >&2
