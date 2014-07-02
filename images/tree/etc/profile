@@ -8,13 +8,13 @@ PROFILE_LOADED=1
 
 PATH=/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/bin:/mnt/usr/sbin:/mnt/usr/bin
 
-PS1="[root@rescue \w]\\$ "
+PS1="[root@ucDrakx \w]\\$ "
 ls () { /bin/ls --color=auto -F "$@";}
 ll () { /bin/ls --color=auto -Fl "$@";}
 d () { /bin/ls --color=auto -F "$@";}
 s () { cd .. ;}
 which () { type -p "$@" ;}
-HOSTNAME=rescue
+HOSTNAME=ucDrakx
 HISTSIZE=1000
 HISTFILESIZE=1000
 
