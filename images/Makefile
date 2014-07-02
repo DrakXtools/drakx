@@ -9,7 +9,7 @@ ARCH=$(shell arch)
 ifeq (x86_64, $(ARCH))
 WORDSIZE = 64
 else
-WORSDIZE=32
+WORDSIZE=32
 ARCH=i586
 endif
 
