@@ -189,16 +189,11 @@
 
 <from dir="../images/setup">
 	<to dir="/etc">
+		fstab
+		group
 		host.conf
 		hosts
 		inputrc
-		profile
-	</to>
-</from>
-
-<from dir="../images/setup">
-	<to dir="/etc">
-		group
 		passwd
 	</to>
 </from>
@@ -452,7 +447,6 @@
 
 <from dir="./tree/etc">
     <to dir="/etc">
-	fstab
 	inittab
 	modprobe.conf
 	profile
