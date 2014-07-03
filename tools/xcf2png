@@ -1,17 +1,65 @@
 #!/bin/sh
 
+COLORS=255
+OPACITY=100
+
+while getopts "c:a:i:o:r:t:" opt; do
+    case $opt in
+        a)
+            if [ -z "$OPTIONS" ]; then
+                OPTIONS="$OPTARG"
+            else
+                OPTIONS="$OPTIONS,$OPTARG"
+            fi
+            ;;
+        c)
+            COLORS=$OPTARG
+            ;;
+        i)
+            INPUT="$OPTARG"
+            ;;
+        o)
+            OUTPUT="$OPTARG"
+            ;;
+        r)
+            if [ -z "$REMOVE" ]; then
+                REMOVE="$OPTARG"
+            else
+                REMOVE="$REMOVE,$OPTARG"
+            fi
+            ;;
+        t)
+            OPACITY=$OPTARG
+            ;;
+    esac
+done
 
 gimp-console --gegl-threads=$(getconf _NPROCESSORS_ONLN) -i --batch-interpreter=python-fu-eval -b - << EOF
 import gimpfu
 
-def convert(input, output):
+def convert(input, output, options, remove, colors, opacity):
     img = pdb.gimp_file_load(input, input)
+    for layer in img.layers:
+        if layer.name in remove:
+            img.remove_layer(layer)
+        else:
+            pdb.gimp_layer_set_opacity(layer, opacity)
+
+
     layer = pdb.gimp_image_merge_visible_layers(img, 1)
+
+    if "rgb" in options and img.base_type != RGB:
+        pdb.gimp_image_convert_rgb(img)
+
+    if "indexed" in options and img.base_type != INDEXED:
+        pdb.gimp_image_convert_indexed(img, NO_DITHER, MAKE_PALETTE, colors, True, False, False)
 
     pdb.gimp_file_save(img, layer, output, output)
     pdb.gimp_image_delete(img)
 
-convert('${1}', '${2}')
+options = "${OPTIONS}".split(",")
+remove = "${REMOVE}".split(",")
+convert('${INPUT}', '${OUTPUT}', options, remove, $COLORS, $OPACITY)
 
 pdb.gimp_quit(1)
 EOF
