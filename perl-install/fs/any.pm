@@ -83,7 +83,7 @@ sub create_minimal_files() {
 
 sub prepare_minimal_root() {
 
-    fs::any::create_minimal_files();
+    create_minimal_files();
 
     # ensure we've all needed devices, for bootloader install and mkinitrd:
     run_program::run('mount', '--bind', '/dev', "$::prefix/dev");
