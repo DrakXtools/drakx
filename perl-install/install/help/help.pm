@@ -468,7 +468,7 @@ To partition the selected hard disk drive, you can use these options:
 
  * \"%s\": this option deletes all partitions on the selected hard disk drive
 
- * \"%s\": this option enables you to automatically create ext3 and swap
+ * \"%s\": this option enables you to automatically create ext4 and swap
 partitions in the free space of your hard disk drive
 
 \"%s\": gives access to additional features:
