@@ -37,7 +37,7 @@ dist-git:
 	tar --concatenate --file=$(PRODUCT)-$(VERSION).tar share/meta-task/meta-task-$(PRODUCT)-$(VERSION).tar
 	rm share/meta-task/meta-task-$(PRODUCT)-$(VERSION).tar
 	xz -v9ef -T0 $(PRODUCT)-$(VERSION).tar
-
+	git tag $(PRODUCT)-$(VERSION)
 
 tar:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
