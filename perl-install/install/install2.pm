@@ -220,7 +220,8 @@ sub formatPartitions {
     fs::any::prepare_minimal_root();
 
     install::any::screenshot_dir__and_move();
-    install::any::move_compressed_image_to_disk($o);
+    # we no longer use squashfs
+    #install::any::move_compressed_image_to_disk($o);
 
     any::rotate_logs($::prefix);
 
