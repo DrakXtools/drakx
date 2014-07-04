@@ -95,8 +95,7 @@ get_needed_files: xs
 
 
 pixmaps/left-background.png: pixmaps/left-background.xcf
-	../../tools/xcf2png $^ $@
-	pngrewrite $@ $@
+	../../tools/xcf2png  -i $^ -o $@ -a indexed -c 75
 
 full_stage2:
 	$(MAKE) stage2
