@@ -71,7 +71,7 @@ sub _setup_and_start_X {
     }
 
 
-    my @servers = qw(Driver:auto Driver:modesetting Driver:fbdev Driver:vesa); #-)
+    my @servers = qw(Driver:auto Driver:fbdev Driver:vesa Driver:modesetting ); #-)
     if ($::testing) {
         @servers = 'Xephyr';
     } elsif (arch() =~ /ia64/) {
