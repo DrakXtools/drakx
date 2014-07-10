@@ -91,6 +91,9 @@ sub _setup_and_start_X {
     foreach (@servers) {
         log::l("Trying with server $_");
         my ($prog, $Driver) = /Driver:(.*)/ ? ('Xorg', $1) : /Xnest|Xephyr|^X_move$/ ? $_ : '';
+	if (/auto/i) {
+            _launchX($o, undef, $prog, undef, $wanted_DISPLAY) and return 1;
+        }
         if (/FB/i) {
             !$o->{vga16} && $o->{allowFB} or next;
 
@@ -113,9 +116,14 @@ sub _launchX {
     if ($server eq 'Xephyr') {
         push @options, '-ac', '-screen', $o->{vga} || ($o->{vga16} ? '640x480' : '1024x768');
     } else {
-        install::gtk::createXconf($f, $Driver);
+        if (defined($f) and defined($Driver)) {
+            install::gtk::createXconf($f, $Driver);
+        }
 
-        push @options, '-allowMouseOpenFail', '-xf86config', $f;
+        push @options, '-allowMouseOpenFail';
+	if (defined($f)) {
+            push @options, '-xf86config', $f;
+        }
         push @options, 'vt7', '-dpi', '75';
         push @options, '-nolisten', 'tcp';
     }
