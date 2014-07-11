@@ -235,12 +235,6 @@
   </to>
 </from>
 
-<from dir="../tools">
-  <to dir="/usr/bin">
-    loadkeys
-  </to>
-</from>
-
 <from>
   /usr/share/misc/magic.mgc
   /usr/share/terminfo/s/screen
@@ -467,6 +461,7 @@
 </from>
 <from dir="./tree/bin">
     <to dir="/bin">
+	loadkeys
 	login.bash
     </to>
 </from>
