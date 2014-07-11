@@ -103,7 +103,7 @@ full_stage2:
 	$(MAKE) compress
 
 compress:
-	(cd $(DESTDIR)$(STAGE2_DEST)/live; find | cpio -o -H newc -H newc --owner=root:root | $(COMPRESS)) > $(DESTDIR)$(STAGE2_DEST)/mdkinst.cpio.xz
+	(cd $(DESTDIR)$(STAGE2_DEST)/live; find | cpio -o -H newc --owner=root:root | $(COMPRESS)) > $(DESTDIR)$(STAGE2_DEST)/mdkinst.cpio.xz
 	rm -rf $(DESTDIR)$(STAGE2_DEST)/live
 
 stage2: pixmaps/left-background.png
