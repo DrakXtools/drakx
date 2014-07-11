@@ -27,6 +27,8 @@ use install::install2;
 $::testing = $ENV{PERL_INSTALL_TEST};
 $::isStandalone = 0;
 
+$ENV{LOCPATH} = "/usr/share/locale";
+
 install::install2::main(@ARGV);
 
 #- not happy about, slightly ugly, but whatever...
