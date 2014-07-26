@@ -252,16 +252,6 @@ sub ask_services() {
 	}
 }
 
-sub ask_glx() {
-    require Xconfig::glx;
-    my @installed_types = Xconfig::glx::filter_installed_types(\@Xconfig::glx::gl_compositing_types);
-    any { $_->{type} ne "none" } @installed_types or return;
-    my $glx = Xconfig::glx::detect_may_install($in->do_pkgs);
-    if ($glx->{supported} && Xconfig::glx::choose_interactive($in, $glx, 'installed_only')) {
-        Xconfig::glx::write($glx);
-    }
-}
-
 sub ask_encrypt_home() {
     my $user = { name => get_conf('ENCRYPT_HOME_USER'), device => get_conf('ENCRYPT_HOME_DEVICE') };
     any { !defined $_ } values %$user and return;
@@ -363,7 +353,6 @@ call('users');
 # (tpg) do not ask users for services
 # call('services');
 call('encrypt_home');
-call('glx');
 setVarsInSh($conf_file, { FINISH_INSTALL => 'no' });
 
 $in->exit(0);
