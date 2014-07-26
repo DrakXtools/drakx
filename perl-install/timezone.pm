@@ -204,7 +204,7 @@ sub print_ntp_servers() {
 
 # perl -Mtimezone -e 'timezone::print_ntp_servers()'
 $ntp_servers{""} = {
-    N_("Global") => "pool.ntp.org",
+    N_("Global") => "openmandriva.pool.ntp.org",
 };
 $ntp_servers{Global} = {
     N_("Africa") => "africa.pool.ntp.org",
