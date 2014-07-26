@@ -360,7 +360,8 @@ call('urpmi');
 $::Wizard_pix_up = 'redhat-config-users';
 call('authentication');
 call('users');
-call('services');
+# (tpg) do not ask users for services
+# call('services');
 call('encrypt_home');
 call('glx');
 setVarsInSh($conf_file, { FINISH_INSTALL => 'no' });
