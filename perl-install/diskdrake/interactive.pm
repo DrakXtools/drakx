@@ -1297,7 +1297,7 @@ sub format_ {
 
 sub _format_raw {
     my ($in, $part, $all_hds, $o_skip) = @_;
-    if ($::expert && !member($part->{fs_type}, 'reiserfs', 'xfs', 'hfs', 'ntfs', 'ntfs-3g')) {
+    if ($::expert && !member($part->{fs_type}, 'reiserfs', 'xfs', 'hfs', 'ntfs', 'ntfs-3g', 'btrfs')) {
 	$part->{toFormatCheck} = $in->ask_yesorno(N("Confirmation"), N("Check bad blocks?"));
     }
     $part->{isFormatted} = 0; #- force format;
