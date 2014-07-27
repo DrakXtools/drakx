@@ -863,7 +863,7 @@ sub ask_user_and_root {
 	my $id = $u->{$field} or return 'ok';
 	my $name = $field eq 'uid' ? N("User ID") : N("Group ID");
 	$id =~ /^\d+$/ or $in->ask_warn('', N("%s must be a number", $name)), return;
-	$id >= 500 or $in->ask_yesorno('', N("%s should be above 500. Accept anyway?", $name)) or return;
+	$id >= 1000 or $in->ask_yesorno('', N("%s should be above 1000. Accept anyway?", $name)) or return;
 	'ok';
     };
     

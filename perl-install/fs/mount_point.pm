@@ -24,7 +24,10 @@ sub guess_mount_point {
     my $d = $handle->{dir};
     my $mnt = find { -e "$d/$l{$_}" } keys %l;
     $mnt ||= (stat("$d/.bashrc"))[4] ? '/root' : '/home/user' . ++$$user if -e "$d/.bashrc";
-    $mnt ||= (any { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bashrc" } glob_($d)) ? '/home' : '';
+    $mnt ||= (any { -d $_ && (stat($_))[4] >= 1000 && -e "$_/.bashrc" } glob_($d)) ? '/home' : '';
+    # Keep uid 500 here for guesswork, but base it on .bash_history to increase
+    # changes it's a real user.
+    $mnt ||= (any { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bash_history" } glob_($d)) ? '/home' : '';
     ($mnt, $handle);
 }
 
