@@ -15,9 +15,6 @@ our %l = (
   {
     atm => [ qw(ambassador eni firestream fore_200e he horizon idt77252 iphase lanai nicstar solos-pci zatm) ],
     main => [
-      if_(arch() =~ /ppc/, qw(bmac fec_mpc52xx ibm_emac mace oaknet sungem)),
-      if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
-      if_(arch() !~ /alpha|sparc/,
         qw(3c501 3c503 3c505 3c507 3c509 3c515 3c990 3c990fx),
         qw(82596 ac3200 acenic aironet4500_card altera_tse amd8111e at1700 atl2 atp),
         qw(bcm4400 cassini cs89x0 cx82310_eth de600 de620),
@@ -28,15 +25,12 @@ our %l = (
         qw(prism2_plx qlge r6040 rcpci rhineget),
         qw(sb1000 sc92031 sh_eth smc-ultra smsc911x smc9194 smsc9420 smsc95xx),
         qw(tc35815 tlan uli526x vmxnet3),
-      ),
-      if_(arch() !~ /alpha/,
         qw(b44 com20020-pci de2104x),
         qw(defxx), # most unused
         qw(dgrs e100 eepro100 epic100 fealnx hamachi natsemi),
         qw(ne2k-pci pcnet32 plip sis900 skfp starfire tulip),
         qw(typhoon via-rhine winbond-840 forcedeth),
         qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
-      ),
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
       # add all phys
       qw(amd at803x bcm7xxx bcm87xx broadcom cicada davicom et1011c icplus lxt marvell mdio-bitbang mdio-gpiomicrel),
@@ -78,7 +72,6 @@ our %l = (
       qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se r8188eu r8723au rtl8821ae rtl_pci rtl_usb rtusb),
       qw(rtl8192se rtl8192cu rtl8192de rtl8723ae rtl8723be rtl8821ae spectrum_cs sr9700 sr9800 ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
       qw(wavelan_cs wcn36xx wl wl3501_cs wvlan_cs zd1201 zd1211rw),
-      if_(arch() =~ /ppc/, qw(airport)),
     ],
     isdn => [
       qw(avmfritz c4 cdc-acm b1pci divas hfc4s8s_l1 hfc_usb hfc4s8s_l1 hisax hisax_st5481 hisax_fcpcipnp hysdn sedlfax t1pci tpam w6692pci),
@@ -110,9 +103,6 @@ our %l = (
         qw(tc86c001 triflex trm290 tx4938ide tx4939ide umc8672 via82cxxx ide-pci-generic ide-generic),
     ],
     scsi => [
-      if_(arch() =~ /ppc/, qw(mesh mac53c94)),
-      if_(arch() =~ /^sparc/, qw(qlogicpti)),
-      if_(arch() !~ /alpha|sparc/,
 	'53c7,8xx',
         qw(a100u2w advansys aha152x aha1542 aha1740 AM53C974 atp870u),
         qw(be2iscsi bfa BusLogic dc395x dc395x_trm dmx3191d dtc eata eata_dma),
@@ -120,7 +110,6 @@ our %l = (
         qw(nsp32 pas16 pci2220i pm80xx pm8001 psi240i qla1280 qla2x00 qla2xxx),
         qw(qlogicfas qlogicfc rsxx seagate shasta skd sim710 stex sym53c416),
         qw(t128 tmscsim u14-34f ultrastor vmw_pvscsi wd7000),
-      ),
       qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicfas408 sym53c8xx lpfc lpfcdd), # ncr53c8xx
     ],
     sata => [
@@ -140,19 +129,15 @@ our %l = (
       qw(pata_radisys pata_rdc pata_rz1000 pata_sc1200 pata_sch),
       qw(pata_serverworks pata_sil680 pata_sis pata_sl82c105),
       qw(pata_triflex pata_via pata_winbond),
-      if_(arch() =~ /ppc/, 'sata_fsl'),
       qw(pata_acpi),
     ],
     hardware_raid => [
-      if_(arch() =~ /^sparc/, qw(pluto)),
-      if_(arch() !~ /alpha|sparc/,
         # 3w-xxxx drives ATA-RAID, 3w-9xxx and arcmsr drive SATA-RAID
         qw(3w-9xxx 3w-sas 3w-xxxx a320raid aacraid arcmsr cciss cpqarray),
         qw(cpqfc csiostor DAC960 dpt_i2o esas2r gdth hpsa hptiop i2o_block imm ipr ips isci),
         qw(it8212 it821x iteraid megaide megaraid megaraid_mbox),
         qw(megaraid_sas mptfc mptsas mptscsih mptspi pdc-ultra pmcraid ppa),
         qw(qla2100 qla2200 qla2300 qla2322 qla4xxx qla6312 qla6322),
-      ),
     ],
     video => [ qw(vmwgfx cirrusfb radeonfb kyrofb i740fb matroxfb_crct2 matroxfb_DAC1064 matroxfb_g450 matroxfb_misc matroxfb_accel matroxfb_Ti3026 matroxfb_base aty128fb vga16fb vt8236fb sstfb s3fb rivafb  mb862xfb nvidiafb fb_ddc udlfb tdfxfb uvesafb viafb tridentfb savagefb cfag1286bfb) ],
     virtual => [ qw(hv_storvsc virtio_blk virtio_scsi xenblk xen-blkfront) ],
@@ -178,10 +163,10 @@ our %l = (
     i2c => [
       qw(i2c-ali1535 i2c-ali1563 i2c-ali15x3 i2c-amd756 i2c-amd8111 i2c-i801 i2c-i810 i2c-nforce2),
       qw(i2c-piix4 i2c-prosavage i2c-savage4 i2c-sis5595 i2c-sis630 i2c-sis96x i2c-via i2c-viapro i2c-voodoo3),
-      if_(arch() !~ /^ppc/, qw(i2c-hydra i2c-ibm_iic i2c-mpc)),
+      qw(i2c-hydra i2c-ibm_iic i2c-mpc),
     ],
     pcmcia => [
-      if_(arch() !~ /^sparc/, qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket)), # cb_enabler
+      qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket), # cb_enabler
     ],
     hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-appleir hid-aureal hid-axff hid-belkin
 	    hid-cherry hid-chicony hid-cp2112 hid-cypress hid-dr hid-drff hid-elecom hid-elo hid-emsff
@@ -206,7 +191,6 @@ our %l = (
     cdrom => [ qw(isofs) ],
     loopback => [ qw(isofs loop squashfs) ],
     local => [
-      if_(arch() =~ /^ppc/, qw(hfs)),
       qw(btrfs ext3 ext4 jfs nilfs2 ntfs reiserfs vfat xfs),
     ],
     various => [ qw(efivarfs overlayfs romfs ufs fuse) ],
@@ -217,9 +201,6 @@ our %l = (
   multimedia => 
   {
     sound => [
-      if_(arch() =~ /ppc/, qw(dmasound_pmac snd-aoa snd-powermac)),
-      if_(arch() =~ /sparc/, qw(snd-sun-amd7930 snd-sun-cs4231 snd-sun-dbri)),
-      if_(arch() !~ /^sparc/,
           qw(ad1816 ad1848 ad1889 ali5455 audigy audio awe_wave cmpci cs4232 cs4281 cs46xx cx88-alsa),
           qw(emu10k1 es1370 es1371 esssolo1 forte gus i810_audio ice1712 kahlua mad16 maestro),
           qw(maestro3 mpu401 msnd_pinnacle nm256_audio nvaudio opl3 opl3sa opl3sa2 pas2 pss),
@@ -240,7 +221,6 @@ our %l = (
           qw(snd-rme96 snd-rme9652 snd-sb16 snd-sb8 snd-sbawe snd-sc6000 snd-sgalaxy snd-sis7019 snd-sonicvibes),
           qw(snd-sscape snd-trident snd-via82xx snd-virtuoso snd-vx222 snd-vxp440 snd-vxpocket snd-wavefront),
           qw(snd-ymfpci sonicvibes sscape trident via82cxxx_audio wavefront ymfpci),
-      ),
   ],
     tv => [ qw(bt878 bttv cx23885 cx25821 cx8800 cx8802 cx88-blackbird dpc7146),
             qw(ivtv mxb pvrusb2 saa7134 saa7164 zr36067) ],
@@ -313,7 +293,6 @@ our %l = (
     ],
     mouse => [
       qw(atixlmouse busmouse generic_serial inport ioc3_serial logibm logibusmouse msbusmouse pcips2 qpmouse synclinkmp),
-      if_(arch() =~ /ppc/, 'macserial'),
       qw(mousedev usbhid usbmouse synaptics_usb),
     ],
     char => [
@@ -337,7 +316,6 @@ our %l = (
       qw(mmc_block sdhci-acpi), # eMMC
 
       'cryptoloop',
-      if_(arch() =~ /sparc/, 'openprom'),
 
       qw(crc32c crc32c-intel),
       
@@ -352,10 +330,6 @@ our %l = (
       qw(vmvgfx),
     ],
     agpgart => [
-      if_(arch() =~ /alpha/, qw(alpha-agp)),
-      if_(arch() =~ /ia64/, qw(hp-agp i460-agp)),
-      if_(arch() =~ /ppc/, qw(uninorth-agp)),
-
       qw(ali-agp amd64-agp amd-k7-agp ati-agp efficeon-agp intel-agp),
 	 qw(k7-agp mch-agp nvidia-agp sis-agp sworks-agp via-agp),
     ],
