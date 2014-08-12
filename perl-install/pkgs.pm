@@ -284,7 +284,7 @@ sub remove_unused_packages {
     undef $wait;
 
     # Packages to not remove even if they seem unused
-    my @wanted_hardware_packages = qw(gnome-bluetooth pulseaudio-module-bluetooth gnome-phone-manager bluedevil kppp ppp wireless-tools wpa_supplicant networkmanager kernel-firmware-nonfree radeon-firmware ralink-firmware rtlwifi-firmware ipw2100-firmware ipw2200-firmware iwlwifi-3945-ucode iwlwifi-4965-ucode iwlwifi-agn-ucode b43-fwcutter b43-openfwwf atmel-firmware speedtouch-firmware zd1211-firmware isdn4k-utils rfkill x11-driver-input-wacom kernel-firmware-extra cpupower upower);
+    my @wanted_hardware_packages = qw(gnome-bluetooth pulseaudio-module-bluetooth gnome-phone-manager bluedevil kppp ppp wireless-tools wpa_supplicant networkmanager kernel-firmware-nonfree radeon-firmware ralink-firmware rtlwifi-firmware ipw2100-firmware ipw2200-firmware iwlwifi-3945-ucode iwlwifi-4965-ucode iwlwifi-agn-ucode b43-fwcutter b43-openfwwf atmel-firmware speedtouch-firmware zd1211-firmware isdn4k-utils rfkill x11-driver-input-wacom kernel-firmware-extra cpupower upower x11-driver-video-vesa);
     @unused_hardware_packages = difference2(\@unused_hardware_packages, \@wanted_hardware_packages);
 
     @unused_hardware_packages || @unselected_locales or return;
