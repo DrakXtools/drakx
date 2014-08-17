@@ -622,6 +622,7 @@ sub _gtk__WebKit_View {
     $w;
 }
 
+sub _gtk__ComboBoxText { &_gtk__ComboBox }
 sub _gtk__ComboBox {
     my ($w, $opts, $_class, $action) = @_;
 
