@@ -29,12 +29,12 @@ our %l = (
         qw(defxx), # most unused
         qw(dgrs e100 eepro100 epic100 fealnx hamachi natsemi),
         qw(ne2k-pci pcnet32 plip sis900 skfp starfire tulip),
-        qw(typhoon via-rhine winbond-840 forcedeth),
+        qw(typhoon via-rhine winbond-840 xgene-enet forcedeth),
         qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
       # add all phys
       qw(amd at803x bcm7xxx bcm87xx broadcom cicada davicom et1011c icplus lxt marvell mdio-bitbang mdio-gpiomicrel),
-      qw(national qsemi r8152 r815x realtek smsc ste10Xp vitesse),
+      qw(national qsemi r8152 r815x realtek smsc spi_ks8995 ste10Xp vitesse),
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
@@ -170,15 +170,15 @@ our %l = (
     ],
     hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-appleir hid-aureal hid-axff hid-belkin
 	    hid-cherry hid-chicony hid-cp2112 hid-cypress hid-dr hid-drff hid-elecom hid-elo hid-emsff
-	    hid-ezkey hid-gaff hid-generic hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse hid-huion
-	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-lenovo-tpkbd
+	    hid-ezkey hid-gaff hid-generic hid-gt683r hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse hid-huion
+	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-lenovo hid-lenovo-tpkbd
 	    hid-logitech hid-logitech-dj hid-magicmouse hid-microsoft hid-monterey
 	    hid-multilaser hid-multitouch hid-ntrig hid-ortek hid-petalynx hid-picolcd
 	    hid-pl hid-primax hid-prodikeys hid-roccat hid-roccat-arvo hid-roccat-common
 	    hid-roccat-isku hid-roccat-kone hid-roccat-koneplus hid-roccat-konepure hid-roccat-kovaplus hid-roccat-lua
 	    hid-roccat-pyra hid-roccat-ryos hid-roccat-savu hid-saitek hid-samsung hid-sensor-hub hid-sjoy hid-sony
 	    hid-speedlink hid-steelseries hid-sunplus hid-tivo hid-thingm hid-tmff hid-topseed hid-twinhan
-	    hid-uclogic hid-wacom hid-waltop hid-wiimote hid-xinmo hid-zpff hid-zydacron) ],
+	    hid-uclogic hid-wacom hid-waltop hid-wiimote hid-xinmo hid-zpff hid-zydacron wacom) ],
 
    #serial_cs
    #ftl_cs 3c575_cb apa1480_cb epic_cb serial_cb tulip_cb iflash2+_mtd iflash2_mtd
@@ -278,7 +278,7 @@ our %l = (
       ],
       remote => [ qw(ati_remote) ],
       # USB tablets and touchscreens:
-      tablet => [ qw(acecad aiptek wacom kbtab) ],
+      tablet => [ qw(acecad aiptek wacom wacom_serial4 kbtab) ],
       touchscreen => [ qw(ads7846_ts gunze hp680_ts_input itmtouch mk712 mtouch sur40 usbtouchscreen) ],
   },
 
