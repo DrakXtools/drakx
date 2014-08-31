@@ -16,9 +16,10 @@ use log;
 use fsedit;
 use feature qw(state);
 
-my ($width, $height, $minwidth) = (400, 50, 16);
+my ($width, $height) = (400, 50);
 my ($all_hds, $in, $do_force_reload, $current_kind, $current_entry, $update_all);
 my ($w, @notebook, $done_button);
+my $lastWindowWidth = 0;
 
 =begin
 
@@ -114,6 +115,28 @@ sub main {
     });
     # ensure partitions bar is properly sized on first display:
     $notebook_widget->signal_connect(realize => $update_all);
+    $notebook_widget->signal_connect(expose_event => sub {
+        # Intercept redrawing the widget to fix auto-resizing of partition buttons
+        # when user resizes the dialog: GTK's resizing is lame, it's not proportional,
+        # so the buttons receive widths different from what would be calculated for the
+        # new dialog width, and e.g. toggling normal/expert mode causes them to suddenly
+        # change sizes.
+
+        # Avoid redrawing when nothing really changed.
+        my $mainWindowWidth = first($w->{window}->window->get_size);
+        return 0 if ($mainWindowWidth == $lastWindowWidth);
+        $lastWindowWidth = $mainWindowWidth;
+
+        # Calculate partition button sizes
+        my @parts = kind2parts($current_kind);
+        calc_buttons4partitions_lengths(\@parts);
+        # Assign the widths to the buttons
+        my @buttons = $current_kind->{display_box}->get_children();
+        for (my $i = 0; $i < scalar(@parts); ++$i) {
+            $buttons[$i]->set_size_request(delete $parts[$i]->{button_width}, 0);
+        }
+        return 0;
+    });
     $w->sync;
     # workaround for $notebook_widget being realized too early:
     if (!$done_button) {
@@ -324,8 +347,19 @@ sub create_automatic_notebooks {
 ################################################################################
 # parts: helpers
 ################################################################################
-sub create_buttons4partitions {
-    my ($kind, $totalsectors, @parts) = @_;
+# Calculates partition button sizes by logarithmic scale
+# Algorithm:
+# 1. Get proportioanal partition sizes relative to the smallest partition: P[i] = size[i] / size_min
+# 2. Take logarithm of this proportion increased by 1:                     L[i] = log(P[i] + 1)
+# 3. Divide the whole width of the buttons area proportionally to L[i]
+# Input:
+#   $parts - arrayref to list of partitions
+# Output:
+#   Key-value pair {button_width => N} is added to each partition, N being width in pixels
+sub calc_buttons4partitions_lengths($) {
+    my ($parts) = @_;
+
+    # Update globally stored width of the buttons area
 
     if ($w->{window}->get_window) {
 	my $windowwidth = $w->{window}->get_allocated_width;
@@ -333,14 +367,37 @@ sub create_buttons4partitions {
 	$width = $windowwidth - first(get_action_box_size()) - 25;
     }
 
-    my $ratio = $totalsectors ? ($width - @parts * $minwidth) / $totalsectors : 1;
-    my $i = 1;
-    while ($i < 30) {
-	$i++;
-	my $totalwidth = sum(map { $_->{size} * $ratio + $minwidth } @parts);
-	$totalwidth <= $width and last;
-	$ratio /= $totalwidth / $width * 1.1;
+    # 1, 2. Taking logarithms of proportional sizes
+    my @part_sizes = map { $_->{'size'} } @$parts;
+    my $min_size = min(@part_sizes);
+    my @part_sizes_log = map { log($_ / $min_size + 1) } @part_sizes;
+
+    # 3. Calculating widths proportional to logarithmic sizes
+    my $total_logs = sum(@part_sizes_log);
+    my @button_widths = map { round($_ * $width / $total_logs) } @part_sizes_log;
+
+    # Because of rounding, resulting widths may not give the total required width.
+    # To fix this, adjust the largest entry by the necessary difference (largest - because its changes are least noticable).
+    my $len_to_adjust = \$button_widths[0];
+    for (@button_widths) {
+        # Searching for the largest entry...
+        if ($$len_to_adjust < $_) {
+            $len_to_adjust = \$_;
+        }
     }
+    # ...and adjusting
+    $$len_to_adjust -= sum(@button_widths) - $width;
+
+    # Finally, put the calculated widths into the original partitions array
+    for (my $i = 0; $i < scalar(@$parts); ++$i) {
+        $parts->[$i]->{'button_width'} = $button_widths[$i];
+    }
+}
+
+sub create_buttons4partitions {
+    my ($kind, $totalsectors, @parts) = @_;
+
+    calc_buttons4partitions_lengths(\@parts);
 
     my $current_button;
     my $set_current_button = sub {
@@ -389,7 +446,7 @@ sub create_buttons4partitions {
 	$w->set_name("PART_" . (isEmpty($entry) ? 'empty' : 
 				$entry->{fs_type} && member($entry->{fs_type}, @colorized_fs_types) ? $entry->{fs_type} :
 				'other'));
-	$w->set_size_request($entry->{size} * $ratio + $minwidth, 0);
+	$w->set_size_request(delete $entry->{button_width}, 0);
 	gtkpack($kind->{display_box}, $w);
 	if ($current_entry && fsedit::are_same_partitions($current_entry, $entry)) {
 	    $set_current_button->($w);
