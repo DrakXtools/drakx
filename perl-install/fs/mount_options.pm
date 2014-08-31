@@ -117,6 +117,8 @@ sub help() {
 
 	'grpquota' => N("Enable group disk quota accounting and optionally enforce limits"),
 
+	'discard' => N("Enable automatic TRIM for SSD disks"),
+
 	'noatime' => N("Do not update inode access times on this filesystem
 (e.g, for faster access on the news spool to speed up news servers)."),
 
