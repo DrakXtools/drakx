@@ -1309,8 +1309,8 @@ sub method_choices {
     my $have_dmraid = find { fs::type::is_dmraid($_) } @{$all_hds->{hds}};
 
     grep {
-	!(/lilo/ && (isLoopback($root_part) || $have_dmraid ||
-	  $boot_part->{fs_type} eq 'btrfs'))
+	!(/lilo/ && (isLoopback($root_part) || $have_dmraid))
+	  && (/grub2/ || $boot_part->{fs_type} ne 'btrfs')
 	  && !(/grub-graphic/ && cat_("/proc/cmdline") =~ /console=ttyS/);
     } method_choices_raw($b_prefix_mounted);
 }
