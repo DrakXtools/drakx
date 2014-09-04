@@ -1570,7 +1570,7 @@ sub configure_time_more {
 	  { label => N("Date, Clock & Time Zone Settings"), title => 1 },
 	  { label => N("What is the best time?") },
 	  { val => \$timezone->{UTC},
-            type => 'list', list => [ 0, 1 ], format => sub {
+            type => 'list', list => [ 1, 0 ], format => sub {
                 $_[0] ?
                   N("%s (hardware clock set to UTC)", POSIX::strftime($time_format, localtime())) :
                   N("%s (hardware clock set to local time)", POSIX::strftime($time_format, gmtime()));
