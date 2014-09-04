@@ -178,7 +178,7 @@ our %l = (
 	    hid-roccat-isku hid-roccat-kone hid-roccat-koneplus hid-roccat-konepure hid-roccat-kovaplus hid-roccat-lua
 	    hid-roccat-pyra hid-roccat-ryos hid-roccat-savu hid-saitek hid-samsung hid-sensor-hub hid-sjoy hid-sony
 	    hid-speedlink hid-steelseries hid-sunplus hid-tivo hid-thingm hid-tmff hid-topseed hid-twinhan
-	    hid-uclogic hid-wacom hid-waltop hid-wiimote hid-xinmo hid-zpff hid-zydacron wacom) ],
+	    hid-uclogic hid-waltop hid-wiimote hid-xinmo hid-zpff hid-zydacron wacom) ],
 
    #serial_cs
    #ftl_cs 3c575_cb apa1480_cb epic_cb serial_cb tulip_cb iflash2+_mtd iflash2_mtd
