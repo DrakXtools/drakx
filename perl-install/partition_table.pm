@@ -398,7 +398,7 @@ sub tell_kernel {
 	}
 
 	# First try partprobe then fall back to BLKRRPART to re-read the partition table
-	run_program::run('partprobe', ${hd}->file);
+	run_program::run('partprobe', ${hd}->{file});
 
 	if($?==0)
 	{
