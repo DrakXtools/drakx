@@ -359,7 +359,7 @@ sub _systemd_services() {
     my %loaded;
     # Running system using systemd
     log::explanations("Detected systemd running. Using systemctl introspection.");
-    foreach (run_program::rooted_get_stdout($::prefix, '/bin/systemctl', '--full', '--all', 'list-units')) {
+    foreach (run_program::rooted_get_stdout($::prefix, '/bin/systemctl', '--no-legend', '--no-pager', '--full', '--all', 'list-units')) {
         if (my ($name) = m!^(\S+)\.service\s+loaded!) {
             # We only look at non-template, non-linked service files in /lib
             # We also check for any non-masked sysvinit files as these are
@@ -371,7 +371,7 @@ sub _systemd_services() {
         }
     }
     # list-units will not list disabled units that can be enabled
-    foreach (run_program::rooted_get_stdout($::prefix, '/bin/systemctl', '--full', 'list-unit-files')) {
+    foreach (run_program::rooted_get_stdout($::prefix, '/bin/systemctl', '--no-legend', '--no-pager', '--full', 'list-unit-files')) {
         if (my ($name) = m!^(\S+)\.service\s+disabled!) {
             # We only look at non-template, non-linked service files in /lib
             # We also check for any non-masked sysvinit files as these are
