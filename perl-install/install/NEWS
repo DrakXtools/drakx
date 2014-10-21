@@ -1,3 +1,21 @@
+- drakx-in-chroot:
+  o pre-create /dev/null & co again (for draklive)
+- fix selecting of uneeded locales (mga#3723)
+
+Version 16.44 - 23 October 2014
+
+- drakx-in-chroot:
+  o document --stage2-update in --help
+  o mount /dev -o ro
+  o try harder to umount everything when sg went havroc
+
+Version 16.43 - 20 October 2014
+
+- drakx-in-chroot:
+  o adapt to the fact that stage2 expects a /dev fully populated by udev
+
+Version 16.42 - 18 September 2014
+
 - only allow GRUB2 when booting on btrfs
 
 Version 16.41 - 31 August 2014
