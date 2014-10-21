@@ -27,6 +27,7 @@ my ($disk_iso_repository, $repository_uri);
     --repository=<path>   path of packages repository
     --text                text mode installer
     --depth=XX            set screen color depth
+    --stage2-update X,Y   will mount --bind X on Y
 ";
 
 (my $repository, my $dir, @ARGV) = @ARGV;
