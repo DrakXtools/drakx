@@ -56,6 +56,9 @@ if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 }
 
+my @mounts;
+my $_b = before_leaving { sys("$sudo umount $_") foreach reverse @mounts };
+
 undef $ENV{TMPDIR}; # prevent packdrake faillure on creating temporary files
 
 if (-d $SLASH_LOCATION) {
@@ -76,21 +79,21 @@ if ($remote_repository) {
     sys("curl --silent -o $local_mdkinst $repository/$COMPRESSED_STAGE2_REL");
     mount_mdkinst($local_mdkinst);
 } elsif (-d "$repository/$LIVE_LOCATION_REL") {
-    sys("$sudo mount -o bind $repository/$LIVE_LOCATION_REL $STAGE2_LOCATION");
+    mount($dir, "$repository/$LIVE_LOCATION_REL", "$STAGE2_LOCATION", "-o bind");
 } elsif (-e "$repository/$COMPRESSED_STAGE2_REL") {
     mount_mdkinst("$repository/$COMPRESSED_STAGE1_REL");
     mount_mdkinst("$repository/$COMPRESSED_STAGE2_REL");
 }
 
-sys("$sudo mount -o bind $dir $SLASH_LOCATION$prefix_ROOTED");
+mount($dir, "$SLASH_LOCATION$prefix_ROOTED". "-o bind");
 $repository_uri ||= $repository_without_arch if !$remote_repository;
-sys("$sudo mount -o bind $repository_uri $SLASH_LOCATION$MEDIA_LOCATION_ROOTED") if $repository_uri;
+mount($repository_uri, "$SLASH_LOCATION$MEDIA_LOCATION_ROOTED", "-o bind") if $repository_uri;
 
-sys("$sudo mount --bind -o ro /dev $SLASH_LOCATION/dev");
-sys("$sudo mount -t proc none $SLASH_LOCATION/proc");
-sys("$sudo mount -t sysfs none $SLASH_LOCATION/sys");
-sys("$sudo mount -t debugfs none $SLASH_LOCATION/sys/kernel/debug");
-sys("$sudo mount -t tmpfs none $SLASH_LOCATION/run");
+mount("/dev", "$SLASH_LOCATION/dev", " --bind -o ro");
+mount("none", "$SLASH_LOCATION/proc", " -t proc");
+mount("none", "$SLASH_LOCATION/sys", " -t sysfs");
+mount("none", "$SLASH_LOCATION/sys/kernel/debug", "-t debugfs");
+mount("none", "$SLASH_LOCATION/run", " -t tmpfs");
 
 # - Ensure we mount the udev run dir for various extra metadata from udevadm
 # - If dracut has been used (and thus udev has yummy metadata) make sure
@@ -99,13 +102,13 @@ sys("$sudo mount -t tmpfs none $SLASH_LOCATION/run");
 foreach my $dir (qw(initramfs udev blkid)) {
     next if !-d "/run/$dir";
     mkdir_p("$SLASH_LOCATION/run/$dir");
-    sys("$sudo mount -o bind /run/$dir $SLASH_LOCATION/run/$dir");
+    mount($mdkinst, "$SLASH_LOCATION/run/$dir" "-o bind");
 }
 
 if ($disk_iso_repository) {
     my $repository_arch = $repository_arch || 'i586';
     mkdir_p($LOOP_MOUNT_POINT);
-    sys("$sudo mount -o loop,ro $disk_iso_repository $LOOP_MOUNT_POINT");
+    mount($disk_iso_repository, $LOOP_MOUNT_POINT, "-o loop,ro");
     symlinkf('loop/' . $repository_arch, "$SLASH_LOCATION$IMAGE_LOCATION_ROOTED"); # FIXME: arch()
 }
 
@@ -192,8 +195,10 @@ sub create_initial_symlinks() {
     }
 }
 
-sub create_initial_devices() {
-    sys("$sudo cp -a /dev/{mem,null,random,urandom} $SLASH_LOCATION/dev");
+sub mount {
+	my ($from, $mntpt, @opts) = @_;
+	push @mounts, $mntpt;
+	sys("$sudo mount $from $mntpt " . join(' ', @opts));
 }
 
 sub umount_all() {
@@ -250,7 +255,7 @@ sub apply_stage2_updates() {
                 undef $ARGV[$::i+1];
                 undef $ARGV[$::i+2];
                 push @stage2_updates, $dest;
-                sys("$sudo mount --bind $file $STAGE2_LOCATION/$dest");
+                mount($file, "$STAGE2_LOCATION/$dest", "--bind");
             }
         }
     } @ARGV;
