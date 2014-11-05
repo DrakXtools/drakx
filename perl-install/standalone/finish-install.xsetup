@@ -19,5 +19,15 @@ if [ -f /etc/sysconfig/finish-install -a -x /usr/sbin/finish-install ]; then
 	/usr/sbin/finish-install
 	# used in live systems, so that dm gets restarted with the new defaults
 	touch /var/lock/reload-dm
+# LIGHTDM BEGIN #
+	if grep "lightdm" /etc/systemd/system/display-manager.service; then
+	. /etc/sysconfig/firstboot
+	. /etc/sysconfig/lightdm
+		if [[ "$FIRSTBOOT" = yes && "$LIGHTDM_INSTALL" = yes ]]; then
+		sed -e 's/^display-setup-script/#display-setup-script/' -i /etc/lightdm/lightdm.conf
+		sed -e 's/yes/no/' -i /etc/sysconfig/lightdm
+		fi
+	fi
+# LIGHDM END #
     fi
 fi
