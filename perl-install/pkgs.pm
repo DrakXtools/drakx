@@ -221,6 +221,11 @@ sub detect_hardware_packages {
     my @ignore_flags = $::isInstall ? () : (
         if_(!$do_pkgs->is_installed('task-kde4-minimal'), "CAT_KDE"),
         if_(!$do_pkgs->is_installed('task-gnome-minimal'), "CAT_GNOME"),
+        if_(!$do_pkgs->is_installed('task-cinnamon-minimal'), "CAT_CINNAMON"),
+        if_(!$do_pkgs->is_installed('task-mate-minimal'), "CAT_MATE"),
+        if_(!$do_pkgs->is_installed('task-xfce-minimal'), "CAT_XFCE"),
+        if_(!$do_pkgs->is_installed('task-e17-minimal'), "CAT_E17"),
+        if_(!$do_pkgs->is_installed('task-razorqt'), "CAT_RAZOR"),
     );
     (
         ($::isInstall ? () : detect_rpmsrate_hardware_packages($o_match_all_hardware, \@ignore_flags)),
