@@ -9,8 +9,8 @@ use drakbug;
 
 BEGIN { unshift @::textdomains, 'libDrakX-standalone' }
 
-#- for sanity (if a use standalone is made during install, MANY problems will happen)
 require 'log.pm'; #- "require log" causes some pb, perl thinking that "log" is the log() function
+#- for sanity (if a use standalone is made during install, MANY problems will happen)
 if ($::isInstall) {
     log::l('ERROR: use standalone made during install :-(');
     log::l('backtrace: ' . backtrace());
