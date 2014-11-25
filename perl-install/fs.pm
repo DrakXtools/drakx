@@ -209,7 +209,9 @@ sub prepare_write_fstab {
 	$comment ||= "# Entry for /dev/$_->{device} :\n" if $device =~ /^(UUID|LABEL)=/;
 
 	my $real_mntpoint = $_->{mntpoint} || ${{ '/tmp/hdimage' => '/mnt/hd' }}{$_->{real_mntpoint}};
-	mkdir_p("$o_prefix$real_mntpoint") if $real_mntpoint =~ m|^/|;
+	if (!member('bind', split(',', $_->{options}))) {
+	   mkdir_p("$o_prefix$real_mntpoint") if $real_mntpoint =~ m|^/|;
+	}
 	my $mntpoint = fs::type::carry_root_loopback($_) ? '/initrd/loopfs' : $real_mntpoint;
 
 	my ($freq, $passno) =
