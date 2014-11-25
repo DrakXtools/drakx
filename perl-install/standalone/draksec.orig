@@ -1,0 +1,254 @@
+#!/usr/bin/perl
+#*****************************************************************************
+#
+# Copyright (c) 2002-2008 Christian Belisle
+#                         Thierry Vignaud <tvignaud@mandriva.com>
+#			  Eugeni Dodonov <eugeni@mandriva.com>
+#
+# This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License version 2, as
+#  published by the Free Software Foundation.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+#
+#*****************************************************************************
+
+use strict;
+use lib qw(/usr/lib/libDrakX);
+use common;
+use standalone;
+use vars qw($MODE %options);
+use interactive;
+use mygtk3 qw(gtknew gtkset);
+use ugtk3 qw(:helpers :wrappers :ask :create);
+use run_program;
+use security::level;
+use security::msec;
+use security::help;
+use security::l10n;
+
+#$MODE = 'basic';
+#$0 =~ /draksec-firewall$/ and $MODE = 'firewall';
+#$0 =~ /draksec-perms$/ and $MODE = 'perms';
+
+#/^-?-(\S+)$/ and $options{$1} = 1 foreach @ARGV;
+
+
+my $_in = 'interactive'->vnew('su'); # enforce being root
+
+$ugtk3::wm_icon = "/usr/share/mcc/themes/default/draksec-mdk.png";
+my ($w);
+
+############################    I18N     ###################################
+
+
+my %translations = (
+	'ALL'     => N("ALL"),
+	'LOCAL'   => N("LOCAL"),
+	'NONE'    => N("NONE"),
+	'default' => N("Default"),
+	'ignore'  => N("Ignore"),
+ 	'no'      => N("No"),
+	'yes'     => N("Yes"),
+);
+my %inv_translations = reverse %translations;
+
+sub to_i18n { map { $translations{$_} || $_ } @_ }
+sub from_i18n { $inv_translations{$_[0]} || $_[0] }
+sub resize { gtkset($_[0], width => 50) }
+
+# factorize this with drakrpm and harddrake2
+sub wait_msg {
+    my $mainw = ugtk3->new(N("Please wait"), (modal => 1, transient => $w->{real_window}));
+    $mainw->{window}->add(gtknew('WrappedLabel', text => $_[0]));
+    $mainw->{rwindow}->show_all;
+    gtkset_mousecursor_wait($mainw->{rwindow}->get_window);
+    # ugly workaround for gtk+ not displaying subdialog contents:
+    Glib::Timeout->add(300, sub { Gtk3->main_quit; 0 });
+    Gtk3->main;
+    $mainw;
+}
+
+sub remove_wait_msg { $_[0]->destroy }
+
+sub new_nonedit_combo {
+    my ($string_list, $o_default_value) = @_;
+    gtknew('ComboBox', text => to_i18n($o_default_value), list => [ to_i18n(@$string_list) ]);
+}
+
+#my $msec = security::msec->new;
+$w = ugtk3->new(N("Security Level and Checks"));
+my $window = $w->{window};
+
+
+############################ MAIN WINDOW ###################################
+# Set different options to Gtk3::Window
+unless ($::isEmbedded) {
+    $w->{rwindow}->set_position('center');
+    $w->{rwindow}->set_title("DrakSec");
+    $window->set_size_request(598, 520);
+}
+
+# Connect the signals
+$window->signal_connect('delete_event', sub { $window->destroy });
+$window->signal_connect('destroy', sub { ugtk3->exit });
+
+$window->add(my $vbox = gtkshow(gtknew('VBox')));
+
+my $common_opts = { col_spacings => 10, row_spacings => 5, mcc => 1 };
+
+######################## AUTH ###################################
+my %progs;
+
+my $auth_string = N("Configure authentication required to access DrakX tools");
+
+my %auth = (
+      default => N("Default"),
+      no_passwd => N("No password"),
+      root_passwd => N("Administrator password"),
+      user_passwd => N("User password"),
+);
+
+my $polkit_rules_file = "/etc/polkit-1/rules.d/51-draksec.rules";
+my %overrides = map { if (/case '([^']+)': return polkit\.Result\.(YES|AUTH_ADMIN_KEEP|AUTH_SELF_KEEP)/) { ($1, $2) } } cat_($polkit_rules_file);
+
+
+sub default_auth_value {
+    my ($prog) = @_;
+
+    return $auth{no_passwd} if $overrides{$prog} eq 'YES';
+    return $auth{root_passwd} if $overrides{$prog} eq 'AUTH_ADMIN_KEEP';
+    return $auth{user_passwd} if $overrides{$prog} eq 'AUTH_SELF_KEEP';
+    return $auth{default};
+}
+
+sub set_auth_value {
+    my ($prog, $auth) = @_;
+    if ($auth eq 'no_passwd') {
+        $overrides{$prog} = 'YES';
+    } elsif ($auth eq 'root_passwd') {
+        $overrides{$prog} = 'AUTH_ADMIN_KEEP';
+    } elsif ($auth eq 'user_passwd') {
+        $overrides{$prog} = 'AUTH_SELF_KEEP';
+    } else {
+        delete $overrides{$prog};
+    }
+}
+
+sub write_rules() {
+    my $contents = '';
+    keys %overrides;
+    while (my ($k, $v) = each %overrides) {
+        $contents .= "case '$k': return polkit.Result.$v;\n" if $k && $v;
+    }
+
+    if ($contents) {
+        output($polkit_rules_file, <<EOF);
+// This file is written by draksec. Do not edit.
+var drakToolAuth = function(tool){switch (tool){
+$contents
+}return polkit.Result.NOT_HANDLED;};
+EOF
+    } else {
+        rm_rf($polkit_rules_file) if -f $polkit_rules_file;
+    }
+
+    system('systemctl', 'try-restart', 'polkit.service');
+}
+
+my %descr = (
+    
+    drakrpm => N("Software Management"),
+    'drakrpm-update' => N("%s Update", N("DrakX")),
+    'drakrpm-editmedia' => N("Software Media Manager"),
+    drak3d => N("Configure 3D Desktop effects"),
+    drakx11 => N("Graphical Server Configuration"),
+    drakmouse => N("Mouse Configuration"),
+    drakkeyboard => N("Keyboard Configuration"),
+    drakups => N("UPS Configuration"),
+    drakconnect => N("Network Configuration"),
+    drakhosts => N("Hosts definitions"),
+    draknetcenter => N("Network Center"),
+    drakroam => N("Wireless Network Roaming"),
+    drakvpn => N("VPN"),
+    drakproxy => N("Proxy Configuration"),
+    drakgw => N("Connection Sharing"),
+    drakauth => N("Authentication"),
+    drakbackup => N("Backups"),
+    drakfont => N("Import fonts"),
+    draklog => N("Logs"),
+    drakxservices => N("Services"),
+    drakuser => N("Users"),
+    drakclock => N("Date, Clock & Time Zone Settings"),
+    drakboot => N("Boot Configuration"),
+);
+
+
+
+
+
+####################### OK CANCEL BUTTONS ##################################
+gtkpack_($vbox,
+	 0, gtkshow(gtknew('VBox', spacing => 5, children => [
+			if_(!$::isEmbedded, 0, Gtk3::Banner->new('/usr/share/mcc/themes/default/drakperm-mdk.png', N("Permissions"))),
+			0, gtknew('Label', text => $auth_string, alignment => [ 0.5, 0 ])
+		])),
+         1, gtkshow(create_scrolled_window(
+			gtknew('VBox', children => [
+			    map {
+				my ($title, $progs) = @$_;
+				(0, gtknew('Expander', use_markup => 1, text => mygtk3::title1_to_markup($title), child => create_packtable(
+				$common_opts,
+				     map {
+					 [
+					     gtkshow(gtknew('Label_Left', line_wrap => 1, text => $descr{$_} || $_)),
+						 $progs{$_} = new_nonedit_combo([
+						     @auth{qw(default user_passwd root_passwd no_passwd)}
+						 ],
+										default_auth_value($_)
+										#$msec->get_check_value($opt)
+									    )
+					 ];
+				     } split(' ', $progs)
+				)));
+			    } (
+				[ N("Software Management"), 'drakrpm drakrpm-update drakrpm-editmedia' ],
+				[ N("Hardware"), 'drak3d drakx11 drakmouse drakkeyboard drakups' ],
+				[ N("Network"), 'drakconnect drakhosts draknetcenter drakroam drakvpn drakproxy drakgw' ],
+				[ N("System"), 'drakauth drakfont draklog drakxservices drakuser drakclock' ],
+				[ N("Boot"), 'drakboot' ],
+			    )
+			]))),
+
+         0, create_okcancel(my $oc =
+                            {
+                             cancel_clicked => sub { ugtk3->exit(0) },
+                             ok_clicked => sub {
+                                log::explanations("Setting up right delegation");
+                                my %rev_auth = reverse %auth;
+                                foreach my $key (keys %progs) {
+                                    my $value = $progs{$key}->get_text;
+                                    set_auth_value($key, $rev_auth{$value});
+                                }
+
+                                write_rules();
+                                remove_wait_msg($w);
+                                ugtk3->exit(0);
+                            }
+                            },
+                            undef, undef, ''
+                           ),
+        );
+
+$oc->{cancel}->set_can_default(1);
+$oc->{cancel}->grab_default;
+
+$w->main;
+ugtk3->exit(0);
