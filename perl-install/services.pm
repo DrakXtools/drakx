@@ -111,6 +111,7 @@ rwhod => N_("The rwho protocol lets remote users get a list of all of the users
 logged into a machine running the rwho daemon (similar to finger)."),
 saned => N_("SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."),
 shorewall => N_("Packet filtering firewall"),
+shorewall6 => N_("Packet filtering firewall for IPv6"),
 smb => N_("The SMB/CIFS protocol enables to share access to files & printers and also integrates with a Windows Server domain"),
 sound => N_("Launch the sound system on your machine"),
 'speech-dispatcherd' => N_("layer for speech analysis"),
@@ -155,7 +156,7 @@ sub ask_ {
 			 # FIXME: split part of 'Internet' into 'Security' or 'Firewall'?
 			 N("Internet") => [ qw(adsl boa cddbp ftp httpd ibod ip6tables ippl iptables iptoip ipvsadm
                                                isdn4linux jabber jabber-icq jail.init junkbuster mandi nessusd pftp portsentry 
-                                               prelude proftpd proftpd-xinetd pure-ftpd ipsec radvd roxen shorewall shorewall-ipv6 squid
+                                               prelude proftpd proftpd-xinetd pure-ftpd ipsec radvd roxen shorewall shorewall6 squid
                                                tftp) ],
 
 			 N("_: Keep these entry short\nNetworking") => [ qw(network network-auth network-up resolvconf) ],
