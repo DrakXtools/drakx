@@ -310,6 +310,7 @@ my %hd_vendors = (
     "Compaq" => "Compaq",
     "CONNER" => "Conner Peripherals",
     "IBM" => "IBM",
+    "INTEL" => "Intel",
     "FUJITSU" => "Fujitsu",
     "HITACHI" => "Hitachi",
     "Lite-On" => "Lite-On Technology Corp.",
