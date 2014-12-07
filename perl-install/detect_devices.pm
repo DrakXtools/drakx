@@ -1181,23 +1181,17 @@ sub dmidecode() {
     return if $>;
     my ($ver, @l) = arch() =~ /86/ ? run_program::get_stdout('dmidecode') : ();
 
-    my $tab = "\t";
-
     my ($major, $minor) = $ver =~ /(\d+)\.(\d+)/;
 
-    if ($major > 2 || $major == 2 && $minor > 7) {
-	#- new dmidecode output is less indented
-	$tab = '';
-	#- drop header
-	shift @l while @l && $l[0] ne "\n";
-    }
+    #- drop header
+    shift @l while @l && $l[0] ne "\n";
 
     foreach (@l) {
 	next if /TRUNCATED/;
-	if (/^$tab\t(.*)/) {
+	if (/^\t(.*)/) {
 	    $dmis[-1]{string} .= "$1\n";
-	    $dmis[-1]{$1} = $2 if /^$tab\t(.*): (.*)$/;
-	} elsif (my ($s) = /^$tab(.*)/) {
+	    $dmis[-1]{$1} = $2 if /^\t(.*): (.*)$/;
+	} elsif (my ($s) = /^(.*)/) {
 	    next if $s =~ /^$/ || $s =~ /\bDMI type \d+/;
 	    $s =~ s/ Information$//;
 	    push @dmis, { name => $s };
