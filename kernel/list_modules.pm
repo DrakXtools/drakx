@@ -316,6 +316,7 @@ our %l = (
       qw(mmc_block sdhci-acpi), # eMMC
 
       'cryptoloop',
+      qw(hv_balloon hyperv_fb),
 
       qw(crc32c crc32c-intel),
       
