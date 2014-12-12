@@ -317,6 +317,7 @@ our %l = (
 
       'cryptoloop',
       qw(hv_balloon hyperv_fb),
+      qw(virtio_balloon vmw_balloon),
 
       qw(crc32c crc32c-intel),
       
