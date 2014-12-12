@@ -268,11 +268,6 @@ sub when_load_category {
 	eval { load('ide_gd_mod') };
     } elsif ($category =~ m,disk/(scsi|hardware_raid|sata|firewire|virtual),) {
 	$conf->add_probeall('scsi_hostadapter', $name);
-	if (detect_devices::isHyperv()) {
-	    log::l("HyperV detected. Loading storvsc");
-	    # those works on Hyper-V but fails on Virtual PC:
-	    eval { load($_) } foreach qw(hv_vmbus hv_storvsc);
-	}
 	eval { load('sd_mod') };
     } elsif ($category eq 'bus/usb') {
 	$conf->add_probeall('usb-interface', $name);
