@@ -193,7 +193,7 @@ our %l = (
     local => [
       qw(btrfs ext3 ext4 jfs nilfs2 ntfs reiserfs vfat xfs),
     ],
-    various => [ qw(efivarfs overlayfs romfs ufs fuse) ],
+    various => [ qw(efivarfs overlay romfs ufs fuse) ],
 
   },
 
