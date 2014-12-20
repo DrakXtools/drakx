@@ -157,7 +157,7 @@ our %l = (
     usb => [ qw(bcma-hcd c67x00 dwc3 dwc3-pci ehci-hcd ehci-pci ehci-platform ehci-tegra fhci fusbh200-hcd hwa-hc
 		imx21-hcd isp116x-hcd isp1362-hcd isp1760 ohci-hcd ohci-pci ohci-platform oxu210hp-hcd
 		r8a66597-hcd renesas-usbhs sl811_cs sl811-hcd ssb-hcd u132-hcd
-		uhci-hcd usb-ohci usb-uhci whci-hcd xhci-hcd) ],
+		uhci-hcd usb-ohci usb-uhci whci-hcd xhci-hcd xhci-pci xhci-plat-hcd) ],
     bluetooth => [ qw(ath3k bcm203x bfusb bluecard_cs bpa10x bt3c_cs btusb dtl1_cs) ],
     firewire => [ qw(ohci1394) ],
     i2c => [
