@@ -19,7 +19,7 @@ our %l = (
         qw(82596 ac3200 acenic aironet4500_card altera_tse amd8111e at1700 atl2 atp),
         qw(bcm4400 cassini cs89x0 cx82310_eth de600 de620),
         qw(depca dmfe e2100 ec_bhf eepro eexpress enic eth16i),
-        qw(ewrk3 hp hp-plus hp100 i40e i40evf),
+        qw(ewrk3 fm10k hp hp-plus hp100 i40e i40evf),
         qw(iph5526), #- fibre channel
         qw(i40evf jme lance ne ni5010 ni52 ni65 nvnet),
         qw(prism2_plx qlge r6040 rcpci rhineget),
@@ -33,7 +33,7 @@ our %l = (
         qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
       # add all phys
-      qw(amd at803x bcm7xxx bcm87xx broadcom cicada davicom et1011c icplus lxt marvell mdio-bitbang mdio-gpiomicrel),
+      qw(amd at803x bcm7xxx bcm87xx broadcom cicada davicom et1011c icplus lxt marvell mdio-bcm-unimac mdio-bitbang mdio-gpiomicrel),
       qw(national qsemi r8152 r815x realtek smsc spi_ks8995 ste10Xp vitesse),
     ],
     firewire => [ qw(eth1394 pcilynx) ],
@@ -69,8 +69,8 @@ our %l = (
       qw(p54usb prism2_cs prism2_pci prism2_usb prism54 qmi_wwan r8180),
       qw(r8187se rtl8188ee r8192_pci r8192s_usb r8192u_usb r8712u ray_cs rndis_wlan rsi_sdio rt2400 rt2400pci rt2500),
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
-      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se r8188eu r8723au rtl8821ae rtl_pci rtl_usb rtusb),
-      qw(rtl8192se rtl8192cu rtl8192de rtl8723ae rtl8723be rtl8821ae spectrum_cs sr9700 sr9800 ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
+      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se r8188eu r8723au rtl_pci rtl_usb rtusb),
+      qw(rtl8192se rtl8192cu rtl8192de rtl8192ee rtl8723ae rtl8723be rtl8821ae spectrum_cs sr9700 sr9800 ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
       qw(wavelan_cs wcn36xx wl wl3501_cs wvlan_cs zd1201 zd1211rw),
     ],
     isdn => [
@@ -109,7 +109,7 @@ our %l = (
         qw(eata_pio fdomain g_NCR5380 in2000 initio mpt2sas mpt3sas mvsas NCR53c406a),
         qw(nsp32 pas16 pci2220i pm80xx pm8001 psi240i qla1280 qla2x00 qla2xxx),
         qw(qlogicfas qlogicfc rsxx seagate shasta skd sim710 stex sym53c416),
-        qw(t128 tmscsim u14-34f ultrastor vmw_pvscsi wd7000),
+        qw(t128 tmscsim u14-34f ultrastor vmw_pvscsi wd7000 xen-scsiback xen-scsifront),
       qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicfas408 sym53c8xx lpfc lpfcdd), # ncr53c8xx
     ],
     sata => [
@@ -157,7 +157,7 @@ our %l = (
     usb => [ qw(bcma-hcd c67x00 dwc3 dwc3-pci ehci-hcd ehci-pci ehci-platform ehci-tegra fhci fusbh200-hcd hwa-hc
 		imx21-hcd isp116x-hcd isp1362-hcd isp1760 ohci-hcd ohci-pci ohci-platform oxu210hp-hcd
 		r8a66597-hcd renesas-usbhs sl811_cs sl811-hcd ssb-hcd u132-hcd
-		uhci-hcd usb-ohci usb-uhci whci-hcd xhci-hcd xhci-pci xhci-plat-hcd) ],
+		uhci-hcd usb-ohci usb-uhci vhci-hcd whci-hcd xhci-hcd xhci-pci xhci-plat-hcd) ],
     bluetooth => [ qw(ath3k bcm203x bfusb bluecard_cs bpa10x bt3c_cs btusb dtl1_cs) ],
     firewire => [ qw(ohci1394) ],
     i2c => [
@@ -173,7 +173,7 @@ our %l = (
 	    hid-ezkey hid-gaff hid-generic hid-gt683r hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse hid-huion
 	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-lenovo hid-lenovo-tpkbd
 	    hid-logitech hid-logitech-dj hid-magicmouse hid-microsoft hid-monterey
-	    hid-multilaser hid-multitouch hid-ntrig hid-ortek hid-petalynx hid-picolcd
+	    hid-multilaser hid-multitouch hid-ntrig hid-ortek hid-penmount hid-petalynx hid-picolcd
 	    hid-pl hid-primax hid-prodikeys hid-roccat hid-roccat-arvo hid-roccat-common
 	    hid-roccat-isku hid-roccat-kone hid-roccat-koneplus hid-roccat-konepure hid-roccat-kovaplus hid-roccat-lua
 	    hid-roccat-pyra hid-roccat-ryos hid-roccat-savu hid-saitek hid-samsung hid-sensor-hub hid-sjoy hid-sony
@@ -323,6 +323,16 @@ our %l = (
       
       qw(evdev), qw(usblp printer), 'floppy', 'microcode', 'usb_common',
       qw(acpi_cpufreq processor),
+      qw(bcm_sf2),
+      qw(usbip-host),
+
+      # drivers/platform/x86:
+      qw(acerhdf acer-wmi alienware-wmi amilo-rfkill apple-gmux asus-laptop asus-nb-wmi asus-wmi classmate-laptop compal-laptop dell-laptop),
+      qw(dell-smo8800 dell-wmi-aio dell-wmi eeepc-laptop eeepc-wmi fujitsu-laptop),
+      qw(fujitsu-tablet hdaps hp_accel hp-wireless hp-wmi ibm_rtl ideapad-laptop intel_ips intel_menlow intel_oaktrail intel-rst intel-smartconnect),
+      qw(msi-laptop msi-wmi mxm-wmi panasonic-laptop pvpanic samsung-laptop samsung-q10 shuttle-wmi sony-laptop thinkpad_acpi topstar-laptop),
+      qw(toshiba_acpi toshiba_bluetooth toshiba_haps wmi),
+
 
       #- these need checking
       qw(rrunner meye),
