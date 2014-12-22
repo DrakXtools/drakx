@@ -144,7 +144,10 @@ sub _launchX {
     my $start_time = time();
     foreach (1..60) {
         log::l("waiting for the server to start ($_ $nb)");
-        log::l("Server died"), return 0 if !fuzzy_pidofs(qr/\b$server\b/);
+        if (!fuzzy_pidofs(qr/\b$server\b/)) {
+            log::l("Server died");
+            return 0;
+	}
         $nb++ if xf86misc::main::Xtest($wanted_DISPLAY);
         if ($nb > 2) {         #- one succeeded test is not enough :-(
             log::l("AFAIK X server is up");
