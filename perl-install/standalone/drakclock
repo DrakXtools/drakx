@@ -266,7 +266,10 @@ sub update_time() {
 }
 
 sub cal_changed() {
-    !$its_reset and $timer and Glib::Source->remove($timer);
+    if (!$its_reset and $timer) {
+	Glib::Source->remove($timer);
+	undef $timer;
+    }
     $button_reset->set_sensitive(1);
 }
 
@@ -282,6 +285,7 @@ sub changed() {
 
 sub spinned() {
     Glib::Source->remove($timer);
+    undef $timer;
     $button_reset->set_sensitive(1);
     time_to_rad($adjs->get_value, $adjm->get_value, $adjh->get_value);
     Repaint($drawing_area);
@@ -293,6 +297,7 @@ sub motion_event {
     $pressed or return;
     if ($first) {
 	Glib::Source->remove($timer);
+	undef $timer;
 	$Radian = determine_radian($event->x, $event->y);
 	$button_reset->set_sensitive(1);
     }

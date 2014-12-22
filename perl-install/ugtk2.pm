@@ -1154,7 +1154,10 @@ sub ask_browse_tree_info_given_widgets {
     $w->{tree}->get_selection->signal_connect(changed => sub {
 	my ($model, $iter) = $_[0]->get_selected;
 	$model && $iter or return;
-	Glib::Source->remove($idle) if $idle;
+	if ($idle) {
+	    Glib::Source->remove($idle);
+	    undef $idle;
+	}
 	
 	if (!$model->iter_has_child($iter)) {
 	    $curr = $model->get($iter, 0);
