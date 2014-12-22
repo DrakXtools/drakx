@@ -1058,17 +1058,6 @@ sub _gtk__AboutDialog {
     $w;
 }
 
-sub _gtk__FileSelection {
-    my ($w, $opts) = @_;
-
-    if (!$w) {
-	$w = Gtk3::FileSelection->new(delete $opts->{title} || '');
-	gtkset($w->ok_button, %{delete $opts->{ok_button}}) if exists $opts->{ok_button};
-	gtkset($w->cancel_button, %{delete $opts->{cancel_button}}) if exists $opts->{cancel_button};
-    }
-    $w;
-}
-
 sub _gtk__FileChooserDialog    { &_gtk_any_Window }
 
 sub _gtk__FileChooser {
