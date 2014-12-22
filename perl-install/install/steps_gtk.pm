@@ -146,7 +146,8 @@ sub _launchX {
         log::l("waiting for the server to start ($_ $nb)");
         if (!fuzzy_pidofs(qr/\b$server\b/)) {
             log::l("Server died");
-            return 0;
+            log::l(any::header("Xorg.log"), cat_("/var/log/Xorg.0.log"));
+            return 0 if !fuzzy_pidofs(qr/\b$server\b/);
 	}
         $nb++ if xf86misc::main::Xtest($wanted_DISPLAY);
         if ($nb > 2) {         #- one succeeded test is not enough :-(
@@ -158,6 +159,7 @@ sub _launchX {
         sleep 1;
     }
     log::l("Timeout!!");
+    log::l(any::header("Xorg.log"), cat_("/var/log/Xorg.0.log"));
     0;
 }
 
