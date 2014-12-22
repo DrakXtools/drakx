@@ -1272,14 +1272,14 @@ sub set_login_serial_console {
     substInFile { s/^s$port:.*//; $_ = $line if eof } "$::prefix/etc/inittab";
 }
 
-sub report_bug {
-    my (@other) = @_;
-
-    sub header { "
+sub header { "
 ********************************************************************************
 * $_[0]
 ********************************************************************************";
-    }
+}
+
+sub report_bug {
+    my (@other) = @_;
 
     join '', map { chomp; "$_\n" }
       header("lspci"), detect_devices::stringlist(),
