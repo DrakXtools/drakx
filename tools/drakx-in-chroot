@@ -62,7 +62,7 @@ if (-d $SLASH_LOCATION) {
     sys("$sudo rm -rf $SLASH_LOCATION");
 }
 
-mkdir_p("$SLASH_LOCATION$_") foreach '/dev', '/dev/usb', '/etc', '/var', '/proc', '/sys', '/run', $MEDIA_LOCATION_ROOTED, $prefix_ROOTED;
+mkdir_p("$SLASH_LOCATION$_") foreach '/dev', '/etc', '/var', '/proc', '/sys', '/run', $MEDIA_LOCATION_ROOTED, $prefix_ROOTED;
 
 sys("$sudo rm -rf $dir") if $ENV{CLEAN};
 -e $dir or sys("$sudo mkdir -p $dir");
