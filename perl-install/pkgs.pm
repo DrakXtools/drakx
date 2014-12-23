@@ -242,9 +242,10 @@ sub detect_unselected_locale_packages {
     require lang;
     my $locales_prefix = 'locales-';
     my $locale = lang::read();
-    my $selected_locale = $locales_prefix . lang::locale_to_main_locale($locale->{lang});
+    my @selected_locales = map { $locales_prefix . $_ } lang::locale_to_main_locale($locale->{lang}), lang::c2locale($locale->{country});
     my @available_locales = $do_pkgs->are_installed($locales_prefix . '*');
-    member($selected_locale, @available_locales) ? difference2(\@available_locales, [ $selected_locale ]) : ();
+    my @unneeded_locales = difference2(\@available_locales, \@selected_locales);
+    $do_pkgs->are_installed(@unneeded_locales);
 }
 
 sub remove_unused_locale_packages {
