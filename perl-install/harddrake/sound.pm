@@ -77,9 +77,7 @@ sub do_switch {
     my $_wait = $in->wait_message(N("Please wait"), N("Please Wait... Applying the configuration"));
     log::explanations("removing old $old_driver\n");
     if ($::isStandalone) {
-        rooted("service sound stop");
-        rooted("service alsa stop") if $old_driver =~ /^snd_/;
-        unload($old_driver);    # run_program("/sbin/modprobe -r $driver"); # just in case ...
+        unload($old_driver);    # run_program("/sbin/modprobe -r $driver");
     }
     $modules_conf->remove_module($old_driver);
     configure_one_sound_slot($modules_conf, $index, $new_driver);
@@ -87,13 +85,8 @@ sub do_switch {
     if ($new_driver =~ /^snd_/) {   # new driver is an alsa one
         $in->do_pkgs->ensure_binary_is_installed(qw(alsa-utils alsactl), 1);
         $in->do_pkgs->ensure_binary_is_installed(qw(aoss aoss), 1);
-        rooted("service alsa start") if $::isStandalone;
-        rooted("/sbin/chkconfig --add alsa")  if $::isStandalone;
-        load($modules_conf, $new_driver) if $::isStandalone;   # service alsa is buggy
-    } else { rooted("/sbin/chkconfig --del alsa") }
-    log::explanations("loading new $new_driver\n");
-    rooted("/sbin/chkconfig --add sound"); # just in case ...
-    rooted("service sound start") if $::isStandalone;
+        load($modules_conf, $new_driver) if $::isStandalone;
+    }
 }
 
 sub config {
