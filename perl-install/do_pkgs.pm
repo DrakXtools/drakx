@@ -333,15 +333,16 @@ sub install {
 	return 1;
     }
 
+    my @wrapper = is_mgalive() ? qw(chroot /mnt) : ();
     my @options = ('--allow-medium-change', '--auto', '--no-verify-rpm', '--expect-install', @l);
     my $ret;
     if (check_for_xserver() && -x '/usr/bin/gurpmi') {
-        $ret = system('gurpmi', @options) == 0;
+        $ret = system(@wrapper, 'gurpmi', @options) == 0;
     } else {
         my $_wait = $do->in && $do->in->wait_message(N("Please wait"), N("Installing packages..."));
         $do->in->suspend if $do->in;
         log::explanations("installing packages @l");
-        $ret = system('urpmi', @options) == 0;
+        $ret = system(@wrapper, 'urpmi', @options) == 0;
         $do->in->resume if $do->in;
     }
     $ret;
