@@ -369,6 +369,7 @@ sub check {
     my ($fs_type, $_hd, $part) = @_;
     $fs_type eq "jfs" && $part->{size} < MB(16) and die N("You cannot use JFS for partitions smaller than 16MB");
     $fs_type eq "reiserfs" && $part->{size} < MB(32) and die N("You cannot use ReiserFS for partitions smaller than 32MB");
+    $fs_type eq "btrfs" && $part->{size} < MB(256) and die N("You cannot use btrfs for partitions smaller than 256MB");
 }
 
 sub guessed_by_mount() {
