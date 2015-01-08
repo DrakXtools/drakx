@@ -222,7 +222,7 @@ sub get_normal_parts_and_holes {
 sub _default_type {
     my ($hd) = @_;
 
-    arch() =~ /ia64/ ? 'gpt' : 
+    is_uefi() ? 'gpt' : 
 	$hd->{totalsectors} > 4 * 1024 * 1024 * 2048 ? 'lvm' : "dos"; #- default to LVM on full disk when >4TB
 }
 
@@ -248,7 +248,7 @@ sub read_primary {
     #- it can be safely considered that the first sector is used to probe the partition table
     #- but other sectors (typically for extended partition ones) have to match this type!
 	my @parttype = (
-	  if_(arch() =~ /^ia64/, 'gpt'),
+	  if_( is_uefi(), 'gpt'),
           # gpt must be tried before dos as it presents a fake compatibility mbr
 	  ('gpt', 'lvm', 'dmcrypt', 'dos', 'bsd', 'sun', 'mac'),
 	);
