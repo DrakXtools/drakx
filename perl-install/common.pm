@@ -711,6 +711,12 @@ sub update_gnomekderc_no_create {
     }
 }
 
+# check if we are in mga live mode
+sub is_mgalive { -e "/run/mgalive" }
+
+# check if we are on an uefi system
+sub is_uefi { -e "/sys/firmware/efi" }
+
 =item cmp_kernel_versions($va, $vb)
 
 Compare two kernel versions
