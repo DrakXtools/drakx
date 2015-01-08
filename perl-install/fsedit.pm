@@ -40,8 +40,8 @@ use fs;
   ],
 );
 foreach (values %suggestions) {
-    if (arch() =~ /ia64/) {
-	@$_ = ({ mntpoint => "/boot/efi", size => MB(50), pt_type => 0xef, ratio => 1, maxsize => MB(150) }, @$_);
+    if ( is_uefi() ) {
+	@$_ = ({ mntpoint => "/boot/EFI", size => MB(100), pt_type => 0xef, ratio => 1, maxsize => MB(300) }, @$_);
     }
 }
 

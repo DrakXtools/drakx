@@ -55,8 +55,7 @@ sub suggest_mount_points_always {
     my @win = grep { isFat_or_NTFS($_) && !$_->{isMounted} && maybeFormatted($_) && !$_->{is_removable} && $_->{pt_type} != 0x12 && !isRecovery($_) } @$fstab;
     log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
     if (@win == 1) {
-	#- Suggest /boot/efi on ia64.
-	$win[0]{mntpoint} = arch() =~ /ia64/ ? "/boot/efi" : "/media/windows";
+	$win[0]{mntpoint} = "/media/windows";
     } else {
 	my %w; foreach (@win) {
 	    my $v = $w{$_->{device_windobe}}++;
