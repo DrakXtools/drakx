@@ -2098,8 +2098,6 @@ sub ensure_pkg_is_installed {
     my %h = ('grub2' => 'grub2-install');
     my $main_method = main_method($bootloader->{method});
     if (member($main_method, qw(grub grub2 lilo))) {
-	# install of bootloader must be done in chroot, not on live image
-	local $::isInstall = 1 if is_mgalive();
 	$do_pkgs->ensure_binary_is_installed($pkg{$main_method} || $main_method, $h{$main_method} || $main_method, 1) or return 0;
 	if ($bootloader->{method} eq 'grub-graphic') {
 	    $do_pkgs->ensure_is_installed('mandriva-gfxboot-theme', '/usr/share/gfxboot/themes/Moondrake/boot/message', 1) or return 0;
