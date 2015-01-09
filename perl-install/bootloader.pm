@@ -1280,12 +1280,10 @@ sub config_files() {
 sub method2text {
     my ($method) = @_;
     +{
-	if_( ! is_uefi(),
 	'lilo-menu'    => N("LILO with text menu"),
+	'grub2'        => N("GRUB2 with graphical menu"),
 	'grub-graphic' => N("GRUB with graphical menu"),
 	'grub-menu'    => N("GRUB with text menu"),
-	),
-	'grub2'        => N("GRUB2 with graphical menu"),
     }->{$method};
 }
 
