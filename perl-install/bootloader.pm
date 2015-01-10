@@ -1292,14 +1292,14 @@ sub method_choices_raw {
     detect_devices::is_xbox() ? 'cromwell' :
     arch() =~ /mips/ ? 'pmon2000' : 
     arch() =~ /arm/ ? 'uboot' :
-      (
-       if_(!$b_prefix_mounted || whereis_binary('lilo', $::prefix), 
-	   'lilo-menu'),
-       if_(!$b_prefix_mounted || whereis_binary('grub', $::prefix), 
-	   'grub-graphic', 'grub-menu'),
        if_(!$b_prefix_mounted || whereis_binary('grub2-reboot', $::prefix), 
 	   'grub2'),
-      );
+      if_(!is_uefi(), (
+       if_(!$b_prefix_mounted || whereis_binary('grub', $::prefix), 
+	   'grub-graphic', 'grub-menu'),
+       if_(!$b_prefix_mounted || whereis_binary('lilo', $::prefix), 
+	   'lilo-menu'),
+      ));
 }
 sub method_choices {
     my ($all_hds, $b_prefix_mounted) = @_;
