@@ -148,7 +148,7 @@ sub ask_users() {
     my $users = [];
     my $superuser = to_bool(lc(get_conf('USERS')) eq 'with_root') && {};
     any::ask_user_and_root($in, $superuser, $users, $security);
-    push @{$users->[0]{groups}}, 'wheel';
+	push @{$users->[0]{groups}}, 'wheel', 'sambashare', 'users';
     my $old_user = get_conf('USER_RENAME_FROM');
     if (@$users && $old_user) {
       $users->[0]{rename_from} = $old_user;
