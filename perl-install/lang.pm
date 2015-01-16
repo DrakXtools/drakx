@@ -1455,7 +1455,7 @@ sub write {
 	    eval {
 		log::explanations(qq(Set system font to "$name"));
 		cp_af(glob_("$p/consolefonts/$name.*"), "$::prefix/etc/sysconfig/console/consolefonts");
-		add2hash $h, { SYSFONT => $name };
+		add2hash $h, { FONT => $name };
 	    };
 	    $@ and log::explanations("missing console font $name");
 	}
@@ -1463,7 +1463,7 @@ sub write {
 	    eval {
 		log::explanations(qq(Set application-charset map (Unicode mapping table) to "$name"));
 		cp_af(glob_("$p/consoletrans/$acm*"), "$::prefix/etc/sysconfig/console/consoletrans");
-		add2hash $h, { SYSFONTACM => $acm };
+		add2hash $h, { FONT_MAP => $acm };
 	    };
 	    $@ and log::explanations("missing console acm file $acm");
 	}
