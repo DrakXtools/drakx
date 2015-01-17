@@ -22,8 +22,16 @@ sub getTimeZones() {
 }
 
 sub read() {
-    my %t = getVarsFromSh("$::prefix/etc/sysconfig/clock") or return {};
-    { timezone => $t{ZONE}, UTC => text2bool($t{UTC}) };
+    my $tz, $lrtc;
+    eval {
+        require Net::DBus;
+        my $bus = Net::DBus->system;
+        my $td_srv = $bus->get_service("org.freedesktop.timedate1");
+        my $td_props = $td_srv->get_object("/org/freedesktop/timedate1", "org.freedesktop.DBus.Properties");
+        $tz = $td_props->Get("org.freedesktop.timedate1", "Timezone");
+        $lrtc = $td_props->Get("org.freedesktop.timedate1", "LocalRTC");
+    };
+    return ($@) ? {} : { timezone => $tz, UTC => $lrtc ? 0 : 1 };
 }
 
 our $ntp = "ntp";
@@ -62,17 +70,18 @@ sub set_ntp_server {
 
 sub write {
     my ($t) = @_;
+    require run_program;
 
     set_ntp_server($t->{ntp});
 
     my $tz_prefix = get_timezone_prefix(1);
     run_program::run('timedatectl', 'set-timezone', $t->{timezone});
     $@ and log::l("installing /etc/localtime failed");
-    setVarsInSh("$::prefix/etc/sysconfig/clock", {
-	ZONE => $t->{timezone},
-	UTC  => bool2text($t->{UTC}),
-	ARC  => "false",
-    });
+
+    run_program::run('timedatectl', 'set-timezone', $t->{timezone});
+    $@ and log::l("setting timezone failed");
+    run_program::run('timedatectl', 'set-local-rtc', bool2text(!$t->{UTC}));
+    $@ and log::l("setting local-rtc failed");
 
     my $adjtime_file = $::prefix . '/etc/adjtime';
     my @adjtime = cat_($adjtime_file);
