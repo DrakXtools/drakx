@@ -242,7 +242,9 @@ sub general_action_box {
 	$done_button = $button if $s eq 'Done';
 	gtkadd($box_end, gtksignal_connect($button, clicked => sub { try($s) }));
     }
-    gtkadd($box, $box_start, $box_end);
+# Remove HELP button
+#    gtkadd($box, $box_start, $box_end);
+    gtkadd($box, $box_end);
 }
 sub per_kind_action_box {
     my ($box, $box2, $kind) = @_;
