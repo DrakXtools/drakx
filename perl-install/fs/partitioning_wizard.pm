@@ -292,7 +292,7 @@ sub create_display_box {
     my $totalsectors = diskdrake::hd_gtk::kind2sectors($kind, @parts);
 
     my $width = 520;
-    my $minwidth = 40;
+    my $minwidth = 7;
 
     my $display_box = ugtk3::gtkset_size_request(Gtk3::HBox->new(0,0), -1, 26);
 
