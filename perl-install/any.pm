@@ -673,7 +673,7 @@ sub get_autologin() {
 
 sub is_standalone_autologin_needed {
     my ($dm) = @_;
-    return member($dm, qw(lxdm slim xdm sddm));
+    return member($dm, qw(lxdm slim xdm));
 }
 
 sub set_autologin {
