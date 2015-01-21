@@ -633,7 +633,7 @@ sub get_autologin() {
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
     my $gdm_file = "$::prefix/etc/X11/gdm/custom.conf";
     my $kdm_file = common::read_alternative('kdm4-config');
-    my $lightdm_conffile = "$::prefix/etc/lightdm/lightdm.conf.d/50-mageia-autologin.conf";
+    my $sddm_file = "$::prefix/etc/sddm.conf";
     my $autologin_file = "$::prefix/etc/sysconfig/autologin";
     my $desktop = $desktop{DESKTOP} || first(sessions());
     my %desktop_to_dm = (
@@ -663,7 +663,7 @@ sub get_autologin() {
         $autologin_user = text2bool($conf{AutoLoginEnable}) && $conf{AutoLoginUser};
     } elsif ($dm eq "sddm") {
         my %conf = read_gnomekderc($sddm_file, 'Autologin');
-        $autologin_user = text2bool($conf{User}) && $conf{Session};
+        $autologin_user = $conf{User} && $conf{Session};
     } else {
         my %conf = getVarsFromSh($autologin_file);
         $autologin_user = text2bool($conf{AUTOLOGIN}) && $conf{USER};
@@ -696,9 +696,9 @@ sub set_autologin {
 	AutoLoginEnable => $do_autologin,
 	AutoLoginUser => $autologin->{user},
     )) } if -e $kdm_conffile;
-	
+
     #- Configure SDDM
-	my $sddm_conffile = "$::prefix/etc/sddm.conf"
+    my $sddm_conffile = "$::prefix/etc/sddm.conf";
     eval { common::update_gnomekderc_no_create($sddm_conffile, 'Autologin' => (
 	Session => $autologin->{desktop},
 	User => $autologin->{user},
