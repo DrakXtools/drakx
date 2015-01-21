@@ -695,6 +695,13 @@ sub set_autologin {
 	AutoLoginEnable => $do_autologin,
 	AutoLoginUser => $autologin->{user},
     )) } if -e $kdm_conffile;
+	
+    #- Configure SDDM
+	my $sddm_conffile = "$::prefix/etc/sddm.conf"
+    eval { common::update_gnomekderc_no_create($sddm_conffile, 'Autologin' => (
+	Session => $autologin->{desktop},
+	User => $autologin->{user},
+    )) } if -e $kdm_conffile;
 
     #- Configure GDM
     my $gdm_conffile = "$::prefix/etc/X11/gdm/custom.conf";
