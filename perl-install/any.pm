@@ -646,6 +646,7 @@ sub get_autologin() {
     my %dm_canonical = (
         gnome => 'gdm',
         kde => 'kdm',
+        lxqt => 'sddm',
     );
     my $dm =
       lc($desktop{DISPLAYMANAGER}) ||
