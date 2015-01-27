@@ -355,10 +355,10 @@ call('users');
 call('encrypt_home');
 setVarsInSh($conf_file, { FINISH_INSTALL => 'no' });
 
-$in->exit(0);
-
 # (tpg) workaround for sddm, which hangs to autologin,
 # because when running finish-install,
 # /etc/sddm.conf is updated, and to get it
 # running sddm needs to be restarted
 system('systemctl restart display-manager.service &');
+
+$in->exit(0);
