@@ -634,6 +634,7 @@ sub get_autologin() {
     my $gdm_file = "$::prefix/etc/X11/gdm/custom.conf";
     my $kdm_file = common::read_alternative('kdm4-config');
     my $sddm_file = "$::prefix/etc/sddm.conf";
+    my $lightdm_conffile = "$::prefix/etc/lightdm/lightdm.conf.d/50-openmandriva-autologin.conf";
     my $autologin_file = "$::prefix/etc/sysconfig/autologin";
     my $desktop = $desktop{DESKTOP} || first(sessions());
     my %desktop_to_dm = (
@@ -642,6 +643,7 @@ sub get_autologin() {
         xfce4 => 'slim',
         LXDE => 'lxdm',
         LXQt => 'sddm',
+        MATE => 'lightdm',
     );
     my %dm_canonical = (
         gnome => 'gdm',
@@ -664,6 +666,9 @@ sub get_autologin() {
     } elsif ($dm eq "sddm") {
         my %conf = read_gnomekderc($sddm_file, 'Autologin');
         $autologin_user = $conf{User} && $conf{Session};
+    } elsif ($dm eq "lightdm") {
+    	my %conf = read_gnomekderc($lightdm_file, 'SeatDefaults');
+        $autologin_user = text2bool($conf{'#dummy-autologin'}) && $conf{autologin-user};
     } else {
         my %conf = getVarsFromSh($autologin_file);
         $autologin_user = text2bool($conf{AUTOLOGIN}) && $conf{USER};
@@ -710,6 +715,13 @@ sub set_autologin {
 	AutomaticLoginEnable => $do_autologin,
 	AutomaticLogin => $autologin->{user},
     )) } if -e $gdm_conffile;
+    
+    #- Configure LIGHTDM
+    my $lightdm_conffile = "$::prefix/etc/lightdm/lightdm.conf.d/50-openmandriva-autologin.conf";
+    eval { update_gnomekderc($lightdm_conffile, SeatDefaults => (
+    '#dummy-autologin' => $do_autologin,
+    'autologin-user' => $autologin->{user}
+    )) } if -e $lightdm_conffile;
 
     #- Configure LIGHTDM
     my $lightdm_conffile = "$::prefix/etc/lightdm/lightdm.conf.d/50-mageia-autologin.conf";
