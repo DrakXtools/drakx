@@ -19,7 +19,7 @@ our %l = (
         qw(82596 ac3200 acenic aironet4500_card altera_tse amd8111e at1700 atl2 atp),
         qw(bcm4400 cassini cs89x0 cx82310_eth de600 de620),
         qw(depca dmfe e2100 ec_bhf eepro eexpress enic eth16i),
-        qw(ewrk3 fm10k hp hp-plus hp100 i40e i40evf),
+        qw(ewrk3 fm10k bcmgenet hp hp-plus hp100 i40e i40evf),
         qw(iph5526), #- fibre channel
         qw(i40evf jme lance ne ni5010 ni52 ni65 nvnet),
         qw(prism2_plx qlge r6040 rcpci rhineget),
@@ -28,12 +28,12 @@ our %l = (
         qw(b44 com20020-pci de2104x),
         qw(defxx), # most unused
         qw(dgrs e100 eepro100 epic100 fealnx hamachi natsemi),
-        qw(ne2k-pci pcnet32 plip sis900 skfp starfire tulip),
+        qw(ne2k-pci pcnet32 plip sis900 skfp starfire stmmac-platform tulip),
         qw(typhoon via-rhine winbond-840 xgene-enet forcedeth),
         qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
       # add all phys
-      qw(amd at803x bcm7xxx bcm87xx broadcom cicada davicom et1011c icplus lxt marvell mdio-bcm-unimac mdio-bitbang mdio-gpiomicrel),
+      qw(amd at803x bcm7xxx bcm87xx broadcom cicada davicom et1011c fixed_phy icplus lxt marvell mdio-bcm-unimac mdio-bitbang mdio-gpiomicrel),
       qw(national qsemi r8152 r815x realtek smsc spi_ks8995 ste10Xp vitesse),
     ],
     firewire => [ qw(eth1394 pcilynx) ],
@@ -104,13 +104,13 @@ our %l = (
     ],
     scsi => [
 	'53c7,8xx',
-        qw(a100u2w advansys aha152x aha1542 aha1740 AM53C974 atp870u),
+        qw(a100u2w advansys aha152x aha1542 aha1740 am53c974 atp870u),
         qw(be2iscsi bfa BusLogic dc395x dc395x_trm dmx3191d dtc eata eata_dma),
         qw(eata_pio fdomain g_NCR5380 in2000 initio mpt2sas mpt3sas mvsas NCR53c406a),
         qw(nsp32 pas16 pci2220i pm80xx pm8001 psi240i qla1280 qla2x00 qla2xxx),
         qw(qlogicfas qlogicfc rsxx seagate shasta skd sim710 stex sym53c416),
-        qw(t128 tmscsim u14-34f ultrastor vmw_pvscsi wd7000 xen-scsiback xen-scsifront),
-      qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicfas408 sym53c8xx lpfc lpfcdd), # ncr53c8xx
+        qw(t128 tmscsim u14-34f ultrastor wd7000 xen-scsiback xen-scsifront),
+      qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicfas408 sym53c8xx wd719x lpfc lpfcdd), # ncr53c8xx
     ],
     sata => [
       # note that ata_piix manage RAID devices on ICH6R
@@ -147,7 +147,7 @@ our %l = (
 	     qw(ums-jumpshot ums-karma ums-onetouch ums-realtek ums-sddr09 ums-sddr55 ums-usbat usb-storage) ],
     firewire => [ qw(sbp2) ],
     cdrom => [ qw(ide-cd_mod sr_mod) ],
-    card_reader => [ qw(rts5208 sdhci sdhci-pci tifm_sd tifm_7xx1) ],
+    card_reader => [ qw(rts5208 sdhci sdhci-pci tifm_sd tifm_7xx1 toshsd ushc via-sdmmc) ],
   },
 
   ################################################################################
@@ -172,9 +172,9 @@ our %l = (
 	    hid-cherry hid-chicony hid-cp2112 hid-cypress hid-dr hid-drff hid-elecom hid-elo hid-emsff
 	    hid-ezkey hid-gaff hid-generic hid-gt683r hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse hid-huion
 	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-lenovo hid-lenovo-tpkbd
-	    hid-logitech hid-logitech-dj hid-magicmouse hid-microsoft hid-monterey
+	    hid-logitech hid-logitech-dj hid-logitech-hidpp hid-magicmouse hid-microsoft hid-monterey
 	    hid-multilaser hid-multitouch hid-ntrig hid-ortek hid-penmount hid-petalynx hid-picolcd
-	    hid-pl hid-primax hid-prodikeys hid-roccat hid-roccat-arvo hid-roccat-common
+	    hid-pl hid-plantronics hid-primax hid-prodikeys hid-roccat hid-roccat-arvo hid-roccat-common hid-rmi
 	    hid-roccat-isku hid-roccat-kone hid-roccat-koneplus hid-roccat-konepure hid-roccat-kovaplus hid-roccat-lua
 	    hid-roccat-pyra hid-roccat-ryos hid-roccat-savu hid-saitek hid-samsung hid-sensor-hub hid-sjoy hid-sony
 	    hid-speedlink hid-steelseries hid-sunplus hid-tivo hid-thingm hid-tmff hid-topseed hid-twinhan
@@ -240,7 +240,7 @@ our %l = (
 	    radio-maxiradio radio-miropcm20 radio-mr800 radio-raremono radio-shark
 	    radio-usb-si470x shark2) ],
     scanner => [ qw(scanner microtek) ],
-    firewire => [ qw(snd-firewire-speakers snd-isight snd-scs1x) ],
+    firewire => [ qw(snd-firewire-speakers snd-isight snd-oxfw snd-scs1x) ],
     gameport => [ qw(cs461x ns558 emu10k1-gp fm801-gp lightning ns558 vortex) ],
     usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-6fire snd-usb-caiaq snd-usb-hiface snd-usb-usx2y usb-midi) ],
     webcam => [
