@@ -209,7 +209,7 @@ our %l = (
           qw(snd-asihpi snd-at73c213 snd-bcd2000 snd-bebob snd-bt87x snd-ca0106 snd-cmi8330 snd-cmi8788 snd-cmipci),
           qw(snd-cs4231 snd-cs4232 snd-cs4236 snd-cs4281 snd-cs46xx snd-cs5530 snd-cs5535audio),
           qw(snd_ctxfi),
-          qw(snd-darla20 snd-darla24 snd-dice snd-dt019x snd-echo3g snd-emu10k1 snd-emu10k1x),
+          qw(snd-darla20 snd-darla24 snd-dt019x snd-echo3g snd-emu10k1 snd-emu10k1x),
           qw(snd-ens1370 snd-ens1371 snd-es1688 snd-es18xx snd-es1938 snd-es1968 snd-es968),
           qw(snd-fireworks snd-fm801 snd-gina20 snd-gina24 snd-gina3g),
           qw(snd-gusclassic snd-gusextreme snd-gusmax),
@@ -240,7 +240,7 @@ our %l = (
 	    radio-maxiradio radio-miropcm20 radio-mr800 radio-raremono radio-shark
 	    radio-usb-si470x shark2) ],
     scanner => [ qw(scanner microtek) ],
-    firewire => [ qw(snd-firewire-speakers snd-isight snd-oxfw snd-scs1x) ],
+    firewire => [ qw(snd-dice snd-firewire-speakers snd-isight snd-oxfw snd-scs1x) ],
     gameport => [ qw(cs461x ns558 emu10k1-gp fm801-gp lightning ns558 vortex) ],
     usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-6fire snd-usb-caiaq snd-usb-hiface snd-usb-usx2y usb-midi) ],
     webcam => [
