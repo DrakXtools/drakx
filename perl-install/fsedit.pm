@@ -22,9 +22,9 @@ use fs;
 # min_hd_size: only suggest this partition if the hd size is bigger than that
 %suggestions = (
   N_("simple") => [
-    { mntpoint => "/",     size => MB(300), fs_type => defaultFS(), ratio => 10, maxsize => MB(12300) },
-    { mntpoint => "swap",  size => MB(128), fs_type => 'swap', ratio => 1,  maxsize => MB(4000) },
-    { mntpoint => "/home", size => MB(300), fs_type => defaultFS(), ratio => 8,  min_hd_size => MB(12000) },
+    { mntpoint => "/",     size => MB(300), fs_type => defaultFS(), ratio => 6, maxsize => MB(51500) },
+    { mntpoint => "swap",  size => MB(256), fs_type => 'swap', ratio => 1, maxsize => MB(4096) },
+    { mntpoint => "/home", size => MB(300), fs_type => defaultFS(), ratio => 12, min_hd_size => MB(51200) },
   ], N_("with /usr") => [
     { mntpoint => "/",     size => MB(250), fs_type => defaultFS(), ratio => 1, maxsize => MB(8000) },
     { mntpoint => "swap",  size =>  MB(64), fs_type => 'swap', ratio => 1, maxsize => MB(4000) },

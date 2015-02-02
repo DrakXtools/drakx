@@ -1,3 +1,8 @@
+- libDrakX/fsedit.pm: new "simple" partitioning scheme
+  o create separate /home only when more than 50G are available
+  o in such case, / is 6/19th of the available space up to 50G,
+    swap is 1/19th up to 4G and /home is the rest (12/19th)
+  o https://ml.mageia.org/l/arc/dev/2014-12/msg00330.html
 - recognize new kernel-3.19 drivers
 
 Version 16.50 - 9 January 2015
