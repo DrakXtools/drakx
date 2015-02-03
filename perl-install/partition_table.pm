@@ -248,9 +248,8 @@ sub read_primary {
     #- it can be safely considered that the first sector is used to probe the partition table
     #- but other sectors (typically for extended partition ones) have to match this type!
 	my @parttype = (
-	  if_( is_uefi(), 'gpt'),
           # gpt must be tried before dos as it presents a fake compatibility mbr
-	  ('gpt', 'lvm', 'dmcrypt', 'dos', 'bsd', 'sun', 'mac'),
+	  'gpt', 'lvm', 'dmcrypt', 'dos', 'bsd', 'sun', 'mac',
 	);
 	foreach ('empty', @parttype, 'unknown') {
 	    /unknown/ and die "unknown partition table format on disk " . $hd->{file};
