@@ -153,7 +153,11 @@ sub write {
 
 sub initialize {
     my ($class, $hd) = @_;
-    $hd->{primary} = { raw => [] };
+    my @raw;
+    for (my $part_number = 0; $part_number < $nb_primary-1; $part_number++) {
+	$raw[$part_number] = { part_number => $part_number };
+    }
+    $hd->{primary} = { raw => \@raw };
     bless $hd, $class;
 }
 
