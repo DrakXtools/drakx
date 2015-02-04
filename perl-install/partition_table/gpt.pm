@@ -132,9 +132,12 @@ sub read_one {
 sub write {
     my ($hd, $_sector, $_pt, $_info) = @_;
 
+    my $partitions_killed;
+
     # Initialize the disk if current partition table is not gpt
     if (c::get_disk_type($hd->{file}) ne "gpt") {
         c::set_disk_type($hd->{file}, "gpt");
+        $partitions_killed = 1;
     }
 
     foreach (@{$hd->{will_tell_kernel}}) {
@@ -143,7 +146,7 @@ sub write {
         print "($action, $part_number, $o_start, $o_size)\n";
         if ($action eq 'add') {
             c::disk_add_partition($hd->{file}, $o_start, $o_size, $part->{fs_type}) or die "failed to add partition";
-        } elsif ($action eq 'del') {
+        } elsif ($action eq 'del' and !$partitions_killed) {
             c::disk_del_partition($hd->{file}, $part_number) or die "failed to del partition";
         }
     }
