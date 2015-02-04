@@ -254,9 +254,11 @@ sub createXconf {
 
     return if !$Driver;
 
-     my $resolution = $Driver eq 'fbdev' ? '"default"' : '"1024x768" "800x600" "640x480"';
-     output($file, sprintf(<<'END',  $Driver, $resolution));
-Section "ServerFlags"
+     # grub2-efi init framebuffer in 1024x768, we must stay in sync or loading fails
+     my $resolution = $Driver eq 'fbdev' ? is_uefi() ? '"1024x768"' : '"default"' : '"800x600" "640x480"';
+     # efi framebuffer wants 24 bit
+     my $depth = is_uefi() ? '24' : '16';
+     output($file, qq(Section "ServerFlags"
 EndSection
 
 Section "Module"
@@ -282,8 +284,10 @@ Section "Screen"
     Identifier "screen"
     Device "device"
     Monitor "monitor"
+    DefaultColorDepth $depth
     Subsection "Display"
-        Modes %s
+        Depth $depth
+        Modes $resolution
     EndSubsection
 EndSection
 
