@@ -70,15 +70,14 @@ several different X sessions on your local machine at the same time.")),
     $in->do_pkgs->ensure_is_installed($dm->{PACKAGE}, $dm->{EXEC}) or goto start;
     addVarsInSh($cfg_file, { DISPLAYMANAGER => $dm->{NAME} });
     log::explanations(qq(Switching to "$dm->{NAME}" display manager));
-    run_program::raw({ detach => 1 }, '/bin/systemctl', 'disable', lc(${dm_NAME}).".service");
-    run_program::raw({ detach => 1 }, '/bin/systemctl', 'enable', $dm->{PACKAGE}.".service");
+    run_program::raw({ detach => 1 }, '/bin/systemctl', 'disable', "isplay-manager.service");
+    run_program::raw({ detach => 1 }, '/bin/systemctl', 'enable', "display-manager.service");
 
 
     if (any::running_window_manager()) {
         $in->ask_yesorno('', N("The change is done, do you want to restart the dm service?"), 1) and
 				$in->ask_yesorno('', N("You are going to close all running programs and lose your current session. Are you really sure that you want to restart the dm service?"), 1) and
-                      run_program::raw({ detach => 1 }, '/bin/systemctl', 'stop', lc(${dm_NAME}).".service");
-                      run_program::raw({ detach => 1 }, '/bin/systemctl', 'start', $dm->{PACKAGE}.".service");
+                      run_program::raw({ detach => 1 }, 'systemctl', 'restart', 'display-manager.service', '>', '/dev/null', '2>', '/dev/null');
     }
 }
 
