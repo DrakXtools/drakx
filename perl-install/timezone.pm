@@ -64,8 +64,8 @@ sub write {
     set_ntp_server($t->{ntp});
 
     my $tz_prefix = get_timezone_prefix();
-    unlink "$::prefix/etc/localtime" or log::l("unlinking $! failed");
-    symlink ($tz_prefix . '/' . $t->{timezone}, "$::prefix/etc/localtime") or log::l("linking /etc/localtime failed");
+    eval { symlinkf($tz_prefix . '/' . $t->{timezone}, "$::prefix/etc/localtime") };
+    $@ and log::l("installing /etc/localtime failed");
     setVarsInSh("$::prefix/etc/sysconfig/clock", {
 	ZONE => $t->{timezone},
 	UTC  => bool2text($t->{UTC}),
