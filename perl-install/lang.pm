@@ -1491,6 +1491,23 @@ sub write {
     log::explanations(qq(Setting l10n configuration in "$file"));
     setVarsInShMode($::prefix . $file, 0644, $h);
 
+    if (!$b_user_only) {
+        $file = '/etc/locale.conf';
+        log::explanations(qq(Setting locale configuration in "$file"));
+        # Only include valid fields and ommit any that are the same as LANG to make it cleaner
+        # (cleanup logic copied from systemd)
+        my @filtered_keys = grep { exists $h->{$_} && ($_ eq 'LANG' || !exists $h->{'LANG'} || $h->{$_} ne $h->{'LANG'}) } @locale_conf_fields;
+        my $h2 = { map { $_ => $h->{$_} } @filtered_keys };
+        setVarsInShMode($::prefix . $file, 0644, $h2);
+
+        if ($h->{'SYSFONT'}) {
+             $file = '/etc/vconsole.conf';
+             $h2 = { 'FONT' => $h->{'SYSFONT'} };
+             $h2->{'FONT_UNIMAP'} = $h->{'SYSFONTACM'} if ($h->{'SYSFONTACM'});
+             addVarsInShMode($::prefix . $file, 0644, $h2);
+        }
+    }
+
     bootloader::set_default_grub_var('locale.lang',$h->{LANG}) if !$b_user_only;
     
     my $charset = l2charset($locale->{lang});
