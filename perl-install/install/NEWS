@@ -1,3 +1,14 @@
+Version 16.55 - 9 February 2015
+
+- drakclock: Ensure that /etc/localtime is a symlink (mga#14888)
+- users: Make sure to restart accounts-daemon after adding users (mga#15113)
+- finish-install: Ensure i18n settings are loaded
+- Create a symlink instead a hard copy to localtime see issue #14888
+- i18n: Write the desired console font to /etc/vconsole.conf
+- i18n: Use the x-distro /etc/locale.conf file instead of /etc/sysconfig/i18n
+- drakedm: Don't run ancient dm init script (which no longer exists)
+- Update traslations
+
 Version 16.52 - 5 February 2015
 
 - default to GPT on disks larger than 4TB, not LVM
