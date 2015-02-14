@@ -114,7 +114,6 @@ if ($disk_iso_repository) {
 
 symlinkf('media' . $repository_arch, "$SLASH_LOCATION$IMAGE_LOCATION_ROOTED");
 #create_initial_symlinks();
-create_initial_devices();
 
 apply_stage2_updates();
 
