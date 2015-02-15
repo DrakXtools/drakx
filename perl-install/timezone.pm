@@ -7,11 +7,12 @@ use common;
 use log;
 
 sub get_timezone_prefix() {
-    "/usr/share/zoneinfo";
+    my $prefix = $::testing ? '' : $::prefix;
+    $prefix . "/usr/share/zoneinfo";
 }
 
 sub getTimeZones() {
-    my $tz_prefix = ($::testing ? '' : $::prefix) . get_timezone_prefix();
+    my $tz_prefix = get_timezone_prefix();
     open(my $F, "cd $tz_prefix && find [A-Z]* -noleaf -type f |");
     my @l = difference2([ chomp_(<$F>) ], [ 'ROC', 'PRC' ]);
     close $F or die "cannot list the available zoneinfos";
