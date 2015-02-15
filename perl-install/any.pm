@@ -1561,7 +1561,7 @@ sub configure_time_more {
     require POSIX;
     use POSIX qw(strftime);
     my $time_format = "%H:%M:%S";
-    my $tz_prefix = timezone::get_timezone_prefix();
+    my $tz_prefix = ($::testing ? '' : $::prefix) . timezone::get_timezone_prefix();
     local $ENV{TZ} = ':' . $tz_prefix . '/' . $timezone->{timezone};
 
     $in->ask_from_({ interactive_help_id => 'configureTimezoneUTC',
