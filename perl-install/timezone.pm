@@ -6,8 +6,10 @@ use strict;
 use common;
 use log;
 
-sub get_timezone_prefix() {
-    my $prefix = $::testing ? '' : $::prefix;
+sub get_timezone_prefix {
+    my ($b_use_system_prefix) = @_;
+
+    my $prefix = ($::testing || $b_use_system_prefix) ? '' : $::prefix;
     $prefix . "/usr/share/zoneinfo";
 }
 
@@ -63,7 +65,7 @@ sub write {
 
     set_ntp_server($t->{ntp});
 
-    my $tz_prefix = get_timezone_prefix();
+    my $tz_prefix = get_timezone_prefix(1);
     eval { symlinkf($tz_prefix . '/' . $t->{timezone}, "$::prefix/etc/localtime") };
     $@ and log::l("installing /etc/localtime failed");
     setVarsInSh("$::prefix/etc/sysconfig/clock", {
