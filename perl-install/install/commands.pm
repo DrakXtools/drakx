@@ -30,8 +30,10 @@ sub bug {
 	my $in = interactive::stdio->new;
 
 	require install::any;
+	my @devs = install::any::removable_media__early_in_install();
+
 	$part = $in->ask_from_listf('', "Which device?", \&partition_table::description, 
-				    [ install::any::removable_media__early_in_install() ]) or return;
+				    \@devs) or return;
     }
 
     warn "putting file report.bug on $part->{device}\n";
