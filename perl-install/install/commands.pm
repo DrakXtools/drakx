@@ -31,6 +31,7 @@ sub bug {
 
 	require install::any;
 	my @devs = install::any::removable_media__early_in_install();
+	@devs or die "You need to plug a removable medium (USB key, floppy, ...)\n";
 
 	$part = $in->ask_from_listf('', "Which device?", \&partition_table::description, 
 				    \@devs) or return;
