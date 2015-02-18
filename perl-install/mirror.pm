@@ -9,7 +9,7 @@ use log;
 
 =head1 SYNOPSYS
 
-B<mirror> enables to manage Mageia distribution mirrors
+B<mirror> enables to manage cooker distribution mirrors
 
 =head1 Functions
 
