@@ -72,7 +72,7 @@ several different X sessions on your local machine at the same time.")),
     $in->do_pkgs->ensure_is_installed($dm->{PACKAGE}, $dm->{EXEC}) or goto start;
     addVarsInSh($cfg_file, { DISPLAYMANAGER => $dm->{NAME} });
     log::explanations(qq(Switching to "$dm->{NAME}" display manager));
-    run_program::raw({ detach => 1 }, '/bin/systemctl', 'disable', "isplay-manager.service");
+    run_program::raw({ detach => 1 }, '/bin/systemctl', 'disable', "display-manager.service");
     run_program::raw({ detach => 1 }, '/bin/systemctl', 'enable', "display-manager.service");
 
 
