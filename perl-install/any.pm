@@ -667,8 +667,8 @@ sub get_autologin() {
         my %conf = read_gnomekderc($sddm_file, 'Autologin');
         $autologin_user = $conf{User} && $conf{Session};
     } elsif ($dm eq "lightdm") {
-    	my %conf = read_gnomekderc($lightdm_file, 'SeatDefaults');
-        $autologin_user = text2bool($conf{'#dummy-autologin'}) && $conf{autologin-user};
+    	my %conf = read_gnomekderc($lightdm_conffile, 'SeatDefaults');
+        $autologin_user = text2bool($conf{'#dummy-autologin'}) && $conf{"autologin-user"};
     } else {
         my %conf = getVarsFromSh($autologin_file);
         $autologin_user = text2bool($conf{AUTOLOGIN}) && $conf{USER};
@@ -721,13 +721,6 @@ sub set_autologin {
     eval { update_gnomekderc($lightdm_conffile, SeatDefaults => (
     '#dummy-autologin' => $do_autologin,
     'autologin-user' => $autologin->{user}
-    )) } if -e $lightdm_conffile;
-
-    #- Configure LIGHTDM
-    my $lightdm_conffile = "$::prefix/etc/lightdm/lightdm.conf.d/50-mageia-autologin.conf";
-    eval { update_gnomekderc($lightdm_conffile, SeatDefaults => (
-	'#dummy-autologin' => $do_autologin,
-	'autologin-user' => $autologin->{user}
     )) } if -e $lightdm_conffile;
 
     my $xdm_autologin_cfg = "$::prefix/etc/sysconfig/autologin";
