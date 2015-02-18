@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-ja\n"
-"POT-Creation-Date: 2014-04-30 02:49+0200\n"
+"POT-Creation-Date: 2015-02-18 12:26+0100\n"
 "PO-Revision-Date: 2009-02-22 19:41+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: any.pm:284 any.pm:1003 diskdrake/interactive.pm:645
-#: diskdrake/interactive.pm:869 diskdrake/interactive.pm:929
-#: diskdrake/interactive.pm:1047 diskdrake/interactive.pm:1277
-#: diskdrake/interactive.pm:1335 do_pkgs.pm:242 do_pkgs.pm:291
-#: harddrake/sound.pm:95 interactive.pm:588 pkgs.pm:254 pkgs.pm:263
-#: pkgs.pm:306
+#: any.pm:284 any.pm:984 diskdrake/interactive.pm:642
+#: diskdrake/interactive.pm:866 diskdrake/interactive.pm:926
+#: diskdrake/interactive.pm:1044 diskdrake/interactive.pm:1274
+#: diskdrake/interactive.pm:1332 do_pkgs.pm:342 do_pkgs.pm:391
+#: harddrake/sound.pm:77 interactive.pm:712 pkgs.pm:260 pkgs.pm:269
+#: pkgs.pm:312
 #, c-format
 msgid "Please wait"
 msgstr "お待ちください"
@@ -35,14 +35,15 @@ msgid "Bootloader installation in progress"
 msgstr "ブートローダをインストール中"
 
 #: any.pm:295
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "LILO wants to assign a new Volume ID to drive %s.  However, changing\n"
-"the Volume ID of a Windows NT, 2000, or XP boot disk is a fatal Windows "
-"error.\n"
-"This caution does not apply to Windows 95 or 98, or to NT data disks.\n"
+"\t\t\t\t\t\t\tthe Volume ID of a Windows NT, 2000, or XP boot disk is a "
+"fatal Windows error.\n"
+"\t\t\t\t\t\t\tThis caution does not apply to Windows 95 or 98, or to NT data "
+"disks.\n"
 "\n"
-"Assign a new Volume ID?"
+"\t\t\t\t\t\t\tAssign a new Volume ID?"
 msgstr ""
 "LILO がドライブ %s に新しいボリューム ID を割り当てようとしています。\n"
 "Windows NT/2000/XP のブートディスクのボリューム ID を変更することは\n"
@@ -56,32 +57,14 @@ msgstr ""
 msgid "Installation of bootloader failed. The following error occurred:"
 msgstr "ブートローダのインストールに失敗しました。以下のエラーが発生:"
 
-#: any.pm:312
-#, c-format
-msgid ""
-"You may need to change your Open Firmware boot-device to\n"
-" enable the bootloader.  If you do not see the bootloader prompt at\n"
-" reboot, hold down Command-Option-O-F at reboot and enter:\n"
-" setenv boot-device %s,\\\\:tbxi\n"
-" Then type: shut-down\n"
-"At your next boot you should see the bootloader prompt."
-msgstr ""
-"ブートローダを有効にするにはオープンファームウェアの起動デバイスを\n"
-"変更する必要があるかもしれません。再起動時にブートローダのプロンプトが\n"
-"表示されない場合は、Command-Option-O-F を再起動時に押して\n"
-" setenv boot-device %s,\\\\:tbxi\n"
-" shut-down\n"
-"と入力してください。\n"
-"次回の起動時にはブートローダのプロンプトが表示されるはずです。"
-
-#: any.pm:352
-#, c-format
+#: any.pm:346
+#, fuzzy, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
-"This implies you already have a bootloader on the hard disk drive you boot "
-"(eg: System Commander).\n"
+"\t\t\tThis implies you already have a bootloader on the hard disk drive you "
+"boot (eg: System Commander).\n"
 "\n"
-"On which drive are you booting?"
+"\t\t\tOn which drive are you booting?"
 msgstr ""
 "パーティションにブートローダをインストールするよう選択されました。\n"
 "これは、起動するハードディスクに既に別のブートローダ (例: システムコマン"
@@ -89,263 +72,218 @@ msgstr ""
 "\n"
 "どのドライブから起動しますか？"
 
-#: any.pm:363
+#: any.pm:357
 #, c-format
 msgid "Bootloader Installation"
 msgstr "ブートローダのインストール"
 
-#: any.pm:367
+#: any.pm:361
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "ブートローダをどこにインストールしますか？"
 
-#: any.pm:391
+#: any.pm:377
 #, c-format
 msgid "First sector (MBR) of drive %s"
 msgstr "ドライブ %s の最初のセクタ (MBR)"
 
-#: any.pm:393
+#: any.pm:379
 #, c-format
 msgid "First sector of drive (MBR)"
 msgstr "ドライブの最初のセクタ (MBR)"
 
-#: any.pm:395
+#: any.pm:381
 #, c-format
 msgid "First sector of the root partition"
 msgstr "root パーティションの最初のセクタ"
 
-#: any.pm:397
+#: any.pm:383
 #, c-format
 msgid "On Floppy"
 msgstr "フロッピー"
 
-#: any.pm:399 pkgs.pm:302 ugtk2.pm:526 ugtk3.pm:516
+#: any.pm:385 pkgs.pm:308 ugtk2.pm:526 ugtk3.pm:602
 #, c-format
 msgid "Skip"
 msgstr "スキップ"
 
-#: any.pm:433
+#: any.pm:413
 #, c-format
 msgid "Boot Style Configuration"
 msgstr "起動方式の設定"
 
-#: any.pm:448 any.pm:480 any.pm:481
+#: any.pm:427
 #, c-format
 msgid "Bootloader main options"
 msgstr "ブートローダのメインオプション"
 
-#: any.pm:452
+#: any.pm:431
 #, c-format
 msgid "Bootloader"
 msgstr "ブートローダ"
 
-#: any.pm:453 any.pm:484
+#: any.pm:432
 #, c-format
 msgid "Bootloader to use"
 msgstr "使用するブートローダ"
 
-#: any.pm:456 any.pm:487
+#: any.pm:435
 #, c-format
 msgid "Boot device"
 msgstr "起動デバイス"
 
-#: any.pm:459
+#: any.pm:438
 #, c-format
 msgid "Main options"
 msgstr "メインオプション"
 
-#: any.pm:460
+#: any.pm:439
 #, c-format
 msgid "Delay before booting default image"
 msgstr "デフォルトが起動するまでの秒数"
 
-#: any.pm:461
+#: any.pm:440
 #, c-format
 msgid "Enable ACPI"
 msgstr "ACPI を有効にする"
 
-#: any.pm:462
+#: any.pm:441
 #, c-format
 msgid "Enable SMP"
 msgstr "SMP を有効にする"
 
-#: any.pm:463
+#: any.pm:442
 #, c-format
 msgid "Enable APIC"
 msgstr "APIC を有効にする"
 
-#: any.pm:465
+#: any.pm:444
 #, c-format
 msgid "Enable Local APIC"
 msgstr "ローカル APIC を有効にする"
 
-#: any.pm:466 security/level.pm:51
+#: any.pm:445 security/level.pm:51
 #, c-format
 msgid "Security"
 msgstr "セキュリティ"
 
-#: any.pm:467 any.pm:931 any.pm:950 authentication.pm:249
+#: any.pm:446 any.pm:896 any.pm:930 authentication.pm:249
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "パスワード"
 
-#: any.pm:470 authentication.pm:260
+#: any.pm:449 authentication.pm:260
 #, c-format
 msgid "The passwords do not match"
 msgstr "パスワードが一致しません"
 
-#: any.pm:470 authentication.pm:260 diskdrake/interactive.pm:1510
+#: any.pm:449 authentication.pm:260 diskdrake/interactive.pm:1498
 #, c-format
 msgid "Please try again"
 msgstr "やり直してください"
 
-#: any.pm:472
+#: any.pm:451
 #, c-format
 msgid "You cannot use a password with %s"
 msgstr "%s にはパスワードは使えません"
 
-#: any.pm:476 any.pm:934 any.pm:952 authentication.pm:250
+#: any.pm:455 any.pm:899 any.pm:932 authentication.pm:250
 #, c-format
 msgid "Password (again)"
 msgstr "パスワード (再入力)"
 
-#: any.pm:486
-#, c-format
-msgid "Init Message"
-msgstr "Init メッセージ"
-
-#: any.pm:488
-#, c-format
-msgid "Open Firmware Delay"
-msgstr "オープンファームウェアの遅延"
-
-#: any.pm:489
-#, c-format
-msgid "Kernel Boot Timeout"
-msgstr "カーネルブートのタイムアウト"
-
-#: any.pm:490
-#, c-format
-msgid "Enable CD Boot?"
-msgstr "CD からの起動を有効にしますか？"
-
-#: any.pm:491
-#, c-format
-msgid "Enable OF Boot?"
-msgstr "OF からの起動を有効にしますか？"
-
-#: any.pm:492
-#, c-format
-msgid "Default OS?"
-msgstr "デフォルトの OS"
-
-#: any.pm:558
+#: any.pm:520
 #, c-format
 msgid "Image"
 msgstr "イメージ"
 
-#: any.pm:559 any.pm:573
+#: any.pm:521 any.pm:533
 #, c-format
 msgid "Root"
 msgstr "root"
 
-#: any.pm:560 any.pm:586
+#: any.pm:522
 #, c-format
 msgid "Append"
 msgstr "追加"
 
-#: any.pm:562
+#: any.pm:524
 #, c-format
 msgid "Xen append"
 msgstr "Xen 追加"
 
-#: any.pm:564
+#: any.pm:526
 #, c-format
 msgid "Requires password to boot"
 msgstr ""
 
-#: any.pm:566
+#: any.pm:527
 #, c-format
 msgid "Video mode"
 msgstr "ビデオモード"
 
-#: any.pm:568
+#: any.pm:528
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:569
+#: any.pm:529
 #, c-format
 msgid "Network profile"
 msgstr "ネットワークプロファイル"
 
-#: any.pm:578 any.pm:583 any.pm:585 diskdrake/interactive.pm:411
+#: any.pm:537 diskdrake/interactive.pm:411
 #, c-format
 msgid "Label"
 msgstr "ラベル"
 
-#: any.pm:580 any.pm:588 harddrake/v4l.pm:438
+#: any.pm:539 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "デフォルト"
 
-#: any.pm:587
-#, c-format
-msgid "NoVideo"
-msgstr "ビデオなし"
-
-#: any.pm:598
+#: any.pm:547
 #, c-format
 msgid "Empty label not allowed"
 msgstr "空白のラベルは使えません"
 
-#: any.pm:599
+#: any.pm:548
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "カーネルイメージを指定してください"
 
-#: any.pm:599
+#: any.pm:548
 #, c-format
 msgid "You must specify a root partition"
 msgstr "root パーティションは必ず指定してください"
 
-#: any.pm:600
+#: any.pm:549
 #, c-format
 msgid "This label is already used"
 msgstr "このラベルは既に使われています"
 
-#: any.pm:618
+#: any.pm:567
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "どの種類のエントリを追加しますか？"
 
-#: any.pm:619
+#: any.pm:568
 #, c-format
 msgid "Linux"
 msgstr "Linux"
 
-#: any.pm:619
-#, c-format
-msgid "Other OS (SunOS...)"
-msgstr "他の OS (SunOS...)"
-
-#: any.pm:620
-#, c-format
-msgid "Other OS (MacOS...)"
-msgstr "他の OS (MacOS...)"
-
-#: any.pm:620
+#: any.pm:568
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "他の OS (Windows...)"
 
-#: any.pm:667
+#: any.pm:615
 #, c-format
 msgid "Bootloader Configuration"
 msgstr "ブートローダの設定"
 
-#: any.pm:668
+#: any.pm:616
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -354,47 +292,47 @@ msgstr ""
 "起動メニューのエントリは以下のとおりです。\n"
 "エントリは追加/変更できます。"
 
-#: any.pm:890
+#: any.pm:852
 #, c-format
 msgid "access to X programs"
 msgstr "X プログラムへのアクセス"
 
-#: any.pm:891
+#: any.pm:853
 #, c-format
 msgid "access to rpm tools"
 msgstr "RPM ツールへのアクセス"
 
-#: any.pm:892
+#: any.pm:854
 #, c-format
 msgid "allow \"su\""
 msgstr "su を許可する"
 
-#: any.pm:893
+#: any.pm:855
 #, c-format
 msgid "access to administrative files"
 msgstr "管理ファイルへのアクセス"
 
-#: any.pm:894
+#: any.pm:856
 #, c-format
 msgid "access to network tools"
 msgstr "ネットワークツールへのアクセス"
 
-#: any.pm:895
+#: any.pm:857
 #, c-format
 msgid "access to compilation tools"
 msgstr "コンパイルツールへのアクセス"
 
-#: any.pm:901
+#: any.pm:863
 #, c-format
 msgid "(already added %s)"
 msgstr "(%s は追加済み)"
 
-#: any.pm:907
+#: any.pm:869
 #, c-format
 msgid "Please give a user name"
 msgstr "ユーザ名を入力してください"
 
-#: any.pm:908
+#: any.pm:870
 #, fuzzy, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
@@ -403,147 +341,147 @@ msgstr ""
 "ユーザ名には英語の小文字、数字、ハイフン (-)、アンダースコア (_) しか使えませ"
 "ん"
 
-#: any.pm:909
+#: any.pm:871
 #, c-format
 msgid "The user name is too long"
 msgstr "ユーザ名が長すぎます"
 
-#: any.pm:910
+#: any.pm:872
 #, c-format
 msgid "This user name has already been added"
 msgstr "このユーザ名は既に存在します"
 
-#: any.pm:916 any.pm:954
+#: any.pm:878 any.pm:934
 #, c-format
 msgid "User ID"
 msgstr "ユーザ ID"
 
-#: any.pm:916 any.pm:955
+#: any.pm:878 any.pm:935
 #, c-format
 msgid "Group ID"
 msgstr "グループ ID"
 
-#: any.pm:917
+#: any.pm:879
 #, c-format
 msgid "%s must be a number"
 msgstr "%s は数字でなければいけません"
 
-#: any.pm:918
+#: any.pm:880
 #, c-format
-msgid "%s should be above 500. Accept anyway?"
-msgstr "%s は 500 より上でなければいけません。このまま受け入れますか？"
+msgid "%s should be above 1000. Accept anyway?"
+msgstr "%s は 1000 より上でなければいけません。このまま受け入れますか？"
 
-#: any.pm:922
+#: any.pm:887 any.pm:912
 #, c-format
 msgid "User management"
 msgstr "ユーザの管理"
 
-#: any.pm:928
+#: any.pm:893
 #, c-format
 msgid "Enable guest account"
 msgstr ""
 
-#: any.pm:930 authentication.pm:236
+#: any.pm:895 authentication.pm:236
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "管理者 (root) のパスワードを設定"
 
-#: any.pm:936
+#: any.pm:916
 #, c-format
 msgid "Enter a user"
 msgstr "ユーザ名を入力"
 
-#: any.pm:938
+#: any.pm:918
 #, c-format
 msgid "Icon"
 msgstr "アイコン"
 
-#: any.pm:941
+#: any.pm:921
 #, c-format
 msgid "Real name"
 msgstr "本名"
 
-#: any.pm:948
+#: any.pm:928
 #, c-format
 msgid "Login name"
 msgstr "ログイン名"
 
-#: any.pm:953
+#: any.pm:933
 #, c-format
 msgid "Shell"
 msgstr "シェル"
 
-#: any.pm:1003
+#: any.pm:984
 #, c-format
 msgid "Please wait, adding media..."
 msgstr "メディアを追加しています。お待ちください..."
 
-#: any.pm:1036 security/l10n.pm:14
+#: any.pm:1017 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "自動ログイン"
 
-#: any.pm:1037
+#: any.pm:1018
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr "自動的に特定のユーザでログオンするように設定できます。"
 
-#: any.pm:1038
+#: any.pm:1019
 #, c-format
 msgid "Use this feature"
 msgstr "この機能を使います"
 
-#: any.pm:1039
+#: any.pm:1020
 #, c-format
 msgid "Choose the default user:"
 msgstr "デフォルトのユーザを選択:"
 
-#: any.pm:1040
+#: any.pm:1021
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "ウィンドウマネージャを選択:"
 
-#: any.pm:1051 any.pm:1065 any.pm:1140
+#: any.pm:1032 any.pm:1046 any.pm:1121
 #, c-format
 msgid "Release Notes"
 msgstr "リリースノート"
 
-#: any.pm:1072 any.pm:1430 interactive/gtk.pm:820
+#: any.pm:1053 any.pm:1411 interactive/gtk.pm:820
 #, c-format
 msgid "Close"
 msgstr "閉じる"
 
-#: any.pm:1126
+#: any.pm:1107
 #, c-format
 msgid "License agreement"
 msgstr "ライセンスへの同意"
 
-#: any.pm:1128 diskdrake/dav.pm:26 mygtk2.pm:1229 mygtk3.pm:1255
+#: any.pm:1109 diskdrake/dav.pm:26 mygtk2.pm:1229 mygtk3.pm:1282
 #, c-format
 msgid "Quit"
 msgstr "終了"
 
-#: any.pm:1135
+#: any.pm:1116
 #, c-format
 msgid "Do you accept this license ?"
 msgstr "このライセンスに同意しますか？"
 
-#: any.pm:1136
+#: any.pm:1117
 #, c-format
 msgid "Accept"
 msgstr "承諾する"
 
-#: any.pm:1136
+#: any.pm:1117
 #, c-format
 msgid "Refuse"
 msgstr "拒否する"
 
-#: any.pm:1162 any.pm:1225
+#: any.pm:1143 any.pm:1206
 #, c-format
 msgid "Please choose a language to use"
 msgstr "使用する言語を選んでください。"
 
-#: any.pm:1190
+#: any.pm:1171
 #, fuzzy, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
@@ -554,82 +492,82 @@ msgstr ""
 "お使いになりたい言語を選んでください。\n"
 "インストール後に再選択することも可能です。"
 
-#: any.pm:1193
+#: any.pm:1174
 #, fuzzy, c-format
 msgid "Multiple languages"
 msgstr "多言語"
 
-#: any.pm:1194
+#: any.pm:1175
 #, c-format
 msgid "Select Additional Languages"
 msgstr ""
 
-#: any.pm:1203 any.pm:1234
+#: any.pm:1184 any.pm:1215
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "UTF-8 ではないエンコーディング (後方互換性のため)"
 
-#: any.pm:1204
+#: any.pm:1185
 #, c-format
 msgid "All languages"
 msgstr "すべての言語"
 
-#: any.pm:1226
+#: any.pm:1207
 #, c-format
 msgid "Language choice"
 msgstr "言語の選択"
 
-#: any.pm:1280
+#: any.pm:1261
 #, c-format
 msgid "Country / Region"
 msgstr "国名/地域"
 
-#: any.pm:1281
+#: any.pm:1262
 #, c-format
 msgid "Please choose your country"
 msgstr "お住いの国を選んでください"
 
-#: any.pm:1283
+#: any.pm:1264
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "利用可能なすべての国名のリスト"
 
-#: any.pm:1284
+#: any.pm:1265
 #, c-format
 msgid "Other Countries"
 msgstr "他の国"
 
-#: any.pm:1284 interactive.pm:489 interactive/gtk.pm:444
+#: any.pm:1265 interactive.pm:491 interactive/gtk.pm:444
 #, c-format
 msgid "Advanced"
 msgstr "詳細"
 
-#: any.pm:1290
+#: any.pm:1271
 #, c-format
 msgid "Input method:"
 msgstr "入力メソッド:"
 
-#: any.pm:1293
+#: any.pm:1274
 #, c-format
 msgid "None"
 msgstr "なし"
 
-#: any.pm:1375
+#: any.pm:1356
 #, c-format
 msgid "No sharing"
 msgstr "共有しない"
 
-#: any.pm:1375
+#: any.pm:1356
 #, c-format
 msgid "Allow all users"
 msgstr "すべてのユーザに許可"
 
-#: any.pm:1375
+#: any.pm:1356
 #, c-format
 msgid "Custom"
 msgstr "カスタム"
 
-#: any.pm:1379
+#: any.pm:1360
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -643,14 +581,14 @@ msgstr ""
 "クリックするだけで共有することができます。\n"
 "「カスタム」を選ぶとユーザごとに細かく設定できます。\n"
 
-#: any.pm:1391
+#: any.pm:1372
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
 "Windows."
 msgstr "NFS: 伝統的な Unix ファイル共有システム"
 
-#: any.pm:1394
+#: any.pm:1375
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -658,18 +596,18 @@ msgid ""
 msgstr ""
 "SMB: Windows/Mac OS X や新しい Linux システムで使われるファイル共有システム"
 
-#: any.pm:1402
+#: any.pm:1383
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "エクスポートには NFS と SMB を使用できます。どちらを使いますか？"
 
-#: any.pm:1430
+#: any.pm:1411
 #, c-format
 msgid "Launch userdrake"
 msgstr "userdrake を起動"
 
-#: any.pm:1432
+#: any.pm:1413
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -678,54 +616,54 @@ msgstr ""
 "ユーザ別に共有する場合は \"fileshare\" グループを使います。\n"
 "userdrake を使ってこのグループにユーザを追加してください。"
 
-#: any.pm:1539
+#: any.pm:1520
 #, fuzzy, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
 "logout now."
 msgstr "変更を有効にするには再ログインしてください。"
 
-#: any.pm:1543
+#: any.pm:1524
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "変更を有効にするには再ログインしてください。"
 
-#: any.pm:1578
+#: any.pm:1559
 #, c-format
 msgid "Timezone"
 msgstr "タイムゾーン"
 
-#: any.pm:1578
+#: any.pm:1559
 #, c-format
 msgid "Which is your timezone?"
 msgstr "タイムゾーンを選んでください。"
 
-#: any.pm:1601 any.pm:1603
+#: any.pm:1582 any.pm:1584
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "日付、時刻とタイムゾーンの設定"
 
-#: any.pm:1604
+#: any.pm:1585
 #, c-format
 msgid "What is the best time?"
 msgstr "どの時刻を使いますか？"
 
-#: any.pm:1608
+#: any.pm:1589
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (ハードウェアクロックを UTC に設定)"
 
-#: any.pm:1609
+#: any.pm:1590
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (ハードウェアクロックをローカルタイムに設定)"
 
-#: any.pm:1611
+#: any.pm:1592
 #, c-format
 msgid "NTP Server"
 msgstr "NTP サーバ"
 
-#: any.pm:1612
+#: any.pm:1593
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "自動的に時間を合わせる (NTP を使用)"
@@ -823,7 +761,7 @@ msgstr "アクティブディレクトリサーバでの認証に Kerberos と L
 
 #: authentication.pm:106 authentication.pm:140 authentication.pm:159
 #: authentication.pm:160 authentication.pm:186 authentication.pm:210
-#: authentication.pm:865
+#: authentication.pm:851
 #, c-format
 msgid " "
 msgstr " "
@@ -1028,27 +966,27 @@ msgstr "パスワードなし"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "このパスワードは短すぎます (最低でも %d 文字以上にしてください)"
 
-#: authentication.pm:373
+#: authentication.pm:374
 #, c-format
 msgid "Cannot use broadcast with no NIS domain"
 msgstr "NIS ドメインがないのでブロードキャストを使えません"
 
-#: authentication.pm:860
+#: authentication.pm:846
 #, c-format
 msgid "Select file"
 msgstr "ファイルを選択"
 
-#: authentication.pm:866
+#: authentication.pm:852
 #, c-format
 msgid "Domain Windows for authentication : "
 msgstr "認証に使う Windows ドメイン: "
 
-#: authentication.pm:868
+#: authentication.pm:854
 #, c-format
 msgid "Domain Admin User Name"
 msgstr "ドメイン管理者の名前"
 
-#: authentication.pm:869
+#: authentication.pm:855
 #, c-format
 msgid "Domain Admin Password"
 msgstr "ドメイン管理者のパスワード"
@@ -1057,7 +995,7 @@ msgstr "ドメイン管理者のパスワード"
 # only the ascii charset will be available
 # so use only 7bit for this message
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:1056
+#: bootloader.pm:1119
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1071,47 +1009,37 @@ msgstr ""
 "Ichiran kara OS wo erabu ka Default no OS no kidou wo\n"
 "Matte kudasai.\n"
 
-#: bootloader.pm:1248
+#: bootloader.pm:1283
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO (テキスト表示)"
 
-#: bootloader.pm:1249
+#: bootloader.pm:1284
 #, fuzzy, c-format
 msgid "GRUB2 with graphical menu"
 msgstr "GRUB (グラフィカル表示)"
 
-#: bootloader.pm:1250
+#: bootloader.pm:1285
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr "GRUB (グラフィカル表示)"
 
-#: bootloader.pm:1251
+#: bootloader.pm:1286
 #, c-format
 msgid "GRUB with text menu"
 msgstr "GRUB (テキスト表示)"
 
-#: bootloader.pm:1252
-#, c-format
-msgid "Yaboot"
-msgstr "Yaboot"
-
-#: bootloader.pm:1253
-#, c-format
-msgid "SILO"
-msgstr "SILO"
-
-#: bootloader.pm:1323
+#: bootloader.pm:1341
 #, c-format
 msgid "not enough room in /boot"
 msgstr "/boot の容量が足りません"
 
-#: bootloader.pm:2110
+#: bootloader.pm:2087
 #, c-format
 msgid "You cannot install the bootloader on a %s partition\n"
 msgstr "ブートローダは %s パーティションにはインストールできません\n"
 
-#: bootloader.pm:2279
+#: bootloader.pm:2262
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1119,7 +1047,7 @@ msgid ""
 msgstr ""
 "パーティション番号が変更されたので、ブートローダの設定を更新してください"
 
-#: bootloader.pm:2292
+#: bootloader.pm:2275
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1128,7 +1056,7 @@ msgstr ""
 "ブートローダを正しくインストールできません。レスキューをブートして %s を選ん"
 "でください。"
 
-#: bootloader.pm:2293
+#: bootloader.pm:2276
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "ブートローダを再インストール"
@@ -1182,42 +1110,42 @@ msgstr ""
 msgid "System requirements warning"
 msgstr ""
 
-#: common.pm:142
+#: common.pm:271
 #, c-format
 msgid "B"
 msgstr "B"
 
-#: common.pm:142
+#: common.pm:271
 #, c-format
 msgid "KB"
 msgstr "KB"
 
-#: common.pm:142
+#: common.pm:271
 #, c-format
 msgid "MB"
 msgstr "MB"
 
-#: common.pm:142
+#: common.pm:271
 #, c-format
 msgid "GB"
 msgstr "GB"
 
-#: common.pm:142 common.pm:151
+#: common.pm:271 common.pm:280
 #, c-format
 msgid "TB"
 msgstr "TB"
 
-#: common.pm:159
+#: common.pm:288
 #, c-format
 msgid "%d minutes"
 msgstr "%d 分"
 
-#: common.pm:161
+#: common.pm:290
 #, c-format
 msgid "1 minute"
 msgstr "1 分"
 
-#: common.pm:163
+#: common.pm:292
 #, c-format
 msgid "%d seconds"
 msgstr "%d 秒"
@@ -1256,43 +1184,43 @@ msgid "Server"
 msgstr "サーバ"
 
 #: diskdrake/dav.pm:66 diskdrake/interactive.pm:408
-#: diskdrake/interactive.pm:722 diskdrake/interactive.pm:740
-#: diskdrake/interactive.pm:744 diskdrake/removable.pm:23
+#: diskdrake/interactive.pm:719 diskdrake/interactive.pm:737
+#: diskdrake/interactive.pm:741 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "マウントポイント"
 
 #: diskdrake/dav.pm:67 diskdrake/interactive.pm:410
-#: diskdrake/interactive.pm:1174 diskdrake/removable.pm:24
+#: diskdrake/interactive.pm:1171 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
 msgstr "オプション"
 
-#: diskdrake/dav.pm:68 interactive.pm:388 interactive/gtk.pm:456
+#: diskdrake/dav.pm:68 interactive.pm:390 interactive/gtk.pm:456
 #, c-format
 msgid "Remove"
 msgstr "削除"
 
-#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:215 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:238 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "完了"
 
-#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:147 diskdrake/hd_gtk.pm:321
+#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:170 diskdrake/hd_gtk.pm:346
 #: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
 #: diskdrake/interactive.pm:456 diskdrake/interactive.pm:527
 #: diskdrake/interactive.pm:545 diskdrake/interactive.pm:550
-#: diskdrake/interactive.pm:712 diskdrake/interactive.pm:1013
-#: diskdrake/interactive.pm:1065 diskdrake/interactive.pm:1220
-#: diskdrake/interactive.pm:1233 diskdrake/interactive.pm:1236
-#: diskdrake/interactive.pm:1510 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23
-#: do_pkgs.pm:28 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:83
+#: diskdrake/interactive.pm:709 diskdrake/interactive.pm:1010
+#: diskdrake/interactive.pm:1062 diskdrake/interactive.pm:1217
+#: diskdrake/interactive.pm:1230 diskdrake/interactive.pm:1233
+#: diskdrake/interactive.pm:1498 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:49
+#: do_pkgs.pm:54 do_pkgs.pm:79 do_pkgs.pm:103 do_pkgs.pm:108 do_pkgs.pm:142
 #: fsedit.pm:246 interactive/http.pm:117 interactive/http.pm:118
-#: modules/interactive.pm:19 scanner.pm:95 scanner.pm:106 scanner.pm:113
-#: scanner.pm:120 wizards.pm:96 wizards.pm:100 wizards.pm:122
+#: modules/interactive.pm:19 scanner.pm:94 scanner.pm:105 scanner.pm:112
+#: scanner.pm:119 wizards.pm:95 wizards.pm:99 wizards.pm:121
 #, c-format
 msgid "Error"
 msgstr "エラー"
@@ -1307,13 +1235,14 @@ msgstr "WavDAV サーバの URL を入力してください"
 msgid "The URL must begin with http:// or https://"
 msgstr "URL は http:// か https:// で始まります"
 
-#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:454 diskdrake/interactive.pm:306
-#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:597
-#: diskdrake/interactive.pm:815 diskdrake/interactive.pm:880
-#: diskdrake/interactive.pm:1045 diskdrake/interactive.pm:1087
-#: diskdrake/interactive.pm:1088 diskdrake/interactive.pm:1320
-#: diskdrake/interactive.pm:1358 diskdrake/interactive.pm:1509 do_pkgs.pm:19
-#: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:78
+#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:149 diskdrake/hd_gtk.pm:513
+#: diskdrake/interactive.pm:306 diskdrake/interactive.pm:391
+#: diskdrake/interactive.pm:597 diskdrake/interactive.pm:812
+#: diskdrake/interactive.pm:877 diskdrake/interactive.pm:1042
+#: diskdrake/interactive.pm:1084 diskdrake/interactive.pm:1085
+#: diskdrake/interactive.pm:1317 diskdrake/interactive.pm:1355
+#: diskdrake/interactive.pm:1497 do_pkgs.pm:45 do_pkgs.pm:74 do_pkgs.pm:100
+#: do_pkgs.pm:137
 #, c-format
 msgid "Warning"
 msgstr "警告"
@@ -1329,62 +1258,56 @@ msgid "Server: "
 msgstr "サーバ: "
 
 #: diskdrake/dav.pm:126 diskdrake/interactive.pm:501
-#: diskdrake/interactive.pm:1382 diskdrake/interactive.pm:1470
+#: diskdrake/interactive.pm:1379 diskdrake/interactive.pm:1458
 #, c-format
 msgid "Mount point: "
 msgstr "マウントポイント: "
 
-#: diskdrake/dav.pm:127 diskdrake/interactive.pm:1477
+#: diskdrake/dav.pm:127 diskdrake/interactive.pm:1465
 #, c-format
 msgid "Options: %s"
 msgstr "オプション: %s"
 
-#: diskdrake/hd_gtk.pm:63 diskdrake/interactive.pm:301
-#: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:108
+#: diskdrake/hd_gtk.pm:64 diskdrake/interactive.pm:301
+#: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:110
 #: fs/partitioning_wizard.pm:59 fs/partitioning_wizard.pm:242
-#: fs/partitioning_wizard.pm:250 fs/partitioning_wizard.pm:289
-#: fs/partitioning_wizard.pm:435 fs/partitioning_wizard.pm:498
-#: fs/partitioning_wizard.pm:581 fs/partitioning_wizard.pm:584
+#: fs/partitioning_wizard.pm:250 fs/partitioning_wizard.pm:285
+#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:494
+#: fs/partitioning_wizard.pm:577 fs/partitioning_wizard.pm:580
 #, c-format
 msgid "Partitioning"
 msgstr "パーティションの設定"
 
-#: diskdrake/hd_gtk.pm:76
+#: diskdrake/hd_gtk.pm:77
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr ""
 "先にパーティションをクリックしてファイルシステムの種類を選択してから実行する"
 "アクションを選択します"
 
-#: diskdrake/hd_gtk.pm:126 diskdrake/interactive.pm:1195
-#: diskdrake/interactive.pm:1205 diskdrake/interactive.pm:1258
-#, c-format
-msgid "Read carefully"
-msgstr "よくお読みください"
-
-#: diskdrake/hd_gtk.pm:126
+#: diskdrake/hd_gtk.pm:149
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "まずデータをバックアップしてください"
 
-#: diskdrake/hd_gtk.pm:127 diskdrake/interactive.pm:240
+#: diskdrake/hd_gtk.pm:150 diskdrake/interactive.pm:240
 #, c-format
 msgid "Exit"
 msgstr "終了"
 
-#: diskdrake/hd_gtk.pm:127
+#: diskdrake/hd_gtk.pm:150
 #, c-format
 msgid "Continue"
 msgstr "続ける"
 
-#: diskdrake/hd_gtk.pm:210 fs/partitioning_wizard.pm:557 interactive.pm:654
+#: diskdrake/hd_gtk.pm:233 fs/partitioning_wizard.pm:553 interactive.pm:778
 #: interactive/gtk.pm:812 interactive/gtk.pm:830 interactive/gtk.pm:862
-#: ugtk2.pm:936 ugtk3.pm:917
+#: ugtk2.pm:936 ugtk3.pm:1034
 #, c-format
 msgid "Help"
 msgstr "ヘルプ"
 
-#: diskdrake/hd_gtk.pm:256
+#: diskdrake/hd_gtk.pm:281
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1395,90 +1318,80 @@ msgstr ""
 "このパーティションをリサイズすることをおすすめします。\n"
 "(パーティションをクリックして「リサイズ」をクリック)"
 
-#: diskdrake/hd_gtk.pm:258
+#: diskdrake/hd_gtk.pm:283
 #, c-format
 msgid "Please click on a partition"
 msgstr "パーティションをクリックしてください"
 
-#: diskdrake/hd_gtk.pm:272 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:297 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "詳細"
 
-#: diskdrake/hd_gtk.pm:321
+#: diskdrake/hd_gtk.pm:346
 #, c-format
 msgid "No hard disk drives found"
 msgstr "ハードドライブが見つかりません"
 
-#: diskdrake/hd_gtk.pm:358
+#: diskdrake/hd_gtk.pm:417
 #, c-format
 msgid "Unknown"
 msgstr "不明"
 
-#: diskdrake/hd_gtk.pm:425
+#: diskdrake/hd_gtk.pm:484
 #, fuzzy, c-format
 msgid "Ext4"
 msgstr "終了"
 
-#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
+#: diskdrake/hd_gtk.pm:484 fs/partitioning_wizard.pm:401
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
+#: diskdrake/hd_gtk.pm:484 fs/partitioning_wizard.pm:401
 #, c-format
 msgid "Swap"
 msgstr "Swap"
 
-#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
-#, c-format
-msgid "SunOS"
-msgstr "SunOS"
-
-#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
-#, c-format
-msgid "HFS"
-msgstr "HFS"
-
-#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
+#: diskdrake/hd_gtk.pm:484 fs/partitioning_wizard.pm:401
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:426 fs/partitioning_wizard.pm:406 services.pm:194
+#: diskdrake/hd_gtk.pm:485 fs/partitioning_wizard.pm:402 services.pm:195
 #, c-format
 msgid "Other"
 msgstr "その他"
 
-#: diskdrake/hd_gtk.pm:426 diskdrake/interactive.pm:1397
-#: fs/partitioning_wizard.pm:406
+#: diskdrake/hd_gtk.pm:485 diskdrake/interactive.pm:1385
+#: fs/partitioning_wizard.pm:402
 #, c-format
 msgid "Empty"
 msgstr "空"
 
 # "FS" instead  of "fairuistemu" because we must keep label narrow
-#: diskdrake/hd_gtk.pm:433
+#: diskdrake/hd_gtk.pm:492
 #, c-format
 msgid "Filesystem types:"
 msgstr "ファイルシステムの種類:"
 
-#: diskdrake/hd_gtk.pm:454
+#: diskdrake/hd_gtk.pm:513
 #, c-format
 msgid "This partition is already empty"
 msgstr "このパーティションは既に空です"
 
-#: diskdrake/hd_gtk.pm:463
+#: diskdrake/hd_gtk.pm:522
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "まず「アンマウント」を使ってください"
 
-#: diskdrake/hd_gtk.pm:463
+#: diskdrake/hd_gtk.pm:522
 #, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "代わりにエキスパートモードで %s を使ってください"
 
-#: diskdrake/hd_gtk.pm:463 diskdrake/interactive.pm:409
-#: diskdrake/interactive.pm:639 diskdrake/removable.pm:25
+#: diskdrake/hd_gtk.pm:522 diskdrake/interactive.pm:409
+#: diskdrake/interactive.pm:636 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
@@ -1501,7 +1414,7 @@ msgid "More"
 msgstr "詳細"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
-#: diskdrake/interactive.pm:1304 mygtk2.pm:1228 mygtk3.pm:1254
+#: diskdrake/interactive.pm:1301 mygtk2.pm:1228 mygtk3.pm:1281
 #, c-format
 msgid "Confirmation"
 msgstr "確認"
@@ -1526,7 +1439,7 @@ msgstr "パーティションテーブルを更新せずに終了しますか？
 msgid "Do you want to save the /etc/fstab modifications?"
 msgstr "/etc/fstab の変更を保存しますか？"
 
-#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:289
+#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:285
 #, c-format
 msgid "You need to reboot for the partition table modifications to take effect"
 msgstr "パーティションテーブルの変更を反映するには再起動してください"
@@ -1601,7 +1514,7 @@ msgstr "詳細情報"
 msgid "View"
 msgstr "表示"
 
-#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:828
+#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:825
 #, c-format
 msgid "Resize"
 msgstr "リサイズ"
@@ -1611,12 +1524,12 @@ msgstr "リサイズ"
 msgid "Format"
 msgstr "フォーマット"
 
-#: diskdrake/interactive.pm:415 diskdrake/interactive.pm:976
+#: diskdrake/interactive.pm:415 diskdrake/interactive.pm:973
 #, c-format
 msgid "Add to RAID"
 msgstr "RAID に追加"
 
-#: diskdrake/interactive.pm:416 diskdrake/interactive.pm:995
+#: diskdrake/interactive.pm:416 diskdrake/interactive.pm:992
 #, c-format
 msgid "Add to LVM"
 msgstr "LVM に追加"
@@ -1676,12 +1589,12 @@ msgstr "新しいパーティションを作成"
 msgid "Start sector: "
 msgstr "開始セクタ: "
 
-#: diskdrake/interactive.pm:497 diskdrake/interactive.pm:1080
+#: diskdrake/interactive.pm:497 diskdrake/interactive.pm:1077
 #, c-format
 msgid "Size in MB: "
 msgstr "サイズ (MB): "
 
-#: diskdrake/interactive.pm:499 diskdrake/interactive.pm:1081
+#: diskdrake/interactive.pm:499 diskdrake/interactive.pm:1078
 #, c-format
 msgid "Filesystem type: "
 msgstr "ファイルシステムの種類: "
@@ -1706,12 +1619,12 @@ msgstr "暗号化アルゴリズム"
 msgid "Encryption key "
 msgstr "暗号鍵"
 
-#: diskdrake/interactive.pm:512 diskdrake/interactive.pm:1514
+#: diskdrake/interactive.pm:512 diskdrake/interactive.pm:1502
 #, c-format
 msgid "Encryption key (again)"
 msgstr "暗号鍵 (再入力)"
 
-#: diskdrake/interactive.pm:524 diskdrake/interactive.pm:1510
+#: diskdrake/interactive.pm:524 diskdrake/interactive.pm:1498
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "暗号鍵が一致しません"
@@ -1737,7 +1650,7 @@ msgstr ""
 msgid "Remove the loopback file?"
 msgstr "ループバックファイルを削除しますか？"
 
-#: diskdrake/interactive.pm:620
+#: diskdrake/interactive.pm:617
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
@@ -1745,57 +1658,57 @@ msgstr ""
 "パーティション %s の種類を変更すると、このパーティションの全データが失われま"
 "す"
 
-#: diskdrake/interactive.pm:636
+#: diskdrake/interactive.pm:633
 #, c-format
 msgid "Change partition type"
 msgstr "パーティションの種類を変更"
 
-#: diskdrake/interactive.pm:638 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:635 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "どのファイルシステムを使いますか？"
 
-#: diskdrake/interactive.pm:645
+#: diskdrake/interactive.pm:642
 #, c-format
 msgid "Switching from %s to %s"
 msgstr "%s を %s に変更"
 
-#: diskdrake/interactive.pm:680
+#: diskdrake/interactive.pm:677
 #, c-format
 msgid "Set volume label"
 msgstr "ボリュームラベルを設定"
 
-#: diskdrake/interactive.pm:682
+#: diskdrake/interactive.pm:679
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
 msgstr "注意: これは確認すると同時にディスクに書き込まれます。"
 
-#: diskdrake/interactive.pm:683
+#: diskdrake/interactive.pm:680
 #, c-format
 msgid "Beware, this will be written to disk only after formatting!"
 msgstr "注意: これはフォーマットした後にのみディスクに書き込まれます。"
 
-#: diskdrake/interactive.pm:685
+#: diskdrake/interactive.pm:682
 #, c-format
 msgid "Which volume label?"
 msgstr "どのボリュームラベル？"
 
-#: diskdrake/interactive.pm:686
+#: diskdrake/interactive.pm:683
 #, c-format
 msgid "Label:"
 msgstr "ラベル:"
 
-#: diskdrake/interactive.pm:707
+#: diskdrake/interactive.pm:704
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "ループバックファイル %s をどこにマウントしますか？"
 
-#: diskdrake/interactive.pm:708
+#: diskdrake/interactive.pm:705
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "デバイス %s をどこにマウントしますか？"
 
-#: diskdrake/interactive.pm:713
+#: diskdrake/interactive.pm:710
 #, c-format
 msgid ""
 "Cannot unset mount point as this partition is used for loop back.\n"
@@ -1804,60 +1717,60 @@ msgstr ""
 "このパーティションはループバックに使用されているので、マウント\n"
 "ポイントを解除できません。まずループバックを削除してください。"
 
-#: diskdrake/interactive.pm:743
+#: diskdrake/interactive.pm:740
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "%s をどこにマウントしますか？"
 
-#: diskdrake/interactive.pm:773 diskdrake/interactive.pm:869
+#: diskdrake/interactive.pm:770 diskdrake/interactive.pm:866
 #: fs/partitioning_wizard.pm:135 fs/partitioning_wizard.pm:211
 #, c-format
 msgid "Resizing"
 msgstr "リサイズ中"
 
-#: diskdrake/interactive.pm:773
+#: diskdrake/interactive.pm:770
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "FAT ファイルシステムの境界を計算"
 
-#: diskdrake/interactive.pm:815
+#: diskdrake/interactive.pm:812
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "このパーティションはリサイズできません"
 
-#: diskdrake/interactive.pm:820
+#: diskdrake/interactive.pm:817
 #, c-format
 msgid "All data on this partition should be backed up"
 msgstr "このパーティションのデータをバックアップしてください"
 
-#: diskdrake/interactive.pm:822
+#: diskdrake/interactive.pm:819
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
 "パーティション %s をリサイズすると、このパーティションの全データが\n"
 "失われます"
 
-#: diskdrake/interactive.pm:829
+#: diskdrake/interactive.pm:826
 #, c-format
 msgid "Choose the new size"
 msgstr "新しいサイズを選択"
 
-#: diskdrake/interactive.pm:830
+#: diskdrake/interactive.pm:827
 #, c-format
 msgid "New size in MB: "
 msgstr "新しいサイズ (MB): "
 
-#: diskdrake/interactive.pm:831
+#: diskdrake/interactive.pm:828
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr "最小サイズ: %s MB"
 
-#: diskdrake/interactive.pm:832
+#: diskdrake/interactive.pm:829
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr "最大サイズ: %s MB"
 
-#: diskdrake/interactive.pm:880 fs/partitioning_wizard.pm:219
+#: diskdrake/interactive.pm:877 fs/partitioning_wizard.pm:219
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
@@ -1866,57 +1779,57 @@ msgstr ""
 "パーティションリサイズ後のデータの完全性を確認するため、次回の\n"
 "Microsoft Windows® 起動時にファイルシステムチェックが実行されます。"
 
-#: diskdrake/interactive.pm:944 diskdrake/interactive.pm:1505
+#: diskdrake/interactive.pm:941 diskdrake/interactive.pm:1493
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "ファイルシステムの暗号鍵"
 
-#: diskdrake/interactive.pm:945
+#: diskdrake/interactive.pm:942
 #, c-format
 msgid "Enter your filesystem encryption key"
 msgstr "ファイルシステムの暗号鍵を入力してください"
 
-#: diskdrake/interactive.pm:946 diskdrake/interactive.pm:1513
+#: diskdrake/interactive.pm:943 diskdrake/interactive.pm:1501
 #, c-format
 msgid "Encryption key"
 msgstr "暗号鍵"
 
-#: diskdrake/interactive.pm:953
+#: diskdrake/interactive.pm:950
 #, c-format
 msgid "Invalid key"
 msgstr "無効な鍵"
 
-#: diskdrake/interactive.pm:976
+#: diskdrake/interactive.pm:973
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "追加する RAID を選んでください"
 
-#: diskdrake/interactive.pm:978 diskdrake/interactive.pm:997
+#: diskdrake/interactive.pm:975 diskdrake/interactive.pm:994
 #, c-format
 msgid "new"
 msgstr "新規"
 
-#: diskdrake/interactive.pm:995
+#: diskdrake/interactive.pm:992
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "追加する LVM を選んでください"
 
-#: diskdrake/interactive.pm:1007 diskdrake/interactive.pm:1016
+#: diskdrake/interactive.pm:1004 diskdrake/interactive.pm:1013
 #, fuzzy, c-format
 msgid "LVM name"
 msgstr "LVM の名前を入力"
 
-#: diskdrake/interactive.pm:1008
+#: diskdrake/interactive.pm:1005
 #, c-format
 msgid "Enter a name for the new LVM volume group"
 msgstr ""
 
-#: diskdrake/interactive.pm:1013
+#: diskdrake/interactive.pm:1010
 #, fuzzy, c-format
 msgid "\"%s\" already exists"
 msgstr "ファイルは既に存在します。これを使いますか？"
 
-#: diskdrake/interactive.pm:1045
+#: diskdrake/interactive.pm:1042
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
@@ -1925,120 +1838,126 @@ msgstr ""
 "物理ボリューム %s は使用中です。\n"
 "このボリュームの使用中の物理エクステントを他のボリュームに移動しますか？"
 
-#: diskdrake/interactive.pm:1047
+#: diskdrake/interactive.pm:1044
 #, c-format
 msgid "Moving physical extents"
 msgstr "物理エクステントを移動"
 
-#: diskdrake/interactive.pm:1065
+#: diskdrake/interactive.pm:1062
 #, c-format
 msgid "This partition cannot be used for loopback"
 msgstr "このパーティションはループバックには使えません"
 
-#: diskdrake/interactive.pm:1078
+#: diskdrake/interactive.pm:1075
 #, c-format
 msgid "Loopback"
 msgstr "ループバック"
 
-#: diskdrake/interactive.pm:1079
+#: diskdrake/interactive.pm:1076
 #, c-format
 msgid "Loopback file name: "
 msgstr "ループバックファイルの名前: "
 
-#: diskdrake/interactive.pm:1084
+#: diskdrake/interactive.pm:1081
 #, c-format
 msgid "Give a file name"
 msgstr "ファイル名を入力"
 
-#: diskdrake/interactive.pm:1087
+#: diskdrake/interactive.pm:1084
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr ""
 "ファイルは既に別のループバックに使用されています。別のものを選んでください。"
 
-#: diskdrake/interactive.pm:1088
+#: diskdrake/interactive.pm:1085
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "ファイルは既に存在します。これを使いますか？"
 
-#: diskdrake/interactive.pm:1120 diskdrake/interactive.pm:1123
+#: diskdrake/interactive.pm:1117 diskdrake/interactive.pm:1120
 #, c-format
 msgid "Mount options"
 msgstr "マウントオプション"
 
-#: diskdrake/interactive.pm:1130
+#: diskdrake/interactive.pm:1127
 #, c-format
 msgid "Various"
 msgstr "その他"
 
-#: diskdrake/interactive.pm:1176
+#: diskdrake/interactive.pm:1173
 #, c-format
 msgid "device"
 msgstr "デバイス"
 
-#: diskdrake/interactive.pm:1177
+#: diskdrake/interactive.pm:1174
 #, c-format
 msgid "level"
 msgstr "レベル"
 
-#: diskdrake/interactive.pm:1178
+#: diskdrake/interactive.pm:1175
 #, c-format
 msgid "chunk size in KiB"
 msgstr "チャンクサイズ (KiB)"
 
-#: diskdrake/interactive.pm:1196
+#: diskdrake/interactive.pm:1192 diskdrake/interactive.pm:1202
+#: diskdrake/interactive.pm:1255
+#, c-format
+msgid "Read carefully"
+msgstr "よくお読みください"
+
+#: diskdrake/interactive.pm:1193
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "注意: この操作は危険です。"
 
-#: diskdrake/interactive.pm:1211
+#: diskdrake/interactive.pm:1208
 #, c-format
 msgid "Partitioning Type"
 msgstr "パーティションの種類"
 
-#: diskdrake/interactive.pm:1211
+#: diskdrake/interactive.pm:1208
 #, c-format
 msgid "What type of partitioning?"
 msgstr "パーティション設定の種類"
 
-#: diskdrake/interactive.pm:1249
+#: diskdrake/interactive.pm:1246
 #, c-format
 msgid "You'll need to reboot before the modification can take effect"
 msgstr "変更を反映させるには再起動してください"
 
-#: diskdrake/interactive.pm:1258
+#: diskdrake/interactive.pm:1255
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "ドライブ %s のパーティションテーブルをディスクに書き込みます"
 
-#: diskdrake/interactive.pm:1277 fs/format.pm:107 fs/format.pm:114
+#: diskdrake/interactive.pm:1274 fs/format.pm:107 fs/format.pm:114
 #, c-format
 msgid "Formatting partition %s"
 msgstr "パーティション %s をフォーマット中"
 
-#: diskdrake/interactive.pm:1290
+#: diskdrake/interactive.pm:1287
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "パーティション %s をフォーマットすると、このパーティションの全データが\n"
 "失われます"
 
-#: diskdrake/interactive.pm:1304
+#: diskdrake/interactive.pm:1301
 #, fuzzy, c-format
 msgid "Check bad blocks?"
 msgstr "不正なブロックをチェックしますか？"
 
-#: diskdrake/interactive.pm:1319
+#: diskdrake/interactive.pm:1316
 #, c-format
 msgid "Move files to the new partition"
 msgstr "ファイルを新しいパーティションに移動"
 
-#: diskdrake/interactive.pm:1319
+#: diskdrake/interactive.pm:1316
 #, c-format
 msgid "Hide files"
 msgstr "ファイルを隠す"
 
-#: diskdrake/interactive.pm:1320
+#: diskdrake/interactive.pm:1317
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -2055,128 +1974,122 @@ msgstr ""
 "おくかのいずれかを選択できます。後者の場合は、マウントされたパーティションの"
 "内容によってファイルが隠されることになります。"
 
-#: diskdrake/interactive.pm:1335
+#: diskdrake/interactive.pm:1332
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "ファイルを新しいパーティションに移動"
 
-#: diskdrake/interactive.pm:1339
+#: diskdrake/interactive.pm:1336
 #, c-format
 msgid "Copying %s"
 msgstr "%s をコピー"
 
-#: diskdrake/interactive.pm:1343
+#: diskdrake/interactive.pm:1340
 #, c-format
 msgid "Removing %s"
 msgstr "%s を削除"
 
-#: diskdrake/interactive.pm:1357
+#: diskdrake/interactive.pm:1354
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "パーティション %s は %s になりました"
 
-#: diskdrake/interactive.pm:1358
+#: diskdrake/interactive.pm:1355
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "パーティションの番号が変わりました: "
 
-#: diskdrake/interactive.pm:1383 diskdrake/interactive.pm:1454
+#: diskdrake/interactive.pm:1380 diskdrake/interactive.pm:1442
 #, c-format
 msgid "Device: "
 msgstr "デバイス: "
 
-#: diskdrake/interactive.pm:1384
+#: diskdrake/interactive.pm:1381
 #, c-format
 msgid "Volume label: "
 msgstr "ボリュームラベル: "
 
-#: diskdrake/interactive.pm:1385
+#: diskdrake/interactive.pm:1382
 #, c-format
 msgid "UUID: "
 msgstr "UUID: "
 
-#: diskdrake/interactive.pm:1386
+#: diskdrake/interactive.pm:1383
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS のドライブ文字: %s (推定)\n"
 
-#: diskdrake/interactive.pm:1390 diskdrake/interactive.pm:1399
-#: diskdrake/interactive.pm:1473
+#: diskdrake/interactive.pm:1387 diskdrake/interactive.pm:1461
 #, c-format
 msgid "Type: "
 msgstr "種類: "
 
-#: diskdrake/interactive.pm:1394 diskdrake/interactive.pm:1458
-#, c-format
-msgid "Name: "
-msgstr "名前: "
-
-#: diskdrake/interactive.pm:1401
+#: diskdrake/interactive.pm:1389
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "開始: セクタ %s\n"
 
-#: diskdrake/interactive.pm:1402
+#: diskdrake/interactive.pm:1390
 #, c-format
 msgid "Size: %s"
 msgstr "サイズ: %s"
 
-#: diskdrake/interactive.pm:1404
+#: diskdrake/interactive.pm:1392
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s セクタ"
 
-#: diskdrake/interactive.pm:1406
+#: diskdrake/interactive.pm:1394
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "シリンダ %d から %d まで\n"
 
-#: diskdrake/interactive.pm:1407
+#: diskdrake/interactive.pm:1395
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "論理エクステントの数: %d\n"
 
-#: diskdrake/interactive.pm:1408
+#: diskdrake/interactive.pm:1396
 #, c-format
 msgid "Formatted\n"
 msgstr "フォーマット済み\n"
 
-#: diskdrake/interactive.pm:1409
+#: diskdrake/interactive.pm:1397
 #, c-format
 msgid "Not formatted\n"
 msgstr "未フォーマット\n"
 
-#: diskdrake/interactive.pm:1410
+#: diskdrake/interactive.pm:1398
 #, c-format
 msgid "Mounted\n"
 msgstr "マウント済み\n"
 
-#: diskdrake/interactive.pm:1411
+#: diskdrake/interactive.pm:1399
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1413
+#: diskdrake/interactive.pm:1401
 #, c-format
 msgid "Encrypted"
 msgstr "暗号化"
 
-#: diskdrake/interactive.pm:1415
+#: diskdrake/interactive.pm:1403
 #, c-format
 msgid " (mapped on %s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1416
+#: diskdrake/interactive.pm:1404
 #, c-format
 msgid " (to map on %s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1417
+#: diskdrake/interactive.pm:1405
 #, c-format
 msgid " (inactive)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1424
+#: diskdrake/interactive.pm:1412
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2185,7 +2098,7 @@ msgstr ""
 "ループバックファイル:\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1425
+#: diskdrake/interactive.pm:1413
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2194,27 +2107,27 @@ msgstr ""
 "デフォルトで起動するパーティション\n"
 "    (MS-DOS 用 - LILO 用ではありません)\n"
 
-#: diskdrake/interactive.pm:1427
+#: diskdrake/interactive.pm:1415
 #, c-format
 msgid "Level %s\n"
 msgstr "レベル %s\n"
 
-#: diskdrake/interactive.pm:1428
+#: diskdrake/interactive.pm:1416
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "チャンクサイズ %d KiB\n"
 
-#: diskdrake/interactive.pm:1429
+#: diskdrake/interactive.pm:1417
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID ディスク %s\n"
 
-#: diskdrake/interactive.pm:1431
+#: diskdrake/interactive.pm:1419
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "ループバックファイル名: %s"
 
-#: diskdrake/interactive.pm:1434
+#: diskdrake/interactive.pm:1422
 #, c-format
 msgid ""
 "\n"
@@ -2227,7 +2140,7 @@ msgstr ""
 "ドライバパーティションのようです。\n"
 "そのままにしておいてください。\n"
 
-#: diskdrake/interactive.pm:1437
+#: diskdrake/interactive.pm:1425
 #, c-format
 msgid ""
 "\n"
@@ -2240,57 +2153,62 @@ msgstr ""
 "パーティションは\n"
 "デュアルブート用です。\n"
 
-#: diskdrake/interactive.pm:1446
+#: diskdrake/interactive.pm:1434
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr "%s の空き容量 (%s)"
 
-#: diskdrake/interactive.pm:1455
+#: diskdrake/interactive.pm:1443
 #, c-format
 msgid "Read-only"
 msgstr "読み取り専用"
 
-#: diskdrake/interactive.pm:1456
+#: diskdrake/interactive.pm:1444
 #, c-format
 msgid "Size: %s\n"
 msgstr "サイズ: %s\n"
 
-#: diskdrake/interactive.pm:1457
+#: diskdrake/interactive.pm:1445
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "ジオメトリ: %s シリンダ, %s ヘッド, %s セクタ\n"
 
-#: diskdrake/interactive.pm:1459
+#: diskdrake/interactive.pm:1446
+#, c-format
+msgid "Name: "
+msgstr "名前: "
+
+#: diskdrake/interactive.pm:1447
 #, c-format
 msgid "Medium type: "
 msgstr "メディアの種類: "
 
-#: diskdrake/interactive.pm:1460
+#: diskdrake/interactive.pm:1448
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM ディスク %s\n"
 
-#: diskdrake/interactive.pm:1461
+#: diskdrake/interactive.pm:1449
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "パーティションテーブルの種類: %s\n"
 
-#: diskdrake/interactive.pm:1462
+#: diskdrake/interactive.pm:1450
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "on channel %d ID %d\n"
 
-#: diskdrake/interactive.pm:1506
+#: diskdrake/interactive.pm:1494
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "ファイルシステムの暗号鍵を選んでください"
 
-#: diskdrake/interactive.pm:1509
+#: diskdrake/interactive.pm:1497
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr "この暗号鍵は簡単すぎます (最低でも %d 文字以上にしてください)"
 
-#: diskdrake/interactive.pm:1516
+#: diskdrake/interactive.pm:1504
 #, c-format
 msgid "Encryption algorithm"
 msgstr "暗号化アルゴリズム"
@@ -2300,12 +2218,12 @@ msgstr "暗号化アルゴリズム"
 msgid "Change type"
 msgstr "種類を変更"
 
-#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:130 interactive.pm:551
+#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:120 interactive.pm:675
 #: interactive/curses.pm:267 interactive/http.pm:104 interactive/http.pm:160
 #: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:846
-#: mygtk2.pm:1229 mygtk3.pm:880 mygtk3.pm:1255 ugtk2.pm:415 ugtk2.pm:517
-#: ugtk2.pm:526 ugtk2.pm:812 ugtk3.pm:417 ugtk3.pm:507 ugtk3.pm:516
-#: ugtk3.pm:793
+#: mygtk2.pm:1229 mygtk3.pm:898 mygtk3.pm:1282 ugtk2.pm:415 ugtk2.pm:517
+#: ugtk2.pm:526 ugtk2.pm:812 ugtk3.pm:503 ugtk3.pm:593 ugtk3.pm:602
+#: ugtk3.pm:910
 #, c-format
 msgid "Cancel"
 msgstr "キャンセル"
@@ -2357,32 +2275,32 @@ msgstr "サーバを検索"
 msgid "Search for new servers"
 msgstr "新しいサーバを検索"
 
-#: do_pkgs.pm:19 do_pkgs.pm:57
+#: do_pkgs.pm:45 do_pkgs.pm:100
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "パッケージ %s が必要です。インストールしますか？"
 
-#: do_pkgs.pm:23 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:83
+#: do_pkgs.pm:49 do_pkgs.pm:79 do_pkgs.pm:103 do_pkgs.pm:142
 #, c-format
 msgid "Could not install the %s package!"
 msgstr "%s パッケージをインストールできません"
 
-#: do_pkgs.pm:28 do_pkgs.pm:65
+#: do_pkgs.pm:54 do_pkgs.pm:108
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "必要なパッケージ %s がありません"
 
-#: do_pkgs.pm:39 do_pkgs.pm:78
+#: do_pkgs.pm:74 do_pkgs.pm:137
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "以下のパッケージをインストールします:\n"
 
-#: do_pkgs.pm:242
+#: do_pkgs.pm:342
 #, c-format
 msgid "Installing packages..."
 msgstr "パッケージをインストール中..."
 
-#: do_pkgs.pm:291 pkgs.pm:306
+#: do_pkgs.pm:391 pkgs.pm:312
 #, c-format
 msgid "Removing packages..."
 msgstr "パッケージを削除..."
@@ -2396,9 +2314,9 @@ msgstr ""
 "エラー発生 - 新しいファイルシステムを作成するためのデバイスが\n"
 "見つかりません。ハードウェアを確認してください。"
 
-#: fs/any.pm:75 fs/partitioning_wizard.pm:68
-#, c-format
-msgid "You must have a FAT partition mounted in /boot/efi"
+#: fs/any.pm:71 fs/partitioning_wizard.pm:68
+#, fuzzy, c-format
+msgid "You must have a ESP FAT32 partition mounted in /boot/EFI"
 msgstr "/boot/efi にマウントされた FAT パーティションが必要です"
 
 #: fs/format.pm:111
@@ -2446,7 +2364,7 @@ msgstr "パーティション %s をディレクトリ %s にマウントでき�
 msgid "Checking %s"
 msgstr "%s をチェック中"
 
-#: fs/mount.pm:126 partition_table.pm:422
+#: fs/mount.pm:126 partition_table.pm:397
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "%s をアンマウント中にエラー: %s"
@@ -2473,6 +2391,11 @@ msgstr "グループディスククォータを有効にしオプションで制
 
 #: fs/mount_options.pm:120
 #, c-format
+msgid "Enable automatic TRIM for SSD disks"
+msgstr ""
+
+#: fs/mount_options.pm:122
+#, c-format
 msgid ""
 "Do not update inode access times on this filesystem\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
@@ -2480,7 +2403,7 @@ msgstr ""
 "このファイルシステムで inode アクセス時間を更新しない。\n"
 "(用途例: ニューススプールへのアクセス速度を向上させる)"
 
-#: fs/mount_options.pm:123
+#: fs/mount_options.pm:125
 #, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
@@ -2489,7 +2412,7 @@ msgstr ""
 "このファイルシステムで inode アクセス時間をより効果的な方法で更新する。\n"
 "(用途例: ニューススプールへのアクセス速度を向上させる)"
 
-#: fs/mount_options.pm:126
+#: fs/mount_options.pm:128
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -2498,14 +2421,14 @@ msgstr ""
 "明示的に指定された場合のみマウントする。\n"
 "('-a' オプションではマウントしない)"
 
-#: fs/mount_options.pm:129
+#: fs/mount_options.pm:131
 #, c-format
 msgid "Do not interpret character or block special devices on the filesystem."
 msgstr ""
 "このファイルシステム上にあるキャラクタ・スペシャル・デバイスやブロック・スペ"
 "シャル・デバイスを解釈しない。"
 
-#: fs/mount_options.pm:131
+#: fs/mount_options.pm:133
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -2515,7 +2438,7 @@ msgstr ""
 "マウントしたファイルシステムでバイナリの実行を禁止する。このオプションは他の"
 "アーキテクチャのバイナリを含むサーバで有用です。"
 
-#: fs/mount_options.pm:135
+#: fs/mount_options.pm:137
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -2525,62 +2448,62 @@ msgstr ""
 "set-user-identifier や set-group-identifier を無効にする。(安全に見えますが "
 "suidperl(1) がインストールされている場合は、かえって危険です)"
 
-#: fs/mount_options.pm:139
+#: fs/mount_options.pm:141
 #, c-format
 msgid "Mount the filesystem read-only."
 msgstr "ファイルシステムを読み込み専用でマウントする"
 
-#: fs/mount_options.pm:141
+#: fs/mount_options.pm:143
 #, c-format
 msgid "All I/O to the filesystem should be done synchronously."
 msgstr "ファイルシステムへのすべての I/O を同期的に行う"
 
-#: fs/mount_options.pm:143
+#: fs/mount_options.pm:145
 #, c-format
 msgid "Allow every user to mount and umount the filesystem."
 msgstr "すべてのユーザにファイルシステムのマウント/アンマウントを許可する"
 
-#: fs/mount_options.pm:145
+#: fs/mount_options.pm:147
 #, c-format
 msgid "Allow an ordinary user to mount the filesystem."
 msgstr "一般ユーザにファイルシステムのマウントを許可する"
 
-#: fs/mount_options.pm:147
+#: fs/mount_options.pm:149
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr "ユーザディスククォータを有効にしオプションで制限を強制する"
 
-#: fs/mount_options.pm:149
+#: fs/mount_options.pm:151
 #, c-format
 msgid "Support \"user.\" extended attributes"
 msgstr "\"user.\" 拡張属性をサポートする"
 
-#: fs/mount_options.pm:151
+#: fs/mount_options.pm:153
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "一般ユーザに書き込み権限を与える"
 
-#: fs/mount_options.pm:153
+#: fs/mount_options.pm:155
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "一般ユーザに読み取りのみの権限を与える"
 
-#: fs/mount_point.pm:82
+#: fs/mount_point.pm:84
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr "マウントポイント %s は重複しています"
 
-#: fs/mount_point.pm:97
+#: fs/mount_point.pm:99
 #, c-format
 msgid "No partition available"
 msgstr "利用可能なパーティションがありません"
 
-#: fs/mount_point.pm:100
+#: fs/mount_point.pm:102
 #, c-format
 msgid "Scanning partitions to find mount points"
 msgstr "パーティションをスキャンしてマウントポイントを探しています"
 
-#: fs/mount_point.pm:107
+#: fs/mount_point.pm:109
 #, c-format
 msgid "Choose the mount points"
 msgstr "マウントポイントを選択"
@@ -2713,8 +2636,8 @@ msgstr ""
 "よろしければ「%s」を押してください。"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:195 fs/partitioning_wizard.pm:561
-#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:509
+#: fs/partitioning_wizard.pm:195 fs/partitioning_wizard.pm:557
+#: interactive.pm:674 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:595
 #, c-format
 msgid "Next"
 msgstr "次へ"
@@ -2768,7 +2691,7 @@ msgid ""
 "to use?"
 msgstr "複数のハードドライブがあります。どこに Linux をインストールしますか？"
 
-#: fs/partitioning_wizard.pm:249 fsedit.pm:634
+#: fs/partitioning_wizard.pm:249 fsedit.pm:632
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "ドライブ %s のすべてのパーティションとデータが失われます"
@@ -2792,40 +2715,45 @@ msgstr ""
 "%s のパーティション設定ができます。\n"
 "完了後は 'w' を使って保存してください。"
 
-#: fs/partitioning_wizard.pm:405
+#: fs/partitioning_wizard.pm:401
 #, fuzzy, c-format
 msgid "Ext2/3/4"
 msgstr "Ext3"
 
-#: fs/partitioning_wizard.pm:435 fs/partitioning_wizard.pm:581
+#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:577
 #, c-format
 msgid "I cannot find any room for installing"
 msgstr "インストール用の空き容量がありません"
 
-#: fs/partitioning_wizard.pm:444 fs/partitioning_wizard.pm:588
+#: fs/partitioning_wizard.pm:440 fs/partitioning_wizard.pm:584
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "以下の解決法があります:"
 
-#: fs/partitioning_wizard.pm:514
+#: fs/partitioning_wizard.pm:510
 #, c-format
 msgid "Here is the content of your disk drive "
 msgstr ""
 
-#: fs/partitioning_wizard.pm:599
+#: fs/partitioning_wizard.pm:595
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "パーティション設定に失敗: %s"
 
-#: fs/type.pm:384
+#: fs/type.pm:365
 #, c-format
 msgid "You cannot use JFS for partitions smaller than 16MB"
 msgstr "16 MB 未満のパーティションに JFS は使えません"
 
-#: fs/type.pm:385
+#: fs/type.pm:366
 #, c-format
 msgid "You cannot use ReiserFS for partitions smaller than 32MB"
 msgstr "32 MB 未満のパーティションに ReiserFS は使えません"
+
+#: fs/type.pm:367
+#, fuzzy, c-format
+msgid "You cannot use btrfs for partitions smaller than 256MB"
+msgstr "16 MB 未満のパーティションに JFS は使えません"
 
 #: fsedit.pm:24
 #, c-format
@@ -2927,7 +2855,7 @@ msgstr ""
 "/boot パーティションがないとブートローダはこれを操作できません。\n"
 "必ず /boot パーティションを追加してください。"
 
-#: fsedit.pm:465 fsedit.pm:485
+#: fsedit.pm:465 fsedit.pm:483
 #, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr "マウントポイント %s には暗号化ファイルシステムは使えません"
@@ -2958,7 +2886,7 @@ msgstr ""
 msgid "This directory should remain within the root filesystem"
 msgstr "このディレクトリは root ファイルシステム内に残してください"
 
-#: fsedit.pm:479 fsedit.pm:481 fsedit.pm:483
+#: fsedit.pm:479 fsedit.pm:481
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount "
@@ -2967,12 +2895,12 @@ msgstr ""
 "このマウントポイントには実在するファイルシステムが必要です。\n"
 "(例: ext2/3/4, reiserfs, xfs, jfs)\n"
 
-#: fsedit.pm:550
+#: fsedit.pm:548
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "空き容量が少ないので自動的に割り当てられません"
 
-#: fsedit.pm:552
+#: fsedit.pm:550
 #, c-format
 msgid "Nothing to do"
 msgstr "何もすることがありません"
@@ -3218,47 +3146,47 @@ msgstr "不明/その他"
 msgid "cpu # "
 msgstr "CPU # "
 
-#: harddrake/sound.pm:95
+#: harddrake/sound.pm:77
 #, c-format
 msgid "Please Wait... Applying the configuration"
 msgstr "設定を適用しています。お待ちください..."
 
-#: harddrake/sound.pm:123
+#: harddrake/sound.pm:98
 #, c-format
 msgid "No known driver"
 msgstr "既知のドライバがありません"
 
-#: harddrake/sound.pm:124
+#: harddrake/sound.pm:99
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr "お使いのサウンドカード (%s) 用の既知のドライバはありません"
 
-#: harddrake/sound.pm:156
+#: harddrake/sound.pm:130
 #, c-format
 msgid "Enable PulseAudio"
 msgstr "PulseAudio を有効にする"
 
-#: harddrake/sound.pm:161
+#: harddrake/sound.pm:135
 #, fuzzy, c-format
 msgid "Use Glitch-Free mode"
 msgstr "オフラインモードを使う"
 
-#: harddrake/sound.pm:167
+#: harddrake/sound.pm:141
 #, c-format
 msgid "Reset sound mixer to default values"
 msgstr "サウンドミキサーをデフォルトの値にリセット"
 
-#: harddrake/sound.pm:172
+#: harddrake/sound.pm:146
 #, c-format
 msgid "Troubleshooting"
 msgstr "トラブルシューティング"
 
-#: harddrake/sound.pm:179
+#: harddrake/sound.pm:153
 #, c-format
 msgid "No alternative driver"
 msgstr "代替ドライバはありません"
 
-#: harddrake/sound.pm:180
+#: harddrake/sound.pm:154
 #, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
@@ -3267,7 +3195,7 @@ msgstr ""
 "お使いのサウンドカード (%s) には OSS/ALSA 代替ドライバがありません。\n"
 "現在 %s を使っています。"
 
-#: harddrake/sound.pm:187
+#: harddrake/sound.pm:161
 #, c-format
 msgid "Sound configuration"
 msgstr "サウンドの設定"
@@ -3275,7 +3203,7 @@ msgstr "サウンドの設定"
 #. -PO: here the first %s is either "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
-#: harddrake/sound.pm:193
+#: harddrake/sound.pm:167
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -3288,7 +3216,7 @@ msgstr ""
 "お使いのカードは現在 %s %s ドライバを使用しています\n"
 "(このカードのデフォルトドライバは %s です)"
 
-#: harddrake/sound.pm:195
+#: harddrake/sound.pm:169
 #, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
@@ -3321,18 +3249,18 @@ msgstr ""
 "- 古い OSS API との互換性\n"
 "- 新しい ALSA API (多くの拡張機能を提供しますが ALSA ライブラリが必要)\n"
 
-#: harddrake/sound.pm:210 harddrake/sound.pm:292
+#: harddrake/sound.pm:184 harddrake/sound.pm:266
 #, c-format
 msgid "Driver:"
 msgstr "ドライバ:"
 
-#: harddrake/sound.pm:232
+#: harddrake/sound.pm:206
 #, c-format
 msgid "Sound troubleshooting"
 msgstr "サウンドのトラブルシューティング"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:235
+#: harddrake/sound.pm:209
 #, c-format
 msgid ""
 "Below are some basic tips to help debug audio problems, but for accurate and "
@@ -3391,18 +3319,18 @@ msgid ""
 "PulseAudio)\n"
 msgstr ""
 
-#: harddrake/sound.pm:281
+#: harddrake/sound.pm:255
 #, c-format
 msgid "Let me pick any driver"
 msgstr "手動でドライバを選択"
 
-#: harddrake/sound.pm:284
+#: harddrake/sound.pm:258
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "任意のドライバを選択"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:287
+#: harddrake/sound.pm:261
 #, fuzzy, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -3459,68 +3387,68 @@ msgstr "カードのモデル:"
 msgid "Tuner type:"
 msgstr "チューナの種類:"
 
-#: interactive.pm:129 interactive.pm:550 interactive/curses.pm:270
+#: interactive.pm:119 interactive.pm:674 interactive/curses.pm:270
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
 #: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:846
-#: mygtk3.pm:880 ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
-#: ugtk3.pm:423 ugtk3.pm:509 ugtk3.pm:793 ugtk3.pm:816
+#: mygtk3.pm:898 ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
+#: ugtk3.pm:509 ugtk3.pm:595 ugtk3.pm:910 ugtk3.pm:933
 #, c-format
 msgid "Ok"
 msgstr "OK"
 
-#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:792
-#: wizards.pm:157
+#: interactive.pm:219 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:909
+#: wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "はい"
 
-#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:792
-#: wizards.pm:157
+#: interactive.pm:219 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:909
+#: wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "いいえ"
 
-#: interactive.pm:263
+#: interactive.pm:253
 #, c-format
 msgid "Choose a file"
 msgstr "ファイルを選択"
 
-#: interactive.pm:388 interactive/gtk.pm:456
+#: interactive.pm:390 interactive/gtk.pm:456
 #, c-format
 msgid "Add"
 msgstr "追加"
 
-#: interactive.pm:388 interactive/gtk.pm:456
+#: interactive.pm:390 interactive/gtk.pm:456
 #, c-format
 msgid "Modify"
 msgstr "変更"
 
-#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:509
+#: interactive.pm:674 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:595
 #, c-format
 msgid "Finish"
 msgstr "完了"
 
-#: interactive.pm:551 interactive/curses.pm:267 ugtk2.pm:517 ugtk3.pm:507
+#: interactive.pm:675 interactive/curses.pm:267 ugtk2.pm:517 ugtk3.pm:593
 #, c-format
 msgid "Previous"
 msgstr "戻る"
 
-#: interactive/curses.pm:576 ugtk2.pm:872 ugtk3.pm:853
+#: interactive/curses.pm:576 ugtk2.pm:872 ugtk3.pm:970
 #, c-format
 msgid "No file chosen"
 msgstr "ファイルが選択されていません"
 
-#: interactive/curses.pm:580 ugtk2.pm:876 ugtk3.pm:857
+#: interactive/curses.pm:580 ugtk2.pm:876 ugtk3.pm:974
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "ディレクトリではなくファイルを選んでください"
 
-#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:859
+#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:976
 #, c-format
 msgid "No such directory"
 msgstr "指定されたディレクトリは存在しません"
 
-#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:859
+#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:976
 #, c-format
 msgid "No such file"
 msgstr "指定されたファイルは存在しません"
@@ -3607,1222 +3535,1222 @@ msgstr "再登録"
 #. -PO: the string "default:LTR" can be translated *ONLY* as "default:LTR"
 #. -PO: or as "default:RTL", depending if your language is written from
 #. -PO: left to right, or from right to left; any other string is wrong.
-#: lang.pm:205
+#: lang.pm:249
 #, c-format
 msgid "default:LTR"
 msgstr "default:LTR"
 
-#: lang.pm:222
+#: lang.pm:303
 #, c-format
 msgid "Andorra"
 msgstr "アンドラ"
 
-#: lang.pm:223 timezone.pm:235
+#: lang.pm:304 timezone.pm:248
 #, c-format
 msgid "United Arab Emirates"
 msgstr "アラブ首長国連邦"
 
-#: lang.pm:224
+#: lang.pm:305
 #, c-format
 msgid "Afghanistan"
 msgstr "アフガニスタン"
 
-#: lang.pm:225
+#: lang.pm:306
 #, c-format
 msgid "Antigua and Barbuda"
 msgstr "アンティグア・バーブーダ"
 
-#: lang.pm:226
+#: lang.pm:307
 #, c-format
 msgid "Anguilla"
 msgstr "アンギラ"
 
-#: lang.pm:227
+#: lang.pm:308
 #, c-format
 msgid "Albania"
 msgstr "アルバニア"
 
-#: lang.pm:228
+#: lang.pm:309
 #, c-format
 msgid "Armenia"
 msgstr "アルメニア"
 
-#: lang.pm:229
+#: lang.pm:310
 #, c-format
 msgid "Netherlands Antilles"
 msgstr "オランダ領アンティル"
 
-#: lang.pm:230
+#: lang.pm:311
 #, c-format
 msgid "Angola"
 msgstr "アンゴラ"
 
-#: lang.pm:231
+#: lang.pm:312
 #, c-format
 msgid "Antarctica"
 msgstr "南極"
 
-#: lang.pm:232 timezone.pm:280
+#: lang.pm:313 timezone.pm:293
 #, c-format
 msgid "Argentina"
 msgstr "アルゼンチン"
 
-#: lang.pm:233
+#: lang.pm:314
 #, c-format
 msgid "American Samoa"
 msgstr "米領サモア"
 
-#: lang.pm:234 mirror.pm:12 timezone.pm:238
+#: lang.pm:315 mirror.pm:22 timezone.pm:251
 #, c-format
 msgid "Austria"
 msgstr "オーストリア"
 
-#: lang.pm:235 mirror.pm:11 timezone.pm:276
+#: lang.pm:316 mirror.pm:21 timezone.pm:289
 #, c-format
 msgid "Australia"
 msgstr "オーストラリア"
 
-#: lang.pm:236
+#: lang.pm:317
 #, c-format
 msgid "Aruba"
 msgstr "アルバ"
 
-#: lang.pm:237
+#: lang.pm:318
 #, c-format
 msgid "Azerbaijan"
 msgstr "アゼルバイジャン"
 
-#: lang.pm:238
+#: lang.pm:319
 #, c-format
 msgid "Bosnia and Herzegovina"
 msgstr "ボスニア・ヘルツェゴビナ"
 
-#: lang.pm:239
+#: lang.pm:320
 #, c-format
 msgid "Barbados"
 msgstr "バルバドス"
 
-#: lang.pm:240 timezone.pm:220
+#: lang.pm:321 timezone.pm:233
 #, c-format
 msgid "Bangladesh"
 msgstr "バングラデシュ"
 
-#: lang.pm:241 mirror.pm:13 timezone.pm:240
+#: lang.pm:322 mirror.pm:23 timezone.pm:253
 #, c-format
 msgid "Belgium"
 msgstr "ベルギー"
 
-#: lang.pm:242
+#: lang.pm:323
 #, c-format
 msgid "Burkina Faso"
 msgstr "ブルキナファソ"
 
-#: lang.pm:243 timezone.pm:241
+#: lang.pm:324 timezone.pm:254
 #, c-format
 msgid "Bulgaria"
 msgstr "ブルガリア"
 
-#: lang.pm:244
+#: lang.pm:325
 #, c-format
 msgid "Bahrain"
 msgstr "バーレーン"
 
-#: lang.pm:245
+#: lang.pm:326
 #, c-format
 msgid "Burundi"
 msgstr "ブルンジ"
 
-#: lang.pm:246
+#: lang.pm:327
 #, c-format
 msgid "Benin"
 msgstr "ベナン"
 
-#: lang.pm:247
+#: lang.pm:328
 #, c-format
 msgid "Bermuda"
 msgstr "バミューダ諸島"
 
-#: lang.pm:248
+#: lang.pm:329
 #, c-format
 msgid "Brunei Darussalam"
 msgstr "ブルネイ"
 
-#: lang.pm:249
+#: lang.pm:330
 #, c-format
 msgid "Bolivia"
 msgstr "ボリビア"
 
-#: lang.pm:250 mirror.pm:14 timezone.pm:281
+#: lang.pm:331 mirror.pm:24 timezone.pm:294
 #, c-format
 msgid "Brazil"
 msgstr "ブラジル"
 
-#: lang.pm:251
+#: lang.pm:332
 #, c-format
 msgid "Bahamas"
 msgstr "バハマ"
 
-#: lang.pm:252
+#: lang.pm:333
 #, c-format
 msgid "Bhutan"
 msgstr "ブータン"
 
-#: lang.pm:253
+#: lang.pm:334
 #, c-format
 msgid "Bouvet Island"
 msgstr "ブーベ島"
 
-#: lang.pm:254
+#: lang.pm:335
 #, c-format
 msgid "Botswana"
 msgstr "ボツワナ"
 
-#: lang.pm:255 timezone.pm:239
+#: lang.pm:336 timezone.pm:252
 #, c-format
 msgid "Belarus"
 msgstr "ベラルーシ"
 
-#: lang.pm:256
+#: lang.pm:337
 #, c-format
 msgid "Belize"
 msgstr "ベリーズ"
 
-#: lang.pm:257 mirror.pm:15 timezone.pm:270
+#: lang.pm:338 mirror.pm:25 timezone.pm:283
 #, c-format
 msgid "Canada"
 msgstr "カナダ"
 
-#: lang.pm:258
+#: lang.pm:339
 #, c-format
 msgid "Cocos (Keeling) Islands"
 msgstr "ココス諸島"
 
-#: lang.pm:259
+#: lang.pm:340
 #, c-format
 msgid "Congo (Kinshasa)"
 msgstr "コンゴ (Kinshasa)"
 
-#: lang.pm:260
+#: lang.pm:341
 #, c-format
 msgid "Central African Republic"
 msgstr "中央アフリカ共和国"
 
-#: lang.pm:261
+#: lang.pm:342
 #, c-format
 msgid "Congo (Brazzaville)"
 msgstr "コンゴ (Brazzaville)"
 
-#: lang.pm:262 mirror.pm:39 timezone.pm:264
+#: lang.pm:343 mirror.pm:49 timezone.pm:277
 #, c-format
 msgid "Switzerland"
 msgstr "スイス"
 
-#: lang.pm:263
+#: lang.pm:344
 #, c-format
 msgid "Cote d'Ivoire"
 msgstr "コートジボアール"
 
-#: lang.pm:264
+#: lang.pm:345
 #, c-format
 msgid "Cook Islands"
 msgstr "クック諸島"
 
-#: lang.pm:265 timezone.pm:282
+#: lang.pm:346 timezone.pm:295
 #, c-format
 msgid "Chile"
 msgstr "チリ"
 
-#: lang.pm:266
+#: lang.pm:347
 #, c-format
 msgid "Cameroon"
 msgstr "カメルーン"
 
-#: lang.pm:267 timezone.pm:221
+#: lang.pm:348 timezone.pm:234
 #, c-format
 msgid "China"
 msgstr "中国"
 
-#: lang.pm:268
+#: lang.pm:349
 #, c-format
 msgid "Colombia"
 msgstr "コロンビア"
 
-#: lang.pm:269 mirror.pm:16
+#: lang.pm:350 mirror.pm:26
 #, c-format
 msgid "Costa Rica"
 msgstr "コスタリカ"
 
-#: lang.pm:270
+#: lang.pm:351
 #, c-format
 msgid "Serbia & Montenegro"
 msgstr "セルビア・モンテネグロ"
 
-#: lang.pm:271
+#: lang.pm:352
 #, c-format
 msgid "Cuba"
 msgstr "キューバ"
 
-#: lang.pm:272
+#: lang.pm:353
 #, c-format
 msgid "Cape Verde"
 msgstr "カーボベルデ"
 
-#: lang.pm:273
+#: lang.pm:354
 #, c-format
 msgid "Christmas Island"
 msgstr "クリスマス島"
 
-#: lang.pm:274
+#: lang.pm:355
 #, c-format
 msgid "Cyprus"
 msgstr "キプロス"
 
-#: lang.pm:275 mirror.pm:17 timezone.pm:242
+#: lang.pm:356 mirror.pm:27 timezone.pm:255
 #, c-format
 msgid "Czech Republic"
 msgstr "チェコ"
 
-#: lang.pm:276 mirror.pm:22 timezone.pm:247
+#: lang.pm:357 mirror.pm:32 timezone.pm:260
 #, c-format
 msgid "Germany"
 msgstr "ドイツ"
 
-#: lang.pm:277
+#: lang.pm:358
 #, c-format
 msgid "Djibouti"
 msgstr "ジブチ"
 
-#: lang.pm:278 mirror.pm:18 timezone.pm:243
+#: lang.pm:359 mirror.pm:28 timezone.pm:256
 #, c-format
 msgid "Denmark"
 msgstr "デンマーク"
 
-#: lang.pm:279
+#: lang.pm:360
 #, c-format
 msgid "Dominica"
 msgstr "ドミニカ"
 
-#: lang.pm:280
+#: lang.pm:361
 #, c-format
 msgid "Dominican Republic"
 msgstr "ドミニカ共和国"
 
-#: lang.pm:281
+#: lang.pm:362
 #, c-format
 msgid "Algeria"
 msgstr "アルジェリア"
 
-#: lang.pm:282
+#: lang.pm:363
 #, c-format
 msgid "Ecuador"
 msgstr "エクアドル"
 
-#: lang.pm:283 mirror.pm:19 timezone.pm:244
+#: lang.pm:364 mirror.pm:29 timezone.pm:257
 #, c-format
 msgid "Estonia"
 msgstr "エストニア"
 
-#: lang.pm:284
+#: lang.pm:365
 #, c-format
 msgid "Egypt"
 msgstr "エジプト"
 
-#: lang.pm:285
+#: lang.pm:366
 #, c-format
 msgid "Western Sahara"
 msgstr "西サハラ"
 
-#: lang.pm:286
+#: lang.pm:367
 #, c-format
 msgid "Eritrea"
 msgstr "エリトリア"
 
-#: lang.pm:287 mirror.pm:37 timezone.pm:262
+#: lang.pm:368 mirror.pm:47 timezone.pm:275
 #, c-format
 msgid "Spain"
 msgstr "スペイン"
 
-#: lang.pm:288
+#: lang.pm:369
 #, c-format
 msgid "Ethiopia"
 msgstr "エチオピア"
 
-#: lang.pm:289 mirror.pm:20 timezone.pm:245
+#: lang.pm:370 mirror.pm:30 timezone.pm:258
 #, c-format
 msgid "Finland"
 msgstr "フィンランド"
 
-#: lang.pm:290
+#: lang.pm:371
 #, c-format
 msgid "Fiji"
 msgstr "フィジー"
 
-#: lang.pm:291
+#: lang.pm:372
 #, c-format
 msgid "Falkland Islands (Malvinas)"
 msgstr "フォークランド諸島 (マルビーナス諸島)"
 
-#: lang.pm:292
+#: lang.pm:373
 #, c-format
 msgid "Micronesia"
 msgstr "ミクロネシア"
 
-#: lang.pm:293
+#: lang.pm:374
 #, c-format
 msgid "Faroe Islands"
 msgstr "フェロー諸島"
 
-#: lang.pm:294 mirror.pm:21 timezone.pm:246
+#: lang.pm:375 mirror.pm:31 timezone.pm:259
 #, c-format
 msgid "France"
 msgstr "フランス"
 
-#: lang.pm:295
+#: lang.pm:376
 #, c-format
 msgid "Gabon"
 msgstr "ガボン"
 
-#: lang.pm:296 timezone.pm:266
+#: lang.pm:377 timezone.pm:279
 #, c-format
 msgid "United Kingdom"
 msgstr "英国"
 
-#: lang.pm:297
+#: lang.pm:378
 #, c-format
 msgid "Grenada"
 msgstr "グレナダ"
 
-#: lang.pm:298
+#: lang.pm:379
 #, c-format
 msgid "Georgia"
 msgstr "グルジア"
 
-#: lang.pm:299
+#: lang.pm:380
 #, c-format
 msgid "French Guiana"
 msgstr "仏領ギアナ"
 
-#: lang.pm:300
+#: lang.pm:381
 #, c-format
 msgid "Ghana"
 msgstr "ガーナ"
 
-#: lang.pm:301
+#: lang.pm:382
 #, c-format
 msgid "Gibraltar"
 msgstr "ジブラルタル"
 
-#: lang.pm:302
+#: lang.pm:383
 #, c-format
 msgid "Greenland"
 msgstr "グリーンランド"
 
-#: lang.pm:303
+#: lang.pm:384
 #, c-format
 msgid "Gambia"
 msgstr "ガンビア"
 
-#: lang.pm:304
+#: lang.pm:385
 #, c-format
 msgid "Guinea"
 msgstr "ギニア"
 
-#: lang.pm:305
+#: lang.pm:386
 #, c-format
 msgid "Guadeloupe"
 msgstr "グアドループ"
 
-#: lang.pm:306
+#: lang.pm:387
 #, c-format
 msgid "Equatorial Guinea"
 msgstr "赤道ギニア"
 
-#: lang.pm:307 mirror.pm:23 timezone.pm:248
+#: lang.pm:388 mirror.pm:33 timezone.pm:261
 #, c-format
 msgid "Greece"
 msgstr "ギリシャ"
 
-#: lang.pm:308
+#: lang.pm:389
 #, c-format
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "南ジョージア島・南サンドイッチ諸島"
 
-#: lang.pm:309 timezone.pm:271
+#: lang.pm:390 timezone.pm:284
 #, c-format
 msgid "Guatemala"
 msgstr "グアテマラ"
 
-#: lang.pm:310
+#: lang.pm:391
 #, c-format
 msgid "Guam"
 msgstr "グアム"
 
-#: lang.pm:311
+#: lang.pm:392
 #, c-format
 msgid "Guinea-Bissau"
 msgstr "ギニアビサウ"
 
-#: lang.pm:312
+#: lang.pm:393
 #, c-format
 msgid "Guyana"
 msgstr "ガイアナ"
 
-#: lang.pm:313
+#: lang.pm:394
 #, c-format
 msgid "Hong Kong SAR (China)"
 msgstr "Hong Kong SAR (China)"
 
-#: lang.pm:314
+#: lang.pm:395
 #, c-format
 msgid "Heard and McDonald Islands"
 msgstr "ハード島・マクドナルド諸島"
 
-#: lang.pm:315
+#: lang.pm:396
 #, c-format
 msgid "Honduras"
 msgstr "ホンジュラス"
 
-#: lang.pm:316
+#: lang.pm:397
 #, c-format
 msgid "Croatia"
 msgstr "クロアチア"
 
-#: lang.pm:317
+#: lang.pm:398
 #, c-format
 msgid "Haiti"
 msgstr "ハイチ"
 
-#: lang.pm:318 mirror.pm:24 timezone.pm:249
+#: lang.pm:399 mirror.pm:34 timezone.pm:262
 #, c-format
 msgid "Hungary"
 msgstr "ハンガリー"
 
-#: lang.pm:319 timezone.pm:224
+#: lang.pm:400 timezone.pm:237
 #, c-format
 msgid "Indonesia"
 msgstr "インドネシア"
 
-#: lang.pm:320 mirror.pm:25 timezone.pm:250
+#: lang.pm:401 mirror.pm:35 timezone.pm:263
 #, c-format
 msgid "Ireland"
 msgstr "アイルランド"
 
-#: lang.pm:321 mirror.pm:26 timezone.pm:226
+#: lang.pm:402 mirror.pm:36 timezone.pm:239
 #, c-format
 msgid "Israel"
 msgstr "イスラエル"
 
-#: lang.pm:322 timezone.pm:223
+#: lang.pm:403 timezone.pm:236
 #, c-format
 msgid "India"
 msgstr "インド"
 
-#: lang.pm:323
+#: lang.pm:404
 #, c-format
 msgid "British Indian Ocean Territory"
 msgstr "英領インド洋地域"
 
-#: lang.pm:324
+#: lang.pm:405
 #, c-format
 msgid "Iraq"
 msgstr "イラク"
 
-#: lang.pm:325 timezone.pm:225
+#: lang.pm:406 timezone.pm:238
 #, c-format
 msgid "Iran"
 msgstr "イラン"
 
-#: lang.pm:326
+#: lang.pm:407
 #, c-format
 msgid "Iceland"
 msgstr "アイスランド"
 
-#: lang.pm:327 mirror.pm:27 timezone.pm:251
+#: lang.pm:408 mirror.pm:37 timezone.pm:264
 #, c-format
 msgid "Italy"
 msgstr "イタリア"
 
-#: lang.pm:328
+#: lang.pm:409
 #, c-format
 msgid "Jamaica"
 msgstr "ジャマイカ"
 
-#: lang.pm:329
+#: lang.pm:410
 #, c-format
 msgid "Jordan"
 msgstr "ヨルダン"
 
-#: lang.pm:330 mirror.pm:28 timezone.pm:227
+#: lang.pm:411 mirror.pm:38 timezone.pm:240
 #, c-format
 msgid "Japan"
 msgstr "日本"
 
-#: lang.pm:331
+#: lang.pm:412
 #, c-format
 msgid "Kenya"
 msgstr "ケニア"
 
-#: lang.pm:332
+#: lang.pm:413
 #, c-format
 msgid "Kyrgyzstan"
 msgstr "キルギス"
 
-#: lang.pm:333
+#: lang.pm:414
 #, c-format
 msgid "Cambodia"
 msgstr "カンボジア"
 
-#: lang.pm:334
+#: lang.pm:415
 #, c-format
 msgid "Kiribati"
 msgstr "キリバス"
 
-#: lang.pm:335
+#: lang.pm:416
 #, c-format
 msgid "Comoros"
 msgstr "コモロ"
 
-#: lang.pm:336
+#: lang.pm:417
 #, c-format
 msgid "Saint Kitts and Nevis"
 msgstr "セントクリストファー・ネビス"
 
-#: lang.pm:337
+#: lang.pm:418
 #, c-format
 msgid "Korea (North)"
 msgstr "北朝鮮"
 
-#: lang.pm:338 timezone.pm:228
+#: lang.pm:419 timezone.pm:241
 #, c-format
 msgid "Korea"
 msgstr "韓国"
 
-#: lang.pm:339
+#: lang.pm:420
 #, c-format
 msgid "Kuwait"
 msgstr "クウェート"
 
-#: lang.pm:340
+#: lang.pm:421
 #, c-format
 msgid "Cayman Islands"
 msgstr "ケイマン諸島"
 
-#: lang.pm:341
+#: lang.pm:422
 #, c-format
 msgid "Kazakhstan"
 msgstr "カザフスタン"
 
-#: lang.pm:342
+#: lang.pm:423
 #, c-format
 msgid "Laos"
 msgstr "ラオス"
 
-#: lang.pm:343
+#: lang.pm:424
 #, c-format
 msgid "Lebanon"
 msgstr "レバノン"
 
-#: lang.pm:344
+#: lang.pm:425
 #, c-format
 msgid "Saint Lucia"
 msgstr "セントルシア"
 
-#: lang.pm:345
+#: lang.pm:426
 #, c-format
 msgid "Liechtenstein"
 msgstr "リヒテンシュタイン"
 
-#: lang.pm:346
+#: lang.pm:427
 #, c-format
 msgid "Sri Lanka"
 msgstr "スリランカ"
 
-#: lang.pm:347
+#: lang.pm:428
 #, c-format
 msgid "Liberia"
 msgstr "リベリア"
 
-#: lang.pm:348
+#: lang.pm:429
 #, c-format
 msgid "Lesotho"
 msgstr "レソト"
 
-#: lang.pm:349 timezone.pm:252
+#: lang.pm:430 timezone.pm:265
 #, c-format
 msgid "Lithuania"
 msgstr "リトアニア"
 
-#: lang.pm:350 timezone.pm:253
+#: lang.pm:431 timezone.pm:266
 #, c-format
 msgid "Luxembourg"
 msgstr "ルクセンブルク"
 
-#: lang.pm:351
+#: lang.pm:432
 #, c-format
 msgid "Latvia"
 msgstr "ラトビア"
 
-#: lang.pm:352
+#: lang.pm:433
 #, c-format
 msgid "Libya"
 msgstr "リビア"
 
-#: lang.pm:353
+#: lang.pm:434
 #, c-format
 msgid "Morocco"
 msgstr "モロッコ"
 
-#: lang.pm:354
+#: lang.pm:435
 #, c-format
 msgid "Monaco"
 msgstr "モナコ"
 
-#: lang.pm:355
+#: lang.pm:436
 #, c-format
 msgid "Moldova"
 msgstr "モルドバ"
 
-#: lang.pm:356
+#: lang.pm:437
 #, c-format
 msgid "Madagascar"
 msgstr "マダガスカル"
 
-#: lang.pm:357
+#: lang.pm:438
 #, c-format
 msgid "Marshall Islands"
 msgstr "マーシャル諸島"
 
-#: lang.pm:358
+#: lang.pm:439
 #, c-format
 msgid "Macedonia"
 msgstr "マケドニア"
 
-#: lang.pm:359
+#: lang.pm:440
 #, c-format
 msgid "Mali"
 msgstr "マリ"
 
-#: lang.pm:360
+#: lang.pm:441
 #, c-format
 msgid "Myanmar"
 msgstr "ミャンマー"
 
-#: lang.pm:361
+#: lang.pm:442
 #, c-format
 msgid "Mongolia"
 msgstr "モンゴル"
 
-#: lang.pm:362
+#: lang.pm:443
 #, c-format
 msgid "Northern Mariana Islands"
 msgstr "北マリアナ諸島連邦"
 
-#: lang.pm:363
+#: lang.pm:444
 #, c-format
 msgid "Martinique"
 msgstr "マルティニク"
 
-#: lang.pm:364
+#: lang.pm:445
 #, c-format
 msgid "Mauritania"
 msgstr "モーリタニア"
 
-#: lang.pm:365
+#: lang.pm:446
 #, c-format
 msgid "Montserrat"
 msgstr "モンセラット"
 
-#: lang.pm:366
+#: lang.pm:447
 #, c-format
 msgid "Malta"
 msgstr "マルタ"
 
-#: lang.pm:367
+#: lang.pm:448
 #, c-format
 msgid "Mauritius"
 msgstr "モーリシャス"
 
-#: lang.pm:368
+#: lang.pm:449
 #, c-format
 msgid "Maldives"
 msgstr "モルディブ"
 
-#: lang.pm:369
+#: lang.pm:450
 #, c-format
 msgid "Malawi"
 msgstr "マラウイ"
 
-#: lang.pm:370 timezone.pm:272
+#: lang.pm:451 timezone.pm:285
 #, c-format
 msgid "Mexico"
 msgstr "メキシコ"
 
-#: lang.pm:371 timezone.pm:229
+#: lang.pm:452 timezone.pm:242
 #, c-format
 msgid "Malaysia"
 msgstr "マレーシア"
 
-#: lang.pm:372
+#: lang.pm:453
 #, c-format
 msgid "Mozambique"
 msgstr "モザンビーク"
 
-#: lang.pm:373
+#: lang.pm:454
 #, c-format
 msgid "Namibia"
 msgstr "ナミビア"
 
-#: lang.pm:374
+#: lang.pm:455
 #, c-format
 msgid "New Caledonia"
 msgstr "ニューカレドニア"
 
-#: lang.pm:375
+#: lang.pm:456
 #, c-format
 msgid "Niger"
 msgstr "ニジェール"
 
-#: lang.pm:376
+#: lang.pm:457
 #, c-format
 msgid "Norfolk Island"
 msgstr "ノーフォーク島"
 
-#: lang.pm:377
+#: lang.pm:458
 #, c-format
 msgid "Nigeria"
 msgstr "ナイジェリア"
 
-#: lang.pm:378
+#: lang.pm:459
 #, c-format
 msgid "Nicaragua"
 msgstr "ニカラグア"
 
-#: lang.pm:379 mirror.pm:29 timezone.pm:254
+#: lang.pm:460 mirror.pm:39 timezone.pm:267
 #, c-format
 msgid "Netherlands"
 msgstr "オランダ"
 
-#: lang.pm:380 mirror.pm:31 timezone.pm:255
+#: lang.pm:461 mirror.pm:41 timezone.pm:268
 #, c-format
 msgid "Norway"
 msgstr "ノルウェー"
 
-#: lang.pm:381
+#: lang.pm:462
 #, c-format
 msgid "Nepal"
 msgstr "ネパール"
 
-#: lang.pm:382
+#: lang.pm:463
 #, c-format
 msgid "Nauru"
 msgstr "ナウル"
 
-#: lang.pm:383
+#: lang.pm:464
 #, c-format
 msgid "Niue"
 msgstr "ニウエ"
 
-#: lang.pm:384 mirror.pm:30 timezone.pm:277
+#: lang.pm:465 mirror.pm:40 timezone.pm:290
 #, c-format
 msgid "New Zealand"
 msgstr "ニュージーランド"
 
-#: lang.pm:385
+#: lang.pm:466
 #, c-format
 msgid "Oman"
 msgstr "オマーン"
 
-#: lang.pm:386
+#: lang.pm:467
 #, c-format
 msgid "Panama"
 msgstr "パナマ"
 
-#: lang.pm:387
+#: lang.pm:468
 #, c-format
 msgid "Peru"
 msgstr "ペルー"
 
-#: lang.pm:388
+#: lang.pm:469
 #, c-format
 msgid "French Polynesia"
 msgstr "仏領ポリネシア"
 
-#: lang.pm:389
+#: lang.pm:470
 #, c-format
 msgid "Papua New Guinea"
 msgstr "パプアニューギニア"
 
-#: lang.pm:390 timezone.pm:230
+#: lang.pm:471 timezone.pm:243
 #, c-format
 msgid "Philippines"
 msgstr "フィリピン"
 
-#: lang.pm:391
+#: lang.pm:472
 #, c-format
 msgid "Pakistan"
 msgstr "パキスタン"
 
-#: lang.pm:392 mirror.pm:32 timezone.pm:256
+#: lang.pm:473 mirror.pm:42 timezone.pm:269
 #, c-format
 msgid "Poland"
 msgstr "ポーランド"
 
-#: lang.pm:393
+#: lang.pm:474
 #, c-format
 msgid "Saint Pierre and Miquelon"
 msgstr "セントピエール島・ミクロン島"
 
-#: lang.pm:394
+#: lang.pm:475
 #, c-format
 msgid "Pitcairn"
 msgstr "ピトケアン島"
 
-#: lang.pm:395
+#: lang.pm:476
 #, c-format
 msgid "Puerto Rico"
 msgstr "プエルトリコ"
 
-#: lang.pm:396
+#: lang.pm:477
 #, c-format
 msgid "Palestine"
 msgstr "パレスチナ"
 
-#: lang.pm:397 mirror.pm:33 timezone.pm:257
+#: lang.pm:478 mirror.pm:43 timezone.pm:270
 #, c-format
 msgid "Portugal"
 msgstr "ポルトガル"
 
-#: lang.pm:398
+#: lang.pm:479
 #, c-format
 msgid "Paraguay"
 msgstr "パラグアイ"
 
-#: lang.pm:399
+#: lang.pm:480
 #, c-format
 msgid "Palau"
 msgstr "パラオ"
 
-#: lang.pm:400
+#: lang.pm:481
 #, c-format
 msgid "Qatar"
 msgstr "カタール"
 
-#: lang.pm:401
+#: lang.pm:482
 #, c-format
 msgid "Reunion"
 msgstr "レユニオン"
 
-#: lang.pm:402 timezone.pm:258
+#: lang.pm:483 timezone.pm:271
 #, c-format
 msgid "Romania"
 msgstr "ルーマニア"
 
-#: lang.pm:403 mirror.pm:34
+#: lang.pm:484 mirror.pm:44
 #, c-format
 msgid "Russia"
 msgstr "ロシア"
 
-#: lang.pm:404
+#: lang.pm:485
 #, c-format
 msgid "Rwanda"
 msgstr "ルワンダ"
 
-#: lang.pm:405
+#: lang.pm:486
 #, c-format
 msgid "Saudi Arabia"
 msgstr "サウジアラビア"
 
-#: lang.pm:406
+#: lang.pm:487
 #, c-format
 msgid "Solomon Islands"
 msgstr "ソロモン諸島"
 
-#: lang.pm:407
+#: lang.pm:488
 #, c-format
 msgid "Seychelles"
 msgstr "セーシェル"
 
-#: lang.pm:408
+#: lang.pm:489
 #, c-format
 msgid "Sudan"
 msgstr "スーダン"
 
-#: lang.pm:409 mirror.pm:38 timezone.pm:263
+#: lang.pm:490 mirror.pm:48 timezone.pm:276
 #, c-format
 msgid "Sweden"
 msgstr "スウェーデン"
 
-#: lang.pm:410 timezone.pm:231
+#: lang.pm:491 timezone.pm:244
 #, c-format
 msgid "Singapore"
 msgstr "シンガポール"
 
-#: lang.pm:411
+#: lang.pm:492
 #, c-format
 msgid "Saint Helena"
 msgstr "セントヘレナ島"
 
-#: lang.pm:412 timezone.pm:261
+#: lang.pm:493 timezone.pm:274
 #, c-format
 msgid "Slovenia"
 msgstr "スロベニア"
 
-#: lang.pm:413
+#: lang.pm:494
 #, c-format
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "スバルバール諸島・ヤンマイエン諸"
 
-#: lang.pm:414 mirror.pm:35 timezone.pm:260
+#: lang.pm:495 mirror.pm:45 timezone.pm:273
 #, c-format
 msgid "Slovakia"
 msgstr "スロバキア"
 
-#: lang.pm:415
+#: lang.pm:496
 #, c-format
 msgid "Sierra Leone"
 msgstr "シエラレオネ"
 
-#: lang.pm:416
+#: lang.pm:497
 #, c-format
 msgid "San Marino"
 msgstr "サンマリノ"
 
-#: lang.pm:417
+#: lang.pm:498
 #, c-format
 msgid "Senegal"
 msgstr "セネガル"
 
-#: lang.pm:418
+#: lang.pm:499
 #, c-format
 msgid "Somalia"
 msgstr "ソマリア"
 
-#: lang.pm:419
+#: lang.pm:500
 #, c-format
 msgid "Suriname"
 msgstr "スリナム"
 
-#: lang.pm:420
+#: lang.pm:501
 #, c-format
 msgid "Sao Tome and Principe"
 msgstr "サントメ・プリンシペ"
 
-#: lang.pm:421
+#: lang.pm:502
 #, c-format
 msgid "El Salvador"
 msgstr "エルサルバドル"
 
-#: lang.pm:422
+#: lang.pm:503
 #, c-format
 msgid "Syria"
 msgstr "シリア"
 
-#: lang.pm:423
+#: lang.pm:504
 #, c-format
 msgid "Swaziland"
 msgstr "スワジランド"
 
-#: lang.pm:424
+#: lang.pm:505
 #, c-format
 msgid "Turks and Caicos Islands"
 msgstr "タークス諸島・カイコス諸島"
 
-#: lang.pm:425
+#: lang.pm:506
 #, c-format
 msgid "Chad"
 msgstr "チャド"
 
-#: lang.pm:426
+#: lang.pm:507
 #, c-format
 msgid "French Southern Territories"
 msgstr "仏領極南諸島"
 
-#: lang.pm:427
+#: lang.pm:508
 #, c-format
 msgid "Togo"
 msgstr "トーゴ"
 
-#: lang.pm:428 mirror.pm:41 timezone.pm:233
+#: lang.pm:509 mirror.pm:51 timezone.pm:246
 #, c-format
 msgid "Thailand"
 msgstr "タイ"
 
-#: lang.pm:429
+#: lang.pm:510
 #, c-format
 msgid "Tajikistan"
 msgstr "タジキスタン"
 
-#: lang.pm:430
+#: lang.pm:511
 #, c-format
 msgid "Tokelau"
 msgstr "トケラウ諸島"
 
-#: lang.pm:431
+#: lang.pm:512
 #, c-format
 msgid "East Timor"
 msgstr "東ティモール"
 
-#: lang.pm:432
+#: lang.pm:513
 #, c-format
 msgid "Turkmenistan"
 msgstr "トルクメニスタン"
 
-#: lang.pm:433
+#: lang.pm:514
 #, c-format
 msgid "Tunisia"
 msgstr "チュニジア"
 
-#: lang.pm:434
+#: lang.pm:515
 #, c-format
 msgid "Tonga"
 msgstr "トンガ"
 
-#: lang.pm:435 timezone.pm:234
+#: lang.pm:516 timezone.pm:247
 #, c-format
 msgid "Turkey"
 msgstr "トルコ"
 
-#: lang.pm:436
+#: lang.pm:517
 #, c-format
 msgid "Trinidad and Tobago"
 msgstr "トリニダード・トバゴ"
 
-#: lang.pm:437
+#: lang.pm:518
 #, c-format
 msgid "Tuvalu"
 msgstr "ツバル"
 
-#: lang.pm:438 mirror.pm:40 timezone.pm:232
+#: lang.pm:519 mirror.pm:50 timezone.pm:245
 #, c-format
 msgid "Taiwan"
 msgstr "台湾"
 
-#: lang.pm:439 timezone.pm:217
+#: lang.pm:520 timezone.pm:230
 #, c-format
 msgid "Tanzania"
 msgstr "タンザニア"
 
-#: lang.pm:440 timezone.pm:265
+#: lang.pm:521 timezone.pm:278
 #, c-format
 msgid "Ukraine"
 msgstr "ウクライナ"
 
-#: lang.pm:441
+#: lang.pm:522
 #, c-format
 msgid "Uganda"
 msgstr "ウガンダ"
 
-#: lang.pm:442
+#: lang.pm:523
 #, c-format
 msgid "United States Minor Outlying Islands"
 msgstr "米領太平洋諸島"
 
-#: lang.pm:443 mirror.pm:42 timezone.pm:273
+#: lang.pm:524 mirror.pm:52 timezone.pm:286
 #, c-format
 msgid "United States"
 msgstr "米国"
 
-#: lang.pm:444
+#: lang.pm:525
 #, c-format
 msgid "Uruguay"
 msgstr "ウルグアイ"
 
-#: lang.pm:445
+#: lang.pm:526
 #, c-format
 msgid "Uzbekistan"
 msgstr "ウズベキスタン"
 
-#: lang.pm:446
+#: lang.pm:527
 #, c-format
 msgid "Vatican"
 msgstr "バチカン"
 
-#: lang.pm:447
+#: lang.pm:528
 #, c-format
 msgid "Saint Vincent and the Grenadines"
 msgstr "セントビンセント・グレナディーン"
 
-#: lang.pm:448
+#: lang.pm:529
 #, c-format
 msgid "Venezuela"
 msgstr "ベネズエラ"
 
-#: lang.pm:449
+#: lang.pm:530
 #, c-format
 msgid "Virgin Islands (British)"
 msgstr "英領バージン諸島"
 
-#: lang.pm:450
+#: lang.pm:531
 #, c-format
 msgid "Virgin Islands (U.S.)"
 msgstr "米領バージン諸島"
 
-#: lang.pm:451
+#: lang.pm:532
 #, c-format
 msgid "Vietnam"
 msgstr "ベトナム"
 
-#: lang.pm:452
+#: lang.pm:533
 #, c-format
 msgid "Vanuatu"
 msgstr "バヌアツ"
 
-#: lang.pm:453
+#: lang.pm:534
 #, c-format
 msgid "Wallis and Futuna"
 msgstr "ワリス・フテュナ諸島"
 
-#: lang.pm:454
+#: lang.pm:535
 #, c-format
 msgid "Samoa"
 msgstr "サモア"
 
-#: lang.pm:455
+#: lang.pm:536
 #, c-format
 msgid "Yemen"
 msgstr "イエメン"
 
-#: lang.pm:456
+#: lang.pm:537
 #, c-format
 msgid "Mayotte"
 msgstr "マヨット"
 
-#: lang.pm:457 mirror.pm:36 timezone.pm:216
+#: lang.pm:538 mirror.pm:46 timezone.pm:229
 #, c-format
 msgid "South Africa"
 msgstr "南アフリカ"
 
-#: lang.pm:458
+#: lang.pm:539
 #, c-format
 msgid "Zambia"
 msgstr "ザンビア"
 
-#: lang.pm:459
+#: lang.pm:540
 #, c-format
 msgid "Zimbabwe"
 msgstr "ジンバブエ"
 
-#: lang.pm:1227
+#: lang.pm:1548
 #, c-format
 msgid "Welcome to %s"
 msgstr "%s へようこそ"
 
-#: lvm.pm:92
+#: lvm.pm:108
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
 msgstr "使用中の物理エクステントを他の物理ボリュームに移動できませんでした"
 
-#: lvm.pm:152
+#: lvm.pm:168
 #, c-format
 msgid "Physical volume %s is still in use"
 msgstr "物理ボリューム %s は使用中です"
 
-#: lvm.pm:162
+#: lvm.pm:178
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "まず論理ボリュームを削除してください\n"
 
-#: lvm.pm:205
+#: lvm.pm:221
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr "ブートローダは複数の物理ボリューム上の /boot を扱えません"
@@ -5316,37 +5244,32 @@ msgstr ""
 "モジュール %s のロードに失敗しました。\n"
 "他のパラメータでもう一度試しますか？"
 
-#: mygtk2.pm:1229 mygtk3.pm:1255
+#: mygtk2.pm:1229 mygtk3.pm:1282
 #, fuzzy, c-format
 msgid "Are you sure you want to quit?"
 msgstr "このボタンをクリックしますか？"
 
-#: mygtk2.pm:1570 mygtk2.pm:1571 mygtk3.pm:1606 mygtk3.pm:1607
+#: mygtk2.pm:1571 mygtk2.pm:1572 mygtk3.pm:1650 mygtk3.pm:1651
 #, c-format
 msgid "Password is trivial to guess"
 msgstr ""
 
-#: mygtk2.pm:1572 mygtk3.pm:1608
+#: mygtk2.pm:1573 mygtk3.pm:1652
 #, c-format
 msgid "Password should be resistant to basic attacks"
 msgstr ""
 
-#: mygtk2.pm:1573 mygtk2.pm:1574 mygtk3.pm:1609 mygtk3.pm:1610
+#: mygtk2.pm:1574 mygtk2.pm:1575 mygtk3.pm:1653 mygtk3.pm:1654
 #, fuzzy, c-format
 msgid "Password seems secure"
 msgstr "パスワード"
 
-#: partition_table.pm:428
+#: partition_table.pm:415
 #, c-format
 msgid "mount failed: "
 msgstr "マウントに失敗: "
 
-#: partition_table.pm:540
-#, c-format
-msgid "Extended partition not supported on this platform"
-msgstr "このプラットフォームでは拡張パーティションはサポートされていません"
-
-#: partition_table.pm:558
+#: partition_table.pm:541
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -5357,7 +5280,7 @@ msgstr ""
 "プライマリパーティションを移動して、この隙間が拡張パーティションの次に来るよ"
 "うにするのが唯一の解決策です。"
 
-#: partition_table/raw.pm:296
+#: partition_table/raw.pm:292
 #, c-format
 msgid ""
 "Something bad is happening on your hard disk drive. \n"
@@ -5369,95 +5292,95 @@ msgstr ""
 "データの完全性チェックに失敗しました。\n"
 "このディスクに書き込んでもデータは破損します。"
 
-#: pkgs.pm:254
+#: pkgs.pm:260
 #, c-format
 msgid "Gathering system information..."
 msgstr ""
 
-#: pkgs.pm:263
+#: pkgs.pm:269
 #, c-format
 msgid "Preparing for installation..."
 msgstr ""
 
-#: pkgs.pm:273 pkgs.pm:276 pkgs.pm:289
+#: pkgs.pm:279 pkgs.pm:282 pkgs.pm:295
 #, c-format
 msgid "Unused packages removal"
 msgstr "不要なパッケージの削除"
 
-#: pkgs.pm:273
+#: pkgs.pm:279
 #, c-format
 msgid "Finding unused hardware packages..."
 msgstr "不要なハードウェア用パッケージを探しています..."
 
-#: pkgs.pm:276
+#: pkgs.pm:282
 #, c-format
 msgid "Finding unused localization packages..."
 msgstr "不要な言語用パッケージを探しています..."
 
-#: pkgs.pm:290
+#: pkgs.pm:296
 #, c-format
 msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
 msgstr "あなたのシステムには必要ないと思われるパッケージが見つかりました。"
 
-#: pkgs.pm:291
+#: pkgs.pm:297
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
 msgstr "特に指示がなければ以下のパッケージを削除します:"
 
-#: pkgs.pm:294 pkgs.pm:295
+#: pkgs.pm:300 pkgs.pm:301
 #, c-format
 msgid "Unused hardware support"
 msgstr "不要なハードウェアサポート"
 
-#: pkgs.pm:298 pkgs.pm:299
+#: pkgs.pm:304 pkgs.pm:305
 #, c-format
 msgid "Unused localization"
 msgstr "不要な言語サポート"
 
-#: raid.pm:43
+#: raid.pm:53
 #, c-format
 msgid "Cannot add a partition to _formatted_ RAID %s"
 msgstr "フォーマット済みの RAID %s にはパーティションを追加できません"
 
-#: raid.pm:166
+#: raid.pm:176
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "RAID レベル %d にはパーティションが足りません\n"
 
-#: scanner.pm:96
+#: scanner.pm:95
 #, c-format
 msgid "Could not create directory /usr/share/sane/firmware!"
 msgstr "ディレクトリ /usr/share/sane/firmware を作成できません"
 
-#: scanner.pm:107
+#: scanner.pm:106
 #, c-format
 msgid "Could not create link /usr/share/sane/%s!"
 msgstr "リンク /usr/share/sane/%s を作成できません"
 
-#: scanner.pm:114
+#: scanner.pm:113
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
 msgstr ""
 "ファームウェアファイル %s を /usr/share/sane/firmware にコピーできません"
 
-#: scanner.pm:121
+#: scanner.pm:120
 #, c-format
 msgid "Could not set permissions of firmware file %s!"
 msgstr "ファームウェアファイル %s の権限を設定できません"
 
-#: scanner.pm:200
+#: scanner.pm:199
 #, c-format
 msgid "Scannerdrake"
 msgstr "Scannerdrake"
 
-#: scanner.pm:201
+#: scanner.pm:200
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "スキャナを共有するために必要なパッケージをインストールできません"
 
-#: scanner.pm:202
+#: scanner.pm:201
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
 msgstr "お使いのスキャナは root 以外のユーザには利用できません"
@@ -6634,6 +6557,11 @@ msgstr ""
 
 #: services.pm:114
 #, c-format
+msgid "Packet filtering firewall for IPv6"
+msgstr ""
+
+#: services.pm:115
+#, c-format
 msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
@@ -6641,17 +6569,17 @@ msgstr ""
 "SMB/CIFS プロトコルはファイルとプリンタへの共有アクセスを可能にします。"
 "Windows サーバドメインにも統合されます。"
 
-#: services.pm:115
+#: services.pm:116
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "サウンドシステムを起動"
 
-#: services.pm:116
+#: services.pm:117
 #, c-format
 msgid "layer for speech analysis"
 msgstr ""
 
-#: services.pm:117
+#: services.pm:118
 #, c-format
 msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
@@ -6660,7 +6588,7 @@ msgstr ""
 "セキュアシェルは 2 つのコンピュータ間でデータをセキュアに (安全に) 交換するた"
 "めのネットワークプロトコルです"
 
-#: services.pm:118
+#: services.pm:119
 #, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages\n"
@@ -6669,94 +6597,94 @@ msgstr ""
 "Syslog は様々なデーモンがシステムログにメッセージを記録するのに\n"
 "使います。Syslog は常に稼動させておいてください。"
 
-#: services.pm:120
+#: services.pm:121
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
 msgstr ""
 
-#: services.pm:121
+#: services.pm:122
 #, c-format
 msgid "Load the drivers for your usb devices."
 msgstr "USB デバイスのドライバをロードします。"
 
-#: services.pm:122
+#: services.pm:123
 #, c-format
 msgid "A lightweight network traffic monitor"
 msgstr ""
 
-#: services.pm:123
+#: services.pm:124
 #, c-format
 msgid "Starts the X Font Server."
 msgstr "X フォントサーバを起動します。"
 
-#: services.pm:124
+#: services.pm:125
 #, c-format
 msgid "Starts other deamons on demand."
 msgstr "オンデマンドで他のデーモンを起動します。"
 
-#: services.pm:153
+#: services.pm:154
 #, c-format
 msgid "Printing"
 msgstr "印刷"
 
-#: services.pm:156
+#: services.pm:157
 #, c-format
 msgid "Internet"
 msgstr "インターネット"
 
-#: services.pm:161
+#: services.pm:162
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "ネットワーク"
 
-#: services.pm:163
+#: services.pm:164
 #, c-format
 msgid "System"
 msgstr "システム"
 
-#: services.pm:169
+#: services.pm:170
 #, c-format
 msgid "Remote Administration"
 msgstr "リモート管理"
 
-#: services.pm:178
+#: services.pm:179
 #, c-format
 msgid "Database Server"
 msgstr "データベースサーバ"
 
-#: services.pm:189 services.pm:226
+#: services.pm:190 services.pm:227
 #, c-format
 msgid "Services"
 msgstr "サービス"
 
-#: services.pm:189
+#: services.pm:190
 #, c-format
 msgid "Choose which services should be automatically started at boot time"
 msgstr "起動時に自動的に開始するサービスを選んでください"
 
-#: services.pm:207
+#: services.pm:208
 #, c-format
 msgid "%d activated for %d registered"
 msgstr "%d 個を起動 (登録数は %d 個)"
 
-#: services.pm:230
+#: services.pm:231
 #, c-format
 msgid "running"
 msgstr "実行中"
 
-#: services.pm:230
+#: services.pm:231
 #, c-format
 msgid "stopped"
 msgstr "停止中"
 
-#: services.pm:235
+#: services.pm:236
 #, c-format
 msgid "Services and daemons"
 msgstr "サービスとデーモン"
 
-#: services.pm:241
+#: services.pm:242
 #, c-format
 msgid ""
 "No additional information\n"
@@ -6765,27 +6693,27 @@ msgstr ""
 "このサービスについての\n"
 "追加情報はありません。"
 
-#: services.pm:248
+#: services.pm:249
 #, c-format
 msgid "Start when requested"
 msgstr "リクエストがあったときに開始"
 
-#: services.pm:248
+#: services.pm:249
 #, c-format
 msgid "On boot"
 msgstr "起動時に開始"
 
-#: services.pm:265
+#: services.pm:266
 #, c-format
 msgid "Start"
 msgstr "開始"
 
-#: services.pm:265
+#: services.pm:266
 #, c-format
 msgid "Stop"
 msgstr "停止"
 
-#: standalone.pm:26
+#: standalone.pm:27
 #, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify\n"
@@ -6818,7 +6746,7 @@ msgstr ""
 "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, "
 "USA.\n"
 
-#: standalone.pm:45
+#: standalone.pm:46
 #, c-format
 msgid ""
 "[--config-info] [--daemon] [--debug] [--default] [--show-conf]\n"
@@ -6845,7 +6773,7 @@ msgstr ""
 "--help                : このヘルプを表示\n"
 "--version             : バージョン情報を表示\n"
 
-#: standalone.pm:57
+#: standalone.pm:58
 #, c-format
 msgid ""
 "[--boot]\n"
@@ -6858,7 +6786,7 @@ msgstr ""
 "  --boot            - ブートローダの設定を有効にする\n"
 "デフォルトモード: 自動ログイン機能の設定を提供する"
 
-#: standalone.pm:61
+#: standalone.pm:62
 #, fuzzy, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
@@ -6875,7 +6803,7 @@ msgstr ""
 "  --report          - プログラムは Mandriva Linux のツールに限ります\n"
 "  --incident        - プログラムは Mandriva Linux のツールに限ります"
 
-#: standalone.pm:67
+#: standalone.pm:68
 #, c-format
 msgid ""
 "[--add]\n"
@@ -6892,7 +6820,7 @@ msgstr ""
 "  --internet        - インターネットを設定\n"
 "  --wizard          - '--add' と同じ"
 
-#: standalone.pm:73
+#: standalone.pm:74
 #, c-format
 msgid ""
 "\n"
@@ -6923,7 +6851,7 @@ msgstr ""
 "                 : アプリケーション名 (staroffice なら so、ghostscript\n"
 "                 : なら gs) - 指定したアプリケーションにのみ有効"
 
-#: standalone.pm:88
+#: standalone.pm:89
 #, fuzzy, c-format
 msgid ""
 "[OPTIONS]...\n"
@@ -6953,17 +6881,17 @@ msgstr ""
 "--delclient      : MTS からクライアントマシンを削除 (MAC アドレス, IP, \n"
 "nbi イメージ名が必要)"
 
-#: standalone.pm:100
+#: standalone.pm:101
 #, c-format
 msgid "[keyboard]"
 msgstr "[キーボード]"
 
-#: standalone.pm:101
+#: standalone.pm:102
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 msgstr "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 
-#: standalone.pm:102
+#: standalone.pm:103
 #, c-format
 msgid ""
 "[OPTIONS]\n"
@@ -6986,7 +6914,7 @@ msgstr ""
 "--status : 接続中なら 1、そうでなければ 0 を返して終了\n"
 "--quiet : クワイエットモード : (dis)connect と一緒に使用"
 
-#: standalone.pm:112
+#: standalone.pm:113
 #, fuzzy, c-format
 msgid ""
 "[OPTION]...\n"
@@ -7003,18 +6931,18 @@ msgstr ""
 "  --changelog-first      説明欄で変更ログをファイルリストより先に表示\n"
 "  --merge-all-rpmnew     検出したすべての .rpmnew/.rpmsave ファイルをマージ"
 
-#: standalone.pm:117
-#, c-format
-msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
-"usbtable] [--dynamic=dev]"
-msgstr ""
-"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
-"usbtable] [--dynamic=dev]"
-
 #: standalone.pm:118
 #, c-format
 msgid ""
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
+msgstr ""
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
+
+#: standalone.pm:119
+#, c-format
+msgid ""
 " [everything]\n"
 "       XFdrake [--noauto] monitor\n"
 "       XFdrake resolution"
@@ -7023,7 +6951,7 @@ msgstr ""
 "       XFdrake [--noauto] monitor\n"
 "       XFdrake resolution"
 
-#: standalone.pm:155
+#: standalone.pm:156
 #, c-format
 msgid ""
 "\n"
@@ -7034,77 +6962,77 @@ msgstr ""
 "Usage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
 "testing] [-v|--version] "
 
-#: timezone.pm:168 timezone.pm:169
+#: timezone.pm:181 timezone.pm:182
 #, c-format
 msgid "All servers"
 msgstr "すべてのサーバ"
 
-#: timezone.pm:205
+#: timezone.pm:218
 #, c-format
 msgid "Global"
 msgstr "グローバル"
 
-#: timezone.pm:208
+#: timezone.pm:221
 #, c-format
 msgid "Africa"
 msgstr "アフリカ"
 
-#: timezone.pm:209
+#: timezone.pm:222
 #, c-format
 msgid "Asia"
 msgstr "アジア"
 
-#: timezone.pm:210
+#: timezone.pm:223
 #, c-format
 msgid "Europe"
 msgstr "ヨーロッパ"
 
-#: timezone.pm:211
+#: timezone.pm:224
 #, c-format
 msgid "North America"
 msgstr "北アメリカ"
 
-#: timezone.pm:212
+#: timezone.pm:225
 #, c-format
 msgid "Oceania"
 msgstr "オセアニア"
 
-#: timezone.pm:213
+#: timezone.pm:226
 #, c-format
 msgid "South America"
 msgstr "南アメリカ"
 
-#: timezone.pm:222
+#: timezone.pm:235
 #, c-format
 msgid "Hong Kong"
 msgstr "香港"
 
-#: timezone.pm:259
+#: timezone.pm:272
 #, c-format
 msgid "Russian Federation"
 msgstr "ロシア"
 
-#: timezone.pm:267
+#: timezone.pm:280
 #, c-format
 msgid "Yugoslavia"
 msgstr "ユーゴスラビア"
 
-#: ugtk2.pm:812 ugtk3.pm:793
+#: ugtk2.pm:812 ugtk3.pm:910
 #, c-format
 msgid "Is this correct?"
 msgstr "正しいですか？"
 
-#: ugtk2.pm:874 ugtk3.pm:855
+#: ugtk2.pm:874 ugtk3.pm:972
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "ファイルではなくディレクトリを選んでください"
 
-#: ugtk2.pm:924 ugtk3.pm:905
+#: ugtk2.pm:924 ugtk3.pm:1022
 #, c-format
 msgid "Info"
 msgstr "情報"
 
-#: wizards.pm:96
+#: wizards.pm:95
 #, c-format
 msgid ""
 "%s is not installed\n"
@@ -7114,10 +7042,41 @@ msgstr ""
 "インストールするには「次へ」\n"
 "終了する場合は「キャンセル」を押してください。"
 
-#: wizards.pm:100
+#: wizards.pm:99
 #, c-format
 msgid "Installation failed"
 msgstr "インストール失敗"
+
+#~ msgid ""
+#~ "LILO wants to assign a new Volume ID to drive %s.  However, changing\n"
+#~ "the Volume ID of a Windows NT, 2000, or XP boot disk is a fatal Windows "
+#~ "error.\n"
+#~ "This caution does not apply to Windows 95 or 98, or to NT data disks.\n"
+#~ "\n"
+#~ "Assign a new Volume ID?"
+#~ msgstr ""
+#~ "LILO がドライブ %s に新しいボリューム ID を割り当てようとしています。\n"
+#~ "Windows NT/2000/XP のブートディスクのボリューム ID を変更することは\n"
+#~ "Windows システムの致命的エラーになります。この警告は Windows 95/98 や\n"
+#~ "NT データディスクには当てはまりません。\n"
+#~ "\n"
+#~ "新しいボリューム ID を割り当てますか？"
+
+#~ msgid ""
+#~ "You decided to install the bootloader on a partition.\n"
+#~ "This implies you already have a bootloader on the hard disk drive you "
+#~ "boot (eg: System Commander).\n"
+#~ "\n"
+#~ "On which drive are you booting?"
+#~ msgstr ""
+#~ "パーティションにブートローダをインストールするよう選択されました。\n"
+#~ "これは、起動するハードディスクに既に別のブートローダ (例: システムコマン"
+#~ "ダー) がインストールされていることが前提になります。\n"
+#~ "\n"
+#~ "どのドライブから起動しますか？"
+
+#~ msgid "You must have a FAT partition mounted in /boot/efi"
+#~ msgstr "/boot/efi にマウントされた FAT パーティションが必要です"
 
 #~ msgid ""
 #~ "\n"
@@ -7228,11 +7187,23 @@ msgstr "インストール失敗"
 #~ "おめでとうございます。インストールが完了しました。\n"
 #~ "起動用メディアを抜き、Enter を押して再起動してください。"
 
+#~ msgid "Default OS?"
+#~ msgstr "デフォルトの OS"
+
 #~ msgid "Enable 5.1 sound with Pulse Audio"
 #~ msgstr "PulseAudio で 5.1 ch サウンドを有効にする"
 
+#~ msgid "Enable CD Boot?"
+#~ msgstr "CD からの起動を有効にしますか？"
+
+#~ msgid "Enable OF Boot?"
+#~ msgstr "OF からの起動を有効にしますか？"
+
 #~ msgid "Enable user switching for audio applications"
 #~ msgstr "オーディオアプリケーションでユーザの切り替えを有効にする"
+
+#~ msgid "Extended partition not supported on this platform"
+#~ msgstr "このプラットフォームでは拡張パーティションはサポートされていません"
 
 #~ msgid "File sharing"
 #~ msgstr "ファイル共有"
@@ -7248,6 +7219,9 @@ msgstr "インストール失敗"
 
 #~ msgid "Give the ram size in MB"
 #~ msgstr "RAM のサイズを MB で入力"
+
+#~ msgid "HFS"
+#~ msgstr "HFS"
 
 #~ msgid ""
 #~ "Here you can select an alternative driver (either OSS or ALSA) for your "
@@ -7302,8 +7276,14 @@ msgstr "インストール失敗"
 #~ "システム設定に関する詳細については Moondrake User's Guide を\n"
 #~ "ご覧ください。"
 
+#~ msgid "Init Message"
+#~ msgstr "Init メッセージ"
+
 #~ msgid "Introduction"
 #~ msgstr "序文"
+
+#~ msgid "Kernel Boot Timeout"
+#~ msgstr "カーネルブートのタイムアウト"
 
 #~ msgid "LILO/grub Installation"
 #~ msgstr "LILO/GRUB のインストール"
@@ -7322,9 +7302,21 @@ msgstr "インストール失敗"
 #~ msgid "No open source driver"
 #~ msgstr "オープンソースのドライバがありません"
 
+#~ msgid "NoVideo"
+#~ msgstr "ビデオなし"
+
+#~ msgid "Open Firmware Delay"
+#~ msgstr "オープンファームウェアの遅延"
+
 #~ msgid ""
 #~ "Option ``Restrict command line options'' is of no use without a password"
 #~ msgstr "コマンドラインオプションを制限するにはパスワードが必要です"
+
+#~ msgid "Other OS (MacOS...)"
+#~ msgstr "他の OS (MacOS...)"
+
+#~ msgid "Other OS (SunOS...)"
+#~ msgstr "他の OS (SunOS...)"
 
 #~ msgid "Paranoid"
 #~ msgstr "極度に高い"
@@ -7389,6 +7381,12 @@ msgstr "インストール失敗"
 
 #~ msgid "Root partition size in MB: "
 #~ msgstr "root パーティションのサイズ (MB):"
+
+#~ msgid "SILO"
+#~ msgstr "SILO"
+
+#~ msgid "SunOS"
+#~ msgstr "SunOS"
 
 #~ msgid "Swap partition size in MB: "
 #~ msgstr "swap パーティションのサイズ (MB): "
@@ -7642,6 +7640,25 @@ msgstr "インストール失敗"
 
 #~ msgid "Which partition do you want to use for Linux4Win?"
 #~ msgstr "どのパーティションに Linux4Win を入れますか？"
+
+#~ msgid "Yaboot"
+#~ msgstr "Yaboot"
+
+#~ msgid ""
+#~ "You may need to change your Open Firmware boot-device to\n"
+#~ " enable the bootloader.  If you do not see the bootloader prompt at\n"
+#~ " reboot, hold down Command-Option-O-F at reboot and enter:\n"
+#~ " setenv boot-device %s,\\\\:tbxi\n"
+#~ " Then type: shut-down\n"
+#~ "At your next boot you should see the bootloader prompt."
+#~ msgstr ""
+#~ "ブートローダを有効にするにはオープンファームウェアの起動デバイスを\n"
+#~ "変更する必要があるかもしれません。再起動時にブートローダのプロンプトが\n"
+#~ "表示されない場合は、Command-Option-O-F を再起動時に押して\n"
+#~ " setenv boot-device %s,\\\\:tbxi\n"
+#~ " shut-down\n"
+#~ "と入力してください。\n"
+#~ "次回の起動時にはブートローダのプロンプトが表示されるはずです。"
 
 #~ msgid "command %s missing"
 #~ msgstr "コマンド %s がありません"

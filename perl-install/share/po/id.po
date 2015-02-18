@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
-"POT-Creation-Date: 2014-04-30 02:49+0200\n"
+"POT-Creation-Date: 2015-02-18 12:26+0100\n"
 "PO-Revision-Date: 2007-10-27 19:26+0700\n"
 "Last-Translator: Willy Sudiarto Raharjo <willysr@gmail.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
@@ -25,12 +25,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.6\n"
 
-#: any.pm:284 any.pm:1003 diskdrake/interactive.pm:645
-#: diskdrake/interactive.pm:869 diskdrake/interactive.pm:929
-#: diskdrake/interactive.pm:1047 diskdrake/interactive.pm:1277
-#: diskdrake/interactive.pm:1335 do_pkgs.pm:242 do_pkgs.pm:291
-#: harddrake/sound.pm:95 interactive.pm:588 pkgs.pm:254 pkgs.pm:263
-#: pkgs.pm:306
+#: any.pm:284 any.pm:984 diskdrake/interactive.pm:642
+#: diskdrake/interactive.pm:866 diskdrake/interactive.pm:926
+#: diskdrake/interactive.pm:1044 diskdrake/interactive.pm:1274
+#: diskdrake/interactive.pm:1332 do_pkgs.pm:342 do_pkgs.pm:391
+#: harddrake/sound.pm:77 interactive.pm:712 pkgs.pm:260 pkgs.pm:269
+#: pkgs.pm:312
 #, c-format
 msgid "Please wait"
 msgstr "Harap tunggu"
@@ -41,14 +41,15 @@ msgid "Bootloader installation in progress"
 msgstr "Proses installasi Bootloader"
 
 #: any.pm:295
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "LILO wants to assign a new Volume ID to drive %s.  However, changing\n"
-"the Volume ID of a Windows NT, 2000, or XP boot disk is a fatal Windows "
-"error.\n"
-"This caution does not apply to Windows 95 or 98, or to NT data disks.\n"
+"\t\t\t\t\t\t\tthe Volume ID of a Windows NT, 2000, or XP boot disk is a "
+"fatal Windows error.\n"
+"\t\t\t\t\t\t\tThis caution does not apply to Windows 95 or 98, or to NT data "
+"disks.\n"
 "\n"
-"Assign a new Volume ID?"
+"\t\t\t\t\t\t\tAssign a new Volume ID?"
 msgstr ""
 "LILO akan memberi Volume ID baru pada drive %s. Namun, mengubah\n"
 "Volume ID disk boot Windows NT, 2000, atau XP adalah kesalahan Windows yang "
@@ -63,32 +64,14 @@ msgstr ""
 msgid "Installation of bootloader failed. The following error occurred:"
 msgstr "Installasi bootloader gagal. Terjadi kesalahan berikut:"
 
-#: any.pm:312
-#, c-format
-msgid ""
-"You may need to change your Open Firmware boot-device to\n"
-" enable the bootloader.  If you do not see the bootloader prompt at\n"
-" reboot, hold down Command-Option-O-F at reboot and enter:\n"
-" setenv boot-device %s,\\\\:tbxi\n"
-" Then type: shut-down\n"
-"At your next boot you should see the bootloader prompt."
-msgstr ""
-"Anda harus mengganti perangkat boot Open Firmware untuk mengaktifkan "
-"bootloader.\n"
-" Jika Anda tak melihat prompt bootloader saat reboot, tekan\n"
-" Command-Option-O-F saat reboot dan ketik:\n"
-" setenv boot-device %s,\\\\:tbxi\n"
-" kemudian ketikkan: shut-down\n"
-"Pada boot berikutnya, Anda akan melihat prompt bootloader."
-
-#: any.pm:352
-#, c-format
+#: any.pm:346
+#, fuzzy, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
-"This implies you already have a bootloader on the hard disk drive you boot "
-"(eg: System Commander).\n"
+"\t\t\tThis implies you already have a bootloader on the hard disk drive you "
+"boot (eg: System Commander).\n"
 "\n"
-"On which drive are you booting?"
+"\t\t\tOn which drive are you booting?"
 msgstr ""
 "Anda memutuskan untuk menginstall bootloader pada partisi.\n"
 "Berarti Anda sudah punya bootloader pada harddisk yang Anda boot (mis: "
@@ -96,263 +79,218 @@ msgstr ""
 "\n"
 "Pada drive mana Anda melakukan booting?"
 
-#: any.pm:363
+#: any.pm:357
 #, c-format
 msgid "Bootloader Installation"
 msgstr "Instalasi Bootloader"
 
-#: any.pm:367
+#: any.pm:361
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Dimana Anda akan menginstall Bootloader?"
 
-#: any.pm:391
+#: any.pm:377
 #, c-format
 msgid "First sector (MBR) of drive %s"
 msgstr "Sektor pertama (MBR) dari drive %s"
 
-#: any.pm:393
+#: any.pm:379
 #, c-format
 msgid "First sector of drive (MBR)"
 msgstr "Sektor pertama pada drive (MBR)"
 
-#: any.pm:395
+#: any.pm:381
 #, c-format
 msgid "First sector of the root partition"
 msgstr "Sektor pertama pada partisi root"
 
-#: any.pm:397
+#: any.pm:383
 #, c-format
 msgid "On Floppy"
 msgstr "Pada Disket"
 
-#: any.pm:399 pkgs.pm:302 ugtk2.pm:526 ugtk3.pm:516
+#: any.pm:385 pkgs.pm:308 ugtk2.pm:526 ugtk3.pm:602
 #, c-format
 msgid "Skip"
 msgstr "Lewati"
 
-#: any.pm:433
+#: any.pm:413
 #, c-format
 msgid "Boot Style Configuration"
 msgstr "Konfigurasi Gaya Boot"
 
-#: any.pm:448 any.pm:480 any.pm:481
+#: any.pm:427
 #, c-format
 msgid "Bootloader main options"
 msgstr "Opsi utama Bootloader"
 
-#: any.pm:452
+#: any.pm:431
 #, c-format
 msgid "Bootloader"
 msgstr "Bootloader"
 
-#: any.pm:453 any.pm:484
+#: any.pm:432
 #, c-format
 msgid "Bootloader to use"
 msgstr "Bootloader yang hendak digunakan"
 
-#: any.pm:456 any.pm:487
+#: any.pm:435
 #, c-format
 msgid "Boot device"
 msgstr "Perangkat boot"
 
-#: any.pm:459
+#: any.pm:438
 #, c-format
 msgid "Main options"
 msgstr "Opsi utama"
 
-#: any.pm:460
+#: any.pm:439
 #, c-format
 msgid "Delay before booting default image"
 msgstr "Jeda sebelum boot ke image default"
 
-#: any.pm:461
+#: any.pm:440
 #, c-format
 msgid "Enable ACPI"
 msgstr "Aktifkan ACPI"
 
-#: any.pm:462
+#: any.pm:441
 #, c-format
 msgid "Enable SMP"
 msgstr "Hidupkan SMP"
 
-#: any.pm:463
+#: any.pm:442
 #, c-format
 msgid "Enable APIC"
 msgstr "Aktifkan APIC"
 
-#: any.pm:465
+#: any.pm:444
 #, c-format
 msgid "Enable Local APIC"
 msgstr "Aktifkan APIC Lokal"
 
-#: any.pm:466 security/level.pm:51
+#: any.pm:445 security/level.pm:51
 #, c-format
 msgid "Security"
 msgstr "Keamanan"
 
-#: any.pm:467 any.pm:931 any.pm:950 authentication.pm:249
+#: any.pm:446 any.pm:896 any.pm:930 authentication.pm:249
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "Kata sandi"
 
-#: any.pm:470 authentication.pm:260
+#: any.pm:449 authentication.pm:260
 #, c-format
 msgid "The passwords do not match"
 msgstr "Kata sandi tidak cocok"
 
-#: any.pm:470 authentication.pm:260 diskdrake/interactive.pm:1510
+#: any.pm:449 authentication.pm:260 diskdrake/interactive.pm:1498
 #, c-format
 msgid "Please try again"
 msgstr "Silahkan coba lagi"
 
-#: any.pm:472
+#: any.pm:451
 #, c-format
 msgid "You cannot use a password with %s"
 msgstr "Anda tidak dapat menggunakan sebuah kata sandi dengan %s"
 
-#: any.pm:476 any.pm:934 any.pm:952 authentication.pm:250
+#: any.pm:455 any.pm:899 any.pm:932 authentication.pm:250
 #, c-format
 msgid "Password (again)"
 msgstr "Kata sandi (lagi)"
 
-#: any.pm:486
-#, c-format
-msgid "Init Message"
-msgstr "Pesan Init"
-
-#: any.pm:488
-#, c-format
-msgid "Open Firmware Delay"
-msgstr "Jeda Open Firmware"
-
-#: any.pm:489
-#, c-format
-msgid "Kernel Boot Timeout"
-msgstr "Timeout Booting Kernel"
-
-#: any.pm:490
-#, c-format
-msgid "Enable CD Boot?"
-msgstr "Aktifkan boot dari CD?"
-
-#: any.pm:491
-#, c-format
-msgid "Enable OF Boot?"
-msgstr "Aktifkan boot dari OF?"
-
-#: any.pm:492
-#, c-format
-msgid "Default OS?"
-msgstr "OS Standar?"
-
-#: any.pm:558
+#: any.pm:520
 #, c-format
 msgid "Image"
 msgstr "Image"
 
-#: any.pm:559 any.pm:573
+#: any.pm:521 any.pm:533
 #, c-format
 msgid "Root"
 msgstr "Root"
 
-#: any.pm:560 any.pm:586
+#: any.pm:522
 #, c-format
 msgid "Append"
 msgstr "Tambahkan"
 
-#: any.pm:562
+#: any.pm:524
 #, c-format
 msgid "Xen append"
 msgstr "Tambahkan Xen"
 
-#: any.pm:564
+#: any.pm:526
 #, c-format
 msgid "Requires password to boot"
 msgstr "Memerlukan sandi untuk boot"
 
-#: any.pm:566
+#: any.pm:527
 #, c-format
 msgid "Video mode"
 msgstr "Mode video"
 
-#: any.pm:568
+#: any.pm:528
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:569
+#: any.pm:529
 #, c-format
 msgid "Network profile"
 msgstr "Profil Jaringan"
 
-#: any.pm:578 any.pm:583 any.pm:585 diskdrake/interactive.pm:411
+#: any.pm:537 diskdrake/interactive.pm:411
 #, c-format
 msgid "Label"
 msgstr "Label"
 
-#: any.pm:580 any.pm:588 harddrake/v4l.pm:438
+#: any.pm:539 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "Standar"
 
-#: any.pm:587
-#, c-format
-msgid "NoVideo"
-msgstr "NoVideo"
-
-#: any.pm:598
+#: any.pm:547
 #, c-format
 msgid "Empty label not allowed"
 msgstr "Label kosong tidak diperbolehkan"
 
-#: any.pm:599
+#: any.pm:548
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "Anda harus menentukan image kernel"
 
-#: any.pm:599
+#: any.pm:548
 #, c-format
 msgid "You must specify a root partition"
 msgstr "Anda harus menentukan partisi root"
 
-#: any.pm:600
+#: any.pm:549
 #, c-format
 msgid "This label is already used"
 msgstr "Label ini sudah dipakai"
 
-#: any.pm:618
+#: any.pm:567
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "Tipe entri mana yang hendak ditambahkan?"
 
-#: any.pm:619
+#: any.pm:568
 #, c-format
 msgid "Linux"
 msgstr "Linux"
 
-#: any.pm:619
-#, c-format
-msgid "Other OS (SunOS...)"
-msgstr "OS Lain (SunOS...)"
-
-#: any.pm:620
-#, c-format
-msgid "Other OS (MacOS...)"
-msgstr "OS Lain (MacOS...)"
-
-#: any.pm:620
+#: any.pm:568
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "OS Lain (Windows...)"
 
-#: any.pm:667
+#: any.pm:615
 #, c-format
 msgid "Bootloader Configuration"
 msgstr "Konfigurasi Bootloader"
 
-#: any.pm:668
+#: any.pm:616
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -361,47 +299,47 @@ msgstr ""
 "Ini adalah daftar pada menu boot Anda yang ada saat ini.\n"
 "Anda boleh menambah atau mengubah yang sudah ada."
 
-#: any.pm:890
+#: any.pm:852
 #, c-format
 msgid "access to X programs"
 msgstr "akses ke program X"
 
-#: any.pm:891
+#: any.pm:853
 #, c-format
 msgid "access to rpm tools"
 msgstr "akses ke aplikasi rpm"
 
-#: any.pm:892
+#: any.pm:854
 #, c-format
 msgid "allow \"su\""
 msgstr "izinkan \"su\""
 
-#: any.pm:893
+#: any.pm:855
 #, c-format
 msgid "access to administrative files"
 msgstr "akses ke file administratif"
 
-#: any.pm:894
+#: any.pm:856
 #, c-format
 msgid "access to network tools"
 msgstr "akses ke aplikasi jaringan"
 
-#: any.pm:895
+#: any.pm:857
 #, c-format
 msgid "access to compilation tools"
 msgstr "akses ke aplikasi kompilasi"
 
-#: any.pm:901
+#: any.pm:863
 #, c-format
 msgid "(already added %s)"
 msgstr "(%s sudah ditambahkan)"
 
-#: any.pm:907
+#: any.pm:869
 #, c-format
 msgid "Please give a user name"
 msgstr "Silakan berikan nama pengguna"
 
-#: any.pm:908
+#: any.pm:870
 #, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
@@ -410,147 +348,147 @@ msgstr ""
 "Nama pengguna harus dimulai dengan huruf kecil diikuti oleh hanya huruf "
 "kecil, nomor, `-' dan `_'"
 
-#: any.pm:909
+#: any.pm:871
 #, c-format
 msgid "The user name is too long"
 msgstr "Nama pengguna terlalu panjang"
 
-#: any.pm:910
+#: any.pm:872
 #, c-format
 msgid "This user name has already been added"
 msgstr "Pengguna ini sudah ada sebelumnya"
 
-#: any.pm:916 any.pm:954
+#: any.pm:878 any.pm:934
 #, c-format
 msgid "User ID"
 msgstr "ID Pengguna"
 
-#: any.pm:916 any.pm:955
+#: any.pm:878 any.pm:935
 #, c-format
 msgid "Group ID"
 msgstr "ID Grup"
 
-#: any.pm:917
+#: any.pm:879
 #, c-format
 msgid "%s must be a number"
 msgstr "%s harus sebuah angka"
 
-#: any.pm:918
+#: any.pm:880
 #, c-format
-msgid "%s should be above 500. Accept anyway?"
-msgstr "%s seharusnya diatas 500. Terima apa adanya?"
+msgid "%s should be above 1000. Accept anyway?"
+msgstr "%s harus di atas 1000. Terima saja?"
 
-#: any.pm:922
+#: any.pm:887 any.pm:912
 #, c-format
 msgid "User management"
 msgstr "Manajemen pengguna"
 
-#: any.pm:928
+#: any.pm:893
 #, c-format
 msgid "Enable guest account"
 msgstr "Hidupkan akun tamu"
 
-#: any.pm:930 authentication.pm:236
+#: any.pm:895 authentication.pm:236
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Tentukan kata sandi root"
 
-#: any.pm:936
+#: any.pm:916
 #, c-format
 msgid "Enter a user"
 msgstr "Masukkan pengguna"
 
-#: any.pm:938
+#: any.pm:918
 #, c-format
 msgid "Icon"
 msgstr "Ikon"
 
-#: any.pm:941
+#: any.pm:921
 #, c-format
 msgid "Real name"
 msgstr "Nama asli"
 
-#: any.pm:948
+#: any.pm:928
 #, c-format
 msgid "Login name"
 msgstr "Nama login"
 
-#: any.pm:953
+#: any.pm:933
 #, c-format
 msgid "Shell"
 msgstr "Shell"
 
-#: any.pm:1003
+#: any.pm:984
 #, c-format
 msgid "Please wait, adding media..."
 msgstr "Harap tunggu, menambahkan media..."
 
-#: any.pm:1036 security/l10n.pm:14
+#: any.pm:1017 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Login otomatis"
 
-#: any.pm:1037
+#: any.pm:1018
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr "Komputer dapat diset agar secara otomatis login dengan satu pengguna."
 
-#: any.pm:1038
+#: any.pm:1019
 #, c-format
 msgid "Use this feature"
 msgstr "Gunakan fitur ini"
 
-#: any.pm:1039
+#: any.pm:1020
 #, c-format
 msgid "Choose the default user:"
 msgstr "Pilih pengguna standar:"
 
-#: any.pm:1040
+#: any.pm:1021
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Pilih window manajer yang akan dijalankan:"
 
-#: any.pm:1051 any.pm:1065 any.pm:1140
+#: any.pm:1032 any.pm:1046 any.pm:1121
 #, c-format
 msgid "Release Notes"
 msgstr "Catatan Rilis"
 
-#: any.pm:1072 any.pm:1430 interactive/gtk.pm:820
+#: any.pm:1053 any.pm:1411 interactive/gtk.pm:820
 #, c-format
 msgid "Close"
 msgstr "Tutup"
 
-#: any.pm:1126
+#: any.pm:1107
 #, c-format
 msgid "License agreement"
 msgstr "Persetujuan Lisensi"
 
-#: any.pm:1128 diskdrake/dav.pm:26 mygtk2.pm:1229 mygtk3.pm:1255
+#: any.pm:1109 diskdrake/dav.pm:26 mygtk2.pm:1229 mygtk3.pm:1282
 #, c-format
 msgid "Quit"
 msgstr "Keluar"
 
-#: any.pm:1135
+#: any.pm:1116
 #, c-format
 msgid "Do you accept this license ?"
 msgstr "Apakah Anda menerima lisensi ini?"
 
-#: any.pm:1136
+#: any.pm:1117
 #, c-format
 msgid "Accept"
 msgstr "Terima"
 
-#: any.pm:1136
+#: any.pm:1117
 #, c-format
 msgid "Refuse"
 msgstr "Tolak"
 
-#: any.pm:1162 any.pm:1225
+#: any.pm:1143 any.pm:1206
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Pilihlah bahasa yang akan dipakai"
 
-#: any.pm:1190
+#: any.pm:1171
 #, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
@@ -561,82 +499,82 @@ msgstr ""
 "bahasa yang ingin Anda install. Mereka akan tersedia\n"
 "setelah instalasi selesai dan Anda merestart sistem."
 
-#: any.pm:1193
+#: any.pm:1174
 #, c-format
 msgid "Multiple languages"
 msgstr "Banyak bahasa"
 
-#: any.pm:1194
+#: any.pm:1175
 #, c-format
 msgid "Select Additional Languages"
 msgstr "Pilih Bahasa Tambahan"
 
-#: any.pm:1203 any.pm:1234
+#: any.pm:1184 any.pm:1215
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Enkoding kompatibilitas lama (non UTF-8)"
 
-#: any.pm:1204
+#: any.pm:1185
 #, c-format
 msgid "All languages"
 msgstr "Semua bahasa"
 
-#: any.pm:1226
+#: any.pm:1207
 #, c-format
 msgid "Language choice"
 msgstr "Pilihan bahasa"
 
-#: any.pm:1280
+#: any.pm:1261
 #, c-format
 msgid "Country / Region"
 msgstr "Negara / Wilayah"
 
-#: any.pm:1281
+#: any.pm:1262
 #, c-format
 msgid "Please choose your country"
 msgstr "Pilih negara Anda"
 
-#: any.pm:1283
+#: any.pm:1264
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Berikut adalah daftar lengkap negara yang tersedia"
 
-#: any.pm:1284
+#: any.pm:1265
 #, c-format
 msgid "Other Countries"
 msgstr "Negara lain"
 
-#: any.pm:1284 interactive.pm:489 interactive/gtk.pm:444
+#: any.pm:1265 interactive.pm:491 interactive/gtk.pm:444
 #, c-format
 msgid "Advanced"
 msgstr "Tingkat mahir"
 
-#: any.pm:1290
+#: any.pm:1271
 #, c-format
 msgid "Input method:"
 msgstr "Metode Input:"
 
-#: any.pm:1293
+#: any.pm:1274
 #, c-format
 msgid "None"
 msgstr "Tak ada"
 
-#: any.pm:1375
+#: any.pm:1356
 #, c-format
 msgid "No sharing"
 msgstr "Tanpa sharing"
 
-#: any.pm:1375
+#: any.pm:1356
 #, c-format
 msgid "Allow all users"
 msgstr "Izinkan semua pengguna"
 
-#: any.pm:1375
+#: any.pm:1356
 #, c-format
 msgid "Custom"
 msgstr "Kebiasaan"
 
-#: any.pm:1379
+#: any.pm:1360
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -651,7 +589,7 @@ msgstr ""
 "\n"
 "\"Custom\" memungkinkan tuning masing-masing pengguna.\n"
 
-#: any.pm:1391
+#: any.pm:1372
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -659,7 +597,7 @@ msgid ""
 msgstr ""
 "NFS: Sistem file sharing tradisional Unix, dengan dukungan Windows dan Mac"
 
-#: any.pm:1394
+#: any.pm:1375
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -668,7 +606,7 @@ msgstr ""
 "SMB: Sistem file sharing yang digunakan Windows, Mac OS X dan sistem Linux "
 "modern"
 
-#: any.pm:1402
+#: any.pm:1383
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
@@ -676,12 +614,12 @@ msgstr ""
 "Anda dapat mengekspor menggunakan NFS atau SMB. Pilih yang hendak Anda "
 "gunakan."
 
-#: any.pm:1430
+#: any.pm:1411
 #, c-format
 msgid "Launch userdrake"
 msgstr "Jalankan userdrake"
 
-#: any.pm:1432
+#: any.pm:1413
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -690,7 +628,7 @@ msgstr ""
 "Sharing setiap user menggunakan grup \"fileshare\". \n"
 "Anda menggunakan userdrake untuk menambah user pada grup ini."
 
-#: any.pm:1539
+#: any.pm:1520
 #, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
@@ -699,47 +637,47 @@ msgstr ""
 "Anda perlu logout dan masuk kembali agar perubahan berlaku. Tekan OK untuk "
 "logout sekarang."
 
-#: any.pm:1543
+#: any.pm:1524
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "Anda harus log out dan kembali agar perubahan berlaku"
 
-#: any.pm:1578
+#: any.pm:1559
 #, c-format
 msgid "Timezone"
 msgstr "Zona waktu"
 
-#: any.pm:1578
+#: any.pm:1559
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Mana zone waktu Anda?"
 
-#: any.pm:1601 any.pm:1603
+#: any.pm:1582 any.pm:1584
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Setting Tanggal, Jam & Zona Waktu"
 
-#: any.pm:1604
+#: any.pm:1585
 #, c-format
 msgid "What is the best time?"
 msgstr "Kapan jam terbaik?"
 
-#: any.pm:1608
+#: any.pm:1589
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (jam perangkat keras diset ke UTC)"
 
-#: any.pm:1609
+#: any.pm:1590
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (jam perangkat keras diset ke waktu lokal)"
 
-#: any.pm:1611
+#: any.pm:1592
 #, c-format
 msgid "NTP Server"
 msgstr "Server NTP"
 
-#: any.pm:1612
+#: any.pm:1593
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Sinkronisasi waktu otomatis (menggunakan NTP)"
@@ -842,7 +780,7 @@ msgstr ""
 
 #: authentication.pm:106 authentication.pm:140 authentication.pm:159
 #: authentication.pm:160 authentication.pm:186 authentication.pm:210
-#: authentication.pm:865
+#: authentication.pm:851
 #, c-format
 msgid " "
 msgstr " "
@@ -1053,27 +991,27 @@ msgstr "Tanpa kata sandi"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Kata sandi ini terlalu pendek (paling tidak harus %d karakter)"
 
-#: authentication.pm:373
+#: authentication.pm:374
 #, c-format
 msgid "Cannot use broadcast with no NIS domain"
 msgstr "Tidak dapat menggunakan broadcast tanpa domain NIS"
 
-#: authentication.pm:860
+#: authentication.pm:846
 #, c-format
 msgid "Select file"
 msgstr "Pilih file"
 
-#: authentication.pm:866
+#: authentication.pm:852
 #, c-format
 msgid "Domain Windows for authentication : "
 msgstr "Domain Windows untuk otentikasi : "
 
-#: authentication.pm:868
+#: authentication.pm:854
 #, c-format
 msgid "Domain Admin User Name"
 msgstr "Nama Pengguna Admin Domain"
 
-#: authentication.pm:869
+#: authentication.pm:855
 #, c-format
 msgid "Domain Admin Password"
 msgstr "Kata sandi Admin Domain"
@@ -1084,7 +1022,7 @@ msgstr "Kata sandi Admin Domain"
 # leave it in English, as it is the best for your language)
 #
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:1056
+#: bootloader.pm:1119
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1099,47 +1037,37 @@ msgstr ""
 "tunggu untuk boot default.\n"
 "\n"
 
-#: bootloader.pm:1248
+#: bootloader.pm:1283
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO dengan menu teks"
 
-#: bootloader.pm:1249
+#: bootloader.pm:1284
 #, c-format
 msgid "GRUB2 with graphical menu"
 msgstr "GRUB2 dengan menu grafis"
 
-#: bootloader.pm:1250
+#: bootloader.pm:1285
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr "GRUB dengan menu grafis"
 
-#: bootloader.pm:1251
+#: bootloader.pm:1286
 #, c-format
 msgid "GRUB with text menu"
 msgstr "GRUB dengan menu teks"
 
-#: bootloader.pm:1252
-#, c-format
-msgid "Yaboot"
-msgstr "Yaboot"
-
-#: bootloader.pm:1253
-#, c-format
-msgid "SILO"
-msgstr "SILO"
-
-#: bootloader.pm:1323
+#: bootloader.pm:1341
 #, c-format
 msgid "not enough room in /boot"
 msgstr "tidak cukup ruang pada /boot"
 
-#: bootloader.pm:2110
+#: bootloader.pm:2087
 #, c-format
 msgid "You cannot install the bootloader on a %s partition\n"
 msgstr "Anda tidak dapat menginstal bootloader pada partisi %s\n"
 
-#: bootloader.pm:2279
+#: bootloader.pm:2262
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1147,7 +1075,7 @@ msgid ""
 msgstr ""
 "Konfigurasi bootloader Anda harus diupdate karena nomor partisi telah berubah"
 
-#: bootloader.pm:2292
+#: bootloader.pm:2275
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1156,7 +1084,7 @@ msgstr ""
 "Bootloader tidak bisa diinstall dengan benar. Anda harus melakukan boot "
 "penyelamatan dan memilih \"%s\""
 
-#: bootloader.pm:2293
+#: bootloader.pm:2276
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Instal ulang Boot Loader"
@@ -1210,42 +1138,42 @@ msgstr ""
 msgid "System requirements warning"
 msgstr ""
 
-#: common.pm:142
+#: common.pm:271
 #, c-format
 msgid "B"
 msgstr "B"
 
-#: common.pm:142
+#: common.pm:271
 #, c-format
 msgid "KB"
 msgstr "KB"
 
-#: common.pm:142
+#: common.pm:271
 #, c-format
 msgid "MB"
 msgstr "MB"
 
-#: common.pm:142
+#: common.pm:271
 #, c-format
 msgid "GB"
 msgstr "GB"
 
-#: common.pm:142 common.pm:151
+#: common.pm:271 common.pm:280
 #, c-format
 msgid "TB"
 msgstr "TB"
 
-#: common.pm:159
+#: common.pm:288
 #, c-format
 msgid "%d minutes"
 msgstr "%d menit"
 
-#: common.pm:161
+#: common.pm:290
 #, c-format
 msgid "1 minute"
 msgstr "1 menit"
 
-#: common.pm:163
+#: common.pm:292
 #, c-format
 msgid "%d seconds"
 msgstr "%d detik"
@@ -1285,43 +1213,43 @@ msgid "Server"
 msgstr "Server"
 
 #: diskdrake/dav.pm:66 diskdrake/interactive.pm:408
-#: diskdrake/interactive.pm:722 diskdrake/interactive.pm:740
-#: diskdrake/interactive.pm:744 diskdrake/removable.pm:23
+#: diskdrake/interactive.pm:719 diskdrake/interactive.pm:737
+#: diskdrake/interactive.pm:741 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Titik mount"
 
 #: diskdrake/dav.pm:67 diskdrake/interactive.pm:410
-#: diskdrake/interactive.pm:1174 diskdrake/removable.pm:24
+#: diskdrake/interactive.pm:1171 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
 msgstr "Opsi"
 
-#: diskdrake/dav.pm:68 interactive.pm:388 interactive/gtk.pm:456
+#: diskdrake/dav.pm:68 interactive.pm:390 interactive/gtk.pm:456
 #, c-format
 msgid "Remove"
 msgstr "Hapus"
 
-#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:215 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:238 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Selesai"
 
-#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:147 diskdrake/hd_gtk.pm:321
+#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:170 diskdrake/hd_gtk.pm:346
 #: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
 #: diskdrake/interactive.pm:456 diskdrake/interactive.pm:527
 #: diskdrake/interactive.pm:545 diskdrake/interactive.pm:550
-#: diskdrake/interactive.pm:712 diskdrake/interactive.pm:1013
-#: diskdrake/interactive.pm:1065 diskdrake/interactive.pm:1220
-#: diskdrake/interactive.pm:1233 diskdrake/interactive.pm:1236
-#: diskdrake/interactive.pm:1510 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23
-#: do_pkgs.pm:28 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:83
+#: diskdrake/interactive.pm:709 diskdrake/interactive.pm:1010
+#: diskdrake/interactive.pm:1062 diskdrake/interactive.pm:1217
+#: diskdrake/interactive.pm:1230 diskdrake/interactive.pm:1233
+#: diskdrake/interactive.pm:1498 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:49
+#: do_pkgs.pm:54 do_pkgs.pm:79 do_pkgs.pm:103 do_pkgs.pm:108 do_pkgs.pm:142
 #: fsedit.pm:246 interactive/http.pm:117 interactive/http.pm:118
-#: modules/interactive.pm:19 scanner.pm:95 scanner.pm:106 scanner.pm:113
-#: scanner.pm:120 wizards.pm:96 wizards.pm:100 wizards.pm:122
+#: modules/interactive.pm:19 scanner.pm:94 scanner.pm:105 scanner.pm:112
+#: scanner.pm:119 wizards.pm:95 wizards.pm:99 wizards.pm:121
 #, c-format
 msgid "Error"
 msgstr "Kesalahan"
@@ -1336,13 +1264,14 @@ msgstr "Masukkan URL server WebDAV"
 msgid "The URL must begin with http:// or https://"
 msgstr "URL harus dimulai dengan http:// atau https://"
 
-#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:454 diskdrake/interactive.pm:306
-#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:597
-#: diskdrake/interactive.pm:815 diskdrake/interactive.pm:880
-#: diskdrake/interactive.pm:1045 diskdrake/interactive.pm:1087
-#: diskdrake/interactive.pm:1088 diskdrake/interactive.pm:1320
-#: diskdrake/interactive.pm:1358 diskdrake/interactive.pm:1509 do_pkgs.pm:19
-#: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:78
+#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:149 diskdrake/hd_gtk.pm:513
+#: diskdrake/interactive.pm:306 diskdrake/interactive.pm:391
+#: diskdrake/interactive.pm:597 diskdrake/interactive.pm:812
+#: diskdrake/interactive.pm:877 diskdrake/interactive.pm:1042
+#: diskdrake/interactive.pm:1084 diskdrake/interactive.pm:1085
+#: diskdrake/interactive.pm:1317 diskdrake/interactive.pm:1355
+#: diskdrake/interactive.pm:1497 do_pkgs.pm:45 do_pkgs.pm:74 do_pkgs.pm:100
+#: do_pkgs.pm:137
 #, c-format
 msgid "Warning"
 msgstr "Peringatan"
@@ -1358,61 +1287,55 @@ msgid "Server: "
 msgstr "Server: "
 
 #: diskdrake/dav.pm:126 diskdrake/interactive.pm:501
-#: diskdrake/interactive.pm:1382 diskdrake/interactive.pm:1470
+#: diskdrake/interactive.pm:1379 diskdrake/interactive.pm:1458
 #, c-format
 msgid "Mount point: "
 msgstr "Titik mount: "
 
-#: diskdrake/dav.pm:127 diskdrake/interactive.pm:1477
+#: diskdrake/dav.pm:127 diskdrake/interactive.pm:1465
 #, c-format
 msgid "Options: %s"
 msgstr "Opsi: %s"
 
-#: diskdrake/hd_gtk.pm:63 diskdrake/interactive.pm:301
-#: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:108
+#: diskdrake/hd_gtk.pm:64 diskdrake/interactive.pm:301
+#: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:110
 #: fs/partitioning_wizard.pm:59 fs/partitioning_wizard.pm:242
-#: fs/partitioning_wizard.pm:250 fs/partitioning_wizard.pm:289
-#: fs/partitioning_wizard.pm:435 fs/partitioning_wizard.pm:498
-#: fs/partitioning_wizard.pm:581 fs/partitioning_wizard.pm:584
+#: fs/partitioning_wizard.pm:250 fs/partitioning_wizard.pm:285
+#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:494
+#: fs/partitioning_wizard.pm:577 fs/partitioning_wizard.pm:580
 #, c-format
 msgid "Partitioning"
 msgstr "Pembuatan partisi"
 
-#: diskdrake/hd_gtk.pm:76
+#: diskdrake/hd_gtk.pm:77
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr ""
 "Klik pada sebuah partisi, pilih tipe sistem file lalu pilih sebuah aksi"
 
-#: diskdrake/hd_gtk.pm:126 diskdrake/interactive.pm:1195
-#: diskdrake/interactive.pm:1205 diskdrake/interactive.pm:1258
-#, c-format
-msgid "Read carefully"
-msgstr "Baca dengan seksama"
-
-#: diskdrake/hd_gtk.pm:126
+#: diskdrake/hd_gtk.pm:149
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Silakan backup terlebih dahulu data Anda"
 
-#: diskdrake/hd_gtk.pm:127 diskdrake/interactive.pm:240
+#: diskdrake/hd_gtk.pm:150 diskdrake/interactive.pm:240
 #, c-format
 msgid "Exit"
 msgstr "Keluar"
 
-#: diskdrake/hd_gtk.pm:127
+#: diskdrake/hd_gtk.pm:150
 #, c-format
 msgid "Continue"
 msgstr "Lanjutkan"
 
-#: diskdrake/hd_gtk.pm:210 fs/partitioning_wizard.pm:557 interactive.pm:654
+#: diskdrake/hd_gtk.pm:233 fs/partitioning_wizard.pm:553 interactive.pm:778
 #: interactive/gtk.pm:812 interactive/gtk.pm:830 interactive/gtk.pm:862
-#: ugtk2.pm:936 ugtk3.pm:917
+#: ugtk2.pm:936 ugtk3.pm:1034
 #, c-format
 msgid "Help"
 msgstr "Bantuan"
 
-#: diskdrake/hd_gtk.pm:256
+#: diskdrake/hd_gtk.pm:281
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1423,89 +1346,79 @@ msgstr ""
 "Disarankan untuk mengubah ukuran partisi ini\n"
 "(klik di situ, lalu pilih \"Ubah ukuran\")"
 
-#: diskdrake/hd_gtk.pm:258
+#: diskdrake/hd_gtk.pm:283
 #, c-format
 msgid "Please click on a partition"
 msgstr "Silakan klik pada partisi"
 
-#: diskdrake/hd_gtk.pm:272 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:297 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Detil"
 
-#: diskdrake/hd_gtk.pm:321
+#: diskdrake/hd_gtk.pm:346
 #, c-format
 msgid "No hard disk drives found"
 msgstr "Harddisk tak ditemukan"
 
-#: diskdrake/hd_gtk.pm:358
+#: diskdrake/hd_gtk.pm:417
 #, c-format
 msgid "Unknown"
 msgstr "Tidak dikenal"
 
-#: diskdrake/hd_gtk.pm:425
+#: diskdrake/hd_gtk.pm:484
 #, c-format
 msgid "Ext4"
 msgstr "Ext4"
 
-#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
+#: diskdrake/hd_gtk.pm:484 fs/partitioning_wizard.pm:401
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
+#: diskdrake/hd_gtk.pm:484 fs/partitioning_wizard.pm:401
 #, c-format
 msgid "Swap"
 msgstr "Swap"
 
-#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
-#, c-format
-msgid "SunOS"
-msgstr "SunOS"
-
-#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
-#, c-format
-msgid "HFS"
-msgstr "HFS"
-
-#: diskdrake/hd_gtk.pm:425 fs/partitioning_wizard.pm:405
+#: diskdrake/hd_gtk.pm:484 fs/partitioning_wizard.pm:401
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:426 fs/partitioning_wizard.pm:406 services.pm:194
+#: diskdrake/hd_gtk.pm:485 fs/partitioning_wizard.pm:402 services.pm:195
 #, c-format
 msgid "Other"
 msgstr "Lainnya"
 
-#: diskdrake/hd_gtk.pm:426 diskdrake/interactive.pm:1397
-#: fs/partitioning_wizard.pm:406
+#: diskdrake/hd_gtk.pm:485 diskdrake/interactive.pm:1385
+#: fs/partitioning_wizard.pm:402
 #, c-format
 msgid "Empty"
 msgstr "Kosong"
 
-#: diskdrake/hd_gtk.pm:433
+#: diskdrake/hd_gtk.pm:492
 #, c-format
 msgid "Filesystem types:"
 msgstr "Tipe filesystem:"
 
-#: diskdrake/hd_gtk.pm:454
+#: diskdrake/hd_gtk.pm:513
 #, c-format
 msgid "This partition is already empty"
 msgstr "Partisi ini sudah kosong"
 
-#: diskdrake/hd_gtk.pm:463
+#: diskdrake/hd_gtk.pm:522
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Gunakan ``unmount'' terlebih dahulu"
 
-#: diskdrake/hd_gtk.pm:463
+#: diskdrake/hd_gtk.pm:522
 #, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Gunakan ``%s'' saja (dalam mode ahli)"
 
-#: diskdrake/hd_gtk.pm:463 diskdrake/interactive.pm:409
-#: diskdrake/interactive.pm:639 diskdrake/removable.pm:25
+#: diskdrake/hd_gtk.pm:522 diskdrake/interactive.pm:409
+#: diskdrake/interactive.pm:636 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
@@ -1528,7 +1441,7 @@ msgid "More"
 msgstr "Selebihnya"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
-#: diskdrake/interactive.pm:1304 mygtk2.pm:1228 mygtk3.pm:1254
+#: diskdrake/interactive.pm:1301 mygtk2.pm:1228 mygtk3.pm:1281
 #, c-format
 msgid "Confirmation"
 msgstr "Konfirmasi"
@@ -1553,7 +1466,7 @@ msgstr "Keluar dari program tanpa menulis tabel partisi?"
 msgid "Do you want to save the /etc/fstab modifications?"
 msgstr "Apakah Anda ingin menyimpan modifikasi /etc/fstab"
 
-#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:289
+#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:285
 #, c-format
 msgid "You need to reboot for the partition table modifications to take effect"
 msgstr "Anda harus reboot agar perubahan tabel partisi dapat berlaku"
@@ -1628,7 +1541,7 @@ msgstr "Informasi detail"
 msgid "View"
 msgstr "Lihat"
 
-#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:828
+#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:825
 #, c-format
 msgid "Resize"
 msgstr "Ubah ukuran"
@@ -1638,12 +1551,12 @@ msgstr "Ubah ukuran"
 msgid "Format"
 msgstr "Format"
 
-#: diskdrake/interactive.pm:415 diskdrake/interactive.pm:976
+#: diskdrake/interactive.pm:415 diskdrake/interactive.pm:973
 #, c-format
 msgid "Add to RAID"
 msgstr "Tambahkan ke RAID"
 
-#: diskdrake/interactive.pm:416 diskdrake/interactive.pm:995
+#: diskdrake/interactive.pm:416 diskdrake/interactive.pm:992
 #, c-format
 msgid "Add to LVM"
 msgstr "Tambahkan ke LVM"
@@ -1703,12 +1616,12 @@ msgstr "Membuat partisi baru"
 msgid "Start sector: "
 msgstr "Sektor awal: "
 
-#: diskdrake/interactive.pm:497 diskdrake/interactive.pm:1080
+#: diskdrake/interactive.pm:497 diskdrake/interactive.pm:1077
 #, c-format
 msgid "Size in MB: "
 msgstr "Ukuran dalam MB: "
 
-#: diskdrake/interactive.pm:499 diskdrake/interactive.pm:1081
+#: diskdrake/interactive.pm:499 diskdrake/interactive.pm:1078
 #, c-format
 msgid "Filesystem type: "
 msgstr "Tipe filesystem: "
@@ -1733,12 +1646,12 @@ msgstr "Enkripsi partisi"
 msgid "Encryption key "
 msgstr "Kunci enkripsi "
 
-#: diskdrake/interactive.pm:512 diskdrake/interactive.pm:1514
+#: diskdrake/interactive.pm:512 diskdrake/interactive.pm:1502
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Kunci enkripsi (lagi)"
 
-#: diskdrake/interactive.pm:524 diskdrake/interactive.pm:1510
+#: diskdrake/interactive.pm:524 diskdrake/interactive.pm:1498
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "Kunci enkripsi tidak sesuai"
@@ -1764,64 +1677,64 @@ msgstr ""
 msgid "Remove the loopback file?"
 msgstr "Hapus file loopback?"
 
-#: diskdrake/interactive.pm:620
+#: diskdrake/interactive.pm:617
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Setelah mengganti tipe partisi %s, semua data pada partisi ini akan hilang"
 
-#: diskdrake/interactive.pm:636
+#: diskdrake/interactive.pm:633
 #, c-format
 msgid "Change partition type"
 msgstr "Mengubah tipe partisi"
 
-#: diskdrake/interactive.pm:638 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:635 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Filesystem apa yang Anda inginkan?"
 
-#: diskdrake/interactive.pm:645
+#: diskdrake/interactive.pm:642
 #, c-format
 msgid "Switching from %s to %s"
 msgstr "Berpindah dari %s ke %s"
 
-#: diskdrake/interactive.pm:680
+#: diskdrake/interactive.pm:677
 #, c-format
 msgid "Set volume label"
 msgstr "Atur label volume"
 
-#: diskdrake/interactive.pm:682
+#: diskdrake/interactive.pm:679
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
 msgstr "Hati-hati, ini akan ditulis ke disk segera setelah Anda validasi!"
 
-#: diskdrake/interactive.pm:683
+#: diskdrake/interactive.pm:680
 #, c-format
 msgid "Beware, this will be written to disk only after formatting!"
 msgstr "Hati-hati, ini akan ditulis ke disk hanya setelah memformat!"
 
-#: diskdrake/interactive.pm:685
+#: diskdrake/interactive.pm:682
 #, c-format
 msgid "Which volume label?"
 msgstr "Label volume yang mana?"
 
-#: diskdrake/interactive.pm:686
+#: diskdrake/interactive.pm:683
 #, c-format
 msgid "Label:"
 msgstr "Label:"
 
-#: diskdrake/interactive.pm:707
+#: diskdrake/interactive.pm:704
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "Dimana Anda akan melakukan mount file loopback %s?"
 
-#: diskdrake/interactive.pm:708
+#: diskdrake/interactive.pm:705
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Dimana Anda akan melakukan mount perangkat %s?"
 
-#: diskdrake/interactive.pm:713
+#: diskdrake/interactive.pm:710
 #, c-format
 msgid ""
 "Cannot unset mount point as this partition is used for loop back.\n"
@@ -1830,59 +1743,59 @@ msgstr ""
 "Tidak bisa unset mount point karena partisi ini sudah digunakan untuk\n"
 "loopback. Hapus dulu loopbacknya."
 
-#: diskdrake/interactive.pm:743
+#: diskdrake/interactive.pm:740
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "Dimana Anda akan melakukan mount %s?"
 
-#: diskdrake/interactive.pm:773 diskdrake/interactive.pm:869
+#: diskdrake/interactive.pm:770 diskdrake/interactive.pm:866
 #: fs/partitioning_wizard.pm:135 fs/partitioning_wizard.pm:211
 #, c-format
 msgid "Resizing"
 msgstr "Mengubah ukuran"
 
-#: diskdrake/interactive.pm:773
+#: diskdrake/interactive.pm:770
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "Menghitung batas filesystem FAT"
 
-#: diskdrake/interactive.pm:815
+#: diskdrake/interactive.pm:812
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "Ukuran partisi ini tidak dapat diubah"
 
-#: diskdrake/interactive.pm:820
+#: diskdrake/interactive.pm:817
 #, c-format
 msgid "All data on this partition should be backed up"
 msgstr "Semua data pada partisi ini sebaiknya dibackup dulu"
 
-#: diskdrake/interactive.pm:822
+#: diskdrake/interactive.pm:819
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
 "Setelah merubah ukuran partisi %s, semua data pada partisi ini akan hilang"
 
-#: diskdrake/interactive.pm:829
+#: diskdrake/interactive.pm:826
 #, c-format
 msgid "Choose the new size"
 msgstr "Pilih ukuran baru"
 
-#: diskdrake/interactive.pm:830
+#: diskdrake/interactive.pm:827
 #, c-format
 msgid "New size in MB: "
 msgstr "Ukuran baru dalam MB: "
 
-#: diskdrake/interactive.pm:831
+#: diskdrake/interactive.pm:828
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr "Ukuran minimal: %s MB"
 
-#: diskdrake/interactive.pm:832
+#: diskdrake/interactive.pm:829
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr "Ukuran maksimal: %s MB"
 
-#: diskdrake/interactive.pm:880 fs/partitioning_wizard.pm:219
+#: diskdrake/interactive.pm:877 fs/partitioning_wizard.pm:219
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
@@ -1892,57 +1805,57 @@ msgstr ""
 "pengujian sistem file akan dilakukan pada boot berikutnya ke Microsoft "
 "Windows®"
 
-#: diskdrake/interactive.pm:944 diskdrake/interactive.pm:1505
+#: diskdrake/interactive.pm:941 diskdrake/interactive.pm:1493
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Kunci enkripsi sistem file"
 
-#: diskdrake/interactive.pm:945
+#: diskdrake/interactive.pm:942
 #, c-format
 msgid "Enter your filesystem encryption key"
 msgstr "Masukkan kunci enkripsi sistem file Anda"
 
-#: diskdrake/interactive.pm:946 diskdrake/interactive.pm:1513
+#: diskdrake/interactive.pm:943 diskdrake/interactive.pm:1501
 #, c-format
 msgid "Encryption key"
 msgstr "Kunci enkripsi"
 
-#: diskdrake/interactive.pm:953
+#: diskdrake/interactive.pm:950
 #, c-format
 msgid "Invalid key"
 msgstr "Kunci tidak valid"
 
-#: diskdrake/interactive.pm:976
+#: diskdrake/interactive.pm:973
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Pilih RAID yang ada untuk ditambahkan ke"
 
-#: diskdrake/interactive.pm:978 diskdrake/interactive.pm:997
+#: diskdrake/interactive.pm:975 diskdrake/interactive.pm:994
 #, c-format
 msgid "new"
 msgstr "baru"
 
-#: diskdrake/interactive.pm:995
+#: diskdrake/interactive.pm:992
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Pilih LVM yang ada untuk ditambahkan ke"
 
-#: diskdrake/interactive.pm:1007 diskdrake/interactive.pm:1016
+#: diskdrake/interactive.pm:1004 diskdrake/interactive.pm:1013
 #, c-format
 msgid "LVM name"
 msgstr "Nama LVM"
 
-#: diskdrake/interactive.pm:1008
+#: diskdrake/interactive.pm:1005
 #, c-format
 msgid "Enter a name for the new LVM volume group"
 msgstr "Masukkan sebuah nama untuk grup volume LVM baru"
 
-#: diskdrake/interactive.pm:1013
+#: diskdrake/interactive.pm:1010
 #, c-format
 msgid "\"%s\" already exists"
 msgstr "\"%s\" sudah ada"
 
-#: diskdrake/interactive.pm:1045
+#: diskdrake/interactive.pm:1042
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
@@ -1952,117 +1865,123 @@ msgstr ""
 "Apakah Anda hendak memindahkan perluasan fisik yang digunakan pada volume "
 "ini pada volume lain?"
 
-#: diskdrake/interactive.pm:1047
+#: diskdrake/interactive.pm:1044
 #, c-format
 msgid "Moving physical extents"
 msgstr "Memindahkan perluasan fisik"
 
-#: diskdrake/interactive.pm:1065
+#: diskdrake/interactive.pm:1062
 #, c-format
 msgid "This partition cannot be used for loopback"
 msgstr "Partisi ini tidak bisa dipakai sebagai loopback"
 
-#: diskdrake/interactive.pm:1078
+#: diskdrake/interactive.pm:1075
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:1079
+#: diskdrake/interactive.pm:1076
 #, c-format
 msgid "Loopback file name: "
 msgstr "Nama file loopback: "
 
-#: diskdrake/interactive.pm:1084
+#: diskdrake/interactive.pm:1081
 #, c-format
 msgid "Give a file name"
 msgstr "Berikan nama file"
 
-#: diskdrake/interactive.pm:1087
+#: diskdrake/interactive.pm:1084
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "File sudah digunakan oleh loopback lain, pilih yang lainnya"
 
-#: diskdrake/interactive.pm:1088
+#: diskdrake/interactive.pm:1085
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "File sudah ada. Gunakan file ini ?"
 
-#: diskdrake/interactive.pm:1120 diskdrake/interactive.pm:1123
+#: diskdrake/interactive.pm:1117 diskdrake/interactive.pm:1120
 #, c-format
 msgid "Mount options"
 msgstr "Opsi mount"
 
-#: diskdrake/interactive.pm:1130
+#: diskdrake/interactive.pm:1127
 #, c-format
 msgid "Various"
 msgstr "Macam-macam"
 
-#: diskdrake/interactive.pm:1176
+#: diskdrake/interactive.pm:1173
 #, c-format
 msgid "device"
 msgstr "perangkat"
 
-#: diskdrake/interactive.pm:1177
+#: diskdrake/interactive.pm:1174
 #, c-format
 msgid "level"
 msgstr "level"
 
-#: diskdrake/interactive.pm:1178
+#: diskdrake/interactive.pm:1175
 #, c-format
 msgid "chunk size in KiB"
 msgstr "ukuran chunk dalam KiB"
 
-#: diskdrake/interactive.pm:1196
+#: diskdrake/interactive.pm:1192 diskdrake/interactive.pm:1202
+#: diskdrake/interactive.pm:1255
+#, c-format
+msgid "Read carefully"
+msgstr "Baca dengan seksama"
+
+#: diskdrake/interactive.pm:1193
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Hati-hati: operasi ini berbahaya"
 
-#: diskdrake/interactive.pm:1211
+#: diskdrake/interactive.pm:1208
 #, c-format
 msgid "Partitioning Type"
 msgstr "Tipe Partisi"
 
-#: diskdrake/interactive.pm:1211
+#: diskdrake/interactive.pm:1208
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Tipe partisi apa yang hendak digunakan?"
 
-#: diskdrake/interactive.pm:1249
+#: diskdrake/interactive.pm:1246
 #, c-format
 msgid "You'll need to reboot before the modification can take effect"
 msgstr "Anda harus reboot agar perubahan tabel partisi dapat berlaku"
 
-#: diskdrake/interactive.pm:1258
+#: diskdrake/interactive.pm:1255
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "Tabel partisi pada drive %s akan ditulis ke disk"
 
-#: diskdrake/interactive.pm:1277 fs/format.pm:107 fs/format.pm:114
+#: diskdrake/interactive.pm:1274 fs/format.pm:107 fs/format.pm:114
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Memformat partisi %s"
 
-#: diskdrake/interactive.pm:1290
+#: diskdrake/interactive.pm:1287
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "Setelah memformat partisi %s semua data pada partisi ini akan hilang"
 
-#: diskdrake/interactive.pm:1304
+#: diskdrake/interactive.pm:1301
 #, fuzzy, c-format
 msgid "Check bad blocks?"
 msgstr "Periksa blok rusak?"
 
-#: diskdrake/interactive.pm:1319
+#: diskdrake/interactive.pm:1316
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Memindahkan file ke partisi baru"
 
-#: diskdrake/interactive.pm:1319
+#: diskdrake/interactive.pm:1316
 #, c-format
 msgid "Hide files"
 msgstr "Sembunyikan file"
 
-#: diskdrake/interactive.pm:1320
+#: diskdrake/interactive.pm:1317
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -2079,128 +1998,122 @@ msgstr ""
 "membiarkan tetap disana (yang berarti akan menyembunyikan mereka dari isi "
 "partisi yang dimount)"
 
-#: diskdrake/interactive.pm:1335
+#: diskdrake/interactive.pm:1332
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Memindahkan file ke partisi baru"
 
-#: diskdrake/interactive.pm:1339
+#: diskdrake/interactive.pm:1336
 #, c-format
 msgid "Copying %s"
 msgstr "Menyalin %s"
 
-#: diskdrake/interactive.pm:1343
+#: diskdrake/interactive.pm:1340
 #, c-format
 msgid "Removing %s"
 msgstr "Menghapus %s"
 
-#: diskdrake/interactive.pm:1357
+#: diskdrake/interactive.pm:1354
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "partisi %s sekarang dikenali sebagai %s"
 
-#: diskdrake/interactive.pm:1358
+#: diskdrake/interactive.pm:1355
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "Telah terjadi penomoran ulang pada partisi:"
 
-#: diskdrake/interactive.pm:1383 diskdrake/interactive.pm:1454
+#: diskdrake/interactive.pm:1380 diskdrake/interactive.pm:1442
 #, c-format
 msgid "Device: "
 msgstr "Perangkat: "
 
-#: diskdrake/interactive.pm:1384
+#: diskdrake/interactive.pm:1381
 #, c-format
 msgid "Volume label: "
 msgstr "Label Volume: "
 
-#: diskdrake/interactive.pm:1385
+#: diskdrake/interactive.pm:1382
 #, c-format
 msgid "UUID: "
 msgstr "UUID"
 
-#: diskdrake/interactive.pm:1386
+#: diskdrake/interactive.pm:1383
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "Huruf drive DOS : %s (hanya tebakan)\n"
 
-#: diskdrake/interactive.pm:1390 diskdrake/interactive.pm:1399
-#: diskdrake/interactive.pm:1473
+#: diskdrake/interactive.pm:1387 diskdrake/interactive.pm:1461
 #, c-format
 msgid "Type: "
 msgstr "Tipe: "
 
-#: diskdrake/interactive.pm:1394 diskdrake/interactive.pm:1458
-#, c-format
-msgid "Name: "
-msgstr "Nama: "
-
-#: diskdrake/interactive.pm:1401
+#: diskdrake/interactive.pm:1389
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Mulai: sektor %s\n"
 
-#: diskdrake/interactive.pm:1402
+#: diskdrake/interactive.pm:1390
 #, c-format
 msgid "Size: %s"
 msgstr "Ukuran: %s"
 
-#: diskdrake/interactive.pm:1404
+#: diskdrake/interactive.pm:1392
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sektor"
 
-#: diskdrake/interactive.pm:1406
+#: diskdrake/interactive.pm:1394
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Silinder %d sampai %d\n"
 
-#: diskdrake/interactive.pm:1407
+#: diskdrake/interactive.pm:1395
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "Jumlah perluasan logical: %d\n"
 
-#: diskdrake/interactive.pm:1408
+#: diskdrake/interactive.pm:1396
 #, c-format
 msgid "Formatted\n"
 msgstr "Telah terformat\n"
 
-#: diskdrake/interactive.pm:1409
+#: diskdrake/interactive.pm:1397
 #, c-format
 msgid "Not formatted\n"
 msgstr "Belum terformat\n"
 
-#: diskdrake/interactive.pm:1410
+#: diskdrake/interactive.pm:1398
 #, c-format
 msgid "Mounted\n"
 msgstr "Telah termount\n"
 
-#: diskdrake/interactive.pm:1411
+#: diskdrake/interactive.pm:1399
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1413
+#: diskdrake/interactive.pm:1401
 #, c-format
 msgid "Encrypted"
 msgstr "Terenkripsi"
 
-#: diskdrake/interactive.pm:1415
+#: diskdrake/interactive.pm:1403
 #, c-format
 msgid " (mapped on %s)"
 msgstr " (dipetakan di %s)"
 
-#: diskdrake/interactive.pm:1416
+#: diskdrake/interactive.pm:1404
 #, c-format
 msgid " (to map on %s)"
 msgstr " (untuk dipetakan di %s)"
 
-#: diskdrake/interactive.pm:1417
+#: diskdrake/interactive.pm:1405
 #, c-format
 msgid " (inactive)"
 msgstr " (tidak aktif)"
 
-#: diskdrake/interactive.pm:1424
+#: diskdrake/interactive.pm:1412
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2209,7 +2122,7 @@ msgstr ""
 "File loopback:\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1425
+#: diskdrake/interactive.pm:1413
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2218,27 +2131,27 @@ msgstr ""
 "Partisi di-boot secara default\n"
 "    (untuk MS-DOS boot, bukan untuk lilo)\n"
 
-#: diskdrake/interactive.pm:1427
+#: diskdrake/interactive.pm:1415
 #, c-format
 msgid "Level %s\n"
 msgstr "Level %s\n"
 
-#: diskdrake/interactive.pm:1428
+#: diskdrake/interactive.pm:1416
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Ukuran chunk %d KiB\n"
 
-#: diskdrake/interactive.pm:1429
+#: diskdrake/interactive.pm:1417
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "Disk RAID %s\n"
 
-#: diskdrake/interactive.pm:1431
+#: diskdrake/interactive.pm:1419
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Nama file loopback: %s"
 
-#: diskdrake/interactive.pm:1434
+#: diskdrake/interactive.pm:1422
 #, c-format
 msgid ""
 "\n"
@@ -2251,7 +2164,7 @@ msgstr ""
 "partisi Driver, sebaiknya\n"
 "biarkan begitu saja.\n"
 
-#: diskdrake/interactive.pm:1437
+#: diskdrake/interactive.pm:1425
 #, c-format
 msgid ""
 "\n"
@@ -2263,57 +2176,62 @@ msgstr ""
 "Partisi bootstrap khusus ini \n"
 "digunakan oleh sistem dual boot.\n"
 
-#: diskdrake/interactive.pm:1446
+#: diskdrake/interactive.pm:1434
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr "Ruang kosong pada %s (%s)"
 
-#: diskdrake/interactive.pm:1455
+#: diskdrake/interactive.pm:1443
 #, c-format
 msgid "Read-only"
 msgstr "Baca-saja"
 
-#: diskdrake/interactive.pm:1456
+#: diskdrake/interactive.pm:1444
 #, c-format
 msgid "Size: %s\n"
 msgstr "Ukuran: %s\n"
 
-#: diskdrake/interactive.pm:1457
+#: diskdrake/interactive.pm:1445
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Ukuran: %s silinder, %s head, %s sektor\n"
 
-#: diskdrake/interactive.pm:1459
+#: diskdrake/interactive.pm:1446
+#, c-format
+msgid "Name: "
+msgstr "Nama: "
+
+#: diskdrake/interactive.pm:1447
 #, c-format
 msgid "Medium type: "
 msgstr "Tipe media: "
 
-#: diskdrake/interactive.pm:1460
+#: diskdrake/interactive.pm:1448
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "Disk LVM %s\n"
 
-#: diskdrake/interactive.pm:1461
+#: diskdrake/interactive.pm:1449
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Tipe tabel partisi: %s\n"
 
-#: diskdrake/interactive.pm:1462
+#: diskdrake/interactive.pm:1450
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "pada kanal %d id %d\n"
 
-#: diskdrake/interactive.pm:1506
+#: diskdrake/interactive.pm:1494
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Pilih kunci enkripsi sistem file Anda"
 
-#: diskdrake/interactive.pm:1509
+#: diskdrake/interactive.pm:1497
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr "Kunci enkripsi ini terlalu mudah (harus paling tidak %d karakter)"
 
-#: diskdrake/interactive.pm:1516
+#: diskdrake/interactive.pm:1504
 #, c-format
 msgid "Encryption algorithm"
 msgstr "Algoritma enkripsi"
@@ -2323,12 +2241,12 @@ msgstr "Algoritma enkripsi"
 msgid "Change type"
 msgstr "Ubah tipe"
 
-#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:130 interactive.pm:551
+#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:120 interactive.pm:675
 #: interactive/curses.pm:267 interactive/http.pm:104 interactive/http.pm:160
 #: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:846
-#: mygtk2.pm:1229 mygtk3.pm:880 mygtk3.pm:1255 ugtk2.pm:415 ugtk2.pm:517
-#: ugtk2.pm:526 ugtk2.pm:812 ugtk3.pm:417 ugtk3.pm:507 ugtk3.pm:516
-#: ugtk3.pm:793
+#: mygtk2.pm:1229 mygtk3.pm:898 mygtk3.pm:1282 ugtk2.pm:415 ugtk2.pm:517
+#: ugtk2.pm:526 ugtk2.pm:812 ugtk3.pm:503 ugtk3.pm:593 ugtk3.pm:602
+#: ugtk3.pm:910
 #, c-format
 msgid "Cancel"
 msgstr "Batal"
@@ -2380,32 +2298,32 @@ msgstr "Cari Server"
 msgid "Search for new servers"
 msgstr "Cari server baru"
 
-#: do_pkgs.pm:19 do_pkgs.pm:57
+#: do_pkgs.pm:45 do_pkgs.pm:100
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "Paket %s perlu diupgrade. Anda ingin instal?"
 
-#: do_pkgs.pm:23 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:83
+#: do_pkgs.pm:49 do_pkgs.pm:79 do_pkgs.pm:103 do_pkgs.pm:142
 #, c-format
 msgid "Could not install the %s package!"
 msgstr "Tidak bisa menginstall paket %s"
 
-#: do_pkgs.pm:28 do_pkgs.pm:65
+#: do_pkgs.pm:54 do_pkgs.pm:108
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "Paket wajib %s hilang"
 
-#: do_pkgs.pm:39 do_pkgs.pm:78
+#: do_pkgs.pm:74 do_pkgs.pm:137
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Paket berikut perlu diinstal:\n"
 
-#: do_pkgs.pm:242
+#: do_pkgs.pm:342
 #, c-format
 msgid "Installing packages..."
 msgstr "Menginstall paket..."
 
-#: do_pkgs.pm:291 pkgs.pm:306
+#: do_pkgs.pm:391 pkgs.pm:312
 #, c-format
 msgid "Removing packages..."
 msgstr "Menghapus paket..."
@@ -2420,9 +2338,9 @@ msgstr ""
 "sistem file baru. Harap periksa perangkat keras Anda untuk penyebab masalah "
 "ini"
 
-#: fs/any.pm:75 fs/partitioning_wizard.pm:68
-#, c-format
-msgid "You must have a FAT partition mounted in /boot/efi"
+#: fs/any.pm:71 fs/partitioning_wizard.pm:68
+#, fuzzy, c-format
+msgid "You must have a ESP FAT32 partition mounted in /boot/EFI"
 msgstr "Anda harus memiliki partisi FAT yang dimount pada /boot/efi"
 
 #: fs/format.pm:111
@@ -2470,7 +2388,7 @@ msgstr "proses mounting partisi %s pada direktori %s gagal"
 msgid "Checking %s"
 msgstr "Menguji %s"
 
-#: fs/mount.pm:126 partition_table.pm:422
+#: fs/mount.pm:126 partition_table.pm:397
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "kesalahan melakukan unmount %s: %s"
@@ -2498,6 +2416,11 @@ msgstr ""
 
 #: fs/mount_options.pm:120
 #, c-format
+msgid "Enable automatic TRIM for SSD disks"
+msgstr ""
+
+#: fs/mount_options.pm:122
+#, c-format
 msgid ""
 "Do not update inode access times on this filesystem\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
@@ -2506,7 +2429,7 @@ msgstr ""
 "(mis: untuk akses lebih cepat di spool berita untuk mempercepat server "
 "berita)."
 
-#: fs/mount_options.pm:123
+#: fs/mount_options.pm:125
 #, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
@@ -2517,7 +2440,7 @@ msgstr ""
 "(mis: untuk akses lebih cepat di spool berita untuk mempercepat server "
 "berita)."
 
-#: fs/mount_options.pm:126
+#: fs/mount_options.pm:128
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -2526,13 +2449,13 @@ msgstr ""
 "Hanya dapat di-mount secara eksplisit\n"
 "(opsi -a takkan me-mount sistem file)."
 
-#: fs/mount_options.pm:129
+#: fs/mount_options.pm:131
 #, c-format
 msgid "Do not interpret character or block special devices on the filesystem."
 msgstr ""
 "Jangan interpretasi perangkat karakter atau blok spesial pada sistem file."
 
-#: fs/mount_options.pm:131
+#: fs/mount_options.pm:133
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -2542,7 +2465,7 @@ msgstr ""
 "Jangan izinkan eksekusi biner di sistem file ter-mount. Opsi ini berguna\n"
 "bagi server yang memiliki sistem file berisi biner untuk arsitektur berbeda."
 
-#: fs/mount_options.pm:135
+#: fs/mount_options.pm:137
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -2554,63 +2477,63 @@ msgstr ""
 "menginstal\n"
 "suidperl(1).)"
 
-#: fs/mount_options.pm:139
+#: fs/mount_options.pm:141
 #, c-format
 msgid "Mount the filesystem read-only."
 msgstr "Mount sistem file read-only."
 
-#: fs/mount_options.pm:141
+#: fs/mount_options.pm:143
 #, c-format
 msgid "All I/O to the filesystem should be done synchronously."
 msgstr "Semua I/O ke sistem file harus dilakukan secara sinkron."
 
-#: fs/mount_options.pm:143
+#: fs/mount_options.pm:145
 #, c-format
 msgid "Allow every user to mount and umount the filesystem."
 msgstr "Ijinkan semua pengguna untuk me-mount dan unmount sistem file."
 
-#: fs/mount_options.pm:145
+#: fs/mount_options.pm:147
 #, c-format
 msgid "Allow an ordinary user to mount the filesystem."
 msgstr "Ijinkan pengguna biasa untuk me-mount sistem file."
 
-#: fs/mount_options.pm:147
+#: fs/mount_options.pm:149
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
 "Mengaktifkan akuntasi quota pengguna dan memaksa batas disk secara opsional"
 
-#: fs/mount_options.pm:149
+#: fs/mount_options.pm:151
 #, c-format
 msgid "Support \"user.\" extended attributes"
 msgstr "Mendukung attribut tambahan \"pengguna.\""
 
-#: fs/mount_options.pm:151
+#: fs/mount_options.pm:153
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "Berikan akses tulis pada pengguna biasa"
 
-#: fs/mount_options.pm:153
+#: fs/mount_options.pm:155
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "Berikan akses baca pada pengguna biasa"
 
-#: fs/mount_point.pm:82
+#: fs/mount_point.pm:84
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr "Titik mount %s terduplikasi"
 
-#: fs/mount_point.pm:97
+#: fs/mount_point.pm:99
 #, c-format
 msgid "No partition available"
 msgstr "Tidak ada partisi yang tersedia"
 
-#: fs/mount_point.pm:100
+#: fs/mount_point.pm:102
 #, c-format
 msgid "Scanning partitions to find mount points"
 msgstr "Menindai partisi untuk mencari titik mount"
 
-#: fs/mount_point.pm:107
+#: fs/mount_point.pm:109
 #, c-format
 msgid "Choose the mount points"
 msgstr "Pilih titik mount"
@@ -2744,8 +2667,8 @@ msgstr ""
 "Jika yakin, tekan %s."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:195 fs/partitioning_wizard.pm:561
-#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:509
+#: fs/partitioning_wizard.pm:195 fs/partitioning_wizard.pm:557
+#: interactive.pm:674 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:595
 #, c-format
 msgid "Next"
 msgstr "Selanjutnya"
@@ -2802,7 +2725,7 @@ msgstr ""
 "Anda memiliki lebih dari satu drive hard disk, mana yang ingin Anda gunakan "
 "untuk installer?"
 
-#: fs/partitioning_wizard.pm:249 fsedit.pm:634
+#: fs/partitioning_wizard.pm:249 fsedit.pm:632
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "SEMUA partisi yang ada dan datanya akan hilang pada drive %s"
@@ -2826,40 +2749,45 @@ msgstr ""
 "Anda sekarang bisa mempartisi %s.\n"
 "Jika sudah selesai, jangan lupa menyimpan menggunakan `w'"
 
-#: fs/partitioning_wizard.pm:405
+#: fs/partitioning_wizard.pm:401
 #, c-format
 msgid "Ext2/3/4"
 msgstr "Ext2/3/4"
 
-#: fs/partitioning_wizard.pm:435 fs/partitioning_wizard.pm:581
+#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:577
 #, c-format
 msgid "I cannot find any room for installing"
 msgstr "Saya tidak bisa menemukan sembarang ruang untuk installasi"
 
-#: fs/partitioning_wizard.pm:444 fs/partitioning_wizard.pm:588
+#: fs/partitioning_wizard.pm:440 fs/partitioning_wizard.pm:584
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "Panduan Partisi DrakX menemukan solusi-solusi berikut:"
 
-#: fs/partitioning_wizard.pm:514
+#: fs/partitioning_wizard.pm:510
 #, c-format
 msgid "Here is the content of your disk drive "
 msgstr "Ini adalah isi dari drive disk Anda"
 
-#: fs/partitioning_wizard.pm:599
+#: fs/partitioning_wizard.pm:595
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Proses partisi gagal: %s"
 
-#: fs/type.pm:384
+#: fs/type.pm:365
 #, c-format
 msgid "You cannot use JFS for partitions smaller than 16MB"
 msgstr "JFS tidak dapat dipakai untuk partisi berukuran di bawah 16MB"
 
-#: fs/type.pm:385
+#: fs/type.pm:366
 #, c-format
 msgid "You cannot use ReiserFS for partitions smaller than 32MB"
 msgstr "ReiserFS tidak dapat dipakai untuk partisi berukuran di bawah 32MB"
+
+#: fs/type.pm:367
+#, fuzzy, c-format
+msgid "You cannot use btrfs for partitions smaller than 256MB"
+msgstr "JFS tidak dapat dipakai untuk partisi berukuran di bawah 16MB"
 
 #: fsedit.pm:24
 #, c-format
@@ -2960,7 +2888,7 @@ msgstr ""
 "Tidak ada bootloader yang bisa menangani ini tanpa partisi /boot.\n"
 "Silakan yakinkan untuk membuat partisi /boot terpisah"
 
-#: fsedit.pm:465 fsedit.pm:485
+#: fsedit.pm:465 fsedit.pm:483
 #, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr ""
@@ -2992,7 +2920,7 @@ msgstr ""
 msgid "This directory should remain within the root filesystem"
 msgstr "Direktori ini harus ada pada sistem file root"
 
-#: fsedit.pm:479 fsedit.pm:481 fsedit.pm:483
+#: fsedit.pm:479 fsedit.pm:481
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount "
@@ -3001,12 +2929,12 @@ msgstr ""
 "Anda perlu file sistem yang sesungguhnya (ext2, reiserfs, xfs, atau jfs) "
 "untuk titik mount ini\n"
 
-#: fsedit.pm:550
+#: fsedit.pm:548
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Tidak cukup ruangan untuk alokasi otomatis"
 
-#: fsedit.pm:552
+#: fsedit.pm:550
 #, c-format
 msgid "Nothing to do"
 msgstr "Tidak ada yang dikerjakan"
@@ -3252,47 +3180,47 @@ msgstr "Tak dikenal/Lain-lain"
 msgid "cpu # "
 msgstr "cpu # "
 
-#: harddrake/sound.pm:95
+#: harddrake/sound.pm:77
 #, c-format
 msgid "Please Wait... Applying the configuration"
 msgstr "Harap tunggu... Menerapkan konfigurasi"
 
-#: harddrake/sound.pm:123
+#: harddrake/sound.pm:98
 #, c-format
 msgid "No known driver"
 msgstr "Tidak ada driver yg diketahui"
 
-#: harddrake/sound.pm:124
+#: harddrake/sound.pm:99
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr "Tidak ada driver yang diketahui untuk kartu suara Anda (%s)"
 
-#: harddrake/sound.pm:156
+#: harddrake/sound.pm:130
 #, c-format
 msgid "Enable PulseAudio"
 msgstr "Hidupkan PulseAudio"
 
-#: harddrake/sound.pm:161
+#: harddrake/sound.pm:135
 #, c-format
 msgid "Use Glitch-Free mode"
 msgstr "Gunakan mode Glitch-Free"
 
-#: harddrake/sound.pm:167
+#: harddrake/sound.pm:141
 #, c-format
 msgid "Reset sound mixer to default values"
 msgstr "Reset mixer suara ke nilai default"
 
-#: harddrake/sound.pm:172
+#: harddrake/sound.pm:146
 #, c-format
 msgid "Troubleshooting"
 msgstr "Troubleshooting"
 
-#: harddrake/sound.pm:179
+#: harddrake/sound.pm:153
 #, c-format
 msgid "No alternative driver"
 msgstr "Tidak ada driver alternatif"
 
-#: harddrake/sound.pm:180
+#: harddrake/sound.pm:154
 #, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
@@ -3301,7 +3229,7 @@ msgstr ""
 "Tidak ada driver OSS/ALSA alternatif yang diketahui untuk kartu suara Anda "
 "(%s) yang kini menggunakan \"%s\""
 
-#: harddrake/sound.pm:187
+#: harddrake/sound.pm:161
 #, c-format
 msgid "Sound configuration"
 msgstr "Konfigurasi suara"
@@ -3309,7 +3237,7 @@ msgstr "Konfigurasi suara"
 #. -PO: here the first %s is either "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
-#: harddrake/sound.pm:193
+#: harddrake/sound.pm:167
 #, c-format
 msgid ""
 "\n"
@@ -3322,7 +3250,7 @@ msgstr ""
 "Perangkat suara Anda saat ini menggunakan driver %s\"%s\" (driver default "
 "untuk perangkat suara Anda adalah \"%s\")"
 
-#: harddrake/sound.pm:195
+#: harddrake/sound.pm:169
 #, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
@@ -3354,18 +3282,18 @@ msgstr ""
 "- API ALSA baru yg menyediakan banyak fitur canggih tapi memerlukan library "
 "ALSA.\n"
 
-#: harddrake/sound.pm:210 harddrake/sound.pm:292
+#: harddrake/sound.pm:184 harddrake/sound.pm:266
 #, c-format
 msgid "Driver:"
 msgstr "Driver:"
 
-#: harddrake/sound.pm:232
+#: harddrake/sound.pm:206
 #, c-format
 msgid "Sound troubleshooting"
 msgstr "Solusi masalah suara"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:235
+#: harddrake/sound.pm:209
 #, c-format
 msgid ""
 "Below are some basic tips to help debug audio problems, but for accurate and "
@@ -3424,18 +3352,18 @@ msgid ""
 "PulseAudio)\n"
 msgstr ""
 
-#: harddrake/sound.pm:281
+#: harddrake/sound.pm:255
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Ambil sembarang driver"
 
-#: harddrake/sound.pm:284
+#: harddrake/sound.pm:258
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "Pilih sembarang driver"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:287
+#: harddrake/sound.pm:261
 #, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -3492,68 +3420,68 @@ msgstr "Model kartu :"
 msgid "Tuner type:"
 msgstr "Tipe tuner :"
 
-#: interactive.pm:129 interactive.pm:550 interactive/curses.pm:270
+#: interactive.pm:119 interactive.pm:674 interactive/curses.pm:270
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
 #: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:846
-#: mygtk3.pm:880 ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
-#: ugtk3.pm:423 ugtk3.pm:509 ugtk3.pm:793 ugtk3.pm:816
+#: mygtk3.pm:898 ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
+#: ugtk3.pm:509 ugtk3.pm:595 ugtk3.pm:910 ugtk3.pm:933
 #, c-format
 msgid "Ok"
 msgstr "Ok"
 
-#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:792
-#: wizards.pm:157
+#: interactive.pm:219 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:909
+#: wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Ya"
 
-#: interactive.pm:229 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:792
-#: wizards.pm:157
+#: interactive.pm:219 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:909
+#: wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Tidak"
 
-#: interactive.pm:263
+#: interactive.pm:253
 #, c-format
 msgid "Choose a file"
 msgstr "Pilih file"
 
-#: interactive.pm:388 interactive/gtk.pm:456
+#: interactive.pm:390 interactive/gtk.pm:456
 #, c-format
 msgid "Add"
 msgstr "Tambah"
 
-#: interactive.pm:388 interactive/gtk.pm:456
+#: interactive.pm:390 interactive/gtk.pm:456
 #, c-format
 msgid "Modify"
 msgstr "Modifikasi"
 
-#: interactive.pm:550 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:509
+#: interactive.pm:674 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:595
 #, c-format
 msgid "Finish"
 msgstr "Selesai"
 
-#: interactive.pm:551 interactive/curses.pm:267 ugtk2.pm:517 ugtk3.pm:507
+#: interactive.pm:675 interactive/curses.pm:267 ugtk2.pm:517 ugtk3.pm:593
 #, c-format
 msgid "Previous"
 msgstr "Sebelumnya"
 
-#: interactive/curses.pm:576 ugtk2.pm:872 ugtk3.pm:853
+#: interactive/curses.pm:576 ugtk2.pm:872 ugtk3.pm:970
 #, c-format
 msgid "No file chosen"
 msgstr "Tidak ada file yang dipilih"
 
-#: interactive/curses.pm:580 ugtk2.pm:876 ugtk3.pm:857
+#: interactive/curses.pm:580 ugtk2.pm:876 ugtk3.pm:974
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "Anda telah memilih sebuah direktori, bukan file"
 
-#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:859
+#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:976
 #, c-format
 msgid "No such directory"
 msgstr "Tidak ada direktori itu"
 
-#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:859
+#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:976
 #, c-format
 msgid "No such file"
 msgstr "Tidak ada file itu"
@@ -3640,1222 +3568,1222 @@ msgstr "Kirim ulang"
 #. -PO: the string "default:LTR" can be translated *ONLY* as "default:LTR"
 #. -PO: or as "default:RTL", depending if your language is written from
 #. -PO: left to right, or from right to left; any other string is wrong.
-#: lang.pm:205
+#: lang.pm:249
 #, c-format
 msgid "default:LTR"
 msgstr "default:LTR"
 
-#: lang.pm:222
+#: lang.pm:303
 #, c-format
 msgid "Andorra"
 msgstr "Andorra"
 
-#: lang.pm:223 timezone.pm:235
+#: lang.pm:304 timezone.pm:248
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Uni Emirat Arab"
 
-#: lang.pm:224
+#: lang.pm:305
 #, c-format
 msgid "Afghanistan"
 msgstr "Afghanistan"
 
-#: lang.pm:225
+#: lang.pm:306
 #, c-format
 msgid "Antigua and Barbuda"
 msgstr "Antigua dan Barbuda"
 
-#: lang.pm:226
+#: lang.pm:307
 #, c-format
 msgid "Anguilla"
 msgstr "Anguilla"
 
-#: lang.pm:227
+#: lang.pm:308
 #, c-format
 msgid "Albania"
 msgstr "Albania"
 
-#: lang.pm:228
+#: lang.pm:309
 #, c-format
 msgid "Armenia"
 msgstr "Armenia"
 
-#: lang.pm:229
+#: lang.pm:310
 #, c-format
 msgid "Netherlands Antilles"
 msgstr "Belanda Antilles"
 
-#: lang.pm:230
+#: lang.pm:311
 #, c-format
 msgid "Angola"
 msgstr "Angola"
 
-#: lang.pm:231
+#: lang.pm:312
 #, c-format
 msgid "Antarctica"
 msgstr "Antartika"
 
-#: lang.pm:232 timezone.pm:280
+#: lang.pm:313 timezone.pm:293
 #, c-format
 msgid "Argentina"
 msgstr "Argentina"
 
-#: lang.pm:233
+#: lang.pm:314
 #, c-format
 msgid "American Samoa"
 msgstr "Samoa Amerika"
 
-#: lang.pm:234 mirror.pm:12 timezone.pm:238
+#: lang.pm:315 mirror.pm:22 timezone.pm:251
 #, c-format
 msgid "Austria"
 msgstr "Austria"
 
-#: lang.pm:235 mirror.pm:11 timezone.pm:276
+#: lang.pm:316 mirror.pm:21 timezone.pm:289
 #, c-format
 msgid "Australia"
 msgstr "Australia"
 
-#: lang.pm:236
+#: lang.pm:317
 #, c-format
 msgid "Aruba"
 msgstr "Aruba"
 
-#: lang.pm:237
+#: lang.pm:318
 #, c-format
 msgid "Azerbaijan"
 msgstr "Azerbaijan"
 
-#: lang.pm:238
+#: lang.pm:319
 #, c-format
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnia Herzegovina"
 
-#: lang.pm:239
+#: lang.pm:320
 #, c-format
 msgid "Barbados"
 msgstr "Barbados"
 
-#: lang.pm:240 timezone.pm:220
+#: lang.pm:321 timezone.pm:233
 #, c-format
 msgid "Bangladesh"
 msgstr "Bangladesh"
 
-#: lang.pm:241 mirror.pm:13 timezone.pm:240
+#: lang.pm:322 mirror.pm:23 timezone.pm:253
 #, c-format
 msgid "Belgium"
 msgstr "Belgia"
 
-#: lang.pm:242
+#: lang.pm:323
 #, c-format
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: lang.pm:243 timezone.pm:241
+#: lang.pm:324 timezone.pm:254
 #, c-format
 msgid "Bulgaria"
 msgstr "Bulgaria"
 
-#: lang.pm:244
+#: lang.pm:325
 #, c-format
 msgid "Bahrain"
 msgstr "Bahrain"
 
-#: lang.pm:245
+#: lang.pm:326
 #, c-format
 msgid "Burundi"
 msgstr "Burundi"
 
-#: lang.pm:246
+#: lang.pm:327
 #, c-format
 msgid "Benin"
 msgstr "Benin"
 
-#: lang.pm:247
+#: lang.pm:328
 #, c-format
 msgid "Bermuda"
 msgstr "Bermuda"
 
-#: lang.pm:248
+#: lang.pm:329
 #, c-format
 msgid "Brunei Darussalam"
 msgstr "Brunei Darussalam"
 
-#: lang.pm:249
+#: lang.pm:330
 #, c-format
 msgid "Bolivia"
 msgstr "Bolivia"
 
-#: lang.pm:250 mirror.pm:14 timezone.pm:281
+#: lang.pm:331 mirror.pm:24 timezone.pm:294
 #, c-format
 msgid "Brazil"
 msgstr "Brazil"
 
-#: lang.pm:251
+#: lang.pm:332
 #, c-format
 msgid "Bahamas"
 msgstr "Bahama"
 
-#: lang.pm:252
+#: lang.pm:333
 #, c-format
 msgid "Bhutan"
 msgstr "Bhutan"
 
-#: lang.pm:253
+#: lang.pm:334
 #, c-format
 msgid "Bouvet Island"
 msgstr "Pulau Bouvet"
 
-#: lang.pm:254
+#: lang.pm:335
 #, c-format
 msgid "Botswana"
 msgstr "Botswana"
 
-#: lang.pm:255 timezone.pm:239
+#: lang.pm:336 timezone.pm:252
 #, c-format
 msgid "Belarus"
 msgstr "Belarus"
 
-#: lang.pm:256
+#: lang.pm:337
 #, c-format
 msgid "Belize"
 msgstr "Belize"
 
-#: lang.pm:257 mirror.pm:15 timezone.pm:270
+#: lang.pm:338 mirror.pm:25 timezone.pm:283
 #, c-format
 msgid "Canada"
 msgstr "Kanada"
 
-#: lang.pm:258
+#: lang.pm:339
 #, c-format
 msgid "Cocos (Keeling) Islands"
 msgstr "Kepulauan Cocos (Keeling)"
 
-#: lang.pm:259
+#: lang.pm:340
 #, c-format
 msgid "Congo (Kinshasa)"
 msgstr "Congo (Kinshasa)"
 
-#: lang.pm:260
+#: lang.pm:341
 #, c-format
 msgid "Central African Republic"
 msgstr "Republik Afrika Tengah"
 
-#: lang.pm:261
+#: lang.pm:342
 #, c-format
 msgid "Congo (Brazzaville)"
 msgstr "Kongo (Brazzaville)"
 
-#: lang.pm:262 mirror.pm:39 timezone.pm:264
+#: lang.pm:343 mirror.pm:49 timezone.pm:277
 #, c-format
 msgid "Switzerland"
 msgstr "Switzerland"
 
-#: lang.pm:263
+#: lang.pm:344
 #, c-format
 msgid "Cote d'Ivoire"
 msgstr "Pantai Gading"
 
-#: lang.pm:264
+#: lang.pm:345
 #, c-format
 msgid "Cook Islands"
 msgstr "Kepulauan Cook"
 
-#: lang.pm:265 timezone.pm:282
+#: lang.pm:346 timezone.pm:295
 #, c-format
 msgid "Chile"
 msgstr "Chile"
 
-#: lang.pm:266
+#: lang.pm:347
 #, c-format
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: lang.pm:267 timezone.pm:221
+#: lang.pm:348 timezone.pm:234
 #, c-format
 msgid "China"
 msgstr "Cina"
 
-#: lang.pm:268
+#: lang.pm:349
 #, c-format
 msgid "Colombia"
 msgstr "Colombia"
 
-#: lang.pm:269 mirror.pm:16
+#: lang.pm:350 mirror.pm:26
 #, c-format
 msgid "Costa Rica"
 msgstr "Costa Rika"
 
-#: lang.pm:270
+#: lang.pm:351
 #, c-format
 msgid "Serbia & Montenegro"
 msgstr "Serbia & Montenegro"
 
-#: lang.pm:271
+#: lang.pm:352
 #, c-format
 msgid "Cuba"
 msgstr "Kuba"
 
-#: lang.pm:272
+#: lang.pm:353
 #, c-format
 msgid "Cape Verde"
 msgstr "Tanjung Verde"
 
-#: lang.pm:273
+#: lang.pm:354
 #, c-format
 msgid "Christmas Island"
 msgstr "Pulau Christmas"
 
-#: lang.pm:274
+#: lang.pm:355
 #, c-format
 msgid "Cyprus"
 msgstr "Kipros"
 
-#: lang.pm:275 mirror.pm:17 timezone.pm:242
+#: lang.pm:356 mirror.pm:27 timezone.pm:255
 #, c-format
 msgid "Czech Republic"
 msgstr "Republik Ceko"
 
-#: lang.pm:276 mirror.pm:22 timezone.pm:247
+#: lang.pm:357 mirror.pm:32 timezone.pm:260
 #, c-format
 msgid "Germany"
 msgstr "Jerman"
 
-#: lang.pm:277
+#: lang.pm:358
 #, c-format
 msgid "Djibouti"
 msgstr "Jibouti"
 
-#: lang.pm:278 mirror.pm:18 timezone.pm:243
+#: lang.pm:359 mirror.pm:28 timezone.pm:256
 #, c-format
 msgid "Denmark"
 msgstr "Denmark"
 
-#: lang.pm:279
+#: lang.pm:360
 #, c-format
 msgid "Dominica"
 msgstr "Dominika"
 
-#: lang.pm:280
+#: lang.pm:361
 #, c-format
 msgid "Dominican Republic"
 msgstr "Republik Dominika"
 
-#: lang.pm:281
+#: lang.pm:362
 #, c-format
 msgid "Algeria"
 msgstr "Aljazair"
 
-#: lang.pm:282
+#: lang.pm:363
 #, c-format
 msgid "Ecuador"
 msgstr "Ekuador"
 
-#: lang.pm:283 mirror.pm:19 timezone.pm:244
+#: lang.pm:364 mirror.pm:29 timezone.pm:257
 #, c-format
 msgid "Estonia"
 msgstr "Estonia"
 
-#: lang.pm:284
+#: lang.pm:365
 #, c-format
 msgid "Egypt"
 msgstr "Mesir"
 
-#: lang.pm:285
+#: lang.pm:366
 #, c-format
 msgid "Western Sahara"
 msgstr "Sahara Barat"
 
-#: lang.pm:286
+#: lang.pm:367
 #, c-format
 msgid "Eritrea"
 msgstr "Eritrea"
 
-#: lang.pm:287 mirror.pm:37 timezone.pm:262
+#: lang.pm:368 mirror.pm:47 timezone.pm:275
 #, c-format
 msgid "Spain"
 msgstr "Spanyol"
 
-#: lang.pm:288
+#: lang.pm:369
 #, c-format
 msgid "Ethiopia"
 msgstr "Ethiopia"
 
-#: lang.pm:289 mirror.pm:20 timezone.pm:245
+#: lang.pm:370 mirror.pm:30 timezone.pm:258
 #, c-format
 msgid "Finland"
 msgstr "Finlandia"
 
-#: lang.pm:290
+#: lang.pm:371
 #, c-format
 msgid "Fiji"
 msgstr "Fiji"
 
-#: lang.pm:291
+#: lang.pm:372
 #, c-format
 msgid "Falkland Islands (Malvinas)"
 msgstr "Kepulauan Malvinas"
 
-#: lang.pm:292
+#: lang.pm:373
 #, c-format
 msgid "Micronesia"
 msgstr "Mikronesia"
 
-#: lang.pm:293
+#: lang.pm:374
 #, c-format
 msgid "Faroe Islands"
 msgstr "Kepulauan Faroe"
 
-#: lang.pm:294 mirror.pm:21 timezone.pm:246
+#: lang.pm:375 mirror.pm:31 timezone.pm:259
 #, c-format
 msgid "France"
 msgstr "Perancis"
 
-#: lang.pm:295
+#: lang.pm:376
 #, c-format
 msgid "Gabon"
 msgstr "Gabon"
 
-#: lang.pm:296 timezone.pm:266
+#: lang.pm:377 timezone.pm:279
 #, c-format
 msgid "United Kingdom"
 msgstr "Inggris"
 
-#: lang.pm:297
+#: lang.pm:378
 #, c-format
 msgid "Grenada"
 msgstr "Grenada"
 
-#: lang.pm:298
+#: lang.pm:379
 #, c-format
 msgid "Georgia"
 msgstr "Grujia"
 
-#: lang.pm:299
+#: lang.pm:380
 #, c-format
 msgid "French Guiana"
 msgstr "Guiana Perancis"
 
-#: lang.pm:300
+#: lang.pm:381
 #, c-format
 msgid "Ghana"
 msgstr "Ghana"
 
-#: lang.pm:301
+#: lang.pm:382
 #, c-format
 msgid "Gibraltar"
 msgstr "Gibraltar"
 
-#: lang.pm:302
+#: lang.pm:383
 #, c-format
 msgid "Greenland"
 msgstr "Greenland"
 
-#: lang.pm:303
+#: lang.pm:384
 #, c-format
 msgid "Gambia"
 msgstr "Gambia"
 
-#: lang.pm:304
+#: lang.pm:385
 #, c-format
 msgid "Guinea"
 msgstr "Guinea"
 
-#: lang.pm:305
+#: lang.pm:386
 #, c-format
 msgid "Guadeloupe"
 msgstr "Guadeloupe"
 
-#: lang.pm:306
+#: lang.pm:387
 #, c-format
 msgid "Equatorial Guinea"
 msgstr "Guinea Equator"
 
-#: lang.pm:307 mirror.pm:23 timezone.pm:248
+#: lang.pm:388 mirror.pm:33 timezone.pm:261
 #, c-format
 msgid "Greece"
 msgstr "Yunani"
 
-#: lang.pm:308
+#: lang.pm:389
 #, c-format
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Georgia Selatan dan Pulau Sandwich Selatan"
 
-#: lang.pm:309 timezone.pm:271
+#: lang.pm:390 timezone.pm:284
 #, c-format
 msgid "Guatemala"
 msgstr "Guatemala"
 
-#: lang.pm:310
+#: lang.pm:391
 #, c-format
 msgid "Guam"
 msgstr "Guam"
 
-#: lang.pm:311
+#: lang.pm:392
 #, c-format
 msgid "Guinea-Bissau"
 msgstr "Guinea-Bissau"
 
-#: lang.pm:312
+#: lang.pm:393
 #, c-format
 msgid "Guyana"
 msgstr "Guyana"
 
-#: lang.pm:313
+#: lang.pm:394
 #, c-format
 msgid "Hong Kong SAR (China)"
 msgstr "Hong Kong SAR (Cina)"
 
-#: lang.pm:314
+#: lang.pm:395
 #, c-format
 msgid "Heard and McDonald Islands"
 msgstr "Kepulauan Heard dan McDonald"
 
-#: lang.pm:315
+#: lang.pm:396
 #, c-format
 msgid "Honduras"
 msgstr "Honduras"
 
-#: lang.pm:316
+#: lang.pm:397
 #, c-format
 msgid "Croatia"
 msgstr "Kroasia"
 
-#: lang.pm:317
+#: lang.pm:398
 #, c-format
 msgid "Haiti"
 msgstr "Haiti"
 
-#: lang.pm:318 mirror.pm:24 timezone.pm:249
+#: lang.pm:399 mirror.pm:34 timezone.pm:262
 #, c-format
 msgid "Hungary"
 msgstr "Hungaria"
 
-#: lang.pm:319 timezone.pm:224
+#: lang.pm:400 timezone.pm:237
 #, c-format
 msgid "Indonesia"
 msgstr "Indonesia"
 
-#: lang.pm:320 mirror.pm:25 timezone.pm:250
+#: lang.pm:401 mirror.pm:35 timezone.pm:263
 #, c-format
 msgid "Ireland"
 msgstr "Irlandia"
 
-#: lang.pm:321 mirror.pm:26 timezone.pm:226
+#: lang.pm:402 mirror.pm:36 timezone.pm:239
 #, c-format
 msgid "Israel"
 msgstr "Israel"
 
-#: lang.pm:322 timezone.pm:223
+#: lang.pm:403 timezone.pm:236
 #, c-format
 msgid "India"
 msgstr "India"
 
-#: lang.pm:323
+#: lang.pm:404
 #, c-format
 msgid "British Indian Ocean Territory"
 msgstr "Inggris Teritori Samudera India"
 
-#: lang.pm:324
+#: lang.pm:405
 #, c-format
 msgid "Iraq"
 msgstr "Iraq"
 
-#: lang.pm:325 timezone.pm:225
+#: lang.pm:406 timezone.pm:238
 #, c-format
 msgid "Iran"
 msgstr "Iran"
 
-#: lang.pm:326
+#: lang.pm:407
 #, c-format
 msgid "Iceland"
 msgstr "Islandia"
 
-#: lang.pm:327 mirror.pm:27 timezone.pm:251
+#: lang.pm:408 mirror.pm:37 timezone.pm:264
 #, c-format
 msgid "Italy"
 msgstr "itali"
 
-#: lang.pm:328
+#: lang.pm:409
 #, c-format
 msgid "Jamaica"
 msgstr "Jamaika"
 
-#: lang.pm:329
+#: lang.pm:410
 #, c-format
 msgid "Jordan"
 msgstr "Jordania"
 
-#: lang.pm:330 mirror.pm:28 timezone.pm:227
+#: lang.pm:411 mirror.pm:38 timezone.pm:240
 #, c-format
 msgid "Japan"
 msgstr "Jepang"
 
-#: lang.pm:331
+#: lang.pm:412
 #, c-format
 msgid "Kenya"
 msgstr "Kenya"
 
-#: lang.pm:332
+#: lang.pm:413
 #, c-format
 msgid "Kyrgyzstan"
 msgstr "Kirgiztan"
 
-#: lang.pm:333
+#: lang.pm:414
 #, c-format
 msgid "Cambodia"
 msgstr "Kamboja"
 
-#: lang.pm:334
+#: lang.pm:415
 #, c-format
 msgid "Kiribati"
 msgstr "Kiribati"
 
-#: lang.pm:335
+#: lang.pm:416
 #, c-format
 msgid "Comoros"
 msgstr "Comoros"
 
-#: lang.pm:336
+#: lang.pm:417
 #, c-format
 msgid "Saint Kitts and Nevis"
 msgstr "Santa Kitts dan Nevis"
 
-#: lang.pm:337
+#: lang.pm:418
 #, c-format
 msgid "Korea (North)"
 msgstr "Korea (Utara)"
 
-#: lang.pm:338 timezone.pm:228
+#: lang.pm:419 timezone.pm:241
 #, c-format
 msgid "Korea"
 msgstr "Korea"
 
-#: lang.pm:339
+#: lang.pm:420
 #, c-format
 msgid "Kuwait"
 msgstr "Kuwait"
 
-#: lang.pm:340
+#: lang.pm:421
 #, c-format
 msgid "Cayman Islands"
 msgstr "Pulau Cayman"
 
-#: lang.pm:341
+#: lang.pm:422
 #, c-format
 msgid "Kazakhstan"
 msgstr "Kazakhstan"
 
-#: lang.pm:342
+#: lang.pm:423
 #, c-format
 msgid "Laos"
 msgstr "Laos"
 
-#: lang.pm:343
+#: lang.pm:424
 #, c-format
 msgid "Lebanon"
 msgstr "Libanon"
 
-#: lang.pm:344
+#: lang.pm:425
 #, c-format
 msgid "Saint Lucia"
 msgstr "Santa Lucia"
 
-#: lang.pm:345
+#: lang.pm:426
 #, c-format
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
-#: lang.pm:346
+#: lang.pm:427
 #, c-format
 msgid "Sri Lanka"
 msgstr "Sri Lanka"
 
-#: lang.pm:347
+#: lang.pm:428
 #, c-format
 msgid "Liberia"
 msgstr "Liberia"
 
-#: lang.pm:348
+#: lang.pm:429
 #, c-format
 msgid "Lesotho"
 msgstr "Lesotho"
 
-#: lang.pm:349 timezone.pm:252
+#: lang.pm:430 timezone.pm:265
 #, c-format
 msgid "Lithuania"
 msgstr "Lithuania"
 
-#: lang.pm:350 timezone.pm:253
+#: lang.pm:431 timezone.pm:266
 #, c-format
 msgid "Luxembourg"
 msgstr "Luxemburg"
 
-#: lang.pm:351
+#: lang.pm:432
 #, c-format
 msgid "Latvia"
 msgstr "Latvia"
 
-#: lang.pm:352
+#: lang.pm:433
 #, c-format
 msgid "Libya"
 msgstr "Libya"
 
-#: lang.pm:353
+#: lang.pm:434
 #, c-format
 msgid "Morocco"
 msgstr "Maroko"
 
-#: lang.pm:354
+#: lang.pm:435
 #, c-format
 msgid "Monaco"
 msgstr "Monako"
 
-#: lang.pm:355
+#: lang.pm:436
 #, c-format
 msgid "Moldova"
 msgstr "Moldova"
 
-#: lang.pm:356
+#: lang.pm:437
 #, c-format
 msgid "Madagascar"
 msgstr "Madagaskar"
 
-#: lang.pm:357
+#: lang.pm:438
 #, c-format
 msgid "Marshall Islands"
 msgstr "Kepulauan Marshall"
 
-#: lang.pm:358
+#: lang.pm:439
 #, c-format
 msgid "Macedonia"
 msgstr "Macedonia"
 
-#: lang.pm:359
+#: lang.pm:440
 #, c-format
 msgid "Mali"
 msgstr "Mali"
 
-#: lang.pm:360
+#: lang.pm:441
 #, c-format
 msgid "Myanmar"
 msgstr "Myanmar"
 
-#: lang.pm:361
+#: lang.pm:442
 #, c-format
 msgid "Mongolia"
 msgstr "Mongolia"
 
-#: lang.pm:362
+#: lang.pm:443
 #, c-format
 msgid "Northern Mariana Islands"
 msgstr "Kepulauan Mariana Utara"
 
-#: lang.pm:363
+#: lang.pm:444
 #, c-format
 msgid "Martinique"
 msgstr "Martinique"
 
-#: lang.pm:364
+#: lang.pm:445
 #, c-format
 msgid "Mauritania"
 msgstr "Mauritania"
 
-#: lang.pm:365
+#: lang.pm:446
 #, c-format
 msgid "Montserrat"
 msgstr "Montserrat"
 
-#: lang.pm:366
+#: lang.pm:447
 #, c-format
 msgid "Malta"
 msgstr "Malta"
 
-#: lang.pm:367
+#: lang.pm:448
 #, c-format
 msgid "Mauritius"
 msgstr "Mauritius"
 
-#: lang.pm:368
+#: lang.pm:449
 #, c-format
 msgid "Maldives"
 msgstr "Maladewa"
 
-#: lang.pm:369
+#: lang.pm:450
 #, c-format
 msgid "Malawi"
 msgstr "Malawi"
 
-#: lang.pm:370 timezone.pm:272
+#: lang.pm:451 timezone.pm:285
 #, c-format
 msgid "Mexico"
 msgstr "Meksiko"
 
-#: lang.pm:371 timezone.pm:229
+#: lang.pm:452 timezone.pm:242
 #, c-format
 msgid "Malaysia"
 msgstr "Malaysia"
 
-#: lang.pm:372
+#: lang.pm:453
 #, c-format
 msgid "Mozambique"
 msgstr "Mozambique"
 
-#: lang.pm:373
+#: lang.pm:454
 #, c-format
 msgid "Namibia"
 msgstr "Namibia"
 
-#: lang.pm:374
+#: lang.pm:455
 #, c-format
 msgid "New Caledonia"
 msgstr "Caledonia Baru"
 
-#: lang.pm:375
+#: lang.pm:456
 #, c-format
 msgid "Niger"
 msgstr "Niger"
 
-#: lang.pm:376
+#: lang.pm:457
 #, c-format
 msgid "Norfolk Island"
 msgstr "Kepulauan Norfolk"
 
-#: lang.pm:377
+#: lang.pm:458
 #, c-format
 msgid "Nigeria"
 msgstr "Nigeria"
 
-#: lang.pm:378
+#: lang.pm:459
 #, c-format
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
-#: lang.pm:379 mirror.pm:29 timezone.pm:254
+#: lang.pm:460 mirror.pm:39 timezone.pm:267
 #, c-format
 msgid "Netherlands"
 msgstr "Belanda"
 
-#: lang.pm:380 mirror.pm:31 timezone.pm:255
+#: lang.pm:461 mirror.pm:41 timezone.pm:268
 #, c-format
 msgid "Norway"
 msgstr "Norwegia"
 
-#: lang.pm:381
+#: lang.pm:462
 #, c-format
 msgid "Nepal"
 msgstr "Nepal"
 
-#: lang.pm:382
+#: lang.pm:463
 #, c-format
 msgid "Nauru"
 msgstr "Nauru"
 
-#: lang.pm:383
+#: lang.pm:464
 #, c-format
 msgid "Niue"
 msgstr "Niue"
 
-#: lang.pm:384 mirror.pm:30 timezone.pm:277
+#: lang.pm:465 mirror.pm:40 timezone.pm:290
 #, c-format
 msgid "New Zealand"
 msgstr "New Zealand"
 
-#: lang.pm:385
+#: lang.pm:466
 #, c-format
 msgid "Oman"
 msgstr "Oman"
 
-#: lang.pm:386
+#: lang.pm:467
 #, c-format
 msgid "Panama"
 msgstr "Panama"
 
-#: lang.pm:387
+#: lang.pm:468
 #, c-format
 msgid "Peru"
 msgstr "Peru"
 
-#: lang.pm:388
+#: lang.pm:469
 #, c-format
 msgid "French Polynesia"
 msgstr "Polinesia Perancis"
 
-#: lang.pm:389
+#: lang.pm:470
 #, c-format
 msgid "Papua New Guinea"
 msgstr "Papua New Guinea"
 
-#: lang.pm:390 timezone.pm:230
+#: lang.pm:471 timezone.pm:243
 #, c-format
 msgid "Philippines"
 msgstr "Filipina"
 
-#: lang.pm:391
+#: lang.pm:472
 #, c-format
 msgid "Pakistan"
 msgstr "Pakistan"
 
-#: lang.pm:392 mirror.pm:32 timezone.pm:256
+#: lang.pm:473 mirror.pm:42 timezone.pm:269
 #, c-format
 msgid "Poland"
 msgstr "Polandia"
 
-#: lang.pm:393
+#: lang.pm:474
 #, c-format
 msgid "Saint Pierre and Miquelon"
 msgstr "Santa Pierre dan Miquelon"
 
-#: lang.pm:394
+#: lang.pm:475
 #, c-format
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
-#: lang.pm:395
+#: lang.pm:476
 #, c-format
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
-#: lang.pm:396
+#: lang.pm:477
 #, c-format
 msgid "Palestine"
 msgstr "Palestina"
 
-#: lang.pm:397 mirror.pm:33 timezone.pm:257
+#: lang.pm:478 mirror.pm:43 timezone.pm:270
 #, c-format
 msgid "Portugal"
 msgstr "Portugis"
 
-#: lang.pm:398
+#: lang.pm:479
 #, c-format
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: lang.pm:399
+#: lang.pm:480
 #, c-format
 msgid "Palau"
 msgstr "Palau"
 
-#: lang.pm:400
+#: lang.pm:481
 #, c-format
 msgid "Qatar"
 msgstr "Qatar"
 
-#: lang.pm:401
+#: lang.pm:482
 #, c-format
 msgid "Reunion"
 msgstr "Reunion"
 
-#: lang.pm:402 timezone.pm:258
+#: lang.pm:483 timezone.pm:271
 #, c-format
 msgid "Romania"
 msgstr "Romania"
 
-#: lang.pm:403 mirror.pm:34
+#: lang.pm:484 mirror.pm:44
 #, c-format
 msgid "Russia"
 msgstr "Rusia"
 
-#: lang.pm:404
+#: lang.pm:485
 #, c-format
 msgid "Rwanda"
 msgstr "Rwanda"
 
-#: lang.pm:405
+#: lang.pm:486
 #, c-format
 msgid "Saudi Arabia"
 msgstr "Arab Saudi"
 
-#: lang.pm:406
+#: lang.pm:487
 #, c-format
 msgid "Solomon Islands"
 msgstr "Pulau Sulaiman"
 
-#: lang.pm:407
+#: lang.pm:488
 #, c-format
 msgid "Seychelles"
 msgstr "Seychelles"
 
-#: lang.pm:408
+#: lang.pm:489
 #, c-format
 msgid "Sudan"
 msgstr "Sudan"
 
-#: lang.pm:409 mirror.pm:38 timezone.pm:263
+#: lang.pm:490 mirror.pm:48 timezone.pm:276
 #, c-format
 msgid "Sweden"
 msgstr "Swedia"
 
-#: lang.pm:410 timezone.pm:231
+#: lang.pm:491 timezone.pm:244
 #, c-format
 msgid "Singapore"
 msgstr "Singapura"
 
-#: lang.pm:411
+#: lang.pm:492
 #, c-format
 msgid "Saint Helena"
 msgstr "Santa Helena"
 
-#: lang.pm:412 timezone.pm:261
+#: lang.pm:493 timezone.pm:274
 #, c-format
 msgid "Slovenia"
 msgstr "Slovenia"
 
-#: lang.pm:413
+#: lang.pm:494
 #, c-format
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Kepulauan Svalbard dan Jan Mayen"
 
-#: lang.pm:414 mirror.pm:35 timezone.pm:260
+#: lang.pm:495 mirror.pm:45 timezone.pm:273
 #, c-format
 msgid "Slovakia"
 msgstr "Slovakia"
 
-#: lang.pm:415
+#: lang.pm:496
 #, c-format
 msgid "Sierra Leone"
 msgstr "Sierra Leone"
 
-#: lang.pm:416
+#: lang.pm:497
 #, c-format
 msgid "San Marino"
 msgstr "San Marino"
 
-#: lang.pm:417
+#: lang.pm:498
 #, c-format
 msgid "Senegal"
 msgstr "Senegal"
 
-#: lang.pm:418
+#: lang.pm:499
 #, c-format
 msgid "Somalia"
 msgstr "Somalia"
 
-#: lang.pm:419
+#: lang.pm:500
 #, c-format
 msgid "Suriname"
 msgstr "Suriname"
 
-#: lang.pm:420
+#: lang.pm:501
 #, c-format
 msgid "Sao Tome and Principe"
 msgstr "Sao Tome dan Principe"
 
-#: lang.pm:421
+#: lang.pm:502
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
 
-#: lang.pm:422
+#: lang.pm:503
 #, c-format
 msgid "Syria"
 msgstr "Syria"
 
-#: lang.pm:423
+#: lang.pm:504
 #, c-format
 msgid "Swaziland"
 msgstr "Swaziland"
 
-#: lang.pm:424
+#: lang.pm:505
 #, c-format
 msgid "Turks and Caicos Islands"
 msgstr "Kepulauan Turks dan Caicos"
 
-#: lang.pm:425
+#: lang.pm:506
 #, c-format
 msgid "Chad"
 msgstr "Chad"
 
-#: lang.pm:426
+#: lang.pm:507
 #, c-format
 msgid "French Southern Territories"
 msgstr "Perancis, Teritori Selatan"
 
-#: lang.pm:427
+#: lang.pm:508
 #, c-format
 msgid "Togo"
 msgstr "Togo"
 
-#: lang.pm:428 mirror.pm:41 timezone.pm:233
+#: lang.pm:509 mirror.pm:51 timezone.pm:246
 #, c-format
 msgid "Thailand"
 msgstr "Thailand"
 
-#: lang.pm:429
+#: lang.pm:510
 #, c-format
 msgid "Tajikistan"
 msgstr "Tajikistan"
 
-#: lang.pm:430
+#: lang.pm:511
 #, c-format
 msgid "Tokelau"
 msgstr "Tokelau"
 
-#: lang.pm:431
+#: lang.pm:512
 #, c-format
 msgid "East Timor"
 msgstr "Timor Timur"
 
-#: lang.pm:432
+#: lang.pm:513
 #, c-format
 msgid "Turkmenistan"
 msgstr "Turkmenistan"
 
-#: lang.pm:433
+#: lang.pm:514
 #, c-format
 msgid "Tunisia"
 msgstr "Tunisia"
 
-#: lang.pm:434
+#: lang.pm:515
 #, c-format
 msgid "Tonga"
 msgstr "Tonga"
 
-#: lang.pm:435 timezone.pm:234
+#: lang.pm:516 timezone.pm:247
 #, c-format
 msgid "Turkey"
 msgstr "Turki"
 
-#: lang.pm:436
+#: lang.pm:517
 #, c-format
 msgid "Trinidad and Tobago"
 msgstr "Trinidad dan Tobago"
 
-#: lang.pm:437
+#: lang.pm:518
 #, c-format
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: lang.pm:438 mirror.pm:40 timezone.pm:232
+#: lang.pm:519 mirror.pm:50 timezone.pm:245
 #, c-format
 msgid "Taiwan"
 msgstr "Taiwan"
 
-#: lang.pm:439 timezone.pm:217
+#: lang.pm:520 timezone.pm:230
 #, c-format
 msgid "Tanzania"
 msgstr "Tanzania"
 
-#: lang.pm:440 timezone.pm:265
+#: lang.pm:521 timezone.pm:278
 #, c-format
 msgid "Ukraine"
 msgstr "Ukraina"
 
-#: lang.pm:441
+#: lang.pm:522
 #, c-format
 msgid "Uganda"
 msgstr "Uganda"
 
-#: lang.pm:442
+#: lang.pm:523
 #, c-format
 msgid "United States Minor Outlying Islands"
 msgstr "Amerika Serikat, kepulauan Luar Minor"
 
-#: lang.pm:443 mirror.pm:42 timezone.pm:273
+#: lang.pm:524 mirror.pm:52 timezone.pm:286
 #, c-format
 msgid "United States"
 msgstr "Amerika Serikat"
 
-#: lang.pm:444
+#: lang.pm:525
 #, c-format
 msgid "Uruguay"
 msgstr "Uruguay"
 
-#: lang.pm:445
+#: lang.pm:526
 #, c-format
 msgid "Uzbekistan"
 msgstr "Uzbekistan"
 
-#: lang.pm:446
+#: lang.pm:527
 #, c-format
 msgid "Vatican"
 msgstr "Vatikan"
 
-#: lang.pm:447
+#: lang.pm:528
 #, c-format
 msgid "Saint Vincent and the Grenadines"
 msgstr "Santa Vincent dan Grenadin"
 
-#: lang.pm:448
+#: lang.pm:529
 #, c-format
 msgid "Venezuela"
 msgstr "Venezuela"
 
-#: lang.pm:449
+#: lang.pm:530
 #, c-format
 msgid "Virgin Islands (British)"
 msgstr "Kepulauan Virgin (Inggris)"
 
-#: lang.pm:450
+#: lang.pm:531
 #, c-format
 msgid "Virgin Islands (U.S.)"
 msgstr "Virgin Islands (Amerika)"
 
-#: lang.pm:451
+#: lang.pm:532
 #, c-format
 msgid "Vietnam"
 msgstr "Vietnam"
 
-#: lang.pm:452
+#: lang.pm:533
 #, c-format
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#: lang.pm:453
+#: lang.pm:534
 #, c-format
 msgid "Wallis and Futuna"
 msgstr "Wallis dan Futuna"
 
-#: lang.pm:454
+#: lang.pm:535
 #, c-format
 msgid "Samoa"
 msgstr "Samoa"
 
-#: lang.pm:455
+#: lang.pm:536
 #, c-format
 msgid "Yemen"
 msgstr "Yaman"
 
-#: lang.pm:456
+#: lang.pm:537
 #, c-format
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: lang.pm:457 mirror.pm:36 timezone.pm:216
+#: lang.pm:538 mirror.pm:46 timezone.pm:229
 #, c-format
 msgid "South Africa"
 msgstr "Afrika Selatan"
 
-#: lang.pm:458
+#: lang.pm:539
 #, c-format
 msgid "Zambia"
 msgstr "Zambia"
 
-#: lang.pm:459
+#: lang.pm:540
 #, c-format
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#: lang.pm:1227
+#: lang.pm:1548
 #, c-format
 msgid "Welcome to %s"
 msgstr "Selamat Datang di %s"
 
-#: lvm.pm:92
+#: lvm.pm:108
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
 msgstr "Pemindahan perluasan fisik yang dipakai pada volume fisik lain gagal"
 
-#: lvm.pm:152
+#: lvm.pm:168
 #, c-format
 msgid "Physical volume %s is still in use"
 msgstr "Volume fisik %s sedang digunakan"
 
-#: lvm.pm:162
+#: lvm.pm:178
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "Hapus volume logical dahulu\n"
 
-#: lvm.pm:205
+#: lvm.pm:221
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr "Bootloader tidak bisa menangani /boot pada beberapa volume fisik"
@@ -5388,37 +5316,32 @@ msgstr ""
 "Pemuatan modul %s gagal.\n"
 "Apakah Anda mau mencoba dengan parameter yang lain?"
 
-#: mygtk2.pm:1229 mygtk3.pm:1255
+#: mygtk2.pm:1229 mygtk3.pm:1282
 #, c-format
 msgid "Are you sure you want to quit?"
 msgstr "Apakah Anda yakin ingin keluar?"
 
-#: mygtk2.pm:1570 mygtk2.pm:1571 mygtk3.pm:1606 mygtk3.pm:1607
+#: mygtk2.pm:1571 mygtk2.pm:1572 mygtk3.pm:1650 mygtk3.pm:1651
 #, c-format
 msgid "Password is trivial to guess"
 msgstr "Sandi mudah ditebak"
 
-#: mygtk2.pm:1572 mygtk3.pm:1608
+#: mygtk2.pm:1573 mygtk3.pm:1652
 #, c-format
 msgid "Password should be resistant to basic attacks"
 msgstr "Sandi harus tahan terhadap serangan dasar"
 
-#: mygtk2.pm:1573 mygtk2.pm:1574 mygtk3.pm:1609 mygtk3.pm:1610
+#: mygtk2.pm:1574 mygtk2.pm:1575 mygtk3.pm:1653 mygtk3.pm:1654
 #, c-format
 msgid "Password seems secure"
 msgstr "Sandi sepertinya aman"
 
-#: partition_table.pm:428
+#: partition_table.pm:415
 #, c-format
 msgid "mount failed: "
 msgstr "proses mount gagal: "
 
-#: partition_table.pm:540
-#, c-format
-msgid "Extended partition not supported on this platform"
-msgstr "Partisi extended tidak didukung pada platform ini"
-
-#: partition_table.pm:558
+#: partition_table.pm:541
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -5429,7 +5352,7 @@ msgstr ""
 "Solusi satu-satunya adalah memindahkan partisi primary Anda ke partisi\n"
 "extended selanjutnya"
 
-#: partition_table/raw.pm:296
+#: partition_table/raw.pm:292
 #, c-format
 msgid ""
 "Something bad is happening on your hard disk drive. \n"
@@ -5442,32 +5365,32 @@ msgstr ""
 "Artinya penulisan data apapun pada disk akan berakhir dengan data acak yang "
 "rusak."
 
-#: pkgs.pm:254
+#: pkgs.pm:260
 #, c-format
 msgid "Gathering system information..."
 msgstr ""
 
-#: pkgs.pm:263
+#: pkgs.pm:269
 #, c-format
 msgid "Preparing for installation..."
 msgstr ""
 
-#: pkgs.pm:273 pkgs.pm:276 pkgs.pm:289
+#: pkgs.pm:279 pkgs.pm:282 pkgs.pm:295
 #, c-format
 msgid "Unused packages removal"
 msgstr "Menghapus paket tak terpakai"
 
-#: pkgs.pm:273
+#: pkgs.pm:279
 #, c-format
 msgid "Finding unused hardware packages..."
 msgstr "Menemukan paket hardware tak terpakai..."
 
-#: pkgs.pm:276
+#: pkgs.pm:282
 #, c-format
 msgid "Finding unused localization packages..."
 msgstr "Menemukan paket lokalisasi tak terpakai..."
 
-#: pkgs.pm:290
+#: pkgs.pm:296
 #, c-format
 msgid ""
 "We have detected that some packages are not needed for your system "
@@ -5476,62 +5399,62 @@ msgstr ""
 "Terdeteksi beberapa paket yang tidak diperlukan untuk konfigurasi sistem "
 "Anda."
 
-#: pkgs.pm:291
+#: pkgs.pm:297
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
 msgstr "Paket berikut akan dihapus, kecuali Anda memilih sebaliknya:"
 
-#: pkgs.pm:294 pkgs.pm:295
+#: pkgs.pm:300 pkgs.pm:301
 #, c-format
 msgid "Unused hardware support"
 msgstr "Dukungan hardware tak terpakai"
 
-#: pkgs.pm:298 pkgs.pm:299
+#: pkgs.pm:304 pkgs.pm:305
 #, c-format
 msgid "Unused localization"
 msgstr "Lokalisasi tak terpakai"
 
-#: raid.pm:43
+#: raid.pm:53
 #, c-format
 msgid "Cannot add a partition to _formatted_ RAID %s"
 msgstr "Tidak dapat menambah partisi pada RAID %s yang _terformat_"
 
-#: raid.pm:166
+#: raid.pm:176
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "Tidak cukup partisi untuk RAID level %d\n"
 
-#: scanner.pm:96
+#: scanner.pm:95
 #, c-format
 msgid "Could not create directory /usr/share/sane/firmware!"
 msgstr "Tidak bisa membuat direktori /usr/share/sane/firmware!"
 
-#: scanner.pm:107
+#: scanner.pm:106
 #, c-format
 msgid "Could not create link /usr/share/sane/%s!"
 msgstr "Tidak bisa membuat link /usr/share/sane/%s!"
 
-#: scanner.pm:114
+#: scanner.pm:113
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
 msgstr "Tidak bisa menyalin file firmware %s ke /usr/share/sane/firmware!"
 
-#: scanner.pm:121
+#: scanner.pm:120
 #, c-format
 msgid "Could not set permissions of firmware file %s!"
 msgstr "Tidak bisa menentukan hak akses file firmware %s!"
 
-#: scanner.pm:200
+#: scanner.pm:199
 #, c-format
 msgid "Scannerdrake"
 msgstr "Scannerdrake"
 
-#: scanner.pm:201
+#: scanner.pm:200
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Tidak bisa menginstall paket yang diperlukan untuk berbagi scanner."
 
-#: scanner.pm:202
+#: scanner.pm:201
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
 msgstr "Scanner Anda tidak akan tersedia untuk pengguna selain root."
@@ -6731,6 +6654,11 @@ msgstr "Firewall penyaringan paket"
 
 #: services.pm:114
 #, c-format
+msgid "Packet filtering firewall for IPv6"
+msgstr "Penyaringan paket firewall untuk IPv6"
+
+#: services.pm:115
+#, c-format
 msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
@@ -6738,17 +6666,17 @@ msgstr ""
 "Protokol SMB/CIFS mengijinkan share akses pada file & printer dan juga "
 "terintegrasi dengan domain Windows Server"
 
-#: services.pm:115
+#: services.pm:116
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Jalankan sistem suara pada komputer Anda"
 
-#: services.pm:116
+#: services.pm:117
 #, c-format
 msgid "layer for speech analysis"
 msgstr "layer untuk analisis ucapan"
 
-#: services.pm:117
+#: services.pm:118
 #, c-format
 msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
@@ -6757,7 +6685,7 @@ msgstr ""
 "Secure Shell adalah protokol jaringan yang mengijinkan data untuk "
 "dipertukarkan pada jalur aman diantara dua komputer"
 
-#: services.pm:118
+#: services.pm:119
 #, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages\n"
@@ -6766,94 +6694,94 @@ msgstr ""
 "Syslog adalah fasilitas yang digunakan para daemon untuk mencatat\n"
 "pesan log sistem pada file. Sebaiknya syslog selalu hidup."
 
-#: services.pm:120
+#: services.pm:121
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
 msgstr "Memindahkan aturan udev tangguh yang dihasilkan ke /etc/udev/rules.d"
 
-#: services.pm:121
+#: services.pm:122
 #, c-format
 msgid "Load the drivers for your usb devices."
 msgstr "Muat driver untuk perangkat USB Anda"
 
-#: services.pm:122
+#: services.pm:123
 #, c-format
 msgid "A lightweight network traffic monitor"
 msgstr "Monitor lalu lintas jaringan yang ringan"
 
-#: services.pm:123
+#: services.pm:124
 #, c-format
 msgid "Starts the X Font Server."
 msgstr "Menjalankan Server X Font."
 
-#: services.pm:124
+#: services.pm:125
 #, c-format
 msgid "Starts other deamons on demand."
 msgstr "Menjalankan daemon lain sesuai kebutuhan."
 
-#: services.pm:153
+#: services.pm:154
 #, c-format
 msgid "Printing"
 msgstr "Pencetakan"
 
-#: services.pm:156
+#: services.pm:157
 #, c-format
 msgid "Internet"
 msgstr "Internet"
 
-#: services.pm:161
+#: services.pm:162
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Jaringan"
 
-#: services.pm:163
+#: services.pm:164
 #, c-format
 msgid "System"
 msgstr "Sistem"
 
-#: services.pm:169
+#: services.pm:170
 #, c-format
 msgid "Remote Administration"
 msgstr "Administrasi remote"
 
-#: services.pm:178
+#: services.pm:179
 #, c-format
 msgid "Database Server"
 msgstr "Server Basis Data"
 
-#: services.pm:189 services.pm:226
+#: services.pm:190 services.pm:227
 #, c-format
 msgid "Services"
 msgstr "Layanan"
 
-#: services.pm:189
+#: services.pm:190
 #, c-format
 msgid "Choose which services should be automatically started at boot time"
 msgstr "Pilih layanan yang akan dijalankan secara otomatis saat boot"
 
-#: services.pm:207
+#: services.pm:208
 #, c-format
 msgid "%d activated for %d registered"
 msgstr "%d diaktifkan untuk %d tercatat"
 
-#: services.pm:230
+#: services.pm:231
 #, c-format
 msgid "running"
 msgstr "berjalan"
 
-#: services.pm:230
+#: services.pm:231
 #, c-format
 msgid "stopped"
 msgstr "berhenti"
 
-#: services.pm:235
+#: services.pm:236
 #, c-format
 msgid "Services and daemons"
 msgstr "Layanan dan daemon"
 
-#: services.pm:241
+#: services.pm:242
 #, c-format
 msgid ""
 "No additional information\n"
@@ -6862,27 +6790,27 @@ msgstr ""
 "Tidak ada informasi tambahan\n"
 "tentang layanan ini, maaf."
 
-#: services.pm:248
+#: services.pm:249
 #, c-format
 msgid "Start when requested"
 msgstr "Jalankan bila diminta"
 
-#: services.pm:248
+#: services.pm:249
 #, c-format
 msgid "On boot"
 msgstr "Saat boot"
 
-#: services.pm:265
+#: services.pm:266
 #, c-format
 msgid "Start"
 msgstr "Mulai"
 
-#: services.pm:265
+#: services.pm:266
 #, c-format
 msgid "Stop"
 msgstr "Stop"
 
-#: standalone.pm:26
+#: standalone.pm:27
 #, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify\n"
@@ -6913,7 +6841,7 @@ msgstr ""
 "program ini; jika tidak, tulis ke Free Software Foundation, Inc., \n"
 "51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n"
 
-#: standalone.pm:45
+#: standalone.pm:46
 #, c-format
 msgid ""
 "[--config-info] [--daemon] [--debug] [--default] [--show-conf]\n"
@@ -6940,7 +6868,7 @@ msgstr ""
 "--help                : tampilkan pesan ini.\n"
 "--version             : tampilkan nomor versi.\n"
 
-#: standalone.pm:57
+#: standalone.pm:58
 #, c-format
 msgid ""
 "[--boot]\n"
@@ -6953,7 +6881,7 @@ msgstr ""
 "  --boot            - mampu mengkonfigurasi boot loader\n"
 "mode default: menawarkan untuk mengkonfigurasi fitur autologin"
 
-#: standalone.pm:61
+#: standalone.pm:62
 #, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
@@ -6970,7 +6898,7 @@ msgstr ""
 "  --report          - program harus salah satu dari peralatan %s\n"
 "  --incident        - program harus salah satu dari peralatan %s"
 
-#: standalone.pm:67
+#: standalone.pm:68
 #, c-format
 msgid ""
 "[--add]\n"
@@ -6987,7 +6915,7 @@ msgstr ""
 "  --internet        - mengkonfigurasi internet\n"
 "  --wizard          - seperti --add"
 
-#: standalone.pm:73
+#: standalone.pm:74
 #, c-format
 msgid ""
 "\n"
@@ -7018,7 +6946,7 @@ msgstr ""
 "                 : nama_aplikasi misalnya so untuk staroffice \n"
 "                 : dan gs untuk ghostscript."
 
-#: standalone.pm:88
+#: standalone.pm:89
 #, c-format
 msgid ""
 "[OPTIONS]...\n"
@@ -7050,17 +6978,17 @@ msgstr ""
 "--delclient      : hapus komputer klien dari MTS (memerlukan alamat MAC, IP, "
 "nama image nbi)"
 
-#: standalone.pm:100
+#: standalone.pm:101
 #, c-format
 msgid "[keyboard]"
 msgstr "[keyboard]"
 
-#: standalone.pm:101
+#: standalone.pm:102
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 msgstr "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 
-#: standalone.pm:102
+#: standalone.pm:103
 #, c-format
 msgid ""
 "[OPTIONS]\n"
@@ -7083,7 +7011,7 @@ msgstr ""
 "--status : kembalikan 1 jika tersambung 0 jika tidak, lalu keluar.\n"
 "--quiet : tidak interaktif. Digunakan dengan (dis)connect."
 
-#: standalone.pm:112
+#: standalone.pm:113
 #, c-format
 msgid ""
 "[OPTION]...\n"
@@ -7103,7 +7031,7 @@ msgstr ""
 "  --merge-all-rpmnew     usulkan untuk menggabung semua file .rpmnew/."
 "rpmsave yang ditemukan"
 
-#: standalone.pm:117
+#: standalone.pm:118
 #, c-format
 msgid ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
@@ -7112,7 +7040,7 @@ msgstr ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
 "usbtable] [--dynamic=dev]"
 
-#: standalone.pm:118
+#: standalone.pm:119
 #, c-format
 msgid ""
 " [everything]\n"
@@ -7123,7 +7051,7 @@ msgstr ""
 "       XFdrake [--noauto] awasi\n"
 "       resolusi XFdrake"
 
-#: standalone.pm:155
+#: standalone.pm:156
 #, c-format
 msgid ""
 "\n"
@@ -7134,77 +7062,77 @@ msgstr ""
 "Penggunaan: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
 "testing] [-v|--version] "
 
-#: timezone.pm:168 timezone.pm:169
+#: timezone.pm:181 timezone.pm:182
 #, c-format
 msgid "All servers"
 msgstr "Semua server"
 
-#: timezone.pm:205
+#: timezone.pm:218
 #, c-format
 msgid "Global"
 msgstr "Global"
 
-#: timezone.pm:208
+#: timezone.pm:221
 #, c-format
 msgid "Africa"
 msgstr "Afrika"
 
-#: timezone.pm:209
+#: timezone.pm:222
 #, c-format
 msgid "Asia"
 msgstr "Asia"
 
-#: timezone.pm:210
+#: timezone.pm:223
 #, c-format
 msgid "Europe"
 msgstr "Eropa"
 
-#: timezone.pm:211
+#: timezone.pm:224
 #, c-format
 msgid "North America"
 msgstr "Amerika Utara"
 
-#: timezone.pm:212
+#: timezone.pm:225
 #, c-format
 msgid "Oceania"
 msgstr "Oseania"
 
-#: timezone.pm:213
+#: timezone.pm:226
 #, c-format
 msgid "South America"
 msgstr "Amerika Selatan"
 
-#: timezone.pm:222
+#: timezone.pm:235
 #, c-format
 msgid "Hong Kong"
 msgstr "Hongkong"
 
-#: timezone.pm:259
+#: timezone.pm:272
 #, c-format
 msgid "Russian Federation"
 msgstr "Federasi Rusia"
 
-#: timezone.pm:267
+#: timezone.pm:280
 #, c-format
 msgid "Yugoslavia"
 msgstr "Yugoslavia"
 
-#: ugtk2.pm:812 ugtk3.pm:793
+#: ugtk2.pm:812 ugtk3.pm:910
 #, c-format
 msgid "Is this correct?"
 msgstr "Apakah sudah benar?"
 
-#: ugtk2.pm:874 ugtk3.pm:855
+#: ugtk2.pm:874 ugtk3.pm:972
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "Anda telah memilih file, bukan direktori"
 
-#: ugtk2.pm:924 ugtk3.pm:905
+#: ugtk2.pm:924 ugtk3.pm:1022
 #, c-format
 msgid "Info"
 msgstr "Informasi"
 
-#: wizards.pm:96
+#: wizards.pm:95
 #, c-format
 msgid ""
 "%s is not installed\n"
@@ -7213,10 +7141,50 @@ msgstr ""
 "%s tidak terinstall\n"
 "Klik \"Berikutnya\" untuk menginstall atau \"Batal\" untuk keluar"
 
-#: wizards.pm:100
+#: wizards.pm:99
 #, c-format
 msgid "Installation failed"
 msgstr "Installasi gagal"
+
+#~ msgid ""
+#~ "After rebooting and logging into Moondrake, you will see the "
+#~ "MoondrakeWelcome screen.\n"
+#~ "It is full of very useful information and links."
+#~ msgstr ""
+#~ "Setelah menjalankan ulang dan masuk ke Moondrake, Anda akan melihat layar "
+#~ "MoondrakeWelcome.\n"
+#~ "Dia penuh dengan informasi dan tautan yang sangat berguna."
+
+#~ msgid ""
+#~ "LILO wants to assign a new Volume ID to drive %s.  However, changing\n"
+#~ "the Volume ID of a Windows NT, 2000, or XP boot disk is a fatal Windows "
+#~ "error.\n"
+#~ "This caution does not apply to Windows 95 or 98, or to NT data disks.\n"
+#~ "\n"
+#~ "Assign a new Volume ID?"
+#~ msgstr ""
+#~ "LILO akan memberi Volume ID baru pada drive %s.  Tetapi, mengubah Volume\n"
+#~ "ID disk boot Windows NT, 2000, atau XP adalah error Windows yang fatal.\n"
+#~ "Peringatan ini tidak berlaku untuk disk data Windows 95 atau 98, atau "
+#~ "NT.\n"
+#~ "\n"
+#~ "Beri Volume ID baru?"
+
+#~ msgid ""
+#~ "You decided to install the bootloader on a partition.\n"
+#~ "This implies you already have a bootloader on the hard disk drive you "
+#~ "boot (eg: System Commander).\n"
+#~ "\n"
+#~ "On which drive are you booting?"
+#~ msgstr ""
+#~ "Anda memutuskan untuk menginstall bootloader pada partisi.\n"
+#~ "Ini artinya Anda sudah memiliki bootloader pada drive hard disk yang akan "
+#~ "diboot (misal: System Commander).\n"
+#~ "\n"
+#~ "Pada drive mana Anda booting?"
+
+#~ msgid "You must have a FAT partition mounted in /boot/efi"
+#~ msgstr "Anda harus memiliki partisi FAT termount di /boot/efi"
 
 #~ msgid ""
 #~ "\n"
@@ -7500,6 +7468,9 @@ msgstr "Installasi gagal"
 #~ "Selamat, instalasi selesai.\n"
 #~ "Keluarkan media boot dan tekan Enter untuk reboot."
 
+#~ msgid "Default OS?"
+#~ msgstr "OS Standar?"
+
 #~ msgid ""
 #~ "Do not update directory inode access times on this filesystem\n"
 #~ "(e.g, for faster access on the news spool to speed up news servers)."
@@ -7507,6 +7478,12 @@ msgstr "Installasi gagal"
 #~ "Jangan update waktu akses inode direktori pada sistem file ini\n"
 #~ "(mis: untuk akses lebih cepat di spool berita untuk mempercepat server "
 #~ "berita)."
+
+#~ msgid "Enable CD Boot?"
+#~ msgstr "Aktifkan boot dari CD?"
+
+#~ msgid "Enable OF Boot?"
+#~ msgstr "Aktifkan boot dari OF?"
 
 #~ msgid "Enable/Disable IP spoofing protection."
 #~ msgstr "Aktifkan/Matikan proteksi pemalsuan IP."
@@ -7534,6 +7511,9 @@ msgstr "Installasi gagal"
 
 #~ msgid "Ext2"
 #~ msgstr "Ext2"
+
+#~ msgid "Extended partition not supported on this platform"
+#~ msgstr "Partisi extended tidak didukung pada platform ini"
 
 #~ msgid "File sharing"
 #~ msgstr "Berbagi file"
@@ -7577,6 +7557,9 @@ msgstr "Installasi gagal"
 
 #~ msgid "Give the ram size in MB"
 #~ msgstr "Berikan ukuran RAM dalam MB"
+
+#~ msgid "HFS"
+#~ msgstr "HFS"
 
 #~ msgid ""
 #~ "Here you can select an alternative driver (either OSS or ALSA) for your "
@@ -7636,11 +7619,17 @@ msgstr "Installasi gagal"
 #~ "Informasi tentang konfigurasi sistem Anda tersedia pada bab pasca\n"
 #~ "install di Panduan Pengguna Resmi Moondrake."
 
+#~ msgid "Init Message"
+#~ msgstr "Pesan Init"
+
 #~ msgid "Introduction"
 #~ msgstr "Pengantar"
 
 #~ msgid "Journalised FS"
 #~ msgstr "FS terjournal"
+
+#~ msgid "Kernel Boot Timeout"
+#~ msgstr "Timeout Booting Kernel"
 
 #~ msgid "LDAP user allowed to browse the Active Directory"
 #~ msgstr "Pengguna LDAP diijinkan untuk menjelajah Active Directory"
@@ -7667,14 +7656,26 @@ msgstr "Installasi gagal"
 #~ msgid "No supermount"
 #~ msgstr "Tanpa supermount"
 
+#~ msgid "NoVideo"
+#~ msgstr "NoVideo"
+
 #~ msgid "Number of capture buffers:"
 #~ msgstr "Jumlah capture buffer :"
+
+#~ msgid "Open Firmware Delay"
+#~ msgstr "Jeda Open Firmware"
 
 #~ msgid ""
 #~ "Option ``Restrict command line options'' is of no use without a password"
 #~ msgstr ""
 #~ "Pilihan ``Batasi parameter perintah baris'' tidak ada gunanya tanpa kata "
 #~ "sandi"
+
+#~ msgid "Other OS (MacOS...)"
+#~ msgstr "OS Lain (MacOS...)"
+
+#~ msgid "Other OS (SunOS...)"
+#~ msgstr "OS Lain (SunOS...)"
 
 #~ msgid "PLL setting:"
 #~ msgstr "setting PLL :"
@@ -7759,6 +7760,9 @@ msgstr "Installasi gagal"
 #~ msgid "Root partition size in MB: "
 #~ msgstr "Ukuran partisi root dalam MB: "
 
+#~ msgid "SILO"
+#~ msgstr "SILO"
+
 #~ msgid "SSL"
 #~ msgstr "SSL"
 
@@ -7770,6 +7774,9 @@ msgstr "Installasi gagal"
 
 #~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
 #~ msgstr "Jalankan Server Font X (agar Xorg dapat berjalan)"
+
+#~ msgid "SunOS"
+#~ msgstr "SunOS"
 
 #~ msgid "Supermount"
 #~ msgstr "Supermount"
@@ -8091,6 +8098,25 @@ msgstr "Installasi gagal"
 #~ msgstr ""
 #~ "Winbind mengijinkan sistem untuk mengotentikasi pengguna dalam Active "
 #~ "Directory Server Windows"
+
+#~ msgid "Yaboot"
+#~ msgstr "Yaboot"
+
+#~ msgid ""
+#~ "You may need to change your Open Firmware boot-device to\n"
+#~ " enable the bootloader.  If you do not see the bootloader prompt at\n"
+#~ " reboot, hold down Command-Option-O-F at reboot and enter:\n"
+#~ " setenv boot-device %s,\\\\:tbxi\n"
+#~ " Then type: shut-down\n"
+#~ "At your next boot you should see the bootloader prompt."
+#~ msgstr ""
+#~ "Anda harus mengganti perangkat boot Open Firmware untuk mengaktifkan "
+#~ "bootloader.\n"
+#~ " Jika Anda tak melihat prompt bootloader saat reboot, tekan\n"
+#~ " Command-Option-O-F saat reboot dan ketik:\n"
+#~ " setenv boot-device %s,\\\\:tbxi\n"
+#~ " kemudian ketikkan: shut-down\n"
+#~ "Pada boot berikutnya, Anda akan melihat prompt bootloader."
 
 #~ msgid "_: You can warn about unofficial translation here"
 #~ msgstr ""
