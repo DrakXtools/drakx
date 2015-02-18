@@ -298,8 +298,7 @@ Section "ServerLayout"
     Identifier "layout"
     Screen "screen"
 EndSection
-
-END
+));
 }
 
 1;
