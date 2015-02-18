@@ -21,7 +21,6 @@ my (%type_name2pt_type, %type_name2fs_type, %fs_type2pt_type, %pt_type2fs_type, 
 	important => [
   0x82 => 'swap',     'Linux swap',
   0x83 => 'ext2',     'Linux native',
-  0x83 => 'btrfs',    'Journalised FS: btrfs',
   0x83 => 'ext3',     'Journalised FS: ext3',
   0x83 => 'ext4',     'Journalised FS: ext4',
   0x83 => 'btrfs',    'Journalised FS: Btrfs',
@@ -33,7 +32,6 @@ if_( is_uefi(),
   0x0b => 'vfat',     'FAT32',
   0x07 => 'ntfs-3g',  'NTFS-3G',
   0x07 => 'ntfs',     'NTFS',
-),
 	],
 
         non_fs_type => [
