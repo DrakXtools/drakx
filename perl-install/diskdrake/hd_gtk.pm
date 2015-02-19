@@ -204,7 +204,7 @@ sub add_kind2notebook {
     $kind->{info_box} = Gtk3::VBox->new(0,0);
     my $box =
       gtkpack_(Gtk3::VBox->new(0,7),
-	       0, $kind->{display_box},
+	       0, create_scrolled_window($kind->{display_box}, [ 'automatic', 'never' ]),
 	       0, filesystems_button_box(),
 	       1, $kind->{info_box});
     $kind->{main_box} = gtknew('HBox', spacing => 5, children => [
