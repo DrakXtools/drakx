@@ -526,7 +526,7 @@ sub main {
         my $contentbox = Gtk3::VBox->new(0, 12);
 
         my $scroll = Gtk3::ScrolledWindow->new;
-        $scroll->set_policy('never', 'automatic'),
+        $scroll->set_policy('automatic', 'automatic'),
         my $vp = Gtk3::Viewport->new;
         $vp->set_shadow_type('none');
         $vp->add($contentbox);
