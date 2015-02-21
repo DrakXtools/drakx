@@ -266,7 +266,7 @@ Read back GRUB2 config + C</boot/grub2/drakboot.conf>
 
 =cut
 
-sub read_grub2 {
+sub read_grub2() {
     my %bootloader = getVarsFromSh("$::prefix/boot/grub2/drakboot.conf");
     my %h = getVarsFromSh("$::prefix/etc/default/grub");
     $bootloader{timeout} = $h{GRUB_TIMEOUT};
