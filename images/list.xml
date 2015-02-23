@@ -74,7 +74,7 @@
 
     partimage
 
-    sfdisk quotacheck mkswap swaplabel setterm
+    quotacheck mkswap swaplabel setterm
 
     blkid
     dmeventd
@@ -118,10 +118,6 @@
     testdisk photorec
   </if-not>
 
-  <if-not ARCH="ppc|sparc">
-    sfdisk
-  </if-not>
- 
   <if ARCH="ppc">
     pdisk 
   </if>
