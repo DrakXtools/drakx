@@ -396,19 +396,7 @@ sub tell_kernel {
 	foreach (@magic_parts) {
 	    syscall_('umount', $_->{real_mntpoint}) or log::l(N("error unmounting %s: %s", $_->{real_mntpoint}, $!));
 	}
-
-	# First try partprobe then fall back to BLKRRPART to re-read the partition table
-	run_program::run('partprobe', ${hd}->{file});
-
-	if($?==0)
-	{
-	    $hd->{rebootNeeded} = 0;
-	}
-	else
-	{
-	    $hd->{rebootNeeded} = !ioctl($F, c::BLKRRPART(), 0);
-	}
-
+	$hd->{rebootNeeded} = !c::tell_kernel_to_reread_partition_table($hd->{file});
 	log::l("tell kernel force_reboot ($hd->{device}), rebootNeeded=$hd->{rebootNeeded}");
 
 	foreach (@magic_parts) {
