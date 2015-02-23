@@ -36,7 +36,6 @@ while getopts "c:a:i:o:r:t:" opt; do
 done
 
 LD_PRELOAD=/usr/${LIB}/libGL.so.1 gimp-console --gegl-threads=$(getconf _NPROCESSORS_ONLN) -i --batch-interpreter=python-fu-eval -b - << EOF
-< EOF
 import gimpfu
 
 def convert(input, output, options, remove, colors, opacity):
