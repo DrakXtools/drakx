@@ -79,12 +79,12 @@ EOF
 
 	ln -s rc.d/init.d $tmp_initrd/etc/init.d
 
-	for bin in `$tmp_initrd/usr/bin/busybox --list-full`; do
+	for bin in `$tmp_initrd/bin/busybox --list-full`; do
 	    dir="`dirname \"$tmp_initrd/$bin\"`"
 	    if [ ! -d "$dir" ]; then
 		mkdir -p $dir
 	    fi
-	    ln -v "$tmp_initrd/usr/bin/busybox" "$tmp_initrd/$bin";
+	    ln -v "$tmp_initrd/bin/busybox" "$tmp_initrd/$bin";
 	done
 	install -m755 "$stage1_root/stage1" -D "$tmp_initrd/sbin/stage1"
 
