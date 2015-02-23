@@ -136,7 +136,7 @@ EOF
     fi
 
     mkdir -p "`dirname \"$img\"`"
-    (cd "$tmp_initrd"; find . | cpio -o -H newc --quiet --owner=root:root) | $COMPRESS > "$img"
+    (cd "$tmp_initrd"; find . | gcpio -o -H newc --quiet --owner=root:root) | $COMPRESS > "$img"
 }
 
 modules() {
@@ -158,7 +158,7 @@ modules() {
     fi
 
     mkdir -p "`dirname \"$out\"`"
-    (cd "$tmp_initrd"; find . | cpio -o -H newc --quiet --owner=root:root) | $COMPRESS > "$out"
+    (cd "$tmp_initrd"; find . | gcpio -o -H newc --quiet --owner=root:root) | $COMPRESS > "$out"
     rm -rf "$tmp_initrd"
 }
 
@@ -177,7 +177,7 @@ firmware() {
 	COMPRESS="xz -T0 --lzma2 -v9e --check=crc32"
     fi
 
-    (cd "$tmp_initrd"; find . | cpio -o -H newc --quiet --owner=root:root) | $COMPRESS > "$out"
+    (cd "$tmp_initrd"; find . | gcpio -o -H newc --quiet --owner=root:root) | $COMPRESS > "$out"
     rm -rf "$tmp_initrd"
 }
 
