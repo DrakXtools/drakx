@@ -34,7 +34,7 @@ dist-git:
 	cd ../..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD kernel perl-install tools images/tree/root Makefile.config > perl-install/install/$(PRODUCT)-$(VERSION).tar
 	cd share/meta-task; \
 	git archive --format=tar --prefix=$(PRODUCT)-$(VERSION)/perl-install/install/share/meta-task/ HEAD . > meta-task-$(PRODUCT)-$(VERSION).tar
-	tar --concatenate --file=$(PRODUCT)-$(VERSION).tar share/meta-task/meta-task-$(PRODUCT)-$(VERSION).tar
+	gtar --concatenate --file=$(PRODUCT)-$(VERSION).tar share/meta-task/meta-task-$(PRODUCT)-$(VERSION).tar
 	rm share/meta-task/meta-task-$(PRODUCT)-$(VERSION).tar
 	xz -v9ef -T0 $(PRODUCT)-$(VERSION).tar
 	git tag $(PRODUCT)-$(VERSION)
