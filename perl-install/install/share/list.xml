@@ -44,10 +44,11 @@
   65-wacom.rules
   69-xorg-vmmouse.rules
   70-touchpad-quirks.rules
-  71-synaptics.rules
   75-net-description.rules
   80-drivers.rules
+  80-libinput-device-groups.rules
   80-net-setup-link.rules
+  90-libinput-model-quirks.rules
   95-dm-notify.rules
 </from>
 
@@ -75,8 +76,7 @@
   drivers/vboxvideo_drv.so
   drivers/vesa_drv.so
   drivers/vmware_drv.so
-  input/evdev_drv.so
-  input/synaptics_drv.so
+  input/libinput_drv.so
   input/vmmouse_drv.so
   input/wacom_drv.so
   libfbdevhw.so
