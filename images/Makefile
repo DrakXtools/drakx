@@ -73,7 +73,7 @@ dist-svn:
 	rm -rf $(PRODUCT)-$(VERSION)
 
 dist-git:
-	cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD tools/install-xml-file-list images tools/loadkeys kernel Makefile.config > $(PRODUCT)-$(VERSION).tar
+	cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD tools/install-xml-file-list images kernel Makefile.config > $(PRODUCT)-$(VERSION).tar
 	cd setup; git archive --prefix=$(PRODUCT)-$(VERSION)/images/setup/ HEAD . > setup-$(PRODUCT)-$(VERSION).tar
 	tar --concatenate --file=../$(PRODUCT)-$(VERSION).tar setup/setup-$(PRODUCT)-$(VERSION).tar
 	rm setup/setup-$(PRODUCT)-$(VERSION).tar
