@@ -637,6 +637,22 @@ disk_add_partition(char * device_path, double start, double length, const char *
   OUTPUT:
   RETVAL
 
+int
+tell_kernel_to_reread_partition_table(char * device_path)
+  CODE:
+  PedDevice *dev = ped_device_get(device_path);
+  RETVAL=0;
+  if(dev) {
+    PedDisk* disk = ped_disk_new(dev);
+    if (disk) {
+      if (ped_disk_commit_to_os (disk))
+         RETVAL=1;
+      ped_disk_destroy(disk);
+    }
+  }
+  OUTPUT:
+  RETVAL
+
 #define BACKTRACE_DEPTH				20
  
 
