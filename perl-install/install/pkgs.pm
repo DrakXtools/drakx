@@ -182,7 +182,8 @@ sub packagesToInstall {
 	log::l("examining packagesToInstall of medium $_->{name}");
 	push @packages, grep { $_->flag_selected } install::media::packagesOfMedium($packages, $_);
     }
-    log::l("found " . scalar(@packages) . " packages to install: " . formatList(5, map { $_->fullname } @packages));
+    log::l("found " . scalar(@packages) . " packages to install: " . formatList(5, map { scalar $_->fullname } @packages));
+
     @packages;
 }
 
