@@ -423,6 +423,7 @@ Is a firmware needed by some HW?
 
 sub is_firmware_needed {
     my ($o) = @_;
+    return 0 if $::o->{match_all_hardware};
     state $res;
     $res = is_firmware_needed_($o) if !defined $res;
     $res;
