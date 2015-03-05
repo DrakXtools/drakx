@@ -805,6 +805,7 @@ sub real_main() {
 	log::l("step \"$o->{step}\" took: ", formatTimeRaw(time() - $time));
 	$o->kill_action;
 	if ($err) {
+	    log::l("step \"$o->{step}\" failed with error: $err");
 	    local $_ = $err;
 	    $o->kill_action;
 	    if (!/^already displayed/) {
