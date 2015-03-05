@@ -90,11 +90,11 @@ mount($dir, "$SLASH_LOCATION$prefix_ROOTED". "-o bind");
 $repository_uri ||= $repository_without_arch if !$remote_repository;
 mount($repository_uri, "$SLASH_LOCATION$MEDIA_LOCATION_ROOTED", "-o bind") if $repository_uri;
 
-mount("/dev", "$SLASH_LOCATION/dev", " --bind -o ro");
-mount("none", "$SLASH_LOCATION/proc", " -t proc");
-mount("none", "$SLASH_LOCATION/sys", " -t sysfs");
-mount("none", "$SLASH_LOCATION/sys/kernel/debug", "-t debugfs");
-mount("none", "$SLASH_LOCATION/run", " -t tmpfs");
+mount('/dev', "$SLASH_LOCATION/dev", " --bind -o ro");
+mount('none', "$SLASH_LOCATION/proc", "-t proc");
+mount('none', "$SLASH_LOCATION/sys", "-t sysfs");
+mount('none', "$SLASH_LOCATION/sys/kernel/debug", "-t debugfs");
+mount('none', "$SLASH_LOCATION/run", "-t tmpfs");
 
 # - Ensure we mount the udev run dir for various extra metadata from udevadm
 # - If dracut has been used (and thus udev has yummy metadata) make sure
@@ -199,10 +199,6 @@ sub mount {
 	my ($from, $mntpt, @opts) = @_;
 	push @mounts, $mntpt;
 	sys("$sudo mount $from $mntpt " . join(' ', @opts));
-}
-
-sub create_initial_devices() {
-    sys("$sudo cp -a /dev/{mem,null,random,urandom,tty} $SLASH_LOCATION/dev");
 }
 
 sub umount_all {
