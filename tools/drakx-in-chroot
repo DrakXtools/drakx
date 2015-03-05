@@ -62,8 +62,9 @@ my $_b = before_leaving { sys("$sudo umount $_") foreach reverse @mounts };
 undef $ENV{TMPDIR}; # prevent packdrake faillure on creating temporary files
 
 if (-d $SLASH_LOCATION) {
-    umount_all() == 0 or exit(1);
-    sys("$sudo rm -rf $SLASH_LOCATION");
+    umount_all(1) == 0 or exit(1);
+    sys("$sudo rm -rf $SLASH_LOCATION/var/lib/rpm $SLASH_LOCATION/dev/mapper");
+    rm_rf($SLASH_LOCATION);
 }
 
 mkdir_p("$SLASH_LOCATION$_") foreach '/dev', '/etc', '/var', '/proc', '/sys', '/run', $MEDIA_LOCATION_ROOTED, $prefix_ROOTED;
@@ -200,10 +201,19 @@ sub mount {
 	sys("$sudo mount $from $mntpt " . join(' ', @opts));
 }
 
-sub umount_all() {
+sub create_initial_devices() {
+    sys("$sudo cp -a /dev/{mem,null,random,urandom,tty} $SLASH_LOCATION/dev");
+}
+
+sub umount_all {
+    my ($b_umount_dev_too) = @_;
     my $err;
     clean_stage2_updates();
     my @procs = (qw(/proc /sys/kernel/debug /sys /run/udev /run/blkid /run/initramfs /run));
+    # special case for !draklive case (else a 2nd run would fail):
+    if ($b_umount_dev_too && cat_('/proc/mounts') =~ m! $SLASH_LOCATION/dev !) {
+	    system_verbose "$sudo umount $SLASH_LOCATION/dev" and rm_rf("$SLASH_LOCATION/dev");
+    }
     foreach ((map { "$prefix_ROOTED$_" } @procs, '/dev', ''), @procs, $STAGE2_LOCATION_ROOTED, $LOOP_MOUNT_POINT, $MEDIA_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED) {
 	my $dir = "$SLASH_LOCATION$_";
 	if (!run("mountpoint -q $dir")) {
