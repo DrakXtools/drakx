@@ -203,8 +203,8 @@ sub mount {
 sub umount_all() {
     my $err;
     clean_stage2_updates();
-    my @procs = ('/proc', '/sys/kernel/debug', '/sys', '/run/udev', '/run/blkid', '/run/initramfs', '/run');
-    foreach ((map { "$prefix_ROOTED$_" } @procs, '/dev', ''), @procs, $LOOP_MOUNT_POINT, $MEDIA_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED) {
+    my @procs = (qw(/proc /sys/kernel/debug /sys /run/udev /run/blkid /run/initramfs /run));
+    foreach ((map { "$prefix_ROOTED$_" } @procs, '/dev', ''), @procs, $STAGE2_LOCATION_ROOTED, $LOOP_MOUNT_POINT, $MEDIA_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED) {
 	my $dir = "$SLASH_LOCATION$_";
 	if (!run("mountpoint -q $dir")) {
 	    run("$sudo umount $dir");
