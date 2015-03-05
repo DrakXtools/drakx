@@ -229,7 +229,7 @@ sub prepare_write_fstab {
 
 	    my $options = $_->{options} || 'defaults';
 	     if (($_->{is_removable} || member($_->{fs_type}, qw(ntfs ntfs-3g))) && !$needed_to_boot && $_->{options} !~ /nofail/) {
-			"$options .= ',nofail';
+			 $options .= ',nofail';
 		         }
 
 	    if ($_->{fs_type} eq 'cifs' && $options =~ /password=/ && !$b_keep_credentials) {
