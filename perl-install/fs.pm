@@ -213,11 +213,12 @@ sub prepare_write_fstab {
 	   mkdir_p("$o_prefix$real_mntpoint") if $real_mntpoint =~ m|^/|;
 	}
 	my $mntpoint = fs::type::carry_root_loopback($_) ? '/initrd/loopfs' : $real_mntpoint;
+	my $needed_to_boot = member($_->{mntpoint}, fs::type::directories_needed_to_boot());
 
 	my ($freq, $passno) =
 	  exists $_->{freq} ?
 	    ($_->{freq}, $_->{passno}) :
-	  isTrueLocalFS($_) && !$_->{dmcrypt_name} && $_->{options} !~ /encryption=/ && (!$_->{is_removable} || member($_->{mntpoint}, fs::type::directories_needed_to_boot())) ? 
+	    isTrueLocalFS($_) && !$_->{dmcrypt_name} && $_->{options} !~ /encryption=/ && (!$_->{is_removable} || $needed_to_boot) ? 
 	    (1, $_->{mntpoint} eq '/' ? 1 : fs::type::carry_root_loopback($_) ? 0 : 2) : 
 	    (0, 0);
 
@@ -227,6 +228,9 @@ sub prepare_write_fstab {
 	    $new{$mntpoint} = 1;
 
 	    my $options = $_->{options} || 'defaults';
+	     if (($_->{is_removable} || member($_->{fs_type}, qw(ntfs ntfs-3g))) && !$needed_to_boot && $_->{options} !~ /nofail/) {
+			"$options .= ',nofail';
+		         }
 
 	    if ($_->{fs_type} eq 'cifs' && $options =~ /password=/ && !$b_keep_credentials) {
 		require fs::remote::smb;
