@@ -56,7 +56,7 @@ our %l = (
    #- protocol reported are not accurate) so we match network adapters against
    #- known drivers :-(
     usb => [ 
-      qw(asix catc cdc_ether cdc_mbim dm9601 huawei_cdc_ncm kaweth mcs7830 pegasus rtl8150 smsc75xx smsc95xx usbnet),
+      qw(asix catc cdc_ether dm9601 huawei_cdc_ncm kaweth mcs7830 pegasus rtl8150 smsc75xx smsc95xx usbnet),
     ],
     wireless => [
       qw(acx-pci acx-usb adm8211 agnx airo airo_cs aironet4500_cs),
@@ -79,7 +79,7 @@ our %l = (
       qw(fcpci fcdsl fcdsl fcdsl2 fcdslsl fcdslslusb fcdslusb fcdslusba fcusb fcusb2 fxusb fxusb_CZ)
     ],
     cellular => [
-      qw(hso nozomi option sierra),
+      qw(cdc_mbim hso nozomi option sierra),
     ],
     modem => [
       qw(ltmodem mwave sm56 ft1000),
