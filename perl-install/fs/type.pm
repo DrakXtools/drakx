@@ -9,7 +9,7 @@ use devices;
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(
-   isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isOtherAvailableFS isRawLVM isRawRAID isRawLUKS isRAID isLVM isLUKS isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isFat_or_NTFS isRecovery
+   isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isOtherAvailableFS isRawLVM isRawRAID isRawLUKS isRAID isLVM isLUKS isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isESP isFat_or_NTFS isRecovery
    maybeFormatted set_isFormatted defaultFS
 );
 
