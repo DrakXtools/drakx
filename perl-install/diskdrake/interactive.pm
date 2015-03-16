@@ -358,7 +358,7 @@ sub Clear_all {
 
 sub Auto_allocate {
     my ($in, $hd, $all_hds) = @_;
-    my $suggestions = partitions_suggestions($in) or return;
+    my $suggestions = partitions_suggestions($in, $all_hds) or return;
 
     my %all_hds_ = %$all_hds;
     $all_hds_{hds} = [ sort { $a == $hd ? -1 : 1 } fs::get::hds($all_hds) ];
@@ -1203,7 +1203,9 @@ sub ask_alldatawillbelost {
 }
 
 sub partitions_suggestions {
-    my ($in) = @_;
+    my ($in, $all_hds) = @_;
+    my $fstab = [ fs::get::fstab($all_hds) ];
+    fsedit::init_efi_suggestions($fstab);
     my $t = $::expert ?
       $in->ask_from_list_(N("Partitioning Type"), N("What type of partitioning?"), [ keys %fsedit::suggestions ]) :
       'simple';

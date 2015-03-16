@@ -3,6 +3,7 @@ package fsedit;
 use diagnostics;
 use strict;
 use vars qw(%suggestions);
+use feature 'state';
 
 #-######################################################################################
 #- misc imports
@@ -39,8 +40,17 @@ use fs;
     { mntpoint => "/tmp",  size => MB(150), fs_type => defaultFS(), ratio => 2, maxsize => MB(4000) },
   ],
 );
-foreach (values %suggestions) {
-    if ( is_uefi() ) {
+
+sub init_efi_suggestions {
+    my ($fstab) = @_;
+    state $done;
+    return if $done;
+    $done++;
+
+    # only suggests /boot/EFI if there's not already one:
+    return if !is_uefi() || grep { isESP($_) } @$fstab;
+
+    foreach (values %suggestions) {
 	@$_ = ({ mntpoint => "/boot/EFI", size => MB(100), pt_type => 0xef, ratio => 1, maxsize => MB(300) }, @$_);
     }
 }
