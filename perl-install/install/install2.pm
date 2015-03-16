@@ -555,9 +555,8 @@ sub parse_args {
 	    'vga=s'       => sub { $o->{vga} = $_[1] =~ /0x/ ? hex($_[1]) : $_[1] },
 	    'display=s'   => \$o->{display},
 	    askdisplay => sub { print "Please enter the X11 display to perform the install on ? "; $o->{display} = chomp_(scalar(<STDIN>)) },
-	    text      => sub { $o->{interactive} = "curses" },
+	    'newt|text' => sub { $o->{interactive} = "curses" },
 	    stdio     => sub { $o->{interactive} = "stdio" },
-	    newt      => sub { $o->{interactive} = "curses" },
 	    simple_themes => \$o->{simple_themes},
 	    'theme=s'     => \$o->{theme},
 	    doc       => \$o->{doc},             #- will be used to know that we're running for the doc team,
@@ -570,11 +569,10 @@ sub parse_args {
 	    testing   => \$::testing,
 	    patch     => \$patch,
 	    'defcfg=s'    => \$cfg,
-	    'kickstart=s' => \$::auto_install,
+	    'auto_install|kickstart=s' => \$::auto_install,
 
 	    local_install => \$::local_install,
 	    uml_install => sub { $::uml_install = $::local_install = 1 },
-	    'auto_install=s' => \$::auto_install,
 
 	    # debugging options:
 	    useless_thing_accepted => \$o->{useless_thing_accepted},
