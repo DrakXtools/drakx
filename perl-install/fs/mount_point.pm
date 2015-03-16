@@ -52,6 +52,10 @@ sub suggest_mount_points {
 sub suggest_mount_points_always {
     my ($fstab) = @_;
 
+    my @ESP = grep { isESP($_) && !$_->{isMounted} && maybeFormatted($_) && !$_->{is_removable} && !isRecovery($_) } @$fstab;
+    if (@ESP) {
+	$ESP[0]{mntpoint} = "/boot/EFI";
+    }
     my @win = grep { isFat_or_NTFS($_) && !$_->{isMounted} && maybeFormatted($_) && !$_->{is_removable} && $_->{pt_type} != 0x12 && !isRecovery($_) } @$fstab;
     log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
     if (@win == 1) {
