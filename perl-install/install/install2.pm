@@ -3,6 +3,7 @@ package install::install2;
 use diagnostics;
 use strict;
 use vars qw($o);
+use Getopt::Long qw(GetOptionsFromArray :config no_ignore_case no_auto_abbrev no_getopt_compat);
 
 BEGIN { $::isInstall = 1 }
 
@@ -518,88 +519,75 @@ Parse arguments (which came from either the boot loader command line or its conf
 
 sub parse_args {
     my ($cfg, $patch);
-    my %cmdline = map { 
-	my ($n, $v) = split /=/;
-	$n => defined($v) ? $v : 1;
-    } split ' ', cat_("/proc/cmdline");
-
-    my $opt; foreach (@_) {
-	if (/^--?(.*)/) {
-	    $cmdline{$opt} = 1 if $opt;
-	    $opt = $1;
-	} else {
-	    $cmdline{$opt} = $_ if $opt;
-	    $opt = '';
-	}
-    } $cmdline{$opt} = 1 if $opt;
+    my @cmdline = @_, map { "--$_" } split ' ', cat_("/proc/cmdline");
 
     #- from stage1
     put_in_hash(\%ENV, { getVarsFromSh('/tmp/env') });
     exists $ENV{$_} and $cmdline{lc($_)} = $ENV{$_} foreach qw(METHOD PCMCIA KICKSTART);
 
-    map_each {
-	my ($n, $v) = @_;
-	my $f = ${{
-	    keyboard  => sub { $o->{keyboard} = $v; push @::auto_steps, 'selectKeyboard' },
-	    lang      => sub { $o->{lang} = $v },
-	    flang     => sub { $o->{lang} = $v; push @::auto_steps, 'selectLanguage' },
-	    langs     => sub { $o->{locale}{langs} = +{ map { $_ => 1 } split(':', $v) } },
-	    method    => sub { $o->{method} = $v },
-	    pcmcia    => sub { $o->{pcmcia} = $v },
-	    step      => sub { $o->{steps}{first} = $v },
-	    meta_class => sub { $o->{meta_class} = $v },
-	    freedriver => sub { $o->{freedriver} = $v },
+    GetOptionsFromArray(\@cmdline,
+	    'keyboard=s'  => sub { $o->{keyboard} = $_[1]; push @::auto_steps, 'selectKeyboard' },
+	    'lang=s'      => \$o->{lang},
+	    'flang=s'     => sub { $o->{lang} = $_[1]; push @::auto_steps, 'selectLanguage' },
+	    'langs=s'     => sub { $o->{locale}{langs} = +{ map { $_ => 1 } split(':', $_[1]) } },
+	    'method=s'    => \$o->{method},
+	    'pcmcia=s'    => \$o->{pcmcia},
+	    'step=s'      => \$o->{steps}{first},
+	    'meta_class=s' => \$o->{meta_class},
+	    'freedriver=s' => \$o->{freedriver},
 
 	    # fs/block options:
-	    no_bad_drives => sub { $o->{partitioning}{no_bad_drives} = 1 },
-	    nodmraid  => sub { $o->{partitioning}{nodmraid} = 1 },
-	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
-	    use_uuid  => sub { $::no_uuid_by_default = !$v },
+	    no_bad_drives => \$o->{partitioning}{no_bad_drives},
+	    nodmraid  => \$o->{partitioning}{nodmraid},
+	    'readonly=s'  => sub { $o->{partitioning}{readonly} = $_[1] ne "0" },
+	    'use_uuid=s'  => sub { $::no_uuid_by_default = !$_[1] },
 
 	    # urpmi options:
 	    debug_urpmi  => sub { $o->{debug_urpmi} = 1 },
 	    justdb    => sub { $o->{justdb} = 1 },
+	    debug_urpmi  => \$o->{debug_urpmi},
+	    deploops     => \$o->{deploops},
+	    justdb    => \$o->{justdb},
 	    'tune-rpm' => sub { $o->{'tune-rpm'} = 'all' },
 
 	    # GUI options:
-	    vga16     => sub { $o->{vga16} = $v },
-	    vga       => sub { $o->{vga} = $v =~ /0x/ ? hex($v) : $v },
-	    display   => sub { $o->{display} = $v },
+	    'vga16=s'     => \$o->{vga16},
+	    'vga=s'       => sub { $o->{vga} = $_[1] =~ /0x/ ? hex($_[1]) : $_[1] },
+	    'display=s'   => \$o->{display},
 	    askdisplay => sub { print "Please enter the X11 display to perform the install on ? "; $o->{display} = chomp_(scalar(<STDIN>)) },
 	    text      => sub { $o->{interactive} = "curses" },
 	    stdio     => sub { $o->{interactive} = "stdio" },
 	    newt      => sub { $o->{interactive} = "curses" },
-	    simple_themes => sub { $o->{simple_themes} = 1 },
-	    theme     => sub { $o->{theme} = $v },
-	    doc       => sub { $o->{doc} = 1 },  #- will be used to know that we're running for the doc team,
+	    simple_themes => \$o->{simple_themes},
+	    'theme=s'     => \$o->{theme},
+	    doc       => \$o->{doc},             #- will be used to know that we're running for the doc team,
 	                                         #- e.g. we want screenshots with a good B&W contrast
 
-	    security  => sub { $o->{security} = $v },
+	    'security=s'  => \$o->{security},
 
 	    # auto install options:
-	    noauto    => sub { $::noauto = 1 },
-	    testing   => sub { $::testing = 1 },
-	    patch     => sub { $patch = 1 },
-	    defcfg    => sub { $cfg = $v },
-	    kickstart => sub { $::auto_install = $v },
+	    noauto    => \$::noauto,
+	    testing   => \$::testing,
+	    patch     => \$patch,
+	    'defcfg=s'    => \$cfg,
+	    'kickstart=s' => \$::auto_install,
 
-	    local_install => sub { $::local_install = 1 },
+	    local_install => \$::local_install,
 	    uml_install => sub { $::uml_install = $::local_install = 1 },
-	    auto_install => sub { $::auto_install = $v },
+	    'auto_install=s' => \$::auto_install,
 
 	    # debugging options:
-	    useless_thing_accepted => sub { $o->{useless_thing_accepted} = 1 },
+	    useless_thing_accepted => \$o->{useless_thing_accepted},
 	    alawindows => sub { $o->{security} = 0; $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
-	    fdisk => sub { $o->{partitioning}{fdisk} = 1 },
-	    nomouseprobe => sub { $o->{nomouseprobe} = $v },
-	    updatemodules => sub { $o->{updatemodules} = 1 },
+	    fdisk => \$o->{partitioning}{fdisk},
+	    'nomouseprobe=s' => \$o->{nomouseprobe},
+	    updatemodules => \$o->{updatemodules},
 
-	    suppl => sub { $o->{supplmedia} = $v },
-	    askmedia => sub { $o->{askmedia} = 1 },
-	    restore => sub { $::isRestore = 1 },
-	    compsslistlevel => sub { $o->{compssListLevel} = $v },
-	}}{lc $n}; &$f if $f;
-    } %cmdline;
+	    'suppl=s' => \$o->{supplmedia},
+	    askmedia => \$o->{askmedia},
+	    restore => \$::isRestore,
+	    'compsslistlevel=s' => \$o->{compssListLevel},
+	);
 
     ($cfg, $patch);
 }
