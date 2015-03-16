@@ -289,7 +289,7 @@ sub defaultFS() { 'ext4' }
 sub true_local_fs_types() { qw(btrfs ext3 ext2 ext4 reiserfs xfs jfs) }
 
 sub isEmpty { !$_[0]{fs_type} && $_[0]{pt_type} == 0 }
-sub isEfi { arch() =~ /ia64/ && $_[0]{pt_type} == 0xef }
+sub isEfi { $_[0]{pt_type} == 0xef }
 sub isExtended { $_[0]{pt_type} == 5 || $_[0]{pt_type} == 0xf || $_[0]{pt_type} == 0x85 }
 sub isRawLVM { $_[0]{pt_type} == 0x8e || $_[0]{type_name} eq 'Linux Logical Volume Manager' }
 sub isRawRAID { $_[0]{pt_type} == 0xfd || $_[0]{type_name} eq 'Linux RAID' }
