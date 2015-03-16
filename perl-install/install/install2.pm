@@ -526,24 +526,23 @@ sub parse_args {
     exists $ENV{$_} and $cmdline{lc($_)} = $ENV{$_} foreach qw(METHOD PCMCIA KICKSTART);
 
     GetOptionsFromArray(\@cmdline,
-	    'keyboard=s'  => sub { $o->{keyboard} = $_[1]; push @::auto_steps, 'selectKeyboard' },
-	    'lang=s'      => \$o->{lang},
-	    'flang=s'     => sub { $o->{lang} = $_[1]; push @::auto_steps, 'selectLanguage' },
-	    'langs=s'     => sub { $o->{locale}{langs} = +{ map { $_ => 1 } split(':', $_[1]) } },
-	    'method=s'    => \$o->{method},
-	    'pcmcia=s'    => \$o->{pcmcia},
-	    'step=s'      => \$o->{steps}{first},
+	    'keyboard=s'   => sub { $o->{keyboard} = $_[1]; push @::auto_steps, 'selectKeyboard' },
+	    'lang=s'       => \$o->{lang},
+	    'flang=s'      => sub { $o->{lang} = $_[1]; push @::auto_steps, 'selectLanguage' },
+	    'langs=s'      => sub { $o->{locale}{langs} = +{ map { $_ => 1 } split(':', $_[1]) } },
+	    'method=s'     => \$o->{method},
+	    'pcmcia=s'     => \$o->{pcmcia},
+	    'step=s'       => \$o->{steps}{first},
 	    'meta_class=s' => \$o->{meta_class},
 	    'freedriver=s' => \$o->{freedriver},
 
 	    # fs/block options:
-	    no_bad_drives => \$o->{partitioning}{no_bad_drives},
-	    nodmraid  => \$o->{partitioning}{nodmraid},
-	    'readonly=s'  => sub { $o->{partitioning}{readonly} = $_[1] ne "0" },
-	    'use_uuid=s'  => sub { $::no_uuid_by_default = !$_[1] },
+	    no_bad_drives  => \$o->{partitioning}{no_bad_drives},
+	    nodmraid       => \$o->{partitioning}{nodmraid},
+	    'readonly=s'   => sub { $o->{partitioning}{readonly} = $_[1] ne "0" },
+	    'use_uuid=s'   => sub { $::no_uuid_by_default = !$_[1] },
 
 	    # urpmi options:
-	    debug_urpmi  => sub { $o->{debug_urpmi} = 1 },
 	    justdb    => sub { $o->{justdb} = 1 },
 	    debug_urpmi  => \$o->{debug_urpmi},
 	    deploops     => \$o->{deploops},
@@ -551,39 +550,39 @@ sub parse_args {
 	    'tune-rpm' => sub { $o->{'tune-rpm'} = 'all' },
 
 	    # GUI options:
-	    'vga16=s'     => \$o->{vga16},
-	    'vga=s'       => sub { $o->{vga} = $_[1] =~ /0x/ ? hex($_[1]) : $_[1] },
-	    'display=s'   => \$o->{display},
-	    askdisplay => sub { print "Please enter the X11 display to perform the install on ? "; $o->{display} = chomp_(scalar(<STDIN>)) },
-	    'newt|text' => sub { $o->{interactive} = "curses" },
-	    stdio     => sub { $o->{interactive} = "stdio" },
-	    simple_themes => \$o->{simple_themes},
-	    'theme=s'     => \$o->{theme},
-	    doc       => \$o->{doc},             #- will be used to know that we're running for the doc team,
+	    'vga16=s'      => \$o->{vga16},
+	    'vga=s'        => sub { $o->{vga} = $_[1] =~ /0x/ ? hex($_[1]) : $_[1] },
+	    'display=s'    => \$o->{display},
+	    askdisplay     => sub { print "Please enter the X11 display to perform the install on ? "; $o->{display} = chomp_(scalar(<STDIN>)) },
+	    'newt|text'    => sub { $o->{interactive} = "curses" },
+	    stdio          => sub { $o->{interactive} = "stdio" },
+	    simple_themes  => \$o->{simple_themes},
+	    'theme=s'      => \$o->{theme},
+	    doc            => \$o->{doc},        #- will be used to know that we're running for the doc team,
 	                                         #- e.g. we want screenshots with a good B&W contrast
 
-	    'security=s'  => \$o->{security},
+	    'security=s'   => \$o->{security},
 
 	    # auto install options:
-	    noauto    => \$::noauto,
-	    testing   => \$::testing,
-	    patch     => \$patch,
-	    'defcfg=s'    => \$cfg,
+	    noauto         => \$::noauto,
+	    testing        => \$::testing,
+	    patch          => \$patch,
+	    'defcfg=s'     => \$cfg,
 	    'auto_install|kickstart=s' => \$::auto_install,
 
-	    local_install => \$::local_install,
-	    uml_install => sub { $::uml_install = $::local_install = 1 },
+	    local_install  => \$::local_install,
+	    uml_install    => sub { $::uml_install = $::local_install = 1 },
 
 	    # debugging options:
 	    useless_thing_accepted => \$o->{useless_thing_accepted},
 	    alawindows => sub { $o->{security} = 0; $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
-	    fdisk => \$o->{partitioning}{fdisk},
+	    fdisk          => \$o->{partitioning}{fdisk},
 	    'nomouseprobe=s' => \$o->{nomouseprobe},
-	    updatemodules => \$o->{updatemodules},
+	    updatemodules  => \$o->{updatemodules},
 
-	    'suppl=s' => \$o->{supplmedia},
-	    askmedia => \$o->{askmedia},
-	    restore => \$::isRestore,
+	    'suppl=s'      => \$o->{supplmedia},
+	    askmedia       => \$o->{askmedia},
+	    restore        => \$::isRestore,
 	    'compsslistlevel=s' => \$o->{compssListLevel},
 	);
 
