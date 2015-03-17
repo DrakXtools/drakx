@@ -46,6 +46,12 @@ sub suggest_mount_points {
 	#- try to find other mount points via fstab
 	fs::merge_info_from_fstab($fstab, $handle->{dir}, $uniq, 'loose') if $mnt eq '/';
     }
+    # reuse existing ESP under UEFI:
+    my @ESP = if_(is_uefi(), grep { isESP($_) } @$fstab);
+    if (@ESP) {
+	$ESP[0]{mntpoint} = '/boot/EFI';
+	delete $ESP[0]{unsafeMntpoint};
+    }
     $_->{mntpoint} and log::l("suggest_mount_points: $_->{device} -> $_->{mntpoint}") foreach @$fstab;
 }
 
