@@ -146,9 +146,12 @@ sub mkinitrd {
 		   if_($::isInstall), "-f", $initrd, $kernel_version, 
 		   if_($entry->{initrd_options}, split(' ', $entry->{initrd_options})),
 		  );
-    if (!run_program::rooted($::prefix, 'mkinitrd', @options)) {
+
+    my $err;
+    if (!run_program::rooted($::prefix, 'mkinitrd', '2>', \$err, @options)) {
 	unlink("$::prefix/$initrd");
-	die "mkinitrd failed:\n(mkinitrd @options)";
+	log::explanations("mkinitrd failed:\n(mkinitrd @options)\nError: <$err>");
+	die "mkinitrd failed:\n(mkinitrd @options)\nError: $err";
     }
     add_boot_splash($initrd, $entry->{vga} || $bootloader->{vga});
 
