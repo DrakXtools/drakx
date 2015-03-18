@@ -60,6 +60,7 @@
   swrast_dri.so
 </from>
 
+<!-- needed by Gtk3 introspection -->
 <from dir="/usr/LIB/girepository-1.0">
   Atk-1.0.typelib
   cairo-1.0.typelib
@@ -100,12 +101,14 @@
   </from>
 </from>
 
+<!-- fix "No GSettings schemas are installed on the system" -->
 <from dir="/usr/share/glib-2.0/schemas">
   <from expand="glob">
     gschema*
   </from>
 </from>
 
+<!-- keyboard layouts -->
 <from dir="/usr/share/X11/xkb">
  <filter subst="s!//.*!!">
   geometry/pc
@@ -155,6 +158,7 @@
     scalable/actions/pan-up-symbolic.svg
 </from>
 
+<!-- translations for modules used by drakx -->
 <from dir="/usr/share/locale">
   <to dir="/usr/share/locale_special">
     <from expand="glob">
