@@ -407,7 +407,6 @@ sub empty_packages {
     $packages->{prefer_vendor_list} = '/etc/urpmi/prefer.vendor.list';
     $packages->{keep_unrequested_dependencies} =
       defined($o_keep_unrequested_dependencies) ? $o_keep_unrequested_dependencies : 1;
-    $urpm::args::options{force_transactions} = 20;
     $urpm::args::options{justdb} = $::o->{justdb};
     urpm::set_tune_rpm($packages, $::o->{'tune-rpm'}) if $::o->{'tune-rpm'};
     $::force = 1;
