@@ -1077,7 +1077,6 @@ sub dmi_probe() {
 }
 
 # pcmcia_probe provides field "device", used in network.pm
-# => probeall with $probe_type is unsafe
 sub probeall() {
     return if $::noauto;
 
