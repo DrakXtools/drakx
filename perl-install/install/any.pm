@@ -420,7 +420,6 @@ Is a firmware needed by some HW?
 
 sub is_firmware_needed {
     my ($o) = @_;
-    return 0 if $::o->{match_all_hardware};
     state $res;
     $res = is_firmware_needed_($o) if !defined $res;
     $res;
@@ -562,7 +561,7 @@ sub setPackages {
 
         install::pkgs::start_pushing_error();
 	# should we really use this? merged from mageia for easier maintenance..
-        media_screen($o) if !$::auto_install;
+        media_screen($o) if !$::auto_install && !$::o->{match_all_hardware};
         my @choosen_media = map { $_->{name} } grep { !$_->{ignore} } @{$urpm->{media}};
         log::l("choosen media: ", join(', ', @choosen_media));
         die "no choosen media" if !@choosen_media;
