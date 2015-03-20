@@ -138,6 +138,7 @@ sub main {
         return 0;
     });
     $w->sync;
+    $notebook_widget->set_current_page(0);
     # workaround for $notebook_widget being realized too early:
     if (!$done_button) {
 	$notebook_widget->set_current_page(-1);
