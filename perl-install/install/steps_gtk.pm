@@ -676,7 +676,6 @@ sub installPackages {
 	    gtkval_modify(\$pkg_progress, 0);
 	    my $p = $packages->{depslist}[$id];
 	    mygtk3::gtkadd($pkg_log_widget, text => sprintf("\n%s: %s", $p->name, translate($p->summary)));
-	    $pkg_log_widget->{to_bottom}->('force');
 	    $current_total_size += $last_size;
 	    $last_size = $p->size;
 
