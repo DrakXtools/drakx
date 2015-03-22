@@ -23,7 +23,7 @@ Manage regular soft RAID (MD=Multiple Drive).
 
 =cut
 
-sub max_nb() { 31 }
+sub max_nb() { 131 }
 
 sub check_prog {
     # perl_checker: require interactive
