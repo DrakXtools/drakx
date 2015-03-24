@@ -515,8 +515,9 @@ get_disk_partitions(char * device_path)
   if(dev) {
     PedDisk* disk = ped_disk_new(dev);
     PedPartition *part = NULL;
-    if(disk)
-      part = ped_disk_next_partition(disk, NULL);
+    if(!disk)
+      return;
+    part = ped_disk_next_partition(disk, NULL);
     while(part) {
       if(part->num != -1) {
         char desc[4196];
@@ -545,8 +546,7 @@ get_disk_partitions(char * device_path)
       }
       part = ped_disk_next_partition(disk, part);
     }
-    if(disk)
-      ped_disk_destroy(disk);
+    ped_disk_destroy(disk);
   }
 
 int
