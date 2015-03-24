@@ -530,15 +530,15 @@ get_disk_partitions(char * device_path)
 	   part = ped_disk_next_partition(disk, part);
 	   continue;
       }
-        char *path = ped_partition_get_path(part);
+      char *path = ped_partition_get_path(part);
       HV * rh = (HV *)sv_2mortal((SV *)newHV());
       hv_store(rh, "part_number",    11, newSViv(part->num),      0);
       hv_store(rh, "real_device",    11, newSVpv(path, 0),        0);
       hv_store(rh, "start",           5, newSViv(part->geom.start), 0);
       hv_store(rh, "size",            4, newSViv(part->geom.length), 0);
       hv_store(rh, "pt_type",         7, newSViv(0xba),           0);
-        free(path);
-        if(part->fs_type)
+      free(path);
+      if(part->fs_type)
         hv_store(rh, "fs_type",       7, newSVpv(part->fs_type->name, 0), 0);
       PUSHs(newRV((SV *)rh));
       part = ped_disk_next_partition(disk, part);
