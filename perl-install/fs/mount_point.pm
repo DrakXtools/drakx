@@ -72,13 +72,6 @@ sub suggest_mount_points_always {
 	    $_->{mntpoint} = $_->{unsafeMntpoint} = "/media/win_" . lc($_->{device_windobe}) . ($v ? $v+1 : ''); #- lc cuz of StartOffice(!) cf dadou
 	}
     }
-
-    my @sunos = grep { $_->{pt_type} == 2 } @$fstab; #- take only into account root partitions.
-    if (@sunos) {
-	my $v = '';
-	map { $_->{mntpoint} = $_->{unsafeMntpoint} = "/mnt/sunos" . ($v && ++$v) } @sunos;
-    }
-    #- a good job is to mount SunOS root partition, and to use mount point described here in /etc/vfstab.
 }
 
 sub validate_mount_points {
