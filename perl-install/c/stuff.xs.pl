@@ -514,38 +514,33 @@ get_disk_partitions(char * device_path)
   PedDevice *dev = ped_device_get(device_path);
   if(dev) {
     PedDisk* disk = ped_disk_new(dev);
-    PedPartition *part = NULL;
+    PedPartition *part = NULL, *first_part = NULL;
+    int count = 1;
     if(!disk)
       return;
-    part = ped_disk_next_partition(disk, NULL);
+    first_part = part = ped_disk_next_partition(disk, NULL);
+    while(part) {
+      part = ped_disk_next_partition(disk, part);
+      count++;
+    }
+    EXTEND(SP, count);
+    part = first_part;
     while(part) {
       if(part->num == -1) {
 	   part = ped_disk_next_partition(disk, part);
 	   continue;
       }
-        char desc[4196];
         char *path = ped_partition_get_path(part);
-        sprintf(desc, "%d ", part->num);
-        sprintf(desc+strlen(desc), "%s ", path);
+      HV * rh = (HV *)sv_2mortal((SV *)newHV());
+      hv_store(rh, "part_number",    11, newSViv(part->num),      0);
+      hv_store(rh, "real_device",    11, newSVpv(path, 0),        0);
+      hv_store(rh, "start",           5, newSViv(part->geom.start), 0);
+      hv_store(rh, "size",            4, newSViv(part->geom.length), 0);
+      hv_store(rh, "pt_type",         7, newSViv(0xba),           0);
         free(path);
         if(part->fs_type)
-          strcat(desc, part->fs_type->name);
-        if(part->type == 0x0)
-          strcat(desc, " normal");
-        else {
-          if(part->type & PED_PARTITION_LOGICAL)
-              strcat(desc, " logical");
-          if(part->type & PED_PARTITION_EXTENDED)
-              strcat(desc, " extended");
-          if(part->type & PED_PARTITION_FREESPACE)
-              strcat(desc, " freespace");
-          if(part->type & PED_PARTITION_METADATA)
-              strcat(desc, " metadata");
-          if(part->type & PED_PARTITION_PROTECTED)
-              strcat(desc, " protected");
-        }
-        sprintf(desc+strlen(desc), " (%lld,%lld,%lld)", part->geom.start, part->geom.end, part->geom.length);
-        XPUSHs(sv_2mortal(newSVpv(desc, 0)));
+        hv_store(rh, "fs_type",       7, newSVpv(part->fs_type->name, 0), 0);
+      PUSHs(newRV((SV *)rh));
       part = ped_disk_next_partition(disk, part);
       }
     ped_disk_destroy(disk);
