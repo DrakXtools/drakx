@@ -519,7 +519,10 @@ get_disk_partitions(char * device_path)
       return;
     part = ped_disk_next_partition(disk, NULL);
     while(part) {
-      if(part->num != -1) {
+      if(part->num == -1) {
+	   part = ped_disk_next_partition(disk, part);
+	   continue;
+      }
         char desc[4196];
         char *path = ped_partition_get_path(part);
         sprintf(desc, "%d ", part->num);
@@ -543,9 +546,8 @@ get_disk_partitions(char * device_path)
         }
         sprintf(desc+strlen(desc), " (%lld,%lld,%lld)", part->geom.start, part->geom.end, part->geom.length);
         XPUSHs(sv_2mortal(newSVpv(desc, 0)));
-      }
       part = ped_disk_next_partition(disk, part);
-    }
+      }
     ped_disk_destroy(disk);
   }
 
