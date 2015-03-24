@@ -107,8 +107,12 @@ sub read_one {
     c::get_disk_type($hd->{file}) eq "gpt" or die "$hd->{device} not a GPT disk ($hd->{file})";
 
     my @pt;
-    # FIXME: just use '@pt = c::...' if part_numbers are always linear:
+    # FIXME: just use '@pt = map { ... } c::...' if part_numbers are always linear:
     foreach (c::get_disk_partitions($hd->{file})) {
+        # fix detecting ESP (special case are they're detected through pt_type):
+        if (c::is_partition_ESP($hd->{file}, $_->{part_number}) {
+	    $_->{pt_type} = 0xef;
+        }
         @pt[$_->{part_number}-1] = $_;
     }
 

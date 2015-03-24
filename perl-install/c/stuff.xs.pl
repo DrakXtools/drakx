@@ -493,6 +493,27 @@ get_iso_volume_ids(int fd)
 
 print '
 
+int
+is_partition_ESP(char * device_path, int part_number)
+  CODE:
+  PedDevice *dev = ped_device_get(device_path);
+  RETVAL = 0;
+  if(dev) {
+    PedDisk* disk = ped_disk_new(dev);
+    if(disk) {
+      PedPartition* part = ped_disk_get_partition(disk, part_number);
+      if (!part) {
+        printf("is_partition_ESP: failed to find partition\n");
+      } else {
+        RETVAL=ped_partition_get_flag(part, PED_PARTITION_ESP);
+      }
+      ped_disk_destroy(disk);
+    }
+  }
+  OUTPUT:
+  RETVAL
+
+
 const char *
 get_disk_type(char * device_path)
   CODE:
