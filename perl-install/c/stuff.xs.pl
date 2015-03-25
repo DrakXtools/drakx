@@ -513,6 +513,35 @@ is_partition_ESP(char * device_path, int part_number)
   OUTPUT:
   RETVAL
 
+int
+set_partition_flag(char * device_path, int part_number, char *type)
+  CODE:
+  PedDevice *dev = ped_device_get(device_path);
+  RETVAL = 0;
+  if(dev) {
+    PedDisk* disk = ped_disk_new(dev);
+    if(disk) {
+      PedPartition* part = ped_disk_get_partition(disk, part_number);
+      if (!part) {
+        printf("set_partition_flag: failed to find partition\n");
+      } else {
+        PedPartitionFlag flag = 0;
+	if (!strcmp(type, "ESP")) {
+	   flag = PED_PARTITION_ESP;
+	} else {
+	   printf("set_partition_flag: unknown type\n");
+	}
+	if (flag)
+	   RETVAL=ped_partition_set_flag(part, flag, 1);
+	   if (RETVAL)
+	      RETVAL = ped_disk_commit(disk);
+      }
+      ped_disk_destroy(disk);
+    }
+  }
+  OUTPUT:
+  RETVAL
+
 
 const char *
 get_disk_type(char * device_path)

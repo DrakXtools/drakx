@@ -6,6 +6,7 @@ use vars qw(@ISA);
 
 @ISA = qw(partition_table::raw);
 
+use fs::type;
 use partition_table::raw;
 use c;
 
@@ -110,7 +111,7 @@ sub read_one {
     # FIXME: just use '@pt = map { ... } c::...' if part_numbers are always linear:
     foreach (c::get_disk_partitions($hd->{file})) {
         # fix detecting ESP (special case are they're detected through pt_type):
-        if (c::is_partition_ESP($hd->{file}, $_->{part_number}) {
+        if (c::is_partition_ESP($hd->{file}, $_->{part_number})) {
 	    $_->{pt_type} = 0xef;
         }
         @pt[$_->{part_number}-1] = $_;
@@ -141,6 +142,10 @@ sub write {
         print "($action, $part_number, $o_start, $o_size)\n";
         if ($action eq 'add') {
             c::disk_add_partition($hd->{file}, $o_start, $o_size, $part->{fs_type}) or die "failed to add partition";
+	    if (isESP($part)) {
+                c::set_partition_flag($hd->{file}, $part_number, 'ESP')
+                  or die "failed to set type for $part->{file} on $part->{mntpoint}";
+	    }
         } elsif ($action eq 'del' and !$partitions_killed) {
             c::disk_del_partition($hd->{file}, $part_number) or die "failed to del partition";
         }
