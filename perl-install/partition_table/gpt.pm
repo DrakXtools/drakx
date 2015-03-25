@@ -146,7 +146,7 @@ sub write {
                 c::set_partition_flag($hd->{file}, $part_number, 'ESP')
                   or die "failed to set type for $part->{file} on $part->{mntpoint}";
 	    }
-        } elsif ($action eq 'del' and !$partitions_killed) {
+        } elsif ($action eq 'del' && !$partitions_killed) {
             c::disk_del_partition($hd->{file}, $part_number) or die "failed to del partition #$part_number on $hd->{file}";
         }
     }
