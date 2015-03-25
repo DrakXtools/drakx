@@ -2097,7 +2097,7 @@ sub install {
 sub ensure_pkg_is_installed {
     my ($do_pkgs, $bootloader) = @_;
 
-    my %pkg = ('grub2' => glob_("/sys/firmware/efi/*") ? 'grub2-efi' : 'grub2');
+    my %pkg = ('grub2' => is_uefi() ? 'grub2-efi' : 'grub2');
     my %h = ('grub2' => 'grub2-install');
     my $main_method = main_method($bootloader->{method});
     if (member($main_method, qw(grub grub2 lilo))) {
