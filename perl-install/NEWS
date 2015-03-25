@@ -1,5 +1,6 @@
 - diskdrake:
   o fix retrieving ESP partition type on GPT
+  o log which GPT partition we fail to add/del
   o set proper GUID to ESP partitions with GPT layout
 - bump max_nb() to 131 to cover mdadm managed imsm and ddf1 bios
   fakeraids (containers defaults to >= 127 and partitions <=126)

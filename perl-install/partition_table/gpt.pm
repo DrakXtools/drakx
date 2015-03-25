@@ -141,13 +141,13 @@ sub write {
         my ($part) = grep { $_->{start} == $o_start && $_->{size} == $o_size } @$pt;
         print "($action, $part_number, $o_start, $o_size)\n";
         if ($action eq 'add') {
-            c::disk_add_partition($hd->{file}, $o_start, $o_size, $part->{fs_type}) or die "failed to add partition";
+            c::disk_add_partition($hd->{file}, $o_start, $o_size, $part->{fs_type}) or die "failed to add partition #$part_number on $hd->{file}";
 	    if (isESP($part)) {
                 c::set_partition_flag($hd->{file}, $part_number, 'ESP')
                   or die "failed to set type for $part->{file} on $part->{mntpoint}";
 	    }
         } elsif ($action eq 'del' and !$partitions_killed) {
-            c::disk_del_partition($hd->{file}, $part_number) or die "failed to del partition";
+            c::disk_del_partition($hd->{file}, $part_number) or die "failed to del partition #$part_number on $hd->{file}";
         }
     }
     common::sync();
