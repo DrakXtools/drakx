@@ -824,6 +824,8 @@ sub default_packages {
     # only needed for CDs/DVDs installations:
     add_n_log("method='cdrom'", 'perl-Hal-Cdroms') if $o->{method} eq 'cdrom';
     add_n_log("needed for VMware hypervisor", 'open-vm-tools') if detect_devices::is_vmware();
+    # we only support grub2-efi on UEFI:
+    add_n_log("needed for UEFI boot", 'grub2-efi') if is_uefi();
 
     my $dmi_BIOS = detect_devices::dmidecode_category('BIOS');
     my $dmi_Base_Board = detect_devices::dmidecode_category('Base Board');
