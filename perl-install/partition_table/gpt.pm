@@ -130,7 +130,7 @@ sub read_one {
 }
 
 sub write {
-    my ($hd, $_sector, $_pt, $_info) = @_;
+    my ($hd, $_sector, $pt, $_info) = @_;
 
     my $partitions_killed;
 
@@ -142,7 +142,7 @@ sub write {
 
     foreach (@{$hd->{will_tell_kernel}}) {
         my ($action, $part_number, $o_start, $o_size) = @$_;
-        my $part;
+        my ($part) = grep { $_->{start} == $o_start && $_->{size} == $o_size } @$pt;
         print "($action, $part_number, $o_start, $o_size)\n";
         if ($action eq 'add') {
             c::disk_add_partition($hd->{file}, $o_start, $o_size, $part->{fs_type}) or die "failed to add partition";
