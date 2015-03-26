@@ -7,6 +7,8 @@ our @EXPORT_OK = qw(getFile_ getAndSaveFile_ getAndSaveFile_media_info packageMe
 
 use common;
 use Data::Dumper;
+# Make sure report.bug are more easily comparable:
+$Data::Dumper::Sortkeys = 1;
 use fs::type;
 use urpm::download;
 use urpm::media;
