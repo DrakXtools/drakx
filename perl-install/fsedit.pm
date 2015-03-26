@@ -51,7 +51,7 @@ sub init_efi_suggestions {
     return if !is_uefi() || grep { isESP($_) } @$fstab;
 
     foreach (values %suggestions) {
-	@$_ = ({ mntpoint => "/boot/EFI", size => MB(100), pt_type => 0xef, ratio => 1, maxsize => MB(300) }, @$_);
+	unshift @$_, { mntpoint => "/boot/EFI", size => MB(100), pt_type => 0xef, ratio => 1, maxsize => MB(300) };
     }
 }
 
