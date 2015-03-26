@@ -6,6 +6,7 @@ our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(getFile_ getAndSaveFile_ getAndSaveFile_media_info packageMedium);
 
 use common;
+use Data::Dumper;
 use fs::type;
 use urpm::download;
 use urpm::media;
@@ -494,7 +495,6 @@ sub update_media {
 
 sub get_media {
     my ($o, $media, $packages) = @_;
-    use Data::Dumper;
 
     my ($suppl_CDs, $copy_rpms_on_disk, $phys_m);
     foreach (@$media) {
