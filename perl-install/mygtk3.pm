@@ -11,6 +11,7 @@ use c;
 use log;
 use common;
 
+BEGIN { print "Ignore the following Glib::Object::Introspection & Gtk3 warnings\n" }
 use Gtk3;
 
 =head1 SYNOPSYS
