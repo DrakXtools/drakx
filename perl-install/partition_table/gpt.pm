@@ -119,6 +119,7 @@ sub read_one {
 	    $_->{pt_type} = 0xfd;
         }
         $_->{fs_type} = 'swap' if $_->{fs_type} eq 'linux-swap(v1)';
+        $_->{fs_type} = 'ntfs-3g' if $_->{fs_type} eq 'ntfs';
         @pt[$_->{part_number}-1] = $_;
     }
 

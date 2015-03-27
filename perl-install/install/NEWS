@@ -1,4 +1,5 @@
 - GPT partitionning:
+  o fix retrieving ntfs partitions as ntfs-3g instead of ntfs
   o really fix retrieving swap partition type
 
 Version 16.73 - 27 March 2015
@@ -8,6 +9,7 @@ Version 16.73 - 27 March 2015
     (regression from 16.33)
   o fix "I cannot read the partition table of device XXX, it is too corrupted"
   o fix retrieving LVM/RAID/swap partition type
+  o fix retrieving ntfs partitions as ntfs-3g instead of ntfs
   o fix tagging lvm/raid as "linux filesystem"
   o fix tagging ntfs-3g as "linux filesystem"
   o fix tagging swap as "linux filesystem"
