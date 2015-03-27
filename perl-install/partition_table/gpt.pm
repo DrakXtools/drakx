@@ -148,9 +148,17 @@ sub write {
             local $part->{fs_type} = 'linux-swap(v1)' if isSwap($part->{fs_type});
             local $part->{fs_type} = 'ntfs' if $part->{fs_type} eq 'ntfs-3g';
             c::disk_add_partition($hd->{file}, $o_start, $o_size, $part->{fs_type}) or die "failed to add partition #$part_number on $hd->{file}";
+	    my $flag;
 	    if (isESP($part)) {
-                c::set_partition_flag($hd->{file}, $part_number, 'ESP')
-                  or die "failed to set type for $part->{file} on $part->{mntpoint}";
+                $flag = 'ESP';
+	    } elsif (isRawLVM($part)) {
+                $flag = 'LVM';
+	    } elsif (isRawRAID($part)) {
+                $flag = 'RAID';
+	    }
+	    if ($flag) {
+	        c::set_partition_flag($hd->{file}, $part_number, $flag)
+	          or die "failed to set type for $part->{file} on $part->{mntpoint}";
 	    }
         } elsif ($action eq 'del' && !$partitions_killed) {
             c::disk_del_partition($hd->{file}, $part_number) or die "failed to del partition #$part_number on $hd->{file}";

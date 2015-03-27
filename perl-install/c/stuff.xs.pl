@@ -98,6 +98,10 @@ PedPartitionFlag string_to_pedpartflag(char*type) {
    PedPartitionFlag flag = 0;
    if (!strcmp(type, "ESP")) {
       flag = PED_PARTITION_ESP;
+   } else if (!strcmp(type, "LVM")) {
+      flag = PED_PARTITION_LVM;
+   } else if (!strcmp(type, "RAID")) {
+      flag = PED_PARTITION_RAID;
    } else {
       printf("set_partition_flag: unknown type");
    }
