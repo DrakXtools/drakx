@@ -113,6 +113,10 @@ sub read_one {
         # fix detecting ESP (special case are they're detected through pt_type):
         if (c::get_partition_flag($hd->{file}, $_->{part_number}, 'ESP')) {
 	    $_->{pt_type} = 0xef;
+        } elsif (c::get_partition_flag($hd->{file}, $_->{part_number}, 'LVM')) {
+	    $_->{pt_type} = 0x8e;
+        } elsif (c::get_partition_flag($hd->{file}, $_->{part_number}, 'RAID')) {
+	    $_->{pt_type} = 0xfd;
         }
         @pt[$_->{part_number}-1] = $_;
     }
