@@ -118,6 +118,7 @@ sub read_one {
         } elsif (c::get_partition_flag($hd->{file}, $_->{part_number}, 'RAID')) {
 	    $_->{pt_type} = 0xfd;
         }
+        $part->{fs_type} = 'swap' if $part->{fs_type} eq 'linux-swap(v1)';
         @pt[$_->{part_number}-1] = $_;
     }
 
