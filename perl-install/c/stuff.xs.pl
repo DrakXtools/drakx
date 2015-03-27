@@ -94,6 +94,16 @@ int length_of_space_padded(char *str, int len) {
   return len;
 }
 
+PedPartitionFlag string_to_pedpartflag(char*type) {
+   PedPartitionFlag flag = 0;
+   if (!strcmp(type, "ESP")) {
+      flag = PED_PARTITION_ESP;
+   } else {
+      printf("set_partition_flag: unknown type");
+   }
+   return flag;
+}
+
 MODULE = c::stuff		PACKAGE = c::stuff
 
 ';
@@ -525,12 +535,7 @@ set_partition_flag(char * device_path, int part_number, char *type)
       if (!part) {
         printf("set_partition_flag: failed to find partition\n");
       } else {
-        PedPartitionFlag flag = 0;
-	if (!strcmp(type, "ESP")) {
-	   flag = PED_PARTITION_ESP;
-	} else {
-	   printf("set_partition_flag: unknown type\n");
-	}
+        PedPartitionFlag flag = string_to_pedpartflag(type);
 	if (flag)
 	   RETVAL=ped_partition_set_flag(part, flag, 1);
 	   if (RETVAL)
