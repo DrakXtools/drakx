@@ -80,6 +80,7 @@ sub entry {
 	$minor = 16 * $3 + ($4 || 0);
     } elsif (my ($prefix, $nb) = /(.*?)(\d+)$/) {	
 	my $f = ${{
+		   "md"          => sub { c::S_IFBLK(), 9,  0  },
 		   "ubd/"        => sub { c::S_IFBLK(), 98, 0  },
 	       }}{$prefix};
 	if ($f) {
