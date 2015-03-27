@@ -103,7 +103,7 @@ PedPartitionFlag string_to_pedpartflag(char*type) {
    } else if (!strcmp(type, "RAID")) {
       flag = PED_PARTITION_RAID;
    } else {
-      printf("set_partition_flag: unknown type");
+      printf("set_partition_flag: unknown type: %s\n", type);
    }
    return flag;
 }

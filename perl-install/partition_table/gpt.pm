@@ -158,7 +158,7 @@ sub write {
 	    }
 	    if ($flag) {
 	        c::set_partition_flag($hd->{file}, $part_number, $flag)
-	          or die "failed to set type for $part->{file} on $part->{mntpoint}";
+	          or die "failed to set type '$flag' for $part->{file} on $part->{mntpoint}";
 	    }
         } elsif ($action eq 'del' && !$partitions_killed) {
             c::disk_del_partition($hd->{file}, $part_number) or die "failed to del partition #$part_number on $hd->{file}";
