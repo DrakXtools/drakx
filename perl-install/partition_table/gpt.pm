@@ -146,6 +146,7 @@ sub write {
         print "($action, $part_number, $o_start, $o_size)\n";
         if ($action eq 'add') {
             local $part->{fs_type} = 'linux-swap(v1)' if isSwap($part->{fs_type});
+            local $part->{fs_type} = 'ntfs' if $part->{fs_type} eq 'ntfs-3g';
             c::disk_add_partition($hd->{file}, $o_start, $o_size, $part->{fs_type}) or die "failed to add partition #$part_number on $hd->{file}";
 	    if (isESP($part)) {
                 c::set_partition_flag($hd->{file}, $part_number, 'ESP')
