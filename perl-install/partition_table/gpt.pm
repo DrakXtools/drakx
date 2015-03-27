@@ -111,7 +111,7 @@ sub read_one {
     # FIXME: just use '@pt = map { ... } c::...' if part_numbers are always linear:
     foreach (c::get_disk_partitions($hd->{file})) {
         # fix detecting ESP (special case are they're detected through pt_type):
-        if (c::is_partition_ESP($hd->{file}, $_->{part_number})) {
+        if (c::get_partition_flag($hd->{file}, $_->{part_number}, 'ESP')) {
 	    $_->{pt_type} = 0xef;
         }
         @pt[$_->{part_number}-1] = $_;

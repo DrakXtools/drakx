@@ -504,7 +504,7 @@ get_iso_volume_ids(int fd)
 print '
 
 int
-is_partition_ESP(char * device_path, int part_number)
+get_partition_flag(char * device_path, int part_number, char *type)
   CODE:
   PedDevice *dev = ped_device_get(device_path);
   RETVAL = 0;
@@ -515,7 +515,9 @@ is_partition_ESP(char * device_path, int part_number)
       if (!part) {
         printf("is_partition_ESP: failed to find partition\n");
       } else {
-        RETVAL=ped_partition_get_flag(part, PED_PARTITION_ESP);
+        PedPartitionFlag flag = string_to_pedpartflag(type);
+        if (flag)
+           RETVAL=ped_partition_get_flag(part, flag);
       }
       ped_disk_destroy(disk);
     }
