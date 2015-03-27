@@ -503,7 +503,7 @@ sub main {
         my $mainbox = Gtk3::VBox->new;
 
         my @kinds = map { diskdrake::hd_gtk::hd2kind($_) } sort { $a->{is_removable} <=> $b->{is_removable} } @{ $all_hds->{hds} };
-        push @kinds, diskdrake::hd_gtk::raid2real_kind($_) foreach @{$all_hds->{raids}};
+        #push @kinds, diskdrake::hd_gtk::raid2real_kind($_) foreach @{$all_hds->{raids}};
         push @kinds, map { diskdrake::hd_gtk::lvm2kind($_) } @{$all_hds->{lvms}};
 
         my $hdchoice = Gtk3::HBox->new;
