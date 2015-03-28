@@ -102,6 +102,12 @@ my %_GUID_to_Label = (
   "89C57F98-2FE5-4DC0-89C1-5EC00CEFF2BE" => "Ceph dm-crypt disk in creation",
 );
 
+my %parted_mapping = (
+   'linux-swap(v1)' => 'swap',
+   'ntfs' => 'ntfs-3g',
+   );
+my %rev_parted_mapping = reverse %parted_mapping;
+
 sub read_one {
     my ($hd, $_sector) = @_;
 
@@ -120,8 +126,7 @@ sub read_one {
         } elsif ($_->{flag} eq 'RECOVERY') {
 	    $_->{pt_type} = 0x12;
         }
-        $_->{fs_type} = 'swap' if $_->{fs_type} eq 'linux-swap(v1)';
-        $_->{fs_type} = 'ntfs-3g' if $_->{fs_type} eq 'ntfs';
+        $_->{fs_type} = $parted_mapping{$_->{fs_type}} if $parted_mapping{$_->{fs_type}};
         @pt[$_->{part_number}-1] = $_;
     }
 
@@ -149,8 +154,7 @@ sub write {
         my ($part) = grep { $_->{start} == $o_start && $_->{size} == $o_size } @$pt;
         print "($action, $part_number, $o_start, $o_size)\n";
         if ($action eq 'add') {
-            local $part->{fs_type} = 'linux-swap(v1)' if isSwap($part->{fs_type});
-            local $part->{fs_type} = 'ntfs' if $part->{fs_type} eq 'ntfs-3g';
+            local $part->{fs_type} = $rev_parted_mapping{$part->{fs_type}} if $rev_parted_mapping{$part->{fs_type}};
             c::disk_add_partition($hd->{file}, $o_start, $o_size, $part->{fs_type}) or die "failed to add partition #$part_number on $hd->{file}";
 	    my $flag;
 	    if (isESP($part)) {
