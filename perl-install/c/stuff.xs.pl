@@ -508,6 +508,31 @@ get_iso_volume_ids(int fd)
 print '
 
 int
+is_recovery_partition(char * device_path, int part_number)
+  CODE:
+  PedDevice *dev = ped_device_get(device_path);
+  RETVAL = 0;
+  if(dev) {
+    PedDisk* disk = ped_disk_new(dev);
+    if(disk) {
+      PedPartition* part = ped_disk_get_partition(disk, part_number);
+      if (!part) {
+        printf("is_recovery_partition: failed to find partition\n");
+      } else {
+        /* FIXME: not sure everything is covered ... */
+        RETVAL=ped_partition_get_flag(part, PED_PARTITION_HPSERVICE) // HP-UX service partition
+          || ped_partition_get_flag(part, PED_PARTITION_MSFT_RESERVED) // Microsoft Reserved Partition -> LDM metadata, ...
+          || ped_partition_get_flag(part, PED_PARTITION_DIAG) // ==> PARTITION_MSFT_RECOVERY (Windows Recovery Environment) 
+          || ped_partition_get_flag(part, PED_PARTITION_APPLE_TV_RECOVERY)
+          || ped_partition_get_flag(part, PED_PARTITION_HIDDEN);
+      }
+      ped_disk_destroy(disk);
+    }
+  }
+  OUTPUT:
+  RETVAL
+
+int
 get_partition_flag(char * device_path, int part_number, char *type)
   CODE:
   PedDevice *dev = ped_device_get(device_path);
