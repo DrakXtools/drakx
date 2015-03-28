@@ -301,6 +301,7 @@ sub isApple { $_[0]{pt_type} == 0x401 && defined $_[0]{isDriver} }
 sub isAppleBootstrap { $_[0]{pt_type} == 0x401 && defined $_[0]{isBoot} }
 sub isRecovery { 
     isFat_or_NTFS($_[0]) && ($_[0]{type_name} =~ /^Hidden/ ||
+      $_->{pt_type} == 0x12 || # "Compaq diagnostics"
         member($_[0]{device_LABEL} , 
             # Extracted from /usr/share/hal/fdi/policy/10osvendor/20-storage-methods.fdi
             # Hopefuly we'll ask to hal/udev someday
