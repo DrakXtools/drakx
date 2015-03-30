@@ -1,5 +1,7 @@
 - diskdrake:
   o better fix for fail to read too corrupted partition table
+  o fix getting ESP with "use free space":
+    make sure to not override /boot/EFI mount point with /media/win_X
   o make sure to check for existing ESP on all disks
   o try to detect recovery partitions on GPT
 - stage2:
