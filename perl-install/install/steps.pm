@@ -176,6 +176,7 @@ sub selectInstallClass {
 #------------------------------------------------------------------------------
 sub doPartitionDisksBefore {
     my ($o) = @_;
+    log::l("fdisk before:\n" . `fdisk -l`);
     eval { 
 	eval { fs::mount::umount("$::prefix/sys/kernel/debug") };
 	eval { fs::mount::umount("$::prefix/sys") };
@@ -190,6 +191,7 @@ sub doPartitionDisksAfter {
     my ($o) = @_;
 
     fs::any::write_hds($o->{all_hds}, $o->{fstab}, !$o->{isUpgrade}, sub { $o->rebootNeeded }, $o);
+    log::l("fdisk after\n" . `fdisk -l`);
 
     if ($::local_install) {
 	my $p = fs::get::mntpoint2part($::prefix, [ fs::read_fstab('', '/proc/mounts') ]);
