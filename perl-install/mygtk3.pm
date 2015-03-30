@@ -1479,8 +1479,7 @@ sub _allow_scroll_TextView_to_bottom {
     sub {
 	my ($o_force) = @_;
 	my $adjustment = $scrolledWindow->get_vadjustment;
-	my $margin = 40; # allow for lag due to animated scrolling
-	if ($o_force || $adjustment->get_page_size + $adjustment->get_value + $margin >= $adjustment->get_upper) {
+	if ($o_force || $adjustment->get_property("page_size") + $adjustment->get_value == $adjustment->get_property("upper")) {
 	    flush(); #- one must flush before scrolling to end, otherwise the text just added *may* not be taken into account correctly, and so it doesn't really scroll to end
 	    $textView->scroll_to_mark($textView->get_buffer->get_mark('end'), 0, 1, 0, 1);
 	}
