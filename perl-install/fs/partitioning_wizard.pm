@@ -90,7 +90,7 @@ sub partitionWizardSolutions {
     my $min_linux = MB(600);
     my $min_swap = MB(50);
     my $min_freewin = MB(100);
-    fsedit::init_efi_suggestions($fstab);
+    fsedit::init_efi_suggestions($full_fstab);
 
     # each solution is a [ score, text, function ], where the function retunrs true if succeeded
 
