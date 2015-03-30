@@ -58,7 +58,7 @@ sub suggest_mount_points {
 sub suggest_mount_points_always {
     my ($fstab) = @_;
 
-    my @ESP = grep { isESP($_) && !$_->{isMounted} && maybeFormatted($_) && !$_->{is_removable} && !isRecovery($_) } @$fstab;
+    my @ESP = grep { isESP($_) && maybeFormatted($_) && !$_->{is_removable} } @$fstab;
     if (@ESP) {
 	$ESP[0]{mntpoint} = "/boot/EFI";
     }

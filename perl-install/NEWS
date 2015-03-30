@@ -3,6 +3,7 @@
   o fix getting ESP with "use free space":
     make sure to not override /boot/EFI mount point with /media/win_X
   o make sure to check for existing ESP on all disks
+  o relax checks for ESP
   o try to detect recovery partitions on GPT
 - stage2:
   o revert changes made in 16.70 for a better fix to mga#13894
