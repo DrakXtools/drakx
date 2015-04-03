@@ -2007,11 +2007,8 @@ sub install_grub2 {
     write_grub2($bootloader, $all_hds);
     my $boot = $bootloader->{boot};
     # if (member($boot, map { "/dev/$_->{device}" } @{$all_hds->{hds}}) {
-    if ($boot =~ /\d$/) {
-       run_program::rooted($::prefix, 'grub2-install', '2>', \$error, '--grub-setup=/bin/true', $boot) or die "grub2-install failed: $error";
-    } else {
-       run_program::rooted($::prefix, 'grub2-install', '2>', \$error, $boot) or die "grub2-install failed: $error";
-    }
+    my @options = $boot =~ /\d$/ ? ('--grub-setup=/bin/true', $boot) : $boot;
+    run_program::rooted($::prefix, 'grub2-install', '2>', \$error, '--grub-setup=/bin/true', @options) or die "grub2-install failed: $error";
     setVarsInSh("$::prefix/boot/grub2/drakboot.conf", { boot => $boot });
 }
 
