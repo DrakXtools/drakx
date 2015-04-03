@@ -117,7 +117,7 @@ sub read_one {
 	    $_->{pt_type} = 0x8e;
         } elsif (c::get_partition_flag($hd->{file}, $_->{part_number}, 'RAID')) {
 	    $_->{pt_type} = 0xfd;
-        } elsif (c::get_partition_flag($hd->{file}, $_->{part_number}, 'recovery')) {
+        } elsif (c::is_recovery_partition($hd->{file}, $_->{part_number})) {
 	    $_->{pt_type} = 0x12;
         }
         $_->{fs_type} = 'swap' if $_->{fs_type} eq 'linux-swap(v1)';
