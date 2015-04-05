@@ -314,10 +314,25 @@ sub encrypt_home {
     undef $wait;
 }
 
+<<<<<<< HEAD
 sub ask_remove_unused_packages {
     require pkgs;
     local $::prefix;
     pkgs::remove_unused_packages($in, $in->do_pkgs, '/');
+=======
+sub ask_gnome_reboot() {
+    my $lock_file = '/etc/draklive-install.d/gnome-reboot';
+    if ( ! is_mgalive() ) {
+	if ( -f $lock_file ) {
+	    run_program::run('/usr/bin/rm', '-f', $lock_file);
+	    # FIXME: convert to perl/gtk* window popup for translation support
+	    system("/usr/bin/zenity --timeout=20 --title 'Finishing install' --no-wrap --info --text 'This system will be rebooted\nfor the changes to take effect!'");
+	    run_program::run('/usr/bin/chown', '-R', 'gdm:gdm', '/var/lib/gdm');
+	    run_program::run('/usr/sbin/ldconfig', '-X');
+	    run_program::run('/usr/bin/systemctl', 'reboot');
+	}
+    }
+>>>>>>> add 'BIG HAMMER' fix to reboot gnome systems at end of configuration steps on first boot after live install
 }
 
 sub call {
@@ -355,11 +370,6 @@ call('users');
 call('encrypt_home');
 setVarsInSh($conf_file, { FINISH_INSTALL => 'no' });
 
-# (tpg) workaround for sddm, which hangs to autologin,
-# because when running finish-install,
-# /etc/sddm.conf is updated, and to get it
-# running sddm needs to be restarted
-# (tpg) this seems to be fixed as sddm got patched to be able to reload config files
-#system('systemctl restart display-manager.service &');
+call('gnome_reboot');
 
 $in->exit(0);
