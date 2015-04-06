@@ -1,6 +1,7 @@
 - bootloader:
   o add 'noiswmd' to kernel command line to manage isw_ bios
     fakeraids with dmraid for now (instead of mdadm)
+  o allow btrfs for / without separate /boot with grub2 (mga#15374)
 - partitioning wizard:
   o do not offer to select RAID as it result in a crash (mga#5800)
 
