@@ -283,6 +283,11 @@ sub read_grub2() {
 	} elsif (/linux\s+(\S+)\s+(.*)?/ || /module\s+(\S+vmlinu\S+)\s+(.*)?/) {
 	    $entry->{type} = 'image';
 	    @$entry{qw(kernel_or_dev append)} = ($1, $2);
+	    my ($vga, $other) = partition { /^vga=/ } split(' ', $entry->{append});
+	    if (@$vga) {
+	        $entry->{vga} = $vga->[0] =~ /vga=(.*)/ && $1;
+	        $entry->{append} = join(' ', @$other);
+	    }
 	} elsif (/initrd\s+(\S+)/ || /module\s+(\S+initrd\S+)\s+(.*)?/) {
 	    $entry->{initrd} = $1;
 	}
