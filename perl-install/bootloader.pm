@@ -1792,6 +1792,9 @@ sub write_grub2 {
     # set default parameters:
     my ($entry) = grep { $_->{kernel_or_dev} =~ /vmlin/ } @{$bootloader->{entries}};
     my $append = $entry->{append};
+    if (my $vga = $entry->{vga} || $bootloader->{vga}) {
+	$append .= " vga=$vga";
+    }
     $append =~ s/root=\S+//g;
     $append =~ s/\bro\b//g;
     $append =~ s/\s+/ /g;
