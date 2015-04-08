@@ -1822,8 +1822,7 @@ sub write_grub2 {
     $conf{GRUB_TIMEOUT} = $bootloader->{timeout};
     setVarsInSh($f, \%conf);
 
-    my $grub2_cfg = '/boot/grub2/grub.cfg';
-    run_program::rooted($::prefix, 'grub2-mkconfig', '2>', \$error, '-o', $grub2_cfg) or die "grub2-mkconfig failed: $error";
+    run_program::rooted($::prefix, 'update-grub2', '2>', \$error) or die "update-grub2 failed: $error";
 
     # set default entry:
     eval {
