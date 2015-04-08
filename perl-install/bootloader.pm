@@ -1815,7 +1815,7 @@ sub write_grub2 {
 
     # set default entry:
     eval {
-	run_program::rooted($::prefix, 'grub2-set-default', '2>', \$error, $bootloader->{default}) or die "grub2-mkconfig failed: $error";
+	run_program::rooted($::prefix, 'grub2-set-default', '2>', \$error, $bootloader->{default}) or die "grub2-set-default failed: $error";
     };
 }
 
