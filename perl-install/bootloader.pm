@@ -1829,6 +1829,7 @@ sub write_grub2 {
     eval {
 	run_program::rooted($::prefix, 'grub2-set-default', '2>', \$error, $bootloader->{default}) or die "grub2-set-default failed: $error";
     };
+    check_enough_space();
 }
 
 sub write_grub {
