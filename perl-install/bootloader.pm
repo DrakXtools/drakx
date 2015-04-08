@@ -249,6 +249,13 @@ sub read {
 	} @devs;
 
 	if ($type eq $main_method) {
+	    return $bootloader if read_($bootloader);
+	}
+    }
+}
+
+sub read_ {
+    my ($bootloader) = @_;
 	    my @prefered_entries = map { get_label($_, $bootloader) } $bootloader->{default}, 'linux';
 
 	    if (my $default = find { $_ && $_->{type} eq 'image' } (@prefered_entries, @{$bootloader->{entries}})) {
@@ -259,8 +266,6 @@ sub read {
 		$bootloader->{default_options} = {};
 	    }
 	    return $bootloader;
-	}
-    }
 }
 
 =item read_grub2 ($o_fstab)
