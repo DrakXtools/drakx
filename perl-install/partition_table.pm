@@ -137,7 +137,7 @@ sub assign_device_numbers {
 
     $i = ord 'C';
     $c->{device_windobe} = chr($i++) if $c;
-    $_->{device_windobe} = chr($i++) foreach grep { isFat_or_NTFS($_) } map { $_->{normal} } @{$hd->{extended}};
+    $_->{device_windobe} = chr($i++) foreach grep { isFat_or_NTFS($_) && !isRecovery($_) } map { $_->{normal} } @{$hd->{extended}};
     $_->{device_windobe} = chr($i++) foreach @others;
 }
 
