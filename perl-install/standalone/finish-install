@@ -359,6 +359,7 @@ setVarsInSh($conf_file, { FINISH_INSTALL => 'no' });
 # because when running finish-install,
 # /etc/sddm.conf is updated, and to get it
 # running sddm needs to be restarted
-system('systemctl restart display-manager.service &');
+# (tpg) this seems to be fixed as sddm got patched to be able to reload config files
+#system('systemctl restart display-manager.service &');
 
 $in->exit(0);
