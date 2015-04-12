@@ -42,9 +42,9 @@ use fs;
 );
 
 sub init_efi_suggestions {
-    my ($fstab) = @_;
+    my ($fstab, $o_force) = @_;
     state $done;
-    return if $done;
+    return if $done && !$o_force;
     $done++;
 
     # only suggests /boot/EFI if there's not already one:
