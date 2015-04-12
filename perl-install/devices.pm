@@ -170,7 +170,7 @@ sub part_prefix {
 
 sub prefix_for_dev {
     my ($dev) = @_;
-    $dev . ($dev =~ /\d$/ || $dev =~ m!mapper/! ? 'p' : '');
+    $dev . ($dev =~ /\d$/ 'p' : '');
 }
 
 sub should_prefer_UUID {
