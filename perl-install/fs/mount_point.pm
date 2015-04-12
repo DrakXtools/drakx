@@ -62,7 +62,7 @@ sub suggest_mount_points_always {
     if (@ESP) {
 	$ESP[0]{mntpoint} = "/boot/EFI";
     }
-    my @win = grep { isFat_or_NTFS($_) && !$_->{isMounted} && maybeFormatted($_) && !$_->{is_removable} && !isRecovery($_) && !isESP($_) } @$fstab;
+    my @win = grep { isnormal_Fat_or_NTFS($_) && !$_->{isMounted} && maybeFormatted($_) && !$_->{is_removable} } @$fstab;
     log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
     if (@win == 1) {
 	$win[0]{mntpoint} = "/media/windows";
