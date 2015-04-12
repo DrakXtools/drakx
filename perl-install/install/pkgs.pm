@@ -126,10 +126,11 @@ sub packagesProviding {
 
 #- search package with given name and compatible with current architecture.
 #- take the best one found (most up-to-date).
+# FIXME: reuse urpmi higher level code instead!
 sub packageByName {
     my ($packages, $name) = @_;
 
-    my @l =  grep { $_->name eq $name } packagesProviding($packages, $name);
+    my @l =  sort { $b->id <=> $a->id } grep { $_->name eq $name } packagesProviding($packages, $name);
 
     my $best;
     foreach (@l) {
