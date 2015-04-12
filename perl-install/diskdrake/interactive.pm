@@ -354,6 +354,8 @@ sub Clear_all {
 	$hd->{getting_rid_of_readonly_allowed} = 0; #- we don't need this flag anymore
 	fsedit::partition_table_clear_and_initialize($all_hds->{lvms}, $hd, $in);
     }
+    my $fstab = [ fs::get::fstab($all_hds) ];
+    fsedit::init_efi_suggestions($fstab, 1);
 }
 
 sub Auto_allocate {
