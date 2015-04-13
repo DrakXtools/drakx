@@ -34,7 +34,12 @@ sub init() {
     eval { modules::load('dm-mirror', 'dm-zero') };
     devices::init_device_mapper();
     if ($::isInstall) {
-	call_dmraid('-ay');
+        foreach my $name (call_dmraid('-s', '-c', '-i')) {
+	    chomp($name);
+	    log::l("got: $name");
+	    call_dmraid('-ay', '-i', '--rm_partitions', '-p', $name);
+	    run_program::run('/sbin/kpartx', '-u', '-a', '/dev/mapper/' . $name);
+        }
     }
     1;
 }
