@@ -68,5 +68,7 @@ if (!$auto) {
 }
 
 run_program::run('mount', '--bind', '/dev', "$::prefix/dev");
+run_program::run('mount', '--bind', '/sys', "$::prefix/sys");
 $install->();
+run_program::run('umount', "$::prefix/sys");
 run_program::run('umount', "$::prefix/dev");
