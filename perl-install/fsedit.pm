@@ -560,6 +560,8 @@ sub auto_allocate {
 	    die N("Nothing to do");
 	}
     }
+    my @fstab = fs::get::fstab($all_hds);
+    fs::mount_point::suggest_mount_points_always(\@fstab);
 }
 
 sub auto_allocate_raids {
