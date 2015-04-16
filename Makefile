@@ -17,6 +17,9 @@ install_only:
 	make -C rescue install DESTDIR=$(DESTDIR)
 	make -C advertising install DESTDIR=$(DESTDIR)
 
+fetchsubmodules:
+	git submodule update --recursive --checkout
+
 clean:
 #	force taking new rpms from repository
 	rm -rf images/RPMS
