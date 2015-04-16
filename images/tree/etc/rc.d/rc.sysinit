@@ -5,9 +5,6 @@
 # Set the hostname.
 action "Setting hostname stage1" hostname stage1
 
-mount /dev
-mkdir /dev/pts /dev/shm
-mount /proc
 mount -a
 
 cat /usr/share/moondrake.logo
