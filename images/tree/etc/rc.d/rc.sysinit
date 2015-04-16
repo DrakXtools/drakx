@@ -26,6 +26,11 @@ udevadm trigger --type=devices --action=add
 
 grep -q noauto /proc/cmdline || drvinst SERIAL_USB
 
+if grep -q vconsole.keymap /proc/cmdline; then
+	keymap=$(sed -e 's#.*vconsole.keymap=\(.*\)\ .*#\1#g')
+	action "Loading keymap: $keymap" loadkeys $keymap
+fi
+
 /etc/rc.d/init.d/gpm start
 
 if grep -q rescue /proc/cmdline; then
