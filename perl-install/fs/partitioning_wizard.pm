@@ -178,7 +178,7 @@ sub partitionWizardSolutions {
                                                              }, \&partition_table::description, \@ok_for_resize_fat) or return;
                           $part->{size} > $part->{min_linux} + $part->{min_win} or die N("Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the %s installation.", "Moondrake GNU/Linux");
                       } else {
-                          $part = top(grep { $_->{req_size} } @ok_for_resize_fat);
+                          $part = top(grep { $_->{size} - $_->{req_size} } @ok_for_resize_fat);
                       }
                       my $resize_fat = $part->{resize_fat};
                       my $hd = fs::get::part2hd($part, $all_hds);
