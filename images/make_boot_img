@@ -213,7 +213,7 @@ boot_iso() {
     LC_ALL=C date -u > grub/VERSION
     cat all.kernels/.list >> grub/VERSION
    
-    grub2-mkrescue --themes='' -o $out grub
+    grub2-mkrescue --compress=xz --themes='' -o $out grub
 }
 
 img="$1"
