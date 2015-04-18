@@ -3,6 +3,9 @@
     where Windows will have most space left after resizing.
   o suggest up to 20GB/20% of the windows partition (whichever is larger),
     previously 6GB/10% (mga#15589)
+- ugtk2, ugtk3, harddrake2:
+  o do not "restore" mouse cursor on the root window, we haven't set it to
+    'wait' since 2005 and this causes a crash if we don't own it (mga#15729).
 
 Version 16.85 - 15 April 2015
 

@@ -853,7 +853,6 @@ sub new {
 
 sub main {
     my ($o, $o_completed, $o_canceled) = @_;
-    gtkset_mousecursor_normal();
 
     $o->show;
     mygtk3::main($o->{rwindow},
@@ -881,7 +880,6 @@ sub shrink_topwindow {
     $o->{real_window}->resize(1, 1);
 }
 sub exit {
-    gtkset_mousecursor_normal(); #- for restoring a normal in any case
     flush();
     if ($::isStandalone) {
         require standalone;

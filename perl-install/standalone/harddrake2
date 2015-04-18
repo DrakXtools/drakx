@@ -249,7 +249,6 @@ $w->{window}->add(gtkpack_(0, Gtk3::VBox->new(0, 0),
                                                                                                       local $SIG{CHLD} = undef;
                                                                                                       require modules::interactive;
                                                                                                       modules::interactive::config_window($in, $current_device);
-                                                                                                      gtkset_mousecursor_normal();
                                                                                                   }),
                                                      0, my $config_button = gtksignal_connect(Gtk3::Button->new(N("Run config tool")),
                                                                                               # we've a configurator, let's add a button for it and show it
@@ -499,7 +498,6 @@ $tree->signal_connect(realize => sub { $tree->get_selection->select_path(Gtk3::T
         my @packages2install = uniq($in->do_pkgs->are_available(@packages));
 
         undef $wait;
-        gtkset_mousecursor_normal();
         
         if (@packages2install && $in->ask_yesorno(N("Warning"), N("The following packages need to be installed:\n") . join(', ', @packages2install))) {
             $in->do_pkgs->install(@packages2install);
@@ -508,7 +506,6 @@ $tree->signal_connect(realize => sub { $tree->get_selection->select_path(Gtk3::T
 }
 $SIG{CHLD} = \&reap_children;
 undef $wait;
-gtkset_mousecursor_normal();
 
 # fill in default right text since no device is selected on startup:
 fill_default_text($text);
