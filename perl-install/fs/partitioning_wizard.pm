@@ -178,7 +178,13 @@ sub partitionWizardSolutions {
                                                              }, \&partition_table::description, \@ok_for_resize_fat) or return;
                           $part->{size} > $part->{min_linux} + $part->{min_win} or die N("Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the %s installation.", "Moondrake GNU/Linux");
                       } else {
-                          $part = top(grep { $_->{size} - $_->{req_size} } @ok_for_resize_fat);
+                          my @selected = grep {
+                              $_->{selected_for_resize} &&
+                              $o_target->{device} eq $_->{rootDevice} # Not needed but let's be safe
+                          } @ok_for_resize_fat;
+                          my $nb_parts = @selected;
+                          die N("Failed to find the partition to resize (%d choices)", $nb_parts) unless $nb_parts == 1;
+                          $part = @selected[0];
                       }
                       my $resize_fat = $part->{resize_fat};
                       my $hd = fs::get::part2hd($part, $all_hds);
@@ -307,16 +313,27 @@ sub create_display_box {
     my $part_sep;
     my $desc;
 
-    my $last = $resize && $resize->[-1];
+    if ($resize) {
+	my %resizable_parts;
+	foreach my $entry (@$resize) {
+	    # selected_for_resize may have been set on another disk, clear it
+	    $entry->{selected_for_resize} = 0;
+	    $resizable_parts{$entry->{device}} = $entry;
+	}
+	# find resizable parts on this disk
+	my @choices = grep { $resizable_parts{$_->{device}} } @parts;
+	my @sorted_resize = sort {
+		($a->{size} - $a->{req_size}) <=> ($b->{size} - $b->{req_size})
+	    } @choices;
+	$sorted_resize[-1]->{selected_for_resize} = 1;
+    }
 
     foreach my $entry (@parts) {
 	my $part_info = Gtk3::Label->new($entry->{device_LABEL});
 	my @colorized_fs_types = qw(ext2 ext3 ext4 xfs swap vfat ntfs ntfs-3g);
         my $part_widget = Gtk3::EventBox->new;
         $entry->{width} = int($entry->{size} * $initial_ratio) + $minwidth;
-        if ($last && $last->{device} eq $entry->{device}) {
-            #- entry is the last resizable partition
-
+        if ($entry->{selected_for_resize}) {
             my $ratio;
             my $update_ratio = sub { $ratio = $entry->{width} / $entry->{size} };
             $update_ratio->();
