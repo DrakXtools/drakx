@@ -108,6 +108,15 @@ PedPartitionFlag string_to_pedpartflag(char*type) {
    return flag;
 }
 
+int is_recovery_partition(PedPartition*part) {
+  /* FIXME: not sure everything is covered ... */
+  return ped_partition_get_flag(part, PED_PARTITION_HPSERVICE) // HP-UX service partition
+      || ped_partition_get_flag(part, PED_PARTITION_MSFT_RESERVED) // Microsoft Reserved Partition -> LDM metadata, ...
+      || ped_partition_get_flag(part, PED_PARTITION_DIAG) // ==> PARTITION_MSFT_RECOVERY (Windows Recovery Environment)
+      || ped_partition_get_flag(part, PED_PARTITION_APPLE_TV_RECOVERY)
+      || ped_partition_get_flag(part, PED_PARTITION_HIDDEN);
+}
+
 MODULE = c::stuff		PACKAGE = c::stuff
 
 ';
@@ -508,31 +517,6 @@ get_iso_volume_ids(int fd)
 print '
 
 int
-is_recovery_partition(char * device_path, int part_number)
-  CODE:
-  PedDevice *dev = ped_device_get(device_path);
-  RETVAL = 0;
-  if(dev) {
-    PedDisk* disk = ped_disk_new(dev);
-    if(disk) {
-      PedPartition* part = ped_disk_get_partition(disk, part_number);
-      if (!part) {
-        printf("is_recovery_partition: failed to find partition\n");
-      } else {
-        /* FIXME: not sure everything is covered ... */
-        RETVAL=ped_partition_get_flag(part, PED_PARTITION_HPSERVICE) // HP-UX service partition
-          || ped_partition_get_flag(part, PED_PARTITION_MSFT_RESERVED) // Microsoft Reserved Partition -> LDM metadata, ...
-          || ped_partition_get_flag(part, PED_PARTITION_DIAG) // ==> PARTITION_MSFT_RECOVERY (Windows Recovery Environment) 
-          || ped_partition_get_flag(part, PED_PARTITION_APPLE_TV_RECOVERY)
-          || ped_partition_get_flag(part, PED_PARTITION_HIDDEN);
-      }
-      ped_disk_destroy(disk);
-    }
-  }
-  OUTPUT:
-  RETVAL
-
-int
 get_partition_flag(char * device_path, int part_number, char *type)
   CODE:
   PedDevice *dev = ped_device_get(device_path);
@@ -617,12 +601,23 @@ get_disk_partitions(char * device_path)
 	   continue;
       }
       char *path = ped_partition_get_path(part);
+      char *flag = "";
+      if (ped_partition_get_flag(part, PED_PARTITION_ESP)) {
+        flag = "ESP";
+      } else if (ped_partition_get_flag(part, PED_PARTITION_LVM)) {
+        flag = "LVM";
+      } else if (ped_partition_get_flag(part, PED_PARTITION_RAID)) {
+        flag = "RAID";
+      } else if (is_recovery_partition(part)) {
+        flag = "RECOVERY";
+      }
       HV * rh = (HV *)sv_2mortal((SV *)newHV());
       hv_store(rh, "part_number",    11, newSViv(part->num),      0);
       hv_store(rh, "real_device",    11, newSVpv(path, 0),        0);
       hv_store(rh, "start",           5, newSViv(part->geom.start), 0);
       hv_store(rh, "size",            4, newSViv(part->geom.length), 0);
       hv_store(rh, "pt_type",         7, newSViv(0xba),           0);
+      hv_store(rh, "flag",            4, newSVpv(flag, 0),        0);
       free(path);
       if(part->fs_type)
         hv_store(rh, "fs_type",       7, newSVpv(part->fs_type->name, 0), 0);
@@ -799,4 +794,3 @@ print '
 
 PROTOTYPES: DISABLE
 ';
-

@@ -111,13 +111,13 @@ sub read_one {
     # FIXME: just use '@pt = map { ... } c::...' if part_numbers are always linear:
     foreach (c::get_disk_partitions($hd->{file})) {
         # fix detecting ESP (special case are they're detected through pt_type):
-        if (c::get_partition_flag($hd->{file}, $_->{part_number}, 'ESP')) {
+        if ($_->{flag} eq 'ESP') {
 	    $_->{pt_type} = 0xef;
-        } elsif (c::get_partition_flag($hd->{file}, $_->{part_number}, 'LVM')) {
+        } elsif ($_->{flag} eq 'LVM') {
 	    $_->{pt_type} = 0x8e;
-        } elsif (c::get_partition_flag($hd->{file}, $_->{part_number}, 'RAID')) {
+        } elsif ($_->{flag} eq 'RAID') {
 	    $_->{pt_type} = 0xfd;
-        } elsif (c::is_recovery_partition($hd->{file}, $_->{part_number})) {
+        } elsif ($_->{flag} eq 'RECOVERY') {
 	    $_->{pt_type} = 0x12;
         }
         $_->{fs_type} = 'swap' if $_->{fs_type} eq 'linux-swap(v1)';
