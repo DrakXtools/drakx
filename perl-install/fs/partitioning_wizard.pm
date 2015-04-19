@@ -304,6 +304,7 @@ sub create_display_box {
     my $minwidth = 7;
 
     my $display_box = ugtk3::gtkset_size_request(Gtk3::HBox->new(0,0), -1, 26);
+    $display_box->set_spacing(1);
 
     my $sep_count = @parts - 1;
     #- ratio used to compute initial partition pixel width (each partition should be > min_width)
@@ -312,7 +313,6 @@ sub create_display_box {
 
     my $vbox = Gtk3::VBox->new;
 
-    my $part_sep;
     my $desc;
 
     if ($resize) {
@@ -411,12 +411,7 @@ sub create_display_box {
             ugtk3::gtkpack($display_box, $part_widget);
         }
 	$part_widget->add($part_info);
-
-	$part_sep = gtkadd(Gtk3::EventBox->new,
-                     gtkset_size_request(Gtk3::Label->new("."), 1, 0));
-	gtkpack__($display_box, $part_sep);
     }
-    $display_box->remove($part_sep) if $part_sep;
     unless ($resize || $fill_empty) {
         my @types = (N_("Ext2/3/4"), N_("XFS"), N_("Swap"), N_("Windows"),
                     N_("Other"), N_("Empty"));
