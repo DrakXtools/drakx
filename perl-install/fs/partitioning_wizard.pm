@@ -295,7 +295,9 @@ sub warn_reboot_needed {
 sub create_display_box {
     my ($kind, $resize, $fill_empty, $button) = @_;
 
-    my @parts = diskdrake::hd_gtk::kind2parts($kind);
+    # Hide empty space < 2MB, wehave such holes due to alignment
+    my @parts = grep { $_->{size} > MB(2) || !isEmpty($_) } diskdrake::hd_gtk::kind2parts($kind);
+
     my $totalsectors = diskdrake::hd_gtk::kind2sectors($kind, @parts);
 
     my $width = 520;

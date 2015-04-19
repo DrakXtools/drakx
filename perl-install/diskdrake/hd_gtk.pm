@@ -398,7 +398,7 @@ sub calc_buttons4partitions_lengths($) {
 }
 
 sub create_buttons4partitions {
-    my ($kind, $totalsectors, @parts) = @_;
+    my ($kind, $totalsectors, @all_parts) = @_;
 
     calc_buttons4partitions_lengths(\@parts);
 
@@ -408,6 +408,8 @@ sub create_buttons4partitions {
 	$current_button->set_active(0) if $current_button;
 	($current_button = $w)->set_active(1);
     };
+
+    my @parts = grep { $_->{size} > MB(2) || !isEmpty($_) } @all_parts;
 
     foreach my $entry (@parts) {
 	if (isRawLUKS($entry) && $entry->{dm_active}) {
