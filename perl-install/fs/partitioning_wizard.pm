@@ -351,6 +351,9 @@ sub create_display_box {
             $hpane->pack1($part_widget, 1, 0);
             $hpane->pack2($mdv_widget, 1, 0);
             $hpane->set_position(ceil($ratio * $entry->{req_size}));
+            # $hpane->set_wide_handle will only be added in Gtk 3.16
+            $style_context = $hpane->get_style_context();
+            $style_context->add_class("wide");
             ugtk3::gtkset_size_request($hpane, $entry->{width}, 0);
             ugtk3::gtkpack__($display_box, $hpane);
 
