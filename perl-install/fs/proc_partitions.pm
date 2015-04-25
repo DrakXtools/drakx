@@ -6,8 +6,12 @@ use common;
 sub read_raw() {
     my (undef, undef, @all) = cat_("/proc/partitions");
     grep {
-	$_->{size} != 1 &&	  # skip main extended partition
-	$_->{size} != 0x3fffffff; # skip cdroms (otherwise stops cd-audios)
+	$_->{size} != 1 &&	      # skip main extended partition
+	$_->{size} != 0x3fffffff &&   # skip cdroms (otherwise stops cd-audios)
+	$_->{dev} !~ /mmcblk\d+[^p]/; # only keep partitions like mmcblk0p0
+	                              # not mmcblk0rpmb or mmcblk0boot0 as they
+				      # are not in the partition table and
+				      # things will break (mga#15759)
     } map { 
 	my %l; 
 	@l{qw(major minor size dev)} = split; 
