@@ -961,11 +961,11 @@ sub detect_lvms_on_dmcrypt {
     require fs::dmcrypt;
     my (undef, $tmp_file) = File::Temp::mkstemp('/tmp/crypttab.XXXXXXX');
     fs::dmcrypt::save_crypttab_($all_hds, $tmp_file);
+    require lvm;
+    lvm::detect_during_install();
     $all_hds->{lvms} = [ fsedit::lvms($all_hds) ];
     fs::dmcrypt::read_crypttab_($all_hds, $tmp_file);
     rm_rf($tmp_file);
-    require lvm;
-    lvm::detect_during_install() if $::isInstall;
 }
 
 sub Add2RAID {
