@@ -1506,6 +1506,8 @@ sub write {
         # Only include valid fields and ommit any that are the same as LANG to make it cleaner
         # (cleanup logic copied from systemd)
         my @filtered_keys = grep { exists $h->{$_} && ($_ eq 'LANG' || !exists $h->{'LANG'} || $h->{$_} ne $h->{'LANG'}) } @locale_conf_fields;
+        my @filtered_input = grep { exists $h->{$_} } @IM_i18n_fields;
+        push (@filtered_keys, @filtered_input);
         my $h2 = { map { $_ => $h->{$_} } @filtered_keys };
         setVarsInShMode($::prefix . $file, 0644, $h2);
 
