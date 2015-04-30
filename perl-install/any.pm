@@ -518,7 +518,7 @@ sub setupBootloader__entries {
 		if ($e->{type} eq "image") { 
 			@l = (
 				{ label => N("Image"), val => \$e->{kernel_or_dev}, list => [ map { "/boot/$_" } bootloader::installed_vmlinuz() ], not_edit => 0 },
-				{ label => N("Root"), val => \$e->{root}, list => [ map { fs::wild_device::from_part('', $_) } @$fstab ], format => sub { $root_descr{$_[0]} }  },
+				{ label => N("Root"), val => \$e->{root}, list => [ map { fs::wild_device::from_part('', $_) } grep { !isSwap($_) } @$fstab ], format => sub { $root_descr{$_[0]} }  },
 				{ label => N("Append"), val => \$append },
 				if_($e->{xen}, 
 					{ label => N("Xen append"), val => \$e->{xen_append} }
