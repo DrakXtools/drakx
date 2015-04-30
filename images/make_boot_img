@@ -205,7 +205,7 @@ grub() {
 	fi
     done
 
-    install -m644 /boot/memtest.bin -D $dir/boot/memtest.bin
+    install -m644 /boot/memtest86+.elf -D $dir/boot/memtest86+.elf
 }
 
 boot_iso() {

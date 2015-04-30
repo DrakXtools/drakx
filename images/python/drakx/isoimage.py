@@ -12,7 +12,7 @@ class IsoImage(object):
         #os.mkdir(config.tmpdir)
         os.mkdir(destdir)
         os.system("ln -s %s/grub/boot/alt* %s/" % (os.path.realpath(config.rootdir), destdir))
-        os.symlink("/boot/memtest.bin", destdir+"/memtest")
+        os.symlink("/boot/memtest86+.elf", destdir+"/memtest")
         os.mkdir(grubdir)
         os.system("ln -s %s/grub/boot/grub/* %s/" % (os.path.realpath(config.rootdir),grubdir))
         for f in ['autorun.inf', 'dosutils']:
