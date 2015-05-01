@@ -1801,10 +1801,8 @@ sub crypt_grub_password {
     chomp_($res);
 }
 
-sub write_grub2 {
-    my ($bootloader, $_all_hds, $o_backup_extension) = @_;
-    my $error;
-
+sub get_grub2_append {
+    my ($bootloader) = @_;
     # set default parameters:
     my ($entry) = grep { $_->{kernel_or_dev} =~ /vmlin/ } @{$bootloader->{entries}};
     my $append = $entry->{append};
@@ -1814,10 +1812,16 @@ sub write_grub2 {
     $append =~ s/root=\S+//g;
     $append =~ s/\bro\b//g;
     $append =~ s/\s+/ /g;
+    $append;
+}
+
+sub write_grub2 {
+    my ($bootloader, $_all_hds, $o_backup_extension) = @_;
+    my $error;
 
     my $f = "$::prefix/etc/default/grub";
     my %conf = getVarsFromSh($f);
-    $conf{GRUB_CMDLINE_LINUX_DEFAULT} = $append;
+    $conf{GRUB_CMDLINE_LINUX_DEFAULT} = get_grub2_append($bootloader);
     $conf{GRUB_GFXPAYLOAD_LINUX} = 'auto' if is_uefi();
     $conf{GRUB_DISABLE_RECOVERY} = 'false'; # for 'failsafe' entry
     $conf{GRUB_TIMEOUT} = $bootloader->{timeout};
