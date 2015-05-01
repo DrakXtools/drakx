@@ -1383,7 +1383,7 @@ sub read {
     $f2 = "$::prefix/etc/sysconfig/i18n" if ! -e $f2 && -e "$::prefix/etc/sysconfig/i18n";
     my %h = getVarsFromSh($b_user_only && -e $f1 ? $f1 : $f2);
     # Fill in defaults (from LANG= variable)
-    %h = map { $_ => $h{$_} || $h{'LANG'} || 'en_US' } @locale_conf_fields;
+    %h = map { $_ => $h{$_} || $h{LANG} || 'en_US' } @locale_conf_fields;
     my $locale = system_locales_to_ourlocale($h{LC_MESSAGES}, $h{LC_MONETARY});
     
     if (find { $h{$_} } @IM_i18n_fields) {
@@ -1505,16 +1505,16 @@ sub write {
         log::explanations(qq(Setting locale configuration in "$file"));
         # Only include valid fields and ommit any that are the same as LANG to make it cleaner
         # (cleanup logic copied from systemd)
-        my @filtered_keys = grep { exists $h->{$_} && ($_ eq 'LANG' || !exists $h->{'LANG'} || $h->{$_} ne $h->{'LANG'}) } @locale_conf_fields;
+        my @filtered_keys = grep { exists $h->{$_} && ($_ eq 'LANG' || !exists $h->{LANG} || $h->{$_} ne $h->{LANG}) } @locale_conf_fields;
         my @filtered_input = grep { exists $h->{$_} } @IM_i18n_fields;
-        push (@filtered_keys, @filtered_input);
+        push @filtered_keys, @filtered_input;
         my $h2 = { map { $_ => $h->{$_} } @filtered_keys };
         setVarsInShMode($::prefix . $file, 0644, $h2);
 
-        if ($h->{'SYSFONT'}) {
+        if ($h->{SYSFONT}) {
              $file = '/etc/vconsole.conf';
-             $h2 = { 'FONT' => $h->{'SYSFONT'} };
-             $h2->{'FONT_UNIMAP'} = $h->{'SYSFONTACM'} if ($h->{'SYSFONTACM'});
+             $h2 = { 'FONT' => $h->{SYSFONT} };
+             $h2->{FONT_UNIMAP} = $h->{SYSFONTACM} if $h->{SYSFONTACM};
              addVarsInShMode($::prefix . $file, 0644, $h2);
         }
     }
