@@ -374,7 +374,7 @@ sub guessed_by_mount() {
 }
 
 sub directories_needed_to_boot() { 
-    qw(/ /usr /var /boot /tmp);
+    qw(/ /usr /var /boot /boot/EFI /tmp);
 }
 
 sub carry_root_loopback {
