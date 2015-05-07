@@ -62,7 +62,8 @@ our @tree =
       string => N("SATA controllers"),
       icon => "ide_hd.png",
       configurator => "",
-      detector => sub { f(grep { $_->{driver} !~ /^pata/ } detect_devices::probe_category('disk/sata')) },
+      detector => sub { f(grep { $_->{driver} !~ /^pata/ } detect_devices::probe_category('disk/sata')),
+                          f(grep { $_->{description} =~ /AHCI/ } @devices) },
       checked_on_boot => 1,
      },
 
