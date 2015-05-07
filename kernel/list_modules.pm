@@ -262,7 +262,7 @@ our %l = (
         # both STV06xx & stv06xx b/c drivers/media/video/gspca/stv06xx/stv06xx.h
         # wrongly use upcase letters:
         qw(se401 sn9c102 STV06xx stv06xx stv680 tcm825x ultracam),
-        qw(usbvideo usbvision vicam w9968cf zc0301 zc3xx),
+        qw(usbvideo usbvision uvcvideo vicam w9968cf zc0301 zc3xx),
     ],
   },
 
