@@ -67,7 +67,7 @@ our %l = (
       qw(mwifiex_usb mwl8k ndiswrapper netwave_cs orinoco orinoco_cs),
       qw(orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd orinoco_usb p54pci),
       qw(p54usb prism2_cs prism2_pci prism2_usb prism54 qmi_wwan r8180),
-      qw(r8187se rtl8188ee r8192_pci r8192s_usb r8192u_usb r8712u ray_cs rndis_wlan rsi_sdio rt2400 rt2400pci rt2500),
+      qw(r8187se rtl8188ee r8192_pci r8192s_usb r8192u_usb r8712u r8723bs ray_cs rndis_wlan rsi_sdio rt2400 rt2400pci rt2500),
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
       qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se r8188eu r8723au rtl_pci rtl_usb rtusb),
       qw(rtl8192se rtl8192cu rtl8192de rtl8192ee rtl8723ae rtl8723be rtl8821ae spectrum_cs sr9700 sr9800 ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
