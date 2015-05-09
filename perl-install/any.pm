@@ -398,19 +398,19 @@ sub setupBootloader__mbr_or_not {
 }
 
 sub setupBootloader__general {
-	my ($in, $b, $all_hds, $fstab, $security) = @_;
+    my ($in, $b, $all_hds, $_fstab, $_security) = @_;
 
-	return if detect_devices::is_xbox();
-	my @method_choices = bootloader::method_choices($all_hds);
-	my $prev_force_acpi = my $force_acpi = bootloader::get_append_with_key($b, 'acpi') !~ /off|ht/;
-	my $prev_enable_apic = my $enable_apic = !bootloader::get_append_simple($b, 'noapic');
-	my $prev_enable_lapic = my $enable_lapic = !bootloader::get_append_simple($b, 'nolapic');
-	my $prev_enable_smp = my $enable_smp = !bootloader::get_append_simple($b, 'nosmp');
-	my $prev_boot = $b->{boot};
-	my $prev_method = $b->{method};
+    return if detect_devices::is_xbox();
+    my @method_choices = bootloader::method_choices($all_hds);
+    my $prev_force_acpi = my $force_acpi = bootloader::get_append_with_key($b, 'acpi') !~ /off|ht/;
+    my $prev_enable_apic = my $enable_apic = !bootloader::get_append_simple($b, 'noapic');
+    my $prev_enable_lapic = my $enable_lapic = !bootloader::get_append_simple($b, 'nolapic');
+    my $prev_enable_smp = my $enable_smp = !bootloader::get_append_simple($b, 'nosmp');
+    my $prev_boot = $b->{boot};
+    my $prev_method = $b->{method};
 
-	$b->{password2} ||= $b->{password} ||= '';
-	$::Wizard_title = N("Boot Style Configuration");
+    $b->{password2} ||= $b->{password} ||= '';
+    $::Wizard_title = N("Boot Style Configuration");
 	my (@boot_devices, %boot_devices);
 	foreach (bootloader::allowed_boot_parts($b, $all_hds)) {
 		my $dev = "/dev/$_->{device}";
