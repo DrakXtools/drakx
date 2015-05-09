@@ -660,8 +660,6 @@ sub setupBootloader__grub2 {
 	   format => \&Xconfig::resolution_and_depth::to_string, advanced => 1 },
 	]);
     if ($res) {
-	#my ($entry) = bootloader::get_grub2_first_entry($b);
-	#$entry->{append} = $append;
 	$b->{entries} = $b2->{entries};
 	$b->{default} = $default;
 	first(@{$b->{entries}})->{append} = $append;
