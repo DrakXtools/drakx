@@ -629,6 +629,48 @@ You can create additional entries or change the existing ones."), [ {
     }
 }
 
+sub setupBootloader__grub2 {
+    my ($in, $b, $_all_hds, $_fstab) = @_;
+
+    # update entries (so that we can display their list below):
+    my $error;
+    run_program::rooted($::prefix, 'update-grub2', '2>', \$error) or die "update-grub2 failed: $error";
+
+    # read grub2 auto-generated entries (instead of keeping eg: grub/lilo ones):
+    my $b2 = bootloader::read_grub2();
+
+    # get default parameters:
+    my $append = bootloader::get_grub2_append($b2);
+    my $default = $b2->{default};
+
+    require Xconfig::resolution_and_depth;
+
+    require network::network; #- to list network profiles
+    my $vga = Xconfig::resolution_and_depth::from_bios($b->{vga});
+
+    my $res = $in->ask_from_(
+	{
+	    title => N("Bootloader Configuration"),
+	},
+	[
+	 { label => N("Default"), val => \$b->{default},
+	   list => [ map { $_->{label} } @{$b2->{entries}} ] },
+	 { label => N("Append"), val => \$append },
+	 { label => N("Video mode"), val => \$vga, list => [ '', Xconfig::resolution_and_depth::bios_vga_modes() ],
+	   format => \&Xconfig::resolution_and_depth::to_string, advanced => 1 },
+	]);
+    if ($res) {
+	#my ($entry) = bootloader::get_grub2_first_entry($b);
+	#$entry->{append} = $append;
+	$b->{entries} = $b2->{entries};
+	$b->{default} = $default;
+	first(@{$b->{entries}})->{append} = $append;
+	1;
+    } else {
+	'';
+    }
+}
+
 sub get_autologin() {
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
     my $gdm_file = "$::prefix/etc/X11/gdm/custom.conf";
