@@ -1801,10 +1801,17 @@ sub crypt_grub_password {
     chomp_($res);
 }
 
-sub get_grub2_append {
+sub get_grub2_first_entry {
     my ($bootloader) = @_;
     # set default parameters:
     my ($entry) = grep { $_->{kernel_or_dev} =~ /vmlin/ } @{$bootloader->{entries}};
+    $entry;
+}
+
+sub get_grub2_append {
+    my ($bootloader) = @_;
+    # get default parameters:
+    my ($entry) = get_grub2_first_entry($bootloader);
     my $append = $entry->{append};
     if (my $vga = $entry->{vga} || $bootloader->{vga}) {
 	$append .= " vga=$vga";
