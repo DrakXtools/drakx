@@ -662,6 +662,7 @@ sub setupBootloader__grub2 {
     if ($res) {
 	$b->{entries} = $b2->{entries};
 	$b->{default} = $default;
+	$b->{vga} = ref($vga) ? $vga->{bios} : $vga;
 	first(@{$b->{entries}})->{append} = $append;
 	1;
     } else {
