@@ -1832,14 +1832,22 @@ sub write_grub2 {
     $conf{GRUB_GFXPAYLOAD_LINUX} = 'auto' if is_uefi();
     $conf{GRUB_DISABLE_RECOVERY} = 'false'; # for 'failsafe' entry
     $conf{GRUB_TIMEOUT} = $bootloader->{timeout};
+    renamef($f, $f . ($o_backup_extension || '.old'));
     setVarsInSh($f, \%conf);
 
+    my $f1 = "$::prefix/boot/grub2/grub.cfg";
+    renamef($f1, $f1 . ($o_backup_extension || '.old'));
     run_program::rooted($::prefix, 'update-grub2', '2>', \$error) or die "update-grub2 failed: $error";
 
     # set default entry:
     eval {
+	my $f2 = "$::prefix/boot/grub2/grubenv";
+	cp_af($f2, $f2 . ($o_backup_extension || '.old'));
 	run_program::rooted($::prefix, 'grub2-set-default', '2>', \$error, $bootloader->{default}) or die "grub2-set-default failed: $error";
     };
+    if (my $err = $@) {
+	log::l("error while running grub2-set-default: $err");
+    }
     check_enough_space();
 }
 
