@@ -1810,7 +1810,7 @@ sub get_grub2_first_entry {
 
 sub get_grub2_append {
     my ($bootloader) = @_;
-    # get default parameters:
+    # get default parameters from first entry:
     my ($entry) = get_grub2_first_entry($bootloader);
     my $append = $entry->{append};
     if (my $vga = $entry->{vga} || $bootloader->{vga}) {
