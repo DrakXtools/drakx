@@ -653,7 +653,7 @@ sub setupBootloader__grub2 {
 	    title => N("Bootloader Configuration"),
 	},
 	[
-	 { label => N("Default"), val => \$b->{default},
+	 { label => N("Default"), val => \$default,
 	   list => [ map { $_->{label} } @{$b2->{entries}} ] },
 	 { label => N("Append"), val => \$append },
 	 { label => N("Video mode"), val => \$vga, list => [ '', Xconfig::resolution_and_depth::bios_vga_modes() ],
