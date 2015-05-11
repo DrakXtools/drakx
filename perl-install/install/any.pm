@@ -564,6 +564,14 @@ sub setPackages {
 	install::pkgs::popup_errors();
 
         install::pkgs::start_pushing_error();
+
+	# in auto-install mode, we enforce selected media, else we respect media.cfg's default:
+        if ($::auto_install && !is_empty_array_ref($o->{enabled_media})) {
+            # respect enabled/disabled media selection:
+            foreach my $medium (@{$urpm->{media}}) {
+                $medium->{temp_enabled} = member($medium->{name}, @{$o->{enabled_media}});
+            }
+        }
 	# should we really use this? merged from mageia for easier maintenance..
         media_screen($o) if !$::auto_install && !$::o->{match_all_hardware};
         enable_choosen_media($o);
