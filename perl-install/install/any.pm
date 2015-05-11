@@ -973,6 +973,9 @@ sub g_auto_install {
     #- deep copy because we're modifying it below
     $o->{users} = $b_respect_privacy ? [] : [ @{$o->{users} || []} ];
 
+    # remember selected media:
+    local $o->{enabled_media} = [ map { $_->{name} } grep { !$_->{ignore} } @{$::o->{packages}{media}} ];
+
     my @user_info_to_remove = (
 	if_($b_respect_privacy, qw(realname pw)), 
 	qw(oldu oldg password password2),
