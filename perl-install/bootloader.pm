@@ -312,7 +312,7 @@ sub read_grub2() {
 	$bootloader{default} = $1 if /saved_entry=(.*)/;
     }
 
-    $bootloader{method} = 'grub2';
+    $bootloader{method} = cat_($f) =~ /set theme=.*maggy/ ? 'grub2-graphic' : 'grub2';
     \%bootloader;
 }
 
@@ -1304,7 +1304,8 @@ sub method2text {
     my ($method) = @_;
     +{
 	'lilo-menu'    => N("LILO with text menu"),
-	'grub2'        => N("GRUB2 with graphical menu"),
+	'grub2-graphic' => N("GRUB2 with graphical menu"),
+	'grub2'        => N("GRUB2 with text menu"),
 	'grub-graphic' => N("GRUB with graphical menu"),
 	'grub-menu'    => N("GRUB with text menu"),
     }->{$method};
@@ -1316,7 +1317,7 @@ sub method_choices_raw {
     arch() =~ /mips/ ? 'pmon2000' : 
     arch() =~ /arm/ ? 'uboot' :
        if_(!$b_prefix_mounted || whereis_binary('grub2-reboot', $::prefix), 
-	   'grub2'),
+	   'grub2-graphic', 'grub2'),
       if_(!is_uefi(), (
        if_(!$b_prefix_mounted || whereis_binary('grub', $::prefix), 
 	   'grub-graphic', 'grub-menu'),
@@ -1334,7 +1335,7 @@ sub method_choices {
     grep {
 	!(/lilo/ && (isLoopback($root_part) || $have_dmraid))
 	  && (/grub2/ || $boot_part->{fs_type} ne 'btrfs')
-	  && !(/grub-graphic/ && cat_("/proc/cmdline") =~ /console=ttyS/);
+	  && !(/grub2?-graphic/ && cat_("/proc/cmdline") =~ /console=ttyS/);
     } method_choices_raw($b_prefix_mounted);
 }
 sub main_method_choices {
@@ -2146,6 +2147,7 @@ sub ensure_pkg_is_installed {
     my %suppl = (
 	# method => [ 'pkg_name', 'file_to_test' ],
 	'grub-graphic' => [ qw(mageia-gfxboot-theme /usr/share/gfxboot/themes/Mageia/boot/message) ],
+	'grub2-graphic' => [ qw(grub2-mageia-theme /boot/grub2/themes/maggy/theme.txt) ],
     );
     my $main_method = main_method($bootloader->{method});
     if (member($main_method, qw(grub grub2 lilo))) {
