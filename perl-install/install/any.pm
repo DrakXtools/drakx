@@ -494,7 +494,11 @@ sub media_screen {
             };
         } grep { $_->{name} !~ /Debug|Testing|Sources|Backports/ } @{$urpm->{media}},
     ]);
+}
 
+sub enable_choosen_media {
+    my ($o) = @_;
+    my $urpm = $o->{packages};
 
     # is there some media to enable?
     my $todo;
@@ -562,6 +566,7 @@ sub setPackages {
         install::pkgs::start_pushing_error();
 	# should we really use this? merged from mageia for easier maintenance..
         media_screen($o) if !$::auto_install && !$::o->{match_all_hardware};
+        enable_choosen_media($o);
         my @choosen_media = map { $_->{name} } grep { !$_->{ignore} } @{$urpm->{media}};
         log::l("choosen media: ", join(', ', @choosen_media));
         die "no choosen media" if !@choosen_media;
