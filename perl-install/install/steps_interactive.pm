@@ -1020,9 +1020,11 @@ sub setRootPassword_addUser {
 sub setupBootloaderBefore {
     my ($o) = @_;
     local $o->{pop_wait_messages} = 1;
-    my $_w = $o->wait_message(N("Preparing bootloader..."), N("Preparing initial startup program...") . "\n" .
-                                N("Be patient, this may take a while...")
-                            );
+    my $_w = $o->wait_message(N("Please wait"),
+			      #-PO: This is NOT the boot loader!!!!
+			      N("Preparing initial startup program...") . "\n" .
+			      N("Be patient, this may take a while...")
+		      );
     $o->SUPER::setupBootloaderBefore;
 }
 
