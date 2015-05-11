@@ -252,6 +252,10 @@ sub setupSCSI {
     my ($o) = @_;
 
     install::any::configure_pcmcia($o);
+    { 
+	my $_w = $o->wait_message(N("CD/DVD"), N("Configuring CD/DVD"));
+	modules::load(modules::category2modules('disk/cdrom'));
+    }
     modules::interactive::load_category($o, $o->{modules_conf}, 'bus/firewire', 1);
 
     my $have_non_scsi = detect_devices::hds(); #- at_least_one scsi device if we have no disks
