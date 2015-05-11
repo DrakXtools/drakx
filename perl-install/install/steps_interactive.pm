@@ -1021,7 +1021,7 @@ sub setupBootloaderBefore {
     my ($o) = @_;
     local $o->{pop_wait_messages} = 1;
     my $_w = $o->wait_message(N("Please wait"),
-			      #-PO: This is NOT the boot loader!!!!
+			      #-PO: This is NOT the boot loader (just the kernel initrds)!!!!
 			      N("Preparing initial startup program...") . "\n" .
 			      N("Be patient, this may take a while...")
 		      );
