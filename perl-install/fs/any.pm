@@ -106,11 +106,11 @@ sub getNeededMinSpace {
 }
 
 sub getAvailableSpace {
-    my ($fstab, $o_skip_mounted) = @_;
+    my ($fstab, $o_skip_mounted, $o_skip_min_space) = @_;
 
     my $n = !$::testing && !$o_skip_mounted && getAvailableSpace_mounted($::prefix) || 
             getAvailableSpace_raw($fstab) * 512 / 1.07;
-    $n - getNeededMinSpace($n);
+    $o_skip_min_space ? $n : $n - getNeededMinSpace($n);
 }
 
 sub getAvailableSpace_mounted {
