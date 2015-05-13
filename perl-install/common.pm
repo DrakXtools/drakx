@@ -283,7 +283,9 @@ sub formatXiB {
 sub formatTime {
     my ($s, $m, $h) = gmtime($_[0]);
     if ($h) {
-	sprintf "%02d:%02d", $h, $m;
+	sprintf
+	    #-PO: here, "2:30" is remaining installation time (eg: "2:30" == 2 hour & 30 minutes)
+	    N("%02d:%02d", $h, $m);
     } elsif ($m > 1) {
 	N("%d minutes", $m);
     } elsif ($m == 1) {
