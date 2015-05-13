@@ -778,7 +778,7 @@ Do you want to install the updates?")),
 
     install::pkgs::clean_rpmdb_shared_regions();
 
-    #- not downing network, even ppp. We don't care much since it is the end of install :)
+    #- not downing network, even PPP. We don't care much since it is the end of install :)
 }
 
 

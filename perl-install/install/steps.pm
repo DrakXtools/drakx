@@ -921,7 +921,7 @@ sub upNetwork {
 	    start_network_interface($o);
 	    return 1;
 	} elsif (!$b_pppAvoided) {
-	    log::l("starting network (ppp: $o->{net}{type})");
+	    log::l("starting network (PPP: $o->{net}{type})");
 	    eval { modules::load(qw(serial ppp bsd_comp ppp_deflate)) };
 	    run_program::rooted($::prefix, "/bin/systemctl", "start", "systemd-journald");
 	    start_network_interface($o);
