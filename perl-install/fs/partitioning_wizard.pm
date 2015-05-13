@@ -564,7 +564,9 @@ sub main {
         display_choices($o, $contentbox, $mainw, %solutions);
 
         $combobox->signal_connect("changed", sub {        
-            $mainw->{kind} = $kinds[$combobox->get_active];
+            my $curr = $kinds[$combobox->get_active];
+            return if !$curr;
+            $mainw->{kind} = $curr;
             my %solutions = partitionWizardSolutions($o, $all_hds, $fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab, diskdrake::hd_gtk::kind2hd($mainw->{kind}));
             delete $solutions{diskdrake} if $b_nodiskdrake;
             display_choices($o, $contentbox, $mainw, %solutions);
