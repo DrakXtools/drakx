@@ -64,7 +64,7 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	if (!any { isSwap($_) } @fstab) {
 	    $ok &&= $in->ask_okcancel('', N("You do not have a swap partition.\n\nContinue anyway?"));
 	}
-	if ( is_uefi() && !fs::get::has_mntpoint("/boot/EFI", $all_hds)) {
+	if (is_uefi() && !fs::get::has_mntpoint("/boot/EFI", $all_hds)) {
 	    $in->ask_warn('', N("You must have a ESP FAT32 partition mounted in /boot/EFI"));
 	    $ok = '';
 	}
@@ -112,7 +112,7 @@ sub partitionWizardSolutions {
 	push @wizlog, N("There is no existing partition to use");
     }
 
-    if (my @ok_for_resize_fat = grep { isnormal_Fat_or_NTFS ($_) && !fs::get::part2hd($_, $all_hds)->{readonly}
+    if (my @ok_for_resize_fat = grep { isnormal_Fat_or_NTFS($_) && !fs::get::part2hd($_, $all_hds)->{readonly}
 					 && $_->{size} > $min_linux + $min_swap + $min_freewin } @$fstab) {
         @ok_for_resize_fat = map {
             my $part = $_;
@@ -180,11 +180,11 @@ sub partitionWizardSolutions {
                       } else {
                           my @selected = grep {
                               $_->{selected_for_resize} &&
-                              $o_target->{device} eq $_->{rootDevice} # Not needed but let's be safe
+                              $o_target->{device} eq $_->{rootDevice}; # Not needed but let's be safe
                           } @ok_for_resize_fat;
                           my $nb_parts = @selected;
                           die N("Failed to find the partition to resize (%d choices)", $nb_parts) unless $nb_parts == 1;
-                          $part = @selected[0];
+                          $part = $selected[0];
                       }
                       my $resize_fat = $part->{resize_fat};
                       my $hd = fs::get::part2hd($part, $all_hds);
@@ -325,9 +325,9 @@ sub create_display_box {
 	# find resizable parts on this disk
 	my @choices = grep { $resizable_parts{$_->{device}} } @parts;
 	my @sorted_resize = sort {
-		($a->{size} - $a->{req_size}) <=> ($b->{size} - $b->{req_size})
+		$a->{size} - $a->{req_size} <=> $b->{size} - $b->{req_size};
 	    } @choices;
-	$sorted_resize[-1]->{selected_for_resize} = 1;
+	$sorted_resize[-1]{selected_for_resize} = 1;
     }
 
     foreach my $entry (@parts) {
@@ -351,7 +351,7 @@ sub create_display_box {
             $hpane->pack1($part_widget, 1, 0);
             $hpane->pack2($mdv_widget, 1, 0);
             $hpane->set_position(ceil($ratio * $entry->{req_size}));
-            $style_context = $hpane->get_style_context();
+            my $style_context = $hpane->get_style_context;
             $style_context->add_class("resize_partition");
             ugtk3::gtkset_size_request($hpane, $entry->{width}, 0);
             ugtk3::gtkpack__($display_box, $hpane);
