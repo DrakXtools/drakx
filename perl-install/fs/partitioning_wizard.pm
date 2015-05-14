@@ -335,7 +335,7 @@ sub create_display_box {
 	my @colorized_fs_types = qw(ext2 ext3 ext4 xfs swap vfat ntfs ntfs-3g);
         my $part_widget = Gtk3::EventBox->new;
         $entry->{width} = int($entry->{size} * $initial_ratio) + $minwidth;
-        if ($entry->{selected_for_resize}) {
+        if ($resize && $entry->{selected_for_resize}) {
             my $ratio;
             my $update_ratio = sub { $ratio = $entry->{width} / $entry->{size} };
             $update_ratio->();
