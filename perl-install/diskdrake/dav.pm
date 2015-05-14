@@ -21,7 +21,6 @@ points, select \"New\".")) },
 		       [ 
 			(map { 
 			    my $dav = $_;
-			    $dav->{mntpoint} ||= 'none';
 			    { label => $dav->{device}, val => $dav->{mntpoint}, clicked_may_quit => sub { config($in, $dav, $all_hds); 1 } } } @$davs),
 			 { val => N("New"), clicked_may_quit => sub { create($in, $all_hds); 1 } },
 			 { val => N("Quit"), clicked_may_quit => sub { $quit = 1 } },
@@ -34,7 +33,7 @@ points, select \"New\".")) },
 sub create {
     my ($in, $all_hds) = @_;
 
-    my $dav = { fs_type => 'davfs2' };
+    my $dav = { fs_type => 'davfs2', mntpoint => 'none' };
     ask_server($in, $dav, $all_hds) or return;
     push @{$all_hds->{davs}}, $dav;
     config($in, $dav, $all_hds);
