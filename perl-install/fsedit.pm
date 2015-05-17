@@ -488,7 +488,7 @@ You should create a separate /boot partition first") if $mntpoint eq "/" && isLV
       if member($mntpoint, qw(/bin /dev /etc /lib /sbin /mnt /media));
     die N("You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount point\n")
       if !isTrueLocalFS($part) && $mntpoint eq '/';
-    die N("You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount point\n")
+    die N("You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount point\n") . $mntpoint
       if !isTrueFS($part) && member($mntpoint, '/home', fs::type::directories_needed_to_boot());
     die N("You cannot use an encrypted filesystem for mount point %s", $mntpoint)
       if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var /boot));
