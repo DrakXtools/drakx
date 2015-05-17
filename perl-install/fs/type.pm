@@ -373,8 +373,11 @@ sub guessed_by_mount() {
     grep { $_ && !/nodev/ } chomp_(cat_('/etc/filesystems'));
 }
 
+sub directories_needed_to_boot_not_ESP() {
+    qw(/ /usr /var /boot /tmp);
+}
 sub directories_needed_to_boot() { 
-    qw(/ /usr /var /boot /boot/EFI /tmp);
+    directories_needed_to_boot_not_ESP(), '/boot/EFI';
 }
 
 sub carry_root_loopback {
