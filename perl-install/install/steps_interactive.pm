@@ -724,6 +724,30 @@ sub installUpdates {
     }
 
     $o->ask_yesorno_({ title => N("Updates"), messages => formatAlaTeX(
+N("You now have the opportunity to setup online media.") . "\n\n" .
+N("This allows to install security updates.") . "\n\n" .
+N("To setup those media, you will need to have a working Internet 
+connection.
+
+Do you want to setup the update media?")),
+			   interactive_help_id => 'installUpdates',
+					       }, 1) or do {
+	log::l("installUpdates: skipping since user say no to media setup");
+	return;
+    };
+
+    #- bring all interface up for installing updates packages.
+    install::interactive::upNetwork($o);
+
+    install::pkgs::clean_rpmdb_shared_regions();
+    if (any::urpmi_add_all_media($o, $o->{previous_release})) {
+	log::l("installUpdates: successfully added media");
+    } else {
+	log::l("installUpdates: failed to add media");
+	die "failed to add media"
+    }
+
+    $o->ask_yesorno_({ title => N("Updates"), messages => formatAlaTeX(
 N("You now have the opportunity to download updated packages. These packages
 have been updated after the distribution was released. They may
 contain security or bug fixes.
@@ -738,14 +762,11 @@ Do you want to install the updates?")),
 	return;
     };
 
-    #- bring all interface up for installing updates packages.
-    install::interactive::upNetwork($o);
-
-    if (any::urpmi_add_all_media($o, $o->{previous_release})) {
 	my $binary = find { whereis_binary($_, $::prefix) } if_(check_for_xserver(), 'gurpmi2'), 'urpmi' or return;
 	my $log_file = '/root/drakx/updates.log';
 	run_program::rooted($::prefix, $binary, '>>', $log_file, '2>>', $log_file, '--auto-select');
-    }
+
+    install::pkgs::clean_rpmdb_shared_regions();
 
     #- not downing network, even ppp. We don't care much since it is the end of install :)
 }
