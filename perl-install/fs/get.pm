@@ -51,7 +51,7 @@ sub hds {
     (@{$all_hds->{hds}}, @{$all_hds->{lvms}});
 }
 
-#- get all normal partition including special ones as found on sparc.
+#- get all normal partition.
 sub hds_fstab {
     map { partition_table::get_normal_parts($_) } @_;
 }

@@ -296,7 +296,6 @@ our %l = (
       qw(mousedev usbhid usbmouse synaptics_usb),
     ],
     char => [
-      if_(arch() =~ /ia64/, qw(efivars)),
       qw(applicom n_r3964 nvram pc110pad ppdev),
       qw(wdt_pci i810-tco sx), #- what are these???
     ],

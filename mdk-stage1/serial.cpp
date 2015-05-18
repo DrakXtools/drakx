@@ -919,19 +919,11 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 	maj = major(sb.st_rdev);
 	if (maj != 4 && (maj < 136 || maj > 143)) {
 	    if (ioctl (fd, TIOCLINUX, &twelve) < 0) {
-			#ifdef __powerpc__
-			// we could have gotten an error for another reason - like EINVAL
-			// skipping ttyS0 on PPC - which is where most modems reside
-			if (errno == ENOTTY) {
-			#endif
 		if (ioctl (fd, TIOCGSERIAL, &si) >= 0) {
 		    if (si.line > 0) {
 			console = 1 << si.line;
 		    } else {
 			console = 0;
-			#ifdef __powerpc__
-			}
-			#endif 
 		    }
 		} else console = 0;
 	    }
