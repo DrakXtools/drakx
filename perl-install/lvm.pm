@@ -200,14 +200,14 @@ sub suggest_lv_name_from_mnt_point {
     $str = "root" if $str eq '/';
     $str =~ s!^/!!;
     $str =~ s!/!_!g;
-    $str;
+    'lv_' . $str;
 }
 
 sub suggest_lv_name {
     my ($lvm, $lv) = @_;
     my $list = $lvm->{primary}{normal} ||= [];
     $lv->{lv_name} ||= suggest_lv_name_from_mnt_point($lv);
-    $lv->{lv_name} ||= 1 + max(map { if_($_->{device} =~ /(\d+)$/, $1) } @$list);
+    $lv->{lv_name} ||= "lv_"  . (1 + max(map { if_($_->{device} =~ /(\d+)$/, $1) } @$list));
 }
 
 sub lv_create {
