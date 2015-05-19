@@ -214,7 +214,7 @@ sub search_windows_font() {
         return 0;
     }
     foreach my $font (@fonts) {
-        progress($pbar, 0.25 / $nb_dir, N("parse all fonts"));
+        progress($pbar, 0.25 / $nb_dir, N("parse all fonts")) if $interactive;
         my $font_name = basename($font);
         !$replace && any { /^\Q$font_name\E$/ } @installed_fonts and next;
         any { /^\Q$font_name\E$/ } @font_list or push @font_list, $font;
