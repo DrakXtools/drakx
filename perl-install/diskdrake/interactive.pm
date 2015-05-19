@@ -501,6 +501,10 @@ sub Create {
          { label => N("Filesystem type: "), val => \$type_name, list => [ fs::type::type_names($::expert, $hd) ],
 	   sort => 0, if_($::expert, gtk => { wrap_width => 2 }, do_not_ellipsize => 1) },
          { label => N("Mount point: "), val => \$part->{mntpoint}, list => [ fsedit::suggestions_mntpoint($all_hds), '' ],
+           if_(isLVM($hd), changed => sub {
+		   undef $part->{lv_name};
+		   lvm::suggest_lv_name($hd, $part);
+	   }), type => 'combo', not_edit => 0,
            disabled => sub { my $p = fs::type::type_name2subpart($type_name); isSwap($p) || isNonMountable($p) }, type => 'combo', not_edit => 0,
          },
            if_($::expert && $hd->hasExtended,
