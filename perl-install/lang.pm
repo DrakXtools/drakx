@@ -883,7 +883,7 @@ my %IM_config =
 		ko => sub { qw(scim-hangul) },
 		th => sub { qw(scim-thai) },
 		vi => sub { qw(scim-m17n) },
-		zh => sub { qw(scim-googlepinyin scim-tables-zh scim-chewing) },
+		zh => sub { qw(scim-tables-zh scim-chewing) },
 	    },
            },
 
@@ -899,7 +899,7 @@ my %IM_config =
            ko => sub { qw(scim-hangul) },
 	   th => sub { qw(scim-thai) },
            vi => sub { qw(scim-m17n) },
-           zh => sub { qw(scim-googlepinyin scim-tables-zh scim-chewing) },
+           zh => sub { qw(scim-tables-zh scim-chewing) },
        },
    },
    'ibus' => {
