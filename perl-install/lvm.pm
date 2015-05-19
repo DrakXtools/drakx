@@ -200,6 +200,7 @@ sub suggest_lv_name_from_mnt_point {
     $str = "root" if $str eq '/';
     $str =~ s!^/!!;
     $str =~ s!/!_!g;
+    $str =~ s! !_!g;
     'lv_' . $str;
 }
 
