@@ -1545,7 +1545,8 @@ sub new {
     } else {
 	$icon_img->set_margin_left(12);
     }
-    $icon_img->set_margin_top(($blue_part->get_height-$icon_w->get_height)/2-4);
+    $icon_img->set_margin_top(($blue_part->get_height-$icon_w->get_height)/2);
+
 
     $w->{label} = $label;
     $w->set_size_request(-1, $d_height);
