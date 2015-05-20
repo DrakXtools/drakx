@@ -1,10 +1,10 @@
 Version 16.99 - 20 May 2015
 
 - bootloader:
-  o display cosmetics when reading back GPT partitions
   o do not detect grub2 on UEFI when there's no bootloader
   o fix default grub2 kernel parameters (mga#15984)
 - partitioning:
+  o display cosmetics when reading back GPT partitions
   o fix mnt point for FAT partitions on GTP (mga#15987)
   o set the proper GUID for FAT partitions on GPT
 - don't try to install non existant scim-googlepinyin (mga#6681)
