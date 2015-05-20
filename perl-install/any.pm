@@ -640,7 +640,7 @@ sub setupBootloader__grub2 {
     my $b2 = bootloader::read_grub2();
 
     # get default parameters:
-    my $append = bootloader::get_grub2_append($b2);
+    my $append = $b->{entries}[0]{append} ||= bootloader::get_grub2_append($b2);
     my $default = $b2->{default};
 
     require Xconfig::resolution_and_depth;
