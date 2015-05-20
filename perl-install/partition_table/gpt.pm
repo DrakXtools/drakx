@@ -105,6 +105,8 @@ my %_GUID_to_Label = (
 my %parted_mapping = (
    'linux-swap(v1)' => 'swap',
    'ntfs' => 'ntfs-3g',
+   'fat16' => 'vfat',
+   'fat32' => 'vfat',
    );
 my %rev_parted_mapping = reverse %parted_mapping;
 
