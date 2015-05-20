@@ -109,6 +109,8 @@ my %parted_mapping = (
    'fat32' => 'vfat',
    );
 my %rev_parted_mapping = reverse %parted_mapping;
+# prefer 'fat32' over 'fat16':
+$rev_parted_mapping{vfat} = 'fat32';
 
 sub read_one {
     my ($hd, $_sector) = @_;
