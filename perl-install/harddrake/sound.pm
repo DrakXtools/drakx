@@ -161,41 +161,13 @@ sub config {
         } elsif ($in->ask_from_({ title => N("Sound configuration"),
                                   messages => 
 				    $device->{description} .
-                          #-PO: here the first %s is either "ALSA", 
-                          #-PO: the second %s is the name of the current driver
-                          #-PO: and the third %s is the name of the default driver
-				  N("\n\nYour card currently uses the %s\"%s\" driver (the default driver for your card is \"%s\")", "ALSA ", $driver, $device->{driver}),
-				  interactive_help => sub {  
-				      N("OSS (Open Sound System) was the first sound API. It's an OS independent sound API (it's available on most UNIX(tm) systems) but it's a very basic and limited API.
-What's more, OSS drivers all reinvent the wheel.
-
-ALSA (Advanced Linux Sound Architecture) is a modularized architecture which
-supports quite a large range of ISA, USB and PCI cards.\n
-It also provides a much higher API than OSS.\n
-To use alsa, one can either use:
-- the old compatibility OSS API
-- the new ALSA API that provides many enhanced features but requires using the ALSA library.
-");
-                                        },
+				  "\n\n" . N("Your card uses the %s\"%s\" driver", $driver),
 				},
                                [
-				if_(@alternative,
-                                { 
-                                    label => N("Driver:"), val => \$new_driver, list => \@alternative, default => $new_driver, sort =>1,
-                                    format => sub { my ($drv) = @_;
-                                                    $drv eq 'unknown' ? $drv :
-                                                      sprintf(($des{$drv} ? "$des{$drv} (%s [%s])"
-                                                                : "%s [%s]"), $drv, $drv =~ /^snd_/ ? 'ALSA' : 'OSS');
-                                                }
-                                }),
                                 @common,
                                 ]))
         {
             $write_config->();
-            return if $new_driver eq $device->{current_driver};
-            log::explanations("switching audio driver from '" . $device->{current_driver} . "' to '$new_driver'\n");
-            do_switch($in, $modules_conf, $device->{current_driver}, $new_driver, $device->{sound_slot_index});
-            $device->{current_driver} = $new_driver;
         }
     }
   end:
