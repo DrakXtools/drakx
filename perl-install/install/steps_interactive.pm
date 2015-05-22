@@ -934,24 +934,6 @@ sub summary {
      $sound_index++;
     }
 
-    if (!@sound_cards && ($o->{rpmsrate_flags_chosen}{CAT_GAMES} || $o->{rpmsrate_flags_chosen}{CAT_AUDIO})) {
-	#- if no sound card are detected AND the user selected things needing a sound card,
-	#- propose a special case for ISA cards
-	push @l, {
-	    group => N("Hardware"),
-	    label => N("Sound card"),
-	    val => sub {},
-	    clicked => sub {
-	        if ($o->ask_yesorno('', N("Do you have an ISA sound card?"))) {
-	    	  $o->do_pkgs->install(qw(alsa-utils sndconfig aoss));
-	    	  $o->ask_warn('', N("Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound card"));
-	        } else {
-	    	  $o->ask_warn('', N("No sound card detected. Try \"harddrake\" after installation"));
-	        }
-	    },
-	};
-    }
-
     push @l, {
 	group => N("Hardware"),
 	label => N("Graphical interface"),
