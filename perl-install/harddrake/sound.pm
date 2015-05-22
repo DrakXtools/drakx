@@ -122,7 +122,6 @@ sub config {
                 clicked => sub { run_program::run('reset_sound') }
             },
             {
-                advanced => 1,
                 val => N("Troubleshooting"), disabled => sub {},
                 clicked => sub { &trouble($in) }
             },
