@@ -100,7 +100,6 @@ sub config {
                         $device->{description}),
                       [ get_any_driver_entry($in, $modules_conf, $driver, $device) ]);
     } else {
-        my $new_driver = $driver;
         push @alternative, $driver;
         my %des = modules::category2modules_and_description('multimedia/sound');
         
@@ -148,7 +147,7 @@ sub config {
             },
         );
 
-        if ($new_driver eq 'unknown') {
+        if ($driver eq 'unknown') {
             if ($in->ask_from_({
                 title => N("No alternative driver"),
                 messages => N("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
@@ -163,9 +162,8 @@ sub config {
 				    $device->{description} .
 				  "\n\n" . N("Your card uses the %s\"%s\" driver", $driver),
 				},
-                               [
-                                @common,
-                                ]))
+                               \@common,
+                                ))
         {
             $write_config->();
         }
