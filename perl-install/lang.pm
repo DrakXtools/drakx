@@ -1383,7 +1383,7 @@ sub read {
     $f2 = "$::prefix/etc/sysconfig/i18n" if ! -e $f2 && -e "$::prefix/etc/sysconfig/i18n";
     my %h = getVarsFromSh($b_user_only && -e $f1 ? $f1 : $f2);
     # Fill in defaults (from LANG= variable)
-    %h = map { $_ => $h{$_} || $h{LANG} || 'en_US' } @locale_conf_fields;
+    $h{$_} ||= $h{LANG} || 'en_US' foreach @locale_conf_fields;
     my $locale = system_locales_to_ourlocale($h{LC_MESSAGES}, $h{LC_MONETARY});
     
     if (find { $h{$_} } @IM_i18n_fields) {
