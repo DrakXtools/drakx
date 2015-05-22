@@ -36,19 +36,19 @@ my $all_hds;
 my $fstab;
 my $bootloader;
 
-    $all_hds = fsedit::get_hds();
-    fs::get_raw_hds('', $all_hds);
-    fs::get_info_from_fstab($all_hds);
-    $fstab = [ fs::get::fstab($all_hds) ];
-    $bootloader = bootloader::read($all_hds);
-    if (!$bootloader) {
-        $in->ask_okcancel('', N("No bootloader found, creating a new configuration"), 0) or $in->exit;
-        any::setupBootloaderBeforeStandalone($in->do_pkgs, $bootloader ||= {}, $all_hds, $fstab);
-    }
+$all_hds = fsedit::get_hds();
+fs::get_raw_hds('', $all_hds);
+fs::get_info_from_fstab($all_hds);
+$fstab = [ fs::get::fstab($all_hds) ];
+$bootloader = bootloader::read($all_hds);
+if (!$bootloader) {
+    $in->ask_okcancel('', N("No bootloader found, creating a new configuration"), 0) or $in->exit;
+    any::setupBootloaderBeforeStandalone($in->do_pkgs, $bootloader ||= {}, $all_hds, $fstab);
+}
 
-    $::isWizard = 1;
-    require security::level;
-    my $level = security::level::from_string(security::level::get());
-    eval { any::setupBootloaderUntilInstalled($in, $bootloader, $all_hds, $fstab, $level) };
-    die if $@ && $@ !~ /^wizcancel/;
-    $in->exit(0);
+$::isWizard = 1;
+require security::level;
+my $level = security::level::from_string(security::level::get());
+eval { any::setupBootloaderUntilInstalled($in, $bootloader, $all_hds, $fstab, $level) };
+die if $@ && $@ !~ /^wizcancel/;
+$in->exit(0);
