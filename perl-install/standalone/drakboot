@@ -23,17 +23,12 @@ use diagnostics;
 use lib qw(/usr/lib/libDrakX);
 
 use standalone; #- warning, standalone must be loaded very first, for 'explanations'
-use c;
 use common;
 use interactive;
 use any;
 use bootloader;
 use fsedit;
 use fs;
-use Config;
-use POSIX;
-use Xconfig::various;
-use log;
 
 my $in = 'interactive'->vnew('su');
 
@@ -63,111 +58,4 @@ if ($is_bootloader_mode) {
     eval { any::setupBootloaderUntilInstalled($in, $bootloader, $all_hds, $fstab, $level) };
     die if $@ && $@ !~ /^wizcancel/;
     $in->exit(0);
-}
-
-require ugtk3;
-ugtk3->import(qw(:helpers :wrappers :create));
-require mygtk3;
-mygtk3->import(qw(gtknew));
-
-autologin_choice();
-
-sub run_boot_window {
-    my ($title, $pack_list, $apply_sub) = @_;
-
-    my $w = ugtk3->new($title);
-    my $window = $w->{window};
-    mygtk3::register_main_window($w->{real_window});
-
-    $window->signal_connect(delete_event => sub { ugtk3->exit(0) });
-    unless ($::isEmbedded) {
-        $window->set_border_width(2);
-        ### menus definition
-        # the menus are not shown but they provides shiny shortcut like C-q
-	my $ui = gtknew('UIManager', actions => [
-                   # [name, stock_id, value, label, accelerator, tooltip, callback]
-                   [ 'FileMenu',        undef, N("_File") ],
-                   [ 'Quit', undef, N("_Quit"), N("<control>Q"), undef, sub { ugtk3->exit(0) } ],
-               ],
-               string => qq(<ui>
-  <menubar name='MenuBar'>
-    <menu action='FileMenu'>
-      <menuitem action='Quit'/>
-    </menu>
-  </menubar>
-</ui>));
-	$w->{rwindow}->add_accel_group($ui->get_accel_group);
-
-        ######### menus end
-    }
-    gtkadd($window, gtknew('VBox', children => [
-                             @$pack_list,
-                             0, create_okcancel({
-                                                 cancel_clicked => sub { ugtk3->exit(0) },
-                                                 ok_clicked => sub {
-                                                     $apply_sub->();
-                                                     ugtk3->exit(0);
-                                                 }
-                                                }) ]));
-    $window->show_all;
-    gtkflush();
-    $w->main;
-    $in->exit(0);
-}
-
-sub autologin_choice() {
-    my @users = sort(list_users());
-    my @sessions = sort(split(' ', `/usr/sbin/chksession -l`));
-
-    my $x_mode = Xconfig::various::runlevel() == 5;
-    my $auto_mode = any::get_autologin();
-
-    my $user = member($auto_mode->{user}, @users) ? $auto_mode->{user} : $users[0];
-    if (!$user) {
-        # no user, bad but add root anyway:
-        $user = "root";
-        push @users, $user;
-    }
-    my $user_combo = gtknew('ComboBox', text => $user, list => \@users);
-    my $desktop_combo = Gtk3::ComboBoxText->new_with_strings(\@sessions, if_(member($auto_mode->{desktop}, @sessions), $auto_mode->{desktop}));
-
-    my $auto_box = gtknew('Table', col_spacings => 5, row_spacings => 5, homogeneous => 1, children => [
-                                    [ gtknew('Label_Left', text => N("Default user")), $user_combo ],
-                                    [ gtknew('Label_Left', text => N("Default desktop")), $desktop_combo ] ]);
-    $auto_box->set_sensitive($auto_mode->{user} ? 1 : 0);
-
-    my @auto_buttons = gtkradio((N("No, I do not want autologin")) x 2,
-                                N("Yes, I want autologin with this (user, desktop)"));
-    $auto_buttons[1]->signal_connect('toggled' => sub { $auto_box->set_sensitive($auto_buttons[1]->get_active) });
-    $auto_buttons[0]->signal_connect('toggled' => sub { $auto_box->set_sensitive(!$auto_buttons[0]->get_active) });
-    $auto_buttons[1]->set_active(1) if $auto_mode->{user};
-    $auto_buttons[0]->set_active(1) if !$auto_mode->{user};
-
-    my $x_box;
-    run_boot_window(N("System mode"),
-                    [
-                     1, gtknew('VBox', spacing => 5, children_tight => [
-                                  gtksignal_connect(gtkset_active(gtknew('CheckButton', text => N("Launch the graphical environment when your system starts")),
-                                                                  $x_mode),
-                                                    clicked => sub {
-                                                        $x_box->set_sensitive(!$x_mode);
-                                                        $x_mode = !$x_mode;
-                                                    }),
-                                  $x_box = gtknew('VBox', sensitive => $x_mode, children_tight => [
-                                            gtknew('VBox', children_tight => [ @auto_buttons ]),
-                                            $auto_box
-                                           ]) ])
-                    ],
-                    sub {
-                        Xconfig::various::runlevel($x_mode ? 5 : 3);
-                        $::testing and return;
-                        if ($auto_buttons[1]->get_active) {
-                            $auto_mode->{user} = $user_combo->entry->get_text;
-                            $auto_mode->{desktop} = $desktop_combo->entry->get_text;
-			} else {
-                            $auto_mode->{user} = undef;
-                            $auto_mode->{desktop} = undef;
-                        }
-                        any::set_autologin($in->do_pkgs, $auto_mode);
-                    });
 }
