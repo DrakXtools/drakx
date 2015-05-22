@@ -71,34 +71,15 @@ sub load {
     modules::load_and_configure($modules_conf, $name) if $::isStandalone;
 }
 
-sub do_switch {
-    my ($in, $modules_conf, $old_driver, $new_driver, $index) = @_;
-    return if $old_driver eq $new_driver;
-    my $_wait = $in->wait_message(N("Please wait"), N("Please Wait... Applying the configuration"));
-    log::explanations("removing old $old_driver\n");
-    if ($::isStandalone) {
-        unload($old_driver);    # run_program("/sbin/modprobe -r $driver");
-    }
-    $modules_conf->remove_module($old_driver);
-    configure_one_sound_slot($modules_conf, $index, $new_driver);
-    $modules_conf->write;
-    if ($new_driver =~ /^snd_/) {   # new driver is an alsa one
-        $in->do_pkgs->ensure_binary_is_installed(qw(alsa-utils alsactl), 1);
-        $in->do_pkgs->ensure_binary_is_installed(qw(aoss aoss), 1);
-        load($modules_conf, $new_driver) if $::isStandalone;
-    }
-}
-
 sub config {
     my ($in, $modules_conf, $device) = @_;
     my $driver = $device->{current_driver} || $device->{driver};
 
     my @alternative = $driver ne $device->{driver} ? $device->{driver} : ();
     if ($driver eq "unknown") {
-        $in->ask_from(N("No known driver"), 
+        $in->ask_warn(N("No known driver"),
                       N("There's no known driver for your sound card (%s)",
-                        $device->{description}),
-                      [ get_any_driver_entry($in, $modules_conf, $driver, $device) ]);
+                        $device->{description}));
     } else {
         push @alternative, $driver;
         my %des = modules::category2modules_and_description('multimedia/sound');
@@ -168,7 +149,6 @@ sub config {
             $write_config->();
         }
     }
-  end:
 }
 
 sub trouble {
@@ -215,32 +195,6 @@ https://wiki.mageia.org/en/Support:DebuggingSoundProblems
 
 - \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" will tell which programs are currently using the sound card directly (normally this should only show PulseAudio)
 ")));
-}
-
-sub get_any_driver_entry {
-    my ($in, $modules_conf, $driver, $device) = @_;
-    return () if $::isInstall;
-    +{
-        advanced => 1,
-        val => N("Let me pick any driver"), disabled => sub {},
-        clicked => sub {
-            my $old_driver = $driver;
-            if ($in->ask_from(N("Choosing an arbitrary driver"),
-                              formatAlaTeX(
-                                           #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
-                                           N("If you really think that you know which driver is the right one for your card
-you can pick one from the list below.
-
-The current driver for your \"%s\" sound card is \"%s\" ", $device->{description}, $driver)),
-                              [
-                               { label => N("Driver:"), val => \$driver, list => [ category2modules("multimedia/sound") ], type => 'combo', default => $driver, sort =>1, separator => '|' },
-                              ]
-                             )) {
-                do_switch($in, $modules_conf, $old_driver, $driver, $device->{sound_slot_index});
-                goto end;
-            }
-        }
-    };
 }
 
 sub configure_one_sound_slot {
