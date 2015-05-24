@@ -120,6 +120,11 @@ sub read_one {
     my @pt;
     # FIXME: just use '@pt = map { ... } c::...' if part_numbers are always linear:
     foreach (c::get_disk_partitions($hd->{file})) {
+        # compatibility with MBR partitions tables:
+        $_->{pt_type} = 0x82 if $_->{fs_type} eq 'swap';
+        $_->{pt_type} = 0x0b if $_->{fs_type} eq 'vfat';
+        $_->{pt_type} = 0x83 if $_->{fs_type} =~ /^ext/;
+
         # fix detecting ESP (special case are they're detected through pt_type):
         if ($_->{flag} eq 'ESP') {
 	    $_->{pt_type} = 0xef;
@@ -131,11 +136,6 @@ sub read_one {
 	    $_->{pt_type} = 0x12;
         }
         $_->{fs_type} = $parted_mapping{$_->{fs_type}} if $parted_mapping{$_->{fs_type}};
-
-        # compatibility with MBR partitions tables:
-        $_->{pt_type} = 0x82 if $_->{fs_type} eq 'swap';
-        $_->{pt_type} = 0x0b if $_->{fs_type} eq 'vfat';
-        $_->{pt_type} = 0x83 if $_->{fs_type} =~ /^ext/;
 
         @pt[$_->{part_number}-1] = $_;
     }
