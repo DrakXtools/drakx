@@ -938,7 +938,7 @@ sub dmcrypt_open {
     my ($in, $_hd, $part, $all_hds) = @_;
     $part->{dm_name} ||= do {
 	my $s = $part->{device};
-	$s =~ s/[^\w]/_/g;
+	$s =~ s/\W/_/g;
 	"crypt_$s";
     };
 
