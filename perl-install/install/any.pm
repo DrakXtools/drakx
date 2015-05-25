@@ -159,7 +159,6 @@ Do you have a supplementary installation medium to configure?",
 
     my %l = my @l = (
 	''      => N("None"),
-	'cdrom' => N("CD-ROM"),
 	'http'  => N("Network (HTTP)"),
 	'ftp'   => N("Network (FTP)"),
 	'nfs'   => N("Network (NFS)"),
@@ -285,8 +284,6 @@ sub ask_suppl_media_url {
 
     if (member($method, qw(ftp http))) {
 	install::any::ask_mirror($o, 'distrib', $o_url);
-    } elsif ($method eq 'cdrom') {
-	'cdrom://';
     } elsif ($method eq 'nfs') {
 	my ($host, $dir) = $o_url ? $o_url =~ m!nfs://(.*?)(/.*)! : ();
 	$o->ask_from_(
@@ -324,7 +321,7 @@ sub selectSupplMedia {
     my $method = ask_suppl_media_method($o) or return;
 
     #- configure network if needed
-    if (!scalar keys %{$o->{net}{ifcfg}} && $method !~ /^(?:cdrom|disk)/ && !$::local_install) {
+    if (!scalar keys %{$o->{net}{ifcfg}} && $method !~ /^(?:disk)/ && !$::local_install) {
 	prep_net_suppl_media($o);
     }
 
