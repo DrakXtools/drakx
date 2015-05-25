@@ -736,6 +736,7 @@ Do you want to setup the update media?")),
 	return;
     };
 
+    try_again:
     #- bring all interface up for installing updates packages.
     install::interactive::upNetwork($o);
 
@@ -744,7 +745,12 @@ Do you want to setup the update media?")),
 	log::l("installUpdates: successfully added media");
     } else {
 	log::l("installUpdates: failed to add media");
-	die "failed to add media"
+	if ($o->ask_okcancel(N("Warning"),
+		N("Failure when adding medium") . "\n" . N("Retry?"))) {
+	  goto try_again;
+	} else {
+	  return 0;
+	}
     }
 
     $o->ask_yesorno_({ title => N("Updates"), messages => formatAlaTeX(
