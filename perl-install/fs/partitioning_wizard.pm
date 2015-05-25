@@ -33,6 +33,13 @@ sub partition_with_diskdrake {
     my ($in, $all_hds, $fstab, $manual_fstab, $_partitions, $partitioning_flags, $skip_mtab) = @_;
     my $ok;
 
+    # The classic installer sets $skip_mtab to either undef or 1. The live
+    # installer sets it to 'skip_mtab'. If $skip_mtab is not set, this has
+    # already been done by fs::any::get_hds.
+    if ($skip_mtab eq 'skip_mtab') {
+        fs::mount_point::suggest_mount_points_always($fstab);
+    }
+
     do {
 	$ok = 1;
 	my $do_force_reload = sub {
