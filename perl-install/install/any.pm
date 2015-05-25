@@ -471,10 +471,11 @@ sub media_screen {
     # - use keywords (backports,testing,testing,sources) to blacklist
     # - introduce 'mandatory' keyword for guessing media that can *not* be disabled
     my %descriptions = (
-        'Main Release' => N("\"%s\" contains the various pieces of the systems and its applications.", _main_medium()),
-        'Contrib Release' => N("\"%s\" contains software that's not officially supported and might not receive the same level of maintenance.", _contrib_medium()),
-        'Non-free Release' => N("\"%s\" contains non free software.\n", _nonfree_medium()) .
-          N("It also contains firmware needed for certain devices to operate (eg: some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"),
+        'Core Release' => N("\"%s\" contains the various pieces of the systems and its applications", _core_medium()),
+        'Nonfree Release' => N("\"%s\" contains non free software.\n", _nonfree_medium()) . " " .
+          N("It also contains firmwares needed for certain devices to operate (eg: some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"),
+        'Tainted Release' => N("\"%s\" contains software that can not be distributed in every country due to software patents.", _tainted_medium()) . " " .
+          N("It also contains software from \"%s\" rebuild with additional capabilities.", _core_medium()),
     );
 
     $o->ask_from_({ messages => join("\n",
