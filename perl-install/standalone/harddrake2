@@ -243,7 +243,7 @@ my $tree_model = Gtk3::TreeStore->new("Gtk3::Gdk::Pixbuf", "Glib::String", "Glib
 $w->{window}->add(gtkpack_(0, Gtk3::VBox->new(0, 0),
                            0, $menubar,
                            0, Gtk3::Banner->new("/usr/share/mcc/themes/default/harddrake-mdk.png", translate("Hardware")),
-                           1, create_hpaned(gtkadd(Gtk3::Frame->new(N("Detected hardware")), 
+                           1, create_hpaned(my $f = gtkadd(Gtk3::Frame->new(N("Detected hardware")), 
                                                    create_scrolled_window(gtkset_size_request(my $tree = Gtk3::TreeView->new_with_model($tree_model), 350, -1), ['automatic', 'automatic'])),
                                             gtkpack_(0, Gtk3::VBox->new(0, 0),
                                                      1, gtkadd(my $frame = Gtk3::Frame->new(N("Information")),
@@ -265,6 +265,7 @@ $w->{window}->add(gtkpack_(0, Gtk3::VBox->new(0, 0),
                           )
                  );
 
+$f->set_size_request(350, -1);
 $text->set_wrap_mode('word');
 $frame->set_size_request(300, 450) unless $::isEmbedded;
 #    $tree->set_column_auto_resize(0, 1);
