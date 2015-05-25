@@ -1093,7 +1093,7 @@ sub _gtk_any_Paned {
     my ($w, $opts, $class, $action) = @_;
 
     if (!$w) {
-	$w = "Gtk3::$class"->new;
+	$w = Gtk3::Paned->new($class =~ /V/ ? 'vertical' : 'horizontal');
 	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
         $w->set_position(delete $opts->{position}) if exists $opts->{position};
     } elsif ($action eq 'gtkset') {

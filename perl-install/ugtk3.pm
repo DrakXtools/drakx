@@ -656,11 +656,11 @@ sub _setup_paned {
 }
 
 sub create_vpaned {
-    _setup_paned(Gtk3::VPaned->new, @_);
+    _setup_paned(Gtk3::Paned->new('vertical'), @_);
 }
 
 sub create_hpaned {
-    _setup_paned(Gtk3::HPaned->new, @_);
+    _setup_paned(Gtk3::Paned->new('horizontal'), @_);
 }
 
 sub gtkcreate_frame {
