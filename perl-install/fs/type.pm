@@ -304,8 +304,8 @@ sub isRecovery {
     isFat_or_NTFS($_[0]) && ($_[0]{type_name} =~ /^Hidden/ ||
       $_[0]{pt_type} == 0x12 || # "Compaq diagnostics"
         member($_[0]{device_LABEL} , 
-            # Extracted from /usr/share/hal/fdi/policy/10osvendor/20-storage-methods.fdi
-            # Hopefuly we'll ask to hal/udev someday
+            # Extracted from /usr/lib/udev/rules.d/80-udisks2.rules
+            # Hopefuly we'll ask to udev/udisk2 someday
             'RECOVERY', 'PQSERVICE', 'HP_RECOVERY', 'Lenovo_Recovery', 'SYSTEM_DRV', 'Recovery Partition', 'DellUtility', 'DellRestore', 'IBM_SERVICE', 'SERVICEV001', 'SERVICEV002', 'Packard_Bell', 'Push_Button_Reset')
     );
 }
