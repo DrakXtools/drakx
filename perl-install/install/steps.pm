@@ -922,7 +922,7 @@ sub upNetwork {
 	    return 1;
 	} elsif (!$b_pppAvoided) {
 	    log::l("starting network (PPP: $o->{net}{type})");
-	    eval { modules::load(qw(serial ppp bsd_comp ppp_deflate)) };
+	    eval { modules::load(qw(serial bsd_comp ppp_deflate)) };
 	    run_program::rooted($::prefix, "/bin/systemctl", "start", "systemd-journald");
 	    start_network_interface($o);
 	    return 1;
@@ -946,7 +946,7 @@ sub downNetwork {
 	} elsif (!network_is_cheap($o)) {
 	    stop_network_interface($o);
 	    run_program::rooted($::prefix, "/bin/systemctl", "stop", "systemd-journald");
-	    eval { modules::unload(qw(ppp_deflate bsd_comp ppp serial)) };
+	    eval { modules::unload(qw(ppp_deflate bsd_comp serial)) };
 	    return 1;
 	}
     }
