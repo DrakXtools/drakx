@@ -59,9 +59,9 @@ sub module_is_available {
 #-###############################################################################
 #- module loading
 #-###############################################################################
-# handles dependencies
-sub load_raw {
-    my ($lm, $h_options) = @_;
+
+sub filter_loaded_modules {
+    my ($lm) = @_;
 
     my $l;
 
@@ -87,6 +87,14 @@ sub load_raw {
 	  push @$l, $mod;
 	}
     }
+    $l;
+}
+
+# handles dependencies
+sub load_raw {
+    my ($lm, $h_options) = @_;
+
+    my $l = filter_loaded_modules($lm);
 
     if ($::testing || $::local_install) {
 	log::l("i would load module $_ ($h_options->{$_})") foreach @$l;
