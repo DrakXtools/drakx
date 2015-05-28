@@ -306,7 +306,7 @@ sub isRecovery {
         member($_[0]{device_LABEL} , 
             # Extracted from /usr/share/hal/fdi/policy/10osvendor/20-storage-methods.fdi
             # Hopefuly we'll ask to hal/udev someday
-            'RECOVERY', 'PQSERVICE', 'HP_RECOVERY', 'Lenovo_Recovery', 'SYSTEM_DRV', 'Recovery Partition', 'DellUtility', 'DellRestore', 'IBM_SERVICE', 'SERVICEV001', 'SERVICEV002')
+            'RECOVERY', 'PQSERVICE', 'HP_RECOVERY', 'Lenovo_Recovery', 'SYSTEM_DRV', 'Recovery Partition', 'DellUtility', 'DellRestore', 'IBM_SERVICE', 'SERVICEV001', 'SERVICEV002' 'Packard_Bell', 'Push_Button_Reset')
     );
 }
 
