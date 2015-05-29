@@ -276,6 +276,9 @@ Do you agree to lose all the partitions?
 
 	my @parts = partition_table::get_normal_parts($hd);
 
+	# fix installer failures due to udev's race when run too early:
+	run_program::run('udevadm', 'settle');
+
 	# checking the magic of the filesystem, do not rely on pt_type
 	foreach (@parts) {
 	    if (my $type = fs::type::type_subpart_from_magic($_)) {
