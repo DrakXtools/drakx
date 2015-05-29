@@ -309,7 +309,7 @@ sub move_fonts {
     my ($src_dir, $dest_dir, @extensions) = @_;
     my @fonts = map { s!.*/!!; $_ } map { glob("$src_dir/*.$_") } @extensions;
     return if !@fonts;
-    system('mv', "$src_dir/$_", $dest_dir) foreach @fonts;
+    system('mv', "$src_dir/$_", "$src_dir/$dest_dir") foreach @fonts;
 }
 
 sub my_rm_rf {
