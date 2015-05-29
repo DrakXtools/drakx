@@ -176,7 +176,7 @@ sub list_fontpath() {
 sub chk_empty_xfs_path() {
     foreach my $tmp_path (@installed_fonts_path) {
         if (every { /^fonts/ || /^type/ } all($tmp_path)) {
-            system("$chkfontpath -r $tmp_path ")
+            system($chkfontpath, '-r', $tmp_path)
               or print "PERL::system command failed during chkfontpath\n";
         }
     }
@@ -380,7 +380,7 @@ sub put_font_dir() {
         interactive_progress($pbar2, 1, N("done"));
         interactive_progress($pbar3, 0.25, N("Suppress Temporary Files"));
         my_rm_rf("$drakfont_dir/tmp/") if !$::testing;
-        system('xset fp rehash');
+        system(qw(xset fp rehash));
         interactive_progress($pbar3, 0.30, N("done"));
     }
 }
@@ -431,7 +431,7 @@ sub remove_fonts() {
         system("cd $i && type1inst") or print "PERL::system command failed during cd or type1inst\n";
         interactive_progress($pbar2, 1 / @list_dir, N("Suppress Fonts Files"));
     }
-    system('xset fp rehash');
+    system(qw(xset fp rehash));
     -e "/usr/share/ghostscript" and my_rm_rf("$drakfont_dir/remove") if !$::testing;
     interactive_progress($pbar2, 0.01, N("done"));
 }
