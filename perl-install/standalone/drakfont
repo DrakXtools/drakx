@@ -325,7 +325,7 @@ sub put_font_dir_real {
     system("cd $drakfont_dir/$subdir && $fccache && $command");
     interactive_progress($pbar2, $progress, $title);
     symlinkf("$drakfont_dir/$subdir", "/etc/X11/fontpath.d/drakfont_$subdir");
-    system("rm -f $font_dir/fonts.cache-1");
+    rm_rf("$font_dir/fonts.cache-1");
 }
 
 sub put_font_dir() {
