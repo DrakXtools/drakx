@@ -518,12 +518,13 @@ sub add {
 }
 
 sub allocatePartitions {
-    my ($all_hds, $to_add) = @_;
+    my ($all_hds, $to_add, $o_hd) = @_;
 
     my @to_add = @$to_add;
  
     foreach my $part_ (fs::get::holes($all_hds, 'non_readonly')) {
 	my ($start, $size, $dev) = @$part_{"start", "size", "rootDevice"};
+	next if $o_hd && (($o_hd->{device} || $o_hd->{VG_name}) ne $dev);
 	my ($part, $suggested);
 	while ($suggested = suggest_part($part = { start => $start, size => 0, maxsize => $size, rootDevice => $dev }, 
 					 $all_hds, \@to_add)) {
@@ -537,11 +538,11 @@ sub allocatePartitions {
 }
 
 sub auto_allocate {
-    my ($all_hds, $o_suggestions) = @_;
+    my ($all_hds, $o_suggestions, $o_target) = @_;
     my $before = listlength(fs::get::fstab($all_hds));
 
     my $suggestions = $o_suggestions || $suggestions{simple};
-    allocatePartitions($all_hds, $suggestions);
+    allocatePartitions($all_hds, $suggestions, $o_target);
 
     if ($o_suggestions) {
 	auto_allocate_raids($all_hds, $suggestions);

@@ -104,7 +104,7 @@ sub partitionWizardSolutions {
     my @hds_rw = grep { !$_->{readonly} } @$hds;
     my @hds_can_add = grep { $_->{type} ne 'hd' || $_->can_add } @hds_rw;
     if (fs::get::hds_free_space(@hds_can_add) > $min_linux) {
-	$solutions{free_space} = [ 30, N("Use free space"), sub { fsedit::auto_allocate($all_hds, $partitions); 1 } ];
+	$solutions{free_space} = [ 30, N("Use free space"), sub { fsedit::auto_allocate($all_hds, $partitions, $o_target); 1 } ];
     } else { 
 	push @wizlog, N("Not enough free space to allocate new partitions") . ": " .
 	  (@hds_can_add ? 
@@ -238,7 +238,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®")) if $
                       partition_table::adjust_local_extended($hd, $part);
                       partition_table::adjust_main_extended($hd);
 
-                      fsedit::auto_allocate($all_hds, $partitions);
+                      fsedit::auto_allocate($all_hds, $partitions, $hd);
                       1;
                   }, \@ok_for_resize_fat ];
         }
@@ -264,7 +264,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®")) if $
 				    title => N("Partitioning"),
 				    interactive_help_id => 'takeOverHdConfirm' }) or return;
 		fsedit::partition_table_clear_and_initialize($all_hds->{lvms}, $hd, $in);
-		fsedit::auto_allocate($all_hds, $partitions);
+		fsedit::auto_allocate($all_hds, $partitions, $hd);
 		1;
 	    } ];
     }

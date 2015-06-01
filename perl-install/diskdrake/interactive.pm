@@ -365,7 +365,7 @@ sub Auto_allocate {
     my %all_hds_ = %$all_hds;
     $all_hds_{hds} = [ sort { $a == $hd ? -1 : 1 } fs::get::hds($all_hds) ];
 
-    eval { fsedit::auto_allocate(\%all_hds_, $suggestions) };
+    eval { fsedit::auto_allocate(\%all_hds_, $suggestions, $hd) };
     if ($@) {
 	$@ =~ /partition table already full/ or die;
 
