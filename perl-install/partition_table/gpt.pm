@@ -182,6 +182,9 @@ sub write {
             c::disk_del_partition($hd->{file}, $part_number) or die "failed to del partition #$part_number on $hd->{file}";
         }
     }
+    # prevent errors when telling kernel to reread partition table:
+    # (above add/del_partition result in udev events)
+    system(qw(udevadm settle));
     common::sync();
     1;
 }
