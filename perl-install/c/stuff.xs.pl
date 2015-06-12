@@ -554,7 +554,7 @@ set_partition_flag(char * device_path, int part_number, char *type)
 	if (flag)
 	   RETVAL=ped_partition_set_flag(part, flag, 1);
 	   if (RETVAL)
-	      RETVAL = ped_disk_commit(disk);
+	      RETVAL = ped_disk_commit_to_dev(disk);
       }
       ped_disk_destroy(disk);
     }
@@ -676,7 +676,7 @@ disk_del_partition(char * device_path, int part_number)
       } else {
         RETVAL=ped_disk_delete_partition(disk, part);
         if(RETVAL) {
-          RETVAL = ped_disk_commit(disk);
+          RETVAL = ped_disk_commit_to_dev(disk);
         } else {
           printf("del_partition failed\n");
         }
@@ -703,7 +703,7 @@ disk_add_partition(char * device_path, double start, double length, const char *
       } else
         RETVAL = ped_disk_add_partition (disk, part, constraint);
       if(RETVAL) {
-        RETVAL = ped_disk_commit(disk);
+        RETVAL = ped_disk_commit_to_dev(disk);
       } else {
         printf("add_partition failed\n");
       }
