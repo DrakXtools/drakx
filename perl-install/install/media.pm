@@ -533,7 +533,7 @@ sub adjust_paths_in_urpmi_cfg {
         } elsif (member($phys_m->{method}, qw(disk nfs))) {
             # use the real mount point:
             if ($medium->{url} =~ m!/tmp/image(/media)?!) {
-                $medium->{url} =~ s!/tmp/image(/media).!$phys_m->{mntpoint}$phys_m->{rel_path}!;
+                $medium->{url} =~ s!/tmp/image(/media)?!$phys_m->{mntpoint}$phys_m->{rel_path}!;
             } else {
                 # just remove $::prefix and we already have the real mount point:
                 $medium->{url} =~ s!^$::prefix!!;
