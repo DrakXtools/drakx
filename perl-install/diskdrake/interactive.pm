@@ -1395,8 +1395,11 @@ sub format_part_info {
 	$info .= N("Type: ") . (fs::type::part2type_name($part) || $part->{fs_type}) . ($::expert ? sprintf " (0x%x)", $part->{pt_type} : '') . "\n";
     }
     $info .= N("Start: sector %s\n", $part->{start}) if $::expert && !isSpecial($part) && !isLVM($hd);
-    $info .= N("Size: %s", formatXiB($part->{size}, 512));
-    $info .= sprintf " (%s%%)", int 100 * $part->{size} / $hd->{totalsectors} if $hd->{totalsectors};
+    if ($hd->{totalsectors}) {
+	$info .= N("Size: %s (%s%% of disk)", formatXiB($part->{size}, 512), int 100 * $part->{size} / $hd->{totalsectors});
+    } else {
+	$info .= N("Size: %s", formatXiB($part->{size}, 512));
+    }
     $info .= N(", %s sectors", $part->{size}) if $::expert;
     $info .= "\n";
     $info .= N("Cylinder %d to %d\n", $part->{start} / $hd->cylinder_size, ($part->{start} + $part->{size} - 1) / $hd->cylinder_size) if ($::expert || isEmpty($part)) && !isSpecial($part) && !isLVM($hd) && $hd->cylinder_size;
