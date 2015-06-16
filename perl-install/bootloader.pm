@@ -1196,6 +1196,7 @@ sub suggest {
     }
 
     my @kernels = get_kernels_and_labels() or die "no kernel installed";
+    log::l("found kernels: ", join(', ', @kernels));
 
     my %old_kernels = map { vmlinuz2version($_->{kernel_or_dev}) => 1 } @{$bootloader->{entries}};
     @kernels = grep { !$old_kernels{$_->{version}} } @kernels;
