@@ -5,9 +5,12 @@ use strict;
 use MDK::Common;
 
 my @aliases;
-my ($main) = `ls -t /lib/modules/*/modules.alias`;
-foreach (cat_(chomp_($main))) {
-    push @aliases, [ $1, $2 ] if /^alias\s+(pcmcia:\S+)\s+(\S+)$/; #- modalias, module
+my @main = `ls -t /lib/modules/*/modules.alias`;
+foreach (@main) {
+    foreach (cat_(chomp_($_))) {
+	push @aliases, [ $1, $2 ] if /^alias\s+(pcmcia:\S+)\s+(\S+)$/; #- modalias, module
+    }
+    not @aliases or last;
 }
 @aliases or die "unable to get PCMCIA aliases";
 
