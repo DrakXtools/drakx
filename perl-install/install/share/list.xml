@@ -291,6 +291,24 @@
   pango-thai-lang.so
 </from>
 
+<from dir="/usr/share/ldetect-lst">
+  dmitable.gz pcitable.gz usbtable.gz
+  dkms-modules.alias fallback-modules.alias
+  <filter command="gzip">
+    Cards+ MonitorsDB isdn.db
+  </filter>
+</from>
+
+<from dir="/lib/module-init-tools">
+  ldetect-lst-modules.alias
+</from>
+
+<from dir="/usr/LIB/device-mapper">
+  <from expand="glob"> 
+    *.so
+ </from>
+</from>
+
 <from dir="/usr/LIB/gconv">
   BIG5.so
   EUC-JP.so
