@@ -71,9 +71,12 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	if (!any { isSwap($_) } @fstab) {
 	    $ok &&= $in->ask_okcancel('', N("You do not have a swap partition.\n\nContinue anyway?"));
 	}
-	if (is_uefi() && !fs::get::has_mntpoint("/boot/EFI", $all_hds)) {
+	if (is_uefi()) {
+	  my $part = fs::get::has_mntpoint("/boot/EFI", $all_hds);
+	  if (!$part || !isESP($part)) {
 	    $in->ask_warn('', N("You must have a ESP FAT32 partition mounted in /boot/EFI"));
 	    $ok = '';
+	  }
 	}
     } until $ok;
     1;
