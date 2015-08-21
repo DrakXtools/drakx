@@ -291,7 +291,7 @@ static int save_netinfo(struct interface_info * intf)
 	fprintf(f, "NETWORKING=yes\n");
 	fprintf(f, "FORWARD_IPV4=false\n");
 
-	if (hostname && !intf->boot_proto == BOOTPROTO_DHCP)
+	if (hostname && !(intf->boot_proto == BOOTPROTO_DHCP))
 		fprintf(f, "HOSTNAME=%s\n", hostname);
 	if (gateway.s_addr != 0)
 		fprintf(f, "GATEWAY=%s\n", inet_ntoa(gateway));
