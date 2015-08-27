@@ -168,9 +168,9 @@ our %l = (
     pcmcia => [
       qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket), # cb_enabler
     ],
-    hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-appleir hid-aureal hid-axff hid-belkin
+    hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-appleir hid-aureal hid-axff hid-belkin hid-betopff
 	    hid-cherry hid-chicony hid-cp2112 hid-cypress hid-dr hid-drff hid-elecom hid-elo hid-emsff
-	    hid-ezkey hid-gaff hid-generic hid-gt683r hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse hid-huion
+	    hid-ezkey hid-gaff hid-generic hid-gt683r hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse
 	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-lenovo hid-lenovo-tpkbd
 	    hid-logitech hid-logitech-dj hid-logitech-hidpp hid-magicmouse hid-microsoft hid-monterey
 	    hid-multilaser hid-multitouch hid-ntrig hid-ortek hid-penmount hid-petalynx hid-picolcd
@@ -219,7 +219,7 @@ our %l = (
           qw(snd-maestro3 snd-mia snd-mixart snd-mona snd-mpu401 snd-nm256),
           qw(snd-opl3sa2 snd-opti92x-ad1848 snd-opti92x-cs4231 snd-opti93x snd-oxygen snd-pcsp snd-pcxhr snd-riptide snd-rme32),
           qw(snd-rme96 snd-rme9652 snd-sb16 snd-sb8 snd-sbawe snd-sc6000 snd-sgalaxy snd-sis7019 snd-sonicvibes),
-          qw(snd-sscape snd-trident snd-via82xx snd-virtuoso snd-vx222 snd-vxp440 snd-vxpocket snd-wavefront),
+          qw(snd-sscape snd-trident snd-usb-variax snd-via82xx snd-virtuoso snd-vx222 snd-vxp440 snd-vxpocket snd-wavefront),
           qw(snd-ymfpci sonicvibes sscape trident via82cxxx_audio wavefront ymfpci),
   ],
     tv => [ qw(bt878 bttv cx23885 cx25821 cx8800 cx8802 cx88-blackbird dpc7146),
@@ -255,7 +255,7 @@ our %l = (
         gspca_spca505 gspca_spca506 gspca_spca508 gspca_spca561
         gspca_sq905 gspca_sq905c gspca_sq930x gspca_stk014 gspca_stk1135
         gspca_stv0680 gspca_stv06xx gspca_sunplus gspca_t613
-        gspca_topro gspca_tv8532 gspca_vc032x gspca_vicam
+        gspca_topro gspca_touptek gspca_tv8532 gspca_vc032x gspca_vicam
         gspca_xirlink_cit gspca_zc3xx),
         qw(ibmcam konicawc mod_quickcam ov511 ov511-alt ov518_decomp),
         qw(ov51x-jpeg ovfx2 pwc qc-usb-messenger quickcam quickcam_messenger),
@@ -325,6 +325,7 @@ our %l = (
       qw(acpi_cpufreq processor),
       qw(bcm_sf2),
       qw(usbip-host),
+      qw(vgem)
 
       # drivers/platform/x86:
       qw(acerhdf acer-wmi alienware-wmi amilo-rfkill apple-gmux asus-laptop asus-nb-wmi asus-wmi classmate-laptop compal-laptop dell-laptop),
@@ -337,7 +338,7 @@ our %l = (
       #- these need checking
       qw(rrunner meye),
 
-      qw(virtio virtio_balloon virtio_pci virtio_ring vhost_scsi hyperv-keyboard),
+      qw(virtio virtio_input virtio_pci virtio_ring vhost_scsi hyperv-keyboard),
       qw(mei pch_phub),
       qw(vmvgfx),
     ],
