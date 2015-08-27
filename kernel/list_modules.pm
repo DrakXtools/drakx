@@ -325,7 +325,7 @@ our %l = (
       qw(acpi_cpufreq processor),
       qw(bcm_sf2),
       qw(usbip-host),
-      qw(vgem)
+      qw(vgem),
 
       # drivers/platform/x86:
       qw(acerhdf acer-wmi alienware-wmi amilo-rfkill apple-gmux asus-laptop asus-nb-wmi asus-wmi classmate-laptop compal-laptop dell-laptop),
