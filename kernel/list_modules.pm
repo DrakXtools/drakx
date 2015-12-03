@@ -27,18 +27,18 @@ our %l = (
         qw(tc35815 tlan uli526x vmxnet3),
         qw(b44 com20020-pci de2104x),
         qw(defxx), # most unused
-        qw(dgrs e100 eepro100 epic100 fealnx hamachi natsemi),
+        qw(dgrs e100 eepro100 epic100 fealnx hamachi mlxsw_pci natsemi),
         qw(ne2k-pci pcnet32 plip sis900 skfp starfire stmmac-platform tulip),
         qw(typhoon via-rhine winbond-840 xgene-enet forcedeth),
         qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
       # add all phys
-      qw(amd at803x bcm7xxx bcm87xx broadcom cicada davicom et1011c fixed_phy icplus lxt marvell mdio-bcm-unimac mdio-bitbang mdio-gpiomicrel),
-      qw(national qsemi r8152 r815x realtek smsc spi_ks8995 ste10Xp vitesse),
+      qw(amd aquantia at803x bcm7xxx bcm87xx broadcom cicada davicom dp83848 dp83867 et1011c fixed_phy icplus lxt marvell mdio-bcm-unimac mdio-bitbang mdio-gpio mdio-octeon micrel microchip),
+      qw(national qsemi r8152 r815x realtek smsc spi_ks8995 ste10Xp teranetics vitesse),
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(alx atl1 atl1c atl1e at91_ether ax88179_178a be2net bna bnx2 bnx2x cxgb cxgb3 cxgb4 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe),
+      qw(alx atl1 atl1c atl1e at91_ether ax88179_178a be2net bna bnx2 bnx2x cxgb cxgb3 cxgb4 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe lan78xx),
       qw(macb mvmdio myri_sbus myri10ge netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io samsung-sxgbe sfc sxg_nic),
       qw(sis190 sk98lin skge sky2 slicoss spidernet stmmac tehuti tg3 via-velocity vxge yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
@@ -56,7 +56,7 @@ our %l = (
    #- protocol reported are not accurate) so we match network adapters against
    #- known drivers :-(
     usb => [ 
-      qw(asix catc cdc_ether dm9601 huawei_cdc_ncm kaweth mcs7830 pegasus rtl8150 smsc75xx smsc95xx usbnet),
+      qw(asix catc cdc_ether ch9200 dm9601 huawei_cdc_ncm kaweth mcs7830 pegasus rtl8150 smsc75xx smsc95xx usbnet),
     ],
     wireless => [
       qw(acx-pci acx-usb adm8211 agnx airo airo_cs aironet4500_cs),
@@ -170,7 +170,7 @@ our %l = (
     ],
     hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-appleir hid-aureal hid-axff hid-belkin hid-betopff
 	    hid-cherry hid-chicony hid-cp2112 hid-cypress hid-dr hid-drff hid-elecom hid-elo hid-emsff
-	    hid-ezkey hid-gaff hid-generic hid-gt683r hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse
+	    hid-ezkey hid-gaff hid-gembird hid-generic hid-gt683r hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse
 	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-lenovo hid-lenovo-tpkbd
 	    hid-logitech hid-logitech-dj hid-logitech-hidpp hid-magicmouse hid-microsoft hid-monterey
 	    hid-multilaser hid-multitouch hid-ntrig hid-ortek hid-penmount hid-petalynx hid-picolcd
@@ -233,7 +233,7 @@ our %l = (
         qw(dvb-usb-dtt200u dvb-usb-dtv5100 dvb-usb-ec168 dvb-usb-friio dvb-usb-gp8ps),
         qw(dvb-usb-nova-t-usb2 dvb-usb-ttusb2 dvb-usb-umt-010),
         qw(dvb-usb-vp702x dvb-usb-vp7045 earth-pt1 firedtv hexium_gemini),
-        qw(hexium_orion pluto2 skystar2 smsusb ttusb_dec),
+        qw(hexium_orion netup-unidvb pluto2 skystar2 smsusb ttusb_dec),
     ],
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-gemtek-pci radio-keene radio-maestro radio-ma901
