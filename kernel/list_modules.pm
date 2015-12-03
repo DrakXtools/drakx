@@ -64,7 +64,7 @@ our %l = (
       qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx bcm_wimax bcma brcm80211 brcmsmac brcmfmac carl9170 com20020_cs),
       qw(dyc_ar5 hostap_cs hostap_pci hostap_plx i2400m_usb ipw2100),
       qw(ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwldvm iwlmvm iwlwifi madwifi_pci),
-      qw(mwifiex_usb mwl8k ndiswrapper netwave_cs orinoco orinoco_cs),
+      qw(mt7601u mwifiex_usb mwl8k ndiswrapper netwave_cs orinoco orinoco_cs),
       qw(orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd orinoco_usb p54pci),
       qw(p54usb prism2_cs prism2_pci prism2_usb prism54 qmi_wwan r8180),
       qw(r8187se rtl8188ee r8192_pci r8192s_usb r8192u_usb r8712u r8723bs ray_cs rndis_wlan rsi_sdio rt2400 rt2400pci rt2500),
@@ -108,7 +108,7 @@ our %l = (
         qw(be2iscsi bfa BusLogic dc395x dc395x_trm dmx3191d dtc eata eata_dma),
         qw(eata_pio fdomain g_NCR5380 in2000 initio mpt2sas mpt3sas mvsas NCR53c406a),
         qw(nsp32 pas16 pci2220i pm80xx pm8001 psi240i qla1280 qla2x00 qla2xxx),
-        qw(qlogicfas qlogicfc rsxx seagate shasta skd sim710 stex sym53c416),
+        qw(qlogicfas qlogicfc rsxx seagate shasta skd sim710 snic stex sym53c416),
         qw(t128 tmscsim u14-34f ultrastor wd7000 xen-scsiback xen-scsifront),
       qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicfas408 sym53c8xx wd719x lpfc lpfcdd), # ncr53c8xx
     ],
@@ -314,8 +314,8 @@ our %l = (
       qw(parport_pc parport_serial),
       qw(btaudio),
       qw(mmc_block sdhci-acpi), # eMMC
-
       'cryptoloop',
+      'ulpi',
       qw(hv_balloon hyperv_fb),
       qw(virtio_balloon vmw_balloon),
 
