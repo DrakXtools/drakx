@@ -1553,8 +1553,8 @@ sub remove_advertising() {
 }
 
 sub disable_user_view() {
-    substInFile { s/^UserView=.*/UserView=true/ } "$::prefix/etc/kde/kdm/kdmrc";
     substInFile { s/^Browser=.*/Browser=0/ } "$::prefix/etc/X11/gdm/custom.conf";
+    #TODO: Needed for sddm ?
 }
 
 sub set_security {
