@@ -219,7 +219,7 @@ sub detect_network_drivers {
 sub detect_hardware_packages {
     my ($do_pkgs, $o_match_all_hardware) = @_;
     my @ignore_flags = $::isInstall ? () : (
-        if_(!$do_pkgs->is_installed('task-plasma5-minimal'), "CAT_KDE"),
+        if_(!$do_pkgs->is_installed('task-plasma5-minimal'), "CAT_PLASMA5"),
         if_(!$do_pkgs->is_installed('task-gnome-minimal'), "CAT_GNOME"),
         if_(!$do_pkgs->is_installed('task-cinnamon-minimal'), "CAT_CINNAMON"),
         if_(!$do_pkgs->is_installed('task-mate-minimal'), "CAT_MATE"),
