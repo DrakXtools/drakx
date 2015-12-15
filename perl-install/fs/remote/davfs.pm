@@ -25,7 +25,7 @@ sub save_credentials {
     @$credentials or return;
 
     output_with_perm(secrets_file(), 0600, 
-		     map { to_double_quoted($_->{mntpoint}, $_->{username}, $_->{password}, $_->{comment}) . "\n" } @$credentials);
+		     map { to_double_quoted($_->{mntpoint}, $_->{username}, $_->{password}) . "\n" } @$credentials);
 }
 
 sub mountpoint_credentials_save {
