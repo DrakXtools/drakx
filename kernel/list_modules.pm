@@ -28,7 +28,7 @@ our %l = (
         qw(b44 com20020-pci de2104x),
         qw(defxx), # most unused
         qw(dgrs e100 eepro100 epic100 fealnx hamachi mlxsw_pci natsemi),
-        qw(ne2k-pci pcnet32 plip sis900 skfp starfire stmmac-platform tulip),
+        qw(ne2k-pci pcnet32 plip qede sis900 skfp starfire stmmac-platform tulip),
         qw(typhoon via-rhine winbond-840 xgene-enet forcedeth),
         qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
@@ -38,7 +38,7 @@ our %l = (
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(alx atl1 atl1c atl1e at91_ether ax88179_178a be2net bna bnx2 bnx2x cxgb cxgb3 cxgb4 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe lan78xx),
+      qw(alx atl1 atl1c atl1e at91_ether ax88179_178a be2net bna bnx2 bnx2x bnxt_en cxgb cxgb3 cxgb4 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe lan78xx),
       qw(macb mvmdio myri_sbus myri10ge netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io samsung-sxgbe sfc sxg_nic),
       qw(sis190 sk98lin skge sky2 slicoss spidernet stmmac tehuti tg3 via-velocity vxge yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
@@ -69,8 +69,8 @@ our %l = (
       qw(p54usb prism2_cs prism2_pci prism2_usb prism54 qmi_wwan r8180),
       qw(r8187se rtl8188ee r8192_pci r8192s_usb r8192u_usb r8712u r8723bs ray_cs rndis_wlan rsi_sdio rt2400 rt2400pci rt2500),
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
-      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se r8188eu r8723au rtl_pci rtl_usb rtusb),
-      qw(rtl8192se rtl8192cu rtl8192de rtl8192ee rtl8723ae rtl8723be rtl8821ae spectrum_cs sr9700 sr9800 ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
+      qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se rtl818x_pci r8188eu r8192ee r8723au rtl_pci rtl_usb rtusb),
+      qw(rtl8192se rtl8192cu rtl8192de rtl8192ee rtl8723ae rtl8723be rtl8821ae rtl8xxxu spectrum_cs sr9700 sr9800 ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
       qw(wavelan_cs wcn36xx wl wl3501_cs wvlan_cs zd1201 zd1211rw),
     ],
     isdn => [
@@ -169,8 +169,8 @@ our %l = (
       qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket), # cb_enabler
     ],
     hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-appleir hid-aureal hid-axff hid-belkin hid-betopff
-	    hid-cherry hid-chicony hid-cp2112 hid-cypress hid-dr hid-drff hid-elecom hid-elo hid-emsff
-	    hid-ezkey hid-gaff hid-gembird hid-generic hid-gt683r hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse
+	    hid-cherry hid-chicony hid-corsair hid-cp2112 hid-cypress hid-dr hid-drff hid-elecom hid-elo hid-emsff
+	    hid-ezkey hid-gaff hid-gembird hid-generic hid-gfrm hid-gt683r hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse
 	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-lenovo hid-lenovo-tpkbd
 	    hid-logitech hid-logitech-dj hid-logitech-hidpp hid-magicmouse hid-microsoft hid-monterey
 	    hid-multilaser hid-multitouch hid-ntrig hid-ortek hid-penmount hid-petalynx hid-picolcd
@@ -240,7 +240,7 @@ our %l = (
 	    radio-maxiradio radio-miropcm20 radio-mr800 radio-raremono radio-shark
 	    radio-usb-si470x shark2) ],
     scanner => [ qw(scanner microtek) ],
-    firewire => [ qw(snd-dice snd-firewire-speakers snd-isight snd-oxfw snd-scs1x) ],
+    firewire => [ qw(snd-dice snd-firewire-digi00x snd-firewire-speakers snd-isight snd-oxfw snd-scs1x snd-firewire-tascam) ],
     gameport => [ qw(cs461x ns558 emu10k1-gp fm801-gp lightning ns558 vortex) ],
     usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-6fire snd-usb-caiaq snd-usb-hiface snd-usb-usx2y usb-midi) ],
     webcam => [
