@@ -223,8 +223,7 @@
   /usr/share/locale/UTF-8
   /bin/brltty
 
-  /usr/bin/drakx-matchbox-window-manager
-  /usr/share/matchbox/mbnoapp.xpm
+  /usr/bin/mutter
 
   /usr/share/themes/Adwaita/gtk-3.0/gtk.css
 
@@ -275,10 +274,6 @@
   </if>
 
   <from expand="glob">
-    <!-- needed by matchbox -->
-    <from spaces_in_filename="1">
-       /usr/share/themes/Ia Ora*/matchbox/*
-    </from>
     /usr/LIB/gdk-pixbuf-2.0/*/loaders.cache
     /usr/LIB/gdk-pixbuf-2.0/*/loaders/libpixbufloader-png.so
     /usr/LIB/gdk-pixbuf-2.0/*/loaders/libpixbufloader-svg.so
