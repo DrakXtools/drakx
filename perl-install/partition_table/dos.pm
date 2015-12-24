@@ -29,7 +29,7 @@ sub geometry_to_string {
 
 sub last_usable_sector { 
     my ($hd) = @_;
-    #- do not use totalsectors, see gi/docs/Partition-ends-after-end-of-disk.txt for more
+    #- do not use totalsectors, see docs/Partition-ends-after-end-of-disk.txt for more
     $hd->{geom}{sectors} * $hd->{geom}{heads} * $hd->{geom}{cylinders};
 }
 

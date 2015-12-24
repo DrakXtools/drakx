@@ -153,7 +153,7 @@ if (my $pid = fork()) {
 } else {
     $ENV{TERM} = 'linux'; # we only have terminfo for terminal "linux"
     $ENV{HOME} = '/';
-    # to kept sync with gi/mdk-stage1/init.c::env:
+    # to kept sync with mdk-stage1/init.c::env:
     $ENV{LD_LIBRARY_PATH}='/lib:/usr/lib:/mnt/lib:/mnt/usr/lib:/lib64:/usr/lib64:/mnt/lib64:/mnt/usr/lib64';
     if ($remote_repository) {
 	$ENV{URLPREFIX} = $repository;
