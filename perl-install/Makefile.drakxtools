@@ -52,7 +52,7 @@ install:
 	mv -f $(SBINDEST)/display_release_notes.pl $(BINDEST)
 	mv -f $(SBINDEST)/localedrake $(BINDEST)
 	# All the things handled by polkit
-	mv -f $(SBINDEST)/drak{auth,boot,clock,font,perm,sec,ups,xservices} $(LIBEXECDEST)
+	mv -f $(SBINDEST)/drak{autologin,auth,boot,clock,font,perm,sec,ups,xservices} $(LIBEXECDEST)
 	mv -f $(SBINDEST)/logdrake $(LIBEXECDEST)/draklog
 	mv -f $(SBINDEST)/drakedm $(LIBEXECDEST)/drakdm
 	mv -f $(SBINDEST)/diskdrake $(LIBEXECDEST)/drakdisk
