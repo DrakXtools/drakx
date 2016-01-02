@@ -719,7 +719,7 @@ Checks if we are in mga live mode
 
 =cut
 
-sub is_mgalive { -e "/run/mgalive" }
+sub is_mgalive() { -e "/run/mgalive" }
 
 =item is_uefi()
 
@@ -727,7 +727,7 @@ Checks if we are on an uefi system
 
 =cut
 
-sub is_uefi { -e "/sys/firmware/efi" }
+sub is_uefi() { -e "/sys/firmware/efi" }
 
 =item cmp_kernel_versions($va, $vb)
 
