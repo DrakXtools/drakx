@@ -79,16 +79,6 @@ sub path {
     ($phys_m->{real_mntpoint} || fs::get::mntpoint_prefixed($phys_m)) . $phys_m->{rel_path} . '/' . $f;
 }
 
-sub rel_rpm_file {
-    my ($medium, $f) = @_;
-    if (my ($arch) = $f =~ m|\.([^\.]*)\.rpm$|) {
-	$f = "$medium->{rpmsdir}/$f";
-	$f =~ s/%{ARCH}/$arch/g;
-	$f =~ s,^/+,,g;
-    }
-    $f;
-}
-
 sub umount_phys_medium {
     my ($phys_m) = @_;
 
