@@ -523,7 +523,7 @@ sub parse_args {
 
     #- from stage1
     put_in_hash(\%ENV, { getVarsFromSh('/tmp/env') });
-    exists $ENV{$_} and $cmdline{lc($_)} = $ENV{$_} foreach qw(METHOD PCMCIA KICKSTART);
+    exists $ENV{$_} and push @cmdline, sprintf("--%s=%s", lc($_), $ENV{$_}) foreach qw(METHOD PCMCIA KICKSTART);
 
     GetOptionsFromArray(\@cmdline,
 	    'keyboard=s'   => sub { $o->{keyboard} = $_[1]; push @::auto_steps, 'selectKeyboard' },
