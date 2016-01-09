@@ -584,6 +584,9 @@ sub parse_args {
 	    askmedia       => \$o->{askmedia},
 	    restore        => \$::isRestore,
 	    'compsslistlevel=s' => \$o->{compssListLevel},
+
+	    # to ignore:
+	    'BOOT_IMAGE|quiet|resume|root|splash' => sub {},
 	);
 
     ($cfg, $patch);
