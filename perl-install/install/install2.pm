@@ -519,7 +519,7 @@ Parse arguments (which came from either the boot loader command line or its conf
 
 sub parse_args {
     my ($cfg, $patch);
-    my @cmdline = @_, map { "--$_" } split ' ', cat_("/proc/cmdline");
+    my @cmdline = (@_, map { "--$_" } split ' ', cat_("/proc/cmdline"));
 
     #- from stage1
     put_in_hash(\%ENV, { getVarsFromSh('/tmp/env') });
