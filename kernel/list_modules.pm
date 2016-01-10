@@ -292,7 +292,7 @@ our %l = (
       qw(async_memcpy async_pq async_raid6_recov async_tx async_xor raid6_pq xor),
     ],
     mouse => [
-      qw(atixlmouse busmouse generic_serial inport ioc3_serial logibm logibusmouse msbusmouse pcips2 qpmouse synclinkmp),
+      qw(atixlmouse busmouse generic_serial inport ioc3_serial logibm logibusmouse msbusmouse psmouse pcips2 qpmouse synclinkmp),
       qw(mousedev usbhid usbmouse synaptics_usb),
     ],
     char => [
