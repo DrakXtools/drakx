@@ -2,7 +2,8 @@ include ../Makefile.config
 
 VERSION=2.30
 PRODUCT=drakx-installer-images
-KERNELS=$(shell rpm -qf /lib/modules/3.*)
+KERNELS=$(shell rpm -qf /lib/modules/4.*)
+
 IMAGES_DEST = $(ROOTDEST)/install/images
 #COMPRESS = xz -v --check=crc32 -9e
 ARCH=$(shell arch)
