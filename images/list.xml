@@ -109,18 +109,11 @@
   ddrescue
 
   setfont kbd_mode
-  <if ARCH="ppc">
-    hformat
-  </if>
+  hformat
 
-  <if-not ARCH="ppc">
-    fdisk gpart
-    testdisk photorec
-  </if-not>
+  fdisk gpart
+  testdisk photorec
 
-  <if ARCH="ppc">
-    pdisk 
-  </if>
   dump dump.ext2 restore restore.ext2 dump.ext3 restore.ext3 dump.xfs restore.xfs
 
   mdadm
@@ -166,14 +159,6 @@
   </if>
   <if ARCH="x86_64">
     efibootmgr 
-  </if>
-  <if ARCH="ppc">
-    ybin
-    mkofboot ofpath
-    nvsetenv
-  </if>
-  <if ARCH="sparc">
-    silo
   </if>
 </from>
 
@@ -279,8 +264,10 @@
   /usr/lib/rpm/macros.d/mandriva
 
   /lib/udev/ata_id
-  /lib/udev/scsi_id
+  /lib/udev/libinput-device-group
+  /lib/udev/libinput-model-quirks
   /lib/udev/pcmcia-socket-startup
+  /lib/udev/scsi_id
 </from>
 
 <filter subst="/^__END__/ and $_ = '', close ARGV">
