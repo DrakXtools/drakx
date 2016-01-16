@@ -303,6 +303,7 @@ sub per_entry_info_box {
 sub current_kind_changed {
     my ($_in, $kind) = @_;
 
+    return if !$kind->{display_box};
     $_->destroy foreach $kind->{display_box}->get_children;
     my @parts = kind2parts($kind);
     my $totalsectors = kind2sectors($kind, @parts);
