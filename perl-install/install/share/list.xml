@@ -12,7 +12,11 @@
 
   fb2png
   perl
-  monitor-edid monitor-get-edid-using-vbe monitor-parse-edid monitor-get-edid
+  monitor-edid
+  <if ARCH="i.86|x86_64">
+  monitor-get-edid-using-vbe
+  </if>
+  monitor-parse-edid monitor-get-edid
 
   <filter subst="s!^echo!/bin/echo!">
     unicode_start
