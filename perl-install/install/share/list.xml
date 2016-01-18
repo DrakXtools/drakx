@@ -44,9 +44,10 @@
   61-x11-input.rules
   63-md-raid-arrays.rules
   64-md-raid-assembly.rules
-
-  65-wacom.rules
+  65-libwacom.rules
+  <if ARCH="i.86|x86_64">
   69-xorg-vmmouse.rules
+  </if>
   75-net-description.rules
   80-drivers.rules
   80-libinput-device-groups.rules
@@ -90,7 +91,9 @@
   drivers/vesa_drv.so
   drivers/vmware_drv.so
   input/libinput_drv.so
+  <if ARCH="i.86|x86_64">
   input/vmmouse_drv.so
+  </if>
   input/wacom_drv.so
   libfbdevhw.so
   libfb.so
