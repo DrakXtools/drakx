@@ -376,7 +376,12 @@
       libnss_files.so.2
       libnss_dns.so.2
       libresolv.so.2
-      ld-linux*.so.2
+      <if ARCH="i.86|x86_64">
+        ld-linux*.so.2
+      </if>
+      <if ARCH="arm">
+        ld-linux*.so.3
+      </if>
 
       <!-- needed by dmraid -->
       libdmraid-events-isw.so
