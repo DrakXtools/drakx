@@ -240,7 +240,9 @@
 
   /etc/pki/tls/certs/ca-bundle.crt
 
+  <if ARCH="i.86|x86_64">
   /bin/vmmouse_detect
+  </if>
 
   <!-- for GDB: -->
   <if set="DEBUG_INSTALL">
