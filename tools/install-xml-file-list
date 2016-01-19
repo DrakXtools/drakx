@@ -31,6 +31,7 @@ if ($>) {
 
 my $initial_dir = cwd();
 my $ARCH = arch() =~ /i.86/ ? 'i386' : arch();
+$ARCH =~ s/^(arm).*/$1/;
 my $LIB = arch() =~ /x86_64/ ? "lib64" : "lib";
 
 my @busybox_funct = split("\n", `busybox --list`);
