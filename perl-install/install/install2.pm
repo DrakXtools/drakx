@@ -586,7 +586,8 @@ sub parse_args {
 	    'compsslistlevel=s' => \$o->{compssListLevel},
 
 	    # to ignore:
-	    'BOOT_IMAGE|quiet|resume|root|splash' => sub {},
+	    'BOOT_IMAGE=s' => sub {},
+	    'quiet|resume|root|splash' => sub {},
 	);
 
     ($cfg, $patch);
