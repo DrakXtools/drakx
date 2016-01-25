@@ -1069,9 +1069,7 @@ Cache the result of c::dmi_probe() (aka C<dmidecode>) and return the list of ite
 
 sub dmi_probe() {
     state $dmi_probe;
-    if (arch() !~ /86/) {
-        return;
-    }
+    return if arch() !~ /86/;
     $dmi_probe ||= $> ? [] : [ LDetect::dmi_probe() ];
     @$dmi_probe;
 }
