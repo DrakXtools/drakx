@@ -57,6 +57,7 @@ sub new($$) {
 
     $o = (bless {}, ref($type) || $type)->SUPER::new($o);
     $o->interactive::gtk::new;
+    gtkset_mousecursor_normal();
     $o;
 }
 
