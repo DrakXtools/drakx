@@ -140,7 +140,7 @@ sub config {
         } elsif ($in->ask_from_({ title => N("Sound configuration"),
                                   messages => 
 				    $device->{description} .
-				  "\n\n" . N("Your card uses the %s\"%s\" driver", $driver),
+				  "\n\n" . N("Your card uses the \"%s\" driver", $driver),
 				},
                                \@common,
                                 ))
