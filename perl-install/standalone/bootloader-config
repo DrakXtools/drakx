@@ -98,7 +98,7 @@ sub remove_kernel() {
 	return;
     }
 
-    remove_kernel_generic();
+    remove_kernel_generic() if bootloader::main_method($bootloader->{method}) ne 'grub2';
 
     modify_bootloader();
 }
