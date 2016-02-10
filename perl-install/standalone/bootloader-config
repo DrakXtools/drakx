@@ -98,6 +98,12 @@ sub remove_kernel() {
 	return;
     }
 
+    remove_kernel_generic();
+
+    modify_bootloader();
+}
+
+sub remove_kernel_generic() {
     my %proposed_labels;
     my @new_entries;
 
@@ -132,8 +138,6 @@ sub remove_kernel() {
 	my ($kernel_str, $v) = @$_;
 	bootloader::add_kernel($bootloader, $kernel_str, $v);
     }
-
-    modify_bootloader();
 }    
 
 
