@@ -241,11 +241,18 @@ sub setupBootloaderBefore {
 sub setupBootloader {
 	my ($in, $b, $all_hds, $fstab, $security) = @_;
 
-	require bootloader;
-	general:
-	{
-		local $::Wizard_no_previous = 1 if $::isStandalone;
-		setupBootloader__general($in, $b, $all_hds, $fstab, $security) or return 0;
+  general:
+    {
+	local $::Wizard_no_previous = 1 if $::isStandalone;
+	setupBootloader__general($in, $b, $all_hds, $fstab, $security) or return 0;
+    }
+    setupBootloader__boot_bios_drive($in, $b, $all_hds->{hds}) or goto general;
+    {
+	local $::Wizard_finished = 1 if $::isStandalone;
+	if (bootloader::main_method($b->{method}) eq 'grub2') {
+            setupBootloader__grub2($in, $b, $all_hds, $fstab) or goto general;
+	} else {
+            setupBootloader__entries($in, $b, $all_hds, $fstab) or goto general;
 	}
 	setupBootloader__boot_bios_drive($in, $b, $all_hds->{hds}) or goto general;
 	{
