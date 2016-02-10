@@ -288,7 +288,8 @@ sub read_grub2() {
     $bootloader{timeout} = $h{GRUB_TIMEOUT};
     $bootloader{entries} = [];
     my $entry;
-    foreach (cat_utf8("$::prefix/boot/grub2/grub.cfg")) {
+    my $f = "$::prefix/boot/grub2/grub.cfg";
+    foreach (cat_utf8($f)) {
 	next if /^#/;
 	if (/menuentry\s+['"]([^']+)["']/) {
 	    push @{$bootloader{entries}}, $entry if $entry;
