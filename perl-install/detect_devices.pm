@@ -67,7 +67,7 @@ sub get() {
     #- 2. The first SCSI device if SCSI exists. Or
     #- 3. The first RAID device if RAID exists.
 
-    getIDE(), getSCSI(), getMmcBlk(), getXenBlk(), getVirtIO(), getDAC960(), getCompaqSmartArray();
+    getIDE(), getSCSI(), getMmcBlk(), getNVMe() getXenBlk(), getVirtIO(), getDAC960(), getCompaqSmartArray();
 }
 sub hds()         { grep { may_be_a_hd($_) } get() }
 sub tapes()       { grep { $_->{media_type} eq 'tape' } get() }
@@ -453,6 +453,14 @@ sub getMmcBlk() {
             { device => basename($_), info => "MMC block device", media_type => 'hd', bus => 'mmc' };
     }
     glob("/sys/bus/mmc/devices/*/block/*");
+}
+
+sub getNVMe() {
+    -d '/sys/bus/pci_express/devices' or return;
+    map {
+            { device => basename($_), info => "NVMe block device", media_type => 'hd', bus => 'pci_express' };
+    }
+    glob("/sys/bus/pci_express/devices/*/block/*");
 }
 
 =item getCPUs()
