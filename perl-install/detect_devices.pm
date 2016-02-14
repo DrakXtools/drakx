@@ -67,7 +67,7 @@ sub get() {
     #- 2. The first SCSI device if SCSI exists. Or
     #- 3. The first RAID device if RAID exists.
 
-    getIDE(), getSCSI(), getMmcBlk(), getNVMe() getXenBlk(), getVirtIO(), getDAC960(), getCompaqSmartArray();
+    getIDE(), getSCSI(), getMmcBlk(), getNVMe(), getXenBlk(), getVirtIO(), getDAC960(), getCompaqSmartArray();
 }
 sub hds()         { grep { may_be_a_hd($_) } get() }
 sub tapes()       { grep { $_->{media_type} eq 'tape' } get() }
