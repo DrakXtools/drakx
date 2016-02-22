@@ -603,12 +603,21 @@ sub _gtk__TextView {
     $w;
 }
 
+
+sub _gtk__WebKit2_WebView {
+    my ($w, $opts, $class, $_action) = @_;
+    _gtk__WebKit_WebView($w, $opts, $class, $_action);
+}
+
 sub _gtk__WebKit_WebView {
-    my ($w, $opts, $_class, $_action) = @_;
+    my ($w, $opts, $class, $_action) = @_;
     if (!$w) {
-        require Gtk3::WebKit;
-        Gtk3::WebKit->import; # needed for initializing introspection
-        $w = Gtk3::WebKit::WebView->new;
+        $class =~ s/_([^_]*)$/::$1/;
+        my $base_class = "Gtk3::$class";
+        $base_class =~ s/_WebView$//;
+        eval "require $base_class";
+        $base_class->import; # needed for initializing introspection
+        $w = $base_class->new;
     }
 
     # disable contextual menu:
