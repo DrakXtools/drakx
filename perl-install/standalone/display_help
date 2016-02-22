@@ -25,7 +25,7 @@ use mygtk3 qw(gtknew);
 use ugtk3 qw(:wrappers :create);
 use Gtk3::WebKit;
 
-my $view = gtknew('WebKit_View', no_popup_menu => 1);
+my $view = gtknew('WebKit_WebView', no_popup_menu => 1);
 
 my $websettings = $view->get_settings;
 $websettings->set_property('allow-scripts-to-close-windows', 1);

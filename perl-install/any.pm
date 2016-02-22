@@ -1088,7 +1088,7 @@ sub display_release_notes {
     ugtk3->import(':all');
     require mygtk3;
     mygtk3->import('gtknew');
-    my $view = gtknew('WebKit_View', no_popup_menu => 1);
+    my $view = gtknew('WebKit_WebView', no_popup_menu => 1);
     $view->load_html_string($release_notes, '/');
                                
     my $w = ugtk3->new(N("Release Notes"), transient => $::main_window, modal => 1, pop_it => 1);

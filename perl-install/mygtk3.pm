@@ -603,7 +603,7 @@ sub _gtk__TextView {
     $w;
 }
 
-sub _gtk__WebKit_View {
+sub _gtk__WebKit_WebView {
     my ($w, $opts, $_class, $_action) = @_;
     if (!$w) {
         require Gtk3::WebKit;
