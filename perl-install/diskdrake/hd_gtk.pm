@@ -139,10 +139,13 @@ sub main {
     });
     $w->sync;
     $notebook_widget->set_current_page(0);
+    # there's always at least one child (at least a button for create a new part on empty discs):
+    my @children = $current_kind->{display_box} ? $current_kind->{display_box}->get_children : ();
     # workaround for $notebook_widget being realized too early:
-    if (!$done_button) {
+    if (!@children ||!$done_button) {
 	$notebook_widget->set_current_page(-1);
 	$notebook_widget->set_current_page(0);
+	undef $initializing;
 	$update_all->(2);
     }
     $done_button->grab_focus;
@@ -152,7 +155,6 @@ sub main {
         if $::isStandalone;
     }
 
-    undef $initializing;
     $w->main;
 }
 
