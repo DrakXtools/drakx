@@ -783,7 +783,7 @@ sub is_help_file_exist {
 
 sub load_from_uri {
     my ($view, $url) = @_;
-    $view->load_uri(get_html_file($::o, $url), 'file:///');
+    $view->load_uri(get_html_file($::o, $url));
 }
 
 sub get_html_file {
