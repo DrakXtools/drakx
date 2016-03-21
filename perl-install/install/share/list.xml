@@ -59,6 +59,9 @@
 <from dir="/usr/libexec">
   Xorg
   Xorg.wrap
+  <!-- needed by WebKit-4.0.typelib -->
+  webkit2gtk-4.0/WebKitNetworkProcess
+  webkit2gtk-4.0/WebKitWebProcess
 </from>
 
 <from dir="/usr/LIB/dri">
@@ -77,10 +80,10 @@
   GModule-2.0.typelib
   GObject-2.0.typelib
   Gtk-3.0.typelib
-  JavaScriptCore-3.0.typelib <!-- needed by WebKit-3.0.typelib -->
+  JavaScriptCore-4.0.typelib <!-- needed by WebKit-4.0.typelib -->
   Pango-1.0.typelib
-  Soup-2.4.typelib <!-- needed by WebKit-3.0.typelib -->
-  WebKit-3.0.typelib
+  Soup-2.4.typelib <!-- needed by WebKit-4.0.typelib -->
+  WebKit2-4.0.typelib
   xlib-2.0.typelib
 </from>
 
@@ -195,12 +198,11 @@
 </from>
 </filter>
 
-<filter command="strip">
-<from dir="/usr/LIB">
-  <!-- needed for Gtk3-WebKit -->
-  libwebkitgtk-3.0.so.0
-</from>
-</filter>
+  <!-- needed fro Gtk3-WebKit2 -->
+  <from expand="glob">
+    libwebkit2gtk-4.0.so.*
+  </from>
+  webkit2gtk-4.0/injected-bundle/libwebkit2gtkinjectedbundle.so
 
 <from dir="../../images/tree/root/">
   <to dir="/">
@@ -539,7 +541,7 @@
   perl-Glib
   perl-Glib-Object-Introspection
   perl-Gtk3
-  perl-Gtk3-WebKit
+  perl-Gtk3-WebKit2
   perl-LDetect
   perl-Locale-gettext
   perl-MDK-Common
