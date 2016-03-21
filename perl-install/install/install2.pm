@@ -735,6 +735,9 @@ sub main {
     # perl_checker: require install::steps_stdio
     require "install/steps_$o->{interactive}.pm" if $o->{interactive};
 
+    #- FIXME loading evdev should prevent crash of following line
+    eval { modules::load("evdev") };
+
     #- needed before accessing floppy (in case of usb floppy)
     modules::load_category($o->{modules_conf}, 'bus/usb'); 
 
