@@ -735,6 +735,9 @@ sub main {
     # perl_checker: require install::steps_stdio
     require "install/steps_$o->{interactive}.pm" if $o->{interactive};
 
+    # psmouse is now modular:
+    eval { modules::load("psmouse") };
+
     #- FIXME loading evdev should prevent crash of following line
     eval { modules::load("evdev") };
 
