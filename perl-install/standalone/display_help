@@ -23,16 +23,13 @@ use common;
 use any;
 use mygtk3 qw(gtknew);
 use ugtk3 qw(:wrappers :create);
-use Gtk3::WebKit;
+use Gtk3::WebKit2;
 
-my $view = gtknew('WebKit_WebView', no_popup_menu => 1);
+my $view = gtknew('WebKit2_WebView', no_popup_menu => 1);
 
-my $websettings = $view->get_settings;
-$websettings->set_property('allow-scripts-to-close-windows', 1);
-$view->set_settings($websettings);
-$view->signal_connect('close-web-view', sub { ugtk3::exit(0) });
+$view->signal_connect('close', sub { ugtk3::exit(0) });
 
-$view->open($ARGV[0]);
+$view->load_uri($ARGV[0]);
 
 # FIXME: merge this with mcc code into new mygtk3::set_standalone_main_window_size()?
 my ($rootwin_width, $rootwin_height) = mygtk3::root_window_size();
