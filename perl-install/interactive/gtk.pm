@@ -805,7 +805,7 @@ sub display_help_window {
     my ($o, $common) = @_;
     if (my $file = $common->{interactive_help_id}) {
         require Gtk3::WebKit;
-        my $view = gtknew('WebKit_View');
+        my $view = gtknew('WebKit_WebView');
 
         load_from_uri($view, $file);
 
