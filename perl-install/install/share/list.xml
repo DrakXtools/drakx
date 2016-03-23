@@ -2,7 +2,9 @@
 
 <from expand="binary">
   aria2c curl <!-- needed by urpmi -->
-  vmmouse_detect
+  <if ARCH="i.86|x86_64">
+    vmmouse_detect
+  </if>
 
   <mode copy="dereference">
     Xorg
@@ -237,10 +239,6 @@
   /usr/share/themes/Adwaita/gtk-3.0/gtk.css
 
   /etc/pki/tls/certs/ca-bundle.crt
-
-  <if ARCH="i.86|x86_64">
-  /bin/vmmouse_detect
-  </if>
 
   <!-- for GDB: -->
   <if set="DEBUG_INSTALL">
