@@ -1369,6 +1369,17 @@ sub virt_technology() {
     $tech ||= chomp_(run_program::get_stdout('systemd-detect-virt'));
 }
 
+=item isHyperv()
+
+Are we running under Hyper-V hypervisor?
+
+=cut
+
+sub isHyperv() {
+      dmidecode_category('System')->{Manufacturer} =~ /Microsoft Corporation/i
+      && dmidecode_category('System')->{'Product Name'} =~ /Virtual Machine/i;
+}
+
 =item is_virtualbox()
 
 Are we running under VirtualBox hypervisor?
