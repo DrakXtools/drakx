@@ -1376,8 +1376,7 @@ Are we running under Hyper-V hypervisor?
 =cut
 
 sub isHyperv() {
-      dmidecode_category('System')->{Manufacturer} =~ /Microsoft Corporation/i
-      && dmidecode_category('System')->{'Product Name'} =~ /Virtual Machine/i;
+    virt_technology() eq 'microsoft';
 }
 
 =item is_virtualbox()
@@ -1387,11 +1386,11 @@ Are we running under VirtualBox hypervisor?
 =cut
 
 sub is_virtualbox() {
-    any { $_->{driver} eq 'vboxadd' } detect_devices::pci_probe();
+    virt_technology() eq 'oracle';
 }
 
 sub is_vmware() {
-    any { $_->{card} =~ /Card:VMware/ } detect_devices::pci_probe();
+    virt_technology() eq 'vmware';
 }
 
 sub is_netbook_nettop() {
