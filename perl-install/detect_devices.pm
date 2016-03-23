@@ -1434,6 +1434,8 @@ sub matching_types() {
 	mips_st_ls2f => is_mips_st_ls2f(),
 	numpa => hasNumpad(),
 	touchpad => hasTouchpad(),
+	virtualbox => is_virtualbox(),
+	vmware => is_vmware(),
 	wireless => to_bool(get_wireless_interface() || probe_category('network/wireless')),
     };
 }
