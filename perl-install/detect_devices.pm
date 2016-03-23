@@ -1358,6 +1358,23 @@ sub is_xbox() {
     any { $_->{vendor} == 0x10de && $_->{id} == 0x02a5 } pci_probe();
 }
 
+=item virt_technology()
+
+Returns the virtualization technology (eg: kvm, oracle, ...)
+
+=cut
+
+sub virt_technology() {
+    state $tech;
+    $tech ||= chomp_(run_program::get_stdout('systemd-detect-virt'));
+}
+
+=item is_virtualbox()
+
+Are we running under VirtualBox hypervisor?
+
+=cut
+
 sub is_virtualbox() {
     any { $_->{driver} eq 'vboxadd' } detect_devices::pci_probe();
 }
