@@ -1426,14 +1426,14 @@ sub has_cpu_flag {
 
 sub matching_types() {
     +{
-	mips_lemote => is_mips_lemote(),
-	mips_ict => is_mips_ict(),
-	mips_st_ls2f => is_mips_st_ls2f(),
-	laptop => isLaptop(),
-	hyperv => isHyperv(),
-	'numpad' => hasNumpad(),
-	'touchpad' => hasTouchpad(),
 	'64bit' => to_bool(arch() =~ /64/),
+	hyperv => isHyperv(),
+	laptop => isLaptop(),
+	mips_ict => is_mips_ict(),
+	mips_lemote => is_mips_lemote(),
+	mips_st_ls2f => is_mips_st_ls2f(),
+	numpa => hasNumpad(),
+	touchpad => hasTouchpad(),
 	wireless => to_bool(get_wireless_interface() || probe_category('network/wireless')),
     };
 }
