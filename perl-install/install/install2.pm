@@ -693,6 +693,7 @@ sub main {
     $o->{stage2_phys_medium} = install::media::stage2_phys_medium($o->{method});
 
     log::l("second stage install running (", install::any::drakx_version($o), ")");
+    log::l(sprintf("Virtualization=%s", detect_devices::virt_technology()));
 
     eval { touch('/root/non-chrooted-marker.DrakX') }; #- helps distinguishing /root and /mnt/root when we don't know if we are chrooted
 
