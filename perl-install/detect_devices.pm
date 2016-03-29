@@ -456,11 +456,11 @@ sub getMmcBlk() {
 }
 
 sub getNVMe() {
-    -d '/sys/bus/pci_express/devices' or return;
+    -d '/sys/class/nvme' or return;
     map {
             { device => basename($_), info => "NVMe block device", media_type => 'hd', bus => 'pci_express' };
     }
-    glob("/sys/bus/pci_express/devices/*/block/*");
+    glob("/sys/block/nvme*");
 }
 
 =item getCPUs()
