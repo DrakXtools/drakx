@@ -86,7 +86,7 @@ install:
 	mv $(LIBDEST)/icons/localedrake-32.png $(ICONSDIR)/localedrake.png
 	mv $(LIBDEST)/icons/localedrake-48.png $(ICONSDIR)/large/localedrake.png
 	mv $(LIBDEST)/icons/localedrake-16.png $(ICONSDIR)/mini/localedrake.png
-	rmdir $(LIBDEST)/icons/harddrake2/menu
+	rm -rf $(LIBDEST)/icons/harddrake2/menu
 	install -m 644 standalone/menu/*.desktop $(DATADIR)/applications
 	mv $(LIBDEST)/icons/harddrake2/ $(DATADIR)/pixmaps/
 	mv $(SBINDEST)/convert $(DATADIR)/harddrake
