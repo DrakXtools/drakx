@@ -145,9 +145,9 @@ sub main {
     if (!@children ||!$done_button) {
 	$notebook_widget->set_current_page(-1);
 	$notebook_widget->set_current_page(0);
-	undef $initializing;
 	$update_all->(2);
     }
+    undef $initializing;
     $done_button->grab_focus;
     if (!$::testing) {
       $in->ask_from_list_(N("Warning"), N("Please make a backup of your data first"), 
