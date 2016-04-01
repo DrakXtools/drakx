@@ -138,6 +138,8 @@ sub main {
         return 0;
     });
     $w->sync;
+    # add a bogus tab so that gtk+ displayed everything when there's only one disk:
+    $notebook_widget->prepend_page(Gtk3::Label->new, Gtk3::Label->new);
     $notebook_widget->set_current_page(0);
     # there's always at least one child (at least a button for create a new part on empty discs):
     my @children = $current_kind->{display_box} ? $current_kind->{display_box}->get_children : ();
@@ -148,6 +150,10 @@ sub main {
 	$update_all->(2);
     }
     undef $initializing;
+    # remove bogus tab we added just to be sure gtk+ displayed everything:
+    $notebook_widget->remove_page(0);
+    # restore position when there's several disks:
+    $notebook_widget->set_current_page(0);
     $done_button->grab_focus;
     if (!$::testing) {
       $in->ask_from_list_(N("Warning"), N("Please make a backup of your data first"), 
