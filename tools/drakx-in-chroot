@@ -42,7 +42,7 @@ foreach (@ARGV) {
     } elsif (/--gdb/) {
         $wrapper = "gdb -q --args";
     } elsif (/--strace/) {
-        $wrapper = "strace -e file";
+        $wrapper = "strace -e file $ENV{STRACE_OPTIONS}";
     } elsif (/--depth=(.*)/) {
         $resolution .= "x$1";
     }
