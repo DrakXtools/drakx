@@ -3,7 +3,7 @@ package install::install2;
 use diagnostics;
 use strict;
 use vars qw($o);
-use Getopt::Long qw(GetOptionsFromArray :config no_ignore_case no_auto_abbrev no_getopt_compat);
+use Getopt::Long qw(GetOptionsFromArray :config no_ignore_case no_auto_abbrev no_getopt_compat pass_through);
 
 BEGIN { $::isInstall = 1 }
 
@@ -584,10 +584,6 @@ sub parse_args {
 	    askmedia       => \$o->{askmedia},
 	    restore        => \$::isRestore,
 	    'compsslistlevel=s' => \$o->{compssListLevel},
-
-	    # to ignore:
-	    'BOOT_IMAGE=s' => sub {},
-	    'quiet|resume|root|splash' => sub {},
 	);
 
     ($cfg, $patch);
