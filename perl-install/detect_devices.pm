@@ -666,7 +666,7 @@ sub serialPort2text {
 =cut
 
 sub getSerialModem {
-    my ($modules_conf, $o_mouse) = @_;
+    my ($_modules_conf, $o_mouse) = @_;
     my $mouse = $o_mouse || {};
     $mouse->{device} = readlink "/dev/mouse";
     my $serdev = arch() =~ /mips/ ? "8250" : "serial";
@@ -1184,9 +1184,7 @@ sub dmidecode() {
     return @dmis if $dmidecode_already_runned;
 
     return if $>;
-    my ($ver, @l) = arch() =~ /86/ ? run_program::get_stdout('dmidecode') : ();
-
-    my ($major, $minor) = $ver =~ /(\d+)\.(\d+)/;
+    my ($_ver, @l) = arch() =~ /86/ ? run_program::get_stdout('dmidecode') : ();
 
     #- drop header
     shift @l while @l && $l[0] ne "\n";
