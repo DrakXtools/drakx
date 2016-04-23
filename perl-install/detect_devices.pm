@@ -1369,13 +1369,13 @@ sub virt_technology() {
     $tech ||= chomp_(run_program::get_stdout('systemd-detect-virt'));
 }
 
-=item isHyperv()
+=item is_hyperv()
 
 Are we running under Hyper-V hypervisor?
 
 =cut
 
-sub isHyperv() {
+sub is_hyperv() {
     virt_technology() eq 'microsoft';
 }
 
@@ -1427,7 +1427,7 @@ sub has_cpu_flag {
 sub matching_types() {
     +{
 	'64bit' => to_bool(arch() =~ /64/),
-	hyperv => isHyperv(),
+	hyperv => is_hyperv(),
 	laptop => isLaptop(),
 	mips_ict => is_mips_ict(),
 	mips_lemote => is_mips_lemote(),
