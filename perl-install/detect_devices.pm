@@ -1379,6 +1379,16 @@ sub is_hyperv() {
     virt_technology() eq 'microsoft';
 }
 
+=item is_qemu()
+
+Are we running under Qemu hypervisor?
+
+=cut
+
+sub is_qemu() {
+    virt_technology() eq 'microsoft';
+}
+
 =item is_virtualbox()
 
 Are we running under VirtualBox hypervisor?
@@ -1434,6 +1444,7 @@ sub matching_types() {
 	mips_st_ls2f => is_mips_st_ls2f(),
 	numpa => hasNumpad(),
 	touchpad => hasTouchpad(),
+	qemu => is_qemu(),
 	virtualbox => is_virtualbox(),
 	vmware => is_vmware(),
 	wireless => to_bool(get_wireless_interface() || probe_category('network/wireless')),
