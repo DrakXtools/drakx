@@ -239,7 +239,7 @@ sub read {
 	    if (m!/fd\d+$!) {
 		warn "not checking the method on floppy, assuming $main_method is right\n";
 		$main_method;
-	    } elsif (member($main_method, qw(cromwell pmon2000 uboot))) {
+	    } elsif (member($main_method, qw(cromwell uboot))) {
 		#- not checking, there's only one bootloader anyway :)
 		$main_method;
 	    } elsif (my $type = partition_table::raw::typeOfMBR($_)) {
@@ -573,9 +573,6 @@ sub read_grub_menu_lst {
 }
 
 # FIXME: actually read back previous conf
-sub read_pmon2000() {
-    +{ method => 'pmon2000' };
-}
 sub read_uboot() {
     +{ method => 'uboot' };
 }
@@ -877,7 +874,7 @@ sub add_kernel {
 	$v->{append} = pack_append($simple, $dict);
     }
 
-    $b_no_initrd //= arch() =~ /mips|arm/ && !detect_devices::is_mips_gdium();
+    $b_no_initrd //= arch() =~ /arm/;
 
     $b_nolink ||= $kernel_str->{use_long_name};
 
@@ -896,25 +893,11 @@ sub add_kernel {
 
     if (!$b_nolink) {
 	$v->{kernel_or_dev} = '/boot/' . kernel_str2vmlinuz_short($kernel_str);
-	if (arch() =~ /mips/) {
-	    log::l("link $::prefix/boot/$vmlinuz_long -> $::prefix$v->{kernel_or_dev}");
-	    linkf("$::prefix/boot/$vmlinuz_long", $::prefix . $v->{kernel_or_dev});
-	    linkf("$::prefix/boot/$vmlinuz_long", $::prefix . $v->{kernel_or_dev} . ".32");
-	} else {
 	    _do_the_symlink($bootloader, $v->{kernel_or_dev}, $vmlinuz_long);
-	}
 
 	if ($v->{initrd}) {
 	    $v->{initrd} = '/boot/' . kernel_str2initrd_short($kernel_str);
-	    if (arch() =~ /mips/) {
-		log::l("link $::prefix/boot/$initrd_long -> $::prefix$v->{initrd}");
-		linkf("$::prefix/boot/$initrd_long", $::prefix . $v->{initrd});
-		if ($v->{initrd} =~ s/.img$/.gz/) {
-		    linkf("$::prefix/boot/$initrd_long", $::prefix . $v->{initrd});
-		}
-	    } else {
 		_do_the_symlink($bootloader, $v->{initrd}, $initrd_long);
-	    }
 	}
     }
 
@@ -1314,7 +1297,6 @@ sub method2text {
 sub method_choices_raw {
     my ($b_prefix_mounted) = @_;
     detect_devices::is_xbox() ? 'cromwell' :
-    arch() =~ /mips/ ? 'pmon2000' : 
     arch() =~ /arm/ ? 'uboot' :
        if_(!$b_prefix_mounted || whereis_binary('grub2-reboot', $::prefix), 
 	   'grub2-graphic', 'grub2'),

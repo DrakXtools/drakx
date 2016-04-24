@@ -89,7 +89,7 @@ sub floppies {
     state @fds;
     state $legacy_already_detected;
 
-    $o_not_detect_legacy_floppies = 1 if arch() =~ /mips|arm/;
+    $o_not_detect_legacy_floppies = 1 if arch() =~ /arm/;
 
     if (!$o_not_detect_legacy_floppies && !$legacy_already_detected) {
         $legacy_already_detected = 1;
@@ -669,7 +669,7 @@ sub getSerialModem {
     my ($_modules_conf, $o_mouse) = @_;
     my $mouse = $o_mouse || {};
     $mouse->{device} = readlink "/dev/mouse";
-    my $serdev = arch() =~ /mips/ ? "8250" : "serial";
+    my $serdev = "serial";
 
     eval { modules::load($serdev) };
 
@@ -1324,22 +1324,6 @@ sub is_i586() {
       !has_cpu_flag('cmov');
 }
 
-sub is_mips_lemote() {
-    to_bool(cat_('/proc/cpuinfo') =~ /lemote/);
-}
-
-sub is_mips_ict() {
-    to_bool(cat_('/proc/cpuinfo') =~ /ict/);
-}
-
-sub is_mips_gdium() {
-    to_bool(cat_('/proc/cpuinfo') =~ /gdium/);
-}
-
-sub is_mips_st_ls2f() {
-    to_bool(cat_('/proc/cpuinfo') =~ /st-ls2f/);
-}
-
 sub is_arm_openrd_client() {
     to_bool(cat_('/proc/cpuinfo') =~ /OpenRD Client/);
 }
@@ -1437,9 +1421,6 @@ sub matching_types() {
 	'64bit' => to_bool(arch() =~ /64/),
 	hyperv => is_hyperv(),
 	laptop => isLaptop(),
-	mips_ict => is_mips_ict(),
-	mips_lemote => is_mips_lemote(),
-	mips_st_ls2f => is_mips_st_ls2f(),
 	numpa => hasNumpad(),
 	touchpad => hasTouchpad(),
 	qemu => is_qemu(),
