@@ -2,6 +2,7 @@
 
 <from expand="binary">
   aria2c curl <!-- needed by urpmi -->
+  spice-vdagent spice-vdagentd
   <if ARCH="i.86|x86_64">
     vmmouse_detect
   </if>
@@ -50,6 +51,7 @@
   <if ARCH="i.86|x86_64">
   69-xorg-vmmouse.rules
   </if>
+  70-spice-vdagentd.rules
   75-net-description.rules
   80-drivers.rules
   80-libinput-device-groups.rules
