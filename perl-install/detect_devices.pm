@@ -1384,7 +1384,7 @@ Are we running under Qemu hypervisor?
 =cut
 
 sub is_qemu() {
-    virt_technology() eq 'microsoft';
+    virt_technology() eq 'qemu';
 }
 
 =item is_virtualbox()
