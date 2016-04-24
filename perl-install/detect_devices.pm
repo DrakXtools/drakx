@@ -1421,7 +1421,7 @@ sub matching_types() {
 	'64bit' => to_bool(arch() =~ /64/),
 	hyperv => is_hyperv(),
 	laptop => isLaptop(),
-	numpa => hasNumpad(),
+	numpad => hasNumpad(),
 	touchpad => hasTouchpad(),
 	qemu => is_qemu(),
 	virtualbox => is_virtualbox(),
