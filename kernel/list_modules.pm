@@ -97,7 +97,7 @@ our %l = (
   {
     # ide drivers compiled as modules:
     ide => [
-        qw(aec62xx ali14xx alim15x3 amd74xx atiixp cmd64x cy82c693 cs5520 cs5530 cs5535 cs5536),
+        qw(aec62xx alim15x3 amd74xx atiixp cmd64x),
         qw(delkin_cb dtc2278 hpt34x hpt366 ns87415 ht6560b it8172 it8213 it821x jmicron),
         qw(opti621 pdc202xx_new pdc202xx_old piix qd65xx rz1000 sc1200 serverworks siimage sis5513 slc90e66),
         qw(tc86c001 triflex trm290 tx4938ide tx4939ide umc8672 via82cxxx ide-pci-generic ide-generic),
