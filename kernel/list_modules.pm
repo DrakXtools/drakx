@@ -319,6 +319,7 @@ our %l = (
       qw(virtio_balloon vmw_balloon),
 
       qw(crc32c crc32c-intel),
+      'nvme',
       
       qw(evdev), qw(usblp printer), 'floppy', 'microcode', 'usb_common',
       qw(acpi_cpufreq processor),
