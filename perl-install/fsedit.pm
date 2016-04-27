@@ -466,9 +466,9 @@ Please be sure to add a separate /boot partition");
       if member($mntpoint, qw(/root));
     die N("This directory should remain within the root filesystem")
       if member($mntpoint, qw(/bin /dev /etc /lib /sbin /mnt /media));
-    die N("You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount point\n")
+    die N("You need a true filesystem (ext2/3/4, f2fs, reiserfs, xfs, or jfs) for this mount point\n")
       if !isTrueLocalFS($part) && $mntpoint eq '/';
-    die N("You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount point\n") . $mntpoint
+    die N("You need a true filesystem (ext2/3/4, f2fs, reiserfs, xfs, or jfs) for this mount point\n") . $mntpoint
       if !isTrueFS($part) && member($mntpoint, '/home', fs::type::directories_needed_to_boot_not_ESP());
     die N("You cannot use an encrypted filesystem for mount point %s", $mntpoint)
       if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var /boot));

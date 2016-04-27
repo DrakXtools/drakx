@@ -35,7 +35,7 @@ sub mount {
     $fs or log::l("not mounting $dev partition"), return;
 
     {
-	my @fs_modules = qw(btrfs ext3 ext4 hfs jfs nilfs2 nfs ntfs romfs reiserfs ufs xfs vfat);
+	my @fs_modules = qw(btrfs f2fs ext3 ext4 hfs jfs nilfs2 nfs ntfs romfs reiserfs ufs xfs vfat);
 	my @types = (qw(ext2 proc sysfs iso9660 devpts auto ntfs-3g), @fs_modules);
 
 	push @types, 'smb', 'cifs', 'davfs2' if !$::isInstall;

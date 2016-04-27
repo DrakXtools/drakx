@@ -24,6 +24,7 @@ my (%type_name2pt_type, %type_name2fs_type, %fs_type2pt_type, %pt_type2fs_type, 
   0x83 => 'ext3',     'Journalised FS: ext3',
   0x83 => 'ext4',     'Journalised FS: ext4',
   0x83 => 'btrfs',    'Journalised FS: Btrfs',
+  0x83 => 'f2fs',     'Journalised FS: F2FS',
 (is_uefi() ?
   (0xef => 'vfat',     'EFI System Partition') :
   ('BIOS_GRUB' => 'BIOS_GRUB',  'BIOS boot partition'),
@@ -288,7 +289,7 @@ sub type_subpart_from_magic {
 
 sub defaultFS() { 'ext4' }
 
-sub true_local_fs_types() { qw(btrfs ext3 ext2 ext4 reiserfs xfs jfs) }
+sub true_local_fs_types() { qw(btrfs f2fs ext3 ext2 ext4 reiserfs xfs jfs) }
 
 sub isEmpty { !$_[0]{fs_type} && $_[0]{pt_type} == 0 }
 sub isBIOS_GRUB { $_[0]{pt_type} eq 'BIOS_GRUB' }

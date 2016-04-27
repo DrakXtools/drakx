@@ -816,6 +816,12 @@ sub Resize {
 	        $nice_resize{btrfs} = 1;
 		$min = max($min, $part->{size} - $free);
 	    }
+	} elsif ($part->{fs_type} eq 'f2fs') {
+	    write_partitions($in, $hd) or return;
+	    if (defined(my $free = fs::df($part))) {
+	        $nice_resize{f2fs} = 1;
+		$min = max($min, $part->{size} - $free);
+	    }
 	}
 	#- make sure that even after normalizing the size to cylinder boundaries, the minimun will be saved,
 	#- this save at least a cylinder (less than 8Mb).

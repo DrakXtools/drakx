@@ -450,7 +450,7 @@ sub create_buttons4partitions {
 	if (isLUKS($entry) || isRawLUKS($entry)) {
 	    $w->set_image(gtknew("Image", file => "security-strong"));
 	}
-	my @colorized_fs_types = qw(ext3 ext4 xfs swap vfat ntfs ntfs-3g);
+	my @colorized_fs_types = qw(f2fs ext3 ext4 f2fs xfs swap vfat ntfs ntfs-3g);
 	$w->set_name("PART_" . (isEmpty($entry) ? 'empty' : 
 				$entry->{fs_type} && member($entry->{fs_type}, @colorized_fs_types) ? $entry->{fs_type} :
 				'other'));
@@ -487,9 +487,9 @@ sub hd2kind {
 }
 
 sub filesystems_button_box() {
-    my @types = (N_("Ext4"), N_("XFS"), N_("Swap"), N_("Windows"),
+    my @types = (N_("Ext4"), N_("F2FS"), N_("Swap"), N_("Windows"),
 		 N_("Other"), N_("Empty"));
-    my %name2fs_type = (Ext3 => 'ext3', Ext4 => 'ext4', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
+    my %name2fs_type = (Ext3 => 'ext3', Ext4 => 'ext4', 'F2FS' => 'f2fs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
 
     gtkpack(Gtk3::HBox->new, 
 	    map {

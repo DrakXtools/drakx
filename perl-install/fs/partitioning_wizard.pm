@@ -350,7 +350,7 @@ sub create_display_box {
 
     foreach my $entry (@parts) {
 	my $part_info = Gtk3::Label->new($entry->{device_LABEL});
-	my @colorized_fs_types = qw(ext2 ext3 ext4 xfs swap vfat ntfs ntfs-3g);
+	my @colorized_fs_types = qw(ext2 ext3 ext4 f2fs xfs swap vfat ntfs ntfs-3g);
         my $part_widget = Gtk3::EventBox->new;
         $entry->{width} = int($entry->{size} * $initial_ratio) + $minwidth;
         if ($resize && $entry->{selected_for_resize}) {
@@ -433,9 +433,9 @@ sub create_display_box {
 	$part_widget->add($part_info);
     }
     unless ($resize || $fill_empty) {
-        my @types = (N_("Ext2/3/4"), N_("XFS"), N_("Swap"), N_("Windows"),
+        my @types = (N_("Ext2/3/4"), N_("F2FS"), N_("Swap"), N_("Windows"),
                     N_("Other"), N_("Empty"));
-        my %name2fs_type = ('Ext2/3/4' => 'ext3', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
+        my %name2fs_type = ('Ext2/3/4' => 'ext3', 'F2FS' => 'f2fs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
         $desc = ugtk3::gtkpack(Gtk3::HBox->new,
                 map {
                      my $t = $name2fs_type{$_};
