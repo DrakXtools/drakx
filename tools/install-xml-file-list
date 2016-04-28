@@ -116,7 +116,7 @@ sub valid_cond {
 
 sub add_to_env {
     my ($env, $tag, $attr) = @_;
-    my %env = map_each { $::a => +{%$::b} } %$env;
+    my %env = map_each { $::a => +{ %$::b } } %$env;
     foreach (keys %$attr) {
 	!$env{$tag}{$_} or die qq(overriding attribute <$tag $_="$env{$tag}{$_}"> with $_="$attr->{$_}"\n); 
 	$env{$tag}{$_} = $attr->{$_};

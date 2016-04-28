@@ -11,7 +11,6 @@ use lib '../kernel';
 use MDK::Common;
 use list_modules;
 
-(my $karch = arch()) =~ s/^i.86$/i586/;
 my $rpm = 'rpm --nosignature';
 
 
