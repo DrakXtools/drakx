@@ -27,7 +27,8 @@ if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 }
 
-# $verbose = 1;
+my $verbose;
+#$verbose = 1;
 
 my $initial_dir = cwd();
 my $ARCH = arch() =~ /i.86/ ? 'i386' : arch();
@@ -178,12 +179,12 @@ sub collect_needed_libraries {
 	@to_check = ();
     }
 }
-sub install_needed_libraries {
+sub install_needed_libraries() {
     copy_files('', $DEST, [ keys %needed_libraries ], '', '--dereference');
 }
 
 sub collect_needed_perl_files {
-    my ($local_rep, $dest, @scripts) = @_;
+    my ($local_rep, @scripts) = @_;
 
     my (%local, %global);
     foreach my $script (@scripts) {
@@ -352,7 +353,7 @@ sub install {
 
 	@files = @text_l;
 	warn "collect-perl-files $local $to @files ($env->{filter}{command})\n";
-	my ($local_perl_files, $global_perl_files) = collect_needed_perl_files($local, $to, @files);
+	my ($local_perl_files, $global_perl_files) = collect_needed_perl_files($local, @files);
 	warn "collect-perl-files gave: ", join(' ', @$local_perl_files), "\n";
 #	warn "                    and: ", join(' ', @$global_perl_files), "\n";
 	copy_and_filter($local =~ m!/! ? $local : "$working_dir/$local", "$DEST/$to", $local_perl_files, $env->{filter}, '', '--dereference');
