@@ -743,6 +743,7 @@ XIM server; or a Qt plugin if exists)
 my @IM_i18n_fields = qw(XMODIFIERS XIM GTK_IM_MODULE XIM_PROGRAM QT_IM_MODULE);
 
 my ($is_kde4);
+my $is_plasma;
 
 =item my %IM_config;
 
@@ -1008,6 +1009,7 @@ sub IM2packages {
 	require any;
 	my @sessions = any::sessions();
 	$is_kde4 = member('KDE4', @sessions);
+	$is_plasma = any { /plasma/ } @sessions;
 	my $per_lang = $IM_config{$locale->{IM}}{packages} || {};
 	my $main_lang = analyse_locale_name($locale->{lang})->{main};
 	my $packages = $per_lang->{$main_lang} || $per_lang->{generic};
