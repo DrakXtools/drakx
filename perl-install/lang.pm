@@ -824,7 +824,7 @@ my %IM_config =
              XMODIFIERS => '@im=gcin',
 	     langs => 'zh',
 	     packages => {
-		     common => sub { if_($is_kde4, 'gcin-qt4') },
+		     common => sub { if_($is_plasma, 'gcin-qt5') },
 		     generic => sub { qw(gcin) },
 	     },
             },
@@ -835,7 +835,7 @@ my %IM_config =
              XMODIFIERS => '@im=hime',
 	     langs => 'zh',
 	     packages => {
-		     common => sub { if_($is_kde4, 'hime-qt4') },
+		     common => sub { if_($is_plasma, 'hime-qt5') },
 		     generic => sub { qw(hime) },
 	     },
             },
