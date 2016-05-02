@@ -1051,6 +1051,25 @@ sub urpmi_add_all_media {
     $val;
 }
 
+sub format_wm {
+    my ($wm) = @_;
+    return {
+	    cinnamon => 'Cinnamon',
+	    enlightenment => 'Enlightenment',
+	    'gnome-classic' => 'Gnome Classic',
+	    gnome => 'Gnome',
+	    i3 => 'I3',
+	    'i3-with-shmlog' => 'I3 with shmlog',
+	    lxqt => 'LxQt',
+	    mate => 'Mate',
+	    openbox => 'OpenBox',
+	    'plasma-mediacenter' => 'Plasma Mediacenter',
+	    '01plasma' => 'Plasma',
+	    sugar => 'Sugar',
+	    xfce => 'XFCE',
+    }->{$wm};
+}
+
 sub autologin {
     my ($o, $in) = @_;
 
@@ -1069,7 +1088,7 @@ sub autologin {
 			 messages => N("I can set up your computer to automatically log on one user.") },
 		       [ { text => N("Use this feature"), val => \$use_autologin, type => 'bool' },
 			 { label => N("Choose the default user:"), val => \$o->{autologin}, list => \@users, disabled => sub { !$use_autologin } },
-			 { label => N("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm, disabled => sub { !$use_autologin } } ]
+			 { label => N("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm, disabled => sub { !$use_autologin }, format => \&format_wm } ]
 		      );
 	delete $o->{autologin} if !$use_autologin;
     } else {
