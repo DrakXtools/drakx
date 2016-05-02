@@ -742,7 +742,6 @@ XIM server; or a Qt plugin if exists)
 
 my @IM_i18n_fields = qw(XMODIFIERS XIM GTK_IM_MODULE XIM_PROGRAM QT_IM_MODULE);
 
-my ($is_kde4);
 my $is_plasma;
 
 =item my %IM_config;
@@ -893,7 +892,6 @@ my %IM_config =
        XIM_PROGRAM => 'scim-bridge',
        XMODIFIERS => '@im=SCIM',
        packages => {
-	   common => sub { if_($is_kde4, 'scim-bridge-qt4') },
            generic => sub { qw(scim-m17n scim-tables) },
            am => sub { qw(scim-tables) },
            ja => sub { qw(scim-anthy) },
@@ -910,7 +908,7 @@ my %IM_config =
 	XMODIFIERS => '@im=ibus',
 	default_for_lang => 'am ja ko th vi zh_CN zh_TW',
 	packages => {
-		generic => sub { qw(ibus-table ibus-m17n), if_($is_kde4, 'ibus-qt4') },
+		generic => sub { qw(ibus-table ibus-m17n) },
 		ja => sub { qw(ibus-mozc) },
 		zh => sub { qw(ibus-libpinyin ibus-chewing) },
 		ko => sub { qw(ibus-hangul) },
@@ -923,7 +921,6 @@ my %IM_config =
            XMODIFIERS => '@im=uim',
 	   langs => 'ja',
 	   packages => {
-		  common => sub { if_($is_kde4, 'uim-qt4immodule') },
 		  generic => sub { qw(uim-gtk uim) },
 	  },
           },
@@ -1008,7 +1005,6 @@ sub IM2packages {
     if ($locale->{IM}) {
 	require any;
 	my @sessions = any::sessions();
-	$is_kde4 = member('KDE4', @sessions);
 	$is_plasma = any { /plasma/ } @sessions;
 	my $per_lang = $IM_config{$locale->{IM}}{packages} || {};
 	my $main_lang = analyse_locale_name($locale->{lang})->{main};
