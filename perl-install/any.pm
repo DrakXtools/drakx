@@ -1004,7 +1004,10 @@ sub ask_user_and_root {
 }
 
 sub sessions() {
-    split(' ', run_program::rooted_get_stdout($::prefix, '/usr/sbin/chksession', '-l'));
+    my $old = chdir('$::prefix/usr/share/xsessions/');
+    my @l = map { s/.desktop$//; $_ } glob("*.desktop");
+    chdir($old);
+    @l;
 }
 sub sessions_with_order() {
     my %h = map { /(.*)=(.*)/ } split(' ', run_program::rooted_get_stdout($::prefix, '/usr/sbin/chksession', '-L'));
