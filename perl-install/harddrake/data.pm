@@ -24,7 +24,7 @@ foreach my $dev (@devices) {
 sub unknown() {
     grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|RAID|SCSI)|SYSTEM_(OTHER|SDHCI)|tape|UPS/
 	       && !member($_->{driver}, qw(cpia_usb cyber2000fb forcedeth ibmcam megaraid mod_quickcam nvnet ohci1394 ov511 ov518_decomp scanner ultracam usbvideo usbvision))
-	       && $_->{driver} !~ /^ISDN|Mouse:USB|Removable:zip|class\|Mouse|sata|www.linmodems.org/
+	       && $_->{driver} !~ /^ISDN|Mouse:USB|Removable:zip|class\|Mouse|sata|www.linmodems.org|kbd|mouse|sysrq|usbhid/
 	       && $_->{type} ne 'network'
 	       && $_->{description} !~ /Alcatel|ADSL Modem/;
 	   } @devices;
