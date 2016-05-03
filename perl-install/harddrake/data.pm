@@ -476,7 +476,7 @@ our @tree =
       icon => "hw-keyboard.png",
       configurator => "$sbindir/keyboarddrake",
       detector => sub {
-          f(grep { $_->{description} =~ /Keyboard/i || $_->{media_type} =~ /Subclass\|Keyboard/i ||
+          f(grep { $_->{description} =~ /Keyboard/i || $_->{media_type} =~ /Keyboard/i ||
                      # USB devices are filtered out since we already catch them through probeall():
                      $_->{bus} ne 'usb' && $_->{driver} =~ /^event|kbd|^usbhid/ && $_->{description} !~ /PC Speaker/;
                  } @devices);
