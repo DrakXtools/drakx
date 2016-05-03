@@ -1348,19 +1348,6 @@ sub check_enough_space() {
     unlink $e;
 }
 
-sub install_pmon2000 { 
-    my ($_bootloader, $_all_hds) = @_;
-    log::l("Mips/pmon2000 - nothing to install...");
-}
-sub write_pmon2000 { 
-    my ($_bootloader, $_all_hds) = @_;
-    log::l("Mips/pmon2000 - nothing to write...");
-}
-sub when_config_changed_pmon2000 {
-    my ($_bootloader) = @_;
-    #- do not do anything
-}
-
 sub install_uboot { 
     my ($_bootloader, $_all_hds) = @_;
     log::l("uboot - nothing to install...");
