@@ -83,7 +83,6 @@ sub load_font {
     $pl->load_from_data("GtkWindow { font: $font }");
     Gtk3::StyleContext::add_provider_for_screen(Gtk3::Gdk::Screen::get_default(), $pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
     # FIXME: this should be done in /mnt too for forked app such as gurpmi{,.addmedia} (mga#67):
-    mkdir_p("/.config/gtk-3.0");
     output("/.config/gtk-3.0/settings.ini", qq([Settings]
 $s
 ));
@@ -194,6 +193,11 @@ sub init_gtk {
     my ($o) = @_;
 
     symlink("/tmp/stage2/etc/$_", "/etc/$_") foreach qw(gtk-3.0 pango fonts);
+
+    # Custom _global_ CSS:
+    mkdir_p("/.config/gtk-3.0");  # TODO/FIXME: set ENV{HOME} ?
+    # FIXME: this should be done in /mnt too for forked app such as gurpmi{,.addmedia} (mga#67):
+    symlinkf('/usr/lib/libDrakX/gtk.css', '/.config/gtk-3.0/gtk.css');
 
     if ($o->{vga16}) {
         #- inactivate antialias in VGA16 because it makes fonts look worse

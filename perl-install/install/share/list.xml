@@ -575,6 +575,12 @@
       dbus-uuidgen > share/machine-id; echo machine-id
     </from>
   </to>
+
+  <!-- custom CSD CSS -->
+  <to dir="/usr/lib/libDrakX"> <!-- /.config/gtk-3.0 is RO -->
+	  gtk.css <!-- symlinked in  -->
+  </to>
+
 </from>
 
 <from dir="../pixmaps">
