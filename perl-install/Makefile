@@ -104,3 +104,8 @@ check_perl_checker:
 	rm -f share/po/libDrakX.pot install/share/po/DrakX.pot
 	@make -C share/po libDrakX.pot
 	@make -C install/share/po DrakX.pot
+
+list_firmwares.pm:
+	../tools/find-drivers-needing-nonfree-firmware
+
+.PHONY: list_firmwares.pm
