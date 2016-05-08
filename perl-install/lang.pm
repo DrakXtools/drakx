@@ -810,11 +810,15 @@ my %IM_config =
 #	       packages => { generic => sub { 'miniChinput' } },
 #              },
    fcitx => {
-             GTK_IM_MODULE => 'xim',
+             GTK_IM_MODULE => 'fcitx',
              XIM => 'fcitx',
              XIM_PROGRAM => 'fcitx',
              XMODIFIERS => '@im=fcitx',
 	     langs => 'zh',
+	     packages => {
+		     common => sub { if_($is_plasma, 'fcitx-qt5') },
+		     generic => sub { qw(fcitx) },
+	     },
             },
    gcin => {
              GTK_IM_MODULE => 'gcin',
