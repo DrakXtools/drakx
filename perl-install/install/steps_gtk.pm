@@ -262,7 +262,7 @@ sub reallyChooseDesktop {
     my $w = ugtk3->new($title);
 
     my %tips = (
-        KDE    => N("Install %s Plasma Desktop", "Moondrake"),
+        KDE    => N("Install %s KDE Desktop", "Moondrake"),
         GNOME  => N("Install %s GNOME Desktop", "Moondrake"),
         Custom => N("Custom install"),
     );
