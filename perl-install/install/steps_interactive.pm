@@ -446,7 +446,7 @@ sub _chooseDesktop {
     my ($o, $rpmsrate_flags_chosen, $chooseGroups) = @_;
 
     my @l = group_by2(
-	KDE    => N("KDE"),
+	KDE    => N("Plasma"),
 	GNOME  => N("GNOME"),
 	Custom => N("Custom"),
     );

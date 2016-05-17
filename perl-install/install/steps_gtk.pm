@@ -262,7 +262,7 @@ sub reallyChooseDesktop {
     my $w = ugtk3->new($title);
 
     my %tips = (
-        KDE    => N("Install %s KDE Desktop", "Moondrake"),
+        KDE    => N("Install %s Plasma Desktop", "Moondrake"),
         GNOME  => N("Install %s GNOME Desktop", "Moondrake"),
         Custom => N("Custom install"),
     );
@@ -285,7 +285,7 @@ sub reallyChooseDesktop {
             gtkadd(Gtk3::EventBox->new, gtknew('Image', file => "desktop-$val->[0]")),
             'button-press-event' => sub {
                 my %title = (
-                    KDE    => N("KDE Desktop"),
+                    KDE    => N("Plasma Desktop"),
                     GNOME  => N("GNOME Desktop"),
                     Custom => N("Custom Desktop"),
                 );
