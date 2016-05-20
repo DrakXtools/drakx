@@ -28,6 +28,7 @@ $(STAGE1_BINS):
 endif
 
 images: images/hd_grub.img images/hd_grub.img images/boot.iso grub/$(ARCH)/install/images/all.cpio.xz grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz grub/boot/firmware.cpio.xz
+	cd images; md5sum *.iso* > MD5SUM;
 
 images/hd_grub.img:
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img.pl --compress "$(COMPRESS)" $@
@@ -40,7 +41,7 @@ grub/boot/grub/grub.cfg: grub_data/grub.cfg make_boot_img all.kernels/.list
 
 images/boot.iso: grub/boot/grub/grub.cfg grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz grub/$(ARCH)/install/images/all.cpio.xz grub/boot/firmware.cpio.xz
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
-	cd images; md5sum boot.iso > MD5SUM
+	cd images; md5sum boot.iso > MD5SUM; sha512sum boot.iso > SHA512SUM
 
 grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz: all.kernels/.list
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
