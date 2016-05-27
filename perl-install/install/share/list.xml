@@ -87,12 +87,12 @@
 
 <from dir="/usr/LIB/xorg/modules">
   drivers/fbdev_drv.so
+  input/libinput_drv.so
+  <if ARCH="i.86|x86_64">
   drivers/modesetting_drv.so
   drivers/vboxvideo_drv.so
   drivers/vesa_drv.so
   drivers/vmware_drv.so
-  input/libinput_drv.so
-  <if ARCH="i.86|x86_64">
   input/vmmouse_drv.so
   libint10.so
   libvbe.so
