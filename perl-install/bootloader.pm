@@ -1842,7 +1842,11 @@ sub write_grub2 {
 
     my $f = "$::prefix/etc/default/grub";
     my %conf = getVarsFromSh($f);
-    $conf{GRUB_CMDLINE_LINUX_DEFAULT} = get_grub2_append($bootloader);
+
+    # First installation or migration from grub-legacy/lilo?
+    if (! -f get_grub2_install_sh()) {
+	$conf{GRUB_CMDLINE_LINUX_DEFAULT} = get_grub2_append($bootloader);
+    }
     $conf{GRUB_GFXPAYLOAD_LINUX} = 'auto' if is_uefi();
     $conf{GRUB_DISABLE_RECOVERY} = 'false'; # for 'failsafe' entry
     $conf{GRUB_TIMEOUT} = $bootloader->{timeout};
