@@ -199,7 +199,7 @@ sub raw {
     my $home;
     if ($options->{as_user}) {
         my $uid;
-        $uid = $ENV{PKEXEC_UID} && getpwuid($ENV{PKEXEC_UID});
+        $uid = $ENV{PKEXEC_UID};
         $uid ||= common::get_parent_uid();
         my ($full_user) = grep { $_->[2] eq $uid } list_passwd();
         $options->{setuid} = getpwnam($full_user->[0]) if $full_user->[0];
