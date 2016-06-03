@@ -198,10 +198,7 @@ sub raw {
 
     my $home;
     if ($options->{as_user}) {
-        my $uid;
-        $uid = $ENV{PKEXEC_UID};
-        $uid ||= common::get_parent_uid();
-        $options->{setuid} = $uid;
+        $options->{setuid} = $ENV{PKEXEC_UID} ||= common::get_parent_uid();;
     }
 
     my $args = $options->{sensitive_arguments} ? '<hidden arguments>' : join(' ', @args);
