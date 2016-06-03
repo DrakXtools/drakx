@@ -168,7 +168,7 @@ Runs $name with @args parameters. $options is a hash ref that can contains:
 
 =item * B<chdir>: $name will be run in a different default directory
 
-=item * B<setuid>: contains a getpwnam(3) struct ; $name will be with droped privileges ;
+=item * B<setuid>: a UID; $name will be with droped privileges ;
 make sure environment is set right and keep a copy of the X11 cookie
 
 =item * B<timeout>: execution of $name will be aborted after C<timeout> seconds
