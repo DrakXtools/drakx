@@ -1294,6 +1294,19 @@ sub method2text {
     }->{$method};
 }
 
+
+=item method_choices_raw($b_prefix_mounted)
+
+Returns list of bootloaders.
+
+method_choices_raw(1) will return the list of installed boot loaders.
+
+method_choices_raw(0) will return the list of all boot loaders supported by drakboot.
+
+Returns: ("grub2", "grub2-graphic")
+
+=cut
+
 sub method_choices_raw {
     my ($b_prefix_mounted) = @_;
     detect_devices::is_xbox() ? 'cromwell' :
@@ -1307,6 +1320,15 @@ sub method_choices_raw {
 	   'lilo-menu'),
       ));
 }
+
+=item method_choices($all_hds, $b_prefix_mounted)
+
+Returns list of supported bootloaders according to what is detected.
+
+Like method_choices_raw(), the $b_prefix_mounted parameter enables to return the list of either installed supported methods or the list of all supported boot loaders.
+
+=cut
+
 sub method_choices {
     my ($all_hds, $b_prefix_mounted) = @_;
     my $fstab = [ fs::get::fstab($all_hds) ];
@@ -1320,6 +1342,15 @@ sub method_choices {
 	  && !(/grub2?-graphic/ && cat_("/proc/cmdline") =~ /console=ttyS/);
     } method_choices_raw($b_prefix_mounted);
 }
+
+=item main_method_choices($b_prefix_mounted)
+
+Returns list of supported bootloaders, not distinging text/gfx mode.
+
+Like method_choices_raw(), the $b_prefix_mounted parameter enables to return the list of either installed supported methods or the list of all supported boot loaders.
+
+=cut
+
 sub main_method_choices {
     my ($b_prefix_mounted) = @_;
     uniq(map { main_method($_) } method_choices_raw($b_prefix_mounted));
