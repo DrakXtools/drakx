@@ -1324,9 +1324,9 @@ sub method_choices_raw {
        if_(!$b_prefix_mounted || whereis_binary('grub2-reboot', $::prefix), 
 	   'grub2-graphic', 'grub2'),
       if_(!is_uefi(), (
-       if_(!$b_prefix_mounted || whereis_binary('grub', $::prefix), 
+       if_(!$b_prefix_mounted || whereis_binary('grub', $::prefix) && -f "$::prefix/boot/grub/install.sh", 
 	   'grub-graphic', 'grub-menu'),
-       if_(!$b_prefix_mounted || whereis_binary('lilo', $::prefix), 
+       if_(!$b_prefix_mounted || whereis_binary('lilo', $::prefix) && -f "$::prefix/etc/lilo.conf", 
 	   'lilo-menu'),
       ));
 }
