@@ -306,6 +306,8 @@ sub read_grub2() {
 	    $entry->{initrd} = $1;
 	}
     }
+    # last entry:
+    push @{$bootloader{entries}}, $entry if $entry;
 
     # get default entry:
     foreach (run_program::rooted_get_stdout($::prefix, qw(grub2-editenv list))) {
