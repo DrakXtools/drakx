@@ -1113,6 +1113,7 @@ sub display_release_notes {
     }
 
     require Gtk3::WebKit2;
+    Gtk3::WebKit2->import;
     require ugtk3;
     ugtk3->import(':all');
     require mygtk3;
