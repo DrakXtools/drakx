@@ -318,7 +318,6 @@ sub read_grub2() {
     \%bootloader;
 }
 
-<<<<<<< HEAD
 sub set_default_grub_var {
         my ($var,$var_value) = (@_);
 
@@ -365,7 +364,8 @@ sub set_default_grub_var {
 	}
 	close($grub);
 	system('grub2-mkconfig -o /boot/grub2/grub.cfg');
-=======
+}
+
 sub read_grub2_install_sh() {
     my $s = cat_(get_grub2_install_sh());
     my %h;
@@ -373,7 +373,6 @@ sub read_grub2_install_sh() {
 	$h{boot} = $1;
     }
     %h;
->>>>>>> introduce get_grub2_install_sh()
 }
 
 =item read_grub($fstab)
@@ -1871,7 +1870,6 @@ sub write_grub2 {
 	log::l("error while running grub2-set-default: $err");
     }
     check_enough_space();
-    write_grub2_install_sh($bootloader, $o_backup_extension);
 }
 
 sub get_grub2_install_sh() {
@@ -2084,6 +2082,12 @@ sub restore_previous_MBR_bootloader {
 
 sub install_grub2 {
     my ($bootloader, $all_hds) = @_;
+    write_grub2($bootloader, $all_hds);
+    write_grub2_install_sh($bootloader, $o_backup_extension);
+    install_raw_grub2();
+}
+
+sub install_raw_grub2() {
     my $error;
     write_grub2($bootloader, $all_hds);
     my $boot = $bootloader->{boot};
