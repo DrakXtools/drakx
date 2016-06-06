@@ -654,6 +654,7 @@ sub setupBootloader__grub2 {
 
     require network::network; #- to list network profiles
     my $vga = Xconfig::resolution_and_depth::from_bios($b->{vga});
+    my $os_prober = run_program::rooted($::prefix, 'rpm', '-q', 'os-prober');
 
     my $res = $in->ask_from_(
 	{
@@ -665,12 +666,18 @@ sub setupBootloader__grub2 {
 	 { label => N("Append"), val => \$append },
 	 { label => N("Video mode"), val => \$vga, list => [ '', Xconfig::resolution_and_depth::bios_vga_modes() ],
 	   format => \&Xconfig::resolution_and_depth::to_string, advanced => 1 },
+	 { text => N("Probe Foreign OS"), val => \$os_prober, type => 'bool' },
 	]);
     if ($res) {
 	$b->{entries} = $b2->{entries};
 	$b->{default} = $default;
 	$b->{vga} = ref($vga) ? $vga->{bios} : $vga;
 	first(@{$b->{entries}})->{append} = $append;
+	if ($os_prober) {
+	    $in->do_pkgs->ensure_is_installed('os-prober', '/usr/bin/os-prober');
+	} else {
+	    $in->do_pkgs->remove('os-prober');
+	}
 	1;
     } else {
 	'';
