@@ -793,7 +793,7 @@ sub default_bootloader() {
        $p = 'grub2-efi';
     } else {
        log::l("defaulting to grub");
-       $p = 'grub2-efi';
+       $p = 'grub2';
     }
     [ $p ];
 }
