@@ -597,6 +597,7 @@ sub setPackages {
 	    install::pkgs::select_by_package_names($urpm, [ $devel_kernel_pkg ], 1);
 	}
 
+	install::pkgs::select_by_package_names_or_die($urpm, default_bootloader(), 1);
 	install::pkgs::select_by_package_names_or_die($urpm, ['basesystem'], 1);
 
 	my $rpmsrate_flags_was_chosen = $o->{rpmsrate_flags_chosen};
@@ -784,6 +785,19 @@ sub rpmsrate_always_flags {
     $rpmsrate_flags_chosen;
 }
 
+sub default_bootloader() {
+    my $p;
+    # we only support grub2-efi on UEFI:
+    if (is_uefi()) {
+       log::l("selecting grub2-efi because it's needed for UEFI boot");
+       $p = 'grub2-efi';
+    } else {
+       log::l("defaulting to grub");
+       $p = 'grub2-efi';
+    }
+    [ $p ];
+}
+
 =item default_packages($o)
 
 Selects default packages to install according to configuration (FS, HW, ...)
@@ -821,8 +835,6 @@ sub default_packages {
     # only needed for CDs/DVDs installations:
     add_n_log("method='cdrom'", 'perl-Hal-Cdroms') if $o->{method} eq 'cdrom';
     add_n_log("needed for VMware hypervisor", 'open-vm-tools') if detect_devices::is_vmware();
-    # we only support grub2-efi on UEFI:
-    add_n_log("needed for UEFI boot", 'grub2-efi') if is_uefi();
 
     my $dmi_BIOS = detect_devices::dmidecode_category('BIOS');
     my $dmi_Base_Board = detect_devices::dmidecode_category('Base Board');
