@@ -128,6 +128,8 @@ sub read_one {
         # fix detecting ESP (special case are they're detected through pt_type):
         if ($_->{flag} eq 'ESP') {
 	    $_->{pt_type} = 0xef;
+        } elsif ($_->{flag} eq 'BIOS_GRUB') {
+	    $_->{pt_type} = $_->{flag};
         } elsif ($_->{flag} eq 'LVM') {
 	    $_->{pt_type} = 0x8e;
         } elsif ($_->{flag} eq 'RAID') {
@@ -169,6 +171,8 @@ sub write {
 	    my $flag;
 	    if (isESP($part)) {
                 $flag = 'ESP';
+	    } elsif (isBIOS_GRUB($part)) {
+                $flag = 'BIOS_GRUB';
 	    } elsif (isRawLVM($part)) {
                 $flag = 'LVM';
 	    } elsif (isRawRAID($part)) {

@@ -98,6 +98,8 @@ PedPartitionFlag string_to_pedpartflag(char*type) {
    PedPartitionFlag flag = 0;
    if (!strcmp(type, "ESP")) {
       flag = PED_PARTITION_ESP;
+   } else if (!strcmp(type, "BIOS_GRUB")) {
+      flag = PED_PARTITION_BIOS_GRUB;
    } else if (!strcmp(type, "LVM")) {
       flag = PED_PARTITION_LVM;
    } else if (!strcmp(type, "RAID")) {
@@ -604,6 +606,8 @@ get_disk_partitions(char * device_path)
       char *flag = "";
       if (ped_partition_get_flag(part, PED_PARTITION_ESP)) {
         flag = "ESP";
+      } else if (ped_partition_get_flag(part, PED_PARTITION_BIOS_GRUB)) {
+        flag = "BIOS_GRUB";
       } else if (ped_partition_get_flag(part, PED_PARTITION_LVM)) {
         flag = "LVM";
       } else if (ped_partition_get_flag(part, PED_PARTITION_RAID)) {

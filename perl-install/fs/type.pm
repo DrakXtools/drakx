@@ -9,7 +9,7 @@ use devices;
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(
-   isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isOtherAvailableFS isRawLVM isRawRAID isRawLUKS isRAID isLVM isLUKS isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isESP isFat_or_NTFS isnormal_Fat_or_NTFS isRecovery
+   isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isOtherAvailableFS isRawLVM isRawRAID isRawLUKS isRAID isLVM isLUKS isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isBIOS_GRUB isESP isFat_or_NTFS isnormal_Fat_or_NTFS isRecovery
    maybeFormatted set_isFormatted defaultFS
 );
 
@@ -24,8 +24,9 @@ my (%type_name2pt_type, %type_name2fs_type, %fs_type2pt_type, %pt_type2fs_type, 
   0x83 => 'ext3',     'Journalised FS: ext3',
   0x83 => 'ext4',     'Journalised FS: ext4',
   0x83 => 'btrfs',    'Journalised FS: Btrfs',
-if_(is_uefi(),
-  0xef => 'vfat',     'EFI System Partition',
+(is_uefi() ?
+  (0xef => 'vfat',     'EFI System Partition') :
+  ('BIOS_GRUB' => '',  'BIOS boot partition'),
 ),
   0x83 => 'xfs',      'Journalised FS: XFS',
   0x83 => 'jfs',      'Journalised FS: JFS',
@@ -289,6 +290,7 @@ sub defaultFS() { 'ext4' }
 sub true_local_fs_types() { qw(btrfs ext3 ext2 ext4 reiserfs xfs jfs) }
 
 sub isEmpty { !$_[0]{fs_type} && $_[0]{pt_type} == 0 }
+sub isBIOS_GRUB { $_[0]{pt_type} == 'BIOS_GRUB' }
 sub isESP { $_[0]{pt_type} == 0xef && $_[0]{fs_type} eq 'vfat' }
 sub isExtended { $_[0]{pt_type} == 5 || $_[0]{pt_type} == 0xf || $_[0]{pt_type} == 0x85 }
 sub isRawLVM { $_[0]{pt_type} == 0x8e || $_[0]{type_name} eq 'Linux Logical Volume Manager' }
