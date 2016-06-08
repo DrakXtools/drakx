@@ -597,7 +597,7 @@ sub setPackages {
 	    install::pkgs::select_by_package_names($urpm, [ $devel_kernel_pkg ], 1);
 	}
 
-	install::pkgs::select_by_package_names_or_die($urpm, default_bootloader(), 1);
+	install::pkgs::select_by_package_names_or_die($urpm, default_bootloader(), 1) if !$o->{isUpgrade};
 	install::pkgs::select_by_package_names_or_die($urpm, ['basesystem'], 1);
 
 	my $rpmsrate_flags_was_chosen = $o->{rpmsrate_flags_chosen};
