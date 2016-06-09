@@ -41,8 +41,9 @@ use fs;
   ],
 );
 
-sub init_efi_suggestions {
-    my ($fstab, $o_force) = @_;
+sub init_mntpnt_suggestions {
+    my ($all_hds, $o_force) = @_;
+    my $fstab = [ fs::get::fstab($all_hds) ];
     state $done;
     return if $done && !$o_force;
     $done++;

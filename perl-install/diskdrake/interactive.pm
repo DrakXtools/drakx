@@ -354,8 +354,7 @@ sub Clear_all {
 	$hd->{getting_rid_of_readonly_allowed} = 0; #- we don't need this flag anymore
 	fsedit::partition_table_clear_and_initialize($all_hds->{lvms}, $hd, $in);
     }
-    my $fstab = [ fs::get::fstab($all_hds) ];
-    fsedit::init_efi_suggestions($fstab, 1);
+    fsedit::init_mntpnt_suggestions($all_hds, 1);
 }
 
 sub Auto_allocate {
@@ -1210,8 +1209,7 @@ sub ask_alldatawillbelost {
 
 sub partitions_suggestions {
     my ($in, $all_hds) = @_;
-    my $fstab = [ fs::get::fstab($all_hds) ];
-    fsedit::init_efi_suggestions($fstab);
+    fsedit::init_mntpnt_suggestions($all_hds);
     my $t = $::expert ?
       $in->ask_from_list_(N("Partitioning Type"), N("What type of partitioning?"), [ keys %fsedit::suggestions ]) :
       'simple';
