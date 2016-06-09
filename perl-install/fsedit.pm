@@ -47,11 +47,16 @@ sub init_efi_suggestions {
     return if $done && !$o_force;
     $done++;
 
+    my $mntpoint;
     # only suggests /boot/EFI if there's not already one:
-    return if !is_uefi() || grep { isESP($_) } @$fstab;
-
+    if (is_uefi()) {
+	if (!grep { isESP($_) } @$fstab) {
+	    $mntpoint = { mntpoint => "/boot/EFI", size => MB(100), pt_type => 0xef, ratio => 1, maxsize => MB(300) };
+	}
+    }
+    return if !$mntpoint;
     foreach (values %suggestions) {
-	unshift @$_, { mntpoint => "/boot/EFI", size => MB(100), pt_type => 0xef, ratio => 1, maxsize => MB(300) };
+	unshift @$_, $mntpoint;
     }
 }
 

@@ -67,8 +67,10 @@ sub check_hds_boot_and_root {
     my ($all_hds, $fstab) = @_;
     fs::get::root_($fstab) or die "Oops, no root partition";
 
-    if (is_uefi() && !fs::get::has_mntpoint("/boot/EFI", $all_hds)) {
-	die N("You must have a ESP FAT32 partition mounted in /boot/EFI");
+    if (is_uefi()) {
+	if (!fs::get::has_mntpoint("/boot/EFI", $all_hds)) {
+	    die N("You must have a ESP FAT32 partition mounted in /boot/EFI");
+	}
     }
 }
 
