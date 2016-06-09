@@ -3,9 +3,12 @@ package fs::any;
 use diagnostics;
 use strict;
 
+use c;
 use common;
 use fsedit;
+use fs::get;
 use fs::mount_point;
+use fs::type;
 use run_program;
 
 sub get_hds {
@@ -71,6 +74,10 @@ sub check_hds_boot_and_root {
 	if (!fs::get::has_mntpoint("/boot/EFI", $all_hds)) {
 	    die N("You must have a ESP FAT32 partition mounted in /boot/EFI");
 	}
+    } else {
+	if (is_boot_bios_part_needed($all_hds, $fstab)) {
+	    die N("You must have a Boot BIOS partition");
+	}
     }
 }
 
@@ -134,6 +141,32 @@ sub getAvailableSpace_raw {
 	return MB($nb);
     }
     die "missing root partition";
+}
+
+=head3 is_boot_bios_part_needed($fstab)
+
+Returns whether a Boot BIOS Partition is needed
+(aka the device holding /boot is GPT partitionned but doesn't already have one).
+
+=cut
+
+sub is_boot_bios_part_needed {
+    my ($all_hds, $fstab) = @_;
+    # failsafe:
+    return if is_uefi();
+    return if !@$fstab;
+    # mount point holding /boot:
+    my $root = fs::get::root($fstab, 1);
+    my $rootDev = $root->{rootDevice};
+    my $boot_hd;
+    if ($rootDev) {
+	# is it GPT?
+	return if c::get_disk_type($rootDev) ne 'gpt';
+	($boot_hd) = find { $_->{device} eq $rootDev } fs::get::hds($all_hds);
+    }
+    # finally check if there's already a  Boot BIOS Partition:
+    my @parts = map { partition_table::get_normal_parts($_) } $boot_hd || fs::get::hds($all_hds);
+    return !any { isBIOS_GRUB($_) } @parts;
 }
 
 1;

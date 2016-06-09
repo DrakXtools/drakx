@@ -55,6 +55,9 @@ sub init_mntpnt_suggestions {
 	if (!any { isESP($_) } @$fstab) {
 	    $mntpoint = { mntpoint => "/boot/EFI", size => MB(100), pt_type => 0xef, ratio => 1, maxsize => MB(300) };
 	}
+    } elsif (fs::any::is_boot_bios_part_needed($all_hds, $fstab)) {
+	# suggests a Boot BIOS partition if none is present and if needed (aka !UEFI but disk is GPT partitionned)
+	$mntpoint = { mntpoint => "", size => MB(1), pt_type => 'BIOS_BOOT', ratio => 1, maxsize => MB(2) };
     }
     return if !$mntpoint;
     foreach (keys %suggestions) {

@@ -77,6 +77,11 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	    $in->ask_warn('', N("You must have a ESP FAT32 partition mounted in /boot/EFI"));
 	    $ok = '';
 	  }
+	} else {
+	    if (!fs::any::is_boot_bios_part_needed($all_hds, $fstab)) {
+		$in->ask_warn('', N("You must have a Boot BIOS partition"));
+		$ok = '';
+	    }
 	}
     } until $ok;
     1;

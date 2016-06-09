@@ -129,7 +129,8 @@ sub read_one {
         if ($_->{flag} eq 'ESP') {
 	    $_->{pt_type} = 0xef;
         } elsif ($_->{flag} eq 'BIOS_GRUB') {
-	    $_->{pt_type} = $_->{flag};
+	    $_->{fs_type} = $_->{flag}; # hack to prevent it to land in hd->{raw}
+	    $_->{pt_type} = $_->{flag}; # hack...
         } elsif ($_->{flag} eq 'LVM') {
 	    $_->{pt_type} = 0x8e;
         } elsif ($_->{flag} eq 'RAID') {
