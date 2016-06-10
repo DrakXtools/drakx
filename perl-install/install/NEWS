@@ -1,6 +1,8 @@
 - do not override bootloader on upgrade (mga#18638)
 - debug build:
   o gdb needs python3 instead of python2 (and guile as well)
+- partionning:
+  o MBR limit really is 2TiB, not 4, so use GPT for disks > 2TiB
 
 Version 17.35.1 - 7 June 2016
 

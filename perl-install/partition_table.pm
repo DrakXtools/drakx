@@ -222,8 +222,8 @@ sub get_normal_parts_and_holes {
 sub _default_type {
     my ($hd) = @_;
 
-    # default to GPT on UEFI systems and disks > 4TB
-    is_uefi() || $hd->{totalsectors} > 4 * 1024 * 1024 * 2048 ? 'gpt' : "dos";
+    # default to GPT on UEFI systems and disks > 2TB
+    is_uefi() || $hd->{totalsectors} > 2 * 1024 * 1024 * 2048 ? 'gpt' : "dos";
 }
 
 sub initialize {
