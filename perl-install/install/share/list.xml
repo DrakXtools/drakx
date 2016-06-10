@@ -242,44 +242,56 @@
 
   <!-- for GDB: -->
   <if set="DEBUG_INSTALL">
-    /usr/include/python2.7/pyconfig.h
-    /usr/LIB/libpython2.7.so.1.0
-    /usr/LIB/python2.7/_abcoll.py
-    /usr/LIB/python2.7/abc.py
-    /usr/LIB/python2.7/codecs.py
-    /usr/LIB/python2.7/collections.py
-    /usr/LIB/python2.7/config/Makefile
-    /usr/LIB/python2.7/copy.py
-    /usr/LIB/python2.7/copy_reg.py
-    /usr/LIB/python2.7/encodings/aliases.py
-    /usr/LIB/python2.7/encodings/__init__.py
-    /usr/LIB/python2.7/encodings/utf_8.py
-    /usr/LIB/python2.7/genericpath.py
-    /usr/LIB/python2.7/heapq.py
-    /usr/LIB/python2.7/keyword.py
-    /usr/LIB/python2.7/lib-dynload/_collections.so
-    /usr/LIB/python2.7/lib-dynload/itertools.so
-    /usr/LIB/python2.7/lib-dynload/operator.so
-    /usr/LIB/python2.7/linecache.py
-    /usr/LIB/python2.7/os.py
-    /usr/LIB/python2.7/posixpath.py
-    /usr/LIB/python2.7/re.py
-    /usr/LIB/python2.7/site-packages/pygtk.pth
-    /usr/LIB/python2.7/site.py
-    /usr/LIB/python2.7/sre_compile.py
-    /usr/LIB/python2.7/sre_constants.py
-    /usr/LIB/python2.7/sre_parse.py
-    /usr/LIB/python2.7/stat.py
-    /usr/LIB/python2.7/sysconfig.py
-    /usr/LIB/python2.7/_sysconfigdata.py
-    /usr/LIB/python2.7/traceback.py
-    /usr/LIB/python2.7/types.py
-    /usr/LIB/python2.7/UserDict.py
-    /usr/LIB/python2.7/warnings.py
-    /usr/LIB/python2.7/weakref.py
-    /usr/LIB/python2.7/_weakrefset.py
+    /usr/include/python3.5m/pyconfig.h
+    /usr/LIB/libpython3.5m.so.1.0
+    /usr/LIB/python3.5/abc.py
+    /usr/LIB/python3.5/_bootlocale.py
+    /usr/LIB/python3.5/codecs.py
+    /usr/LIB/python3.5/_collections_abc.py
+    /usr/LIB/python3.5/copy.py
+    <from expand="glob">
+      /usr/LIB/python3.5/lib-dynload/*opcode*.so
+    </from>
+    /usr/LIB/python3.5/encodings/aliases.py
+    /usr/LIB/python3.5/encodings/__init__.py
+    /usr/LIB/python3.5/encodings/latin_1.py
+    /usr/LIB/python3.5/encodings/utf_8.py
+    /usr/LIB/python3.5/genericpath.py
+    /usr/LIB/python3.5/heapq.py
+    /usr/LIB/python3.5/io.py
+    /usr/LIB/python3.5/keyword.py
+    /usr/LIB/python3.5/linecache.py
+    /usr/LIB/python3.5/os.py
+    /usr/LIB/python3.5/posixpath.py
+    /usr/LIB/python3.5/re.py
+    /usr/LIB/python3.5/site.py
+    /usr/LIB/python3.5/_sitebuiltins.py
+    /usr/LIB/python3.5/sre_compile.py
+    /usr/LIB/python3.5/sre_constants.py
+    /usr/LIB/python3.5/sre_parse.py
+    /usr/LIB/python3.5/stat.py
+    /usr/LIB/python3.5/sysconfig.py
+    /usr/LIB/python3.5/_sysconfigdata.py
+    /usr/LIB/python3.5/traceback.py
+    /usr/LIB/python3.5/types.py
+    /usr/LIB/python3.5/warnings.py
+    /usr/LIB/python3.5/weakref.py
+    /usr/LIB/python3.5/_weakrefset.py
     <from expand="glob">
       /usr/share/gdb/python/gdb/*
+    </from>
+    /usr/share/guile/2.0/ice-9/boot-9.scm <!-- which loads the following: -->
+    /usr/share/guile/2.0/ice-9/deprecated.scm
+    /usr/share/guile/2.0/ice-9/networking.scm
+    /usr/share/guile/2.0/ice-9/posix.scm
+    /usr/share/guile/2.0/ice-9/psyntax-pp.scm
+    /usr/share/guile/2.0/ice-9/q.scm
+    /usr/share/guile/2.0/ice-9/quasisyntax.scm
+    /usr/share/guile/2.0/ice-9/r4rs.scm
+    /usr/share/guile/2.0/ice-9/r6rs-libraries.scm
+    /usr/share/guile/2.0/rnrs/bytevectors.scm
+    <from expand="glob">
+      /usr/share/guile/2.0/srfi/*
     </from>
   </if>
 
