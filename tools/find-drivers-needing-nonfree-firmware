@@ -51,7 +51,7 @@ warn Data::Dumper->Dump([ \%firmwares ], [ 'firmwares' ]) if $debug;
 
 # compute list of module that needs nonfree firmwares:
 my @non_free_fw_drivers;
-foreach (@modules) {
+foreach (uniq(@modules)) {
     my ($raw) = m!([^/]*)$!;
     my $cache = $cache{modinfo} . $raw;
     my @firmwares = cat_($cache);
