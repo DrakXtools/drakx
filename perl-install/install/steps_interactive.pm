@@ -446,7 +446,7 @@ sub _chooseDesktop {
     my ($o, $rpmsrate_flags_chosen, $chooseGroups) = @_;
 
     my @l = group_by2(
-	KDE    => N("Plasma"),
+	PLASMA5 => N("Plasma"),
 	GNOME  => N("GNOME"),
 	Custom => N("Custom"),
     );
@@ -465,7 +465,7 @@ sub _chooseDesktop {
     }
     my $desktop = $choice->[0];
     log::l("chosen Desktop: $desktop");
-    my @desktops = ('KDE', 'GNOME');
+    my @desktops = ('PLASMA5', 'GNOME');
     if (member($desktop, @desktops)) {
 	my ($want, $dontwant) = ($desktop, grep { $desktop ne $_ } @desktops);
 	$rpmsrate_flags_chosen->{"CAT_$want"} = 1;
