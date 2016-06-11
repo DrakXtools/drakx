@@ -40,6 +40,7 @@ use fs;
     { mntpoint => "/tmp",  size => MB(150), fs_type => defaultFS(), ratio => 2, maxsize => MB(4000) },
   ],
 );
+my %bck_suggestions = %suggestions;
 
 sub init_mntpnt_suggestions {
     my ($all_hds, $o_force) = @_;
@@ -56,8 +57,8 @@ sub init_mntpnt_suggestions {
 	}
     }
     return if !$mntpoint;
-    foreach (values %suggestions) {
-	unshift @$_, $mntpoint;
+    foreach (keys %suggestions) {
+	$suggestions{$_} = [ $mntpoint, @{$bck_suggestions{$_}} ];
     }
 }
 
