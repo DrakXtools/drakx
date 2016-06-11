@@ -272,6 +272,9 @@ filesystem checks will be run on your next boot into Microsoft Windows®")) if $
 				    title => N("Partitioning"),
 				    interactive_help_id => 'takeOverHdConfirm' }) or return;
 		fsedit::partition_table_clear_and_initialize($all_hds->{lvms}, $hd, $in);
+		# FIXME: reread all_hds:
+		# re add suggestions if needed (as we might just have erased eg Boot BIOS partition):
+		fsedit::init_mntpnt_suggestions($all_hds);
 		fsedit::auto_allocate($all_hds, $partitions, $hd);
 		1;
 	    } ];
