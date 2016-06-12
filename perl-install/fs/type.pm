@@ -26,7 +26,7 @@ my (%type_name2pt_type, %type_name2fs_type, %fs_type2pt_type, %pt_type2fs_type, 
   0x83 => 'btrfs',    'Journalised FS: Btrfs',
 (is_uefi() ?
   (0xef => 'vfat',     'EFI System Partition') :
-  ('BIOS_GRUB' => '',  'BIOS boot partition'),
+  ('BIOS_GRUB' => 'BIOS_GRUB',  'BIOS boot partition'),
 ),
   0x83 => 'xfs',      'Journalised FS: XFS',
   0x83 => 'jfs',      'Journalised FS: JFS',
