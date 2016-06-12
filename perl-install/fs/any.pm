@@ -160,6 +160,7 @@ sub is_boot_bios_part_needed {
     my $rootDev = $root->{rootDevice};
     my $boot_hd;
     if ($rootDev) {
+	$rootDev = "/dev/" . $rootDev if $rootDev !~ m!/!;
 	# is it GPT?
 	return if c::get_disk_type($rootDev) ne 'gpt';
 	($boot_hd) = find { $_->{device} eq $rootDev } fs::get::hds($all_hds);
