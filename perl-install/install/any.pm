@@ -943,7 +943,7 @@ sub g_auto_install {
     my $o = {};
 
     require install::pkgs;
-    $o->{default_packages} = install::pkgs::selected_leaves($::o->{packages});
+    $o->{default_packages} = [ sort @{ install::pkgs::selected_leaves($::o->{packages}) } ];
 
     my @fields = qw(fs_type hd level mntpoint options parts size VG_name);
     $o->{partitions} = [ map { 
