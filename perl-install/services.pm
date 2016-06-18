@@ -163,9 +163,9 @@ sub ask_ {
 
 			 N("System") => [ qw(acon acpid alsa anacron apcupsd apmd atd bpowerd bpowerfail crond cvs dm fcron functions
                                              gpm halt harddrake inetd irda jserver keytable kheader killall
-                                             mandrake_firstime mdadm medusa-init messagebus microcode_ctl mosix netconsole numlock partmon
-                                             pcmcia portmap powertweak.init psacct
-                                             random rawdevices rpcbind sensors single sound syslog syslog-ng ups usb usbd wine xfs xinetd) ],
+                                             mandrake_everytime mdadm medusa-init messagebus microcode_ctl netconsole numlock partmon
+                                             pcmcia portmap psacct
+                                             random rawdevices rpcbind sensors single sound syslog syslog-ng ups wine xfs xinetd) ],
 
 			 N("Remote Administration") => [ qw(cfd drakxtools_http heartbeat iplog ldirectord mon netsaint olympusd rexec
                                                             rlogin rsh sshd telnet telnetd vncserver webmin) ],
