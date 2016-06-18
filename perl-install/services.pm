@@ -159,13 +159,13 @@ sub ask_ {
                                                prelude proftpd proftpd-xinetd pure-ftpd ipsec radvd roxen shorewall shorewall6 squid
                                                tftp) ],
 
-			 N("_: Keep these entry short\nNetworking") => [ qw(network network-auth network-up resolvconf) ],
+			 N("_: Keep these entry short\nNetworking") => [ qw(arp-ethers network network-auth network-up resolvconf systemd-networkd systemd-resolved) ],
 
 			 N("System") => [ qw(acon acpid alsa anacron apcupsd apmd atd bpowerd bpowerfail crond cvs dm fcron functions
-                                             gpm halt harddrake inetd irda jserver keytable kheader killall
-                                             mandrake_everytime mdadm medusa-init messagebus microcode_ctl netconsole numlock partmon
+                                             gpm halt harddrake inetd irda jserver keytable kheader killall mandrake_everytime
+                                             mdadm messagebus microcode_ctl mga-bg-res netconsole numlock partmon
                                              pcmcia portmap psacct
-                                             random rawdevices rpcbind sensors single sound syslog syslog-ng ups wine xfs xinetd) ],
+                                             random rawdevices rpcbind sensors single sound syslog syslog-ng systemd-journal-upload ups wine xfs xinetd) ],
 
 			 N("Remote Administration") => [ qw(cfd drakxtools_http heartbeat iplog ldirectord mon netsaint olympusd rexec
                                                             rlogin rsh sshd telnet telnetd vncserver webmin) ],
