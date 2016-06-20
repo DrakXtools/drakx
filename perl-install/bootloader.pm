@@ -2183,14 +2183,15 @@ sub ensure_pkg_is_installed {
     my ($do_pkgs, $bootloader) = @_;
 
     my %pkg = ('grub2' => is_uefi() ? 'grub2-efi' : 'grub2');
-    my %h = ('grub2' => 'grub2-install');
     my %suppl = (
 	# method => [ 'pkg_name', 'file_to_test' ],
 	'grub-graphic' => [ qw(mageia-gfxboot-theme /usr/share/gfxboot/themes/Mageia/boot/message) ],
 	'grub2-graphic' => [ qw(grub2-mageia-theme /boot/grub2/themes/maggy/theme.txt) ],
     );
     my $main_method = main_method($bootloader->{method});
-    if (member($main_method, qw(grub grub2 lilo))) {
+    if ($main_method eq 'grub2') {
+	$do_pkgs->ensure_binary_is_installed($pkg{grub2}, 'grub2-install', 1) or return 0;
+    } elsif (member($main_method, qw(grub grub2 lilo))) {
 	$do_pkgs->ensure_binary_is_installed($pkg{$main_method} || $main_method, $h{$main_method} || $main_method, 1) or return 0;
     }
     # Install gfx theme if needed:
