@@ -2192,7 +2192,7 @@ sub ensure_pkg_is_installed {
     if ($main_method eq 'grub2') {
 	$do_pkgs->ensure_binary_is_installed($pkg{grub2}, 'grub2-install', 1) or return 0;
     } elsif (member($main_method, qw(grub grub2 lilo))) {
-	$do_pkgs->ensure_binary_is_installed($pkg{$main_method} || $main_method, $h{$main_method} || $main_method, 1) or return 0;
+	$do_pkgs->ensure_binary_is_installed($main_method, $main_method, 1) or return 0;
     }
     # Install gfx theme if needed:
     if (my $pkg = $suppl{$bootloader->{method}}) {
