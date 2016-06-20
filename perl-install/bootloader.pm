@@ -2190,8 +2190,8 @@ sub ensure_pkg_is_installed {
     my $main_method = main_method($bootloader->{method});
     if ($main_method eq 'grub2') {
 	my $pkg = is_uefi() ? 'grub2-efi' : 'grub2';
-	my $prefix = is_uefi() ? 'efi' : 'pc';
-	$do_pkgs->ensure_is_installed($pkg, glob("/usr/lib/grub/*-$prefix/ext2.mod"), 1) or return 0;
+	my $prefix = is_uefi() ? (arch() eq 'x86_64' ? 'x86_64-efi' : 'i386-efi') : 'i386-pc';
+	$do_pkgs->ensure_is_installed($pkg, "/usr/lib/grub/$prefix/ext2.mod", 1) or return 0;
     } elsif (member($main_method, qw(grub grub2 lilo))) {
 	$do_pkgs->ensure_binary_is_installed($main_method, $main_method, 1) or return 0;
     }
