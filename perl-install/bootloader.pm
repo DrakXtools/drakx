@@ -2083,7 +2083,7 @@ sub restore_previous_MBR_bootloader {
 sub install_grub2 {
     my ($bootloader, $all_hds) = @_;
     write_grub2($bootloader, $all_hds);
-    write_grub2_install_sh($bootloader, $o_backup_extension);
+    write_grub2_install_sh($bootloader, '.old');
     install_raw_grub2();
 }
 
