@@ -753,6 +753,33 @@ sub _gtk__Expander {
 
 
 
+sub _gtk__Popover {
+    my ($w, $opts) = @_;
+
+    if ($w) {
+	$w->set_relative_to(delete $opts->{text}) if exists $opts->{text};
+    } else {
+	$w = Gtk3::Popover->new(delete $opts->{relative_to});
+    }
+    $w->set_use_markup(delete $opts->{use_markup}) if exists $opts->{use_markup};
+    $w->set_position(delete $opts->{position}) if exists $opts->{position};
+    $w->set_relative_to(delete $opts->{relative_to}) if exists $opts->{relative_to};
+    if (my $widget = delete $opts->{child}) {
+	$w->add($widget);
+	$widget->show;
+    }
+
+    $w->signal_connect(activate => delete $opts->{activate}) if exists $opts->{activate};
+
+    if (my $child = delete $opts->{child}) {
+	$w->add($child);
+	$child->show;
+    }
+    $w;
+}
+
+
+
 sub _gtk__MDV_Notebook {
     my ($w, $opts, $_class, $_action) = @_;
     if (!$w) {
