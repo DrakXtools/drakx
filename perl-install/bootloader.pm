@@ -1951,6 +1951,7 @@ sub write_grub2_install_sh    {
     my $boot = $bootloader->{boot};
     my @options;
     if (is_uefi()) {
+	push @options, qw(--bootloader-id=tmp --no-nvram) if $boot =~ /\d$/;
     } else {
 	@options = $boot =~ /\d$/ ? ('--grub-setup=/bin/true', $boot) : $boot;
     }
