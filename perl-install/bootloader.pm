@@ -1887,7 +1887,7 @@ sub write_grub2 {
         }
 	output_with_perm($pw_f, 0600, "GRUB2_PASSWORD=$bootloader->{password}");
     } else {
-	rm_rf($pw_f);
+	unlink($pw_f);
     }
 
     my $f = "$::prefix/etc/default/grub";
