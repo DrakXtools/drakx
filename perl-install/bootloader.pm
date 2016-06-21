@@ -275,6 +275,18 @@ sub read_ {
 	    return $bootloader;
 }
 
+
+=item is_grub2_already_crypted($password)
+
+Returns whether grub2 password is already encrypted or not
+
+=cut
+
+sub is_grub2_already_crypted {
+    my ($password) = @_;
+    $password =~ /grub.pbkdf2.sha512/;
+}
+
 =item read_grub2 ($o_fstab)
 
 Read back GRUB2 config + C</boot/grub2/drakboot.conf>
@@ -312,6 +324,16 @@ sub read_grub2() {
     # get default entry:
     foreach (run_program::rooted_get_stdout($::prefix, qw(grub2-editenv list))) {
 	$bootloader{default} = $1 if /saved_entry=(.*)/;
+    }
+
+    # Get password prior to run update-grub2:
+    my $pw_f = get_grub2_users();
+    if (-e $pw_f) {
+	foreach (cat_($pw_f)) {
+	    if (/password_pbkdf2 root (.*)/) {
+		$bootloader{password} = $1;
+	    }
+	}
     }
 
     $bootloader{method} = cat_($f) =~ /set theme=.*maggy/ ? 'grub2-graphic' : 'grub2';
@@ -1837,9 +1859,47 @@ sub get_grub2_append {
     $append;
 }
 
+sub crypt_grub2_password {
+    my ($password) = @_;
+    require IPC::Open2;
+    local $ENV{LC_ALL} = 'C';
+    my ($his_out, $his_in);
+    my $pid = IPC::Open2::open2($his_out, $his_in, "$::prefix/bin/grub2-mkpasswd-pbkdf2");
+
+    my ($line, $res);
+    while (sysread($his_out, $line, 100)) {
+        if ($line =~ /enter.*password:/i) {
+            syswrite($his_in, "$password\n");
+        } else {
+            chomp($line);
+            $res .= $line if $line;
+        }
+    }
+    $res =~ s/^PBKDF2 hash of your password is //;
+    waitpid($pid, 0);
+    my $status = $? >> 8;
+    die "failed to encrypt password (status=$status)" if $status != 0;
+    chomp_($res);
+}
+
 sub write_grub2 {
     my ($bootloader, $_all_hds, $o_backup_extension) = @_;
     my $error;
+
+    # Set password prior to run update-grub2:
+    my $pw_f = get_grub2_users();
+    if ($bootloader->{password}) {
+	if (!is_grub2_already_crypted($bootloader->{password})) {
+	    $bootloader->{password} = crypt_grub2_password($bootloader->{password});
+        }
+
+	output_with_perm($pw_f, 0755, qq(cat <<EOF
+set superusers="root"
+password_pbkdf2 root $bootloader->{password}
+EOF));
+    } else {
+	rm_rf($pw_f);
+    }
 
     my $f = "$::prefix/etc/default/grub";
     my %conf = getVarsFromSh($f);
@@ -1870,6 +1930,10 @@ sub write_grub2 {
 	log::l("error while running grub2-set-default: $err");
     }
     check_enough_space();
+}
+
+sub get_grub2_users() {
+    "$::prefix/etc/grub.d/01_drakx_users";
 }
 
 sub get_grub2_install_sh() {
