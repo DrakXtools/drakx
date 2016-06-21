@@ -327,14 +327,7 @@ sub read_grub2() {
     }
 
     # Get password prior to run update-grub2:
-    my $pw_f = get_grub2_users();
-    if (-e $pw_f) {
-	foreach (cat_($pw_f)) {
-	    if (/password_pbkdf2 root (.*)/) {
-		$bootloader{password} = $1;
-	    }
-	}
-    }
+    $bootloader{password} = { getVarsFromSh(get_grub2_users()) }->{GRUB2_PASSWORD};
 
     $bootloader{method} = cat_($f) =~ /set theme=.*maggy/ ? 'grub2-graphic' : 'grub2';
     \%bootloader;
@@ -1892,11 +1885,7 @@ sub write_grub2 {
 	if (!is_grub2_already_crypted($bootloader->{password})) {
 	    $bootloader->{password} = crypt_grub2_password($bootloader->{password});
         }
-
-	output_with_perm($pw_f, 0755, qq(cat <<EOF
-set superusers="root"
-password_pbkdf2 root $bootloader->{password}
-EOF));
+	output_with_perm($pw_f, 0600, "GRUB2_PASSWORD=$bootloader->{password}");
     } else {
 	rm_rf($pw_f);
     }
@@ -1933,7 +1922,7 @@ EOF));
 }
 
 sub get_grub2_users() {
-    "$::prefix/etc/grub.d/01_drakx_users";
+    "$::prefix/boot/grub2/user.cfg";
 }
 
 sub get_grub2_install_sh() {
