@@ -193,8 +193,13 @@ sub ask_ {
 			       node_state => sub { $services{$_[0]} ? 'selected' : 'unselected' },
 			       build_tree => sub {
 				   my ($add_node, $flat) = @_;
+				   # sort existing services by category, putting "Other" at end
+				   my @srvs = grep { $services{$_} } map { @{$root_services{$_}} }
+						     sort { $a cmp $b } keys %root_services;
+				   # put "Others" last:
+				   push @srvs, difference2([ keys %services ], \@srvs);
 				   $add_node->($_, !$flat && ($services_root{$_} || N("Other")))
-				     foreach sort keys %services;
+				     foreach @srvs;
 			       },
 			       grep_unselected => sub { grep { !$services{$_} } @_ },
 			       toggle_nodes => sub {
