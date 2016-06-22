@@ -301,11 +301,11 @@ sub read_grub2() {
     $bootloader{entries} = [];
     my $entry;
     my $f = "$::prefix/boot/grub2/grub.cfg";
+    my @menus;
     foreach (cat_utf8($f)) {
 	next if /^#/;
 	if (/menuentry\s+['"]([^']+)["']/) {
-	    push @{$bootloader{entries}}, $entry if $entry;
-	    $entry = { label => $1 };
+	    $entry = { label => $1, real_label => join('>', @menus, $1) };
 	} elsif (/linux\s+(\S+)\s+(.*)?/ || /module\s+(\S+vmlinu\S+)\s+(.*)?/) {
 	    $entry->{type} = 'image';
 	    @$entry{qw(kernel_or_dev append)} = ($1, $2);
@@ -316,6 +316,15 @@ sub read_grub2() {
 	    }
 	} elsif (/initrd\s+(\S+)/ || /module\s+(\S+initrd\S+)\s+(.*)?/) {
 	    $entry->{initrd} = $1;
+	} elsif (/^submenu\s+['"]([^']+)["']/) {
+	    push @menus, $1;
+	} elsif (/}/) {
+	    if ($entry) {
+		push @{$bootloader{entries}}, $entry;
+		undef $entry;
+	    } else {
+		pop @menus;
+	    }
 	}
     }
     # last entry:
@@ -324,6 +333,7 @@ sub read_grub2() {
     # get default entry:
     foreach (run_program::rooted_get_stdout($::prefix, qw(grub2-editenv list))) {
 	$bootloader{default} = $1 if /saved_entry=(.*)/;
+	$bootloader{default} =~ s/.*>//; # strip full menu entry path
     }
 
     # Get password prior to run update-grub2:
@@ -1909,11 +1919,17 @@ sub write_grub2 {
     renamef($f1, $f1 . ($o_backup_extension || '.old'));
     run_program::rooted($::prefix, 'update-grub2', '2>', \$error) or die "update-grub2 failed: $error";
 
+    my $default = $bootloader->{default};
+    # menu entry must be identified by its full path. eg: "submenu1>submenu2>title":
+    if (my $def = find { $_->{label} eq $bootloader->{default} } @{$bootloader->{entries}}) {
+	$default = $def->{real_label} if $def->{real_label};
+    }
+
     # set default entry:
     eval {
 	my $f2 = "$::prefix/boot/grub2/grubenv";
 	cp_af($f2, $f2 . ($o_backup_extension || '.old'));
-	run_program::rooted($::prefix, 'grub2-set-default', '2>', \$error, $bootloader->{default}) or die "grub2-set-default failed: $error";
+	run_program::rooted($::prefix, 'grub2-set-default', '2>', \$error, $default) or die "grub2-set-default failed: $error";
     };
     if (my $err = $@) {
 	log::l("error while running grub2-set-default: $err");
