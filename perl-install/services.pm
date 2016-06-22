@@ -360,8 +360,13 @@ sub _systemd_services() {
     my %loaded;
     # Running system using systemd
     log::explanations("Detected systemd running. Using systemctl introspection.");
-    foreach (run_program::rooted_get_stdout($::prefix, '/bin/systemctl', '--no-legend', '--no-pager', '--full', '--all', 'list-units')) {
-        if (my ($name) = m!^(\S+)\.service\s+loaded!) {
+    # even if systemd is not running, we can detect status of shorewell service which is not wanted by:
+    my @opts = $::isInstall ? 'list-unit-files' : qw(--all list-units);
+    print "chroot $::prefix /bin/systemctl --no-legend --no-pager --full @opts";
+    foreach (run_program::rooted_get_stdout($::prefix, '/bin/systemctl', '--no-legend', '--no-pager', '--full', @opts)) {
+        my ($name) = m!^(\S+)\.service\s+loaded!;
+        ($name) = m!^(\S+)\.service\s+enabled! if $::isInstall && !$name;
+        if ($name) {
             # We only look at non-template, non-linked service files in /lib
             # We also check for any non-masked sysvinit files as these are
             # also handled by systemd
@@ -459,6 +464,12 @@ sub services() {
         @services = _systemd_services();
     } else {
         @services = _legacy_services();
+        # list shorewall and the like which are not "wantedBy":
+        if ($::isInstall) {
+	    # prevent listing some services twice:
+	    my @found = map { $_->[0] } @services;
+	    push @services, grep { !member($_->[0], @found) } _systemd_services();
+	}
     }
 
     my @l = xinetd_services();
