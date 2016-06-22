@@ -165,7 +165,8 @@ sub ask_ {
                                              gpm halt harddrake inetd irda jserver keytable kheader killall mandrake_everytime
                                              mdadm messagebus microcode_ctl mga-bg-res netconsole numlock partmon
                                              pcmcia portmap psacct
-                                             random rawdevices rpcbind sensors single sound syslog syslog-ng systemd-journal-upload ups wine xfs xinetd) ],
+                                             random rawdevices rpcbind sensors single sound spice-vdagentd
+                                             syslog syslog-ng systemd-journal-upload systemd-timesyncd ups wine xfs xinetd) ],
 
 			 N("Remote Administration") => [ qw(cfd drakxtools_http heartbeat iplog ldirectord mon netsaint olympusd rexec
                                                             rlogin rsh sshd telnet telnetd vncserver webmin) ],
