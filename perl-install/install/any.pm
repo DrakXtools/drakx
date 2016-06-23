@@ -928,6 +928,12 @@ sub kdemove_desktop_file {
     }
 }
 
+sub log_system_info {
+    my ($o) = @_;
+    log::l("second stage install running (", drakx_version($o), ")");
+    log::l(sprintf("Virtualization=%s", detect_devices::virt_technology()));
+}
+
 
 #-###############################################################################
 #- auto_install stuff
