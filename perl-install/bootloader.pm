@@ -732,14 +732,18 @@ sub suggest_onmbr {
 
 =item allowed_boot_parts($bootloader, $all_hds)
 
-Returns list of places where we can install the bootloader
+Returns list of places where we can install the bootloader when not in UEFI mode
+(in UEFI mode, grub2 automatically look for the ESP).
 
 =cut
 
 sub allowed_boot_parts {
     my ($bootloader, $all_hds) = @_;
     (
-     @{$all_hds->{hds}}, # MBR
+     ( # GPT disks w/o a BIOS boot partition do not have free space for grub2 to embed:
+      grep { c::get_disk_type($_->{file}) ne 'gpt' ||
+		 any { isBIOS_GRUB($_) } map { partition_table::get_normal_parts($_) } $_;
+      } @{$all_hds->{hds}}), # MBR
 
      if_($bootloader->{method} =~ /lilo/,
 	 grep { $_->{level} eq '1' } @{$all_hds->{raids}}
