@@ -196,7 +196,7 @@ sub part_raw {
     # Preserve UUID on fs where we couldn't enforce it while formatting
     if (my $uuid_cmd = $preserve_UUID{$fs_type}) {
 	(undef, $cmd) = @$uuid_cmd;
-	run_program::raw({}, $cmd, '-U', devices::make($dev)) if $cmd;
+	run_program::raw({}, $cmd, '-U', $part->{device_UUID}, devices::make($dev)) if $cmd;
     }
     
     if (member($fs_type, qw(ext3 ext4))) {
