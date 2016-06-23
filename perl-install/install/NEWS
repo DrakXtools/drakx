@@ -1,5 +1,6 @@
 - bootloader configuration:
   o do not offer to pick the disk where to install grub2 on UEFI
+  o filter GPT disks w/o a BIOS boot part (mga#18770)
 - logs:
   o fix found kernel names
   o log if were running under UEFI
