@@ -481,6 +481,8 @@ sub _chooseDesktop {
 sub chooseGroups {
     my ($o, $packages, $compssUsers, $individual) = @_;
 
+    my $w = $o->wait_message('', N("Looking for available packages..."));
+
     #- for all groups available, determine package which belongs to each one.
     #- this will enable getting the size of each groups more quickly due to
     #- limitation of current implementation.
@@ -496,6 +498,8 @@ sub chooseGroups {
 
     my %stable_flags = grep_each { $::b } %{$o->{rpmsrate_flags_chosen}};
     delete $stable_flags{"CAT_$_"} foreach map { @{$_->{flags}} } @{$o->{compssUsers}};
+
+    undef $w;
 
     my $compute_size = sub {
 	my %pkgs;
