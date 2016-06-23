@@ -748,7 +748,9 @@ sub allowed_boot_parts {
      if_($bootloader->{method} =~ /lilo/,
 	 grep { $_->{level} eq '1' } @{$all_hds->{raids}}
 	),
-     (grep { !isFat_or_NTFS($_) } fs::get::fstab($all_hds)), # filesystems except those who do not leave space for our bootloaders
+     (if_(main_method($bootloader->{method}) ne 'grub2',
+	  grep { !isFat_or_NTFS($_) } fs::get::fstab($all_hds)), # filesystems except those who do not leave space for our bootloaders
+     ),
      detect_devices::floppies(),
     );
 }
@@ -1955,9 +1957,9 @@ sub write_grub2_install_sh    {
     my $boot = $bootloader->{boot};
     my @options;
     if (is_uefi()) {
-	push @options, qw(--bootloader-id=tmp --no-nvram) if $boot =~ /\d$/;
+	push @options, qw(--bootloader-id=tmp --no-nvram) if $bootloader->{no_esp_or_mbr};
     } else {
-	@options = $boot =~ /\d$/ ? ('--grub-setup=/bin/true', $boot) : $boot;
+	@options = $bootloader->{no_esp_or_mbr} ? ('--grub-setup=/bin/true', $boot) : $boot;
     }
     renamef($f, $f . ($o_backup_extension || '.old'));
     output_with_perm($f, 0755, join(' ', 'grub2-install', @options));
