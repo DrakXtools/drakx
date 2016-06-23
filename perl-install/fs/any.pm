@@ -143,7 +143,7 @@ sub getAvailableSpace_raw {
     die "missing root partition";
 }
 
-=head3 is_boot_bios_part_needed($fstab)
+=head3 is_boot_bios_part_needed($all_hds, $fstab)
 
 Returns whether a Boot BIOS Partition is needed
 (aka the device holding /boot is GPT partitionned but doesn't already have one).
