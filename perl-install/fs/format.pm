@@ -171,7 +171,7 @@ sub part_raw {
     }
 
     # Preserve UUID
-    if (member($fs_type, 'swap', 'ext2', 'ext3', 'ext4')) {
+    if (member($fs_type, qw(swap ext2 ext3 ext4))) {
 	push @options, '-U', $part->{device_UUID} if $part->{device_UUID};
     } elsif ($fs_type eq 'reiserfs') {
 	push @options, '-u', $part->{device_UUID} if $part->{device_UUID};
