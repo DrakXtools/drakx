@@ -397,6 +397,7 @@ sub read_grub2_install_sh() {
     if ($s =~ m!(/dev/\S+)!m) {
 	$h{boot} = $1;
     }
+    $h{no_esp_or_mbr} = $s =~ m!--grub-setup=/bin/true!;
     %h;
 }
 
