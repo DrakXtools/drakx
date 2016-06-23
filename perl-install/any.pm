@@ -438,7 +438,7 @@ sub setupBootloader__general {
 			{ label => N("Bootloader"), title => 1 },
 			{ label => N("Bootloader to use"), val => \$b->{method},
 				list => \@method_choices, format => \&bootloader::method2text },
-			{ label => N("Boot device"), val => \$b->{boot}, list => \@boot_devices,
+			{ label => N("Boot device"), val => \$b->{boot}, list => \@boot_devices, allow_empty_list => 1,
 				format => sub { $boot_devices{$_[0]} }, disabled => sub { is_uefi() } },
 			{ label => N("Main options"), title => 1 },
 			{ label => N("Delay before booting default image"), val => \$b->{timeout} },
