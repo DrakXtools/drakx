@@ -65,7 +65,6 @@ my %edit_LABEL = ( # package, command, option
 
 # Preserve UUID on fs where we couldn't enforce it while formatting
 my %preserve_UUID = ( # package, command
-    #btrfs    => [ 'btrfs-progs', 'btrfstune' ], # btrfstune needs answering 'y'
     jfs      => [ 'jfsutils', 'jfs_tune', ],
     xfs      => [ 'xfsprogs', 'xfs_admin' ],
     nilfs2   => [ 'nilfs-utils', 'nilfs-tune' ],
@@ -144,6 +143,13 @@ sub write_label {
     delete $part->{device_LABEL_changed};
 }
 
+sub write_btrfs_uuid {
+    my ($UUID, $dev) = @_;
+    $dev = devices::make($dev);
+    my $status = system("echo y|btrfstune -U $UUID $dev") == 0;
+    die "failed to set UUID to '$UUID' on $dev (status=$status)" if !$status;
+}
+
 sub part_raw {
     my ($part, $wait_message) = @_;
 
@@ -197,6 +203,8 @@ sub part_raw {
     if (my $uuid_cmd = $preserve_UUID{$fs_type}) {
 	(undef, $cmd) = @$uuid_cmd;
 	run_program::raw({}, $cmd, '-U', $part->{device_UUID}, devices::make($dev)) if $cmd;
+    } elsif ($fs_type eq 'btrfs' && $part->{device_UUID}) {
+	write_btrfs_uuid($part->{device_UUID}, $dev);
     }
     
     if (member($fs_type, qw(ext3 ext4))) {
