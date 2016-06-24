@@ -1892,9 +1892,8 @@ sub crypt_grub2_password {
     chomp_($res);
 }
 
-sub write_grub2 {
+sub write_grub2_sysconfig {
     my ($bootloader, $_all_hds, $o_backup_extension) = @_;
-    my $error;
 
     # Set password prior to run update-grub2:
     my $pw_f = get_grub2_users();
@@ -1921,6 +1920,13 @@ sub write_grub2 {
     $conf{GRUB_TIMEOUT} = $bootloader->{timeout};
     renamef($f, $f . ($o_backup_extension || '.old'));
     setVarsInSh($f, \%conf);
+}
+
+sub write_grub2 {
+    my ($bootloader, $o_all_hds, $o_backup_extension) = @_;
+    my $error;
+
+    write_grub2_sysconfig($bootloader, $o_all_hds, $o_backup_extension);
 
     my $f1 = "$::prefix/boot/grub2/grub.cfg";
     renamef($f1, $f1 . ($o_backup_extension || '.old'));
