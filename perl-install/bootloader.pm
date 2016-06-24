@@ -1954,14 +1954,11 @@ sub write_grub2 {
     my ($bootloader, $o_all_hds, $o_backup_extension) = @_;
     my $error;
 
-    write_grub2_sysconfig($bootloader, $o_all_hds, $o_backup_extension);
-
     my $f1 = "$::prefix/boot/grub2/grub.cfg";
     renamef($f1, $f1 . ($o_backup_extension || '.old'));
     run_program::rooted($::prefix, 'update-grub2', '2>', \$error) or die "update-grub2 failed: $error";
     log::l("update-grub2 logs: $error");
 
-    write_grub2_default_entry($bootloader, $o_all_hds, $o_backup_extension);
     check_enough_space();
 }
 
@@ -2180,7 +2177,9 @@ sub restore_previous_MBR_bootloader {
 
 sub install_grub2 {
     my ($bootloader, $all_hds) = @_;
+    write_grub2_sysconfig($bootloader, $all_hds);
     write_grub2($bootloader, $all_hds);
+    write_grub2_default_entry($bootloader, $all_hds);
     write_grub2_install_sh($bootloader, '.old');
     install_raw_grub2();
 }
