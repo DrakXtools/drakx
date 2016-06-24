@@ -1951,7 +1951,7 @@ sub write_grub2 {
 }
 
 sub write_grub2 {
-    my ($bootloader, $o_all_hds, $o_backup_extension) = @_;
+    my ($o_backup_extension) = @_;
     my $error;
 
     my $f1 = "$::prefix/boot/grub2/grub.cfg";
@@ -2178,7 +2178,7 @@ sub restore_previous_MBR_bootloader {
 sub install_grub2 {
     my ($bootloader, $all_hds) = @_;
     write_grub2_sysconfig($bootloader, $all_hds);
-    write_grub2($bootloader, $all_hds);
+    write_grub2();
     write_grub2_default_entry($bootloader, $all_hds);
     write_grub2_install_sh($bootloader, '.old');
     install_raw_grub2();
