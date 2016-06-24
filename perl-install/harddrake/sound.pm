@@ -95,7 +95,7 @@ sub config {
             set_pulseaudio($is_pulseaudio_enabled);
             set_pulseaudio_glitchfree($is_pulseaudio_glitchfree_enabled);
             if ($is_pulseaudio_enabled) {
-                my $lib = (arch() =~ /x86_64/ ? 'lib64' : 'lib');
+                my $lib = get_libdir();
                 $in->do_pkgs->ensure_is_installed($lib . 'alsa-plugins-pulseaudio',
                                                     '/usr/' . $lib . '/alsa-lib/libasound_module_pcm_pulse.so');
             }

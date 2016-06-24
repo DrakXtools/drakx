@@ -10,7 +10,7 @@ use run_program;
 
 use Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT = qw($SECTORSIZE N P N_ check_for_xserver files_exist formatTime MB formatXiB get_parent_uid is_mgalive is_running is_uefi makedev distro_release distro_release_info removeXiBSuffix require_root_capability setVirtual set_alternative set_l10n_sort set_permissions to_utf8  translate unmakedev);
+our @EXPORT = qw($SECTORSIZE N P N_ check_for_xserver files_exist formatTime MB formatXiB get_libdir get_parent_uid is_mgalive is_running is_uefi makedev distro_release distro_release_info removeXiBSuffix require_root_capability setVirtual set_alternative set_l10n_sort set_permissions to_utf8 translate unmakedev);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -711,6 +711,10 @@ sub update_gnomekderc_no_create {
     if (-e $file) {
 	update_gnomekderc($file, $category, %subst_);
     }
+}
+
+sub get_libdir() {
+    arch() =~ /x86_64/ ? "lib64" : "lib";
 }
 
 =item is_mgalive()

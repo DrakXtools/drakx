@@ -125,7 +125,7 @@ sub schedule_warn_about_switch {
     output('/var/run/harddrake-notify-x11-free-driver-switch', $reason);
 }
 
-my $lib = arch() =~ /x86_64/ ? "lib64" : "lib";
+my $lib = get_libdir();
 
 sub find_xorg_driver {
     my ($new_driver) = @_;

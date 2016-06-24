@@ -47,7 +47,7 @@ my %kind2nsswitch = (
     winbind   => ['winbind'], 
 );
 
-my $lib = (arch() =~ /x86_64/ ? 'lib64' : 'lib');
+my $lib = get_libdir();
 
 my %kind2packages = (
     local     => [],
