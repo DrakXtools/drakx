@@ -1942,11 +1942,26 @@ sub write_grub2 {
     eval {
 	my $f2 = "$::prefix/boot/grub2/grubenv";
 	cp_af($f2, $f2 . ($o_backup_extension || '.old'));
+	my $error;
 	run_program::rooted($::prefix, 'grub2-set-default', '2>', \$error, $default) or die "grub2-set-default failed: $error";
     };
     if (my $err = $@) {
 	log::l("error while running grub2-set-default: $err");
     }
+}
+
+sub write_grub2 {
+    my ($bootloader, $o_all_hds, $o_backup_extension) = @_;
+    my $error;
+
+    write_grub2_sysconfig($bootloader, $o_all_hds, $o_backup_extension);
+
+    my $f1 = "$::prefix/boot/grub2/grub.cfg";
+    renamef($f1, $f1 . ($o_backup_extension || '.old'));
+    run_program::rooted($::prefix, 'update-grub2', '2>', \$error) or die "update-grub2 failed: $error";
+    log::l("update-grub2 logs: $error");
+
+    write_grub2_default_entry($bootloader, $o_all_hds, $o_backup_extension);
     check_enough_space();
 }
 
