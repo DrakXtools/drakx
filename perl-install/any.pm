@@ -664,7 +664,13 @@ sub setupBootloader__grub2 {
 	 { label => N("Append"), val => \$append },
 	 { label => N("Video mode"), val => \$vga, list => [ '', Xconfig::resolution_and_depth::bios_vga_modes() ],
 	   format => \&Xconfig::resolution_and_depth::to_string, advanced => 1 },
-	 { text => N("Do not touch ESP or MBR"), val => \$b->{no_esp_or_mbr}, type => 'bool', advanced => 1 },
+	 { text => N("Do not touch ESP or MBR"), val => \$b->{no_esp_or_mbr}, type => 'bool', advanced => 1,
+	    validate => sub {
+		$b->{no_esp_or_mbr} and $in->ask_warn(N("Warning"),
+			     N("Not installing on ESP or MBR means that the installation is not bootable unless chain loaded from another OS!"));
+		1;
+	    },
+	 },
 	 { text => N("Probe Foreign OS"), val => \$os_prober, type => 'bool' },
 	]);
     if ($res) {
