@@ -161,7 +161,8 @@ sub type_names {
     my @l = @{$type_names{important}};
     push @l, grep { $_ ne 'Encrypted' } @{$type_names{non_fs_type}};
     push @l, sort @{$type_names{other}} if $expert;
-    if ($o_hd && !$o_hd->use_pt_type) {
+    # not show partition types which have no associated filesystem for LVM LV:
+    if ($o_hd && isLVM($o_hd)) {
 	@l = grep { $type_name2fs_type{$_} } @l;
 	@l = uniq_ { $type_name2fs_type{$_} } @l;
 	(@l, @{$type_names{non_fs_type}});
