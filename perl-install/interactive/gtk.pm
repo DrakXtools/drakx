@@ -435,7 +435,6 @@ sub create_widget {
 	$w->signal_connect(key_press_event => $e->{may_go_to_next});
 	$set = sub { $adj->set_value($_[0]) };
     } elsif ($e->{type} eq 'expander') {
-	# FIXME: we handle advanced here:
 	$e->{grow} = 'fill';
 	my $children = [ if_($e->{message}, { type => 'only_label', no_indent => 1, val => \$e->{message} }), @{$e->{children}} ];
 	create_widgets_block($o, $common, $children, $update, $ignore_ref);
@@ -669,7 +668,6 @@ sub create_widgets_block {
 
 	my $eater = if_($e->{alignment} eq 'right' && !$label_w, gtknew('Label'));
 
-	# FIXME: we should not pack advanced button here
 	$e->{real_w} = gtkpack_(Gtk3::HBox->new,
 				if_($e->{icon}, 0, eval { gtkcreate_img($e->{icon}) }),
 				if_($eater, 1, $eater),
@@ -864,7 +862,6 @@ sub ask_fromW {
                             [ gtknew('Install_Button', text => N("Help"),
                                      clicked => sub { display_help($o, $common) }), undef, 1 ]),
 			if_($common->{more_buttons}, @{$common->{more_buttons}}),
-	# FIXME: we should pack advanced button here
 		       );
     my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @more_buttons);
 
