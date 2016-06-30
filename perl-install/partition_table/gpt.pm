@@ -118,7 +118,6 @@ sub read_one {
     c::get_disk_type($hd->{file}) eq "gpt" or die "$hd->{device} not a GPT disk ($hd->{file})";
 
     my @pt;
-    # FIXME: just use '@pt = map { ... } c::...' if part_numbers are always linear:
     foreach (c::get_disk_partitions($hd->{file})) {
         # compatibility with MBR partitions tables:
         $_->{pt_type} = 0x82 if $_->{fs_type} eq 'swap';
