@@ -993,9 +993,9 @@ sub ask_user_and_root {
           { label => N("Shell"), val => \$u->{shell}, list => [ shells() ], advanced => 1 },
 	  { label => N("User ID"), val => \$u->{uid}, advanced => 1, validate => sub { $validate_uid_gid->('uid') } },
 	  { label => N("Group ID"), val => \$u->{gid}, advanced => 1, validate => sub { $validate_uid_gid->('gid') } },
-	    if_($security > 3,
+	    if_($security >= 1,
                 map {
-                    { label => $_, val => \$groups{$_}, text => $high_security_groups{$_}, type => 'bool' };
+                    { label => $_, val => \$groups{$_}, text => $high_security_groups{$_}, type => 'bool', advanced => 1 };
                 } keys %high_security_groups,
                ),
 	  ],
