@@ -88,48 +88,11 @@ static void warning_insmod_failed(enum insmod_return r)
 }
 
 #ifndef DISABLE_NETWORK
-struct net_description_elem
-{
-	char * intf_name;
-	char * intf_description;
-};
-static struct net_description_elem net_descriptions[50];
-static int net_descr_number = 0;
-static char * intf_descr_for_discover = NULL;
-static char * net_intf_too_early_name[50]; /* for modules providing more than one net intf */
-static int net_intf_too_early_number = 0;
-static int net_intf_too_early_ptr = 0;
-
 const char * safe_descr(const char * text) {
 	return (text && *text) ? text : "unknown";
 }
 
-void prepare_intf_descr(const char * intf_descr)
-{
-	intf_descr_for_discover = strdup(intf_descr);
-}
-
-void net_discovered_interface(char * intf_name)
-{
-	if (!intf_descr_for_discover) {
-		net_intf_too_early_name[net_intf_too_early_number++] = strdup(intf_name);
-		return;
-	}
-	if (!intf_name) {
-		if (net_intf_too_early_ptr >= net_intf_too_early_number) {
-			log_message("NET: was expecting another network interface (broken net module?)");
-			return;
-		}
-		net_descriptions[net_descr_number].intf_name = net_intf_too_early_name[net_intf_too_early_ptr++];
-	}
-	else
-		net_descriptions[net_descr_number].intf_name = strdup(intf_name);
-	net_descriptions[net_descr_number].intf_description = strdup(intf_descr_for_discover);
-	intf_descr_for_discover = NULL;
-	net_descr_number++;
-}
-
-char * get_net_intf_description(const char * intf_name)
+char * get_net_intf_description(char * intf_name)
 {
 	struct ifreq ifr;
 	struct ethtool_drvinfo drvinfo;
@@ -305,12 +268,9 @@ void discovered_device(enum driver_type type, const char * description, const ch
 #ifndef DISABLE_NETWORK
 	if (type == NETWORK_DEVICES) {
 		wait_message("Loading driver for network device:\n \n%s", description);
-		prepare_intf_descr(description);
 		failed = my_modprobe(driver, NETWORK_DEVICES, NULL);
 		warning_insmod_failed(failed);
 		remove_wait_message();
-		if (intf_descr_for_discover) /* for modules providing more than one net intf */
-			net_discovered_interface(NULL);
 	}
 #endif
 #ifdef ENABLE_USB
