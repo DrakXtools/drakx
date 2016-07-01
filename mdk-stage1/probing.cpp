@@ -40,6 +40,8 @@
 #include <fnmatch.h>
 #include <sys/socket.h>
 #include <net/if.h>
+#include <linux/sockios.h>
+#include <linux/ethtool.h>
 #include <sys/ioctl.h>
 #include <sys/mount.h>
 #include <pci/pci.h>
@@ -129,11 +131,25 @@ void net_discovered_interface(char * intf_name)
 
 char * get_net_intf_description(const char * intf_name)
 {
-	int i;
-	for (i = 0; i < net_descr_number ; i++)
-		if (!strcmp(net_descriptions[i].intf_name, intf_name))
-			return net_descriptions[i].intf_description;
-	return strdup("unknown");
+	struct ifreq ifr;
+	struct ethtool_drvinfo drvinfo;
+	int s = socket(AF_INET, SOCK_DGRAM, 0);
+	char *res;
+
+	memset(&ifr, 0, sizeof(ifr));
+	strncpy(ifr.ifr_name, intf_name, IFNAMSIZ);
+
+	drvinfo.cmd = ETHTOOL_GDRVINFO;
+	ifr.ifr_data = (caddr_t) &drvinfo;
+
+	if (ioctl(s, SIOCETHTOOL, &ifr) != -1) {
+		res = drvinfo.driver;
+	} else {
+		perror("SIOCETHTOOL");
+		res = "unknown";
+	}
+	close(s);
+	return strdup(res);
 }
 #endif
 
