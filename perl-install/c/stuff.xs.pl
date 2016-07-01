@@ -36,9 +36,9 @@ print '
 #include <net/route.h>
 #include <netinet/in.h>
 #include <linux/sockios.h>
+#include <linux/ethtool.h>
 #include <linux/input.h>
 #include <execinfo.h>
-#include <linux/ethtool.h>
 
 // for UPS on USB:
 # define HID_MAX_USAGES 1024
