@@ -38,13 +38,6 @@ print '
 #include <linux/sockios.h>
 #include <linux/input.h>
 #include <execinfo.h>
-
-// for ethtool structs:
-typedef unsigned long long u64;
-typedef __uint32_t u32;
-typedef __uint16_t u16;
-typedef __uint8_t u8;
-
 #include <linux/ethtool.h>
 
 // for UPS on USB:
