@@ -419,6 +419,10 @@ sub setupBootloader__general {
     $b->{password2} ||= $b->{password} ||= '';
     $::Wizard_title = N("Boot Style Configuration");
 	my (@boot_devices, %boot_devices);
+    if (is_uefi()) {
+	@boot_devices = 'ESP';
+	%boot_devices = (ESP => N("EFI System partition"));
+    } else {
 	foreach (bootloader::allowed_boot_parts($b, $all_hds)) {
 		my $dev = "/dev/$_->{device}";
 		push @boot_devices, $dev;
@@ -429,6 +433,7 @@ sub setupBootloader__general {
 		}
 		$boot_devices{$dev} = $name ? "$dev ($name)" : $dev;
 	}
+    }
 
 	$in->ask_from_({ #messages => N("Bootloader main options"),
 			title => N("Bootloader main options"),
