@@ -17,8 +17,6 @@ if [ -f /etc/sysconfig/finish-install -a -x /usr/sbin/finish-install ]; then
 	. /etc/profile.d/10distro-release.sh
 	xsetroot -cursor_name left_ptr
 	/usr/sbin/finish-install
-	# used in live systems, so that dm gets restarted with the new defaults
-	touch /var/lock/reload-dm
 # LIGHTDM BEGIN #
 	if grep "lightdm" /etc/systemd/system/display-manager.service; then
 	. /etc/sysconfig/firstboot
