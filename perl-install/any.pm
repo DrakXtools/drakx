@@ -418,7 +418,7 @@ sub setupBootloader__general {
 
     $b->{password2} ||= $b->{password} ||= '';
     $::Wizard_title = N("Boot Style Configuration");
-	my (@boot_devices, %boot_devices);
+    my (@boot_devices, %boot_devices);
     if (is_uefi()) {
 	@boot_devices = 'ESP';
 	%boot_devices = (ESP => N("EFI System partition"));
@@ -435,10 +435,10 @@ sub setupBootloader__general {
 	}
     }
 
-	$in->ask_from_({ #messages => N("Bootloader main options"),
-			title => N("Bootloader main options"),
-			interactive_help_id => 'setupBootloader',
-		}, [
+    $in->ask_from_({ #messages => N("Bootloader main options"),
+	title => N("Bootloader main options"),
+	interactive_help_id => 'setupBootloader',
+		   }, [
 			#title => N("Bootloader main options"),
 			{ label => N("Bootloader"), title => 1 },
 			{ label => N("Bootloader to use"), val => \$b->{method},
