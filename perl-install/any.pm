@@ -421,7 +421,7 @@ sub setupBootloader__general {
     my (@boot_devices, %boot_devices);
     if (is_uefi()) {
 	@boot_devices = 'ESP';
-	%boot_devices = (ESP => N("EFI System partition"));
+	%boot_devices = (ESP => N("EFI System Partition"));
     } else {
 	foreach (bootloader::allowed_boot_parts($b, $all_hds)) {
 		my $dev = "/dev/$_->{device}";
