@@ -156,16 +156,16 @@ sub ask_ {
 			 # FIXME: split part of 'Internet' into 'Security' or 'Firewall'?
 			 N("Internet") => [ qw(adsl boa cddbp ftp httpd ibod ip6tables ippl iptables iptoip ipvsadm
                                                isdn4linux jabber jabber-icq jail.init junkbuster mandi nessusd pftp portsentry 
-                                               prelude proftpd proftpd-xinetd pure-ftpd ipsec radvd roxen shorewall shorewall6 squid
+                                               prelude proftpd proftpd-xinetd pure-ftpd ipsec radvd roxen rsyncd shorewall shorewall6 squid
                                                tftp) ],
 
 			 N("_: Keep these entry short\nNetworking") => [ qw(arp-ethers network network-auth network-up resolvconf systemd-networkd systemd-resolved) ],
 
-			 N("System") => [ qw(acon acpid alsa anacron apcupsd apmd atd bpowerd bpowerfail crond cvs dm fcron functions
+			 N("System") => [ qw(acon acpid alsa anacron apcupsd apmd atd bpowerd bpowerfail cpupower crond cvs dm fcron functions
                                              gpm halt harddrake inetd irda jserver keytable kheader killall mandrake_everytime
                                              mdadm messagebus microcode_ctl mga-bg-res netconsole numlock partmon
                                              pcmcia portmap psacct
-                                             random rawdevices rpcbind sensors single sound spice-vdagentd
+                                             random rawdevices rpcbind rtkit sensors single sound spice-vdagentd
                                              syslog syslog-ng systemd-journal-upload systemd-timesyncd ups wine xfs xinetd) ],
 
 			 N("Remote Administration") => [ qw(cfd drakxtools_http heartbeat iplog ldirectord mon netsaint olympusd rexec
