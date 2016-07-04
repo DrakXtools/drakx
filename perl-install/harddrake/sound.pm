@@ -84,7 +84,7 @@ sub config {
         push @alternative, $driver;
         my %des = modules::category2modules_and_description('multimedia/sound');
         
-        my $is_pulseaudio_installed = (-f $pa_startup_scriptfile && -d '/etc/sound/profiles/pulse');
+        my $is_pulseaudio_installed = -f $pa_startup_scriptfile && -d '/etc/sound/profiles/pulse';
         my $is_pulseaudio_enabled = is_pulseaudio_enabled();
         my $is_pulseaudio_glitchfree_enabled = is_pulseaudio_glitchfree_enabled();
 
