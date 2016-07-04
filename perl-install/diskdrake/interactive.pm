@@ -1303,8 +1303,8 @@ sub format_ {
 
 sub _format_raw {
     my ($in, $part, $all_hds, $o_skip) = @_;
-    if ($::expert && !member($part->{fs_type}, 'reiserfs', 'xfs', 'hfs', 'ntfs', 'ntfs-3g', 'btrfs')) {
-	$part->{toFormatCheck} = $in->ask_yesorno(N("Confirmation"), N("Check bad blocks?"));
+    if ($::expert && !member($part->{fs_type}, qw(hfs ntfs ntfs-3g reiserfs xfs btrfs))) {
+	$part->{toFormatCheck} = $in->ask_yesorno(N("Confirmation"), N("Check for bad blocks?"));
     }
     $part->{isFormatted} = 0; #- force format;
     # Wait for the newly created device to appear before formatting it
