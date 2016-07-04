@@ -2270,10 +2270,6 @@ Writes back the boot loader config. Calls the proper write_XYZ() function.
 sub install {
     my ($bootloader, $all_hds) = @_;
 
-    if (my $part = fs::get::device2part($bootloader->{boot}, [ fs::get::fstab($all_hds) ])) {
-	die N("You cannot install the bootloader on a %s partition\n", $part->{fs_type})
-	  if $part->{fs_type} eq 'xfs';
-    }
     $bootloader->{keytable} = keytable($bootloader->{keytable}) if $bootloader->{method} eq 'lilo';
     action($bootloader, 'install', $all_hds);
 }
