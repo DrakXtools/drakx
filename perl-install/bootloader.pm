@@ -1357,7 +1357,8 @@ sub method_choices_raw {
        if_(!$b_prefix_mounted || whereis_binary('grub2-reboot', $::prefix), 
 	   'grub2-graphic', 'grub2'),
       # only grub2 works on UEFI:
-      if_(!is_uefi(), (
+      # lilo & grub-legacy do not suppport new ext4/xfs format and are unmainted so only allow them on upgrade:
+      if_(!is_uefi() && !($::isInstall && !$::o->{isUpgrade}), (
        if_(!$b_prefix_mounted || whereis_binary('grub', $::prefix) && -f "$::prefix/boot/grub/install.sh", 
 	   'grub-graphic', 'grub-menu'),
        if_(!$b_prefix_mounted || whereis_binary('lilo', $::prefix) && -f "$::prefix/etc/lilo.conf", 
