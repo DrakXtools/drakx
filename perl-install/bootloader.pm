@@ -1356,6 +1356,7 @@ sub method_choices_raw {
     arch() =~ /arm/ ? 'uboot' :
        if_(!$b_prefix_mounted || whereis_binary('grub2-reboot', $::prefix), 
 	   'grub2-graphic', 'grub2'),
+      # only grub2 works on UEFI:
       if_(!is_uefi(), (
        if_(!$b_prefix_mounted || whereis_binary('grub', $::prefix) && -f "$::prefix/boot/grub/install.sh", 
 	   'grub-graphic', 'grub-menu'),
