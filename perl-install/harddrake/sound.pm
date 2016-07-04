@@ -138,6 +138,7 @@ sub config {
                 $write_config->();
             }
         } elsif ($in->ask_from_({ title => N("Sound configuration"),
+                                  interactive_help_id => 'soundConfig',
                                   messages => 
 				    $device->{description} .
 				  "\n\n" . N("Your card uses the \"%s\" driver", $driver),
