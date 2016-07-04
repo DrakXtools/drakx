@@ -461,13 +461,6 @@ Please be sure to add a separate /boot partition");
 	die N("You cannot use an encrypted filesystem for mount point %s", "/boot");
     }
 
-    #- NB: if the LV doesn't exist, lv_nb_pvs returns 0
-    die N("You cannot use the LVM Logical Volume for mount point %s since it spans physical volumes", $mntpoint)
-      if $mntpoint eq '/boot' && isLVM($part) && lvm::lv_nb_pvs($part) > 1;
-    cdie N("You've selected the LVM Logical Volume as root (/).
-The bootloader is not able to handle this when the volume spans physical volumes.
-You should create a separate /boot partition first") if $mntpoint eq "/" && isLVM($part) && lvm::lv_nb_pvs($part) != 1 && !fs::get::has_mntpoint("/boot", $all_hds);
-
     cdie N("This directory should remain within the root filesystem")
       if member($mntpoint, qw(/root));
     die N("This directory should remain within the root filesystem")

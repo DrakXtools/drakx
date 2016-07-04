@@ -4,6 +4,7 @@
   o make sure we only offer lilo/grub choice on upgrades only
 - partionning:
   o do not offer to check for bad blocks on btrfs (mga#12393)
+  o do not warn about no bootloader can boot LVM as grub2 can (mga#9426)
   o do not warn about no bootloader can boot RAID[^1] as grub2 can (mga#11324)
   o enable bad blocks checking on JFS
 - summary:
