@@ -1020,6 +1020,7 @@ sub Add2LVM {
 	$lvm = new lvm($name);
 	push @$lvms, $lvm;
     }
+    my $_w = $in->wait_message(N("Please wait"), N("Setting up LVM"));
     raid::make($all_hds->{raids}, $part) if isRAID($part);
     lvm::check($in->do_pkgs) if $::isStandalone;
     lvm::add_to_VG($part, $lvm);
