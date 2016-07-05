@@ -1073,7 +1073,7 @@ sub loadO {
 	my $o;
 	foreach (removable_media__early_in_install()) {
             my $dev = devices::make($_->{device});
-            foreach my $fs (qw(ext2 vfat ntfs-3g)) {
+            foreach my $fs (qw(ext4 vfat ntfs-3g)) {
                 eval { fs::mount::mount($dev, '/mnt', $fs, 'readonly'); 1 } or next;
 		if (my $abs_f = find { -e $_ } "/mnt/$f", "/mnt/$f.pl") {
 		    $o = loadO_($O, $abs_f);
