@@ -14,6 +14,12 @@ my $nb_primary = 128;
 
 # See https://en.wikipedia.org/wiki/GUID_Partition_Table#Partition_type_GUIDs for a list of exitings GUIDs
 
+sub last_usable_sector {
+    my ($hd) = @_;
+    #- do not use totalsectors because backup GPT is at end
+    $hd->{totalsectors} - 33;
+}
+
 my %parted_mapping = (
    'linux-swap(v1)' => 'swap',
    'ntfs' => 'ntfs-3g',
