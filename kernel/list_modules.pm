@@ -39,7 +39,7 @@ our %l = (
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(alx atl1 atl1c atl1e at91_ether ax88179_178a be2net bna bnx2 bnx2x bnxt_en cxgb cxgb3 cxgb4 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe lan78xx),
+      qw(alx atl1 atl1c atl1e at91_ether ax88179_178a be2net bna bnx2 bnx2x bnxt_en cxgb cxgb3 cxgb4 dl2k e1000 e1000e et131x hfi1 igb ipg ixgb ixgbe lan78xx),
       qw(macb mvmdio myri_sbus myri10ge netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io samsung-sxgbe sfc sxg_nic),
       qw(sis190 sk98lin skge sky2 slicoss spidernet stmmac tehuti tg3 via-velocity vxge yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
@@ -169,7 +169,7 @@ our %l = (
     pcmcia => [
       qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket), # cb_enabler
     ],
-    hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-appleir hid-aureal hid-axff hid-belkin hid-betopff
+    hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-appleir hid-asus hid-aureal hid-axff hid-belkin hid-betopff
 	    hid-cherry hid-chicony hid-cmedia hid-corsair hid-cp2112 hid-cypress hid-dr hid-drff hid-elecom hid-elo hid-emsff
 	    hid-ezkey hid-gaff hid-gembird hid-generic hid-gfrm hid-gt683r hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse
 	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-lenovo hid-lenovo-tpkbd
@@ -194,7 +194,7 @@ our %l = (
     local => [
       qw(btrfs ext3 ext4 jfs nilfs2 ntfs reiserfs vfat xfs),
     ],
-    various => [ qw(efivarfs overlay romfs ufs fuse) ],
+    various => [ qw(efivarfs efibc capsule-loader overlay romfs ufs fuse) ],
 
   },
 
