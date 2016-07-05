@@ -9,6 +9,7 @@ use strict;
 use common;
 use detect_devices;
 use partition_table;
+use fs::proc_partitions;
 use fs::type;
 use lang;
 use run_program;
@@ -1379,6 +1380,12 @@ sub header { "
 ********************************************************************************
 * $_[0]
 ********************************************************************************";
+}
+
+sub fdisk() {
+    my @devs = grep { !m!^/dev/(loop|ram)\d+! && !/\d$/ } map { "/dev/$_->{dev}" } fs::proc_partitions::read_raw();
+    `fdisk -l @devs`;
+
 }
 
 sub report_bug {
