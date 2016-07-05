@@ -403,7 +403,7 @@ sub suggest_part {
     my $has_swap = any { isSwap($_) } fs::get::fstab($all_hds);
 
     my @local_suggestions =
-      grep { !$_->{mntpoint} && !$_->{VG_name} || !fs::get::has_mntpoint($_->{mntpoint}, $all_hds) || isSwap($_) && !$has_swap }
+      grep { $::auto_install || !$_->{mntpoint} && !$_->{VG_name} || !fs::get::has_mntpoint($_->{mntpoint}, $all_hds) || isSwap($_) && !$has_swap }
       grep { !$_->{min_hd_size} || !$hd_size || $_->{min_hd_size} <= $hd_size }
       grep { !$_->{hd} || $_->{hd} eq $part->{rootDevice} }
 	@$suggestions;
