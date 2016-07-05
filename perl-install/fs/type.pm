@@ -294,7 +294,7 @@ sub isEmpty { !$_[0]{fs_type} && $_[0]{pt_type} == 0 }
 sub isBIOS_GRUB { $_[0]{pt_type} eq 'BIOS_GRUB' }
 sub isESP { $_[0]{pt_type} == 0xef && member($_[0]{fs_type}, qw(fat32 vfat)) }
 sub isExtended { $_[0]{pt_type} == 5 || $_[0]{pt_type} == 0xf || $_[0]{pt_type} == 0x85 }
-sub isBlockCheckable { member($_[0]{fs_type}, qw(btrfs hfs ntfs ntfs-3g reiserfs xfs)) }
+sub isBlockCheckable { !member($_[0]{fs_type}, qw(btrfs hfs ntfs ntfs-3g reiserfs xfs)) }
 sub isRawLVM { $_[0]{pt_type} == 0x8e || $_[0]{type_name} eq 'Linux Logical Volume Manager' }
 sub isRawRAID { $_[0]{pt_type} == 0xfd || $_[0]{type_name} eq 'Linux RAID' }
 sub isRawLUKS { $_[0]{type_name} eq 'Encrypted' }
