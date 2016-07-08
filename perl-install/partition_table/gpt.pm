@@ -113,11 +113,8 @@ sub write {
 
 sub initialize {
     my ($class, $hd) = @_;
-    my @raw;
-    for (my $part_number = 0; $part_number < $nb_primary-1; $part_number++) {
-        # part_number starts at 1
-        $raw[$part_number] = { part_number => $part_number + 1 };
-    }
+    # part_number starts at 1
+    my @raw = map { +{ part_number => $_ + 1 } } 0..$nb_primary-2;
     $hd->{primary} = { raw => \@raw };
     bless $hd, $class;
 }
