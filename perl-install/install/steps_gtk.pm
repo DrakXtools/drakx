@@ -47,7 +47,7 @@ sub new($$) {
     }
     if (detect_devices::is_qemu()) {
         mkdir_p('/var/run/spice-vdagentd');
-        run_program::raw({ detach => 1 }, 'spice-vdagentd', '-X', '>', '/dev/null', '2>', '/dev/null');
+        run_program::raw({ detach => 1 }, 'spice-vdagentd', '>', '/dev/null', '2>', '/dev/null', '-X');
         run_program::raw({ detach => 1 }, 'spice-vdagent', '>', '/dev/null', '2>', '/dev/null');
     }
     any::disable_x_screensaver();
