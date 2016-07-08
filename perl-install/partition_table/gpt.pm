@@ -79,6 +79,9 @@ sub write {
         $partitions_killed = 1;
     }
 
+    # sync libparted view with diskdrake one in order to prevent overlapping errors when adding partitions:
+    c::disk_delete_all($hd->{file}) if delete $hd->{sync_with_libparted};
+
     foreach (@{$hd->{will_tell_kernel}}) {
         my ($action, $part_number, $o_start, $o_size) = @$_;
         my ($part) = grep { $_->{start} == $o_start && $_->{size} == $o_size } @$pt;
@@ -113,6 +116,8 @@ sub write {
 
 sub initialize {
     my ($class, $hd) = @_;
+    # sync libparted view with diskdrake one in order to prevent overlapping errors when adding partitions:
+    $hd->{sync_with_libparted} = 1;
     # part_number starts at 1
     my @raw = map { +{ part_number => $_ + 1 } } 0..$nb_primary-2;
     $hd->{primary} = { raw => \@raw };
