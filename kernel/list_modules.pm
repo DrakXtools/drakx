@@ -339,7 +339,7 @@ our %l = (
       #- these need checking
       qw(rrunner meye),
 
-      qw(virtio virtio_input virtio_pci virtio_ring vhost_scsi hyperv-keyboard),
+      qw(virtio virtio-console virtio_input virtio_pci virtio_ring vhost_scsi hyperv-keyboard),
       qw(mei pch_phub),
       qw(vmvgfx),
     ],
