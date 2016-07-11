@@ -324,7 +324,7 @@ sub isOtherAvailableFS { isESP($_[0]) || isFat_or_NTFS($_[0]) || member($_[0]{fs
 sub isMountableRW { (isTrueFS($_[0]) || isOtherAvailableFS($_[0])) && $_[0]{fs_type} ne 'ntfs' }
 sub cannotBeMountable { 
     my ($part) = @_;
-    isRawRAID($part) || isRawLUKS($part) || isRawLVM($part);
+    isRawRAID($part) || isRawLUKS($part) || isRawLVM($part) || isBIOS_GRUB($part);
 }
 sub isNonMountable { 
     my ($part) = @_;
