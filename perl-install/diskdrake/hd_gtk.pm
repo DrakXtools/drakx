@@ -258,9 +258,7 @@ sub per_kind_action_box {
     my ($box, $kind) = @_;
     $_->destroy foreach $box->get_children;
 
-    $kind->{type} =~ /hd|lvm/ or return;
-
-    my @actions = (diskdrake::interactive::hd_possible_actions_base($in),
+    my @actions = (if_($kind->{type} =~ /hd|lvm/, diskdrake::interactive::hd_possible_actions_base($in)),
 	diskdrake::interactive::hd_possible_actions_extra($in));
     foreach my $s (@actions) {
 	gtkadd($box, 
