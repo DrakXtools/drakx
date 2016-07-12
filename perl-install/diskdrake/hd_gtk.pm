@@ -80,7 +80,6 @@ sub main {
                             ),
 		    1, (my $notebook_widget = Gtk3::Notebook->new),
 		    0, (my $per_kind_action_box = gtknew('HButtonBox', layout => 'edge')),
-		    0, (my $per_kind_action_box2 = gtknew('HButtonBox', layout => 'end')),
 		    0, Gtk3::HSeparator->new,
 		    0, (my $general_action_box  = gtknew('HBox', spacing => 5)),
 		   ),
@@ -96,7 +95,7 @@ sub main {
 	partition_table::assign_device_numbers($_) foreach fs::get::hds($all_hds);
 	create_automatic_notebooks($notebook_widget);
 	general_action_box($general_action_box);
-	per_kind_action_box($per_kind_action_box, $per_kind_action_box2, $current_kind);
+	per_kind_action_box($per_kind_action_box, $current_kind);
 	current_kind_changed($in, $current_kind);
 	current_entry_changed($current_kind, $current_entry);
 	$lock = 0;
@@ -256,8 +255,8 @@ sub general_action_box {
     gtkadd($box, $box_end);
 }
 sub per_kind_action_box {
-    my ($box, $box2, $kind) = @_;
-    $_->destroy foreach $box->get_children, $box2->get_children;
+    my ($box, $kind) = @_;
+    $_->destroy foreach $box->get_children;
 
     $kind->{type} =~ /hd|lvm/ or return;
 
