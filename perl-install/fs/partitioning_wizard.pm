@@ -79,7 +79,7 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	  }
 	} else {
 	    if (fs::any::is_boot_bios_part_needed($all_hds, $fstab)) {
-		$in->ask_warn('', N("You must have a Boot BIOS partition"));
+		$in->ask_warn('', N("You must have a BIOS boot partition for non-UEFI GPT-partitioned disks. Please create one before continuing."));
 		$ok = '';
 	    }
 	}

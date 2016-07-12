@@ -76,7 +76,7 @@ sub check_hds_boot_and_root {
 	}
     } else {
 	if (is_boot_bios_part_needed($all_hds, $fstab)) {
-	    die N("You must have a Boot BIOS partition");
+	    die N("You must have a BIOS boot partition for non-UEFI GPT-partitioned disks. Please create one before continuing.");
 	}
     }
 }
