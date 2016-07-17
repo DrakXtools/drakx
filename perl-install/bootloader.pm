@@ -289,12 +289,12 @@ sub is_grub2_already_crypted {
 
 =item read_grub2 ($o_fstab)
 
-Read back GRUB2 config + C</boot/grub2/drakboot.conf>
+Read back GRUB2 config
 
 =cut
 
 sub read_grub2() {
-    my %bootloader = getVarsFromSh("$::prefix/boot/grub2/drakboot.conf");
+    my %bootloader = read_grub2_install_sh();
     return if is_empty_hash_ref(\%bootloader) & !-s "$::prefix/boot/grub2/grub.cfg";
     my %h = getVarsFromSh("$::prefix/etc/default/grub");
     $bootloader{timeout} = $h{GRUB_TIMEOUT};
@@ -2196,7 +2196,6 @@ sub install_raw_grub2() {
 	log::explanations("grub2-install failed:\n(grub2-install @options)\nError: <$error>");
 	die "grub2-install failed: $error";
     }
-    setVarsInSh("$::prefix/boot/grub2/drakboot.conf", { boot => $boot });
 }
 
 sub install_grub {
