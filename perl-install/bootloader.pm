@@ -298,6 +298,8 @@ sub read_grub2() {
     return if is_empty_hash_ref(\%bootloader) & !-s "$::prefix/boot/grub2/grub.cfg";
     my %h = getVarsFromSh("$::prefix/etc/default/grub");
     $bootloader{timeout} = $h{GRUB_TIMEOUT};
+    # on first run (during installer) or when migrating from grub-legacy or lilo:
+    $bootloader{default_append} ||= $::isInstall ? get_grub2_append(\%bootloader) : $h{GRUB_CMDLINE_LINUX_DEFAULT};
     $bootloader{entries} = [];
     my $entry;
     my $f = "$::prefix/boot/grub2/grub.cfg";
@@ -1911,10 +1913,7 @@ sub write_grub2_sysconfig {
     my $f = "$::prefix/etc/default/grub";
     my %conf = getVarsFromSh($f);
 
-    # First installation or migration from grub-legacy/lilo?
-    if (! -f get_grub2_install_sh()) {
-	$conf{GRUB_CMDLINE_LINUX_DEFAULT} = get_grub2_append($bootloader);
-    }
+    $conf{GRUB_CMDLINE_LINUX_DEFAULT} = $bootloader->{default_append} || get_grub2_append($bootloader);
     $conf{GRUB_GFXPAYLOAD_LINUX} = 'auto' if is_uefi();
     $conf{GRUB_DISABLE_RECOVERY} = 'false'; # for 'failsafe' entry
     $conf{GRUB_DEFAULT} ||= 'saved'; # for default entry but do not overwrite user choice

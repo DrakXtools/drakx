@@ -651,7 +651,7 @@ sub setupBootloader__grub2 {
     my $b2 = bootloader::read_grub2();
 
     # get default parameters:
-    my $append = $b->{entries}[0]{append} ||= bootloader::get_grub2_append($b2);
+    my $append = $b->{default_append} || $b->{entries}[0]{append} || bootloader::get_grub2_append($b2);
     my $default = $b2->{default};
 
     require Xconfig::resolution_and_depth;
@@ -683,7 +683,7 @@ sub setupBootloader__grub2 {
 	$b->{entries} = $b2->{entries};
 	$b->{default} = $default;
 	$b->{vga} = ref($vga) ? $vga->{bios} : $vga;
-	first(@{$b->{entries}})->{append} = $append;
+	$b->{default_append} = $append;
 	if ($os_prober) {
 	    $in->do_pkgs->ensure_is_installed('os-prober', '/usr/bin/os-prober');
 	} else {
