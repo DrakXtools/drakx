@@ -1951,12 +1951,11 @@ sub write_grub2 {
     }
 }
 
-sub write_grub2 {
-    my ($o_backup_extension) = @_;
+sub write_grub2() {
     my $error;
 
     my $f1 = "$::prefix/boot/grub2/grub.cfg";
-    renamef($f1, $f1 . ($o_backup_extension || '.old'));
+    renamef($f1, $f1 . '.old');
     run_program::rooted($::prefix, 'update-grub2', '2>', \$error) or die "update-grub2 failed: $error";
     log::l("update-grub2 logs: $error");
 
