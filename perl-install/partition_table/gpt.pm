@@ -14,6 +14,8 @@ my $nb_primary = 128;
 
 # See https://en.wikipedia.org/wiki/GUID_Partition_Table#Partition_type_GUIDs for a list of exitings GUIDs
 
+sub first_usable_sector { 34 }
+
 sub last_usable_sector {
     my ($hd) = @_;
     #- do not use totalsectors because backup GPT is at end
