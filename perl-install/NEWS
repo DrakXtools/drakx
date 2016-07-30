@@ -1,5 +1,7 @@
 - diskdrake:
   o first usable sector is LBA34 for GPT
+  o respect used scheme when clearing a disk
+    (ie do not switch from gpt to dos scheme on small disk)
 - drakboot:
   o fix .old backup for grub2's grub.cfg
 - authentication: add support for sha256/sha512 and default to sha512

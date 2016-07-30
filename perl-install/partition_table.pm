@@ -229,7 +229,9 @@ sub _default_type {
 sub initialize {
     my ($hd, $o_type) = @_;
 
-    my $type = $o_type || _default_type($hd);
+    my $current = c::get_disk_type($hd->{file});
+    $current = 'dos' if $current eq 'msdos';
+    my $type = $o_type || $current || _default_type($hd);
 
     require "partition_table/$type.pm";
     "partition_table::$type"->initialize($hd);

@@ -2,6 +2,8 @@
   o fix .old backup for grub2's grub.cfg
 - partionning:
   o first usable sector is LBA34 for GPT
+  o respect used scheme when clearing a disk
+    (ie do not switch from gpt to dos scheme on small disk)
 
 Version 17.52 - 17 July 2016
 
