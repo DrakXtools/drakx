@@ -695,6 +695,15 @@ sub setupBootloader__grub2 {
     }
 }
 
+sub adapt_desktop_for_plasma {
+    my ($desktop) = @_;
+    my %h = (
+	'Plasma' => '01plasma',
+	'GNOMEClassic' => 'gnome-classic',
+    );
+    $h{$desktop} ? $h{$desktop} . '.desktop' : lc("${desktop}.desktop");
+}
+
 sub get_autologin() {
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
     my $gdm_file = "$::prefix/etc/X11/gdm/custom.conf";
@@ -760,7 +769,7 @@ sub set_autologin {
     #- Configure SDDM
     my $sddm_conffile = "$::prefix/etc/sddm.conf";
     eval { common::update_gnomekderc_no_create($sddm_conffile, 'Autologin' => (
-	Session => $autologin->{desktop},
+	Session => adapt_desktop_for_plasma($autologin->{desktop}),
 	User => $autologin->{user},
     )) } if -e $sddm_conffile;
 
