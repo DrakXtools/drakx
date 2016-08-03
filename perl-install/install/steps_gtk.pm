@@ -80,7 +80,7 @@ sub _setup_and_start_X {
     my @servers = qw(Driver:auto Driver:fbdev Driver:vesa Driver:modesetting ); #-)
     if ($::testing) {
         @servers = 'Xnest';
-    } elsif ( is_uefi() ) {
+    } elsif (is_uefi()) {
         require Xconfig::card;
         my ($card) = Xconfig::card::probe();
         @servers = 'Driver:fbdev';
