@@ -713,16 +713,16 @@ sub get_autologin() {
     my $desktop = $desktop{DESKTOP} || first(sessions());
     my %desktop_to_dm = (
         GNOME => 'gdm',
-        KDE4 => 'kdm',
-        xfce4 => 'slim',
+        PLASMA => 'sddm',
+        xfce4 => 'lightdm',
         LXDE => 'lxdm',
         LXQt => 'sddm',
         MATE => 'lightdm',
     );
     my %dm_canonical = (
         gnome => 'gdm',
-        kde => 'kdm',
         lxqt => 'sddm',
+        plasma => 'sddm',
     );
     my $dm =
       lc($desktop{DISPLAYMANAGER}) ||
