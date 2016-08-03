@@ -698,9 +698,8 @@ sub setupBootloader__grub2 {
 sub get_autologin() {
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
     my $gdm_file = "$::prefix/etc/X11/gdm/custom.conf";
-    my $kdm_file = common::read_alternative('kdm4-config');
     my $sddm_file = "$::prefix/etc/sddm.conf";
-    my $lightdm_conffile = "$::prefix/etc/lightdm/lightdm.conf.d/50-openmandriva-autologin.conf";
+    my $lightdm_conffile = "$::prefix/etc/lightdm/lightdm.conf.d/50-mageia-autologin.conf";
     my $autologin_file = "$::prefix/etc/sysconfig/autologin";
     my $desktop = $desktop{DESKTOP} || first(sessions());
     my %desktop_to_dm = (
@@ -726,12 +725,9 @@ sub get_autologin() {
     if ($dm eq "gdm") {
         my %conf = read_gnomekderc($gdm_file, 'daemon');
         $autologin_user = text2bool($conf{AutomaticLoginEnable}) && $conf{AutomaticLogin};
-    } elsif ($dm eq "kdm") {
-        my %conf = read_gnomekderc($kdm_file, 'X-:0-Core');
-        $autologin_user = text2bool($conf{AutoLoginEnable}) && $conf{AutoLoginUser};
     } elsif ($dm eq "sddm") {
         my %conf = read_gnomekderc($sddm_file, 'Autologin');
-        $autologin_user = $conf{User} && $conf{Session};
+        $autologin_user = $conf{User};
     } elsif ($dm eq "lightdm") {
         my %conf = read_gnomekderc($lightdm_conffile, 'Seat:*');
         $autologin_user = text2bool($conf{'#dummy-autologin'}) && $conf{"autologin-user"};
@@ -760,13 +756,6 @@ sub set_autologin {
         $do_pkgs->ensure_is_installed('autologin', '/usr/bin/startx.autologin', $o_auto)
           or return;
     }
-
-    #- Configure KDM / MDKKDM
-    my $kdm_conffile = common::read_alternative('kdm4-config');
-    eval { common::update_gnomekderc_no_create($kdm_conffile, 'X-:0-Core' => (
-	AutoLoginEnable => $do_autologin,
-	AutoLoginUser => $autologin->{user},
-    )) } if -e $kdm_conffile;
 
     #- Configure SDDM
     my $sddm_conffile = "$::prefix/etc/sddm.conf";
