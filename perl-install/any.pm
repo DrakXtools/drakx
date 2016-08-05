@@ -1471,7 +1471,7 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
 	    nfs => [ 'nfs-utils', 'nfs-server',
 		     N("NFS: the traditional Unix file sharing system, with less support on Mac and Windows.")
 		   ],
-	    smb => [ 'samba-server', 'smb',
+	    smb => [ 'samba', 'smb',
 		     N("SMB: a file sharing system used by Windows, Mac OS X and many modern Linux systems.")
 		   ],
        );
