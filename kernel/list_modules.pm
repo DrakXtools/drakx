@@ -224,7 +224,7 @@ our %l = (
           qw(snd-ymfpci sonicvibes sscape trident via82cxxx_audio wavefront ymfpci),
   ],
     tv => [ qw(bt878 bttv cx23885 cx25821 cx8800 cx8802 cx88-blackbird dpc7146),
-            qw(ivtv mxb pvrusb2 saa7134 saa7164 zr36067) ],
+            qw(em28xx ivtv mxb pvrusb2 saa7134 saa7164 zr36067) ],
     dvb => [
         qw(b2c2-flexcop-pci b2c2-flexcop-usb budget budget-av),
         qw(budget-ci cinergyT2 dm1105 dvb-dibusb dvb-ttpci),
@@ -245,8 +245,8 @@ our %l = (
     gameport => [ qw(cs461x ns558 emu10k1-gp fm801-gp lightning ns558 vortex) ],
     usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-6fire snd-usb-caiaq snd-usb-hiface snd-usb-usx2y usb-midi) ],
     webcam => [
-        qw(cafe_ccic cpia2 cpia_usb cyber2000fb em28xx et61x251 gspca),
-        qw(gspca_benq gspca_conex gspca_cpia1 gspca_etoms
+        qw(cafe_ccic cpia2 cpia_usb cyber2000fb et61x251 gspca),
+        qw(gspca_benq gspca_conex gspca_cpia1 gspca_dtcs033 gspca_etoms
         gspca_finepix gspca_gl860 gspca_jeilinj gspca_jl2005bcd
         gspca_kinect gspca_konica gspca_m5602 gspca_mars
         gspca_mr97310a gspca_nw80x gspca_ov519 gspca_ov534
