@@ -709,6 +709,7 @@ sub get_autologin() {
     my $gdm_file = "$::prefix/etc/X11/gdm/custom.conf";
     my $sddm_file = "$::prefix/etc/sddm.conf";
     my $lightdm_conffile = "$::prefix/etc/lightdm/lightdm.conf.d/50-mageia-autologin.conf";
+    my $lxdm_conffile = "$::prefix/etc/lxdm/lxdm.conf";
     my $autologin_file = "$::prefix/etc/sysconfig/autologin";
     my $desktop = $desktop{DESKTOP} || first(sessions());
     my %desktop_to_dm = (
@@ -740,6 +741,10 @@ sub get_autologin() {
     } elsif ($dm eq "lightdm") {
         my %conf = read_gnomekderc($lightdm_conffile, 'Seat:*');
         $autologin_user = text2bool($conf{'#dummy-autologin'}) && $conf{"autologin-user"};
+    } elsif ($dm eq "lxdm") {
+        my %conf = read_gnomekderc($lxdm_conffile, 'base');
+        $autologin_user = $conf{autologin};
+        $autologin_user =~ s/^.//;
     } else {
         my %conf = getVarsFromSh($autologin_file);
         $autologin_user = text2bool($conf{AUTOLOGIN}) && $conf{USER};
@@ -750,7 +755,7 @@ sub get_autologin() {
 
 sub is_standalone_autologin_needed {
     my ($dm) = @_;
-    return member($dm, qw(lxdm slim xdm));
+    return member($dm, qw(slim xdm));
 }
 
 sub set_autologin {
@@ -787,8 +792,25 @@ sub set_autologin {
     'autologin-user' => $autologin->{user}
     )) } if -e $lightdm_conffile;
 
+    #- Configure LXDM
+    my $lxdm_conffile = "$::prefix/etc/lxdm/lxdm.conf";
+    eval { update_gnomekderc($lxdm_conffile, 'base' => (
+	if_($autologin->{user}, 'autologin' => '@' . $autologin->{user})
+    ));
+    if ($autologin->{user} && $autologin->{desktop} && !member($autologin->{desktop}, qw(default failsafe))) {
+	my $xsession_file = find {
+	    my %xsession = read_gnomekderc($_, 'Desktop Entry');
+	    $xsession{Name} eq $autologin->{desktop};
+	} glob("$::prefix/usr/share/xsessions/*.desktop");
+	$xsession_file =~ s!\.[^.]+$!!;
+	$xsession_file =~ s!.*/!!;
+	$xsession_file ||= $autologin->{desktop};
+	update_gnomekderc($lxdm_conffile, $autologin->{user} => (
+	'user' => $autologin->{user},
+	'session' => $xsession_file,
+    )) } } if -e $lxdm_conffile;
+
     my $xdm_autologin_cfg = "$::prefix/etc/sysconfig/autologin";
-    # TODO: configure lxdm in /etx/lxdm/lxdm.conf
     if (is_standalone_autologin_needed($autologin->{dm})) {
 	setVarsInShMode($xdm_autologin_cfg, 0644,
 			{ USER => $autologin->{user}, AUTOLOGIN => bool2yesno($autologin->{user}), EXEC => '/usr/bin/startx.autologin' });
