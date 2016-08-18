@@ -136,7 +136,7 @@ eval { cp_af('/etc/resolv.conf', "$SLASH_LOCATION/etc/resolv.conf") };
 }
 
 my $Xnest_pid;
-my $Xnest_bin = find { whereis_binary($_) } 'Xephyr', 'Xnest' or die "Xephyr not find! Please install x11-server-xephyr!\n";
+my $Xnest_bin = find { whereis_binary($_) } 'Xephyr', 'Xnest' or die "Xephyr not found! Please install x11-server-xephyr!\n";
 if (!-f ($SLASH_LOCATION . $AUTO_INSTALL_ROOTED) && $Xnest_bin && join('', @ARGV) !~ /--text/) {
     my $DISPLAY = ':8';
     $Xnest_pid = fork();
