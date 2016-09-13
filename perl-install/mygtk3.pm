@@ -605,8 +605,8 @@ sub _gtk__TextView {
 
 
 sub _gtk__WebKit2_WebView {
-    my ($w, $opts, $class, $_action) = @_;
-    _gtk__WebKit_WebView($w, $opts, $class, $_action);
+    my ($w, $opts, $class, $action) = @_;
+    _gtk__WebKit_WebView($w, $opts, $class, $action);
 }
 
 sub _gtk__WebKit_WebView {
