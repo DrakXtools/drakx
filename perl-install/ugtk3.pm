@@ -1505,7 +1505,7 @@ use ugtk3 qw(:helpers :wrappers);
 sub set_style {
    my ($w) = @_;
    my $pl = Gtk3::CssProvider->new;
-   $pl->load_from_data("Layout, GtkLabel {font: 15px; background-color: #ffffff }");
+   $pl->load_from_data("Layout, GtkLabel { font-size: 15px; background-color: #ffffff }");
    $w->{label}->get_style_context->add_provider($pl, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
    my $p = Gtk3::CssProvider->new;
    $w->get_style_context->add_provider($p, Gtk3::STYLE_PROVIDER_PRIORITY_APPLICATION);
