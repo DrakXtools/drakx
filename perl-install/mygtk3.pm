@@ -905,14 +905,6 @@ sub _gtknew_handle_layout_children {
             $w->put(@$_);
         }
         delete $opts->{children};
-
-        if ($opts->{pixbuf_file}) {
-            my $pixbuf = if_($opts->{pixbuf_file}, gtknew('Pixbuf', file => delete $opts->{pixbuf_file}));
-            $w->signal_connect(
-                realize => sub {
-                    ugtk3::set_back_pixbuf($w, $pixbuf);
-                });
-        }
 }
 
 
