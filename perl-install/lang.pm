@@ -1277,6 +1277,20 @@ sub charset2pango_font {
     $charset2pango_font{$charset} || $charset2pango_font{default};
 }
 
+=item charset2css_font ($charset)
+
+Returns the font to use with $charset or the default one if non is set
+
+=cut
+
+sub charset2css_font {
+    my ($charset) = @_;
+
+    my $font = $charset2pango_font{$charset} || $charset2pango_font{default};
+    my ($familly, $size) = $font =~ /(.*) (\d+)$/;
+    return "font-family: $familly; font-size: ${size}pt;";
+}
+
 sub l2pango_font {
     my ($lang) = @_;
 
@@ -1284,6 +1298,16 @@ sub l2pango_font {
     my $font = charset2pango_font($charset);
     log::l("lang:$lang charset:$charset font:$font consolefont:$charsets{$charset}[0]");
     
+    return $font;
+}
+
+sub l2css_font {
+    my ($lang) = @_;
+
+    my $charset = l2charset($lang) or log::l("no charset found for lang $lang!"), return;
+    my $font = charset2css_font($charset);
+    log::l("lang:$lang charset:$charset font:$font consolefont:$charsets{$charset}[0]");
+
     return $font;
 }
 
