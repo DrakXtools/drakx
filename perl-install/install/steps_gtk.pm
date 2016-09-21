@@ -81,8 +81,6 @@ sub _setup_and_start_X {
     if ($::testing) {
         @servers = 'Xnest';
     } elsif (is_uefi()) {
-        require Xconfig::card;
-        my ($card) = Xconfig::card::probe();
         @servers = 'Driver:fbdev';
     } elsif (arch() =~ /i.86/) {
         require Xconfig::card;
