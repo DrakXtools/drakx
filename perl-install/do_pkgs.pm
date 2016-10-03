@@ -333,7 +333,7 @@ sub install {
 	return 1;
     }
 
-    my @wrapper = is_mgalive() ? qw(chroot /mnt/install) : ();
+    my @wrapper = is_mgalive() && -e '/mnt/install' ? qw(chroot /mnt/install) : ();
     my @options = ('--allow-medium-change', '--auto', '--no-verify-rpm', '--expect-install', @l);
     my $ret;
     if (check_for_xserver() && -x '/usr/bin/gurpmi') {
