@@ -376,6 +376,9 @@
       libnss_dns.so.2
       libresolv.so.2
       ld-linux*.so.*
+      <if ARCH="armv7hl">
+          ld-linux-armhf.so.*
+      </if>
 
       <!-- needed by dmraid -->
       libdmraid-events-isw.so
