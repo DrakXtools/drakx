@@ -64,14 +64,7 @@ if (@devices = @$devices_ok) {
 # we failed to detect any TV card:
 if (is_empty_array_ref($devices) && is_empty_array_ref($devices_ok)) {
     $in->ask_warn(N("No TV Card detected!"), formatAlaTeX(
-                                                          #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
-                                                          N("No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.
-
-
-You can visit our hardware database at:
-
-
-http://www.mandrivalinux.com/en/hardware.php3")));
+                                                          N("No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.")));
 }
 $in->exit(0) if defined $in;
 
