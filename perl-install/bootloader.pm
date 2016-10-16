@@ -1123,8 +1123,6 @@ sub short_ext {
     my ($kernel_str) = @_;
 
     my $short_ext = {
-	'i586-up-1GB' => 'i586',
-	'i686-up-4GB' => '4GB',
 	'xen0' => 'xen',
     }->{$kernel_str->{ext}};
 
@@ -1139,17 +1137,13 @@ sub _sanitize_ver {
 
     my $v = $kernel_str->{version_no_ext};
     if ($v =~ s/-\d+\.mm\././) {
-	$name = join(' ', grep { $_ } $name, 'multimedia');
+	$name = join(' ', grep { $_ } $name);
     }
 
     $v =~ s!(md[kv]|mnb)$!!;
     $v =~ s!-0\.(pre|rc)(\d+)\.!$1$2-!;
 
     my $return = join(' ', grep { $_ } $name, short_ext($kernel_str), $v);
-
-    length($return) < 30 or $return =~ s!secure!sec!;
-    length($return) < 30 or $return =~ s!enterprise!ent!;
-    length($return) < 30 or $return =~ s!multimedia!mm!;
 
     $return;
 }
@@ -1270,7 +1264,7 @@ sub suggest {
 		      });
 	} @windows_boot_parts;
 
-    my @preferred = map { "linux-$_" } 'p3-smp-64GB', 'secure', 'enterprise', 'smp', 'i686-up-4GB';
+    my @preferred = map { "linux-$_" } 'server';
     if (my $preferred = find { get_label($_, $bootloader) } @preferred) {
 	$bootloader->{default} ||= $preferred;
     }
