@@ -300,7 +300,7 @@ sub isRawRAID { $_[0]{pt_type} == 0xfd || $_[0]{type_name} eq 'Linux RAID' }
 sub isRawLUKS { $_[0]{type_name} eq 'Encrypted' }
 sub isSwap { $_[0]{fs_type} eq 'swap' }
 sub isDos { ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{pt_type}} }
-sub isFat_or_NTFS { member($_[0]{fs_type}, 'vfat', 'ntfs', 'ntfs-3g') }
+sub isFat_or_NTFS { member($_[0]{fs_type}, qw(vfat, ntfs, ntfs-3g)) }
 sub isnormal_Fat_or_NTFS { grep { isFat_or_NTFS($_) && !isESP($_) && !isRecovery($_) } @_ }
 sub isApple { $_[0]{pt_type} == 0x401 && defined $_[0]{isDriver} }
 sub isAppleBootstrap { $_[0]{pt_type} == 0x401 && defined $_[0]{isBoot} }

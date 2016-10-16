@@ -1254,7 +1254,7 @@ sub suggest {
 	#- search for dos (or windows) boot partition. Do not look in extended partitions!
 	my @windows_boot_parts =
 	  grep { $_->{active}
-		 && isFat_or_NTFS($_) && member(fs::type::fs_type_from_magic($_), 'vfat', 'ntfs', 'ntfs-3g')
+		 && isFat_or_NTFS($_) && member(fs::type::fs_type_from_magic($_), qw(vfat ntfs ntfs-3g))
 		 && !$_->{is_removable}
 		 && !isRecovery($_);
 	     }
