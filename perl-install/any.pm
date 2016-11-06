@@ -1569,7 +1569,7 @@ sub monitor_full_edid() {
 
 # FIXME: is buggy regarding multiple sessions
 sub running_window_manager() {
-    my @window_managers = qw(drakx-matchbox-window-manager ksmserver kwin gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce4-session blackbox sawfish olvwm fluxbox compiz lxsession);
+    my @window_managers = qw(drakx-matchbox-window-manager ksmserver kwin kwin_x11 gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce4-session blackbox sawfish olvwm fluxbox compiz lxsession);
 
     foreach (@window_managers) {
 	my @pids = fuzzy_pidofs(qr/\b$_\b/) or next;
