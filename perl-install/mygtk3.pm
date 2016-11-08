@@ -622,9 +622,9 @@ sub _gtk__WebKit_WebView {
 
     # disable contextual menu:
     if (delete $opts->{no_popup_menu}) {
-        $w->signal_connect('populate-popup' => sub {
+        $w->signal_connect('context-menu' => sub {
                                my (undef, $menu) = @_;
-                               $menu->destroy if $menu;
+                               $menu->remove_all if $menu;
                                1;
                            });
     }
