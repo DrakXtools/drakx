@@ -1601,30 +1601,6 @@ sub root_window_size() {
     @$root;
 }
 
-sub rgb2color {
-    my ($r, $g, $b) = @_;
-    my $color = Gtk3::Gdk::Color->new($r, $g, $b);
-    root_window()->get_colormap->rgb_find_color($color);
-    $color;
-}
-
-sub set_root_window_background {
-    my ($r, $g, $b) = @_;
-    my $root = root_window();
-    my $gc = Gtk3::Gdk::GC->new($root);
-    my $color = rgb2color($r, $g, $b);
-    $gc->set_rgb_fg_color($color);
-    set_root_window_background_with_gc($gc);
-}
-
-sub set_root_window_background_with_gc {
-    my ($gc) = @_;
-    my $root = root_window();
-    my ($w, $h) = $root->get_size;
-    $root->set_background($gc->get_values->{foreground});
-    $root->draw_rectangle($gc, 1, 0, 0, $w, $h);
-}
-
 sub _new_alpha_pixbuf {
     my ($pixbuf) = @_;
     my ($height, $width) = ($pixbuf->get_height, $pixbuf->get_width);

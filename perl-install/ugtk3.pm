@@ -17,7 +17,7 @@ use locale;
                      gtktext_insert ) ],
 
     helpers => [ qw(add2notebook add_icon_path escape_text_for_TextView_markup_format gtkcolor gtkcreate_img
-                    gtkcreate_pixbuf gtkfontinfo gtkset_background gtktreeview_children set_back_pixmap
+                    gtkcreate_pixbuf gtkfontinfo gtktreeview_children set_back_pixmap
                     get_default_step_items set_default_step_items
                     string_size string_width) ],
 
@@ -195,7 +195,6 @@ sub gtkradio {
 
 sub gtkroot() { mygtk3::root_window() }
 sub gtkcolor { &mygtk3::rgb2color }
-sub gtkset_background { &mygtk3::set_root_window_background }
 
 sub gtkset_text {
     my ($w, $s) = @_;
