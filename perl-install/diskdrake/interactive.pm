@@ -4,6 +4,8 @@ use diagnostics;
 use strict;
 use utf8;
 
+use lib qw(/usr/lib/libDrakX);  # for perl_checker
+use MDK::Common; # for perl_checker
 use common;
 use fs::type;
 use fs::loopback;

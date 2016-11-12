@@ -1,7 +1,7 @@
 package pkgs;
 
 use strict;
-
+use lib qw(/usr/lib/libDrakX); # for perl_checker
 use common;
 use run_program;
 use detect_devices;
