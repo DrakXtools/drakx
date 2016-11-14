@@ -445,7 +445,11 @@ sub part_possible_actions {
     	        $cond =~ s/$k/qq(($v))/e;
     	    }
     	    $cond =~ s/(^|[^:\$]) \b ([a-z]\w{3,}) \b ($|[\s&\)])/$1 . $2 . '($part)' . $3/exg;
-    	    eval $cond;
+    	    my $res = eval $cond;
+	    if (my $err = $@)  {
+		warn "ERROR: Bogus condition for '$actions{$_}': $err\n";
+	    }
+	    $res;
         } @$actions_names;
     }
 }
