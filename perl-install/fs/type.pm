@@ -9,7 +9,7 @@ use devices;
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(
-   isBlockCheckable isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isOtherAvailableFS isRawLVM isRawRAID isRawLUKS isRAID isLVM isLUKS isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isBIOS_GRUB isESP isFat_or_NTFS isnormal_Fat_or_NTFS isRecovery
+   isBlockCheckable isEmpty isExtended isFormatable isTrueLocalFS isTrueFS isDos isSwap isOtherAvailableFS isRawLVM isRawRAID isRawLUKS isRAID isLVM isLUKS isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isBIOS_GRUB isESP isFat_or_NTFS isnormal_Fat_or_NTFS isRecovery
    maybeFormatted set_isFormatted defaultFS
 );
 
@@ -326,6 +326,12 @@ sub cannotBeMountable {
     my ($part) = @_;
     isRawRAID($part) || isRawLUKS($part) || isRawLVM($part) || isBIOS_GRUB($part);
 }
+# is not a special sg that cannot be mounted/formatted (parts of RAID/LVM, BIOS_GRUB):
+sub isFormatable {
+    my ($part) = @_;
+    !cannotBeMountable($part);
+}
+
 sub isNonMountable { 
     my ($part) = @_;
     cannotBeMountable($part) || $part->{fs_type} eq 'ntfs' && !$part->{isFormatted} && $part->{notFormatted};
