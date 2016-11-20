@@ -240,6 +240,7 @@ sub special_shortcuts {
     my (undef, $event) = @_;
     my $d = ${{ Gtk3::Gdk::KEY_F2 => 'screenshot', Gtk3::Gdk::KEY_Home => 'restart' }}{$event->keyval};
     if ($d eq 'screenshot') {
+	# FIXME: should handle the fact it doesn't work when chrooted by urpmi during transaction:
 	install::any::take_screenshot($::o);
     } elsif ($d eq 'restart' && member('control-mask', @{$event->state}) && member('mod1-mask', @{$event->state})) {
 	log::l("restarting install");
