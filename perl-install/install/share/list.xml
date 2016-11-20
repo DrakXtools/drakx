@@ -13,7 +13,7 @@
   xset
   xkbcomp setxkbmap
 
-  fb2png
+  scrot
   perl
   monitor-edid
   <if ARCH="i.86|x86_64">
@@ -66,6 +66,13 @@
   <!-- needed by WebKit-4.0.typelib -->
   webkit2gtk-4.0/WebKitNetworkProcess
   webkit2gtk-4.0/WebKitWebProcess
+</from>
+
+<from dir="/usr/LIB/imlib2/loaders"> <!-- for scrot/giblib -->
+  argb.so
+  jpeg.so
+  png.so
+  zlib.so
 </from>
 
 <!-- needed by Gtk3 introspection -->

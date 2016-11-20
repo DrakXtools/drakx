@@ -1545,7 +1545,7 @@ sub take_screenshot {
     }
     my $nb = 1;
     $nb++ while -e "$dir/$nb.png";
-    run_program::run('fb2png', '-p', "$dir/$nb.png");
+    run_program::run('scrot', "$dir/$nb.png");
 
     # help doesn't remember warning has been shown (one shot processes):
     $warned ||= -e "$dir/2.png";
