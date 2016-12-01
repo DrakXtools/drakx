@@ -795,7 +795,7 @@ sub set_autologin {
     #- Configure LXDM
     my $lxdm_conffile = "$::prefix/etc/lxdm/lxdm.conf";
     eval { update_gnomekderc($lxdm_conffile, 'base' => (
-	if_($autologin->{user}, 'autologin' => '@' . $autologin->{user})
+	'autologin' => $autologin->{user} ? '@' . $autologin->{user} : ''
     ));
     if ($autologin->{user} && $autologin->{desktop} && !member($autologin->{desktop}, qw(default failsafe))) {
 	my $xsession_file = find {
