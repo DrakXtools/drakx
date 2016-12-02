@@ -67,8 +67,10 @@ sub set_cdrom_symlink {
 }
 
 sub check_hds_boot_and_root {
-    my ($all_hds, $fstab) = @_;
+    my ($all_hds, $fstab, $o_match_all_hardware) = @_;
     fs::get::root_($fstab) or die "Oops, no root partition";
+
+    return if $o_match_all_hardware;
 
     if (is_uefi()) {
 	if (!fs::get::has_mntpoint("/boot/EFI", $all_hds)) {
