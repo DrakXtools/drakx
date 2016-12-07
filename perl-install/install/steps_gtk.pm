@@ -4,6 +4,7 @@ use diagnostics;
 use strict;
 use feature 'state';
 use vars qw(@ISA);
+use Math::Int64 ':native_if_available', 'int64';
 
 @ISA = qw(install::steps_interactive interactive::gtk);
 
@@ -659,7 +660,7 @@ sub installPackages {
 	if ($type eq 'user' && $subtype eq 'install') {
 	    #- $amount and $total are used to return number of package and total size.
 	    $nb = $amount;
-	    $total_size = $total; $current_total_size = 0;
+	    $total_size = $total; $current_total_size = int64(0);
 	    $o->{install_start_time} = 0;
 	    mygtk3::gtkadd($pkg_log_widget, text => P("%d package", "%d packages", $nb, $nb));
 	    $w->flush;
