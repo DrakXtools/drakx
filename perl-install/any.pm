@@ -677,7 +677,9 @@ sub setupBootloader__grub2 {
 		1;
 	    },
 	 },
-	 { text => N("Probe Foreign OS"), val => \$os_prober, type => 'bool' },
+	 { text => N("Probe Foreign OS"), val => \$os_prober, type => 'bool',
+	   help => N("If grub2 takes too long to install, you can use this option to skip detecting other OSes and make it fast"),
+	 },
 	]);
     if ($res) {
 	$b->{entries} = $b2->{entries};
