@@ -688,9 +688,9 @@ sub installPackages {
 
 	    my $dtime = time() - $o->{install_start_time};
 	    my $ratio = 
-	      $total_size == 0 ? 0 :
+	      $total_size == 0 ? int64(0) :
 		install::pkgs::size2time($current_total_size + $amount, $total_size) / install::pkgs::size2time($total_size, $total_size);
-	    $ratio >= 1 and $ratio = 1;
+	    $ratio >= 1 and $ratio = int64(1);
 	    my $total_time = $ratio ? $dtime / $ratio : time();
 
 	    gtkval_modify(\$progress_total, $ratio);
