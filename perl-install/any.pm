@@ -663,6 +663,7 @@ sub setupBootloader__grub2 {
     my $res = $in->ask_from_(
 	{
 	    title => N("Bootloader Configuration"),
+	    interactive_help_id => 'setupBootloaderAddEntry',
 	},
 	[
 	 { label => N("Default"), val => \$default,
