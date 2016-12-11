@@ -3,6 +3,7 @@ package install::steps_interactive;
 
 use strict;
 use feature 'state';
+use Math::Int64 ':native_if_available', 'int64';
 
 our @ISA = qw(install::steps);
 
@@ -629,7 +630,7 @@ sub reallyChooseGroups {
 #------------------------------------------------------------------------------
 sub installPackages {
     my ($o) = @_;
-    my ($current, $total) = (0, 0);
+    my ($current, $total) = (int64(0), 0);
 
     my ($_w, $wait_message) = $o->wait_message_with_progress_bar(N("Installing"));
     $wait_message->(N("Preparing installation"), 0, 100); #- beware, interactive::curses::wait_message_with_progress_bar need to create the Dialog::Progress here because in installCallback we are chrooted

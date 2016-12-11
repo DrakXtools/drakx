@@ -2,6 +2,7 @@ package install::pkgs;
 
 use strict;
 use feature 'state';
+use Math::Int64 ':native_if_available', 'int64';
 
 BEGIN {
     # needed before "use URPM"
@@ -711,6 +712,7 @@ sub selectPackagesAlreadyInstalled {
     my %sizes;
     $packages->{rpmdb}->traverse(sub {
 	my ($p) = @_;      
+	$sizes{$p->name} ||= int64(0);
 	$sizes{$p->name} += $p->size;
     });
     $packages->{sizes} = \%sizes;
