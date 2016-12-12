@@ -630,6 +630,7 @@ sub installPackages {
     # TODO: kill pid after finished installing packages rather than leaving zombie process
     #   $w->{window}->show_all;
 
+    my $progress_total = int64(0);
     $box->pack_end(gtkshow(gtknew('VBox', border_width => 7, spacing => 3, children_loose => [
 	gtknew('ScrolledWindow', child => $pkg_log_widget, 
 	       hide_ref => \$show_advertising, height => 250, to_bottom => 1),
@@ -638,7 +639,7 @@ sub installPackages {
 	    N("Time remaining:"), 
 	    gtknew('Label', text_ref => \ (my $msg_time_remaining = N("(estimating...)"))),
 	]),
-	gtknew('VBox', children_centered => [ gtknew('ProgressBar', fraction_ref => \ (my $progress_total), height => 25) ]),
+	gtknew('VBox', children_centered => [ gtknew('ProgressBar', fraction_ref => \$progress_total, height => 25) ]),
 	gtknew('HSeparator'),
 	gtknew('HButtonBox', spacing => 0, layout => 'edge', children_loose => [
             if_($release_notes, $rel_notes),
