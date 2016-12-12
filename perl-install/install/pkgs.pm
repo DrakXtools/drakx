@@ -46,7 +46,7 @@ sub invCorrectSize { ($_[0] - $C) / $B }
 
 sub selectedSize {
     my ($packages) = @_;
-    my $size = 0;
+    my $size = int64(0);
     my %skip;
     #- take care of packages selected...
     foreach (@{$packages->{depslist}}) {
@@ -768,11 +768,11 @@ sub install {
 
     #- first stage to extract some important information
     #- about the selected packages.
-    my ($total, $nb);
+    my ($total, $nb) = (int64(0), 0);
     foreach my $pkg (@$toInstall) {
 	$packages{$pkg->id} = $pkg;
 	$nb++;
-	$total += to_int($pkg->size); #- do not correct for upgrade!
+	$total += $pkg->size; #- do not correct for upgrade!
     }
 
     log::l("install::pkgs::install $::prefix");
