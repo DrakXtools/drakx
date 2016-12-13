@@ -39,10 +39,11 @@ our %compssListDesc = (
 
 #- TODO BEFORE TODO
 #- size and correction size functions for packages.
-my $B = 1.20873;
-my $C = 4.98663; #- does not take hdlist's into account as getAvailableSpace will do it.
-sub correctSize { $B * $_[0] + $C }
-sub invCorrectSize { ($_[0] - $C) / $B }
+my $B = 120873;
+my $C = 498663; #- does not take hdlist's into account as getAvailableSpace will do it.
+my $D = 100000;
+sub correctSize { ($B * $_[0] + $C) / $D }
+sub invCorrectSize { ($_[0] * $D - $C) / $B }
 
 sub selectedSize {
     my ($packages) = @_;
@@ -70,14 +71,14 @@ sub selectedSize {
 
 sub size2time {
     my ($x, $max) = @_;
-    my $A = 7e-07;
+    my $A = 7e9;
     my $limit = min($max * 3 / 4, 9e8);
     if ($x < $limit) {
-	$A * $x;
+	$A * int64_to_number($x);
     } else { 
 	$x -= $limit;
-	my $B = 6e-16;
-	my $C = 15e-07;
+	my $B = 6;
+	my $C = 15e9;
 	$B * $x ** 2 + $C * $x + $A * $limit;
     }
 }
