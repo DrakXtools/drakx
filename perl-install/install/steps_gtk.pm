@@ -630,7 +630,7 @@ sub installPackages {
     # TODO: kill pid after finished installing packages rather than leaving zombie process
     #   $w->{window}->show_all;
 
-    my $progress_total = int64(0);
+    my $progress_total = 0;
     $box->pack_end(gtkshow(gtknew('VBox', border_width => 7, spacing => 3, children_loose => [
 	gtknew('ScrolledWindow', child => $pkg_log_widget, 
 	       hide_ref => \$show_advertising, height => 250, to_bottom => 1),
@@ -689,9 +689,9 @@ sub installPackages {
 
 	    my $dtime = time() - $o->{install_start_time};
 	    my $ratio = 
-	      $total_size == 0 ? int64(0) :
+	      $total_size == 0 ? 0 :
 		install::pkgs::size2time($current_total_size + $amount, $total_size) / install::pkgs::size2time($total_size, $total_size);
-	    $ratio >= 1 and $ratio = int64(1);
+	    $ratio >= 1 and $ratio = 1;
 	    my $total_time = $ratio ? $dtime / $ratio : time();
 
 	    gtkval_modify(\$progress_total, $ratio);
