@@ -74,7 +74,7 @@ sub size2time {
     my $A = 7e9;
     my $limit = min($max * 3 / 4, 9e8);
     if ($x < $limit) {
-	$A * int64_to_number($x);
+	$A * $x;
     } else { 
 	$x -= $limit;
 	my $B = 6;
