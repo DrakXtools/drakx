@@ -69,8 +69,12 @@ sub selectedSize {
     $size;
 }
 
+sub int64_to_float { sprintf("%.2f", $_[0])*1 }
+
 sub size2time {
     my ($x, $max) = @_;
+    $x = int64_to_float($x);
+    $max = int64_to_float($max);
     my $A = 7e9;
     my $limit = min($max * 3 / 4, 9e8);
     if ($x < $limit) {
