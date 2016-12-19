@@ -497,7 +497,9 @@ $tree->signal_connect(realize => sub { $tree->get_selection->select_path(Gtk3::T
     $SIG{CHLD} = undef;
     #local $SIG{CHLD} = sub {};
 
-    if (my @packages = difference2([ pkgs::detect_hardware_packages($in->do_pkgs) ], [ qw(dmraid mdadm) ])) {
+    # do no try to install too generic hw packages:
+    my @blacklist = [ qw(dmraid mdadm) ];
+    if (my @packages = difference2([ pkgs::detect_hardware_packages($in->do_pkgs) ], @blacklist)) {
         @packages = difference2(\@packages, [ $in->do_pkgs->are_installed(@packages) ]);
         # we use uniq() because on biarch machines, we got packages twice:
         my @packages2install = uniq($in->do_pkgs->are_available(@packages));
