@@ -1232,8 +1232,8 @@ sub suggest {
 	       {
 		root => $root,
 		if_($options{vga_fb}, vga => $options{vga_fb}), #- using framebuffer
-		if_($options{vga_fb} && $options{splash}, append => "splash noiswmd"),
-		if_($options{quiet}, append => "splash quiet noiswmd"),
+		if_($options{vga_fb} && $options{splash}, append => "splash noiswmd audit=0"),
+		if_($options{quiet}, append => "splash quiet noiswmd audit=0"),
 	       });
 
 	if ($options{vga_fb} && $e->{label} eq 'linux') {
@@ -1242,7 +1242,7 @@ sub suggest {
     }
 
     add_kernel($bootloader, $kernels[0],
-	       { root => $root, label => 'failsafe', append => 'failsafe noiswmd' })
+	       { root => $root, label => 'failsafe', append => 'failsafe noiswmd audit=0' })
       if @kernels;
 
 	#- search for dos (or windows) boot partition. Do not look in extended partitions!
