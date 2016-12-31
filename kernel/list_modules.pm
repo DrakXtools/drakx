@@ -34,8 +34,8 @@ our %l = (
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
       # add all phys
       qw(amd aquantia at803x bcm7xxx bcm87xx broadcom cicada davicom dp83848 dp83867 et1011c fixed_phy icplus lxt marvell),
-      qw(mdio-bcm-unimac mdio-bitbang mdio-cavium mdio-gpio mdio-octeon mdio-thunder micrel microchip),
-      qw(national qsemi r8152 r815x realtek smsc spi_ks8995 ste10Xp teranetics vitesse),
+      qw(mdio-bcm-unimac mdio-bitbang mdio-cavium mdio-gpio mdio-octeon mdio-thunder micrel microchip mscc),
+      qw(national qsemi r8152 r815x realtek smsc spi_ks8995 ste10Xp teranetics vitesse xilinx_gmii2rgmii),
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
@@ -90,7 +90,7 @@ our %l = (
     ],
     wan => [ qw(c101 cosa cyclomx cycx_drv dlci dscc4 farsync hdlc hostess_sv11 lapbether lmc n2 pc300 pci200syn sbni sdla sdladrv sealevel syncppp wanxl z85230) ],
     usb_dsl => [ qw(cxacru speedtch ueagle-atm usbatm xusbatm) ],
-    virtual => [ qw(hv_netvsc vboxdrv virtio_net xen-netfront) ],
+    virtual => [ qw(ena hv_netvsc vboxdrv virtio_net vmxnet3 xen-netfront) ],
   },
 
   ################################################################################
@@ -179,7 +179,8 @@ our %l = (
 	    hid-roccat-isku hid-roccat-kone hid-roccat-koneplus hid-roccat-konepure hid-roccat-kovaplus hid-roccat-lua
 	    hid-roccat-pyra hid-roccat-ryos hid-roccat-savu hid-saitek hid-samsung hid-sensor-hub hid-sjoy hid-sony
 	    hid-speedlink hid-steelseries hid-sunplus hid-tivo hid-thingm hid-tmff hid-topseed hid-twinhan
-	    hid-uclogic hid-waltop hid-wiimote hid-xinmo hid-zpff hid-zydacron wacom) ],
+	    hid-uclogic hid-waltop hid-wiimote hid-xinmo hid-zpff hid-zydacron wacom
+	    intel-ish-ipc intel-ishtp-hid intel-ishtp) ],
 
    #serial_cs
    #ftl_cs 3c575_cb apa1480_cb epic_cb serial_cb tulip_cb iflash2+_mtd iflash2_mtd
