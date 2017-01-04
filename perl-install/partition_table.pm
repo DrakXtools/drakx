@@ -360,13 +360,15 @@ sub will_tell_kernel {
 
 	push @{$hd->{'will_tell_kernel' . ($o_delay || '')} ||= []}, [ $action, @para ];
     }
-    if (!$o_delay) {
-	foreach my $delay ('delay_del', 'delay_add') {
-	    my $l = delete $hd->{"will_tell_kernel$delay"} or next;
-	    push @{$hd->{will_tell_kernel} ||= []}, @$l;
-	}
-    }
     $hd->{isDirty} = 1;
+}
+
+sub will_tell_kernel_delayed {
+    my ($hd) = @_;
+    foreach my $delay ('delay_del', 'delay_add') {
+	my $l = delete $hd->{"will_tell_kernel$delay"} or next;
+	push @{$hd->{will_tell_kernel} ||= []}, @$l;
+    }
 }
 
 sub tell_kernel {
@@ -493,6 +495,8 @@ sub remove {
 	assign_device_numbers($hd);
 
 	will_tell_kernel($hd, del => $part);
+	#- schedule renumbering after deleting the partition
+	will_tell_kernel_delayed($hd);
 	return 1;
     }
     0;
@@ -584,6 +588,8 @@ sub add {
     }
   success:
     assign_device_numbers($hd);
+    #- schedule renumbering before adding the partition
+    will_tell_kernel_delayed($hd);
     will_tell_kernel($hd, add => $part);
 }
 
