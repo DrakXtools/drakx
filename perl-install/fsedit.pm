@@ -51,6 +51,7 @@ sub init_mntpnt_suggestions {
 
     my $mntpoint;
     # only suggests /boot/EFI if there's not already one:
+    require fs::any;
     if (is_uefi()) {
 	if (!any { isESP($_) } @$fstab) {
 	    $mntpoint = { mntpoint => "/boot/EFI", size => MB(100), pt_type => 0xef, ratio => 1, maxsize => MB(300) };
