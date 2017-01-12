@@ -608,8 +608,9 @@ sub check_for_xserver() {
     if (!defined $::xtest) {
 	$::xtest = 0;         
 	eval { 
-	    require xf86misc::main; 
-	    $::xtest = xf86misc::main::Xtest($ENV{DISPLAY});
+	    require Gtk3;
+	    Gtk3->import;
+	    $::xtest = Gtk3::init_check();
 	} if $ENV{DISPLAY};
     }
     return $::xtest;
