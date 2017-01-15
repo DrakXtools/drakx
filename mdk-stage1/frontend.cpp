@@ -33,8 +33,8 @@
 #include "frontend.h"
 #include "utils.h"
 
-static int size_progress;
-static int actually_drawn;
+int size_progress;
+int actually_drawn;
 
 /* really ugly for now... */
 #include "stdio-frontend.cpp"

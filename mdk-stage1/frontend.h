@@ -66,5 +66,7 @@ void vinfo_message(const char *msg, va_list ap);
 void vwait_message(const char *msg, va_list ap);
 
 extern const char * binary_name;
+extern int size_progress;
+extern int actually_drawn;
 
 #endif
