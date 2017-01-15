@@ -821,9 +821,9 @@ sub user_crypted_passwd {
 	} elsif ($authentication->{md5}) {
 	    $salt = '$1$' . salt(8);
 	} elsif ($authentication->{sha256}) {
-	    $salt = '$5$' . salt(32);
+	    $salt = '$5$' . salt(44);
 	} elsif ($authentication->{sha512}) {
-	    $salt = '$6$' . salt(64);
+	    $salt = '$6$' . salt(88);
 	} else {
 	    $salt = salt(2);
 	}
