@@ -18,7 +18,7 @@ install_only:
 	make -C advertising install DESTDIR=$(DESTDIR)
 
 fetchsubmodules:
-	git submodule update --recursive --checkout
+	git submodule update --recursive --checkout --init
 
 clean:
 #	force taking new rpms from repository
