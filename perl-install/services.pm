@@ -340,7 +340,7 @@ sub running_systemd() {
 }
 
 sub has_systemd() {
-    run_program::rooted($::prefix, '/bin/rpm', '-q', '--qf', '', 'systemd');
+    run_program::rooted($::prefix, '/bin/rpm', '-q', '--quiet', 'systemd');
 }
 
 sub xinetd_services() {
