@@ -97,7 +97,7 @@ char * get_net_intf_description(char * intf_name)
 	struct ifreq ifr;
 	struct ethtool_drvinfo drvinfo;
 	int s = socket(AF_INET, SOCK_DGRAM, 0);
-	char *res;
+	const char *res;
 
 	memset(&ifr, 0, sizeof(ifr));
 	strncpy(ifr.ifr_name, intf_name, IFNAMSIZ);
