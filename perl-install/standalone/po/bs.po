@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone-bs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:28+0100\n"
+"POT-Creation-Date: 2017-01-15 15:12+0100\n"
 "PO-Revision-Date: 2006-09-09 19:47+0200\n"
 "Last-Translator: Vedran Ljubovic <vljubovic@smartnet.ba>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
 
-#: display_help:53 display_help:58 drakbug:173 drakperm:134
+#: display_help:50 display_help:55 drakbug:173 drakperm:134
 #, c-format
 msgid "Help"
 msgstr "Pomoć"
 
-#: display_help:66 drakbug:178 drakfont:507
+#: display_help:63 drakbug:178 drakfont:507
 #, c-format
 msgid "Close"
 msgstr "Zatvori"
@@ -34,143 +34,65 @@ msgstr "Zatvori"
 msgid "Authentication"
 msgstr "Baza korisnika"
 
-#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213
-#: drakfont:226 drakfont:264 finish-install:133 logdrake:177 logdrake:453
-#: logdrake:458 scannerdrake:56 scannerdrake:98 scannerdrake:139
-#: scannerdrake:197 scannerdrake:256 scannerdrake:726 scannerdrake:737
-#: scannerdrake:876 scannerdrake:887 scannerdrake:957
+#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213 drakfont:226
+#: drakfont:264 finish-install:133 logdrake:177 logdrake:453 logdrake:458
+#: scannerdrake:56 scannerdrake:98 scannerdrake:139 scannerdrake:197
+#: scannerdrake:256 scannerdrake:726 scannerdrake:737 scannerdrake:876
+#: scannerdrake:887 scannerdrake:957
 #, c-format
 msgid "Error"
 msgstr "Greška"
 
-#: drakboot:54
-#, c-format
-msgid "No bootloader found, creating a new configuration"
-msgstr "Nije pronađen bootloader, pravim novu konfiguraciju"
-
-#: drakboot:89 harddrake2:191 logdrake:77
+#: drakautologin:54 harddrake2:195 logdrake:77
 #, c-format
 msgid "_File"
 msgstr "_Datoteka"
 
-#: drakboot:90 harddrake2:192 logdrake:78 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:78 logdrake:79
 #, c-format
 msgid "_Quit"
 msgstr "_Izlaz"
 
-#: drakboot:90 harddrake2:192 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:79
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
-#: drakboot:138
-#, c-format
-msgid "Text only"
-msgstr "Samo tekst"
-
-#: drakboot:139
-#, c-format
-msgid "Verbose"
-msgstr "Opširno"
-
-#: drakboot:140
-#, c-format
-msgid "Silent"
-msgstr "Bez ispisa"
-
-#: drakboot:146 drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381
-#: drakups:27 harddrake2:504 localedrake:45 scannerdrake:48 scannerdrake:51
-#: scannerdrake:294 scannerdrake:299 scannerdrake:951
-#, c-format
-msgid "Warning"
-msgstr "Upozorenje"
-
-#: drakboot:147
-#, c-format
-msgid ""
-"Your system bootloader is not in framebuffer mode. To activate graphical "
-"boot, select a graphic video mode from the bootloader configuration tool."
-msgstr ""
-"Vaš sistemski bootloader nije u framebuffer modu. Da aktivirate grafički "
-"boot, izaberite grafički video režim iz alata za podešavanje bootloadera."
-
-#: drakboot:148
-#, c-format
-msgid "Do you want to configure it now?"
-msgstr "Želite li ga sada podesiti ?"
-
-#: drakboot:157
-#, c-format
-msgid "Install themes"
-msgstr "Instaliraj teme"
-
-#: drakboot:159
-#, c-format
-msgid "Graphical boot theme selection"
-msgstr "Izbor grafičke boot teme"
-
-#: drakboot:162
-#, c-format
-msgid "Graphical boot mode:"
-msgstr "Režim grafičkog pokretanja:"
-
-#: drakboot:164
-#, c-format
-msgid "Theme"
-msgstr "Tema"
-
-#: drakboot:198
+#: drakautologin:100
 #, c-format
 msgid "Default user"
 msgstr "Korisnik"
 
-#: drakboot:199
+#: drakautologin:101
 #, c-format
 msgid "Default desktop"
 msgstr "Desktop"
 
-#: drakboot:202
+#: drakautologin:104
 #, c-format
 msgid "No, I do not want autologin"
 msgstr "Ne, ne želim da se automatski prijavim"
 
-#: drakboot:203
+#: drakautologin:105
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr ""
 "Da, želim da se automatski prijavim sa ovim vrijednostima (korisnik, desktop)"
 
-#: drakboot:210
+#: drakautologin:112
 #, c-format
 msgid "System mode"
 msgstr "Sistemske opcije"
 
-#: drakboot:213
+#: drakautologin:115
 #, c-format
 msgid "Launch the graphical environment when your system starts"
 msgstr "Pokreni X-Window sistem na startu"
 
-#: drakboot:268
+#: drakboot:41
 #, c-format
-msgid "Boot Style Configuration"
-msgstr "Konfiguracija stila boota"
-
-#: drakboot:270 drakboot:274
-#, c-format
-msgid "Video mode"
-msgstr "Video režim"
-
-#: drakboot:271
-#, c-format
-msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries "
-"selected below.\n"
-"Be sure your video card supports the mode you choose."
-msgstr ""
-"Molim izaberite video režim, on će biti primjenjen na svaku od boot stavki "
-"izabranih ispod.\n"
-"Provjerite da li vaša video kartica podržava taj režim prije nego što "
-"izaberete!"
+msgid "No bootloader found, creating a new configuration"
+msgstr "Nije pronađen bootloader, pravim novu konfiguraciju"
 
 #: drakbug:52 drakbug:140
 #, c-format
@@ -331,6 +253,13 @@ msgstr "Nije instaliran"
 msgid "Package not installed"
 msgstr "Paket nije instaliran"
 
+#: drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381 drakups:27
+#: harddrake2:509 localedrake:45 scannerdrake:48 scannerdrake:51
+#: scannerdrake:294 scannerdrake:299 scannerdrake:951
+#, c-format
+msgid "Warning"
+msgstr "Upozorenje"
+
 #: drakbug:251
 #, c-format
 msgid ""
@@ -452,7 +381,7 @@ msgstr ""
 msgid "Could not get the list of available channels"
 msgstr ""
 
-#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:358
+#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:362
 #: scannerdrake:63 scannerdrake:67 scannerdrake:75 scannerdrake:316
 #: scannerdrake:365 scannerdrake:501 scannerdrake:505 scannerdrake:527
 #: service_harddrake:426
@@ -501,16 +430,21 @@ msgid "SLIM (Simple Display Manager)"
 msgstr "XDM (X Display Manager)"
 
 #: drakedm:45
+#, fuzzy, c-format
+msgid "SDDM (Simple Desktop Display Manager)"
+msgstr "XDM (X Display Manager)"
+
+#: drakedm:46
 #, c-format
 msgid "XDM (X Display Manager)"
 msgstr "XDM (X Display Manager)"
 
-#: drakedm:56
+#: drakedm:57
 #, c-format
 msgid "Choosing a display manager"
 msgstr "Izbor display managera"
 
-#: drakedm:57
+#: drakedm:58
 #, c-format
 msgid ""
 "X11 Display Manager allows you to graphically log\n"
@@ -521,12 +455,12 @@ msgstr ""
 "pokretanje X Window Systema, a podržava i nekoliko različitih X sesija na "
 "vašem lokalnom računaru u isto vrijeme."
 
-#: drakedm:80
+#: drakedm:81
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
 msgstr "Izmjena je primijenjena, želite li sada restartovati servis dm?"
 
-#: drakedm:81
+#: drakedm:82
 #, c-format
 msgid ""
 "You are going to close all running programs and lose your current session. "
@@ -703,7 +637,7 @@ msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:532 harddrake2:531
+#: drakfont:532 harddrake2:536
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr "Vedran Ljubovic <vljubovic@smartnet.ba>\n"
@@ -778,12 +712,12 @@ msgstr "Instalacija"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Da li ste sigurni da želite deinstalirati sljedeće fontove?"
 
-#: drakfont:688 draksec:59 harddrake2:302
+#: drakfont:688 draksec:59 harddrake2:306
 #, c-format
 msgid "Yes"
 msgstr "Da"
 
-#: drakfont:690 draksec:58 harddrake2:303
+#: drakfont:690 draksec:58 harddrake2:307
 #, c-format
 msgid "No"
 msgstr "Ne"
@@ -1334,42 +1268,20 @@ msgstr "Boot"
 msgid "No Sound Card detected!"
 msgstr "Nije izabrana zvučna kartica!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: draksound:51
-#, c-format
+#: draksound:50
+#, fuzzy, c-format
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
-"supported Sound Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Sound Card is correctly plugged in"
 msgstr ""
-"Nije pronađena nijedna zvučna kartica na vašoj mašini. Molim provjerite da "
-"li je ispravno spojena zvučna kartica koja je podržana pod Linuxom.\n"
+"Na vašem računaru nije detektovana TV kartica. Molim provjerite da li je "
+"ispravno priključena Video/TV kartica koja je podržana pod Linuxom.\n"
 "\n"
 "\n"
 "Možete posjetiti našu bazu hardvera na:\n"
 "\n"
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
-
-#: draksound:58
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
-"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
-msgstr ""
-"\n"
-"\n"
-"\n"
-"Napomena: ako imate ISA PnP zvučnu karticu, moraćete koristiti alsaconf ili "
-"sndconfig program.  Samo ukucajte \"alsaconf\" ili \"sndconfig\" na konzoli."
 
 #: drakups:71
 #, c-format
@@ -1415,7 +1327,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "Auto prepoznavanje"
 
-#: drakups:99 harddrake2:358
+#: drakups:99 harddrake2:362
 #, c-format
 msgid "Detection in progress"
 msgstr "Detekcija u toku"
@@ -1500,12 +1412,12 @@ msgid "UPS devices"
 msgstr "UPS uređaji"
 
 #: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:116
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "Name"
 msgstr "Ime"
 
-#: drakups:249 harddrake2:139
+#: drakups:249 harddrake2:143
 #, c-format
 msgid "Driver"
 msgstr "Drajver"
@@ -1580,18 +1492,11 @@ msgstr "Dobrodošli u alate za podešavanje UPSa"
 msgid "No TV Card detected!"
 msgstr "Nije detektovana TV kartica!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: drakxtv:68
-#, c-format
+#: drakxtv:67
+#, fuzzy, c-format
 msgid ""
 "No TV Card has been detected on your machine. Please verify that a Linux-"
-"supported Video/TV Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Video/TV Card is correctly plugged in."
 msgstr ""
 "Na vašem računaru nije detektovana TV kartica. Molim provjerite da li je "
 "ispravno priključena Video/TV kartica koja je podržana pod Linuxom.\n"
@@ -1687,7 +1592,7 @@ msgstr "Alternativni drajveri"
 msgid "the list of alternative drivers for this sound card"
 msgstr "spisak alternativnih drajvera za ovu zvučnu karticu"
 
-#: harddrake2:33 harddrake2:125
+#: harddrake2:33 harddrake2:129
 #, c-format
 msgid "Bus"
 msgstr "Sabirnica"
@@ -1699,7 +1604,7 @@ msgid ""
 msgstr ""
 "ovo je fizička sabirnica na koju je uređaj priključen (npr: PCI, USB, ...)"
 
-#: harddrake2:36 harddrake2:151
+#: harddrake2:36 harddrake2:155
 #, c-format
 msgid "Bus identification"
 msgstr "Identifikacija sabirnice (busa)"
@@ -2021,7 +1926,7 @@ msgstr "Flagovi"
 msgid "CPU flags reported by the kernel"
 msgstr "CPU flagovi koje je prijavio kernel"
 
-#: harddrake2:80 harddrake2:144
+#: harddrake2:80 harddrake2:148
 #, fuzzy, c-format
 msgid "Cores"
 msgstr "Zatvori"
@@ -2190,7 +2095,7 @@ msgstr "Omogućena veličina"
 msgid "Enabled size of the memory bank"
 msgstr "Omogućena veličina memorijske banke"
 
-#: harddrake2:113 harddrake2:122
+#: harddrake2:113 harddrake2:126
 #, c-format
 msgid "Type"
 msgstr "Vrsta"
@@ -2200,12 +2105,12 @@ msgstr "Vrsta"
 msgid "type of the memory device"
 msgstr "vrsta memorijskog uređaja"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed"
 msgstr "Brzina"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed of the memory bank"
 msgstr "Brzina memorijske banke"
@@ -2220,231 +2125,246 @@ msgstr "Veze memorijske banke"
 msgid "Socket designation of the memory bank"
 msgstr "Oznaka podnožja (socketa) memorijske banke"
 
-#: harddrake2:120
+#: harddrake2:118
+#, fuzzy, c-format
+msgid "Location"
+msgstr "Akcija"
+
+#: harddrake2:119
+#, c-format
+msgid "Size"
+msgstr "Veličina"
+
+#: harddrake2:119
+#, fuzzy, c-format
+msgid "Size of the memory device"
+msgstr "vrsta memorijskog uređaja"
+
+#: harddrake2:124
 #, c-format
 msgid "Device file"
 msgstr "Datoteka uređaja"
 
-#: harddrake2:120
+#: harddrake2:124
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 "datoteka uređaja koja se koristi za komunikaciju sa kernelskim drajverom miša"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "Emulated wheel"
 msgstr "Simulirani točkić"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "da li je točkić simuliran ili ne"
 
-#: harddrake2:122
+#: harddrake2:126
 #, c-format
 msgid "the type of the mouse"
 msgstr "vrsta miša"
 
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "the name of the mouse"
 msgstr "naziv miša"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "Number of buttons"
 msgstr "Broj dugmadi"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "the number of buttons the mouse has"
 msgstr "broj dugmadi koje ima miš"
 
-#: harddrake2:125
+#: harddrake2:129
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "vrsta sabirnice na koju je spojen miš"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr "Protokol miša koji koristi X11"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "protokol koji koristi grafički desktop sa mišem"
 
-#: harddrake2:130
+#: harddrake2:134
 #, c-format
 msgid "Identification"
 msgstr "Identifikacija"
 
-#: harddrake2:135 harddrake2:150
+#: harddrake2:139 harddrake2:154
 #, c-format
 msgid "Connection"
 msgstr "Konekcija"
 
-#: harddrake2:145
+#: harddrake2:149
 #, c-format
 msgid "Performances"
 msgstr "Performanse"
 
-#: harddrake2:152
+#: harddrake2:156
 #, c-format
 msgid "Device"
 msgstr "Uređaj"
 
-#: harddrake2:153
+#: harddrake2:157
 #, c-format
 msgid "Partitions"
 msgstr "Particije"
 
-#: harddrake2:158
+#: harddrake2:162
 #, c-format
 msgid "Features"
 msgstr "Osobine"
 
-#: harddrake2:179
+#: harddrake2:183
 #, c-format
 msgid "Autodetect _modems"
 msgstr "Automatski prepoznaj _modeme"
 
-#: harddrake2:180
+#: harddrake2:184
 #, c-format
 msgid "Autodetect parallel _zip drives"
 msgstr "Autodetektuj paralelne _ZIP uređaje"
 
-#: harddrake2:184
+#: harddrake2:188
 #, c-format
 msgid "Hardware Configuration"
 msgstr "Podešavanje hardvera"
 
-#: harddrake2:193
+#: harddrake2:197
 #, c-format
 msgid "_Options"
 msgstr "_Opcije"
 
-#: harddrake2:194 harddrake2:195
+#: harddrake2:198 harddrake2:199
 #, c-format
 msgid "_Help"
 msgstr "_Pomoć"
 
-#: harddrake2:195
+#: harddrake2:199
 #, fuzzy, c-format
 msgid "<control>H"
 msgstr "<control>Q"
 
-#: harddrake2:196
+#: harddrake2:200
 #, c-format
 msgid "_Fields description"
 msgstr "_Opis polja"
 
-#: harddrake2:197
+#: harddrake2:201
 #, c-format
 msgid "_Report Bug"
 msgstr "_Prijavi grešku"
 
-#: harddrake2:198
+#: harddrake2:202
 #, c-format
 msgid "_About..."
 msgstr "_O programu..."
 
-#: harddrake2:242
+#: harddrake2:246
 #, c-format
 msgid "Detected hardware"
 msgstr "Pronađeni hardver"
 
-#: harddrake2:245 scannerdrake:283
+#: harddrake2:249 scannerdrake:283
 #, c-format
 msgid "Information"
 msgstr "Informacije"
 
-#: harddrake2:247
+#: harddrake2:251
 #, c-format
 msgid "Set current driver options"
 msgstr "Podesite opcije trenutnog drajvera"
 
-#: harddrake2:254
+#: harddrake2:257
 #, c-format
 msgid "Run config tool"
 msgstr "Pokreni alat za podešavanje"
 
-#: harddrake2:280
+#: harddrake2:284
 #, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
 "information here."
 msgstr "Kliknite na uređaj u drvetu lijevo da dobijete informacije o njemu."
 
-#: harddrake2:300 notify-x11-free-driver-switch:13
+#: harddrake2:304 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "nepoznat"
 
-#: harddrake2:301
+#: harddrake2:305
 #, c-format
 msgid "Unknown"
 msgstr "Nepoznat"
 
-#: harddrake2:321
+#: harddrake2:325
 #, c-format
 msgid "Misc"
 msgstr "Razno"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "secondary"
 msgstr "sekundarni"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "primary"
 msgstr "primarni"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "burner"
 msgstr "pržilica"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:504
+#: harddrake2:509
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Sljedeći paketi trebaju biti instalirani:\n"
 
-#: harddrake2:521
+#: harddrake2:525
 #, c-format
 msgid "Harddrake"
 msgstr "Harddrake"
 
-#: harddrake2:523
+#: harddrake2:528
 #, c-format
 msgid "Copyright (C) %s by %s"
 msgstr "Copyright (C) %s %s"
 
-#: harddrake2:523 harddrake2:527
+#: harddrake2:528 harddrake2:532
 #, c-format
 msgid "Mageia"
 msgstr ""
 
-#: harddrake2:525
+#: harddrake2:530
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr "Ovo je HardDrake, %s alat za podešavanje hardvera."
 
-#: harddrake2:540
+#: harddrake2:545
 #, c-format
 msgid "Harddrake help"
 msgstr "Harddrake pomoć"
 
-#: harddrake2:541
+#: harddrake2:546
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -2453,12 +2373,12 @@ msgstr ""
 "Opis polja:\n"
 "\n"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid "Select a device!"
 msgstr "Izaberite uređaj !"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2751,8 +2671,7 @@ msgstr "Čarobnjak je uspješno isključio e-mail obavještenja."
 msgid "Save as.."
 msgstr "Sačuvaj kao..."
 
-#: notify-x11-free-driver-switch:18 service_harddrake:468
-#: service_harddrake:481
+#: notify-x11-free-driver-switch:18 service_harddrake:468 service_harddrake:481
 #, c-format
 msgid "Display driver setup"
 msgstr ""
@@ -3419,6 +3338,16 @@ msgstr "Podešavanja"
 msgid "Language & country configuration"
 msgstr "Ručno podešavanje"
 
+#: ../polkit/org.mageia.drakautologin.policy.in.h:1
+#, fuzzy
+msgid "Run Mageia AutoLogin Configuration"
+msgstr "Postavke upozorenja"
+
+#: ../polkit/org.mageia.drakautologin.policy.in.h:2
+#, fuzzy
+msgid "Authentication is required to run Mageia AutoLogin Configuration"
+msgstr "Postavke upozorenja"
+
 #: ../polkit/org.moondrake.drakauth.policy.in.h:1
 #, fuzzy
 msgid "Run DrakX Authentication Configuration"
@@ -3547,56 +3476,23 @@ msgid "Authentication is required to run DrakX Service Configuration"
 msgstr "Podešavanje Mail obavijesti"
 
 #, fuzzy
-#~ msgid "%s Bug Report Tool"
-#~ msgstr "Moondrake alat za prijavu bugova"
-
-#, fuzzy
-#~ msgid "%s Tools Logs"
-#~ msgstr "Dnevnici Moondrake alata"
-
-#, fuzzy
-#~ msgid "Run Moondrake Application Security Configuration"
-#~ msgstr "Automatska konfiguracija koraka"
-
-#, fuzzy
-#~ msgid "Run Moondrake Authentication Configuration"
-#~ msgstr "Automatska konfiguracija koraka"
-
-#, fuzzy
 #~ msgid "Run Moondrake Boot Configuration"
 #~ msgstr "Postavke upozorenja"
 
-#, fuzzy
-#~ msgid "Run Moondrake Date and Time Configuration"
-#~ msgstr "Podešavanje Mail obavijesti"
-
-#, fuzzy
-#~ msgid "Run Moondrake Font Configuration"
-#~ msgstr "Ručno podešavanje"
-
-#, fuzzy
-#~ msgid "Run Moondrake Hardware Configuration"
-#~ msgstr "Podešavanje Mail obavijesti"
-
-#, fuzzy
-#~ msgid "Run Moondrake Login Manager Configuration"
-#~ msgstr "Ručno podešavanje"
-
-#, fuzzy
-#~ msgid "Run Moondrake Scanner Configuration"
-#~ msgstr "Podešavanje Mail obavijesti"
-
-#, fuzzy
-#~ msgid "Run Moondrake Security Permissions Configuration"
-#~ msgstr "Podešavanje Mail obavijesti"
-
-#, fuzzy
-#~ msgid "Run Moondrake Service Configuration"
-#~ msgstr "Podešavanje Mail obavijesti"
-
-#, fuzzy
-#~ msgid "Run Moondrake UPS Configuration"
-#~ msgstr "Podešavanje UPS drajvera"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
+#~ "the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a "
+#~ "console."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Napomena: ako imate ISA PnP zvučnu karticu, moraćete koristiti alsaconf "
+#~ "ili sndconfig program.  Samo ukucajte \"alsaconf\" ili \"sndconfig\" na "
+#~ "konzoli."
 
 #~ msgid ""
 #~ "\n"
@@ -3630,12 +3526,20 @@ msgstr "Podešavanje Mail obavijesti"
 #~ "\n"
 #~ "Upotreba: \n"
 
+#, fuzzy
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Moondrake alat za prijavu bugova"
+
 #~ msgid "%s Control Center"
 #~ msgstr "%s Kontrolni centar"
 
 #, fuzzy
 #~ msgid "%s Help Center"
 #~ msgstr "Moondrake Centar za pomoć"
+
+#, fuzzy
+#~ msgid "%s Tools Logs"
+#~ msgstr "Dnevnici Moondrake alata"
 
 #~ msgid "(default value: %s)"
 #~ msgstr " (default vrijednost: %s)"
@@ -3727,6 +3631,9 @@ msgstr "Podešavanje Mail obavijesti"
 #~ msgid "Basic options"
 #~ msgstr "Osnovne opcije"
 
+#~ msgid "Boot Style Configuration"
+#~ msgstr "Konfiguracija stila boota"
+
 #~ msgid "Bugs"
 #~ msgstr "Bugovi"
 
@@ -3783,6 +3690,9 @@ msgstr "Podešavanje Mail obavijesti"
 #~ "Tema prikaza\n"
 #~ "pod konzolom"
 
+#~ msgid "Do you want to configure it now?"
+#~ msgstr "Želite li ga sada podesiti ?"
+
 #, fuzzy
 #~ msgid "Do you want to remove these packages?"
 #~ msgstr "Želite li pokrenuti odgovarajući konfiguracijski alat ?"
@@ -3833,8 +3743,18 @@ msgstr "Podešavanje Mail obavijesti"
 #~ msgid "Final resolution"
 #~ msgstr "Krajnja rezolucija"
 
+#, fuzzy
+#~ msgid "Finishing install"
+#~ msgstr "Instalacija fontova."
+
 #~ msgid "Gradient type"
 #~ msgstr "Vrsta prelaza boja"
+
+#~ msgid "Graphical boot mode:"
+#~ msgstr "Režim grafičkog pokretanja:"
+
+#~ msgid "Graphical boot theme selection"
+#~ msgstr "Izbor grafičke boot teme"
 
 #~ msgid "Halt bug"
 #~ msgstr "Halt bug"
@@ -3960,6 +3880,9 @@ msgstr "Podešavanje Mail obavijesti"
 #~ msgid "Insert another blank floppy in drive %s (for drivers disk)"
 #~ msgstr "Ubacite još jednu praznu disketu u jedinicu %s (za drajvere)"
 
+#~ msgid "Install themes"
+#~ msgstr "Instaliraj teme"
+
 #~ msgid "Is FPU present"
 #~ msgstr "Da li postoji FPU"
 
@@ -3985,13 +3908,18 @@ msgstr "Podešavanje Mail obavijesti"
 #~ msgid "Network Options"
 #~ msgstr "Mrežne opcije"
 
-#, fuzzy
 #~ msgid ""
 #~ "No Sound Card has been detected on your machine. Please verify that a "
-#~ "Linux-supported Sound Card is correctly plugged in"
+#~ "Linux-supported Sound Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
-#~ "Na vašem računaru nije detektovana TV kartica. Molim provjerite da li je "
-#~ "ispravno priključena Video/TV kartica koja je podržana pod Linuxom.\n"
+#~ "Nije pronađena nijedna zvučna kartica na vašoj mašini. Molim provjerite "
+#~ "da li je ispravno spojena zvučna kartica koja je podržana pod Linuxom.\n"
 #~ "\n"
 #~ "\n"
 #~ "Možete posjetiti našu bazu hardvera na:\n"
@@ -3999,10 +3927,15 @@ msgstr "Podešavanje Mail obavijesti"
 #~ "\n"
 #~ "http://www.mandrivalinux.com/en/hardware.php3"
 
-#, fuzzy
 #~ msgid ""
 #~ "No TV Card has been detected on your machine. Please verify that a Linux-"
-#~ "supported Video/TV Card is correctly plugged in."
+#~ "supported Video/TV Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
 #~ "Na vašem računaru nije detektovana TV kartica. Molim provjerite da li je "
 #~ "ispravno priključena Video/TV kartica koja je podržana pod Linuxom.\n"
@@ -4021,6 +3954,16 @@ msgstr "Podešavanje Mail obavijesti"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "Periodične provjere"
+
+#~ msgid ""
+#~ "Please choose a video mode, it will be applied to each of the boot "
+#~ "entries selected below.\n"
+#~ "Be sure your video card supports the mode you choose."
+#~ msgstr ""
+#~ "Molim izaberite video režim, on će biti primjenjen na svaku od boot "
+#~ "stavki izabranih ispod.\n"
+#~ "Provjerite da li vaša video kartica podržava taj režim prije nego što "
+#~ "izaberete!"
 
 #~ msgid ""
 #~ "Please choose for each step whether it will replay like your install, or "
@@ -4053,6 +3996,46 @@ msgstr "Podešavanje Mail obavijesti"
 #~ msgid "Restart XFS"
 #~ msgstr "Restartuj XFS"
 
+#, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Automatska konfiguracija koraka"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Automatska konfiguracija koraka"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Podešavanje Mail obavijesti"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Ručno podešavanje"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Podešavanje Mail obavijesti"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Ručno podešavanje"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Podešavanje Mail obavijesti"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Podešavanje Mail obavijesti"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Podešavanje Mail obavijesti"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "Podešavanje UPS drajvera"
+
 #~ msgid "Save theme"
 #~ msgstr "Snimi temu"
 
@@ -4067,6 +4050,9 @@ msgstr "Podešavanje Mail obavijesti"
 
 #~ msgid "Select Mandriva Tool:"
 #~ msgstr "Izaberite Mandriva alat:"
+
+#~ msgid "Silent"
+#~ msgstr "Bez ispisa"
 
 #~ msgid "Silent bootsplash"
 #~ msgstr "Startni ekran bez poruka"
@@ -4096,6 +4082,9 @@ msgstr "Podešavanje Mail obavijesti"
 
 #~ msgid "Text color"
 #~ msgstr "Boja teksta"
+
+#~ msgid "Text only"
+#~ msgstr "Samo tekst"
 
 #~ msgid "Text size"
 #~ msgstr "Veličina teksta"
@@ -4142,6 +4131,9 @@ msgstr "Podešavanje Mail obavijesti"
 #~ msgid "The width of the progress bar"
 #~ msgstr "Širina indikatora napretka"
 
+#~ msgid "Theme"
+#~ msgstr "Tema"
+
 #~ msgid "Theme name"
 #~ msgstr "Naziv teme"
 
@@ -4157,8 +4149,14 @@ msgstr "Podešavanje Mail obavijesti"
 #~ msgid "Userdrake"
 #~ msgstr "Userdrake"
 
+#~ msgid "Verbose"
+#~ msgstr "Opširno"
+
 #~ msgid "Verbose bootsplash"
 #~ msgstr "Startni ekran sa porukama"
+
+#~ msgid "Video mode"
+#~ msgstr "Video režim"
 
 #~ msgid "Whether the FPU has an irq vector"
 #~ msgstr "Da li FPU ima IRQ vektor"
@@ -4201,6 +4199,13 @@ msgstr "Podešavanje Mail obavijesti"
 #~ "ovaj računar.\n"
 #~ "\n"
 #~ "Pritisnite \"U redu\" za nastavak."
+
+#~ msgid ""
+#~ "Your system bootloader is not in framebuffer mode. To activate graphical "
+#~ "boot, select a graphic video mode from the bootloader configuration tool."
+#~ msgstr ""
+#~ "Vaš sistemski bootloader nije u framebuffer modu. Da aktivirate grafički "
+#~ "boot, izaberite grafički video režim iz alata za podešavanje bootloadera."
 
 #~ msgid "choose image"
 #~ msgstr "izaberite sliku"

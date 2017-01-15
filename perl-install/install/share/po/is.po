@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:31+0100\n"
+"POT-Creation-Date: 2017-01-15 15:11+0100\n"
 "PO-Revision-Date: 2009-03-30 14:04+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -59,86 +59,81 @@ msgstr ""
 
 #: any.pm:162
 #, c-format
-msgid "CD-ROM"
-msgstr "Geisladrif"
-
-#: any.pm:163
-#, c-format
 msgid "Network (HTTP)"
 msgstr "Net (HTTP)"
 
-#: any.pm:164
+#: any.pm:163
 #, c-format
 msgid "Network (FTP)"
 msgstr "Net (FTP)"
 
-#: any.pm:165
+#: any.pm:164
 #, c-format
 msgid "Network (NFS)"
 msgstr "Net (NFS)"
 
-#: any.pm:224
+#: any.pm:223
 #, c-format
 msgid "URL of the mirror?"
 msgstr "Vefslóð að spegli?"
 
-#: any.pm:230
+#: any.pm:229
 #, c-format
 msgid "URL must start with ftp:// or http://"
 msgstr "Slóð verður að byrja á ftp:// eða http://"
 
-#: any.pm:248
+#: any.pm:247
 #, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr "Hef samband við %s vefinn til að sækja lista yfir fáanlega spegla..."
 
-#: any.pm:253
+#: any.pm:252
 #, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
 "Mistókst að tengjast við %s vefinn til að sækja lista yfir fáanlega spegla"
 
-#: any.pm:263
+#: any.pm:262
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "Veldu spegilvélina þaðan sem á að sækja pakkanna"
 
-#: any.pm:293
+#: any.pm:290
 #, c-format
 msgid "NFS setup"
 msgstr "NFS uppsetning"
 
-#: any.pm:294
+#: any.pm:291
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
 msgstr "Sláðu inn vélarnafn og möppu sem inniheldur NFS miðil"
 
-#: any.pm:298
+#: any.pm:295
 #, c-format
 msgid "Hostname missing"
 msgstr "Vélarnafn vantar"
 
-#: any.pm:299
+#: any.pm:296
 #, c-format
 msgid "Directory must begin with \"/\""
 msgstr "Möppunafn verður að byrja á \"/\""
 
-#: any.pm:303
+#: any.pm:300
 #, c-format
 msgid "Hostname of the NFS mount ?"
 msgstr "Vélarnafn á NFS tengipunkti?"
 
-#: any.pm:304
+#: any.pm:301
 #, c-format
 msgid "Directory"
 msgstr "Mappa"
 
-#: any.pm:334
+#: any.pm:331
 #, c-format
 msgid "Supplementary"
 msgstr "Aukalegt"
 
-#: any.pm:369
+#: any.pm:366
 #, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
@@ -147,79 +142,85 @@ msgstr ""
 "Finn ekki pakkalista-skrá á þessum spegli. Athugaðu hvort staðsetningin sé "
 "rétt."
 
-#: any.pm:394
+#: any.pm:391
 #, c-format
 msgid "Main Release"
 msgstr ""
 
-#: any.pm:396
+#: any.pm:393
 #, c-format
 msgid "Contrib Release"
 msgstr ""
 
-#: any.pm:398
+#: any.pm:395
 #, c-format
 msgid "Non-free Release"
 msgstr ""
 
-#: any.pm:436
+#: any.pm:433
 #, c-format
 msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
 "free software drivers to work."
 msgstr ""
 
-#: any.pm:437
+#: any.pm:434
 #, c-format
 msgid "You should enable \"%s\""
 msgstr ""
 
+#: any.pm:473
+#, c-format
+msgid "\"%s\" contains the various pieces of the systems and its applications"
+msgstr ""
+
+#: any.pm:474
+#, c-format
+msgid "\"%s\" contains non free software.\n"
+msgstr ""
+
+#: any.pm:475
+#, c-format
+msgid ""
+"It also contains firmwares needed for certain devices to operate (eg: some "
+"ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
+msgstr ""
+
 #: any.pm:476
 #, c-format
-msgid "\"%s\" contains the various pieces of the systems and its applications."
+msgid ""
+"\"%s\" contains software that can not be distributed in every country due to "
+"software patents."
 msgstr ""
 
 #: any.pm:477
 #, c-format
 msgid ""
-"\"%s\" contains software that's not officially supported and might not "
-"receive the same level of maintenance."
+"It also contains software from \"%s\" rebuild with additional capabilities."
 msgstr ""
 
-#: any.pm:478
-#, c-format
-msgid "\"%s\" contains non free software.\n"
-msgstr ""
-
-#: any.pm:479
-#, c-format
-msgid ""
-"It also contains firmware needed for certain devices to operate (eg: some "
-"ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
-msgstr ""
-
-#: any.pm:483
+#: any.pm:481
 #, c-format
 msgid "Here you can enable more media if you want."
 msgstr ""
 
-#: any.pm:584
+#: any.pm:595
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Athuga þegar uppsetta pakka..."
 
-#: any.pm:619
+#: any.pm:631
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Leita að pökkum til að uppfæra..."
 
-#: any.pm:643
+#: any.pm:655
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "Fjarlægi pakka áður en uppfærsla hefst..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:870
+#: any.pm:896
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -232,87 +233,87 @@ msgstr ""
 "\n"
 "Viltu í alvöru fjarlægja þessa pakka?\n"
 
-#: any.pm:1085
+#: any.pm:1121
 #, c-format
 msgid "Error reading file %s"
 msgstr "Villa við lestur úr skránni %s"
 
-#: any.pm:1293
+#: any.pm:1329
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Eftirfarandi diskar voru endurnefndir:"
 
-#: any.pm:1295
+#: any.pm:1331
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (áður nefnt %s)"
 
-#: any.pm:1352
+#: any.pm:1388
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1352
+#: any.pm:1388
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1352
+#: any.pm:1388
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1371 steps_interactive.pm:933
+#: any.pm:1407 steps_interactive.pm:951
 #, c-format
 msgid "Network"
 msgstr "Net"
 
-#: any.pm:1375
+#: any.pm:1411
 #, c-format
 msgid "Please choose a media"
 msgstr "Veldu miðil"
 
-#: any.pm:1391
+#: any.pm:1427
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Skráin er þegar til. Skrifa yfir hana?"
 
-#: any.pm:1395
+#: any.pm:1431
 #, c-format
 msgid "Permission denied"
 msgstr "Aðgangi hafnað"
 
-#: any.pm:1443
+#: any.pm:1479
 #, c-format
 msgid "Bad NFS name"
 msgstr "Rangt NFS nafn"
 
-#: any.pm:1464
+#: any.pm:1500
 #, c-format
 msgid "Bad media %s"
 msgstr "Gallaður miðill %s"
 
-#: any.pm:1508
+#: any.pm:1544
 #, c-format
 msgid "Cannot make screenshots before partitioning"
 msgstr "Get ekki tekið skjámyndir fyrr en disksneiðar hafa verið skilgreindar"
 
-#: any.pm:1519
+#: any.pm:1555
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Skjámyndir verða tiltækar eftir uppsetningu í %s"
 
-#: gtk.pm:135
+#: gtk.pm:134
 #, c-format
 msgid "Installation"
 msgstr "Set inn"
 
-#: gtk.pm:139 share/meta-task/compssUsers.pl:55
+#: gtk.pm:138
 #, c-format
 msgid "Configuration"
 msgstr "Stillingar"
 
-#: install2.pm:209
+#: install2.pm:210
 #, c-format
 msgid "You must also format %s"
 msgstr "Þú verður einnig að forsníða %s"
@@ -337,69 +338,69 @@ msgstr "Keyri upp netið"
 msgid "Bringing down the network"
 msgstr "Keyri niður netið"
 
-#: media.pm:404
+#: media.pm:397
 #, c-format
 msgid "Please wait, retrieving file"
 msgstr "Bíðið, sæki skrá"
 
-#: media.pm:712
+#: media.pm:704
 #, c-format
 msgid "unable to add medium"
 msgstr "get ekki bætt við miðli"
 
-#: media.pm:752
+#: media.pm:744
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr "Afrita nokkra pakka á diska til notkunar síðar"
 
-#: media.pm:805
+#: media.pm:797
 #, c-format
 msgid "Copying in progress"
 msgstr "Afritun í gangi"
 
-#: pkgs.pm:32
+#: pkgs.pm:33
 #, c-format
 msgid "must have"
 msgstr "verð að fá"
 
-#: pkgs.pm:33
+#: pkgs.pm:34
 #, c-format
 msgid "important"
 msgstr "áríðandi"
 
-#: pkgs.pm:34
+#: pkgs.pm:35
 #, c-format
 msgid "very nice"
 msgstr "mjög þægilegt"
 
-#: pkgs.pm:35
+#: pkgs.pm:36
 #, c-format
 msgid "nice"
 msgstr "þægilegt"
 
-#: pkgs.pm:36
+#: pkgs.pm:37
 #, c-format
 msgid "maybe"
 msgstr "kannski"
 
-#: pkgs.pm:102
+#: pkgs.pm:108
 #, c-format
 msgid "Getting package information from XML meta-data..."
 msgstr ""
 
-#: pkgs.pm:111
+#: pkgs.pm:117
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
 "Engin XML-info skrá fyrir miðil \"%s\", aðeins takmarkaðar upplýsingar fyrir "
 "pakka %s"
 
-#: pkgs.pm:119
+#: pkgs.pm:125
 #, c-format
 msgid "No description"
 msgstr "Engin lýsing til"
 
-#: pkgs.pm:279
+#: pkgs.pm:287
 #, c-format
 msgid ""
 "Some packages requested by %s cannot be installed:\n"
@@ -408,383 +409,30 @@ msgstr ""
 "Suma pakka sem %s þarfnast, er ekki hægt að setja inn:\n"
 "%s"
 
-#: pkgs.pm:375 pkgs.pm:402
+#: pkgs.pm:383 pkgs.pm:410
 #, c-format
 msgid "An error occurred:"
 msgstr "Villa kom upp:"
 
-#: pkgs.pm:394
+#: pkgs.pm:402
 #, c-format
 msgid "A fatal error occurred: %s."
 msgstr "Banvæn villa kom upp: %s."
 
-#: pkgs.pm:877 pkgs.pm:919
+#: pkgs.pm:885 pkgs.pm:927
 #, c-format
 msgid "Do not ask again"
 msgstr ""
 
-#: pkgs.pm:893
+#: pkgs.pm:901
 #, c-format
 msgid "%d installation transactions failed"
 msgstr "%d Innsetningarfærslur brugðust"
 
-#: pkgs.pm:894
+#: pkgs.pm:902
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "Innsetning pakka tókst ekki:"
-
-#: share/meta-task/compssUsers.pl:17
-#, c-format
-msgid "Workstation"
-msgstr "Vinnustöð"
-
-#: share/meta-task/compssUsers.pl:19
-#, c-format
-msgid "Office Workstation"
-msgstr "Skrifstofu-vinnustöð"
-
-#: share/meta-task/compssUsers.pl:21
-#, c-format
-msgid ""
-"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-"(LibreOffice Calc, Kspread), PDF viewers, etc"
-msgstr ""
-"Skrifstofu forrit: ritvinnsla (LibreOffice Writer, Kword), töflureiknar "
-"(LibreOffice Calc, Kspread) pdf skoðarar, o.s.frv"
-
-#: share/meta-task/compssUsers.pl:27
-#, c-format
-msgid "Game station"
-msgstr "Leikja-(vinnu)stöð"
-
-#: share/meta-task/compssUsers.pl:28
-#, fuzzy, c-format
-msgid "Amusement programs: arcade, boards, strategy, etc."
-msgstr "Leikjaforrit, skotleikir, borðleikir, herkænskuleikir og fleira"
-
-#: share/meta-task/compssUsers.pl:32
-#, c-format
-msgid "Multimedia station"
-msgstr "Margmiðlunar-vinnustöð"
-
-#: share/meta-task/compssUsers.pl:33
-#, c-format
-msgid "Sound and video playing/editing programs"
-msgstr "Spila og breyta hljóðskrám og kvikmyndum"
-
-#: share/meta-task/compssUsers.pl:38
-#, c-format
-msgid "Toys"
-msgstr ""
-
-#: share/meta-task/compssUsers.pl:39
-#, c-format
-msgid "Apps and tools of less useful value, yet entertaining..."
-msgstr ""
-
-#: share/meta-task/compssUsers.pl:43
-#, c-format
-msgid "Internet station"
-msgstr "Internet-vinnustöð"
-
-#: share/meta-task/compssUsers.pl:44
-#, c-format
-msgid ""
-"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
-"Web"
-msgstr ""
-"Tól og tæki til að lesa og senda póst, fréttir (mutt,tin...) og til að "
-"flakka á vefnum"
-
-#: share/meta-task/compssUsers.pl:49
-#, c-format
-msgid "Network Computer (client)"
-msgstr "Netbiðlarar"
-
-#: share/meta-task/compssUsers.pl:50
-#, c-format
-msgid "Clients for different protocols including ssh"
-msgstr "Biðlarar fyrir ýmsar samskiptareglur þ.m.t ssh"
-
-#: share/meta-task/compssUsers.pl:56
-#, c-format
-msgid "Tools to ease the configuration of your computer"
-msgstr "Tæki til að auðvelda uppsetningu tölvunnar"
-
-#: share/meta-task/compssUsers.pl:60
-#, c-format
-msgid "Console Tools"
-msgstr "Skjától"
-
-#: share/meta-task/compssUsers.pl:61
-#, c-format
-msgid "Editors, shells, file tools, terminals"
-msgstr "Ritlar, skeljar, skráatól, skjáhermar"
-
-#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
-#: share/meta-task/compssUsers.pl:203
-#, c-format
-msgid "Development"
-msgstr "Forritun"
-
-#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
-#, c-format
-msgid "C and C++ development libraries, programs and include files"
-msgstr "C og C++ undirforritasöfn, forrit og lýsingaskrár"
-
-#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
-#, c-format
-msgid "Documentation"
-msgstr "Handbækur"
-
-#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
-#, c-format
-msgid "Books and Howto's on Linux and Free Software"
-msgstr "Bækur og leiðbeiningar um Linux og frjálsan hugbúnað"
-
-#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
-#, c-format
-msgid "LSB"
-msgstr "LSB"
-
-#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
-#, c-format
-msgid "Linux Standard Base. Third party applications support"
-msgstr "Linux Standard Base. Stuðningur fyrir forrit þriðja aðila"
-
-#: share/meta-task/compssUsers.pl:87
-#, c-format
-msgid "Web Server"
-msgstr "Vefmiðlari"
-
-#: share/meta-task/compssUsers.pl:88
-#, c-format
-msgid "Apache"
-msgstr "Apache"
-
-#: share/meta-task/compssUsers.pl:92
-#, c-format
-msgid "Groupware"
-msgstr "Hópvinnuforrit"
-
-#: share/meta-task/compssUsers.pl:93
-#, c-format
-msgid "Kolab Server"
-msgstr "Kolab Miðlari"
-
-#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
-#, c-format
-msgid "Firewall/Router"
-msgstr "Eldveggur/beinir"
-
-#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
-#, c-format
-msgid "Internet gateway"
-msgstr "Internet netgátt"
-
-#: share/meta-task/compssUsers.pl:100
-#, c-format
-msgid "Mail/News"
-msgstr "Póstur/Fréttir"
-
-#: share/meta-task/compssUsers.pl:101
-#, c-format
-msgid "Postfix mail server, Inn news server"
-msgstr "Postfix póstþjónusta, Inn fréttaþjónusta"
-
-#: share/meta-task/compssUsers.pl:105
-#, c-format
-msgid "Directory Server"
-msgstr "Upplýsingaveita"
-
-#: share/meta-task/compssUsers.pl:110
-#, c-format
-msgid "FTP Server"
-msgstr "FTP Miðlari"
-
-#: share/meta-task/compssUsers.pl:111
-#, c-format
-msgid "ProFTPd"
-msgstr "ProFTPd"
-
-#: share/meta-task/compssUsers.pl:115
-#, c-format
-msgid "DNS/NIS"
-msgstr "DNS/NIS"
-
-#: share/meta-task/compssUsers.pl:116
-#, c-format
-msgid "Domain Name and Network Information Server"
-msgstr "Nafnaþjónustur og net-upplýsingaveitur"
-
-#: share/meta-task/compssUsers.pl:120
-#, c-format
-msgid "File and Printer Sharing Server"
-msgstr "Skráa og prentmiðlari"
-
-#: share/meta-task/compssUsers.pl:121
-#, c-format
-msgid "NFS Server, Samba server"
-msgstr "NFS miðlari, Samba miðlari"
-
-#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
-#, c-format
-msgid "Database"
-msgstr "Gagnagrunnar"
-
-#: share/meta-task/compssUsers.pl:126
-#, c-format
-msgid "PostgreSQL and MariaDB Database Server"
-msgstr "PostgreSQL og MariaDB gagnagrunns-miðlarar"
-
-#: share/meta-task/compssUsers.pl:131
-#, c-format
-msgid "Web/FTP"
-msgstr "Vefur/FTP"
-
-#: share/meta-task/compssUsers.pl:132
-#, c-format
-msgid "Apache, Pro-ftpd"
-msgstr "Apache, Pro-ftpd"
-
-#: share/meta-task/compssUsers.pl:136
-#, c-format
-msgid "Mail"
-msgstr "Póstur"
-
-#: share/meta-task/compssUsers.pl:137
-#, c-format
-msgid "Postfix mail server"
-msgstr "Postfix póstþjónusta"
-
-#: share/meta-task/compssUsers.pl:142
-#, c-format
-msgid "PostgreSQL or MariaDB database server"
-msgstr "PostgreSQL eða MariaDB gagnagrunns-miðlarar"
-
-#: share/meta-task/compssUsers.pl:150
-#, c-format
-msgid "Network Computer server"
-msgstr "Netþjónustur"
-
-#: share/meta-task/compssUsers.pl:151
-#, c-format
-msgid "NFS server, SMB server, Proxy server, ssh server"
-msgstr "NFS-þjónusta, SMB-þjónusta, Staðgengils-þjónusta, ssh-þjónusta"
-
-#: share/meta-task/compssUsers.pl:159
-#, c-format
-msgid "Graphical Environment"
-msgstr "Myndrænt umhverfi"
-
-#: share/meta-task/compssUsers.pl:163
-#, c-format
-msgid "KDE Workstation"
-msgstr "KDE Vinnustöð"
-
-#: share/meta-task/compssUsers.pl:164
-#, c-format
-msgid ""
-"The K Desktop Environment, the basic graphical environment with a collection "
-"of accompanying tools"
-msgstr "KDE (K Desktop Environment). Gluggastjóri með safni hjálparforrita"
-
-#: share/meta-task/compssUsers.pl:169
-#, c-format
-msgid "GNOME Workstation"
-msgstr "Gnome vinnustöð"
-
-#: share/meta-task/compssUsers.pl:170
-#, c-format
-msgid ""
-"A graphical environment with user-friendly set of applications and desktop "
-"tools"
-msgstr "Gluggastjóri með notendavænum forritum og skjáborðs-tólum"
-
-#: share/meta-task/compssUsers.pl:175
-#, fuzzy, c-format
-msgid "Xfce Workstation"
-msgstr "Skrifstofu-vinnustöð"
-
-#: share/meta-task/compssUsers.pl:176
-#, fuzzy, c-format
-msgid ""
-"A lighter graphical environment with user-friendly set of applications and "
-"desktop tools"
-msgstr "Gluggastjóri með notendavænum forritum og skjáborðs-tólum"
-
-#: share/meta-task/compssUsers.pl:181
-#, c-format
-msgid "LXDE Desktop"
-msgstr "LXDE Skjáborð"
-
-#: share/meta-task/compssUsers.pl:183
-#, c-format
-msgid ""
-"A lightweight & fast graphical environment with user-friendly set of "
-"applications and desktop tools"
-msgstr ""
-"Létt og hratt gluggaumhverfi með notendavænum forritum og skjáborðs-tólum"
-
-#: share/meta-task/compssUsers.pl:188
-#, c-format
-msgid "Other Graphical Desktops"
-msgstr "Aðrir gluggastjórar"
-
-#: share/meta-task/compssUsers.pl:189
-#, fuzzy, c-format
-msgid "Window Maker, Enlightenment, Fvwm, etc."
-msgstr "Window Maker, Enlightenment, Fvwm, o.s.frv"
-
-#: share/meta-task/compssUsers.pl:192
-#, c-format
-msgid "Media Center"
-msgstr ""
-
-#: share/meta-task/compssUsers.pl:193
-#, c-format
-msgid "XBMC, MythTV, etc."
-msgstr ""
-
-#: share/meta-task/compssUsers.pl:218
-#, c-format
-msgid "Utilities"
-msgstr "Tól"
-
-#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
-#, c-format
-msgid "SSH Server"
-msgstr "SSH Miðlari"
-
-#: share/meta-task/compssUsers.pl:225
-#, c-format
-msgid "Webmin"
-msgstr "Webmin"
-
-#: share/meta-task/compssUsers.pl:226
-#, c-format
-msgid "Webmin Remote Configuration Server"
-msgstr "Webmin, stillingar á fjartengdri tölvu um vef"
-
-#: share/meta-task/compssUsers.pl:230
-#, c-format
-msgid "Network Utilities/Monitoring"
-msgstr "Netforrit/Neteftirlit"
-
-#: share/meta-task/compssUsers.pl:231
-#, c-format
-msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-msgstr "Eftirlitstól, vinna með notendur, tcpdump, nmap, ..."
-
-#: share/meta-task/compssUsers.pl:235
-#, fuzzy, c-format
-msgid "DrakX Wizards"
-msgstr "Moondrake Ráðgjafar"
-
-#: share/meta-task/compssUsers.pl:236
-#, c-format
-msgid "Wizards to configure server"
-msgstr "Ráðgjafar til að stilla miðlara"
 
 #: steps.pm:85
 #, c-format
@@ -795,7 +443,7 @@ msgstr ""
 "Óþekkt villa kom upp sem ekki er hægt að meðhöndla.\n"
 "Haltu áfram á eigin ábyrgð."
 
-#: steps.pm:449
+#: steps.pm:451
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -823,12 +471,12 @@ msgstr "%s uppsetning %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> milli skrefa"
 
-#: steps_gtk.pm:158
+#: steps_gtk.pm:163
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg miðlari er seinn að ræsa. Bíddu við..."
 
-#: steps_gtk.pm:223
+#: steps_gtk.pm:228
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -841,236 +489,236 @@ msgstr ""
 "Til þess að gera það, ýttu á F1 þegar þú ræsir af\n"
 "geisladisknum og sláðu síðan inn `text'."
 
-#: steps_gtk.pm:253 steps_gtk.pm:790
+#: steps_gtk.pm:258 steps_gtk.pm:793
 #, c-format
 msgid "Media Selection"
 msgstr "Val á miðlum"
 
-#: steps_gtk.pm:264
-#, c-format
-msgid "Install %s KDE Desktop"
+#: steps_gtk.pm:269
+#, fuzzy, c-format
+msgid "Install %s Plasma Desktop"
 msgstr "Setja inn %s KDE umhverfi"
 
-#: steps_gtk.pm:265
+#: steps_gtk.pm:270
 #, c-format
 msgid "Install %s GNOME Desktop"
 msgstr "Setja inn %s GNOME umhverfi"
 
-#: steps_gtk.pm:266
+#: steps_gtk.pm:271
 #, c-format
 msgid "Custom install"
 msgstr "Sérsniðin uppsetning"
 
-#: steps_gtk.pm:287
-#, c-format
-msgid "KDE Desktop"
-msgstr "KDE Skjáborð"
+#: steps_gtk.pm:292
+#, fuzzy, c-format
+msgid "Plasma Desktop"
+msgstr "Sérsniðið Skjáborð"
 
-#: steps_gtk.pm:288
+#: steps_gtk.pm:293
 #, c-format
 msgid "GNOME Desktop"
 msgstr "GNOME Skjáborð"
 
-#: steps_gtk.pm:289
+#: steps_gtk.pm:294
 #, c-format
 msgid "Custom Desktop"
 msgstr "Sérsniðið Skjáborð"
 
-#: steps_gtk.pm:295
+#: steps_gtk.pm:300
 #, c-format
 msgid "Here's a preview of the '%s' desktop."
 msgstr "Hér er forsýn af '%s' skjáborðinu."
 
-#: steps_gtk.pm:322
+#: steps_gtk.pm:327
 #, c-format
 msgid "Click on images in order to see a bigger preview"
 msgstr "Smelltu á myndir til að sjá stærri forsýn"
 
-#: steps_gtk.pm:338 steps_interactive.pm:595 steps_list.pm:31
+#: steps_gtk.pm:343 steps_interactive.pm:604 steps_list.pm:31
 #, c-format
 msgid "Package Group Selection"
 msgstr "Val á pakkahóp"
 
-#: steps_gtk.pm:361 steps_interactive.pm:612
+#: steps_gtk.pm:366 steps_interactive.pm:621
 #, c-format
 msgid "Individual package selection"
 msgstr "Val á einstökum pökkum"
 
-#: steps_gtk.pm:368
+#: steps_gtk.pm:373
 #, c-format
 msgid "Unselect All"
 msgstr "Afvelja allt"
 
-#: steps_gtk.pm:387 steps_interactive.pm:524
+#: steps_gtk.pm:392 steps_interactive.pm:533
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Heildarstærð: %d / %d MB"
 
-#: steps_gtk.pm:432
+#: steps_gtk.pm:437
 #, c-format
 msgid "Version: "
 msgstr "Útgáfa: "
 
-#: steps_gtk.pm:433
+#: steps_gtk.pm:438
 #, c-format
 msgid "Size: "
 msgstr "Stærð: "
 
-#: steps_gtk.pm:433
+#: steps_gtk.pm:438
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KB\n"
 
-#: steps_gtk.pm:434
+#: steps_gtk.pm:439
 #, c-format
 msgid "Importance: "
 msgstr "Mikilvægi: "
 
-#: steps_gtk.pm:469
+#: steps_gtk.pm:474
 #, c-format
 msgid "You cannot select/unselect this package"
 msgstr "Þú getur ekki valið/af-valið þennan pakka"
 
-#: steps_gtk.pm:473
+#: steps_gtk.pm:478
 #, c-format
 msgid "due to missing %s"
 msgstr "vegna þess að %s vantar"
 
-#: steps_gtk.pm:474
+#: steps_gtk.pm:479
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "vegna þess að %s er ekki uppfyllt"
 
-#: steps_gtk.pm:475
+#: steps_gtk.pm:480
 #, c-format
 msgid "trying to promote %s"
 msgstr "reyni að hækka vægi %s"
 
-#: steps_gtk.pm:476
+#: steps_gtk.pm:481
 #, c-format
 msgid "in order to keep %s"
 msgstr "til þess að halda %s"
 
-#: steps_gtk.pm:481
+#: steps_gtk.pm:486
 #, c-format
 msgid ""
 "You cannot select this package as there is not enough space left to install "
 "it"
 msgstr "Þú getur ekki valið þennan pakka því það er ekki nægilegt pláss"
 
-#: steps_gtk.pm:484
+#: steps_gtk.pm:489
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Eftirfarandi pakkar verða settir inn"
 
-#: steps_gtk.pm:485
+#: steps_gtk.pm:490
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Eftirfarandi pakkar verða fjarlægðir"
 
-#: steps_gtk.pm:511
+#: steps_gtk.pm:516
 #, c-format
 msgid "This is a mandatory package, it cannot be unselected"
 msgstr "Þessi pakki verður að vera uppsettur, þú getur ekki af-valið hann"
 
-#: steps_gtk.pm:513
+#: steps_gtk.pm:518
 #, c-format
 msgid "You cannot unselect this package. It is already installed"
 msgstr "Þú getur ekki af-valið þennan pakka hann er þegar uppsettur"
 
-#: steps_gtk.pm:515
+#: steps_gtk.pm:520
 #, c-format
 msgid "You cannot unselect this package. It must be upgraded"
 msgstr "Þú getur ekki af-valið þennan pakka, það verður að uppfæra hann"
 
-#: steps_gtk.pm:519
+#: steps_gtk.pm:524
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Sýna sjálfvirkt valda pakka"
 
-#: steps_gtk.pm:523
+#: steps_gtk.pm:528
 #, c-format
 msgid "Install"
 msgstr "Setja inn"
 
-#: steps_gtk.pm:526
+#: steps_gtk.pm:531
 #, c-format
 msgid "Load/Save selection"
 msgstr "Sækja/Vista val"
 
-#: steps_gtk.pm:527
+#: steps_gtk.pm:532
 #, c-format
 msgid "Updating package selection"
 msgstr "Uppfæri val á pökkum"
 
-#: steps_gtk.pm:532
+#: steps_gtk.pm:537
 #, c-format
 msgid "Minimal install"
 msgstr "Lágmarks uppsetning"
 
-#: steps_gtk.pm:545
+#: steps_gtk.pm:550
 #, c-format
 msgid "Software Management"
 msgstr "Hugbúnaðarumsýsla"
 
-#: steps_gtk.pm:545 steps_interactive.pm:405
+#: steps_gtk.pm:550 steps_interactive.pm:410
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Veldu pakkana sem þú vilt setja inn"
 
-#: steps_gtk.pm:562 steps_interactive.pm:626 steps_list.pm:33
+#: steps_gtk.pm:567 steps_interactive.pm:635 steps_list.pm:33
 #, c-format
 msgid "Installing"
 msgstr "Set inn"
 
-#: steps_gtk.pm:593
+#: steps_gtk.pm:598
 #, c-format
 msgid "Bored?"
 msgstr ""
 
-#: steps_gtk.pm:593
+#: steps_gtk.pm:598
 #, c-format
 msgid "Boss button"
 msgstr ""
 
-#: steps_gtk.pm:599
+#: steps_gtk.pm:604
 #, c-format
 msgid "No details"
 msgstr "Engar upplýsingar"
 
-#: steps_gtk.pm:633
+#: steps_gtk.pm:639
 #, c-format
 msgid "Time remaining:"
 msgstr "Tími eftir:"
 
-#: steps_gtk.pm:634
+#: steps_gtk.pm:640
 #, c-format
 msgid "(estimating...)"
 msgstr "(áætla...)"
 
-#: steps_gtk.pm:664
+#: steps_gtk.pm:666
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d pakki"
 msgstr[1] "%d pakkar"
 
-#: steps_gtk.pm:720 steps_interactive.pm:794 steps_list.pm:44
+#: steps_gtk.pm:723 steps_interactive.pm:830 steps_list.pm:44
 #, c-format
 msgid "Summary"
 msgstr "Yfirlit"
 
-#: steps_gtk.pm:739
+#: steps_gtk.pm:742
 #, c-format
 msgid "Configure"
 msgstr "Stilla"
 
-#: steps_gtk.pm:756 steps_interactive.pm:790 steps_interactive.pm:946
+#: steps_gtk.pm:759 steps_interactive.pm:826 steps_interactive.pm:964
 #, c-format
 msgid "not configured"
 msgstr "ekki stillt"
 
-#: steps_gtk.pm:799 steps_interactive.pm:303
+#: steps_gtk.pm:802 steps_interactive.pm:308
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -1079,7 +727,7 @@ msgstr ""
 "Eftirfarandi uppsetningar-miðlar hafa fundist.\n"
 "Ef þú vilt sleppa einhverjum af þeim, þá getur þú af-valið þá núna."
 
-#: steps_gtk.pm:815 steps_interactive.pm:309
+#: steps_gtk.pm:818 steps_interactive.pm:314
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard disk drive "
@@ -1092,69 +740,69 @@ msgstr ""
 "Síðan mun uppsetning halda áfram frá disknum og pakkarnir verða til staðar "
 "þegar kerfið er að fullu uppsett."
 
-#: steps_gtk.pm:817 steps_interactive.pm:311
+#: steps_gtk.pm:820 steps_interactive.pm:316
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Afrita alla geisladiska"
 
-#: steps_interactive.pm:40
+#: steps_interactive.pm:41
 #, c-format
 msgid "An error occurred"
 msgstr "Villa kom upp"
 
-#: steps_interactive.pm:105
+#: steps_interactive.pm:106
 #, c-format
 msgid "Please choose your keyboard layout"
 msgstr "Veldu lyklaborðs-uppsetningu"
 
-#: steps_interactive.pm:109
+#: steps_interactive.pm:110
 #, c-format
 msgid "Here is the full list of available keyboards:"
 msgstr "Hér er tæmandi listi af tiltækum lyklaborðum:"
 
-#: steps_interactive.pm:148
+#: steps_interactive.pm:149
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Innsetning/Uppfærsla"
 
-#: steps_interactive.pm:152
+#: steps_interactive.pm:153
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Er þetta innsetning eða uppfærsla?"
 
-#: steps_interactive.pm:154
+#: steps_interactive.pm:155
 #, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "Innsetning"
 
-#: steps_interactive.pm:156
+#: steps_interactive.pm:157
 #, c-format
 msgid "Upgrade %s"
 msgstr "Uppfæra %s"
 
-#: steps_interactive.pm:174
+#: steps_interactive.pm:175
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Dulritunar-lykill fyrir %s"
 
-#: steps_interactive.pm:209
+#: steps_interactive.pm:210
 #, c-format
 msgid "Cancel installation, reboot system"
 msgstr "Hætta við innsetningu, endurræsa kerfi"
 
-#: steps_interactive.pm:210
+#: steps_interactive.pm:211
 #, c-format
 msgid "New Installation"
 msgstr "Ný Uppsetning"
 
-#: steps_interactive.pm:211
+#: steps_interactive.pm:212
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
 msgstr "Uppfæra fyrri uppsetningu (ekki mælt með)"
 
-#: steps_interactive.pm:215
+#: steps_interactive.pm:216
 #, fuzzy, c-format
 msgid ""
 "Installer has detected that your installed %s system could not\n"
@@ -1173,7 +821,17 @@ msgstr ""
 "Aðvörun : þú ættir að afrita öll persónuleg gögn áður en þú velur \"Ný "
 "Uppsetning\"."
 
-#: steps_interactive.pm:342
+#: steps_interactive.pm:257
+#, c-format
+msgid "CD/DVD"
+msgstr ""
+
+#: steps_interactive.pm:257
+#, fuzzy, c-format
+msgid "Configuring CD/DVD"
+msgstr "Uppsetning IDE"
+
+#: steps_interactive.pm:347
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1187,12 +845,12 @@ msgstr ""
 "Ef þú hefur ekki diskinn, ýttu þá að \"Hætta við\" til að sleppa uppsetningu "
 "frá þessum diski."
 
-#: steps_interactive.pm:360
+#: steps_interactive.pm:365 steps_interactive.pm:485
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Leita að tiltækum pökkum..."
 
-#: steps_interactive.pm:368
+#: steps_interactive.pm:373
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade "
@@ -1201,7 +859,7 @@ msgstr ""
 "Það er ekki nóg laust pláss fyrir innsetningu eða uppfærslu á kerfinu þínu "
 "(%dMB > %dMB)"
 
-#: steps_interactive.pm:418
+#: steps_interactive.pm:423
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1210,52 +868,52 @@ msgstr ""
 "Veldu hvort eigi að sækja eða vista pakkaval.\n"
 "Sniðið er það sama og á auto_install skrám."
 
-#: steps_interactive.pm:420
+#: steps_interactive.pm:425
 #, c-format
 msgid "Load"
 msgstr "Sækja"
 
-#: steps_interactive.pm:420
+#: steps_interactive.pm:425
 #, c-format
 msgid "Save"
 msgstr "Vista"
 
-#: steps_interactive.pm:428
+#: steps_interactive.pm:433
 #, c-format
 msgid "Bad file"
 msgstr "Gölluð skrá"
 
-#: steps_interactive.pm:445
-#, c-format
-msgid "KDE"
-msgstr "KDE"
+#: steps_interactive.pm:450
+#, fuzzy, c-format
+msgid "Plasma"
+msgstr "Sérsniðið Skjáborð"
 
-#: steps_interactive.pm:446
+#: steps_interactive.pm:451
 #, c-format
 msgid "GNOME"
 msgstr "GNOME"
 
-#: steps_interactive.pm:449
+#: steps_interactive.pm:454
 #, c-format
 msgid "Desktop Selection"
 msgstr "Val á Skjáborði"
 
-#: steps_interactive.pm:450
+#: steps_interactive.pm:455
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr "Þú getur valið vinnustöðvar-umhverfi (skjáborð)."
 
-#: steps_interactive.pm:538
+#: steps_interactive.pm:547
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Valin stærð er stærri en tiltækt pláss"
 
-#: steps_interactive.pm:562
+#: steps_interactive.pm:571
 #, c-format
 msgid "Type of install"
 msgstr "Tegund uppsetningar"
 
-#: steps_interactive.pm:563
+#: steps_interactive.pm:572
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1264,87 +922,116 @@ msgstr ""
 "Þú hefur ekki valið neina pakkahópa.\n"
 "Veldu lágmarksuppsetningu sem þú vilt:"
 
-#: steps_interactive.pm:568
+#: steps_interactive.pm:577
 #, c-format
 msgid "With X"
 msgstr "Með X"
 
-#: steps_interactive.pm:569
+#: steps_interactive.pm:578
 #, fuzzy, c-format
 msgid "Install suggested packages"
 msgstr "Set inn pakka %s"
 
-#: steps_interactive.pm:570
+#: steps_interactive.pm:579
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Með grunn-handbókum (mælt með!)"
 
-#: steps_interactive.pm:571
+#: steps_interactive.pm:580
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Alger lágmarksuppsetning (ekkert urpmi)"
 
-#: steps_interactive.pm:627
+#: steps_interactive.pm:636
 #, c-format
 msgid "Preparing installation"
 msgstr "Undirbý innsetningu"
 
-#: steps_interactive.pm:635
+#: steps_interactive.pm:644
 #, c-format
 msgid "Installing package %s"
 msgstr "Set inn pakka %s"
 
-#: steps_interactive.pm:659
+#: steps_interactive.pm:668
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Það kom upp villa við að raða pökkum:"
 
-#: steps_interactive.pm:659
+#: steps_interactive.pm:668
 #, c-format
 msgid "Go on anyway?"
 msgstr "Viltu samt halda áfram?"
 
-#: steps_interactive.pm:663
+#: steps_interactive.pm:672
 #, c-format
 msgid "Retry"
 msgstr "Reyna aftur"
 
-#: steps_interactive.pm:664
+#: steps_interactive.pm:673
 #, c-format
 msgid "Skip this package"
 msgstr "Sleppa þessum pakka"
 
-#: steps_interactive.pm:665
+#: steps_interactive.pm:674
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "Sleppa ölum pökkum af miðli \"%s\""
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:675
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Fara til baka í val á miðlum og pökkum"
 
-#: steps_interactive.pm:669
+#: steps_interactive.pm:678
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Það kom upp villa við innsetningu pakka %s."
 
-#: steps_interactive.pm:688
+#: steps_interactive.pm:697
 #, c-format
 msgid "Post-install configuration"
 msgstr "Lokastillingar"
 
-#: steps_interactive.pm:695
+#: steps_interactive.pm:704
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Staðfestu að Uppfærslu-miðill sé í drifi %s"
 
-#: steps_interactive.pm:726
+#: steps_interactive.pm:735 steps_interactive.pm:765
 #, c-format
 msgid "Updates"
 msgstr "Uppfærslur"
 
-#: steps_interactive.pm:727
+#: steps_interactive.pm:736
+#, c-format
+msgid "You now have the opportunity to setup online media."
+msgstr ""
+
+#: steps_interactive.pm:737
+#, c-format
+msgid "This allows to install security updates."
+msgstr ""
+
+#: steps_interactive.pm:738
+#, c-format
+msgid ""
+"To setup those media, you will need to have a working Internet \n"
+"connection.\n"
+"\n"
+"Do you want to setup the update media?"
+msgstr ""
+
+#: steps_interactive.pm:758
+#, fuzzy, c-format
+msgid "Failure when adding medium"
+msgstr "get ekki bætt við miðli"
+
+#: steps_interactive.pm:758
+#, fuzzy, c-format
+msgid "Retry?"
+msgstr "Reyna aftur"
+
+#: steps_interactive.pm:766
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1365,103 +1052,79 @@ msgstr ""
 "Viltu sækja uppfærslurnar?"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:838
+#: steps_interactive.pm:874
 #, c-format
 msgid "%s on %s"
 msgstr "%s á %s"
 
-#: steps_interactive.pm:873 steps_interactive.pm:880 steps_interactive.pm:893
-#: steps_interactive.pm:910 steps_interactive.pm:925
+#: steps_interactive.pm:909 steps_interactive.pm:916 steps_interactive.pm:929
+#: steps_interactive.pm:943
 #, c-format
 msgid "Hardware"
 msgstr "Vélbúnaður"
 
-#: steps_interactive.pm:894 steps_interactive.pm:911
+#: steps_interactive.pm:930
 #, c-format
 msgid "Sound card"
 msgstr "Hljóðkort"
 
-#: steps_interactive.pm:914
-#, c-format
-msgid "Do you have an ISA sound card?"
-msgstr "Er kannski ISA hljóðkort í vélinni?"
-
-#: steps_interactive.pm:916
-#, c-format
-msgid ""
-"Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
-"card"
-msgstr ""
-"Keyrðu \"alsaconf\" eða \"sndconfig\" eftir uppsetningu til að stilla "
-"hljóðkortið þitt"
-
-#: steps_interactive.pm:918
-#, c-format
-msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr ""
-"Ekkert hljóðkort fannst. Reyndu að keyra \"harddrake\" eftir uppsetningu"
-
-#: steps_interactive.pm:926
+#: steps_interactive.pm:944
 #, c-format
 msgid "Graphical interface"
 msgstr "Myndrænt viðmót"
 
-#: steps_interactive.pm:932 steps_interactive.pm:944
+#: steps_interactive.pm:950 steps_interactive.pm:962
 #, c-format
 msgid "Network & Internet"
 msgstr "Staðarnet og Internet"
 
-#: steps_interactive.pm:945
+#: steps_interactive.pm:963
 #, c-format
 msgid "Proxies"
 msgstr "Sel"
 
-#: steps_interactive.pm:946
+#: steps_interactive.pm:964
 #, c-format
 msgid "configured"
 msgstr "stillt"
 
-#: steps_interactive.pm:956
+#: steps_interactive.pm:974
 #, c-format
 msgid "Security Level"
 msgstr "Öryggisþrep"
 
-#: steps_interactive.pm:976
+#: steps_interactive.pm:994
 #, c-format
 msgid "Firewall"
 msgstr "Eldveggur"
 
-#: steps_interactive.pm:980
+#: steps_interactive.pm:998
 #, c-format
 msgid "activated"
 msgstr "virkt"
 
-#: steps_interactive.pm:980
+#: steps_interactive.pm:998
 #, c-format
 msgid "disabled"
 msgstr "óvirkt"
 
-#: steps_interactive.pm:994
+#: steps_interactive.pm:1012
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Þú hefur ekki sett upp X, ertu viss um að þú viljir þetta?"
 
-#: steps_interactive.pm:1023
-#, c-format
-msgid "Preparing bootloader..."
-msgstr "Set upp ræsistjórann..."
-
-#: steps_interactive.pm:1023
+#. -PO: This is NOT the boot loader (just the kernel initrds)!!!!
+#: steps_interactive.pm:1043
 #, fuzzy, c-format
 msgid "Preparing initial startup program..."
 msgstr "Undirbý innsetningu"
 
-#: steps_interactive.pm:1024
+#: steps_interactive.pm:1044
 #, c-format
 msgid "Be patient, this may take a while..."
 msgstr "Verið þolinmóð þetta getur tekið nokkra stund..."
 
-#: steps_interactive.pm:1040
+#: steps_interactive.pm:1060
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1470,17 +1133,17 @@ msgstr ""
 "Í þessu öryggisþrepi er aðgangur að Windows disksneiðum takmarkaður við "
 "kerfisstjóra."
 
-#: steps_interactive.pm:1072
+#: steps_interactive.pm:1092
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Settu tóman diskling í drif %s"
 
-#: steps_interactive.pm:1074
+#: steps_interactive.pm:1094
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Bý til diskling fyrir sjálfvirka uppsetningu..."
 
-#: steps_interactive.pm:1085
+#: steps_interactive.pm:1105
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1491,12 +1154,12 @@ msgstr ""
 "\n"
 "Viltu virkilega hætta núna?"
 
-#: steps_interactive.pm:1095
+#: steps_interactive.pm:1115
 #, c-format
 msgid "Congratulations"
 msgstr "Til hamingju"
 
-#: steps_interactive.pm:1098
+#: steps_interactive.pm:1118
 #, c-format
 msgid "Reboot"
 msgstr "Endurræsa"
@@ -1620,30 +1283,8 @@ msgid ""
 msgstr "Hætta"
 
 #, fuzzy
-#~ msgid "A lightweight fast graphical environment"
-#~ msgstr ""
-#~ "Létt og hratt gluggaumhverfi með notendavænum forritum og skjáborðs-tólum"
-
-#, fuzzy
-#~ msgid "Install recommended packages"
-#~ msgstr "Set inn pakka %s"
-
-#, fuzzy
-#~ msgid "LXQT Desktop"
-#~ msgstr "LXDE Skjáborð"
-
-#~ msgid "Moondrake Wizards"
-#~ msgstr "Moondrake Ráðgjafar"
-
-#, fuzzy
-#~ msgid "Plasma Desktop"
-#~ msgstr "Sérsniðið Skjáborð"
-
-#, fuzzy
-#~ msgid ""
-#~ "The Plasma Desktop, the basic graphical environment with a collection of "
-#~ "accompanying tools"
-#~ msgstr "KDE (K Desktop Environment). Gluggastjóri með safni hjálparforrita"
+#~ msgid "Plasma Workstation"
+#~ msgstr "Vinnustöð"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Full Mandriva Linux vinnustöð, með þjónustu"
@@ -1655,6 +1296,28 @@ msgstr "Hætta"
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "Myndrænt umhverfi"
 
+#~ msgid ""
+#~ "A graphical environment with user-friendly set of applications and "
+#~ "desktop tools"
+#~ msgstr "Gluggastjóri með notendavænum forritum og skjáborðs-tólum"
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr "Gluggastjóri með notendavænum forritum og skjáborðs-tólum"
+
+#~ msgid ""
+#~ "A lightweight & fast graphical environment with user-friendly set of "
+#~ "applications and desktop tools"
+#~ msgstr ""
+#~ "Létt og hratt gluggaumhverfi með notendavænum forritum og skjáborðs-tólum"
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment"
+#~ msgstr ""
+#~ "Létt og hratt gluggaumhverfi með notendavænum forritum og skjáborðs-tólum"
+
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment with a dedicated following"
 #~ msgstr ""
@@ -1663,18 +1326,68 @@ msgstr "Hætta"
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "Leikjaforrit, skotleikir, borðleikir, herkænskuleikir og fleira"
 
+#, fuzzy
+#~ msgid "Amusement programs: arcade, boards, strategy, etc."
+#~ msgstr "Leikjaforrit, skotleikir, borðleikir, herkænskuleikir og fleira"
+
+#~ msgid "Apache"
+#~ msgstr "Apache"
+
+#~ msgid "Apache, Pro-ftpd"
+#~ msgstr "Apache, Pro-ftpd"
+
 #~ msgid "Bad package"
 #~ msgstr "Skemmdur pakki"
+
+#~ msgid "Books and Howto's on Linux and Free Software"
+#~ msgstr "Bækur og leiðbeiningar um Linux og frjálsan hugbúnað"
+
+#~ msgid "C and C++ development libraries, programs and include files"
+#~ msgstr "C og C++ undirforritasöfn, forrit og lýsingaskrár"
+
+#~ msgid "CD-ROM"
+#~ msgstr "Geisladrif"
 
 #, fuzzy
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Vinnustöð"
 
-#~ msgid "Configuring IDE"
-#~ msgstr "Uppsetning IDE"
+#~ msgid "Clients for different protocols including ssh"
+#~ msgstr "Biðlarar fyrir ýmsar samskiptareglur þ.m.t ssh"
+
+#~ msgid "Console Tools"
+#~ msgstr "Skjától"
+
+#~ msgid "DNS/NIS"
+#~ msgstr "DNS/NIS"
+
+#~ msgid "Database"
+#~ msgstr "Gagnagrunnar"
+
+#~ msgid "Development"
+#~ msgstr "Forritun"
+
+#~ msgid "Directory Server"
+#~ msgstr "Upplýsingaveita"
+
+#~ msgid "Do you have an ISA sound card?"
+#~ msgstr "Er kannski ISA hljóðkort í vélinni?"
+
+#~ msgid "Documentation"
+#~ msgstr "Handbækur"
+
+#~ msgid "Domain Name and Network Information Server"
+#~ msgstr "Nafnaþjónustur og net-upplýsingaveitur"
 
 #~ msgid "Downloading file %s..."
 #~ msgstr "Sæki skrá %s..."
+
+#, fuzzy
+#~ msgid "DrakX Wizards"
+#~ msgstr "Moondrake Ráðgjafar"
+
+#~ msgid "Editors, shells, file tools, terminals"
+#~ msgstr "Ritlar, skeljar, skráatól, skjáhermar"
 
 #~ msgid "Explore Linux easily with Mandriva One"
 #~ msgstr "Kannaðu Linux með Mandriva One"
@@ -1682,8 +1395,33 @@ msgstr "Hætta"
 #~ msgid "Explore Linux easily with Moondrake One"
 #~ msgstr "Kannaðu Linux með Moondrake One"
 
+#~ msgid "FTP Server"
+#~ msgstr "FTP Miðlari"
+
+#~ msgid "File and Printer Sharing Server"
+#~ msgstr "Skráa og prentmiðlari"
+
+#~ msgid "Firewall/Router"
+#~ msgstr "Eldveggur/beinir"
+
+#~ msgid "GNOME Workstation"
+#~ msgstr "Gnome vinnustöð"
+
+#~ msgid "Game station"
+#~ msgstr "Leikja-(vinnu)stöð"
+
+#~ msgid "Graphical Environment"
+#~ msgstr "Myndrænt umhverfi"
+
+#~ msgid "Groupware"
+#~ msgstr "Hópvinnuforrit"
+
 #~ msgid "IDE"
 #~ msgstr "IDE"
+
+#, fuzzy
+#~ msgid "Install recommended packages"
+#~ msgstr "Set inn pakka %s"
 
 #, fuzzy
 #~ msgid ""
@@ -1704,9 +1442,46 @@ msgstr "Hætta"
 #~ "Aðvörun : þú ættir að afrita öll persónuleg gögn áður en þú velur \"Ný "
 #~ "Uppsetning\"."
 
+#~ msgid "Internet gateway"
+#~ msgstr "Internet netgátt"
+
+#~ msgid "Internet station"
+#~ msgstr "Internet-vinnustöð"
+
+#~ msgid "KDE"
+#~ msgstr "KDE"
+
+#~ msgid "KDE Desktop"
+#~ msgstr "KDE Skjáborð"
+
+#~ msgid "KDE Workstation"
+#~ msgstr "KDE Vinnustöð"
+
+#~ msgid "Kolab Server"
+#~ msgstr "Kolab Miðlari"
+
+#~ msgid "LSB"
+#~ msgstr "LSB"
+
+#~ msgid "LXDE Desktop"
+#~ msgstr "LXDE Skjáborð"
+
+#, fuzzy
+#~ msgid "LXQT Desktop"
+#~ msgstr "LXDE Skjáborð"
+
+#~ msgid "Linux Standard Base. Third party applications support"
+#~ msgstr "Linux Standard Base. Stuðningur fyrir forrit þriðja aðila"
+
 #, fuzzy
 #~ msgid "MATE Workstation"
 #~ msgstr "Gnome vinnustöð"
+
+#~ msgid "Mail"
+#~ msgstr "Póstur"
+
+#~ msgid "Mail/News"
+#~ msgstr "Póstur/Fréttir"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linux uppsetning %s"
@@ -1717,8 +1492,32 @@ msgstr "Hætta"
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr "Mandriva: dreifingar við allra hæfi"
 
+#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+#~ msgstr "Eftirlitstól, vinna með notendur, tcpdump, nmap, ..."
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondrake Ráðgjafar"
+
 #~ msgid "Moondrake: distributions for everybody's needs"
 #~ msgstr "Moondrake: dreifingar við allra hæfi"
+
+#~ msgid "Multimedia station"
+#~ msgstr "Margmiðlunar-vinnustöð"
+
+#~ msgid "NFS Server, Samba server"
+#~ msgstr "NFS miðlari, Samba miðlari"
+
+#~ msgid "NFS server, SMB server, Proxy server, ssh server"
+#~ msgstr "NFS-þjónusta, SMB-þjónusta, Staðgengils-þjónusta, ssh-þjónusta"
+
+#~ msgid "Network Computer (client)"
+#~ msgstr "Netbiðlarar"
+
+#~ msgid "Network Computer server"
+#~ msgstr "Netþjónustur"
+
+#~ msgid "Network Utilities/Monitoring"
+#~ msgstr "Netforrit/Neteftirlit"
 
 #~ msgid ""
 #~ "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1726,6 +1525,20 @@ msgstr "Hætta"
 #~ msgstr ""
 #~ "Ekki pláss fyrir 1MB ræsigeira! Uppsetning mun halda áfram, en til að "
 #~ "ræsa kerfið þitt verður þú að búa til ræsi-disksneið með DiskDrake"
+
+#~ msgid "No sound card detected. Try \"harddrake\" after installation"
+#~ msgstr ""
+#~ "Ekkert hljóðkort fannst. Reyndu að keyra \"harddrake\" eftir uppsetningu"
+
+#~ msgid "Office Workstation"
+#~ msgstr "Skrifstofu-vinnustöð"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Skrifstofu forrit: ritvinnsla (LibreOffice Writer, Kword), töflureiknar "
+#~ "(LibreOffice Calc, Kspread) pdf skoðarar, o.s.frv"
 
 #, fuzzy
 #~ msgid ""
@@ -1746,8 +1559,23 @@ msgstr "Hætta"
 #~ msgid "Office tools"
 #~ msgstr "Skrifstofu-vinnustöð"
 
+#~ msgid "Other Graphical Desktops"
+#~ msgstr "Aðrir gluggastjórar"
+
+#~ msgid "Postfix mail server"
+#~ msgstr "Postfix póstþjónusta"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Postfix póstþjónusta, Inn fréttaþjónusta"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL og MariaDB gagnagrunns-miðlarar"
+
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "PostgreSQL og MySQL gagnagrunns-miðlarar"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL eða MariaDB gagnagrunns-miðlarar"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "PostgreSQL eða MySQL gagnagrunns-miðlarar"
@@ -1756,9 +1584,15 @@ msgstr "Hætta"
 #~ msgid "Preparing boot images..."
 #~ msgstr "Set upp ræsistjórann..."
 
+#~ msgid "Preparing bootloader..."
+#~ msgstr "Set upp ræsistjórann..."
+
 #, fuzzy
 #~ msgid "Preparing upgrade..."
 #~ msgstr "Set upp ræsistjórann..."
+
+#~ msgid "ProFTPd"
+#~ msgstr "ProFTPd"
 
 #~ msgid "Proceed"
 #~ msgstr "Halda áfram"
@@ -1767,8 +1601,28 @@ msgstr "Hætta"
 #~ msgid "RazorQT Desktop"
 #~ msgstr "Sérsniðið Skjáborð"
 
+#~ msgid ""
+#~ "Run \"alsaconf\" or \"sndconfig\" after installation to configure your "
+#~ "sound card"
+#~ msgstr ""
+#~ "Keyrðu \"alsaconf\" eða \"sndconfig\" eftir uppsetningu til að stilla "
+#~ "hljóðkortið þitt"
+
+#~ msgid "SSH Server"
+#~ msgstr "SSH Miðlari"
+
 #~ msgid "Select All"
 #~ msgstr "Velja allt"
+
+#~ msgid ""
+#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
+#~ "the Web"
+#~ msgstr ""
+#~ "Tól og tæki til að lesa og senda póst, fréttir (mutt,tin...) og til að "
+#~ "flakka á vefnum"
+
+#~ msgid "Sound and video playing/editing programs"
+#~ msgstr "Spila og breyta hljóðskrám og kvikmyndum"
 
 #~ msgid "The 100%% open source Mandriva Linux distribution"
 #~ msgstr "Mandriva uppsetningin með 100%% frjálsum, opnum hugbúnaði"
@@ -1776,9 +1630,23 @@ msgstr "Hætta"
 #~ msgid "The 100%% open source Moondrake distribution"
 #~ msgstr "Moondrake uppsetningin með 100%% frjálsum, opnum hugbúnaði"
 
+#~ msgid ""
+#~ "The K Desktop Environment, the basic graphical environment with a "
+#~ "collection of accompanying tools"
+#~ msgstr "KDE (K Desktop Environment). Gluggastjóri með safni hjálparforrita"
+
+#, fuzzy
+#~ msgid ""
+#~ "The Plasma Desktop, the basic graphical environment with a collection of "
+#~ "accompanying tools"
+#~ msgstr "KDE (K Desktop Environment). Gluggastjóri með safni hjálparforrita"
+
 #, fuzzy
 #~ msgid "This medium provides package updates for medium \"%s\""
 #~ msgstr "Sleppa ölum pökkum af miðli \"%s\""
+
+#~ msgid "Tools to ease the configuration of your computer"
+#~ msgstr "Tæki til að auðvelda uppsetningu tölvunnar"
 
 #~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 #~ msgstr "Ekki er stutt við uppfærslu frá 32-bita í 64-bita dreifingu"
@@ -1786,13 +1654,42 @@ msgstr "Hætta"
 #~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 #~ msgstr "Ekki er stutt við uppfærslu frá 64-bita í 32-bita dreifingu"
 
+#~ msgid "Utilities"
+#~ msgstr "Tól"
+
+#~ msgid "Web Server"
+#~ msgstr "Vefmiðlari"
+
+#~ msgid "Web/FTP"
+#~ msgstr "Vefur/FTP"
+
+#~ msgid "Webmin"
+#~ msgstr "Webmin"
+
+#~ msgid "Webmin Remote Configuration Server"
+#~ msgstr "Webmin, stillingar á fjartengdri tölvu um vef"
+
+#, fuzzy
+#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
+#~ msgstr "Window Maker, Enlightenment, Fvwm, o.s.frv"
+
 #, fuzzy
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Window Maker, Enlightenment, Fvwm, o.s.frv"
 
+#~ msgid "Wizards to configure server"
+#~ msgstr "Ráðgjafar til að stilla miðlara"
+
+#~ msgid "Workstation"
+#~ msgstr "Vinnustöð"
+
 #, fuzzy
 #~ msgid "XFCE Workstation"
 #~ msgstr "KDE Vinnustöð"
+
+#, fuzzy
+#~ msgid "Xfce Workstation"
+#~ msgstr "Skrifstofu-vinnustöð"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

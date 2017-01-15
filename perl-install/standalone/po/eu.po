@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:28+0100\n"
+"POT-Creation-Date: 2017-01-15 15:12+0100\n"
 "PO-Revision-Date: 2011-04-29 08:59+0200\n"
 "Last-Translator: Ignigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
@@ -20,12 +20,12 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: display_help:53 display_help:58 drakbug:173 drakperm:134
+#: display_help:50 display_help:55 drakbug:173 drakperm:134
 #, c-format
 msgid "Help"
 msgstr "Laguntza"
 
-#: display_help:66 drakbug:178 drakfont:507
+#: display_help:63 drakbug:178 drakfont:507
 #, c-format
 msgid "Close"
 msgstr "Itxi"
@@ -35,142 +35,64 @@ msgstr "Itxi"
 msgid "Authentication"
 msgstr "Autentikazioa"
 
-#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213
-#: drakfont:226 drakfont:264 finish-install:133 logdrake:177 logdrake:453
-#: logdrake:458 scannerdrake:56 scannerdrake:98 scannerdrake:139
-#: scannerdrake:197 scannerdrake:256 scannerdrake:726 scannerdrake:737
-#: scannerdrake:876 scannerdrake:887 scannerdrake:957
+#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213 drakfont:226
+#: drakfont:264 finish-install:133 logdrake:177 logdrake:453 logdrake:458
+#: scannerdrake:56 scannerdrake:98 scannerdrake:139 scannerdrake:197
+#: scannerdrake:256 scannerdrake:726 scannerdrake:737 scannerdrake:876
+#: scannerdrake:887 scannerdrake:957
 #, c-format
 msgid "Error"
 msgstr "Akatsa"
 
-#: drakboot:54
-#, c-format
-msgid "No bootloader found, creating a new configuration"
-msgstr "Ez da abio-zamatzailerik aurkitu, konfigurazio berria sortzen"
-
-#: drakboot:89 harddrake2:191 logdrake:77
+#: drakautologin:54 harddrake2:195 logdrake:77
 #, c-format
 msgid "_File"
 msgstr "_Fitxategia"
 
-#: drakboot:90 harddrake2:192 logdrake:78 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:78 logdrake:79
 #, c-format
 msgid "_Quit"
 msgstr "_Irten"
 
-#: drakboot:90 harddrake2:192 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:79
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
-#: drakboot:138
-#, c-format
-msgid "Text only"
-msgstr "Testua soilik"
-
-#: drakboot:139
-#, c-format
-msgid "Verbose"
-msgstr "Berritsua"
-
-#: drakboot:140
-#, c-format
-msgid "Silent"
-msgstr "Isila"
-
-#: drakboot:146 drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381
-#: drakups:27 harddrake2:504 localedrake:45 scannerdrake:48 scannerdrake:51
-#: scannerdrake:294 scannerdrake:299 scannerdrake:951
-#, c-format
-msgid "Warning"
-msgstr "Abisua"
-
-#: drakboot:147
-#, c-format
-msgid ""
-"Your system bootloader is not in framebuffer mode. To activate graphical "
-"boot, select a graphic video mode from the bootloader configuration tool."
-msgstr ""
-"Sistemaren abioko kargatzailea ez dago framebuffer moduan. Abio grafikoa "
-"aktibatzeko, hautatu bideo grafikoko modu bat abioko kargatzailea "
-"konfiguratzeko tresnan."
-
-#: drakboot:148
-#, c-format
-msgid "Do you want to configure it now?"
-msgstr "Orain konfiguratu nahi duzu?"
-
-#: drakboot:157
-#, c-format
-msgid "Install themes"
-msgstr "Instalatu gaiak"
-
-#: drakboot:159
-#, c-format
-msgid "Graphical boot theme selection"
-msgstr "Abioko grafikoaren gai-hautapena"
-
-#: drakboot:162
-#, c-format
-msgid "Graphical boot mode:"
-msgstr "Abio Grafikodun modua:"
-
-#: drakboot:164
-#, c-format
-msgid "Theme"
-msgstr "Gaia"
-
-#: drakboot:198
+#: drakautologin:100
 #, c-format
 msgid "Default user"
 msgstr "Erabiltzaile lehenetsia"
 
-#: drakboot:199
+#: drakautologin:101
 #, c-format
 msgid "Default desktop"
 msgstr "Mahaigain lehenetsia"
 
-#: drakboot:202
+#: drakautologin:104
 #, c-format
 msgid "No, I do not want autologin"
 msgstr "Ez, ez dut saioa automatikoki hasi nahi"
 
-#: drakboot:203
+#: drakautologin:105
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "Bai, automatikoki honekin hasi nahi dut (erabiltzailea, mahaigaina)"
 
-#: drakboot:210
+#: drakautologin:112
 #, c-format
 msgid "System mode"
 msgstr "Sistema modua"
 
-#: drakboot:213
+#: drakautologin:115
 #, c-format
 msgid "Launch the graphical environment when your system starts"
 msgstr "Abiarazi ingurune grafikoa sistema abiaraztean"
 
-#: drakboot:268
+#: drakboot:41
 #, c-format
-msgid "Boot Style Configuration"
-msgstr "Abio tankera konfiguraketa"
-
-#: drakboot:270 drakboot:274
-#, c-format
-msgid "Video mode"
-msgstr "Bideo modua"
-
-#: drakboot:271
-#, c-format
-msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries "
-"selected below.\n"
-"Be sure your video card supports the mode you choose."
-msgstr ""
-"Mesedez aukeratu bideo modu bat, azpian hautatutako abiapen sarrera "
-"bakoitzari aplikatuko zaio.\n"
-"Ziurtatu zure bideo txartelak aukeratzen duzun modua onartzen duela."
+msgid "No bootloader found, creating a new configuration"
+msgstr "Ez da abio-zamatzailerik aurkitu, konfigurazio berria sortzen"
 
 #: drakbug:52 drakbug:140
 #, c-format
@@ -333,6 +255,13 @@ msgstr "Instalatu gabe"
 msgid "Package not installed"
 msgstr "Paketea ez dago instalatuta"
 
+#: drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381 drakups:27
+#: harddrake2:509 localedrake:45 scannerdrake:48 scannerdrake:51
+#: scannerdrake:294 scannerdrake:299 scannerdrake:951
+#, c-format
+msgid "Warning"
+msgstr "Abisua"
+
 #: drakbug:251
 #, c-format
 msgid ""
@@ -456,7 +385,7 @@ msgstr "%s dagoeneko existitzen da eta bere edukia galdu egingo da"
 msgid "Could not get the list of available channels"
 msgstr "Ezin da kate eskuragarrien zerrenda lortu"
 
-#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:358
+#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:362
 #: scannerdrake:63 scannerdrake:67 scannerdrake:75 scannerdrake:316
 #: scannerdrake:365 scannerdrake:501 scannerdrake:505 scannerdrake:527
 #: service_harddrake:426
@@ -506,15 +435,20 @@ msgstr "XDM (X11 konexioen kudeatzailea)"
 
 #: drakedm:45
 #, c-format
+msgid "SDDM (Simple Desktop Display Manager)"
+msgstr "SDDM (Simple Desktop Display Manager)"
+
+#: drakedm:46
+#, c-format
 msgid "XDM (X Display Manager)"
 msgstr "XDM (X11 konexioen kudeatzailea)"
 
-#: drakedm:56
+#: drakedm:57
 #, c-format
 msgid "Choosing a display manager"
 msgstr "Bistaratze-kudeatzailea aukeratzea"
 
-#: drakedm:57
+#: drakedm:58
 #, c-format
 msgid ""
 "X11 Display Manager allows you to graphically log\n"
@@ -525,12 +459,12 @@ msgstr ""
 "sisteman saioa grafikoki hasteko X Window sistemarekin, eta makinan aldi \n"
 "berean hainbat X saio exekutatutzeko."
 
-#: drakedm:80
+#: drakedm:81
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
 msgstr "Aldaketa egin da, dm zerbitzua berrabiarazi nahi duzu?"
 
-#: drakedm:81
+#: drakedm:82
 #, c-format
 msgid ""
 "You are going to close all running programs and lose your current session. "
@@ -707,7 +641,7 @@ msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:532 harddrake2:531
+#: drakfont:532 harddrake2:536
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr "Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
@@ -783,12 +717,12 @@ msgstr "Instalatu"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Ziur zaude ondorengo letra-tipoak desinstalatu nahi dituzula?"
 
-#: drakfont:688 draksec:59 harddrake2:302
+#: drakfont:688 draksec:59 harddrake2:306
 #, c-format
 msgid "Yes"
 msgstr "Bai"
 
-#: drakfont:690 draksec:58 harddrake2:303
+#: drakfont:690 draksec:58 harddrake2:307
 #, c-format
 msgid "No"
 msgstr "Ez"
@@ -1336,42 +1270,14 @@ msgstr "Abioa"
 msgid "No Sound Card detected!"
 msgstr "Ez da detektatu soinu-txartelik!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: draksound:51
+#: draksound:50
 #, c-format
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
-"supported Sound Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Sound Card is correctly plugged in"
 msgstr ""
-"Soinu-txartelik ez da detektatu zure makinan. Egiazta ezazu Linux-ek "
-"onartutako soinu-txartela behar bezala sartuta dagoela.\n"
-"\n"
-"\n"
-"Gure hardwarearen datu-basea bisita dezakezu:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
-
-#: draksound:58
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
-"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
-msgstr ""
-"\n"
-"\n"
-"\n"
-"Oharra: ISA PnP soinu-txartela baduzu, alsaconf edo sndconfig programa "
-"erabili behar duzu. Idatzi \"alsaconf\" edo \"sndconfig\" kontsola batean."
+"Soinu txartelik ez da detektatu zure makinan. Egiaztatu Linux onartzen duen "
+"soinu txartela behar bezala konektaturik duzula"
 
 #: drakups:71
 #, c-format
@@ -1416,7 +1322,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "Autodetektatu"
 
-#: drakups:99 harddrake2:358
+#: drakups:99 harddrake2:362
 #, c-format
 msgid "Detection in progress"
 msgstr "Detekzioa egiten"
@@ -1501,12 +1407,12 @@ msgid "UPS devices"
 msgstr "UPS gailuak"
 
 #: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:116
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "Name"
 msgstr "Izena"
 
-#: drakups:249 harddrake2:139
+#: drakups:249 harddrake2:143
 #, c-format
 msgid "Driver"
 msgstr "Kontrolatzailea"
@@ -1581,27 +1487,14 @@ msgstr "Ongi etorri UPS konfigurazio-tresnetara"
 msgid "No TV Card detected!"
 msgstr "Ez da detektatu telebista-txartelik!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: drakxtv:68
+#: drakxtv:67
 #, c-format
 msgid ""
 "No TV Card has been detected on your machine. Please verify that a Linux-"
-"supported Video/TV Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Video/TV Card is correctly plugged in."
 msgstr ""
-"Telebista-txartelik ez da detektatu zure makinan. Egiazta ezazu Linux-ek "
-"onartutako bideo/telebista-txartela behar bezala sartuta dagoela.\n"
-"\n"
-"\n"
-"Gure hardwarearen datu-basea bisita dezakezu:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"TB txartelik ez da detektatu zure makinan. Egiaztatu Linux-onartutako bideo/"
+"telebista-txartela behar bezala konektaturik dagoela."
 
 #: finish-install:57
 #, c-format
@@ -1688,7 +1581,7 @@ msgstr "Kontrolatzaile alternatiboak"
 msgid "the list of alternative drivers for this sound card"
 msgstr "soinu-txartel honen kontrolatzaile alternatiboen zerrenda"
 
-#: harddrake2:33 harddrake2:125
+#: harddrake2:33 harddrake2:129
 #, c-format
 msgid "Bus"
 msgstr "Bus"
@@ -1699,7 +1592,7 @@ msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "Gailua konektatutako bus fisikoa da hau (adib.: PCI, USB, ...)"
 
-#: harddrake2:36 harddrake2:151
+#: harddrake2:36 harddrake2:155
 #, c-format
 msgid "Bus identification"
 msgstr "Bus-identifikazioa"
@@ -2024,7 +1917,7 @@ msgstr "Banderak"
 msgid "CPU flags reported by the kernel"
 msgstr "PUZ-banderen berri eman du nukleoak"
 
-#: harddrake2:80 harddrake2:144
+#: harddrake2:80 harddrake2:148
 #, c-format
 msgid "Cores"
 msgstr "Nukleo"
@@ -2192,7 +2085,7 @@ msgstr "Gaitutako Neurria"
 msgid "Enabled size of the memory bank"
 msgstr "Memoria bankuaren gaitutako neurria"
 
-#: harddrake2:113 harddrake2:122
+#: harddrake2:113 harddrake2:126
 #, c-format
 msgid "Type"
 msgstr "Mota"
@@ -2202,12 +2095,12 @@ msgstr "Mota"
 msgid "type of the memory device"
 msgstr "memoria gailuaren mota"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed"
 msgstr "Abiadura"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed of the memory bank"
 msgstr "Memoria bankuaren abiadura"
@@ -2222,159 +2115,174 @@ msgstr "Banku loturak"
 msgid "Socket designation of the memory bank"
 msgstr "Memoria bankuaren socket izendapena"
 
-#: harddrake2:120
+#: harddrake2:118
+#, c-format
+msgid "Location"
+msgstr "Kokapena"
+
+#: harddrake2:119
+#, c-format
+msgid "Size"
+msgstr "Tamaina"
+
+#: harddrake2:119
+#, c-format
+msgid "Size of the memory device"
+msgstr "Memoria gailuaren tamaina"
+
+#: harddrake2:124
 #, c-format
 msgid "Device file"
 msgstr "Gailu fitxategia"
 
-#: harddrake2:120
+#: harddrake2:124
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 "saguaren kernel gidariarekin komunikatzeko erabilitako gailu fitxategia"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "Emulated wheel"
 msgstr "Gurpil emulatua"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "gurpila emulatutakoa izan hala ez"
 
-#: harddrake2:122
+#: harddrake2:126
 #, c-format
 msgid "the type of the mouse"
 msgstr "sagu mota"
 
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "the name of the mouse"
 msgstr "saguaren izena"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "Number of buttons"
 msgstr "Botoi-kopurua"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "the number of buttons the mouse has"
 msgstr "saguaren botoi-kopurua"
 
-#: harddrake2:125
+#: harddrake2:129
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "sagua konektatutako bus-mota"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr "X11-k erabilitako sagu protokoloa"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "idaztegi grafikoak saguarekin erabiltzen duen protokoloa"
 
-#: harddrake2:130
+#: harddrake2:134
 #, c-format
 msgid "Identification"
 msgstr "Identifikazioa"
 
-#: harddrake2:135 harddrake2:150
+#: harddrake2:139 harddrake2:154
 #, c-format
 msgid "Connection"
 msgstr "Lotura"
 
-#: harddrake2:145
+#: harddrake2:149
 #, c-format
 msgid "Performances"
 msgstr "Errendimendua"
 
-#: harddrake2:152
+#: harddrake2:156
 #, c-format
 msgid "Device"
 msgstr "Gailua"
 
-#: harddrake2:153
+#: harddrake2:157
 #, c-format
 msgid "Partitions"
 msgstr "Partizioak"
 
-#: harddrake2:158
+#: harddrake2:162
 #, c-format
 msgid "Features"
 msgstr "Ezaugarriak"
 
-#: harddrake2:179
+#: harddrake2:183
 #, c-format
 msgid "Autodetect _modems"
 msgstr "Autodetektatu _modemak"
 
-#: harddrake2:180
+#: harddrake2:184
 #, c-format
 msgid "Autodetect parallel _zip drives"
 msgstr "Autodetektatu zip _unitate paraleloak"
 
-#: harddrake2:184
+#: harddrake2:188
 #, c-format
 msgid "Hardware Configuration"
 msgstr "Hardware konfiguraketa"
 
-#: harddrake2:193
+#: harddrake2:197
 #, c-format
 msgid "_Options"
 msgstr "_Aukerak"
 
-#: harddrake2:194 harddrake2:195
+#: harddrake2:198 harddrake2:199
 #, c-format
 msgid "_Help"
 msgstr "_Laguntza"
 
-#: harddrake2:195
+#: harddrake2:199
 #, c-format
 msgid "<control>H"
 msgstr "<control>H"
 
-#: harddrake2:196
+#: harddrake2:200
 #, c-format
 msgid "_Fields description"
 msgstr "_Eremuen azalpena"
 
-#: harddrake2:197
+#: harddrake2:201
 #, c-format
 msgid "_Report Bug"
 msgstr "_Akatsen berri-ematea"
 
-#: harddrake2:198
+#: harddrake2:202
 #, c-format
 msgid "_About..."
 msgstr "_Honi buruz..."
 
-#: harddrake2:242
+#: harddrake2:246
 #, c-format
 msgid "Detected hardware"
 msgstr "Detektatutako hardwarea"
 
-#: harddrake2:245 scannerdrake:283
+#: harddrake2:249 scannerdrake:283
 #, c-format
 msgid "Information"
 msgstr "Informazioa"
 
-#: harddrake2:247
+#: harddrake2:251
 #, c-format
 msgid "Set current driver options"
 msgstr "Ezarri uneko gidariaren aukerak"
 
-#: harddrake2:254
+#: harddrake2:257
 #, c-format
 msgid "Run config tool"
 msgstr "Exekutatu konfigurazio-tresna"
 
-#: harddrake2:280
+#: harddrake2:284
 #, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
@@ -2383,72 +2291,72 @@ msgstr ""
 "Egin klik ezkerreko zuhaitzeko gailu batean, dagokion informazioa hemen "
 "bistaratzeko."
 
-#: harddrake2:300 notify-x11-free-driver-switch:13
+#: harddrake2:304 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "ezezaguna"
 
-#: harddrake2:301
+#: harddrake2:305
 #, c-format
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: harddrake2:321
+#: harddrake2:325
 #, c-format
 msgid "Misc"
 msgstr "Askotakoak"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "secondary"
 msgstr "bigarren mailakoa"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "primary"
 msgstr "lehen mailakoa"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "burner"
 msgstr "grabagailua"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:504
+#: harddrake2:509
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Ondorengo paketeak instalatu behar dituzu:\n"
 
-#: harddrake2:521
+#: harddrake2:525
 #, c-format
 msgid "Harddrake"
 msgstr "Harddrake"
 
-#: harddrake2:523
+#: harddrake2:528
 #, c-format
 msgid "Copyright (C) %s by %s"
 msgstr "Copyright (C) %s %s"
 
-#: harddrake2:523 harddrake2:527
+#: harddrake2:528 harddrake2:532
 #, c-format
 msgid "Mageia"
 msgstr ""
 
-#: harddrake2:525
+#: harddrake2:530
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr "Hau HardDrake da, %s hardware konfiguratzeko tresna."
 
-#: harddrake2:540
+#: harddrake2:545
 #, c-format
 msgid "Harddrake help"
 msgstr "Harddrake-ren laguntza"
 
-#: harddrake2:541
+#: harddrake2:546
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -2457,12 +2365,12 @@ msgstr ""
 "Eremuen azalpena:\n"
 "\n"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid "Select a device!"
 msgstr "Hautatu gailu bat!"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2754,8 +2662,7 @@ msgstr "Morroiak behar bezala desgaitu ditu posta-abisuak."
 msgid "Save as.."
 msgstr "Gorde honela.."
 
-#: notify-x11-free-driver-switch:18 service_harddrake:468
-#: service_harddrake:481
+#: notify-x11-free-driver-switch:18 service_harddrake:468 service_harddrake:481
 #, c-format
 msgid "Display driver setup"
 msgstr "Bistaratzeko gidariaren ezarpena"
@@ -3428,6 +3335,16 @@ msgstr "Eskualdeko ezarpenak"
 msgid "Language & country configuration"
 msgstr "Hizkuntza eta herrialde konfiguraketa"
 
+#: ../polkit/org.mageia.drakautologin.policy.in.h:1
+#, fuzzy
+msgid "Run Mageia AutoLogin Configuration"
+msgstr "Exekutatu Moondrake Abio Konfigurazioa"
+
+#: ../polkit/org.mageia.drakautologin.policy.in.h:2
+#, fuzzy
+msgid "Authentication is required to run Mageia AutoLogin Configuration"
+msgstr "Egiaztapena beharrezkoa da Moondrake Abio Konfigurazioa exekutatzeko"
+
 #: ../polkit/org.moondrake.drakauth.policy.in.h:1
 #, fuzzy
 msgid "Run DrakX Authentication Configuration"
@@ -3555,6 +3472,27 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 msgid "Authentication is required to run DrakX Service Configuration"
 msgstr "Zerbitzari grafikoaren konfiguraketa"
 
+#~ msgid "Authentication is required to run Moondrake Boot Configuration"
+#~ msgstr ""
+#~ "Egiaztapena beharrezkoa da Moondrake Abio Konfigurazioa exekutatzeko"
+
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "Exekutatu Moondrake Abio Konfigurazioa"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
+#~ "the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a "
+#~ "console."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Oharra: ISA PnP soinu-txartela baduzu, alsaconf edo sndconfig programa "
+#~ "erabili behar duzu. Idatzi \"alsaconf\" edo \"sndconfig\" kontsola batean."
+
 #~ msgid "  --help                - display this help     \n"
 #~ msgstr "  --help                - laguntza hau erakutsi     \n"
 
@@ -3577,132 +3515,14 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 #~ msgid "%s Bug Report Tool"
 #~ msgstr "%s Akats Txosten Tresna"
 
+#~ msgid "%s Control Center"
+#~ msgstr "%s Aginte Gunea"
+
 #~ msgid "%s Help Center"
 #~ msgstr "%s Laguntza Gunea"
 
 #~ msgid "%s Tools Logs"
 #~ msgstr "%s Log Tresnak"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Application Security "
-#~ "Configuration"
-#~ msgstr ""
-#~ "Egiaztapena beharrezkoa da Moondrake Segurtasun Aplikazio Konfigurazioa "
-#~ "exekutatzeko"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Authentication Configuration"
-#~ msgstr ""
-#~ "Egiaztapena beharrezkoa da Moondrake Autentifikazio konfigurazioa "
-#~ "exekutatzeko"
-
-#~ msgid "Authentication is required to run Moondrake Boot Configuration"
-#~ msgstr ""
-#~ "Egiaztapena beharrezkoa da Moondrake Abio Konfigurazioa exekutatzeko"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Date and Time Configuration"
-#~ msgstr ""
-#~ "Egiaztapena beharrezkoa da Moondrake Data eta Ordua Konfigurazioa "
-#~ "exekutatzeko"
-
-#~ msgid "Authentication is required to run Moondrake Disk Layout Editor"
-#~ msgstr ""
-#~ "Egiaztapena beharrezkoa da Moondrake Disko Maketatzailea exekutatzeko"
-
-#~ msgid "Authentication is required to run Moondrake Font Configuration"
-#~ msgstr ""
-#~ "Egiaztapena beharrezkoa da Moondrake Letra Konfigurazioa exekutatzeko"
-
-#~ msgid "Authentication is required to run Moondrake Hardware Configuration"
-#~ msgstr ""
-#~ "Egiaztapena beharrezkoa da Moondrake Hardware Konfigurazioa exekutatzeko"
-
-#~ msgid "Authentication is required to run Moondrake Log Viewer"
-#~ msgstr "Egiaztapena beharrezkoa da Moondrake Log ikustailea exekutatzeko"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Login Manager Configuration"
-#~ msgstr ""
-#~ "Egiaztapena beharrezkoa da Moondrake Saioa hasteko Kudeatzaileren "
-#~ "Konfigurazioa exekutatzeko"
-
-#~ msgid "Authentication is required to run Moondrake Scanner Configuration"
-#~ msgstr ""
-#~ "Egiaztapena beharrezkoa da Moondrake Eskaner Konfigurazioa exekutatzeko"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Security Permissions "
-#~ "Configuration"
-#~ msgstr ""
-#~ "Egiaztapena beharrezkoa da Moondrake Segurtasun Baimenen Konfigurazioa "
-#~ "exekutatzeko"
-
-#~ msgid "Authentication is required to run Moondrake Service Configuration"
-#~ msgstr ""
-#~ "Egiaztapena beharrezkoa da Moondrake Zerbitzu Konfigurazioa exekutatzeko"
-
-#~ msgid "Authentication is required to run Moondrake UPS Configuration"
-#~ msgstr "Egiaztapena beharrezkoa da Moondrake UPS konfigurazioa exekutatzeko"
-
-#~ msgid "Configure authentication required to access %s tools"
-#~ msgstr "Konfiguratzeko egiaztapena behar da %s tresnak eskuratzeko"
-
-#~ msgid ""
-#~ "No Sound Card has been detected on your machine. Please verify that a "
-#~ "Linux-supported Sound Card is correctly plugged in"
-#~ msgstr ""
-#~ "Soinu txartelik ez da detektatu zure makinan. Egiaztatu Linux onartzen "
-#~ "duen soinu txartela behar bezala konektaturik duzula"
-
-#~ msgid ""
-#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
-#~ "supported Video/TV Card is correctly plugged in."
-#~ msgstr ""
-#~ "TB txartelik ez da detektatu zure makinan. Egiaztatu Linux-onartutako "
-#~ "bideo/telebista-txartela behar bezala konektaturik dagoela."
-
-#~ msgid "Run Moondrake Application Security Configuration"
-#~ msgstr "Exekutatu Moondrake Segurtasun Aplikazio Konfigurazioa"
-
-#~ msgid "Run Moondrake Authentication Configuration"
-#~ msgstr "Exekutatu Moondrake Autentifikazio Konfigurazioa"
-
-#~ msgid "Run Moondrake Boot Configuration"
-#~ msgstr "Exekutatu Moondrake Abio Konfigurazioa"
-
-#~ msgid "Run Moondrake Date and Time Configuration"
-#~ msgstr "Exekutatu Moondrake Data eta Ordua Konfigurazioa"
-
-#~ msgid "Run Moondrake Disk Layout Editor"
-#~ msgstr "Exekutatu Moondrake Disko Maketatzailea"
-
-#~ msgid "Run Moondrake Font Configuration"
-#~ msgstr "Exekutatu Moondrake Letra Konfigurazioa"
-
-#~ msgid "Run Moondrake Hardware Configuration"
-#~ msgstr "Exekutatu Moondrake Hardware Konfigurazioa"
-
-#~ msgid "Run Moondrake Log Viewer"
-#~ msgstr "Exekutatu Moondrake Log ikustailea"
-
-#~ msgid "Run Moondrake Login Manager Configuration"
-#~ msgstr "Exekutatu Moondrake Saioa hasteko Kudeatzaileren Konfigurazioa"
-
-#~ msgid "Run Moondrake Scanner Configuration"
-#~ msgstr "Exekutatu Moondrake Eskaner Konfigurazioa"
-
-#~ msgid "Run Moondrake Security Permissions Configuration"
-#~ msgstr "Exekutatu Moondrake Segurtasun Baimenen Konfigurazioa"
-
-#~ msgid "Run Moondrake Service Configuration"
-#~ msgstr "Exekutatu Moondrake Zerbitzu Konfigurazioa"
-
-#~ msgid "Run Moondrake UPS Configuration"
-#~ msgstr "Exekutatu Moondrake UPS Konfigurazioa"
-
-#~ msgid "%s Control Center"
-#~ msgstr "%s Aginte Gunea"
 
 #~ msgid "(default value: %s)"
 #~ msgstr "(balio lehenetsia: %s)"
@@ -3770,6 +3590,64 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 #~ msgid "<control>O"
 #~ msgstr "<control>O"
 
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Application Security "
+#~ "Configuration"
+#~ msgstr ""
+#~ "Egiaztapena beharrezkoa da Moondrake Segurtasun Aplikazio Konfigurazioa "
+#~ "exekutatzeko"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Authentication Configuration"
+#~ msgstr ""
+#~ "Egiaztapena beharrezkoa da Moondrake Autentifikazio konfigurazioa "
+#~ "exekutatzeko"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Date and Time Configuration"
+#~ msgstr ""
+#~ "Egiaztapena beharrezkoa da Moondrake Data eta Ordua Konfigurazioa "
+#~ "exekutatzeko"
+
+#~ msgid "Authentication is required to run Moondrake Disk Layout Editor"
+#~ msgstr ""
+#~ "Egiaztapena beharrezkoa da Moondrake Disko Maketatzailea exekutatzeko"
+
+#~ msgid "Authentication is required to run Moondrake Font Configuration"
+#~ msgstr ""
+#~ "Egiaztapena beharrezkoa da Moondrake Letra Konfigurazioa exekutatzeko"
+
+#~ msgid "Authentication is required to run Moondrake Hardware Configuration"
+#~ msgstr ""
+#~ "Egiaztapena beharrezkoa da Moondrake Hardware Konfigurazioa exekutatzeko"
+
+#~ msgid "Authentication is required to run Moondrake Log Viewer"
+#~ msgstr "Egiaztapena beharrezkoa da Moondrake Log ikustailea exekutatzeko"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Login Manager Configuration"
+#~ msgstr ""
+#~ "Egiaztapena beharrezkoa da Moondrake Saioa hasteko Kudeatzaileren "
+#~ "Konfigurazioa exekutatzeko"
+
+#~ msgid "Authentication is required to run Moondrake Scanner Configuration"
+#~ msgstr ""
+#~ "Egiaztapena beharrezkoa da Moondrake Eskaner Konfigurazioa exekutatzeko"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Security Permissions "
+#~ "Configuration"
+#~ msgstr ""
+#~ "Egiaztapena beharrezkoa da Moondrake Segurtasun Baimenen Konfigurazioa "
+#~ "exekutatzeko"
+
+#~ msgid "Authentication is required to run Moondrake Service Configuration"
+#~ msgstr ""
+#~ "Egiaztapena beharrezkoa da Moondrake Zerbitzu Konfigurazioa exekutatzeko"
+
+#~ msgid "Authentication is required to run Moondrake UPS Configuration"
+#~ msgstr "Egiaztapena beharrezkoa da Moondrake UPS konfigurazioa exekutatzeko"
+
 #~ msgid "Autodetect _jaz drives"
 #~ msgstr "Autodetektatu _jaz unitateak"
 
@@ -3781,6 +3659,9 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 
 #~ msgid "Basic options"
 #~ msgstr "Oinarrizko aukerak"
+
+#~ msgid "Boot Style Configuration"
+#~ msgstr "Abio tankera konfiguraketa"
 
 #~ msgid "Bugs"
 #~ msgstr "Akatsak"
@@ -3809,6 +3690,9 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 #~ msgid "Coma bug"
 #~ msgstr "Coma programa-errorea"
 
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Konfiguratzeko egiaztapena behar da %s tresnak eskuratzeko"
+
 #~ msgid "Configure authentication required to access Mandriva tools"
 #~ msgstr "Konfiguratu Mandriva tresnak atzitzeko beharrezko autentikazioa"
 
@@ -3828,6 +3712,9 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 #~ msgstr ""
 #~ "Bistaratu gaia\n"
 #~ "kontsolan"
+
+#~ msgid "Do you want to configure it now?"
+#~ msgstr "Orain konfiguratu nahi duzu?"
 
 #, fuzzy
 #~ msgid "DrakX Online"
@@ -3872,8 +3759,17 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 #~ msgid "Final resolution"
 #~ msgstr "Azken bereizmena"
 
+#~ msgid "Finishing install"
+#~ msgstr "Instalazioa amaitu"
+
 #~ msgid "Gradient type"
 #~ msgstr "Gradiente mota"
+
+#~ msgid "Graphical boot mode:"
+#~ msgstr "Abio Grafikodun modua:"
+
+#~ msgid "Graphical boot theme selection"
+#~ msgstr "Abioko grafikoaren gai-hautapena"
 
 #~ msgid "Halt bug"
 #~ msgstr "Halt instrukzioaren programa-errorea"
@@ -3990,6 +3886,9 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 #~ "da, baina sistema erabat itxita uzten du eta segurtasun ezaugarriak\n"
 #~ " mailarik handienean daudehandiena da"
 
+#~ msgid "Install themes"
+#~ msgstr "Instalatu gaiak"
+
 #~ msgid "Is FPU present"
 #~ msgstr "FPU badago"
 
@@ -4011,6 +3910,44 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 #~ msgid "Network Options"
 #~ msgstr "Sare-aukerak"
 
+#~ msgid ""
+#~ "No Sound Card has been detected on your machine. Please verify that a "
+#~ "Linux-supported Sound Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
+#~ msgstr ""
+#~ "Soinu-txartelik ez da detektatu zure makinan. Egiazta ezazu Linux-ek "
+#~ "onartutako soinu-txartela behar bezala sartuta dagoela.\n"
+#~ "\n"
+#~ "\n"
+#~ "Gure hardwarearen datu-basea bisita dezakezu:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
+
+#~ msgid ""
+#~ "No TV Card has been detected on your machine. Please verify that a Linux-"
+#~ "supported Video/TV Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
+#~ msgstr ""
+#~ "Telebista-txartelik ez da detektatu zure makinan. Egiazta ezazu Linux-ek "
+#~ "onartutako bideo/telebista-txartela behar bezala sartuta dagoela.\n"
+#~ "\n"
+#~ "\n"
+#~ "Gure hardwarearen datu-basea bisita dezakezu:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
+
 #~ msgid "OpenOffice.org"
 #~ msgstr "OpenOffice.org"
 
@@ -4019,6 +3956,15 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "Aldizkako egiaztapenak"
+
+#~ msgid ""
+#~ "Please choose a video mode, it will be applied to each of the boot "
+#~ "entries selected below.\n"
+#~ "Be sure your video card supports the mode you choose."
+#~ msgstr ""
+#~ "Mesedez aukeratu bideo modu bat, azpian hautatutako abiapen sarrera "
+#~ "bakoitzari aplikatuko zaio.\n"
+#~ "Ziurtatu zure bideo txartelak aukeratzen duzun modua onartzen duela."
 
 #~ msgid "Please enter a theme name"
 #~ msgstr "Mesedez sartu gai baten izena"
@@ -4038,6 +3984,42 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 #~ msgid "Progress box transparency"
 #~ msgstr "Aurrerapen laukiaren gardentasuna"
 
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Exekutatu Moondrake Segurtasun Aplikazio Konfigurazioa"
+
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Exekutatu Moondrake Autentifikazio Konfigurazioa"
+
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Exekutatu Moondrake Data eta Ordua Konfigurazioa"
+
+#~ msgid "Run Moondrake Disk Layout Editor"
+#~ msgstr "Exekutatu Moondrake Disko Maketatzailea"
+
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Exekutatu Moondrake Letra Konfigurazioa"
+
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Exekutatu Moondrake Hardware Konfigurazioa"
+
+#~ msgid "Run Moondrake Log Viewer"
+#~ msgstr "Exekutatu Moondrake Log ikustailea"
+
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Exekutatu Moondrake Saioa hasteko Kudeatzaileren Konfigurazioa"
+
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Exekutatu Moondrake Eskaner Konfigurazioa"
+
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Exekutatu Moondrake Segurtasun Baimenen Konfigurazioa"
+
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Exekutatu Moondrake Zerbitzu Konfigurazioa"
+
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "Exekutatu Moondrake UPS Konfigurazioa"
+
 #~ msgid "Save theme"
 #~ msgstr "Gaia gorde"
 
@@ -4052,6 +4034,9 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 
 #~ msgid "Select Mandriva Tool:"
 #~ msgstr "Aukeratu Mandriva Tresna:"
+
+#~ msgid "Silent"
+#~ msgstr "Isila"
 
 #~ msgid "Silent bootsplash"
 #~ msgstr "Modu isila"
@@ -4080,6 +4065,9 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 
 #~ msgid "Text color"
 #~ msgstr "Testuaren kolorea"
+
+#~ msgid "Text only"
+#~ msgstr "Testua soilik"
 
 #~ msgid "Text size"
 #~ msgstr "Testu neurria"
@@ -4111,8 +4099,18 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 #~ msgid "The width of the progress bar"
 #~ msgstr "Aurrerapen barraren zabalera"
 
+#~ msgid "Theme"
+#~ msgstr "Gaia"
+
 #~ msgid "Theme name"
 #~ msgstr "Gaiaren izena"
+
+#~ msgid ""
+#~ "This system will be rebooted\n"
+#~ "for the changes to take effect!"
+#~ msgstr ""
+#~ "Sistema hau berrabiarazi egingo da\n"
+#~ "aldaketak eragina izan dezaten!"
 
 #~ msgid "Unable to load image file %s"
 #~ msgstr "Ezin da %s irudi fitxategia zamatu"
@@ -4120,8 +4118,14 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 #~ msgid "Unknown/Others"
 #~ msgstr "Ezezaguna/Beste batzuk"
 
+#~ msgid "Verbose"
+#~ msgstr "Berritsua"
+
 #~ msgid "Verbose bootsplash"
 #~ msgstr "Modu berritsua"
+
+#~ msgid "Video mode"
+#~ msgstr "Bideo modua"
 
 #~ msgid "Whether the FPU has an irq vector"
 #~ msgstr "FPUk irq bektorea duen edo ez"
@@ -4137,6 +4141,14 @@ msgstr "Zerbitzari grafikoaren konfiguraketa"
 
 #~ msgid "Y coordinate of the text"
 #~ msgstr "Testuaren y koordenatua"
+
+#~ msgid ""
+#~ "Your system bootloader is not in framebuffer mode. To activate graphical "
+#~ "boot, select a graphic video mode from the bootloader configuration tool."
+#~ msgstr ""
+#~ "Sistemaren abioko kargatzailea ez dago framebuffer moduan. Abio grafikoa "
+#~ "aktibatzeko, hautatu bideo grafikoko modu bat abioko kargatzailea "
+#~ "konfiguratzeko tresnan."
 
 #~ msgid "choose image"
 #~ msgstr "hautatu imajina"

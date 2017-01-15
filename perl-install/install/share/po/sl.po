@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:31+0100\n"
+"POT-Creation-Date: 2017-01-15 15:11+0100\n"
 "PO-Revision-Date: 2009-10-03 16:38+0200\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -60,89 +60,84 @@ msgstr ""
 
 #: any.pm:162
 #, c-format
-msgid "CD-ROM"
-msgstr "CD-ROM"
-
-#: any.pm:163
-#, c-format
 msgid "Network (HTTP)"
 msgstr "Omrežje (HTTP)"
 
-#: any.pm:164
+#: any.pm:163
 #, c-format
 msgid "Network (FTP)"
 msgstr "Omrežje (FTP)"
 
-#: any.pm:165
+#: any.pm:164
 #, c-format
 msgid "Network (NFS)"
 msgstr "Omrežje (NFS)"
 
-#: any.pm:224
+#: any.pm:223
 #, c-format
 msgid "URL of the mirror?"
 msgstr "Lokacija zrcalnega strežnika?"
 
-#: any.pm:230
+#: any.pm:229
 #, c-format
 msgid "URL must start with ftp:// or http://"
 msgstr "Lokacija se mora začeti z ftp:// ali s http://"
 
-#: any.pm:248
+#: any.pm:247
 #, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr ""
 "Vzpostavljanje povezave s spletno stranjo %s in pridobivanje seznama "
 "dosegljivih zrcalnih strežnikov ..."
 
-#: any.pm:253
+#: any.pm:252
 #, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
 "Vzpostavljanje povezave s spletno stranjo %s in pridobivanje seznama "
 "dosegljivih zrcalnih strežnikov ni uspelo"
 
-#: any.pm:263
+#: any.pm:262
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "Izberite zrcalni strežnik, s katerega želite pridobiti pakete"
 
-#: any.pm:293
+#: any.pm:290
 #, c-format
 msgid "NFS setup"
 msgstr "Namestitev prek NFS"
 
-#: any.pm:294
+#: any.pm:291
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
 msgstr "Vnesite ime gostitelja in ime mape vašega vira NFS"
 
-#: any.pm:298
+#: any.pm:295
 #, c-format
 msgid "Hostname missing"
 msgstr "Manjka ime gostitelja"
 
-#: any.pm:299
+#: any.pm:296
 #, c-format
 msgid "Directory must begin with \"/\""
 msgstr "Mapa se mora pričeti z »/«"
 
-#: any.pm:303
+#: any.pm:300
 #, c-format
 msgid "Hostname of the NFS mount ?"
 msgstr "Ime gostitelja vira NFS"
 
-#: any.pm:304
+#: any.pm:301
 #, c-format
 msgid "Directory"
 msgstr "Mapa"
 
-#: any.pm:334
+#: any.pm:331
 #, c-format
 msgid "Supplementary"
 msgstr "Dodatno"
 
-#: any.pm:369
+#: any.pm:366
 #, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
@@ -151,22 +146,22 @@ msgstr ""
 "Na tem zrcalnem strežniku ne najdem seznama paketov. Prepričajte se, da je "
 "lokacija prava."
 
-#: any.pm:394
+#: any.pm:391
 #, c-format
 msgid "Main Release"
 msgstr ""
 
-#: any.pm:396
+#: any.pm:393
 #, c-format
 msgid "Contrib Release"
 msgstr ""
 
-#: any.pm:398
+#: any.pm:395
 #, c-format
 msgid "Non-free Release"
 msgstr ""
 
-#: any.pm:436
+#: any.pm:433
 #, c-format
 msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
@@ -175,57 +170,69 @@ msgstr ""
 "Nekateri deli vaše strojne opreme za pravilno delovanje odprtokodnih "
 "gonilnikov potrebujejo lastniško strojno programsko opremo."
 
-#: any.pm:437
+#: any.pm:434
 #, c-format
 msgid "You should enable \"%s\""
 msgstr "Priporočljivo je omogočiti vir »%s«"
 
-#: any.pm:476
+#: any.pm:473
 #, c-format
-msgid "\"%s\" contains the various pieces of the systems and its applications."
+msgid "\"%s\" contains the various pieces of the systems and its applications"
 msgstr ""
+"Vir »%s« vsebuje različne sistemske dele in pripadajočo programsko opremo"
 
-#: any.pm:477
-#, c-format
-msgid ""
-"\"%s\" contains software that's not officially supported and might not "
-"receive the same level of maintenance."
-msgstr ""
-
-#: any.pm:478
+#: any.pm:474
 #, c-format
 msgid "\"%s\" contains non free software.\n"
 msgstr "Vir »%s« vsebuje lastniško programsko opremo.\n"
 
-#: any.pm:479
+#: any.pm:475
 #, c-format
 msgid ""
-"It also contains firmware needed for certain devices to operate (eg: some "
+"It also contains firmwares needed for certain devices to operate (eg: some "
 "ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
 msgstr ""
+"Vsebuje tudi strojno programsko opremo, ki je potrebna za delovanje "
+"nekaterih naprav (npr.: nekatere grafične kartice ATI/AMD, določene mrežne "
+"kartice, nekatere kartice RAID) ..."
 
-#: any.pm:483
+#: any.pm:476
+#, c-format
+msgid ""
+"\"%s\" contains software that can not be distributed in every country due to "
+"software patents."
+msgstr ""
+"Vir »%s« vsebuje programsko opremo, ki je zaradi patentne zaščite v "
+"nekaterih državah ni možno prosto razširjati."
+
+#: any.pm:477
+#, c-format
+msgid ""
+"It also contains software from \"%s\" rebuild with additional capabilities."
+msgstr "Vsebuje tudi pakete iz vira »%s«, a z dodatnimi zmožnostmi."
+
+#: any.pm:481
 #, c-format
 msgid "Here you can enable more media if you want."
 msgstr "Tu lahko po želji omogočite več virov."
 
-#: any.pm:584
+#: any.pm:595
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Pregledovanje že nameščenih paketov ..."
 
-#: any.pm:619
+#: any.pm:631
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Iskanje paketov za posodobitev ..."
 
-#: any.pm:643
+#: any.pm:655
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "Odstranjevanje paketov pred posodobitvijo ..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:870
+#: any.pm:896
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -239,87 +246,87 @@ msgstr ""
 "\n"
 "Ali naj odstranim navedene pakete?\n"
 
-#: any.pm:1085
+#: any.pm:1121
 #, c-format
 msgid "Error reading file %s"
 msgstr "Napaka pri branju datoteke %s"
 
-#: any.pm:1293
+#: any.pm:1329
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Naslednji diski so bili preimenovani:"
 
-#: any.pm:1295
+#: any.pm:1331
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (prejšnje ime: %s)"
 
-#: any.pm:1352
+#: any.pm:1388
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1352
+#: any.pm:1388
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1352
+#: any.pm:1388
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1371 steps_interactive.pm:933
+#: any.pm:1407 steps_interactive.pm:951
 #, c-format
 msgid "Network"
 msgstr "Omrežje"
 
-#: any.pm:1375
+#: any.pm:1411
 #, c-format
 msgid "Please choose a media"
 msgstr "Izberite vir"
 
-#: any.pm:1391
+#: any.pm:1427
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Datoteka že obstaja. Ali naj jo nadomestim?"
 
-#: any.pm:1395
+#: any.pm:1431
 #, c-format
 msgid "Permission denied"
 msgstr "Nimate dovoljenja"
 
-#: any.pm:1443
+#: any.pm:1479
 #, c-format
 msgid "Bad NFS name"
 msgstr "Napačno ime NFS"
 
-#: any.pm:1464
+#: any.pm:1500
 #, c-format
 msgid "Bad media %s"
 msgstr "Neustrezen vir %s"
 
-#: any.pm:1508
+#: any.pm:1544
 #, c-format
 msgid "Cannot make screenshots before partitioning"
 msgstr "Posnetkov zaslona ni mogoče zajeti, dokler disk ni razdeljen"
 
-#: any.pm:1519
+#: any.pm:1555
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Posnetki zaslona bodo po namestitvi v %s"
 
-#: gtk.pm:135
+#: gtk.pm:134
 #, c-format
 msgid "Installation"
 msgstr "Namestitev"
 
-#: gtk.pm:139 share/meta-task/compssUsers.pl:55
+#: gtk.pm:138
 #, c-format
 msgid "Configuration"
 msgstr "Nastavitev"
 
-#: install2.pm:209
+#: install2.pm:210
 #, c-format
 msgid "You must also format %s"
 msgstr "Formatirati morate tudi %s"
@@ -344,67 +351,67 @@ msgstr "Vklapljanje omrežja"
 msgid "Bringing down the network"
 msgstr "Izklapljanje omrežja"
 
-#: media.pm:404
+#: media.pm:397
 #, c-format
 msgid "Please wait, retrieving file"
 msgstr "Prosimo, počakajte. Pridobivanje datoteke ..."
 
-#: media.pm:712
+#: media.pm:704
 #, c-format
 msgid "unable to add medium"
 msgstr "ni moč dodati vira"
 
-#: media.pm:752
+#: media.pm:744
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr "Kopiranje nekaterih paketov na disk, za kasnejšo uporabo"
 
-#: media.pm:805
+#: media.pm:797
 #, c-format
 msgid "Copying in progress"
 msgstr "Kopiranje poteka"
 
-#: pkgs.pm:32
+#: pkgs.pm:33
 #, c-format
 msgid "must have"
 msgstr "nepogrešljivo"
 
-#: pkgs.pm:33
+#: pkgs.pm:34
 #, c-format
 msgid "important"
 msgstr "pomembno"
 
-#: pkgs.pm:34
+#: pkgs.pm:35
 #, c-format
 msgid "very nice"
 msgstr "zelo uporabno"
 
-#: pkgs.pm:35
+#: pkgs.pm:36
 #, c-format
 msgid "nice"
 msgstr "uporabno"
 
-#: pkgs.pm:36
+#: pkgs.pm:37
 #, c-format
 msgid "maybe"
 msgstr "morda"
 
-#: pkgs.pm:102
+#: pkgs.pm:108
 #, c-format
 msgid "Getting package information from XML meta-data..."
 msgstr "Pridobivanje informacij o paketu iz metapodatkov XML ..."
 
-#: pkgs.pm:111
+#: pkgs.pm:117
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr "Za vir »%s« ni metapodatkov, zato rezultati za paket %s niso popolni"
 
-#: pkgs.pm:119
+#: pkgs.pm:125
 #, c-format
 msgid "No description"
 msgstr "Brez opisa"
 
-#: pkgs.pm:279
+#: pkgs.pm:287
 #, c-format
 msgid ""
 "Some packages requested by %s cannot be installed:\n"
@@ -413,386 +420,30 @@ msgstr ""
 "Ni moč namestiti nekaj paketov, ki jih zahteva %s:\n"
 "%s"
 
-#: pkgs.pm:375 pkgs.pm:402
+#: pkgs.pm:383 pkgs.pm:410
 #, c-format
 msgid "An error occurred:"
 msgstr "Prišlo je do napake:"
 
-#: pkgs.pm:394
+#: pkgs.pm:402
 #, c-format
 msgid "A fatal error occurred: %s."
 msgstr "Zgodila se je usodna napaka: %s."
 
-#: pkgs.pm:877 pkgs.pm:919
+#: pkgs.pm:885 pkgs.pm:927
 #, c-format
 msgid "Do not ask again"
 msgstr "Ne sprašuj več"
 
-#: pkgs.pm:893
+#: pkgs.pm:901
 #, c-format
 msgid "%d installation transactions failed"
 msgstr "%d namestitvenih transakcij je spodletelo"
 
-#: pkgs.pm:894
+#: pkgs.pm:902
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "Nameščanje paketov ni uspelo:"
-
-#: share/meta-task/compssUsers.pl:17
-#, c-format
-msgid "Workstation"
-msgstr "Delovna postaja"
-
-#: share/meta-task/compssUsers.pl:19
-#, c-format
-msgid "Office Workstation"
-msgstr "Pisarniška delovna postaja"
-
-#: share/meta-task/compssUsers.pl:21
-#, c-format
-msgid ""
-"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-"(LibreOffice Calc, Kspread), PDF viewers, etc"
-msgstr ""
-"Pisarniški programi: urejavalniki besedil (LibreOffice Writer, KWord), "
-"preglednice (LibreOffice Calc, KSpread), pregledovalniki PDF, itd"
-
-#: share/meta-task/compssUsers.pl:27
-#, c-format
-msgid "Game station"
-msgstr "Igralna postaja"
-
-#: share/meta-task/compssUsers.pl:28
-#, fuzzy, c-format
-msgid "Amusement programs: arcade, boards, strategy, etc."
-msgstr "Programi za zabavo: arkade, deske, strategije, itd"
-
-#: share/meta-task/compssUsers.pl:32
-#, c-format
-msgid "Multimedia station"
-msgstr "Večpredstavnostna postaja"
-
-#: share/meta-task/compssUsers.pl:33
-#, c-format
-msgid "Sound and video playing/editing programs"
-msgstr "Programi za predvajanje in urejanje zvoka in videa"
-
-#: share/meta-task/compssUsers.pl:38
-#, c-format
-msgid "Toys"
-msgstr ""
-
-#: share/meta-task/compssUsers.pl:39
-#, c-format
-msgid "Apps and tools of less useful value, yet entertaining..."
-msgstr ""
-
-#: share/meta-task/compssUsers.pl:43
-#, c-format
-msgid "Internet station"
-msgstr "Internetna postaja"
-
-#: share/meta-task/compssUsers.pl:44
-#, c-format
-msgid ""
-"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
-"Web"
-msgstr ""
-"Zbirka orodij za branje in pošiljanje pošte in pošiljanje v novičarske "
-"skupine (mutt, tin ...) ter brskanje po spletu"
-
-#: share/meta-task/compssUsers.pl:49
-#, c-format
-msgid "Network Computer (client)"
-msgstr "Omrežni računalnik (odjemalec)"
-
-#: share/meta-task/compssUsers.pl:50
-#, c-format
-msgid "Clients for different protocols including ssh"
-msgstr "Odjemalci za različne protokole, vključujoč SSH"
-
-#: share/meta-task/compssUsers.pl:56
-#, c-format
-msgid "Tools to ease the configuration of your computer"
-msgstr "Orodja za lažjo nastavitev računalnika"
-
-#: share/meta-task/compssUsers.pl:60
-#, c-format
-msgid "Console Tools"
-msgstr "Konzolna orodja"
-
-#: share/meta-task/compssUsers.pl:61
-#, c-format
-msgid "Editors, shells, file tools, terminals"
-msgstr "Urejevalniki, lupine, datotečna orodja, terminali"
-
-#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
-#: share/meta-task/compssUsers.pl:203
-#, c-format
-msgid "Development"
-msgstr "Razvoj"
-
-#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
-#, c-format
-msgid "C and C++ development libraries, programs and include files"
-msgstr "Razvojne knjižnice, programi in datoteke z glavami za C in C++"
-
-#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
-#, c-format
-msgid "Documentation"
-msgstr "Dokumentacija"
-
-#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
-#, c-format
-msgid "Books and Howto's on Linux and Free Software"
-msgstr "Knjige in priročniki o Linuxu in prostem programju"
-
-#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
-#, c-format
-msgid "LSB"
-msgstr "LSB"
-
-#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
-#, c-format
-msgid "Linux Standard Base. Third party applications support"
-msgstr "Standardna osnova Linuxa (LSB). Podpora programom tretjih oseb"
-
-#: share/meta-task/compssUsers.pl:87
-#, c-format
-msgid "Web Server"
-msgstr "Spletni strežnik"
-
-#: share/meta-task/compssUsers.pl:88
-#, c-format
-msgid "Apache"
-msgstr "Apache"
-
-#: share/meta-task/compssUsers.pl:92
-#, c-format
-msgid "Groupware"
-msgstr "Skupinsko delo"
-
-#: share/meta-task/compssUsers.pl:93
-#, c-format
-msgid "Kolab Server"
-msgstr "Strežnik Kolab"
-
-#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
-#, c-format
-msgid "Firewall/Router"
-msgstr "Požarni zid/usmerjevalnik"
-
-#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
-#, c-format
-msgid "Internet gateway"
-msgstr "Internetni prehod (gateway)"
-
-#: share/meta-task/compssUsers.pl:100
-#, c-format
-msgid "Mail/News"
-msgstr "Pošta/novičarske skupine"
-
-#: share/meta-task/compssUsers.pl:101
-#, c-format
-msgid "Postfix mail server, Inn news server"
-msgstr "Poštni strežnik postfix in novičarski strežnik Inn"
-
-#: share/meta-task/compssUsers.pl:105
-#, c-format
-msgid "Directory Server"
-msgstr "Imeniški strežnik"
-
-#: share/meta-task/compssUsers.pl:110
-#, c-format
-msgid "FTP Server"
-msgstr "Strežnik FTP"
-
-#: share/meta-task/compssUsers.pl:111
-#, c-format
-msgid "ProFTPd"
-msgstr "ProFTPd"
-
-#: share/meta-task/compssUsers.pl:115
-#, c-format
-msgid "DNS/NIS"
-msgstr "DNS/NIS"
-
-#: share/meta-task/compssUsers.pl:116
-#, c-format
-msgid "Domain Name and Network Information Server"
-msgstr "Strežnik imen domen in omrežnih podatkov"
-
-#: share/meta-task/compssUsers.pl:120
-#, c-format
-msgid "File and Printer Sharing Server"
-msgstr "Strežnik za souporabo datotek in tiskalnikov"
-
-#: share/meta-task/compssUsers.pl:121
-#, c-format
-msgid "NFS Server, Samba server"
-msgstr "Strežnik NFS, strežnik Samba"
-
-#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
-#, c-format
-msgid "Database"
-msgstr "Podatkovna zbirka"
-
-#: share/meta-task/compssUsers.pl:126
-#, c-format
-msgid "PostgreSQL and MariaDB Database Server"
-msgstr "Strežnik podatkovnih baz PostgreSQL in MariaDB"
-
-#: share/meta-task/compssUsers.pl:131
-#, c-format
-msgid "Web/FTP"
-msgstr "Splet/FTP"
-
-#: share/meta-task/compssUsers.pl:132
-#, c-format
-msgid "Apache, Pro-ftpd"
-msgstr "Apache, Pro-ftpd"
-
-#: share/meta-task/compssUsers.pl:136
-#, c-format
-msgid "Mail"
-msgstr "Pošta"
-
-#: share/meta-task/compssUsers.pl:137
-#, c-format
-msgid "Postfix mail server"
-msgstr "Poštni strežnik Postfix"
-
-#: share/meta-task/compssUsers.pl:142
-#, c-format
-msgid "PostgreSQL or MariaDB database server"
-msgstr "Strežnik podatkovnih baz PostgreSQL ali MariaDB"
-
-#: share/meta-task/compssUsers.pl:150
-#, c-format
-msgid "Network Computer server"
-msgstr "Omrežni računalnik (strežnik)"
-
-#: share/meta-task/compssUsers.pl:151
-#, c-format
-msgid "NFS server, SMB server, Proxy server, ssh server"
-msgstr "Strežnik NFS, strežnik SMB, posredniški strežnik, strežnik SSH"
-
-#: share/meta-task/compssUsers.pl:159
-#, c-format
-msgid "Graphical Environment"
-msgstr "Grafično okolje"
-
-#: share/meta-task/compssUsers.pl:163
-#, c-format
-msgid "KDE Workstation"
-msgstr "Delovna postaja KDE"
-
-#: share/meta-task/compssUsers.pl:164
-#, c-format
-msgid ""
-"The K Desktop Environment, the basic graphical environment with a collection "
-"of accompanying tools"
-msgstr ""
-"Namizno okolje KDE, moderno grafično okolje z zbirko pripadajočih orodij"
-
-#: share/meta-task/compssUsers.pl:169
-#, c-format
-msgid "GNOME Workstation"
-msgstr "Delovna postaja GNOME"
-
-#: share/meta-task/compssUsers.pl:170
-#, c-format
-msgid ""
-"A graphical environment with user-friendly set of applications and desktop "
-"tools"
-msgstr "Grafično okolje z naborom programov in namiznimi orodji"
-
-#: share/meta-task/compssUsers.pl:175
-#, fuzzy, c-format
-msgid "Xfce Workstation"
-msgstr "Pisarniška delovna postaja"
-
-#: share/meta-task/compssUsers.pl:176
-#, c-format
-msgid ""
-"A lighter graphical environment with user-friendly set of applications and "
-"desktop tools"
-msgstr ""
-"Majhno grafično okolje z naborom uporabniku prijaznih programov in namiznimi "
-"orodji"
-
-#: share/meta-task/compssUsers.pl:181
-#, c-format
-msgid "LXDE Desktop"
-msgstr "Namizje LXDE"
-
-#: share/meta-task/compssUsers.pl:183
-#, c-format
-msgid ""
-"A lightweight & fast graphical environment with user-friendly set of "
-"applications and desktop tools"
-msgstr ""
-"Majhno in hitro grafično okolje z naborom programov in namiznimi orodji"
-
-#: share/meta-task/compssUsers.pl:188
-#, c-format
-msgid "Other Graphical Desktops"
-msgstr "Druga grafična namizja"
-
-#: share/meta-task/compssUsers.pl:189
-#, fuzzy, c-format
-msgid "Window Maker, Enlightenment, Fvwm, etc."
-msgstr "Window Maker, Enlightenment, FVWM ..."
-
-#: share/meta-task/compssUsers.pl:192
-#, c-format
-msgid "Media Center"
-msgstr ""
-
-#: share/meta-task/compssUsers.pl:193
-#, c-format
-msgid "XBMC, MythTV, etc."
-msgstr ""
-
-#: share/meta-task/compssUsers.pl:218
-#, c-format
-msgid "Utilities"
-msgstr "Pripomočki"
-
-#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
-#, c-format
-msgid "SSH Server"
-msgstr "Strežnik SSH"
-
-#: share/meta-task/compssUsers.pl:225
-#, c-format
-msgid "Webmin"
-msgstr "Webmin"
-
-#: share/meta-task/compssUsers.pl:226
-#, c-format
-msgid "Webmin Remote Configuration Server"
-msgstr "Strežnik Webmin za oddaljeno nastavljanje"
-
-#: share/meta-task/compssUsers.pl:230
-#, c-format
-msgid "Network Utilities/Monitoring"
-msgstr "Omrežni pripomočki/nadzorovanje"
-
-#: share/meta-task/compssUsers.pl:231
-#, c-format
-msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-msgstr "Nadzorna orodja, knjigovodstvo procesov, tcpdump, nmap ..."
-
-#: share/meta-task/compssUsers.pl:235
-#, fuzzy, c-format
-msgid "DrakX Wizards"
-msgstr "Magejini čarovniki"
-
-#: share/meta-task/compssUsers.pl:236
-#, c-format
-msgid "Wizards to configure server"
-msgstr "Čarovniki za nastavitev strežnikov"
 
 #: steps.pm:85
 #, c-format
@@ -803,7 +454,7 @@ msgstr ""
 "Prišlo je do napake, ki je sistem ne zna odpraviti na ustrezen način.\n"
 "Nadaljujte na lastno odgovornost."
 
-#: steps.pm:449
+#: steps.pm:451
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -831,12 +482,12 @@ msgstr "Namestitev %s %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> med elementi"
 
-#: steps_gtk.pm:158
+#: steps_gtk.pm:163
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
 msgstr "Grafični strežnik se zaganja počasi. Prosimo, počakajte ..."
 
-#: steps_gtk.pm:223
+#: steps_gtk.pm:228
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -848,117 +499,117 @@ msgstr ""
 "v besedilnem načinu.\n"
 "Po zagonu z namestitvenega nosilca pritisnite »F1« in vnesite »text«."
 
-#: steps_gtk.pm:253 steps_gtk.pm:790
+#: steps_gtk.pm:258 steps_gtk.pm:793
 #, c-format
 msgid "Media Selection"
 msgstr "Izbira virov"
 
-#: steps_gtk.pm:264
+#: steps_gtk.pm:269
 #, c-format
-msgid "Install %s KDE Desktop"
-msgstr "Namestitev %s namizja KDE"
+msgid "Install %s Plasma Desktop"
+msgstr "Namestitev %s namizja Plazma"
 
-#: steps_gtk.pm:265
+#: steps_gtk.pm:270
 #, c-format
 msgid "Install %s GNOME Desktop"
 msgstr "Namestitev %s namizja GNOME"
 
-#: steps_gtk.pm:266
+#: steps_gtk.pm:271
 #, c-format
 msgid "Custom install"
 msgstr "Po meri"
 
-#: steps_gtk.pm:287
+#: steps_gtk.pm:292
 #, c-format
-msgid "KDE Desktop"
-msgstr "Namizje KDE"
+msgid "Plasma Desktop"
+msgstr "Namizje Plazma"
 
-#: steps_gtk.pm:288
+#: steps_gtk.pm:293
 #, c-format
 msgid "GNOME Desktop"
 msgstr "Namizje GNOME"
 
-#: steps_gtk.pm:289
+#: steps_gtk.pm:294
 #, c-format
 msgid "Custom Desktop"
 msgstr "Namizje po meri"
 
-#: steps_gtk.pm:295
+#: steps_gtk.pm:300
 #, c-format
 msgid "Here's a preview of the '%s' desktop."
 msgstr "To je ogled namizja »%s«."
 
-#: steps_gtk.pm:322
+#: steps_gtk.pm:327
 #, c-format
 msgid "Click on images in order to see a bigger preview"
 msgstr "Kliknite na sliko, da vidite večji ogled"
 
-#: steps_gtk.pm:338 steps_interactive.pm:595 steps_list.pm:31
+#: steps_gtk.pm:343 steps_interactive.pm:604 steps_list.pm:31
 #, c-format
 msgid "Package Group Selection"
 msgstr "Izbira skupin paketov"
 
-#: steps_gtk.pm:361 steps_interactive.pm:612
+#: steps_gtk.pm:366 steps_interactive.pm:621
 #, c-format
 msgid "Individual package selection"
 msgstr "Izbira posamičnih paketov"
 
-#: steps_gtk.pm:368
+#: steps_gtk.pm:373
 #, c-format
 msgid "Unselect All"
 msgstr "Odstrani izbiro"
 
-#: steps_gtk.pm:387 steps_interactive.pm:524
+#: steps_gtk.pm:392 steps_interactive.pm:533
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Skupna velikost: %d / %d MiB"
 
-#: steps_gtk.pm:432
+#: steps_gtk.pm:437
 #, c-format
 msgid "Version: "
 msgstr "Različica: "
 
-#: steps_gtk.pm:433
+#: steps_gtk.pm:438
 #, c-format
 msgid "Size: "
 msgstr "Velikost: "
 
-#: steps_gtk.pm:433
+#: steps_gtk.pm:438
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KiB\n"
 
-#: steps_gtk.pm:434
+#: steps_gtk.pm:439
 #, c-format
 msgid "Importance: "
 msgstr "Pomembnost: "
 
-#: steps_gtk.pm:469
+#: steps_gtk.pm:474
 #, c-format
 msgid "You cannot select/unselect this package"
 msgstr "Tega paketa ne morete izbrati ali izločiti."
 
-#: steps_gtk.pm:473
+#: steps_gtk.pm:478
 #, c-format
 msgid "due to missing %s"
 msgstr "ker manjka %s"
 
-#: steps_gtk.pm:474
+#: steps_gtk.pm:479
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "zaradi ne-zadostitve %s"
 
-#: steps_gtk.pm:475
+#: steps_gtk.pm:480
 #, c-format
 msgid "trying to promote %s"
 msgstr "poizkušam uveljaviti %s"
 
-#: steps_gtk.pm:476
+#: steps_gtk.pm:481
 #, c-format
 msgid "in order to keep %s"
 msgstr "da bi obdržal %s"
 
-#: steps_gtk.pm:481
+#: steps_gtk.pm:486
 #, c-format
 msgid ""
 "You cannot select this package as there is not enough space left to install "
@@ -967,97 +618,97 @@ msgstr ""
 "Tega paketa ne morete izbrati, ker ni dovolj prostora, da bi ga lahko "
 "namestili."
 
-#: steps_gtk.pm:484
+#: steps_gtk.pm:489
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Nameščeni bodo naslednji paketi"
 
-#: steps_gtk.pm:485
+#: steps_gtk.pm:490
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Odstranjeni bodo naslednji paketi"
 
-#: steps_gtk.pm:511
+#: steps_gtk.pm:516
 #, c-format
 msgid "This is a mandatory package, it cannot be unselected"
 msgstr "To je obvezen paket in ga ni mogoče izločiti."
 
-#: steps_gtk.pm:513
+#: steps_gtk.pm:518
 #, c-format
 msgid "You cannot unselect this package. It is already installed"
 msgstr "Tega paketa ne morete izločiti, ker je že nameščen."
 
-#: steps_gtk.pm:515
+#: steps_gtk.pm:520
 #, c-format
 msgid "You cannot unselect this package. It must be upgraded"
 msgstr "Tega paketa ne morete izločiti, ker ga je treba posodobiti."
 
-#: steps_gtk.pm:519
+#: steps_gtk.pm:524
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Prikaži samodejno izbrane pakete"
 
-#: steps_gtk.pm:523
+#: steps_gtk.pm:528
 #, c-format
 msgid "Install"
 msgstr "Namesti"
 
-#: steps_gtk.pm:526
+#: steps_gtk.pm:531
 #, c-format
 msgid "Load/Save selection"
 msgstr "Naloži/shrani izbor"
 
-#: steps_gtk.pm:527
+#: steps_gtk.pm:532
 #, c-format
 msgid "Updating package selection"
 msgstr "Posodabljanje izbora paketov"
 
-#: steps_gtk.pm:532
+#: steps_gtk.pm:537
 #, c-format
 msgid "Minimal install"
 msgstr "Minimalna namestitev"
 
-#: steps_gtk.pm:545
+#: steps_gtk.pm:550
 #, c-format
 msgid "Software Management"
 msgstr "Upravljanje s programi"
 
-#: steps_gtk.pm:545 steps_interactive.pm:405
+#: steps_gtk.pm:550 steps_interactive.pm:410
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Izberite pakete, ki jih želite namestiti"
 
-#: steps_gtk.pm:562 steps_interactive.pm:626 steps_list.pm:33
+#: steps_gtk.pm:567 steps_interactive.pm:635 steps_list.pm:33
 #, c-format
 msgid "Installing"
 msgstr "Nameščanje"
 
-#: steps_gtk.pm:593
+#: steps_gtk.pm:598
 #, c-format
 msgid "Bored?"
 msgstr ""
 
-#: steps_gtk.pm:593
+#: steps_gtk.pm:598
 #, c-format
 msgid "Boss button"
 msgstr ""
 
-#: steps_gtk.pm:599
+#: steps_gtk.pm:604
 #, c-format
 msgid "No details"
 msgstr "Brez podrobnosti"
 
-#: steps_gtk.pm:633
+#: steps_gtk.pm:639
 #, c-format
 msgid "Time remaining:"
 msgstr "Preostali čas:"
 
-#: steps_gtk.pm:634
+#: steps_gtk.pm:640
 #, c-format
 msgid "(estimating...)"
 msgstr "(izračunavanje ...)"
 
-#: steps_gtk.pm:664
+#: steps_gtk.pm:666
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
@@ -1066,22 +717,22 @@ msgstr[1] "%d paketa"
 msgstr[2] "%d paketi"
 msgstr[3] "%d paketov"
 
-#: steps_gtk.pm:720 steps_interactive.pm:794 steps_list.pm:44
+#: steps_gtk.pm:723 steps_interactive.pm:830 steps_list.pm:44
 #, c-format
 msgid "Summary"
 msgstr "Povzetek"
 
-#: steps_gtk.pm:739
+#: steps_gtk.pm:742
 #, c-format
 msgid "Configure"
 msgstr "Nastavitev"
 
-#: steps_gtk.pm:756 steps_interactive.pm:790 steps_interactive.pm:946
+#: steps_gtk.pm:759 steps_interactive.pm:826 steps_interactive.pm:964
 #, c-format
 msgid "not configured"
 msgstr "ni nastavljeno"
 
-#: steps_gtk.pm:799 steps_interactive.pm:303
+#: steps_gtk.pm:802 steps_interactive.pm:308
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -1090,7 +741,7 @@ msgstr ""
 "Na voljo so naslednji viri za namestitev.\n"
 "Če želite katerega izmed njih izločiti, to lahko storite sedaj."
 
-#: steps_gtk.pm:815 steps_interactive.pm:309
+#: steps_gtk.pm:818 steps_interactive.pm:314
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard disk drive "
@@ -1103,69 +754,69 @@ msgstr ""
 "V tem primeru bo namestitev potekala s trdega diska, paketi pa bodo ostali "
 "na voljo tudi po zaključeni namestitvi."
 
-#: steps_gtk.pm:817 steps_interactive.pm:311
+#: steps_gtk.pm:820 steps_interactive.pm:316
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Prekopiraj vsebino nosilcev"
 
-#: steps_interactive.pm:40
+#: steps_interactive.pm:41
 #, c-format
 msgid "An error occurred"
 msgstr "Prišlo je do napake"
 
-#: steps_interactive.pm:105
+#: steps_interactive.pm:106
 #, c-format
 msgid "Please choose your keyboard layout"
 msgstr "Izberite razpored tipkovnice"
 
-#: steps_interactive.pm:109
+#: steps_interactive.pm:110
 #, c-format
 msgid "Here is the full list of available keyboards:"
 msgstr "Tu je celoten seznam razpoložljivih tipkovnic:"
 
-#: steps_interactive.pm:148
+#: steps_interactive.pm:149
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Namestitev/nadgradnja"
 
-#: steps_interactive.pm:152
+#: steps_interactive.pm:153
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Ali želite izvesti namestitev ali nadgradnjo?"
 
-#: steps_interactive.pm:154
+#: steps_interactive.pm:155
 #, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "Namestitev"
 
-#: steps_interactive.pm:156
+#: steps_interactive.pm:157
 #, c-format
 msgid "Upgrade %s"
 msgstr "Nadgradnja %s"
 
-#: steps_interactive.pm:174
+#: steps_interactive.pm:175
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Šifrirni ključ za %s"
 
-#: steps_interactive.pm:209
+#: steps_interactive.pm:210
 #, c-format
 msgid "Cancel installation, reboot system"
 msgstr "Prekliči namestitev, znova zaženi računalnik"
 
-#: steps_interactive.pm:210
+#: steps_interactive.pm:211
 #, c-format
 msgid "New Installation"
 msgstr "Nova namestitev"
 
-#: steps_interactive.pm:211
+#: steps_interactive.pm:212
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
 msgstr "Nadgradite obstoječo namestitev (ni priporočeno)"
 
-#: steps_interactive.pm:215
+#: steps_interactive.pm:216
 #, fuzzy, c-format
 msgid ""
 "Installer has detected that your installed %s system could not\n"
@@ -1184,7 +835,17 @@ msgstr ""
 "Opozorilo: Pred nadaljevanjem z novo namestitvijo napravite\n"
 "varnostno kopijo vseh osebnih podatkov."
 
-#: steps_interactive.pm:342
+#: steps_interactive.pm:257
+#, c-format
+msgid "CD/DVD"
+msgstr "CD/DVD"
+
+#: steps_interactive.pm:257
+#, c-format
+msgid "Configuring CD/DVD"
+msgstr "Nastavljanje enote CD/DVD"
+
+#: steps_interactive.pm:347
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1198,12 +859,12 @@ msgstr ""
 "Če zahtevanega nosilca nimate, kliknite Prekliči, da ga bo namestitev "
 "preskočila."
 
-#: steps_interactive.pm:360
+#: steps_interactive.pm:365 steps_interactive.pm:485
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Iskanje razpoložljivih paketov ..."
 
-#: steps_interactive.pm:368
+#: steps_interactive.pm:373
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade "
@@ -1211,7 +872,7 @@ msgid ""
 msgstr ""
 "Sistem nima dovolj prostora za namestitev ali nadgradnjo (%d MiB > %d MiB)"
 
-#: steps_interactive.pm:418
+#: steps_interactive.pm:423
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1220,52 +881,52 @@ msgstr ""
 "Izberite nalaganje ali shranjevanje izbora paketov.\n"
 "Format je enak formatu datotek za samodejno namestitev."
 
-#: steps_interactive.pm:420
+#: steps_interactive.pm:425
 #, c-format
 msgid "Load"
 msgstr "Naloži"
 
-#: steps_interactive.pm:420
+#: steps_interactive.pm:425
 #, c-format
 msgid "Save"
 msgstr "Shrani"
 
-#: steps_interactive.pm:428
+#: steps_interactive.pm:433
 #, c-format
 msgid "Bad file"
 msgstr "Neustrezna datoteka"
 
-#: steps_interactive.pm:445
+#: steps_interactive.pm:450
 #, c-format
-msgid "KDE"
-msgstr "KDE"
+msgid "Plasma"
+msgstr "Plazma"
 
-#: steps_interactive.pm:446
+#: steps_interactive.pm:451
 #, c-format
 msgid "GNOME"
 msgstr "GNOME"
 
-#: steps_interactive.pm:449
+#: steps_interactive.pm:454
 #, c-format
 msgid "Desktop Selection"
 msgstr "Izbira namizja"
 
-#: steps_interactive.pm:450
+#: steps_interactive.pm:455
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr "Tu lahko izberete namizno okolje, ki bo nameščeno."
 
-#: steps_interactive.pm:538
+#: steps_interactive.pm:547
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Velikost izbora presega velikost razpoložljivega prostora."
 
-#: steps_interactive.pm:562
+#: steps_interactive.pm:571
 #, c-format
 msgid "Type of install"
 msgstr "Vrsta namestitve"
 
-#: steps_interactive.pm:563
+#: steps_interactive.pm:572
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1274,87 +935,119 @@ msgstr ""
 "Izbrali niste nobene skupine paketov.\n"
 "Izbrati morate vsaj minimalno namestitev:"
 
-#: steps_interactive.pm:568
+#: steps_interactive.pm:577
 #, c-format
 msgid "With X"
 msgstr "Z grafičnim okoljem"
 
-#: steps_interactive.pm:569
+#: steps_interactive.pm:578
 #, c-format
 msgid "Install suggested packages"
 msgstr "Namesti predlagane pakete"
 
-#: steps_interactive.pm:570
+#: steps_interactive.pm:579
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Z osnovno dokumentacijo (priporočeno)"
 
-#: steps_interactive.pm:571
+#: steps_interactive.pm:580
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Zares najmanjša možna namestitev (še posebej brez urpmi)"
 
-#: steps_interactive.pm:627
+#: steps_interactive.pm:636
 #, c-format
 msgid "Preparing installation"
 msgstr "Pripravljanje namestitve"
 
-#: steps_interactive.pm:635
+#: steps_interactive.pm:644
 #, c-format
 msgid "Installing package %s"
 msgstr "Nameščanje paketa %s"
 
-#: steps_interactive.pm:659
+#: steps_interactive.pm:668
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Med razvrščanjem paketov je prišlo do napake:"
 
-#: steps_interactive.pm:659
+#: steps_interactive.pm:668
 #, c-format
 msgid "Go on anyway?"
 msgstr "Ali naj kljub temu nadaljujem?"
 
-#: steps_interactive.pm:663
+#: steps_interactive.pm:672
 #, c-format
 msgid "Retry"
 msgstr "Poskusi znova"
 
-#: steps_interactive.pm:664
+#: steps_interactive.pm:673
 #, c-format
 msgid "Skip this package"
 msgstr "Spusti ta paket"
 
-#: steps_interactive.pm:665
+#: steps_interactive.pm:674
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "Spusti vse pakete z nosilca »%s«"
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:675
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Nazaj na izbiro nosilcev in paketov"
 
-#: steps_interactive.pm:669
+#: steps_interactive.pm:678
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Prišlo je do napake med nameščanjem paketa %s."
 
-#: steps_interactive.pm:688
+#: steps_interactive.pm:697
 #, c-format
 msgid "Post-install configuration"
 msgstr "Nastavitev po namestitvi"
 
-#: steps_interactive.pm:695
+#: steps_interactive.pm:704
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Prepričajte se, da je nosilec »Posodobitev modulov« v pogonu %s"
 
-#: steps_interactive.pm:726
+#: steps_interactive.pm:735 steps_interactive.pm:765
 #, c-format
 msgid "Updates"
 msgstr "Posodobitve"
 
-#: steps_interactive.pm:727
+#: steps_interactive.pm:736
+#, c-format
+msgid "You now have the opportunity to setup online media."
+msgstr "Sedaj je priložnost za nastavitev spletnih virov."
+
+#: steps_interactive.pm:737
+#, c-format
+msgid "This allows to install security updates."
+msgstr "S tem bo možno namestiti varnostne posodobitve."
+
+#: steps_interactive.pm:738
+#, c-format
+msgid ""
+"To setup those media, you will need to have a working Internet \n"
+"connection.\n"
+"\n"
+"Do you want to setup the update media?"
+msgstr ""
+"Za nastavitev spletnih virov je potrebna delujoča spletna povezava.\n"
+"\n"
+"Ali želite nastaviti spletne posodobitvene vire?"
+
+#: steps_interactive.pm:758
+#, c-format
+msgid "Failure when adding medium"
+msgstr "Napaka pri dodajanju vira"
+
+#: steps_interactive.pm:758
+#, c-format
+msgid "Retry?"
+msgstr "Poskusi znova?"
+
+#: steps_interactive.pm:766
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1375,104 +1068,79 @@ msgstr ""
 "Ali želite namestiti posodobitve?"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:838
+#: steps_interactive.pm:874
 #, c-format
 msgid "%s on %s"
 msgstr "%s na %s"
 
-#: steps_interactive.pm:873 steps_interactive.pm:880 steps_interactive.pm:893
-#: steps_interactive.pm:910 steps_interactive.pm:925
+#: steps_interactive.pm:909 steps_interactive.pm:916 steps_interactive.pm:929
+#: steps_interactive.pm:943
 #, c-format
 msgid "Hardware"
 msgstr "Strojna oprema"
 
-#: steps_interactive.pm:894 steps_interactive.pm:911
+#: steps_interactive.pm:930
 #, c-format
 msgid "Sound card"
 msgstr "Zvočna kartica"
 
-#: steps_interactive.pm:914
-#, c-format
-msgid "Do you have an ISA sound card?"
-msgstr "Ali imate zvočno kartico na vodilu ISA?"
-
-#: steps_interactive.pm:916
-#, c-format
-msgid ""
-"Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
-"card"
-msgstr ""
-"Za nastavitev zvočne kartice po namestitvi zaženite »alsaconf« ali "
-"»sndconfig«."
-
-#: steps_interactive.pm:918
-#, c-format
-msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr ""
-"Ne zaznam zvočne kartice. Po namestitvi jo poskusite nastaviti s pomočjo "
-"»harddrake«."
-
-#: steps_interactive.pm:926
+#: steps_interactive.pm:944
 #, c-format
 msgid "Graphical interface"
 msgstr "Grafična kartica"
 
-#: steps_interactive.pm:932 steps_interactive.pm:944
+#: steps_interactive.pm:950 steps_interactive.pm:962
 #, c-format
 msgid "Network & Internet"
 msgstr "Omrežje in internet"
 
-#: steps_interactive.pm:945
+#: steps_interactive.pm:963
 #, c-format
 msgid "Proxies"
 msgstr "Posredniški strežniki"
 
-#: steps_interactive.pm:946
+#: steps_interactive.pm:964
 #, c-format
 msgid "configured"
 msgstr "nastavljeno"
 
-#: steps_interactive.pm:956
+#: steps_interactive.pm:974
 #, c-format
 msgid "Security Level"
 msgstr "Stopnja varnosti"
 
-#: steps_interactive.pm:976
+#: steps_interactive.pm:994
 #, c-format
 msgid "Firewall"
 msgstr "Požarni zid"
 
-#: steps_interactive.pm:980
+#: steps_interactive.pm:998
 #, c-format
 msgid "activated"
 msgstr "aktivirano"
 
-#: steps_interactive.pm:980
+#: steps_interactive.pm:998
 #, c-format
 msgid "disabled"
 msgstr "onemogočeno"
 
-#: steps_interactive.pm:994
+#: steps_interactive.pm:1012
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Niste nastavili grafičnega strežnika. Ali to zares želite?"
 
-#: steps_interactive.pm:1023
-#, c-format
-msgid "Preparing bootloader..."
-msgstr "Pripravljanje zagonskega nalagalnika ..."
-
-#: steps_interactive.pm:1023
+#. -PO: This is NOT the boot loader (just the kernel initrds)!!!!
+#: steps_interactive.pm:1043
 #, c-format
 msgid "Preparing initial startup program..."
 msgstr "Pripravljanje začetnega zagonskega programa ..."
 
-#: steps_interactive.pm:1024
+#: steps_interactive.pm:1044
 #, c-format
 msgid "Be patient, this may take a while..."
 msgstr "Prosimo, potrpite. To lahko traja dalj časa ..."
 
-#: steps_interactive.pm:1040
+#: steps_interactive.pm:1060
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1481,17 +1149,17 @@ msgstr ""
 "Na tej varnostni stopnji je dostop do datotek na razdelku za Windows "
 "dovoljen samo skrbniku sistema (root)."
 
-#: steps_interactive.pm:1072
+#: steps_interactive.pm:1092
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "V pogon %s vstavite prazno disketo"
 
-#: steps_interactive.pm:1074
+#: steps_interactive.pm:1094
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Ustvarjanje diskete za samodejno namestitev ..."
 
-#: steps_interactive.pm:1085
+#: steps_interactive.pm:1105
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1502,12 +1170,12 @@ msgstr ""
 "\n"
 "Ali res želite končati?"
 
-#: steps_interactive.pm:1095
+#: steps_interactive.pm:1115
 #, c-format
 msgid "Congratulations"
 msgstr "Čestitke"
 
-#: steps_interactive.pm:1098
+#: steps_interactive.pm:1118
 #, c-format
 msgid "Reboot"
 msgstr "Ponovni zagon"
@@ -1630,42 +1298,11 @@ msgid ""
 "Exit"
 msgstr "Izhod"
 
-#~ msgid "A lightweight fast graphical environment"
-#~ msgstr "Majhno in hitro grafično okolje"
+#~ msgid "LXQt Desktop"
+#~ msgstr "Namizje LXQt"
 
-#~ msgid "A next generation QT port of the lightweight desktop environment"
-#~ msgstr ""
-#~ "Nova generacija majhnega in hitrega namiznega okolja prenesenega na QT"
-
-#~ msgid "Install recommended packages"
-#~ msgstr "Namesti priporočene pakete"
-
-#~ msgid "LXQT Desktop"
-#~ msgstr "Namizje LXQT"
-
-#~ msgid "Moondrake Wizards"
-#~ msgstr "Magejini čarovniki"
-
-#~ msgid "Plasma Desktop"
-#~ msgstr "Namizje Plazma"
-
-#~ msgid ""
-#~ "The Plasma Desktop, the basic graphical environment with a collection of "
-#~ "accompanying tools"
-#~ msgstr ""
-#~ "Namizje Plazma, osnovno grafično okolje z zbirko pripadajočih orodij"
-
-#~ msgid ""
-#~ "\"%s\" contains software that can not be distributed in every country due "
-#~ "to software patents."
-#~ msgstr ""
-#~ "Vir »%s« vsebuje programsko opremo, ki je zaradi patentne zaščite v "
-#~ "nekaterih državah ni možno prosto razširjati."
-
-#~ msgid ""
-#~ "\"%s\" contains the various pieces of the systems and its applications"
-#~ msgstr ""
-#~ "Vir »%s« vsebuje različne sistemske dele in pripadajočo programsko opremo"
+#~ msgid "Plasma Workstation"
+#~ msgstr "Delovna postaja Plazma"
 
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Popolno namizje Mandriva Linux, s podporo"
@@ -1673,14 +1310,49 @@ msgstr "Izhod"
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "Grafično okolje osnovano na GNOME"
 
+#~ msgid ""
+#~ "A graphical environment with user-friendly set of applications and "
+#~ "desktop tools"
+#~ msgstr "Grafično okolje z naborom programov in namiznimi orodji"
+
 #~ msgid "A less developed lightweight fast graphical environment"
 #~ msgstr "Majhno in hitro, a manj razvito grafično okolje"
+
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Majhno grafično okolje z naborom uporabniku prijaznih programov in "
+#~ "namiznimi orodji"
+
+#~ msgid ""
+#~ "A lightweight & fast graphical environment with user-friendly set of "
+#~ "applications and desktop tools"
+#~ msgstr ""
+#~ "Majhno in hitro grafično okolje z naborom programov in namiznimi orodji"
+
+#~ msgid "A lightweight fast graphical environment"
+#~ msgstr "Majhno in hitro grafično okolje"
 
 #~ msgid "A lightweight fast graphical environment with a dedicated following"
 #~ msgstr "Majhno in hitro grafično okolje s predanimi privrženci"
 
+#~ msgid "A next generation QT port of the lightweight desktop environment"
+#~ msgstr ""
+#~ "Nova generacija majhnega in hitrega namiznega okolja prenesenega na QT"
+
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "Programi za zabavo: arkade, deske, strategije, itd"
+
+#, fuzzy
+#~ msgid "Amusement programs: arcade, boards, strategy, etc."
+#~ msgstr "Programi za zabavo: arkade, deske, strategije, itd"
+
+#~ msgid "Apache"
+#~ msgstr "Apache"
+
+#~ msgid "Apache, Pro-ftpd"
+#~ msgstr "Apache, Pro-ftpd"
 
 #~ msgid "Automated"
 #~ msgstr "Samodejno"
@@ -1691,11 +1363,23 @@ msgstr "Izhod"
 #~ msgid "Be Free!"
 #~ msgstr "Bodite svobodni!"
 
+#~ msgid "Books and Howto's on Linux and Free Software"
+#~ msgstr "Knjige in priročniki o Linuxu in prostem programju"
+
+#~ msgid "C and C++ development libraries, programs and include files"
+#~ msgstr "Razvojne knjižnice, programi in datoteke z glavami za C in C++"
+
+#~ msgid "CD-ROM"
+#~ msgstr "CD-ROM"
+
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Delovna postaja Cinnamon"
 
-#~ msgid "Configuring IDE"
-#~ msgstr "Nastavljanje IDE"
+#~ msgid "Clients for different protocols including ssh"
+#~ msgstr "Odjemalci za različne protokole, vključujoč SSH"
+
+#~ msgid "Console Tools"
+#~ msgstr "Konzolna orodja"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr ""
@@ -1705,11 +1389,39 @@ msgstr "Izhod"
 #~ msgid "Core Release"
 #~ msgstr "Glavni (core) - izdajni"
 
+#~ msgid "DNS/NIS"
+#~ msgstr "DNS/NIS"
+
+#~ msgid "Database"
+#~ msgstr "Podatkovna zbirka"
+
+#~ msgid "Development"
+#~ msgstr "Razvoj"
+
+#~ msgid "Directory Server"
+#~ msgstr "Imeniški strežnik"
+
+#~ msgid "Do you have an ISA sound card?"
+#~ msgstr "Ali imate zvočno kartico na vodilu ISA?"
+
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "Ali želite uporabiti aboot?"
 
+#~ msgid "Documentation"
+#~ msgstr "Dokumentacija"
+
+#~ msgid "Domain Name and Network Information Server"
+#~ msgstr "Strežnik imen domen in omrežnih podatkov"
+
 #~ msgid "Downloading file %s..."
 #~ msgstr "Prenos datoteke %s ..."
+
+#, fuzzy
+#~ msgid "DrakX Wizards"
+#~ msgstr "Magejini čarovniki"
+
+#~ msgid "Editors, shells, file tools, terminals"
+#~ msgstr "Urejevalniki, lupine, datotečna orodja, terminali"
 
 #~ msgid "Enlightenment e17 Desktop"
 #~ msgstr "Namizje Enlightenment e17"
@@ -1724,6 +1436,15 @@ msgstr "Izhod"
 
 #~ msgid "Explore Linux easily with Mandriva One"
 #~ msgstr "Z Mandriva One je odkrivanje Linuxa preprosto"
+
+#~ msgid "FTP Server"
+#~ msgstr "Strežnik FTP"
+
+#~ msgid "File and Printer Sharing Server"
+#~ msgstr "Strežnik za souporabo datotek in tiskalnikov"
+
+#~ msgid "Firewall/Router"
+#~ msgstr "Požarni zid/usmerjevalnik"
 
 #~ msgid "For contributors"
 #~ msgstr "Za vse, ki prispevajo"
@@ -1743,8 +1464,20 @@ msgstr "Izhod"
 #~ msgid "For you"
 #~ msgstr "Za vsakogar"
 
+#~ msgid "GNOME Workstation"
+#~ msgstr "Delovna postaja GNOME"
+
+#~ msgid "Game station"
+#~ msgstr "Igralna postaja"
+
 #~ msgid "Generate auto install floppy"
 #~ msgstr "Ustvari disketo za samodejno namestitev"
+
+#~ msgid "Graphical Environment"
+#~ msgstr "Grafično okolje"
+
+#~ msgid "Groupware"
+#~ msgstr "Skupinsko delo"
 
 #~ msgid "Home entertainment"
 #~ msgstr "Domača zabava"
@@ -1754,6 +1487,9 @@ msgstr "Izhod"
 
 #~ msgid "IceWm Desktop"
 #~ msgstr "Namizje IceWM"
+
+#~ msgid "Install recommended packages"
+#~ msgstr "Namesti priporočene pakete"
 
 #~ msgid ""
 #~ "Installer has detected that your installed Linux system could not\n"
@@ -1772,24 +1508,47 @@ msgstr "Izhod"
 #~ "Opozorilo: Pred nadaljevanjem z novo namestitvijo napravite\n"
 #~ "varnostno kopijo vseh osebnih podatkov."
 
-#~ msgid ""
-#~ "It also contains firmwares needed for certain devices to operate (eg: "
-#~ "some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
-#~ msgstr ""
-#~ "Vsebuje tudi strojno programsko opremo, ki je potrebna za delovanje "
-#~ "nekaterih naprav (npr.: nekatere grafične kartice ATI/AMD, določene "
-#~ "mrežne kartice, nekatere kartice RAID) ..."
+#~ msgid "Internet gateway"
+#~ msgstr "Internetni prehod (gateway)"
 
-#~ msgid ""
-#~ "It also contains software from \"%s\" rebuild with additional "
-#~ "capabilities."
-#~ msgstr "Vsebuje tudi pakete iz vira »%s«, a z dodatnimi zmožnostmi."
+#~ msgid "Internet station"
+#~ msgstr "Internetna postaja"
 
 #~ msgid "Join Us!"
 #~ msgstr "Pridružite se nam!"
 
+#~ msgid "KDE"
+#~ msgstr "KDE"
+
+#~ msgid "KDE Desktop"
+#~ msgstr "Namizje KDE"
+
+#~ msgid "KDE Workstation"
+#~ msgstr "Delovna postaja KDE"
+
+#~ msgid "Kolab Server"
+#~ msgstr "Strežnik Kolab"
+
+#~ msgid "LSB"
+#~ msgstr "LSB"
+
+#~ msgid "LXDE Desktop"
+#~ msgstr "Namizje LXDE"
+
+#~ msgid "LXQT Desktop"
+#~ msgstr "Namizje LXQT"
+
+#~ msgid "Linux Standard Base. Third party applications support"
+#~ msgstr "Standardna osnova Linuxa (LSB). Podpora programom tretjih oseb"
+
 #~ msgid "MATE Workstation"
 #~ msgstr "Delovna postaja MATE"
+
+#~ msgid "Mail"
+#~ msgstr "Pošta"
+
+#~ msgid "Mail/News"
+#~ msgstr "Pošta/novičarske skupine"
 
 #~ msgid "Make it yours!"
 #~ msgstr "Osvojite jo!"
@@ -1803,8 +1562,32 @@ msgstr "Izhod"
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr "Mandriva: distribucije za potrebe vsakogar"
 
+#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+#~ msgstr "Nadzorna orodja, knjigovodstvo procesov, tcpdump, nmap ..."
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Magejini čarovniki"
+
 #~ msgid "Moondrake, the new Linux distribution"
 #~ msgstr "Moondrake, nova distribucija Linuxa"
+
+#~ msgid "Multimedia station"
+#~ msgstr "Večpredstavnostna postaja"
+
+#~ msgid "NFS Server, Samba server"
+#~ msgstr "Strežnik NFS, strežnik Samba"
+
+#~ msgid "NFS server, SMB server, Proxy server, ssh server"
+#~ msgstr "Strežnik NFS, strežnik SMB, posredniški strežnik, strežnik SSH"
+
+#~ msgid "Network Computer (client)"
+#~ msgstr "Omrežni računalnik (odjemalec)"
+
+#~ msgid "Network Computer server"
+#~ msgstr "Omrežni računalnik (strežnik)"
+
+#~ msgid "Network Utilities/Monitoring"
+#~ msgstr "Omrežni pripomočki/nadzorovanje"
 
 #~ msgid ""
 #~ "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1814,8 +1597,23 @@ msgstr "Izhod"
 #~ "nadaljevala, vendar morate, da bi sistem po namestitvi lahko zagnali, s "
 #~ "pomočjo orodja DiskDrake ustvariti razdelek za začetno nalaganje."
 
+#~ msgid "No sound card detected. Try \"harddrake\" after installation"
+#~ msgstr ""
+#~ "Ne zaznam zvočne kartice. Po namestitvi jo poskusite nastaviti s pomočjo "
+#~ "»harddrake«."
+
 #~ msgid "Nonfree Release"
 #~ msgstr "Lastniški (nonfree) - izdajni"
+
+#~ msgid "Office Workstation"
+#~ msgstr "Pisarniška delovna postaja"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Pisarniški programi: urejavalniki besedil (LibreOffice Writer, KWord), "
+#~ "preglednice (LibreOffice Calc, KSpread), pregledovalniki PDF, itd"
 
 #, fuzzy
 #~ msgid ""
@@ -1835,11 +1633,26 @@ msgstr "Izhod"
 #~ msgid "Office tools"
 #~ msgstr "Pisarniška orodja"
 
+#~ msgid "Other Graphical Desktops"
+#~ msgstr "Druga grafična namizja"
+
 #~ msgid "People!"
 #~ msgstr "Ljudje"
 
+#~ msgid "Postfix mail server"
+#~ msgstr "Poštni strežnik Postfix"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Poštni strežnik postfix in novičarski strežnik Inn"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "Strežnik podatkovnih baz PostgreSQL in MariaDB"
+
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "Strežnik podatkovnih baz PostgreSQL in MySQL"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "Strežnik podatkovnih baz PostgreSQL ali MariaDB"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "Strežnik podatkovnih baz PostgreSQL ali MySQL"
@@ -1847,8 +1660,14 @@ msgstr "Izhod"
 #~ msgid "Preparing boot images..."
 #~ msgstr "Pripravljanje zagonskega nalagalnika ..."
 
+#~ msgid "Preparing bootloader..."
+#~ msgstr "Pripravljanje zagonskega nalagalnika ..."
+
 #~ msgid "Preparing upgrade..."
 #~ msgstr "Pripravljanje nadgradnje ..."
+
+#~ msgid "ProFTPd"
+#~ msgstr "ProFTPd"
 
 #~ msgid "Proceed"
 #~ msgstr "Nadaljuj"
@@ -1859,11 +1678,31 @@ msgstr "Izhod"
 #~ msgid "Replay"
 #~ msgstr "Ponovi"
 
+#~ msgid ""
+#~ "Run \"alsaconf\" or \"sndconfig\" after installation to configure your "
+#~ "sound card"
+#~ msgstr ""
+#~ "Za nastavitev zvočne kartice po namestitvi zaženite »alsaconf« ali "
+#~ "»sndconfig«."
+
+#~ msgid "SSH Server"
+#~ msgstr "Strežnik SSH"
+
 #~ msgid "Save packages selection"
 #~ msgstr "Shrani izbiro paketov"
 
 #~ msgid "Select All"
 #~ msgstr "Izberi vse"
+
+#~ msgid ""
+#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
+#~ "the Web"
+#~ msgstr ""
+#~ "Zbirka orodij za branje in pošiljanje pošte in pošiljanje v novičarske "
+#~ "skupine (mutt, tin ...) ter brskanje po spletu"
+
+#~ msgid "Sound and video playing/editing programs"
+#~ msgstr "Programi za predvajanje in urejanje zvoka in videa"
 
 #~ msgid "Tainted Release"
 #~ msgstr "Patentno zaščiteni (tainted) - izdajni"
@@ -1873,6 +1712,18 @@ msgstr "Izhod"
 
 #~ msgid "The 100%% open source Mandriva Linux distribution"
 #~ msgstr "100 %% odprto-kodna distribucija Mandriva Linux"
+
+#~ msgid ""
+#~ "The K Desktop Environment, the basic graphical environment with a "
+#~ "collection of accompanying tools"
+#~ msgstr ""
+#~ "Namizno okolje KDE, moderno grafično okolje z zbirko pripadajočih orodij"
+
+#~ msgid ""
+#~ "The Plasma Desktop, the basic graphical environment with a collection of "
+#~ "accompanying tools"
+#~ msgstr ""
+#~ "Namizje Plazma, osnovno grafično okolje z zbirko pripadajočih orodij"
 
 #~ msgid ""
 #~ "The auto install can be fully automated if wanted,\n"
@@ -1891,6 +1742,9 @@ msgstr "Izhod"
 #~ msgid "This medium provides package updates for medium \"%s\""
 #~ msgstr "Ta vir ponuja posodobitve paketov za vir »%s«"
 
+#~ msgid "Tools to ease the configuration of your computer"
+#~ msgstr "Orodja za lažjo nastavitev računalnika"
+
 #~ msgid "Unable to contact mirror %s"
 #~ msgstr "Povezave z zrcalnim strežnikom %s ni mogoče vzpostaviti."
 
@@ -1900,17 +1754,46 @@ msgstr "Izhod"
 #~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 #~ msgstr "Posodobitev s 64-bitnega na 32-bitni sistem ni podprta"
 
+#~ msgid "Utilities"
+#~ msgstr "Pripomočki"
+
+#~ msgid "Web Server"
+#~ msgstr "Spletni strežnik"
+
+#~ msgid "Web/FTP"
+#~ msgstr "Splet/FTP"
+
+#~ msgid "Webmin"
+#~ msgstr "Webmin"
+
+#~ msgid "Webmin Remote Configuration Server"
+#~ msgstr "Strežnik Webmin za oddaljeno nastavljanje"
+
 #~ msgid "Welcome"
 #~ msgstr "Dobrodošli"
 
 #~ msgid "Welcome!"
 #~ msgstr "Dobrodošli"
 
+#, fuzzy
+#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
+#~ msgstr "Window Maker, Enlightenment, FVWM ..."
+
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Window Maker, FVWM ..."
 
+#~ msgid "Wizards to configure server"
+#~ msgstr "Čarovniki za nastavitev strežnikov"
+
+#~ msgid "Workstation"
+#~ msgstr "Delovna postaja"
+
 #~ msgid "XFCE Workstation"
 #~ msgstr "Delovna postaja XFCE"
+
+#, fuzzy
+#~ msgid "Xfce Workstation"
+#~ msgstr "Pisarniška delovna postaja"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

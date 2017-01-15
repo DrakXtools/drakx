@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:28+0100\n"
+"POT-Creation-Date: 2017-01-15 15:12+0100\n"
 "PO-Revision-Date: 2004-01-02 00:35+0100\n"
 "Last-Translator: Sanlig Badral <Badral@openmn.org>\n"
 "Language-Team: Mongolian <openmn-core@lists.sf.net>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.0.2\n"
 
-#: display_help:53 display_help:58 drakbug:173 drakperm:134
+#: display_help:50 display_help:55 drakbug:173 drakperm:134
 #, c-format
 msgid "Help"
 msgstr "Тусламж"
 
-#: display_help:66 drakbug:178 drakfont:507
+#: display_help:63 drakbug:178 drakfont:507
 #, c-format
 msgid "Close"
 msgstr "Хаах"
@@ -33,135 +33,63 @@ msgstr "Хаах"
 msgid "Authentication"
 msgstr "Баталгаажуулалт"
 
-#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213
-#: drakfont:226 drakfont:264 finish-install:133 logdrake:177 logdrake:453
-#: logdrake:458 scannerdrake:56 scannerdrake:98 scannerdrake:139
-#: scannerdrake:197 scannerdrake:256 scannerdrake:726 scannerdrake:737
-#: scannerdrake:876 scannerdrake:887 scannerdrake:957
+#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213 drakfont:226
+#: drakfont:264 finish-install:133 logdrake:177 logdrake:453 logdrake:458
+#: scannerdrake:56 scannerdrake:98 scannerdrake:139 scannerdrake:197
+#: scannerdrake:256 scannerdrake:726 scannerdrake:737 scannerdrake:876
+#: scannerdrake:887 scannerdrake:957
 #, c-format
 msgid "Error"
 msgstr "Алдаа"
 
-#: drakboot:54
-#, c-format
-msgid "No bootloader found, creating a new configuration"
-msgstr ""
-
-#: drakboot:89 harddrake2:191 logdrake:77
+#: drakautologin:54 harddrake2:195 logdrake:77
 #, c-format
 msgid "_File"
 msgstr "_Файл"
 
-#: drakboot:90 harddrake2:192 logdrake:78 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:78 logdrake:79
 #, c-format
 msgid "_Quit"
 msgstr "_Гарах"
 
-#: drakboot:90 harddrake2:192 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:79
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
-#: drakboot:138
-#, c-format
-msgid "Text only"
-msgstr "Зөвхөн текст"
-
-#: drakboot:139
-#, c-format
-msgid "Verbose"
-msgstr ""
-
-#: drakboot:140
-#, c-format
-msgid "Silent"
-msgstr ""
-
-#: drakboot:146 drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381
-#: drakups:27 harddrake2:504 localedrake:45 scannerdrake:48 scannerdrake:51
-#: scannerdrake:294 scannerdrake:299 scannerdrake:951
-#, c-format
-msgid "Warning"
-msgstr "Анхааруулга"
-
-#: drakboot:147
-#, c-format
-msgid ""
-"Your system bootloader is not in framebuffer mode. To activate graphical "
-"boot, select a graphic video mode from the bootloader configuration tool."
-msgstr ""
-
-#: drakboot:148
-#, fuzzy, c-format
-msgid "Do you want to configure it now?"
-msgstr "вы?"
-
-#: drakboot:157
-#, c-format
-msgid "Install themes"
-msgstr ""
-
-#: drakboot:159
-#, fuzzy, c-format
-msgid "Graphical boot theme selection"
-msgstr "Хэвлэгч"
-
-#: drakboot:162
-#, fuzzy, c-format
-msgid "Graphical boot mode:"
-msgstr "Хэвлэгч"
-
-#: drakboot:164
-#, c-format
-msgid "Theme"
-msgstr "Загвар"
-
-#: drakboot:198
+#: drakautologin:100
 #, fuzzy, c-format
 msgid "Default user"
 msgstr "Үндсэн хэвлэгч"
 
-#: drakboot:199
+#: drakautologin:101
 #, fuzzy, c-format
 msgid "Default desktop"
 msgstr "Стандарт"
 
-#: drakboot:202
+#: drakautologin:104
 #, c-format
 msgid "No, I do not want autologin"
 msgstr "Үгүй, би автомат нэвтрэлтийг хэрэглэмээргүй байна"
 
-#: drakboot:203
+#: drakautologin:105
 #, fuzzy, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "Тийм"
 
-#: drakboot:210
+#: drakautologin:112
 #, c-format
 msgid "System mode"
 msgstr "Системийн горим"
 
-#: drakboot:213
+#: drakautologin:115
 #, c-format
 msgid "Launch the graphical environment when your system starts"
 msgstr ""
 
-#: drakboot:268
-#, fuzzy, c-format
-msgid "Boot Style Configuration"
-msgstr "Загвар"
-
-#: drakboot:270 drakboot:274
+#: drakboot:41
 #, c-format
-msgid "Video mode"
-msgstr "Видео горим"
-
-#: drakboot:271
-#, c-format
-msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries "
-"selected below.\n"
-"Be sure your video card supports the mode you choose."
+msgid "No bootloader found, creating a new configuration"
 msgstr ""
 
 #: drakbug:52 drakbug:140
@@ -317,6 +245,13 @@ msgstr ""
 msgid "Package not installed"
 msgstr "Пакет"
 
+#: drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381 drakups:27
+#: harddrake2:509 localedrake:45 scannerdrake:48 scannerdrake:51
+#: scannerdrake:294 scannerdrake:299 scannerdrake:951
+#, c-format
+msgid "Warning"
+msgstr "Анхааруулга"
+
 #: drakbug:251
 #, c-format
 msgid ""
@@ -436,7 +371,7 @@ msgstr ""
 msgid "Could not get the list of available channels"
 msgstr ""
 
-#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:358
+#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:362
 #: scannerdrake:63 scannerdrake:67 scannerdrake:75 scannerdrake:316
 #: scannerdrake:365 scannerdrake:501 scannerdrake:505 scannerdrake:527
 #: service_harddrake:426
@@ -486,15 +421,20 @@ msgstr ""
 
 #: drakedm:45
 #, c-format
+msgid "SDDM (Simple Desktop Display Manager)"
+msgstr ""
+
+#: drakedm:46
+#, c-format
 msgid "XDM (X Display Manager)"
 msgstr ""
 
-#: drakedm:56
+#: drakedm:57
 #, c-format
 msgid "Choosing a display manager"
 msgstr ""
 
-#: drakedm:57
+#: drakedm:58
 #, fuzzy, c-format
 msgid ""
 "X11 Display Manager allows you to graphically log\n"
@@ -502,13 +442,13 @@ msgid ""
 "several different X sessions on your local machine at the same time."
 msgstr "X11 Менежер вы log X Цонх Систем X."
 
-#: drakedm:80
+#: drakedm:81
 #, fuzzy, c-format
 msgid "The change is done, do you want to restart the dm service?"
 msgstr ""
 "Сүлжээг тахин эхлүүлэх хэрэгтэй. Та үүнийг дахин эхлүүлэхийг хүсэж байна уу?"
 
-#: drakedm:81
+#: drakedm:82
 #, c-format
 msgid ""
 "You are going to close all running programs and lose your current session. "
@@ -678,7 +618,7 @@ msgstr "Мандрива Линукс"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:532 harddrake2:531
+#: drakfont:532 harddrake2:536
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr ""
@@ -753,12 +693,12 @@ msgstr "Суулга"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr ""
 
-#: drakfont:688 draksec:59 harddrake2:302
+#: drakfont:688 draksec:59 harddrake2:306
 #, c-format
 msgid "Yes"
 msgstr "Тийм"
 
-#: drakfont:690 draksec:58 harddrake2:303
+#: drakfont:690 draksec:58 harddrake2:307
 #, c-format
 msgid "No"
 msgstr "Үгүй"
@@ -1291,31 +1231,14 @@ msgstr "Эхлүүлэл"
 msgid "No Sound Card detected!"
 msgstr "Үгүй Дуу!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: draksound:51
+#: draksound:50
 #, fuzzy, c-format
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
-"supported Sound Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Sound Card is correctly plugged in"
 msgstr ""
-"Үгүй Дуу Дуу бол ямх г г г г\n"
+"Үгүй Видео бол ямх г г г г\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
-
-#: draksound:58
-#, fuzzy, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
-"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
-msgstr "г г вы вы Программ төрөл ямх."
 
 #: drakups:71
 #, c-format
@@ -1354,7 +1277,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "Автомат танилт"
 
-#: drakups:99 harddrake2:358
+#: drakups:99 harddrake2:362
 #, fuzzy, c-format
 msgid "Detection in progress"
 msgstr "ямх"
@@ -1437,12 +1360,12 @@ msgid "UPS devices"
 msgstr " төхөөрөмж дээр: %s"
 
 #: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:116
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "Name"
 msgstr "Нэр"
 
-#: drakups:249 harddrake2:139
+#: drakups:249 harddrake2:143
 #, c-format
 msgid "Driver"
 msgstr "Драйвер"
@@ -1517,18 +1440,11 @@ msgstr "Тест аас"
 msgid "No TV Card detected!"
 msgstr "Үгүй!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: drakxtv:68
+#: drakxtv:67
 #, fuzzy, c-format
 msgid ""
 "No TV Card has been detected on your machine. Please verify that a Linux-"
-"supported Video/TV Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Video/TV Card is correctly plugged in."
 msgstr ""
 "Үгүй Видео бол ямх г г г г\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
@@ -1626,7 +1542,7 @@ msgstr "Альтернатив хөтлөгчүүд"
 msgid "the list of alternative drivers for this sound card"
 msgstr "жигсаалт аас"
 
-#: harddrake2:33 harddrake2:125
+#: harddrake2:33 harddrake2:129
 #, c-format
 msgid "Bus"
 msgstr "Бус"
@@ -1637,7 +1553,7 @@ msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "бол бол USB"
 
-#: harddrake2:36 harddrake2:151
+#: harddrake2:36 harddrake2:155
 #, c-format
 msgid "Bus identification"
 msgstr ""
@@ -1949,7 +1865,7 @@ msgstr "Төлвүүд"
 msgid "CPU flags reported by the kernel"
 msgstr "цөмөөр мэдээлэгдсэн CPU-ийн төлөвүүд"
 
-#: harddrake2:80 harddrake2:144
+#: harddrake2:80 harddrake2:148
 #, fuzzy, c-format
 msgid "Cores"
 msgstr "Хаах"
@@ -2111,7 +2027,7 @@ msgstr "идэвхжүүлэх"
 msgid "Enabled size of the memory bank"
 msgstr ""
 
-#: harddrake2:113 harddrake2:122
+#: harddrake2:113 harddrake2:126
 #, c-format
 msgid "Type"
 msgstr "Төрөл"
@@ -2121,12 +2037,12 @@ msgstr "Төрөл"
 msgid "type of the memory device"
 msgstr "нэр аас"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed"
 msgstr "Хурд"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed of the memory bank"
 msgstr ""
@@ -2141,242 +2057,257 @@ msgstr "Кабель холболт"
 msgid "Socket designation of the memory bank"
 msgstr ""
 
-#: harddrake2:120
+#: harddrake2:118
+#, fuzzy, c-format
+msgid "Location"
+msgstr "Үйлдэл"
+
+#: harddrake2:119
+#, c-format
+msgid "Size"
+msgstr "Хэмжээ"
+
+#: harddrake2:119
+#, fuzzy, c-format
+msgid "Size of the memory device"
+msgstr "нэр аас"
+
+#: harddrake2:124
 #, fuzzy, c-format
 msgid "Device file"
 msgstr "Төхөөрөмж: "
 
-#: harddrake2:120
+#: harddrake2:124
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "Emulated wheel"
 msgstr ""
 
-#: harddrake2:121
+#: harddrake2:125
 #, fuzzy, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "Товчинууд тоолуур"
 
-#: harddrake2:122
+#: harddrake2:126
 #, fuzzy, c-format
 msgid "the type of the mouse"
 msgstr "нэр аас"
 
-#: harddrake2:123
+#: harddrake2:127
 #, fuzzy, c-format
 msgid "the name of the mouse"
 msgstr "нэр аас"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "Number of buttons"
 msgstr "Товчнуудын тоо"
 
-#: harddrake2:124
+#: harddrake2:128
 #, fuzzy, c-format
 msgid "the number of buttons the mouse has"
 msgstr "аас"
 
-#: harddrake2:125
+#: harddrake2:129
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "төрөл аас бол"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr ""
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr ""
 
-#: harddrake2:130
+#: harddrake2:134
 #, c-format
 msgid "Identification"
 msgstr "Тодотгол"
 
-#: harddrake2:135 harddrake2:150
+#: harddrake2:139 harddrake2:154
 #, c-format
 msgid "Connection"
 msgstr "Холболт"
 
-#: harddrake2:145
+#: harddrake2:149
 #, fuzzy, c-format
 msgid "Performances"
 msgstr "Тохируулгууд"
 
-#: harddrake2:152
+#: harddrake2:156
 #, c-format
 msgid "Device"
 msgstr "Төхөөрөмж"
 
-#: harddrake2:153
+#: harddrake2:157
 #, c-format
 msgid "Partitions"
 msgstr "Хуваалтууд"
 
-#: harddrake2:158
+#: harddrake2:162
 #, c-format
 msgid "Features"
 msgstr "Тэмдэг"
 
-#: harddrake2:179
+#: harddrake2:183
 #, c-format
 msgid "Autodetect _modems"
 msgstr ""
 
-#: harddrake2:180
+#: harddrake2:184
 #, c-format
 msgid "Autodetect parallel _zip drives"
 msgstr ""
 
-#: harddrake2:184
+#: harddrake2:188
 #, fuzzy, c-format
 msgid "Hardware Configuration"
 msgstr "Сүлжээний тохируулга"
 
-#: harddrake2:193
+#: harddrake2:197
 #, c-format
 msgid "_Options"
 msgstr "_Сонголтууд"
 
-#: harddrake2:194 harddrake2:195
+#: harddrake2:198 harddrake2:199
 #, c-format
 msgid "_Help"
 msgstr "_Тусламж"
 
-#: harddrake2:195
+#: harddrake2:199
 #, fuzzy, c-format
 msgid "<control>H"
 msgstr "<control>Q"
 
-#: harddrake2:196
+#: harddrake2:200
 #, c-format
 msgid "_Fields description"
 msgstr ""
 
-#: harddrake2:197
+#: harddrake2:201
 #, c-format
 msgid "_Report Bug"
 msgstr "_Гажигийг мэдээлэх"
 
-#: harddrake2:198
+#: harddrake2:202
 #, c-format
 msgid "_About..."
 msgstr "_Т_ухай..."
 
-#: harddrake2:242
+#: harddrake2:246
 #, c-format
 msgid "Detected hardware"
 msgstr ""
 
-#: harddrake2:245 scannerdrake:283
+#: harddrake2:249 scannerdrake:283
 #, c-format
 msgid "Information"
 msgstr "Мэдээлэл"
 
-#: harddrake2:247
+#: harddrake2:251
 #, c-format
 msgid "Set current driver options"
 msgstr ""
 
-#: harddrake2:254
+#: harddrake2:257
 #, c-format
 msgid "Run config tool"
 msgstr "Тохируулагчийг ажиллуулах"
 
-#: harddrake2:280
+#: harddrake2:284
 #, fuzzy, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
 "information here."
 msgstr "ямх зүүн Мод ямх."
 
-#: harddrake2:300 notify-x11-free-driver-switch:13
+#: harddrake2:304 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "үл мэдэгдэх"
 
-#: harddrake2:301
+#: harddrake2:305
 #, c-format
 msgid "Unknown"
 msgstr "Үл мэдэгдэх"
 
-#: harddrake2:321
+#: harddrake2:325
 #, c-format
 msgid "Misc"
 msgstr "Янз бүрийн"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "secondary"
 msgstr "хоёрдугаар"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "primary"
 msgstr ""
 
-#: harddrake2:408
+#: harddrake2:412
 #, fuzzy, c-format
 msgid "burner"
 msgstr "Хэвлэгч"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:504
+#: harddrake2:509
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr ""
 
-#: harddrake2:521
+#: harddrake2:525
 #, fuzzy, c-format
 msgid "Harddrake"
 msgstr "HardDrake"
 
-#: harddrake2:523
+#: harddrake2:528
 #, c-format
 msgid "Copyright (C) %s by %s"
 msgstr ""
 
-#: harddrake2:523 harddrake2:527
+#: harddrake2:528 harddrake2:532
 #, c-format
 msgid "Mageia"
 msgstr ""
 
-#: harddrake2:525
+#: harddrake2:530
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr ""
 
-#: harddrake2:540
+#: harddrake2:545
 #, c-format
 msgid "Harddrake help"
 msgstr ""
 
-#: harddrake2:541
+#: harddrake2:546
 #, fuzzy, c-format
 msgid ""
 "Description of the fields:\n"
 "\n"
 msgstr "Тодорхойлолт аас г"
 
-#: harddrake2:548
+#: harddrake2:553
 #, fuzzy, c-format
 msgid "Select a device!"
 msgstr "Сонгох!"
 
-#: harddrake2:548
+#: harddrake2:553
 #, fuzzy, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2661,8 +2592,7 @@ msgstr ""
 msgid "Save as.."
 msgstr "Хадгалах."
 
-#: notify-x11-free-driver-switch:18 service_harddrake:468
-#: service_harddrake:481
+#: notify-x11-free-driver-switch:18 service_harddrake:468 service_harddrake:481
 #, c-format
 msgid "Display driver setup"
 msgstr ""
@@ -3287,6 +3217,16 @@ msgstr "Тохируулга"
 msgid "Language & country configuration"
 msgstr "Гараар"
 
+#: ../polkit/org.mageia.drakautologin.policy.in.h:1
+#, fuzzy
+msgid "Run Mageia AutoLogin Configuration"
+msgstr "Сонордуулга"
+
+#: ../polkit/org.mageia.drakautologin.policy.in.h:2
+#, fuzzy
+msgid "Authentication is required to run Mageia AutoLogin Configuration"
+msgstr "Сонордуулга"
+
 #: ../polkit/org.moondrake.drakauth.policy.in.h:1
 #, fuzzy
 msgid "Run DrakX Authentication Configuration"
@@ -3415,56 +3355,18 @@ msgid "Authentication is required to run DrakX Service Configuration"
 msgstr "Мэйл сонордуулгын тохиргоо"
 
 #, fuzzy
-#~ msgid "%s Bug Report Tool"
-#~ msgstr "Мандрива удирдлагын төв"
-
-#, fuzzy
-#~ msgid "%s Tools Logs"
-#~ msgstr "Мандрива удирдлагын төв"
-
-#, fuzzy
-#~ msgid "Run Moondrake Application Security Configuration"
-#~ msgstr "Автоматаар"
-
-#, fuzzy
-#~ msgid "Run Moondrake Authentication Configuration"
-#~ msgstr "Автоматаар"
-
-#, fuzzy
 #~ msgid "Run Moondrake Boot Configuration"
 #~ msgstr "Сонордуулга"
 
 #, fuzzy
-#~ msgid "Run Moondrake Date and Time Configuration"
-#~ msgstr "Мэйл сонордуулгын тохиргоо"
-
-#, fuzzy
-#~ msgid "Run Moondrake Font Configuration"
-#~ msgstr "Гараар"
-
-#, fuzzy
-#~ msgid "Run Moondrake Hardware Configuration"
-#~ msgstr "Мэйл сонордуулгын тохиргоо"
-
-#, fuzzy
-#~ msgid "Run Moondrake Login Manager Configuration"
-#~ msgstr "Гараар"
-
-#, fuzzy
-#~ msgid "Run Moondrake Scanner Configuration"
-#~ msgstr "Мэйл сонордуулгын тохиргоо"
-
-#, fuzzy
-#~ msgid "Run Moondrake Security Permissions Configuration"
-#~ msgstr "Мэйл сонордуулгын тохиргоо"
-
-#, fuzzy
-#~ msgid "Run Moondrake Service Configuration"
-#~ msgstr "Мэйл сонордуулгын тохиргоо"
-
-#, fuzzy
-#~ msgid "Run Moondrake UPS Configuration"
-#~ msgstr "CUPS тохиргоо"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
+#~ "the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a "
+#~ "console."
+#~ msgstr "г г вы вы Программ төрөл ямх."
 
 #, fuzzy
 #~ msgid ""
@@ -3475,11 +3377,19 @@ msgstr "Мэйл сонордуулгын тохиргоо"
 #~ "left"
 #~ msgstr "г аас ямх"
 
+#, fuzzy
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Мандрива удирдлагын төв"
+
 #~ msgid "%s Control Center"
 #~ msgstr "%s Хяналтын Төв"
 
 #, fuzzy
 #~ msgid "%s Help Center"
+#~ msgstr "Мандрива удирдлагын төв"
+
+#, fuzzy
+#~ msgid "%s Tools Logs"
 #~ msgstr "Мандрива удирдлагын төв"
 
 #, fuzzy
@@ -3570,6 +3480,10 @@ msgstr "Мэйл сонордуулгын тохиргоо"
 #~ msgstr "Үндсэн"
 
 #, fuzzy
+#~ msgid "Boot Style Configuration"
+#~ msgstr "Загвар"
+
+#, fuzzy
 #~ msgid "Bugs"
 #~ msgstr "Бус"
 
@@ -3598,6 +3512,10 @@ msgstr "Мэйл сонордуулгын тохиргоо"
 #, fuzzy
 #~ msgid "Display logo on Console"
 #~ msgstr "Харуулах Нээх"
+
+#, fuzzy
+#~ msgid "Do you want to configure it now?"
+#~ msgstr "вы?"
 
 #, fuzzy
 #~ msgid "Do you want to remove these packages?"
@@ -3637,6 +3555,18 @@ msgstr "Мэйл сонордуулгын тохиргоо"
 
 #~ msgid "File/_Save"
 #~ msgstr "Файл/_Хадгалах"
+
+#, fuzzy
+#~ msgid "Finishing install"
+#~ msgstr "Фонтуудыг устгах"
+
+#, fuzzy
+#~ msgid "Graphical boot mode:"
+#~ msgstr "Хэвлэгч"
+
+#, fuzzy
+#~ msgid "Graphical boot theme selection"
+#~ msgstr "Хэвлэгч"
 
 #~ msgid "Halt bug"
 #~ msgstr "Зогс алдаа"
@@ -3687,15 +3617,27 @@ msgstr "Мэйл сонордуулгын тохиргоо"
 #, fuzzy
 #~ msgid ""
 #~ "No Sound Card has been detected on your machine. Please verify that a "
-#~ "Linux-supported Sound Card is correctly plugged in"
+#~ "Linux-supported Sound Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
-#~ "Үгүй Видео бол ямх г г г г\n"
+#~ "Үгүй Дуу Дуу бол ямх г г г г\n"
 #~ "http://www.mandrivalinux.com/en/hardware.php3"
 
 #, fuzzy
 #~ msgid ""
 #~ "No TV Card has been detected on your machine. Please verify that a Linux-"
-#~ "supported Video/TV Card is correctly plugged in."
+#~ "supported Video/TV Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
 #~ "Үгүй Видео бол ямх г г г г\n"
 #~ "http://www.mandrivalinux.com/en/hardware.php3"
@@ -3718,6 +3660,46 @@ msgstr "Мэйл сонордуулгын тохиргоо"
 #, fuzzy
 #~ msgid "Restart XFS"
 #~ msgstr "Шинээр эхлэх"
+
+#, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Автоматаар"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Автоматаар"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Мэйл сонордуулгын тохиргоо"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Гараар"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Мэйл сонордуулгын тохиргоо"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Гараар"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Мэйл сонордуулгын тохиргоо"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Мэйл сонордуулгын тохиргоо"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Мэйл сонордуулгын тохиргоо"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "CUPS тохиргоо"
 
 #, fuzzy
 #~ msgid "Save theme"
@@ -3752,6 +3734,9 @@ msgstr "Мэйл сонордуулгын тохиргоо"
 #~ msgid "Text box height"
 #~ msgstr "текст"
 
+#~ msgid "Text only"
+#~ msgstr "Зөвхөн текст"
+
 #~ msgid "The height of the progress bar"
 #~ msgstr "явц харуулагчийн өндөр"
 
@@ -3772,6 +3757,9 @@ msgstr "Мэйл сонордуулгын тохиргоо"
 #~ msgid "The width of the progress bar"
 #~ msgstr "өргөн аас"
 
+#~ msgid "Theme"
+#~ msgstr "Загвар"
+
 #, fuzzy
 #~ msgid "Theme name"
 #~ msgstr "Аяны  нэр"
@@ -3785,6 +3773,9 @@ msgstr "Мэйл сонордуулгын тохиргоо"
 
 #~ msgid "Userdrake"
 #~ msgstr "Хэрэглэгчийн драке"
+
+#~ msgid "Video mode"
+#~ msgstr "Видео горим"
 
 #~ msgid ""
 #~ "early pentiums were buggy and freezed when decoding the F00F bytecode"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:28+0100\n"
+"POT-Creation-Date: 2017-01-15 15:12+0100\n"
 "PO-Revision-Date: 2010-05-11 17:04+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -16,12 +16,12 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: display_help:53 display_help:58 drakbug:173 drakperm:134
+#: display_help:50 display_help:55 drakbug:173 drakperm:134
 #, c-format
 msgid "Help"
 msgstr "Hjelp"
 
-#: display_help:66 drakbug:178 drakfont:507
+#: display_help:63 drakbug:178 drakfont:507
 #, c-format
 msgid "Close"
 msgstr "Lukk"
@@ -31,142 +31,64 @@ msgstr "Lukk"
 msgid "Authentication"
 msgstr "Autentisering"
 
-#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213
-#: drakfont:226 drakfont:264 finish-install:133 logdrake:177 logdrake:453
-#: logdrake:458 scannerdrake:56 scannerdrake:98 scannerdrake:139
-#: scannerdrake:197 scannerdrake:256 scannerdrake:726 scannerdrake:737
-#: scannerdrake:876 scannerdrake:887 scannerdrake:957
+#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213 drakfont:226
+#: drakfont:264 finish-install:133 logdrake:177 logdrake:453 logdrake:458
+#: scannerdrake:56 scannerdrake:98 scannerdrake:139 scannerdrake:197
+#: scannerdrake:256 scannerdrake:726 scannerdrake:737 scannerdrake:876
+#: scannerdrake:887 scannerdrake:957
 #, c-format
 msgid "Error"
 msgstr "Feil"
 
-#: drakboot:54
-#, c-format
-msgid "No bootloader found, creating a new configuration"
-msgstr "Fann ingen oppstartslaster. Lagar nytt oppsett."
-
-#: drakboot:89 harddrake2:191 logdrake:77
+#: drakautologin:54 harddrake2:195 logdrake:77
 #, c-format
 msgid "_File"
 msgstr "_Fil"
 
-#: drakboot:90 harddrake2:192 logdrake:78 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:78 logdrake:79
 #, c-format
 msgid "_Quit"
 msgstr "_Avslutt"
 
-#: drakboot:90 harddrake2:192 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:79
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
-#: drakboot:138
-#, c-format
-msgid "Text only"
-msgstr "Berre tekst"
-
-#: drakboot:139
-#, c-format
-msgid "Verbose"
-msgstr "Utvida meldingar"
-
-#: drakboot:140
-#, c-format
-msgid "Silent"
-msgstr "Stille"
-
-#: drakboot:146 drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381
-#: drakups:27 harddrake2:504 localedrake:45 scannerdrake:48 scannerdrake:51
-#: scannerdrake:294 scannerdrake:299 scannerdrake:951
-#, c-format
-msgid "Warning"
-msgstr "Åtvaring"
-
-#: drakboot:147
-#, c-format
-msgid ""
-"Your system bootloader is not in framebuffer mode. To activate graphical "
-"boot, select a graphic video mode from the bootloader configuration tool."
-msgstr ""
-"Oppstartslastaren er ikkje i framebuffer-modus (grafisk modus). For å bruk "
-"grafisk oppstart må du velja ein skjermmodus frå oppsettverktøyet for "
-"oppstartslastaren."
-
-#: drakboot:148
-#, c-format
-msgid "Do you want to configure it now?"
-msgstr "Vil du setja det opp no?"
-
-#: drakboot:157
-#, c-format
-msgid "Install themes"
-msgstr "Installer tema"
-
-#: drakboot:159
-#, c-format
-msgid "Graphical boot theme selection"
-msgstr "Val av grafisk oppstartstema"
-
-#: drakboot:162
-#, c-format
-msgid "Graphical boot mode:"
-msgstr "Grafisk oppstartsmodus:"
-
-#: drakboot:164
-#, c-format
-msgid "Theme"
-msgstr "Tema"
-
-#: drakboot:198
+#: drakautologin:100
 #, c-format
 msgid "Default user"
 msgstr "Brukar:"
 
-#: drakboot:199
+#: drakautologin:101
 #, c-format
 msgid "Default desktop"
 msgstr "Skrivebord:"
 
-#: drakboot:202
+#: drakautologin:104
 #, c-format
 msgid "No, I do not want autologin"
 msgstr "Ikkje logg inn automatisk"
 
-#: drakboot:203
+#: drakautologin:105
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "Logg inn automatisk med følgjande brukar og skrivebord"
 
-#: drakboot:210
+#: drakautologin:112
 #, c-format
 msgid "System mode"
 msgstr "Systemmodus"
 
-#: drakboot:213
+#: drakautologin:115
 #, c-format
 msgid "Launch the graphical environment when your system starts"
 msgstr "Start det grafiske miljøet ved oppstart"
 
-#: drakboot:268
+#: drakboot:41
 #, c-format
-msgid "Boot Style Configuration"
-msgstr "Oppsettype"
-
-#: drakboot:270 drakboot:274
-#, c-format
-msgid "Video mode"
-msgstr "Videomodus"
-
-#: drakboot:271
-#, c-format
-msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries "
-"selected below.\n"
-"Be sure your video card supports the mode you choose."
-msgstr ""
-"Vel ein skjermmodus. Denne vert brukt for kvar av oppstartseiningane merkte "
-"nedanfor.\n"
-"Hugs at skjermkortet ditt må støtta skjermmodusen du vel."
+msgid "No bootloader found, creating a new configuration"
+msgstr "Fann ingen oppstartslaster. Lagar nytt oppsett."
 
 #: drakbug:52 drakbug:140
 #, c-format
@@ -326,6 +248,13 @@ msgstr "Ikkje installert"
 msgid "Package not installed"
 msgstr "Pakke ikkje installert"
 
+#: drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381 drakups:27
+#: harddrake2:509 localedrake:45 scannerdrake:48 scannerdrake:51
+#: scannerdrake:294 scannerdrake:299 scannerdrake:951
+#, c-format
+msgid "Warning"
+msgstr "Åtvaring"
+
 #: drakbug:251
 #, c-format
 msgid ""
@@ -450,7 +379,7 @@ msgstr "«%s» finst alt, og innhaldet vil gå tapt."
 msgid "Could not get the list of available channels"
 msgstr "Klarte ikkje henta oversikta over kanalane."
 
-#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:358
+#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:362
 #: scannerdrake:63 scannerdrake:67 scannerdrake:75 scannerdrake:316
 #: scannerdrake:365 scannerdrake:501 scannerdrake:505 scannerdrake:527
 #: service_harddrake:426
@@ -499,16 +428,21 @@ msgid "SLIM (Simple Display Manager)"
 msgstr "XDM (X Display Manager)"
 
 #: drakedm:45
+#, fuzzy, c-format
+msgid "SDDM (Simple Desktop Display Manager)"
+msgstr "XDM (X Display Manager)"
+
+#: drakedm:46
 #, c-format
 msgid "XDM (X Display Manager)"
 msgstr "XDM (X Display Manager)"
 
-#: drakedm:56
+#: drakedm:57
 #, c-format
 msgid "Choosing a display manager"
 msgstr "Vel innloggingsveljar"
 
-#: drakedm:57
+#: drakedm:58
 #, c-format
 msgid ""
 "X11 Display Manager allows you to graphically log\n"
@@ -519,12 +453,12 @@ msgstr ""
 "på systemet når X køyrer, og støttar òg fleire\n"
 "X-økter på maskina samtidig."
 
-#: drakedm:80
+#: drakedm:81
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
 msgstr "Endringa er no lagra. Vil du starta «dm»-tenesta på nytt?"
 
-#: drakedm:81
+#: drakedm:82
 #, c-format
 msgid ""
 "You are going to close all running programs and lose your current session. "
@@ -701,7 +635,7 @@ msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:532 harddrake2:531
+#: drakfont:532 harddrake2:536
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr "Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -776,12 +710,12 @@ msgstr "Installer"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Er du sikker på at du vil avinstallera desse skriftene?"
 
-#: drakfont:688 draksec:59 harddrake2:302
+#: drakfont:688 draksec:59 harddrake2:306
 #, c-format
 msgid "Yes"
 msgstr "Ja"
 
-#: drakfont:690 draksec:58 harddrake2:303
+#: drakfont:690 draksec:58 harddrake2:307
 #, c-format
 msgid "No"
 msgstr "Nei"
@@ -1329,43 +1263,20 @@ msgstr "Oppstart"
 msgid "No Sound Card detected!"
 msgstr "Fann ikkje noko lydkort."
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: draksound:51
-#, c-format
+#: draksound:50
+#, fuzzy, c-format
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
-"supported Sound Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Sound Card is correctly plugged in"
 msgstr ""
-"Fann ikkje noko lydkort kopla til maskina. Kontroller at du har eit lydkort "
-"som er støtta i Linux kopla til.\n"
+"Fann ikkje noko fjernsynskort kopla til maskina. Kontroller at du har eit "
+"fjernsynskort som er støtta i Linux kopla til.\n"
 "\n"
 "\n"
 "Du finn maskinvaredatabasen vår på:\n"
 "\n"
 "\n"
 "http://www.mandriva.com/en/hardware/"
-
-#: draksound:58
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
-"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
-msgstr ""
-"\n"
-"\n"
-"\n"
-"Merk: Viss du har eit ISA PnP-basert lydkort, må du bruka «alsaconf»- eller "
-"«sndconfig»-programma. Berre skriv «alsaconf» eller «sndconfig» i ein "
-"konsoll."
 
 #: drakups:71
 #, c-format
@@ -1410,7 +1321,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "Søk"
 
-#: drakups:99 harddrake2:358
+#: drakups:99 harddrake2:362
 #, c-format
 msgid "Detection in progress"
 msgstr "Søk pågår"
@@ -1495,12 +1406,12 @@ msgid "UPS devices"
 msgstr "UPS-einingar"
 
 #: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:116
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "Name"
 msgstr "Namn"
 
-#: drakups:249 harddrake2:139
+#: drakups:249 harddrake2:143
 #, c-format
 msgid "Driver"
 msgstr "Drivar"
@@ -1575,18 +1486,11 @@ msgstr "Velkommen til UPS-oppsettverktøya"
 msgid "No TV Card detected!"
 msgstr "Fann ikkje noko fjernsynskort."
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: drakxtv:68
-#, c-format
+#: drakxtv:67
+#, fuzzy, c-format
 msgid ""
 "No TV Card has been detected on your machine. Please verify that a Linux-"
-"supported Video/TV Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Video/TV Card is correctly plugged in."
 msgstr ""
 "Fann ikkje noko fjernsynskort kopla til maskina. Kontroller at du har eit "
 "fjernsynskort som er støtta i Linux kopla til.\n"
@@ -1682,7 +1586,7 @@ msgstr "Alternative drivarar"
 msgid "the list of alternative drivers for this sound card"
 msgstr "oversikta over alternative drivarar for lydkortet"
 
-#: harddrake2:33 harddrake2:125
+#: harddrake2:33 harddrake2:129
 #, c-format
 msgid "Bus"
 msgstr "Buss"
@@ -1695,7 +1599,7 @@ msgstr ""
 "Dette er den fysiske bussen som eininga er kopla til (eksempel: PCI eller "
 "USB)."
 
-#: harddrake2:36 harddrake2:151
+#: harddrake2:36 harddrake2:155
 #, c-format
 msgid "Bus identification"
 msgstr "Bussidentifisering"
@@ -2017,7 +1921,7 @@ msgstr "Flagg"
 msgid "CPU flags reported by the kernel"
 msgstr "CPU-flagg rapportert av kjernen"
 
-#: harddrake2:80 harddrake2:144
+#: harddrake2:80 harddrake2:148
 #, c-format
 msgid "Cores"
 msgstr "Kjerner"
@@ -2184,7 +2088,7 @@ msgstr "Aktivert storleik"
 msgid "Enabled size of the memory bank"
 msgstr "Aktivert storleik på minnebank"
 
-#: harddrake2:113 harddrake2:122
+#: harddrake2:113 harddrake2:126
 #, c-format
 msgid "Type"
 msgstr "Type"
@@ -2194,12 +2098,12 @@ msgstr "Type"
 msgid "type of the memory device"
 msgstr "type minneeining"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed"
 msgstr "Fart"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed of the memory bank"
 msgstr "Fart til minnebank"
@@ -2214,232 +2118,247 @@ msgstr "Banksamband"
 msgid "Socket designation of the memory bank"
 msgstr "Sokkelnamn på minnebank"
 
-#: harddrake2:120
+#: harddrake2:118
+#, fuzzy, c-format
+msgid "Location"
+msgstr "Handling"
+
+#: harddrake2:119
+#, c-format
+msgid "Size"
+msgstr "Storleik"
+
+#: harddrake2:119
+#, fuzzy, c-format
+msgid "Size of the memory device"
+msgstr "type minneeining"
+
+#: harddrake2:124
 #, c-format
 msgid "Device file"
 msgstr "Einingsfil"
 
-#: harddrake2:120
+#: harddrake2:124
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr "einingsfila for musa brukt til å kommunisera med kjernedrivaren"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "Emulated wheel"
 msgstr "Emulert hjul"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "om det skal brukat hjulemulering"
 
-#: harddrake2:122
+#: harddrake2:126
 #, c-format
 msgid "the type of the mouse"
 msgstr "mustype"
 
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "the name of the mouse"
 msgstr "namnet på musa"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "Number of buttons"
 msgstr "Talet på knappar"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "the number of buttons the mouse has"
 msgstr "talet på knappar på musa"
 
-#: harddrake2:125
+#: harddrake2:129
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "busstypen musa er kopla til"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr "Musprotokoll brukt av X11"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr ""
 "protokollen som det grafiske skrivebordet skal bruka til å kommunisera med "
 "musa"
 
-#: harddrake2:130
+#: harddrake2:134
 #, c-format
 msgid "Identification"
 msgstr "Identifisering"
 
-#: harddrake2:135 harddrake2:150
+#: harddrake2:139 harddrake2:154
 #, c-format
 msgid "Connection"
 msgstr "Samband"
 
-#: harddrake2:145
+#: harddrake2:149
 #, c-format
 msgid "Performances"
 msgstr "Yting"
 
-#: harddrake2:152
+#: harddrake2:156
 #, c-format
 msgid "Device"
 msgstr "Eining"
 
-#: harddrake2:153
+#: harddrake2:157
 #, c-format
 msgid "Partitions"
 msgstr "Partisjonar"
 
-#: harddrake2:158
+#: harddrake2:162
 #, c-format
 msgid "Features"
 msgstr "Funksjonar"
 
-#: harddrake2:179
+#: harddrake2:183
 #, c-format
 msgid "Autodetect _modems"
 msgstr "Finn automatisk _modem"
 
-#: harddrake2:180
+#: harddrake2:184
 #, c-format
 msgid "Autodetect parallel _zip drives"
 msgstr "Finn automatisk _Zip-stasjonar på parallellport"
 
-#: harddrake2:184
+#: harddrake2:188
 #, c-format
 msgid "Hardware Configuration"
 msgstr "Maskinvareoppsett"
 
-#: harddrake2:193
+#: harddrake2:197
 #, c-format
 msgid "_Options"
 msgstr "_Val"
 
-#: harddrake2:194 harddrake2:195
+#: harddrake2:198 harddrake2:199
 #, c-format
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: harddrake2:195
+#: harddrake2:199
 #, fuzzy, c-format
 msgid "<control>H"
 msgstr "<control>Q"
 
-#: harddrake2:196
+#: harddrake2:200
 #, c-format
 msgid "_Fields description"
 msgstr "_Feltskildring"
 
-#: harddrake2:197
+#: harddrake2:201
 #, c-format
 msgid "_Report Bug"
 msgstr "_Meld frå om feil"
 
-#: harddrake2:198
+#: harddrake2:202
 #, c-format
 msgid "_About..."
 msgstr "_Om …"
 
-#: harddrake2:242
+#: harddrake2:246
 #, c-format
 msgid "Detected hardware"
 msgstr "Funnen maskinvare"
 
-#: harddrake2:245 scannerdrake:283
+#: harddrake2:249 scannerdrake:283
 #, c-format
 msgid "Information"
 msgstr "Informasjon"
 
-#: harddrake2:247
+#: harddrake2:251
 #, c-format
 msgid "Set current driver options"
 msgstr "Set drivarval"
 
-#: harddrake2:254
+#: harddrake2:257
 #, c-format
 msgid "Run config tool"
 msgstr "Køyr oppsettverktøy"
 
-#: harddrake2:280
+#: harddrake2:284
 #, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
 "information here."
 msgstr "Trykk på ei eining til venstre for å sjå informasjon om ho her."
 
-#: harddrake2:300 notify-x11-free-driver-switch:13
+#: harddrake2:304 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "ukjend"
 
-#: harddrake2:301
+#: harddrake2:305
 #, c-format
 msgid "Unknown"
 msgstr "Ukjend"
 
-#: harddrake2:321
+#: harddrake2:325
 #, c-format
 msgid "Misc"
 msgstr "Ymse"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "secondary"
 msgstr "sekundær"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "primary"
 msgstr "primær"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "burner"
 msgstr "brennar"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:504
+#: harddrake2:509
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Desse pakkane må installerast:\n"
 
-#: harddrake2:521
+#: harddrake2:525
 #, c-format
 msgid "Harddrake"
 msgstr "Harddrake"
 
-#: harddrake2:523
+#: harddrake2:528
 #, c-format
 msgid "Copyright (C) %s by %s"
 msgstr "Copyright © %s %s"
 
-#: harddrake2:523 harddrake2:527
+#: harddrake2:528 harddrake2:532
 #, c-format
 msgid "Mageia"
 msgstr ""
 
-#: harddrake2:525
+#: harddrake2:530
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr "Dette er HardDrake – eit oppsettverktøy for %s."
 
-#: harddrake2:540
+#: harddrake2:545
 #, c-format
 msgid "Harddrake help"
 msgstr "Hjelp"
 
-#: harddrake2:541
+#: harddrake2:546
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -2448,12 +2367,12 @@ msgstr ""
 "Feltskildring:\n"
 "\n"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid "Select a device!"
 msgstr "Vel ei eining."
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2748,8 +2667,7 @@ msgstr "E-postvarselet er no slått av."
 msgid "Save as.."
 msgstr "Lagra som …"
 
-#: notify-x11-free-driver-switch:18 service_harddrake:468
-#: service_harddrake:481
+#: notify-x11-free-driver-switch:18 service_harddrake:468 service_harddrake:481
 #, c-format
 msgid "Display driver setup"
 msgstr ""
@@ -3406,6 +3324,16 @@ msgstr "Språk og land"
 msgid "Language & country configuration"
 msgstr "Oppsett av språk og land"
 
+#: ../polkit/org.mageia.drakautologin.policy.in.h:1
+#, fuzzy
+msgid "Run Mageia AutoLogin Configuration"
+msgstr "Oppstartsoppsett"
+
+#: ../polkit/org.mageia.drakautologin.policy.in.h:2
+#, fuzzy
+msgid "Authentication is required to run Mageia AutoLogin Configuration"
+msgstr "Oppstartsoppsett"
+
 #: ../polkit/org.moondrake.drakauth.policy.in.h:1
 #, fuzzy
 msgid "Run DrakX Authentication Configuration"
@@ -3534,60 +3462,23 @@ msgid "Authentication is required to run DrakX Service Configuration"
 msgstr "Oppsett av skjermtenar"
 
 #, fuzzy
-#~ msgid "%s Bug Report Tool"
-#~ msgstr "Feilrapporteringsverktøy for Moondrake"
-
-#, fuzzy
-#~ msgid "%s Tools Logs"
-#~ msgstr "Loggverktøy for Moondrake"
-
-#, fuzzy
-#~ msgid "Configure authentication required to access %s tools"
-#~ msgstr "Set opp autentisering for tilgang til Moondrake-verktøya"
-
-#, fuzzy
-#~ msgid "Run Moondrake Application Security Configuration"
-#~ msgstr "Set opp e-postvarsel"
-
-#, fuzzy
-#~ msgid "Run Moondrake Authentication Configuration"
-#~ msgstr "Set opp e-postvarsel"
-
-#, fuzzy
 #~ msgid "Run Moondrake Boot Configuration"
 #~ msgstr "Oppstartsoppsett"
 
-#, fuzzy
-#~ msgid "Run Moondrake Date and Time Configuration"
-#~ msgstr "Set opp e-postvarsel"
-
-#, fuzzy
-#~ msgid "Run Moondrake Font Configuration"
-#~ msgstr "Oppsett av språk og land"
-
-#, fuzzy
-#~ msgid "Run Moondrake Hardware Configuration"
-#~ msgstr "Oppsett av skjermtenar"
-
-#, fuzzy
-#~ msgid "Run Moondrake Login Manager Configuration"
-#~ msgstr "Oppsett av språk og land"
-
-#, fuzzy
-#~ msgid "Run Moondrake Scanner Configuration"
-#~ msgstr "Oppsett av skjermtenar"
-
-#, fuzzy
-#~ msgid "Run Moondrake Security Permissions Configuration"
-#~ msgstr "Oppsett av skjermtenar"
-
-#, fuzzy
-#~ msgid "Run Moondrake Service Configuration"
-#~ msgstr "Oppsett av skjermtenar"
-
-#, fuzzy
-#~ msgid "Run Moondrake UPS Configuration"
-#~ msgstr "UPS-oppsett"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
+#~ "the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a "
+#~ "console."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Merk: Viss du har eit ISA PnP-basert lydkort, må du bruka «alsaconf»- "
+#~ "eller «sndconfig»-programma. Berre skriv «alsaconf» eller «sndconfig» i "
+#~ "ein konsoll."
 
 #, fuzzy
 #~ msgid "  --help                - display this help     \n"
@@ -3610,12 +3501,20 @@ msgstr "Oppsett av skjermtenar"
 #~ "\n"
 #~ "Bruk: \n"
 
+#, fuzzy
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Feilrapporteringsverktøy for Moondrake"
+
 #~ msgid "%s Control Center"
 #~ msgstr "%s-kontrollsenter"
 
 #, fuzzy
 #~ msgid "%s Help Center"
 #~ msgstr "Moondrake-hjelpesenter"
+
+#, fuzzy
+#~ msgid "%s Tools Logs"
+#~ msgstr "Loggverktøy for Moondrake"
 
 #~ msgid "(default value: %s)"
 #~ msgstr "(standardverdi: %s)"
@@ -3695,6 +3594,9 @@ msgstr "Oppsett av skjermtenar"
 #~ msgid "Basic options"
 #~ msgstr "Grunnleggjande val"
 
+#~ msgid "Boot Style Configuration"
+#~ msgstr "Oppsettype"
+
 #~ msgid "Bugs"
 #~ msgstr "Feil"
 
@@ -3722,6 +3624,10 @@ msgstr "Oppsett av skjermtenar"
 #~ msgid "Coma bug"
 #~ msgstr "Coma-feil"
 
+#, fuzzy
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Set opp autentisering for tilgang til Moondrake-verktøya"
+
 #~ msgid "Configure authentication required to access Mandriva tools"
 #~ msgstr "Set opp autentisering for tilgang til Mandriva-verktøya"
 
@@ -3741,6 +3647,9 @@ msgstr "Oppsett av skjermtenar"
 #~ msgstr ""
 #~ "Vis tema\n"
 #~ "under konsoll"
+
+#~ msgid "Do you want to configure it now?"
+#~ msgstr "Vil du setja det opp no?"
 
 #~ msgid "Do you want to remove these packages?"
 #~ msgstr "Vil du fjerna desse pakkane?"
@@ -3793,8 +3702,18 @@ msgstr "Oppsett av skjermtenar"
 #~ msgid "Finding unused localization packages..."
 #~ msgstr "Finn ubrukte språkpakkar …"
 
+#, fuzzy
+#~ msgid "Finishing install"
+#~ msgstr "Skriftinstallering."
+
 #~ msgid "Gradient type"
 #~ msgstr "Fargeovergangtype"
+
+#~ msgid "Graphical boot mode:"
+#~ msgstr "Grafisk oppstartsmodus:"
+
+#~ msgid "Graphical boot theme selection"
+#~ msgstr "Val av grafisk oppstartstema"
 
 #~ msgid "Halt bug"
 #~ msgstr "Halt-feil"
@@ -3906,6 +3825,9 @@ msgstr "Oppsett av skjermtenar"
 #~ "nivå, men systemet er fullstendig lukka, og alle tryggleiksfunksjonar "
 #~ "køyrer på høgste nivå."
 
+#~ msgid "Install themes"
+#~ msgstr "Installer tema"
+
 #~ msgid "Is FPU present"
 #~ msgstr "Finst FPU"
 
@@ -3930,13 +3852,18 @@ msgstr "Oppsett av skjermtenar"
 #~ msgid "Network Options"
 #~ msgstr "Nettverksval"
 
-#, fuzzy
 #~ msgid ""
 #~ "No Sound Card has been detected on your machine. Please verify that a "
-#~ "Linux-supported Sound Card is correctly plugged in"
+#~ "Linux-supported Sound Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
-#~ "Fann ikkje noko fjernsynskort kopla til maskina. Kontroller at du har eit "
-#~ "fjernsynskort som er støtta i Linux kopla til.\n"
+#~ "Fann ikkje noko lydkort kopla til maskina. Kontroller at du har eit "
+#~ "lydkort som er støtta i Linux kopla til.\n"
 #~ "\n"
 #~ "\n"
 #~ "Du finn maskinvaredatabasen vår på:\n"
@@ -3944,10 +3871,15 @@ msgstr "Oppsett av skjermtenar"
 #~ "\n"
 #~ "http://www.mandriva.com/en/hardware/"
 
-#, fuzzy
 #~ msgid ""
 #~ "No TV Card has been detected on your machine. Please verify that a Linux-"
-#~ "supported Video/TV Card is correctly plugged in."
+#~ "supported Video/TV Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
 #~ "Fann ikkje noko fjernsynskort kopla til maskina. Kontroller at du har eit "
 #~ "fjernsynskort som er støtta i Linux kopla til.\n"
@@ -3966,6 +3898,15 @@ msgstr "Oppsett av skjermtenar"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "Regelmessige kontrollar"
+
+#~ msgid ""
+#~ "Please choose a video mode, it will be applied to each of the boot "
+#~ "entries selected below.\n"
+#~ "Be sure your video card supports the mode you choose."
+#~ msgstr ""
+#~ "Vel ein skjermmodus. Denne vert brukt for kvar av oppstartseiningane "
+#~ "merkte nedanfor.\n"
+#~ "Hugs at skjermkortet ditt må støtta skjermmodusen du vel."
 
 #~ msgid "Please enter a theme name"
 #~ msgstr "Skriv inn temanamn"
@@ -3994,6 +3935,46 @@ msgstr "Oppsett av skjermtenar"
 #~ msgid "Restart XFS"
 #~ msgstr "Start XFS på nytt"
 
+#, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Set opp e-postvarsel"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Set opp e-postvarsel"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Set opp e-postvarsel"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Oppsett av språk og land"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Oppsett av skjermtenar"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Oppsett av språk og land"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Oppsett av skjermtenar"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Oppsett av skjermtenar"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Oppsett av skjermtenar"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "UPS-oppsett"
+
 #~ msgid "Save theme"
 #~ msgstr "Lagra tema"
 
@@ -4008,6 +3989,9 @@ msgstr "Oppsett av skjermtenar"
 
 #~ msgid "Select Mandriva Tool:"
 #~ msgstr "Vel Mandriva-verktøy:"
+
+#~ msgid "Silent"
+#~ msgstr "Stille"
 
 #~ msgid "Silent bootsplash"
 #~ msgstr "Stille oppstart"
@@ -4036,6 +4020,9 @@ msgstr "Oppsett av skjermtenar"
 
 #~ msgid "Text color"
 #~ msgstr "Tekstfarge"
+
+#~ msgid "Text only"
+#~ msgstr "Berre tekst"
 
 #~ msgid "Text size"
 #~ msgstr "Tekststorleik"
@@ -4083,6 +4070,9 @@ msgstr "Oppsett av skjermtenar"
 #~ msgid "The width of the progress bar"
 #~ msgstr "Breidda til tekstboksen."
 
+#~ msgid "Theme"
+#~ msgstr "Tema"
+
 #~ msgid "Theme name"
 #~ msgstr "Temanamn"
 
@@ -4092,8 +4082,14 @@ msgstr "Oppsett av skjermtenar"
 #~ msgid "Unknown/Others"
 #~ msgstr "Ukjend/andre"
 
+#~ msgid "Verbose"
+#~ msgstr "Utvida meldingar"
+
 #~ msgid "Verbose bootsplash"
 #~ msgstr "Oppstart med utvida meldingar"
+
+#~ msgid "Video mode"
+#~ msgstr "Videomodus"
 
 #~ msgid "Whether the FPU has an irq vector"
 #~ msgstr "Om mattekoprosessoren har ein avbruddsvektor"
@@ -4109,6 +4105,14 @@ msgstr "Oppsett av skjermtenar"
 
 #~ msgid "Y coordinate of the text"
 #~ msgstr "Y-koordinat til tekst"
+
+#~ msgid ""
+#~ "Your system bootloader is not in framebuffer mode. To activate graphical "
+#~ "boot, select a graphic video mode from the bootloader configuration tool."
+#~ msgstr ""
+#~ "Oppstartslastaren er ikkje i framebuffer-modus (grafisk modus). For å "
+#~ "bruk grafisk oppstart må du velja ein skjermmodus frå oppsettverktøyet "
+#~ "for oppstartslastaren."
 
 #~ msgid "choose image"
 #~ msgstr "Vel bilete"

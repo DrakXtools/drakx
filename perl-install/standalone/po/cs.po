@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:28+0100\n"
+"POT-Creation-Date: 2017-01-15 15:12+0100\n"
 "PO-Revision-Date: 2010-05-03 22:07+0200\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 1.0\n"
 
-#: display_help:53 display_help:58 drakbug:173 drakperm:134
+#: display_help:50 display_help:55 drakbug:173 drakperm:134
 #, c-format
 msgid "Help"
 msgstr "Nápověda"
 
-#: display_help:66 drakbug:178 drakfont:507
+#: display_help:63 drakbug:178 drakfont:507
 #, c-format
 msgid "Close"
 msgstr "Zavřít"
@@ -34,141 +34,64 @@ msgstr "Zavřít"
 msgid "Authentication"
 msgstr "Ověření"
 
-#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213
-#: drakfont:226 drakfont:264 finish-install:133 logdrake:177 logdrake:453
-#: logdrake:458 scannerdrake:56 scannerdrake:98 scannerdrake:139
-#: scannerdrake:197 scannerdrake:256 scannerdrake:726 scannerdrake:737
-#: scannerdrake:876 scannerdrake:887 scannerdrake:957
+#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213 drakfont:226
+#: drakfont:264 finish-install:133 logdrake:177 logdrake:453 logdrake:458
+#: scannerdrake:56 scannerdrake:98 scannerdrake:139 scannerdrake:197
+#: scannerdrake:256 scannerdrake:726 scannerdrake:737 scannerdrake:876
+#: scannerdrake:887 scannerdrake:957
 #, c-format
 msgid "Error"
 msgstr "Chyba"
 
-#: drakboot:54
-#, c-format
-msgid "No bootloader found, creating a new configuration"
-msgstr "Nebyl nalezen zavaděč; vytvářím nové nastavení"
-
-#: drakboot:89 harddrake2:191 logdrake:77
+#: drakautologin:54 harddrake2:195 logdrake:77
 #, c-format
 msgid "_File"
 msgstr "_Soubor"
 
-#: drakboot:90 harddrake2:192 logdrake:78 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:78 logdrake:79
 #, c-format
 msgid "_Quit"
 msgstr "_Konec"
 
-#: drakboot:90 harddrake2:192 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:79
 #, c-format
 msgid "<control>Q"
 msgstr "<control>K"
 
-#: drakboot:138
-#, c-format
-msgid "Text only"
-msgstr "Pouze text"
-
-#: drakboot:139
-#, c-format
-msgid "Verbose"
-msgstr "Informativní"
-
-#: drakboot:140
-#, c-format
-msgid "Silent"
-msgstr "Tichý"
-
-#: drakboot:146 drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381
-#: drakups:27 harddrake2:504 localedrake:45 scannerdrake:48 scannerdrake:51
-#: scannerdrake:294 scannerdrake:299 scannerdrake:951
-#, c-format
-msgid "Warning"
-msgstr "Varování"
-
-#: drakboot:147
-#, c-format
-msgid ""
-"Your system bootloader is not in framebuffer mode. To activate graphical "
-"boot, select a graphic video mode from the bootloader configuration tool."
-msgstr ""
-"Zavaděč systému není v režimu framebuffer. Pro aktivaci spouštění v "
-"grafickém režimu vyberte video režim v konfiguračním nástroji pro zavaděč."
-
-#: drakboot:148
-#, c-format
-msgid "Do you want to configure it now?"
-msgstr "Chcete to nastavit nyní?"
-
-#: drakboot:157
-#, c-format
-msgid "Install themes"
-msgstr "Instalovat motivy"
-
-#: drakboot:159
-#, c-format
-msgid "Graphical boot theme selection"
-msgstr "Výběr tématu pro grafické přihlášení"
-
-#: drakboot:162
-#, c-format
-msgid "Graphical boot mode:"
-msgstr "Režim grafického zavádění:"
-
-#: drakboot:164
-#, c-format
-msgid "Theme"
-msgstr "Téma"
-
-#: drakboot:198
+#: drakautologin:100
 #, c-format
 msgid "Default user"
 msgstr "Výchozí uživatel"
 
-#: drakboot:199
+#: drakautologin:101
 #, c-format
 msgid "Default desktop"
 msgstr "Výchozí pracovní plocha"
 
-#: drakboot:202
+#: drakautologin:104
 #, c-format
 msgid "No, I do not want autologin"
 msgstr "Ne, nechci automatické přihlášení"
 
-#: drakboot:203
+#: drakautologin:105
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "Ano, chci automatické přihlášení s tímto (uživatelem, desktopem)"
 
-#: drakboot:210
+#: drakautologin:112
 #, c-format
 msgid "System mode"
 msgstr "Systémový režim"
 
-#: drakboot:213
+#: drakautologin:115
 #, c-format
 msgid "Launch the graphical environment when your system starts"
 msgstr "Spustit grafické prostředí při startu systému"
 
-#: drakboot:268
+#: drakboot:41
 #, c-format
-msgid "Boot Style Configuration"
-msgstr "Nastavení stylu zavádění"
-
-#: drakboot:270 drakboot:274
-#, c-format
-msgid "Video mode"
-msgstr "Video režim"
-
-#: drakboot:271
-#, c-format
-msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries "
-"selected below.\n"
-"Be sure your video card supports the mode you choose."
-msgstr ""
-"Vyberte prosím video režim, který bude aplikován na všechny níže vybrané "
-"položky zavaděče.\n"
-"Ujistěte se prosím, že vaše grafická karta podporuje režim, který vyberete."
+msgid "No bootloader found, creating a new configuration"
+msgstr "Nebyl nalezen zavaděč; vytvářím nové nastavení"
 
 #: drakbug:52 drakbug:140
 #, c-format
@@ -334,6 +257,13 @@ msgstr "Není instalováno"
 msgid "Package not installed"
 msgstr "Balíček není nainstalován"
 
+#: drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381 drakups:27
+#: harddrake2:509 localedrake:45 scannerdrake:48 scannerdrake:51
+#: scannerdrake:294 scannerdrake:299 scannerdrake:951
+#, c-format
+msgid "Warning"
+msgstr "Varování"
+
 #: drakbug:251
 #, c-format
 msgid ""
@@ -457,7 +387,7 @@ msgstr "%s již existuje a jeho obsah bude ztracen"
 msgid "Could not get the list of available channels"
 msgstr "Nelze získat seznam dostupných kanálů"
 
-#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:358
+#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:362
 #: scannerdrake:63 scannerdrake:67 scannerdrake:75 scannerdrake:316
 #: scannerdrake:365 scannerdrake:501 scannerdrake:505 scannerdrake:527
 #: service_harddrake:426
@@ -507,15 +437,20 @@ msgstr "XDM (Správce obrazovky X)"
 
 #: drakedm:45
 #, c-format
+msgid "SDDM (Simple Desktop Display Manager)"
+msgstr "SDDM (správce obrazovky jednoduché pracovní plochy)"
+
+#: drakedm:46
+#, c-format
 msgid "XDM (X Display Manager)"
 msgstr "XDM (Správce obrazovky X)"
 
-#: drakedm:56
+#: drakedm:57
 #, c-format
 msgid "Choosing a display manager"
 msgstr "Výběr správce oken"
 
-#: drakedm:57
+#: drakedm:58
 #, c-format
 msgid ""
 "X11 Display Manager allows you to graphically log\n"
@@ -526,12 +461,12 @@ msgstr ""
 "rozhraní k bežícímu systému X Window a podporuje spuštění různých\n"
 "X sezení na lokálním počítači současně."
 
-#: drakedm:80
+#: drakedm:81
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
 msgstr "Změny provedeny, chcete restartovat službu dm?"
 
-#: drakedm:81
+#: drakedm:82
 #, c-format
 msgid ""
 "You are going to close all running programs and lose your current session. "
@@ -708,7 +643,7 @@ msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:532 harddrake2:531
+#: drakfont:532 harddrake2:536
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr "Michal Bukovjan <bukm@centrum.cz>\n"
@@ -783,12 +718,12 @@ msgstr "Instalace"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Jste si jisti, že chcete odinstalovat následující písma?"
 
-#: drakfont:688 draksec:59 harddrake2:302
+#: drakfont:688 draksec:59 harddrake2:306
 #, c-format
 msgid "Yes"
 msgstr "Ano"
 
-#: drakfont:690 draksec:58 harddrake2:303
+#: drakfont:690 draksec:58 harddrake2:307
 #, c-format
 msgid "No"
 msgstr "Ne"
@@ -1337,42 +1272,14 @@ msgstr "Start počítače"
 msgid "No Sound Card detected!"
 msgstr "Nebyla nalezena žádná zvuková karta!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: draksound:51
+#: draksound:50
 #, c-format
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
-"supported Sound Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Sound Card is correctly plugged in"
 msgstr ""
-"V počítači nebyla nalezena žádná zvuková karta karta. Zkontrolujte prosím,"
-"zda podporovaná karta je správně zapojena.\n"
-"\n"
-"\n"
-"Databázi hardware lze nalézt na:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
-
-#: draksound:58
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
-"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
-msgstr ""
-"\n"
-"\n"
-"\n"
-"Pozn: Pokud máte PnP zvukovou kartu na ISA, použijte program sndconfig nebo "
-"alsaconf. Spustíte je příkazem \"sndconfig\" nebo \"alsaconf\" v konzoli."
+"Na vašem počítači nebyla detekována žádná zvuková karta. Prosíme ověřte, že "
+"máte kartu podporovanou v Linuxu a že je korektně zapojená."
 
 #: drakups:71
 #, c-format
@@ -1418,7 +1325,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "Autodetekce"
 
-#: drakups:99 harddrake2:358
+#: drakups:99 harddrake2:362
 #, c-format
 msgid "Detection in progress"
 msgstr "Probíhá detekce"
@@ -1503,12 +1410,12 @@ msgid "UPS devices"
 msgstr "Zařízení UPS"
 
 #: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:116
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "Name"
 msgstr "Název"
 
-#: drakups:249 harddrake2:139
+#: drakups:249 harddrake2:143
 #, c-format
 msgid "Driver"
 msgstr "Ovladač"
@@ -1583,27 +1490,14 @@ msgstr "Vítejte v nástroji pro nastavení UPS"
 msgid "No TV Card detected!"
 msgstr "Nebyla nalezena TV karta!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: drakxtv:68
+#: drakxtv:67
 #, c-format
 msgid ""
 "No TV Card has been detected on your machine. Please verify that a Linux-"
-"supported Video/TV Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Video/TV Card is correctly plugged in."
 msgstr ""
-"V počítači nebyla nalezena žádná TV karta. Zkontrolujte prosím, zda "
-"podporovaná karta je správně zapojena.\n"
-"\n"
-"\n"
-"Databázi hardware lze nalézt na:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"Na vašem počítači nebyla detekována žádná televizní karta. Prosíme ověřte, "
+"že máte kartu podporovanou v Linuxu a že je korektně zapojená."
 
 #: finish-install:57
 #, c-format
@@ -1690,7 +1584,7 @@ msgstr "Alternativní ovladače"
 msgid "the list of alternative drivers for this sound card"
 msgstr "seznam alternativních ovladačů pro vaši zvukovou kartu"
 
-#: harddrake2:33 harddrake2:125
+#: harddrake2:33 harddrake2:129
 #, c-format
 msgid "Bus"
 msgstr "Sběrnice"
@@ -1703,7 +1597,7 @@ msgstr ""
 "toto je fyzická sběrnice, na kterou je připojeno zařízení (např. PCI, "
 "USB, ...)"
 
-#: harddrake2:36 harddrake2:151
+#: harddrake2:36 harddrake2:155
 #, c-format
 msgid "Bus identification"
 msgstr "Identifikace sběrnice"
@@ -2026,7 +1920,7 @@ msgstr "Příznaky"
 msgid "CPU flags reported by the kernel"
 msgstr "Příznaky CPU nalezené jádrem"
 
-#: harddrake2:80 harddrake2:144
+#: harddrake2:80 harddrake2:148
 #, c-format
 msgid "Cores"
 msgstr "Jádra"
@@ -2194,7 +2088,7 @@ msgstr "Dostupná velikost"
 msgid "Enabled size of the memory bank"
 msgstr "Dostupná velikost paměťové banky"
 
-#: harddrake2:113 harddrake2:122
+#: harddrake2:113 harddrake2:126
 #, c-format
 msgid "Type"
 msgstr "Typ"
@@ -2204,12 +2098,12 @@ msgstr "Typ"
 msgid "type of the memory device"
 msgstr "typ paměťového zařízení"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed"
 msgstr "Rychlost"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed of the memory bank"
 msgstr "Rychlost paměťové banky"
@@ -2224,159 +2118,174 @@ msgstr "Propojení banky"
 msgid "Socket designation of the memory bank"
 msgstr "Umístění patice paměťové banky"
 
-#: harddrake2:120
+#: harddrake2:118
+#, c-format
+msgid "Location"
+msgstr "Umístění"
+
+#: harddrake2:119
+#, c-format
+msgid "Size"
+msgstr "Velikost"
+
+#: harddrake2:119
+#, c-format
+msgid "Size of the memory device"
+msgstr "Velikost paměťového zařízení"
+
+#: harddrake2:124
 #, c-format
 msgid "Device file"
 msgstr "Soubor se zařízením"
 
-#: harddrake2:120
+#: harddrake2:124
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 "soubor se zařízením, který se používá při komunikaci s ovladačem jádra myši"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "Emulated wheel"
 msgstr "Emulované kolečko"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "zda-li je kolečko emulováno nebo ne"
 
-#: harddrake2:122
+#: harddrake2:126
 #, c-format
 msgid "the type of the mouse"
 msgstr "typ myši"
 
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "the name of the mouse"
 msgstr "název myši"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "Number of buttons"
 msgstr "Počet tlačítek"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "the number of buttons the mouse has"
 msgstr "počet tlačítek na myši"
 
-#: harddrake2:125
+#: harddrake2:129
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Typ sběrnice, ke které je připojena myš"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr "Protokol myši používaný X11"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "protokol, který s myší používá grafické prostředí"
 
-#: harddrake2:130
+#: harddrake2:134
 #, c-format
 msgid "Identification"
 msgstr "Identifikace"
 
-#: harddrake2:135 harddrake2:150
+#: harddrake2:139 harddrake2:154
 #, c-format
 msgid "Connection"
 msgstr "Připojení"
 
-#: harddrake2:145
+#: harddrake2:149
 #, c-format
 msgid "Performances"
 msgstr "Výkony"
 
-#: harddrake2:152
+#: harddrake2:156
 #, c-format
 msgid "Device"
 msgstr "Zařízení"
 
-#: harddrake2:153
+#: harddrake2:157
 #, c-format
 msgid "Partitions"
 msgstr "Oddíly"
 
-#: harddrake2:158
+#: harddrake2:162
 #, c-format
 msgid "Features"
 msgstr "Vlastnosti"
 
-#: harddrake2:179
+#: harddrake2:183
 #, c-format
 msgid "Autodetect _modems"
 msgstr "Automaticky detekovat _modemy"
 
-#: harddrake2:180
+#: harddrake2:184
 #, c-format
 msgid "Autodetect parallel _zip drives"
 msgstr "Automaticky detekovat jednotky _Zip na paralelním portu"
 
-#: harddrake2:184
+#: harddrake2:188
 #, c-format
 msgid "Hardware Configuration"
 msgstr "Nastavení hardware"
 
-#: harddrake2:193
+#: harddrake2:197
 #, c-format
 msgid "_Options"
 msgstr "_Volby"
 
-#: harddrake2:194 harddrake2:195
+#: harddrake2:198 harddrake2:199
 #, c-format
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: harddrake2:195
+#: harddrake2:199
 #, c-format
 msgid "<control>H"
 msgstr "<control>H"
 
-#: harddrake2:196
+#: harddrake2:200
 #, c-format
 msgid "_Fields description"
 msgstr "_Popis položek"
 
-#: harddrake2:197
+#: harddrake2:201
 #, c-format
 msgid "_Report Bug"
 msgstr "Nah_lásit chybu"
 
-#: harddrake2:198
+#: harddrake2:202
 #, c-format
 msgid "_About..."
 msgstr "_O aplikaci..."
 
-#: harddrake2:242
+#: harddrake2:246
 #, c-format
 msgid "Detected hardware"
 msgstr "Nalezený hardware"
 
-#: harddrake2:245 scannerdrake:283
+#: harddrake2:249 scannerdrake:283
 #, c-format
 msgid "Information"
 msgstr "Informace"
 
-#: harddrake2:247
+#: harddrake2:251
 #, c-format
 msgid "Set current driver options"
 msgstr "Nastavit volby aktuálního ovladače"
 
-#: harddrake2:254
+#: harddrake2:257
 #, c-format
 msgid "Run config tool"
 msgstr "Spustit nástroj pro nastavení"
 
-#: harddrake2:280
+#: harddrake2:284
 #, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
@@ -2384,72 +2293,72 @@ msgid ""
 msgstr ""
 "Klepněte na zařízení v levé části stromu a zobrazíte zde o něm informace."
 
-#: harddrake2:300 notify-x11-free-driver-switch:13
+#: harddrake2:304 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "neznámý"
 
-#: harddrake2:301
+#: harddrake2:305
 #, c-format
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: harddrake2:321
+#: harddrake2:325
 #, c-format
 msgid "Misc"
 msgstr "Ostatní"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "secondary"
 msgstr "sekundární"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "primary"
 msgstr "primární"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "burner"
 msgstr "vypalovačka"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:504
+#: harddrake2:509
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Je potřeba nainstalovat tyto balíčky:\n"
 
-#: harddrake2:521
+#: harddrake2:525
 #, c-format
 msgid "Harddrake"
 msgstr "Harddrake"
 
-#: harddrake2:523
+#: harddrake2:528
 #, c-format
 msgid "Copyright (C) %s by %s"
 msgstr "Copyright (C) %s %s"
 
-#: harddrake2:523 harddrake2:527
+#: harddrake2:528 harddrake2:532
 #, c-format
 msgid "Mageia"
 msgstr ""
 
-#: harddrake2:525
+#: harddrake2:530
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr "Toto je HardDrake, nástroj pro nastavení hardware %s"
 
-#: harddrake2:540
+#: harddrake2:545
 #, c-format
 msgid "Harddrake help"
 msgstr "Nápověda pro HardDrake"
 
-#: harddrake2:541
+#: harddrake2:546
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -2458,12 +2367,12 @@ msgstr ""
 "Popis polí:\n"
 "\n"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid "Select a device!"
 msgstr "Zvolte zařízení!"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2757,8 +2666,7 @@ msgstr "Průvodce úspěšně zakázal zasílání varovných zpráv emailem."
 msgid "Save as.."
 msgstr "Uložit jako..."
 
-#: notify-x11-free-driver-switch:18 service_harddrake:468
-#: service_harddrake:481
+#: notify-x11-free-driver-switch:18 service_harddrake:468 service_harddrake:481
 #, c-format
 msgid "Display driver setup"
 msgstr "Nastavení ovladače grafické karty."
@@ -3422,6 +3330,16 @@ msgstr "Regionální nastavení"
 msgid "Language & country configuration"
 msgstr "Nastavení jazyka a země"
 
+#: ../polkit/org.mageia.drakautologin.policy.in.h:1
+#, fuzzy
+msgid "Run Mageia AutoLogin Configuration"
+msgstr "Spustit nastavení Mageii pro zavádění"
+
+#: ../polkit/org.mageia.drakautologin.policy.in.h:2
+#, fuzzy
+msgid "Authentication is required to run Mageia AutoLogin Configuration"
+msgstr "Ke spuštění nastavení Mageii pro zavádění je vyžadováno ověření"
+
 #: ../polkit/org.moondrake.drakauth.policy.in.h:1
 #, fuzzy
 msgid "Run DrakX Authentication Configuration"
@@ -3549,105 +3467,26 @@ msgstr "Nastavení grafického serveru"
 msgid "Authentication is required to run DrakX Service Configuration"
 msgstr "Nastavení grafického serveru"
 
-#~ msgid "%s Bug Report Tool"
-#~ msgstr "Nástroj pro hlášení chyb %s "
-
-#~ msgid "%s Tools Logs"
-#~ msgstr "Nástroje pro záznam %s"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Application Security "
-#~ "Configuration"
-#~ msgstr ""
-#~ "Ke spuštění nastavení Mageii pro bezpečnost aplikací je vyžadováno ověření"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Authentication Configuration"
-#~ msgstr "K nastavení Mageii pro ověřování je vyžadováno ověření"
-
 #~ msgid "Authentication is required to run Moondrake Boot Configuration"
 #~ msgstr "Ke spuštění nastavení Mageii pro zavádění je vyžadováno ověření"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Date and Time Configuration"
-#~ msgstr "Ke spuštění nastavení Mageii pro čas a datum je vyžadováno ověření"
-
-#~ msgid "Authentication is required to run Moondrake Disk Layout Editor"
-#~ msgstr ""
-#~ "Ke spuštění editoru Mageii pro rozvržení disku je vyžadováno ověření"
-
-#~ msgid "Authentication is required to run Moondrake Font Configuration"
-#~ msgstr "Ke spuštění nastavení Mageii pro písmo je vyžadováno ověření"
-
-#~ msgid "Authentication is required to run Moondrake Hardware Configuration"
-#~ msgstr ""
-#~ "Ke spuštění nastavení Mageii pro technické vybavení je vyžadováno ověření"
-
-#~ msgid "Authentication is required to run Moondrake Log Viewer"
-#~ msgstr "Ke spuštění prohlížeče Mageii pro zápisy je vyžadováno ověření"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Login Manager Configuration"
-#~ msgstr ""
-#~ "Ke spuštění nastavení Mageii pro správce přihlášení je vyžadováno ověření"
-
-#~ msgid "Authentication is required to run Moondrake Scanner Configuration"
-#~ msgstr "Ke spuštění nastavení Mageii pro skener je vyžadováno ověření"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Security Permissions "
-#~ "Configuration"
-#~ msgstr ""
-#~ "Ke spuštění nastavení Mageii pro bezpečnostní oprávnění je vyžadováno "
-#~ "ověření"
-
-#~ msgid "Authentication is required to run Moondrake Service Configuration"
-#~ msgstr "Ke spuštění nastavení Mageii pro služby je vyžadováno ověření"
-
-#~ msgid "Authentication is required to run Moondrake UPS Configuration"
-#~ msgstr "Ke spuštění nastavení Mageii pro UPS je vyžadováno ověření"
-
-#~ msgid "Configure authentication required to access %s tools"
-#~ msgstr "Pro nastavení nástroje %s je nutné zadat heslo superuživatele"
-
-#~ msgid "Run Moondrake Application Security Configuration"
-#~ msgstr "Spustit nastavení Mageii pro bezpečnost aplikací"
-
-#~ msgid "Run Moondrake Authentication Configuration"
-#~ msgstr "Spustit nastavení Mageii pro ověřování"
 
 #~ msgid "Run Moondrake Boot Configuration"
 #~ msgstr "Spustit nastavení Mageii pro zavádění"
 
-#~ msgid "Run Moondrake Date and Time Configuration"
-#~ msgstr "Spustit nastavení Mageii pro čas a datum"
-
-#~ msgid "Run Moondrake Disk Layout Editor"
-#~ msgstr "Spustit editor Mageii pro rozvržení disku"
-
-#~ msgid "Run Moondrake Font Configuration"
-#~ msgstr "Spustit nastavení Mageii pro písmo"
-
-#~ msgid "Run Moondrake Hardware Configuration"
-#~ msgstr "Spustit nastavení Mageii pro technické vybavení"
-
-#~ msgid "Run Moondrake Log Viewer"
-#~ msgstr "Spustit prohlížeč Mageii pro zápisy"
-
-#~ msgid "Run Moondrake Login Manager Configuration"
-#~ msgstr "Spustit nastavení Mageii pro správce přihlášení"
-
-#~ msgid "Run Moondrake Scanner Configuration"
-#~ msgstr "Spustit nastavení Mageii pro skener"
-
-#~ msgid "Run Moondrake Security Permissions Configuration"
-#~ msgstr "Spustit nastavení Mageii pro bezpečnostní oprávnění"
-
-#~ msgid "Run Moondrake Service Configuration"
-#~ msgstr "Spustit nastavení Mageii pro služby"
-
-#~ msgid "Run Moondrake UPS Configuration"
-#~ msgstr "Spustit nastavení Mageii pro UPS"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
+#~ "the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a "
+#~ "console."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Pozn: Pokud máte PnP zvukovou kartu na ISA, použijte program sndconfig "
+#~ "nebo alsaconf. Spustíte je příkazem \"sndconfig\" nebo \"alsaconf\" v "
+#~ "konzoli."
 
 #~ msgid "  --help                - display this help     \n"
 #~ msgstr " --help                - zobrazí tuto nápovědu     \n"
@@ -3668,11 +3507,17 @@ msgstr "Nastavení grafického serveru"
 #~ "zachování podmínek licence GNU GPL.\n"
 #~ "Použití:\n"
 
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Nástroj pro hlášení chyb %s "
+
 #~ msgid "%s Control Center"
 #~ msgstr "%s Ovládací centrum"
 
 #~ msgid "%s Help Center"
 #~ msgstr "Nápověda %s"
+
+#~ msgid "%s Tools Logs"
+#~ msgstr "Nástroje pro záznam %s"
 
 #~ msgid "/Autodetect _jaz drives"
 #~ msgstr "/Automaticky detekovat jednotky _Jaz"
@@ -3737,6 +3582,55 @@ msgstr "Nastavení grafického serveru"
 #~ msgid "<control>O"
 #~ msgstr "<control>O"
 
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Application Security "
+#~ "Configuration"
+#~ msgstr ""
+#~ "Ke spuštění nastavení Mageii pro bezpečnost aplikací je vyžadováno ověření"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Authentication Configuration"
+#~ msgstr "K nastavení Mageii pro ověřování je vyžadováno ověření"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Date and Time Configuration"
+#~ msgstr "Ke spuštění nastavení Mageii pro čas a datum je vyžadováno ověření"
+
+#~ msgid "Authentication is required to run Moondrake Disk Layout Editor"
+#~ msgstr ""
+#~ "Ke spuštění editoru Mageii pro rozvržení disku je vyžadováno ověření"
+
+#~ msgid "Authentication is required to run Moondrake Font Configuration"
+#~ msgstr "Ke spuštění nastavení Mageii pro písmo je vyžadováno ověření"
+
+#~ msgid "Authentication is required to run Moondrake Hardware Configuration"
+#~ msgstr ""
+#~ "Ke spuštění nastavení Mageii pro technické vybavení je vyžadováno ověření"
+
+#~ msgid "Authentication is required to run Moondrake Log Viewer"
+#~ msgstr "Ke spuštění prohlížeče Mageii pro zápisy je vyžadováno ověření"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Login Manager Configuration"
+#~ msgstr ""
+#~ "Ke spuštění nastavení Mageii pro správce přihlášení je vyžadováno ověření"
+
+#~ msgid "Authentication is required to run Moondrake Scanner Configuration"
+#~ msgstr "Ke spuštění nastavení Mageii pro skener je vyžadováno ověření"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Security Permissions "
+#~ "Configuration"
+#~ msgstr ""
+#~ "Ke spuštění nastavení Mageii pro bezpečnostní oprávnění je vyžadováno "
+#~ "ověření"
+
+#~ msgid "Authentication is required to run Moondrake Service Configuration"
+#~ msgstr "Ke spuštění nastavení Mageii pro služby je vyžadováno ověření"
+
+#~ msgid "Authentication is required to run Moondrake UPS Configuration"
+#~ msgstr "Ke spuštění nastavení Mageii pro UPS je vyžadováno ověření"
+
 #~ msgid "Autodetect _jaz drives"
 #~ msgstr "Automaticky detekovat jednotky _Jaz"
 
@@ -3745,6 +3639,9 @@ msgstr "Nastavení grafického serveru"
 
 #~ msgid "Background color"
 #~ msgstr "Barva pozadí"
+
+#~ msgid "Boot Style Configuration"
+#~ msgstr "Nastavení stylu zavádění"
 
 #~ msgid "Bugs"
 #~ msgstr "Chyby"
@@ -3773,6 +3670,9 @@ msgstr "Nastavení grafického serveru"
 #~ msgid "Coma bug"
 #~ msgstr "Chyba čárky"
 
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Pro nastavení nástroje %s je nutné zadat heslo superuživatele"
+
 #~ msgid "Configure authentication required to access Mandriva tools"
 #~ msgstr "Nastavení ověřování vyžadovaného pro přístup k nástrojům Mandriva"
 
@@ -3788,6 +3688,9 @@ msgstr "Nastavení grafického serveru"
 #~ msgstr ""
 #~ "Zobrazit motiv\n"
 #~ "na konzoli"
+
+#~ msgid "Do you want to configure it now?"
+#~ msgstr "Chcete to nastavit nyní?"
 
 #, fuzzy
 #~ msgid "DrakX Online"
@@ -3834,6 +3737,12 @@ msgstr "Nastavení grafického serveru"
 #~ msgid "Gradient type"
 #~ msgstr "Typ přechodu"
 
+#~ msgid "Graphical boot mode:"
+#~ msgstr "Režim grafického zavádění:"
+
+#~ msgid "Graphical boot theme selection"
+#~ msgstr "Výběr tématu pro grafické přihlášení"
+
 #~ msgid "Halt bug"
 #~ msgstr "Halt chyba"
 
@@ -3848,6 +3757,9 @@ msgstr "Nastavení grafického serveru"
 #~ "Zde můžete vidět soubory, které se používají k opravám oprávnění, "
 #~ "vlastníků a skupin aplikací msec.\n"
 #~ "Můžete také vytvářet svá vlastní pravidla, která přepíší pravidla výchozí."
+
+#~ msgid "Install themes"
+#~ msgstr "Instalovat motivy"
 
 #~ msgid "Is FPU present"
 #~ msgstr "Přítomnost FPU"
@@ -3869,23 +3781,57 @@ msgstr "Nastavení grafického serveru"
 
 #~ msgid ""
 #~ "No Sound Card has been detected on your machine. Please verify that a "
-#~ "Linux-supported Sound Card is correctly plugged in"
+#~ "Linux-supported Sound Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
-#~ "Na vašem počítači nebyla detekována žádná zvuková karta. Prosíme ověřte, "
-#~ "že máte kartu podporovanou v Linuxu a že je korektně zapojená."
+#~ "V počítači nebyla nalezena žádná zvuková karta karta. Zkontrolujte prosím,"
+#~ "zda podporovaná karta je správně zapojena.\n"
+#~ "\n"
+#~ "\n"
+#~ "Databázi hardware lze nalézt na:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 
 #~ msgid ""
 #~ "No TV Card has been detected on your machine. Please verify that a Linux-"
-#~ "supported Video/TV Card is correctly plugged in."
+#~ "supported Video/TV Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
-#~ "Na vašem počítači nebyla detekována žádná televizní karta. Prosíme "
-#~ "ověřte, že máte kartu podporovanou v Linuxu a že je korektně zapojená."
+#~ "V počítači nebyla nalezena žádná TV karta. Zkontrolujte prosím, zda "
+#~ "podporovaná karta je správně zapojena.\n"
+#~ "\n"
+#~ "\n"
+#~ "Databázi hardware lze nalézt na:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 
 #~ msgid "OpenOffice.org"
 #~ msgstr "OpenOffice.org"
 
 #~ msgid "Options/Test"
 #~ msgstr "Volby/Test"
+
+#~ msgid ""
+#~ "Please choose a video mode, it will be applied to each of the boot "
+#~ "entries selected below.\n"
+#~ "Be sure your video card supports the mode you choose."
+#~ msgstr ""
+#~ "Vyberte prosím video režim, který bude aplikován na všechny níže vybrané "
+#~ "položky zavaděče.\n"
+#~ "Ujistěte se prosím, že vaše grafická karta podporuje režim, který "
+#~ "vyberete."
 
 #~ msgid "Please enter a theme name"
 #~ msgstr "Zadejte prosím název tématu"
@@ -3899,11 +3845,50 @@ msgstr "Nastavení grafického serveru"
 #~ msgid "Progress box transparency"
 #~ msgstr "Průhlednost lišty s průběhem"
 
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Spustit nastavení Mageii pro bezpečnost aplikací"
+
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Spustit nastavení Mageii pro ověřování"
+
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Spustit nastavení Mageii pro čas a datum"
+
+#~ msgid "Run Moondrake Disk Layout Editor"
+#~ msgstr "Spustit editor Mageii pro rozvržení disku"
+
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Spustit nastavení Mageii pro písmo"
+
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Spustit nastavení Mageii pro technické vybavení"
+
+#~ msgid "Run Moondrake Log Viewer"
+#~ msgstr "Spustit prohlížeč Mageii pro zápisy"
+
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Spustit nastavení Mageii pro správce přihlášení"
+
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Spustit nastavení Mageii pro skener"
+
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Spustit nastavení Mageii pro bezpečnostní oprávnění"
+
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Spustit nastavení Mageii pro služby"
+
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "Spustit nastavení Mageii pro UPS"
+
 #~ msgid "Save theme"
 #~ msgstr "uložit motiv"
 
 #~ msgid "Select Mandriva Tool:"
 #~ msgstr "Vyberte nástroj Mandriva:"
+
+#~ msgid "Silent"
+#~ msgstr "Tichý"
 
 #~ msgid "Silent bootsplash"
 #~ msgstr "Tichý zaváděcí obrázek"
@@ -3929,6 +3914,9 @@ msgstr "Nastavení grafického serveru"
 
 #~ msgid "Text color"
 #~ msgstr "Barva textu"
+
+#~ msgid "Text only"
+#~ msgstr "Pouze text"
 
 #~ msgid "Text size"
 #~ msgstr "Velikost textu"
@@ -3960,6 +3948,9 @@ msgstr "Nastavení grafického serveru"
 #~ msgid "The width of the progress bar"
 #~ msgstr "šířka lišty s průběhem"
 
+#~ msgid "Theme"
+#~ msgstr "Téma"
+
 #~ msgid "Theme name"
 #~ msgstr "Název tématu"
 
@@ -3969,8 +3960,14 @@ msgstr "Nastavení grafického serveru"
 #~ msgid "Unknown/Others"
 #~ msgstr "Neznámý/Jiný"
 
+#~ msgid "Verbose"
+#~ msgstr "Informativní"
+
 #~ msgid "Verbose bootsplash"
 #~ msgstr "Informativní zaváděcí obrázek"
+
+#~ msgid "Video mode"
+#~ msgstr "Video režim"
 
 #~ msgid "Whether the FPU has an irq vector"
 #~ msgstr "Zda má FPU irq vektor"
@@ -3986,6 +3983,13 @@ msgstr "Nastavení grafického serveru"
 
 #~ msgid "Y coordinate of the text"
 #~ msgstr "Souřadnice y textu"
+
+#~ msgid ""
+#~ "Your system bootloader is not in framebuffer mode. To activate graphical "
+#~ "boot, select a graphic video mode from the bootloader configuration tool."
+#~ msgstr ""
+#~ "Zavaděč systému není v režimu framebuffer. Pro aktivaci spouštění v "
+#~ "grafickém režimu vyberte video režim v konfiguračním nástroji pro zavaděč."
 
 #~ msgid "choose image"
 #~ msgstr "vyberte obraz"

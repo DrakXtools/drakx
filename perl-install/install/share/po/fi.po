@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:31+0100\n"
+"POT-Creation-Date: 2017-01-15 15:11+0100\n"
 "PO-Revision-Date: 2009-09-18 18:16+0300\n"
 "Last-Translator: Jani Välimaa <jani.valimaa@gmail.com>\n"
 "Language-Team: Finnish <cooker-i18n@mandrivalinux.org>\n"
@@ -64,86 +64,81 @@ msgstr ""
 
 #: any.pm:162
 #, c-format
-msgid "CD-ROM"
-msgstr "CD/DVD-levy"
-
-#: any.pm:163
-#, c-format
 msgid "Network (HTTP)"
 msgstr "Verkko (HTTP)"
 
-#: any.pm:164
+#: any.pm:163
 #, c-format
 msgid "Network (FTP)"
 msgstr "Verkko (FTP)"
 
-#: any.pm:165
+#: any.pm:164
 #, c-format
 msgid "Network (NFS)"
 msgstr "Verkko (NFS)"
 
-#: any.pm:224
+#: any.pm:223
 #, c-format
 msgid "URL of the mirror?"
 msgstr "Peilipalvelimen osoite?"
 
-#: any.pm:230
+#: any.pm:229
 #, c-format
 msgid "URL must start with ftp:// or http://"
 msgstr "Osoitteen täytyy alkaa etuliitteellä ftp:// tai http://"
 
-#: any.pm:248
+#: any.pm:247
 #, c-format
 msgid "Contacting %s web site to get the list of available mirrors..."
 msgstr "Otetaan yhteys %sin sivustolle peilipalvelinlistan hakemiseksi..."
 
-#: any.pm:253
+#: any.pm:252
 #, c-format
 msgid "Failed contacting %s web site to get the list of available mirrors"
 msgstr ""
 "Yhteydenotto %sin sivustolle peilipalvelinlistan hakemiseksi epäonnistui"
 
-#: any.pm:263
+#: any.pm:262
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "Valitse peilipalvelin, jolta paketit haetaan"
 
-#: any.pm:293
+#: any.pm:290
 #, c-format
 msgid "NFS setup"
 msgstr "NFS-asetukset"
 
-#: any.pm:294
+#: any.pm:291
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
 msgstr "Syötä NFS-palvelimen nimi ja hakemistopolku"
 
-#: any.pm:298
+#: any.pm:295
 #, c-format
 msgid "Hostname missing"
 msgstr "Palvelimen osoite puuttuu"
 
-#: any.pm:299
+#: any.pm:296
 #, c-format
 msgid "Directory must begin with \"/\""
 msgstr "Hakemistopolun täytyy alkaa \"/\"-merkillä"
 
-#: any.pm:303
+#: any.pm:300
 #, c-format
 msgid "Hostname of the NFS mount ?"
 msgstr "NFS-palvelimen nimi?"
 
-#: any.pm:304
+#: any.pm:301
 #, c-format
 msgid "Directory"
 msgstr "Hakemisto"
 
-#: any.pm:334
+#: any.pm:331
 #, c-format
 msgid "Supplementary"
 msgstr "Lisämedia"
 
-#: any.pm:369
+#: any.pm:366
 #, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
@@ -152,79 +147,85 @@ msgstr ""
 "Peilipalvelimelta ei löydy tiedostolistausta. Varmista tiedostopolun "
 "oikeellisuus."
 
-#: any.pm:394
+#: any.pm:391
 #, c-format
 msgid "Main Release"
 msgstr ""
 
-#: any.pm:396
+#: any.pm:393
 #, c-format
 msgid "Contrib Release"
 msgstr ""
 
-#: any.pm:398
+#: any.pm:395
 #, c-format
 msgid "Non-free Release"
 msgstr ""
 
-#: any.pm:436
+#: any.pm:433
 #, c-format
 msgid ""
 "Some hardware on your machine needs some non free firmwares in order for the "
 "free software drivers to work."
 msgstr ""
 
-#: any.pm:437
+#: any.pm:434
 #, c-format
 msgid "You should enable \"%s\""
 msgstr ""
 
+#: any.pm:473
+#, c-format
+msgid "\"%s\" contains the various pieces of the systems and its applications"
+msgstr ""
+
+#: any.pm:474
+#, c-format
+msgid "\"%s\" contains non free software.\n"
+msgstr ""
+
+#: any.pm:475
+#, c-format
+msgid ""
+"It also contains firmwares needed for certain devices to operate (eg: some "
+"ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
+msgstr ""
+
 #: any.pm:476
 #, c-format
-msgid "\"%s\" contains the various pieces of the systems and its applications."
+msgid ""
+"\"%s\" contains software that can not be distributed in every country due to "
+"software patents."
 msgstr ""
 
 #: any.pm:477
 #, c-format
 msgid ""
-"\"%s\" contains software that's not officially supported and might not "
-"receive the same level of maintenance."
+"It also contains software from \"%s\" rebuild with additional capabilities."
 msgstr ""
 
-#: any.pm:478
-#, c-format
-msgid "\"%s\" contains non free software.\n"
-msgstr ""
-
-#: any.pm:479
-#, c-format
-msgid ""
-"It also contains firmware needed for certain devices to operate (eg: some "
-"ATI/AMD graphic cards, some network cards, some RAID cards, ...)"
-msgstr ""
-
-#: any.pm:483
+#: any.pm:481
 #, c-format
 msgid "Here you can enable more media if you want."
 msgstr ""
 
-#: any.pm:584
+#: any.pm:595
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Etsitään asennettuja paketteja..."
 
-#: any.pm:619
+#: any.pm:631
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Etsitään paketteja päivitettäväksi..."
 
-#: any.pm:643
+#: any.pm:655
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "Poistetaan paketteja ennen päivitystä..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:870
+#: any.pm:896
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -237,87 +238,87 @@ msgstr ""
 "\n"
 "Poistetaanko paketit?\n"
 
-#: any.pm:1085
+#: any.pm:1121
 #, c-format
 msgid "Error reading file %s"
 msgstr "Virhe luettaessa tiedostoa %s"
 
-#: any.pm:1293
+#: any.pm:1329
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Seuraavat levyt nimettiin uudelleen:"
 
-#: any.pm:1295
+#: any.pm:1331
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (ennen: %s)"
 
-#: any.pm:1352
+#: any.pm:1388
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1352
+#: any.pm:1388
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1352
+#: any.pm:1388
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1371 steps_interactive.pm:933
+#: any.pm:1407 steps_interactive.pm:951
 #, c-format
 msgid "Network"
 msgstr "Verkko"
 
-#: any.pm:1375
+#: any.pm:1411
 #, c-format
 msgid "Please choose a media"
 msgstr "Valitse media"
 
-#: any.pm:1391
+#: any.pm:1427
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Tiedosto jo olemassa. Korvaa?"
 
-#: any.pm:1395
+#: any.pm:1431
 #, c-format
 msgid "Permission denied"
 msgstr "Ei oikeuksia"
 
-#: any.pm:1443
+#: any.pm:1479
 #, c-format
 msgid "Bad NFS name"
 msgstr "Virheellinen NFS-nimi"
 
-#: any.pm:1464
+#: any.pm:1500
 #, c-format
 msgid "Bad media %s"
 msgstr "Virheellinen media %s"
 
-#: any.pm:1508
+#: any.pm:1544
 #, c-format
 msgid "Cannot make screenshots before partitioning"
 msgstr "Kuvakaappauksia ei voida ottaa ennen osiointia"
 
-#: any.pm:1519
+#: any.pm:1555
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Kuvakaappaukset löytyvät asennuksen jälkeen hakemistosta %s"
 
-#: gtk.pm:135
+#: gtk.pm:134
 #, c-format
 msgid "Installation"
 msgstr "Asennus"
 
-#: gtk.pm:139 share/meta-task/compssUsers.pl:55
+#: gtk.pm:138
 #, c-format
 msgid "Configuration"
 msgstr "Asetukset"
 
-#: install2.pm:209
+#: install2.pm:210
 #, c-format
 msgid "You must also format %s"
 msgstr "Myös %s tulee alustaa"
@@ -341,68 +342,68 @@ msgstr "Käynnistetään verkkoa"
 msgid "Bringing down the network"
 msgstr "Ajetaan verkkoa alas"
 
-#: media.pm:404
+#: media.pm:397
 #, c-format
 msgid "Please wait, retrieving file"
 msgstr "Odota hetki, haetaan tiedostoa"
 
-#: media.pm:712
+#: media.pm:704
 #, c-format
 msgid "unable to add medium"
 msgstr "median lisääminen epäonnistui"
 
-#: media.pm:752
+#: media.pm:744
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr "Kopioidaan paketteja kovalevylle myöhempään käyttöä varten"
 
-#: media.pm:805
+#: media.pm:797
 #, c-format
 msgid "Copying in progress"
 msgstr "Kopioidaan"
 
-#: pkgs.pm:32
+#: pkgs.pm:33
 #, c-format
 msgid "must have"
 msgstr "pakollinen"
 
-#: pkgs.pm:33
+#: pkgs.pm:34
 #, c-format
 msgid "important"
 msgstr "tärkeä"
 
-#: pkgs.pm:34
+#: pkgs.pm:35
 #, c-format
 msgid "very nice"
 msgstr "erittäin hyvä"
 
-#: pkgs.pm:35
+#: pkgs.pm:36
 #, c-format
 msgid "nice"
 msgstr "hyvä"
 
-#: pkgs.pm:36
+#: pkgs.pm:37
 #, c-format
 msgid "maybe"
 msgstr "ehkä"
 
-#: pkgs.pm:102
+#: pkgs.pm:108
 #, c-format
 msgid "Getting package information from XML meta-data..."
 msgstr ""
 
-#: pkgs.pm:111
+#: pkgs.pm:117
 #, c-format
 msgid "No xml info for medium \"%s\", only partial result for package %s"
 msgstr ""
 "Medialla \"%s\" ei ole XML-tietoja, vain osittainen hakutulos paketille %s"
 
-#: pkgs.pm:119
+#: pkgs.pm:125
 #, c-format
 msgid "No description"
 msgstr "Ei kuvausta"
 
-#: pkgs.pm:279
+#: pkgs.pm:287
 #, c-format
 msgid ""
 "Some packages requested by %s cannot be installed:\n"
@@ -411,390 +412,30 @@ msgstr ""
 "Joitakin paketin %s vaatimia paketteja ei voida asentaa:\n"
 "%s"
 
-#: pkgs.pm:375 pkgs.pm:402
+#: pkgs.pm:383 pkgs.pm:410
 #, c-format
 msgid "An error occurred:"
 msgstr "Virhe:"
 
-#: pkgs.pm:394
+#: pkgs.pm:402
 #, c-format
 msgid "A fatal error occurred: %s."
 msgstr "Tapahtui ohittamaton virhe: %s."
 
-#: pkgs.pm:877 pkgs.pm:919
+#: pkgs.pm:885 pkgs.pm:927
 #, c-format
 msgid "Do not ask again"
 msgstr "Älä kysy uudelleen"
 
-#: pkgs.pm:893
+#: pkgs.pm:901
 #, c-format
 msgid "%d installation transactions failed"
 msgstr "%d asennustapahtumaa epäonnistui"
 
-#: pkgs.pm:894
+#: pkgs.pm:902
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "Pakettien asennus epäonnistui:"
-
-#: share/meta-task/compssUsers.pl:17
-#, c-format
-msgid "Workstation"
-msgstr "Työasema"
-
-#: share/meta-task/compssUsers.pl:19
-#, c-format
-msgid "Office Workstation"
-msgstr "Toimistotyöasema"
-
-#: share/meta-task/compssUsers.pl:21
-#, c-format
-msgid ""
-"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-"(LibreOffice Calc, Kspread), PDF viewers, etc"
-msgstr ""
-"Toimisto-ohjelmistot: tekstinkäsittely (LibreOffice Writer, Kword), "
-"taulukkolaskenta (LibreOffice calc, Kspread), PDF-lukijat jne"
-
-#: share/meta-task/compssUsers.pl:27
-#, c-format
-msgid "Game station"
-msgstr "Peliasema"
-
-#: share/meta-task/compssUsers.pl:28
-#, fuzzy, c-format
-msgid "Amusement programs: arcade, boards, strategy, etc."
-msgstr "Viihdeohjelmat: tasohyppely, korttipelit, strategia jne"
-
-#: share/meta-task/compssUsers.pl:32
-#, c-format
-msgid "Multimedia station"
-msgstr "Multimediatyöasema"
-
-#: share/meta-task/compssUsers.pl:33
-#, c-format
-msgid "Sound and video playing/editing programs"
-msgstr "Äänen ja videon toisto- ja editointiohjelmat"
-
-#: share/meta-task/compssUsers.pl:38
-#, c-format
-msgid "Toys"
-msgstr ""
-
-#: share/meta-task/compssUsers.pl:39
-#, c-format
-msgid "Apps and tools of less useful value, yet entertaining..."
-msgstr ""
-
-#: share/meta-task/compssUsers.pl:43
-#, c-format
-msgid "Internet station"
-msgstr "Internet-työasema"
-
-#: share/meta-task/compssUsers.pl:44
-#, c-format
-msgid ""
-"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
-"Web"
-msgstr ""
-"Valikoima työkaluja sähköpostin ja uutisryhmien lukemiseen (mutt, tin...), "
-"sekä Internetin selailuun"
-
-#: share/meta-task/compssUsers.pl:49
-#, c-format
-msgid "Network Computer (client)"
-msgstr "Verkkopääte (asiakas)"
-
-#: share/meta-task/compssUsers.pl:50
-#, c-format
-msgid "Clients for different protocols including ssh"
-msgstr "Asiakasohjelmat eri protokollille (SSH jne.)"
-
-#: share/meta-task/compssUsers.pl:56
-#, c-format
-msgid "Tools to ease the configuration of your computer"
-msgstr "Työkalut, jotka helpottavat tietokoneen asetusten muokkaamista"
-
-#: share/meta-task/compssUsers.pl:60
-#, c-format
-msgid "Console Tools"
-msgstr "Komentorivityökalut"
-
-#: share/meta-task/compssUsers.pl:61
-#, c-format
-msgid "Editors, shells, file tools, terminals"
-msgstr "Editorit, komentotulkit, tiedostotyökalut, päätteet"
-
-#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
-#: share/meta-task/compssUsers.pl:203
-#, c-format
-msgid "Development"
-msgstr "Kehitysympäristö"
-
-#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
-#, c-format
-msgid "C and C++ development libraries, programs and include files"
-msgstr ""
-"Ohjelmat, include-tiedostot ja kehityskirjastot ohjelmointikielille C ja C++"
-
-#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
-#, c-format
-msgid "Documentation"
-msgstr "Dokumentaatio"
-
-#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
-#, c-format
-msgid "Books and Howto's on Linux and Free Software"
-msgstr "Kirjoja ja ohjeita Linuxista ja vapaan lähdekoodin ohjelmista"
-
-#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
-#, c-format
-msgid "LSB"
-msgstr "LSB"
-
-#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
-#, c-format
-msgid "Linux Standard Base. Third party applications support"
-msgstr ""
-"Linux Standard Base (LSB)\n"
-" - Tuki kolmannen osapuolen ohjelmistoille"
-
-#: share/meta-task/compssUsers.pl:87
-#, c-format
-msgid "Web Server"
-msgstr "WWW-palvelin"
-
-#: share/meta-task/compssUsers.pl:88
-#, c-format
-msgid "Apache"
-msgstr "Apache"
-
-#: share/meta-task/compssUsers.pl:92
-#, c-format
-msgid "Groupware"
-msgstr "Groupware"
-
-#: share/meta-task/compssUsers.pl:93
-#, c-format
-msgid "Kolab Server"
-msgstr "Kolab-palvelin"
-
-#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
-#, c-format
-msgid "Firewall/Router"
-msgstr "Palomuuri / Reititin"
-
-#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
-#, c-format
-msgid "Internet gateway"
-msgstr "Internetin yhdyskäytävä"
-
-#: share/meta-task/compssUsers.pl:100
-#, c-format
-msgid "Mail/News"
-msgstr "Sähköposti / Uutiset"
-
-#: share/meta-task/compssUsers.pl:101
-#, c-format
-msgid "Postfix mail server, Inn news server"
-msgstr "Postfix-sähköpostipalvelin, Inn-uutispalvelin"
-
-#: share/meta-task/compssUsers.pl:105
-#, c-format
-msgid "Directory Server"
-msgstr "Hakemisto-palvelin"
-
-#: share/meta-task/compssUsers.pl:110
-#, c-format
-msgid "FTP Server"
-msgstr "FTP-palvelin"
-
-#: share/meta-task/compssUsers.pl:111
-#, c-format
-msgid "ProFTPd"
-msgstr "ProFTPd"
-
-#: share/meta-task/compssUsers.pl:115
-#, c-format
-msgid "DNS/NIS"
-msgstr "DNS / NIS"
-
-#: share/meta-task/compssUsers.pl:116
-#, c-format
-msgid "Domain Name and Network Information Server"
-msgstr "DNS- ja NIS-palvelin"
-
-#: share/meta-task/compssUsers.pl:120
-#, c-format
-msgid "File and Printer Sharing Server"
-msgstr "Tiedosto- ja tulostuspalvelin"
-
-#: share/meta-task/compssUsers.pl:121
-#, c-format
-msgid "NFS Server, Samba server"
-msgstr "NFS-palvelin, Samba-palvelin"
-
-#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
-#, c-format
-msgid "Database"
-msgstr "Tietokanta"
-
-#: share/meta-task/compssUsers.pl:126
-#, c-format
-msgid "PostgreSQL and MariaDB Database Server"
-msgstr "PostgreSQL- ja MariaDB-tietokantapalvelin"
-
-#: share/meta-task/compssUsers.pl:131
-#, c-format
-msgid "Web/FTP"
-msgstr "WWW / FTP"
-
-#: share/meta-task/compssUsers.pl:132
-#, c-format
-msgid "Apache, Pro-ftpd"
-msgstr "Apache WWW-palvelin ja Pro-ftpd FTP-palvelin"
-
-#: share/meta-task/compssUsers.pl:136
-#, c-format
-msgid "Mail"
-msgstr "Sähköposti"
-
-#: share/meta-task/compssUsers.pl:137
-#, c-format
-msgid "Postfix mail server"
-msgstr "Postfix-sähköpostipalvelin"
-
-#: share/meta-task/compssUsers.pl:142
-#, c-format
-msgid "PostgreSQL or MariaDB database server"
-msgstr "PostgreSQL- tai MariaDB-tietokantapalvelin"
-
-#: share/meta-task/compssUsers.pl:150
-#, c-format
-msgid "Network Computer server"
-msgstr "Verkkotietokone (palvelin)"
-
-#: share/meta-task/compssUsers.pl:151
-#, c-format
-msgid "NFS server, SMB server, Proxy server, ssh server"
-msgstr "NFS-, SMB-, SSH- ja välityspalvelin"
-
-#: share/meta-task/compssUsers.pl:159
-#, c-format
-msgid "Graphical Environment"
-msgstr "Graafinen ympäristö"
-
-#: share/meta-task/compssUsers.pl:163
-#, c-format
-msgid "KDE Workstation"
-msgstr "KDE-työasema"
-
-#: share/meta-task/compssUsers.pl:164
-#, c-format
-msgid ""
-"The K Desktop Environment, the basic graphical environment with a collection "
-"of accompanying tools"
-msgstr ""
-"K-työpöytäympäristö. Graafinen perusympäristö ja sen mukana tulevat työkalut"
-
-#: share/meta-task/compssUsers.pl:169
-#, c-format
-msgid "GNOME Workstation"
-msgstr "GNOME-työasema"
-
-#: share/meta-task/compssUsers.pl:170
-#, c-format
-msgid ""
-"A graphical environment with user-friendly set of applications and desktop "
-"tools"
-msgstr ""
-"Graafinen ympäristö käyttäjäystävällisillä sovelluksilla ja työkaluilla."
-
-#: share/meta-task/compssUsers.pl:175
-#, fuzzy, c-format
-msgid "Xfce Workstation"
-msgstr "Toimistotyöasema"
-
-#: share/meta-task/compssUsers.pl:176
-#, fuzzy, c-format
-msgid ""
-"A lighter graphical environment with user-friendly set of applications and "
-"desktop tools"
-msgstr ""
-"Graafinen ympäristö käyttäjäystävällisillä sovelluksilla ja työkaluilla."
-
-#: share/meta-task/compssUsers.pl:181
-#, c-format
-msgid "LXDE Desktop"
-msgstr "LXDE-työpöytä"
-
-#: share/meta-task/compssUsers.pl:183
-#, c-format
-msgid ""
-"A lightweight & fast graphical environment with user-friendly set of "
-"applications and desktop tools"
-msgstr ""
-"Kevyt ja nopea, etenkin minikannettaville suunniteltu, graafinen ympäristö "
-"käyttäjäystävällisillä työkaluilla ja työpöytäsovelluksilla."
-
-#: share/meta-task/compssUsers.pl:188
-#, c-format
-msgid "Other Graphical Desktops"
-msgstr "Muut graafiset työpöytäympäristöt"
-
-#: share/meta-task/compssUsers.pl:189
-#, fuzzy, c-format
-msgid "Window Maker, Enlightenment, Fvwm, etc."
-msgstr "Window Maker, Enlightenment, FVWM jne."
-
-#: share/meta-task/compssUsers.pl:192
-#, c-format
-msgid "Media Center"
-msgstr ""
-
-#: share/meta-task/compssUsers.pl:193
-#, c-format
-msgid "XBMC, MythTV, etc."
-msgstr ""
-
-#: share/meta-task/compssUsers.pl:218
-#, c-format
-msgid "Utilities"
-msgstr "Työkalut"
-
-#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
-#, c-format
-msgid "SSH Server"
-msgstr "SSH-palvelin"
-
-#: share/meta-task/compssUsers.pl:225
-#, c-format
-msgid "Webmin"
-msgstr "Webmin"
-
-#: share/meta-task/compssUsers.pl:226
-#, c-format
-msgid "Webmin Remote Configuration Server"
-msgstr "Webmin etäasetuspalvelin"
-
-#: share/meta-task/compssUsers.pl:230
-#, c-format
-msgid "Network Utilities/Monitoring"
-msgstr "Verkkotyökalut ja verkon valvonta"
-
-#: share/meta-task/compssUsers.pl:231
-#, c-format
-msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-msgstr "Valvontatyökalut, prosessienhallinta, tcpdump, nmap, ..."
-
-#: share/meta-task/compssUsers.pl:235
-#, fuzzy, c-format
-msgid "DrakX Wizards"
-msgstr "Moondraken asetusvelhot"
-
-#: share/meta-task/compssUsers.pl:236
-#, c-format
-msgid "Wizards to configure server"
-msgstr "Velhoja palvelinten asettamiseksi"
 
 #: steps.pm:85
 #, c-format
@@ -805,7 +446,7 @@ msgstr ""
 "Ilmeni virhe, eikä sitä ei voida käsitellä kunnolla.\n"
 "Jatka omalla vastuullasi."
 
-#: steps.pm:449
+#: steps.pm:451
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -833,12 +474,12 @@ msgstr "%sin asennus %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> vaihtaa osaa"
 
-#: steps_gtk.pm:158
+#: steps_gtk.pm:163
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
 msgstr "X.org-palvelin on hidas käynnistää. Odota..."
 
-#: steps_gtk.pm:223
+#: steps_gtk.pm:228
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -851,120 +492,120 @@ msgstr ""
 "käynnistetään painamalla käynnistysruudussa näppäintä F1,\n"
 "kirjoittamalla teksti \"text\" ja painamalla Enteriä."
 
-#: steps_gtk.pm:253 steps_gtk.pm:790
+#: steps_gtk.pm:258 steps_gtk.pm:793
 #, c-format
 msgid "Media Selection"
 msgstr "Asennusmedioiden valinta"
 
-#: steps_gtk.pm:264
-#, c-format
-msgid "Install %s KDE Desktop"
+#: steps_gtk.pm:269
+#, fuzzy, c-format
+msgid "Install %s Plasma Desktop"
 msgstr "Asenna %s KDE-työpöytäympäristöllä"
 
-#: steps_gtk.pm:265
+#: steps_gtk.pm:270
 #, c-format
 msgid "Install %s GNOME Desktop"
 msgstr "Asenna %s GNOME-työpöytäympäristöllä"
 
 # Asennuksen sivuvalikko
-#: steps_gtk.pm:266
+#: steps_gtk.pm:271
 #, c-format
 msgid "Custom install"
 msgstr "Mukautettu asennus"
 
-#: steps_gtk.pm:287
-#, c-format
-msgid "KDE Desktop"
-msgstr "KDE-työpöytä"
+#: steps_gtk.pm:292
+#, fuzzy, c-format
+msgid "Plasma Desktop"
+msgstr "Mukautettu"
 
-#: steps_gtk.pm:288
+#: steps_gtk.pm:293
 #, c-format
 msgid "GNOME Desktop"
 msgstr "GNOME-työpöytä"
 
-#: steps_gtk.pm:289
+#: steps_gtk.pm:294
 #, c-format
 msgid "Custom Desktop"
 msgstr "Mukautettu"
 
-#: steps_gtk.pm:295
+#: steps_gtk.pm:300
 #, c-format
 msgid "Here's a preview of the '%s' desktop."
 msgstr "%s-työpöydän esikatselu."
 
-#: steps_gtk.pm:322
+#: steps_gtk.pm:327
 #, c-format
 msgid "Click on images in order to see a bigger preview"
 msgstr "Kuvaa napsauttamalla aukeaa isompi esikatselukuva."
 
-#: steps_gtk.pm:338 steps_interactive.pm:595 steps_list.pm:31
+#: steps_gtk.pm:343 steps_interactive.pm:604 steps_list.pm:31
 #, c-format
 msgid "Package Group Selection"
 msgstr "Pakettiryhmien valinta"
 
-#: steps_gtk.pm:361 steps_interactive.pm:612
+#: steps_gtk.pm:366 steps_interactive.pm:621
 #, c-format
 msgid "Individual package selection"
 msgstr "Yksittäisten pakettien valinta"
 
-#: steps_gtk.pm:368
+#: steps_gtk.pm:373
 #, c-format
 msgid "Unselect All"
 msgstr "Poista valinnat"
 
 # mat
-#: steps_gtk.pm:387 steps_interactive.pm:524
+#: steps_gtk.pm:392 steps_interactive.pm:533
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Koko yhteensä: %d / %d Mt"
 
-#: steps_gtk.pm:432
+#: steps_gtk.pm:437
 #, c-format
 msgid "Version: "
 msgstr "Versio: "
 
 # mat
-#: steps_gtk.pm:433
+#: steps_gtk.pm:438
 #, c-format
 msgid "Size: "
 msgstr "Koko: "
 
-#: steps_gtk.pm:433
+#: steps_gtk.pm:438
 #, c-format
 msgid "%d KB\n"
 msgstr "%d kt\n"
 
-#: steps_gtk.pm:434
+#: steps_gtk.pm:439
 #, c-format
 msgid "Importance: "
 msgstr "Tärkeys: "
 
-#: steps_gtk.pm:469
+#: steps_gtk.pm:474
 #, c-format
 msgid "You cannot select/unselect this package"
 msgstr "Pakettia ei voida valita tai poistaa"
 
-#: steps_gtk.pm:473
+#: steps_gtk.pm:478
 #, c-format
 msgid "due to missing %s"
 msgstr "puuttuvan riippuvuuden %s vuoksi"
 
-#: steps_gtk.pm:474
+#: steps_gtk.pm:479
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "täyttämättömistä riippuvuuksista %s johtuen"
 
-#: steps_gtk.pm:475
+#: steps_gtk.pm:480
 #, c-format
 msgid "trying to promote %s"
 msgstr "yritetään asentaa %s"
 
-#: steps_gtk.pm:476
+#: steps_gtk.pm:481
 #, c-format
 msgid "in order to keep %s"
 msgstr "jotta %s voitaisiin säilyttää"
 
-#: steps_gtk.pm:481
+#: steps_gtk.pm:486
 #, c-format
 msgid ""
 "You cannot select this package as there is not enough space left to install "
@@ -973,98 +614,98 @@ msgstr ""
 "Pakettia ei voida asentaa, koska levyllä ei ole tarpeeksi tilaa sen "
 "asentamiseen"
 
-#: steps_gtk.pm:484
+#: steps_gtk.pm:489
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Seuraavat paketit asennetaan"
 
-#: steps_gtk.pm:485
+#: steps_gtk.pm:490
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Seuraavat paketit poistetaan"
 
-#: steps_gtk.pm:511
+#: steps_gtk.pm:516
 #, c-format
 msgid "This is a mandatory package, it cannot be unselected"
 msgstr "Tämä on pakollinen paketti, sitä ei voida poistaa valinnoista"
 
-#: steps_gtk.pm:513
+#: steps_gtk.pm:518
 #, c-format
 msgid "You cannot unselect this package. It is already installed"
 msgstr "Paketin valintaa ei voi poistaa, koska se on jo asennettu"
 
-#: steps_gtk.pm:515
+#: steps_gtk.pm:520
 #, c-format
 msgid "You cannot unselect this package. It must be upgraded"
 msgstr "Paketin valintaa ei voi poistaa, koska se pitää päivittää"
 
-#: steps_gtk.pm:519
+#: steps_gtk.pm:524
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Näytä automaattisesti valitut paketit"
 
-#: steps_gtk.pm:523
+#: steps_gtk.pm:528
 #, c-format
 msgid "Install"
 msgstr "Asenna"
 
-#: steps_gtk.pm:526
+#: steps_gtk.pm:531
 #, c-format
 msgid "Load/Save selection"
 msgstr "Lataa / tallenna pakettivalinnat"
 
-#: steps_gtk.pm:527
+#: steps_gtk.pm:532
 #, c-format
 msgid "Updating package selection"
 msgstr "Päivitetään pakettien valintoja"
 
 # Asennuksen sivuvalikko
-#: steps_gtk.pm:532
+#: steps_gtk.pm:537
 #, c-format
 msgid "Minimal install"
 msgstr "Vähimmäisasennus"
 
-#: steps_gtk.pm:545
+#: steps_gtk.pm:550
 #, c-format
 msgid "Software Management"
 msgstr "Ohjelmistojen hallinta"
 
-#: steps_gtk.pm:545 steps_interactive.pm:405
+#: steps_gtk.pm:550 steps_interactive.pm:410
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Valitse asennettavat paketit"
 
-#: steps_gtk.pm:562 steps_interactive.pm:626 steps_list.pm:33
+#: steps_gtk.pm:567 steps_interactive.pm:635 steps_list.pm:33
 #, c-format
 msgid "Installing"
 msgstr "Asennus käynnissä"
 
-#: steps_gtk.pm:593
+#: steps_gtk.pm:598
 #, c-format
 msgid "Bored?"
 msgstr ""
 
-#: steps_gtk.pm:593
+#: steps_gtk.pm:598
 #, c-format
 msgid "Boss button"
 msgstr ""
 
-#: steps_gtk.pm:599
+#: steps_gtk.pm:604
 #, c-format
 msgid "No details"
 msgstr "Ei yksityiskohtia"
 
-#: steps_gtk.pm:633
+#: steps_gtk.pm:639
 #, c-format
 msgid "Time remaining:"
 msgstr "Aikaa jäljellä:"
 
-#: steps_gtk.pm:634
+#: steps_gtk.pm:640
 #, c-format
 msgid "(estimating...)"
 msgstr "(arvioidaan...)"
 
-#: steps_gtk.pm:664
+#: steps_gtk.pm:666
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
@@ -1072,22 +713,22 @@ msgstr[0] "%d paketti"
 msgstr[1] "%d pakettia"
 
 # Asennuksen sivuvalikko
-#: steps_gtk.pm:720 steps_interactive.pm:794 steps_list.pm:44
+#: steps_gtk.pm:723 steps_interactive.pm:830 steps_list.pm:44
 #, c-format
 msgid "Summary"
 msgstr "Yhteenveto"
 
-#: steps_gtk.pm:739
+#: steps_gtk.pm:742
 #, c-format
 msgid "Configure"
 msgstr "Aseta"
 
-#: steps_gtk.pm:756 steps_interactive.pm:790 steps_interactive.pm:946
+#: steps_gtk.pm:759 steps_interactive.pm:826 steps_interactive.pm:964
 #, c-format
 msgid "not configured"
 msgstr "ei asetettu"
 
-#: steps_gtk.pm:799 steps_interactive.pm:303
+#: steps_gtk.pm:802 steps_interactive.pm:308
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -1096,7 +737,7 @@ msgstr ""
 "Löydettiin seuraavat asennusmediat.\n"
 "Poista median valinta, jos et halua käyttää sitä."
 
-#: steps_gtk.pm:815 steps_interactive.pm:309
+#: steps_gtk.pm:818 steps_interactive.pm:314
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard disk drive "
@@ -1108,69 +749,69 @@ msgstr ""
 "Asennus jatkuu tämän jälkeen kovalevyltä ja paketit ovat käytettävissä myös "
 "asennuksen jälkeen."
 
-#: steps_gtk.pm:817 steps_interactive.pm:311
+#: steps_gtk.pm:820 steps_interactive.pm:316
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Kopioi asennuslevyt"
 
-#: steps_interactive.pm:40
+#: steps_interactive.pm:41
 #, c-format
 msgid "An error occurred"
 msgstr "Ilmeni virhe"
 
-#: steps_interactive.pm:105
+#: steps_interactive.pm:106
 #, c-format
 msgid "Please choose your keyboard layout"
 msgstr "Valitse näppäimistöasettelu"
 
-#: steps_interactive.pm:109
+#: steps_interactive.pm:110
 #, c-format
 msgid "Here is the full list of available keyboards:"
 msgstr "Lista kaikista käytettävissä olevista näppäimistöistä:"
 
-#: steps_interactive.pm:148
+#: steps_interactive.pm:149
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Asennustapa"
 
-#: steps_interactive.pm:152
+#: steps_interactive.pm:153
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Asennus vai päivitys?"
 
-#: steps_interactive.pm:154
+#: steps_interactive.pm:155
 #, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "Asennus"
 
-#: steps_interactive.pm:156
+#: steps_interactive.pm:157
 #, c-format
 msgid "Upgrade %s"
 msgstr "Päivitä %s"
 
-#: steps_interactive.pm:174
+#: steps_interactive.pm:175
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Salausavain %s:lle"
 
-#: steps_interactive.pm:209
+#: steps_interactive.pm:210
 #, c-format
 msgid "Cancel installation, reboot system"
 msgstr "Peruuta asennus ja käynnistä järjestelmä uudelleen"
 
-#: steps_interactive.pm:210
+#: steps_interactive.pm:211
 #, c-format
 msgid "New Installation"
 msgstr "Uusi asennus"
 
-#: steps_interactive.pm:211
+#: steps_interactive.pm:212
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
 msgstr "Päivitä edellinen asennus (ei suositella)"
 
-#: steps_interactive.pm:215
+#: steps_interactive.pm:216
 #, fuzzy, c-format
 msgid ""
 "Installer has detected that your installed %s system could not\n"
@@ -1189,7 +830,17 @@ msgstr ""
 "HUOM! Ota varmuuskopio tärkeistä ja henkilökohtaisista tiedostoista\n"
 "ennen kuin valitset \"Uusi asennus\"."
 
-#: steps_interactive.pm:342
+#: steps_interactive.pm:257
+#, c-format
+msgid "CD/DVD"
+msgstr ""
+
+#: steps_interactive.pm:257
+#, fuzzy, c-format
+msgid "Configuring CD/DVD"
+msgstr "Etsitään IDE-levyjä"
+
+#: steps_interactive.pm:347
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1203,12 +854,12 @@ msgstr ""
 "Jos levyä ei ole, valitse \"Peruuta\" ohittaaksesi asennukset kyseiseltä "
 "levyltä."
 
-#: steps_interactive.pm:360
+#: steps_interactive.pm:365 steps_interactive.pm:485
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Etsitään saatavilla olevia paketteja..."
 
-#: steps_interactive.pm:368
+#: steps_interactive.pm:373
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade "
@@ -1217,7 +868,7 @@ msgstr ""
 "Järjestelmässä ei ole riittävästi vapaata tilaa asennusta tai päivitystä "
 "varten (%dMt > %dMt)"
 
-#: steps_interactive.pm:418
+#: steps_interactive.pm:423
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1226,53 +877,53 @@ msgstr ""
 "Lataa tai tallenna pakettien valinta.\n"
 "Muotoilu on sama kuin auto_install-toiminnon luomilla tiedostoilla."
 
-#: steps_interactive.pm:420
+#: steps_interactive.pm:425
 #, c-format
 msgid "Load"
 msgstr "Lataa"
 
-#: steps_interactive.pm:420
+#: steps_interactive.pm:425
 #, c-format
 msgid "Save"
 msgstr "Tallenna"
 
-#: steps_interactive.pm:428
+#: steps_interactive.pm:433
 #, c-format
 msgid "Bad file"
 msgstr "Virheellinen tiedosto"
 
-#: steps_interactive.pm:445
-#, c-format
-msgid "KDE"
-msgstr "KDE"
+#: steps_interactive.pm:450
+#, fuzzy, c-format
+msgid "Plasma"
+msgstr "Mukautettu"
 
-#: steps_interactive.pm:446
+#: steps_interactive.pm:451
 #, c-format
 msgid "GNOME"
 msgstr "GNOME"
 
-#: steps_interactive.pm:449
+#: steps_interactive.pm:454
 #, c-format
 msgid "Desktop Selection"
 msgstr "Työpöydän valinta"
 
-#: steps_interactive.pm:450
+#: steps_interactive.pm:455
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr "Valitse asennettava työpöytäympäristö."
 
-#: steps_interactive.pm:538
+#: steps_interactive.pm:547
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr ""
 "Valittujen pakettien koko on suurempi kuin käytettävissä oleva levytila"
 
-#: steps_interactive.pm:562
+#: steps_interactive.pm:571
 #, c-format
 msgid "Type of install"
 msgstr "Asennuksen tyyppi"
 
-#: steps_interactive.pm:563
+#: steps_interactive.pm:572
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1281,87 +932,116 @@ msgstr ""
 "Yhtään pakettiryhmää ei ole valittu.\n"
 "Valitse haluttu vähimmäisasennus:"
 
-#: steps_interactive.pm:568
+#: steps_interactive.pm:577
 #, c-format
 msgid "With X"
 msgstr "Graafisella käyttöliittymällä"
 
-#: steps_interactive.pm:569
+#: steps_interactive.pm:578
 #, c-format
 msgid "Install suggested packages"
 msgstr "Asenna ehdotetut paketit"
 
-#: steps_interactive.pm:570
+#: steps_interactive.pm:579
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Perusdokumentaation kanssa (suositeltu!)"
 
-#: steps_interactive.pm:571
+#: steps_interactive.pm:580
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Vähimmäisasennus (ei edes urpmi:a)"
 
-#: steps_interactive.pm:627
+#: steps_interactive.pm:636
 #, c-format
 msgid "Preparing installation"
 msgstr "Valmistellaan asennusta"
 
-#: steps_interactive.pm:635
+#: steps_interactive.pm:644
 #, c-format
 msgid "Installing package %s"
 msgstr "Asennetaan pakettia %s"
 
-#: steps_interactive.pm:659
+#: steps_interactive.pm:668
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Paketteja järjestettäessä tapahtui virhe:"
 
-#: steps_interactive.pm:659
+#: steps_interactive.pm:668
 #, c-format
 msgid "Go on anyway?"
 msgstr "Jatka?"
 
-#: steps_interactive.pm:663
+#: steps_interactive.pm:672
 #, c-format
 msgid "Retry"
 msgstr "Yritä uudelleen"
 
-#: steps_interactive.pm:664
+#: steps_interactive.pm:673
 #, c-format
 msgid "Skip this package"
 msgstr "Ohita paketti"
 
-#: steps_interactive.pm:665
+#: steps_interactive.pm:674
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "Ohita kaikki paketit medialta \"%s\""
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:675
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Siirry takaisin medioiden ja pakettien valintaan"
 
-#: steps_interactive.pm:669
+#: steps_interactive.pm:678
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Paketin %s asentamisessa tapahtui virhe."
 
-#: steps_interactive.pm:688
+#: steps_interactive.pm:697
 #, c-format
 msgid "Post-install configuration"
 msgstr "Asennuksen jälkeiset toiminnot"
 
-#: steps_interactive.pm:695
+#: steps_interactive.pm:704
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Varmista, että \"Update Modules\"-media on asemassa %s"
 
-#: steps_interactive.pm:726
+#: steps_interactive.pm:735 steps_interactive.pm:765
 #, c-format
 msgid "Updates"
 msgstr "Päivitykset"
 
-#: steps_interactive.pm:727
+#: steps_interactive.pm:736
+#, c-format
+msgid "You now have the opportunity to setup online media."
+msgstr ""
+
+#: steps_interactive.pm:737
+#, c-format
+msgid "This allows to install security updates."
+msgstr ""
+
+#: steps_interactive.pm:738
+#, c-format
+msgid ""
+"To setup those media, you will need to have a working Internet \n"
+"connection.\n"
+"\n"
+"Do you want to setup the update media?"
+msgstr ""
+
+#: steps_interactive.pm:758
+#, c-format
+msgid "Failure when adding medium"
+msgstr "Virhe lisättäessä lähdettä"
+
+#: steps_interactive.pm:758
+#, c-format
+msgid "Retry?"
+msgstr "Yritä uudelleen?"
+
+#: steps_interactive.pm:766
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1382,105 +1062,80 @@ msgstr ""
 "Asennetaanko päivitykset?"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:838
+#: steps_interactive.pm:874
 #, c-format
 msgid "%s on %s"
 msgstr "%s kohteessa %s"
 
-#: steps_interactive.pm:873 steps_interactive.pm:880 steps_interactive.pm:893
-#: steps_interactive.pm:910 steps_interactive.pm:925
+#: steps_interactive.pm:909 steps_interactive.pm:916 steps_interactive.pm:929
+#: steps_interactive.pm:943
 #, c-format
 msgid "Hardware"
 msgstr "Laitteisto"
 
-#: steps_interactive.pm:894 steps_interactive.pm:911
+#: steps_interactive.pm:930
 #, c-format
 msgid "Sound card"
 msgstr "Äänikortti"
 
-#: steps_interactive.pm:914
-#, c-format
-msgid "Do you have an ISA sound card?"
-msgstr "Onko koneessa ISA-väylään liitettävä äänikortti?"
-
-#: steps_interactive.pm:916
-#, c-format
-msgid ""
-"Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
-"card"
-msgstr ""
-"Suorita asennuksen jälkeen komento \"alsaconf\" tai \"sndconfig\" "
-"asettaaksesi äänikortin."
-
-#: steps_interactive.pm:918
-#, c-format
-msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr ""
-"Yhtään äänikorttia ei löytynyt. Suorita asennuksen jälkeen komento "
-"\"harddrake2\"."
-
-#: steps_interactive.pm:926
+#: steps_interactive.pm:944
 #, c-format
 msgid "Graphical interface"
 msgstr "Graafinen käyttöliittymä"
 
-#: steps_interactive.pm:932 steps_interactive.pm:944
+#: steps_interactive.pm:950 steps_interactive.pm:962
 #, c-format
 msgid "Network & Internet"
 msgstr "Verkko ja Internet"
 
-#: steps_interactive.pm:945
+#: steps_interactive.pm:963
 #, c-format
 msgid "Proxies"
 msgstr "Välityspalvelimet"
 
-#: steps_interactive.pm:946
+#: steps_interactive.pm:964
 #, c-format
 msgid "configured"
 msgstr "asetettu"
 
-#: steps_interactive.pm:956
+#: steps_interactive.pm:974
 #, c-format
 msgid "Security Level"
 msgstr "Turvallisuustaso"
 
-#: steps_interactive.pm:976
+#: steps_interactive.pm:994
 #, c-format
 msgid "Firewall"
 msgstr "Palomuuri"
 
-#: steps_interactive.pm:980
+#: steps_interactive.pm:998
 #, c-format
 msgid "activated"
 msgstr "aktivoitu"
 
-#: steps_interactive.pm:980
+#: steps_interactive.pm:998
 #, c-format
 msgid "disabled"
 msgstr "ei käytössä"
 
-#: steps_interactive.pm:994
+#: steps_interactive.pm:1012
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
 "X-palvelinta ei ole asetettu, haluatko varmasti jättää sen asettamatta?"
 
-#: steps_interactive.pm:1023
-#, c-format
-msgid "Preparing bootloader..."
-msgstr "Valmistellaan käynnistyslatainta..."
-
-#: steps_interactive.pm:1023
+#. -PO: This is NOT the boot loader (just the kernel initrds)!!!!
+#: steps_interactive.pm:1043
 #, fuzzy, c-format
 msgid "Preparing initial startup program..."
 msgstr "Valmistellaan asennusta"
 
-#: steps_interactive.pm:1024
+#: steps_interactive.pm:1044
 #, c-format
 msgid "Be patient, this may take a while..."
 msgstr "Ole kärsivällinen, valmistelussa voi kestää hetki..."
 
-#: steps_interactive.pm:1040
+#: steps_interactive.pm:1060
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1490,17 +1145,17 @@ msgstr ""
 "pääkäyttäjälle."
 
 # mat
-#: steps_interactive.pm:1072
+#: steps_interactive.pm:1092
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Aseta tyhjä levyke levykeasemaan %s"
 
-#: steps_interactive.pm:1074
+#: steps_interactive.pm:1094
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Luodaan automaattiasennuslevykettä..."
 
-#: steps_interactive.pm:1085
+#: steps_interactive.pm:1105
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1511,12 +1166,12 @@ msgstr ""
 "\n"
 "Haluatko todella lopettaa?"
 
-#: steps_interactive.pm:1095
+#: steps_interactive.pm:1115
 #, c-format
 msgid "Congratulations"
 msgstr "Onnittelut"
 
-#: steps_interactive.pm:1098
+#: steps_interactive.pm:1118
 #, c-format
 msgid "Reboot"
 msgstr "Käynnistä uudelleen"
@@ -1642,35 +1297,6 @@ msgid ""
 "Exit"
 msgstr "Lopetus"
 
-#, fuzzy
-#~ msgid "A lightweight fast graphical environment"
-#~ msgstr ""
-#~ "Kevyt ja nopea, etenkin minikannettaville suunniteltu, graafinen "
-#~ "ympäristö käyttäjäystävällisillä työkaluilla ja työpöytäsovelluksilla."
-
-#, fuzzy
-#~ msgid "Install recommended packages"
-#~ msgstr "Asenna ehdotetut paketit"
-
-#, fuzzy
-#~ msgid "LXQT Desktop"
-#~ msgstr "LXDE-työpöytä"
-
-#~ msgid "Moondrake Wizards"
-#~ msgstr "Moondraken asetusvelhot"
-
-#, fuzzy
-#~ msgid "Plasma Desktop"
-#~ msgstr "Mukautettu"
-
-#, fuzzy
-#~ msgid ""
-#~ "The Plasma Desktop, the basic graphical environment with a collection of "
-#~ "accompanying tools"
-#~ msgstr ""
-#~ "K-työpöytäympäristö. Graafinen perusympäristö ja sen mukana tulevat "
-#~ "työkalut"
-
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Käyttäjätuella varustettu täysi Mandriva Linux -jakelu"
 
@@ -1681,6 +1307,32 @@ msgstr "Lopetus"
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "Graafinen ympäristö"
 
+#~ msgid ""
+#~ "A graphical environment with user-friendly set of applications and "
+#~ "desktop tools"
+#~ msgstr ""
+#~ "Graafinen ympäristö käyttäjäystävällisillä sovelluksilla ja työkaluilla."
+
+#, fuzzy
+#~ msgid ""
+#~ "A lighter graphical environment with user-friendly set of applications "
+#~ "and desktop tools"
+#~ msgstr ""
+#~ "Graafinen ympäristö käyttäjäystävällisillä sovelluksilla ja työkaluilla."
+
+#~ msgid ""
+#~ "A lightweight & fast graphical environment with user-friendly set of "
+#~ "applications and desktop tools"
+#~ msgstr ""
+#~ "Kevyt ja nopea, etenkin minikannettaville suunniteltu, graafinen "
+#~ "ympäristö käyttäjäystävällisillä työkaluilla ja työpöytäsovelluksilla."
+
+#, fuzzy
+#~ msgid "A lightweight fast graphical environment"
+#~ msgstr ""
+#~ "Kevyt ja nopea, etenkin minikannettaville suunniteltu, graafinen "
+#~ "ympäristö käyttäjäystävällisillä työkaluilla ja työpöytäsovelluksilla."
+
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment with a dedicated following"
 #~ msgstr ""
@@ -1690,24 +1342,76 @@ msgstr "Lopetus"
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "Viihdeohjelmat: tasohyppely, korttipelit, strategia jne"
 
+#, fuzzy
+#~ msgid "Amusement programs: arcade, boards, strategy, etc."
+#~ msgstr "Viihdeohjelmat: tasohyppely, korttipelit, strategia jne"
+
+#~ msgid "Apache"
+#~ msgstr "Apache"
+
+#~ msgid "Apache, Pro-ftpd"
+#~ msgstr "Apache WWW-palvelin ja Pro-ftpd FTP-palvelin"
+
 #~ msgid "Automated"
 #~ msgstr "Automaattinen"
 
 #~ msgid "Bad package"
 #~ msgstr "Viallinen paketti"
 
+#~ msgid "Books and Howto's on Linux and Free Software"
+#~ msgstr "Kirjoja ja ohjeita Linuxista ja vapaan lähdekoodin ohjelmista"
+
+#~ msgid "C and C++ development libraries, programs and include files"
+#~ msgstr ""
+#~ "Ohjelmat, include-tiedostot ja kehityskirjastot ohjelmointikielille C ja C"
+#~ "++"
+
+#~ msgid "CD-ROM"
+#~ msgstr "CD/DVD-levy"
+
 #, fuzzy
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Työasema"
 
-#~ msgid "Configuring IDE"
-#~ msgstr "Etsitään IDE-levyjä"
+#~ msgid "Clients for different protocols including ssh"
+#~ msgstr "Asiakasohjelmat eri protokollille (SSH jne.)"
+
+#~ msgid "Console Tools"
+#~ msgstr "Komentorivityökalut"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "Yhdistetään peilipalvelimeen uusimman pakettilistan saamiseksi..."
 
+#~ msgid "DNS/NIS"
+#~ msgstr "DNS / NIS"
+
+#~ msgid "Database"
+#~ msgstr "Tietokanta"
+
+#~ msgid "Development"
+#~ msgstr "Kehitysympäristö"
+
+#~ msgid "Directory Server"
+#~ msgstr "Hakemisto-palvelin"
+
+#~ msgid "Do you have an ISA sound card?"
+#~ msgstr "Onko koneessa ISA-väylään liitettävä äänikortti?"
+
+#~ msgid "Documentation"
+#~ msgstr "Dokumentaatio"
+
+#~ msgid "Domain Name and Network Information Server"
+#~ msgstr "DNS- ja NIS-palvelin"
+
 #~ msgid "Downloading file %s..."
 #~ msgstr "Haetaan tiedosto %s ..."
+
+#, fuzzy
+#~ msgid "DrakX Wizards"
+#~ msgstr "Moondraken asetusvelhot"
+
+#~ msgid "Editors, shells, file tools, terminals"
+#~ msgstr "Editorit, komentotulkit, tiedostotyökalut, päätteet"
 
 #~ msgid "Explore Linux easily with Mandriva One"
 #~ msgstr "Tutustu Linuxiin helposti Mandriva One:n avulla"
@@ -1715,14 +1419,39 @@ msgstr "Lopetus"
 #~ msgid "Explore Linux easily with Moondrake One"
 #~ msgstr "Tutustu Linuxiin helposti Moondrake One:n avulla"
 
+#~ msgid "FTP Server"
+#~ msgstr "FTP-palvelin"
+
+#~ msgid "File and Printer Sharing Server"
+#~ msgstr "Tiedosto- ja tulostuspalvelin"
+
+#~ msgid "Firewall/Router"
+#~ msgstr "Palomuuri / Reititin"
+
+#~ msgid "GNOME Workstation"
+#~ msgstr "GNOME-työasema"
+
+#~ msgid "Game station"
+#~ msgstr "Peliasema"
+
 #~ msgid "Generate auto install floppy"
 #~ msgstr "Luo automaattinen asennuslevyke"
+
+#~ msgid "Graphical Environment"
+#~ msgstr "Graafinen ympäristö"
+
+#~ msgid "Groupware"
+#~ msgstr "Groupware"
 
 #~ msgid "IDE"
 #~ msgstr "IDE"
 
 #~ msgid "IceWm Desktop"
 #~ msgstr "IceWm Työpöytä"
+
+#, fuzzy
+#~ msgid "Install recommended packages"
+#~ msgstr "Asenna ehdotetut paketit"
 
 #~ msgid ""
 #~ "Installer has detected that your installed Linux system could not\n"
@@ -1741,9 +1470,48 @@ msgstr "Lopetus"
 #~ "HUOM! Ota varmuuskopio tärkeistä ja henkilökohtaisista tiedostoista\n"
 #~ "ennen kuin valitset \"Uusi asennus\"."
 
+#~ msgid "Internet gateway"
+#~ msgstr "Internetin yhdyskäytävä"
+
+#~ msgid "Internet station"
+#~ msgstr "Internet-työasema"
+
+#~ msgid "KDE"
+#~ msgstr "KDE"
+
+#~ msgid "KDE Desktop"
+#~ msgstr "KDE-työpöytä"
+
+#~ msgid "KDE Workstation"
+#~ msgstr "KDE-työasema"
+
+#~ msgid "Kolab Server"
+#~ msgstr "Kolab-palvelin"
+
+#~ msgid "LSB"
+#~ msgstr "LSB"
+
+#~ msgid "LXDE Desktop"
+#~ msgstr "LXDE-työpöytä"
+
+#, fuzzy
+#~ msgid "LXQT Desktop"
+#~ msgstr "LXDE-työpöytä"
+
+#~ msgid "Linux Standard Base. Third party applications support"
+#~ msgstr ""
+#~ "Linux Standard Base (LSB)\n"
+#~ " - Tuki kolmannen osapuolen ohjelmistoille"
+
 #, fuzzy
 #~ msgid "MATE Workstation"
 #~ msgstr "GNOME-työasema"
+
+#~ msgid "Mail"
+#~ msgstr "Sähköposti"
+
+#~ msgid "Mail/News"
+#~ msgstr "Sähköposti / Uutiset"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linuxin asennus %s"
@@ -1754,11 +1522,35 @@ msgstr "Lopetus"
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr "Mandriva: jakeluja jokaisen tarpeisiin"
 
+#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+#~ msgstr "Valvontatyökalut, prosessienhallinta, tcpdump, nmap, ..."
+
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Moondraken asetusvelhot"
+
 #~ msgid "Moondrake, the new Linux distribution"
 #~ msgstr "Moondrake, uusi Linux-jakelu"
 
 #~ msgid "Moondrake: distributions for everybody's needs"
 #~ msgstr "Moondrake: jakeluja jokaisen tarpeisiin"
+
+#~ msgid "Multimedia station"
+#~ msgstr "Multimediatyöasema"
+
+#~ msgid "NFS Server, Samba server"
+#~ msgstr "NFS-palvelin, Samba-palvelin"
+
+#~ msgid "NFS server, SMB server, Proxy server, ssh server"
+#~ msgstr "NFS-, SMB-, SSH- ja välityspalvelin"
+
+#~ msgid "Network Computer (client)"
+#~ msgstr "Verkkopääte (asiakas)"
+
+#~ msgid "Network Computer server"
+#~ msgstr "Verkkotietokone (palvelin)"
+
+#~ msgid "Network Utilities/Monitoring"
+#~ msgstr "Verkkotyökalut ja verkon valvonta"
 
 #~ msgid ""
 #~ "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1767,6 +1559,21 @@ msgstr "Lopetus"
 #~ "1 Mt:n käynnistyslohkoa varten ei löydy vapaata tilaa! Asennusta "
 #~ "jatketaan, mutta käynnistyslohko-osio pitää luoda DiskDrakella "
 #~ "järjestelmän käynnistämiseksi."
+
+#~ msgid "No sound card detected. Try \"harddrake\" after installation"
+#~ msgstr ""
+#~ "Yhtään äänikorttia ei löytynyt. Suorita asennuksen jälkeen komento "
+#~ "\"harddrake2\"."
+
+#~ msgid "Office Workstation"
+#~ msgstr "Toimistotyöasema"
+
+#~ msgid ""
+#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
+#~ msgstr ""
+#~ "Toimisto-ohjelmistot: tekstinkäsittely (LibreOffice Writer, Kword), "
+#~ "taulukkolaskenta (LibreOffice calc, Kspread), PDF-lukijat jne"
 
 #, fuzzy
 #~ msgid ""
@@ -1787,8 +1594,23 @@ msgstr "Lopetus"
 #~ msgid "Office tools"
 #~ msgstr "Toimistotyöasema"
 
+#~ msgid "Other Graphical Desktops"
+#~ msgstr "Muut graafiset työpöytäympäristöt"
+
+#~ msgid "Postfix mail server"
+#~ msgstr "Postfix-sähköpostipalvelin"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Postfix-sähköpostipalvelin, Inn-uutispalvelin"
+
+#~ msgid "PostgreSQL and MariaDB Database Server"
+#~ msgstr "PostgreSQL- ja MariaDB-tietokantapalvelin"
+
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "PostgreSQL- ja MySQL-tietokantapalvelin"
+
+#~ msgid "PostgreSQL or MariaDB database server"
+#~ msgstr "PostgreSQL- tai MariaDB-tietokantapalvelin"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "PostgreSQL- tai MySQL-tietokantapalvelin"
@@ -1797,9 +1619,15 @@ msgstr "Lopetus"
 #~ msgid "Preparing boot images..."
 #~ msgstr "Valmistellaan käynnistyslatainta..."
 
+#~ msgid "Preparing bootloader..."
+#~ msgstr "Valmistellaan käynnistyslatainta..."
+
 #, fuzzy
 #~ msgid "Preparing upgrade..."
 #~ msgstr "Valmistellaan käynnistyslatainta..."
+
+#~ msgid "ProFTPd"
+#~ msgstr "ProFTPd"
 
 #~ msgid "Proceed"
 #~ msgstr "Jatka"
@@ -1811,17 +1639,52 @@ msgstr "Lopetus"
 #~ msgid "Replay"
 #~ msgstr "Toista"
 
+#~ msgid ""
+#~ "Run \"alsaconf\" or \"sndconfig\" after installation to configure your "
+#~ "sound card"
+#~ msgstr ""
+#~ "Suorita asennuksen jälkeen komento \"alsaconf\" tai \"sndconfig\" "
+#~ "asettaaksesi äänikortin."
+
+#~ msgid "SSH Server"
+#~ msgstr "SSH-palvelin"
+
 #~ msgid "Save packages selection"
 #~ msgstr "Tallenna pakettien valinta"
 
 #~ msgid "Select All"
 #~ msgstr "Valitse kaikki"
 
+#~ msgid ""
+#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
+#~ "the Web"
+#~ msgstr ""
+#~ "Valikoima työkaluja sähköpostin ja uutisryhmien lukemiseen (mutt, "
+#~ "tin...), sekä Internetin selailuun"
+
+#~ msgid "Sound and video playing/editing programs"
+#~ msgstr "Äänen ja videon toisto- ja editointiohjelmat"
+
 #~ msgid "The 100%% open source Mandriva Linux distribution"
 #~ msgstr "Mandriva Linux - 100%% vapaan lähdekoodin jakelu"
 
 #~ msgid "The 100%% open source Moondrake distribution"
 #~ msgstr "Moondrake - 100%% vapaan lähdekoodin jakelu"
+
+#~ msgid ""
+#~ "The K Desktop Environment, the basic graphical environment with a "
+#~ "collection of accompanying tools"
+#~ msgstr ""
+#~ "K-työpöytäympäristö. Graafinen perusympäristö ja sen mukana tulevat "
+#~ "työkalut"
+
+#, fuzzy
+#~ msgid ""
+#~ "The Plasma Desktop, the basic graphical environment with a collection of "
+#~ "accompanying tools"
+#~ msgstr ""
+#~ "K-työpöytäympäristö. Graafinen perusympäristö ja sen mukana tulevat "
+#~ "työkalut"
 
 #~ msgid ""
 #~ "The auto install can be fully automated if wanted,\n"
@@ -1840,6 +1703,9 @@ msgstr "Lopetus"
 #~ msgid "This medium provides package updates for medium \"%s\""
 #~ msgstr "Ohita kaikki paketit medialta \"%s\""
 
+#~ msgid "Tools to ease the configuration of your computer"
+#~ msgstr "Työkalut, jotka helpottavat tietokoneen asetusten muokkaamista"
+
 #~ msgid "Unable to contact mirror %s"
 #~ msgstr "Yhteyttä peilipalvelimeen %s ei voitu muodostaa"
 
@@ -1851,16 +1717,45 @@ msgstr "Lopetus"
 #~ msgstr ""
 #~ "Päivittäminen 64-bittisestä jakelusta 32-bittiseen jakeluun ei ole tuettu."
 
+#~ msgid "Utilities"
+#~ msgstr "Työkalut"
+
+#~ msgid "Web Server"
+#~ msgstr "WWW-palvelin"
+
+#~ msgid "Web/FTP"
+#~ msgstr "WWW / FTP"
+
+#~ msgid "Webmin"
+#~ msgstr "Webmin"
+
+#~ msgid "Webmin Remote Configuration Server"
+#~ msgstr "Webmin etäasetuspalvelin"
+
 #~ msgid "Welcome"
 #~ msgstr "Tervetuloa"
+
+#, fuzzy
+#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
+#~ msgstr "Window Maker, Enlightenment, FVWM jne."
 
 #, fuzzy
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Window Maker, Enlightenment, FVWM jne."
 
+#~ msgid "Wizards to configure server"
+#~ msgstr "Velhoja palvelinten asettamiseksi"
+
+#~ msgid "Workstation"
+#~ msgstr "Työasema"
+
 #, fuzzy
 #~ msgid "XFCE Workstation"
 #~ msgstr "KDE-työasema"
+
+#, fuzzy
+#~ msgid "Xfce Workstation"
+#~ msgstr "Toimistotyöasema"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

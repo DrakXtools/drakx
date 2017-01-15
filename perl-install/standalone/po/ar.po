@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:28+0100\n"
+"POT-Creation-Date: 2017-01-15 15:12+0100\n"
 "PO-Revision-Date: 2005-03-03 01:06+0300\n"
 "Last-Translator: Ossama M. Khayat <okhayat@yahoo.com>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -22,12 +22,12 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && n<=10 ? 2 : "
 "3\n"
 
-#: display_help:53 display_help:58 drakbug:173 drakperm:134
+#: display_help:50 display_help:55 drakbug:173 drakperm:134
 #, c-format
 msgid "Help"
 msgstr "مساعدة"
 
-#: display_help:66 drakbug:178 drakfont:507
+#: display_help:63 drakbug:178 drakfont:507
 #, c-format
 msgid "Close"
 msgstr "إغلاق"
@@ -37,141 +37,64 @@ msgstr "إغلاق"
 msgid "Authentication"
 msgstr "المصادقة"
 
-#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213
-#: drakfont:226 drakfont:264 finish-install:133 logdrake:177 logdrake:453
-#: logdrake:458 scannerdrake:56 scannerdrake:98 scannerdrake:139
-#: scannerdrake:197 scannerdrake:256 scannerdrake:726 scannerdrake:737
-#: scannerdrake:876 scannerdrake:887 scannerdrake:957
+#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213 drakfont:226
+#: drakfont:264 finish-install:133 logdrake:177 logdrake:453 logdrake:458
+#: scannerdrake:56 scannerdrake:98 scannerdrake:139 scannerdrake:197
+#: scannerdrake:256 scannerdrake:726 scannerdrake:737 scannerdrake:876
+#: scannerdrake:887 scannerdrake:957
 #, c-format
 msgid "Error"
 msgstr "خطأ"
 
-#: drakboot:54
-#, c-format
-msgid "No bootloader found, creating a new configuration"
-msgstr "لم يُعثر على محمِّل اﻹقلاع , إنشاء إعدادات جديدة"
-
-#: drakboot:89 harddrake2:191 logdrake:77
+#: drakautologin:54 harddrake2:195 logdrake:77
 #, c-format
 msgid "_File"
 msgstr "_ملف"
 
-#: drakboot:90 harddrake2:192 logdrake:78 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:78 logdrake:79
 #, c-format
 msgid "_Quit"
 msgstr "_خروج"
 
-#: drakboot:90 harddrake2:192 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:79
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
-#: drakboot:138
-#, c-format
-msgid "Text only"
-msgstr "نص فقط"
-
-#: drakboot:139
-#, c-format
-msgid "Verbose"
-msgstr "مُطنب"
-
-#: drakboot:140
-#, c-format
-msgid "Silent"
-msgstr "صامت"
-
-#: drakboot:146 drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381
-#: drakups:27 harddrake2:504 localedrake:45 scannerdrake:48 scannerdrake:51
-#: scannerdrake:294 scannerdrake:299 scannerdrake:951
-#, c-format
-msgid "Warning"
-msgstr "تحذير"
-
-#: drakboot:147
-#, c-format
-msgid ""
-"Your system bootloader is not in framebuffer mode. To activate graphical "
-"boot, select a graphic video mode from the bootloader configuration tool."
-msgstr ""
-"محمّل الإقلاع لنظامك ليس في وضع framebuffer. لتُنشّط\n"
-"الإقلاع الرّسوميّ، اختر وضع فيديو رسومي من أداة تهيئة محمّل الإقلاع."
-
-#: drakboot:148
-#, c-format
-msgid "Do you want to configure it now?"
-msgstr "هل تريد تهيئته الآن؟"
-
-#: drakboot:157
-#, c-format
-msgid "Install themes"
-msgstr "تثبيت السمات"
-
-#: drakboot:159
-#, c-format
-msgid "Graphical boot theme selection"
-msgstr "تحديد سمة الإقلاع الرّسومي"
-
-#: drakboot:162
-#, c-format
-msgid "Graphical boot mode:"
-msgstr "وضع إقلاع رسومي:"
-
-#: drakboot:164
-#, c-format
-msgid "Theme"
-msgstr "سمة"
-
-#: drakboot:198
+#: drakautologin:100
 #, c-format
 msgid "Default user"
 msgstr "المستخدم الإفتراضي"
 
-#: drakboot:199
+#: drakautologin:101
 #, c-format
 msgid "Default desktop"
 msgstr "سطح المكتب الإفتراضي"
 
-#: drakboot:202
+#: drakautologin:104
 #, c-format
 msgid "No, I do not want autologin"
 msgstr "لا، لا أريد دخولا أليا"
 
-#: drakboot:203
+#: drakautologin:105
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "نعم، أريد دخولا آليا مع هذا (المستخدم، سطح المكتب)"
 
-#: drakboot:210
+#: drakautologin:112
 #, c-format
 msgid "System mode"
 msgstr "وضع النظام"
 
-#: drakboot:213
+#: drakautologin:115
 #, c-format
 msgid "Launch the graphical environment when your system starts"
 msgstr "تشغيل X-Window عند بدء التشغيل"
 
-#: drakboot:268
+#: drakboot:41
 #, c-format
-msgid "Boot Style Configuration"
-msgstr "تهيئة أسلوب الإقلاع"
-
-#: drakboot:270 drakboot:274
-#, c-format
-msgid "Video mode"
-msgstr "وضعية الفيديو"
-
-#: drakboot:271
-#, c-format
-msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries "
-"selected below.\n"
-"Be sure your video card supports the mode you choose."
-msgstr ""
-"رجاء اختيار وضع فيديو، والذي سيتم تطبيقه على كل مُدخلات الإقلاع المُحدّدة "
-"أدناه.\n"
-"تأكّد من أن بطاقة الفيديو تدعم الوضع الذي تختاره."
+msgid "No bootloader found, creating a new configuration"
+msgstr "لم يُعثر على محمِّل اﻹقلاع , إنشاء إعدادات جديدة"
 
 #: drakbug:52 drakbug:140
 #, c-format
@@ -333,6 +256,13 @@ msgstr "غير مثبت"
 msgid "Package not installed"
 msgstr "لم يتم تثبيت الحزمة"
 
+#: drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381 drakups:27
+#: harddrake2:509 localedrake:45 scannerdrake:48 scannerdrake:51
+#: scannerdrake:294 scannerdrake:299 scannerdrake:951
+#, c-format
+msgid "Warning"
+msgstr "تحذير"
+
 #: drakbug:251
 #, c-format
 msgid ""
@@ -456,7 +386,7 @@ msgstr "%s موجودة مسبقا و ستفقد محتوياتها"
 msgid "Could not get the list of available channels"
 msgstr "لا يمكن الحصول على لائحة القنوات المتوفرة"
 
-#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:358
+#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:362
 #: scannerdrake:63 scannerdrake:67 scannerdrake:75 scannerdrake:316
 #: scannerdrake:365 scannerdrake:501 scannerdrake:505 scannerdrake:527
 #: service_harddrake:426
@@ -505,16 +435,21 @@ msgid "SLIM (Simple Display Manager)"
 msgstr "XDM (مدير عرض X("
 
 #: drakedm:45
+#, fuzzy, c-format
+msgid "SDDM (Simple Desktop Display Manager)"
+msgstr "XDM (مدير عرض X("
+
+#: drakedm:46
 #, c-format
 msgid "XDM (X Display Manager)"
 msgstr "XDM (مدير عرض X("
 
-#: drakedm:56
+#: drakedm:57
 #, c-format
 msgid "Choosing a display manager"
 msgstr "جاري اختيار مدير العرض"
 
-#: drakedm:57
+#: drakedm:58
 #, c-format
 msgid ""
 "X11 Display Manager allows you to graphically log\n"
@@ -525,12 +460,12 @@ msgstr ""
 "نظامك مع تشغيل خادم النوافذ X و يدعم تشغيل\n"
 "عدة جلسات X مختلفة على ماكينتك المحلية في نفس الوقت."
 
-#: drakedm:80
+#: drakedm:81
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
 msgstr "تم عمل التغيير، هل تريد إعادة تشغيل خدمة dm؟"
 
-#: drakedm:81
+#: drakedm:82
 #, c-format
 msgid ""
 "You are going to close all running programs and lose your current session. "
@@ -706,7 +641,7 @@ msgstr "ﻡﺎﻧﺩﺮﻴﺑﺍ ﻞﻴﻨﻜﺳ"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:532 harddrake2:531
+#: drakfont:532 harddrake2:536
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr "Arabeyes <support@arabeyes.org>\n"
@@ -781,12 +716,12 @@ msgstr "تثبيت"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "هل تريد تأكيد رغبتك في إزالة الخطوط التالية؟"
 
-#: drakfont:688 draksec:59 harddrake2:302
+#: drakfont:688 draksec:59 harddrake2:306
 #, c-format
 msgid "Yes"
 msgstr "نعم"
 
-#: drakfont:690 draksec:58 harddrake2:303
+#: drakfont:690 draksec:58 harddrake2:307
 #, c-format
 msgid "No"
 msgstr "لا"
@@ -1332,42 +1267,20 @@ msgstr "الإقلاع"
 msgid "No Sound Card detected!"
 msgstr "لم يتم اختيار بطاقة صوت"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: draksound:51
+#: draksound:50
 #, c-format
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
-"supported Sound Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Sound Card is correctly plugged in"
 msgstr ""
-"تعذر العثور على بطاقة صوت على جهازك. الرجاء التأكّد من أن بطاقة الصوت "
-"المدعومة من لينكس موصولة بشكل صحيح.\n"
+"لا توجد بطاقة صوت على جهازك. رجاء تأكّد من أن بطاقة الصوت المدعومة من لينكس "
+"موصولة بشكل صحيح.\n"
 "\n"
 "\n"
 "يمكنك زيارة قاعدة بيانات العتاد المدعوم الخاصة بنا على:\n"
 "\n"
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
-
-#: draksound:58
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
-"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
-msgstr ""
-"\n"
-"\n"
-"\n"
-"ملحوظة: إذا كانت لديك بطاقة صوت ISA PnP، ستحتاج إلى استخدام برنامج alsaconf "
-"أو برنامج sndconfig.  فقط اكتب \"alsaconf\" أو \"sndconfig\" في سطر الأوامر."
 
 #: drakups:71
 #, c-format
@@ -1412,7 +1325,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "كشف آلي"
 
-#: drakups:99 harddrake2:358
+#: drakups:99 harddrake2:362
 #, c-format
 msgid "Detection in progress"
 msgstr "جاري التحقّق"
@@ -1497,12 +1410,12 @@ msgid "UPS devices"
 msgstr "أجهزة UPS"
 
 #: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:116
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "Name"
 msgstr "الاسم"
 
-#: drakups:249 harddrake2:139
+#: drakups:249 harddrake2:143
 #, c-format
 msgid "Driver"
 msgstr "المشغّل"
@@ -1577,20 +1490,13 @@ msgstr "مرحبا في أدوات تهيئة UPS"
 msgid "No TV Card detected!"
 msgstr "لم يعثر على بطاقة تلفاز!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: drakxtv:68
+#: drakxtv:67
 #, c-format
 msgid ""
 "No TV Card has been detected on your machine. Please verify that a Linux-"
-"supported Video/TV Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Video/TV Card is correctly plugged in."
 msgstr ""
-"لم يعثر على بطاقة تلفاز على جهازك. الرجاء التأكّد من أن بطاقة الفيديو/التلفاز "
+"لا توجد بطاقة تلفاز على جهازك. رجاء تأكّد من أن بطاقة الفيديو/التلفاز "
 "المدعومة في لينكس موصولة بشكل صحيح.\n"
 "\n"
 "\n"
@@ -1684,7 +1590,7 @@ msgstr "مشغلات بديلة"
 msgid "the list of alternative drivers for this sound card"
 msgstr "قائمة المُشغّلات البديلة لبطاقة الصوت"
 
-#: harddrake2:33 harddrake2:125
+#: harddrake2:33 harddrake2:129
 #, c-format
 msgid "Bus"
 msgstr "ناقل"
@@ -1695,7 +1601,7 @@ msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "هذا هو النّاقل المادّي الذّي يتّصل به الجهاز (مثلاً، PCI، USB، ...("
 
-#: harddrake2:36 harddrake2:151
+#: harddrake2:36 harddrake2:155
 #, c-format
 msgid "Bus identification"
 msgstr "معرف Bus"
@@ -2018,7 +1924,7 @@ msgstr "الأعلام"
 msgid "CPU flags reported by the kernel"
 msgstr "علامات وحدة المعالجة المركزية (cpu) التي قرّرتها النّواة"
 
-#: harddrake2:80 harddrake2:144
+#: harddrake2:80 harddrake2:148
 #, c-format
 msgid "Cores"
 msgstr "أنوية"
@@ -2185,7 +2091,7 @@ msgstr "الحجم المُمكّن"
 msgid "Enabled size of the memory bank"
 msgstr "حجم بنك الذّاكرة الممكّن"
 
-#: harddrake2:113 harddrake2:122
+#: harddrake2:113 harddrake2:126
 #, c-format
 msgid "Type"
 msgstr "النوع"
@@ -2195,12 +2101,12 @@ msgstr "النوع"
 msgid "type of the memory device"
 msgstr "فئة جهاز الذّاكرة"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed"
 msgstr "السّرعة"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed of the memory bank"
 msgstr "سرعة بنك الذّاكرة"
@@ -2215,230 +2121,245 @@ msgstr "اتّصالات البنك"
 msgid "Socket designation of the memory bank"
 msgstr "تعيين المحاجر في بنك الذّاكرة"
 
-#: harddrake2:120
+#: harddrake2:118
+#, fuzzy, c-format
+msgid "Location"
+msgstr "فعل"
+
+#: harddrake2:119
+#, c-format
+msgid "Size"
+msgstr "الحجم"
+
+#: harddrake2:119
+#, fuzzy, c-format
+msgid "Size of the memory device"
+msgstr "فئة جهاز الذّاكرة"
+
+#: harddrake2:124
 #, c-format
 msgid "Device file"
 msgstr "ملفّ الجهاز"
 
-#: harddrake2:120
+#: harddrake2:124
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr "ملفّ الجهاز المستعمل للإتّصال مع مشغّل النّواة للماوس"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "Emulated wheel"
 msgstr "عجلة محاكاة"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "محاكاة العجل أم لا"
 
-#: harddrake2:122
+#: harddrake2:126
 #, c-format
 msgid "the type of the mouse"
 msgstr "نوع الماوس"
 
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "the name of the mouse"
 msgstr "إسم الماوس"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "Number of buttons"
 msgstr "عدد الأزرار"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "the number of buttons the mouse has"
 msgstr "عدد أزرار الماوس"
 
-#: harddrake2:125
+#: harddrake2:129
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "نوع الناقل الذي ترتبط به الماوس"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr "برتوكول الماوس المستعمل من طرف X11"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "البروتوكول المستعمل من طرف سطح المكتب الرّسومي مع الماوس"
 
-#: harddrake2:130
+#: harddrake2:134
 #, c-format
 msgid "Identification"
 msgstr "التّعريف"
 
-#: harddrake2:135 harddrake2:150
+#: harddrake2:139 harddrake2:154
 #, c-format
 msgid "Connection"
 msgstr "الوصلة"
 
-#: harddrake2:145
+#: harddrake2:149
 #, c-format
 msgid "Performances"
 msgstr "الأداء"
 
-#: harddrake2:152
+#: harddrake2:156
 #, c-format
 msgid "Device"
 msgstr "الجهاز"
 
-#: harddrake2:153
+#: harddrake2:157
 #, c-format
 msgid "Partitions"
 msgstr "التّجزيئات"
 
-#: harddrake2:158
+#: harddrake2:162
 #, c-format
 msgid "Features"
 msgstr "الميزات"
 
-#: harddrake2:179
+#: harddrake2:183
 #, c-format
 msgid "Autodetect _modems"
 msgstr "تحقق آلي من أ_جهزة المودم"
 
-#: harddrake2:180
+#: harddrake2:184
 #, c-format
 msgid "Autodetect parallel _zip drives"
 msgstr "التمس  تلقائي لتعريفات _zip الموازية"
 
-#: harddrake2:184
+#: harddrake2:188
 #, c-format
 msgid "Hardware Configuration"
 msgstr "إعداد العتاد"
 
-#: harddrake2:193
+#: harddrake2:197
 #, c-format
 msgid "_Options"
 msgstr "_خيارات"
 
-#: harddrake2:194 harddrake2:195
+#: harddrake2:198 harddrake2:199
 #, c-format
 msgid "_Help"
 msgstr "_مساعدة"
 
-#: harddrake2:195
+#: harddrake2:199
 #, fuzzy, c-format
 msgid "<control>H"
 msgstr "<control>Q"
 
-#: harddrake2:196
+#: harddrake2:200
 #, c-format
 msgid "_Fields description"
 msgstr "_وصف الحقول"
 
-#: harddrake2:197
+#: harddrake2:201
 #, c-format
 msgid "_Report Bug"
 msgstr "_تقرير خطأ"
 
-#: harddrake2:198
+#: harddrake2:202
 #, c-format
 msgid "_About..."
 msgstr "_حول..."
 
-#: harddrake2:242
+#: harddrake2:246
 #, c-format
 msgid "Detected hardware"
 msgstr "العتاد المُكتشف"
 
-#: harddrake2:245 scannerdrake:283
+#: harddrake2:249 scannerdrake:283
 #, c-format
 msgid "Information"
 msgstr "معلومات"
 
-#: harddrake2:247
+#: harddrake2:251
 #, c-format
 msgid "Set current driver options"
 msgstr "اضبط خيارات التعريف الحالي"
 
-#: harddrake2:254
+#: harddrake2:257
 #, c-format
 msgid "Run config tool"
 msgstr "تشغيل أداة التهيئة"
 
-#: harddrake2:280
+#: harddrake2:284
 #, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
 "information here."
 msgstr "اضغط على جهاز في السلسلة اليسرى لعرض معلوماته هنا."
 
-#: harddrake2:300 notify-x11-free-driver-switch:13
+#: harddrake2:304 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "مجهول"
 
-#: harddrake2:301
+#: harddrake2:305
 #, c-format
 msgid "Unknown"
 msgstr "مجهول"
 
-#: harddrake2:321
+#: harddrake2:325
 #, c-format
 msgid "Misc"
 msgstr "متفرّقات"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "secondary"
 msgstr "ثانوي"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "primary"
 msgstr "أوّلي"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "burner"
 msgstr "ناسخ أقراص"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:504
+#: harddrake2:509
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "يجب تثبيت الحزم التالية:\n"
 
-#: harddrake2:521
+#: harddrake2:525
 #, c-format
 msgid "Harddrake"
 msgstr "مدير العتاد دريك ( Harddrake )"
 
-#: harddrake2:523
+#: harddrake2:528
 #, c-format
 msgid "Copyright (C) %s by %s"
 msgstr "حقوق النسخ %s by %s"
 
-#: harddrake2:523 harddrake2:527
+#: harddrake2:528 harddrake2:532
 #, c-format
 msgid "Mageia"
 msgstr ""
 
-#: harddrake2:525
+#: harddrake2:530
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr "هذا مدير العتاد-دريك ( HardDrake ) , و هي أداة تهيئة العتاد %s ."
 
-#: harddrake2:540
+#: harddrake2:545
 #, c-format
 msgid "Harddrake help"
 msgstr "مساعدة Harddrake"
 
-#: harddrake2:541
+#: harddrake2:546
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -2447,12 +2368,12 @@ msgstr ""
 "وصف الحقول:\n"
 "\n"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid "Select a device!"
 msgstr "اختيار جهاز!"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2744,8 +2665,7 @@ msgstr "قام المرشد بتعطيل تنبيه البريد بنجاح."
 msgid "Save as.."
 msgstr "حفظ باسم.."
 
-#: notify-x11-free-driver-switch:18 service_harddrake:468
-#: service_harddrake:481
+#: notify-x11-free-driver-switch:18 service_harddrake:468 service_harddrake:481
 #, c-format
 msgid "Display driver setup"
 msgstr "إعداد تعريف العرض"
@@ -3399,6 +3319,16 @@ msgstr "الإعدادات الإقليمية"
 msgid "Language & country configuration"
 msgstr "إعدادات الدولة و اللغة"
 
+#: ../polkit/org.mageia.drakautologin.policy.in.h:1
+#, fuzzy
+msgid "Run Mageia AutoLogin Configuration"
+msgstr "إعداد اﻹقلاع"
+
+#: ../polkit/org.mageia.drakautologin.policy.in.h:2
+#, fuzzy
+msgid "Authentication is required to run Mageia AutoLogin Configuration"
+msgstr "إعداد اﻹقلاع"
+
 #: ../polkit/org.moondrake.drakauth.policy.in.h:1
 #, fuzzy
 msgid "Run DrakX Authentication Configuration"
@@ -3526,58 +3456,20 @@ msgstr "إعداد الخادم الرسومي"
 msgid "Authentication is required to run DrakX Service Configuration"
 msgstr "إعداد الخادم الرسومي"
 
-#~ msgid "%s Bug Report Tool"
-#~ msgstr "أداة تقرير العيوب في %s"
-
-#~ msgid "%s Tools Logs"
-#~ msgstr "سجلات أدوات %s"
-
-#~ msgid "Configure authentication required to access %s tools"
-#~ msgstr "تتطلب تهيئة الإستيثاق النفاذ إلى أدوات %s"
-
-#, fuzzy
-#~ msgid "Run Moondrake Application Security Configuration"
-#~ msgstr "تهيئة تنبيه البريد"
-
-#, fuzzy
-#~ msgid "Run Moondrake Authentication Configuration"
-#~ msgstr "تهيئة تنبيه البريد"
-
-#, fuzzy
-#~ msgid "Run Moondrake Boot Configuration"
-#~ msgstr "إعداد اﻹقلاع"
-
-#, fuzzy
-#~ msgid "Run Moondrake Date and Time Configuration"
-#~ msgstr "تهيئة تنبيه البريد"
-
-#, fuzzy
-#~ msgid "Run Moondrake Font Configuration"
-#~ msgstr "إعدادات الدولة و اللغة"
-
-#, fuzzy
-#~ msgid "Run Moondrake Hardware Configuration"
-#~ msgstr "إعداد الخادم الرسومي"
-
-#, fuzzy
-#~ msgid "Run Moondrake Login Manager Configuration"
-#~ msgstr "إعدادات الدولة و اللغة"
-
-#, fuzzy
-#~ msgid "Run Moondrake Scanner Configuration"
-#~ msgstr "إعداد الخادم الرسومي"
-
-#, fuzzy
-#~ msgid "Run Moondrake Security Permissions Configuration"
-#~ msgstr "إعداد الخادم الرسومي"
-
-#, fuzzy
-#~ msgid "Run Moondrake Service Configuration"
-#~ msgstr "إعداد الخادم الرسومي"
-
-#, fuzzy
-#~ msgid "Run Moondrake UPS Configuration"
-#~ msgstr "إعداد UPS"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
+#~ "the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a "
+#~ "console."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "ملحوظة: إذا كانت لديك بطاقة صوت ISA PnP، ستحتاج إلى استخدام برنامج "
+#~ "alsaconf أو برنامج sndconfig.  فقط اكتب \"alsaconf\" أو \"sndconfig\" في "
+#~ "سطر الأوامر."
 
 #~ msgid ""
 #~ "\n"
@@ -3610,11 +3502,17 @@ msgstr "إعداد الخادم الرسومي"
 #~ "\n"
 #~ "الاستعمال: \n"
 
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "أداة تقرير العيوب في %s"
+
 #~ msgid "%s Control Center"
 #~ msgstr "مركز تحكّم %s"
 
 #~ msgid "%s Help Center"
 #~ msgstr "مركز مساعدة %s"
+
+#~ msgid "%s Tools Logs"
+#~ msgstr "سجلات أدوات %s"
 
 #~ msgid "(default value: %s)"
 #~ msgstr "(القيمة الإفتراضية: %s)"
@@ -3703,11 +3601,17 @@ msgstr "إعداد الخادم الرسومي"
 #~ msgid "Basic options"
 #~ msgstr "الخيارات الأساسية"
 
+#~ msgid "Boot Style Configuration"
+#~ msgstr "تهيئة أسلوب الإقلاع"
+
 #~ msgid "Bugs"
 #~ msgstr "العلل"
 
 #~ msgid "Coma bug"
 #~ msgstr "علّة الغيبوبة"
+
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "تتطلب تهيئة الإستيثاق النفاذ إلى أدوات %s"
 
 #~ msgid "Copyright (C) 2001-2008 by Mandriva"
 #~ msgstr "حقوق النّسخ 2001-2008 لماندريبا "
@@ -3730,6 +3634,9 @@ msgstr "إعداد الخادم الرسومي"
 #~ msgstr ""
 #~ "عرض السمات\n"
 #~ "في سطر الأوامر"
+
+#~ msgid "Do you want to configure it now?"
+#~ msgstr "هل تريد تهيئته الآن؟"
 
 #, fuzzy
 #~ msgid "Do you want to remove these packages?"
@@ -3779,6 +3686,12 @@ msgstr "إعداد الخادم الرسومي"
 
 #~ msgid "Final resolution"
 #~ msgstr "الاستبانة النهائية"
+
+#~ msgid "Graphical boot mode:"
+#~ msgstr "وضع إقلاع رسومي:"
+
+#~ msgid "Graphical boot theme selection"
+#~ msgstr "تحديد سمة الإقلاع الرّسومي"
 
 #~ msgid "Halt bug"
 #~ msgstr "علّة Halt"
@@ -3892,6 +3805,9 @@ msgstr "إعداد الخادم الرسومي"
 #~ msgid "Insert another blank floppy in drive %s (for drivers disk)"
 #~ msgstr "أدخل قرص مرن فارغ آخر في السواقة %s (من أجل المشغّلات)"
 
+#~ msgid "Install themes"
+#~ msgstr "تثبيت السمات"
+
 #~ msgid "Is FPU present"
 #~ msgstr "هل FPU موجود"
 
@@ -3922,10 +3838,16 @@ msgstr "إعداد الخادم الرسومي"
 
 #~ msgid ""
 #~ "No Sound Card has been detected on your machine. Please verify that a "
-#~ "Linux-supported Sound Card is correctly plugged in"
+#~ "Linux-supported Sound Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
-#~ "لا توجد بطاقة صوت على جهازك. رجاء تأكّد من أن بطاقة الصوت المدعومة من "
-#~ "لينكس موصولة بشكل صحيح.\n"
+#~ "تعذر العثور على بطاقة صوت على جهازك. الرجاء التأكّد من أن بطاقة الصوت "
+#~ "المدعومة من لينكس موصولة بشكل صحيح.\n"
 #~ "\n"
 #~ "\n"
 #~ "يمكنك زيارة قاعدة بيانات العتاد المدعوم الخاصة بنا على:\n"
@@ -3935,10 +3857,16 @@ msgstr "إعداد الخادم الرسومي"
 
 #~ msgid ""
 #~ "No TV Card has been detected on your machine. Please verify that a Linux-"
-#~ "supported Video/TV Card is correctly plugged in."
+#~ "supported Video/TV Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
-#~ "لا توجد بطاقة تلفاز على جهازك. رجاء تأكّد من أن بطاقة الفيديو/التلفاز "
-#~ "المدعومة في لينكس موصولة بشكل صحيح.\n"
+#~ "لم يعثر على بطاقة تلفاز على جهازك. الرجاء التأكّد من أن بطاقة الفيديو/"
+#~ "التلفاز المدعومة في لينكس موصولة بشكل صحيح.\n"
 #~ "\n"
 #~ "\n"
 #~ "يمكنك زيارة قاعدة بيانات العتاد المدعوم الخاصة بنا على:\n"
@@ -3954,6 +3882,15 @@ msgstr "إعداد الخادم الرسومي"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "تحقّق دَوْري"
+
+#~ msgid ""
+#~ "Please choose a video mode, it will be applied to each of the boot "
+#~ "entries selected below.\n"
+#~ "Be sure your video card supports the mode you choose."
+#~ msgstr ""
+#~ "رجاء اختيار وضع فيديو، والذي سيتم تطبيقه على كل مُدخلات الإقلاع المُحدّدة "
+#~ "أدناه.\n"
+#~ "تأكّد من أن بطاقة الفيديو تدعم الوضع الذي تختاره."
 
 #~ msgid ""
 #~ "Please choose for each step whether it will replay like your install, or "
@@ -3985,6 +3922,46 @@ msgstr "إعداد الخادم الرسومي"
 #~ msgid "Restart XFS"
 #~ msgstr "إعادة تشغيل XFS"
 
+#, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "تهيئة تنبيه البريد"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "تهيئة تنبيه البريد"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "تهيئة تنبيه البريد"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "إعدادات الدولة و اللغة"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "إعداد الخادم الرسومي"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "إعدادات الدولة و اللغة"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "إعداد الخادم الرسومي"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "إعداد الخادم الرسومي"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "إعداد الخادم الرسومي"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "إعداد UPS"
+
 #~ msgid "Save theme"
 #~ msgstr "حفظ السمة"
 
@@ -3999,6 +3976,9 @@ msgstr "إعداد الخادم الرسومي"
 
 #~ msgid "Select Mandriva Tool:"
 #~ msgstr "اختيار أداة ماندريبا:"
+
+#~ msgid "Silent"
+#~ msgstr "صامت"
 
 #~ msgid ""
 #~ "Some of the early i486DX-100 chips cannot reliably return to operating "
@@ -4019,6 +3999,9 @@ msgstr "إعداد الخادم الرسومي"
 
 #~ msgid "Text color"
 #~ msgstr "لون النص"
+
+#~ msgid "Text only"
+#~ msgstr "نص فقط"
 
 #~ msgid "The change is done, but to be effective you must logout"
 #~ msgstr "تم عمل التغيير، و لكن ليتم تفعيله يجب عليك الخروج"
@@ -4068,6 +4051,9 @@ msgstr "إعداد الخادم الرسومي"
 #~ msgid "The width of the progress bar"
 #~ msgstr "عرض شريط التقدم"
 
+#~ msgid "Theme"
+#~ msgstr "سمة"
+
 #~ msgid "Theme name"
 #~ msgstr "اسم السمة"
 
@@ -4079,6 +4065,12 @@ msgstr "إعداد الخادم الرسومي"
 
 #~ msgid "Userdrake"
 #~ msgstr "Userdrake"
+
+#~ msgid "Verbose"
+#~ msgstr "مُطنب"
+
+#~ msgid "Video mode"
+#~ msgstr "وضعية الفيديو"
 
 #~ msgid "Whether the FPU has an irq vector"
 #~ msgstr "إذا كان الـFPU لديه متجه irq"
@@ -4107,6 +4099,13 @@ msgstr "إعداد الخادم الرسومي"
 #~ "مثلما اخترت أثناء التثبيت على هذا الحاسب.\n"
 #~ "\n"
 #~ "اضغط موافق للاستمرار."
+
+#~ msgid ""
+#~ "Your system bootloader is not in framebuffer mode. To activate graphical "
+#~ "boot, select a graphic video mode from the bootloader configuration tool."
+#~ msgstr ""
+#~ "محمّل الإقلاع لنظامك ليس في وضع framebuffer. لتُنشّط\n"
+#~ "الإقلاع الرّسوميّ، اختر وضع فيديو رسومي من أداة تهيئة محمّل الإقلاع."
 
 #~ msgid "choose image"
 #~ msgstr "اختيار صورة"

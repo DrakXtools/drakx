@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:28+0100\n"
+"POT-Creation-Date: 2017-01-15 15:12+0100\n"
 "PO-Revision-Date: 2002-09-09 09:08+0900\n"
 "Last-Translator: Jaegeum Cze <baedaron@hanafos.com>\n"
 "Language-Team: Korean <beadaron@hanafos.com>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: display_help:53 display_help:58 drakbug:173 drakperm:134
+#: display_help:50 display_help:55 drakbug:173 drakperm:134
 #, c-format
 msgid "Help"
 msgstr "도움말"
 
-#: display_help:66 drakbug:178 drakfont:507
+#: display_help:63 drakbug:178 drakfont:507
 #, c-format
 msgid "Close"
 msgstr "닫기"
@@ -32,135 +32,63 @@ msgstr "닫기"
 msgid "Authentication"
 msgstr "사용자 인증"
 
-#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213
-#: drakfont:226 drakfont:264 finish-install:133 logdrake:177 logdrake:453
-#: logdrake:458 scannerdrake:56 scannerdrake:98 scannerdrake:139
-#: scannerdrake:197 scannerdrake:256 scannerdrake:726 scannerdrake:737
-#: scannerdrake:876 scannerdrake:887 scannerdrake:957
+#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213 drakfont:226
+#: drakfont:264 finish-install:133 logdrake:177 logdrake:453 logdrake:458
+#: scannerdrake:56 scannerdrake:98 scannerdrake:139 scannerdrake:197
+#: scannerdrake:256 scannerdrake:726 scannerdrake:737 scannerdrake:876
+#: scannerdrake:887 scannerdrake:957
 #, c-format
 msgid "Error"
 msgstr "오류"
 
-#: drakboot:54
-#, c-format
-msgid "No bootloader found, creating a new configuration"
-msgstr ""
-
-#: drakboot:89 harddrake2:191 logdrake:77
+#: drakautologin:54 harddrake2:195 logdrake:77
 #, c-format
 msgid "_File"
 msgstr "파일(_F)"
 
-#: drakboot:90 harddrake2:192 logdrake:78 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:78 logdrake:79
 #, c-format
 msgid "_Quit"
 msgstr "종료(_Q)"
 
-#: drakboot:90 harddrake2:192 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:79
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
-#: drakboot:138
-#, c-format
-msgid "Text only"
-msgstr "글자만"
-
-#: drakboot:139
-#, c-format
-msgid "Verbose"
-msgstr ""
-
-#: drakboot:140
-#, c-format
-msgid "Silent"
-msgstr "조용"
-
-#: drakboot:146 drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381
-#: drakups:27 harddrake2:504 localedrake:45 scannerdrake:48 scannerdrake:51
-#: scannerdrake:294 scannerdrake:299 scannerdrake:951
-#, c-format
-msgid "Warning"
-msgstr "경고"
-
-#: drakboot:147
-#, c-format
-msgid ""
-"Your system bootloader is not in framebuffer mode. To activate graphical "
-"boot, select a graphic video mode from the bootloader configuration tool."
-msgstr ""
-
-#: drakboot:148
-#, fuzzy, c-format
-msgid "Do you want to configure it now?"
-msgstr "이 설정을 테스트해 보시겠습니까?"
-
-#: drakboot:157
-#, c-format
-msgid "Install themes"
-msgstr "테마 설치"
-
-#: drakboot:159
-#, fuzzy, c-format
-msgid "Graphical boot theme selection"
-msgstr "프린터 모델 선택"
-
-#: drakboot:162
-#, fuzzy, c-format
-msgid "Graphical boot mode:"
-msgstr "프린터 모델 선택"
-
-#: drakboot:164
-#, c-format
-msgid "Theme"
-msgstr "테마"
-
-#: drakboot:198
+#: drakautologin:100
 #, fuzzy, c-format
 msgid "Default user"
 msgstr "기본 프린터"
 
-#: drakboot:199
+#: drakautologin:101
 #, fuzzy, c-format
 msgid "Default desktop"
 msgstr "기본값"
 
-#: drakboot:202
+#: drakautologin:104
 #, c-format
 msgid "No, I do not want autologin"
 msgstr "아니오, 자동로그인을 사용하지 않습니다."
 
-#: drakboot:203
+#: drakautologin:105
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "예, 자동로그인을 사용합니다."
 
-#: drakboot:210
+#: drakautologin:112
 #, c-format
 msgid "System mode"
 msgstr "시스템 모드"
 
-#: drakboot:213
+#: drakautologin:115
 #, c-format
 msgid "Launch the graphical environment when your system starts"
 msgstr "시작할 때 X-Window 실행"
 
-#: drakboot:268
+#: drakboot:41
 #, c-format
-msgid "Boot Style Configuration"
-msgstr "부팅 스타일 설정"
-
-#: drakboot:270 drakboot:274
-#, c-format
-msgid "Video mode"
-msgstr "비디오 모드"
-
-#: drakboot:271
-#, c-format
-msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries "
-"selected below.\n"
-"Be sure your video card supports the mode you choose."
+msgid "No bootloader found, creating a new configuration"
 msgstr ""
 
 #: drakbug:52 drakbug:140
@@ -314,6 +242,13 @@ msgstr "설치되지 않았습니다."
 msgid "Package not installed"
 msgstr "설치되지 않았습니다."
 
+#: drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381 drakups:27
+#: harddrake2:509 localedrake:45 scannerdrake:48 scannerdrake:51
+#: scannerdrake:294 scannerdrake:299 scannerdrake:951
+#, c-format
+msgid "Warning"
+msgstr "경고"
+
 #: drakbug:251
 #, c-format
 msgid ""
@@ -404,9 +339,9 @@ msgid "Quit"
 msgstr "종료"
 
 #: drakclock:145
-#, fuzzy, c-format
+#, c-format
 msgid "Retry"
-msgstr "복구"
+msgstr "재시도"
 
 #: drakclock:168 drakclock:178
 #, c-format
@@ -433,7 +368,7 @@ msgstr ""
 msgid "Could not get the list of available channels"
 msgstr ""
 
-#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:358
+#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:362
 #: scannerdrake:63 scannerdrake:67 scannerdrake:75 scannerdrake:316
 #: scannerdrake:365 scannerdrake:501 scannerdrake:505 scannerdrake:527
 #: service_harddrake:426
@@ -483,15 +418,20 @@ msgstr ""
 
 #: drakedm:45
 #, c-format
+msgid "SDDM (Simple Desktop Display Manager)"
+msgstr ""
+
+#: drakedm:46
+#, c-format
 msgid "XDM (X Display Manager)"
 msgstr ""
 
-#: drakedm:56
+#: drakedm:57
 #, c-format
 msgid "Choosing a display manager"
 msgstr ""
 
-#: drakedm:57
+#: drakedm:58
 #, c-format
 msgid ""
 "X11 Display Manager allows you to graphically log\n"
@@ -499,12 +439,12 @@ msgid ""
 "several different X sessions on your local machine at the same time."
 msgstr ""
 
-#: drakedm:80
+#: drakedm:81
 #, fuzzy, c-format
 msgid "The change is done, do you want to restart the dm service?"
 msgstr "팩키지 %s가 필요합니다. 설치하겠습니까?"
 
-#: drakedm:81
+#: drakedm:82
 #, c-format
 msgid ""
 "You are going to close all running programs and lose your current session. "
@@ -674,7 +614,7 @@ msgstr "맨드리바 온라인"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:532 harddrake2:531
+#: drakfont:532 harddrake2:536
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr ""
@@ -749,12 +689,12 @@ msgstr "설치"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr ""
 
-#: drakfont:688 draksec:59 harddrake2:302
+#: drakfont:688 draksec:59 harddrake2:306
 #, c-format
 msgid "Yes"
 msgstr "예"
 
-#: drakfont:690 draksec:58 harddrake2:303
+#: drakfont:690 draksec:58 harddrake2:307
 #, c-format
 msgid "No"
 msgstr "아니오"
@@ -1171,9 +1111,9 @@ msgid "Software Media Manager"
 msgstr "소프트웨어 소스 관리자"
 
 #: draksec:171
-#, fuzzy, c-format
+#, c-format
 msgid "Configure 3D Desktop effects"
-msgstr "설정..."
+msgstr "3D 데스크톱 효과 설정..."
 
 #: draksec:172
 #, fuzzy, c-format
@@ -1201,9 +1141,9 @@ msgid "UPS Configuration"
 msgstr "OKI 윈프린터 설정"
 
 #: draksec:177
-#, fuzzy, c-format
+#, c-format
 msgid "Network Configuration"
-msgstr "경고 설정"
+msgstr "네트웍 환경 설정"
 
 #: draksec:178
 #, c-format
@@ -1211,9 +1151,9 @@ msgid "Hosts definitions"
 msgstr ""
 
 #: draksec:179
-#, fuzzy, c-format
+#, c-format
 msgid "Network Center"
-msgstr "네트웍과 인터넷"
+msgstr "네트워크 센터"
 
 #: draksec:180
 #, c-format
@@ -1251,7 +1191,7 @@ msgid "Services"
 msgstr "서비스"
 
 #: draksec:189
-#, fuzzy, c-format
+#, c-format
 msgid "Users"
 msgstr "사용자"
 
@@ -1266,9 +1206,9 @@ msgid "Hardware"
 msgstr "하드웨어"
 
 #: draksec:225
-#, fuzzy, c-format
+#, c-format
 msgid "Network"
-msgstr "추가 옵션"
+msgstr "망"
 
 #: draksec:226
 #, c-format
@@ -1285,28 +1225,11 @@ msgstr "부트"
 msgid "No Sound Card detected!"
 msgstr "사운드카드를 찾을 수 없습니다!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: draksound:51
+#: draksound:50
 #, c-format
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
-"supported Sound Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
-msgstr ""
-
-#: draksound:58
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
-"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
+"supported Sound Card is correctly plugged in"
 msgstr ""
 
 #: drakups:71
@@ -1349,7 +1272,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "자동 검색"
 
-#: drakups:99 harddrake2:358
+#: drakups:99 harddrake2:362
 #, c-format
 msgid "Detection in progress"
 msgstr "검색 진행 중"
@@ -1432,12 +1355,12 @@ msgid "UPS devices"
 msgstr "서비스"
 
 #: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:116
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "Name"
 msgstr "이름"
 
-#: drakups:249 harddrake2:139
+#: drakups:249 harddrake2:143
 #, c-format
 msgid "Driver"
 msgstr "드라이버"
@@ -1512,18 +1435,11 @@ msgstr "설정 테스트"
 msgid "No TV Card detected!"
 msgstr "TV 카드를 찾을 수 없습니다!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: drakxtv:68
+#: drakxtv:67
 #, c-format
 msgid ""
 "No TV Card has been detected on your machine. Please verify that a Linux-"
-"supported Video/TV Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Video/TV Card is correctly plugged in."
 msgstr ""
 
 #: finish-install:57
@@ -1539,7 +1455,7 @@ msgstr "키보드 레이아웃 선택"
 #: finish-install:106
 #, c-format
 msgid "Testing your connection..."
-msgstr ""
+msgstr "연결 테스트 중..."
 
 #: finish-install:187
 #, c-format
@@ -1611,7 +1527,7 @@ msgstr "대체 드라이버들"
 msgid "the list of alternative drivers for this sound card"
 msgstr ""
 
-#: harddrake2:33 harddrake2:125
+#: harddrake2:33 harddrake2:129
 #, c-format
 msgid "Bus"
 msgstr "버스"
@@ -1622,7 +1538,7 @@ msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 
-#: harddrake2:36 harddrake2:151
+#: harddrake2:36 harddrake2:155
 #, c-format
 msgid "Bus identification"
 msgstr "버스 아이디"
@@ -1934,7 +1850,7 @@ msgstr "프래그"
 msgid "CPU flags reported by the kernel"
 msgstr ""
 
-#: harddrake2:80 harddrake2:144
+#: harddrake2:80 harddrake2:148
 #, fuzzy, c-format
 msgid "Cores"
 msgstr "닫기"
@@ -1975,9 +1891,9 @@ msgid "generation of the cpu (eg: 8 for Pentium III, ...)"
 msgstr ""
 
 #: harddrake2:87 harddrake2:88
-#, fuzzy, c-format
+#, c-format
 msgid "Model name"
-msgstr "모듈 이름"
+msgstr "모델"
 
 #: harddrake2:87 harddrake2:88
 #, c-format
@@ -2096,7 +2012,7 @@ msgstr "허용"
 msgid "Enabled size of the memory bank"
 msgstr ""
 
-#: harddrake2:113 harddrake2:122
+#: harddrake2:113 harddrake2:126
 #, c-format
 msgid "Type"
 msgstr "유형"
@@ -2106,12 +2022,12 @@ msgstr "유형"
 msgid "type of the memory device"
 msgstr "프린터 이름"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed"
 msgstr "속도"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed of the memory bank"
 msgstr ""
@@ -2126,242 +2042,257 @@ msgstr "캐이블 연결"
 msgid "Socket designation of the memory bank"
 msgstr ""
 
-#: harddrake2:120
+#: harddrake2:118
+#, fuzzy, c-format
+msgid "Location"
+msgstr "동작"
+
+#: harddrake2:119
+#, c-format
+msgid "Size"
+msgstr "크기"
+
+#: harddrake2:119
+#, fuzzy, c-format
+msgid "Size of the memory device"
+msgstr "프린터 이름"
+
+#: harddrake2:124
 #, fuzzy, c-format
 msgid "Device file"
 msgstr "오래된 장치 파일"
 
-#: harddrake2:120
+#: harddrake2:124
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "Emulated wheel"
 msgstr ""
 
-#: harddrake2:121
+#: harddrake2:125
 #, fuzzy, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "버튼 에뮬레이션"
 
-#: harddrake2:122
+#: harddrake2:126
 #, fuzzy, c-format
 msgid "the type of the mouse"
 msgstr "마우스를 테스트하세요."
 
-#: harddrake2:123
+#: harddrake2:127
 #, fuzzy, c-format
 msgid "the name of the mouse"
 msgstr "버튼 수"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "Number of buttons"
 msgstr "버튼 수"
 
-#: harddrake2:124
+#: harddrake2:128
 #, fuzzy, c-format
 msgid "the number of buttons the mouse has"
 msgstr "버튼 수"
 
-#: harddrake2:125
+#: harddrake2:129
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "어떤 시리얼 포트에 마우스가 연결되어 있나요?"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr ""
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr ""
 
-#: harddrake2:130
+#: harddrake2:134
 #, c-format
 msgid "Identification"
 msgstr "확인"
 
-#: harddrake2:135 harddrake2:150
+#: harddrake2:139 harddrake2:154
 #, c-format
 msgid "Connection"
 msgstr "연결"
 
-#: harddrake2:145
+#: harddrake2:149
 #, fuzzy, c-format
 msgid "Performances"
 msgstr "사용자 정의"
 
-#: harddrake2:152
+#: harddrake2:156
 #, c-format
 msgid "Device"
 msgstr "장치"
 
-#: harddrake2:153
+#: harddrake2:157
 #, c-format
 msgid "Partitions"
 msgstr "분할영역"
 
-#: harddrake2:158
+#: harddrake2:162
 #, c-format
 msgid "Features"
 msgstr "기능"
 
-#: harddrake2:179
+#: harddrake2:183
 #, fuzzy, c-format
 msgid "Autodetect _modems"
 msgstr "자동 검색됨"
 
-#: harddrake2:180
+#: harddrake2:184
 #, c-format
 msgid "Autodetect parallel _zip drives"
 msgstr ""
 
-#: harddrake2:184
+#: harddrake2:188
 #, fuzzy, c-format
 msgid "Hardware Configuration"
 msgstr "네트웍 환경 설정"
 
-#: harddrake2:193
+#: harddrake2:197
 #, c-format
 msgid "_Options"
 msgstr "옵션(_O)"
 
-#: harddrake2:194 harddrake2:195
+#: harddrake2:198 harddrake2:199
 #, c-format
 msgid "_Help"
 msgstr "도움말(_H)"
 
-#: harddrake2:195
+#: harddrake2:199
 #, fuzzy, c-format
 msgid "<control>H"
 msgstr "<control>Q"
 
-#: harddrake2:196
+#: harddrake2:200
 #, fuzzy, c-format
 msgid "_Fields description"
 msgstr "설명"
 
-#: harddrake2:197
+#: harddrake2:201
 #, c-format
 msgid "_Report Bug"
 msgstr "버그 보고(_R)"
 
-#: harddrake2:198
+#: harddrake2:202
 #, c-format
 msgid "_About..."
 msgstr "정보(_A)..."
 
-#: harddrake2:242
+#: harddrake2:246
 #, c-format
 msgid "Detected hardware"
 msgstr "검색된 하드웨어"
 
-#: harddrake2:245 scannerdrake:283
+#: harddrake2:249 scannerdrake:283
 #, c-format
 msgid "Information"
 msgstr "정보"
 
-#: harddrake2:247
+#: harddrake2:251
 #, c-format
 msgid "Set current driver options"
 msgstr ""
 
-#: harddrake2:254
+#: harddrake2:257
 #, c-format
 msgid "Run config tool"
 msgstr "설정 도구 실행"
 
-#: harddrake2:280
+#: harddrake2:284
 #, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
 "information here."
 msgstr ""
 
-#: harddrake2:300 notify-x11-free-driver-switch:13
+#: harddrake2:304 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "알 수 없음"
 
-#: harddrake2:301
+#: harddrake2:305
 #, c-format
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: harddrake2:321
+#: harddrake2:325
 #, c-format
 msgid "Misc"
 msgstr "기타"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "secondary"
 msgstr "두번째"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "primary"
 msgstr "주"
 
-#: harddrake2:408
+#: harddrake2:412
 #, fuzzy, c-format
 msgid "burner"
 msgstr "프린터"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:504
+#: harddrake2:509
 #, fuzzy, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "다음 팩키지들이 설치될 것입니다."
 
-#: harddrake2:521
-#, fuzzy, c-format
+#: harddrake2:525
+#, c-format
 msgid "Harddrake"
 msgstr "하드 드레이크"
 
-#: harddrake2:523
+#: harddrake2:528
 #, c-format
 msgid "Copyright (C) %s by %s"
 msgstr "저작권(C) %s %s."
 
-#: harddrake2:523 harddrake2:527
+#: harddrake2:528 harddrake2:532
 #, c-format
 msgid "Mageia"
 msgstr ""
 
-#: harddrake2:525
+#: harddrake2:530
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr ""
 
-#: harddrake2:540
+#: harddrake2:545
 #, c-format
 msgid "Harddrake help"
 msgstr "하드 드레이크 도움말"
 
-#: harddrake2:541
+#: harddrake2:546
 #, c-format
 msgid ""
 "Description of the fields:\n"
 "\n"
 msgstr ""
 
-#: harddrake2:548
+#: harddrake2:553
 #, fuzzy, c-format
 msgid "Select a device!"
 msgstr "스캐너 선택"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2404,14 +2335,14 @@ msgstr "<control>S"
 msgid ""
 "_:this is the auth.log log file\n"
 "Authentication"
-msgstr ""
+msgstr "사용자 인증"
 
 #: logdrake:118
 #, c-format
 msgid ""
 "_:this is the user.log log file\n"
 "User"
-msgstr ""
+msgstr "사용자"
 
 #: logdrake:119
 #, c-format
@@ -2649,8 +2580,7 @@ msgstr ""
 msgid "Save as.."
 msgstr "새 이름으로 저장"
 
-#: notify-x11-free-driver-switch:18 service_harddrake:468
-#: service_harddrake:481
+#: notify-x11-free-driver-switch:18 service_harddrake:468 service_harddrake:481
 #, c-format
 msgid "Display driver setup"
 msgstr ""
@@ -3267,6 +3197,16 @@ msgstr "설정값"
 msgid "Language & country configuration"
 msgstr "수동 설정"
 
+#: ../polkit/org.mageia.drakautologin.policy.in.h:1
+#, fuzzy
+msgid "Run Mageia AutoLogin Configuration"
+msgstr "경고 설정"
+
+#: ../polkit/org.mageia.drakautologin.policy.in.h:2
+#, fuzzy
+msgid "Authentication is required to run Mageia AutoLogin Configuration"
+msgstr "경고 설정"
+
 #: ../polkit/org.moondrake.drakauth.policy.in.h:1
 #, fuzzy
 msgid "Run DrakX Authentication Configuration"
@@ -3394,65 +3334,23 @@ msgstr "메일 경고 설정"
 msgid "Authentication is required to run DrakX Service Configuration"
 msgstr "메일 경고 설정"
 
+#~ msgid "%s Control Center"
+#~ msgstr "%s 제어센터"
+
+#~ msgid "Moondrake"
+#~ msgstr "마제야"
+
 #, fuzzy
 #~ msgid "%s Bug Report Tool"
 #~ msgstr "맨드리바 버그 보고 도구"
 
 #, fuzzy
-#~ msgid "%s Tools Logs"
-#~ msgstr "맨드리바 도구 설명"
-
-#, fuzzy
-#~ msgid "Run Moondrake Application Security Configuration"
-#~ msgstr "자동 과정 설정기"
-
-#, fuzzy
-#~ msgid "Run Moondrake Authentication Configuration"
-#~ msgstr "자동 과정 설정기"
-
-#, fuzzy
-#~ msgid "Run Moondrake Boot Configuration"
-#~ msgstr "경고 설정"
-
-#, fuzzy
-#~ msgid "Run Moondrake Date and Time Configuration"
-#~ msgstr "메일 경고 설정"
-
-#, fuzzy
-#~ msgid "Run Moondrake Font Configuration"
-#~ msgstr "수동 설정"
-
-#, fuzzy
-#~ msgid "Run Moondrake Hardware Configuration"
-#~ msgstr "메일 경고 설정"
-
-#, fuzzy
-#~ msgid "Run Moondrake Login Manager Configuration"
-#~ msgstr "수동 설정"
-
-#, fuzzy
-#~ msgid "Run Moondrake Scanner Configuration"
-#~ msgstr "메일 경고 설정"
-
-#, fuzzy
-#~ msgid "Run Moondrake Security Permissions Configuration"
-#~ msgstr "메일 경고 설정"
-
-#, fuzzy
-#~ msgid "Run Moondrake Service Configuration"
-#~ msgstr "메일 경고 설정"
-
-#, fuzzy
-#~ msgid "Run Moondrake UPS Configuration"
-#~ msgstr "OKI 윈프린터 설정"
-
-#, fuzzy
-#~ msgid "%s Control Center"
-#~ msgstr "맨드리바 제어 센터"
-
-#, fuzzy
 #~ msgid "%s Help Center"
 #~ msgstr "맨드리바 제어 센터"
+
+#, fuzzy
+#~ msgid "%s Tools Logs"
+#~ msgstr "맨드리바 도구 설명"
 
 #, fuzzy
 #~ msgid "(default value: %s)"
@@ -3549,6 +3447,9 @@ msgstr "메일 경고 설정"
 #~ msgid "Basic options"
 #~ msgstr "DrakSec 기본 옵션"
 
+#~ msgid "Boot Style Configuration"
+#~ msgstr "부팅 스타일 설정"
+
 #, fuzzy
 #~ msgid "Bugs"
 #~ msgstr "버스"
@@ -3572,6 +3473,10 @@ msgstr "메일 경고 설정"
 #~ msgstr ""
 #~ "콘솔하에서\n"
 #~ "테마 보이기"
+
+#, fuzzy
+#~ msgid "Do you want to configure it now?"
+#~ msgstr "이 설정을 테스트해 보시겠습니까?"
 
 #, fuzzy
 #~ msgid "Do you want to remove these packages?"
@@ -3605,6 +3510,14 @@ msgstr "메일 경고 설정"
 #~ msgid "Final resolution"
 #~ msgstr "최종 해상도"
 
+#, fuzzy
+#~ msgid "Graphical boot mode:"
+#~ msgstr "프린터 모델 선택"
+
+#, fuzzy
+#~ msgid "Graphical boot theme selection"
+#~ msgstr "프린터 모델 선택"
+
 #~ msgid "Help/_About..."
 #~ msgstr "도움말(H)/이 프로그램은(_A)..."
 
@@ -3617,6 +3530,9 @@ msgstr "메일 경고 설정"
 #, fuzzy
 #~ msgid "Insert another blank floppy in drive %s (for drivers disk)"
 #~ msgstr "%s 드라이브에 빈 플로피 디스크를 넣으세요"
+
+#~ msgid "Install themes"
+#~ msgstr "테마 설치"
 
 #, fuzzy
 #~ msgid "Mandriva Linux Bug Report Tool"
@@ -3632,10 +3548,6 @@ msgstr "메일 경고 설정"
 
 #~ msgid "Menudrake"
 #~ msgstr "메뉴 드레이크"
-
-#, fuzzy
-#~ msgid "Moondrake"
-#~ msgstr "맨드리바 온라인"
 
 #~ msgid "Msec"
 #~ msgstr "기타"
@@ -3678,6 +3590,46 @@ msgstr "메일 경고 설정"
 #~ msgid "Restart XFS"
 #~ msgstr "XFS 재시작"
 
+#, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "자동 과정 설정기"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "자동 과정 설정기"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "메일 경고 설정"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "수동 설정"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "메일 경고 설정"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "수동 설정"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "메일 경고 설정"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "메일 경고 설정"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "메일 경고 설정"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "OKI 윈프린터 설정"
+
 #~ msgid "Save theme"
 #~ msgstr "테마 저장"
 
@@ -3692,6 +3644,9 @@ msgstr "메일 경고 설정"
 #~ msgid "Security Level:"
 #~ msgstr "보안 등급 :"
 
+#~ msgid "Silent"
+#~ msgstr "조용"
+
 #, fuzzy
 #~ msgid "System Options"
 #~ msgstr "추가 옵션"
@@ -3702,6 +3657,9 @@ msgstr "메일 경고 설정"
 
 #~ msgid "Text color"
 #~ msgstr "텍스트 색깔 "
+
+#~ msgid "Text only"
+#~ msgstr "글자만"
 
 #~ msgid "The change is done, but to be effective you must logout"
 #~ msgstr "변경이 완료 되었지만, 적용되기 위해서는 재로그인해야 합니다."
@@ -3724,6 +3682,9 @@ msgstr "메일 경고 설정"
 #~ "system:"
 #~ msgstr "다음 팩키지들이 설치될 것입니다."
 
+#~ msgid "Theme"
+#~ msgstr "테마"
+
 #~ msgid "Theme name"
 #~ msgstr "테마 이름"
 
@@ -3736,6 +3697,9 @@ msgstr "메일 경고 설정"
 
 #~ msgid "Userdrake"
 #~ msgstr "사용자 드레이크"
+
+#~ msgid "Video mode"
+#~ msgstr "비디오 모드"
 
 #, fuzzy
 #~ msgid ""

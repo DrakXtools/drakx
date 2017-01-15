@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-et\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:28+0100\n"
+"POT-Creation-Date: 2017-01-15 15:12+0100\n"
 "PO-Revision-Date: 2011-04-25 13:31+0200\n"
 "Last-Translator: Marek Laane <bald@smail.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "X-Generator: KBabel 1.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: display_help:53 display_help:58 drakbug:173 drakperm:134
+#: display_help:50 display_help:55 drakbug:173 drakperm:134
 #, c-format
 msgid "Help"
 msgstr "Abi"
 
-#: display_help:66 drakbug:178 drakfont:507
+#: display_help:63 drakbug:178 drakfont:507
 #, c-format
 msgid "Close"
 msgstr "Sulge"
@@ -33,142 +33,65 @@ msgstr "Sulge"
 msgid "Authentication"
 msgstr "Autentimisviis"
 
-#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213
-#: drakfont:226 drakfont:264 finish-install:133 logdrake:177 logdrake:453
-#: logdrake:458 scannerdrake:56 scannerdrake:98 scannerdrake:139
-#: scannerdrake:197 scannerdrake:256 scannerdrake:726 scannerdrake:737
-#: scannerdrake:876 scannerdrake:887 scannerdrake:957
+#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213 drakfont:226
+#: drakfont:264 finish-install:133 logdrake:177 logdrake:453 logdrake:458
+#: scannerdrake:56 scannerdrake:98 scannerdrake:139 scannerdrake:197
+#: scannerdrake:256 scannerdrake:726 scannerdrake:737 scannerdrake:876
+#: scannerdrake:887 scannerdrake:957
 #, c-format
 msgid "Error"
 msgstr "Viga"
 
-#: drakboot:54
-#, c-format
-msgid "No bootloader found, creating a new configuration"
-msgstr "Alglaadurit ei leitud, luuakse uus konfiguratsioon"
-
-#: drakboot:89 harddrake2:191 logdrake:77
+#: drakautologin:54 harddrake2:195 logdrake:77
 #, c-format
 msgid "_File"
 msgstr "_Fail"
 
-#: drakboot:90 harddrake2:192 logdrake:78 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:78 logdrake:79
 #, c-format
 msgid "_Quit"
 msgstr "_Välju"
 
-#: drakboot:90 harddrake2:192 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:79
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
-#: drakboot:138
-#, c-format
-msgid "Text only"
-msgstr "Ainult tekst"
-
-#: drakboot:139
-#, c-format
-msgid "Verbose"
-msgstr "Jutukas"
-
-#: drakboot:140
-#, c-format
-msgid "Silent"
-msgstr "Vaikne"
-
-#: drakboot:146 drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381
-#: drakups:27 harddrake2:504 localedrake:45 scannerdrake:48 scannerdrake:51
-#: scannerdrake:294 scannerdrake:299 scannerdrake:951
-#, c-format
-msgid "Warning"
-msgstr "Hoiatus"
-
-#: drakboot:147
-#, c-format
-msgid ""
-"Your system bootloader is not in framebuffer mode. To activate graphical "
-"boot, select a graphic video mode from the bootloader configuration tool."
-msgstr ""
-"Teie süsteemi alglaadur ei tööta konsoolirežiimis. Graafilise alglaadimise "
-"kasutamiseks valige sobiv režiim alglaaduri seadistamistööriistaga."
-
-#: drakboot:148
-#, c-format
-msgid "Do you want to configure it now?"
-msgstr "Kas soovite seda nüüd seadistada?"
-
-#: drakboot:157
-#, c-format
-msgid "Install themes"
-msgstr "Teemade paigaldamine"
-
-#: drakboot:159
-#, c-format
-msgid "Graphical boot theme selection"
-msgstr "Graafilise algkäivitusteema valik"
-
-#: drakboot:162
-#, c-format
-msgid "Graphical boot mode:"
-msgstr "Graafilise algkäivituse režiim:"
-
-#: drakboot:164
-#, c-format
-msgid "Theme"
-msgstr "Teema"
-
-#: drakboot:198
+#: drakautologin:100
 #, c-format
 msgid "Default user"
 msgstr "Vaikimisi kasutaja"
 
-#: drakboot:199
+#: drakautologin:101
 #, c-format
 msgid "Default desktop"
 msgstr "Vaikimisi töölaud"
 
-#: drakboot:202
+#: drakautologin:104
 #, c-format
 msgid "No, I do not want autologin"
 msgstr "Ei taha automaatselt siseneda"
 
-#: drakboot:203
+#: drakautologin:105
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr ""
 "Jah, soovin automaatset sisselogimist sellele (kasutajale, keskkonnale)"
 
-#: drakboot:210
+#: drakautologin:112
 #, c-format
 msgid "System mode"
 msgstr "Töömood"
 
-#: drakboot:213
+#: drakautologin:115
 #, c-format
 msgid "Launch the graphical environment when your system starts"
 msgstr "X Windows käivitatakse alglaadimisel"
 
-#: drakboot:268
+#: drakboot:41
 #, c-format
-msgid "Boot Style Configuration"
-msgstr "Alglaaduri stiil"
-
-#: drakboot:270 drakboot:274
-#, c-format
-msgid "Video mode"
-msgstr "Ekraanilahutus"
-
-#: drakboot:271
-#, c-format
-msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries "
-"selected below.\n"
-"Be sure your video card supports the mode you choose."
-msgstr ""
-"Palun valide graafikamood. Seda rakendatakse kõigi allpool valitud "
-"alglaadimiskirjete korral.\n"
-"Palun kontrollige, et Teie videokaart ikka toetab valitud moodi."
+msgid "No bootloader found, creating a new configuration"
+msgstr "Alglaadurit ei leitud, luuakse uus konfiguratsioon"
 
 #: drakbug:52 drakbug:140
 #, c-format
@@ -328,6 +251,13 @@ msgstr "Pole paigaldatud"
 msgid "Package not installed"
 msgstr "Pakett ei ole paigaldatud"
 
+#: drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381 drakups:27
+#: harddrake2:509 localedrake:45 scannerdrake:48 scannerdrake:51
+#: scannerdrake:294 scannerdrake:299 scannerdrake:951
+#, c-format
+msgid "Warning"
+msgstr "Hoiatus"
+
 #: drakbug:251
 #, c-format
 msgid ""
@@ -451,7 +381,7 @@ msgstr "%s on juba olemas ja selle sisu läheb kaotsi"
 msgid "Could not get the list of available channels"
 msgstr "Saadaolevate kanalite nimekirja hankimine nurjus"
 
-#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:358
+#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:362
 #: scannerdrake:63 scannerdrake:67 scannerdrake:75 scannerdrake:316
 #: scannerdrake:365 scannerdrake:501 scannerdrake:505 scannerdrake:527
 #: service_harddrake:426
@@ -500,16 +430,21 @@ msgid "SLIM (Simple Display Manager)"
 msgstr "XDM (X'i kuvahaldur)"
 
 #: drakedm:45
+#, fuzzy, c-format
+msgid "SDDM (Simple Desktop Display Manager)"
+msgstr "XDM (X'i kuvahaldur)"
+
+#: drakedm:46
 #, c-format
 msgid "XDM (X Display Manager)"
 msgstr "XDM (X'i kuvahaldur)"
 
-#: drakedm:56
+#: drakedm:57
 #, c-format
 msgid "Choosing a display manager"
 msgstr "Kuvahalduri valimine"
 
-#: drakedm:57
+#: drakedm:58
 #, c-format
 msgid ""
 "X11 Display Manager allows you to graphically log\n"
@@ -520,12 +455,12 @@ msgstr ""
 "süsteemi, kus töötab X Window System, samuti toetab see korraga \n"
 "mitme X-seansi käivitamist ja neis töötamist."
 
-#: drakedm:80
+#: drakedm:81
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
 msgstr "Muutus on tehtud. Kas käivitada nüüd kuvahaldur uuesti?"
 
-#: drakedm:81
+#: drakedm:82
 #, c-format
 msgid ""
 "You are going to close all running programs and lose your current session. "
@@ -702,7 +637,7 @@ msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:532 harddrake2:531
+#: drakfont:532 harddrake2:536
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr "Marek Laane <bald@starman.ee>\n"
@@ -777,12 +712,12 @@ msgstr "Paigaldamine"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Kas tõesti eemaldada järgmised fondid?"
 
-#: drakfont:688 draksec:59 harddrake2:302
+#: drakfont:688 draksec:59 harddrake2:306
 #, c-format
 msgid "Yes"
 msgstr "Jah"
 
-#: drakfont:690 draksec:58 harddrake2:303
+#: drakfont:690 draksec:58 harddrake2:307
 #, c-format
 msgid "No"
 msgstr "Ei"
@@ -1330,42 +1265,14 @@ msgstr "Algkäivitus"
 msgid "No Sound Card detected!"
 msgstr "Helikaarti ei leitud!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: draksound:51
+#: draksound:50
 #, c-format
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
-"supported Sound Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Sound Card is correctly plugged in"
 msgstr ""
 "Teie masinas ei leitud helikaarti. Kontrollige palun, et Linuxi toega "
-"helikaart on korrektselt ühendatud.\n"
-"\n"
-"\n"
-"Meie riistvara andmebaasi saab näha aadressil:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
-
-#: draksound:58
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
-"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
-msgstr ""
-"\n"
-"\n"
-"\n"
-"Märkus: kui Teil on ISA PnP helikaart, tuleb kasutada programmi alsaconf või "
-"sndconfig. Selleks kirjutage käsureale \"alsaconf\" või \"sndconfig\"."
+"helikaart on korrektselt ühendatud."
 
 #: drakups:71
 #, c-format
@@ -1411,7 +1318,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "Automaattuvastus"
 
-#: drakups:99 harddrake2:358
+#: drakups:99 harddrake2:362
 #, c-format
 msgid "Detection in progress"
 msgstr "Toimub tuvastamine..."
@@ -1496,12 +1403,12 @@ msgid "UPS devices"
 msgstr "UPS-id"
 
 #: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:116
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "Name"
 msgstr "Nimi"
 
-#: drakups:249 harddrake2:139
+#: drakups:249 harddrake2:143
 #, c-format
 msgid "Driver"
 msgstr "Draiver"
@@ -1576,27 +1483,14 @@ msgstr "Tere tulemast kasutama UPS-i seadistamise abilist"
 msgid "No TV Card detected!"
 msgstr "TV-kaarti ei leitud!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: drakxtv:68
+#: drakxtv:67
 #, c-format
 msgid ""
 "No TV Card has been detected on your machine. Please verify that a Linux-"
-"supported Video/TV Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Video/TV Card is correctly plugged in."
 msgstr ""
 "Teie süsteemis ei leitud TV-kaarti. Kontrollige palun, et Linuxi toega video/"
-"TV-kaart on korrektselt ühendatud.\n"
-"\n"
-"\n"
-"Meie riistvara andmebaasi saate külastada aadressil:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"TV-kaart on korrektselt ühendatud."
 
 #: finish-install:57
 #, c-format
@@ -1683,7 +1577,7 @@ msgstr "Alternatiivsed draiverid"
 msgid "the list of alternative drivers for this sound card"
 msgstr "selle helikaardi alternatiivsete draiverite nimekiri"
 
-#: harddrake2:33 harddrake2:125
+#: harddrake2:33 harddrake2:129
 #, c-format
 msgid "Bus"
 msgstr "Siin"
@@ -1694,7 +1588,7 @@ msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "see on füüsiline siin, millega seade on ühendatud (nt: PCI, USB, ...)"
 
-#: harddrake2:36 harddrake2:151
+#: harddrake2:36 harddrake2:155
 #, c-format
 msgid "Bus identification"
 msgstr "Siinitunnus"
@@ -2015,7 +1909,7 @@ msgstr "Lipud"
 msgid "CPU flags reported by the kernel"
 msgstr "CPU lipud kerneli teatel"
 
-#: harddrake2:80 harddrake2:144
+#: harddrake2:80 harddrake2:148
 #, c-format
 msgid "Cores"
 msgstr "Tuumad"
@@ -2182,7 +2076,7 @@ msgstr "Sisselülitatud suurus"
 msgid "Enabled size of the memory bank"
 msgstr "Mälumooduli sisselülitatud suurus"
 
-#: harddrake2:113 harddrake2:122
+#: harddrake2:113 harddrake2:126
 #, c-format
 msgid "Type"
 msgstr "Tüüp"
@@ -2192,12 +2086,12 @@ msgstr "Tüüp"
 msgid "type of the memory device"
 msgstr "Mälumooduli tüüp"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed"
 msgstr "Kiirus"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed of the memory bank"
 msgstr "Mälumooduli kiirus"
@@ -2212,158 +2106,173 @@ msgstr "Mooduli ühendused"
 msgid "Socket designation of the memory bank"
 msgstr "Mälumooduli sokkel"
 
-#: harddrake2:120
+#: harddrake2:118
+#, c-format
+msgid "Location"
+msgstr "Asukoht"
+
+#: harddrake2:119
+#, c-format
+msgid "Size"
+msgstr "Suurus"
+
+#: harddrake2:119
+#, c-format
+msgid "Size of the memory device"
+msgstr "Mäluseadme suurus"
+
+#: harddrake2:124
 #, c-format
 msgid "Device file"
 msgstr "Seadmefail"
 
-#: harddrake2:120
+#: harddrake2:124
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr "seadmefail, mida kasutatakse hiire suhtlemisel kerneliga"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "Emulated wheel"
 msgstr "Emuleeritud hiireratas"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "kas hiireratas on emuleeritud või mitte"
 
-#: harddrake2:122
+#: harddrake2:126
 #, c-format
 msgid "the type of the mouse"
 msgstr "hiire tüüp"
 
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "the name of the mouse"
 msgstr "hiire nimi"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "Number of buttons"
 msgstr "Nuppude arv"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "the number of buttons the mouse has"
 msgstr "hiire nuppude arv"
 
-#: harddrake2:125
+#: harddrake2:129
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "siinitüüp, millega hiir on ühendatud"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr "X11 kasutatav hiireprotokoll"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "protokoll, mida graafiline töölaud hiire jaoks kasutab"
 
-#: harddrake2:130
+#: harddrake2:134
 #, c-format
 msgid "Identification"
 msgstr "Identifikaator"
 
-#: harddrake2:135 harddrake2:150
+#: harddrake2:139 harddrake2:154
 #, c-format
 msgid "Connection"
 msgstr "Ühendus"
 
-#: harddrake2:145
+#: harddrake2:149
 #, c-format
 msgid "Performances"
 msgstr "Jõudlus"
 
-#: harddrake2:152
+#: harddrake2:156
 #, c-format
 msgid "Device"
 msgstr "Seade"
 
-#: harddrake2:153
+#: harddrake2:157
 #, c-format
 msgid "Partitions"
 msgstr "Partitsioonid"
 
-#: harddrake2:158
+#: harddrake2:162
 #, c-format
 msgid "Features"
 msgstr "Omadused"
 
-#: harddrake2:179
+#: harddrake2:183
 #, c-format
 msgid "Autodetect _modems"
 msgstr "_Modemite automaattuvastus"
 
-#: harddrake2:180
+#: harddrake2:184
 #, c-format
 msgid "Autodetect parallel _zip drives"
 msgstr "Paralleelpordi _ZIP-ketaste automaattuvastus"
 
-#: harddrake2:184
+#: harddrake2:188
 #, c-format
 msgid "Hardware Configuration"
 msgstr "Riistvara seadistamine"
 
-#: harddrake2:193
+#: harddrake2:197
 #, c-format
 msgid "_Options"
 msgstr "_Eelistused"
 
-#: harddrake2:194 harddrake2:195
+#: harddrake2:198 harddrake2:199
 #, c-format
 msgid "_Help"
 msgstr "_Abi"
 
-#: harddrake2:195
+#: harddrake2:199
 #, c-format
 msgid "<control>H"
 msgstr "<control>H"
 
-#: harddrake2:196
+#: harddrake2:200
 #, c-format
 msgid "_Fields description"
 msgstr "Välja_de kirjeldus"
 
-#: harddrake2:197
+#: harddrake2:201
 #, c-format
 msgid "_Report Bug"
 msgstr "_Veast teatamine"
 
-#: harddrake2:198
+#: harddrake2:202
 #, c-format
 msgid "_About..."
 msgstr "_Misvärk"
 
-#: harddrake2:242
+#: harddrake2:246
 #, c-format
 msgid "Detected hardware"
 msgstr "Tuvastatud riistvara"
 
-#: harddrake2:245 scannerdrake:283
+#: harddrake2:249 scannerdrake:283
 #, c-format
 msgid "Information"
 msgstr "Info"
 
-#: harddrake2:247
+#: harddrake2:251
 #, c-format
 msgid "Set current driver options"
 msgstr "Aktiivse draiveri võtmete määramine"
 
-#: harddrake2:254
+#: harddrake2:257
 #, c-format
 msgid "Run config tool"
 msgstr "Seadistamistööriista käivitamine"
 
-#: harddrake2:280
+#: harddrake2:284
 #, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
@@ -2371,72 +2280,72 @@ msgid ""
 msgstr ""
 "Klõps seadmel vasakul asuvas puus näitab siin selle kohta käivat infot."
 
-#: harddrake2:300 notify-x11-free-driver-switch:13
+#: harddrake2:304 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "tundmatu"
 
-#: harddrake2:301
+#: harddrake2:305
 #, c-format
 msgid "Unknown"
 msgstr "Tundmatu"
 
-#: harddrake2:321
+#: harddrake2:325
 #, c-format
 msgid "Misc"
 msgstr "Muud"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "secondary"
 msgstr "teisene"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "primary"
 msgstr "esmane"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "burner"
 msgstr "CD-kirjutaja"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:504
+#: harddrake2:509
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Paigaldada tuleb järgmised paketid:\n"
 
-#: harddrake2:521
+#: harddrake2:525
 #, c-format
 msgid "Harddrake"
 msgstr "Harddrake"
 
-#: harddrake2:523
+#: harddrake2:528
 #, c-format
 msgid "Copyright (C) %s by %s"
 msgstr "Autoriõigus (C) %s: %s"
 
-#: harddrake2:523 harddrake2:527
+#: harddrake2:528 harddrake2:532
 #, c-format
 msgid "Mageia"
 msgstr ""
 
-#: harddrake2:525
+#: harddrake2:530
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr "Harddrake on %si riistvara seadistamise tööriist."
 
-#: harddrake2:540
+#: harddrake2:545
 #, c-format
 msgid "Harddrake help"
 msgstr "HardDrake abi"
 
-#: harddrake2:541
+#: harddrake2:546
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -2445,12 +2354,12 @@ msgstr ""
 "Väljade kirjeldus:\n"
 "\n"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid "Select a device!"
 msgstr "Valige seade!"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2743,8 +2652,7 @@ msgstr "Nõustaja keelustas edukalt e-kirjaga hoiatamise."
 msgid "Save as.."
 msgstr "Salvesta kui..."
 
-#: notify-x11-free-driver-switch:18 service_harddrake:468
-#: service_harddrake:481
+#: notify-x11-free-driver-switch:18 service_harddrake:468 service_harddrake:481
 #, c-format
 msgid "Display driver setup"
 msgstr "Graafikadraiveri seadistus"
@@ -3414,6 +3322,16 @@ msgstr "Asukohaseadistused"
 msgid "Language & country configuration"
 msgstr "Keele ja riigi seadistamine"
 
+#: ../polkit/org.mageia.drakautologin.policy.in.h:1
+#, fuzzy
+msgid "Run Mageia AutoLogin Configuration"
+msgstr "Moondrake alglaadimise seadistamise käivitamine"
+
+#: ../polkit/org.mageia.drakautologin.policy.in.h:2
+#, fuzzy
+msgid "Authentication is required to run Mageia AutoLogin Configuration"
+msgstr "Moondrake alglaadimise seadistamine nõuab autentimist"
+
 #: ../polkit/org.moondrake.drakauth.policy.in.h:1
 #, fuzzy
 msgid "Run DrakX Authentication Configuration"
@@ -3546,99 +3464,25 @@ msgstr "Moondrake teenuste seadistamise käivitamine"
 msgid "Authentication is required to run DrakX Service Configuration"
 msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 
-#~ msgid "%s Bug Report Tool"
-#~ msgstr "%s vigadest teatamise tööriist"
-
-#~ msgid "%s Tools Logs"
-#~ msgstr "%s tööriistade logid"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Application Security "
-#~ "Configuration"
-#~ msgstr "Moondrake rakenduste turbe seadistamine nõuab autentimist"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Authentication Configuration"
-#~ msgstr "Moondrake autentimise seadistamine nõuab autentimist"
-
 #~ msgid "Authentication is required to run Moondrake Boot Configuration"
 #~ msgstr "Moondrake alglaadimise seadistamine nõuab autentimist"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Date and Time Configuration"
-#~ msgstr "Moondrake kuupäeva ja kellaaja seadistamine nõuab autentimist"
-
-#~ msgid "Authentication is required to run Moondrake Disk Layout Editor"
-#~ msgstr "Moondrake kettajagamise programm nõuab autentimist"
-
-#~ msgid "Authentication is required to run Moondrake Font Configuration"
-#~ msgstr "Moondrake fontide seadistamine nõuab autentimist"
-
-#~ msgid "Authentication is required to run Moondrake Hardware Configuration"
-#~ msgstr "Moondrake riistvara seadistamine nõuab autentimist"
-
-#~ msgid "Authentication is required to run Moondrake Log Viewer"
-#~ msgstr "Moondrake loginäitaja käivitamine nõuab autentimist"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Login Manager Configuration"
-#~ msgstr "Moondrake sisselogimishalduri seadistamine nõuab autentimist"
-
-#~ msgid "Authentication is required to run Moondrake Scanner Configuration"
-#~ msgstr "Moondrake skanneri seadistamine nõuab autentimist"
-
-#~ msgid ""
-#~ "Authentication is required to run Moondrake Security Permissions "
-#~ "Configuration"
-#~ msgstr "Moondrake turbeõiguste seadistamine nõuab autentimist"
-
-#~ msgid "Authentication is required to run Moondrake Service Configuration"
-#~ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
-
-#~ msgid "Authentication is required to run Moondrake UPS Configuration"
-#~ msgstr "Moondrake UPS-i seadistamine nõuab autentimist"
-
-#~ msgid "Configure authentication required to access %s tools"
-#~ msgstr "Autentimise seadistamine %s tööriistade kasutamiseks"
-
-#~ msgid "Run Moondrake Application Security Configuration"
-#~ msgstr "Moondrake rakenduste turbe seadistamise käivitamine"
-
-#~ msgid "Run Moondrake Authentication Configuration"
-#~ msgstr "Moondrake autentimise seadistamise käivitamine"
 
 #~ msgid "Run Moondrake Boot Configuration"
 #~ msgstr "Moondrake alglaadimise seadistamise käivitamine"
 
-#~ msgid "Run Moondrake Date and Time Configuration"
-#~ msgstr "Moondrake kuupäeva ja kellaaja seadistamise käivitamine"
-
-#~ msgid "Run Moondrake Disk Layout Editor"
-#~ msgstr "Moondrake kettajagamise programmi käivitamine"
-
-#~ msgid "Run Moondrake Font Configuration"
-#~ msgstr "Moondrake fontide seadistamise käivitamine"
-
-#~ msgid "Run Moondrake Hardware Configuration"
-#~ msgstr "Moondrake riistvara seadistamise käivitamine"
-
-#~ msgid "Run Moondrake Log Viewer"
-#~ msgstr "Moondrake loginäitaja käivitamine"
-
-#~ msgid "Run Moondrake Login Manager Configuration"
-#~ msgstr "Moondrake sisselogimishalduri seadistamise käivitamine"
-
-#~ msgid "Run Moondrake Scanner Configuration"
-#~ msgstr "Moondrake skanneri seadistamise käivitamine"
-
-#~ msgid "Run Moondrake Security Permissions Configuration"
-#~ msgstr "Moondrake turbeõiguste seadistamise käivitamine"
-
-#~ msgid "Run Moondrake Service Configuration"
-#~ msgstr "Moondrake teenuste seadistamise käivitamine"
-
-#~ msgid "Run Moondrake UPS Configuration"
-#~ msgstr "Moondrake UPS-i seadistamise käivitamine"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
+#~ "the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a "
+#~ "console."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Märkus: kui Teil on ISA PnP helikaart, tuleb kasutada programmi alsaconf "
+#~ "või sndconfig. Selleks kirjutage käsureale \"alsaconf\" või \"sndconfig\"."
 
 #~ msgid ""
 #~ "\n"
@@ -3672,11 +3516,17 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 #~ "\n"
 #~ "Kasutamine:\n"
 
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "%s vigadest teatamise tööriist"
+
 #~ msgid "%s Control Center"
 #~ msgstr "%s juhtimiskeskus"
 
 #~ msgid "%s Help Center"
 #~ msgstr "%s abikeskus"
+
+#~ msgid "%s Tools Logs"
+#~ msgstr "%s tööriistade logid"
 
 #~ msgid "(default value: %s)"
 #~ msgstr "(vaikeväärtus: %s)"
@@ -3747,6 +3597,49 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 #~ msgid "Add an item"
 #~ msgstr "Lisa element"
 
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Application Security "
+#~ "Configuration"
+#~ msgstr "Moondrake rakenduste turbe seadistamine nõuab autentimist"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Authentication Configuration"
+#~ msgstr "Moondrake autentimise seadistamine nõuab autentimist"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Date and Time Configuration"
+#~ msgstr "Moondrake kuupäeva ja kellaaja seadistamine nõuab autentimist"
+
+#~ msgid "Authentication is required to run Moondrake Disk Layout Editor"
+#~ msgstr "Moondrake kettajagamise programm nõuab autentimist"
+
+#~ msgid "Authentication is required to run Moondrake Font Configuration"
+#~ msgstr "Moondrake fontide seadistamine nõuab autentimist"
+
+#~ msgid "Authentication is required to run Moondrake Hardware Configuration"
+#~ msgstr "Moondrake riistvara seadistamine nõuab autentimist"
+
+#~ msgid "Authentication is required to run Moondrake Log Viewer"
+#~ msgstr "Moondrake loginäitaja käivitamine nõuab autentimist"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Login Manager Configuration"
+#~ msgstr "Moondrake sisselogimishalduri seadistamine nõuab autentimist"
+
+#~ msgid "Authentication is required to run Moondrake Scanner Configuration"
+#~ msgstr "Moondrake skanneri seadistamine nõuab autentimist"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Security Permissions "
+#~ "Configuration"
+#~ msgstr "Moondrake turbeõiguste seadistamine nõuab autentimist"
+
+#~ msgid "Authentication is required to run Moondrake Service Configuration"
+#~ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
+
+#~ msgid "Authentication is required to run Moondrake UPS Configuration"
+#~ msgstr "Moondrake UPS-i seadistamine nõuab autentimist"
+
 #~ msgid "Auto Install"
 #~ msgstr "Automaatpaigaldus"
 
@@ -3767,6 +3660,9 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 
 #~ msgid "Basic options"
 #~ msgstr "Põhiseadistused"
+
+#~ msgid "Boot Style Configuration"
+#~ msgstr "Alglaaduri stiil"
 
 #~ msgid "Bugs"
 #~ msgstr "Vead"
@@ -3795,6 +3691,9 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 #~ msgid "Coma bug"
 #~ msgstr "\"Koomaviga\""
 
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Autentimise seadistamine %s tööriistade kasutamiseks"
+
 #~ msgid "Configure authentication required to access Mandriva tools"
 #~ msgstr "Autentimise seadistamine Mandriva tööriistade kasutamiseks"
 
@@ -3819,6 +3718,9 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 #~ msgstr ""
 #~ "Teema näitamine\n"
 #~ "konsoolis"
+
+#~ msgid "Do you want to configure it now?"
+#~ msgstr "Kas soovite seda nüüd seadistada?"
 
 #~ msgid "Do you want to remove these packages?"
 #~ msgstr "Kas soovite need paketid eemaldada?"
@@ -3871,8 +3773,17 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 #~ msgid "Finding unused localization packages..."
 #~ msgstr "Ülearuste lokaliseerimispakettide otsing..."
 
+#~ msgid "Finishing install"
+#~ msgstr "Paigalduse lõpetamine"
+
 #~ msgid "Gradient type"
 #~ msgstr "Ülemineku tüüp"
+
+#~ msgid "Graphical boot mode:"
+#~ msgstr "Graafilise algkäivituse režiim:"
+
+#~ msgid "Graphical boot theme selection"
+#~ msgstr "Graafilise algkäivitusteema valik"
 
 #~ msgid "Halt bug"
 #~ msgstr "Seiskamisviga"
@@ -3997,6 +3908,9 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 #~ msgid "Insert another blank floppy in drive %s (for drivers disk)"
 #~ msgstr "Pange palun draiverite jaoks tühi diskett seadmesse %s"
 
+#~ msgid "Install themes"
+#~ msgstr "Teemade paigaldamine"
+
 #~ msgid "Is FPU present"
 #~ msgstr "FPU olemasolu"
 
@@ -4023,17 +3937,41 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 
 #~ msgid ""
 #~ "No Sound Card has been detected on your machine. Please verify that a "
-#~ "Linux-supported Sound Card is correctly plugged in"
+#~ "Linux-supported Sound Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
 #~ "Teie masinas ei leitud helikaarti. Kontrollige palun, et Linuxi toega "
-#~ "helikaart on korrektselt ühendatud."
+#~ "helikaart on korrektselt ühendatud.\n"
+#~ "\n"
+#~ "\n"
+#~ "Meie riistvara andmebaasi saab näha aadressil:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 
 #~ msgid ""
 #~ "No TV Card has been detected on your machine. Please verify that a Linux-"
-#~ "supported Video/TV Card is correctly plugged in."
+#~ "supported Video/TV Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
 #~ "Teie süsteemis ei leitud TV-kaarti. Kontrollige palun, et Linuxi toega "
-#~ "video/TV-kaart on korrektselt ühendatud."
+#~ "video/TV-kaart on korrektselt ühendatud.\n"
+#~ "\n"
+#~ "\n"
+#~ "Meie riistvara andmebaasi saate külastada aadressil:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 
 #~ msgid "OpenOffice.org"
 #~ msgstr "OpenOffice.org"
@@ -4043,6 +3981,15 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "Perioodiline kontroll"
+
+#~ msgid ""
+#~ "Please choose a video mode, it will be applied to each of the boot "
+#~ "entries selected below.\n"
+#~ "Be sure your video card supports the mode you choose."
+#~ msgstr ""
+#~ "Palun valide graafikamood. Seda rakendatakse kõigi allpool valitud "
+#~ "alglaadimiskirjete korral.\n"
+#~ "Palun kontrollige, et Teie videokaart ikka toetab valitud moodi."
 
 #~ msgid ""
 #~ "Please choose for each step whether it will replay like your install, or "
@@ -4081,6 +4028,42 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 #~ msgid "Restart XFS"
 #~ msgstr "XFS taaskäivitamine"
 
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Moondrake rakenduste turbe seadistamise käivitamine"
+
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Moondrake autentimise seadistamise käivitamine"
+
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "Moondrake kuupäeva ja kellaaja seadistamise käivitamine"
+
+#~ msgid "Run Moondrake Disk Layout Editor"
+#~ msgstr "Moondrake kettajagamise programmi käivitamine"
+
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "Moondrake fontide seadistamise käivitamine"
+
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "Moondrake riistvara seadistamise käivitamine"
+
+#~ msgid "Run Moondrake Log Viewer"
+#~ msgstr "Moondrake loginäitaja käivitamine"
+
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "Moondrake sisselogimishalduri seadistamise käivitamine"
+
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "Moondrake skanneri seadistamise käivitamine"
+
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "Moondrake turbeõiguste seadistamise käivitamine"
+
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "Moondrake teenuste seadistamise käivitamine"
+
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "Moondrake UPS-i seadistamise käivitamine"
+
 #~ msgid "Save theme"
 #~ msgstr "Teema salvestamine"
 
@@ -4095,6 +4078,9 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 
 #~ msgid "Select Mandriva Tool:"
 #~ msgstr "Valige Mandriva tööriist:"
+
+#~ msgid "Silent"
+#~ msgstr "Vaikne"
 
 #~ msgid "Silent bootsplash"
 #~ msgstr "Vaikne käivituslogo"
@@ -4123,6 +4109,9 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 
 #~ msgid "Text color"
 #~ msgstr "Teksti värv"
+
+#~ msgid "Text only"
+#~ msgstr "Ainult tekst"
 
 #~ msgid "Text size"
 #~ msgstr "Teksti suurus"
@@ -4175,8 +4164,18 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 #~ msgid "The width of the progress bar"
 #~ msgstr "Edenemisriba laius"
 
+#~ msgid "Theme"
+#~ msgstr "Teema"
+
 #~ msgid "Theme name"
 #~ msgstr "Teema nimi"
+
+#~ msgid ""
+#~ "This system will be rebooted\n"
+#~ "for the changes to take effect!"
+#~ msgstr ""
+#~ "Muudatuste rakendamiseks\n"
+#~ "käivitatakse süsteem uuesti!"
 
 #~ msgid "Unable to load image file %s"
 #~ msgstr "Pildifaili %s laadimine ebaõnnestus"
@@ -4184,8 +4183,14 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 #~ msgid "Unknown/Others"
 #~ msgstr "Tundmatu/Muu"
 
+#~ msgid "Verbose"
+#~ msgstr "Jutukas"
+
 #~ msgid "Verbose bootsplash"
 #~ msgstr "Jutukas käivituslogo"
+
+#~ msgid "Video mode"
+#~ msgstr "Ekraanilahutus"
 
 #~ msgid "Whether the FPU has an irq vector"
 #~ msgstr "Kas FPU-l on irq vektor"
@@ -4227,6 +4232,14 @@ msgstr "Moondrake teenuste seadistamine nõuab autentimist"
 #~ "võimaluse kasuks olete paigaldamise algul otsustanud.\n"
 #~ "\n"
 #~ "Klõpsake jätkamiseks nupule \"Olgu\"."
+
+#~ msgid ""
+#~ "Your system bootloader is not in framebuffer mode. To activate graphical "
+#~ "boot, select a graphic video mode from the bootloader configuration tool."
+#~ msgstr ""
+#~ "Teie süsteemi alglaadur ei tööta konsoolirežiimis. Graafilise "
+#~ "alglaadimise kasutamiseks valige sobiv režiim alglaaduri "
+#~ "seadistamistööriistaga."
 
 #~ msgid "choose image"
 #~ msgstr "valige pilt"

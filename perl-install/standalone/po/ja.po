@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone-ja\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:28+0100\n"
+"POT-Creation-Date: 2017-01-15 15:12+0100\n"
 "PO-Revision-Date: 2009-03-22 19:59+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
@@ -20,12 +20,12 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: display_help:53 display_help:58 drakbug:173 drakperm:134
+#: display_help:50 display_help:55 drakbug:173 drakperm:134
 #, c-format
 msgid "Help"
 msgstr "ヘルプ"
 
-#: display_help:66 drakbug:178 drakfont:507
+#: display_help:63 drakbug:178 drakfont:507
 #, c-format
 msgid "Close"
 msgstr "閉じる"
@@ -35,142 +35,64 @@ msgstr "閉じる"
 msgid "Authentication"
 msgstr "認証"
 
-#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213
-#: drakfont:226 drakfont:264 finish-install:133 logdrake:177 logdrake:453
-#: logdrake:458 scannerdrake:56 scannerdrake:98 scannerdrake:139
-#: scannerdrake:197 scannerdrake:256 scannerdrake:726 scannerdrake:737
-#: scannerdrake:876 scannerdrake:887 scannerdrake:957
+#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213 drakfont:226
+#: drakfont:264 finish-install:133 logdrake:177 logdrake:453 logdrake:458
+#: scannerdrake:56 scannerdrake:98 scannerdrake:139 scannerdrake:197
+#: scannerdrake:256 scannerdrake:726 scannerdrake:737 scannerdrake:876
+#: scannerdrake:887 scannerdrake:957
 #, c-format
 msgid "Error"
 msgstr "エラー"
 
-#: drakboot:54
-#, c-format
-msgid "No bootloader found, creating a new configuration"
-msgstr "ブートローダが見つかりません。新しい設定を作成します。"
-
-#: drakboot:89 harddrake2:191 logdrake:77
+#: drakautologin:54 harddrake2:195 logdrake:77
 #, c-format
 msgid "_File"
 msgstr "ファイル(_F)"
 
-#: drakboot:90 harddrake2:192 logdrake:78 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:78 logdrake:79
 #, c-format
 msgid "_Quit"
 msgstr "終了(_Q)"
 
-#: drakboot:90 harddrake2:192 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:79
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
-#: drakboot:138
-#, c-format
-msgid "Text only"
-msgstr "テキストのみ"
-
-#: drakboot:139
-#, c-format
-msgid "Verbose"
-msgstr "詳細モード"
-
-#: drakboot:140
-#, c-format
-msgid "Silent"
-msgstr "サイレントモード"
-
-#: drakboot:146 drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381
-#: drakups:27 harddrake2:504 localedrake:45 scannerdrake:48 scannerdrake:51
-#: scannerdrake:294 scannerdrake:299 scannerdrake:951
-#, c-format
-msgid "Warning"
-msgstr "警告"
-
-#: drakboot:147
-#, c-format
-msgid ""
-"Your system bootloader is not in framebuffer mode. To activate graphical "
-"boot, select a graphic video mode from the bootloader configuration tool."
-msgstr ""
-"ブートローダがフレームバッファモードではありません。グラフィカルブートを有効"
-"にするには、ブートローダ設定ツールでビデオモードを選んでください。"
-
-#: drakboot:148
-#, c-format
-msgid "Do you want to configure it now?"
-msgstr "設定しますか？"
-
-#: drakboot:157
-#, c-format
-msgid "Install themes"
-msgstr "テーマをインストール"
-
-#: drakboot:159
-#, c-format
-msgid "Graphical boot theme selection"
-msgstr "グラフィカル起動のテーマを選択"
-
-#: drakboot:162
-#, c-format
-msgid "Graphical boot mode:"
-msgstr "グラフィカル起動モード:"
-
-#: drakboot:164
-#, c-format
-msgid "Theme"
-msgstr "テーマ"
-
-#: drakboot:198
+#: drakautologin:100
 #, c-format
 msgid "Default user"
 msgstr "デフォルトのユーザ"
 
-#: drakboot:199
+#: drakautologin:101
 #, c-format
 msgid "Default desktop"
 msgstr "デフォルトのデスクトップ"
 
-#: drakboot:202
+#: drakautologin:104
 #, c-format
 msgid "No, I do not want autologin"
 msgstr "自動ログインを使わない"
 
-#: drakboot:203
+#: drakautologin:105
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "以下のユーザとデスクトップで自動的にログインする"
 
-#: drakboot:210
+#: drakautologin:112
 #, c-format
 msgid "System mode"
 msgstr "システムモード"
 
-#: drakboot:213
+#: drakautologin:115
 #, c-format
 msgid "Launch the graphical environment when your system starts"
 msgstr "起動時にXウィンドウを実行"
 
-#: drakboot:268
+#: drakboot:41
 #, c-format
-msgid "Boot Style Configuration"
-msgstr "起動方式の設定"
-
-#: drakboot:270 drakboot:274
-#, c-format
-msgid "Video mode"
-msgstr "ビデオモード"
-
-#: drakboot:271
-#, c-format
-msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries "
-"selected below.\n"
-"Be sure your video card supports the mode you choose."
-msgstr ""
-"ビデオモードを選んでください。下に選択されているブートエントリに適用されま"
-"す。\n"
-"指定したモードがお使いのビデオカードでサポートされていることを必ず確認してく"
-"ださい。"
+msgid "No bootloader found, creating a new configuration"
+msgstr "ブートローダが見つかりません。新しい設定を作成します。"
 
 #: drakbug:52 drakbug:140
 #, c-format
@@ -328,6 +250,13 @@ msgstr "インストールされていません"
 msgid "Package not installed"
 msgstr "パッケージがインストールされていません"
 
+#: drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381 drakups:27
+#: harddrake2:509 localedrake:45 scannerdrake:48 scannerdrake:51
+#: scannerdrake:294 scannerdrake:299 scannerdrake:951
+#, c-format
+msgid "Warning"
+msgstr "警告"
+
 #: drakbug:251
 #, c-format
 msgid ""
@@ -451,7 +380,7 @@ msgstr "%s は既に存在し、その内容が失われます"
 msgid "Could not get the list of available channels"
 msgstr "利用可能なチャンネルの一覧を取得できませんでした"
 
-#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:358
+#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:362
 #: scannerdrake:63 scannerdrake:67 scannerdrake:75 scannerdrake:316
 #: scannerdrake:365 scannerdrake:501 scannerdrake:505 scannerdrake:527
 #: service_harddrake:426
@@ -500,16 +429,21 @@ msgid "SLIM (Simple Display Manager)"
 msgstr "XDM (X ディスプレイマネージャ)"
 
 #: drakedm:45
+#, fuzzy, c-format
+msgid "SDDM (Simple Desktop Display Manager)"
+msgstr "XDM (X ディスプレイマネージャ)"
+
+#: drakedm:46
 #, c-format
 msgid "XDM (X Display Manager)"
 msgstr "XDM (X ディスプレイマネージャ)"
 
-#: drakedm:56
+#: drakedm:57
 #, c-format
 msgid "Choosing a display manager"
 msgstr "ディスプレイマネージャを選んでください"
 
-#: drakedm:57
+#: drakedm:58
 #, c-format
 msgid ""
 "X11 Display Manager allows you to graphically log\n"
@@ -521,12 +455,12 @@ msgstr ""
 "複数の X セッションを実行できるようになります。\n"
 "ディスプレイマネージャを選んでください。"
 
-#: drakedm:80
+#: drakedm:81
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
 msgstr "変更しました。dm サービスを再起動しますか？"
 
-#: drakedm:81
+#: drakedm:82
 #, c-format
 msgid ""
 "You are going to close all running programs and lose your current session. "
@@ -703,7 +637,7 @@ msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:532 harddrake2:531
+#: drakfont:532 harddrake2:536
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr ""
@@ -780,12 +714,12 @@ msgstr "インストール"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "本当に以下のフォントをアンインストールしますか？"
 
-#: drakfont:688 draksec:59 harddrake2:302
+#: drakfont:688 draksec:59 harddrake2:306
 #, c-format
 msgid "Yes"
 msgstr "はい"
 
-#: drakfont:690 draksec:58 harddrake2:303
+#: drakfont:690 draksec:58 harddrake2:307
 #, c-format
 msgid "No"
 msgstr "いいえ"
@@ -1334,42 +1268,19 @@ msgstr "起動"
 msgid "No Sound Card detected!"
 msgstr "サウンドカードを検出できませんでした"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: draksound:51
-#, c-format
+#: draksound:50
+#, fuzzy, c-format
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
-"supported Sound Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Sound Card is correctly plugged in"
 msgstr ""
-"サウンドカードを検出できませんでした。Linux がサポートしている\n"
-"サウンドカードが正しく差し込まれているか確認してください。\n"
+"テレビカードを検出できませんでした。Linux がサポートしている\n"
+"ビデオ/テレビカードが正しく挿入されているか確認してください。\n"
 "\n"
 "\n"
 "弊社のハードウェアデータベースを参照してください:\n"
 "\n"
-"\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
-
-#: draksound:58
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
-"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
-msgstr ""
-"\n"
-"\n"
-"\n"
-"注意: ISA PnP サウンドカードをお使いの場合は、alsaconf か sndconfig を使って"
-"ください。コンソールで 'alsaconf' または 'sndconfig' と入力します。"
 
 #: drakups:71
 #, c-format
@@ -1415,7 +1326,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "自動検出"
 
-#: drakups:99 harddrake2:358
+#: drakups:99 harddrake2:362
 #, c-format
 msgid "Detection in progress"
 msgstr "検出中です"
@@ -1500,12 +1411,12 @@ msgid "UPS devices"
 msgstr "UPS デバイス"
 
 #: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:116
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "Name"
 msgstr "名前"
 
-#: drakups:249 harddrake2:139
+#: drakups:249 harddrake2:143
 #, c-format
 msgid "Driver"
 msgstr "ドライバ"
@@ -1580,18 +1491,11 @@ msgstr "UPS 設定ツールへようこそ"
 msgid "No TV Card detected!"
 msgstr "テレビカードが見つかりません"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: drakxtv:68
-#, c-format
+#: drakxtv:67
+#, fuzzy, c-format
 msgid ""
 "No TV Card has been detected on your machine. Please verify that a Linux-"
-"supported Video/TV Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Video/TV Card is correctly plugged in."
 msgstr ""
 "テレビカードを検出できませんでした。Linux がサポートしている\n"
 "ビデオ/テレビカードが正しく挿入されているか確認してください。\n"
@@ -1614,7 +1518,7 @@ msgstr "キーボードの配列を選んでください。"
 #: finish-install:106
 #, c-format
 msgid "Testing your connection..."
-msgstr ""
+msgstr "接続をテストしています..."
 
 #: finish-install:187
 #, c-format
@@ -1686,7 +1590,7 @@ msgstr "代替ドライバ"
 msgid "the list of alternative drivers for this sound card"
 msgstr "このサウンドカード用の代替ドライバのリスト"
 
-#: harddrake2:33 harddrake2:125
+#: harddrake2:33 harddrake2:129
 #, c-format
 msgid "Bus"
 msgstr "バス"
@@ -1697,7 +1601,7 @@ msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "デバイスを挿入する物理バス (PCI、USB など)"
 
-#: harddrake2:36 harddrake2:151
+#: harddrake2:36 harddrake2:155
 #, c-format
 msgid "Bus identification"
 msgstr "バスの識別"
@@ -2019,7 +1923,7 @@ msgstr "フラグ"
 msgid "CPU flags reported by the kernel"
 msgstr "カーネルが報告する CPU フラグ"
 
-#: harddrake2:80 harddrake2:144
+#: harddrake2:80 harddrake2:148
 #, fuzzy, c-format
 msgid "Cores"
 msgstr "閉じる"
@@ -2187,7 +2091,7 @@ msgstr "有効になっているサイズ"
 msgid "Enabled size of the memory bank"
 msgstr "メモリバンクの有効になっているサイズ"
 
-#: harddrake2:113 harddrake2:122
+#: harddrake2:113 harddrake2:126
 #, c-format
 msgid "Type"
 msgstr "種類"
@@ -2197,12 +2101,12 @@ msgstr "種類"
 msgid "type of the memory device"
 msgstr "メモリデバイスのタイプ"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed"
 msgstr "速度"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed of the memory bank"
 msgstr "メモリバンクの速度"
@@ -2217,230 +2121,245 @@ msgstr "バンクの接続"
 msgid "Socket designation of the memory bank"
 msgstr "メモリバンクのソケット指定"
 
-#: harddrake2:120
+#: harddrake2:118
+#, fuzzy, c-format
+msgid "Location"
+msgstr "アクション"
+
+#: harddrake2:119
+#, c-format
+msgid "Size"
+msgstr "サイズ"
+
+#: harddrake2:119
+#, fuzzy, c-format
+msgid "Size of the memory device"
+msgstr "メモリデバイスのタイプ"
+
+#: harddrake2:124
 #, c-format
 msgid "Device file"
 msgstr "デバイスファイル"
 
-#: harddrake2:120
+#: harddrake2:124
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr "このデバイスファイルはマウス用のカーネルドライバとの通信に使います"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "Emulated wheel"
 msgstr "ホイールをエミュレート"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "ホイールをエミュレートする/しない"
 
-#: harddrake2:122
+#: harddrake2:126
 #, c-format
 msgid "the type of the mouse"
 msgstr "マウスの種類"
 
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "the name of the mouse"
 msgstr "マウスの名前"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "Number of buttons"
 msgstr "ボタンの数"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "the number of buttons the mouse has"
 msgstr "マウスボタンの数"
 
-#: harddrake2:125
+#: harddrake2:129
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "マウスを接続しているバスの種類"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr "X11 が使用するマウスプロトコル"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "グラフィカルデスクトップが使用するマウスプロトコル"
 
-#: harddrake2:130
+#: harddrake2:134
 #, c-format
 msgid "Identification"
 msgstr "識別"
 
-#: harddrake2:135 harddrake2:150
+#: harddrake2:139 harddrake2:154
 #, c-format
 msgid "Connection"
 msgstr "接続"
 
-#: harddrake2:145
+#: harddrake2:149
 #, c-format
 msgid "Performances"
 msgstr "パフォーマンス"
 
-#: harddrake2:152
+#: harddrake2:156
 #, c-format
 msgid "Device"
 msgstr "デバイス"
 
-#: harddrake2:153
+#: harddrake2:157
 #, c-format
 msgid "Partitions"
 msgstr "パーティション"
 
-#: harddrake2:158
+#: harddrake2:162
 #, c-format
 msgid "Features"
 msgstr "機能"
 
-#: harddrake2:179
+#: harddrake2:183
 #, c-format
 msgid "Autodetect _modems"
 msgstr "モデムを自動検出(_M)"
 
-#: harddrake2:180
+#: harddrake2:184
 #, c-format
 msgid "Autodetect parallel _zip drives"
 msgstr "パラレル Zip ドライブを自動検出(_Z)"
 
-#: harddrake2:184
+#: harddrake2:188
 #, c-format
 msgid "Hardware Configuration"
 msgstr "ハードウェアの設定"
 
-#: harddrake2:193
+#: harddrake2:197
 #, c-format
 msgid "_Options"
 msgstr "オプション(_O)"
 
-#: harddrake2:194 harddrake2:195
+#: harddrake2:198 harddrake2:199
 #, c-format
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
-#: harddrake2:195
-#, fuzzy, c-format
+#: harddrake2:199
+#, c-format
 msgid "<control>H"
-msgstr "<control>Q"
+msgstr "<control>H"
 
-#: harddrake2:196
+#: harddrake2:200
 #, c-format
 msgid "_Fields description"
 msgstr "項目の説明(_F)"
 
-#: harddrake2:197
+#: harddrake2:201
 #, c-format
 msgid "_Report Bug"
 msgstr "バグを報告(_R)"
 
-#: harddrake2:198
+#: harddrake2:202
 #, c-format
 msgid "_About..."
 msgstr "情報(_A)..."
 
-#: harddrake2:242
+#: harddrake2:246
 #, c-format
 msgid "Detected hardware"
 msgstr "検出したハードウェア"
 
-#: harddrake2:245 scannerdrake:283
+#: harddrake2:249 scannerdrake:283
 #, c-format
 msgid "Information"
 msgstr "情報"
 
-#: harddrake2:247
+#: harddrake2:251
 #, c-format
 msgid "Set current driver options"
 msgstr "現在のドライバのオプションを設定"
 
-#: harddrake2:254
+#: harddrake2:257
 #, c-format
 msgid "Run config tool"
 msgstr "設定ツールを実行"
 
-#: harddrake2:280
+#: harddrake2:284
 #, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
 "information here."
 msgstr "情報を表示するには左のデバイスをクリックしてください。"
 
-#: harddrake2:300 notify-x11-free-driver-switch:13
+#: harddrake2:304 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "不明"
 
-#: harddrake2:301
+#: harddrake2:305
 #, c-format
 msgid "Unknown"
 msgstr "不明"
 
-#: harddrake2:321
+#: harddrake2:325
 #, c-format
 msgid "Misc"
 msgstr "その他"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "secondary"
 msgstr "二次"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "primary"
 msgstr "一次"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "burner"
 msgstr "ライター"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:504
+#: harddrake2:509
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "以下のパッケージをインストールします:\n"
 
-#: harddrake2:521
+#: harddrake2:525
 #, c-format
 msgid "Harddrake"
 msgstr "Harddrake"
 
-#: harddrake2:523
+#: harddrake2:528
 #, c-format
 msgid "Copyright (C) %s by %s"
 msgstr "Copyright (C) %s by %s"
 
-#: harddrake2:523 harddrake2:527
+#: harddrake2:528 harddrake2:532
 #, c-format
 msgid "Mageia"
 msgstr ""
 
-#: harddrake2:525
+#: harddrake2:530
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr "これは HardDrake %s ハードウェア設定ツールです。"
 
-#: harddrake2:540
+#: harddrake2:545
 #, c-format
 msgid "Harddrake help"
 msgstr "Harddrake のヘルプ"
 
-#: harddrake2:541
+#: harddrake2:546
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -2449,12 +2368,12 @@ msgstr ""
 "項目の説明:\n"
 "\n"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid "Select a device!"
 msgstr "デバイスを選んでください"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2744,8 +2663,7 @@ msgstr "メール警告を無効にしました。"
 msgid "Save as.."
 msgstr "名前を付けて保存"
 
-#: notify-x11-free-driver-switch:18 service_harddrake:468
-#: service_harddrake:481
+#: notify-x11-free-driver-switch:18 service_harddrake:468 service_harddrake:481
 #, c-format
 msgid "Display driver setup"
 msgstr ""
@@ -3408,6 +3326,16 @@ msgstr "言語と国の設定"
 msgid "Language & country configuration"
 msgstr "言語と国の設定"
 
+#: ../polkit/org.mageia.drakautologin.policy.in.h:1
+#, fuzzy
+msgid "Run Mageia AutoLogin Configuration"
+msgstr "起動の設定"
+
+#: ../polkit/org.mageia.drakautologin.policy.in.h:2
+#, fuzzy
+msgid "Authentication is required to run Mageia AutoLogin Configuration"
+msgstr "起動の設定"
+
 #: ../polkit/org.moondrake.drakauth.policy.in.h:1
 #, fuzzy
 msgid "Run DrakX Authentication Configuration"
@@ -3535,61 +3463,19 @@ msgstr "グラフィカルサーバの設定"
 msgid "Authentication is required to run DrakX Service Configuration"
 msgstr "グラフィカルサーバの設定"
 
-#, fuzzy
-#~ msgid "%s Bug Report Tool"
-#~ msgstr "Moondrake バグ報告ツール"
-
-#, fuzzy
-#~ msgid "%s Tools Logs"
-#~ msgstr "Moondrake ツールのログ"
-
-#, fuzzy
-#~ msgid "Configure authentication required to access %s tools"
-#~ msgstr "Moondrake ツールにアクセスするための認証方法を設定"
-
-#, fuzzy
-#~ msgid "Run Moondrake Application Security Configuration"
-#~ msgstr "メール警告を設定"
-
-#, fuzzy
-#~ msgid "Run Moondrake Authentication Configuration"
-#~ msgstr "メール警告を設定"
-
-#, fuzzy
-#~ msgid "Run Moondrake Boot Configuration"
-#~ msgstr "起動の設定"
-
-#, fuzzy
-#~ msgid "Run Moondrake Date and Time Configuration"
-#~ msgstr "メール警告を設定"
-
-#, fuzzy
-#~ msgid "Run Moondrake Font Configuration"
-#~ msgstr "言語と国の設定"
-
-#, fuzzy
-#~ msgid "Run Moondrake Hardware Configuration"
-#~ msgstr "グラフィカルサーバの設定"
-
-#, fuzzy
-#~ msgid "Run Moondrake Login Manager Configuration"
-#~ msgstr "言語と国の設定"
-
-#, fuzzy
-#~ msgid "Run Moondrake Scanner Configuration"
-#~ msgstr "グラフィカルサーバの設定"
-
-#, fuzzy
-#~ msgid "Run Moondrake Security Permissions Configuration"
-#~ msgstr "グラフィカルサーバの設定"
-
-#, fuzzy
-#~ msgid "Run Moondrake Service Configuration"
-#~ msgstr "グラフィカルサーバの設定"
-
-#, fuzzy
-#~ msgid "Run Moondrake UPS Configuration"
-#~ msgstr "UPS の設定"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
+#~ "the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a "
+#~ "console."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "注意: ISA PnP サウンドカードをお使いの場合は、alsaconf か sndconfig を使っ"
+#~ "てください。コンソールで 'alsaconf' または 'sndconfig' と入力します。"
 
 #, fuzzy
 #~ msgid "  --help                - display this help     \n"
@@ -3612,12 +3498,20 @@ msgstr "グラフィカルサーバの設定"
 #~ "\n"
 #~ "使い方: \n"
 
+#, fuzzy
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "Moondrake バグ報告ツール"
+
 #~ msgid "%s Control Center"
 #~ msgstr "%s コントロールセンター"
 
 #, fuzzy
 #~ msgid "%s Help Center"
 #~ msgstr "Moondrake ヘルプセンター"
+
+#, fuzzy
+#~ msgid "%s Tools Logs"
+#~ msgstr "Moondrake ツールのログ"
 
 #~ msgid "(default value: %s)"
 #~ msgstr "(デフォルトの設定: %s)"
@@ -3697,6 +3591,9 @@ msgstr "グラフィカルサーバの設定"
 #~ msgid "Basic options"
 #~ msgstr "基本オプション"
 
+#~ msgid "Boot Style Configuration"
+#~ msgstr "起動方式の設定"
+
 #~ msgid "Bugs"
 #~ msgstr "バグ"
 
@@ -3724,6 +3621,10 @@ msgstr "グラフィカルサーバの設定"
 #~ msgid "Coma bug"
 #~ msgstr "Coma バグ"
 
+#, fuzzy
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "Moondrake ツールにアクセスするための認証方法を設定"
+
 #~ msgid "Configure authentication required to access Mandriva tools"
 #~ msgstr "Mandriva ツールにアクセスするための認証方法を設定"
 
@@ -3743,6 +3644,9 @@ msgstr "グラフィカルサーバの設定"
 #~ msgstr ""
 #~ "コンソールで\n"
 #~ "テーマを表示"
+
+#~ msgid "Do you want to configure it now?"
+#~ msgstr "設定しますか？"
 
 #, fuzzy
 #~ msgid "DrakX Online"
@@ -3789,6 +3693,12 @@ msgstr "グラフィカルサーバの設定"
 
 #~ msgid "Gradient type"
 #~ msgstr "グラデーションの種類"
+
+#~ msgid "Graphical boot mode:"
+#~ msgstr "グラフィカル起動モード:"
+
+#~ msgid "Graphical boot theme selection"
+#~ msgstr "グラフィカル起動のテーマを選択"
 
 #~ msgid "Halt bug"
 #~ msgstr "Halt バグ"
@@ -3895,6 +3805,9 @@ msgstr "グラフィカルサーバの設定"
 #~ "が、このレベルではシステムは完全に閉ざされ、セキュリティ機能が最大に設定さ"
 #~ "れます。"
 
+#~ msgid "Install themes"
+#~ msgstr "テーマをインストール"
+
 #~ msgid "Is FPU present"
 #~ msgstr "FPU の状態を表示"
 
@@ -3916,23 +3829,34 @@ msgstr "グラフィカルサーバの設定"
 #~ msgid "Network Options"
 #~ msgstr "ネットワークオプション"
 
-#, fuzzy
 #~ msgid ""
 #~ "No Sound Card has been detected on your machine. Please verify that a "
-#~ "Linux-supported Sound Card is correctly plugged in"
+#~ "Linux-supported Sound Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
-#~ "テレビカードを検出できませんでした。Linux がサポートしている\n"
-#~ "ビデオ/テレビカードが正しく挿入されているか確認してください。\n"
+#~ "サウンドカードを検出できませんでした。Linux がサポートしている\n"
+#~ "サウンドカードが正しく差し込まれているか確認してください。\n"
 #~ "\n"
 #~ "\n"
 #~ "弊社のハードウェアデータベースを参照してください:\n"
 #~ "\n"
+#~ "\n"
 #~ "http://www.mandrivalinux.com/en/hardware.php3"
 
-#, fuzzy
 #~ msgid ""
 #~ "No TV Card has been detected on your machine. Please verify that a Linux-"
-#~ "supported Video/TV Card is correctly plugged in."
+#~ "supported Video/TV Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
 #~ "テレビカードを検出できませんでした。Linux がサポートしている\n"
 #~ "ビデオ/テレビカードが正しく挿入されているか確認してください。\n"
@@ -3950,6 +3874,16 @@ msgstr "グラフィカルサーバの設定"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "定期的なチェック"
+
+#~ msgid ""
+#~ "Please choose a video mode, it will be applied to each of the boot "
+#~ "entries selected below.\n"
+#~ "Be sure your video card supports the mode you choose."
+#~ msgstr ""
+#~ "ビデオモードを選んでください。下に選択されているブートエントリに適用されま"
+#~ "す。\n"
+#~ "指定したモードがお使いのビデオカードでサポートされていることを必ず確認して"
+#~ "ください。"
 
 #~ msgid "Please enter a theme name"
 #~ msgstr "テーマの名前を入力してください"
@@ -3969,6 +3903,46 @@ msgstr "グラフィカルサーバの設定"
 #~ msgid "Progress box transparency"
 #~ msgstr "進行ボックスの透明度"
 
+#, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "メール警告を設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "メール警告を設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "メール警告を設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "言語と国の設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "グラフィカルサーバの設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "言語と国の設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "グラフィカルサーバの設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "グラフィカルサーバの設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "グラフィカルサーバの設定"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "UPS の設定"
+
 #~ msgid "Save theme"
 #~ msgstr "テーマを保存"
 
@@ -3983,6 +3957,9 @@ msgstr "グラフィカルサーバの設定"
 
 #~ msgid "Select Mandriva Tool:"
 #~ msgstr "Mandriva のツールを選択:"
+
+#~ msgid "Silent"
+#~ msgstr "サイレントモード"
 
 #~ msgid "Silent bootsplash"
 #~ msgstr "サイレント起動スプラッシュ"
@@ -4012,6 +3989,9 @@ msgstr "グラフィカルサーバの設定"
 #~ msgid "Text color"
 #~ msgstr "テキストの色"
 
+#~ msgid "Text only"
+#~ msgstr "テキストのみ"
+
 #~ msgid "Text size"
 #~ msgstr "テキストのサイズ"
 
@@ -4038,6 +4018,9 @@ msgstr "グラフィカルサーバの設定"
 #~ msgid "The width of the progress bar"
 #~ msgstr "進行バーの幅"
 
+#~ msgid "Theme"
+#~ msgstr "テーマ"
+
 #~ msgid "Theme name"
 #~ msgstr "テーマ名"
 
@@ -4047,8 +4030,14 @@ msgstr "グラフィカルサーバの設定"
 #~ msgid "Unknown/Others"
 #~ msgstr "不明/その他"
 
+#~ msgid "Verbose"
+#~ msgstr "詳細モード"
+
 #~ msgid "Verbose bootsplash"
 #~ msgstr "詳細起動スプラッシュ"
+
+#~ msgid "Video mode"
+#~ msgstr "ビデオモード"
 
 #~ msgid "Whether the FPU has an irq vector"
 #~ msgstr "FPU に irq vector があるかどうか"
@@ -4064,6 +4053,13 @@ msgstr "グラフィカルサーバの設定"
 
 #~ msgid "Y coordinate of the text"
 #~ msgstr "テキストの Y 座標"
+
+#~ msgid ""
+#~ "Your system bootloader is not in framebuffer mode. To activate graphical "
+#~ "boot, select a graphic video mode from the bootloader configuration tool."
+#~ msgstr ""
+#~ "ブートローダがフレームバッファモードではありません。グラフィカルブートを有"
+#~ "効にするには、ブートローダ設定ツールでビデオモードを選んでください。"
 
 #~ msgid "choose image"
 #~ msgstr "画像を選択"

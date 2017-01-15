@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 2007\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:28+0100\n"
+"POT-Creation-Date: 2017-01-15 15:12+0100\n"
 "PO-Revision-Date: 2009-04-09 11:56+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: display_help:53 display_help:58 drakbug:173 drakperm:134
+#: display_help:50 display_help:55 drakbug:173 drakperm:134
 #, c-format
 msgid "Help"
 msgstr "帮助"
 
-#: display_help:66 drakbug:178 drakfont:507
+#: display_help:63 drakbug:178 drakfont:507
 #, c-format
 msgid "Close"
 msgstr "关闭"
@@ -33,140 +33,64 @@ msgstr "关闭"
 msgid "Authentication"
 msgstr "认证"
 
-#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213
-#: drakfont:226 drakfont:264 finish-install:133 logdrake:177 logdrake:453
-#: logdrake:458 scannerdrake:56 scannerdrake:98 scannerdrake:139
-#: scannerdrake:197 scannerdrake:256 scannerdrake:726 scannerdrake:737
-#: scannerdrake:876 scannerdrake:887 scannerdrake:957
+#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213 drakfont:226
+#: drakfont:264 finish-install:133 logdrake:177 logdrake:453 logdrake:458
+#: scannerdrake:56 scannerdrake:98 scannerdrake:139 scannerdrake:197
+#: scannerdrake:256 scannerdrake:726 scannerdrake:737 scannerdrake:876
+#: scannerdrake:887 scannerdrake:957
 #, c-format
 msgid "Error"
 msgstr "错误"
 
-#: drakboot:54
-#, c-format
-msgid "No bootloader found, creating a new configuration"
-msgstr "未找到引导程序，创建新配置"
-
-#: drakboot:89 harddrake2:191 logdrake:77
+#: drakautologin:54 harddrake2:195 logdrake:77
 #, c-format
 msgid "_File"
 msgstr "文件(_F)"
 
-#: drakboot:90 harddrake2:192 logdrake:78 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:78 logdrake:79
 #, c-format
 msgid "_Quit"
 msgstr "退出(_Q)"
 
-#: drakboot:90 harddrake2:192 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:79
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
-#: drakboot:138
-#, c-format
-msgid "Text only"
-msgstr "只有文本"
-
-#: drakboot:139
-#, c-format
-msgid "Verbose"
-msgstr "详细"
-
-#: drakboot:140
-#, c-format
-msgid "Silent"
-msgstr "静默"
-
-#: drakboot:146 drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381
-#: drakups:27 harddrake2:504 localedrake:45 scannerdrake:48 scannerdrake:51
-#: scannerdrake:294 scannerdrake:299 scannerdrake:951
-#, c-format
-msgid "Warning"
-msgstr "警告"
-
-#: drakboot:147
-#, c-format
-msgid ""
-"Your system bootloader is not in framebuffer mode. To activate graphical "
-"boot, select a graphic video mode from the bootloader configuration tool."
-msgstr ""
-"您的系统引导程序并不位于帧缓存模式。要激活图形化引导程序, 请在引导程序配置工"
-"具中选择图形视频模式。"
-
-#: drakboot:148
-#, c-format
-msgid "Do you want to configure it now?"
-msgstr "您想要现在配置吗?"
-
-#: drakboot:157
-#, c-format
-msgid "Install themes"
-msgstr "安装主题"
-
-#: drakboot:159
-#, c-format
-msgid "Graphical boot theme selection"
-msgstr "图形化启动主题选择"
-
-#: drakboot:162
-#, c-format
-msgid "Graphical boot mode:"
-msgstr "图形化启动模式:"
-
-#: drakboot:164
-#, c-format
-msgid "Theme"
-msgstr "主题"
-
-#: drakboot:198
+#: drakautologin:100
 #, c-format
 msgid "Default user"
 msgstr "默认用户"
 
-#: drakboot:199
+#: drakautologin:101
 #, c-format
 msgid "Default desktop"
 msgstr "默认桌面"
 
-#: drakboot:202
+#: drakautologin:104
 #, c-format
 msgid "No, I do not want autologin"
 msgstr "否, 不要自动登录"
 
-#: drakboot:203
+#: drakautologin:105
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "是, 以指定用户的身份自动登录到指定桌面"
 
-#: drakboot:210
+#: drakautologin:112
 #, c-format
 msgid "System mode"
 msgstr "系统模式"
 
-#: drakboot:213
+#: drakautologin:115
 #, c-format
 msgid "Launch the graphical environment when your system starts"
 msgstr "系统启动时进入图形环境"
 
-#: drakboot:268
+#: drakboot:41
 #, c-format
-msgid "Boot Style Configuration"
-msgstr "启动风格配置"
-
-#: drakboot:270 drakboot:274
-#, c-format
-msgid "Video mode"
-msgstr "显示模式"
-
-#: drakboot:271
-#, c-format
-msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries "
-"selected below.\n"
-"Be sure your video card supports the mode you choose."
-msgstr ""
-"请选择视频模式, 该模式将应用到下面所选的每个启动项。\n"
-"请确定您的视频卡支持您所选的模式。"
+msgid "No bootloader found, creating a new configuration"
+msgstr "未找到引导程序，创建新配置"
 
 #: drakbug:52 drakbug:140
 #, c-format
@@ -199,9 +123,9 @@ msgid "Standalone Tools"
 msgstr "独立工具"
 
 #: drakbug:72 drakbug:73
-#, fuzzy, c-format
+#, c-format
 msgid "%s Online"
-msgstr "Moondrake 在线"
+msgstr "%s 在线"
 
 #: drakbug:72 drakbug:73 drakbug:99 draksec:169
 #, fuzzy, c-format
@@ -229,9 +153,9 @@ msgid "Configuration Wizards"
 msgstr "配置向导"
 
 #: drakbug:99
-#, fuzzy, c-format
+#, c-format
 msgid "Select %s Tool:"
-msgstr "选择 Moondrake 工具:"
+msgstr "选择 %s 工具："
 
 #: drakbug:100
 #, c-format
@@ -248,7 +172,7 @@ msgid "Find Package"
 msgstr "查找软件包"
 
 #: drakbug:104
-#, fuzzy, c-format
+#, c-format
 msgid "Browse"
 msgstr "浏览"
 
@@ -268,9 +192,9 @@ msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "“%s”程序已崩溃，并抛出如下错误："
 
 #: drakbug:144
-#, fuzzy, c-format
+#, c-format
 msgid "Used theme: %s"
-msgstr "用户: %s"
+msgstr "使用的主题：%s"
 
 #: drakbug:146
 #, c-format
@@ -322,6 +246,13 @@ msgstr "没有安装"
 #, c-format
 msgid "Package not installed"
 msgstr "软件包未安装"
+
+#: drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381 drakups:27
+#: harddrake2:509 localedrake:45 scannerdrake:48 scannerdrake:51
+#: scannerdrake:294 scannerdrake:299 scannerdrake:951
+#, c-format
+msgid "Warning"
+msgstr "警告"
 
 #: drakbug:251
 #, c-format
@@ -445,7 +376,7 @@ msgstr "%s 已经存在，其内容将丢失"
 msgid "Could not get the list of available channels"
 msgstr "无法获得可用频道的列表"
 
-#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:358
+#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:362
 #: scannerdrake:63 scannerdrake:67 scannerdrake:75 scannerdrake:316
 #: scannerdrake:365 scannerdrake:501 scannerdrake:505 scannerdrake:527
 #: service_harddrake:426
@@ -494,16 +425,21 @@ msgid "SLIM (Simple Display Manager)"
 msgstr "XDM (X 显示管理器)"
 
 #: drakedm:45
+#, fuzzy, c-format
+msgid "SDDM (Simple Desktop Display Manager)"
+msgstr "XDM (X 显示管理器)"
+
+#: drakedm:46
 #, c-format
 msgid "XDM (X Display Manager)"
 msgstr "XDM (X 显示管理器)"
 
-#: drakedm:56
+#: drakedm:57
 #, c-format
 msgid "Choosing a display manager"
 msgstr "选择其它显示管理器"
 
-#: drakedm:57
+#: drakedm:58
 #, c-format
 msgid ""
 "X11 Display Manager allows you to graphically log\n"
@@ -513,12 +449,12 @@ msgstr ""
 "X11 显示管理器允许您以图形化方式登录到您的系统, 使用 X 窗口系统和在您的本\n"
 "地机器同时跑很多个不同的 X 连接服务。"
 
-#: drakedm:80
+#: drakedm:81
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
 msgstr "更改已经完成, 您想要重新启动 dm 服务吗?"
 
-#: drakedm:81
+#: drakedm:82
 #, c-format
 msgid ""
 "You are going to close all running programs and lose your current session. "
@@ -693,7 +629,7 @@ msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:532 harddrake2:531
+#: drakfont:532 harddrake2:536
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr "Funda Wang <fundawang@gmail.com>\n"
@@ -711,7 +647,7 @@ msgstr "Ghostscript"
 #: drakfont:554
 #, c-format
 msgid "LibreOffice"
-msgstr ""
+msgstr "LibreOffice"
 
 #: drakfont:555
 #, c-format
@@ -768,12 +704,12 @@ msgstr "安装"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "您确定想要卸载下列字体吗?"
 
-#: drakfont:688 draksec:59 harddrake2:302
+#: drakfont:688 draksec:59 harddrake2:306
 #, c-format
 msgid "Yes"
 msgstr "是"
 
-#: drakfont:690 draksec:58 harddrake2:303
+#: drakfont:690 draksec:58 harddrake2:307
 #, c-format
 msgid "No"
 msgstr "否"
@@ -1194,9 +1130,9 @@ msgid "Software Management"
 msgstr "软件管理"
 
 #: draksec:169
-#, fuzzy, c-format
+#, c-format
 msgid "%s Update"
-msgstr "Moondrake 更新"
+msgstr "%s 更新"
 
 #: draksec:170
 #, c-format
@@ -1318,42 +1254,13 @@ msgstr "启动"
 msgid "No Sound Card detected!"
 msgstr "没有发现声卡！"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: draksound:51
+#: draksound:50
 #, c-format
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
-"supported Sound Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Sound Card is correctly plugged in"
 msgstr ""
-"在您的机器上没有检测到声卡。请检查您是否正确的安装了您的声卡, 它是否被 Linux "
-"支持。\n"
-"\n"
-"\n"
-"您可以访问硬件数据库: \n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/zh_CN/hardware.php3"
-
-#: draksound:58
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
-"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
-msgstr ""
-"\n"
-"\n"
-"\n"
-"注意: 如果您的声卡是 ISA 即插即用的，您需要使用 sndconfig 程序。只需在控制台"
-"中输入“alsaconf”或“sndconfig”。"
+"在您的机器上找不到任何声卡。请确保您已经正确安装了 Linux 支持的声卡设备"
 
 #: drakups:71
 #, c-format
@@ -1398,7 +1305,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "自动检测"
 
-#: drakups:99 harddrake2:358
+#: drakups:99 harddrake2:362
 #, c-format
 msgid "Detection in progress"
 msgstr "检测进行中"
@@ -1483,12 +1390,12 @@ msgid "UPS devices"
 msgstr "UPS 设备"
 
 #: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:116
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "Name"
 msgstr "名称"
 
-#: drakups:249 harddrake2:139
+#: drakups:249 harddrake2:143
 #, c-format
 msgid "Driver"
 msgstr "驱动程序"
@@ -1563,27 +1470,13 @@ msgstr "欢迎使用 UPS 配置工具"
 msgid "No TV Card detected!"
 msgstr "没有发现电视卡！"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: drakxtv:68
+#: drakxtv:67
 #, c-format
 msgid ""
 "No TV Card has been detected on your machine. Please verify that a Linux-"
-"supported Video/TV Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Video/TV Card is correctly plugged in."
 msgstr ""
-"没有在您的计算机上检测到电视卡。请检查是否正确安装了 Linux 支持的视频/电视"
-"卡。\n"
-"\n"
-"\n"
-"请您访问我们的硬件数据库:\n"
-"\n"
-"\n"
-"http://www.mandarkelinux.com/zh_CN/hardware.php3"
+"在您的机器上找不到任何电视卡。请确保您已经正确安装了 Linux 支持的电视卡设备"
 
 #: finish-install:57
 #, c-format
@@ -1598,7 +1491,7 @@ msgstr "请选择您使用的键盘布局。"
 #: finish-install:106
 #, c-format
 msgid "Testing your connection..."
-msgstr ""
+msgstr "正在测试您的连接..."
 
 #: finish-install:187
 #, c-format
@@ -1670,7 +1563,7 @@ msgstr "替代的驱动程序"
 msgid "the list of alternative drivers for this sound card"
 msgstr "这个声卡的替代驱动程序列表"
 
-#: harddrake2:33 harddrake2:125
+#: harddrake2:33 harddrake2:129
 #, c-format
 msgid "Bus"
 msgstr "总线"
@@ -1681,7 +1574,7 @@ msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "设备所插在的物理总线(例如:PCI, USB, ...)"
 
-#: harddrake2:36 harddrake2:151
+#: harddrake2:36 harddrake2:155
 #, c-format
 msgid "Bus identification"
 msgstr "总线标识"
@@ -1847,9 +1740,9 @@ msgid "the PCI domain of the device"
 msgstr "设备的 PCI 域名"
 
 #: harddrake2:60
-#, fuzzy, c-format
+#, c-format
 msgid "PCI revision"
-msgstr "权限"
+msgstr "PCI 版本"
 
 #: harddrake2:61
 #, c-format
@@ -2000,35 +1893,35 @@ msgstr "标志"
 msgid "CPU flags reported by the kernel"
 msgstr "核心报告的 CPU 标志"
 
-#: harddrake2:80 harddrake2:144
-#, fuzzy, c-format
+#: harddrake2:80 harddrake2:148
+#, c-format
 msgid "Cores"
-msgstr "关闭"
+msgstr "核心"
 
 #: harddrake2:80
 #, c-format
 msgid "CPU cores"
-msgstr ""
+msgstr "CPU 内核"
 
 #: harddrake2:81
-#, fuzzy, c-format
+#, c-format
 msgid "Core ID"
-msgstr "厂家 ID"
+msgstr "核心 ID"
 
 #: harddrake2:82
 #, c-format
 msgid "Physical ID"
-msgstr ""
+msgstr "物理  ID"
 
 #: harddrake2:83
 #, c-format
 msgid "ACPI ID"
-msgstr ""
+msgstr "ACPI ID"
 
 #: harddrake2:84
-#, fuzzy, c-format
+#, c-format
 msgid "Siblings"
-msgstr "设置"
+msgstr "逻辑核心"
 
 #: harddrake2:85
 #, c-format
@@ -2123,12 +2016,12 @@ msgstr "通常是磁盘序列号"
 #: harddrake2:103
 #, c-format
 msgid "Target id number"
-msgstr ""
+msgstr "目标 ID 编号"
 
 #: harddrake2:103
 #, c-format
 msgid "the SCSI target identifier"
-msgstr ""
+msgstr "SCSI 目标端的标识符"
 
 #: harddrake2:104
 #, c-format
@@ -2136,14 +2029,14 @@ msgid "Logical unit number"
 msgstr "逻辑单元号"
 
 #: harddrake2:104
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
 "uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
-"SCSI 目标号(LUN)。连接到主机的 SCSI 设备将通过通道号、目标 ID 和逻辑单元号加"
-"以唯一标识。"
+"SCSI 逻辑单元编号（LUN）。连接到主机上的 SCSI 设备由一个唯一的通道号、一个目"
+"标 ID 和一个逻辑单元编号所标识。"
 
 #. -PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
 #: harddrake2:111
@@ -2166,7 +2059,7 @@ msgstr "启用容量"
 msgid "Enabled size of the memory bank"
 msgstr "已启用的内存容量"
 
-#: harddrake2:113 harddrake2:122
+#: harddrake2:113 harddrake2:126
 #, c-format
 msgid "Type"
 msgstr "类型"
@@ -2176,12 +2069,12 @@ msgstr "类型"
 msgid "type of the memory device"
 msgstr "内存条类型"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed"
 msgstr "速度"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed of the memory bank"
 msgstr "内存速度"
@@ -2196,230 +2089,245 @@ msgstr "内存条连接"
 msgid "Socket designation of the memory bank"
 msgstr "内存条的插座设计"
 
-#: harddrake2:120
+#: harddrake2:118
+#, c-format
+msgid "Location"
+msgstr "位置"
+
+#: harddrake2:119
+#, c-format
+msgid "Size"
+msgstr "大小"
+
+#: harddrake2:119
+#, c-format
+msgid "Size of the memory device"
+msgstr "内存设备大小"
+
+#: harddrake2:124
 #, c-format
 msgid "Device file"
 msgstr "设备文件"
 
-#: harddrake2:120
+#: harddrake2:124
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr "内核驱动程序与鼠标进行通讯的设备文件"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "Emulated wheel"
 msgstr "模拟滚轮"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "是否模拟滚轮"
 
-#: harddrake2:122
+#: harddrake2:126
 #, c-format
 msgid "the type of the mouse"
 msgstr "鼠标类型"
 
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "the name of the mouse"
 msgstr "鼠标名称"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "Number of buttons"
 msgstr "按钮数目"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "the number of buttons the mouse has"
 msgstr "鼠标按钮数"
 
-#: harddrake2:125
+#: harddrake2:129
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "请选择您鼠标所连接的总线类型"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr "X11 所用的鼠标协议"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "图形桌面使用鼠标的协议"
 
-#: harddrake2:130
+#: harddrake2:134
 #, c-format
 msgid "Identification"
 msgstr "标识"
 
-#: harddrake2:135 harddrake2:150
+#: harddrake2:139 harddrake2:154
 #, c-format
 msgid "Connection"
 msgstr "连接"
 
-#: harddrake2:145
+#: harddrake2:149
 #, c-format
 msgid "Performances"
 msgstr "性能"
 
-#: harddrake2:152
+#: harddrake2:156
 #, c-format
 msgid "Device"
 msgstr "设备"
 
-#: harddrake2:153
+#: harddrake2:157
 #, c-format
 msgid "Partitions"
 msgstr "分区"
 
-#: harddrake2:158
+#: harddrake2:162
 #, c-format
 msgid "Features"
 msgstr "特性"
 
-#: harddrake2:179
+#: harddrake2:183
 #, c-format
 msgid "Autodetect _modems"
 msgstr "自动检测调制解调器(_M)"
 
-#: harddrake2:180
+#: harddrake2:184
 #, c-format
 msgid "Autodetect parallel _zip drives"
 msgstr "自动检测并口 zip 驱动器(_Z)"
 
-#: harddrake2:184
+#: harddrake2:188
 #, c-format
 msgid "Hardware Configuration"
 msgstr "硬件配置"
 
-#: harddrake2:193
+#: harddrake2:197
 #, c-format
 msgid "_Options"
 msgstr "选项(_O)"
 
-#: harddrake2:194 harddrake2:195
+#: harddrake2:198 harddrake2:199
 #, c-format
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: harddrake2:195
-#, fuzzy, c-format
+#: harddrake2:199
+#, c-format
 msgid "<control>H"
-msgstr "<control>Q"
+msgstr "<control>H"
 
-#: harddrake2:196
+#: harddrake2:200
 #, c-format
 msgid "_Fields description"
 msgstr "域描述(_F)"
 
-#: harddrake2:197
+#: harddrake2:201
 #, c-format
 msgid "_Report Bug"
 msgstr "故障报告(_R)"
 
-#: harddrake2:198
+#: harddrake2:202
 #, c-format
 msgid "_About..."
 msgstr "关于(_A)..."
 
-#: harddrake2:242
+#: harddrake2:246
 #, c-format
 msgid "Detected hardware"
 msgstr "检测到的硬件"
 
-#: harddrake2:245 scannerdrake:283
+#: harddrake2:249 scannerdrake:283
 #, c-format
 msgid "Information"
 msgstr "信息"
 
-#: harddrake2:247
+#: harddrake2:251
 #, c-format
 msgid "Set current driver options"
 msgstr "设定当前驱动程序选项"
 
-#: harddrake2:254
+#: harddrake2:257
 #, c-format
 msgid "Run config tool"
 msgstr "运行配置工具"
 
-#: harddrake2:280
+#: harddrake2:284
 #, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
 "information here."
 msgstr "单击左侧树中的设备, 就可在此显示其信息。"
 
-#: harddrake2:300 notify-x11-free-driver-switch:13
+#: harddrake2:304 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "未知"
 
-#: harddrake2:301
+#: harddrake2:305
 #, c-format
 msgid "Unknown"
 msgstr "未知"
 
-#: harddrake2:321
+#: harddrake2:325
 #, c-format
 msgid "Misc"
 msgstr "杂项"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "secondary"
 msgstr "次要"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "primary"
 msgstr "主"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "burner"
 msgstr "刻录机"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:504
+#: harddrake2:509
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "下列软件包需要安装: \n"
 
-#: harddrake2:521
+#: harddrake2:525
 #, c-format
 msgid "Harddrake"
 msgstr "Drak 硬件配置"
 
-#: harddrake2:523
+#: harddrake2:528
 #, c-format
 msgid "Copyright (C) %s by %s"
 msgstr "版权 (C) %s %s"
 
-#: harddrake2:523 harddrake2:527
+#: harddrake2:528 harddrake2:532
 #, c-format
 msgid "Mageia"
 msgstr ""
 
-#: harddrake2:525
+#: harddrake2:530
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr "这是 HardDrake，%s 的硬件配置工具。"
 
-#: harddrake2:540
+#: harddrake2:545
 #, c-format
 msgid "Harddrake help"
 msgstr "“Drak 硬件配置”帮助"
 
-#: harddrake2:541
+#: harddrake2:546
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -2428,12 +2336,12 @@ msgstr ""
 "各个域的描述:\n"
 "\n"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid "Select a device!"
 msgstr "请选择设备！"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2685,14 +2593,14 @@ msgid "and enter the name (or the IP) of the SMTP server you wish to use"
 msgstr "请输入您想使用的 SMTP 服务器的名称(或 IP 地址)"
 
 #: logdrake:448
-#, fuzzy, c-format
+#, c-format
 msgid "Email address"
-msgstr "IP 地址"
+msgstr "电子邮件地址"
 
 #: logdrake:449
-#, fuzzy, c-format
+#, c-format
 msgid "Email server"
-msgstr "Samba 服务器"
+msgstr "电子邮件服务器"
 
 #: logdrake:453
 #, c-format
@@ -2722,21 +2630,20 @@ msgstr "向导已经成功禁用了邮件提醒。"
 msgid "Save as.."
 msgstr "另存为..."
 
-#: notify-x11-free-driver-switch:18 service_harddrake:468
-#: service_harddrake:481
+#: notify-x11-free-driver-switch:18 service_harddrake:468 service_harddrake:481
 #, c-format
 msgid "Display driver setup"
-msgstr ""
+msgstr "显示驱动设置"
 
 #: notify-x11-free-driver-switch:20
 #, c-format
 msgid "The display driver has been automatically switched to '%s'."
-msgstr ""
+msgstr "此显示驱动已被自动切换至“%s”。"
 
 #: notify-x11-free-driver-switch:21
 #, c-format
 msgid "Reason: %s."
-msgstr ""
+msgstr "原因：%s。"
 
 #: scannerdrake:48
 #, c-format
@@ -3016,12 +2923,13 @@ msgid ""
 msgstr "更多信息请参看驱动程序的手册页。运行“man sane-%s”可阅读。"
 
 #: scannerdrake:406 scannerdrake:415
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"此后您就可以从应用程序菜单的“多媒体/图像”中使用“XSane”或“Kooka”来扫描文档了。"
+"之后，您可以使用“XSane”或（应用程序菜单中）多媒体/图形分类下的“%s”来检查文"
+"档。"
 
 #: scannerdrake:410
 #, c-format
@@ -3050,14 +2958,14 @@ msgid "Congratulations!"
 msgstr "恭喜!"
 
 #: scannerdrake:418
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" or \"%s\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"您的 %s 已经配置好了。\n"
-"现在您可以从应用程序菜单的“多媒体/图像”中使用“XSane”或“Kooka”来扫描文档。"
+"您已配置 %s。\n"
+"您现在即可使用“XSane”或（应用程序菜单中）多媒体/图形分类下的“%s”来检查文档。"
 
 #: scannerdrake:443
 #, c-format
@@ -3256,19 +3164,19 @@ msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "无法安装共享您的扫描仪所需的软件包。"
 
 #: service_harddrake:173
-#, fuzzy, c-format
+#, c-format
 msgid "The graphics card '%s' is no longer supported by driver '%s'"
-msgstr "%2$s 版本不支持 %1$s。"
+msgstr "显卡“%s”已不再被驱动“%s”所支持"
 
 #: service_harddrake:183
 #, c-format
 msgid "New release, reconfiguring X for %s"
-msgstr ""
+msgstr "新版本，为 %s 配置 X 服务"
 
 #: service_harddrake:274
 #, c-format
 msgid "The proprietary kernel driver was not found for X.org driver '%s'"
-msgstr ""
+msgstr "找不到与 X.org 驱动“%s”相应的内核驱动"
 
 #: service_harddrake:313
 #, c-format
@@ -3308,7 +3216,7 @@ msgstr "硬件检测进行中"
 #: service_harddrake:447 service_harddrake:452
 #, c-format
 msgid "Display driver issue"
-msgstr ""
+msgstr "有关显示驱动的问题"
 
 #: service_harddrake:448
 #, c-format
@@ -3318,6 +3226,8 @@ msgid ""
 "boot process. Startup of the X server may now fail as that option was not "
 "specified."
 msgstr ""
+"当前配置的显示驱动需要您在引导时使用“nokmsboot”参数，以阻止加载内核的 KMS 驱"
+"动。由于尚未指定该选项，系统可能无法加载 X 服务。"
 
 #: service_harddrake:453
 #, c-format
@@ -3326,16 +3236,18 @@ msgid ""
 "driver the X server is configured to use. Startup of the X server may now "
 "fail."
 msgstr ""
+"所加载的内核显示驱动模块与 X 服务的驱动有冲突，但仍被配置为使用状态。系统可能"
+"无法加载 X 服务。"
 
 #: service_harddrake:468 service_harddrake:481
 #, c-format
 msgid "The system has to be rebooted due to a display driver change."
-msgstr ""
+msgstr "由于改变了显示驱动，系统必须重启。"
 
 #: service_harddrake:469 service_harddrake:482
 #, c-format
 msgid "Press Cancel within %d seconds to abort."
-msgstr ""
+msgstr "在 %d 秒内按“取消”，可以放弃操作。"
 
 #: ../menu/harddrake.desktop.in.h:1
 msgid "HardDrake"
@@ -3364,6 +3276,16 @@ msgstr "区域设置"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Language & country configuration"
 msgstr "语言和国家配置"
+
+#: ../polkit/org.mageia.drakautologin.policy.in.h:1
+#, fuzzy
+msgid "Run Mageia AutoLogin Configuration"
+msgstr "启动配置"
+
+#: ../polkit/org.mageia.drakautologin.policy.in.h:2
+#, fuzzy
+msgid "Authentication is required to run Mageia AutoLogin Configuration"
+msgstr "启动配置"
 
 #: ../polkit/org.moondrake.drakauth.policy.in.h:1
 #, fuzzy
@@ -3492,67 +3414,9 @@ msgstr "图形服务器配置"
 msgid "Authentication is required to run DrakX Service Configuration"
 msgstr "图形服务器配置"
 
-#, fuzzy
-#~ msgid "%s Bug Report Tool"
-#~ msgstr "Moondrake 故障报告工具"
-
-#, fuzzy
-#~ msgid "%s Tools Logs"
-#~ msgstr "Moondrake 工具日志"
-
-#, fuzzy
-#~ msgid "Configure authentication required to access %s tools"
-#~ msgstr "配置访问 Moondrake 工具所需的身份认证"
-
-#, fuzzy
-#~ msgid "Run Moondrake Application Security Configuration"
-#~ msgstr "邮件提醒设定"
-
-#, fuzzy
-#~ msgid "Run Moondrake Authentication Configuration"
-#~ msgstr "邮件提醒设定"
-
-#, fuzzy
-#~ msgid "Run Moondrake Boot Configuration"
-#~ msgstr "启动配置"
-
-#, fuzzy
-#~ msgid "Run Moondrake Date and Time Configuration"
-#~ msgstr "邮件提醒设定"
-
-#, fuzzy
-#~ msgid "Run Moondrake Font Configuration"
-#~ msgstr "语言和国家配置"
-
-#, fuzzy
-#~ msgid "Run Moondrake Hardware Configuration"
-#~ msgstr "图形服务器配置"
-
-#, fuzzy
-#~ msgid "Run Moondrake Login Manager Configuration"
-#~ msgstr "语言和国家配置"
-
-#, fuzzy
-#~ msgid "Run Moondrake Scanner Configuration"
-#~ msgstr "图形服务器配置"
-
-#, fuzzy
-#~ msgid "Run Moondrake Security Permissions Configuration"
-#~ msgstr "图形服务器配置"
-
-#, fuzzy
-#~ msgid "Run Moondrake Service Configuration"
-#~ msgstr "图形服务器配置"
-
-#, fuzzy
-#~ msgid "Run Moondrake UPS Configuration"
-#~ msgstr "UPS 配置"
-
-#, fuzzy
 #~ msgid "  --help                - display this help     \n"
-#~ msgstr " --help                - 显示此帮助\n"
+#~ msgstr "  --help                - 显示此帮助\n"
 
-#, fuzzy
 #~ msgid ""
 #~ " drakhelp 0.1\n"
 #~ "Copyright (C) %s Mandriva.\n"
@@ -3562,18 +3426,127 @@ msgstr "图形服务器配置"
 #~ "\n"
 #~ "Usage: \n"
 #~ msgstr ""
-#~ " Drak 帮助 0.1\n"
-#~ "版权 (C) %s Moondrake.\n"
-#~ "这是自由软件, 可按照 GNU GPL 协议条款再发放。\n"
+#~ " drakhelp 0.1\n"
+#~ "Copyright (C) %s Mandriva.\n"
+#~ "版权所有 (C) %s Moondrake。\n"
+#~ "本软件是自由软件，您可以在遵循 GNU 通用公共授权协议的前提下对其进行再分"
+#~ "发。\n"
 #~ "\n"
-#~ "用法: \n"
+#~ "用法：\n"
+
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "%s 软件缺陷报告工具"
+
+#~ msgid "%s Help Center"
+#~ msgstr "%s 帮助中心"
+
+#~ msgid "%s Tools Logs"
+#~ msgstr "%s 工具日志"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Application Security "
+#~ "Configuration"
+#~ msgstr "运行 Moondrake 程序安全配置需要身份验证"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Authentication Configuration"
+#~ msgstr "运行 Moondrake 认证配置需要身份验证"
+
+#~ msgid "Authentication is required to run Moondrake Boot Configuration"
+#~ msgstr "运行 Moondrake 引导配置需要身份验证"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Date and Time Configuration"
+#~ msgstr "需要进行认证以运行 Moondrake 日期与时间墙配置"
+
+#~ msgid "Authentication is required to run Moondrake Disk Layout Editor"
+#~ msgstr "运行 Moondrake 磁盘布局编辑器需要身份验证"
+
+#~ msgid "Authentication is required to run Moondrake Font Configuration"
+#~ msgstr "运行 Moondrake 字体配置需要身份验证"
+
+#~ msgid "Authentication is required to run Moondrake Hardware Configuration"
+#~ msgstr "运行 Moondrake 硬件配置需要身份验证"
+
+#~ msgid "Authentication is required to run Moondrake Log Viewer"
+#~ msgstr "需要进行认证以运行 Moondrake 日志查看器"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Login Manager Configuration"
+#~ msgstr "需要进行认证以运行 Moondrake 登录管理器"
+
+#~ msgid "Authentication is required to run Moondrake Scanner Configuration"
+#~ msgstr "运行 Moondrake 扫描器配置需要身份验证"
+
+#~ msgid ""
+#~ "Authentication is required to run Moondrake Security Permissions "
+#~ "Configuration"
+#~ msgstr "运行 Moondrake 安全权限配置需要身份验证"
+
+#~ msgid "Authentication is required to run Moondrake Service Configuration"
+#~ msgstr "需要进行认证以运行 Moondrake 服务配置"
+
+#~ msgid "Authentication is required to run Moondrake UPS Configuration"
+#~ msgstr "运行 Moondrake UPS 配置需要身份验证"
+
+#~ msgid "Configure authentication required to access %s tools"
+#~ msgstr "配置访问 %s 工具前需要进行的认证"
+
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "运行 Moondrake 程序安全配置"
+
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "运行 Moondrake 认证配置"
+
+#~ msgid "Run Moondrake Boot Configuration"
+#~ msgstr "运行 Moondrake 引导配置"
+
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "运行 Moondrake 日期和时间配置"
+
+#~ msgid "Run Moondrake Disk Layout Editor"
+#~ msgstr "运行 Moondrake 磁盘布局编辑器"
+
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "运行 Moondrake 字体配置"
+
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "运行 Moondrake 硬件配置"
+
+#~ msgid "Run Moondrake Log Viewer"
+#~ msgstr "运行 Moondrake 日志查看器"
+
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "运行 Moondrake 登录管理器"
+
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "运行 Moondrake 扫描器配置"
+
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "运行 Moondrake 安全权限配置"
+
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "运行 Moondrake 服务配置"
+
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "运行Moondrake UPS 配置"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
+#~ "the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a "
+#~ "console."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "注意: 如果您的声卡是 ISA 即插即用的，您需要使用 sndconfig 程序。只需在控制"
+#~ "台中输入“alsaconf”或“sndconfig”。"
 
 #~ msgid "%s Control Center"
 #~ msgstr "%s 控制中心"
-
-#, fuzzy
-#~ msgid "%s Help Center"
-#~ msgstr "Moondrake 帮助中心"
 
 #~ msgid "(default value: %s)"
 #~ msgstr "(默认值: %s)"
@@ -3653,6 +3626,9 @@ msgstr "图形服务器配置"
 #~ msgid "Basic options"
 #~ msgstr "基本选项"
 
+#~ msgid "Boot Style Configuration"
+#~ msgstr "启动风格配置"
+
 #~ msgid "Bugs"
 #~ msgstr "错误"
 
@@ -3700,6 +3676,9 @@ msgstr "图形服务器配置"
 #~ "在控制台\n"
 #~ "显示主题"
 
+#~ msgid "Do you want to configure it now?"
+#~ msgstr "您想要现在配置吗?"
+
 #, fuzzy
 #~ msgid "DrakX Online"
 #~ msgstr "Mandriva 在线"
@@ -3742,8 +3721,17 @@ msgstr "图形服务器配置"
 #~ msgid "Final resolution"
 #~ msgstr "最终分辨率"
 
+#~ msgid "Finishing install"
+#~ msgstr "完成安装"
+
 #~ msgid "Gradient type"
 #~ msgstr "渐变类型"
+
+#~ msgid "Graphical boot mode:"
+#~ msgstr "图形化启动模式:"
+
+#~ msgid "Graphical boot theme selection"
+#~ msgstr "图形化启动主题选择"
 
 #~ msgid "Halt bug"
 #~ msgstr "死锁错误"
@@ -3846,6 +3834,9 @@ msgstr "图形服务器配置"
 #~ "<span foreground=\"royalblue3\">苛刻</span>：本级别与前一级别类似, 但系统"
 #~ "几乎完全封闭, 安全特性达到最高"
 
+#~ msgid "Install themes"
+#~ msgstr "安装主题"
+
 #~ msgid "Is FPU present"
 #~ msgstr "FPU 存在"
 
@@ -3867,24 +3858,34 @@ msgstr "图形服务器配置"
 #~ msgid "Network Options"
 #~ msgstr "网络选项"
 
-#, fuzzy
 #~ msgid ""
 #~ "No Sound Card has been detected on your machine. Please verify that a "
-#~ "Linux-supported Sound Card is correctly plugged in"
+#~ "Linux-supported Sound Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
-#~ "没有在您的计算机上检测到电视卡。请检查是否正确安装了 Linux 支持的视频/电视"
-#~ "卡。\n"
+#~ "在您的机器上没有检测到声卡。请检查您是否正确的安装了您的声卡, 它是否被 "
+#~ "Linux 支持。\n"
 #~ "\n"
 #~ "\n"
-#~ "请您访问我们的硬件数据库:\n"
+#~ "您可以访问硬件数据库: \n"
 #~ "\n"
 #~ "\n"
-#~ "http://www.mandarkelinux.com/zh_CN/hardware.php3"
+#~ "http://www.mandrivalinux.com/zh_CN/hardware.php3"
 
-#, fuzzy
 #~ msgid ""
 #~ "No TV Card has been detected on your machine. Please verify that a Linux-"
-#~ "supported Video/TV Card is correctly plugged in."
+#~ "supported Video/TV Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
 #~ "没有在您的计算机上检测到电视卡。请检查是否正确安装了 Linux 支持的视频/电视"
 #~ "卡。\n"
@@ -3903,6 +3904,14 @@ msgstr "图形服务器配置"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "定期检查"
+
+#~ msgid ""
+#~ "Please choose a video mode, it will be applied to each of the boot "
+#~ "entries selected below.\n"
+#~ "Be sure your video card supports the mode you choose."
+#~ msgstr ""
+#~ "请选择视频模式, 该模式将应用到下面所选的每个启动项。\n"
+#~ "请确定您的视频卡支持您所选的模式。"
 
 #~ msgid "Please enter a theme name"
 #~ msgstr "请输入要主题名称"
@@ -3937,6 +3946,9 @@ msgstr "图形服务器配置"
 #~ msgid "Select Mandriva Tool:"
 #~ msgstr "选择 Mandriva 工具:"
 
+#~ msgid "Silent"
+#~ msgstr "静默"
+
 #~ msgid "Silent bootsplash"
 #~ msgstr "静默启动屏幕"
 
@@ -3963,6 +3975,9 @@ msgstr "图形服务器配置"
 #~ msgid "Text color"
 #~ msgstr "文本颜色"
 
+#~ msgid "Text only"
+#~ msgstr "只有文本"
+
 #~ msgid "Text size"
 #~ msgstr "文本大小"
 
@@ -3987,8 +4002,16 @@ msgstr "图形服务器配置"
 #~ msgid "The width of the progress bar"
 #~ msgstr "进度条的宽度"
 
+#~ msgid "Theme"
+#~ msgstr "主题"
+
 #~ msgid "Theme name"
 #~ msgstr "主题名称"
+
+#~ msgid ""
+#~ "This system will be rebooted\n"
+#~ "for the changes to take effect!"
+#~ msgstr "系统将会重启，以便更改生效！"
 
 #~ msgid "Unable to load image file %s"
 #~ msgstr "无法装入图像文件 %s"
@@ -3996,8 +4019,14 @@ msgstr "图形服务器配置"
 #~ msgid "Unknown/Others"
 #~ msgstr "未知/其它"
 
+#~ msgid "Verbose"
+#~ msgstr "详细"
+
 #~ msgid "Verbose bootsplash"
 #~ msgstr "详细静默屏幕"
+
+#~ msgid "Video mode"
+#~ msgstr "显示模式"
 
 #~ msgid "Whether the FPU has an irq vector"
 #~ msgstr "FPU 是否有 IRQ 向量"
@@ -4013,6 +4042,13 @@ msgstr "图形服务器配置"
 
 #~ msgid "Y coordinate of the text"
 #~ msgstr "文本的 Y 坐标"
+
+#~ msgid ""
+#~ "Your system bootloader is not in framebuffer mode. To activate graphical "
+#~ "boot, select a graphic video mode from the bootloader configuration tool."
+#~ msgstr ""
+#~ "您的系统引导程序并不位于帧缓存模式。要激活图形化引导程序, 请在引导程序配置"
+#~ "工具中选择图形视频模式。"
 
 #~ msgid "choose image"
 #~ msgstr "选择图像"

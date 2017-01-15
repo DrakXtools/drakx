@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:28+0100\n"
+"POT-Creation-Date: 2017-01-15 15:12+0100\n"
 "PO-Revision-Date: 2001-09-10 14:24GMT+7\n"
 "Last-Translator: Wachara Chinsettawong <wachara@yahoo.com>\n"
 "Language-Team: Thai <th@li.org>\n"
@@ -16,12 +16,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.5\n"
 
-#: display_help:53 display_help:58 drakbug:173 drakperm:134
+#: display_help:50 display_help:55 drakbug:173 drakperm:134
 #, c-format
 msgid "Help"
 msgstr "ช่วยเหลือ"
 
-#: display_help:66 drakbug:178 drakfont:507
+#: display_help:63 drakbug:178 drakfont:507
 #, c-format
 msgid "Close"
 msgstr "ปิด"
@@ -31,135 +31,63 @@ msgstr "ปิด"
 msgid "Authentication"
 msgstr "การตรวจสอบสิทธิ์การใช้งาน"
 
-#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213
-#: drakfont:226 drakfont:264 finish-install:133 logdrake:177 logdrake:453
-#: logdrake:458 scannerdrake:56 scannerdrake:98 scannerdrake:139
-#: scannerdrake:197 scannerdrake:256 scannerdrake:726 scannerdrake:737
-#: scannerdrake:876 scannerdrake:887 scannerdrake:957
+#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213 drakfont:226
+#: drakfont:264 finish-install:133 logdrake:177 logdrake:453 logdrake:458
+#: scannerdrake:56 scannerdrake:98 scannerdrake:139 scannerdrake:197
+#: scannerdrake:256 scannerdrake:726 scannerdrake:737 scannerdrake:876
+#: scannerdrake:887 scannerdrake:957
 #, c-format
 msgid "Error"
 msgstr "ผิดพลาด"
 
-#: drakboot:54
-#, c-format
-msgid "No bootloader found, creating a new configuration"
-msgstr ""
-
-#: drakboot:89 harddrake2:191 logdrake:77
+#: drakautologin:54 harddrake2:195 logdrake:77
 #, c-format
 msgid "_File"
 msgstr "_ไฟล์"
 
-#: drakboot:90 harddrake2:192 logdrake:78 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:78 logdrake:79
 #, c-format
 msgid "_Quit"
 msgstr "_ออก"
 
-#: drakboot:90 harddrake2:192 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:79
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
-#: drakboot:138
-#, c-format
-msgid "Text only"
-msgstr "ข้อความเท่านั้น"
-
-#: drakboot:139
-#, c-format
-msgid "Verbose"
-msgstr ""
-
-#: drakboot:140
-#, c-format
-msgid "Silent"
-msgstr ""
-
-#: drakboot:146 drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381
-#: drakups:27 harddrake2:504 localedrake:45 scannerdrake:48 scannerdrake:51
-#: scannerdrake:294 scannerdrake:299 scannerdrake:951
-#, c-format
-msgid "Warning"
-msgstr "คำเตือน"
-
-#: drakboot:147
-#, c-format
-msgid ""
-"Your system bootloader is not in framebuffer mode. To activate graphical "
-"boot, select a graphic video mode from the bootloader configuration tool."
-msgstr ""
-
-#: drakboot:148
-#, fuzzy, c-format
-msgid "Do you want to configure it now?"
-msgstr "คุณต้องการทดสอบการคอนฟิกหรือไม่"
-
-#: drakboot:157
-#, fuzzy, c-format
-msgid "Install themes"
-msgstr "ติดตั้งระบบ"
-
-#: drakboot:159
-#, fuzzy, c-format
-msgid "Graphical boot theme selection"
-msgstr "เลือกการเชื่อมต่อกับเครื่องพิมพ์"
-
-#: drakboot:162
-#, fuzzy, c-format
-msgid "Graphical boot mode:"
-msgstr "เลือกการเชื่อมต่อกับเครื่องพิมพ์"
-
-#: drakboot:164
-#, c-format
-msgid "Theme"
-msgstr "ชุดตกแต่ง"
-
-#: drakboot:198
+#: drakautologin:100
 #, fuzzy, c-format
 msgid "Default user"
 msgstr "เครื่องพิมพ์โลคอล (ต่อติดกับตัวเครื่อง)"
 
-#: drakboot:199
+#: drakautologin:101
 #, fuzzy, c-format
 msgid "Default desktop"
 msgstr "Default"
 
-#: drakboot:202
+#: drakautologin:104
 #, c-format
 msgid "No, I do not want autologin"
 msgstr "ไม่ต้องการ autologin"
 
-#: drakboot:203
+#: drakautologin:105
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "ใช่แล้ว ผมต้องการ autologin สำหรับผู้ใช้รายนี้"
 
-#: drakboot:210
+#: drakautologin:112
 #, c-format
 msgid "System mode"
 msgstr "System mode"
 
-#: drakboot:213
+#: drakautologin:115
 #, c-format
 msgid "Launch the graphical environment when your system starts"
 msgstr "รัน X-Window เมื่อเริ่มทำงาน"
 
-#: drakboot:268
+#: drakboot:41
 #, c-format
-msgid "Boot Style Configuration"
-msgstr "Boot Style Configuration"
-
-#: drakboot:270 drakboot:274
-#, c-format
-msgid "Video mode"
-msgstr "โหมดของการแสดงผล"
-
-#: drakboot:271
-#, c-format
-msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries "
-"selected below.\n"
-"Be sure your video card supports the mode you choose."
+msgid "No bootloader found, creating a new configuration"
 msgstr ""
 
 #: drakbug:52 drakbug:140
@@ -313,6 +241,13 @@ msgstr "ออกจากการติดตั้ง"
 msgid "Package not installed"
 msgstr "ออกจากการติดตั้ง"
 
+#: drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381 drakups:27
+#: harddrake2:509 localedrake:45 scannerdrake:48 scannerdrake:51
+#: scannerdrake:294 scannerdrake:299 scannerdrake:951
+#, c-format
+msgid "Warning"
+msgstr "คำเตือน"
+
 #: drakbug:251
 #, c-format
 msgid ""
@@ -432,7 +367,7 @@ msgstr ""
 msgid "Could not get the list of available channels"
 msgstr ""
 
-#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:358
+#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:362
 #: scannerdrake:63 scannerdrake:67 scannerdrake:75 scannerdrake:316
 #: scannerdrake:365 scannerdrake:501 scannerdrake:505 scannerdrake:527
 #: service_harddrake:426
@@ -482,15 +417,20 @@ msgstr ""
 
 #: drakedm:45
 #, c-format
+msgid "SDDM (Simple Desktop Display Manager)"
+msgstr ""
+
+#: drakedm:46
+#, c-format
 msgid "XDM (X Display Manager)"
 msgstr ""
 
-#: drakedm:56
+#: drakedm:57
 #, c-format
 msgid "Choosing a display manager"
 msgstr ""
 
-#: drakedm:57
+#: drakedm:58
 #, c-format
 msgid ""
 "X11 Display Manager allows you to graphically log\n"
@@ -498,14 +438,14 @@ msgid ""
 "several different X sessions on your local machine at the same time."
 msgstr ""
 
-#: drakedm:80
+#: drakedm:81
 #, fuzzy, c-format
 msgid "The change is done, do you want to restart the dm service?"
 msgstr ""
 "แพกเกจนี้จำเป็นต้องถูก upgrade\n"
 "คุณแน่ใจว่าจะไม่เลือกมันหรือ"
 
-#: drakedm:81
+#: drakedm:82
 #, c-format
 msgid ""
 "You are going to close all running programs and lose your current session. "
@@ -675,7 +615,7 @@ msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:532 harddrake2:531
+#: drakfont:532 harddrake2:536
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr ""
@@ -750,12 +690,12 @@ msgstr "ติดตั้ง"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr ""
 
-#: drakfont:688 draksec:59 harddrake2:302
+#: drakfont:688 draksec:59 harddrake2:306
 #, c-format
 msgid "Yes"
 msgstr "ใช่"
 
-#: drakfont:690 draksec:58 harddrake2:303
+#: drakfont:690 draksec:58 harddrake2:307
 #, c-format
 msgid "No"
 msgstr "ไม่ต้อง"
@@ -1202,9 +1142,9 @@ msgid "UPS Configuration"
 msgstr "การคอนฟิก Internet"
 
 #: draksec:177
-#, fuzzy, c-format
+#, c-format
 msgid "Network Configuration"
-msgstr "การคอนฟิก"
+msgstr "การคอนฟิกระบบเน็ตเวิร์ก"
 
 #: draksec:178
 #, c-format
@@ -1252,7 +1192,7 @@ msgid "Services"
 msgstr "เซอร์วิส"
 
 #: draksec:189
-#, fuzzy, c-format
+#, c-format
 msgid "Users"
 msgstr "ผู้ใช้"
 
@@ -1267,9 +1207,9 @@ msgid "Hardware"
 msgstr "ฮาร์ดแวร์"
 
 #: draksec:225
-#, fuzzy, c-format
+#, c-format
 msgid "Network"
-msgstr "อ๊อปชั่นของโมดูล:"
+msgstr "ระบบเครือข่าย"
 
 #: draksec:226
 #, c-format
@@ -1286,28 +1226,11 @@ msgstr "บู๊ต"
 msgid "No Sound Card detected!"
 msgstr "ไม่เชื่อมต่อ"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: draksound:51
+#: draksound:50
 #, c-format
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
-"supported Sound Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
-msgstr ""
-
-#: draksound:58
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
-"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
+"supported Sound Card is correctly plugged in"
 msgstr ""
 
 #: drakups:71
@@ -1347,15 +1270,15 @@ msgstr ""
 msgid "Autodetection"
 msgstr "ใช้ auto detection"
 
-#: drakups:99 harddrake2:358
+#: drakups:99 harddrake2:362
 #, fuzzy, c-format
 msgid "Detection in progress"
 msgstr "ค้นหาเจอบน port %s"
 
 #: drakups:118 drakups:157 logdrake:465 logdrake:471
-#, fuzzy, c-format
+#, c-format
 msgid "Congratulations"
-msgstr "ขอแสดงความยินดี"
+msgstr "ยินดีด้วย"
 
 #: drakups:119
 #, c-format
@@ -1430,12 +1353,12 @@ msgid "UPS devices"
 msgstr "อุปกรณ์"
 
 #: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:116
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "Name"
 msgstr "ชื่อ"
 
-#: drakups:249 harddrake2:139
+#: drakups:249 harddrake2:143
 #, c-format
 msgid "Driver"
 msgstr "Driver"
@@ -1510,18 +1433,11 @@ msgstr "ทดสอบการคอนฟิก"
 msgid "No TV Card detected!"
 msgstr ""
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: drakxtv:68
+#: drakxtv:67
 #, c-format
 msgid ""
 "No TV Card has been detected on your machine. Please verify that a Linux-"
-"supported Video/TV Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Video/TV Card is correctly plugged in."
 msgstr ""
 
 #: finish-install:57
@@ -1537,7 +1453,7 @@ msgstr "คุณต้องการเลือกคีย์บอร์ด
 #: finish-install:106
 #, c-format
 msgid "Testing your connection..."
-msgstr ""
+msgstr "ทดสอบ connection..."
 
 #: finish-install:187
 #, c-format
@@ -1609,7 +1525,7 @@ msgstr "กำลังพิมพ์กระดาษทดสอบ"
 msgid "the list of alternative drivers for this sound card"
 msgstr ""
 
-#: harddrake2:33 harddrake2:125
+#: harddrake2:33 harddrake2:129
 #, c-format
 msgid "Bus"
 msgstr ""
@@ -1620,7 +1536,7 @@ msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 
-#: harddrake2:36 harddrake2:151
+#: harddrake2:36 harddrake2:155
 #, fuzzy, c-format
 msgid "Bus identification"
 msgstr "การตรวจสอบสิทธิ์การใช้งาน"
@@ -1932,7 +1848,7 @@ msgstr "แฟล็ก"
 msgid "CPU flags reported by the kernel"
 msgstr ""
 
-#: harddrake2:80 harddrake2:144
+#: harddrake2:80 harddrake2:148
 #, fuzzy, c-format
 msgid "Cores"
 msgstr "ปิด"
@@ -1973,9 +1889,9 @@ msgid "generation of the cpu (eg: 8 for Pentium III, ...)"
 msgstr ""
 
 #: harddrake2:87 harddrake2:88
-#, fuzzy, c-format
+#, c-format
 msgid "Model name"
-msgstr "ชี่อ module"
+msgstr "แบบ"
 
 #: harddrake2:87 harddrake2:88
 #, c-format
@@ -2094,7 +2010,7 @@ msgstr "enable"
 msgid "Enabled size of the memory bank"
 msgstr ""
 
-#: harddrake2:113 harddrake2:122
+#: harddrake2:113 harddrake2:126
 #, c-format
 msgid "Type"
 msgstr "ประเภท"
@@ -2104,12 +2020,12 @@ msgstr "ประเภท"
 msgid "type of the memory device"
 msgstr "ชื่อเครื่องพิมพ์"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed"
 msgstr "ความเร็ว"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed of the memory bank"
 msgstr ""
@@ -2124,242 +2040,257 @@ msgstr "cable connection"
 msgid "Socket designation of the memory bank"
 msgstr ""
 
-#: harddrake2:120
+#: harddrake2:118
+#, fuzzy, c-format
+msgid "Location"
+msgstr "การกระทำ"
+
+#: harddrake2:119
+#, c-format
+msgid "Size"
+msgstr "ขนาด"
+
+#: harddrake2:119
+#, fuzzy, c-format
+msgid "Size of the memory device"
+msgstr "ชื่อเครื่องพิมพ์"
+
+#: harddrake2:124
 #, fuzzy, c-format
 msgid "Device file"
 msgstr "เลือกไฟล์"
 
-#: harddrake2:120
+#: harddrake2:124
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "Emulated wheel"
 msgstr ""
 
-#: harddrake2:121
+#: harddrake2:125
 #, fuzzy, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "Logitech MouseMan"
 
-#: harddrake2:122
+#: harddrake2:126
 #, fuzzy, c-format
 msgid "the type of the mouse"
 msgstr "กรุณาทดสอบเม้าส์"
 
-#: harddrake2:123
+#: harddrake2:127
 #, fuzzy, c-format
 msgid "the name of the mouse"
 msgstr "2 buttons"
 
-#: harddrake2:124
+#: harddrake2:128
 #, fuzzy, c-format
 msgid "Number of buttons"
 msgstr "2 buttons"
 
-#: harddrake2:124
+#: harddrake2:128
 #, fuzzy, c-format
 msgid "the number of buttons the mouse has"
 msgstr "2 buttons"
 
-#: harddrake2:125
+#: harddrake2:129
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "เม้าส์ของคุณต่อเข้ากับพอร์ตอนุกรมใด"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr ""
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr ""
 
-#: harddrake2:130
+#: harddrake2:134
 #, fuzzy, c-format
 msgid "Identification"
 msgstr "การตรวจสอบสิทธิ์การใช้งาน"
 
-#: harddrake2:135 harddrake2:150
+#: harddrake2:139 harddrake2:154
 #, c-format
 msgid "Connection"
 msgstr "การเชื่อมต่อ"
 
-#: harddrake2:145
+#: harddrake2:149
 #, fuzzy, c-format
 msgid "Performances"
 msgstr "ข้อกำหนด: "
 
-#: harddrake2:152
+#: harddrake2:156
 #, c-format
 msgid "Device"
 msgstr "อุปกรณ์"
 
-#: harddrake2:153
+#: harddrake2:157
 #, c-format
 msgid "Partitions"
 msgstr "พาร์ติชัน"
 
-#: harddrake2:158
+#: harddrake2:162
 #, c-format
 msgid "Features"
 msgstr "คุณสมบัติ"
 
-#: harddrake2:179
+#: harddrake2:183
 #, fuzzy, c-format
 msgid "Autodetect _modems"
 msgstr "ใช้ auto detection"
 
-#: harddrake2:180
+#: harddrake2:184
 #, c-format
 msgid "Autodetect parallel _zip drives"
 msgstr ""
 
-#: harddrake2:184
+#: harddrake2:188
 #, fuzzy, c-format
 msgid "Hardware Configuration"
 msgstr "การคอนฟิกระบบเน็ตเวิร์ก"
 
-#: harddrake2:193
+#: harddrake2:197
 #, c-format
 msgid "_Options"
 msgstr "_อ็อปชั่น"
 
-#: harddrake2:194 harddrake2:195
+#: harddrake2:198 harddrake2:199
 #, c-format
 msgid "_Help"
 msgstr "_ช่วยเหลือ"
 
-#: harddrake2:195
+#: harddrake2:199
 #, fuzzy, c-format
 msgid "<control>H"
 msgstr "<control>Q"
 
-#: harddrake2:196
+#: harddrake2:200
 #, fuzzy, c-format
 msgid "_Fields description"
 msgstr "รายละเอียด"
 
-#: harddrake2:197
+#: harddrake2:201
 #, c-format
 msgid "_Report Bug"
 msgstr "_แจ้ง Bug"
 
-#: harddrake2:198
+#: harddrake2:202
 #, c-format
 msgid "_About..."
 msgstr "_เกี่ยวกับ..."
 
-#: harddrake2:242
+#: harddrake2:246
 #, fuzzy, c-format
 msgid "Detected hardware"
 msgstr "อ่านต่อข้อมูลของฮาร์ดแวร์"
 
-#: harddrake2:245 scannerdrake:283
+#: harddrake2:249 scannerdrake:283
 #, c-format
 msgid "Information"
 msgstr "ข้อมูล"
 
-#: harddrake2:247
+#: harddrake2:251
 #, c-format
 msgid "Set current driver options"
 msgstr ""
 
-#: harddrake2:254
+#: harddrake2:257
 #, c-format
 msgid "Run config tool"
 msgstr ""
 
-#: harddrake2:280
+#: harddrake2:284
 #, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
 "information here."
 msgstr ""
 
-#: harddrake2:300 notify-x11-free-driver-switch:13
+#: harddrake2:304 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "ไม่รู้จัก"
 
-#: harddrake2:301
+#: harddrake2:305
 #, c-format
 msgid "Unknown"
 msgstr "ไม่รู้จัก"
 
-#: harddrake2:321
+#: harddrake2:325
 #, c-format
 msgid "Misc"
 msgstr "เบ็ดเตล็ด"
 
-#: harddrake2:404
+#: harddrake2:408
 #, fuzzy, c-format
 msgid "secondary"
 msgstr "%d วินาที"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "primary"
 msgstr ""
 
-#: harddrake2:408
+#: harddrake2:412
 #, fuzzy, c-format
 msgid "burner"
 msgstr "เครื่องพิมพ์"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "DVD"
 msgstr "ดีวีดี"
 
-#: harddrake2:504
+#: harddrake2:509
 #, fuzzy, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "แพ็คเก็จเหล่านี้กำลังจะถูกติดตั้ง"
 
-#: harddrake2:521
-#, fuzzy, c-format
+#: harddrake2:525
+#, c-format
 msgid "Harddrake"
-msgstr "ฮาร์ดแวร์"
+msgstr "HardDrake"
 
-#: harddrake2:523
+#: harddrake2:528
 #, c-format
 msgid "Copyright (C) %s by %s"
 msgstr ""
 
-#: harddrake2:523 harddrake2:527
+#: harddrake2:528 harddrake2:532
 #, c-format
 msgid "Mageia"
 msgstr ""
 
-#: harddrake2:525
+#: harddrake2:530
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr ""
 
-#: harddrake2:540
+#: harddrake2:545
 #, c-format
 msgid "Harddrake help"
 msgstr ""
 
-#: harddrake2:541
+#: harddrake2:546
 #, c-format
 msgid ""
 "Description of the fields:\n"
 "\n"
 msgstr ""
 
-#: harddrake2:548
+#: harddrake2:553
 #, fuzzy, c-format
 msgid "Select a device!"
 msgstr "เลือกกราฟฟิคการ์ด"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2402,14 +2333,14 @@ msgstr "<control>S"
 msgid ""
 "_:this is the auth.log log file\n"
 "Authentication"
-msgstr ""
+msgstr "การตรวจสอบสิทธิ์การใช้งาน"
 
 #: logdrake:118
 #, c-format
 msgid ""
 "_:this is the user.log log file\n"
 "User"
-msgstr ""
+msgstr "ผู้ใช้"
 
 #: logdrake:119
 #, c-format
@@ -2644,8 +2575,7 @@ msgstr ""
 msgid "Save as.."
 msgstr "บันทึกแฟ้มเป็น"
 
-#: notify-x11-free-driver-switch:18 service_harddrake:468
-#: service_harddrake:481
+#: notify-x11-free-driver-switch:18 service_harddrake:468 service_harddrake:481
 #, c-format
 msgid "Display driver setup"
 msgstr ""
@@ -3266,6 +3196,16 @@ msgstr "ค่าติดตั้ง"
 msgid "Language & country configuration"
 msgstr "การคอนฟิก"
 
+#: ../polkit/org.mageia.drakautologin.policy.in.h:1
+#, fuzzy
+msgid "Run Mageia AutoLogin Configuration"
+msgstr "การคอนฟิก"
+
+#: ../polkit/org.mageia.drakautologin.policy.in.h:2
+#, fuzzy
+msgid "Authentication is required to run Mageia AutoLogin Configuration"
+msgstr "การคอนฟิก"
+
 #: ../polkit/org.moondrake.drakauth.policy.in.h:1
 #, fuzzy
 msgid "Run DrakX Authentication Configuration"
@@ -3393,60 +3333,16 @@ msgstr "การปรับแต่ง LAN"
 msgid "Authentication is required to run DrakX Service Configuration"
 msgstr "การปรับแต่ง LAN"
 
-#, fuzzy
-#~ msgid "%s Tools Logs"
-#~ msgstr "Control Center"
-
-#, fuzzy
-#~ msgid "Run Moondrake Application Security Configuration"
-#~ msgstr "Boot Style Configuration"
-
-#, fuzzy
-#~ msgid "Run Moondrake Authentication Configuration"
-#~ msgstr "Boot Style Configuration"
-
-#, fuzzy
-#~ msgid "Run Moondrake Boot Configuration"
-#~ msgstr "การคอนฟิก"
-
-#, fuzzy
-#~ msgid "Run Moondrake Date and Time Configuration"
-#~ msgstr "การปรับแต่ง LAN"
-
-#, fuzzy
-#~ msgid "Run Moondrake Font Configuration"
-#~ msgstr "การคอนฟิก"
-
-#, fuzzy
-#~ msgid "Run Moondrake Hardware Configuration"
-#~ msgstr "การปรับแต่ง LAN"
-
-#, fuzzy
-#~ msgid "Run Moondrake Login Manager Configuration"
-#~ msgstr "การคอนฟิก"
-
-#, fuzzy
-#~ msgid "Run Moondrake Scanner Configuration"
-#~ msgstr "การปรับแต่ง LAN"
-
-#, fuzzy
-#~ msgid "Run Moondrake Security Permissions Configuration"
-#~ msgstr "การปรับแต่ง LAN"
-
-#, fuzzy
-#~ msgid "Run Moondrake Service Configuration"
-#~ msgstr "การปรับแต่ง LAN"
-
-#, fuzzy
-#~ msgid "Run Moondrake UPS Configuration"
-#~ msgstr "การคอนฟิก Internet"
-
 #~ msgid "%s Control Center"
 #~ msgstr "%s ฐานควบคุม"
 
 #, fuzzy
 #~ msgid "%s Help Center"
 #~ msgstr "Moondrake ฐานควบคุม"
+
+#, fuzzy
+#~ msgid "%s Tools Logs"
+#~ msgstr "Control Center"
 
 #, fuzzy
 #~ msgid "(default value: %s)"
@@ -3543,6 +3439,9 @@ msgstr "การปรับแต่ง LAN"
 #~ msgid "Background color"
 #~ msgstr "สีพื้นหลัง"
 
+#~ msgid "Boot Style Configuration"
+#~ msgstr "Boot Style Configuration"
+
 #, fuzzy
 #~ msgid "Bugs"
 #~ msgstr "สิงหาคม"
@@ -3565,6 +3464,10 @@ msgstr "การปรับแต่ง LAN"
 #, fuzzy
 #~ msgid "Creating auto install floppy (drivers disk)"
 #~ msgstr "กำลังเตรียมการติดตั้งลงบน floppy"
+
+#, fuzzy
+#~ msgid "Do you want to configure it now?"
+#~ msgstr "คุณต้องการทดสอบการคอนฟิกหรือไม่"
 
 #, fuzzy
 #~ msgid "Do you want to remove these packages?"
@@ -3599,6 +3502,14 @@ msgstr "การปรับแต่ง LAN"
 #~ msgid "Final resolution"
 #~ msgstr "ขนาดจอภาพ"
 
+#, fuzzy
+#~ msgid "Graphical boot mode:"
+#~ msgstr "เลือกการเชื่อมต่อกับเครื่องพิมพ์"
+
+#, fuzzy
+#~ msgid "Graphical boot theme selection"
+#~ msgstr "เลือกการเชื่อมต่อกับเครื่องพิมพ์"
+
 #~ msgid "Help/_About..."
 #~ msgstr "ช่วยเหลือ/_เกี่ยวกับ..."
 
@@ -3608,6 +3519,10 @@ msgstr "การปรับแต่ง LAN"
 #, fuzzy
 #~ msgid "Insert another blank floppy in drive %s (for drivers disk)"
 #~ msgstr "ให้ใส่แผ่นฟล้อปปี้ลงในไดรว์ %s "
+
+#, fuzzy
+#~ msgid "Install themes"
+#~ msgstr "ติดตั้งระบบ"
 
 #, fuzzy
 #~ msgid "Mandriva Linux Tools Logs"
@@ -3663,6 +3578,46 @@ msgstr "การปรับแต่ง LAN"
 #~ msgstr "จำเพาะ"
 
 #, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "Boot Style Configuration"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "Boot Style Configuration"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "การปรับแต่ง LAN"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "การคอนฟิก"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "การปรับแต่ง LAN"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "การคอนฟิก"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "การปรับแต่ง LAN"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "การปรับแต่ง LAN"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "การปรับแต่ง LAN"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "การคอนฟิก Internet"
+
+#, fuzzy
 #~ msgid "Save theme"
 #~ msgstr "ติดตั้งระบบ"
 
@@ -3689,6 +3644,9 @@ msgstr "การปรับแต่ง LAN"
 #~ msgid "Text color"
 #~ msgstr "สีข้อความ"
 
+#~ msgid "Text only"
+#~ msgstr "ข้อความเท่านั้น"
+
 #, fuzzy
 #~ msgid ""
 #~ "The following hardware packages do not seem to be useful for your system:"
@@ -3700,6 +3658,9 @@ msgstr "การปรับแต่ง LAN"
 #~ "system:"
 #~ msgstr "แพ็คเก็จเหล่านี้กำลังจะถูกติดตั้ง"
 
+#~ msgid "Theme"
+#~ msgstr "ชุดตกแต่ง"
+
 #, fuzzy
 #~ msgid "Theme name"
 #~ msgstr "ชื่อที่ใช้ในกรุ๊ป (sharename)"
@@ -3710,6 +3671,9 @@ msgstr "การปรับแต่ง LAN"
 
 #~ msgid "Userdrake"
 #~ msgstr "Userdrake"
+
+#~ msgid "Video mode"
+#~ msgstr "โหมดของการแสดงผล"
 
 #, fuzzy
 #~ msgid "choose image"

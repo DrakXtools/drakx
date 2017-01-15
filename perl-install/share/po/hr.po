@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0\n"
-"POT-Creation-Date: 2015-02-18 12:26+0100\n"
+"POT-Creation-Date: 2017-01-15 15:09+0100\n"
 "PO-Revision-Date: 2005-01-04 21:25+CET\n"
 "Last-Translator: auto\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -16,22 +16,21 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;;\n"
 "X-Generator: TransDict server\n"
 
-#: any.pm:284 any.pm:984 diskdrake/interactive.pm:642
-#: diskdrake/interactive.pm:866 diskdrake/interactive.pm:926
-#: diskdrake/interactive.pm:1044 diskdrake/interactive.pm:1274
-#: diskdrake/interactive.pm:1332 do_pkgs.pm:342 do_pkgs.pm:391
-#: harddrake/sound.pm:77 interactive.pm:712 pkgs.pm:260 pkgs.pm:269
-#: pkgs.pm:312
+#: any.pm:294 any.pm:1079 diskdrake/interactive.pm:653
+#: diskdrake/interactive.pm:877 diskdrake/interactive.pm:937
+#: diskdrake/interactive.pm:1029 diskdrake/interactive.pm:1056
+#: diskdrake/interactive.pm:1287 diskdrake/interactive.pm:1345 do_pkgs.pm:342
+#: do_pkgs.pm:391 interactive.pm:712 pkgs.pm:260 pkgs.pm:269 pkgs.pm:312
 #, c-format
 msgid "Please wait"
 msgstr "Molim pričekajte"
 
-#: any.pm:284
+#: any.pm:294
 #, fuzzy, c-format
 msgid "Bootloader installation in progress"
 msgstr "Bootloader instalacija"
 
-#: any.pm:295
+#: any.pm:305
 #, c-format
 msgid ""
 "LILO wants to assign a new Volume ID to drive %s.  However, changing\n"
@@ -43,13 +42,13 @@ msgid ""
 "\t\t\t\t\t\t\tAssign a new Volume ID?"
 msgstr ""
 
-#: any.pm:306
+#: any.pm:316
 #, c-format
 msgid "Installation of bootloader failed. The following error occurred:"
 msgstr ""
 "Instalacija bootloader-a nije uspjela. Prijavljena je slijedeća grešska:"
 
-#: any.pm:346
+#: any.pm:356
 #, fuzzy, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
@@ -64,219 +63,224 @@ msgstr ""
 "\n"
 "Sa kojeg diska želite podizati?"
 
-#: any.pm:357
+#: any.pm:367
 #, fuzzy, c-format
 msgid "Bootloader Installation"
 msgstr "Bootloader instalacija"
 
-#: any.pm:361
+#: any.pm:371
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Gdje želite instalirati bootloader?"
 
-#: any.pm:377
+#: any.pm:387
 #, fuzzy, c-format
 msgid "First sector (MBR) of drive %s"
 msgstr "Prvi sektor pogona (MBR)"
 
-#: any.pm:379
+#: any.pm:389
 #, c-format
 msgid "First sector of drive (MBR)"
 msgstr "Prvi sektor pogona (MBR)"
 
-#: any.pm:381
+#: any.pm:391
 #, fuzzy, c-format
 msgid "First sector of the root partition"
 msgstr "Prvi sektor boot particije"
 
-#: any.pm:383
+#: any.pm:393
 #, fuzzy, c-format
 msgid "On Floppy"
 msgstr "Spremi na disketu"
 
-#: any.pm:385 pkgs.pm:308 ugtk2.pm:526 ugtk3.pm:602
+#: any.pm:395 pkgs.pm:308 ugtk2.pm:526 ugtk3.pm:600
 #, c-format
 msgid "Skip"
 msgstr "Preskoči"
 
-#: any.pm:413
+#: any.pm:423
 #, c-format
 msgid "Boot Style Configuration"
 msgstr "Postava Stila Podizanja"
 
 #: any.pm:427
+#, fuzzy, c-format
+msgid "EFI System Partition"
+msgstr "Provjera autentičnosti"
+
+#: any.pm:442
 #, c-format
 msgid "Bootloader main options"
 msgstr "Glavne postavke bootloadera"
 
-#: any.pm:431
+#: any.pm:446
 #, c-format
 msgid "Bootloader"
 msgstr "Program za pokretanje sustava"
 
-#: any.pm:432
+#: any.pm:447
 #, c-format
 msgid "Bootloader to use"
 msgstr "Koristiti Bootloader"
 
-#: any.pm:435
+#: any.pm:449
 #, c-format
 msgid "Boot device"
 msgstr "Boot uređaj"
 
-#: any.pm:438
+#: any.pm:451
 #, c-format
 msgid "Main options"
-msgstr ""
+msgstr "Glavne opcije"
 
-#: any.pm:439
+#: any.pm:452
 #, c-format
 msgid "Delay before booting default image"
 msgstr "Odgoda prije bootiranja uobičajenog imagea"
 
-#: any.pm:440
+#: any.pm:453
 #, fuzzy, c-format
 msgid "Enable ACPI"
 msgstr "Omogući CD podizanje?"
 
-#: any.pm:441
+#: any.pm:454
 #, fuzzy, c-format
 msgid "Enable SMP"
 msgstr "Omogući CD podizanje?"
 
-#: any.pm:442
+#: any.pm:455
 #, fuzzy, c-format
 msgid "Enable APIC"
 msgstr "Omogući CD podizanje?"
 
-#: any.pm:444
+#: any.pm:457
 #, fuzzy, c-format
 msgid "Enable Local APIC"
 msgstr "Omogući CD podizanje?"
 
-#: any.pm:445 security/level.pm:51
+#: any.pm:458 security/level.pm:51
 #, c-format
 msgid "Security"
 msgstr "Sigurnost"
 
-#: any.pm:446 any.pm:896 any.pm:930 authentication.pm:249
+#: any.pm:459 any.pm:987 any.pm:1021 authentication.pm:249
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "Lozinka"
 
-#: any.pm:449 authentication.pm:260
+#: any.pm:462 authentication.pm:260
 #, c-format
 msgid "The passwords do not match"
 msgstr "Lozinke se ne podudaraju"
 
-#: any.pm:449 authentication.pm:260 diskdrake/interactive.pm:1498
+#: any.pm:462 authentication.pm:260 diskdrake/interactive.pm:1514
 #, c-format
 msgid "Please try again"
 msgstr "Molim pokušajte ponovo"
 
-#: any.pm:451
+#: any.pm:464
 #, fuzzy, c-format
 msgid "You cannot use a password with %s"
 msgstr ""
 "Ne možete koristiti enkriptirani datotečni sustav za točku montiranja %s"
 
-#: any.pm:455 any.pm:899 any.pm:932 authentication.pm:250
+#: any.pm:468 any.pm:990 any.pm:1023 authentication.pm:250
 #, c-format
 msgid "Password (again)"
 msgstr "Lozinka (provjera)"
 
-#: any.pm:520
+#: any.pm:533
 #, c-format
 msgid "Image"
 msgstr "Slika"
 
-#: any.pm:521 any.pm:533
+#: any.pm:534 any.pm:546
 #, c-format
 msgid "Root"
 msgstr "Korijen"
 
-#: any.pm:522
+#: any.pm:535 any.pm:673
 #, c-format
 msgid "Append"
 msgstr "Dodaj"
 
-#: any.pm:524
+#: any.pm:537
 #, c-format
 msgid "Xen append"
 msgstr ""
 
-#: any.pm:526
+#: any.pm:539
 #, c-format
 msgid "Requires password to boot"
 msgstr ""
 
-#: any.pm:527
+#: any.pm:540 any.pm:674
 #, c-format
 msgid "Video mode"
 msgstr "Video mod"
 
-#: any.pm:528
+#: any.pm:541
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:529
+#: any.pm:542
 #, fuzzy, c-format
 msgid "Network profile"
 msgstr "Mrežni međusklop"
 
-#: any.pm:537 diskdrake/interactive.pm:411
+#: any.pm:550 diskdrake/interactive.pm:414
 #, c-format
 msgid "Label"
 msgstr "Oznaka"
 
-#: any.pm:539 harddrake/v4l.pm:438
+#: any.pm:552 any.pm:671 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "Uobičajeno"
 
-#: any.pm:547
+#: any.pm:560
 #, c-format
 msgid "Empty label not allowed"
 msgstr "Prazna oznaka nije dozvoljena"
 
-#: any.pm:548
+#: any.pm:561
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "Morate odrediti sliku kernela"
 
-#: any.pm:548
+#: any.pm:561
 #, c-format
 msgid "You must specify a root partition"
 msgstr "Morate odrediti root particiju"
 
-#: any.pm:549
+#: any.pm:562
 #, c-format
 msgid "This label is already used"
 msgstr "Ova oznaka već postoji"
 
-#: any.pm:567
+#: any.pm:580
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "Kakvu vrstu zapisa želite dodati"
 
-#: any.pm:568
+#: any.pm:581
 #, c-format
 msgid "Linux"
 msgstr "Linux"
 
-#: any.pm:568
+#: any.pm:581
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "Drugi OS (Windows...)"
 
-#: any.pm:615
+#: any.pm:628 any.pm:667
 #, fuzzy, c-format
 msgid "Bootloader Configuration"
 msgstr "Postava Stila Podizanja"
 
-#: any.pm:616
+#: any.pm:629
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -285,198 +289,237 @@ msgstr ""
 "Ovo su trenutni zapisi.\n"
 "Možete dodati još koji ili urediti postojeći."
 
-#: any.pm:852
+#: any.pm:676
+#, c-format
+msgid "Do not touch ESP or MBR"
+msgstr ""
+
+#: any.pm:678 diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:158
+#: diskdrake/hd_gtk.pm:519 diskdrake/interactive.pm:308
+#: diskdrake/interactive.pm:394 diskdrake/interactive.pm:608
+#: diskdrake/interactive.pm:823 diskdrake/interactive.pm:888
+#: diskdrake/interactive.pm:1054 diskdrake/interactive.pm:1096
+#: diskdrake/interactive.pm:1097 diskdrake/interactive.pm:1330
+#: diskdrake/interactive.pm:1368 diskdrake/interactive.pm:1513 do_pkgs.pm:45
+#: do_pkgs.pm:74 do_pkgs.pm:100 do_pkgs.pm:137
+#, c-format
+msgid "Warning"
+msgstr "Upozorenje"
+
+#: any.pm:679
+#, c-format
+msgid ""
+"Not installing on ESP or MBR means that the installation is not bootable "
+"unless chain loaded from another OS!"
+msgstr ""
+
+#: any.pm:683
+#, c-format
+msgid "Probe Foreign OS"
+msgstr ""
+
+#: any.pm:684
+#, c-format
+msgid ""
+"If grub2 takes too long to install, you can use this option to skip "
+"detecting other OSes and make it fast"
+msgstr ""
+
+#: any.pm:943
 #, c-format
 msgid "access to X programs"
 msgstr "pristup X programima"
 
-#: any.pm:853
+#: any.pm:944
 #, c-format
 msgid "access to rpm tools"
 msgstr "pristup rpm alatima"
 
-#: any.pm:854
+#: any.pm:945
 #, c-format
 msgid "allow \"su\""
 msgstr "dozvoli \"su\""
 
-#: any.pm:855
+#: any.pm:946
 #, c-format
 msgid "access to administrative files"
 msgstr "pristup administracijskim datotekama"
 
-#: any.pm:856
+#: any.pm:947
 #, fuzzy, c-format
 msgid "access to network tools"
 msgstr "pristup rpm alatima"
 
-#: any.pm:857
+#: any.pm:948
 #, fuzzy, c-format
 msgid "access to compilation tools"
 msgstr "pristup rpm alatima"
 
-#: any.pm:863
+#: any.pm:954
 #, c-format
 msgid "(already added %s)"
 msgstr "(već postoji %s)"
 
-#: any.pm:869
+#: any.pm:960
 #, c-format
 msgid "Please give a user name"
 msgstr "Molim dajte korisniku korisničko ime"
 
-#: any.pm:870
+#: any.pm:961
 #, fuzzy, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
 msgstr "Korisničko ime može sadržavati samo mala slova, brojeve, `-' i `_'"
 
-#: any.pm:871
+#: any.pm:962
 #, fuzzy, c-format
 msgid "The user name is too long"
 msgstr "Ovaj korisnik već postoji"
 
-#: any.pm:872
+#: any.pm:963
 #, c-format
 msgid "This user name has already been added"
 msgstr "Ovaj korisnik već postoji"
 
-#: any.pm:878 any.pm:934
+#: any.pm:969 any.pm:1025
 #, c-format
 msgid "User ID"
 msgstr "Korisnički ID"
 
-#: any.pm:878 any.pm:935
+#: any.pm:969 any.pm:1026
 #, c-format
 msgid "Group ID"
 msgstr "ID grupe"
 
-#: any.pm:879
+#: any.pm:970
 #, fuzzy, c-format
 msgid "%s must be a number"
 msgstr "Opcija %s mora biti broj!"
 
-#: any.pm:880
+#: any.pm:971
 #, c-format
 msgid "%s should be above 1000. Accept anyway?"
 msgstr ""
 
-#: any.pm:887 any.pm:912
+#: any.pm:978 any.pm:1003
 #, fuzzy, c-format
 msgid "User management"
 msgstr "Korisničko ime"
 
-#: any.pm:893
+#: any.pm:984
 #, c-format
 msgid "Enable guest account"
 msgstr ""
 
-#: any.pm:895 authentication.pm:236
+#: any.pm:986 authentication.pm:236
 #, fuzzy, c-format
 msgid "Set administrator (root) password"
 msgstr "Podešavanje root lozinke"
 
-#: any.pm:916
-#, fuzzy, c-format
+#: any.pm:1007
+#, c-format
 msgid "Enter a user"
-msgstr ""
-"Unesite korisnika\n"
-"%s"
+msgstr "Unesite korisnika"
 
-#: any.pm:918
+#: any.pm:1009
 #, c-format
 msgid "Icon"
 msgstr "Sličica"
 
-#: any.pm:921
+#: any.pm:1012
 #, c-format
 msgid "Real name"
 msgstr "Puno ime"
 
-#: any.pm:928
+#: any.pm:1019
 #, c-format
 msgid "Login name"
 msgstr "Korisnička oznaka"
 
-#: any.pm:933
+#: any.pm:1024
 #, c-format
 msgid "Shell"
 msgstr "Ljuska"
 
-#: any.pm:984
-#, fuzzy, c-format
-msgid "Please wait, adding media..."
-msgstr "sačekajte tijekom ttmkfdira..."
+#: any.pm:1028
+#, c-format
+msgid "Extra Groups:"
+msgstr ""
 
-#: any.pm:1017 security/l10n.pm:14
+#: any.pm:1079
+#, c-format
+msgid "Please wait, adding media..."
+msgstr "Molim pričekajte, dodajem medij..."
+
+#: any.pm:1131 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Auto-prijava"
 
-#: any.pm:1018
+#: any.pm:1132
 #, fuzzy, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "Mogu podesiti da se vaše računalo automatski prijavi kao jedan korisnik.\n"
 "Da li želite koristiti tu pogodnost?"
 
-#: any.pm:1019
+#: any.pm:1133
 #, fuzzy, c-format
 msgid "Use this feature"
 msgstr "Da li želite koristiti aboot?"
 
-#: any.pm:1020
+#: any.pm:1134
 #, c-format
 msgid "Choose the default user:"
 msgstr "Izaberite uobičajenog korisnika:"
 
-#: any.pm:1021
+#: any.pm:1135
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Izaberite prozorski upravitelj koji želite pokrenuti:"
 
-#: any.pm:1032 any.pm:1046 any.pm:1121
-#, fuzzy, c-format
+#: any.pm:1146 any.pm:1161 any.pm:1236
+#, c-format
 msgid "Release Notes"
-msgstr "Molim pričekajte"
+msgstr "Bilješke o izdanju"
 
-#: any.pm:1053 any.pm:1411 interactive/gtk.pm:820
+#: any.pm:1168 any.pm:1536 interactive/gtk.pm:820
 #, c-format
 msgid "Close"
 msgstr "Zatvori"
 
-#: any.pm:1107
+#: any.pm:1222
 #, c-format
 msgid "License agreement"
 msgstr "Licencni dogovor"
 
-#: any.pm:1109 diskdrake/dav.pm:26 mygtk2.pm:1229 mygtk3.pm:1282
+#: any.pm:1224 diskdrake/dav.pm:26 mygtk2.pm:1229 mygtk3.pm:1312
 #, c-format
 msgid "Quit"
 msgstr "Izlaz"
 
-#: any.pm:1116
+#: any.pm:1231
 #, fuzzy, c-format
 msgid "Do you accept this license ?"
 msgstr "Da li imate još koji?"
 
-#: any.pm:1117
+#: any.pm:1232
 #, c-format
 msgid "Accept"
 msgstr "Prihvati"
 
-#: any.pm:1117
+#: any.pm:1232
 #, c-format
 msgid "Refuse"
 msgstr "Odbij"
 
-#: any.pm:1143 any.pm:1206
+#: any.pm:1258 any.pm:1321
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Molim izaberite jezik koji želite koristiti"
 
-#: any.pm:1171
+#: any.pm:1286
 #, fuzzy, c-format
 msgid ""
 "%s can support multiple languages. Select\n"
@@ -484,82 +527,82 @@ msgid ""
 "when your installation is complete and you restart your system."
 msgstr "Možete izabrati druge jezike koji će biti dostupni nakon instalacije"
 
-#: any.pm:1174
+#: any.pm:1289
 #, fuzzy, c-format
 msgid "Multiple languages"
 msgstr "Svi jezici"
 
-#: any.pm:1175
+#: any.pm:1290
 #, c-format
 msgid "Select Additional Languages"
 msgstr ""
 
-#: any.pm:1184 any.pm:1215
+#: any.pm:1299 any.pm:1330
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr ""
 
-#: any.pm:1185
+#: any.pm:1300
 #, c-format
 msgid "All languages"
 msgstr "Svi jezici"
 
-#: any.pm:1207
+#: any.pm:1322
 #, fuzzy, c-format
 msgid "Language choice"
 msgstr "Myanmar"
 
-#: any.pm:1261
+#: any.pm:1376
 #, c-format
 msgid "Country / Region"
 msgstr "Država / Regija"
 
-#: any.pm:1262
+#: any.pm:1377
 #, fuzzy, c-format
 msgid "Please choose your country"
 msgstr "Molim izaberite koju vrstu miša koristite"
 
-#: any.pm:1264
+#: any.pm:1379
 #, fuzzy, c-format
 msgid "Here is the full list of available countries"
 msgstr "Ovdje je cijeli popis raspoloživih tipkovnica"
 
-#: any.pm:1265
+#: any.pm:1380
 #, fuzzy, c-format
 msgid "Other Countries"
 msgstr "Iskušaj portove"
 
-#: any.pm:1265 interactive.pm:491 interactive/gtk.pm:444
+#: any.pm:1380 interactive.pm:491 interactive/gtk.pm:444
 #, c-format
 msgid "Advanced"
 msgstr "&Napredno"
 
-#: any.pm:1271
+#: any.pm:1386
 #, c-format
 msgid "Input method:"
 msgstr ""
 
-#: any.pm:1274
+#: any.pm:1389
 #, c-format
 msgid "None"
 msgstr "Nijedan"
 
-#: any.pm:1356
+#: any.pm:1481
 #, c-format
 msgid "No sharing"
 msgstr "Nema dijeljenja"
 
-#: any.pm:1356
+#: any.pm:1481
 #, c-format
 msgid "Allow all users"
 msgstr "Dozvoli svim korisnicima"
 
-#: any.pm:1356
+#: any.pm:1481
 #, c-format
 msgid "Custom"
 msgstr "Prilagođeno"
 
-#: any.pm:1360
+#: any.pm:1485
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -576,32 +619,32 @@ msgstr ""
 "\n"
 "\"Proizvoljno\" će omogućiti dozvoljavanje po korisniku.\n"
 
-#: any.pm:1372
+#: any.pm:1497
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
 "Windows."
 msgstr ""
 
-#: any.pm:1375
+#: any.pm:1500
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
 msgstr ""
 
-#: any.pm:1383
+#: any.pm:1508
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Možete izvesti koristeći NFS ili Sambu. Koji od njih želite"
 
-#: any.pm:1411
+#: any.pm:1536
 #, c-format
 msgid "Launch userdrake"
 msgstr "Pokreni userdrake"
 
-#: any.pm:1413
+#: any.pm:1538
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -610,54 +653,54 @@ msgstr ""
 "Dijeljenje po korisniku koristi grupu \"fileshare\". \n"
 "Možete koristiti userdrake za dodavanje korisnika u navedenu grupu."
 
-#: any.pm:1520
+#: any.pm:1645
 #, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
 "logout now."
 msgstr ""
 
-#: any.pm:1524
+#: any.pm:1649
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr ""
 
-#: any.pm:1559
+#: any.pm:1684
 #, c-format
 msgid "Timezone"
 msgstr "Vremenska zona"
 
-#: any.pm:1559
+#: any.pm:1684
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Koja je vaša vremenska zona?"
 
-#: any.pm:1582 any.pm:1584
+#: any.pm:1707 any.pm:1709
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
-msgstr ""
+msgstr "Postavke datuma, sata & vremenske zone"
 
-#: any.pm:1585
+#: any.pm:1710
 #, c-format
 msgid "What is the best time?"
 msgstr ""
 
-#: any.pm:1589
+#: any.pm:1714
 #, fuzzy, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "Vaš hardverski sat namješten je na GMT"
 
-#: any.pm:1590
+#: any.pm:1715
 #, fuzzy, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "Vaš hardverski sat namješten je na GMT"
 
-#: any.pm:1592
+#: any.pm:1717
 #, c-format
 msgid "NTP Server"
 msgstr "NTP Poslužitelj"
 
-#: any.pm:1593
+#: any.pm:1718
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatska vremenska sinkronizacija (koristeći NTP)"
@@ -751,10 +794,10 @@ msgstr ""
 
 #: authentication.pm:106 authentication.pm:140 authentication.pm:159
 #: authentication.pm:160 authentication.pm:186 authentication.pm:210
-#: authentication.pm:851
+#: authentication.pm:865
 #, c-format
 msgid " "
-msgstr ""
+msgstr " "
 
 #: authentication.pm:107 authentication.pm:141 authentication.pm:187
 #: authentication.pm:211
@@ -808,7 +851,7 @@ msgstr ""
 #: authentication.pm:129
 #, c-format
 msgid "  "
-msgstr ""
+msgstr " "
 
 #: authentication.pm:121 authentication.pm:173
 #, c-format
@@ -955,27 +998,27 @@ msgid "This password is too short (it must be at least %d characters long)"
 msgstr ""
 "Ova lozinka je prejednostavna (lozinka mora sadržavati barem %d znakova)"
 
-#: authentication.pm:374
+#: authentication.pm:375
 #, c-format
 msgid "Cannot use broadcast with no NIS domain"
 msgstr "Ne mogu koristiti broadcast bez NIS domene"
 
-#: authentication.pm:846
+#: authentication.pm:860
 #, c-format
 msgid "Select file"
 msgstr "Odaberite datoteku"
 
-#: authentication.pm:852
+#: authentication.pm:866
 #, fuzzy, c-format
 msgid "Domain Windows for authentication : "
 msgstr "Provjera autentičnosti"
 
-#: authentication.pm:854
+#: authentication.pm:868
 #, fuzzy, c-format
 msgid "Domain Admin User Name"
 msgstr "Ime domene"
 
-#: authentication.pm:855
+#: authentication.pm:869
 #, c-format
 msgid "Domain Admin Password"
 msgstr "Zaporka administratora domene"
@@ -986,7 +1029,7 @@ msgstr "Zaporka administratora domene"
 # leave it in English, as it is the best for your language)
 #
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:1119
+#: bootloader.pm:1163
 #, fuzzy, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1001,51 +1044,51 @@ msgstr ""
 "pricekajte %d sekundi za uobicajeno podizanje.\n"
 "\n"
 
-#: bootloader.pm:1283
+#: bootloader.pm:1328
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO sa tekstualnim menijem"
 
-#: bootloader.pm:1284
+#: bootloader.pm:1329
 #, c-format
 msgid "GRUB2 with graphical menu"
 msgstr ""
 
-#: bootloader.pm:1285
+#: bootloader.pm:1330
+#, c-format
+msgid "GRUB2 with text menu"
+msgstr "GRUB2 sa tekstualnim menijem"
+
+#: bootloader.pm:1331
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr ""
 
-#: bootloader.pm:1286
+#: bootloader.pm:1332
 #, c-format
 msgid "GRUB with text menu"
-msgstr ""
+msgstr "GRUB sa tekstualnim menijem"
 
-#: bootloader.pm:1341
+#: bootloader.pm:1419
 #, c-format
 msgid "not enough room in /boot"
 msgstr "nema dovoljno mjesta u /boot"
 
-#: bootloader.pm:2087
-#, c-format
-msgid "You cannot install the bootloader on a %s partition\n"
-msgstr "Ne možete instalirati bootloader na %s particiju\n"
-
-#: bootloader.pm:2262
+#: bootloader.pm:2444
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
 msgstr ""
 
-#: bootloader.pm:2275
+#: bootloader.pm:2457
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
 "choose \"%s\""
 msgstr ""
 
-#: bootloader.pm:2276
+#: bootloader.pm:2458
 #, fuzzy, c-format
 msgid "Re-install Boot Loader"
 msgstr "Instaliraj bootloader"
@@ -1100,9 +1143,9 @@ msgid "System requirements warning"
 msgstr ""
 
 #: common.pm:271
-#, fuzzy, c-format
+#, c-format
 msgid "B"
-msgstr "KB"
+msgstr "B"
 
 #: common.pm:271
 #, c-format
@@ -1124,17 +1167,23 @@ msgstr "GB"
 msgid "TB"
 msgstr "TB"
 
+#. -PO: here, "2:30" is remaining installation time (eg: "2:30" == 2 hour & 30 minutes)
 #: common.pm:288
+#, c-format
+msgid "%02d:%02d"
+msgstr ""
+
+#: common.pm:290
 #, c-format
 msgid "%d minutes"
 msgstr "%d minuta"
 
-#: common.pm:290
+#: common.pm:292
 #, c-format
 msgid "1 minute"
 msgstr "1 minuta"
 
-#: common.pm:292
+#: common.pm:294
 #, c-format
 msgid "%d seconds"
 msgstr "%d sekundi"
@@ -1153,12 +1202,12 @@ msgstr ""
 msgid "New"
 msgstr "Novi"
 
-#: diskdrake/dav.pm:63 diskdrake/interactive.pm:418 diskdrake/smbnfs_gtk.pm:75
+#: diskdrake/dav.pm:63 diskdrake/interactive.pm:421 diskdrake/smbnfs_gtk.pm:75
 #, c-format
 msgid "Unmount"
 msgstr "Odmontiraj"
 
-#: diskdrake/dav.pm:64 diskdrake/interactive.pm:414 diskdrake/smbnfs_gtk.pm:76
+#: diskdrake/dav.pm:64 diskdrake/interactive.pm:417 diskdrake/smbnfs_gtk.pm:76
 #, c-format
 msgid "Mount"
 msgstr "Monitraj"
@@ -1168,16 +1217,16 @@ msgstr "Monitraj"
 msgid "Server"
 msgstr "Poslužitelj"
 
-#: diskdrake/dav.pm:66 diskdrake/interactive.pm:408
-#: diskdrake/interactive.pm:719 diskdrake/interactive.pm:737
-#: diskdrake/interactive.pm:741 diskdrake/removable.pm:23
+#: diskdrake/dav.pm:66 diskdrake/interactive.pm:411
+#: diskdrake/interactive.pm:730 diskdrake/interactive.pm:748
+#: diskdrake/interactive.pm:752 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Točka montiranja"
 
-#: diskdrake/dav.pm:67 diskdrake/interactive.pm:410
-#: diskdrake/interactive.pm:1171 diskdrake/removable.pm:24
+#: diskdrake/dav.pm:67 diskdrake/interactive.pm:413
+#: diskdrake/interactive.pm:1183 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1188,22 +1237,22 @@ msgstr "Odrednice"
 msgid "Remove"
 msgstr "Ukloni"
 
-#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:238 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:246 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Gotovo"
 
-#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:170 diskdrake/hd_gtk.pm:346
-#: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
-#: diskdrake/interactive.pm:456 diskdrake/interactive.pm:527
-#: diskdrake/interactive.pm:545 diskdrake/interactive.pm:550
-#: diskdrake/interactive.pm:709 diskdrake/interactive.pm:1010
-#: diskdrake/interactive.pm:1062 diskdrake/interactive.pm:1217
-#: diskdrake/interactive.pm:1230 diskdrake/interactive.pm:1233
-#: diskdrake/interactive.pm:1498 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:49
+#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:178 diskdrake/hd_gtk.pm:350
+#: diskdrake/interactive.pm:249 diskdrake/interactive.pm:262
+#: diskdrake/interactive.pm:463 diskdrake/interactive.pm:538
+#: diskdrake/interactive.pm:556 diskdrake/interactive.pm:561
+#: diskdrake/interactive.pm:720 diskdrake/interactive.pm:1021
+#: diskdrake/interactive.pm:1074 diskdrake/interactive.pm:1230
+#: diskdrake/interactive.pm:1243 diskdrake/interactive.pm:1246
+#: diskdrake/interactive.pm:1514 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:49
 #: do_pkgs.pm:54 do_pkgs.pm:79 do_pkgs.pm:103 do_pkgs.pm:108 do_pkgs.pm:142
-#: fsedit.pm:246 interactive/http.pm:117 interactive/http.pm:118
+#: fsedit.pm:267 interactive/http.pm:117 interactive/http.pm:118
 #: modules/interactive.pm:19 scanner.pm:94 scanner.pm:105 scanner.pm:112
 #: scanner.pm:119 wizards.pm:95 wizards.pm:99 wizards.pm:121
 #, c-format
@@ -1220,18 +1269,6 @@ msgstr "Upišite brzinu cd snimača"
 msgid "The URL must begin with http:// or https://"
 msgstr "URL mora početi sa http:// ili https://"
 
-#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:149 diskdrake/hd_gtk.pm:513
-#: diskdrake/interactive.pm:306 diskdrake/interactive.pm:391
-#: diskdrake/interactive.pm:597 diskdrake/interactive.pm:812
-#: diskdrake/interactive.pm:877 diskdrake/interactive.pm:1042
-#: diskdrake/interactive.pm:1084 diskdrake/interactive.pm:1085
-#: diskdrake/interactive.pm:1317 diskdrake/interactive.pm:1355
-#: diskdrake/interactive.pm:1497 do_pkgs.pm:45 do_pkgs.pm:74 do_pkgs.pm:100
-#: do_pkgs.pm:137
-#, c-format
-msgid "Warning"
-msgstr "Upozorenje"
-
 #: diskdrake/dav.pm:106
 #, fuzzy, c-format
 msgid "Are you sure you want to delete this mount point?"
@@ -1242,23 +1279,23 @@ msgstr "Da li želite kliknuti na ovaj gumb? "
 msgid "Server: "
 msgstr "Poslužitelj: "
 
-#: diskdrake/dav.pm:126 diskdrake/interactive.pm:501
-#: diskdrake/interactive.pm:1379 diskdrake/interactive.pm:1458
+#: diskdrake/dav.pm:126 diskdrake/interactive.pm:508
+#: diskdrake/interactive.pm:1392 diskdrake/interactive.pm:1474
 #, c-format
 msgid "Mount point: "
 msgstr "Mjesto montiranja:"
 
-#: diskdrake/dav.pm:127 diskdrake/interactive.pm:1465
+#: diskdrake/dav.pm:127 diskdrake/interactive.pm:1481
 #, c-format
 msgid "Options: %s"
 msgstr "Opcije: %s"
 
-#: diskdrake/hd_gtk.pm:64 diskdrake/interactive.pm:301
-#: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:110
-#: fs/partitioning_wizard.pm:59 fs/partitioning_wizard.pm:242
-#: fs/partitioning_wizard.pm:250 fs/partitioning_wizard.pm:285
-#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:494
-#: fs/partitioning_wizard.pm:577 fs/partitioning_wizard.pm:580
+#: diskdrake/hd_gtk.pm:64 diskdrake/interactive.pm:303
+#: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:113
+#: fs/partitioning_wizard.pm:66 fs/partitioning_wizard.pm:264
+#: fs/partitioning_wizard.pm:272 fs/partitioning_wizard.pm:310
+#: fs/partitioning_wizard.pm:466 fs/partitioning_wizard.pm:529
+#: fs/partitioning_wizard.pm:614 fs/partitioning_wizard.pm:617
 #, c-format
 msgid "Partitioning"
 msgstr "Particioniranje"
@@ -1268,29 +1305,29 @@ msgstr "Particioniranje"
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr ""
 
-#: diskdrake/hd_gtk.pm:149
+#: diskdrake/hd_gtk.pm:158
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Prvo napravite backup podataka"
 
-#: diskdrake/hd_gtk.pm:150 diskdrake/interactive.pm:240
+#: diskdrake/hd_gtk.pm:159 diskdrake/interactive.pm:242
 #, c-format
 msgid "Exit"
 msgstr "Izađi"
 
-#: diskdrake/hd_gtk.pm:150
+#: diskdrake/hd_gtk.pm:159
 #, c-format
 msgid "Continue"
 msgstr "Nastavi"
 
-#: diskdrake/hd_gtk.pm:233 fs/partitioning_wizard.pm:553 interactive.pm:778
+#: diskdrake/hd_gtk.pm:241 fs/partitioning_wizard.pm:590 interactive.pm:778
 #: interactive/gtk.pm:812 interactive/gtk.pm:830 interactive/gtk.pm:862
-#: ugtk2.pm:936 ugtk3.pm:1034
+#: ugtk2.pm:934 ugtk3.pm:1030
 #, c-format
 msgid "Help"
 msgstr "Pomoć"
 
-#: diskdrake/hd_gtk.pm:281
+#: diskdrake/hd_gtk.pm:284
 #, fuzzy, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1302,179 +1339,182 @@ msgstr ""
 "Preporučam da promijenite veličinu particije\n"
 "(kliknite prvo na particiju te onda na \"Promijeni veličinu\")"
 
-#: diskdrake/hd_gtk.pm:283
+#: diskdrake/hd_gtk.pm:286
 #, c-format
 msgid "Please click on a partition"
 msgstr "Molim kliknite na particiju"
 
-#: diskdrake/hd_gtk.pm:297 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:300 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Detalji"
 
-#: diskdrake/hd_gtk.pm:346
+#: diskdrake/hd_gtk.pm:350
 #, fuzzy, c-format
 msgid "No hard disk drives found"
 msgstr ""
 "Nije pronađen lokalni pisač!\n"
 "\n"
 
-#: diskdrake/hd_gtk.pm:417
+#: diskdrake/hd_gtk.pm:423
 #, c-format
 msgid "Unknown"
 msgstr "Napoznato"
 
-#: diskdrake/hd_gtk.pm:484
+#: diskdrake/hd_gtk.pm:490
 #, fuzzy, c-format
 msgid "Ext4"
 msgstr "Izađi"
 
-#: diskdrake/hd_gtk.pm:484 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:490 fs/partitioning_wizard.pm:436
 #, fuzzy, c-format
 msgid "XFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:484 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:490 fs/partitioning_wizard.pm:436
 #, c-format
 msgid "Swap"
 msgstr "Swap"
 
-#: diskdrake/hd_gtk.pm:484 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:490 fs/partitioning_wizard.pm:436
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:485 fs/partitioning_wizard.pm:402 services.pm:195
+#: diskdrake/hd_gtk.pm:491 fs/partitioning_wizard.pm:437 services.pm:201
 #, c-format
 msgid "Other"
 msgstr "Ostalo"
 
-#: diskdrake/hd_gtk.pm:485 diskdrake/interactive.pm:1385
-#: fs/partitioning_wizard.pm:402
+#: diskdrake/hd_gtk.pm:491 diskdrake/interactive.pm:1398
+#: fs/partitioning_wizard.pm:437
 #, c-format
 msgid "Empty"
 msgstr "Prazno"
 
-#: diskdrake/hd_gtk.pm:492
+#: diskdrake/hd_gtk.pm:498
 #, c-format
 msgid "Filesystem types:"
 msgstr "Vrste datotečnih sustava:"
 
-#: diskdrake/hd_gtk.pm:513
+#: diskdrake/hd_gtk.pm:519
 #, fuzzy, c-format
 msgid "This partition is already empty"
 msgstr "Ova particija nije promjenjiva u veličini"
 
-#: diskdrake/hd_gtk.pm:522
+#: diskdrake/hd_gtk.pm:528
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Prvo pritisnite ``Demontiraj''"
 
-#: diskdrake/hd_gtk.pm:522
+#: diskdrake/hd_gtk.pm:528
 #, fuzzy, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Umjesto toga koristi ``%s''"
 
-#: diskdrake/hd_gtk.pm:522 diskdrake/interactive.pm:409
-#: diskdrake/interactive.pm:636 diskdrake/removable.pm:25
+#: diskdrake/hd_gtk.pm:528 diskdrake/interactive.pm:412
+#: diskdrake/interactive.pm:647 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
 msgstr "Tip"
 
-#: diskdrake/interactive.pm:211
+#: diskdrake/interactive.pm:213
 #, c-format
 msgid "Choose another partition"
 msgstr "Izaberite drugu particiju"
 
-#: diskdrake/interactive.pm:211
+#: diskdrake/interactive.pm:213
 #, c-format
 msgid "Choose a partition"
 msgstr "Izaberite particiju"
 
-#: diskdrake/interactive.pm:273 diskdrake/interactive.pm:382
+#: diskdrake/interactive.pm:275 diskdrake/interactive.pm:385
 #: interactive/curses.pm:532
 #, c-format
 msgid "More"
 msgstr "Više"
 
-#: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
-#: diskdrake/interactive.pm:1301 mygtk2.pm:1228 mygtk3.pm:1281
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:283 diskdrake/interactive.pm:296
+#: diskdrake/interactive.pm:1314 mygtk2.pm:1228 mygtk3.pm:1311
+#, c-format
 msgid "Confirmation"
-msgstr "Postavke"
+msgstr "Potvrda"
 
-#: diskdrake/interactive.pm:281
+#: diskdrake/interactive.pm:283
 #, c-format
 msgid "Continue anyway?"
 msgstr "Da ipak nastavim?"
 
-#: diskdrake/interactive.pm:286
+#: diskdrake/interactive.pm:288
 #, c-format
 msgid "Quit without saving"
 msgstr "Da završim bez spremanja"
 
-#: diskdrake/interactive.pm:286
+#: diskdrake/interactive.pm:288
 #, c-format
 msgid "Quit without writing the partition table?"
 msgstr "Da završim bez zapisivanje particijske tablice?"
 
-#: diskdrake/interactive.pm:294
+#: diskdrake/interactive.pm:296
 #, c-format
 msgid "Do you want to save the /etc/fstab modifications?"
 msgstr "Da li želite spremiti /etc/fstab promjene?"
 
-#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:285
+#: diskdrake/interactive.pm:303 fs/partitioning_wizard.pm:310
 #, c-format
 msgid "You need to reboot for the partition table modifications to take effect"
 msgstr ""
 "Morate ponovo pokrenuti sustav kako bi se aktivirala promjena particijske "
 "tablice"
 
-#: diskdrake/interactive.pm:306
+#: diskdrake/interactive.pm:308
 #, c-format
 msgid ""
 "You should format partition %s.\n"
 "Otherwise no entry for mount point %s will be written in fstab.\n"
 "Quit anyway?"
 msgstr ""
+"Trebate formatirati particiju %s.\n"
+"U protivnom nijedan unos za točku montiranja %s neće biti zapisan u fstab.\n"
+"Prekinuti?"
 
-#: diskdrake/interactive.pm:319
+#: diskdrake/interactive.pm:321
 #, c-format
 msgid "Clear all"
 msgstr "Očisti sve"
 
-#: diskdrake/interactive.pm:320
+#: diskdrake/interactive.pm:322
 #, c-format
 msgid "Auto allocate"
 msgstr "Raspodijeli automatski"
 
-#: diskdrake/interactive.pm:326
+#: diskdrake/interactive.pm:328
 #, c-format
 msgid "Toggle to normal mode"
 msgstr "Prebaci u normalni mod"
 
-#: diskdrake/interactive.pm:326
+#: diskdrake/interactive.pm:328
 #, c-format
 msgid "Toggle to expert mode"
 msgstr "Normalno > Ekspert"
 
-#: diskdrake/interactive.pm:338
+#: diskdrake/interactive.pm:340
 #, c-format
 msgid "Hard disk drive information"
 msgstr "Hard disk informacije"
 
-#: diskdrake/interactive.pm:371
+#: diskdrake/interactive.pm:374
 #, c-format
 msgid "All primary partitions are used"
 msgstr "Sve primarne particije su iskorištene"
 
-#: diskdrake/interactive.pm:372
+#: diskdrake/interactive.pm:375
 #, c-format
 msgid "I cannot add any more partitions"
 msgstr "Ne mogu dodati niti jednu dodatnu particiju"
 
-#: diskdrake/interactive.pm:373
+#: diskdrake/interactive.pm:376
 #, c-format
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
@@ -1484,142 +1524,142 @@ msgstr ""
 "bi\n"
 "mogli stvoriti jednu extended particiju."
 
-#: diskdrake/interactive.pm:384
+#: diskdrake/interactive.pm:387
 #, c-format
 msgid "Reload partition table"
 msgstr "Ponovno učitaj particijsku tabelu"
 
-#: diskdrake/interactive.pm:391
+#: diskdrake/interactive.pm:394
 #, c-format
 msgid "Detailed information"
 msgstr "Detaljne informacije"
 
-#: diskdrake/interactive.pm:407
+#: diskdrake/interactive.pm:410
 #, c-format
 msgid "View"
 msgstr "Pogled"
 
-#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:825
+#: diskdrake/interactive.pm:415 diskdrake/interactive.pm:836
 #, c-format
 msgid "Resize"
 msgstr "Promjena veličine"
 
-#: diskdrake/interactive.pm:413
+#: diskdrake/interactive.pm:416
 #, c-format
 msgid "Format"
 msgstr "Oblikovanje"
 
-#: diskdrake/interactive.pm:415 diskdrake/interactive.pm:973
+#: diskdrake/interactive.pm:418 diskdrake/interactive.pm:984
 #, c-format
 msgid "Add to RAID"
 msgstr "Dodaj RAID-u"
 
-#: diskdrake/interactive.pm:416 diskdrake/interactive.pm:992
+#: diskdrake/interactive.pm:419 diskdrake/interactive.pm:1003
 #, c-format
 msgid "Add to LVM"
 msgstr "Dodaj LVM-u"
 
-#: diskdrake/interactive.pm:417
+#: diskdrake/interactive.pm:420
 #, fuzzy, c-format
 msgid "Use"
 msgstr "Korisnički ID"
 
-#: diskdrake/interactive.pm:419
+#: diskdrake/interactive.pm:422
 #, c-format
 msgid "Delete"
 msgstr "Obriši"
 
-#: diskdrake/interactive.pm:420
+#: diskdrake/interactive.pm:423
 #, c-format
 msgid "Remove from RAID"
 msgstr "Ukloni sa RAID-a"
 
-#: diskdrake/interactive.pm:421
+#: diskdrake/interactive.pm:424
 #, c-format
 msgid "Remove from LVM"
 msgstr "Ukloni sa LVM-a"
 
-#: diskdrake/interactive.pm:422
+#: diskdrake/interactive.pm:425
 #, fuzzy, c-format
 msgid "Remove from dm"
 msgstr "Ukloni sa LVM-a"
 
-#: diskdrake/interactive.pm:423
+#: diskdrake/interactive.pm:426
 #, c-format
 msgid "Modify RAID"
 msgstr "Promijeni RAID"
 
-#: diskdrake/interactive.pm:424
+#: diskdrake/interactive.pm:427
 #, c-format
 msgid "Use for loopback"
 msgstr "Koristi za loopback"
 
-#: diskdrake/interactive.pm:434
+#: diskdrake/interactive.pm:437
 #, c-format
 msgid "Create"
 msgstr "Stvori"
 
-#: diskdrake/interactive.pm:456
+#: diskdrake/interactive.pm:463
 #, fuzzy, c-format
 msgid "Failed to mount partition"
 msgstr "Premijesti datoteku na novu particiju"
 
-#: diskdrake/interactive.pm:490 diskdrake/interactive.pm:492
+#: diskdrake/interactive.pm:497 diskdrake/interactive.pm:499
 #, c-format
 msgid "Create a new partition"
 msgstr "Stvori novu particiju"
 
-#: diskdrake/interactive.pm:494
+#: diskdrake/interactive.pm:501
 #, c-format
 msgid "Start sector: "
 msgstr "Početni sektor:"
 
-#: diskdrake/interactive.pm:497 diskdrake/interactive.pm:1077
+#: diskdrake/interactive.pm:504 diskdrake/interactive.pm:1089
 #, c-format
 msgid "Size in MB: "
 msgstr "Veličina u MB:"
 
-#: diskdrake/interactive.pm:499 diskdrake/interactive.pm:1078
+#: diskdrake/interactive.pm:506 diskdrake/interactive.pm:1090
 #, c-format
 msgid "Filesystem type: "
 msgstr "Vrsta datotečnog sustava:"
 
-#: diskdrake/interactive.pm:505
+#: diskdrake/interactive.pm:516
 #, c-format
 msgid "Preference: "
 msgstr "Postavke:"
 
-#: diskdrake/interactive.pm:508
+#: diskdrake/interactive.pm:519
 #, fuzzy, c-format
 msgid "Logical volume name "
 msgstr "Lokalne datoteke"
 
-#: diskdrake/interactive.pm:510
+#: diskdrake/interactive.pm:521
 #, fuzzy, c-format
 msgid "Encrypt partition"
 msgstr "Provjera autentičnosti"
 
-#: diskdrake/interactive.pm:511
+#: diskdrake/interactive.pm:522
 #, fuzzy, c-format
 msgid "Encryption key "
 msgstr "Enkripcijski ključ"
 
-#: diskdrake/interactive.pm:512 diskdrake/interactive.pm:1502
+#: diskdrake/interactive.pm:523 diskdrake/interactive.pm:1518
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Enkripcijski ključ (ponovno)"
 
-#: diskdrake/interactive.pm:524 diskdrake/interactive.pm:1498
+#: diskdrake/interactive.pm:535 diskdrake/interactive.pm:1514
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "Enkripcijski ključevi se ne slažu"
 
-#: diskdrake/interactive.pm:525
+#: diskdrake/interactive.pm:536
 #, fuzzy, c-format
 msgid "Missing encryption key"
 msgstr "Ključ enkriptiranja datotečnog sustava"
 
-#: diskdrake/interactive.pm:545
+#: diskdrake/interactive.pm:556
 #, c-format
 msgid ""
 "You cannot create a new partition\n"
@@ -1627,12 +1667,12 @@ msgid ""
 "First remove a primary partition and create an extended partition."
 msgstr ""
 
-#: diskdrake/interactive.pm:597
+#: diskdrake/interactive.pm:608
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "Ukloniti loopback datoteku?"
 
-#: diskdrake/interactive.pm:617
+#: diskdrake/interactive.pm:628
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
@@ -1640,57 +1680,57 @@ msgstr ""
 "Nakon mijenjanja tipa particije %s svi podaci na ovoj particiji biti će "
 "obrisani"
 
-#: diskdrake/interactive.pm:633
+#: diskdrake/interactive.pm:644
 #, c-format
 msgid "Change partition type"
 msgstr "Mijenjam tip particije"
 
-#: diskdrake/interactive.pm:635 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:646 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Koji datotečni sustav želite?"
 
-#: diskdrake/interactive.pm:642
+#: diskdrake/interactive.pm:653
 #, fuzzy, c-format
 msgid "Switching from %s to %s"
 msgstr "Mijenjam iz ext2 u ext3"
 
-#: diskdrake/interactive.pm:677
+#: diskdrake/interactive.pm:688
 #, c-format
 msgid "Set volume label"
 msgstr ""
 
-#: diskdrake/interactive.pm:679
+#: diskdrake/interactive.pm:690
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
 msgstr ""
 
-#: diskdrake/interactive.pm:680
+#: diskdrake/interactive.pm:691
 #, c-format
 msgid "Beware, this will be written to disk only after formatting!"
 msgstr ""
 
-#: diskdrake/interactive.pm:682
+#: diskdrake/interactive.pm:693
 #, c-format
 msgid "Which volume label?"
 msgstr ""
 
-#: diskdrake/interactive.pm:683
+#: diskdrake/interactive.pm:694
 #, fuzzy, c-format
 msgid "Label:"
 msgstr "Oznaka"
 
-#: diskdrake/interactive.pm:704
+#: diskdrake/interactive.pm:715
 #, fuzzy, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "Gdje želite montirati loopback datoteku %s?"
 
-#: diskdrake/interactive.pm:705
+#: diskdrake/interactive.pm:716
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Gdje želite montirati uređaj %s?"
 
-#: diskdrake/interactive.pm:710
+#: diskdrake/interactive.pm:721
 #, c-format
 msgid ""
 "Cannot unset mount point as this partition is used for loop back.\n"
@@ -1700,242 +1740,247 @@ msgstr ""
 "loop back.\n"
 "Uklonite loopback prvo"
 
-#: diskdrake/interactive.pm:740
+#: diskdrake/interactive.pm:751
 #, fuzzy, c-format
 msgid "Where do you want to mount %s?"
 msgstr "Gdje želite montirati uređaj %s?"
 
-#: diskdrake/interactive.pm:770 diskdrake/interactive.pm:866
-#: fs/partitioning_wizard.pm:135 fs/partitioning_wizard.pm:211
+#: diskdrake/interactive.pm:781 diskdrake/interactive.pm:877
+#: fs/partitioning_wizard.pm:151 fs/partitioning_wizard.pm:233
 #, c-format
 msgid "Resizing"
 msgstr "Mijenjanje veličine"
 
-#: diskdrake/interactive.pm:770
+#: diskdrake/interactive.pm:781
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "Izračunavam granice fat datotečnog sustava"
 
-#: diskdrake/interactive.pm:812
+#: diskdrake/interactive.pm:823
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "Ova particija nije promjenjiva u veličini"
 
-#: diskdrake/interactive.pm:817
+#: diskdrake/interactive.pm:828
 #, c-format
 msgid "All data on this partition should be backed up"
 msgstr "Preporučam da prvo backupirate sve podatke s ove particije"
 
-#: diskdrake/interactive.pm:819
+#: diskdrake/interactive.pm:830
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
 "Nakon mijenjanja veličine particije %s svi podaci na ovoj particiji biti će "
 "izgubljeni"
 
-#: diskdrake/interactive.pm:826
+#: diskdrake/interactive.pm:837
 #, c-format
 msgid "Choose the new size"
 msgstr "Odaberite novu veličinu"
 
-#: diskdrake/interactive.pm:827
+#: diskdrake/interactive.pm:838
 #, c-format
 msgid "New size in MB: "
 msgstr "Nova veličina u MB: "
 
-#: diskdrake/interactive.pm:828
+#: diskdrake/interactive.pm:839
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr ""
 
-#: diskdrake/interactive.pm:829
+#: diskdrake/interactive.pm:840
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr ""
 
-#: diskdrake/interactive.pm:877 fs/partitioning_wizard.pm:219
+#: diskdrake/interactive.pm:888 fs/partitioning_wizard.pm:241
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 
-#: diskdrake/interactive.pm:941 diskdrake/interactive.pm:1493
+#: diskdrake/interactive.pm:952 diskdrake/interactive.pm:1509
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Ključ enkriptiranja datotečnog sustava"
 
-#: diskdrake/interactive.pm:942
+#: diskdrake/interactive.pm:953
 #, fuzzy, c-format
 msgid "Enter your filesystem encryption key"
 msgstr "Izaberite vaš ključ za enkriptiranje datotečnog sustava"
 
-#: diskdrake/interactive.pm:943 diskdrake/interactive.pm:1501
+#: diskdrake/interactive.pm:954 diskdrake/interactive.pm:1517
 #, c-format
 msgid "Encryption key"
 msgstr "Enkripcijski ključ"
 
-#: diskdrake/interactive.pm:950
+#: diskdrake/interactive.pm:961
 #, c-format
 msgid "Invalid key"
 msgstr ""
 
-#: diskdrake/interactive.pm:973
+#: diskdrake/interactive.pm:984
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Izaberite postojeći RAID na koji želite dodati "
 
-#: diskdrake/interactive.pm:975 diskdrake/interactive.pm:994
+#: diskdrake/interactive.pm:986 diskdrake/interactive.pm:1005
 #, c-format
 msgid "new"
 msgstr "novi"
 
-#: diskdrake/interactive.pm:992
+#: diskdrake/interactive.pm:1003
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Izaberite postojeći LVM na koji želite dodati "
 
-#: diskdrake/interactive.pm:1004 diskdrake/interactive.pm:1013
+#: diskdrake/interactive.pm:1015 diskdrake/interactive.pm:1024
 #, fuzzy, c-format
 msgid "LVM name"
 msgstr "LVM ime?"
 
-#: diskdrake/interactive.pm:1005
+#: diskdrake/interactive.pm:1016
 #, c-format
 msgid "Enter a name for the new LVM volume group"
 msgstr ""
 
-#: diskdrake/interactive.pm:1010
+#: diskdrake/interactive.pm:1021
 #, fuzzy, c-format
 msgid "\"%s\" already exists"
 msgstr "Datoteka već postoji. Da li da nju upotrijebim?"
 
-#: diskdrake/interactive.pm:1042
+#: diskdrake/interactive.pm:1029
+#, c-format
+msgid "Setting up LVM"
+msgstr ""
+
+#: diskdrake/interactive.pm:1054
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
 
-#: diskdrake/interactive.pm:1044
+#: diskdrake/interactive.pm:1056
 #, c-format
 msgid "Moving physical extents"
 msgstr ""
 
-#: diskdrake/interactive.pm:1062
+#: diskdrake/interactive.pm:1074
 #, c-format
 msgid "This partition cannot be used for loopback"
 msgstr "Ova particija se ne može koristiti za loopback"
 
-#: diskdrake/interactive.pm:1075
+#: diskdrake/interactive.pm:1087
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:1076
+#: diskdrake/interactive.pm:1088
 #, c-format
 msgid "Loopback file name: "
 msgstr "Ime loopback datoteke:"
 
-#: diskdrake/interactive.pm:1081
+#: diskdrake/interactive.pm:1093
 #, c-format
 msgid "Give a file name"
 msgstr "Dajte ime datoteke"
 
-#: diskdrake/interactive.pm:1084
+#: diskdrake/interactive.pm:1096
 #, fuzzy, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr ""
 "Datoteku koristi neki drugi loopback. Molim izaberite neku drugu datoteku"
 
-#: diskdrake/interactive.pm:1085
+#: diskdrake/interactive.pm:1097
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Datoteka već postoji. Da li da nju upotrijebim?"
 
-#: diskdrake/interactive.pm:1117 diskdrake/interactive.pm:1120
+#: diskdrake/interactive.pm:1129 diskdrake/interactive.pm:1132
 #, c-format
 msgid "Mount options"
 msgstr "Opcije montiranja"
 
-#: diskdrake/interactive.pm:1127
+#: diskdrake/interactive.pm:1139
 #, c-format
 msgid "Various"
 msgstr "Razno"
 
-#: diskdrake/interactive.pm:1173
+#: diskdrake/interactive.pm:1185
 #, c-format
 msgid "device"
 msgstr "uređaj"
 
-#: diskdrake/interactive.pm:1174
+#: diskdrake/interactive.pm:1186
 #, c-format
 msgid "level"
 msgstr "razina"
 
-#: diskdrake/interactive.pm:1175
+#: diskdrake/interactive.pm:1187
 #, fuzzy, c-format
 msgid "chunk size in KiB"
 msgstr "chunk veličina"
 
-#: diskdrake/interactive.pm:1192 diskdrake/interactive.pm:1202
-#: diskdrake/interactive.pm:1255
+#: diskdrake/interactive.pm:1204 diskdrake/interactive.pm:1214
+#: diskdrake/interactive.pm:1268
 #, c-format
 msgid "Read carefully"
 msgstr "Pročitajte pažljivo"
 
-#: diskdrake/interactive.pm:1193
+#: diskdrake/interactive.pm:1205
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Budite oprezni: ova operacija je opasna"
 
-#: diskdrake/interactive.pm:1208
+#: diskdrake/interactive.pm:1221
 #, fuzzy, c-format
 msgid "Partitioning Type"
 msgstr "Particioniranje"
 
-#: diskdrake/interactive.pm:1208
+#: diskdrake/interactive.pm:1221
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Kakav tip particioniranja?"
 
-#: diskdrake/interactive.pm:1246
+#: diskdrake/interactive.pm:1259
 #, c-format
 msgid "You'll need to reboot before the modification can take effect"
 msgstr "Trebate ponovo pokrenuti sustav prije nego promjene postanu aktivne"
 
-#: diskdrake/interactive.pm:1255
+#: diskdrake/interactive.pm:1268
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "Particijska tablica pogona %s će sada biti zapisana na disk"
 
-#: diskdrake/interactive.pm:1274 fs/format.pm:107 fs/format.pm:114
+#: diskdrake/interactive.pm:1287 fs/format.pm:106 fs/format.pm:113
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Formatiram particiju %s"
 
-#: diskdrake/interactive.pm:1287
+#: diskdrake/interactive.pm:1300
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "Nakon formatiranja particije %s svi podaci na ovoj particiji biti će obrisani"
 
-#: diskdrake/interactive.pm:1301
-#, fuzzy, c-format
-msgid "Check bad blocks?"
+#: diskdrake/interactive.pm:1314 fs/partitioning.pm:48
+#, c-format
+msgid "Check for bad blocks?"
 msgstr "Provjeri za loše blokove?"
 
-#: diskdrake/interactive.pm:1316
+#: diskdrake/interactive.pm:1329
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Premijesti datoteku na novu particiju"
 
-#: diskdrake/interactive.pm:1316
+#: diskdrake/interactive.pm:1329
 #, c-format
 msgid "Hide files"
 msgstr "Sakrij datoteku"
 
-#: diskdrake/interactive.pm:1317
+#: diskdrake/interactive.pm:1330
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -1946,122 +1991,127 @@ msgid ""
 "the contents of the mounted partition)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1332
+#: diskdrake/interactive.pm:1345
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Premiješteam datoteke na novu particiju"
 
-#: diskdrake/interactive.pm:1336
+#: diskdrake/interactive.pm:1349
 #, c-format
 msgid "Copying %s"
 msgstr "Kopiram %s"
 
-#: diskdrake/interactive.pm:1340
+#: diskdrake/interactive.pm:1353
 #, c-format
 msgid "Removing %s"
 msgstr "Uklanjam %s"
 
-#: diskdrake/interactive.pm:1354
+#: diskdrake/interactive.pm:1367
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "particija %s je sada poznata kao %s"
 
-#: diskdrake/interactive.pm:1355
+#: diskdrake/interactive.pm:1368
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1380 diskdrake/interactive.pm:1442
+#: diskdrake/interactive.pm:1393 diskdrake/interactive.pm:1458
 #, c-format
 msgid "Device: "
 msgstr "Uređaj: "
 
-#: diskdrake/interactive.pm:1381
+#: diskdrake/interactive.pm:1394
 #, c-format
 msgid "Volume label: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1382
+#: diskdrake/interactive.pm:1395
 #, c-format
 msgid "UUID: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1383
+#: diskdrake/interactive.pm:1396
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS uređaj slovo: %s (nagađanje)\n"
 
-#: diskdrake/interactive.pm:1387 diskdrake/interactive.pm:1461
+#: diskdrake/interactive.pm:1400 diskdrake/interactive.pm:1477
 #, c-format
 msgid "Type: "
 msgstr "Vrsta: "
 
-#: diskdrake/interactive.pm:1389
+#: diskdrake/interactive.pm:1402
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Početak: sektor %s\n"
 
-#: diskdrake/interactive.pm:1390
+#: diskdrake/interactive.pm:1404
+#, c-format
+msgid "Size: %s (%s%% of disk)"
+msgstr ""
+
+#: diskdrake/interactive.pm:1406
 #, c-format
 msgid "Size: %s"
 msgstr "Veličina: %s"
 
-#: diskdrake/interactive.pm:1392
+#: diskdrake/interactive.pm:1408
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sektora"
 
-#: diskdrake/interactive.pm:1394
+#: diskdrake/interactive.pm:1410
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Cilindar %d do %d\n"
 
-#: diskdrake/interactive.pm:1395
+#: diskdrake/interactive.pm:1411
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr ""
 
-#: diskdrake/interactive.pm:1396
+#: diskdrake/interactive.pm:1412
 #, c-format
 msgid "Formatted\n"
 msgstr "Formatiran\n"
 
-#: diskdrake/interactive.pm:1397
+#: diskdrake/interactive.pm:1413
 #, c-format
 msgid "Not formatted\n"
 msgstr "Nije formatiran\n"
 
-#: diskdrake/interactive.pm:1398
+#: diskdrake/interactive.pm:1414
 #, c-format
 msgid "Mounted\n"
 msgstr "Montiran\n"
 
-#: diskdrake/interactive.pm:1399
+#: diskdrake/interactive.pm:1415
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1401
+#: diskdrake/interactive.pm:1417
 #, fuzzy, c-format
 msgid "Encrypted"
 msgstr "Enkripcijski ključ"
 
-#: diskdrake/interactive.pm:1403
+#: diskdrake/interactive.pm:1419
 #, c-format
 msgid " (mapped on %s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1404
+#: diskdrake/interactive.pm:1420
 #, c-format
 msgid " (to map on %s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1405
+#: diskdrake/interactive.pm:1421
 #, c-format
 msgid " (inactive)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1412
+#: diskdrake/interactive.pm:1428
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2070,7 +2120,7 @@ msgstr ""
 "Loopback datoteka(e):\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1413
+#: diskdrake/interactive.pm:1429
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2079,27 +2129,27 @@ msgstr ""
 "Podrazumijevana boot particija\n"
 "  (za MS-DOS boot, ne za LILO)\n"
 
-#: diskdrake/interactive.pm:1415
+#: diskdrake/interactive.pm:1431
 #, c-format
 msgid "Level %s\n"
 msgstr "Razina %s\n"
 
-#: diskdrake/interactive.pm:1416
+#: diskdrake/interactive.pm:1432
 #, fuzzy, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Chunk veličina %s\n"
 
-#: diskdrake/interactive.pm:1417
+#: diskdrake/interactive.pm:1433
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-diskovi %s\n"
 
-#: diskdrake/interactive.pm:1419
+#: diskdrake/interactive.pm:1435
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Ime loopback datoteke: %s"
 
-#: diskdrake/interactive.pm:1422
+#: diskdrake/interactive.pm:1438
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -2112,7 +2162,7 @@ msgstr ""
 "ustvari particija upravljačkog programa, vjerojatno\n"
 "biste ju trebali ostaviti.\n"
 
-#: diskdrake/interactive.pm:1425
+#: diskdrake/interactive.pm:1441
 #, c-format
 msgid ""
 "\n"
@@ -2125,64 +2175,64 @@ msgstr ""
 "particija je za\n"
 "dvostruko-podizanje (dual-boot) vašeg sustava.\n"
 
-#: diskdrake/interactive.pm:1434
+#: diskdrake/interactive.pm:1450
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1443
+#: diskdrake/interactive.pm:1459
 #, c-format
 msgid "Read-only"
 msgstr "Samo za čitanje"
 
-#: diskdrake/interactive.pm:1444
+#: diskdrake/interactive.pm:1460
 #, c-format
 msgid "Size: %s\n"
 msgstr "Veličina: %s\n"
 
-#: diskdrake/interactive.pm:1445
+#: diskdrake/interactive.pm:1461
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometrija: %s cilindara, %s glava, %s sektora\n"
 
-#: diskdrake/interactive.pm:1446
+#: diskdrake/interactive.pm:1462
 #, c-format
 msgid "Name: "
 msgstr "Ime: "
 
-#: diskdrake/interactive.pm:1447
+#: diskdrake/interactive.pm:1463
 #, fuzzy, c-format
 msgid "Medium type: "
 msgstr "Vrsta datotečnog sustava:"
 
-#: diskdrake/interactive.pm:1448
+#: diskdrake/interactive.pm:1464
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-diskovi %s\n"
 
-#: diskdrake/interactive.pm:1449
+#: diskdrake/interactive.pm:1465
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Vrsta particijske tabele: %s\n"
 
-#: diskdrake/interactive.pm:1450
+#: diskdrake/interactive.pm:1466
 #, fuzzy, c-format
 msgid "on channel %d id %d\n"
 msgstr "na sabirnici %d id %d\n"
 
-#: diskdrake/interactive.pm:1494
+#: diskdrake/interactive.pm:1510
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Izaberite vaš ključ za enkriptiranje datotečnog sustava"
 
-#: diskdrake/interactive.pm:1497
+#: diskdrake/interactive.pm:1513
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
 "Upisani enkripcijski ključ je prejednostavan (mora biti dug najmanje %d "
 "znakova)"
 
-#: diskdrake/interactive.pm:1504
+#: diskdrake/interactive.pm:1520
 #, fuzzy, c-format
 msgid "Encryption algorithm"
 msgstr "Provjera autentičnosti"
@@ -2195,9 +2245,9 @@ msgstr "Promijeni tip"
 #: diskdrake/smbnfs_gtk.pm:81 interactive.pm:120 interactive.pm:675
 #: interactive/curses.pm:267 interactive/http.pm:104 interactive/http.pm:160
 #: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:846
-#: mygtk2.pm:1229 mygtk3.pm:898 mygtk3.pm:1282 ugtk2.pm:415 ugtk2.pm:517
-#: ugtk2.pm:526 ugtk2.pm:812 ugtk3.pm:503 ugtk3.pm:593 ugtk3.pm:602
-#: ugtk3.pm:910
+#: mygtk2.pm:1229 mygtk3.pm:928 mygtk3.pm:1312 ugtk2.pm:415 ugtk2.pm:517
+#: ugtk2.pm:526 ugtk2.pm:810 ugtk3.pm:501 ugtk3.pm:591 ugtk3.pm:600
+#: ugtk3.pm:906
 #, c-format
 msgid "Cancel"
 msgstr "Odustani"
@@ -2278,7 +2328,7 @@ msgstr "Instaliram pakete..."
 msgid "Removing packages..."
 msgstr "Uklanjanje paketa..."
 
-#: fs/any.pm:18
+#: fs/any.pm:21
 #, c-format
 msgid ""
 "An error occurred - no valid devices were found on which to create new "
@@ -2288,32 +2338,39 @@ msgstr ""
 "bih mogao instalirati datotečni sustav. Provjerite da li je sa vašim "
 "hardverom sve u redu."
 
-#: fs/any.pm:71 fs/partitioning_wizard.pm:68
-#, fuzzy, c-format
+#: fs/any.pm:77 fs/partitioning_wizard.pm:77
+#, c-format
 msgid "You must have a ESP FAT32 partition mounted in /boot/EFI"
-msgstr "Morate imati FAT particiju montiranu na /boot/efi"
+msgstr "Morate imati ESP FAT32 particiju montiranu na /boot/EFI"
 
-#: fs/format.pm:111
+#: fs/any.pm:81 fs/partitioning_wizard.pm:82
+#, c-format
+msgid ""
+"You must have a BIOS boot partition for non-UEFI GPT-partitioned disks. "
+"Please create one before continuing."
+msgstr ""
+
+#: fs/format.pm:110
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr "Stvaram i formatiram datoteku %s"
 
-#: fs/format.pm:131
+#: fs/format.pm:130
 #, fuzzy, c-format
 msgid "I do not know how to set label on %s with type %s"
 msgstr "ne znam kako formatirati %s kao vrstu %s"
 
-#: fs/format.pm:143
+#: fs/format.pm:142
 #, fuzzy, c-format
 msgid "setting label on %s failed, is it formatted?"
 msgstr "%s formatiranje %s nije uspjelo"
 
-#: fs/format.pm:184
+#: fs/format.pm:190
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "ne znam kako formatirati %s kao vrstu %s"
 
-#: fs/format.pm:189 fs/format.pm:191
+#: fs/format.pm:195 fs/format.pm:197
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s formatiranje %s nije uspjelo"
@@ -2338,7 +2395,7 @@ msgstr "montiranje particije %s u direktorij %s neuspješno"
 msgid "Checking %s"
 msgstr "Provjeravam %s"
 
-#: fs/mount.pm:126 partition_table.pm:397
+#: fs/mount.pm:126 partition_table.pm:399
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "greška kod demontiranja %s: %s"
@@ -2466,22 +2523,22 @@ msgstr "Daj dozvolu pisanja običnim korisnicima"
 msgid "Give read-only access to ordinary users"
 msgstr ""
 
-#: fs/mount_point.pm:84
+#: fs/mount_point.pm:87
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr "Dupliciraj mjesto monitranja %s"
 
-#: fs/mount_point.pm:99
+#: fs/mount_point.pm:102
 #, c-format
 msgid "No partition available"
 msgstr "nema dostupnih particija"
 
-#: fs/mount_point.pm:102
+#: fs/mount_point.pm:105
 #, c-format
 msgid "Scanning partitions to find mount points"
 msgstr "Tražim particije kako bi pronašao mjesta montiranja"
 
-#: fs/mount_point.pm:109
+#: fs/mount_point.pm:112
 #, c-format
 msgid "Choose the mount points"
 msgstr "Odaberite mjesta montiranja"
@@ -2490,11 +2547,6 @@ msgstr "Odaberite mjesta montiranja"
 #, c-format
 msgid "Choose the partitions you want to format"
 msgstr "Izaberite particije koje želite formatirati"
-
-#: fs/partitioning.pm:48
-#, c-format
-msgid "Check for bad blocks?"
-msgstr "Provjeri za loše blokove?"
 
 #: fs/partitioning.pm:75
 #, c-format
@@ -2508,7 +2560,7 @@ msgstr ""
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr "Nema dovoljno swapa za završetak instalacije, molim dodajte još"
 
-#: fs/partitioning_wizard.pm:59
+#: fs/partitioning_wizard.pm:66
 #, c-format
 msgid ""
 "You must have a root partition.\n"
@@ -2519,7 +2571,7 @@ msgstr ""
 "Prvo napravite particiju (ili kliknite na postojeću) te\n"
 "odaberite akciju ``Mjesto monitranja'' te odaberite `/'"
 
-#: fs/partitioning_wizard.pm:65
+#: fs/partitioning_wizard.pm:72
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2530,42 +2582,42 @@ msgstr ""
 "\n"
 "Da ipak nastavim?"
 
-#: fs/partitioning_wizard.pm:99
+#: fs/partitioning_wizard.pm:115
 #, c-format
 msgid "Use free space"
 msgstr "Koristi slobodan prostor"
 
-#: fs/partitioning_wizard.pm:101
+#: fs/partitioning_wizard.pm:117
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Nema dovoljno slobodnog prostora za pravljenje novih particija"
 
-#: fs/partitioning_wizard.pm:109
+#: fs/partitioning_wizard.pm:125
 #, c-format
 msgid "Use existing partitions"
 msgstr "Koristi postojeće particije"
 
-#: fs/partitioning_wizard.pm:111
+#: fs/partitioning_wizard.pm:127
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "Nema postojećih particija koje bih mogao upotrijebiti"
 
-#: fs/partitioning_wizard.pm:135
+#: fs/partitioning_wizard.pm:151
 #, fuzzy, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Iskoristi slobodan prostor na Microsoft Windows® particiji"
 
-#: fs/partitioning_wizard.pm:171
+#: fs/partitioning_wizard.pm:187
 #, fuzzy, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "Iskoristi slobodan prostor na Windows particiji"
 
-#: fs/partitioning_wizard.pm:175
+#: fs/partitioning_wizard.pm:191
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Kojoj particiji želite promijeniti veličinu?"
 
-#: fs/partitioning_wizard.pm:178
+#: fs/partitioning_wizard.pm:194
 #, fuzzy, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2575,7 +2627,12 @@ msgstr ""
 "Vaša Microsoft Windows® particija je prefragmentirana, molim pokrenite "
 "``defrag'' prvo."
 
-#: fs/partitioning_wizard.pm:186
+#: fs/partitioning_wizard.pm:201
+#, c-format
+msgid "Failed to find the partition to resize (%d choices)"
+msgstr ""
+
+#: fs/partitioning_wizard.pm:208
 #, fuzzy, c-format
 msgid ""
 "WARNING!\n"
@@ -2610,77 +2667,77 @@ msgstr ""
 "Kada ste sigurni da želite nastaviti, pritisnite %s."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:195 fs/partitioning_wizard.pm:557
-#: interactive.pm:674 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:595
+#: fs/partitioning_wizard.pm:217 fs/partitioning_wizard.pm:594
+#: interactive.pm:674 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:593
 #, c-format
 msgid "Next"
 msgstr "Dalje"
 
-#: fs/partitioning_wizard.pm:201
+#: fs/partitioning_wizard.pm:223
 #, fuzzy, c-format
 msgid "Partitionning"
 msgstr "Particioniranje"
 
-#: fs/partitioning_wizard.pm:201
+#: fs/partitioning_wizard.pm:223
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr "Koliku veličinu želite zadržati za windowse particija %s?"
 
-#: fs/partitioning_wizard.pm:202
+#: fs/partitioning_wizard.pm:224
 #, c-format
 msgid "Size"
 msgstr "Veličina"
 
-#: fs/partitioning_wizard.pm:211
+#: fs/partitioning_wizard.pm:233
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Izračunavam granice Microsoft Windows® datotečnog sustava"
 
-#: fs/partitioning_wizard.pm:216
+#: fs/partitioning_wizard.pm:238
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "Mijenjanje FAT veličine nije uspjelo: %s"
 
-#: fs/partitioning_wizard.pm:232
+#: fs/partitioning_wizard.pm:254
 #, fuzzy, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Nema FAT particije za mjenjanje veličine ili za korištenje loopback-a (ili "
 "nema dovoljno prostora)"
 
-#: fs/partitioning_wizard.pm:237
+#: fs/partitioning_wizard.pm:259
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Ukloni Windowse(TM)"
 
-#: fs/partitioning_wizard.pm:237
+#: fs/partitioning_wizard.pm:259
 #, fuzzy, c-format
 msgid "Erase and use entire disk"
 msgstr "Obriši cijeli disk"
 
-#: fs/partitioning_wizard.pm:241
+#: fs/partitioning_wizard.pm:263
 #, fuzzy, c-format
 msgid ""
 "You have more than one hard disk drive, which one do you want the installer "
 "to use?"
 msgstr "Imate više od jednog hard diska, na koji želite instalirati Linux?"
 
-#: fs/partitioning_wizard.pm:249 fsedit.pm:632
+#: fs/partitioning_wizard.pm:271 fsedit.pm:639
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "SVE postojeće particije i podaci biti će izgubljeni na disku %s"
 
-#: fs/partitioning_wizard.pm:259
+#: fs/partitioning_wizard.pm:284
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Proizvoljno particioniranje diska"
 
-#: fs/partitioning_wizard.pm:265
+#: fs/partitioning_wizard.pm:290
 #, c-format
 msgid "Use fdisk"
 msgstr "Koristi fdisk"
 
-#: fs/partitioning_wizard.pm:268
+#: fs/partitioning_wizard.pm:293
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2689,67 +2746,67 @@ msgstr ""
 "Sada možete razdijeliti %s.\n"
 "Kada ste gotovi ne zaboravite spremiti postavu sa `w'"
 
-#: fs/partitioning_wizard.pm:401
+#: fs/partitioning_wizard.pm:436
 #, fuzzy, c-format
 msgid "Ext2/3/4"
 msgstr "Izađi"
 
-#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:577
+#: fs/partitioning_wizard.pm:466 fs/partitioning_wizard.pm:614
 #, c-format
 msgid "I cannot find any room for installing"
 msgstr "Ne mogu pronaći bilo kakvo mjesto za instaliranje"
 
-#: fs/partitioning_wizard.pm:440 fs/partitioning_wizard.pm:584
+#: fs/partitioning_wizard.pm:475 fs/partitioning_wizard.pm:621
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "DrakX čarobnjak za particioniranje je pronašao slijedeća rješenja:"
 
-#: fs/partitioning_wizard.pm:510
+#: fs/partitioning_wizard.pm:545
 #, c-format
 msgid "Here is the content of your disk drive "
 msgstr ""
 
-#: fs/partitioning_wizard.pm:595
+#: fs/partitioning_wizard.pm:632
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Particioniranje neuspjelo: %s"
 
-#: fs/type.pm:365
+#: fs/type.pm:380
 #, c-format
 msgid "You cannot use JFS for partitions smaller than 16MB"
 msgstr "JFS se ne može koristiti na particijama koje su manje od 16 MB"
 
-#: fs/type.pm:366
+#: fs/type.pm:381
 #, c-format
 msgid "You cannot use ReiserFS for partitions smaller than 32MB"
 msgstr "ReiserFS se ne može koristiti na particijama koje su manje od 32 MB"
 
-#: fs/type.pm:367
+#: fs/type.pm:382
 #, fuzzy, c-format
 msgid "You cannot use btrfs for partitions smaller than 256MB"
 msgstr "JFS se ne može koristiti na particijama koje su manje od 16 MB"
 
-#: fsedit.pm:24
+#: fsedit.pm:25
 #, c-format
 msgid "simple"
 msgstr "jednostavno"
 
-#: fsedit.pm:28
+#: fsedit.pm:29
 #, c-format
 msgid "with /usr"
 msgstr "sa /usr"
 
-#: fsedit.pm:33
+#: fsedit.pm:34
 #, c-format
 msgid "server"
 msgstr "poslužitelj"
 
-#: fsedit.pm:137
+#: fsedit.pm:158
 #, c-format
 msgid "BIOS software RAID detected on disks %s. Activate it?"
 msgstr ""
 
-#: fsedit.pm:247
+#: fsedit.pm:268
 #, fuzzy, c-format
 msgid ""
 "I cannot read the partition table of device %s, it's too corrupted for me :"
@@ -2768,58 +2825,22 @@ msgstr ""
 "\n"
 "Da li se slažete da izgubite sve particije?\n"
 
-#: fsedit.pm:427
+#: fsedit.pm:451
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Mjesto montiranja mora početi sa /"
 
-#: fsedit.pm:428
+#: fsedit.pm:452
 #, fuzzy, c-format
 msgid "Mount points should contain only alphanumerical characters"
 msgstr "Ime pisača može sadržavati samo slova, brojeve i podvlaku"
 
-#: fsedit.pm:429
+#: fsedit.pm:453
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Već postoji particija sa mjestom montiranja %s\n"
 
-#: fsedit.pm:434
-#, fuzzy, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a separate /boot partition"
-msgstr ""
-"Izabrali ste softwaresku RAID particiju kao root (/).\n"
-"Nema bootloader-a koji je u mogućnosti to podržati bez /boot particije.\n"
-"Zato budite pažljivi da dodate /boot particiju"
-
-#: fsedit.pm:440
-#, fuzzy, c-format
-msgid ""
-"Metadata version unsupported for a boot partition. Please be sure to add a "
-"separate /boot partition."
-msgstr ""
-"Izabrali ste softwaresku RAID particiju kao root (/).\n"
-"Nema bootloader-a koji je u mogućnosti to podržati bez /boot particije.\n"
-"Zato budite pažljivi da dodate /boot particiju"
-
-#: fsedit.pm:448
-#, fuzzy, c-format
-msgid ""
-"You've selected a software RAID partition as /boot.\n"
-"No bootloader is able to handle this."
-msgstr ""
-"Izabrali ste softwaresku RAID particiju kao root (/).\n"
-"Nema bootloader-a koji je u mogućnosti to podržati bez /boot particije.\n"
-"Zato budite pažljivi da dodate /boot particiju"
-
-#: fsedit.pm:452
-#, c-format
-msgid "Metadata version unsupported for a boot partition."
-msgstr ""
-
-#: fsedit.pm:459
+#: fsedit.pm:456
 #, fuzzy, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
@@ -2830,37 +2851,18 @@ msgstr ""
 "Nema bootloader-a koji je u mogućnosti to podržati bez /boot particije.\n"
 "Zato budite pažljivi da dodate /boot particiju"
 
-#: fsedit.pm:465 fsedit.pm:483
+#: fsedit.pm:462 fsedit.pm:473
 #, c-format
 msgid "You cannot use an encrypted filesystem for mount point %s"
 msgstr ""
 "Ne možete koristiti enkriptirani datotečni sustav za točku montiranja %s"
 
-#: fsedit.pm:469
-#, fuzzy, c-format
-msgid ""
-"You cannot use the LVM Logical Volume for mount point %s since it spans "
-"physical volumes"
-msgstr "Ne možete koristiti LVM logički prostor za mjesto montiranja %s"
-
-#: fsedit.pm:471
-#, fuzzy, c-format
-msgid ""
-"You've selected the LVM Logical Volume as root (/).\n"
-"The bootloader is not able to handle this when the volume spans physical "
-"volumes.\n"
-"You should create a separate /boot partition first"
-msgstr ""
-"Izabrali ste softwaresku RAID particiju kao root (/).\n"
-"Nema bootloader-a koji je u mogućnosti to podržati bez /boot particije.\n"
-"Zato budite pažljivi da dodate /boot particiju"
-
-#: fsedit.pm:475 fsedit.pm:477
+#: fsedit.pm:465 fsedit.pm:467
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Ovaj direktorij bi trebao ostati unutar root datotečnog sustava"
 
-#: fsedit.pm:479 fsedit.pm:481
+#: fsedit.pm:469 fsedit.pm:471
 #, fuzzy, c-format
 msgid ""
 "You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount "
@@ -2869,12 +2871,12 @@ msgstr ""
 "Treba vam istinski datotečni sustav (ex2, reiserfs) za ovo mjesto "
 "montiranja\n"
 
-#: fsedit.pm:548
+#: fsedit.pm:539
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Nema dovoljno slobodnog prostora za auto-alokaciju"
 
-#: fsedit.pm:550
+#: fsedit.pm:541
 #, c-format
 msgid "Nothing to do"
 msgstr "Nema ništa za uraditi"
@@ -2884,338 +2886,301 @@ msgstr "Nema ništa za uraditi"
 msgid "SATA controllers"
 msgstr ""
 
-#: harddrake/data.pm:71
+#: harddrake/data.pm:72
 #, c-format
 msgid "RAID controllers"
 msgstr ""
 
-#: harddrake/data.pm:81
+#: harddrake/data.pm:82
 #, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr "(E)IDE/ATA kontroleri "
 
-#: harddrake/data.pm:92
+#: harddrake/data.pm:93
 #, fuzzy, c-format
 msgid "Card readers"
 msgstr "Memorija kartice (DMA)"
 
-#: harddrake/data.pm:101
+#: harddrake/data.pm:102
 #, c-format
 msgid "Firewire controllers"
 msgstr "Kontroleri Firewire-a"
 
-#: harddrake/data.pm:110
+#: harddrake/data.pm:111
 #, c-format
 msgid "PCMCIA controllers"
 msgstr ""
 
-#: harddrake/data.pm:119
+#: harddrake/data.pm:120
 #, c-format
 msgid "SCSI controllers"
 msgstr "SCSI kontroleri"
 
-#: harddrake/data.pm:128
+#: harddrake/data.pm:129
 #, c-format
 msgid "USB controllers"
 msgstr ""
 
-#: harddrake/data.pm:137
+#: harddrake/data.pm:138
 #, fuzzy, c-format
 msgid "USB ports"
 msgstr ", USB pisač \\/*%s"
 
-#: harddrake/data.pm:146
+#: harddrake/data.pm:147
 #, c-format
 msgid "SMBus controllers"
 msgstr "SMBus kontroleri"
 
-#: harddrake/data.pm:155
+#: harddrake/data.pm:156
 #, c-format
 msgid "Bridges and system controllers"
 msgstr "Mostovi i sistemski kontroleri"
 
-#: harddrake/data.pm:167
+#: harddrake/data.pm:168
 #, c-format
 msgid "Floppy"
 msgstr "Disketa"
 
-#: harddrake/data.pm:177
+#: harddrake/data.pm:178
 #, c-format
 msgid "Zip"
 msgstr "Poštanski broj"
 
-#: harddrake/data.pm:193
+#: harddrake/data.pm:194
 #, c-format
 msgid "Hard Disk"
 msgstr "Hard Disk"
 
-#: harddrake/data.pm:203
+#: harddrake/data.pm:204
 #, c-format
 msgid "USB Mass Storage Devices"
 msgstr ""
 
-#: harddrake/data.pm:212
+#: harddrake/data.pm:213
 #, c-format
 msgid "CDROM"
 msgstr "CDROM"
 
-#: harddrake/data.pm:222
+#: harddrake/data.pm:223
 #, c-format
 msgid "CD/DVD burners"
 msgstr "CD/DVD snimači"
 
-#: harddrake/data.pm:232
+#: harddrake/data.pm:233
 #, c-format
 msgid "DVD-ROM"
 msgstr "DVD-ROM"
 
-#: harddrake/data.pm:242
+#: harddrake/data.pm:243
 #, c-format
 msgid "Tape"
 msgstr "Vrsta"
 
-#: harddrake/data.pm:253
+#: harddrake/data.pm:254
 #, c-format
 msgid "AGP controllers"
 msgstr "AGP kontroleri"
 
-#: harddrake/data.pm:262
+#: harddrake/data.pm:263
 #, fuzzy, c-format
 msgid "Videocard"
 msgstr "Video mod"
 
-#: harddrake/data.pm:271
+#: harddrake/data.pm:272
 #, c-format
 msgid "DVB card"
 msgstr ""
 
-#: harddrake/data.pm:279
+#: harddrake/data.pm:280
 #, fuzzy, c-format
 msgid "Tvcard"
 msgstr "TV kartica"
 
-#: harddrake/data.pm:289
+#: harddrake/data.pm:290
 #, fuzzy, c-format
 msgid "Other MultiMedia devices"
 msgstr "Ostali mediji"
 
-#: harddrake/data.pm:298
+#: harddrake/data.pm:299
 #, c-format
 msgid "Soundcard"
 msgstr "Zvučna kartica"
 
-#: harddrake/data.pm:312
+#: harddrake/data.pm:313
 #, c-format
 msgid "Webcam"
 msgstr ""
 
-#: harddrake/data.pm:327
+#: harddrake/data.pm:328
 #, c-format
 msgid "Processors"
 msgstr "procesori"
 
-#: harddrake/data.pm:337
+#: harddrake/data.pm:338
 #, c-format
 msgid "ISDN adapters"
 msgstr "Interna ISDN kartica"
 
-#: harddrake/data.pm:348
+#: harddrake/data.pm:349
 #, c-format
 msgid "USB sound devices"
 msgstr ""
 
-#: harddrake/data.pm:357
+#: harddrake/data.pm:358
 #, c-format
 msgid "Radio cards"
 msgstr ""
 
-#: harddrake/data.pm:366
+#: harddrake/data.pm:367
 #, c-format
 msgid "ATM network cards"
 msgstr ""
 
-#: harddrake/data.pm:375
+#: harddrake/data.pm:376
 #, c-format
 msgid "WAN network cards"
 msgstr ""
 
-#: harddrake/data.pm:384
+#: harddrake/data.pm:385
 #, c-format
 msgid "Bluetooth devices"
 msgstr ""
 
-#: harddrake/data.pm:393
+#: harddrake/data.pm:394
 #, fuzzy, c-format
 msgid "Ethernetcard"
 msgstr "Ethernet kartica"
 
-#: harddrake/data.pm:410
+#: harddrake/data.pm:411
 #, c-format
 msgid "Modem"
 msgstr "Modem"
 
-#: harddrake/data.pm:420
+#: harddrake/data.pm:421
 #, c-format
 msgid "ADSL adapters"
 msgstr "ADSL adapteri"
 
-#: harddrake/data.pm:432
+#: harddrake/data.pm:433
 #, c-format
 msgid "Memory"
 msgstr "Memorija"
 
-#: harddrake/data.pm:441
+#: harddrake/data.pm:442
 #, c-format
 msgid "Printer"
 msgstr "Pisač"
 
 #. -PO: these are joysticks controllers:
-#: harddrake/data.pm:455
+#: harddrake/data.pm:456
 #, c-format
 msgid "Game port controllers"
 msgstr ""
 
-#: harddrake/data.pm:464
+#: harddrake/data.pm:465
 #, c-format
 msgid "Joystick"
 msgstr "Igračka palica"
 
-#: harddrake/data.pm:474
+#: harddrake/data.pm:475
 #, c-format
 msgid "Keyboard"
 msgstr "Tipkovnica"
 
-#: harddrake/data.pm:488
+#: harddrake/data.pm:489
 #, c-format
 msgid "Tablet and touchscreen"
 msgstr ""
 
-#: harddrake/data.pm:497
+#: harddrake/data.pm:498
 #, c-format
 msgid "Mouse"
 msgstr "Miš"
 
-#: harddrake/data.pm:512
+#: harddrake/data.pm:513
 #, c-format
 msgid "Biometry"
 msgstr ""
 
-#: harddrake/data.pm:520
+#: harddrake/data.pm:521
 #, c-format
 msgid "UPS"
 msgstr "UPS"
 
-#: harddrake/data.pm:529
+#: harddrake/data.pm:530
 #, c-format
 msgid "Scanner"
 msgstr "Skener"
 
-#: harddrake/data.pm:540
+#: harddrake/data.pm:541
 #, fuzzy, c-format
 msgid "Unknown/Others"
 msgstr "Generički"
 
-#: harddrake/data.pm:570
+#: harddrake/data.pm:571
 #, c-format
 msgid "cpu # "
 msgstr "cpu # "
 
-#: harddrake/sound.pm:77
-#, c-format
-msgid "Please Wait... Applying the configuration"
-msgstr "Molimo pričekajte... Primjenjujem konfiguraciju"
-
-#: harddrake/sound.pm:98
+#: harddrake/sound.pm:80
 #, fuzzy, c-format
 msgid "No known driver"
 msgstr "X upravljački program"
 
-#: harddrake/sound.pm:99
+#: harddrake/sound.pm:81
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr ""
 
-#: harddrake/sound.pm:130
+#: harddrake/sound.pm:110
 #, c-format
 msgid "Enable PulseAudio"
 msgstr ""
 
-#: harddrake/sound.pm:135
+#: harddrake/sound.pm:115
 #, c-format
 msgid "Use Glitch-Free mode"
 msgstr ""
 
-#: harddrake/sound.pm:141
+#: harddrake/sound.pm:121
 #, c-format
 msgid "Reset sound mixer to default values"
 msgstr ""
 
-#: harddrake/sound.pm:146
+#: harddrake/sound.pm:125
 #, c-format
 msgid "Troubleshooting"
 msgstr ""
 
-#: harddrake/sound.pm:153
+#: harddrake/sound.pm:132
 #, c-format
 msgid "No alternative driver"
 msgstr "Nema slternativnog upravljačkog programa "
 
-#: harddrake/sound.pm:154
+#: harddrake/sound.pm:133
 #, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
 "currently uses \"%s\""
 msgstr ""
 
-#: harddrake/sound.pm:161
+#: harddrake/sound.pm:140
 #, fuzzy, c-format
 msgid "Sound configuration"
 msgstr "CUPS postavke"
 
-#. -PO: here the first %s is either "ALSA", 
-#. -PO: the second %s is the name of the current driver
-#. -PO: and the third %s is the name of the default driver
-#: harddrake/sound.pm:167
+#: harddrake/sound.pm:144
 #, c-format
-msgid ""
-"\n"
-"\n"
-"Your card currently uses the %s\"%s\" driver (the default driver for your "
-"card is \"%s\")"
+msgid "Your card uses the \"%s\" driver"
 msgstr ""
 
-#: harddrake/sound.pm:169
-#, c-format
-msgid ""
-"OSS (Open Sound System) was the first sound API. It's an OS independent "
-"sound API (it's available on most UNIX(tm) systems) but it's a very basic "
-"and limited API.\n"
-"What's more, OSS drivers all reinvent the wheel.\n"
-"\n"
-"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
-"which\n"
-"supports quite a large range of ISA, USB and PCI cards.\n"
-"\n"
-"It also provides a much higher API than OSS.\n"
-"\n"
-"To use alsa, one can either use:\n"
-"- the old compatibility OSS API\n"
-"- the new ALSA API that provides many enhanced features but requires using "
-"the ALSA library.\n"
-msgstr ""
-
-#: harddrake/sound.pm:184 harddrake/sound.pm:266
-#, c-format
-msgid "Driver:"
-msgstr "Upravljački program:"
-
-#: harddrake/sound.pm:206
+#: harddrake/sound.pm:156
 #, c-format
 msgid "Sound troubleshooting"
 msgstr ""
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:209
+#: harddrake/sound.pm:159
 #, c-format
 msgid ""
 "Below are some basic tips to help debug audio problems, but for accurate and "
@@ -3274,27 +3239,6 @@ msgid ""
 "PulseAudio)\n"
 msgstr ""
 
-#: harddrake/sound.pm:255
-#, c-format
-msgid "Let me pick any driver"
-msgstr "Dopusti da sam odaberem upravljački program"
-
-#: harddrake/sound.pm:258
-#, c-format
-msgid "Choosing an arbitrary driver"
-msgstr "Odaberite nametnuti upravljački program"
-
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:261
-#, c-format
-msgid ""
-"If you really think that you know which driver is the right one for your "
-"card\n"
-"you can pick one from the list below.\n"
-"\n"
-"The current driver for your \"%s\" sound card is \"%s\" "
-msgstr ""
-
 #: harddrake/v4l.pm:12
 #, c-format
 msgid "Auto-detect"
@@ -3337,19 +3281,19 @@ msgstr "Promijeni tip"
 #: interactive.pm:119 interactive.pm:674 interactive/curses.pm:270
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
 #: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:846
-#: mygtk3.pm:898 ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
-#: ugtk3.pm:509 ugtk3.pm:595 ugtk3.pm:910 ugtk3.pm:933
+#: mygtk3.pm:928 ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:810 ugtk2.pm:833
+#: ugtk3.pm:507 ugtk3.pm:593 ugtk3.pm:906 ugtk3.pm:929
 #, c-format
 msgid "Ok"
 msgstr "U redu"
 
-#: interactive.pm:219 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:909
+#: interactive.pm:219 modules/interactive.pm:72 ugtk2.pm:809 ugtk3.pm:905
 #: wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Da"
 
-#: interactive.pm:219 modules/interactive.pm:72 ugtk2.pm:811 ugtk3.pm:909
+#: interactive.pm:219 modules/interactive.pm:72 ugtk2.pm:809 ugtk3.pm:905
 #: wizards.pm:156
 #, c-format
 msgid "No"
@@ -3370,32 +3314,32 @@ msgstr "Dodaj"
 msgid "Modify"
 msgstr "Izmijeni"
 
-#: interactive.pm:674 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:595
+#: interactive.pm:674 interactive/curses.pm:270 ugtk2.pm:519 ugtk3.pm:593
 #, c-format
 msgid "Finish"
 msgstr "Završetak"
 
-#: interactive.pm:675 interactive/curses.pm:267 ugtk2.pm:517 ugtk3.pm:593
+#: interactive.pm:675 interactive/curses.pm:267 ugtk2.pm:517 ugtk3.pm:591
 #, c-format
 msgid "Previous"
 msgstr "Prethodni"
 
-#: interactive/curses.pm:576 ugtk2.pm:872 ugtk3.pm:970
+#: interactive/curses.pm:576 ugtk2.pm:870 ugtk3.pm:966
 #, fuzzy, c-format
 msgid "No file chosen"
 msgstr "izbornik datoteka"
 
-#: interactive/curses.pm:580 ugtk2.pm:876 ugtk3.pm:974
+#: interactive/curses.pm:580 ugtk2.pm:874 ugtk3.pm:970
 #, fuzzy, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "Ime '/' može biti samo mapa, a ne ključ"
 
-#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:976
+#: interactive/curses.pm:582 ugtk2.pm:876 ugtk3.pm:972
 #, fuzzy, c-format
 msgid "No such directory"
 msgstr "Nije mapa"
 
-#: interactive/curses.pm:582 ugtk2.pm:878 ugtk3.pm:976
+#: interactive/curses.pm:582 ugtk2.pm:876 ugtk3.pm:972
 #, c-format
 msgid "No such file"
 msgstr "Datoteka ne postoji"
@@ -3943,7 +3887,7 @@ msgid "Guyana"
 msgstr "Gvajana"
 
 #: lang.pm:394
-#, fuzzy, c-format
+#, c-format
 msgid "Hong Kong SAR (China)"
 msgstr "Hong Kong"
 
@@ -4677,7 +4621,7 @@ msgstr "Zambija"
 msgid "Zimbabwe"
 msgstr "Zimbabve"
 
-#: lang.pm:1548
+#: lang.pm:1576
 #, c-format
 msgid "Welcome to %s"
 msgstr "Dobrodošli u %s"
@@ -4697,7 +4641,7 @@ msgstr ""
 msgid "Remove the logical volumes first\n"
 msgstr "Ukloni logički volumen prvo\n"
 
-#: lvm.pm:221
+#: lvm.pm:222
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr ""
@@ -5223,32 +5167,32 @@ msgstr ""
 "Učitavanje modula %s nije uspjelo.\n"
 "Da li želite pokušati ponovo sa drugim parametrima?"
 
-#: mygtk2.pm:1229 mygtk3.pm:1282
+#: mygtk2.pm:1229 mygtk3.pm:1312
 #, fuzzy, c-format
 msgid "Are you sure you want to quit?"
 msgstr "Da li želite kliknuti na ovaj gumb? "
 
-#: mygtk2.pm:1571 mygtk2.pm:1572 mygtk3.pm:1650 mygtk3.pm:1651
+#: mygtk2.pm:1571 mygtk2.pm:1572 mygtk3.pm:1647 mygtk3.pm:1648
 #, c-format
 msgid "Password is trivial to guess"
 msgstr ""
 
-#: mygtk2.pm:1573 mygtk3.pm:1652
+#: mygtk2.pm:1573 mygtk3.pm:1649
 #, c-format
 msgid "Password should be resistant to basic attacks"
 msgstr ""
 
-#: mygtk2.pm:1574 mygtk2.pm:1575 mygtk3.pm:1653 mygtk3.pm:1654
+#: mygtk2.pm:1574 mygtk2.pm:1575 mygtk3.pm:1650 mygtk3.pm:1651
 #, fuzzy, c-format
 msgid "Password seems secure"
 msgstr "Lozinka"
 
-#: partition_table.pm:415
+#: partition_table.pm:405
 #, c-format
 msgid "mount failed: "
 msgstr "montiranje nije uspjelo: "
 
-#: partition_table.pm:541
+#: partition_table.pm:531
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -5259,7 +5203,7 @@ msgstr ""
 "Jedino rješenje je da pomaknete vašu primarnu particiju kako bi rupa bila\n"
 "odmah do proširenih particija."
 
-#: partition_table/raw.pm:292
+#: partition_table/raw.pm:293
 #, fuzzy, c-format
 msgid ""
 "Something bad is happening on your hard disk drive. \n"
@@ -5379,9 +5323,9 @@ msgid "Accept icmp echo."
 msgstr "Prihvati icmp echo"
 
 #: security/help.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow autologin."
-msgstr "Dozvoli/Zabrani auto-prijavu"
+msgstr "Dozvoli autologin."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
@@ -6603,47 +6547,47 @@ msgstr "Mreža"
 msgid "System"
 msgstr "Sustav"
 
-#: services.pm:170
+#: services.pm:171
 #, c-format
 msgid "Remote Administration"
 msgstr "Udaljeno administriranje"
 
-#: services.pm:179
+#: services.pm:180
 #, c-format
 msgid "Database Server"
 msgstr "Poslužitelj baza podataka"
 
-#: services.pm:190 services.pm:227
+#: services.pm:191 services.pm:233
 #, c-format
 msgid "Services"
 msgstr "Servisi"
 
-#: services.pm:190
+#: services.pm:191
 #, c-format
 msgid "Choose which services should be automatically started at boot time"
 msgstr "Izaberite koji servisi trebaju biti startani automatski kod boot-a"
 
-#: services.pm:208
+#: services.pm:214
 #, c-format
 msgid "%d activated for %d registered"
 msgstr "%d aktiviran za %d registriran"
 
-#: services.pm:231
+#: services.pm:237
 #, c-format
 msgid "running"
 msgstr "radi"
 
-#: services.pm:231
+#: services.pm:237
 #, c-format
 msgid "stopped"
 msgstr "zaustavljen"
 
-#: services.pm:236
+#: services.pm:242
 #, c-format
 msgid "Services and daemons"
 msgstr "Servisi i daemoni"
 
-#: services.pm:242
+#: services.pm:248
 #, c-format
 msgid ""
 "No additional information\n"
@@ -6652,22 +6596,22 @@ msgstr ""
 "Nema dodatnih informacija\n"
 "o ovom servisu, žalim."
 
-#: services.pm:249
+#: services.pm:255
 #, c-format
 msgid "Start when requested"
 msgstr ""
 
-#: services.pm:249
+#: services.pm:255
 #, c-format
 msgid "On boot"
 msgstr "Pri pokretanju"
 
-#: services.pm:266
+#: services.pm:272
 #, c-format
 msgid "Start"
 msgstr "Započni"
 
-#: services.pm:266
+#: services.pm:272
 #, c-format
 msgid "Stop"
 msgstr "Zaustavi"
@@ -6914,17 +6858,17 @@ msgstr "Ruska Federacija"
 msgid "Yugoslavia"
 msgstr "Jugoslavija"
 
-#: ugtk2.pm:812 ugtk3.pm:910
+#: ugtk2.pm:810 ugtk3.pm:906
 #, c-format
 msgid "Is this correct?"
 msgstr "Da li je ovo ispravno?"
 
-#: ugtk2.pm:874 ugtk3.pm:972
+#: ugtk2.pm:872 ugtk3.pm:968
 #, fuzzy, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "Trebate odrediti datoteku, a ne direktorij.\n"
 
-#: ugtk2.pm:924 ugtk3.pm:1022
+#: ugtk2.pm:922 ugtk3.pm:1018
 #, c-format
 msgid "Info"
 msgstr "Info"
@@ -6943,22 +6887,8 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Instalacija nije uspjela"
 
-#~ msgid ""
-#~ "You decided to install the bootloader on a partition.\n"
-#~ "This implies you already have a bootloader on the hard disk drive you "
-#~ "boot (eg: System Commander).\n"
-#~ "\n"
-#~ "On which drive are you booting?"
-#~ msgstr ""
-#~ "Odlučili ste instalirati bootloader na particiju.\n"
-#~ "To podrazumijeva da već imate bootloader na tvrdom disku sa kojeg "
-#~ "podižete\n"
-#~ "sustav (npr. System Commander).\n"
-#~ "\n"
-#~ "Sa kojeg diska želite podizati?"
-
-#~ msgid "You must have a FAT partition mounted in /boot/efi"
-#~ msgstr "Morate imati FAT particiju montiranu na /boot/efi"
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr " "
 
 #~ msgid ""
 #~ "\n"
@@ -7115,11 +7045,18 @@ msgstr "Instalacija nije uspjela"
 #~ msgid "Bad backup file"
 #~ msgstr "Loša backup datoteka"
 
+#, fuzzy
+#~ msgid "Check bad blocks?"
+#~ msgstr "Provjeri za loše blokove?"
+
 #~ msgid "Choose action"
 #~ msgstr "Izaberite akciju"
 
 #~ msgid "Choose the sizes"
 #~ msgstr "Odaberite veličinu"
+
+#~ msgid "Choosing an arbitrary driver"
+#~ msgstr "Odaberite nametnuti upravljački program"
 
 #~ msgid "Clean /tmp at each boot"
 #~ msgstr "Očisti /tmp na svakom podizanju"
@@ -7146,6 +7083,9 @@ msgstr "Instalacija nije uspjela"
 #~ "Ne osvježavaj vremenski pristup inodeu na ovom datotečnom sustavu\n"
 #~ "(na primjer za brži pristup na odlagalište diskusija da se ubrzaju "
 #~ "poslužitelji vijesti (newsa))"
+
+#~ msgid "Driver:"
+#~ msgstr "Upravljački program:"
 
 #~ msgid "Enable CD Boot?"
 #~ msgstr "Omogući CD podizanje?"
@@ -7282,6 +7222,18 @@ msgstr "Instalacija nije uspjela"
 #~ "Pokreće paketno filtriranje za Linux kernel 2.2 serije, za postavljanje\n"
 #~ "vatrozida za zaštitu vašeg računala od mrežnih napada."
 
+#~ msgid "Let me pick any driver"
+#~ msgstr "Dopusti da sam odaberem upravljački program"
+
+#, fuzzy
+#~ msgid ""
+#~ "Metadata version unsupported for a boot partition. Please be sure to add "
+#~ "a separate /boot partition."
+#~ msgstr ""
+#~ "Izabrali ste softwaresku RAID particiju kao root (/).\n"
+#~ "Nema bootloader-a koji je u mogućnosti to podržati bez /boot particije.\n"
+#~ "Zato budite pažljivi da dodate /boot particiju"
+
 #~ msgid "Moondrake"
 #~ msgstr "Moondrake"
 
@@ -7323,6 +7275,9 @@ msgstr "Instalacija nije uspjela"
 #~ msgstr ""
 #~ "Lozinke su sada uključene međutim još ne preporučam korištenje ovog "
 #~ "računala u mrežnom okolišu."
+
+#~ msgid "Please Wait... Applying the configuration"
+#~ msgstr "Molimo pričekajte... Primjenjujem konfiguraciju"
 
 #~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
 #~ msgstr "Molim prvo se odjavite te pritisnite Ctrl-Alt-BackSpace"
@@ -7622,6 +7577,29 @@ msgstr "Instalacija nije uspjela"
 #~ msgid "Yaboot"
 #~ msgstr "Yaboot"
 
+#~ msgid "You cannot install the bootloader on a %s partition\n"
+#~ msgstr "Ne možete instalirati bootloader na %s particiju\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "You cannot use the LVM Logical Volume for mount point %s since it spans "
+#~ "physical volumes"
+#~ msgstr "Ne možete koristiti LVM logički prostor za mjesto montiranja %s"
+
+#~ msgid ""
+#~ "You decided to install the bootloader on a partition.\n"
+#~ "This implies you already have a bootloader on the hard disk drive you "
+#~ "boot (eg: System Commander).\n"
+#~ "\n"
+#~ "On which drive are you booting?"
+#~ msgstr ""
+#~ "Odlučili ste instalirati bootloader na particiju.\n"
+#~ "To podrazumijeva da već imate bootloader na tvrdom disku sa kojeg "
+#~ "podižete\n"
+#~ "sustav (npr. System Commander).\n"
+#~ "\n"
+#~ "Sa kojeg diska želite podizati?"
+
 #~ msgid ""
 #~ "You may need to change your Open Firmware boot-device to\n"
 #~ " enable the bootloader.  If you do not see the bootloader prompt at\n"
@@ -7636,6 +7614,39 @@ msgstr "Instalacija nije uspjela"
 #~ " setenv boot-device %s,\\\\:tbxi\n"
 #~ " Tada napišite: shut-down\n"
 #~ "Pri slijedećem podizanju trebali biste vidjeti prompt bootloadera."
+
+#~ msgid "You must have a FAT partition mounted in /boot/efi"
+#~ msgstr "Morate imati FAT particiju montiranu na /boot/efi"
+
+#, fuzzy
+#~ msgid ""
+#~ "You've selected a software RAID partition as /boot.\n"
+#~ "No bootloader is able to handle this."
+#~ msgstr ""
+#~ "Izabrali ste softwaresku RAID particiju kao root (/).\n"
+#~ "Nema bootloader-a koji je u mogućnosti to podržati bez /boot particije.\n"
+#~ "Zato budite pažljivi da dodate /boot particiju"
+
+#, fuzzy
+#~ msgid ""
+#~ "You've selected a software RAID partition as root (/).\n"
+#~ "No bootloader is able to handle this without a /boot partition.\n"
+#~ "Please be sure to add a separate /boot partition"
+#~ msgstr ""
+#~ "Izabrali ste softwaresku RAID particiju kao root (/).\n"
+#~ "Nema bootloader-a koji je u mogućnosti to podržati bez /boot particije.\n"
+#~ "Zato budite pažljivi da dodate /boot particiju"
+
+#, fuzzy
+#~ msgid ""
+#~ "You've selected the LVM Logical Volume as root (/).\n"
+#~ "The bootloader is not able to handle this when the volume spans physical "
+#~ "volumes.\n"
+#~ "You should create a separate /boot partition first"
+#~ msgstr ""
+#~ "Izabrali ste softwaresku RAID particiju kao root (/).\n"
+#~ "Nema bootloader-a koji je u mogućnosti to podržati bez /boot particije.\n"
+#~ "Zato budite pažljivi da dodate /boot particiju"
 
 #~ msgid "restrict"
 #~ msgstr "ograniči"

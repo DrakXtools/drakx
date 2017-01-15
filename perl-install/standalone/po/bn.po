@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 12:28+0100\n"
+"POT-Creation-Date: 2017-01-15 15:12+0100\n"
 "PO-Revision-Date: 2005-03-19 23:18+0600\n"
 "Last-Translator: Samia <mailsamia2001@yahoo.com>\n"
 "Language-Team: Bangla <mdk-translation@bengalinux.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: display_help:53 display_help:58 drakbug:173 drakperm:134
+#: display_help:50 display_help:55 drakbug:173 drakperm:134
 #, c-format
 msgid "Help"
 msgstr "সহায়িকা"
 
-#: display_help:66 drakbug:178 drakfont:507
+#: display_help:63 drakbug:178 drakfont:507
 #, c-format
 msgid "Close"
 msgstr "বন্ধ করো"
@@ -33,141 +33,64 @@ msgstr "বন্ধ করো"
 msgid "Authentication"
 msgstr "অনুমোদন"
 
-#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213
-#: drakfont:226 drakfont:264 finish-install:133 logdrake:177 logdrake:453
-#: logdrake:458 scannerdrake:56 scannerdrake:98 scannerdrake:139
-#: scannerdrake:197 scannerdrake:256 scannerdrake:726 scannerdrake:737
-#: scannerdrake:876 scannerdrake:887 scannerdrake:957
+#: drakauth:37 drakclock:117 drakclock:142 drakdvb:74 drakfont:213 drakfont:226
+#: drakfont:264 finish-install:133 logdrake:177 logdrake:453 logdrake:458
+#: scannerdrake:56 scannerdrake:98 scannerdrake:139 scannerdrake:197
+#: scannerdrake:256 scannerdrake:726 scannerdrake:737 scannerdrake:876
+#: scannerdrake:887 scannerdrake:957
 #, c-format
 msgid "Error"
 msgstr "ত্রুটি"
 
-#: drakboot:54
-#, c-format
-msgid "No bootloader found, creating a new configuration"
-msgstr ""
-
-#: drakboot:89 harddrake2:191 logdrake:77
+#: drakautologin:54 harddrake2:195 logdrake:77
 #, c-format
 msgid "_File"
 msgstr "ফাইল (_ফ)"
 
-#: drakboot:90 harddrake2:192 logdrake:78 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:78 logdrake:79
 #, c-format
 msgid "_Quit"
 msgstr "পরিত্যাগ (_প)"
 
-#: drakboot:90 harddrake2:192 logdrake:79
+#: drakautologin:55 harddrake2:196 logdrake:79
 #, c-format
 msgid "<control>Q"
 msgstr "<control>0x10009aa"
 
-#: drakboot:138
-#, c-format
-msgid "Text only"
-msgstr "শুধুমাত্র টেক্সট"
-
-#: drakboot:139
-#, c-format
-msgid "Verbose"
-msgstr ""
-
-#: drakboot:140
-#, c-format
-msgid "Silent"
-msgstr "নীরব"
-
-#: drakboot:146 drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381
-#: drakups:27 harddrake2:504 localedrake:45 scannerdrake:48 scannerdrake:51
-#: scannerdrake:294 scannerdrake:299 scannerdrake:951
-#, c-format
-msgid "Warning"
-msgstr "সতর্কবাণী"
-
-#: drakboot:147
-#, c-format
-msgid ""
-"Your system bootloader is not in framebuffer mode. To activate graphical "
-"boot, select a graphic video mode from the bootloader configuration tool."
-msgstr ""
-"আপনার সিস্টেমের বুটলোডার ফ্রেমবাফার মোডে নেই।  গ্রাফিকাল বুট পদ্ধতি সক্রিয় করার জন্য "
-"গ্রাফিকাল বুট কনফিগারেশন থেকে একটি গ্রাফিকাল ভিডিও মোড বেছে নিন।"
-
-#: drakboot:148
-#, c-format
-msgid "Do you want to configure it now?"
-msgstr "আপনি কি এক্ষুনি কনফিগার করতে চান?"
-
-#: drakboot:157
-#, c-format
-msgid "Install themes"
-msgstr "থিম ইনস্টল করো"
-
-#: drakboot:159
-#, c-format
-msgid "Graphical boot theme selection"
-msgstr "গ্রাফিকাল বুট থিম কনফিগারেশন"
-
-#: drakboot:162
-#, fuzzy, c-format
-msgid "Graphical boot mode:"
-msgstr "গ্রাফিকাল বুট পদ্ধতি ব্যবহার করো"
-
-#: drakboot:164
-#, c-format
-msgid "Theme"
-msgstr "থিম"
-
-#: drakboot:198
+#: drakautologin:100
 #, c-format
 msgid "Default user"
 msgstr "ডিফল্ট ব্যবহারকারী"
 
-#: drakboot:199
+#: drakautologin:101
 #, c-format
 msgid "Default desktop"
 msgstr "ডিফল্ট ডেস্কটপ"
 
-#: drakboot:202
+#: drakautologin:104
 #, c-format
 msgid "No, I do not want autologin"
 msgstr "না, আমি স্বয়ংক্রিয়ভাবে লগ-ইন করতে চাই না"
 
-#: drakboot:203
+#: drakautologin:105
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "হ্যাঁ, আমি স্বয়ংক্রিয়ভাবে এটিতে লগ-ইন করতে চাই (ব্যবহারকারী, ডেস্কটপ)"
 
-#: drakboot:210
+#: drakautologin:112
 #, c-format
 msgid "System mode"
 msgstr "সিস্টেম মোড"
 
-#: drakboot:213
+#: drakautologin:115
 #, c-format
 msgid "Launch the graphical environment when your system starts"
 msgstr "সিস্টেম চালু করার সময় গ্রাফিকাল মোড সচল করো"
 
-#: drakboot:268
+#: drakboot:41
 #, c-format
-msgid "Boot Style Configuration"
-msgstr "বুটের ধরণ কনফিগারেশন"
-
-#: drakboot:270 drakboot:274
-#, c-format
-msgid "Video mode"
-msgstr "ভিডিওর ধরণ"
-
-#: drakboot:271
-#, c-format
-msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries "
-"selected below.\n"
-"Be sure your video card supports the mode you choose."
+msgid "No bootloader found, creating a new configuration"
 msgstr ""
-"অনুগ্রহ করে একটি ভিডিও মোড বেছে নিন, এটার নিচের প্রত্যেক বাছাইকৃত বুট এন্ট্রিতে "
-"প্রভাব ফেলবে।\n"
-"নিশ্চিত হোন যে আপনার ভিডিও কার্ড আপনার বেছে নেয়া মোড সমর্থন করে কিনা।"
 
 #: drakbug:52 drakbug:140
 #, c-format
@@ -327,6 +250,13 @@ msgstr "ইনস্টল করা নেই"
 msgid "Package not installed"
 msgstr "প্যাকেজ ইনস্টল করা নেই"
 
+#: drakbug:250 drakdvb:57 drakfont:682 drakperm:371 drakperm:381 drakups:27
+#: harddrake2:509 localedrake:45 scannerdrake:48 scannerdrake:51
+#: scannerdrake:294 scannerdrake:299 scannerdrake:951
+#, c-format
+msgid "Warning"
+msgstr "সতর্কবাণী"
+
 #: drakbug:251
 #, c-format
 msgid ""
@@ -448,7 +378,7 @@ msgstr ""
 msgid "Could not get the list of available channels"
 msgstr ""
 
-#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:358
+#: drakdvb:80 draksec:69 drakups:99 finish-install:106 harddrake2:362
 #: scannerdrake:63 scannerdrake:67 scannerdrake:75 scannerdrake:316
 #: scannerdrake:365 scannerdrake:501 scannerdrake:505 scannerdrake:527
 #: service_harddrake:426
@@ -497,16 +427,21 @@ msgid "SLIM (Simple Display Manager)"
 msgstr "XDM (X ডিসপ্লে ম্যানেজার)"
 
 #: drakedm:45
+#, fuzzy, c-format
+msgid "SDDM (Simple Desktop Display Manager)"
+msgstr "XDM (X ডিসপ্লে ম্যানেজার)"
+
+#: drakedm:46
 #, c-format
 msgid "XDM (X Display Manager)"
 msgstr "XDM (X ডিসপ্লে ম্যানেজার)"
 
-#: drakedm:56
+#: drakedm:57
 #, c-format
 msgid "Choosing a display manager"
 msgstr "একটি ডিসপ্লে ম্যানেজার বেছে নেয়া হচ্ছে"
 
-#: drakedm:57
+#: drakedm:58
 #, c-format
 msgid ""
 "X11 Display Manager allows you to graphically log\n"
@@ -517,14 +452,14 @@ msgstr ""
 "করতে পারেন এবং আপনার \n"
 "স্থানীয় কম্পিউটারে একাধিক পৃথক এক্স সেশন চালাতে পারেন।"
 
-#: drakedm:80
+#: drakedm:81
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
 msgstr ""
 "পরিবর্তন সম্পন্ন হয়েছে, আপনি কি ডি-এম (ডিসপ্লে ম্যানেজার) সার্ভিস পুনরায় চালু করতে "
 "চান?"
 
-#: drakedm:81
+#: drakedm:82
 #, c-format
 msgid ""
 "You are going to close all running programs and lose your current session. "
@@ -680,7 +615,7 @@ msgid "Import"
 msgstr "ইমপোর্ট"
 
 #: drakfont:521
-#, fuzzy, c-format
+#, c-format
 msgid "Drakfont"
 msgstr "DrakFont"
 
@@ -701,7 +636,7 @@ msgstr "ম্যান্ড্রিব লিনাক্স (Mandriva Linux)
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:532 harddrake2:531
+#: drakfont:532 harddrake2:536
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr "Bangla team <mdk-translation@bengalinux.org>\n"
@@ -776,12 +711,12 @@ msgstr "ইনস্টল করো"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr ""
 
-#: drakfont:688 draksec:59 harddrake2:302
+#: drakfont:688 draksec:59 harddrake2:306
 #, c-format
 msgid "Yes"
 msgstr "হ্যাঁ"
 
-#: drakfont:690 draksec:58 harddrake2:303
+#: drakfont:690 draksec:58 harddrake2:307
 #, c-format
 msgid "No"
 msgstr "না"
@@ -1244,19 +1179,19 @@ msgid "UPS Configuration"
 msgstr "ইউ-পি-এস ড্রাইভার কন্‌ফিগারেশন"
 
 #: draksec:177
-#, fuzzy, c-format
+#, c-format
 msgid "Network Configuration"
-msgstr "সংকেত কনফিগারেশন"
+msgstr "নেটওয়ার্ক কনফিগারেশন"
 
 #: draksec:178
 #, c-format
 msgid "Hosts definitions"
-msgstr ""
+msgstr "হোস্ট ডেফিনিশনসমূহ"
 
 #: draksec:179
-#, fuzzy, c-format
+#, c-format
 msgid "Network Center"
-msgstr "নেটওয়ার্ক এবং ইন্টারনেট"
+msgstr "নেটওয়ার্ক সেন্টার"
 
 #: draksec:180
 #, c-format
@@ -1294,7 +1229,7 @@ msgid "Services"
 msgstr "সার্ভিসসমূহ"
 
 #: draksec:189
-#, fuzzy, c-format
+#, c-format
 msgid "Users"
 msgstr "ব্যবহারকারী"
 
@@ -1309,9 +1244,9 @@ msgid "Hardware"
 msgstr "হার্ডওয়্যার"
 
 #: draksec:225
-#, fuzzy, c-format
+#, c-format
 msgid "Network"
-msgstr "নেটওয়ার্ক অপশন"
+msgstr "নেটওয়ার্ক"
 
 #: draksec:226
 #, c-format
@@ -1328,43 +1263,20 @@ msgstr "বুট"
 msgid "No Sound Card detected!"
 msgstr "কোন সাউন্ড কার্ড সনাক্ত করা যায়নি!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: draksound:51
-#, c-format
+#: draksound:50
+#, fuzzy, c-format
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
-"supported Sound Card is correctly plugged in.\n"
+"supported Sound Card is correctly plugged in"
+msgstr ""
+"আপনি মেশিনে কোন টিভি কার্ড পাওয়া যায় নি। অনুগ্রহ করে পরীক্ষা করুন যে লিনাক্স-"
+"সমর্থিত ভিডিও/টিভি কার্ড সঠিকভাবে সংযুক্ত আছে।\n"
 "\n"
 "\n"
-"You can visit our hardware database at:\n"
+"আপনি আমাদের হার্ডওয়্যার ডাটাবেজে ঘুরে আসতে পারেন:\n"
 "\n"
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
-msgstr ""
-"আপনার মেশিনে কোন সাউন্ডকার্ড পাওয়া যায়নি। অনুগ্রহ করে ভালভাবে দেখুন একটি লিনাক্স-"
-"সমর্থিত সাউন্ডকার্ড সঠিকভাবে লাগানো আছে।\n"
-" \n"
-"\n"
-"আপনি আমাদের হার্ডওয়ার ডাটাবেজে ঘুরে আসতে পারেন:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
-
-#: draksound:58
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
-"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
-msgstr ""
-"\n"
-"\n"
-"\n"
-"নোট: যদি আপনার ISA PnP সাউন্ডকার্ড থাকে, তাহলে আপনাকে alsaconf বা sndconfig "
-"প্রোগ্রাম ব্হব্যবহার করতে হবে। কনসোলে শুধুমাত্র \"alsaconf\" বা \"sndconfig\" "
-"ব্যবহার করুন।"
 
 #: drakups:71
 #, c-format
@@ -1409,7 +1321,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "সয়ংক্রিয় সনাক্ত"
 
-#: drakups:99 harddrake2:358
+#: drakups:99 harddrake2:362
 #, c-format
 msgid "Detection in progress"
 msgstr "সনাক্তকরনে উন্নতি হচ্ছে"
@@ -1494,12 +1406,12 @@ msgid "UPS devices"
 msgstr "ইউ-পি-এস যন্ত্র"
 
 #: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:116
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "Name"
 msgstr "নাম"
 
-#: drakups:249 harddrake2:139
+#: drakups:249 harddrake2:143
 #, c-format
 msgid "Driver"
 msgstr "ড্রাইভার"
@@ -1575,18 +1487,11 @@ msgstr "ইউ-পি-এস কন্‌ফিগারেশন টুলে �
 msgid "No TV Card detected!"
 msgstr "কোন টিভি কার্ড পাওয়া যায় নি!"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: drakxtv:68
-#, c-format
+#: drakxtv:67
+#, fuzzy, c-format
 msgid ""
 "No TV Card has been detected on your machine. Please verify that a Linux-"
-"supported Video/TV Card is correctly plugged in.\n"
-"\n"
-"\n"
-"You can visit our hardware database at:\n"
-"\n"
-"\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"supported Video/TV Card is correctly plugged in."
 msgstr ""
 "আপনি মেশিনে কোন টিভি কার্ড পাওয়া যায় নি। অনুগ্রহ করে পরীক্ষা করুন যে লিনাক্স-"
 "সমর্থিত ভিডিও/টিভি কার্ড সঠিকভাবে সংযুক্ত আছে।\n"
@@ -1610,7 +1515,7 @@ msgstr "অনুগ্রহ করে আপনার কী-বোর্ড �
 #: finish-install:106
 #, c-format
 msgid "Testing your connection..."
-msgstr ""
+msgstr "আপনার কানেকশন পরীক্ষা করা হচ্ছে..."
 
 #: finish-install:187
 #, c-format
@@ -1682,7 +1587,7 @@ msgstr "বিকল্প ড্রাইভার"
 msgid "the list of alternative drivers for this sound card"
 msgstr "এই সাউন্ড কার্ডের জন্য বিকল্প ড্রাইভারের তালিকা"
 
-#: harddrake2:33 harddrake2:125
+#: harddrake2:33 harddrake2:129
 #, c-format
 msgid "Bus"
 msgstr "বাস"
@@ -1695,7 +1600,7 @@ msgstr ""
 "এটা হচ্ছে ফিজিকাল বাস (physical bas) যেখানে যন্ত্রগুলো যুক্ত থাকে (যেমন: পি-সি-আই, "
 "ইউএসবি, ...)"
 
-#: harddrake2:36 harddrake2:151
+#: harddrake2:36 harddrake2:155
 #, c-format
 msgid "Bus identification"
 msgstr "বাস পরিচিতি"
@@ -2017,7 +1922,7 @@ msgstr "ফ্ল্যাগ"
 msgid "CPU flags reported by the kernel"
 msgstr "কার্ণেলের দ্বারা রিপোর্টকৃত CPU ফ্ল্যাগ"
 
-#: harddrake2:80 harddrake2:144
+#: harddrake2:80 harddrake2:148
 #, fuzzy, c-format
 msgid "Cores"
 msgstr "বন্ধ করো"
@@ -2185,7 +2090,7 @@ msgstr "সক্রিয়কৃত আকার"
 msgid "Enabled size of the memory bank"
 msgstr "মেমরী ব্যংকের সক্রিয়কৃত আকার"
 
-#: harddrake2:113 harddrake2:122
+#: harddrake2:113 harddrake2:126
 #, c-format
 msgid "Type"
 msgstr "ধরণ"
@@ -2195,12 +2100,12 @@ msgstr "ধরণ"
 msgid "type of the memory device"
 msgstr "মেমরী ডিভাইসের ধরন"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed"
 msgstr "গতি"
 
-#: harddrake2:114
+#: harddrake2:114 harddrake2:120
 #, c-format
 msgid "Speed of the memory bank"
 msgstr "মেমরী ব্যংকের গতি"
@@ -2215,158 +2120,173 @@ msgstr "ব্যাংক সংযোগসমূহ"
 msgid "Socket designation of the memory bank"
 msgstr "মেমরী ব্যংকটির সকেটের নাম"
 
-#: harddrake2:120
+#: harddrake2:118
+#, fuzzy, c-format
+msgid "Location"
+msgstr "কাজ"
+
+#: harddrake2:119
+#, c-format
+msgid "Size"
+msgstr "মাপ"
+
+#: harddrake2:119
+#, fuzzy, c-format
+msgid "Size of the memory device"
+msgstr "মেমরী ডিভাইসের ধরন"
+
+#: harddrake2:124
 #, c-format
 msgid "Device file"
 msgstr "ডিভাইস ফাইল"
 
-#: harddrake2:120
+#: harddrake2:124
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr "মাউসের জন্য কার্ণেল ড্রাইভারের সাথে যোগাযোগে ব্যবহৃত ডিভাইস ফাইল"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "Emulated wheel"
 msgstr "সমকক্ষ চাকা"
 
-#: harddrake2:121
+#: harddrake2:125
 #, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "চাকা সমকক্ষ হবে কিংবা হবে না"
 
-#: harddrake2:122
+#: harddrake2:126
 #, c-format
 msgid "the type of the mouse"
 msgstr "মাউসের ধরণ"
 
-#: harddrake2:123
+#: harddrake2:127
 #, c-format
 msgid "the name of the mouse"
 msgstr "মাউসের নাম"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "Number of buttons"
 msgstr "বাটনের নম্বর"
 
-#: harddrake2:124
+#: harddrake2:128
 #, c-format
 msgid "the number of buttons the mouse has"
 msgstr "মাউসের বাটন সংখ্যা"
 
-#: harddrake2:125
+#: harddrake2:129
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "মাউসটি যে বাসে সংযুক্ত তার ধরণ"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr "X11 কর্তৃক ব্যবহৃত মাউস প্রোটোকল"
 
-#: harddrake2:126
+#: harddrake2:130
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "মাউসের সাথে গ্রাফিকাল ডেস্কটপ ব্যবহারের প্রোটোকল"
 
-#: harddrake2:130
+#: harddrake2:134
 #, c-format
 msgid "Identification"
 msgstr "শনাক্তকারন"
 
-#: harddrake2:135 harddrake2:150
+#: harddrake2:139 harddrake2:154
 #, c-format
 msgid "Connection"
 msgstr "সংযোগ"
 
-#: harddrake2:145
+#: harddrake2:149
 #, c-format
 msgid "Performances"
 msgstr "সম্পাদন কার্য"
 
-#: harddrake2:152
+#: harddrake2:156
 #, c-format
 msgid "Device"
 msgstr "ডিভাইস"
 
-#: harddrake2:153
+#: harddrake2:157
 #, c-format
 msgid "Partitions"
 msgstr "পার্টিশনসমূহ"
 
-#: harddrake2:158
+#: harddrake2:162
 #, c-format
 msgid "Features"
 msgstr "বৈশিষ্ট্যসমূহ"
 
-#: harddrake2:179
+#: harddrake2:183
 #, c-format
 msgid "Autodetect _modems"
 msgstr "স্বয়ংক্রিয় মডেম (_ম)"
 
-#: harddrake2:180
+#: harddrake2:184
 #, c-format
 msgid "Autodetect parallel _zip drives"
 msgstr ""
 
-#: harddrake2:184
+#: harddrake2:188
 #, fuzzy, c-format
 msgid "Hardware Configuration"
 msgstr "নেটওয়ার্ক কনফিগারেশন"
 
-#: harddrake2:193
+#: harddrake2:197
 #, c-format
 msgid "_Options"
 msgstr "অপশন (_ও)"
 
-#: harddrake2:194 harddrake2:195
+#: harddrake2:198 harddrake2:199
 #, c-format
 msgid "_Help"
 msgstr "সাহায্য _য"
 
-#: harddrake2:195
-#, fuzzy, c-format
+#: harddrake2:199
+#, c-format
 msgid "<control>H"
-msgstr "<control>0x10009aa"
+msgstr "<control>H"
 
-#: harddrake2:196
+#: harddrake2:200
 #, c-format
 msgid "_Fields description"
 msgstr "ফিল্ডের বর্ণনা (_ফ)"
 
-#: harddrake2:197
+#: harddrake2:201
 #, c-format
 msgid "_Report Bug"
 msgstr "_বাগ রিপোর্ট করো"
 
-#: harddrake2:198
+#: harddrake2:202
 #, c-format
 msgid "_About..."
 msgstr "_সম্বন্ধে..."
 
-#: harddrake2:242
+#: harddrake2:246
 #, c-format
 msgid "Detected hardware"
 msgstr "সনাক্তকৃত হার্ডওয়্যার"
 
-#: harddrake2:245 scannerdrake:283
+#: harddrake2:249 scannerdrake:283
 #, c-format
 msgid "Information"
 msgstr "তথ্য"
 
-#: harddrake2:247
+#: harddrake2:251
 #, c-format
 msgid "Set current driver options"
 msgstr ""
 
-#: harddrake2:254
+#: harddrake2:257
 #, c-format
 msgid "Run config tool"
 msgstr "কনফিগ টুল চালাও"
 
-#: harddrake2:280
+#: harddrake2:284
 #, c-format
 msgid ""
 "Click on a device in the tree on the left in order to display its "
@@ -2374,72 +2294,72 @@ msgid ""
 msgstr ""
 "বামপাশের ট্রীতে কোন একটি যন্ত্রের উপর ক্লিক করুন এখানে তার সম্পর্কে তথ্য দেখার জন্য।"
 
-#: harddrake2:300 notify-x11-free-driver-switch:13
+#: harddrake2:304 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "অজানা"
 
-#: harddrake2:301
+#: harddrake2:305
 #, c-format
 msgid "Unknown"
 msgstr "অজানা"
 
-#: harddrake2:321
+#: harddrake2:325
 #, c-format
 msgid "Misc"
 msgstr "আনুসাঙ্গিক"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "secondary"
 msgstr "মাধ্যমিক"
 
-#: harddrake2:404
+#: harddrake2:408
 #, c-format
 msgid "primary"
 msgstr "প্রাইমারী"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "burner"
 msgstr "বার্ণার"
 
-#: harddrake2:408
+#: harddrake2:412
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:504
+#: harddrake2:509
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "নিম্নোক্ত প্যাকেজসমূহ ইনস্টল করা প্রয়োজন:\n"
 
-#: harddrake2:521
-#, fuzzy, c-format
+#: harddrake2:525
+#, c-format
 msgid "Harddrake"
-msgstr "হার্ডড্রেক২"
+msgstr "হার্ডড্রেক"
 
-#: harddrake2:523
-#, fuzzy, c-format
+#: harddrake2:528
+#, c-format
 msgid "Copyright (C) %s by %s"
-msgstr "কপিরাইট (C) ১৯৯৯-২০০৬ ম্যান্ড্রিব।"
+msgstr "কপিরাইট %s %s"
 
-#: harddrake2:523 harddrake2:527
+#: harddrake2:528 harddrake2:532
 #, c-format
 msgid "Mageia"
 msgstr ""
 
-#: harddrake2:525
+#: harddrake2:530
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr ""
 
-#: harddrake2:540
+#: harddrake2:545
 #, c-format
 msgid "Harddrake help"
 msgstr "হার্ডড্রেকের সাহায্য"
 
-#: harddrake2:541
+#: harddrake2:546
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -2448,12 +2368,12 @@ msgstr ""
 "ফিল্ডগুলোর বর্ণনা:\n"
 "\n"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid "Select a device!"
 msgstr "একটি যন্ত্র বেছে নিন!"
 
-#: harddrake2:548
+#: harddrake2:553
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2708,9 +2628,9 @@ msgstr ""
 "এবং আপনি যেই SMTP সার্ভারটি ব্যবহার করতে চান তার নাম (অথবা IP ঠিকানা) প্রবেশ করুন"
 
 #: logdrake:448
-#, fuzzy, c-format
+#, c-format
 msgid "Email address"
-msgstr "IP ঠিকানাসমূহ"
+msgstr "ইমেইল ঠিকানা"
 
 #: logdrake:449
 #, fuzzy, c-format
@@ -2746,8 +2666,7 @@ msgstr "এই সাহায্যকারীটি সঠিকভাবে 
 msgid "Save as.."
 msgstr "...এর মত সেভ করো"
 
-#: notify-x11-free-driver-switch:18 service_harddrake:468
-#: service_harddrake:481
+#: notify-x11-free-driver-switch:18 service_harddrake:468 service_harddrake:481
 #, c-format
 msgid "Display driver setup"
 msgstr ""
@@ -3411,6 +3330,16 @@ msgstr "সেটিং"
 msgid "Language & country configuration"
 msgstr "স্বনির্বাচিত কনফিগারেশন"
 
+#: ../polkit/org.mageia.drakautologin.policy.in.h:1
+#, fuzzy
+msgid "Run Mageia AutoLogin Configuration"
+msgstr "সংকেত কনফিগারেশন"
+
+#: ../polkit/org.mageia.drakautologin.policy.in.h:2
+#, fuzzy
+msgid "Authentication is required to run Mageia AutoLogin Configuration"
+msgstr "সংকেত কনফিগারেশন"
+
 #: ../polkit/org.moondrake.drakauth.policy.in.h:1
 #, fuzzy
 msgid "Run DrakX Authentication Configuration"
@@ -3538,57 +3467,23 @@ msgstr "মেইলের সংকেত কনফিগারেশন"
 msgid "Authentication is required to run DrakX Service Configuration"
 msgstr "মেইলের সংকেত কনফিগারেশন"
 
-#, fuzzy
-#~ msgid "%s Bug Report Tool"
-#~ msgstr "ম্যান্ড্রিব লিনাক্স ত্রুটি রিপোর্টকারী টুল"
+#~ msgid "%s Control Center"
+#~ msgstr "%s নিয়ন্ত্রণ কেন্দ্র"
 
-#, fuzzy
-#~ msgid "%s Tools Logs"
-#~ msgstr "Moondrake টুলসমুহের লগ"
-
-#, fuzzy
-#~ msgid "Run Moondrake Application Security Configuration"
-#~ msgstr "সয়ংক্রিয় ধাপসমুহের কনফিগারেশন"
-
-#, fuzzy
-#~ msgid "Run Moondrake Authentication Configuration"
-#~ msgstr "সয়ংক্রিয় ধাপসমুহের কনফিগারেশন"
-
-#, fuzzy
-#~ msgid "Run Moondrake Boot Configuration"
-#~ msgstr "সংকেত কনফিগারেশন"
-
-#, fuzzy
-#~ msgid "Run Moondrake Date and Time Configuration"
-#~ msgstr "মেইলের সংকেত কনফিগারেশন"
-
-#, fuzzy
-#~ msgid "Run Moondrake Font Configuration"
-#~ msgstr "স্বনির্বাচিত কনফিগারেশন"
-
-#, fuzzy
-#~ msgid "Run Moondrake Hardware Configuration"
-#~ msgstr "মেইলের সংকেত কনফিগারেশন"
-
-#, fuzzy
-#~ msgid "Run Moondrake Login Manager Configuration"
-#~ msgstr "স্বনির্বাচিত কনফিগারেশন"
-
-#, fuzzy
-#~ msgid "Run Moondrake Scanner Configuration"
-#~ msgstr "মেইলের সংকেত কনফিগারেশন"
-
-#, fuzzy
-#~ msgid "Run Moondrake Security Permissions Configuration"
-#~ msgstr "মেইলের সংকেত কনফিগারেশন"
-
-#, fuzzy
-#~ msgid "Run Moondrake Service Configuration"
-#~ msgstr "মেইলের সংকেত কনফিগারেশন"
-
-#, fuzzy
-#~ msgid "Run Moondrake UPS Configuration"
-#~ msgstr "ইউ-পি-এস ড্রাইভার কন্‌ফিগারেশন"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
+#~ "the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a "
+#~ "console."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "নোট: যদি আপনার ISA PnP সাউন্ডকার্ড থাকে, তাহলে আপনাকে alsaconf বা sndconfig "
+#~ "প্রোগ্রাম ব্হব্যবহার করতে হবে। কনসোলে শুধুমাত্র \"alsaconf\" বা \"sndconfig\" "
+#~ "ব্যবহার করুন।"
 
 #~ msgid ""
 #~ "\n"
@@ -3624,12 +3519,16 @@ msgstr "মেইলের সংকেত কনফিগারেশন"
 #~ "ব্যবহার: \n"
 
 #, fuzzy
-#~ msgid "%s Control Center"
-#~ msgstr "ম্যান্ড্রিব লিনাক্স নিয়ন্ত্রন (control) সেন্টার"
+#~ msgid "%s Bug Report Tool"
+#~ msgstr "ম্যান্ড্রিব লিনাক্স ত্রুটি রিপোর্টকারী টুল"
 
 #, fuzzy
 #~ msgid "%s Help Center"
 #~ msgstr "Moondrake সাহায্যকেন্দ্র"
+
+#, fuzzy
+#~ msgid "%s Tools Logs"
+#~ msgstr "Moondrake টুলসমুহের লগ"
 
 #~ msgid "(default value: %s)"
 #~ msgstr "(ডিফল্ট মান: %s)"
@@ -3718,6 +3617,9 @@ msgstr "মেইলের সংকেত কনফিগারেশন"
 #~ msgid "Basic options"
 #~ msgstr "বেসিক অপশন"
 
+#~ msgid "Boot Style Configuration"
+#~ msgstr "বুটের ধরণ কনফিগারেশন"
+
 #~ msgid "Bugs"
 #~ msgstr "প্রোগ্রাম ত্রুটিসমূহ"
 
@@ -3749,6 +3651,9 @@ msgstr "মেইলের সংকেত কনফিগারেশন"
 #~ msgstr ""
 #~ "কনসোলে\n"
 #~ "থিম দেখাও"
+
+#~ msgid "Do you want to configure it now?"
+#~ msgstr "আপনি কি এক্ষুনি কনফিগার করতে চান?"
 
 #, fuzzy
 #~ msgid "Do you want to remove these packages?"
@@ -3798,6 +3703,13 @@ msgstr "মেইলের সংকেত কনফিগারেশন"
 
 #~ msgid "Final resolution"
 #~ msgstr "ফাইনাল রেজুলেশন"
+
+#, fuzzy
+#~ msgid "Graphical boot mode:"
+#~ msgstr "গ্রাফিকাল বুট পদ্ধতি ব্যবহার করো"
+
+#~ msgid "Graphical boot theme selection"
+#~ msgstr "গ্রাফিকাল বুট থিম কনফিগারেশন"
 
 #~ msgid "Halt bug"
 #~ msgstr "ত্রুটি থামাও"
@@ -3921,6 +3833,9 @@ msgstr "মেইলের সংকেত কনফিগারেশন"
 #~ msgid "Insert another blank floppy in drive %s (for drivers disk)"
 #~ msgstr "আরেকটি ফাঁকা ফ্লপি %s ডিস্কে ঢুকান (ড্রাইভার ডিস্কের জন্য)"
 
+#~ msgid "Install themes"
+#~ msgstr "থিম ইনস্টল করো"
+
 #~ msgid "Is FPU present"
 #~ msgstr "FPU কি উপস্থিত আছে"
 
@@ -3946,24 +3861,34 @@ msgstr "মেইলের সংকেত কনফিগারেশন"
 #~ msgid "Network Options"
 #~ msgstr "নেটওয়ার্ক অপশন"
 
-#, fuzzy
 #~ msgid ""
 #~ "No Sound Card has been detected on your machine. Please verify that a "
-#~ "Linux-supported Sound Card is correctly plugged in"
+#~ "Linux-supported Sound Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
-#~ "আপনি মেশিনে কোন টিভি কার্ড পাওয়া যায় নি। অনুগ্রহ করে পরীক্ষা করুন যে লিনাক্স-"
-#~ "সমর্থিত ভিডিও/টিভি কার্ড সঠিকভাবে সংযুক্ত আছে।\n"
+#~ "আপনার মেশিনে কোন সাউন্ডকার্ড পাওয়া যায়নি। অনুগ্রহ করে ভালভাবে দেখুন একটি "
+#~ "লিনাক্স-সমর্থিত সাউন্ডকার্ড সঠিকভাবে লাগানো আছে।\n"
+#~ " \n"
 #~ "\n"
-#~ "\n"
-#~ "আপনি আমাদের হার্ডওয়্যার ডাটাবেজে ঘুরে আসতে পারেন:\n"
+#~ "আপনি আমাদের হার্ডওয়ার ডাটাবেজে ঘুরে আসতে পারেন:\n"
 #~ "\n"
 #~ "\n"
 #~ "http://www.mandrivalinux.com/en/hardware.php3"
 
-#, fuzzy
 #~ msgid ""
 #~ "No TV Card has been detected on your machine. Please verify that a Linux-"
-#~ "supported Video/TV Card is correctly plugged in."
+#~ "supported Video/TV Card is correctly plugged in.\n"
+#~ "\n"
+#~ "\n"
+#~ "You can visit our hardware database at:\n"
+#~ "\n"
+#~ "\n"
+#~ "http://www.mandrivalinux.com/en/hardware.php3"
 #~ msgstr ""
 #~ "আপনি মেশিনে কোন টিভি কার্ড পাওয়া যায় নি। অনুগ্রহ করে পরীক্ষা করুন যে লিনাক্স-"
 #~ "সমর্থিত ভিডিও/টিভি কার্ড সঠিকভাবে সংযুক্ত আছে।\n"
@@ -3979,6 +3904,15 @@ msgstr "মেইলের সংকেত কনফিগারেশন"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "পুনরাবৃত্তি পরীক্ষা"
+
+#~ msgid ""
+#~ "Please choose a video mode, it will be applied to each of the boot "
+#~ "entries selected below.\n"
+#~ "Be sure your video card supports the mode you choose."
+#~ msgstr ""
+#~ "অনুগ্রহ করে একটি ভিডিও মোড বেছে নিন, এটার নিচের প্রত্যেক বাছাইকৃত বুট এন্ট্রিতে "
+#~ "প্রভাব ফেলবে।\n"
+#~ "নিশ্চিত হোন যে আপনার ভিডিও কার্ড আপনার বেছে নেয়া মোড সমর্থন করে কিনা।"
 
 #~ msgid ""
 #~ "Please choose for each step whether it will replay like your install, or "
@@ -4010,6 +3944,46 @@ msgstr "মেইলের সংকেত কনফিগারেশন"
 #~ msgid "Restart XFS"
 #~ msgstr "XFS পুনরায় চালু করো"
 
+#, fuzzy
+#~ msgid "Run Moondrake Application Security Configuration"
+#~ msgstr "সয়ংক্রিয় ধাপসমুহের কনফিগারেশন"
+
+#, fuzzy
+#~ msgid "Run Moondrake Authentication Configuration"
+#~ msgstr "সয়ংক্রিয় ধাপসমুহের কনফিগারেশন"
+
+#, fuzzy
+#~ msgid "Run Moondrake Date and Time Configuration"
+#~ msgstr "মেইলের সংকেত কনফিগারেশন"
+
+#, fuzzy
+#~ msgid "Run Moondrake Font Configuration"
+#~ msgstr "স্বনির্বাচিত কনফিগারেশন"
+
+#, fuzzy
+#~ msgid "Run Moondrake Hardware Configuration"
+#~ msgstr "মেইলের সংকেত কনফিগারেশন"
+
+#, fuzzy
+#~ msgid "Run Moondrake Login Manager Configuration"
+#~ msgstr "স্বনির্বাচিত কনফিগারেশন"
+
+#, fuzzy
+#~ msgid "Run Moondrake Scanner Configuration"
+#~ msgstr "মেইলের সংকেত কনফিগারেশন"
+
+#, fuzzy
+#~ msgid "Run Moondrake Security Permissions Configuration"
+#~ msgstr "মেইলের সংকেত কনফিগারেশন"
+
+#, fuzzy
+#~ msgid "Run Moondrake Service Configuration"
+#~ msgstr "মেইলের সংকেত কনফিগারেশন"
+
+#, fuzzy
+#~ msgid "Run Moondrake UPS Configuration"
+#~ msgstr "ইউ-পি-এস ড্রাইভার কন্‌ফিগারেশন"
+
 #~ msgid "Save theme"
 #~ msgstr "থীম সংরক্ষণ করো"
 
@@ -4024,6 +3998,9 @@ msgstr "মেইলের সংকেত কনফিগারেশন"
 
 #~ msgid "Select Mandriva Tool:"
 #~ msgstr "Mandriva টুল বেছে নিন:"
+
+#~ msgid "Silent"
+#~ msgstr "নীরব"
 
 #~ msgid ""
 #~ "Some of the early i486DX-100 chips cannot reliably return to operating "
@@ -4041,6 +4018,9 @@ msgstr "মেইলের সংকেত কনফিগারেশন"
 
 #~ msgid "Text box height"
 #~ msgstr "টেক্সট্ বক্সের উচ্চতা"
+
+#~ msgid "Text only"
+#~ msgstr "শুধুমাত্র টেক্সট"
 
 #~ msgid "The change is done, but to be effective you must logout"
 #~ msgstr ""
@@ -4084,6 +4064,9 @@ msgstr "মেইলের সংকেত কনফিগারেশন"
 #~ msgid "The width of the progress bar"
 #~ msgstr "প্রোগ্রেস বারের প্রস্থ"
 
+#~ msgid "Theme"
+#~ msgstr "থিম"
+
 #~ msgid "Theme name"
 #~ msgstr "থীমের নাম"
 
@@ -4096,8 +4079,18 @@ msgstr "মেইলের সংকেত কনফিগারেশন"
 #~ msgid "Userdrake"
 #~ msgstr "ইউজারড্রেক"
 
+#~ msgid "Video mode"
+#~ msgstr "ভিডিওর ধরণ"
+
 #~ msgid "Whether the FPU has an irq vector"
 #~ msgstr "যখন FPU এর একটি irq ভেক্টর আছে"
+
+#~ msgid ""
+#~ "Your system bootloader is not in framebuffer mode. To activate graphical "
+#~ "boot, select a graphic video mode from the bootloader configuration tool."
+#~ msgstr ""
+#~ "আপনার সিস্টেমের বুটলোডার ফ্রেমবাফার মোডে নেই।  গ্রাফিকাল বুট পদ্ধতি সক্রিয় করার "
+#~ "জন্য গ্রাফিকাল বুট কনফিগারেশন থেকে একটি গ্রাফিকাল ভিডিও মোড বেছে নিন।"
 
 #~ msgid "choose image"
 #~ msgstr "ছবি (image) পছন্দ করুন"
