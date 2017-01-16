@@ -58,13 +58,15 @@ struct eventResult {
 enum eventTypes { EV_FOCUS, EV_UNFOCUS, EV_KEYPRESS, EV_MOUSE };
 enum eventSequence { EV_EARLY, EV_NORMAL, EV_LATE };
 
+enum mouseActions { MOUSE_MOTION, MOUSE_BUTTON_DOWN, MOUSE_BUTTON_UP };
+
 struct event {
     enum eventTypes event;
     enum eventSequence when;
     union {
 	int key;
 	struct {
-	    enum { MOUSE_MOTION, MOUSE_BUTTON_DOWN, MOUSE_BUTTON_UP } type;
+	    enum mouseActions type;
 	    int x, y;
 	} mouse;
     } u;

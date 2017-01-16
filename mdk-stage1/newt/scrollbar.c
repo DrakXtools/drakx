@@ -25,15 +25,15 @@ static struct componentOps sbOps = {
 
 void newtScrollbarSet(newtComponent co, int where, int total) {
     struct scrollbar * sb = co->data;
-    int new;
+    int New;
 
     if (sb->arrows)
-	new = (where * (co->height - 3)) / (total ? total : 1) + 1;
+	New = (where * (co->height - 3)) / (total ? total : 1) + 1;
     else
-	new = (where * (co->height - 1)) / (total ? total : 1);
-    if (new != sb->curr) {
+	New = (where * (co->height - 1)) / (total ? total : 1);
+    if (New != sb->curr) {
 	sbDrawThumb(co, 0);
-	sb->curr = new;
+	sb->curr = New;
 	sbDrawThumb(co, 1);
     }
 }

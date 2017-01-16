@@ -348,7 +348,7 @@ struct index_file *index_file_open(const char *filename)
 {
 	FILE *file;
 	uint32_t magic, version;
-	struct index_file *new;
+	struct index_file *New;
 
 	file = fopen(filename, "re");
 	if (!file)
@@ -367,12 +367,12 @@ struct index_file *index_file_open(const char *filename)
 		return NULL;
 	}
 
-	new = NOFAIL(malloc(sizeof(struct index_file)));
-	new->file = file;
-	new->root_offset = read_long(new->file);
+	New = NOFAIL(malloc(sizeof(struct index_file)));
+	New->file = file;
+	New->root_offset = read_long(New->file);
 
 	errno = 0;
-	return new;
+	return New;
 }
 
 void index_file_close(struct index_file *idx)

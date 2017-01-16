@@ -55,7 +55,7 @@ struct kmod_elf {
 	const uint8_t *memory;
 	uint8_t *changed;
 	uint64_t size;
-	enum kmod_elf_class class;
+	enum kmod_elf_class Class;
 	struct kmod_elf_header {
 		struct {
 			uint64_t offset;
@@ -83,8 +83,8 @@ static inline void _elf_dbg(const struct kmod_elf *elf, const char *fname, unsig
 	va_list args;
 
 	fprintf(stderr, "ELFDBG-%d%c: %s:%u %s() ",
-		(elf->class & KMOD_ELF_32) ? 32 : 64,
-		(elf->class & KMOD_ELF_MSB) ? 'M' : 'L',
+		(elf->Class & KMOD_ELF_32) ? 32 : 64,
+		(elf->Class & KMOD_ELF_MSB) ? 'M' : 'L',
 		fname, line, func);
 	va_start(args, fmt);
 	vfprintf(stderr, fmt, args);
@@ -98,7 +98,7 @@ static inline void _elf_dbg(const struct kmod_elf *elf, const char *fname, unsig
 static int elf_identify(const void *memory, uint64_t size)
 {
 	const uint8_t *p = memory;
-	int class = 0;
+	int Class = 0;
 
 	if (size <= EI_NIDENT || memcmp(p, ELFMAG, SELFMAG) != 0)
 		return -ENOEXEC;
@@ -107,12 +107,12 @@ static int elf_identify(const void *memory, uint64_t size)
 	case ELFCLASS32:
 		if (size <= sizeof(Elf32_Ehdr))
 			return -EINVAL;
-		class |= KMOD_ELF_32;
+		Class |= KMOD_ELF_32;
 		break;
 	case ELFCLASS64:
 		if (size <= sizeof(Elf64_Ehdr))
 			return -EINVAL;
-		class |= KMOD_ELF_64;
+		Class |= KMOD_ELF_64;
 		break;
 	default:
 		return -EINVAL;
@@ -120,16 +120,16 @@ static int elf_identify(const void *memory, uint64_t size)
 
 	switch (p[EI_DATA]) {
 	case ELFDATA2LSB:
-		class |= KMOD_ELF_LSB;
+		Class |= KMOD_ELF_LSB;
 		break;
 	case ELFDATA2MSB:
-		class |= KMOD_ELF_MSB;
+		Class |= KMOD_ELF_MSB;
 		break;
 	default:
 		return -EINVAL;
 	}
 
-	return class;
+	return Class;
 }
 
 static inline uint64_t elf_get_uint(const struct kmod_elf *elf, uint64_t offset, uint16_t size)
@@ -147,7 +147,7 @@ static inline uint64_t elf_get_uint(const struct kmod_elf *elf, uint64_t offset,
 	}
 
 	p = elf->memory + offset;
-	if (elf->class & KMOD_ELF_MSB) {
+	if (elf->Class & KMOD_ELF_MSB) {
 		for (i = 0; i < size; i++)
 			ret = (ret << 8) | p[i];
 	} else {
@@ -187,7 +187,7 @@ static inline int elf_set_uint(struct kmod_elf *elf, uint64_t offset, uint64_t s
 	}
 
 	p = elf->changed + offset;
-	if (elf->class & KMOD_ELF_MSB) {
+	if (elf->Class & KMOD_ELF_MSB) {
 		for (i = 1; i <= size; i++) {
 			p[size - i] = value & 0xff;
 			value = (value & 0xffffffffffffff00) >> 8;
@@ -242,7 +242,7 @@ static inline int elf_get_section_info(const struct kmod_elf *elf, uint16_t idx,
 #define READV(field) \
 	elf_get_uint(elf, off + offsetof(typeof(*hdr), field), sizeof(hdr->field))
 
-	if (elf->class & KMOD_ELF_32) {
+	if (elf->Class & KMOD_ELF_32) {
 		const Elf32_Shdr *hdr _unused_ = (const Elf32_Shdr *)p;
 		*size = READV(sh_size);
 		*offset = READV(sh_offset);
@@ -278,16 +278,16 @@ struct kmod_elf *kmod_elf_new(const void *memory, off_t size)
 {
 	struct kmod_elf *elf;
 	size_t hdr_size, shdr_size, min_size;
-	int class;
+	int Class;
 
 	assert(sizeof(uint16_t) == sizeof(Elf32_Half));
 	assert(sizeof(uint16_t) == sizeof(Elf64_Half));
 	assert(sizeof(uint32_t) == sizeof(Elf32_Word));
 	assert(sizeof(uint32_t) == sizeof(Elf64_Word));
 
-	class = elf_identify(memory, size);
-	if (class < 0) {
-		errno = -class;
+	Class = elf_identify(memory, size);
+	if (Class < 0) {
+		errno = -Class;
 		return NULL;
 	}
 
@@ -299,7 +299,7 @@ struct kmod_elf *kmod_elf_new(const void *memory, off_t size)
 	elf->memory = memory;
 	elf->changed = NULL;
 	elf->size = size;
-	elf->class = class;
+	elf->Class = Class;
 
 #define READV(field) \
 	elf_get_uint(elf, offsetof(typeof(*hdr), field), sizeof(hdr->field))
@@ -310,7 +310,7 @@ struct kmod_elf *kmod_elf_new(const void *memory, off_t size)
 	elf->header.section.entry_size = READV(e_shentsize);	\
 	elf->header.strings.section = READV(e_shstrndx);	\
 	elf->header.machine = READV(e_machine)
-	if (elf->class & KMOD_ELF_32) {
+	if (elf->Class & KMOD_ELF_32) {
 		const Elf32_Ehdr *hdr _unused_ = elf_get_mem(elf, 0);
 		LOAD_HEADER;
 		hdr_size = sizeof(Elf32_Ehdr);
@@ -491,7 +491,7 @@ int kmod_elf_get_modversions(const struct kmod_elf *elf, struct kmod_modversion 
 	assert(sizeof(struct kmod_modversion64) ==
 					sizeof(struct kmod_modversion32));
 
-	if (elf->class == KMOD_ELF_32)
+	if (elf->Class == KMOD_ELF_32)
 		offcrc = sizeof(uint32_t);
 	else
 		offcrc = sizeof(uint64_t);
@@ -560,7 +560,7 @@ int kmod_elf_strip_section(struct kmod_elf *elf, const char *section)
 
 #define WRITEV(field, value)			\
 	elf_set_uint(elf, off + offsetof(typeof(*hdr), field), sizeof(hdr->field), value)
-	if (elf->class & KMOD_ELF_32) {
+	if (elf->Class & KMOD_ELF_32) {
 		const Elf32_Shdr *hdr _unused_ = buf;
 		uint32_t val = ~(uint32_t)SHF_ALLOC;
 		return WRITEV(sh_flags, val);
@@ -749,7 +749,7 @@ int kmod_elf_get_symbols(const struct kmod_elf *elf, struct kmod_modversion **ar
 		goto fallback;
 	}
 
-	if (elf->class & KMOD_ELF_32)
+	if (elf->Class & KMOD_ELF_32)
 		symlen = sizeof(Elf32_Sym);
 	else
 		symlen = sizeof(Elf64_Sym);
@@ -771,7 +771,7 @@ int kmod_elf_get_symbols(const struct kmod_elf *elf, struct kmod_modversion **ar
 #define READV(field)							\
 		elf_get_uint(elf, sym_off + offsetof(typeof(*s), field),\
 			     sizeof(s->field))
-		if (elf->class & KMOD_ELF_32) {
+		if (elf->Class & KMOD_ELF_32) {
 			Elf32_Sym *s;
 			name_off = READV(st_name);
 		} else {
@@ -812,7 +812,7 @@ int kmod_elf_get_symbols(const struct kmod_elf *elf, struct kmod_modversion **ar
 #define READV(field)							\
 		elf_get_uint(elf, sym_off + offsetof(typeof(*s), field),\
 			     sizeof(s->field))
-		if (elf->class & KMOD_ELF_32) {
+		if (elf->Class & KMOD_ELF_32) {
 			Elf32_Sym *s;
 			name_off = READV(st_name);
 			crc = READV(st_value);
@@ -829,7 +829,7 @@ int kmod_elf_get_symbols(const struct kmod_elf *elf, struct kmod_modversion **ar
 			continue;
 		name += crc_strlen;
 
-		if (elf->class & KMOD_ELF_32)
+		if (elf->Class & KMOD_ELF_32)
 			bind = ELF32_ST_BIND(info);
 		else
 			bind = ELF64_ST_BIND(info);
@@ -855,7 +855,7 @@ static int kmod_elf_crc_find(const struct kmod_elf *elf, const void *versions, u
 	size_t verlen, crclen, off;
 	uint64_t i;
 
-	if (elf->class & KMOD_ELF_32) {
+	if (elf->Class & KMOD_ELF_32) {
 		struct kmod_modversion32 *mv;
 		verlen = sizeof(*mv);
 		crclen = sizeof(mv->crc);
@@ -904,7 +904,7 @@ int kmod_elf_get_dependency_symbols(const struct kmod_elf *elf, struct kmod_modv
 		verlen = 0;
 		crclen = 0;
 	} else {
-		if (elf->class & KMOD_ELF_32) {
+		if (elf->Class & KMOD_ELF_32) {
 			struct kmod_modversion32 *mv;
 			verlen = sizeof(*mv);
 			crclen = sizeof(mv->crc);
@@ -932,7 +932,7 @@ int kmod_elf_get_dependency_symbols(const struct kmod_elf *elf, struct kmod_modv
 		return -EINVAL;
 	}
 
-	if (elf->class & KMOD_ELF_32)
+	if (elf->Class & KMOD_ELF_32)
 		symlen = sizeof(Elf32_Sym);
 	else
 		symlen = sizeof(Elf64_Sym);
@@ -978,7 +978,7 @@ int kmod_elf_get_dependency_symbols(const struct kmod_elf *elf, struct kmod_modv
 #define READV(field)							\
 		elf_get_uint(elf, sym_off + offsetof(typeof(*s), field),\
 			     sizeof(s->field))
-		if (elf->class & KMOD_ELF_32) {
+		if (elf->Class & KMOD_ELF_32) {
 			Elf32_Sym *s;
 			name_off = READV(st_name);
 			secidx = READV(st_shndx);
@@ -995,7 +995,7 @@ int kmod_elf_get_dependency_symbols(const struct kmod_elf *elf, struct kmod_modv
 
 		if (handle_register_symbols) {
 			uint8_t type;
-			if (elf->class & KMOD_ELF_32)
+			if (elf->Class & KMOD_ELF_32)
 				type = ELF32_ST_TYPE(info);
 			else
 				type = ELF64_ST_TYPE(info);
@@ -1073,7 +1073,7 @@ int kmod_elf_get_dependency_symbols(const struct kmod_elf *elf, struct kmod_modv
 #define READV(field)							\
 		elf_get_uint(elf, sym_off + offsetof(typeof(*s), field),\
 			     sizeof(s->field))
-		if (elf->class & KMOD_ELF_32) {
+		if (elf->Class & KMOD_ELF_32) {
 			Elf32_Sym *s;
 			name_off = READV(st_name);
 			secidx = READV(st_shndx);
@@ -1090,7 +1090,7 @@ int kmod_elf_get_dependency_symbols(const struct kmod_elf *elf, struct kmod_modv
 
 		if (handle_register_symbols) {
 			uint8_t type;
-			if (elf->class & KMOD_ELF_32)
+			if (elf->Class & KMOD_ELF_32)
 				type = ELF32_ST_TYPE(info);
 			else
 				type = ELF64_ST_TYPE(info);
@@ -1110,7 +1110,7 @@ int kmod_elf_get_dependency_symbols(const struct kmod_elf *elf, struct kmod_modv
 			continue;
 		}
 
-		if (elf->class & KMOD_ELF_32)
+		if (elf->Class & KMOD_ELF_32)
 			bind = ELF32_ST_BIND(info);
 		else
 			bind = ELF64_ST_BIND(info);

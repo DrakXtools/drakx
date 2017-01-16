@@ -158,7 +158,7 @@ static int Gpm_Open(Gpm_Connect *conn, int flag)
   char *term;
   int i;
   struct sockaddr_un addr;
-  Gpm_Stst *new;
+  Gpm_Stst *New;
   char* sock_name = 0;
 
   /*....................................... First of all, check xterm */
@@ -185,16 +185,16 @@ static int Gpm_Open(Gpm_Connect *conn, int flag)
   if (!gpm_flag && gpm_tried) return -1;
   gpm_tried=1; /* do or die */
 
-  new=malloc(sizeof(Gpm_Stst));
-  if (!new) return -1;
+  New=malloc(sizeof(Gpm_Stst));
+  if (!New) return -1;
 
-  new->next=gpm_stack;
-  gpm_stack=new;
+  New->next=gpm_stack;
+  gpm_stack=New;
 
   conn->pid=getpid(); /* fill obvious values */
 
-  if (new->next)
-    conn->vc=new->next->info.vc; /* inherit */
+  if (New->next)
+    conn->vc=New->next->info.vc; /* inherit */
   else
     {
       conn->vc=0;                 /* default handler */
@@ -218,7 +218,7 @@ static int Gpm_Open(Gpm_Connect *conn, int flag)
 
     }
 
-  new->info=*conn;
+  New->info=*conn;
 
   /*....................................... Connect to the control socket */
 
@@ -300,9 +300,9 @@ static int Gpm_Open(Gpm_Connect *conn, int flag)
  err:
   do
     {
-      new=gpm_stack->next;
+      New=gpm_stack->next;
       free(gpm_stack);
-      gpm_stack=new;
+      gpm_stack=New;
     }
   while(gpm_stack);
   if (gpm_fd>=0) close(gpm_fd);
@@ -518,21 +518,21 @@ static void formScroll(newtComponent co, int delta) {
 
 void newtFormSetCurrent(newtComponent co, newtComponent subco) {
     struct form * form = co->data;
-    int i, new;
+    int i, New;
 
     for (i = 0; i < form->numComps; i++) {
 	 if (form->elements[i].co == subco) break;
     }
 
     if (form->elements[i].co != subco) return;
-    new = i;
+    New = i;
 
-    if (co->isMapped && !componentFits(co, new)) {
+    if (co->isMapped && !componentFits(co, New)) {
 	gotoComponent(form, -1);
-	formScroll(co, form->elements[new].co->top - co->top - 1);
+	formScroll(co, form->elements[New].co->top - co->top - 1);
     }
 
-    gotoComponent(form, new);
+    gotoComponent(form, New);
 }
 
 void newtFormSetTimer(newtComponent co, int millisecs) {
@@ -631,7 +631,7 @@ void newtDrawForm(newtComponent co) {
 static struct eventResult formEvent(newtComponent co, struct event ev) {
     struct form * form = co->data;
     newtComponent subco = form->elements[form->currComp].co;
-    int new, wrap = 0;
+    int New, wrap = 0;
     struct eventResult er;
     int dir = 0, page = 0;
     int i, num, found;
@@ -743,48 +743,48 @@ static struct eventResult formEvent(newtComponent co, struct event ev) {
     }
 
     if (dir) {
-	new = form->currComp;
+	New = form->currComp;
 
 	if (page) {
-	    new += dir * co->height;
-	    if (new < 0)
-		new = 0;
-	    else if (new >= form->numComps)
-		new = (form->numComps - 1);
+	    New += dir * co->height;
+	    if (New < 0)
+		New = 0;
+	    else if (New >= form->numComps)
+		New = (form->numComps - 1);
 
-	    while (!form->elements[new].co->takesFocus &&
-		    new - dir >= 0 && new - dir < form->numComps)
-		new -= dir;
+	    while (!form->elements[New].co->takesFocus &&
+		    New - dir >= 0 && New - dir < form->numComps)
+		New -= dir;
 	} else {
 	    do {
-		new += dir;
+		New += dir;
 
 		if (wrap) {
-		    if (new < 0)
-			new = form->numComps - 1;
-		    else if (new >= form->numComps)
-			new = 0;
-		    if (new == form->currComp)
+		    if (New < 0)
+			New = form->numComps - 1;
+		    else if (New >= form->numComps)
+			New = 0;
+		    if (New == form->currComp)
 			/* back where we started */
 			return er;
-		} else if (new < 0 || new >= form->numComps)
+		} else if (New < 0 || New >= form->numComps)
 		    return er;
-	    } while (!form->elements[new].co->takesFocus);
+	    } while (!form->elements[New].co->takesFocus);
 	}
 
 	/* make sure this component is visible */
-	if (!componentFits(co, new)) {
+	if (!componentFits(co, New)) {
 	    int vertDelta;
 
 	    gotoComponent(form, -1);
 
 	    if (dir < 0) {
 		/* make the new component the first one */
-		vertDelta = form->elements[new].co->top - co->top;
+		vertDelta = form->elements[New].co->top - co->top;
 	    } else {
 		/* make the new component the last one */
-		vertDelta = (form->elements[new].co->top +
-					form->elements[new].co->height) -
+		vertDelta = (form->elements[New].co->top +
+					form->elements[New].co->height) -
 				    (co->top + co->height);
 	    }
 
@@ -792,7 +792,7 @@ static struct eventResult formEvent(newtComponent co, struct event ev) {
 	    newtDrawForm(co);
 	}
 
-	gotoComponent(form, new);
+	gotoComponent(form, New);
 	er.result = ER_SWALLOWED;
     }
 

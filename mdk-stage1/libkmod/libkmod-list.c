@@ -127,32 +127,32 @@ static inline void list_node_append_list(struct list_node *list1,
 
 struct kmod_list *kmod_list_append(struct kmod_list *list, const void *data)
 {
-	struct kmod_list *new;
+	struct kmod_list *New;
 
-	new = malloc(sizeof(*new));
-	if (new == NULL)
+	New = malloc(sizeof(*New));
+	if (New == NULL)
 		return NULL;
 
-	new->data = (void *)data;
-	list_node_append(list ? &list->node : NULL, &new->node);
+	New->data = (void *)data;
+	list_node_append(list ? &list->node : NULL, &New->node);
 
-	return list ? list : new;
+	return list ? list : New;
 }
 
 struct kmod_list *kmod_list_insert_after(struct kmod_list *list,
 							const void *data)
 {
-	struct kmod_list *new;
+	struct kmod_list *New;
 
 	if (list == NULL)
 		return kmod_list_append(list, data);
 
-	new = malloc(sizeof(*new));
-	if (new == NULL)
+	New = malloc(sizeof(*New));
+	if (New == NULL)
 		return NULL;
 
-	new->data = (void *)data;
-	list_node_insert_after(&list->node, &new->node);
+	New->data = (void *)data;
+	list_node_insert_after(&list->node, &New->node);
 
 	return list;
 }
@@ -160,19 +160,19 @@ struct kmod_list *kmod_list_insert_after(struct kmod_list *list,
 struct kmod_list *kmod_list_insert_before(struct kmod_list *list,
 							const void *data)
 {
-	struct kmod_list *new;
+	struct kmod_list *New;
 
 	if (list == NULL)
 		return kmod_list_append(list, data);
 
-	new = malloc(sizeof(*new));
-	if (new == NULL)
+	New = malloc(sizeof(*New));
+	if (New == NULL)
 		return NULL;
 
-	new->data = (void *)data;
-	list_node_insert_before(&list->node, &new->node);
+	New->data = (void *)data;
+	list_node_insert_before(&list->node, &New->node);
 
-	return new;
+	return New;
 }
 
 struct kmod_list *kmod_list_append_list(struct kmod_list *list1,
@@ -191,16 +191,16 @@ struct kmod_list *kmod_list_append_list(struct kmod_list *list1,
 
 struct kmod_list *kmod_list_prepend(struct kmod_list *list, const void *data)
 {
-	struct kmod_list *new;
+	struct kmod_list *New;
 
-	new = malloc(sizeof(*new));
-	if (new == NULL)
+	New = malloc(sizeof(*New));
+	if (New == NULL)
 		return NULL;
 
-	new->data = (void *)data;
-	list_node_append(list ? &list->node : NULL, &new->node);
+	New->data = (void *)data;
+	list_node_append(list ? &list->node : NULL, &New->node);
 
-	return new;
+	return New;
 }
 
 struct kmod_list *kmod_list_remove(struct kmod_list *list)

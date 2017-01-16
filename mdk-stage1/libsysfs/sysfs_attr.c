@@ -23,10 +23,10 @@
 #include "libsysfs.h"
 #include "sysfs.h"
 
-static int sort_char(void *new, void *old)
+static int sort_char(void *New, void *old)
 {
-	return ((strncmp((char *)new, (char *)old,
-			strlen((char *)new))) < 0 ? 1 : 0);
+	return ((strncmp((char *)New, (char *)old,
+			strlen((char *)New))) < 0 ? 1 : 0);
 }
 
 /**

@@ -222,7 +222,7 @@ struct sysfs_device *sysfs_open_device_path(const char *path)
  */
 struct sysfs_device *sysfs_open_device_tree(const char *path)
 {
-	struct sysfs_device *rootdev = NULL, *new = NULL;
+	struct sysfs_device *rootdev = NULL, *New = NULL;
 	struct sysfs_device *cur = NULL;
 	struct sysfs_device *devlist;
 
@@ -240,8 +240,8 @@ struct sysfs_device *sysfs_open_device_tree(const char *path)
         if (devlist->children) {
 		dlist_for_each_data(devlist->children, cur,
 				struct sysfs_device) {
-			new = sysfs_open_device_tree(cur->path);
-			if (new == NULL) {
+			New = sysfs_open_device_tree(cur->path);
+			if (New == NULL) {
 				dprintf("Error opening device tree at %s\n",
 						cur->path);
 				sysfs_close_device_tree(rootdev);
@@ -251,7 +251,7 @@ struct sysfs_device *sysfs_open_device_tree(const char *path)
 				rootdev->children = dlist_new_with_delete
 					(sizeof(struct sysfs_device),
 					sysfs_close_dev_tree);
-			dlist_unshift_sorted(rootdev->children, new, sort_list);
+			dlist_unshift_sorted(rootdev->children, New, sort_list);
 		}
 	}
 

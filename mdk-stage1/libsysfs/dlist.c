@@ -434,11 +434,11 @@ void dlist_transform(struct dlist *list, void (*node_operation)(void *))
  * return pointer to inserted node
  * NOTE: assumes list is already sorted
  */
-void *dlist_insert_sorted(struct dlist *list, void *new, int (*sorter)(void *, void *))
+void *dlist_insert_sorted(struct dlist *list, void *New, int (*sorter)(void *, void *))
 {
 	for(dlist_start(list),dlist_next(list); \
-		list->marker!=list->head && !sorter(new,list->marker->data);dlist_next(list));
-	return(dlist_insert_before(list,new));
+		list->marker!=list->head && !sorter(New,list->marker->data);dlist_next(list));
+	return(dlist_insert_before(list,New));
 }
 
 /*

@@ -220,9 +220,10 @@ void newtTextboxSetColors(newtComponent co, int normal, int active);
 char * newtReflowText(char * text, int width, int flexDown, int flexUp,
 		      int * actualWidth, int * actualHeight);
 
+enum exitReason { NEWT_EXIT_HOTKEY, NEWT_EXIT_COMPONENT, NEWT_EXIT_FDREADY,
+    NEWT_EXIT_TIMER, NEWT_EXIT_ERROR };
 struct newtExitStruct {
-    enum { NEWT_EXIT_HOTKEY, NEWT_EXIT_COMPONENT, NEWT_EXIT_FDREADY,
-	   NEWT_EXIT_TIMER, NEWT_EXIT_ERROR } reason;
+    enum exitReason reason;
     union {
 	int watch;
 	int key;
