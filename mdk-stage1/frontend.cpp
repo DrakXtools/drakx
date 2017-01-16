@@ -31,14 +31,12 @@
 #include <probing.h>
 
 #include "frontend.h"
+#include "newt-frontend.h"
+#include "stdio-frontend.h"
 #include "utils.h"
 
 int size_progress;
 int actually_drawn;
-
-/* really ugly for now... */
-#include "stdio-frontend.cpp"
-#include "newt-frontend.cpp"
 
 void init_frontend(const char * welcome_msg)
 {

@@ -30,6 +30,7 @@
 #include <probing.h>
 
 #include "frontend.h"
+#include "stdio-frontend.h"
 #include "utils.h"
 
 void init_frontend_stdio(const char * welcome_msg)

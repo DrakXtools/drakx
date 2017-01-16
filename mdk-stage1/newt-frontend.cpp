@@ -35,6 +35,7 @@
 #include <probing.h>
 
 #include "frontend.h"
+#include "newt-frontend.h"
 
 void init_frontend_newt(const char * welcome_msg)
 {
