@@ -20,7 +20,7 @@
 #define _STDIO_FRONTEND_H_
 
 void init_frontend_stdio(const char * welcome_msg);
-void finish_frontend_stdio(void);
+const void finish_frontend_stdio(void);
 
 void remove_wait_message_stdio(void);
 
