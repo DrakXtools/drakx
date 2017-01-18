@@ -2,10 +2,10 @@ include ../Makefile.config
 
 VERSION=2.41
 PRODUCT=drakx-installer-images
-KERNELS=$(shell rpm -qf /lib/modules/4.*)
+KERNELS ?= $(shell rpm -qf /lib/modules/4.*)
 
 IMAGES_DEST = $(ROOTDEST)/install/images
-#COMPRESS = xz -v --check=crc32 -9e
+COMPRESS ?= xz -v --check=crc32 -9e
 ARCH=$(shell arch)
 ifeq (x86_64, $(ARCH))
 WORDSIZE = 64

@@ -219,10 +219,10 @@ sub copy_files {
 	}
     } else {
 	my $options = join(' ', $base_cpio_options, @options);
-	warn "gcpio $options to_dir=$to_dir from=$working_dir: @$files\n" if $verbose;
-	open(my $F, "| cd $working_dir ; $sudo gcpio $options $to_dir");
+	warn "cpio $options to_dir=$to_dir from=$working_dir: @$files\n" if $verbose;
+	open(my $F, "| cd $working_dir ; $sudo cpio $options $to_dir");
 	print $F "$_\n" foreach @$files;
-	close($F) or die "gcpio $to_dir failed\n";
+	close($F) or die "cpio $to_dir failed\n";
     }
 }
 

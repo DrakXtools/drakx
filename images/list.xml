@@ -1,8 +1,10 @@
 <list no-arch-libraries="on">
 
+<!--
 <from expand="rpm">
   uclibc-kmod
 </from>
+-->
 
 <from expand="binary">
   busybox
@@ -64,9 +66,13 @@
 
 
   <mode copy="system">
-    ntfs-3g mount.ntfs-3g
+    ntfs-3g
 
+    <!-- fix later
     dropbearmulti
+    -->
+    dbclient dropbear
+
     pppd
     pppoe
 
@@ -135,11 +141,11 @@
   lspci
 
   rpm
-  db52_archive
-  db52_dump
-  db52_load
-  db52_recover
-  db52_verify
+  db53_archive
+  db53_dump
+  db53_load
+  db53_recover
+  db53_verify
   rpm2cpio
 
   hexedit
@@ -158,12 +164,14 @@
   <if ARCH="i.86|x86_64">
     grub grub-install
   </if>
+  <!--
   <if ARCH="x86_64">
     efibootmgr 
   </if>
+  -->
 </from>
 
-<from dir="/usr/uclibc/LIB/device-mapper">
+<from dir="/LIB/device-mapper">
   <from expand="glob"> 
     *.so
   </from>
@@ -223,7 +231,7 @@
   /usr/share/terminfo/x/xterm-256color
 
   <if ARCH="i.86|x86_64">    
-    <from dir="/lib/grub/ARCH-*mandriva" expand="glob">
+    <from dir="/lib/grub/ARCH-*" expand="glob">
       stage1
       stage2
       *_stage1_5
@@ -253,6 +261,7 @@
   <!-- needed by mlabel used during Flash upgrades -->
   /usr/LIB/gconv/IBM850.so
   
+  <!--
   <if ARCH="i.86">
      /usr/uclibc/lib/ld-uClibc.so.0
   </if>
@@ -263,6 +272,7 @@
   /usr/lib/rpm/macros
   /usr/lib/rpm/cpuinfo.yaml
   /usr/lib/rpm/macros.d/mandriva
+  -->
 
   /lib/udev/ata_id
   /lib/udev/libinput-device-group
@@ -313,7 +323,6 @@
   protocols
   services
   shells
-  udhcpd.conf
   <if ARCH="i.86|x86_64">
     pcmcia/config.opts
   </if>
@@ -332,10 +341,6 @@
   default.script
 </from>
 
-<from>
-  /var/lib/udhcpd/udhcpd.leases
-</from>
-
 <from dir="/lib/systemd">
   systemd-udevd
 </from>
@@ -350,7 +355,6 @@
   60-persistent-storage.rules
   63-md-raid-arrays.rules
   64-md-raid-assembly.rules
-  65-md-incremental.rules
   75-net-description.rules
   80-drivers.rules
   <!-- "predictable names" don't wanna! 80-net-name-slot.rules -->

@@ -51,11 +51,11 @@ OPTFLAGS = -Os -fomit-frame-pointer
 endif
 
 #- flags used by all stuff
-CXXFLAGS = $(OPTFLAGS) -pipe -Wall -Werror=strict-aliasing -Wstrict-aliasing=2 -std=gnu++11
+CXXFLAGS = $(OPTFLAGS) -pipe -Wall -Werror=strict-aliasing -Wno-error=write-strings -w -Wstrict-aliasing=2 -std=gnu++14 -fpermissive
 ifeq (uclibc, $(LIBC))
 CXXFLAGS += -fno-rtti -fno-exceptions
 endif
-WHOLEFLAGS = -Os -fwhole-program -flto
+WHOLEFLAGS = -Os -fwhole-program -flto -fuse-linker-plugin
 
 ifneq (ppc, $(ARCH))
 ifneq (sparc, $(ARCH))
@@ -63,7 +63,7 @@ ifneq (sparc, $(ARCH))
 endif
 endif
 
-LDFLAGS = $(CFLAGS) -Wl,-O2,-no-undefined -z relro -Wl,--no-warn-common
+LDFLAGS = $(CFLAGS) -fuse-ld=gold -Wl,-O2,-no-undefined -z relro -Wl,--no-warn-common
 
 # (blino) make sure yynewerror and yyerrlab are uselessly used
 YFLAGS := -d

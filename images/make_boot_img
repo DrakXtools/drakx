@@ -6,6 +6,12 @@ else
     wordsize=32
 fi
 
+cpio=cpio
+# cooker isn't using gnu version cpio as default, with binary renamed for
+if type gcpio &>/dev/null; then
+	cpio=gcpio
+fi
+
 initrd() {
     if [ "$USE_LOCAL_STAGE1" = "1" ]; then
 	stage1_root=../mdk-stage1
@@ -93,11 +99,22 @@ EOF
 	ln -v "$tmp_initrd/sbin/stage1" "$tmp_initrd$hardlink"
     done
 
-    for hardlink in /usr/bin/dropbear /usr/bin/ssh /usr/bin/scp /usr/bin/dbclient; do
-	ln -v "$tmp_initrd/usr/bin/dropbearmulti" "$tmp_initrd$hardlink"
-    done
+#    for hardlink in /usr/bin/dropbear /usr/bin/ssh /usr/bin/scp /usr/bin/dbclient; do
+#	ln -v "$tmp_initrd/usr/bin/dropbearmulti" "$tmp_initrd$hardlink"
+#    done
+    ln -v "$tmp_initrd/bin/dbclient" "$tmp_initrd/usr/bin/ssh"
 
     ln -v "$tmp_initrd/sbin/init" "$tmp_initrd/init"
+
+    # ??? is up with mageia replacing symlink with a copy with stricter permissions???
+    ln -v "$tmp_initrd/bin/ntfs-3g" "$tmp_initrd/sbin/mount.ntfs-3g"
+
+
+    # XXX: temporary just go with bash for now to get giubg...
+    install -m755 /bin/bash -D "$tmp_initrd/bin/bash"
+    ln -f "$tmp_initrd/bin/bash" "$tmp_initrd/bin/sh"
+
+
 
     LANGUAGE=C
     sed -e 's/^#LANGUAGE.*/export LANGUAGE=$LANGUAGE\nexport LC_ALL=$LANGUAGE\n/g' -i "$tmp_initrd/etc/rc.d/rc.stage2"
@@ -136,7 +153,8 @@ EOF
     fi
 
     mkdir -p "`dirname \"$img\"`"
-    (cd "$tmp_initrd"; find . | gcpio -o -H newc --quiet --owner=root:root) | $COMPRESS > "$img"
+    echo "(cd $tmp_initrd; find . | $cpio -o -H newc --quiet --owner=root:root) | $COMPRESS > $img"
+    (cd "$tmp_initrd"; find . | $cpio -o -H newc --quiet --owner=root:root) | $COMPRESS > "$img"
 }
 
 modules() {
@@ -158,7 +176,8 @@ modules() {
     fi
 
     mkdir -p "`dirname \"$out\"`"
-    (cd "$tmp_initrd"; find . | gcpio -o -H newc --quiet --owner=root:root) | $COMPRESS > "$out"
+    echo "(cd $tmp_initrd; find . | $cpio -o -H newc --quiet --owner=root:root) | $COMPRESS > $img"
+    (cd "$tmp_initrd"; find . | $cpio -o -H newc --quiet --owner=root:root) | $COMPRESS > "$out"
     rm -rf "$tmp_initrd"
 }
 
@@ -177,18 +196,20 @@ firmware() {
 	COMPRESS="xz -T0 --lzma2 -v9e --check=crc32"
     fi
 
-    (cd "$tmp_initrd"; find . | gcpio -o -H newc --quiet --owner=root:root) | $COMPRESS > "$out"
+    mkdir -p "`dirname \"$out\"`"
+    echo "(cd $tmp_initrd; find . | $cpio -o -H newc --quiet --owner=root:root) | $COMPRESS > $img"
+    (cd "$tmp_initrd"; find . | $cpio -o -H newc --quiet --owner=root:root) | $COMPRESS > "$out"
     rm -rf "$tmp_initrd"
 }
 
 grub() {
     dir=$1
+    . /etc/os-release
     install -m644 grub_data/grub.cfg -D "$dir/boot/grub/grub.cfg"
     install -d "$dir/boot/grub/themes/Moondrake"
     cp -a /boot/grub2/themes/Moondrake/*png "$dir/boot/grub/themes/Moondrake"
     cp -a /boot/grub2/themes/Moondrake/*pf2 "$dir/boot/grub/themes/Moondrake"
-    CODENAME="$(cat /etc/os-release|grep VERSION=|sed -e 's#.*(\(.*\)).*#\1#g')"
-    sed -e "s#\(title-text: \"\)#\1$CODENAME#g" /boot/grub2/themes/Moondrake/theme.txt > "$dir/boot/grub/themes/Moondrake/theme.txt"
+    sed -e "s#\(title-text: \"\)#\1$PRETTY_NAME#g" /boot/grub2/themes/Moondrake/theme.txt > "$dir/boot/grub/themes/Moondrake/theme.txt"
 
     if [ ! -s all.kernels/.list ]; then
 	    echo grub: no kernel >&2
@@ -218,6 +239,7 @@ boot_iso() {
 
 img="$1"
 filename="`basename \"$img\"`"
+dirname="`dirname \"$img\"`"
 lib=`rpm -E %_lib`
 tmp_initrd="$PWD/tmp_initrd"
 rm -rf "$tmp_initrd"
