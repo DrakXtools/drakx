@@ -482,16 +482,17 @@ sub write {
     #- it will never be writed back on partition table.
     verifyParts($hd);
 
-    $hd->write(0, $hd->{primary}{raw}, $hd->{primary}{info}) or die "writing of partition table failed";
-
+    my $handle = $hd->start_write();
+    $hd->write($handle, 0, $hd->{primary}{raw}, $hd->{primary}{info}) or die "writing of partition table failed";
     #- should be fixed but a extended exist with no real extended partition, that blanks mbr!
 	foreach (@{$hd->{extended}}) {
 	    # in case of extended partitions, the start sector must be local to the partition
 	    $_->{normal}{local_start} = $_->{normal}{start} - $_->{start};
 	    $_->{extended} and $_->{extended}{local_start} = $_->{extended}{start} - $hd->{primary}{extended}{start};
 
-	    $hd->write($_->{start}, $_->{raw}) or die "writing of partition table failed";
+	    $hd->write($handle, $_->{start}, $_->{raw}) or die "writing of partition table failed";
 	}
+    $hd->end_write($handle);
     $hd->{isDirty} = 0;
 
     if (my $tell_kernel = delete $hd->{will_tell_kernel}) {

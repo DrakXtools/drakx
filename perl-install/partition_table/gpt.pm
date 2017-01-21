@@ -71,7 +71,7 @@ sub read_one {
 }
 
 sub write {
-    my ($hd, $_sector, $pt, $_info) = @_;
+    my ($hd, $_handle, $_sector, $pt, $_info) = @_;
 
     my $partitions_killed;
 

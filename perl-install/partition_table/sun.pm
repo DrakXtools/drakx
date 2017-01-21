@@ -119,7 +119,7 @@ sub read_one {
 # write the partition table (and extended ones)
 # for each entry, it uses fields: start, size, pt_type, active
 sub write($$$;$) {
-    my ($hd, $sector, $pt, $info) = @_;
+    my ($hd, $_handle, $sector, $pt, $info) = @_;
 #    my ($csize, $wdsize) = (0, 0);
 
     #- handle testing for writing partition table on file only!

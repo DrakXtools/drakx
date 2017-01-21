@@ -193,7 +193,7 @@ sub read_one {
 }
 
 sub write($$$;$) {
-    my ($hd, $sector, $pt, $info) = @_;
+    my ($hd, $_handle, $sector, $pt, $info) = @_;
 
     #- handle testing for writing partition table on file only!
     my $F;

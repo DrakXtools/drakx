@@ -295,4 +295,14 @@ A test to check the integrity of data has failed.
 It means writing anything on the disk will end up with random, corrupted data.");
 }
 
+sub start_write {
+    my ($_hd) = @_;
+    1;
+}
+
+sub end_write {
+    my ($_hd, $_handle) = @_;
+    1;
+}
+
 1;

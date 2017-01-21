@@ -236,10 +236,9 @@ sub read_one {
     [ @pt ];
 }
 
-# write the partition table (and extended ones)
-# for each entry, it uses fields: start, size, pt_type, active
-sub write {
-    my ($hd, $sector, $pt) = @_;
+# prepare to write the partition table (and extended ones)
+sub start_write {
+    my ($hd) = @_;
 
     log::l("partition::dos::write $hd->{device}");
 
@@ -250,6 +249,16 @@ sub write {
 	open $F, ">$file" or die "error opening test file $file";
     } else {
 	$F = partition_table::raw::openit($hd, 2) or die "error opening device $hd->{device} for writing";
+    }
+    $F;
+}
+
+# write the partition table (and extended ones)
+# for each entry, it uses fields: start, size, pt_type, active
+sub write {
+    my ($hd, $F, $sector, $pt) = @_;
+
+    if (!$::testing) {
         c::lseek_sector(fileno($F), $sector, $offset) or return 0;
     }
 
@@ -262,6 +271,11 @@ sub write {
     }
     syswrite $F, $magic, length $magic or return 0;
     1;
+}
+
+sub end_write {
+    my ($hd, $F) = @_;
+    close $F;
 }
 
 sub empty_raw { { raw => [ ({}) x $nb_primary ] } }
