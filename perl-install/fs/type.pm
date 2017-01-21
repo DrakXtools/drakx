@@ -291,7 +291,7 @@ sub defaultFS() { 'ext4' }
 
 sub true_local_fs_types() { qw(btrfs f2fs ext3 ext2 ext4 reiserfs xfs jfs) }
 
-sub isEmpty { !$_[0]{fs_type} && $_[0]{pt_type} == 0 }
+sub isEmpty { !$_[0]{fs_type} && !$_[0]{pt_type} }
 sub isBIOS_GRUB { $_[0]{pt_type} eq 'BIOS_GRUB' }
 sub isESP { $_[0]{pt_type} == 0xef && member($_[0]{fs_type}, qw(fat32 vfat)) }
 sub isExtended { $_[0]{pt_type} == 5 || $_[0]{pt_type} == 0xf || $_[0]{pt_type} == 0x85 }
