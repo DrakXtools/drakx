@@ -238,6 +238,12 @@ sub zero_MBR_and_dirty {
     fsedit::partition_table_clear_and_initialize([], $hd);
 }
 
+#- by default, we assume the kernel doesn't automatically reread partition table:
+sub need_to_tell_kernel {
+    my ($_hd) = @_;
+    1;
+}
+
 sub read_primary {
     my ($hd) = @_;
 

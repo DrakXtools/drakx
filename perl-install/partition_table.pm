@@ -500,7 +500,7 @@ sub write {
 	    fs::dmraid::call_dmraid('-an');
 	    fs::dmraid::call_dmraid('-ay');
 	} else {
-	    tell_kernel($hd, $tell_kernel);
+	    tell_kernel($hd, $tell_kernel) if $hd->need_to_tell_kernel();
 	}
     }
     # get major/minor again after writing the partition table so that we got them for dynamic devices

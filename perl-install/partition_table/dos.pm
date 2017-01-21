@@ -278,6 +278,14 @@ sub end_write {
     close $F;
 }
 
+sub need_to_tell_kernel {
+    my ($hd) = @_;
+    # If none of the partitions are mounted, the kernel will automatically rescan
+    # the partition table. If any partitions are mounted, this doesn't happen, so
+    # we need to tell the kernel what has changed.
+    return any { $_->{isMounted} } partition_table::get_normal_parts($hd);
+}
+
 sub empty_raw { { raw => [ ({}) x $nb_primary ] } }
 
 sub initialize { 
