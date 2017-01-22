@@ -32,7 +32,12 @@ sub hd2minimal_part {
     };
 }
 
-#- works for both hard disk drives and partitions ;p
+=item description($hd)
+
+Works for both hard disk drives and partitions ;p
+
+=cut
+
 sub description {
     my ($hd) = @_;
     my $win = $hd->{device_windobe};
@@ -46,7 +51,12 @@ sub description {
 	       $hd->{info}, $hd->{mntpoint}, $hd->{fs_type});
 }
 
-#- align partition start to the next MB boundary
+=item align_to_MB_boundaries($part)
+
+Align partition start to the next MB boundary
+
+=cut
+
 sub align_to_MB_boundaries {
     my ($part) = @_;
 
@@ -448,7 +458,12 @@ sub tell_kernel {
     }
 }
 
-# write the partition table
+=item write($hd)
+
+Write the partition table
+
+=cut
+
 sub write {
     my ($hd) = @_;
     $hd->{isDirty} or return;
@@ -500,8 +515,12 @@ sub active {
     $hd->{isDirty} = 1;
 }
 
+=item remove($hd, $part)
 
-# remove a normal partition from hard disk drive hd
+Remove a normal partition from hard disk drive $hd
+
+=cut
+
 sub remove {
     my ($hd, $part) = @_;
     my $i;
@@ -541,7 +560,12 @@ sub remove {
     0;
 }
 
-# create of partition at starting at `start', of size `size' and of type `pt_type' (nice comment, uh?)
+=item add_primary($hd, $part)
+
+Create of partition at starting at `start', of size `size' and of type `pt_type'
+
+=cut
+
 sub add_primary {
     my ($hd, $part) = @_;
 
@@ -632,7 +656,12 @@ sub add {
     will_tell_kernel($hd, add => $part);
 }
 
-# search for the next partition
+=item next($hd, $part)
+
+Search for the next partition
+
+=cut
+
 sub next {
     my ($hd, $part) = @_;
 
