@@ -9,6 +9,20 @@ use partition_table::raw;
 use detect_devices;
 use log;
 
+=head1 SYNOPSYS
+
+B<partition_table> enables to read & write partitions on various partition schemes (DOS, GPT, BSD, ...)
+
+It holds base partition table management methods, it manages
+appriopriate partition_table_XXX object according to what has been read
+as XXX partition table type.
+
+=head1 Functions
+
+=over
+
+=cut
+
 
 sub hd2minimal_part {
     my ($hd) = @_;
@@ -219,12 +233,30 @@ sub get_normal_parts_and_holes {
     grep { !isEmpty($_) || $_->{size} >= $hd->cylinder_size } @l;
 }
 
+
+=item _default_type($hd)
+
+Returns the default type of $hd ('gpt' or 'dos' depending on whether we're running under UEFI or
+whether the disk size is too big for a MBR partition table.
+
+=cut
+
 sub _default_type {
     my ($hd) = @_;
 
     # default to GPT on UEFI systems and disks > 2TB
     is_uefi() || $hd->{totalsectors} > 2 * 1024 * 1024 * 2048 ? 'gpt' : "dos";
 }
+
+=item initialize($hd, $o_type)
+
+Initialize a $hd object.
+
+Expect $hd->{file} to point to the raw device disk.
+
+The optional $o_type parameter enables to override the detected disk type (eg: 'dos', 'gpt', ...).
+
+=cut
 
 sub initialize {
     my ($hd, $o_type) = @_;
@@ -273,6 +305,13 @@ sub read_primary {
 	}
     0;
 }
+
+
+=item read($hd)
+
+Read the partition table of $hd.
+
+=cut
 
 sub read {
     my ($hd) = @_;
@@ -608,5 +647,9 @@ sub next_start {
     my $next = &next($hd, $part);
     $next ? $next->{start} : $hd->last_usable_sector;
 }
+
+=back
+
+=cut
 
 1;
