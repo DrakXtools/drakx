@@ -1945,16 +1945,7 @@ sub write_grub2 {
     }
 }
 
-sub write_grub2() {
-    my $error;
 
-    my $f1 = "$::prefix/boot/grub2/grub.cfg";
-    renamef($f1, $f1 . '.old');
-    run_program::rooted($::prefix, 'update-grub2', '2>', \$error) or die "update-grub2 failed: $error";
-    log::l("update-grub2 logs: $error");
-
-    check_enough_space();
-}
 
 sub get_grub2_users() {
     "$::prefix/boot/grub2/user.cfg";
@@ -2175,10 +2166,12 @@ sub install_grub2 {
     write_grub2();
     write_grub2_default_entry($bootloader, $all_hds);
     write_grub2_install_sh($bootloader, '.old');
-    install_raw_grub2();
+    install_raw_grub2($bootloader, $all_hds);
 }
 
 sub install_raw_grub2() {
+    my ($bootloader, $all_hds) = @_;
+
     my $error;
     write_grub2($bootloader, $all_hds);
     my $boot = $bootloader->{boot};
