@@ -88,7 +88,7 @@ int length_of_space_padded(char *str, int len) {
 }
 
 PedPartitionFlag string_to_pedpartflag(char*type) {
-   PedPartitionFlag flag = 0;
+   PedPartitionFlag flag = static_cast<PedPartitionFlag>(0);
    if (!strcmp(type, "ESP")) {
       flag = PED_PARTITION_ESP;
    } else if (!strcmp(type, "BIOS_GRUB")) {
@@ -596,7 +596,7 @@ get_disk_partitions(char * device_path)
 	   continue;
       }
       char *path = ped_partition_get_path(part);
-      char *flag = "";
+      const char *flag = "";
       if (ped_partition_get_flag(part, PED_PARTITION_ESP)) {
         flag = "ESP";
       } else if (ped_partition_get_flag(part, PED_PARTITION_BIOS_GRUB)) {
