@@ -462,6 +462,33 @@ sub tell_kernel {
 
 Write the partition table
 
+The partition_table_XXX object is expected to provide three functions to
+support writing the partition table:
+
+=over
+
+=item * start_write()
+
+start_write() is called once at the beginning to initiate the write operation,
+
+=item * write()
+
+write() is then called one or more times (depending on whether there are any
+extended partitions),
+
+=item * end_write().
+
+and end_write() is called once to complete the write operation.
+
+=back
+
+For partition table types that support extended partitions (e.g.  DOS),
+start_write() is expected to return a file handle to the raw device which is
+then passed to write() and end_write(), allowing the entire table to be written
+before closing the raw device. For partition table types that don't support
+extended partitions, this is optional, and the entire write operation can be
+performed in the single call to write().
+
 =cut
 
 sub write {
