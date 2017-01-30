@@ -52,7 +52,7 @@ sub detect_during_install() {
 
 sub init() {
     devices::init_device_mapper();
-    detect_during_install() if $::isInstall;
+    detect_during_install() if $::isInstall || $::isLiveInstall;
     1;
 }
 
