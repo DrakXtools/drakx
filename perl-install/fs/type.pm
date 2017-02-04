@@ -279,6 +279,7 @@ sub type_subpart_from_magic {
     }
 
     if ($p) {
+	$p->{fs_type} = '' if $part->{pt_type} eq 'BIOS_GRUB';
 	$part->{fs_type_from_magic} = $p->{fs_type};
 	$p->{device_LABEL} = $ids->{ID_FS_LABEL} if $ids->{ID_FS_LABEL};
 	$p->{device_UUID} = $ids->{ID_FS_UUID} if $ids->{ID_FS_UUID};
