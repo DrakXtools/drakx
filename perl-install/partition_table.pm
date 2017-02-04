@@ -310,6 +310,7 @@ sub read_primary {
 		bless $hd, "partition_table::$_";
 	        if ($hd->read_primary) {
 		    log::l("found a $_ partition table on $hd->{file} at sector 0");
+		    $hd->{pt_table_type} = $_ if $_ ne 'empty';
 		    return 1;
 		}
 	}

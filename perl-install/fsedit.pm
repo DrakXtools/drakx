@@ -56,9 +56,6 @@ sub init_mntpnt_suggestions {
 	if (!any { isESP($_) } @$fstab) {
 	    $mntpoint = { mntpoint => "/boot/EFI", size => MB(100), pt_type => 0xef, ratio => 1, maxsize => MB(300) };
 	}
-    } elsif (fs::any::is_boot_bios_part_needed($all_hds, $fstab)) {
-	# suggests a Boot BIOS partition if none is present and if needed (aka !UEFI but disk is GPT partitionned)
-	$mntpoint = { mntpoint => "", size => MB(1), pt_type => 'BIOS_BOOT', ratio => 1, maxsize => MB(2) };
     }
     return if !$mntpoint;
     foreach (keys %suggestions) {
@@ -518,6 +515,8 @@ sub auto_allocate {
     my ($all_hds, $o_suggestions, $o_target) = @_;
     my $before = listlength(fs::get::fstab($all_hds));
 
+    auto_allocate_bios_boot_parts($all_hds, $o_target) if !is_uefi();
+
     my $suggestions = $o_suggestions || $suggestions{simple};
     allocatePartitions($all_hds, $suggestions, $o_target);
 
@@ -543,6 +542,22 @@ sub auto_allocate {
     }
     my @fstab = fs::get::fstab($all_hds);
     fs::mount_point::suggest_mount_points_always(\@fstab);
+}
+
+sub auto_allocate_bios_boot_parts {
+    my ($all_hds, $o_hd) = @_;
+    foreach my $hd (@{$all_hds->{hds}}) {
+	# skip if not the selected device
+	next if $o_hd && ($o_hd->{device} ne $hd->{device});
+	# skip non-GPT disks
+	next if ($hd->{pt_table_type} || partition_table::default_type($hd)) ne 'gpt';
+	# check if a BIOS boot partition already exists
+	my @parts = map { partition_table::get_normal_parts($_) } $hd;
+	next if any { isBIOS_GRUB($_) } @parts;
+	# try to allocate a BIOS boot partition
+	my $suggest = { mntpoint => "", size => MB(1), pt_type => 'BIOS_GRUB', ratio => 1, maxsize => MB(2) };
+	allocatePartitions($all_hds, [ $suggest ], $hd);
+    }
 }
 
 sub auto_allocate_raids {
