@@ -425,8 +425,6 @@ sub tell_kernel {
 
     my $F = partition_table::raw::openit($hd);
 
-    run_program::run('udevadm', 'control', '--stop-exec-queue');
-
     my $force_reboot = any { $_->[0] eq 'force_reboot' } @$tell_kernel;
     if (!$force_reboot) {
 	foreach (@$tell_kernel) {
@@ -440,8 +438,6 @@ sub tell_kernel {
 	    log::l("tell kernel $action ($hd->{device} $part_number $o_start $o_size) force_reboot=$force_reboot rebootNeeded=$hd->{rebootNeeded}");
 	}
     }
-
-    run_program::run('udevadm', 'control', '--start-exec-queue');
 
     if ($force_reboot) {
 	# FIXME Handle LVM/dmcrypt/RAID
