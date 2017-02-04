@@ -244,14 +244,14 @@ sub get_normal_parts_and_holes {
 }
 
 
-=item _default_type($hd)
+=item default_type($hd)
 
 Returns the default type of $hd ('gpt' or 'dos' depending on whether we're running under UEFI or
 whether the disk size is too big for a MBR partition table.
 
 =cut
 
-sub _default_type {
+sub default_type {
     my ($hd) = @_;
 
     # default to GPT on UEFI systems and disks > 2TB
@@ -273,7 +273,7 @@ sub initialize {
 
     my $current = c::get_disk_type($hd->{file});
     $current = 'dos' if $current eq 'msdos';
-    my $type = $o_type || $current || _default_type($hd);
+    my $type = $o_type || $current || default_type($hd);
 
     require "partition_table/$type.pm";
     "partition_table::$type"->initialize($hd);
