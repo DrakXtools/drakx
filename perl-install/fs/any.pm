@@ -77,7 +77,7 @@ sub check_hds_boot_and_root {
 	    die N("You must have a ESP FAT32 partition mounted in /boot/EFI");
 	}
     } else {
-	if (is_boot_bios_part_needed($all_hds, $fstab)) {
+	if (is_boot_bios_part_needed($all_hds)) {
 	    die N("You must have a BIOS boot partition for non-UEFI GPT-partitioned disks. Please create one before continuing.");
 	}
     }
@@ -145,31 +145,30 @@ sub getAvailableSpace_raw {
     die "missing root partition";
 }
 
-=head3 is_boot_bios_part_needed($all_hds, $fstab)
+=head3 is_boot_bios_part_needed($all_hds)
 
 Returns whether a Boot BIOS Partition is needed
-(aka the device holding /boot is GPT partitionned but doesn't already have one).
+
+Returns true if all of the following are true:
+  - legacy boot (not UEFI)
+  - all disks are (or will be) GPT
+  - no disks have a BIOS boot partition
 
 =cut
 
 sub is_boot_bios_part_needed {
-    my ($all_hds, $fstab) = @_;
-    # failsafe:
+    my ($all_hds) = @_;
+    # never needed for UEFI boot
     return if is_uefi();
-    return if !@$fstab;
-    # mount point holding /boot:
-    my $root = fs::get::root($fstab, 1);
-    my $rootDev = $root->{rootDevice};
-    my $boot_hd;
-    if ($rootDev) {
-	$rootDev = "/dev/" . $rootDev if $rootDev !~ m!/!;
-	# is it GPT?
-	return if c::get_disk_type($rootDev) ne 'gpt';
-	($boot_hd) = find { $_->{device} eq $rootDev } fs::get::hds($all_hds);
+    # do we already have one?
+    my @parts = map { partition_table::get_normal_parts($_) } fs::get::hds($all_hds);
+    return if any { isBIOS_GRUB($_) } @parts;
+    # do we have any non-GPT disks?
+    foreach my $hd (@{$all_hds->{hds}}) {
+	my $type = $hd->{pt_table_type} || partition_table::default_type($hd);
+	return if $type ne 'gpt';
     }
-    # finally check if there's already a  Boot BIOS Partition:
-    my @parts = map { partition_table::get_normal_parts($_) } $boot_hd || fs::get::hds($all_hds);
-    return !any { isBIOS_GRUB($_) } @parts;
+    1;
 }
 
 1;
