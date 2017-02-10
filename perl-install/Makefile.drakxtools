@@ -55,9 +55,11 @@ install:
 	mv -f $(SBINDEST)/drak{autologin,auth,boot,clock,font,perm,sec,ups,xservices} $(LIBEXECDEST)
 	mv -f $(SBINDEST)/logdrake $(LIBEXECDEST)/draklog
 	mv -f $(SBINDEST)/drakedm $(LIBEXECDEST)/drakdm
-	mv -f $(SBINDEST)/diskdrake $(LIBEXECDEST)/drakdisk
 	mv -f $(SBINDEST)/harddrake2 $(LIBEXECDEST)/drakhardware
 	mv -f $(SBINDEST)/scannerdrake $(LIBEXECDEST)/drakscanner
+	# diskdrake is called by the drakdisk wrapper
+	mv -f $(SBINDEST)/diskdrake $(LIBEXECDEST)
+	install -D standalone/drakdisk $(LIBEXECDEST)
 
 
 	install -m 644 *.pm $(LIBDEST)

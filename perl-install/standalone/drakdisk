@@ -1,0 +1,10 @@
+#!/bin/sh
+
+CMD=/usr/libexec/diskdrake
+
+ps -C udisksd > /dev/null
+if [ $? -eq 0 -a -x /usr/lib/udisks2/udisks2-inhibit ] ; then
+  /usr/lib/udisks2/udisks2-inhibit $CMD "$@"
+else
+  $CMD "$@"
+fi
