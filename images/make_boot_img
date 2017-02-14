@@ -109,13 +109,6 @@ EOF
     # ??? is up with mageia replacing symlink with a copy with stricter permissions???
     ln -v "$tmp_initrd/bin/ntfs-3g" "$tmp_initrd/sbin/mount.ntfs-3g"
 
-
-    # XXX: temporary just go with bash for now to get giubg...
-    install -m755 /bin/bash -D "$tmp_initrd/bin/bash"
-    ln -f "$tmp_initrd/bin/bash" "$tmp_initrd/bin/sh"
-
-
-
     LANGUAGE=C
     sed -e 's/^#LANGUAGE.*/export LANGUAGE=$LANGUAGE\nexport LC_ALL=$LANGUAGE\n/g' -i "$tmp_initrd/etc/rc.d/rc.stage2"
 
