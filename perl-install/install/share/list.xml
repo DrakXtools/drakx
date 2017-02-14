@@ -26,7 +26,7 @@
   </filter>
 
   <if ARCH="ia64">
-    efibootmgr 
+    efibootmgr
   </if>
 
   <if set="DEBUG_INSTALL">
@@ -99,7 +99,7 @@
   input/libinput_drv.so
   <if ARCH="i.86|x86_64">
   drivers/modesetting_drv.so
-  drivers/vboxvideo_drv.so
+  <!-- drivers/vboxvideo_drv.so -->
   drivers/vesa_drv.so
   drivers/vmware_drv.so
   input/vmmouse_drv.so
@@ -207,11 +207,6 @@
 </filter>
 
   <!-- needed fro Gtk3-WebKit2 -->
- <from expand="glob">
-    libwebkit2gtk-4.0.so.??
-  </from>
-  webkit2gtk-4.0/injected-bundle/libwebkit2gtkinjectedbundle.so
-
 <from dir="../../images/tree/root/">
   <to dir="/">
     .digger.sco
@@ -221,10 +216,16 @@
   /usr/games/digger
 </from>
 
+<from dir="/usr/LIB">
+ <from expand="glob">
+    libwebkit2gtk-4.0.so.??
+  </from>
+  webkit2gtk-4.0/injected-bundle/libwebkit2gtkinjectedbundle.so
+</from>
+
 <from>
   /etc/urpmi/prefer.vendor.list
   /etc/fonts/
-  /etc/rpm/macros.d/legacy_compat.macros
 
 <!--  /usr/share/X11/XKeysymDB -->
   /usr/LIB/libgdk_pixbuf-2.0.so.0
@@ -317,12 +318,6 @@
   <from expand="command">
     perl -Mlang -I.. -le 'print foreach lang::console_font_files()'
   </from>
-</from>
-
-<from dir="/usr/LIB/pango/*/modules">
-  pango-arabic-lang.so
-  pango-indic-lang.so
-  pango-thai-lang.so
 </from>
 
 <from dir="/usr/share/ldetect-lst">
@@ -495,7 +490,6 @@
   XML/SAX/Exception.pm
   ARCH-linux-thread-multi/Cairo.pm
   ARCH-linux-thread-multi/List/MoreUtils.pm
-  ARCH-linux-thread-multi/RPMBDB.pm
   ARCH-linux-thread-multi/List/MoreUtils/PP.pm
   ARCH-linux-thread-multi/List/MoreUtils/XS.pm
   ARCH-linux-thread-multi/Term/ReadKey.pm
@@ -508,7 +502,6 @@
   ARCH-linux-thread-multi/XML/LibXML/Boolean.pm
   ARCH-linux-thread-multi/XML/LibXML/Literal.pm
   ARCH-linux-thread-multi/XML/LibXML/Number.pm
-  ARCH-linux-thread-multi/auto/RPMBDB/RPMBDB.so
   ARCH-linux-thread-multi/auto/Cairo/Cairo.so
   ARCH-linux-thread-multi/auto/Term/ReadKey/ReadKey.so
   ARCH-linux-thread-multi/auto/XML/LibXML/LibXML.so
@@ -541,7 +534,7 @@
   </if>
 </from>
 
-<from expand="rpm" matching="m!/usr/lib/perl5/.*/unicore/lib!">
+<from expand="rpm" matching="m!^/usr/lib/perl5! and !/\.1.xz$/">
   perl
 </from>
 
@@ -641,8 +634,8 @@
       desktop-Custom.png
       desktop-GNOME-big.png
       desktop-GNOME.png
-      desktop-KDE-big.png
-      desktop-KDE.png
+      desktop-PLASMA5-big.png
+      desktop-PLASMA5.png
       empty-banner.png
       left-background.png
       left-border.png
