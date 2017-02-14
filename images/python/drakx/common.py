@@ -1,4 +1,4 @@
-import subprocess, StringIO
+import subprocess, io
 
 BLACK     = 30
 RED       = 31
@@ -26,9 +26,9 @@ def color(text, fgcolor = RESET, bgcolor = RESET, style = NORMAL):
 
 # not exactly top notch, but whatever...
 def signPackage(gpgName, passPhrase, package):
-    io = StringIO.StringIO()
+    io = io.StringIO()
 
-    print "Signing packages..."
+    print("Signing packages...")
     passDef = ""
     if passPhrase:
         # these defines are to override some strange rpm bug...
@@ -43,6 +43,6 @@ expect eof
 
     sign = subprocess.Popen(["expect", "-f", "-"], stdin=exp.stdout)
     sign.wait()
-    print "Signing done"
+    print("Signing done")
 
 # vim:ts=4:sw=4:et

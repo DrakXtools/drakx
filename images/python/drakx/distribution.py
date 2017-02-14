@@ -8,7 +8,7 @@ class Distribution(object):
     def __init__(self, config, arch, media, includelist, excludelist, rpmsrate, compssusers, filedeps, suggests = False, synthfilter = ".cz:gzip -9", root="/usr/lib64/drakx-installer/root", stage1=None, stage2=None, advertising=None, gpgName=None, gpgPass=None):
         volumeid = ("%s-%s-%s-%s" % (config.vendor, config.product, config.version, arch)).upper()
         if len(volumeid) > 32:
-            print "length of volumeid '%s' (%d) > 32" % (volumeid, len(volumeid))
+            print("length of volumeid '%s' (%d) > 32" % (volumeid, len(volumeid)))
             exit(1)
         self.arch = arch
         self.media = {}
@@ -19,7 +19,7 @@ class Distribution(object):
         repopath = config.repopath+"/"+self.arch
         config.rootdir = root
 
-        print color("Parsing lists of packages to include", GREEN)
+        print(color("Parsing lists of packages to include", GREEN))
         includes = []
         for pkglf in includelist:
             f = open(pkglf)
@@ -35,7 +35,7 @@ class Distribution(object):
                     includes.append(line)
             f.close()
 
-        print color("Parsing lists of packages to exclude", GREEN)
+        print(color("Parsing lists of packages to exclude", GREEN))
         excludepattern = ""
         excludes = []
         for exclf in excludelist:
@@ -63,13 +63,13 @@ class Distribution(object):
                 #"""$urpm->{debug_URPM} = sub { printf "URPM debug: %s\n", $_[0] };"""
                 "$urpm;")
 
-        for m in self.media.keys():
+        for m in list(self.media.keys()):
             synthesis = repopath + "/" + self.media[m].getSynthesis()
-            print color("Parsing synthesis for %s: %s" % (m, synthesis), GREEN)
+            print(color("Parsing synthesis for %s: %s" % (m, synthesis), GREEN))
             urpm.parse_synthesis(synthesis) 
             updates = repopath + "/" + self.media[m].getSynthesis("updates")
             if os.path.exists(updates):
-                print color("Parsing updates synthesis for %s: %s" % (m, synthesis), GREEN)
+                print(color("Parsing updates synthesis for %s: %s" % (m, synthesis), GREEN))
                 urpm.parse_synthesis(updates) 
 
 
@@ -116,7 +116,7 @@ class Distribution(object):
             # create a dictionary of URPM::Package objects, indexed by fullname
             # for us to easier lookup packages in
             pkgdict = dict()
-            for key in requested.keys():
+            for key in list(requested.keys()):
                 if not key:
                     requested.pop(key)
                     continue
@@ -129,7 +129,7 @@ class Distribution(object):
                     pkg = urpm['depslist'][int(pkgid)]
                     if excludere.match(pkg.name()):
                         requested.pop(key)
-                        print color("skipping candidate for requested packages: %s" % pkg.fullname(), YELLOW)
+                        print(color("skipping candidate for requested packages: %s" % pkg.fullname(), YELLOW))
                         break
                     if not dep:
                         dep = pkg
@@ -155,16 +155,16 @@ class Distribution(object):
             # getting rejected. To workaround this, we'll try resolve these packages
             # separately to still include them and their dependencies.
             rejects = []
-            for key in state['rejected'].keys():
+            for key in list(state['rejected'].keys()):
                 reject = state['rejected'][key]
                 #print color("rejected: %s" % key, RED, RESET, DIM)
-                if reject.has_key('backtrack'):
+                if 'backtrack' in reject:
                     backtrack = reject['backtrack']
-                    if backtrack.has_key('conflicts'):
+                    if 'conflicts' in backtrack:
                         if key in pkgdict:
                             pkg = pkgdict[key]
 
-                            print color("conflicts: %s with %s" % (key, list(backtrack['conflicts'])), RED, RESET, DIM)
+                            print(color("conflicts: %s with %s" % (key, list(backtrack['conflicts'])), RED, RESET, DIM))
                             if pkg.name() in deps and pkg.name() not in rejects:
                                 conflicts = backtrack['conflicts']
                                 skip = False
@@ -180,20 +180,20 @@ class Distribution(object):
                                     else:
                                         skip = True
                                 if not skip:
-                                    print color("The requested package %s has been rejected due to conflicts with: %s" %
-                                            (pkg.fullname(), string.join(conflicts)), RED, RESET, BRIGHT)
+                                    print(color("The requested package %s has been rejected due to conflicts with: %s" %
+                                            (pkg.fullname(), string.join(conflicts)), RED, RESET, BRIGHT))
                                     rejects.append(pkg.name())
             if rejects:
-                print color("Trying to resolve the following requested packages rejected due to conflicts: %s" %
-                        string.join(rejects, " "), BLUE, RESET, BRIGHT)
+                print(color("Trying to resolve the following requested packages rejected due to conflicts: %s" %
+                        string.join(rejects, " "), BLUE, RESET, BRIGHT))
                 res = search_pkgs(rejects)
                 for pkg in res:
                     pkgid = str(pkg.id())
-                    if not pkgid in state['selected'].keys():
-                        print color("adding %s" % pkg.fullname(), BLUE)
+                    if not pkgid in list(state['selected'].keys()):
+                        print(color("adding %s" % pkg.fullname(), BLUE))
                         state['selected'][pkgid] = 1
 
-            for pkgid in state['selected'].keys():
+            for pkgid in list(state['selected'].keys()):
                 pkgids = pkgid.split('|')
             
                 dep = None
@@ -201,7 +201,7 @@ class Distribution(object):
                     pkgid = int(pkgid)
                     pkg = urpm['depslist'][pkgid]
                     if excludere.match(pkg.name()):
-                        print color("skipping1: %s" % pkg.fullname(), YELLOW, RESET, DIM)
+                        print(color("skipping1: %s" % pkg.fullname(), YELLOW, RESET, DIM))
                         continue
                     #else:
                     #    print color("including1: %s" % pkg.fullname(), YELLOW, RESET, BRIGHT)
@@ -209,17 +209,17 @@ class Distribution(object):
                     if not dep:
                         dep = pkg
                     else:
-                        print color("hum: %s" % pkg.fullname(), YELLOW, RESET, DIM)
+                        print(color("hum: %s" % pkg.fullname(), YELLOW, RESET, DIM))
                         True
                 if dep is None:
-                    print color("dep is none: %s" % pkg.fullname(), YELLOW, RESET, DIM)
+                    print(color("dep is none: %s" % pkg.fullname(), YELLOW, RESET, DIM))
                     continue
                 else:
                     #print color("including: %s" % pkg.fullname(), YELLOW, RESET, BRIGHT)
                     allpkgs.append(dep)
             return allpkgs
 
-        print color("Resolving packages", GREEN)
+        print(color("Resolving packages", GREEN))
         allpkgs = search_pkgs(includes)
         # we allow to search through all matches regardless of being able to satisfy
         # dependencies, for in which case urpmi doesn't check which to prefer in case
@@ -230,7 +230,7 @@ class Distribution(object):
             includes.append(p.name())
         allpkgs = search_pkgs(includes)
 
-        print color("Initiating distribution tree", GREEN)
+        print(color("Initiating distribution tree", GREEN))
         smartopts = "channel -o sync-urpmi-medialist=no --data-dir smartdata"
         os.system("rm -rf " + tmpdir)
         os.system("rm -rf smartdata")
@@ -250,13 +250,13 @@ class Distribution(object):
       
         ext = synthfilter.split(":")[0]
         for m in media:
-            print color("Generating media tree for " + m.name, GREEN)
+            print(color("Generating media tree for " + m.name, GREEN))
             os.system("mkdir -p %s/media/%s" % (tmpdir, m.name))
 
             pkgs = []
             for pkg in allpkgs:
                 if excludere.match(pkg.name()):
-                    print color("skipping2: " + pkg.name(), YELLOW, RESET, DIM)
+                    print(color("skipping2: " + pkg.name(), YELLOW, RESET, DIM))
                     continue
                 for rep in "release", "updates":
                     source = "%s/media/%s/%s/%s.rpm" % (repopath, m.name, rep, pkg.fullname())
@@ -274,7 +274,7 @@ class Distribution(object):
                 #signPackage(gpgName, gpgPass, " ".join(pkgs))
                 os.system("gpg --export --armor %s > %s/media/%s/media_info/pubkey" % (gpgName, tmpdir, m.name))
 
-        print color("Writing %s/media/media_info/media.cfg" % tmpdir, GREEN)
+        print(color("Writing %s/media/media_info/media.cfg" % tmpdir, GREEN))
         if not os.path.exists("%s/media/media_info" % tmpdir):
             os.mkdir("%s/media/media_info" % tmpdir)
         mediaCfg = \
@@ -309,26 +309,26 @@ class Distribution(object):
             os.system("smart channel --yes %s --add %s type=urpmi baseurl=%s/media/%s/ hdlurl=media_info/synthesis.hdlist%s" %
                     (smartopts, m.name, tmpdir, m.name, ext))
 
-        print color("Checking packages", GREEN)
+        print(color("Checking packages", GREEN))
         rpmdirs = []
-        for m in self.media.keys():
+        for m in list(self.media.keys()):
             rpmdirs.append("%s/media/%s" % (tmpdir, m))
         os.system("smart update %s" % smartopts)
-        os.system("smart check %s --channels=%s" % (smartopts, string.join(self.media.keys(),",")))
+        os.system("smart check %s --channels=%s" % (smartopts, string.join(list(self.media.keys()),",")))
         os.system("sleep 5");
 
-        print color("Generating %s/media/media_info/rpmsrate" % tmpdir, GREEN)
+        print(color("Generating %s/media/media_info/rpmsrate" % tmpdir, GREEN))
         # TODO: reimplement clean-rpmsrate in python(?)
         #       can probably replace much of it's functionality with meta packages
         os.system("clean-rpmsrate -o %s/media/media_info/rpmsrate %s %s" % (tmpdir, rpmsrate, string.join(rpmdirs," ")))
         if not os.path.exists("%s/media/media_info/rpmsrate" % tmpdir):
-            print "error in rpmsrate"
+            print("error in rpmsrate")
             exit(1)
 
         # if none specified, rely on it's presence in grub target tree...
         if not stage1:
             stage1 = "%s/grub/%s/install/images/all.cpio.xz" % (config.rootdir, self.arch)
-        print color("Copying first stage installer: %s -> %s/install/images/all.cpio.xz" % (stage1, tmpdir), GREEN)
+        print(color("Copying first stage installer: %s -> %s/install/images/all.cpio.xz" % (stage1, tmpdir), GREEN))
         os.mkdir("%s/install" % tmpdir)
         os.mkdir("%s/install/images" % tmpdir)
         os.symlink(os.path.realpath(stage1), tmpdir + "/install/images/all.cpio.xz")
@@ -337,18 +337,18 @@ class Distribution(object):
             stage2 = os.path.realpath(config.rootdir) + "/install/stage2/mdkinst.cpio.xz"
 
         versionFile = os.path.realpath(config.rootdir) + "/install/stage2/VERSION"
-        print color("Copying second stage installer: %s -> %s/install/stage2/mdkinst.cpio.xz" % (stage2, tmpdir), GREEN)
+        print(color("Copying second stage installer: %s -> %s/install/stage2/mdkinst.cpio.xz" % (stage2, tmpdir), GREEN))
         os.mkdir(tmpdir + "/install/stage2")
         os.symlink(stage2, tmpdir + "/install/stage2/mdkinst.cpio.xz")
         os.symlink(versionFile, tmpdir + "/install/stage2/VERSION")
 
         if not advertising:
             advertising="%s/install/extra/advertising" % config.rootdir
-        print color("Copying advertising: %s -> %s/install/extra/advertising" % (advertising, tmpdir), GREEN)
+        print(color("Copying advertising: %s -> %s/install/extra/advertising" % (advertising, tmpdir), GREEN))
         os.mkdir("%s/install/extra" % tmpdir)
         os.symlink(os.path.realpath(advertising), tmpdir + "/install/extra/advertising")
 
-        print color("Generating %s/media/media_info/MD5SUM" % tmpdir, GREEN)
+        print(color("Generating %s/media/media_info/MD5SUM" % tmpdir, GREEN))
         os.system("cd %s/media/media_info/; md5sum * > MD5SUM" % tmpdir)
 
         self.pkgs = []
@@ -420,10 +420,10 @@ class Distribution(object):
     
             if deps:
                 if int(weight) >= int(threshold):
-                    print color("rpmsrate including: %s (%s >= %s)" % (deps,weight,threshold), YELLOW, RESET, BRIGHT)
+                    print(color("rpmsrate including: %s (%s >= %s)" % (deps,weight,threshold), YELLOW, RESET, BRIGHT))
                     pkgs.extend(deps)
                 else:
-                    print color("rpmsrate excluding: %s (%s < %s)" % (deps, weight,threshold), YELLOW, RESET, DIM)
+                    print(color("rpmsrate excluding: %s (%s < %s)" % (deps, weight,threshold), YELLOW, RESET, DIM))
             if unsetCat:
                 cat = None
         f.close()
