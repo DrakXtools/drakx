@@ -27,13 +27,13 @@ $(STAGE1_BINS):
 	make -C ../mdk-stage1 $(shell basename $@)
 endif
 
-images: images/hd_grub.img images/hd_grub.img images/boot.iso grub/$(ARCH)/install/images/all.cpio.xz grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz grub/boot/firmware.cpio.xz
+images: images/hd_grub.img images/hd_grub.img images/boot.iso grub/$(ARCH)/install/images/all.cpio.xz grub/boot/alt0/$(WORDSIZE)/modules.cpio.xz grub/boot/firmware.cpio.xz make_boot_img
 	cd images; md5sum *.iso* > MD5SUM;
 
 images/hd_grub.img:
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img.pl --compress "$(COMPRESS)" $@
 
-grub/$(ARCH)/install/images/all.cpio.xz: list.xml guessmounts
+grub/$(ARCH)/install/images/all.cpio.xz: list.xml guessmounts make_boot_img
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img $@
 
 grub/boot/grub/grub.cfg: grub_data/grub.cfg make_boot_img all.kernels/.list
