@@ -125,9 +125,10 @@ ifeq (dietlibc, $(LIBC))
 else
 	STAGE1_NETWORK_LIBS += -lresolv
 endif
-ifeq (glibc, $(LIBC))
-STAGE1_NETWORK_LIBS += -ltirpc
-endif
+# glibc in cauldron is built with obsolete sunrpc
+#ifeq (glibc, $(LIBC))
+#STAGE1_NETWORK_LIBS += -Wl,-as-needed -ltirpc
+#endif
 
 # - stage1 itself
 STAGE1_SRC = stage1.cpp log.cpp utils.cpp params.cpp tools.cpp modules.cpp probing.cpp mount.cpp automatic.cpp frontend.cpp frontend-common.cpp lomount.cpp thirdparty.cpp
