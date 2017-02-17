@@ -25,7 +25,12 @@ udevadm trigger --type=devices --action=add
 
 grep -q noauto /proc/cmdline || drvinst SERIAL_USB
 
-kbd_mode -u -C /dev/console
+kbd_mode -u
+if [ -t 1 -a -t 2 ]; then
+	printf '\033%%G'
+fi
+stty iutf8
+
 if grep -q vconsole.keymap /proc/cmdline; then
 	keymap=$(sed -e 's#.*vconsole.keymap=\(.*\)\ .*#\1#g')
 	action "Loading keymap: $keymap" loadkeys $keymap
