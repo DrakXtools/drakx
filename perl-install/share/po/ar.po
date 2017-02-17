@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2017-01-15 15:09+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2005-03-03 01:06+0300\n"
 "Last-Translator: Ossama M. Khayat <okhayat@yahoo.com>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -1085,14 +1085,14 @@ msgstr "GRUB مع قائمة نصية"
 msgid "not enough room in /boot"
 msgstr "لا توجد مساحة كافية في /boot"
 
-#: bootloader.pm:2444
+#: bootloader.pm:2437
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
 msgstr "تهيئة محمّل الإقلاع يجب أن يحدّث لأنّ التجزيء تمّ إعادة ترقيمه"
 
-#: bootloader.pm:2457
+#: bootloader.pm:2450
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1101,7 +1101,7 @@ msgstr ""
 "لا يمكن تثبيت محمّل الإقلاع بشكل صحيح. يجب أن تقوم بإقلاع الإنقاذ وتختار \"%s"
 "\""
 
-#: bootloader.pm:2458
+#: bootloader.pm:2451
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "إعادة تثبيت مُحمِّل الإقلاع"
@@ -2401,7 +2401,7 @@ msgstr "فشل تركيب التجزيء %s في الدليل %s"
 msgid "Checking %s"
 msgstr "جاري التأكد من %s"
 
-#: fs/mount.pm:126 partition_table.pm:399
+#: fs/mount.pm:126 partition_table.pm:450
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "خطأ في فكّ %s: %s"
@@ -5173,12 +5173,12 @@ msgstr ""
 msgid "Password seems secure"
 msgstr "كلمة مرور المستخدم"
 
-#: partition_table.pm:405
+#: partition_table.pm:456
 #, c-format
 msgid "mount failed: "
 msgstr "فشل التركيب: "
 
-#: partition_table.pm:531
+#: partition_table.pm:598
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -6942,9 +6942,6 @@ msgstr ""
 msgid "Installation failed"
 msgstr "فشل التّثبيت"
 
-#~ msgid "_: You can warn about unofficial translation here"
-#~ msgstr " "
-
 #, fuzzy
 #~ msgid ""
 #~ "\n"
@@ -7634,6 +7631,9 @@ msgstr "فشل التّثبيت"
 #~ "لقد اخترت تجزيء كتلة منطقيّة LVM كدليل جزر (/).\n"
 #~ "لا يستطيع محمّل الإقلاع التعامل مع ذلك بدون تجزيء /boot.\n"
 #~ "الرجاء التأكّد من أن تضيف تجزيء /boot"
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr " "
 
 #~ msgid "number of capture buffers for mmap'ed capture"
 #~ msgstr "عدد مخازن اللّقطات للقطات mmap'ed"

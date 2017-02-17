@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2017-01-15 15:09+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2007-09-26 20:12+0200\n"
 "Last-Translator: Jaegeum Cze <baedaron@hanafos.com>\n"
 "Language-Team: Korean <beadaron@hanafos.com>\n"
@@ -1081,7 +1081,7 @@ msgstr "텍스트 메뉴 GRUB"
 msgid "not enough room in /boot"
 msgstr "/boot에 공간이 부족합니다."
 
-#: bootloader.pm:2444
+#: bootloader.pm:2437
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1089,7 +1089,7 @@ msgid ""
 msgstr ""
 "파티션이 번호가 변경되었기 때문에, 부트로더 설정이 업데이트 되어야 합니다."
 
-#: bootloader.pm:2457
+#: bootloader.pm:2450
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1098,7 +1098,7 @@ msgstr ""
 "부트로더가 정확하게 설치 될수 없습니다. rescue로 부팅하여 \"%s\"를 \n"
 "선택하여야 합니다."
 
-#: bootloader.pm:2458
+#: bootloader.pm:2451
 #, fuzzy, c-format
 msgid "Re-install Boot Loader"
 msgstr "부트로더 재설치"
@@ -2403,7 +2403,7 @@ msgstr "%s 디렉토리에서 "
 msgid "Checking %s"
 msgstr "%s 복사 중"
 
-#: fs/mount.pm:126 partition_table.pm:399
+#: fs/mount.pm:126 partition_table.pm:450
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "%s를 언마운트중 오류발생: %s"
@@ -5054,12 +5054,12 @@ msgstr ""
 msgid "Password seems secure"
 msgstr "암호가 필요합니다."
 
-#: partition_table.pm:405
+#: partition_table.pm:456
 #, c-format
 msgid "mount failed: "
 msgstr "마운트 실패: "
 
-#: partition_table.pm:531
+#: partition_table.pm:598
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -6682,12 +6682,6 @@ msgstr ""
 msgid "Installation failed"
 msgstr "설치 실패."
 
-#~ msgid "Moondrake"
-#~ msgstr "마제야"
-
-#~ msgid "_: You can warn about unofficial translation here"
-#~ msgstr " "
-
 #~ msgid ""
 #~ "A library which defends against buffer overflow and format string attacks."
 #~ msgstr "버퍼 넘침이나 형식화 문자열 공격을 막는 라이브러리."
@@ -6880,6 +6874,9 @@ msgstr "설치 실패."
 #~ "소프트웨어 RAID 파티션을 루트(/)로 지정했습니다.\n"
 #~ "어떠한 부트로더도 /boot 파티션 없이는 이것을 처리하지 못합니다.\n"
 #~ "그러므로 /boot 파티션을 추가하는 것을 잊지 마세요."
+
+#~ msgid "Moondrake"
+#~ msgstr "마제야"
 
 #~ msgid "NoVideo"
 #~ msgstr "비디오 없음"
@@ -7137,6 +7134,9 @@ msgstr "설치 실패."
 #~ "소프트웨어 RAID 파티션을 루트(/)로 지정했습니다.\n"
 #~ "어떠한 부트로더도 /boot 파티션 없이는 이것을 처리하지 못합니다.\n"
 #~ "그러므로 /boot 파티션을 추가하는 것을 잊지 마세요."
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr " "
 
 #~ msgid "command %s missing"
 #~ msgstr "잘못된 명령 %s "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
 "Report-Msgid-Bugs-To: https://qa.mandriva.com\n"
-"POT-Creation-Date: 2017-01-15 15:09+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2011-08-26 12:05+0000\n"
 "Last-Translator: Alexander Kazancev <kazancas@mandriva.org>\n"
 "Language-Team: Russian (http://transifex.mandriva.com/projects/p/"
@@ -335,6 +335,8 @@ msgid ""
 "If grub2 takes too long to install, you can use this option to skip "
 "detecting other OSes and make it fast"
 msgstr ""
+"Если grub2 слишком долго устанавливается, то вы можете использовать эту "
+"опцию для ускорения, чтобы пропустить обнаружение других операционных систем"
 
 #: any.pm:943
 #, c-format
@@ -1100,7 +1102,7 @@ msgstr "GRUB с текстовым меню"
 msgid "not enough room in /boot"
 msgstr "не хватает места в /boot"
 
-#: bootloader.pm:2444
+#: bootloader.pm:2437
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1109,7 +1111,7 @@ msgstr ""
 "Так как был изменён номера раздела, необходимо обновить конфигурацию "
 "начального загрузчика"
 
-#: bootloader.pm:2457
+#: bootloader.pm:2450
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1118,7 +1120,7 @@ msgstr ""
 "Начальный загрузчик не может быть корректно установлен. Вам необходимо "
 "загрузиться в режиме rescue и выбрать \"%s\""
 
-#: bootloader.pm:2458
+#: bootloader.pm:2451
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Переустановка начального загрузчика"
@@ -2440,7 +2442,7 @@ msgstr "монтирование раздела %s в каталог %s заве
 msgid "Checking %s"
 msgstr "Проверяется %s"
 
-#: fs/mount.pm:126 partition_table.pm:399
+#: fs/mount.pm:126 partition_table.pm:450
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "ошибка размонтирования %s: %s"
@@ -5365,12 +5367,12 @@ msgstr "Пароль должен быть стойким к простым ат
 msgid "Password seems secure"
 msgstr "Пароль кажется безопасным"
 
-#: partition_table.pm:405
+#: partition_table.pm:456
 #, c-format
 msgid "mount failed: "
 msgstr "ошибка монтирования: "
 
-#: partition_table.pm:531
+#: partition_table.pm:598
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -7212,6 +7214,62 @@ msgid "Installation failed"
 msgstr "Установка завершилась неудачей"
 
 #~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Your card currently uses the %s\"%s\" driver (the default driver for your "
+#~ "card is \"%s\")"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "В настоящий момент для карты используется драйвер %s\"%s\" (драйвером по "
+#~ "умолчанию является \"%s\")"
+
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Лицензионное соглашение"
+
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Ограниченные гарантийные обязательства"
+
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. Лицензия GPL и связанные лицензии"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Права на объекты интеллектуальной собственности"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Регулирующие законы"
+
+#~ msgid ""
+#~ "After rebooting and logging into Moondrake, you will see the "
+#~ "MoondrakeWelcome screen.\n"
+#~ "It is full of very useful information and links."
+#~ msgstr ""
+#~ "После перезагрузки и входа в Moondrake вы увидите окно MoondrakeWelcome.\n"
+#~ "В этом окне приведена очень полезная информация и ссылки."
+
+#~ msgid ""
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
+#~ msgstr ""
+#~ "Все права на компоненты Программных Продуктов принадлежат их "
+#~ "соответствующим авторам \n"
+#~ "и защищены законами об интеллектуальной собственности и авторском праве, "
+#~ "применительно \n"
+#~ "к программному обеспечению. Компания Moondrake и её поставщики и "
+#~ "лицензиары сохраняют \n"
+#~ "за собой право изменять или адаптировать Программные Продукты (как "
+#~ "целиком, так и по частям) \n"
+#~ "любым образом и для любых целей.\n"
+#~ "«Moondrake» и соответствующие логотипы являются товарными знаками \n"
+#~ "компании %s"
+
+#~ msgid ""
 #~ "Below are some basic tips to help debug audio problems, but for accurate "
 #~ "and up-to-date tips and tricks, please see:\n"
 #~ "\n"
@@ -7226,9 +7284,9 @@ msgstr "Установка завершилась неудачей"
 #~ "\n"
 #~ "\n"
 #~ "\n"
-#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and \"pavucontrol"
-#~ "\" (generic) will launch graphical applications to allow you to view your "
-#~ "sound devices and adjust volume levels\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and "
+#~ "\"pauvucontrol\" (generic) will launch graphical applications to allow "
+#~ "you to view your sound devices and adjust volume levels\n"
 #~ "\n"
 #~ "\n"
 #~ "- \"ps aux | grep pulseaudio\" will check that PulseAudio is running.\n"
@@ -7325,62 +7383,6 @@ msgstr "Установка завершилась неудачей"
 #~ "показать только касаемо PulseAudio)\n"
 
 #~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "Your card currently uses the %s\"%s\" driver (the default driver for your "
-#~ "card is \"%s\")"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "В настоящий момент для карты используется драйвер %s\"%s\" (драйвером по "
-#~ "умолчанию является \"%s\")"
-
-#~ msgid "1. License Agreement"
-#~ msgstr "1. Лицензионное соглашение"
-
-#~ msgid "2. Limited Warranty"
-#~ msgstr "2. Ограниченные гарантийные обязательства"
-
-#~ msgid "3. The GPL License and Related Licenses"
-#~ msgstr "3. Лицензия GPL и связанные лицензии"
-
-#~ msgid "4. Intellectual Property Rights"
-#~ msgstr "4. Права на объекты интеллектуальной собственности"
-
-#~ msgid "5. Governing Laws"
-#~ msgstr "5. Регулирующие законы"
-
-#~ msgid ""
-#~ "After rebooting and logging into Moondrake, you will see the "
-#~ "MoondrakeWelcome screen.\n"
-#~ "It is full of very useful information and links."
-#~ msgstr ""
-#~ "После перезагрузки и входа в Moondrake вы увидите окно MoondrakeWelcome.\n"
-#~ "В этом окне приведена очень полезная информация и ссылки."
-
-#~ msgid ""
-#~ "All rights to the components of the Software Products belong to their "
-#~ "respective authors and are \n"
-#~ "protected by intellectual property and copyright laws applicable to "
-#~ "software programs.\n"
-#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
-#~ "or adapt the Software \n"
-#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
-#~ "\"Moondrake\" and associated logos are trademarks of %s"
-#~ msgstr ""
-#~ "Все права на компоненты Программных Продуктов принадлежат их "
-#~ "соответствующим авторам \n"
-#~ "и защищены законами об интеллектуальной собственности и авторском праве, "
-#~ "применительно \n"
-#~ "к программному обеспечению. Компания Moondrake и её поставщики и "
-#~ "лицензиары сохраняют \n"
-#~ "за собой право изменять или адаптировать Программные Продукты (как "
-#~ "целиком, так и по частям) \n"
-#~ "любым образом и для любых целей.\n"
-#~ "«Moondrake» и соответствующие логотипы являются товарными знаками \n"
-#~ "компании %s"
-
-#~ msgid ""
 #~ "Below are some basic tips to help debug audio problems, but for accurate "
 #~ "and up-to-date tips and tricks, please see:\n"
 #~ "\n"
@@ -7395,9 +7397,9 @@ msgstr "Установка завершилась неудачей"
 #~ "\n"
 #~ "\n"
 #~ "\n"
-#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and "
-#~ "\"pauvucontrol\" (generic) will launch graphical applications to allow "
-#~ "you to view your sound devices and adjust volume levels\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and \"pavucontrol"
+#~ "\" (generic) will launch graphical applications to allow you to view your "
+#~ "sound devices and adjust volume levels\n"
 #~ "\n"
 #~ "\n"
 #~ "- \"ps aux | grep pulseaudio\" will check that PulseAudio is running.\n"

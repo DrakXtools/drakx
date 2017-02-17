@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:09+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2010-06-06 00:01+0200\n"
 "Last-Translator: Andrea Celli <andrea.celli@libero.it>\n"
 "Language-Team: Italian <timl@frelists.org>\n"
@@ -1113,7 +1113,7 @@ msgstr "GRUB con menu testuale"
 msgid "not enough room in /boot"
 msgstr "spazio insufficiente in /boot"
 
-#: bootloader.pm:2444
+#: bootloader.pm:2437
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1122,7 +1122,7 @@ msgstr ""
 "Devi aggiornare la configurazione del bootloader perché le partizioni hanno "
 "cambiato numerazione"
 
-#: bootloader.pm:2457
+#: bootloader.pm:2450
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1131,7 +1131,7 @@ msgstr ""
 "Il bootloader non può essere installato correttamente. Devi avviare in "
 "modalità rescue e selezionare \"%s\""
 
-#: bootloader.pm:2458
+#: bootloader.pm:2451
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Reinstallazione del bootloader"
@@ -2458,7 +2458,7 @@ msgstr "il mount della partizione %s sulla directory %s non è riuscito"
 msgid "Checking %s"
 msgstr "Sto controllando %s"
 
-#: fs/mount.pm:126 partition_table.pm:399
+#: fs/mount.pm:126 partition_table.pm:450
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "errore in fase di unmount di %s: %s"
@@ -5380,12 +5380,12 @@ msgstr "La password dovrebbe poter resistere agli attacchi più semplici"
 msgid "Password seems secure"
 msgstr "La password sembra sicura"
 
-#: partition_table.pm:405
+#: partition_table.pm:456
 #, c-format
 msgid "mount failed: "
 msgstr "mount non riuscito: "
 
-#: partition_table.pm:531
+#: partition_table.pm:598
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -7217,6 +7217,33 @@ msgid "Installation failed"
 msgstr "Installazione non riuscita"
 
 #~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Your card currently uses the %s\"%s\" driver (the default driver for your "
+#~ "card is \"%s\")"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "La tua scheda attualmente usa il driver %s \"%s\" (il driver predefinito "
+#~ "per la tua scheda è \"%s\")"
+
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Termini di licenza"
+
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Limiti della garanzia"
+
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr ""
+#~ "3. La Licenza GPL (\"General Public License\") e altre Licenze collegate"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Diritti di proprietà intellettuale"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Disposizioni diverse"
+
+#~ msgid ""
 #~ "After rebooting and logging into Moondrake, you will see the "
 #~ "MoondrakeWelcome screen.\n"
 #~ "It is full of very useful information and links."
@@ -7224,6 +7251,30 @@ msgstr "Installazione non riuscita"
 #~ "Dopo aver riavviato ed eseguito il login in Moondrake vedrai la schermata "
 #~ "di benvenuto.\n"
 #~ "Contiene informazioni e link molto utili."
+
+#~ msgid ""
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
+#~ msgstr ""
+#~ "Tutti i diritti relativi alle componenti dei \"Prodotti software\" "
+#~ "appartengono ai rispettivi\n"
+#~ "\n"
+#~ "autori e sono protetti dalle leggi che disciplinano la proprietà "
+#~ "intellettuale e diritti\n"
+#~ "\n"
+#~ "d'autore applicabili ai programmi software. Moondrake si riserva il "
+#~ "diritto di modificare o \n"
+#~ "\n"
+#~ "adattare i \"Prodotti software\", in parte o in tutto, con ogni mezzo e "
+#~ "per qualsiasi \n"
+#~ "\n"
+#~ "scopo. \"Moondrake\" e i relativi loghi sono proprietà di %s"
 
 #~ msgid ""
 #~ "Below are some basic tips to help debug audio problems, but for accurate "
@@ -7339,57 +7390,6 @@ msgstr "Installazione non riuscita"
 #~ "- \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" ti dirà quali programmi "
 #~ "stanno attualmente utilizzando la scheda audio direttamente (normalmente "
 #~ "verrà mostrato solo PulseAudio)\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "Your card currently uses the %s\"%s\" driver (the default driver for your "
-#~ "card is \"%s\")"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "La tua scheda attualmente usa il driver %s \"%s\" (il driver predefinito "
-#~ "per la tua scheda è \"%s\")"
-
-#~ msgid "1. License Agreement"
-#~ msgstr "1. Termini di licenza"
-
-#~ msgid "2. Limited Warranty"
-#~ msgstr "2. Limiti della garanzia"
-
-#~ msgid "3. The GPL License and Related Licenses"
-#~ msgstr ""
-#~ "3. La Licenza GPL (\"General Public License\") e altre Licenze collegate"
-
-#~ msgid "4. Intellectual Property Rights"
-#~ msgstr "4. Diritti di proprietà intellettuale"
-
-#~ msgid "5. Governing Laws"
-#~ msgstr "5. Disposizioni diverse"
-
-#~ msgid ""
-#~ "All rights to the components of the Software Products belong to their "
-#~ "respective authors and are \n"
-#~ "protected by intellectual property and copyright laws applicable to "
-#~ "software programs.\n"
-#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
-#~ "or adapt the Software \n"
-#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
-#~ "\"Moondrake\" and associated logos are trademarks of %s"
-#~ msgstr ""
-#~ "Tutti i diritti relativi alle componenti dei \"Prodotti software\" "
-#~ "appartengono ai rispettivi\n"
-#~ "\n"
-#~ "autori e sono protetti dalle leggi che disciplinano la proprietà "
-#~ "intellettuale e diritti\n"
-#~ "\n"
-#~ "d'autore applicabili ai programmi software. Moondrake si riserva il "
-#~ "diritto di modificare o \n"
-#~ "\n"
-#~ "adattare i \"Prodotti software\", in parte o in tutto, con ogni mezzo e "
-#~ "per qualsiasi \n"
-#~ "\n"
-#~ "scopo. \"Moondrake\" e i relativi loghi sono proprietà di %s"
 
 #, fuzzy
 #~ msgid "Check bad blocks?"

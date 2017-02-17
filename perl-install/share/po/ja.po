@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-ja\n"
-"POT-Creation-Date: 2017-01-15 15:09+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2009-02-22 19:41+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
@@ -1084,7 +1084,7 @@ msgstr "GRUB (テキスト表示)"
 msgid "not enough room in /boot"
 msgstr "/boot の容量が足りません"
 
-#: bootloader.pm:2444
+#: bootloader.pm:2437
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1092,7 +1092,7 @@ msgid ""
 msgstr ""
 "パーティション番号が変更されたので、ブートローダの設定を更新してください"
 
-#: bootloader.pm:2457
+#: bootloader.pm:2450
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1101,7 +1101,7 @@ msgstr ""
 "ブートローダを正しくインストールできません。レスキューをブートして %s を選ん"
 "でください。"
 
-#: bootloader.pm:2458
+#: bootloader.pm:2451
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "ブートローダを再インストール"
@@ -2420,7 +2420,7 @@ msgstr "パーティション %s をディレクトリ %s にマウントでき�
 msgid "Checking %s"
 msgstr "%s をチェック中"
 
-#: fs/mount.pm:126 partition_table.pm:399
+#: fs/mount.pm:126 partition_table.pm:450
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "%s をアンマウント中にエラー: %s"
@@ -5184,12 +5184,12 @@ msgstr ""
 msgid "Password seems secure"
 msgstr "パスワード"
 
-#: partition_table.pm:405
+#: partition_table.pm:456
 #, c-format
 msgid "mount failed: "
 msgstr "マウントに失敗: "
 
-#: partition_table.pm:531
+#: partition_table.pm:598
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -6967,9 +6967,6 @@ msgstr ""
 msgid "Installation failed"
 msgstr "インストール失敗"
 
-#~ msgid "_: You can warn about unofficial translation here"
-#~ msgstr " "
-
 #, fuzzy
 #~ msgid ""
 #~ "\n"
@@ -7705,6 +7702,9 @@ msgstr "インストール失敗"
 #~ "このボリュームが物理ボリュームに及ぶ場合はブートローダはこれを扱えませ"
 #~ "ん。\n"
 #~ "まず /boot パーティションを作成してください。"
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr " "
 
 #~ msgid "command %s missing"
 #~ msgstr "コマンド %s がありません"

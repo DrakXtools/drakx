@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-bg\n"
-"POT-Creation-Date: 2017-01-15 15:09+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2009-03-21 13:58+0200\n"
 "Last-Translator: Kolio Kolev <kolio_kolev@biotronica.net>\n"
 "Language-Team: Bulgarian <Mandriva User Group - Bulgaria <mandriva-"
@@ -1095,7 +1095,7 @@ msgstr "GRUB с текстово меню"
 msgid "not enough room in /boot"
 msgstr "няма достатъчно място в /boot"
 
-#: bootloader.pm:2444
+#: bootloader.pm:2437
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1104,7 +1104,7 @@ msgstr ""
 "Конфигурацията на програмата за начално зареждане трябва да се актуализира, "
 "защото дисковите дялове бяха преномерирани"
 
-#: bootloader.pm:2457
+#: bootloader.pm:2450
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1113,7 +1113,7 @@ msgstr ""
 "Програмата за начално зареждане не може да бъде коректно инсталирана. Трябва "
 "да стартирате режим rescue и да изберете  \"%s\""
 
-#: bootloader.pm:2458
+#: bootloader.pm:2451
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Преинсталиране на програмата за начално зареждане"
@@ -2445,7 +2445,7 @@ msgstr " пропадна монтирането на дисков дял %s в 
 msgid "Checking %s"
 msgstr "Проверка на %s"
 
-#: fs/mount.pm:126 partition_table.pm:399
+#: fs/mount.pm:126 partition_table.pm:450
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "грешка при демонтиране на %s: %s"
@@ -5228,12 +5228,12 @@ msgstr ""
 msgid "Password seems secure"
 msgstr "Изисква парола"
 
-#: partition_table.pm:405
+#: partition_table.pm:456
 #, c-format
 msgid "mount failed: "
 msgstr "монтирането не успя: "
 
-#: partition_table.pm:531
+#: partition_table.pm:598
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -6892,9 +6892,6 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Инсталацията провалена"
 
-#~ msgid "_: You can warn about unofficial translation here"
-#~ msgstr " "
-
 #, fuzzy
 #~ msgid ""
 #~ "\n"
@@ -7662,6 +7659,9 @@ msgstr "Инсталацията провалена"
 #~ "Няма зареждаща програма, която да може да се справи с него без /boot "
 #~ "дял.\n"
 #~ "Така че добавете /boot дял"
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr " "
 
 #~ msgid "command %s missing"
 #~ msgstr "командата %s липсва"

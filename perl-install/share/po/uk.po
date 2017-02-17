@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
-"POT-Creation-Date: 2017-01-15 15:09+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2010-06-06 14:52-0400\n"
 "Last-Translator: Taras Boychuk <btr0001@ukr.net>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
@@ -1116,7 +1116,7 @@ msgstr "GRUB з текстовим меню"
 msgid "not enough room in /boot"
 msgstr "недостатньо місця в /boot"
 
-#: bootloader.pm:2444
+#: bootloader.pm:2437
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1125,7 +1125,7 @@ msgstr ""
 "Конфігурація Вашого завантажувача має бути поновлена, бо розділи було "
 "перенумеровано"
 
-#: bootloader.pm:2457
+#: bootloader.pm:2450
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1134,7 +1134,7 @@ msgstr ""
 "Завантажувач не може бути коректно встановлений. Вам необхідно завантажити "
 "rescue, і вибрати \"%s\""
 
-#: bootloader.pm:2458
+#: bootloader.pm:2451
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Перевстановити завантажувач"
@@ -2455,7 +2455,7 @@ msgstr "монтування розділу %s в теку %s завершило
 msgid "Checking %s"
 msgstr "Перевірка %s"
 
-#: fs/mount.pm:126 partition_table.pm:399
+#: fs/mount.pm:126 partition_table.pm:450
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "помилка розмонтування %s: %s"
@@ -5340,12 +5340,12 @@ msgstr "Пароль має протистояти базовим атакам"
 msgid "Password seems secure"
 msgstr "Здається, безпечний пароль"
 
-#: partition_table.pm:405
+#: partition_table.pm:456
 #, c-format
 msgid "mount failed: "
 msgstr "помилка монтування: "
 
-#: partition_table.pm:531
+#: partition_table.pm:598
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -7182,6 +7182,62 @@ msgid "Installation failed"
 msgstr "Встановлення завершилося невдало"
 
 #~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Your card currently uses the %s\"%s\" driver (the default driver for your "
+#~ "card is \"%s\")"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Ваша картка зараз використовує драйвер %s\"%s\" (типовим драйвером для "
+#~ "вашої картки є \"%s\")"
+
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Ліцензійна угода"
+
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Обмежена гарантія"
+
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. Ліцензія GPL та пов’язані з нею ліцензії"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Права інтелектуальної власності"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Законодавство"
+
+#~ msgid ""
+#~ "After rebooting and logging into Moondrake, you will see the "
+#~ "MoondrakeWelcome screen.\n"
+#~ "It is full of very useful information and links."
+#~ msgstr ""
+#~ "Після перезавантаження та входу до Moondrake ви побачите вікно "
+#~ "MoondrakeWelcome.\n"
+#~ "У цьому вікні наведено дуже корисну інформацію та посилання."
+
+#~ msgid ""
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
+#~ msgstr ""
+#~ "Всі права на складові компоненти Програмних продуктів належать\n"
+#~ "відповідним авторам і захищені законами про інтелектуальну власність\n"
+#~ "на програмне забезпечення.\n"
+#~ "Moondrake залишає за собою право змінювати чи\n"
+#~ "адаптувати Програмні продукти як в цілому, так і окремими частинами з\n"
+#~ "будь-якою метою і для будь-яких цілей. \"Moondrake\" та\n"
+#~ "відповідні логотипи є торговельними марками %s."
+
+#~ msgid "Automatic routing from ALSA to PulseAudio"
+#~ msgstr "Автоматична маршрутизація з ALSA на PulseAudio"
+
+#~ msgid ""
 #~ "Below are some basic tips to help debug audio problems, but for accurate "
 #~ "and up-to-date tips and tricks, please see:\n"
 #~ "\n"
@@ -7196,9 +7252,9 @@ msgstr "Встановлення завершилося невдало"
 #~ "\n"
 #~ "\n"
 #~ "\n"
-#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and \"pavucontrol"
-#~ "\" (generic) will launch graphical applications to allow you to view your "
-#~ "sound devices and adjust volume levels\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and "
+#~ "\"pauvucontrol\" (generic) will launch graphical applications to allow "
+#~ "you to view your sound devices and adjust volume levels\n"
 #~ "\n"
 #~ "\n"
 #~ "- \"ps aux | grep pulseaudio\" will check that PulseAudio is running.\n"
@@ -7302,62 +7358,6 @@ msgstr "Встановлення завершилося невдало"
 #~ "звукову картку (зазвичай, має бути показано лише PulseAudio).\n"
 
 #~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "Your card currently uses the %s\"%s\" driver (the default driver for your "
-#~ "card is \"%s\")"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "Ваша картка зараз використовує драйвер %s\"%s\" (типовим драйвером для "
-#~ "вашої картки є \"%s\")"
-
-#~ msgid "1. License Agreement"
-#~ msgstr "1. Ліцензійна угода"
-
-#~ msgid "2. Limited Warranty"
-#~ msgstr "2. Обмежена гарантія"
-
-#~ msgid "3. The GPL License and Related Licenses"
-#~ msgstr "3. Ліцензія GPL та пов’язані з нею ліцензії"
-
-#~ msgid "4. Intellectual Property Rights"
-#~ msgstr "4. Права інтелектуальної власності"
-
-#~ msgid "5. Governing Laws"
-#~ msgstr "5. Законодавство"
-
-#~ msgid ""
-#~ "After rebooting and logging into Moondrake, you will see the "
-#~ "MoondrakeWelcome screen.\n"
-#~ "It is full of very useful information and links."
-#~ msgstr ""
-#~ "Після перезавантаження та входу до Moondrake ви побачите вікно "
-#~ "MoondrakeWelcome.\n"
-#~ "У цьому вікні наведено дуже корисну інформацію та посилання."
-
-#~ msgid ""
-#~ "All rights to the components of the Software Products belong to their "
-#~ "respective authors and are \n"
-#~ "protected by intellectual property and copyright laws applicable to "
-#~ "software programs.\n"
-#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
-#~ "or adapt the Software \n"
-#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
-#~ "\"Moondrake\" and associated logos are trademarks of %s"
-#~ msgstr ""
-#~ "Всі права на складові компоненти Програмних продуктів належать\n"
-#~ "відповідним авторам і захищені законами про інтелектуальну власність\n"
-#~ "на програмне забезпечення.\n"
-#~ "Moondrake залишає за собою право змінювати чи\n"
-#~ "адаптувати Програмні продукти як в цілому, так і окремими частинами з\n"
-#~ "будь-якою метою і для будь-яких цілей. \"Moondrake\" та\n"
-#~ "відповідні логотипи є торговельними марками %s."
-
-#~ msgid "Automatic routing from ALSA to PulseAudio"
-#~ msgstr "Автоматична маршрутизація з ALSA на PulseAudio"
-
-#~ msgid ""
 #~ "Below are some basic tips to help debug audio problems, but for accurate "
 #~ "and up-to-date tips and tricks, please see:\n"
 #~ "\n"
@@ -7372,9 +7372,9 @@ msgstr "Встановлення завершилося невдало"
 #~ "\n"
 #~ "\n"
 #~ "\n"
-#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and "
-#~ "\"pauvucontrol\" (generic) will launch graphical applications to allow "
-#~ "you to view your sound devices and adjust volume levels\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and \"pavucontrol"
+#~ "\" (generic) will launch graphical applications to allow you to view your "
+#~ "sound devices and adjust volume levels\n"
 #~ "\n"
 #~ "\n"
 #~ "- \"ps aux | grep pulseaudio\" will check that PulseAudio is running.\n"

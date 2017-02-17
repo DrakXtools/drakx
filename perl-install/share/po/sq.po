@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for MDK 9.2\n"
-"POT-Creation-Date: 2017-01-15 15:09+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2004-09-15 13:33+0200\n"
 "Last-Translator: Naim Daka <naim70@freesurf.ch>\n"
 "Language-Team: Albanian <LL@li.org>\n"
@@ -1095,21 +1095,21 @@ msgstr ""
 msgid "not enough room in /boot"
 msgstr "nuk ka vend të mjaftueshëm në repertorin /boot"
 
-#: bootloader.pm:2444
+#: bootloader.pm:2437
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
 msgstr ""
 
-#: bootloader.pm:2457
+#: bootloader.pm:2450
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
 "choose \"%s\""
 msgstr ""
 
-#: bootloader.pm:2458
+#: bootloader.pm:2451
 #, fuzzy, c-format
 msgid "Re-install Boot Loader"
 msgstr "Instalim i bootloader"
@@ -2427,7 +2427,7 @@ msgstr "montimi i ndarjes %s në repertorin %s dështoi"
 msgid "Checking %s"
 msgstr "Verifikimi i %s"
 
-#: fs/mount.pm:126 partition_table.pm:399
+#: fs/mount.pm:126 partition_table.pm:450
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "gabim gjatë çmontimit %s: %s"
@@ -5237,12 +5237,12 @@ msgstr ""
 msgid "Password seems secure"
 msgstr "Parulla nevojitet"
 
-#: partition_table.pm:405
+#: partition_table.pm:456
 #, c-format
 msgid "mount failed: "
 msgstr "dështim gjatë montimit: "
 
-#: partition_table.pm:531
+#: partition_table.pm:598
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -7036,16 +7036,6 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Instalimi dështio"
 
-#~ msgid ""
-#~ "Congratulations, installation is complete.\n"
-#~ "Remove the boot media and press Enter to reboot."
-#~ msgstr ""
-#~ "Urime, instalimi ka mbaruar.\n"
-#~ "Hiq media ndezëse dhe shtyp Hyrë për të rifilluar."
-
-#~ msgid "Moondrake"
-#~ msgstr "Moondrake"
-
 #, fuzzy
 #~ msgid ""
 #~ "\n"
@@ -7233,6 +7223,13 @@ msgstr "Instalimi dështio"
 
 #~ msgid "Collapse Tree"
 #~ msgstr "Zvogëloje Drurin Gjinealogjik"
+
+#~ msgid ""
+#~ "Congratulations, installation is complete.\n"
+#~ "Remove the boot media and press Enter to reboot."
+#~ msgstr ""
+#~ "Urime, instalimi ka mbaruar.\n"
+#~ "Hiq media ndezëse dhe shtyp Hyrë për të rifilluar."
 
 #~ msgid "Default OS?"
 #~ msgstr "Sistem i Eksploatimit me marrëveshje?"
@@ -7460,6 +7457,9 @@ msgstr "Instalimi dështio"
 #~ "(/).\n"
 #~ "Që sistemi i juaj të funksionoj si duhet, shtone një ndarje jo RAID\n"
 #~ "të repertorit ndarës /boot"
+
+#~ msgid "Moondrake"
+#~ msgstr "Moondrake"
 
 #~ msgid "No open source driver"
 #~ msgstr "Asnjë burim i hapur për pilotin"

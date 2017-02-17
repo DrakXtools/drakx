@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
-"POT-Creation-Date: 2017-01-15 15:09+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2009-04-09 11:48+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -1072,21 +1072,21 @@ msgstr "文本菜单 GRUB"
 msgid "not enough room in /boot"
 msgstr "/boot 中没有足够空间"
 
-#: bootloader.pm:2444
+#: bootloader.pm:2437
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
 msgstr "必须更新您的启动引导程序配置, 因为分区已经重新编号"
 
-#: bootloader.pm:2457
+#: bootloader.pm:2450
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
 "choose \"%s\""
 msgstr "无法正确安装启动引导程序。您需要以抢救方式启动并选择“%s”"
 
-#: bootloader.pm:2458
+#: bootloader.pm:2451
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "重新安装启动引导程序"
@@ -2387,7 +2387,7 @@ msgstr "将分区 %s 挂载于目录 %s 失败"
 msgid "Checking %s"
 msgstr "正在检查 %s"
 
-#: fs/mount.pm:126 partition_table.pm:399
+#: fs/mount.pm:126 partition_table.pm:450
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "卸载 %s 出错: %s"
@@ -5115,12 +5115,12 @@ msgstr "密码可抵御常见攻击"
 msgid "Password seems secure"
 msgstr "密码好像安全"
 
-#: partition_table.pm:405
+#: partition_table.pm:456
 #, c-format
 msgid "mount failed: "
 msgstr "挂载失败: "
 
-#: partition_table.pm:531
+#: partition_table.pm:598
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -6844,6 +6844,32 @@ msgstr ""
 msgid "Installation failed"
 msgstr "安装失败"
 
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Your card currently uses the %s\"%s\" driver (the default driver for your "
+#~ "card is \"%s\")"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "您的声卡现在正在使用 %s“%s”驱动程序(其默认驱动程序为“%s”)"
+
+#~ msgid "1. License Agreement"
+#~ msgstr "1. 许可协议"
+
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. 有限担保"
+
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. GPL 许可协议和其它有关协议"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. 知识产权"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. 适用法律"
+
 #~ msgid ""
 #~ "After rebooting and logging into Moondrake, you will see the "
 #~ "MoondrakeWelcome screen.\n"
@@ -6851,6 +6877,21 @@ msgstr "安装失败"
 #~ msgstr ""
 #~ "重启并登录进入 Moondrake 后，您将会看到 Moondrake 欢迎画面。\n"
 #~ "其中包含了有用的信息和链接。"
+
+#~ msgid ""
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
+#~ msgstr ""
+#~ "本软件产品的各个组件的所有权利属于它们各自的作者, 并受到所有可适用于软件程"
+#~ "序的知识产权和版权法律的保护。Moondrake 保留对本软件产品进行全面或部分的更"
+#~ "改或调整的权利, 不论采用任何方法, 不论出于任何目的。\n"
+#~ "“Moondrake”和相关的标志是 %s 的商标。"
 
 #~ msgid ""
 #~ "Below are some basic tips to help debug audio problems, but for accurate "
@@ -6955,71 +6996,6 @@ msgstr "安装失败"
 #~ "\n"
 #~ "- “/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp”可以告诉您当前直接使用声卡的"
 #~ "程序（正常情况下，应当只有 PulseAudio）。\n"
-
-#~ msgid ""
-#~ "The Software Products consist of components created by different persons "
-#~ "or entities.\n"
-#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
-#~ "the components which \n"
-#~ "they cover. Please read carefully the terms and conditions of the license "
-#~ "agreement for each component \n"
-#~ "before using any component. Any question on a component license should be "
-#~ "addressed to the component \n"
-#~ "licensor or supplier and not to Moondrake.\n"
-#~ "The programs developed by Moondrake are governed by the GPL License. "
-#~ "Documentation written \n"
-#~ "by Moondrake is governed by \"%s\" License."
-#~ msgstr ""
-#~ "软件产品中包含由不同人（或团体）创作的组件。\n"
-#~ "多数组件的协议允许您使用、复制、修改或再分发它们。\n"
-#~ "请仔细阅读每个组件的条款和许可协议的条件。应当向组件的授权者或供应者咨询有"
-#~ "关协议的问题，而不是 Moondrake。\n"
-#~ "由 Moondrake 开发的程序均由 GPL 协议授权。\n"
-#~ "由 Moondrake 编写的文档均由“%s”协议授权。"
-
-#~ msgid "_: You can warn about unofficial translation here"
-#~ msgstr " "
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "Your card currently uses the %s\"%s\" driver (the default driver for your "
-#~ "card is \"%s\")"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "您的声卡现在正在使用 %s“%s”驱动程序(其默认驱动程序为“%s”)"
-
-#~ msgid "1. License Agreement"
-#~ msgstr "1. 许可协议"
-
-#~ msgid "2. Limited Warranty"
-#~ msgstr "2. 有限担保"
-
-#~ msgid "3. The GPL License and Related Licenses"
-#~ msgstr "3. GPL 许可协议和其它有关协议"
-
-#~ msgid "4. Intellectual Property Rights"
-#~ msgstr "4. 知识产权"
-
-#~ msgid "5. Governing Laws"
-#~ msgstr "5. 适用法律"
-
-#~ msgid ""
-#~ "All rights to the components of the Software Products belong to their "
-#~ "respective authors and are \n"
-#~ "protected by intellectual property and copyright laws applicable to "
-#~ "software programs.\n"
-#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
-#~ "or adapt the Software \n"
-#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
-#~ "\"Moondrake\" and associated logos are trademarks of %s"
-#~ msgstr ""
-#~ "本软件产品的各个组件的所有权利属于它们各自的作者, 并受到所有可适用于软件程"
-#~ "序的知识产权和版权法律的保护。Moondrake 保留对本软件产品进行全面或部分的更"
-#~ "改或调整的权利, 不论采用任何方法, 不论出于任何目的。\n"
-#~ "“Moondrake”和相关的标志是 %s 的商标。"
 
 #, fuzzy
 #~ msgid "Check bad blocks?"
@@ -7321,6 +7297,27 @@ msgstr "安装失败"
 #~ "但不限于本软件产品所包括的强大数据加密组件。"
 
 #~ msgid ""
+#~ "The Software Products consist of components created by different persons "
+#~ "or entities.\n"
+#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
+#~ "the components which \n"
+#~ "they cover. Please read carefully the terms and conditions of the license "
+#~ "agreement for each component \n"
+#~ "before using any component. Any question on a component license should be "
+#~ "addressed to the component \n"
+#~ "licensor or supplier and not to Moondrake.\n"
+#~ "The programs developed by Moondrake are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by Moondrake is governed by \"%s\" License."
+#~ msgstr ""
+#~ "软件产品中包含由不同人（或团体）创作的组件。\n"
+#~ "多数组件的协议允许您使用、复制、修改或再分发它们。\n"
+#~ "请仔细阅读每个组件的条款和许可协议的条件。应当向组件的授权者或供应者咨询有"
+#~ "关协议的问题，而不是 Moondrake。\n"
+#~ "由 Moondrake 开发的程序均由 GPL 协议授权。\n"
+#~ "由 Moondrake 编写的文档均由“%s”协议授权。"
+
+#~ msgid ""
 #~ "The classic bug sound tester is to run the following commands:\n"
 #~ "\n"
 #~ "\n"
@@ -7489,6 +7486,9 @@ msgstr "安装失败"
 #~ "您选择了加密分区作为根分区（/）。\n"
 #~ "引导器无法引导跨物理卷的根分区。\n"
 #~ "请您确保创建了独立的 /boot 分区。"
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr " "
 
 #~ msgid "command %s missing"
 #~ msgstr "缺少命令 %s"

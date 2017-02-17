@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
-"POT-Creation-Date: 2017-01-15 15:09+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2009-04-13 12:52+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@gmail.com>\n"
 "Language-Team: Nederlands\n"
@@ -1120,7 +1120,7 @@ msgstr "GRUB met tekstmenu"
 msgid "not enough room in /boot"
 msgstr "niet genoeg ruimte in /boot"
 
-#: bootloader.pm:2444
+#: bootloader.pm:2437
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1129,7 +1129,7 @@ msgstr ""
 "De configuratie van uw opstartlader moet bijgewerkt worden omdat de partitie "
 "is omgenummerd"
 
-#: bootloader.pm:2457
+#: bootloader.pm:2450
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1138,7 +1138,7 @@ msgstr ""
 "Kan de opstartlader niet correct installeren. U dient in rescue-modus op te "
 "starten en \"%s\" te kiezen"
 
-#: bootloader.pm:2458
+#: bootloader.pm:2451
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Opstartlader herinstalleren"
@@ -2469,7 +2469,7 @@ msgstr "het koppelen van partitie %s in map %s is mislukt"
 msgid "Checking %s"
 msgstr "Bezig met controleren van %s"
 
-#: fs/mount.pm:126 partition_table.pm:399
+#: fs/mount.pm:126 partition_table.pm:450
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "fout bij ontkoppelen %s: %s"
@@ -5366,12 +5366,12 @@ msgstr ""
 msgid "Password seems secure"
 msgstr "Wachtwoord lijkt veilig te zijn"
 
-#: partition_table.pm:405
+#: partition_table.pm:456
 #, c-format
 msgid "mount failed: "
 msgstr "koppelen mislukt: "
 
-#: partition_table.pm:531
+#: partition_table.pm:598
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -7218,6 +7218,64 @@ msgid "Installation failed"
 msgstr "Installatie mislukt"
 
 #~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Your card currently uses the %s\"%s\" driver (the default driver for your "
+#~ "card is \"%s\")"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Uw kaart gebruikt momenteel het %s\"%s\"-stuurprogramma (het standaard "
+#~ "stuurprogramma voor uw kaart is \"%s\")"
+
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Licentieovereenkomst"
+
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Beperkte garantie"
+
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. De GPL-licentie en gerelateerde licenties"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Intellectuele eigendomsrechten"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Geldende wetten"
+
+#~ msgid ""
+#~ "After rebooting and logging into Moondrake, you will see the "
+#~ "MoondrakeWelcome screen.\n"
+#~ "It is full of very useful information and links."
+#~ msgstr ""
+#~ "Als u na het herstarten inlogt bij Moondrake, zult u het MoondrakeWelcome-"
+#~ "scherm zien.\n"
+#~ "Het bevat zeer veel bijzonder bruikbare informatie en links."
+
+#~ msgid ""
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
+#~ msgstr ""
+#~ "Alle rechten op de componenten van de Software Producten behoren toe aan "
+#~ "hun respectievelijke\n"
+#~ "auteurs en zijn beschermd door intellectuele eigendoms- en copyright-"
+#~ "wetten welke gelden voor\n"
+#~ "computerprogrammatuur.\n"
+#~ "Moondrake behoudt zich het recht voor om de Software Producten te "
+#~ "veranderen in hun geheel\n"
+#~ "of in onderdelen, op welke manier dan ook en voor welk doel dan ook.\n"
+#~ "\"Moondrake\" en geassocieerde logo's zijn handelsmerken van %s"
+
+#~ msgid "Automatic routing from ALSA to PulseAudio"
+#~ msgstr "Automatisch omleiden van ALSA naar PulseAudio"
+
+#~ msgid ""
 #~ "Below are some basic tips to help debug audio problems, but for accurate "
 #~ "and up-to-date tips and tricks, please see:\n"
 #~ "\n"
@@ -7232,9 +7290,9 @@ msgstr "Installatie mislukt"
 #~ "\n"
 #~ "\n"
 #~ "\n"
-#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and \"pavucontrol"
-#~ "\" (generic) will launch graphical applications to allow you to view your "
-#~ "sound devices and adjust volume levels\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and "
+#~ "\"pauvucontrol\" (generic) will launch graphical applications to allow "
+#~ "you to view your sound devices and adjust volume levels\n"
 #~ "\n"
 #~ "\n"
 #~ "- \"ps aux | grep pulseaudio\" will check that PulseAudio is running.\n"
@@ -7332,64 +7390,6 @@ msgstr "Installatie mislukt"
 #~ "zou dit slechts PulseAudio mogen tonen)\n"
 
 #~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "Your card currently uses the %s\"%s\" driver (the default driver for your "
-#~ "card is \"%s\")"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "Uw kaart gebruikt momenteel het %s\"%s\"-stuurprogramma (het standaard "
-#~ "stuurprogramma voor uw kaart is \"%s\")"
-
-#~ msgid "1. License Agreement"
-#~ msgstr "1. Licentieovereenkomst"
-
-#~ msgid "2. Limited Warranty"
-#~ msgstr "2. Beperkte garantie"
-
-#~ msgid "3. The GPL License and Related Licenses"
-#~ msgstr "3. De GPL-licentie en gerelateerde licenties"
-
-#~ msgid "4. Intellectual Property Rights"
-#~ msgstr "4. Intellectuele eigendomsrechten"
-
-#~ msgid "5. Governing Laws"
-#~ msgstr "5. Geldende wetten"
-
-#~ msgid ""
-#~ "After rebooting and logging into Moondrake, you will see the "
-#~ "MoondrakeWelcome screen.\n"
-#~ "It is full of very useful information and links."
-#~ msgstr ""
-#~ "Als u na het herstarten inlogt bij Moondrake, zult u het MoondrakeWelcome-"
-#~ "scherm zien.\n"
-#~ "Het bevat zeer veel bijzonder bruikbare informatie en links."
-
-#~ msgid ""
-#~ "All rights to the components of the Software Products belong to their "
-#~ "respective authors and are \n"
-#~ "protected by intellectual property and copyright laws applicable to "
-#~ "software programs.\n"
-#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
-#~ "or adapt the Software \n"
-#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
-#~ "\"Moondrake\" and associated logos are trademarks of %s"
-#~ msgstr ""
-#~ "Alle rechten op de componenten van de Software Producten behoren toe aan "
-#~ "hun respectievelijke\n"
-#~ "auteurs en zijn beschermd door intellectuele eigendoms- en copyright-"
-#~ "wetten welke gelden voor\n"
-#~ "computerprogrammatuur.\n"
-#~ "Moondrake behoudt zich het recht voor om de Software Producten te "
-#~ "veranderen in hun geheel\n"
-#~ "of in onderdelen, op welke manier dan ook en voor welk doel dan ook.\n"
-#~ "\"Moondrake\" en geassocieerde logo's zijn handelsmerken van %s"
-
-#~ msgid "Automatic routing from ALSA to PulseAudio"
-#~ msgstr "Automatisch omleiden van ALSA naar PulseAudio"
-
-#~ msgid ""
 #~ "Below are some basic tips to help debug audio problems, but for accurate "
 #~ "and up-to-date tips and tricks, please see:\n"
 #~ "\n"
@@ -7404,9 +7404,9 @@ msgstr "Installatie mislukt"
 #~ "\n"
 #~ "\n"
 #~ "\n"
-#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and "
-#~ "\"pauvucontrol\" (generic) will launch graphical applications to allow "
-#~ "you to view your sound devices and adjust volume levels\n"
+#~ "- \"kmix\" (KDE), \"gnome-control-center sound\" (GNOME) and \"pavucontrol"
+#~ "\" (generic) will launch graphical applications to allow you to view your "
+#~ "sound devices and adjust volume levels\n"
 #~ "\n"
 #~ "\n"
 #~ "- \"ps aux | grep pulseaudio\" will check that PulseAudio is running.\n"

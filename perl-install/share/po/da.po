@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
-"POT-Creation-Date: 2017-01-15 15:09+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2010-06-06 12:39+0200\n"
 "Last-Translator: Keld Simonsen <keld@keldix.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -1106,7 +1106,7 @@ msgstr "GRUB med tekstmenu"
 msgid "not enough room in /boot"
 msgstr "Ikke nok plads i /boot"
 
-#: bootloader.pm:2444
+#: bootloader.pm:2437
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1115,7 +1115,7 @@ msgstr ""
 "Din opstartsindlæserkonfiguration behøver at opdateres da rækkefølgen på "
 "dine partitioner er blevet ændret"
 
-#: bootloader.pm:2457
+#: bootloader.pm:2450
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1124,7 +1124,7 @@ msgstr ""
 "Opstartsindlæseren kan ikke blive installeret korrekt. Du skal lave "
 "nødopstart og vælge \"%s\""
 
-#: bootloader.pm:2458
+#: bootloader.pm:2451
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Geninstallér systemopstarter"
@@ -2444,7 +2444,7 @@ msgstr "montering af partition %s i katalog %s mislykkedes"
 msgid "Checking %s"
 msgstr "Tjekker %s"
 
-#: fs/mount.pm:126 partition_table.pm:399
+#: fs/mount.pm:126 partition_table.pm:450
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "fejl ved afmontering af %s: %s"
@@ -5309,12 +5309,12 @@ msgstr "Adgangskode bør kunne modstå basale angreb"
 msgid "Password seems secure"
 msgstr "Adgangskode ser sikker ud"
 
-#: partition_table.pm:405
+#: partition_table.pm:456
 #, c-format
 msgid "mount failed: "
 msgstr "montering mislykkedes: "
 
-#: partition_table.pm:531
+#: partition_table.pm:598
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -7118,6 +7118,33 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Installation mislykkedes"
 
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Your card currently uses the %s\"%s\" driver (the default driver for your "
+#~ "card is \"%s\")"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Dit kort bruger i øjeblikket %s\"%s\"-driveren (normal driver for dit "
+#~ "kort er \"%s\")"
+
+#~ msgid "1. License Agreement"
+#~ msgstr "1. Licensaftale"
+
+#~ msgid "2. Limited Warranty"
+#~ msgstr "2. Begrænset garanti"
+
+#~ msgid "3. The GPL License and Related Licenses"
+#~ msgstr "3. GPL-licensen og relaterede licenser"
+
+#~ msgid "4. Intellectual Property Rights"
+#~ msgstr "4. Intellektuelle rettigheder"
+
+#~ msgid "5. Governing Laws"
+#~ msgstr "5. Styrende love"
+
 #~ msgid ""
 #~ "After rebooting and logging into Moondrake, you will see the "
 #~ "MoondrakeWelcome screen.\n"
@@ -7126,6 +7153,23 @@ msgstr "Installation mislykkedes"
 #~ "Efter genstart og logget ind Moondrake, vil du se Moondrake "
 #~ "Velkomstskærmen.\n"
 #~ "Den er fuld af mange nyttige oplysninger og links."
+
+#~ msgid ""
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to "
+#~ "software programs.\n"
+#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
+#~ "or adapt the Software \n"
+#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
+#~ "\"Moondrake\" and associated logos are trademarks of %s"
+#~ msgstr ""
+#~ "Alle rettigheder til komponenterne i programmelproduktet tilhører deres "
+#~ "respektive forfattere, og er beskyttet af intellektuelle rettigheds- og "
+#~ "ophavsretslove, gældende for programmel. Moondrake forbeholder sine "
+#~ "rettigheder til at ændre eller tilpasse programmelprodukterne, helt eller "
+#~ "delvist, med alle midler og til alle formål. \"Moondrake\" samt de "
+#~ "tilhørende logoer er varemærker for %s  "
 
 #~ msgid ""
 #~ "Below are some basic tips to help debug audio problems, but for accurate "
@@ -7246,80 +7290,6 @@ msgstr "Installation mislykkedes"
 #~ "- \"/usr/sbin/fuser -v /dev/snd/pcm* /dev/dsp\" \n"
 #~ "vil fortælle hvilke programmer der i øjeblikket bruger lydkortet direkte "
 #~ "(normalt skulledette kun vise PulseAudio)\n"
-
-#~ msgid ""
-#~ "The Software Products consist of components created by different persons "
-#~ "or entities.\n"
-#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
-#~ "the components which \n"
-#~ "they cover. Please read carefully the terms and conditions of the license "
-#~ "agreement for each component \n"
-#~ "before using any component. Any question on a component license should be "
-#~ "addressed to the component \n"
-#~ "licensor or supplier and not to Moondrake.\n"
-#~ "The programs developed by Moondrake are governed by the GPL License. "
-#~ "Documentation written \n"
-#~ "by Moondrake is governed by \"%s\" License."
-#~ msgstr ""
-#~ "Software produkter består af komponenter lavet af forskellige personer "
-#~ "eller enheder.\n"
-#~ "De fleste af disse licenser tillader dig at bruge, kopiere, tilpasse "
-#~ "eller videredistribuere de komponenter, som\n"
-#~ "de dækker. Læs omhyggeligt de vilkår og betingelser i licensaftalen for "
-#~ "hver komponent\n"
-#~ "før du bruger noget komponent. Ethvert spørgsmål om en komponent licens "
-#~ "skal rettes til den komponent\n"
-#~ "licensgiver eller leverandør og ikke til Moondrake\n"
-#~ "Programmerne der er udviklet af Moondrake reguleres af GPL licens. "
-#~ "dokumentation skrevet\n"
-#~ "af Moondrake er underlagt \"%s\" Licens."
-
-#~ msgid "_: You can warn about unofficial translation here"
-#~ msgstr " "
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "Your card currently uses the %s\"%s\" driver (the default driver for your "
-#~ "card is \"%s\")"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "Dit kort bruger i øjeblikket %s\"%s\"-driveren (normal driver for dit "
-#~ "kort er \"%s\")"
-
-#~ msgid "1. License Agreement"
-#~ msgstr "1. Licensaftale"
-
-#~ msgid "2. Limited Warranty"
-#~ msgstr "2. Begrænset garanti"
-
-#~ msgid "3. The GPL License and Related Licenses"
-#~ msgstr "3. GPL-licensen og relaterede licenser"
-
-#~ msgid "4. Intellectual Property Rights"
-#~ msgstr "4. Intellektuelle rettigheder"
-
-#~ msgid "5. Governing Laws"
-#~ msgstr "5. Styrende love"
-
-#~ msgid ""
-#~ "All rights to the components of the Software Products belong to their "
-#~ "respective authors and are \n"
-#~ "protected by intellectual property and copyright laws applicable to "
-#~ "software programs.\n"
-#~ "Moondrake and its suppliers and licensors reserves their rights to modify "
-#~ "or adapt the Software \n"
-#~ "Products, as a whole or in parts, by all means and for all purposes.\n"
-#~ "\"Moondrake\" and associated logos are trademarks of %s"
-#~ msgstr ""
-#~ "Alle rettigheder til komponenterne i programmelproduktet tilhører deres "
-#~ "respektive forfattere, og er beskyttet af intellektuelle rettigheds- og "
-#~ "ophavsretslove, gældende for programmel. Moondrake forbeholder sine "
-#~ "rettigheder til at ændre eller tilpasse programmelprodukterne, helt eller "
-#~ "delvist, med alle midler og til alle formål. \"Moondrake\" samt de "
-#~ "tilhørende logoer er varemærker for %s  "
 
 #, fuzzy
 #~ msgid "Check bad blocks?"
@@ -7658,6 +7628,33 @@ msgstr "Installation mislykkedes"
 #~ "følge- eller ulykkes-skader.  "
 
 #~ msgid ""
+#~ "The Software Products consist of components created by different persons "
+#~ "or entities.\n"
+#~ "Most of these licenses allow you to use, duplicate, adapt or redistribute "
+#~ "the components which \n"
+#~ "they cover. Please read carefully the terms and conditions of the license "
+#~ "agreement for each component \n"
+#~ "before using any component. Any question on a component license should be "
+#~ "addressed to the component \n"
+#~ "licensor or supplier and not to Moondrake.\n"
+#~ "The programs developed by Moondrake are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by Moondrake is governed by \"%s\" License."
+#~ msgstr ""
+#~ "Software produkter består af komponenter lavet af forskellige personer "
+#~ "eller enheder.\n"
+#~ "De fleste af disse licenser tillader dig at bruge, kopiere, tilpasse "
+#~ "eller videredistribuere de komponenter, som\n"
+#~ "de dækker. Læs omhyggeligt de vilkår og betingelser i licensaftalen for "
+#~ "hver komponent\n"
+#~ "før du bruger noget komponent. Ethvert spørgsmål om en komponent licens "
+#~ "skal rettes til den komponent\n"
+#~ "licensgiver eller leverandør og ikke til Moondrake\n"
+#~ "Programmerne der er udviklet af Moondrake reguleres af GPL licens. "
+#~ "dokumentation skrevet\n"
+#~ "af Moondrake er underlagt \"%s\" Licens."
+
+#~ msgid ""
 #~ "The classic bug sound tester is to run the following commands:\n"
 #~ "\n"
 #~ "\n"
@@ -7842,6 +7839,9 @@ msgstr "Installation mislykkedes"
 #~ "Bootloader er ikke i stand til at håndtere dette, når Logisk Volumen  "
 #~ "spænder flere fysiske Logisk Volumen.\n"
 #~ "Du bør oprette en separat / boot-partition først"
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr " "
 
 #~ msgid "command %s missing"
 #~ msgstr "kommando %s mangler"

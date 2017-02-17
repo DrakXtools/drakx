@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2017-01-15 15:09+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2004-09-15 13:33+0200\n"
 "Last-Translator: Toma Jankovic <tomaja@net.yu>\n"
 "Language-Team: Serbian <i18n@mandrake.co.yu>\n"
@@ -1071,21 +1071,21 @@ msgstr ""
 msgid "not enough room in /boot"
 msgstr "нема довољно места у /boot"
 
-#: bootloader.pm:2444
+#: bootloader.pm:2437
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
 msgstr ""
 
-#: bootloader.pm:2457
+#: bootloader.pm:2450
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
 "choose \"%s\""
 msgstr ""
 
-#: bootloader.pm:2458
+#: bootloader.pm:2451
 #, fuzzy, c-format
 msgid "Re-install Boot Loader"
 msgstr "Инсталирај стартер"
@@ -2391,7 +2391,7 @@ msgstr "монтирање партиције %s у директоријум %s 
 msgid "Checking %s"
 msgstr "Проверавам %s"
 
-#: fs/mount.pm:126 partition_table.pm:399
+#: fs/mount.pm:126 partition_table.pm:450
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "Грешка при демонтирању %s: %s"
@@ -5176,12 +5176,12 @@ msgstr ""
 msgid "Password seems secure"
 msgstr "Потребна је Лозинка"
 
-#: partition_table.pm:405
+#: partition_table.pm:456
 #, c-format
 msgid "mount failed: "
 msgstr "монтирање није успело: "
 
-#: partition_table.pm:531
+#: partition_table.pm:598
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -7062,9 +7062,6 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Инсталација није успела"
 
-#~ msgid "_: You can warn about unofficial translation here"
-#~ msgstr " "
-
 #, fuzzy
 #~ msgid ""
 #~ "\n"
@@ -8014,6 +8011,9 @@ msgstr "Инсталација није успела"
 #~ "Изабрали сте софтверску RAID партицију као root (/).\n"
 #~ "Ниједан стартер не може да ради са тим без /boot партиције.\n"
 #~ "Зато треба да додате /boot партицију"
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr " "
 
 #~ msgid "number of capture buffers for mmap'ed capture"
 #~ msgstr "број capture buffer-а за mmap'ed capture"

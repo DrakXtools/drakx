@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
-"POT-Creation-Date: 2017-01-15 15:09+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2009-03-27 10:46+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -1098,7 +1098,7 @@ msgstr "GRUB með texavalmynd"
 msgid "not enough room in /boot"
 msgstr "ekki nægilegt pláss í /boot"
 
-#: bootloader.pm:2444
+#: bootloader.pm:2437
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1107,7 +1107,7 @@ msgstr ""
 "Þú verður að uppfæra stillingar ræsistjórans því disksneiðar hafa verið "
 "endurnúmeraðar"
 
-#: bootloader.pm:2457
+#: bootloader.pm:2450
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1116,7 +1116,7 @@ msgstr ""
 "Ekki er hægt að setja ræsistjórann rétt upp. Þú verður að ræsa með "
 "björgunardisk og velja \"%s\""
 
-#: bootloader.pm:2458
+#: bootloader.pm:2451
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Setja aftur inn ræsistjóra"
@@ -2432,7 +2432,7 @@ msgstr "tenging disksneiðar %s í möppu %s mistókst"
 msgid "Checking %s"
 msgstr "Athuga %s"
 
-#: fs/mount.pm:126 partition_table.pm:399
+#: fs/mount.pm:126 partition_table.pm:450
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "villa við að aftengja %s: %s"
@@ -5220,12 +5220,12 @@ msgstr ""
 msgid "Password seems secure"
 msgstr "Lykilorðagrunnur"
 
-#: partition_table.pm:405
+#: partition_table.pm:456
 #, c-format
 msgid "mount failed: "
 msgstr "tókst ekki að tengja: "
 
-#: partition_table.pm:531
+#: partition_table.pm:598
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -7006,9 +7006,6 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Innsetning mistókst"
 
-#~ msgid "_: You can warn about unofficial translation here"
-#~ msgstr " "
-
 #, fuzzy
 #~ msgid ""
 #~ "\n"
@@ -7650,6 +7647,9 @@ msgstr "Innsetning mistókst"
 #~ "Ræsistjórinn getur ekki notað þetta þegar sýndardiskurinn spannar marga "
 #~ "raunverulega diska.\n"
 #~ "Þú ættir að búa til /boot disksneið fyrst"
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr " "
 
 #~ msgid "command %s missing"
 #~ msgstr "skipun %s vantar"

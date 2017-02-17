@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
-"POT-Creation-Date: 2017-01-15 15:09+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2010-06-06 23:21+0200\n"
 "Last-Translator: Keld Simonsen <keld@keldix.com>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@mandrivalinux.org>\n"
@@ -1103,7 +1103,7 @@ msgstr "GRUB med tekstmeny"
 msgid "not enough room in /boot"
 msgstr "Ikke nok plass på «/boot»"
 
-#: bootloader.pm:2444
+#: bootloader.pm:2437
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1111,7 +1111,7 @@ msgid ""
 msgstr ""
 "Oppstartslasteren må oppdateres, da partisjonene har fått ny rekkefølge"
 
-#: bootloader.pm:2457
+#: bootloader.pm:2450
 #, c-format
 msgid ""
 "The bootloader cannot be installed correctly. You have to boot rescue and "
@@ -1120,7 +1120,7 @@ msgstr ""
 "Klarte ikke å installere oppstartslasteren. Du må kjøre redningsmodus og "
 "velge «%s»"
 
-#: bootloader.pm:2458
+#: bootloader.pm:2451
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Installer oppstartslaster på nytt"
@@ -2435,7 +2435,7 @@ msgstr "Klarte ikke å montere partisjonen «%s» i mappa «%s»"
 msgid "Checking %s"
 msgstr "Kontrollerer «%s»"
 
-#: fs/mount.pm:126 partition_table.pm:399
+#: fs/mount.pm:126 partition_table.pm:450
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "Feil ved avmontering av «%s»: %s"
@@ -5310,12 +5310,12 @@ msgstr "Passord bør stå i mot grunnleggende angrep"
 msgid "Password seems secure"
 msgstr "Passordet ser ut til å være sikkert"
 
-#: partition_table.pm:405
+#: partition_table.pm:456
 #, c-format
 msgid "mount failed: "
 msgstr "Feil ved montering: "
 
-#: partition_table.pm:531
+#: partition_table.pm:598
 #, c-format
 msgid ""
 "You have a hole in your partition table but I cannot use it.\n"
@@ -7109,9 +7109,6 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Feil ved installering."
 
-#~ msgid "_: You can warn about unofficial translation here"
-#~ msgstr " "
-
 #, fuzzy
 #~ msgid ""
 #~ "\n"
@@ -7710,6 +7707,9 @@ msgstr "Feil ved installering."
 #~ "Oppstartslasteren kan ikke håndtere dette når volumet dekker flere "
 #~ "fysiske volum.\n"
 #~ "Du bør derfor lage en «/boot»-partisjon først."
+
+#~ msgid "_: You can warn about unofficial translation here"
+#~ msgstr " "
 
 #~ msgid "command %s missing"
 #~ msgstr "kommandoen %s mangler"
