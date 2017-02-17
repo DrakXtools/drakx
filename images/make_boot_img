@@ -116,7 +116,7 @@ EOF
 
     mv "$tmp_initrd/usr/sbin/*" "$tmp_initrd/sbin"
     rmdir "$tmp_initrd/usr/sbin/"
-    ln -sr "$tmp_initrd/sbin" "$tmp_initrd/usr/sbin
+    ln -sr "$tmp_initrd/sbin" "$tmp_initrd/usr/sbin"
 
     LANGUAGE=C
     sed -e 's/^#LANGUAGE.*/export LANGUAGE=$LANGUAGE\nexport LC_ALL=$LANGUAGE\n/g' -i "$tmp_initrd/etc/rc.d/rc.stage2"
