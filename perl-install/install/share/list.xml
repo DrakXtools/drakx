@@ -100,6 +100,7 @@
   <if ARCH="i.86|x86_64">
   drivers/cirrus_drv.so
   drivers/modesetting_drv.so
+  drivers/qxl_drv.so
   <!-- drivers/vboxvideo_drv.so -->
   drivers/vesa_drv.so
   drivers/vmware_drv.so
@@ -111,6 +112,8 @@
   libfbdevhw.so
   libfb.so
   libshadow.so
+  libshadowfb.so
+  libvgahw.so
 </from>
 
 <from dir="/usr/share/X11/xorg.conf.d">
