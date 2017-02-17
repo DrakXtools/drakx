@@ -107,7 +107,9 @@ compress:
 
 stage2: pixmaps/left-background.png
 	rm -rf $(DESTDIR)$(DEST)
-	mkdir -p $(DESTDIR)$(DEST)
+	mkdir -p $(DESTDIR)$(DEST)/{bin,sbin,usr}
+	ln -sr $(DESTDIR)$(DEST)/bin $(DESTDIR)$(DEST)/usr/bin
+	ln -sr $(DESTDIR)$(DEST)/sbin $(DESTDIR)$(DEST)/usr/sbin
 	$(MAKE) get_needed_files 
 	$(MAKE) install_pms
 
