@@ -262,6 +262,12 @@ sub createXconf {
      my $resolution = $Driver eq 'fbdev' ? is_uefi() ? '"1024x768"' : '"default"' : '"800x600" "640x480"';
      # efi framebuffer wants 24 bit
      my $depth = is_uefi() ? '24' : '16';
+
+     my $driversection = $Driver eq 'auto' ? "" : qq(Section "Device"
+    Identifier "device"
+    Driver "$Driver"
+EndSection);
+
      output($file, qq(Section "ServerFlags"
 EndSection
 
@@ -279,10 +285,7 @@ Section "Monitor"
     VertRefresh 50-70
 EndSection
 
-Section "Device"
-    Identifier  "device"
-    Driver      "%s"
-EndSection
+$driversection
 
 Section "Screen"
     Identifier "screen"
