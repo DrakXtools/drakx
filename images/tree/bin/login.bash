@@ -1,2 +1,2 @@
 #!/bin/sh
-exec /bin/bash --login
+exec /bin/sh --login
