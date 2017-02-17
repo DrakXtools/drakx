@@ -2,7 +2,7 @@ include ../../Makefile.config
 include ../Makefile.config
 
 PRODUCT=$(FAMILY)-stage2
-COMPRESS ?= xz -T0 --x86 --lzma2 -ve9 --check=crc32
+COMPRESS ?= xz --x86 --lzma2 -ve9 --check=crc32
 
 STAGE2_DEST = $(ROOTDEST)/install/stage2
 DEST = $(STAGE2_DEST)/live
