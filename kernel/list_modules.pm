@@ -342,7 +342,7 @@ our %l = (
 
       qw(virtio virtio-console virtio_input virtio_pci virtio_ring vhost_scsi hyperv-keyboard),
       qw(mei pch_phub),
-      qw(vmvgfx),
+      qw(cirrus qxl vmvgfx),
     ],
     agpgart => [
       qw(ali-agp amd64-agp amd-k7-agp ati-agp efficeon-agp intel-agp),
