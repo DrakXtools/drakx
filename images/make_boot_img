@@ -21,10 +21,13 @@ initrd() {
 
 
     for dir in /dev /etc/sysconfig/network-scripts /etc/X11 /lib /media/cdrom \
-	/media/floppy /mnt /proc /run /sbin /sys /tmp /var/lock/subsys /var/log /var/run \
+	/media/floppy /mnt /proc /run /bin /sbin /usr /sys /tmp /var/lock/subsys /var/log /var/run \
 	/var/tmp /tmp/newroot /tmp/stage2; do
 	mkdir -p "$tmp_initrd$dir"
     done
+    ln -sr "$tmp_initrd/bin" "$tmp_initrd/usr/bin"
+    ln -sr "$tmp_initrd/sbin" "$tmp_initrd/usr/sbin"
+
     ln -s /proc/mounts "$tmp_initrd/etc/mtab"
     # XXX: drop
     ln -s ../tmp "$tmp_initrd/var/run/"
@@ -108,15 +111,6 @@ EOF
 
     # ??? is up with mageia replacing symlink with a copy with stricter permissions???
     ln -v "$tmp_initrd/bin/ntfs-3g" "$tmp_initrd/sbin/mount.ntfs-3g"
-
-    # XXX
-    mv "$tmp_initrd/usr/bin/*" "$tmp_initrd/bin"
-    rmdir "$tmp_initrd/usr/bin/"
-    ln -sr "$tmp_initrd/bin" "$tmp_initrd/usr/bin"
-
-    mv "$tmp_initrd/usr/sbin/*" "$tmp_initrd/sbin"
-    rmdir "$tmp_initrd/usr/sbin/"
-    ln -sr "$tmp_initrd/sbin" "$tmp_initrd/usr/sbin"
 
     LANGUAGE=C
     sed -e 's/^#LANGUAGE.*/export LANGUAGE=$LANGUAGE\nexport LC_ALL=$LANGUAGE\n/g' -i "$tmp_initrd/etc/rc.d/rc.stage2"
