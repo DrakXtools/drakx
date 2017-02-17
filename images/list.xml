@@ -213,7 +213,7 @@
 	mkdir($dir);
         foreach (keyboard::_keyboards()) {
           my $kmap = keyboard::keyboard2kmap($_);
-            if (system("loadkeys -b $kmap > $dir/$kmap.bkmap") != 0) {
+            if (system("loadkeys -u -b $kmap > $dir/$kmap.bkmap") != 0) {
               warn "unknown kmap $kmap\n";
               unlink "$dir/$kmap.bkmap";
             } else {
