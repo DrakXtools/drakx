@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 setterm -powersave off
 setterm -blank 0

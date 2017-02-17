@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 TITLE="Moondrake Installer"
 BACKTITLE="Moondrake"
