@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2004-04-04 21:54+0530\n"
 "Last-Translator: धनञ्जय शर्मा (Dhananjaya Sharma) <dysxhi@yahoo.co.in>\n"
 "Language-Team: हिन्दी (Hindi) <dysxhi@yahoo.co.in>\n"
@@ -301,7 +301,7 @@ msgstr "%s में संसाधन के उपरान्त स्क�
 msgid "Installation"
 msgstr "संसाधन हो रहा है"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "संरचना"
@@ -422,6 +422,361 @@ msgstr "%d संसाधन क्रिया-कलाप असफ़ल"
 #, fuzzy, c-format
 msgid "Installation of packages failed:"
 msgstr "%s पैकेज का संसाधन हो रहा है"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "कार्यकेंद्र"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "ऑफ़िस कार्यकेन्द्र"
+
+#: share/meta-task/compssUsers.pl:21
+#, fuzzy, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"ऑफ़िस के कार्यक्रम: शब्दसंसाधक (केवर्ड, आबीवर्ड), स्प्रेडशीट (केस्प्रेड, जीन्यूमेरिक), पीडीएफ़ "
+"अवलोक्क, इत्यादि"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "खेल स्टेशन"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "मनोरंजक कार्यक्रम: आरकेड, बोर्ड, व्यूह-रचना, इत्यादि "
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "मल्टीमीडीया केन्द्र"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "ध्वनि और वीडीयो के खेलने वाले/संपादन करने वाले कार्यक्रम"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "इन्टरनेट केन्द्र"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"विपत्र और समाचारों को पढ़ने और भेजने के लिए  (मट, टिन...) और वेब को ब्राउज़ करने के लिए "
+"औज़ारों का समूह"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "नेटवर्क कम्प्यूटर (ग्राहक)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "एस०एस०एच० को शामिल करते हुए विभिन्न प्रोटोकॉलों के लिए ग्राहक"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "आपके कम्प्यूटर की संरचना कार्य को सहज बनाने हेतु अनेक औजार"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "कन्सोल के औज़ार"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "अनेकों संपादक, कोश, संचिका औजार, टर्मिनल"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "विकास"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "सी और सी++ विकास लेखागार, कार्यक्रम और इन्क्लूड संचिकायें"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "प्रलेखन"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "लिनक्स और मुक्त सॉफ़्टवेयर पर किताबें और कैसे-करेंअस्तकें"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "एल०एस०बी०"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "लिनक्स मानकीकरण आधार ! त्रितीय पक्ष कार्यक्रमों को समर्थन"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "वेब सर्वर"
+
+#: share/meta-task/compssUsers.pl:88
+#, fuzzy, c-format
+msgid "Apache"
+msgstr "रास्ता"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "ग्रुपवेयर"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "कोलाब सर्वर"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "अग्नि-भीतिका/रूटर"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "इन्टरनेट गेटवे"
+
+#: share/meta-task/compssUsers.pl:100
+#, fuzzy, c-format
+msgid "Mail/News"
+msgstr "/संचिका (F)/नवीन (_N)"
+
+#: share/meta-task/compssUsers.pl:101
+#, fuzzy, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "पोस्टफ़िक्स विपत्र सर्वर"
+
+#: share/meta-task/compssUsers.pl:105
+#, fuzzy, c-format
+msgid "Directory Server"
+msgstr "निर्देशिका जिससे पुनःस्थापन करना है"
+
+#: share/meta-task/compssUsers.pl:110
+#, fuzzy, c-format
+msgid "FTP Server"
+msgstr "एन०टी०पी० सर्वर"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:115
+#, fuzzy, c-format
+msgid "DNS/NIS"
+msgstr "डीएनएस"
+
+#: share/meta-task/compssUsers.pl:116
+#, fuzzy, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "डोमेन नाम सर्वर"
+
+#: share/meta-task/compssUsers.pl:120
+#, fuzzy, c-format
+msgid "File and Printer Sharing Server"
+msgstr "प्रिंटर सर्वर"
+
+#: share/meta-task/compssUsers.pl:121
+#, fuzzy, c-format
+msgid "NFS Server, Samba server"
+msgstr "सॉबा सर्वर"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "डाटाबेस"
+
+#: share/meta-task/compssUsers.pl:126
+#, fuzzy, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "पोस्टग्रीसीक्यूअल या माईसीक्यूअल डाटाबेस सर्वर"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "वेब/एफ़०टी०पी०"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "आपाचे, प्रो-एफ़०टी०पी०डी०"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "विपत्र"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "पोस्टफ़िक्स विपत्र सर्वर"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "पोस्टग्रीसीक्यूअल या माईसीक्यूअल डाटाबेस सर्वर"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "नेटवर्क कम्प्यूटर सर्वर"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "एन०एफ़०एस० सर्वर, एस०एम०बी० सर्वर, प्रोक्सी सर्वर, एस०एस०एच० सर्वर"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "सचित्र वातावरण"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "केडीई कार्यकेन्द्र"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr "के डेस्कटाप वातावरण, मूलभूत सचित्र वातावरणसंलग्न औजारों के एक समूह के साथ"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "गनोम कार्यकेन्द्र"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"एक सचित्र वातावरण, उपयोगकर्ता-मित्रवत कार्यक्रमों के समुच्चय और डेस्कटाप औजारों के साथ"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "ऑफ़िस कार्यकेन्द्र"
+
+#: share/meta-task/compssUsers.pl:176
+#, fuzzy, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr ""
+"एक सचित्र वातावरण, उपयोगकर्ता-मित्रवत कार्यक्रमों के समुच्चय और डेस्कटाप औजारों के साथ"
+
+#: share/meta-task/compssUsers.pl:181
+#, fuzzy, c-format
+msgid "LXDE Desktop"
+msgstr "डेस्कटाप"
+
+#: share/meta-task/compssUsers.pl:183
+#, fuzzy, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"एक सचित्र वातावरण, उपयोगकर्ता-मित्रवत कार्यक्रमों के समुच्चय और डेस्कटाप औजारों के साथ"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "अन्य सचित्र डेस्कटाप"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "आईसीडब्लूएम, विण्डो मेकर, एनलाइटमेन्ट, एफ़वीडब्लूएम, इत्यादि"
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "यूटिलिटीज़"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "एसएसएच सर्वर"
+
+#: share/meta-task/compssUsers.pl:225
+#, fuzzy, c-format
+msgid "Webmin"
+msgstr "वेबकैम"
+
+#: share/meta-task/compssUsers.pl:226
+#, fuzzy, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "टर्मिनल सर्वर संरचना"
+
+#: share/meta-task/compssUsers.pl:230
+#, fuzzy, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "नेटवर्क मॉनीट्रिंग"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "<b>मैनड्रिव स्टोर</b>"
+
+#: share/meta-task/compssUsers.pl:236
+#, fuzzy, c-format
+msgid "Wizards to configure server"
+msgstr "\"%s\" प्रिंटर की संरचना में असफ़ल !"
 
 #: steps.pm:85
 #, c-format
@@ -1255,10 +1610,6 @@ msgid ""
 "Exit"
 msgstr "निकास"
 
-#, fuzzy
-#~ msgid "Plasma Workstation"
-#~ msgstr "कार्यकेंद्र"
-
 #~ msgid "%d packages"
 #~ msgstr "%d पैकेज"
 
@@ -1271,26 +1622,6 @@ msgstr "निकास"
 #, fuzzy
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "सचित्र वातावरण"
-
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "एक सचित्र वातावरण, उपयोगकर्ता-मित्रवत कार्यक्रमों के समुच्चय और डेस्कटाप औजारों के साथ"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "एक सचित्र वातावरण, उपयोगकर्ता-मित्रवत कार्यक्रमों के समुच्चय और डेस्कटाप औजारों के साथ"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "एक सचित्र वातावरण, उपयोगकर्ता-मित्रवत कार्यक्रमों के समुच्चय और डेस्कटाप औजारों के साथ"
 
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment"
@@ -1308,31 +1639,14 @@ msgstr "निकास"
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "मनोरंजक कार्यक्रम: आरकेड, बोर्ड, व्यूह-रचना, इत्यादि "
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "मनोरंजक कार्यक्रम: आरकेड, बोर्ड, व्यूह-रचना, इत्यादि "
-
-#, fuzzy
-#~ msgid "Apache"
-#~ msgstr "रास्ता"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "आपाचे, प्रो-एफ़०टी०पी०डी०"
-
 #~ msgid "Automated"
 #~ msgstr "स्वचालित"
 
 #~ msgid "Bad package"
 #~ msgstr "निकृष्ट पैकेज"
 
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "लिनक्स और मुक्त सॉफ़्टवेयर पर किताबें और कैसे-करेंअस्तकें"
-
 #~ msgid "Boot"
 #~ msgstr "बूट"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "सी और सी++ विकास लेखागार, कार्यक्रम और इन्क्लूड संचिकायें"
 
 #~ msgid "CD-ROM"
 #~ msgstr "सीडी-रॉम"
@@ -1354,32 +1668,12 @@ msgstr "निकास"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "कार्यकेंद्र"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "एस०एस०एच० को शामिल करते हुए विभिन्न प्रोटोकॉलों के लिए ग्राहक"
-
 #~ msgid "Configure X"
 #~ msgstr "एक्स को संरचित करें"
-
-#~ msgid "Console Tools"
-#~ msgstr "कन्सोल के औज़ार"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr ""
 #~ "उपलब्ध पैकेजों की सूची प्राप्त करने के लिए मिरर से सम्पर्क स्थापित किया जा रहा है..."
-
-#, fuzzy
-#~ msgid "DNS/NIS"
-#~ msgstr "डीएनएस"
-
-#~ msgid "Database"
-#~ msgstr "डाटाबेस"
-
-#~ msgid "Development"
-#~ msgstr "विकास"
-
-#, fuzzy
-#~ msgid "Directory Server"
-#~ msgstr "निर्देशिका जिससे पुनःस्थापन करना है"
 
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "क्या आपके पास एक आई०एस०ऐ० सांउड कार्ड है?"
@@ -1387,26 +1681,12 @@ msgstr "निकास"
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "क्या आप ऐबूट का का उपयोग करना चाहते है?"
 
-#~ msgid "Documentation"
-#~ msgstr "प्रलेखन"
-
-#, fuzzy
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "डोमेन नाम सर्वर"
-
 #, fuzzy
 #~ msgid "Downloading file %s..."
 #~ msgstr "संचिकायें प्रेषित की जा रही..."
 
 #~ msgid "DrakVPN"
 #~ msgstr "ड्रैक वीपीएन"
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "<b>मैनड्रिव स्टोर</b>"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "अनेकों संपादक, कोश, संचिका औजार, टर्मिनल"
 
 #~ msgid ""
 #~ "Error installing aboot, \n"
@@ -1416,34 +1696,11 @@ msgstr "निकास"
 #~ "संसाधन को बलपूर्वक करने का प्रयास करे, चाहे कि प्रथम विभाजन नष्ट हो जायें?"
 
 #, fuzzy
-#~ msgid "FTP Server"
-#~ msgstr "एन०टी०पी० सर्वर"
-
-#, fuzzy
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "प्रिंटर सर्वर"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "अग्नि-भीतिका/रूटर"
-
-#, fuzzy
 #~ msgid "Formatting"
 #~ msgstr "अनुमान लगाया जा रहा है"
 
-#~ msgid "GNOME Workstation"
-#~ msgstr "गनोम कार्यकेन्द्र"
-
-#~ msgid "Game station"
-#~ msgstr "खेल स्टेशन"
-
 #~ msgid "Generate auto install floppy"
 #~ msgstr "स्वतः संसाधान फ़्लापी का निर्माण किया जा रहा है"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "सचित्र वातावरण"
-
-#~ msgid "Groupware"
-#~ msgstr "ग्रुपवेयर"
 
 #~ msgid "Gwenview"
 #~ msgstr "ग्वेनव्यू"
@@ -1463,30 +1720,11 @@ msgstr "निकास"
 #~ msgid "Installation class"
 #~ msgstr "संसाधन प्रकार का चयन करें"
 
-#~ msgid "Internet gateway"
-#~ msgstr "इन्टरनेट गेटवे"
-
-#~ msgid "Internet station"
-#~ msgstr "इन्टरनेट केन्द्र"
-
 #~ msgid "KDE"
 #~ msgstr "के०डी०ई०"
 
 #, fuzzy
 #~ msgid "KDE Desktop"
-#~ msgstr "डेस्कटाप"
-
-#~ msgid "KDE Workstation"
-#~ msgstr "केडीई कार्यकेन्द्र"
-
-#~ msgid "Kolab Server"
-#~ msgstr "कोलाब सर्वर"
-
-#~ msgid "LSB"
-#~ msgstr "एल०एस०बी०"
-
-#, fuzzy
-#~ msgid "LXDE Desktop"
 #~ msgstr "डेस्कटाप"
 
 #, fuzzy
@@ -1499,19 +1737,9 @@ msgstr "निकास"
 #~ msgid "License"
 #~ msgstr "प्रमाण-पत्र"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "लिनक्स मानकीकरण आधार ! त्रितीय पक्ष कार्यक्रमों को समर्थन"
-
 #, fuzzy
 #~ msgid "MATE Workstation"
 #~ msgstr "गनोम कार्यकेन्द्र"
-
-#~ msgid "Mail"
-#~ msgstr "विपत्र"
-
-#, fuzzy
-#~ msgid "Mail/News"
-#~ msgstr "/संचिका (F)/नवीन (_N)"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "मैनड्रिव लिनक्स संसाधन %s"
@@ -1523,26 +1751,6 @@ msgstr "निकास"
 #, fuzzy
 #~ msgid "Moondrake Wizards"
 #~ msgstr "<b>मैनड्रिव स्टोर</b>"
-
-#~ msgid "Multimedia station"
-#~ msgstr "मल्टीमीडीया केन्द्र"
-
-#, fuzzy
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "सॉबा सर्वर"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "एन०एफ़०एस० सर्वर, एस०एम०बी० सर्वर, प्रोक्सी सर्वर, एस०एस०एच० सर्वर"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "नेटवर्क कम्प्यूटर (ग्राहक)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "नेटवर्क कम्प्यूटर सर्वर"
-
-#, fuzzy
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "नेटवर्क मॉनीट्रिंग"
 
 #~ msgid "Networking"
 #~ msgstr "नेटवर्किंग"
@@ -1558,17 +1766,6 @@ msgstr "निकास"
 #~ msgstr ""
 #~ "कोई साउण्ड कार्ड नहीं खोजा जा सका । संसाधन के उपरान्त \"harddrake\" को उपयोग "
 #~ "करके देखें"
-
-#~ msgid "Office Workstation"
-#~ msgstr "ऑफ़िस कार्यकेन्द्र"
-
-#, fuzzy
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "ऑफ़िस के कार्यक्रम: शब्दसंसाधक (केवर्ड, आबीवर्ड), स्प्रेडशीट (केस्प्रेड, जीन्यूमेरिक), "
-#~ "पीडीएफ़ अवलोक्क, इत्यादि"
 
 #, fuzzy
 #~ msgid ""
@@ -1589,25 +1786,12 @@ msgstr "निकास"
 #~ msgid "Office tools"
 #~ msgstr "ऑफ़िस कार्यकेन्द्र"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "अन्य सचित्र डेस्कटाप"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "पोस्टफ़िक्स विपत्र सर्वर"
-
 #, fuzzy
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "पोस्टफ़िक्स विपत्र सर्वर"
-
-#, fuzzy
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "पोस्टग्रीसीक्यूअल या माईसीक्यूअल डाटाबेस सर्वर"
+#~ msgid "Plasma Workstation"
+#~ msgstr "कार्यकेंद्र"
 
 #, fuzzy
 #~ msgid "PostgreSQL and MySQL Database Server"
-#~ msgstr "पोस्टग्रीसीक्यूअल या माईसीक्यूअल डाटाबेस सर्वर"
-
-#~ msgid "PostgreSQL or MariaDB database server"
 #~ msgstr "पोस्टग्रीसीक्यूअल या माईसीक्यूअल डाटाबेस सर्वर"
 
 #~ msgid "PostgreSQL or MySQL database server"
@@ -1638,32 +1822,14 @@ msgstr "निकास"
 #~ msgstr ""
 #~ "संसाधन के उपरान्त \"sndconfig\" को अपने साउण्ड कार्ड को संरचित करने के लिए चलायें"
 
-#~ msgid "SSH Server"
-#~ msgstr "एसएसएच सर्वर"
-
 #~ msgid "Save packages selection"
 #~ msgstr "पैकेजों के चयन को सुरक्षित करें"
 
 #~ msgid "Select All"
 #~ msgstr "सभी का चयन"
 
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "विपत्र और समाचारों को पढ़ने और भेजने के लिए  (मट, टिन...) और वेब को ब्राउज़ करने के "
-#~ "लिए औज़ारों का समूह"
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "ध्वनि और वीडीयो के खेलने वाले/संपादन करने वाले कार्यक्रम"
-
 #~ msgid "TV card"
 #~ msgstr "टीवी कार्ड"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr "के डेस्कटाप वातावरण, मूलभूत सचित्र वातावरणसंलग्न औजारों के एक समूह के साथ"
 
 #, fuzzy
 #~ msgid ""
@@ -1684,57 +1850,22 @@ msgstr "निकास"
 #~ "\n"
 #~ "आप हो सकता है कि संसाधन को रीप्ले करन चाहते हो।\n"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "आपके कम्प्यूटर की संरचना कार्य को सहज बनाने हेतु अनेक औजार"
-
 #~ msgid "Unable to contact mirror %s"
 #~ msgstr "%s मिरर प्रणाली से संबंध स्थापित करने में असमर्थ"
 
 #~ msgid "Users"
 #~ msgstr "उपयोगकर्ताओ"
 
-#~ msgid "Utilities"
-#~ msgstr "यूटिलिटीज़"
-
-#~ msgid "Web Server"
-#~ msgstr "वेब सर्वर"
-
-#~ msgid "Web/FTP"
-#~ msgstr "वेब/एफ़०टी०पी०"
-
-#, fuzzy
-#~ msgid "Webmin"
-#~ msgstr "वेबकैम"
-
-#, fuzzy
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "टर्मिनल सर्वर संरचना"
-
 #~ msgid "Welcome"
 #~ msgstr "स्वागत"
-
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "आईसीडब्लूएम, विण्डो मेकर, एनलाइटमेन्ट, एफ़वीडब्लूएम, इत्यादि"
 
 #, fuzzy
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "आईसीडब्लूएम, विण्डो मेकर, एनलाइटमेन्ट, एफ़वीडब्लूएम, इत्यादि"
 
 #, fuzzy
-#~ msgid "Wizards to configure server"
-#~ msgstr "\"%s\" प्रिंटर की संरचना में असफ़ल !"
-
-#~ msgid "Workstation"
-#~ msgstr "कार्यकेंद्र"
-
-#, fuzzy
 #~ msgid "XFCE Workstation"
 #~ msgstr "केडीई कार्यकेन्द्र"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "ऑफ़िस कार्यकेन्द्र"
 
 #, fuzzy
 #~ msgid ""

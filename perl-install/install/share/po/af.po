@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-af\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2005-04-21 17:33+0200\n"
 "Last-Translator: Dirk van der Walt <dirkvanderwalt@webmail.co.za>\n"
 "Language-Team: Afrikaans\n"
@@ -303,7 +303,7 @@ msgstr "Skermfoto's sal na die installasie beskikbaar wees in %s"
 msgid "Installation"
 msgstr "Besig met installasie"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "Konfigurasie"
@@ -423,6 +423,368 @@ msgstr "onsuksesvolle installasie"
 #, fuzzy, c-format
 msgid "Installation of packages failed:"
 msgstr "Installeer pakket %s"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "Werkstasie"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "Kantoorwerkstasie"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Kantoorprogramme: Woordverwerkers(LibreOffice Writer, Kword), spreistate "
+"(LibreOffice Calc, Kspread), PDF-sigprogramme, ens."
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "Speletjiesrekenaar"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "Vermaak: Arkade, Bordspel, Strategie ens."
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "Multimediastasie"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Klank- en videospelers/redigeerders"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Internetstasie"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Stel hulpprogramme om e-pos en netnuus te lees en te stuur (mutt, tin) en om "
+"ook die web deur te blaai."
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Netwerkrekenaar (kliënt)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Kliëntprogramme vir 'n verkeidenheid protokolle insluitend SSH"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Nutsprogramme wat u rekenaarkonfigurasie vergemaklik"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Konsole Hulpprogramme"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr ""
+"Redigeerders. teksverwerkers, instruksiedoppe, lêer-nutsprogramme, terminaal-"
+"programme"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "Ontwikkeling"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "C en C++ ontwikkelingsprogrammateke, programme en insluitlêers"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "Dokumentasie"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Boeke en HOWTO's oor Linux en Vrye Sagteware"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "Linux Standard Base. Derdeparty ondersteuning van programme"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "Web-bediener"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, fuzzy, c-format
+msgid "Groupware"
+msgstr "Groep:"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Kolab-bediener"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "Vuurmuur/Netwerkroteerder"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "Internetpoort"
+
+#: share/meta-task/compssUsers.pl:100
+#, fuzzy, c-format
+msgid "Mail/News"
+msgstr "/Lêer/_Nuut"
+
+#: share/meta-task/compssUsers.pl:101
+#, fuzzy, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Postfix e-pos-bediener"
+
+#: share/meta-task/compssUsers.pl:105
+#, fuzzy, c-format
+msgid "Directory Server"
+msgstr "Herstel vanaf CD"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "FTP-bediener"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "Domeinnaam en Netwerk-informasie-bediener (DNS/NIS)"
+
+#: share/meta-task/compssUsers.pl:120
+#, fuzzy, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Drukkerbediener"
+
+#: share/meta-task/compssUsers.pl:121
+#, fuzzy, c-format
+msgid "NFS Server, Samba server"
+msgstr "Samba-bediener"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "Databasis"
+
+#: share/meta-task/compssUsers.pl:126
+#, fuzzy, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "PostgreSQL of MariaDB databasisbediener"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "e-Pos"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Postfix e-pos-bediener"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "PostgreSQL of MariaDB databasisbediener"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "Netwerkrekenaar-bediener"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "NFS, SMB, Instaan- , SSH (Bedieners)"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "Grafiese Omgewing"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "KDE Werkstasie"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"Die K-werkskermomgewing (KDE), die basiese grafiese omgewing met 'n "
+"versameling bygaande hulpprogramme"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "GNOME-werkstasie"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"'n Grafiese omgewing met  gebruikersvriendelike stel applikasies en "
+"werkskerm-hulpprogramme"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "Kantoorwerkstasie"
+
+#: share/meta-task/compssUsers.pl:176
+#, fuzzy, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr ""
+"'n Grafiese omgewing met  gebruikersvriendelike stel applikasies en "
+"werkskerm-hulpprogramme"
+
+#: share/meta-task/compssUsers.pl:181
+#, fuzzy, c-format
+msgid "LXDE Desktop"
+msgstr "'n Werkstasie"
+
+#: share/meta-task/compssUsers.pl:183
+#, fuzzy, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"'n Grafiese omgewing met  gebruikersvriendelike stel applikasies en "
+"werkskerm-hulpprogramme"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Ander Grafiese Werkskerms"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Icewm, Window Maker, Enlightenment, Fvwm, ens."
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "Nutsprogramme"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "SSH-bediener"
+
+#: share/meta-task/compssUsers.pl:225
+#, fuzzy, c-format
+msgid "Webmin"
+msgstr "Webkamera"
+
+#: share/meta-task/compssUsers.pl:226
+#, fuzzy, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Terminal Server Konfigurasie"
+
+#: share/meta-task/compssUsers.pl:230
+#, fuzzy, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Monitor van Netwerk"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "<b>Moondrake Store</b>"
+
+#: share/meta-task/compssUsers.pl:236
+#, fuzzy, c-format
+msgid "Wizards to configure server"
+msgstr "Probleme met die konfigurasie van drukker \" %s\"!"
 
 #: steps.pm:85
 #, c-format
@@ -1260,14 +1622,6 @@ msgid ""
 "Exit"
 msgstr "Verlaat"
 
-#, fuzzy
-#~ msgid "LXQt Desktop"
-#~ msgstr "'n Werkstasie"
-
-#, fuzzy
-#~ msgid "Plasma Workstation"
-#~ msgstr "Werkstasie"
-
 #~ msgid "%d packages"
 #~ msgstr "%d pakkette"
 
@@ -1279,29 +1633,6 @@ msgstr "Verlaat"
 #, fuzzy
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "Grafiese Omgewing"
-
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "'n Grafiese omgewing met  gebruikersvriendelike stel applikasies en "
-#~ "werkskerm-hulpprogramme"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "'n Grafiese omgewing met  gebruikersvriendelike stel applikasies en "
-#~ "werkskerm-hulpprogramme"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "'n Grafiese omgewing met  gebruikersvriendelike stel applikasies en "
-#~ "werkskerm-hulpprogramme"
 
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment"
@@ -1321,30 +1652,14 @@ msgstr "Verlaat"
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "Vermaak: Arkade, Bordspel, Strategie ens."
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "Vermaak: Arkade, Bordspel, Strategie ens."
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache, Pro-ftpd"
-
 #~ msgid "Automated"
 #~ msgstr "Outomaties"
 
 #~ msgid "Bad package"
 #~ msgstr "Foutiewe pakket"
 
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Boeke en HOWTO's oor Linux en Vrye Sagteware"
-
 #~ msgid "Boot"
 #~ msgstr "Selflaai"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "C en C++ ontwikkelingsprogrammateke, programme en insluitlêers"
 
 #~ msgid "CD-ROM"
 #~ msgstr "CDROM"
@@ -1366,42 +1681,17 @@ msgstr "Verlaat"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Werkstasie"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "Kliëntprogramme vir 'n verkeidenheid protokolle insluitend SSH"
-
 #~ msgid "Configure X"
 #~ msgstr "Stel X op"
 
-#~ msgid "Console Tools"
-#~ msgstr "Konsole Hulpprogramme"
-
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "Spieël word gekontak vir die lys van pakkette..."
-
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "Databasis"
-
-#~ msgid "Development"
-#~ msgstr "Ontwikkeling"
-
-#, fuzzy
-#~ msgid "Directory Server"
-#~ msgstr "Herstel vanaf CD"
 
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "Beskik u oor 'n ISA klankkaart?"
 
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "Wil u aboot gebruik?"
-
-#~ msgid "Documentation"
-#~ msgstr "Dokumentasie"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "Domeinnaam en Netwerk-informasie-bediener (DNS/NIS)"
 
 #, fuzzy
 #~ msgid "Downloading file %s..."
@@ -1410,15 +1700,6 @@ msgstr "Verlaat"
 #~ msgid "DrakVPN"
 #~ msgstr "DrakVPN"
 
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "<b>Moondrake Store</b>"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr ""
-#~ "Redigeerders. teksverwerkers, instruksiedoppe, lêer-nutsprogramme, "
-#~ "terminaal-programme"
-
 #~ msgid ""
 #~ "Error installing aboot, \n"
 #~ "try to force installation even if that destroys the first partition?"
@@ -1426,35 +1707,12 @@ msgstr "Verlaat"
 #~ "Die 'aboot' installasie het gefaal. Wil u 'n installasie afwurg al\n"
 #~ "word die eerste partisie vernietig?"
 
-#~ msgid "FTP Server"
-#~ msgstr "FTP-bediener"
-
-#, fuzzy
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "Drukkerbediener"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "Vuurmuur/Netwerkroteerder"
-
 #, fuzzy
 #~ msgid "Formatting"
 #~ msgstr "Skatting"
 
-#~ msgid "GNOME Workstation"
-#~ msgstr "GNOME-werkstasie"
-
-#~ msgid "Game station"
-#~ msgstr "Speletjiesrekenaar"
-
 #~ msgid "Generate auto install floppy"
 #~ msgstr "Skep outoinstallasieskyf"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "Grafiese Omgewing"
-
-#, fuzzy
-#~ msgid "Groupware"
-#~ msgstr "Groep:"
 
 #~ msgid "IDE"
 #~ msgstr "IDE"
@@ -1471,12 +1729,6 @@ msgstr "Verlaat"
 #~ msgid "Installation class"
 #~ msgstr "Kies installasieklas"
 
-#~ msgid "Internet gateway"
-#~ msgstr "Internetpoort"
-
-#~ msgid "Internet station"
-#~ msgstr "Internetstasie"
-
 #~ msgid "KDE"
 #~ msgstr "KDE"
 
@@ -1484,21 +1736,12 @@ msgstr "Verlaat"
 #~ msgid "KDE Desktop"
 #~ msgstr "'n Werkstasie"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "KDE Werkstasie"
-
-#~ msgid "Kolab Server"
-#~ msgstr "Kolab-bediener"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
 #, fuzzy
-#~ msgid "LXDE Desktop"
+#~ msgid "LXQT Desktop"
 #~ msgstr "'n Werkstasie"
 
 #, fuzzy
-#~ msgid "LXQT Desktop"
+#~ msgid "LXQt Desktop"
 #~ msgstr "'n Werkstasie"
 
 #~ msgid "Language"
@@ -1507,19 +1750,9 @@ msgstr "Verlaat"
 #~ msgid "License"
 #~ msgstr "Lisensie"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "Linux Standard Base. Derdeparty ondersteuning van programme"
-
 #, fuzzy
 #~ msgid "MATE Workstation"
 #~ msgstr "GNOME-werkstasie"
-
-#~ msgid "Mail"
-#~ msgstr "e-Pos"
-
-#, fuzzy
-#~ msgid "Mail/News"
-#~ msgstr "/Lêer/_Nuut"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linux Installasie %s"
@@ -1531,26 +1764,6 @@ msgstr "Verlaat"
 #, fuzzy
 #~ msgid "Moondrake Wizards"
 #~ msgstr "<b>Moondrake Store</b>"
-
-#~ msgid "Multimedia station"
-#~ msgstr "Multimediastasie"
-
-#, fuzzy
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "Samba-bediener"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "NFS, SMB, Instaan- , SSH (Bedieners)"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "Netwerkrekenaar (kliënt)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "Netwerkrekenaar-bediener"
-
-#, fuzzy
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "Monitor van Netwerk"
 
 #~ msgid "Networking"
 #~ msgstr "Netwerk"
@@ -1566,16 +1779,6 @@ msgstr "Verlaat"
 #~ msgid "No sound card detected. Try \"harddrake\" after installation"
 #~ msgstr ""
 #~ "Geen klankkaart opgespoor nie. Probeer \"harddrake\" na die installasie"
-
-#~ msgid "Office Workstation"
-#~ msgstr "Kantoorwerkstasie"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "Kantoorprogramme: Woordverwerkers(LibreOffice Writer, Kword), spreistate "
-#~ "(LibreOffice Calc, Kspread), PDF-sigprogramme, ens."
 
 #, fuzzy
 #~ msgid ""
@@ -1596,26 +1799,13 @@ msgstr "Verlaat"
 #~ msgid "Office tools"
 #~ msgstr "Kantoorwerkstasie"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "Ander Grafiese Werkskerms"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "Postfix e-pos-bediener"
-
 #, fuzzy
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Postfix e-pos-bediener"
-
-#, fuzzy
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "PostgreSQL of MariaDB databasisbediener"
+#~ msgid "Plasma Workstation"
+#~ msgstr "Werkstasie"
 
 #, fuzzy
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "PostgreSQL of MySQL databasisbediener"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "PostgreSQL of MariaDB databasisbediener"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "PostgreSQL of MySQL databasisbediener"
@@ -1645,34 +1835,14 @@ msgstr "Verlaat"
 #~ msgstr ""
 #~ "Loop \"sndconfig\" na die installasie om u klankkaart te konfigureer"
 
-#~ msgid "SSH Server"
-#~ msgstr "SSH-bediener"
-
 #~ msgid "Save packages selection"
 #~ msgstr "Stoor pakketseleksie"
 
 #~ msgid "Select All"
 #~ msgstr "Kies almal"
 
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "Stel hulpprogramme om e-pos en netnuus te lees en te stuur (mutt, tin) en "
-#~ "om ook die web deur te blaai."
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "Klank- en videospelers/redigeerders"
-
 #~ msgid "TV card"
 #~ msgstr "TV-kaart"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr ""
-#~ "Die K-werkskermomgewing (KDE), die basiese grafiese omgewing met 'n "
-#~ "versameling bygaande hulpprogramme"
 
 #, fuzzy
 #~ msgid ""
@@ -1695,57 +1865,22 @@ msgstr "Verlaat"
 #~ "\n"
 #~ "U mag verkies om hierdie installasie elders te herhaal.\n"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "Nutsprogramme wat u rekenaarkonfigurasie vergemaklik"
-
 #~ msgid "Unable to contact mirror %s"
 #~ msgstr "Kon nie die spieëlwebplek %s kontak nie"
 
 #~ msgid "Users"
 #~ msgstr "Gebruikers"
 
-#~ msgid "Utilities"
-#~ msgstr "Nutsprogramme"
-
-#~ msgid "Web Server"
-#~ msgstr "Web-bediener"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#, fuzzy
-#~ msgid "Webmin"
-#~ msgstr "Webkamera"
-
-#, fuzzy
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Terminal Server Konfigurasie"
-
 #~ msgid "Welcome"
 #~ msgstr "Welkom"
-
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, ens."
 
 #, fuzzy
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, ens."
 
 #, fuzzy
-#~ msgid "Wizards to configure server"
-#~ msgstr "Probleme met die konfigurasie van drukker \" %s\"!"
-
-#~ msgid "Workstation"
-#~ msgstr "Werkstasie"
-
-#, fuzzy
 #~ msgid "XFCE Workstation"
 #~ msgstr "KDE Werkstasie"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "Kantoorwerkstasie"
 
 #, fuzzy
 #~ msgid ""

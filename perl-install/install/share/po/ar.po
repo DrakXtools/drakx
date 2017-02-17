@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2009-03-25 19:22+0400\n"
 "Last-Translator: Yaser Ammar <linux.uae@gawab.com>\n"
 "Language-Team:  Arabic <doc@arabeyes.org>\n"
@@ -313,7 +313,7 @@ msgstr "ستكون لقطات الشاشة موجودة بعد التثبيت ف
 msgid "Installation"
 msgstr "التثبيت"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "الضبط"
@@ -436,6 +436,364 @@ msgstr "فشلت عملية تثبيت %d"
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "فشل تثبيت الحزمة:"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "محطة عمل"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "محطّة عمل مكتبية"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"برامج مكتبية: معالجات نصوص (OpenOffice.org Writer، Kword)، جداول ممتدة "
+"(OpenOffice.org Calc، Kspread)، برامج عرض pdf، إلخ"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "محطّة ألعاب"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "برامج تسلية: ألعاب فيديو، ألعاب لوحات، ألعاب استراتيجية، إلخ"
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "محطة وسائط متعدّدة"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "برامج تحرير/تشغيل فيديو وصوتيات"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "محطّة إنترنت"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"مجموعة أدوات لقراءة وإرسال البريد والأخبار (mutt، tin..) ولتصفح الإنترنت"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "جهاز شبكة (عميل)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "عملاء لبروتوكولات مختلفة بما فيها ssh"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "أدوات لتسهيل ضبط حاسوبك"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "أدوات الطرفيّات"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "محررات نصوص، صَدَفات، أدوات ملفات، طرفيات"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "تطوير"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "برامج ومكتبات تطوير C و C++ وملفات مضمنة"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "توثيق"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "كتب ودلائل إرشادية حول لينكس والبرامج الحرة"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "القاعدة القياسيّة للينكس (LSB). دعم تطبيقات الطرف الثالث"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "خادم وب"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "برامج مجموعات"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "خادم Kolab"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "جدار ناري/موجِّه"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "بوابة إنترنت"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "بريد/أخبار"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "خادم بريد Postfix، خادم أخبار Inn"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "خادم مجلّدات"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "خادم FTP"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "خادم أسماء نطاقات ومعلومات شبكة"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "خادم مشاركة ملفّات وطابعات"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "خادم NFS، خادم Samba"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "قواعد بيانات"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "خادم قواعد بيانات PostgreSQL و MariaDB"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "وب/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache، Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "البريد"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "خادم بريد Postfix"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "خادم قواعد بيانات PostgreSQL أو MariaDB"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "خادم شبكات"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "خادم NFS، خادم SMB، خادم وسيط، خادم ssh"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "بيئات رسومية"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "محطّة عمل كِدي"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"بيئة سطح مكتب كِدي؛ البيئة الرسومية الأساسية مع مجموعة من الأدوات المصاحبة"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "محطّة عمل جنوم"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"بيئة رسومية مع مجموعة من التطبيقات وأدوات سطح المكتب المناسبة للمستخدمين "
+"العاديين"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "محطّة عمل مكتبية"
+
+#: share/meta-task/compssUsers.pl:176
+#, fuzzy, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr ""
+"بيئة رسومية مع مجموعة من التطبيقات وأدوات سطح المكتب المناسبة للمستخدمين "
+"العاديين"
+
+#: share/meta-task/compssUsers.pl:181
+#, c-format
+msgid "LXDE Desktop"
+msgstr "سطح مكتب LXDE"
+
+#: share/meta-task/compssUsers.pl:183
+#, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"بيئة رسومية خفيفة وسريعة مع مجموعة من التطبيقات وأدوات سطح المكتب المناسبة "
+"للمستخدمين العاديين"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "أسطح مكتب رسومية أخرى"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Icewm، Window Maker، Enlightenment، Fvwm، إلخ"
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "وسائل"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "خادم SSH"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "خادم الضبط البعيد Webmin"
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "وسائل الشبكة/المراقبة"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "أدوات مراقبة، محاسبة عمليّات، tcpdump، nmap، ..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "مرشدو ماجيا"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "مرشدو ضبط الخادم"
 
 #: steps.pm:85
 #, c-format
@@ -1287,28 +1645,6 @@ msgstr "اخرج"
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "بيئات رسومية"
 
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "بيئة رسومية مع مجموعة من التطبيقات وأدوات سطح المكتب المناسبة للمستخدمين "
-#~ "العاديين"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "بيئة رسومية مع مجموعة من التطبيقات وأدوات سطح المكتب المناسبة للمستخدمين "
-#~ "العاديين"
-
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "بيئة رسومية خفيفة وسريعة مع مجموعة من التطبيقات وأدوات سطح المكتب "
-#~ "المناسبة للمستخدمين العاديين"
-
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment"
 #~ msgstr ""
@@ -1324,27 +1660,11 @@ msgstr "اخرج"
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "برامج تسلية: ألعاب فيديو، ألعاب لوحات، ألعاب استراتيجية، إلخ"
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "برامج تسلية: ألعاب فيديو، ألعاب لوحات، ألعاب استراتيجية، إلخ"
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache، Pro-ftpd"
-
 #~ msgid "Bad package"
 #~ msgstr "حزمة فاسدة"
 
 #~ msgid "Be Free!"
 #~ msgstr "كن حراً!"
-
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "كتب ودلائل إرشادية حول لينكس والبرامج الحرة"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "برامج ومكتبات تطوير C و C++ وملفات مضمنة"
 
 #~ msgid "CD-ROM"
 #~ msgstr "القرص المدمج"
@@ -1353,57 +1673,17 @@ msgstr "اخرج"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "محطة عمل"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "عملاء لبروتوكولات مختلفة بما فيها ssh"
-
-#~ msgid "Console Tools"
-#~ msgstr "أدوات الطرفيّات"
-
 #~ msgid "Core Release"
 #~ msgstr "مخزن Core Release"
-
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "قواعد بيانات"
-
-#~ msgid "Development"
-#~ msgstr "تطوير"
-
-#~ msgid "Directory Server"
-#~ msgstr "خادم مجلّدات"
 
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "هل لديك بطاقة صوت ISA؟"
 
-#~ msgid "Documentation"
-#~ msgstr "توثيق"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "خادم أسماء نطاقات ومعلومات شبكة"
-
 #~ msgid "Downloading file %s..."
 #~ msgstr "يجري تنزيل الملف %s ..."
 
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "مرشدو ماجيا"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "محررات نصوص، صَدَفات، أدوات ملفات، طرفيات"
-
 #~ msgid "Explore Linux easily with Mandriva One"
 #~ msgstr "اكتشف لينكس بسهولة مع ماندريفا ون"
-
-#~ msgid "FTP Server"
-#~ msgstr "خادم FTP"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "خادم مشاركة ملفّات وطابعات"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "جدار ناري/موجِّه"
 
 #~ msgid "For developers!"
 #~ msgstr "للمطورين!"
@@ -1413,18 +1693,6 @@ msgstr "اخرج"
 
 #~ msgid "For kids"
 #~ msgstr "للأطفال"
-
-#~ msgid "GNOME Workstation"
-#~ msgstr "محطّة عمل جنوم"
-
-#~ msgid "Game station"
-#~ msgstr "محطّة ألعاب"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "بيئات رسومية"
-
-#~ msgid "Groupware"
-#~ msgstr "برامج مجموعات"
 
 #~ msgid "Home entertainment"
 #~ msgstr "الترفيه المنزلي"
@@ -1455,12 +1723,6 @@ msgstr "اخرج"
 #~ " \n"
 #~ " تحذير: ينبغي أن تنسخ جميع بياناتك الشخصية قبل اختيار\"تثبيت جديد\""
 
-#~ msgid "Internet gateway"
-#~ msgstr "بوابة إنترنت"
-
-#~ msgid "Internet station"
-#~ msgstr "محطّة إنترنت"
-
 #~ msgid "Join Us!"
 #~ msgstr "انضم إلينا!"
 
@@ -1470,34 +1732,13 @@ msgstr "اخرج"
 #~ msgid "KDE Desktop"
 #~ msgstr "سطح مكتب كِدي"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "محطّة عمل كِدي"
-
-#~ msgid "Kolab Server"
-#~ msgstr "خادم Kolab"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
-#~ msgid "LXDE Desktop"
-#~ msgstr "سطح مكتب LXDE"
-
 #, fuzzy
 #~ msgid "LXQT Desktop"
 #~ msgstr "سطح مكتب LXDE"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "القاعدة القياسيّة للينكس (LSB). دعم تطبيقات الطرف الثالث"
-
 #, fuzzy
 #~ msgid "MATE Workstation"
 #~ msgstr "محطة عمل جنوم"
-
-#~ msgid "Mail"
-#~ msgstr "البريد"
-
-#~ msgid "Mail/News"
-#~ msgstr "بريد/أخبار"
 
 #~ msgid "Make it yours!"
 #~ msgstr "لتكن ملكك!"
@@ -1511,32 +1752,11 @@ msgstr "اخرج"
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr "ماندريفا: توزيعات تلبي احتياجات الجميع"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "أدوات مراقبة، محاسبة عمليّات، tcpdump، nmap، ..."
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "مرشدو ماجيا"
 
 #~ msgid "Moondrake, the new Linux distribution"
 #~ msgstr "ماجيّا ، توزيعة لينكس الجديدة"
-
-#~ msgid "Multimedia station"
-#~ msgstr "محطة وسائط متعدّدة"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "خادم NFS، خادم Samba"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "خادم NFS، خادم SMB، خادم وسيط، خادم ssh"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "جهاز شبكة (عميل)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "خادم شبكات"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "وسائل الشبكة/المراقبة"
 
 #~ msgid ""
 #~ "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1550,16 +1770,6 @@ msgstr "اخرج"
 
 #~ msgid "Nonfree Release"
 #~ msgstr "مخزن Nonfree Release"
-
-#~ msgid "Office Workstation"
-#~ msgstr "محطّة عمل مكتبية"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "برامج مكتبية: معالجات نصوص (OpenOffice.org Writer، Kword)، جداول ممتدة "
-#~ "(OpenOffice.org Calc، Kspread)، برامج عرض pdf، إلخ"
 
 #, fuzzy
 #~ msgid ""
@@ -1579,23 +1789,8 @@ msgstr "اخرج"
 #~ msgid "Office tools"
 #~ msgstr "أدوات مكتبية"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "أسطح مكتب رسومية أخرى"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "خادم بريد Postfix"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "خادم بريد Postfix، خادم أخبار Inn"
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "خادم قواعد بيانات PostgreSQL و MariaDB"
-
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "خادم قواعد بيانات PostgreSQL و MySQL"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "خادم قواعد بيانات PostgreSQL أو MariaDB"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "خادم قواعد بيانات PostgreSQL أو MySQL"
@@ -1609,9 +1804,6 @@ msgstr "اخرج"
 #~ msgid "Preparing upgrade..."
 #~ msgstr "التحضير للترقية..."
 
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
-
 #, fuzzy
 #~ msgid "RazorQT Desktop"
 #~ msgstr "سطح مكتب مخصص"
@@ -1621,20 +1813,8 @@ msgstr "اخرج"
 #~ "sound card"
 #~ msgstr "شغّل \"alsaconf\" أو \"sndconfig\" بعد التّثبيت لضبط بطاقة الصّوت"
 
-#~ msgid "SSH Server"
-#~ msgstr "خادم SSH"
-
 #~ msgid "Select All"
 #~ msgstr "اختيار الكل"
-
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "مجموعة أدوات لقراءة وإرسال البريد والأخبار (mutt، tin..) ولتصفح الإنترنت"
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "برامج تحرير/تشغيل فيديو وصوتيات"
 
 #~ msgid "Tainted Release"
 #~ msgstr "مخزن Tainted Release"
@@ -1644,12 +1824,6 @@ msgstr "اخرج"
 
 #~ msgid "The 100%% open source Mandriva Linux distribution"
 #~ msgstr "توزيعة لينكس ماندريفا مفتوحة المصدر 100%%"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr ""
-#~ "بيئة سطح مكتب كِدي؛ البيئة الرسومية الأساسية مع مجموعة من الأدوات المصاحبة"
 
 #, fuzzy
 #~ msgid ""
@@ -1661,51 +1835,19 @@ msgstr "اخرج"
 #~ msgid "This medium provides package updates for medium \"%s\""
 #~ msgstr "هذا الوسيط يوفر تحديثات للبرمجيات للوسيط \"%s\""
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "أدوات لتسهيل ضبط حاسوبك"
-
 #~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 #~ msgstr "الترقية من توزيعة 32 بت إلى 64 بت غير مدعومة"
 
 #~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 #~ msgstr "الترقية من توزيعة 64 بت إلى 32 بت غير مدعومة"
 
-#~ msgid "Utilities"
-#~ msgstr "وسائل"
-
-#~ msgid "Web Server"
-#~ msgstr "خادم وب"
-
-#~ msgid "Web/FTP"
-#~ msgstr "وب/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "خادم الضبط البعيد Webmin"
-
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Icewm، Window Maker، Enlightenment، Fvwm، إلخ"
-
 #, fuzzy
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Icewm، Window Maker، Enlightenment، Fvwm، إلخ"
 
-#~ msgid "Wizards to configure server"
-#~ msgstr "مرشدو ضبط الخادم"
-
-#~ msgid "Workstation"
-#~ msgstr "محطة عمل"
-
 #, fuzzy
 #~ msgid "XFCE Workstation"
 #~ msgstr "محطة عمل كدي"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "محطّة عمل مكتبية"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

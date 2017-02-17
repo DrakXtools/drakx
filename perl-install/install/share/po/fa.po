@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2005-02-26 06:31+0100\n"
 "Last-Translator: Abbas Izad <abbasizad@hotmail.com>\n"
 "Language-Team: Persian\n"
@@ -301,7 +301,7 @@ msgstr "عکس‌صفحه‌ها بعد از نصب در %s در دسترس خو
 msgid "Installation"
 msgstr "نصب کردن"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "پیکربندی"
@@ -421,6 +421,356 @@ msgstr "نصب شکست خورد"
 #, fuzzy, c-format
 msgid "Installation of packages failed:"
 msgstr "نصب کردن بسته‌ی %s"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "ایستگاه‌کار"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "ایستگاه‌کار دفتری"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"برنامه های دفتری: واژه پردازان (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "ایستگاه بازی"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "برنامه‌های سرگرمی: آرکید، تخته‌ها، تاکتیکی، غیره"
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "ایستگاه چندرسانه‌ای"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "برنامه‌های ویرایش/پخش ویدیو و صوت"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "ایستگاه اینترنت"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr "مجموعه ابزار خواندن و ارسال پست و اخبار (mutt, tin..) و برای مرور وب"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "رایانه‌ی شبکه (کارگیر)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "کارگیرها برای پایان‌نامه‌های گوناگون از جمله ssh"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "ابزارهای برای آسان‌ کردن پیکربندی رایانه‌اتان"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "ابزارهای کنسول"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "ویرایش‌گرها، پوسته‌ها، ابزار پرونده، پایانه‌ها"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "برنامه‌سازی"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "کتابخانه‌های برنامه‌سازی C و C++، برنامه‌ها و پرونده‌های شامل"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "نوشتار"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "کتاب‌ها و چگونگی‌ها در لینوکس و نرم‌افزار آزاد"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "پایه‌ی استاندارد لینوکس. حمایت برنامه‌های شخص سوم"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "کارگزار‌ وب"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "آپاچ"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "گروه افزار"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "کارگزار Kolab"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "دیوار‌آتش/مسیریاب"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "دروازه‌ی اینترنت"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "پست/اخبار"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "کارگزار پست Postfix، کارگزار اخبار Inn "
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "کارگزار شاخه"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "کارگزار FTP"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "نام دامنه و کارگزار اطلاعات شبکه"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "کارگزاراشتراک چاپگر و پرونده"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "کارگزار NFS، کارگزار Samba"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "بانک ‌اطلاعات"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "کارگزار پایگاه داده‌ی PostgreSQL و MariaDB "
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "پست"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "کارگزار پست Postfix "
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "کارگزار بانک اطلاعاتی PostgreSQL یا MariaDB "
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "کارگزار شبکه‌ی رایانه"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "کارگزار NFS , کارگزار SMB , کارگزار Proxy , کارگزار ssh "
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "محیط گرافیکی"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "ایستگاه‌کار KDE "
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr "محیط رومیزی K، محیط گرافیکی پایه با مجموعه‌ای از ابزارهای ضمیمه"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "ایستگاه‌کار گنوم"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr "محیط گرافیکی کاربر-دوستانه با مجموعه‌ای از برنامه‌ها و ابزارهای رومیزی"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "ایستگاه‌کار دفتری"
+
+#: share/meta-task/compssUsers.pl:176
+#, fuzzy, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr "محیط گرافیکی کاربر-دوستانه با مجموعه‌ای از برنامه‌ها و ابزارهای رومیزی"
+
+#: share/meta-task/compssUsers.pl:181
+#, fuzzy, c-format
+msgid "LXDE Desktop"
+msgstr "رومیزی Plucker"
+
+#: share/meta-task/compssUsers.pl:183
+#, fuzzy, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr "محیط گرافیکی کاربر-دوستانه با مجموعه‌ای از برنامه‌ها و ابزارهای رومیزی"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "دیگر رومیزی‌های گرافیکی"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etc"
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "وسایل"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "کارگزار‌ SSH"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "کارگزار پیکربندی از راه دور Webmin "
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "پایشگری/وسایل شبکه"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "ابزار پایشگری، پروسه های حسابداری، tcpdump, nmap, ..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "جادوگران نرم افزار ماندریبا"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "جادوگران برای پیکربندی کارگزار"
 
 #: steps.pm:85
 #, c-format
@@ -1259,10 +1609,6 @@ msgid ""
 "Exit"
 msgstr "خروج"
 
-#, fuzzy
-#~ msgid "Plasma Workstation"
-#~ msgstr "ایستگاه‌کار"
-
 #~ msgid "%d packages"
 #~ msgstr "بسته‌های %d"
 
@@ -1273,26 +1619,6 @@ msgstr "خروج"
 #, fuzzy
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "محیط گرافیکی"
-
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "محیط گرافیکی کاربر-دوستانه با مجموعه‌ای از برنامه‌ها و ابزارهای رومیزی"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "محیط گرافیکی کاربر-دوستانه با مجموعه‌ای از برنامه‌ها و ابزارهای رومیزی"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "محیط گرافیکی کاربر-دوستانه با مجموعه‌ای از برنامه‌ها و ابزارهای رومیزی"
 
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment"
@@ -1310,30 +1636,14 @@ msgstr "خروج"
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "برنامه‌های سرگرمی: آرکید، تخته‌ها، تاکتیکی، غیره"
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "برنامه‌های سرگرمی: آرکید، تخته‌ها، تاکتیکی، غیره"
-
-#~ msgid "Apache"
-#~ msgstr "آپاچ"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache, Pro-ftpd"
-
 #~ msgid "Automated"
 #~ msgstr "خودکار"
 
 #~ msgid "Bad package"
 #~ msgstr "بسته‌ی خراب"
 
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "کتاب‌ها و چگونگی‌ها در لینوکس و نرم‌افزار آزاد"
-
 #~ msgid "Boot"
 #~ msgstr "آغازگری"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "کتابخانه‌های برنامه‌سازی C و C++، برنامه‌ها و پرونده‌های شامل"
 
 #~ msgid "CD-ROM"
 #~ msgstr "CD-ROM"
@@ -1355,41 +1665,17 @@ msgstr "خروج"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "ایستگاه‌کار"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "کارگیرها برای پایان‌نامه‌های گوناگون از جمله ssh"
-
 #~ msgid "Configure X"
 #~ msgstr "پیکربندی ایکس"
 
-#~ msgid "Console Tools"
-#~ msgstr "ابزارهای کنسول"
-
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "تماس گرفتن با آینه برای گرفتن لیست بسته‌های موجود..."
-
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "بانک ‌اطلاعات"
-
-#~ msgid "Development"
-#~ msgstr "برنامه‌سازی"
-
-#~ msgid "Directory Server"
-#~ msgstr "کارگزار شاخه"
 
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "آیا کارت صوتی ISA دارید؟"
 
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "آیا می‌خواهید از aboot استفاده کنید؟"
-
-#~ msgid "Documentation"
-#~ msgstr "نوشتار"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "نام دامنه و کارگزار اطلاعات شبکه"
 
 #, fuzzy
 #~ msgid "Downloading file %s..."
@@ -1398,13 +1684,6 @@ msgstr "خروج"
 #~ msgid "DrakVPN"
 #~ msgstr "DrakVPN"
 
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "جادوگران نرم افزار ماندریبا"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "ویرایش‌گرها، پوسته‌ها، ابزار پرونده، پایانه‌ها"
-
 #~ msgid ""
 #~ "Error installing aboot, \n"
 #~ "try to force installation even if that destroys the first partition?"
@@ -1412,33 +1691,12 @@ msgstr "خروج"
 #~ "خطا در نصب aboot, \n"
 #~ "تلاش به اجبار نصب می‌کنید حتی اگر آن اولین قسمت‌بندی را خراب کند؟"
 
-#~ msgid "FTP Server"
-#~ msgstr "کارگزار FTP"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "کارگزاراشتراک چاپگر و پرونده"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "دیوار‌آتش/مسیریاب"
-
 #, fuzzy
 #~ msgid "Formatting"
 #~ msgstr "تخمین زدن"
 
-#~ msgid "GNOME Workstation"
-#~ msgstr "ایستگاه‌کار گنوم"
-
-#~ msgid "Game station"
-#~ msgstr "ایستگاه بازی"
-
 #~ msgid "Generate auto install floppy"
 #~ msgstr "تولید دیسکچه‌ی نصب خودکار"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "محیط گرافیکی"
-
-#~ msgid "Groupware"
-#~ msgstr "گروه افزار"
 
 #~ msgid "Gwenview"
 #~ msgstr "Gwenview"
@@ -1458,30 +1716,11 @@ msgstr "خروج"
 #~ msgid "Installation class"
 #~ msgstr "انتخاب رده‌ی نصب"
 
-#~ msgid "Internet gateway"
-#~ msgstr "دروازه‌ی اینترنت"
-
-#~ msgid "Internet station"
-#~ msgstr "ایستگاه اینترنت"
-
 #~ msgid "KDE"
 #~ msgstr "KDE"
 
 #, fuzzy
 #~ msgid "KDE Desktop"
-#~ msgstr "رومیزی Plucker"
-
-#~ msgid "KDE Workstation"
-#~ msgstr "ایستگاه‌کار KDE "
-
-#~ msgid "Kolab Server"
-#~ msgstr "کارگزار Kolab"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
-#, fuzzy
-#~ msgid "LXDE Desktop"
 #~ msgstr "رومیزی Plucker"
 
 #, fuzzy
@@ -1494,18 +1733,9 @@ msgstr "خروج"
 #~ msgid "License"
 #~ msgstr "مجوز"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "پایه‌ی استاندارد لینوکس. حمایت برنامه‌های شخص سوم"
-
 #, fuzzy
 #~ msgid "MATE Workstation"
 #~ msgstr "ایستگاه‌کار گنوم"
-
-#~ msgid "Mail"
-#~ msgstr "پست"
-
-#~ msgid "Mail/News"
-#~ msgstr "پست/اخبار"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "نصب لینوکس ماندریبا %s"
@@ -1513,29 +1743,8 @@ msgstr "خروج"
 #~ msgid "Mandriva Wizards"
 #~ msgstr "جادوگران نرم افزار ماندریبا"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "ابزار پایشگری، پروسه های حسابداری، tcpdump, nmap, ..."
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "جادوگران نرم افزار ماندریبا"
-
-#~ msgid "Multimedia station"
-#~ msgstr "ایستگاه چندرسانه‌ای"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "کارگزار NFS، کارگزار Samba"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "کارگزار NFS , کارگزار SMB , کارگزار Proxy , کارگزار ssh "
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "رایانه‌ی شبکه (کارگیر)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "کارگزار شبکه‌ی رایانه"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "پایشگری/وسایل شبکه"
 
 #~ msgid "Networking"
 #~ msgstr "شبکه‌کاری"
@@ -1549,16 +1758,6 @@ msgstr "خروج"
 
 #~ msgid "No sound card detected. Try \"harddrake\" after installation"
 #~ msgstr "هیچ کارت صوتی شناسایی نشد. \"harddrake\" را بعد از نصب امتحان کنید"
-
-#~ msgid "Office Workstation"
-#~ msgstr "ایستگاه‌کار دفتری"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "برنامه های دفتری: واژه پردازان (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
 
 #, fuzzy
 #~ msgid ""
@@ -1579,23 +1778,12 @@ msgstr "خروج"
 #~ msgid "Office tools"
 #~ msgstr "ایستگاه‌کار دفتری"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "دیگر رومیزی‌های گرافیکی"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "کارگزار پست Postfix "
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "کارگزار پست Postfix، کارگزار اخبار Inn "
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "کارگزار پایگاه داده‌ی PostgreSQL و MariaDB "
+#, fuzzy
+#~ msgid "Plasma Workstation"
+#~ msgstr "ایستگاه‌کار"
 
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "کارگزار پایگاه داده‌ی PostgreSQL و MySQL "
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "کارگزار بانک اطلاعاتی PostgreSQL یا MariaDB "
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "کارگزار بانک اطلاعاتی PostgreSQL یا MySQL "
@@ -1611,9 +1799,6 @@ msgstr "خروج"
 #~ msgid "Preparing upgrade..."
 #~ msgstr "آماده کردن بارگذار آغازگر..."
 
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
-
 #, fuzzy
 #~ msgid "RazorQT Desktop"
 #~ msgstr "رومیزی Plucker"
@@ -1628,31 +1813,14 @@ msgstr "خروج"
 #~ "برای پیکربندی کارت صوتی خود بعد از نصب برنامه‌ی \"sndconfig\" یا \"alsaconf"
 #~ "\"  را اجرا کنید"
 
-#~ msgid "SSH Server"
-#~ msgstr "کارگزار‌ SSH"
-
 #~ msgid "Save packages selection"
 #~ msgstr "ذخیره‌ی مجموعه بسته‌ها"
 
 #~ msgid "Select All"
 #~ msgstr "همه انتخاب شده‌اند"
 
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "مجموعه ابزار خواندن و ارسال پست و اخبار (mutt, tin..) و برای مرور وب"
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "برنامه‌های ویرایش/پخش ویدیو و صوت"
-
 #~ msgid "TV card"
 #~ msgstr "کارت تلویزیون"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr "محیط رومیزی K، محیط گرافیکی پایه با مجموعه‌ای از ابزارهای ضمیمه"
 
 #, fuzzy
 #~ msgid ""
@@ -1673,54 +1841,22 @@ msgstr "خروج"
 #~ "\n"
 #~ "ممکن است ترجیح دهید نصب را اجرای مجدد کنید.\n"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "ابزارهای برای آسان‌ کردن پیکربندی رایانه‌اتان"
-
 #~ msgid "Unable to contact mirror %s"
 #~ msgstr "نمی‌توان با آینه %s تماس برقرار کرد"
 
 #~ msgid "Users"
 #~ msgstr "کاربران"
 
-#~ msgid "Utilities"
-#~ msgstr "وسایل"
-
-#~ msgid "Web Server"
-#~ msgstr "کارگزار‌ وب"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "کارگزار پیکربندی از راه دور Webmin "
-
 #~ msgid "Welcome"
 #~ msgstr "خوش آمدید"
-
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etc"
 
 #, fuzzy
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etc"
 
-#~ msgid "Wizards to configure server"
-#~ msgstr "جادوگران برای پیکربندی کارگزار"
-
-#~ msgid "Workstation"
-#~ msgstr "ایستگاه‌کار"
-
 #, fuzzy
 #~ msgid "XFCE Workstation"
 #~ msgstr "ایستگاه‌کار KDE "
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "ایستگاه‌کار دفتری"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

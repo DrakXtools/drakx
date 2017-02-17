@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for MDK 9.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2004-09-15 13:33+0200\n"
 "Last-Translator: Naim Daka <naim70@freesurf.ch>\n"
 "Language-Team: Albanian <LL@li.org>\n"
@@ -312,7 +312,7 @@ msgstr ""
 msgid "Installation"
 msgstr "Instalimi"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "Konfigurimi"
@@ -438,6 +438,365 @@ msgstr "Instalimi i transmetimit të %d dështio"
 msgid "Installation of packages failed:"
 msgstr "Instalimi i paketave dështoj:"
 
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "Stacion punues"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "Stacioni Punues në Tryezë"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Programe për tryezë: trajtues të teksteve (LibreOffice Writer, Kword), "
+"tablues (LibreOffice Calc, Kspread), çfaqës pdf, etj."
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "Stacion Lojërash"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "Programe ahengi: lojë arkade, lojë me stenda, strategji, etj"
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "Stacion Multimedia"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Programe për lojëra/botime të zërit dhe videos"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Stacion Interneti"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Set mjetesh për të lexuar dhe për të dërguar postë dhe lajme (mutt, tin ..) "
+"dhe të shfletoni Internetin"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Kompjuter Rrjeti (klient)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Klient për protokole të ndryshme me përfshirje në ssh"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Vegla për të konfiguruar kompjuterin tuaj"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Vegla në konsolë"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "Botues, interpretues, vegla skedaresh, terminale"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "Zhvillimi"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "Bibloteka ndërtuese e C dhe C++, programe dhe skedare me përfshirje"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "Dokumentacioni"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Libra dhe Howto's për Linux dhe Softver gratis"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "Bazë Standarde e Linux. Përkrahë aplikacione të pjesës së tretë"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "Server Web"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "Grupimi"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Server Kolab"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "Murë-i-Zjarrtë/Router"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "Portë kaluese Interneti"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "Postë/Lajme"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Postfix server poste,  Inn server lajme"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "Server Skedarësh"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "Server FTP"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "Server i Emrit (DNS) dhe Server i Informacionit (NIS)"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Server Shpërndarës Skedarësh dhe Printeri"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "NFS Server, Samba server"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "Bazë e të dhënave"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "PostgreSQL dhe MariaDB Database Server"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "Mail"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Server i letrave (mail) Postfix"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "Server PostgreSQL apo MariaDB i bazës së të dhënave"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "Server Kompjuter Rrjeti"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "Server NFS, server SMB, server Proxy, server ssh"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "Mjedis Grafikë"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "Stacioni punues KDE"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"Mjedisi i Tryezës K, dhe grafiku basic, i mjedisit me koleksionimin e veglave"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "Stacioni punues Gnome"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"Një mjedis grafikë me përdorues-miqësie, një përgjithësi e palikacioneve dhe "
+"vegla në tryezë"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "Stacioni Punues në Tryezë"
+
+#: share/meta-task/compssUsers.pl:176
+#, fuzzy, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr ""
+"Një mjedis grafikë me përdorues-miqësie, një përgjithësi e palikacioneve dhe "
+"vegla në tryezë"
+
+#: share/meta-task/compssUsers.pl:181
+#, c-format
+msgid "LXDE Desktop"
+msgstr "LXDE Desktop"
+
+#: share/meta-task/compssUsers.pl:183
+#, fuzzy, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"Një mjedis grafikë me përdorues-miqësie, një përgjithësi e palikacioneve dhe "
+"vegla në tryezë"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Mjedise të Tjera Grafike në Tryezë"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etj."
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "Shërbime"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "Server SSH"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, fuzzy, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Konfigurim i Serverit me Terminale Mandriva"
+
+#: share/meta-task/compssUsers.pl:230
+#, fuzzy, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Vështrimi i Rrjetit (Network)"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "Vegla monitorimi, llogaritje procesesh, tcpdump, nmap, ..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "Qendra Kontrolluese Moondrake"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "Udhëzuesi për konfigurim serverin"
+
 #: steps.pm:85
 #, c-format
 msgid ""
@@ -509,9 +868,9 @@ msgid "Install %s GNOME Desktop"
 msgstr "Instalo %s GNOME Desktop"
 
 #: steps_gtk.pm:271
-#, fuzzy, c-format
+#, c-format
 msgid "Custom install"
-msgstr "Instalim minimal"
+msgstr "Instalim personalizuar"
 
 #: steps_gtk.pm:292
 #, fuzzy, c-format
@@ -1004,7 +1363,7 @@ msgstr ""
 #: steps_interactive.pm:737
 #, c-format
 msgid "This allows to install security updates."
-msgstr ""
+msgstr "Kjo lejon të instaloni përditësime sigurie."
 
 #: steps_interactive.pm:738
 #, c-format
@@ -1074,9 +1433,9 @@ msgid "Network & Internet"
 msgstr "Rrjeti & Internet"
 
 #: steps_interactive.pm:963
-#, fuzzy, c-format
+#, c-format
 msgid "Proxies"
-msgstr "Profili "
+msgstr "Proxies"
 
 #: steps_interactive.pm:964
 #, c-format
@@ -1111,14 +1470,14 @@ msgstr ""
 
 #. -PO: This is NOT the boot loader (just the kernel initrds)!!!!
 #: steps_interactive.pm:1043
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing initial startup program..."
-msgstr "Pregatitje për instalim"
+msgstr "Përgatitja programit fillestar për fillimin..."
 
 #: steps_interactive.pm:1044
 #, c-format
 msgid "Be patient, this may take a while..."
-msgstr ""
+msgstr "Kini durim, kjo mund të marrë pak kohë..."
 
 #: steps_interactive.pm:1060
 #, c-format
@@ -1126,6 +1485,8 @@ msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
 msgstr ""
+"Në këtë nivel të sigurisë, qasja në skedarë në ndarjen e Windows është i "
+"kufizuar nga administratori."
 
 #: steps_interactive.pm:1092
 #, c-format
@@ -1282,112 +1643,20 @@ msgid ""
 "Exit"
 msgstr "Braktise"
 
-#~ msgid "A graphical environment based on GNOME"
-#~ msgstr "Një mjedis grafik i bazuar në GNOME"
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Stacionpune Cinnamon"
 
-#~ msgid "Be Free!"
-#~ msgstr "Ekzisto Lirshëm!"
+#~ msgid "MATE Workstation"
+#~ msgstr "Stacionpune MATE"
 
-#~ msgid "Core Release"
-#~ msgstr "Lëshim Bërthamë"
+#~ msgid "Plasma Workstation"
+#~ msgstr "Stacionpune Plasma"
 
-#~ msgid "Directory Server"
-#~ msgstr "Server Skedarësh"
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Krijues Windows, Fvwm, etj"
 
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "Server Shpërndarës Skedarësh dhe Printeri"
-
-#~ msgid "For developers!"
-#~ msgstr "Për zhvilluesit!"
-
-#~ msgid "For family!"
-#~ msgstr "Për familjen!"
-
-#~ msgid "For kids"
-#~ msgstr "Për fëmijët"
-
-#~ msgid "Groupware"
-#~ msgstr "Grupimi"
-
-#~ msgid "Home entertainment"
-#~ msgstr "Argëtim shtëpie "
-
-#~ msgid "Install recommended packages"
-#~ msgstr "Instalimi paketave rekomanduara"
-
-#~ msgid "Join Us!"
-#~ msgstr "Bashkohu me ne!"
-
-#~ msgid "LXDE Desktop"
-#~ msgstr "LXDE Desktop"
-
-#~ msgid "LXQt Desktop"
-#~ msgstr "LXQt Desktop"
-
-#~ msgid "Mail/News"
-#~ msgstr "Postë/Lajme"
-
-#~ msgid "Make it yours!"
-#~ msgstr "Bëni atë tuajat!"
-
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "Vegla monitorimi, llogaritje procesesh, tcpdump, nmap, ..."
-
-#~ msgid "Moondrake Wizards"
-#~ msgstr "Udhëzuesi Moondrake"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "NFS Server, Samba server"
-
-#~ msgid "Nonfree Release"
-#~ msgstr "Lëshim Jofalas"
-
-#~ msgid "Office tools"
-#~ msgstr "Vegla zyre"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Postfix server poste,  Inn server lajme"
-
-#~ msgid "Preparing upgrade..."
-#~ msgstr "Përgatitje përmirësim..."
-
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
-
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "Set mjetesh për të lexuar dhe për të dërguar postë dhe lajme (mutt, "
-#~ "tin ..) dhe të shfletoni Internetin"
-
-#~ msgid "Tainted Release"
-#~ msgstr "Lëshim Prishur"
-
-#~ msgid "Thank you!"
-#~ msgstr "Faleminderit!"
-
-#~ msgid "This medium provides package updates for medium \"%s\""
-#~ msgstr "Ky medium ofron përditësime paketë për të mesëm \"%s\""
-
-#~ msgid "Utilities"
-#~ msgstr "Shërbime"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Wizards to configure server"
-#~ msgstr "Udhëzuesi për konfigurim serverin"
-
-#~ msgid "Your choice!"
-#~ msgstr "Zgjedhja juaj!"
-
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Updates"
-#~ msgstr ""
-#~ "_: Mbani këto hyrje të shkurtra\n"
-#~ "Azhurnime"
+#~ msgid "XFCE Workstation"
+#~ msgstr "Stacionpune XFCE"
 
 #~ msgid "%d packages"
 #~ msgstr "%d pakot"
@@ -1398,28 +1667,8 @@ msgstr "Braktise"
 #~ msgstr[0] "%d pakot"
 #~ msgstr[1] "%d pakot"
 
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "Një mjedis grafikë me përdorues-miqësie, një përgjithësi e palikacioneve "
-#~ "dhe vegla në tryezë"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "Një mjedis grafikë me përdorues-miqësie, një përgjithësi e palikacioneve "
-#~ "dhe vegla në tryezë"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "Një mjedis grafikë me përdorues-miqësie, një përgjithësi e palikacioneve "
-#~ "dhe vegla në tryezë"
+#~ msgid "A graphical environment based on GNOME"
+#~ msgstr "Një mjedis grafik i bazuar në GNOME"
 
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment"
@@ -1439,30 +1688,17 @@ msgstr "Braktise"
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "Programe ahengi: lojë arkade, lojë me stenda, strategji, etj"
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "Programe ahengi: lojë arkade, lojë me stenda, strategji, etj"
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache, Pro-ftpd"
-
 #~ msgid "Automated"
 #~ msgstr "Automatizuar"
 
 #~ msgid "Bad package"
 #~ msgstr "Pako jo e mirë"
 
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Libra dhe Howto's për Linux dhe Softver gratis"
+#~ msgid "Be Free!"
+#~ msgstr "Ekzisto Lirshëm!"
 
 #~ msgid "Boot"
 #~ msgstr "Boot"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "Bibloteka ndërtuese e C dhe C++, programe dhe skedare me përfshirje"
 
 #~ msgid "CD-ROM"
 #~ msgstr "CD-ROM"
@@ -1481,30 +1717,14 @@ msgstr "Braktise"
 #~ msgid "Choosing packages"
 #~ msgstr "Zgjedhi pakot instaluese"
 
-#, fuzzy
-#~ msgid "Cinnamon Workstation"
-#~ msgstr "Stacion punues"
-
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "Klient për protokole të ndryshme me përfshirje në ssh"
-
 #~ msgid "Configure X"
 #~ msgstr "Konfigurim i X"
-
-#~ msgid "Console Tools"
-#~ msgstr "Vegla në konsolë"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "Transferimi i listës së pasqyreve me pako të lira..."
 
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "Bazë e të dhënave"
-
-#~ msgid "Development"
-#~ msgstr "Zhvillimi"
+#~ msgid "Core Release"
+#~ msgstr "Lëshim Bërthamë"
 
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "A posedoni një kartelë zëri ISA?"
@@ -1512,22 +1732,9 @@ msgstr "Braktise"
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "A dëshironi ta përdorni aboot?"
 
-#~ msgid "Documentation"
-#~ msgstr "Dokumentacioni"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "Server i Emrit (DNS) dhe Server i Informacionit (NIS)"
-
 #, fuzzy
 #~ msgid "Downloading file %s..."
 #~ msgstr "Dërgimi i skedareve..."
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "Qendra Kontrolluese Moondrake"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "Botues, interpretues, vegla skedaresh, terminale"
 
 #~ msgid ""
 #~ "Error installing aboot, \n"
@@ -1537,27 +1744,24 @@ msgstr "Braktise"
 #~ "mundohu me instalim të forcuar, edhe pse ai do ta shkatërroj ndarjen e "
 #~ "parë?"
 
-#~ msgid "FTP Server"
-#~ msgstr "Server FTP"
+#~ msgid "For developers!"
+#~ msgstr "Për zhvilluesit!"
 
-#~ msgid "Firewall/Router"
-#~ msgstr "Murë-i-Zjarrtë/Router"
+#~ msgid "For family!"
+#~ msgstr "Për familjen!"
+
+#~ msgid "For kids"
+#~ msgstr "Për fëmijët"
 
 #, fuzzy
 #~ msgid "Formatting"
 #~ msgstr "Vlerësimi në sipër"
 
-#~ msgid "GNOME Workstation"
-#~ msgstr "Stacioni punues Gnome"
-
-#~ msgid "Game station"
-#~ msgstr "Stacion Lojërash"
-
 #~ msgid "Generate auto install floppy"
 #~ msgstr "Krijo një disketë auto instaluese"
 
-#~ msgid "Graphical Environment"
-#~ msgstr "Mjedis Grafikë"
+#~ msgid "Home entertainment"
+#~ msgstr "Argëtim shtëpie "
 
 #~ msgid "IDE"
 #~ msgstr "IDE"
@@ -1566,15 +1770,15 @@ msgstr "Braktise"
 #~ msgid "IceWm Desktop"
 #~ msgstr "Tryeza"
 
+#~ msgid "Install recommended packages"
+#~ msgstr "Instalimi paketave rekomanduara"
+
 #, fuzzy
 #~ msgid "Installation class"
 #~ msgstr "Zgjedhe klasën e instalimit"
 
-#~ msgid "Internet gateway"
-#~ msgstr "Portë kaluese Interneti"
-
-#~ msgid "Internet station"
-#~ msgstr "Stacion Interneti"
+#~ msgid "Join Us!"
+#~ msgstr "Bashkohu me ne!"
 
 #~ msgid "KDE"
 #~ msgstr "KDE"
@@ -1583,18 +1787,12 @@ msgstr "Braktise"
 #~ msgid "KDE Desktop"
 #~ msgstr "Tryeza"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "Stacioni punues KDE"
-
-#~ msgid "Kolab Server"
-#~ msgstr "Server Kolab"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
 #, fuzzy
 #~ msgid "LXQT Desktop"
 #~ msgstr "Tryeza"
+
+#~ msgid "LXQt Desktop"
+#~ msgstr "LXQt Desktop"
 
 #~ msgid "Language"
 #~ msgstr "Zgjedheni gjuhën tuaj"
@@ -1602,15 +1800,8 @@ msgstr "Braktise"
 #~ msgid "License"
 #~ msgstr "Licenca"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "Bazë Standarde e Linux. Përkrahë aplikacione të pjesës së tretë"
-
-#, fuzzy
-#~ msgid "MATE Workstation"
-#~ msgstr "Stacioni punues Gnome"
-
-#~ msgid "Mail"
-#~ msgstr "Mail"
+#~ msgid "Make it yours!"
+#~ msgstr "Bëni atë tuajat!"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Instalimi i Mandriva Linux %s"
@@ -1619,21 +1810,8 @@ msgstr "Braktise"
 #~ msgid "Mandriva Wizards"
 #~ msgstr "Qendra Kontrolluese Mandriva Linux"
 
-#~ msgid "Multimedia station"
-#~ msgstr "Stacion Multimedia"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "Server NFS, server SMB, server Proxy, server ssh"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "Kompjuter Rrjeti (klient)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "Server Kompjuter Rrjeti"
-
-#, fuzzy
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "Vështrimi i Rrjetit (Network)"
+#~ msgid "Moondrake Wizards"
+#~ msgstr "Udhëzuesi Moondrake"
 
 #~ msgid "Networking"
 #~ msgstr "Punimi i rrjetit"
@@ -1649,15 +1827,8 @@ msgstr "Braktise"
 #~ msgid "No sound card detected. Try \"harddrake\" after installation"
 #~ msgstr "Asnjë kartelë e zbuluar. Provo \"harddrake\" mbasë instalimit"
 
-#~ msgid "Office Workstation"
-#~ msgstr "Stacioni Punues në Tryezë"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "Programe për tryezë: trajtues të teksteve (LibreOffice Writer, Kword), "
-#~ "tablues (LibreOffice Calc, Kspread), çfaqës pdf, etj."
+#~ msgid "Nonfree Release"
+#~ msgstr "Lëshim Jofalas"
 
 #, fuzzy
 #~ msgid ""
@@ -1674,22 +1845,12 @@ msgstr "Braktise"
 #~ "Programe për tryezë: trajtues të teksteve (kword, abiword), tablues "
 #~ "(kspread, gnumeric), çfaqës pdf, etj."
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "Mjedise të Tjera Grafike në Tryezë"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "Server i letrave (mail) Postfix"
-
-#, fuzzy
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "Server PostgreSQL apo MariaDB i bazës së të dhënave"
+#~ msgid "Office tools"
+#~ msgstr "Vegla zyre"
 
 #, fuzzy
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "Server PostgreSQL apo MySQL i bazës së të dhënave"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "Server PostgreSQL apo MariaDB i bazës së të dhënave"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "Server PostgreSQL apo MySQL i bazës së të dhënave"
@@ -1700,6 +1861,9 @@ msgstr "Braktise"
 
 #~ msgid "Preparing bootloader..."
 #~ msgstr "Pregatitja e bootloader..."
+
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Përgatitje përmirësim..."
 
 #, fuzzy
 #~ msgid "RazorQT Desktop"
@@ -1715,27 +1879,20 @@ msgstr "Braktise"
 #~ msgstr ""
 #~ "Nise \"sndconfig\" mbasë instalimit për ta konfiguruar kartëlën e zërit"
 
-#~ msgid "SSH Server"
-#~ msgstr "Server SSH"
-
 #~ msgid "Save packages selection"
 #~ msgstr "Regjistroi pakot e zgjedhura"
 
 #~ msgid "Select All"
 #~ msgstr "Zgjedhi Gjithë"
 
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "Programe për lojëra/botime të zërit dhe videos"
-
 #~ msgid "TV card"
 #~ msgstr "Kartelë TV"
 
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr ""
-#~ "Mjedisi i Tryezës K, dhe grafiku basic, i mjedisit me koleksionimin e "
-#~ "veglave"
+#~ msgid "Tainted Release"
+#~ msgstr "Lëshim Prishur"
+
+#~ msgid "Thank you!"
+#~ msgstr "Faleminderit!"
 
 #, fuzzy
 #~ msgid ""
@@ -1758,8 +1915,8 @@ msgstr "Braktise"
 #~ "\n"
 #~ "A dëshironi ta përsëritni instalimin.\n"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "Vegla për të konfiguruar kompjuterin tuaj"
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Ky medium ofron përditësime paketë për të mesëm \"%s\""
 
 #~ msgid "Unable to contact mirror %s"
 #~ msgstr "Nuk mundur të kontaktohet pasqyrja %s"
@@ -1767,37 +1924,8 @@ msgstr "Braktise"
 #~ msgid "Users"
 #~ msgstr "Përdoruesit"
 
-#~ msgid "Web Server"
-#~ msgstr "Server Web"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#, fuzzy
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Konfigurim i Serverit me Terminale Mandriva"
-
 #~ msgid "Welcome"
 #~ msgstr "Mirësevini"
-
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etj."
-
-#, fuzzy
-#~ msgid "Window Maker, Fvwm, etc"
-#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etj."
-
-#~ msgid "Workstation"
-#~ msgstr "Stacion punues"
-
-#, fuzzy
-#~ msgid "XFCE Workstation"
-#~ msgstr "Stacioni punues KDE"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "Stacioni Punues në Tryezë"
 
 #, fuzzy
 #~ msgid ""
@@ -1844,6 +1972,9 @@ msgstr "Braktise"
 #~ "1MB!Instalimi do të vazhdoj, ju duhet të krijoni një ndarje me nisje të "
 #~ "udhëzuar(bootstrap) në DiskDrake"
 
+#~ msgid "Your choice!"
+#~ msgstr "Zgjedhja juaj!"
+
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
@@ -1858,3 +1989,10 @@ msgstr "Braktise"
 #~ "_: Keep these entry short\n"
 #~ "Networking"
 #~ msgstr "Punimi i rrjetit"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Updates"
+#~ msgstr ""
+#~ "_: Mbani këto hyrje të shkurtra\n"
+#~ "Azhurnime"

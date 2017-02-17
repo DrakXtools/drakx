@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2008-09-30 18:23+0200\n"
 "Last-Translator: Dotan Kamber <kamberd@yahoo.com>\n"
 "Language-Team: Hebrew\n"
@@ -310,7 +310,7 @@ msgstr "ניתן למצוא את תמונות המסך אחרי התקנה ב%s"
 msgid "Installation"
 msgstr "התקנה"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "הגדרות"
@@ -432,6 +432,357 @@ msgstr "%d התקנות נכשלו"
 #, fuzzy, c-format
 msgid "Installation of packages failed:"
 msgstr "מתקין חבילה %s"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "תחנת עבודה"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "תחנת עבודה משרדית"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"תוכנות משרד: מעבדי תמלילים (כתבן אופן אופיס, Kword), גיליונות אלקטרונים "
+"(גיליון אופן אופיס, Kspread),מציגי pdf, ועוד"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "תחנת עבודה למשחקים"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "תוכנות לבידור: ארקייד, לוח, אסטרטגיה, ועוד"
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "תחנת עבודה למולטימדיה"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "תוכנות להשמעה או עריכה של קול ווידאו"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "תחנת עבודה לאינטרנט"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"ערכת כלים לקריאה וכתיבת דוא\"ל וחדשות  (pine, mutt, tin..) ולגלישה באינטרנט"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "מחשב רשת (לקוח)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "לקוחות לפרוטוקולים שונים כולל ssh"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "כלי עזר לביצוע הגדרות המחשב שלך"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "כלי מסוף"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "עורכים, מעטפות, כלי קבצים, מסופים"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "פיתוח"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "ספריות פיתוח בC וC++, תוכנות וקבצי include"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "מסמכים"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "ספרים ומדריכים לשימוש בלינוקס ותוכנה חופשית"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "תמיכה בתוכנות צד שלישי. Linux Standard Base"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "שרת איחסון אתרים"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "עבודה בקבוצה"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "שרת Kolab"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "חומת אש/נתב"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "הגנת המערכת בעת חיבור לאינטרנט"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "דואר/קבוצות דיון"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "שרת דואר Postfix, שרת קבוצות דיון Inn"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "שרת ספרייה"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "שרת FTP"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "שרת שמות מתחם ומידע רשת"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "שרת שיתוף קבצים ומדפסות"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "שרת NFS, שרת סמבה"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "מסדי נתונים"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "שרת מסד נתונים MariaDB או PostgreSQL"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "דואר"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "שרת דואר Postfix"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "שרת מסד נתונים MariaDB או PostgreSQL"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "שרת מחשב רשת"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "שרת NFS, שרת SMB, שרת Proxy, שרת ssh"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "סביבה גרפית"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "סביבת העבודה KDE"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr "סביבת שולחן עבודה פופולרית וקלה לשימוש עם מגוון יישומים נלווים"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "סביבת העבודה GNOME"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr "סביבת שולחן עבודה פופולרית וקלה לשימוש עם מגוון יישומים נלווים"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "תחנת עבודה משרדית"
+
+#: share/meta-task/compssUsers.pl:176
+#, fuzzy, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr "סביבת שולחן עבודה פופולרית וקלה לשימוש עם מגוון יישומים נלווים"
+
+#: share/meta-task/compssUsers.pl:181
+#, fuzzy, c-format
+msgid "LXDE Desktop"
+msgstr "שולחן עבודה IceWm"
+
+#: share/meta-task/compssUsers.pl:183
+#, fuzzy, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr "סביבת שולחן עבודה פופולרית וקלה לשימוש עם מגוון יישומים נלווים"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "סביבות עבודה אחרות"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "סביבות עבודה קלילות כגון Window Maker, Enlightenment, Fvwm, ועוד"
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "תוכנות שרות"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "שרת SSH"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "שרת הגדרה תצורה מרחוק Webmin"
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "כלי הגדרת וניטור רשת"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "כלי ניטור, בקרת תהליכים, tcpdump , nmap, ..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "אשפי מנדריבה"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "אשפים להגדרת השרת שלך"
 
 #: steps.pm:85
 #, c-format
@@ -1266,10 +1617,6 @@ msgid ""
 "Exit"
 msgstr "יציאה"
 
-#, fuzzy
-#~ msgid "Plasma Workstation"
-#~ msgstr "תחנת עבודה"
-
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "שולחן עבודה מלא של מנדריבה לינוקס, עם תמיכה"
 
@@ -1279,23 +1626,6 @@ msgstr "יציאה"
 #, fuzzy
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "סביבה גרפית"
-
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr "סביבת שולחן עבודה פופולרית וקלה לשימוש עם מגוון יישומים נלווים"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr "סביבת שולחן עבודה פופולרית וקלה לשימוש עם מגוון יישומים נלווים"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr "סביבת שולחן עבודה פופולרית וקלה לשימוש עם מגוון יישומים נלווים"
 
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment"
@@ -1308,27 +1638,11 @@ msgstr "יציאה"
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "תוכנות לבידור: ארקייד, לוח, אסטרטגיה, ועוד"
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "תוכנות לבידור: ארקייד, לוח, אסטרטגיה, ועוד"
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache, Pro-ftpd"
-
 #~ msgid "Automated"
 #~ msgstr "אוטומטי"
 
 #~ msgid "Bad package"
 #~ msgstr "חבילה פגומה"
-
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "ספרים ומדריכים לשימוש בלינוקס ותוכנה חופשית"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "ספריות פיתוח בC וC++, תוכנות וקבצי include"
 
 #~ msgid "CD-ROM"
 #~ msgstr "תקליטור"
@@ -1337,26 +1651,8 @@ msgstr "יציאה"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "תחנת עבודה"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "לקוחות לפרוטוקולים שונים כולל ssh"
-
-#~ msgid "Console Tools"
-#~ msgstr "כלי מסוף"
-
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "מתחבר לאתר המראה כדי לקבל את רשימת החבילות הזמינות..."
-
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "מסדי נתונים"
-
-#~ msgid "Development"
-#~ msgstr "פיתוח"
-
-#~ msgid "Directory Server"
-#~ msgstr "שרת ספרייה"
 
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "האם יש לך כרטיס קול ISA?"
@@ -1364,21 +1660,8 @@ msgstr "יציאה"
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "האם ברצונך להשתמש בaboot?"
 
-#~ msgid "Documentation"
-#~ msgstr "מסמכים"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "שרת שמות מתחם ומידע רשת"
-
 #~ msgid "Downloading file %s..."
 #~ msgstr "מוריד קובץ %s..."
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "אשפי מנדריבה"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "עורכים, מעטפות, כלי קבצים, מסופים"
 
 #~ msgid ""
 #~ "Error installing aboot, \n"
@@ -1393,29 +1676,8 @@ msgstr "יציאה"
 #~ msgid "Explore Linux easily with Moondrake One"
 #~ msgstr "בדוק את לינוקס בקלות עם מנדריבה One"
 
-#~ msgid "FTP Server"
-#~ msgstr "שרת FTP"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "שרת שיתוף קבצים ומדפסות"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "חומת אש/נתב"
-
-#~ msgid "GNOME Workstation"
-#~ msgstr "סביבת העבודה GNOME"
-
-#~ msgid "Game station"
-#~ msgstr "תחנת עבודה למשחקים"
-
 #~ msgid "Generate auto install floppy"
 #~ msgstr "בניית תקליטון הפעלה אוטומטית"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "סביבה גרפית"
-
-#~ msgid "Groupware"
-#~ msgstr "עבודה בקבוצה"
 
 #~ msgid "IDE"
 #~ msgstr "IDE"
@@ -1427,12 +1689,6 @@ msgstr "יציאה"
 #~ msgid "Install recommended packages"
 #~ msgstr "מתקין חבילה %s"
 
-#~ msgid "Internet gateway"
-#~ msgstr "הגנת המערכת בעת חיבור לאינטרנט"
-
-#~ msgid "Internet station"
-#~ msgstr "תחנת עבודה לאינטרנט"
-
 #~ msgid "KDE"
 #~ msgstr "KDE"
 
@@ -1440,35 +1696,13 @@ msgstr "יציאה"
 #~ msgid "KDE Desktop"
 #~ msgstr "שולחן עבודה IceWm"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "סביבת העבודה KDE"
-
-#~ msgid "Kolab Server"
-#~ msgstr "שרת Kolab"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
-#, fuzzy
-#~ msgid "LXDE Desktop"
-#~ msgstr "שולחן עבודה IceWm"
-
 #, fuzzy
 #~ msgid "LXQT Desktop"
 #~ msgstr "שולחן עבודה IceWm"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "תמיכה בתוכנות צד שלישי. Linux Standard Base"
-
 #, fuzzy
 #~ msgid "MATE Workstation"
 #~ msgstr "סביבת העבודה GNOME"
-
-#~ msgid "Mail"
-#~ msgstr "דואר"
-
-#~ msgid "Mail/News"
-#~ msgstr "דואר/קבוצות דיון"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "התקנת מנדריבה לינוקס %s"
@@ -1479,32 +1713,11 @@ msgstr "יציאה"
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr "מנדריבה: הפצות לצרכים של כל אחד"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "כלי ניטור, בקרת תהליכים, tcpdump , nmap, ..."
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "אשפי מנדריבה"
 
 #~ msgid "Moondrake: distributions for everybody's needs"
 #~ msgstr "מנדריבה: הפצות לצרכים של כל אחד"
-
-#~ msgid "Multimedia station"
-#~ msgstr "תחנת עבודה למולטימדיה"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "שרת NFS, שרת סמבה"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "שרת NFS, שרת SMB, שרת Proxy, שרת ssh"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "מחשב רשת (לקוח)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "שרת מחשב רשת"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "כלי הגדרת וניטור רשת"
 
 #~ msgid ""
 #~ "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1515,16 +1728,6 @@ msgstr "יציאה"
 
 #~ msgid "No sound card detected. Try \"harddrake\" after installation"
 #~ msgstr "לא זוהו כרטיסי קול. יש לנסות את האשף \"harddrake\"  לאחר ההתקנה"
-
-#~ msgid "Office Workstation"
-#~ msgstr "תחנת עבודה משרדית"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "תוכנות משרד: מעבדי תמלילים (כתבן אופן אופיס, Kword), גיליונות אלקטרונים "
-#~ "(גיליון אופן אופיס, Kspread),מציגי pdf, ועוד"
 
 #, fuzzy
 #~ msgid ""
@@ -1545,23 +1748,12 @@ msgstr "יציאה"
 #~ msgid "Office tools"
 #~ msgstr "תחנת עבודה משרדית"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "סביבות עבודה אחרות"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "שרת דואר Postfix"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "שרת דואר Postfix, שרת קבוצות דיון Inn"
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "שרת מסד נתונים MariaDB או PostgreSQL"
+#, fuzzy
+#~ msgid "Plasma Workstation"
+#~ msgstr "תחנת עבודה"
 
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "שרת מסד נתונים MySQL או PostgreSQL"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "שרת מסד נתונים MariaDB או PostgreSQL"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "שרת מסד נתונים MySQL או PostgreSQL"
@@ -1577,9 +1769,6 @@ msgstr "יציאה"
 #~ msgid "Preparing upgrade..."
 #~ msgstr "מכין את מנהל האתחול..."
 
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
-
 #, fuzzy
 #~ msgid "RazorQT Desktop"
 #~ msgstr "שולחן עבודה IceWm"
@@ -1594,35 +1783,17 @@ msgstr "יציאה"
 #~ "עליך להריץ את \"alsaconf\" או \"sndconfig\" אחרי ההתקנה בכדי להגדיר את "
 #~ "כרטיס הקול שלך"
 
-#~ msgid "SSH Server"
-#~ msgstr "שרת SSH"
-
 #~ msgid "Save packages selection"
 #~ msgstr "שמירת בחירת החבילות"
 
 #~ msgid "Select All"
 #~ msgstr "בחר את הכל"
 
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "ערכת כלים לקריאה וכתיבת דוא\"ל וחדשות  (pine, mutt, tin..) ולגלישה "
-#~ "באינטרנט"
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "תוכנות להשמעה או עריכה של קול ווידאו"
-
 #~ msgid "The 100%% open source Mandriva Linux distribution"
 #~ msgstr "הפצת מנדריבה לינוקס שהיא 100%% קוד פתוח"
 
 #~ msgid "The 100%% open source Moondrake distribution"
 #~ msgstr "הפצת מנדריבה לינוקס שהיא 100%% קוד פתוח"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr "סביבת שולחן עבודה פופולרית וקלה לשימוש עם מגוון יישומים נלווים"
 
 #, fuzzy
 #~ msgid ""
@@ -1647,9 +1818,6 @@ msgstr "יציאה"
 #~ msgid "This medium provides package updates for medium \"%s\""
 #~ msgstr "דלג על כל החבילות ממקור \"%s\""
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "כלי עזר לביצוע הגדרות המחשב שלך"
-
 #~ msgid "Unable to contact mirror %s"
 #~ msgstr "לא יכול להתחבר לאתר המראה  %s"
 
@@ -1659,45 +1827,16 @@ msgstr "יציאה"
 #~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 #~ msgstr "שרוג מהפצת 64ביט להפצת 32 ביט אינו נתמך"
 
-#~ msgid "Utilities"
-#~ msgstr "תוכנות שרות"
-
-#~ msgid "Web Server"
-#~ msgstr "שרת איחסון אתרים"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "שרת הגדרה תצורה מרחוק Webmin"
-
 #~ msgid "Welcome"
 #~ msgstr "ברוך בואך"
-
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "סביבות עבודה קלילות כגון Window Maker, Enlightenment, Fvwm, ועוד"
 
 #, fuzzy
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "סביבות עבודה קלילות כגון Window Maker, Enlightenment, Fvwm, ועוד"
 
-#~ msgid "Wizards to configure server"
-#~ msgstr "אשפים להגדרת השרת שלך"
-
-#~ msgid "Workstation"
-#~ msgstr "תחנת עבודה"
-
 #, fuzzy
 #~ msgid "XFCE Workstation"
 #~ msgstr "סביבת העבודה KDE"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "תחנת עבודה משרדית"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

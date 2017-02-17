@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-ky\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2009-04-18 19:08+0600\n"
 "Last-Translator: Ilyas Bakirov <just_ilyas@yahoo.com>\n"
 "Language-Team: Kyrgyz\n"
@@ -307,7 +307,7 @@ msgstr "Орнотуудан кийин скриншоттор %s ичинде �
 msgid "Installation"
 msgstr "Орнотуу"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "Конфигурациялоо"
@@ -432,6 +432,372 @@ msgstr "%d орнотуу транзакциялары ишке ашпады"
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "Пакеттердин орнотулушу ийгиликсиз аяктады:"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "Иш станциясы"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "Офис станциясы"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Офис программалары: текст процессорлору (LibreOffice Writer, Kword), "
+"электрондук таблицалар  (LibreOffice Calc, Kspread), pdf файлдарын көрүү "
+"программалары, ж.б."
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "Оюн станциясы"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr ""
+"Оюн-зоок программалары: аркада оюндары, тактай оюндары, стратегия оюндары, ж."
+"б."
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "Мультимедиа станциясы"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Үн жана видео ойнотуу/терүү программалары"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Интернет станциясы"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Почтаны жана жаңылыктарды (mutt, tin..) окууга жана жөнөтүүгө, жана вебде "
+"иштөөгө арналган куралдар тобу"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Тармак компьютери (клиент)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Ар түрдүү протоколдор клиенттери, ssh да кошулган"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Компьютериңизди жеңил конфигурациялоо куралдары"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Консоль куралдары"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "Редакторлор, шелдер, файл куралдары, терминалдар"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "Иштеп түзүү"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr ""
+"C жана C++ иштеп чыгуу библиотекалары, программалар жана include файлдары"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "Документация"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Linux жана Free Software жөнүндөгү китептер жана HOWTOлар"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr ""
+"Linux стандарттык базасы. Үчүнчү тараптык иштеп чыгуучулардын тиркемелерин "
+"колдоо"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "Веб-сервери"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "Groupware"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Kolab сервери"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "Файрволл/Маршруттагыч"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "Интернет дарбазасы"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "Почта/Жаңылыктар"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Postfix почта сервери, Inn жаңылыктар сервери"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "Каталогдор сервери"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "FTP сервери"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "DNS жана NIS"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Файл жана принтер бөлүшүү сервери"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "NFS сервери, Samba сервери"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "Берилиштер базасы"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "PostgreSQL жана MariaDB берилиштер базасынын сервери"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "Почта"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Postfix почта сервери"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "PostgreSQL же MariaDB берилиштер базасынын сервери"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "Тармак сервери"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "NFS сервери, SMB сервери, Proxy сервери, ssh сервери"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "Графикалык чөйрө"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "KDE иш станциясы"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"K Desktop Environment - негизги графикалык чөйрө, кошумча куралдар "
+"коллекциясы менен"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "GNOME иш станциясы"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"Колдонуучуга ыңгайлашкан тиркемелерин жана иш столунун кураларын камтыган "
+"графикалык чөйрө"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "Офис станциясы"
+
+#: share/meta-task/compssUsers.pl:176
+#, fuzzy, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr ""
+"Колдонуучуга ыңгайлашкан тиркемелерин жана иш столунун кураларын камтыган "
+"графикалык чөйрө"
+
+#: share/meta-task/compssUsers.pl:181
+#, c-format
+msgid "LXDE Desktop"
+msgstr "LXDE иш столу"
+
+#: share/meta-task/compssUsers.pl:183
+#, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"Колдонуучуга ыңгайлашкан тиркемелерин жана иш столунун кураларын камтыган "
+"графикалык чөйрө"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Башка графикалык иш столдору"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Window Maker, Enlightenment, Fvwm, ж.б. "
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "Утилиталар"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "SSH сервери"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Webmin узактан башкаруу сервери"
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Тармак аспаптары/Мониторинг"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "Мониторинг аспаптар, процесс эсептүүчүлөр, tcpdump, nmap, ..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "Moondrake Усталары"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "Серверди ырастоо усталары"
 
 #: steps.pm:85
 #, c-format
@@ -1281,14 +1647,6 @@ msgid ""
 "Exit"
 msgstr "Чыгуу"
 
-#, fuzzy
-#~ msgid "LXQt Desktop"
-#~ msgstr "LXDE иш столу"
-
-#, fuzzy
-#~ msgid "Plasma Workstation"
-#~ msgstr "Иш станциясы"
-
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Толук Mandriva Linux иш столу жардам менен"
 
@@ -1298,28 +1656,6 @@ msgstr "Чыгуу"
 #, fuzzy
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "Графикалык чөйрө"
-
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "Колдонуучуга ыңгайлашкан тиркемелерин жана иш столунун кураларын камтыган "
-#~ "графикалык чөйрө"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "Колдонуучуга ыңгайлашкан тиркемелерин жана иш столунун кураларын камтыган "
-#~ "графикалык чөйрө"
-
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "Колдонуучуга ыңгайлашкан тиркемелерин жана иш столунун кураларын камтыган "
-#~ "графикалык чөйрө"
 
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment"
@@ -1341,33 +1677,14 @@ msgstr "Чыгуу"
 #~ "Оюн-зоок программалары: аркада оюндары, тактай оюндары, стратегия "
 #~ "оюндары, ж.б."
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr ""
-#~ "Оюн-зоок программалары: аркада оюндары, тактай оюндары, стратегия "
-#~ "оюндары, ж.б."
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache, Pro-ftpd"
-
 #~ msgid "Automated"
 #~ msgstr "Автоматтык"
 
 #~ msgid "Bad package"
 #~ msgstr "Туура эмес пакет"
 
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Linux жана Free Software жөнүндөгү китептер жана HOWTOлар"
-
 #~ msgid "Boot"
 #~ msgstr "Жүктөө"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr ""
-#~ "C жана C++ иштеп чыгуу библиотекалары, программалар жана include файлдары"
 
 #~ msgid "CD-ROM"
 #~ msgstr "CD-ROM"
@@ -1380,45 +1697,14 @@ msgstr "Чыгуу"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Иш станциясы"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "Ар түрдүү протоколдор клиенттери, ssh да кошулган"
-
 #~ msgid "Configure X"
 #~ msgstr "X конфигурациялоо"
-
-#~ msgid "Console Tools"
-#~ msgstr "Консоль куралдары"
-
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "Берилиштер базасы"
-
-#~ msgid "Development"
-#~ msgstr "Иштеп түзүү"
-
-#~ msgid "Directory Server"
-#~ msgstr "Каталогдор сервери"
 
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "Сизде ISA добуш карточкасы барбы?"
 
-#~ msgid "Documentation"
-#~ msgstr "Документация"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "DNS жана NIS"
-
 #~ msgid "Downloading file %s..."
 #~ msgstr "%s файлы жүктөөлүп жатат..."
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "Moondrake Усталары"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "Редакторлор, шелдер, файл куралдары, терминалдар"
 
 #~ msgid "Explore Linux easily with Mandriva One"
 #~ msgstr "Linux'ту Mandriva One менен аралап үйрөнүү"
@@ -1426,30 +1712,9 @@ msgstr "Чыгуу"
 #~ msgid "Explore Linux easily with Moondrake One"
 #~ msgstr "Linux'ту Moondrake One менен аралап үйрөнүү"
 
-#~ msgid "FTP Server"
-#~ msgstr "FTP сервери"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "Файл жана принтер бөлүшүү сервери"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "Файрволл/Маршруттагыч"
-
 #, fuzzy
 #~ msgid "Formatting"
 #~ msgstr "Болжолдуу убакыт"
-
-#~ msgid "GNOME Workstation"
-#~ msgstr "GNOME иш станциясы"
-
-#~ msgid "Game station"
-#~ msgstr "Оюн станциясы"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "Графикалык чөйрө"
-
-#~ msgid "Groupware"
-#~ msgstr "Groupware"
 
 #~ msgid "Gwenview"
 #~ msgstr "Gwenview"
@@ -1486,48 +1751,23 @@ msgstr "Чыгуу"
 #~ "Эскертүү : \"Жаңы орнотулуш\" тандоодон мурун, бардык жеке\n"
 #~ "маалыматтарды архивдөө менен көчүрүп алышыңыз керек."
 
-#~ msgid "Internet gateway"
-#~ msgstr "Интернет дарбазасы"
-
-#~ msgid "Internet station"
-#~ msgstr "Интернет станциясы"
-
 #~ msgid "KDE"
 #~ msgstr "KDE"
 
 #~ msgid "KDE Desktop"
 #~ msgstr "KDE иш столу"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "KDE иш станциясы"
-
-#~ msgid "Kolab Server"
-#~ msgstr "Kolab сервери"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
-#~ msgid "LXDE Desktop"
-#~ msgstr "LXDE иш столу"
-
 #, fuzzy
 #~ msgid "LXQT Desktop"
 #~ msgstr "LXDE иш столу"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr ""
-#~ "Linux стандарттык базасы. Үчүнчү тараптык иштеп чыгуучулардын "
-#~ "тиркемелерин колдоо"
+#, fuzzy
+#~ msgid "LXQt Desktop"
+#~ msgstr "LXDE иш столу"
 
 #, fuzzy
 #~ msgid "MATE Workstation"
 #~ msgstr "GNOME иш станциясы"
-
-#~ msgid "Mail"
-#~ msgstr "Почта"
-
-#~ msgid "Mail/News"
-#~ msgstr "Почта/Жаңылыктар"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linux %s орнотуу"
@@ -1538,32 +1778,11 @@ msgstr "Чыгуу"
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr "Mandriva: ар бирдин керектеген дистрибутив"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "Мониторинг аспаптар, процесс эсептүүчүлөр, tcpdump, nmap, ..."
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "Moondrake Усталары"
 
 #~ msgid "Moondrake: distributions for everybody's needs"
 #~ msgstr "Moondrake: ар бирдин керектеген дистрибутив"
-
-#~ msgid "Multimedia station"
-#~ msgstr "Мультимедиа станциясы"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "NFS сервери, Samba сервери"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "NFS сервери, SMB сервери, Proxy сервери, ssh сервери"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "Тармак компьютери (клиент)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "Тармак сервери"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "Тармак аспаптары/Мониторинг"
 
 #~ msgid "Networking"
 #~ msgstr "Тармактар"
@@ -1580,17 +1799,6 @@ msgstr "Чыгуу"
 #~ msgstr ""
 #~ "Эч кандай добуш карточкасы табылган жок. Орнотуудан кийин \"harddrake\" "
 #~ "кайталап көрүңүз"
-
-#~ msgid "Office Workstation"
-#~ msgstr "Офис станциясы"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "Офис программалары: текст процессорлору (LibreOffice Writer, Kword), "
-#~ "электрондук таблицалар  (LibreOffice Calc, Kspread), pdf файлдарын көрүү "
-#~ "программалары, ж.б."
 
 #, fuzzy
 #~ msgid ""
@@ -1612,23 +1820,12 @@ msgstr "Чыгуу"
 #~ msgid "Office tools"
 #~ msgstr "Офис станциясы"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "Башка графикалык иш столдору"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "Postfix почта сервери"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Postfix почта сервери, Inn жаңылыктар сервери"
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "PostgreSQL жана MariaDB берилиштер базасынын сервери"
+#, fuzzy
+#~ msgid "Plasma Workstation"
+#~ msgstr "Иш станциясы"
 
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "PostgreSQL жана MySQL берилиштер базасынын сервери"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "PostgreSQL же MariaDB берилиштер базасынын сервери"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "PostgreSQL же MySQL берилиштер базасынын сервери"
@@ -1643,9 +1840,6 @@ msgstr "Чыгуу"
 #, fuzzy
 #~ msgid "Preparing upgrade..."
 #~ msgstr "Система жүктөөгүч даярдалууда..."
-
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
 
 #~ msgid "Proceed"
 #~ msgstr "Аткарылды"
@@ -1664,21 +1858,8 @@ msgstr "Чыгуу"
 #~ "Үн картасын ырастоо үчүн орнотуудан кийин \"alsaconf\" же \"sndconfig\" "
 #~ "коммандаларын аткарыңыз"
 
-#~ msgid "SSH Server"
-#~ msgstr "SSH сервери"
-
 #~ msgid "Save packages selection"
 #~ msgstr "Тандалган пакеттерди сактоо"
-
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "Почтаны жана жаңылыктарды (mutt, tin..) окууга жана жөнөтүүгө, жана вебде "
-#~ "иштөөгө арналган куралдар тобу"
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "Үн жана видео ойнотуу/терүү программалары"
 
 #~ msgid "TV card"
 #~ msgstr "ТВ-карта"
@@ -1688,13 +1869,6 @@ msgstr "Чыгуу"
 
 #~ msgid "The 100%% open source Moondrake distribution"
 #~ msgstr "100%% ачык кодду Moondrake дистрибутиви"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr ""
-#~ "K Desktop Environment - негизги графикалык чөйрө, кошумча куралдар "
-#~ "коллекциясы менен"
 
 #, fuzzy
 #~ msgid ""
@@ -1708,9 +1882,6 @@ msgstr "Чыгуу"
 #~ msgid "This medium provides package updates for medium \"%s\""
 #~ msgstr "\"%s\" ичинен бардык пакеттерди аттап өтүү"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "Компьютериңизди жеңил конфигурациялоо куралдары"
-
 #~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 #~ msgstr "32bit тен 64bit ке жаңылоо мүмкүе эмес"
 
@@ -1720,45 +1891,16 @@ msgstr "Чыгуу"
 #~ msgid "Users"
 #~ msgstr "Колдонуучулар"
 
-#~ msgid "Utilities"
-#~ msgstr "Утилиталар"
-
-#~ msgid "Web Server"
-#~ msgstr "Веб-сервери"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Webmin узактан башкаруу сервери"
-
 #~ msgid "Welcome"
 #~ msgstr "Кош келиңиз"
-
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Window Maker, Enlightenment, Fvwm, ж.б. "
 
 #, fuzzy
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Window Maker, Enlightenment, Fvwm, ж.б. "
 
-#~ msgid "Wizards to configure server"
-#~ msgstr "Серверди ырастоо усталары"
-
-#~ msgid "Workstation"
-#~ msgstr "Иш станциясы"
-
 #, fuzzy
 #~ msgid "XFCE Workstation"
 #~ msgstr "KDE иш станциясы"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "Офис станциясы"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

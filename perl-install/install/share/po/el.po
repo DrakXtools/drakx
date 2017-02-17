@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2010-02-11 18:37+0100\n"
 "Last-Translator: Glentadakis Dimitrios\n"
 "Language-Team: Greek <translators_team@mandrivalinux.gr>\n"
@@ -328,7 +328,7 @@ msgstr "Τα στιγμιότυπα θα είναι διαθέσιμα μετά 
 msgid "Installation"
 msgstr "Εγκατάσταση"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "Ρύθμιση"
@@ -454,6 +454,361 @@ msgstr "Η %d συναλλαγή εγκατάστασης απέτυχε"
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "Η εγκατάσταση των πακέτων απέτυχε :"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "Σταθμός Εργασίας"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "Σταθμός Εργασίας Γραφείου"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Εργαλεία γραφείου: επεξεργαστές κειμένου (LibreOffice Writer, Kword), "
+"λογιστικών φύλλων (LibreOffice Calc, Kspread), προβολείς pdf, κλπ"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "Σταθμός παιχνιδιών"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "Διασκέδαση (παιχνίδια)"
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "Σταθμός πολυμέσων"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Προγράμματα αναπαραγωγής και διαχείρισης video και ήχου"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Σταθμός Διαδικτύου"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Εργαλεία για αποστολή και λήψη αλληλογραφίας και ειδήσεων (mutt, tin...) και "
+"περιήγηση στο Διαδίκτυο"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Υπολογιστής Δικτύου (πελάτης)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Πελάτες για διαφορετικά πρωτόκολλα συμπεριλαμβανομένου του ssh"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Εργαλεία για διευκόλυνση της ρύθμισης του υπολογιστή σας"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Εργαλεία Κονσόλας"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "Επεξεργαστές κειμένου, κελύφη, εργαλεία αρχείων, τερματικά"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "Ανάπτυξη"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "Βιβλιοθήκες ανάπτυξης C και C++, προγράμματα και άλλα αρχεία"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "Τεκμηρίωση"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Βιβλία και οδηγοί για το Linux και το Ελεύθερο Λογισμικό"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "Linux Standard Base. Υποστήριξη εφαρμογών τρίτων"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "Εξυπηρετητής Ιστοσελίδων"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "Groupware"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Εξυπηρετητής του Kolab"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "Τοίχος Προστασίας/Δρομολογητής"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "Πύλη Διαδικτύου"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "Αλληλογραφία/Νέα"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Postfix server ταχυδρομείου, Inn server ειδήσεων"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "Εξυπηρετητής Καταλόγων"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "Διακομιστής FTP"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "Εξυπηρετητής Όνομα Τομέα και Πληροφοριών Δικτύου"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Εξυπηρετητής Κοινής Χρήσης Αρχείων και Εκτυπώσεων"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "Εξυπηρετητής NFS, εξυπηρετητής Samba"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "Βάση Δεδομένων"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "Εξυπηρετητής βάσης δεδομένων PostgreSQL και MariaDB"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "Ταχυδρομείο"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Εξυπηρετητής ταχυδρομείου Postfix"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "Εξυπηρετητής βάσης δεδομένων PostgreSQL ή MariaDB"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "Εξυπηρετητής δικτύου"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr ""
+"εξυπηρετητής NFS, εξυπηρετητής SMB, εξυπηρετητής Proxy, εξυπηρετητής ssh"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "Γραφικό Περιβάλλον"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "Σταθμός εργασίας KDE"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr "Το περιβάλλον γραφείου KDE με μια συλλογή συνοδευτικών εργαλείων"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "Σταθμός Εργασίας Gnome"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr "Γραφικό περιβάλλον με φιλικά εργαλεία και εφαρμογές"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "Σταθμός Εργασίας Γραφείου"
+
+#: share/meta-task/compssUsers.pl:176
+#, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr "Ένα ελαφρύ γραφικό περιβάλλον με φιλικά εργαλεία και εφαρμογές"
+
+#: share/meta-task/compssUsers.pl:181
+#, c-format
+msgid "LXDE Desktop"
+msgstr "LXDE Γραφικό Περιβάλλον Εργασίας"
+
+#: share/meta-task/compssUsers.pl:183
+#, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"Ένα ελαφρύ & γρήγορο γραφικό περιβάλλον με ένα σύνολο φιλικών εργαλείων και "
+"εφαρμογών"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Άλλα γραφικά περιβάλλοντα"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Window Maker, Enlightenment, Fvwm, κλπ"
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "Εργαλεία"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "Εξυπηρετητής SSH"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Webmin Server Απομακρυσμένης Ρύθμισης"
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Εργαλεία Δικτύου/Παρακολούθηση"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "Εργαλεία παρακολούθησης, απολογισμός διεργασιών, tcpdump, nmap, ..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "Οδηγοί Moondrake"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "Οδηγοί για τη ρύθμιση εξυπηρετητή"
 
 #: steps.pm:85
 #, c-format
@@ -1323,12 +1678,6 @@ msgid ""
 "Exit"
 msgstr "Έξοδος"
 
-#~ msgid "LXQt Desktop"
-#~ msgstr "Περιβάλλον εργασίας LXQt"
-
-#~ msgid "Plasma Workstation"
-#~ msgstr "Σταθμός εργασίας Plasma"
-
 #~ msgid "%d packages"
 #~ msgstr "%d πακέτα"
 
@@ -1343,25 +1692,8 @@ msgstr "Έξοδος"
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "Γραφικό περιβάλλον βασισμένο στο GNOME"
 
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr "Γραφικό περιβάλλον με φιλικά εργαλεία και εφαρμογές"
-
 #~ msgid "A less developed lightweight fast graphical environment"
 #~ msgstr "Ένα υποανάπτυξη ελαφρύ και γρήγορο γραφικό περιβάλλον"
-
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr "Ένα ελαφρύ γραφικό περιβάλλον με φιλικά εργαλεία και εφαρμογές"
-
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "Ένα ελαφρύ & γρήγορο γραφικό περιβάλλον με ένα σύνολο φιλικών εργαλείων "
-#~ "και εφαρμογών"
 
 #~ msgid "A lightweight fast graphical environment"
 #~ msgstr "Ένα ελαφρύ και γρήγορο γραφικό περιβάλλον"
@@ -1380,16 +1712,6 @@ msgstr "Έξοδος"
 #~ "Προγράμματα διασκέδασης: ηλεκτρονικά παιχνίδια, επιτραπέζια, στρατηγικής, "
 #~ "κλπ"
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "Διασκέδαση (παιχνίδια)"
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache, Pro-ftpd"
-
 #~ msgid "Automated"
 #~ msgstr "Αυτόματο"
 
@@ -1399,14 +1721,8 @@ msgstr "Έξοδος"
 #~ msgid "Be Free!"
 #~ msgstr "Ελευθερωθείτε!"
 
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Βιβλία και οδηγοί για το Linux και το Ελεύθερο Λογισμικό"
-
 #~ msgid "Boot"
 #~ msgstr "Εκκίνηση"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "Βιβλιοθήκες ανάπτυξης C και C++, προγράμματα και άλλα αρχεία"
 
 #~ msgid "CD-ROM"
 #~ msgstr "CD-ROM"
@@ -1428,14 +1744,8 @@ msgstr "Έξοδος"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Σταθμός εργασίας Cinnamon"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "Πελάτες για διαφορετικά πρωτόκολλα συμπεριλαμβανομένου του ssh"
-
 #~ msgid "Configure X"
 #~ msgstr "Ρύθμιση Χ"
-
-#~ msgid "Console Tools"
-#~ msgstr "Εργαλεία Κονσόλας"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "Σύνδεση με τον τόπο για την λήψη των διαθέσιμων πακέτων..."
@@ -1443,39 +1753,14 @@ msgstr "Έξοδος"
 #~ msgid "Core Release"
 #~ msgstr "Core Release"
 
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "Βάση Δεδομένων"
-
-#~ msgid "Development"
-#~ msgstr "Ανάπτυξη"
-
-#~ msgid "Directory Server"
-#~ msgstr "Εξυπηρετητής Καταλόγων"
-
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "Έχετε κάρτα ήχου ISA;"
 
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "Θέλετε να χρησιμοποιήσετε το aboot;"
 
-#~ msgid "Documentation"
-#~ msgstr "Τεκμηρίωση"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "Εξυπηρετητής Όνομα Τομέα και Πληροφοριών Δικτύου"
-
 #~ msgid "Downloading file %s..."
 #~ msgstr "Λήψη αρχείου %s..."
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "Οδηγοί Moondrake"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "Επεξεργαστές κειμένου, κελύφη, εργαλεία αρχείων, τερματικά"
 
 #~ msgid "Enlightenment e17 Desktop"
 #~ msgstr "Περιβάλλον εργασίας Enlightenment e17 "
@@ -1490,15 +1775,6 @@ msgstr "Έξοδος"
 
 #~ msgid "Explore Linux easily with Mandriva One"
 #~ msgstr "Εξερεύνησε το Λίνουξ, εύκολα, με το Mandriva One"
-
-#~ msgid "FTP Server"
-#~ msgstr "Διακομιστής FTP"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "Εξυπηρετητής Κοινής Χρήσης Αρχείων και Εκτυπώσεων"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "Τοίχος Προστασίας/Δρομολογητής"
 
 #~ msgid "For contributors"
 #~ msgstr "Για συνεισφέροντες"
@@ -1522,20 +1798,8 @@ msgstr "Έξοδος"
 #~ msgid "Formatting"
 #~ msgstr "Εκτίμηση"
 
-#~ msgid "GNOME Workstation"
-#~ msgstr "Σταθμός Εργασίας Gnome"
-
-#~ msgid "Game station"
-#~ msgstr "Σταθμός παιχνιδιών"
-
 #~ msgid "Generate auto install floppy"
 #~ msgstr "Δημιουργία δισκέτας αυτόματης εγκατάστασης"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "Γραφικό Περιβάλλον"
-
-#~ msgid "Groupware"
-#~ msgstr "Groupware"
 
 #~ msgid "Gwenview"
 #~ msgstr "Gwenview"
@@ -1575,12 +1839,6 @@ msgstr "Έξοδος"
 #~ "δεδομένων πριν επιλέξετε\n"
 #~ "«Νέα εγκατάσταση»."
 
-#~ msgid "Internet gateway"
-#~ msgstr "Πύλη Διαδικτύου"
-
-#~ msgid "Internet station"
-#~ msgstr "Σταθμός Διαδικτύου"
-
 #~ msgid "Join Us!"
 #~ msgstr "Ελάτε μαζί μας!"
 
@@ -1590,20 +1848,11 @@ msgstr "Έξοδος"
 #~ msgid "KDE Desktop"
 #~ msgstr "KDE Γραφικό Περιβάλλον Εργασίας"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "Σταθμός εργασίας KDE"
-
-#~ msgid "Kolab Server"
-#~ msgstr "Εξυπηρετητής του Kolab"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
-#~ msgid "LXDE Desktop"
-#~ msgstr "LXDE Γραφικό Περιβάλλον Εργασίας"
-
 #~ msgid "LXQT Desktop"
 #~ msgstr "Περιβάλλον εργασίας LXQT"
+
+#~ msgid "LXQt Desktop"
+#~ msgstr "Περιβάλλον εργασίας LXQt"
 
 #~ msgid "Language"
 #~ msgstr "Επιλέξτε γλώσσα"
@@ -1611,17 +1860,8 @@ msgstr "Έξοδος"
 #~ msgid "License"
 #~ msgstr "Άδεια Χρήσης"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "Linux Standard Base. Υποστήριξη εφαρμογών τρίτων"
-
 #~ msgid "MATE Workstation"
 #~ msgstr "Σταθμός Εργασίας MATE"
-
-#~ msgid "Mail"
-#~ msgstr "Ταχυδρομείο"
-
-#~ msgid "Mail/News"
-#~ msgstr "Αλληλογραφία/Νέα"
 
 #~ msgid "Make it yours!"
 #~ msgstr "Κάντε τη δική σας!"
@@ -1635,33 +1875,11 @@ msgstr "Έξοδος"
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr "Mandriva: συστήματα Λίνουξ για όλες τις χρήσεις"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "Εργαλεία παρακολούθησης, απολογισμός διεργασιών, tcpdump, nmap, ..."
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "Οδηγοί Moondrake"
 
 #~ msgid "Moondrake, the new Linux distribution"
 #~ msgstr "Moondrake, η νέα διανομή Linux"
-
-#~ msgid "Multimedia station"
-#~ msgstr "Σταθμός πολυμέσων"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "Εξυπηρετητής NFS, εξυπηρετητής Samba"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr ""
-#~ "εξυπηρετητής NFS, εξυπηρετητής SMB, εξυπηρετητής Proxy, εξυπηρετητής ssh"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "Υπολογιστής Δικτύου (πελάτης)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "Εξυπηρετητής δικτύου"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "Εργαλεία Δικτύου/Παρακολούθηση"
 
 #~ msgid "Networking"
 #~ msgstr "Δικτύωση"
@@ -1681,16 +1899,6 @@ msgstr "Έξοδος"
 #~ msgid "Nonfree Release"
 #~ msgstr "Nonfree Release"
 
-#~ msgid "Office Workstation"
-#~ msgstr "Σταθμός Εργασίας Γραφείου"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "Εργαλεία γραφείου: επεξεργαστές κειμένου (LibreOffice Writer, Kword), "
-#~ "λογιστικών φύλλων (LibreOffice Calc, Kspread), προβολείς pdf, κλπ"
-
 #~ msgid ""
 #~ "Office programs: wordprocessors (OpenOffice.org Writer, Kword), "
 #~ "spreadsheets (OpenOffice.org Calc, Kspread), PDF viewers, etc"
@@ -1708,26 +1916,14 @@ msgstr "Έξοδος"
 #~ msgid "Office tools"
 #~ msgstr "Εργαλεία γραφείου"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "Άλλα γραφικά περιβάλλοντα"
-
 #~ msgid "People!"
 #~ msgstr "Άνθρωποι!"
 
-#~ msgid "Postfix mail server"
-#~ msgstr "Εξυπηρετητής ταχυδρομείου Postfix"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Postfix server ταχυδρομείου, Inn server ειδήσεων"
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "Εξυπηρετητής βάσης δεδομένων PostgreSQL και MariaDB"
+#~ msgid "Plasma Workstation"
+#~ msgstr "Σταθμός εργασίας Plasma"
 
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "PostgreSQL και MySQL Database Server"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "Εξυπηρετητής βάσης δεδομένων PostgreSQL ή MariaDB"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "Εξυπηρετητής βάσης δεδομένων PostgreSQL ή MySQL"
@@ -1741,9 +1937,6 @@ msgstr "Έξοδος"
 
 #~ msgid "Preparing upgrade..."
 #~ msgstr "Προετοιμασία της αναβάθμισης..."
-
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
 
 #~ msgid "Proceed"
 #~ msgstr "Συνέχεια"
@@ -1761,24 +1954,11 @@ msgstr "Έξοδος"
 #~ "Εκτέλεσε την εντολή \"alsaconf\" ή \"sndconfig\", μετά την εγκατάσταση, "
 #~ "για να ρυθμίσεις την κάρτα ήχου"
 
-#~ msgid "SSH Server"
-#~ msgstr "Εξυπηρετητής SSH"
-
 #~ msgid "Save packages selection"
 #~ msgstr "Αποθήκευση επιλογής πακέτων"
 
 #~ msgid "Select All"
 #~ msgstr "Επιλογή όλων"
-
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "Εργαλεία για αποστολή και λήψη αλληλογραφίας και ειδήσεων (mutt, tin...) "
-#~ "και περιήγηση στο Διαδίκτυο"
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "Προγράμματα αναπαραγωγής και διαχείρισης video και ήχου"
 
 #~ msgid "TV card"
 #~ msgstr "Κάρτα TV"
@@ -1791,11 +1971,6 @@ msgstr "Έξοδος"
 
 #~ msgid "The 100%% open source Mandriva Linux distribution"
 #~ msgstr "Η 100%% ανοιχτού κώδικα, διανομή του Mandriva Linux"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr "Το περιβάλλον γραφείου KDE με μια συλλογή συνοδευτικών εργαλείων"
 
 #~ msgid ""
 #~ "The Plasma Desktop, the basic graphical environment with a collection of "
@@ -1820,9 +1995,6 @@ msgstr "Έξοδος"
 #~ msgid "This medium provides package updates for medium \"%s\""
 #~ msgstr "Αυτό το μέσο παρέχει ενημερώσεις πακέτων για το μέσο «%s»"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "Εργαλεία για διευκόλυνση της ρύθμισης του υπολογιστή σας"
-
 #~ msgid "Unable to contact mirror %s"
 #~ msgstr "Αδυναμία επικοινωνίας με την εναλλακτική τοποθεσία %s"
 
@@ -1835,46 +2007,17 @@ msgstr "Έξοδος"
 #~ msgid "Users"
 #~ msgstr "Χρήστες"
 
-#~ msgid "Utilities"
-#~ msgstr "Εργαλεία"
-
-#~ msgid "Web Server"
-#~ msgstr "Εξυπηρετητής Ιστοσελίδων"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Webmin Server Απομακρυσμένης Ρύθμισης"
-
 #~ msgid "Welcome"
 #~ msgstr "Καλώς ήρθατε"
 
 #~ msgid "Welcome!"
 #~ msgstr "Καλώς ήρθατε!"
 
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Window Maker, Enlightenment, Fvwm, κλπ"
-
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Window Maker, Fvwm, κλπ"
 
-#~ msgid "Wizards to configure server"
-#~ msgstr "Οδηγοί για τη ρύθμιση εξυπηρετητή"
-
-#~ msgid "Workstation"
-#~ msgstr "Σταθμός Εργασίας"
-
 #~ msgid "XFCE Workstation"
 #~ msgstr "Σταθμός εργασίας XFCE"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "Σταθμός Εργασίας Γραφείου"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

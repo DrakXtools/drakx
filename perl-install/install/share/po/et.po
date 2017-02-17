@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-et\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2009-09-14 16:59+0200\n"
 "Last-Translator: Marek Laane <bald@starman.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -313,7 +313,7 @@ msgstr "Ekraanipildid asuvad pärast paigaldamist asukohas %s"
 msgid "Installation"
 msgstr "Paigaldamine"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "Seadistamine"
@@ -436,6 +436,361 @@ msgstr "%d paigaldamistehingut nurjus"
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "Pakettide paigaldamine nurjus:"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "Tööjaam"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "Kontori-tööjaam"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Kontoritöö programmid: tekstitöötlus (LibreOffice Writer, KWord), "
+"tabelitöötlus (LibreOffice Calc, KSpread), PDF-failide näitajad jne"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "Mänguvahend"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "Meelelahutus: põnevus-, laua-, strateegiamängud jne"
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "Multimeedia-tööjaam"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Heli ja video mängimine ja redigeerimine"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Interneti-tööjaam"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Valik rakendusi e-posti ja uudiste lugemiseks (mutt, tin...) ning veebi "
+"lehitsemiseks"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Võrguarvuti (klient)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Mitme protokolli, sealhulgas ssh kliendid"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Tööriistad süsteemi lihtsamaks haldamiseks"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Konsoolitööriistad"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "Redaktorid, shellid, terminalid, failihaldus"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "Arendus"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "C ja C++ arendusteegid, rakendused ja päisefailid"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "Dokumentatsioon"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Raamatud ja HOWTO-d Linuxi ja vabavara kohta"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "Linux Standard Base. Kolmandate tootjate rakenduste toetus"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "Veebiserver"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "Grupitöö"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Kolabi server"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "Tulemüür/marsruuter"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "Internet"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "E-post/Uudistegrupid"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Postfixi e-posti server, Inn uudisteserver"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "Kataloogiserver"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "FTP-server"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "Nimeserver ja võrguteabeserver"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Faili- ja printserver"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "NFS-server, Samba-server"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "Andmebaasid"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "PostgreSQL- ja MariaDB-andmebaasiserver"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Veeb/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache ja Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "E-post"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Postfixi e-posti server"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "PostgreSQL- või MariaDB-andmebaasiserver"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "Võrguserver"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "NFS-, SMB-, SSH-server, puhverserver (proxy)"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "Graafiline keskkond"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "KDE tööjaam"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr "K töölaua keskkond: graafiline töökeskkond ja palju rakendusi"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "GNOME tööjaam"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr "Graafiline töökeskkond koos kasutajasõbralike rakendustega"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "Kontori-tööjaam"
+
+#: share/meta-task/compssUsers.pl:176
+#, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr ""
+"Kergemat sorti graafiline töökeskkond koos kasutajasõbralike rakendustega"
+
+#: share/meta-task/compssUsers.pl:181
+#, c-format
+msgid "LXDE Desktop"
+msgstr "LXDE töölaud"
+
+#: share/meta-task/compssUsers.pl:183
+#, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"Vähese koormusega ja kiire graafiline töökeskkond koos kasutajasõbralike "
+"rakenduste ja tööriistadega"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Muud graafilised töölauad"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "WindowMaker, Enlightenment, Fvwm jt"
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "Utiliidid"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "SSH-server"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Webmin võrguseadistusserver"
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Võrguutiliidid ja võrgu jälgimine"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "Jälgimistööriistad, protsesside jälgimine, tcpdump, nmap..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "Moondrake nõustajad"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "Serverite seadistamise nõustajad"
 
 #: steps.pm:85
 #, c-format
@@ -1283,38 +1638,14 @@ msgid ""
 "Exit"
 msgstr "Välju"
 
-#~ msgid "LXQt Desktop"
-#~ msgstr "LXQt töölaud"
-
-#~ msgid "Plasma Workstation"
-#~ msgstr "Plasma tööjaam"
-
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Täielik Mandriva Linuxi töölaud koos kasutajatoega"
 
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "GNOME-l põhinev graafiline keskkond"
 
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr "Graafiline töökeskkond koos kasutajasõbralike rakendustega"
-
 #~ msgid "A less developed lightweight fast graphical environment"
 #~ msgstr "Kergemat sorti kiire graafiline töökeskkond"
-
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "Kergemat sorti graafiline töökeskkond koos kasutajasõbralike rakendustega"
-
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "Vähese koormusega ja kiire graafiline töökeskkond koos kasutajasõbralike "
-#~ "rakenduste ja tööriistadega"
 
 #~ msgid "A lightweight fast graphical environment"
 #~ msgstr "Kergemat sorti kiire graafiline töökeskkond"
@@ -1332,16 +1663,6 @@ msgstr "Välju"
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "Meelelahutus: põnevus-, laua-, strateegiamängud jne"
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "Meelelahutus: põnevus-, laua-, strateegiamängud jne"
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache ja Pro-ftpd"
-
 #~ msgid "Automated"
 #~ msgstr "Automaatne"
 
@@ -1351,14 +1672,8 @@ msgstr "Välju"
 #~ msgid "Be Free!"
 #~ msgstr "Tundke end vabalt!"
 
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Raamatud ja HOWTO-d Linuxi ja vabavara kohta"
-
 #~ msgid "Boot"
 #~ msgstr "Alglaadimine"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "C ja C++ arendusteegid, rakendused ja päisefailid"
 
 #~ msgid "CD-ROM"
 #~ msgstr "CD"
@@ -1379,14 +1694,8 @@ msgstr "Välju"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Cinnamoni tööjaam"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "Mitme protokolli, sealhulgas ssh kliendid"
-
 #~ msgid "Configure X"
 #~ msgstr "X'i seadistamine"
-
-#~ msgid "Console Tools"
-#~ msgstr "Konsoolitööriistad"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "Peeglilt pakettide nimekirja lugemine..."
@@ -1394,39 +1703,14 @@ msgstr "Välju"
 #~ msgid "Core Release"
 #~ msgstr "Tuumiktarkvara (core)"
 
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "Andmebaasid"
-
-#~ msgid "Development"
-#~ msgstr "Arendus"
-
-#~ msgid "Directory Server"
-#~ msgstr "Kataloogiserver"
-
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "Kas Teil on ISA helikaart?"
 
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "Kas soovite kasutada aboot-i?"
 
-#~ msgid "Documentation"
-#~ msgstr "Dokumentatsioon"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "Nimeserver ja võrguteabeserver"
-
 #~ msgid "Downloading file %s..."
 #~ msgstr "Faili %s allalaadimine..."
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "Moondrake nõustajad"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "Redaktorid, shellid, terminalid, failihaldus"
 
 #~ msgid "Enlightenment e17 Desktop"
 #~ msgstr "Enlightenment e17 töölaud"
@@ -1440,15 +1724,6 @@ msgstr "Välju"
 
 #~ msgid "Explore Linux easily with Mandriva One"
 #~ msgstr "Linuxi hõlpus tundmaõppimine Mandriva One abil"
-
-#~ msgid "FTP Server"
-#~ msgstr "FTP-server"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "Faili- ja printserver"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "Tulemüür/marsruuter"
 
 #~ msgid "For contributors"
 #~ msgstr "Kaasautoritele"
@@ -1471,20 +1746,8 @@ msgstr "Välju"
 #~ msgid "Formatting"
 #~ msgstr "Vormindamine"
 
-#~ msgid "GNOME Workstation"
-#~ msgstr "GNOME tööjaam"
-
-#~ msgid "Game station"
-#~ msgstr "Mänguvahend"
-
 #~ msgid "Generate auto install floppy"
 #~ msgstr "Loo kiirpaigaldusdiskett"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "Graafiline keskkond"
-
-#~ msgid "Groupware"
-#~ msgstr "Grupitöö"
 
 #~ msgid "Home entertainment"
 #~ msgstr "Kodune meelelahutus"
@@ -1518,12 +1781,6 @@ msgstr "Välju"
 #~ "Hoiatus: Te peaksite varundama kõik oma isiklikud andmed,\n"
 #~ "enne kui valite võimaluse \"Uus paigaldus\"."
 
-#~ msgid "Internet gateway"
-#~ msgstr "Internet"
-
-#~ msgid "Internet station"
-#~ msgstr "Interneti-tööjaam"
-
 #~ msgid "Join Us!"
 #~ msgstr "Ühinege meiega!"
 
@@ -1533,20 +1790,11 @@ msgstr "Välju"
 #~ msgid "KDE Desktop"
 #~ msgstr "KDE töölaud"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "KDE tööjaam"
-
-#~ msgid "Kolab Server"
-#~ msgstr "Kolabi server"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
-#~ msgid "LXDE Desktop"
-#~ msgstr "LXDE töölaud"
-
 #~ msgid "LXQT Desktop"
 #~ msgstr "LXQT töölaud"
+
+#~ msgid "LXQt Desktop"
+#~ msgstr "LXQt töölaud"
 
 #~ msgid "Language"
 #~ msgstr "Keel"
@@ -1554,17 +1802,8 @@ msgstr "Välju"
 #~ msgid "License"
 #~ msgstr "Litsents"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "Linux Standard Base. Kolmandate tootjate rakenduste toetus"
-
 #~ msgid "MATE Workstation"
 #~ msgstr "MATE tööjaam"
-
-#~ msgid "Mail"
-#~ msgstr "E-post"
-
-#~ msgid "Mail/News"
-#~ msgstr "E-post/Uudistegrupid"
 
 #~ msgid "Make it yours!"
 #~ msgstr "Võtke see omaks!"
@@ -1578,32 +1817,11 @@ msgstr "Välju"
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr "Mandriva: distributsioone igale maitsele ja kõigiks vajadusteks"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "Jälgimistööriistad, protsesside jälgimine, tcpdump, nmap..."
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "Moondrake nõustajad"
 
 #~ msgid "Moondrake, the new Linux distribution"
 #~ msgstr "Moondrake, uus Linuxi distributsioon"
-
-#~ msgid "Multimedia station"
-#~ msgstr "Multimeedia-tööjaam"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "NFS-server, Samba-server"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "NFS-, SMB-, SSH-server, puhverserver (proxy)"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "Võrguarvuti (klient)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "Võrguserver"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "Võrguutiliidid ja võrgu jälgimine"
 
 #~ msgid "Networking"
 #~ msgstr "Võrk"
@@ -1623,16 +1841,6 @@ msgstr "Välju"
 #~ msgid "Nonfree Release"
 #~ msgstr "Mittevaba tarkvara (non-free)"
 
-#~ msgid "Office Workstation"
-#~ msgstr "Kontori-tööjaam"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "Kontoritöö programmid: tekstitöötlus (LibreOffice Writer, KWord), "
-#~ "tabelitöötlus (LibreOffice Calc, KSpread), PDF-failide näitajad jne"
-
 #~ msgid ""
 #~ "Office programs: wordprocessors (OpenOffice.org Writer, Kword), "
 #~ "spreadsheets (OpenOffice.org Calc, Kspread), PDF viewers, etc"
@@ -1650,26 +1858,14 @@ msgstr "Välju"
 #~ msgid "Office tools"
 #~ msgstr "Kontoritöö vahendid"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "Muud graafilised töölauad"
-
 #~ msgid "People!"
 #~ msgstr "Rahvas!"
 
-#~ msgid "Postfix mail server"
-#~ msgstr "Postfixi e-posti server"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Postfixi e-posti server, Inn uudisteserver"
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "PostgreSQL- ja MariaDB-andmebaasiserver"
+#~ msgid "Plasma Workstation"
+#~ msgstr "Plasma tööjaam"
 
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "PostgreSQL- ja MySQL-andmebaasiserver"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "PostgreSQL- või MariaDB-andmebaasiserver"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "PostgreSQL- või MySQL-andmebaasiserver"
@@ -1683,9 +1879,6 @@ msgstr "Välju"
 
 #~ msgid "Preparing upgrade..."
 #~ msgstr "Uuendamiseks valmistumine..."
-
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
 
 #~ msgid "Proceed"
 #~ msgstr "Jätka"
@@ -1703,24 +1896,11 @@ msgstr "Välju"
 #~ "Helikaardi seadistamiseks käivitage pärast paigaldamist \"alsaconf\" või "
 #~ "\"sndconfig\""
 
-#~ msgid "SSH Server"
-#~ msgstr "SSH-server"
-
 #~ msgid "Save packages selection"
 #~ msgstr "Salvesta paketivalik"
 
 #~ msgid "Select All"
 #~ msgstr "Kõigi valimine"
-
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "Valik rakendusi e-posti ja uudiste lugemiseks (mutt, tin...) ning veebi "
-#~ "lehitsemiseks"
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "Heli ja video mängimine ja redigeerimine"
 
 #~ msgid "TV card"
 #~ msgstr "TV kaart"
@@ -1733,11 +1913,6 @@ msgstr "Välju"
 
 #~ msgid "The 100%% open source Mandriva Linux distribution"
 #~ msgstr "100%% vaba tarkvaraga Mandriva Linuxi distributsioon"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr "K töölaua keskkond: graafiline töökeskkond ja palju rakendusi"
 
 #~ msgid ""
 #~ "The Plasma Desktop, the basic graphical environment with a collection of "
@@ -1759,9 +1934,6 @@ msgstr "Välju"
 #~ msgid "This medium provides package updates for medium \"%s\""
 #~ msgstr "See andmekandja sisaldab \"%s\" uuendusi"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "Tööriistad süsteemi lihtsamaks haldamiseks"
-
 #~ msgid "Unable to contact mirror %s"
 #~ msgstr "Ühendust peegliga %s ei saadud"
 
@@ -1776,46 +1948,17 @@ msgstr "Välju"
 #~ msgid "Users"
 #~ msgstr "Kasutajad"
 
-#~ msgid "Utilities"
-#~ msgstr "Utiliidid"
-
-#~ msgid "Web Server"
-#~ msgstr "Veebiserver"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Veeb/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Webmin võrguseadistusserver"
-
 #~ msgid "Welcome"
 #~ msgstr "Tere tulemast"
 
 #~ msgid "Welcome!"
 #~ msgstr "Tere tulemast!"
 
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "WindowMaker, Enlightenment, Fvwm jt"
-
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Window Maker, Fvwm jt"
 
-#~ msgid "Wizards to configure server"
-#~ msgstr "Serverite seadistamise nõustajad"
-
-#~ msgid "Workstation"
-#~ msgstr "Tööjaam"
-
 #~ msgid "XFCE Workstation"
 #~ msgstr "XFCE tööjaam"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "Kontori-tööjaam"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2008-10-01 10:02+0800\n"
 "Last-Translator: # You-Cheng Hsieh <yochenhsieh@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
@@ -319,7 +319,7 @@ msgstr "在安裝後您可以於 %s 取得螢幕截圖"
 msgid "Installation"
 msgstr "安裝"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "組態設定"
@@ -441,6 +441,356 @@ msgstr "%d 個安裝執行失敗"
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "安裝套件失敗："
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "工作站"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "辦公軟體平台"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"辦公軟體：文書處理軟體 (LibreOffice Writer、Kword)、試算表 (OpenOffice.org "
+"Calc、Kspread)、PDF 檢視器等等"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "遊戲平台"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "娛樂的一些程式：紙牌、益智、動作、策略等"
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "多媒體平台"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "音效以及影像撥放編輯程式"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "網際網路平台"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr "包含讀信、寄信和閱讀新聞群組 (mutt、tin ..) 以及網路瀏覽的工具"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "網路電腦 (客戶端)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "包含 ssh 等其他不同通訊協定的用戶端程式"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "讓您方便設定您系統的工具"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Console 工具"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "編輯器、shell、檔案工具、終端機"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "程式開發"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "C/C++ 發展環境，包含編譯器、程式庫與及一些引入檔"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "文件檔案"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Linux 系統與自由軟體的書籍、HOWTO 文件"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "LSB 的支援，包含第三類協力廠商軟體支援"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "網頁伺服器 (Web)"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "群組軟體"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Kolab 伺服器"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "防火牆/路由器"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "網際網路閘道器"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "郵件/新聞"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Postfix 郵件伺服器，Inn 新聞伺服器"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "目錄伺服器"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "FTP 伺服器"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "網域名稱與網路資訊伺服器"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "檔案與列印分享伺服器"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "NFS 伺服器、Samba 伺服器"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "資料庫軟體"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "PostgreSQL 與 MariaDB 資料庫伺服器"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache、ProFTPD"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "電子郵件"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Postfix 郵件伺服器"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "PostgreSQL、MariaDB 資料庫"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "網路伺服器"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "NFS 伺服器、SMB 伺服器、Proxy 伺服器、SSH 伺服器"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "圖形環境"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "KDE 工作站"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr "K 桌面環境，包含許多好用的圖型介面工具程式"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "GNOME 工作站"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr "包含友善的應用程式、桌面軟體的圖型化使用環境"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "辦公軟體平台"
+
+#: share/meta-task/compssUsers.pl:176
+#, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr "一個包含友善的應用程式和桌面工具的輕量圖形環境"
+
+#: share/meta-task/compssUsers.pl:181
+#, c-format
+msgid "LXDE Desktop"
+msgstr "LXDE 桌面"
+
+#: share/meta-task/compssUsers.pl:183
+#, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr "包含友善的應用程式、桌面軟體的輕量級圖型化使用環境"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "其他圖型桌面軟體"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Window Maker、Enlightenment、Fvwm 等"
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "工具軟體"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "SSH 伺服主機"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Webmin 遠端設定伺服器"
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "網路工具/監控"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "監控工具、程序管理、tcpdump、nmap..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "Moondrake 精靈"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "用來設定伺服器的精靈"
 
 #: steps.pm:85
 #, c-format
@@ -1277,13 +1627,11 @@ msgid ""
 "Exit"
 msgstr "離開"
 
+#~ msgid "A full Mandriva Linux desktop, with support"
+#~ msgstr "完整的 Mandriva Linux 桌面，並有支援"
+
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "一個以 GNOME 為基礎的圖形環境"
-
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr "一個包含友善的應用程式和桌面工具的輕量圖形環境"
 
 #~ msgid "A lightweight fast graphical environment"
 #~ msgstr "一個輕量且快速的圖形環境"
@@ -1294,128 +1642,32 @@ msgstr "離開"
 #~ msgid "A next generation QT port of the lightweight desktop environment"
 #~ msgstr "輕量桌面環境的下一代 QT 版本"
 
-#~ msgid "Cinnamon Workstation"
-#~ msgstr "Cinnamon 工作站"
-
-#~ msgid "Enlightenment e17 Desktop"
-#~ msgstr "Enlightenment e17 桌面"
-
-#~ msgid "Install recommended packages"
-#~ msgstr "安裝建議的套件"
-
-#~ msgid "LXQt Desktop"
-#~ msgstr "LXQt 桌面"
-
-#~ msgid "MATE Workstation"
-#~ msgstr "MATE 工作站"
-
-#~ msgid "Plasma Workstation"
-#~ msgstr "Plasma 工作站"
-
-#~ msgid "Window Maker, Fvwm, etc"
-#~ msgstr "Window Maker, Fvwm, 等"
-
-#~ msgid "XFCE Workstation"
-#~ msgstr "XFCE 工作站"
-
-#~ msgid "A full Mandriva Linux desktop, with support"
-#~ msgstr "完整的 Mandriva Linux 桌面，並有支援"
-
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr "包含友善的應用程式、桌面軟體的圖型化使用環境"
-
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr "包含友善的應用程式、桌面軟體的輕量級圖型化使用環境"
-
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "娛樂的一些程式：紙牌、益智、動作、策略等"
-
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "娛樂的一些程式：紙牌、益智、動作、策略等"
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache、ProFTPD"
 
 #~ msgid "Bad package"
 #~ msgstr "壞掉的套件"
 
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Linux 系統與自由軟體的書籍、HOWTO 文件"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "C/C++ 發展環境，包含編譯器、程式庫與及一些引入檔"
-
 #~ msgid "CD-ROM"
 #~ msgstr "CD-ROM"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "包含 ssh 等其他不同通訊協定的用戶端程式"
-
-#~ msgid "Console Tools"
-#~ msgstr "Console 工具"
-
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "資料庫軟體"
-
-#~ msgid "Development"
-#~ msgstr "程式開發"
-
-#~ msgid "Directory Server"
-#~ msgstr "目錄伺服器"
+#~ msgid "Cinnamon Workstation"
+#~ msgstr "Cinnamon 工作站"
 
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "您有 ISA 音效卡嗎？"
 
-#~ msgid "Documentation"
-#~ msgstr "文件檔案"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "網域名稱與網路資訊伺服器"
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "Moondrake 精靈"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "編輯器、shell、檔案工具、終端機"
+#~ msgid "Enlightenment e17 Desktop"
+#~ msgstr "Enlightenment e17 桌面"
 
 #~ msgid "Explore Linux easily with Mandriva One"
 #~ msgstr "用 Mandriva One 輕鬆探索 Linux"
 
-#~ msgid "FTP Server"
-#~ msgstr "FTP 伺服器"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "檔案與列印分享伺服器"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "防火牆/路由器"
-
-#~ msgid "GNOME Workstation"
-#~ msgstr "GNOME 工作站"
-
-#~ msgid "Game station"
-#~ msgstr "遊戲平台"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "圖形環境"
-
-#~ msgid "Groupware"
-#~ msgstr "群組軟體"
-
 #~ msgid "IDE"
 #~ msgstr "IDE"
+
+#~ msgid "Install recommended packages"
+#~ msgstr "安裝建議的套件"
 
 #~ msgid ""
 #~ "Installer has detected that your installed Linux system could not\n"
@@ -1432,42 +1684,21 @@ msgstr "離開"
 #~ "\n"
 #~ "警告：在您選擇「新安裝」之前，您應該備份您所有的個人資料。"
 
-#~ msgid "Internet gateway"
-#~ msgstr "網際網路閘道器"
-
-#~ msgid "Internet station"
-#~ msgstr "網際網路平台"
-
 #~ msgid "KDE"
 #~ msgstr "KDE"
 
 #~ msgid "KDE Desktop"
 #~ msgstr "KDE 桌面"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "KDE 工作站"
-
-#~ msgid "Kolab Server"
-#~ msgstr "Kolab 伺服器"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
-#~ msgid "LXDE Desktop"
-#~ msgstr "LXDE 桌面"
-
 #, fuzzy
 #~ msgid "LXQT Desktop"
 #~ msgstr "LXDE 桌面"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "LSB 的支援，包含第三類協力廠商軟體支援"
+#~ msgid "LXQt Desktop"
+#~ msgstr "LXQt 桌面"
 
-#~ msgid "Mail"
-#~ msgstr "電子郵件"
-
-#~ msgid "Mail/News"
-#~ msgstr "郵件/新聞"
+#~ msgid "MATE Workstation"
+#~ msgstr "MATE 工作站"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linux 安裝程式 %s"
@@ -1478,32 +1709,11 @@ msgstr "離開"
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr "Mandriva：可以符合所有使用者需求的套件"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "監控工具、程序管理、tcpdump、nmap..."
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "Moondrake 精靈"
 
 #~ msgid "Moondrake, the new Linux distribution"
 #~ msgstr "Moondrake，新的 Linux 套件"
-
-#~ msgid "Multimedia station"
-#~ msgstr "多媒體平台"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "NFS 伺服器、Samba 伺服器"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "NFS 伺服器、SMB 伺服器、Proxy 伺服器、SSH 伺服器"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "網路電腦 (客戶端)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "網路伺服器"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "網路工具/監控"
 
 #~ msgid ""
 #~ "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1514,16 +1724,6 @@ msgstr "離開"
 
 #~ msgid "No sound card detected. Try \"harddrake\" after installation"
 #~ msgstr "沒偵測到任何音效卡。請在安裝後嘗試 \"harddrake\" 進行設定"
-
-#~ msgid "Office Workstation"
-#~ msgstr "辦公軟體平台"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "辦公軟體：文書處理軟體 (LibreOffice Writer、Kword)、試算表 (OpenOffice."
-#~ "org Calc、Kspread)、PDF 檢視器等等"
 
 #, fuzzy
 #~ msgid ""
@@ -1537,23 +1737,11 @@ msgstr "離開"
 #~ msgid "Office tools"
 #~ msgstr "辦公軟體平台"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "其他圖型桌面軟體"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "Postfix 郵件伺服器"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Postfix 郵件伺服器，Inn 新聞伺服器"
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "PostgreSQL 與 MariaDB 資料庫伺服器"
+#~ msgid "Plasma Workstation"
+#~ msgstr "Plasma 工作站"
 
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "PostgreSQL 與 MySQL 資料庫伺服器"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "PostgreSQL、MariaDB 資料庫"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "PostgreSQL、MySQL 資料庫"
@@ -1568,9 +1756,6 @@ msgstr "離開"
 #~ msgid "Preparing upgrade..."
 #~ msgstr "正在準備升級..."
 
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
-
 #, fuzzy
 #~ msgid "RazorQT Desktop"
 #~ msgstr "自訂桌面"
@@ -1580,27 +1765,11 @@ msgstr "離開"
 #~ "sound card"
 #~ msgstr "請在安裝完畢後，執行 \"alsaconf\" 或 \"sndconfig\" 來設定您的音效卡"
 
-#~ msgid "SSH Server"
-#~ msgstr "SSH 伺服主機"
-
 #~ msgid "Select All"
 #~ msgstr "選取所有項目"
 
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr "包含讀信、寄信和閱讀新聞群組 (mutt、tin ..) 以及網路瀏覽的工具"
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "音效以及影像撥放編輯程式"
-
 #~ msgid "The 100%% open source Mandriva Linux distribution"
 #~ msgstr "百分之百開放源碼 Mandriva Linux 套件"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr "K 桌面環境，包含許多好用的圖型介面工具程式"
 
 #, fuzzy
 #~ msgid ""
@@ -1611,37 +1780,11 @@ msgstr "離開"
 #~ msgid "This medium provides package updates for medium \"%s\""
 #~ msgstr "這個媒體包含 \"%s\" 媒體的套件更新"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "讓您方便設定您系統的工具"
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Fvwm, 等"
 
-#~ msgid "Utilities"
-#~ msgstr "工具軟體"
-
-#~ msgid "Web Server"
-#~ msgstr "網頁伺服器 (Web)"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Webmin 遠端設定伺服器"
-
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Window Maker、Enlightenment、Fvwm 等"
-
-#~ msgid "Wizards to configure server"
-#~ msgstr "用來設定伺服器的精靈"
-
-#~ msgid "Workstation"
-#~ msgstr "工作站"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "辦公軟體平台"
+#~ msgid "XFCE Workstation"
+#~ msgstr "XFCE 工作站"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

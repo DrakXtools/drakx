@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-2010.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2009-10-06 09:55+0100\n"
 "Last-Translator: Gergely Lónyai <aleph@mandriva.org>\n"
 "Language-Team: Hungarian <aleph@mandriva.org>\n"
@@ -321,7 +321,7 @@ msgstr "A képernyőfelvételek a telepítés után itt lesznek elérhetők: %s"
 msgid "Installation"
 msgstr "Telepítés"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "Beállítás"
@@ -451,6 +451,364 @@ msgstr "%d telepítési művelet nem sikerült"
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "Sikertelen csomagtelepítések:"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "Munkaállomás"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "Irodai munkaállomás"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Irodai programok: szövegszerkesztők (LibreOffice Writer, KWord), "
+"táblázatkezelők (LibreOffice Calc, KSpread), PDF-megjelenítők, ..."
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "Játékgép"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "Játékprogramok: lövöldözős, táblás, stratégiai, ..."
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "Multimédiás munkaállomás"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Lejátszó- és szerkesztőprogramok hang- és videóanyagokhoz"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Internetes munkaállomás"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Eszközök levelezéshez, hírkezeléshez (mutt, tin, ...) és a web böngészéséhez"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Hálózati számítógép (kliens)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Kliensprogramok különféle protokollokhoz (például: ssh)"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Segédprogramok a számítógép beállításához"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Parancssori eszközök"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "Szövegszerkesztők, parancsértelmezők, fájlkezelők, terminálprogramok"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "Fejlesztés"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "C/C++ fejlesztőkönyvtárak, programok és include-fájlok"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "Dokumentáció"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Könyvek és HOGYAN-ok a Linuxról és a szabad szoftverekről"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "Linux Standard Base. Külső társaságok alkalmazásainak támogatása."
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "Webkiszolgáló"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "Csoportmunka-alkalmazás"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Kolab kiszolgáló"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "Tűzfal/útválasztó (router)"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "Internet átjáró"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "Levelezés/hírek"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Postfix email kiszolgáló, Inn hírkiszolgáló"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "Címtárkiszolgáló"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "FTP kiszolgáló"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "DNS és NIS kiszolgáló"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Fájl- és nyomtatómegosztási kiszolgáló"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "NFS kiszolgáló, Samba kiszolgáló"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "Adatbázis"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "PostgreSQL és MariaDB adatbázis kiszolgáló"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "Levelezés"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Postfix email kiszolgáló"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "PostgreSQL vagy MariaDB adatbázis kiszolgáló"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "Kiszolgáló hálózati számítógépekhez"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "NFS, SMB, proxy és SSH kiszolgáló"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "Grafikus környezet"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "KDE munkaállomás"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"A K Desktop Environment - az alapvető grafikus környezet - az ahhoz tartozó "
+"eszközökkel együtt"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "GNOME munkaállomás"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"Grafikus környezet felhasználóbarát alkalmazásokkal és segédprogramokkal"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "Irodai munkaállomás"
+
+#: share/meta-task/compssUsers.pl:176
+#, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr ""
+"Egy könnyedebb grafikus környezet felhasználóbarát alkalmazásokkal és "
+"asztali eszközökkel."
+
+#: share/meta-task/compssUsers.pl:181
+#, c-format
+msgid "LXDE Desktop"
+msgstr "LXDE munkaasztal"
+
+#: share/meta-task/compssUsers.pl:183
+#, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"Egy könnyű és gyors grafikus környezet felhasználóbarát alkalmazásokkal és "
+"segédprogramokkal"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Más grafikus környezetek"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "WindowMaker, Enlightenment, Fvwm, ..."
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "Segédprogramok"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "SSH kiszolgáló"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Webmin kiszolgáló távoli beállításhoz"
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Hálózati programok/hálózatfigyelés"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "Figyelőeszközök, folyamatszámlázás, tcpdump, nmap, ..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "Moondrake varázslók"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "Varázslók a kiszolgáló beállítására"
 
 #: steps.pm:85
 #, c-format
@@ -1320,15 +1678,14 @@ msgid ""
 "Exit"
 msgstr "Kilépés"
 
+#~ msgid "A full Mandriva Linux desktop, with support"
+#~ msgstr "Egy teljes Mandriva Linux munkaasztal, támogatással"
+
+#~ msgid "A full Moondrake desktop, with support"
+#~ msgstr "Egy teljes Moondrake munkaasztal, támogatással"
+
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "Egy GNOME-on alapuló grafikus környezet"
-
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "Egy könnyedebb grafikus környezet felhasználóbarát alkalmazásokkal és "
-#~ "asztali eszközökkel."
 
 #~ msgid "A lightweight fast graphical environment"
 #~ msgstr "Egy könnyű, gyors grafikus környezet"
@@ -1340,17 +1697,57 @@ msgstr "Kilépés"
 #~ msgstr ""
 #~ "A pehelysúlyú munkaasztal-környezet új generációs, QT-ra portolt változata"
 
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Játékprogramok: lövöldözős, táblás, stratégiai, ..."
+
+#~ msgid "Automated"
+#~ msgstr "Automatikus"
+
+#~ msgid "Bad package"
+#~ msgstr "Hibás csomag"
+
 #~ msgid "Be Free!"
 #~ msgstr "Légy szabad!"
+
+#~ msgid "CD-ROM"
+#~ msgstr "CD-ROM"
 
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Cinnamon munkaállomás"
 
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Kapcsolatfelvétel a tükörkiszolgálóval; az elérhető csomagok listájának "
+#~ "letöltése..."
+
 #~ msgid "Core Release"
 #~ msgstr "Core tároló"
 
+#~ msgid "Do you have an ISA sound card?"
+#~ msgstr "Van ISA hangkártyája?"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "Szeretné az aboot-ot használni?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "%s fájl letöltése..."
+
 #~ msgid "Enlightenment e17 Desktop"
 #~ msgstr "Enlightenment e17 munkaasztal"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Hiba az aboot telepítésekor.\n"
+#~ "Próbáljam újra a telepítést akkor is, ha ez esetleg tönkreteszi az első\n"
+#~ "partíciót?"
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "A Linux könnyed kipróbálása: Mandriva One"
+
+#~ msgid "Explore Linux easily with Moondrake One"
+#~ msgstr "A Linux könnyed kipróbálása: Moondrake One"
 
 #~ msgid "For developers!"
 #~ msgstr "Fejlesztőknek!"
@@ -1361,8 +1758,17 @@ msgstr "Kilépés"
 #~ msgid "For kids"
 #~ msgstr "Gyerekeknek"
 
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Automatikus telepítőfloppy készítése"
+
 #~ msgid "Home entertainment"
 #~ msgstr "Otthoni szórakoztatás"
+
+#~ msgid "IDE"
+#~ msgstr "IDE"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm-munkaasztal"
 
 #~ msgid "Install recommended packages"
 #~ msgstr "Javasolt csomagok telepítése"
@@ -1387,6 +1793,16 @@ msgstr "Kilépés"
 #~ msgid "Join Us!"
 #~ msgstr "Csatlakozz!"
 
+#~ msgid "KDE"
+#~ msgstr "KDE"
+
+#~ msgid "KDE Desktop"
+#~ msgstr "KDE munkaasztal"
+
+#, fuzzy
+#~ msgid "LXQT Desktop"
+#~ msgstr "LXDE munkaasztal"
+
 #~ msgid "LXQt Desktop"
 #~ msgstr "LXQt Munkaasztal"
 
@@ -1395,210 +1811,6 @@ msgstr "Kilépés"
 
 #~ msgid "Make it yours!"
 #~ msgstr "Legyen a tiéd!"
-
-#~ msgid "Nonfree Release"
-#~ msgstr "Nem szabad tároló"
-
-#~ msgid "Office tools"
-#~ msgstr "Irodai eszközök"
-
-#~ msgid "Plasma Workstation"
-#~ msgstr "Plasma Munkaállomás"
-
-#~ msgid "Preparing upgrade..."
-#~ msgstr "Felkészülés a frissítésre..."
-
-#~ msgid "Tainted Release"
-#~ msgstr "Tainted tároló"
-
-#~ msgid "Thank you!"
-#~ msgstr "Köszönjük!"
-
-#~ msgid "This medium provides package updates for medium \"%s\""
-#~ msgstr "Ez az adatforrás frissítőcsomagokat tartalmaz a \"%s\" számára."
-
-#~ msgid "Window Maker, Fvwm, etc"
-#~ msgstr "Window Maker, Fvwm, stb."
-
-#~ msgid "XFCE Workstation"
-#~ msgstr "XFCE munkaállomás"
-
-#~ msgid "Your choice!"
-#~ msgstr "A te választásod!"
-
-#~ msgid "A full Mandriva Linux desktop, with support"
-#~ msgstr "Egy teljes Mandriva Linux munkaasztal, támogatással"
-
-#~ msgid "A full Moondrake desktop, with support"
-#~ msgstr "Egy teljes Moondrake munkaasztal, támogatással"
-
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "Grafikus környezet felhasználóbarát alkalmazásokkal és segédprogramokkal"
-
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "Egy könnyű és gyors grafikus környezet felhasználóbarát alkalmazásokkal "
-#~ "és segédprogramokkal"
-
-#~ msgid "Amusement programs: arcade, boards, strategy, etc"
-#~ msgstr "Játékprogramok: lövöldözős, táblás, stratégiai, ..."
-
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "Játékprogramok: lövöldözős, táblás, stratégiai, ..."
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache, Pro-ftpd"
-
-#~ msgid "Automated"
-#~ msgstr "Automatikus"
-
-#~ msgid "Bad package"
-#~ msgstr "Hibás csomag"
-
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Könyvek és HOGYAN-ok a Linuxról és a szabad szoftverekről"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "C/C++ fejlesztőkönyvtárak, programok és include-fájlok"
-
-#~ msgid "CD-ROM"
-#~ msgstr "CD-ROM"
-
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "Kliensprogramok különféle protokollokhoz (például: ssh)"
-
-#~ msgid "Console Tools"
-#~ msgstr "Parancssori eszközök"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "Kapcsolatfelvétel a tükörkiszolgálóval; az elérhető csomagok listájának "
-#~ "letöltése..."
-
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "Adatbázis"
-
-#~ msgid "Development"
-#~ msgstr "Fejlesztés"
-
-#~ msgid "Directory Server"
-#~ msgstr "Címtárkiszolgáló"
-
-#~ msgid "Do you have an ISA sound card?"
-#~ msgstr "Van ISA hangkártyája?"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Szeretné az aboot-ot használni?"
-
-#~ msgid "Documentation"
-#~ msgstr "Dokumentáció"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "DNS és NIS kiszolgáló"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "%s fájl letöltése..."
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "Moondrake varázslók"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr ""
-#~ "Szövegszerkesztők, parancsértelmezők, fájlkezelők, terminálprogramok"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Hiba az aboot telepítésekor.\n"
-#~ "Próbáljam újra a telepítést akkor is, ha ez esetleg tönkreteszi az első\n"
-#~ "partíciót?"
-
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "A Linux könnyed kipróbálása: Mandriva One"
-
-#~ msgid "Explore Linux easily with Moondrake One"
-#~ msgstr "A Linux könnyed kipróbálása: Moondrake One"
-
-#~ msgid "FTP Server"
-#~ msgstr "FTP kiszolgáló"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "Fájl- és nyomtatómegosztási kiszolgáló"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "Tűzfal/útválasztó (router)"
-
-#~ msgid "GNOME Workstation"
-#~ msgstr "GNOME munkaállomás"
-
-#~ msgid "Game station"
-#~ msgstr "Játékgép"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Automatikus telepítőfloppy készítése"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "Grafikus környezet"
-
-#~ msgid "Groupware"
-#~ msgstr "Csoportmunka-alkalmazás"
-
-#~ msgid "IDE"
-#~ msgstr "IDE"
-
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm-munkaasztal"
-
-#~ msgid "Internet gateway"
-#~ msgstr "Internet átjáró"
-
-#~ msgid "Internet station"
-#~ msgstr "Internetes munkaállomás"
-
-#~ msgid "KDE"
-#~ msgstr "KDE"
-
-#~ msgid "KDE Desktop"
-#~ msgstr "KDE munkaasztal"
-
-#~ msgid "KDE Workstation"
-#~ msgstr "KDE munkaállomás"
-
-#~ msgid "Kolab Server"
-#~ msgstr "Kolab kiszolgáló"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
-#~ msgid "LXDE Desktop"
-#~ msgstr "LXDE munkaasztal"
-
-#, fuzzy
-#~ msgid "LXQT Desktop"
-#~ msgstr "LXDE munkaasztal"
-
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "Linux Standard Base. Külső társaságok alkalmazásainak támogatása."
-
-#~ msgid "Mail"
-#~ msgstr "Levelezés"
-
-#~ msgid "Mail/News"
-#~ msgstr "Levelezés/hírek"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linux telepítés %s"
@@ -1609,32 +1821,11 @@ msgstr "Kilépés"
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr "Mandriva: disztribúciók minden igényre"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "Figyelőeszközök, folyamatszámlázás, tcpdump, nmap, ..."
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "Moondrake varázslók"
 
 #~ msgid "Moondrake: distributions for everybody's needs"
 #~ msgstr "Moondrake: disztribúciók minden igényre"
-
-#~ msgid "Multimedia station"
-#~ msgstr "Multimédiás munkaállomás"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "NFS kiszolgáló, Samba kiszolgáló"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "NFS, SMB, proxy és SSH kiszolgáló"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "Hálózati számítógép (kliens)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "Kiszolgáló hálózati számítógépekhez"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "Hálózati programok/hálózatfigyelés"
 
 #~ msgid ""
 #~ "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1649,15 +1840,8 @@ msgstr "Kilépés"
 #~ "A telepítő nem talált hangkártyát. Futtassa a \"harddrake\" programot a "
 #~ "telepítés után."
 
-#~ msgid "Office Workstation"
-#~ msgstr "Irodai munkaállomás"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "Irodai programok: szövegszerkesztők (LibreOffice Writer, KWord), "
-#~ "táblázatkezelők (LibreOffice Calc, KSpread), PDF-megjelenítők, ..."
+#~ msgid "Nonfree Release"
+#~ msgstr "Nem szabad tároló"
 
 #, fuzzy
 #~ msgid ""
@@ -1674,23 +1858,14 @@ msgstr "Kilépés"
 #~ "Irodai programok: szövegszerkesztők (KWord, AbiWord), táblázatkezelők "
 #~ "(KSpread, Gnumeric), PDF-nézegetők, ..."
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "Más grafikus környezetek"
+#~ msgid "Office tools"
+#~ msgstr "Irodai eszközök"
 
-#~ msgid "Postfix mail server"
-#~ msgstr "Postfix email kiszolgáló"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Postfix email kiszolgáló, Inn hírkiszolgáló"
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "PostgreSQL és MariaDB adatbázis kiszolgáló"
+#~ msgid "Plasma Workstation"
+#~ msgstr "Plasma Munkaállomás"
 
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "PostgreSQL és MySQL adatbázis kiszolgáló"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "PostgreSQL vagy MariaDB adatbázis kiszolgáló"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "PostgreSQL vagy MySQL adatbázis kiszolgáló"
@@ -1702,8 +1877,8 @@ msgstr "Kilépés"
 #~ msgid "Preparing bootloader..."
 #~ msgstr "Rendszerbetöltő előkészítése..."
 
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Felkészülés a frissítésre..."
 
 #~ msgid "Proceed"
 #~ msgstr "Feldolgozva"
@@ -1722,37 +1897,23 @@ msgstr "Kilépés"
 #~ "A hangkártya beállításához futtassa az \"alsaconf\" vagy az \"sndconfig\" "
 #~ "programot a telepítés után."
 
-#~ msgid "SSH Server"
-#~ msgstr "SSH kiszolgáló"
-
 #~ msgid "Save packages selection"
 #~ msgstr "Csomagösszeállítás mentése"
 
 #~ msgid "Select All"
 #~ msgstr "Mindent kijelöl"
 
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "Eszközök levelezéshez, hírkezeléshez (mutt, tin, ...) és a web "
-#~ "böngészéséhez"
+#~ msgid "Tainted Release"
+#~ msgstr "Tainted tároló"
 
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "Lejátszó- és szerkesztőprogramok hang- és videóanyagokhoz"
+#~ msgid "Thank you!"
+#~ msgstr "Köszönjük!"
 
 #~ msgid "The 100%% open source Mandriva Linux distribution"
 #~ msgstr "A 100%%-ban nyílt forráskódú Mandriva Linux disztribúció"
 
 #~ msgid "The 100%% open source Moondrake distribution"
 #~ msgstr "A 100%%-ban nyílt forráskódú Moondrake disztribúció"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr ""
-#~ "A K Desktop Environment - az alapvető grafikus környezet - az ahhoz "
-#~ "tartozó eszközökkel együtt"
 
 #, fuzzy
 #~ msgid ""
@@ -1776,8 +1937,8 @@ msgstr "Kilépés"
 #~ "\n"
 #~ "Lehetőség van a telepítés újrajátszására is.\n"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "Segédprogramok a számítógép beállításához"
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Ez az adatforrás frissítőcsomagokat tartalmaz a \"%s\" számára."
 
 #~ msgid "Unable to contact mirror %s"
 #~ msgstr "Nem sikerült kapcsolódni ehhez a tükörkiszolgálóhoz: %s"
@@ -1788,37 +1949,14 @@ msgstr "Kilépés"
 #~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 #~ msgstr "64 bites disztribúcióról 32 bitesre való frissítés nem támogatott"
 
-#~ msgid "Utilities"
-#~ msgstr "Segédprogramok"
-
-#~ msgid "Web Server"
-#~ msgstr "Webkiszolgáló"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Webmin kiszolgáló távoli beállításhoz"
-
 #~ msgid "Welcome"
 #~ msgstr "Üdvözöljük"
 
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "WindowMaker, Enlightenment, Fvwm, ..."
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Fvwm, stb."
 
-#~ msgid "Wizards to configure server"
-#~ msgstr "Varázslók a kiszolgáló beállítására"
-
-#~ msgid "Workstation"
-#~ msgstr "Munkaállomás"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "Irodai munkaállomás"
+#~ msgid "XFCE Workstation"
+#~ msgstr "XFCE munkaállomás"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1882,6 +2020,9 @@ msgstr "Kilépés"
 #~ "Létre kell hozni egy PPC PReP rendszerindítót. A telepítés folytatódik, "
 #~ "de a rendszer indításához létre kell hozni a rendszerindítási partíciót a "
 #~ "DiskDrake-kel."
+
+#~ msgid "Your choice!"
+#~ msgstr "A te választásod!"
 
 #~ msgid "Your desktop on a USB key"
 #~ msgstr "Az Ön munkaasztala egy USB kulcson"

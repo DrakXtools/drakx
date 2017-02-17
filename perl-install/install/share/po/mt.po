@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2004-10-04 18:45+0200\n"
 "Last-Translator: Ramon Casha <ramon.casha@linux.org.mt>\n"
 "Language-Team: Maltese <mt@li.org>\n"
@@ -301,7 +301,7 @@ msgstr "Ir-ritratti jkunu disponibbli wara l-installazzjoni f' %s"
 msgid "Installation"
 msgstr "Qed ninstalla"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "Konfigurazzjoni"
@@ -421,6 +421,359 @@ msgstr "%d tranżazzjonijiet ta' installazzjoni fallew"
 #, fuzzy, c-format
 msgid "Installation of packages failed:"
 msgstr "Qed jinstalla il-pakkett %s"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "Workstation"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "Kompjuter tal-Uffiċċju"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Programmi tal-uffiċċju: wordprocessors (LibreOffice Writer, Kword), "
+"spreadsheet (LibreOffice Calc, Kspread) eċċ"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "Logħob"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "Programmi ta' divertiment: logħob tal-arcaDES, karti, strateġija eċċ"
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "Multimedja"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Programmi għad-daqq u editjar ta' awdjo u video"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Internet"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Sett għodda biex taqra u tibgħat imejl u \"news\", u biex tibbrawżja l-web"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Kompjuter fuq network (klijent)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Klijenti għal protokolli differenti, eż. SSH"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Għodda biex tiffaċilita l-konfigurazzjoni tal-kompjuter"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Għodda tal-konsol"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "Edituri, shells, għodda tal-fajls, terminals"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "Żviluppar"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "Libreriji, programmi u fajls għal żviluppar C u C++"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "Dokumentazzjoni"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Kotba u \"HOWTO\" dwar il-Linux u Softwer Ħieles"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "Linux Standard Base. Sapport ta' programmi ta' terzi partiti"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "Server tal-web"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, fuzzy, c-format
+msgid "Groupware"
+msgstr "Grupp"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Server Kolab"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "Firewall/Router"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "Gateway tal-internet"
+
+#: share/meta-task/compssUsers.pl:100
+#, fuzzy, c-format
+msgid "Mail/News"
+msgstr "/File/_Ġdid"
+
+#: share/meta-task/compssUsers.pl:101
+#, fuzzy, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Server tal-imejl Postfix"
+
+#: share/meta-task/compssUsers.pl:105
+#, fuzzy, c-format
+msgid "Directory Server"
+msgstr "Direttorju minn fejn trid tirrestawra"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "Server FTP"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:115
+#, fuzzy, c-format
+msgid "DNS/NIS"
+msgstr "DNS"
+
+#: share/meta-task/compssUsers.pl:116
+#, fuzzy, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "Server tal-ismijiet tad-dominji"
+
+#: share/meta-task/compssUsers.pl:120
+#, fuzzy, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Server tal-printer"
+
+#: share/meta-task/compssUsers.pl:121
+#, fuzzy, c-format
+msgid "NFS Server, Samba server"
+msgstr "Server Samba"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "Database"
+
+#: share/meta-task/compssUsers.pl:126
+#, fuzzy, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "Server tad-database PostgreSQL jew MariaDB"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "Imejl"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Server tal-imejl Postfix"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "Server tad-database PostgreSQL jew MariaDB"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "Kompjuter Server tan-Network"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "Servers NFS, SMB, Proxy, ssh"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "Ambjent Grafiku"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "Stazzjon KDE"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"K Desktop Environment, l-interfaċċja grafika bażi, b'għażla ta' għodda "
+"jakkumpanjawha"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "Stazzjon GNOME"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr "Ambjent grafiku b' għażla ta' programmi u għodda faċli"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "Kompjuter tal-Uffiċċju"
+
+#: share/meta-task/compssUsers.pl:176
+#, fuzzy, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr "Ambjent grafiku b' għażla ta' programmi u għodda faċli"
+
+#: share/meta-task/compssUsers.pl:181
+#, fuzzy, c-format
+msgid "LXDE Desktop"
+msgstr "Desktop"
+
+#: share/meta-task/compssUsers.pl:183
+#, fuzzy, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr "Ambjent grafiku b' għażla ta' programmi u għodda faċli"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Desktops Grafiċi Oħrajn"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Icewm, Window Maker, Enlightenment, Fvwm, eċċ"
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, fuzzy, c-format
+msgid "Utilities"
+msgstr "Filippini"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "Server SSH"
+
+#: share/meta-task/compssUsers.pl:225
+#, fuzzy, c-format
+msgid "Webmin"
+msgstr "Webcam"
+
+#: share/meta-task/compssUsers.pl:226
+#, fuzzy, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Konfigurazzjoni tat-Terminal Server"
+
+#: share/meta-task/compssUsers.pl:230
+#, fuzzy, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Monitoraġġ tan-network"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "<b>Prodotti Moondrake</b>"
+
+#: share/meta-task/compssUsers.pl:236
+#, fuzzy, c-format
+msgid "Wizards to configure server"
+msgstr "Ma stajtx nikkonfigura l-printer \"%s\"!"
 
 #: steps.pm:85
 #, c-format
@@ -1260,14 +1613,6 @@ msgid ""
 "Exit"
 msgstr "Oħroġ"
 
-#, fuzzy
-#~ msgid "LXQt Desktop"
-#~ msgstr "Desktop"
-
-#, fuzzy
-#~ msgid "Plasma Workstation"
-#~ msgstr "Workstation"
-
 #~ msgid "%d packages"
 #~ msgstr "%d pakketti"
 
@@ -1280,23 +1625,6 @@ msgstr "Oħroġ"
 #, fuzzy
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "Ambjent Grafiku"
-
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr "Ambjent grafiku b' għażla ta' programmi u għodda faċli"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr "Ambjent grafiku b' għażla ta' programmi u għodda faċli"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr "Ambjent grafiku b' għażla ta' programmi u għodda faċli"
 
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment"
@@ -1313,31 +1641,14 @@ msgstr "Oħroġ"
 #~ msgstr ""
 #~ "Programmi ta' divertiment: logħob tal-arcaDES, karti, strateġija eċċ"
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr ""
-#~ "Programmi ta' divertiment: logħob tal-arcaDES, karti, strateġija eċċ"
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache, Pro-ftpd"
-
 #~ msgid "Automated"
 #~ msgstr "Awtomatizzata"
 
 #~ msgid "Bad package"
 #~ msgstr "Pakkett ħażin"
 
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Kotba u \"HOWTO\" dwar il-Linux u Softwer Ħieles"
-
 #~ msgid "Boot"
 #~ msgstr "Boot"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "Libreriji, programmi u fajls għal żviluppar C u C++"
 
 #~ msgid "CD-ROM"
 #~ msgstr "CD-ROM"
@@ -1359,31 +1670,11 @@ msgstr "Oħroġ"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Workstation"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "Klijenti għal protokolli differenti, eż. SSH"
-
 #~ msgid "Configure X"
 #~ msgstr "Ikkonfigura X"
 
-#~ msgid "Console Tools"
-#~ msgstr "Għodda tal-konsol"
-
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "Qed nikkuntattja l-mera biex nikseb lista tal-pakketti disponibbli"
-
-#, fuzzy
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS"
-
-#~ msgid "Database"
-#~ msgstr "Database"
-
-#~ msgid "Development"
-#~ msgstr "Żviluppar"
-
-#, fuzzy
-#~ msgid "Directory Server"
-#~ msgstr "Direttorju minn fejn trid tirrestawra"
 
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "Għandek kard tal-awdjo ISA?"
@@ -1391,26 +1682,12 @@ msgstr "Oħroġ"
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "Trid tuża \"aboot\"?"
 
-#~ msgid "Documentation"
-#~ msgstr "Dokumentazzjoni"
-
-#, fuzzy
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "Server tal-ismijiet tad-dominji"
-
 #, fuzzy
 #~ msgid "Downloading file %s..."
 #~ msgstr "Qed nibgħat fajls..."
 
 #~ msgid "DrakVPN"
 #~ msgstr "DrakVPN"
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "<b>Prodotti Moondrake</b>"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "Edituri, shells, għodda tal-fajls, terminals"
 
 #~ msgid ""
 #~ "Error installing aboot, \n"
@@ -1420,35 +1697,12 @@ msgstr "Oħroġ"
 #~ "trid tipprova timponi l-installazzjoni anke jekk tħassar l-ewwel "
 #~ "partizzjoni?"
 
-#~ msgid "FTP Server"
-#~ msgstr "Server FTP"
-
-#, fuzzy
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "Server tal-printer"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "Firewall/Router"
-
 #, fuzzy
 #~ msgid "Formatting"
 #~ msgstr "Qed nieħu stima"
 
-#~ msgid "GNOME Workstation"
-#~ msgstr "Stazzjon GNOME"
-
-#~ msgid "Game station"
-#~ msgstr "Logħob"
-
 #~ msgid "Generate auto install floppy"
 #~ msgstr "Oħloq flopi awto-installa"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "Ambjent Grafiku"
-
-#, fuzzy
-#~ msgid "Groupware"
-#~ msgstr "Grupp"
 
 #~ msgid "IDE"
 #~ msgstr "IDE"
@@ -1465,12 +1719,6 @@ msgstr "Oħroġ"
 #~ msgid "Installation class"
 #~ msgstr "Agħżel klassi ta' installazzjoni"
 
-#~ msgid "Internet gateway"
-#~ msgstr "Gateway tal-internet"
-
-#~ msgid "Internet station"
-#~ msgstr "Internet"
-
 #~ msgid "KDE"
 #~ msgstr "KDE"
 
@@ -1478,21 +1726,12 @@ msgstr "Oħroġ"
 #~ msgid "KDE Desktop"
 #~ msgstr "Desktop"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "Stazzjon KDE"
-
-#~ msgid "Kolab Server"
-#~ msgstr "Server Kolab"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
 #, fuzzy
-#~ msgid "LXDE Desktop"
+#~ msgid "LXQT Desktop"
 #~ msgstr "Desktop"
 
 #, fuzzy
-#~ msgid "LXQT Desktop"
+#~ msgid "LXQt Desktop"
 #~ msgstr "Desktop"
 
 #~ msgid "Language"
@@ -1501,19 +1740,9 @@ msgstr "Oħroġ"
 #~ msgid "License"
 #~ msgstr "Liċenzja"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "Linux Standard Base. Sapport ta' programmi ta' terzi partiti"
-
 #, fuzzy
 #~ msgid "MATE Workstation"
 #~ msgstr "Stazzjon GNOME"
-
-#~ msgid "Mail"
-#~ msgstr "Imejl"
-
-#, fuzzy
-#~ msgid "Mail/News"
-#~ msgstr "/File/_Ġdid"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Installazzjoni Mandriva Linux %s"
@@ -1525,26 +1754,6 @@ msgstr "Oħroġ"
 #, fuzzy
 #~ msgid "Moondrake Wizards"
 #~ msgstr "<b>Prodotti Moondrake</b>"
-
-#~ msgid "Multimedia station"
-#~ msgstr "Multimedja"
-
-#, fuzzy
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "Server Samba"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "Servers NFS, SMB, Proxy, ssh"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "Kompjuter fuq network (klijent)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "Kompjuter Server tan-Network"
-
-#, fuzzy
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "Monitoraġġ tan-network"
 
 #~ msgid "Networking"
 #~ msgstr "Networking"
@@ -1560,16 +1769,6 @@ msgstr "Oħroġ"
 #~ msgstr ""
 #~ "Ebda kard tal-awdjo ma nstabet. Ipprova ħaddem \"harddrake\" wara l-"
 #~ "installazzjoni"
-
-#~ msgid "Office Workstation"
-#~ msgstr "Kompjuter tal-Uffiċċju"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "Programmi tal-uffiċċju: wordprocessors (LibreOffice Writer, Kword), "
-#~ "spreadsheet (LibreOffice Calc, Kspread) eċċ"
 
 #, fuzzy
 #~ msgid ""
@@ -1590,26 +1789,13 @@ msgstr "Oħroġ"
 #~ msgid "Office tools"
 #~ msgstr "Kompjuter tal-Uffiċċju"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "Desktops Grafiċi Oħrajn"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "Server tal-imejl Postfix"
-
 #, fuzzy
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Server tal-imejl Postfix"
-
-#, fuzzy
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "Server tad-database PostgreSQL jew MariaDB"
+#~ msgid "Plasma Workstation"
+#~ msgstr "Workstation"
 
 #, fuzzy
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "Server tad-database PostgreSQL jew MySQL"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "Server tad-database PostgreSQL jew MariaDB"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "Server tad-database PostgreSQL jew MySQL"
@@ -1639,33 +1825,14 @@ msgstr "Oħroġ"
 #~ "Ħaddem \"alsaconf\" jew \"sndconfig\" wara l-installazzjoni biex "
 #~ "tikkonfigura l-kard awdjo."
 
-#~ msgid "SSH Server"
-#~ msgstr "Server SSH"
-
 #~ msgid "Save packages selection"
 #~ msgstr "Ikteb l-għażla ta' pakketti"
 
 #~ msgid "Select All"
 #~ msgstr "Kollox magħżul"
 
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "Sett għodda biex taqra u tibgħat imejl u \"news\", u biex tibbrawżja l-web"
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "Programmi għad-daqq u editjar ta' awdjo u video"
-
 #~ msgid "TV card"
 #~ msgstr "Kard TV"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr ""
-#~ "K Desktop Environment, l-interfaċċja grafika bażi, b'għażla ta' għodda "
-#~ "jakkumpanjawha"
 
 #, fuzzy
 #~ msgid ""
@@ -1688,58 +1855,22 @@ msgstr "Oħroġ"
 #~ "\n"
 #~ "Forsi tippreferi tuża \"replay\" tal-installazzjoni.\n"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "Għodda biex tiffaċilita l-konfigurazzjoni tal-kompjuter"
-
 #~ msgid "Unable to contact mirror %s"
 #~ msgstr "Ma stajtx nikkuntattja l-mera %s"
 
 #~ msgid "Users"
 #~ msgstr "Users"
 
-#, fuzzy
-#~ msgid "Utilities"
-#~ msgstr "Filippini"
-
-#~ msgid "Web Server"
-#~ msgstr "Server tal-web"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#, fuzzy
-#~ msgid "Webmin"
-#~ msgstr "Webcam"
-
-#, fuzzy
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Konfigurazzjoni tat-Terminal Server"
-
 #~ msgid "Welcome"
 #~ msgstr "Merħba"
-
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, eċċ"
 
 #, fuzzy
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, eċċ"
 
 #, fuzzy
-#~ msgid "Wizards to configure server"
-#~ msgstr "Ma stajtx nikkonfigura l-printer \"%s\"!"
-
-#~ msgid "Workstation"
-#~ msgstr "Workstation"
-
-#, fuzzy
 #~ msgid "XFCE Workstation"
 #~ msgstr "Stazzjon KDE"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "Kompjuter tal-Uffiċċju"
 
 #, fuzzy
 #~ msgid ""

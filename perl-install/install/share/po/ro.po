@@ -43,7 +43,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2011-02-10 22:50+0100\n"
 "Last-Translator: Cătălin Florin RUSSEN <cfrussen@yahoo.co.uk>\n"
 "Language-Team: Romanian <cooker-i18n@mandrivalinux.org  >\n"
@@ -358,7 +358,7 @@ msgstr "Capturile de ecran vor fi disponibile după instalare în %s"
 msgid "Installation"
 msgstr "Instalare"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "Configurare"
@@ -483,6 +483,363 @@ msgstr "%d operațiuni de instalare eșuate"
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "Instalarea pachetelor a eșuat:"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "Stație de lucru"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "Calculator de birou"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Programe de birotică: procesoare de text (LibreOffice Writer, Kword), calcul "
+"tabelar (LibreOffice Calc, Kspread), vizualizatoare de fișiere PDF, etc."
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "Stație de jocuri"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "Programe de amuzament: jocuri de acțiune, table, strategie etc."
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "Stație multimedia"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Programe de editare/redare sunet și video"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Stație de Internet"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Set de unelte pentru citire/trimitere de poștă și știri (mutt, tin..) și "
+"navigare pe Internet"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Calculator în rețea (client)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Clienți pentru diverse protocoale, inclusiv ssh"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Unelete pentru a vă ușura configurarea calculatorului"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Unelte de consolă"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "Editoare, interpretoare, terminale, unelte de fișiere"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "Dezvoltare"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "Biblioteci de dezvoltare C și C++, programe și fișiere include"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "Documentație"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Cărți și ghiduri despre Linux și programele libere"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "Baza standard Linux. Suport pentru aplicații terțe."
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "Server Web"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "Lucru colaborativ"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Server Kolab"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "Parafoc/Ruter"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "Pasarelă Internet"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "Poștă/Știri"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Serverul de poștă Postfix, serverul de știri Inn"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "Server de anuar"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "Server FTP"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "Server de DNS și NIS"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Server de fișiere și de partajare a imprimantei"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "Server NFS, server Samba"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "Bază de date"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "Server de baze de date MariaDB și PostgreSQL"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "Poștă electronică"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Serverul de poștă electronică Postfix"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "Serverul de baze de date MariaDB sau PostgreSQL"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "Server în rețea"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "Server NFS, SMB, Proxy, SSH"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "Mediu grafic de lucru"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "Stație de lucru KDE"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"Mediul de birou K, mediul grafic de bază cu o colecție de unelte asociate"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "Stație de lucru Gnome"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr "Un mediu grafic cu un set de aplicații prietenoase și unelte de birou"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "Calculator de birou"
+
+#: share/meta-task/compssUsers.pl:176
+#, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr ""
+"Un mediu grafic lejer cu un set de unelte de birou și de aplicații "
+"prietenoase"
+
+#: share/meta-task/compssUsers.pl:181
+#, c-format
+msgid "LXDE Desktop"
+msgstr "Birou LXDE"
+
+#: share/meta-task/compssUsers.pl:183
+#, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"Un mediu grafic lejer și rapid cu un set de aplicații prietenoase și unelte "
+"de birou"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Alte medii grafice"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Window Maker, Enlightenment, Fvwm, etc"
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "Utilitare"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "Server SSH"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Serverul de configurare distantă Webmin"
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Utilitare rețea/Supraveghere"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "Unelte de supraveghere, evidența proceselor, tcpdump, nmap, ..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "Asistenții Moondrake"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "Asistenți pentru configurarea de server"
 
 #: steps.pm:85
 #, c-format
@@ -1340,40 +1697,14 @@ msgid ""
 "Exit"
 msgstr "Ieșire"
 
-#~ msgid "LXQt Desktop"
-#~ msgstr "Birou LXQt"
-
-#~ msgid "Plasma Workstation"
-#~ msgstr "Stația de lucru Plasma"
-
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Un birou Mandriva Linux complet, cu suport"
 
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "Un mediu grafic bazat pe GNOME"
 
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "Un mediu grafic cu un set de aplicații prietenoase și unelte de birou"
-
 #~ msgid "A less developed lightweight fast graphical environment"
 #~ msgstr "Un mediu grafic lejer și rapid mai puțin dezvoltat"
-
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "Un mediu grafic lejer cu un set de unelte de birou și de aplicații "
-#~ "prietenoase"
-
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "Un mediu grafic lejer și rapid cu un set de aplicații prietenoase și "
-#~ "unelte de birou"
 
 #~ msgid "A lightweight fast graphical environment"
 #~ msgstr "Un mediu grafic lejer și rapid"
@@ -1387,27 +1718,11 @@ msgstr "Ieșire"
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "Programe de amuzament: jocuri de acțiune, table, strategie etc."
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "Programe de amuzament: jocuri de acțiune, table, strategie etc."
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache, Pro-ftpd"
-
 #~ msgid "Bad package"
 #~ msgstr "Pachet defectuos"
 
 #~ msgid "Be Free!"
 #~ msgstr "Fiți liberi!"
-
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Cărți și ghiduri despre Linux și programele libere"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "Biblioteci de dezvoltare C și C++, programe și fișiere include"
 
 #~ msgid "CD-ROM"
 #~ msgstr "CD-ROM"
@@ -1415,60 +1730,20 @@ msgstr "Ieșire"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Stație de lucru Cinnamon"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "Clienți pentru diverse protocoale, inclusiv ssh"
-
-#~ msgid "Console Tools"
-#~ msgstr "Unelte de consolă"
-
 #~ msgid "Core Release"
 #~ msgstr "Ediția de bază"
-
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "Bază de date"
-
-#~ msgid "Development"
-#~ msgstr "Dezvoltare"
-
-#~ msgid "Directory Server"
-#~ msgstr "Server de anuar"
 
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "Aveți o placă de sunet ISA?"
 
-#~ msgid "Documentation"
-#~ msgstr "Documentație"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "Server de DNS și NIS"
-
 #~ msgid "Downloading file %s..."
 #~ msgstr "Se descarcă fișierul %s..."
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "Asistenții Moondrake"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "Editoare, interpretoare, terminale, unelte de fișiere"
 
 #~ msgid "Enlightenment e17 Desktop"
 #~ msgstr "Birou Enlightenment e17"
 
 #~ msgid "Explore Linux easily with Mandriva One"
 #~ msgstr "Explorați facil Linux cu Mandriva One"
-
-#~ msgid "FTP Server"
-#~ msgstr "Server FTP"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "Server de fișiere și de partajare a imprimantei"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "Parafoc/Ruter"
 
 #~ msgid "For developers!"
 #~ msgstr "Pentru dezvoltatori!"
@@ -1478,18 +1753,6 @@ msgstr "Ieșire"
 
 #~ msgid "For kids"
 #~ msgstr "Pentru copii"
-
-#~ msgid "GNOME Workstation"
-#~ msgstr "Stație de lucru Gnome"
-
-#~ msgid "Game station"
-#~ msgstr "Stație de jocuri"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "Mediu grafic de lucru"
-
-#~ msgid "Groupware"
-#~ msgstr "Lucru colaborativ"
 
 #~ msgid "Home entertainment"
 #~ msgstr "Divertisment"
@@ -1519,12 +1782,6 @@ msgstr "Ieșire"
 #~ "personale\n"
 #~ "înainte de a alege \"Instalare nouă\"."
 
-#~ msgid "Internet gateway"
-#~ msgstr "Pasarelă Internet"
-
-#~ msgid "Internet station"
-#~ msgstr "Stație de Internet"
-
 #~ msgid "Join Us!"
 #~ msgstr "Alăturați-vă nouă!"
 
@@ -1534,32 +1791,14 @@ msgstr "Ieșire"
 #~ msgid "KDE Desktop"
 #~ msgstr "Birou KDE"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "Stație de lucru KDE"
-
-#~ msgid "Kolab Server"
-#~ msgstr "Server Kolab"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
-#~ msgid "LXDE Desktop"
-#~ msgstr "Birou LXDE"
-
 #~ msgid "LXQT Desktop"
 #~ msgstr "Birou LXQT"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "Baza standard Linux. Suport pentru aplicații terțe."
+#~ msgid "LXQt Desktop"
+#~ msgstr "Birou LXQt"
 
 #~ msgid "MATE Workstation"
 #~ msgstr "Stație de lucru MATE"
-
-#~ msgid "Mail"
-#~ msgstr "Poștă electronică"
-
-#~ msgid "Mail/News"
-#~ msgstr "Poștă/Știri"
 
 #~ msgid "Make it yours!"
 #~ msgstr "Personalizați după plac!"
@@ -1573,29 +1812,8 @@ msgstr "Ieșire"
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr "Mandriva: distribuții pentru nevoile fiecăruia"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "Unelte de supraveghere, evidența proceselor, tcpdump, nmap, ..."
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "Asistenții Moondrake"
-
-#~ msgid "Multimedia station"
-#~ msgstr "Stație multimedia"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "Server NFS, server Samba"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "Server NFS, SMB, Proxy, SSH"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "Calculator în rețea (client)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "Server în rețea"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "Utilitare rețea/Supraveghere"
 
 #~ msgid ""
 #~ "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1612,17 +1830,6 @@ msgstr "Ieșire"
 
 #~ msgid "Nonfree Release"
 #~ msgstr "Ediția proprietară"
-
-#~ msgid "Office Workstation"
-#~ msgstr "Calculator de birou"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "Programe de birotică: procesoare de text (LibreOffice Writer, Kword), "
-#~ "calcul tabelar (LibreOffice Calc, Kspread), vizualizatoare de fișiere "
-#~ "PDF, etc."
 
 #, fuzzy
 #~ msgid ""
@@ -1643,23 +1850,11 @@ msgstr "Ieșire"
 #~ msgid "Office tools"
 #~ msgstr "Unelte de birotică"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "Alte medii grafice"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "Serverul de poștă electronică Postfix"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Serverul de poștă Postfix, serverul de știri Inn"
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "Server de baze de date MariaDB și PostgreSQL"
+#~ msgid "Plasma Workstation"
+#~ msgstr "Stația de lucru Plasma"
 
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "Server de baze de date MySQL și PostgreSQL"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "Serverul de baze de date MariaDB sau PostgreSQL"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "Serverul de baze de date MySQL sau PostgreSQL"
@@ -1669,9 +1864,6 @@ msgstr "Ieșire"
 
 #~ msgid "Preparing upgrade..."
 #~ msgstr "Se pregătește actualizarea majoră..."
-
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
 
 #~ msgid "Proceed"
 #~ msgstr "Procedează"
@@ -1686,19 +1878,6 @@ msgstr "Ieșire"
 #~ "Lansați „alsaconf” sau „sndconfig” după instalare pentru a vă configura "
 #~ "placa de sunet"
 
-#~ msgid "SSH Server"
-#~ msgstr "Server SSH"
-
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "Set de unelte pentru citire/trimitere de poștă și știri (mutt, tin..) și "
-#~ "navigare pe Internet"
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "Programe de editare/redare sunet și video"
-
 #~ msgid "Tainted Release"
 #~ msgstr "Ediția nuanțată"
 
@@ -1709,12 +1888,6 @@ msgstr "Ieșire"
 #~ msgstr "Distribuția Mandriva Linux 100%% cu sursă deschisă"
 
 #~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr ""
-#~ "Mediul de birou K, mediul grafic de bază cu o colecție de unelte asociate"
-
-#~ msgid ""
 #~ "The Plasma Desktop, the basic graphical environment with a collection of "
 #~ "accompanying tools"
 #~ msgstr ""
@@ -1722,9 +1895,6 @@ msgstr "Ieșire"
 
 #~ msgid "This medium provides package updates for medium \"%s\""
 #~ msgstr "Acest mediu furnizează actualizări pentru mediul „%s”"
-
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "Unelete pentru a vă ușura configurarea calculatorului"
 
 #~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 #~ msgstr ""
@@ -1736,40 +1906,11 @@ msgstr "Ieșire"
 #~ "Actualizarea majoră de la o distribuție pe 64 de biți la una pe 32 de "
 #~ "biți nu este suportată."
 
-#~ msgid "Utilities"
-#~ msgstr "Utilitare"
-
-#~ msgid "Web Server"
-#~ msgstr "Server Web"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Serverul de configurare distantă Webmin"
-
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Window Maker, Enlightenment, Fvwm, etc"
-
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Window Maker, Fvwm, etc."
 
-#~ msgid "Wizards to configure server"
-#~ msgstr "Asistenți pentru configurarea de server"
-
-#~ msgid "Workstation"
-#~ msgstr "Stație de lucru"
-
 #~ msgid "XFCE Workstation"
 #~ msgstr "Stație de lucru XFCE"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "Calculator de birou"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

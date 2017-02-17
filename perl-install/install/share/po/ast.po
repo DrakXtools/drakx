@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2009-11-04 19:22+0100\n"
 "Last-Translator: astur <malditoastur@gmail.com>\n"
 "Language-Team: Asturian <alministradores@softastur.org>\n"
@@ -318,7 +318,7 @@ msgstr ""
 msgid "Installation"
 msgstr "Instalación"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "Configuración"
@@ -443,6 +443,366 @@ msgstr "Fallaron %d tresaiciones d'instalación"
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "Falló la instalación de paquetes:"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "Estación de trabayu"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "Estación de trabayu d'Oficina"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Programes d'Oficina: procesadores de testu (LibreOffice Writer, Kword), "
+"fueyes de cálculu (LibreOffice Calc, Kspread), visualizadores PDF, etc"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "Estación de Xuegos"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "Programes d'entretenimientu: arcade, tableros, estratexía, etc"
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "Estación Multimedia"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Programes de reproducción/edición de soníu y vidéu"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Estación d'Internet"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Conxuntu de ferramientes pa lleer y unviar corréu y noticies (mutt, tin...) "
+"y pa restolar pola Web"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Ordenador de Rede (veceru)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Veceros pa los distintos protocolos incluyendo a SSH"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Ferramientes pa facilitar la configuración del to ordenador"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Ferramientes pa la consola"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "Editores, shells, manipulación de ficheros, terminales"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "Desendolcu"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "Biblioteques de desendolcu C y C++, programes y ficheros *.h"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "Documentación"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Llibros y aides sobro Linux y Software Llibre"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "Linux Standard Base. Sofitu d'aplicaciones de terceros"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "Sirvidor web"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "Grupos de trabayu"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Sirvidor Kolab"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "Tornafuegos/Router"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "Pasarela d'accesu a Internet"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "Corréu/Noticies"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Sirvidor de corréu Postfix, sirvidor de noticies Inn"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "Sirvidor de direutorios"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "Sirvidor FTP"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "Sirvidor de nomes de dominiu y sirvidor d'información de rede"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Sirvidor de ficheros ya impresión"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "Sirvidor NFS, sirvidor Samba"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "Base de Datos"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "Sirvidor de base de datos PostgreSQL y MariaDB"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache y Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "Corréu"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Sirvidor de corréu Postfix"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "Sirvidor de base de datos PostgreSQL o MariaDB"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "Sirvidor de rede"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "Sirvidor NFS, sirvidor SMB, sirvidor proxy, sirvidor SSH"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "Entornu gráficu"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "Estación de trabayu KDE"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"L'entornu d'Escritoriu K, l'entornu gráficu básicu con una coleición de "
+"ferramientes que lu acompañen"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "Estación de trabayu GNOME"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"Entornu gráficu con un conxuntu de ferramientes d'escritoriu y aplicaciones "
+"amigables"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "Estación de trabayu d'Oficina"
+
+#: share/meta-task/compssUsers.pl:176
+#, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr ""
+"Un entornu d'escritoriu más llixeru con un conxuntu d'aplicaciones y "
+"ferramientes amigables"
+
+#: share/meta-task/compssUsers.pl:181
+#, c-format
+msgid "LXDE Desktop"
+msgstr "Escritoriu LXDE"
+
+#: share/meta-task/compssUsers.pl:183
+#, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"Un entornu gráficu llixeru y rápidu con un conxuntu de ferramientes "
+"d'escritoriu y aplicaciones amigables"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Otros entornos gráficos"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Window Maker, Enlightenment, Fvwm, etc"
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "Utilidaes"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "Sirvidor SSH"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Sirvidor de configuración remota Webmin"
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Utilidaes/Supervisión de rede"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "Ferramientes de supervisión, control de procesos, tcpdump, nmap, ..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "Asistentes de Moondrake"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "Asistentes pa configurar el sirvidor"
 
 #: steps.pm:85
 #, c-format
@@ -1294,15 +1654,14 @@ msgid ""
 "Exit"
 msgstr "Colar"
 
+#~ msgid "A full Mandriva Linux desktop, with support"
+#~ msgstr "Un escritoriu Mandriva Linux completu, con sofitu"
+
+#~ msgid "A full Moondrake desktop, with support"
+#~ msgstr "Un escritoriu Moondrake completu, con sofitu"
+
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "Un entornu gráficu basáu en GNOME"
-
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "Un entornu d'escritoriu más llixeru con un conxuntu d'aplicaciones y "
-#~ "ferramientes amigables"
 
 #~ msgid "A lightweight fast graphical environment"
 #~ msgstr "Un entronu d'escritoriu rápidu y llixeru"
@@ -1313,17 +1672,57 @@ msgstr "Colar"
 #~ msgid "A next generation QT port of the lightweight desktop environment"
 #~ msgstr "Un entronu d'escritoriu basáu en QT y LXDE de nueva xeneración"
 
+#~ msgid "Amusement programs: arcade, boards, strategy, etc"
+#~ msgstr "Programes d'entretenimientu: arcade, tableros, estratexía, etc"
+
+#~ msgid "Automated"
+#~ msgstr "Automatizada"
+
+#~ msgid "Bad package"
+#~ msgstr "Paquete incorreutu"
+
 #~ msgid "Be Free!"
 #~ msgstr "¡Sé llibre!"
+
+#~ msgid "CD-ROM"
+#~ msgstr "CD-ROM"
 
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Estación de trabayu Cinnamon"
 
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Contactando con el sitio de réplica para obtener la lista de los paquetes "
+#~ "disponibles..."
+
 #~ msgid "Core Release"
 #~ msgstr "Llanzamientu Core"
 
+#~ msgid "Do you have an ISA sound card?"
+#~ msgstr "¿Tienes una tarxeta de soníu ISA?"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "¿Desea usar aboot?"
+
+#~ msgid "Downloading file %s..."
+#~ msgstr "Descargando el archivo %s..."
+
 #~ msgid "Enlightenment e17 Desktop"
 #~ msgstr "Escritoriu Enlightenment e17"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "Ocurrió un error al instalar aboot, \n"
+#~ "¿desea forzar la instalación incluso si ello implicara la destrucción de "
+#~ "la primera partición?"
+
+#~ msgid "Explore Linux easily with Mandriva One"
+#~ msgstr "Restola Linux con facilidá per aciu de Mandriva One"
+
+#~ msgid "Explore Linux easily with Moondrake One"
+#~ msgstr "Restola Linux con facilidá per aciu de Moondrake One"
 
 #~ msgid "For developers!"
 #~ msgstr "¡Pa desendolcadores!"
@@ -1334,8 +1733,17 @@ msgstr "Colar"
 #~ msgid "For kids"
 #~ msgstr "Pa guaḥes"
 
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Generar un disquete de instalación automática"
+
 #~ msgid "Home entertainment"
 #~ msgstr "Entretenimientu llariegu"
+
+#~ msgid "IDE"
+#~ msgstr "IDE"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "Escritorio IceWm"
 
 #~ msgid "Install recommended packages"
 #~ msgstr "Instalar paquetes aconseyaos"
@@ -1361,6 +1769,16 @@ msgstr "Colar"
 #~ msgid "Join Us!"
 #~ msgstr "¡Xúnite a nós!"
 
+#~ msgid "KDE"
+#~ msgstr "KDE"
+
+#~ msgid "KDE Desktop"
+#~ msgstr "Escritoriu KDE"
+
+#, fuzzy
+#~ msgid "LXQT Desktop"
+#~ msgstr "Escritoriu LXDE"
+
 #~ msgid "LXQt Desktop"
 #~ msgstr "Escritoriu LXQt"
 
@@ -1369,207 +1787,6 @@ msgstr "Colar"
 
 #~ msgid "Make it yours!"
 #~ msgstr "¡Failu de to!"
-
-#~ msgid "Nonfree Release"
-#~ msgstr "Llanzamientu nonfree"
-
-#~ msgid "Office tools"
-#~ msgstr "Ferramientes d'oficina"
-
-#~ msgid "Preparing upgrade..."
-#~ msgstr "Tresnando anovamientu..."
-
-#~ msgid "Tainted Release"
-#~ msgstr "Llanzamientu Tainted"
-
-#~ msgid "Thank you!"
-#~ msgstr "¡Gracies!"
-
-#~ msgid "This medium provides package updates for medium \"%s\""
-#~ msgstr "Esti mediu apurre anovamientos de paquete pal mediu \"%s\""
-
-#~ msgid "Window Maker, Fvwm, etc"
-#~ msgstr "Window Maker, Fvwm, etc"
-
-#~ msgid "XFCE Workstation"
-#~ msgstr "Estación de trabayu XFCE"
-
-#~ msgid "Your choice!"
-#~ msgstr "¡La to escoyeta!"
-
-#~ msgid "A full Mandriva Linux desktop, with support"
-#~ msgstr "Un escritoriu Mandriva Linux completu, con sofitu"
-
-#~ msgid "A full Moondrake desktop, with support"
-#~ msgstr "Un escritoriu Moondrake completu, con sofitu"
-
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "Entornu gráficu con un conxuntu de ferramientes d'escritoriu y "
-#~ "aplicaciones amigables"
-
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "Un entornu gráficu llixeru y rápidu con un conxuntu de ferramientes "
-#~ "d'escritoriu y aplicaciones amigables"
-
-#~ msgid "Amusement programs: arcade, boards, strategy, etc"
-#~ msgstr "Programes d'entretenimientu: arcade, tableros, estratexía, etc"
-
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "Programes d'entretenimientu: arcade, tableros, estratexía, etc"
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache y Pro-ftpd"
-
-#~ msgid "Automated"
-#~ msgstr "Automatizada"
-
-#~ msgid "Bad package"
-#~ msgstr "Paquete incorreutu"
-
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Llibros y aides sobro Linux y Software Llibre"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "Biblioteques de desendolcu C y C++, programes y ficheros *.h"
-
-#~ msgid "CD-ROM"
-#~ msgstr "CD-ROM"
-
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "Veceros pa los distintos protocolos incluyendo a SSH"
-
-#~ msgid "Console Tools"
-#~ msgstr "Ferramientes pa la consola"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "Contactando con el sitio de réplica para obtener la lista de los paquetes "
-#~ "disponibles..."
-
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "Base de Datos"
-
-#~ msgid "Development"
-#~ msgstr "Desendolcu"
-
-#~ msgid "Directory Server"
-#~ msgstr "Sirvidor de direutorios"
-
-#~ msgid "Do you have an ISA sound card?"
-#~ msgstr "¿Tienes una tarxeta de soníu ISA?"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "¿Desea usar aboot?"
-
-#~ msgid "Documentation"
-#~ msgstr "Documentación"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "Sirvidor de nomes de dominiu y sirvidor d'información de rede"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "Descargando el archivo %s..."
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "Asistentes de Moondrake"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "Editores, shells, manipulación de ficheros, terminales"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Ocurrió un error al instalar aboot, \n"
-#~ "¿desea forzar la instalación incluso si ello implicara la destrucción de "
-#~ "la primera partición?"
-
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Restola Linux con facilidá per aciu de Mandriva One"
-
-#~ msgid "Explore Linux easily with Moondrake One"
-#~ msgstr "Restola Linux con facilidá per aciu de Moondrake One"
-
-#~ msgid "FTP Server"
-#~ msgstr "Sirvidor FTP"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "Sirvidor de ficheros ya impresión"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "Tornafuegos/Router"
-
-#~ msgid "GNOME Workstation"
-#~ msgstr "Estación de trabayu GNOME"
-
-#~ msgid "Game station"
-#~ msgstr "Estación de Xuegos"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Generar un disquete de instalación automática"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "Entornu gráficu"
-
-#~ msgid "Groupware"
-#~ msgstr "Grupos de trabayu"
-
-#~ msgid "IDE"
-#~ msgstr "IDE"
-
-#~ msgid "IceWm Desktop"
-#~ msgstr "Escritorio IceWm"
-
-#~ msgid "Internet gateway"
-#~ msgstr "Pasarela d'accesu a Internet"
-
-#~ msgid "Internet station"
-#~ msgstr "Estación d'Internet"
-
-#~ msgid "KDE"
-#~ msgstr "KDE"
-
-#~ msgid "KDE Desktop"
-#~ msgstr "Escritoriu KDE"
-
-#~ msgid "KDE Workstation"
-#~ msgstr "Estación de trabayu KDE"
-
-#~ msgid "Kolab Server"
-#~ msgstr "Sirvidor Kolab"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
-#~ msgid "LXDE Desktop"
-#~ msgstr "Escritoriu LXDE"
-
-#, fuzzy
-#~ msgid "LXQT Desktop"
-#~ msgstr "Escritoriu LXDE"
-
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "Linux Standard Base. Sofitu d'aplicaciones de terceros"
-
-#~ msgid "Mail"
-#~ msgstr "Corréu"
-
-#~ msgid "Mail/News"
-#~ msgstr "Corréu/Noticies"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Instalación de Mandriva Linux %s"
@@ -1580,33 +1797,11 @@ msgstr "Colar"
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr "Mandriva: distribuciones pa les necesidaes de toos"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr ""
-#~ "Ferramientes de supervisión, control de procesos, tcpdump, nmap, ..."
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "Asistentes de Moondrake"
 
 #~ msgid "Moondrake: distributions for everybody's needs"
 #~ msgstr "Moondrake: distribuciones pa les necesidaes de toos"
-
-#~ msgid "Multimedia station"
-#~ msgstr "Estación Multimedia"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "Sirvidor NFS, sirvidor Samba"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "Sirvidor NFS, sirvidor SMB, sirvidor proxy, sirvidor SSH"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "Ordenador de Rede (veceru)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "Sirvidor de rede"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "Utilidaes/Supervisión de rede"
 
 #~ msgid ""
 #~ "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1621,15 +1816,8 @@ msgstr "Colar"
 #~ "Nun se deteutó tarxeta de soníu. Preba \"harddrake\" dempués de la "
 #~ "instalación"
 
-#~ msgid "Office Workstation"
-#~ msgstr "Estación de trabayu d'Oficina"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "Programes d'Oficina: procesadores de testu (LibreOffice Writer, Kword), "
-#~ "fueyes de cálculu (LibreOffice Calc, Kspread), visualizadores PDF, etc"
+#~ msgid "Nonfree Release"
+#~ msgstr "Llanzamientu nonfree"
 
 #, fuzzy
 #~ msgid ""
@@ -1646,23 +1834,11 @@ msgstr "Colar"
 #~ "Programes d'Oficina: procesadores de pallabres (kword, abiword), plantíes "
 #~ "de cálculu (kspread, gnumeric), visualizadores PDF, etc"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "Otros entornos gráficos"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "Sirvidor de corréu Postfix"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Sirvidor de corréu Postfix, sirvidor de noticies Inn"
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "Sirvidor de base de datos PostgreSQL y MariaDB"
+#~ msgid "Office tools"
+#~ msgstr "Ferramientes d'oficina"
 
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "Sirvidor de base de datos PostgreSQL y MySQL"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "Sirvidor de base de datos PostgreSQL o MariaDB"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "Sirvidor de base de datos PostgreSQL o MySQL"
@@ -1674,8 +1850,8 @@ msgstr "Colar"
 #~ msgid "Preparing bootloader..."
 #~ msgstr "Tresnando'l cargador d'arranque"
 
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
+#~ msgid "Preparing upgrade..."
+#~ msgstr "Tresnando anovamientu..."
 
 #~ msgid "Proceed"
 #~ msgstr "Continuar"
@@ -1694,34 +1870,20 @@ msgstr "Colar"
 #~ "Usa \"alsaconf\" o \"sndconfig\" dempués de la instalación pa configurar "
 #~ "la to tarxeta de soníu"
 
-#~ msgid "SSH Server"
-#~ msgstr "Sirvidor SSH"
-
 #~ msgid "Save packages selection"
 #~ msgstr "Guardar la selección de paquetes"
 
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "Conxuntu de ferramientes pa lleer y unviar corréu y noticies (mutt, "
-#~ "tin...) y pa restolar pola Web"
+#~ msgid "Tainted Release"
+#~ msgstr "Llanzamientu Tainted"
 
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "Programes de reproducción/edición de soníu y vidéu"
+#~ msgid "Thank you!"
+#~ msgstr "¡Gracies!"
 
 #~ msgid "The 100%% open source Mandriva Linux distribution"
 #~ msgstr "La distribución Mandriva Linux 100%% códigu llibre"
 
 #~ msgid "The 100%% open source Moondrake distribution"
 #~ msgstr "La distribución Moondrake 100%% códigu llibre"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr ""
-#~ "L'entornu d'Escritoriu K, l'entornu gráficu básicu con una coleición de "
-#~ "ferramientes que lu acompañen"
 
 #, fuzzy
 #~ msgid ""
@@ -1744,8 +1906,8 @@ msgstr "Colar"
 #~ "\n"
 #~ "Puede preferir reproducir la instalación.\n"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "Ferramientes pa facilitar la configuración del to ordenador"
+#~ msgid "This medium provides package updates for medium \"%s\""
+#~ msgstr "Esti mediu apurre anovamientos de paquete pal mediu \"%s\""
 
 #~ msgid "Unable to contact mirror %s"
 #~ msgstr "No se puede contactar al sitio de réplica %s"
@@ -1758,37 +1920,14 @@ msgstr "Colar"
 #~ msgstr ""
 #~ "No se soporta la actualización de una distribución 64 bit a una 32 bit"
 
-#~ msgid "Utilities"
-#~ msgstr "Utilidaes"
-
-#~ msgid "Web Server"
-#~ msgstr "Sirvidor web"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Sirvidor de configuración remota Webmin"
-
 #~ msgid "Welcome"
 #~ msgstr "Bienvenido"
 
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Window Maker, Enlightenment, Fvwm, etc"
+#~ msgid "Window Maker, Fvwm, etc"
+#~ msgstr "Window Maker, Fvwm, etc"
 
-#~ msgid "Wizards to configure server"
-#~ msgstr "Asistentes pa configurar el sirvidor"
-
-#~ msgid "Workstation"
-#~ msgstr "Estación de trabayu"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "Estación de trabayu d'Oficina"
+#~ msgid "XFCE Workstation"
+#~ msgstr "Estación de trabayu XFCE"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1850,6 +1989,9 @@ msgstr "Colar"
 #~ "¡Necesites criar un bootstrap d'arranque PReP PPC! La instalación "
 #~ "siguirá, pero p'arrancar el to sistema, necesitarás criar la partición "
 #~ "bootstrap en DiskDrake"
+
+#~ msgid "Your choice!"
+#~ msgstr "¡La to escoyeta!"
 
 #~ msgid "Your desktop on a USB key"
 #~ msgstr "El to escritoriu nun llápiz USB"

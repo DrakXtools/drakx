@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2006-09-24 17:51+0200\n"
 "Last-Translator: Māris Laureckis <marlau@inbox.lv>\n"
 "Language-Team: Latgalian <linux@latgola.lv>\n"
@@ -304,7 +304,7 @@ msgstr "Ekrana attāli byus pīejami piec instaleišonys %s"
 msgid "Installation"
 msgstr "Instalaceja"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "Konfiguraceja"
@@ -424,6 +424,366 @@ msgstr "%d instalacejis transakcejis naizadeve"
 #, fuzzy, c-format
 msgid "Installation of packages failed:"
 msgstr "Instaleju pakūtni %s"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "Dorba staceja"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "Biroja dators"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Biroja programmys: teksta procesori (LibreOffice Writer, Kword), "
+"izkluojlopys (LibreOffice Calc, Kspread), PDF skateituoji, u.c."
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "Spēļu dators"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "Izklaidis programmys: arkade, goldaspēlis, strategeja u.c."
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "Multimedeju dators"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Skanis i video atskaņuošonys/redigeišonys programmys"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Interneta dators"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Reiku komplekts, lai laseitu i syuteitu postu voi jaunumus (mutt, tin..), i "
+"puorlyukuotu Puorstaipteiklu"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Teikla dators (klients)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Klienti dažaidim protokolim, īskaitūt ssh"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Reiki datora konfigureišonys atvīgluošonai"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Konsolis reiki"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "Redaktori, čaulys, failu reiki, terminali"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "Izstruode"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "C i C++ izstruodis bibliotekys, programmys i īkļautī faili"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "Dokumentaceja"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Gruomotys i vaicuojumu par Linux i Breivū programmaturu"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "Linuks Standarta Bāze. Trešū izstruoduoju aplikaceju atbolsts"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "Puorstaipteikla (Web) servers"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "Groupware"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Kolab servers"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "Gunsmyurs/Maršrutizators"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "Interneta vuorteja"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "Posts/Jauns"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Postfix posta servers, Inn ziņu servers"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "Katalogu Servers"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "FTP servers"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "DNS i NIS servers"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Failu un Printeru Kūplītuošonys servers"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "NFS servers, Samba servers"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "Datubāzis"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "PostgreSQL i MariaDB datubāžu servers"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Teimeklis/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "Posts"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Postfix posta servers"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "PostgreSQL voi MariaDB datubāžu servers"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "Teikla datoru servers"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "NFS servers, SMB servers, storpnīkservers (Proxy), ssh servers"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "Grafiskuo vide"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "KDE dorba staceja"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"K Desktop Environment, golvonuo grafiskuo vide kūpā ar papyldus reiku "
+"kolekceju"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "Gnome dorba staceja"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"Grafiskuo vide ar lītuotuojam draudzeigu programmu komplektu i dorba "
+"viersmys reikim"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "Biroja dators"
+
+#: share/meta-task/compssUsers.pl:176
+#, fuzzy, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr ""
+"Grafiskuo vide ar lītuotuojam draudzeigu programmu komplektu i dorba "
+"viersmys reikim"
+
+#: share/meta-task/compssUsers.pl:181
+#, fuzzy, c-format
+msgid "LXDE Desktop"
+msgstr "IceWm Dorba viersma"
+
+#: share/meta-task/compssUsers.pl:183
+#, fuzzy, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"Grafiskuo vide ar lītuotuojam draudzeigu programmu komplektu i dorba "
+"viersmys reikim"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Cytys grafiskuos dorba viersmys"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Window Maker, Enlightenment, Fvwm u.c."
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "Utilitys"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "SSH servers"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Webmin attuolynuotuos konfiguracejis servers "
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Teikla utilitys/puorraudzeiba"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "Puorraudzeibys reiki, procesu uzskaite, tcpdump, nmap, ..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "Moondrake paleigi"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "Servera konfiguracejis paleigi"
 
 #: steps.pm:85
 #, c-format
@@ -1269,14 +1629,6 @@ msgid ""
 "Exit"
 msgstr "Izīt"
 
-#, fuzzy
-#~ msgid "LXQt Desktop"
-#~ msgstr "IceWm Dorba viersma"
-
-#, fuzzy
-#~ msgid "Plasma Workstation"
-#~ msgstr "Dorba staceja"
-
 #~ msgid "%d packages"
 #~ msgstr "%d pakūtnis"
 
@@ -1296,29 +1648,6 @@ msgstr "Izīt"
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "Grafiskuo vide"
 
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "Grafiskuo vide ar lītuotuojam draudzeigu programmu komplektu i dorba "
-#~ "viersmys reikim"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "Grafiskuo vide ar lītuotuojam draudzeigu programmu komplektu i dorba "
-#~ "viersmys reikim"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "Grafiskuo vide ar lītuotuojam draudzeigu programmu komplektu i dorba "
-#~ "viersmys reikim"
-
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment"
 #~ msgstr ""
@@ -1337,16 +1666,6 @@ msgstr "Izīt"
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "Izklaidis programmys: arkade, goldaspēlis, strategeja u.c."
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "Izklaidis programmys: arkade, goldaspēlis, strategeja u.c."
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache, Pro-ftpd"
-
 #~ msgid "Arkeia"
 #~ msgstr "Arkeia"
 
@@ -1356,14 +1675,8 @@ msgstr "Izīt"
 #~ msgid "Bad package"
 #~ msgstr "Slykta pakūtne"
 
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Gruomotys i vaicuojumu par Linux i Breivū programmaturu"
-
 #~ msgid "Boot"
 #~ msgstr "Suoknēt"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "C i C++ izstruodis bibliotekys, programmys i īkļautī faili"
 
 #~ msgid "CD-ROM"
 #~ msgstr "CD-ROM"
@@ -1390,29 +1703,11 @@ msgstr "Izīt"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Dorba staceja"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "Klienti dažaidim protokolim, īskaitūt ssh"
-
 #~ msgid "Configure X"
 #~ msgstr "X konfigureišona"
 
-#~ msgid "Console Tools"
-#~ msgstr "Konsolis reiki"
-
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "Pīsaslādzu spūguļserveram, lai sajimtu pīejamū pakūtņu sarokstu"
-
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "Datubāzis"
-
-#~ msgid "Development"
-#~ msgstr "Izstruode"
-
-#~ msgid "Directory Server"
-#~ msgstr "Katalogu Servers"
 
 #~ msgid "Discovery Live Mode"
 #~ msgstr "Discovery Dzeivaja reižimā"
@@ -1423,24 +1718,11 @@ msgstr "Izīt"
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "Voi gribit izmontuot aboot?"
 
-#~ msgid "Documentation"
-#~ msgstr "Dokumentaceja"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "DNS i NIS servers"
-
 #~ msgid "Downloading file %s..."
 #~ msgstr "Teik šursyuteiti fail %s..."
 
 #~ msgid "DrakVPN"
 #~ msgstr "DrakVPN"
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "Moondrake paleigi"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "Redaktori, čaulys, failu reiki, terminali"
 
 #~ msgid ""
 #~ "Error installing aboot, \n"
@@ -1449,35 +1731,14 @@ msgstr "Izīt"
 #~ "Kliuda, instalejūt aboot, \n"
 #~ "voi instalēt pīspīdu kuortā pat tod, ja tiks iznycynuota pyrmuo sadaļa?"
 
-#~ msgid "FTP Server"
-#~ msgstr "FTP servers"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "Failu un Printeru Kūplītuošonys servers"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "Gunsmyurs/Maršrutizators"
-
 #~ msgid "Flatout"
 #~ msgstr "Flatout"
 
 #~ msgid "Formatting"
 #~ msgstr "Formateišona"
 
-#~ msgid "GNOME Workstation"
-#~ msgstr "Gnome dorba staceja"
-
-#~ msgid "Game station"
-#~ msgstr "Spēļu dators"
-
 #~ msgid "Generate auto install floppy"
 #~ msgstr "Sagatavēt auto instaleišonys disketi"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "Grafiskuo vide"
-
-#~ msgid "Groupware"
-#~ msgstr "Groupware"
 
 #~ msgid "Gwenview"
 #~ msgstr "Gwenview"
@@ -1498,12 +1759,6 @@ msgstr "Izīt"
 #~ msgid "Installation class"
 #~ msgstr "Instaleišonys klase"
 
-#~ msgid "Internet gateway"
-#~ msgstr "Interneta vuorteja"
-
-#~ msgid "Internet station"
-#~ msgstr "Interneta dators"
-
 #~ msgid "Invictus Firewall"
 #~ msgstr "Invictus guņsmyurs"
 
@@ -1514,24 +1769,15 @@ msgstr "Izīt"
 #~ msgid "KDE Desktop"
 #~ msgstr "IceWm Dorba viersma"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "KDE dorba staceja"
-
 #~ msgid "Kaspersky"
 #~ msgstr "Kaspersky"
 
-#~ msgid "Kolab Server"
-#~ msgstr "Kolab servers"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
 #, fuzzy
-#~ msgid "LXDE Desktop"
+#~ msgid "LXQT Desktop"
 #~ msgstr "IceWm Dorba viersma"
 
 #, fuzzy
-#~ msgid "LXQT Desktop"
+#~ msgid "LXQt Desktop"
 #~ msgstr "IceWm Dorba viersma"
 
 #~ msgid "Language"
@@ -1543,18 +1789,9 @@ msgstr "Izīt"
 #~ msgid "LinDVD"
 #~ msgstr "LinDVD"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "Linuks Standarta Bāze. Trešū izstruoduoju aplikaceju atbolsts"
-
 #, fuzzy
 #~ msgid "MATE Workstation"
 #~ msgstr "Gnome dorba staceja"
-
-#~ msgid "Mail"
-#~ msgstr "Posts"
-
-#~ msgid "Mail/News"
-#~ msgstr "Posts/Jauns"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linux instaleišona %s"
@@ -1565,29 +1802,8 @@ msgstr "Izīt"
 #~ msgid "Mandriva Wizards"
 #~ msgstr "Mandriva paleigi"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "Puorraudzeibys reiki, procesu uzskaite, tcpdump, nmap, ..."
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "Moondrake paleigi"
-
-#~ msgid "Multimedia station"
-#~ msgstr "Multimedeju dators"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "NFS servers, Samba servers"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "NFS servers, SMB servers, storpnīkservers (Proxy), ssh servers"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "Teikla dators (klients)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "Teikla datoru servers"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "Teikla utilitys/puorraudzeiba"
 
 #~ msgid "Networking"
 #~ msgstr "Teikluošona"
@@ -1606,16 +1822,6 @@ msgstr "Izīt"
 #~ msgid "No sound card detected. Try \"harddrake\" after installation"
 #~ msgstr ""
 #~ "Nav atrosta skanis karte. Piec instaleišonys izmieginit \"harddrake\""
-
-#~ msgid "Office Workstation"
-#~ msgstr "Biroja dators"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "Biroja programmys: teksta procesori (LibreOffice Writer, Kword), "
-#~ "izkluojlopys (LibreOffice Calc, Kspread), PDF skateituoji, u.c."
 
 #, fuzzy
 #~ msgid ""
@@ -1636,23 +1842,12 @@ msgstr "Izīt"
 #~ msgid "Office tools"
 #~ msgstr "Biroja dators"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "Cytys grafiskuos dorba viersmys"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "Postfix posta servers"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Postfix posta servers, Inn ziņu servers"
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "PostgreSQL i MariaDB datubāžu servers"
+#, fuzzy
+#~ msgid "Plasma Workstation"
+#~ msgstr "Dorba staceja"
 
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "PostgreSQL i MySQL datubāžu servers"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "PostgreSQL voi MariaDB datubāžu servers"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "PostgreSQL voi MySQL datubāžu servers"
@@ -1667,9 +1862,6 @@ msgstr "Izīt"
 #, fuzzy
 #~ msgid "Preparing upgrade..."
 #~ msgstr "Sagataveju suokneituoju"
-
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
 
 #, fuzzy
 #~ msgid "RazorQT Desktop"
@@ -1688,37 +1880,17 @@ msgstr "Izīt"
 #~ "Piec instaleišonys palaidit \"alsaconf\" voi \"sndconfig\", lai "
 #~ "konfigurātu jiusu skanis karti"
 
-#~ msgid "SSH Server"
-#~ msgstr "SSH servers"
-
 #~ msgid "Save packages selection"
 #~ msgstr "Saglobuot pakūtņu izvieli"
 
 #~ msgid "Select All"
 #~ msgstr "Izavielēt vysys"
 
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "Reiku komplekts, lai laseitu i syuteitu postu voi jaunumus (mutt, tin..), "
-#~ "i puorlyukuotu Puorstaipteiklu"
-
 #~ msgid "Skype"
 #~ msgstr "Skype"
 
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "Skanis i video atskaņuošonys/redigeišonys programmys"
-
 #~ msgid "TV card"
 #~ msgstr "TV karte"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr ""
-#~ "K Desktop Environment, golvonuo grafiskuo vide kūpā ar papyldus reiku "
-#~ "kolekceju"
 
 #, fuzzy
 #~ msgid ""
@@ -1741,9 +1913,6 @@ msgstr "Izīt"
 #~ "\n"
 #~ "Jius varbyut gribēsit atkuortuot instalaceju.\n"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "Reiki datora konfigureišonys atvīgluošonai"
-
 #~ msgid "Transgaming/Cedega"
 #~ msgstr "Transgaming/Cedega"
 
@@ -1753,48 +1922,19 @@ msgstr "Izīt"
 #~ msgid "Users"
 #~ msgstr "Lītuotuoji"
 
-#~ msgid "Utilities"
-#~ msgstr "Utilitys"
-
 #~ msgid "Web 2.0"
 #~ msgstr "Web 2.0"
-
-#~ msgid "Web Server"
-#~ msgstr "Puorstaipteikla (Web) servers"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Teimeklis/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Webmin attuolynuotuos konfiguracejis servers "
 
 #~ msgid "Welcome"
 #~ msgstr "Laipni lyugtum"
 
 #, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Window Maker, Enlightenment, Fvwm u.c."
-
-#, fuzzy
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Window Maker, Enlightenment, Fvwm u.c."
-
-#~ msgid "Wizards to configure server"
-#~ msgstr "Servera konfiguracejis paleigi"
-
-#~ msgid "Workstation"
-#~ msgstr "Dorba staceja"
 
 #, fuzzy
 #~ msgid "XFCE Workstation"
 #~ msgstr "KDE dorba staceja"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "Biroja dators"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

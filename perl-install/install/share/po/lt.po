@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2000-12-23 13:50+0200\n"
 "Last-Translator: Mykolas Norvai­as <Myka@centras.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -301,7 +301,7 @@ msgstr "Tu gali pasirinkti kitas kalbas, kurios bus prieinamos po įdiegimo"
 msgid "Installation"
 msgstr "Įdiegimas"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "Nustatymai"
@@ -423,6 +423,367 @@ msgstr "%d įdiegimo operacijos nepavyko"
 #, fuzzy, c-format
 msgid "Installation of packages failed:"
 msgstr "Įdiegiamas paketas %s"
+
+#: share/meta-task/compssUsers.pl:17
+#, fuzzy, c-format
+msgid "Workstation"
+msgstr "KDE darbo stotis"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "Biuro darbo stotis"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Biuro programos: tekstų redaktoriai (LibreOffice Writer, Kword), "
+"skaičiuoklės (LibreOffice Calc, Kspread), pdf peržiūros programos ir pan."
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "Žaidimų stotis"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr ""
+"Programos pasilinksminimui: lentos, strateginiai, kortų žaidimai ir pan."
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "Multimedija stotis"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Garso ir vaizdo grojimo/redagavimo programos"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Interneto stotis"
+
+#: share/meta-task/compssUsers.pl:44
+#, fuzzy, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Rinkinys įrankių skaityti ir siųsti paštą bei naujienas (pine, mutt, tin) ir "
+"naršyti žiniatinklį (WWW)"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Tinklo kompiuteris (klientas)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Įvairių protokolų klientai, įskaitant ssh"
+
+#: share/meta-task/compssUsers.pl:56
+#, fuzzy, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Ar tu nori išbandyti nustatymus?"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Konsolės įrankiai"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "Redaktoriai, shell'ai, bylų įrankiai, terminalai"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "Programavimas"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "C bei C++ kūrimo bibliotekos, programos ir include bylos"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "Dokumentacija"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Knygos ir HOWTO apie Linux ir Free Software"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:87
+#, fuzzy, c-format
+msgid "Web Server"
+msgstr "serveris"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "Grupinis darbas"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Kolab serveris"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "Serveris, Firewall/Routeris"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, fuzzy, c-format
+msgid "Internet gateway"
+msgstr "Priėjimas prie Interneto"
+
+#: share/meta-task/compssUsers.pl:100
+#, fuzzy, c-format
+msgid "Mail/News"
+msgstr "/Byla/_Nauja"
+
+#: share/meta-task/compssUsers.pl:101
+#, fuzzy, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Serveris, Duomenų bazių"
+
+#: share/meta-task/compssUsers.pl:105
+#, fuzzy, c-format
+msgid "Directory Server"
+msgstr "Atstatyti iš diskelio"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "FTP serveris"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:120
+#, fuzzy, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Spausdinimo serveris"
+
+#: share/meta-task/compssUsers.pl:121
+#, fuzzy, c-format
+msgid "NFS Server, Samba server"
+msgstr "NIS serveris"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "Serveris, Duomenų bazių"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Serveris, Tinklapių/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "Paštas"
+
+#: share/meta-task/compssUsers.pl:137
+#, fuzzy, c-format
+msgid "Postfix mail server"
+msgstr "Serveris, Duomenų bazių"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:150
+#, fuzzy, c-format
+msgid "Network Computer server"
+msgstr "Serveris, Tinklo Kompiuterio serveris"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "Grafinė aplinka"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "KDE darbo stotis"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"The K Desktop Environment, pagrindinė grafinė aplinka su dideliu rinkiniu "
+"pritaikytų programų"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "Gnome darbo stotis"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"Grafinė aplinka su vartotojui draugiškų programų ir darbalaukio įrankių "
+"rinkiniu"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "Biuro darbo stotis"
+
+#: share/meta-task/compssUsers.pl:176
+#, fuzzy, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr ""
+"Grafinė aplinka su vartotojui draugiškų programų ir darbalaukio įrankių "
+"rinkiniu"
+
+#: share/meta-task/compssUsers.pl:181
+#, fuzzy, c-format
+msgid "LXDE Desktop"
+msgstr "Darbastalis"
+
+#: share/meta-task/compssUsers.pl:183
+#, fuzzy, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"Grafinė aplinka su vartotojui draugiškų programų ir darbalaukio įrankių "
+"rinkiniu"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Kiti grafiniai darbalaukiai"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "IceWM, Window Maker, Enlightenment, Fvwm ir pan."
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "Naudės"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, fuzzy, c-format
+msgid "SSH Server"
+msgstr "NIS serveris"
+
+#: share/meta-task/compssUsers.pl:225
+#, fuzzy, c-format
+msgid "Webmin"
+msgstr "įrenginys"
+
+#: share/meta-task/compssUsers.pl:226
+#, fuzzy, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Interneto konfigūravimas"
+
+#: share/meta-task/compssUsers.pl:230
+#, fuzzy, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Tinklo konfigūravimas"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "Prisijungti prie interneto"
+
+#: share/meta-task/compssUsers.pl:236
+#, fuzzy, c-format
+msgid "Wizards to configure server"
+msgstr "Nustatyti spausdintuvą"
 
 #: steps.pm:85
 #, c-format
@@ -1246,33 +1607,6 @@ msgid ""
 "Exit"
 msgstr "Išeiti"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "Įvairių protokolų klientai, įskaitant ssh"
-
-#~ msgid "Core Release"
-#~ msgstr "Pagrindinė laida"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "For kids"
-#~ msgstr "Vaikams"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "Grafinė aplinka"
-
-#~ msgid "Join Us!"
-#~ msgstr "Prisijunk!"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "Tinklo kompiuteris (klientas)"
-
-#~ msgid "Nonfree Release"
-#~ msgstr "Nelaisvoji laida"
-
-#~ msgid "Office tools"
-#~ msgstr "Biuro įrankiai"
-
 #~ msgid "%d packages"
 #~ msgstr "%d paketų"
 
@@ -1282,29 +1616,6 @@ msgstr "Išeiti"
 #~ msgstr[0] "%d paketų"
 #~ msgstr[1] "%d paketų"
 #~ msgstr[2] "%d paketų"
-
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "Grafinė aplinka su vartotojui draugiškų programų ir darbalaukio įrankių "
-#~ "rinkiniu"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "Grafinė aplinka su vartotojui draugiškų programų ir darbalaukio įrankių "
-#~ "rinkiniu"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "Grafinė aplinka su vartotojui draugiškų programų ir darbalaukio įrankių "
-#~ "rinkiniu"
 
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment"
@@ -1325,28 +1636,14 @@ msgstr "Išeiti"
 #~ msgstr ""
 #~ "Programos pasilinksminimui: lentos, strateginiai, kortų žaidimai ir pan."
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr ""
-#~ "Programos pasilinksminimui: lentos, strateginiai, kortų žaidimai ir pan."
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
 #~ msgid "Automated"
 #~ msgstr "Automatinis"
 
 #~ msgid "Bad package"
 #~ msgstr "Blogas paketas"
 
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Knygos ir HOWTO apie Linux ir Free Software"
-
 #~ msgid "Boot"
 #~ msgstr "Įkelties nustatymai"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "C bei C++ kūrimo bibliotekos, programos ir include bylos"
 
 #~ msgid "CD-ROM"
 #~ msgstr "CD-ROM"
@@ -1362,25 +1659,12 @@ msgstr "Išeiti"
 #~ msgid "Configure X"
 #~ msgstr "Nustatyti X"
 
-#~ msgid "Console Tools"
-#~ msgstr "Konsolės įrankiai"
-
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr ""
 #~ "Jungiamasi prie atvaizdžio (mirror), kad gautume prieinamų paketų sąrašą"
 
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "Serveris, Duomenų bazių"
-
-#~ msgid "Development"
-#~ msgstr "Programavimas"
-
-#, fuzzy
-#~ msgid "Directory Server"
-#~ msgstr "Atstatyti iš diskelio"
+#~ msgid "Core Release"
+#~ msgstr "Pagrindinė laida"
 
 #, fuzzy
 #~ msgid "Do you have an ISA sound card?"
@@ -1389,19 +1673,9 @@ msgstr "Išeiti"
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "Ar nori naudoti aboot?"
 
-#~ msgid "Documentation"
-#~ msgstr "Dokumentacija"
-
 #, fuzzy
 #~ msgid "Downloading file %s..."
 #~ msgstr "Išsaugoti į bylą"
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "Prisijungti prie interneto"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "Redaktoriai, shell'ai, bylų įrankiai, terminalai"
 
 #~ msgid ""
 #~ "Error installing aboot, \n"
@@ -1410,31 +1684,15 @@ msgstr "Išeiti"
 #~ "Klaida įdiegiant aboot,\n"
 #~ "bandyti įdiegti priverstinai, net jei tai sunaikintų pirmąjį skirsnį?"
 
-#~ msgid "FTP Server"
-#~ msgstr "FTP serveris"
-
-#, fuzzy
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "Spausdinimo serveris"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "Serveris, Firewall/Routeris"
+#~ msgid "For kids"
+#~ msgstr "Vaikams"
 
 #, fuzzy
 #~ msgid "Formatting"
 #~ msgstr "Skaičiuojama"
 
-#~ msgid "GNOME Workstation"
-#~ msgstr "Gnome darbo stotis"
-
-#~ msgid "Game station"
-#~ msgstr "Žaidimų stotis"
-
 #~ msgid "Generate auto install floppy"
 #~ msgstr "Sukurti automatinio įdiegimo diskelį"
-
-#~ msgid "Groupware"
-#~ msgstr "Grupinis darbas"
 
 #~ msgid "IDE"
 #~ msgstr "IDE"
@@ -1451,28 +1709,14 @@ msgstr "Išeiti"
 #~ msgid "Installation class"
 #~ msgstr "Parink įdiegimo klasę"
 
-#, fuzzy
-#~ msgid "Internet gateway"
-#~ msgstr "Priėjimas prie Interneto"
-
-#~ msgid "Internet station"
-#~ msgstr "Interneto stotis"
+#~ msgid "Join Us!"
+#~ msgstr "Prisijunk!"
 
 #~ msgid "KDE"
 #~ msgstr "KDE"
 
 #, fuzzy
 #~ msgid "KDE Desktop"
-#~ msgstr "Darbastalis"
-
-#~ msgid "KDE Workstation"
-#~ msgstr "KDE darbo stotis"
-
-#~ msgid "Kolab Server"
-#~ msgstr "Kolab serveris"
-
-#, fuzzy
-#~ msgid "LXDE Desktop"
 #~ msgstr "Darbastalis"
 
 #, fuzzy
@@ -1489,13 +1733,6 @@ msgstr "Išeiti"
 #~ msgid "MATE Workstation"
 #~ msgstr "Gnome darbo stotis"
 
-#~ msgid "Mail"
-#~ msgstr "Paštas"
-
-#, fuzzy
-#~ msgid "Mail/News"
-#~ msgstr "/Byla/_Nauja"
-
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linux įdiegimas %s"
 
@@ -1507,33 +1744,11 @@ msgstr "Išeiti"
 #~ msgid "Moondrake Wizards"
 #~ msgstr "Prisijungti prie interneto"
 
-#~ msgid "Multimedia station"
-#~ msgstr "Multimedija stotis"
-
-#, fuzzy
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "NIS serveris"
-
-#, fuzzy
-#~ msgid "Network Computer server"
-#~ msgstr "Serveris, Tinklo Kompiuterio serveris"
-
-#, fuzzy
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "Tinklo konfigūravimas"
-
 #~ msgid "Networking"
 #~ msgstr "Tinklai"
 
-#~ msgid "Office Workstation"
-#~ msgstr "Biuro darbo stotis"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "Biuro programos: tekstų redaktoriai (LibreOffice Writer, Kword), "
-#~ "skaičiuoklės (LibreOffice Calc, Kspread), pdf peržiūros programos ir pan."
+#~ msgid "Nonfree Release"
+#~ msgstr "Nelaisvoji laida"
 
 #, fuzzy
 #~ msgid ""
@@ -1550,16 +1765,8 @@ msgstr "Išeiti"
 #~ "Biuro programos: tekstų redaktoriai (kword, abiword), skaičiuoklės "
 #~ "(kspread, gnumeric), pdf peržiūros programos ir pan."
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "Kiti grafiniai darbalaukiai"
-
-#, fuzzy
-#~ msgid "Postfix mail server"
-#~ msgstr "Serveris, Duomenų bazių"
-
-#, fuzzy
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Serveris, Duomenų bazių"
+#~ msgid "Office tools"
+#~ msgstr "Biuro įrankiai"
 
 #, fuzzy
 #~ msgid "Preparing boot images..."
@@ -1579,10 +1786,6 @@ msgstr "Išeiti"
 #~ msgid "Replay"
 #~ msgstr "Parodyti vėl"
 
-#, fuzzy
-#~ msgid "SSH Server"
-#~ msgstr "NIS serveris"
-
 #~ msgid "Save packages selection"
 #~ msgstr "Išsaugoti paketų pasirinkimą"
 
@@ -1590,26 +1793,8 @@ msgstr "Išeiti"
 #~ msgid "Select All"
 #~ msgstr "Pasirink bylą"
 
-#, fuzzy
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "Rinkinys įrankių skaityti ir siųsti paštą bei naujienas (pine, mutt, tin) "
-#~ "ir naršyti žiniatinklį (WWW)"
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "Garso ir vaizdo grojimo/redagavimo programos"
-
 #~ msgid "TV card"
 #~ msgstr "TV plokštė"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr ""
-#~ "The K Desktop Environment, pagrindinė grafinė aplinka su dideliu rinkiniu "
-#~ "pritaikytų programų"
 
 #, fuzzy
 #~ msgid ""
@@ -1633,60 +1818,22 @@ msgstr "Išeiti"
 #~ "Jūs galbūt norėsite pakartoti įdiegimą.\n"
 
 #, fuzzy
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "Ar tu nori išbandyti nustatymus?"
-
-#, fuzzy
 #~ msgid "Unable to contact mirror %s"
 #~ msgstr "Uždrausti tinklą"
 
 #~ msgid "Users"
 #~ msgstr "Vartotojai"
 
-#~ msgid "Utilities"
-#~ msgstr "Naudės"
-
-#, fuzzy
-#~ msgid "Web Server"
-#~ msgstr "serveris"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Serveris, Tinklapių/FTP"
-
-#, fuzzy
-#~ msgid "Webmin"
-#~ msgstr "įrenginys"
-
-#, fuzzy
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Interneto konfigūravimas"
-
 #~ msgid "Welcome"
 #~ msgstr "Sveiki"
-
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "IceWM, Window Maker, Enlightenment, Fvwm ir pan."
 
 #, fuzzy
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "IceWM, Window Maker, Enlightenment, Fvwm ir pan."
 
 #, fuzzy
-#~ msgid "Wizards to configure server"
-#~ msgstr "Nustatyti spausdintuvą"
-
-#, fuzzy
-#~ msgid "Workstation"
-#~ msgstr "KDE darbo stotis"
-
-#, fuzzy
 #~ msgid "XFCE Workstation"
 #~ msgstr "KDE darbo stotis"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "Biuro darbo stotis"
 
 #~ msgid ""
 #~ "_: Keep these entry short\n"

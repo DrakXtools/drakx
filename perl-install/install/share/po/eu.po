@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2009-09-19 08:21+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-doc@kde.org>\n"
@@ -314,7 +314,7 @@ msgstr ""
 msgid "Installation"
 msgstr "Instalaketa"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "Konfigurazioa"
@@ -438,6 +438,366 @@ msgstr "%d instaketa eragiketek huts egin dute"
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "Paketeen instalaketak huts egin du:"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "Lanpostua"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "Bulegoko lanpostua"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Bulego programak: testu-prozetzaileak (LibreOffice Writer, Kword), kalkulu-"
+"orriak (LibreOffice Calc, Kspread), PDF ikustaileak, etab"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "Jokoak"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr ""
+"Denbora-pasako programak: makina-jokoak, taula-jokoak, estrategiakoak, etab."
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "Multimedia"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Soinua eta bideoa jotzeko/editatzeko programak"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Internet"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Posta eta berri-taldeetako mezuak (mutt, tin...) irakurtzeko eta bidaltzeko "
+"eta Interneten nabigatzeko tresna-multzoa"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Sare-ordenagailua (bezeroa)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Hainbat protokolotako bezeroak, ssh-renak barne"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Zure ordenagailuaren konfigurazioa errazteko tresnak"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Kontsola-tresnak"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "Editoreak, shell-ak, fitxategi-tresnak, terminalak"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "Garapena"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "C eta C++ garapen-liburutegiak, programak eta fitxategiak"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "Dokumentazioa"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Linux eta Software libreari buruzko liburuak eta azalpenak"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "Linux Standard Base. Beste batzuek egindako aplikazioen euskarria"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "Web zerbitzaria"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "Taldelanerako Aplikazioak"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Kolab Zerbitzaria"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "Suebakia/Bideratzailea"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "Interneteko atebidea"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "Posta/Berriak"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Postfix posta zerbitzaria, Inn berri zerbitzaria"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "Direktorio Zerbitzara"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "FTP Zerbitzaria"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "Domeinu Izen eta Sare Informazio Zerbitzaria"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Fitxategi eta Inprimaketa Elkarbanatzeko Zerbitzaria"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "NFS zerbitzaria, Samba zerbitzaria"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "Datu-basea"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "PostgreSQL eta MariaDB Datubase Zerbitzaria"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "Posta"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Postfix posta-zerbitzaria"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "PostgreSQL edo MariaDB datu-baseen zerbitzaria"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "Sare-zerbitzaria"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "NFS zerbitzaria, SMB zerbitzaria, Proxy zerbitzaria, ssh zerbitzaria"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "Ingurune grafikoa"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "KDE lanpostua"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"K Desktop Environment, hainbat tresna dituen oinarrizko ingurune grafikoa"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "GNOME lanpostua"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"Aplikazio-multzo eta mahaigaineko tresna lagungarri eta atseginak dituen "
+"ingurune grafikoa"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "Bulegoko lanpostua"
+
+#: share/meta-task/compssUsers.pl:176
+#, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr ""
+"Aplikazioen eta mahaigain-tresnen sorta erabilerrazarekiko ingurumen argitsu "
+"grafiko bat"
+
+#: share/meta-task/compssUsers.pl:181
+#, c-format
+msgid "LXDE Desktop"
+msgstr "LXDE Idaztegia"
+
+#: share/meta-task/compssUsers.pl:183
+#, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"Ingurune grafiko arin eta azkarra aplikazio multzo eta mahaigaineko tresna "
+"erabilerrazak dituena"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Beste mahaigain grafiko batzuk"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Window Maker, Enlightenment, Fvwm, etab."
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "Utilitateak"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "SSH zerbitzaria"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Webmin Urruneko Konfigurazio Zerbitzaria"
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Sare Utilitateak/Gainbegiraketa"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "Gainbegiraketa tresnak, prozesuen kotabilitatea, tcpdump, nmap, ..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "Moondrake Morroiak"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "Zerbitzaria konfiguratzeko morroiak"
 
 #: steps.pm:85
 #, c-format
@@ -1288,12 +1648,6 @@ msgid ""
 "Exit"
 msgstr "Irten"
 
-#~ msgid "LXQt Desktop"
-#~ msgstr "LXQt Mahaigaina"
-
-#~ msgid "Plasma Workstation"
-#~ msgstr "Plasma Lanpostua"
-
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Mandriva Linux idaztegi oso bat, eukarriarekin"
 
@@ -1302,27 +1656,6 @@ msgstr "Irten"
 
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "GNOMEn oinarritutako ingurune grafikoa"
-
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "Aplikazio-multzo eta mahaigaineko tresna lagungarri eta atseginak dituen "
-#~ "ingurune grafikoa"
-
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "Aplikazioen eta mahaigain-tresnen sorta erabilerrazarekiko ingurumen "
-#~ "argitsu grafiko bat"
-
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "Ingurune grafiko arin eta azkarra aplikazio multzo eta mahaigaineko "
-#~ "tresna erabilerrazak dituena"
 
 #~ msgid "A lightweight fast graphical environment"
 #~ msgstr "Ingurune grafiko arin bat"
@@ -1338,29 +1671,11 @@ msgstr "Irten"
 #~ "Denbora-pasako programak: makina-jokoak, taula-jokoak, estrategiakoak, "
 #~ "etab."
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr ""
-#~ "Denbora-pasako programak: makina-jokoak, taula-jokoak, estrategiakoak, "
-#~ "etab."
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache, Pro-ftpd"
-
 #~ msgid "Bad package"
 #~ msgstr "Pakete txarra"
 
 #~ msgid "Be Free!"
 #~ msgstr "Libre izan!"
-
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Linux eta Software libreari buruzko liburuak eta azalpenak"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "C eta C++ garapen-liburutegiak, programak eta fitxategiak"
 
 #~ msgid "CD-ROM"
 #~ msgstr "CD-ROM"
@@ -1368,45 +1683,14 @@ msgstr "Irten"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Cinnamon Lanpostua"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "Hainbat protokolotako bezeroak, ssh-renak barne"
-
-#~ msgid "Console Tools"
-#~ msgstr "Kontsola-tresnak"
-
 #~ msgid "Core Release"
 #~ msgstr "Core Release"
-
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "Datu-basea"
-
-#~ msgid "Development"
-#~ msgstr "Garapena"
-
-#~ msgid "Directory Server"
-#~ msgstr "Direktorio Zerbitzara"
 
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "ISA soinu-txartela duzu?"
 
-#~ msgid "Documentation"
-#~ msgstr "Dokumentazioa"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "Domeinu Izen eta Sare Informazio Zerbitzaria"
-
 #~ msgid "Downloading file %s..."
 #~ msgstr "%s fitxategiak jaisten..."
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "Moondrake Morroiak"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "Editoreak, shell-ak, fitxategi-tresnak, terminalak"
 
 #~ msgid "Enlightenment e17 Desktop"
 #~ msgstr "Enlightenment e17 Mahaigaina"
@@ -1417,15 +1701,6 @@ msgstr "Irten"
 #~ msgid "Explore Linux easily with Moondrake One"
 #~ msgstr "Esploratu Linux era errazean Moondrake One-kin"
 
-#~ msgid "FTP Server"
-#~ msgstr "FTP Zerbitzaria"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "Fitxategi eta Inprimaketa Elkarbanatzeko Zerbitzaria"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "Suebakia/Bideratzailea"
-
 #~ msgid "For developers!"
 #~ msgstr "Garatzaileentzat!"
 
@@ -1434,18 +1709,6 @@ msgstr "Irten"
 
 #~ msgid "For kids"
 #~ msgstr "Umeentzat"
-
-#~ msgid "GNOME Workstation"
-#~ msgstr "GNOME lanpostua"
-
-#~ msgid "Game station"
-#~ msgstr "Jokoak"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "Ingurune grafikoa"
-
-#~ msgid "Groupware"
-#~ msgstr "Taldelanerako Aplikazioak"
 
 #~ msgid "Home entertainment"
 #~ msgstr "Etxe entretenimendua"
@@ -1476,12 +1739,6 @@ msgstr "Irten"
 #~ "Erne: zure datu pertsonalen babeskopia egin behar zenuke \"Instalaketa\n"
 #~ "Berria\" aukeratu aurretik."
 
-#~ msgid "Internet gateway"
-#~ msgstr "Interneteko atebidea"
-
-#~ msgid "Internet station"
-#~ msgstr "Internet"
-
 #~ msgid "Join Us!"
 #~ msgstr "Elkartu gurekin!"
 
@@ -1491,32 +1748,14 @@ msgstr "Irten"
 #~ msgid "KDE Desktop"
 #~ msgstr "KDE Idaztegia"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "KDE lanpostua"
-
-#~ msgid "Kolab Server"
-#~ msgstr "Kolab Zerbitzaria"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
-#~ msgid "LXDE Desktop"
-#~ msgstr "LXDE Idaztegia"
-
 #~ msgid "LXQT Desktop"
 #~ msgstr "LXQT Mahaigaina"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "Linux Standard Base. Beste batzuek egindako aplikazioen euskarria"
+#~ msgid "LXQt Desktop"
+#~ msgstr "LXQt Mahaigaina"
 
 #~ msgid "MATE Workstation"
 #~ msgstr "MATE lanpostua"
-
-#~ msgid "Mail"
-#~ msgstr "Posta"
-
-#~ msgid "Mail/News"
-#~ msgstr "Posta/Berriak"
 
 #~ msgid "Make it yours!"
 #~ msgstr "Zurea egin ezazu!"
@@ -1530,33 +1769,11 @@ msgstr "Irten"
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr "Mandriva: guztientzako beharrak asetzeko banaketak"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "Gainbegiraketa tresnak, prozesuen kotabilitatea, tcpdump, nmap, ..."
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "Moondrake Morroiak"
 
 #~ msgid "Moondrake: distributions for everybody's needs"
 #~ msgstr "Moondrake: guztientzako beharrak asetzeko banaketak"
-
-#~ msgid "Multimedia station"
-#~ msgstr "Multimedia"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "NFS zerbitzaria, Samba zerbitzaria"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr ""
-#~ "NFS zerbitzaria, SMB zerbitzaria, Proxy zerbitzaria, ssh zerbitzaria"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "Sare-ordenagailua (bezeroa)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "Sare-zerbitzaria"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "Sare Utilitateak/Gainbegiraketa"
 
 #~ msgid ""
 #~ "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1573,16 +1790,6 @@ msgstr "Irten"
 
 #~ msgid "Nonfree Release"
 #~ msgstr "Nonfree Release"
-
-#~ msgid "Office Workstation"
-#~ msgstr "Bulegoko lanpostua"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "Bulego programak: testu-prozetzaileak (LibreOffice Writer, Kword), "
-#~ "kalkulu-orriak (LibreOffice Calc, Kspread), PDF ikustaileak, etab"
 
 #, fuzzy
 #~ msgid ""
@@ -1602,23 +1809,11 @@ msgstr "Irten"
 #~ msgid "Office tools"
 #~ msgstr "Bulegoko tresnak"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "Beste mahaigain grafiko batzuk"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "Postfix posta-zerbitzaria"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Postfix posta zerbitzaria, Inn berri zerbitzaria"
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "PostgreSQL eta MariaDB Datubase Zerbitzaria"
+#~ msgid "Plasma Workstation"
+#~ msgstr "Plasma Lanpostua"
 
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "PostgreSQL eta MySQL Datubase Zerbitzaria"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "PostgreSQL edo MariaDB datu-baseen zerbitzaria"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "PostgreSQL edo MySQL datu-baseen zerbitzaria"
@@ -1632,9 +1827,6 @@ msgstr "Irten"
 
 #~ msgid "Preparing upgrade..."
 #~ msgstr "Berritzea prestatzen ..."
-
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
 
 #~ msgid "Proceed"
 #~ msgstr "Jarratiu"
@@ -1650,21 +1842,8 @@ msgstr "Irten"
 #~ "Instalazioa egindakoan, exekutatu \"alsaconf\" edo \"sndconfig\" soinu-"
 #~ "txartela konfiguratzeko"
 
-#~ msgid "SSH Server"
-#~ msgstr "SSH zerbitzaria"
-
 #~ msgid "Select All"
 #~ msgstr "Hautatutako guztiak"
-
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "Posta eta berri-taldeetako mezuak (mutt, tin...) irakurtzeko eta "
-#~ "bidaltzeko eta Interneten nabigatzeko tresna-multzoa"
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "Soinua eta bideoa jotzeko/editatzeko programak"
 
 #~ msgid "Tainted Release"
 #~ msgstr "Tainted Release"
@@ -1679,12 +1858,6 @@ msgstr "Irten"
 #~ msgstr "100%% iturburu irekia duen Moondrake banaketa"
 
 #~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr ""
-#~ "K Desktop Environment, hainbat tresna dituen oinarrizko ingurune grafikoa"
-
-#~ msgid ""
 #~ "The Plasma Desktop, the basic graphical environment with a collection of "
 #~ "accompanying tools"
 #~ msgstr ""
@@ -1694,9 +1867,6 @@ msgstr "Irten"
 #~ msgid "This medium provides package updates for medium \"%s\""
 #~ msgstr "Hedabide honek paketea \"%s\" hedabidetik eguneratzea ematen du"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "Zure ordenagailuaren konfigurazioa errazteko tresnak"
-
 #~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 #~ msgstr ""
 #~ "32bit-eko banaketa batetik 64bit-ekora bertsio berritzea ez da onartzen"
@@ -1705,40 +1875,11 @@ msgstr "Irten"
 #~ msgstr ""
 #~ "64bit-eko banaketa batetik 32bit-ekora bertsio berritzea ez da onartzen"
 
-#~ msgid "Utilities"
-#~ msgstr "Utilitateak"
-
-#~ msgid "Web Server"
-#~ msgstr "Web zerbitzaria"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Webmin Urruneko Konfigurazio Zerbitzaria"
-
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Window Maker, Enlightenment, Fvwm, etab."
-
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Window Maker, Enlightenment, Fvwm, etab."
 
-#~ msgid "Wizards to configure server"
-#~ msgstr "Zerbitzaria konfiguratzeko morroiak"
-
-#~ msgid "Workstation"
-#~ msgstr "Lanpostua"
-
 #~ msgid "XFCE Workstation"
 #~ msgstr "XFCE lanpostua"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "Bulegoko lanpostua"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

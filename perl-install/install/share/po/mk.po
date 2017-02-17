@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2006-09-24 20:39-0700\n"
 "Last-Translator: Zoran Dimovski <zoki.dimovski@gmail.com>\n"
 "Language-Team: Macedonian <mkde-l10n@lists.sourceforge.net>\n"
@@ -312,7 +312,7 @@ msgstr "Екранските снимки ќе бидат достапни по 
 msgid "Installation"
 msgstr "Инсталација"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "Конфигурација"
@@ -433,6 +433,363 @@ msgstr "%d неуспешни трансакциии на инсталација
 #, fuzzy, c-format
 msgid "Installation of packages failed:"
 msgstr "Инсталирање на пакетот %s"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "Работна станица"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "Канцелариски"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Канцелариски програми: обработка на текст (LibreOffice Writer, Kword), "
+"табеларни пресметки (LibreOffice Calc, Kspread), прегледувачи на „PDF“ итн."
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "Станица за игри"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "Забавни програми: аркадни, на табла, стратегија, итн."
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "Мултимедијална станица"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Програми за пуштање и уредување на звук и видео"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Интернет станица"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Комплет алатки за читање и пракање е-пошта и вести (mutt, tin..) и "
+"прелистување на Интернет"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Мрежен компјутер (клиент)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Клиенти за различни протоколи, вклучувајќи и „ssh“"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Алатки за лесно конфигурирање на вашиот компјутер"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Конзолски алатки"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "Уредувачи, школки, алатки за датотеки, терминали"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "Развој"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "Развивачки датотеки за „C“ и „C++“, програми и „include“ датотеки"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "Документација"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Книги и „Како да“ за „Linux“ и слободен софтвер"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "„Linux Standard Base“. Поддршка за апликации од други фирми"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "Веб сервер"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "Групи"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Kolab Сервер"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "Firewall/Router"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "Интернет gateway"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "Пошта/Вести"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "„Postfix“ сервер за пошта, „Inn“ сервер за вести"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "Директориумски сервер"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "„FTP“ сервер"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "Име на доменот и сервер за мрежни информации"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Сервер за споделување на датотеки и печатач"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "„NFS“ сервер, „Samba“ сервер"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "База на податоци"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "„PostgreSQL“ и „MariaDB“ сервер за бази на податоци"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "Пошта"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Postfix сервер за пошта"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "„PostgreSQL“ или „MariaDB“ сервер за бази на податоци"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "Мрежен компјутер-сервер"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "„NFS“ сервер, „SMB“ сервер, „Proxy“ сервер, „ssh“ сервер"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "Графичка околина"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "„KDE“ работна станица"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"„К“ работна околина, основната графичка околина со додатна колекција на "
+"придружни алатки"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "„GNOME“ работна станица"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"Графичка околина со кориснички пакет на алатки и алатки за работната површина"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "Канцелариски"
+
+#: share/meta-task/compssUsers.pl:176
+#, fuzzy, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr ""
+"Графичка околина со кориснички пакет на алатки и алатки за работната површина"
+
+#: share/meta-task/compssUsers.pl:181
+#, fuzzy, c-format
+msgid "LXDE Desktop"
+msgstr "„IceWm“ работна површина"
+
+#: share/meta-task/compssUsers.pl:183
+#, fuzzy, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"Графичка околина со кориснички пакет на алатки и алатки за работната површина"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Други графички работни околини"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Window Maker, Enlightenment, Fvwm, итн."
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "Помошни алатки"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "SSH Сервер"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "„Webmin“"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "„Webmin“ оддалечен сервер за конфигурирање"
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Мрежни помошни алатки/надгледување"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "Алатки за надгледување, раководење на процеси, tcpdump, nmap, ..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "„Moondrake“ волшебници"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "Волшебници за конфигурирање на сервер"
 
 #: steps.pm:85
 #, c-format
@@ -1276,14 +1633,6 @@ msgid ""
 "Exit"
 msgstr "Излез"
 
-#, fuzzy
-#~ msgid "LXQt Desktop"
-#~ msgstr "„IceWm“ работна површина"
-
-#, fuzzy
-#~ msgid "Plasma Workstation"
-#~ msgstr "Работна станица"
-
 #~ msgid "%d packages"
 #~ msgstr "%d пакети"
 
@@ -1303,29 +1652,6 @@ msgstr "Излез"
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "Графичка околина"
 
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "Графичка околина со кориснички пакет на алатки и алатки за работната "
-#~ "површина"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "Графичка околина со кориснички пакет на алатки и алатки за работната "
-#~ "површина"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "Графичка околина со кориснички пакет на алатки и алатки за работната "
-#~ "површина"
-
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment"
 #~ msgstr ""
@@ -1344,16 +1670,6 @@ msgstr "Излез"
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "Забавни програми: аркадни, на табла, стратегија, итн."
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "Забавни програми: аркадни, на табла, стратегија, итн."
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache, Pro-ftpd"
-
 #~ msgid "Arkeia"
 #~ msgstr "Arkeia"
 
@@ -1363,14 +1679,8 @@ msgstr "Излез"
 #~ msgid "Bad package"
 #~ msgstr "Лош пакет"
 
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Книги и „Како да“ за „Linux“ и слободен софтвер"
-
 #~ msgid "Boot"
 #~ msgstr "Подигање"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "Развивачки датотеки за „C“ и „C++“, програми и „include“ датотеки"
 
 #~ msgid "CD-ROM"
 #~ msgstr "CD-ROM"
@@ -1397,29 +1707,11 @@ msgstr "Излез"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Работна станица"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "Клиенти за различни протоколи, вклучувајќи и „ssh“"
-
 #~ msgid "Configure X"
 #~ msgstr "Конфигурирај Х"
 
-#~ msgid "Console Tools"
-#~ msgstr "Конзолски алатки"
-
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "Контактирање со огледалото за добивање листа на достапни пакети..."
-
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "База на податоци"
-
-#~ msgid "Development"
-#~ msgstr "Развој"
-
-#~ msgid "Directory Server"
-#~ msgstr "Директориумски сервер"
 
 #~ msgid "Discovery Live Mode"
 #~ msgstr "`"
@@ -1430,24 +1722,11 @@ msgstr "Излез"
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "Дали сакате да го користите aboot?"
 
-#~ msgid "Documentation"
-#~ msgstr "Документација"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "Име на доменот и сервер за мрежни информации"
-
 #~ msgid "Downloading file %s..."
 #~ msgstr "Снимање на датотека %s..."
 
 #~ msgid "DrakVPN"
 #~ msgstr "DrakVPN"
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "„Moondrake“ волшебници"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "Уредувачи, школки, алатки за датотеки, терминали"
 
 #~ msgid ""
 #~ "Error installing aboot, \n"
@@ -1456,35 +1735,14 @@ msgstr "Излез"
 #~ "Грешка при инсталирање aboot. \n"
 #~ "Да се обидеме со сила, иако тоа може да ја уништи првата партиција?"
 
-#~ msgid "FTP Server"
-#~ msgstr "„FTP“ сервер"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "Сервер за споделување на датотеки и печатач"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "Firewall/Router"
-
 #~ msgid "Flatout"
 #~ msgstr "Flatout"
 
 #~ msgid "Formatting"
 #~ msgstr "Форматирање"
 
-#~ msgid "GNOME Workstation"
-#~ msgstr "„GNOME“ работна станица"
-
-#~ msgid "Game station"
-#~ msgstr "Станица за игри"
-
 #~ msgid "Generate auto install floppy"
 #~ msgstr "Генерирање дискета за авто-инсталација"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "Графичка околина"
-
-#~ msgid "Groupware"
-#~ msgstr "Групи"
 
 #~ msgid "Gwenview"
 #~ msgstr "Gwenview"
@@ -1505,12 +1763,6 @@ msgstr "Излез"
 #~ msgid "Installation class"
 #~ msgstr "Класа на инсталација"
 
-#~ msgid "Internet gateway"
-#~ msgstr "Интернет gateway"
-
-#~ msgid "Internet station"
-#~ msgstr "Интернет станица"
-
 #~ msgid "Invictus Firewall"
 #~ msgstr "Несовладлив заштитен ѕид"
 
@@ -1521,24 +1773,15 @@ msgstr "Излез"
 #~ msgid "KDE Desktop"
 #~ msgstr "„IceWm“ работна површина"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "„KDE“ работна станица"
-
 #~ msgid "Kaspersky"
 #~ msgstr "Kaspersky"
 
-#~ msgid "Kolab Server"
-#~ msgstr "Kolab Сервер"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
 #, fuzzy
-#~ msgid "LXDE Desktop"
+#~ msgid "LXQT Desktop"
 #~ msgstr "„IceWm“ работна површина"
 
 #, fuzzy
-#~ msgid "LXQT Desktop"
+#~ msgid "LXQt Desktop"
 #~ msgstr "„IceWm“ работна површина"
 
 #~ msgid "Language"
@@ -1550,18 +1793,9 @@ msgstr "Излез"
 #~ msgid "LinDVD"
 #~ msgstr "LinDVD"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "„Linux Standard Base“. Поддршка за апликации од други фирми"
-
 #, fuzzy
 #~ msgid "MATE Workstation"
 #~ msgstr "„GNOME“ работна станица"
-
-#~ msgid "Mail"
-#~ msgstr "Пошта"
-
-#~ msgid "Mail/News"
-#~ msgstr "Пошта/Вести"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linux Инсталација %s"
@@ -1572,29 +1806,8 @@ msgstr "Излез"
 #~ msgid "Mandriva Wizards"
 #~ msgstr "„Mandriva“ волшебници"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "Алатки за надгледување, раководење на процеси, tcpdump, nmap, ..."
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "„Moondrake“ волшебници"
-
-#~ msgid "Multimedia station"
-#~ msgstr "Мултимедијална станица"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "„NFS“ сервер, „Samba“ сервер"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "„NFS“ сервер, „SMB“ сервер, „Proxy“ сервер, „ssh“ сервер"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "Мрежен компјутер (клиент)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "Мрежен компјутер-сервер"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "Мрежни помошни алатки/надгледување"
 
 #~ msgid "Networking"
 #~ msgstr "Мрежа"
@@ -1614,17 +1827,6 @@ msgstr "Излез"
 #~ msgstr ""
 #~ "Не е детектирана звучна картичка. Обидете се со \"harddrake\" по "
 #~ "инсталацијата"
-
-#~ msgid "Office Workstation"
-#~ msgstr "Канцелариски"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "Канцелариски програми: обработка на текст (LibreOffice Writer, Kword), "
-#~ "табеларни пресметки (LibreOffice Calc, Kspread), прегледувачи на „PDF“ "
-#~ "итн."
 
 #, fuzzy
 #~ msgid ""
@@ -1646,23 +1848,12 @@ msgstr "Излез"
 #~ msgid "Office tools"
 #~ msgstr "Канцелариски"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "Други графички работни околини"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "Postfix сервер за пошта"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "„Postfix“ сервер за пошта, „Inn“ сервер за вести"
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "„PostgreSQL“ и „MariaDB“ сервер за бази на податоци"
+#, fuzzy
+#~ msgid "Plasma Workstation"
+#~ msgstr "Работна станица"
 
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "„PostgreSQL“ и „MySQL“ сервер за бази на податоци"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "„PostgreSQL“ или „MariaDB“ сервер за бази на податоци"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "„PostgreSQL“ или „MySQL“ сервер за бази на податоци"
@@ -1677,9 +1868,6 @@ msgstr "Излез"
 #, fuzzy
 #~ msgid "Preparing upgrade..."
 #~ msgstr "Подговтвување на подигачот..."
-
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
 
 #, fuzzy
 #~ msgid "RazorQT Desktop"
@@ -1698,37 +1886,17 @@ msgstr "Излез"
 #~ "По инсталацијата вклучете \"alsaconf\" или \"sndconfig\" за да ја "
 #~ "конфигурирате звучаната картичка"
 
-#~ msgid "SSH Server"
-#~ msgstr "SSH Сервер"
-
 #~ msgid "Save packages selection"
 #~ msgstr "Зачувување на селекцијата пакети"
 
 #~ msgid "Select All"
 #~ msgstr "Слектирани сите"
 
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "Комплет алатки за читање и пракање е-пошта и вести (mutt, tin..) и "
-#~ "прелистување на Интернет"
-
 #~ msgid "Skype"
 #~ msgstr "Skype"
 
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "Програми за пуштање и уредување на звук и видео"
-
 #~ msgid "TV card"
 #~ msgstr "ТВ картичка"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr ""
-#~ "„К“ работна околина, основната графичка околина со додатна колекција на "
-#~ "придружни алатки"
 
 #, fuzzy
 #~ msgid ""
@@ -1751,9 +1919,6 @@ msgstr "Излез"
 #~ "\n"
 #~ "Можеби претпочитате да ја репризирате (replay) инсталацијата.\n"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "Алатки за лесно конфигурирање на вашиот компјутер"
-
 #~ msgid "Transgaming/Cedega"
 #~ msgstr "Transgaming/Cedega"
 
@@ -1763,48 +1928,19 @@ msgstr "Излез"
 #~ msgid "Users"
 #~ msgstr "Корисници"
 
-#~ msgid "Utilities"
-#~ msgstr "Помошни алатки"
-
 #~ msgid "Web 2.0"
 #~ msgstr "Веб 2.0"
-
-#~ msgid "Web Server"
-#~ msgstr "Веб сервер"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "„Webmin“"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "„Webmin“ оддалечен сервер за конфигурирање"
 
 #~ msgid "Welcome"
 #~ msgstr "Добредојдовте"
 
 #, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Window Maker, Enlightenment, Fvwm, итн."
-
-#, fuzzy
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Window Maker, Enlightenment, Fvwm, итн."
-
-#~ msgid "Wizards to configure server"
-#~ msgstr "Волшебници за конфигурирање на сервер"
-
-#~ msgid "Workstation"
-#~ msgstr "Работна станица"
 
 #, fuzzy
 #~ msgid "XFCE Workstation"
 #~ msgstr "„KDE“ работна станица"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "Канцелариски"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2010-03-17 05:45+0100\n"
 "Last-Translator: Olav Dahlum <odahlum@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@mandrivalinux.org>\n"
@@ -322,7 +322,7 @@ msgstr "Skjermbilder vil være tilgjengelig etter installasjon i %s"
 msgid "Installation"
 msgstr "Installasjon"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "Oppsett"
@@ -444,6 +444,366 @@ msgstr "%d mislykket installasjonstransaksjon"
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "Installasjon av pakker feilet:"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "Arbeidsstasjon"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "Kontorarbeidsstasjon"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Kontorstøtteprogrammer: tekstbehandlere (LibreOffice Writer, Kword), "
+"regneark (LibreOffice Calc, Kspread), PDF-framvisere, etc"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "Spillstasjon"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "Underholdningsprogrammer: arkade, brettspill, strategi, etc"
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "Multimediastasjon"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Lyd- og videoavspilling/redigeringsprogrammer"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Internettstasjon"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Sett med verktøy for å lese og sende e-post og njus (mutt, tin..) og til å "
+"surfe på nettet"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Nettverksmaskin (klient)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Klienter for forskjellige protokoller inkludert ssh"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Verktøy for å forenkle oppsettet av maskinen din"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "Konsollverktøy"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "Tekstprogrammer, skall, filverktøy, terminaler"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "Utvikling"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "C- og C++-utviklingsbibliotek, -programmer og include-filer"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "Dokumentasjon"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Bøker og Howto's om Linux og fri programvare"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "Linux Standard Base. Støtte for tredjeparts programvare"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "Webtjener"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "Gruppevare"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Kolab-tjener"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "Brannmur/ruter"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "Internett-gateway"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "E-post/Njus"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Postfix e-posttjener, Inn njustjener"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "Katalogtjener"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "FTP-tjener"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "Domenenavn- og nettverksinformasjons-tjener"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Fil- og Skriverdelingstjener"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "NFS-Tjener, Samba-tjener"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "Database"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "PostgreSQL- og MariaDB-databasetjener"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "E-post"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Postfix e-posttjener"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "PostgreSQL eller MariaDB-databasetjener"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "Nettverksmaskintjener"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "NFS-tjener, SMB-tjener, Proxy-tjener, SSH-tjener"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "Grafisk miljø"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "KDE-arbeidsstasjon"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"K Desktop Environment, grunnleggende grafisk miljø med en samling av "
+"passende verktøy"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "GNOME-arbeidsstasjon"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"Et grafisk miljø med et brukervennlig sett av programmer og "
+"skrivebordsverktøy"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "Kontorarbeidsstasjon"
+
+#: share/meta-task/compssUsers.pl:176
+#, fuzzy, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr ""
+"Et grafisk miljø med et brukervennlig sett av programmer og "
+"skrivebordsverktøy"
+
+#: share/meta-task/compssUsers.pl:181
+#, c-format
+msgid "LXDE Desktop"
+msgstr "LXDE-skrivebord"
+
+#: share/meta-task/compssUsers.pl:183
+#, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"Et lettvekts og raskt grafisk miljø med et brukervennlig sett av programmer "
+"og skrivebordsverktøy"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Andre grafiske skrivebord"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Window Maker, Enlightenment, Fvwm etc"
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "Verktøy"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "SSH-tjener"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Webmin Fjernadministrasjonstjener"
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Nettverks-verktøy/overvåkning"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "Overvårkningsverktøy, prosessbokføring, tcpdump, nmap,  … "
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "Moondrake-veivisere"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "Veivisere til å sette opp tjener"
 
 #: steps.pm:85
 #, c-format
@@ -1296,10 +1656,6 @@ msgid ""
 "Exit"
 msgstr "Avslutt"
 
-#, fuzzy
-#~ msgid "Plasma Workstation"
-#~ msgstr "Arbeidsstasjon"
-
 #~ msgid "A full Mandriva Linux desktop, with support"
 #~ msgstr "Et fullt Mandriva Linux-skrivebord – med brukerstøtte"
 
@@ -1309,28 +1665,6 @@ msgstr "Avslutt"
 #, fuzzy
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "Grafisk miljø"
-
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "Et grafisk miljø med et brukervennlig sett av programmer og "
-#~ "skrivebordsverktøy"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "Et grafisk miljø med et brukervennlig sett av programmer og "
-#~ "skrivebordsverktøy"
-
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "Et lettvekts og raskt grafisk miljø med et brukervennlig sett av "
-#~ "programmer og skrivebordsverktøy"
 
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment"
@@ -1347,24 +1681,8 @@ msgstr "Avslutt"
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "Underholdningsprogrammer: arkade, brettspill, strategi, etc"
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "Underholdningsprogrammer: arkade, brettspill, strategi, etc"
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache, Pro-ftpd"
-
 #~ msgid "Bad package"
 #~ msgstr "Ugyldig pakke"
-
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Bøker og Howto's om Linux og fri programvare"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "C- og C++-utviklingsbibliotek, -programmer og include-filer"
 
 #~ msgid "CD-ROM"
 #~ msgstr "CD-ROM"
@@ -1373,66 +1691,14 @@ msgstr "Avslutt"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "Arbeidsstasjon"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "Klienter for forskjellige protokoller inkludert ssh"
-
-#~ msgid "Console Tools"
-#~ msgstr "Konsollverktøy"
-
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "Database"
-
-#~ msgid "Development"
-#~ msgstr "Utvikling"
-
-#~ msgid "Directory Server"
-#~ msgstr "Katalogtjener"
-
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "Har du et ISA-lydkort?"
-
-#~ msgid "Documentation"
-#~ msgstr "Dokumentasjon"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "Domenenavn- og nettverksinformasjons-tjener"
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "Moondrake-veivisere"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "Tekstprogrammer, skall, filverktøy, terminaler"
 
 #~ msgid "Explore Linux easily with Mandriva One"
 #~ msgstr "Utforsk Linux med Mandriva One"
 
 #~ msgid "Explore Linux easily with Moondrake One"
 #~ msgstr "Utforsk Linux med Moondrake One"
-
-#~ msgid "FTP Server"
-#~ msgstr "FTP-tjener"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "Fil- og Skriverdelingstjener"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "Brannmur/ruter"
-
-#~ msgid "GNOME Workstation"
-#~ msgstr "GNOME-arbeidsstasjon"
-
-#~ msgid "Game station"
-#~ msgstr "Spillstasjon"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "Grafisk miljø"
-
-#~ msgid "Groupware"
-#~ msgstr "Gruppevare"
 
 #~ msgid "IDE"
 #~ msgstr "IDE"
@@ -1459,46 +1725,19 @@ msgstr "Avslutt"
 #~ "Advarsel: Du bør ta reservekopi av alle personlige data før du velger "
 #~ "«Nyinstallering»."
 
-#~ msgid "Internet gateway"
-#~ msgstr "Internett-gateway"
-
-#~ msgid "Internet station"
-#~ msgstr "Internettstasjon"
-
 #~ msgid "KDE"
 #~ msgstr "KDE"
 
 #~ msgid "KDE Desktop"
 #~ msgstr "KDE-skrivebord"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "KDE-arbeidsstasjon"
-
-#~ msgid "Kolab Server"
-#~ msgstr "Kolab-tjener"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
-#~ msgid "LXDE Desktop"
-#~ msgstr "LXDE-skrivebord"
-
 #, fuzzy
 #~ msgid "LXQT Desktop"
 #~ msgstr "LXDE-skrivebord"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "Linux Standard Base. Støtte for tredjeparts programvare"
-
 #, fuzzy
 #~ msgid "MATE Workstation"
 #~ msgstr "GNOME-arbeidsstasjon"
-
-#~ msgid "Mail"
-#~ msgstr "E-post"
-
-#~ msgid "Mail/News"
-#~ msgstr "E-post/Njus"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linux-installasjon %s"
@@ -1509,32 +1748,11 @@ msgstr "Avslutt"
 #~ msgid "Mandriva: distributions for everybody's needs"
 #~ msgstr "Mandriva: Distribusjoner for alle behov"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "Overvårkningsverktøy, prosessbokføring, tcpdump, nmap,  … "
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "Moondrake-veivisere"
 
 #~ msgid "Moondrake: distributions for everybody's needs"
 #~ msgstr "Moondrake: Distribusjoner for alle behov"
-
-#~ msgid "Multimedia station"
-#~ msgstr "Multimediastasjon"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "NFS-Tjener, Samba-tjener"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "NFS-tjener, SMB-tjener, Proxy-tjener, SSH-tjener"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "Nettverksmaskin (klient)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "Nettverksmaskintjener"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "Nettverks-verktøy/overvåkning"
 
 #~ msgid ""
 #~ "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1545,16 +1763,6 @@ msgstr "Avslutt"
 
 #~ msgid "No sound card detected. Try \"harddrake\" after installation"
 #~ msgstr "Lydkort ikke oppdaget. Prøv \"harddrake\" etter installasjonen"
-
-#~ msgid "Office Workstation"
-#~ msgstr "Kontorarbeidsstasjon"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "Kontorstøtteprogrammer: tekstbehandlere (LibreOffice Writer, Kword), "
-#~ "regneark (LibreOffice Calc, Kspread), PDF-framvisere, etc"
 
 #, fuzzy
 #~ msgid ""
@@ -1575,23 +1783,12 @@ msgstr "Avslutt"
 #~ msgid "Office tools"
 #~ msgstr "Kontorarbeidsstasjon"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "Andre grafiske skrivebord"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "Postfix e-posttjener"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Postfix e-posttjener, Inn njustjener"
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "PostgreSQL- og MariaDB-databasetjener"
+#, fuzzy
+#~ msgid "Plasma Workstation"
+#~ msgstr "Arbeidsstasjon"
 
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "PostgreSQL- og MySQL-databasetjener"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "PostgreSQL eller MariaDB-databasetjener"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "PostgreSQL eller MySQL-databasetjener"
@@ -1607,9 +1804,6 @@ msgstr "Avslutt"
 #~ msgid "Preparing upgrade..."
 #~ msgstr "Klargjør oppstartslaster … "
 
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
-
 #, fuzzy
 #~ msgid "RazorQT Desktop"
 #~ msgstr "Tilpasset skrivebord"
@@ -1621,34 +1815,14 @@ msgstr "Avslutt"
 #~ "Kjør «alsaconf» eller «sndconfig» etter installasjonen for å sette opp "
 #~ "lydkortet ditt"
 
-#~ msgid "SSH Server"
-#~ msgstr "SSH-tjener"
-
 #~ msgid "Select All"
 #~ msgstr "Velg alle"
-
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "Sett med verktøy for å lese og sende e-post og njus (mutt, tin..) og til "
-#~ "å surfe på nettet"
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "Lyd- og videoavspilling/redigeringsprogrammer"
 
 #~ msgid "The 100%% open source Mandriva Linux distribution"
 #~ msgstr "Mandriva Linux-distribusjonen med 100 %% åpen kildekode"
 
 #~ msgid "The 100%% open source Moondrake distribution"
 #~ msgstr "Moondrake-distribusjonen med 100 %% åpen kildekode"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr ""
-#~ "K Desktop Environment, grunnleggende grafisk miljø med en samling av "
-#~ "passende verktøy"
 
 #, fuzzy
 #~ msgid ""
@@ -1662,48 +1836,16 @@ msgstr "Avslutt"
 #~ msgid "This medium provides package updates for medium \"%s\""
 #~ msgstr "Hopp over alle pakker fra media \"%s\""
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "Verktøy for å forenkle oppsettet av maskinen din"
-
-#~ msgid "Utilities"
-#~ msgstr "Verktøy"
-
-#~ msgid "Web Server"
-#~ msgstr "Webtjener"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Webmin Fjernadministrasjonstjener"
-
 #~ msgid "Welcome"
 #~ msgstr "Velkommen"
-
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Window Maker, Enlightenment, Fvwm etc"
 
 #, fuzzy
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Window Maker, Enlightenment, Fvwm etc"
 
-#~ msgid "Wizards to configure server"
-#~ msgstr "Veivisere til å sette opp tjener"
-
-#~ msgid "Workstation"
-#~ msgstr "Arbeidsstasjon"
-
 #, fuzzy
 #~ msgid "XFCE Workstation"
 #~ msgstr "KDE-arbeidsstasjon"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "Kontorarbeidsstasjon"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "

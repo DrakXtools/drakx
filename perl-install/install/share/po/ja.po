@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-ja\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 15:11+0100\n"
+"POT-Creation-Date: 2017-02-17 05:40+0100\n"
 "PO-Revision-Date: 2009-03-22 21:11+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
@@ -309,7 +309,7 @@ msgstr ""
 msgid "Installation"
 msgstr "インストール"
 
-#: gtk.pm:138
+#: gtk.pm:138 share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Configuration"
 msgstr "設定"
@@ -432,6 +432,356 @@ msgstr "%d 件のインストールが失敗しました"
 #, fuzzy, c-format
 msgid "Installation of packages failed:"
 msgstr "パッケージ %s をインストール"
+
+#: share/meta-task/compssUsers.pl:17
+#, c-format
+msgid "Workstation"
+msgstr "ワークステーション"
+
+#: share/meta-task/compssUsers.pl:19
+#, c-format
+msgid "Office Workstation"
+msgstr "オフィスワークステーション"
+
+#: share/meta-task/compssUsers.pl:21
+#, c-format
+msgid ""
+"Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
+"(LibreOffice Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"オフィスソフト: ワープロ (LibreOffice Writer, Kword), 表計算 (OpenOffice.org "
+"Calc, Kspread), PDF ビューアなど"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid "Game station"
+msgstr "ゲームステーション"
+
+#: share/meta-task/compssUsers.pl:28
+#, fuzzy, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc."
+msgstr "ゲームプログラム: アーケードゲーム, ボードゲーム, 戦略ゲームなど"
+
+#: share/meta-task/compssUsers.pl:32
+#, c-format
+msgid "Multimedia station"
+msgstr "マルチメディアステーション"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "サウンドと動画の再生/編集ソフト"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Toys"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:39
+#, c-format
+msgid "Apps and tools of less useful value, yet entertaining..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "インターネットステーション"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr "メールとニュースの送受信用ツール (mutt,tin..) とウェブブラウズ用ツール"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "ネットワーク (クライアント)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "ssh などの各種プロトコル用クライアント"
+
+#: share/meta-task/compssUsers.pl:56
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "コンピュータの設定を簡単にするツール"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Console Tools"
+msgstr "コンソールツール"
+
+#: share/meta-task/compssUsers.pl:61
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "エディタ, シェル, ファイル関連ツール, ターミナル"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:203
+#, c-format
+msgid "Development"
+msgstr "開発用"
+
+#: share/meta-task/compssUsers.pl:66 share/meta-task/compssUsers.pl:204
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "C/C++ の開発ライブラリ, プログラム, include ファイル"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:208
+#, c-format
+msgid "Documentation"
+msgstr "ドキュメント"
+
+#: share/meta-task/compssUsers.pl:71 share/meta-task/compssUsers.pl:209
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Linux/フリーソフト関連の文書とHowto"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:212
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:76 share/meta-task/compssUsers.pl:213
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "Linux Standard Base, サードパーティのアプリケーションをサポート"
+
+#: share/meta-task/compssUsers.pl:87
+#, c-format
+msgid "Web Server"
+msgstr "Web サーバ"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:92
+#, c-format
+msgid "Groupware"
+msgstr "グループウェア"
+
+#: share/meta-task/compssUsers.pl:93
+#, c-format
+msgid "Kolab Server"
+msgstr "Kolabサーバ"
+
+#: share/meta-task/compssUsers.pl:96 share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "Firewall/Router"
+msgstr "ファイアウォール/ルータ"
+
+#: share/meta-task/compssUsers.pl:97 share/meta-task/compssUsers.pl:147
+#, c-format
+msgid "Internet gateway"
+msgstr "インターネットゲートウェイ"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Mail/News"
+msgstr "メール/ニュース"
+
+#: share/meta-task/compssUsers.pl:101
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Postfix メールサーバ, Inn ニュースサーバ"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "Directory Server"
+msgstr "ディレクトリサーバ"
+
+#: share/meta-task/compssUsers.pl:110
+#, c-format
+msgid "FTP Server"
+msgstr "FTP サーバ"
+
+#: share/meta-task/compssUsers.pl:111
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:115
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:116
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "ドメイン名/ネットワークインフォメーションサーバ"
+
+#: share/meta-task/compssUsers.pl:120
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "ファイル/プリンタ共有サーバ"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "NFS サーバ/Samba サーバ"
+
+#: share/meta-task/compssUsers.pl:125 share/meta-task/compssUsers.pl:141
+#, c-format
+msgid "Database"
+msgstr "データベース"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "PostgreSQL and MariaDB Database Server"
+msgstr "PostgreSQL/MariaDBデータベースサーバ"
+
+#: share/meta-task/compssUsers.pl:131
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:132
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:136
+#, c-format
+msgid "Mail"
+msgstr "メール"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Postfix mail server"
+msgstr "Postfix メールサーバ"
+
+#: share/meta-task/compssUsers.pl:142
+#, c-format
+msgid "PostgreSQL or MariaDB database server"
+msgstr "PostgreSQL/MariaDB データベースサーバ"
+
+#: share/meta-task/compssUsers.pl:150
+#, c-format
+msgid "Network Computer server"
+msgstr "ネットワークコンピュータサーバ"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "NFS サーバ, SMB サーバ, プロキシサーバ, SSH サーバ"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Graphical Environment"
+msgstr "グラフィカル環境"
+
+#: share/meta-task/compssUsers.pl:163
+#, c-format
+msgid "KDE Workstation"
+msgstr "KDE ワークステーション"
+
+#: share/meta-task/compssUsers.pl:164
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr "KDE - さまざまなツールを含む定番グラフィカル環境"
+
+#: share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "GNOME Workstation"
+msgstr "GNOME ワークステーション"
+
+#: share/meta-task/compssUsers.pl:170
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr "使いやすいアプリケーションとデスクトップツールを含むグラフィカル環境"
+
+#: share/meta-task/compssUsers.pl:175
+#, fuzzy, c-format
+msgid "Xfce Workstation"
+msgstr "オフィスワークステーション"
+
+#: share/meta-task/compssUsers.pl:176
+#, fuzzy, c-format
+msgid ""
+"A lighter graphical environment with user-friendly set of applications and "
+"desktop tools"
+msgstr "使いやすいアプリケーションとデスクトップツールを含むグラフィカル環境"
+
+#: share/meta-task/compssUsers.pl:181
+#, c-format
+msgid "LXDE Desktop"
+msgstr "LXDE デスクトップ"
+
+#: share/meta-task/compssUsers.pl:183
+#, fuzzy, c-format
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr "使いやすいアプリケーションとデスクトップツールを含むグラフィカル環境"
+
+#: share/meta-task/compssUsers.pl:188
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "その他のグラフィカルデスクトップ"
+
+#: share/meta-task/compssUsers.pl:189
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc."
+msgstr "Window Maker, Enlightenment, Fvwm など"
+
+#: share/meta-task/compssUsers.pl:192
+#, c-format
+msgid "Media Center"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:193
+#, c-format
+msgid "XBMC, MythTV, etc."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:218
+#, c-format
+msgid "Utilities"
+msgstr "ユーティリティ"
+
+#: share/meta-task/compssUsers.pl:220 share/meta-task/compssUsers.pl:221
+#, c-format
+msgid "SSH Server"
+msgstr "SSH サーバ"
+
+#: share/meta-task/compssUsers.pl:225
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:226
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Webmin リモート設定サーバ"
+
+#: share/meta-task/compssUsers.pl:230
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "ネットワークユーティリティ/モニタリング"
+
+#: share/meta-task/compssUsers.pl:231
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "モニタリングツール, プロセス管理, tcpdump, nmap..."
+
+#: share/meta-task/compssUsers.pl:235
+#, fuzzy, c-format
+msgid "DrakX Wizards"
+msgstr "Moondrake ウィザード"
+
+#: share/meta-task/compssUsers.pl:236
+#, c-format
+msgid "Wizards to configure server"
+msgstr "サーバ設定ウィザード"
 
 #: steps.pm:85
 #, c-format
@@ -1282,26 +1632,6 @@ msgstr "終了"
 #~ msgid "A graphical environment based on GNOME"
 #~ msgstr "グラフィカル環境"
 
-#~ msgid ""
-#~ "A graphical environment with user-friendly set of applications and "
-#~ "desktop tools"
-#~ msgstr ""
-#~ "使いやすいアプリケーションとデスクトップツールを含むグラフィカル環境"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lighter graphical environment with user-friendly set of applications "
-#~ "and desktop tools"
-#~ msgstr ""
-#~ "使いやすいアプリケーションとデスクトップツールを含むグラフィカル環境"
-
-#, fuzzy
-#~ msgid ""
-#~ "A lightweight & fast graphical environment with user-friendly set of "
-#~ "applications and desktop tools"
-#~ msgstr ""
-#~ "使いやすいアプリケーションとデスクトップツールを含むグラフィカル環境"
-
 #, fuzzy
 #~ msgid "A lightweight fast graphical environment"
 #~ msgstr ""
@@ -1315,24 +1645,8 @@ msgstr "終了"
 #~ msgid "Amusement programs: arcade, boards, strategy, etc"
 #~ msgstr "ゲームプログラム: アーケードゲーム, ボードゲーム, 戦略ゲームなど"
 
-#, fuzzy
-#~ msgid "Amusement programs: arcade, boards, strategy, etc."
-#~ msgstr "ゲームプログラム: アーケードゲーム, ボードゲーム, 戦略ゲームなど"
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Apache, Pro-ftpd"
-#~ msgstr "Apache, Pro-ftpd"
-
 #~ msgid "Bad package"
 #~ msgstr "不正なパッケージ"
-
-#~ msgid "Books and Howto's on Linux and Free Software"
-#~ msgstr "Linux/フリーソフト関連の文書とHowto"
-
-#~ msgid "C and C++ development libraries, programs and include files"
-#~ msgstr "C/C++ の開発ライブラリ, プログラム, include ファイル"
 
 #~ msgid "CD-ROM"
 #~ msgstr "CD-ROM"
@@ -1341,63 +1655,11 @@ msgstr "終了"
 #~ msgid "Cinnamon Workstation"
 #~ msgstr "ワークステーション"
 
-#~ msgid "Clients for different protocols including ssh"
-#~ msgstr "ssh などの各種プロトコル用クライアント"
-
-#~ msgid "Console Tools"
-#~ msgstr "コンソールツール"
-
-#~ msgid "DNS/NIS"
-#~ msgstr "DNS/NIS"
-
-#~ msgid "Database"
-#~ msgstr "データベース"
-
-#~ msgid "Development"
-#~ msgstr "開発用"
-
-#~ msgid "Directory Server"
-#~ msgstr "ディレクトリサーバ"
-
 #~ msgid "Do you have an ISA sound card?"
 #~ msgstr "ISA サウンドカードをお使いですか？"
 
-#~ msgid "Documentation"
-#~ msgstr "ドキュメント"
-
-#~ msgid "Domain Name and Network Information Server"
-#~ msgstr "ドメイン名/ネットワークインフォメーションサーバ"
-
 #~ msgid "Downloading file %s..."
 #~ msgstr "ファイル %s をダウンロード中..."
-
-#, fuzzy
-#~ msgid "DrakX Wizards"
-#~ msgstr "Moondrake ウィザード"
-
-#~ msgid "Editors, shells, file tools, terminals"
-#~ msgstr "エディタ, シェル, ファイル関連ツール, ターミナル"
-
-#~ msgid "FTP Server"
-#~ msgstr "FTP サーバ"
-
-#~ msgid "File and Printer Sharing Server"
-#~ msgstr "ファイル/プリンタ共有サーバ"
-
-#~ msgid "Firewall/Router"
-#~ msgstr "ファイアウォール/ルータ"
-
-#~ msgid "GNOME Workstation"
-#~ msgstr "GNOME ワークステーション"
-
-#~ msgid "Game station"
-#~ msgstr "ゲームステーション"
-
-#~ msgid "Graphical Environment"
-#~ msgstr "グラフィカル環境"
-
-#~ msgid "Groupware"
-#~ msgstr "グループウェア"
 
 #~ msgid "IDE"
 #~ msgstr "IDE"
@@ -1427,46 +1689,19 @@ msgstr "終了"
 #~ "警告: 「新しくインストール」を選択する前に、必ず個人データの\n"
 #~ "バックアップを作成してください。"
 
-#~ msgid "Internet gateway"
-#~ msgstr "インターネットゲートウェイ"
-
-#~ msgid "Internet station"
-#~ msgstr "インターネットステーション"
-
 #~ msgid "KDE"
 #~ msgstr "KDE"
 
 #~ msgid "KDE Desktop"
 #~ msgstr "KDE デスクトップ"
 
-#~ msgid "KDE Workstation"
-#~ msgstr "KDE ワークステーション"
-
-#~ msgid "Kolab Server"
-#~ msgstr "Kolabサーバ"
-
-#~ msgid "LSB"
-#~ msgstr "LSB"
-
-#~ msgid "LXDE Desktop"
-#~ msgstr "LXDE デスクトップ"
-
 #, fuzzy
 #~ msgid "LXQT Desktop"
 #~ msgstr "LXDE デスクトップ"
 
-#~ msgid "Linux Standard Base. Third party applications support"
-#~ msgstr "Linux Standard Base, サードパーティのアプリケーションをサポート"
-
 #, fuzzy
 #~ msgid "MATE Workstation"
 #~ msgstr "GNOME ワークステーション"
-
-#~ msgid "Mail"
-#~ msgstr "メール"
-
-#~ msgid "Mail/News"
-#~ msgstr "メール/ニュース"
 
 #~ msgid "Mandriva Linux Installation %s"
 #~ msgstr "Mandriva Linux のインストール %s"
@@ -1474,29 +1709,8 @@ msgstr "終了"
 #~ msgid "Mandriva Wizards"
 #~ msgstr "Mandriva ウィザード"
 
-#~ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-#~ msgstr "モニタリングツール, プロセス管理, tcpdump, nmap..."
-
 #~ msgid "Moondrake Wizards"
 #~ msgstr "Moondrake ウィザード"
-
-#~ msgid "Multimedia station"
-#~ msgstr "マルチメディアステーション"
-
-#~ msgid "NFS Server, Samba server"
-#~ msgstr "NFS サーバ/Samba サーバ"
-
-#~ msgid "NFS server, SMB server, Proxy server, ssh server"
-#~ msgstr "NFS サーバ, SMB サーバ, プロキシサーバ, SSH サーバ"
-
-#~ msgid "Network Computer (client)"
-#~ msgstr "ネットワーク (クライアント)"
-
-#~ msgid "Network Computer server"
-#~ msgstr "ネットワークコンピュータサーバ"
-
-#~ msgid "Network Utilities/Monitoring"
-#~ msgstr "ネットワークユーティリティ/モニタリング"
 
 #~ msgid ""
 #~ "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1510,16 +1724,6 @@ msgstr "終了"
 #~ msgstr ""
 #~ "サウンドカードが見つかりません。インストール後に harddrake で再度設定を試"
 #~ "みてください。"
-
-#~ msgid "Office Workstation"
-#~ msgstr "オフィスワークステーション"
-
-#~ msgid ""
-#~ "Office programs: wordprocessors (LibreOffice Writer, Kword), spreadsheets "
-#~ "(LibreOffice Calc, Kspread), PDF viewers, etc"
-#~ msgstr ""
-#~ "オフィスソフト: ワープロ (LibreOffice Writer, Kword), 表計算 (OpenOffice."
-#~ "org Calc, Kspread), PDF ビューアなど"
 
 #, fuzzy
 #~ msgid ""
@@ -1540,23 +1744,8 @@ msgstr "終了"
 #~ msgid "Office tools"
 #~ msgstr "オフィスワークステーション"
 
-#~ msgid "Other Graphical Desktops"
-#~ msgstr "その他のグラフィカルデスクトップ"
-
-#~ msgid "Postfix mail server"
-#~ msgstr "Postfix メールサーバ"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Postfix メールサーバ, Inn ニュースサーバ"
-
-#~ msgid "PostgreSQL and MariaDB Database Server"
-#~ msgstr "PostgreSQL/MariaDBデータベースサーバ"
-
 #~ msgid "PostgreSQL and MySQL Database Server"
 #~ msgstr "PostgreSQL/MySQLデータベースサーバ"
-
-#~ msgid "PostgreSQL or MariaDB database server"
-#~ msgstr "PostgreSQL/MariaDB データベースサーバ"
 
 #~ msgid "PostgreSQL or MySQL database server"
 #~ msgstr "PostgreSQL/MySQL データベースサーバ"
@@ -1572,9 +1761,6 @@ msgstr "終了"
 #~ msgid "Preparing upgrade..."
 #~ msgstr "ブートローダを準備中..."
 
-#~ msgid "ProFTPd"
-#~ msgstr "ProFTPd"
-
 #~ msgid "Proceed"
 #~ msgstr "続行"
 
@@ -1589,25 +1775,8 @@ msgstr "終了"
 #~ "インストール後に alsaconf か sndconfig を実行してサウンドカードを設定して"
 #~ "ください。"
 
-#~ msgid "SSH Server"
-#~ msgstr "SSH サーバ"
-
 #~ msgid "Select All"
 #~ msgstr "すべて選択"
-
-#~ msgid ""
-#~ "Set of tools to read and send mail and news (mutt, tin..) and to browse "
-#~ "the Web"
-#~ msgstr ""
-#~ "メールとニュースの送受信用ツール (mutt,tin..) とウェブブラウズ用ツール"
-
-#~ msgid "Sound and video playing/editing programs"
-#~ msgstr "サウンドと動画の再生/編集ソフト"
-
-#~ msgid ""
-#~ "The K Desktop Environment, the basic graphical environment with a "
-#~ "collection of accompanying tools"
-#~ msgstr "KDE - さまざまなツールを含む定番グラフィカル環境"
 
 #, fuzzy
 #~ msgid ""
@@ -1619,9 +1788,6 @@ msgstr "終了"
 #~ msgid "This medium provides package updates for medium \"%s\""
 #~ msgstr "メディア %s のすべてのパッケージを飛ばす"
 
-#~ msgid "Tools to ease the configuration of your computer"
-#~ msgstr "コンピュータの設定を簡単にするツール"
-
 #~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 #~ msgstr ""
 #~ "32bit から 64bit ディストリビューションへのアップグレードはサポートされて"
@@ -1632,45 +1798,16 @@ msgstr "終了"
 #~ "64bit から 32bit ディストリビューションへのアップグレードはサポートされて"
 #~ "いません"
 
-#~ msgid "Utilities"
-#~ msgstr "ユーティリティ"
-
-#~ msgid "Web Server"
-#~ msgstr "Web サーバ"
-
-#~ msgid "Web/FTP"
-#~ msgstr "Web/FTP"
-
-#~ msgid "Webmin"
-#~ msgstr "Webmin"
-
-#~ msgid "Webmin Remote Configuration Server"
-#~ msgstr "Webmin リモート設定サーバ"
-
 #~ msgid "Welcome"
 #~ msgstr "ようこそ"
-
-#, fuzzy
-#~ msgid "Window Maker, Enlightenment, Fvwm, etc."
-#~ msgstr "Window Maker, Enlightenment, Fvwm など"
 
 #, fuzzy
 #~ msgid "Window Maker, Fvwm, etc"
 #~ msgstr "Window Maker, Enlightenment, Fvwm など"
 
-#~ msgid "Wizards to configure server"
-#~ msgstr "サーバ設定ウィザード"
-
-#~ msgid "Workstation"
-#~ msgstr "ワークステーション"
-
 #, fuzzy
 #~ msgid "XFCE Workstation"
 #~ msgstr "KDE ワークステーション"
-
-#, fuzzy
-#~ msgid "Xfce Workstation"
-#~ msgstr "オフィスワークステーション"
 
 #~ msgid ""
 #~ "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
