@@ -19,6 +19,8 @@ elif [ -x /tmp/stage2/usr/bin/runinstall2 ]; then
 fi
 
 if [ -x /usr/bin/runinstall2 ]; then
+	grep -q noauto /proc/cmdline || drvinst DISPLAY_VGA
+
 	# FIXME: using cttyhack feels dirty.. :p
 	sed -e 's|^tty1::once:.*|tty1::respawn:cttyhack /usr/bin/runinstall2|g' -i /etc/inittab
 else
