@@ -271,10 +271,6 @@ EndSection);
      output($file, qq(Section "ServerFlags"
 EndSection
 
-Section "Module"
-      Disable "glx"
-EndSection
-
 Section "Files"
    FontPath   "/usr/share/fonts:unscaled"
 EndSection
