@@ -339,6 +339,38 @@ bool module_already_present(const char *name)
 	return present;
 }
 
+bool module_exists(const std::string &name)
+{
+	int err;
+	bool exists;
+	const char *null_config = NULL;
+	const char *path = NULL;
+	struct kmod_ctx *ctx;
+	struct kmod_module *mod;
+	struct stat sb;
+
+	ctx = kmod_new(NULL, &null_config);
+	if (!ctx) {
+		fputs("Error: kmod_new() failed!\n", stderr);
+		return 1;
+	}
+
+	err = kmod_module_new_from_name(ctx, name.c_str(), &mod);
+
+	if (err < 0)
+		print_mod_strerror(err, mod, NULL);
+
+	path = kmod_module_get_path(mod);
+
+	exists = (stat(path, &sb) == 0);
+
+	kmod_module_unref(mod);
+	kmod_unref(ctx);
+
+	return exists;
+}
+
+
 static enum insmod_return insmod_with_deps(const char * mod_name, const char * options)
 {
 	int err = modprobe(mod_name, options);

@@ -19,6 +19,7 @@
 #define _MODULES_H_
 
 #include <stdbool.h>
+#include <string>
 
 #include "stage1.h"
 #include "probing.h"
@@ -34,6 +35,7 @@ int modprobe(const char *alias, const char *extra_options);
 enum insmod_return my_modprobe(const char * mod_name, enum driver_type type, const char * options);
 enum return_type ask_insmod(enum driver_type);
 bool module_already_present(const char * name);
+bool module_exists(const std::string &name);
 
 extern int disable_modules;
 
