@@ -70,7 +70,7 @@ static void load_modules(int argc, char *argv[]) {
 
 int drvinst_main(int argc, char *argv[]) {
     if (argc > 1 && !strcmp(argv[0], "--help")) 
-	fprintf(stderr, "usage: drivers_install [drivertype1 [drivertype2 ...]]\n");
+	fprintf(stderr, "usage: drvinst [drivertype1 [drivertype2 ...]]\n");
     else {
 	load_modules<pci, pciEntry>(argc, argv);
 	load_modules<usb, usbEntry>(argc, argv);
