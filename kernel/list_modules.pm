@@ -140,7 +140,7 @@ our %l = (
         qw(megaraid_sas mptfc mptsas mptscsih mptspi pdc-ultra pmcraid ppa),
         qw(qla2100 qla2200 qla2300 qla2322 qla4xxx qla6312 qla6322),
     ],
-    video => [ qw(vmwgfx cirrus qxl radeonfb kyrofb i740fb matroxfb_crct2 matroxfb_DAC1064 matroxfb_g450 matroxfb_misc matroxfb_accel matroxfb_Ti3026 matroxfb_base aty128fb vga16fb vt8236fb sstfb s3fb rivafb  mb862xfb nvidiafb fb_ddc udlfb tdfxfb uvesafb viafb tridentfb savagefb cfag1286bfb) ],
+    video => [ qw(vmwgfx cirrus qxl bochs_drm radeonfb kyrofb i740fb matroxfb_crct2 matroxfb_DAC1064 matroxfb_g450 matroxfb_misc matroxfb_accel matroxfb_Ti3026 matroxfb_base aty128fb vga16fb vt8236fb sstfb s3fb rivafb  mb862xfb nvidiafb fb_ddc udlfb tdfxfb uvesafb viafb tridentfb savagefb cfag1286bfb) ],
     virtual => [ qw(hv_storvsc virtio_blk virtio_scsi xenblk xen-blkfront) ],
     pcmcia => [ qw(aha152x_cs fdomain_cs nsp_cs qlogic_cs ide-cs pata_pcmcia sym53c500_cs) ],
     raw => [ qw(ide-gd_mod sd_mod) ],
