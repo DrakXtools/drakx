@@ -46,7 +46,13 @@ static void load_modules(int argc, char *argv[]) {
 	const std::string &devclass = pci_class2text(e.class_id);
 	if ((e.kmodules.empty() && (e.module.empty() || e.module.find(':') != std::string::npos)))
 	    continue;
-	const std::string &module = e.module.empty() ? e.kmodules.front() : e.module;
+	auto kmodule = e.kmodules.cbegin();
+	for (; kmodule != e.kmodules.end(); ++kmodule)
+	    if (module_exists(*kmodule))
+		break;
+	if (kmodule == e.kmodules.end())
+	    continue;
+	const std::string &module = e.module.empty() ? *kmodule : e.module;
 	bool skip = true;
 
 	if (argc > 1) {
