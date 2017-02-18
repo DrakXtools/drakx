@@ -90,7 +90,7 @@ our %l = (
     ],
     wan => [ qw(c101 cosa cyclomx cycx_drv dlci dscc4 farsync hdlc hostess_sv11 lapbether lmc n2 pc300 pci200syn sbni sdla sdladrv sealevel syncppp wanxl z85230) ],
     usb_dsl => [ qw(cxacru speedtch ueagle-atm usbatm xusbatm) ],
-    virtual => [ qw(ena hv_netvsc vboxdrv virtio_net vmxnet3 xen-netfront) ],
+    virtual => [ qw(ena hv_netvsc vboxdrv vboxvideo virtio_net vmxnet3 xen-netfront) ],
   },
 
   ################################################################################
