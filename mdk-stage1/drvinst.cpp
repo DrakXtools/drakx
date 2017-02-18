@@ -64,7 +64,7 @@ static void load_modules(int argc, char *argv[]) {
 		continue;
 
 	std::cerr << "Installing driver " << module << " (for \"" << e.text << "\" [" << devclass << "])" << std::endl;
-	modprobe(e.module.empty() ? e.kmodules.front().c_str() : e.module.c_str(), nullptr);
+	modprobe(module.c_str(), nullptr);
     }
 }
 
