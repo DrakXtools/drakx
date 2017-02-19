@@ -37,23 +37,15 @@
 <!-- when adding udev rules, think whether they're needed in rescue too
      (../../../rescue/list.xml) -->
 <from dir="/lib/udev/rules.d">
-  10-dm.rules
-  11-dm-lvm.rules
-  13-dm-disk.rules
-  50-udev-default.rules <!-- needed for input in X11 -->
   60-evdev.rules
   60-persistent-input.rules
   60-persistent-storage.rules
   61-x11-input.rules
-  63-md-raid-arrays.rules
-  64-md-raid-assembly.rules
   65-libwacom.rules
   <if ARCH="i.86|x86_64">
   69-xorg-vmmouse.rules
   </if>
   70-spice-vdagentd.rules
-  75-net-description.rules
-  80-drivers.rules
   80-libinput-device-groups.rules
   80-net-setup-link.rules
   90-libinput-model-quirks.rules
