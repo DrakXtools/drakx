@@ -36,7 +36,19 @@ if grep -q vconsole.keymap /proc/cmdline; then
 	action "Loading keymap: $keymap" loadkeys $keymap
 fi
 
-/etc/rc.d/init.d/gpm start
+service gpm start
+
+if grep -q network /proc/cmdline; then
+	grep -q noauto /proc/cmdline || drvinst NETWORK_ETHERNET
+	eval echo -e $(getarg network `cat /root/cmdline`) > /etc/sysconfig/network-scripts/ifcfg-eth0
+	. /etc/sysconfig/network-scripts/ifcfg-eth0
+	[ -z "$DEVICE" ] && echo "DEVICE=eth0" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+	echo "ONBOOT=yes" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+	ifup eth0
+	if grep -q sshd /proc/cmdline; then
+		dropbear -B
+	fi
+fi
 
 if grep -q rescue /proc/cmdline; then
 	. /etc/rc.d/rc.stage2
