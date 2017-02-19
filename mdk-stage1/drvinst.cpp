@@ -43,7 +43,7 @@ static void load_modules(int argc, char *argv[]) {
     pu.probe();
     for (uint16_t i = 0; i < pu.size(); i++) {
 	const E &e = pu[i];
-	const std::string &devclass = pci_class2text(e.class_id);
+	const std::string &devclass = e.class_type;
 	if ((e.kmodules.empty() && (e.module.empty() || e.module.find(':') != std::string::npos)))
 	    continue;
 	auto kmodule = e.kmodules.cbegin();
