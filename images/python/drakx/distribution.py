@@ -158,9 +158,12 @@ class Distribution(object):
             for key in list(state['rejected'].keys()):
                 reject = state['rejected'][key]
                 #print color("rejected: %s" % key, RED, RESET, DIM)
-                if 'backtrack' in reject:
+                # FIXME:
+                #if 'backtrack' in reject:
+                if reject.has_key('backtrack'):
                     backtrack = reject['backtrack']
-                    if 'conflicts' in backtrack:
+                    #if 'conflicts' in backtrack:
+                    if backtrack.has_key('conflicts'):
                         if key in pkgdict:
                             pkg = pkgdict[key]
 
