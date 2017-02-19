@@ -263,6 +263,12 @@ sub createXconf {
      # efi framebuffer wants 24 bit
      my $depth = is_uefi() ? '24' : '16';
 
+     my $displaysection = $Driver eq 'fbdev' ? "" : qq(DefaultColorDepth $depth
+     Subsectiom "Display"
+	Depth $depth
+	Modes $resolution
+     EndSubsection);
+
      my $driversection = $Driver eq 'auto' ? "" : qq(Section "Device"
     Identifier "device"
     Driver "$Driver"
@@ -287,11 +293,7 @@ Section "Screen"
     Identifier "screen"
     Device "device"
     Monitor "monitor"
-    DefaultColorDepth $depth
-    Subsection "Display"
-        Depth $depth
-        Modes $resolution
-    EndSubsection
+    $displaysection
 EndSection
 
 Section "ServerLayout"
