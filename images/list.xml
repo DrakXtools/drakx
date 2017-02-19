@@ -48,6 +48,8 @@
   mount umount
   losetup
 
+  service
+
   kill ps strace
   sed tr
   strings
@@ -331,10 +333,24 @@
   </if>
 </from>
 <from dir="/etc/rc.d/init.d">
-	udhcpd
-	functions
-	gpm
+  udhcpd
+  functions
+  gpm
+  network
 </from>
+<from dir="/etc/sysconfig/network-scripts">
+  ifdown-aliases
+  ifdown-eth
+  ifdown-post
+  ifdown-ppp
+  ifdown-routes
+  ifup-aliases
+  ifup-eth
+  ifup-post
+  ifup-ppp
+  ifup-routes
+  network-functions
+</fromZ>
 
 <from dir="/etc/udhcpc">
   default.bound
