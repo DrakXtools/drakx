@@ -38,7 +38,7 @@ if grep -q vconsole.keymap /proc/cmdline; then
 	action "Loading keymap: $keymap" loadkeys $keymap
 fi
 
-service gpm start
+/etc/rc.d/init.d/gpm start
 
 if grep -q network /proc/cmdline; then
 	grep -q noauto /proc/cmdline || drvinst NETWORK_ETHERNET
