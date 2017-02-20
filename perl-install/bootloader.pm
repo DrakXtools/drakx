@@ -2263,8 +2263,9 @@ sub ensure_pkg_is_installed {
 
     my %suppl = (
 	# method => [ 'pkg_name', 'file_to_test' ],
-	'grub-graphic' => [ qw(mageia-gfxboot-theme /usr/share/gfxboot/themes/Mageia/boot/message) ],
-	'grub2-graphic' => [ qw(grub2-mageia-theme /boot/grub2/themes/maggy/theme.txt) ],
+	# XXX: we really shouldn't hardcode vendor specific branding in the actual code...
+	'grub-graphic' => [ qw(distro-gfxboot-theme /usr/share/gfxboot/themes/Moondrake/boot/message) ],
+	'grub2-graphic' => [ qw(grub2-theme /boot/grub2/themes/Moondrake/theme.txt) ],
     );
     my $main_method = main_method($bootloader->{method});
     if ($main_method eq 'grub2') {
