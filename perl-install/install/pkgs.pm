@@ -786,7 +786,7 @@ sub install {
     URPM::read_config_files();
     # force loading libnss*
     getgrent();
-    URPM::add_macro('__nofsync 1');
+    URPM::add_macro('_dbi_config %{?__dbi_other} nofsync');
     my $LOG = _openInstallLog();
 
     $packages->{log} = $packages->{info} = $packages->{print} = sub {
