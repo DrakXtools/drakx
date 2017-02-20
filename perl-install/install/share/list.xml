@@ -37,19 +37,21 @@
 <!-- when adding udev rules, think whether they're needed in rescue too
      (../../../rescue/list.xml) -->
 <from dir="/lib/udev/rules.d">
-  60-evdev.rules
-  60-persistent-input.rules
-  60-persistent-storage.rules
-  61-x11-input.rules
-  65-libwacom.rules
-  <if ARCH="i.86|x86_64">
-  69-xorg-vmmouse.rules
-  </if>
-  70-spice-vdagentd.rules
-  80-libinput-device-groups.rules
-  80-net-setup-link.rules
-  90-libinput-model-quirks.rules
-  95-dm-notify.rules
+  <to dir="/usr/lib/udev/rules.d">
+    60-evdev.rules
+    60-persistent-input.rules
+    60-persistent-storage.rules
+    61-x11-input.rules
+    65-libwacom.rules
+    <if ARCH="i.86|x86_64">
+      69-xorg-vmmouse.rules
+    </if>
+    70-spice-vdagentd.rules
+    80-libinput-device-groups.rules
+    80-net-setup-link.rules
+    90-libinput-model-quirks.rules
+    95-dm-notify.rules
+  </to>
 </from>
 
 <from dir="/usr/libexec">

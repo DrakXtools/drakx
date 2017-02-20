@@ -366,19 +366,21 @@
 </from>
 
 <from dir="/lib/udev/rules.d">
-  10-dm.rules
-  11-dm-lvm.rules
-  13-dm-disk.rules
-  50-udev-default.rules <!-- needed for input in X11 -->
-  <!-- "removed in recent systemd, don't know relevance of" 60-keyboard.rules -->
-  60-persistent-input.rules
-  60-persistent-storage.rules
-  63-md-raid-arrays.rules
-  64-md-raid-assembly.rules
-  75-net-description.rules
-  80-drivers.rules
-  <!-- "predictable names" don't wanna! 80-net-name-slot.rules -->
-  95-dm-notify.rules
+  <to dir="/usr/lib/udev/rules.d">
+    10-dm.rules
+    11-dm-lvm.rules
+    13-dm-disk.rules
+    50-udev-default.rules <!-- needed for input in X11 -->
+    <!-- "removed in recent systemd, don't know relevance of" 60-keyboard.rules -->
+    60-persistent-input.rules
+    60-persistent-storage.rules
+    63-md-raid-arrays.rules
+    64-md-raid-assembly.rules
+    75-net-description.rules
+    80-drivers.rules
+    <!-- "predictable names" don't wanna! 80-net-name-slot.rules -->
+    95-dm-notify.rules
+  </to>
 </from>
 
 <from dir="/usr/share/ldetect-lst">
