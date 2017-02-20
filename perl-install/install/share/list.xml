@@ -219,11 +219,16 @@
   webkit2gtk-4.0/injected-bundle/libwebkit2gtkinjectedbundle.so
 </from>
 
+<from dir="/bin">
+  <to dir="/sbin">
+    rpm
+  </to>
+</from>
+
 <from>
   /usr/lib/rpm/rpmrc
   /etc/rpm/macros.d/20common.macros
   /usr/lib/rpm/macros
-  /bin/rpm
 
   /etc/urpmi/prefer.vendor.list
   /etc/fonts/
