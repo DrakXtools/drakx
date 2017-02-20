@@ -318,10 +318,8 @@
 </from>
 
 <from dir="/usr/share/ldetect-lst">
-  dmitable.gz pcitable.gz usbtable.gz
-  dkms-modules.alias fallback-modules.alias
-  <filter command="gzip">
-    Cards+ MonitorsDB isdn.db
+  <filter command="gunzip">
+    pcitable.gz usbtable.gz
   </filter>
 </from>
 
