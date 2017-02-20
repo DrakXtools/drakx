@@ -504,12 +504,6 @@ Consoles 1,3,4,7 may also contain interesting information";
     log::l("fix missing /media/cdrom");
     run_program::rooted($::prefix, "mkdir", "/media/cdrom");
 
-    # active nepomuk
-    my $nepomukconf = "/var/lib/mandriva/kde4-profiles/common/share/config/nepomukserverrc";
-    if (-f "$::prefix/$nepomukconf") {
-	substInFile { s/Start\sNepomuk.*/Start Nepomuk=true/ } "$::prefix/$nepomukconf";
-    }
-
     if ($o->{mouse}{device} =~ /ttyS/) {
 	log::l("disabling gpm for serial mice (does not get along nicely with X)");
 	run_program::rooted($::prefix, "/bin/systemctl", "disable", "gpm"); 
