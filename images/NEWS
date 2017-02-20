@@ -1,3 +1,10 @@
+Version 2.41.1 - 20 February 2017 by Per Øyvind Karlsen
+
+- lotsa work on adapting cooker branch to cauldron...
+- get rid of bashism, we're now using 'ash' shell from busybox
+- allow specifying network configuration with 'network=' on cmdline, and also
+  enable starting of dropbear by passing 'sshd' to kernel cmdline
+
 Version 2.41 - 6 January 2017 by Thomas Backlund
 
 - disable audit logging as it floods the logs
