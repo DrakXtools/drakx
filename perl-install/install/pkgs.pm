@@ -1049,7 +1049,7 @@ sub _remove_raw {
     log::l("removing: " . join(' ', @$to_remove));
 
     URPM::read_config_files();
-    URPM::add_macro('__nofsync 1');
+    URPM::add_macro('_dbi_config %{?__dbi_other} nofsync');
 
     my $db = open_rpm_db_rw() or die "error opening RPM database: ", URPM::rpmErrorString();
     my $trans = $db->create_transaction;
