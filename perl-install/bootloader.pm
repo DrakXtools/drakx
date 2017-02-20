@@ -2164,7 +2164,7 @@ sub install_grub2 {
     my ($bootloader, $all_hds) = @_;
     write_grub2_sysconfig($bootloader, $all_hds);
     write_grub2();
-    write_grub2_default_entry($bootloader, $all_hds);
+    write_grub2($bootloader, $all_hds);
     write_grub2_install_sh($bootloader, '.old');
     install_raw_grub2($bootloader, $all_hds);
 }
