@@ -12,9 +12,9 @@ tty11::once:/usr/bin/tail -f /var/log/stage1.log
 tty12::once:/usr/bin/tail -f /var/log/messages
 
 tty1::once:/sbin/stage1
-::respawn:/sbin/getty -n 115200,9600 tty2 linux -l /bin/login.bash
-::respawn:/sbin/getty -n 115200,9600 tty3 linux -l /bin/login.bash
-::respawn:/sbin/getty -n 115200,9600 tty4 linux -l /bin/login.bash
-::respawn:/sbin/getty -n 115200,9600 tty5 linux -l /bin/login.bash
-::respawn:/sbin/getty -n 115200,9600 tty6 linux -l /bin/login.bash
-::respawn:/sbin/getty -h -t 60 ttyS0 9600 ansi -l /bin/login.bash
+::respawn:/sbin/getty -n 115200,9600 tty2 linux -l /bin/login.sh
+::respawn:/sbin/getty -n 115200,9600 tty3 linux -l /bin/login.sh
+::respawn:/sbin/getty -n 115200,9600 tty4 linux -l /bin/login.sh
+::respawn:/sbin/getty -n 115200,9600 tty5 linux -l /bin/login.sh
+::respawn:/sbin/getty -n 115200,9600 tty6 linux -l /bin/login.sh
+::respawn:/sbin/getty -h -t 60 ttyS0 9600 ansi -l /bin/login.sh
