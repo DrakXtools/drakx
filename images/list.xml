@@ -344,6 +344,7 @@
   ifdown-post
   ifdown-ppp
   ifdown-routes
+  ifup
   ifup-aliases
   ifup-eth
   ifup-post
@@ -448,6 +449,11 @@
     </to>
   </from>
 </if>
+
+<from dir="/sbin">
+  ifup
+  ifdown
+</from>
 
 <from dir="./tree/etc">
     <to dir="/etc">
