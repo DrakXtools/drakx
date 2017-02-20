@@ -182,14 +182,18 @@
 </from>
 
 <from dir="../images/setup">
-	<to dir="/etc">
-		fstab
-		group
-		host.conf
-		hosts
-		inputrc
-		passwd
-	</to>
+  <to dir="/etc">
+    fstab
+    group
+    host.conf
+    hosts
+    inputrc
+    passwd
+    protocols
+    resolv.conf
+    services
+    shells
+  </to>
 </from>
 
 <from dir="/usr/LIB/drakx-installer/binaries">
@@ -324,11 +328,7 @@
   gpm-root.conf
   mke2fs.conf
   netconfig
-  inputrc
-  protocols
-  resolv.conf
-  services
-  shells
+
   <if ARCH="i.86|x86_64">
     pcmcia/config.opts
   </if>
