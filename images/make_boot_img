@@ -92,9 +92,6 @@ EOF
 	ln -v "$tmp_initrd/sbin/stage1" "$tmp_initrd$hardlink"
     done
 
-    for bin in insmod modinfo rmmod modprobe; do
-	ln -vf "$tmp_initrd/bin/kmod" "$tmp_initrd/sbin/$bin"
-    done
 #    for hardlink in /usr/bin/dropbear /usr/bin/ssh /usr/bin/scp /usr/bin/dbclient; do
 #	ln -v "$tmp_initrd/usr/bin/dropbearmulti" "$tmp_initrd$hardlink"
 #    done
@@ -117,7 +114,12 @@ EOF
 	    strip "$f"
 	fi
     done
-    
+
+    echo "Making symlinks defined in 'aliases'"
+    cat aliases | while read x y ; do
+	ln -vf "$tmp_initrd/$x" "$tmp_initrd/$y"
+    done
+
     echo "Prelinking files"
     sed -e "s# /# $tmp_initrd/#g" /etc/prelink.conf > ucdrakx-prelink.conf
     /usr/sbin/prelink -a -N -c ucdrakx-prelink.conf
