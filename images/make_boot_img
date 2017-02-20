@@ -102,8 +102,8 @@ EOF
 	ln -v "$tmp_initrd/sbin/stage1" "$tmp_initrd$hardlink"
     done
 
-    for bin in insmod rmmod modprobe; do
-	ln -v "$tmp_initrd/sbin/kmod" "$tmp_initrd/sbin/$bin"
+    for bin in insmod modinfo rmmod modprobe; do
+	ln -vf "$tmp_initrd/bin/kmod" "$tmp_initrd/sbin/$bin"
     done
 #    for hardlink in /usr/bin/dropbear /usr/bin/ssh /usr/bin/scp /usr/bin/dbclient; do
 #	ln -v "$tmp_initrd/usr/bin/dropbearmulti" "$tmp_initrd$hardlink"
