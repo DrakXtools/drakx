@@ -391,6 +391,10 @@
   Cards+ MonitorsDB isdn.db
 </from>
 
+<from dir="/lib/module-init-tools">
+  ldetect-lst-modules.alias
+</from>
+
 <mode copy="dereference">
   <filter command="strip">
     <!-- 32bit grub needs 32 bit loader -->
