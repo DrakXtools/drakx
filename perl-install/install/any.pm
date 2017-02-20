@@ -506,6 +506,7 @@ sub media_screen {
                 disabled => sub {
 		    state $parent_media = $parent && urpm::media::name2medium($urpm, $parent);
 		    $name =~ /^(?:Core|Main|Moondrake) Release$/ || $parent_media ? !$parent_media->{temp_enabled} : 0;
+		},
             };
         } @{$urpm->{media}},
     ]);
