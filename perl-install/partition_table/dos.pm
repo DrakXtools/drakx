@@ -281,10 +281,14 @@ sub end_write {
 
 sub need_to_tell_kernel {
     my ($hd) = @_;
-    # If none of the partitions are mounted, the kernel will automatically rescan
-    # the partition table. If any partitions are mounted, this doesn't happen, so
-    # we need to tell the kernel what has changed.
-    return any { $_->{isMounted} } partition_table::get_normal_parts($hd);
+    # Whenever udevd receives a change event for a raw disk device it is watching, it asks the kernel to
+    # rescan the partition table on that device by calling the BLKRRPART ioctl. This is only successful
+    # if none of the partitions on that device are currently mounted. So if any partitions are mounted,
+    # we need to tell the kernel what has changed ourselves.
+    # The udev/rules.d/60-block.rules file causes the raw disk devices to be watched by udev. This file is
+    # not present in the cut-down system used to run the classic installer, so we always need to tell the
+    # kernel in that case.
+    return ! -e '/usr/lib/udev/rules.d/60-block.rules' || any { $_->{isMounted} } partition_table::get_normal_parts($hd);
 }
 
 sub empty_raw { { raw => [ ({}) x $nb_primary ] } }
