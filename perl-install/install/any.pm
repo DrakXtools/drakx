@@ -388,11 +388,13 @@ sub load_rate_files {
     defined $o->{compssUsers} or die "Can't read compssUsers.pl file, aborting installation\n";
 }
 
-sub _main_medium() { N("Main Release") }
+sub _core_medium() { N("Core Release") }
 
-sub _contrib_medium() { N("Contrib Release") }
+sub _moondrake_medium() { N("Moondrake Release") }
 
-sub _nonfree_medium() { N("Non-free Release") }
+sub _tainted_medium() { N("Tainted Release") }
+
+sub _nonfree_medium() { N("Nonfree Release") }
 
 # FIXME: move me in ../any.pm or in harddrake::*, might be needed by rpmdrake/harddrake:
 sub is_firmware_needed_ {
@@ -471,11 +473,14 @@ sub media_screen {
     # - introduce 'mandatory' keyword for guessing media that can *not* be disabled
     my %descriptions = (
         'Core Release' => N("\"%s\" contains the various pieces of the systems and its applications", _core_medium()),
+        'Moondrake Release' => N("\"%s\" contains Mandrake Cooker builds of various package", _moondrake_medium()),
         'Nonfree Release' => N("\"%s\" contains non free software.\n", _nonfree_medium()) . " " .
           N("It also contains firmwares needed for certain devices to operate (eg: some ATI/AMD graphic cards, some network cards, some RAID cards, ...)"),
         'Tainted Release' => N("\"%s\" contains software that can not be distributed in every country due to software patents.", _tainted_medium()) . " " .
           N("It also contains software from \"%s\" rebuild with additional capabilities.", _core_medium()),
     );
+
+    my $nonfree_is_needed = is_firmware_needed($o);
 
     $o->ask_from_({ messages => join("\n",
                                       N("Here you can enable more media if you want."),
@@ -486,13 +491,23 @@ sub media_screen {
         map {
             my $medium = $_;
 	    $medium->{temp_enabled} = !$medium->{ignore};
+	    my $name = $medium->{name};
+	    my ($distribconf, $medium_path) = @{$_->{mediacfg}};
+	    my @media_types = split(':', $distribconf->getvalue($medium_path, 'media_type'));
+	    my $parent = $distribconf->getvalue($distribconf->getvalue($medium_path, 'updates_for'), 'name');
+	    my $non_regular_medium = intersection(\@media_types, [ qw(backports debug source testing) ]);
+	    enable_nonfree_media($medium) if $nonfree_is_needed && !$non_regular_medium;
+	    $non_regular_medium ? () :
+
 	    +{
-                val => \$medium->{temp_enabled}, type => 'bool', text => $medium->{name},
-                # 'Main Release' cannot be unselected:
-                disabled => sub { $medium->{name} eq 'Main Release' },
-                format => sub { $descriptions{$_[0]} || translate(%descriptions) },
+                val => \$medium->{temp_enabled}, type => 'bool', text => $name,
+		help => $medium->{update} ? N("This medium provides package updates for medium \"%s\"", $parent) : $descriptions{$name},
+                # '/(Core|Moondrake) Release' cannot be unselected:
+                disabled => sub {
+		    state $parent_media = $parent && urpm::media::name2medium($urpm, $parent);
+		    $name =~ /^(?:Core|Main|Moondrake) Release$/ || $parent_media ? !$parent_media->{temp_enabled} : 0;
             };
-        } grep { $_->{name} !~ /Debug|Testing|Sources|Backports/ } @{$urpm->{media}},
+        } @{$urpm->{media}},
     ]);
 }
 
@@ -555,7 +570,7 @@ sub setPackages {
 	my ($suppl_method, $copy_rpms_on_disk);
 
 	install::pkgs::start_pushing_error();
-    	($suppl_method, $copy_rpms_on_disk) = install::media::get_media($o, $media, $urpm);
+	($suppl_method, $copy_rpms_on_disk) = install::media::get_media($o, $media, $urpm);
 
 	if ($suppl_method) {
 	    1 while $o->selectSupplMedia;
@@ -563,30 +578,30 @@ sub setPackages {
 	install::media::update_media($urpm);
 	install::pkgs::popup_errors();
 
-        install::pkgs::start_pushing_error();
+	install::pkgs::start_pushing_error();
 
 	# in auto-install mode, we enforce selected media, else we respect media.cfg's default:
-        if ($::auto_install && !is_empty_array_ref($o->{enabled_media})) {
-            # respect enabled/disabled media selection:
-            foreach my $medium (@{$urpm->{media}}) {
-                $medium->{temp_enabled} = member($medium->{name}, @{$o->{enabled_media}});
-            }
-        }
+	if ($::auto_install && !is_empty_array_ref($o->{enabled_media})) {
+	    # respect enabled/disabled media selection:
+	    foreach my $medium (@{$urpm->{media}}) {
+		$medium->{temp_enabled} = member($medium->{name}, @{$o->{enabled_media}});
+	    }
+	}
 	# should we really use this? merged from mageia for easier maintenance..
-        media_screen($o) if !$::auto_install && !$::o->{match_all_hardware};
-        enable_choosen_media($o);
-        my @choosen_media = map { $_->{name} } grep { !$_->{ignore} } @{$urpm->{media}};
-        log::l("choosen media: ", join(', ', @choosen_media));
-        die "no choosen media" if !@choosen_media;
+	media_screen($o) if !$::auto_install && !$::o->{match_all_hardware};
+	enable_choosen_media($o);
+	my @choosen_media = map { $_->{name} } grep { !$_->{ignore} } @{$urpm->{media}};
+	log::l("choosen media: ", join(', ', @choosen_media));
+	die "no choosen media" if !@choosen_media;
 
-        # actually read synthesis now we have all the ones we want:
-        require urpm::media;
-        urpm::media::configure($urpm);
+	# actually read synthesis now we have all the ones we want:
+	require urpm::media;
+	urpm::media::configure($urpm);
 
-        install::pkgs::popup_errors();
+	install::pkgs::popup_errors();
 
-        install::media::adjust_paths_in_urpmi_cfg($urpm);
-        log::l('urpmi completely set up');
+	install::media::adjust_paths_in_urpmi_cfg($urpm);
+	log::l('urpmi completely set up');
 
 	#- open rpm db according to right mode needed
 	$urpm->{rpmdb} ||= install::pkgs::rpmDbOpen('rebuild_if_needed');
