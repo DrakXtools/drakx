@@ -155,7 +155,7 @@ sub main {
     $notebook_widget->set_current_page(0);
     $done_button->grab_focus;
     if (!$::testing) {
-      $in->ask_from_list_(N("Warning"), N("Please make a backup of your data first"), 
+      $in->ask_from_list_(N("Warning"), N("Please make a backup of your data first"),
 			  [ N_("Exit"), N_("Continue") ], N_("Continue")) eq N_("Continue") or $in->exit(0)
         if $::isStandalone;
     }
@@ -403,6 +403,8 @@ sub calc_buttons4partitions_lengths($) {
 sub create_buttons4partitions {
     my ($kind, $totalsectors, @all_parts) = @_;
 
+    my @parts = grep { $_->{size} > MB(2) || !isEmpty($_) } @all_parts;
+
     calc_buttons4partitions_lengths(\@parts);
 
     my $current_button;
@@ -411,8 +413,6 @@ sub create_buttons4partitions {
 	$current_button->set_active(0) if $current_button;
 	($current_button = $w)->set_active(1);
     };
-
-    my @parts = grep { $_->{size} > MB(2) || !isEmpty($_) } @all_parts;
 
     foreach my $entry (@parts) {
 	if (isRawLUKS($entry) && $entry->{dm_active}) {
