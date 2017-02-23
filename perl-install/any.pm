@@ -1420,7 +1420,7 @@ sub report_bug {
       header("lspci"), detect_devices::stringlist(),
       header("pci_devices"), cat_("/proc/bus/pci/devices"),
       header("dmidecode"), arch() =~ /86/ ? `dmidecode` : (),
-      header("fdisk"), `fdisk -l`,
+      header("fdisk"), fdisk(),
       header("scsi"), cat_("/proc/scsi/scsi"),
       header("/sys/bus/scsi/devices"), -d '/sys/bus/scsi/devices' ? `ls -l /sys/bus/scsi/devices` : (),
       header("lsmod"), cat_("/proc/modules"),
