@@ -201,7 +201,7 @@ sub doPartitionDisksAfter {
 	$part->{isMounted} = 1;
     }
 
-    fs::any::check_hds_boot_and_root($o->{all_hds}, $o->{fstab}, $o->{match_all_hardware});
+    fs::any::check_hds_boot_and_root($o->{all_hds}, $o->{fstab}, $o->{isUpgrade}, $o->{match_all_hardware});
 
     if ($o->{partitioning}{use_existing_root}) {
 	#- ensure those partitions are mounted so that they are not proposed in choosePartitionsToFormat

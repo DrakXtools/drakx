@@ -67,7 +67,7 @@ sub set_cdrom_symlink {
 }
 
 sub check_hds_boot_and_root {
-    my ($all_hds, $fstab, $o_match_all_hardware) = @_;
+    my ($all_hds, $fstab, $isUpgrade, $o_match_all_hardware) = @_;
     fs::get::root_($fstab) or die "Oops, no root partition";
 
     return if $o_match_all_hardware;
@@ -77,6 +77,8 @@ sub check_hds_boot_and_root {
 	    die N("You must have a ESP FAT32 partition mounted in /boot/EFI");
 	}
     } else {
+	# if we are doing an upgrade, the user may still be using a legacy bootloader
+	return if $isUpgrade;
 	if (is_boot_bios_part_needed($all_hds)) {
 	    die N("You must have a BIOS boot partition for non-UEFI GPT-partitioned disks. Please create one before continuing.");
 	}
