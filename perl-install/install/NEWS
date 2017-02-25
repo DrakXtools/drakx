@@ -1,4 +1,12 @@
+Version 17.72 - 25 February 2017
+- partitioning:
+  o allow a BIOS boot partition to be located on any disk (mga#20161)
+  o fix auto-allocation of BIOS boot partitions (mga#20161, mga#19888)
+  o don't suggest mountpoint for ESP when doing a legacy boot install (mga#20164)
+  o fix bugs in sync'ing the kernel's partition table cache (mga#20074)
+  o detect and handle DOS "Empty" partition types (mga#20074)
 - fix enabling of nofsync through other macro means for rpm.org
+- recognize new kernel-4.8 drivers
 
 Version 17.71.1 - 17 February 2017
 

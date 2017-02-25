@@ -33,7 +33,7 @@ our %l = (
         qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
       # add all phys
-      qw(amd aquantia at803x bcm7xxx bcm87xx broadcom cicada davicom dp83848 dp83867 et1011c fixed_phy icplus lxt marvell),
+      qw(amd aquantia at803x bcm7xxx bcm87xx broadcom cicada davicom dp83848 dp83867 et1011c fixed_phy icplus intel-xway lxt marvell),
       qw(mdio-bcm-unimac mdio-bitbang mdio-cavium mdio-gpio mdio-octeon mdio-thunder micrel microchip mscc),
       qw(national qsemi r8152 r815x realtek smsc spi_ks8995 ste10Xp teranetics vitesse xilinx_gmii2rgmii),
     ],
@@ -172,13 +172,13 @@ our %l = (
     hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-appleir hid-asus hid-aureal hid-axff hid-belkin hid-betopff
 	    hid-cherry hid-chicony hid-cmedia hid-corsair hid-cp2112 hid-cypress hid-dr hid-drff hid-elecom hid-elo hid-emsff
 	    hid-ezkey hid-gaff hid-gembird hid-generic hid-gfrm hid-gt683r hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse
-	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-lenovo hid-lenovo-tpkbd
+	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-led hid-lenovo hid-lenovo-tpkbd
 	    hid-logitech hid-logitech-dj hid-logitech-hidpp hid-magicmouse hid-microsoft hid-monterey
 	    hid-multilaser hid-multitouch hid-ntrig hid-ortek hid-penmount hid-petalynx hid-picolcd
 	    hid-pl hid-plantronics hid-primax hid-prodikeys hid-roccat hid-roccat-arvo hid-roccat-common hid-rmi
 	    hid-roccat-isku hid-roccat-kone hid-roccat-koneplus hid-roccat-konepure hid-roccat-kovaplus hid-roccat-lua
 	    hid-roccat-pyra hid-roccat-ryos hid-roccat-savu hid-saitek hid-samsung hid-sensor-hub hid-sjoy hid-sony
-	    hid-speedlink hid-steelseries hid-sunplus hid-tivo hid-thingm hid-tmff hid-topseed hid-twinhan
+	    hid-speedlink hid-steelseries hid-sunplus hid-tivo hid-tmff hid-topseed hid-twinhan
 	    hid-uclogic hid-waltop hid-wiimote hid-xinmo hid-zpff hid-zydacron wacom
 	    intel-ish-ipc intel-ishtp-hid intel-ishtp) ],
 
@@ -340,7 +340,7 @@ our %l = (
       #- these need checking
       qw(rrunner meye),
 
-      qw(virtio virtio-console virtio_input virtio_pci virtio_ring vhost_scsi hyperv-keyboard),
+      qw(virtio virtio-console virtio_input virtio_pci virtio_ring vhost_scsi vhost_vsock hyperv-keyboard),
       qw(mei pch_phub),
       qw(cirrus qxl vmvgfx),
     ],
