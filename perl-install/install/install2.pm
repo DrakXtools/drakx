@@ -61,7 +61,7 @@ $o = $::o = {
 #    bootloader => { linear => 0, message => 1, timeout => 5, restricted => 0 },
 #-    packages   => [ qw() ],
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0 }, #-, readonly => 0 },
-    authentication => { blowfish => 1, shadow => 1 },
+    authentication => { sha512 => 1, shadow => 1 },
     locale         => { lang => 'en_US' },
 #-    isUpgrade    => 0,
     toRemove     => [],
