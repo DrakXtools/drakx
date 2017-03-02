@@ -87,7 +87,7 @@ sub write {
     foreach (@{$hd->{will_tell_kernel}}) {
         my ($action, $part_number, $o_start, $o_size) = @$_;
         my ($part) = grep { $_->{start} == $o_start && $_->{size} == $o_size } @$pt;
-        print "($action, $part_number, $o_start, $o_size)\n";
+        log::l("GPT partitioning: ($action, $part_number, $o_start, $o_size)");
         if ($action eq 'add') {
             local $part->{fs_type} = $rev_parted_mapping{$part->{fs_type}} if $rev_parted_mapping{$part->{fs_type}};
             c::disk_add_partition($hd->{file}, $o_start, $o_size, $part->{fs_type}) or die "failed to add partition #$part_number on $hd->{file}";
