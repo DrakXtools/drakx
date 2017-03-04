@@ -209,7 +209,7 @@ sub get_hds {
 
 	if ($flags->{clearall} || member($hd->{device}, @{$flags->{clear} || []})) {
 	    my $lvms = []; #- temporary one, will be re-created later in get_hds()
-	    partition_table_initialize($lvms, $hd, $o_in);
+	    partition_table_clear_and_initialize($lvms, $hd, $o_in);
 	} else {
 	    my $handle_die_and_cdie = sub {
 		if (my $type = fs::type::type_subpart_from_magic($hd)) {
@@ -628,25 +628,11 @@ sub change_type {
 
 =item partition_table_clear_and_initialize($lvms, $hd, $o_in, $o_type, $b_warn) = @_;
 
-wrapper around partition_table::initialize().
+partition_table_clear_and_initialize() but which also create a singleton VG
 
 =cut
 
 sub partition_table_clear_and_initialize {
-    my ($lvms, $hd, $o_in, $o_type, $b_warn) = @_;
-    $hd->clear_existing;
-    partition_table_initialize($lvms, $hd, $o_in, $b_warn, $o_type);
-}
-
-=item partition_table_initialize($lvms, $hd, $o_in, $o_type, $b_warn) = @_;
-
-wrapper around partition_table::initialize() like
-partition_table_clear_and_initialize() but which also create a singleton VG
-automatically (so that it's easier for the user)
-
-=cut
-
-sub partition_table_initialize {
     my ($lvms, $hd, $o_in, $o_type, $b_warn) = @_;
     partition_table::initialize($hd, $o_type);
     if ($hd->isa('partition_table::lvm')) {

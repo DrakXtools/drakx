@@ -226,12 +226,6 @@ sub raw_add {
 
 sub zero_MBR { &partition_table::initialize } #- deprecated
 
-sub clear_existing {
-    my ($hd) = @_;
-    my @parts = (partition_table::get_normal_parts($hd), if_($hd->{primary}{extended}, $hd->{primary}{extended}));
-    partition_table::will_tell_kernel($hd, del => $_) foreach @parts;
-}
-
 #- deprecated
 sub zero_MBR_and_dirty { 
     my ($hd) = @_;
