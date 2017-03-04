@@ -284,6 +284,8 @@ sub initialize {
         partition_table::dos::compute_CHS($hd, $part);
 	$hd->{primary}{raw}[0] = $part;
     }
+
+    will_tell_kernel($hd, 'init');
 }
 
 sub read_primary {
@@ -394,6 +396,13 @@ sub will_tell_kernel {
     if ($action eq 'resize') {
 	will_tell_kernel($hd, del => $o_part);
 	will_tell_kernel($hd, add => $o_part);
+    } elsif ($action eq 'init') {
+	# We will tell the kernel to reread the partition table, so no need to remember
+	# previous changes.
+	delete $hd->{will_tell_kernel};
+	delete $hd->{will_tell_kerneldelay_add};
+	delete $hd->{will_tell_kerneldelay_del};
+	push @{$hd->{will_tell_kernel} ||= []}, [ $action, () ];
     } else {
 	my $part_number;
 	if ($o_part) {
@@ -403,7 +412,6 @@ sub will_tell_kernel {
 	}
 
 	my @para =
-	  $action eq 'force_reboot' ? () :
 	  $action eq 'add' ? ($part_number, $o_part->{start}, $o_part->{size}) :
 	  $action eq 'del' ? $part_number :
 	  internal_error("unknown action $action");
@@ -426,7 +434,7 @@ sub tell_kernel {
 
     my $F = partition_table::raw::openit($hd);
 
-    my $force_reboot = any { $_->[0] eq 'force_reboot' } @$tell_kernel;
+    my $force_reboot = any { $_->[0] eq 'init' } @$tell_kernel;
     if (!$force_reboot) {
 	foreach (@$tell_kernel) {
 	    my ($action, $part_number, $o_start, $o_size) = @$_;
