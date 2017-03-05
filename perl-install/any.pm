@@ -706,7 +706,7 @@ sub adapt_desktop_for_plasma {
 	'Plasma' => '01plasma',
 	'GNOMEClassic' => 'gnome-classic',
     );
-    $h{$desktop} ? $h{$desktop} . '.desktop' : lc("${desktop}.desktop");
+    return $desktop ? ($h{$desktop} || lc($desktop)) . '.desktop' : '';
 }
 
 sub get_autologin() {
