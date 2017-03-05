@@ -73,12 +73,15 @@ sub read_one {
 sub write {
     my ($hd, $_handle, $_sector, $pt, $_info) = @_;
 
+    my $ped_disk;
     my $partitions_killed;
 
     # Initialize the disk if current partition table is not gpt
     if (c::get_disk_type($hd->{file}) ne "gpt") {
-        c::set_disk_type($hd->{file}, "gpt");
+        $ped_disk = c::disk_open($hd->{file}, "gpt") or die "failed to create new partition table on $hd->{file}";
         $partitions_killed = 1;
+    } else {
+        $ped_disk = c::disk_open($hd->{file}) or die "failed to open partition table on $hd->{file}";
     }
 
     foreach (@{$hd->{will_tell_kernel}}) {
@@ -87,7 +90,7 @@ sub write {
         log::l("GPT partitioning: ($action, $part_number, $o_start, $o_size)");
         if ($action eq 'add') {
             local $part->{fs_type} = $rev_parted_mapping{$part->{fs_type}} if $rev_parted_mapping{$part->{fs_type}};
-            c::disk_add_partition($hd->{file}, $o_start, $o_size, $part->{fs_type}) or die "failed to add partition #$part_number on $hd->{file}";
+            c::disk_add_partition($ped_disk, $o_start, $o_size, $part->{fs_type}) or die "failed to add partition #$part_number on $hd->{file}";
 	    my $flag;
 	    if (isESP($part)) {
                 $flag = 'ESP';
@@ -99,20 +102,29 @@ sub write {
                 $flag = 'RAID';
 	    }
 	    if ($flag) {
-	        c::set_partition_flag($hd->{file}, $part_number, $flag)
+	        c::set_partition_flag($ped_disk, $part_number, $flag)
 	          or die "failed to set type '$flag' for $part->{file} on $part->{mntpoint}";
 	    }
         } elsif ($action eq 'del' && !$partitions_killed) {
-            c::disk_del_partition($hd->{file}, $part_number) or die "failed to del partition #$part_number on $hd->{file}";
+            c::disk_del_partition($ped_disk, $part_number) or die "failed to del partition #$part_number on $hd->{file}";
         } elsif ($action eq 'init' && !$partitions_killed) {
-            c::disk_delete_all($hd->{file}) or die "failed to delete all partitions on $hd->{file}";
+            c::disk_delete_all($ped_disk) or die "failed to delete all partitions on $hd->{file}";
         }
     }
-    # prevent errors when telling kernel to reread partition table:
-    # (above add/del_partition result in udev events)
-    system(qw(udevadm settle));
-    common::sync();
-    1;
+
+    # Commit changes to the disk and inform the kernel
+    my $commit_level = c::disk_commit($ped_disk);
+    # Updating the kernel partition table will fail if any of the deleted partitions were mounted
+    $hd->{rebootNeeded} = 1 if $commit_level < 2;
+    $commit_level;
+}
+
+# Hint partition_table::write() that telling the kernel to reread the
+# partition_table is not needed if we already succeeded in that:
+sub need_to_tell_kernel {
+    my ($hd) = @_;
+    # If we failed, try again (partion_table::tell_kernel() will unmount some partitions first)
+    $hd->{rebootNeeded};
 }
 
 sub initialize {

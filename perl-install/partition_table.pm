@@ -435,7 +435,7 @@ sub tell_kernel {
 
     my $F = partition_table::raw::openit($hd);
 
-    my $force_reboot = any { $_->[0] eq 'init' } @$tell_kernel;
+    my $force_reboot = $hd->{rebootNeeded} || any { $_->[0] eq 'init' } @$tell_kernel;
     if (!$force_reboot) {
 	foreach (@$tell_kernel) {
 	    my ($action, $part_number, $o_start, $o_size) = @$_;
