@@ -542,10 +542,9 @@ get_disk_type(char * device_path)
   PedDevice *dev = ped_device_get(device_path);
   RETVAL = NULL;
   if(dev) {
-    PedDisk* disk = ped_disk_new(dev);
-    if(disk) {
-      RETVAL = disk->type->name;
-      ped_disk_destroy(disk);
+    PedDiskType* type = ped_disk_probe(dev);
+    if(type) {
+      RETVAL = type->name;
     } 
   }
   OUTPUT:
