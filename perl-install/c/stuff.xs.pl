@@ -597,7 +597,7 @@ get_disk_partitions(char * device_path)
         hv_store(rh, "fs_type",       7, newSVpv(part->fs_type->name, 0), 0);
       PUSHs(newRV((SV *)rh));
       part = ped_disk_next_partition(disk, part);
-      }
+    }
     ped_disk_destroy(disk);
   }
 
