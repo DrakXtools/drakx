@@ -225,7 +225,7 @@ sub detect_hardware_packages {
         if_(!$do_pkgs->is_installed('task-mate-minimal'), "CAT_MATE"),
         if_(!$do_pkgs->is_installed('task-xfce-minimal'), "CAT_XFCE"),
         if_(!$do_pkgs->is_installed('task-enlightenment-minimal'), "CAT_ENLIGHTENMENT"),
-        if_(!$do_pkgs->is_installed('task-razorqt'), "CAT_RAZOR"),
+        if_(!$do_pkgs->is_installed('task-lxqt-minimal'), "CAT_LXQT"),
     );
     (
         ($::isInstall ? () : detect_rpmsrate_hardware_packages($o_match_all_hardware, \@ignore_flags)),
