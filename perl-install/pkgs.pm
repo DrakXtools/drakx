@@ -224,7 +224,7 @@ sub detect_hardware_packages {
         if_(!$do_pkgs->is_installed('task-cinnamon-minimal'), "CAT_CINNAMON"),
         if_(!$do_pkgs->is_installed('task-mate-minimal'), "CAT_MATE"),
         if_(!$do_pkgs->is_installed('task-xfce-minimal'), "CAT_XFCE"),
-        if_(!$do_pkgs->is_installed('task-e17-minimal'), "CAT_E17"),
+        if_(!$do_pkgs->is_installed('task-enlightenment-minimal'), "CAT_ENLIGHTENMENT"),
         if_(!$do_pkgs->is_installed('task-razorqt'), "CAT_RAZOR"),
     );
     (
