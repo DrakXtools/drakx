@@ -288,13 +288,18 @@ sub need_to_tell_kernel {
     # The udev/rules.d/60-block.rules file causes the raw disk devices to be watched by udev. This file is
     # not present in the cut-down system used to run the classic installer, so we always need to tell the
     # kernel in that case.
-    return ! -e '/usr/lib/udev/rules.d/60-block.rules' || any { $_->{isMounted} } partition_table::get_normal_parts($hd);
+    # diskdrake will not let the user delete an individual partition that is mounted, but will let the
+    # user clear all partitions. So initialize() records if any partitions were mounted and we take note
+    # of that here.
+    return ! -e '/usr/lib/udev/rules.d/60-block.rules' || delete $hd->{hadMountedPartitions} || any { $_->{isMounted} } partition_table::get_normal_parts($hd);
 }
 
 sub empty_raw { { raw => [ ({}) x $nb_primary ] } }
 
 sub initialize { 
     my ($class, $hd) = @_;
+    # Remember whether any existing partitions are mounted, for use by need_to_tell_kernel().
+    $hd->{hadMountedPartitions} = 1 if any { $_->{isMounted} } partition_table::get_normal_parts($hd);
     $hd->{primary} = empty_raw();
     bless $hd, $class;
 }
