@@ -660,7 +660,7 @@ sub setupBootloader__grub2 {
 
     require network::network; #- to list network profiles
     my $vga = Xconfig::resolution_and_depth::from_bios($b->{vga});
-    my $os_prober = run_program::rooted($::prefix, 'rpm', '-q', 'os-prober');
+    my $os_prober = $in->do_pkgs->is_installed('os-prober', '/usr/bin/os-prober');
 
     my $res = $in->ask_from_(
 	{
