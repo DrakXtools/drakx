@@ -265,6 +265,8 @@ sub per_kind_action_box {
 	       gtksignal_connect(Gtk3::Button->new(translate($s)),
 				 clicked => sub { try($s, kind2hd($kind)) }));
     }
+    # make sure a big translations window to resize (as by default all buttons have the same size):
+    $box->set_child_non_homogeneous($_, Glib::TRUE), "\n" foreach $box->get_children;
 }
 sub per_entry_action_box {
     my ($box, $kind, $entry) = @_;
