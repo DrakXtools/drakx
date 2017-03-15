@@ -38,7 +38,7 @@ If $b_auto is set, (g)urpmi will not ask any questions.
 sub ensure_is_installed {
     my ($do, $pkg, $o_file, $b_auto) = @_;
 
-    if ($o_file ? -e "$::prefix$o_file" : $do->is_installed($pkg)) {
+    if ($do->is_installed($pkg)) {
 	return 1;
     }
 
@@ -187,8 +187,8 @@ This is less costly (needs to query RPM DB)
 =cut
 
 sub is_installed {
-    my ($do, $name) = @_;
-    $do->are_installed($name);
+    my ($do, $name, $o_file) = @_;
+    $o_file ? -e "$::prefix$o_file" : $do->are_installed($name);
 }
 
 =item check_kernel_module_packages($do, $base_name)
