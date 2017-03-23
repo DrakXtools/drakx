@@ -526,15 +526,16 @@ sub parse_args {
     exists $ENV{$_} and push @cmdline, sprintf("--%s=%s", lc($_), $ENV{$_}) foreach qw(METHOD PCMCIA KICKSTART);
 
     GetOptionsFromArray(\@cmdline,
+	    $o, # must be 2nd parameter (see http://perldoc.perl.org/Getopt/Long.html#Storing-options-values-in-a-hash)
 	    'keyboard=s'   => sub { $o->{keyboard} = $_[1]; push @::auto_steps, 'selectKeyboard' },
-	    'lang=s'       => \$o->{lang},
+	    'lang=s',
 	    'flang=s'      => sub { $o->{lang} = $_[1]; push @::auto_steps, 'selectLanguage' },
 	    'langs=s'      => sub { $o->{locale}{langs} = +{ map { $_ => 1 } split(':', $_[1]) } },
-	    'method=s'     => \$o->{method},
-	    'pcmcia=s'     => \$o->{pcmcia},
+	    'method=s',
+	    'pcmcia=s',
 	    'step=s'       => \$o->{steps}{first},
-	    'meta_class=s' => \$o->{meta_class},
-	    'freedriver=s' => \$o->{freedriver},
+	    'meta_class=s',
+	    'freedriver=s',
 
 	    # fs/block options:
 	    no_bad_drives  => \$o->{partitioning}{no_bad_drives},
@@ -543,25 +544,23 @@ sub parse_args {
 	    'use_uuid=s'   => sub { $::no_uuid_by_default = !$_[1] },
 
 	    # urpmi options:
-	    justdb    => sub { $o->{justdb} = 1 },
-	    debug_urpmi  => \$o->{debug_urpmi},
-	    deploops     => \$o->{deploops},
-	    justdb    => \$o->{justdb},
+	    'debug_urpmi',
+	    'deploops',
+	    'justdb',
 	    'tune-rpm' => sub { $o->{'tune-rpm'} = 'all' },
 
 	    # GUI options:
 	    'vga16=s'      => \$o->{vga16},
 	    'vga=s'        => sub { $o->{vga} = $_[1] =~ /0x/ ? hex($_[1]) : $_[1] },
-	    'display=s'    => \$o->{display},
+	    'display=s',
 	    askdisplay     => sub { print "Please enter the X11 display to perform the install on ? "; $o->{display} = chomp_(scalar(<STDIN>)) },
 	    'newt|text'    => sub { $o->{interactive} = "curses" },
 	    stdio          => sub { $o->{interactive} = "stdio" },
-	    simple_themes  => \$o->{simple_themes},
-	    'theme=s'      => \$o->{theme},
-	    doc            => \$o->{doc},        #- will be used to know that we're running for the doc team,
-	                                         #- e.g. we want screenshots with a good B&W contrast
-
-	    'security=s'   => \$o->{security},
+	    'simple_themes',
+	    'theme=s',
+	    'doc',        #- will be used to know that we're running for the doc team,
+	                  #- e.g. we want screenshots with a good B&W contrast
+	    'security=s',
 
 	    # auto install options:
 	    noauto         => \$::noauto,
@@ -574,16 +573,16 @@ sub parse_args {
 	    uml_install    => sub { $::uml_install = $::local_install = 1 },
 
 	    # debugging options:
-	    useless_thing_accepted => \$o->{useless_thing_accepted},
+	    'useless_thing_accepted',
 	    alawindows => sub { $o->{security} = 0; $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
 	    fdisk          => \$o->{partitioning}{fdisk},
-	    'nomouseprobe=s' => \$o->{nomouseprobe},
-	    updatemodules  => \$o->{updatemodules},
+	    'nomouseprobe=s',
+	    'updatemodules',
 
 	    'suppl=s'      => \$o->{supplmedia},
-	    askmedia       => \$o->{askmedia},
+	    'askmedia',
 	    restore        => \$::isRestore,
-	    'compsslistlevel=s' => \$o->{compssListLevel},
+	    'compssListLevel=s' # case is important!
 	);
 
     ($cfg, $patch);
