@@ -13,8 +13,8 @@ use standalone;
 use timezone;
 
 my $in = interactive->vnew('su');
-my $pixmap;
-my $radius;
+my $cairo;
+my ($midx, $midy, $radius);
 my ($dRadians_hour, $dRadians_min, $dRadians_sec);
 my $Radian;
 my $timer;
@@ -89,7 +89,7 @@ $my_win->{window}->add(
 				    ]))
 			]),
 		    0, gtknew('VBox', children => [
-			    0, gtknew('HBox', children => [
+			    0, my $clock = gtknew('HBox', children => [
 					  0, $drawing_area = gtkset_size_request(Gtk3::DrawingArea->new, @image_size),
 				      ]),
 			    0, my $time_box = gtknew('HBox', homogenous => 1, children => [
@@ -168,7 +168,7 @@ $my_win->{window}->add(
 		[ N("Reset"), sub {
 		    $its_reset = 1;
 		    $timer = Glib::Timeout->add(120, \&update_time);
-		    Repaint($drawing_area, 1);
+		    Repaint(1);
 		    $button_reset->set_sensitive(0);
 		    $its_reset = 0;
 		  } ]
@@ -197,11 +197,6 @@ if (-e $ntpfile && is_ntp_daemon_running()) {
 my $pressed;
 $drawing_area->set_events(${ Gtk3::Gdk::EventMask->new([ 'button_press_mask', 'button_release_mask', "pointer_motion_mask" ]) });
 $drawing_area->signal_connect(draw => \&draw);
-$drawing_area->signal_connect(realize => sub {
-                                  my $window = $drawing_area->get_window;
-                                  return; #FIXME
-                                  $pixmap = Gtk3::Gdk::Pixmap->new($window, @image_size, $window->get_depth);
-                              });
 
 $drawing_area->signal_connect(button_press_event   => sub { $pressed = 1 });
 $drawing_area->signal_connect(button_release_event => sub { $first = 1; $pressed = 0 });
@@ -234,7 +229,6 @@ $timer = Glib::Timeout->add(120, \&update_time);
 
 $drawing_area->show;
 $my_win->{window}->show_all;
-my ($midx, $midy); # FIXME = ($drawing_area->get_allocation->width/2, $drawing_area->get_allocation->height/2);
 $my_win->main;
 ugtk3->exit(0);
 
@@ -264,7 +258,7 @@ sub update_time() {
     $calendar->select_day($mday);
     $calendar->select_month($mon, $year);
     $its_reset = $old_its_reset;
-    Repaint($drawing_area, 1);
+    Repaint(1);
 }
 
 sub cal_changed() {
@@ -286,11 +280,11 @@ sub changed() {
 }
 
 sub spinned() {
-    Glib::Source->remove($timer);
+    Glib::Source->remove($timer) if $timer;
     undef $timer;
     $button_reset->set_sensitive(1);
     time_to_rad($adjs->get_value, $adjm->get_value, $adjh->get_value);
-    Repaint($drawing_area);
+    Repaint();
     0;
 }
 
@@ -298,7 +292,7 @@ sub motion_event {
     my ($widget, $event) = @_;
     $pressed or return;
     if ($first) {
-	Glib::Source->remove($timer);
+	Glib::Source->remove($timer) if $timer;
 	undef $timer;
 	$Radian = determine_radian($event->x, $event->y);
 	$button_reset->set_sensitive(1);
@@ -306,7 +300,7 @@ sub motion_event {
 
     $$Radian = -atan2($event->x - $midx, $event->y - $midy) + $PI;
 
-    Repaint($widget);
+    Repaint();
     rad_to_time();
     $first = 0;
 }
@@ -326,9 +320,8 @@ sub determine_radian {
 
 sub draw {
     my ($widget, $event) = @_;
-    return; #FIXME
-    my ($x, $y, $width, $height) = $event->area->get_values;
-    $widget->get_window->draw_drawable($widget->get_style->fg_gc('normal'), $pixmap, $x, $y, $x, $y, $width, $height);
+    $cairo = $event;
+    Repaint();
     0;
 }
 
@@ -349,79 +342,81 @@ sub time_to_rad {
 }
 
 sub Repaint {
-    my ($drawing_area, $o_update_time) = @_;
+    my ($o_update_time) = @_;
     my ($sec, $min, $hour) = localtime(time());
     time_to_rad($sec, $min, $hour) if $o_update_time;
-    return; #FIXME
-    my ($width, $height) = ($drawing_area->get_allocation->width, $drawing_area->get_allocation->height);
-    my $dRadians_hour_real = $dRadians_hour + $dRadians_min / 12;
-    my $dRadians_min_real  = POSIX::floor($dRadians_min / $PI * 30) * $PI / 30;
-    my $dRadians_sec_real  = $dRadians_sec;
-    my $gc = $drawing_area->get_style->white_gc;
-    # fix race on ugtk3->exit that causes a crash (#33894)
-    return 0  if !$gc;
-    $pixmap->draw_rectangle($drawing_area->get_style->white_gc, 1, 0, 0, $width, $height);
-    my ($midx, $midy) = ($width / 2, $height / 2);
+    ($midx, $midy) = ($drawing_area->get_allocated_width/2, $drawing_area->get_allocated_height/2);
     $radius = ($midx < $midy ? $midx : $midy) - 10;
+    $drawing_area->set_margin_start($clock->get_allocated_width/2 - $midx);
 
-    my $gray_gc  = $drawing_area->get_style->bg_gc('normal');
-    my $black_gc = $drawing_area->get_style->black_gc;
-    foreach ([ $gray_gc, 5 ], [ $black_gc, 0 ]) {
-      &DrawTickAt($pixmap,  $_->[0], $midx, $midy, $_->[1]);
-      &DrawHour($pixmap, $_->[0], $midx, $midy, $dRadians_hour_real, $_->[1]);
-      &DrawMin($pixmap,  $_->[0], $midx, $midy, $dRadians_min_real,  $_->[1]);
-      &DrawSec($pixmap,  $_->[0], $midx, $midy, $dRadians_sec_real,  $_->[1]);
-    }
-    &DrawPointAt($pixmap, $black_gc, $_, $midx, $midy) foreach (1..60);
+    $cairo->set_antialias('default');
+    DrawTicks();
+    DrawPoints();
+    DrawHour();
+    DrawMin();
+    DrawSec();
     $drawing_area->queue_draw;
     1;
 }
 
 sub DrawSec {
-    my ($pixmap, $gc, $midx, $midy, $dRadians, $dec) = @_;
-    $pixmap->draw_line($gc,
-		       $midx+$dec, $midy+$dec,
-		       $midx+$dec + (8/10 * $radius * sin($dRadians)),
-		       $midy+$dec - (8/10 * $radius * cos($dRadians)));
+    my $dRadians = $dRadians_sec;
+    $cairo->set_source_rgb(0.9, 0, 0);
+    $cairo->move_to($midx, $midy);
+    $cairo->line_to($midx + 85/100 * $radius * sin($dRadians), $midy - 85/100 * $radius * cos($dRadians));
+    $cairo->stroke;
 }
 
 sub DrawMin {
-    my ($pixmap, $gc, $midx, $midy, $dRadians, $dec) = @_;
-    $pixmap->draw_polygon($gc, 1, $midx+$dec - 3/100 * $radius * sin($dRadians),       $midy+$dec + 3/100 * $radius * cos($dRadians),
-				    $midx+$dec - 3/100 * $radius * sin($dRadians+$PI/2), $midy+$dec + 3/100 * $radius * cos($dRadians+$PI/2),
-				    $midx+$dec + 8/10  * $radius * sin($dRadians),       $midy+$dec - 8/10  * $radius * cos($dRadians),
-				    $midx+$dec + 3/100 * $radius * sin($dRadians+$PI/2), $midy+$dec - 3/100 * $radius * cos($dRadians+$PI/2)
-				    );
+    my $dRadians = POSIX::floor($dRadians_min / $PI * 30) * $PI / 30;
+    $cairo->set_source_rgb(0.2, 0.2, 0.2);
+    $cairo->move_to($midx - 3/100 * $radius * sin($dRadians),       $midy + 3/100 * $radius * cos($dRadians));
+    $cairo->line_to($midx - 3/100 * $radius * sin($dRadians+$PI/2), $midy + 3/100 * $radius * cos($dRadians+$PI/2));
+    $cairo->line_to($midx + 7/10  * $radius * sin($dRadians-0.03),  $midy - 7/10  * $radius * cos($dRadians-0.03));
+    $cairo->line_to($midx + 8/10  * $radius * sin($dRadians),       $midy - 8/10  * $radius * cos($dRadians));
+    $cairo->line_to($midx + 7/10  * $radius * sin($dRadians+0.03),  $midy - 7/10  * $radius * cos($dRadians+0.03));
+    $cairo->line_to($midx + 3/100 * $radius * sin($dRadians+$PI/2), $midy - 3/100 * $radius * cos($dRadians+$PI/2));
+    $cairo->fill;
 }
 
 sub DrawHour {
-    my ($pixmap, $gc, $midx, $midy, $dRadians, $dec) = @_;
-    $pixmap->draw_polygon($gc, 1, $midx+$dec - 5/100 * $radius * sin($dRadians),       $midy+$dec + 5/100 * $radius * cos($dRadians),
-				    $midx+$dec - 5/100 * $radius * sin($dRadians+$PI/2), $midy+$dec + 5/100 * $radius * cos($dRadians+$PI/2),
-				    $midx+$dec + 6/10  * $radius * sin($dRadians),       $midy+$dec - 6/10  * $radius * cos($dRadians),
-				    $midx+$dec + 5/100 * $radius * sin($dRadians+$PI/2), $midy+$dec - 5/100 * $radius * cos($dRadians+$PI/2)
-				    );
+    my $dRadians = $dRadians_hour + $dRadians_min / 12;
+    $cairo->set_source_rgb(0.2, 0.2, 0.2);
+    $cairo->move_to($midx - 4/100 * $radius * sin($dRadians),       $midy + 4/100 * $radius * cos($dRadians));
+    $cairo->line_to($midx - 4/100 * $radius * sin($dRadians+$PI/2), $midy + 4/100 * $radius * cos($dRadians+$PI/2));
+    $cairo->line_to($midx + 5/10  * $radius * sin($dRadians-0.05),  $midy - 5/10  * $radius * cos($dRadians-0.05));
+    $cairo->line_to($midx + 6/10  * $radius * sin($dRadians),       $midy - 6/10  * $radius * cos($dRadians));
+    $cairo->line_to($midx + 5/10  * $radius * sin($dRadians+0.05),  $midy - 5/10  * $radius * cos($dRadians+0.05));
+    $cairo->line_to($midx + 4/100 * $radius * sin($dRadians+$PI/2), $midy - 4/100 * $radius * cos($dRadians+$PI/2));
+    $cairo->fill;
 }
 
-sub DrawTickAt {
-    my ($pixmap, $gc, $cx, $cy, $dec) = @_;
+sub DrawTicks {
+    $cairo->set_source_rgb(1, 1, 1);
+    $cairo->new_sub_path;
+    $cairo->arc($midx, $midy, $radius, 0, 2 * $PI);
+    $cairo->fill_preserve;
+    $cairo->set_source_rgb(0, 0, 0);
+    $cairo->stroke;
+
     foreach my $nHour (1..12) {
-      my $dRadians = $nHour * $PI / 6.0;
-      $pixmap->draw_line($gc,
-			 $cx + $dec + 9/10 * $radius * sin($dRadians),
-			 $cy + $dec - 9/10 * $radius * cos($dRadians),
-			 $cx + $dec + 1    * $radius * sin($dRadians),
-			 $cy + $dec - 1    * $radius * cos($dRadians));
+        my $dRadians = $nHour * $PI / 6.0;
+        $cairo->move_to($midx + 9/10 * $radius * sin($dRadians),
+                        $midy - 9/10 * $radius * cos($dRadians));
+        $cairo->line_to($midx + 1    * $radius * sin($dRadians),
+                        $midy - 1    * $radius * cos($dRadians));
     }
+    $cairo->stroke;
 }
 
-sub DrawPointAt {
-    my ($pixmap, $black_gc, $nHour, $cx, $cy) = @_;
-    my $dRadians = $nHour * $PI / 30;
-
-    $pixmap->draw_points($black_gc,
-			$cx + 95/100 * $radius * sin($dRadians),
-			$cy - 95/100 * $radius * cos($dRadians));
+sub DrawPoints {
+    $cairo->set_source_rgb(0, 0, 0);
+    foreach my $nMin (1..60) {
+        my $dRadians = $nMin * $PI / 30;
+        $cairo->move_to($midx + 95/100 * $radius * sin($dRadians), $midy - 95/100 * $radius * cos($dRadians));
+        $cairo->line_to($midx + 90/100 * $radius * sin($dRadians), $midy - 90/100 * $radius * cos($dRadians));
+    }
+    $cairo->stroke;
 }
 
 
