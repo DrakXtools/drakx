@@ -1,3 +1,21 @@
+- drakclock:
+  o fix the display of the clock (mga#11776)
+
+Version 17.75 - 17 March 2017
+
+- diskdrake:
+  o allow a BIOS boot partition to be located on any disk (mga#20161)
+  o ensure kernel is informed when a MBR partition table is cleared
+  o clearing GPT partitions:
+    * delay thus fix clearing GPT partitions (mga#20264)
+      ("failed to del partition #1 on /dev/...")
+    * don't send separate events to the kernel about removing/adding GPT partitions,
+      just tell it to reread the whole newly cleared & allocated partition table
+  o tell the kernel all actions at once on GPT partitions instead of telling it
+    separatly about removing partitions A, B & C, then adding partition E, F &G
+
+Version 17.74 - 9 March 2017
+
 - recognize LXQt (Razor-qt is now LXQt)
 - fix Enlightenment (e21) recognition
 

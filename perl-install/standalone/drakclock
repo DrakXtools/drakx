@@ -321,7 +321,7 @@ sub determine_radian {
 sub draw {
     my ($widget, $event) = @_;
     $cairo = $event;
-    Repaint();
+    Repaint(undef, 1);
     0;
 }
 
@@ -342,7 +342,7 @@ sub time_to_rad {
 }
 
 sub Repaint {
-    my ($o_update_time) = @_;
+    my ($o_update_time, $skip_redraw) = @_;
     my ($sec, $min, $hour) = localtime(time());
     time_to_rad($sec, $min, $hour) if $o_update_time;
     ($midx, $midy) = ($drawing_area->get_allocated_width/2, $drawing_area->get_allocated_height/2);
@@ -355,7 +355,9 @@ sub Repaint {
     DrawHour();
     DrawMin();
     DrawSec();
-    $drawing_area->queue_draw;
+    # Only redraw the clock if there are changes.
+    # This highly decreases the CPU usage.
+    $drawing_area->queue_draw unless $skip_redraw;
     1;
 }
 
