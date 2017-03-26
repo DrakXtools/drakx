@@ -370,7 +370,7 @@ sub DrawSec {
 }
 
 sub DrawMin {
-    my $dRadians = POSIX::floor($dRadians_min / $PI * 30) * $PI / 30;
+    my $dRadians = $dRadians_min;
     $cairo->set_source_rgb(0.2, 0.2, 0.2);
     $cairo->move_to($midx - 3/100 * $radius * sin($dRadians),       $midy + 3/100 * $radius * cos($dRadians));
     $cairo->line_to($midx - 3/100 * $radius * sin($dRadians+$PI/2), $midy + 3/100 * $radius * cos($dRadians+$PI/2));
