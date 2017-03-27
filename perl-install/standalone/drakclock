@@ -262,7 +262,7 @@ sub update_time() {
 }
 
 sub cal_changed() {
-    if (!$its_reset and $timer) {
+    if (!$its_reset && $timer) {
 	Glib::Source->remove($timer);
 	undef $timer;
     }
@@ -361,7 +361,7 @@ sub Repaint {
     1;
 }
 
-sub DrawSec {
+sub DrawSec() {
     my $dRadians = $dRadians_sec;
     $cairo->set_source_rgb(0.9, 0, 0);
     $cairo->move_to($midx, $midy);
@@ -369,7 +369,7 @@ sub DrawSec {
     $cairo->stroke;
 }
 
-sub DrawMin {
+sub DrawMin() {
     my $dRadians = $dRadians_min;
     $cairo->set_source_rgb(0.2, 0.2, 0.2);
     $cairo->move_to($midx - 3/100 * $radius * sin($dRadians),       $midy + 3/100 * $radius * cos($dRadians));
@@ -381,7 +381,7 @@ sub DrawMin {
     $cairo->fill;
 }
 
-sub DrawHour {
+sub DrawHour() {
     my $dRadians = $dRadians_hour + $dRadians_min / 12;
     $cairo->set_source_rgb(0.2, 0.2, 0.2);
     $cairo->move_to($midx - 4/100 * $radius * sin($dRadians),       $midy + 4/100 * $radius * cos($dRadians));
@@ -393,7 +393,7 @@ sub DrawHour {
     $cairo->fill;
 }
 
-sub DrawTicks {
+sub DrawTicks() {
     $cairo->set_source_rgb(1, 1, 1);
     $cairo->new_sub_path;
     $cairo->arc($midx, $midy, $radius, 0, 2 * $PI);
@@ -411,7 +411,7 @@ sub DrawTicks {
     $cairo->stroke;
 }
 
-sub DrawPoints {
+sub DrawPoints() {
     $cairo->set_source_rgb(0, 0, 0);
     foreach my $nMin (1..60) {
         my $dRadians = $nMin * $PI / 30;
