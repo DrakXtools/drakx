@@ -20,7 +20,7 @@ sub read_raw() {
 }
 
 sub read {
-    my ($hds) = @_;
+    my ($hds, $o_ignore_fstype) = @_;
 
     my @all = read_raw();
     my ($parts, $_disks) = partition { $_->{dev} =~ /\d$/ && $_->{dev} !~ /^(sr|scd)/ } @all;
@@ -40,7 +40,7 @@ sub read {
 	$part->{size} *= 2;	# from KB to sectors
 	$part->{start} = $prev_part ? $prev_part->{start} + $prev_part->{size} : 0;
 	require fs::type;
-	put_in_hash($part, fs::type::type_subpart_from_magic($part));
+	put_in_hash($part, fs::type::type_subpart_from_magic($part)) if !$o_ignore_fstype;
 	$prev_part = $part;
 	delete $part->{dev}; # cleanup
     }
@@ -54,7 +54,7 @@ sub compare {
 
 
     my @l1 = partition_table::get_normal_parts($hd);
-    my @l2 = grep { $_->{rootDevice} eq $hd->{device} } &read([$hd]);
+    my @l2 = grep { $_->{rootDevice} eq $hd->{device} } &read([$hd], 1);
 
     #- /proc/partitions includes partition with type "empty" and a non-null size
     #- so add them for comparison
