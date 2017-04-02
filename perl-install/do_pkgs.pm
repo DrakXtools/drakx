@@ -38,7 +38,7 @@ If $b_auto is set, (g)urpmi will not ask any questions.
 sub ensure_is_installed {
     my ($do, $pkg, $o_file, $b_auto) = @_;
 
-    if ($do->is_installed($pkg)) {
+    if ($do->is_installed($pkg, $o_file)) {
 	return 1;
     }
 
