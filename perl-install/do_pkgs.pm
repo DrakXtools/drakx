@@ -382,7 +382,8 @@ sub are_installed {
 
     my @l2;
     my $query_all = (any { /\*/ } @l) ? 'a' : '';
-    run_program::run('/bin/rpm', '>', \@l2, '-q' . $query_all, '--qf', "%{name}\n", @l); #- do not care about the return value
+    my $rooted = $::isLiveInstall && $::prefix ? { root => $::prefix } : {};
+    run_program::raw($rooted, '/bin/rpm', '>', \@l2, '-q' . $query_all, '--qf', "%{name}\n", @l); #- do not care about the return value
     $query_all ? chomp_(@l2) : intersection(\@l, [ chomp_(@l2) ]); #- cannot return directly @l2 since it contains things like "package xxx is not installed"
 }
 
