@@ -392,7 +392,8 @@ sub remove {
     my $_wait = $do->in && $do->in->wait_message(N("Please wait"), N("Removing packages..."));
     $do->in->suspend if $do->in;
     log::explanations("removing packages @l");
-    my $ret = system('rpm', '-e', @l) == 0;
+    my @wrapper = $::isLiveInstall && $::prefix ? ('chroot', $::prefix) : ();
+    my $ret = system(@wrapper, 'rpm', '-e', @l) == 0;
     $do->in->resume if $do->in;
     $ret;
 }
