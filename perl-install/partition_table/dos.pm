@@ -6,9 +6,11 @@ use vars qw(@ISA);
 
 @ISA = qw(partition_table::raw);
 
+use Time::HiRes qw(usleep);
 use common;
 use partition_table::raw;
 use partition_table;
+use fs::proc_partitions;
 use fs::type;
 use c;
 
@@ -291,7 +293,24 @@ sub need_to_tell_kernel {
     # diskdrake will not let the user delete an individual partition that is mounted, but will let the
     # user clear all partitions. So initialize() records if any partitions were mounted and we take note
     # of that here.
-    return ! -e '/usr/lib/udev/rules.d/60-block.rules' || delete $hd->{hadMountedPartitions} || any { $_->{isMounted} } partition_table::get_normal_parts($hd);
+    return 1 if ! -e '/usr/lib/udev/rules.d/60-block.rules' || delete $hd->{hadMountedPartitions} || any { $_->{isMounted} } partition_table::get_normal_parts($hd);
+
+    # No further actions must be performed until the kernel has been informed of the changes. There is
+    # no easy way to check that udevd has received the uevent and called the BLKRRPART ioctl, so do it
+    # the hard way.
+    my $tries = 0;
+    do {
+	usleep(100000);
+	log::l("checking that udevd has informed the kernel of partition table changes");
+	eval { fs::proc_partitions::compare($hd) };
+	return 0 if !$@;
+	$tries++;
+    } while $tries < 5;
+
+    # We don't expect to get here, but fail safe if so.
+    log::l("udevd failed to inform kernel of partition table changes");
+    $hd->{rebootNeeded} = 1;
+    1;
 }
 
 sub empty_raw { { raw => [ ({}) x $nb_primary ] } }
