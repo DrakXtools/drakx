@@ -1,3 +1,16 @@
+- partitioning:
+  o don't require a BIOS boot partition when performing an upgrade (mga#20338)
+  o make partitioning more robust with "Use entire disk" option (mga#20619):
+    * add safety net for informing the kernel after writing a DOS partition
+      table.
+    * speed up proc_partitions::compare() and avoid unwanted udev events.
+  o force reinitialisation of partition suggestions after wiping disk
+    (mga#20621)
+- various fixes to do_pkgs during Live installs (mga#20620):
+  o fix do_pkgs_standalone::are_installed() for Live install
+  o fix do_pkgs_standalone::remove() for Live install
+  o fix fast path for do_pkgs::ensure_is_installed()
+
 Version 17.76 - 24 March 2017
 
 - installer options handling:
