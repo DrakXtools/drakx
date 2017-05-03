@@ -12,7 +12,7 @@ our ($version, $sbindir, $bindir) = ("10", "/usr/sbin", "/usr/bin");
 my @devices = (detect_devices::probeall(), detect_devices::getSCSI());
 
 foreach my $dev (@devices) {
-    # normalize device IDs for devices cthat came from mouse.pm:
+    # normalize device IDs for devices that came from mouse.pm:
     next if !defined $dev->{Synaptics};
     foreach my $field (qw(vendor id subvendor subid)) {
         next if !defined $dev->{$field};
