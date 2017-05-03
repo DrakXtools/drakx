@@ -1136,9 +1136,6 @@ sub _sanitize_ver {
     $name = '' if $name eq 'vmlinuz';
 
     my $v = $kernel_str->{version_no_ext};
-    if ($v =~ s/-\d+\.mm\././) {
-	$name = join(' ', grep { $_ } $name);
-    }
 
     $v =~ s!(md[kv]|mnb)$!!;
     $v =~ s!-0\.(pre|rc)(\d+)\.!$1$2-!;
