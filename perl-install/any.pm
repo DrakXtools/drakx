@@ -647,7 +647,11 @@ sub setupBootloader__grub2 {
 
     # update entries (so that we can display their list below):
     my $error;
+    # grub2-update can take many minutes on some systems (mga#18538)
+    # FIXME: change the message to be more informative
+    my $_w = $in->wait_message(N("Please wait"), N("Please wait"));
     run_program::rooted($::prefix, 'update-grub2', '2>', \$error) or die "update-grub2 failed: $error";
+    undef $_w;
 
     # read grub2 auto-generated entries (instead of keeping eg: grub/lilo ones):
     my $b2 = bootloader::read_grub2();
