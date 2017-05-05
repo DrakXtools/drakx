@@ -648,7 +648,7 @@ sub get_media_cfg {
         die "media.cfg not found";
     }
 
-    my $suppl_CDs = exists $o->{supplmedia} ? $o->{supplmedia} : $distribconf->{suppl} || 0;
+    my $suppl_CDs = defined $o->{supplmedia} ? $o->{supplmedia} : $distribconf->{suppl} || 0;
     my $deselectionAllowed = $distribconf->{askmedia} || $o->{askmedia} || 0;
 
     log::l(Data::Dumper->Dump([ $phys_medium ], [ 'phys_medium' ]));
