@@ -156,9 +156,9 @@ sub switch_x_driver {
     substInFile { s!Driver "($old_driver)"!Driver "$new_driver"!g } '/etc/X11/xorg.conf';
     log::explanations("switch X.org driver from '$old_driver' to '$new_driver' ($reason)");
     Xconfig::card::libgl_config_and_more({ Driver => $new_driver });
-    Xconfig::various::setup_kms();
+    my $kms_changed = Xconfig::various::setup_kms();
 
-    after_x_driver_switch(); # returns 1 if reboot is needed
+    after_x_driver_switch() || $kms_changed; # returns 1 if reboot is needed
 }
 
 sub should_reconfigure_x_driver {
