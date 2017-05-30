@@ -1424,6 +1424,7 @@ sub report_bug {
       header("lspci"), detect_devices::stringlist(),
       header("hid_devices"), (map { sprintf("%-16s: %s", $_->{driver} || "unknown", $_->{description}) } c::hid_probe()),
       header("input devices"), cat_("/proc/bus/input/devices"),
+      header("libinput devices"), `libinput-list-devices`,
       header("pci_devices"), cat_("/proc/bus/pci/devices"),
       header("dmidecode"), arch() =~ /86/ ? `dmidecode` : (),
       header("fdisk"), fdisk(),
