@@ -60,8 +60,8 @@ our %l = (
       qw(asix catc cdc_ether ch9200 dm9601 huawei_cdc_ncm kaweth mcs7830 pegasus rtl8150 smsc75xx smsc95xx usbnet),
     ],
     wireless => [
-      qw(acx-pci acx-usb adm8211 agnx airo airo_cs aironet4500_cs),
-      qw(aironet_cs ar5523 ar9170usb arlan arusb_lnx at76c50x_usb ath10k_pci ath5k ath6kl ath6kl_usb ath9k ath9k_htc),
+      qw(8812au acx-pci acx-usb adm8211 agnx airo airo_cs aironet4500_cs),
+      qw(aironet_cs ar5523 ar9170usb arlan arusb_lnx at76c50x_usb ath10k_pci ath5k ath6kl ath6kl_sdio ath6kl_usb ath9k ath9k_htc),
       qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx bcm_wimax bcma brcm80211 brcmsmac brcmfmac carl9170 com20020_cs),
       qw(dyc_ar5 hostap_cs hostap_pci hostap_plx i2400m_usb ipw2100),
       qw(ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwldvm iwlmvm iwlwifi libertas_spi madwifi_pci),
