@@ -1907,8 +1907,8 @@ sub write_grub2_sysconfig {
     $conf{GRUB_CMDLINE_LINUX_DEFAULT} = $bootloader->{default_append} || get_grub2_append($bootloader);
     $conf{GRUB_GFXPAYLOAD_LINUX} = 'auto' if is_uefi();
     $conf{GRUB_DISABLE_RECOVERY} = 'false'; # for 'failsafe' entry
-    $conf{GRUB_DEFAULT} ||= 'saved'; # for default entry but do not overwrite user choice
-    $conf{GRUB_SAVEDEFAULT} ||= 'true'; # for default entry but do not overwrite user choice
+    $conf{GRUB_DEFAULT} //= 'saved'; # for default entry but do not overwrite user choice
+    $conf{GRUB_SAVEDEFAULT} //= 'true'; # for default entry but do not overwrite user choice
     $conf{GRUB_TIMEOUT} = $bootloader->{timeout};
     renamef($f, $f . ($o_backup_extension || '.old'));
     setVarsInSh($f, \%conf);
