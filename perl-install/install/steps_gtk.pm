@@ -611,8 +611,7 @@ sub installPackages {
     my $rel_notes = gtknew('Button', text => N("Release Notes"), 
                            clicked => sub { $show_release_notes = 1 });
 
-    ugtk3::gtkadd($w->{window}, my $box = gtknew('VBox', children_tight => [ 
-	# TODO: allow for both advertising and game?
+    ugtk3::gtkadd($w->{window}, my $box = gtknew('VBox', children_centered => [
 	gtknew('Image', file_ref => \$advertising_image, show_ref => \$show_advertising),
     ]));
 
