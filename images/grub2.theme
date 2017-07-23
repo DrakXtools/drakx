@@ -1,0 +1,34 @@
+# GRUB gfxmenu theme "maggy".
+
+title-text: "Mageia 7 (Cauldron) UEFI"
+title-font: "MageiaLogo Bold 28"
+title-color: "white"
+
+desktop-image: "grub2-mageia-default.png"
+terminal-font: "Unknown Regular 16"
+
++ boot_menu {
+   left = 20%
+   top = 15%
+   width = 60%
+   height = 55%
+   item_font = "MageiaLogo Regular 20"
+   selected_item_font = "MageiaLogo Bold 20"
+   color_normal="black/black"
+   item_color = "#2397d4"
+   selected_item_color = "white"
+   item_height = 24
+   item_spacing = 10
+}
+
++ progress_bar
+{
+   id = "__timeout__"
+   left = 20%
+   top = 65%
+   width = 60%
+   height = 1%
+   fg_color = "lightskyblue"
+   bg_color = "dodgerblue"
+   border_color = "midnightblue"
+}
