@@ -269,6 +269,8 @@ sub read_ {
 		$bootloader->{default_options} = $default;
 		$bootloader->{perImageAppend} ||= $default->{append};
 		log::l("perImageAppend is now $bootloader->{perImageAppend}");
+		$bootloader->{default_vga} ||= $default->{vga};
+		log::l("default_vga is now $bootloader->{default_vga}");
 	    } else {
 		$bootloader->{default_options} = {};
 	    }
@@ -298,8 +300,10 @@ sub read_grub2() {
     return if is_empty_hash_ref(\%bootloader) & !-s "$::prefix/boot/grub2/grub.cfg";
     my %h = getVarsFromSh("$::prefix/etc/default/grub");
     $bootloader{timeout} = $h{GRUB_TIMEOUT};
-    # keep suggested perImageAppend on first run (during installer) or when migrating from grub-legacy or lilo:
-    $bootloader{perImageAppend} ||= $h{GRUB_CMDLINE_LINUX_DEFAULT};
+    # keep suggested perImageAppend and default_vga on first run (during installer) or when migrating from grub-legacy or lilo:
+    my ($vga, $other) = partition { /^vga=/ } split(' ', $h{GRUB_CMDLINE_LINUX_DEFAULT});
+    $bootloader{perImageAppend} ||= join(' ', @$other) if @$other;
+    $bootloader{default_vga} ||= $vga->[0] =~ /vga=(.*)/ && $1 if @$vga;
     $bootloader{entries} = [];
     my $entry;
     my $f = "$::prefix/boot/grub2/grub.cfg";
@@ -1270,6 +1274,7 @@ sub suggest {
 				    method_choices($all_hds, 0)); # or best if no valid one is installed
 
     $bootloader->{perImageAppend} = $bootloader->{entries}[0]{append};
+    $bootloader->{default_vga} = $options{vga_fb};
 
     if (main_method($bootloader->{method}) eq 'grub') {
 	my %processed_entries = {};
@@ -1906,7 +1911,11 @@ sub write_grub2_sysconfig {
     my $f = "$::prefix/etc/default/grub";
     my %conf = getVarsFromSh($f);
 
-    $conf{GRUB_CMDLINE_LINUX_DEFAULT} = $bootloader->{perImageAppend} || get_grub2_append($bootloader);
+    my $append = $bootloader->{perImageAppend} || get_grub2_append($bootloader);
+    my $vga = $bootloader->{default_vga};
+    $append .= " vga=$vga" if $append !~ /vga=/ && $vga && $vga ne "normal";
+
+    $conf{GRUB_CMDLINE_LINUX_DEFAULT} = $append;
     $conf{GRUB_GFXPAYLOAD_LINUX} = 'auto' if is_uefi();
     $conf{GRUB_DISABLE_RECOVERY} = 'false'; # for 'failsafe' entry
     $conf{GRUB_DEFAULT} //= 'saved'; # for default entry but do not overwrite user choice

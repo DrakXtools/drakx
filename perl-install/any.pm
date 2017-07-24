@@ -663,7 +663,7 @@ sub setupBootloader__grub2 {
     require Xconfig::resolution_and_depth;
 
     require network::network; #- to list network profiles
-    my $vga = Xconfig::resolution_and_depth::from_bios($b->{vga});
+    my $vga = Xconfig::resolution_and_depth::from_bios($b->{default_vga});
     my $os_prober = $in->do_pkgs->is_installed('os-prober', '/usr/bin/os-prober');
 
     my $res = $in->ask_from_(
@@ -691,7 +691,7 @@ sub setupBootloader__grub2 {
     if ($res) {
 	$b->{entries} = $b2->{entries};
 	$b->{default} = $default;
-	$b->{vga} = ref($vga) ? $vga->{bios} : $vga;
+	$b->{default_vga} = ref($vga) ? $vga->{bios} : $vga;
 	$b->{perImageAppend} = $append;
 	if ($os_prober) {
 	    $in->do_pkgs->ensure_is_installed('os-prober', '/usr/bin/os-prober');
