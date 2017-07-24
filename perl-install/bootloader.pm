@@ -320,7 +320,7 @@ sub read_grub2() {
 	        $entry->{vga} = $vga->[0] =~ /vga=(.*)/ && $1;
 	        $entry->{append} = join(' ', @$other);
 	    }
-	} elsif (/initrd\s+(\S+)/ || /module\s+(\S+initrd\S+)\s+(.*)?/) {
+	} elsif (/initrd(?:16)?\s+(\S+)/ || /module\s+(\S+initrd\S+)\s+(.*)?/) {
 	    $entry->{initrd} = $1;
 	} elsif (/^submenu\s+['"]([^']+)["']/) {
 	    push @menus, $1;
