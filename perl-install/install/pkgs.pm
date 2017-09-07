@@ -2,7 +2,6 @@ package install::pkgs;
 
 use strict;
 use feature 'state';
-use Math::Int64 ':native_if_available', 'int64';
 
 BEGIN {
     # needed before "use URPM"
@@ -47,7 +46,7 @@ sub invCorrectSize { ($_[0] * $D - $C) / $B }
 
 sub selectedSize {
     my ($packages) = @_;
-    my $size = int64(0);
+    my $size = 0;
     my %skip;
     #- take care of packages selected...
     foreach (@{$packages->{depslist}}) {
@@ -69,12 +68,8 @@ sub selectedSize {
     $size;
 }
 
-sub int64_to_float { sprintf("%.2f", $_[0])*1 }
-
 sub size2time {
     my ($x, $max) = @_;
-    $x = int64_to_float($x);
-    $max = int64_to_float($max);
     my $A = 7e9;
     my $limit = min($max * 3 / 4, 9e8);
     if ($x < $limit) {
@@ -717,7 +712,7 @@ sub selectPackagesAlreadyInstalled {
     my %sizes;
     $packages->{rpmdb}->traverse(sub {
 	my ($p) = @_;      
-	$sizes{$p->name} ||= int64(0);
+	$sizes{$p->name} ||= 0;
 	$sizes{$p->name} += $p->size;
     });
     $packages->{sizes} = \%sizes;
@@ -773,7 +768,7 @@ sub install {
 
     #- first stage to extract some important information
     #- about the selected packages.
-    my ($total, $nb) = (int64(0), 0);
+    my ($total, $nb) = (0, 0);
     foreach my $pkg (@$toInstall) {
 	$packages{$pkg->id} = $pkg;
 	$nb++;
