@@ -320,7 +320,7 @@ sub read_grub2() {
 	    $entry->{initrd} = $1;
 	} elsif (/^submenu\s+['"]([^']+)["']/) {
 	    push @menus, $1;
-	} elsif (/}/) {
+	} elsif (/^\s+}/) {
 	    if ($entry) {
 		push @{$bootloader{entries}}, $entry;
 		undef $entry;
