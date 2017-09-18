@@ -308,7 +308,7 @@ sub read_grub2() {
 	next if /^#/;
 	if (/menuentry\s+['"]([^']+)["']/) {
 	    $entry = { label => $1, real_label => join('>', @menus, $1) };
-	} elsif (/linux\s+(\S+)\s+(.*)?/ || /module\s+(\S+vmlinu\S+)\s+(.*)?/) {
+	} elsif (/linux(?:16)?\s+([^-]\S+)\s+(.*)?/ || /module\s+(\S+vmlinu\S+)\s+(.*)?/) {
 	    $entry->{type} = 'image';
 	    @$entry{qw(kernel_or_dev append)} = ($1, $2);
 	    my ($vga, $other) = partition { /^vga=/ } split(' ', $entry->{append});
