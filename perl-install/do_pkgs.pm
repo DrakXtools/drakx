@@ -193,7 +193,7 @@ sub is_installed {
 
 =item check_kernel_module_packages($do, $base_name)
 
-Takes something like "C<ati-kernel>" and returns:
+Takes something like C<ati-kernel> and returns:
 
 =over 4
 

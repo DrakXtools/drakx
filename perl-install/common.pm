@@ -622,7 +622,7 @@ special unpack:
 
 =over 4
 
-=item * returning an array refs for each element like "C<s10>"
+=item * returning an array refs for each element like C<s10>
 
 =item * handling things like C<s10*> at the end of the format
 

@@ -433,7 +433,7 @@ nb:
 
 =over 4
 
-=item * $boot_part comes from C</boot/grub/install.sh> "C<root (hd...)>" line
+=item * $boot_part comes from C</boot/grub/install.sh> C<root (hd...)> line
 
 =item * $grub2dev is C</boot/grub/device.map>
 
@@ -1714,7 +1714,7 @@ sub write_grub_device_map {
 
 =item parse_grub_file($grub_file)
 
-Parses things like "C<(hd0,4)/boot/vmlinuz>"
+Parses things like C<(hd0,4)/boot/vmlinuz>
 
 Returns: ("hd0", 4, "boot/vmlinuz")
 
@@ -1729,7 +1729,7 @@ sub parse_grub_file {
 
 =item grub2dev_and_file($grub_file, $grub2dev, $o_block_device)
 
-Takes things like "C<(hd0,4)/boot/vmlinuz>"
+Takes things like C<(hd0,4)/boot/vmlinuz>
 
 Returns: ("/dev/sda5", "boot/vmlinuz")
 
@@ -1746,7 +1746,7 @@ sub grub2dev_and_file {
 
 =item grub2devd($grub_file, $grub2dev, $o_block_device)
 
-Takes things like "C<(hd0,4)/boot/vmlinuz>"
+Takes things like C<(hd0,4)/boot/vmlinuz>
 
 Returns: "/dev/sda5"
 
@@ -1763,9 +1763,9 @@ Replaces
 
 =over 4
 
-=item * "C</vmlinuz>" with "C</boot/vmlinuz>" when "root" or "rootnoverify" is set for the entry
+=item * C</vmlinuz> with C</boot/vmlinuz> when "root" or "rootnoverify" is set for the entry
 
-=item * "C<(hdX,Y)>" in "C<(hdX,Y)/boot/vmlinuz...>" by appropriate path if possible/needed
+=item * C<(hdX,Y)> in C<(hdX,Y)/boot/vmlinuz...> by appropriate path if possible/needed
 
 =back
 
