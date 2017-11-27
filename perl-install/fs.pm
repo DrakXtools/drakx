@@ -144,7 +144,7 @@ sub get_major_minor {
 	eval {
 	    my (undef, $major, $minor) = devices::entry($_->{device});
 	    ($_->{major}, $_->{minor}) = ($major, $minor);
-	} if !$_->{major};
+	};
     }
 }
 
