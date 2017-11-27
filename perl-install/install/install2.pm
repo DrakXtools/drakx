@@ -212,6 +212,13 @@ sub formatPartitions {
     }
     installStepsCall($o, $auto, 'formatMountPartitions') if !$::testing;
 
+    # Workaround for mga#22059. Because stage2 does not include the udev 60-blocks.rule,
+    # udev does not automatically update the soft links in /dev/disk/by-uuid after we
+    # write the partition table and format the partitions. We need these links to be
+    # updated before we create the initrd. It would be cleaner to fix this with a udev
+    # rule, but for now, use brute force.
+    run_program::run('udevadm', 'trigger', '--type=devices');
+
     if ($want_root_formated) {
 	#- we formatted /, ensure /var/lib/rpm is cleaned otherwise bad things can happen
 	#- (especially when /var is *not* formatted)

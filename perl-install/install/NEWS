@@ -1,6 +1,8 @@
 - diskdrake:
   o ensure device major/minor numbers are reread after writing the
     partition table (mga#22032)
+  o ensure soft links in /dev/disk/by-uuid are updated so that valid
+    UUIDs are embedded in the initrd (mga#22059)
 
 Version 17.92 - 4 January 2017
 
