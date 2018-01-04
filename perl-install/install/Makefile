@@ -58,7 +58,8 @@ install:
 install_pms:
 	[ -d $(DESTDIR)$(DEST) ] || ../../tools/mdkinst_stage2_tool --uncompress $(DESTDIR)$(STAGE2_DEST)
 
-	for i in `perl -ne 's/sub (\w+?)_?(\(\))? {.*/$$1/ and print' commands.pm`; do ln -sf commands $(DESTDIR)$(DEST)/usr/bin/$$i; done
+# commands implemented in perl:
+	for i in `perl -ne 's/sub (\w+?)_?(\(\))? \{.*/$$1/ and print' commands.pm` sync; do if [ ! -x $(DEST)/usr/bin/$$i ]; then ln -sf commands $(DEST)/usr/bin/$$i; fi; done
 
 	install -d $(DESTDIR)$(DESTREP4PMS)
 	cd .. ; for i in $(PMS); do \
