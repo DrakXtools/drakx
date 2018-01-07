@@ -209,7 +209,7 @@ sub detect_network_drivers {
         foreach my $settings (@network_settings) {
             foreach (@network::thirdparty::thirdparty_types) {
                 my @packages = network::thirdparty::get_required_packages($_, $settings);
-                push @l, network::thirdparty::get_available_packages($_, $do_pkgs, @packages);
+                push @l, network::thirdparty::get_available_packages($_, $do_pkgs, @packages) if @packages;
             }
         }
     }
