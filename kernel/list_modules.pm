@@ -21,7 +21,7 @@ our %l = (
         qw(depca dmfe e2100 ec_bhf eepro eexpress enic eth16i),
         qw(ewrk3 fm10k bcmgenet hp hp-plus hp100 i40e i40evf),
         qw(iph5526), #- fibre channel
-        qw(i40evf jme lance ne nfp_netvf ni5010 ni52 ni65 nvnet),
+        qw(i40evf jme lance ne nfp ni5010 ni52 ni65 nvnet),
         qw(prism2_plx qlge r6040 rcpci rhineget),
         qw(sb1000 sc92031 sh_eth smc-ultra smsc911x smc9194 smsc9420 smsc95xx),
         qw(tc35815 tlan uli526x vmxnet3),
@@ -33,14 +33,14 @@ our %l = (
         qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
       qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
       # add all phys
-      qw(amd aquantia at803x bcm7xxx bcm87xx broadcom cicada davicom dp83848 dp83867 et1011c fixed_phy icplus intel-xway lxt marvell),
-      qw(mdio-bcm-unimac mdio-bitbang mdio-cavium mdio-gpio mdio-octeon mdio-thunder micrel microchip mscc),
-      qw(national qsemi r8152 r815x realtek smsc spi_ks8995 ste10Xp teranetics vitesse xilinx_gmii2rgmii),
+      qw(amd aquantia at803x bcm7xxx bcm87xx broadcom cicada cortina davicom dp83848 dp83867 et1011c fixed_phy icplus intel-xway),
+      qw(lxt marwell marwell10g mdio-bitbang mdio-cavium mdio-gpio mdio-thunder micrel microchip mscc),
+      qw(national qsemi r8152 r815x realtek rockchip smsc spi_ks8995 ste10Xp teranetics vitesse xilinx_gmii2rgmii),
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(alx atl1 atl1c atl1e at91_ether ax88179_178a be2net bna bnx2 bnx2x bnxt_en cxgb cxgb3 cxgb4 dl2k e1000 e1000e et131x hfi1 igb ipg ixgb ixgbe lan78xx),
-      qw(macb mvmdio myri_sbus myri10ge netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io samsung-sxgbe sfc sxg_nic),
+      qw(amd-xgbe alx atl1 atl1c atl1e atlantic at91_ether ax88179_178a be2net bna bnx2 bnx2x bnxt_en cxgb cxgb3 cxgb4 dl2k dwc-xlgmac e1000 e1000e et131x),
+      qw(hinic hfi1 igb ipg ixgb ixgbe lan78xx macb mlx4_en mvmdio myri_sbus myri10ge netxen_nic ns83820 pch_gbe qla3xxx r8169 s2io samsung-sxgbe sfc sfc-falcon sxg_nic),
       qw(sis190 sk98lin skge sky2 slicoss spidernet stmmac tehuti tg3 via-velocity vxge yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
     ],
@@ -61,14 +61,14 @@ our %l = (
     ],
     wireless => [
       qw(8812au acx-pci acx-usb adm8211 agnx airo airo_cs aironet4500_cs),
-      qw(aironet_cs ar5523 ar9170usb arlan arusb_lnx at76c50x_usb ath10k_pci ath5k ath6kl ath6kl_sdio ath6kl_usb ath9k ath9k_htc),
+      qw(aironet_cs ar5523 ar9170usb arlan arusb_lnx at76c50x_usb ath10k_pci ath10k_sdio ath10k_usb ath5k ath6kl ath6kl_sdio ath6kl_usb ath9k ath9k_htc),
       qw(ath_pci atmel_cs atmel_pci b43 b43legacy bcm43xx bcm_wimax bcma brcm80211 brcmsmac brcmfmac carl9170 com20020_cs),
       qw(dyc_ar5 hostap_cs hostap_pci hostap_plx i2400m_usb ipw2100),
       qw(ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwldvm iwlmvm iwlwifi libertas_spi madwifi_pci),
       qw(mt7601u mwifiex_pcie mwifiex_sdio mwifiex_usb mwl8k ndiswrapper netwave_cs orinoco orinoco_cs),
       qw(orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd orinoco_usb p54pci p54spi),
-      qw(p54usb prism2_cs prism2_pci prism2_usb prism54 qmi_wwan r8180),
-      qw(r8187se rtl8188ee rtl8192ce r8192_pci r8192s_usb r8192u_usb r8712u r8723bs ray_cs rndis_wlan rsi_sdio rsi_usb rt2400 rt2400pci rt2500),
+      qw(p54usb prism2_cs prism2_pci prism2_usb prism54 qmi_wwan qtnfmac qtnfmac_pearl_pcie r8180),
+      qw(r8187se rtl8188ee rtl8192ce r8192_pci r8192s_usb r8192u_usb r8712u r8723bs r8822be ray_cs rndis_wlan rsi_sdio rsi_usb rt2400 rt2400pci rt2500),
       qw(rt2500pci rt2500usb rt2570 rt2800pci rt2800usb rt2860 rt2860sta rt2870),
       qw(rt3070sta rt61 rt61pci rt73 rt73usb rtl8180 rtl8187 rtl8187se rtl818x_pci r8188eu r8192ee r8723au rtl_pci rtl_usb rtusb),
       qw(rtl8192se rtl8192cu rtl8192de rtl8192ee rtl8723ae rtl8723be rtl8821ae rtl8xxxu spectrum_cs sr9700 sr9800 ssb usb8xxx usbvnet_rfmd vt6655_stage vt6656_stage vt_ar5k w35und),
@@ -172,10 +172,10 @@ our %l = (
     hid => [ qw(ff-memless hid hid-a4tech hid-apple hid-appleir hid-asus hid-aureal hid-axff hid-belkin hid-betopff
 	    hid-cherry hid-chicony hid-cmedia hid-corsair hid-cp2112 hid-cypress hid-dr hid-drff hid-elecom hid-elo hid-emsff
 	    hid-ezkey hid-gaff hid-gembird hid-generic hid-gfrm hid-gt683r hid-gyration hid-holtek-kbd hid-holtekff hid-holtek-mouse
-	    hid-hyperv hid-icade hid-kensington hid-keytouch hid-kye hid-lcpower hid-led hid-lenovo hid-lenovo-tpkbd
+	    hid-hyperv hid-icade hid-ite hid-kensington hid-keytouch hid-kye hid-lcpower hid-led hid-lenovo hid-lenovo-tpkbd
 	    hid-logitech hid-logitech-dj hid-logitech-hidpp hid-magicmouse hid-microsoft hid-monterey
 	    hid-multilaser hid-multitouch hid-ntrig hid-ortek hid-penmount hid-petalynx hid-picolcd
-	    hid-pl hid-plantronics hid-primax hid-prodikeys hid-roccat hid-roccat-arvo hid-roccat-common hid-rmi
+	    hid-pl hid-plantronics hid-primax hid-prodikeys hid-retrode hid-roccat hid-roccat-arvo hid-roccat-common hid-rmi
 	    hid-roccat-isku hid-roccat-kone hid-roccat-koneplus hid-roccat-konepure hid-roccat-kovaplus hid-roccat-lua
 	    hid-roccat-pyra hid-roccat-ryos hid-roccat-savu hid-saitek hid-samsung hid-sensor-hub hid-sjoy hid-sony
 	    hid-speedlink hid-steelseries hid-sunplus hid-tivo hid-tmff hid-topseed hid-twinhan
@@ -302,7 +302,7 @@ our %l = (
       qw(wdt_pci i810-tco sx), #- what are these???
     ],
     crypto => [
-      qw(aes-i586 aes-x86_64 aes_generic aesni_intel amd768_rng amd7xx_tco cbc cryptd hw_random i810_rng leedslite padlock sha256_generic virtio_rng xts),
+      qw(aes-i586 aes-x86_64 aes_generic aesni_intel amd768_rng amd7xx_tco cbc cryptd hw_random i810_rng leedslite n5pf padlock sha256_generic virtio_crypto virtio_rng xts),
     ],
     laptop => [
       qw(i8k sonypi toshiba),
@@ -322,7 +322,7 @@ our %l = (
 
       qw(crc32c crc32c-intel),
       'nvme',
-      
+
       qw(evdev), qw(usblp printer), 'floppy', 'microcode', 'usb_common',
       qw(acpi_cpufreq processor),
       qw(bcm_sf2),
