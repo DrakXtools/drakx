@@ -392,7 +392,7 @@ sub init_local_install {
     push @::auto_steps, 
 #      'selectLanguage', 'selectKeyboard', 'miscellaneous', 'selectInstallClass',
       'doPartitionDisks', 'formatPartitions';
-	fs::mount::sys_kernel_debug('');  #- do it now so that when_load doesn't do it
+	eval { fs::mount::sys_kernel_debug(''); };  #- do it now so that when_load doesn't do it
 	$o->{nomouseprobe} = 1;
 	$o->{mouse} = mouse::fullname2mouse('Universal|Any PS/2 & USB mice');
 }
