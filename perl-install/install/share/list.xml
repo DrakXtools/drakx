@@ -12,7 +12,7 @@
   </mode>
   xset
   xkbcomp setxkbmap
-  libinput-list-devices
+  libinput-list-devices libinput
 
   scrot
   perl
@@ -70,6 +70,9 @@
   <!-- needed by WebKit-4.0.typelib -->
   webkit2gtk-4.0/WebKitNetworkProcess
   webkit2gtk-4.0/WebKitWebProcess
+  <from expand="glob">
+   libinput/libinput-*
+  </from>
 </from>
 
 <from dir="/usr/LIB/imlib2/loaders"> <!-- for scrot/giblib -->
