@@ -254,7 +254,7 @@ sub read {
     }
     # still no boot loader found? let's check for ESP if using UEFI: 
     if (is_uefi()) {
-	if (-f "/boot/EFI/EFI/mageia/grubx64.efi") {
+	if (-f "/boot/EFI/EFI/mageia/grubx64.efi" || -f "/boot/EFI/EFI/mageia/grubia32.efi") {
 	    my $bootloader = bootloader::read_grub2();
 	    return $bootloader if read_($bootloader);
 	}
